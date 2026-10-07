@@ -9,11 +9,13 @@ import { SAVE_KEY } from './domain';
 import { SESSION_KEY, ownSession } from './recovery-store';
 import { playerInput } from './input';
 import { installControls } from './mobile';
+import { sampleEnabled } from './coast-view/sample';
 
 async function boot() {
     await Promise.all([loadPixelFont(), loadTitleArt()]);
     const ownership = await ownSession(navigator.locks);
     initSave(ownership.owned);
+    if (sampleEnabled()) app.runWorld = 'buildings';
     app.menuMotion = !matchMedia('(prefers-reduced-motion: reduce)').matches;
     app.game = new Phaser.Game({ type: Phaser.AUTO, parent: 'game', width: 960, height: 540, backgroundColor: '#122021', pixelArt: true, roundPixels: true, antialias: false, audio: { noAudio: true }, input: { mouse: { preventDefaultWheel: true } }, fps: { target: 60, smoothStep: false }, scene: [BootScene, MenuScene, HideoutScene, BaseScene, RaidScene, ResultScene], render: { powerPreference: 'high-performance' } });
     const coarse = matchMedia('(pointer: coarse)'), fine = matchMedia('(any-pointer: fine)');
@@ -39,7 +41,8 @@ async function boot() {
         if (app.game?.canvas) app.game.scale.updateBounds();
         const changed = Math.abs(width - previousWidth) > 2 || Math.abs(height - previousHeight) > 2;
         previousWidth = width; previousHeight = height;
-        if ((changed || modeChanged) && (app.state === 'run' || app.baseWalking) && !editing) {
+        // The village sample host handles its own resize, pause and input release.
+        if ((changed || modeChanged) && (app.state === 'run' || app.baseWalking) && !editing && !app.coastSample) {
             app.raid?.releaseInput(); playerInput.clear(); const baseSaved = app.base?.checkpoint() ?? true; controls();
             if (!app.pendingSettlement && app.overlay !== 'checkpoint-error') setOverlay(app.baseWalking ? baseSaved ? 'base-menu' : 'base-save-error' : touch && (innerWidth < innerHeight || height < 280) ? 'rotate' : 'pause');
         }
@@ -56,6 +59,7 @@ async function boot() {
         }
     });
     const suspend = () => {
+        if (app.coastSample) { audio.stop(); return; }
         app.raid?.releaseInput(); const baseSaved = app.base?.checkpoint() ?? true; playerInput.clear(); controls(); audio.stop();
         if (!baseSaved) setOverlay('base-save-error');
         if (app.state === 'run' && !app.pendingSettlement) setOverlay('pause');
@@ -64,7 +68,7 @@ async function boot() {
     document.addEventListener('visibilitychange', () => { if (document.hidden) suspend(); });
     addEventListener('pagehide', () => { suspend(); ownership.release(); });
     addEventListener('pageshow', e => { if (e.persisted) location.reload(); });
-    addEventListener('beforeunload', e => { app.raid?.checkpoint(); app.base?.checkpoint(); if (app.pendingSettlement || !app.storageOK) { e.preventDefault(); e.returnValue = ''; } });
+    addEventListener('beforeunload', e => { app.raid?.checkpoint(); app.coastSample?.checkpoint(); app.base?.checkpoint(); if (app.pendingSettlement || !app.storageOK) { e.preventDefault(); e.returnValue = ''; } });
     document.addEventListener('contextmenu', e => { if ((e.target as HTMLElement).closest('#game, #touch-controls')) e.preventDefault(); });
     addEventListener('pointermove', e => { if (e.pointerType === 'mouse') playerInput.pointer = { x: e.clientX, y: e.clientY }; });
     const game = document.getElementById('game')!;
@@ -83,6 +87,7 @@ async function boot() {
     addEventListener('pointercancel', () => { playerInput.clear(); controls(); });
     addEventListener('keydown', e => {
         if (/INPUT|TEXTAREA|SELECT/.test((e.target as HTMLElement).tagName)) return;
+        if (app.coastSample) return;
         const modal = app.state === 'menu' ? document.querySelector<HTMLElement>('#ui [aria-modal="true"]') : null;
         if (modal && e.key === 'Tab') {
             const targets = Array.from(modal.querySelectorAll<HTMLButtonElement>('button:not(:disabled)'));
@@ -109,7 +114,7 @@ async function boot() {
     addEventListener('storage', e => {
         if (e.key !== SESSION_KEY && e.key !== SAVE_KEY && e.key !== null) return;
         saveSession.markConflict();
-        if (app.state === 'run') { setOverlay('pause'); app.raid?.lock(); }
+        if (app.state === 'run' && !app.coastSample) { setOverlay('pause'); app.raid?.lock(); }
         toast('另一个窗口已更新存档，本页已停止操作。请导出需要保留的进度，再刷新本页。');
     });
     // Explicitly opt-in acceptance hooks; never available in the normal game.

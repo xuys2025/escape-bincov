@@ -1,0 +1,71 @@
+/* Village sample host (?sample=village): full-viewport Pixi view; the Phaser frame is hidden while it runs. */
+html[data-coast-sample] #frame { visibility: hidden; }
+html[data-coast-sample] #toast { z-index: 120; }
+.coast-sample { --cs-ink: #242321; --cs-panel: #1b1a17f0; --cs-line: #4b4842; --cs-text: #ddd5c3; --cs-muted: #a49b88; --cs-accent: #c9a65e; --cs-bad: #d07a5a;
+  position: fixed; inset: 0; z-index: 60; color: var(--cs-text); font-family: "Bincov Text", "Microsoft YaHei", "PingFang SC", sans-serif; user-select: none; -webkit-user-select: none; touch-action: none;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+.coast-sample .cs-canvas { position: absolute; inset: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+.coast-sample .cs-canvas canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: none; }
+.coast-sample .cs-hud { position: absolute; inset: 0; pointer-events: none; }
+.coast-sample button { font: inherit; font-size: 16px; pointer-events: auto; cursor: pointer; padding: 4px 12px; background: #2b2a26; color: var(--cs-text); border: 1px solid var(--cs-line); }
+.coast-sample button:hover, .coast-sample button:focus-visible { border-color: var(--cs-accent); outline: none; }
+.coast-sample button:disabled { opacity: .45; cursor: default; }
+.cs-status { position: absolute; left: 12px; top: 10px; display: grid; gap: 4px; font-size: 16px; line-height: 16px; text-shadow: 0 1px 0 #000, 1px 0 0 #000; }
+.cs-meter { display: flex; align-items: center; gap: 6px; }
+.cs-meter span { color: var(--cs-muted); width: 2.2em; }
+.cs-bar { width: 120px; height: 8px; background: #2b2a26; border: 1px solid #000; }
+.cs-bar.thin { height: 5px; }
+.cs-bar > div { height: 100%; width: 100%; background: #b0533f; }
+.cs-bar.thin > div { background: #9aa07a; }
+.cs-weapon { color: #e6dcc0; }
+.cs-where { color: var(--cs-muted); font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 12px; line-height: 16px; }
+.cs-clock { position: absolute; left: 50%; top: 8px; transform: translateX(-50%); display: grid; justify-items: center; font-size: 16px; color: #e6dcc0; text-shadow: 0 1px 0 #000; font-variant-numeric: tabular-nums; }
+.cs-clock small { font-size: 12px; color: #e0a070; font-family: "Microsoft YaHei", sans-serif; }
+.cs-hits { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
+.cs-hits i { position: absolute; left: -60px; top: -3px; width: 120px; height: 6px; background: linear-gradient(90deg, transparent 80%, #d0573f 80%); transform-origin: 60px 3px; }
+.cs-prompt, .cs-choices { position: absolute; left: 0; top: 0; white-space: nowrap; font-size: 16px; line-height: 16px; padding: 4px 8px; background: #191815b3; border: 1px solid #c9a65e88; color: #f0e3bd; margin: 0; }
+.cs-prompt kbd { display: inline-block; min-width: 18px; margin-right: 6px; padding: 0 4px; background: var(--cs-accent); color: #1b1a17; font: inherit; text-align: center; }
+.cs-choices { list-style: none; pointer-events: auto; }
+.cs-choices li { padding: 2px 0; cursor: pointer; }
+.cs-choices li[aria-current] { color: #fff3cf; }
+.cs-choices .cs-hint { color: var(--cs-muted); cursor: default; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; }
+.cs-toast { position: absolute; left: 50%; top: 52px; transform: translateX(-50%); padding: 6px 14px; background: #1b1a17e6; border: 1px solid var(--cs-line); font-size: 16px; line-height: 16px; opacity: 0; transition: opacity .2s; max-width: 90vw; text-align: center; }
+.cs-toast.on { opacity: 1; } .cs-toast.bad { border-color: var(--cs-bad); color: #f1c4b4; }
+.cs-cross { position: absolute; left: -12px; top: -12px; width: 25px; height: 25px; pointer-events: none;
+  background: linear-gradient(#f0e3bd, #f0e3bd) 12px 0/1px 8px no-repeat, linear-gradient(#f0e3bd, #f0e3bd) 12px 17px/1px 8px no-repeat,
+    linear-gradient(#f0e3bd, #f0e3bd) 0 12px/8px 1px no-repeat, linear-gradient(#f0e3bd, #f0e3bd) 17px 12px/8px 1px no-repeat;
+  filter: drop-shadow(0 0 1px #000) drop-shadow(0 0 1px #000); }
+.cs-cross.precise { background-size: 1px 5px, 1px 5px, 5px 1px, 5px 1px; background-position: 12px 3px, 12px 17px, 3px 12px, 17px 12px; }
+.cs-fade { position: absolute; inset: 0; background: #0b0a09; opacity: 0; pointer-events: none; }
+.cs-fade.on { animation: cs-fade .45s ease-out; }
+@keyframes cs-fade { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .cs-fade.on { animation-duration: .01s; } .cs-toast { transition: none; } }
+.cs-touch { display: none; position: absolute; right: 16px; bottom: 16px; gap: 8px; }
+.coast-sample.touch .cs-touch { display: flex; }
+.cs-touch button { min-width: 60px; min-height: 48px; background: #1b1a17cc; color: #f0e3bd; border-color: #c9a65e99; }
+.coast-sample.touch .cs-cross { display: none; }
+.cs-panel { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(620px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto; padding: 16px 18px; background: var(--cs-panel); border: 1px solid var(--cs-line); font-size: 16px; line-height: 24px; pointer-events: auto; }
+.cs-panel h2 { margin: 0 0 8px; font-size: 16px; font-weight: 400; color: #f0e3bd; }
+.cs-panel h3 { margin: 4px 0; font-size: 16px; font-weight: 400; color: var(--cs-muted); }
+.cs-panel p { margin: 0 0 10px; }
+.cs-panel .cs-sub { color: var(--cs-muted); font-family: "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 18px; }
+.cs-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+.cs-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.cs-items li { display: flex; align-items: center; gap: 6px; }
+.cs-items li span { flex: 1; }
+.cs-items button { padding: 0 8px; }
+.cs-items .cs-empty { color: var(--cs-muted); }
+.cs-row { display: flex; flex-wrap: wrap; gap: 8px; }
+/* Short landscape phones: the 16px pixel font is too tall for the status block; use the small system face there. */
+@media (max-height: 480px) {
+  .cs-status { gap: 2px; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 12px; line-height: 14px; }
+  .cs-meter span { width: 2.4em; } .cs-bar { height: 6px; } .cs-bar.thin { height: 4px; }
+  .cs-clock { font-size: 14px; }
+  .cs-prompt, .cs-choices { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 12px; line-height: 14px; padding: 3px 6px; }
+  .cs-touch button { min-width: 52px; min-height: 44px; font-size: 14px; }
+}
+@media (max-width: 900px), (max-height: 480px) {
+  .cs-status { top: 6px; left: 8px; } .cs-bar { width: 84px; }
+  .cs-cols { grid-template-columns: 1fr; }
+  .cs-panel { padding: 10px 12px; line-height: 20px; }
+}

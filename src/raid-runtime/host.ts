@@ -5,7 +5,11 @@ import { CoastRaidRuntime } from './runtime';
 
 /** Production handoff: expose the v1 port and durable services, never mutable simulation internals. */
 export function createCoastRaidHost(session: SessionState, saves: SaveSession, freezeFrames = true) {
-    const core = new CoastRaidRuntime(session, saves, freezeFrames);
+    return wrapCoastRuntime(new CoastRaidRuntime(session, saves, freezeFrames), session, saves);
+}
+
+/** Shared by the production factory and the explicit ?test=1 factory; exposes the same port and services. */
+export function wrapCoastRuntime(core: CoastRaidRuntime, session: SessionState, saves: SaveSession) {
     const runtime: RaidRuntime = Object.freeze({
         advance: core.advance.bind(core), current: core.current.bind(core), pause: core.pause.bind(core),
         resume: core.resume.bind(core), setBlocked: core.setBlocked.bind(core), dispose: core.dispose.bind(core),

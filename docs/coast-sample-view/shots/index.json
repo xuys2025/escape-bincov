@@ -1,0 +1,825 @@
+{
+  "browser": "154.0.8037.98",
+  "seed": "42",
+  "url": "?test=1&sample=village",
+  "shots": [
+    {
+      "file": "cross-1280x720.png",
+      "scene": "cross",
+      "note": "街口全景",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 2,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "longwall-1280x720.png",
+      "scene": "longwall",
+      "note": "居民楼北侧（二层收起，被挡人物显示轮廓）",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 3,
+      "player": [
+        464,
+        204
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "door-1280x720.png",
+      "scene": "door",
+      "note": "正门关闭：室内未揭示",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 4,
+      "player": [
+        464,
+        436
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "door-open-1280x720.png",
+      "scene": "door-open",
+      "note": "开门站门洞：屋顶淡出、前墙局部淡化",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 6,
+      "player": [
+        464,
+        404
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "reveal-1280x720.png",
+      "scene": "reveal",
+      "note": "居民楼一楼室内揭示",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 8,
+      "player": [
+        472,
+        340
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "window-1280x720.png",
+      "scene": "window",
+      "note": "贴西墙窗口向外瞄准",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 10,
+      "player": [
+        360,
+        342
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "loot-1280x720.png",
+      "scene": "loot",
+      "note": "最近的真实物资箱",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 11,
+      "player": [
+        606,
+        604
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "enemies-1280x720.png",
+      "scene": "enemies",
+      "note": "真实敌人种类外观",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 12,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "extract-1280x720.png",
+      "scene": "extract",
+      "note": "北线检查口撤离点",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 13,
+      "player": [
+        208,
+        128
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "outside-1280x720.png",
+      "scene": "outside",
+      "note": "样板范围外：通用占位画面与边界标记",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 14,
+      "player": [
+        104,
+        860
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "upstairs-1280x720.png",
+      "scene": "upstairs",
+      "note": "二楼（真实落点）",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "resident-f2",
+      "epoch": 15,
+      "player": [
+        304,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "basement-1280x720.png",
+      "scene": "basement",
+      "note": "地下层（真实落点）",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "resident-b1",
+      "epoch": 16,
+      "player": [
+        240,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "cross-1920x1080.png",
+      "scene": "cross",
+      "note": "街口全景",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 2,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "longwall-1920x1080.png",
+      "scene": "longwall",
+      "note": "居民楼北侧（二层收起，被挡人物显示轮廓）",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 3,
+      "player": [
+        464,
+        204
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "door-1920x1080.png",
+      "scene": "door",
+      "note": "正门关闭：室内未揭示",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 4,
+      "player": [
+        464,
+        436
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "door-open-1920x1080.png",
+      "scene": "door-open",
+      "note": "开门站门洞：屋顶淡出、前墙局部淡化",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 6,
+      "player": [
+        464,
+        404
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "reveal-1920x1080.png",
+      "scene": "reveal",
+      "note": "居民楼一楼室内揭示",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 8,
+      "player": [
+        472,
+        340
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "window-1920x1080.png",
+      "scene": "window",
+      "note": "贴西墙窗口向外瞄准",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 10,
+      "player": [
+        360,
+        342
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "loot-1920x1080.png",
+      "scene": "loot",
+      "note": "最近的真实物资箱",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 11,
+      "player": [
+        606,
+        604
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "enemies-1920x1080.png",
+      "scene": "enemies",
+      "note": "真实敌人种类外观",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 12,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "extract-1920x1080.png",
+      "scene": "extract",
+      "note": "北线检查口撤离点",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 13,
+      "player": [
+        208,
+        128
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "outside-1920x1080.png",
+      "scene": "outside",
+      "note": "样板范围外：通用占位画面与边界标记",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 14,
+      "player": [
+        104,
+        860
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "upstairs-1920x1080.png",
+      "scene": "upstairs",
+      "note": "二楼（真实落点）",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "resident-f2",
+      "epoch": 15,
+      "player": [
+        304,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "basement-1920x1080.png",
+      "scene": "basement",
+      "note": "地下层（真实落点）",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "resident-b1",
+      "epoch": 16,
+      "player": [
+        240,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "cross-844x390.png",
+      "scene": "cross",
+      "note": "街口全景",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 2,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "longwall-844x390.png",
+      "scene": "longwall",
+      "note": "居民楼北侧（二层收起，被挡人物显示轮廓）",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 3,
+      "player": [
+        464,
+        204
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "door-844x390.png",
+      "scene": "door",
+      "note": "正门关闭：室内未揭示",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 4,
+      "player": [
+        464,
+        436
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "door-open-844x390.png",
+      "scene": "door-open",
+      "note": "开门站门洞：屋顶淡出、前墙局部淡化",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 6,
+      "player": [
+        464,
+        404
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "reveal-844x390.png",
+      "scene": "reveal",
+      "note": "居民楼一楼室内揭示",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 8,
+      "player": [
+        472,
+        340
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "window-844x390.png",
+      "scene": "window",
+      "note": "贴西墙窗口向外瞄准",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 10,
+      "player": [
+        360,
+        342
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "loot-844x390.png",
+      "scene": "loot",
+      "note": "最近的真实物资箱",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 11,
+      "player": [
+        606,
+        604
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "enemies-844x390.png",
+      "scene": "enemies",
+      "note": "真实敌人种类外观",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 12,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "extract-844x390.png",
+      "scene": "extract",
+      "note": "北线检查口撤离点",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 13,
+      "player": [
+        208,
+        128
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "outside-844x390.png",
+      "scene": "outside",
+      "note": "样板范围外：通用占位画面与边界标记",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 14,
+      "player": [
+        104,
+        860
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "upstairs-844x390.png",
+      "scene": "upstairs",
+      "note": "二楼（真实落点）",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "resident-f2",
+      "epoch": 15,
+      "player": [
+        304,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "basement-844x390.png",
+      "scene": "basement",
+      "note": "地下层（真实落点）",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "resident-b1",
+      "epoch": 16,
+      "player": [
+        240,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "cross-640x300.png",
+      "scene": "cross",
+      "note": "街口全景",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 2,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "longwall-640x300.png",
+      "scene": "longwall",
+      "note": "居民楼北侧（二层收起，被挡人物显示轮廓）",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 3,
+      "player": [
+        464,
+        204
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "door-640x300.png",
+      "scene": "door",
+      "note": "正门关闭：室内未揭示",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 4,
+      "player": [
+        464,
+        436
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "door-open-640x300.png",
+      "scene": "door-open",
+      "note": "开门站门洞：屋顶淡出、前墙局部淡化",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 6,
+      "player": [
+        464,
+        404
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "reveal-640x300.png",
+      "scene": "reveal",
+      "note": "居民楼一楼室内揭示",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 8,
+      "player": [
+        472,
+        340
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "window-640x300.png",
+      "scene": "window",
+      "note": "贴西墙窗口向外瞄准",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 10,
+      "player": [
+        360,
+        342
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "loot-640x300.png",
+      "scene": "loot",
+      "note": "最近的真实物资箱",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 11,
+      "player": [
+        606,
+        604
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "enemies-640x300.png",
+      "scene": "enemies",
+      "note": "真实敌人种类外观",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 12,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "extract-640x300.png",
+      "scene": "extract",
+      "note": "北线检查口撤离点",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 13,
+      "player": [
+        208,
+        128
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "outside-640x300.png",
+      "scene": "outside",
+      "note": "样板范围外：通用占位画面与边界标记",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 14,
+      "player": [
+        104,
+        860
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "upstairs-640x300.png",
+      "scene": "upstairs",
+      "note": "二楼（真实落点）",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "resident-f2",
+      "epoch": 15,
+      "player": [
+        304,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    },
+    {
+      "file": "basement-640x300.png",
+      "scene": "basement",
+      "note": "地下层（真实落点）",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "resident-b1",
+      "epoch": 16,
+      "player": [
+        240,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": ""
+    }
+  ],
+  "errors": [],
+  "requests": []
+}

@@ -1,3 +1,11 @@
+## 2026-10-08 · PR #22 城中村可玩样板：Pixi 画面接入真实 Runtime（Opus）
+
+用户要求续作原分支、用真实 Runtime 替换原型 Mock、接好原会话/存档/事务，只做城中村及二楼、地下层，沿用占位素材，交付后停止。开工时 main 为 `841e8bb`（#25），已正常合并进任务分支（`a829e9d`），handoff 冲突按日期保留双方。PR #22 远端头仍为 `878f563`，原 fork 无写权限，本轮提交仅在本地。
+
+新增 `src/coast-view/`：PixiJS 8.22.0（MIT，经现有 esbuild 打进同一离线 HTML，+0.53 MB）、宿主、输入、外观表与程序占位素材。显式 `?sample=village` 时，居民楼行动的出击与恢复改挂样板宿主，RaidScene 不启动、Phaser 循环休眠；不带参数时原游戏不变。所有物品与保存操作走 Runtime 事务服务；结算提交后才卸载并交回原结算页。Runtime 规则与协议未改，仅抽出宿主包装并加 `?test=1` 测试宿主。详见[样板接入说明](docs/COAST-SAMPLE-VIEW.md)与[给 Sol 的验收清单](docs/coast-sample-view/SOL-ACCEPTANCE.md)。
+
+实际运行：`pnpm test` 223 项、`pnpm package`、样板接线 17/17、四尺寸 48 张截图与本机测量；原浏览器回归结果登记在 [verification.json](docs/coast-sample-view/verification.json)。背包/搜刮为简化列表、地图与阅读面板未做；一次截图运行中出现过未复现的保存失败面板，已登记待 Sol 复测。未推送、未开 PR、未合并或发布，等待用户确认画面与交接。
+
 ## 2026-10-08 · PR #22 城中村真实样板 Runtime，等待 Opus 接线
 
 维护者在 A01 评估与 Opus v1 清单之后明确授权逻辑源码实现。续作原分支，合入最新 main `f144147`，基线合并提交 `002435e`，保留双方历史。纯数据 Runtime 复用既有 SaveSession、世界/库存/RPG/追击规则，提供 v1 发布、真实地图与揭示、连续输入、旁路战斗事件、原子事务、终局重试以及不暴露内部状态的宿主入口。普通游戏仍走原 RaidScene，作为兼容入口和新旧差分基线；不把逻辑交付标为新画面已接入。

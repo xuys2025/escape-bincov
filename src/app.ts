@@ -13,6 +13,8 @@ export const app = {
     game: null as Phaser.Game | null,
     raid: null as RaidScene | null,
     base: null as BaseScene | null,
+    /** Opt-in Pixi village sample host (?sample=village); while set, the Phaser RaidScene is never started. */
+    coastSample: null as { checkpoint(): boolean } | null,
     baseWalking: false, baseFacility: 'rest', mapView: '',
     tab: 'gear', overlay: '', helpReturn: '', selected: '', selectedSource: '', seed: '',
     runWorld: 'coast' as 'coast' | 'buildings' | 'mall',

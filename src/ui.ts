@@ -20,6 +20,7 @@ import { criticalChance, useRpgItem } from './rpg';
 import type { ExpansionDraft } from './session';
 import { PIXEL_FONT } from './font';
 import { inventoryArtSize } from './art/inventory';
+import { sampleEnabled, sampleSupports, startCoastSample } from './coast-view/sample';
 type InventoryDrag = { uid: string; source: string; token: number; runId: string | null; containerId: string | null; rotated?: boolean };
 let activeDrag: InventoryDrag | null = null;
 let dragToken = 0;
@@ -55,6 +56,8 @@ export function initSave(owned = true) {
     saved(saveSession.initialize(owned));
     audio.setVolume(app.save.settings.volume);
 }
+/** Enter the run state for an external renderer (village sample) without starting the Phaser RaidScene. */
+export function enterExternalRun() { clearLootContext(); playerInput.clear(); app.state = 'run'; app.overlay = ''; app.baseWalking = false; clearSelection(); app.game?.scene.getScenes(true).forEach(scene => app.game!.scene.stop(scene.scene.key)); render(); }
 export function changeState(state: typeof app.state, walking = app.baseWalking) { if (app.pendingSettlement) { setOverlay('save-error'); return; } clearLootContext(); app.raid?.releaseInput(); if (app.base && !app.base.checkpoint()) { setOverlay('base-save-error'); return; } playerInput.clear(); app.state = state; app.overlay = ''; app.baseWalking = state === 'hideout' && walking; clearSelection(); if (state === 'hideout') {
     saved(saveSession.grantRelief());
 } app.game?.scene.getScenes(true).forEach(scene => app.game!.scene.stop(scene.scene.key)); app.game?.scene.start(state === 'hideout' && app.baseWalking ? 'Base' : ({ menu: 'Menu', hideout: 'Hideout', run: 'Raid', result: 'Result' })[state]); render(); }
@@ -200,6 +203,7 @@ function details() {
 function deploy() {
     const cfg = app.runWorld === 'mall' ? mallRunConfig(app.seed || Date.now()) : generateRun(app.seed || Date.now());
     if (!saved(saveSession.beginRun(cfg.seed, app.runWorld === 'mall' ? 'mall' : app.runWorld === 'buildings'))) return;
+    if (sampleEnabled() && sampleSupports()) { app.shop = null; void startCoastSample(); return; }
     app.shop = null; app.game!.registry.set('runConfig', cfg); changeState('run');
 }
 function checkout() {
@@ -259,6 +263,7 @@ export function render() {
         if (app.baseWalking && !['base-menu', 'shop-leave', 'shop-quest'].includes(app.overlay)) { renderBase(); return; }
         renderHideout();
     }
+    if (app.state === 'run' && app.coastSample) { ui().innerHTML = ''; return; }
     if (app.state === 'run') {
         ui().innerHTML = `<div class="hud"><div class="hud-top"><div class="location"><div class="section-label">滨科夫 · 沿海封锁区</div><strong id="zone">封锁区</strong><div class="small" id="tide">潮位确认中</div></div><div class="timer"><strong id="timer">10:00</strong><small>撤离倒计时</small></div></div><div id="radio" class="radio">水产站：信号接通。撤离点已标记在地图上，别等到最后一分钟。</div><div class="hud-bottom"><div class="vitals ${app.expansion?.raid ? 'rpg-vitals' : ''}"><div class="vital-row"><span>生命</span><span id="hp">100 / 100</span></div><div class="bar"><i id="hpbar"></i></div><div class="vital-row"><span>耐力</span><span id="stamina">100</span></div><div class="bar stamina"><i id="staminabar"></i></div><div class="vital-row vital-status" style="margin-bottom:0"><span id="status">状态正常</span><span id="weight">0 kg</span></div></div><div class="weapon-hud"><div class="eyebrow" id="gunname">${weaponName()}</div><div class="ammo" id="ammo">—</div><div class="small muted" id="reload">R 换弹　1 主武器　2 匕首</div></div></div><div class="keytips"><kbd>E</kbd>拾取 / 撤离　<kbd>Tab</kbd>背包　<kbd>Q</kbd>治疗　<kbd>M</kbd>地图　<kbd>Esc</kbd>暂停 ${app.expansion?.raid ? btn('身体', 'property') : ''}</div><div id="hit-directions" aria-hidden="true"></div><div class="raid-information"><button id="exit-navigation" data-action="map">选择撤离点</button><details id="raid-quests" ${app.tasksExpanded ? 'open' : ''}><summary>任务 <span id="raid-quest-count"></span></summary><div id="raid-quest-list"></div><small title="携带数量包含背包、安全箱和出门带上的物资">携带含带入物资 · 回站交付</small></details></div><div id="interaction" class="interaction" style="display:none"></div><div id="warning"></div></div>${overlayHtml()}`;
         bind();
@@ -680,6 +685,7 @@ function bind() {
             case 'enter':
                 if (app.checkpoint || app.expansion?.raid) {
                     if (saveSession.resumeRun()) {
+                        if (sampleEnabled() && sampleSupports()) { void startCoastSample(true); break; }
                         app.game!.registry.set('runConfig', app.expansion?.raid?.worldVersion === 'mall-v1' ? mallRunConfig(app.expansion.raid.seed) : generateRun(app.expansion?.raid?.seed ?? app.checkpoint!.seed));
                         changeState('run'); app.overlay = 'pause'; render();
                     }

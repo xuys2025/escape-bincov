@@ -1,0 +1,83 @@
+/**
+ * Village sample entry (opt-in with ?sample=village). Deploying or resuming a coast-buildings raid mounts the
+ * Pixi host on the real Runtime instead of starting the Phaser RaidScene; without the flag nothing changes.
+ * Only one of the two may own the SaveSession: the RaidScene is never started while this host is alive.
+ */
+import { app, saveSession } from '../app';
+import { createCoastRaidHost } from '../raid-runtime';
+import { createTestCoastHost } from '../raid-runtime/test-support';
+import { changeState, enterExternalRun, exportSave, toast } from '../ui';
+import { CoastSampleHost, type CoastHandle } from './host';
+import { CoastView, type ViewOptions } from './scene';
+import { lifecycle } from './scope';
+
+const params = () => new URLSearchParams(location.search);
+export const sampleEnabled = () => params().get('sample') === 'village';
+export const sampleSupports = () => app.expansion?.raid?.worldVersion === 'coast-buildings-v1';
+
+let starting = false;
+
+export async function startCoastSample(paused = false): Promise<boolean> {
+  if (app.coastSample || starting || !sampleSupports()) return false;
+  starting = true;
+  try {
+    enterExternalRun();
+    // Only one renderer runs: the Phaser loop sleeps while the sample host owns the raid.
+    app.game?.loop.sleep();
+    const test = params().get('test') === '1';
+    const created = test ? createTestCoastHost(app, saveSession, location.search) : createCoastRaidHost(app, saveSession);
+    const p = params();
+    const opts: ViewOptions = {
+      debug: test && p.get('debug') === '1', xray: p.get('xray') !== '0', mood: Number(p.get('mood') ?? 0) === 1 ? 1 : 0,
+      reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches,
+      viewTiles: p.get('view') === '28' ? 28 : 24, collapseTall: p.get('collapse') !== '0',
+    };
+    const host: CoastSampleHost = new CoastSampleHost(created as unknown as CoastHandle, app, opts, () => finish(host), exportSave);
+    app.coastSample = host;
+    document.documentElement.dataset.coastSample = 'run';
+    await host.mount(document.body);
+    if (paused) host.pause('overlay');
+    if (test) expose(host, 'driver' in created ? created.driver : null);
+    return true;
+  } catch (error) {
+    console.error(error);
+    (app.coastSample as CoastSampleHost | null)?.unmount();
+    app.coastSample = null;
+    delete document.documentElement.dataset.coastSample;
+    app.game?.loop.wake();
+    toast('新画面启动失败，行动已保存。刷新后可继续。');
+    changeState('menu');
+    return false;
+  } finally { starting = false; }
+}
+
+/** Settlement is committed: release the Runtime, unmount the view, then hand the result screen to the original UI. */
+function finish(host: CoastSampleHost) {
+  host.runtime.dispose();
+  host.unmount();
+  if (app.coastSample === host) app.coastSample = null;
+  delete document.documentElement.dataset.coastSample;
+  app.game?.loop.wake();
+  changeState('result');
+}
+
+function expose(host: CoastSampleHost, driver: unknown) {
+  (window as unknown as { __bincovSample: unknown }).__bincovSample = {
+    get host() { return app.coastSample; }, driver, initial: host,
+    counts: () => ({ ...lifecycle, liveViews: CoastView.live.size, canvases: document.querySelectorAll('canvas').length,
+      sampleRoots: document.querySelectorAll('.coast-sample').length,
+      atlasPages: [...CoastView.live].reduce((n, v) => n + v.tex.atlas.stats.pages, 0),
+      largeTextures: [...CoastView.live].reduce((n, v) => n + v.tex.atlas.stats.largeTextures, 0),
+      heap: (performance as unknown as { memory?: { usedJSHeapSize: number } }).memory?.usedJSHeapSize ?? 0 }),
+    /** View-only remount on the same live Runtime: exercises Pixi/listener/texture ownership without ending the raid. */
+    async remount(times: number) {
+      for (let i = 0; i < times; i++) {
+        const old = app.coastSample as CoastSampleHost; if (!old) break;
+        old.unmount();
+        const next = new CoastSampleHost(old.handle, app, old.opts, () => finish(next), exportSave);
+        app.coastSample = next; await next.mount(document.body);
+        await new Promise(r => setTimeout(r, 60));
+      }
+    },
+  };
+}

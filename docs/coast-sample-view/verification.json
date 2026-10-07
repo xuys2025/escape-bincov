@@ -1,0 +1,144 @@
+{
+  "generatedAt": "2026-10-07T16:46:07.556Z",
+  "platform": "win32",
+  "node": "v24.19.0",
+  "pnpm": "11.19.0 (corepack)",
+  "browser": "154.0.8037.98",
+  "baseline": {
+    "mainAtStart": "841e8bbdfb070eada82537563dd1ab1b4801aea3",
+    "mergeCommit": "a829e9d",
+    "runtimeCommit": "4d89f27",
+    "prHead": "878f5633316a824960091f8f924c0ddd8dd78078",
+    "pushPermission": false
+  },
+  "artifacts": {
+    "dist/index.html": {
+      "bytes": 3088289,
+      "sha256": "7b2c950cc22b888eb6ae34ca9d67c81e3de52fa9f8737d74b7cd82ecad436e17"
+    },
+    "start the game.html": {
+      "bytes": 3088289,
+      "sha256": "7b2c950cc22b888eb6ae34ca9d67c81e3de52fa9f8737d74b7cd82ecad436e17"
+    },
+    "release/Escape-Bincov-portable.zip": {
+      "bytes": 1043918,
+      "sha256": "456cf8aa1fc7ead905a3cf867e2456b32ac592ab8d518818f4ab21feda3492b4"
+    },
+    "release/Escape-Bincov-web.zip": {
+      "bytes": 1040143,
+      "sha256": "957ad5f1979d7703bbe093ae7dd99795b9b10de421d63c10c7d0de17ee209826"
+    }
+  },
+  "unit": {
+    "command": "pnpm test",
+    "passed": 223,
+    "failed": 0
+  },
+  "package": {
+    "command": "pnpm package",
+    "status": "passed"
+  },
+  "sample": {
+    "wiring": {
+      "command": "node scripts/coast-sample-test.mjs",
+      "passed": 17,
+      "total": 17,
+      "errors": 0,
+      "externalRequests": 0
+    },
+    "screenshots": {
+      "command": "node scripts/coast-sample-shots.mjs",
+      "shots": 48,
+      "anomalies": 0,
+      "externalRequests": 0
+    },
+    "measure": {
+      "command": "node scripts/coast-sample-measure.mjs",
+      "frameInterval": {
+        "p50": 6,
+        "p95": 7.5,
+        "p99": 8.9
+      },
+      "runtimeAdvance": {
+        "p50": 2.3,
+        "p95": 3.4,
+        "p99": 3.8
+      },
+      "viewPresent": {
+        "p50": 1,
+        "p95": 1.5,
+        "p99": 2
+      },
+      "note": "Local desktop GPU; real Runtime with AI active; present excludes GPU completion; not a phone measurement."
+    },
+    "unreproduced": "One earlier four-size screenshot run showed a save-failure pause panel on the 1280x720 outside scene; a per-scene replay and a full 48-shot rerun did not reproduce it. Root cause unknown."
+  },
+  "regression": {
+    "test:browser": {
+      "status": "passed",
+      "passLines": 24
+    },
+    "test:desktop-input": {
+      "status": "passed",
+      "passLines": 10
+    },
+    "test:save-browser": {
+      "status": "passed",
+      "passLines": 9
+    },
+    "test:buildings": {
+      "status": "passed",
+      "passLines": 8
+    },
+    "test:mobile": {
+      "status": "passed",
+      "passLines": 10
+    },
+    "test:mobile-ux": {
+      "status": "passed",
+      "passLines": 11
+    },
+    "test:portable": {
+      "status": "passed",
+      "passLines": 0
+    },
+    "test:ui": {
+      "status": "passed",
+      "passLines": 38
+    },
+    "test:loot": {
+      "status": "passed",
+      "passLines": 44
+    },
+    "test:expansion": {
+      "status": "passed",
+      "passLines": 5
+    },
+    "test:qol-expansion": {
+      "status": "passed",
+      "passLines": 4
+    },
+    "test:systems": {
+      "status": "passed",
+      "passLines": 16
+    }
+  },
+  "regressionNotes": {
+    "test:expansion": "First attempt failed only because test-results/pre-m0.html was absent; exported from pinned commit 07b1414 (the same file CI downloads) and the rerun passed."
+  },
+  "notRun": [
+    "test:layered-play (known failing script from the previous round)",
+    "test:art",
+    "test:tactical",
+    "test:title",
+    "test:title-water",
+    "test:mall-passages",
+    "test:mall-landing",
+    "test:qol",
+    "test:loot-target",
+    "test:play",
+    "A01 F01-F22 beyond the W00-W16 coverage",
+    "WebGL context loss",
+    "real devices and human playtest"
+  ]
+}

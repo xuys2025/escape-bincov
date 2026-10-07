@@ -54,7 +54,7 @@
 
 | 事项 | 来源 / 当前归属 | 当前处理 |
 | --- | --- | --- |
-| 沿海地图 2.5D 视角与像素材质 | 用户 2026-10-07 确认，随后明确授权首个真实城中村 Runtime；[#22](https://github.com/xuys2025/escape-bincov/pull/22) · `docs/coast-2-5d-art-design`；[设计文档](COAST-2_5D-ART-DESIGN.md) | 2026-10-08 本地交付纯数据 Runtime、v1 端口、地图/输入/事务事件与测试；[接入及实际回归](COAST-RUNTIME-SAMPLE.md)。基线 main `f144147`，原 PR 头 `878f563`；原 fork 无 push 权限，提交暂存本地，远端仍为文档版本。等待 Opus/Sol 接线验收后续指令；不扩展全沿海、不制作素材、不合并发布 |
+| 沿海地图 2.5D 视角与像素材质 | 用户 2026-10-07 确认，随后明确授权首个真实城中村 Runtime；[#22](https://github.com/xuys2025/escape-bincov/pull/22) · `docs/coast-2-5d-art-design`；[设计文档](COAST-2_5D-ART-DESIGN.md) | 2026-10-08 本地交付纯数据 Runtime、v1 端口、地图/输入/事务事件与测试；[接入及实际回归](COAST-RUNTIME-SAMPLE.md)。基线 main `f144147`，原 PR 头 `878f563`；原 fork 无 push 权限，提交暂存本地，远端仍为文档版本。等待 Opus/Sol 接线验收后续指令；不扩展全沿海、不制作素材、不合并发布。2026-10-08 Opus 在原分支本地完成城中村/二楼/地下层可玩样板：`?sample=village` 挂 Pixi 画面于真实 Runtime 与事务服务，见 [样板接入](COAST-SAMPLE-VIEW.md) 与 [Sol 验收清单](coast-sample-view/SOL-ACCEPTANCE.md)；等待用户确认画面 |
 | QOL 与建筑/RPG 主线整合 | #10 原分支，基线 `9045139` | 本轮修复与验证见 [整合记录](QOL-PR16-INTEGRATION.md)，完整 CI 通过后按维护者授权合并；未完真机验收保留 |
 | 美术及界面前序成果收尾 | #11 / #18，承接实现 #20 | 方向与核心资产已采用；原 PR 留档收尾，历史报告不冒充新版本验收 |
 | 追击事件重开已经走过的门 | #16，审阅 `7cc9236` 的 `src/pursuit.ts` | 已复现并修复，只处理本帧新路段及身体范围；纯规则、原生关门/刷新与主线整合回归通过，最终 CI 已通过并随 #16 合并 |

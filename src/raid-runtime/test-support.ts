@@ -1,5 +1,7 @@
 /** Explicit test-only driver. Do not import from the ordinary application entry. */
-import type { CoastRaidRuntime } from './runtime';
+import { CoastRaidRuntime } from './runtime';
+import { wrapCoastRuntime } from './host';
+import type { SaveSession, SessionState } from '../session';
 import type { Point } from '../world';
 
 export function createRuntimeTestDriver(runtime: CoastRaidRuntime, search: string) {
@@ -35,4 +37,11 @@ export function createRuntimeTestDriver(runtime: CoastRaidRuntime, search: strin
             state.loadout.ammoRelief = 0; state.knife = false; state.reloadLeft = 0; state.fireCooldown = 0; runtime.restore(state);
         },
     };
+}
+
+/** Explicit ?test=1 host: the same v1 port and services as production, plus the fixture driver. */
+export function createTestCoastHost(session: SessionState, saves: SaveSession, search: string) {
+    if (new URLSearchParams(search).get('test') !== '1') throw new Error('Runtime fixtures require ?test=1.');
+    const core = new CoastRaidRuntime(session, saves);
+    return { ...wrapCoastRuntime(core, session, saves), driver: createRuntimeTestDriver(core, search) };
 }

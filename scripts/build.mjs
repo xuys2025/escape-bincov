@@ -23,7 +23,7 @@ async function compile() {
   const missing = [...await fontCharacters()].filter(c => !manifest.codepoints.includes(c.codePointAt(0)));
   if (missing.length) throw new Error('Regenerate the embedded font for: ' + missing.join(''));
   const fontCss = `@font-face{font-family:"Bincov Text";src:url(data:font/woff2;base64,${font.toString('base64')}) format("woff2");font-weight:400;font-style:normal;font-display:swap;}\n`;
-  const css = fontCss + (await Promise.all(['src/style.css', 'src/title.css', 'src/tactical.css'].map(path => readFile(path, 'utf8')))).join('\n');
+  const css = fontCss + (await Promise.all(['src/style.css', 'src/title.css', 'src/tactical.css', 'src/coast-view/coast.css'].map(path => readFile(path, 'utf8')))).join('\n');
   const notices = (await readFile('THIRD_PARTY_NOTICES.md','utf8')).replace(/-->/g,'--&gt;');
   const js = result.outputFiles[0].text.replace(/<\/script/gi,'<\\/script');
   const html = `<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><!--\n${notices}\n--><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#10272b"><title>逃离滨科夫 · Escape Bincov</title><style>${css}</style></head><body><main id="frame"><div id="game"></div><div id="ui"></div><div id="touch-controls"></div><div id="world-labels" aria-hidden="true"></div></main><div id="toast" role="status"></div><script>${js}</script></body></html>`;
