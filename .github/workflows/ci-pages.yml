@@ -15,11 +15,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  verify:
-    name: Build and test
+  build:
+    name: Build shared game
     runs-on: ubuntu-24.04
-    # Combined expansion and QOL suites retain both PRs' full browser coverage.
-    timeout-minutes: 45
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
         with:
@@ -38,58 +37,154 @@ jobs:
         run: pnpm package
       - name: Verify committed game matches source
         run: git diff --exit-code -- dist/index.html 'start the game.html'
+      - name: Record shared artifact checksums
+        run: |
+          sha256sum dist/index.html 'start the game.html' \
+            release/Escape-Bincov-portable.zip release/Escape-Bincov-web.zip \
+            docs/release-manifest.json > build-checksums.sha256
+      - name: Upload shared game
+        uses: actions/upload-artifact@v6
+        with:
+          name: built-game
+          # Explicit files preserve paths and avoid uploading workspace credentials.
+          path: |
+            dist/index.html
+            start the game.html
+            release/Escape-Bincov-portable.zip
+            release/Escape-Bincov-web.zip
+            docs/release-manifest.json
+            build-checksums.sha256
+          if-no-files-found: error
+          retention-days: 1
+
+  browser:
+    name: Browser / ${{ matrix.group }}
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      # Independent runners avoid competing Chromium processes and report paths.
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        group: [visual, inventory, world, input]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Install pinned pnpm
+        run: npm install --global pnpm@11.19.0
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --registry=https://registry.npmjs.org
+      - name: Download shared game
+        uses: actions/download-artifact@v8
+        with:
+          name: built-game
+          digest-mismatch: error
+      - name: Verify shared artifact checksums
+        run: sha256sum --check build-checksums.sha256
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
       - name: Install Chinese screenshot fonts
         run: sudo apt-get install -y fonts-noto-cjk
       - name: Browser regression
+        if: matrix.group == 'input'
         run: pnpm test:browser
       - name: Desktop and hybrid input regression
+        if: matrix.group == 'input'
         run: pnpm test:desktop-input
       - name: UI layout and screenshot review
+        if: matrix.group == 'visual'
         run: pnpm test:ui
       - name: Tactical inventory and pixel artwork regression
+        if: matrix.group == 'visual'
         run: pnpm test:tactical && pnpm test:art
       - name: Responsive title and motion regression
+        if: matrix.group == 'visual'
         run: pnpm test:title && pnpm test:title-water
       - name: Save reliability regression
+        if: matrix.group == 'inventory'
         run: pnpm test:save-browser
       - name: Obtain actual pre-expansion client
+        if: matrix.group == 'inventory'
         run: |
           mkdir -p test-results
           curl --fail --location --retry 3 https://raw.githubusercontent.com/xuys2025/escape-bincov/07b1414da9f1ac4c3ad13a23ec914630ccbd7fbb/dist/index.html --output test-results/pre-m0.html
       - name: Expansion storage and actual old-client regression
+        if: matrix.group == 'inventory'
         run: pnpm test:expansion
       - name: Buildings and floor controls
+        if: matrix.group == 'world'
         run: pnpm test:buildings
       - name: QOL with RPG, base and layered inventory
+        if: matrix.group == 'inventory'
         run: pnpm test:qol-expansion
       - name: RPG, station and mall transactions
+        if: matrix.group == 'world'
         run: pnpm test:systems
       - name: Repeated same-layer mall passages
+        if: matrix.group == 'world'
         run: pnpm test:mall-passages
       - name: Mall landing congestion and held input
+        if: matrix.group == 'world'
         run: pnpm test:mall-landing
       - name: Crate and corpse inventory regression
+        if: matrix.group == 'inventory'
         run: pnpm test:loot
       - name: Nearby loot target selection
+        if: matrix.group == 'inventory'
         run: pnpm test:loot-target
       - name: QOL transactions and information regression
+        if: matrix.group == 'inventory'
         run: pnpm test:qol
       - name: Mobile input and recovery regression
+        if: matrix.group == 'input'
         run: pnpm test:mobile
       - name: Mobile inventory and feedback regression
+        if: matrix.group == 'input'
         run: pnpm test:mobile-ux
       - name: Offline portable regression
+        if: matrix.group == 'inventory'
         run: pnpm test:portable
       - name: Save diagnostic reports and screenshots
         if: always()
         uses: actions/upload-artifact@v6
         with:
-          name: browser-evidence
+          name: browser-evidence-${{ matrix.group }}
           path: test-results/
           if-no-files-found: ignore
           retention-days: 14
+
+  verify:
+    # Keep this required check and the mirror's release gate stable.
+    name: Build and test
+    if: always()
+    needs: [build, browser]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Require build and every browser group to succeed
+        env:
+          BUILD_RESULT: ${{ needs.build.result }}
+          BROWSER_RESULT: ${{ needs.browser.result }}
+        run: |
+          if [[ "$BUILD_RESULT" != success || "$BROWSER_RESULT" != success ]]; then
+            echo "Build: $BUILD_RESULT; browser groups: $BROWSER_RESULT"
+            exit 1
+          fi
+      - name: Download validated game
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/download-artifact@v8
+        with:
+          name: built-game
+          digest-mismatch: error
+      - name: Verify Pages artifact checksums
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: sha256sum --check build-checksums.sha256
       - name: Configure Pages
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/configure-pages@v5

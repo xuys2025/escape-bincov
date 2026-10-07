@@ -148,14 +148,36 @@ pnpm test:ui
 pnpm test:tactical
 pnpm test:art
 pnpm test:title
+pnpm test:title-water
 pnpm test:save-browser
+pnpm test:expansion
+pnpm test:buildings
+pnpm test:qol-expansion
+pnpm test:systems
+pnpm test:mall-passages
+pnpm test:mall-landing
 pnpm test:loot
+pnpm test:loot-target
+pnpm test:qol
 pnpm test:portable
 pnpm test:mobile
 pnpm test:mobile-ux
 ```
 
-CI 对 PR 与 `main` 运行以上检查，并保存 14 天诊断附件。真实计时脚本约 10 分钟，不在每次 CI 中默认执行。
+CI 对 PR 与 `main` 运行以上完整检查。单元测试及打包只在 `Build shared game` 执行一次，四组浏览器任务在独立 Ubuntu runner 上并行下载同一次运行的 `built-game` 制品，并核对 HTML、ZIP 和发布清单的 SHA-256。分组如下：
+
+| 组 | 完整浏览器命令（均保留现有断言和循环） |
+| --- | --- |
+| `visual` | `test:ui`、`test:tactical`、`test:art`、`test:title`、`test:title-water` |
+| `inventory` | `test:save-browser`、`test:expansion`、`test:qol-expansion`、`test:loot`、`test:loot-target`、`test:qol`、`test:portable` |
+| `world` | `test:buildings`、`test:systems`、`test:mall-passages`、`test:mall-landing` |
+| `input` | `test:browser`、`test:desktop-input`、`test:mobile`、`test:mobile-ux` |
+
+诊断附件为 `browser-evidence-visual`、`browser-evidence-inventory`、`browser-evidence-world`、`browser-evidence-input`，保留 14 天；临时构建制品仅保留 1 天。失败时其余组继续收集证据，取消旧运行的规则保持不变。
+
+统一检查名仍为 `Build and test`：构建及每组浏览器检查必须全部成功，失败、取消或跳过均不能通过。只有 main 的 push 或手动运行在该门禁成功后，才会校验并上传同一份 `dist/`，随后执行 `Deploy Pages`；PR 不发布，现有公开 Pages 镜像的两个成功检查名保持兼容。当前仓库公开且使用标准 GitHub 托管 runner，计算时间免费；附件仍应控制体积与保留时间。
+
+真实计时脚本约 10 分钟，不在每次 CI 中默认执行。
 
 `test:browser` 使用显式夹具加速移动/计时；`test:play` 仅读状态并发送真实键鼠，但拥有地图信息和自动瞄准。两者都不能证明真人玩起来好玩，也不能替代大陆运营商网络实测。不要把历史“47 项通过”当作新提交已验证。
 

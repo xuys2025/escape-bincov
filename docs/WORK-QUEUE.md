@@ -18,6 +18,7 @@
 
 | 任务 / 承接入口 | 核对时实际范围 | 下一步与范围边界 |
 | --- | --- | --- |
+| `ci/parallel-browser-checks` · [CI 工作流](../.github/workflows/ci-pages.yml) | 2026-10-07 维护者明确授权执行 CI 优化；实时 main 为 `f144147`，无同目标开放 PR。单次构建，20 项浏览器检查分四组独立 runner 并行，保留统一门禁、证据与 Pages/镜像检查名 | 本地语法、覆盖、失败门禁、制品哈希及单元/打包检查后提交独立 PR，等待该提交完整 CI。按路径选择测试、缩短诊断循环及缓存调整留待后续明确范围；等待维护者合并 |
 | [#10](https://github.com/xuys2025/escape-bincov/pull/10) · `agent/qol-discovery-20261005` | 原头 `a99c661` 的完整 QOL 与已接受 #16 整合；保留原分支历史，补齐 RPG 商店、多层搜刮/拆分/旋转、真实命中方向和基地离店确认 | [本轮整合记录](QOL-PR16-INTEGRATION.md)；必须在最新组合完整 CI 通过后合并。真机及真人清单继续保留 |
 | [#11](https://github.com/xuys2025/escape-bincov/pull/11) · `docs/art-direction-research` | 核心资产已由 #20 采用；63 份来源档案由 #19 保留原头父历史承接 | GitHub 已标记合并，归档来源及历史验收保留；不恢复旧 `art.css` |
 | [#16](https://github.com/xuys2025/escape-bincov/pull/16) · `feat/buildings-rpg-mall` | 最终头 `c558888` 已复核，完整 CI 通过，合并为 `9045139`；建筑/RPG/基地/商场进入主线 | [73 项验收登记](PR16-ACCEPTANCE-REGISTER.md)保留原图、真人、真机、独立性能及扩展组合缺口；已合并不代表这些全部通过 |
