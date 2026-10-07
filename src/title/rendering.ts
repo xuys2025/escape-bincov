@@ -10,6 +10,12 @@ const TEXEL_SCALE = 2;
 export function motionTexture(scene: Phaser.Scene, name: LayerName) {
     const spec = LAYERS[name];
     if (!MOVING.has(name)) return spec.key;
+    // Grid layers already hold 3x3 texels per art pixel: linear filtering then only
+    // softens a sixth of a pixel at block edges during subpixel motion. No copy needed.
+    if ((spec.res ?? 1) > 1) {
+        scene.textures.get(spec.key).setFilter(Phaser.Textures.FilterMode.LINEAR);
+        return spec.key;
+    }
     const key = `${spec.key}-motion`;
     if (!scene.textures.exists(key)) {
         const source = scene.textures.get(spec.key).getSourceImage() as HTMLImageElement;

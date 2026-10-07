@@ -1,9 +1,11 @@
 {
   "schema": 2,
   "generator": "scripts/title-art/generate.ts",
-  "note": "Unified master-v3 sources are immutable. Preparation crops/resamples registered layers, pads parallax edges and derives lamp/mooring frames. All runtime imports are validated.",
+  "note": "Unified master-v3 sources are immutable. Preparation resamples every registered layer onto one 640x360 art-pixel grid with one shared palette (assets/title/palette.json), stores grid layers at 2 texels per logical pixel, applies hand passes, extrudes parallax edges and derives lamp/mooring frames. All runtime imports are validated.",
   "sources": {
-    "assets/title/sources/wordmark-industrial-v4.png": "4389b18dfc2c36b27de0201bfcf88206f65ad55db23b209b96c13b4ac1a266ff",
+    "assets/title/sources/refine-v5/wordmark-144x72.png": "39e8495087c34ecd738bcf3060423dada679c177093df2ab956e8ac0dc665813",
+    "assets/title/sources/refine-v5/radio-panel.png": "5aabf6184458205884f5c461d3bc45d2301cb590bda4e9f297c6f7ac9074ee14",
+    "assets/title/sources/refine-v5/rifle.png": "68fabf870521ef1c3c14e7d4b42fac839d7729ee216f7eb5ac6e1a9575b22ed6",
     "assets/title/sources/master-v3/master-v3.png": "6190365faf37759ae8ae198554036f83b0437830546f857cd3ae3444b48dab9a",
     "assets/title/sources/master-v3/room-v3.png": "7541cb01ddade2ad0c1e88978f0e18dc9d7451ae8ca954e2ee15a81402810c1d",
     "assets/title/sources/master-v3/desk-v3.png": "41e6d794e608158e2cda9ea1ae5cb16e0a064ac959f875aac2ff612f2b061cb9",
@@ -23,13 +25,14 @@
       "y": -2,
       "w": 964,
       "h": 544,
-      "frameWidth": 964,
-      "frameHeight": 544,
+      "res": 2,
+      "frameWidth": 1928,
+      "frameHeight": 1088,
       "frames": 1,
-      "bytes": 975433,
-      "sha256": "d73081efaa18fa8263a72ee6b80ae13bc3a748e40cb5b4d1cc67b95c4b275ff6",
-      "pixelSha256": "b76f628b646036707ed9d7e2e8e944a29aa9c93b9b5887085c04f9c034a4e014",
-      "provenance": "Imported image with edge extrusion"
+      "bytes": 91161,
+      "sha256": "1030e703338ec562ecc306a552f7bee3fe6e7a62113189dabcbd4d11103e78e1",
+      "pixelSha256": "81fc42096449c93bda76c2f4e690debf7d1cab0ee97286d0712de1b5e9f6ce8a",
+      "provenance": "ImageGen master-v3 layer on the shared 640x360 pixel grid and palette"
     },
     "harbor": {
       "file": "assets/title/title-harbor-ready.png",
@@ -39,13 +42,14 @@
       "y": -3,
       "w": 968,
       "h": 546,
-      "frameWidth": 968,
-      "frameHeight": 546,
+      "res": 2,
+      "frameWidth": 1936,
+      "frameHeight": 1092,
       "frames": 1,
-      "bytes": 976507,
-      "sha256": "a0c022a379dfe0a6eb4041fcf0d8de6666ba5d48f421cae4357fbdde70e2d01a",
-      "pixelSha256": "2bdc9b20f8e37faf16789cffa33c2bef08db992368fb7e948ca993f46f6802fe",
-      "provenance": "Imported image with edge extrusion"
+      "bytes": 91494,
+      "sha256": "4b5c85ed6ff41a88635d7e620d7deb1dcfded5e75fefd852e4b0d76d270ec9f3",
+      "pixelSha256": "484957182cec7ab5152702e23081bf9e84ec233f658aa10b7d09a5b63733375b",
+      "provenance": "ImageGen master-v3 layer on the shared 640x360 pixel grid and palette"
     },
     "fogHigh": {
       "file": "assets/title/title-fog-high-new.png",
@@ -87,13 +91,14 @@
       "y": 62,
       "w": 164,
       "h": 232,
-      "frameWidth": 164,
-      "frameHeight": 232,
+      "res": 2,
+      "frameWidth": 328,
+      "frameHeight": 464,
       "frames": 1,
-      "bytes": 45100,
-      "sha256": "c0f40d1e5ada6a356b83e6c419b6bff6bca4540dbbf7946ddd700ed3b29d3d92",
-      "pixelSha256": "1d5830dc88918c0a0edf5dd90cca7f3a77ed0df097daeb74111122a47ef09617",
-      "provenance": "Imported ImageGen pixel layer"
+      "bytes": 5405,
+      "sha256": "9ea62b07469417aed1ce6539d100e6075f25713ff37ae705a07c59a41c7ea0c0",
+      "pixelSha256": "fa0c530c83d29070bc04f1de22536fbf218a333ee7029cbcc6caec1c34903a13",
+      "provenance": "ImageGen master-v3 layer on the shared 640x360 pixel grid and palette"
     },
     "mooring": {
       "file": "assets/title/title-mooring-master-v3.png",
@@ -106,8 +111,8 @@
       "frames": 3,
       "frameWidth": 152,
       "frameHeight": 62,
-      "bytes": 448,
-      "sha256": "d361448a264a7b3c4427a332dd65187eedaaa4104030584460e91308877bf2d8",
+      "bytes": 333,
+      "sha256": "2de1a90ac110c4c9a5ce3954427a3ae9f26ffcb5c6089d3550a2bc9fa239c1dd",
       "pixelSha256": "61a2bb339184d47804a612699bd83ee020aedf2e7f08baf468059abb4d072efc",
       "provenance": "Deterministic native pixel-line frames"
     },
@@ -119,13 +124,14 @@
       "y": 28,
       "w": 960,
       "h": 540,
-      "frameWidth": 960,
-      "frameHeight": 540,
+      "res": 2,
+      "frameWidth": 1920,
+      "frameHeight": 1080,
       "frames": 1,
-      "bytes": 147844,
-      "sha256": "7664122d5ec65c2036c69331c6d2afc4ecb04e964670b87892317d070c247c87",
-      "pixelSha256": "988d725a6e09aa4bdc0046bccc11a89e52e98d2e274d79a22ce0627cf0d800c2",
-      "provenance": "Imported ImageGen pixel layer"
+      "bytes": 18666,
+      "sha256": "b096a82528e35e80c31cc4335b6f44657d5a813aaab0d96629cd735b93bc4c5e",
+      "pixelSha256": "2a647e74811f79fd1df164a229b4c66f53e1ee59df9dd4be98fc7d7076da5325",
+      "provenance": "ImageGen master-v3 layer on the shared 640x360 pixel grid and palette"
     },
     "room": {
       "file": "assets/title/title-room-ready.png",
@@ -135,13 +141,14 @@
       "y": -4,
       "w": 972,
       "h": 548,
-      "frameWidth": 972,
-      "frameHeight": 548,
+      "res": 2,
+      "frameWidth": 1944,
+      "frameHeight": 1096,
       "frames": 1,
-      "bytes": 922835,
-      "sha256": "c5e90a1736be6279f48a8ae108a3c510c970fa9b9cbf7b986e34d909be14a975",
-      "pixelSha256": "0a36ee86e1df1255be23c35ccaddd3aa2ce0fa8d15e020dc58348b91cca9a639",
-      "provenance": "Imported image with edge extrusion"
+      "bytes": 91878,
+      "sha256": "54adc93804c11978e5af165d504afd4fdfa1e2d08a66959de5cc595f2ac0d2d1",
+      "pixelSha256": "e40703d4599d342ec9cbb523ec6e50ce6d06050d88fc7e71e7c264fe75be6e59",
+      "provenance": "ImageGen master-v3 layer on the shared 640x360 pixel grid and palette, with hand passes (scripts/title-art/touch.ts)"
     },
     "lamp": {
       "file": "assets/title/title-lamp-master-v3.png",
@@ -152,11 +159,12 @@
       "w": 148,
       "h": 116,
       "frames": 5,
-      "frameWidth": 148,
-      "frameHeight": 116,
-      "bytes": 25728,
-      "sha256": "df701ce205e2d91736ac82496adaeec8185e637814b3194d8d3d64f94c9727e9",
-      "pixelSha256": "b6d448b5b499f555e612d86c9ce789238e23f9e1ccc09069f724484878fd9993",
+      "res": 2,
+      "frameWidth": 296,
+      "frameHeight": 232,
+      "bytes": 4453,
+      "sha256": "73f18df4ebd443eacb8979d6201bebf0ed803885beeab580c605838c4d261ebe",
+      "pixelSha256": "33ddd9c9da7cbd7958d7fc634d8d331180c252a8d6cf1578113927dc9c80966b",
       "provenance": "ImageGen cutout, registered crop and fixed-suspension row-shift frames"
     },
     "desk": {
@@ -167,13 +175,14 @@
       "y": 232,
       "w": 588,
       "h": 314,
-      "frameWidth": 588,
-      "frameHeight": 314,
+      "res": 2,
+      "frameWidth": 1176,
+      "frameHeight": 628,
       "frames": 1,
-      "bytes": 348853,
-      "sha256": "7a5734b28fe56a6b9433b7e15da732c20154c9a1dfee9701bbe0e61f1929f30b",
-      "pixelSha256": "1d48cd24821e80915d5af026e5cb912fb195476e44a4db64ff114ff7400ba273",
-      "provenance": "Imported ImageGen pixel layer"
+      "bytes": 34631,
+      "sha256": "7304c3431803ffcbed3e55f7aeddabd1f4d737f5a6f5c28642ddca5dcc79ab71",
+      "pixelSha256": "2aa9ebe60ef34768ead2edf0995fc5149783bf11d403c2ff3402b32ab85971d3",
+      "provenance": "ImageGen master-v3 layer on the shared 640x360 pixel grid and palette, with Codex radio and rifle redraws (sources/refine-v5)"
     },
     "light": {
       "file": "assets/title/title-light-new.png",
@@ -215,13 +224,14 @@
       "y": 365,
       "w": 352,
       "h": 182,
-      "frameWidth": 352,
-      "frameHeight": 182,
+      "res": 2,
+      "frameWidth": 704,
+      "frameHeight": 364,
       "frames": 1,
-      "bytes": 56054,
-      "sha256": "ff6b7c9c1afcea82694ff7182746ca05239fa8cd1566d2de5a835035745a96ab",
-      "pixelSha256": "039365db542a0b5d92b640e7b2a06a7e2e4f14ce48f88c17066d47c30c5f4a20",
-      "provenance": "Imported ImageGen pixel layer"
+      "bytes": 7080,
+      "sha256": "118d7f4577d02e0ddf6b41a7695290a9bb083be0871a094dc236d22b845d5f4e",
+      "pixelSha256": "c9a34ee639bea4c91232884443c8aaf20af0d308407e7c6ed3e0fe40a3f9fcdf",
+      "provenance": "ImageGen master-v3 layer on the shared 640x360 pixel grid and palette"
     },
     "fore": {
       "file": "assets/title/title-fore-master-v3.png",
@@ -231,13 +241,14 @@
       "y": -11,
       "w": 200,
       "h": 562,
-      "frameWidth": 200,
-      "frameHeight": 562,
+      "res": 2,
+      "frameWidth": 400,
+      "frameHeight": 1124,
       "frames": 1,
-      "bytes": 93858,
-      "sha256": "57fb71eb08782efc44aa32e98e374148141049b5b67c8a794aa902f14bb572ee",
-      "pixelSha256": "58a9331c50b016e5f9c67fa850a03a38d3770e20c080254cf9011fb8165edc25",
-      "provenance": "Imported ImageGen pixel layer"
+      "bytes": 11186,
+      "sha256": "0866dafe1d5c8f5873dc7b52a139772c0cd4cedcdfbb7c77a638227f2f1f8b06",
+      "pixelSha256": "34f8d68545712ede979786f345abb59543934c71bafd2e8307ef5193afc474fe",
+      "provenance": "ImageGen master-v3 layer on the shared 640x360 pixel grid and palette"
     },
     "sparks": {
       "file": "assets/title/title-sparks-new.png",
@@ -272,8 +283,8 @@
       "provenance": "Existing deterministic effect sprite"
     },
     "wordmark": {
-      "file": "assets/title/title-wordmark-industrial-v4.png",
-      "key": "title-wordmark-industrial-v4",
+      "file": "assets/title/title-wordmark-industrial-v5.png",
+      "key": "title-wordmark-industrial-v5",
       "group": "fore",
       "x": 0,
       "y": 0,
@@ -283,14 +294,14 @@
       "frameWidth": 144,
       "frameHeight": 72,
       "frames": 1,
-      "bytes": 899,
-      "sha256": "902f5fa6591e1c753689d0daa06ff59a50ddc77b34be93fcf9f793373990f0a7",
-      "pixelSha256": "94909673be06984ff57a98435506267211fa5ca5e0cbbd29dd8e440fed1a5c26",
-      "provenance": "ImageGen, one-ink nearest-neighbour preparation"
+      "bytes": 636,
+      "sha256": "6812ea689c04a5b114d6edfaef92307a87d632b84e735d9d1b0ed05c4d5d1052",
+      "pixelSha256": "047638805bcc82d155e610aedc0725d5ae833491d7f1dacafce8ab93a2282739",
+      "provenance": "Codex redraw at runtime size (sources/refine-v5), one ink"
     }
   },
   "totals": {
-    "pngBytes": 3598951,
-    "rgbaBytes": 11064480
+    "pngBytes": 362315,
+    "rgbaBytes": 42132288
   }
 }

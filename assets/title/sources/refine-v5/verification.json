@@ -1,0 +1,64 @@
+{
+  "Date": "2026-10-07",
+  "Generator": "Built-in image_gen",
+  "Master": "escape-bincov/assets/title/sources/master-v3/master-v3.png",
+  "MasterSha256": "6190365faf37759ae8ae198554036f83b0437830546f857cd3ae3444b48dab9a",
+  "CropRegistration": {
+    "Radio": {
+      "Height": 130,
+      "X": 1040,
+      "Width": 250,
+      "Y": 470
+    },
+    "Rifle": {
+      "Height": 260,
+      "X": 1150,
+      "Width": 380,
+      "Y": 600
+    }
+  },
+  "Assets": [
+    {
+      "File": "radio-panel.png",
+      "Width": 250,
+      "Height": 130,
+      "OpaquePixels": 27517,
+      "TransparentPixels": 4983,
+      "SemitransparentPixels": 0,
+      "VisibleColors": 7035,
+      "Sha256": "5aabf6184458205884f5c461d3bc45d2301cb590bda4e9f297c6f7ac9074ee14"
+    },
+    {
+      "File": "rifle.png",
+      "Width": 380,
+      "Height": 260,
+      "OpaquePixels": 25902,
+      "TransparentPixels": 72898,
+      "SemitransparentPixels": 0,
+      "VisibleColors": 10354,
+      "Sha256": "68fabf870521ef1c3c14e7d4b42fac839d7729ee216f7eb5ac6e1a9575b22ed6"
+    },
+    {
+      "File": "wordmark-144x72.png",
+      "Width": 144,
+      "Height": 72,
+      "OpaquePixels": 2608,
+      "TransparentPixels": 7760,
+      "SemitransparentPixels": 0,
+      "VisibleColors": 1,
+      "Sha256": "39e8495087c34ecd738bcf3060423dada679c177093df2ab956e8ac0dc665813"
+    },
+    {
+      "File": "wordmark-preview.png",
+      "Width": 1152,
+      "Height": 576,
+      "OpaquePixels": 166912,
+      "TransparentPixels": 496640,
+      "SemitransparentPixels": 0,
+      "VisibleColors": 1,
+      "Sha256": "b884bd2788fd7581a522629b03a1f73bd7a55ea66e6b1ae4fcf238d0218d69af"
+    }
+  ],
+  "Preview8xExact": true,
+  "IntegratedIntoGame": false
+}

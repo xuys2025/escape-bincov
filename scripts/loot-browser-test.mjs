@@ -12,6 +12,7 @@ const report = { startedAt: new Date().toISOString(), status: 'running', viewpor
   'Positions, inventories, enemy readiness and elapsed time are controlled fixtures. E opening, closing, transfers, combat and extraction use real browser keys/mouse.',
   'Real pointer dragTo uses displayed grid geometry. Stale-drag checks close and replace the source while the mouse is held.',
   'Quota injection starts at capture of the trusted pointerup event, so periodic saves remain writable until the transfer. Failed transfers compare inventories and the exact pre-drop session bytes.',
+  'The old-client storage-event fixture pauses the first raid scene through the existing opt-in hook, preserving the open loot panel while excluding automatic checkpoints; it resumes after conflict detection.',
   'Repeated refreshes restore matching container, corpse and carried inventories. Three consecutive completed runs verify lifecycle isolation. This is not a natural-play balance test.',
 ] };
 await mkdir(out, { recursive: true });
@@ -316,19 +317,27 @@ async function suite(viewport) {
       await screenshot('restored-crate');
     });
     await step('a real second-window storage event closes loot and protects the newer record', async () => {
+      // Isolate storage-event handling from the separate old-client/checkpoint race
+      // tracked in #24. Keep loot open so the real event must clear its context.
+      await page.evaluate(() => window.__bincov.app.raid.scene.pause());
+      assert.equal(await page.evaluate(() => window.__bincov.app.raid.scene.isPaused()), true);
       const before = await snapshot();
       assert.equal(before.overlay, 'loot');
+      assert.ok(before.context);
       const other = await context.newPage();
       try {
         await other.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1');
         await other.waitForFunction(() => window.__bincov);
         assert.equal(await other.evaluate(() => window.__bincov.app.storageOK), false, 'The second game page cannot take ownership');
+        assert.deepEqual((await snapshot()).context, before.context, 'Loot stays open until the real storage event');
         const winner = await other.evaluate(key => {
           // Simulate an older client that does not obey the current page lock.
           const value = JSON.parse(localStorage.getItem(key)); value.revision++;
           const bytes = JSON.stringify(value); localStorage.setItem(key, bytes); return bytes;
         }, SAVE_KEY);
         await page.waitForFunction(() => window.__bincov.app.conflict);
+        assert.equal((await snapshot()).elapsed, before.elapsed, 'No periodic checkpoint can race the old-client write');
+        await page.evaluate(() => window.__bincov.app.raid.scene.resume());
         const after = await snapshot(); assert.equal(after.context, null);
         assert.deepEqual(after.loadout, before.loadout); assert.equal(after.storage, winner);
       } finally { await other.close(); }

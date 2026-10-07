@@ -66,6 +66,23 @@ export function encodePng({ w, h, data }: RGBA): Buffer {
     ihdr.writeUInt32BE(w);
     ihdr.writeUInt32BE(h, 4);
     ihdr[8] = 8;
+    // Limited-palette art is stored losslessly as indexed colour (with per-entry alpha).
+    const colours = new Map<number, number>();
+    for (let i = 0; i < w * h && colours.size <= 256; i++) {
+        const v = ((data[i * 4] << 24) | (data[i * 4 + 1] << 16) | (data[i * 4 + 2] << 8) | data[i * 4 + 3]) >>> 0;
+        if (!colours.has(v)) colours.set(v, colours.size);
+    }
+    if (colours.size <= 256) {
+        ihdr[9] = 3;
+        const plte = Buffer.alloc(colours.size * 3), trns = Buffer.alloc(colours.size);
+        for (const [v, k] of colours) { plte[k * 3] = v >>> 24; plte[k * 3 + 1] = (v >>> 16) & 255; plte[k * 3 + 2] = (v >>> 8) & 255; trns[k] = v & 255; }
+        const raw = Buffer.alloc((w + 1) * h);
+        for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+            const i = (y * w + x) * 4;
+            raw[y * (w + 1) + 1 + x] = colours.get(((data[i] << 24) | (data[i + 1] << 16) | (data[i + 2] << 8) | data[i + 3]) >>> 0)!;
+        }
+        return Buffer.concat([Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]), chunk('IHDR', ihdr), chunk('PLTE', plte), ...(trns.some(a => a < 255) ? [chunk('tRNS', trns)] : []), chunk('IDAT', deflateSync(raw, { level: 9 })), chunk('IEND', Buffer.alloc(0))]);
+    }
     ihdr[9] = 6;
     const raw = Buffer.alloc((w * 4 + 1) * h);
     for (let y = 0; y < h; y++)

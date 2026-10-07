@@ -110,7 +110,7 @@ test('fog tiles repeat seamlessly (two periods equal the tile twice)', () => {
 
 test('the room layer is open at the door and window, and solid elsewhere', () => {
     const room = decodePng(readFileSync(manifest.layers.room.file));
-    const at = (x: number, y: number) => room.data[((y - LAYERS.room.y) * room.w + (x - LAYERS.room.x))*4+3];
+    const s = LAYERS.room.res ?? 1, at = (x: number, y: number) => room.data[(((y - LAYERS.room.y) * s) * room.w + (x - LAYERS.room.x) * s)*4+3];
     assert.equal(at(OPENINGS.door.x + 40, OPENINGS.door.y + 120), 0);
     assert.equal(at(OPENINGS.window.x + 40, OPENINGS.window.y + 100), 0);
     assert.notEqual(at(100, 200), 0);
@@ -121,11 +121,11 @@ test('exterior pier owns no interior floor below the threshold; room owns the fl
     const pier = decodePng(readFileSync(manifest.layers.pierFront.file));
     // First extraction accidentally included interior boards to the bottom of the canvas.
     // The corrected source ends before row 402; downstream floor must be fully transparent.
-    for (let y = 405; y < pier.h; y++) for (let x = 0; x < pier.w; x++)
+    for (let y = 405 * (LAYERS.pierFront.res ?? 1); y < pier.h; y++) for (let x = 0; x < pier.w; x++)
         assert.equal(pier.data[(y * pier.w + x) * 4 + 3], 0, `indoor pixels in exterior pier at ${x},${y}`);
-    const room = decodePng(readFileSync(manifest.layers.room.file));
+    const room = decodePng(readFileSync(manifest.layers.room.file)), s = LAYERS.room.res ?? 1;
     for (const [x,y] of [[360,432],[430,466],[280,510]])
-        assert.ok(room.data[((y - LAYERS.room.y) * room.w + x - LAYERS.room.x) * 4 + 3] >= 250, 'interior floor must be covered by room, allowing generated near-opaque alpha');
+        assert.ok(room.data[((y - LAYERS.room.y) * s * room.w + (x - LAYERS.room.x) * s) * 4 + 3] >= 250, 'interior floor must be covered by room, allowing generated near-opaque alpha');
     assert.ok(LAYERS.pierFront.group !== LAYERS.room.group, 'threshold and outside must retain independent depth');
 });
 
@@ -138,8 +138,42 @@ test('every runtime title import matches the imported-art manifest', () => {
         const decoded = decodePng(bytes);
         assert.equal(createHash('sha256').update(decoded.data).digest('hex'),entry.pixelSha256,`${name} pixels`);
         assert.ok(imports.includes(entry.file),`${name} manifest is not the runtime import`);
-        assert.equal(decoded.w, LAYERS[name].w * (LAYERS[name].frames ?? 1), `${name} width`);
-        assert.equal(decoded.h,LAYERS[name].h,`${name} height`);
+        const res = LAYERS[name].res ?? 1;
+        assert.equal(decoded.w, LAYERS[name].w * res * (LAYERS[name].frames ?? 1), `${name} width`);
+        assert.equal(decoded.h,LAYERS[name].h * res,`${name} height`);
+    }
+});
+
+test('grid layers share one 640x360 art-pixel grid and one palette', () => {
+    const palette = JSON.parse(readFileSync('assets/title/palette.json', 'utf8'));
+    assert.equal(palette.grid, '640x360');
+    const colours = new Set<string>(palette.colours);
+    const grid = palette.logicalPerArtPixel * palette.texelsPerLogical;
+    assert.equal(grid, 3, 'one art pixel must be exactly 3x3 texels');
+    for (const name of Object.keys(LAYERS) as LayerName[]) {
+        const L = LAYERS[name];
+        if (!L.res) continue;
+        assert.equal(L.res, palette.texelsPerLogical, `${name} texel density`);
+        const im = decodePng(readFileSync(manifest.layers[name].file)), fw = L.w * L.res;
+        // Global grid phase: texel column i of a frame starts at scene texel L.x*res + i.
+        const block = (v: number, origin: number) => Math.floor((origin * L.res! + v) / grid);
+        for (let y = 0; y < im.h; y += 7) for (let x = 0; x < im.w; x += 5) {
+            const p = (y * im.w + x) * 4;
+            if (im.data[p + 3] === 0) continue;
+            assert.equal(im.data[p + 3], 255, `${name} alpha is binary`);
+            const c = '#' + [0, 1, 2].map(k => im.data[p + k].toString(16).padStart(2, '0')).join('');
+            assert.ok(colours.has(c), `${name} colour ${c} is outside the shared palette`);
+            // Neighbouring texels inside the same art pixel carry the same colour.
+            const fx = x % fw, nx = x + 1, ny = y + 1;
+            if (nx % fw && nx < im.w && block(fx + 1, L.x) === block(fx, L.x)) {
+                const q = (y * im.w + nx) * 4;
+                if (im.data[q + 3]) assert.deepEqual([...im.data.subarray(q, q + 3)], [...im.data.subarray(p, p + 3)], `${name} block split at ${x},${y}`);
+            }
+            if (ny < im.h && block(ny, L.y) === block(y, L.y)) {
+                const q = (ny * im.w + x) * 4;
+                if (im.data[q + 3]) assert.deepEqual([...im.data.subarray(q, q + 3)], [...im.data.subarray(p, p + 3)], `${name} block split at ${x},${y}`);
+            }
+        }
     }
 });
 

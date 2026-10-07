@@ -34,11 +34,13 @@ export function mountWater(scene: Phaser.Scene, group: Phaser.GameObjects.Contai
     const shade = scene.add.rectangle(-4, ANCHORS.horizon, 968, 250, 0x102a39, .15).setOrigin(0);
     group.add([shade, back.image]);
     const source = scene.textures.get(LAYERS.boat.key).getSourceImage() as HTMLImageElement;
+    // Hull sampling works in logical scene pixels; grid layers store 2 texels per pixel.
     const canvas = document.createElement('canvas');
-    canvas.width = source.width;
-    canvas.height = source.height;
+    canvas.width = LAYERS.boat.w;
+    canvas.height = LAYERS.boat.h;
     const ctx = canvas.getContext('2d', { willReadFrequently: true })!;
-    ctx.drawImage(source, 0, 0);
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(source, 0, 0, canvas.width, canvas.height);
     const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height), w = canvas.width, h = canvas.height;
     const bottoms = Array.from({ length: w }, (_, x) => {
         for (let y = h - 1; y >= 90; y--) {

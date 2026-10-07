@@ -16,7 +16,7 @@ import chair from '../../assets/title/title-chair-master-v3.png';
 import fore from '../../assets/title/title-fore-master-v3.png';
 import sparks from '../../assets/title/title-sparks-new.png';
 import rain from '../../assets/title/title-rain-new.png';
-import wordmark from '../../assets/title/title-wordmark-industrial-v4.png';
+import wordmark from '../../assets/title/title-wordmark-industrial-v5.png';
 
 /** Inline data URLs; the build checks each file against assets/title/manifest.json. */
 export const TITLE_ART: Record<LayerName, string> = { sky, fogHigh, fogLow, harbor, boat, mooring, pierFront, room, lamp, desk, light, radioFx, chair, fore, sparks, rain, wordmark };
@@ -46,7 +46,7 @@ export function registerTitleTextures(scene: Phaser.Scene) {
         const spec = LAYERS[name];
         if (scene.textures.exists(spec.key)) continue;
         const texture = (spec.frames ?? 1) > 1
-            ? scene.textures.addSpriteSheet(spec.key, image, { frameWidth: spec.w, frameHeight: spec.h })
+            ? scene.textures.addSpriteSheet(spec.key, image, { frameWidth: spec.w * (spec.res ?? 1), frameHeight: spec.h * (spec.res ?? 1) })
             : scene.textures.addImage(spec.key, image);
         texture?.setFilter(Phaser.Textures.FilterMode.NEAREST);
     }
