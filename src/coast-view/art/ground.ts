@@ -1,14 +1,26 @@
 import type { MapDef, Rect } from '../../raid-runtime/contract';
 import type { GroundMaterial } from '../appearance';
 import { P, canvas, dot, hash, line, rect, type Ctx } from './paint';
+import { solGround, type SolArt } from './sol';
 
 const isWallish = (m: MapDef, x: number, y: number) => {
   const c = m.cells[y]?.[x];
   return c === 'wall' || c === 'window' || m.doors.some(d => d.x === x && d.y === y);
 };
 
-function tile(g: Ctx, M: GroundMaterial[][], tx: number, ty: number, x: number, y: number) {
+function tile(g: Ctx, M: GroundMaterial[][], tx: number, ty: number, x: number, y: number, art: SolArt | null) {
   const mat = M[ty]?.[tx] ?? 'void', h = (i: number) => hash(tx, ty, i);
+  // Sol samples replace the base texture; only the rare patches, cracks, moss and drains stay as runtime variation.
+  if (art && solGround(art, g, mat, tx, ty, x, y)) {
+    if (mat === 'asphalt') {
+      if (h(90) < .14) { rect(g, P.asphaltPatch, x + 4, y + 6, 18, 12); rect(g, '#504c45', x + 4, y + 6, 18, 1); }
+      if (h(91) < .18) { const sx = Math.floor(h(92) * 20) + 6; line(g, '#35332f', x + sx, y, x + sx + 4, y + 13); line(g, '#35332f', x + sx + 4, y + 13, x + sx + 1, y + 24); }
+    } else if (mat === 'yard') {
+      if (h(6) < .22) { const gx = x + Math.floor(h(7) * 26), gy = y + Math.floor(h(8) * 26); rect(g, P.moss, gx, gy, 3, 2); dot(g, '#6b7258', gx + 1, gy - 1); dot(g, P.moss, gx + 4, gy + 1); }
+      if (h(9) < .06) { rect(g, '#3f4546', x + 8, y + 12, 14, 5); rect(g, '#4a5354', x + 10, y + 12, 6, 1); }
+    }
+    return;
+  }
   switch (mat) {
     case 'asphalt': {
       rect(g, P.asphalt, x, y, 32, 32);
@@ -64,14 +76,14 @@ function tile(g: Ctx, M: GroundMaterial[][], tx: number, ty: number, x: number, 
   }
 }
 
-export function paintGround(m: MapDef, b: Rect, M: GroundMaterial[][]): HTMLCanvasElement {
+export function paintGround(m: MapDef, b: Rect, M: GroundMaterial[][], art: SolArt | null = null): HTMLCanvasElement {
   const { c, g } = canvas(b.w, b.h);
   rect(g, P.void, 0, 0, b.w, b.h);
   // One tile of margin so curbs and baked shadows that cross a chunk edge are drawn on both sides.
   const x0 = Math.floor(b.x / 32) - 1, y0 = Math.floor(b.y / 32) - 1, x1 = Math.ceil((b.x + b.w) / 32) + 1, y1 = Math.ceil((b.y + b.h) / 32) + 1;
   for (let ty = y0; ty < y1; ty++) for (let tx = x0; tx < x1; tx++) {
     if (ty < 0 || tx < 0 || ty >= m.rows || tx >= m.cols) continue;
-    tile(g, M, tx, ty, tx * 32 - b.x, ty * 32 - b.y);
+    tile(g, M, tx, ty, tx * 32 - b.x, ty * 32 - b.y, art);
   }
   const mat = (x: number, y: number) => M[y]?.[x];
   for (let ty = y0; ty < y1; ty++) for (let tx = x0; tx < x1; tx++) {

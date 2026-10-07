@@ -1,5 +1,6 @@
 // Four-size screenshots of the village sample on the real Runtime (offline build, seed 42, explicit ?test=1 fixtures
-// only to place the player/enemies/doors and freeze AI). Placeholder art; not final assets.
+// only to place the player/enemies/doors and freeze AI). Sol first-batch art unless SHOT_QUERY=art=placeholder.
+// Panel scenes open and close their panel with the real key (`key`), and expect that panel in the index.
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -7,7 +8,9 @@ import { chromium } from 'playwright';
 import { browserOptions } from './browser-options.mjs';
 
 const out = resolve(process.env.BINCOV_SHOTS_OUT || 'test-results/coast-sample/shots'); await mkdir(out, { recursive: true });
-const url = pathToFileURL(resolve('dist/index.html')).href + '?test=1&sample=village';
+// SHOT_QUERY appends options (for example art=placeholder); SHOT_SCENES limits the scene ids.
+const query = '?test=1&sample=village' + (process.env.SHOT_QUERY ? '&' + process.env.SHOT_QUERY : '');
+const url = pathToFileURL(resolve('dist/index.html')).href + query;
 const S = Math.PI / 2, N = -Math.PI / 2, W = Math.PI;
 const SCENES = [
   { id: 'cross', note: '街口全景', run: d => d.placePlayer({ x: 640, y: 456 }, 0, 'coast') },
@@ -22,6 +25,11 @@ const SCENES = [
   { id: 'outside', note: '样板范围外：通用占位画面与边界标记', run: d => d.placePlayer({ x: 104, y: 860 }, 0, 'coast') },
   { id: 'upstairs', note: '二楼（真实落点）', run: d => d.placePlayer({ x: 304, y: 80 }, S, 'resident-f2') },
   { id: 'basement', note: '地下层（真实落点）', run: d => d.placePlayer({ x: 240, y: 80 }, S, 'resident-b1') },
+  { id: 'carbine', note: '卡宾枪持握（Sol 试样）', run: d => { d.weapon('carbine'); d.placePlayer({ x: 640, y: 456 }, W, 'coast'); } },
+  { id: 'inventory', note: '背包格子面板（Tab）', key: 'Tab', panel: 'inventory', run: d => d.placePlayer({ x: 640, y: 456 }, 0, 'coast') },
+  { id: 'loot-panel', note: '搜刮格子面板（E）', key: 'e', panel: 'loot', run: (d, _e, f) => { const c = f.containers.filter(c => c.kind === 'crate' && c.stacks > 0 && c.regionId === null).sort((a, b) => Math.hypot(a.x - 640, a.y - 456) - Math.hypot(b.x - 640, b.y - 456))[0]; d.placePlayer({ x: c.x, y: c.y + 12 }, N, 'coast'); } },
+  { id: 'map', note: '地图面板（M）', key: 'm', panel: 'map', run: d => d.placePlayer({ x: 640, y: 456 }, 0, 'coast') },
+  { id: 'reading', note: '阅读面板：市场停业告示（E）', key: 'e', panel: 'reading', run: d => d.placePlayer({ x: 656, y: 1086 }, N, 'coast') },
 ];
 const ONLY = process.env.SHOT_SIZES; const SIZES_ALL = [
   { w: 1280, h: 720, dpr: 1, touch: false }, { w: 1920, h: 1080, dpr: 1, touch: false },
@@ -29,7 +37,7 @@ const ONLY = process.env.SHOT_SIZES; const SIZES_ALL = [
 ];
 const SIZES = ONLY ? SIZES_ALL.filter(s => ONLY.split(',').includes(s.w + 'x' + s.h)) : SIZES_ALL;
 const browser = await chromium.launch(browserOptions);
-const index = { startedAt: new Date().toISOString(), browser: browser.version(), seed: '42', url: '?test=1&sample=village', shots: [], errors: [], requests: [], console: [], anomalies: [] };
+const index = { startedAt: new Date().toISOString(), browser: browser.version(), seed: '42', url: query, shots: [], errors: [], requests: [], console: [], anomalies: [] };
 for (const size of SIZES) {
   const context = await browser.newContext({ viewport: size.touch ? { width: 844, height: 390 } : { width: size.w, height: size.h }, deviceScaleFactor: size.dpr, hasTouch: size.touch, isMobile: size.touch, offline: true });
   context.on('request', r => { if (/^https?:/.test(r.url())) index.requests.push(r.url()); });
@@ -37,6 +45,9 @@ for (const size of SIZES) {
   page.on('console', message => { if (index.console.length < 200) index.console.push({ size: `${size.w}x${size.h}`, type: message.type(), text: message.text().slice(0, 1500) }); });
   // Observe real test-context writes without changing their outcome or recording save contents.
   await page.addInitScript(() => {
+    // Record save-validation errors (message and top frames) so a rejected checkpoint can be told apart from a setItem failure.
+    window.__saveErrors = [];
+    window.Error = new Proxy(Error, { construct(target, args) { const e = new target(...args); if (/存档|保存/.test(String(args[0])) && window.__saveErrors.length < 10) window.__saveErrors.push({ at: performance.now(), message: String(args[0]), stack: String(e.stack).split(String.fromCharCode(10)).slice(1, 6).join(' | ') }); return e; } });
     window.__solStorageTrace = [];
     const set = Storage.prototype.setItem;
     Storage.prototype.setItem = function (key, value) {
@@ -54,7 +65,7 @@ for (const size of SIZES) {
   await page.waitForFunction(() => window.__bincovSample?.host?.lastBatch);
   if (size.touch) await page.setViewportSize({ width: size.w, height: size.h });
   await page.evaluate(() => window.__bincovSample.driver.freezeAI(true));
-  for (const scene of SCENES) {
+  for (const scene of SCENES.filter(s => !process.env.SHOT_SCENES || process.env.SHOT_SCENES.split(',').includes(s.id))) {
     await page.evaluate(([src]) => {
       const run = new Function('S', 'N', 'W', 'return ' + src)(Math.PI / 2, -Math.PI / 2, Math.PI), h = window.__bincovSample.host, f = h.lastBatch.frame;
       const enemies = f.actors.filter(a => a.alive).sort((a, b) => a.kind.localeCompare(b.kind) || a.uid.localeCompare(b.uid));
@@ -62,12 +73,15 @@ for (const size of SIZES) {
       run(window.__bincovSample.driver, [...kinds, ...enemies.map(a => a.uid)], f);
     }, [scene.run.toString()]);
     await page.waitForTimeout(1100);
+    if (scene.key) { await page.keyboard.press(scene.key); await page.waitForTimeout(400); }
     const file = `${scene.id}-${size.w}x${size.h}.png`;
     await page.screenshot({ path: resolve(out, file) });
-    const info = await page.evaluate(() => { const h = window.__bincovSample.host, b = h.lastBatch; return { map: b.stamp.world.mapId, epoch: b.stamp.epoch, player: [b.frame.player.x, b.frame.player.y], phase: b.frame.phase, panel: h.panel, storageError: window.__bincov.app.storageError || '', storageOK: window.__bincov.app.storageOK, rejected: h.eventLog.filter(e => e.type === 'rejected').slice(-5), writes: window.__solStorageTrace.slice(-5) }; });
+    const info = await page.evaluate(() => { const h = window.__bincovSample.host, b = h.lastBatch; return { map: b.stamp.world.mapId, epoch: b.stamp.epoch, player: [b.frame.player.x, b.frame.player.y], phase: b.frame.phase, panel: h.panel, storageError: window.__bincov.app.storageError || '', storageOK: window.__bincov.app.storageOK, rejected: h.eventLog.filter(e => e.type === 'rejected').slice(-5), writes: window.__solStorageTrace.slice(-5), saveErrors: window.__saveErrors.slice() }; });
     if (process.env.SHOT_DEBUG) console.log(scene.id, JSON.stringify(info));
     index.shots.push({ file, scene: scene.id, note: scene.note, size: `${size.w}x${size.h}`, dpr: size.dpr, touch: size.touch, ...info });
-    if (info.phase !== 'running' || info.panel !== null || info.storageError || !info.storageOK) index.anomalies.push({ file, ...info });
+    const expected = scene.panel ?? null;
+    if (info.phase !== (expected ? 'blocked' : 'running') || info.panel !== expected || info.storageError || !info.storageOK || info.saveErrors.length) index.anomalies.push({ file, ...info });
+    if (scene.key) { await page.keyboard.press(scene.key); await page.waitForTimeout(300); }
     console.log('shot', file);
   }
   await context.close();

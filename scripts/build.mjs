@@ -16,6 +16,11 @@ async function compile() {
     if (bytes.readUInt32BE(16) !== layer.frameWidth * layer.frames || bytes.readUInt32BE(20) !== layer.frameHeight) throw new Error(`Title dimensions mismatch: ${layer.file}`);
   }
   for (const [file, sha256] of Object.entries(titleManifest.sources)) if (createHash('sha256').update(await readFile(file)).digest('hex') !== sha256) throw new Error(`Title source changed: ${file}`);
+  // Coast sample assets: every runtime PNG must match its manifest hash, and the importer must cover exactly the manifest.
+  const coast = JSON.parse(await readFile('assets/coast/manifest.json','utf8'));
+  const coastImports = [...(await readFile('src/coast-view/assets.ts','utf8')).matchAll(/from '\.\.\/\.\.\/(assets\/coast\/[^']+\.png)'/g)].map(m => m[1]).sort();
+  if (JSON.stringify(coastImports) !== JSON.stringify(coast.assets.map(a => a.file).sort())) throw new Error('Coast asset imports do not match assets/coast/manifest.json.');
+  for (const a of coast.assets) if (createHash('sha256').update(await readFile(a.file)).digest('hex') !== a.sha256) throw new Error(`Coast asset hash mismatch: ${a.file}`);
   const result = await build({entryPoints:['src/main.ts'],bundle:true,write:false,minify:true,target:'es2020',format:'iife',legalComments:'inline',loader:{'.png':'dataurl'},define:{'process.env.NODE_ENV':'"production"'}});
   const font = await readFile('assets/fonts/bincov-text.woff2');
   const manifest = JSON.parse(await readFile('assets/fonts/manifest.json','utf8'));

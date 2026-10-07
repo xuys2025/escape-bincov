@@ -3,6 +3,7 @@ import { CoastRaidRuntime } from './runtime';
 import { wrapCoastRuntime } from './host';
 import type { SaveSession, SessionState } from '../session';
 import type { Point } from '../world';
+import { WEAPONS } from '../domain';
 
 export function createRuntimeTestDriver(runtime: CoastRaidRuntime, search: string) {
     if (new URLSearchParams(search).get('test') !== '1') throw new Error('Runtime fixtures require ?test=1.');
@@ -28,12 +29,18 @@ export function createRuntimeTestDriver(runtime: CoastRaidRuntime, search: strin
             if (hp !== undefined) enemy.hp = hp;
             runtime.restore(state);
         },
+        /** Kill through the Runtime's own damage path, so kills, the corpse container and hurt/death events stay consistent. */
+        kill(uid: string) {
+            const enemy = runtime.enemies.find(e => e.uid === uid);
+            if (!enemy) throw new Error('Unknown enemy.');
+            runtime.damageEnemy(enemy, enemy.hp + 1000);
+        },
         door(id: string, open: boolean) {
             const state = runtime.snapshotExpansion(), doors = state.raid!.maps[state.raid!.currentMap].doors;
             if (!(id in doors)) throw new Error('Unknown door.'); doors[id] = open; runtime.restoreExpansion(state);
         },
         weapon(id: 'pistol' | 'carbine' | 'shotgun') {
-            const state = runtime.snapshot(); state.loadout.weapon = id; state.loadout.ammo = id === 'shotgun' ? 5 : id === 'pistol' ? 8 : 24;
+            const state = runtime.snapshot(); state.loadout.weapon = id; state.loadout.ammo = WEAPONS[id].magazine; // a full magazine; more fails checkpoint validation
             state.loadout.ammoRelief = 0; state.knife = false; state.reloadLeft = 0; state.fireCooldown = 0; runtime.restore(state);
         },
     };

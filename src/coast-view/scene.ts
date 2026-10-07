@@ -2,6 +2,7 @@ import { Application, Container, Graphics, RenderTexture, Sprite, type Texture }
 import { worldKeyString, type ActorKind, type ActorView, type MapDef, type Point, type PublishedView, type Rect, type StampedEvent, type ViewFrame } from '../raid-runtime/contract';
 import { SAMPLE_AREA, hasRoof, isRuined, materials, regionLamps, storeys } from './appearance';
 import { paintGround } from './art/ground';
+import { solWall, type SolArt } from './art/sol';
 import { LOW_H, ROOF_MARGIN, STOREY_H, WALL_H, paintCanopy, paintCeiling, paintDownpipe, paintLintel, paintLow, paintRoof, paintStairs, paintWall, paintWallAC, wallKey, type WallSpec } from './art/structures';
 import { Fx } from './fx';
 import { Lighting, MOODS, lamp } from './lighting';
@@ -28,11 +29,13 @@ export interface ViewOptions {
   debug: boolean; xray: boolean; mood: number; reducedMotion: boolean;
   viewTiles: 24 | 28;
   collapseTall: boolean;
+  /** Decoded Sol samples; null keeps the procedural placeholders. */
+  art: SolArt | null;
 }
 
 export class CoastView {
   static live = new Set<CoastView>();
-  readonly tex = new Textures();
+  readonly tex: Textures;
   private groundRoot = new Container();
   private groundLayer = new Container();
   private flat = new Container();
@@ -77,6 +80,7 @@ export class CoastView {
 
   constructor(private app: Application, public opts: ViewOptions) {
     CoastView.live.add(this);
+    this.tex = new Textures(opts.art);
     this.light = new Lighting(this.tex);
     this.groundRoot.addChild(this.groundLayer, this.flat, this.shadows);
     this.sorted.sortableChildren = true;
@@ -84,7 +88,7 @@ export class CoastView {
     this.lightOverlay.blendMode = 'multiply';
     this.lightHolder.addChild(this.lightOverlay);
     this.upHolder.addChild(this.upSprite);
-    this.fx = new Fx(this.tex, this.sorted, this.flat);
+    this.fx = new Fx(this.tex, this.sorted, this.flat, (x, y) => this.regionAt({ x, y }));
     this.tex.warm(['player', 'scav', 'salt', 'creature', 'elite']);
     this.resize();
   }
@@ -139,6 +143,7 @@ export class CoastView {
       this.onEvent(e, f);
     }
     this.fx.update(dt);
+    this.fx.reveal(f.revealed);
     for (let i = this.muzzles.length - 1; i >= 0; i--) { const m = this.muzzles[i]; m.t += dt; if (m.t > .03) m.s.texture = this.tex.muzzle(1); if (m.t > .07) { m.s.destroy(); this.muzzles.splice(i, 1); } }
     for (let i = this.swings.length - 1; i >= 0; i--) { const s = this.swings[i]; s.t += dt; s.g.alpha = 1 - s.t / .14; if (s.t > .14) { s.g.destroy(); this.swings.splice(i, 1); } }
 
@@ -175,7 +180,7 @@ export class CoastView {
     const CH = 512, prefix = `ground:${worldKeyString(m.key)}`;
     for (let cy = b.y; cy < b.y + b.h; cy += CH) for (let cx = b.x; cx < b.x + b.w; cx += CH) {
       const r = { x: cx, y: cy, w: Math.min(CH, b.x + b.w - cx), h: Math.min(CH, b.y + b.h - cy) }, key = `${prefix}:${cx},${cy}`;
-      this.tex.atlas.add(key, paintGround(m, r, M), true);
+      this.tex.atlas.add(key, paintGround(m, r, M, this.opts.art), true);
       const chunk = new Sprite(this.tex.atlas.get(key)); chunk.position.set(cx, cy); this.groundLayer.addChildAt(chunk, 0);
     }
     if (m.key.mapId === 'coast') this.markSampleArea(b);
@@ -254,7 +259,7 @@ export class CoastView {
     this.groundLayer.addChild(g);
   }
 
-  private wallTexKey(spec: WallSpec) { const key = wallKey(spec); this.tex.ensure(key, () => paintWall(spec)); return key; }
+  private wallTexKey(spec: WallSpec) { const key = wallKey(spec); this.tex.ensure(key, () => (this.opts.art && solWall(this.opts.art, spec)) || paintWall(spec)); return key; }
 
   private addOccluder(key: string, x: number, y: number, z: number, kind: Occluder['kind'], keepBottom: number): Occluder {
     const t = this.tex.atlas.get(key), s = new Sprite(t);
@@ -647,6 +652,9 @@ export class CoastView {
   }
   get mapDef() { return this.map; }
   /** Diagnostic: whether an actor currently has any visible display object (used by the info-boundary check). */
+  regionAt(p: Point): string | null { return this.map?.regions.find(r => r.inside && p.x >= r.x && p.x < r.x + r.w && p.y >= r.y && p.y < r.y + r.h)?.id ?? null; }
+  /** Test probe: particles and decals currently withheld because their region is not revealed. */
+  get hiddenFx() { return this.fx.hidden; }
   actorShown(uid: string): boolean { const g = this.actors.get(uid); return !!g && (g.body.visible || !!g.corpse?.visible); }
   /** Player is on the coast map but outside the dressed village corner (generic placeholder rendering). */
   outsideSample(): boolean {

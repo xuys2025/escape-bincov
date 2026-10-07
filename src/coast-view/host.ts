@@ -4,17 +4,22 @@
  * HUD never registers a second set of gameplay inputs.
  *
  * Panels follow the original split: pause (world frozen, checkpoint written by the Runtime) versus blocking
- * (inventory/loot: world keeps running, gameplay input ignored). Every transition suppresses held controls until
- * they are released. Transactions go only through the Runtime services, which already wrap SaveSession.
+ * (inventory/loot/map/reading: world keeps running, gameplay input ignored). Every transition suppresses held
+ * controls until they are released. Item and save operations go only through the Runtime services, or through
+ * SaveSession.mutate for plain bag/safe edits (the original inventory entry point).
  */
 import { Application } from 'pixi.js';
 import * as D from '../domain';
-import type { SessionState } from '../session';
+import { SURVIVAL } from '../balance';
+import { derivedLimits } from '../expansion-state';
+import { exitBearing, questProgress } from '../qol';
+import type { MutationResult, SaveSession, SessionState } from '../session';
 import type { Interaction, PublishedView, RaidRuntime, StampedEvent, TargetRef } from '../raid-runtime/contract';
 import type { LootTransfer } from '../loot';
-import type { MutationResult } from '../session';
 import { CoastView, AIM_H, type ViewOptions } from './scene';
 import { InputState } from './input';
+import { InventoryPanel } from './inventory';
+import { drawMap, mapPanelHtml } from './map';
 import { Scope, lifecycle } from './scope';
 
 export interface CoastServices {
@@ -33,8 +38,8 @@ export interface CoastServices {
 }
 export interface CoastHandle { runtime: RaidRuntime; services: CoastServices }
 export type SampleExit = { kind: 'settled' };
+type Panel = null | 'pause' | 'inventory' | 'loot' | 'map' | 'reading' | 'ending';
 
-const SUPPLIES = new Set(['bandage', 'medkit', 'antidote', 'water', 'food', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckySachet', 'unluckySachet']);
 const REASONS: Record<string, string> = {
   'stale-target': '目标已失效，请重新靠近。', 'stale-or-blocked': '现在无法交互。', 'out-of-range': '离目标过远。',
   rejected: '操作未完成，请检查空间与条件。', blocked: '现在无法操作。', 'save-failed': '存档保存失败，状态已恢复到操作前。',
@@ -47,18 +52,25 @@ const HTML = `
 <div class="cs-hud" aria-live="polite">
   <section class="cs-status">
     <div class="cs-meter"><span>生命</span><div class="cs-bar"><div data-hp></div></div><b data-hp-text></b></div>
-    <div class="cs-meter"><span>体力</span><div class="cs-bar thin"><div data-st></div></div></div>
+    <div class="cs-meter"><span>体力</span><div class="cs-bar thin"><div data-st></div></div><b data-st-text></b></div>
     <div data-weapon class="cs-weapon"></div>
+    <div data-state class="cs-state"></div>
     <div data-where class="cs-where"></div>
   </section>
   <section class="cs-clock"><b data-time></b><small data-tide></small></section>
+  <div data-radio class="cs-radio" hidden></div>
+  <section class="cs-info">
+    <button type="button" data-do="map" data-exit-nav>选择撤离点</button>
+    <details data-quests><summary>任务 <span data-quest-count></span></summary><div data-quest-list></div><small>携带含带入物资 · 回站交付</small></details>
+  </section>
+  <div class="cs-keys" data-keys><kbd>E</kbd>交互 / 撤离　<kbd>Tab</kbd>背包　<kbd>Q</kbd>治疗　<kbd>R</kbd>换弹　<kbd>M</kbd>地图　<kbd>Esc</kbd>暂停</div>
   <div data-hits class="cs-hits"></div>
   <div data-prompt class="cs-prompt" hidden></div>
   <ul data-choices class="cs-choices" hidden aria-label="附近可搜刮的箱子和尸体"></ul>
   <div data-toast class="cs-toast" role="status"></div>
   <div data-cross class="cs-cross" hidden></div>
   <div data-fade class="cs-fade"></div>
-  <div class="cs-touch"><button type="button" data-bag>背包</button><button type="button" data-heal>治疗</button><button type="button" data-reload>换弹</button><button type="button" data-act>交互</button></div>
+  <div class="cs-touch"><button type="button" data-bag>背包</button><button type="button" data-do="map">地图</button><button type="button" data-heal>治疗</button><button type="button" data-reload>换弹</button><button type="button" data-act>交互</button></div>
 </div>
 <section class="cs-panel" data-panel hidden role="dialog" aria-modal="true"></section>`;
 
@@ -68,21 +80,26 @@ export class CoastSampleHost {
   private app!: Application;
   view!: CoastView;
   readonly input = new InputState();
-  /** null: playing. 'pause' freezes the world; 'inventory'/'loot' block input while the world keeps running. */
-  panel: null | 'pause' | 'inventory' | 'loot' | 'ending' = null;
+  panel: Panel = null;
+  private inv!: InventoryPanel;
   private last: PublishedView | null = null;
   private lastSeq = 0;
   private toastLeft = 0;
+  private radioLeft = 0;
   private lastRejected = '';
   private mounted = false;
   private exiting = false;
+  private mapView = '';
+  selectedExit = '';
+  private reading: { title: string; text: string } | null = null;
+  private noteTitles = new Set<string>();
   frameTimes: number[] = [];
   /** Bounded diagnostic log of consumed events (read by the ?test=1 checks; never drives behaviour). */
   readonly eventLog: { seq: number; type: string; durability: string; map: string; epoch: number; detail: Record<string, unknown> }[] = [];
   get lastBatch() { return this.last; }
   stats = { advanceMs: 0, presentMs: 0, frames: 0 };
 
-  constructor(readonly handle: CoastHandle, private session: SessionState, readonly opts: ViewOptions,
+  constructor(readonly handle: CoastHandle, private session: SessionState, private saves: SaveSession, readonly opts: ViewOptions,
     private onExit: (o: SampleExit) => void, private exportBackup: () => void) {}
 
   get runtime() { return this.handle.runtime; }
@@ -100,6 +117,14 @@ export class CoastSampleHost {
     lifecycle.views++;
     this.view.onRebuild = reason => { if (reason !== 'enter') this.fade(); };
     this.input.touch = document.documentElement.classList.contains('mobile') || matchMedia('(pointer: coarse)').matches && !matchMedia('(any-pointer: fine)').matches;
+    this.inv = new InventoryPanel(this.q('[data-panel]'), {
+      session: this.session, saves: this.saves, services: this.services,
+      lootRef: () => this.lootRef(), touch: () => this.input.touch, toast: (t, bad) => this.toast(t, bad),
+      saveFailed: () => { if (!this.services.checkpoint()) this.lastRejected = 'checkpoint'; },
+      close: () => this.closePanel(true),
+      carryLimit: () => this.session.expansion?.version === 2 ? derivedLimits(this.session.expansion).carry : SURVIVAL.carryLimit,
+      magazine: () => this.last?.frame.hud.weapon.mag ?? 0,
+    });
     this.wire();
     const tick = () => this.frame();
     this.app.ticker.add(tick); lifecycle.tickers++;
@@ -116,39 +141,55 @@ export class CoastSampleHost {
     const t0 = performance.now();
     const playing = this.panel === null;
     const intent = this.input.read(playing, (x, y) => this.view.aimFromClient(x, y));
+    const note = playing && intent.interactPressed && this.last?.frame.interaction?.kind === 'note' ? this.last.frame.interaction.ref.id : null;
     const batch = this.runtime.advance(t0, intent);
     const t1 = performance.now();
+    if (batch.map !== this.last?.map) this.noteTitles = new Set(batch.map.notes.map(n => n.title));
     this.view.present(batch, this.app.ticker.deltaMS / 1000);
     const t2 = performance.now();
-    this.hud(batch);
     this.last = batch;
+    if (note) this.readingFor = note;
+    this.hud(batch);
     this.syncPanels(batch);
     this.stats.advanceMs = t1 - t0; this.stats.presentMs = t2 - t1; this.stats.frames++;
     if (this.frameTimes.length < 4000) this.frameTimes.push(this.app.ticker.deltaMS);
   }
+  private readingFor: string | null = null;
+  /** setBlocked(true) was requested but no batch has shown it yet: a panel opened mid-frame must not be closed by that frame's stale phase. */
+  private blockPending = 0;
 
   /** Mirror Runtime phase into panels; the Runtime decides, the host only shows. */
   private syncPanels(b: PublishedView) {
     const phase = b.frame.phase, loot = this.services.lootContext();
     if (phase === 'ending') { if (this.panel !== 'ending') this.showEnding(); else this.refreshEnding(); return; }
     if (phase === 'blocked' && loot && this.panel !== 'loot') { this.openLoot(); return; }
-    if (phase !== 'blocked' && (this.panel === 'loot' || this.panel === 'inventory')) { this.closePanel(false); }
+    if (phase === 'blocked' && !this.panel) {
+      // Touch reading opens the Runtime's own blocking overlay; show its text, or release a stray block.
+      if (this.reading) this.openReading(); else this.runtime.setBlocked(false);
+      return;
+    }
+    // Allow a few frames for the requested block to be published before a running phase may close the panel.
+    if (phase === 'running' && this.blockPending > 0) { this.blockPending--; return; }
+    this.blockPending = 0;
+    if (phase !== 'blocked' && (this.panel === 'loot' || this.panel === 'inventory' || this.panel === 'map' || this.panel === 'reading')) this.closePanel(false);
     if (phase === 'paused' && this.panel !== 'pause') this.showPause();
     if (this.panel === 'pause' && phase === 'running') this.closePanel(false);
+    if (this.panel === 'map' && (this.stats.frames & 7) === 0) this.redrawMap();
   }
 
   // --- input wiring ---
   private wire() {
-    const s = this.scope, canvas = this.app.canvas;
+    const s = this.scope, canvas = this.app.canvas, panel = this.q('[data-panel]');
     s.on(window, 'keydown', e => {
       if (/INPUT|TEXTAREA|SELECT/.test((e.target as HTMLElement).tagName)) return;
       const k = e.key.toLowerCase();
       if (['tab', ' ', 'escape'].includes(k)) e.preventDefault();
       if (e.repeat) return;
-      if (k === 'escape') { if (this.panel === 'inventory' || this.panel === 'loot') this.closePanel(true); else if (this.panel === 'pause') this.resume(); else if (!this.panel) this.pause(); return; }
-      if (k === 'tab') { if (this.panel === 'inventory' || this.panel === 'loot') this.closePanel(true); else if (!this.panel) this.openInventory(); return; }
-      if (k === 'e' && this.panel === 'loot') { this.closePanel(true); return; }
-      if (k === 'm' && !this.panel) { this.toast('样板未包含地图面板。'); return; }
+      if ((this.panel === 'inventory' || this.panel === 'loot') && this.inv.key(k)) return;
+      if (k === 'escape') { if (this.blocking()) this.closePanel(true); else if (this.panel === 'pause') this.resume(); else if (!this.panel) this.pause(); return; }
+      if (k === 'tab') { if (this.blocking()) this.closePanel(true); else if (!this.panel) this.openInventory(); return; }
+      if (k === 'e' && (this.panel === 'loot' || this.panel === 'reading')) { this.closePanel(true); return; }
+      if (k === 'm') { if (this.panel === 'map') this.closePanel(true); else if (!this.panel) this.openMap(); return; }
       if (this.panel) return;
       this.input.key(e.key, true);
     });
@@ -163,7 +204,11 @@ export class CoastSampleHost {
       else { this.input.touch = true; this.touchStart(e); }
       try { canvas.setPointerCapture(e.pointerId); } catch { /* synthetic or released pointer */ }
     });
-    s.on(window, 'pointerup', e => { if (e.pointerType === 'mouse') this.input.mouse(e.button, false); else { this.input.release(e.pointerId); this.sticks.delete(e.pointerId); } });
+    s.on(window, 'pointermove', e => { if (this.panel === 'inventory' || this.panel === 'loot') this.inv.pointerMove(e); });
+    s.on(window, 'pointerup', e => {
+      if ((this.panel === 'inventory' || this.panel === 'loot') && this.inv.pointerUp(e)) this.suppressClick = true;
+      if (e.pointerType === 'mouse') this.input.mouse(e.button, false); else { this.input.release(e.pointerId); this.sticks.delete(e.pointerId); }
+    });
     s.on(window, 'pointercancel', e => { if (e.pointerType === 'mouse') this.input.mouse(e.button, false); else { this.input.release(e.pointerId); this.sticks.delete(e.pointerId); } });
     s.on(canvas, 'pointerleave', e => { if (e.pointerType === 'mouse') this.input.pointer.inside = false; });
     s.on(canvas, 'wheel', e => { e.preventDefault(); this.cycleChoice(Math.sign(e.deltaY)); }, { passive: false });
@@ -180,8 +225,19 @@ export class CoastSampleHost {
     s.on(this.q('[data-heal]'), 'pointerdown', e => { e.preventDefault(); this.input.press('heal'); });
     s.on(this.q('[data-bag]'), 'click', () => { if (!this.panel) this.openInventory(); else if (this.panel === 'inventory') this.closePanel(true); });
     s.on(this.q('[data-choices]'), 'click', e => { const id = (e.target as HTMLElement).closest('[data-id]')?.getAttribute('data-id'); if (id) this.input.select(id); });
-    s.on(this.q('[data-panel]'), 'click', e => this.onPanelClick(e));
+    s.on(this.q('.cs-hud'), 'click', e => { if ((e.target as HTMLElement).closest('[data-do="map"]') && !this.panel) this.openMap(); });
+    s.on(this.q('[data-quests]'), 'toggle', () => { this.questsOpen = (this.q<HTMLDetailsElement>('[data-quests]')).open; });
+    // A drop that re-renders the grid removes the press target, so the browser may send no trailing click: every new press clears the suppression.
+    s.on(panel, 'pointerdown', e => { this.suppressClick = false; if (this.panel === 'inventory' || this.panel === 'loot') this.inv.pointerDown(e); });
+    s.on(panel, 'click', e => {
+      if (this.suppressClick) { this.suppressClick = false; return; }
+      if ((this.panel === 'inventory' || this.panel === 'loot') && this.inv.onClick(e)) return;
+      this.onPanelClick(e);
+    });
+    s.on(panel, 'change', e => { const t = e.target as HTMLSelectElement; if (t.matches('[data-exit]')) { this.selectedExit = t.value; this.redrawMap(); } });
   }
+  private suppressClick = false;
+  private questsOpen = false;
 
   private sticks = new Map<number, { kind: 'move' | 'aim'; ox: number; oy: number }>();
   private touchStart(e: PointerEvent) {
@@ -201,13 +257,14 @@ export class CoastSampleHost {
 
   // --- panels ---
   private q<T extends HTMLElement>(s: string) { return this.root.querySelector(s) as T; }
-  private setPanel(kind: CoastSampleHost['panel'], html: string, label: string) {
+  private blocking() { return this.panel === 'inventory' || this.panel === 'loot' || this.panel === 'map' || this.panel === 'reading'; }
+  private setPanel(kind: Panel, html: string, label: string) {
     this.panel = kind; const p = this.q('[data-panel]'); p.className = `cs-panel ${kind ?? ''}`; p.innerHTML = html; p.setAttribute('aria-label', label); p.hidden = !kind;
     p.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
   }
   pause(reason: 'overlay' | 'blur' | 'context-lost' = 'overlay') {
     if (!this.mounted || this.panel === 'pause' || this.panel === 'ending') return;
-    if (this.panel === 'inventory' || this.panel === 'loot') this.closePanel(true);
+    if (this.blocking()) this.closePanel(true);
     this.input.suppressHeld(); this.sticks.clear();
     this.runtime.pause(reason);
     this.showPause(reason);
@@ -224,78 +281,57 @@ export class CoastSampleHost {
     this.input.suppressHeld(); this.sticks.clear();
     this.setPanel('pause', `<h2>${title}</h2><p>${text}</p><div class="cs-row">${buttons}</div>`, title);
   }
-  private resume() {
-    this.input.suppressHeld();
-    this.runtime.resume();
-    if (this.runtime.current().frame.phase !== 'paused') this.closePanel(false);
+  /** Resume only asks the Runtime; syncPanels closes the panel when the published phase is running again. */
+  private resume() { this.input.suppressHeld(); this.runtime.resume(); }
+  private openBlocking(kind: 'inventory' | 'map' | 'reading') {
+    this.input.suppressHeld(); this.sticks.clear();
+    this.runtime.setBlocked(true); this.blockPending = 3;
+    this.panel = kind;
   }
   private openInventory() {
-    this.input.suppressHeld(); this.sticks.clear();
-    this.runtime.setBlocked(true);
-    this.panel = 'inventory'; this.renderInventory();
+    this.openBlocking('inventory');
+    const p = this.q('[data-panel]'); p.className = 'cs-panel cs-inv-panel'; p.hidden = false; p.setAttribute('aria-label', '随身物资');
+    this.inv.open('inventory');
   }
   private openLoot() {
     this.input.suppressHeld(); this.sticks.clear();
-    this.panel = 'loot'; this.renderLoot();
+    this.panel = 'loot';
+    const p = this.q('[data-panel]'); p.className = 'cs-panel cs-inv-panel'; p.hidden = false; p.setAttribute('aria-label', '搜刮物资');
+    const ref = this.lootRef(); this.inv.containerLabel = this.last?.frame.containers.find(c => c.id === ref?.id)?.name ?? '物资箱';
+    this.inv.open('loot');
+  }
+  private openMap() {
+    if (!this.last) return;
+    this.openBlocking('map');
+    this.mapView = this.last.stamp.world.mapId;
+    this.setPanel('map', mapPanelHtml(this.session, this.last, this.mapView, this.selectedExit, this.input.touch), '地图');
+    this.redrawMap();
+  }
+  private redrawMap() {
+    const c = this.q<HTMLCanvasElement>('[data-map]'); if (!c || !this.last) return;
+    // Backing store follows the displayed size (aspect fixed at 960:694) so the map stays sharp on small and dense screens.
+    const w = Math.max(320, Math.min(2400, Math.round((c.clientWidth || 960) * (devicePixelRatio || 1))));
+    if (c.width !== w) { c.width = w; c.height = Math.round(w * 694 / 960); }
+    drawMap(c, this.session, this.last, this.mapView, this.input.touch);
+  }
+  private openReading() {
+    const r = this.reading; if (!r) return;
+    if (this.last?.frame.phase !== 'blocked') { this.runtime.setBlocked(true); this.blockPending = 3; }
+    this.input.suppressHeld(); this.sticks.clear();
+    this.setPanel('reading', `<header class="cs-inv-head"><div><h2>${esc(r.title)}</h2><span class="cs-sub">世界仍在运行</span></div><button type="button" data-do="close">关闭（E / Esc）</button></header><p class="cs-reading">${esc(r.text)}</p>`, r.title);
   }
   /** Close a blocking panel; the Runtime clears its loot context in setBlocked(false). */
   private closePanel(byPlayer: boolean) {
-    const was = this.panel;
-    if (byPlayer && (was === 'inventory' || was === 'loot')) this.runtime.setBlocked(false);
+    const was = this.panel; this.blockPending = 0;
+    if (byPlayer && (was === 'inventory' || was === 'loot' || was === 'map' || was === 'reading')) this.runtime.setBlocked(false);
+    if (was === 'inventory' || was === 'loot') this.inv.closeTransient();
+    if (was === 'reading') this.reading = null;
     this.input.suppressHeld(); this.sticks.clear();
     this.setPanel(null, '', '');
-  }
-
-  private bagRows(inv: D.Inventory, from: 'bag' | 'safe') {
-    if (!inv.items.length) return '<li class="cs-empty">空</li>';
-    return inv.items.map(i => {
-      const weapon = D.WEAPONS[i.id] && i.id !== 'knife' && from === 'bag';
-      return `<li><span>${esc(name(i.id))} ×${i.qty}${i.relief ? ' · 救济' : ''}</span>${SUPPLIES.has(i.id) ? `<button type="button" data-do="use" data-uid="${i.uid}" data-id="${i.id}" data-from="${from}">使用</button>` : ''}${weapon ? `<button type="button" data-do="equip" data-uid="${i.uid}">装备</button>` : ''}<button type="button" data-do="drop" data-uid="${i.uid}" data-from="${from}">丢弃</button></li>`;
-    }).join('');
-  }
-  private renderInventory() {
-    const l = this.session.loadout; if (!l) return;
-    const w = D.WEAPONS[l.weapon || 'knife'];
-    this.setPanel('inventory', `<h2>随身物资</h2><p class="cs-sub">背包里的东西撤离失败会丢失，安全箱保留。世界仍在运行。</p>
-      <p>主武器：${esc(w?.name ?? '水手匕首')}</p>
-      <div class="cs-cols"><section><h3>背包 ${l.bag.w} × ${l.bag.h}</h3><ul class="cs-items">${this.bagRows(l.bag, 'bag')}</ul></section>
-      <section><h3>安全箱</h3><ul class="cs-items">${this.bagRows(l.safe, 'safe')}</ul></section></div>
-      <div class="cs-row"><button type="button" data-do="close">关闭（Tab / Esc）</button></div>`, '随身物资');
   }
   private lootRef(): TargetRef | null {
     const c = this.services.lootContext(), map = this.last?.stamp.world.mapId; if (!c || !map) return null;
     return { runId: c.runId, mapId: map, kind: 'container', id: c.containerId };
-  }
-  private renderLoot() {
-    const ref = this.lootRef(), inv = ref ? this.services.lootInventory(ref) : null, l = this.session.loadout;
-    if (!ref || !inv || !l) { this.closePanel(true); return; }
-    const box = this.last?.frame.containers.find(c => c.id === ref.id);
-    const rows = inv.items.length ? inv.items.map(i => `<li><span>${esc(name(i.id))} ×${i.qty}</span><button type="button" data-do="take" data-uid="${i.uid}">拿取</button></li>`).join('') : '<li class="cs-empty">已搜空</li>';
-    const bag = l.bag.items.length ? l.bag.items.map(i => `<li><span>${esc(name(i.id))} ×${i.qty}</span><button type="button" data-do="put" data-uid="${i.uid}">放回</button></li>`).join('') : '<li class="cs-empty">空</li>';
-    this.setPanel('loot', `<h2>${esc(box?.name ?? '物资')}</h2><p class="cs-sub">搜刮时世界仍在运行，请留意周围。每次拿取会立即保存。</p>
-      <div class="cs-cols"><section><h3>${box?.kind === 'corpse' ? '尸体物品栏' : '箱子物品栏'}</h3><ul class="cs-items">${rows}</ul></section>
-      <section><h3>背包 ${l.bag.w} × ${l.bag.h}</h3><ul class="cs-items">${bag}</ul></section></div>
-      <div class="cs-row"><button type="button" data-do="take-all"${inv.items.length ? '' : ' disabled'}>全部拿取</button><button type="button" data-do="close">关闭（E / Tab / Esc）</button></div>`, '搜刮物资');
-  }
-
-  /** First free top-left slot in `to` (merging into a compatible stack first, then trying rotation). */
-  private slot(to: D.Inventory, item: D.Item): { x: number; y: number; rotated: boolean } | null {
-    const def = D.ITEMS[item.id];
-    const stack = to.items.find(t => t.id === item.id && !!t.relief === !!item.relief && t.qty < def.stack);
-    if (stack) return { x: stack.x, y: stack.y, rotated: !!stack.rotated };
-    for (const rotated of def.w === def.h ? [false] : [false, true])
-      for (let y = 0; y < to.h; y++) for (let x = 0; x < to.w; x++) if (D.fits(to, item.id, x, y, undefined, rotated)) return { x, y, rotated };
-    return null;
-  }
-  private transfer(uid: string, from: 'container' | 'bag', silent = false): MutationResult | 'no-space' {
-    const ref = this.lootRef(), l = this.session.loadout; if (!ref || !l) return 'rejected';
-    const box = this.services.lootInventory(ref); if (!box) return 'rejected';
-    const src = from === 'container' ? box : l.bag, dst = from === 'container' ? l.bag : box;
-    const item = src.items.find(i => i.uid === uid); if (!item) return 'rejected';
-    const at = this.slot(dst, item);
-    if (!at) { if (!silent) this.toast(from === 'container' ? '背包空间不足。' : '箱子空间不足。', true); return 'no-space'; }
-    const result = this.services.transferLoot(ref, { runId: ref.runId, containerId: ref.id, from, to: from === 'container' ? 'bag' : 'container', uid, x: at.x, y: at.y, rotated: at.rotated });
-    return result;
   }
   private onPanelClick(e: Event) {
     const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-do]'); if (!b) return;
@@ -308,21 +344,13 @@ export class CoastSampleHost {
       case 'backup': this.exportBackup(); break;
       case 'retry-settlement': this.services.retrySettlement(); this.refreshEnding(); break;
       case 'close': this.closePanel(true); break;
-      case 'use': this.services.useSupply(d.id!, d.from as 'bag' | 'safe', d.uid); this.renderInventory(); break;
-      case 'equip': this.services.equipItem(d.uid!); this.renderInventory(); break;
-      case 'drop': this.services.dropItem(d.uid!, d.from as 'bag' | 'safe'); this.renderInventory(); break;
-      case 'take': this.transfer(d.uid!, 'container'); this.renderLoot(); break;
-      case 'put': this.transfer(d.uid!, 'bag'); this.renderLoot(); break;
-      case 'take-all': {
-        const ref = this.lootRef(), inv = ref && this.services.lootInventory(ref);
-        for (const item of inv?.items ?? []) if (this.transfer(item.uid, 'container', true) !== 'committed') break;
-        if (this.panel === 'loot') this.renderLoot(); break;
-      }
+      case 'map-floor': this.mapView = d.id!; this.q('[data-panel]').querySelectorAll('[data-do="map-floor"]').forEach(n => n.toggleAttribute('aria-current', (n as HTMLElement).dataset.id === this.mapView)); this.redrawMap(); break;
     }
   }
 
   // --- ending ---
   private showEnding() {
+    if (this.blocking()) this.inv.closeTransient();
     this.input.suppressHeld(); this.sticks.clear();
     this.setPanel('ending', '<h2>正在保存结算</h2><p data-ending-text></p><div class="cs-row" data-ending-row></div>', '结算');
     this.refreshEnding();
@@ -344,11 +372,12 @@ export class CoastSampleHost {
 
   // --- HUD ---
   private hud(b: PublishedView) {
-    const f = b.frame, h = f.hud, q = <T extends HTMLElement>(s: string) => this.q<T>(s);
-    q('[data-hp]').style.width = `${Math.max(0, h.hp / h.maxHp) * 100}%`; q('[data-hp-text]').textContent = `${Math.ceil(h.hp)}`;
-    q('[data-st]').style.width = `${Math.max(0, h.stamina / h.maxStamina) * 100}%`;
+    const f = b.frame, h = f.hud, q = <T extends HTMLElement>(s: string) => this.q<T>(s), dt = this.app.ticker.deltaMS / 1000;
+    q('[data-hp]').style.width = `${Math.max(0, h.hp / h.maxHp) * 100}%`; q('[data-hp-text]').textContent = `${Math.ceil(h.hp)} / ${h.maxHp}`;
+    q('[data-st]').style.width = `${Math.max(0, h.stamina / h.maxStamina) * 100}%`; q('[data-st-text]').textContent = `${Math.round(h.stamina)}`;
     const w = h.weapon;
     q('[data-weapon]').textContent = w.magSize ? `${w.name}  ${w.reloading ? '换弹中' : `${w.mag} / ${w.magSize}`}  备用 ${w.reserve} · 医疗 ${h.heals}` : `${w.name} · 医疗 ${h.heals}`;
+    if ((this.stats.frames & 7) === 0) this.slowHud(b);
     const region = this.view.regionName();
     q('[data-where]').textContent = `${b.map.name} · ${b.map.floor}${region ? ` · ${region}` : ''}${this.view.outsideSample() ? ' · 样板外（通用占位画面）' : ''}`;
     const t = Math.ceil(h.timeLeft);
@@ -361,14 +390,33 @@ export class CoastSampleHost {
     cross.style.transform = `translate(${this.input.pointer.x}px, ${this.input.pointer.y}px)`;
     cross.classList.toggle('precise', f.player.state.precise);
     this.root.classList.toggle('touch', this.input.touch);
+    let lootChanged = false;
     for (const e of b.events) if (e.seq > this.lastSeq) {
       this.lastSeq = e.seq; this.onEvent(e);
+      if (e.type === 'looted' || e.type === 'rejected') lootChanged = true;
       const { seq, type, durability, stamp, ...detail } = e;
       this.eventLog.push({ seq, type, durability, map: stamp.world.mapId, epoch: stamp.epoch, detail: detail as Record<string, unknown> });
       if (this.eventLog.length > 1000) this.eventLog.shift();
     }
-    if (this.toastLeft > 0) { this.toastLeft -= this.app.ticker.deltaMS / 1000; if (this.toastLeft <= 0) q('[data-toast]').classList.remove('on'); }
-    if (this.panel === 'loot' && b.events.some(e => e.type === 'looted' || e.type === 'rejected')) this.renderLoot();
+    if (this.toastLeft > 0) { this.toastLeft -= dt; if (this.toastLeft <= 0) q('[data-toast]').classList.remove('on'); }
+    if (this.radioLeft > 0) { this.radioLeft -= dt; if (this.radioLeft <= 0) q('[data-radio]').hidden = true; }
+    if (this.panel === 'loot' && lootChanged) this.inv.render();
+  }
+  /** Lower-rate HUD: status, carried weight, exit bearing and quests (the original refreshes these every 0.1 s). */
+  private slowHud(b: PublishedView) {
+    const h = b.frame.hud, l = this.session.loadout, body = this.session.expansion?.body;
+    const status = [h.bleeding ? '流血' : '', h.pollution > 10 ? `污染 ${Math.round(h.pollution)}%` : '',
+      body && this.session.expansion?.raid ? `精神 ${Math.round(body.mental)} · 水分 ${Math.round(body.water)} · 饱食 ${Math.round(body.satiety)}` : ''].filter(Boolean).join(' · ') || '状态正常';
+    let weight = '';
+    if (l) { const w = D.WEAPONS[l.weapon || 'knife']; weight = `${(D.weight(l.bag) + D.weight(l.safe) + (l.weapon ? D.ITEMS[l.weapon].weight : 0) + D.ITEMS.knife.weight + (w.ammo ? D.ITEMS[w.ammo].weight * h.weapon.mag : 0)).toFixed(1)} kg`; }
+    this.q('[data-state]').textContent = `${status}　${weight}`;
+    const exit = b.map.exits.find(e => e.name === this.selectedExit);
+    this.q('[data-exit-nav]').textContent = exit ? (() => { const bearing = exitBearing(b.frame.player, exit.at); return `${exit.name} · ${bearing.direction} · 直线 ${bearing.distance.toFixed(1)} 格`; })()
+      : this.selectedExit ? `${this.selectedExit} · 返回地面查看方位` : '选择撤离点';
+    const progress = questProgress(this.session.save, this.session.loadout);
+    this.q('[data-quest-count]').textContent = `· ${progress.length} 项未完成`;
+    const html = progress.map(qt => `<section><strong>${esc(qt.name)}</strong>${qt.needs.map(n => `<p>${esc(name(n.id))}：仓库 ${n.stored} · 携带 ${n.carried} / 需 ${n.needed}</p>`).join('')}</section>`).join('') || '<p>全部任务已交付。</p>';
+    const list = this.q('[data-quest-list]'); if (list.innerHTML !== html) list.innerHTML = html;
   }
   private prompt(t: Interaction | null, py: number) {
     const el = this.q('[data-prompt]'), list = this.q('[data-choices]'), act = this.q('[data-act]');
@@ -393,10 +441,17 @@ export class CoastSampleHost {
     } else list.hidden = true;
   }
   private onEvent(e: StampedEvent) {
-    if (e.type === 'notice') this.toast(e.text);
+    if (e.type === 'notice') {
+      // A note's text arrives as "title：text" after the player reads it: show it in the reading panel.
+      const title = this.readingFor && this.noteTitles.has(this.readingFor) && e.text.startsWith(`${this.readingFor}：`) ? this.readingFor : null;
+      if (title) { this.reading = { title, text: e.text.slice(title.length + 1) }; this.readingFor = null; this.openReading(); return; }
+      this.radio(e.text, e.seconds);
+    }
     else if (e.type === 'rejected') { this.lastRejected = e.action === 'checkpoint' ? 'checkpoint' : e.reason === 'save-failed' ? 'save-failed' : e.action; if (e.action !== 'select-target') this.toast(REASONS[e.reason] ?? e.reason, true); }
     else if (e.type === 'looted' && e.durability === 'committed') this.toast(`获得 ${name(e.item)} ×${e.qty}${e.partial ? '（部分）' : ''}`);
   }
+  /** Radio line: the original shows Runtime messages (say) in a timed radio box. */
+  private radio(text: string, seconds: number) { const r = this.q('[data-radio]'); r.textContent = text; r.hidden = false; this.radioLeft = Math.max(3, seconds || 6); }
   toast(text: string, bad = false) { const t = this.q('[data-toast]'); if (!t) return; t.textContent = text; t.classList.add('on'); t.classList.toggle('bad', bad); this.toastLeft = 2.8; }
   private fade() { const f = this.q('[data-fade]'); f.classList.remove('on'); void f.offsetWidth; f.classList.add('on'); }
 
@@ -407,10 +462,12 @@ export class CoastSampleHost {
   unmount() {
     if (!this.mounted) return;
     this.mounted = false;
+    this.inv?.closeTransient();
     this.scope.dispose();
     this.view.destroy(); lifecycle.views--;
     this.app.destroy({ removeView: true, releaseGlobalResources: true }, { children: true, texture: true, textureSource: true });
     lifecycle.apps--;
     this.root.remove();
+    this.last = null;
   }
 }

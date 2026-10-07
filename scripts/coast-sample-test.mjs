@@ -114,12 +114,126 @@ const restoreWrites = page => page.evaluate(() => { Storage.prototype.setItem = 
     const t0 = await now(page); assert.equal(t0.panel, 'loot'); assert.equal(t0.phase, 'blocked');
     await page.keyboard.down('w'); await wait(400); const t1 = await now(page); await page.keyboard.up('w');
     assert.ok(t1.stamp.simulationTime > t0.stamp.simulationTime); assert.ok(Math.abs(t1.player.y - t0.player.y) < .5);
-    await page.locator('[data-do="take"]').first().click(); await frames(page, 4);
+    await page.locator('[data-panel] [data-grid="container"] .item').first().click(); await page.locator('[data-do="inv-quick"]').click(); await frames(page, 4);
     const looted = (await events(page, 'looted')).filter(e => e.durability === 'committed');
     assert.equal(looted.length, 1);
     await page.keyboard.press('Tab'); await frames(page, 3);
     assert.equal((await now(page)).panel, null); assert.equal((await now(page)).phase, 'running');
     return { crate: crate.name, looted: looted[0].detail, choices: target.choices.length };
+  });
+  // --- Inventory, loot, map, reading and HUD panels: native pointer/keyboard operations only. ---
+  const bagItems = (page, src = 'bag') => page.evaluate(s => window.__bincov.app.loadout[s].items.map(i => ({ uid: i.uid, id: i.id, qty: i.qty, x: i.x, y: i.y, rotated: !!i.rotated })), src);
+  const cellBox = (page, grid, x, y) => page.evaluate(([g, x, y]) => { const el = document.querySelector(`[data-panel] [data-grid="${g}"]`), r = el.getBoundingClientRect(), c = Number(el.dataset.cell); return { x: r.left + x * c, y: r.top + y * c, c }; }, [grid, x, y]);
+  const itemEl = (page, uid) => page.locator(`[data-panel] .item[data-uid="${uid}"]`);
+  // Grab 6 px inside the item's top-left corner and release 6 px inside the target cell, so the ghost lands on that cell.
+  async function dragItem(page, uid, grid, x, y) {
+    const from = await itemEl(page, uid).boundingBox(), to = await cellBox(page, grid, x, y);
+    await page.mouse.move(from.x + 6, from.y + 6); await page.mouse.down();
+    await page.mouse.move(from.x + 20, from.y + 20, { steps: 3 }); await page.mouse.move(to.x + 6, to.y + 6, { steps: 6 });
+    const preview = await page.locator('[data-panel] .drop-preview').count();
+    await page.mouse.up(); await frames(page, 2);
+    return preview;
+  }
+  await step('U01 inventory: mouse drag moves a bag item to the exact cell with a live drop preview', async () => {
+    await page.keyboard.press('Tab'); await frames(page, 3);
+    assert.equal((await now(page)).panel, 'inventory'); assert.equal((await now(page)).phase, 'blocked');
+    const water = (await bagItems(page)).find(i => i.id === 'water');
+    const preview = await dragItem(page, water.uid, 'bag', 4, 3);
+    const moved = (await bagItems(page)).find(i => i.uid === water.uid);
+    assert.equal(preview, 1); assert.deepEqual([moved.x, moved.y], [4, 3]);
+    return { from: [water.x, water.y], to: [moved.x, moved.y] };
+  });
+  await step('U02 inventory: rotate turns a 3x1 carbine (in place, or through the rotated placement preview when it does not fit); fixture item added through the real save session', async () => {
+    await page.keyboard.press('Tab'); await frames(page, 2);
+    const added = await page.evaluate(() => window.__bincov.saveSession.mutate(() => { window.__bincov.app.loadout.bag.items.push({ uid: 'bc-fixture-carbine', id: 'carbine', qty: 1, x: 0, y: 4 }); }));
+    assert.equal(added, 'committed', await page.evaluate(() => window.__bincov.app.storageError));
+    await page.keyboard.press('Tab'); await frames(page, 3);
+    const before = await itemEl(page, 'bc-fixture-carbine').boundingBox();
+    await itemEl(page, 'bc-fixture-carbine').click(); await page.locator('[data-do="inv-rotate"]').click(); await frames(page, 2);
+    // Standing 1x3 at the bottom row does not fit, so the panel switches to the rotated placement preview.
+    const preview = await page.locator('[data-panel] [data-grid="bag"] .placement-cell').count();
+    // Placement cells are visual only (pointer-events: none): click the grid at the first valid cell.
+    if (preview) { const c = await page.locator('[data-panel] [data-grid="bag"] .placement-cell').first().boundingBox(); await page.mouse.click(c.x + c.width / 2, c.y + c.height / 2); await frames(page, 2); }
+    const after = await itemEl(page, 'bc-fixture-carbine').boundingBox(), item = (await bagItems(page)).find(i => i.uid === 'bc-fixture-carbine');
+    assert.equal(item.rotated, true); assert.ok(before.width > before.height && after.height > after.width);
+    assert.ok(preview > 0);
+    return { before: [before.width, before.height], after: [after.width, after.height], at: [item.x, item.y], previewCells: preview };
+  });
+  await step('U03 inventory: split 5 of 24 rounds into the safe; the remainder stays in the bag stack', async () => {
+    const ammo = (await bagItems(page)).find(i => i.id === 'ammo9');
+    await itemEl(page, ammo.uid).click(); await page.locator('[data-split]').fill('5'); await page.locator('[data-do="inv-split"]').click(); await frames(page, 2);
+    const cells = await page.locator('[data-panel] [data-grid="safe"] .placement-cell').count();
+    const to = await cellBox(page, 'safe', 0, 0); await page.mouse.click(to.x + to.c / 2, to.y + to.c / 2); await frames(page, 2);
+    const bag = (await bagItems(page)).find(i => i.uid === ammo.uid), safe = await bagItems(page, 'safe');
+    assert.ok(cells > 0); assert.equal(bag.qty, 19); assert.equal(safe.length, 1); assert.equal(safe[0].id, 'ammo9'); assert.equal(safe[0].qty, 5);
+    return { bag: bag.qty, safe: safe[0].qty, placementCells: cells };
+  });
+  await step('U04 inventory: quick transfer moves the safe stack back and merges it into the bag stack', async () => {
+    const safe = (await bagItems(page, 'safe'))[0];
+    await itemEl(page, safe.uid).click(); await page.locator('[data-do="inv-quick"]').click(); await frames(page, 2);
+    const ammo = (await bagItems(page)).filter(i => i.id === 'ammo9');
+    assert.equal((await bagItems(page, 'safe')).length, 0); assert.deepEqual(ammo.map(i => i.qty), [24]);
+    return { bag: ammo[0].qty };
+  });
+  await step('U05 inventory: a failed write rolls the move back and opens the original save-failure retry', async () => {
+    const water = (await bagItems(page)).find(i => i.id === 'water');
+    await failWrites(page);
+    await dragItem(page, water.uid, 'bag', 5, 1); await frames(page, 4);
+    const after = (await bagItems(page)).find(i => i.uid === water.uid), s = await now(page);
+    await restoreWrites(page);
+    assert.deepEqual([after.x, after.y], [water.x, water.y]); assert.equal(s.panel, 'pause');
+    await page.locator('[data-do="retry-save"]').click(); await frames(page, 4);
+    const r = await now(page); assert.equal(r.panel, null); assert.equal(r.phase, 'running');
+    return { kept: [after.x, after.y], panel: s.panel };
+  });
+  await step('U06 loot: click-to-place puts a container item on the chosen cell through one committed transfer', async () => {
+    const crate = await page.evaluate(() => { const f = window.__bincovSample.host.lastBatch.frame;
+      return f.containers.filter(c => c.kind === 'crate' && c.stacks > 0 && c.regionId === null).sort((a, b) => Math.hypot(a.x - 640, a.y - 456) - Math.hypot(b.x - 640, b.y - 456))[0]; });
+    await place(page, crate.x, crate.y + 12, -Math.PI / 2); await frames(page, 4);
+    await clearEvents(page); await page.keyboard.press('e'); await frames(page, 4);
+    assert.equal((await now(page)).panel, 'loot');
+    const first = page.locator('[data-panel] [data-grid="container"] .item').first(), uid = await first.getAttribute('data-uid');
+    await first.click(); await page.locator('[data-do="inv-place"]').click(); await frames(page, 2);
+    const grid = (await page.locator('[data-panel] [data-grid="safe"] .placement-cell').count()) ? 'safe' : 'bag';
+    const cell = await page.locator(`[data-panel] [data-grid="${grid}"] .placement-cell`).last().boundingBox(), box = await cellBox(page, grid, 0, 0);
+    const target = { x: Math.round((cell.x - box.x) / box.c), y: Math.round((cell.y - box.y) / box.c) };
+    await page.mouse.click(cell.x + cell.width / 2, cell.y + cell.height / 2); await frames(page, 4);
+    const placed = (await bagItems(page, grid)).find(i => i.x === target.x && i.y === target.y);
+    const looted = (await events(page, 'looted')).filter(e => e.durability === 'committed');
+    assert.ok(placed, 'item on the chosen cell'); assert.equal(looted.length, 1);
+    await page.keyboard.press('e'); await frames(page, 3); assert.equal((await now(page)).panel, null);
+    return { uid, grid, target, item: placed.id };
+  });
+  await step('U07 map: M opens the floor map (blocked, time runs), floor tabs switch, an exit choice drives the HUD guide', async () => {
+    await place(page, 640, 456, 0, 'coast'); await frames(page, 3);
+    await page.keyboard.press('m'); await frames(page, 3);
+    const s0 = await now(page); assert.equal(s0.panel, 'map'); assert.equal(s0.phase, 'blocked');
+    const tabs = await page.locator('[data-panel] [data-do="map-floor"]').count();
+    await page.locator('[data-panel] [data-do="map-floor"]').nth(1).click();
+    const current = await page.locator('[data-panel] [data-do="map-floor"][aria-current]').getAttribute('data-id');
+    const exit = await page.locator('[data-panel] [data-exit] option').nth(1).getAttribute('value');
+    await page.locator('[data-panel] [data-exit]').selectOption(exit); await wait(300);
+    const t = await now(page); assert.ok(t.stamp.simulationTime > s0.stamp.simulationTime);
+    await page.keyboard.press('m'); await frames(page, 6);
+    const nav = await page.locator('[data-exit-nav]').textContent();
+    assert.ok(tabs >= 3); assert.notEqual(current, 'coast'); assert.ok(nav.startsWith(exit), nav); assert.equal((await now(page)).phase, 'running');
+    return { tabs, current, exit, nav };
+  });
+  await step('U08 reading: E on a note opens its text in the reading panel; E closes it', async () => {
+    const note = await page.evaluate(() => window.__bincovSample.host.lastBatch.map.notes.find(n => n.title === '市场停业告示'));
+    await place(page, note.at.x, note.at.y + 14, -Math.PI / 2); await frames(page, 4);
+    assert.equal((await now(page)).interaction?.kind, 'note');
+    await page.keyboard.press('e'); await frames(page, 6);
+    const s = await now(page), title = await page.locator('[data-panel] h2').textContent(), text = await page.locator('[data-panel] .cs-reading').textContent();
+    assert.equal(s.panel, 'reading'); assert.equal(s.phase, 'blocked'); assert.equal(title, note.title); assert.ok(text.length > 10);
+    await page.keyboard.press('e'); await frames(page, 3); assert.equal((await now(page)).panel, null); assert.equal((await now(page)).phase, 'running');
+    return { title, chars: text.length };
+  });
+  await step('U09 HUD: stamina, status/weight, exit guide, quest count and key hints are filled from the frame', async () => {
+    await frames(page, 30);
+    const h = await page.evaluate(() => { const q = s => document.querySelector(`.coast-sample ${s}`); return { st: q('[data-st-text]').textContent, state: q('[data-state]').textContent, nav: q('[data-exit-nav]').textContent, quests: q('[data-quest-count]').textContent, keys: q('.cs-keys')?.textContent ?? '' }; });
+    assert.match(h.st, /^\d+$/); assert.match(h.state, /kg/); assert.ok(h.nav.length > 2); assert.ok(h.quests.length > 0); assert.match(h.keys, /地图/);
+    return h;
   });
   await step('W07 canvas offset: pointer -> chest plane -> logic angle matches an independent recomputation', async () => {
     await place(page, 640, 456, 0); await page.addStyleTag({ content: '.coast-sample .cs-canvas{inset:60px 0 0 90px !important}' }); await wait(300);
@@ -142,6 +256,60 @@ const restoreWrites = page => page.evaluate(() => { Storage.prototype.setItem = 
     const shown = await page.evaluate(u => window.__bincovSample.host.view.actorShown(u), uid);
     assert.equal(hidden, false); assert.equal(shown, true);
     return { uid, hidden, shown };
+  });
+  await step('V01 a corpse killed in an unrevealed room adds 0 changed pixels (closed, reopened-and-closed, rebuilt, after a floor change); reveal shows it', async () => {
+    const ROOM = { x: 304, y: 192, w: 320, h: 240 }, ROOM_ID = 'coast-buildings-v1/resident-layout-1/coast/region/resident-ground';
+    // Pixels of the view's composited render target (no HTML), re-presented from the same batch at a fixed view time while
+    // the real pause holds simulation time (ambient light follows raid time). The first call stores the baseline. Roofs and
+    // ceilings are stripped for every probe (a fully faded roof), so a pass depends on region gating, not on the roof
+    // covering the room; `leak` forces the withheld decals visible as the positive control.
+    const probe = (compare, leak = false) => page.evaluate(([r, compare, leak]) => {
+      const h = window.__bincovSample.host, v = h.view; h.app.ticker.stop();
+      const fades = v.updateFades, reveal = v.fx.reveal;
+      v.updateFades = function (...a) { fades.apply(this, a); this.occluders.forEach(o => { if (o.kind === 'roof' || o.kind === 'ceiling') o.sprite.visible = false; }); };
+      if (leak) v.fx.reveal = function (rv) { reveal.call(this, rv); this.decals.forEach(d => { d.s.visible = true; }); };
+      // The camera may still be easing while paused: every probe reuses the baseline camera.
+      if (!compare) window.__probeCam = { ...v.camF }; v.camF = { ...window.__probeCam }; v.shake = 0;
+      v.time = 1; v.present({ ...h.lastBatch, events: [] }, 0); h.app.render(); delete v.updateFades; delete v.fx.reveal;
+      const { pixels, width } = h.app.renderer.extract.pixels(v.upRT), k = v.view.k, rows = pixels.length / 4 / width;
+      const x0 = Math.max(0, Math.round((r.x - v.cam.x) * k)), y0 = Math.max(0, Math.round((r.y - v.cam.y) * k));
+      const x1 = Math.min(width, Math.round((r.x + r.w - v.cam.x) * k)), y1 = Math.min(rows, Math.round((r.y + r.h - v.cam.y) * k));
+      const crop = []; for (let y = y0; y < y1; y++) crop.push(pixels.slice((y * width + x0) * 4, (y * width + x1) * 4));
+      h.app.ticker.start();
+      if (!compare) { window.__probeBase = crop; return { size: [x1 - x0, y1 - y0] }; }
+      let changed = 0; crop.forEach((row, y) => { const a = window.__probeBase[y]; for (let i = 0; i < row.length; i += 4) if (row[i] !== a[i] || row[i + 1] !== a[i + 1] || row[i + 2] !== a[i + 2]) changed++; });
+      return { size: [x1 - x0, y1 - y0], changed };
+    }, [ROOM, compare, leak]);
+    const state = () => page.evaluate(id => { const h = window.__bincovSample.host, f = h.lastBatch.frame; return { revealed: f.revealed[id] === true, hiddenFx: h.view.hiddenFx, error: window.__bincov.app.storageError }; }, ROOM_ID);
+    const pause = async on => { await page.evaluate(on => on ? window.__bincovSample.host.pause('overlay') : window.__bincovSample.host.resume(), on); await frames(page, 4); };
+    const enemies = (await page.evaluate(() => window.__bincovSample.host.lastBatch.frame.actors.filter(a => a.alive).map(a => a.uid))).slice(1);
+    const door = open => page.evaluate(o => window.__bincovSample.driver.door('resident-front', o), open);
+    const conditions = [
+      ['closed', async () => { await door(false); await place(page, 464, 440, -Math.PI / 2, 'coast'); }],
+      ['reopened-and-closed', async () => { await door(true); await frames(page, 4); await door(false); await place(page, 464, 448, -Math.PI / 2, 'coast'); }],
+      ['rebuilt', async () => { await place(page, 464, 448, -Math.PI / 2, 'coast'); }],
+      ['after-floor-change', async () => { await place(page, 304, 80, Math.PI / 2, 'resident-f2'); await frames(page, 6); await place(page, 464, 448, -Math.PI / 2, 'coast'); }],
+    ];
+    const results = [];
+    for (const [i, [name, setup]] of conditions.entries()) {
+      const uid = enemies[i];
+      await page.evaluate(u => window.__bincovSample.driver.placeEnemy(u, { x: 104, y: 860 }), uid);
+      await setup(); await frames(page, 8); await pause(true);
+      await probe(false); const before = await state();
+      await page.evaluate(([u, i]) => { const d = window.__bincovSample.driver; d.placeEnemy(u, { x: 352 + i * 30, y: 336 }); d.kill(u); }, [uid, i]);
+      await frames(page, 6);
+      const hidden = await probe(true), after = await state(), shown = await page.evaluate(u => window.__bincovSample.host.view.actorShown(u), uid);
+      const control = i === 0 ? await probe(true, true) : null;
+      await pause(false);
+      assert.equal(before.revealed, false, name); assert.equal(after.revealed, false, name); assert.equal(hidden.changed, 0, name);
+      assert.ok(after.hiddenFx >= before.hiddenFx + 14, name); assert.equal(shown, false, name); assert.equal(after.error, '', name);
+      if (control) assert.ok(control.changed > 0, 'forcing the hidden decals visible must change pixels');
+      results.push({ name, changed: hidden.changed, hiddenFx: after.hiddenFx, ...(control ? { controlChanged: control.changed } : {}) });
+    }
+    await place(page, 464, 330, Math.PI, 'coast'); await frames(page, 8);
+    const revealed = await state(), corpse = await page.evaluate(u => window.__bincovSample.host.view.actorShown(u), enemies[0]);
+    assert.equal(revealed.revealed, true); assert.equal(revealed.hiddenFx, 0); assert.equal(corpse, true);
+    return { results, revealed: revealed.hiddenFx };
   });
   await step('W09 stairs: entering upstairs and the basement commits, raises epoch and rebuilds the view', async () => {
     await place(page, 560, 272, -Math.PI / 2); await frames(page, 3); const a = await now(page);

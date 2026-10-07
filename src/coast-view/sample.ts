@@ -31,8 +31,10 @@ export async function startCoastSample(paused = false): Promise<boolean> {
       debug: test && p.get('debug') === '1', xray: p.get('xray') !== '0', mood: Number(p.get('mood') ?? 0) === 1 ? 1 : 0,
       reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches,
       viewTiles: p.get('view') === '28' ? 28 : 24, collapseTall: p.get('collapse') !== '0',
+      // Loaded on demand: esbuild still inlines the module, but the app's module graph (and Node tests) never import PNGs.
+      art: p.get('art') === 'placeholder' ? null : await (await import('./assets')).loadCoastAssets(),
     };
-    const host: CoastSampleHost = new CoastSampleHost(created as unknown as CoastHandle, app, opts, () => finish(host), exportSave);
+    const host: CoastSampleHost = new CoastSampleHost(created as unknown as CoastHandle, app, saveSession, opts, () => finish(host), exportSave);
     app.coastSample = host;
     document.documentElement.dataset.coastSample = 'run';
     await host.mount(document.body);
@@ -66,6 +68,7 @@ function expose(host: CoastSampleHost, driver: unknown) {
     get host() { return app.coastSample; }, driver, initial: host,
     counts: () => ({ ...lifecycle, liveViews: CoastView.live.size, canvases: document.querySelectorAll('canvas').length,
       sampleRoots: document.querySelectorAll('.coast-sample').length,
+      art: [...CoastView.live].some(v => v.opts.art) ? 'sol' : 'placeholder',
       atlasPages: [...CoastView.live].reduce((n, v) => n + v.tex.atlas.stats.pages, 0),
       largeTextures: [...CoastView.live].reduce((n, v) => n + v.tex.atlas.stats.largeTextures, 0),
       heap: (performance as unknown as { memory?: { usedJSHeapSize: number } }).memory?.usedJSHeapSize ?? 0 }),
@@ -74,7 +77,7 @@ function expose(host: CoastSampleHost, driver: unknown) {
       for (let i = 0; i < times; i++) {
         const old = app.coastSample as CoastSampleHost; if (!old) break;
         old.unmount();
-        const next = new CoastSampleHost(old.handle, app, old.opts, () => finish(next), exportSave);
+        const next = new CoastSampleHost(old.handle, app, saveSession, old.opts, () => finish(next), exportSave);
         app.coastSample = next; await next.mount(document.body);
         await new Promise(r => setTimeout(r, 60));
       }

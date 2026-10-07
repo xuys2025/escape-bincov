@@ -67,7 +67,7 @@ export const weaponName = () => D.WEAPONS[app.loadout?.weapon || 'knife']?.name 
 function preparedWeight(){const s=app.save,w=D.WEAPONS[s.equipment.weapon||'knife'];return D.weight(s.bag)+D.weight(s.safe)+D.ITEMS.knife.weight+(s.equipment.weapon?D.ITEMS[s.equipment.weapon].weight:0)+(w.ammo?D.ITEMS[w.ammo].weight*s.equipment.ammo:0)+(app.expansion?.charm ? D.ITEMS[app.expansion.charm.id].weight : 0);}
 const iconCache = new Map<string, string>();
 function inventoryCell() { return !playerInput.touch && innerWidth >= 1700 && innerHeight >= 900 ? 80 : 54; }
-function itemArtwork(id: string, maxWidth: number, maxHeight: number, rotated = false) {
+export function itemArtwork(id: string, maxWidth: number, maxHeight: number, rotated = false) {
     const key = `item-inventory-${id}`;
     let url = iconCache.get(key);
     if (!url && app.game?.textures.exists(key)) {

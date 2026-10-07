@@ -4,6 +4,7 @@ import { Atlas } from './atlas';
 import { WALK_FRAMES, paintActorFrame, paintCorpse, paintMuzzle, paintWeapon, type WeaponArt } from './art/actors';
 import { dithered, rim, silhouette } from './art/paint';
 import { blob, paintCrate, paintExitDecal, paintLoot, pixel } from './art/props';
+import { solPlayerFrame, solWeapon, type SolArt } from './art/sol';
 
 export const FADE_LEVELS = [1, .7, .45, .25, 0];
 
@@ -11,6 +12,8 @@ export class Textures {
   readonly atlas = new Atlas();
   private canvases = new Map<string, HTMLCanvasElement>();
   private weapons = new Map<string, WeaponArt>();
+  /** Sol samples, or null for the procedural placeholders (?art=placeholder). */
+  constructor(readonly art: SolArt | null = null) {}
 
   ensure(key: string, paint: () => HTMLCanvasElement): Texture {
     if (!this.atlas.has(key)) { const c = paint(); this.canvases.set(key, c); this.atlas.add(key, c); }
@@ -26,7 +29,8 @@ export class Textures {
 
   actor(kind: ActorKind, dir: number, frame: number | 'crouch'): Texture {
     const key = `actor:${kind}:${dir}:${frame}`;
-    return this.ensure(key, () => frame === 'crouch' ? paintActorFrame(kind, dir, 0, 'crouch') : paintActorFrame(kind, dir, frame));
+    return this.ensure(key, () => (kind === 'player' && this.art && solPlayerFrame(this.art, dir, frame))
+      || (frame === 'crouch' ? paintActorFrame(kind, dir, 0, 'crouch') : paintActorFrame(kind, dir, frame)));
   }
   actorFlash(kind: ActorKind, dir: number, frame: number | 'crouch'): Texture {
     const base = `actor:${kind}:${dir}:${frame}`; this.actor(kind, dir, frame);
@@ -42,7 +46,7 @@ export class Textures {
     const glove = kind === 'player' ? '#4a463c' : kind === 'salt' ? '#7f7a6b' : '#3e3a33';
     const key = `weapon:${id}:${glove}`;
     let art = this.weapons.get(key);
-    if (!art) { art = paintWeapon(id, glove); this.weapons.set(key, art); this.canvases.set(key, art.canvas); this.atlas.add(key, art.canvas); }
+    if (!art) { art = (this.art && solWeapon(this.art, id)) || paintWeapon(id, glove); this.weapons.set(key, art); this.canvases.set(key, art.canvas); this.atlas.add(key, art.canvas); }
     const rimKey = `${key}|rim`;
     if (!this.atlas.has(rimKey)) { const r = rim(art.canvas); this.canvases.set(rimKey, r); this.atlas.add(rimKey, r); }
     return { ...art, texture: this.atlas.get(key), rim: this.atlas.get(rimKey) };

@@ -1,3 +1,18 @@
+## 2026-10-08 · PR #22 城中村样板第三轮：Sol 验收返修（Opus）
+
+从原分支 `c836737` 接手，工作区干净；main `841e8bb`、PR #22 远端头 `878f563` 均未变化，原 fork 无写权限，本轮提交只在本地。详见[第三轮说明](docs/coast-sample-view/round3/README.md)。
+
+- **前端补齐：** 背包与搜刮改为原库存格子（拖放预览、R 旋转、点选放置、拆分、安全箱互转），提交路径沿用 `transferLoot` 和 `SaveSession.mutate`；另补地图面板（楼层页签、撤离指引）、阅读面板和缺失的 HUD。
+- **宿主问题：** 新检查发现两处并已修复：拖放后下一次点击会被吞掉；阅读面板会在同一帧被立即关掉。
+- **素材：** 首批 43 张素材按 manifest 校验哈希后内联接入（+31 KB），`?art=placeholder` 可切回占位；返修项 ART-R01–R10 交 Sol，只针对这 43 张。
+- **隐藏房间特效：** 粒子与贴花按所在区域的揭示状态绘制。V01 去掉屋顶后，在四种条件下逐像素比较，改变均为 0，阳性对照为正。
+- **F20：** 定位为测试等待返回的 JSHandle、JIT 预热，以及 PixiJS 全局着色器名缓存（约 5 KB/次挂载，库内行为，交维护者决定）；回归脚本断言宿主、Runtime、Pixi 及纹理实例不跨局累积。
+- **测试驱动：** `?test=1` 驱动造出的非法弹匣和击杀数会触发与 ASTRA-SAVE-01 相同的面板，已修正驱动；历史异常的根因仍未确认，交 Astra。
+
+验证：223/223 单测；打包通过，重新构建逐字节一致；样板接线 27/27；F20 30 轮回归通过；原 12 套浏览器回归全部通过；四种尺寸 68 张截图，0 异常。另有 8 张素材对比裁图和本机测量。未运行：layered-play（已知脚本问题）、Sol 的边界脚本（选择器待 Sol 更新）。截图约 24 MB。
+
+未做：真机与真人试玩、WebGL 上下文丢失、全沿海外观、素材扩量；没有推送、合并或发布。提交保留本地密钥检查，没有读取或上传 SSH 私钥。
+
 ## 2026-10-08 · PR #22 Sol 工程验证与首批素材，交回 Opus 后停止
 
 从原分支 `docs/coast-2-5d-art-design` 的 `cdfc965` 接手，初始工作区干净；最新 main `841e8bb` 已包含，PR #22 远端原 fork 仍为文档提交 `878f563`。Pages 逐字节等于当前 main，尚不含本地 Runtime 样板；验收请用本地 HTML 加 `?sample=village`。详见 [Sol 验收报告](docs/coast-sample-view/sol-acceptance-20261008/README.md)、[Astra/Opus 归属清单](docs/coast-sample-view/sol-acceptance-20261008/defects.md) 和 [43 PNG manifest](docs/coast-sample-view/sol-acceptance-20261008/assets/manifest.json)。

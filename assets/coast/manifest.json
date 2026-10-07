@@ -1,0 +1,726 @@
+{
+  "schema": 1,
+  "source": "docs/coast-sample-view/sol-acceptance-20261008/assets/manifest.json",
+  "note": "Runtime copies of Sol first-batch samples (1x PNG). Identity and anchors from the source manifest.",
+  "assets": [
+    {
+      "id": "coast-player-body-e-f0-v1",
+      "file": "assets/coast/v1/coast-player-body-e-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "E",
+      "frameIndex": 0,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "a73c2ee53d11890f0f818f0ab5ea6dc37f3d5df1ed6c7752850fcb1dbf4e2341"
+    },
+    {
+      "id": "coast-player-body-e-f1-v1",
+      "file": "assets/coast/v1/coast-player-body-e-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "E",
+      "frameIndex": 1,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "04ae2f840685646b4741c596a9a0594895a104d4971280b324751a6103c9231b"
+    },
+    {
+      "id": "coast-player-body-e-f2-v1",
+      "file": "assets/coast/v1/coast-player-body-e-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "E",
+      "frameIndex": 2,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "9c3e8a7b8e25b6ed2722def7262d0c2aea0d2f33afa3414f3a5621d562e89de6"
+    },
+    {
+      "id": "coast-player-body-e-f3-v1",
+      "file": "assets/coast/v1/coast-player-body-e-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "E",
+      "frameIndex": 3,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "1e00305c1aea6d06020ccf87bee3c55ea333e1d51fac3de2054be9f992889afe"
+    },
+    {
+      "id": "coast-player-body-e-f4-v1",
+      "file": "assets/coast/v1/coast-player-body-e-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "E",
+      "frameIndex": 4,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "33db98246637aa6791e19cec8670bf6a173c8026e153a17d05b4a5543ef8c050"
+    },
+    {
+      "id": "coast-player-body-se-f0-v1",
+      "file": "assets/coast/v1/coast-player-body-se-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "SE",
+      "frameIndex": 0,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "c43f21e5f74ea773431c3de345423b44a08915750cf0433e62a14551293bf718"
+    },
+    {
+      "id": "coast-player-body-se-f1-v1",
+      "file": "assets/coast/v1/coast-player-body-se-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "SE",
+      "frameIndex": 1,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "01ed540f28791d6571a6ec98618f01eda57d294514040f2007459709de9c2bf4"
+    },
+    {
+      "id": "coast-player-body-se-f2-v1",
+      "file": "assets/coast/v1/coast-player-body-se-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "SE",
+      "frameIndex": 2,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "40a03c70435a0148bc81b2c645bfd56316850ab28b64f164c20f0bf4fb205b59"
+    },
+    {
+      "id": "coast-player-body-se-f3-v1",
+      "file": "assets/coast/v1/coast-player-body-se-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "SE",
+      "frameIndex": 3,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "d2be80d15edbf88606890459ae9a920f50cc156d2fdc51a59c5c7b03bab7e1c6"
+    },
+    {
+      "id": "coast-player-body-se-f4-v1",
+      "file": "assets/coast/v1/coast-player-body-se-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "SE",
+      "frameIndex": 4,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "ec24f4af940f568778bd15f894323bf8358bdaebdc83f99b3c01c2326a025547"
+    },
+    {
+      "id": "coast-player-body-s-f0-v1",
+      "file": "assets/coast/v1/coast-player-body-s-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "S",
+      "frameIndex": 0,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "ee570563651727beeb59b5f002bfc6b460659144df85deba69e20afd414b77a8"
+    },
+    {
+      "id": "coast-player-body-s-f1-v1",
+      "file": "assets/coast/v1/coast-player-body-s-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "S",
+      "frameIndex": 1,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "7370e837f17b098cb70d23379130bbd27bac3ea0657f1b091a44a1ebd9cdf787"
+    },
+    {
+      "id": "coast-player-body-s-f2-v1",
+      "file": "assets/coast/v1/coast-player-body-s-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "S",
+      "frameIndex": 2,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "b49ba50947016c845642f8c9ae4e6adf0a84363a307ec8db86069a817de31f92"
+    },
+    {
+      "id": "coast-player-body-s-f3-v1",
+      "file": "assets/coast/v1/coast-player-body-s-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "S",
+      "frameIndex": 3,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "b2a1cdb210aa012366922ca54aabf1906fb6519cd148c341ed523edae524245f"
+    },
+    {
+      "id": "coast-player-body-s-f4-v1",
+      "file": "assets/coast/v1/coast-player-body-s-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "S",
+      "frameIndex": 4,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "8038bc723cd302248da44d56e436c005cae622a184a835442d449f334f26d6b8"
+    },
+    {
+      "id": "coast-player-body-ne-f0-v1",
+      "file": "assets/coast/v1/coast-player-body-ne-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "NE",
+      "frameIndex": 0,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "bdaa4e9afe6d93501062b7942da2e921ed7f99d560a8f54dce5a39f1eace9fe2"
+    },
+    {
+      "id": "coast-player-body-ne-f1-v1",
+      "file": "assets/coast/v1/coast-player-body-ne-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "NE",
+      "frameIndex": 1,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "fe4f271099796aa94cbee5743197a0f8b985988d27ba48106ab6a0218fca6279"
+    },
+    {
+      "id": "coast-player-body-ne-f2-v1",
+      "file": "assets/coast/v1/coast-player-body-ne-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "NE",
+      "frameIndex": 2,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "f946c6b9a56b5dbe717e9fbe7cdf2cfb8af509a5b65320e6d55cbe49e02af49c"
+    },
+    {
+      "id": "coast-player-body-ne-f3-v1",
+      "file": "assets/coast/v1/coast-player-body-ne-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "NE",
+      "frameIndex": 3,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "3b112c5399c7c5f069b156212a7b3da7fdad69454f75f125be83f16851e41cd4"
+    },
+    {
+      "id": "coast-player-body-ne-f4-v1",
+      "file": "assets/coast/v1/coast-player-body-ne-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "NE",
+      "frameIndex": 4,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "3653091be80545d41c754510ae8e71b26173e29be463eeac3c602796ab263e0e"
+    },
+    {
+      "id": "coast-player-body-n-f0-v1",
+      "file": "assets/coast/v1/coast-player-body-n-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "N",
+      "frameIndex": 0,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "2abbdf5d7cdf7771ee022a6de1a7428e0d02434343746fbc36b181e57c3b4600"
+    },
+    {
+      "id": "coast-player-body-n-f1-v1",
+      "file": "assets/coast/v1/coast-player-body-n-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "N",
+      "frameIndex": 1,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "b752657bf5c1b007ae0083bc8e4162650a8753d758e70d8e4d4fdabfcb984810"
+    },
+    {
+      "id": "coast-player-body-n-f2-v1",
+      "file": "assets/coast/v1/coast-player-body-n-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "N",
+      "frameIndex": 2,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "c1c417568649b638b81ebbbc2bbba5fd8965c1bd931cbc06876f66df97a14e4a"
+    },
+    {
+      "id": "coast-player-body-n-f3-v1",
+      "file": "assets/coast/v1/coast-player-body-n-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "N",
+      "frameIndex": 3,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "88d2b7b7882f86d9c05ad3f117d51379f5f811778af3d3c0afa1c435ce5c45c1"
+    },
+    {
+      "id": "coast-player-body-n-f4-v1",
+      "file": "assets/coast/v1/coast-player-body-n-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "player",
+      "dir": "N",
+      "frameIndex": 4,
+      "part": "coast-player",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "55ba54eba01d324cfa00c71c64d5d175764a985255dc3eb00c052c0cfa66fb25"
+    },
+    {
+      "id": "coast-wall-core-v1",
+      "file": "assets/coast/v1/coast-wall-core-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        32
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "core",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "b89ccb22f7774b3d2b47efc884fa364742f91dd7ef79aa41c40e1ededce96725"
+    },
+    {
+      "id": "coast-wall-edge-n-v1",
+      "file": "assets/coast/v1/coast-wall-edge-n-v1.png",
+      "w": 32,
+      "h": 3,
+      "anchor": [
+        0,
+        3
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "edge-n",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "487932a6d4122e52780b213c34a3702812a5d500a0c243c19abc0cbe2ddd6370"
+    },
+    {
+      "id": "coast-wall-edge-s-v1",
+      "file": "assets/coast/v1/coast-wall-edge-s-v1.png",
+      "w": 32,
+      "h": 3,
+      "anchor": [
+        0,
+        3
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "edge-s",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "4744ff401660f54d499df5d362937ed2a465fda52b27e7d6ed5523174561062c"
+    },
+    {
+      "id": "coast-wall-edge-e-v1",
+      "file": "assets/coast/v1/coast-wall-edge-e-v1.png",
+      "w": 3,
+      "h": 32,
+      "anchor": [
+        0,
+        32
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "edge-e",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "86af923ee48f2417309389f1ce0c9961756a01cac688b0ea5e9bab1b8b26c068"
+    },
+    {
+      "id": "coast-wall-edge-w-v1",
+      "file": "assets/coast/v1/coast-wall-edge-w-v1.png",
+      "w": 3,
+      "h": 32,
+      "anchor": [
+        0,
+        32
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "edge-w",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "f738f368f8cc84f4cd05fcfb307830ffd3d20f087a0cf4b4e1546418dea991b8"
+    },
+    {
+      "id": "coast-wall-exterior-a-v1",
+      "file": "assets/coast/v1/coast-wall-exterior-a-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        0,
+        48
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "exterior-a",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "bf50ffab0a695e91b15c3cf1902c3c1bb5079b994f07a5de67d64a050d707955"
+    },
+    {
+      "id": "coast-wall-exterior-b-v1",
+      "file": "assets/coast/v1/coast-wall-exterior-b-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        0,
+        48
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "exterior-b",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "49c08ce1f504f4c3212f661b0b0be2aebff73d74a062404b36a0e65805c3681d"
+    },
+    {
+      "id": "coast-wall-interior-v1",
+      "file": "assets/coast/v1/coast-wall-interior-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        0,
+        48
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "interior",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "fcac529b0b74964724398eefbe9ea181c2f7b63aa84d481baddbc1654f5d2bd9"
+    },
+    {
+      "id": "coast-wall-window-ew-v1",
+      "file": "assets/coast/v1/coast-wall-window-ew-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        0,
+        48
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "window-ew",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "c58e96082c8195a476517fd26e0c00e8b5542167d37d3d42036348c592f12b9a"
+    },
+    {
+      "id": "coast-wall-door-ew-closed-v1",
+      "file": "assets/coast/v1/coast-wall-door-ew-closed-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        0,
+        48
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "door-ew-closed",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "8533e998c2b068ff436595a694b8903f9e97e16a80a5989032e4fb0579934319"
+    },
+    {
+      "id": "coast-wall-door-ew-open-v1",
+      "file": "assets/coast/v1/coast-wall-door-ew-open-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        0,
+        48
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "door-ew-open",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "67c9d6e27a728334f3b66e3705c96473dd6e7020139158130eeafe6b4e1f33e0"
+    },
+    {
+      "id": "coast-ground-asphalt-a-v1",
+      "file": "assets/coast/v1/coast-ground-asphalt-a-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        0
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "coast-ground-asphalt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "09c5ac45deb20f724eb7058663a048dff857643ec105067b514f5796a486bc14"
+    },
+    {
+      "id": "coast-ground-asphalt-b-v1",
+      "file": "assets/coast/v1/coast-ground-asphalt-b-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        0
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "coast-ground-asphalt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "e9d163bd9f7743ae4ea0312418fc8041295b6bc730f33fb69b770884369ffdcb"
+    },
+    {
+      "id": "coast-ground-yard-a-v1",
+      "file": "assets/coast/v1/coast-ground-yard-a-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        0
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "coast-ground-yard",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "15dd85add5353a5579553d6dc55a5315871430790de44d285c43d145211382d8"
+    },
+    {
+      "id": "coast-ground-yard-b-v1",
+      "file": "assets/coast/v1/coast-ground-yard-b-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        0
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "coast-ground-yard",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "e6143cccf832276f228774e41797d9eaa88bec33c84d12a83b132b55f8b00d54"
+    },
+    {
+      "id": "coast-ground-tile-a-v1",
+      "file": "assets/coast/v1/coast-ground-tile-a-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        0
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "coast-ground-tile",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "f1760e42777695d5ffb7f107f001141385907d79a9bddbe5253e88bd08f6c621"
+    },
+    {
+      "id": "coast-ground-tile-b-v1",
+      "file": "assets/coast/v1/coast-ground-tile-b-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        0
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "coast-ground-tile",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "043de6a62bec6f75ab74b16943afac7b1c1c9be4a4f0fcbd439bf7cb84d89987"
+    },
+    {
+      "id": "coast-weapon-carbine-held-v1",
+      "file": "assets/coast/v1/coast-weapon-carbine-held-v1.png",
+      "w": 31,
+      "h": 10,
+      "anchor": [
+        8,
+        4
+      ],
+      "dir": null,
+      "frameIndex": null,
+      "part": "coast-weapon-carbine",
+      "grip": [
+        8,
+        4
+      ],
+      "muzzle": [
+        28,
+        4
+      ],
+      "sha256": "7e4157ac89587045218de25fea996aa83dd047c068df7f5e703551cac3542107"
+    }
+  ]
+}
