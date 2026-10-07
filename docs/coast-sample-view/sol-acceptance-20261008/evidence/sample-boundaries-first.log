@@ -1,0 +1,34 @@
+PASS F01 legacy profile and coast-v1 restore use RaidScene under sample flag
+PASS Mall click regression: HUD coordinate is rejected; native canvas input still fires
+PASS F14 native bag drop write failure preserves bag and ground, no success event
+PASS F16 bag/loot blur, pagehide and hidden resume paused and suppress held keys
+PASS F18 checkpoint immediately after layer, refresh restores only target map and one initial rebuild
+FAIL F19 DPR1/2/3 noninteger offset canvas and simulated safe-area aim alignment The expression evaluated to a falsy value:
+
+  assert.ok(Math.abs(r.aim-r.expect)<.01)
+
+FAIL F20 twenty full deploy-layer-extract/abandon-base cycles, zero owners after each cycle 1 apps
+
+1 !== 0
+
+Cannot convert argument "entryNameEncoding", with value: "True", for "ExtractToDirectory" to type "System.Text.Encoding
+": "Cannot convert value "True" to type "System.Text.Encoding". Error: "Invalid cast from 'System.Boolean' to 'System.T
+ext.Encoding'.""
+At line:1 char:58
++ ... FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory($env: ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodException
+    + FullyQualifiedErrorId : MethodArgumentConversionInvalidCastArgument
+
+FAIL F21 both HTML and extracted portable ZIP finish offline without test globals Command failed: powershell.exe -NoLogo -NoProfile -NonInteractive -Command Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory($env:BINCOV_SOL_ZIP,$env:BINCOV_SOL_EXTRACT,$true)
+Cannot convert argument "entryNameEncoding", with value: "True", for "ExtractToDirectory" to type "System.Text.Encoding
+": "Cannot convert value "True" to type "System.Text.Encoding". Error: "Invalid cast from 'System.Boolean' to 'System.T
+ext.Encoding'.""
+At line:1 char:58
++ ... FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory($env: ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodException
+    + FullyQualifiedErrorId : MethodArgumentConversionInvalidCastArgument
+
+
+5/8

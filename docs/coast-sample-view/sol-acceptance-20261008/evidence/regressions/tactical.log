@@ -1,0 +1,8 @@
+PASS 1280x720: equipment / bag / stash order, visible safe, fixed details, actual font B at 16px
+PASS 1280x720: 30 inventory objects, eight rotated shapes, no clipped artwork
+PASS 1280x720: merchant / buy-sell buffer / warehouse order, artwork, inspection and atomic checkout
+PASS 1280x720: full viewport loot, own inventory on left, live clock, pointer drag and return at both scales
+PASS 1920x1080: equipment / bag / stash order, visible safe, fixed details, actual font B at 16px
+PASS 1920x1080: 30 inventory objects, eight rotated shapes, no clipped artwork
+PASS 1920x1080: merchant / buy-sell buffer / warehouse order, artwork, inspection and atomic checkout
+PASS 1920x1080: full viewport loot, own inventory on left, live clock, pointer drag and return at both scales

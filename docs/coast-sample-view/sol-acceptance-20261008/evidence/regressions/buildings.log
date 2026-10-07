@@ -1,0 +1,8 @@
+PASS native deployment saves all three maps with one global roster and body
+PASS failed door write leaves the closed door and original bytes; retry opens exactly once
+PASS one held E switches once, releases held movement, and keeps global time and saved doors
+PASS refresh restores upstairs and all maps; reverse and basement entries return to paired anchors
+PASS native E closes a passed pursuit door; subsequent frames and reload keep it closed
+PASS indoor warning and tide use the global clock; failed upstairs timeout retains its candidate and retries once
+PASS native touch entry and map panel at 844x390
+PASS native touch entry and map panel at 640x300

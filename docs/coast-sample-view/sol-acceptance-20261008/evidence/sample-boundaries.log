@@ -1,0 +1,29 @@
+PASS F01 legacy profile and coast-v1 restore use RaidScene under sample flag
+PASS Mall click regression: HUD coordinate is rejected; native canvas input still fires
+PASS F14 native bag drop write failure preserves bag and ground, no success event
+PASS F16 bag/loot blur, pagehide and hidden resume paused and suppress held keys
+PASS F18 checkpoint immediately after layer, refresh restores only target map and one initial rebuild
+PASS F19 DPR1/2/3 noninteger offset canvas and simulated safe-area aim alignment
+LIFECYCLE 1 resident-f2 death 23984929
+LIFECYCLE 2 resident-b1 extract 25114973
+LIFECYCLE 3 resident-f2 death 25395619
+LIFECYCLE 4 resident-b1 extract 25635316
+LIFECYCLE 5 resident-f2 death 25891171
+LIFECYCLE 6 resident-b1 extract 26069855
+LIFECYCLE 7 resident-f2 death 26123331
+LIFECYCLE 8 resident-b1 extract 26230259
+LIFECYCLE 9 resident-f2 death 26659639
+LIFECYCLE 10 resident-b1 extract 26740547
+LIFECYCLE 11 resident-f2 death 26832069
+LIFECYCLE 12 resident-b1 extract 26902775
+LIFECYCLE 13 resident-f2 death 27035549
+LIFECYCLE 14 resident-b1 extract 27068359
+LIFECYCLE 15 resident-f2 death 27097329
+LIFECYCLE 16 resident-b1 extract 27154394
+LIFECYCLE 17 resident-f2 death 27212220
+LIFECYCLE 18 resident-b1 extract 27357845
+LIFECYCLE 19 resident-f2 death 27407588
+LIFECYCLE 20 resident-b1 extract 27456278
+PASS F20 twenty full deploy-layer-extract/abandon-base cycles, zero owners after each
+PASS F21 both HTML and extracted portable ZIP finish offline without test globals
+8/8

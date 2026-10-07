@@ -1,0 +1,27 @@
+PASS 1280x720 mixed transaction stays provisional, cancels both ways, confirms leaving and uses net cash
+PASS 1280x720 quest sale explains final shortage; cancel and save failure preserve the whole transaction
+PASS 1280x720 departure shows missing matching ammo and safe-only treatment without blocking light deployment
+PASS 1280x720 loot rotation and quantity previews cancel cleanly; split and partial merge preserve remainders
+PASS 1280x720 R previews rotation; Escape, outside release, blur and background cancel; hybrid touch placement and normal reload work
+PASS 1280x720 exit choice shows straight-line bearing; collapsed quests separate stored and carried goods; hit directions expire
+PASS 1920x1080 mixed transaction stays provisional, cancels both ways, confirms leaving and uses net cash
+PASS 1920x1080 quest sale explains final shortage; cancel and save failure preserve the whole transaction
+PASS 1920x1080 departure shows missing matching ammo and safe-only treatment without blocking light deployment
+PASS 1920x1080 loot rotation and quantity previews cancel cleanly; split and partial merge preserve remainders
+PASS 1920x1080 R previews rotation; Escape, outside release, blur and background cancel; hybrid touch placement and normal reload work
+PASS 1920x1080 exit choice shows straight-line bearing; collapsed quests separate stored and carried goods; hit directions expire
+PASS 844x390-touch mixed transaction stays provisional, cancels both ways, confirms leaving and uses net cash
+PASS 844x390-touch quest sale explains final shortage; cancel and save failure preserve the whole transaction
+PASS 844x390-touch departure shows missing matching ammo and safe-only treatment without blocking light deployment
+PASS 844x390-touch loot rotation and quantity previews cancel cleanly; split and partial merge preserve remainders
+PASS 844x390-touch exit choice shows straight-line bearing; collapsed quests separate stored and carried goods; hit directions expire
+PASS 667x375-touch mixed transaction stays provisional, cancels both ways, confirms leaving and uses net cash
+PASS 667x375-touch quest sale explains final shortage; cancel and save failure preserve the whole transaction
+PASS 667x375-touch departure shows missing matching ammo and safe-only treatment without blocking light deployment
+PASS 667x375-touch loot rotation and quantity previews cancel cleanly; split and partial merge preserve remainders
+PASS 667x375-touch exit choice shows straight-line bearing; collapsed quests separate stored and carried goods; hit directions expire
+PASS 740x300-touch mixed transaction stays provisional, cancels both ways, confirms leaving and uses net cash
+PASS 740x300-touch quest sale explains final shortage; cancel and save failure preserve the whole transaction
+PASS 740x300-touch departure shows missing matching ammo and safe-only treatment without blocking light deployment
+PASS 740x300-touch loot rotation and quantity previews cancel cleanly; split and partial merge preserve remainders
+PASS 740x300-touch exit choice shows straight-line bearing; collapsed quests separate stored and carried goods; hit directions expire

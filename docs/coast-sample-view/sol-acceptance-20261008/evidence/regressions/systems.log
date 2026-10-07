@@ -1,0 +1,16 @@
+PASS station movement is real, blocked movement earns no practice; menus close and rearm input
+PASS failed facility payment rolls back cash, material, grade and bytes; next click commits once
+PASS all five facilities expose costs and gates; finite recipe queue debits each batch once
+PASS offline time restores damaged body and finishes only paid batches; claim rollback and single receipt
+PASS charm swap, body panel and medical use commit the item and effect together
+PASS mall native deployment has 39 regions, 25 enemies, one clock and two valid exits
+PASS mall native crate transfer keeps both inventories atomic and persists remaining contents after a floor round trip
+PASS map and backpack block a nearby connector; a failed floor write preserves successful loot and retries once
+PASS all four paired mall connectors support ten round trips each with no duplicated population
+PASS upstairs fixed crate supports failed and successful native transfer, floor round trip and refresh without duplicating either end
+PASS mall floor preview does not move the player; terrace stays upstairs and reload restores it
+PASS scene tide flip reroutes the persisted source pursuit once and leaves upstairs dry
+PASS station and mall native touch at 844x390
+PASS station and mall native touch at 640x300
+PASS native terminal scenes commit death, timeout, abandonment and extraction once; failed settlement retains its candidate
+PASS ordinary offline mall entry exposes no test hook and saves native movement, map view and refresh recovery

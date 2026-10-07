@@ -1,0 +1,10 @@
+PASS desktop keyboard/mouse 1280x720
+PASS touch laptop keyboard/mouse 1280x720
+PASS desktop keyboard/mouse 1920x1080
+PASS touch laptop keyboard/mouse 1920x1080
+PASS keyboard/mouse remain usable in compact touch layout
+PASS Esc resumes the native audio context on every pause cycle
+PASS manual pause suspends native audio until an explicit resume
+PASS blur pauses audio and releases held keys before keyboard resume
+PASS ineffective healing preserves held movement and all medical items
+PASS failed medical write rolls back and pause still clears held movement

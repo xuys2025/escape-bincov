@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { browserOptions } from './browser-options.mjs';
 
-const out = resolve('test-results/coast-sample/shots'); await mkdir(out, { recursive: true });
+const out = resolve(process.env.BINCOV_SHOTS_OUT || 'test-results/coast-sample/shots'); await mkdir(out, { recursive: true });
 const url = pathToFileURL(resolve('dist/index.html')).href + '?test=1&sample=village';
 const S = Math.PI / 2, N = -Math.PI / 2, W = Math.PI;
 const SCENES = [
@@ -29,11 +29,24 @@ const ONLY = process.env.SHOT_SIZES; const SIZES_ALL = [
 ];
 const SIZES = ONLY ? SIZES_ALL.filter(s => ONLY.split(',').includes(s.w + 'x' + s.h)) : SIZES_ALL;
 const browser = await chromium.launch(browserOptions);
-const index = { browser: browser.version(), seed: '42', url: '?test=1&sample=village', shots: [], errors: [], requests: [] };
+const index = { startedAt: new Date().toISOString(), browser: browser.version(), seed: '42', url: '?test=1&sample=village', shots: [], errors: [], requests: [], console: [], anomalies: [] };
 for (const size of SIZES) {
   const context = await browser.newContext({ viewport: size.touch ? { width: 844, height: 390 } : { width: size.w, height: size.h }, deviceScaleFactor: size.dpr, hasTouch: size.touch, isMobile: size.touch, offline: true });
   context.on('request', r => { if (/^https?:/.test(r.url())) index.requests.push(r.url()); });
   const page = await context.newPage(); page.setDefaultTimeout(15000); page.on('pageerror', e => index.errors.push(e.message));
+  page.on('console', message => { if (index.console.length < 200) index.console.push({ size: `${size.w}x${size.h}`, type: message.type(), text: message.text().slice(0, 1500) }); });
+  // Observe real test-context writes without changing their outcome or recording save contents.
+  await page.addInitScript(() => {
+    window.__solStorageTrace = [];
+    const set = Storage.prototype.setItem;
+    Storage.prototype.setItem = function (key, value) {
+      if (key !== 'escape-bincov.session.v2') return set.call(this, key, value);
+      const trace = { at: performance.now(), bytes: new TextEncoder().encode(value).length, result: 'pending' };
+      try { const result = set.call(this, key, value); trace.result = 'written'; return result; }
+      catch (error) { trace.result = 'failed'; trace.error = `${error.name}: ${error.message}`; throw error; }
+      finally { window.__solStorageTrace.push(trace); if (window.__solStorageTrace.length > 30) window.__solStorageTrace.shift(); }
+    };
+  });
   await page.goto(url);
   const go = name => page.locator(`[data-action="${name}"]`);
   if (size.touch) { await go('enter').tap(); await page.locator('#seed').fill('42'); await go('deploy').tap(); }
@@ -51,13 +64,16 @@ for (const size of SIZES) {
     await page.waitForTimeout(1100);
     const file = `${scene.id}-${size.w}x${size.h}.png`;
     await page.screenshot({ path: resolve(out, file) });
-    const info = await page.evaluate(() => { const h = window.__bincovSample.host, b = h.lastBatch; return { map: b.stamp.world.mapId, epoch: b.stamp.epoch, player: [b.frame.player.x, b.frame.player.y], phase: b.frame.phase, panel: h.panel, storageError: window.__bincov.app.storageError || '' }; });
+    const info = await page.evaluate(() => { const h = window.__bincovSample.host, b = h.lastBatch; return { map: b.stamp.world.mapId, epoch: b.stamp.epoch, player: [b.frame.player.x, b.frame.player.y], phase: b.frame.phase, panel: h.panel, storageError: window.__bincov.app.storageError || '', storageOK: window.__bincov.app.storageOK, rejected: h.eventLog.filter(e => e.type === 'rejected').slice(-5), writes: window.__solStorageTrace.slice(-5) }; });
     if (process.env.SHOT_DEBUG) console.log(scene.id, JSON.stringify(info));
     index.shots.push({ file, scene: scene.id, note: scene.note, size: `${size.w}x${size.h}`, dpr: size.dpr, touch: size.touch, ...info });
+    if (info.phase !== 'running' || info.panel !== null || info.storageError || !info.storageOK) index.anomalies.push({ file, ...info });
     console.log('shot', file);
   }
   await context.close();
 }
 await browser.close();
+index.finishedAt = new Date().toISOString();
 await writeFile(resolve(out, 'index.json'), JSON.stringify(index, null, 2));
-console.log(`${index.shots.length} shots; errors ${index.errors.length}; external requests ${index.requests.length}`);
+console.log(`${index.shots.length} shots; anomalies ${index.anomalies.length}; errors ${index.errors.length}; external requests ${index.requests.length}`);
+if (index.anomalies.length || index.errors.length || index.requests.length) process.exitCode = 1;

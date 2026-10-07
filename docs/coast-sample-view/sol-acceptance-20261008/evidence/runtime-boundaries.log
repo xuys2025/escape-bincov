@@ -1,0 +1,5 @@
+PASS F05 move intent with zero displacement, hurt and release reset extraction
+PASS F06 duplicate names and adjacent corpse resolve to stable selected ID
+PASS F08 actual coast window/low/door-slit trajectories retain no blocked impact
+PASS F12 no valid landing preserves map, source bullets and RNG exactly
+PASS F14 partial loot and drop write faults roll back exact world/bag/stored bytes

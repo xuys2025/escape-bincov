@@ -1,0 +1,50 @@
+[
+  {
+    "endpoint": "commits/main",
+    "status": 200,
+    "at": "2026-10-07T17:50:03.154Z",
+    "sha": "841e8bbdfb070eada82537563dd1ab1b4801aea3"
+  },
+  {
+    "endpoint": "pulls/22",
+    "status": 200,
+    "at": "2026-10-07T17:50:03.233Z",
+    "state": "open",
+    "head": {
+      "sha": "878f5633316a824960091f8f924c0ddd8dd78078",
+      "ref": "docs/coast-2-5d-art-design",
+      "repo": "LMX-323/escape-bincov"
+    }
+  },
+  {
+    "endpoint": "actions/runs?branch=main&per_page=3",
+    "status": 200,
+    "at": "2026-10-07T17:50:03.202Z",
+    "runs": [
+      {
+        "id": 37650616588,
+        "name": "CI & Pages",
+        "status": "completed",
+        "conclusion": "success",
+        "headSHA": "841e8bbdfb070eada82537563dd1ab1b4801aea3",
+        "url": "https://github.com/xuys2025/escape-bincov/actions/runs/37650616588"
+      },
+      {
+        "id": 37641484608,
+        "name": "CI & Pages",
+        "status": "completed",
+        "conclusion": "success",
+        "headSHA": "f14414718f6dd2b9b8d9144b40134b51fcbc8cc9",
+        "url": "https://github.com/xuys2025/escape-bincov/actions/runs/37641484608"
+      },
+      {
+        "id": 37592632335,
+        "name": "CI & Pages",
+        "status": "completed",
+        "conclusion": "success",
+        "headSHA": "425f32013bd04da668ca5924f25fa2fef926b2c9",
+        "url": "https://github.com/xuys2025/escape-bincov/actions/runs/37592632335"
+      }
+    ]
+  }
+]

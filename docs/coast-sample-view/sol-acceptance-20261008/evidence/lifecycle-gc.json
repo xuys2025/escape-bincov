@@ -1,0 +1,425 @@
+{
+  "startedAt": "2026-10-07T17:53:37.623Z",
+  "steps": [
+    {
+      "id": "F20 twenty full deploy-layer-extract/abandon-base cycles, zero owners after each",
+      "status": "passed",
+      "detail": {
+        "cycles": [
+          {
+            "cycle": 1,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 22860108
+            }
+          },
+          {
+            "cycle": 2,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 23654869
+            }
+          },
+          {
+            "cycle": 3,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 23894137
+            }
+          },
+          {
+            "cycle": 4,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 24196033
+            }
+          },
+          {
+            "cycle": 5,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 24399977
+            }
+          },
+          {
+            "cycle": 6,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 24738961
+            }
+          },
+          {
+            "cycle": 7,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 24579625
+            }
+          },
+          {
+            "cycle": 8,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 24727225
+            }
+          },
+          {
+            "cycle": 9,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 25044325
+            }
+          },
+          {
+            "cycle": 10,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 25421101
+            }
+          },
+          {
+            "cycle": 11,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 25269545
+            }
+          },
+          {
+            "cycle": 12,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 25581533
+            }
+          },
+          {
+            "cycle": 13,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 25451653
+            }
+          },
+          {
+            "cycle": 14,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 25532597
+            }
+          },
+          {
+            "cycle": 15,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 25526693
+            }
+          },
+          {
+            "cycle": 16,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 25661977
+            }
+          },
+          {
+            "cycle": 17,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 25711833
+            }
+          },
+          {
+            "cycle": 18,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 25823325
+            }
+          },
+          {
+            "cycle": 19,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 25833853
+            }
+          },
+          {
+            "cycle": 20,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "heap": 25942837
+            }
+          }
+        ],
+        "afterIdle": 26067537,
+        "gcMethod": "CDP HeapProfiler.collectGarbage and window.gc",
+        "gcAvailable": true,
+        "afterWarmupMean": 24902247.4,
+        "lastFiveMean": 25794765,
+        "growthBytes": 892517.6000000015,
+        "toleranceBytes": 8388608
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "method": "Offline real packaged HTML. Explicit test fixtures position actors/freeze AI; all panel and lifecycle actions use native input. Visibility/pagehide are injected events; no physical-phone claim.",
+  "browser": "154.0.8037.98",
+  "finishedAt": "2026-10-07T17:54:30.278Z"
+}

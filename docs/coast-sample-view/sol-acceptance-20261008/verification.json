@@ -1,0 +1,921 @@
+{
+  "at": "2026-10-07T18:10:52.309Z",
+  "scope": "Sol engineering verification and first asset samples only; no src changes, no merge or publish.",
+  "baseline": {
+    "tested": "cdfc965f3015bbf562cee63eb241e9fa6bf70753",
+    "branch": "docs/coast-2-5d-art-design",
+    "worktree": "D:/bincov/pr22-runtime",
+    "initialWorktree": "clean",
+    "remoteMain": "841e8bbdfb070eada82537563dd1ab1b4801aea3",
+    "mainIncluded": true,
+    "remotePR22": {
+      "state": "open",
+      "merged": false,
+      "headRepository": "LMX-323/escape-bincov",
+      "headSHA": "878f5633316a824960091f8f924c0ddd8dd78078",
+      "priorHandoffPushPermission": false,
+      "currentPushPermission": "unavailable (gh returned HTTP401); no push attempted"
+    },
+    "pages": {
+      "url": "https://xuys2025.github.io/escape-bincov/",
+      "at": "2026-10-07T17:26:14.913Z",
+      "bytes": 2416678,
+      "sha256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+      "note": "Equals current main HTML; runtime sample is local only, use local HTML with ?sample=village."
+    },
+    "remoteMetadata": "evidence/remote-baseline.json"
+  },
+  "artifacts": {
+    "dist/index.html": {
+      "bytes": 3088289,
+      "sha256": "7b2c950cc22b888eb6ae34ca9d67c81e3de52fa9f8737d74b7cd82ecad436e17"
+    },
+    "start the game.html": {
+      "bytes": 3088289,
+      "sha256": "7b2c950cc22b888eb6ae34ca9d67c81e3de52fa9f8737d74b7cd82ecad436e17"
+    },
+    "release/Escape-Bincov-portable.zip": {
+      "bytes": 1043918,
+      "sha256": "456cf8aa1fc7ead905a3cf867e2456b32ac592ab8d518818f4ab21feda3492b4"
+    },
+    "release/Escape-Bincov-web.zip": {
+      "bytes": 1040143,
+      "sha256": "957ad5f1979d7703bbe093ae7dd99795b9b10de421d63c10c7d0de17ee209826"
+    }
+  },
+  "license": {
+    "PixiJS": {
+      "notices": true,
+      "htmlHeader": true
+    },
+    "@pixi/colord": {
+      "notices": true,
+      "htmlHeader": true
+    },
+    "earcut": {
+      "notices": true,
+      "htmlHeader": true
+    },
+    "ismobilejs": {
+      "notices": true,
+      "htmlHeader": true
+    },
+    "parse-svg-path": {
+      "notices": true,
+      "htmlHeader": true
+    }
+  },
+  "commands": {
+    "install": {
+      "command": "corepack pnpm install --frozen-lockfile",
+      "status": "passed",
+      "pnpm": "11.19.0"
+    },
+    "unit": {
+      "command": "corepack pnpm test",
+      "status": "passed",
+      "passed": 223
+    },
+    "package": {
+      "command": "corepack pnpm package",
+      "status": "passed",
+      "generatedHTMLDiff": "none"
+    },
+    "sampleWiring": {
+      "command": "node scripts/coast-sample-test.mjs",
+      "status": "passed",
+      "passed": 17
+    },
+    "shots": {
+      "command": "BINCOV_SHOTS_OUT=test-results/sol-acceptance/shots-N node scripts/coast-sample-shots.mjs",
+      "status": "passed",
+      "runs": [
+        {
+          "run": 1,
+          "count": 48,
+          "anomalies": 0,
+          "errors": 0,
+          "requests": 0,
+          "written": 208,
+          "failed": 0,
+          "traceNote": "last writes per shot overlap; counts are observations, not unique transactions"
+        },
+        {
+          "run": 2,
+          "count": 48,
+          "anomalies": 0,
+          "errors": 0,
+          "requests": 0,
+          "written": 208,
+          "failed": 0,
+          "traceNote": "last writes per shot overlap; counts are observations, not unique transactions"
+        },
+        {
+          "run": 3,
+          "count": 48,
+          "anomalies": 0,
+          "errors": 0,
+          "requests": 0,
+          "written": 208,
+          "failed": 0,
+          "traceNote": "last writes per shot overlap; counts are observations, not unique transactions"
+        },
+        {
+          "run": 4,
+          "count": 48,
+          "anomalies": 0,
+          "errors": 0,
+          "requests": 0,
+          "written": 208,
+          "failed": 0,
+          "traceNote": "last writes per shot overlap; counts are observations, not unique transactions"
+        },
+        {
+          "run": 5,
+          "count": 48,
+          "anomalies": 0,
+          "errors": 0,
+          "requests": 0,
+          "written": 208,
+          "failed": 0,
+          "traceNote": "last writes per shot overlap; counts are observations, not unique transactions"
+        }
+      ],
+      "total": 240
+    },
+    "regressions": [
+      {
+        "name": "browser",
+        "script": "browser-test.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:10:53.6099958Z",
+        "finishedAt": "2026-10-07T17:11:34.0053207Z",
+        "command": "node --import tsx scripts/browser-test.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "desktop-input",
+        "script": "desktop-input-test.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:11:34.0512089Z",
+        "finishedAt": "2026-10-07T17:11:58.8819338Z",
+        "command": "node --import tsx scripts/desktop-input-test.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "save-browser",
+        "script": "save-browser-test.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:11:58.8951927Z",
+        "finishedAt": "2026-10-07T17:12:12.7965844Z",
+        "command": "node --import tsx scripts/save-browser-test.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "buildings",
+        "script": "building-browser-test.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:12:12.7993967Z",
+        "finishedAt": "2026-10-07T17:12:26.3681488Z",
+        "command": "node --import tsx scripts/building-browser-test.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "mobile",
+        "script": "mobile-test.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:12:26.3708442Z",
+        "finishedAt": "2026-10-07T17:12:46.2733304Z",
+        "command": "node --import tsx scripts/mobile-test.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "mobile-ux",
+        "script": "mobile-ux-test.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:12:46.2761029Z",
+        "finishedAt": "2026-10-07T17:13:56.0041841Z",
+        "command": "node --import tsx scripts/mobile-ux-test.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "portable",
+        "script": "portable-test.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:13:56.0064349Z",
+        "finishedAt": "2026-10-07T17:14:01.4309674Z",
+        "command": "node --import tsx scripts/portable-test.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "ui",
+        "script": "ui-review.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:14:01.4334430Z",
+        "finishedAt": "2026-10-07T17:14:09.9897767Z",
+        "command": "node --import tsx scripts/ui-review.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "loot",
+        "script": "loot-browser-test.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:14:09.9926383Z",
+        "finishedAt": "2026-10-07T17:15:03.1424607Z",
+        "command": "node --import tsx scripts/loot-browser-test.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "expansion",
+        "script": "expansion-browser-test.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:15:03.1448513Z",
+        "finishedAt": "2026-10-07T17:15:13.3386934Z",
+        "command": "node --import tsx scripts/expansion-browser-test.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "qol-expansion",
+        "script": "qol-expansion-test.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:15:13.3413628Z",
+        "finishedAt": "2026-10-07T17:15:18.0877704Z",
+        "command": "node --import tsx scripts/qol-expansion-test.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "systems",
+        "script": "systems-browser-test.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:15:18.0901571Z",
+        "finishedAt": "2026-10-07T17:15:56.4163688Z",
+        "command": "node --import tsx scripts/systems-browser-test.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "art",
+        "script": "art-review.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:15:56.4184325Z",
+        "finishedAt": "2026-10-07T17:16:09.5686753Z",
+        "command": "node --import tsx scripts/art-review.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "tactical",
+        "script": "tactical-review.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:16:09.5708683Z",
+        "finishedAt": "2026-10-07T17:16:28.1816548Z",
+        "command": "node --import tsx scripts/tactical-review.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "title",
+        "script": "title-review.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:16:28.1838244Z",
+        "finishedAt": "2026-10-07T17:17:27.0767357Z",
+        "command": "node --import tsx scripts/title-review.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "title-water",
+        "script": "title-water-review.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:17:27.0787702Z",
+        "finishedAt": "2026-10-07T17:17:37.0085018Z",
+        "command": "node --import tsx scripts/title-water-review.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "mall-passages",
+        "script": "mall-passages.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:17:37.0108329Z",
+        "finishedAt": "2026-10-07T17:20:24.6751574Z",
+        "command": "node --import tsx scripts/mall-passages.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "mall-landing",
+        "script": "mall-landing.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:20:24.6775001Z",
+        "finishedAt": "2026-10-07T17:20:32.6384683Z",
+        "command": "node --import tsx scripts/mall-landing.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "qol",
+        "script": "qol-test.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:20:32.6407122Z",
+        "finishedAt": "2026-10-07T17:20:55.3980933Z",
+        "command": "node --import tsx scripts/qol-test.mjs",
+        "status": "passed"
+      },
+      {
+        "name": "loot-target",
+        "script": "loot-target-test.mjs",
+        "exit": 0,
+        "startedAt": "2026-10-07T17:20:55.4060145Z",
+        "finishedAt": "2026-10-07T17:21:14.8685943Z",
+        "command": "node --import tsx scripts/loot-target-test.mjs",
+        "status": "passed"
+      }
+    ],
+    "runtimeBoundary": {
+      "command": "node --import tsx scripts/sol-runtime-boundaries.mjs",
+      "status": "passed",
+      "passed": 5
+    },
+    "browserBoundary": {
+      "command": "node --import tsx scripts/sol-sample-boundaries.mjs",
+      "status": "partial",
+      "passed": 7,
+      "partial": 1,
+      "note": "Initial eight groups executed; F20 heap sign-off withdrawn after independent forced-GC growth review."
+    },
+    "targetLoot": {
+      "command": "node --import tsx scripts/sol-target-loot-probe.mjs",
+      "status": "passed",
+      "passed": 2
+    },
+    "lifecycle": {
+      "command": "BINCOV_SOL_ONLY=F20 BINCOV_SOL_OUT=test-results/sol-acceptance/lifecycle-final node --import tsx scripts/sol-sample-boundaries.mjs",
+      "status": "partial",
+      "exit": 1,
+      "note": "All20 complete cycles and zero resource owners; positive post-GC heap trend remains unsigned."
+    },
+    "narrowDPR": {
+      "command": "BINCOV_SOL_ONLY=F19 BINCOV_SOL_NARROW=1 BINCOV_SOL_OUT=test-results/sol-acceptance/dpr-narrow node --import tsx scripts/sol-sample-boundaries.mjs",
+      "status": "passed"
+    },
+    "visibility": {
+      "command": "node scripts/sol-visibility-probe.mjs",
+      "status": "passed-with-risk",
+      "note": "14 hidden corpse decals allocated;0 changed screen pixels under opaque roof. See Opus risk."
+    },
+    "layeredPlay": {
+      "command": "BINCOV_PLAY_OUT=test-results/sol-acceptance/layered-play node --import tsx scripts/layered-play.mjs",
+      "status": "passed",
+      "runs": 3
+    },
+    "measure": {
+      "command": "node scripts/coast-sample-measure.mjs",
+      "status": "passed"
+    },
+    "assets": {
+      "generate": "node scripts/sol-sample-assets.mjs",
+      "validate": "node scripts/sol-verify-assets.mjs",
+      "status": "passed",
+      "count": 43
+    }
+  },
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "win32",
+    "osRelease": "10.0.19045",
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12400F",
+    "logicalCpus": 12,
+    "ramBytes": 34192441344,
+    "browser": "154.0.8037.98",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "dpr": 1,
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3070 (0x00002484) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "vendor": "Google Inc. (NVIDIA)",
+    "memory": 28845104
+  },
+  "unverified": [
+    "Physical phones and physical notched display",
+    "Human G12 balance playtest",
+    "First PNG in-engine integration/style/animation/weapon pivot review by Opus",
+    "Wall/bullet pixel-mask manual signed acceptance",
+    "Remote CI for local-only Sol commit",
+    "Cause of historical intermittent save-failure screenshot",
+    "F20 no-sustained-heap-growth criterion; forced-GC trend observed"
+  ],
+  "evidence": [
+    {
+      "file": "evidence/unit.log",
+      "bytes": 22031,
+      "sha256": "b5b59a8eb8df9b6af3fbc16e270b31784efa8c054662e3b6afb1700110c7d0ff",
+      "originalBytes": 22263,
+      "originalSha256": "dc8fb4344604a2502454d0b779c928c300006a9bcf1f2c20234f35f9326232c9",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/package.log",
+      "bytes": 422,
+      "sha256": "3769111116600d7f16319b77178b154fb2d30e79c35c7b22b67b6b2ac2f7a6ef",
+      "originalBytes": 428,
+      "originalSha256": "c5cbff1fb486138e16ab84d46e465c76d4b1cc6922ee0974e39a690d0decbe31",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/core.json",
+      "bytes": 48,
+      "sha256": "88e7bfc30bfbe02adc55661d06cbd4864997970283d898f6a32a817ef7bf0f6c",
+      "originalBytes": 52,
+      "originalSha256": "cad67ff9132f1e81dba1e366737ce6a45f380804cf972fb2619aa9def60a389f",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/sample-wiring.log",
+      "bytes": 1506,
+      "sha256": "f6fe9c02f07449ca49cc9e5eb733fadb11e58722bf60e1f8d1b027ed0f80f99a",
+      "originalBytes": 1524,
+      "originalSha256": "9639d0ab18317653008b8a3b0735fec4b58d3742743dce99b67e22ac439f1839",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions.json",
+      "bytes": 3664,
+      "sha256": "4886430c0a319661f7dcff47cf243b84ec5625b5849940f848cfd91274517c82",
+      "originalBytes": 3806,
+      "originalSha256": "a815f532eecab8ee4492da32e219c08a79f76ec574d1b9c1b14564e45e307461",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/runtime-boundaries.json",
+      "bytes": 2202,
+      "sha256": "b4ad2589257f31b8498e312208e11e518698a92f9582a91fab958908a2c52b15",
+      "originalBytes": 2202,
+      "originalSha256": "b4ad2589257f31b8498e312208e11e518698a92f9582a91fab958908a2c52b15",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/runtime-boundaries.log",
+      "bytes": 390,
+      "sha256": "03c62c03136d2f034ad6bc8979e6b74f437b0fdbd0b8d55d8603450e06513977",
+      "originalBytes": 395,
+      "originalSha256": "1f4863096ad7a04f0fbd2ca0513982ae923e2604faa8938963993cf35a28274e",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/sample-boundaries.json",
+      "bytes": 16546,
+      "sha256": "aec36d9ed55514d09386ee6bcea102fa5bf490b81d7869b21ee618dd927edf49",
+      "originalBytes": 16546,
+      "originalSha256": "aec36d9ed55514d09386ee6bcea102fa5bf490b81d7869b21ee618dd927edf49",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/sample-boundaries.log",
+      "bytes": 1494,
+      "sha256": "fc39917f1ce88d3331b24eb67e5e1d7046914ca49258fe6b39bf05fa4b811eed",
+      "originalBytes": 1523,
+      "originalSha256": "6f69c8dbe41fd618780a9f247b80c0a505b8436bcdf02eb767c3da6d6cc1ed73",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/sample-boundaries-first.json",
+      "bytes": 5407,
+      "sha256": "69a909ee515b6bd77ad54022d64fed8b1be34d254e4f3dc1744ca0f67cf9d568",
+      "originalBytes": 5407,
+      "originalSha256": "69a909ee515b6bd77ad54022d64fed8b1be34d254e4f3dc1744ca0f67cf9d568",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/sample-boundaries-first.log",
+      "bytes": 2177,
+      "sha256": "d887a63c09c07fa7daaf4532831f0fda19820d5ebe83f8ce662d21db519dc929",
+      "originalBytes": 2213,
+      "originalSha256": "42cc40a59c1fecaa94eb937167703bd4d094612caec906c53cf01c8c4dad815e",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/visibility-probe.json",
+      "bytes": 1325,
+      "sha256": "47e7eef23b10a62a92f00571f4b2a90427c677b044e196572ae9cf4a19a0a915",
+      "originalBytes": 1325,
+      "originalSha256": "47e7eef23b10a62a92f00571f4b2a90427c677b044e196572ae9cf4a19a0a915",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/visibility-probe.log",
+      "bytes": 1326,
+      "sha256": "faf7823c9a05e816f1a45df66ad878c60310af63818373a84ab99a1dcd0e8126",
+      "originalBytes": 1376,
+      "originalSha256": "ef4176e7d378c96331fd7c227b0af89b4432172ad4b26275b4c1a3a0dfe6301c",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/target-loot-probe.json",
+      "bytes": 1604,
+      "sha256": "b80859085121a430272d452201358a40012d4dab74bc599d1458820a3eb31276",
+      "originalBytes": 1604,
+      "originalSha256": "b80859085121a430272d452201358a40012d4dab74bc599d1458820a3eb31276",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/target-loot-probe.log",
+      "bytes": 167,
+      "sha256": "a8af448a7fb47ec70f677b7d8720b1220990d0e7b0dde399b95648645f7c2687",
+      "originalBytes": 169,
+      "originalSha256": "e3b5eae5736b0208db30b1280aaebbb4bc3adcdef7e95772ba056d54f4c7dfb4",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/duplicate-targets.png",
+      "bytes": 134732,
+      "sha256": "7fa3bc5b30e44172bd2872aaff73d48a80cf05605c304bac1d7c42c98032afb2"
+    },
+    {
+      "file": "evidence/partial-save-fault.png",
+      "bytes": 133716,
+      "sha256": "874e0a34f497ae0135f12323f19aeda72b463b8664d71fd30014674f9f997281"
+    },
+    {
+      "file": "evidence/measure.log",
+      "bytes": 1190,
+      "sha256": "e3a279805e214cc8bd208009d0a0711b8429ff17651e4795544ea6809d3c0f7f",
+      "originalBytes": 1241,
+      "originalSha256": "c1c37d22185709a664b9b52390544b8f3d1064f2a1a73c43656c9788593a29b6",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/layered-play.log",
+      "bytes": 1988,
+      "sha256": "cfa9a7b201e6d79d9208602922ea61b52777e1b56250c9b90e07ac98f2e52246",
+      "originalBytes": 2011,
+      "originalSha256": "000b55801ae05727a99738015ffa86171f6fd5e18e6da70ce393b94d11b472e6",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/mall-click-guard.png",
+      "bytes": 66858,
+      "sha256": "d214a9a2f2484e6ceab937990b09e96719ca02b536605ec4b85bd1ba33734a96"
+    },
+    {
+      "file": "evidence/drop-save-fault.png",
+      "bytes": 118904,
+      "sha256": "9d78ce6ee1efd3c30b3dbf4d142226a8510cf19e71bb0d4e2679572571268234"
+    },
+    {
+      "file": "evidence/hidden-room-probe.png",
+      "bytes": 84283,
+      "sha256": "84d8a5c24367db513d732ea486eed86f009919d5f02186a79b1fb522ef235426"
+    },
+    {
+      "file": "evidence/hidden-room-without-decals.png",
+      "bytes": 84283,
+      "sha256": "84d8a5c24367db513d732ea486eed86f009919d5f02186a79b1fb522ef235426"
+    },
+    {
+      "file": "evidence/dpr-1.png",
+      "bytes": 152971,
+      "sha256": "85b807aae59e9e60f65185bfc940679a162e70ac3936a32c5479777ddc131162"
+    },
+    {
+      "file": "evidence/dpr-2.png",
+      "bytes": 217734,
+      "sha256": "852113b3443321c584be78659402478f463ecc97a5f3f668c4882f138445e43c"
+    },
+    {
+      "file": "evidence/dpr-3.png",
+      "bytes": 139144,
+      "sha256": "08e18c465dae71b3e524515bbb5f94c8982d61faedcd35dc054e6e15d7abe3fa"
+    },
+    {
+      "file": "evidence/regressions/browser.log",
+      "bytes": 1967,
+      "sha256": "6e22e90e929c2aec8b134756373e494a101436e2c184b0d1cd26b984aa545ee0",
+      "originalBytes": 1992,
+      "originalSha256": "cfeab6e0304e70bf5b868b8dd8c8ee79c44d1726a7eb7a15c79f7943d4c501ea",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/desktop-input.log",
+      "bytes": 560,
+      "sha256": "4c46af1ae8308bf18e8f0b70628894bda446a8e997ed8b6849086364b0a9c1d4",
+      "originalBytes": 570,
+      "originalSha256": "52631262cc186eacb1b58ffb12d8fe52049dd820874fd832959509d0068b8fe4",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/save-browser.log",
+      "bytes": 662,
+      "sha256": "61abd59814d4fe56be6416195e1912e6ba2217e0d7ee6ae83aad352b61ba0ead",
+      "originalBytes": 671,
+      "originalSha256": "8a0d4935d3e5b7517581270a535c47de38f1208b5643ddcb699f8c5b0dd03a4b",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/buildings.log",
+      "bytes": 659,
+      "sha256": "3b7e18952ef2e3753b5761a1d778ebfdd7f8cb5e8a2b078ddbaa67933a12c89a",
+      "originalBytes": 667,
+      "originalSha256": "ffcf94d53e7da354fc0fba00b826ce25fca6a2fe456568e560071ee272449b99",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/mobile.log",
+      "bytes": 801,
+      "sha256": "49dd53e391f7e7fcd87fd299a749b2828eb8776c005d5f608de184b1cd28ead6",
+      "originalBytes": 811,
+      "originalSha256": "00a99cd829ab09d01f53f4ee107e41c670b342518db0ec4bbf44b942b3883aba",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/mobile-ux.log",
+      "bytes": 849,
+      "sha256": "450c34f928a860fef44c87125041c661e9eef635a4235b5dbf0948b4f8ddb7c1",
+      "originalBytes": 860,
+      "originalSha256": "cf82a1ecfc379ec1db7dfaef3929dcfb3a51c4e74779f03c844374a2093c8ec8",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/portable.log",
+      "bytes": 3199,
+      "sha256": "bc1ccb921faa191bb05359060fb138029afb0ec9aff5517c007aa264596274a0",
+      "originalBytes": 3312,
+      "originalSha256": "45f1bc1453d0d0a6dc8771608dd5f75105f95c784f2c3133a00169e0476daf79",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/ui.log",
+      "bytes": 859,
+      "sha256": "22440257f7c8dcd7bdcb916395f90a9596cfa545882476e754806d66c13f6ec4",
+      "originalBytes": 897,
+      "originalSha256": "ecd99506c214dc59270001b840f3ac458688d1206e95abfce50ed12e1c24cc0b",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/loot.log",
+      "bytes": 3768,
+      "sha256": "624a382de225d6286df958a60ecd00f79dbdeccdab0ee8aa5a7829395f1e0ce5",
+      "originalBytes": 3812,
+      "originalSha256": "420ae55af88d8287b582175cba56f0cce30dcddd4a464a214edaca8832c1ecb6",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/expansion.log",
+      "bytes": 500,
+      "sha256": "cdaad851b9b02c434b17fadefaf374d11e7dacaffcb3dec0de39325eaa857c05",
+      "originalBytes": 505,
+      "originalSha256": "aacdc6946c7a02147dc0ba69a9db0cfde6efde79965bb7ad131279d7237a64c4",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/qol-expansion.log",
+      "bytes": 404,
+      "sha256": "f5e8ec18a0115c7484b9695efc85cfde5c0e3280290f41a4840c2cb60b781ae3",
+      "originalBytes": 408,
+      "originalSha256": "31fc7c1d0b2589adaa3ed52bf5785344e23c0026c2c3b39e416ef533d80cf390",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/systems.log",
+      "bytes": 1528,
+      "sha256": "2927a6d69c5b0449856473d26fd3974f05e2aa5d068d3a5008eb0b881c496886",
+      "originalBytes": 1544,
+      "originalSha256": "f472b0e1e0af64ca0e2e250a1214207a68f4f3c902db4267deb9a7b2ff0ce84c",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/art.log",
+      "bytes": 663,
+      "sha256": "7ca17b3f74b08b7020c73c740e4b06e7d689ceba8619c6fa04dc29d60e13af02",
+      "originalBytes": 664,
+      "originalSha256": "703b9e7a507f535800297dea65256110b10fda49d9f9f65bb555f0fa465557db",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/tactical.log",
+      "bytes": 774,
+      "sha256": "d047248e2fd1e59dcd6231d6518c77c2a60c72846cfec0e143d96749c2616c08",
+      "originalBytes": 782,
+      "originalSha256": "6e19c86227287d6bb5fffc10d8c3f2875fa6a7fdeb421a27771ea37dad53f468",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/title.log",
+      "bytes": 1782,
+      "sha256": "49f247e30a3b5f182bff9db6740b02e34b794ac0bda3a867b299a4b56474c974",
+      "originalBytes": 1809,
+      "originalSha256": "90449250c332abe4408ae80c9e14036db819209d76f52c8c2384747f2b0ec204",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/title-water.log",
+      "bytes": 1976,
+      "sha256": "187ccee7c181871012074899a3d5a8872698489ecedd942d37a0e5944ae6668d",
+      "originalBytes": 2073,
+      "originalSha256": "443f2064f6624799446bcf937bc73d3f91b0014efc98ebcb3cd294915cf8dfa7",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/mall-passages.log",
+      "bytes": 289,
+      "sha256": "c05c3039cdbc6807bc6a9fa88eb94407f999c7a53287bba090768a2280039197",
+      "originalBytes": 296,
+      "originalSha256": "5828be7296ac479a9ec0295ad934930300584d9815a836fe3a7e860886171659",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/mall-landing.log",
+      "bytes": 69,
+      "sha256": "c90c702e9599da66ff1de893f19297b3d3544f3ffda2cfa6d294478fc496dbd6",
+      "originalBytes": 70,
+      "originalSha256": "be8c44ea78a3b365a3449aebf7103c646f82066f1a176488b411d573ff7a9953",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/qol.log",
+      "bytes": 3144,
+      "sha256": "26d9fc3389723be4bcc4c5c3780177aa780ba6810c494e383369298ff5eebc9e",
+      "originalBytes": 3171,
+      "originalSha256": "4ad5215c16e9af4df5778f2c62bb65da17eda1606975962ccd7edb87e3bbfaa4",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/regressions/loot-target.log",
+      "bytes": 2252,
+      "sha256": "3b5200f2a8915ed89984731785035f142ca2fc67d7c4d8dbea4b1fb6a9339f7d",
+      "originalBytes": 2276,
+      "originalSha256": "542a6918efb41f8ceeed77142b97ee181d0b34929e5b64ebf31e494b2f01c479",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/sample-wiring.json",
+      "bytes": 6432,
+      "sha256": "642e53580038e8fe9766dc29b2e69070540c28b575f40e2be64457074665982f",
+      "originalBytes": 6432,
+      "originalSha256": "642e53580038e8fe9766dc29b2e69070540c28b575f40e2be64457074665982f",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/measure.json",
+      "bytes": 1272,
+      "sha256": "d078868ce68ef6c256b33c8704b3c9ca88fc54bb3501d7f3400a51b8c2c60a10",
+      "originalBytes": 1272,
+      "originalSha256": "d078868ce68ef6c256b33c8704b3c9ca88fc54bb3501d7f3400a51b8c2c60a10",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/layered-play-report.json",
+      "bytes": 21476,
+      "sha256": "9091373fb47a8fb56ba37df0c0cc05f3d07bb6ffb7d74ec0d51cff353f32c2dd",
+      "originalBytes": 21476,
+      "originalSha256": "9091373fb47a8fb56ba37df0c0cc05f3d07bb6ffb7d74ec0d51cff353f32c2dd",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/dpr-narrow.json",
+      "bytes": 1809,
+      "sha256": "e3ad26d4f792befa82d55af4d4ed364f8d1369dc304b3463674a05256cd04fd6",
+      "originalBytes": 1809,
+      "originalSha256": "e3ad26d4f792befa82d55af4d4ed364f8d1369dc304b3463674a05256cd04fd6",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/remote-baseline.json",
+      "bytes": 1422,
+      "sha256": "802cd06848ff2988608a1ce79a0cc37fedc5f7f4eac54d28ec8aa6651dd09574",
+      "originalBytes": 1422,
+      "originalSha256": "802cd06848ff2988608a1ce79a0cc37fedc5f7f4eac54d28ec8aa6651dd09574",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/lifecycle-gc.json",
+      "bytes": 11699,
+      "sha256": "c6d7162d3922ad2cf7899c5c25dbd3594387226b4ef4d6d9ffcdb72a039acad2",
+      "originalBytes": 11699,
+      "originalSha256": "c6d7162d3922ad2cf7899c5c25dbd3594387226b4ef4d6d9ffcdb72a039acad2",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/lifecycle-gc.log",
+      "bytes": 901,
+      "sha256": "f1a246f3e7105af958c09852a2e2af99c821caa49ea3bc9daca76c7e236fc2d8",
+      "originalBytes": 923,
+      "originalSha256": "d848b5c3702deed9f2773330d0cfbc54a38acec99dc62fb9bb7761cf9bf0a72a",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/lifecycle-final.json",
+      "bytes": 11760,
+      "sha256": "67732edf39a1324f157bd82e05f24899e19a7ef365c6ac6f1749bee0444152d7",
+      "originalBytes": 11760,
+      "originalSha256": "67732edf39a1324f157bd82e05f24899e19a7ef365c6ac6f1749bee0444152d7",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/lifecycle-final.log",
+      "bytes": 904,
+      "sha256": "ab884ec18e13ad5afc93962c082fb6b8580a33cc1635ea619ade67b69e9b7a52",
+      "originalBytes": 926,
+      "originalSha256": "c2cc9d26aca6729ac973de2d69c685c424a8bb11d0fe6ba00d004465df3fd8c4",
+      "normalization": "UTF-8, CRLF -> LF, trailing whitespace removed"
+    },
+    {
+      "file": "evidence/shots-1/index.json",
+      "bytes": 44873,
+      "sha256": "94556babf492907b4b3c7c91ea15d91bbed3b776734efd1b280f506c4ddab311",
+      "originalBytes": 44873,
+      "originalSha256": "94556babf492907b4b3c7c91ea15d91bbed3b776734efd1b280f506c4ddab311",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/shots-2/index.json",
+      "bytes": 44487,
+      "sha256": "90ee3a89372e399549c4ac335ad7de356abb52450107e0bf2a63d688d6a2f4e5",
+      "originalBytes": 44487,
+      "originalSha256": "90ee3a89372e399549c4ac335ad7de356abb52450107e0bf2a63d688d6a2f4e5",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/shots-3/index.json",
+      "bytes": 44739,
+      "sha256": "90702185c9fa6072ffc21998812a1d505fa55fe5682662a6b5f4fdde9fcb6841",
+      "originalBytes": 44739,
+      "originalSha256": "90702185c9fa6072ffc21998812a1d505fa55fe5682662a6b5f4fdde9fcb6841",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/shots-4/index.json",
+      "bytes": 44558,
+      "sha256": "34d728405b8c7ae4783eea36a5f8b0f2a8b456fd51ef8a9f8ead39a56f485c3b",
+      "originalBytes": 44558,
+      "originalSha256": "34d728405b8c7ae4783eea36a5f8b0f2a8b456fd51ef8a9f8ead39a56f485c3b",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/shots-5/index.json",
+      "bytes": 44864,
+      "sha256": "4176e01d969214d7fb53d9570611f0056f1bad597218beb6fca3e52a0d002324",
+      "originalBytes": 44864,
+      "originalSha256": "4176e01d969214d7fb53d9570611f0056f1bad597218beb6fca3e52a0d002324",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/shots-5/outside-1280x720.png",
+      "bytes": 85442,
+      "sha256": "f6699ab1f48342cf300a5bf39b966f56a20654c349298ce242a44fb74f5a2b28"
+    },
+    {
+      "file": "evidence/shots-5/outside-1920x1080.png",
+      "bytes": 81288,
+      "sha256": "666c052195af72b220b87a692279e4f0b02f3854382231608e4c91c3cf797991"
+    },
+    {
+      "file": "evidence/shots-5/outside-844x390.png",
+      "bytes": 97165,
+      "sha256": "4a8b61552b545e91b542962f9e71ea4b4faef00516537906e52b1e01776a4388"
+    },
+    {
+      "file": "evidence/shots-5/outside-640x300.png",
+      "bytes": 148755,
+      "sha256": "573946e0167847616cad30719bd201687432da1ba567dfd9a00f8657bb3222ae"
+    },
+    {
+      "file": "evidence/shots-5/cross-1280x720.png",
+      "bytes": 128108,
+      "sha256": "aa69595b629901b072e52383b8066b88c134e46e2ab6bed6072db534d3862f71"
+    },
+    {
+      "file": "evidence/shots-5/door-open-1280x720.png",
+      "bytes": 183671,
+      "sha256": "bdb90c142563ae312d25582fe5bcd0e557a981b33d2831e0f001af8fbfc8d0d9"
+    },
+    {
+      "file": "evidence/shots-5/window-1280x720.png",
+      "bytes": 187454,
+      "sha256": "d455b7984b4b6cf453118bb1a9ce5d9a95ed620ebe3ba98940508260138a1efe"
+    },
+    {
+      "file": "evidence/shots-5/upstairs-1280x720.png",
+      "bytes": 66757,
+      "sha256": "19620c465e33116e62a9e06a18a527902effcb7038b39aae0f6982a4cc081b62"
+    },
+    {
+      "file": "evidence/shots-5/basement-1280x720.png",
+      "bytes": 55989,
+      "sha256": "a99b1d2b61777b5ee3f923b031a191ca23237a64674fc8ef78571e0a2c8e54af"
+    },
+    {
+      "file": "evidence/check-basement-1280x720.png",
+      "bytes": 44598,
+      "sha256": "144f041904d10c84ee25175f7ddcc9586dc592adebc4accceff04f0863910c0a"
+    },
+    {
+      "file": "evidence/specification/03-给Sol-图片规格清单.md",
+      "bytes": 9868,
+      "sha256": "546cc0494c273aa34442722c8bc2ac7bf1b22a73a02964bccc3e5e7e2414e0f5",
+      "originalBytes": 9868,
+      "originalSha256": "546cc0494c273aa34442722c8bc2ac7bf1b22a73a02964bccc3e5e7e2414e0f5",
+      "normalization": "UTF-8, CRLF -> LF"
+    },
+    {
+      "file": "evidence/specification/07-给Sol-素材需求变更.md",
+      "bytes": 4267,
+      "sha256": "93556f2dd44ac1a21b29cafe5dea61986cba96443aee9ef7eb580567e671c98d",
+      "originalBytes": 4267,
+      "originalSha256": "93556f2dd44ac1a21b29cafe5dea61986cba96443aee9ef7eb580567e671c98d",
+      "normalization": "UTF-8, CRLF -> LF"
+    }
+  ],
+  "overallStatus": "engineering-gates-passed; A01-partial; first-assets-delivered"
+}

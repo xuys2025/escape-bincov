@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-07T17:17:27.529Z",
+  "methodology": "Offline file:// current packaged game. Screenshots are unmodified. Water diagnostic uses ?test=1 to disable rain and hold the camera; a separate static capture uses reduced motion. Synthetic state is limited to these controls; no saved-game fixture.",
+  "checks": [
+    {
+      "name": "visible water changes without rain",
+      "changedPixels": 2490
+    },
+    {
+      "name": "visible reflection changes without rain",
+      "changedPixels": 2935
+    },
+    {
+      "name": "fixed-camera diagnostic",
+      "camera": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "motion toggle preserves pose",
+      "before": [
+        {
+          "far": [
+            0,
+            0
+          ],
+          "harbor": [
+            0,
+            0
+          ],
+          "room": [
+            0.9789374603172619,
+            0
+          ],
+          "lamp": [
+            0.9789374603172619,
+            0
+          ],
+          "desk": [
+            1.9578749206345238,
+            0
+          ],
+          "chair": [
+            2.936812380951786,
+            0
+          ],
+          "fore": [
+            3.9157498412690477,
+            0
+          ]
+        },
+        61.459031263801066,
+        2,
+        52
+      ],
+      "after": [
+        {
+          "far": [
+            0,
+            0
+          ],
+          "harbor": [
+            0,
+            0
+          ],
+          "room": [
+            0.9789374603172619,
+            0
+          ],
+          "lamp": [
+            0.9789374603172619,
+            0
+          ],
+          "desk": [
+            1.9578749206345238,
+            0
+          ],
+          "chair": [
+            2.936812380951786,
+            0
+          ],
+          "fore": [
+            3.9157498412690477,
+            0
+          ]
+        },
+        61.459031263801066,
+        2,
+        52
+      ]
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "status": "passed"
+}
