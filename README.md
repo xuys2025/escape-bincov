@@ -199,6 +199,7 @@ PR 会运行 **CI & Pages / Build and test**；合并至 `main` 并验证通过�
 | 像素值守室主界面、视差、素材与验收 | [像素主界面记录](docs/title-parallax/README.md)、[素材说明](assets/title/README.md) |
 | 旧版夜港主界面（历史） | [主界面重制记录](docs/TITLE-SCREEN.md) |
 | 沿海地图 2.5D 视角、灰褐材质与 GPT Image 拼板（设计待实现） | [沿海美术设计规范](docs/COAST-2_5D-ART-DESIGN.md) |
+| 城中村真实样板 Runtime（逻辑已交付，待 Opus 接线） | [代码入口、事务服务与实际回归](docs/COAST-RUNTIME-SAMPLE.md) |
 | 玩家文案、统一术语与校对规则 | [文案约定](docs/COPY-GUIDE.md) · [校对记录](docs/COPY-REVIEW.md) |
 | 上一轮实现、验证与遗留事项 | [handoff.md](handoff.md) |
 | 离线分享及验收证据 | [便携包说明](docs/PORTABLE.md) · [验收记录](docs/ACCEPTANCE.md) |
