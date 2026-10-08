@@ -75,6 +75,8 @@ html[data-coast-sample] #toast { z-index: 120; }
 .cs-items button { padding: 0 8px; }
 .cs-items .cs-empty { color: var(--cs-muted); }
 .cs-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.cs-volume { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; color: var(--cs-muted); }
+.cs-volume input { flex: 1; max-width: 220px; accent-color: var(--cs-accent); pointer-events: auto; }
 /* Short landscape phones: the 16px pixel font is too tall for the status block; use the small system face there. */
 @media (max-height: 480px) {
   .cs-status { gap: 2px; padding: 4px 6px; min-width: 0; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 12px; line-height: 14px; }

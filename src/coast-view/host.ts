@@ -22,6 +22,8 @@ import { InventoryPanel } from './inventory';
 import { drawMap, mapPanelHtml, type MapLayout } from './map';
 import { Scope, lifecycle } from './scope';
 import { ITEM_ART_IDS, paintItem, type ItemArtId } from '../art/items';
+import { audio } from '../app';
+import { SampleSound } from './sound';
 
 export interface CoastServices {
   cancelStart(): void;
@@ -189,6 +191,7 @@ export class CoastSampleHost {
         close: () => this.closePanel(true),
         carryLimit: () => this.session.expansion?.version === 2 ? derivedLimits(this.session.expansion).carry : SURVIVAL.carryLimit,
         magazine: () => this.last?.frame.hud.weapon.mag ?? 0,
+        used: () => this.sound.used(),
       });
       this.wire();
       const tick = () => this.frame();
@@ -222,6 +225,8 @@ export class CoastSampleHost {
   }
   private readingFor: string | null = null;
   private weaponShown = '';
+  /** The game's synth audio, driven from this host's batches (see sound.ts). */
+  private readonly sound = new SampleSound(audio);
   /** setBlocked(true) was requested but no batch has shown it yet: a panel opened mid-frame must not be closed by that frame's stale phase. */
   private blockPending = 0;
 
@@ -309,6 +314,12 @@ export class CoastSampleHost {
       this.onPanelClick(e);
     });
     s.on(panel, 'change', e => { const t = e.target as HTMLSelectElement; if (t.matches('[data-exit]')) { this.selectedExit = t.value; this.redrawMap(); } });
+    s.on(panel, 'input', e => {
+      const t = e.target as HTMLInputElement; if (!t.matches('[data-volume]')) return;
+      if (this.saves.setVolume(Number(t.value))) audio.setVolume(this.session.save.settings.volume);
+      else { t.value = String(this.session.save.settings.volume); this.toast('音量设置未能保存。', true); }
+      const label = panel.querySelector('[data-volume-label]'); if (label) label.textContent = `${Math.round(this.session.save.settings.volume * 100)}%`;
+    });
   }
   private suppressClick = false;
   private questsOpen = false;
@@ -354,7 +365,9 @@ export class CoastSampleHost {
       : saveError ? `<button type="button" data-do="retry-save">重试保存</button><button type="button" data-do="backup">导出备份</button>`
       : `<button type="button" data-do="resume" ${this.contextLost ? 'disabled' : ''}>继续</button>${this.contextLost ? '<button type="button" data-do="backup">导出备份</button>' : ''}<button type="button" data-do="abandon">放弃行动</button>`;
     this.input.suppressHeld(); this.sticks.clear();
-    this.setPanel('pause', `<h2>${title}</h2><p>${text}</p><div class="cs-row">${buttons}</div>`, title);
+    // Same volume setting as the original pause overlay: one saved value for the whole game.
+    const volume = conflict || saveError ? '' : `<label class="cs-volume">游戏音量 <span data-volume-label>${Math.round(this.session.save.settings.volume * 100)}%</span><input data-volume aria-label="游戏音量" type="range" min="0" max="1" step="0.05" value="${this.session.save.settings.volume}"></label>`;
+    this.setPanel('pause', `<h2>${title}</h2><p>${text}</p>${volume}<div class="cs-row">${buttons}</div>`, title);
   }
   /** Resume only asks the Runtime; syncPanels closes the panel when the published phase is running again. */
   private resume() { if (this.contextLost) return; this.input.suppressHeld(); this.runtime.resume(); }
@@ -436,6 +449,7 @@ export class CoastSampleHost {
     if (s.committed) {
       if (this.exiting) return;
       this.exiting = true;
+      this.sound.settled((s.result as { outcome?: string } | null)?.outcome);
       text.textContent = '结算已保存。';
       row.innerHTML = '';
       this.scope.timeout(() => this.onExit({ kind: 'settled' }), 400);
@@ -448,6 +462,7 @@ export class CoastSampleHost {
   // --- HUD ---
   private hud(b: PublishedView) {
     const f = b.frame, h = f.hud, q = <T extends HTMLElement>(s: string) => this.q<T>(s), dt = this.app.ticker.deltaMS / 1000;
+    this.sound.frame(b, dt);
     q('[data-hp]').style.width = `${Math.max(0, h.hp / h.maxHp) * 100}%`; q('[data-hp-text]').textContent = `${Math.ceil(h.hp)} / ${h.maxHp}`;
     q('[data-st]').style.width = `${Math.max(0, h.stamina / h.maxStamina) * 100}%`; q('[data-st-text]').textContent = `${Math.round(h.stamina)}`;
     const w = h.weapon;
@@ -474,7 +489,7 @@ export class CoastSampleHost {
     this.root.classList.toggle('touch', this.input.touch);
     let lootChanged = false;
     for (const e of b.events) if (e.seq > this.lastSeq) {
-      this.lastSeq = e.seq; this.onEvent(e);
+      this.lastSeq = e.seq; this.onEvent(e); this.sound.event(e, b.stamp.world.mapId);
       if (e.type === 'looted' || e.type === 'rejected') lootChanged = true;
       const { seq, type, durability, stamp, ...detail } = e;
       this.eventLog.push({ seq, type, durability, map: stamp.world.mapId, epoch: stamp.epoch, detail: detail as Record<string, unknown> });
@@ -527,7 +542,7 @@ export class CoastSampleHost {
       // A note's text arrives as "title：text" after the player reads it: show it in the reading panel.
       const title = this.readingFor && this.noteTitles.has(this.readingFor) && e.text.startsWith(`${this.readingFor}：`) ? this.readingFor : null;
       if (title) { this.reading = { title, text: e.text.slice(title.length + 1) }; this.readingFor = null; this.openReading(); return; }
-      this.radio(e.text, e.seconds);
+      this.radio(e.text, e.seconds); this.sound.radio();
     }
     else if (e.type === 'rejected') { this.lastRejected = e.action === 'checkpoint' ? 'checkpoint' : e.reason === 'save-failed' ? 'save-failed' : e.action; if (e.action !== 'select-target') this.toast(REASONS[e.reason] ?? e.reason, true); }
     else if (e.type === 'looted' && e.durability === 'committed') this.toast(`获得 ${name(e.item)} ×${e.qty}${e.partial ? '（部分）' : ''}`);

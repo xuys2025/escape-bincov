@@ -3,7 +3,7 @@
  * Pixi host on the real Runtime instead of starting the Phaser RaidScene; without the flag nothing changes.
  * Only one of the two may own the SaveSession: the RaidScene is never started while this host is alive.
  */
-import { app, saveSession } from '../app';
+import { app, audio, saveSession } from '../app';
 import { createCoastRaidHost } from '../raid-runtime';
 import { createTestCoastHost } from '../raid-runtime/test-support';
 import { changeState, enterExternalRun, exportSave, toast } from '../ui';
@@ -81,6 +81,8 @@ function finish(host: CoastSampleHost) {
   if (app.coastSample === host) app.coastSample = null;
   delete document.documentElement.dataset.coastSample;
   app.game?.loop.wake();
+  // The result screen plays the extract/death cue; a run settled from the pause menu still has audio suspended.
+  audio.start();
   changeState('result');
 }
 

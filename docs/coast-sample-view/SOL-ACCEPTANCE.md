@@ -2,6 +2,8 @@
 
 > 2026-10-08 Sol 已从 `bf099cc` 完成限定签收：**OPUS-DEATH-01 敌人路径PASS**，原真实死亡检查及 **36/36** 门禁、两尺寸生命周期各4/4、原20套浏览器回归通过。玩家完整倒地不在本次范围，OPUS-DEATH-02待排期；F20仍PARTIAL、ASTRA-SAVE-01仍未确认。见[当前签收报告](sol-death-20261008/README.md)。下方97c0b44及早期轮次为历史记录，不覆盖本次结论。
 >
+> 2026-10-08 声音：新增 `node scripts/coast-audio-test.mjs`。它在输出端采样，不加自动播放参数，期望 14/14；验收时请看 `audio-waveforms.png`，确认起音与事件对齐。见 [声音报告](opus-audio-20261008/README.md)。
+>
 > 2026-10-08 第五轮（Opus 真人试玩整改）：试玩入口改为仓库根目录的 `城中村试玩.html`；样板门禁增至 **37 项**（新增 V05：握持、地面物品、撤离圆弧、搜刮停靠）；新增 `scripts/coast-playtest.mjs`（真实键鼠全流程）和 `scripts/coast-launcher-check.mjs`。第二批图片规格见 [sol-art-requests](opus-playtest-20261008/sol-art-requests.md)。
 >
 > 2026-10-08 OPUS-DEATH-01 已在本地提交修复：样板门禁增至 **36 项**（新增 V03/V04 两种素材模式的真实死亡倾倒、隐藏房间、重建与读档检查）。请按 [Opus 定向复验说明](opus-death-20261008/README.md) 第五节复验；玩家自身死亡只作为边界观察，不登记为倒地已验收。

@@ -1,0 +1,159 @@
+{
+  "at": "2026-10-08T14:45:52.755Z",
+  "base": "717856d",
+  "unit": {
+    "command": "pnpm test",
+    "tests": 229,
+    "pass": 229
+  },
+  "package": {
+    "command": "pnpm package",
+    "exit": 0
+  },
+  "artifacts": {
+    "dist/index.html": {
+      "bytes": 3156061,
+      "sha256": "4be1408745e5f0af39ef2e55ea318c2fe909ddea5f005e45026934a2c7c714e2"
+    },
+    "start the game.html": {
+      "bytes": 3156061,
+      "sha256": "4be1408745e5f0af39ef2e55ea318c2fe909ddea5f005e45026934a2c7c714e2"
+    },
+    "release/Escape-Bincov-portable.zip": {
+      "bytes": 1072822,
+      "sha256": "0e1ecccdc47e01493022b7812267985799ebf815568120b7464ec47a54aeb586"
+    },
+    "release/Escape-Bincov-web.zip": {
+      "bytes": 1069047,
+      "sha256": "db3d63e840de63982b02df8cc75aebe077d189adeeae184a56c66243ca7db2d9"
+    }
+  },
+  "audio": {
+    "passed": 14,
+    "total": 14,
+    "browser": "154.0.8037.98",
+    "autoplayOverride": false,
+    "stabilityRuns": "3 extra consecutive runs before packaging: 14/14 each"
+  },
+  "positiveControl": {
+    "html": "717856d dist (before this round)",
+    "sha256": "fac0ad28ec76c3bff8a4ebc35137444bf02de2b223416073ad23d5685a3a3c6e",
+    "passed": 1,
+    "total": 14,
+    "onlyPassing": [
+      "A1"
+    ]
+  },
+  "runs": [
+    {
+      "name": "audio",
+      "exit": 0,
+      "start": "2026-10-08T22:35:40+08:00",
+      "end": "2026-10-08T22:36:51+08:00"
+    },
+    {
+      "name": "sample",
+      "exit": 0,
+      "start": "2026-10-08T22:36:51+08:00",
+      "end": "2026-10-08T22:37:35+08:00"
+    },
+    {
+      "name": "launcher",
+      "exit": 0,
+      "start": "2026-10-08T22:37:35+08:00",
+      "end": "2026-10-08T22:37:44+08:00"
+    },
+    {
+      "name": "playtest-1280",
+      "exit": 0,
+      "start": "2026-10-08T22:37:44+08:00",
+      "end": "2026-10-08T22:38:13+08:00"
+    },
+    {
+      "name": "sol-visual",
+      "exit": 0,
+      "start": "2026-10-08T22:38:13+08:00",
+      "end": "2026-10-08T22:38:18+08:00"
+    },
+    {
+      "name": "lifecycle-1280",
+      "exit": 0,
+      "start": "2026-10-08T22:38:18+08:00",
+      "end": "2026-10-08T22:38:33+08:00"
+    },
+    {
+      "name": "lifecycle-1920",
+      "exit": 0,
+      "start": "2026-10-08T22:38:33+08:00",
+      "end": "2026-10-08T22:38:48+08:00"
+    },
+    {
+      "name": "browser",
+      "exit": 0,
+      "start": "2026-10-08T22:38:48+08:00",
+      "end": "2026-10-08T22:39:27+08:00"
+    },
+    {
+      "name": "portable",
+      "exit": 0,
+      "start": "2026-10-08T22:39:28+08:00",
+      "end": "2026-10-08T22:39:33+08:00"
+    },
+    {
+      "name": "ui",
+      "exit": 0,
+      "start": "2026-10-08T22:39:33+08:00",
+      "end": "2026-10-08T22:39:41+08:00"
+    },
+    {
+      "name": "save-browser",
+      "exit": 0,
+      "start": "2026-10-08T22:39:41+08:00",
+      "end": "2026-10-08T22:39:54+08:00"
+    },
+    {
+      "name": "desktop-input",
+      "exit": 0,
+      "start": "2026-10-08T22:39:54+08:00",
+      "end": "2026-10-08T22:40:16+08:00"
+    },
+    {
+      "name": "mobile",
+      "exit": 0,
+      "start": "2026-10-08T22:40:16+08:00",
+      "end": "2026-10-08T22:40:35+08:00"
+    },
+    {
+      "name": "mobile-ux",
+      "exit": 0,
+      "start": "2026-10-08T22:40:35+08:00",
+      "end": "2026-10-08T22:41:45+08:00"
+    },
+    {
+      "name": "qol",
+      "exit": 0,
+      "start": "2026-10-08T22:41:45+08:00",
+      "end": "2026-10-08T22:42:07+08:00"
+    },
+    {
+      "name": "loot",
+      "exit": 0,
+      "start": "2026-10-08T22:42:07+08:00",
+      "end": "2026-10-08T22:42:57+08:00"
+    },
+    {
+      "name": "audio-old",
+      "exit": 1,
+      "start": "2026-10-08T22:42:57+08:00",
+      "end": "2026-10-08T22:42:58+08:00",
+      "note": "runner error: the HTML path lost its backslashes, page.goto failed before any check; rerun as audio-old-rerun"
+    },
+    {
+      "name": "audio-old-rerun",
+      "exit": 1,
+      "start": "2026-10-08T22:43:28+08:00",
+      "end": "2026-10-08T22:45:33+08:00",
+      "note": "expected failure: positive control on the 717856d build, 1/14 (only ambience)"
+    }
+  ]
+}

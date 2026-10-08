@@ -30,6 +30,8 @@ export interface InventoryHost {
   close(): void;
   carryLimit(): number;
   magazine(): number;
+  /** A supply use committed (sound cue). */
+  used?(): void;
 }
 
 interface Drag { uid: string; source: Source; startX: number; startY: number; grabX: number; grabY: number; rotated: boolean; active: boolean; ghost: HTMLElement | null; pointerId: number }
@@ -135,7 +137,7 @@ export class InventoryPanel {
     const sel = this.selected, i = this.item(); if (!sel || !i) return;
     const loadout = this.host.session.loadout!;
     switch (a) {
-      case 'inv-use': this.result(this.host.services.useSupply(i.id, sel.source as 'bag' | 'safe', i.uid)); break;
+      case 'inv-use': { const r = this.host.services.useSupply(i.id, sel.source as 'bag' | 'safe', i.uid); if (r === 'committed') this.host.used?.(); this.result(r); break; }
       case 'inv-equip': this.result(this.host.services.equipItem(i.uid)); break;
       case 'inv-drop': this.result(this.host.services.dropItem(i.uid, sel.source as 'bag' | 'safe')); break;
       case 'inv-place': this.placement = {}; this.status = ''; this.render(); break;

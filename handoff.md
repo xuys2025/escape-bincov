@@ -8,6 +8,16 @@
 - **玩家完整倒地不在本次签收范围**，OPUS-DEATH-02仍待排期；本轮未跑可选玩家探针。F20仍PARTIAL，本轮未重采样，前轮不同口径和未归因增长全部保留；ASTRA-SAVE-01仍UNCONFIRMED。
 - 仅交付签收文档与证据，本地提交后停止；未扩量、未修改前端方案、未推送/合并/发布。真机、真人、十分钟自然计时、旧构建对照及当前本地提交远端CI未运行。
 
+## 2026-10-08 · PR #22 Opus：样板声音接通，等待用户试玩
+
+接 `717856d`。见[报告](docs/coast-sample-view/opus-audio-20261008/README.md)。
+
+- 新增 `src/coast-view/sound.ts`，按原 RaidScene 的用法驱动已有的 SynthAudio：开枪、近战、受击（伤害 ≥ 1）、脚步（0.42 秒 / 0.25 秒）、拾取、换弹、开门、无线电，以及结算时的撤离或死亡提示音。音频跟随发布的阶段：暂停、失焦、上下文丢失时挂起，继续时重启。暂停面板补上「游戏音量」滑块，与原版共用同一个存档设置。
+- 附带修复：流血和污染每帧发出的小额 hurt 不再触发受击音，也不再触发每帧白闪和血雾。
+- 实测：`node scripts/coast-audio-test.mjs` 在输出端采样，不加自动播放参数，14/14；打包前另连续 3 次各 14/14；`717856d` 上为 1/14。229 单测、package（`4be14087…`）、样板 37/37、跳转页、全流程、Sol visual、生命周期两尺寸、9 套原回归均通过。真实窗口切换在 headless 下改用游戏监听的 blur 和 visibilitychange 事件代替，需真人确认。
+- 交 GPT 侧（Astra 主责，Sol 回归）：SynthAudio 恢复期间提示音被静默丢弃，原游戏从暂停菜单放弃时死亡音也丢失（main 已复现）。样板目前用 150 ms 延迟变通。复现在工作标准的缺陷登记。
+- 仅本地提交；未推送、合并或发布。
+
 ## 2026-10-08 · PR #22 Opus 第五轮：真人试玩整改，等待用户试玩
 
 在原分支从 `05aaee6` 接手，工作区干净；main 仍为 841e8bb，已在分支中；PR #22 OPEN，头 878f563。见[报告](docs/coast-sample-view/opus-playtest-20261008/README.md)、[整改前后对比](docs/coast-sample-view/opus-playtest-20261008/evidence/compare/)、[Sol 第二批图片规格](docs/coast-sample-view/opus-playtest-20261008/sol-art-requests.md)。

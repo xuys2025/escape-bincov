@@ -375,7 +375,8 @@ export class CoastView {
         break;
       }
       case 'hurt': {
-        const g = this.actors.get(e.uid); if (!g) break;
+        // Bleeding and pollution publish a tiny hurt every frame (no angle): no flash, kick or blood spray for those.
+        const g = this.actors.get(e.uid); if (!g || (e.angle === null && e.damage < 1)) break;
         const ang = e.angle ?? 0;
         g.flashT = .07; g.kick = e.angle === null ? { x: 0, y: 0 } : { x: Math.cos(ang) * 2, y: Math.sin(ang) * 2 }; g.kickT = .08;
         const a = actor(e.uid); if (a && shown(a)) this.fx.blood(a.x, a.y + .5, AIM_H, ang, this.rnd);
