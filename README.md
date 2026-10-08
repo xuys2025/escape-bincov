@@ -183,6 +183,7 @@ PR 会运行 **CI & Pages / Build and test**；合并至 `main` 并验证通过�
 | 建筑、RPG 与商场实施任务与验收 | [总实施计划](docs/IMPLEMENTATION-PLAN.md) |
 | PR16实施候选、详细计划与73项验收状态 | [实施记录](docs/PR16-IMPLEMENTATION.md) · [详细计划](docs/PR16-DEVELOPMENT-PLAN.md) · [逐项登记](docs/PR16-ACCEPTANCE-REGISTER.md) |
 | 当前任务、需求登记与 PR 归属 | [统一任务清单](docs/WORK-QUEUE.md) |
+| PR22 完成后的改枪规划：20 枪与 100 配件 | [改枪计划与前置条件](docs/gunsmith/README.md) |
 | Agent 必须遵守的规则 | [AGENTS.md](AGENTS.md) |
 | 架构、开发流程、验证与交接 | [Agent 开发手册](docs/AGENT-HANDBOOK.md) |
 | 应用状态、存档事务与后续扩展 | [架构说明](docs/ARCHITECTURE.md) |
