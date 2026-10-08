@@ -103,6 +103,8 @@ try {
       const paused = await bytes(p); decodeSession(paused);
       await p.keyboard.press('Escape');
       await p.evaluate(() => document.querySelector('[data-do="resume"]')?.click());
+      assert.equal(await p.locator('[data-do="resume"]').isEnabled(), false);
+      await p.keyboard.down('d');
       await p.waitForTimeout(2300);
       assert.ok((await bytes(p)) === paused, 'context loss must keep the world and saved time frozen');
       await p.evaluate(() => window.__life.loss.restoreContext());
@@ -110,6 +112,9 @@ try {
       assert.equal(await p.evaluate(() => window.__life.live.canvas === document.querySelector('.coast-sample canvas')), true, 'same canvas restored');
       await p.screenshot({ path: resolve(out, 'context-restored-paused.png') });
       assert.ok(await p.locator('[data-do="resume"]').isVisible());
+      await p.waitForTimeout(2300);
+      assert.equal(await bytes(p), paused, 'restored canvas must remain paused with a held movement key');
+      await p.keyboard.up('d');
       await p.locator('[data-do="resume"]').click(); await p.waitForTimeout(2300);
       const resumed = decodeSession(await bytes(p));
       assert.ok(resumed.expansion.raid.elapsed > JSON.parse(paused).expansion.raid.elapsed);
@@ -128,7 +133,7 @@ try {
       await p.locator('[data-action="return"]').click();
       await p.locator('[data-action="deploy"]').click(); await p.waitForSelector('.coast-sample canvas');
       assert.deepEqual(errors, []);
-      return { hooksAbsent: true, lostFrozen: true, nativeRestored: true, failedSettlementRetained: true, nextRaidMounted: true };
+      return { hooksAbsent: true, lostFrozen: true, heldMovementBlocked: true, nativeRestored: true, restoredRemainedPaused: true, failedSettlementRetained: true, nextRaidMounted: true };
     } finally { report.checks.at(-1).errors = errors; await ctx.close(); }
   });
 } finally { await browser.close(); }

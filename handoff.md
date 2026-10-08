@@ -1,3 +1,14 @@
+## 2026-10-08 · PR #22 Sol 从97c0b44复验，交回后停止
+
+在原分支 `docs/coast-2-5d-art-design` 从 `97c0b44` 接手，初始干净；main仍为841e8bb，原PR #22 OPEN/头878f563，Pages逐字节等于main且不含本地样板。见[本轮真实报告](docs/coast-sample-view/sol-round4-20261008/README.md)、[归属清单](docs/coast-sample-view/sol-round4-20261008/defects.md)、[素材需求](docs/coast-sample-view/sol-round4-20261008/material-requirements.md)。
+
+- qol-expansion原生E之后补lootContext/overlay状态等待，原26条assert保留；20次新浏览器连续通过，完整回归另过1次。224单测、package、样板32项、原20浏览器回归通过，正式生成物与97c0b44逐字节相同。
+- 生命周期PASS：普通入口1280/1920各4/4，加强持续移动键、真实原canvas恢复后仍暂停断言；启动故障清理/重试、结算失败保留及成功后下一局通过。
+- F20 PARTIAL：严格结果页+379,727.2B（exit1）；基地三次GC完整A/B+317,704.0/+332,122.4B，普通对照+328,469.6B。第6/20轮旧Runtime/Host/View等为0；页面池1、stage空/ticker停/canvas脱DOM、GPU纹理2、shader81→81。不同采样/GC/快照口径保留，self_size启发式和强路径不等于dominator或完整/有界归因。
+- 背向持枪、15组镜像与短屏地图代表检查通过；**真实敌人倒地过渡FAIL**：syncActor先创建corpse，随后death事件无法启动deathT，0～0.2秒直接尸体，Sol/placeholder两路径独立复现，交Opus。无需下蹲或西向补图；43 PNG不变，未扩量。
+- ASTRA-SAVE-01仍UNCONFIRMED。三类分类故障、普通样板外与驱动检查点、68截图无异常不等于历史已修复；原诊断保留。
+- 未修改生产源码、前端方案、运行资产/manifest或正式HTML/ZIP；没有推送、合并、发布。本地提交完成后停止，等待Opus修展示与Astra继续增长/存档归因。
+
 ## 2026-10-08 · PR #22 第四轮后续：Astra 生命周期与定向诊断
 
 从原分支 bcf7304 接手；main 841e8bb 已在分支，PR #22 远端仍为 fork 的 878f563。本轮按用户要求仅本地提交。详见[交接与 Sol 签收标准](docs/coast-sample-view/astra-lifecycle-20261008/README.md)。

@@ -1,0 +1,39 @@
+{
+  "status": "failed",
+  "checks": [
+    {
+      "id": "R09-runtime-mirror",
+      "status": "passed"
+    },
+    {
+      "id": "R10-real-death-sol",
+      "status": "failed",
+      "reason": "No visible fall: first dead frame already has corpse, deathT stays zero. syncActor precedes onEvent(death).",
+      "first": {
+        "at": 1721.8999999985099,
+        "dt": 0.006,
+        "deathEvents": 1,
+        "deathT": 0,
+        "rotation": 0,
+        "body": false,
+        "weapon": false,
+        "corpse": true
+      }
+    },
+    {
+      "id": "R10-real-death-placeholder",
+      "status": "failed",
+      "reason": "No visible fall: first dead frame already has corpse, deathT stays zero. syncActor precedes onEvent(death).",
+      "first": {
+        "at": 1312.699999999255,
+        "dt": 0.0061000000000001366,
+        "deathEvents": 1,
+        "deathT": 0,
+        "rotation": 0,
+        "body": false,
+        "weapon": false,
+        "corpse": true
+      }
+    }
+  ]
+}

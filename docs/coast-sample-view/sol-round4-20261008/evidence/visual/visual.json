@@ -1,0 +1,756 @@
+{
+  "at": "2026-10-08T12:07:12.648Z",
+  "node": "v24.19.0",
+  "htmlSHA256": "88ca4cf44377533c385284994f41a837aa0004fd3e8d3614d11276a689a1684d",
+  "method": "Exact formal bundle; actual Runtime damageEnemy via driver.kill; hook observes present after normal call; no manual deathT/corpse/event ordering change. Mirror compares actual cached body canvases, not the source PNG alone.",
+  "checks": [
+    {
+      "id": "R09-runtime-mirror",
+      "status": "passed",
+      "pairs": [
+        {
+          "a": 0,
+          "b": 4,
+          "frame": 0,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "frame": 1,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "frame": 2,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "frame": 3,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "frame": 4,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frame": 0,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frame": 1,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frame": 2,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frame": 3,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frame": 4,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 7,
+          "b": 5,
+          "frame": 0,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 7,
+          "b": 5,
+          "frame": 1,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 7,
+          "b": 5,
+          "frame": 2,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 7,
+          "b": 5,
+          "frame": 3,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 7,
+          "b": 5,
+          "frame": 4,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        }
+      ]
+    },
+    {
+      "id": "R10-real-death-sol",
+      "status": "failed",
+      "reason": "No visible fall: first dead frame already has corpse, deathT stays zero. syncActor precedes onEvent(death).",
+      "first": {
+        "at": 1721.8999999985099,
+        "dt": 0.006,
+        "deathEvents": 1,
+        "deathT": 0,
+        "rotation": 0,
+        "body": false,
+        "weapon": false,
+        "corpse": true
+      },
+      "sampleTimes": [
+        0.00010000000149011611,
+        0.04310000000149011,
+        0.08590000000223517,
+        0.1261000000014901,
+        0.20090000000223518
+      ],
+      "rows": [
+        {
+          "at": 1721.8999999985099,
+          "dt": 0.006,
+          "deathEvents": 1,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1744.3999999985099,
+          "dt": 0.024200000000000044,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1748.8999999985099,
+          "dt": 0.006200000000000046,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1753.5999999977648,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1759.199999999255,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1765,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1778.5999999977648,
+          "dt": 0.012200000000000046,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1783.0999999977648,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1789.300000000745,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1795.800000000745,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1801.3999999985099,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1807.800000000745,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1823.0999999977648,
+          "dt": 0.012100000000000137,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1826.5,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1833.300000000745,
+          "dt": 0.006200000000000046,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1840.0999999977648,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1848,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1861.0999999977648,
+          "dt": 0.012199999999999819,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1868.5,
+          "dt": 0.012100000000000137,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1874.0999999977648,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1881.800000000745,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1887.300000000745,
+          "dt": 0.006200000000000046,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1892.8999999985099,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1898.300000000745,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1905.5,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1910.300000000745,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1917.199999999255,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1922.800000000745,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1938.199999999255,
+          "dt": 0.01209999999999991,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        }
+      ]
+    },
+    {
+      "id": "R10-real-death-placeholder",
+      "status": "failed",
+      "reason": "No visible fall: first dead frame already has corpse, deathT stays zero. syncActor precedes onEvent(death).",
+      "first": {
+        "at": 1312.699999999255,
+        "dt": 0.0061000000000001366,
+        "deathEvents": 1,
+        "deathT": 0,
+        "rotation": 0,
+        "body": false,
+        "weapon": false,
+        "corpse": true
+      },
+      "sampleTimes": [
+        0,
+        0.040900000002235176,
+        0.0835,
+        0.12030000000074506,
+        0.20490000000223518
+      ],
+      "rows": [
+        {
+          "at": 1312.699999999255,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 1,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1339,
+          "dt": 0.0305,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1342.6000000014901,
+          "dt": 0.0057999999999999545,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1347.5,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1353.6000000014901,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1380.800000000745,
+          "dt": 0.018299999999999955,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1384.1000000014901,
+          "dt": 0.012,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1390,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1396.199999999255,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1421.1000000014901,
+          "dt": 0.024200000000000044,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1426.9000000022352,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1433,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1455.300000000745,
+          "dt": 0.018299999999999955,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1458.9000000022352,
+          "dt": 0.005900000000000091,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1462.699999999255,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1468.800000000745,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1474.800000000745,
+          "dt": 0.006299999999999955,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1480.800000000745,
+          "dt": 0.0057999999999999545,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1486.699999999255,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1492.800000000745,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1499,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1505.1000000014901,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1511.4000000022352,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1517.6000000014901,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1536,
+          "dt": 0.018200000000000046,
+          "deathEvents": 0,
+          "deathT": 0,
+          "rotation": 0,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "status": "failed"
+}

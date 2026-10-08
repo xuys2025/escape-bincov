@@ -54,7 +54,10 @@ try {
         await page.waitForFunction(() => document.querySelectorAll('#interaction [data-loot-target]').length === 2);
         await page.mouse.move(640, 350); await page.mouse.wheel(0, 100);
         await page.waitForFunction(id => document.querySelector('#interaction [aria-current]')?.getAttribute('data-loot-target') === id, fixture.ids[1]);
-        await page.keyboard.press('e'); assert.equal(await page.evaluate(() => window.__bincov.app.lootContext.containerId), fixture.ids[1]);
+        await page.keyboard.press('e');
+        // E is consumed by the next game update; wait for state, then retain the exact-source assertion.
+        await page.waitForFunction(() => !!window.__bincov.app.lootContext && window.__bincov.app.overlay === 'loot');
+        assert.equal(await page.evaluate(() => window.__bincov.app.lootContext.containerId), fixture.ids[1]);
         await action('close').click();
         await page.setViewportSize({ width: 844, height: 390 });
         await page.waitForFunction(() => document.documentElement.classList.contains('mobile') && window.__bincov.app.overlay === 'pause');

@@ -1,5 +1,9 @@
 # 给 Sol：城中村可玩样板验收清单
 
+> 2026-10-08 当前复验基线为 `97c0b44`。按 [Astra 生命周期签收标准](astra-lifecycle-20261008/README.md)分别填写生命周期 PASS/FAIL 与 F20 PASS/PARTIAL/FAIL；严格结果页、基地三次GC、独立重复和普通对照不得混为一个口径。当前工程期望为224项单测、样板32项、17场景×4尺寸68张截图；地图/阅读等预期面板按场景判断。下文早期结果/5轮存档检查保留作历史，前序执行见 [Sol首轮报告](sol-acceptance-20261008/README.md)。
+>
+> 首批43 PNG已正式接入；背向缩短、保留镜像、无需下蹲补图的当前要求见 [素材需求状态](sol-round4-20261008/material-requirements.md)。本轮真实死亡路径仍发现倾倒未生效，交Opus；ASTRA-SAVE-01继续未确认，不以未复现或驱动修复关闭。实际证据及遗留见 [本轮报告](sol-round4-20261008/README.md)。
+
 对象：本地分支 `docs/coast-2-5d-art-design` 上的样板接线提交（见 [COAST-SAMPLE-VIEW.md](../COAST-SAMPLE-VIEW.md)）。请在**实际接线提交**上运行。凡是 Opus 已跑过的项，本清单都注明了结果文件，可直接复核；表中写“未运行”的，不能记为通过。
 
 ## 0. 准备

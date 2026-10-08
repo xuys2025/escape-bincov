@@ -1,0 +1,11 @@
+$ node scripts/mobile-test.mjs
+PASS portrait hideout matrix keeps controls readable and reachable
+PASS tap inventory transfers, native scroll and explicit grid placement
+PASS two trusted touch pointers move and fire together; release stops fire
+PASS rejected healing preserves the other thumb movement without consuming medicine
+PASS pointer cancellation and rotation never leave movement, fire or extraction held
+PASS loot pickup commits removal with inventory; checkpoint restores bullets and RNG
+PASS live backup round trip and failed medical transaction preserve consistent state
+PASS short landscape layout fits all active touch targets and map text remains readable
+PASS hold extraction is cancellable and successful settlement cannot restore the run
+PASS unsupported record stays untouched and original bytes can be exported
