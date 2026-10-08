@@ -1,0 +1,114 @@
+$ node scripts/portable-test.mjs
+{
+  "portable": true,
+  "status": "passed",
+  "startedAt": "2026-10-08T13:03:36.563Z",
+  "archive": "D:\\bincov\\pr22-runtime\\release\\Escape-Bincov-portable.zip",
+  "browser": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "offline": true,
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "steps": [
+    {
+      "name": "extract exactly the two portable files into a fresh Chinese and space path",
+      "status": "passed",
+      "detail": {
+        "files": [
+          "README-游玩说明.txt",
+          "start the game.html"
+        ],
+        "htmlBytes": 3146669,
+        "sha256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e"
+      }
+    },
+    {
+      "name": "normal offline entry shows the menu without exposing test hooks",
+      "status": "passed"
+    },
+    {
+      "name": "enter the safe house and deploy seed 42 using real buttons",
+      "status": "passed",
+      "detail": {
+        "atDeploy": "10:00",
+        "after": "09:59",
+        "countedDown": true
+      }
+    },
+    {
+      "name": "one real left click fires one round: 8 to 7",
+      "status": "passed",
+      "detail": {
+        "before": 8,
+        "after": 7,
+        "input": "real left mouse click",
+        "target": {
+          "x": 716.8,
+          "y": 360
+        }
+      }
+    },
+    {
+      "name": "Tab opens the action inventory and its close button dismisses it",
+      "status": "passed",
+      "detail": {
+        "openedWithTab": true,
+        "closedWithButton": true
+      }
+    },
+    {
+      "name": "Escape pauses play and the visible clock stays unchanged",
+      "status": "passed",
+      "detail": {
+        "before": "09:59",
+        "after": "09:59",
+        "observedMs": 1500,
+        "unchanged": true
+      }
+    }
+  ],
+  "externalRequests": [],
+  "unexpectedFileRequests": [],
+  "errors": [],
+  "methodology": "Extract the shared ZIP outside the workspace; open its file:// HTML without test hooks; use real buttons and keyboard/mouse input; read the visible HUD. No fixtures, original assets, server, screenshots, or internet access.",
+  "extractionDirectory": "C:\\Users\\xty\\AppData\\Local\\Temp\\滨科夫 portable test WVPnF4",
+  "sha256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e",
+  "archiveSha256": "5e87fca7f44eb3bc847883aabd8eea8eed0080537e19533954697cbbab6adc92",
+  "htmlBytes": 3146669,
+  "archiveBytes": 1070057,
+  "files": [
+    "README-游玩说明.txt",
+    "start the game.html"
+  ],
+  "entry": "file:///C:/Users/xty/AppData/Local/Temp/%E6%BB%A8%E7%A7%91%E5%A4%AB%20portable%20test%20WVPnF4/start%20the%20game.html",
+  "browserVersion": "154.0.8037.98",
+  "testHookAbsent": true,
+  "seed": 42,
+  "timer": {
+    "atDeploy": "10:00",
+    "after": "09:59",
+    "countedDown": true
+  },
+  "ammo": {
+    "before": 8,
+    "after": 7,
+    "input": "real left mouse click",
+    "target": {
+      "x": 716.8,
+      "y": 360
+    }
+  },
+  "inventory": {
+    "openedWithTab": true,
+    "closedWithButton": true
+  },
+  "pause": {
+    "before": "09:59",
+    "after": "09:59",
+    "observedMs": 1500,
+    "unchanged": true
+  },
+  "temporaryDirectoryRemoved": true,
+  "finishedAt": "2026-10-08T13:03:41.511Z"
+}

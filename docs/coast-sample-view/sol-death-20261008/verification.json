@@ -1,0 +1,2047 @@
+{
+  "at": "2026-10-08T13:06:37.264Z",
+  "base": "bf099cc9a2f3aef86c7b45feea357d8ce940cbbb",
+  "branch": "docs/coast-2-5d-art-design",
+  "baseline": {
+    "at": "2026-10-08T12:59:31.281Z",
+    "head": "bf099cc9a2f3aef86c7b45feea357d8ce940cbbb",
+    "branch": "docs/coast-2-5d-art-design",
+    "main": "841e8bbdfb070eada82537563dd1ab1b4801aea3",
+    "initialStatus": "",
+    "node": "v24.19.0",
+    "platform": "win32",
+    "release": "10.0.19045",
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12400F",
+    "logicalCPUs": 12,
+    "totalMemory": 34192441344,
+    "pr": {
+      "url": "https://github.com/xuys2025/escape-bincov/pull/22",
+      "state": "open",
+      "merged": false,
+      "headRepository": "LMX-323/escape-bincov",
+      "headBranch": "docs/coast-2-5d-art-design",
+      "headSHA": "878f5633316a824960091f8f924c0ddd8dd78078",
+      "body": "## 为什么需要这个改动\n\n为当前沿海地图制定可执行的视角与材质规范：采用已确认的 A 方案（俯视方格地面＋可见立面），转向低饱和灰褐废土，并规定 GPT Image 同图多素材拼板、切分与验收流程。所有重绘能力均标注“设计待实现”，当前玩家画面和行为不变。\n\n## 任务归属与交付边界\n\n- 任务入口：docs/WORK-QUEUE.md 的“沿海地图 2.5D 视角与像素材质”。\n- 关联 PR / 依赖：以已接受 main `425f32013bd04da668ca5924f25fa2fef926b2c9` 为基线，保留 #16 建筑规则、#20 美术和 #21 主菜单成果。\n- 新建理由：维护者明确授权的独立中文设计文档交付；开始时没有开放 PR。不是主菜单续作，不另开代码实现线。\n- 本次范围：设计文档、README 导航、任务登记及 handoff；完成条件为文档事实/格式/链接核对与审阅。\n- 不包含：代码、素材生成、游戏测试、打包、存档迁移、部署；商场、基地、主菜单与库存 UI 不纳入重绘。\n\n## 改了什么\n\n- 定义脚底坐标、八方向直立人物与连续瞄准、分段排序、屋顶/前墙遮挡及信息边界。\n- 提供尺寸表、13 色基础色板、9 类材质、共用与五个区域的 P0/P1/P2 素材清单。\n- 规定 4×4、3×3、2×2 拼板及独立人物朝向板，提供三套中文提示词和局部返修模板；不把生成候选板当作运行图集。\n- 记录 Alpha、切分、像素整理、锚点、素材追溯与离线内联约束，并列出 6 项素材和 12 项未来游戏验收。\n\n## 验证证据\n\n| 检查/命令 | 结果 | 说明 |\n| --- | --- | --- |\n| 基线 | 通过 | Git fetch 与 GitHub main 均确认 425f320；任务清单和开放 PR 已核对 |\n| 文档检查 | 通过 | 新文档及新增导航的相对链接；9 张表格/99 行；18 个未来验收编号；13 色；尺寸算术与围栏 |\n| 源码事实 | 通过 | 7 项检查：地块/地图尺寸、屋顶与密封规则、PNG data URL、独立外观变体；另人工核对角色旋转/快照等调用 |\n| git diff --check | 通过 | 修正新文件末尾空行后，全量文档差异通过 |\n| pnpm test | 未运行 | 本地只有设计文档改动；PR 自动 CI 另行执行 |\n| pnpm package | 不适用 | 未改变游戏源码、打包脚本或玩家游玩说明 |\n| 对应浏览器检查 | 未运行 | 无实现画面变化，无截图冒充实现证据 |\n| 上传一致性 | 通过 | 连接器创建的完整文件树与本地已验收树一致 |\n\n## 兼容性、风险与剩余问题\n\n不改 API、存档、运行资产、许可或发布包；不调用绘图工具、不消耗绘图额度。原工作区未提交内容完整保留，使用独立工作树。后续素材质量、游戏实现、真人辨识、真机与性能仍待独立验收；拼板不承诺固定节省比例。上游无写权限，按规则由 fork 提交，不自行合并。\n\n## 交付自查\n\n- [x] 已核对最新 main、任务清单及开放 PR，未覆盖他人工作。\n- [x] 新建 PR 的独立文档交付理由明确。\n- [x] 遵循 AGENTS.md，变更范围与明确需求一致。\n- [x] 文档检查已实际执行，游戏检查未运行的原因已记录。\n- [x] 本次不满足重新打包条件，生成物与发布清单保持不变。\n- [x] 同步任务归属、文档导航和 handoff，等待维护者审阅合并。\n",
+      "comments": [
+        {
+          "url": "https://github.com/xuys2025/escape-bincov/pull/22#issuecomment-6052268742",
+          "at": "2026-10-08T04:30:47Z",
+          "body": "已排期 预期需3工作日完工"
+        }
+      ],
+      "reviews": [],
+      "checks": []
+    },
+    "pages": {
+      "url": "https://xuys2025.github.io/escape-bincov/",
+      "bytes": 2416678,
+      "sha256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+      "mainHTMLSHA256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+      "equalsMain": true
+    },
+    "scope": "Local OPUS-DEATH-01 verification only; no remote mutations."
+  },
+  "environment": {
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "browser": "154.0.8037.98"
+  },
+  "signoff": {
+    "OPUS-DEATH-01": "PASS: tested enemy paths in both art modes",
+    "lifecycle": "PASS: ordinary formal entry, two sizes, four gates each",
+    "F20": "PARTIAL inherited; not rerun in this narrowly scoped round",
+    "ASTRA-SAVE-01": "UNCONFIRMED",
+    "OPUS-DEATH-02": "UNSCHEDULED: complete player terminal fall excluded"
+  },
+  "commands": [
+    {
+      "id": "test",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T12:59:31.444Z",
+      "finished": "2026-10-08T12:59:37.260Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "package",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "package"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T12:59:37.260Z",
+      "finished": "2026-10-08T12:59:41.444Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "sol-visual",
+      "args": [
+        "scripts/sol-round4-visual.mjs"
+      ],
+      "environment": {
+        "BINCOV_VISUAL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-death-20261008/visual"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:00:10.419Z",
+      "finished": "2026-10-08T13:00:15.086Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "sample",
+      "args": [
+        "scripts/coast-sample-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_SAMPLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-death-20261008/sample"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:00:15.087Z",
+      "finished": "2026-10-08T13:00:55.917Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "lifecycle-1280",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/coast-lifecycle-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_LIFECYCLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-death-20261008/lifecycle-1280",
+        "BINCOV_LIFECYCLE_WIDE": ""
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:10.280Z",
+      "finished": "2026-10-08T13:01:30.223Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "lifecycle-1920",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/coast-lifecycle-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_LIFECYCLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-death-20261008/lifecycle-1920",
+        "BINCOV_LIFECYCLE_WIDE": "1"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:30.224Z",
+      "finished": "2026-10-08T13:01:49.318Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "shots",
+      "args": [
+        "scripts/coast-sample-shots.mjs"
+      ],
+      "environment": {
+        "BINCOV_SHOTS_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-death-20261008/shots"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:09.915Z",
+      "finished": "2026-10-08T13:02:54.307Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-ui",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:ui"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:09.549Z",
+      "finished": "2026-10-08T13:01:21.331Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-tactical",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:tactical"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:21.332Z",
+      "finished": "2026-10-08T13:01:42.216Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-art",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:art"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:42.217Z",
+      "finished": "2026-10-08T13:01:59.545Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-title",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:title"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:59.546Z",
+      "finished": "2026-10-08T13:03:04.859Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-title-water",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:title-water"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:03:04.860Z",
+      "finished": "2026-10-08T13:03:15.467Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-save-browser",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:save-browser"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:11.855Z",
+      "finished": "2026-10-08T13:01:29.488Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-expansion",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:expansion"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:29.489Z",
+      "finished": "2026-10-08T13:01:42.096Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-qol-expansion",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:qol-expansion"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:42.098Z",
+      "finished": "2026-10-08T13:01:49.174Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-loot",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:loot"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:49.175Z",
+      "finished": "2026-10-08T13:02:51.419Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-loot-target",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:loot-target"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:02:51.419Z",
+      "finished": "2026-10-08T13:03:12.386Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-qol",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:qol"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:03:12.387Z",
+      "finished": "2026-10-08T13:03:35.753Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-portable",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:portable"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:03:35.754Z",
+      "finished": "2026-10-08T13:03:41.542Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-buildings",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:buildings"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:09.945Z",
+      "finished": "2026-10-08T13:01:27.962Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-systems",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:systems"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:27.962Z",
+      "finished": "2026-10-08T13:02:17.389Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-mall-passages",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:mall-passages"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:02:17.389Z",
+      "finished": "2026-10-08T13:05:07.132Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-mall-landing",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:mall-landing"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:05:07.132Z",
+      "finished": "2026-10-08T13:05:15.232Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-browser",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:browser"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:09.806Z",
+      "finished": "2026-10-08T13:01:53.211Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-desktop-input",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:desktop-input"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:01:53.212Z",
+      "finished": "2026-10-08T13:02:21.440Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-mobile",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:mobile"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:02:21.442Z",
+      "finished": "2026-10-08T13:02:42.438Z",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "id": "regression-mobile-ux",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:mobile-ux"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T13:02:42.438Z",
+      "finished": "2026-10-08T13:03:53.409Z",
+      "exitCode": 0,
+      "signal": null
+    }
+  ],
+  "deathGates": [
+    {
+      "name": "V03 sol: a real Runtime kill in view tips the standing body over its feet, weapon gone, before the corpse replaces it",
+      "status": "passed",
+      "detail": {
+        "art": "sol",
+        "deathFrame": {
+          "uid": "enemy-3",
+          "dt": 0.006,
+          "alive": false,
+          "death": true,
+          "rebuilt": false,
+          "map": "coast",
+          "epoch": 2,
+          "deathT": 0.0061,
+          "rotation": -0.04765625,
+          "body": true,
+          "weapon": false,
+          "corpse": false,
+          "hasCorpse": false,
+          "corpseKey": "",
+          "shown": true
+        },
+        "fallFrames": 23,
+        "rotations": [
+          -0.048,
+          -0.142,
+          -0.237,
+          -0.284,
+          -0.331,
+          -0.427,
+          -0.473,
+          -0.521,
+          -0.569,
+          -0.616,
+          -0.663,
+          -0.675,
+          -0.722,
+          -0.769,
+          -0.816,
+          -0.863,
+          -0.911,
+          -0.959,
+          -1.006,
+          -1.1,
+          -1.148,
+          -1.195,
+          -1.243
+        ],
+        "handoffDeathT": 0.16509999999776473,
+        "facing": -1,
+        "crops": [
+          {
+            "deathT": 0.0061,
+            "rotation": -0.04765625,
+            "corpse": false,
+            "changedFromDeathFrame": 0
+          },
+          {
+            "deathT": 0.04239999999999996,
+            "rotation": -0.33124999999999966,
+            "corpse": false,
+            "changedFromDeathFrame": 5652
+          },
+          {
+            "deathT": 0.08489999999999996,
+            "rotation": -0.6632812499999997,
+            "corpse": false,
+            "changedFromDeathFrame": 6201
+          },
+          {
+            "deathT": 0.12269999999776485,
+            "rotation": -0.9585937499825379,
+            "corpse": false,
+            "changedFromDeathFrame": 6741
+          },
+          {
+            "deathT": 0.16509999999776473,
+            "rotation": -1.2429687499825368,
+            "corpse": true,
+            "changedFromDeathFrame": 7803
+          },
+          {
+            "deathT": 0.30449999999776484,
+            "rotation": -1.2429687499825368,
+            "corpse": true,
+            "changedFromDeathFrame": 7812
+          }
+        ]
+      }
+    },
+    {
+      "name": "V04 sol: no fall for a kill in an unrevealed room (0 changed pixels), nor for corpses rebuilt by an epoch, the stairs or a reload",
+      "status": "passed",
+      "detail": {
+        "hidden": {
+          "frames": 14,
+          "changed": 0
+        },
+        "reveal": 11,
+        "indoorFallFrames": 25,
+        "stairs": 13,
+        "loaded": [
+          {
+            "uid": "enemy-3",
+            "deathT": 0,
+            "rotation": 0,
+            "body": false,
+            "hasCorpse": true,
+            "shown": true
+          },
+          {
+            "uid": "enemy-12",
+            "deathT": 0,
+            "rotation": 0,
+            "body": false,
+            "hasCorpse": true,
+            "shown": true
+          },
+          {
+            "uid": "enemy-21",
+            "deathT": 0,
+            "rotation": 0,
+            "body": false,
+            "hasCorpse": true,
+            "shown": true
+          }
+        ],
+        "resumed": 45
+      }
+    },
+    {
+      "name": "V03 placeholder: a real Runtime kill in view tips the standing body over its feet, weapon gone, before the corpse replaces it",
+      "status": "passed",
+      "detail": {
+        "art": "placeholder",
+        "deathFrame": {
+          "uid": "enemy-3",
+          "dt": 0.006,
+          "alive": false,
+          "death": true,
+          "rebuilt": false,
+          "map": "coast",
+          "epoch": 2,
+          "deathT": 0.0061,
+          "rotation": -0.04765625,
+          "body": true,
+          "weapon": false,
+          "corpse": false,
+          "hasCorpse": false,
+          "corpseKey": "",
+          "shown": true
+        },
+        "fallFrames": 25,
+        "rotations": [
+          -0.048,
+          -0.143,
+          -0.238,
+          -0.284,
+          -0.332,
+          -0.38,
+          -0.427,
+          -0.473,
+          -0.52,
+          -0.569,
+          -0.616,
+          -0.663,
+          -0.676,
+          -0.723,
+          -0.771,
+          -0.818,
+          -0.866,
+          -0.912,
+          -0.96,
+          -1.007,
+          -1.055,
+          -1.102,
+          -1.149,
+          -1.197,
+          -1.244
+        ],
+        "handoffDeathT": 0.1652999999992552,
+        "facing": -1,
+        "crops": [
+          {
+            "deathT": 0.0061,
+            "rotation": -0.04765625,
+            "corpse": false,
+            "changedFromDeathFrame": 0
+          },
+          {
+            "deathT": 0.04250000000000009,
+            "rotation": -0.33203125000000067,
+            "corpse": false,
+            "changedFromDeathFrame": 5661
+          },
+          {
+            "deathT": 0.0849000000000002,
+            "rotation": -0.6632812500000016,
+            "corpse": false,
+            "changedFromDeathFrame": 6201
+          },
+          {
+            "deathT": 0.1228999999992551,
+            "rotation": -0.9601562499941805,
+            "corpse": false,
+            "changedFromDeathFrame": 6768
+          },
+          {
+            "deathT": 0.1652999999992552,
+            "rotation": -1.2437499999941801,
+            "corpse": true,
+            "changedFromDeathFrame": 7803
+          },
+          {
+            "deathT": 0.30469999999925507,
+            "rotation": -1.2437499999941801,
+            "corpse": true,
+            "changedFromDeathFrame": 7812
+          }
+        ]
+      }
+    },
+    {
+      "name": "V04 placeholder: no fall for a kill in an unrevealed room (0 changed pixels), nor for corpses rebuilt by an epoch, the stairs or a reload",
+      "status": "passed",
+      "detail": {
+        "hidden": {
+          "frames": 15,
+          "changed": 0
+        },
+        "reveal": 11,
+        "indoorFallFrames": 26,
+        "stairs": 12,
+        "loaded": [
+          {
+            "uid": "enemy-3",
+            "deathT": 0,
+            "rotation": 0,
+            "body": false,
+            "hasCorpse": true,
+            "shown": true
+          },
+          {
+            "uid": "enemy-12",
+            "deathT": 0,
+            "rotation": 0,
+            "body": false,
+            "hasCorpse": true,
+            "shown": true
+          },
+          {
+            "uid": "enemy-21",
+            "deathT": 0,
+            "rotation": 0,
+            "body": false,
+            "hasCorpse": true,
+            "shown": true
+          }
+        ],
+        "resumed": 45
+      }
+    }
+  ],
+  "visualChecks": [
+    {
+      "id": "R09-runtime-mirror",
+      "status": "passed"
+    },
+    {
+      "id": "R10-real-death-sol",
+      "status": "passed",
+      "first": {
+        "at": 1788.2999999970198,
+        "dt": 0.006,
+        "deathEvents": 1,
+        "deathT": 0.0061,
+        "rotation": -0.04765625,
+        "body": true,
+        "weapon": false,
+        "corpse": false
+      },
+      "sampleTimes": [
+        0,
+        0.045600000001490115,
+        0.08140000000223517,
+        0.127,
+        0.203
+      ]
+    },
+    {
+      "id": "R10-real-death-placeholder",
+      "status": "passed",
+      "first": {
+        "at": 1278.699999999255,
+        "dt": 0.006099999999999909,
+        "deathEvents": 1,
+        "deathT": 0.00619999999999991,
+        "rotation": -0.04843749999999929,
+        "body": true,
+        "weapon": false,
+        "corpse": false
+      },
+      "sampleTimes": [
+        0,
+        0.04310000000149011,
+        0.08619999999925494,
+        0.12180000000074506,
+        0.20030000000074505
+      ]
+    }
+  ],
+  "lifecycle": [
+    {
+      "at": "2026-10-08T13:01:11.046Z",
+      "checks": [
+        {
+          "name": "startup-asset-cleanup-and-retry",
+          "beforeRetry": {
+            "roots": 0,
+            "errors": [
+              "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8547:131711)\n    at <anonymous>:14:61"
+            ]
+          },
+          "errors": [
+            "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8547:131711)\n    at <anonymous>:14:61"
+          ],
+          "rootsAfterFailure": 0,
+          "sameRunResumed": true,
+          "expectedErrors": [
+            "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8547:131711)\n    at <anonymous>:14:61"
+          ],
+          "status": "passed"
+        },
+        {
+          "name": "startup-view-cleanup-and-retry",
+          "beforeRetry": {
+            "roots": 0,
+            "errors": [
+              "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at vf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:75715)\n    at gf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:85346)\n    at new mf (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:73250)\n    at new ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:89335)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:2149)\n    at async d0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:23001)"
+            ]
+          },
+          "errors": [
+            "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at vf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:75715)\n    at gf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:85346)\n    at new mf (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:73250)\n    at new ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:89335)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:2149)\n    at async d0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:23001)"
+          ],
+          "rootsAfterFailure": 0,
+          "sameRunResumed": true,
+          "expectedErrors": [
+            "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at vf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:75715)\n    at gf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:85346)\n    at new mf (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:73250)\n    at new ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:89335)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:2149)\n    at async d0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:23001)"
+          ],
+          "status": "passed"
+        },
+        {
+          "name": "startup-observer-cleanup-and-retry",
+          "beforeRetry": {
+            "roots": 0,
+            "errors": [
+              "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:3177)\n    at async d0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:23001)"
+            ]
+          },
+          "errors": [
+            "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:3177)\n    at async d0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:23001)"
+          ],
+          "rootsAfterFailure": 0,
+          "sameRunResumed": true,
+          "expectedErrors": [
+            "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:3177)\n    at async d0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:23001)"
+          ],
+          "status": "passed"
+        },
+        {
+          "name": "ordinary-context-loss-native-restore-and-settlement",
+          "errors": [],
+          "hooksAbsent": true,
+          "lostFrozen": true,
+          "heldMovementBlocked": true,
+          "nativeRestored": true,
+          "restoredRemainedPaused": true,
+          "failedSettlementRetained": true,
+          "nextRaidMounted": true,
+          "status": "passed"
+        }
+      ],
+      "requests": [],
+      "browser": "154.0.8037.98"
+    },
+    {
+      "at": "2026-10-08T13:01:30.940Z",
+      "checks": [
+        {
+          "name": "startup-asset-cleanup-and-retry",
+          "beforeRetry": {
+            "roots": 0,
+            "errors": [
+              "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8547:131711)\n    at <anonymous>:14:61"
+            ]
+          },
+          "errors": [
+            "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8547:131711)\n    at <anonymous>:14:61"
+          ],
+          "rootsAfterFailure": 0,
+          "sameRunResumed": true,
+          "expectedErrors": [
+            "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8547:131711)\n    at <anonymous>:14:61"
+          ],
+          "status": "passed"
+        },
+        {
+          "name": "startup-view-cleanup-and-retry",
+          "beforeRetry": {
+            "roots": 0,
+            "errors": [
+              "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at vf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:75715)\n    at gf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:85346)\n    at new mf (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:73250)\n    at new ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:89335)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:2149)\n    at async d0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:23001)"
+            ]
+          },
+          "errors": [
+            "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at vf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:75715)\n    at gf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:85346)\n    at new mf (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:73250)\n    at new ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:89335)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:2149)\n    at async d0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:23001)"
+          ],
+          "rootsAfterFailure": 0,
+          "sameRunResumed": true,
+          "expectedErrors": [
+            "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at vf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:75715)\n    at gf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:85346)\n    at new mf (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:73250)\n    at new ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:89335)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:2149)\n    at async d0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:23001)"
+          ],
+          "status": "passed"
+        },
+        {
+          "name": "startup-observer-cleanup-and-retry",
+          "beforeRetry": {
+            "roots": 0,
+            "errors": [
+              "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:3177)\n    at async d0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:23001)"
+            ]
+          },
+          "errors": [
+            "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:3177)\n    at async d0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:23001)"
+          ],
+          "rootsAfterFailure": 0,
+          "sameRunResumed": true,
+          "expectedErrors": [
+            "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:3177)\n    at async d0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:23001)"
+          ],
+          "status": "passed"
+        },
+        {
+          "name": "ordinary-context-loss-native-restore-and-settlement",
+          "errors": [],
+          "hooksAbsent": true,
+          "lostFrozen": true,
+          "heldMovementBlocked": true,
+          "nativeRestored": true,
+          "restoredRemainedPaused": true,
+          "failedSettlementRetained": true,
+          "nextRaidMounted": true,
+          "status": "passed"
+        }
+      ],
+      "requests": [],
+      "browser": "154.0.8037.98"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "dist/index.html",
+      "bytes": 3146669,
+      "sha256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e",
+      "baseSHA256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e",
+      "byteEqual": true,
+      "equalsBase": "byte identity"
+    },
+    {
+      "file": "start the game.html",
+      "bytes": 3146669,
+      "sha256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e",
+      "baseSHA256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e",
+      "byteEqual": true,
+      "equalsBase": "byte identity"
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "bytes": 1070057,
+      "sha256": "5e87fca7f44eb3bc847883aabd8eea8eed0080537e19533954697cbbab6adc92",
+      "baseSHA256": "5e87fca7f44eb3bc847883aabd8eea8eed0080537e19533954697cbbab6adc92",
+      "byteEqual": true,
+      "equalsBase": "byte identity"
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "bytes": 1066282,
+      "sha256": "37926e2b232aa62bb0704da9888b24de34d41b9c55959d9af7b5f9ff680effeb",
+      "baseSHA256": "37926e2b232aa62bb0704da9888b24de34d41b9c55959d9af7b5f9ff680effeb",
+      "byteEqual": true,
+      "equalsBase": "byte identity"
+    },
+    {
+      "file": "docs/release-manifest.json",
+      "bytes": 747,
+      "sha256": "251d3aa2c9b61767920cf9f700c30508ab6217b78e9ff10ff973b61edb7c43cc",
+      "baseSHA256": "251d3aa2c9b61767920cf9f700c30508ab6217b78e9ff10ff973b61edb7c43cc",
+      "byteEqual": true,
+      "equalsBase": "byte identity"
+    },
+    {
+      "file": "scripts/sol-round4-visual.mjs",
+      "bytes": 5821,
+      "sha256": "6c54a985c64237c0852068d32d87e682b18a538a8d82aa9a1bf019b5ba62d124",
+      "baseSHA256": "6c54a985c64237c0852068d32d87e682b18a538a8d82aa9a1bf019b5ba62d124",
+      "byteEqual": true,
+      "equalsBase": "LF-normalized source identity"
+    },
+    {
+      "file": "scripts/coast-sample-test.mjs",
+      "bytes": 56929,
+      "sha256": "ebbb16698834763f01d9287c6491d6807346bbcb774231ddf38c70e71cd9987e",
+      "baseSHA256": "ebbb16698834763f01d9287c6491d6807346bbcb774231ddf38c70e71cd9987e",
+      "byteEqual": true,
+      "equalsBase": "LF-normalized source identity"
+    },
+    {
+      "file": "scripts/coast-lifecycle-test.mjs",
+      "bytes": 8402,
+      "sha256": "0ebba499c38f875b7d7ccd0662dc5da900fec717922cd3380258acb8a415f578",
+      "baseSHA256": "b719e999c57727aebd27b135a8054a7ebb37c6eb83eabc627301f847fb3635ac",
+      "byteEqual": false,
+      "equalsBase": "LF-normalized source identity"
+    }
+  ],
+  "scope": {
+    "productSourceAssetsOriginalScriptsAndFormalArtifactsUnchanged": true,
+    "newAssets": 0,
+    "remoteMutations": 0
+  },
+  "manualReview": {
+    "at": "2026-10-08T13:02:52.249Z",
+    "method": "Viewed eight original PNGs from this execution, not prior Opus screenshots.",
+    "images": [
+      "sample/death-fall-sol.png",
+      "sample/death-fall-placeholder.png",
+      "sample/death-midfall-sol.png",
+      "sample/death-midfall-placeholder.png",
+      "sample/death-hidden-sol.png",
+      "sample/death-hidden-placeholder.png",
+      "sample/death-reload-sol.png",
+      "sample/death-reload-placeholder.png"
+    ],
+    "conclusions": {
+      "visibleEnemyFall": "Both modes show progressive tipping before the corpse, with no visible held weapon. Final body orientation and corpse direction agree; no conspicuous lateral jump in the inspected strips.",
+      "hiddenRoom": "Target room has no visible falling actor/corpse. The visible street corpse is the preceding public kill, not the hidden-room target. Zero-pixel claim is from V04, not screenshot alone.",
+      "reload": "Paused reload screenshots show existing corpses lying down. Non-replay conclusion also relies on V04 recorded deathT=0 and no death events, not screenshots alone."
+    },
+    "boundary": "Enemy path only; player complete terminal fall is not signed off; no subjective claim for every angle, enemy type or device."
+  },
+  "rawShots": [
+    {
+      "file": "test-results/sol-death-20261008/shots/cross-1280x720.png",
+      "bytes": 369638,
+      "sha256": "bb5f20f75373657e087304c55033864904cc17f3a67e9e20e7c9a2cdf0b1795b",
+      "scene": "cross",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/longwall-1280x720.png",
+      "bytes": 392382,
+      "sha256": "a49e1618ded39ee609f5ac89275218f1705a983d338b49ec5928239b046fc5c9",
+      "scene": "longwall",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/door-1280x720.png",
+      "bytes": 395109,
+      "sha256": "35a5ab3e087419462d90a3e3c242d85912aef20d34a84c0a237c880ac68687ec",
+      "scene": "door",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/door-open-1280x720.png",
+      "bytes": 452748,
+      "sha256": "ae5b1bcbc0ca7611fcc7b769454036e5f8eeb1090ab712ed8e493dc19890d9a0",
+      "scene": "door-open",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/reveal-1280x720.png",
+      "bytes": 451183,
+      "sha256": "b8962e9b19551ae072df095542e3ed0b0b33c159415b081b06132cef2f4b33e6",
+      "scene": "reveal",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/window-1280x720.png",
+      "bytes": 519203,
+      "sha256": "cd736ae15edbe8641323d5bfef06e517b3476193a61c9891975771a2700ffd6e",
+      "scene": "window",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/loot-1280x720.png",
+      "bytes": 351036,
+      "sha256": "e5b75c4b703f10a63485eb9127b5b547ae4fef7280f41af60ac7d7d406d6ae5b",
+      "scene": "loot",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/enemies-1280x720.png",
+      "bytes": 375759,
+      "sha256": "ed572c590892e446562916f4d3775b15463982645a4d2e89502e2893da5865a8",
+      "scene": "enemies",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/extract-1280x720.png",
+      "bytes": 437079,
+      "sha256": "b4946944089fec8d3489d601a394e61c47fd1faa73e335c46f9ea37b22290930",
+      "scene": "extract",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/outside-1280x720.png",
+      "bytes": 366113,
+      "sha256": "85f015452ffa0b3cdf0ed8cff7a5b4de5070c40574d5905a6540100f6be41a4c",
+      "scene": "outside",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/upstairs-1280x720.png",
+      "bytes": 109860,
+      "sha256": "28c2d87c482432b42e401bb17c6d69252ef24a377dd6358a60297ad62c0e1701",
+      "scene": "upstairs",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/basement-1280x720.png",
+      "bytes": 92246,
+      "sha256": "1790829cc495960ec51f6039a9ba3938742c160ecf339530612232e26c1f2a6b",
+      "scene": "basement",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/carbine-1280x720.png",
+      "bytes": 378302,
+      "sha256": "bb16a20a119bc0f866c936d521c811e83631f1e3a04852aab8db619415a7fce8",
+      "scene": "carbine",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/inventory-1280x720.png",
+      "bytes": 318776,
+      "sha256": "6e2e16ce99232b4c3d6edc1713484f7bbb82da0f870370f276d028030178ecee",
+      "scene": "inventory",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/loot-panel-1280x720.png",
+      "bytes": 298174,
+      "sha256": "8a87fb41c1459abec2563d5d56fbac1f709605d10a09f0cbf0e6290c855be9b4",
+      "scene": "loot-panel",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/map-1280x720.png",
+      "bytes": 245382,
+      "sha256": "e8db69629c43665f293ebbb51e29f78bccd379c26d7d32ffa67fcf559cac1eb0",
+      "scene": "map",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/reading-1280x720.png",
+      "bytes": 293804,
+      "sha256": "9511bcb9600bfed097f4ab908a24da061d911c739f4fa64af124e9e3a55fb44e",
+      "scene": "reading",
+      "size": "1280x720"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/cross-1920x1080.png",
+      "bytes": 299789,
+      "sha256": "b1fbc9083a1f165604bc481c2155c016bf988aba767868a9fa5f640aa28ce63d",
+      "scene": "cross",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/longwall-1920x1080.png",
+      "bytes": 318403,
+      "sha256": "86d16a69caab1c3598e8e1bf2fb45da372fe396974bec480139b55fcf42e44c5",
+      "scene": "longwall",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/door-1920x1080.png",
+      "bytes": 317821,
+      "sha256": "ee2ffbfb00ac614ad82895abc8fe64bff1f433b6e5fb631a705f1de65d2ee65b",
+      "scene": "door",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/door-open-1920x1080.png",
+      "bytes": 368147,
+      "sha256": "26b4329c1f5de8e66a0257ab9ea66af91185617376c2ade408b9290a46142633",
+      "scene": "door-open",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/reveal-1920x1080.png",
+      "bytes": 365584,
+      "sha256": "ba12e34ef36e87418b19750306d96f85a788dafc8d94960bbf8218335036f39f",
+      "scene": "reveal",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/window-1920x1080.png",
+      "bytes": 422299,
+      "sha256": "f8e023c868a8b82fa5246173c2a7522bde078abe06a1f1573009b8ae78c8fd1e",
+      "scene": "window",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/loot-1920x1080.png",
+      "bytes": 263473,
+      "sha256": "7adad4c24fe27df48a2dd17aa2746d93e86a789b80103469d7e552cd8dcabd4d",
+      "scene": "loot",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/enemies-1920x1080.png",
+      "bytes": 305729,
+      "sha256": "e5be86d7090a355f925615068973ed38225fe56de1dfc12c71c13c4e14c6a88b",
+      "scene": "enemies",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/extract-1920x1080.png",
+      "bytes": 362189,
+      "sha256": "ea00f87243ae28c4cea3c13d4169bf31baf82039dd0e9c3fa9333ec2854798f9",
+      "scene": "extract",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/outside-1920x1080.png",
+      "bytes": 252496,
+      "sha256": "4f36e959be3c87bfa5306733e8c9412a689a6a1f31d0cc305571cb3db6dab1ca",
+      "scene": "outside",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/upstairs-1920x1080.png",
+      "bytes": 90137,
+      "sha256": "2b5c65f26c03d591be35257ecfd9beb950ca37b2da817589131f0d2a341d0067",
+      "scene": "upstairs",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/basement-1920x1080.png",
+      "bytes": 76459,
+      "sha256": "58007f0c07be276998434a1fc7ca38347a03f0624ea19e43b96785205a837adf",
+      "scene": "basement",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/carbine-1920x1080.png",
+      "bytes": 310456,
+      "sha256": "1be6e27f4dac15c69eb181c73eb6158563c2c5c94645a25be0f57d987d5b2b50",
+      "scene": "carbine",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/inventory-1920x1080.png",
+      "bytes": 333779,
+      "sha256": "4f0a24fa33657396578b6cacfd0b485c8492bd75d91c35e7c0320e271f7342b5",
+      "scene": "inventory",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/loot-panel-1920x1080.png",
+      "bytes": 298228,
+      "sha256": "1aca6947e3f39cf8ff0ba9f4c0c6e6c13ac1c99f46e1fa28c7254cdae6186264",
+      "scene": "loot-panel",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/map-1920x1080.png",
+      "bytes": 287148,
+      "sha256": "b300f0d1a419dedc2d2bedb5b17491984c6f5d007499aaa6fa33dcb86e33e46d",
+      "scene": "map",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/reading-1920x1080.png",
+      "bytes": 214192,
+      "sha256": "d84d9635be4cbdd82a7bb8f25c59b0d35a21fdd2cc4da33dde84759d7c395b74",
+      "scene": "reading",
+      "size": "1920x1080"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/cross-844x390.png",
+      "bytes": 254796,
+      "sha256": "c350d2883b36fcbfa2baaab2a53108c265a505c84672df8b0c1a968f99ce60ea",
+      "scene": "cross",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/longwall-844x390.png",
+      "bytes": 284358,
+      "sha256": "2512e0ae976e7a37e0fa81b26fd5073de990fca4ce8877fc9b0a808489bcae6d",
+      "scene": "longwall",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/door-844x390.png",
+      "bytes": 271452,
+      "sha256": "2035f51900c247683be8c9fc0a157154c81cddac5540589a8a0c7ed4e071e700",
+      "scene": "door",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/door-open-844x390.png",
+      "bytes": 310386,
+      "sha256": "41f75d6fc6020380e76cb82a9779639271abec8e401087069ee86d7388fbe0c1",
+      "scene": "door-open",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/reveal-844x390.png",
+      "bytes": 316568,
+      "sha256": "ba8af6eba92941105b1b8efebca494de4347931fef26c0e377b19cac6b136692",
+      "scene": "reveal",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/window-844x390.png",
+      "bytes": 315713,
+      "sha256": "14a39ed4c04a3f68054632cad837ac229d0d77b1d9528c3c086dae503217a244",
+      "scene": "window",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/loot-844x390.png",
+      "bytes": 252893,
+      "sha256": "e2552cad480bccd7d2b7cb8e6070b93226f3fafe17f2ed41f2e0c3b52bef0b59",
+      "scene": "loot",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/enemies-844x390.png",
+      "bytes": 258131,
+      "sha256": "36aef7f206a59435baec0c8870cd550b423ce3db52b9d41c53023f3c90842f4a",
+      "scene": "enemies",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/extract-844x390.png",
+      "bytes": 255167,
+      "sha256": "499e6734e79ebb2df40aa0f7c6d493625e93a5e12c4764b20bc7b64cd8b64eab",
+      "scene": "extract",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/outside-844x390.png",
+      "bytes": 221740,
+      "sha256": "c98d1e0804626a6a5be1db6f53aef6014637c4207ea8a7b1bb511ad91b361e81",
+      "scene": "outside",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/upstairs-844x390.png",
+      "bytes": 123860,
+      "sha256": "9ba5edeeee4a83ef34670c0a7d152c8e79d16194bd23b4ecf878a6f3181bb9c6",
+      "scene": "upstairs",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/basement-844x390.png",
+      "bytes": 113486,
+      "sha256": "7ff4192c009358802163e9fa7f73e4466849c70ea3f1f41bec127411c602483b",
+      "scene": "basement",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/carbine-844x390.png",
+      "bytes": 260754,
+      "sha256": "daabc4600abb834edf3f5de626f42b2a722e4bfc3c833522996bfc9a443dcace",
+      "scene": "carbine",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/inventory-844x390.png",
+      "bytes": 269044,
+      "sha256": "e60050527318a910f4394865a27d026876f4ae40620836f2610889f21ad1bd71",
+      "scene": "inventory",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/loot-panel-844x390.png",
+      "bytes": 256242,
+      "sha256": "acd8eba6e26a48a3d6aa3c75e54c4f21aee730797c041b80ffbcc0ca67f5b798",
+      "scene": "loot-panel",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/map-844x390.png",
+      "bytes": 220143,
+      "sha256": "a439013a642c19a4e6cfce274dd74dfa7d27945169e02a2282df250d1afe0c0c",
+      "scene": "map",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/reading-844x390.png",
+      "bytes": 245598,
+      "sha256": "6c24076afcf4947af07ad893aa681b88d39c3a0b15886c39b048f76d5f7c3b55",
+      "scene": "reading",
+      "size": "844x390"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/cross-640x300.png",
+      "bytes": 462749,
+      "sha256": "63a4ef9a926fff91d22d854907ac1f47d3b8ec79e3219331a756bc324635b9c7",
+      "scene": "cross",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/longwall-640x300.png",
+      "bytes": 533135,
+      "sha256": "4fef9ac93936969260cfec76ec22bed393f854a96eb6d6b5ee83b465c81d0582",
+      "scene": "longwall",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/door-640x300.png",
+      "bytes": 522625,
+      "sha256": "b806af22bf5a8091cfd3c66ea7dd23bac03798826d6129645b1dbedf5490374d",
+      "scene": "door",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/door-open-640x300.png",
+      "bytes": 603378,
+      "sha256": "b6e69166f96ef1638f2b2395ab4873dd2eca1f813ea69974b813e011f96e5e3e",
+      "scene": "door-open",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/reveal-640x300.png",
+      "bytes": 615437,
+      "sha256": "9be5be95372261f2980667a709e5b6d19ee646759cf4dbde3d9eceae5ed11a61",
+      "scene": "reveal",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/window-640x300.png",
+      "bytes": 620403,
+      "sha256": "bc8388c4f17853dbf3c43d79b21eed786dda56da80bd61dec7a6c87a38150a98",
+      "scene": "window",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/loot-640x300.png",
+      "bytes": 456004,
+      "sha256": "9ab837b4f76e070831ec972e3ac323df5ee6548a12e59253def2b9217295fa95",
+      "scene": "loot",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/enemies-640x300.png",
+      "bytes": 471497,
+      "sha256": "b511753f0613319cf983b9954258b469fb9ff13c9ac14cbebe57625f8cd4e076",
+      "scene": "enemies",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/extract-640x300.png",
+      "bytes": 449241,
+      "sha256": "2dc9d2db13ffad2c1467faec9272ef661067fd17a9e8523c5f0d6de9e6e41652",
+      "scene": "extract",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/outside-640x300.png",
+      "bytes": 401959,
+      "sha256": "c7d82488e6e6dc2cf91f8ffc6a13e41770109794ac4fa42befcb3491a99f6e52",
+      "scene": "outside",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/upstairs-640x300.png",
+      "bytes": 180180,
+      "sha256": "6176a9ee3fbf4f46f83d83dfa5d83a265b817286809096bb8137ccdab757c545",
+      "scene": "upstairs",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/basement-640x300.png",
+      "bytes": 161342,
+      "sha256": "d0222dcd7c63d89c28c11d9f387be31feb888961ff02a78c99e222b320e11313",
+      "scene": "basement",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/carbine-640x300.png",
+      "bytes": 472905,
+      "sha256": "803508285235127052c71890308c6cd4c9f764ccb37a800e6e5da963b4b4a4ba",
+      "scene": "carbine",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/inventory-640x300.png",
+      "bytes": 282925,
+      "sha256": "4bdc1b6959d8fbc335647152f3d8cde825d8dc6691ffeff7b0ebb11d40d5d044",
+      "scene": "inventory",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/loot-panel-640x300.png",
+      "bytes": 224653,
+      "sha256": "ee1e3d2b305970b7bd9fd5c4485d8cfc207c0a22a6447526f522993dfa40ecc5",
+      "scene": "loot-panel",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/map-640x300.png",
+      "bytes": 274737,
+      "sha256": "a3f7daf7eb0fada94dd083c280b52a900f4fa54b67de55924b062c5e41271d49",
+      "scene": "map",
+      "size": "640x300"
+    },
+    {
+      "file": "test-results/sol-death-20261008/shots/reading-640x300.png",
+      "bytes": 354601,
+      "sha256": "cdb96dc0681eafc20e963e2c5bf2192ee952f370200f3e242cf35308c41c23b4",
+      "scene": "reading",
+      "size": "640x300"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "evidence/baseline.json",
+      "bytes": 4743,
+      "sha256": "dfbcd452571e9bc666dbc46783c5eeb3fd3ca40a151e76d9e851a1a4ae3e9a45",
+      "raw": "test-results/sol-death-20261008/baseline.json",
+      "originalBytes": 4743,
+      "originalSHA256": "dfbcd452571e9bc666dbc46783c5eeb3fd3ca40a151e76d9e851a1a4ae3e9a45",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/artifacts.json",
+      "bytes": 2429,
+      "sha256": "0580a24a4f01c1302dfbd9921469c0588de2e19e7054e196f033c8aa534acc8b",
+      "raw": "test-results/sol-death-20261008/artifacts.json",
+      "originalBytes": 2429,
+      "originalSHA256": "0580a24a4f01c1302dfbd9921469c0588de2e19e7054e196f033c8aa534acc8b",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/manual-review.json",
+      "bytes": 1224,
+      "sha256": "2910f89d3e844c2f11efea70c651ed3805ed0c32a46eb9ae83f2972dd06b4940",
+      "raw": "test-results/sol-death-20261008/manual-review.json",
+      "originalBytes": 1224,
+      "originalSHA256": "2910f89d3e844c2f11efea70c651ed3805ed0c32a46eb9ae83f2972dd06b4940",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/harness-notes.json",
+      "bytes": 244,
+      "sha256": "7e8ea059951f4717bf0036fc7ebcd0cdc2e70c73f5484fb951c6d18dbd5b973e",
+      "raw": "test-results/sol-death-20261008/harness-notes.json",
+      "originalBytes": 244,
+      "originalSHA256": "7e8ea059951f4717bf0036fc7ebcd0cdc2e70c73f5484fb951c6d18dbd5b973e",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/runner.mjs",
+      "bytes": 5035,
+      "sha256": "e49bbc016d2a6deeb54faff8d864ff7db9f40671070e4c66eeaf7fbe227e4f30",
+      "raw": "test-results/sol-death-20261008/runner.mjs",
+      "originalBytes": 5035,
+      "originalSHA256": "e49bbc016d2a6deeb54faff8d864ff7db9f40671070e4c66eeaf7fbe227e4f30",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/core.json",
+      "bytes": 647,
+      "sha256": "538e33769e28d23a2393949f04b2cb83eb42eeab6835f54f4e2c3c3be86915dc",
+      "raw": "test-results/sol-death-20261008/core.json",
+      "originalBytes": 647,
+      "originalSHA256": "538e33769e28d23a2393949f04b2cb83eb42eeab6835f54f4e2c3c3be86915dc",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/target.json",
+      "bytes": 727,
+      "sha256": "fe2088a96e8e64d15889aace945e911ef2f49cd75051b87fe94626478f1bea94",
+      "raw": "test-results/sol-death-20261008/target.json",
+      "originalBytes": 727,
+      "originalSHA256": "fe2088a96e8e64d15889aace945e911ef2f49cd75051b87fe94626478f1bea94",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/lifecycle.json",
+      "bytes": 900,
+      "sha256": "d9816d2bed935911c2db695fc44a4854760b00377cb815511bd3757cfe752992",
+      "raw": "test-results/sol-death-20261008/lifecycle.json",
+      "originalBytes": 900,
+      "originalSHA256": "d9816d2bed935911c2db695fc44a4854760b00377cb815511bd3757cfe752992",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/shots.json",
+      "bytes": 361,
+      "sha256": "7d56c8dfc4b2ad43febb9a32452f7865500736c934d059388ba88f00b19c0e57",
+      "raw": "test-results/sol-death-20261008/shots.json",
+      "originalBytes": 361,
+      "originalSHA256": "7d56c8dfc4b2ad43febb9a32452f7865500736c934d059388ba88f00b19c0e57",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/visual.json",
+      "bytes": 1696,
+      "sha256": "b2df57de89ce5c826ee8cdf4888659df6c721f53dd2c645d60d12e828e888dbe",
+      "raw": "test-results/sol-death-20261008/visual.json",
+      "originalBytes": 1696,
+      "originalSHA256": "b2df57de89ce5c826ee8cdf4888659df6c721f53dd2c645d60d12e828e888dbe",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/inventory.json",
+      "bytes": 2412,
+      "sha256": "f85c579aa9e5b3a9379a06a208485d077b8a6d37159e76974689c07aee4bb395",
+      "raw": "test-results/sol-death-20261008/inventory.json",
+      "originalBytes": 2412,
+      "originalSHA256": "f85c579aa9e5b3a9379a06a208485d077b8a6d37159e76974689c07aee4bb395",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/world.json",
+      "bytes": 1393,
+      "sha256": "8fdabcf03dacf1f86df9c9309aa98856414ee07c7859ab6592e5da39f8f045cf",
+      "raw": "test-results/sol-death-20261008/world.json",
+      "originalBytes": 1393,
+      "originalSHA256": "8fdabcf03dacf1f86df9c9309aa98856414ee07c7859ab6592e5da39f8f045cf",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/input.json",
+      "bytes": 1381,
+      "sha256": "f89643a932e9b8cb2cb33d4441d9bcfe1e4207010fba89b7ead8608ca25ca165",
+      "raw": "test-results/sol-death-20261008/input.json",
+      "originalBytes": 1381,
+      "originalSHA256": "f89643a932e9b8cb2cb33d4441d9bcfe1e4207010fba89b7ead8608ca25ca165",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/test.log",
+      "bytes": 22133,
+      "sha256": "526782a1abec9f8cf0f8a19f9e7fabe7a45a590fb13e50add072e8561f813c66",
+      "raw": "test-results/sol-death-20261008/test.log",
+      "originalBytes": 22133,
+      "originalSHA256": "526782a1abec9f8cf0f8a19f9e7fabe7a45a590fb13e50add072e8561f813c66",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/package.log",
+      "bytes": 422,
+      "sha256": "dd94d6beda8ccbbdaf6049054cb1c4cea7edf5d77c2a46cc048c4cece8126476",
+      "raw": "test-results/sol-death-20261008/package.log",
+      "originalBytes": 422,
+      "originalSHA256": "dd94d6beda8ccbbdaf6049054cb1c4cea7edf5d77c2a46cc048c4cece8126476",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/sol-visual.log",
+      "bytes": 821,
+      "sha256": "8e5c5abebb73c0b8b2615aa9aab50ab13cc4726289de997520330c1ec4b1d054",
+      "raw": "test-results/sol-death-20261008/sol-visual.log",
+      "originalBytes": 821,
+      "originalSHA256": "8e5c5abebb73c0b8b2615aa9aab50ab13cc4726289de997520330c1ec4b1d054",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/sample.log",
+      "bytes": 3663,
+      "sha256": "ffdc6076e589690e8661c3a9c5b3953676c560de83ea726adad6f5708e4695fe",
+      "raw": "test-results/sol-death-20261008/sample.log",
+      "originalBytes": 3663,
+      "originalSHA256": "ffdc6076e589690e8661c3a9c5b3953676c560de83ea726adad6f5708e4695fe",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/lifecycle-1280.log",
+      "bytes": 178,
+      "sha256": "07a602e9998d9205bdf2609af646fd0c297b752ba047abf12d978f14f75829f0",
+      "raw": "test-results/sol-death-20261008/lifecycle-1280.log",
+      "originalBytes": 182,
+      "originalSHA256": "c79078a78b7f70094485031990f75664f3c0a30c1cc25307f659736a4c1c77ba",
+      "normalization": "UTF-8 LF, trailing whitespace removed, one EOF newline"
+    },
+    {
+      "file": "evidence/lifecycle-1920.log",
+      "bytes": 178,
+      "sha256": "07a602e9998d9205bdf2609af646fd0c297b752ba047abf12d978f14f75829f0",
+      "raw": "test-results/sol-death-20261008/lifecycle-1920.log",
+      "originalBytes": 182,
+      "originalSHA256": "c79078a78b7f70094485031990f75664f3c0a30c1cc25307f659736a4c1c77ba",
+      "normalization": "UTF-8 LF, trailing whitespace removed, one EOF newline"
+    },
+    {
+      "file": "evidence/shots.log",
+      "bytes": 1788,
+      "sha256": "7c0f20bfd3b860df8b41cdb7771cf37c893b4e55975cb86af0ddadd8010b5958",
+      "raw": "test-results/sol-death-20261008/shots.log",
+      "originalBytes": 1788,
+      "originalSHA256": "7c0f20bfd3b860df8b41cdb7771cf37c893b4e55975cb86af0ddadd8010b5958",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-ui.log",
+      "bytes": 888,
+      "sha256": "5bbcc0ca21c4c3e253270cf2435d0ceb37bbbf1c6a4b83c70e5520444814668e",
+      "raw": "test-results/sol-death-20261008/regression-ui.log",
+      "originalBytes": 888,
+      "originalSHA256": "5bbcc0ca21c4c3e253270cf2435d0ceb37bbbf1c6a4b83c70e5520444814668e",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-tactical.log",
+      "bytes": 822,
+      "sha256": "cccfe805390f042d82379d5202ed349d061b8dcbf9a7ff5d165bdc67bf44294f",
+      "raw": "test-results/sol-death-20261008/regression-tactical.log",
+      "originalBytes": 822,
+      "originalSHA256": "cccfe805390f042d82379d5202ed349d061b8dcbf9a7ff5d165bdc67bf44294f",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-art.log",
+      "bytes": 706,
+      "sha256": "47d67d1b2760687f4042378a69c9a7e39e76c68e08b35856f36051734797691e",
+      "raw": "test-results/sol-death-20261008/regression-art.log",
+      "originalBytes": 706,
+      "originalSHA256": "47d67d1b2760687f4042378a69c9a7e39e76c68e08b35856f36051734797691e",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-title.log",
+      "bytes": 1814,
+      "sha256": "af95a8f3e5c6be595ea2e8472faf07b3e650a0a647c5feac0b45f493d7935d4e",
+      "raw": "test-results/sol-death-20261008/regression-title.log",
+      "originalBytes": 1814,
+      "originalSHA256": "af95a8f3e5c6be595ea2e8472faf07b3e650a0a647c5feac0b45f493d7935d4e",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-title-water.log",
+      "bytes": 2029,
+      "sha256": "f6d11782d96491ba40e03b9b128c71da699195e6fdcaeb85bd439062947be2f0",
+      "raw": "test-results/sol-death-20261008/regression-title-water.log",
+      "originalBytes": 2029,
+      "originalSHA256": "f6d11782d96491ba40e03b9b128c71da699195e6fdcaeb85bd439062947be2f0",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-save-browser.log",
+      "bytes": 699,
+      "sha256": "77420714aca24958afbc65e6fcb19970acb0ecb9c627c73f25e2a6341dede2f6",
+      "raw": "test-results/sol-death-20261008/regression-save-browser.log",
+      "originalBytes": 699,
+      "originalSHA256": "77420714aca24958afbc65e6fcb19970acb0ecb9c627c73f25e2a6341dede2f6",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-expansion.log",
+      "bytes": 542,
+      "sha256": "cc02c6972e26e7ebd5326ed06c0c0f6a4114a3636a9ffe0c97b85abe341dbae0",
+      "raw": "test-results/sol-death-20261008/regression-expansion.log",
+      "originalBytes": 542,
+      "originalSHA256": "cc02c6972e26e7ebd5326ed06c0c0f6a4114a3636a9ffe0c97b85abe341dbae0",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-qol-expansion.log",
+      "bytes": 442,
+      "sha256": "f6673a79ed9d8fa53103b2f74e4087319f7f7616dd0a9379968d8a107a2a2491",
+      "raw": "test-results/sol-death-20261008/regression-qol-expansion.log",
+      "originalBytes": 442,
+      "originalSHA256": "f6673a79ed9d8fa53103b2f74e4087319f7f7616dd0a9379968d8a107a2a2491",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-loot.log",
+      "bytes": 3805,
+      "sha256": "d076d9745949ade92eb81f03d9e43a5d4d3495fd819d376483e87921f6630838",
+      "raw": "test-results/sol-death-20261008/regression-loot.log",
+      "originalBytes": 3805,
+      "originalSHA256": "d076d9745949ade92eb81f03d9e43a5d4d3495fd819d376483e87921f6630838",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-loot-target.log",
+      "bytes": 2301,
+      "sha256": "b6a7ec34990b2131e4e5ee0a38335d8bac76f226e73b80d56a200849c0663dfa",
+      "raw": "test-results/sol-death-20261008/regression-loot-target.log",
+      "originalBytes": 2301,
+      "originalSHA256": "b6a7ec34990b2131e4e5ee0a38335d8bac76f226e73b80d56a200849c0663dfa",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-qol.log",
+      "bytes": 3172,
+      "sha256": "06f5724b78e46309e48210f5d944fec63eaeee3fc3c8bda63fc6433ce98cc591",
+      "raw": "test-results/sol-death-20261008/regression-qol.log",
+      "originalBytes": 3172,
+      "originalSHA256": "06f5724b78e46309e48210f5d944fec63eaeee3fc3c8bda63fc6433ce98cc591",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-portable.log",
+      "bytes": 3232,
+      "sha256": "857a7a9b6dca266ccafd957806bdd6b8795017d6ded2768c74846eb9251231c5",
+      "raw": "test-results/sol-death-20261008/regression-portable.log",
+      "originalBytes": 3232,
+      "originalSHA256": "857a7a9b6dca266ccafd957806bdd6b8795017d6ded2768c74846eb9251231c5",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-buildings.log",
+      "bytes": 700,
+      "sha256": "e6232303f56559f9a1de642c328397f63ea0c56c5a35884334670b7b3a6c73ae",
+      "raw": "test-results/sol-death-20261008/regression-buildings.log",
+      "originalBytes": 700,
+      "originalSHA256": "e6232303f56559f9a1de642c328397f63ea0c56c5a35884334670b7b3a6c73ae",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-systems.log",
+      "bytes": 1581,
+      "sha256": "58d33036db5941b8e82d9f38cc6b99b0b3c721ebdc452a6c984844fa91b06598",
+      "raw": "test-results/sol-death-20261008/regression-systems.log",
+      "originalBytes": 1581,
+      "originalSHA256": "58d33036db5941b8e82d9f38cc6b99b0b3c721ebdc452a6c984844fa91b06598",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-mall-passages.log",
+      "bytes": 335,
+      "sha256": "f58784f2a76be83b719ffca6b95e505a5101f896993aab94d69481b7c434dd28",
+      "raw": "test-results/sol-death-20261008/regression-mall-passages.log",
+      "originalBytes": 335,
+      "originalSHA256": "f58784f2a76be83b719ffca6b95e505a5101f896993aab94d69481b7c434dd28",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-mall-landing.log",
+      "bytes": 114,
+      "sha256": "dee46425b91ff092c8744a3b3000690f0c4784d40f8a1cfbf7533e69c5ee466f",
+      "raw": "test-results/sol-death-20261008/regression-mall-landing.log",
+      "originalBytes": 114,
+      "originalSHA256": "dee46425b91ff092c8744a3b3000690f0c4784d40f8a1cfbf7533e69c5ee466f",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-browser.log",
+      "bytes": 1999,
+      "sha256": "bca65270f4169c6c5f66c46d446bbcdcf3d49fb2983429fe91824204bb770edf",
+      "raw": "test-results/sol-death-20261008/regression-browser.log",
+      "originalBytes": 1999,
+      "originalSHA256": "bca65270f4169c6c5f66c46d446bbcdcf3d49fb2983429fe91824204bb770edf",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-desktop-input.log",
+      "bytes": 598,
+      "sha256": "0de5f31a0a38b1c8ebd2dedf4ae5bf1713d9956e2de8b01dd602a1584825e313",
+      "raw": "test-results/sol-death-20261008/regression-desktop-input.log",
+      "originalBytes": 598,
+      "originalSHA256": "0de5f31a0a38b1c8ebd2dedf4ae5bf1713d9956e2de8b01dd602a1584825e313",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-mobile.log",
+      "bytes": 832,
+      "sha256": "fb7aaa9d364f4663e488948d38925c861c0e88b07972b8df3fd060a4ec4fef40",
+      "raw": "test-results/sol-death-20261008/regression-mobile.log",
+      "originalBytes": 832,
+      "originalSHA256": "fb7aaa9d364f4663e488948d38925c861c0e88b07972b8df3fd060a4ec4fef40",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/regression-mobile-ux.log",
+      "bytes": 896,
+      "sha256": "751ad3052682f17c386e0a9d747d907eac67d451459818f0acb8ea585663a98d",
+      "raw": "test-results/sol-death-20261008/regression-mobile-ux.log",
+      "originalBytes": 896,
+      "originalSHA256": "751ad3052682f17c386e0a9d747d907eac67d451459818f0acb8ea585663a98d",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/sample/report.json",
+      "bytes": 20210,
+      "sha256": "19c00783e5b9748ea50df2c2e83a2a534b878d00792fb20de2a13f5182222ee2",
+      "raw": "test-results/sol-death-20261008/sample/report.json",
+      "originalBytes": 20209,
+      "originalSHA256": "65f3cf8a5082edfc5caab58357b3ce3b5065660b6bde8d9ecfe20f736fecf161",
+      "normalization": "UTF-8 LF, trailing whitespace removed, one EOF newline"
+    },
+    {
+      "file": "evidence/sample/death-corpse-placeholder.png",
+      "bytes": 141921,
+      "sha256": "1104b638a05bfa4d2c070969463c5aac35c3f23a95796434064d0dc016e960b7",
+      "raw": "test-results/sol-death-20261008/sample/death-corpse-placeholder.png",
+      "originalBytes": 141921,
+      "originalSHA256": "1104b638a05bfa4d2c070969463c5aac35c3f23a95796434064d0dc016e960b7",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/sample/death-corpse-sol.png",
+      "bytes": 370142,
+      "sha256": "df109f2f974507fddc2515527b9cb33f20c724fa5b0e5c5b44007c511d8ab955",
+      "raw": "test-results/sol-death-20261008/sample/death-corpse-sol.png",
+      "originalBytes": 370142,
+      "originalSHA256": "df109f2f974507fddc2515527b9cb33f20c724fa5b0e5c5b44007c511d8ab955",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/sample/death-fall-placeholder.png",
+      "bytes": 20049,
+      "sha256": "dc26f6f8a99a4763c38aeb94786306ef673313cb67cb048001cfff15fcbac363",
+      "raw": "test-results/sol-death-20261008/sample/death-fall-placeholder.png",
+      "originalBytes": 20049,
+      "originalSHA256": "dc26f6f8a99a4763c38aeb94786306ef673313cb67cb048001cfff15fcbac363",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/sample/death-fall-sol.png",
+      "bytes": 39127,
+      "sha256": "9f4bd3dea85f812d8a560e44de4fc07ac580a64024e1bc6e8f62c594e6ca9528",
+      "raw": "test-results/sol-death-20261008/sample/death-fall-sol.png",
+      "originalBytes": 39127,
+      "originalSHA256": "9f4bd3dea85f812d8a560e44de4fc07ac580a64024e1bc6e8f62c594e6ca9528",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/sample/death-hidden-placeholder.png",
+      "bytes": 144639,
+      "sha256": "e07408473f4ef8cc94296523ec30f96f2182b577a4732d5609f51dc26c802ca9",
+      "raw": "test-results/sol-death-20261008/sample/death-hidden-placeholder.png",
+      "originalBytes": 144639,
+      "originalSHA256": "e07408473f4ef8cc94296523ec30f96f2182b577a4732d5609f51dc26c802ca9",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/sample/death-hidden-sol.png",
+      "bytes": 405439,
+      "sha256": "6eb4c655be6eacbbf3054f5eed7dd3e2144c57efd9fbddb7f3336bdfa85cc5e6",
+      "raw": "test-results/sol-death-20261008/sample/death-hidden-sol.png",
+      "originalBytes": 405439,
+      "originalSHA256": "6eb4c655be6eacbbf3054f5eed7dd3e2144c57efd9fbddb7f3336bdfa85cc5e6",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/sample/death-midfall-placeholder.png",
+      "bytes": 131713,
+      "sha256": "daa52b5c2512292da3a2e53e4ed1141ebc3e641f8a07aa160df65d390116b941",
+      "raw": "test-results/sol-death-20261008/sample/death-midfall-placeholder.png",
+      "originalBytes": 131713,
+      "originalSHA256": "daa52b5c2512292da3a2e53e4ed1141ebc3e641f8a07aa160df65d390116b941",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/sample/death-midfall-sol.png",
+      "bytes": 349937,
+      "sha256": "68276a97b8bf1e37058708446a1a5bb446a73a35593baf5d046093d13f3a571b",
+      "raw": "test-results/sol-death-20261008/sample/death-midfall-sol.png",
+      "originalBytes": 349937,
+      "originalSHA256": "68276a97b8bf1e37058708446a1a5bb446a73a35593baf5d046093d13f3a571b",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/sample/death-reload-placeholder.png",
+      "bytes": 247979,
+      "sha256": "d2e4483cfb4dc9d84f8a523c1ee313957c2c0b03bc16bd44bfa732bf00192a02",
+      "raw": "test-results/sol-death-20261008/sample/death-reload-placeholder.png",
+      "originalBytes": 247979,
+      "originalSHA256": "d2e4483cfb4dc9d84f8a523c1ee313957c2c0b03bc16bd44bfa732bf00192a02",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/sample/death-reload-sol.png",
+      "bytes": 517942,
+      "sha256": "f5d9b0b75ac1c3bff98c452e618b6202be1fa8adf7ef7a7bda8b26b0c612751f",
+      "raw": "test-results/sol-death-20261008/sample/death-reload-sol.png",
+      "originalBytes": 517942,
+      "originalSHA256": "f5d9b0b75ac1c3bff98c452e618b6202be1fa8adf7ef7a7bda8b26b0c612751f",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/visual/visual.json",
+      "bytes": 20711,
+      "sha256": "bf353bb5c3bb66f48f7cb4215388a2cfd946e26aaa087e895d48294817cbdc69",
+      "raw": "test-results/sol-death-20261008/visual/visual.json",
+      "originalBytes": 20711,
+      "originalSHA256": "bf353bb5c3bb66f48f7cb4215388a2cfd946e26aaa087e895d48294817cbdc69",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/visual/death-placeholder.png",
+      "bytes": 144357,
+      "sha256": "139bfe3d11e87bbeeeb3aa3fba8f5c11566c60a5731a25f568e9f6d59e1ed42a",
+      "raw": "test-results/sol-death-20261008/visual/death-placeholder.png",
+      "originalBytes": 144357,
+      "originalSHA256": "139bfe3d11e87bbeeeb3aa3fba8f5c11566c60a5731a25f568e9f6d59e1ed42a",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/visual/death-sol.png",
+      "bytes": 372794,
+      "sha256": "b7ad58192a633586a6a3179c1426e77c3b870d1a957fd7b77472369a7f4180fb",
+      "raw": "test-results/sol-death-20261008/visual/death-sol.png",
+      "originalBytes": 372794,
+      "originalSHA256": "b7ad58192a633586a6a3179c1426e77c3b870d1a957fd7b77472369a7f4180fb",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/visual/death-timeline-placeholder.png",
+      "bytes": 18286,
+      "sha256": "d336150100f1ec251252701963e4a2e3ff34eec03bf08520225492d889ef1cdb",
+      "raw": "test-results/sol-death-20261008/visual/death-timeline-placeholder.png",
+      "originalBytes": 18286,
+      "originalSHA256": "d336150100f1ec251252701963e4a2e3ff34eec03bf08520225492d889ef1cdb",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/visual/death-timeline-sol.png",
+      "bytes": 33621,
+      "sha256": "eca3eb7b7a70cae29032e5d4fc17ee2b6d0f348a407e0730af60f39027c3fc71",
+      "raw": "test-results/sol-death-20261008/visual/death-timeline-sol.png",
+      "originalBytes": 33621,
+      "originalSHA256": "eca3eb7b7a70cae29032e5d4fc17ee2b6d0f348a407e0730af60f39027c3fc71",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/lifecycle-1280/lifecycle.json",
+      "bytes": 4736,
+      "sha256": "11413eee82febfbced40584699eca68e6d183fc7e975bcd189eff5500773a9c8",
+      "raw": "test-results/sol-death-20261008/lifecycle-1280/lifecycle.json",
+      "originalBytes": 4736,
+      "originalSHA256": "11413eee82febfbced40584699eca68e6d183fc7e975bcd189eff5500773a9c8",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/lifecycle-1280/context-restored-paused.png",
+      "bytes": 334956,
+      "sha256": "4452c461575c8e30879dbd25f86402a52e759cd420b9a65d5387681f8f5a1ebf",
+      "raw": "test-results/sol-death-20261008/lifecycle-1280/context-restored-paused.png",
+      "originalBytes": 334956,
+      "originalSHA256": "4452c461575c8e30879dbd25f86402a52e759cd420b9a65d5387681f8f5a1ebf",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/lifecycle-1920/lifecycle.json",
+      "bytes": 4736,
+      "sha256": "f857df403cb9055e1f051aeb294997c3b66a50357d71f852919f83caffa2e548",
+      "raw": "test-results/sol-death-20261008/lifecycle-1920/lifecycle.json",
+      "originalBytes": 4736,
+      "originalSHA256": "f857df403cb9055e1f051aeb294997c3b66a50357d71f852919f83caffa2e548",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/lifecycle-1920/context-restored-paused.png",
+      "bytes": 235890,
+      "sha256": "5a3711d9ef4035713c63213a1120b3899cfe3a3b76e5025e4b6ae8c9109ec68d",
+      "raw": "test-results/sol-death-20261008/lifecycle-1920/context-restored-paused.png",
+      "originalBytes": 235890,
+      "originalSHA256": "5a3711d9ef4035713c63213a1120b3899cfe3a3b76e5025e4b6ae8c9109ec68d",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/shots/index.json",
+      "bytes": 66110,
+      "sha256": "c70f328b53f2cf9fac32d1a3d8cec8b7e3d8e7716e4fef263a17567d191feb1a",
+      "raw": "test-results/sol-death-20261008/shots/index.json",
+      "originalBytes": 66109,
+      "originalSHA256": "9fd81f1044f222c465dead35f23922568008bdd76855006460e55188a2345f5b",
+      "normalization": "UTF-8 LF, trailing whitespace removed, one EOF newline"
+    },
+    {
+      "file": "evidence/shots/cross-1280x720.png",
+      "bytes": 369638,
+      "sha256": "bb5f20f75373657e087304c55033864904cc17f3a67e9e20e7c9a2cdf0b1795b",
+      "raw": "test-results/sol-death-20261008/shots/cross-1280x720.png",
+      "originalBytes": 369638,
+      "originalSHA256": "bb5f20f75373657e087304c55033864904cc17f3a67e9e20e7c9a2cdf0b1795b",
+      "normalization": "unchanged"
+    },
+    {
+      "file": "evidence/shots/cross-1920x1080.png",
+      "bytes": 299789,
+      "sha256": "b1fbc9083a1f165604bc481c2155c016bf988aba767868a9fa5f640aa28ce63d",
+      "raw": "test-results/sol-death-20261008/shots/cross-1920x1080.png",
+      "originalBytes": 299789,
+      "originalSHA256": "b1fbc9083a1f165604bc481c2155c016bf988aba767868a9fa5f640aa28ce63d",
+      "normalization": "unchanged"
+    }
+  ],
+  "limitations": [
+    "Enemy fixtures only; tested salt/scav; not complete player terminal fall acceptance.",
+    "No F20 or heap snapshots rerun; preserve historical methods and unattributed growth.",
+    "No old-build positive control rerun, physical device, human session, natural ten-minute run or current local commit remote CI.",
+    "Original lifecycle expected injected errors are retained; no normal context/settlement errors.",
+    "Twenty regression suites were grouped concurrently; results are functional, not performance measurements."
+  ]
+}

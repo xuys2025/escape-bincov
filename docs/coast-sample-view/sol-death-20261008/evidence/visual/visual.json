@@ -1,0 +1,816 @@
+{
+  "at": "2026-10-08T13:00:10.708Z",
+  "node": "v24.19.0",
+  "htmlSHA256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e",
+  "method": "Exact formal bundle; actual Runtime damageEnemy via driver.kill; hook observes present after normal call; no manual deathT/corpse/event ordering change. Mirror compares actual cached body canvases, not the source PNG alone.",
+  "checks": [
+    {
+      "id": "R09-runtime-mirror",
+      "status": "passed",
+      "pairs": [
+        {
+          "a": 0,
+          "b": 4,
+          "frame": 0,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "frame": 1,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "frame": 2,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "frame": 3,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 0,
+          "b": 4,
+          "frame": 4,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frame": 0,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frame": 1,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frame": 2,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frame": 3,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 1,
+          "b": 3,
+          "frame": 4,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 7,
+          "b": 5,
+          "frame": 0,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 7,
+          "b": 5,
+          "frame": 1,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 7,
+          "b": 5,
+          "frame": 2,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 7,
+          "b": 5,
+          "frame": 3,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        },
+        {
+          "a": 7,
+          "b": 5,
+          "frame": 4,
+          "size": [
+            32,
+            48
+          ],
+          "changedChannels": 0
+        }
+      ]
+    },
+    {
+      "id": "R10-real-death-sol",
+      "status": "passed",
+      "reason": null,
+      "first": {
+        "at": 1788.2999999970198,
+        "dt": 0.006,
+        "deathEvents": 1,
+        "deathT": 0.0061,
+        "rotation": -0.04765625,
+        "body": true,
+        "weapon": false,
+        "corpse": false
+      },
+      "sampleTimes": [
+        0,
+        0.045600000001490115,
+        0.08140000000223517,
+        0.127,
+        0.203
+      ],
+      "rows": [
+        {
+          "at": 1788.2999999970198,
+          "dt": 0.006,
+          "deathEvents": 1,
+          "deathT": 0.0061,
+          "rotation": -0.04765625,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1808.3999999985099,
+          "dt": 0.018200000000000046,
+          "deathEvents": 0,
+          "deathT": 0.024300000000000047,
+          "rotation": -0.18984375000000037,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1811.8999999985099,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.03030000000000005,
+          "rotation": -0.23671875000000037,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1815.5999999977648,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.03639999999999996,
+          "rotation": -0.2843749999999997,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1821.3999999985099,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0.04250000000000009,
+          "rotation": -0.33203125000000067,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1827.3999999985099,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.04850000000000009,
+          "rotation": -0.3789062500000007,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1833.8999999985099,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.0546,
+          "rotation": -0.4265625,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1849.0999999977648,
+          "dt": 0.01209999999999991,
+          "deathEvents": 0,
+          "deathT": 0.06669999999999991,
+          "rotation": -0.5210937499999992,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1852.7999999970198,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0.07280000000000005,
+          "rotation": -0.5687500000000003,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1857.7999999970198,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.07880000000000005,
+          "rotation": -0.6156250000000004,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1863.699999999255,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.08489999999999996,
+          "rotation": -0.6632812499999997,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1869.699999999255,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0.0910000000000001,
+          "rotation": -0.7109375000000007,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1885,
+          "dt": 0.01209999999999991,
+          "deathEvents": 0,
+          "deathT": 0.1031,
+          "rotation": -0.80546875,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1888.699999999255,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.10919999999999991,
+          "rotation": -0.8531249999999992,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1895.2999999970198,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.11519999999999991,
+          "rotation": -0.8999999999999992,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1903.7999999970198,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0.12130000000000005,
+          "rotation": -0.9476562500000003,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1907,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.12739999999999996,
+          "rotation": -0.9953124999999996,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1915.2999999970198,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.13339999999999996,
+          "rotation": -1.0421874999999998,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1930.199999999255,
+          "dt": 0.012100000000000137,
+          "deathEvents": 0,
+          "deathT": 0.1455000000000001,
+          "rotation": -1.1367187500000007,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1936.5,
+          "dt": 0.012199999999999819,
+          "deathEvents": 0,
+          "deathT": 0.15769999999999992,
+          "rotation": -1.2320312499999995,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1944.699999999255,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.16369999999999993,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1948.699999999255,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.16969999999999993,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1954.699999999255,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0.17580000000000007,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1961.5,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.18189999999999998,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1967.3999999985099,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0.1880000000000001,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1973,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.19400000000000012,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1979.2999999970198,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.20000000000000012,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1985.3999999985099,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.20610000000000003,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1991.2999999970198,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.21219999999999994,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 2006.2999999970198,
+          "dt": 0.012100000000000137,
+          "deathEvents": 0,
+          "deathT": 0.22430000000000008,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        }
+      ]
+    },
+    {
+      "id": "R10-real-death-placeholder",
+      "status": "passed",
+      "reason": null,
+      "first": {
+        "at": 1278.699999999255,
+        "dt": 0.006099999999999909,
+        "deathEvents": 1,
+        "deathT": 0.00619999999999991,
+        "rotation": -0.04843749999999929,
+        "body": true,
+        "weapon": false,
+        "corpse": false
+      },
+      "sampleTimes": [
+        0,
+        0.04310000000149011,
+        0.08619999999925494,
+        0.12180000000074506,
+        0.20030000000074505
+      ],
+      "rows": [
+        {
+          "at": 1278.699999999255,
+          "dt": 0.006099999999999909,
+          "deathEvents": 1,
+          "deathT": 0.00619999999999991,
+          "rotation": -0.04843749999999929,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1300,
+          "dt": 0.024200000000000044,
+          "deathEvents": 0,
+          "deathT": 0.030399999999999955,
+          "rotation": -0.23749999999999966,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1303.699999999255,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.036499999999999866,
+          "rotation": -0.28515624999999895,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1310.300000000745,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.042499999999999864,
+          "rotation": -0.33203124999999895,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1317.8999999985099,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0.048600000000000004,
+          "rotation": -0.3796875,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1321.800000000745,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.054699999999999915,
+          "rotation": -0.42734374999999936,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1333.1000000014901,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.060699999999999914,
+          "rotation": -0.47421874999999936,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1339.300000000745,
+          "dt": 0.01209999999999991,
+          "deathEvents": 0,
+          "deathT": 0.07279999999999982,
+          "rotation": -0.5687499999999986,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1346.6000000014901,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0.07889999999999996,
+          "rotation": -0.6164062499999996,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1352.300000000745,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.08499999999999987,
+          "rotation": -0.6640624999999989,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1358.199999999255,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.09099999999999987,
+          "rotation": -0.710937499999999,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1364.8999999985099,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.09699999999999988,
+          "rotation": -0.757812499999999,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1379.300000000745,
+          "dt": 0.012200000000000046,
+          "deathEvents": 0,
+          "deathT": 0.10919999999999992,
+          "rotation": -0.8531249999999995,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1383.1000000014901,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.11519999999999993,
+          "rotation": -0.8999999999999995,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1388.3999999985099,
+          "dt": 0.006200000000000046,
+          "deathEvents": 0,
+          "deathT": 0.12139999999999998,
+          "rotation": -0.9484374999999998,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1395.1000000014901,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.12739999999999999,
+          "rotation": -0.9953124999999998,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1400.5,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.1334999999999999,
+          "rotation": -1.0429687499999991,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1413.800000000745,
+          "dt": 0.012,
+          "deathEvents": 0,
+          "deathT": 0.1454999999999999,
+          "rotation": -1.1367187499999991,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1418.6000000014901,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0.15160000000000004,
+          "rotation": -1.1843750000000002,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1425.6000000014901,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.15769999999999995,
+          "rotation": -1.2320312499999995,
+          "body": true,
+          "weapon": false,
+          "corpse": false
+        },
+        {
+          "at": 1433.3999999985099,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.16369999999999996,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1437.5,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.16969999999999996,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1443.300000000745,
+          "dt": 0.006200000000000046,
+          "deathEvents": 0,
+          "deathT": 0.1759,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1448.8999999985099,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.1819999999999999,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1454.800000000745,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.18799999999999992,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1461,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.19399999999999992,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1467.300000000745,
+          "dt": 0.0061000000000001366,
+          "deathEvents": 0,
+          "deathT": 0.20010000000000006,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1473.300000000745,
+          "dt": 0.006,
+          "deathEvents": 0,
+          "deathT": 0.20610000000000006,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1479,
+          "dt": 0.006099999999999909,
+          "deathEvents": 0,
+          "deathT": 0.21219999999999997,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        },
+        {
+          "at": 1494.5,
+          "dt": 0.01209999999999991,
+          "deathEvents": 0,
+          "deathT": 0.2242999999999999,
+          "rotation": -1.2320312499999995,
+          "body": false,
+          "weapon": false,
+          "corpse": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "status": "passed"
+}

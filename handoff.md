@@ -1,3 +1,13 @@
+## 2026-10-08 · PR #22 Sol 从 bf099cc 定向签收 OPUS-DEATH-01 后停止
+
+原分支 `docs/coast-2-5d-art-design` 从 `bf099cc9a2f3aef86c7b45feea357d8ce940cbbb` 接手，初始干净。main 仍为841e8bb，PR #22 OPEN/远端头878f563；Pages等于main、不含本地样板。见[本轮签收报告与遗留状态](docs/coast-sample-view/sol-death-20261008/README.md)、[63份证据哈希](docs/coast-sample-view/sol-death-20261008/verification.json)。
+
+- **OPUS-DEATH-01 敌人路径本机PASS**：Sol原真实死亡工具未改、exit0；正式样板36/36，两模式先倾倒后尸体、武器隐藏，隐藏房间变化0像素，epoch/原生楼梯/读档不重播。目视复核本轮8张死亡过程/隐藏/读档截图。
+- Node24.19.0/pnpm11.19.0，224单测、package、原20套浏览器回归全部通过，68场景截图异常/页面错误/外部请求0。正式HTML SHA为6828628e…，所有制品与bf099cc逐字节相同；生产源码、原测试及运行素材不变。
+- 生命周期普通入口1280/1920各4/4：三类启动失败清理重试、真实上下文丢失与原canvas恢复后继续暂停、持键保护、结算失败保留及重试后下一局通过。
+- **玩家完整倒地不在本次签收范围**，OPUS-DEATH-02仍待排期；本轮未跑可选玩家探针。F20仍PARTIAL，本轮未重采样，前轮不同口径和未归因增长全部保留；ASTRA-SAVE-01仍UNCONFIRMED。
+- 仅交付签收文档与证据，本地提交后停止；未扩量、未修改前端方案、未推送/合并/发布。真机、真人、十分钟自然计时、旧构建对照及当前本地提交远端CI未运行。
+
 ## 2026-10-08 · PR #22 Opus 修 OPUS-DEATH-01，交 Sol 定向复验后停止
 
 在原分支 `docs/coast-2-5d-art-design` 从 `81e1bd0` 接手，工作区干净；main 仍为 841e8bb，已包含在分支中；PR #22 OPEN，头 878f563。见[报告与 Sol 定向复验说明](docs/coast-sample-view/opus-death-20261008/README.md)。

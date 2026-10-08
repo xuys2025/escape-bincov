@@ -1,0 +1,98 @@
+$ node --import tsx scripts/title-water-review.mjs
+{
+  "date": "2026-10-08T13:03:05.828Z",
+  "methodology": "Offline file:// current packaged game. Screenshots are unmodified. Water diagnostic uses ?test=1 to disable rain and hold the camera; a separate static capture uses reduced motion. Synthetic state is limited to these controls; no saved-game fixture.",
+  "checks": [
+    {
+      "name": "visible water changes without rain",
+      "changedPixels": 2490
+    },
+    {
+      "name": "visible reflection changes without rain",
+      "changedPixels": 1253
+    },
+    {
+      "name": "fixed-camera diagnostic",
+      "camera": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "motion toggle preserves pose",
+      "before": [
+        {
+          "far": [
+            0,
+            0
+          ],
+          "harbor": [
+            0,
+            0
+          ],
+          "room": [
+            0.9789743902124671,
+            0
+          ],
+          "lamp": [
+            0.9789743902124671,
+            0
+          ],
+          "desk": [
+            1.9579487804249343,
+            0
+          ],
+          "chair": [
+            2.9369231706374013,
+            0
+          ],
+          "fore": [
+            3.9158975608498685,
+            0
+          ]
+        },
+        61.503154275757375,
+        2,
+        53
+      ],
+      "after": [
+        {
+          "far": [
+            0,
+            0
+          ],
+          "harbor": [
+            0,
+            0
+          ],
+          "room": [
+            0.9789743902124671,
+            0
+          ],
+          "lamp": [
+            0.9789743902124671,
+            0
+          ],
+          "desk": [
+            1.9579487804249343,
+            0
+          ],
+          "chair": [
+            2.9369231706374013,
+            0
+          ],
+          "fore": [
+            3.9158975608498685,
+            0
+          ]
+        },
+        61.503154275757375,
+        2,
+        53
+      ]
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "status": "passed"
+}

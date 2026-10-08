@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-08T12:59:31.281Z",
+  "head": "bf099cc9a2f3aef86c7b45feea357d8ce940cbbb",
+  "branch": "docs/coast-2-5d-art-design",
+  "main": "841e8bbdfb070eada82537563dd1ab1b4801aea3",
+  "initialStatus": "",
+  "node": "v24.19.0",
+  "platform": "win32",
+  "release": "10.0.19045",
+  "cpu": "12th Gen Intel(R) Core(TM) i5-12400F",
+  "logicalCPUs": 12,
+  "totalMemory": 34192441344,
+  "pr": {
+    "url": "https://github.com/xuys2025/escape-bincov/pull/22",
+    "state": "open",
+    "merged": false,
+    "headRepository": "LMX-323/escape-bincov",
+    "headBranch": "docs/coast-2-5d-art-design",
+    "headSHA": "878f5633316a824960091f8f924c0ddd8dd78078",
+    "body": "## 为什么需要这个改动\n\n为当前沿海地图制定可执行的视角与材质规范：采用已确认的 A 方案（俯视方格地面＋可见立面），转向低饱和灰褐废土，并规定 GPT Image 同图多素材拼板、切分与验收流程。所有重绘能力均标注“设计待实现”，当前玩家画面和行为不变。\n\n## 任务归属与交付边界\n\n- 任务入口：docs/WORK-QUEUE.md 的“沿海地图 2.5D 视角与像素材质”。\n- 关联 PR / 依赖：以已接受 main `425f32013bd04da668ca5924f25fa2fef926b2c9` 为基线，保留 #16 建筑规则、#20 美术和 #21 主菜单成果。\n- 新建理由：维护者明确授权的独立中文设计文档交付；开始时没有开放 PR。不是主菜单续作，不另开代码实现线。\n- 本次范围：设计文档、README 导航、任务登记及 handoff；完成条件为文档事实/格式/链接核对与审阅。\n- 不包含：代码、素材生成、游戏测试、打包、存档迁移、部署；商场、基地、主菜单与库存 UI 不纳入重绘。\n\n## 改了什么\n\n- 定义脚底坐标、八方向直立人物与连续瞄准、分段排序、屋顶/前墙遮挡及信息边界。\n- 提供尺寸表、13 色基础色板、9 类材质、共用与五个区域的 P0/P1/P2 素材清单。\n- 规定 4×4、3×3、2×2 拼板及独立人物朝向板，提供三套中文提示词和局部返修模板；不把生成候选板当作运行图集。\n- 记录 Alpha、切分、像素整理、锚点、素材追溯与离线内联约束，并列出 6 项素材和 12 项未来游戏验收。\n\n## 验证证据\n\n| 检查/命令 | 结果 | 说明 |\n| --- | --- | --- |\n| 基线 | 通过 | Git fetch 与 GitHub main 均确认 425f320；任务清单和开放 PR 已核对 |\n| 文档检查 | 通过 | 新文档及新增导航的相对链接；9 张表格/99 行；18 个未来验收编号；13 色；尺寸算术与围栏 |\n| 源码事实 | 通过 | 7 项检查：地块/地图尺寸、屋顶与密封规则、PNG data URL、独立外观变体；另人工核对角色旋转/快照等调用 |\n| git diff --check | 通过 | 修正新文件末尾空行后，全量文档差异通过 |\n| pnpm test | 未运行 | 本地只有设计文档改动；PR 自动 CI 另行执行 |\n| pnpm package | 不适用 | 未改变游戏源码、打包脚本或玩家游玩说明 |\n| 对应浏览器检查 | 未运行 | 无实现画面变化，无截图冒充实现证据 |\n| 上传一致性 | 通过 | 连接器创建的完整文件树与本地已验收树一致 |\n\n## 兼容性、风险与剩余问题\n\n不改 API、存档、运行资产、许可或发布包；不调用绘图工具、不消耗绘图额度。原工作区未提交内容完整保留，使用独立工作树。后续素材质量、游戏实现、真人辨识、真机与性能仍待独立验收；拼板不承诺固定节省比例。上游无写权限，按规则由 fork 提交，不自行合并。\n\n## 交付自查\n\n- [x] 已核对最新 main、任务清单及开放 PR，未覆盖他人工作。\n- [x] 新建 PR 的独立文档交付理由明确。\n- [x] 遵循 AGENTS.md，变更范围与明确需求一致。\n- [x] 文档检查已实际执行，游戏检查未运行的原因已记录。\n- [x] 本次不满足重新打包条件，生成物与发布清单保持不变。\n- [x] 同步任务归属、文档导航和 handoff，等待维护者审阅合并。\n",
+    "comments": [
+      {
+        "url": "https://github.com/xuys2025/escape-bincov/pull/22#issuecomment-6052268742",
+        "at": "2026-10-08T04:30:47Z",
+        "body": "已排期 预期需3工作日完工"
+      }
+    ],
+    "reviews": [],
+    "checks": []
+  },
+  "pages": {
+    "url": "https://xuys2025.github.io/escape-bincov/",
+    "bytes": 2416678,
+    "sha256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+    "mainHTMLSHA256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+    "equalsMain": true
+  },
+  "scope": "Local OPUS-DEATH-01 verification only; no remote mutations."
+}
