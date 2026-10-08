@@ -1,0 +1,1118 @@
+{
+  "at": "2026-10-08T04:37:41.483Z",
+  "overallStatus": "engineering-regressions-passed; F20-strict-no-growth-not-signed-off; ART-R08/R10-unresolved; revised-first-batch-delivered",
+  "baseline": {
+    "at": "2026-10-08T04:25:32.049Z",
+    "tested": "6a7e6b194bc3778e7e009eddf671699b112c3cdb",
+    "branch": "docs/coast-2-5d-art-design",
+    "main": "841e8bbdfb070eada82537563dd1ab1b4801aea3",
+    "originMain": "841e8bbdfb070eada82537563dd1ab1b4801aea3",
+    "mainIncluded": false,
+    "pr": {
+      "url": "https://github.com/xuys2025/escape-bincov/pull/22",
+      "state": "open",
+      "merged": false,
+      "headSHA": "878f5633316a824960091f8f924c0ddd8dd78078",
+      "headRepository": "LMX-323/escape-bincov",
+      "headBranch": "docs/coast-2-5d-art-design",
+      "updatedAt": "2026-10-07T12:13:38Z",
+      "body": "## 为什么需要这个改动\n\n为当前沿海地图制定可执行的视角与材质规范：采用已确认的 A 方案（俯视方格地面＋可见立面），转向低饱和灰褐废土，并规定 GPT Image 同图多素材拼板、切分与验收流程。所有重绘能力均标注“设计待实现”，当前玩家画面和行为不变。\n\n## 任务归属与交付边界\n\n- 任务入口：docs/WORK-QUEUE.md 的“沿海地图 2.5D 视角与像素材质”。\n- 关联 PR / 依赖：以已接受 main `425f32013bd04da668ca5924f25fa2fef926b2c9` 为基线，保留 #16 建筑规则、#20 美术和 #21 主菜单成果。\n- 新建理由：维护者明确授权的独立中文设计文档交付；开始时没有开放 PR。不是主菜单续作，不另开代码实现线。\n- 本次范围：设计文档、README 导航、任务登记及 handoff；完成条件为文档事实/格式/链接核对与审阅。\n- 不包含：代码、素材生成、游戏测试、打包、存档迁移、部署；商场、基地、主菜单与库存 UI 不纳入重绘。\n\n## 改了什么\n\n- 定义脚底坐标、八方向直立人物与连续瞄准、分段排序、屋顶/前墙遮挡及信息边界。\n- 提供尺寸表、13 色基础色板、9 类材质、共用与五个区域的 P0/P1/P2 素材清单。\n- 规定 4×4、3×3、2×2 拼板及独立人物朝向板，提供三套中文提示词和局部返修模板；不把生成候选板当作运行图集。\n- 记录 Alpha、切分、像素整理、锚点、素材追溯与离线内联约束，并列出 6 项素材和 12 项未来游戏验收。\n\n## 验证证据\n\n| 检查/命令 | 结果 | 说明 |\n| --- | --- | --- |\n| 基线 | 通过 | Git fetch 与 GitHub main 均确认 425f320；任务清单和开放 PR 已核对 |\n| 文档检查 | 通过 | 新文档及新增导航的相对链接；9 张表格/99 行；18 个未来验收编号；13 色；尺寸算术与围栏 |\n| 源码事实 | 通过 | 7 项检查：地块/地图尺寸、屋顶与密封规则、PNG data URL、独立外观变体；另人工核对角色旋转/快照等调用 |\n| git diff --check | 通过 | 修正新文件末尾空行后，全量文档差异通过 |\n| pnpm test | 未运行 | 本地只有设计文档改动；PR 自动 CI 另行执行 |\n| pnpm package | 不适用 | 未改变游戏源码、打包脚本或玩家游玩说明 |\n| 对应浏览器检查 | 未运行 | 无实现画面变化，无截图冒充实现证据 |\n| 上传一致性 | 通过 | 连接器创建的完整文件树与本地已验收树一致 |\n\n## 兼容性、风险与剩余问题\n\n不改 API、存档、运行资产、许可或发布包；不调用绘图工具、不消耗绘图额度。原工作区未提交内容完整保留，使用独立工作树。后续素材质量、游戏实现、真人辨识、真机与性能仍待独立验收；拼板不承诺固定节省比例。上游无写权限，按规则由 fork 提交，不自行合并。\n\n## 交付自查\n\n- [x] 已核对最新 main、任务清单及开放 PR，未覆盖他人工作。\n- [x] 新建 PR 的独立文档交付理由明确。\n- [x] 遵循 AGENTS.md，变更范围与明确需求一致。\n- [x] 文档检查已实际执行，游戏检查未运行的原因已记录。\n- [x] 本次不满足重新打包条件，生成物与发布清单保持不变。\n- [x] 同步任务归属、文档导航和 handoff，等待维护者审阅合并。\n",
+      "permission": "Current credentials not queried; prior handoff says no push permission; no push requested or attempted"
+    },
+    "comments": [],
+    "reviews": [],
+    "errors": [],
+    "pages": {
+      "url": "https://xuys2025.github.io/escape-bincov/",
+      "bytes": 2416678,
+      "sha256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+      "mainBytes": 2416678,
+      "mainSHA256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+      "equalsMain": true,
+      "includesLocalSample": false
+    }
+  },
+  "environment": {
+    "node": "v24.19.0",
+    "pnpm": "11.19.0 (Corepack)",
+    "os": "win32 10.0.19045",
+    "arch": "x64",
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12400F",
+    "logicalCPUs": 12,
+    "totalMemoryBytes": 34192441344,
+    "browser": "154.0.8037.98",
+    "execution": "Chrome headless; physical-device/human performance not claimed"
+  },
+  "scope": {
+    "sourceChanged": false,
+    "runtimeAssetIntegrationChanged": false,
+    "generatedArtifactsChanged": false,
+    "push": false,
+    "merge": false,
+    "publish": false,
+    "assets": {
+      "player": 25,
+      "wall": 11,
+      "ground": 6,
+      "weapon": 1,
+      "total": 43,
+      "changed": 34,
+      "unchanged": 9
+    }
+  },
+  "commands": {
+    "core": {
+      "node": "v24.19.0",
+      "unitExit": 0,
+      "packageExit": 0
+    },
+    "finalGates": [
+      {
+        "id": "wiring-final",
+        "node": "v24.19.0",
+        "command": [
+          "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+          "scripts/coast-sample-test.mjs"
+        ],
+        "env": {
+          "BINCOV_SAMPLE_OUT": "test-results/sol-round3/wiring-final",
+          "BINCOV_SAMPLE_HTML": "dist/index.html"
+        },
+        "log": "test-results/sol-round3/wiring-final.log",
+        "startedAt": "2026-10-08T04:23:47.084Z",
+        "finishedAt": "2026-10-08T04:24:14.924Z",
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      {
+        "id": "target-loot-final",
+        "node": "v24.19.0",
+        "command": [
+          "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+          "--import",
+          "tsx",
+          "scripts/sol-target-loot-probe.mjs"
+        ],
+        "env": {
+          "BINCOV_SOL_OUT": "test-results/sol-round3/target-final"
+        },
+        "log": "test-results/sol-round3/target-loot-final.log",
+        "startedAt": "2026-10-08T04:24:14.925Z",
+        "finishedAt": "2026-10-08T04:24:19.324Z",
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      },
+      {
+        "id": "heap-final",
+        "node": "v24.19.0",
+        "command": [
+          "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+          "scripts/coast-sample-heap.mjs"
+        ],
+        "env": {
+          "BINCOV_HEAP_OUT": "test-results/sol-round3/heap-final",
+          "BINCOV_HEAP_CYCLES": "30",
+          "BINCOV_HEAP_SNAP": "10,30",
+          "BINCOV_HEAP_KEEP": "1"
+        },
+        "log": "test-results/sol-round3/heap-final.log",
+        "startedAt": "2026-10-08T04:24:19.325Z",
+        "finishedAt": "2026-10-08T04:25:37.580Z",
+        "exitCode": 0,
+        "signal": null,
+        "error": null
+      }
+    ],
+    "regressions": [
+      {
+        "name": "browser",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:17:06.2268444Z",
+        "finishedAt": "2026-10-08T04:17:45.7817571Z"
+      },
+      {
+        "name": "desktop-input",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:17:45.7870394Z",
+        "finishedAt": "2026-10-08T04:18:10.5436893Z"
+      },
+      {
+        "name": "save-browser",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:18:10.5462738Z",
+        "finishedAt": "2026-10-08T04:18:24.0127052Z"
+      },
+      {
+        "name": "buildings",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:18:24.0143610Z",
+        "finishedAt": "2026-10-08T04:18:36.9547696Z"
+      },
+      {
+        "name": "mobile",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:18:36.9566340Z",
+        "finishedAt": "2026-10-08T04:18:56.5213148Z"
+      },
+      {
+        "name": "mobile-ux",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:18:56.5229929Z",
+        "finishedAt": "2026-10-08T04:20:06.4846498Z"
+      },
+      {
+        "name": "portable",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:20:06.4863961Z",
+        "finishedAt": "2026-10-08T04:20:12.2269167Z"
+      },
+      {
+        "name": "ui",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:20:12.2287576Z",
+        "finishedAt": "2026-10-08T04:20:20.7092353Z"
+      },
+      {
+        "name": "loot",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:20:20.7107983Z",
+        "finishedAt": "2026-10-08T04:21:11.0359293Z"
+      },
+      {
+        "name": "expansion",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:21:11.0378887Z",
+        "finishedAt": "2026-10-08T04:21:20.1809038Z"
+      },
+      {
+        "name": "qol-expansion",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:21:20.1824031Z",
+        "finishedAt": "2026-10-08T04:21:24.6760200Z"
+      },
+      {
+        "name": "systems",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:21:24.6775936Z",
+        "finishedAt": "2026-10-08T04:21:59.3264460Z"
+      },
+      {
+        "name": "art",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:21:59.3279845Z",
+        "finishedAt": "2026-10-08T04:22:11.9017511Z"
+      },
+      {
+        "name": "tactical",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:22:11.9058922Z",
+        "finishedAt": "2026-10-08T04:22:30.4317492Z"
+      },
+      {
+        "name": "title",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:22:30.4331900Z",
+        "finishedAt": "2026-10-08T04:23:26.9516638Z"
+      },
+      {
+        "name": "title-water",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:23:26.9532984Z",
+        "finishedAt": "2026-10-08T04:23:37.3321519Z"
+      },
+      {
+        "name": "mall-passages",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:23:37.3337090Z",
+        "finishedAt": "2026-10-08T04:26:24.9272959Z"
+      },
+      {
+        "name": "mall-landing",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:26:24.9287343Z",
+        "finishedAt": "2026-10-08T04:26:33.5430476Z"
+      },
+      {
+        "name": "qol",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:26:33.5452715Z",
+        "finishedAt": "2026-10-08T04:26:55.9370981Z"
+      },
+      {
+        "name": "loot-target",
+        "exitCode": 0,
+        "node": "v24.19.0",
+        "startedAt": "2026-10-08T04:26:55.9385028Z",
+        "finishedAt": "2026-10-08T04:27:15.4966672Z"
+      }
+    ],
+    "unit": {
+      "status": "passed",
+      "passed": 223
+    },
+    "package": {
+      "status": "passed",
+      "unchanged": true
+    },
+    "wiring": {
+      "status": "passed",
+      "passed": 27
+    },
+    "revisedWiring": {
+      "status": "passed",
+      "passed": 27,
+      "variant": "evidence/art-revised/variant.json"
+    },
+    "boundaries": {
+      "status": "partial",
+      "passed": 7,
+      "total": 8,
+      "exitCode": 1
+    },
+    "heap": {
+      "status": "tracked-instances-pass; strict-total-heap-partial",
+      "cycles": 30,
+      "exitCode": 0,
+      "accumulated": [],
+      "trend": {
+        "afterWarmupMean": 32966118.4,
+        "lastFiveMean": 33663621.6,
+        "growthBytes": 697503.200000003
+      },
+      "selfSize": {
+        "10": 45741380,
+        "30": 46248920,
+        "perCycle": 25377
+      },
+      "shaderRetainedBytes": 107040,
+      "shaderBytesPerMount": 5352,
+      "packaged20CycleTrend": 547495.1999999993
+    },
+    "mall": {
+      "status": "passed",
+      "runs": [
+        {
+          "run": 1,
+          "outcome": "timeout",
+          "realSeconds": 600.427
+        },
+        {
+          "run": 2,
+          "outcome": "death",
+          "realSeconds": 61.472
+        },
+        {
+          "run": 3,
+          "outcome": "extract",
+          "realSeconds": 29.555
+        }
+      ],
+      "aimClicks": {
+        "fired": 37,
+        "occluded": 44
+      }
+    },
+    "screenshots": {
+      "original": 68,
+      "revisedVariant": 68,
+      "total": 136,
+      "anomalies": 0,
+      "pageErrors": 0,
+      "externalRequests": 0,
+      "saveErrors": 0
+    },
+    "saveDiagnostic": {
+      "status": "passed",
+      "passed": 3,
+      "exitCode": 0,
+      "historicalRootCause": "unconfirmed; repaired test-driver causes do not establish the historical outside screenshot cause"
+    },
+    "occlusion": {
+      "original": "passed",
+      "revisedVariant": "passed",
+      "casesPerVariant": 8,
+      "scope": "Representative front wall/closed door four fade levels; does not cover all material/roof combinations"
+    },
+    "assets": {
+      "status": "43/43 mechanical checks passed; 25 unique player frames",
+      "manifest": "assets/manifest.json",
+      "validation": "assets/validation.json"
+    }
+  },
+  "harnessNotes": [
+    "Initial PowerShell wrapper ran node --version before reading LASTEXITCODE, overwriting it. That suite-exits.json is not used as exit-code evidence. Final gates use spawnSync status, boundaries were rerun with immediate capture, all 20 regressions capture immediately.",
+    "The first occlusion fixture selected an off-screen wall; zero positive-control pixels correctly failed the probe. Final fixtures use a front-door-neighbour wall and require controlOpaquePixels > 0."
+  ],
+  "limitations": [
+    "ASTRA-SAVE-01 historical anomaly not reproduced and not declared fixed",
+    "F20 total heap still grows; no Pixi/library/lifecycle change in this scope",
+    "ART-R08 visual back-weapon policy awaits Opus; not applied in preview variant",
+    "ART-R10 crouch frames absent under fixed 43 assets; idle fallback not signed off",
+    "Mirror-lighting preference awaits Opus final art review",
+    "No physical phone, human G12, WebGL context-loss test, exact local-commit remote CI or deployment"
+  ],
+  "artifacts": {
+    "dist/index.html": {
+      "bytes": 3144063,
+      "sha256": "b3c859899cbd2a6754528c0b50dd05f4e27395803f6c96adec768e40bc0f62a6",
+      "equals6a7e6b1": true
+    },
+    "start the game.html": {
+      "bytes": 3144063,
+      "sha256": "b3c859899cbd2a6754528c0b50dd05f4e27395803f6c96adec768e40bc0f62a6",
+      "equals6a7e6b1": true
+    },
+    "release/Escape-Bincov-portable.zip": {
+      "bytes": 1069283,
+      "sha256": "2fd6761e7a21568d06095966b7b69067c98c302b871e05f557a438fa8a85c8d3",
+      "equals6a7e6b1": true
+    },
+    "release/Escape-Bincov-web.zip": {
+      "bytes": 1065508,
+      "sha256": "3796f8433d229798aded03b100370f4e51e94a449e3e0edeae53bafa3f2c0bb9",
+      "equals6a7e6b1": true
+    },
+    "docs/release-manifest.json": {
+      "bytes": 747,
+      "sha256": "3c0147b1fb0c96198c13c5fca8942a3115a25453b98f2ff70bfce2e779b7aec0",
+      "equals6a7e6b1": true
+    }
+  },
+  "evidence": [
+    {
+      "file": "evidence/unit.log",
+      "bytes": 22035,
+      "sha256": "b329418ca714b48825f854611d7bf888d07d0bdc819f13aa96507867d0fc5104",
+      "raw": "test-results/sol-round3/unit.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 22267,
+      "originalSha256": "601fb0211e0d3a5b986a51e5abdd3b88b3b5ebe0c603421a7b89dd7ade432f6a"
+    },
+    {
+      "file": "evidence/package.log",
+      "bytes": 422,
+      "sha256": "ec2501acac0c764371b6ca34f11343f499b853331eb2f03ee8cf87b01060e623",
+      "raw": "test-results/sol-round3/package.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 428,
+      "originalSha256": "5fd4a753c8a8081d517417659f43754f5530dba80b0baa9b5c6a31d89c0333e9"
+    },
+    {
+      "file": "evidence/core.json",
+      "bytes": 62,
+      "sha256": "8fb797bc0243746cc899c133286c253337efda21aec450a482228a837a479cf1",
+      "raw": "test-results/sol-round3/core.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 67,
+      "originalSha256": "9cc40bd17d236980aea58a4c5568e4b7dd48fad2d8d6e018c7226140549fb62e"
+    },
+    {
+      "file": "evidence/final-gates.json",
+      "bytes": 1731,
+      "sha256": "212fa53a4689c60909d0b46b005d6e1be016962ec35695effa5fc2728db10bc3",
+      "raw": "test-results/sol-round3/final-gates.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 1731,
+      "originalSha256": "212fa53a4689c60909d0b46b005d6e1be016962ec35695effa5fc2728db10bc3"
+    },
+    {
+      "file": "evidence/final-gates-runner.mjs",
+      "bytes": 1351,
+      "sha256": "dce323a9ff09c15b8cc7e6c94bf45314b0bebfac6859d45b2f3bea534b6e828c",
+      "raw": "test-results/sol-round3/final-gates-runner.mjs",
+      "normalization": "UTF-8, LF; terminal blank lines removed",
+      "originalBytes": 1353,
+      "originalSha256": "f74eeb02425cf6f03c70a87055a04bf4f41690355754845464bb447593e07c1a"
+    },
+    {
+      "file": "evidence/wiring.json",
+      "bytes": 10060,
+      "sha256": "d599aa7fef8413dc672c379d4be36ec51c4f3d05166bd06503297c129d12384c",
+      "raw": "test-results/sol-round3/wiring-final/report.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 10060,
+      "originalSha256": "d599aa7fef8413dc672c379d4be36ec51c4f3d05166bd06503297c129d12384c"
+    },
+    {
+      "file": "evidence/wiring.log",
+      "bytes": 2605,
+      "sha256": "2d2bf49725bd742f25d4d075e01ef9bd1081c5d1d93640458c73b1491571d8ba",
+      "raw": "test-results/sol-round3/wiring-final.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 2605,
+      "originalSha256": "2d2bf49725bd742f25d4d075e01ef9bd1081c5d1d93640458c73b1491571d8ba"
+    },
+    {
+      "file": "evidence/wiring-revised.json",
+      "bytes": 10059,
+      "sha256": "409dd75c6799d8a92b764e41a78eb0b32073db390664f25301b92dfe1b8a5120",
+      "raw": "test-results/sol-round3/wiring-revised/report.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 10059,
+      "originalSha256": "409dd75c6799d8a92b764e41a78eb0b32073db390664f25301b92dfe1b8a5120"
+    },
+    {
+      "file": "evidence/wiring-revised.log",
+      "bytes": 2605,
+      "sha256": "2d2bf49725bd742f25d4d075e01ef9bd1081c5d1d93640458c73b1491571d8ba",
+      "raw": "test-results/sol-round3/wiring-revised.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 2633,
+      "originalSha256": "9f63183c0d34bb2a1cbb43a05611fe327928b28689c6e79b381d6aebe3519203"
+    },
+    {
+      "file": "evidence/revised-variant-exits.json",
+      "bytes": 67,
+      "sha256": "0f325d718ecec1b6b9fc18d35d54d03c15caaa87bc633c5a8abddfb79aef33c7",
+      "raw": "test-results/sol-round3/revised-variant-exits.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 72,
+      "originalSha256": "8a5b79a2abaa2e4f3e29ed72dfae0778aec3de61fd79e3fb9f5e1ca7d09c6c78"
+    },
+    {
+      "file": "evidence/sample-boundaries.json",
+      "bytes": 17594,
+      "sha256": "f9b95cdc92da45905270a500c3f54a6120b18d9fbef2ce3ca3d421cbf7ae44f2",
+      "raw": "test-results/sol-round3/boundaries-final/sample-boundaries.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 17594,
+      "originalSha256": "f9b95cdc92da45905270a500c3f54a6120b18d9fbef2ce3ca3d421cbf7ae44f2"
+    },
+    {
+      "file": "evidence/sample-boundaries.log",
+      "bytes": 1497,
+      "sha256": "68346b122e8b41f4c2250526b2df4b122c0ebc86623ab3cad0de973e78471027",
+      "raw": "test-results/sol-round3/sample-boundaries-final.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 1526,
+      "originalSha256": "8d3249c6f7cb0a4dcfe6916d36734faa0a960fa94d279d03908f88613dabd96c"
+    },
+    {
+      "file": "evidence/boundaries-exit.json",
+      "bytes": 101,
+      "sha256": "150b3632ff0d6dd5be5c3ea4989a46fae9ecf2e53f067ede9df88de69cf3b9eb",
+      "raw": "test-results/sol-round3/boundaries-final-exit.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 106,
+      "originalSha256": "64c9ea6c8dfbb9e0aab27a60ca6ccab6558ba78ec40a8a83c5be62c3a174dc63"
+    },
+    {
+      "file": "evidence/target-loot.json",
+      "bytes": 1623,
+      "sha256": "1d6a8ea4ce8ea8857d0be2166c924e569f708d089a26e4baec11eba04a9f6d89",
+      "raw": "test-results/sol-round3/target-final/target-loot-probe.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 1623,
+      "originalSha256": "1d6a8ea4ce8ea8857d0be2166c924e569f708d089a26e4baec11eba04a9f6d89"
+    },
+    {
+      "file": "evidence/target-loot.log",
+      "bytes": 167,
+      "sha256": "a8af448a7fb47ec70f677b7d8720b1220990d0e7b0dde399b95648645f7c2687",
+      "raw": "test-results/sol-round3/target-loot-final.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 167,
+      "originalSha256": "a8af448a7fb47ec70f677b7d8720b1220990d0e7b0dde399b95648645f7c2687"
+    },
+    {
+      "file": "evidence/heap-report.json",
+      "bytes": 9958,
+      "sha256": "0a904662b699f1e6af4ba4c66ec038b2fcd47a8b3e14e208e0c219bc5e52ea7a",
+      "raw": "test-results/sol-round3/heap-final/heap-report.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 9958,
+      "originalSha256": "0a904662b699f1e6af4ba4c66ec038b2fcd47a8b3e14e208e0c219bc5e52ea7a"
+    },
+    {
+      "file": "evidence/shader-cache.json",
+      "bytes": 10986,
+      "sha256": "d2202c4c8c5963abdb1699eb6abe52eb80736c55fc0cffab518cd26417f56950",
+      "raw": "test-results/sol-round3/heap-final/shader-cache.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 10986,
+      "originalSha256": "d2202c4c8c5963abdb1699eb6abe52eb80736c55fc0cffab518cd26417f56950"
+    },
+    {
+      "file": "evidence/heap.log",
+      "bytes": 2403,
+      "sha256": "3d7a2fffa694e64716847d8d411247e0fb77e5f971adf1b68d1b867f690d28fa",
+      "raw": "test-results/sol-round3/heap-final.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 2403,
+      "originalSha256": "3d7a2fffa694e64716847d8d411247e0fb77e5f971adf1b68d1b867f690d28fa"
+    },
+    {
+      "file": "evidence/save-diagnostic.json",
+      "bytes": 1730,
+      "sha256": "db0e1a12312e45223447f629e3ecbf96b8751e937d8434f05f3c4e94ed3efe75",
+      "raw": "test-results/sol-round3/save-diagnostic/save-diagnostic.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 1730,
+      "originalSha256": "db0e1a12312e45223447f629e3ecbf96b8751e937d8434f05f3c4e94ed3efe75"
+    },
+    {
+      "file": "evidence/save-diagnostic.log",
+      "bytes": 50,
+      "sha256": "62055dcc6dbdb4babd9e0cb72696c1e5ef96f3b550b842d9165edbd29b94b080",
+      "raw": "test-results/sol-round3/save-diagnostic.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 51,
+      "originalSha256": "b6ab8502490d9232c65fef04f188600fd9d25069b62b8ac619112ff57297a79f"
+    },
+    {
+      "file": "evidence/save-diagnostic-exit.json",
+      "bytes": 42,
+      "sha256": "c74e71bd2836b612e9c0701b726d576d068b0d41c81b0198717e8b729e3fe7e0",
+      "raw": "test-results/sol-round3/save-diagnostic-exit.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 46,
+      "originalSha256": "d937867f30c6217cf0ab173f65d2f566a0fd87bcd340f2ced59e2a46f5c9d05b"
+    },
+    {
+      "file": "evidence/layered-play-report.json",
+      "bytes": 21505,
+      "sha256": "fa492d3eaf427c3f965e07e96401b56b372e6d9e8889718af7bf0d9aa7d2d77d",
+      "raw": "test-results/sol-round3/mall/layered-play-report.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 21505,
+      "originalSha256": "fa492d3eaf427c3f965e07e96401b56b372e6d9e8889718af7bf0d9aa7d2d77d"
+    },
+    {
+      "file": "evidence/layered-play.log",
+      "bytes": 1969,
+      "sha256": "a2bbd9b8f4327cace0e3e213351b8cdc77bbb6819132e4135d721d9ac218b730",
+      "raw": "test-results/sol-round3/layered-play.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 1992,
+      "originalSha256": "8ccacd354b72e44cf19d41f70ed4507c0ccc8aa0d5fa824a2dbd069f25a12063"
+    },
+    {
+      "file": "evidence/shots-original/index.json",
+      "bytes": 66224,
+      "sha256": "eda20a4362eb58a6fab611e4edd6f6860f47800f2bfc43420c93db8972874b21",
+      "raw": "test-results/sol-round3/shots/index.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 66224,
+      "originalSha256": "eda20a4362eb58a6fab611e4edd6f6860f47800f2bfc43420c93db8972874b21"
+    },
+    {
+      "file": "evidence/shots-original.log",
+      "bytes": 1788,
+      "sha256": "7c0f20bfd3b860df8b41cdb7771cf37c893b4e55975cb86af0ddadd8010b5958",
+      "raw": "test-results/sol-round3/shots.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 1857,
+      "originalSha256": "cd9aeaad59d1d84ae4d7be495a5469d040562323b5d9ca7ef878027797ff1d98"
+    },
+    {
+      "file": "evidence/shots-revised/index.json",
+      "bytes": 65821,
+      "sha256": "c577c6881e80d9084f6cd13b83639a1158eb6c69a76cf621486189bd7bfa7e5c",
+      "raw": "test-results/sol-round3/shots-revised/index.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 65821,
+      "originalSha256": "c577c6881e80d9084f6cd13b83639a1158eb6c69a76cf621486189bd7bfa7e5c"
+    },
+    {
+      "file": "evidence/shots-revised.log",
+      "bytes": 1788,
+      "sha256": "7c0f20bfd3b860df8b41cdb7771cf37c893b4e55975cb86af0ddadd8010b5958",
+      "raw": "test-results/sol-round3/shots-revised.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 1857,
+      "originalSha256": "cd9aeaad59d1d84ae4d7be495a5469d040562323b5d9ca7ef878027797ff1d98"
+    },
+    {
+      "file": "evidence/shots-revised-exit.json",
+      "bytes": 42,
+      "sha256": "c74e71bd2836b612e9c0701b726d576d068b0d41c81b0198717e8b729e3fe7e0",
+      "raw": "test-results/sol-round3/shots-revised-exit.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 46,
+      "originalSha256": "d937867f30c6217cf0ab173f65d2f566a0fd87bcd340f2ced59e2a46f5c9d05b"
+    },
+    {
+      "file": "evidence/visibility-probe.json",
+      "bytes": 1586,
+      "sha256": "d60440b63f62eff4622e30ce5a805265a380cffeb35ed87295f58097a032d08a",
+      "raw": "test-results/sol-round3/visibility/visibility-probe.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 1586,
+      "originalSha256": "d60440b63f62eff4622e30ce5a805265a380cffeb35ed87295f58097a032d08a"
+    },
+    {
+      "file": "evidence/visibility.log",
+      "bytes": 1587,
+      "sha256": "60362c4501ac2738da5d133f418386c923bdf594c2c43c5e41d7020e3367929a",
+      "raw": "test-results/sol-round3/visibility.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 1641,
+      "originalSha256": "6f6d1e773f1f2fe030f554ed8deb11a6b807d74cae14be231859e0e2035d5a89"
+    },
+    {
+      "file": "evidence/visibility-exit.json",
+      "bytes": 42,
+      "sha256": "c74e71bd2836b612e9c0701b726d576d068b0d41c81b0198717e8b729e3fe7e0",
+      "raw": "test-results/sol-round3/visibility-exit.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 46,
+      "originalSha256": "d937867f30c6217cf0ab173f65d2f566a0fd87bcd340f2ced59e2a46f5c9d05b"
+    },
+    {
+      "file": "evidence/occlusion.json",
+      "bytes": 3723,
+      "sha256": "240b617e6734f0e7bfd9e9c5eb7a015dc0b3b6550df8f84ea61a0a7bf24db4e1",
+      "raw": "test-results/sol-round3/occlusion/occlusion.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 3723,
+      "originalSha256": "240b617e6734f0e7bfd9e9c5eb7a015dc0b3b6550df8f84ea61a0a7bf24db4e1"
+    },
+    {
+      "file": "evidence/occlusion.log",
+      "bytes": 58,
+      "sha256": "edeb9a60ade76d86d547a4a4d2e2d7dccb8e30a21880068c8372ac757c0e3379",
+      "raw": "test-results/sol-round3/occlusion-final.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 59,
+      "originalSha256": "cbafd21a118503c3027bc22e8b06dd62e9e98436987f6869ffe2ae4a3bac8db8"
+    },
+    {
+      "file": "evidence/occlusion-revised.json",
+      "bytes": 3758,
+      "sha256": "60a15beb0110574f5b34f7aa8ef5cb0aaabff2539ece3c326ff899b9bda28aaf",
+      "raw": "test-results/sol-round3/occlusion-revised/occlusion.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 3758,
+      "originalSha256": "60a15beb0110574f5b34f7aa8ef5cb0aaabff2539ece3c326ff899b9bda28aaf"
+    },
+    {
+      "file": "evidence/occlusion-revised.log",
+      "bytes": 58,
+      "sha256": "edeb9a60ade76d86d547a4a4d2e2d7dccb8e30a21880068c8372ac757c0e3379",
+      "raw": "test-results/sol-round3/occlusion-revised.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 59,
+      "originalSha256": "cbafd21a118503c3027bc22e8b06dd62e9e98436987f6869ffe2ae4a3bac8db8"
+    },
+    {
+      "file": "evidence/occlusion-exits.json",
+      "bytes": 66,
+      "sha256": "9ce9b3ad0cd1fc5fe739410a6d030f61f662ee7e1deb925e9340b94b1ef2406a",
+      "raw": "test-results/sol-round3/occlusion-final-exits.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 71,
+      "originalSha256": "6f89e6fc2a42e0ad01d45ae35b815acf9a04319538616613e785f74023c67658"
+    },
+    {
+      "file": "evidence/occlusion-first-fixture.json",
+      "bytes": 3672,
+      "sha256": "bb3bf7e00b1444f669644e28b7ab4131ff8c39dfbb3e67944dd6475eb15d3bb4",
+      "raw": "test-results/sol-round3/occlusion-first-fixture.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 3672,
+      "originalSha256": "bb3bf7e00b1444f669644e28b7ab4131ff8c39dfbb3e67944dd6475eb15d3bb4"
+    },
+    {
+      "file": "evidence/art-revised/index.json",
+      "bytes": 1600,
+      "sha256": "7794b10bf235a7fbd93fd16999c6f06f5177b444cbf16819dcae1643c020647a",
+      "raw": "test-results/sol-round3/art-revised/index.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 1600,
+      "originalSha256": "7794b10bf235a7fbd93fd16999c6f06f5177b444cbf16819dcae1643c020647a"
+    },
+    {
+      "file": "evidence/art-revised/variant.json",
+      "bytes": 8670,
+      "sha256": "2e916c5672df5cc3d4d4c64ac4a559378353fcd943a78251cdf8e1d2dad8e974",
+      "raw": "test-results/sol-round3/art-revised/variant.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 8670,
+      "originalSha256": "2e916c5672df5cc3d4d4c64ac4a559378353fcd943a78251cdf8e1d2dad8e974"
+    },
+    {
+      "file": "evidence/art-revised.log",
+      "bytes": 60,
+      "sha256": "70cae9c43307f5007eca5988364e1a8c5a760759b17ddd8000fa9df762e77ffe",
+      "raw": "test-results/sol-round3/art-revised.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 61,
+      "originalSha256": "021f82f4f342c4bbba6fb315c69d37d0b14f91e9d40cacd8ad90f37c37dca919"
+    },
+    {
+      "file": "evidence/remote-baseline.json",
+      "bytes": 4570,
+      "sha256": "f286f5ce95285aeb0013d95f705c3675f5447ac166166cff484606163140d965",
+      "raw": "test-results/sol-round3/remote-baseline.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 4570,
+      "originalSha256": "f286f5ce95285aeb0013d95f705c3675f5447ac166166cff484606163140d965"
+    },
+    {
+      "file": "evidence/regressions.json",
+      "bytes": 3488,
+      "sha256": "8253aa88590f44b9df3aa06849f1bf5bee4ec0e024ec017bf748b88ff114509e",
+      "raw": "test-results/sol-round3/regressions.json",
+      "normalization": "UTF-8, LF",
+      "originalBytes": 3630,
+      "originalSha256": "c741aab7e35c72dd0d81bfa149f1df71cbc0f32c33df4800994e965cf7e623a1"
+    },
+    {
+      "file": "evidence/drop-save-fault.png",
+      "bytes": 415951,
+      "sha256": "9235907e27e7f48bbcc0f6fefb9d869e6edd22dc5a3185a5df15a4b47ec2dda2",
+      "raw": "test-results/sol-round3/boundaries-final/drop-save-fault.png"
+    },
+    {
+      "file": "evidence/mall-click-guard.png",
+      "bytes": 67150,
+      "sha256": "054db52dbf8ce9e7b0f1c9480e7f93f02aea31e4850c326cf11d353a829f28c7",
+      "raw": "test-results/sol-round3/boundaries-final/mall-click-guard.png"
+    },
+    {
+      "file": "evidence/duplicate-targets.png",
+      "bytes": 445526,
+      "sha256": "eec5e49d96829dc4e39a33ec6751d2f33b356a2a89ae60731fc8533f6becd3db",
+      "raw": "test-results/sol-round3/target-final/duplicate-targets.png"
+    },
+    {
+      "file": "evidence/partial-save-fault.png",
+      "bytes": 440820,
+      "sha256": "57b04fa3c28161dbed4e433dee791fa2a32dfc2cae846885f932337e6d1da975",
+      "raw": "test-results/sol-round3/target-final/partial-save-fault.png"
+    },
+    {
+      "file": "evidence/hidden-room-probe.png",
+      "bytes": 378207,
+      "sha256": "e4b6f05ad1d5dffe460753663c55cd807aa7776977929227ee631cf3cdb22522",
+      "raw": "test-results/sol-round3/visibility/hidden-room-probe.png"
+    },
+    {
+      "file": "evidence/occlusion-front-wall.png",
+      "bytes": 174131,
+      "sha256": "075c9b61d184e9c1ec3a2d2b21d8cabde1f51c7f79924206159771e3530bc1d4",
+      "raw": "test-results/sol-round3/occlusion-revised/front-wall.png"
+    },
+    {
+      "file": "evidence/occlusion-front-wall-positive.png",
+      "bytes": 175181,
+      "sha256": "7283731295da5e69d8d1475ceacbdd9fcac089af8546615e3d7432f4d4cae4d1",
+      "raw": "test-results/sol-round3/occlusion-revised/front-wall-positive.png"
+    },
+    {
+      "file": "evidence/regressions/art.log",
+      "bytes": 706,
+      "sha256": "47d67d1b2760687f4042378a69c9a7e39e76c68e08b35856f36051734797691e",
+      "raw": "test-results/sol-round3/regressions/art.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 708,
+      "originalSha256": "ed7e404c952adf63a8ce95e6711d6e71e94b0192df3c69205635c80f70ffc56e"
+    },
+    {
+      "file": "evidence/regressions/browser.log",
+      "bytes": 1999,
+      "sha256": "bca65270f4169c6c5f66c46d446bbcdcf3d49fb2983429fe91824204bb770edf",
+      "raw": "test-results/sol-round3/regressions/browser.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 2025,
+      "originalSha256": "9c1542e0a02e524a27daae4d7f18f24a05fa3a34d867a8ebf4f02ba2f8b986f2"
+    },
+    {
+      "file": "evidence/regressions/buildings.log",
+      "bytes": 700,
+      "sha256": "e6232303f56559f9a1de642c328397f63ea0c56c5a35884334670b7b3a6c73ae",
+      "raw": "test-results/sol-round3/regressions/buildings.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 709,
+      "originalSha256": "4c2f089a52ae658db8e13d8fcfe5693f47dfbfe1d6766fd15591cd1060c45f81"
+    },
+    {
+      "file": "evidence/regressions/desktop-input.log",
+      "bytes": 598,
+      "sha256": "0de5f31a0a38b1c8ebd2dedf4ae5bf1713d9956e2de8b01dd602a1584825e313",
+      "raw": "test-results/sol-round3/regressions/desktop-input.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 609,
+      "originalSha256": "7b43cc52d002ff111a8a051be9fe937dcaed95aacc8fcf6c90b50a063768cc36"
+    },
+    {
+      "file": "evidence/regressions/expansion.log",
+      "bytes": 542,
+      "sha256": "cc02c6972e26e7ebd5326ed06c0c0f6a4114a3636a9ffe0c97b85abe341dbae0",
+      "raw": "test-results/sol-round3/regressions/expansion.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 548,
+      "originalSha256": "5c7a4c0469003054c3e35b6906ea039103601d666bb23064d44430ffad419bac"
+    },
+    {
+      "file": "evidence/regressions/loot-target.log",
+      "bytes": 2301,
+      "sha256": "b6a7ec34990b2131e4e5ee0a38335d8bac76f226e73b80d56a200849c0663dfa",
+      "raw": "test-results/sol-round3/regressions/loot-target.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 2326,
+      "originalSha256": "f18661f6e6afbc8bf12de74cb528f70b9bc67d42f9969a2ddec27cbe392929b0"
+    },
+    {
+      "file": "evidence/regressions/loot.log",
+      "bytes": 3805,
+      "sha256": "d076d9745949ade92eb81f03d9e43a5d4d3495fd819d376483e87921f6630838",
+      "raw": "test-results/sol-round3/regressions/loot.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 3850,
+      "originalSha256": "d485775b4fd8b94142cc1ebb55adb6f8185331df69ab42688eaf363e2bd69b80"
+    },
+    {
+      "file": "evidence/regressions/mall-landing.log",
+      "bytes": 114,
+      "sha256": "dee46425b91ff092c8744a3b3000690f0c4784d40f8a1cfbf7533e69c5ee466f",
+      "raw": "test-results/sol-round3/regressions/mall-landing.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 116,
+      "originalSha256": "6f90d87cffce36d9840d841ee23152c0e303257f7a8f531076ff68ab6561b786"
+    },
+    {
+      "file": "evidence/regressions/mall-passages.log",
+      "bytes": 335,
+      "sha256": "f58784f2a76be83b719ffca6b95e505a5101f896993aab94d69481b7c434dd28",
+      "raw": "test-results/sol-round3/regressions/mall-passages.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 343,
+      "originalSha256": "2becac4eefad91da7e32cda177ba0be4ac88ebeb3c5a0a3327070e4d1a4e1385"
+    },
+    {
+      "file": "evidence/regressions/mobile-ux.log",
+      "bytes": 896,
+      "sha256": "751ad3052682f17c386e0a9d747d907eac67d451459818f0acb8ea585663a98d",
+      "raw": "test-results/sol-round3/regressions/mobile-ux.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 908,
+      "originalSha256": "7488b42383cb675d968db6ad39a699c9fa541419c5033b5257496652450ed767"
+    },
+    {
+      "file": "evidence/regressions/mobile.log",
+      "bytes": 832,
+      "sha256": "fb7aaa9d364f4663e488948d38925c861c0e88b07972b8df3fd060a4ec4fef40",
+      "raw": "test-results/sol-round3/regressions/mobile.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 843,
+      "originalSha256": "fe5aec27bd75511aec9178cc70335efc65f50a5d3179800231fc90f1dbb0c885"
+    },
+    {
+      "file": "evidence/regressions/portable.log",
+      "bytes": 3232,
+      "sha256": "46d65de882a33cc2d86c01d476d511906b222aa5a9ff5d7fc99b5d46056b15cc",
+      "raw": "test-results/sol-round3/regressions/portable.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 3346,
+      "originalSha256": "01c0b0bebf210470a0488301db9111092416b6c4fb2d38374bb3410c3862e148"
+    },
+    {
+      "file": "evidence/regressions/qol-expansion.log",
+      "bytes": 442,
+      "sha256": "f6673a79ed9d8fa53103b2f74e4087319f7f7616dd0a9379968d8a107a2a2491",
+      "raw": "test-results/sol-round3/regressions/qol-expansion.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 447,
+      "originalSha256": "128f9b1c267db6d895d1d5aebbd1383ce046ced1dc52fddb49902fb1b05daa0b"
+    },
+    {
+      "file": "evidence/regressions/qol.log",
+      "bytes": 3172,
+      "sha256": "06f5724b78e46309e48210f5d944fec63eaeee3fc3c8bda63fc6433ce98cc591",
+      "raw": "test-results/sol-round3/regressions/qol.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 3200,
+      "originalSha256": "575ae999451dc2309b4a9bdc04cecd7427d097c8f52d478ed29089669a53cdef"
+    },
+    {
+      "file": "evidence/regressions/save-browser.log",
+      "bytes": 699,
+      "sha256": "77420714aca24958afbc65e6fcb19970acb0ecb9c627c73f25e2a6341dede2f6",
+      "raw": "test-results/sol-round3/regressions/save-browser.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 709,
+      "originalSha256": "44da469da3393237033d0cfdae498d581ec87be6a420783206f90ddb65a995d2"
+    },
+    {
+      "file": "evidence/regressions/systems.log",
+      "bytes": 1581,
+      "sha256": "58d33036db5941b8e82d9f38cc6b99b0b3c721ebdc452a6c984844fa91b06598",
+      "raw": "test-results/sol-round3/regressions/systems.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 1598,
+      "originalSha256": "f9d91e8eb1c61f13449a2f9cef711fbc652fc7bfe62c202f101bc7707180958d"
+    },
+    {
+      "file": "evidence/regressions/tactical.log",
+      "bytes": 822,
+      "sha256": "cccfe805390f042d82379d5202ed349d061b8dcbf9a7ff5d165bdc67bf44294f",
+      "raw": "test-results/sol-round3/regressions/tactical.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 831,
+      "originalSha256": "3fbd7359bbcb0af844b357c4d8be130818cf17f056c4471426358f165733eb7a"
+    },
+    {
+      "file": "evidence/regressions/title-water.log",
+      "bytes": 2025,
+      "sha256": "52152de231db81092ce020878c1ae8cf2d65052e674af573d82fef24ded70560",
+      "raw": "test-results/sol-round3/regressions/title-water.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 2123,
+      "originalSha256": "ce6239f558fb53ebdd71cefc472c2303a595b958bb0d062edd53edc010550b08"
+    },
+    {
+      "file": "evidence/regressions/title.log",
+      "bytes": 1814,
+      "sha256": "af95a8f3e5c6be595ea2e8472faf07b3e650a0a647c5feac0b45f493d7935d4e",
+      "raw": "test-results/sol-round3/regressions/title.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 1842,
+      "originalSha256": "0b8e3b97d163c4e1be8d50fbe68393ed55f8d283dd80949a8822e6f1d58c6210"
+    },
+    {
+      "file": "evidence/regressions/ui.log",
+      "bytes": 888,
+      "sha256": "5bbcc0ca21c4c3e253270cf2435d0ceb37bbbf1c6a4b83c70e5520444814668e",
+      "raw": "test-results/sol-round3/regressions/ui.log",
+      "normalization": "UTF-8, LF; log trailing whitespace removed",
+      "originalBytes": 927,
+      "originalSha256": "36c4a5f3891ae5a9ca031b9c70abf89ede2ed3f7baedf04a7e7d1dde63e3a29b"
+    },
+    {
+      "file": "evidence/art-revised/facade-placeholder.png",
+      "bytes": 13651,
+      "sha256": "166d5cf26307bc7d5fe3e59fe4a8667c1906084fa459a26d41a17911fb2e0636",
+      "raw": "test-results/sol-round3/art-revised/facade-placeholder.png"
+    },
+    {
+      "file": "evidence/art-revised/facade-sol.png",
+      "bytes": 22806,
+      "sha256": "393cad1923bd3f374bbbd2d460af5d08c9d7354acdf9066620b73cd4915e82ee",
+      "raw": "test-results/sol-round3/art-revised/facade-sol.png"
+    },
+    {
+      "file": "evidence/art-revised/interior-placeholder.png",
+      "bytes": 42677,
+      "sha256": "25469acef15521223fb96f85a1d37888fe68bafdd7018979efb87d6e95b72cc3",
+      "raw": "test-results/sol-round3/art-revised/interior-placeholder.png"
+    },
+    {
+      "file": "evidence/art-revised/interior-sol.png",
+      "bytes": 56837,
+      "sha256": "3e20f3eb0e7ce779def70a7752b0e09f97e0dae3ead6f37b045ede7aeb7525f3",
+      "raw": "test-results/sol-round3/art-revised/interior-sol.png"
+    },
+    {
+      "file": "evidence/art-revised/player-dirs-placeholder.png",
+      "bytes": 17009,
+      "sha256": "b01edb2d93d3f493f5345b0cb1b6a9aa363d6fb2866ad31b401d3fece13d200b",
+      "raw": "test-results/sol-round3/art-revised/player-dirs-placeholder.png"
+    },
+    {
+      "file": "evidence/art-revised/player-dirs-sol.png",
+      "bytes": 37628,
+      "sha256": "389e23a815e2817dfc94d7f4d73c4b2a8fa982d8921a1819fc2184569b97cefa",
+      "raw": "test-results/sol-round3/art-revised/player-dirs-sol.png"
+    },
+    {
+      "file": "evidence/art-revised/street-placeholder.png",
+      "bytes": 17207,
+      "sha256": "31d648975035ca173beeb1e28e737c44f0fe27fd2d7a129d42ca35db3c6e4550",
+      "raw": "test-results/sol-round3/art-revised/street-placeholder.png"
+    },
+    {
+      "file": "evidence/art-revised/street-sol.png",
+      "bytes": 44117,
+      "sha256": "165da4f6fd0b927a7fb90f4d25aac6d8b3e706429d08163e1a57302f7f969ff4",
+      "raw": "test-results/sol-round3/art-revised/street-sol.png"
+    },
+    {
+      "file": "evidence/shots-revised/inventory-1280x720.png",
+      "bytes": 318776,
+      "sha256": "6e2e16ce99232b4c3d6edc1713484f7bbb82da0f870370f276d028030178ecee",
+      "raw": "test-results/sol-round3/shots-revised/inventory-1280x720.png"
+    },
+    {
+      "file": "evidence/shots-revised/inventory-640x300.png",
+      "bytes": 282925,
+      "sha256": "4bdc1b6959d8fbc335647152f3d8cde825d8dc6691ffeff7b0ebb11d40d5d044",
+      "raw": "test-results/sol-round3/shots-revised/inventory-640x300.png"
+    },
+    {
+      "file": "evidence/shots-revised/loot-panel-1280x720.png",
+      "bytes": 298110,
+      "sha256": "a5bf5badc03897233d3b00883066c9c41e51c8ab08a72f4cd58bf667a8d35ad8",
+      "raw": "test-results/sol-round3/shots-revised/loot-panel-1280x720.png"
+    },
+    {
+      "file": "evidence/shots-revised/loot-panel-640x300.png",
+      "bytes": 224653,
+      "sha256": "ee1e3d2b305970b7bd9fd5c4485d8cfc207c0a22a6447526f522993dfa40ecc5",
+      "raw": "test-results/sol-round3/shots-revised/loot-panel-640x300.png"
+    },
+    {
+      "file": "evidence/shots-revised/map-1280x720.png",
+      "bytes": 244951,
+      "sha256": "5ce640ab84ccacb0e405e453f0ae0b5a0c0dc620df778757384c5be85bd47b06",
+      "raw": "test-results/sol-round3/shots-revised/map-1280x720.png"
+    },
+    {
+      "file": "evidence/shots-revised/map-640x300.png",
+      "bytes": 373111,
+      "sha256": "21957199834a118763edef234db4890ff4258da503a176342c83592f104a834f",
+      "raw": "test-results/sol-round3/shots-revised/map-640x300.png"
+    },
+    {
+      "file": "evidence/shots-revised/reading-1280x720.png",
+      "bytes": 293871,
+      "sha256": "31be791505465984121abd861e79eb55a2fc53d9b9614a400ed17e240bf7c344",
+      "raw": "test-results/sol-round3/shots-revised/reading-1280x720.png"
+    },
+    {
+      "file": "evidence/shots-revised/reading-640x300.png",
+      "bytes": 354623,
+      "sha256": "a387c5d1872dfa3461b8f666e7826d86ec05f8fb31bb00ab6540ea38a45aa2d0",
+      "raw": "test-results/sol-round3/shots-revised/reading-640x300.png"
+    },
+    {
+      "file": "evidence/shots-original/door-1280x720.png",
+      "bytes": 443938,
+      "sha256": "a1e4872c3f4ffbc5b7697bcd9ada36c10c366e37c92871d61de8fbaeb95f4626",
+      "raw": "test-results/sol-round3/shots/door-1280x720.png"
+    },
+    {
+      "file": "evidence/shots-original/window-1920x1080.png",
+      "bytes": 476389,
+      "sha256": "f6cd5d5ce409641e80f54a0c926d5f148ff176d0e0d4fab667a96b327f5aeb33",
+      "raw": "test-results/sol-round3/shots/window-1920x1080.png"
+    },
+    {
+      "file": "evidence/shots-original/outside-1280x720.png",
+      "bytes": 415800,
+      "sha256": "ee8e67f538187e8c567c5b42176ab84ed11f120f0e983408eba99af89a22fbb2",
+      "raw": "test-results/sol-round3/shots/outside-1280x720.png"
+    }
+  ]
+}

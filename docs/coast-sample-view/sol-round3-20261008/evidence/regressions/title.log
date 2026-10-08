@@ -1,0 +1,28 @@
+$ node scripts/title-review.mjs
+PASS composition, lettering, help, input and round-trip 1280x720
+PASS composition, lettering, help, input and round-trip 1920x1080
+PASS composition, lettering, help, input and round-trip 2560x1080
+PASS composition, lettering, help, input and round-trip 1024x768
+PASS composition, lettering, help, input and round-trip 768x1024
+PASS composition, lettering, help, input and round-trip 360x800
+PASS composition, lettering, help, input and round-trip 390x844
+PASS composition, lettering, help, input and round-trip 412x915
+PASS composition, lettering, help, input and round-trip 430x932
+PASS composition, lettering, help, input and round-trip 844x390
+PASS composition, lettering, help, input and round-trip 932x430
+PASS composition, lettering, help, input and round-trip 640x360
+PASS composition, lettering, help, input and round-trip 740x300
+PASS layered scene mounted with one controller
+PASS water renders cached pixels instead of per-frame vector commands
+PASS bounded horizontal parallax, fixed horizon, no idle/leave/menu drift
+PASS actual subpixel floor movement and continuous boat/lamp animation
+PASS painted pixel contrast survives fractional movement without broad edge blur
+PASS at least four ambient motion kinds, with and without rain
+PASS rain recycles off-screen only; fog never jumps back
+PASS guide freezes pointer parallax and releases it on close
+PASS motion toggle and live reduced-motion preference stop every system
+PASS hidden or unfocused page pauses the scene and resumes without catch-up
+PASS twenty scene round-trips without controller, object, texture or listener growth
+PASS 600-frame desktop headless sample with motion on (measurement, not a device guarantee)
+PASS orientation changes, including an open help dialog
+PASS touch taps do not drive parallax

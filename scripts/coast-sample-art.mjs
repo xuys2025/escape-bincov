@@ -16,12 +16,12 @@ const CROPS = [
   { id: 'street', note: '街口地面：沥青 a/b、院地 a/b 与路缘', setup: d => d.placePlayer({ x: 640, y: 456 }, 0, 'coast'), rect: { x: 520, y: 380, w: 260, h: 150 } },
 ];
 const browser = await chromium.launch(browserOptions);
-const index = { startedAt: new Date().toISOString(), crops: [], errors: [], requests: [] };
+const index = { inputHTML: process.env.BINCOV_ART_HTML || 'dist/index.html', inputVariant: process.env.BINCOV_ART_VARIANT || 'committed-runtime', startedAt: new Date().toISOString(), crops: [], errors: [], requests: [] };
 for (const art of ['sol', 'placeholder']) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 720 }, offline: true });
   ctx.on('request', r => { if (/^https?:/.test(r.url())) index.requests.push(r.url()); });
   const p = await ctx.newPage(); p.on('pageerror', e => index.errors.push(e.message));
-  await p.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&sample=village' + (art === 'placeholder' ? '&art=placeholder' : ''));
+  await p.goto(pathToFileURL(resolve(process.env.BINCOV_ART_HTML || 'dist/index.html')).href + '?test=1&sample=village' + (art === 'placeholder' ? '&art=placeholder' : ''));
   await p.locator('[data-action="enter"]').click(); await p.locator('#run-world').selectOption('buildings'); await p.locator('#seed').fill('42'); await p.locator('[data-action="deploy"]').click();
   await p.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch);
   await p.evaluate(() => { const d = window.__bincovSample.driver; d.freezeAI(true); d.weapon('carbine'); });

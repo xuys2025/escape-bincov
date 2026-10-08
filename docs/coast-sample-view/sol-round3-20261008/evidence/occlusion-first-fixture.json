@@ -1,0 +1,158 @@
+{
+  "at": "2026-10-08T04:20:00.930Z",
+  "node": "v24.19.0",
+  "input": "D:\\bincov\\pr22-runtime\\dist\\index.html",
+  "method": "Detached view-only bullets behind real front wall/closed door. Native worldRT RGB diff restricted to opaque pixels of each actual faded wall texture; every case also removes that occluder for a positive bullet-visibility control. Roof/ceiling removed, fixed camera/time, no simulation/save claim.",
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "art": "sol",
+  "cases": [
+    {
+      "kind": "front-wall",
+      "level": 0,
+      "rect": {
+        "x": 1216,
+        "y": 368,
+        "w": 32,
+        "h": 80
+      },
+      "z": 448,
+      "bulletY": 440,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 0,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 0,
+      "totalChanged": 0,
+      "controlChanged": 0
+    },
+    {
+      "kind": "front-wall",
+      "level": 1,
+      "rect": {
+        "x": 1216,
+        "y": 368,
+        "w": 32,
+        "h": 80
+      },
+      "z": 448,
+      "bulletY": 440,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 0,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 0,
+      "totalChanged": 0,
+      "controlChanged": 0
+    },
+    {
+      "kind": "front-wall",
+      "level": 2,
+      "rect": {
+        "x": 1216,
+        "y": 368,
+        "w": 32,
+        "h": 80
+      },
+      "z": 448,
+      "bulletY": 440,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 0,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 0,
+      "totalChanged": 0,
+      "controlChanged": 0
+    },
+    {
+      "kind": "front-wall",
+      "level": 3,
+      "rect": {
+        "x": 1216,
+        "y": 368,
+        "w": 32,
+        "h": 80
+      },
+      "z": 448,
+      "bulletY": 440,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 0,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 0,
+      "totalChanged": 0,
+      "controlChanged": 0
+    },
+    {
+      "kind": "closed-door",
+      "level": 0,
+      "rect": {
+        "x": 448,
+        "y": 336,
+        "w": 32,
+        "h": 80
+      },
+      "z": 416,
+      "bulletY": 408,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 15,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 0,
+      "totalChanged": 0,
+      "controlChanged": 12
+    },
+    {
+      "kind": "closed-door",
+      "level": 1,
+      "rect": {
+        "x": 448,
+        "y": 336,
+        "w": 32,
+        "h": 80
+      },
+      "z": 416,
+      "bulletY": 408,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 15,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 5,
+      "totalChanged": 5,
+      "controlChanged": 12
+    },
+    {
+      "kind": "closed-door",
+      "level": 2,
+      "rect": {
+        "x": 448,
+        "y": 336,
+        "w": 32,
+        "h": 80
+      },
+      "z": 416,
+      "bulletY": 408,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 8,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 5,
+      "totalChanged": 5,
+      "controlChanged": 12
+    },
+    {
+      "kind": "closed-door",
+      "level": 3,
+      "rect": {
+        "x": 448,
+        "y": 336,
+        "w": 32,
+        "h": 80
+      },
+      "z": 416,
+      "bulletY": 408,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 8,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 11,
+      "totalChanged": 11,
+      "controlChanged": 12
+    }
+  ],
+  "status": "failed",
+  "failure": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(c.opaqueSamplesOnTrail>0)\n\n    at file:///D:/bincov/pr22-runtime/scripts/sol-occlusion-probe.mjs:51:98"
+}

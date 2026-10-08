@@ -1,0 +1,3070 @@
+{
+  "startedAt": "2026-10-08T04:20:04.767Z",
+  "browser": "154.0.8037.98",
+  "seed": "42",
+  "url": "?test=1&sample=village",
+  "shots": [
+    {
+      "file": "cross-1280x720.png",
+      "scene": "cross",
+      "note": "街口全景",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 2,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 456.5,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 1197,
+          "bytes": 15823,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "longwall-1280x720.png",
+      "scene": "longwall",
+      "note": "居民楼北侧（二层收起，被挡人物显示轮廓）",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 3,
+      "player": [
+        464,
+        204
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 456.5,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 1197,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3384.1999999999534,
+          "bytes": 16969,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "door-1280x720.png",
+      "scene": "door",
+      "note": "正门关闭：室内未揭示",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 4,
+      "player": [
+        464,
+        436
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 456.5,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 1197,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3384.1999999999534,
+          "bytes": 16969,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "door-open-1280x720.png",
+      "scene": "door-open",
+      "note": "开门站门洞：屋顶淡出、前墙局部淡化",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 6,
+      "player": [
+        464,
+        404
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 456.5,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 1197,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3384.1999999999534,
+          "bytes": 16969,
+          "result": "written"
+        },
+        {
+          "at": 5389.5,
+          "bytes": 16950,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "reveal-1280x720.png",
+      "scene": "reveal",
+      "note": "居民楼一楼室内揭示",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 8,
+      "player": [
+        472,
+        340
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 456.5,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 1197,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3384.1999999999534,
+          "bytes": 16969,
+          "result": "written"
+        },
+        {
+          "at": 5389.5,
+          "bytes": 16950,
+          "result": "written"
+        },
+        {
+          "at": 7395.199999999953,
+          "bytes": 16949,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "window-1280x720.png",
+      "scene": "window",
+      "note": "贴西墙窗口向外瞄准",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 10,
+      "player": [
+        360,
+        342
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 456.5,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 1197,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3384.1999999999534,
+          "bytes": 16969,
+          "result": "written"
+        },
+        {
+          "at": 5389.5,
+          "bytes": 16950,
+          "result": "written"
+        },
+        {
+          "at": 7395.199999999953,
+          "bytes": 16949,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "loot-1280x720.png",
+      "scene": "loot",
+      "note": "最近的真实物资箱",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 11,
+      "player": [
+        606,
+        604
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 1197,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3384.1999999999534,
+          "bytes": 16969,
+          "result": "written"
+        },
+        {
+          "at": 5389.5,
+          "bytes": 16950,
+          "result": "written"
+        },
+        {
+          "at": 7395.199999999953,
+          "bytes": 16949,
+          "result": "written"
+        },
+        {
+          "at": 9395.300000000047,
+          "bytes": 16946,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "enemies-1280x720.png",
+      "scene": "enemies",
+      "note": "真实敌人种类外观",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 12,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 1197,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3384.1999999999534,
+          "bytes": 16969,
+          "result": "written"
+        },
+        {
+          "at": 5389.5,
+          "bytes": 16950,
+          "result": "written"
+        },
+        {
+          "at": 7395.199999999953,
+          "bytes": 16949,
+          "result": "written"
+        },
+        {
+          "at": 9395.300000000047,
+          "bytes": 16946,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "extract-1280x720.png",
+      "scene": "extract",
+      "note": "北线检查口撤离点",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 13,
+      "player": [
+        208,
+        128
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 3384.1999999999534,
+          "bytes": 16969,
+          "result": "written"
+        },
+        {
+          "at": 5389.5,
+          "bytes": 16950,
+          "result": "written"
+        },
+        {
+          "at": 7395.199999999953,
+          "bytes": 16949,
+          "result": "written"
+        },
+        {
+          "at": 9395.300000000047,
+          "bytes": 16946,
+          "result": "written"
+        },
+        {
+          "at": 11400.90000000014,
+          "bytes": 16955,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "outside-1280x720.png",
+      "scene": "outside",
+      "note": "样板范围外：通用占位画面与边界标记",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 14,
+      "player": [
+        104,
+        860
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 5389.5,
+          "bytes": 16950,
+          "result": "written"
+        },
+        {
+          "at": 7395.199999999953,
+          "bytes": 16949,
+          "result": "written"
+        },
+        {
+          "at": 9395.300000000047,
+          "bytes": 16946,
+          "result": "written"
+        },
+        {
+          "at": 11400.90000000014,
+          "bytes": 16955,
+          "result": "written"
+        },
+        {
+          "at": 13407.300000000047,
+          "bytes": 16941,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "upstairs-1280x720.png",
+      "scene": "upstairs",
+      "note": "二楼（真实落点）",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "resident-f2",
+      "epoch": 15,
+      "player": [
+        304,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 5389.5,
+          "bytes": 16950,
+          "result": "written"
+        },
+        {
+          "at": 7395.199999999953,
+          "bytes": 16949,
+          "result": "written"
+        },
+        {
+          "at": 9395.300000000047,
+          "bytes": 16946,
+          "result": "written"
+        },
+        {
+          "at": 11400.90000000014,
+          "bytes": 16955,
+          "result": "written"
+        },
+        {
+          "at": 13407.300000000047,
+          "bytes": 16941,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "basement-1280x720.png",
+      "scene": "basement",
+      "note": "地下层（真实落点）",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "resident-b1",
+      "epoch": 16,
+      "player": [
+        240,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 7395.199999999953,
+          "bytes": 16949,
+          "result": "written"
+        },
+        {
+          "at": 9395.300000000047,
+          "bytes": 16946,
+          "result": "written"
+        },
+        {
+          "at": 11400.90000000014,
+          "bytes": 16955,
+          "result": "written"
+        },
+        {
+          "at": 13407.300000000047,
+          "bytes": 16941,
+          "result": "written"
+        },
+        {
+          "at": 15412,
+          "bytes": 16996,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "carbine-1280x720.png",
+      "scene": "carbine",
+      "note": "卡宾枪持握（Sol 试样）",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 17,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 7395.199999999953,
+          "bytes": 16949,
+          "result": "written"
+        },
+        {
+          "at": 9395.300000000047,
+          "bytes": 16946,
+          "result": "written"
+        },
+        {
+          "at": 11400.90000000014,
+          "bytes": 16955,
+          "result": "written"
+        },
+        {
+          "at": 13407.300000000047,
+          "bytes": 16941,
+          "result": "written"
+        },
+        {
+          "at": 15412,
+          "bytes": 16996,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "inventory-1280x720.png",
+      "scene": "inventory",
+      "note": "背包格子面板（Tab）",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 18,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "blocked",
+      "panel": "inventory",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 9395.300000000047,
+          "bytes": 16946,
+          "result": "written"
+        },
+        {
+          "at": 11400.90000000014,
+          "bytes": 16955,
+          "result": "written"
+        },
+        {
+          "at": 13407.300000000047,
+          "bytes": 16941,
+          "result": "written"
+        },
+        {
+          "at": 15412,
+          "bytes": 16996,
+          "result": "written"
+        },
+        {
+          "at": 17418.800000000047,
+          "bytes": 16995,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "loot-panel-1280x720.png",
+      "scene": "loot-panel",
+      "note": "搜刮格子面板（E）",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 19,
+      "player": [
+        592,
+        604
+      ],
+      "phase": "blocked",
+      "panel": "loot",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 11400.90000000014,
+          "bytes": 16955,
+          "result": "written"
+        },
+        {
+          "at": 13407.300000000047,
+          "bytes": 16941,
+          "result": "written"
+        },
+        {
+          "at": 15412,
+          "bytes": 16996,
+          "result": "written"
+        },
+        {
+          "at": 17418.800000000047,
+          "bytes": 16995,
+          "result": "written"
+        },
+        {
+          "at": 19436.90000000014,
+          "bytes": 16995,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "map-1280x720.png",
+      "scene": "map",
+      "note": "地图面板（M）",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 20,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "blocked",
+      "panel": "map",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 13407.300000000047,
+          "bytes": 16941,
+          "result": "written"
+        },
+        {
+          "at": 15412,
+          "bytes": 16996,
+          "result": "written"
+        },
+        {
+          "at": 17418.800000000047,
+          "bytes": 16995,
+          "result": "written"
+        },
+        {
+          "at": 19436.90000000014,
+          "bytes": 16995,
+          "result": "written"
+        },
+        {
+          "at": 21456.300000000047,
+          "bytes": 16995,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "reading-1280x720.png",
+      "scene": "reading",
+      "note": "阅读面板：市场停业告示（E）",
+      "size": "1280x720",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 21,
+      "player": [
+        656,
+        1086
+      ],
+      "phase": "blocked",
+      "panel": "reading",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 15412,
+          "bytes": 16996,
+          "result": "written"
+        },
+        {
+          "at": 17418.800000000047,
+          "bytes": 16995,
+          "result": "written"
+        },
+        {
+          "at": 19436.90000000014,
+          "bytes": 16995,
+          "result": "written"
+        },
+        {
+          "at": 21456.300000000047,
+          "bytes": 16995,
+          "result": "written"
+        },
+        {
+          "at": 23479,
+          "bytes": 16995,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "cross-1920x1080.png",
+      "scene": "cross",
+      "note": "街口全景",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 2,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 340.39999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 944.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "longwall-1920x1080.png",
+      "scene": "longwall",
+      "note": "居民楼北侧（二层收起，被挡人物显示轮廓）",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 3,
+      "player": [
+        464,
+        204
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 340.39999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 944.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3046.5,
+          "bytes": 17062,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "door-1920x1080.png",
+      "scene": "door",
+      "note": "正门关闭：室内未揭示",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 4,
+      "player": [
+        464,
+        436
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 340.39999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 944.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3046.5,
+          "bytes": 17062,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "door-open-1920x1080.png",
+      "scene": "door-open",
+      "note": "开门站门洞：屋顶淡出、前墙局部淡化",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 6,
+      "player": [
+        464,
+        404
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 340.39999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 944.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3046.5,
+          "bytes": 17062,
+          "result": "written"
+        },
+        {
+          "at": 5046.800000000047,
+          "bytes": 17040,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "reveal-1920x1080.png",
+      "scene": "reveal",
+      "note": "居民楼一楼室内揭示",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 8,
+      "player": [
+        472,
+        340
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 340.39999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 944.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3046.5,
+          "bytes": 17062,
+          "result": "written"
+        },
+        {
+          "at": 5046.800000000047,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 7049.600000000093,
+          "bytes": 17040,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "window-1920x1080.png",
+      "scene": "window",
+      "note": "贴西墙窗口向外瞄准",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 10,
+      "player": [
+        360,
+        342
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 340.39999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 944.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3046.5,
+          "bytes": 17062,
+          "result": "written"
+        },
+        {
+          "at": 5046.800000000047,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 7049.600000000093,
+          "bytes": 17040,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "loot-1920x1080.png",
+      "scene": "loot",
+      "note": "最近的真实物资箱",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 11,
+      "player": [
+        606,
+        604
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 944.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3046.5,
+          "bytes": 17062,
+          "result": "written"
+        },
+        {
+          "at": 5046.800000000047,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 7049.600000000093,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 9052,
+          "bytes": 17037,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "enemies-1920x1080.png",
+      "scene": "enemies",
+      "note": "真实敌人种类外观",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 12,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 944.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3046.5,
+          "bytes": 17062,
+          "result": "written"
+        },
+        {
+          "at": 5046.800000000047,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 7049.600000000093,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 9052,
+          "bytes": 17037,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "extract-1920x1080.png",
+      "scene": "extract",
+      "note": "北线检查口撤离点",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 13,
+      "player": [
+        208,
+        128
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 3046.5,
+          "bytes": 17062,
+          "result": "written"
+        },
+        {
+          "at": 5046.800000000047,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 7049.600000000093,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 9052,
+          "bytes": 17037,
+          "result": "written"
+        },
+        {
+          "at": 11058.100000000093,
+          "bytes": 17050,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "outside-1920x1080.png",
+      "scene": "outside",
+      "note": "样板范围外：通用占位画面与边界标记",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 14,
+      "player": [
+        104,
+        860
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 5046.800000000047,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 7049.600000000093,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 9052,
+          "bytes": 17037,
+          "result": "written"
+        },
+        {
+          "at": 11058.100000000093,
+          "bytes": 17050,
+          "result": "written"
+        },
+        {
+          "at": 13064.899999999907,
+          "bytes": 17034,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "upstairs-1920x1080.png",
+      "scene": "upstairs",
+      "note": "二楼（真实落点）",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "resident-f2",
+      "epoch": 15,
+      "player": [
+        304,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 5046.800000000047,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 7049.600000000093,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 9052,
+          "bytes": 17037,
+          "result": "written"
+        },
+        {
+          "at": 11058.100000000093,
+          "bytes": 17050,
+          "result": "written"
+        },
+        {
+          "at": 13064.899999999907,
+          "bytes": 17034,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "basement-1920x1080.png",
+      "scene": "basement",
+      "note": "地下层（真实落点）",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "resident-b1",
+      "epoch": 16,
+      "player": [
+        240,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 7049.600000000093,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 9052,
+          "bytes": 17037,
+          "result": "written"
+        },
+        {
+          "at": 11058.100000000093,
+          "bytes": 17050,
+          "result": "written"
+        },
+        {
+          "at": 13064.899999999907,
+          "bytes": 17034,
+          "result": "written"
+        },
+        {
+          "at": 15070.399999999907,
+          "bytes": 17089,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "carbine-1920x1080.png",
+      "scene": "carbine",
+      "note": "卡宾枪持握（Sol 试样）",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 17,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 7049.600000000093,
+          "bytes": 17040,
+          "result": "written"
+        },
+        {
+          "at": 9052,
+          "bytes": 17037,
+          "result": "written"
+        },
+        {
+          "at": 11058.100000000093,
+          "bytes": 17050,
+          "result": "written"
+        },
+        {
+          "at": 13064.899999999907,
+          "bytes": 17034,
+          "result": "written"
+        },
+        {
+          "at": 15070.399999999907,
+          "bytes": 17089,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "inventory-1920x1080.png",
+      "scene": "inventory",
+      "note": "背包格子面板（Tab）",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 18,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "blocked",
+      "panel": "inventory",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 9052,
+          "bytes": 17037,
+          "result": "written"
+        },
+        {
+          "at": 11058.100000000093,
+          "bytes": 17050,
+          "result": "written"
+        },
+        {
+          "at": 13064.899999999907,
+          "bytes": 17034,
+          "result": "written"
+        },
+        {
+          "at": 15070.399999999907,
+          "bytes": 17089,
+          "result": "written"
+        },
+        {
+          "at": 17076.399999999907,
+          "bytes": 17087,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "loot-panel-1920x1080.png",
+      "scene": "loot-panel",
+      "note": "搜刮格子面板（E）",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 19,
+      "player": [
+        592,
+        604
+      ],
+      "phase": "blocked",
+      "panel": "loot",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 11058.100000000093,
+          "bytes": 17050,
+          "result": "written"
+        },
+        {
+          "at": 13064.899999999907,
+          "bytes": 17034,
+          "result": "written"
+        },
+        {
+          "at": 15070.399999999907,
+          "bytes": 17089,
+          "result": "written"
+        },
+        {
+          "at": 17076.399999999907,
+          "bytes": 17087,
+          "result": "written"
+        },
+        {
+          "at": 19097.800000000047,
+          "bytes": 17086,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "map-1920x1080.png",
+      "scene": "map",
+      "note": "地图面板（M）",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 20,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "blocked",
+      "panel": "map",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 13064.899999999907,
+          "bytes": 17034,
+          "result": "written"
+        },
+        {
+          "at": 15070.399999999907,
+          "bytes": 17089,
+          "result": "written"
+        },
+        {
+          "at": 17076.399999999907,
+          "bytes": 17087,
+          "result": "written"
+        },
+        {
+          "at": 19097.800000000047,
+          "bytes": 17086,
+          "result": "written"
+        },
+        {
+          "at": 21119.100000000093,
+          "bytes": 17086,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "reading-1920x1080.png",
+      "scene": "reading",
+      "note": "阅读面板：市场停业告示（E）",
+      "size": "1920x1080",
+      "dpr": 1,
+      "touch": false,
+      "map": "coast",
+      "epoch": 21,
+      "player": [
+        656,
+        1086
+      ],
+      "phase": "blocked",
+      "panel": "reading",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 15070.399999999907,
+          "bytes": 17089,
+          "result": "written"
+        },
+        {
+          "at": 17076.399999999907,
+          "bytes": 17087,
+          "result": "written"
+        },
+        {
+          "at": 19097.800000000047,
+          "bytes": 17086,
+          "result": "written"
+        },
+        {
+          "at": 21119.100000000093,
+          "bytes": 17086,
+          "result": "written"
+        },
+        {
+          "at": 23136.199999999953,
+          "bytes": 17087,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "cross-844x390.png",
+      "scene": "cross",
+      "note": "街口全景",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 2,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 351.89999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 908.3000000000466,
+          "bytes": 15823,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "longwall-844x390.png",
+      "scene": "longwall",
+      "note": "居民楼北侧（二层收起，被挡人物显示轮廓）",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 3,
+      "player": [
+        464,
+        204
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 351.89999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 908.3000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.1999999999534,
+          "bytes": 16464,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "door-844x390.png",
+      "scene": "door",
+      "note": "正门关闭：室内未揭示",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 4,
+      "player": [
+        464,
+        436
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 351.89999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 908.3000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.1999999999534,
+          "bytes": 16464,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "door-open-844x390.png",
+      "scene": "door-open",
+      "note": "开门站门洞：屋顶淡出、前墙局部淡化",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 6,
+      "player": [
+        464,
+        404
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 351.89999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 908.3000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.1999999999534,
+          "bytes": 16464,
+          "result": "written"
+        },
+        {
+          "at": 5067.399999999907,
+          "bytes": 16460,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "reveal-844x390.png",
+      "scene": "reveal",
+      "note": "居民楼一楼室内揭示",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 8,
+      "player": [
+        472,
+        340
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 351.89999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 908.3000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.1999999999534,
+          "bytes": 16464,
+          "result": "written"
+        },
+        {
+          "at": 5067.399999999907,
+          "bytes": 16460,
+          "result": "written"
+        },
+        {
+          "at": 7073.899999999907,
+          "bytes": 16459,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "window-844x390.png",
+      "scene": "window",
+      "note": "贴西墙窗口向外瞄准",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 10,
+      "player": [
+        360,
+        342
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 351.89999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 908.3000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.1999999999534,
+          "bytes": 16464,
+          "result": "written"
+        },
+        {
+          "at": 5067.399999999907,
+          "bytes": 16460,
+          "result": "written"
+        },
+        {
+          "at": 7073.899999999907,
+          "bytes": 16459,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "loot-844x390.png",
+      "scene": "loot",
+      "note": "最近的真实物资箱",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 11,
+      "player": [
+        606,
+        604
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 908.3000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.1999999999534,
+          "bytes": 16464,
+          "result": "written"
+        },
+        {
+          "at": 5067.399999999907,
+          "bytes": 16460,
+          "result": "written"
+        },
+        {
+          "at": 7073.899999999907,
+          "bytes": 16459,
+          "result": "written"
+        },
+        {
+          "at": 9078.800000000047,
+          "bytes": 16458,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "enemies-844x390.png",
+      "scene": "enemies",
+      "note": "真实敌人种类外观",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 12,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 908.3000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.1999999999534,
+          "bytes": 16464,
+          "result": "written"
+        },
+        {
+          "at": 5067.399999999907,
+          "bytes": 16460,
+          "result": "written"
+        },
+        {
+          "at": 7073.899999999907,
+          "bytes": 16459,
+          "result": "written"
+        },
+        {
+          "at": 9078.800000000047,
+          "bytes": 16458,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "extract-844x390.png",
+      "scene": "extract",
+      "note": "北线检查口撤离点",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 13,
+      "player": [
+        208,
+        128
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 3061.1999999999534,
+          "bytes": 16464,
+          "result": "written"
+        },
+        {
+          "at": 5067.399999999907,
+          "bytes": 16460,
+          "result": "written"
+        },
+        {
+          "at": 7073.899999999907,
+          "bytes": 16459,
+          "result": "written"
+        },
+        {
+          "at": 9078.800000000047,
+          "bytes": 16458,
+          "result": "written"
+        },
+        {
+          "at": 11086.09999999986,
+          "bytes": 16453,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "outside-844x390.png",
+      "scene": "outside",
+      "note": "样板范围外：通用占位画面与边界标记",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 14,
+      "player": [
+        104,
+        860
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 5067.399999999907,
+          "bytes": 16460,
+          "result": "written"
+        },
+        {
+          "at": 7073.899999999907,
+          "bytes": 16459,
+          "result": "written"
+        },
+        {
+          "at": 9078.800000000047,
+          "bytes": 16458,
+          "result": "written"
+        },
+        {
+          "at": 11086.09999999986,
+          "bytes": 16453,
+          "result": "written"
+        },
+        {
+          "at": 13088.5,
+          "bytes": 16433,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "upstairs-844x390.png",
+      "scene": "upstairs",
+      "note": "二楼（真实落点）",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "resident-f2",
+      "epoch": 15,
+      "player": [
+        304,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 5067.399999999907,
+          "bytes": 16460,
+          "result": "written"
+        },
+        {
+          "at": 7073.899999999907,
+          "bytes": 16459,
+          "result": "written"
+        },
+        {
+          "at": 9078.800000000047,
+          "bytes": 16458,
+          "result": "written"
+        },
+        {
+          "at": 11086.09999999986,
+          "bytes": 16453,
+          "result": "written"
+        },
+        {
+          "at": 13088.5,
+          "bytes": 16433,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "basement-844x390.png",
+      "scene": "basement",
+      "note": "地下层（真实落点）",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "resident-b1",
+      "epoch": 16,
+      "player": [
+        240,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 7073.899999999907,
+          "bytes": 16459,
+          "result": "written"
+        },
+        {
+          "at": 9078.800000000047,
+          "bytes": 16458,
+          "result": "written"
+        },
+        {
+          "at": 11086.09999999986,
+          "bytes": 16453,
+          "result": "written"
+        },
+        {
+          "at": 13088.5,
+          "bytes": 16433,
+          "result": "written"
+        },
+        {
+          "at": 15090.199999999953,
+          "bytes": 16490,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "carbine-844x390.png",
+      "scene": "carbine",
+      "note": "卡宾枪持握（Sol 试样）",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 17,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 7073.899999999907,
+          "bytes": 16459,
+          "result": "written"
+        },
+        {
+          "at": 9078.800000000047,
+          "bytes": 16458,
+          "result": "written"
+        },
+        {
+          "at": 11086.09999999986,
+          "bytes": 16453,
+          "result": "written"
+        },
+        {
+          "at": 13088.5,
+          "bytes": 16433,
+          "result": "written"
+        },
+        {
+          "at": 15090.199999999953,
+          "bytes": 16490,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "inventory-844x390.png",
+      "scene": "inventory",
+      "note": "背包格子面板（Tab）",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 18,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "blocked",
+      "panel": "inventory",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 9078.800000000047,
+          "bytes": 16458,
+          "result": "written"
+        },
+        {
+          "at": 11086.09999999986,
+          "bytes": 16453,
+          "result": "written"
+        },
+        {
+          "at": 13088.5,
+          "bytes": 16433,
+          "result": "written"
+        },
+        {
+          "at": 15090.199999999953,
+          "bytes": 16490,
+          "result": "written"
+        },
+        {
+          "at": 17096.699999999953,
+          "bytes": 16471,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "loot-panel-844x390.png",
+      "scene": "loot-panel",
+      "note": "搜刮格子面板（E）",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 19,
+      "player": [
+        592,
+        604
+      ],
+      "phase": "blocked",
+      "panel": "loot",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 11086.09999999986,
+          "bytes": 16453,
+          "result": "written"
+        },
+        {
+          "at": 13088.5,
+          "bytes": 16433,
+          "result": "written"
+        },
+        {
+          "at": 15090.199999999953,
+          "bytes": 16490,
+          "result": "written"
+        },
+        {
+          "at": 17096.699999999953,
+          "bytes": 16471,
+          "result": "written"
+        },
+        {
+          "at": 19145.399999999907,
+          "bytes": 16489,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "map-844x390.png",
+      "scene": "map",
+      "note": "地图面板（M）",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 20,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "blocked",
+      "panel": "map",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 13088.5,
+          "bytes": 16433,
+          "result": "written"
+        },
+        {
+          "at": 15090.199999999953,
+          "bytes": 16490,
+          "result": "written"
+        },
+        {
+          "at": 17096.699999999953,
+          "bytes": 16471,
+          "result": "written"
+        },
+        {
+          "at": 19145.399999999907,
+          "bytes": 16489,
+          "result": "written"
+        },
+        {
+          "at": 21199.399999999907,
+          "bytes": 16472,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "reading-844x390.png",
+      "scene": "reading",
+      "note": "阅读面板：市场停业告示（E）",
+      "size": "844x390",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 21,
+      "player": [
+        656,
+        1086
+      ],
+      "phase": "blocked",
+      "panel": "reading",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 15090.199999999953,
+          "bytes": 16490,
+          "result": "written"
+        },
+        {
+          "at": 17096.699999999953,
+          "bytes": 16471,
+          "result": "written"
+        },
+        {
+          "at": 19145.399999999907,
+          "bytes": 16489,
+          "result": "written"
+        },
+        {
+          "at": 21199.399999999907,
+          "bytes": 16472,
+          "result": "written"
+        },
+        {
+          "at": 23223.199999999953,
+          "bytes": 16492,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "cross-640x300.png",
+      "scene": "cross",
+      "note": "街口全景",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 2,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 352.89999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 929.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "longwall-640x300.png",
+      "scene": "longwall",
+      "note": "居民楼北侧（二层收起，被挡人物显示轮廓）",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 3,
+      "player": [
+        464,
+        204
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 352.89999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 929.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.5999999998603,
+          "bytes": 17085,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "door-640x300.png",
+      "scene": "door",
+      "note": "正门关闭：室内未揭示",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 4,
+      "player": [
+        464,
+        436
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 352.89999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 929.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.5999999998603,
+          "bytes": 17085,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "door-open-640x300.png",
+      "scene": "door-open",
+      "note": "开门站门洞：屋顶淡出、前墙局部淡化",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 6,
+      "player": [
+        464,
+        404
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 352.89999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 929.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.5999999998603,
+          "bytes": 17085,
+          "result": "written"
+        },
+        {
+          "at": 5066.5,
+          "bytes": 17083,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "reveal-640x300.png",
+      "scene": "reveal",
+      "note": "居民楼一楼室内揭示",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 8,
+      "player": [
+        472,
+        340
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 352.89999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 929.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.5999999998603,
+          "bytes": 17085,
+          "result": "written"
+        },
+        {
+          "at": 5066.5,
+          "bytes": 17083,
+          "result": "written"
+        },
+        {
+          "at": 7067.199999999953,
+          "bytes": 17081,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "window-640x300.png",
+      "scene": "window",
+      "note": "贴西墙窗口向外瞄准",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 10,
+      "player": [
+        360,
+        342
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 352.89999999990687,
+          "bytes": 804,
+          "result": "written"
+        },
+        {
+          "at": 929.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.5999999998603,
+          "bytes": 17085,
+          "result": "written"
+        },
+        {
+          "at": 5066.5,
+          "bytes": 17083,
+          "result": "written"
+        },
+        {
+          "at": 7067.199999999953,
+          "bytes": 17081,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "loot-640x300.png",
+      "scene": "loot",
+      "note": "最近的真实物资箱",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 11,
+      "player": [
+        606,
+        604
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 929.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.5999999998603,
+          "bytes": 17085,
+          "result": "written"
+        },
+        {
+          "at": 5066.5,
+          "bytes": 17083,
+          "result": "written"
+        },
+        {
+          "at": 7067.199999999953,
+          "bytes": 17081,
+          "result": "written"
+        },
+        {
+          "at": 9067,
+          "bytes": 17078,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "enemies-640x300.png",
+      "scene": "enemies",
+      "note": "真实敌人种类外观",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 12,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 929.8000000000466,
+          "bytes": 15823,
+          "result": "written"
+        },
+        {
+          "at": 3061.5999999998603,
+          "bytes": 17085,
+          "result": "written"
+        },
+        {
+          "at": 5066.5,
+          "bytes": 17083,
+          "result": "written"
+        },
+        {
+          "at": 7067.199999999953,
+          "bytes": 17081,
+          "result": "written"
+        },
+        {
+          "at": 9067,
+          "bytes": 17078,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "extract-640x300.png",
+      "scene": "extract",
+      "note": "北线检查口撤离点",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 13,
+      "player": [
+        208,
+        128
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 3061.5999999998603,
+          "bytes": 17085,
+          "result": "written"
+        },
+        {
+          "at": 5066.5,
+          "bytes": 17083,
+          "result": "written"
+        },
+        {
+          "at": 7067.199999999953,
+          "bytes": 17081,
+          "result": "written"
+        },
+        {
+          "at": 9067,
+          "bytes": 17078,
+          "result": "written"
+        },
+        {
+          "at": 11073.5,
+          "bytes": 17063,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "outside-640x300.png",
+      "scene": "outside",
+      "note": "样板范围外：通用占位画面与边界标记",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 14,
+      "player": [
+        104,
+        860
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 5066.5,
+          "bytes": 17083,
+          "result": "written"
+        },
+        {
+          "at": 7067.199999999953,
+          "bytes": 17081,
+          "result": "written"
+        },
+        {
+          "at": 9067,
+          "bytes": 17078,
+          "result": "written"
+        },
+        {
+          "at": 11073.5,
+          "bytes": 17063,
+          "result": "written"
+        },
+        {
+          "at": 13078.59999999986,
+          "bytes": 17057,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "upstairs-640x300.png",
+      "scene": "upstairs",
+      "note": "二楼（真实落点）",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "resident-f2",
+      "epoch": 15,
+      "player": [
+        304,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 5066.5,
+          "bytes": 17083,
+          "result": "written"
+        },
+        {
+          "at": 7067.199999999953,
+          "bytes": 17081,
+          "result": "written"
+        },
+        {
+          "at": 9067,
+          "bytes": 17078,
+          "result": "written"
+        },
+        {
+          "at": 11073.5,
+          "bytes": 17063,
+          "result": "written"
+        },
+        {
+          "at": 13078.59999999986,
+          "bytes": 17057,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "basement-640x300.png",
+      "scene": "basement",
+      "note": "地下层（真实落点）",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "resident-b1",
+      "epoch": 16,
+      "player": [
+        240,
+        80
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 7067.199999999953,
+          "bytes": 17081,
+          "result": "written"
+        },
+        {
+          "at": 9067,
+          "bytes": 17078,
+          "result": "written"
+        },
+        {
+          "at": 11073.5,
+          "bytes": 17063,
+          "result": "written"
+        },
+        {
+          "at": 13078.59999999986,
+          "bytes": 17057,
+          "result": "written"
+        },
+        {
+          "at": 15083.800000000047,
+          "bytes": 17100,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "carbine-640x300.png",
+      "scene": "carbine",
+      "note": "卡宾枪持握（Sol 试样）",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 17,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "running",
+      "panel": null,
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 7067.199999999953,
+          "bytes": 17081,
+          "result": "written"
+        },
+        {
+          "at": 9067,
+          "bytes": 17078,
+          "result": "written"
+        },
+        {
+          "at": 11073.5,
+          "bytes": 17063,
+          "result": "written"
+        },
+        {
+          "at": 13078.59999999986,
+          "bytes": 17057,
+          "result": "written"
+        },
+        {
+          "at": 15083.800000000047,
+          "bytes": 17100,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "inventory-640x300.png",
+      "scene": "inventory",
+      "note": "背包格子面板（Tab）",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 18,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "blocked",
+      "panel": "inventory",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 9067,
+          "bytes": 17078,
+          "result": "written"
+        },
+        {
+          "at": 11073.5,
+          "bytes": 17063,
+          "result": "written"
+        },
+        {
+          "at": 13078.59999999986,
+          "bytes": 17057,
+          "result": "written"
+        },
+        {
+          "at": 15083.800000000047,
+          "bytes": 17100,
+          "result": "written"
+        },
+        {
+          "at": 17092.199999999953,
+          "bytes": 17078,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "loot-panel-640x300.png",
+      "scene": "loot-panel",
+      "note": "搜刮格子面板（E）",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 19,
+      "player": [
+        592,
+        604
+      ],
+      "phase": "blocked",
+      "panel": "loot",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 11073.5,
+          "bytes": 17063,
+          "result": "written"
+        },
+        {
+          "at": 13078.59999999986,
+          "bytes": 17057,
+          "result": "written"
+        },
+        {
+          "at": 15083.800000000047,
+          "bytes": 17100,
+          "result": "written"
+        },
+        {
+          "at": 17092.199999999953,
+          "bytes": 17078,
+          "result": "written"
+        },
+        {
+          "at": 19133.399999999907,
+          "bytes": 17099,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "map-640x300.png",
+      "scene": "map",
+      "note": "地图面板（M）",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 20,
+      "player": [
+        640,
+        456
+      ],
+      "phase": "blocked",
+      "panel": "map",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 13078.59999999986,
+          "bytes": 17057,
+          "result": "written"
+        },
+        {
+          "at": 15083.800000000047,
+          "bytes": 17100,
+          "result": "written"
+        },
+        {
+          "at": 17092.199999999953,
+          "bytes": 17078,
+          "result": "written"
+        },
+        {
+          "at": 19133.399999999907,
+          "bytes": 17099,
+          "result": "written"
+        },
+        {
+          "at": 21169.09999999986,
+          "bytes": 17079,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    },
+    {
+      "file": "reading-640x300.png",
+      "scene": "reading",
+      "note": "阅读面板：市场停业告示（E）",
+      "size": "640x300",
+      "dpr": 3,
+      "touch": true,
+      "map": "coast",
+      "epoch": 21,
+      "player": [
+        656,
+        1086
+      ],
+      "phase": "blocked",
+      "panel": "reading",
+      "storageError": "",
+      "storageOK": true,
+      "rejected": [],
+      "writes": [
+        {
+          "at": 15083.800000000047,
+          "bytes": 17100,
+          "result": "written"
+        },
+        {
+          "at": 17092.199999999953,
+          "bytes": 17078,
+          "result": "written"
+        },
+        {
+          "at": 19133.399999999907,
+          "bytes": 17099,
+          "result": "written"
+        },
+        {
+          "at": 21169.09999999986,
+          "bytes": 17079,
+          "result": "written"
+        },
+        {
+          "at": 23241.800000000047,
+          "bytes": 17099,
+          "result": "written"
+        }
+      ],
+      "saveErrors": []
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "console": [
+    {
+      "size": "1280x720",
+      "type": "log",
+      "text": "%c %c %c %c %c Phaser v3.90.0 (WebGL | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent"
+    },
+    {
+      "size": "1920x1080",
+      "type": "log",
+      "text": "%c %c %c %c %c Phaser v3.90.0 (WebGL | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent"
+    },
+    {
+      "size": "844x390",
+      "type": "log",
+      "text": "%c %c %c %c %c Phaser v3.90.0 (WebGL | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent"
+    },
+    {
+      "size": "640x300",
+      "type": "log",
+      "text": "%c %c %c %c %c Phaser v3.90.0 (WebGL | Web Audio) %c https://phaser.io/v390 background: #ff0000 background: #ffff00 background: #00ff00 background: #00ffff color: #ffffff; background: #000000 background: transparent"
+    }
+  ],
+  "anomalies": [],
+  "finishedAt": "2026-10-08T04:21:44.113Z"
+}

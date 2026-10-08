@@ -1,0 +1,23 @@
+MALL run 1
+MALL sample 1 0 mall-f1 HP 100
+MALL floor mall-f2 30.04579999999905
+MALL sample 1 60 mall-f2 HP 100
+MALL sample 1 120 mall-f2 HP 100
+MALL sample 1 180 mall-f2 HP 100
+MALL sample 1 240 mall-f2 HP 100
+MALL sample 1 300 mall-f2 HP 100
+MALL sample 1 360 mall-f2 HP 100
+MALL sample 1 421 mall-f2 HP 100
+MALL sample 1 481 mall-f2 HP 100
+MALL sample 1 541 mall-f2 HP 100
+MALL floor mall-f1 578.9594999994973
+MALL completed {"run":1,"result":{"outcome":"timeout","kills":8,"keptValue":0,"lostValue":360,"seed":41,"recovered":false,"message":"撤离超时，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"},"realSeconds":600.427,"lastObservedElapsed":599.944099999447,"frames":{"count":98501,"p50":6.099999999976717,"p95":6.19999999999709,"p99":6.200000000069849,"maximum":96.90000000000009},"heap":24500000,"textures":159,"children":[1]}
+MALL run 2
+MALL sample 2 0 mall-f1 HP 81.51546666666667
+MALL floor mall-f2 31.0853000000003
+MALL floor mall-f1 54.681600000001986
+MALL sample 2 60 mall-f1 HP 25.450481666666434
+MALL completed {"run":2,"result":{"outcome":"death","kills":4,"keptValue":0,"lostValue":0,"seed":41,"recovered":false,"message":"撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"},"realSeconds":61.472,"lastObservedElapsed":61.39050000000205,"frames":{"count":10008,"p50":6.099999999976717,"p95":6.199999999953434,"p99":6.5,"maximum":109.20000000006985},"heap":24500000,"textures":159,"children":[1]}
+MALL run 3
+MALL sample 3 0 mall-f1 HP 1.4777100000000907
+MALL completed {"run":3,"result":{"outcome":"extract","kills":1,"keptValue":0,"lostValue":0,"seed":41,"recovered":false,"message":"成功撤离，装备和物资已带回水产站。"},"realSeconds":29.555,"lastObservedElapsed":26.25509999999989,"frames":{"count":4827,"p50":6.099999999976717,"p95":6.199999999953434,"p99":6.200000000069849,"maximum":78.70000000006985},"heap":24500000,"textures":159,"children":[1]}

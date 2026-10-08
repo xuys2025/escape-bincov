@@ -1,0 +1,98 @@
+$ node --import tsx scripts/title-water-review.mjs
+{
+  "date": "2026-10-08T04:23:27.778Z",
+  "methodology": "Offline file:// current packaged game. Screenshots are unmodified. Water diagnostic uses ?test=1 to disable rain and hold the camera; a separate static capture uses reduced motion. Synthetic state is limited to these controls; no saved-game fixture.",
+  "checks": [
+    {
+      "name": "visible water changes without rain",
+      "changedPixels": 2478
+    },
+    {
+      "name": "visible reflection changes without rain",
+      "changedPixels": 2932
+    },
+    {
+      "name": "fixed-camera diagnostic",
+      "camera": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "motion toggle preserves pose",
+      "before": [
+        {
+          "far": [
+            0,
+            0
+          ],
+          "harbor": [
+            0,
+            0
+          ],
+          "room": [
+            0.9789143349072192,
+            0
+          ],
+          "lamp": [
+            0.9789143349072192,
+            0
+          ],
+          "desk": [
+            1.9578286698144385,
+            0
+          ],
+          "chair": [
+            2.9367430047216576,
+            0
+          ],
+          "fore": [
+            3.915657339628877,
+            0
+          ]
+        },
+        61.43883107168603,
+        2,
+        51
+      ],
+      "after": [
+        {
+          "far": [
+            0,
+            0
+          ],
+          "harbor": [
+            0,
+            0
+          ],
+          "room": [
+            0.9789143349072192,
+            0
+          ],
+          "lamp": [
+            0.9789143349072192,
+            0
+          ],
+          "desk": [
+            1.9578286698144385,
+            0
+          ],
+          "chair": [
+            2.9367430047216576,
+            0
+          ],
+          "fore": [
+            3.915657339628877,
+            0
+          ]
+        },
+        61.43883107168603,
+        2,
+        51
+      ]
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "status": "passed"
+}

@@ -1,0 +1,440 @@
+{
+  "at": "2026-10-08T04:33:53.986Z",
+  "node": "v24.19.0",
+  "method": "Node-id comparison of string nodes containing exact SHADER_NAME defines in forced-GC unminified-page snapshots. Strong incoming edges only, at most 7 reverse hops. Not a proof that all retained heap bytes have this cause.",
+  "snapshots": [
+    {
+      "cycle": 10,
+      "bytes": 38455836,
+      "sha256": "08f60c7725af3902b2a4998cc6627216966049d84b523a9493495e41b4fe0e42"
+    },
+    {
+      "cycle": 30,
+      "bytes": 38749116,
+      "sha256": "0da53f4a49570584ea65d4be7a24bb14bdc68cfb1d1ba2c0d2fc1d843c5ca942"
+    }
+  ],
+  "shaderStrings": {
+    "cycle10": {
+      "count": 97,
+      "bytes": 96208
+    },
+    "cycle30": {
+      "count": 137,
+      "bytes": 203248
+    },
+    "newRetainedCount": 40,
+    "newRetainedBytes": 107040,
+    "sample": [
+      {
+        "id": 613291,
+        "type": "string",
+        "shader": "graphics-vertex-14",
+        "bytes": 4336
+      },
+      {
+        "id": 613293,
+        "type": "string",
+        "shader": "big-triangle-vertex-23",
+        "bytes": 1016
+      },
+      {
+        "id": 613303,
+        "type": "string",
+        "shader": "big-triangle-vertex-15",
+        "bytes": 1016
+      },
+      {
+        "id": 613307,
+        "type": "string",
+        "shader": "graphics-vertex-12",
+        "bytes": 4336
+      },
+      {
+        "id": 613309,
+        "type": "string",
+        "shader": "graphics-vertex-29",
+        "bytes": 4336
+      },
+      {
+        "id": 613311,
+        "type": "string",
+        "shader": "graphics-vertex-17",
+        "bytes": 4336
+      },
+      {
+        "id": 613313,
+        "type": "string",
+        "shader": "graphics-vertex-18",
+        "bytes": 4336
+      },
+      {
+        "id": 613315,
+        "type": "string",
+        "shader": "graphics-vertex-20",
+        "bytes": 4336
+      },
+      {
+        "id": 613317,
+        "type": "string",
+        "shader": "graphics-vertex-23",
+        "bytes": 4336
+      },
+      {
+        "id": 613319,
+        "type": "string",
+        "shader": "big-triangle-vertex-11",
+        "bytes": 1016
+      },
+      {
+        "id": 613321,
+        "type": "string",
+        "shader": "graphics-vertex-21",
+        "bytes": 4336
+      },
+      {
+        "id": 613327,
+        "type": "string",
+        "shader": "big-triangle-vertex-19",
+        "bytes": 1016
+      }
+    ]
+  },
+  "ownerPaths": [
+    [
+      {
+        "id": 613293,
+        "type": "string",
+        "name": "#define SHADER_NAME big-triangle-vertex-23\n\n\n        #ifdef GL_ES // This checks if it is WebGL1\n   "
+      },
+      {
+        "edge": "internal:87",
+        "id": 696903,
+        "type": "array",
+        "name": "(object properties)"
+      },
+      {
+        "edge": "internal:properties",
+        "id": 73031,
+        "type": "object",
+        "name": "Object"
+      },
+      {
+        "edge": "context:idHash2",
+        "id": 72927,
+        "type": "object",
+        "name": "system / Context / scope @69933"
+      }
+    ],
+    [
+      {
+        "id": 613293,
+        "type": "string",
+        "name": "#define SHADER_NAME big-triangle-vertex-23\n\n\n        #ifdef GL_ES // This checks if it is WebGL1\n   "
+      },
+      {
+        "edge": "internal:87",
+        "id": 696903,
+        "type": "array",
+        "name": "(object properties)"
+      },
+      {
+        "edge": "internal:properties",
+        "id": 73031,
+        "type": "object",
+        "name": "Object"
+      },
+      {
+        "edge": "context:idHash2",
+        "id": 72927,
+        "type": "object",
+        "name": "system / Context / scope @69933"
+      },
+      {
+        "edge": "internal:context",
+        "id": 73137,
+        "type": "closure",
+        "name": "CanvasGraphicsContextRenderData"
+      }
+    ],
+    [
+      {
+        "id": 613293,
+        "type": "string",
+        "name": "#define SHADER_NAME big-triangle-vertex-23\n\n\n        #ifdef GL_ES // This checks if it is WebGL1\n   "
+      },
+      {
+        "edge": "internal:87",
+        "id": 696903,
+        "type": "array",
+        "name": "(object properties)"
+      },
+      {
+        "edge": "internal:properties",
+        "id": 73031,
+        "type": "object",
+        "name": "Object"
+      },
+      {
+        "edge": "context:idHash2",
+        "id": 72927,
+        "type": "object",
+        "name": "system / Context / scope @69933"
+      },
+      {
+        "edge": "internal:context",
+        "id": 73295,
+        "type": "closure",
+        "name": "CanvasGraphicsContext"
+      }
+    ],
+    [
+      {
+        "id": 613293,
+        "type": "string",
+        "name": "#define SHADER_NAME big-triangle-vertex-23\n\n\n        #ifdef GL_ES // This checks if it is WebGL1\n   "
+      },
+      {
+        "edge": "internal:87",
+        "id": 696903,
+        "type": "array",
+        "name": "(object properties)"
+      },
+      {
+        "edge": "internal:properties",
+        "id": 73031,
+        "type": "object",
+        "name": "Object"
+      },
+      {
+        "edge": "context:idHash2",
+        "id": 72927,
+        "type": "object",
+        "name": "system / Context / scope @69933"
+      },
+      {
+        "edge": "internal:context",
+        "id": 73859,
+        "type": "closure",
+        "name": "buildContextBatches"
+      }
+    ]
+  ],
+  "library": {
+    "name": "pixi.js",
+    "version": "8.22.0",
+    "license": "MIT; existing third-party notices retained",
+    "sources": [
+      {
+        "file": "node_modules/pixi.js/lib/rendering/renderers/shared/utils/createIdFromString.mjs",
+        "sha256": "a4cc848c31d7d54b2f3d8bd2ff8f9792cc7352b6f1272f5c09ba9f84c44e6207",
+        "excerpt": [
+          {
+            "line": 1,
+            "text": "\"use strict\";"
+          },
+          {
+            "line": 2,
+            "text": "const idCounts = /* @__PURE__ */ Object.create(null);"
+          },
+          {
+            "line": 3,
+            "text": "const idHash = /* @__PURE__ */ Object.create(null);"
+          },
+          {
+            "line": 4,
+            "text": "function createIdFromString(value, groupId) {"
+          },
+          {
+            "line": 5,
+            "text": "  let id = idHash[value];"
+          },
+          {
+            "line": 6,
+            "text": "  if (id === void 0) {"
+          },
+          {
+            "line": 7,
+            "text": "    if (idCounts[groupId] === void 0) {"
+          },
+          {
+            "line": 8,
+            "text": "      idCounts[groupId] = 1;"
+          },
+          {
+            "line": 9,
+            "text": "    }"
+          },
+          {
+            "line": 10,
+            "text": "    idHash[value] = id = idCounts[groupId]++;"
+          },
+          {
+            "line": 11,
+            "text": "  }"
+          },
+          {
+            "line": 12,
+            "text": "  return id;"
+          },
+          {
+            "line": 13,
+            "text": "}"
+          }
+        ]
+      },
+      {
+        "file": "node_modules/pixi.js/lib/rendering/renderers/gl/shader/program/preprocessors/setProgramName.mjs",
+        "sha256": "dccffed7092fff7353339bb7b9fa990851633435ea0035780fedd8d4986cd661",
+        "excerpt": [
+          {
+            "line": 6,
+            "text": "  name += isFragment ? \"-fragment\" : \"-vertex\";"
+          },
+          {
+            "line": 7,
+            "text": "  const nameCache = isFragment ? fragmentNameCache : VertexNameCache;"
+          },
+          {
+            "line": 8,
+            "text": "  if (nameCache[name]) {"
+          },
+          {
+            "line": 9,
+            "text": "    nameCache[name]++;"
+          },
+          {
+            "line": 10,
+            "text": "    name += `-${nameCache[name]}`;"
+          },
+          {
+            "line": 11,
+            "text": "  } else {"
+          },
+          {
+            "line": 12,
+            "text": "    nameCache[name] = 1;"
+          },
+          {
+            "line": 13,
+            "text": "  }"
+          },
+          {
+            "line": 14,
+            "text": "  if (src.indexOf(\"#define SHADER_NAME\") !== -1) return src;"
+          },
+          {
+            "line": 15,
+            "text": "  const shaderName = `#define SHADER_NAME ${name}`;"
+          },
+          {
+            "line": 16,
+            "text": "  return `${shaderName}"
+          },
+          {
+            "line": 17,
+            "text": "${src}`;"
+          },
+          {
+            "line": 18,
+            "text": "}"
+          }
+        ]
+      },
+      {
+        "file": "node_modules/pixi.js/lib/rendering/renderers/gl/shader/GlProgram.mjs",
+        "sha256": "6cd38d2da8e6e73f913a1f8451359c190f973aef4f79e96abafc45d3b881d08c",
+        "excerpt": [
+          {
+            "line": 54,
+            "text": "    this.transformFeedbackVaryings = options.transformFeedbackVaryings;"
+          },
+          {
+            "line": 55,
+            "text": "    this._key = createIdFromString(`${this.vertex}:${this.fragment}`, \"gl-program\");"
+          },
+          {
+            "line": 56,
+            "text": "  }"
+          },
+          {
+            "line": 57,
+            "text": "  /** destroys the program */"
+          },
+          {
+            "line": 58,
+            "text": "  destroy() {"
+          },
+          {
+            "line": 59,
+            "text": "    this.fragment = null;"
+          },
+          {
+            "line": 60,
+            "text": "    this.vertex = null;"
+          },
+          {
+            "line": 61,
+            "text": "    this._attributeData = null;"
+          },
+          {
+            "line": 64,
+            "text": "    this.transformFeedbackVaryings = null;"
+          },
+          {
+            "line": 65,
+            "text": "    programCache[this._cacheKey] = null;"
+          },
+          {
+            "line": 66,
+            "text": "  }"
+          },
+          {
+            "line": 67,
+            "text": "  /**"
+          },
+          {
+            "line": 68,
+            "text": "   * Helper function that creates a program for a given source."
+          },
+          {
+            "line": 75,
+            "text": "    const key = `${options.vertex}:${options.fragment}`;"
+          },
+          {
+            "line": 76,
+            "text": "    if (!programCache[key]) {"
+          },
+          {
+            "line": 77,
+            "text": "      programCache[key] = new _GlProgram(options);"
+          },
+          {
+            "line": 78,
+            "text": "      programCache[key]._cacheKey = key;"
+          },
+          {
+            "line": 79,
+            "text": "    }"
+          },
+          {
+            "line": 80,
+            "text": "    return programCache[key];"
+          },
+          {
+            "line": 81,
+            "text": "  }"
+          },
+          {
+            "line": 82,
+            "text": "};"
+          },
+          {
+            "line": 83,
+            "text": "/** The default options used by the program. */"
+          }
+        ]
+      }
+    ]
+  }
+}

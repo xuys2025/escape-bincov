@@ -1,0 +1,2435 @@
+{
+  "schema": 1,
+  "status": "revised-first-batch-awaiting-Opus-integration",
+  "baseline": "6a7e6b194bc3778e7e009eddf671699b112c3cdb",
+  "specifications": [
+    "../../round3/README.md",
+    "../../sol-acceptance-20261008/evidence/specification/03-给Sol-图片规格清单.md",
+    "../../sol-acceptance-20261008/evidence/specification/07-给Sol-素材需求变更.md"
+  ],
+  "pixelPolicy": {
+    "scaleMode": "nearest",
+    "alpha": [
+      0,
+      255
+    ],
+    "shadows": "none; runtime-owned",
+    "actorMirror": {
+      "W": "E",
+      "SW": "SE",
+      "NW": "NE"
+    },
+    "anchorConvention": "pixel-boundary coordinates; y=48 is lower edge",
+    "palette": {
+      "player": [
+        [
+          36,
+          35,
+          33
+        ],
+        [
+          57,
+          55,
+          51
+        ],
+        [
+          75,
+          72,
+          66
+        ],
+        [
+          89,
+          96,
+          74
+        ],
+        [
+          119,
+          114,
+          104
+        ],
+        [
+          117,
+          99,
+          78
+        ],
+        [
+          195,
+          162,
+          106
+        ],
+        [
+          201,
+          166,
+          94
+        ]
+      ],
+      "stone": [
+        [
+          75,
+          72,
+          66
+        ],
+        [
+          119,
+          114,
+          104
+        ],
+        [
+          164,
+          155,
+          136
+        ],
+        [
+          89,
+          96,
+          74
+        ]
+      ],
+      "plaster": [
+        [
+          119,
+          114,
+          104
+        ],
+        [
+          164,
+          155,
+          136
+        ],
+        [
+          201,
+          192,
+          172
+        ],
+        [
+          89,
+          96,
+          74
+        ],
+        [
+          75,
+          72,
+          66
+        ]
+      ],
+      "window": [
+        [
+          36,
+          35,
+          33
+        ],
+        [
+          68,
+          75,
+          70
+        ],
+        [
+          107,
+          115,
+          104
+        ],
+        [
+          119,
+          114,
+          104
+        ],
+        [
+          164,
+          155,
+          136
+        ]
+      ],
+      "yard": [
+        [
+          75,
+          72,
+          66
+        ],
+        [
+          89,
+          87,
+          78
+        ],
+        [
+          105,
+          101,
+          90
+        ],
+        [
+          89,
+          96,
+          74
+        ]
+      ],
+      "tile": [
+        [
+          89,
+          85,
+          77
+        ],
+        [
+          105,
+          100,
+          90
+        ],
+        [
+          119,
+          114,
+          104
+        ],
+        [
+          75,
+          72,
+          66
+        ]
+      ]
+    },
+    "lighting": "Neutral ambient shading; existing mirrors retained pending Opus final lighting review",
+    "bodyHands": "No hands or lower forearms baked into body",
+    "crouch": {
+      "provided": false,
+      "currentFallback": "idle",
+      "accepted": false
+    }
+  },
+  "counts": {
+    "player": 25,
+    "wall": 11,
+    "ground": 6,
+    "weapon": 1,
+    "total": 43
+  },
+  "sourceTool": "image_gen",
+  "conditioningScript": "scripts/sol-round3-assets.mjs",
+  "sources": [
+    {
+      "kind": "player",
+      "file": "source/player-revised.png",
+      "sha256": "810cc7eeb28684f5e76db7697ee2ea2f8f7e411bbb795ab9da4f429e80c74cd5",
+      "prompt": "source/prompts.json#player"
+    },
+    {
+      "kind": "wall",
+      "file": "source/wall-revised.png",
+      "sha256": "0e79366ca52832044ea5699ecd95104e3788a9250d9b9e81bab8818b99b7c742",
+      "prompt": "source/prompts.json#wall"
+    },
+    {
+      "kind": "ground",
+      "file": "source/ground-revised.png",
+      "sha256": "7f2cc5c16473a6ef66ea7ff84c3f32ef6d980400cecfa4aae5911012e2103271",
+      "prompt": "source/prompts.json#ground"
+    }
+  ],
+  "assets": [
+    {
+      "id": "coast-player-body-e-f0-v1",
+      "file": "png/coast-player-body-e-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "E",
+      "frame": "idle",
+      "pose": "idle",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "933a3bc99471677ba3dea5bd4ec950d1e93d1eb0a1ded20a4773471dcdb13bea",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 50,
+        "top": 39,
+        "width": 104,
+        "height": 255
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 0,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "a73c2ee53d11890f0f818f0ab5ea6dc37f3d5df1ed6c7752850fcb1dbf4e2341",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-e-f1-v1",
+      "file": "png/coast-player-body-e-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "E",
+      "frame": "walk1",
+      "pose": "walk-1",
+      "baseline": 48,
+      "headTop": 10,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "f788886455018cf8c1bf9aada414b6ac1e52b986701213198d2d11abdbe3c543",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 246,
+        "top": 39,
+        "width": 133,
+        "height": 256
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 1,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "04ae2f840685646b4741c596a9a0594895a104d4971280b324751a6103c9231b",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-e-f2-v1",
+      "file": "png/coast-player-body-e-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "E",
+      "frame": "walk2",
+      "pose": "walk-2",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "2b9709060e654834ec32908434c456a22157e0722321f367c31db52ba956bb8e",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 450,
+        "top": 40,
+        "width": 128,
+        "height": 255
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 2,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "9c3e8a7b8e25b6ed2722def7262d0c2aea0d2f33afa3414f3a5621d562e89de6",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-e-f3-v1",
+      "file": "png/coast-player-body-e-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "E",
+      "frame": "walk3",
+      "pose": "walk-3",
+      "baseline": 48,
+      "headTop": 10,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "57c51427bda0bf682ac817924ea27cac4f2196934c65eedb6c917aa9ef2412fe",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 648,
+        "top": 40,
+        "width": 144,
+        "height": 255
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 3,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "1e00305c1aea6d06020ccf87bee3c55ea333e1d51fac3de2054be9f992889afe",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-e-f4-v1",
+      "file": "png/coast-player-body-e-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "E",
+      "frame": "walk4",
+      "pose": "walk-4",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "8a1f473c6c0be5d7ea0f9439cf73218dbd90f51a7e7741eaa52a3191817033b0",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 861,
+        "top": 39,
+        "width": 126,
+        "height": 256
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 4,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "33db98246637aa6791e19cec8670bf6a173c8026e153a17d05b4a5543ef8c050",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-se-f0-v1",
+      "file": "png/coast-player-body-se-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "SE",
+      "frame": "idle",
+      "pose": "idle",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "4991bdee3b7d2be32dbe9cc2deaff1660a46917dce08217dcf03b0d65294850c",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 48,
+        "top": 344,
+        "width": 119,
+        "height": 255
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 0,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "c43f21e5f74ea773431c3de345423b44a08915750cf0433e62a14551293bf718",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-se-f1-v1",
+      "file": "png/coast-player-body-se-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "SE",
+      "frame": "walk1",
+      "pose": "walk-1",
+      "baseline": 48,
+      "headTop": 10,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "3fc10d68ef4c8dc3d3475671538a07cd4e5000cf3d9beecf258f929d59e5416e",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 251,
+        "top": 344,
+        "width": 121,
+        "height": 258
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 1,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "01ed540f28791d6571a6ec98618f01eda57d294514040f2007459709de9c2bf4",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-se-f2-v1",
+      "file": "png/coast-player-body-se-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "SE",
+      "frame": "walk2",
+      "pose": "walk-2",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "f3f1cbf5fb753afdaadcb6f2599c77167cdcbf555f447f632afa117cceade9ae",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 447,
+        "top": 344,
+        "width": 121,
+        "height": 259
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 2,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "40a03c70435a0148bc81b2c645bfd56316850ab28b64f164c20f0bf4fb205b59",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-se-f3-v1",
+      "file": "png/coast-player-body-se-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "SE",
+      "frame": "walk3",
+      "pose": "walk-3",
+      "baseline": 48,
+      "headTop": 10,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "b2098f780275f939663fcb200afa0d4a924c66beadf13af1626d2c912edc6adc",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 654,
+        "top": 344,
+        "width": 121,
+        "height": 261
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 3,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "d2be80d15edbf88606890459ae9a920f50cc156d2fdc51a59c5c7b03bab7e1c6",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-se-f4-v1",
+      "file": "png/coast-player-body-se-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "SE",
+      "frame": "walk4",
+      "pose": "walk-4",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "bacb284c7bcc1fe75e95c7d4b97f2a1f7bea4d70f48511f9becac5ee1ea38bb6",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 855,
+        "top": 344,
+        "width": 125,
+        "height": 258
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 4,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "ec24f4af940f568778bd15f894323bf8358bdaebdc83f99b3c01c2326a025547",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-s-f0-v1",
+      "file": "png/coast-player-body-s-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "S",
+      "frame": "idle",
+      "pose": "idle",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "3d24329c8ecb36b0da2fa43dda0c87940586b8a910c408b6381f9d948e80c621",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 48,
+        "top": 647,
+        "width": 129,
+        "height": 254
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 0,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "ee570563651727beeb59b5f002bfc6b460659144df85deba69e20afd414b77a8",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-s-f1-v1",
+      "file": "png/coast-player-body-s-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "S",
+      "frame": "walk1",
+      "pose": "walk-1",
+      "baseline": 48,
+      "headTop": 10,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "700920b70eefddb27db042bd67e83a83cb168a139863b0d054f87aa35e1686d5",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 251,
+        "top": 646,
+        "width": 129,
+        "height": 259
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 1,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "7370e837f17b098cb70d23379130bbd27bac3ea0657f1b091a44a1ebd9cdf787",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-s-f2-v1",
+      "file": "png/coast-player-body-s-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "S",
+      "frame": "walk2",
+      "pose": "walk-2",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "2b1bd3c472f2241bc083317930cb45cbfca43445bbcdb6f39010b2150d848630",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 448,
+        "top": 645,
+        "width": 128,
+        "height": 258
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 2,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "b49ba50947016c845642f8c9ae4e6adf0a84363a307ec8db86069a817de31f92",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-s-f3-v1",
+      "file": "png/coast-player-body-s-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "S",
+      "frame": "walk3",
+      "pose": "walk-3",
+      "baseline": 48,
+      "headTop": 10,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "465a668039f3d3ce95a2b19ea63cc00635281f9930786aaad12118b5524d57b2",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 646,
+        "top": 651,
+        "width": 132,
+        "height": 255
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 3,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "b2a1cdb210aa012366922ca54aabf1906fb6519cd148c341ed523edae524245f",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-s-f4-v1",
+      "file": "png/coast-player-body-s-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "S",
+      "frame": "walk4",
+      "pose": "walk-4",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "176a75a5b33e7f02d8b625990cab862ba56da6cbbb96a583d595fef403d92b2f",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 848,
+        "top": 646,
+        "width": 129,
+        "height": 259
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 4,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "8038bc723cd302248da44d56e436c005cae622a184a835442d449f334f26d6b8",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-ne-f0-v1",
+      "file": "png/coast-player-body-ne-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "NE",
+      "frame": "idle",
+      "pose": "idle",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "228b5cf5b6498d559c14d2023bc89df446189ca6fdc9ed427d8bada507781358",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 53,
+        "top": 943,
+        "width": 115,
+        "height": 257
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 0,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "bdaa4e9afe6d93501062b7942da2e921ed7f99d560a8f54dce5a39f1eace9fe2",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-ne-f1-v1",
+      "file": "png/coast-player-body-ne-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "NE",
+      "frame": "walk1",
+      "pose": "walk-1",
+      "baseline": 48,
+      "headTop": 10,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "93cddbdbdd14584e46181440bcdc8841ac849a1859c40ed887b1deafd7ae4547",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 248,
+        "top": 943,
+        "width": 124,
+        "height": 257
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 1,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "fe4f271099796aa94cbee5743197a0f8b985988d27ba48106ab6a0218fca6279",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-ne-f2-v1",
+      "file": "png/coast-player-body-ne-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "NE",
+      "frame": "walk2",
+      "pose": "walk-2",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "d7201919db21545d03edbd34d502987024ad24afb180e56a5028f69ce00901eb",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 449,
+        "top": 943,
+        "width": 117,
+        "height": 258
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 2,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "f946c6b9a56b5dbe717e9fbe7cdf2cfb8af509a5b65320e6d55cbe49e02af49c",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-ne-f3-v1",
+      "file": "png/coast-player-body-ne-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "NE",
+      "frame": "walk3",
+      "pose": "walk-3",
+      "baseline": 48,
+      "headTop": 10,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "a197a865a537f30f07a248278e3bfa8d3bb32fafaf205b803f9e80e061b809fc",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 650,
+        "top": 943,
+        "width": 125,
+        "height": 257
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 3,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "3b112c5399c7c5f069b156212a7b3da7fdad69454f75f125be83f16851e41cd4",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-ne-f4-v1",
+      "file": "png/coast-player-body-ne-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "NE",
+      "frame": "walk4",
+      "pose": "walk-4",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "2cb730a5eead8ca848ddbd9d9409bde6345d62e8376dd62b40fb9e3a56273147",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 861,
+        "top": 942,
+        "width": 117,
+        "height": 259
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 4,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "3653091be80545d41c754510ae8e71b26173e29be463eeac3c602796ab263e0e",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-n-f0-v1",
+      "file": "png/coast-player-body-n-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "N",
+      "frame": "idle",
+      "pose": "idle",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "4468b6b6002d6c60f1f3b519cd376272a3c32f3e33c0917bf2b957c5f1908201",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 47,
+        "top": 1234,
+        "width": 133,
+        "height": 265
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 0,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "2abbdf5d7cdf7771ee022a6de1a7428e0d02434343746fbc36b181e57c3b4600",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-n-f1-v1",
+      "file": "png/coast-player-body-n-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "N",
+      "frame": "walk1",
+      "pose": "walk-1",
+      "baseline": 48,
+      "headTop": 10,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "81eccafb9e90163dc7be5411d9a0ee736fc27eb2a857f04ea59c1b466b8565d9",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 248,
+        "top": 1234,
+        "width": 132,
+        "height": 265
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 1,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "b752657bf5c1b007ae0083bc8e4162650a8753d758e70d8e4d4fdabfcb984810",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-n-f2-v1",
+      "file": "png/coast-player-body-n-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "N",
+      "frame": "walk2",
+      "pose": "walk-2",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "3c23a39532f079c2d13e79437035ad085cfe28de03ce9e0c32c9d88f95480130",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 444,
+        "top": 1235,
+        "width": 134,
+        "height": 265
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 2,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "c1c417568649b638b81ebbbc2bbba5fd8965c1bd931cbc06876f66df97a14e4a",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-n-f3-v1",
+      "file": "png/coast-player-body-n-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "N",
+      "frame": "walk3",
+      "pose": "walk-3",
+      "baseline": 48,
+      "headTop": 10,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "b642cba4e19f608e990610b278a66e23c81bf8aafe6b19c7607933c6f8eab687",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 649,
+        "top": 1234,
+        "width": 134,
+        "height": 266
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 3,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "88d2b7b7882f86d9c05ad3f117d51379f5f811778af3d3c0afa1c435ce5c45c1",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-player-body-n-f4-v1",
+      "file": "png/coast-player-body-n-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "layer": "upright",
+      "kind": "player",
+      "dir": "N",
+      "frame": "walk4",
+      "pose": "walk-4",
+      "baseline": 48,
+      "headTop": 9,
+      "logicalEntity": "player",
+      "decorative": false,
+      "sha256": "ccf7cb63116688ce64cdd9287fe91d31b8a03826b47ffa59c68d4c15d192390b",
+      "source": "source/player-revised.png",
+      "crop": {
+        "left": 848,
+        "top": 1235,
+        "width": 133,
+        "height": 265
+      },
+      "conditioning": "Edited body source: no baked hands; nearest-neighbour; binary alpha; neutral palette; baseline preserved",
+      "alpha": [
+        0,
+        255
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#player",
+      "baselineY": 48,
+      "frameIndex": 4,
+      "slot": "coast-player",
+      "revision": 2,
+      "previousSha256": "55ba54eba01d324cfa00c71c64d5d175764a985255dc3eb00c052c0cfa66fb25",
+      "repairIds": [
+        "ART-R07",
+        "ART-R09"
+      ],
+      "bodyArms": "upper sleeves only; no baked hands or hanging forearms",
+      "heldGripLocal": [
+        16,
+        26
+      ],
+      "weaponPresentationProposal": {
+        "backDirections": [
+          "N",
+          "NE",
+          "NW"
+        ],
+        "policy": "hide visual weapon when facing back; requires Opus integration",
+        "affectsSimulation": false
+      }
+    },
+    {
+      "id": "coast-wall-core-v1",
+      "file": "png/coast-wall-core-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        32
+      ],
+      "layer": "upper",
+      "logicalEntity": "wall",
+      "decorative": false,
+      "sha256": "efa3b3957b74b30ed99697bccb8493ff31f9d05a00442fca5ecfd8f123544299",
+      "source": "source/wall-revised.png",
+      "crop": {
+        "left": 86,
+        "top": 122,
+        "width": 219,
+        "height": 216
+      },
+      "alpha": [
+        255
+      ],
+      "part": "core",
+      "composedWallAnchor": [
+        0,
+        80
+      ],
+      "width": 32,
+      "height": 32,
+      "prompt": "source/prompts.json#wall",
+      "slot": "coast-wallcap-core-a",
+      "revision": 2,
+      "previousSha256": "b89ccb22f7774b3d2b47efc884fa364742f91dd7ef79aa41c40e1ededce96725",
+      "repairIds": [
+        "ART-R01"
+      ],
+      "conditioning": "Edited wall source; nearest; binary alpha; part-specific low-contrast palette; no new part"
+    },
+    {
+      "id": "coast-wall-edge-n-v1",
+      "file": "png/coast-wall-edge-n-v1.png",
+      "w": 32,
+      "h": 3,
+      "anchor": [
+        0,
+        3
+      ],
+      "layer": "upright",
+      "logicalEntity": "wall",
+      "decorative": false,
+      "sha256": "487932a6d4122e52780b213c34a3702812a5d500a0c243c19abc0cbe2ddd6370",
+      "source": "../../sol-acceptance-20261008/assets/source/wall-source.png",
+      "crop": {
+        "left": 373,
+        "top": 239,
+        "width": 242,
+        "height": 33
+      },
+      "alpha": [
+        255
+      ],
+      "colors": 5,
+      "part": "edge-n",
+      "composedWallAnchor": [
+        0,
+        80
+      ],
+      "width": 32,
+      "height": 3,
+      "prompt": "../../sol-acceptance-20261008/assets/source/prompts.json#wall",
+      "slot": "coast-wallcap-edge-n",
+      "revision": 2,
+      "previousSha256": "487932a6d4122e52780b213c34a3702812a5d500a0c243c19abc0cbe2ddd6370",
+      "repairIds": [],
+      "conditioning": "Unchanged byte-for-byte from first batch",
+      "originalSource": "source/wall-source.png",
+      "sourceReferenceOnly": true
+    },
+    {
+      "id": "coast-wall-edge-s-v1",
+      "file": "png/coast-wall-edge-s-v1.png",
+      "w": 32,
+      "h": 3,
+      "anchor": [
+        0,
+        3
+      ],
+      "layer": "upright",
+      "logicalEntity": "wall",
+      "decorative": false,
+      "sha256": "4744ff401660f54d499df5d362937ed2a465fda52b27e7d6ed5523174561062c",
+      "source": "../../sol-acceptance-20261008/assets/source/wall-source.png",
+      "crop": {
+        "left": 683,
+        "top": 239,
+        "width": 242,
+        "height": 33
+      },
+      "alpha": [
+        255
+      ],
+      "colors": 3,
+      "part": "edge-s",
+      "composedWallAnchor": [
+        0,
+        80
+      ],
+      "width": 32,
+      "height": 3,
+      "prompt": "../../sol-acceptance-20261008/assets/source/prompts.json#wall",
+      "slot": "coast-wallcap-edge-s",
+      "revision": 2,
+      "previousSha256": "4744ff401660f54d499df5d362937ed2a465fda52b27e7d6ed5523174561062c",
+      "repairIds": [],
+      "conditioning": "Unchanged byte-for-byte from first batch",
+      "originalSource": "source/wall-source.png",
+      "sourceReferenceOnly": true
+    },
+    {
+      "id": "coast-wall-edge-e-v1",
+      "file": "png/coast-wall-edge-e-v1.png",
+      "w": 3,
+      "h": 32,
+      "anchor": [
+        0,
+        32
+      ],
+      "layer": "upright",
+      "logicalEntity": "wall",
+      "decorative": false,
+      "sha256": "86af923ee48f2417309389f1ce0c9961756a01cac688b0ea5e9bab1b8b26c068",
+      "source": "../../sol-acceptance-20261008/assets/source/wall-source.png",
+      "crop": {
+        "left": 1068,
+        "top": 120,
+        "width": 31,
+        "height": 234
+      },
+      "alpha": [
+        255
+      ],
+      "colors": 3,
+      "part": "edge-e",
+      "composedWallAnchor": [
+        0,
+        80
+      ],
+      "width": 3,
+      "height": 32,
+      "prompt": "../../sol-acceptance-20261008/assets/source/prompts.json#wall",
+      "slot": "coast-wallcap-edge-e",
+      "revision": 2,
+      "previousSha256": "86af923ee48f2417309389f1ce0c9961756a01cac688b0ea5e9bab1b8b26c068",
+      "repairIds": [],
+      "conditioning": "Unchanged byte-for-byte from first batch",
+      "originalSource": "source/wall-source.png",
+      "sourceReferenceOnly": true
+    },
+    {
+      "id": "coast-wall-edge-w-v1",
+      "file": "png/coast-wall-edge-w-v1.png",
+      "w": 3,
+      "h": 32,
+      "anchor": [
+        0,
+        32
+      ],
+      "layer": "upright",
+      "logicalEntity": "wall",
+      "decorative": false,
+      "sha256": "f738f368f8cc84f4cd05fcfb307830ffd3d20f087a0cf4b4e1546418dea991b8",
+      "source": "../../sol-acceptance-20261008/assets/source/wall-source.png",
+      "crop": {
+        "left": 97,
+        "top": 462,
+        "width": 33,
+        "height": 261
+      },
+      "alpha": [
+        255
+      ],
+      "colors": 3,
+      "part": "edge-w",
+      "composedWallAnchor": [
+        0,
+        80
+      ],
+      "width": 3,
+      "height": 32,
+      "prompt": "../../sol-acceptance-20261008/assets/source/prompts.json#wall",
+      "slot": "coast-wallcap-edge-w",
+      "revision": 2,
+      "previousSha256": "f738f368f8cc84f4cd05fcfb307830ffd3d20f087a0cf4b4e1546418dea991b8",
+      "repairIds": [],
+      "conditioning": "Unchanged byte-for-byte from first batch",
+      "originalSource": "source/wall-source.png",
+      "sourceReferenceOnly": true
+    },
+    {
+      "id": "coast-wall-exterior-a-v1",
+      "file": "png/coast-wall-exterior-a-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        0,
+        48
+      ],
+      "layer": "upright",
+      "logicalEntity": "wall",
+      "decorative": false,
+      "sha256": "184fd2c52a6b17eebb975ee486a8c01e701d226c4734329edef8cf42f089626e",
+      "source": "source/wall-revised.png",
+      "crop": {
+        "left": 244,
+        "top": 435,
+        "width": 203,
+        "height": 313
+      },
+      "alpha": [
+        255
+      ],
+      "part": "exterior-a",
+      "composedWallAnchor": [
+        0,
+        80
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#wall",
+      "slot": "coast-wall-ext-a",
+      "wetBandPx": 9,
+      "revision": 2,
+      "previousSha256": "bf50ffab0a695e91b15c3cf1902c3c1bb5079b994f07a5de67d64a050d707955",
+      "repairIds": [
+        "ART-R02"
+      ],
+      "conditioning": "Edited wall source; nearest; binary alpha; part-specific low-contrast palette; no new part"
+    },
+    {
+      "id": "coast-wall-exterior-b-v1",
+      "file": "png/coast-wall-exterior-b-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        0,
+        48
+      ],
+      "layer": "upright",
+      "logicalEntity": "wall",
+      "decorative": false,
+      "sha256": "7dbd801ff9f237097fe855a57a9e73daf4a26529a3e4bc82f6ca24948674d450",
+      "source": "source/wall-revised.png",
+      "crop": {
+        "left": 496,
+        "top": 435,
+        "width": 192,
+        "height": 313
+      },
+      "alpha": [
+        255
+      ],
+      "part": "exterior-b",
+      "composedWallAnchor": [
+        0,
+        80
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#wall",
+      "slot": "coast-wall-ext-b",
+      "wetBandPx": 9,
+      "revision": 2,
+      "previousSha256": "49c08ce1f504f4c3212f661b0b0be2aebff73d74a062404b36a0e65805c3681d",
+      "repairIds": [
+        "ART-R02"
+      ],
+      "conditioning": "Edited wall source; nearest; binary alpha; part-specific low-contrast palette; no new part"
+    },
+    {
+      "id": "coast-wall-interior-v1",
+      "file": "png/coast-wall-interior-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        0,
+        48
+      ],
+      "layer": "upright",
+      "logicalEntity": "wall",
+      "decorative": false,
+      "sha256": "58a4da49bc2180743b90eaaa1edf19b9908c5192376fd6f0f580a1c472b6a13b",
+      "source": "source/wall-revised.png",
+      "crop": {
+        "left": 745,
+        "top": 435,
+        "width": 183,
+        "height": 313
+      },
+      "alpha": [
+        255
+      ],
+      "part": "interior",
+      "composedWallAnchor": [
+        0,
+        80
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#wall",
+      "slot": "coast-wall-int-a",
+      "lowerSkirtPx": 18,
+      "revision": 2,
+      "previousSha256": "fcac529b0b74964724398eefbe9ea181c2f7b63aa84d481baddbc1654f5d2bd9",
+      "repairIds": [
+        "ART-R03"
+      ],
+      "conditioning": "Edited wall source; nearest; binary alpha; part-specific low-contrast palette; no new part"
+    },
+    {
+      "id": "coast-wall-window-ew-v1",
+      "file": "png/coast-wall-window-ew-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        0,
+        48
+      ],
+      "layer": "upright",
+      "logicalEntity": "window",
+      "decorative": false,
+      "sha256": "7da2d93daa89801c111debef314ffedae6285be2530afbbb0f5c5385bd6c2a5b",
+      "source": "source/wall-revised.png",
+      "crop": {
+        "left": 996,
+        "top": 435,
+        "width": 192,
+        "height": 313
+      },
+      "alpha": [
+        255
+      ],
+      "part": "window-ew",
+      "composedWallAnchor": [
+        0,
+        80
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "source/prompts.json#wall",
+      "slot": "coast-wall-window-ew",
+      "revision": 2,
+      "previousSha256": "c58e96082c8195a476517fd26e0c00e8b5542167d37d3d42036348c592f12b9a",
+      "repairIds": [
+        "ART-R04"
+      ],
+      "conditioning": "Edited wall source; nearest; binary alpha; part-specific low-contrast palette; no new part"
+    },
+    {
+      "id": "coast-wall-door-ew-closed-v1",
+      "file": "png/coast-wall-door-ew-closed-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        0,
+        48
+      ],
+      "layer": "upright",
+      "logicalEntity": "door",
+      "decorative": false,
+      "sha256": "8533e998c2b068ff436595a694b8903f9e97e16a80a5989032e4fb0579934319",
+      "source": "../../sol-acceptance-20261008/assets/source/wall-source.png",
+      "crop": {
+        "left": 241,
+        "top": 813,
+        "width": 204,
+        "height": 297
+      },
+      "alpha": [
+        255
+      ],
+      "colors": 7,
+      "part": "door-ew-closed",
+      "composedWallAnchor": [
+        0,
+        80
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "../../sol-acceptance-20261008/assets/source/prompts.json#wall",
+      "slot": "coast-door-ew-closed",
+      "revision": 2,
+      "previousSha256": "8533e998c2b068ff436595a694b8903f9e97e16a80a5989032e4fb0579934319",
+      "repairIds": [],
+      "conditioning": "Unchanged byte-for-byte from first batch",
+      "originalSource": "source/wall-source.png",
+      "sourceReferenceOnly": true
+    },
+    {
+      "id": "coast-wall-door-ew-open-v1",
+      "file": "png/coast-wall-door-ew-open-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        0,
+        48
+      ],
+      "layer": "upright",
+      "logicalEntity": "door",
+      "decorative": false,
+      "sha256": "67c9d6e27a728334f3b66e3705c96473dd6e7020139158130eeafe6b4e1f33e0",
+      "source": "../../sol-acceptance-20261008/assets/source/wall-source.png",
+      "crop": {
+        "left": 495,
+        "top": 813,
+        "width": 195,
+        "height": 297
+      },
+      "alpha": [
+        0,
+        255
+      ],
+      "colors": 4,
+      "part": "door-ew-open",
+      "composedWallAnchor": [
+        0,
+        80
+      ],
+      "width": 32,
+      "height": 48,
+      "prompt": "../../sol-acceptance-20261008/assets/source/prompts.json#wall",
+      "slot": "coast-door-ew-open",
+      "opening": {
+        "x": 5,
+        "y": 4,
+        "w": 22,
+        "h": 44
+      },
+      "leftLeafPx": 4,
+      "revision": 2,
+      "previousSha256": "67c9d6e27a728334f3b66e3705c96473dd6e7020139158130eeafe6b4e1f33e0",
+      "repairIds": [],
+      "conditioning": "Unchanged byte-for-byte from first batch",
+      "originalSource": "source/wall-source.png",
+      "sourceReferenceOnly": true
+    },
+    {
+      "id": "coast-ground-asphalt-a-v1",
+      "file": "png/coast-ground-asphalt-a-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "logicalEntity": null,
+      "decorative": true,
+      "sha256": "09c5ac45deb20f724eb7058663a048dff857643ec105067b514f5796a486bc14",
+      "source": "../../sol-acceptance-20261008/assets/source/ground-source.png",
+      "crop": {
+        "left": 74,
+        "top": 56,
+        "width": 400,
+        "height": 400
+      },
+      "alpha": [
+        255
+      ],
+      "colors": 4,
+      "seamless": true,
+      "width": 32,
+      "height": 32,
+      "prompt": "../../sol-acceptance-20261008/assets/source/prompts.json#ground",
+      "slot": "coast-ground-asphalt",
+      "revision": 2,
+      "previousSha256": "09c5ac45deb20f724eb7058663a048dff857643ec105067b514f5796a486bc14",
+      "repairIds": [],
+      "conditioning": "Unchanged byte-for-byte from first batch",
+      "originalSource": "source/ground-source.png",
+      "sourceReferenceOnly": true
+    },
+    {
+      "id": "coast-ground-asphalt-b-v1",
+      "file": "png/coast-ground-asphalt-b-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "logicalEntity": null,
+      "decorative": true,
+      "sha256": "e9d163bd9f7743ae4ea0312418fc8041295b6bc730f33fb69b770884369ffdcb",
+      "source": "../../sol-acceptance-20261008/assets/source/ground-source.png",
+      "crop": {
+        "left": 570,
+        "top": 56,
+        "width": 400,
+        "height": 400
+      },
+      "alpha": [
+        255
+      ],
+      "colors": 3,
+      "seamless": true,
+      "width": 32,
+      "height": 32,
+      "prompt": "../../sol-acceptance-20261008/assets/source/prompts.json#ground",
+      "slot": "coast-ground-asphalt",
+      "revision": 2,
+      "previousSha256": "e9d163bd9f7743ae4ea0312418fc8041295b6bc730f33fb69b770884369ffdcb",
+      "repairIds": [],
+      "conditioning": "Unchanged byte-for-byte from first batch",
+      "originalSource": "source/ground-source.png",
+      "sourceReferenceOnly": true
+    },
+    {
+      "id": "coast-ground-yard-a-v1",
+      "file": "png/coast-ground-yard-a-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "logicalEntity": null,
+      "decorative": true,
+      "sha256": "78200ce2a1ca965f314f3cdbeb5bfbfb02461f0d0203a52da7f7a0e50a364918",
+      "source": "source/ground-revised.png",
+      "crop": {
+        "left": 1062,
+        "top": 56,
+        "width": 400,
+        "height": 400
+      },
+      "alpha": [
+        255
+      ],
+      "seamless": true,
+      "width": 32,
+      "height": 32,
+      "prompt": "source/prompts.json#ground",
+      "slot": "coast-ground-yard",
+      "revision": 2,
+      "previousSha256": "15dd85add5353a5579553d6dc55a5315871430790de44d285c43d145211382d8",
+      "repairIds": [
+        "ART-R05"
+      ],
+      "conditioning": "Edited ground source; reduced courtyard contrast; tile a/b in one muted ramp; exact existing grout/edges"
+    },
+    {
+      "id": "coast-ground-yard-b-v1",
+      "file": "png/coast-ground-yard-b-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "logicalEntity": null,
+      "decorative": true,
+      "sha256": "58bfabf79b209e96aaad5ac2142d657019c54c72be0341d10903924de9079c15",
+      "source": "source/ground-revised.png",
+      "crop": {
+        "left": 74,
+        "top": 554,
+        "width": 400,
+        "height": 400
+      },
+      "alpha": [
+        255
+      ],
+      "seamless": true,
+      "width": 32,
+      "height": 32,
+      "prompt": "source/prompts.json#ground",
+      "slot": "coast-ground-yard",
+      "revision": 2,
+      "previousSha256": "e6143cccf832276f228774e41797d9eaa88bec33c84d12a83b132b55f8b00d54",
+      "repairIds": [
+        "ART-R05"
+      ],
+      "conditioning": "Edited ground source; reduced courtyard contrast; tile a/b in one muted ramp; exact existing grout/edges"
+    },
+    {
+      "id": "coast-ground-tile-a-v1",
+      "file": "png/coast-ground-tile-a-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "logicalEntity": null,
+      "decorative": true,
+      "sha256": "29ab13629f858452fe25836db504feeb8415d0a13f51cd809d6645ce949057bc",
+      "source": "source/ground-revised.png",
+      "crop": {
+        "left": 570,
+        "top": 554,
+        "width": 400,
+        "height": 400
+      },
+      "alpha": [
+        255
+      ],
+      "seamless": true,
+      "width": 32,
+      "height": 32,
+      "prompt": "source/prompts.json#ground",
+      "slot": "coast-ground-tile",
+      "revision": 2,
+      "previousSha256": "f1760e42777695d5ffb7f107f001141385907d79a9bddbe5253e88bd08f6c621",
+      "repairIds": [
+        "ART-R06"
+      ],
+      "conditioning": "Edited ground source; reduced courtyard contrast; tile a/b in one muted ramp; exact existing grout/edges"
+    },
+    {
+      "id": "coast-ground-tile-b-v1",
+      "file": "png/coast-ground-tile-b-v1.png",
+      "w": 32,
+      "h": 32,
+      "anchor": [
+        0,
+        0
+      ],
+      "layer": "ground",
+      "logicalEntity": null,
+      "decorative": true,
+      "sha256": "f937266bb57c6b2893986aa4102780cc961ed2892c598be4b831b433aac3fd08",
+      "source": "source/ground-revised.png",
+      "crop": {
+        "left": 1062,
+        "top": 554,
+        "width": 400,
+        "height": 400
+      },
+      "alpha": [
+        255
+      ],
+      "seamless": true,
+      "width": 32,
+      "height": 32,
+      "prompt": "source/prompts.json#ground",
+      "slot": "coast-ground-tile",
+      "revision": 2,
+      "previousSha256": "043de6a62bec6f75ab74b16943afac7b1c1c9be4a4f0fcbd439bf7cb84d89987",
+      "repairIds": [
+        "ART-R06"
+      ],
+      "conditioning": "Edited ground source; reduced courtyard contrast; tile a/b in one muted ramp; exact existing grout/edges"
+    },
+    {
+      "id": "coast-weapon-carbine-held-v1",
+      "file": "png/coast-weapon-carbine-held-v1.png",
+      "w": 31,
+      "h": 10,
+      "anchor": [
+        8,
+        4
+      ],
+      "layer": "upright",
+      "logicalEntity": "carbine",
+      "decorative": false,
+      "sha256": "7e4157ac89587045218de25fea996aa83dd047c068df7f5e703551cac3542107",
+      "source": "../../sol-acceptance-20261008/assets/source/carbine-source.png",
+      "crop": {
+        "left": 57,
+        "top": 179,
+        "width": 2091,
+        "height": 365
+      },
+      "alpha": [
+        0,
+        255
+      ],
+      "colors": 8,
+      "grip": [
+        8,
+        4
+      ],
+      "muzzle": [
+        28,
+        4
+      ],
+      "barrelAxis": 4,
+      "gloves": "#4a463c",
+      "width": 31,
+      "height": 10,
+      "prompt": "../../sol-acceptance-20261008/assets/source/prompts.json#carbine",
+      "axisRow": 4,
+      "slot": "coast-weapon-carbine",
+      "revision": 2,
+      "previousSha256": "7e4157ac89587045218de25fea996aa83dd047c068df7f5e703551cac3542107",
+      "repairIds": [],
+      "conditioning": "Unchanged byte-for-byte from first batch",
+      "originalSource": "source/carbine-source.png",
+      "sourceReferenceOnly": true
+    }
+  ],
+  "revision": 2,
+  "assetIdPolicy": "Existing v1 IDs and filenames deliberately retained for the Opus import contract; revision and SHA256 distinguish these replacements",
+  "repairDisposition": [
+    {
+      "id": "ART-R01",
+      "status": "repaired-png",
+      "note": "Wall core border removed; paired edges verified"
+    },
+    {
+      "id": "ART-R02",
+      "status": "repaired-png",
+      "note": "No third exterior; A/B source motifs differ and side profiles match"
+    },
+    {
+      "id": "ART-R03",
+      "status": "repaired-png",
+      "note": "Arrow-like marks removed in edited interior"
+    },
+    {
+      "id": "ART-R04",
+      "status": "repaired-png",
+      "note": "Window strip uses low-saturation grey-green"
+    },
+    {
+      "id": "ART-R05",
+      "status": "repaired-png",
+      "note": "Courtyard bright speckles reduced"
+    },
+    {
+      "id": "ART-R06",
+      "status": "repaired-png",
+      "note": "Tile A/B share a darker close-luminance ramp"
+    },
+    {
+      "id": "ART-R07",
+      "status": "repaired-png-awaiting-in-engine-review",
+      "note": "All 25 bodies remove baked hands and dangling forearms"
+    },
+    {
+      "id": "ART-R08",
+      "status": "requires-opus-integration",
+      "note": "Proposal: hide only the visual gun on N/NE/NW; current scene does not consume this field. Simulation unchanged."
+    },
+    {
+      "id": "ART-R09",
+      "status": "mirror-retained-for-Opus-review",
+      "note": "W/SW/NW continue mirroring with diffuse shading; Opus final lighting preference pending, no added directions"
+    },
+    {
+      "id": "ART-R10",
+      "status": "blocked-by-fixed-43-scope",
+      "note": "No crouch sample can be added without expanding frame count or breaking the five-frame contract; existing idle fallback remains unaccepted"
+    }
+  ]
+}

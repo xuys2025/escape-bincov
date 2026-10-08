@@ -1,0 +1,165 @@
+{
+  "at": "2026-10-08T04:21:04.508Z",
+  "node": "v24.19.0",
+  "input": "D:\\bincov\\pr22-runtime\\dist\\index.html",
+  "method": "Detached view-only bullets behind real front wall/closed door. Native worldRT RGB diff restricted to opaque pixels of each actual faded wall texture; every case also removes that occluder for a positive bullet-visibility control. Roof/ceiling removed, fixed camera/time, no simulation/save claim.",
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "art": "sol",
+  "cases": [
+    {
+      "kind": "front-wall",
+      "level": 0,
+      "rect": {
+        "x": 416,
+        "y": 336,
+        "w": 32,
+        "h": 80
+      },
+      "z": 416,
+      "bulletY": 408,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 15,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 0,
+      "totalChanged": 0,
+      "controlChanged": 12,
+      "controlOpaquePixels": 12
+    },
+    {
+      "kind": "front-wall",
+      "level": 1,
+      "rect": {
+        "x": 416,
+        "y": 336,
+        "w": 32,
+        "h": 80
+      },
+      "z": 416,
+      "bulletY": 408,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 15,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 5,
+      "totalChanged": 5,
+      "controlChanged": 12,
+      "controlOpaquePixels": 7
+    },
+    {
+      "kind": "front-wall",
+      "level": 2,
+      "rect": {
+        "x": 416,
+        "y": 336,
+        "w": 32,
+        "h": 80
+      },
+      "z": 416,
+      "bulletY": 408,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 8,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 5,
+      "totalChanged": 5,
+      "controlChanged": 12,
+      "controlOpaquePixels": 7
+    },
+    {
+      "kind": "front-wall",
+      "level": 3,
+      "rect": {
+        "x": 416,
+        "y": 336,
+        "w": 32,
+        "h": 80
+      },
+      "z": 416,
+      "bulletY": 408,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 8,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 11,
+      "totalChanged": 11,
+      "controlChanged": 12,
+      "controlOpaquePixels": 1
+    },
+    {
+      "kind": "closed-door",
+      "level": 0,
+      "rect": {
+        "x": 448,
+        "y": 336,
+        "w": 32,
+        "h": 80
+      },
+      "z": 416,
+      "bulletY": 408,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 15,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 0,
+      "totalChanged": 0,
+      "controlChanged": 12,
+      "controlOpaquePixels": 12
+    },
+    {
+      "kind": "closed-door",
+      "level": 1,
+      "rect": {
+        "x": 448,
+        "y": 336,
+        "w": 32,
+        "h": 80
+      },
+      "z": 416,
+      "bulletY": 408,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 15,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 5,
+      "totalChanged": 5,
+      "controlChanged": 12,
+      "controlOpaquePixels": 7
+    },
+    {
+      "kind": "closed-door",
+      "level": 2,
+      "rect": {
+        "x": 448,
+        "y": 336,
+        "w": 32,
+        "h": 80
+      },
+      "z": 416,
+      "bulletY": 408,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 8,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 5,
+      "totalChanged": 5,
+      "controlChanged": 12,
+      "controlOpaquePixels": 7
+    },
+    {
+      "kind": "closed-door",
+      "level": 3,
+      "rect": {
+        "x": 448,
+        "y": 336,
+        "w": 32,
+        "h": 80
+      },
+      "z": 416,
+      "bulletY": 408,
+      "bulletVisible": true,
+      "opaqueSamplesOnTrail": 8,
+      "opaqueChanged": 0,
+      "changedThroughHoles": 11,
+      "totalChanged": 11,
+      "controlChanged": 12,
+      "controlOpaquePixels": 1
+    }
+  ],
+  "status": "passed"
+}

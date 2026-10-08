@@ -1,0 +1,46 @@
+cycle 1 heap 31101044 session chars 2768
+cycle 2 heap 32110696 session chars 2757
+cycle 3 heap 32258452 session chars 2767
+cycle 4 heap 32514856 session chars 2756
+cycle 5 heap 32645856 session chars 2767
+cycle 6 heap 32799676 session chars 2757
+cycle 7 heap 32781824 session chars 2767
+cycle 8 heap 32861804 session chars 2756
+cycle 9 heap 33121892 session chars 2767
+cycle 10 heap 33265396 session chars 2758
+cycle 11 heap 33269800 session chars 2767
+cycle 12 heap 33300240 session chars 2758
+cycle 13 heap 33332084 session chars 2768
+cycle 14 heap 33423188 session chars 2758
+cycle 15 heap 33335956 session chars 2767
+cycle 16 heap 33382256 session chars 2758
+cycle 17 heap 33392116 session chars 2768
+cycle 18 heap 33550420 session chars 2758
+cycle 19 heap 33472124 session chars 2767
+cycle 20 heap 33529900 session chars 2760
+cycle 21 heap 33537632 session chars 2770
+cycle 22 heap 33633908 session chars 2760
+cycle 23 heap 33536936 session chars 2770
+cycle 24 heap 33595640 session chars 2760
+cycle 25 heap 33560292 session chars 2769
+cycle 26 heap 33678980 session chars 2761
+cycle 27 heap 33595308 session chars 2770
+cycle 28 heap 33671864 session chars 2759
+cycle 29 heap 33633396 session chars 2771
+cycle 30 heap 33738560 session chars 2761
+heap trend, cycles 6-10 against the last five: 697503 bytes
+retained self size 45741380 -> 46248920: 25377 bytes per cycle
+tracked instances {"Texture3":22,"_Container":14,"HTMLCanvasElement":7,"_TextureSource2":5,"WebGLRenderer3":1,"Container4":8,"TextureSource3":163,"_Sprite":12,"CoastSampleHost":1,"Atlas":1,"_CoastView":1,"Fx":1,"Textures":1,"_Graphics":4,"_Application2":1,"Lighting":1,"InventoryPanel":1,"Scope":1,"Texture":4,"Sprite3":3,"WebGL2RenderingContext":3,"CoastRaidRuntime":1,"CanvasSource":1}
+   188928     91 code:system / InstructionStream
+   107316    100 string:(string)
+    74448    208 code:system / TrustedByteArray
+    32740    163 native:system / WeakArrayList
+    30788     82 code:system / ProtectedFixedArray
+     8720    218 object shape:system / Map
+     6664     49 native:LargestContentfulPaint
+     6552     91 code:system / Code
+     6080     40 native:LayoutShift
+     5632     32 native:PerformanceLongAnimationFrameTiming
+     5096     49 native:InteractionContentfulPaint
+     4480     80 native:DOMRectReadOnly
+PASS F20 heap: no tracked instance accumulates; explicit resource counts are zero after every cycle

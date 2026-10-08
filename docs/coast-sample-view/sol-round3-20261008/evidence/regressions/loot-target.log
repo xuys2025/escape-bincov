@@ -1,0 +1,25 @@
+$ node --import tsx scripts/loot-target-test.mjs
+PASS 1280x720: guide returns to pause on close and Escape; loot danger stays above item details
+PASS 1280x720: all overlapping sources appear, empty sources remain and same-name corpses have distinct numbers
+PASS 1280x720: wheel moves both ways, wraps, and E opens exactly the highlighted source
+PASS 1280x720: wheel cannot switch a source inside loot, inventory or pause; closing preserves selection
+PASS 1280x720: movement, gunfire, clock and enemies continue while the list is visible
+PASS 1280x720: ground loot remains accessible beside a selected container
+PASS 1280x720: a departing selection falls back to an accessible target without renumbering corpses
+PASS 1280x720: crowded lists keep every target reachable and the selected row visible
+PASS 1280x720: leaving range removes stale targets and E cannot reopen a remote source
+PASS 1280x720: walls and high tide exclude inaccessible sources; selected flooded corpse disappears
+PASS 1280x720: extraction takes priority even with a container under the player
+PASS 1920x1080: guide returns to pause on close and Escape; loot danger stays above item details
+PASS 1920x1080: all overlapping sources appear, empty sources remain and same-name corpses have distinct numbers
+PASS 1920x1080: wheel moves both ways, wraps, and E opens exactly the highlighted source
+PASS 1920x1080: wheel cannot switch a source inside loot, inventory or pause; closing preserves selection
+PASS 1920x1080: movement, gunfire, clock and enemies continue while the list is visible
+PASS 1920x1080: ground loot remains accessible beside a selected container
+PASS 1920x1080: a departing selection falls back to an accessible target without renumbering corpses
+PASS 1920x1080: crowded lists keep every target reachable and the selected row visible
+PASS 1920x1080: leaving range removes stale targets and E cannot reopen a remote source
+PASS 1920x1080: walls and high tide exclude inaccessible sources; selected flooded corpse disappears
+PASS 1920x1080: extraction takes priority even with a container under the player
+PASS 844x390-touch: guide returns to pause on close and Escape; loot danger stays above item details
+PASS 844x390-touch: phone taps an exact source, including an empty corpse, and closes before choosing another

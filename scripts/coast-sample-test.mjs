@@ -9,8 +9,8 @@ import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { browserOptions } from './browser-options.mjs';
 
-const out = resolve('test-results/coast-sample'); await mkdir(out, { recursive: true });
-const url = pathToFileURL(resolve('dist/index.html')).href;
+const out = resolve(process.env.BINCOV_SAMPLE_OUT || 'test-results/coast-sample'); await mkdir(out, { recursive: true });
+const url = pathToFileURL(resolve(process.env.BINCOV_SAMPLE_HTML || 'dist/index.html')).href;
 const report = { startedAt: new Date().toISOString(), seed: '42', steps: [], errors: [], requests: [] };
 const browser = await chromium.launch(browserOptions); report.browser = browser.version();
 const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -32,7 +32,7 @@ const action = (page, name) => page.locator(`[data-action="${name}"]`);
 async function deploy(page, { enter = true } = {}) {
   if (enter) await action(page, 'enter').click();
   await page.locator('#run-world').selectOption('buildings'); await page.locator('#seed').fill('42'); await action(page, 'deploy').click();
-  await page.waitForFunction(() => window.__bincovSample?.host?.lastBatch);
+  await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch);
   await page.evaluate(() => window.__bincovSample.driver.freezeAI(true));
 }
 const now = page => page.evaluate(() => {
@@ -329,7 +329,7 @@ const restoreWrites = page => page.evaluate(() => { Storage.prototype.setItem = 
     const saved = await page.evaluate(() => window.__bincovSample.host.services.checkpoint());
     const before = await now(page);
     await page.reload(); await action(page, 'enter').click();
-    await page.waitForFunction(() => window.__bincovSample?.host?.lastBatch);
+    await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch);
     const after = await now(page);
     assert.equal(saved, true); assert.equal(after.panel, 'pause'); assert.equal(after.map, before.map);
     assert.deepEqual([after.player.x, after.player.y], [before.player.x, before.player.y]);
@@ -400,7 +400,7 @@ const restoreWrites = page => page.evaluate(() => { Storage.prototype.setItem = 
   await step('W16 the ordinary entry is unchanged: residential raids still use the Phaser RaidScene', async () => {
     const page = plain.page;
     await action(page, 'enter').click(); await page.locator('#run-world').selectOption('buildings'); await page.locator('#seed').fill('42'); await action(page, 'deploy').click();
-    await page.waitForFunction(() => window.__bincov.app.raid?.player?.active);
+    await page.waitForFunction(() => !!window.__bincov.app.raid?.player?.active);
     const s = await page.evaluate(() => ({ sample: document.querySelectorAll('.coast-sample').length, coastSample: !!window.__bincov.app.coastSample, canvases: document.querySelectorAll('canvas').length }));
     assert.equal(s.sample, 0); assert.equal(s.coastSample, false);
     return s;

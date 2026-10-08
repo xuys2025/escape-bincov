@@ -1,0 +1,514 @@
+{
+  "startedAt": "2026-10-08T04:25:37.335Z",
+  "browser": "154.0.8037.98",
+  "cycles": 30,
+  "snapshots": [
+    10,
+    30
+  ],
+  "trend": {
+    "afterWarmupMean": 32966118.4,
+    "lastFiveMean": 33663621.6,
+    "growthBytes": 697503.200000003
+  },
+  "selfSize": {
+    "10": 45741380,
+    "30": 46248920,
+    "perCycle": 25377
+  },
+  "tracked": {
+    "10": {
+      "Texture3": 22,
+      "_Container": 14,
+      "HTMLCanvasElement": 7,
+      "_TextureSource2": 5,
+      "WebGLRenderer3": 1,
+      "Container4": 8,
+      "TextureSource3": 163,
+      "WebGL2RenderingContext": 3,
+      "Sprite3": 3,
+      "Texture": 4,
+      "CoastSampleHost": 1,
+      "Scope": 1,
+      "CoastRaidRuntime": 1,
+      "_Sprite": 12,
+      "_Graphics": 4,
+      "Atlas": 1,
+      "_CoastView": 1,
+      "Fx": 1,
+      "Textures": 1,
+      "_Application2": 1,
+      "Lighting": 1,
+      "InventoryPanel": 1,
+      "CanvasSource": 1
+    },
+    "30": {
+      "Texture3": 22,
+      "_Container": 14,
+      "HTMLCanvasElement": 7,
+      "_TextureSource2": 5,
+      "WebGLRenderer3": 1,
+      "Container4": 8,
+      "TextureSource3": 163,
+      "_Sprite": 12,
+      "CoastSampleHost": 1,
+      "Atlas": 1,
+      "_CoastView": 1,
+      "Fx": 1,
+      "Textures": 1,
+      "_Graphics": 4,
+      "_Application2": 1,
+      "Lighting": 1,
+      "InventoryPanel": 1,
+      "Scope": 1,
+      "Texture": 4,
+      "Sprite3": 3,
+      "WebGL2RenderingContext": 3,
+      "CoastRaidRuntime": 1,
+      "CanvasSource": 1
+    }
+  },
+  "accumulated": [],
+  "sessionChars": [
+    2768,
+    2761
+  ],
+  "perCycleHeap": [
+    {
+      "cycle": 1,
+      "heap": 31101044,
+      "outcome": "death"
+    },
+    {
+      "cycle": 2,
+      "heap": 32110696,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 3,
+      "heap": 32258452,
+      "outcome": "death"
+    },
+    {
+      "cycle": 4,
+      "heap": 32514856,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 5,
+      "heap": 32645856,
+      "outcome": "death"
+    },
+    {
+      "cycle": 6,
+      "heap": 32799676,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 7,
+      "heap": 32781824,
+      "outcome": "death"
+    },
+    {
+      "cycle": 8,
+      "heap": 32861804,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 9,
+      "heap": 33121892,
+      "outcome": "death"
+    },
+    {
+      "cycle": 10,
+      "heap": 33265396,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 11,
+      "heap": 33269800,
+      "outcome": "death"
+    },
+    {
+      "cycle": 12,
+      "heap": 33300240,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 13,
+      "heap": 33332084,
+      "outcome": "death"
+    },
+    {
+      "cycle": 14,
+      "heap": 33423188,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 15,
+      "heap": 33335956,
+      "outcome": "death"
+    },
+    {
+      "cycle": 16,
+      "heap": 33382256,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 17,
+      "heap": 33392116,
+      "outcome": "death"
+    },
+    {
+      "cycle": 18,
+      "heap": 33550420,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 19,
+      "heap": 33472124,
+      "outcome": "death"
+    },
+    {
+      "cycle": 20,
+      "heap": 33529900,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 21,
+      "heap": 33537632,
+      "outcome": "death"
+    },
+    {
+      "cycle": 22,
+      "heap": 33633908,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 23,
+      "heap": 33536936,
+      "outcome": "death"
+    },
+    {
+      "cycle": 24,
+      "heap": 33595640,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 25,
+      "heap": 33560292,
+      "outcome": "death"
+    },
+    {
+      "cycle": 26,
+      "heap": 33678980,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 27,
+      "heap": 33595308,
+      "outcome": "death"
+    },
+    {
+      "cycle": 28,
+      "heap": 33671864,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 29,
+      "heap": 33633396,
+      "outcome": "death"
+    },
+    {
+      "cycle": 30,
+      "heap": 33738560,
+      "outcome": "extract"
+    }
+  ],
+  "growth": [
+    {
+      "key": "code:system / InstructionStream",
+      "dCount": 91,
+      "dSize": 188928,
+      "count": 2612,
+      "size": 3391488
+    },
+    {
+      "key": "string:(string)",
+      "dCount": 100,
+      "dSize": 107316,
+      "count": 70856,
+      "size": 1578545
+    },
+    {
+      "key": "code:system / TrustedByteArray",
+      "dCount": 208,
+      "dSize": 74448,
+      "count": 5480,
+      "size": 727552
+    },
+    {
+      "key": "native:system / WeakArrayList",
+      "dCount": 163,
+      "dSize": 32740,
+      "count": 1682,
+      "size": 183800
+    },
+    {
+      "key": "code:system / ProtectedFixedArray",
+      "dCount": 82,
+      "dSize": 30788,
+      "count": 414,
+      "size": 148944
+    },
+    {
+      "key": "object shape:system / Map",
+      "dCount": 218,
+      "dSize": 8720,
+      "count": 12247,
+      "size": 493272
+    },
+    {
+      "key": "native:LargestContentfulPaint",
+      "dCount": 49,
+      "dSize": 6664,
+      "count": 72,
+      "size": 9792
+    },
+    {
+      "key": "code:system / Code",
+      "dCount": 91,
+      "dSize": 6552,
+      "count": 2612,
+      "size": 188064
+    },
+    {
+      "key": "native:LayoutShift",
+      "dCount": 40,
+      "dSize": 6080,
+      "count": 62,
+      "size": 9424
+    },
+    {
+      "key": "native:PerformanceLongAnimationFrameTiming",
+      "dCount": 32,
+      "dSize": 5632,
+      "count": 47,
+      "size": 8272
+    },
+    {
+      "key": "native:InteractionContentfulPaint",
+      "dCount": 49,
+      "dSize": 5096,
+      "count": 72,
+      "size": 7488
+    },
+    {
+      "key": "native:DOMRectReadOnly",
+      "dCount": 80,
+      "dSize": 4480,
+      "count": 124,
+      "size": 6944
+    },
+    {
+      "key": "code:(constant elements)",
+      "dCount": 270,
+      "dSize": 4264,
+      "count": 1777,
+      "size": 39376
+    },
+    {
+      "key": "object shape:system / DescriptorArray",
+      "dCount": 47,
+      "dSize": 3596,
+      "count": 2679,
+      "size": 385840
+    },
+    {
+      "key": "native:TaskAttributionTiming",
+      "dCount": 27,
+      "dSize": 3240,
+      "count": 42,
+      "size": 5040
+    },
+    {
+      "key": "code:system / TrustedWeakFixedArray",
+      "dCount": 82,
+      "dSize": 3164,
+      "count": 414,
+      "size": 15264
+    },
+    {
+      "key": "object:Object",
+      "dCount": 107,
+      "dSize": 2988,
+      "count": 9314,
+      "size": 262208
+    },
+    {
+      "key": "native:PerformanceLongTaskTiming",
+      "dCount": 27,
+      "dSize": 2808,
+      "count": 42,
+      "size": 4368
+    },
+    {
+      "key": "array:(object properties)",
+      "dCount": 20,
+      "dSize": 2368,
+      "count": 402,
+      "size": 244500
+    },
+    {
+      "key": "code:system / AllocationSite",
+      "dCount": 82,
+      "dSize": 2296,
+      "count": 1306,
+      "size": 34836
+    },
+    {
+      "key": "array:(object elements)",
+      "dCount": 20,
+      "dSize": 1836,
+      "count": 1620,
+      "size": 297660
+    },
+    {
+      "key": "native:LayoutShiftAttribution",
+      "dCount": 40,
+      "dSize": 1600,
+      "count": 62,
+      "size": 2480
+    },
+    {
+      "key": "code:system / WeakArrayList",
+      "dCount": 28,
+      "dSize": 1320,
+      "count": 244,
+      "size": 10004
+    },
+    {
+      "key": "native:system / ProtectedFixedArray",
+      "dCount": 82,
+      "dSize": 1208,
+      "count": 415,
+      "size": 5848
+    },
+    {
+      "key": "code:system / FeedbackVector",
+      "dCount": 7,
+      "dSize": 912,
+      "count": 2170,
+      "size": 349996
+    },
+    {
+      "key": "code:system / CodeWrapper",
+      "dCount": 91,
+      "dSize": 728,
+      "count": 5140,
+      "size": 20896
+    },
+    {
+      "key": "native:blink::HeapVectorBacking<cppgc::internal::BasicMember<blink::PerformanceEntry, c",
+      "dCount": 0,
+      "dSize": 680,
+      "count": 9,
+      "size": 1248
+    },
+    {
+      "key": "native:system / SharedFunctionInfoWrapper",
+      "dCount": 82,
+      "dSize": 656,
+      "count": 414,
+      "size": 3312
+    },
+    {
+      "key": "native:blink::HeapVectorBacking<cppgc::internal::BasicMember<blink::TaskAttributionTimi",
+      "dCount": 27,
+      "dSize": 648,
+      "count": 42,
+      "size": 1008
+    },
+    {
+      "key": "object shape:system / TransitionArray",
+      "dCount": 4,
+      "dSize": 584,
+      "count": 287,
+      "size": 14892
+    }
+  ],
+  "shrink": [
+    {
+      "key": "number:int",
+      "dCount": 20,
+      "dSize": 0,
+      "count": 33887,
+      "size": 0
+    },
+    {
+      "key": "native:<div class=\"cs-canvas\" aria-label=\"行动画面\">",
+      "dCount": 0,
+      "dSize": -16,
+      "count": 1,
+      "size": 104
+    },
+    {
+      "key": "native:<div class=\"cs-row\" data-ending-row=\"\">",
+      "dCount": 0,
+      "dSize": -16,
+      "count": 1,
+      "size": 104
+    },
+    {
+      "key": "native:<p data-ending-text=\"\">",
+      "dCount": 0,
+      "dSize": -16,
+      "count": 1,
+      "size": 104
+    },
+    {
+      "key": "code:system / UncompiledDataWithoutPreparseData",
+      "dCount": -1,
+      "dSize": -20,
+      "count": 7674,
+      "size": 153480
+    },
+    {
+      "key": "native:blink::NodeRareData::DataFieldWrapper<int>",
+      "dCount": -2,
+      "dSize": -48,
+      "count": 8,
+      "size": 192
+    },
+    {
+      "key": "native:blink::NodeRareData",
+      "dCount": -2,
+      "dSize": -64,
+      "count": 41,
+      "size": 1440
+    },
+    {
+      "key": "native:blink::HeapHashTableBacking<blink::HashTable<cppgc::internal::BasicMember<blink:",
+      "dCount": 0,
+      "dSize": -1504,
+      "count": 363,
+      "size": 98552
+    },
+    {
+      "key": "native:blink::HeapHashTableBacking<blink::HashTable<cppgc::internal::BasicMember<const ",
+      "dCount": 1,
+      "dSize": -1976,
+      "count": 25,
+      "size": 8584
+    },
+    {
+      "key": "code:(object elements)",
+      "dCount": -270,
+      "dSize": -4264,
+      "count": 104,
+      "size": 2824
+    }
+  ],
+  "errors": [],
+  "requests": []
+}

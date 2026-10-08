@@ -10,7 +10,7 @@ import { browserOptions } from './browser-options.mjs';
 const out = resolve(process.env.BINCOV_SHOTS_OUT || 'test-results/coast-sample/shots'); await mkdir(out, { recursive: true });
 // SHOT_QUERY appends options (for example art=placeholder); SHOT_SCENES limits the scene ids.
 const query = '?test=1&sample=village' + (process.env.SHOT_QUERY ? '&' + process.env.SHOT_QUERY : '');
-const url = pathToFileURL(resolve('dist/index.html')).href + query;
+const url = pathToFileURL(resolve(process.env.BINCOV_SHOTS_HTML || 'dist/index.html')).href + query;
 const S = Math.PI / 2, N = -Math.PI / 2, W = Math.PI;
 const SCENES = [
   { id: 'cross', note: '街口全景', run: d => d.placePlayer({ x: 640, y: 456 }, 0, 'coast') },
@@ -62,7 +62,7 @@ for (const size of SIZES) {
   const go = name => page.locator(`[data-action="${name}"]`);
   if (size.touch) { await go('enter').tap(); await page.locator('#seed').fill('42'); await go('deploy').tap(); }
   else { await go('enter').click(); await page.locator('#seed').fill('42'); await go('deploy').click(); }
-  await page.waitForFunction(() => window.__bincovSample?.host?.lastBatch);
+  await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch);
   if (size.touch) await page.setViewportSize({ width: size.w, height: size.h });
   await page.evaluate(() => window.__bincovSample.driver.freezeAI(true));
   for (const scene of SCENES.filter(s => !process.env.SHOT_SCENES || process.env.SHOT_SCENES.split(',').includes(s.id))) {

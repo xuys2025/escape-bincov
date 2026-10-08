@@ -22,7 +22,7 @@ async function info(){return page.evaluate(()=>{const a=window.__bincov.app,r=a.
 async function deploy(){
  await act('tab','arms').click();await buyAffordable(page,'ammo9',3);await act('tab','med').click();await buyAffordable(page,'medkit');await act('tab','gear').click();
  for(let i=0;i<20;i++){const items=page.locator('[data-source="stash"][data-uid]');const choices=await items.evaluateAll(elements=>elements.filter(el=>/9毫米|绷带|急救|净水|罐头/.test(el.getAttribute('aria-label')??el.textContent??'')).map(el=>el.dataset.uid));if(!choices.length)break;await page.locator(`[data-source="stash"][data-uid="${choices[0]}"]`).dblclick();if((await items.evaluateAll(es=>es.map(e=>e.dataset.uid))).includes(choices[0]))break;}
- await page.locator('#run-world').selectOption('mall');await page.locator('#seed').fill('41');await act('deploy').click();await page.waitForFunction(()=>window.__bincov.app.raid?.player?.active);phase=0;lastSample=-60;lastMap='mall-f1';lastPosition=null;stuck=0;lastObserved=0;runStarted=Date.now();runNo++;console.log('MALL run',runNo);
+ await page.locator('#run-world').selectOption('mall');await page.locator('#seed').fill('41');await act('deploy').click();await page.waitForFunction(()=>!!window.__bincov.app.raid?.player?.active);phase=0;lastSample=-60;lastMap='mall-f1';lastPosition=null;stuck=0;lastObserved=0;runStarted=Date.now();runNo++;console.log('MALL run',runNo);
 }
 function route(s){
  if(phase===0)return{map:'mall-f1',at:MALL_WORLD.maps['mall-f1'].entries.find(e=>e.id==='S-N-up').at,entry:'S-N-up'};
