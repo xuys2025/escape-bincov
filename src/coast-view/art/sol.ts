@@ -11,13 +11,16 @@ export type SolArt = ReadonlyMap<string, HTMLCanvasElement>;
 const id = (name: string) => `coast-${name}-v1`;
 const get = (art: SolArt, name: string) => art.get(id(name)) ?? null;
 
-/** Manifest directions are E, SE, S, NE, N; W, SW and NW mirror E, SE and NE (pixelPolicy.actorMirror). */
+/**
+ * Manifest directions are E, SE, S, NE, N; W, SW and NW mirror E, SE and NE (pixelPolicy.actorMirror). Revision 2
+ * bodies carry only weak ambient shading and directional light comes from the runtime lightmap, so mirroring does not
+ * flip a visible key light (ART-R09).
+ */
 const PLAYER_DIR: Record<number, [string, boolean]> = { 0: ['e', false], 1: ['se', false], 2: ['s', false], 3: ['se', true], 4: ['e', true], 5: ['ne', true], 6: ['n', false], 7: ['ne', false] };
 
-export function solPlayerFrame(art: SolArt, dir: number, frame: number | 'crouch'): HTMLCanvasElement | null {
+export function solPlayerFrame(art: SolArt, dir: number, frame: number): HTMLCanvasElement | null {
   const [d, mirror] = PLAYER_DIR[dir] ?? PLAYER_DIR[0];
-  // No crouch sample yet: the idle frame stands in.
-  const src = get(art, `player-body-${d}-f${frame === 'crouch' ? 0 : frame}`);
+  const src = get(art, `player-body-${d}-f${frame}`);
   if (!src) return null;
   const { c, g } = canvas(src.width, src.height);
   if (mirror) { g.translate(src.width, 0); g.scale(-1, 1); }

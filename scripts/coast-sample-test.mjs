@@ -311,6 +311,44 @@ const restoreWrites = page => page.evaluate(() => { Storage.prototype.setItem = 
     assert.equal(revealed.revealed, true); assert.equal(revealed.hiddenFx, 0); assert.equal(corpse, true);
     return { results, revealed: revealed.hiddenFx };
   });
+  await step('V02 held carbine facing away stays inside the body: 0 weapon pixels above the head for N/NE/NW; side views still show it', async () => {
+    // Same frame presented twice at a fixed camera, with and without the weapon sprite; pixels of the composited target
+    // that differ are the weapon's. `full` restores the old unshortened length as the positive control.
+    const AWAY = { NE: -Math.PI / 4, N: -Math.PI / 2, NW: -3 * Math.PI / 4 }, SIDE = { E: 0, W: Math.PI, SE: Math.PI / 4, S: Math.PI / 2 };
+    const weaponPixels = (full = false) => page.evaluate(full => {
+      const h = window.__bincovSample.host, v = h.view, p = h.lastBatch.frame.player, g = v.actors.get(p.uid); h.app.ticker.stop();
+      const grab = weapon => {
+        // present() renders the world target itself, so the weapon is adjusted from a hook that runs before that.
+        const xray = v.updateXray;
+        v.updateXray = function (...a) { xray.apply(this, a); if (full) g.weapon.scale.x = 1; g.weapon.visible = weapon; g.wrim.visible = false; };
+        v.time = 1; v.shake = 0; v.present({ ...h.lastBatch, events: [] }, 0); delete v.updateXray; h.app.render();
+        const { pixels, width } = h.app.renderer.extract.pixels(v.upRT), k = v.view.k;
+        // Columns +-24 px around the player, rows from 60 px above the feet to the feet; row index 0 is 60 px up.
+        const x0 = Math.round((p.x - 24 - v.cam.x) * k), y0 = Math.round((p.y - 60 - v.cam.y) * k), n = Math.round(48 * k), m = Math.round(60 * k);
+        const rows = []; for (let y = 0; y < m; y++) rows.push(pixels.slice(((y0 + y) * width + x0) * 4, ((y0 + y) * width + x0 + n) * 4));
+        return rows;
+      };
+      const a = grab(true), b = grab(false), k = v.view.k, head = Math.round((60 - 39) * k);
+      let above = 0, total = 0;
+      a.forEach((row, y) => { for (let i = 0; i < row.length; i += 4) if (row[i] !== b[y][i] || row[i + 1] !== b[y][i + 1] || row[i + 2] !== b[y][i + 2]) { total++; if (y < head) above++; } });
+      h.app.ticker.start();
+      return { above, total };
+    }, full);
+    await page.evaluate(() => window.__bincovSample.driver.weapon('carbine'));
+    const result = {};
+    for (const [name, angle] of Object.entries({ ...AWAY, ...SIDE })) {
+      // The aim follows the pointer, so the pointer is moved along the same direction from the screen centre.
+      await place(page, 640, 456, angle, 'coast'); await page.mouse.move(640 + Math.cos(angle) * 220, 360 + Math.sin(angle) * 220); await frames(page, 12);
+      const aim = await page.evaluate(() => window.__bincovSample.host.lastBatch.frame.player.aim);
+      assert.ok(Math.abs(Math.atan2(Math.sin(aim - angle), Math.cos(aim - angle))) < .2, `${name}: aim ${aim}`);
+      result[name] = { aim: +aim.toFixed(3), ...await weaponPixels() };
+      if (name === 'N') result.controlN = await weaponPixels(true);
+    }
+    for (const name of Object.keys(AWAY)) assert.equal(result[name].above, 0, `${name}: weapon above the head`);
+    for (const name of ['E', 'W']) assert.ok(result[name].total > 20, `${name}: side view shows the gun`);
+    assert.ok(result.controlN.above > 0, 'an unshortened carbine aimed north must reach above the head');
+    return result;
+  });
   await step('W09 stairs: entering upstairs and the basement commits, raises epoch and rebuilds the view', async () => {
     await place(page, 560, 272, -Math.PI / 2); await frames(page, 3); const a = await now(page);
     await page.keyboard.press('e'); await page.waitForFunction(() => window.__bincovSample.host.lastBatch.stamp.world.mapId === 'resident-f2'); await frames(page, 3);
@@ -336,12 +374,32 @@ const restoreWrites = page => page.evaluate(() => { Storage.prototype.setItem = 
     await page.locator('[data-do="resume"]').click(); await page.evaluate(() => window.__bincovSample.driver.freezeAI(true)); await frames(page, 3);
     return { position: [after.player.x, after.player.y], epoch: after.stamp.epoch };
   });
-  await step('W11 20 view remounts on the live Runtime keep listeners, tickers, apps, canvases and textures flat', async () => {
+  await step('W11 20 view remounts on the live Runtime keep listeners, tickers, apps, canvases, atlas and GPU textures flat', async () => {
     const first = await page.evaluate(() => window.__bincovSample.counts());
     await page.evaluate(() => window.__bincovSample.remount(20)); await frames(page, 5);
     const last = await page.evaluate(() => window.__bincovSample.counts());
-    for (const k of ['listeners', 'tickers', 'observers', 'apps', 'views', 'renderTextures', 'liveViews', 'canvases', 'sampleRoots', 'atlasPages', 'largeTextures']) assert.equal(last[k], first[k], k);
+    for (const k of ['listeners', 'tickers', 'observers', 'apps', 'parked', 'views', 'renderTextures', 'liveViews', 'canvases', 'sampleRoots', 'atlasPages', 'largeTextures', 'gpuTextures']) assert.equal(last[k], first[k], k);
     return { first, last };
+  });
+  await step('W11b the renderer is reused across remounts; a lost context is replaced by a fresh renderer on the next mount', async () => {
+    const r = await page.evaluate(async () => {
+      const s = window.__bincovSample, app0 = s.host.app;
+      await s.remount(1); const reused = s.host.app === app0;
+      // Lose the live context, then remount: parking keeps the lost renderer, taking it must replace it.
+      const app1 = s.host.app; app1.renderer.gl.getExtension('WEBGL_lose_context').loseContext();
+      await new Promise(r => setTimeout(r, 100));
+      await s.remount(1); await new Promise(r => setTimeout(r, 300));
+      const app2 = s.host.app;
+      return { reused, replaced: app2 !== app1, lost: app2.renderer.gl.isContextLost(), counts: s.counts(), frames: s.host.stats.frames };
+    });
+    // The loss paused the shared Runtime (as in play); the test remount kept that Runtime, so resume it here.
+    const paused = await page.evaluate(() => window.__bincovSample.host.lastBatch.frame.phase);
+    await page.evaluate(() => window.__bincovSample.host.resume()); await frames(page, 6);
+    const frames2 = await page.evaluate(() => window.__bincovSample.host.stats.frames), phase = (await now(page)).phase;
+    assert.equal(paused, 'paused'); assert.equal(phase, 'running');
+    assert.equal(r.reused, true); assert.equal(r.replaced, true); assert.equal(r.lost, false);
+    assert.equal(r.counts.apps, 1); assert.equal(r.counts.parked, 0); assert.ok(frames2 > r.frames);
+    return { ...r, paused, frames2, phase };
   });
   await step('W12 extraction holds 3 s; a failed settlement write keeps the raid and retries into the result screen', async () => {
     await place(page, 208, 122, Math.PI / 2); await frames(page, 4);
@@ -385,6 +443,34 @@ const restoreWrites = page => page.evaluate(() => { Storage.prototype.setItem = 
     assert.ok(shots >= 3); return { shots };
   });
   await context.close();
+}
+{ // Short and small screens: map labels never overlap, every exit stays labelled, the map uses the panel height
+  for (const size of [{ w: 640, h: 300, dpr: 3, touch: true }, { w: 844, h: 390, dpr: 3, touch: true }, { w: 1280, h: 720, dpr: 1, touch: false }]) {
+    const { context, page } = await open('?test=1&sample=village', size.touch ? { viewport: { width: 844, height: 390 }, deviceScaleFactor: size.dpr, hasTouch: true, isMobile: true } : {});
+    await step(`U10 map labels at ${size.w}x${size.h}: no overlap, every exit named, map fills the short panel`, async () => {
+      if (size.touch) { await action(page, 'enter').tap(); await page.locator('#run-world').selectOption('buildings'); await page.locator('#seed').fill('42'); await action(page, 'deploy').tap(); await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch); await page.evaluate(() => window.__bincovSample.driver.freezeAI(true)); await page.setViewportSize({ width: size.w, height: size.h }); }
+      else await deploy(page);
+      await place(page, 640, 456, 0, 'coast'); await frames(page, 4);
+      await page.keyboard.press('m'); await frames(page, 4);
+      const exits = await page.evaluate(() => window.__bincovSample.host.lastBatch.map.exits.map(e => e.name));
+      await page.locator('[data-panel] [data-exit]').selectOption(exits.at(-1)); await frames(page, 2);
+      const r = await page.evaluate(() => {
+        const h = window.__bincovSample.host, c = document.querySelector('[data-map]'), box = c.getBoundingClientRect();
+        return { labels: h.mapLayout.labels, markers: h.mapLayout.markers, canvas: [c.width, c.height], css: [Math.round(box.width), Math.round(box.height)] };
+      });
+      await page.screenshot({ path: resolve(out, `check-map-${size.w}x${size.h}.png`) });
+      const shown = r.labels.filter(l => l.box);
+      const hit = (a, b) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1;
+      for (const [i, a] of shown.entries()) for (const b of shown.slice(i + 1)) assert.ok(!hit(a.box, b.box), `${a.name} overlaps ${b.name}`);
+      for (const a of shown) assert.ok(!r.markers.some(m => hit(a.box, m)), `${a.name} covers an exit or the player marker`);
+      for (const l of shown) assert.ok(l.box.x0 >= 0 && l.box.y0 >= 0 && l.box.x1 <= r.canvas[0] + .5 && l.box.y1 <= r.canvas[1] + .5, `${l.name} leaves the canvas`);
+      assert.deepEqual(r.labels.filter(l => l.kind === 'exit' && l.box).map(l => l.name).sort(), [...exits].sort());
+      if (size.h <= 480) assert.ok(r.css[1] >= size.h - 60, `short-screen map height ${r.css[1]}`);
+      await page.keyboard.press('m'); await frames(page, 3);
+      return { css: r.css, shown: shown.map(l => l.name), dropped: r.labels.filter(l => !l.box).map(l => l.name) };
+    });
+    await context.close();
+  }
 }
 { // Entries without the test flag
   const { context, page } = await open('?sample=village');

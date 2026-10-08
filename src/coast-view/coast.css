@@ -114,10 +114,12 @@ html[data-coast-sample] #toast { z-index: 120; }
 /* Map panel: wider on desktop; on short landscape screens floor tabs and the exit choice sit beside the map. */
 .cs-panel.map { width: min(980px, calc(100vw - 24px)); }
 @media (max-height: 480px) {
-  .cs-panel.map { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "head head" "tabs map" "exit map"; column-gap: 10px; align-content: start; padding: 8px 10px; }
-  .cs-panel.map .cs-inv-head { grid-area: head; margin-bottom: 4px; }
+  /* The header joins the side column so the map gets the full panel height (the old 100vh-180px cap left 120px). */
+  .cs-panel.map { display: grid; grid-template-columns: minmax(0, 9.5em) minmax(0, 1fr); grid-template-rows: auto auto 1fr; grid-template-areas: "head map" "tabs map" "exit map"; column-gap: 10px; row-gap: 6px; align-content: start; padding: 8px 10px; }
+  .cs-panel.map .cs-inv-head { grid-area: head; margin: 0; flex-direction: column-reverse; gap: 4px; }
+  .cs-panel.map .cs-inv-head h2 { margin: 0; font-family: "Microsoft YaHei", sans-serif; font-size: 13px; line-height: 16px; }
   .cs-panel.map .cs-map-tabs { grid-area: tabs; flex-direction: column; margin: 0; }
-  .cs-panel.map .cs-map { grid-area: map; width: auto; height: calc(100vh - 84px); max-width: 100%; justify-self: center; }
+  .cs-panel.map .cs-map { grid-area: map; width: auto; height: calc(100vh - 52px); max-height: none; max-width: 100%; justify-self: center; }
   .cs-panel.map .cs-exit { grid-area: exit; flex-direction: column; align-items: stretch; gap: 2px; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; }
   .cs-panel.map .cs-exit select { max-width: 9em; }
 }

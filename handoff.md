@@ -1,3 +1,16 @@
+## 2026-10-08 · PR #22 城中村样板第四轮：返修素材接入（Opus）
+
+从原分支 `87b879b` 接手，工作区干净；main `841e8bb`、PR #22 远端头 `878f563` 均未变化，原 fork 无写权限，本轮提交只在本地。详见[第四轮说明](docs/coast-sample-view/round4/README.md)。
+
+- **素材：** Sol 第二版 43 张按哈希/尺寸/锚点校验后正式接入，34 张替换，9 张不变（`scripts/coast-import-assets.mjs`）。
+- **背向持枪：** 持枪按纵深缩短，背向时枪留在躯干轮廓内；新增 V02 像素检查（头顶以上 0 像素，全长阳性对照 12）。
+- **镜像光照：** 实测确认保留镜像，不需要西向原画。
+- **下蹲：** 现有动作不需要下蹲图；死亡过渡改为倒地倾斜，删除 idle 代下蹲。
+- **短屏地图：** 解除 120px 高度限制，标注避让并按优先级舍去；新增 U10（三种尺寸）。
+- **F20：** 整页复用一个 Pixi 渲染器，消除着色器名缓存增长（快照 81→81）；同时修掉复用后暴露的 Graphics 上下文残留。Sol 的严格总堆条件仍为 partial（+410,481 B），未签收。
+- **验证：** 223 单测、打包（重建一致）、样板 32/32、20 项浏览器回归中 19 项与 layered-play 退出码 0、68 张截图 0 异常、Sol 遮挡 8/8 与可见性通过。`qol-expansion` 间歇失败，基线 `87b879b` 同样出现（本构建 5/10、基线 2/10），交 Sol。
+- 未运行真机、真人试玩与远端 CI。未扩量、未推送、未合并或发布。没有读取或上传 SSH 私钥。
+
 ## 2026-10-08 · PR #22 Sol 第三轮复验与首批素材返修，交回后停止
 
 在原分支从 `6a7e6b1` 接手，初始干净；最新main `841e8bb`、原PR #22远端头 `878f563` 未变。已读Opus [第三轮交接](docs/coast-sample-view/round3/README.md)，本轮使用Node24.19.0 / Corepack pnpm11.19.0。详见 [真实验收报告](docs/coast-sample-view/sol-round3-20261008/README.md)、[Opus/Astra问题清单](docs/coast-sample-view/sol-round3-20261008/defects.md)、[新版43 PNG manifest](docs/coast-sample-view/sol-round3-20261008/assets/manifest.json)。

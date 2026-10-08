@@ -7,6 +7,8 @@
 > - 首批 43 张素材接入（`?art=placeholder` 可切回占位）；
 > - 隐藏房间特效按揭示区域管理，F20 堆增长定位，并补了相应回归。
 >
+> **第四轮（Sol 返修素材接入）：** 34 张返修 PNG 正式接入；背向持枪按纵深缩短、镜像光照确认、死亡改为倒地倾斜（不再需要下蹲帧）；短屏地图标注避让；F20 着色器名缓存增长通过复用渲染器消除。见 [第四轮说明](coast-sample-view/round4/README.md)。
+>
 > 见 [第三轮说明](coast-sample-view/round3/README.md)。下文是第二轮记录；其中「没有完成」各项的现状以第三轮说明为准。
 
 **第二轮停止点：** 城中村街口、居民楼二楼和地下层的可玩样板已接到真实 Runtime、原会话、存档与事务服务，使用程序占位素材。没有扩展全沿海外观，没有制作素材，没有推送、合并或发布。等待用户确认画面与交接。
@@ -52,7 +54,7 @@
 - **生命周期：**
   - 挂载时，原 Phaser 主循环 `sleep()`，`#frame` 隐藏，原全局键盘、失焦、缩放和冲突监听在样板运行期间让出。
   - 结算提交后依次执行 `runtime.dispose()`、宿主卸载、唤醒 Phaser，再由原 `changeState('result')` 进入结算页。
-  - 卸载会回收监听、ticker、ResizeObserver、RenderTexture、图集与 WebGL 上下文。
+  - 卸载会回收监听、ticker、ResizeObserver、RenderTexture 与图集。第四轮起，整页只保留一个 Pixi 渲染器：卸载时清空舞台、停 ticker、移除画布并释放 Pixi 全局池，下次挂载复用；若其 WebGL 上下文已丢失，则销毁并新建（见[第四轮说明](coast-sample-view/round4/README.md)）。
   - 新画面启动失败时，清理并回到主菜单，行动保留在存档里。
 
 ## 原代码的改动点

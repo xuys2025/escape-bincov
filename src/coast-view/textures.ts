@@ -27,16 +27,16 @@ export class Textures {
     return this.ensure(k, () => dithered(this.canvas(key), FADE_LEVELS[level], keepBottom, ox, oy));
   }
 
-  actor(kind: ActorKind, dir: number, frame: number | 'crouch'): Texture {
+  actor(kind: ActorKind, dir: number, frame: number): Texture {
     const key = `actor:${kind}:${dir}:${frame}`;
     return this.ensure(key, () => (kind === 'player' && this.art && solPlayerFrame(this.art, dir, frame))
-      || (frame === 'crouch' ? paintActorFrame(kind, dir, 0, 'crouch') : paintActorFrame(kind, dir, frame)));
+      || paintActorFrame(kind, dir, frame));
   }
-  actorFlash(kind: ActorKind, dir: number, frame: number | 'crouch'): Texture {
+  actorFlash(kind: ActorKind, dir: number, frame: number): Texture {
     const base = `actor:${kind}:${dir}:${frame}`; this.actor(kind, dir, frame);
     return this.ensure(`${base}|white`, () => silhouette(this.canvas(base)));
   }
-  actorRim(kind: ActorKind, dir: number, frame: number | 'crouch'): Texture {
+  actorRim(kind: ActorKind, dir: number, frame: number): Texture {
     const base = `actor:${kind}:${dir}:${frame}`; this.actor(kind, dir, frame);
     return this.ensure(`${base}|rim`, () => rim(this.canvas(base)));
   }

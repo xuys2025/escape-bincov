@@ -55,16 +55,19 @@ async function snapshot(cycle) {
 function summarize(s) {
   const f = s.snapshot.meta.node_fields, types = s.snapshot.meta.node_types[0], n = f.length;
   const iType = f.indexOf('type'), iName = f.indexOf('name'), iSize = f.indexOf('self_size');
-  const groups = new Map(), tracked = {}; let total = 0;
+  const groups = new Map(), tracked = {}, shaderNames = new Set(); let total = 0, shaderStrings = 0;
   for (let i = 0; i < s.nodes.length; i += n) {
     const type = types[s.nodes[i + iType]], raw = s.strings[s.nodes[i + iName]];
     const name = type.includes('string') ? '(string)' : raw.slice(0, 80), size = s.nodes[i + iSize];
+    // Compiled shader sources carry Pixi's per-compile name (graphics-vertex-12); one new copy per renderer was the leak.
+    const shader = type.includes('string') && /#define SHADER_NAME (\S+)/.exec(raw);
+    if (shader) { shaderStrings++; shaderNames.add(shader[1]); }
     const key = `${type}:${name}`, g = groups.get(key) ?? { count: 0, size: 0 };
     g.count++; g.size += size; total += size; groups.set(key, g);
     const cls = (type === 'object' || type === 'native') && raw.split(' ')[0];
     if (cls && TRACKED.test(cls)) tracked[cls] = (tracked[cls] ?? 0) + 1;
   }
-  return { total, groups, tracked };
+  return { total, groups, tracked, shaderStrings, shaderNames: [...shaderNames].sort() };
 }
 
 const cycles = [], snaps = {};
@@ -82,6 +85,8 @@ for (let i = 1; i <= CYCLES; i++) {
   await action('return').click();
   await gc();
   const r = await p.evaluate(() => ({ heap: performance.memory.usedJSHeapSize, counts: window.__bincovSample.counts(), session: (localStorage.getItem('escape-bincov.session.v2') ?? '').length, outcome: window.__bincov.app.result?.outcome ?? null }));
+  assert.equal(r.counts.parked, 1, `cycle ${i}: the renderer is parked for reuse`);
+  if (i > 1) assert.ok(r.counts.gpuTextures <= cycles[0].counts.gpuTextures, `cycle ${i}: GPU textures ${r.counts.gpuTextures}`);
   for (const k of ['apps', 'views', 'listeners', 'tickers', 'observers', 'timers', 'renderTextures', 'liveViews', 'sampleRoots', 'atlasPages', 'largeTextures']) assert.equal(r.counts[k], 0, `cycle ${i}: ${k}`);
   cycles.push({ cycle: i, ...r });
   console.log('cycle', i, 'heap', r.heap, 'session chars', r.session);
@@ -95,17 +100,25 @@ const diff = [...new Set([...a.groups.keys(), ...b.groups.keys()])].map(k => {
 const heaps = cycles.map(c => c.heap), mean = v => v.reduce((x, y) => x + y, 0) / v.length;
 const trend = { afterWarmupMean: mean(heaps.slice(5, 10)), lastFiveMean: mean(heaps.slice(-5)) }; trend.growthBytes = trend.lastFiveMean - trend.afterWarmupMean;
 const span = SNAP[1] - SNAP[0], perCycle = (b.total - a.total) / span;
+// V8 compiled code and its metadata (JIT tiering) against everything else, which is where a view/host leak would land.
+const isCode = d => d.key.startsWith('code:') || /^(native|object shape):system \/ (WeakArrayList|TrustedWeakFixedArray|Map)$/.test(d.key);
+const codePerCycle = diff.filter(isCode).reduce((n, d) => n + d.dSize, 0) / span, otherPerCycle = diff.filter(d => !isCode(d)).reduce((n, d) => n + d.dSize, 0) / span;
 const accumulated = Object.keys({ ...a.tracked, ...b.tracked }).filter(k => (b.tracked[k] ?? 0) > (a.tracked[k] ?? 0)).map(k => `${k} ${a.tracked[k] ?? 0} -> ${b.tracked[k]}`);
 const report = { startedAt: new Date().toISOString(), browser: browser.version(), cycles: CYCLES, snapshots: SNAP, trend,
-  selfSize: { [SNAP[0]]: a.total, [SNAP[1]]: b.total, perCycle }, tracked: { [SNAP[0]]: a.tracked, [SNAP[1]]: b.tracked }, accumulated,
+  selfSize: { [SNAP[0]]: a.total, [SNAP[1]]: b.total, perCycle, codePerCycle, otherPerCycle }, tracked: { [SNAP[0]]: a.tracked, [SNAP[1]]: b.tracked }, accumulated,
   sessionChars: [cycles[0].session, cycles.at(-1).session], perCycleHeap: cycles.map(c => ({ cycle: c.cycle, heap: c.heap, outcome: c.outcome })),
+  shaderSources: { [SNAP[0]]: { strings: a.shaderStrings, names: a.shaderNames }, [SNAP[1]]: { strings: b.shaderStrings, names: b.shaderNames } },
+  gpuTextures: cycles.map(c => c.counts.gpuTextures),
   growth: diff.slice(0, 30), shrink: diff.slice(-10), errors, requests };
 await writeFile(resolve(out, 'heap-report.json'), JSON.stringify(report, null, 2));
 console.log('heap trend, cycles 6-10 against the last five:', Math.round(trend.growthBytes), 'bytes');
-console.log(`retained self size ${a.total} -> ${b.total}: ${Math.round(perCycle)} bytes per cycle`);
+console.log(`retained self size ${a.total} -> ${b.total}: ${Math.round(perCycle)} bytes per cycle (compiled code ${Math.round(codePerCycle)}, other ${Math.round(otherPerCycle)})`);
 console.log('tracked instances', JSON.stringify(b.tracked));
+console.log(`shader source strings ${a.shaderStrings} -> ${b.shaderStrings}; names ${b.shaderNames.join(', ')}`);
 for (const d of diff.slice(0, 12)) console.log(String(d.dSize).padStart(9), String(d.dCount).padStart(6), d.key);
 await cdp.detach(); await browser.close();
 assert.deepEqual(accumulated, [], 'tracked instances accumulated between snapshots');
+assert.equal(b.shaderStrings, a.shaderStrings, 'compiled shader sources accumulated between snapshots');
+assert.deepEqual(b.shaderNames, a.shaderNames, 'new shader names were compiled between snapshots');
 assert.deepEqual(errors, []); assert.deepEqual(requests, []);
-console.log('PASS F20 heap: no tracked instance accumulates; explicit resource counts are zero after every cycle');
+console.log('PASS F20 heap: no tracked instance or shader source accumulates; explicit resource counts are zero after every cycle; one parked renderer');

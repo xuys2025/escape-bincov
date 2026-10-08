@@ -12,13 +12,12 @@ const LOOKS: Record<Exclude<ActorKind, 'creature'>, Look> = {
   elite: { coat: '#43423d', coatL: '#5d5b54', coatD: '#302f2b', pants: '#33322e', boots: '#24231f', pack: '#4f4d47', packL: '#64625a', head: '#4f4e48', headL: '#666560', face: P.skin, accent: '#a3483a', mask: '#2e3a3c', helmet: true },
 };
 
-function paintBody(g: Ctx, L: Look, dir: 0 | 1 | 2 | 6 | 7, walk: number, pose: 'stand' | 'crouch' = 'stand') {
-  const crouch = pose === 'crouch' ? 7 : 0;
-  const top = 9 + crouch + (walk === 1 || walk === 3 ? 1 : 0);
+function paintBody(g: Ctx, L: Look, dir: 0 | 1 | 2 | 6 | 7, walk: number) {
+  const top = 9 + (walk === 1 || walk === 3 ? 1 : 0);
   const side = dir === 0, front = dir === 1 || dir === 2, back = dir === 6 || dir === 7;
   const tw = side ? 9 : dir === 2 || dir === 6 ? 13 : 12;
   const cx = 16, tx = cx - Math.floor(tw / 2) + (dir === 1 ? 1 : dir === 7 ? -1 : 0);
-  const hipY = 34 + crouch, footY = 47;
+  const hipY = 34, footY = 47;
   const phase = [0, 1, 0, -1, 0][walk];
   if (side) {
     const stride = phase * 4;
@@ -78,14 +77,14 @@ function paintCreature(g: Ctx, dir: number, walk: number) {
   g.restore();
 }
 
-export function paintActorFrame(kind: ActorKind, dir: number, walk: number, pose: 'stand' | 'crouch' = 'stand'): HTMLCanvasElement {
+export function paintActorFrame(kind: ActorKind, dir: number, walk: number): HTMLCanvasElement {
   const { c, g } = canvas(ACTOR_W, ACTOR_H);
   if (kind === 'creature') { paintCreature(g, dir, walk); outline(c); return c; }
   const L = LOOKS[kind];
   const mirror = dir >= 3 && dir <= 5;
   const base = (mirror ? ({ 3: 1, 4: 0, 5: 7 } as Record<number, number>)[dir] : dir) as 0 | 1 | 2 | 6 | 7;
   if (mirror) { g.save(); g.translate(32, 0); g.scale(-1, 1); }
-  paintBody(g, L, base, walk, pose);
+  paintBody(g, L, base, walk);
   if (mirror) g.restore();
   outline(c);
   return c;

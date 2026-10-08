@@ -7,7 +7,7 @@ import { app, saveSession } from '../app';
 import { createCoastRaidHost } from '../raid-runtime';
 import { createTestCoastHost } from '../raid-runtime/test-support';
 import { changeState, enterExternalRun, exportSave, toast } from '../ui';
-import { CoastSampleHost, type CoastHandle } from './host';
+import { CoastSampleHost, gpuTextures, type CoastHandle } from './host';
 import { CoastView, type ViewOptions } from './scene';
 import { lifecycle } from './scope';
 
@@ -71,6 +71,7 @@ function expose(host: CoastSampleHost, driver: unknown) {
       art: [...CoastView.live].some(v => v.opts.art) ? 'sol' : 'placeholder',
       atlasPages: [...CoastView.live].reduce((n, v) => n + v.tex.atlas.stats.pages, 0),
       largeTextures: [...CoastView.live].reduce((n, v) => n + v.tex.atlas.stats.largeTextures, 0),
+      gpuTextures: gpuTextures(),
       heap: (performance as unknown as { memory?: { usedJSHeapSize: number } }).memory?.usedJSHeapSize ?? 0 }),
     /** View-only remount on the same live Runtime: exercises Pixi/listener/texture ownership without ending the raid. */
     async remount(times: number) {

@@ -8,7 +8,7 @@
  * controls until they are released. Item and save operations go only through the Runtime services, or through
  * SaveSession.mutate for plain bag/safe edits (the original inventory entry point).
  */
-import { Application } from 'pixi.js';
+import { Application, GlobalResourceRegistry } from 'pixi.js';
 import * as D from '../domain';
 import { SURVIVAL } from '../balance';
 import { derivedLimits } from '../expansion-state';
@@ -19,7 +19,7 @@ import type { LootTransfer } from '../loot';
 import { CoastView, AIM_H, type ViewOptions } from './scene';
 import { InputState } from './input';
 import { InventoryPanel } from './inventory';
-import { drawMap, mapPanelHtml } from './map';
+import { drawMap, mapPanelHtml, type MapLayout } from './map';
 import { Scope, lifecycle } from './scope';
 
 export interface CoastServices {
@@ -74,6 +74,45 @@ const HTML = `
 </div>
 <section class="cs-panel" data-panel hidden role="dialog" aria-modal="true"></section>`;
 
+/**
+ * One Pixi Application per page, parked between mounts (OPUS-MEM-01). Every new renderer compiles its graphics and
+ * back-buffer programs again, and Pixi 8 names each compile with a new counter suffix, so each source string is new
+ * to its global id cache and kept for the page's life: about 5.4 KB per mount. Reusing the renderer compiles them once.
+ * Parking leaves no scene: the view has destroyed its containers, render targets and textures; the stage is emptied,
+ * the ticker stopped, the canvas detached and Pixi's global pools released. A parked context that was lost is destroyed
+ * and replaced.
+ */
+let parked: Application | null = null, current: Application | null = null;
+async function takeApp(): Promise<Application> {
+  const app = parked; parked = null; lifecycle.parked = 0;
+  if (app && !(app.renderer as { gl?: WebGL2RenderingContext }).gl?.isContextLost()) {
+    app.renderer.resize(innerWidth, innerHeight); app.ticker.start();
+    return current = app;
+  }
+  if (app) dropApp(app);
+  const fresh = new Application();
+  await fresh.init({ background: 0x121110, antialias: false, resolution: 1, autoDensity: false, preference: 'webgl', width: innerWidth, height: innerHeight, powerPreference: 'high-performance' });
+  return current = fresh;
+}
+function parkApp(app: Application) {
+  for (const c of app.stage.removeChildren()) c.destroy({ children: true, context: true });
+  app.ticker.stop(); app.canvas.remove();
+  // Pixi's global pools (BigPool batch objects, pooled render textures, canvases) are what releaseGlobalResources
+  // cleared on destroy; they only hold returned objects, so emptying them with the renderer alive is safe.
+  GlobalResourceRegistry.release();
+  if (parked && parked !== app) dropApp(parked);
+  parked = app; lifecycle.parked = 1;
+}
+function dropApp(app: Application) {
+  app.destroy({ removeView: true, releaseGlobalResources: true }, { children: true, texture: true, textureSource: true });
+  if (current === app) current = null;
+}
+/**
+ * GPU textures the page's renderer still manages, mounted or parked (read by the sample checks). Pixi nulls a released
+ * slot and compacts the hash later, so only live entries are counted.
+ */
+export const gpuTextures = () => (current?.renderer.texture as { managedTextures?: unknown[] } | undefined)?.managedTextures?.filter(Boolean).length ?? 0;
+
 export class CoastSampleHost {
   private scope = new Scope();
   private root!: HTMLElement;
@@ -91,6 +130,8 @@ export class CoastSampleHost {
   private exiting = false;
   private mapView = '';
   selectedExit = '';
+  /** Label placement of the last map draw (read by the sample checks). */
+  mapLayout: MapLayout = { labels: [], markers: [] };
   private reading: { title: string; text: string } | null = null;
   private noteTitles = new Set<string>();
   frameTimes: number[] = [];
@@ -108,8 +149,7 @@ export class CoastSampleHost {
   async mount(parent: HTMLElement) {
     this.root = document.createElement('div'); this.root.className = 'coast-sample'; this.root.innerHTML = HTML;
     parent.appendChild(this.root);
-    this.app = new Application();
-    await this.app.init({ background: 0x121110, antialias: false, resolution: 1, autoDensity: false, preference: 'webgl', width: innerWidth, height: innerHeight, powerPreference: 'high-performance' });
+    this.app = await takeApp();
     lifecycle.apps++;
     this.q('.cs-canvas').appendChild(this.app.canvas);
     this.view = new CoastView(this.app, this.opts);
@@ -312,7 +352,7 @@ export class CoastSampleHost {
     // Backing store follows the displayed size (aspect fixed at 960:694) so the map stays sharp on small and dense screens.
     const w = Math.max(320, Math.min(2400, Math.round((c.clientWidth || 960) * (devicePixelRatio || 1))));
     if (c.width !== w) { c.width = w; c.height = Math.round(w * 694 / 960); }
-    drawMap(c, this.session, this.last, this.mapView, this.input.touch);
+    this.mapLayout = drawMap(c, this.session, this.last, this.mapView, this.input.touch, this.selectedExit);
   }
   private openReading() {
     const r = this.reading; if (!r) return;
@@ -465,7 +505,7 @@ export class CoastSampleHost {
     this.inv?.closeTransient();
     this.scope.dispose();
     this.view.destroy(); lifecycle.views--;
-    this.app.destroy({ removeView: true, releaseGlobalResources: true }, { children: true, texture: true, textureSource: true });
+    parkApp(this.app);
     lifecycle.apps--;
     this.root.remove();
     this.last = null;

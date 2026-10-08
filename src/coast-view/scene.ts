@@ -10,6 +10,15 @@ import { Textures } from './textures';
 import { lifecycle } from './scope';
 
 export const AIM_H = 22;
+/**
+ * Held weapons point along the ground-plane aim, but a barrel aimed away from (north) or toward (south) the camera
+ * is seen end-on in the 3/4 view, so its drawn length shrinks with |sin(aim)|. Direction stays the aim, so bullets,
+ * tracers and the muzzle flash stay on the gun's line. Facing away, this keeps the gun inside the torso and pack
+ * silhouette instead of poking above the head (ART-R08); simulation and muzzle distance are untouched.
+ */
+const heldLength = (angle: number) => 1 - .5 * Math.abs(Math.sin(angle));
+/** Seconds of the fall before the corpse sprite replaces the body. */
+const FALL_T = .16;
 
 interface Occluder {
   sprite: Sprite; key: string; kind: 'wall' | 'door' | 'roof' | 'ceiling' | 'canopy' | 'lintel';
@@ -23,6 +32,7 @@ interface ActorGfx {
 
 const intersects = (a: Rect, b: Rect) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
 const grow = (r: Rect, p: number): Rect => ({ x: r.x - p, y: r.y - p, w: r.w + p * 2, h: r.h + p * 2 });
+const corpseFacing = (a: ActorView): 1 | -1 => Math.cos((a.corpse?.angle ?? a.aim) + Math.PI) >= 0 ? 1 : -1;
 const dirOf = (a: number) => ((Math.round(a / (Math.PI / 4)) % 8) + 8) % 8;
 
 export interface ViewOptions {
@@ -322,7 +332,8 @@ export class CoastView {
         const angle = e.pellets.reduce((s, p) => s + p.angle, 0) / Math.max(1, e.pellets.length);
         const art = this.tex.weapon(a.weapon, a.kind), c = Math.cos(angle), s = Math.sin(angle);
         const sp = new Sprite(this.tex.muzzle(0)); sp.anchor.set(.5); sp.blendMode = 'add';
-        sp.position.set(Math.round(a.x + c * art.muzzle), Math.round(a.y - AIM_H + s * art.muzzle)); sp.rotation = angle; sp.zIndex = a.y + .2 + (s < -.2 ? -.4 : 0);
+        const reach = art.muzzle * heldLength(angle);
+        sp.position.set(Math.round(a.x + c * reach), Math.round(a.y - AIM_H + s * reach)); sp.rotation = angle; sp.zIndex = a.y + .2 + (s < -.2 ? -.4 : 0);
         if (e.weapon === 'shotgun') sp.scale.set(1.4);
         this.sorted.addChild(sp); this.muzzles.push({ s: sp, t: 0 });
         this.light.lights.push({ x: a.x + c * 20, y: a.y + s * 20, r: e.weapon === 'shotgun' ? 100 : 80, color: 0xe0b878, k: .9, ttl: .07, region: a.regionId });
@@ -378,15 +389,15 @@ export class CoastView {
     g.dir = dirOf(a.aim);
     g.flashT = Math.max(0, g.flashT - dt); g.kickT = Math.max(0, g.kickT - dt); g.swingT = Math.max(0, g.swingT - dt);
     if (g.deathT > 0) g.deathT += dt;
-    const dying = !a.alive && g.deathT > 0 && g.deathT < .16;
-    const frame: number | 'crouch' = dying ? 'crouch' : speed > 5 ? 1 + Math.floor(g.walk) : 0;
+    const dying = !a.alive && g.deathT > 0 && g.deathT < FALL_T;
+    const frame = dying ? 0 : speed > 5 ? 1 + Math.floor(g.walk) : 0;
     const dead = !a.alive && !dying;
     const kx = g.kickT > 0 ? g.kick.x : 0, ky = g.kickT > 0 ? g.kick.y : 0;
     const x = Math.round(a.x + kx), y = Math.round(a.y + ky);
     for (const s of [g.body, g.weapon, g.flash, g.shadow]) s.visible = shown && !dead;
     g.seen = shown;
     if (dead) {
-      const facing: 1 | -1 = Math.cos((a.corpse?.angle ?? a.aim) + Math.PI) >= 0 ? 1 : -1, key = `corpse:${a.kind}:${facing}`;
+      const facing = corpseFacing(a), key = `corpse:${a.kind}:${facing}`;
       if (!g.corpse || g.corpseKey !== key) {
         const fresh = !g.corpse && g.deathT > 0;
         g.corpse?.destroy();
@@ -401,8 +412,10 @@ export class CoastView {
       return;
     }
     if (g.corpse) { g.corpse.destroy(); g.corpse = null; g.corpseKey = ''; }
-    g.body.texture = this.tex.actor(a.kind, g.dir, frame); g.body.position.set(x, y); g.body.zIndex = a.y;
-    g.flash.texture = this.tex.actorFlash(a.kind, g.dir, frame); g.flash.position.set(x, y); g.flash.zIndex = a.y + .01; g.flash.visible = shown && g.flashT > 0; g.flash.alpha = .5;
+    // Dying: the standing frame tips over its feet toward the side the corpse will lie on, then the corpse replaces it.
+    const tilt = dying ? corpseFacing(a) * 1.25 * Math.min(1, g.deathT / FALL_T) : 0;
+    g.body.texture = this.tex.actor(a.kind, g.dir, frame); g.body.position.set(x, y); g.body.zIndex = a.y; g.body.rotation = tilt;
+    g.flash.texture = this.tex.actorFlash(a.kind, g.dir, frame); g.flash.position.set(x, y); g.flash.zIndex = a.y + .01; g.flash.visible = shown && g.flashT > 0; g.flash.alpha = .5; g.flash.rotation = tilt;
     g.shadow.position.set(x + 2, y - 1);
     g.rim.texture = this.tex.actorRim(a.kind, g.dir, frame); g.rim.position.set(x, y + 1); g.rim.tint = a.kind === 'player' ? 0xf0dca0 : 0xe07a5a;
     const art = this.tex.weapon(a.weapon, a.kind);
@@ -411,9 +424,9 @@ export class CoastView {
     const angle = a.aim + reload + swing, c = Math.cos(angle), s = Math.sin(angle);
     g.weapon.texture = art.texture; g.weapon.anchor.set(art.pivotX / art.canvas.width, art.pivotY / art.canvas.height);
     g.weapon.position.set(Math.round(a.x + kx + c * art.forward), Math.round(a.y + ky - AIM_H + s * art.forward));
-    g.weapon.rotation = angle; g.weapon.scale.set(1, Math.cos(a.aim) < 0 ? -1 : 1);
+    g.weapon.rotation = angle; g.weapon.scale.set(heldLength(angle), Math.cos(a.aim) < 0 ? -1 : 1);
     g.weapon.zIndex = a.y + (Math.sin(a.aim) < -.35 ? -.05 : .05);
-    g.weapon.visible = shown && a.weapon !== 'claw';
+    g.weapon.visible = shown && a.weapon !== 'claw' && !dying;
     g.wrim.texture = art.rim; g.wrim.anchor.set((art.pivotX + 1) / (art.canvas.width + 2), (art.pivotY + 1) / (art.canvas.height + 2));
     g.wrim.position.copyFrom(g.weapon.position); g.wrim.rotation = g.weapon.rotation; g.wrim.scale.copyFrom(g.weapon.scale); g.wrim.tint = g.rim.tint;
   }
@@ -666,7 +679,9 @@ export class CoastView {
     if (this.destroyed) return;
     this.destroyed = true;
     this.clearScene();
-    for (const c of [this.groundRoot, this.upper, this.light.layer, this.lightHolder, this.upHolder, this.screen]) c.destroy({ children: true });
+    // `context: true`: with any options object Pixi keeps a Graphics' own context registered with the renderer, which
+    // outlives the view now that the renderer is reused.
+    for (const c of [this.groundRoot, this.upper, this.light.layer, this.lightHolder, this.upHolder, this.screen]) c.destroy({ children: true, context: true });
     for (const rt of [this.worldRT, this.lightRT, this.upRT]) if (rt) { rt.destroy(true); lifecycle.renderTextures--; }
     this.worldRT = this.lightRT = this.upRT = null;
     this.tex.destroy();

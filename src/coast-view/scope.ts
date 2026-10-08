@@ -1,4 +1,4 @@
-export const lifecycle = { listeners: 0, tickers: 0, observers: 0, timers: 0, apps: 0, views: 0, renderTextures: 0 };
+export const lifecycle = { listeners: 0, tickers: 0, observers: 0, timers: 0, apps: 0, parked: 0, views: 0, renderTextures: 0 };
 
 export class Scope {
   private ctrl = new AbortController();
