@@ -18,6 +18,7 @@
 
 | 任务 / 承接入口 | 核对时实际范围 | 下一步与范围边界 |
 | --- | --- | --- |
+| [#27](https://github.com/xuys2025/escape-bincov/pull/27) · `docs/world-regions-story` · [世界观与地图主线](WORLD-REGIONS-STORY.md) | 2026-10-09 维护者明确授权落实本次设定文档；main `841e8bb`，开工时开放 PR 仅有美术方向 #22，无同目标承接。潮水、盐度、一据点十二区域、五方势力及六阶段三结局 | 独立内容文档交付，补充 #16 已接受街区/商场的叙事方向；不改 #22 的素材设计，不启动新代码实现线。文档检查通过，已提交待审；新增区域、盐度迁移和任务接入待后续授权 |
 | `ci/parallel-browser-checks` · [CI 工作流](../.github/workflows/ci-pages.yml) | 2026-10-07 维护者明确授权执行 CI 优化；实时 main 为 `f144147`，无同目标开放 PR。单次构建，20 项浏览器检查分四组独立 runner 并行，保留统一门禁、证据与 Pages/镜像检查名 | 本地语法、覆盖、失败门禁、制品哈希及单元/打包检查后提交独立 PR，等待该提交完整 CI。按路径选择测试、缩短诊断循环及缓存调整留待后续明确范围；等待维护者合并 |
 | [#10](https://github.com/xuys2025/escape-bincov/pull/10) · `agent/qol-discovery-20261005` | 原头 `a99c661` 的完整 QOL 与已接受 #16 整合；保留原分支历史，补齐 RPG 商店、多层搜刮/拆分/旋转、真实命中方向和基地离店确认 | [本轮整合记录](QOL-PR16-INTEGRATION.md)；必须在最新组合完整 CI 通过后合并。真机及真人清单继续保留 |
 | [#11](https://github.com/xuys2025/escape-bincov/pull/11) · `docs/art-direction-research` | 核心资产已由 #20 采用；63 份来源档案由 #19 保留原头父历史承接 | GitHub 已标记合并，归档来源及历史验收保留；不恢复旧 `art.css` |
