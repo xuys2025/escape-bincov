@@ -1,0 +1,931 @@
+{
+  "startedAt": "2026-10-08T18:45:24.277Z",
+  "node": "v24.19.0",
+  "method": "Five fresh contexts per coordinate/build; same window scene, real >2s automatic checkpoint. Native Storage and Error taps record outcome, never change it. In-memory backup decode and player-only counterfactual never written.",
+  "runs": [
+    {
+      "build": "old-1c1c935",
+      "htmlSHA256": "4be1408745e5f0af39ef2e55ea318c2fe909ddea5f005e45026934a2c7c714e2",
+      "trial": 1,
+      "point": [
+        360,
+        342
+      ],
+      "start": {
+        "at": 1706.2000000029802
+      },
+      "beforeRevision": 2,
+      "afterRevision": 2,
+      "candidateSHA256": "fc981de81efde43c571913b5ce0de36bb4de6f186d1abf403a62bf25ada61e89",
+      "candidateDecodeError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "0334f26ef28b781192a2085f20360282ba303a3a23f044a2bd6e7f16a8da5b5b",
+      "afterSHA256": "0334f26ef28b781192a2085f20360282ba303a3a23f044a2bd6e7f16a8da5b5b",
+      "sameBytes": true,
+      "writeAttempts": 0,
+      "writes": [],
+      "phase": "paused",
+      "panel": "pause",
+      "player": [
+        360,
+        342
+      ],
+      "storageOK": false,
+      "storageError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejected": [
+        {
+          "seq": 1,
+          "type": "rejected",
+          "durability": "accepted",
+          "map": "coast",
+          "epoch": 3,
+          "detail": {
+            "action": "checkpoint",
+            "reason": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。"
+          }
+        }
+      ],
+      "validationErrors": [
+        {
+          "at": 3218.8000000044703,
+          "message": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+          "stack": "Error: 建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。\n    at Object.construct (<anonymous>:2:488)\n    at bt (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:720966)\n    at Fg (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:727111)\n    at mr (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:760412)\n    at eu.commit (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:762925)\n    at co.persist (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:773187)\n    at Wn.checkpoint (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8588:13381)\n    at Wn.advance (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8588:12366)\n    at ch.frame (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8622:3594)\n    at ia.s [as _fn] (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8622:2981)"
+        }
+      ],
+      "panelText": "存档保存失败最近的操作或检查点没有写入，世界已保持在保存前的状态。检查浏览器存储后重试，或先导出备份。重试保存导出备份",
+      "status": "passed"
+    },
+    {
+      "build": "old-1c1c935",
+      "htmlSHA256": "4be1408745e5f0af39ef2e55ea318c2fe909ddea5f005e45026934a2c7c714e2",
+      "trial": 2,
+      "point": [
+        360,
+        342
+      ],
+      "start": {
+        "at": 1424.5999999940395
+      },
+      "beforeRevision": 2,
+      "afterRevision": 2,
+      "candidateSHA256": "1cf63b6b649b86b41ef7cfb5a0369d74722e2b33692fa91f21d1fd947285d5ab",
+      "candidateDecodeError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "98285bc5e6c5f90048e194bc9822923ab0dde20dfa8e56e8fd3d0865aa12f03a",
+      "afterSHA256": "98285bc5e6c5f90048e194bc9822923ab0dde20dfa8e56e8fd3d0865aa12f03a",
+      "sameBytes": true,
+      "writeAttempts": 0,
+      "writes": [],
+      "phase": "paused",
+      "panel": "pause",
+      "player": [
+        360,
+        342
+      ],
+      "storageOK": false,
+      "storageError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejected": [
+        {
+          "seq": 1,
+          "type": "rejected",
+          "durability": "accepted",
+          "map": "coast",
+          "epoch": 3,
+          "detail": {
+            "action": "checkpoint",
+            "reason": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。"
+          }
+        }
+      ],
+      "validationErrors": [
+        {
+          "at": 2992.5999999940395,
+          "message": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+          "stack": "Error: 建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。\n    at Object.construct (<anonymous>:2:488)\n    at bt (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:720966)\n    at Fg (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:727111)\n    at mr (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:760412)\n    at eu.commit (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:762925)\n    at co.persist (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:773187)\n    at Wn.checkpoint (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8588:13381)\n    at Wn.advance (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8588:12366)\n    at ch.frame (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8622:3594)\n    at ia.s [as _fn] (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8622:2981)"
+        }
+      ],
+      "panelText": "存档保存失败最近的操作或检查点没有写入，世界已保持在保存前的状态。检查浏览器存储后重试，或先导出备份。重试保存导出备份",
+      "status": "passed"
+    },
+    {
+      "build": "old-1c1c935",
+      "htmlSHA256": "4be1408745e5f0af39ef2e55ea318c2fe909ddea5f005e45026934a2c7c714e2",
+      "trial": 3,
+      "point": [
+        360,
+        342
+      ],
+      "start": {
+        "at": 1279.2000000029802
+      },
+      "beforeRevision": 2,
+      "afterRevision": 2,
+      "candidateSHA256": "2c6418b8e872ae036b51193e67aec40ce9a0d149c32c7ea80da5b054ed89610d",
+      "candidateDecodeError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "ca8b2d02794016dc2c32705f30bd86463a45cf84ffab67ce1358a370d2b0c311",
+      "afterSHA256": "ca8b2d02794016dc2c32705f30bd86463a45cf84ffab67ce1358a370d2b0c311",
+      "sameBytes": true,
+      "writeAttempts": 0,
+      "writes": [],
+      "phase": "paused",
+      "panel": "pause",
+      "player": [
+        360,
+        342
+      ],
+      "storageOK": false,
+      "storageError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejected": [
+        {
+          "seq": 1,
+          "type": "rejected",
+          "durability": "accepted",
+          "map": "coast",
+          "epoch": 3,
+          "detail": {
+            "action": "checkpoint",
+            "reason": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。"
+          }
+        }
+      ],
+      "validationErrors": [
+        {
+          "at": 2871.5,
+          "message": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+          "stack": "Error: 建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。\n    at Object.construct (<anonymous>:2:488)\n    at bt (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:720966)\n    at Fg (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:727111)\n    at mr (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:760412)\n    at eu.commit (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:762925)\n    at co.persist (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:773187)\n    at Wn.checkpoint (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8588:13381)\n    at Wn.advance (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8588:12366)\n    at ch.frame (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8622:3594)\n    at ia.s [as _fn] (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8622:2981)"
+        }
+      ],
+      "panelText": "存档保存失败最近的操作或检查点没有写入，世界已保持在保存前的状态。检查浏览器存储后重试，或先导出备份。重试保存导出备份",
+      "status": "passed"
+    },
+    {
+      "build": "old-1c1c935",
+      "htmlSHA256": "4be1408745e5f0af39ef2e55ea318c2fe909ddea5f005e45026934a2c7c714e2",
+      "trial": 4,
+      "point": [
+        360,
+        342
+      ],
+      "start": {
+        "at": 1332.5
+      },
+      "beforeRevision": 2,
+      "afterRevision": 2,
+      "candidateSHA256": "ad3318fed7313a7e27aecf3b876c7163ffef3bd43069dc3e1d8f5f2f8a7d7f03",
+      "candidateDecodeError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "47d7618c68484da00279f98fe6912e03ba4658a5a0f24e346e441dd9d369746a",
+      "afterSHA256": "47d7618c68484da00279f98fe6912e03ba4658a5a0f24e346e441dd9d369746a",
+      "sameBytes": true,
+      "writeAttempts": 0,
+      "writes": [],
+      "phase": "paused",
+      "panel": "pause",
+      "player": [
+        360,
+        342
+      ],
+      "storageOK": false,
+      "storageError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejected": [
+        {
+          "seq": 1,
+          "type": "rejected",
+          "durability": "accepted",
+          "map": "coast",
+          "epoch": 3,
+          "detail": {
+            "action": "checkpoint",
+            "reason": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。"
+          }
+        }
+      ],
+      "validationErrors": [
+        {
+          "at": 2931.39999999851,
+          "message": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+          "stack": "Error: 建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。\n    at Object.construct (<anonymous>:2:488)\n    at bt (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:720966)\n    at Fg (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:727111)\n    at mr (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:760412)\n    at eu.commit (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:762925)\n    at co.persist (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:773187)\n    at Wn.checkpoint (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8588:13381)\n    at Wn.advance (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8588:12366)\n    at ch.frame (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8622:3594)\n    at ia.s [as _fn] (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8622:2981)"
+        }
+      ],
+      "panelText": "存档保存失败最近的操作或检查点没有写入，世界已保持在保存前的状态。检查浏览器存储后重试，或先导出备份。重试保存导出备份",
+      "status": "passed"
+    },
+    {
+      "build": "old-1c1c935",
+      "htmlSHA256": "4be1408745e5f0af39ef2e55ea318c2fe909ddea5f005e45026934a2c7c714e2",
+      "trial": 5,
+      "point": [
+        360,
+        342
+      ],
+      "start": {
+        "at": 1498.7999999970198
+      },
+      "beforeRevision": 2,
+      "afterRevision": 2,
+      "candidateSHA256": "ed7f605b2262e49ad007a9d79071d90d12ed3d9bfa9006f54d677c365efb8e74",
+      "candidateDecodeError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "fc45a1abdac65d1c428b03b405b4a977814a580daa747bcd917fc1f45b6dc5e5",
+      "afterSHA256": "fc45a1abdac65d1c428b03b405b4a977814a580daa747bcd917fc1f45b6dc5e5",
+      "sameBytes": true,
+      "writeAttempts": 0,
+      "writes": [],
+      "phase": "paused",
+      "panel": "pause",
+      "player": [
+        360,
+        342
+      ],
+      "storageOK": false,
+      "storageError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejected": [
+        {
+          "seq": 1,
+          "type": "rejected",
+          "durability": "accepted",
+          "map": "coast",
+          "epoch": 3,
+          "detail": {
+            "action": "checkpoint",
+            "reason": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。"
+          }
+        }
+      ],
+      "validationErrors": [
+        {
+          "at": 3073.39999999851,
+          "message": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+          "stack": "Error: 建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。\n    at Object.construct (<anonymous>:2:488)\n    at bt (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:720966)\n    at Fg (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:727111)\n    at mr (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:760412)\n    at eu.commit (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:762925)\n    at co.persist (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8569:773187)\n    at Wn.checkpoint (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8588:13381)\n    at Wn.advance (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8588:12366)\n    at ch.frame (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8622:3594)\n    at ia.s [as _fn] (file:///D:/bincov/pr22-runtime/test-results/sol-r6-20261009/1c1c935.html?test=1&sample=village:8622:2981)"
+        }
+      ],
+      "panelText": "存档保存失败最近的操作或检查点没有写入，世界已保持在保存前的状态。检查浏览器存储后重试，或先导出备份。重试保存导出备份",
+      "status": "passed"
+    },
+    {
+      "build": "old-1c1c935",
+      "htmlSHA256": "4be1408745e5f0af39ef2e55ea318c2fe909ddea5f005e45026934a2c7c714e2",
+      "trial": 1,
+      "point": [
+        368,
+        344
+      ],
+      "start": {
+        "at": 1442.8999999985099
+      },
+      "beforeRevision": 2,
+      "afterRevision": 3,
+      "candidateSHA256": "ea6db72725b7c4433ee1a1e235fdbde631f5de1919fc80beb28a6a608988fe64",
+      "candidateDecodeError": null,
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "b195494d5a158a206e2b96e2b68dbb621ade9721144099a0f111aa1f80bab474",
+      "afterSHA256": "1145f581d69a9ea33dedbda582659049573ddfa11634b3a2f312734416c205a9",
+      "sameBytes": false,
+      "writeAttempts": 1,
+      "writes": [
+        {
+          "at": 2995.10000000149,
+          "bytes": 16915,
+          "result": "written"
+        }
+      ],
+      "phase": "running",
+      "panel": null,
+      "player": [
+        368,
+        344
+      ],
+      "storageOK": true,
+      "storageError": "",
+      "rejected": [],
+      "validationErrors": [],
+      "panelText": "",
+      "status": "passed"
+    },
+    {
+      "build": "old-1c1c935",
+      "htmlSHA256": "4be1408745e5f0af39ef2e55ea318c2fe909ddea5f005e45026934a2c7c714e2",
+      "trial": 2,
+      "point": [
+        368,
+        344
+      ],
+      "start": {
+        "at": 1360.6999999955297
+      },
+      "beforeRevision": 2,
+      "afterRevision": 3,
+      "candidateSHA256": "0da690c7d4b416af529e26ce5d3dcc5ae079db730382557c5c6f1dfef11faf5e",
+      "candidateDecodeError": null,
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "e0e5e53c69b728fe21746b5d09e4138890911154174789e87b80d60c48a2ebd6",
+      "afterSHA256": "40550b8246f568d1aee375203d88a1bb6ebec3f748fb010214fd22e31ffefdac",
+      "sameBytes": false,
+      "writeAttempts": 1,
+      "writes": [
+        {
+          "at": 2933.7999999970198,
+          "bytes": 16937,
+          "result": "written"
+        }
+      ],
+      "phase": "running",
+      "panel": null,
+      "player": [
+        368,
+        344
+      ],
+      "storageOK": true,
+      "storageError": "",
+      "rejected": [],
+      "validationErrors": [],
+      "panelText": "",
+      "status": "passed"
+    },
+    {
+      "build": "old-1c1c935",
+      "htmlSHA256": "4be1408745e5f0af39ef2e55ea318c2fe909ddea5f005e45026934a2c7c714e2",
+      "trial": 3,
+      "point": [
+        368,
+        344
+      ],
+      "start": {
+        "at": 1386.2000000029802
+      },
+      "beforeRevision": 2,
+      "afterRevision": 3,
+      "candidateSHA256": "4d9afc69c9975dcc3b62661cd6950d0f644f8b565c5eaa631c45476dec4c6dd8",
+      "candidateDecodeError": null,
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "fb81840287b575788a7f13620858fbdbb5465f245f7d1ddef5a2772f42c10a3d",
+      "afterSHA256": "e334a4a4b9b28b91260a733cd842ab9c74c7a295ca17213712ce816d187c1dac",
+      "sameBytes": false,
+      "writeAttempts": 1,
+      "writes": [
+        {
+          "at": 2985.10000000149,
+          "bytes": 16638,
+          "result": "written"
+        }
+      ],
+      "phase": "running",
+      "panel": null,
+      "player": [
+        368,
+        344
+      ],
+      "storageOK": true,
+      "storageError": "",
+      "rejected": [],
+      "validationErrors": [],
+      "panelText": "",
+      "status": "passed"
+    },
+    {
+      "build": "old-1c1c935",
+      "htmlSHA256": "4be1408745e5f0af39ef2e55ea318c2fe909ddea5f005e45026934a2c7c714e2",
+      "trial": 4,
+      "point": [
+        368,
+        344
+      ],
+      "start": {
+        "at": 1355
+      },
+      "beforeRevision": 2,
+      "afterRevision": 3,
+      "candidateSHA256": "7c7c32e3dd90113f942106daedf43d086682f5ba96377c7912919e4aa25f7dfd",
+      "candidateDecodeError": null,
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "24f6468805073af1a0e4c1ed6debbc6fbf05d0c5e5acfb37fbf22ad6c65ccc41",
+      "afterSHA256": "45bf245d81c41d42018bd85bc6d89717323ea66ca0d24621c6bd98f14d981851",
+      "sameBytes": false,
+      "writeAttempts": 1,
+      "writes": [
+        {
+          "at": 2954.89999999851,
+          "bytes": 16935,
+          "result": "written"
+        }
+      ],
+      "phase": "running",
+      "panel": null,
+      "player": [
+        368,
+        344
+      ],
+      "storageOK": true,
+      "storageError": "",
+      "rejected": [],
+      "validationErrors": [],
+      "panelText": "",
+      "status": "passed"
+    },
+    {
+      "build": "old-1c1c935",
+      "htmlSHA256": "4be1408745e5f0af39ef2e55ea318c2fe909ddea5f005e45026934a2c7c714e2",
+      "trial": 5,
+      "point": [
+        368,
+        344
+      ],
+      "start": {
+        "at": 1399.3999999985099
+      },
+      "beforeRevision": 2,
+      "afterRevision": 3,
+      "candidateSHA256": "2ce1a9faa427a8b668c825162e28cf2e2418cb5b13036bf6cde12a6f1dba22a1",
+      "candidateDecodeError": null,
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "180b0a1691221f9b41f8aec2e36a1d56ba9405b07aedefffce8990cc68041dd9",
+      "afterSHA256": "20b985dbe1001f733b328c4a286cda548a6760afa572ae445a1c27216b5985f7",
+      "sameBytes": false,
+      "writeAttempts": 1,
+      "writes": [
+        {
+          "at": 2987.2999999970198,
+          "bytes": 16934,
+          "result": "written"
+        }
+      ],
+      "phase": "running",
+      "panel": null,
+      "player": [
+        368,
+        344
+      ],
+      "storageOK": true,
+      "storageError": "",
+      "rejected": [],
+      "validationErrors": [],
+      "panelText": "",
+      "status": "passed"
+    },
+    {
+      "build": "current-14abea3",
+      "htmlSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "trial": 1,
+      "point": [
+        360,
+        342
+      ],
+      "start": {
+        "at": 1394.2000000029802
+      },
+      "beforeRevision": 2,
+      "afterRevision": 2,
+      "candidateSHA256": "62e3b689ee5e0f0cee914553471ae8c3565ddf2b9866e200abc9c7dd73bf2ae1",
+      "candidateDecodeError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "1b621982a6ad001d5192dd761a588c4250b22a044d6e78cab9f07f0685124199",
+      "afterSHA256": "1b621982a6ad001d5192dd761a588c4250b22a044d6e78cab9f07f0685124199",
+      "sameBytes": true,
+      "writeAttempts": 0,
+      "writes": [],
+      "phase": "paused",
+      "panel": "pause",
+      "player": [
+        360,
+        342
+      ],
+      "storageOK": false,
+      "storageError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejected": [
+        {
+          "seq": 1,
+          "type": "rejected",
+          "durability": "accepted",
+          "map": "coast",
+          "epoch": 3,
+          "detail": {
+            "action": "checkpoint",
+            "reason": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。"
+          }
+        }
+      ],
+      "validationErrors": [
+        {
+          "at": 2864.39999999851,
+          "message": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+          "stack": "Error: 建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。\n    at Object.construct (<anonymous>:2:488)\n    at bt (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:722088)\n    at ox (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:728233)\n    at Sr (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:761534)\n    at gu.commit (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:764047)\n    at Mo.persist (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:774309)\n    at ra.checkpoint (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8635:13381)\n    at ra.advance (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8635:12366)\n    at Rh.frame (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8740:3935)\n    at va.s [as _fn] (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8740:3232)"
+        }
+      ],
+      "panelText": "存档保存失败最近的操作或检查点没有写入，世界已保持在保存前的状态。检查浏览器存储后重试，或先导出备份。重试保存导出备份",
+      "status": "passed"
+    },
+    {
+      "build": "current-14abea3",
+      "htmlSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "trial": 2,
+      "point": [
+        360,
+        342
+      ],
+      "start": {
+        "at": 1362.2000000029802
+      },
+      "beforeRevision": 2,
+      "afterRevision": 2,
+      "candidateSHA256": "c1fe59a5083474d7ea6a2a669015e235f9e3309289769bd1d8420dcdc5ae61e4",
+      "candidateDecodeError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "6aa3a1f0c0a149bd119037bf2082c14088a4d6df988fb73f2658597e7f5ca24f",
+      "afterSHA256": "6aa3a1f0c0a149bd119037bf2082c14088a4d6df988fb73f2658597e7f5ca24f",
+      "sameBytes": true,
+      "writeAttempts": 0,
+      "writes": [],
+      "phase": "paused",
+      "panel": "pause",
+      "player": [
+        360,
+        342
+      ],
+      "storageOK": false,
+      "storageError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejected": [
+        {
+          "seq": 1,
+          "type": "rejected",
+          "durability": "accepted",
+          "map": "coast",
+          "epoch": 3,
+          "detail": {
+            "action": "checkpoint",
+            "reason": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。"
+          }
+        }
+      ],
+      "validationErrors": [
+        {
+          "at": 2838.5,
+          "message": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+          "stack": "Error: 建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。\n    at Object.construct (<anonymous>:2:488)\n    at bt (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:722088)\n    at ox (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:728233)\n    at Sr (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:761534)\n    at gu.commit (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:764047)\n    at Mo.persist (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:774309)\n    at ra.checkpoint (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8635:13381)\n    at ra.advance (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8635:12366)\n    at Rh.frame (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8740:3935)\n    at va.s [as _fn] (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8740:3232)"
+        }
+      ],
+      "panelText": "存档保存失败最近的操作或检查点没有写入，世界已保持在保存前的状态。检查浏览器存储后重试，或先导出备份。重试保存导出备份",
+      "status": "passed"
+    },
+    {
+      "build": "current-14abea3",
+      "htmlSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "trial": 3,
+      "point": [
+        360,
+        342
+      ],
+      "start": {
+        "at": 1425.3999999985099
+      },
+      "beforeRevision": 2,
+      "afterRevision": 2,
+      "candidateSHA256": "09e8c799f335a1a9bd3fcc5873357d095268fdc6379e883772200f9d90324692",
+      "candidateDecodeError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "d3b19cfaaf818492daa27e41e35e4aaac587df97d0ccd796e2faa03a4af3a3b5",
+      "afterSHA256": "d3b19cfaaf818492daa27e41e35e4aaac587df97d0ccd796e2faa03a4af3a3b5",
+      "sameBytes": true,
+      "writeAttempts": 0,
+      "writes": [],
+      "phase": "paused",
+      "panel": "pause",
+      "player": [
+        360,
+        342
+      ],
+      "storageOK": false,
+      "storageError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejected": [
+        {
+          "seq": 1,
+          "type": "rejected",
+          "durability": "accepted",
+          "map": "coast",
+          "epoch": 3,
+          "detail": {
+            "action": "checkpoint",
+            "reason": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。"
+          }
+        }
+      ],
+      "validationErrors": [
+        {
+          "at": 2879.2000000029802,
+          "message": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+          "stack": "Error: 建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。\n    at Object.construct (<anonymous>:2:488)\n    at bt (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:722088)\n    at ox (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:728233)\n    at Sr (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:761534)\n    at gu.commit (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:764047)\n    at Mo.persist (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:774309)\n    at ra.checkpoint (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8635:13381)\n    at ra.advance (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8635:12366)\n    at Rh.frame (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8740:3935)\n    at va.s [as _fn] (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8740:3232)"
+        }
+      ],
+      "panelText": "存档保存失败最近的操作或检查点没有写入，世界已保持在保存前的状态。检查浏览器存储后重试，或先导出备份。重试保存导出备份",
+      "status": "passed"
+    },
+    {
+      "build": "current-14abea3",
+      "htmlSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "trial": 4,
+      "point": [
+        360,
+        342
+      ],
+      "start": {
+        "at": 1459.3000000044703
+      },
+      "beforeRevision": 2,
+      "afterRevision": 2,
+      "candidateSHA256": "1130549f057f7ef59ae768966ec90716c2507c56ba040889db3092fede382fcb",
+      "candidateDecodeError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "a86311acd58f19c642e1e812ede2509506aed0e7f5b9084e4617f249546453ca",
+      "afterSHA256": "a86311acd58f19c642e1e812ede2509506aed0e7f5b9084e4617f249546453ca",
+      "sameBytes": true,
+      "writeAttempts": 0,
+      "writes": [],
+      "phase": "paused",
+      "panel": "pause",
+      "player": [
+        360,
+        342
+      ],
+      "storageOK": false,
+      "storageError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejected": [
+        {
+          "seq": 1,
+          "type": "rejected",
+          "durability": "accepted",
+          "map": "coast",
+          "epoch": 3,
+          "detail": {
+            "action": "checkpoint",
+            "reason": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。"
+          }
+        }
+      ],
+      "validationErrors": [
+        {
+          "at": 2925.5,
+          "message": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+          "stack": "Error: 建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。\n    at Object.construct (<anonymous>:2:488)\n    at bt (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:722088)\n    at ox (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:728233)\n    at Sr (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:761534)\n    at gu.commit (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:764047)\n    at Mo.persist (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:774309)\n    at ra.checkpoint (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8635:13381)\n    at ra.advance (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8635:12366)\n    at Rh.frame (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8740:3935)\n    at va.s [as _fn] (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8740:3232)"
+        }
+      ],
+      "panelText": "存档保存失败最近的操作或检查点没有写入，世界已保持在保存前的状态。检查浏览器存储后重试，或先导出备份。重试保存导出备份",
+      "status": "passed"
+    },
+    {
+      "build": "current-14abea3",
+      "htmlSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "trial": 5,
+      "point": [
+        360,
+        342
+      ],
+      "start": {
+        "at": 1453.7000000029802
+      },
+      "beforeRevision": 2,
+      "afterRevision": 2,
+      "candidateSHA256": "81ca98f7a5c8b2d5e6594f4a9a34f4df2f7552e694c07cc872c1cfae6ad7401e",
+      "candidateDecodeError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "1940881f8529f92e336b674495be6c9adb96fc22856398cc1757207a22600ef9",
+      "afterSHA256": "1940881f8529f92e336b674495be6c9adb96fc22856398cc1757207a22600ef9",
+      "sameBytes": true,
+      "writeAttempts": 0,
+      "writes": [],
+      "phase": "paused",
+      "panel": "pause",
+      "player": [
+        360,
+        342
+      ],
+      "storageOK": false,
+      "storageError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejected": [
+        {
+          "seq": 1,
+          "type": "rejected",
+          "durability": "accepted",
+          "map": "coast",
+          "epoch": 3,
+          "detail": {
+            "action": "checkpoint",
+            "reason": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。"
+          }
+        }
+      ],
+      "validationErrors": [
+        {
+          "at": 2902.89999999851,
+          "message": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+          "stack": "Error: 建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。\n    at Object.construct (<anonymous>:2:488)\n    at bt (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:722088)\n    at ox (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:728233)\n    at Sr (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:761534)\n    at gu.commit (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:764047)\n    at Mo.persist (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8616:774309)\n    at ra.checkpoint (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8635:13381)\n    at ra.advance (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8635:12366)\n    at Rh.frame (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8740:3935)\n    at va.s [as _fn] (file:///D:/bincov/pr22-runtime/dist/index.html?test=1&sample=village:8740:3232)"
+        }
+      ],
+      "panelText": "存档保存失败最近的操作或检查点没有写入，世界已保持在保存前的状态。检查浏览器存储后重试，或先导出备份。重试保存导出备份",
+      "status": "passed"
+    },
+    {
+      "build": "current-14abea3",
+      "htmlSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "trial": 1,
+      "point": [
+        368,
+        344
+      ],
+      "start": {
+        "at": 1569.8000000044703
+      },
+      "beforeRevision": 2,
+      "afterRevision": 3,
+      "candidateSHA256": "fcc859031803021d2f787018cf13bbd012c816d02624d3c9ebbc0fae92d8b678",
+      "candidateDecodeError": null,
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "5e236f538994b6335ea32766e8a5643b76225ed1b197c85aa5f2c85d1492cdb3",
+      "afterSHA256": "19145e0a7dcfb11c7d53884827f7aaaffb2247f79d7b2129db56f87478583d0e",
+      "sameBytes": false,
+      "writeAttempts": 1,
+      "writes": [
+        {
+          "at": 3017.10000000149,
+          "bytes": 16938,
+          "result": "written"
+        }
+      ],
+      "phase": "running",
+      "panel": null,
+      "player": [
+        368,
+        344
+      ],
+      "storageOK": true,
+      "storageError": "",
+      "rejected": [],
+      "validationErrors": [],
+      "panelText": "",
+      "status": "passed"
+    },
+    {
+      "build": "current-14abea3",
+      "htmlSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "trial": 2,
+      "point": [
+        368,
+        344
+      ],
+      "start": {
+        "at": 1655.7999999970198
+      },
+      "beforeRevision": 2,
+      "afterRevision": 3,
+      "candidateSHA256": "29148cc44abdd010d3ecfa87a3e3211e556c088473292cae6e8358cbf337a4b1",
+      "candidateDecodeError": null,
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "4d7d7dc7e51cc226dbc99291fffd8ae904d184d659e7f822584271ccc51cde1b",
+      "afterSHA256": "83013294bb98538c22f0f057678a050360ed6f821f0c5b947c15f7446496c238",
+      "sameBytes": false,
+      "writeAttempts": 1,
+      "writes": [
+        {
+          "at": 3092.2999999970198,
+          "bytes": 16936,
+          "result": "written"
+        }
+      ],
+      "phase": "running",
+      "panel": null,
+      "player": [
+        368,
+        344
+      ],
+      "storageOK": true,
+      "storageError": "",
+      "rejected": [],
+      "validationErrors": [],
+      "panelText": "",
+      "status": "passed"
+    },
+    {
+      "build": "current-14abea3",
+      "htmlSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "trial": 3,
+      "point": [
+        368,
+        344
+      ],
+      "start": {
+        "at": 1511.3999999985099
+      },
+      "beforeRevision": 2,
+      "afterRevision": 3,
+      "candidateSHA256": "2400eda0872d7ddc9423619a972d0e5a8e316b632fd54f6654d455b3c6efcb48",
+      "candidateDecodeError": null,
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "c34e7bddd7f67822f86d033e5e15bb260d9a7d9af6356d0458079d595a64e6ed",
+      "afterSHA256": "c391bd6860e4ef333e8802c505f6770381b2a62a031667577eb8bafe934a7baa",
+      "sameBytes": false,
+      "writeAttempts": 1,
+      "writes": [
+        {
+          "at": 2969.5999999940395,
+          "bytes": 16934,
+          "result": "written"
+        }
+      ],
+      "phase": "running",
+      "panel": null,
+      "player": [
+        368,
+        344
+      ],
+      "storageOK": true,
+      "storageError": "",
+      "rejected": [],
+      "validationErrors": [],
+      "panelText": "",
+      "status": "passed"
+    },
+    {
+      "build": "current-14abea3",
+      "htmlSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "trial": 4,
+      "point": [
+        368,
+        344
+      ],
+      "start": {
+        "at": 1561.3000000044703
+      },
+      "beforeRevision": 2,
+      "afterRevision": 3,
+      "candidateSHA256": "648d7d8b5b70053fe6b572dfbd5a31d543e1ee8e0cba384fb401a92bc274e4b7",
+      "candidateDecodeError": null,
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "2897044fead8ac9968b12030c523c4c7ed1af032a83a5dd1fb7c005467cd53f3",
+      "afterSHA256": "bfaa368e8fae09277f1b8a8c75def175bf773efd750e1e057bdc92322b7d93bc",
+      "sameBytes": false,
+      "writeAttempts": 1,
+      "writes": [
+        {
+          "at": 2990.7000000029802,
+          "bytes": 16961,
+          "result": "written"
+        }
+      ],
+      "phase": "running",
+      "panel": null,
+      "player": [
+        368,
+        344
+      ],
+      "storageOK": true,
+      "storageError": "",
+      "rejected": [],
+      "validationErrors": [],
+      "panelText": "",
+      "status": "passed"
+    },
+    {
+      "build": "current-14abea3",
+      "htmlSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "trial": 5,
+      "point": [
+        368,
+        344
+      ],
+      "start": {
+        "at": 1553.2000000029802
+      },
+      "beforeRevision": 2,
+      "afterRevision": 3,
+      "candidateSHA256": "a336876336e1bbe8ae252c786bab8a4ba686894ba8519a077e3b3575ad117dea",
+      "candidateDecodeError": null,
+      "playerOnlyCounterfactualDecodeError": null,
+      "beforeSHA256": "937968fb17949272bcf51f411820d54c510bdc20cf97e53581fbf5b03aeb25f9",
+      "afterSHA256": "52f756977efc73b7f5370719d1172f782cb6efae7b6ad602c59d620317ab5754",
+      "sameBytes": false,
+      "writeAttempts": 1,
+      "writes": [
+        {
+          "at": 3030.39999999851,
+          "bytes": 16382,
+          "result": "written"
+        }
+      ],
+      "phase": "running",
+      "panel": null,
+      "player": [
+        368,
+        344
+      ],
+      "storageOK": true,
+      "storageError": "",
+      "rejected": [],
+      "validationErrors": [],
+      "panelText": "",
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "finishedAt": "2026-10-08T18:46:50.197Z"
+}

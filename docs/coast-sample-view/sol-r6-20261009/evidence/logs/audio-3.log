@@ -1,0 +1,15 @@
+PASS  A1 first entry: the AudioContext runs after the first click, ambience reaches the output
+PASS  A2 gunshots: every player shot is followed by a real onset (peak well above ambience)
+PASS  A3 footsteps: walking 3 s gives periodic onsets; standing still 2 s gives none
+PASS  A4 melee: knife swings are audible
+PASS  A5 pickup: picking up ground loot and taking an item from a crate are audible
+PASS  A6 hits and enemy fire: an adjacent scav and a salt rifleman attack; every hit on the player and every enemy shot is audible
+PASS  A7 heal: Q uses a supply audibly
+PASS  B1 Esc pause suspends the output (no rendered blocks); 继续 restores it and shots are audible again
+PASS  B2 switching to another tab pauses and silences; coming back and pressing 继续 brings the sound back
+PASS  C1 volume from the pause panel: 0% silences shots and ambience; 100% is louder than the 35% default; the value persists
+PASS  D1 refresh: the run resumes paused and silent; after 进入 and 继续 the sound is back at the saved volume
+PASS  E1 run 1 extracts: the result screen plays the extraction chime
+PASS  E2 run 2: deploy again, shots audible, abandon from the pause menu: the death cue still plays
+PASS  E3 run 3: deploy again, ambience, shots and footsteps audible, extract with the chime
+14/14 passed; errors 0; external requests 0

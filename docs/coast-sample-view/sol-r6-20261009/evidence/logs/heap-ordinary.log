@@ -1,0 +1,37 @@
+ordinary cycle 1 heap 31567759
+ordinary cycle 2 heap 32111455
+ordinary cycle 3 heap 32381475
+ordinary cycle 4 heap 32577031
+ordinary cycle 5 heap 32756451
+ordinary cycle 6 heap 32883671
+ordinary cycle 7 heap 32921723
+ordinary cycle 8 heap 32973719
+ordinary cycle 9 heap 33217247
+ordinary cycle 10 heap 33233503
+ordinary cycle 11 heap 33264207
+ordinary cycle 12 heap 33276511
+ordinary cycle 13 heap 33296755
+ordinary cycle 14 heap 33312215
+ordinary cycle 15 heap 33320471
+ordinary cycle 16 heap 33323319
+ordinary cycle 17 heap 33337931
+ordinary cycle 18 heap 33365179
+ordinary cycle 19 heap 33380471
+ordinary cycle 20 heap 33410335
+heap trend, cycles 6-10 against the last five: 317474 bytes
+self size (not dominator retained size) 45688718 -> 46346958: 47017 bytes per cycle (code/VM heuristic 36290, other 10727)
+tracked instances {"HTMLCanvasElement":8,"WebGL2RenderingContext":4,"Container4":8,"Texture3":22,"TextureSource3":163,"WebGLRenderer3":1,"_TextureSource2":6,"SynthAudio":1,"_Container":3,"Texture":4,"Sprite3":3,"WebGLRenderer":1,"CanvasSource":1,"_Sprite":1,"_Application2":1}
+shader source strings 83 -> 83; names BARREL_FS, BLOOM_FS, BLUR_HIGH_FS, BLUR_LOW_FS, BLUR_MED_FS, BOKEH_FS, CIRCLE_FS, DISPLACEMENT_FS, GLOW_FS, GRADIENT_FS, PHASER_ADD_BLEND_FS, PHASER_ADD_BLEND_FS",, PHASER_BITMAP_MASK_FS, PHASER_BITMAP_MASK_VS, PHASER_COLORMATRIX_FS, PHASER_COPY_FS, PHASER_LIGHT_FS, PHASER_LINEAR_BLEND_FS, PHASER_MESH_FS, PHASER_MESH_VS, PHASER_MOBILE_FS, PHASER_MOBILE_VS, PHASER_MULTI_FS, PHASER_MULTI_VS, PHASER_POINTLIGHT_FS, PHASER_POINTLIGHT_VS, PHASER_POSTFX_FS, PHASER_QUAD_VS, PHASER_SINGLE_FS, PHASER_SINGLE_VS, PIXELATE_FS, SHADOW_FS, SHINE_FS, VIGNETTE_FS, WIPE_FS, batch-vertex, big-triangle-vertex, graphics-fragment, graphics-vertex, tiling-sprite-shader-vertex
+   297408    235 code:system / InstructionStream
+    83976    493 code:system / TrustedByteArray
+    37200    214 native:system / WeakArrayList
+    25432    166 code:system / FeedbackVector
+    24820     68 code:system / ProtectedFixedArray
+    17000      5 native:blink::HeapHashTableBacking<blink::HashTable<cppgc::internal::BasicMember<const
+    16920    235 code:system / Code
+    13776    154 native:Text
+     9408     14 native:blink::ElementAnimations
+     6272    112 native:DOMRectReadOnly
+     5992    364 code:system / LoadHandler
+     5824     56 native:<span>
+PASS lifecycle ownership checks only. F20 memory signoff: partial: positive heap trend requires retainer attribution

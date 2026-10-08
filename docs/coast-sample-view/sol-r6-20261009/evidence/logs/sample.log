@@ -1,0 +1,51 @@
+PASS  W00 sample deploy mounts the Pixi host on the real Runtime; RaidScene never starts
+PASS  W01 holding the left mouse button fires once (press edge)
+PASS  W02 one shotgun trigger is one shot batch with six real pellets
+PASS  W03 holding E toggles the door exactly once; the event is committed
+PASS  W04 failed door write rolls back, shows retry, and the retried ticket commits once
+PASS  W05 Esc pause freezes time; after resume a still-held key needs release and re-press
+PASS  W06 loot panel blocks input while the world runs; taking an item is one committed transfer
+PASS  U01 inventory: mouse drag moves a bag item to the exact cell with a live drop preview
+PASS  U02 inventory: rotate turns a 3x1 carbine (in place, or through the rotated placement preview when it does not fit); fixture item added through the real save session
+PASS  U03 inventory: split 5 of 24 rounds into the safe; the remainder stays in the bag stack
+PASS  U04 inventory: quick transfer moves the safe stack back and merges it into the bag stack
+PASS  U05 inventory: a failed write rolls the move back and opens the original save-failure retry
+PASS  U06 loot: click-to-place puts a container item on the chosen cell through one committed transfer
+PASS  U07 map: M opens the floor map (blocked, time runs), floor tabs switch, an exit choice drives the HUD guide
+PASS  U08 reading: E on a note opens its text in the reading panel; E closes it
+PASS  U09 HUD: stamina, status/weight, exit guide, quest count and key hints are filled from the frame
+PASS  W07 canvas offset: pointer -> chest plane -> logic angle matches an independent recomputation
+PASS  W08 unrevealed interior hides enemies; revealing the room shows them
+PASS  V01 a corpse killed in an unrevealed room adds 0 changed pixels (closed, reopened-and-closed, rebuilt, after a floor change); reveal shows it
+PASS  V02 held carbine facing away stays inside the body: 0 weapon pixels above the head for N/NE/NW; side views still show it
+PASS  W09 stairs: entering upstairs and the basement commits, raises epoch and rebuilds the view
+PASS  W10 refresh restores the committed checkpoint into a paused sample host
+PASS  W11 20 view remounts on the live Runtime keep listeners, tickers, apps, canvases, atlas and GPU textures flat
+PASS  W11b the renderer is reused across remounts; a lost context is replaced by a fresh renderer on the next mount
+PASS  W12 extraction holds 3 s; a failed settlement write keeps the raid and retries into the result screen
+PASS  W13 a second run abandons through the pause menu and settles as a failure
+PASS  V05 readability: arms end on the weapon grip, ground loot uses the item icon, the exit ring draws no stray line, docked loot keeps the player in view
+PASS  V03 sol: a real Runtime kill in view tips the standing body over its feet, weapon gone, before the corpse replaces it
+PASS  V04 sol: no fall for a kill in an unrevealed room (0 changed pixels), nor for corpses rebuilt by an epoch, the stairs or a reload
+PASS  V03 placeholder: a real Runtime kill in view tips the standing body over its feet, weapon gone, before the corpse replaces it
+PASS  V04 placeholder: no fall for a kill in an unrevealed room (0 changed pixels), nor for corpses rebuilt by an epoch, the stairs or a reload
+PASS  V06 feedback: hits mark the target, the kill marks bigger, a hit in an unrevealed room marks nothing; reload ring; hurt edge rises and fades
+PASS  V06b the chosen exit: an edge arrow toward it off screen (clear of the HUD cards), a marker over it on screen; off-screen shooters get an edge chevron
+FAIL  V07 atmosphere is stateless and bounded: identical pixels on re-present, no drop in a revealed interior, none on a layered floor; the ground bakes once per map
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+FAIL  V08 a crate opens its lid while its loot panel is up; a door passes through an ajar frame
+      page.waitForFunction: Timeout 15000ms exceeded.
+PASS  V09 the player's death: fall and corpse presented after the settlement commit, curtain 你倒下了, no simulation, grading cleared after
+PASS  W14 touch aim stick past 0.62 keeps firing
+PASS  U11 item labels at 1280x720: three-character names are not cut (pixel face on desktop, compact face on touch)
+PASS  U11 item labels at 1920x1080: three-character names are not cut (pixel face on desktop, compact face on touch)
+PASS  U11 item labels at 844x390: three-character names are not cut (pixel face on desktop, compact face on touch)
+PASS  U11 item labels at 640x300: three-character names are not cut (pixel face on desktop, compact face on touch)
+PASS  U12 drag at 1280x720: the ghost follows the cursor above the panel, the docked panel never scrolls, closing mid-drag clears it
+PASS  U12 drag at 1920x1080: the ghost follows the cursor above the panel, the docked panel never scrolls, closing mid-drag clears it
+PASS  U10 map labels at 640x300: no overlap, every exit named, map fills the short panel
+PASS  U10 map labels at 844x390: no overlap, every exit named, map fills the short panel
+PASS  U10 map labels at 1280x720: no overlap, every exit named, map fills the short panel
+PASS  W15 ?sample=village without ?test=1 exposes no test interface and still plays on the real Runtime
+PASS  W16 the ordinary entry is unchanged: residential raids still use the Phaser RaidScene
+46/48 passed; errors 0; external requests 0

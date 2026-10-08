@@ -1,0 +1,22 @@
+passed 1 sol real-death 27934720
+failed 2 sol extract 27934720
+passed 3 placeholder real-death 27934720
+failed 4 placeholder extract 27934720
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+4 !== 20
+
+    at file:///D:/bincov/pr22-runtime/scripts/sol-r6-resources.mjs:32:8 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 4,
+  expected: 20,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

@@ -1,0 +1,37 @@
+cycle 1 heap 31731350 session chars 2768
+cycle 2 heap 32387226 session chars 2755
+cycle 3 heap 32614334 session chars 2765
+cycle 4 heap 32819978 session chars 2757
+cycle 5 heap 33001498 session chars 2767
+cycle 6 heap 33083534 session chars 2755
+cycle 7 heap 33104658 session chars 2767
+cycle 8 heap 33146186 session chars 2756
+cycle 9 heap 33289010 session chars 2767
+cycle 10 heap 33329874 session chars 2757
+cycle 11 heap 33346442 session chars 2767
+cycle 12 heap 33403318 session chars 2757
+cycle 13 heap 33425698 session chars 2768
+cycle 14 heap 33447958 session chars 2758
+cycle 15 heap 33464854 session chars 2767
+cycle 16 heap 33513038 session chars 2756
+cycle 17 heap 33543150 session chars 2768
+cycle 18 heap 33587514 session chars 2758
+cycle 19 heap 33593522 session chars 2768
+cycle 20 heap 33620754 session chars 2759
+heap trend, cycles 6-10 against the last five: 380943 bytes
+self size (not dominator retained size) 45886375 -> 46462043: 41119 bytes per cycle (code/VM heuristic 36813, other 4307)
+tracked instances {"WebGLRenderer3":1,"HTMLCanvasElement":8,"_TextureSource2":6,"_Container":3,"WebGLRenderer":1,"WebGL2RenderingContext":4,"Texture":4,"CanvasSource":1,"Texture3":22,"TextureSource3":163,"_Application2":1,"SynthAudio":1,"Container4":8,"Sprite3":3,"_Sprite":1}
+shader source strings 83 -> 83; names BARREL_FS, BLOOM_FS, BLUR_HIGH_FS, BLUR_LOW_FS, BLUR_MED_FS, BOKEH_FS, CIRCLE_FS, DISPLACEMENT_FS, GLOW_FS, GRADIENT_FS, PHASER_ADD_BLEND_FS, PHASER_ADD_BLEND_FS",, PHASER_BITMAP_MASK_FS, PHASER_BITMAP_MASK_VS, PHASER_COLORMATRIX_FS, PHASER_COPY_FS, PHASER_LIGHT_FS, PHASER_LINEAR_BLEND_FS, PHASER_MESH_FS, PHASER_MESH_VS, PHASER_MOBILE_FS, PHASER_MOBILE_VS, PHASER_MULTI_FS, PHASER_MULTI_VS, PHASER_POINTLIGHT_FS, PHASER_POINTLIGHT_VS, PHASER_POSTFX_FS, PHASER_QUAD_VS, PHASER_SINGLE_FS, PHASER_SINGLE_VS, PIXELATE_FS, SHADOW_FS, SHINE_FS, VIGNETTE_FS, WIPE_FS, batch-vertex, big-triangle-vertex, graphics-fragment, graphics-vertex, tiling-sprite-shader-vertex
+   299264    217 code:system / InstructionStream
+    90668    472 code:system / TrustedByteArray
+    37064    224 native:system / WeakArrayList
+    30524     79 code:system / ProtectedFixedArray
+    22092    138 code:system / FeedbackVector
+    15624    217 code:system / Code
+    14876      4 array:(object elements)
+     6272    112 native:DOMRectReadOnly
+     5984     34 native:PerformanceLongAnimationFrameTiming
+     5824    360 code:(object elements)
+     5216    319 code:system / LoadHandler
+     4680    117 object shape:system / Map
+PASS lifecycle ownership checks only. F20 memory signoff: partial: positive heap trend requires retainer attribution

@@ -1,0 +1,14 @@
+{
+  "node": "v24.19.0",
+  "method": "Fake suspended context with never-resolving resume; shared current source unchanged. Schedules/counts only, complementary to native output controls.",
+  "resumeBudget": 16,
+  "expiredBudget": 16,
+  "afterStop": {
+    "voices": 0,
+    "resumeAt": -1,
+    "ambientNodes": 0
+  },
+  "runningBudget": 96,
+  "afterEnded": 0,
+  "status": "passed"
+}

@@ -1,0 +1,1960 @@
+{
+  "at": "2026-10-08T18:55:20.794Z",
+  "testedSource": "14abea379d8f70d98d92178b614cd7361462c6ae",
+  "branch": "docs/coast-2-5d-art-design",
+  "node": "v24.19.0",
+  "browser": "154.0.8037.98",
+  "machine": {
+    "platform": "win32",
+    "release": "10.0.19045",
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12400F",
+    "totalMemory": 34192441344
+  },
+  "dpr": [
+    1,
+    3
+  ],
+  "sampleViewport": [
+    "1280x720",
+    "1920x1080",
+    "844x390",
+    "640x300"
+  ],
+  "ordinaryLifecycleViewport": [
+    "1280x720",
+    "1920x1080"
+  ],
+  "formalHTMLSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+  "packageIdentity": [
+    {
+      "file": "dist/index.html",
+      "bytes": 3204789,
+      "sha256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "baselineSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "equals14abea3": true,
+      "gitBlob": "7618961f763bce0f98671bc97939c80a1e2a903a"
+    },
+    {
+      "file": "start the game.html",
+      "bytes": 3204789,
+      "sha256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "baselineSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "equals14abea3": true,
+      "gitBlob": "7618961f763bce0f98671bc97939c80a1e2a903a"
+    },
+    {
+      "file": "城中村试玩.html",
+      "bytes": 1185,
+      "sha256": "9fee91e2d91f97c63ca1b54ce903c4111bb989c404a445c43e72fe7b1dd7f52c",
+      "baselineSHA256": "9fee91e2d91f97c63ca1b54ce903c4111bb989c404a445c43e72fe7b1dd7f52c",
+      "equals14abea3": true,
+      "gitBlob": "4d9278e37fb7e3074d50b83fa7f79901e6f8bac7"
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "bytes": 1085528,
+      "sha256": "3e53611a3744e72bca32c02c08b63845d6248826578d5480203b0dfd0f440bfb",
+      "baselineSHA256": "3e53611a3744e72bca32c02c08b63845d6248826578d5480203b0dfd0f440bfb",
+      "equals14abea3": true,
+      "gitBlob": "d4aa1d4b3ed8babac5a56d619f830adf91a9a947"
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "bytes": 1089303,
+      "sha256": "c2d99c0a7addeb000bead9d76a496bc6065703c53323219f7bdfcec66337ae59",
+      "baselineSHA256": "c2d99c0a7addeb000bead9d76a496bc6065703c53323219f7bdfcec66337ae59",
+      "equals14abea3": true,
+      "gitBlob": "d2a995dd02a870b7d5e9ef261acbd26e481d60cb"
+    },
+    {
+      "file": "docs/release-manifest.json",
+      "bytes": 747,
+      "sha256": "30a1962b7963c1ea1a809a7be965cf2cac498d43357ea4cc2d55e296e99763d6",
+      "baselineSHA256": "30a1962b7963c1ea1a809a7be965cf2cac498d43357ea4cc2d55e296e99763d6",
+      "equals14abea3": true,
+      "gitBlob": "d4ea45d31f4f6bee27464ddc6a8e7f723a071b28"
+    }
+  ],
+  "signoff": {
+    "overall": "PARTIAL",
+    "R6V1": "PARTIAL: first 46/48 then sequential 48/48; original visibility tool failed before entry-animation wait",
+    "R6V2": "PASS: native output recovery/threshold and original Phaser four cue controls + shared main levels",
+    "R6V3": "PASS: real AI player death, both art modes, committed frozen outro and canvas cleanup",
+    "R6V4": "fixture cause confirmed; historical ASTRA-SAVE-01 unconfirmed",
+    "lifecycle": "PASS",
+    "F20": "PARTIAL: all three base trends and original strict result-page trend positive",
+    "R6V5": "NOT RUN: awaiting physical mobile/desktop devices and people"
+  },
+  "commands": [
+    {
+      "group": "core",
+      "id": "test",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:18:34.406Z",
+      "finished": "2026-10-08T18:18:40.522Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "cf6de6f5dd90152e9586105a2848f3569a06da80cee977c16a1ec9d6083142bb"
+    },
+    {
+      "group": "core",
+      "id": "package",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "package"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:18:40.522Z",
+      "finished": "2026-10-08T18:18:44.921Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "4c833718482d9c6e42651471aed51ef50cab7f9ad026a19d18eb05fb7e6e63d8"
+    },
+    {
+      "group": "target",
+      "id": "sol-visual",
+      "args": [
+        "scripts/sol-round4-visual.mjs"
+      ],
+      "environment": {
+        "BINCOV_VISUAL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/visual"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:06.262Z",
+      "finished": "2026-10-08T18:19:18.649Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "f81a9ec6599c529c088231ff569af62b0cc64b81f02731fee572148ce1df54ac"
+    },
+    {
+      "group": "target",
+      "id": "sample",
+      "args": [
+        "scripts/coast-sample-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_SAMPLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/sample"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:18.652Z",
+      "finished": "2026-10-08T18:21:29.473Z",
+      "exitCode": 1,
+      "signal": null,
+      "rawLogSHA256": "5561a5f6cca234bb27ee5ae0f77c112ac4a016663b923ed20102e6c963a59d61"
+    },
+    {
+      "group": "sample-repeat",
+      "id": "sample-repeat",
+      "args": [
+        "scripts/coast-sample-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_SAMPLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/sample-repeat"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:25:19.917Z",
+      "finished": "2026-10-08T18:26:39.510Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "57e5e539340fd23434e21638757eb8b0426cbe3c69bb66e42166477102f16c4d"
+    },
+    {
+      "group": "lifecycle",
+      "id": "lifecycle-1280",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/coast-lifecycle-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_LIFECYCLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/lifecycle-1280",
+        "BINCOV_LIFECYCLE_WIDE": ""
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:05.650Z",
+      "finished": "2026-10-08T18:19:33.585Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "c79078a78b7f70094485031990f75664f3c0a30c1cc25307f659736a4c1c77ba"
+    },
+    {
+      "group": "lifecycle",
+      "id": "lifecycle-1920",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/coast-lifecycle-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_LIFECYCLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/lifecycle-1920",
+        "BINCOV_LIFECYCLE_WIDE": "1"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:33.586Z",
+      "finished": "2026-10-08T18:20:00.001Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "c79078a78b7f70094485031990f75664f3c0a30c1cc25307f659736a4c1c77ba"
+    },
+    {
+      "group": "play",
+      "id": "play-empty",
+      "args": [
+        "scripts/coast-playtest.mjs"
+      ],
+      "environment": {
+        "BINCOV_PLAYTEST_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/play-empty",
+        "BINCOV_PLAYTEST_SEED": "",
+        "BINCOV_PLAYTEST_SIZE": "1280x720"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:06.412Z",
+      "finished": "2026-10-08T18:19:51.049Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bedfd3425c51f3d7512b3ce9fc259f316515015e99ec3b5c720a18c06f82738a"
+    },
+    {
+      "group": "play",
+      "id": "play-1280",
+      "args": [
+        "scripts/coast-playtest.mjs"
+      ],
+      "environment": {
+        "BINCOV_PLAYTEST_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/play-1280",
+        "BINCOV_PLAYTEST_SEED": "20261008",
+        "BINCOV_PLAYTEST_SIZE": "1280x720"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:51.050Z",
+      "finished": "2026-10-08T18:20:29.791Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "15d1b5bd2f49f188b0f619b136472a16ed8263f8a9257022619dc3c49463137b"
+    },
+    {
+      "group": "play",
+      "id": "play-1920",
+      "args": [
+        "scripts/coast-playtest.mjs"
+      ],
+      "environment": {
+        "BINCOV_PLAYTEST_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/play-1920",
+        "BINCOV_PLAYTEST_SEED": "20261008",
+        "BINCOV_PLAYTEST_SIZE": "1920x1080"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:20:29.793Z",
+      "finished": "2026-10-08T18:21:06.192Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "ab27e9cfc58d8211c3300f57af4c91c366c5543fcb8ecaff66e0eb1dbf965644"
+    },
+    {
+      "group": "launcher",
+      "id": "launcher",
+      "args": [
+        "scripts/coast-launcher-check.mjs"
+      ],
+      "environment": {
+        "BINCOV_LAUNCHER_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/launcher"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:08.190Z",
+      "finished": "2026-10-08T18:19:33.028Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "b152651092a3bbf883353b3ae81d54ab8f34825d558f63e2233bff9b37c4bd24"
+    },
+    {
+      "group": "shots",
+      "id": "shots",
+      "args": [
+        "scripts/coast-sample-shots.mjs"
+      ],
+      "environment": {
+        "BINCOV_SHOTS_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/shots"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:06.362Z",
+      "finished": "2026-10-08T18:21:12.475Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "7c0f20bfd3b860df8b41cdb7771cf37c893b4e55975cb86af0ddadd8010b5958"
+    },
+    {
+      "group": "audio",
+      "id": "audio-1",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/audio-1"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:27:42.077Z",
+      "finished": "2026-10-08T18:28:55.304Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "audio",
+      "id": "audio-2",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/audio-2"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:28:55.305Z",
+      "finished": "2026-10-08T18:30:08.509Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "audio",
+      "id": "audio-3",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/audio-3"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:30:08.510Z",
+      "finished": "2026-10-08T18:31:21.925Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "audio-extra",
+      "id": "audio-levels",
+      "args": [
+        "scripts/sol-r6-audio-controls.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:31:36.721Z",
+      "finished": "2026-10-08T18:32:03.735Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "db8b0a65d0c410ce4242ab12141b67cd7a20dc982a29064f0ee6df41a1866886"
+    },
+    {
+      "group": "audio-extra",
+      "id": "original-current",
+      "args": [
+        "D:/bincov/工作标准/缺陷登记/音频服务丢失恢复期提示音-20261008/repro.mjs",
+        "D:\\bincov\\pr22-runtime/dist/index.html"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:32:03.735Z",
+      "finished": "2026-10-08T18:32:10.673Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bc4c710881822b8dc71c43b8b05b520d8cd0f6e06c1c5ba450f5ee5a155ff5fa"
+    },
+    {
+      "group": "audio-extra",
+      "id": "original-old",
+      "args": [
+        "D:/bincov/工作标准/缺陷登记/音频服务丢失恢复期提示音-20261008/repro.mjs",
+        "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/1c1c935.html"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:32:10.674Z",
+      "finished": "2026-10-08T18:32:17.566Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "9e30148faca8b4115d269ccdb9746d1045998335cafa158f1f78e8dcffa76def"
+    },
+    {
+      "group": "audio-extra",
+      "id": "audio-negative",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/audio-negative",
+        "BINCOV_SAMPLE_HTML": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/audio-controls/death-muted.html"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:32:17.567Z",
+      "finished": "2026-10-08T18:33:30.853Z",
+      "exitCode": 1,
+      "signal": null,
+      "rawLogSHA256": "19e9021a5fb47fa0baa9c5e3f7f9f20104d3098cea540a3b0021299e31ad07fd"
+    },
+    {
+      "group": "audio-extra",
+      "id": "player-death",
+      "args": [
+        "scripts/opus-player-death-probe.mjs"
+      ],
+      "environment": {
+        "BINCOV_PLAYER_DEATH_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/player"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:33:30.854Z",
+      "finished": "2026-10-08T18:33:36.991Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "feb563c6aff5273bcec847471c56c4cccc6017b86c3592668598d01beb003edb"
+    },
+    {
+      "group": "audio-extra",
+      "id": "save-placement",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-r6-save-test.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:33:36.991Z",
+      "finished": "2026-10-08T18:35:03.375Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "0d1cfe575a09baa25879843cf0956f04fc557bcca8be9556e7a093f7f634736e"
+    },
+    {
+      "group": "boundaries",
+      "id": "hidden-feedback",
+      "args": [
+        "scripts/sol-r6-hidden-feedback.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:35:36.247Z",
+      "finished": "2026-10-08T18:35:40.184Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "8985787532479733ae7d59e8d58d261fddbee476e880c6e6abe34e66ec7bf760"
+    },
+    {
+      "group": "boundaries",
+      "id": "hidden-contract",
+      "args": [
+        "scripts/sol-visibility-probe.mjs"
+      ],
+      "environment": {
+        "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/hidden-contract"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:35:40.185Z",
+      "finished": "2026-10-08T18:35:43.146Z",
+      "exitCode": 1,
+      "signal": null,
+      "rawLogSHA256": "ea31ce833fcb29b625b2a071dc54f63e8c957369b9f2679760be4299c8e9470a"
+    },
+    {
+      "group": "boundaries",
+      "id": "astra-save-classification",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/astra-save-diagnostic.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:35:43.147Z",
+      "finished": "2026-10-08T18:35:53.281Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "eae5f9a5c20a5a1a567df02d8c57ef90f3ed8c08271c150bef4707c7c3929e36"
+    },
+    {
+      "group": "boundaries",
+      "id": "boundary-F01",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-sample-boundaries.mjs"
+      ],
+      "environment": {
+        "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/boundary-F01",
+        "BINCOV_SOL_ONLY": "F01"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:35:53.281Z",
+      "finished": "2026-10-08T18:35:56.726Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "b66424e9bd6880cb99433ed534d8ce1e96bfdac2efdf6d8f4adb8b139aa9738c"
+    },
+    {
+      "group": "boundaries",
+      "id": "boundary-F14",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-sample-boundaries.mjs"
+      ],
+      "environment": {
+        "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/boundary-F14",
+        "BINCOV_SOL_ONLY": "F14"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:35:56.726Z",
+      "finished": "2026-10-08T18:35:59.805Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "96ab74f8d5e18309b5f333dbb704e5975e6c843029c444356c5069dcba7106bd"
+    },
+    {
+      "group": "boundaries",
+      "id": "boundary-F16",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-sample-boundaries.mjs"
+      ],
+      "environment": {
+        "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/boundary-F16",
+        "BINCOV_SOL_ONLY": "F16"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:35:59.806Z",
+      "finished": "2026-10-08T18:36:05.862Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "dbec2c2be37903bb39e8d31da0f17cfbe9b7b5a21ec83e10ccf385c214c95359"
+    },
+    {
+      "group": "boundaries",
+      "id": "boundary-F18",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-sample-boundaries.mjs"
+      ],
+      "environment": {
+        "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/boundary-F18",
+        "BINCOV_SOL_ONLY": "F18"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:36:05.862Z",
+      "finished": "2026-10-08T18:36:09.369Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "a7df164208e7fbf784ea55bf79a9a0e1c52533f5b030bfee2a17cfc51c611ee7"
+    },
+    {
+      "group": "boundaries",
+      "id": "boundary-F19",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-sample-boundaries.mjs"
+      ],
+      "environment": {
+        "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/boundary-F19",
+        "BINCOV_SOL_ONLY": "F19"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:36:09.370Z",
+      "finished": "2026-10-08T18:36:19.614Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "26bec44574ab4d7dc6d01e3629575b8fc9631b32c2daea0425a24851903552ee"
+    },
+    {
+      "group": "boundaries",
+      "id": "boundary-F21",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-sample-boundaries.mjs"
+      ],
+      "environment": {
+        "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/boundary-F21",
+        "BINCOV_SOL_ONLY": "F21"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:36:19.614Z",
+      "finished": "2026-10-08T18:36:30.913Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "743964aa082ca124b8c54dde7f0d620bae3af221df372f52510391d944b12678"
+    },
+    {
+      "group": "memory",
+      "id": "hidden-contract-settled",
+      "args": [
+        "scripts/sol-r6-visibility.mjs"
+      ],
+      "environment": {
+        "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/hidden-contract-settled"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:36:54.806Z",
+      "finished": "2026-10-08T18:36:58.149Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "4e03b8af918baa4c58fc124f2877fc7c422d979ef57a2e3a2316fc1761f47be2"
+    },
+    {
+      "group": "memory",
+      "id": "F20-strict",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-sample-boundaries.mjs"
+      ],
+      "environment": {
+        "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/f20",
+        "BINCOV_SOL_ONLY": "F20"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:36:58.150Z",
+      "finished": "2026-10-08T18:38:04.360Z",
+      "exitCode": 1,
+      "signal": null,
+      "rawLogSHA256": "eb72da35c960d4e055b95e46b239a4cf531e7b75d14d8c6e1e928d513bfbf6bb"
+    },
+    {
+      "group": "memory",
+      "id": "heap-extended",
+      "args": [
+        "scripts/sol-r6-heap.mjs"
+      ],
+      "environment": {
+        "BINCOV_HEAP_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/heap-extended",
+        "BINCOV_HEAP_KEEP": "1"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:38:04.360Z",
+      "finished": "2026-10-08T18:39:12.073Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "5397cd55ae12b6eed1e985ee994edbefcd61000050edf19609ca0d941aba12ea"
+    },
+    {
+      "group": "memory",
+      "id": "heap-repeat",
+      "args": [
+        "scripts/sol-r6-heap.mjs"
+      ],
+      "environment": {
+        "BINCOV_HEAP_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/heap-repeat",
+        "BINCOV_HEAP_KEEP": "1"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:39:12.074Z",
+      "finished": "2026-10-08T18:40:20.344Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "3ccff229a3d081ea9616c6ad8b487229e717cb55106259a165dcde39fee749fb"
+    },
+    {
+      "group": "memory",
+      "id": "heap-ordinary",
+      "args": [
+        "scripts/sol-r6-heap.mjs"
+      ],
+      "environment": {
+        "BINCOV_HEAP_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/heap-ordinary",
+        "BINCOV_HEAP_ENTRY": "ordinary",
+        "BINCOV_HEAP_KEEP": "1"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:40:20.344Z",
+      "finished": "2026-10-08T18:41:07.345Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "1992378fa1d7a566d83c0743cfaf0257c8f71f63fd9e7b3bcd603f6e88c8f611"
+    },
+    {
+      "group": "memory",
+      "id": "resources",
+      "args": [
+        "scripts/sol-r6-resources.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:41:07.346Z",
+      "finished": "2026-10-08T18:41:24.469Z",
+      "exitCode": 1,
+      "signal": null,
+      "rawLogSHA256": "38dab2bf690b0e86d66065b307a937d862cc054742ace84bc09df651f08b9a27"
+    },
+    {
+      "group": "final-functional",
+      "id": "original-cues",
+      "args": [
+        "scripts/sol-r6-original-audio.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:41:35.968Z",
+      "finished": "2026-10-08T18:42:03.811Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "a7833392e26f58d2c5bdd12ae38db6107766316f444b9c05235b9041cc5c2509"
+    },
+    {
+      "group": "final-functional",
+      "id": "audio-bounds",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-r6-audio-bounds.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:42:03.812Z",
+      "finished": "2026-10-08T18:42:03.935Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "c71422c30315ce2041be3053f95ce28e50758628d7c02c5da7ab9297ab4330f0"
+    },
+    {
+      "group": "resource-repeat",
+      "id": "resources-repeat",
+      "args": [
+        "scripts/sol-r6-resources.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:43:14.574Z",
+      "finished": "2026-10-08T18:44:27.158Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "c11b3ef06e6988d1e9c98f4aa547d9e9f6cf99580d7094925695d94f0283f0d6"
+    },
+    {
+      "group": "save-recheck",
+      "id": "save-recheck",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-r6-save-test.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:45:23.822Z",
+      "finished": "2026-10-08T18:46:50.213Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "0d1cfe575a09baa25879843cf0956f04fc557bcca8be9556e7a093f7f634736e"
+    },
+    {
+      "group": "visual",
+      "id": "regression-ui",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:ui"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:06.541Z",
+      "finished": "2026-10-08T18:19:33.204Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "5bbcc0ca21c4c3e253270cf2435d0ceb37bbbf1c6a4b83c70e5520444814668e"
+    },
+    {
+      "group": "visual",
+      "id": "regression-tactical",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:tactical"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:33.205Z",
+      "finished": "2026-10-08T18:20:00.189Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "cccfe805390f042d82379d5202ed349d061b8dcbf9a7ff5d165bdc67bf44294f"
+    },
+    {
+      "group": "visual",
+      "id": "regression-art",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:art"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:20:00.191Z",
+      "finished": "2026-10-08T18:20:27.873Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "47d67d1b2760687f4042378a69c9a7e39e76c68e08b35856f36051734797691e"
+    },
+    {
+      "group": "visual",
+      "id": "regression-title",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:title"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:20:27.874Z",
+      "finished": "2026-10-08T18:21:43.734Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "af95a8f3e5c6be595ea2e8472faf07b3e650a0a647c5feac0b45f493d7935d4e"
+    },
+    {
+      "group": "visual",
+      "id": "regression-title-water",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:title-water"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:21:43.735Z",
+      "finished": "2026-10-08T18:21:54.246Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "4457f0c9b6e572305097e7df11a49439b5da991ac69f635bca7c2fe2358fdb67"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-save-browser",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:save-browser"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:06.030Z",
+      "finished": "2026-10-08T18:19:39.826Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "77420714aca24958afbc65e6fcb19970acb0ecb9c627c73f25e2a6341dede2f6"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-expansion",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:expansion"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:39.829Z",
+      "finished": "2026-10-08T18:19:59.735Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "cc02c6972e26e7ebd5326ed06c0c0f6a4114a3636a9ffe0c97b85abe341dbae0"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-qol-expansion",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:qol-expansion"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:59.736Z",
+      "finished": "2026-10-08T18:20:11.874Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "f6673a79ed9d8fa53103b2f74e4087319f7f7616dd0a9379968d8a107a2a2491"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-loot",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:loot"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:20:11.874Z",
+      "finished": "2026-10-08T18:21:34.243Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "d076d9745949ade92eb81f03d9e43a5d4d3495fd819d376483e87921f6630838"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-loot-target",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:loot-target"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:21:34.243Z",
+      "finished": "2026-10-08T18:21:54.776Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "b6a7ec34990b2131e4e5ee0a38335d8bac76f226e73b80d56a200849c0663dfa"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-qol",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:qol"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:21:54.776Z",
+      "finished": "2026-10-08T18:22:17.463Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "06f5724b78e46309e48210f5d944fec63eaeee3fc3c8bda63fc6433ce98cc591"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-portable",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:portable"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:22:17.464Z",
+      "finished": "2026-10-08T18:22:23.111Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "5bf60afdf2bdb667feca08411b18a2d2af5799f9e16b325bf024aa4f42751725"
+    },
+    {
+      "group": "world",
+      "id": "regression-buildings",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:buildings"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:06.124Z",
+      "finished": "2026-10-08T18:19:33.401Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "e6232303f56559f9a1de642c328397f63ea0c56c5a35884334670b7b3a6c73ae"
+    },
+    {
+      "group": "world",
+      "id": "regression-systems",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:systems"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:33.402Z",
+      "finished": "2026-10-08T18:20:44.806Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "58d33036db5941b8e82d9f38cc6b99b0b3c721ebdc452a6c984844fa91b06598"
+    },
+    {
+      "group": "world",
+      "id": "regression-mall-passages",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:mall-passages"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:20:44.806Z",
+      "finished": "2026-10-08T18:23:37.320Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "f58784f2a76be83b719ffca6b95e505a5101f896993aab94d69481b7c434dd28"
+    },
+    {
+      "group": "world",
+      "id": "regression-mall-landing",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:mall-landing"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:23:37.321Z",
+      "finished": "2026-10-08T18:23:45.416Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "dee46425b91ff092c8744a3b3000690f0c4784d40f8a1cfbf7533e69c5ee466f"
+    },
+    {
+      "group": "input",
+      "id": "regression-browser",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:browser"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:06.068Z",
+      "finished": "2026-10-08T18:19:59.511Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bca65270f4169c6c5f66c46d446bbcdcf3d49fb2983429fe91824204bb770edf"
+    },
+    {
+      "group": "input",
+      "id": "regression-desktop-input",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:desktop-input"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:19:59.512Z",
+      "finished": "2026-10-08T18:20:37.885Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "0de5f31a0a38b1c8ebd2dedf4ae5bf1713d9956e2de8b01dd602a1584825e313"
+    },
+    {
+      "group": "input",
+      "id": "regression-mobile",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:mobile"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:20:37.896Z",
+      "finished": "2026-10-08T18:21:04.993Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "fb7aaa9d364f4663e488948d38925c861c0e88b07972b8df3fd060a4ec4fef40"
+    },
+    {
+      "group": "input",
+      "id": "regression-mobile-ux",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:mobile-ux"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-08T18:21:04.995Z",
+      "finished": "2026-10-08T18:22:17.618Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "751ad3052682f17c386e0a9d747d907eac67d451459818f0acb8ea585663a98d"
+    }
+  ],
+  "logNormalization": "Delivery logs remove trailing spaces/tabs only; original ignored logs remain byte-exact and each command includes rawLogSHA256.",
+  "expectedNonzero": {
+    "sample": "first V07 Fx live 6!=0 and V08 panel wait timeout",
+    "hidden-contract": "original whole-page pixel comparison caught entry CSS fade; assertions unchanged, settled copy passed",
+    "F20-strict": "PARTIAL positive trend",
+    "audio-negative": "intentional death-muted control: only E2 failed",
+    "resources": "first mixed workload aborted 4/20; post-death body hp1/pollution50 caused later extract fixture to die"
+  },
+  "notRun": [
+    "R6-V5/G12 physical devices/human full games/headphone stereo",
+    "Remote CI on local verification commit",
+    "Deployed R6 Pages (Pages equals main, not this sample)",
+    "40/60-cycle windows, fixed idle control and dominator attribution of all growth",
+    "R6-L1..L7 and R6-A1..A7, second batch art and frontend changes",
+    "Existing test:layered-play script (known click/exit selector issue in Opus report); not substituted by other tests",
+    "Independent GPU/driver/native audio heap accounting"
+  ],
+  "resourceSupplement": {
+    "cycles": 20,
+    "perArt": 10,
+    "bothFloorsEveryCycle": true,
+    "baseRecoveryFixture": true,
+    "firstFailureRetained": true,
+    "atlasBytes": [
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720,
+      27934720
+    ],
+    "maps": 3,
+    "gpuTextures": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ]
+  },
+  "heapSampling": [
+    {
+      "name": "original strict",
+      "phase": "result page; one CDP GC and window.gc",
+      "acceptanceStatus": "partial",
+      "heapStatus": "growth-observed-not-signed-off",
+      "waitContract": "Every wait returns a primitive boolean; no PublishedView JSHandle is retained.",
+      "resourceCountsPassed": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 23444460
+          }
+        },
+        {
+          "cycle": 2,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24151829
+          }
+        },
+        {
+          "cycle": 3,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24345069
+          }
+        },
+        {
+          "cycle": 4,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24562805
+          }
+        },
+        {
+          "cycle": 5,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24785017
+          }
+        },
+        {
+          "cycle": 6,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24869437
+          }
+        },
+        {
+          "cycle": 7,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24886121
+          }
+        },
+        {
+          "cycle": 8,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24930453
+          }
+        },
+        {
+          "cycle": 9,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25078513
+          }
+        },
+        {
+          "cycle": 10,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25125377
+          }
+        },
+        {
+          "cycle": 11,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25134157
+          }
+        },
+        {
+          "cycle": 12,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25200557
+          }
+        },
+        {
+          "cycle": 13,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25219601
+          }
+        },
+        {
+          "cycle": 14,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25232837
+          }
+        },
+        {
+          "cycle": 15,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25247605
+          }
+        },
+        {
+          "cycle": 16,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25295697
+          }
+        },
+        {
+          "cycle": 17,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25322797
+          }
+        },
+        {
+          "cycle": 18,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25361253
+          }
+        },
+        {
+          "cycle": 19,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25363749
+          }
+        },
+        {
+          "cycle": 20,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25389429
+          }
+        }
+      ],
+      "afterIdle": 25518689,
+      "gcMethod": "CDP HeapProfiler.collectGarbage and window.gc",
+      "gcAvailable": true,
+      "afterWarmupMean": 24977980.2,
+      "lastFiveMean": 25346585,
+      "growthBytes": 368604.80000000075
+    },
+    {
+      "entry": "test: full layer/extract/abandon workload",
+      "sampling": "1280x720; base after return; three CDP GCs; snapshots 6/20; primitive waits; read-only scalar page-pool probe in detached unminified bundle",
+      "trend": {
+        "warmupMean": 32513960.8,
+        "afterWarmupMean": 33198144,
+        "lastFiveMean": 33558512,
+        "growthBytes": 360368
+      },
+      "remainingOwners": [],
+      "accumulated": [],
+      "selfSize": {
+        "6": 45890897,
+        "20": 46447429,
+        "perCycle": 39752.28571428572,
+        "codePerCycle": 35531.71428571428,
+        "otherPerCycle": 4220.571428571428
+      },
+      "shaderSources": {
+        "6": {
+          "strings": 83,
+          "names": [
+            "BARREL_FS",
+            "BLOOM_FS",
+            "BLUR_HIGH_FS",
+            "BLUR_LOW_FS",
+            "BLUR_MED_FS",
+            "BOKEH_FS",
+            "CIRCLE_FS",
+            "DISPLACEMENT_FS",
+            "GLOW_FS",
+            "GRADIENT_FS",
+            "PHASER_ADD_BLEND_FS",
+            "PHASER_ADD_BLEND_FS\",",
+            "PHASER_BITMAP_MASK_FS",
+            "PHASER_BITMAP_MASK_VS",
+            "PHASER_COLORMATRIX_FS",
+            "PHASER_COPY_FS",
+            "PHASER_LIGHT_FS",
+            "PHASER_LINEAR_BLEND_FS",
+            "PHASER_MESH_FS",
+            "PHASER_MESH_VS",
+            "PHASER_MOBILE_FS",
+            "PHASER_MOBILE_VS",
+            "PHASER_MULTI_FS",
+            "PHASER_MULTI_VS",
+            "PHASER_POINTLIGHT_FS",
+            "PHASER_POINTLIGHT_VS",
+            "PHASER_POSTFX_FS",
+            "PHASER_QUAD_VS",
+            "PHASER_SINGLE_FS",
+            "PHASER_SINGLE_VS",
+            "PIXELATE_FS",
+            "SHADOW_FS",
+            "SHINE_FS",
+            "VIGNETTE_FS",
+            "WIPE_FS",
+            "batch-vertex",
+            "big-triangle-vertex",
+            "graphics-fragment",
+            "graphics-vertex",
+            "tiling-sprite-shader-vertex"
+          ]
+        },
+        "20": {
+          "strings": 83,
+          "names": [
+            "BARREL_FS",
+            "BLOOM_FS",
+            "BLUR_HIGH_FS",
+            "BLUR_LOW_FS",
+            "BLUR_MED_FS",
+            "BOKEH_FS",
+            "CIRCLE_FS",
+            "DISPLACEMENT_FS",
+            "GLOW_FS",
+            "GRADIENT_FS",
+            "PHASER_ADD_BLEND_FS",
+            "PHASER_ADD_BLEND_FS\",",
+            "PHASER_BITMAP_MASK_FS",
+            "PHASER_BITMAP_MASK_VS",
+            "PHASER_COLORMATRIX_FS",
+            "PHASER_COPY_FS",
+            "PHASER_LIGHT_FS",
+            "PHASER_LINEAR_BLEND_FS",
+            "PHASER_MESH_FS",
+            "PHASER_MESH_VS",
+            "PHASER_MOBILE_FS",
+            "PHASER_MOBILE_VS",
+            "PHASER_MULTI_FS",
+            "PHASER_MULTI_VS",
+            "PHASER_POINTLIGHT_FS",
+            "PHASER_POINTLIGHT_VS",
+            "PHASER_POSTFX_FS",
+            "PHASER_QUAD_VS",
+            "PHASER_SINGLE_FS",
+            "PHASER_SINGLE_VS",
+            "PIXELATE_FS",
+            "SHADOW_FS",
+            "SHINE_FS",
+            "VIGNETTE_FS",
+            "WIPE_FS",
+            "batch-vertex",
+            "big-triangle-vertex",
+            "graphics-fragment",
+            "graphics-vertex",
+            "tiling-sprite-shader-vertex"
+          ]
+        }
+      },
+      "memorySignoff": "partial: positive heap trend requires retainer attribution"
+    },
+    {
+      "entry": "test: full layer/extract/abandon workload",
+      "sampling": "1280x720; base after return; three CDP GCs; snapshots 6/20; primitive waits; read-only scalar page-pool probe in detached unminified bundle",
+      "trend": {
+        "warmupMean": 32510877.2,
+        "afterWarmupMean": 33190652.4,
+        "lastFiveMean": 33571595.6,
+        "growthBytes": 380943.200000003
+      },
+      "remainingOwners": [],
+      "accumulated": [],
+      "selfSize": {
+        "6": 45886375,
+        "20": 46462043,
+        "perCycle": 41119.142857142855,
+        "codePerCycle": 36812.57142857143,
+        "otherPerCycle": 4306.571428571428
+      },
+      "shaderSources": {
+        "6": {
+          "strings": 83,
+          "names": [
+            "BARREL_FS",
+            "BLOOM_FS",
+            "BLUR_HIGH_FS",
+            "BLUR_LOW_FS",
+            "BLUR_MED_FS",
+            "BOKEH_FS",
+            "CIRCLE_FS",
+            "DISPLACEMENT_FS",
+            "GLOW_FS",
+            "GRADIENT_FS",
+            "PHASER_ADD_BLEND_FS",
+            "PHASER_ADD_BLEND_FS\",",
+            "PHASER_BITMAP_MASK_FS",
+            "PHASER_BITMAP_MASK_VS",
+            "PHASER_COLORMATRIX_FS",
+            "PHASER_COPY_FS",
+            "PHASER_LIGHT_FS",
+            "PHASER_LINEAR_BLEND_FS",
+            "PHASER_MESH_FS",
+            "PHASER_MESH_VS",
+            "PHASER_MOBILE_FS",
+            "PHASER_MOBILE_VS",
+            "PHASER_MULTI_FS",
+            "PHASER_MULTI_VS",
+            "PHASER_POINTLIGHT_FS",
+            "PHASER_POINTLIGHT_VS",
+            "PHASER_POSTFX_FS",
+            "PHASER_QUAD_VS",
+            "PHASER_SINGLE_FS",
+            "PHASER_SINGLE_VS",
+            "PIXELATE_FS",
+            "SHADOW_FS",
+            "SHINE_FS",
+            "VIGNETTE_FS",
+            "WIPE_FS",
+            "batch-vertex",
+            "big-triangle-vertex",
+            "graphics-fragment",
+            "graphics-vertex",
+            "tiling-sprite-shader-vertex"
+          ]
+        },
+        "20": {
+          "strings": 83,
+          "names": [
+            "BARREL_FS",
+            "BLOOM_FS",
+            "BLUR_HIGH_FS",
+            "BLUR_LOW_FS",
+            "BLUR_MED_FS",
+            "BOKEH_FS",
+            "CIRCLE_FS",
+            "DISPLACEMENT_FS",
+            "GLOW_FS",
+            "GRADIENT_FS",
+            "PHASER_ADD_BLEND_FS",
+            "PHASER_ADD_BLEND_FS\",",
+            "PHASER_BITMAP_MASK_FS",
+            "PHASER_BITMAP_MASK_VS",
+            "PHASER_COLORMATRIX_FS",
+            "PHASER_COPY_FS",
+            "PHASER_LIGHT_FS",
+            "PHASER_LINEAR_BLEND_FS",
+            "PHASER_MESH_FS",
+            "PHASER_MESH_VS",
+            "PHASER_MOBILE_FS",
+            "PHASER_MOBILE_VS",
+            "PHASER_MULTI_FS",
+            "PHASER_MULTI_VS",
+            "PHASER_POINTLIGHT_FS",
+            "PHASER_POINTLIGHT_VS",
+            "PHASER_POSTFX_FS",
+            "PHASER_QUAD_VS",
+            "PHASER_SINGLE_FS",
+            "PHASER_SINGLE_VS",
+            "PIXELATE_FS",
+            "SHADOW_FS",
+            "SHINE_FS",
+            "VIGNETTE_FS",
+            "WIPE_FS",
+            "batch-vertex",
+            "big-triangle-vertex",
+            "graphics-fragment",
+            "graphics-vertex",
+            "tiling-sprite-shader-vertex"
+          ]
+        }
+      },
+      "memorySignoff": "partial: positive heap trend requires retainer attribution"
+    },
+    {
+      "entry": "ordinary: deploy-abandon-return control (no stairs/extraction)",
+      "sampling": "1280x720; base after return; three CDP GCs; snapshots 6/20; primitive waits; read-only scalar page-pool probe in detached unminified bundle",
+      "trend": {
+        "warmupMean": 32278834.2,
+        "afterWarmupMean": 33045972.6,
+        "lastFiveMean": 33363447,
+        "growthBytes": 317474.3999999985
+      },
+      "remainingOwners": [],
+      "accumulated": [],
+      "selfSize": {
+        "6": 45688718,
+        "20": 46346958,
+        "perCycle": 47017.142857142855,
+        "codePerCycle": 36290,
+        "otherPerCycle": 10727.142857142857
+      },
+      "shaderSources": {
+        "6": {
+          "strings": 83,
+          "names": [
+            "BARREL_FS",
+            "BLOOM_FS",
+            "BLUR_HIGH_FS",
+            "BLUR_LOW_FS",
+            "BLUR_MED_FS",
+            "BOKEH_FS",
+            "CIRCLE_FS",
+            "DISPLACEMENT_FS",
+            "GLOW_FS",
+            "GRADIENT_FS",
+            "PHASER_ADD_BLEND_FS",
+            "PHASER_ADD_BLEND_FS\",",
+            "PHASER_BITMAP_MASK_FS",
+            "PHASER_BITMAP_MASK_VS",
+            "PHASER_COLORMATRIX_FS",
+            "PHASER_COPY_FS",
+            "PHASER_LIGHT_FS",
+            "PHASER_LINEAR_BLEND_FS",
+            "PHASER_MESH_FS",
+            "PHASER_MESH_VS",
+            "PHASER_MOBILE_FS",
+            "PHASER_MOBILE_VS",
+            "PHASER_MULTI_FS",
+            "PHASER_MULTI_VS",
+            "PHASER_POINTLIGHT_FS",
+            "PHASER_POINTLIGHT_VS",
+            "PHASER_POSTFX_FS",
+            "PHASER_QUAD_VS",
+            "PHASER_SINGLE_FS",
+            "PHASER_SINGLE_VS",
+            "PIXELATE_FS",
+            "SHADOW_FS",
+            "SHINE_FS",
+            "VIGNETTE_FS",
+            "WIPE_FS",
+            "batch-vertex",
+            "big-triangle-vertex",
+            "graphics-fragment",
+            "graphics-vertex",
+            "tiling-sprite-shader-vertex"
+          ]
+        },
+        "20": {
+          "strings": 83,
+          "names": [
+            "BARREL_FS",
+            "BLOOM_FS",
+            "BLUR_HIGH_FS",
+            "BLUR_LOW_FS",
+            "BLUR_MED_FS",
+            "BOKEH_FS",
+            "CIRCLE_FS",
+            "DISPLACEMENT_FS",
+            "GLOW_FS",
+            "GRADIENT_FS",
+            "PHASER_ADD_BLEND_FS",
+            "PHASER_ADD_BLEND_FS\",",
+            "PHASER_BITMAP_MASK_FS",
+            "PHASER_BITMAP_MASK_VS",
+            "PHASER_COLORMATRIX_FS",
+            "PHASER_COPY_FS",
+            "PHASER_LIGHT_FS",
+            "PHASER_LINEAR_BLEND_FS",
+            "PHASER_MESH_FS",
+            "PHASER_MESH_VS",
+            "PHASER_MOBILE_FS",
+            "PHASER_MOBILE_VS",
+            "PHASER_MULTI_FS",
+            "PHASER_MULTI_VS",
+            "PHASER_POINTLIGHT_FS",
+            "PHASER_POINTLIGHT_VS",
+            "PHASER_POSTFX_FS",
+            "PHASER_QUAD_VS",
+            "PHASER_SINGLE_FS",
+            "PHASER_SINGLE_VS",
+            "PIXELATE_FS",
+            "SHADOW_FS",
+            "SHINE_FS",
+            "VIGNETTE_FS",
+            "WIPE_FS",
+            "batch-vertex",
+            "big-triangle-vertex",
+            "graphics-fragment",
+            "graphics-vertex",
+            "tiling-sprite-shader-vertex"
+          ]
+        }
+      },
+      "memorySignoff": "partial: positive heap trend requires retainer attribution"
+    }
+  ],
+  "historicalSave": "Old coordinates + automatic validation failure proven with player-only valid counterfactual and unchanged bytes; actual historical candidate/write/stack missing. No closure."
+}
