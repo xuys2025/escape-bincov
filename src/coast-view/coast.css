@@ -113,6 +113,8 @@ html[data-coast-sample] #toast { z-index: 120; }
 .cs-split input { width: 3.5em; font: inherit; background: #2b2a26; color: var(--cs-text); border: 1px solid var(--cs-line); padding: 2px 4px; }
 .cs-inv-foot { margin-top: 8px; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; color: var(--cs-muted); }
 .cs-ghost { box-shadow: 0 4px 12px #0008; }
+/* Labels too long for a compact cell (touch, very short screens) use the small system face rather than being cut. */
+.cs-inv-panel .item .item-label.tight { font: 11px/18px "Microsoft YaHei", "PingFang SC", sans-serif; padding: 0; text-align: center; }
 .cs-panel.map { width: min(1000px, calc(100vw - 24px)); }
 .cs-map { display: block; width: 100%; height: auto; max-height: calc(100vh - 180px); object-fit: contain; image-rendering: pixelated; border: 1px solid var(--cs-line); }
 .cs-map-tabs { display: flex; gap: 6px; margin-bottom: 6px; }

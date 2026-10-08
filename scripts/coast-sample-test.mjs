@@ -792,6 +792,105 @@ for (const art of ['sol', 'placeholder']) {
   });
   await context.close();
 }
+{ // Item names in the grid panels: three-character labels (保险管 and the like) show in full at every size.
+  for (const size of [{ w: 1280, h: 720, touch: false }, { w: 1920, h: 1080, touch: false }, { w: 844, h: 390, dpr: 3, touch: true }, { w: 640, h: 300, dpr: 3, touch: true }]) {
+    const { context, page } = await open('?test=1&sample=village', size.touch ? { viewport: { width: 844, height: 390 }, deviceScaleFactor: size.dpr, hasTouch: true, isMobile: true } : { viewport: { width: size.w, height: size.h } });
+    await step(`U11 item labels at ${size.w}x${size.h}: three-character names are not cut (pixel face on desktop, compact face on touch)`, async () => {
+      if (size.touch) {
+        await action(page, 'enter').tap(); await page.locator('#run-world').selectOption('buildings'); await page.locator('#seed').fill('42'); await action(page, 'deploy').tap();
+        await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch); await page.evaluate(() => window.__bincovSample.driver.freezeAI(true));
+        await page.setViewportSize({ width: size.w, height: size.h });
+      } else await deploy(page);
+      await place(page, 640, 456, 0, 'coast'); await frames(page, 4);
+      // Four 1x1 items with three-character labels, added to the empty safe through the real save session.
+      const added = await page.evaluate(() => window.__bincov.saveSession.mutate(() => {
+        window.__bincov.app.loadout.safe.items.push(...[['fuse', 0, 0], ['antidote', 1, 0], ['ammoR', 0, 1], ['strengthDose', 1, 1]].map(([id, x, y]) => ({ uid: `bc-label-${id}`, id, qty: 1, x, y })));
+      }));
+      assert.equal(added, 'committed', await page.evaluate(() => window.__bincov.app.storageError));
+      if (size.touch) await page.locator('.coast-sample [data-bag]').tap(); else await page.keyboard.press('Tab');
+      await page.waitForFunction(() => window.__bincovSample.host.panel === 'inventory'); await frames(page, 4);
+      await page.evaluate(() => document.fonts.ready);
+      const labels = await page.evaluate(() => [...document.querySelectorAll('.coast-sample [data-panel] .item')].map(el => {
+        const l = el.querySelector('.item-label');
+        return { uid: el.dataset.uid, text: l.textContent, tight: l.classList.contains('tight'), font: getComputedStyle(l).fontFamily.split(',')[0], cut: l.scrollWidth > l.clientWidth + 0.5, width: Math.round(el.getBoundingClientRect().width) };
+      }));
+      await page.screenshot({ path: resolve(out, `check-labels-${size.w}x${size.h}.png`) });
+      const fixtures = labels.filter(l => l.uid.startsWith('bc-label-'));
+      assert.equal(fixtures.length, 4, JSON.stringify(labels));
+      for (const l of labels) assert.equal(l.cut, false, `label cut: ${JSON.stringify(l)}`);
+      assert.deepEqual(fixtures.map(l => l.text), ['保险管', '除藻剂', '卡宾弹', '力量针']);
+      for (const l of fixtures) assert.equal(l.tight, size.touch, `${size.touch ? 'compact' : 'pixel'} face expected: ${JSON.stringify(l)}`);
+      await page.keyboard.press('Escape'); await frames(page, 2);
+      return { cell: await page.evaluate(() => Number(document.querySelector('.coast-sample [data-grid]')?.dataset.cell ?? 0)), labels: fixtures };
+    });
+    await context.close();
+  }
+}
+{ // Dragging in the docked panels: the ghost stays under the cursor, above the panel, and the panel never grows a scrollbar.
+  for (const size of [{ w: 1280, h: 720 }, { w: 1920, h: 1080 }]) {
+    const { context, page } = await open('?test=1&sample=village', { viewport: { width: size.w, height: size.h } });
+    await step(`U12 drag at ${size.w}x${size.h}: the ghost follows the cursor above the panel, the docked panel never scrolls, closing mid-drag clears it`, async () => {
+      await deploy(page);
+      const watch = () => page.evaluate(() => {
+        const p = document.querySelector('.coast-sample [data-panel]'), g = document.querySelector('.cs-ghost');
+        let ghost = null, onTop = false;
+        if (g) {
+          // Hit-test a point just inside the ghost with its pointer events briefly on: true when nothing is drawn above it.
+          const r = g.getBoundingClientRect(); ghost = { left: r.left, top: r.top };
+          g.style.pointerEvents = 'auto'; const hit = document.elementFromPoint(r.left + 4, r.top + 4); g.style.pointerEvents = 'none';
+          onTop = !!hit && g.contains(hit);
+        }
+        return { scroll: [p.scrollWidth - p.clientWidth, p.scrollHeight - p.clientHeight], ghost, onTop, inPanel: !!g && p.contains(g) };
+      });
+      const results = [];
+      for (const mode of ['inventory', 'loot']) {
+        if (mode === 'inventory') { await place(page, 640, 456, 0, 'coast'); await frames(page, 4); await page.keyboard.press('Tab'); }
+        else {
+          const crate = await page.evaluate(() => { const f = window.__bincovSample.host.lastBatch.frame; return f.containers.filter(c => c.kind === 'crate' && c.stacks > 0 && c.regionId === null).sort((a, b) => Math.hypot(a.x - 640, a.y - 456) - Math.hypot(b.x - 640, b.y - 456))[0]; });
+          await place(page, crate.x - 24, crate.y, 0, 'coast'); await frames(page, 6); await page.keyboard.press('e');
+        }
+        await page.waitForFunction(m => window.__bincovSample.host.panel === m, mode); await frames(page, 4);
+        const item = page.locator('.coast-sample [data-panel] .item[data-uid]').first(), box = await item.boundingBox();
+        const grab = { x: box.x + 10, y: box.y + 12 };
+        await page.mouse.move(grab.x, grab.y); await page.mouse.down();
+        const before = await watch(), path = [];
+        // Sweep toward the right edge and the bottom of the screen, where the old ghost overflowed the panel.
+        for (const [x, y] of [[grab.x + 40, grab.y + 10], [size.w - 30, grab.y], [size.w - 20, size.h - 20], [grab.x + 120, size.h - 40]]) {
+          await page.mouse.move(x, y, { steps: 6 }); await frames(page, 2);
+          const s = await watch(); path.push({ x, y, ...s });
+          if (path.length === 1) await page.screenshot({ path: resolve(out, `check-drag-mid-${mode}-${size.w}x${size.h}.png`) });
+        }
+        // Released below the grids (no drop target): nothing moves, the ghost goes away.
+        await page.mouse.up(); await frames(page, 4);
+        await page.screenshot({ path: resolve(out, `check-drag-${mode}-${size.w}x${size.h}.png`) });
+        for (const s of [before, ...path]) assert.deepEqual(s.scroll.map(v => v > 0), [false, false], `${mode}: panel overflow while dragging ${JSON.stringify(s)}`);
+        for (const s of path) {
+          assert.ok(s.ghost && !s.inPanel && s.onTop, `${mode}: ghost exists outside the panel and is drawn on top ${JSON.stringify(s)}`);
+          assert.ok(Math.abs(s.ghost.left - (s.x - 10)) <= 1.5 && Math.abs(s.ghost.top - (s.y - 12)) <= 1.5, `${mode}: ghost under the cursor ${JSON.stringify(s)}`);
+        }
+        assert.equal(await page.evaluate(() => document.querySelectorAll('.cs-ghost').length), 0, 'ghost removed after the drop');
+        await page.keyboard.press('Escape'); await frames(page, 4);
+        results.push({ mode, steps: path.length, lastGhost: path.at(-1).ghost });
+      }
+      // The ghost no longer lives in the panel, so closing the panel mid-drag has to take it away: Tab, and a blur pause.
+      const ghosts = () => page.evaluate(() => document.querySelectorAll('.cs-ghost').length);
+      for (const how of ['tab', 'blur']) {
+        await page.keyboard.press('Tab'); await page.waitForFunction(() => window.__bincovSample.host.panel === 'inventory'); await frames(page, 4);
+        const box = await page.locator('.coast-sample [data-panel] .item[data-uid]').first().boundingBox();
+        await page.mouse.move(box.x + 10, box.y + 12); await page.mouse.down(); await page.mouse.move(box.x + 60, box.y + 40, { steps: 6 }); await frames(page, 2);
+        assert.equal(await ghosts(), 1, `${how}: dragging`);
+        if (how === 'tab') await page.keyboard.press('Tab'); else await page.evaluate(() => window.dispatchEvent(new Event('blur')));
+        await page.waitForFunction(p => window.__bincovSample.host.panel === p, how === 'tab' ? null : 'pause'); await frames(page, 2);
+        assert.equal(await ghosts(), 0, `${how}: ghost removed with the panel`);
+        await page.mouse.up(); await frames(page, 2);
+        if (how === 'blur') { await page.keyboard.press('Escape'); await page.waitForFunction(() => window.__bincovSample.host.panel === null); }
+        results.push({ closedMidDrag: how, ghosts: await ghosts() });
+      }
+      return results;
+    });
+    await context.close();
+  }
+}
 { // Short and small screens: map labels never overlap, every exit stays labelled, the map uses the panel height
   for (const size of [{ w: 640, h: 300, dpr: 3, touch: true }, { w: 844, h: 390, dpr: 3, touch: true }, { w: 1280, h: 720, dpr: 1, touch: false }]) {
     const { context, page } = await open('?test=1&sample=village', size.touch ? { viewport: { width: 844, height: 390 }, deviceScaleFactor: size.dpr, hasTouch: true, isMobile: true } : {});

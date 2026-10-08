@@ -18,6 +18,11 @@ import { itemArtwork } from '../ui';
 const SUPPLIES = new Set(['bandage', 'medkit', 'antidote', 'water', 'food', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckySachet', 'unluckySachet']);
 const esc = (s: string) => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
 type Source = 'container' | 'bag' | 'safe';
+/**
+ * Whether a label fits on one line in the pixel face (16 px per CJK character, 8 per ASCII) inside an item box of
+ * `width` px: the box loses 2 px of border and the label 2 px of padding.
+ */
+export const labelFits = (label: string, width: number) => [...label].reduce((n, c) => n + (c.charCodeAt(0) > 255 ? 16 : 8), 0) <= width - 4;
 const LABEL: Record<Source, string> = { container: '来源', bag: '背包', safe: '安全箱' };
 
 export interface InventoryHost {
@@ -46,10 +51,15 @@ export class InventoryPanel {
 
   constructor(private el: HTMLElement, private host: InventoryHost) {}
 
-  open(mode: 'inventory' | 'loot') { this.mode = mode; this.selected = null; this.placement = null; this.status = ''; this.render(); }
+  open(mode: 'inventory' | 'loot') { this.cancelDrag(); this.mode = mode; this.selected = null; this.placement = null; this.status = ''; this.render(); }
   closeTransient() { this.cancelDrag(); this.selected = null; this.placement = null; }
 
-  private cell() { return this.host.touch() || innerHeight < 700 ? 36 : 44; }
+  /**
+   * Grid cell in CSS px. Desktop uses the base UI's 54, where a three-character label (the fuse, carbine rounds) fits the
+   * pixel face at its native 16 px. Touch and very short screens stay compact; there a label that would not fit takes the
+   * small system face instead of being cut to its first character (see `labelFits`).
+   */
+  private cell() { return this.host.touch() ? 40 : innerHeight < 600 ? 44 : 54; }
   private inv(source: Source): D.Inventory | null {
     if (source === 'container') { const ref = this.host.lootRef(); return ref ? this.host.services.lootInventory(ref) : null; }
     return this.host.session.loadout?.[source] ?? null;
@@ -84,7 +94,7 @@ export class InventoryPanel {
     const cell = this.cell(), sel = this.selected;
     const items = inv.items.map(i => {
       const d = D.ITEMS[i.id], size = D.itemSize(i), on = sel?.uid === i.uid && sel.source === source;
-      return `<div tabindex="0" role="button" aria-label="${esc(d.name)} × ${i.qty}" aria-pressed="${on}" title="${esc(d.name)} × ${i.qty} · ${(d.weight * i.qty).toFixed(2)} kg" data-uid="${i.uid}" data-source="${source}" data-kind="${d.kind}" class="item ${on ? 'selected' : ''}" style="left:${i.x * cell + 1}px;top:${i.y * cell + 1}px;width:${size.w * cell - 2}px;height:${size.h * cell - 2}px"><span class="inventory-art">${itemArtwork(i.id, size.w * cell - 10, size.h * cell - 27, !!i.rotated)}</span><span class="item-label ${i.relief ? 'relief' : ''}">${esc(d.short || d.name)}</span>${i.qty > 1 ? `<span class="qty">${i.qty}</span>` : ''}</div>`;
+      return `<div tabindex="0" role="button" aria-label="${esc(d.name)} × ${i.qty}" aria-pressed="${on}" title="${esc(d.name)} × ${i.qty} · ${(d.weight * i.qty).toFixed(2)} kg" data-uid="${i.uid}" data-source="${source}" data-kind="${d.kind}" class="item ${on ? 'selected' : ''}" style="left:${i.x * cell + 1}px;top:${i.y * cell + 1}px;width:${size.w * cell - 2}px;height:${size.h * cell - 2}px"><span class="inventory-art">${itemArtwork(i.id, size.w * cell - 10, size.h * cell - 27, !!i.rotated)}</span><span class="item-label ${i.relief ? 'relief' : ''} ${labelFits(d.short || d.name, size.w * cell) ? '' : 'tight'}">${esc(d.short || d.name)}</span>${i.qty > 1 ? `<span class="qty">${i.qty}</span>` : ''}</div>`;
     }).join('');
     return `<div class="grid" data-grid="${source}" data-cell="${cell}" style="width:${inv.w * cell}px;height:${inv.h * cell}px;--cell:${cell}px">${items}${this.placementCells(inv, source, cell)}${inv.items.length ? '' : '<div class="empty-hint">暂无物品</div>'}</div>`;
   }
@@ -198,6 +208,8 @@ export class InventoryPanel {
     const item = (e.target as HTMLElement).closest<HTMLElement>('.item[data-uid]'); if (!item) return;
     const r = item.getBoundingClientRect(), src = item.dataset.source as Source, it = this.inv(src)?.items.find(i => i.uid === item.dataset.uid);
     if (!it) return;
+    // A drag whose release never arrived must not leave its ghost behind on the sample root.
+    this.cancelDrag();
     this.drag = { uid: it.uid, source: src, startX: e.clientX, startY: e.clientY, grabX: e.clientX - r.left, grabY: e.clientY - r.top, rotated: !!it.rotated, active: false, ghost: null, pointerId: e.pointerId };
   }
   pointerMove(e: PointerEvent) {
@@ -231,7 +243,10 @@ export class InventoryPanel {
     g.className = 'item cs-ghost'; g.dataset.kind = D.ITEMS[it.id].kind;
     g.style.cssText = `position:fixed;left:0;top:0;width:${size.w * cell - 2}px;height:${size.h * cell - 2}px;pointer-events:none;z-index:200;opacity:.85`;
     g.innerHTML = `<span class="inventory-art">${itemArtwork(it.id, size.w * cell - 10, size.h * cell - 27, d.rotated)}</span>`;
-    this.el.appendChild(g); d.ghost = g;
+    // Not inside the panel: the docked panel is centred with a transform, which makes it the containing block of a fixed
+    // child, so the ghost landed off the cursor and its overflow gave the panel a scrollbar. The sample root is fixed and
+    // untransformed, and a re-render of the panel mid-drag no longer wipes the ghost.
+    (this.el.closest('.coast-sample') ?? document.body).appendChild(g); d.ghost = g;
   }
   private moveGhost(cx: number, cy: number) {
     const d = this.drag!; if (!d.ghost) return;
