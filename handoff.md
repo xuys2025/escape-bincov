@@ -8,6 +8,33 @@
 - **玩家完整倒地不在本次签收范围**，OPUS-DEATH-02仍待排期；本轮未跑可选玩家探针。F20仍PARTIAL，本轮未重采样，前轮不同口径和未归因增长全部保留；ASTRA-SAVE-01仍UNCONFIRMED。
 - 仅交付签收文档与证据，本地提交后停止；未扩量、未修改前端方案、未推送/合并/发布。真机、真人、十分钟自然计时、旧构建对照及当前本地提交远端CI未运行。
 
+## 2026-10-08 · PR #22 Opus 第五轮：真人试玩整改，等待用户试玩
+
+在原分支从 `05aaee6` 接手，工作区干净；main 仍为 841e8bb，已在分支中；PR #22 OPEN，头 878f563。见[报告](docs/coast-sample-view/opus-playtest-20261008/README.md)、[整改前后对比](docs/coast-sample-view/opus-playtest-20261008/evidence/compare/)、[Sol 第二批图片规格](docs/coast-sample-view/opus-playtest-20261008/sol-art-requests.md)。
+
+- 试玩入口：双击 `城中村试玩.html`，进入水产站，种子留空出击。出生点固定在已制作的城中村街口，撤离点含北线检查口。这只是挑种子，规则和存档不变；普通入口不变。
+- 前端整改：
+  - 地面物品改用物品图标；
+  - 运行时袖管连接武器手套（玩家颜色取自 Sol 夹克）；
+  - Sol 墙顶亮度 124 降到约 66；
+  - 混凝土地面纹理；
+  - 玩家淡描边；
+  - 状态卡、武器卡和按键条加底板；
+  - 搜刮和背包面板贴底停靠，镜头抬起玩家；
+  - 修复撤离圆弧的多余线段。
+- 验证：
+  - 224 单测、package（HTML `fac0ad28…`）、样板 37/37（新增 V05，对旧构建失败）；
+  - 跳转页 3 次无测试接口出击均落在城中村；
+  - `coast-playtest.mjs` 真实键鼠全流程到结算页，种子留空、1280、1920 各 1 次；
+  - 68 张截图、Sol visual、生命周期两尺寸 4/4；
+  - browser、portable、ui、save-browser、desktop-input、mobile、mobile-ux、qol、loot 均通过；
+  - 其余 11 套未运行。
+- 待办：
+  - Sol：P1 敌人身体，P2 持握武器，P3 尸体和南北向门窗，P4 地面；
+  - Astra：ASTRA-SPAWN-01（正式出生点是否偏向已制作区域）、ASTRA-RANGE-01（射程超出画面纵向半高）、OPUS-DEATH-02；
+  - F20 PARTIAL 和 ASTRA-SAVE-01 不变。
+- 仅本地提交；不扩展全沿海，不推送、合并或发布。
+
 ## 2026-10-08 · PR #22 Opus 修 OPUS-DEATH-01，交 Sol 定向复验后停止
 
 在原分支 `docs/coast-2-5d-art-design` 从 `81e1bd0` 接手，工作区干净；main 仍为 841e8bb，已包含在分支中；PR #22 OPEN，头 878f563。见[报告与 Sol 定向复验说明](docs/coast-sample-view/opus-death-20261008/README.md)。

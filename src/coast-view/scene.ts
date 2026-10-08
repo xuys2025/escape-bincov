@@ -2,6 +2,7 @@ import { Application, Container, Graphics, RenderTexture, Sprite, type Texture }
 import { worldKeyString, type ActorKind, type ActorView, type MapDef, type Point, type PublishedView, type Rect, type StampedEvent, type ViewFrame } from '../raid-runtime/contract';
 import { SAMPLE_AREA, hasRoof, isRuined, materials, regionLamps, storeys } from './appearance';
 import { paintGround } from './art/ground';
+import { LOOT_FOOT, LOOT_H } from './art/props';
 import { solWall, type SolArt } from './art/sol';
 import { LOW_H, ROOF_MARGIN, STOREY_H, WALL_H, paintCanopy, paintCeiling, paintDownpipe, paintLintel, paintLow, paintRoof, paintStairs, paintWall, paintWallAC, wallKey, type WallSpec } from './art/structures';
 import { Fx } from './fx';
@@ -29,6 +30,10 @@ interface Occluder {
 }
 interface ActorGfx {
   kind: ActorKind; body: Sprite; weapon: Sprite; flash: Sprite; rim: Sprite; wrim: Sprite; shadow: Sprite; corpse: Sprite | null; corpseKey: string;
+  /** Trigger and support sleeves from the shoulders to the hands painted on the held weapon. */
+  arms: [Sprite, Sprite];
+  /** Player only: faint warm outline so the player separates from dark asphalt (not the occlusion rim). */
+  edge: Sprite | null;
   walk: number; dir: number; flashT: number; deathT: number; kick: Point; kickT: number; seen: boolean; swingT: number;
 }
 
@@ -89,6 +94,8 @@ export class CoastView {
   shake = 0;
   onRebuild?: (reason: 'enter' | 'epoch' | 'map') => void;
   hudTop = 0;
+  /** CSS px covered by a bottom-docked panel; the camera centres the player in the band above it. */
+  panelInset = 0;
 
   constructor(private app: Application, public opts: ViewOptions) {
     try {
@@ -387,10 +394,12 @@ export class CoastView {
     if (fell && g && !g.corpse && g.deathT === 0 && shown) g.deathT = .0001;
     if (!g) {
       const mk = () => { const s = new Sprite(); s.anchor.set(.5, 1); return s; };
+      const arm = () => { const s = new Sprite(this.tex.arm(a.kind)); s.anchor.set(0, .5); return s; };
       g = { kind: a.kind, body: mk(), weapon: new Sprite(), flash: mk(), rim: new Sprite(), wrim: new Sprite(), shadow: new Sprite(this.tex.blob(20, 7)), corpse: null, corpseKey: '',
-        walk: 0, dir: dirOf(a.aim), flashT: 0, deathT: 0, kick: { x: 0, y: 0 }, kickT: 0, seen: false, swingT: 0 };
+        arms: [arm(), arm()], edge: a.kind === 'player' ? new Sprite() : null, walk: 0, dir: dirOf(a.aim), flashT: 0, deathT: 0, kick: { x: 0, y: 0 }, kickT: 0, seen: false, swingT: 0 };
       g.flash.blendMode = 'add'; g.rim.anchor.set(.5, (48 + 1) / 50); g.shadow.anchor.set(.5);
-      this.sorted.addChild(g.body, g.weapon, g.flash); this.xray.addChild(g.rim, g.wrim); this.shadows.addChild(g.shadow);
+      this.sorted.addChild(g.body, ...g.arms, g.weapon, g.flash); this.xray.addChild(g.rim, g.wrim);
+      if (g.edge) { g.edge.anchor.set(.5, (48 + 1) / 50); g.edge.tint = 0xf3dfa8; g.edge.alpha = .38; this.sorted.addChild(g.edge); } this.shadows.addChild(g.shadow);
       this.actors.set(a.uid, g);
     }
     g.kind = a.kind;
@@ -404,7 +413,8 @@ export class CoastView {
     const dead = !a.alive && !dying;
     const kx = g.kickT > 0 ? g.kick.x : 0, ky = g.kickT > 0 ? g.kick.y : 0;
     const x = Math.round(a.x + kx), y = Math.round(a.y + ky);
-    for (const s of [g.body, g.weapon, g.flash, g.shadow]) s.visible = shown && !dead;
+    for (const s of [g.body, g.weapon, g.flash, g.shadow, ...g.arms]) s.visible = shown && !dead;
+    if (g.edge) g.edge.visible = shown && !dead;
     g.seen = shown;
     if (dead) {
       const facing = corpseFacing(a), key = `corpse:${a.kind}:${facing}`;
@@ -426,6 +436,7 @@ export class CoastView {
     const fall = dying ? Math.min(1, g.deathT / FALL_T) : 0, side = dying ? corpseFacing(a) : 0, tilt = side * 1.25 * fall;
     const bx = x - Math.round(side * FALL_SLIDE * fall), by = y + Math.round(4 * fall);
     g.body.texture = this.tex.actor(a.kind, g.dir, frame); g.body.position.set(bx, by); g.body.zIndex = a.y; g.body.rotation = tilt;
+    if (g.edge) { g.edge.texture = this.tex.actorEdge(a.kind, g.dir, frame); g.edge.position.set(bx, by + 1); g.edge.rotation = tilt; g.edge.zIndex = a.y - .002; }
     g.flash.texture = this.tex.actorFlash(a.kind, g.dir, frame); g.flash.position.set(bx, by); g.flash.zIndex = a.y + .01; g.flash.visible = shown && g.flashT > 0; g.flash.alpha = .5; g.flash.rotation = tilt;
     g.shadow.position.set(x + 2, y - 1);
     g.rim.texture = this.tex.actorRim(a.kind, g.dir, frame); g.rim.position.set(x, y + 1); g.rim.tint = a.kind === 'player' ? 0xf0dca0 : 0xe07a5a;
@@ -438,10 +449,33 @@ export class CoastView {
     g.weapon.rotation = angle; g.weapon.scale.set(heldLength(angle), Math.cos(a.aim) < 0 ? -1 : 1);
     g.weapon.zIndex = a.y + (Math.sin(a.aim) < -.35 ? -.05 : .05);
     g.weapon.visible = shown && a.weapon !== 'claw' && !dying;
+    this.syncArms(g, a, art, angle, kx, ky);
     g.wrim.texture = art.rim; g.wrim.anchor.set((art.pivotX + 1) / (art.canvas.width + 2), (art.pivotY + 1) / (art.canvas.height + 2));
     g.wrim.position.copyFrom(g.weapon.position); g.wrim.rotation = g.weapon.rotation; g.wrim.scale.copyFrom(g.weapon.scale); g.wrim.tint = g.rim.tint;
   }
-  private dropActor(g: ActorGfx) { for (const s of [g.body, g.weapon, g.flash, g.rim, g.wrim, g.shadow, g.corpse]) s?.destroy(); }
+  /**
+   * Shoulders sit 7 px above the aim plane and spread across the body as the actor turns toward or away from the camera
+   * (the character's right is (-sin, cos) of the aim). The trigger arm reaches the grip pivot, the support arm the fore
+   * grip along the barrel (or the same grip for a two-handed pistol); one-handed melee leaves the support arm down.
+   */
+  private syncArms(g: ActorGfx, a: ActorView, art: { support?: number; oneHanded?: boolean }, angle: number, kx: number, ky: number) {
+    const on = g.weapon.visible;
+    const c = Math.cos(angle), s = Math.sin(angle), hl = heldLength(angle);
+    const gx = g.weapon.x, gy = g.weapon.y;
+    const sx = a.x + kx + Math.cos(a.aim) * 1.5, sy = a.y + ky - AIM_H - 7;
+    const rx = -Math.sin(a.aim) * 4, ry = Math.cos(a.aim) * 1.5;
+    const reach = (arm: Sprite, x0: number, y0: number, x1: number, y1: number) => {
+      const dx = x1 - x0, dy = y1 - y0, len = Math.hypot(dx, dy);
+      arm.visible = on && len > 1; arm.position.set(Math.round(x0), Math.round(y0)); arm.rotation = Math.atan2(dy, dx); arm.scale.set(len, 1);
+    };
+    const support = art.support ?? 0;
+    reach(g.arms[0], sx + rx, sy + ry, gx, gy);
+    if (art.oneHanded) reach(g.arms[1], sx - rx, sy - ry, sx - rx + c * 2, sy - ry + 9);
+    else reach(g.arms[1], sx - rx, sy - ry, gx + c * support * hl + c, gy + s * support * hl + s);
+    // Arms share the weapon's depth, just under it so the painted gloves cover the sleeve ends.
+    for (const arm of g.arms) { arm.zIndex = g.weapon.zIndex - .001; arm.tint = g.weapon.tint; }
+  }
+  private dropActor(g: ActorGfx) { for (const s of [g.body, g.weapon, g.flash, g.rim, g.wrim, g.shadow, g.corpse, g.edge, ...g.arms]) s?.destroy(); }
 
   private syncCrates(f: ViewFrame, visible: (r: string | null) => boolean) {
     const seen = new Set<string>();
@@ -465,7 +499,7 @@ export class CoastView {
     for (const l of f.loot) {
       seen.add(l.uid);
       let s = this.loot.get(l.uid);
-      if (!s) { s = new Sprite(this.tex.loot(l.item)); s.anchor.set(.5, 11 / 14); s.position.set(Math.round(l.x), Math.round(l.y)); this.flat.addChild(s); this.loot.set(l.uid, s); }
+      if (!s) { s = new Sprite(this.tex.loot(l.item)); s.anchor.set(.5, s.texture.height === LOOT_H ? LOOT_FOOT / LOOT_H : 11 / 14); s.position.set(Math.round(l.x), Math.round(l.y)); this.flat.addChild(s); this.loot.set(l.uid, s); }
       s.visible = visible(l.regionId);
       s.tint = (this.time % 2) < .12 ? 0xffffff : 0xe8e2d4;
     }
@@ -497,7 +531,8 @@ export class CoastView {
     const ex = this.map!.exits.find(x => x.id === t.ref.id); if (!ex) return;
     const p = Math.min(1, t.hold.progress / t.hold.required);
     g.circle(ex.at.x, ex.at.y, 40).stroke({ width: 2, color: 0x2b3322, alpha: .8 });
-    if (p > 0) g.arc(ex.at.x, ex.at.y, 40, -Math.PI / 2, -Math.PI / 2 + p * Math.PI * 2).stroke({ width: 3, color: 0xd6ec9a, alpha: 1 });
+    // Start the arc at its own first point: Pixi joins an arc to the current pen position (the world origin here).
+    if (p > 0) g.moveTo(ex.at.x, ex.at.y - 40).arc(ex.at.x, ex.at.y, 40, -Math.PI / 2, -Math.PI / 2 + p * Math.PI * 2).stroke({ width: 3, color: 0xd6ec9a, alpha: 1 });
   }
 
   private updateTall(f: ViewFrame) {
@@ -594,7 +629,7 @@ export class CoastView {
   private camera(f: ViewFrame, dt: number) {
     const p = f.player, precise = p.state.precise ? 1.7 : 1;
     const ax = Math.cos(p.aim) * 48 * precise, ay = Math.sin(p.aim) * 34 * precise;
-    const tx = p.x + ax - this.view.w / 2, ty = p.y - AIM_H + ay - this.view.h / 2;
+    const tx = p.x + ax - this.view.w / 2, ty = p.y - AIM_H + ay - this.view.h / 2 + this.panelInset * this.view.dpr / this.view.s / 2;
     const k = 1 - Math.exp(-dt * 8);
     this.camF.x += (tx - this.camF.x) * k; this.camF.y += (ty - this.camF.y) * k;
     const b = this.map!.bounds, pad = this.map!.key.mapId === 'coast' ? 0 : 96;
@@ -615,7 +650,7 @@ export class CoastView {
     }
     for (const [, g] of this.actors) {
       const tint = this.light.at({ x: g.body.x, y: g.body.y - 2 }, null, rv);
-      g.body.tint = tint; g.weapon.tint = tint; if (g.corpse) g.corpse.tint = tint;
+      g.body.tint = tint; g.weapon.tint = tint; g.arms[0].tint = g.arms[1].tint = tint; if (g.corpse) g.corpse.tint = tint;
     }
     for (const [, c] of this.crates) c.s.tint = this.light.at({ x: c.s.x, y: c.s.y }, null, rv);
     for (const s of this.sorted.children) if ((s as Sprite & { lowLit?: boolean }).lowLit) (s as Sprite).tint = this.light.at({ x: s.x + 16, y: s.y + 40 }, null, rv);

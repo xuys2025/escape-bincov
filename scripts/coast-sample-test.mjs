@@ -474,6 +474,45 @@ const deadGraphics = page => page.evaluate(() => {
 });
 const noFall = (rows, label) => { for (const r of rows) assert.ok(r.deathT === 0 && r.rotation === 0 && !r.body && !r.weapon, `${label}: ${JSON.stringify(r)}`); };
 
+// Playtest readability (round 5): held-weapon arms, recognisable ground loot, the exit hold ring and the docked panels.
+{
+  const { context, page } = await open('?test=1&sample=village');
+  await deploy(page);
+  await step('V05 readability: arms end on the weapon grip, ground loot uses the item icon, the exit ring draws no stray line, docked loot keeps the player in view', async () => {
+    await place(page, 640, 456, 0, 'coast'); await frames(page, 10);
+    // Real pointer aim in four directions; the trigger arm must end on the weapon's grip pivot.
+    const arms = [];
+    for (const t of [0, Math.PI / 2, Math.PI, -Math.PI / 4]) {
+      const at = await page.evaluate(t => { const v = window.__bincovSample.host.view, p = window.__bincovSample.host.lastBatch.frame.player, r = document.querySelector('.coast-sample canvas').getBoundingClientRect();
+        return { x: r.left + (p.x + Math.cos(t) * 120 - v.cam.x) * v.view.s / v.view.dpr, y: r.top + (p.y - 22 + Math.sin(t) * 120 - v.cam.y) * v.view.s / v.view.dpr }; }, t);
+      await page.mouse.move(at.x, at.y); await frames(page, 6);
+      arms.push(await page.evaluate(() => { const v = window.__bincovSample.host.view, g = v.actors.get('player'), a = g.arms[0];
+        return { gap: Math.hypot(a.x + Math.cos(a.rotation) * a.scale.x - g.weapon.x, a.y + Math.sin(a.rotation) * a.scale.x - g.weapon.y), visible: a.visible, weapon: g.weapon.visible, len: a.scale.x }; }));
+    }
+    for (const a of arms) { assert.ok(a.gap < 1.5, `arm reaches the grip: ${JSON.stringify(a)}`); assert.equal(a.visible, a.weapon); }
+    const loot = await page.evaluate(() => { const v = window.__bincovSample.host.view; return [...v.loot.values()].slice(0, 20).map(s => [s.texture.width, s.texture.height]); });
+    assert.ok(loot.length > 0 && loot.every(([w, h]) => w === 28 && h === 27), `ground loot uses the 24 px item icon plate: ${JSON.stringify(loot.slice(0, 3))}`);
+    // Exit hold: the progress ring must stay inside its own circle (no line from the world origin).
+    await place(page, 208, 120, Math.PI / 2, 'coast'); await frames(page, 6);
+    await page.keyboard.down('e'); await wait(900);
+    const ring = await page.evaluate(() => { const v = window.__bincovSample.host.view, b = v.exitG.getLocalBounds(), ex = window.__bincovSample.host.lastBatch.map.exits.find(e => e.id === 'north');
+      return { x: b.x, y: b.y, w: b.width, h: b.height, ex: ex.at, progress: window.__bincovSample.host.lastBatch.frame.interaction?.hold?.progress ?? 0 }; });
+    await page.keyboard.up('e'); await frames(page, 4);
+    assert.ok(ring.progress > 0, 'hold in progress'); assert.ok(ring.w <= 86 && ring.h <= 86 && Math.abs(ring.x + ring.w / 2 - ring.ex.x) < 3, `ring bounds ${JSON.stringify(ring)}`);
+    // Docked loot panel: the player is drawn above the panel's top edge.
+    const crate = await page.evaluate(() => { const f = window.__bincovSample.host.lastBatch.frame; return f.containers.filter(c => c.kind === 'crate' && c.stacks > 0 && c.regionId === null).sort((a, b) => Math.hypot(a.x - 640, a.y - 456) - Math.hypot(b.x - 640, b.y - 456))[0]; });
+    await place(page, crate.x - 24, crate.y, 0, 'coast'); await frames(page, 6);
+    await page.keyboard.press('e'); await page.waitForFunction(() => window.__bincovSample.host.panel === 'loot'); await frames(page, 40);
+    const docked = await page.evaluate(() => { const v = window.__bincovSample.host.view, p = window.__bincovSample.host.lastBatch.frame.player, r = document.querySelector('.coast-sample canvas').getBoundingClientRect();
+      return { playerY: r.top + (p.y - v.cam.y) * v.view.s / v.view.dpr, panelTop: document.querySelector('.coast-sample [data-panel]').getBoundingClientRect().top }; });
+    await page.screenshot({ path: resolve(out, 'check-loot-docked-1280x720.png') });
+    await page.keyboard.press('Escape'); await frames(page, 4);
+    assert.ok(docked.playerY < docked.panelTop - 8, `player visible above the docked panel: ${JSON.stringify(docked)}`);
+    return { arms, loot: loot.length, ring, docked };
+  });
+  await context.close();
+}
+
 // OPUS-DEATH-01: the shared actor path under both art modes. The player's own death is not driven here (see the round report).
 for (const art of ['sol', 'placeholder']) {
   const { context, page } = await open(`?test=1&sample=village${art === 'placeholder' ? '&art=placeholder' : ''}`);

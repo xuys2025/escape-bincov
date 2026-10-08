@@ -21,6 +21,7 @@ import { InputState } from './input';
 import { InventoryPanel } from './inventory';
 import { drawMap, mapPanelHtml, type MapLayout } from './map';
 import { Scope, lifecycle } from './scope';
+import { ITEM_ART_IDS, paintItem, type ItemArtId } from '../art/items';
 
 export interface CoastServices {
   cancelStart(): void;
@@ -47,6 +48,18 @@ const REASONS: Record<string, string> = {
 };
 const esc = (s: string) => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
 const name = (id: string) => D.ITEMS[id]?.name ?? id;
+const weaponIcons = new Map<string, string>();
+/** The game's own 32 px item drawing of the held weapon, shown at 2x in the weapon card. */
+function weaponIcon(id: string): string {
+  let url = weaponIcons.get(id);
+  if (!url) {
+    const c = document.createElement('canvas'); c.width = c.height = 32;
+    const g = c.getContext('2d')!; g.imageSmoothingEnabled = false;
+    if ((ITEM_ART_IDS as readonly string[]).includes(id)) paintItem(g, id as ItemArtId, 32);
+    url = c.toDataURL(); weaponIcons.set(id, url);
+  }
+  return url;
+}
 
 const HTML = `
 <div class="cs-canvas" aria-label="行动画面"></div>
@@ -54,11 +67,11 @@ const HTML = `
   <section class="cs-status">
     <div class="cs-meter"><span>生命</span><div class="cs-bar"><div data-hp></div></div><b data-hp-text></b></div>
     <div class="cs-meter"><span>体力</span><div class="cs-bar thin"><div data-st></div></div><b data-st-text></b></div>
-    <div data-weapon class="cs-weapon"></div>
     <div data-state class="cs-state"></div>
     <div data-where class="cs-where"></div>
   </section>
   <section class="cs-clock"><b data-time></b><small data-tide></small></section>
+  <section class="cs-arms" data-weapon><img data-weapon-icon alt="" width="64" height="64"><div class="cs-arms-text"><span data-weapon-name></span><b data-mag></b><small data-reserve></small></div><div class="cs-heal"><kbd>Q</kbd>医疗 <b data-heals></b></div></section>
   <div data-radio class="cs-radio" hidden></div>
   <section class="cs-info">
     <button type="button" data-do="map" data-exit-nav>选择撤离点</button>
@@ -208,6 +221,7 @@ export class CoastSampleHost {
     if (this.frameTimes.length < 4000) this.frameTimes.push(this.app.ticker.deltaMS);
   }
   private readingFor: string | null = null;
+  private weaponShown = '';
   /** setBlocked(true) was requested but no batch has shown it yet: a panel opened mid-frame must not be closed by that frame's stale phase. */
   private blockPending = 0;
 
@@ -437,7 +451,13 @@ export class CoastSampleHost {
     q('[data-hp]').style.width = `${Math.max(0, h.hp / h.maxHp) * 100}%`; q('[data-hp-text]').textContent = `${Math.ceil(h.hp)} / ${h.maxHp}`;
     q('[data-st]').style.width = `${Math.max(0, h.stamina / h.maxStamina) * 100}%`; q('[data-st-text]').textContent = `${Math.round(h.stamina)}`;
     const w = h.weapon;
-    q('[data-weapon]').textContent = w.magSize ? `${w.name}  ${w.reloading ? '换弹中' : `${w.mag} / ${w.magSize}`}  备用 ${w.reserve} · 医疗 ${h.heals}` : `${w.name} · 医疗 ${h.heals}`;
+    if (w.id !== this.weaponShown) { this.weaponShown = w.id; q<HTMLImageElement>('[data-weapon-icon]').src = weaponIcon(w.id); q('[data-weapon-name]').textContent = w.name; }
+    q('[data-mag]').textContent = !w.magSize ? '近战' : w.reloading ? '换弹中' : `${w.mag} / ${w.magSize}`;
+    q('[data-reserve]').textContent = w.magSize ? `备用 ${w.reserve}` : '';
+    q('[data-weapon]').classList.toggle('empty', !!w.magSize && w.mag === 0 && !w.reloading);
+    q('[data-weapon]').classList.toggle('reloading', w.reloading);
+    q('[data-heals]').textContent = String(h.heals);
+    q('.cs-status').classList.toggle('low', h.hp / h.maxHp < .35);
     if ((this.stats.frames & 7) === 0) this.slowHud(b);
     const region = this.view.regionName();
     q('[data-where]').textContent = `${b.map.name} · ${b.map.floor}${region ? ` · ${region}` : ''}${this.view.outsideSample() ? ' · 样板外（通用占位画面）' : ''}`;
@@ -446,6 +466,7 @@ export class CoastSampleHost {
     q('[data-tide]').textContent = h.tideWarning ? '潮汐预警' : h.highTide ? '高潮' : '';
     q('[data-hits]').innerHTML = h.hitDirections.filter(x => x.angle !== null).map(x => `<i style="transform:rotate(${x.angle!}rad);opacity:${Math.min(1, x.left)}"></i>`).join('');
     if ((this.stats.frames & 15) === 0) { const r = this.q('.cs-status').getBoundingClientRect(); this.view.hudTop = innerHeight < 480 ? r.bottom : 0; }
+    if ((this.stats.frames & 3) === 0) { const docked = this.panel === 'loot' || this.panel === 'inventory'; this.view.panelInset = docked ? Math.max(0, innerHeight - this.q('[data-panel]').getBoundingClientRect().top) : 0; }
     this.prompt(this.panel ? null : f.interaction, f.player.y);
     const cross = q('[data-cross]'); cross.hidden = this.input.touch || !this.input.pointer.inside || !!this.panel;
     cross.style.transform = `translate(${this.input.pointer.x}px, ${this.input.pointer.y}px)`;

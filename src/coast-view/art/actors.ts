@@ -111,23 +111,36 @@ export function paintCorpse(kind: ActorKind, facing: 1 | -1): HTMLCanvasElement 
   return c;
 }
 
-export interface WeaponArt { canvas: HTMLCanvasElement; pivotX: number; pivotY: number; forward: number; muzzle: number }
+/**
+ * One-pixel-long sleeve strip (ink, light, sleeve, ink), stretched and rotated by the view from a shoulder to a hand.
+ * Hands are the gloves already painted on the held weapon art, so the arm just has to reach them.
+ */
+export function paintArm(kind: ActorKind): HTMLCanvasElement {
+  // The player sleeve matches the Sol jacket (olive over dark grey); enemies use their own coat ramps.
+  const [ink, light, base] = kind === 'player' ? ['#242321', '#59604a', '#41443a'] : [P.ink, LOOKS[kind === 'creature' ? 'scav' : kind].coatL, LOOKS[kind === 'creature' ? 'scav' : kind].coat];
+  const { c, g } = canvas(1, 4);
+  rect(g, ink, 0, 0, 1, 1); rect(g, light, 0, 1, 1, 1); rect(g, base, 0, 2, 1, 1); rect(g, ink, 0, 3, 1, 1);
+  return c;
+}
+
+/** `support` is the fore hand's distance along the barrel from the grip pivot (0: one-handed or a two-handed pistol grip). */
+export interface WeaponArt { canvas: HTMLCanvasElement; pivotX: number; pivotY: number; forward: number; muzzle: number; support?: number; oneHanded?: boolean }
 export function paintWeapon(id: string, glove: string): WeaponArt {
   if (id === 'claw') { const { c } = canvas(2, 2); return { canvas: c, pivotX: 0, pivotY: 0, forward: 0, muzzle: 14 }; }
   if (id === 'pistol') {
     const { c, g } = canvas(16, 8);
     rect(g, '#2c2c29', 3, 3, 11, 2); rect(g, '#4a4a45', 3, 3, 11, 1); rect(g, '#2c2c29', 3, 4, 3, 3); rect(g, glove, 2, 4, 3, 3); dot(g, '#6a6a62', 13, 2);
-    outline(c); return { canvas: c, pivotX: 3, pivotY: 4, forward: 8, muzzle: 8 + 12 };
+    outline(c); return { canvas: c, pivotX: 3, pivotY: 4, forward: 8, muzzle: 8 + 12, support: 0 };
   }
   if (id === 'knife') {
     const { c, g } = canvas(16, 7);
     rect(g, glove, 1, 2, 3, 3); rect(g, '#3a2f26', 3, 3, 4, 2); rect(g, '#9aa59f', 7, 3, 7, 1); rect(g, '#c7cfc8', 7, 2, 6, 1); dot(g, '#c7cfc8', 14, 3);
-    outline(c); return { canvas: c, pivotX: 2, pivotY: 3, forward: 6, muzzle: 6 + 12 };
+    outline(c); return { canvas: c, pivotX: 2, pivotY: 3, forward: 6, muzzle: 6 + 12, oneHanded: true };
   }
   if (id === 'club') {
     const { c, g } = canvas(20, 7);
     rect(g, glove, 1, 2, 3, 3); rect(g, '#5d5a52', 3, 3, 15, 2); rect(g, '#77736a', 3, 3, 15, 1); rect(g, P.rust, 15, 2, 4, 4); rect(g, '#5e3f33', 16, 5, 2, 1);
-    outline(c); return { canvas: c, pivotX: 2, pivotY: 3, forward: 4, muzzle: 4 + 17 };
+    outline(c); return { canvas: c, pivotX: 2, pivotY: 3, forward: 4, muzzle: 4 + 17, oneHanded: true };
   }
   if (id === 'shotgun') {
     const { c, g } = canvas(31, 10);
@@ -135,7 +148,7 @@ export function paintWeapon(id: string, glove: string): WeaponArt {
     rect(g, '#33332f', 10, 3, 5, 3); rect(g, '#2b2b28', 15, 3, 13, 1); rect(g, '#2b2b28', 15, 5, 13, 1);
     rect(g, '#4a4a44', 15, 4, 13, 1); rect(g, '#6e5642', 15, 6, 7, 2);
     rect(g, glove, 10, 5, 3, 3); rect(g, glove, 18, 6, 3, 3);
-    outline(c); return { canvas: c, pivotX: 9, pivotY: 4, forward: 0, muzzle: 28 - 9 };
+    outline(c); return { canvas: c, pivotX: 9, pivotY: 4, forward: 0, muzzle: 28 - 9, support: 10 };
   }
   const rifle = id === 'rifle';
   const { c, g } = canvas(31, 10);
@@ -147,7 +160,7 @@ export function paintWeapon(id: string, glove: string): WeaponArt {
   rect(g, glove, 9, 5, 3, 3); rect(g, glove, 19, 4, 3, 3);
   line(g, '#3a3a35', 14, 1, 17, 1);
   outline(c);
-  return { canvas: c, pivotX: 8, pivotY: 4, forward: 0, muzzle: 28 - 8 };
+  return { canvas: c, pivotX: 8, pivotY: 4, forward: 0, muzzle: 28 - 8, support: 12 };
 }
 
 export function paintMuzzle(frame: number): HTMLCanvasElement {

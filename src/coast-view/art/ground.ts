@@ -50,10 +50,15 @@ function tile(g: Ctx, M: GroundMaterial[][], tx: number, ty: number, x: number, 
       break;
     }
     case 'concrete': {
-      rect(g, '#6d685e', x, y, 32, 32);
-      for (let i = 0; i < 6; i++) dot(g, '#625d54', x + Math.floor(h(i) * 32), y + Math.floor(h(i + 9) * 32));
-      if (h(20) < .2) { rect(g, '#5d5850', x + 9, y + 10, 10, 6); rect(g, '#625d54', x + 7, y + 12, 3, 3); }
-      if (tx % 3 === 0) rect(g, '#5d584f', x, y, 1, 32);
+      // Poured slab: 2x2-tile joints, grit, oil stains, hairline cracks and rubble chips, so a large floor is not a flat
+      // grey field (ruined workshops and stores read as used interiors rather than unfinished placeholders).
+      rect(g, '#6b665c', x, y, 32, 32);
+      for (let i = 0; i < 22; i++) dot(g, i % 4 ? '#625d54' : '#77726a', x + Math.floor(h(i) * 32), y + Math.floor(h(i + 9) * 32));
+      if (tx % 2 === 0) { rect(g, '#55514a', x, y, 1, 32); rect(g, '#77726a', x + 1, y, 1, 32); }
+      if (ty % 2 === 0) { rect(g, '#55514a', x, y, 32, 1); rect(g, '#77726a', x, y + 1, 32, 1); }
+      if (h(20) < .22) { const sx = x + 6 + Math.floor(h(21) * 12), sy = y + 6 + Math.floor(h(22) * 12); rect(g, '#5f5a51', sx, sy, 12, 7); rect(g, '#5a554d', sx + 2, sy + 2, 8, 3); rect(g, '#5f5a51', sx - 2, sy + 2, 2, 3); }
+      if (h(23) < .25) { const sx = Math.floor(h(24) * 22) + 5; line(g, '#4f4b44', x + sx, y + 2, x + sx + 5, y + 12); line(g, '#4f4b44', x + sx + 5, y + 12, x + sx + 2, y + 22); }
+      if (h(25) < .3) for (let i = 0; i < 3; i++) { const cx = x + 4 + Math.floor(h(26 + i) * 24), cy = y + 4 + Math.floor(h(30 + i) * 24); rect(g, '#8a8476', cx, cy, 2, 1); dot(g, '#4a463f', cx, cy + 1); }
       break;
     }
     case 'wood': {

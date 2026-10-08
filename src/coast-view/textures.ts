@@ -1,8 +1,8 @@
 import type { Texture } from 'pixi.js';
 import type { ActorKind } from '../raid-runtime/contract';
 import { Atlas } from './atlas';
-import { WALK_FRAMES, paintActorFrame, paintCorpse, paintMuzzle, paintWeapon, type WeaponArt } from './art/actors';
-import { dithered, rim, silhouette } from './art/paint';
+import { WALK_FRAMES, paintActorFrame, paintArm, paintCorpse, paintMuzzle, paintWeapon, type WeaponArt } from './art/actors';
+import { dithered, edge, rim, silhouette } from './art/paint';
 import { blob, paintCrate, paintExitDecal, paintLoot, pixel } from './art/props';
 import { solPlayerFrame, solWeapon, type SolArt } from './art/sol';
 
@@ -36,10 +36,15 @@ export class Textures {
     const base = `actor:${kind}:${dir}:${frame}`; this.actor(kind, dir, frame);
     return this.ensure(`${base}|white`, () => silhouette(this.canvas(base)));
   }
+  actorEdge(kind: ActorKind, dir: number, frame: number): Texture {
+    const base = `actor:${kind}:${dir}:${frame}`; this.actor(kind, dir, frame);
+    return this.ensure(`${base}|edge`, () => edge(this.canvas(base)));
+  }
   actorRim(kind: ActorKind, dir: number, frame: number): Texture {
     const base = `actor:${kind}:${dir}:${frame}`; this.actor(kind, dir, frame);
     return this.ensure(`${base}|rim`, () => rim(this.canvas(base)));
   }
+  arm(kind: ActorKind): Texture { return this.ensure(`arm:${kind}`, () => paintArm(kind)); }
   corpse(kind: ActorKind, facing: 1 | -1): Texture { return this.ensure(`corpse:${kind}:${facing}`, () => paintCorpse(kind, facing)); }
 
   weapon(id: string, kind: ActorKind): WeaponArt & { texture: Texture; rim: Texture } {

@@ -33,7 +33,7 @@ export function solWeapon(art: SolArt, weapon: string) {
   const src = weapon === 'carbine' ? get(art, 'weapon-carbine-held') : null;
   if (!src) return null;
   const { c, g } = canvas(src.width, src.height); g.drawImage(src, 0, 0);
-  return { canvas: c, pivotX: 8, pivotY: 4, forward: 0, muzzle: 28 - 8 };
+  return { canvas: c, pivotX: 8, pivotY: 4, forward: 0, muzzle: 28 - 8, support: 12 };
 }
 
 /**
@@ -48,6 +48,9 @@ export function solWall(art: SolArt, s: WallSpec): HTMLCanvasElement | null {
   if (!core || !front) return null;
   const { c, g } = canvas(32, 32 + WALL_H);
   g.drawImage(core, 0, 0);
+  // Wall tops must read darker than every floor (asphalt ~60, yard ~90, tile ~109), or a one-tile wall looks like a
+  // walkable slab. The sample's texture is kept; only its value drops (124 -> ~66), so the edge strips become the rim.
+  g.globalCompositeOperation = 'multiply'; rect(g, '#8a8780', 0, 0, 32, 32); g.globalCompositeOperation = 'source-over';
   const edge = (name: string, x: number, y: number) => { const e = get(art, name); if (e) g.drawImage(e, x, y); };
   if (!s.n) edge('wall-edge-n', 0, 0);
   if (!s.s) edge('wall-edge-s', 0, 29);

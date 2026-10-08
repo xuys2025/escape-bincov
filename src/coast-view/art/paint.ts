@@ -96,6 +96,20 @@ export function rim(src: HTMLCanvasElement): HTMLCanvasElement {
   return c;
 }
 
+/** Outline-only copy: the transparent pixels touching the silhouette, one pixel wide (for a faint readability edge). */
+export function edge(src: HTMLCanvasElement): HTMLCanvasElement {
+  const { c, g } = canvas(src.width + 2, src.height + 2);
+  g.drawImage(src, 1, 1);
+  const img = g.getImageData(0, 0, c.width, c.height), d = img.data, out = new Uint8ClampedArray(d.length);
+  const solid = (x: number, y: number) => x >= 0 && y >= 0 && x < c.width && y < c.height && d[(y * c.width + x) * 4 + 3] > 10;
+  for (let y = 0; y < c.height; y++) for (let x = 0; x < c.width; x++) {
+    if (solid(x, y) || !(solid(x - 1, y) || solid(x + 1, y) || solid(x, y - 1) || solid(x, y + 1))) continue;
+    const i = (y * c.width + x) * 4; out[i] = out[i + 1] = out[i + 2] = out[i + 3] = 255;
+  }
+  g.putImageData(new ImageData(out, c.width, c.height), 0, 0);
+  return c;
+}
+
 export function radialLight(radius: number, steps = 6, color = '#ffffff'): HTMLCanvasElement {
   const size = radius * 2, { c, g } = canvas(size, size), [r, gg, b] = hex(color);
   const img = g.createImageData(size, size), d = img.data;

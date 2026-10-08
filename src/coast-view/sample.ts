@@ -10,10 +10,26 @@ import { changeState, enterExternalRun, exportSave, toast } from '../ui';
 import { CoastSampleHost, gpuTextures, type CoastHandle } from './host';
 import { CoastView, type ViewOptions } from './scene';
 import { lifecycle } from './scope';
+import { SAMPLE_AREA } from './appearance';
+import { generateRunBase } from '../world';
 
 const params = () => new URLSearchParams(location.search);
 export const sampleEnabled = () => params().get('sample') === 'village';
 export const sampleSupports = () => app.expansion?.raid?.worldVersion === 'coast-buildings-v1';
+
+/**
+ * Playtest deploy with an empty seed field: take the first seed from the clock whose spawn lies in the dressed village
+ * corner and whose two exits include the north checkpoint there, so the run starts in the finished area. This is the
+ * same choice as typing that seed; spawn and exit rules are untouched. A typed seed is always used as typed.
+ */
+export function villageSeed(from = Date.now()): number {
+  const inside = (p: { x: number; y: number }) => p.x >= SAMPLE_AREA.x && p.x < SAMPLE_AREA.x + SAMPLE_AREA.w && p.y >= SAMPLE_AREA.y && p.y < SAMPLE_AREA.y + SAMPLE_AREA.h;
+  for (let seed = from; seed < from + 400; seed++) {
+    const run = generateRunBase(seed);
+    if (inside(run.spawn) && run.exits.some(e => e.id === 'north')) return seed;
+  }
+  return from;
+}
 
 let starting = false;
 let testDriver: unknown = null;

@@ -20,7 +20,7 @@ import { criticalChance, useRpgItem } from './rpg';
 import type { ExpansionDraft } from './session';
 import { PIXEL_FONT } from './font';
 import { inventoryArtSize } from './art/inventory';
-import { sampleEnabled, sampleSupports, startCoastSample } from './coast-view/sample';
+import { sampleEnabled, sampleSupports, startCoastSample, villageSeed } from './coast-view/sample';
 type InventoryDrag = { uid: string; source: string; token: number; runId: string | null; containerId: string | null; rotated?: boolean };
 let activeDrag: InventoryDrag | null = null;
 let dragToken = 0;
@@ -201,7 +201,7 @@ function details() {
     return `<aside class="details"><div class="item-heading"><div class="detail-icon">${itemIcon(item.id)}</div><div><div class="section-label">${kindName[d.kind]}</div><h3>${d.name}</h3></div>${playerInput.touch ? btn('关闭详情', 'clear-selection', 'detail-close') : ''}</div><div class="detail-body"><p class="item-description">${itemDescription(item.id)}</p><dl class="item-facts"><div><dt>占用</dt><dd>${size.w} × ${size.h} 格</dd></div><div><dt>重量</dt><dd>${(d.weight * item.qty).toFixed(2)} kg</dd></div><div><dt>数量</dt><dd>${item.qty}</dd></div><div><dt>售价</dt><dd>${item.relief ? '不可出售' : '¥ ' + d.sell * item.qty}</dd></div></dl>${item.relief ? '<p class="small orange">救济物资 · 不可出售</p>' : ''}<div class="item-actions">${actions}${baseActions}${d.w !== d.h ? btn('旋转', 'rotate-item') : ''}${btn('移动格位', 'place-item')}${splitControl(item)}</div></div></aside>`;
 }
 function deploy() {
-    const cfg = app.runWorld === 'mall' ? mallRunConfig(app.seed || Date.now()) : generateRun(app.seed || Date.now());
+    const cfg = app.runWorld === 'mall' ? mallRunConfig(app.seed || Date.now()) : generateRun(app.seed || (sampleEnabled() && app.runWorld === 'buildings' ? villageSeed() : Date.now()));
     if (!saved(saveSession.beginRun(cfg.seed, app.runWorld === 'mall' ? 'mall' : app.runWorld === 'buildings'))) return;
     if (sampleEnabled() && sampleSupports()) { app.shop = null; void startCoastSample(); return; }
     app.shop = null; app.game!.registry.set('runConfig', cfg); changeState('run');

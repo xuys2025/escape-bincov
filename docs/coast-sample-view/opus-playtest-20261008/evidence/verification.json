@@ -1,0 +1,194 @@
+{
+  "at": "2026-10-08T13:55:42.957Z",
+  "baseline": {
+    "head": "05aaee6",
+    "originMain": "841e8bbdfb070eada82537563dd1ab1b4801aea3",
+    "pr22": {
+      "state": "OPEN",
+      "head": "878f5633316a824960091f8f924c0ddd8dd78078"
+    }
+  },
+  "env": {
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "chrome": "154.0.8037.98",
+    "os": "Windows 10.0.19045"
+  },
+  "unit": {
+    "command": "pnpm test",
+    "exit": 0,
+    "tests": 224,
+    "pass": 224
+  },
+  "package": {
+    "command": "pnpm package",
+    "exit": 0
+  },
+  "before": {
+    "dist": "05aaee6 dist/index.html",
+    "sha256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e"
+  },
+  "artifacts": {
+    "dist/index.html": {
+      "bytes": 3153633,
+      "sha256": "fac0ad28ec76c3bff8a4ebc35137444bf02de2b223416073ad23d5685a3a3c6e"
+    },
+    "start the game.html": {
+      "bytes": 3153633,
+      "sha256": "fac0ad28ec76c3bff8a4ebc35137444bf02de2b223416073ad23d5685a3a3c6e"
+    },
+    "release/Escape-Bincov-portable.zip": {
+      "bytes": 1072039,
+      "sha256": "16c387d33a824f351d8ba4dd5da20ad42bfe465effbec9cedb11bb93687f50da"
+    },
+    "release/Escape-Bincov-web.zip": {
+      "bytes": 1068264,
+      "sha256": "51509051b66783eeea32c47070fe60798bf34fb72b9448c3cc83c3edaf6b8fa5"
+    },
+    "城中村试玩.html": {
+      "bytes": 925,
+      "sha256": "d8165fb1d391c7465a04d26833e0b3eecfa3d403a01d793fcce8885a4883776b"
+    }
+  },
+  "sample": {
+    "passed": 37,
+    "failed": 0,
+    "errors": 0,
+    "requests": 0
+  },
+  "runs": [
+    {
+      "name": "sample",
+      "exit": 0,
+      "start": "2026-10-08T21:45:13+08:00",
+      "end": "2026-10-08T21:45:58+08:00",
+      "command": "node scripts/coast-sample-test.mjs"
+    },
+    {
+      "name": "launcher",
+      "exit": 0,
+      "start": "2026-10-08T21:45:58+08:00",
+      "end": "2026-10-08T21:46:08+08:00",
+      "command": "node scripts/coast-launcher-check.mjs"
+    },
+    {
+      "name": "playtest-empty-seed",
+      "exit": 0,
+      "start": "2026-10-08T21:46:08+08:00",
+      "end": "2026-10-08T21:46:45+08:00",
+      "command": "node scripts/coast-playtest.mjs"
+    },
+    {
+      "name": "playtest-1280",
+      "exit": 0,
+      "start": "2026-10-08T21:46:45+08:00",
+      "end": "2026-10-08T21:47:16+08:00",
+      "command": "BINCOV_PLAYTEST_SEED=20261008 node scripts/coast-playtest.mjs"
+    },
+    {
+      "name": "playtest-1920",
+      "exit": 0,
+      "start": "2026-10-08T21:47:16+08:00",
+      "end": "2026-10-08T21:47:46+08:00",
+      "command": "BINCOV_PLAYTEST_SEED=20261008 BINCOV_PLAYTEST_SIZE=1920x1080 node scripts/coast-playtest.mjs"
+    },
+    {
+      "name": "before-1920",
+      "exit": 0,
+      "start": "2026-10-08T21:47:46+08:00",
+      "end": "2026-10-08T21:48:16+08:00",
+      "command": "same as playtest-1920 against the 05aaee6 dist (before)"
+    },
+    {
+      "name": "shots",
+      "exit": 0,
+      "start": "2026-10-08T21:48:16+08:00",
+      "end": "2026-10-08T21:49:56+08:00",
+      "command": "node scripts/coast-sample-shots.mjs"
+    },
+    {
+      "name": "sol-visual",
+      "exit": 0,
+      "start": "2026-10-08T21:49:56+08:00",
+      "end": "2026-10-08T21:50:01+08:00",
+      "command": "node scripts/sol-round4-visual.mjs"
+    },
+    {
+      "name": "lifecycle-1280",
+      "exit": 0,
+      "start": "2026-10-08T21:50:01+08:00",
+      "end": "2026-10-08T21:50:16+08:00",
+      "command": "node --import tsx scripts/coast-lifecycle-test.mjs"
+    },
+    {
+      "name": "lifecycle-1920",
+      "exit": 0,
+      "start": "2026-10-08T21:50:16+08:00",
+      "end": "2026-10-08T21:50:32+08:00",
+      "command": "BINCOV_LIFECYCLE_WIDE=1 node --import tsx scripts/coast-lifecycle-test.mjs"
+    },
+    {
+      "name": "browser",
+      "exit": 0,
+      "start": "2026-10-08T21:50:32+08:00",
+      "end": "2026-10-08T21:51:12+08:00",
+      "command": "pnpm test:browser"
+    },
+    {
+      "name": "portable",
+      "exit": 0,
+      "start": "2026-10-08T21:51:12+08:00",
+      "end": "2026-10-08T21:51:17+08:00",
+      "command": "pnpm test:portable"
+    },
+    {
+      "name": "ui",
+      "exit": 0,
+      "start": "2026-10-08T21:51:17+08:00",
+      "end": "2026-10-08T21:51:25+08:00",
+      "command": "pnpm test:ui"
+    },
+    {
+      "name": "save-browser",
+      "exit": 0,
+      "start": "2026-10-08T21:51:25+08:00",
+      "end": "2026-10-08T21:51:38+08:00",
+      "command": "pnpm test:save-browser"
+    },
+    {
+      "name": "desktop-input",
+      "exit": 0,
+      "start": "2026-10-08T21:51:38+08:00",
+      "end": "2026-10-08T21:52:00+08:00",
+      "command": "pnpm test:desktop-input"
+    },
+    {
+      "name": "mobile",
+      "exit": 0,
+      "start": "2026-10-08T21:52:00+08:00",
+      "end": "2026-10-08T21:52:19+08:00",
+      "command": "pnpm test:mobile"
+    },
+    {
+      "name": "mobile-ux",
+      "exit": 0,
+      "start": "2026-10-08T21:52:19+08:00",
+      "end": "2026-10-08T21:53:29+08:00",
+      "command": "pnpm test:mobile-ux"
+    },
+    {
+      "name": "qol",
+      "exit": 0,
+      "start": "2026-10-08T21:53:29+08:00",
+      "end": "2026-10-08T21:53:52+08:00",
+      "command": "pnpm test:qol"
+    },
+    {
+      "name": "loot",
+      "exit": 0,
+      "start": "2026-10-08T21:53:52+08:00",
+      "end": "2026-10-08T21:54:42+08:00",
+      "command": "pnpm test:loot"
+    }
+  ]
+}

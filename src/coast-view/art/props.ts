@@ -1,3 +1,4 @@
+import { ITEM_ART_IDS, paintItem, type ItemArtId } from '../../art/items';
 import { P, canvas, disc, dot, rect } from './paint';
 
 export function paintCrate(empty: boolean): HTMLCanvasElement {
@@ -26,7 +27,30 @@ export function lootCategory(item: string): 'ammo' | 'medical' | 'valuable' | 'm
   if (item === 'note') return 'note';
   return 'material';
 }
+/** Ground loot height above its anchor row: the icon stands on a contact shadow at y = LOOT_FOOT. */
+export const LOOT_W = 28, LOOT_H = 27, LOOT_FOOT = 23;
+const ARTED = new Set<string>(ITEM_ART_IDS);
+/**
+ * Ground loot uses the game's own 24 px item icon (the same drawing as the inventory and base), so a pistol on the
+ * floor is recognisably that pistol. A one-pixel pale halo keeps the ink outline readable on dark asphalt.
+ */
 export function paintLoot(item: string): HTMLCanvasElement {
+  if (!ARTED.has(item)) return paintLootFallback(item);
+  const { c, g } = canvas(LOOT_W, LOOT_H);
+  const icon = canvas(24, 24); paintItem(icon.g, item as ItemArtId, 24);
+  const halo = canvas(26, 26); halo.g.drawImage(icon.c, 1, 1);
+  const d = halo.g.getImageData(0, 0, 26, 26), out = halo.g.createImageData(26, 26);
+  const solid = (x: number, y: number) => x >= 0 && y >= 0 && x < 26 && y < 26 && d.data[(y * 26 + x) * 4 + 3] > 40;
+  for (let y = 0; y < 26; y++) for (let x = 0; x < 26; x++) {
+    if (solid(x, y) || !(solid(x - 1, y) || solid(x + 1, y) || solid(x, y - 1) || solid(x, y + 1))) continue;
+    const i = (y * 26 + x) * 4; out.data[i] = 236; out.data[i + 1] = 226; out.data[i + 2] = 196; out.data[i + 3] = 120;
+  }
+  disc(g, 'rgba(14,12,10,.45)', 14, LOOT_FOOT + 1, 10, 2.5);
+  halo.g.putImageData(out, 0, 0); halo.g.drawImage(icon.c, 1, 1);
+  g.drawImage(halo.c, 1, 0);
+  return c;
+}
+function paintLootFallback(item: string): HTMLCanvasElement {
   const { c, g } = canvas(16, 14), cat = lootCategory(item);
   rect(g, 'rgba(20,18,15,.35)', 3, 11, 11, 2);
   if (cat === 'medical') {
