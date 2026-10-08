@@ -315,3 +315,25 @@ test('drop and equip failure restore ammunition provenance, inventory, ground an
         assert.equal(r.snapshot().nextEntity, before.nextEntity + 1); assert.equal(D.count(r.snapshot().loadout.bag, 'bandage'), 0);
     }
 });
+
+test('startup cancellation detaches ownership without writing, advancing RNG, or settling the saved raid', () => {
+    for (const layered of [false, true]) {
+        const f = fixture(layered), before = f.data.get(SESSION_KEY), writes = f.writes;
+        const initial = f.runtime.snapshot();
+        f.runtime.cancelStart(); f.runtime.cancelStart();
+        assert.equal(f.runtime.disposed, true);
+        assert.equal(f.data.get(SESSION_KEY), before); assert.equal(f.writes, writes);
+        assert.equal(f.state.pendingSettlement, null); assert.equal(f.state.result, null);
+        assert.throws(() => f.runtime.current(), /disposed/);
+        const next = new CoastRaidRuntime(f.state, f.saves);
+        assert.deepEqual(next.snapshot(), initial);
+        next.advance(0, intent());
+        assert.throws(() => next.cancelStart(), /unstarted/);
+        assert.throws(() => next.dispose(), /Settlement/);
+        f.fail(true); next.finish('abandon');
+        assert.throws(() => next.cancelStart(), /unstarted/);
+        assert.throws(() => next.dispose(), /Settlement/);
+        f.fail(false); assert.equal(next.retrySettlement(), true);
+        next.dispose(); next.dispose();
+    }
+});

@@ -182,6 +182,16 @@ export class CoastRaidRuntime implements RaidRuntime {
             return;
         if (!this.ending || this.session.pendingSettlement || !this.session.result)
             throw new Error('Settlement must be committed before disposal.');
+        this.releaseOwnership();
+    }
+    /** Startup rollback only: no simulated frame or terminal transaction may be discarded. */
+    cancelStart() {
+        if (this.disposed) return;
+        if (this.lastNow !== null || this.ending || this.session.pendingSettlement)
+            throw new Error('Only an unstarted Runtime may cancel startup.');
+        this.releaseOwnership();
+    }
+    private releaseOwnership() {
         if (owners.get(this.saves) === this) {
             this.saves.attachRaid(null);
             this.saves.attachExpansion(null);

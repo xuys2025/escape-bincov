@@ -1,3 +1,14 @@
+## 2026-10-08 · PR #22 第四轮后续：Astra 生命周期与定向诊断
+
+从原分支 bcf7304 接手；main 841e8bb 已在分支，PR #22 远端仍为 fork 的 878f563。本轮按用户要求仅本地提交。详见[交接与 Sol 签收标准](docs/coast-sample-view/astra-lifecycle-20261008/README.md)。
+
+- 确认并修复普通入口上下文丢失时 Esc 可恢复 invisible simulation、素材/视图/挂载失败后的 Runtime 所有权与资源残留；原画布恢复后仍需主动继续。
+- 启动失败使用仅首帧前可调用的 services.cancelStart；原结算成功后才能 dispose 的约束保持。修复测试钩子保留旧 Runtime/Host，普通和测试入口堆快照旧实例均为零。
+- ASTRA-SAVE-01 保持历史原因未确认：三类合成失败已分层记录，普通样板外三次保存与修正驱动 3/3 通过，不据此声称历史问题已修复。
+- F20 生命周期通过，总堆仍 partial。Sol 原严格脚本 7 passed / 1 partial，增长 380,136 B；辅助完整循环 +312,234 B、普通对照 +318,313 B，采样口径分别保留。Performance 强路径仅支持部分归因，未证明全部差额有界。
+- 验证：224 单测、样板 32/32、普通生命周期两尺寸各 4/4；browser/UI/desktop-input/mobile/mobile-ux/save-browser/portable 通过；打包重建 HTML 字节一致。真机、真人、远端 CI 和线上 Pages 未验证。
+- 前端展示需求交 Opus；后续严格内存复验与历史存档诊断证据交 Sol。交接后停止；未扩量、未制作素材、未推送/合并/发布，未读取或上传 SSH 私钥。
+
 ## 2026-10-08 · PR #22 城中村样板第四轮：返修素材接入（Opus）
 
 从原分支 `87b879b` 接手，工作区干净；main `841e8bb`、PR #22 远端头 `878f563` 均未变化，原 fork 无写权限，本轮提交只在本地。详见[第四轮说明](docs/coast-sample-view/round4/README.md)。

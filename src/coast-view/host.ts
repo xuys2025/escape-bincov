@@ -23,6 +23,7 @@ import { drawMap, mapPanelHtml, type MapLayout } from './map';
 import { Scope, lifecycle } from './scope';
 
 export interface CoastServices {
+  cancelStart(): void;
   activate(ref: TargetRef): boolean;
   transferLoot(ref: TargetRef, request: LootTransfer): MutationResult;
   useSupply(id: string, from?: 'bag' | 'safe', uid?: string): MutationResult;
@@ -91,7 +92,14 @@ async function takeApp(): Promise<Application> {
   }
   if (app) dropApp(app);
   const fresh = new Application();
-  await fresh.init({ background: 0x121110, antialias: false, resolution: 1, autoDensity: false, preference: 'webgl', width: innerWidth, height: innerHeight, powerPreference: 'high-performance' });
+  try {
+    await fresh.init({ background: 0x121110, antialias: false, resolution: 1, autoDensity: false, preference: 'webgl', width: innerWidth, height: innerHeight, powerPreference: 'high-performance' });
+  } catch (error) {
+    // Before init resolves Application.destroy assumes a renderer that may not exist yet.
+    if (fresh.renderer) dropApp(fresh);
+    else fresh.stage.destroy({ children: true, context: true });
+    throw error;
+  }
   return current = fresh;
 }
 function parkApp(app: Application) {
@@ -127,6 +135,8 @@ export class CoastSampleHost {
   private radioLeft = 0;
   private lastRejected = '';
   private mounted = false;
+  private closed = false;
+  private contextLost = false;
   private exiting = false;
   private mapView = '';
   selectedExit = '';
@@ -147,32 +157,35 @@ export class CoastSampleHost {
   get services() { return this.handle.services; }
 
   async mount(parent: HTMLElement) {
-    this.root = document.createElement('div'); this.root.className = 'coast-sample'; this.root.innerHTML = HTML;
-    parent.appendChild(this.root);
-    this.app = await takeApp();
-    lifecycle.apps++;
-    this.q('.cs-canvas').appendChild(this.app.canvas);
-    this.view = new CoastView(this.app, this.opts);
-    this.app.stage.addChild(this.view.screen);
-    lifecycle.views++;
-    this.view.onRebuild = reason => { if (reason !== 'enter') this.fade(); };
-    this.input.touch = document.documentElement.classList.contains('mobile') || matchMedia('(pointer: coarse)').matches && !matchMedia('(any-pointer: fine)').matches;
-    this.inv = new InventoryPanel(this.q('[data-panel]'), {
-      session: this.session, saves: this.saves, services: this.services,
-      lootRef: () => this.lootRef(), touch: () => this.input.touch, toast: (t, bad) => this.toast(t, bad),
-      saveFailed: () => { if (!this.services.checkpoint()) this.lastRejected = 'checkpoint'; },
-      close: () => this.closePanel(true),
-      carryLimit: () => this.session.expansion?.version === 2 ? derivedLimits(this.session.expansion).carry : SURVIVAL.carryLimit,
-      magazine: () => this.last?.frame.hud.weapon.mag ?? 0,
-    });
-    this.wire();
-    const tick = () => this.frame();
-    this.app.ticker.add(tick); lifecycle.tickers++;
-    this.scope.add(() => { this.app.ticker.remove(tick); lifecycle.tickers--; });
-    // Follow the original phone-layout decision (main.ts toggles html.mobile on resize).
-    const ro = new ResizeObserver(() => { this.view.resize(); if (document.documentElement.classList.contains('mobile')) this.input.touch = true; });
-    ro.observe(this.root); this.scope.observe(ro);
-    this.mounted = true;
+    if (this.closed || this.root) throw new Error('Host can only mount once.');
+    try {
+      this.root = document.createElement('div'); this.root.className = 'coast-sample'; this.root.innerHTML = HTML;
+      parent.appendChild(this.root);
+      this.app = await takeApp();
+      lifecycle.apps++;
+      this.q('.cs-canvas').appendChild(this.app.canvas);
+      this.view = new CoastView(this.app, this.opts);
+      this.app.stage.addChild(this.view.screen);
+      lifecycle.views++;
+      this.view.onRebuild = reason => { if (reason !== 'enter') this.fade(); };
+      this.input.touch = document.documentElement.classList.contains('mobile') || matchMedia('(pointer: coarse)').matches && !matchMedia('(any-pointer: fine)').matches;
+      this.inv = new InventoryPanel(this.q('[data-panel]'), {
+        session: this.session, saves: this.saves, services: this.services,
+        lootRef: () => this.lootRef(), touch: () => this.input.touch, toast: (t, bad) => this.toast(t, bad),
+        saveFailed: () => { if (!this.services.checkpoint()) this.lastRejected = 'checkpoint'; },
+        close: () => this.closePanel(true),
+        carryLimit: () => this.session.expansion?.version === 2 ? derivedLimits(this.session.expansion).carry : SURVIVAL.carryLimit,
+        magazine: () => this.last?.frame.hud.weapon.mag ?? 0,
+      });
+      this.wire();
+      const tick = () => this.frame();
+      this.app.ticker.add(tick); lifecycle.tickers++;
+      this.scope.add(() => { this.app.ticker.remove(tick); lifecycle.tickers--; });
+      // Follow the original phone-layout decision (main.ts toggles html.mobile on resize).
+      const ro = new ResizeObserver(() => { if (!this.contextLost) this.view.resize(); if (document.documentElement.classList.contains('mobile')) this.input.touch = true; });
+      this.scope.observe(ro); ro.observe(this.root);
+      this.mounted = true;
+    } catch (error) { this.unmount(); throw error; }
   }
 
   // --- frame ---
@@ -185,7 +198,7 @@ export class CoastSampleHost {
     const batch = this.runtime.advance(t0, intent);
     const t1 = performance.now();
     if (batch.map !== this.last?.map) this.noteTitles = new Set(batch.map.notes.map(n => n.title));
-    this.view.present(batch, this.app.ticker.deltaMS / 1000);
+    if (!this.contextLost) this.view.present(batch, this.app.ticker.deltaMS / 1000);
     const t2 = performance.now();
     this.last = batch;
     if (note) this.readingFor = note;
@@ -255,8 +268,15 @@ export class CoastSampleHost {
     s.on(window, 'blur', () => this.pause('blur'));
     s.on(window, 'pagehide', () => this.pause('blur'));
     s.on(document, 'visibilitychange', () => { if (document.hidden) this.pause('blur'); });
-    s.on(canvas, 'webglcontextlost', e => { e.preventDefault(); this.pause('context-lost'); });
-    s.on(canvas, 'webglcontextrestored', () => { this.view.resize(); this.toast('画面已恢复。'); });
+    s.on(canvas, 'webglcontextlost', e => {
+      e.preventDefault(); this.contextLost = true; this.pause('context-lost');
+      if (this.panel === 'pause') this.showPause('context-lost');
+    });
+    s.on(canvas, 'webglcontextrestored', () => {
+      this.view.resize(); this.contextLost = false;
+      if (this.panel === 'pause') this.showPause();
+      this.toast('画面已恢复，请继续行动。');
+    });
     const act = this.q('[data-act]');
     s.on(act, 'pointerdown', e => { e.preventDefault(); this.input.touch = true; this.input.interact(e.pointerId); try { act.setPointerCapture(e.pointerId); } catch { /* synthetic */ } });
     s.on(act, 'pointerup', e => this.input.release(e.pointerId));
@@ -310,19 +330,20 @@ export class CoastSampleHost {
     this.showPause(reason);
   }
   private showPause(reason?: string) {
+    if (this.contextLost) reason = 'context-lost';
     const conflict = this.session.conflict, saveError = !this.session.storageOK || this.lastRejected === 'checkpoint' || this.lastRejected === 'save-failed';
     const title = conflict ? '存档已被其他窗口更新' : saveError ? '存档保存失败' : reason === 'context-lost' ? '画面中断' : '已暂停';
     const text = conflict ? '本页已停止操作。请导出需要保留的进度，再刷新本页。'
       : saveError ? '最近的操作或检查点没有写入，世界已保持在保存前的状态。检查浏览器存储后重试，或先导出备份。'
-      : reason === 'context-lost' ? '图形上下文丢失，行动已暂停，存档没有改变。' : '行动时间已停止。';
+      : reason === 'context-lost' ? '图形上下文丢失，行动已暂停。画面恢复后可继续，也可导出备份。' : '行动时间已停止。';
     const buttons = conflict ? `<button type="button" data-do="backup">导出备份</button>`
       : saveError ? `<button type="button" data-do="retry-save">重试保存</button><button type="button" data-do="backup">导出备份</button>`
-      : `<button type="button" data-do="resume">继续</button><button type="button" data-do="abandon">放弃行动</button>`;
+      : `<button type="button" data-do="resume" ${this.contextLost ? 'disabled' : ''}>继续</button>${this.contextLost ? '<button type="button" data-do="backup">导出备份</button>' : ''}<button type="button" data-do="abandon">放弃行动</button>`;
     this.input.suppressHeld(); this.sticks.clear();
     this.setPanel('pause', `<h2>${title}</h2><p>${text}</p><div class="cs-row">${buttons}</div>`, title);
   }
   /** Resume only asks the Runtime; syncPanels closes the panel when the published phase is running again. */
-  private resume() { this.input.suppressHeld(); this.runtime.resume(); }
+  private resume() { if (this.contextLost) return; this.input.suppressHeld(); this.runtime.resume(); }
   private openBlocking(kind: 'inventory' | 'map' | 'reading') {
     this.input.suppressHeld(); this.sticks.clear();
     this.runtime.setBlocked(true); this.blockPending = 3;
@@ -500,14 +521,13 @@ export class CoastSampleHost {
 
   // --- unmount ---
   unmount() {
-    if (!this.mounted) return;
-    this.mounted = false;
+    if (this.closed) return;
+    this.closed = true; this.mounted = false;
     this.inv?.closeTransient();
     this.scope.dispose();
-    this.view.destroy(); lifecycle.views--;
-    parkApp(this.app);
-    lifecycle.apps--;
-    this.root.remove();
+    if (this.view) { this.view.destroy(); lifecycle.views--; }
+    if (this.app) { parkApp(this.app); lifecycle.apps--; }
+    this.root?.remove();
     this.last = null;
   }
 }

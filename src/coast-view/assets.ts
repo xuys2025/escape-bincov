@@ -100,6 +100,6 @@ export function loadCoastAssets(): Promise<Map<string, HTMLCanvasElement>> {
     img.onload = () => { const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight; c.getContext('2d')!.drawImage(img, 0, 0); resolve([id, c]); };
     img.onerror = () => reject(new Error(`Coast asset failed to decode: ${id}`));
     img.src = url;
-  }))).then(entries => new Map(entries));
+  }))).then(entries => new Map(entries)).catch(error => { loaded = null; throw error; });
   return loaded;
 }

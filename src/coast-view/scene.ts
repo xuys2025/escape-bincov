@@ -89,18 +89,20 @@ export class CoastView {
   hudTop = 0;
 
   constructor(private app: Application, public opts: ViewOptions) {
-    CoastView.live.add(this);
-    this.tex = new Textures(opts.art);
-    this.light = new Lighting(this.tex);
-    this.groundRoot.addChild(this.groundLayer, this.flat, this.shadows);
-    this.sorted.sortableChildren = true;
-    this.upper.addChild(this.sorted, this.xray, this.overhead, this.debugG);
-    this.lightOverlay.blendMode = 'multiply';
-    this.lightHolder.addChild(this.lightOverlay);
-    this.upHolder.addChild(this.upSprite);
-    this.fx = new Fx(this.tex, this.sorted, this.flat, (x, y) => this.regionAt({ x, y }));
-    this.tex.warm(['player', 'scav', 'salt', 'creature', 'elite']);
-    this.resize();
+    try {
+      this.tex = new Textures(opts.art);
+      this.light = new Lighting(this.tex);
+      this.groundRoot.addChild(this.groundLayer, this.flat, this.shadows);
+      this.sorted.sortableChildren = true;
+      this.upper.addChild(this.sorted, this.xray, this.overhead, this.debugG);
+      this.lightOverlay.blendMode = 'multiply';
+      this.lightHolder.addChild(this.lightOverlay);
+      this.upHolder.addChild(this.upSprite);
+      this.fx = new Fx(this.tex, this.sorted, this.flat, (x, y) => this.regionAt({ x, y }));
+      this.tex.warm(['player', 'scav', 'salt', 'creature', 'elite']);
+      this.resize();
+      CoastView.live.add(this);
+    } catch (error) { this.destroy(); throw error; }
   }
 
   rnd = () => { let t = (this.rngState += 0x6d2b79f5); t = Math.imul(t ^ (t >>> 15), 1 | t); t ^= t + Math.imul(t ^ (t >>> 7), 61 | t); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
@@ -116,10 +118,10 @@ export class CoastView {
     this.view = { w, h, s, k, dpr, W, H };
     this.app.renderer.resize(W, H);
     for (const rt of [this.worldRT, this.lightRT, this.upRT]) if (rt) { rt.destroy(true); lifecycle.renderTextures--; }
-    lifecycle.renderTextures += 3;
-    this.worldRT = RenderTexture.create({ width: w, height: h, scaleMode: 'nearest' });
-    this.lightRT = RenderTexture.create({ width: w, height: h, scaleMode: 'nearest' });
-    this.upRT = RenderTexture.create({ width: w * k, height: h * k, scaleMode: 'linear' });
+    this.worldRT = this.lightRT = this.upRT = null;
+    this.worldRT = RenderTexture.create({ width: w, height: h, scaleMode: 'nearest' }); lifecycle.renderTextures++;
+    this.lightRT = RenderTexture.create({ width: w, height: h, scaleMode: 'nearest' }); lifecycle.renderTextures++;
+    this.upRT = RenderTexture.create({ width: w * k, height: h * k, scaleMode: 'linear' }); lifecycle.renderTextures++;
     this.lightOverlay.texture = this.lightRT;
     this.upSprite.texture = this.worldRT; this.upSprite.scale.set(k);
     this.screen.texture = this.upRT; this.screen.scale.set(s / k);
@@ -173,7 +175,7 @@ export class CoastView {
 
   private clearScene() {
     for (const layer of [this.groundLayer, this.flat, this.shadows, this.sorted, this.xray, this.overhead]) for (const c of layer.removeChildren()) c.destroy();
-    this.fx.clear();
+    this.fx?.clear();
     this.occluders = []; this.doors.clear(); this.actors.clear(); this.bullets.clear(); this.crates.clear(); this.loot.clear(); this.muzzles = []; this.swings = [];
     this.debugG.clear();
   }
@@ -681,10 +683,12 @@ export class CoastView {
     this.clearScene();
     // `context: true`: with any options object Pixi keeps a Graphics' own context registered with the renderer, which
     // outlives the view now that the renderer is reused.
-    for (const c of [this.groundRoot, this.upper, this.light.layer, this.lightHolder, this.upHolder, this.screen]) c.destroy({ children: true, context: true });
+    for (const c of [this.groundRoot, this.upper, this.light?.layer, this.lightHolder, this.upHolder, this.screen,
+      this.groundLayer, this.flat, this.shadows, this.sorted, this.xray, this.overhead, this.debugG, this.exitG, this.highlight, this.lightOverlay, this.upSprite])
+      if (c && !c.destroyed) c.destroy({ children: true, context: true });
     for (const rt of [this.worldRT, this.lightRT, this.upRT]) if (rt) { rt.destroy(true); lifecycle.renderTextures--; }
     this.worldRT = this.lightRT = this.upRT = null;
-    this.tex.destroy();
+    this.tex?.destroy();
     this.map = null; this.last = null;
     CoastView.live.delete(this);
   }

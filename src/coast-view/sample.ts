@@ -16,16 +16,17 @@ export const sampleEnabled = () => params().get('sample') === 'village';
 export const sampleSupports = () => app.expansion?.raid?.worldVersion === 'coast-buildings-v1';
 
 let starting = false;
+let testDriver: unknown = null;
 
 export async function startCoastSample(paused = false): Promise<boolean> {
   if (app.coastSample || starting || !sampleSupports()) return false;
   starting = true;
+  let created: ReturnType<typeof createCoastRaidHost> | null = null;
   try {
     enterExternalRun();
     // Only one renderer runs: the Phaser loop sleeps while the sample host owns the raid.
     app.game?.loop.sleep();
     const test = params().get('test') === '1';
-    const created = test ? createTestCoastHost(app, saveSession, location.search) : createCoastRaidHost(app, saveSession);
     const p = params();
     const opts: ViewOptions = {
       debug: test && p.get('debug') === '1', xray: p.get('xray') !== '0', mood: Number(p.get('mood') ?? 0) === 1 ? 1 : 0,
@@ -34,16 +35,19 @@ export async function startCoastSample(paused = false): Promise<boolean> {
       // Loaded on demand: esbuild still inlines the module, but the app's module graph (and Node tests) never import PNGs.
       art: p.get('art') === 'placeholder' ? null : await (await import('./assets')).loadCoastAssets(),
     };
+    created = test ? createTestCoastHost(app, saveSession, location.search) : createCoastRaidHost(app, saveSession);
     const host: CoastSampleHost = new CoastSampleHost(created as unknown as CoastHandle, app, saveSession, opts, () => finish(host), exportSave);
     app.coastSample = host;
     document.documentElement.dataset.coastSample = 'run';
     await host.mount(document.body);
     if (paused) host.pause('overlay');
-    if (test) expose(host, 'driver' in created ? created.driver : null);
+    if (test) expose('driver' in created ? created.driver : null);
     return true;
   } catch (error) {
     console.error(error);
     (app.coastSample as CoastSampleHost | null)?.unmount();
+    created?.services.cancelStart();
+    testDriver = null;
     app.coastSample = null;
     delete document.documentElement.dataset.coastSample;
     app.game?.loop.wake();
@@ -57,15 +61,18 @@ export async function startCoastSample(paused = false): Promise<boolean> {
 function finish(host: CoastSampleHost) {
   host.runtime.dispose();
   host.unmount();
+  testDriver = null;
   if (app.coastSample === host) app.coastSample = null;
   delete document.documentElement.dataset.coastSample;
   app.game?.loop.wake();
   changeState('result');
 }
 
-function expose(host: CoastSampleHost, driver: unknown) {
+function expose(driver: unknown) {
+  testDriver = driver;
   (window as unknown as { __bincovSample: unknown }).__bincovSample = {
-    get host() { return app.coastSample; }, driver, initial: host,
+    get host() { return app.coastSample; }, get driver() { return testDriver; },
+    get initial() { return app.coastSample; },
     counts: () => ({ ...lifecycle, liveViews: CoastView.live.size, canvases: document.querySelectorAll('canvas').length,
       sampleRoots: document.querySelectorAll('.coast-sample').length,
       art: [...CoastView.live].some(v => v.opts.art) ? 'sol' : 'placeholder',
