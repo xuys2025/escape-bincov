@@ -598,6 +598,185 @@ for (const art of ['sol', 'placeholder']) {
   });
   await context.close();
 }
+// Round 6 (experience pass): combat feedback, the exit pointer, the stateless atmosphere and the end-of-run outro.
+// Fixtures only place actors, doors and the player; shots, keys and panels are real input.
+{
+  const { context, page } = await open('?test=1&sample=village');
+  await deploy(page);
+  const screenOf = (x, y) => page.evaluate(([x, y]) => { const v = window.__bincovSample.host.view, r = document.querySelector('.coast-sample canvas').getBoundingClientRect(); return { x: r.left + (x - v.cam.x) * v.view.s / v.view.dpr, y: r.top + (y - v.cam.y) * v.view.s / v.view.dpr }; }, [x, y]);
+  const marks = () => page.evaluate(() => window.__marks);
+  // Fixture positions must be ones the save accepts (bodyFits), or the next checkpoint is rejected.
+  const savable = async () => { assert.equal(await page.evaluate(() => window.__bincovSample.host.services.checkpoint()), true, 'fixture positions pass checkpoint validation'); };
+  await step('V06 feedback: hits mark the target, the kill marks bigger, a hit in an unrevealed room marks nothing; reload ring; hurt edge rises and fades', async () => {
+    await page.evaluate(() => { const h = window.__bincovSample.host, mark = h.mark.bind(h); window.__marks = []; h.mark = (uid, at, kill) => { const p = h.view.worldToClient(at); window.__marks.push({ uid, kill, at, screen: p }); mark(uid, at, kill); }; });
+    await place(page, 640, 456, 0, 'coast');
+    const uid = (await page.evaluate(() => window.__bincovSample.host.lastBatch.frame.actors.find(a => a.alive && a.kind === 'scav')?.uid));
+    await page.evaluate(u => window.__bincovSample.driver.placeEnemy(u, { x: 704, y: 456 }), uid); await frames(page, 10); await savable();
+    const aim = await screenOf(704, 456 - 22); await page.mouse.move(aim.x, aim.y); await frames(page, 6);
+    for (let i = 0; i < 8 && await page.evaluate(u => window.__bincovSample.host.lastBatch.frame.actors.find(a => a.uid === u).alive, uid); i++) {
+      await page.mouse.down(); await wait(30); await page.mouse.up(); await wait(420);
+    }
+    const hits = (await events(page, 'impact')).filter(e => e.detail.reason === 'hit-actor' && e.detail.target === uid).length, m = await marks();
+    assert.ok(hits >= 1 && m.filter(x => x.uid === uid && !x.kill).length === hits, `every hit marked once: ${hits} hits, ${JSON.stringify(m.map(x => x.kill))}`);
+    assert.equal(m.filter(x => x.kill).length, 1, 'one kill marker');
+    const target = await screenOf(704, 456 - 22);
+    for (const x of m) assert.ok(Math.hypot(x.screen.x - target.x, x.screen.y - target.y) < 28, `marker on the target: ${JSON.stringify(x.screen)} vs ${JSON.stringify(target)}`);
+    assert.equal(m.at(-1).kill, true, 'the killing hit shows the kill marker');
+    // Direct check of the boundary rule: a player-bullet hit inside the closed, unrevealed resident room marks nothing.
+    const hidden = await page.evaluate(([room]) => {
+      const h = window.__bincovSample.host, b = h.lastBatch, before = window.__marks.length;
+      h.playerBullets.add('probe-bullet');
+      const at = { x: room.x + room.w / 2, y: room.y + room.h / 2 };
+      h.feedback({ type: 'impact', bullet: 'probe-bullet', reason: 'hit-actor', lastFree: at, contact: at, normal: null, surface: 'actor', target: 'enemy-x', seq: 0, stamp: b.stamp, durability: 'accepted' }, b);
+      return { revealed: b.frame.revealed[Object.keys(b.frame.revealed).find(k => k.endsWith('/resident-ground'))], marked: window.__marks.length - before };
+    }, [ROOM]);
+    assert.equal(hidden.revealed, false); assert.equal(hidden.marked, 0, 'no marker for a hit inside an unrevealed room');
+    // Reload ring: R with a partly used magazine.
+    await page.keyboard.press('r'); await frames(page, 6);
+    const ring = await page.evaluate(() => ({ on: document.querySelector('[data-cross]').classList.contains('reloading'), deg: parseFloat(document.querySelector('[data-cross]').style.getPropertyValue('--reload')) }));
+    await wait(500);
+    const ring2 = await page.evaluate(() => parseFloat(document.querySelector('[data-cross]').style.getPropertyValue('--reload')));
+    assert.ok(ring.on && ring2 > ring.deg, `reload ring fills: ${ring.deg} -> ${ring2}`);
+    await wait(1600);
+    // Hurt edge: let a rifleman hit the player, then watch it fade.
+    const rifle = await page.evaluate(() => window.__bincovSample.host.lastBatch.frame.actors.find(a => a.alive && a.kind === 'salt')?.uid);
+    await page.evaluate(u => window.__bincovSample.driver.placeEnemy(u, { x: 704, y: 456 }), rifle); await savable();
+    await page.evaluate(u => { window.__hurtLog = []; const h = window.__bincovSample.host; window.__hurtTick = () => window.__hurtLog.push({ t: performance.now(), op: +document.querySelector('[data-hurt]').style.opacity || 0, hp: h.lastBatch.frame.hud.hp }); h.app.ticker.add(window.__hurtTick); window.__bincovSample.driver.freezeAI(false); }, rifle);
+    await page.waitForFunction(() => window.__hurtLog.some(r => r.hp < 100), null, { timeout: 15000 });
+    await page.evaluate(u => { const d = window.__bincovSample.driver; d.freezeAI(true); d.placeEnemy(u, { x: 104, y: 860 }); }, rifle);
+    await wait(1800);
+    const hurt = await page.evaluate(() => { window.__bincovSample.host.app.ticker.remove(window.__hurtTick); return window.__hurtLog; });
+    const peak = Math.max(...hurt.map(r => r.op)), last = hurt.at(-1);
+    assert.ok(peak > .4, `hurt edge peak ${peak}`); assert.ok(last.hp / 100 >= .35 ? last.op < .05 : true, `hurt edge fades at hp ${last.hp}: ${last.op}`);
+    return { hits, marks: m.length, kill: m.at(-1).kill, hidden, ring: [ring.deg, ring2], hurtPeak: +peak.toFixed(2), hurtEnd: last.op, hp: last.hp };
+  });
+  await step('V06b the chosen exit: an edge arrow toward it off screen (clear of the HUD cards), a marker over it on screen; off-screen shooters get an edge chevron', async () => {
+    await place(page, 640, 456, 0, 'coast'); await frames(page, 8);
+    await page.keyboard.press('m'); await page.waitForFunction(() => window.__bincovSample.host.panel === 'map');
+    const far = await page.evaluate(() => window.__bincovSample.host.lastBatch.map.exits.find(e => e.id !== 'north'));
+    await page.locator('[data-exit]').selectOption(far.name); await page.keyboard.press('m'); await frames(page, 10);
+    const edge = await page.evaluate(() => {
+      const el = document.querySelector('[data-exitptr]'), box = el.querySelector('span').getBoundingClientRect(), arrow = el.querySelector('i').getBoundingClientRect();
+      const cards = ['.cs-status', '.cs-arms', '.cs-info', '.cs-keys', '.cs-clock'].map(s => document.querySelector('.coast-sample ' + s).getBoundingClientRect());
+      const hit = r => cards.some(c => r.left < c.right && c.left < r.right && r.top < c.bottom && c.top < r.bottom);
+      return { hidden: el.hidden, edge: el.classList.contains('edge'), text: el.textContent, dir: el.style.getPropertyValue('--dir'), arrow: { x: arrow.x + arrow.width / 2, y: arrow.y + arrow.height / 2 }, overlaps: hit(box) || hit(arrow) };
+    });
+    const exitScreen = await screenOf(far.at.x, far.at.y - 30), centre = { x: 640, y: 360 };
+    const want = Math.atan2(exitScreen.y - centre.y, exitScreen.x - centre.x), got = parseFloat(edge.dir);
+    assert.ok(!edge.hidden && edge.edge && edge.text.includes(far.name) && edge.text.includes('格'), JSON.stringify(edge));
+    assert.ok(Math.abs(Math.atan2(Math.sin(got - want), Math.cos(got - want))) < .05, `arrow points at the exit: ${got} vs ${want}`);
+    assert.equal(edge.overlaps, false, 'the pointer stays clear of the HUD cards');
+    // Near the far exit, standing on the first spot the save accepts: the marker sits over its ring.
+    let spot = null;
+    for (const [dx, dy] of [[-120, 0], [120, 0], [0, 110], [0, -110], [-90, 80], [90, 80], [-90, -80], [90, -80]]) {
+      await place(page, far.at.x + dx, far.at.y + dy, 0, 'coast');
+      if (await page.evaluate(() => window.__bincovSample.host.services.checkpoint())) { spot = [dx, dy]; break; }
+    }
+    assert.ok(spot, 'a valid standing spot near the far exit'); await frames(page, 30);
+    const near = await page.evaluate(() => { const el = document.querySelector('[data-exitptr]'), r = el.querySelector('i').getBoundingClientRect(); return { hidden: el.hidden, edge: el.classList.contains('edge'), x: r.x + r.width / 2, y: r.y + r.height / 2 }; });
+    const ns = await screenOf(far.at.x, far.at.y);
+    assert.ok(!near.hidden && !near.edge && Math.abs(near.x - ns.x) < 12 && near.y < ns.y, `marker over the exit: ${JSON.stringify(near)} vs ${JSON.stringify(ns)}`);
+    // Under the top cards (the north checkpoint sits at the map's top edge): its ring is in view, so no pointer at all.
+    const north = await page.evaluate(() => window.__bincovSample.host.lastBatch.map.exits.find(e => e.id === 'north'));
+    await page.evaluate(n => { window.__bincovSample.host.selectedExit = n; }, north.name);
+    await place(page, north.at.x + 90, north.at.y + 60, 0, 'coast'); await frames(page, 30);
+    const under = await page.evaluate(() => document.querySelector('[data-exitptr]').hidden);
+    const ring = await screenOf(north.at.x, north.at.y);
+    assert.ok(ring.y > 0 && ring.y < 720 && under, `north ring in view (${JSON.stringify(ring)}), pointer stood aside: ${under}`);
+    // Off-screen shooter: a rifleman well above the frame fires; the chevron sits on the top edge pointing up.
+    await page.evaluate(() => { window.__bincovSample.host.selectedExit = ''; });
+    await place(page, 640, 456, 0, 'coast');
+    const rifle = await page.evaluate(() => window.__bincovSample.host.lastBatch.frame.actors.find(a => a.alive && a.kind === 'salt')?.uid);
+    await page.evaluate(u => window.__bincovSample.driver.placeEnemy(u, { x: 640, y: 200 }), rifle); await frames(page, 4); await savable();
+    await page.evaluate(() => window.__bincovSample.driver.freezeAI(false));
+    await page.waitForFunction(() => [...document.querySelectorAll('[data-threats] i')].some(e => +e.style.opacity > .5), null, { timeout: 15000 });
+    const chevron = await page.evaluate(() => { const e = [...document.querySelectorAll('[data-threats] i')].find(e => +e.style.opacity > .5); const r = e.getBoundingClientRect(); return { y: r.y + r.height / 2, rot: e.style.transform.match(/rotate\(([-\d.e]+)rad\)/)?.[1] }; });
+    await page.evaluate(u => { const d = window.__bincovSample.driver; d.freezeAI(true); d.placeEnemy(u, { x: 136, y: 860 }); }, rifle);
+    assert.ok(chevron.y < 60 && Math.abs(parseFloat(chevron.rot) + Math.PI / 2) < .35, `chevron on the top edge pointing up: ${JSON.stringify(chevron)}`);
+    return { edge, spot, near, under, chevron };
+  });
+  await step('V07 atmosphere is stateless and bounded: identical pixels on re-present, no drop in a revealed interior, none on a layered floor; the ground bakes once per map', async () => {
+    // Grab a frame at view time 7.25, advance the view by half a second (weather, lamps and fades move), then pin the
+    // camera back and grab at 7.25 again: stateless air and light draw the same pixels. No live particles are allowed.
+    const twice = () => page.evaluate(() => {
+      const h = window.__bincovSample.host, v = h.view; h.app.ticker.stop();
+      const cam = { ...v.camF }, recoil = { ...v.recoil };
+      const grab = (t = 7.25) => { v.camF = { ...cam }; v.recoil = { ...recoil }; v.time = t; v.shake = 0; v.present({ ...h.lastBatch, events: [] }, 0); h.app.render();
+        const { pixels } = h.app.renderer.extract.pixels(v.upRT); let sum = 0; for (let i = 0; i < pixels.length; i += 7) sum = (sum * 31 + pixels[i]) >>> 0; return sum; };
+      const live = v.fx.live.length, a = grab(); v.present({ ...h.lastBatch, events: [] }, .5); const b = grab(), moved = grab(7.31);
+      h.app.ticker.start(); return { a, b, moved, live };
+    });
+    await place(page, 640, 456, 0, 'coast');
+    await page.waitForFunction(() => window.__bincovSample.host.view.fx.live.length === 0, null, { timeout: 15000 }); await frames(page, 10);
+    await page.evaluate(() => window.__bincovSample.host.pause('overlay')); await frames(page, 3);
+    const { a, b, moved, live } = await twice();
+    assert.equal(live, 0); assert.notEqual(moved, a, 'control: 60 ms later the drizzle has moved');
+    const outdoors = await page.evaluate(() => ({ ...window.__bincovSample.host.view.weather.stats }));
+    await page.evaluate(() => window.__bincovSample.host.resume()); await frames(page, 4);
+    assert.equal(a, b, 'two re-presents at one view time draw identical frames');
+    assert.ok(outdoors.drops > 10, `drizzle falls outdoors: ${JSON.stringify(outdoors)}`);
+    // Inside the revealed resident ground floor: drops that would land there are skipped; none is drawn inside it.
+    await page.evaluate(() => window.__bincovSample.driver.door('resident-front', true)); await place(page, 464, 330, Math.PI, 'coast'); await frames(page, 30);
+    const inside = await page.evaluate(([room]) => {
+      const v = window.__bincovSample.host.view, f = window.__bincovSample.host.lastBatch.frame, id = Object.keys(f.revealed).find(k => k.endsWith('/resident-ground'));
+      const inRoom = s => s.visible && s.x >= room.x && s.x < room.x + room.w && s.y >= room.y && s.y < room.y + room.h;
+      return { revealed: f.revealed[id], skipped: v.weather.stats.skippedRevealed, splashesInside: v.weather.back.children.filter(inRoom).length };
+    }, [{ x: 320, y: 224, w: 288, h: 192 }]);
+    assert.equal(inside.revealed, true); assert.ok(inside.skipped > 0, 'drops over the revealed room are skipped'); assert.equal(inside.splashesInside, 0);
+    // Upstairs: no weather at all; back on the coast the ground is not baked again.
+    const largeBefore = await page.evaluate(() => window.__bincovSample.counts().largeTextures);
+    await place(page, 304, 80, Math.PI / 2, 'resident-f2'); await frames(page, 8);
+    const upstairs = await page.evaluate(() => { const w = window.__bincovSample.host.view.weather; return { front: w.front.visible, back: w.back.visible }; });
+    await place(page, 640, 456, 0, 'coast'); await frames(page, 8);
+    const back = await page.evaluate(() => ({ rebuildMs: window.__bincovSample.host.view.stats.rebuildMs, large: window.__bincovSample.counts().largeTextures }));
+    assert.deepEqual(upstairs, { front: false, back: false }, 'no weather on a layered floor');
+    assert.ok(back.large >= largeBefore && back.rebuildMs < 120, `coast chunks kept: ${JSON.stringify({ largeBefore, ...back })}`);
+    return { identical: a === b, outdoors, inside, upstairs, back };
+  });
+  await step('V08 a crate opens its lid while its loot panel is up; a door passes through an ajar frame', async () => {
+    const crate = await page.evaluate(() => { const f = window.__bincovSample.host.lastBatch.frame; return f.containers.filter(c => c.kind === 'crate' && c.stacks > 0 && c.regionId === null).sort((a, b) => Math.hypot(a.x - 640, a.y - 456) - Math.hypot(b.x - 640, b.y - 456))[0]; });
+    await place(page, crate.x - 24, crate.y, 0, 'coast'); await frames(page, 8);
+    await page.keyboard.press('e'); await page.waitForFunction(() => window.__bincovSample.host.panel === 'loot'); await frames(page, 6);
+    const open = await page.evaluate(id => window.__bincovSample.host.view.crates.get(id).look, crate.id);
+    await page.keyboard.press('Escape'); await frames(page, 6);
+    const closed = await page.evaluate(id => window.__bincovSample.host.view.crates.get(id).look, crate.id);
+    assert.equal(open, 'open'); assert.equal(closed, 'full');
+    await place(page, 464, 436, -Math.PI / 2, 'coast'); await page.evaluate(() => window.__bincovSample.driver.door('resident-front', false)); await frames(page, 8);
+    const swing = await page.evaluate(() => new Promise(r => { const v = window.__bincovSample.host.view, seen = []; window.__bincovSample.driver.door('resident-front', true);
+      let n = 0; const f = () => { const o = v.doors.get('resident-front'); seen.push(o.key.endsWith('|ajar') ? 'ajar' : o.spec.open ? 'open' : 'closed'); if (++n < 40) requestAnimationFrame(f); else r(seen); }; requestAnimationFrame(f); }));
+    assert.ok(swing.includes('ajar') && swing.at(-1) === 'open' && swing.indexOf('open') > swing.lastIndexOf('ajar'), `door frames ${swing.join(',')}`);
+    return { crate: [open, closed], swing: swing.filter(s => s === 'ajar').length };
+  });
+  await context.close();
+}
+// The outro after a saved settlement: the player's own fall plays to the corpse under the curtain (OPUS-DEATH-02), with
+// no further simulation; the canvas grading is cleared for the next mount.
+{
+  const { context, page } = await open('?test=1&sample=village');
+  await deploy(page);
+  await step('V09 the player\'s death: fall and corpse presented after the settlement commit, curtain 你倒下了, no simulation, grading cleared after', async () => {
+    await page.evaluate(() => {
+      const d = window.__bincovSample.driver; d.placePlayer({ x: 640, y: 456 }, 0, 'coast');
+      [['enemy-6', 704, 456], ['enemy-9', 576, 456], ['enemy-18', 640, 392], ['enemy-23', 640, 520], ['enemy-24', 704, 392]].forEach(([u, x, y]) => d.placeEnemy(u, { x, y }));
+      const h = window.__bincovSample.host, v = h.view, present = Object.getPrototypeOf(v).present, log = window.__outro = { rows: [] };
+      window.__outroCanvas = h.app.canvas;
+      v.present = function (batch, dt) { present.call(this, batch, dt); const g = this.actors.get('player'); log.rows.push({ alive: batch.frame.player.alive, exiting: h.exiting, frames: h.stats.frames, deathT: g.deathT, corpse: !!g.corpse?.visible, body: g.body.visible, filter: h.app.canvas.style.filter, text: document.querySelector('[data-curtain-text]').textContent }); };
+      d.freezeAI(false);
+    });
+    await page.waitForFunction(() => window.__outro.rows.some(r => !r.alive), null, { timeout: 60000 });
+    await page.waitForFunction(() => window.__bincov.app.state === 'result' && !document.querySelector('.coast-sample'), null, { timeout: 15000 });
+    const rows = await page.evaluate(() => window.__outro.rows), after = await page.evaluate(() => window.__outroCanvas.style.filter);
+    const outro = rows.filter(r => r.exiting), dead = rows.filter(r => !r.alive);
+    assert.ok(dead[0] && outro.length >= 20, `frames presented after the commit: ${outro.length}`);
+    assert.ok(outro.every(r => r.frames === outro[0].frames), 'no host frame (and no Runtime advance) during the outro');
+    assert.ok(outro.some(r => r.body && r.deathT > 0 && r.deathT < .16) && outro.some(r => r.corpse && r.deathT >= .16), 'the fall plays, then the corpse');
+    assert.equal(outro.at(-1).text, '你倒下了'); assert.ok(outro.at(-1).filter.includes('grayscale'), 'the scene greys under the curtain');
+    assert.equal(after, '', 'the parked canvas carries no grading');
+    assert.equal(await page.evaluate(() => window.__bincov.app.result?.outcome), 'death');
+    return { outroFrames: outro.length, fallFrames: outro.filter(r => r.body && r.deathT > 0).length, corpseFrames: outro.filter(r => r.corpse).length, text: outro.at(-1).text };
+  });
+  await context.close();
+}
 { // Touch
   const { context, page } = await open('?test=1&sample=village', { hasTouch: true });
   await step('W14 touch aim stick past 0.62 keeps firing', async () => {

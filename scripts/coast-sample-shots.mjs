@@ -18,7 +18,9 @@ const SCENES = [
   { id: 'door', note: '正门关闭：室内未揭示', run: d => { d.placePlayer({ x: 464, y: 436 }, N, 'coast'); d.door('resident-front', false); } },
   { id: 'door-open', note: '开门站门洞：屋顶淡出、前墙局部淡化', run: d => { d.placePlayer({ x: 464, y: 436 }, N, 'coast'); d.door('resident-front', true); d.placePlayer({ x: 464, y: 404 }, N, 'coast'); } },
   { id: 'reveal', note: '居民楼一楼室内揭示', run: d => { d.placePlayer({ x: 464, y: 436 }, N, 'coast'); d.door('resident-front', true); d.door('resident-west', true); d.placePlayer({ x: 472, y: 340 }, W, 'coast'); } },
-  { id: 'window', note: '贴西墙窗口向外瞄准', run: (d, e) => { d.placePlayer({ x: 464, y: 436 }, N, 'coast'); d.door('resident-front', true); d.placePlayer({ x: 360, y: 342 }, W, 'coast'); d.placeEnemy(e[1], { x: 232, y: 342 }); } },
+  // (368, 344): 16 px off the west wall. The old (360, 342) overlapped the wall, so the save rejected any checkpoint taken
+  // during this scene (and every later shot showed the save-error pause); see the round-6 report.
+  { id: 'window', note: '贴西墙窗口向外瞄准', run: (d, e) => { d.placePlayer({ x: 464, y: 436 }, N, 'coast'); d.door('resident-front', true); d.placePlayer({ x: 368, y: 344 }, W, 'coast'); d.placeEnemy(e[1], { x: 232, y: 342 }); } },
   { id: 'loot', note: '最近的真实物资箱', run: (d, _e, f) => { const c = f.containers.filter(c => c.kind === 'crate' && c.regionId === null).sort((a, b) => Math.hypot(a.x - 640, a.y - 456) - Math.hypot(b.x - 640, b.y - 456))[0]; d.placePlayer({ x: c.x + 14, y: c.y + 12 }, N, 'coast'); } },
   { id: 'enemies', note: '真实敌人种类外观', run: (d, e) => { d.placePlayer({ x: 640, y: 456 }, 0, 'coast'); e.slice(0, 4).forEach((uid, i) => d.placeEnemy(uid, { x: 720 + i * 34, y: 430 + (i % 2) * 30 })); } },
   { id: 'extract', note: '北线检查口撤离点', run: d => d.placePlayer({ x: 208, y: 128 }, S, 'coast') },

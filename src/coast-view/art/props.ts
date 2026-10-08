@@ -1,11 +1,16 @@
 import { ITEM_ART_IDS, paintItem, type ItemArtId } from '../../art/items';
 import { P, canvas, disc, dot, rect } from './paint';
 
-export function paintCrate(empty: boolean): HTMLCanvasElement {
-  const { c, g } = canvas(32, 28);
+/** Supply crate: closed, open while its loot panel is up (lid raised, contents showing), or searched empty. */
+export function paintCrate(look: 'full' | 'empty' | 'open'): HTMLCanvasElement {
+  const { c, g } = canvas(32, 28), empty = look === 'empty';
   rect(g, 'rgba(20,18,15,.35)', 6, 21, 24, 4);
   rect(g, P.ink, 4, 6, 24, 18);
-  if (!empty) {
+  if (look === 'open') {
+    rect(g, '#4a4933', 5, 2, 22, 6); rect(g, '#5b5a3f', 5, 2, 22, 1); rect(g, P.ink, 4, 1, 24, 1);
+    rect(g, '#1d1c16', 5, 8, 22, 8); rect(g, '#6b6a45', 7, 9, 6, 4); rect(g, '#82805a', 7, 9, 6, 1); rect(g, P.label, 14, 10, 5, 4); rect(g, '#a8463a', 20, 9, 4, 5); rect(g, '#c9a24e', 9, 11, 2, 2);
+    rect(g, '#4e4d37', 5, 16, 22, 7); rect(g, '#3e3d2c', 5, 21, 22, 2); rect(g, '#6b6550', 15, 14, 3, 2);
+  } else if (!empty) {
     rect(g, '#5b5a3f', 5, 7, 22, 9); rect(g, '#6f6e4f', 5, 7, 22, 2); rect(g, '#4a4933', 5, 14, 22, 2);
     rect(g, '#4e4d37', 5, 16, 22, 7); rect(g, '#3e3d2c', 5, 21, 22, 2);
     rect(g, '#7a6a4a', 5, 10, 22, 1); rect(g, P.label, 8, 17, 6, 3); dot(g, '#8d8670', 9, 18);

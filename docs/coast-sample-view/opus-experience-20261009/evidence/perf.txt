@@ -1,0 +1,4 @@
+dist/index.html deploy 656 ms {"first":171.6,"sameMap":52.8,"upstairs":13.6,"backToCoast":20.6,"present":{"p50":0.8,"p95":1.3,"p99":1.9},"advance":{"p50":2.9,"p95":4.2},"frames":493}
+dist/index.html deploy 544 ms {"first":214.8,"sameMap":61.5,"upstairs":13.6,"backToCoast":20.4,"present":{"p50":1,"p95":2.1,"p99":3.3},"advance":{"p50":2.7,"p95":3.9},"frames":494}
+dist/index.html rebuild ms [same map, upstairs, back to coast]: [66.2,12.8,20.8]
+baseline/index.html rebuild ms [same map, upstairs, back to coast]: [31.6,4.3,26.5]

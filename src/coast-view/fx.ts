@@ -1,5 +1,6 @@
 import { Container, Sprite } from 'pixi.js';
 import type { Textures } from './textures';
+import { canvas, hash } from './art/paint';
 
 interface Particle { region: string | null; s: Sprite; x: number; y: number; h: number; vx: number; vy: number; vh: number; age: number; ttl: number; g: number; settle: 'decal' | 'fade' | 'stay'; color: number }
 
@@ -42,6 +43,22 @@ export class Fx {
     for (let i = 0; i < n; i++) this.spawn({ x: x + (rnd() - .5) * 10, y: y + (rnd() - .5) * 4, h: 1, vx: (rnd() - .5) * 18, vy: (rnd() - .5) * 6, vh: 8 + rnd() * 8, ttl: .35 + rnd() * .2, color: 0x8a8273, g: 10, size: 2 });
   }
 
+  /** Gun smoke: a few grey puffs that rise slowly, drift west with the wind and thin out. */
+  smoke(x: number, y: number, h: number, rnd: () => number, n = 3) {
+    for (let i = 0; i < n; i++) this.spawn({ x: x + (rnd() - .5) * 4, y: y + (rnd() - .5) * 3, h, vx: -10 - rnd() * 8, vy: (rnd() - .5) * 4, vh: 6 + rnd() * 8, ttl: .5 + rnd() * .45, color: i % 2 ? 0x9a958a : 0x7d796f, g: -6, size: 2 });
+  }
+  /**
+   * Blood pool under a body: a fresh kill spreads it over about three seconds; a body met already dead (loaded, revealed
+   * later) has it at full size. Like every decal it belongs to the region under it and shows only once that is revealed.
+   */
+  pool(x: number, y: number, seed: number, grow: boolean) {
+    const s = new Sprite(this.tex.ensure(`fx:pool:${seed % 3}`, () => paintPool(seed % 3)));
+    s.anchor.set(.5); s.position.set(Math.round(x), Math.round(y)); s.scale.set(grow ? .25 : 1);
+    this.flat.addChild(s); this.decals.push({ s, region: this.regionAt(x, y) });
+    if (grow) this.pools.push({ s, age: 0 });
+  }
+  private pools: { s: Sprite; age: number }[] = [];
+
   decal(x: number, y: number, color: number, size = 1) {
     const s = new Sprite(this.tex.pixel()); s.tint = color; s.scale.set(size); s.position.set(Math.round(x), Math.round(y));
     this.flat.addChild(s); this.decals.push({ s, region: this.regionAt(x, y) });
@@ -49,6 +66,12 @@ export class Fx {
   }
 
   update(dt: number) {
+    for (let i = this.pools.length - 1; i >= 0; i--) {
+      const p = this.pools[i]; p.age += dt;
+      if (p.s.destroyed || p.age >= 3) { if (!p.s.destroyed) p.s.scale.set(1); this.pools.splice(i, 1); continue; }
+      // Whole-pixel steps so the pool edge never shimmers.
+      const k = .25 + .75 * (1 - (1 - p.age / 3) ** 2); p.s.scale.set(Math.round(k * 22) / 22, Math.round(k * 10) / 10);
+    }
     for (let i = this.live.length - 1; i >= 0; i--) {
       const p = this.live[i];
       p.age += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vh -= p.g * dt; p.h += p.vh * dt;
@@ -77,7 +100,18 @@ export class Fx {
   clear() {
     for (const p of this.live) p.s.destroy(); this.live = [];
     for (const s of this.free) s.destroy(); this.free = [];
-    for (const d of this.decals) d.s.destroy(); this.decals = []; this.hidden = 0;
+    for (const d of this.decals) d.s.destroy(); this.decals = []; this.hidden = 0; this.pools = [];
   }
   get count() { return this.live.length + this.decals.length; }
+}
+
+/** Irregular dark pool, 22x10, two tones; three variants. */
+function paintPool(v: number): HTMLCanvasElement {
+  const { c, g } = canvas(22, 10);
+  for (let y = 0; y < 10; y++) for (let x = 0; x < 22; x++) {
+    const dx = (x - 10.5) / 11, dy = (y - 4.5) / 5, r = dx * dx + dy * dy + (hash(x >> 1, y >> 1, 300 + v) - .5) * .5;
+    if (r > 1) continue;
+    g.fillStyle = r < .45 ? 'rgba(62,20,17,.72)' : 'rgba(84,30,25,.55)'; g.fillRect(x, y, 1, 1);
+  }
+  return c;
 }

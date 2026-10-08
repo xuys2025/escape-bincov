@@ -58,7 +58,7 @@ export class Textures {
   }
 
   muzzle(frame: number) { return this.ensure(`fx:muzzle:${frame}`, () => paintMuzzle(frame)); }
-  crate(empty: boolean) { return this.ensure(`crate:${empty ? 'empty' : 'full'}`, () => paintCrate(empty)); }
+  crate(look: 'full' | 'empty' | 'open') { return this.ensure(`crate:${look}`, () => paintCrate(look)); }
   loot(item: string) { return this.ensure(`loot:${item}`, () => paintLoot(item)); }
   exitDecal() { return this.ensure('exit:decal', paintExitDecal); }
   destroy() { this.atlas.destroy(); this.canvases.clear(); this.weapons.clear(); }

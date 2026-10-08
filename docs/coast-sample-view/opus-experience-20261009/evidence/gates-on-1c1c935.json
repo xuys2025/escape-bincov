@@ -1,0 +1,39 @@
+{
+  "startedAt": "2026-10-08T17:14:45.871Z",
+  "seed": "42",
+  "steps": [
+    {
+      "name": "V06 feedback: hits mark the target, the kill marks bigger, a hit in an unrevealed room marks nothing; reload ring; hurt edge rises and fades",
+      "status": "failed",
+      "error": "page.evaluate: TypeError: Cannot read properties of undefined (reading 'bind')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:61)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at D:\\bincov\\pr22-runtime\\scripts\\.r6-only.mjs:85:16\n    at step (D:\\bincov\\pr22-runtime\\scripts\\.r6-only.mjs:19:30)\n    at D:\\bincov\\pr22-runtime\\scripts\\.r6-only.mjs:84:9"
+    },
+    {
+      "name": "V06b the chosen exit: an edge arrow toward it off screen (clear of the HUD cards), a marker over it on screen; off-screen shooters get an edge chevron",
+      "status": "failed",
+      "error": "page.evaluate: TypeError: Cannot read properties of null (reading 'querySelector')\n    at eval (eval at evaluate (:311:30), <anonymous>:2:69)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at D:\\bincov\\pr22-runtime\\scripts\\.r6-only.mjs:132:29\n    at async step (D:\\bincov\\pr22-runtime\\scripts\\.r6-only.mjs:19:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/.r6-only.mjs:127:3"
+    },
+    {
+      "name": "V07 atmosphere is stateless and bounded: identical pixels on re-present, no drop in a revealed interior, none on a layered floor; the ground bakes once per map",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: control: 60 ms later the drizzle has moved\n    at file:///D:/bincov/pr22-runtime/scripts/.r6-only.mjs:187:35\n    at async step (file:///D:/bincov/pr22-runtime/scripts/.r6-only.mjs:19:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/.r6-only.mjs:172:3"
+    },
+    {
+      "name": "V08 a crate opens its lid while its loot panel is up; a door passes through an ajar frame",
+      "status": "failed",
+      "error": "page.waitForFunction: Timeout 15000ms exceeded.\n    at D:\\bincov\\pr22-runtime\\scripts\\.r6-only.mjs:213:48\n    at async step (D:\\bincov\\pr22-runtime\\scripts\\.r6-only.mjs:19:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/.r6-only.mjs:210:3"
+    },
+    {
+      "name": "V09 the player's death: fall and corpse presented after the settlement commit, curtain 你倒下了, no simulation, grading cleared after",
+      "status": "failed",
+      "error": "page.waitForFunction: Timeout 60000ms exceeded.\n    at D:\\bincov\\pr22-runtime\\scripts\\.r6-only.mjs:240:16\n    at async step (D:\\bincov\\pr22-runtime\\scripts\\.r6-only.mjs:19:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/.r6-only.mjs:231:3"
+    }
+  ],
+  "errors": [
+    "TypeError: Cannot read properties of null (reading 'textContent')\n    at v.present (eval at evaluate (:311:30), <anonymous>:6:358)\n    at ch.frame (file:///1c1c935-build/index.html?test=1&sample=village:8622:3734)\n    at ia.s [as _fn] (file:///1c1c935-build/index.html?test=1&sample=village:8622:2981)\n    at ia.emit (file:///1c1c935-build/index.html?test=1&sample=village:7633:57384)\n    at ji.update (file:///1c1c935-build/index.html?test=1&sample=village:7633:59822)\n    at _tick (file:///1c1c935-build/index.html?test=1&sample=village:7633:58181)"
+  ],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "finishedAt": "2026-10-08T17:16:04.719Z",
+  "passed": 0,
+  "failed": 5
+}

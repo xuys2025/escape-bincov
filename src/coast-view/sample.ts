@@ -48,6 +48,7 @@ export async function startCoastSample(paused = false): Promise<boolean> {
       debug: test && p.get('debug') === '1', xray: p.get('xray') !== '0', mood: Number(p.get('mood') ?? 0) === 1 ? 1 : 0,
       reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches,
       viewTiles: p.get('view') === '28' ? 28 : 24, collapseTall: p.get('collapse') !== '0',
+      weather: p.get('weather') === 'clear' ? 'clear' : 'rain',
       // Loaded on demand: esbuild still inlines the module, but the app's module graph (and Node tests) never import PNGs.
       art: p.get('art') === 'placeholder' ? null : await (await import('./assets')).loadCoastAssets(),
     };

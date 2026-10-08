@@ -246,6 +246,12 @@ try {
   await check('E1 run 1 extracts: the result screen plays the extraction chime', async () => {
     const r = await exitAndSettle('run 1 settlement'); assert.equal(r.outcome, 'extract'); assert.ok(r.chime, `chime ${JSON.stringify(r)}`); return r;
   });
+  // The audio service now schedules cues asked for while resume() is pending, so the death cue starts in the very first
+  // block rendered after the pause, together with the ambience: there is no preceding output for the onset detector to
+  // compare with. The cue is therefore measured by level: the peak of the settlement window against the peak of the
+  // ambience alone once the cue has died away. Measured over 16 runs of this check with the cue: 2.11-2.89x, peak
+  // 0.113-0.159 (docs/coast-sample-view/opus-experience-20261009/evidence/audio-e2-calibration.json); with the cue dropped (the original game before the fix) both windows sit at the ambience, about 0.05,
+  // so about 1x. The sea swell moves the ambience peak by about +-20%, hence 1.6x and a 0.09 floor.
   await check('E2 run 2: deploy again, shots audible, abandon from the pause menu: the death cue still plays', async () => {
     await page.locator('[data-action="return"]').click(); await wait(500); await deploy(false);
     const s = await shots(2, 'run 2 shots'); assert.equal(s.sounded, 2, JSON.stringify(s));
@@ -253,8 +259,9 @@ try {
     await page.locator('.coast-sample [data-do="abandon"]').click();
     const c = await capture('run 2 abandon from pause', async () => { await page.locator('.coast-sample [data-do="abandon-yes"]').click(); await page.waitForFunction(() => window.__bincov.app.state === 'result'); }, 1800);
     const outcome = await page.evaluate(() => window.__bincov.app.result?.outcome);
-    assert.equal(outcome, 'death'); assert.ok(c.on.length >= 1, `death cue onsets ${c.on.length}`);
-    return { shots: s, cueOnsets: c.on.length, ...stats(c.bs), states: await ctxState() };
+    const ambience = await capture('ambience after the death cue', async () => {}, 900), cue = stats(c.bs).peak, quiet = stats(ambience.bs).peak;
+    assert.equal(outcome, 'death'); assert.ok(cue >= quiet * 1.6 && cue > .09, `death cue peak ${cue} vs ambience ${quiet} (onsets ${c.on.length})`);
+    return { shots: s, cueOnsets: c.on.length, cuePeak: cue, ambiencePeak: quiet, ...stats(c.bs), states: await ctxState() };
   });
   await check('E3 run 3: deploy again, ambience, shots and footsteps audible, extract with the chime', async () => {
     await page.locator('[data-action="return"]').click(); await wait(500); await deploy(false);

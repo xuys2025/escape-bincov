@@ -138,6 +138,9 @@ try {
   await page.waitForFunction(() => window.__bincov.app.state === 'result' || window.__bincov.app.coastSample?.panel === 'ending', null, { timeout: 15000 }).catch(() => {});
   if (await page.evaluate(() => window.__bincov.app.coastSample?.panel === 'ending')) await shot('settling', '结算写入');
   await page.waitForFunction(() => window.__bincov.app.state === 'result', null, { timeout: 15000 });
+  // The saved settlement is followed by the sample's short outro (curtain) before the original result screen.
+  await wait(500); if (await page.evaluate(() => !!document.querySelector('.coast-sample.outro'))) await shot('outro', '撤离落幕');
+  await page.waitForFunction(() => !document.querySelector('.coast-sample'), null, { timeout: 15000 });
   await wait(600); await shot('result', '结算页');
   report.result = await page.evaluate(() => ({ outcome: window.__bincov.app.result?.outcome, kills: window.__bincov.app.result?.kills ?? null }));
 } catch (error) {

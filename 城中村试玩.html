@@ -11,7 +11,11 @@
   body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #15140f; color: #e8e2d4; font: 16px/1.6 system-ui, sans-serif; }
   a { color: #e6c470; }
 </style>
-<script>location.replace('start%20the%20game.html?sample=village' + location.hash);</script>
+<!-- Options given to this page (for example ?weather=clear) are passed on after sample=village. -->
+<script>
+  var extra = location.search.slice(1).split('&').filter(function (p) { return p && p.indexOf('sample=') !== 0; }).join('&');
+  location.replace('start%20the%20game.html?sample=village' + (extra ? '&' + extra : '') + location.hash);
+</script>
 </head>
 <body>
 <p>正在打开城中村试玩……若没有自动跳转，请点 <a href="start%20the%20game.html?sample=village">这里</a>，或用 <code>start the game.html?sample=village</code> 打开。</p>

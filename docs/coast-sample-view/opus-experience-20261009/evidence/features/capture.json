@@ -1,0 +1,66 @@
+{
+  "errors": [],
+  "requests": [],
+  "shots": [
+    {
+      "name": "hit-marker.png",
+      "note": "命中标记、枪口烟、准星后坐"
+    },
+    {
+      "name": "hit-marker-zoom.png",
+      "note": "命中标记 放大"
+    },
+    {
+      "name": "kill-marker.png",
+      "note": "击杀标记与倒地"
+    },
+    {
+      "name": "reload-ring-zoom.png",
+      "note": "换弹环 放大"
+    },
+    {
+      "name": "exit-pointer-edge.png",
+      "note": "撤离指向标：画面外时在边缘指向"
+    },
+    {
+      "name": "exit-pointer-near.png",
+      "note": "撤离指向标：画面内时标在撤离圈上方；海面反光与涟漪"
+    },
+    {
+      "name": "threat-chevron.png",
+      "note": "画面外射手：顶边箭头指向；受击边缘泛红"
+    },
+    {
+      "name": "crate-open-zoom.png",
+      "note": "搜刮时箱盖掀开 放大"
+    },
+    {
+      "name": "rain-zoom.png",
+      "note": "细雨、溅点、水洼涟漪 放大"
+    },
+    {
+      "name": "low-hp.png",
+      "note": "低血量：受击边缘持续搏动"
+    },
+    {
+      "name": "death-0120.png",
+      "note": "倒地 0.12 秒"
+    },
+    {
+      "name": "death-0620.png",
+      "note": "倒地 0.6 秒：转灰、压暗"
+    },
+    {
+      "name": "death-1320.png",
+      "note": "倒地 1.3 秒：你倒下了"
+    },
+    {
+      "name": "death-result.png",
+      "note": "原结算页"
+    },
+    {
+      "name": "extract-outro.png",
+      "note": "撤离成功"
+    }
+  ]
+}

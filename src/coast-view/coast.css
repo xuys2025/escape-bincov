@@ -146,3 +146,48 @@ html[data-coast-sample] #toast { z-index: 120; }
   .cs-panel.map .cs-exit select { max-width: 9em; }
 }
 @media (max-height: 480px) { .coast-sample .cs-panel.map .cs-map-tabs button { min-height: 30px; padding: 0 10px; } }
+/* Feedback layer (round 6): a fixed lens vignette, the hurt edge, hit markers, the reload ring on the reticle, the exit
+   pointer and the end-of-run curtain. All of it is presentation; positions come from the host every frame. */
+.cs-vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 72% 70% at 50% 47%, transparent 62%, rgba(10,9,7,.34) 100%); }
+.cs-hurt { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(ellipse 70% 66% at 50% 50%, transparent 50%, rgba(122,22,14,.5) 86%, rgba(90,10,6,.72) 100%); }
+.cs-cross .cs-ring { position: absolute; left: 0; top: 0; width: 25px; height: 25px; border-radius: 50%; display: none;
+  background: conic-gradient(#e7c873 var(--reload, 0deg), #3a352b66 0); -webkit-mask: radial-gradient(circle, transparent 9.5px, #000 10px, #000 12.5px, transparent 13px); mask: radial-gradient(circle, transparent 9.5px, #000 10px, #000 12.5px, transparent 13px); }
+.cs-cross.reloading .cs-ring { display: block; }
+/* The host moves .cs-hitpop with a translate; the pop itself scales on the inner wrapper, around the hit point. */
+.cs-hitpop { position: absolute; left: 0; top: 0; width: 0; height: 0; pointer-events: none; }
+.cs-hitpop b { position: absolute; left: 0; top: 0; width: 0; height: 0; opacity: 0; }
+.cs-hitpop i { position: absolute; width: 6px; height: 2px; background: #f4ead2; box-shadow: 0 0 0 1px #0009; }
+.cs-hitpop i:nth-child(1) { left: -11px; top: -9px; transform: rotate(45deg); }
+.cs-hitpop i:nth-child(2) { left: 5px; top: -9px; transform: rotate(-45deg); }
+.cs-hitpop i:nth-child(3) { left: -11px; top: 7px; transform: rotate(-45deg); }
+.cs-hitpop i:nth-child(4) { left: 5px; top: 7px; transform: rotate(45deg); }
+.cs-hitpop.on b { animation: cs-hitpop .2s steps(4) forwards; }
+.cs-hitpop.kill i { background: #e8664c; width: 8px; }
+.cs-hitpop.kill.on b { animation: cs-hitkill .42s steps(6) forwards; }
+@keyframes cs-hitpop { 0% { opacity: 1; transform: scale(.7); } 50% { opacity: 1; transform: scale(1.15); } 100% { opacity: 0; transform: scale(1.25); } }
+@keyframes cs-hitkill { 0% { opacity: 1; transform: scale(.7); } 30% { opacity: 1; transform: scale(1.4); } 100% { opacity: 0; transform: scale(1.6); } }
+.cs-exitptr { position: absolute; left: 0; top: 0; width: 0; height: 0; pointer-events: none; }
+.cs-exitptr i { position: absolute; left: -10px; top: -6px; width: 20px; height: 12px; transform: rotate(var(--dir, 90deg)); filter: drop-shadow(0 0 1px #000) drop-shadow(0 1px 0 #000); }
+.cs-exitptr i::before { content: ""; position: absolute; left: 0; top: 5px; width: 11px; height: 2px; background: #d6ec9a; }
+.cs-exitptr i::after { content: ""; position: absolute; left: 10px; top: 0; border: 6px solid transparent; border-left: 10px solid #d6ec9a; border-right: 0; }
+.cs-exitptr span { position: absolute; left: 0; top: 14px; transform: translateX(var(--lx, -50%)); white-space: nowrap; padding: 1px 6px; font-size: 16px; line-height: 16px; color: #e8f2c4; background: #12140fcc; border: 1px solid #6f8250; }
+.cs-exitptr:not(.edge) span { top: -32px; }
+.cs-curtain { position: absolute; inset: 0; display: none; place-items: center; pointer-events: none; }
+.coast-sample.outro .cs-curtain { display: grid; }
+.cs-curtain b { font-weight: 400; font-size: 32px; line-height: 32px; letter-spacing: 6px; color: #efe5cc; text-shadow: 0 2px 0 #000, 0 0 12px #000; opacity: 0; }
+.coast-sample[data-outro="died"] .cs-curtain b { color: #f0c8b8; }
+.coast-sample[data-outro="extract"] .cs-curtain b { color: #e2f0b4; }
+.coast-sample.outro .cs-status, .coast-sample.outro .cs-arms, .coast-sample.outro .cs-clock, .coast-sample.outro .cs-keys, .coast-sample.outro .cs-info,
+.coast-sample.outro .cs-prompt, .coast-sample.outro .cs-choices, .coast-sample.outro .cs-touch, .coast-sample.outro .cs-exitptr, .coast-sample.outro .cs-cross,
+.coast-sample.outro .cs-hits, .coast-sample.outro .cs-radio, .coast-sample.outro .cs-toast, .coast-sample.outro .cs-hitpop { visibility: hidden; }
+/* The pixel face is drawn for 16 px and its integer multiples; short screens use the small system face instead. */
+@media (max-height: 480px) { .cs-exitptr span { font-family: "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 14px; } }
+@media (prefers-reduced-motion: reduce) { .cs-hitpop.on b, .cs-hitpop.kill.on b { animation-duration: .01s; } }
+/* Off-screen shooters: an orange chevron on the screen edge pointing out toward them, fading in under a second. */
+.cs-threats i { position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; opacity: 0; pointer-events: none;
+  background: linear-gradient(45deg, transparent 46%, #e8774f 46%, #e8774f 60%, transparent 60%) 0 0/9px 9px no-repeat,
+    linear-gradient(-45deg, transparent 46%, #e8774f 46%, #e8774f 60%, transparent 60%) 0 9px/9px 9px no-repeat;
+  filter: drop-shadow(0 0 1px #000) drop-shadow(0 0 1px #000); }
+.coast-sample.outro .cs-threats { visibility: hidden; }
+/* Very short landscape phones: the status card keeps its bars; location and the routine body line give way. */
+@media (max-height: 340px) { .cs-where { display: none; } .cs-state.calm { display: none; } }

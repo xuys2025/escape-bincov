@@ -50,6 +50,9 @@ const REASONS: Record<string, string> = {
 };
 const esc = (s: string) => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
 const name = (id: string) => D.ITEMS[id]?.name ?? id;
+type Outro = 'died' | 'extract' | 'timeout' | 'failed';
+const OUTRO_TEXT: Record<Outro, string> = { died: '你倒下了', extract: '撤离成功', timeout: '行动超时', failed: '行动失败' };
+const ease = (t: number) => t * t * (3 - 2 * t);
 const weaponIcons = new Map<string, string>();
 /** The game's own 32 px item drawing of the held weapon, shown at 2x in the weapon card. */
 function weaponIcon(id: string): string {
@@ -66,6 +69,10 @@ function weaponIcon(id: string): string {
 const HTML = `
 <div class="cs-canvas" aria-label="行动画面"></div>
 <div class="cs-hud" aria-live="polite">
+  <div class="cs-vignette" aria-hidden="true"></div>
+  <div class="cs-hurt" data-hurt aria-hidden="true"></div>
+  <div class="cs-exitptr" data-exitptr hidden><i></i><span data-exitptr-text></span></div>
+  <div class="cs-threats" data-threats aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   <section class="cs-status">
     <div class="cs-meter"><span>生命</span><div class="cs-bar"><div data-hp></div></div><b data-hp-text></b></div>
     <div class="cs-meter"><span>体力</span><div class="cs-bar thin"><div data-st></div></div><b data-st-text></b></div>
@@ -84,8 +91,10 @@ const HTML = `
   <div data-prompt class="cs-prompt" hidden></div>
   <ul data-choices class="cs-choices" hidden aria-label="附近可搜刮的箱子和尸体"></ul>
   <div data-toast class="cs-toast" role="status"></div>
-  <div data-cross class="cs-cross" hidden></div>
+  <div data-cross class="cs-cross" hidden><i class="cs-ring"></i></div>
+  <div data-hitpop class="cs-hitpop" aria-hidden="true"><b><i></i><i></i><i></i><i></i></b></div>
   <div data-fade class="cs-fade"></div>
+  <div data-curtain class="cs-curtain" aria-live="assertive"><b data-curtain-text></b></div>
   <div class="cs-touch"><button type="button" data-bag>背包</button><button type="button" data-do="map">地图</button><button type="button" data-heal>治疗</button><button type="button" data-reload>换弹</button><button type="button" data-act>交互</button></div>
 </div>
 <section class="cs-panel" data-panel hidden role="dialog" aria-modal="true"></section>`;
@@ -166,7 +175,9 @@ export class CoastSampleHost {
   stats = { advanceMs: 0, presentMs: 0, frames: 0 };
 
   constructor(readonly handle: CoastHandle, private session: SessionState, private saves: SaveSession, readonly opts: ViewOptions,
-    private onExit: (o: SampleExit) => void, private exportBackup: () => void) {}
+    private onExit: (o: SampleExit) => void, private exportBackup: () => void) {
+    this.sound = new SampleSound(audio);
+  }
 
   get runtime() { return this.handle.runtime; }
   get services() { return this.handle.services; }
@@ -182,7 +193,8 @@ export class CoastSampleHost {
       this.view = new CoastView(this.app, this.opts);
       this.app.stage.addChild(this.view.screen);
       lifecycle.views++;
-      this.view.onRebuild = reason => { if (reason !== 'enter') this.fade(); };
+      // Every rebuild fades in from black, the first entry included.
+      this.view.onRebuild = () => this.fade();
       this.input.touch = document.documentElement.classList.contains('mobile') || matchMedia('(pointer: coarse)').matches && !matchMedia('(any-pointer: fine)').matches;
       this.inv = new InventoryPanel(this.q('[data-panel]'), {
         session: this.session, saves: this.saves, services: this.services,
@@ -206,14 +218,17 @@ export class CoastSampleHost {
 
   // --- frame ---
   private frame() {
-    if (!this.mounted || this.exiting) return;
+    if (!this.mounted) return;
+    if (this.exiting) { this.outro(); return; }
     const t0 = performance.now();
     const playing = this.panel === null;
     const intent = this.input.read(playing, (x, y) => this.view.aimFromClient(x, y));
+    if (intent.firePressed) this.sound.trigger(this.last?.frame.hud.weapon);
     const note = playing && intent.interactPressed && this.last?.frame.interaction?.kind === 'note' ? this.last.frame.interaction.ref.id : null;
     const batch = this.runtime.advance(t0, intent);
     const t1 = performance.now();
     if (batch.map !== this.last?.map) this.noteTitles = new Set(batch.map.notes.map(n => n.title));
+    this.view.openContainer = this.panel === 'loot' ? this.services.lootContext()?.containerId ?? null : null;
     if (!this.contextLost) this.view.present(batch, this.app.ticker.deltaMS / 1000);
     const t2 = performance.now();
     this.last = batch;
@@ -223,10 +238,75 @@ export class CoastSampleHost {
     this.stats.advanceMs = t1 - t0; this.stats.presentMs = t2 - t1; this.stats.frames++;
     if (this.frameTimes.length < 4000) this.frameTimes.push(this.app.ticker.deltaMS);
   }
+  /** Outro after the saved settlement: kind, seconds shown and total seconds before the result screen. */
+  private ending: { kind: Outro; t: number; hold: number } | null = null;
+  /**
+   * After the settlement is saved: keep drawing the last frame without simulation, events or bullets (the player's fall,
+   * camera, lamps and weather keep animating) while the curtain closes. Nothing here touches the Runtime.
+   */
+  private outro() {
+    const last = this.last, o = this.ending; if (!last || !o) return;
+    const dt = Math.min(.05, this.app.ticker.deltaMS / 1000);
+    if (!this.contextLost) this.view.present({ ...last, events: [], frame: { ...last.frame, bullets: [] } }, dt);
+    o.t += dt;
+    const p = Math.min(1, o.t / o.hold), k = ease(p), canvas = this.app.canvas, curtain = this.q('[data-curtain]');
+    if (o.kind === 'died') {
+      canvas.style.filter = `grayscale(${(k * .85).toFixed(3)}) brightness(${(1 - k * .3).toFixed(3)})`;
+      curtain.style.background = `radial-gradient(ellipse at 50% 46%, rgba(52,10,6,${(k * .35).toFixed(3)}) 30%, rgba(18,4,2,${(k * .88).toFixed(3)}) 100%)`;
+    } else curtain.style.background = `rgba(10,9,8,${(o.kind === 'extract' ? ease(Math.max(0, p - .25) / .75) : k * .85).toFixed(3)})`;
+    const text = this.q('[data-curtain-text]');
+    text.style.opacity = String(Math.min(1, Math.max(0, (o.t - (o.kind === 'died' ? .45 : .15)) / .35)));
+  }
   private readingFor: string | null = null;
   private weaponShown = '';
+  // --- combat feedback (display only) ---
+  /** Bullets the player fired that have not ended yet: their hits light the hit marker. */
+  private playerBullets = new Set<string>();
+  /** Targets the player hit recently (uid -> ms), so a death in the same burst shows the kill marker. */
+  private recentHits = new Map<string, number>();
+  private hurtPulse = 0;
+  private kick = 0;
+  private markT = 0;
+  private markAt = { x: 0, y: 0 };
+  /** Feedback for one new event. Hits are marked only where the hit point is in a revealed area (or outdoors). */
+  private feedback(e: StampedEvent, b: PublishedView) {
+    const f = b.frame, shown = (p: { x: number; y: number }) => { const r = this.view.regionAt(p); return r === null || f.revealed[r] === true; };
+    if (e.type === 'shot' && e.shooter === 'player') {
+      for (const p of e.pellets) this.playerBullets.add(p.bullet);
+      if (this.playerBullets.size > 200) this.playerBullets = new Set([...this.playerBullets].slice(-100));
+      this.kick = Math.min(1.4, this.kick + (e.weapon === 'shotgun' ? 1.2 : .8));
+    } else if (e.type === 'impact') {
+      const mine = this.playerBullets.delete(e.bullet), at = e.contact ?? e.lastFree;
+      // Contact is on the ground plane; the marker sits on the chest plane where the bullet is drawn.
+      if (mine && e.reason === 'hit-actor' && e.target && shown(at)) this.mark(e.target, { x: at.x, y: at.y - AIM_H }, false);
+    } else if (e.type === 'melee' && e.attacker === 'player' && e.hit) {
+      const a = f.actors.find(x => x.uid === e.hit); if (a && shown(a)) this.mark(a.uid, { x: a.x, y: a.y - AIM_H }, false);
+    } else if (e.type === 'death' && e.uid !== 'player') {
+      const at = this.recentHits.get(e.uid), a = f.actors.find(x => x.uid === e.uid);
+      if (at !== undefined && performance.now() - at < 500 && a && shown(a)) this.mark(e.uid, { x: a.x, y: a.y - AIM_H }, true);
+    } else if (e.type === 'hurt' && e.uid === 'player' && e.damage >= 1) this.hurtPulse = Math.min(1, this.hurtPulse + .45 + e.damage / 40);
+    else if (e.type === 'shot' && e.shooter !== 'player') {
+      // A shot from off screen by someone standing in the open or in a revealed room: mark the edge toward them.
+      const a = f.actors.find(x => x.uid === e.shooter);
+      if (a && shown(a)) {
+        const p = this.view.worldToClient({ x: a.x, y: a.y - AIM_H });
+        if (p.x < 0 || p.y < 0 || p.x > innerWidth || p.y > innerHeight) {
+          const slot = this.threats.find(t => t.uid === a.uid) ?? this.threats.reduce((o, t) => t.left < o.left ? t : o);
+          Object.assign(slot, { uid: a.uid, x: a.x, y: a.y - AIM_H, left: .9 });
+        }
+      }
+    }
+  }
+  /** Off-screen shooters (up to four), each fading over 0.9 s. */
+  private threats = [0, 1, 2, 3].map(() => ({ uid: '', x: 0, y: 0, left: 0 }));
+  private mark(uid: string, at: { x: number; y: number }, kill: boolean) {
+    this.recentHits.set(uid, performance.now());
+    if (this.recentHits.size > 40) this.recentHits.delete(this.recentHits.keys().next().value!);
+    this.markT = kill ? .42 : .2; this.markAt = { ...at };
+    const el = this.q('[data-hitpop]'); el.classList.toggle('kill', kill); el.classList.remove('on'); void el.offsetWidth; el.classList.add('on');
+  }
   /** The game's synth audio, driven from this host's batches (see sound.ts). */
-  private readonly sound = new SampleSound(audio);
+  private readonly sound: SampleSound;
   /** setBlocked(true) was requested but no batch has shown it yet: a panel opened mid-frame must not be closed by that frame's stale phase. */
   private blockPending = 0;
 
@@ -449,10 +529,20 @@ export class CoastSampleHost {
     if (s.committed) {
       if (this.exiting) return;
       this.exiting = true;
-      this.sound.settled((s.result as { outcome?: string } | null)?.outcome);
+      const outcome = (s.result as { outcome?: string } | null)?.outcome;
+      this.sound.settled(outcome);
       text.textContent = '结算已保存。';
       row.innerHTML = '';
-      this.scope.timeout(() => this.onExit({ kind: 'settled' }), 400);
+      // The settlement is already saved; what remains is presentation. A death plays the fall under a darkening
+      // curtain before the original result screen takes over; extraction and other endings fade out.
+      const died = this.last?.frame.player.alive === false;
+      const kind = outcome === 'extract' ? 'extract' : died ? 'died' : outcome === 'timeout' ? 'timeout' : 'failed';
+      const hold = this.opts.reducedMotion ? 400 : kind === 'died' ? 1700 : kind === 'extract' ? 1150 : 900;
+      this.ending = { kind, t: 0, hold: hold / 1000 };
+      this.q('[data-panel]').hidden = true;
+      this.root.classList.add('outro'); this.root.dataset.outro = kind;
+      this.q('[data-curtain-text]').textContent = OUTRO_TEXT[kind];
+      this.scope.timeout(() => this.onExit({ kind: 'settled' }), hold);
       return;
     }
     text.textContent = s.retryable ? '结算还没有写入存档。结算记录已保留，可以重试或先导出备份。' : '等待结算保存';
@@ -484,12 +574,16 @@ export class CoastSampleHost {
     if ((this.stats.frames & 3) === 0) { const docked = this.panel === 'loot' || this.panel === 'inventory'; this.view.panelInset = docked ? Math.max(0, innerHeight - this.q('[data-panel]').getBoundingClientRect().top) : 0; }
     this.prompt(this.panel ? null : f.interaction, f.player.y);
     const cross = q('[data-cross]'); cross.hidden = this.input.touch || !this.input.pointer.inside || !!this.panel;
-    cross.style.transform = `translate(${this.input.pointer.x}px, ${this.input.pointer.y}px)`;
+    // Recoil kick on the reticle; a ring around it fills while reloading.
+    cross.style.transform = `translate(${this.input.pointer.x}px, ${this.input.pointer.y}px) scale(${(1 + this.kick * .32).toFixed(3)})`;
     cross.classList.toggle('precise', f.player.state.precise);
+    const reload = f.player.state.reloading;
+    cross.classList.toggle('reloading', !!reload);
+    if (reload) cross.style.setProperty('--reload', `${Math.round((1 - reload.left / Math.max(.01, reload.total)) * 360)}deg`);
     this.root.classList.toggle('touch', this.input.touch);
     let lootChanged = false;
     for (const e of b.events) if (e.seq > this.lastSeq) {
-      this.lastSeq = e.seq; this.onEvent(e); this.sound.event(e, b.stamp.world.mapId);
+      this.lastSeq = e.seq; this.onEvent(e); this.sound.event(e, b.stamp.world.mapId); this.feedback(e, b);
       if (e.type === 'looted' || e.type === 'rejected') lootChanged = true;
       const { seq, type, durability, stamp, ...detail } = e;
       this.eventLog.push({ seq, type, durability, map: stamp.world.mapId, epoch: stamp.epoch, detail: detail as Record<string, unknown> });
@@ -498,6 +592,68 @@ export class CoastSampleHost {
     if (this.toastLeft > 0) { this.toastLeft -= dt; if (this.toastLeft <= 0) q('[data-toast]').classList.remove('on'); }
     if (this.radioLeft > 0) { this.radioLeft -= dt; if (this.radioLeft <= 0) q('[data-radio]').hidden = true; }
     if (this.panel === 'loot' && lootChanged) this.inv.render();
+    this.feedbackFrame(b, dt);
+  }
+  /** Per-frame feedback: hurt edge (a pulse per blow, a slow throb at low health), hit marker, reticle kick, exit pointer. */
+  private feedbackFrame(b: PublishedView, dt: number) {
+    const f = b.frame, h = f.hud, low = Math.max(0, .35 - h.hp / h.maxHp) / .35;
+    this.hurtPulse = Math.max(0, this.hurtPulse - dt * 1.6);
+    this.kick = Math.max(0, this.kick - dt * 9);
+    const throb = low > 0 && f.player.alive ? low * (.42 + .18 * Math.sin(performance.now() / 1000 * 5.2)) : 0;
+    this.q('[data-hurt]').style.opacity = Math.max(this.hurtPulse * .9, throb).toFixed(3);
+    const pop = this.q('[data-hitpop]');
+    if (this.markT > 0) {
+      this.markT -= dt;
+      const p = this.view.worldToClient(this.markAt);
+      pop.style.transform = `translate(${Math.round(p.x)}px, ${Math.round(p.y)}px)`;
+      if (this.markT <= 0) pop.classList.remove('on');
+    }
+    this.exitPointer(b);
+    const marks = this.q('[data-threats]').children;
+    this.threats.forEach((t, i) => {
+      const el = marks[i] as HTMLElement; t.left = Math.max(0, t.left - dt);
+      if (t.left <= 0 || this.panel) { el.style.opacity = '0'; return; }
+      const W = innerWidth, H = innerHeight, c = this.view.worldToClient({ x: f.player.x, y: f.player.y - AIM_H }), at = this.view.worldToClient(t);
+      const dx = at.x - c.x, dy = at.y - c.y, k = Math.min(dx ? ((dx > 0 ? W - 34 : 34) - c.x) / dx : Infinity, dy ? ((dy > 0 ? H - 34 : 34) - c.y) / dy : Infinity);
+      el.style.opacity = Math.min(1, t.left / .5).toFixed(2);
+      el.style.transform = `translate(${Math.round(c.x + dx * k)}px, ${Math.round(c.y + dy * k)}px) rotate(${Math.atan2(dy, dx)}rad)`;
+    });
+  }
+  private ptrInset: { l: number; r: number; t: number; b: number } | null = null;
+  /**
+   * The exit chosen on the map: a marker over it when it is on screen, otherwise an arrow on the screen edge pointing
+   * at it with its straight-line distance in tiles. Exits are the Runtime's visible exits; nothing else is pointed at.
+   */
+  private exitPointer(b: PublishedView) {
+    const el = this.q('[data-exitptr]'), exit = b.stamp.world.mapId === 'coast' && !this.panel ? b.map.exits.find(e => e.name === this.selectedExit) : undefined;
+    if (!exit) { el.hidden = true; return; }
+    const p = b.frame.player, at = this.view.worldToClient({ x: exit.at.x, y: exit.at.y - 30 }), W = innerWidth, H = innerHeight;
+    const ground = this.view.worldToClient(exit.at), tiles = Math.hypot(exit.at.x - p.x, exit.at.y - p.y) / 32;
+    this.q('[data-exitptr-text]').textContent = `${exit.name} · ${tiles < 1.5 ? '已到达' : `${tiles.toFixed(0)} 格`}`;
+    // The pointer stays inside the band between the top and bottom HUD cards (measured every 16 frames).
+    if ((this.stats.frames & 15) === 0 || !this.ptrInset) {
+      const top = Math.max(...['.cs-status', '.cs-info', '.cs-clock'].map(c => this.q(c).getBoundingClientRect().bottom));
+      const low = Math.min(...['.cs-arms', this.input.touch ? '.cs-touch' : '.cs-keys'].map(c => { const r = this.q(c).getBoundingClientRect(); return r.height ? r.top : H; }));
+      // Room for the label: above the marker on screen (32 px), below the arrow on the edge (about 34 px).
+      this.ptrInset = { l: 28, r: 28, t: Math.min(H / 2 - 40, top + 40), b: Math.min(H / 2 - 40, H - low + 44) };
+    }
+    const inset = this.ptrInset;
+    // The exit's ring in view: a marker over it when the marker fits between the HUD cards, otherwise nothing (the ring
+    // itself is showing). Out of view: an arrow on the edge of the band.
+    const inView = ground.x > 16 && ground.x < W - 16 && ground.y > 16 && ground.y < H - 16;
+    const onScreen = inView && at.x > inset.l && at.x < W - inset.r && at.y > inset.t && at.y < H - inset.b;
+    el.hidden = inView && !onScreen;
+    if (el.hidden) return;
+    el.classList.toggle('edge', !onScreen);
+    if (onScreen) { el.style.transform = `translate(${Math.round(at.x)}px, ${Math.round(at.y + Math.sin(performance.now() / 260) * 3)}px)`; el.style.setProperty('--dir', '90deg'); el.style.setProperty('--lx', '-50%'); return; }
+    // Clamp the ray from the screen centre to the inset rectangle.
+    const cx = W / 2, cy = H / 2, dx = at.x - cx, dy = at.y - cy;
+    const s = Math.min(dx ? ((dx > 0 ? W - inset.r : inset.l) - cx) / dx : Infinity, dy ? ((dy > 0 ? H - inset.b : inset.t) - cy) / dy : Infinity);
+    const x = cx + dx * s, y = cy + dy * s;
+    el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+    el.style.setProperty('--dir', `${Math.atan2(dy, dx)}rad`);
+    // Keep the label on screen at the side edges.
+    el.style.setProperty('--lx', x > W - 140 ? 'calc(-100% + 10px)' : x < 140 ? '-10px' : '-50%');
   }
   /** Lower-rate HUD: status, carried weight, exit bearing and quests (the original refreshes these every 0.1 s). */
   private slowHud(b: PublishedView) {
@@ -507,6 +663,8 @@ export class CoastSampleHost {
     let weight = '';
     if (l) { const w = D.WEAPONS[l.weapon || 'knife']; weight = `${(D.weight(l.bag) + D.weight(l.safe) + (l.weapon ? D.ITEMS[l.weapon].weight : 0) + D.ITEMS.knife.weight + (w.ammo ? D.ITEMS[w.ammo].weight * h.weapon.mag : 0)).toFixed(1)} kg`; }
     this.q('[data-state]').textContent = `${status}　${weight}`;
+    // Short screens hide the routine body line; a bleed or pollution warning keeps it.
+    this.q('[data-state]').classList.toggle('calm', !h.bleeding && h.pollution <= 10);
     const exit = b.map.exits.find(e => e.name === this.selectedExit);
     this.q('[data-exit-nav]').textContent = exit ? (() => { const bearing = exitBearing(b.frame.player, exit.at); return `${exit.name} · ${bearing.direction} · 直线 ${bearing.distance.toFixed(1)} 格`; })()
       : this.selectedExit ? `${this.selectedExit} · 返回地面查看方位` : '选择撤离点';
@@ -562,7 +720,8 @@ export class CoastSampleHost {
     this.inv?.closeTransient();
     this.scope.dispose();
     if (this.view) { this.view.destroy(); lifecycle.views--; }
-    if (this.app) { parkApp(this.app); lifecycle.apps--; }
+    // The parked canvas is reused by the next mount: drop the outro's grading.
+    if (this.app) { this.app.canvas.style.filter = ''; parkApp(this.app); lifecycle.apps--; }
     this.root?.remove();
     this.last = null;
   }

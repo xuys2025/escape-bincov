@@ -1,7 +1,8 @@
 import { Application, Container, Graphics, RenderTexture, Sprite, type Texture } from 'pixi.js';
 import { worldKeyString, type ActorKind, type ActorView, type MapDef, type Point, type PublishedView, type Rect, type StampedEvent, type ViewFrame } from '../raid-runtime/contract';
-import { SAMPLE_AREA, hasRoof, isRuined, materials, regionLamps, storeys } from './appearance';
-import { paintGround } from './art/ground';
+import { SAMPLE_AREA, hasRoof, isRuined, materials, regionLamps, storeys, type GroundMaterial } from './appearance';
+import { paintGround, puddles, type GroundBake } from './art/ground';
+import { groundGeometry } from './art/surface';
 import { LOOT_FOOT, LOOT_H } from './art/props';
 import { solWall, type SolArt } from './art/sol';
 import { LOW_H, ROOF_MARGIN, STOREY_H, WALL_H, paintCanopy, paintCeiling, paintDownpipe, paintLintel, paintLow, paintRoof, paintStairs, paintWall, paintWallAC, wallKey, type WallSpec } from './art/structures';
@@ -9,6 +10,7 @@ import { Fx } from './fx';
 import { Lighting, MOODS, lamp } from './lighting';
 import { Textures } from './textures';
 import { lifecycle } from './scope';
+import { Weather, type RoofArea, type WeatherKind } from './weather';
 
 export const AIM_H = 22;
 /**
@@ -27,6 +29,8 @@ interface Occluder {
   sprite: Sprite; key: string; kind: 'wall' | 'door' | 'roof' | 'ceiling' | 'canopy' | 'lintel';
   z: number; rect: Rect; keepBottom: number; level: number; target: number; region?: string; spec?: WallSpec;
   tall?: { full: string; flat: string; band: number; y: number; building: Rect; collapsed: boolean };
+  /** A door caught between closed and open for a few frames (display only; the Runtime state already changed). */
+  swing?: { t: number; key: string };
 }
 interface ActorGfx {
   kind: ActorKind; body: Sprite; weapon: Sprite; flash: Sprite; rim: Sprite; wrim: Sprite; shadow: Sprite; corpse: Sprite | null; corpseKey: string;
@@ -35,6 +39,8 @@ interface ActorGfx {
   /** Player only: faint warm outline so the player separates from dark asphalt (not the occlusion rim). */
   edge: Sprite | null;
   walk: number; dir: number; flashT: number; deathT: number; kick: Point; kickT: number; seen: boolean; swingT: number;
+  /** Half-cycles of the walk, to put a puff of dust under each sprinting step. */
+  step: number;
 }
 
 const intersects = (a: Rect, b: Rect) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
@@ -48,6 +54,8 @@ export interface ViewOptions {
   collapseTall: boolean;
   /** Decoded Sol samples; null keeps the procedural placeholders. */
   art: SolArt | null;
+  /** Drizzle on the coast map (default) or a dry overcast; reduced motion keeps only a still mist. */
+  weather: WeatherKind;
 }
 
 export class CoastView {
@@ -70,6 +78,7 @@ export class CoastView {
   private upHolder = new Container(); private upSprite = new Sprite();
   readonly screen = new Sprite();
   private fx: Fx;
+  readonly weather: Weather;
 
   private map: MapDef | null = null;
   private mapKey = ''; private epoch = -1;
@@ -77,7 +86,7 @@ export class CoastView {
   private doors = new Map<string, Occluder>();
   private actors = new Map<string, ActorGfx>();
   private bullets = new Map<string, { g: Graphics; born: Point; vx: number; vy: number }>();
-  private crates = new Map<string, { s: Sprite; shadow: Sprite; empty: boolean }>();
+  private crates = new Map<string, { s: Sprite; shadow: Sprite; empty: boolean; look: 'full' | 'empty' | 'open' }>();
   private loot = new Map<string, Sprite>();
   private muzzles: { s: Sprite; t: number }[] = [];
   private swings: { g: Graphics; t: number }[] = [];
@@ -88,9 +97,13 @@ export class CoastView {
   private destroyed = false;
 
   cam = { x: 0, y: 0 }; private camF = { x: 0, y: 0 };
+  /** Camera kick opposite the player's shot, settling back within a few frames. */
+  private recoil = { x: 0, y: 0 };
+  /** Crate whose loot panel is open (set by the host): drawn with its lid up. */
+  openContainer: string | null = null;
   view = { w: 0, h: 0, s: 1, k: 1, dpr: 1, W: 0, H: 0 };
   last: ViewFrame | null = null;
-  stats = { sprites: 0, occluders: 0, rebuilds: 0, frameMs: 0, droppedEvents: 0, events: 0 };
+  stats = { sprites: 0, occluders: 0, rebuilds: 0, frameMs: 0, droppedEvents: 0, events: 0, rebuildMs: 0 };
   shake = 0;
   onRebuild?: (reason: 'enter' | 'epoch' | 'map') => void;
   hudTop = 0;
@@ -101,9 +114,10 @@ export class CoastView {
     try {
       this.tex = new Textures(opts.art);
       this.light = new Lighting(this.tex);
-      this.groundRoot.addChild(this.groundLayer, this.flat, this.shadows);
+      this.weather = new Weather(this.tex, opts.weather, opts.reducedMotion);
+      this.groundRoot.addChild(this.groundLayer, this.flat, this.shadows, this.weather.back);
       this.sorted.sortableChildren = true;
-      this.upper.addChild(this.sorted, this.xray, this.overhead, this.debugG);
+      this.upper.addChild(this.sorted, this.xray, this.overhead, this.weather.front, this.debugG);
       this.lightOverlay.blendMode = 'multiply';
       this.lightHolder.addChild(this.lightOverlay);
       this.upHolder.addChild(this.upSprite);
@@ -151,7 +165,12 @@ export class CoastView {
 
     for (const [id, occ] of this.doors) {
       const open = !!f.doors[id];
-      if (occ.spec && occ.spec.open !== open) { occ.spec = { ...occ.spec, open }; occ.key = this.wallTexKey(occ.spec); occ.level = -1; }
+      if (occ.spec && occ.spec.open !== open) {
+        occ.spec = { ...occ.spec, open }; occ.key = this.wallTexKey(occ.spec); occ.level = -1;
+        // East-west doors pass through an ajar frame for a moment; the logic state has already switched.
+        if (occ.spec.kind === 'door-ew' && !this.opts.reducedMotion) { occ.swing = { t: 0, key: occ.key }; occ.key = this.ajarKey(occ.spec); }
+      }
+      if (occ.swing) { occ.swing.t += dt; if (occ.swing.t >= .11) { occ.key = occ.swing.key; occ.swing = undefined; occ.level = -1; } }
     }
     // A death is published in the same batch as the first frame with alive=false, so it must reach syncActor before that
     // frame turns the body into a corpse. Only this map/epoch counts: a rebuild (load, layer change) never replays a fall.
@@ -167,6 +186,7 @@ export class CoastView {
       if (!current(e)) { this.stats.droppedEvents++; continue; }
       this.onEvent(e, f);
     }
+    this.bakeAhead(dt);
     this.fx.update(dt);
     this.fx.reveal(f.revealed);
     for (let i = this.muzzles.length - 1; i >= 0; i--) { const m = this.muzzles[i]; m.t += dt; if (m.t > .03) m.s.texture = this.tex.muzzle(1); if (m.t > .07) { m.s.destroy(); this.muzzles.splice(i, 1); } }
@@ -178,7 +198,8 @@ export class CoastView {
     this.updateXray(f);
     this.updateHighlight(f, visible);
     this.camera(f, dt);
-    this.light.sync(dt, l => l.region === undefined || l.region === null || f.revealed[l.region] === true);
+    this.weather.update(this.time, this.cam, this.view, f.revealed);
+    this.light.sync(dt, l => l.region === undefined || l.region === null || f.revealed[l.region] === true, this.time);
     this.tintUpright(f);
     if (this.opts.debug) this.drawDebug(f); else this.debugG.clear();
     this.render();
@@ -189,24 +210,31 @@ export class CoastView {
   private clearScene() {
     for (const layer of [this.groundLayer, this.flat, this.shadows, this.sorted, this.xray, this.overhead]) for (const c of layer.removeChildren()) c.destroy();
     this.fx?.clear();
-    this.occluders = []; this.doors.clear(); this.actors.clear(); this.bullets.clear(); this.crates.clear(); this.loot.clear(); this.muzzles = []; this.swings = [];
+    this.occluders = []; this.pendingChunks = []; this.doors.clear(); this.actors.clear(); this.bullets.clear(); this.crates.clear(); this.loot.clear(); this.muzzles = []; this.swings = [];
     this.debugG.clear();
   }
 
   private rebuild(m: MapDef, f: ViewFrame) {
-    if (this.map) this.tex.atlas.dropPrefix(`ground:${worldKeyString(this.map.key)}`);
+    const t0 = performance.now(), mapKey = worldKeyString(m.key);
+    // Ground depends only on the map definition, so baked chunks are kept for the view's life: a raid has the coast and
+    // two small floors (about 16 MB in all), and going upstairs and back, or an epoch rebuild, never bakes again.
     this.map = m; this.stats.rebuilds++;
     this.clearScene();
     this.highlight = new Sprite(); this.highlight.visible = false; this.xray.addChild(this.highlight);
     this.exitG = new Graphics(); this.groundLayer.addChild(this.exitG);
     const b = m.bounds, M = materials(m);
+    let bake = this.bakes.get(mapKey);
+    if (!bake) { const geo = groundGeometry(m, M); bake = { geo, puddles: puddles(m, M, geo) }; this.bakes.set(mapKey, bake); }
 
     // Ground is painted once into 512px chunks (standalone textures), so the full 2304x1664 coast never needs one huge texture.
-    const CH = 512, prefix = `ground:${worldKeyString(m.key)}`;
+    // Chunks around the starting view bake now; the rest bake nearest-first, one per presented frame (bakeAhead), so the
+    // first entry to the 2304x1664 coast does not stall on all twenty chunks at once.
+    const CH = 512, prefix = `ground:${mapKey}`, near = grow({ x: f.player.x - this.view.w / 2, y: f.player.y - this.view.h / 2, w: this.view.w, h: this.view.h }, 64);
+    this.pendingChunks = [];
     for (let cy = b.y; cy < b.y + b.h; cy += CH) for (let cx = b.x; cx < b.x + b.w; cx += CH) {
       const r = { x: cx, y: cy, w: Math.min(CH, b.x + b.w - cx), h: Math.min(CH, b.y + b.h - cy) }, key = `${prefix}:${cx},${cy}`;
-      this.tex.atlas.add(key, paintGround(m, r, M, this.opts.art), true);
-      const chunk = new Sprite(this.tex.atlas.get(key)); chunk.position.set(cx, cy); this.groundLayer.addChildAt(chunk, 0);
+      if (this.tex.atlas.has(key) || intersects(r, near)) this.placeChunk(m, r, key, M, bake);
+      else this.pendingChunks.push({ r, key, M, bake });
     }
     if (m.key.mapId === 'coast') this.markSampleArea(b);
     for (const e of m.entries) {
@@ -246,9 +274,11 @@ export class CoastView {
       }
     }
 
+    const roofs: RoofArea[] = [];
     for (const bld of m.buildings) {
       if (!hasRoof(m, bld)) continue;
       const n = storeys(m, bld), band = (n - 1) * STOREY_H, lift = WALL_H + band;
+      roofs.push({ rect: { x: bld.x, y: bld.y, w: bld.w, h: bld.h }, lift, region: bld.regionIds[0] ?? null });
       const full = `roof:${bld.id}:${n}`, flat = `roof:${bld.id}:1`;
       this.tex.ensure(full, () => paintRoof(bld.w, bld.h, n, bld.x ^ bld.y));
       this.tex.ensure(flat, () => paintRoof(bld.w, bld.h, 1, bld.x ^ bld.y));
@@ -267,11 +297,40 @@ export class CoastView {
       const occ = this.addOccluder(key, r.x, r.y, r.y + r.h + .5, 'ceiling', 0); occ.region = r.id;
     }
     if (m.key.mapId === 'coast') this.dressCoast();
-    this.light.setMap(m); this.light.setMood(this.opts.mood, b);
+    // Awnings keep the pavement under them dry.
+    const awnings = m.key.mapId === 'coast' ? [11, 25].map(tx => ({ x: tx * 32, y: 15 * 32 - 8, w: 4 * 32, h: 40 })) : [];
+    this.weather.setMap(m, bake.puddles, roofs, awnings, (x, y) => M[y >> 5]?.[x >> 5] === 'water');
+    this.light.mood = MOODS[this.opts.mood % MOODS.length]; this.light.setMap(m);
     this.staticLights(m);
     this.stats.occluders = this.occluders.length;
     this.camF = { x: f.player.x - this.view.w / 2, y: f.player.y - AIM_H - this.view.h / 2 };
+    this.stats.rebuildMs = performance.now() - t0;
   }
+  private pendingChunks: { r: Rect; key: string; M: GroundMaterial[][]; bake: GroundBake }[] = [];
+  private placeChunk(m: MapDef, r: Rect, key: string, M: GroundMaterial[][], bake: GroundBake) {
+    if (!this.tex.atlas.has(key)) this.tex.atlas.add(key, paintGround(m, r, M, this.opts.art, bake), true);
+    const chunk = new Sprite(this.tex.atlas.get(key)); chunk.position.set(r.x, r.y); this.groundLayer.addChildAt(chunk, 0);
+  }
+  /**
+   * Bake the pending chunk nearest the camera once the view comes within 320 px of it: one per frame, never on a
+   * zero-time re-present. Chunks the player never approaches are never baked.
+   */
+  private bakeAhead(dt: number) {
+    if (!this.pendingChunks.length || dt <= 0 || !this.map) return;
+    const reach = grow({ x: this.cam.x, y: this.cam.y, w: this.view.w, h: this.view.h }, 320), cx = this.cam.x + this.view.w / 2, cy = this.cam.y + this.view.h / 2;
+    let best = -1, bestD = Infinity;
+    this.pendingChunks.forEach((c, i) => {
+      if (!intersects(c.r, reach)) return;
+      const d = Math.hypot(c.r.x + c.r.w / 2 - cx, c.r.y + c.r.h / 2 - cy); if (d < bestD) { bestD = d; best = i; }
+    });
+    if (best < 0) return;
+    const c = this.pendingChunks.splice(best, 1)[0];
+    this.placeChunk(this.map, c.r, c.key, c.M, c.bake);
+  }
+  /** Ground chunks still waiting to bake (read by checks). */
+  get pendingGround() { return this.pendingChunks.length; }
+  /** Per-map bake inputs (geometry, noise lattices, puddles), reused by every rebuild of the same map. */
+  private bakes = new Map<string, GroundBake>();
 
   /** Outside the dressed village corner the generic placeholder pipeline still renders the real map; mark it as such. */
   private markSampleArea(b: Rect) {
@@ -284,6 +343,18 @@ export class CoastView {
     this.groundLayer.addChild(g);
   }
 
+  /** Ajar door: the open frame with the closed leaf squeezed toward its hinge (left), as seen half way through the swing. */
+  private ajarKey(spec: WallSpec) {
+    const closed = this.wallTexKey({ ...spec, open: false }), opened = this.wallTexKey({ ...spec, open: true }), key = `${closed}|ajar`;
+    this.tex.ensure(key, () => {
+      const a = this.tex.canvas(opened), b = this.tex.canvas(closed), c = document.createElement('canvas'); c.width = a.width; c.height = a.height;
+      const g = c.getContext('2d')!; g.imageSmoothingEnabled = false; g.drawImage(a, 0, 0);
+      g.drawImage(b, 4, 32, 24, WALL_H, 4, 32, 11, WALL_H);
+      g.fillStyle = 'rgba(20,18,15,.35)'; g.fillRect(15, 34, 2, WALL_H - 4);
+      return c;
+    });
+    return key;
+  }
   private wallTexKey(spec: WallSpec) { const key = wallKey(spec); this.tex.ensure(key, () => (this.opts.art && solWall(this.opts.art, spec)) || paintWall(spec)); return key; }
 
   private addOccluder(key: string, x: number, y: number, z: number, kind: Occluder['kind'], keepBottom: number): Occluder {
@@ -323,9 +394,10 @@ export class CoastView {
 
   private staticLights(m: MapDef) {
     this.light.lights = [];
-    for (const l of regionLamps(m)) this.light.lights.push(lamp(l.x, l.y, l.region, l.warm ? 0xc3a26a : 0xa08a5f));
+    // Room lamps waver slightly and the odd one stutters (stateless in view time; no visibility or combat effect).
+    for (const l of regionLamps(m)) this.light.lights.push({ ...lamp(l.x, l.y, l.region, l.warm ? 0xc3a26a : 0xa08a5f), flicker: Math.floor(l.x * 7 + l.y * 13) % 997 });
     if (m.key.mapId === 'coast') {
-      this.light.lights.push(lamp(26 * 32, 18.5 * 32, null, 0xa08a5f));
+      this.light.lights.push({ ...lamp(26 * 32, 18.5 * 32, null, 0xa08a5f), flicker: 311 });
       this.light.lights.push({ x: 20 * 32, y: 9 * 32, r: 90, color: 0xb59a68, k: .35, region: null });
     }
     for (const x of m.exits) this.light.lights.push({ x: x.at.x, y: x.at.y, r: 120, color: 0x7f9a55, k: .5, region: null });
@@ -353,7 +425,12 @@ export class CoastView {
         this.sorted.addChild(sp); this.muzzles.push({ s: sp, t: 0 });
         this.light.lights.push({ x: a.x + c * 20, y: a.y + s * 20, r: e.weapon === 'shotgun' ? 100 : 80, color: 0xe0b878, k: .9, ttl: .07, region: a.regionId });
         if (e.weapon !== 'shotgun') this.fx.casing(a.x + c * 4, a.y + s * 4, AIM_H - 2, angle, this.rnd);
-        if (a.kind === 'player' && !this.opts.reducedMotion) this.shake = Math.min(2, this.shake + (e.weapon === 'shotgun' ? 2 : 1));
+        this.fx.smoke(a.x + c * (reach + 2), a.y + s * (reach + 2) * .6, AIM_H, this.rnd, e.weapon === 'shotgun' ? 5 : 3);
+        if (a.kind === 'player' && !this.opts.reducedMotion) {
+          this.shake = Math.min(2, this.shake + (e.weapon === 'shotgun' ? 1.5 : .6));
+          const k = e.weapon === 'shotgun' ? 4 : e.weapon === 'carbine' ? 2.5 : 2;
+          this.recoil.x -= c * k; this.recoil.y -= s * k;
+        }
         break;
       }
       case 'melee': {
@@ -397,7 +474,7 @@ export class CoastView {
       const mk = () => { const s = new Sprite(); s.anchor.set(.5, 1); return s; };
       const arm = () => { const s = new Sprite(this.tex.arm(a.kind)); s.anchor.set(0, .5); return s; };
       g = { kind: a.kind, body: mk(), weapon: new Sprite(), flash: mk(), rim: new Sprite(), wrim: new Sprite(), shadow: new Sprite(this.tex.blob(20, 7)), corpse: null, corpseKey: '',
-        arms: [arm(), arm()], edge: a.kind === 'player' ? new Sprite() : null, walk: 0, dir: dirOf(a.aim), flashT: 0, deathT: 0, kick: { x: 0, y: 0 }, kickT: 0, seen: false, swingT: 0 };
+        arms: [arm(), arm()], edge: a.kind === 'player' ? new Sprite() : null, walk: 0, dir: dirOf(a.aim), flashT: 0, deathT: 0, kick: { x: 0, y: 0 }, kickT: 0, seen: false, swingT: 0, step: 0 };
       g.flash.blendMode = 'add'; g.rim.anchor.set(.5, (48 + 1) / 50); g.shadow.anchor.set(.5);
       this.sorted.addChild(g.body, ...g.arms, g.weapon, g.flash); this.xray.addChild(g.rim, g.wrim);
       if (g.edge) { g.edge.anchor.set(.5, (48 + 1) / 50); g.edge.tint = 0xf3dfa8; g.edge.alpha = .38; this.sorted.addChild(g.edge); } this.shadows.addChild(g.shadow);
@@ -406,6 +483,8 @@ export class CoastView {
     g.kind = a.kind;
     const speed = Math.hypot(a.vx, a.vy);
     g.walk = speed > 5 ? (g.walk + dt * speed / 22) % 4 : 0;
+    const step = Math.floor(g.walk / 2);
+    if (step !== g.step) { g.step = step; if (speed > 150 && shown && a.alive && dt > 0) this.fx.dust(a.x, a.y, this.rnd, 2); }
     g.dir = dirOf(a.aim);
     g.flashT = Math.max(0, g.flashT - dt); g.kickT = Math.max(0, g.kickT - dt); g.swingT = Math.max(0, g.swingT - dt);
     if (g.deathT > 0) g.deathT += dt;
@@ -427,6 +506,9 @@ export class CoastView {
         const seed = fresh ? null : [...a.uid].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
         let k = seed ?? 0; const r = () => seed === null ? this.rnd() : ((k = (k * 1103515245 + 12345) >>> 0) / 4294967296);
         for (let i = 0; i < 14; i++) this.fx.decal(a.x - 9 + r() * 18, a.y - 2 + r() * 7, i % 3 ? 0x5a2724 : 0x6e2f2a, r() < .4 ? 2 : 1);
+        if (a.kind !== 'creature') this.fx.pool(a.x + facing * 4, a.y + 1, [...a.uid].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 3), fresh);
+        // Pools go under the body: move the corpse to the top of the flat layer again.
+        this.flat.addChild(g.corpse);
       }
       g.corpse.position.set(x, y); g.corpse.visible = shown;
       g.rim.visible = g.wrim.visible = false;
@@ -483,14 +565,15 @@ export class CoastView {
     for (const c of f.containers) {
       if (c.kind !== 'crate') continue;
       seen.add(c.id);
-      const empty = c.stacks === 0;
+      const empty = c.stacks === 0, look = empty ? 'empty' : this.openContainer === c.id ? 'open' : 'full';
       let e = this.crates.get(c.id);
       if (!e) {
-        const s = new Sprite(this.tex.crate(empty)); s.anchor.set(.5, 22 / 28); s.position.set(Math.round(c.x), Math.round(c.y)); s.zIndex = c.y + 1;
+        const s = new Sprite(this.tex.crate(look)); s.anchor.set(.5, 22 / 28); s.position.set(Math.round(c.x), Math.round(c.y)); s.zIndex = c.y + 1;
         const shadow = new Sprite(this.tex.blob(26, 6)); shadow.anchor.set(.5); shadow.position.set(Math.round(c.x) + 2, Math.round(c.y) + 1);
-        this.sorted.addChild(s); this.shadows.addChild(shadow); e = { s, shadow, empty }; this.crates.set(c.id, e);
+        this.sorted.addChild(s); this.shadows.addChild(shadow); e = { s, shadow, empty, look }; this.crates.set(c.id, e);
       }
-      if (e.empty !== empty) { e.empty = empty; e.s.texture = this.tex.crate(empty); this.fx.dust(c.x, c.y, this.rnd, 3); }
+      if (e.empty !== empty) { e.empty = empty; this.fx.dust(c.x, c.y, this.rnd, 3); }
+      if (e.look !== look) { e.look = look; e.s.texture = this.tex.crate(look); }
       e.s.visible = e.shadow.visible = visible(c.regionId);
     }
     for (const [id, e] of this.crates) if (!seen.has(id)) { e.s.destroy(); e.shadow.destroy(); this.crates.delete(id); }
@@ -617,7 +700,7 @@ export class CoastView {
         const g = c.ownerUid ? this.actors.get(c.ownerUid) : null; if (!g?.corpse) return;
         h.texture = this.tex.ensure(`${g.corpseKey}|rim`, () => rimOf(this.tex.canvas(g.corpseKey))); h.anchor.set(.5, 15 / 26); h.position.copyFrom(g.corpse.position);
       } else {
-        const key = `crate:${c.stacks ? 'full' : 'empty'}`;
+        const key = `crate:${this.crates.get(c.id)?.look ?? (c.stacks ? 'full' : 'empty')}`;
         h.texture = this.tex.ensure(`${key}|rim`, () => rimOf(this.tex.canvas(key))); h.anchor.set(.5, 23 / 30); h.position.set(Math.round(c.x), Math.round(c.y));
       }
     } else {
@@ -638,8 +721,9 @@ export class CoastView {
     const top = this.hudTop * this.view.dpr / this.view.s;
     const cx = clamp(this.camF.x, b.x - pad, b.x + b.w + pad - this.view.w), cy = clamp(this.camF.y, b.y - pad - (pad ? 40 : 0) - top, b.y + b.h + pad - this.view.h);
     this.shake = Math.max(0, this.shake - dt * 30);
+    const settle = Math.exp(-dt * 16); this.recoil.x *= settle; this.recoil.y *= settle;
     const sx = this.shake > .3 ? Math.round((this.rnd() - .5) * this.shake) : 0, sy = this.shake > .3 ? Math.round((this.rnd() - .5) * this.shake) : 0;
-    this.cam = { x: Math.round(cx) + sx, y: Math.round(cy) + sy };
+    this.cam = { x: Math.round(cx + this.recoil.x) + sx, y: Math.round(cy + this.recoil.y) + sy };
   }
 
   private tintUpright(f: ViewFrame) {
@@ -728,6 +812,8 @@ export class CoastView {
     this.clearScene();
     // `context: true`: with any options object Pixi keeps a Graphics' own context registered with the renderer, which
     // outlives the view now that the renderer is reused.
+    this.light?.destroy();
+    this.weather?.destroy();
     for (const c of [this.groundRoot, this.upper, this.light?.layer, this.lightHolder, this.upHolder, this.screen,
       this.groundLayer, this.flat, this.shadows, this.sorted, this.xray, this.overhead, this.debugG, this.exitG, this.highlight, this.lightOverlay, this.upSprite])
       if (c && !c.destroyed) c.destroy({ children: true, context: true });

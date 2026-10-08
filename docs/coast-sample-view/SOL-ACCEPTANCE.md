@@ -1,5 +1,7 @@
 # 给 Sol：城中村可玩样板验收清单
 
+> 2026-10-09 第六轮（Opus 前端体验整改）：样板门禁增至 **42 项**（新增 V06 战斗反馈、V06b 指向标、V07 空气无状态、V08 箱盖与门、V09 玩家倒地落幕）；单测 233 项；`coast-audio-test.mjs` 仍为 14/14，其中 E2 改为按电平判断（原因见报告）；`coast-sample-shots.mjs` 的 window 场景摆放已改为合法位置。复验项按 [任务清单](opus-experience-20261009/gpt-tasks.md) 第一节（R6-V1 至 V5）执行。
+
 > 2026-10-08 Sol 已从 `bf099cc` 完成限定签收：**OPUS-DEATH-01 敌人路径PASS**，原真实死亡检查及 **36/36** 门禁、两尺寸生命周期各4/4、原20套浏览器回归通过。玩家完整倒地不在本次范围，OPUS-DEATH-02待排期；F20仍PARTIAL、ASTRA-SAVE-01仍未确认。见[当前签收报告](sol-death-20261008/README.md)。下方97c0b44及早期轮次为历史记录，不覆盖本次结论。
 >
 > 2026-10-08 声音：新增 `node scripts/coast-audio-test.mjs`。它在输出端采样，不加自动播放参数，期望 14/14；验收时请看 `audio-waveforms.png`，确认起音与事件对齐。见 [声音报告](opus-audio-20261008/README.md)。
