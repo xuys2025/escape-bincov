@@ -1,3 +1,13 @@
+## 2026-10-08 · PR #22 Opus 修 OPUS-DEATH-01，交 Sol 定向复验后停止
+
+在原分支 `docs/coast-2-5d-art-design` 从 `81e1bd0` 接手，工作区干净；main 仍为 841e8bb，已包含在分支中；PR #22 OPEN，头 878f563。见[报告与 Sol 定向复验说明](docs/coast-sample-view/opus-death-20261008/README.md)。
+
+- `scene.present` 在 `syncActor` 之前读取当前地图/epoch 的 `death` 事件。只有已站立画出、尚无尸体、本帧可见的演员才倾倒；其余直接换尸体。倾倒时脚底回滑，使倒地位置与尸体图对齐。Runtime、存档、素材均未改动。
+- 新门禁 V03/V04（Sol/placeholder 两种模式）使用真实 `damageEnemy`：可见击杀倾倒、隐藏房间像素变化 0、揭示/楼梯/读档不重播。样板 36/36；用 `81e1bd0` 重建（与当时 dist 逐字节相同）运行为 0/4。Sol 原 `sol-round4-visual.mjs` 现为 exit 0。
+- 224 单测、package（HTML `6828628e…`）、生命周期 1280/1920 各 4/4、test:browser、test:portable 通过。生命周期首次因执行器漏 `--import tsx` 以 exit 1 退出，已按原命令重跑并记录。
+- 玩家自身死亡（真实敌人射击，探针非门禁）：倾倒开始，但结算在同帧提交，宿主进入 exiting 后停止呈现，只看到第一帧。登记为候选 OPUS-DEATH-02，待用户/维护者决定，本轮未改。
+- OPUS-MEM-01 F20 PARTIAL、ASTRA-SAVE-01 UNCONFIRMED 不变。仅本地提交，未推送、合并、发布。
+
 ## 2026-10-08 · PR #22 Sol 从97c0b44复验，交回后停止
 
 在原分支 `docs/coast-2-5d-art-design` 从 `97c0b44` 接手，初始干净；main仍为841e8bb，原PR #22 OPEN/头878f563，Pages逐字节等于main且不含本地样板。见[本轮真实报告](docs/coast-sample-view/sol-round4-20261008/README.md)、[归属清单](docs/coast-sample-view/sol-round4-20261008/defects.md)、[素材需求](docs/coast-sample-view/sol-round4-20261008/material-requirements.md)。

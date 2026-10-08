@@ -19,6 +19,8 @@ export const AIM_H = 22;
 const heldLength = (angle: number) => 1 - .5 * Math.abs(Math.sin(angle));
 /** Seconds of the fall before the corpse sprite replaces the body. */
 const FALL_T = .16;
+/** The feet slide back this far (world px, plus a little down) while the body tips, so the fallen body lies where the corpse is drawn. */
+const FALL_SLIDE = 18;
 
 interface Occluder {
   sprite: Sprite; key: string; kind: 'wall' | 'door' | 'roof' | 'ceiling' | 'canopy' | 'lintel';
@@ -144,14 +146,18 @@ export class CoastView {
       const open = !!f.doors[id];
       if (occ.spec && occ.spec.open !== open) { occ.spec = { ...occ.spec, open }; occ.key = this.wallTexKey(occ.spec); occ.level = -1; }
     }
+    // A death is published in the same batch as the first frame with alive=false, so it must reach syncActor before that
+    // frame turns the body into a corpse. Only this map/epoch counts: a rebuild (load, layer change) never replays a fall.
+    const current = (e: StampedEvent) => worldKeyString(e.stamp.world) === this.mapKey && e.stamp.epoch === this.epoch;
+    const fallen = new Set(batch.events.flatMap(e => e.type === 'death' && current(e) ? [e.uid] : []));
     const seen = new Set<string>();
-    for (const a of [f.player, ...f.actors]) { seen.add(a.uid); this.syncActor(a, dt, visible(a.regionId)); }
+    for (const a of [f.player, ...f.actors]) { seen.add(a.uid); this.syncActor(a, dt, visible(a.regionId), fallen.has(a.uid)); }
     for (const [uid, g] of this.actors) if (!seen.has(uid)) { this.dropActor(g); this.actors.delete(uid); }
     this.syncCrates(f, visible); this.syncLoot(f, visible); this.syncBullets(f);
 
     for (const e of batch.events) {
       this.stats.events++;
-      if (worldKeyString(e.stamp.world) !== this.mapKey || e.stamp.epoch !== this.epoch) { this.stats.droppedEvents++; continue; }
+      if (!current(e)) { this.stats.droppedEvents++; continue; }
       this.onEvent(e, f);
     }
     this.fx.update(dt);
@@ -368,15 +374,17 @@ export class CoastView {
         const a = actor(e.uid); if (a && shown(a)) this.fx.blood(a.x, a.y + .5, AIM_H, ang, this.rnd);
         break;
       }
-      case 'death': { const g = this.actors.get(e.uid); if (g && !g.corpse) g.deathT = .0001; break; }
       case 'door': { const d = this.map!.doors.find(x => x.id === e.id); if (d) this.fx.dust(d.x * 32 + 16, d.y * 32 + 30, this.rnd, 4); break; }
       case 'looted': { const p = f.player; this.fx.dust(p.x, p.y, this.rnd, 2); break; }
       default: break;
     }
   }
 
-  private syncActor(a: ActorView, dt: number, shown: boolean) {
+  private syncActor(a: ActorView, dt: number, shown: boolean, fell = false) {
     let g = this.actors.get(a.uid);
+    // The fall plays only for a body already drawn standing and visible now; a death in a hidden room, or one first met
+    // as a corpse, goes straight to the corpse.
+    if (fell && g && !g.corpse && g.deathT === 0 && shown) g.deathT = .0001;
     if (!g) {
       const mk = () => { const s = new Sprite(); s.anchor.set(.5, 1); return s; };
       g = { kind: a.kind, body: mk(), weapon: new Sprite(), flash: mk(), rim: new Sprite(), wrim: new Sprite(), shadow: new Sprite(this.tex.blob(20, 7)), corpse: null, corpseKey: '',
@@ -415,9 +423,10 @@ export class CoastView {
     }
     if (g.corpse) { g.corpse.destroy(); g.corpse = null; g.corpseKey = ''; }
     // Dying: the standing frame tips over its feet toward the side the corpse will lie on, then the corpse replaces it.
-    const tilt = dying ? corpseFacing(a) * 1.25 * Math.min(1, g.deathT / FALL_T) : 0;
-    g.body.texture = this.tex.actor(a.kind, g.dir, frame); g.body.position.set(x, y); g.body.zIndex = a.y; g.body.rotation = tilt;
-    g.flash.texture = this.tex.actorFlash(a.kind, g.dir, frame); g.flash.position.set(x, y); g.flash.zIndex = a.y + .01; g.flash.visible = shown && g.flashT > 0; g.flash.alpha = .5; g.flash.rotation = tilt;
+    const fall = dying ? Math.min(1, g.deathT / FALL_T) : 0, side = dying ? corpseFacing(a) : 0, tilt = side * 1.25 * fall;
+    const bx = x - Math.round(side * FALL_SLIDE * fall), by = y + Math.round(4 * fall);
+    g.body.texture = this.tex.actor(a.kind, g.dir, frame); g.body.position.set(bx, by); g.body.zIndex = a.y; g.body.rotation = tilt;
+    g.flash.texture = this.tex.actorFlash(a.kind, g.dir, frame); g.flash.position.set(bx, by); g.flash.zIndex = a.y + .01; g.flash.visible = shown && g.flashT > 0; g.flash.alpha = .5; g.flash.rotation = tilt;
     g.shadow.position.set(x + 2, y - 1);
     g.rim.texture = this.tex.actorRim(a.kind, g.dir, frame); g.rim.position.set(x, y + 1); g.rim.tint = a.kind === 'player' ? 0xf0dca0 : 0xe07a5a;
     const art = this.tex.weapon(a.weapon, a.kind);

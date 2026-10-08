@@ -49,6 +49,29 @@ const failWrites = page => page.evaluate(() => { window.__set = Storage.prototyp
 const failSettlementWrites = page => page.evaluate(() => { window.__set = Storage.prototype.setItem; Storage.prototype.setItem = function (k, v) { if (k === 'escape-bincov.session.v2' && !String(v).includes('"location":"raid"')) throw new DOMException('Injected fault', 'QuotaExceededError'); return window.__set.call(this, k, v); }; });
 const restoreWrites = page => page.evaluate(() => { Storage.prototype.setItem = window.__set; });
 
+const ROOM = { x: 304, y: 192, w: 320, h: 240 }, ROOM_ID = 'coast-buildings-v1/resident-layout-1/coast/region/resident-ground';
+// Pixels of the view's composited render target (no HTML), re-presented from the same batch at a fixed view time while
+// the real pause holds simulation time (ambient light follows raid time). The first call stores the baseline. Roofs and
+// ceilings are stripped for every probe (a fully faded roof), so a pass depends on region gating, not on the roof
+// covering the room; `leak` forces the withheld decals visible as the positive control.
+const roomPixels = (page, compare, leak = false) => page.evaluate(([r, compare, leak]) => {
+  const h = window.__bincovSample.host, v = h.view; h.app.ticker.stop();
+  const fades = v.updateFades, reveal = v.fx.reveal;
+  v.updateFades = function (...a) { fades.apply(this, a); this.occluders.forEach(o => { if (o.kind === 'roof' || o.kind === 'ceiling') o.sprite.visible = false; }); };
+  if (leak) v.fx.reveal = function (rv) { reveal.call(this, rv); this.decals.forEach(d => { d.s.visible = true; }); };
+  // The camera may still be easing while paused: every probe reuses the baseline camera.
+  if (!compare) window.__probeCam = { ...v.camF }; v.camF = { ...window.__probeCam }; v.shake = 0;
+  v.time = 1; v.present({ ...h.lastBatch, events: [] }, 0); h.app.render(); delete v.updateFades; delete v.fx.reveal;
+  const { pixels, width } = h.app.renderer.extract.pixels(v.upRT), k = v.view.k, rows = pixels.length / 4 / width;
+  const x0 = Math.max(0, Math.round((r.x - v.cam.x) * k)), y0 = Math.max(0, Math.round((r.y - v.cam.y) * k));
+  const x1 = Math.min(width, Math.round((r.x + r.w - v.cam.x) * k)), y1 = Math.min(rows, Math.round((r.y + r.h - v.cam.y) * k));
+  const crop = []; for (let y = y0; y < y1; y++) crop.push(pixels.slice((y * width + x0) * 4, (y * width + x1) * 4));
+  h.app.ticker.start();
+  if (!compare) { window.__probeBase = crop; return { size: [x1 - x0, y1 - y0] }; }
+  let changed = 0; crop.forEach((row, y) => { const a = window.__probeBase[y]; for (let i = 0; i < row.length; i += 4) if (row[i] !== a[i] || row[i + 1] !== a[i + 1] || row[i + 2] !== a[i + 2]) changed++; });
+  return { size: [x1 - x0, y1 - y0], changed };
+}, [ROOM, compare, leak]);
+
 { // Desktop flow: one run through every wiring point, ending in a settlement
   const { context, page } = await open('?test=1&sample=village');
   await step('W00 sample deploy mounts the Pixi host on the real Runtime; RaidScene never starts', async () => {
@@ -258,28 +281,7 @@ const restoreWrites = page => page.evaluate(() => { Storage.prototype.setItem = 
     return { uid, hidden, shown };
   });
   await step('V01 a corpse killed in an unrevealed room adds 0 changed pixels (closed, reopened-and-closed, rebuilt, after a floor change); reveal shows it', async () => {
-    const ROOM = { x: 304, y: 192, w: 320, h: 240 }, ROOM_ID = 'coast-buildings-v1/resident-layout-1/coast/region/resident-ground';
-    // Pixels of the view's composited render target (no HTML), re-presented from the same batch at a fixed view time while
-    // the real pause holds simulation time (ambient light follows raid time). The first call stores the baseline. Roofs and
-    // ceilings are stripped for every probe (a fully faded roof), so a pass depends on region gating, not on the roof
-    // covering the room; `leak` forces the withheld decals visible as the positive control.
-    const probe = (compare, leak = false) => page.evaluate(([r, compare, leak]) => {
-      const h = window.__bincovSample.host, v = h.view; h.app.ticker.stop();
-      const fades = v.updateFades, reveal = v.fx.reveal;
-      v.updateFades = function (...a) { fades.apply(this, a); this.occluders.forEach(o => { if (o.kind === 'roof' || o.kind === 'ceiling') o.sprite.visible = false; }); };
-      if (leak) v.fx.reveal = function (rv) { reveal.call(this, rv); this.decals.forEach(d => { d.s.visible = true; }); };
-      // The camera may still be easing while paused: every probe reuses the baseline camera.
-      if (!compare) window.__probeCam = { ...v.camF }; v.camF = { ...window.__probeCam }; v.shake = 0;
-      v.time = 1; v.present({ ...h.lastBatch, events: [] }, 0); h.app.render(); delete v.updateFades; delete v.fx.reveal;
-      const { pixels, width } = h.app.renderer.extract.pixels(v.upRT), k = v.view.k, rows = pixels.length / 4 / width;
-      const x0 = Math.max(0, Math.round((r.x - v.cam.x) * k)), y0 = Math.max(0, Math.round((r.y - v.cam.y) * k));
-      const x1 = Math.min(width, Math.round((r.x + r.w - v.cam.x) * k)), y1 = Math.min(rows, Math.round((r.y + r.h - v.cam.y) * k));
-      const crop = []; for (let y = y0; y < y1; y++) crop.push(pixels.slice((y * width + x0) * 4, (y * width + x1) * 4));
-      h.app.ticker.start();
-      if (!compare) { window.__probeBase = crop; return { size: [x1 - x0, y1 - y0] }; }
-      let changed = 0; crop.forEach((row, y) => { const a = window.__probeBase[y]; for (let i = 0; i < row.length; i += 4) if (row[i] !== a[i] || row[i + 1] !== a[i + 1] || row[i + 2] !== a[i + 2]) changed++; });
-      return { size: [x1 - x0, y1 - y0], changed };
-    }, [ROOM, compare, leak]);
+    const probe = (compare, leak = false) => roomPixels(page, compare, leak);
     const state = () => page.evaluate(id => { const h = window.__bincovSample.host, f = h.lastBatch.frame; return { revealed: f.revealed[id] === true, hiddenFx: h.view.hiddenFx, error: window.__bincov.app.storageError }; }, ROOM_ID);
     const pause = async on => { await page.evaluate(on => on ? window.__bincovSample.host.pause('overlay') : window.__bincovSample.host.resume(), on); await frames(page, 4); };
     const enemies = (await page.evaluate(() => window.__bincovSample.host.lastBatch.frame.actors.filter(a => a.alive).map(a => a.uid))).slice(1);
@@ -426,6 +428,134 @@ const restoreWrites = page => page.evaluate(() => { Storage.prototype.setItem = 
     const r = await page.evaluate(() => ({ outcome: window.__bincov.app.result?.outcome, counts: window.__bincovSample.counts() }));
     assert.equal(r.outcome, 'death', 'abandon settles under the original failure rules'); assert.equal(r.counts.apps, 0);
     return r;
+  });
+  await context.close();
+}
+// Real Runtime deaths (driver.kill -> damageEnemy, so hurt/death events, kills and the corpse container are the game's own)
+// watched from inside the view: the real present runs unchanged and each watched actor's graphics are read after it.
+// Nothing primes deathT, injects or reorders events, or removes corpses. `strip` also crops the composited target through
+// one actor's fall, and holds the ticker once mid-fall so the page itself can be screenshotted.
+const watchDeaths = (page, uids, strip = null) => page.evaluate(([uids, strip]) => {
+  const h = window.__bincovSample.host, v = h.view, present = Object.getPrototypeOf(v).present, log = window.__deaths = { rows: [], crops: [], hold: false };
+  v.present = function (batch, dt) {
+    const rebuilds = this.stats.rebuilds; present.call(this, batch, dt);
+    for (const uid of uids) {
+      const a = [batch.frame.player, ...batch.frame.actors].find(x => x.uid === uid), g = this.actors.get(uid); if (!a || !g) continue;
+      log.rows.push({ uid, dt, alive: a.alive, death: batch.events.some(e => e.type === 'death' && e.uid === uid), rebuilt: this.stats.rebuilds > rebuilds,
+        map: batch.stamp.world.mapId, epoch: batch.stamp.epoch, deathT: g.deathT, rotation: g.body.rotation, body: g.body.visible, weapon: g.weapon.visible,
+        corpse: !!g.corpse?.visible, hasCorpse: !!g.corpse, corpseKey: g.corpseKey, shown: this.actorShown(uid) });
+      const marks = [() => true, () => g.deathT >= .04, () => g.deathT >= .08, () => g.deathT >= .12, () => !!g.corpse, () => g.deathT >= .3];
+      if (uid !== strip || a.alive || !marks[log.crops.length]?.()) continue;
+      const k = this.view.k, c = document.createElement('canvas'); c.width = c.height = 216; const cg = c.getContext('2d'); cg.imageSmoothingEnabled = false;
+      cg.drawImage(h.app.renderer.extract.canvas(this.upRT), Math.round((a.x - 36 - this.cam.x) * k), Math.round((a.y - 56 - this.cam.y) * k), 72 * k, 72 * k, 0, 0, 216, 216);
+      log.crops.push({ deathT: g.deathT, rotation: g.body.rotation, corpse: !!g.corpse, canvas: c });
+      if (log.crops.length === 3) { log.hold = true; h.app.ticker.stop(); }
+    }
+  };
+}, [uids, strip]);
+const releaseHold = page => page.evaluate(() => { window.__deaths.hold = false; window.__bincovSample.host.app.ticker.start(); });
+const endWatch = page => page.evaluate(() => {
+  const v = window.__bincovSample.host.view, log = window.__deaths; delete v.present; delete window.__deaths;
+  const data = c => c.getContext('2d').getImageData(0, 0, 216, 216).data, base = log.crops[0] && data(log.crops[0].canvas);
+  const crops = log.crops.map(c => { const d = data(c.canvas); let changed = 0; for (let i = 0; i < d.length; i += 4) if (d[i] !== base[i] || d[i + 1] !== base[i + 1] || d[i + 2] !== base[i + 2]) changed++; return { deathT: c.deathT, rotation: c.rotation, corpse: c.corpse, changedFromDeathFrame: changed }; });
+  let png = null;
+  if (log.crops.length) {
+    const s = document.createElement('canvas'); s.width = 216 * log.crops.length; s.height = 240; const g = s.getContext('2d'); g.imageSmoothingEnabled = false;
+    g.fillStyle = '#111'; g.fillRect(0, 0, s.width, s.height); g.fillStyle = '#fff'; g.font = '13px monospace';
+    log.crops.forEach((c, i) => { g.drawImage(c.canvas, i * 216, 24); g.fillText(`deathT ${c.deathT.toFixed(3)}s${c.corpse ? ' corpse' : ''}`, i * 216 + 6, 16); });
+    png = s.toDataURL();
+  }
+  return { rows: log.rows, crops, png };
+});
+const saveStrip = (w, name) => w.png ? writeFile(resolve(out, name), Buffer.from(w.png.split(',')[1], 'base64')) : null;
+const deadGraphics = page => page.evaluate(() => {
+  const v = window.__bincovSample.host.view, f = window.__bincovSample.host.lastBatch.frame;
+  return f.actors.filter(a => !a.alive).map(a => { const g = v.actors.get(a.uid); return { uid: a.uid, deathT: g.deathT, rotation: g.body.rotation, body: g.body.visible, hasCorpse: !!g.corpse, shown: v.actorShown(a.uid) }; });
+});
+const noFall = (rows, label) => { for (const r of rows) assert.ok(r.deathT === 0 && r.rotation === 0 && !r.body && !r.weapon, `${label}: ${JSON.stringify(r)}`); };
+
+// OPUS-DEATH-01: the shared actor path under both art modes. The player's own death is not driven here (see the round report).
+for (const art of ['sol', 'placeholder']) {
+  const { context, page } = await open(`?test=1&sample=village${art === 'placeholder' ? '&art=placeholder' : ''}`);
+  await deploy(page);
+  const kill = uid => page.evaluate(u => window.__bincovSample.driver.kill(u), uid);
+  const putEnemy = (uid, x, y) => page.evaluate(([u, x, y]) => window.__bincovSample.driver.placeEnemy(u, { x, y }), [uid, x, y]);
+  const shownNow = uid => page.evaluate(u => window.__bincovSample.host.view.actorShown(u), uid);
+  // A standing fixture must be a position the save accepts (bodyFits), or the next checkpoint is rejected.
+  const savable = async () => { assert.equal(await page.evaluate(() => window.__bincovSample.host.services.checkpoint()), true, 'fixture positions pass checkpoint validation'); assert.equal(await page.evaluate(() => window.__bincov.app.storageError), ''); };
+  await step(`V03 ${art}: a real Runtime kill in view tips the standing body over its feet, weapon gone, before the corpse replaces it`, async () => {
+    assert.equal((await page.evaluate(() => window.__bincovSample.counts())).art, art);
+    const uid = 'enemy-3'; // a rifleman: the held weapon must leave with the fall
+    // Inside the village sample, so the Sol mode draws its own ground around the fall (enemy bodies are procedural in both modes).
+    await place(page, 640, 456, 0, 'coast'); await putEnemy(uid, 704, 456); await frames(page, 8); await savable();
+    assert.equal(await shownNow(uid), true, 'the enemy stands in view before the kill');
+    await watchDeaths(page, [uid], uid); await kill(uid);
+    // Without a fall (the OPUS-DEATH-01 defect) the hold never comes: stop waiting once the corpse is up and let the asserts say why.
+    await page.waitForFunction(() => { const d = window.__deaths; return d.hold || d.rows.some(r => !r.alive && r.hasCorpse && r.deathT === 0); });
+    if (await page.evaluate(() => window.__deaths.hold)) {
+      await page.evaluate(() => window.__bincovSample.host.app.render());
+      await page.screenshot({ path: resolve(out, `death-midfall-${art}.png`) }); await releaseHold(page);
+    }
+    await page.waitForFunction(() => { const d = window.__deaths; return d.crops.length === 6 || d.rows.filter(r => !r.alive).length >= 60; });
+    await page.screenshot({ path: resolve(out, `death-corpse-${art}.png`) });
+    const w = await endWatch(page); await saveStrip(w, `death-fall-${art}.png`);
+    const dead = w.rows.filter(r => !r.alive), first = dead[0], dying = dead.filter(r => !r.hasCorpse), lying = dead.filter(r => r.hasCorpse);
+    assert.equal(first.death, true, 'the first dead frame carries the real death event');
+    assert.ok(first.deathT > 0 && first.body && !first.weapon && !first.hasCorpse, `the death frame starts the fall, not the corpse: ${JSON.stringify(first)}`);
+    assert.ok(dying.length >= 3, `frames of fall: ${dying.length}`);
+    assert.equal(dead.indexOf(lying[0]), dying.length, 'the corpse comes after every falling frame, never before');
+    dying.forEach((r, i) => { assert.ok(r.body && !r.weapon && r.shown, 'standing body shown, weapon hidden'); if (i) assert.ok(Math.abs(r.rotation) >= Math.abs(dying[i - 1].rotation)); });
+    const facing = Number(lying[0].corpseKey.split(':').at(-1));
+    assert.ok(dying.every(r => Math.sign(r.rotation) === facing), 'falls toward the side the corpse lies on');
+    assert.ok(Math.abs(dying.at(-1).rotation) >= .9, `tipped ${dying.at(-1).rotation} rad before the corpse`);
+    assert.ok(lying[0].deathT >= .16 && lying.every(r => r.corpse && !r.body && !r.weapon && r.shown), 'then only the corpse shows');
+    assert.equal(w.crops.length, 6); assert.ok(w.crops[3].changedFromDeathFrame > 0 && !w.crops[3].corpse, 'the tipped body renders differently from the death frame');
+    await savable();
+    return { art, deathFrame: first, fallFrames: dying.length, rotations: dying.map(r => +r.rotation.toFixed(3)), handoffDeathT: lying[0].deathT, facing, crops: w.crops };
+  });
+  await step(`V04 ${art}: no fall for a kill in an unrevealed room (0 changed pixels), nor for corpses rebuilt by an epoch, the stairs or a reload`, async () => {
+    const hidden = 'enemy-12', indoor = 'enemy-21';
+    const pause = async on => { await page.evaluate(on => on ? window.__bincovSample.host.pause('overlay') : window.__bincovSample.host.resume(), on); await frames(page, 4); };
+    // Hidden room: the death event arrives, the body never shows and nothing changes on screen. As in V01 the enemy waits
+    // outside the view and is moved into the room in the same task as the kill (the room spot is not a valid standing body).
+    await page.evaluate(() => window.__bincovSample.driver.door('resident-front', false)); await place(page, 464, 440, -Math.PI / 2, 'coast');
+    await putEnemy(hidden, 104, 860); await frames(page, 8); await savable(); await pause(true);
+    await roomPixels(page, false);
+    await watchDeaths(page, [hidden]); await page.evaluate(u => { const d = window.__bincovSample.driver; d.placeEnemy(u, { x: 352, y: 336 }); d.kill(u); }, hidden); await frames(page, 12);
+    const px = await roomPixels(page, true), hiddenRows = (await endWatch(page)).rows.filter(r => !r.alive); await pause(false);
+    assert.ok(hiddenRows.some(r => r.death), 'the real death event reached the view'); noFall(hiddenRows, 'hidden kill');
+    assert.ok(hiddenRows.every(r => !r.corpse && !r.shown)); assert.equal(px.changed, 0, 'hidden kill changes no pixels');
+    await page.screenshot({ path: resolve(out, `death-hidden-${art}.png`) });
+    // Reveal by stepping in (placement raises the epoch: a rebuild): the corpse is simply there.
+    await watchDeaths(page, [hidden]); await place(page, 464, 330, Math.PI, 'coast'); await frames(page, 10);
+    const revealRows = (await endWatch(page)).rows; noFall(revealRows, 'revealed corpse');
+    assert.ok(revealRows.some(r => r.rebuilt) && revealRows.at(-1).corpse && revealRows.at(-1).shown, 'the revealed corpse is shown');
+    // A visible indoor kill near the stairs falls; after up and down the stairs the rebuilt corpse does not fall again.
+    await place(page, 560, 272, -Math.PI / 2, 'coast'); await putEnemy(indoor, 464, 330); await frames(page, 8); await savable();
+    assert.equal(await shownNow(indoor), true);
+    await watchDeaths(page, [indoor]); await kill(indoor); await wait(400); await frames(page, 2);
+    const indoorRows = (await endWatch(page)).rows.filter(r => !r.alive);
+    assert.ok(indoorRows[0].death && indoorRows[0].body && indoorRows[0].deathT > 0 && indoorRows.at(-1).corpse, 'the indoor kill in view falls');
+    await watchDeaths(page, [indoor]);
+    await page.keyboard.press('e'); await page.waitForFunction(() => window.__bincovSample.host.lastBatch.stamp.world.mapId === 'resident-f2'); await frames(page, 3);
+    await page.keyboard.press('e'); await page.waitForFunction(() => window.__bincovSample.host.lastBatch.stamp.world.mapId === 'coast'); await frames(page, 10);
+    const stairRows = (await endWatch(page)).rows.filter(r => r.map === 'coast' && r.epoch > indoorRows[0].epoch);
+    assert.ok(stairRows.length && stairRows[0].rebuilt, 'returned through a rebuild'); noFall(stairRows, 'after the stairs');
+    assert.ok(stairRows.every(r => r.corpse && r.shown && !r.death), 'the old corpse is shown at once, with no death event');
+    // Reload from the committed checkpoint: a fresh view meets every corpse lying down (deathT never resets, so 0 means never fell).
+    assert.equal(await page.evaluate(() => window.__bincovSample.host.services.checkpoint()), true);
+    await page.reload(); await action(page, 'enter').click(); await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch); await frames(page, 4);
+    const loaded = await deadGraphics(page), logged = await events(page, 'death');
+    await page.screenshot({ path: resolve(out, `death-reload-${art}.png`) });
+    await page.locator('[data-do="resume"]').click(); await page.evaluate(() => window.__bincovSample.driver.freezeAI(true));
+    await watchDeaths(page, ['enemy-3', hidden, indoor]); await frames(page, 15);
+    const resumed = (await endWatch(page)).rows;
+    assert.deepEqual(logged, [], 'loading emits no death event');
+    assert.ok([hidden, indoor, 'enemy-3'].every(u => loaded.some(d => d.uid === u)));
+    for (const d of loaded) assert.ok(d.deathT === 0 && d.rotation === 0 && !d.body && d.hasCorpse, `loaded corpse: ${JSON.stringify(d)}`);
+    assert.equal(loaded.find(d => d.uid === indoor).shown, true, 'the corpse by the stairs is on screen after the load');
+    noFall(resumed, 'resumed after the load'); await savable();
+    return { hidden: { frames: hiddenRows.length, changed: px.changed }, reveal: revealRows.length, indoorFallFrames: indoorRows.filter(r => !r.hasCorpse).length, stairs: stairRows.length, loaded, resumed: resumed.length };
   });
   await context.close();
 }

@@ -1,0 +1,126 @@
+{
+  "at": "2026-10-08T12:50:52.274Z",
+  "baseline": {
+    "head": "81e1bd071f4d5ce6c812f0bbd0dc0d002b0ddb37",
+    "originMain": "841e8bbdfb070eada82537563dd1ab1b4801aea3",
+    "pr22": {
+      "state": "OPEN",
+      "head": "878f5633316a824960091f8f924c0ddd8dd78078"
+    }
+  },
+  "env": {
+    "node": "24.19.0",
+    "pnpm": "11.19.0",
+    "chrome": "154.0.8037.98",
+    "os": "Windows 10.0.19045"
+  },
+  "unit": {
+    "command": "pnpm test",
+    "exit": 0,
+    "tests": 224,
+    "pass": 224,
+    "fail": 0
+  },
+  "package": {
+    "command": "pnpm package",
+    "exit": 0
+  },
+  "artifacts": {
+    "dist/index.html": {
+      "bytes": 3146669,
+      "sha256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e"
+    },
+    "start the game.html": {
+      "bytes": 3146669,
+      "sha256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e"
+    },
+    "release/Escape-Bincov-portable.zip": {
+      "bytes": 1070057,
+      "sha256": "5e87fca7f44eb3bc847883aabd8eea8eed0080537e19533954697cbbab6adc92"
+    },
+    "release/Escape-Bincov-web.zip": {
+      "bytes": 1066282,
+      "sha256": "37926e2b232aa62bb0704da9888b24de34d41b9c55959d9af7b5f9ff680effeb"
+    }
+  },
+  "positiveControl": {
+    "source": "git show 81e1bd0:src/coast-view/scene.ts, rebuilt with scripts/build.mjs",
+    "htmlSha256": "88ca4cf44377533c385284994f41a837aa0004fd3e8d3614d11276a689a1684d",
+    "equalsCommitted81e1bd0Dist": true
+  },
+  "runs": [
+    {
+      "name": "sample",
+      "exit": 0,
+      "start": "2026-10-08T20:47:28+08:00",
+      "end": "2026-10-08T20:48:09+08:00",
+      "command": "BINCOV_SAMPLE_OUT=... node scripts/coast-sample-test.mjs"
+    },
+    {
+      "name": "sol-visual",
+      "exit": 0,
+      "start": "2026-10-08T20:48:09+08:00",
+      "end": "2026-10-08T20:48:13+08:00",
+      "command": "node scripts/sol-round4-visual.mjs"
+    },
+    {
+      "name": "lifecycle-1280",
+      "exit": 1,
+      "start": "2026-10-08T20:48:13+08:00",
+      "end": "2026-10-08T20:48:13+08:00",
+      "note": "runner error: launched without --import tsx, failed loading TS sources before any browser opened; rerun below",
+      "command": "node scripts/coast-lifecycle-test.mjs (missing --import tsx)"
+    },
+    {
+      "name": "lifecycle-1920",
+      "exit": 1,
+      "start": "2026-10-08T20:48:14+08:00",
+      "end": "2026-10-08T20:48:14+08:00",
+      "note": "runner error, same as above",
+      "command": "BINCOV_LIFECYCLE_WIDE=1 node scripts/coast-lifecycle-test.mjs (missing --import tsx)"
+    },
+    {
+      "name": "portable",
+      "exit": 0,
+      "start": "2026-10-08T20:48:14+08:00",
+      "end": "2026-10-08T20:48:19+08:00",
+      "command": "pnpm test:portable"
+    },
+    {
+      "name": "browser",
+      "exit": 0,
+      "start": "2026-10-08T20:48:19+08:00",
+      "end": "2026-10-08T20:48:59+08:00",
+      "command": "pnpm test:browser"
+    },
+    {
+      "name": "lifecycle-1280-tsx",
+      "exit": 0,
+      "start": "2026-10-08T20:49:09+08:00",
+      "end": "2026-10-08T20:49:24+08:00",
+      "command": "node --import tsx scripts/coast-lifecycle-test.mjs"
+    },
+    {
+      "name": "lifecycle-1920-tsx",
+      "exit": 0,
+      "start": "2026-10-08T20:49:24+08:00",
+      "end": "2026-10-08T20:49:40+08:00",
+      "command": "BINCOV_LIFECYCLE_WIDE=1 node --import tsx scripts/coast-lifecycle-test.mjs"
+    },
+    {
+      "name": "player-death",
+      "exit": 0,
+      "start": "2026-10-08T20:49:40+08:00",
+      "end": "2026-10-08T20:49:45+08:00",
+      "command": "node scripts/opus-player-death-probe.mjs"
+    },
+    {
+      "name": "old-gates",
+      "exit": 1,
+      "start": "2026-10-08T20:49:46+08:00",
+      "end": "2026-10-08T20:49:52+08:00",
+      "note": "expected failure: positive control on a rebuild of 81e1bd0 scene.ts",
+      "command": "BINCOV_SAMPLE_HTML=<rebuild of 81e1bd0> V03/V04 block of scripts/coast-sample-test.mjs"
+    }
+  ]
+}
