@@ -138,7 +138,53 @@ async function takeApp(): Promise<Application> {
     else fresh.stage.destroy({ children: true, context: true });
     throw error;
   }
+  detachPixiEvents(fresh);
   return current = fresh;
+}
+/**
+ * The sample never uses Pixi's federated events: input.ts reads the DOM itself. Left attached, Pixi's event system
+ * listens on the canvas, document and window, and its pooled events keep the last native PointerEvent, whose event path
+ * holds the HUD of an unmounted host while the renderer is parked (R7-F20-FE-02). It is detached once, right after
+ * init; Application.destroy detaches again harmlessly. The two styles it wrote on the canvas (touch-action none,
+ * cursor inherit) are kept by coast.css.
+ */
+function detachPixiEvents(app: Application) {
+  (app.renderer as unknown as { events?: { setTargetElement(element: HTMLElement | null): void } }).events?.setTargetElement(null);
+}
+/**
+ * Pixi 8 keeps every GPU resource and renderable it manages in GCSystem hashes keyed by uid, and a released entry
+ * becomes a null placeholder (GCManagedHash.remove). Pixi rebuilds a hash without them only after 10,000 placeholders
+ * and only while rendering, so a parked renderer keeps one per Graphics, texture, buffer and geometry the last view
+ * released: about 24 Graphics slots a run (R7-F20-FE-01). Parking does the same rebuild Pixi does (copy the live
+ * entries into a fresh table), never touching a live entry. Returns the placeholders dropped; if Pixi's internals
+ * change shape this finds no table and returns 0, which the sample check W11 would report as growth.
+ */
+function compactManagedHashes(app: Application): number {
+  const gc = (app.renderer as unknown as { gc?: { _running?: boolean; _managedResourceHashes?: { context: Record<string, unknown>; hash: string }[] } }).gc;
+  const list = gc?._managedResourceHashes;
+  if (!Array.isArray(list) || gc!._running) return 0;
+  let dropped = 0;
+  for (const { context, hash } of list) {
+    const table = context?.[hash] as Record<string, unknown> | undefined;
+    if (!table || typeof table !== 'object' || Array.isArray(table)) continue;
+    let nulls = 0;
+    for (const key in table) if (table[key] === null) nulls++;
+    if (!nulls) continue;
+    const live: Record<string, unknown> = Object.create(null);
+    for (const key in table) if (table[key] !== null) live[key] = table[key];
+    context[hash] = live; dropped += nulls;
+  }
+  return dropped;
+}
+/** Null placeholders and live entries across the renderer's GC-managed hashes (read by the sample checks). */
+export function managedSlots(): { live: number; empty: number } {
+  const list = (current?.renderer as unknown as { gc?: { _managedResourceHashes?: { context: Record<string, unknown>; hash: string }[] } } | undefined)?.gc?._managedResourceHashes;
+  let live = 0, empty = 0;
+  for (const { context, hash } of Array.isArray(list) ? list : []) {
+    const table = context?.[hash] as Record<string, unknown> | undefined;
+    if (table && typeof table === 'object' && !Array.isArray(table)) for (const key in table) if (table[key] === null) empty++; else live++;
+  }
+  return { live, empty };
 }
 function parkApp(app: Application) {
   for (const c of app.stage.removeChildren()) c.destroy({ children: true, context: true });
@@ -146,6 +192,7 @@ function parkApp(app: Application) {
   // Pixi's global pools (BigPool batch objects, pooled render textures, canvases) are what releaseGlobalResources
   // cleared on destroy; they only hold returned objects, so emptying them with the renderer alive is safe.
   GlobalResourceRegistry.release();
+  compactManagedHashes(app);
   if (parked && parked !== app) dropApp(parked);
   parked = app; lifecycle.parked = 1;
 }

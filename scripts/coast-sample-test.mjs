@@ -382,7 +382,15 @@ const roomPixels = (page, compare, leak = false) => page.evaluate(([r, compare, 
     await page.evaluate(() => window.__bincovSample.remount(20)); await frames(page, 5);
     const last = await page.evaluate(() => window.__bincovSample.counts());
     for (const k of ['listeners', 'tickers', 'observers', 'apps', 'parked', 'views', 'renderTextures', 'liveViews', 'canvases', 'sampleRoots', 'atlasPages', 'largeTextures', 'gpuTextures']) assert.equal(last[k], first[k], k);
-    return { first, last };
+    // R7-F20-FE-01: each park rebuilds Pixi's GC-managed hashes without the released entries' null placeholders, so
+    // twenty remounts leave no more placeholders than one, and the live entries are the same set size.
+    assert.ok(last.managedEmpty <= first.managedEmpty, `placeholders ${first.managedEmpty} -> ${last.managedEmpty}`);
+    assert.equal(last.managedLive, first.managedLive, 'live managed entries');
+    // R7-F20-FE-02: Pixi's event system is detached, so the real mouse input of the earlier steps (drags, clicks, aim)
+    // left no native event in its pooled federated events.
+    const events = await page.evaluate(() => { const e = window.__bincovSample.host.app.renderer.events; return { attached: !!e.domElement, root: e._rootPointerEvent?.nativeEvent ?? null, wheel: e._rootWheelEvent?.nativeEvent ?? null, menu: e._rootContextMenuEvent?.nativeEvent ?? null }; });
+    assert.deepEqual(events, { attached: false, root: null, wheel: null, menu: null });
+    return { first, last, events };
   });
   await step('W11b the renderer is reused across remounts; a lost context is replaced by a fresh renderer on the next mount', async () => {
     const r = await page.evaluate(async () => {
@@ -425,6 +433,8 @@ const roomPixels = (page, compare, leak = false) => page.evaluate(([r, compare, 
     assert.deepEqual(curtain, { outro: 'extract', text: '撤离成功' });
     assert.equal(end.outcome, 'extract'); assert.equal(end.pending, false); assert.equal(end.sample, false);
     for (const k of ['listeners', 'tickers', 'apps', 'views', 'renderTextures', 'liveViews', 'sampleRoots']) assert.equal(end.counts[k], 0, k);
+    // Parked after a real settlement: no null placeholders left in the renderer's managed hashes (R7-F20-FE-01).
+    assert.equal(end.counts.parked, 1); assert.equal(end.counts.managedEmpty, 0, 'placeholders left on the parked renderer');
     return { mid, reset, failed, curtain, ...end };
   });
   await step('W13 a second run abandons through the pause menu and settles as a failure; the outro says 已放弃行动, not 你倒下了', async () => {

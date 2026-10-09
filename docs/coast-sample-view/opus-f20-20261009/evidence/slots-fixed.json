@@ -1,0 +1,106 @@
+{
+  "html": "D:\\bincov\\pr22-runtime\\dist\\index.html",
+  "browser": "154.0.8037.98",
+  "errors": [],
+  "rows": [
+    {
+      "label": "mounted after mouse input",
+      "attached": false,
+      "rootPointer": null,
+      "pooled": 0,
+      "tables": [
+        {
+          "name": "graphics",
+          "live": 8,
+          "empty": 1
+        },
+        {
+          "name": "graphicsContext",
+          "live": 8,
+          "empty": 1
+        },
+        {
+          "name": "glBuffer",
+          "live": 19,
+          "empty": 0
+        },
+        {
+          "name": "glTexture",
+          "live": 17,
+          "empty": 3
+        },
+        {
+          "name": "glGeometry",
+          "live": 9,
+          "empty": 0
+        },
+        {
+          "name": "tilingSprite",
+          "live": 2,
+          "empty": 0
+        }
+      ]
+    },
+    {
+      "label": "after 20 view remounts",
+      "attached": false,
+      "rootPointer": null,
+      "pooled": 0,
+      "tables": [
+        {
+          "name": "graphics",
+          "live": 8,
+          "empty": 0
+        },
+        {
+          "name": "graphicsContext",
+          "live": 8,
+          "empty": 0
+        },
+        {
+          "name": "glBuffer",
+          "live": 19,
+          "empty": 0
+        },
+        {
+          "name": "glTexture",
+          "live": 17,
+          "empty": 0
+        },
+        {
+          "name": "glGeometry",
+          "live": 9,
+          "empty": 0
+        },
+        {
+          "name": "tilingSprite",
+          "live": 2,
+          "empty": 0
+        }
+      ]
+    },
+    {
+      "label": "parked after a real abandon",
+      "attached": false,
+      "rootPointer": null,
+      "pooled": 0,
+      "tables": [
+        {
+          "name": "glBuffer",
+          "live": 5,
+          "empty": 0
+        },
+        {
+          "name": "glTexture",
+          "live": 2,
+          "empty": 0
+        },
+        {
+          "name": "glGeometry",
+          "live": 2,
+          "empty": 0
+        }
+      ]
+    }
+  ]
+}

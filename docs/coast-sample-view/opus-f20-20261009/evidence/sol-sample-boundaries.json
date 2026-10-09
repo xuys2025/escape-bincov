@@ -1,0 +1,726 @@
+{
+  "startedAt": "2026-10-09T11:17:09.083Z",
+  "steps": [
+    {
+      "id": "F01 legacy profile and coast-v1 restore use RaidScene under sample flag",
+      "status": "passed",
+      "detail": [
+        {
+          "kind": "profile-v1",
+          "raidScene": true,
+          "sampleRoots": 0,
+          "storageError": ""
+        },
+        {
+          "kind": "coast-v1",
+          "raidScene": true,
+          "sampleRoots": 0,
+          "storageError": ""
+        }
+      ]
+    },
+    {
+      "id": "Mall click regression: HUD coordinate is rejected; native canvas input still fires",
+      "status": "passed",
+      "detail": {
+        "point": {
+          "x": 1028.0445,
+          "y": 202.9111
+        },
+        "hit": {
+          "tag": "BUTTON",
+          "action": "map",
+          "text": "选择撤离点"
+        },
+        "reproducedOldClick": true,
+        "fixedRejectedHUD": true,
+        "nativeCanvas": true
+      }
+    },
+    {
+      "id": "F14 native bag drop write failure preserves bag and ground, no success event",
+      "status": "passed",
+      "detail": {
+        "rollback": true,
+        "phase": "paused",
+        "error": "Sol fault"
+      }
+    },
+    {
+      "id": "F16 bag/loot blur, pagehide and hidden resume paused and suppress held keys",
+      "status": "passed",
+      "detail": [
+        {
+          "panel": "inventory",
+          "signal": "blur",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "inventory",
+          "signal": "pagehide",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "inventory",
+          "signal": "hidden",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "loot",
+          "signal": "blur",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "loot",
+          "signal": "pagehide",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "loot",
+          "signal": "hidden",
+          "paused": true,
+          "heldSuppressed": true
+        }
+      ]
+    },
+    {
+      "id": "F18 checkpoint immediately after layer, refresh restores only target map and one initial rebuild",
+      "status": "passed",
+      "detail": {
+        "before": "coast",
+        "after": "resident-f2",
+        "epoch": [
+          2,
+          3
+        ],
+        "rebuilds": [
+          2,
+          3,
+          1
+        ],
+        "restored": "resident-f2"
+      }
+    },
+    {
+      "id": "F19 DPR1/2/3 noninteger offset canvas and simulated safe-area aim alignment",
+      "status": "passed",
+      "detail": {
+        "checks": [
+          {
+            "dpr": 1,
+            "s": 1.67578125,
+            "canvas": [
+              1287,
+              727
+            ],
+            "rect": [
+              31.5,
+              17.5,
+              1232.25,
+              697.75
+            ],
+            "aim": -2.3853439224038047,
+            "expect": -2.3853439224038047,
+            "cross": "-12px"
+          },
+          {
+            "dpr": 2,
+            "s": 3.3515625,
+            "canvas": [
+              2574,
+              1454
+            ],
+            "rect": [
+              31.5,
+              17.5,
+              1232.25,
+              697.75
+            ],
+            "aim": -2.3853439224038047,
+            "expect": -2.3853439224038047,
+            "cross": "-12px"
+          },
+          {
+            "dpr": 3,
+            "s": 5,
+            "canvas": [
+              3861,
+              2181
+            ],
+            "rect": [
+              31.5,
+              17.5,
+              1232.25,
+              697.75
+            ],
+            "aim": -2.3811515986940828,
+            "expect": -2.3811515986940828,
+            "cross": "-12px"
+          }
+        ],
+        "safeArea": "Simulated canvas insets; no physical notched device."
+      }
+    },
+    {
+      "id": "F20 twenty full deploy-layer-extract/abandon-base cycles, zero owners after each",
+      "status": "partial",
+      "detail": {
+        "acceptanceStatus": "partial",
+        "heapStatus": "growth-observed-not-signed-off",
+        "waitContract": "Every wait returns a primitive boolean; no PublishedView JSHandle is retained.",
+        "resourceCountsPassed": true,
+        "cycles": [
+          {
+            "cycle": 1,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 23488536
+            }
+          },
+          {
+            "cycle": 2,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 24143669
+            }
+          },
+          {
+            "cycle": 3,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 24343665
+            }
+          },
+          {
+            "cycle": 4,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 24509477
+            }
+          },
+          {
+            "cycle": 5,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 24762397
+            }
+          },
+          {
+            "cycle": 6,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 24850421
+            }
+          },
+          {
+            "cycle": 7,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 24867069
+            }
+          },
+          {
+            "cycle": 8,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 24906953
+            }
+          },
+          {
+            "cycle": 9,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 25059037
+            }
+          },
+          {
+            "cycle": 10,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 25099989
+            }
+          },
+          {
+            "cycle": 11,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 25113933
+            }
+          },
+          {
+            "cycle": 12,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 25174941
+            }
+          },
+          {
+            "cycle": 13,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 25194289
+            }
+          },
+          {
+            "cycle": 14,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 25205497
+            }
+          },
+          {
+            "cycle": 15,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 25217481
+            }
+          },
+          {
+            "cycle": 16,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 25259789
+            }
+          },
+          {
+            "cycle": 17,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 25286005
+            }
+          },
+          {
+            "cycle": 18,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 25320145
+            }
+          },
+          {
+            "cycle": 19,
+            "map": "resident-f2",
+            "outcome": "death",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 25328565
+            }
+          },
+          {
+            "cycle": 20,
+            "map": "resident-b1",
+            "outcome": "extract",
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 25358189
+            }
+          }
+        ],
+        "afterIdle": 25488185,
+        "gcMethod": "CDP HeapProfiler.collectGarbage and window.gc",
+        "gcAvailable": true,
+        "afterWarmupMean": 24956693.8,
+        "lastFiveMean": 25310538.6,
+        "growthBytes": 353844.80000000075
+      }
+    },
+    {
+      "id": "F21 both HTML and extracted portable ZIP finish offline without test globals",
+      "status": "passed",
+      "detail": [
+        {
+          "file": "D:\\bincov\\pr22-runtime\\dist\\index.html",
+          "globals": {
+            "sample": "undefined",
+            "bincov": "undefined"
+          },
+          "completed": "abandon -> result -> hideout",
+          "offline": true
+        },
+        {
+          "file": "D:\\bincov\\pr22-runtime\\start the game.html",
+          "globals": {
+            "sample": "undefined",
+            "bincov": "undefined"
+          },
+          "completed": "abandon -> result -> hideout",
+          "offline": true
+        },
+        {
+          "file": "D:\\bincov\\pr22-runtime\\test-results\\f20\\sol-boundaries\\portable-sample-NmwY1C\\start the game.html",
+          "globals": {
+            "sample": "undefined",
+            "bincov": "undefined"
+          },
+          "completed": "abandon -> result -> hideout",
+          "offline": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "method": "Offline real packaged HTML. Explicit test fixtures position actors/freeze AI; all panel and lifecycle actions use native input. Visibility/pagehide are injected events; no physical-phone claim.",
+  "browser": "154.0.8037.98",
+  "finishedAt": "2026-10-09T11:18:44.783Z"
+}

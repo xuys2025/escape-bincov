@@ -1,0 +1,409 @@
+{
+  "method": "Read-only named snapshot inspection. Numeric indexed items and backing self_size, not native allocation; Null entries are identified by the native null singleton. Inspect pinned-vs-released separately.",
+  "rows": [
+    {
+      "file": "test-results/f20/loops/base-named60/cycle-6.heapsnapshot",
+      "graphics": [
+        {
+          "pipe": {
+            "id": 152297,
+            "type": "object",
+            "name": "GraphicsPipe",
+            "bytes": 60
+          },
+          "items": {
+            "id": 152619,
+            "type": "object",
+            "name": "Object",
+            "bytes": 12
+          },
+          "backing": {
+            "id": 152623,
+            "type": "array",
+            "name": "(object elements)",
+            "bytes": 3096
+          },
+          "indexEntries": 144,
+          "nullEntries": 144,
+          "nonNullValues": []
+        }
+      ],
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 394991,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 564415,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 394993,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 135131,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 394995,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 135131,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 552765,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 135131,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 556529,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        }
+      ],
+      "counts": {
+        "PointerEvent": 5,
+        "GraphicsPipe": 1,
+        "GCManagedHash": 6,
+        "<div class=\"cs-hud\" aria-live=\"polite\">": 2
+      }
+    },
+    {
+      "file": "test-results/f20/loops/base-named60/cycle-20.heapsnapshot",
+      "graphics": [
+        {
+          "pipe": {
+            "id": 152297,
+            "type": "object",
+            "name": "GraphicsPipe",
+            "bytes": 60
+          },
+          "items": {
+            "id": 152619,
+            "type": "object",
+            "name": "Object",
+            "bytes": 12
+          },
+          "backing": {
+            "id": 704381,
+            "type": "array",
+            "name": "(object elements)",
+            "bytes": 12312
+          },
+          "indexEntries": 480,
+          "nullEntries": 480,
+          "nonNullValues": []
+        }
+      ],
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 394991,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 739829,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 394993,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 738997,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 394995,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 738997,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 552765,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 738997,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 556529,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        }
+      ],
+      "counts": {
+        "GCManagedHash": 6,
+        "GraphicsPipe": 1,
+        "PointerEvent": 5,
+        "<div class=\"cs-hud\" aria-live=\"polite\">": 2
+      }
+    },
+    {
+      "file": "test-results/f20/loops/base-named60/cycle-40.heapsnapshot",
+      "graphics": [
+        {
+          "pipe": {
+            "id": 152297,
+            "type": "object",
+            "name": "GraphicsPipe",
+            "bytes": 60
+          },
+          "items": {
+            "id": 152619,
+            "type": "object",
+            "name": "Object",
+            "bytes": 12
+          },
+          "backing": {
+            "id": 841471,
+            "type": "array",
+            "name": "(object elements)",
+            "bytes": 24600
+          },
+          "indexEntries": 960,
+          "nullEntries": 960,
+          "nonNullValues": []
+        }
+      ],
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 394991,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 920459,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 394993,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 919795,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 394995,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 919795,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 552765,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 919795,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 556529,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        }
+      ],
+      "counts": {
+        "GCManagedHash": 6,
+        "GraphicsPipe": 1,
+        "PointerEvent": 5,
+        "<div class=\"cs-hud\" aria-live=\"polite\">": 2
+      }
+    },
+    {
+      "file": "test-results/f20/loops/base-named60/cycle-60.heapsnapshot",
+      "graphics": [
+        {
+          "pipe": {
+            "id": 152297,
+            "type": "object",
+            "name": "GraphicsPipe",
+            "bytes": 60
+          },
+          "items": {
+            "id": 152619,
+            "type": "object",
+            "name": "Object",
+            "bytes": 12
+          },
+          "backing": {
+            "id": 1007447,
+            "type": "array",
+            "name": "(object elements)",
+            "bytes": 49176
+          },
+          "indexEntries": 1440,
+          "nullEntries": 1440,
+          "nonNullValues": []
+        }
+      ],
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 394991,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 1101509,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 394993,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 1041309,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 394995,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 1041309,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 552765,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 1041309,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 556529,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        }
+      ],
+      "counts": {
+        "PointerEvent": 5,
+        "GraphicsPipe": 1,
+        "GCManagedHash": 6,
+        "<div class=\"cs-hud\" aria-live=\"polite\">": 2
+      }
+    }
+  ]
+}

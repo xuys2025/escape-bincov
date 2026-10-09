@@ -1,0 +1,197 @@
+{
+  "method": "Read-only named snapshot inspection. Numeric indexed items and backing self_size, not native allocation; Null entries are identified by the native null singleton. Inspect pinned-vs-released separately.",
+  "rows": [
+    {
+      "file": "test-results/f20/loops/fixed-named60/cycle-6.heapsnapshot",
+      "graphics": [
+        {
+          "pipe": {
+            "id": 214519,
+            "type": "object",
+            "name": "GraphicsPipe",
+            "bytes": 60
+          },
+          "items": {
+            "id": 570187,
+            "type": "object",
+            "name": "Object",
+            "bytes": 12
+          },
+          "backing": null,
+          "indexEntries": 0,
+          "nullEntries": 0,
+          "nonNullValues": []
+        }
+      ],
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 213813,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        },
+        {
+          "event": {
+            "id": 213817,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        }
+      ],
+      "counts": {
+        "GCManagedHash": 6,
+        "GraphicsPipe": 1,
+        "PointerEvent": 2
+      }
+    },
+    {
+      "file": "test-results/f20/loops/fixed-named60/cycle-20.heapsnapshot",
+      "graphics": [
+        {
+          "pipe": {
+            "id": 214519,
+            "type": "object",
+            "name": "GraphicsPipe",
+            "bytes": 60
+          },
+          "items": {
+            "id": 734955,
+            "type": "object",
+            "name": "Object",
+            "bytes": 12
+          },
+          "backing": null,
+          "indexEntries": 0,
+          "nullEntries": 0,
+          "nonNullValues": []
+        }
+      ],
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 213813,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        },
+        {
+          "event": {
+            "id": 213817,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        }
+      ],
+      "counts": {
+        "GCManagedHash": 6,
+        "GraphicsPipe": 1,
+        "PointerEvent": 2
+      }
+    },
+    {
+      "file": "test-results/f20/loops/fixed-named60/cycle-40.heapsnapshot",
+      "graphics": [
+        {
+          "pipe": {
+            "id": 214519,
+            "type": "object",
+            "name": "GraphicsPipe",
+            "bytes": 60
+          },
+          "items": {
+            "id": 887661,
+            "type": "object",
+            "name": "Object",
+            "bytes": 12
+          },
+          "backing": null,
+          "indexEntries": 0,
+          "nullEntries": 0,
+          "nonNullValues": []
+        }
+      ],
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 213813,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        },
+        {
+          "event": {
+            "id": 213817,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        }
+      ],
+      "counts": {
+        "GCManagedHash": 6,
+        "GraphicsPipe": 1,
+        "PointerEvent": 2
+      }
+    },
+    {
+      "file": "test-results/f20/loops/fixed-named60/cycle-60.heapsnapshot",
+      "graphics": [
+        {
+          "pipe": {
+            "id": 214519,
+            "type": "object",
+            "name": "GraphicsPipe",
+            "bytes": 60
+          },
+          "items": {
+            "id": 1015537,
+            "type": "object",
+            "name": "Object",
+            "bytes": 12
+          },
+          "backing": null,
+          "indexEntries": 0,
+          "nullEntries": 0,
+          "nonNullValues": []
+        }
+      ],
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 213813,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        },
+        {
+          "event": {
+            "id": 213817,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        }
+      ],
+      "counts": {
+        "GCManagedHash": 6,
+        "GraphicsPipe": 1,
+        "PointerEvent": 2
+      }
+    }
+  ]
+}

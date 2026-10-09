@@ -1,3 +1,12 @@
+## 2026-10-09 · PR #22 Opus：F20 前端两项（管理表空槽、停放事件引用），本地提交后停止
+
+从 `5b09c05` 接手，工作区干净。PR #22 仍为 OPEN，远端头是 `878f563`；本轮只本地提交，不推送、不合并、不发布。详见[报告](docs/coast-sample-view/opus-f20-20261009/README.md)。
+
+- **FE-01：** Pixi 8 释放资源后，在 GC 管理表里留下空槽，只有渲染期间攒满 10,000 个才会清理。停放渲染器时现在按 Pixi 自己的做法重建这些表，只保留存活项。实测基线有六张表在长（graphics、graphicsContext、glBuffer、glTexture、glGeometry、tilingSprite），修复后都是 0。依赖 Pixi 内部字段 `gc._managedResourceHashes`，字段变化时静默不做，由门禁 W11、W12 发现。
+- **FE-02：** 样板不用 Pixi 的联邦事件，初始化后用公开接口 `setTargetElement(null)` 把事件系统摘下。不再保留原生事件和旧 HUD。原来事件系统写在画布上的 `touch-action: none` 和 `cursor: inherit` 改由 coast.css 保留，玩家看到的指针不变。
+- **长循环：** 同口径严格 60 轮，第 16–20、36–40、56–60 轮的增长：基线 +375,750 / +689,792 / +939,563 B，修复后 +348,086 / +604,729 / +797,456 B。**F20 总堆仍为 PARTIAL**，剩余增长约 77% 是编译代码。
+- **回归：** 243 项单测、样板 51/51、Sol 边界 7 项通过（F20 PARTIAL）、生命周期 2×4/4、音频 2×14/14、68 张截图、CI 同款 20/20。1920 真实输入机器人结果不稳定，基线上同样如此。没有读取或上传 SSH 私钥。
+
 ## 2026-10-09 · PR #22 Astra R7 F20 诊断，交 Opus / Sol 后停止
 
 从 e209ed0 续作，原分支保留；末次只读核对 main 8355b85、PR22 OPEN/未合并、远端 head 878f563，无合并/推送/发布。[诊断与复验清单](docs/coast-sample-view/astra-r7-f20-20261009/README.md)、[真实验证](docs/coast-sample-view/astra-r7-f20-20261009/verification.json)。

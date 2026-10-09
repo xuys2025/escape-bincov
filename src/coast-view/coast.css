@@ -5,7 +5,9 @@ html[data-coast-sample] #toast { z-index: 120; }
   position: fixed; inset: 0; z-index: 60; color: var(--cs-text); font-family: "Bincov Text", "Microsoft YaHei", "PingFang SC", sans-serif; user-select: none; -webkit-user-select: none; touch-action: none;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
 .coast-sample .cs-canvas { position: absolute; inset: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
-.coast-sample .cs-canvas canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: none; }
+/* Pixi's event system used to write touch-action none and cursor inherit on the canvas; it is detached now (host.ts),
+   so the same two values live here: no browser panning or zooming on the play area, and the ordinary pointer. */
+.coast-sample .cs-canvas canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: inherit; touch-action: none; }
 .coast-sample .cs-hud { position: absolute; inset: 0; pointer-events: none; }
 .coast-sample button { font: inherit; font-size: 16px; pointer-events: auto; cursor: pointer; padding: 4px 12px; background: #2b2a26; color: var(--cs-text); border: 1px solid var(--cs-line); }
 .coast-sample button:hover, .coast-sample button:focus-visible { border-color: var(--cs-accent); outline: none; }
