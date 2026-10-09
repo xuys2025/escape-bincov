@@ -1,0 +1,1096 @@
+{
+  "startedAt": "2026-10-09T09:10:17.114Z",
+  "node": "v24.19.0",
+  "formalSHA256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+  "loadedSHA256": "e49e25af20a2caba6d667e8a27e7b2607bfa9c7704a645200358d2014e85ed9a",
+  "named": true,
+  "seed": 3,
+  "cyclesRequested": 20,
+  "snapshots": [
+    6,
+    20
+  ],
+  "pinControl": false,
+  "method": "1280x720 offline; original alternating upstairs/basement and abandon/extract; result page after sample DOM removal; one CDP HeapProfiler.collectGarbage followed by window.gc in original counts evaluation; primitive waits; no page reload or base recovery. 6-10 baseline retained, 16-20/36-40/56-60 compared separately. Snapshots occur AFTER the per-cycle sample; additional snapshot GC can perturb subsequent cycles, so named/snapshot data is auxiliary.",
+  "cycles": [
+    {
+      "cycle": 1,
+      "map": "resident-f2",
+      "outcome": "death",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 31735453
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qvumv-b|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qvumv-b|coast-buildings-v1|resident-layout-1|resident-f2"
+        ],
+        "atlas": {
+          "frames": 381,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26705920
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 2,
+      "map": "resident-b1",
+      "outcome": "extract",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32440314
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qvvzu-c|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qvvzu-c|coast-buildings-v1|resident-layout-1|resident-b1"
+        ],
+        "atlas": {
+          "frames": 376,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26656768
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 3,
+      "map": "resident-f2",
+      "outcome": "death",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32634798
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qvzna-d|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qvzna-d|coast-buildings-v1|resident-layout-1|resident-f2"
+        ],
+        "atlas": {
+          "frames": 381,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26705920
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 4,
+      "map": "resident-b1",
+      "outcome": "extract",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32835850
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qw0te-e|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qw0te-e|coast-buildings-v1|resident-layout-1|resident-b1"
+        ],
+        "atlas": {
+          "frames": 372,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26656768
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 5,
+      "map": "resident-f2",
+      "outcome": "death",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33064670
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qw4g1-f|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qw4g1-f|coast-buildings-v1|resident-layout-1|resident-f2"
+        ],
+        "atlas": {
+          "frames": 380,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26705920
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 6,
+      "map": "resident-b1",
+      "outcome": "extract",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33156294
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qw5je-g|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qw5je-g|coast-buildings-v1|resident-layout-1|resident-b1"
+        ],
+        "atlas": {
+          "frames": 375,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26656768
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 7,
+      "map": "resident-f2",
+      "outcome": "death",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33178462
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qw9rx-h|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qw9rx-h|coast-buildings-v1|resident-layout-1|resident-f2"
+        ],
+        "atlas": {
+          "frames": 380,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26705920
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 8,
+      "map": "resident-b1",
+      "outcome": "extract",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33237238
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qwb0j-i|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qwb0j-i|coast-buildings-v1|resident-layout-1|resident-b1"
+        ],
+        "atlas": {
+          "frames": 375,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26656768
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 9,
+      "map": "resident-f2",
+      "outcome": "death",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33377094
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qwerj-j|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qwerj-j|coast-buildings-v1|resident-layout-1|resident-f2"
+        ],
+        "atlas": {
+          "frames": 382,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26705920
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 10,
+      "map": "resident-b1",
+      "outcome": "extract",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33419290
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qwfz5-k|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qwfz5-k|coast-buildings-v1|resident-layout-1|resident-b1"
+        ],
+        "atlas": {
+          "frames": 375,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26656768
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 11,
+      "map": "resident-f2",
+      "outcome": "death",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33429302
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qwjp5-l|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qwjp5-l|coast-buildings-v1|resident-layout-1|resident-f2"
+        ],
+        "atlas": {
+          "frames": 380,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26705920
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 12,
+      "map": "resident-b1",
+      "outcome": "extract",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33500766
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qwkws-m|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qwkws-m|coast-buildings-v1|resident-layout-1|resident-b1"
+        ],
+        "atlas": {
+          "frames": 375,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26656768
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 13,
+      "map": "resident-f2",
+      "outcome": "death",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33512170
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qwonk-n|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qwonk-n|coast-buildings-v1|resident-layout-1|resident-f2"
+        ],
+        "atlas": {
+          "frames": 380,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26705920
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 14,
+      "map": "resident-b1",
+      "outcome": "extract",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33521102
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qwpw8-o|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qwpw8-o|coast-buildings-v1|resident-layout-1|resident-b1"
+        ],
+        "atlas": {
+          "frames": 376,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26656768
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 15,
+      "map": "resident-f2",
+      "outcome": "death",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33534394
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qwtmk-p|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qwtmk-p|coast-buildings-v1|resident-layout-1|resident-f2"
+        ],
+        "atlas": {
+          "frames": 380,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26705920
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 16,
+      "map": "resident-b1",
+      "outcome": "extract",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33578270
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qwuu9-q|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qwuu9-q|coast-buildings-v1|resident-layout-1|resident-b1"
+        ],
+        "atlas": {
+          "frames": 375,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26656768
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 17,
+      "map": "resident-f2",
+      "outcome": "death",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33609118
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qwyjt-r|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qwyjt-r|coast-buildings-v1|resident-layout-1|resident-f2"
+        ],
+        "atlas": {
+          "frames": 381,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26705920
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 18,
+      "map": "resident-b1",
+      "outcome": "extract",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33638234
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qwzrk-s|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qwzrk-s|coast-buildings-v1|resident-layout-1|resident-b1"
+        ],
+        "atlas": {
+          "frames": 377,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26656768
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 19,
+      "map": "resident-f2",
+      "outcome": "death",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33663714
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qx3ik-t|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qx3ik-t|coast-buildings-v1|resident-layout-1|resident-f2"
+        ],
+        "atlas": {
+          "frames": 381,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26705920
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    },
+    {
+      "cycle": 20,
+      "map": "resident-b1",
+      "outcome": "extract",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 33694222
+      },
+      "highCache": {
+        "high": true,
+        "flooded": 106,
+        "shown": 106,
+        "alpha": 1,
+        "bakes": [
+          "bc-mv0qx4r7-u|coast-buildings-v1|resident-layout-1|coast",
+          "bc-mv0qx4r7-u|coast-buildings-v1|resident-layout-1|resident-b1"
+        ],
+        "atlas": {
+          "frames": 377,
+          "pages": 1,
+          "largeTextures": 10,
+          "bytes": 26656768
+        },
+        "tideKeys": [
+          "tide:body:0",
+          "tide:body:1",
+          "tide:body:2",
+          "tide:body:3",
+          "tide:foam:1",
+          "tide:foam:12",
+          "tide:foam:2",
+          "tide:foam:4",
+          "tide:foam:8",
+          "tide:foam:9",
+          "tide:wade"
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "windows": [
+    {
+      "from": 1,
+      "to": 5,
+      "mean": 32542217
+    },
+    {
+      "from": 6,
+      "to": 10,
+      "mean": 33273675.6
+    },
+    {
+      "from": 11,
+      "to": 15,
+      "mean": 33499546.8
+    },
+    {
+      "from": 16,
+      "to": 20,
+      "mean": 33636711.6
+    }
+  ],
+  "comparisons": [
+    {
+      "baseline": "6-10",
+      "tail": "16-20",
+      "baselineMean": 33273675.6,
+      "tailMean": 33636711.6,
+      "growthBytes": 363036
+    }
+  ],
+  "afterIdle": 33788238,
+  "resourceStatus": "passed",
+  "memoryStatus": "PARTIAL",
+  "status": "partial",
+  "finishedAt": "2026-10-09T09:11:26.180Z"
+}

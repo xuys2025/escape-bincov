@@ -1,0 +1,23 @@
+CYCLE 1 death 31735453
+CYCLE 2 extract 32440314
+CYCLE 3 death 32634798
+CYCLE 4 extract 32835850
+CYCLE 5 death 33064670
+CYCLE 6 extract 33156294
+SNAPSHOT cycle-6
+CYCLE 7 death 33178462
+CYCLE 8 extract 33237238
+CYCLE 9 death 33377094
+CYCLE 10 extract 33419290
+CYCLE 11 death 33429302
+CYCLE 12 extract 33500766
+CYCLE 13 death 33512170
+CYCLE 14 extract 33521102
+CYCLE 15 death 33534394
+CYCLE 16 extract 33578270
+CYCLE 17 death 33609118
+CYCLE 18 extract 33638234
+CYCLE 19 death 33663714
+CYCLE 20 extract 33694222
+SNAPSHOT cycle-20
+{"status":"partial","cycles":20,"comparisons":[{"baseline":"6-10","tail":"16-20","baselineMean":33273675.6,"tailMean":33636711.6,"growthBytes":363036}]}

@@ -1,3 +1,11 @@
+## 2026-10-09 · PR #22 Astra R7 F20 诊断，交 Opus / Sol 后停止
+
+从 e209ed0 续作，原分支保留；末次只读核对 main 8355b85、PR22 OPEN/未合并、远端 head 878f563，无合并/推送/发布。[诊断与复验清单](docs/coast-sample-view/astra-r7-f20-20261009/README.md)、[真实验证](docs/coast-sample-view/astra-r7-f20-20261009/verification.json)。
+
+严格正式包60循环全部释放计数通过，但6–10对56–60总堆仍增941,991.2 B，F20继续PARTIAL，不设容差。命名包引用链区分显式测试句柄、编译/浏览器条目及前端管理表增长；Graphics空槽144→1440、backing3096→49176 B，事件池稳定保留2棵已移除HUD，交Opus评估，未宣称无限泄漏。高潮20循环106格、11缓存键、退出归零通过，总堆仍增长。R7-L5确认沿用原玩法：高潮水下不可拾取，退潮仍需距离/通路/背包条件。
+
+243单测、图算法2/2、潮位浏览器10/10及package通过；游戏源码、素材和六个生成物均未变。无新确认底层缺陷，ASTRA-SAVE-01及其他历史未确认结论保留；不扩功能。本地提交后停止等待交接。
+
 ## 2026-10-09 · PR #22 Sol 第七轮独立复验，本地提交后停止
 
 从138e899续作，原分支docs/coast-2-5d-art-design，Node24，浏览器全部顺序执行。最新main8355b85已含于本分支，PR22 OPEN头878f563；Pages与main一致，不含R7。 [签收报告](docs/coast-sample-view/sol-r7-20261009/README.md)、[Opus/Astra清单](docs/coast-sample-view/sol-r7-20261009/defects.md)、[真实命令](docs/coast-sample-view/sol-r7-20261009/verification.json)。

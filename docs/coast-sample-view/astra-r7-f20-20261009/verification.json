@@ -1,0 +1,262 @@
+{
+  "date": "2026-10-09",
+  "baseline": "e209ed09f71b9a9305dc357ae4b46adb1f073a17",
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "11.19.0",
+    "browser": "154.0.8037.98",
+    "platform": "Windows",
+    "viewport": [
+      1280,
+      720
+    ],
+    "offline": true
+  },
+  "concurrency": "All browser workloads sequential. Some read-only Node heap graph analyses overlapped browser work; not an isolated timing/performance machine.",
+  "commands": [
+    {
+      "run": "strict60",
+      "command": "node scripts/astra-r7-f20.mjs",
+      "env": {
+        "R7_OUT": "test-results/astra-r7/strict60",
+        "R7_CYCLES": "60",
+        "R7_SEED": "42",
+        "R7_NAMED": "0",
+        "R7_SNAPS": "",
+        "R7_PIN": "0"
+      },
+      "startedAt": "2026-10-09T09:01:04.409Z",
+      "finishedAt": "2026-10-09T09:04:12.930Z",
+      "exitCode": 1,
+      "status": "partial",
+      "resourceStatus": "passed",
+      "memoryStatus": "PARTIAL",
+      "loadedSHA256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+      "formalSHA256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+      "scriptVersion": "evidence/runner-low-executed.mjs",
+      "evidence": "evidence/strict60.json"
+    },
+    {
+      "run": "named60",
+      "command": "node scripts/astra-r7-f20.mjs",
+      "env": {
+        "R7_OUT": "test-results/astra-r7/named60",
+        "R7_CYCLES": "60",
+        "R7_SEED": "42",
+        "R7_NAMED": "1",
+        "R7_SNAPS": "6,20,40,60",
+        "R7_PIN": "0"
+      },
+      "startedAt": "2026-10-09T09:04:13.593Z",
+      "finishedAt": "2026-10-09T09:07:30.753Z",
+      "exitCode": 1,
+      "status": "partial",
+      "resourceStatus": "passed",
+      "memoryStatus": "PARTIAL",
+      "loadedSHA256": "e49e25af20a2caba6d667e8a27e7b2607bfa9c7704a645200358d2014e85ed9a",
+      "formalSHA256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+      "scriptVersion": "evidence/runner-long-executed.mjs",
+      "evidence": "evidence/named60.json"
+    },
+    {
+      "run": "high20",
+      "command": "node scripts/astra-r7-f20.mjs",
+      "env": {
+        "R7_OUT": "test-results/astra-r7/high20",
+        "R7_CYCLES": "20",
+        "R7_SEED": "3",
+        "R7_NAMED": "0",
+        "R7_SNAPS": "",
+        "R7_PIN": "0"
+      },
+      "startedAt": "2026-10-09T09:09:10.523Z",
+      "finishedAt": "2026-10-09T09:10:16.452Z",
+      "exitCode": 1,
+      "status": "partial",
+      "resourceStatus": "passed",
+      "memoryStatus": "PARTIAL",
+      "loadedSHA256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+      "formalSHA256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+      "scriptVersion": "evidence/runner-long-executed.mjs",
+      "evidence": "evidence/high20.json"
+    },
+    {
+      "run": "high-named20",
+      "command": "node scripts/astra-r7-f20.mjs",
+      "env": {
+        "R7_OUT": "test-results/astra-r7/high-named20",
+        "R7_CYCLES": "20",
+        "R7_SEED": "3",
+        "R7_NAMED": "1",
+        "R7_SNAPS": "6,20",
+        "R7_PIN": "0"
+      },
+      "startedAt": "2026-10-09T09:10:17.114Z",
+      "finishedAt": "2026-10-09T09:11:26.180Z",
+      "exitCode": 1,
+      "status": "partial",
+      "resourceStatus": "passed",
+      "memoryStatus": "PARTIAL",
+      "loadedSHA256": "e49e25af20a2caba6d667e8a27e7b2607bfa9c7704a645200358d2014e85ed9a",
+      "formalSHA256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+      "scriptVersion": "evidence/runner-long-executed.mjs",
+      "evidence": "evidence/high-named20.json"
+    },
+    {
+      "run": "pin-control",
+      "command": "node scripts/astra-r7-f20.mjs",
+      "env": {
+        "R7_OUT": "test-results/astra-r7/pin-control",
+        "R7_CYCLES": "1",
+        "R7_SEED": "42",
+        "R7_NAMED": "1",
+        "R7_SNAPS": "",
+        "R7_PIN": "1"
+      },
+      "startedAt": "2026-10-09T09:11:26.849Z",
+      "finishedAt": "2026-10-09T09:11:33.910Z",
+      "exitCode": 0,
+      "status": "passed",
+      "resourceStatus": "passed",
+      "memoryStatus": "no-growth-observed; independent evidence still required",
+      "loadedSHA256": "e49e25af20a2caba6d667e8a27e7b2607bfa9c7704a645200358d2014e85ed9a",
+      "formalSHA256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+      "scriptVersion": "evidence/runner-long-executed.mjs",
+      "evidence": "evidence/pin-control.json"
+    },
+    {
+      "run": "pin-final",
+      "command": "node scripts/astra-r7-f20.mjs",
+      "env": {
+        "R7_OUT": "test-results/astra-r7/pin-final",
+        "R7_CYCLES": "1",
+        "R7_SEED": "42",
+        "R7_NAMED": "1",
+        "R7_SNAPS": "",
+        "R7_PIN": "1"
+      },
+      "startedAt": "2026-10-09T09:14:04.470Z",
+      "finishedAt": "2026-10-09T09:14:11.447Z",
+      "exitCode": 0,
+      "status": "passed",
+      "resourceStatus": "passed",
+      "memoryStatus": "not assessed (fewer than 20 cycles)",
+      "loadedSHA256": "e49e25af20a2caba6d667e8a27e7b2607bfa9c7704a645200358d2014e85ed9a",
+      "formalSHA256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+      "scriptVersion": "scripts/astra-r7-f20.mjs final (line-ending normalization only)",
+      "evidence": "evidence/pin-final.json"
+    },
+    {
+      "run": "tide",
+      "command": "node scripts/sol-r7-tide.mjs",
+      "env": {
+        "BINCOV_R7_OUT": "test-results/astra-r7/tide"
+      },
+      "startedAt": "2026-10-09T09:12:10.850Z",
+      "finishedAt": "2026-10-09T09:13:18.624Z",
+      "exitCode": 0,
+      "passed": 10,
+      "evidence": "evidence/tide.json"
+    },
+    {
+      "run": "unit",
+      "command": "pnpm test",
+      "exitCode": 0,
+      "passed": 243,
+      "evidence": "evidence/tests.txt",
+      "timing": "Exact start/end not recorded; raw process completion and log preserved",
+      "logLastWrittenAt": "2026-10-09T09:13:24.709Z"
+    },
+    {
+      "run": "package",
+      "command": "pnpm package",
+      "exitCode": 0,
+      "passed": null,
+      "evidence": "evidence/package.txt",
+      "timing": "Exact start/end not recorded; raw process completion and log preserved",
+      "logLastWrittenAt": "2026-10-09T09:13:29.027Z"
+    },
+    {
+      "run": "graph-tests",
+      "command": "node --test scripts/astra-r7-heap-graph.test.mjs",
+      "exitCode": 0,
+      "passed": 2,
+      "evidence": "evidence/graph-tests-final.txt",
+      "timing": "Exact start/end not recorded; raw process completion and log preserved",
+      "logLastWrittenAt": "2026-10-09T09:13:29.209Z"
+    },
+    {
+      "run": "l5-unit",
+      "command": "node --import tsx --test tests/raid-runtime-r7.test.ts",
+      "exitCode": 0,
+      "passed": 1,
+      "evidence": "evidence/l5-unit.txt",
+      "timing": "Exact start/end not recorded; raw process completion and log preserved",
+      "logLastWrittenAt": "2026-10-09T09:05:14.430Z"
+    }
+  ],
+  "analysisCommands": [
+    "node scripts/astra-r7-heap-graph.mjs <first.heapsnapshot> <last.heapsnapshot> <output.json>",
+    "node scripts/astra-r7-cache-graph.mjs <output.json> <snapshot...>"
+  ],
+  "analysisPairs": [
+    "named60:6->20",
+    "named60:20->40",
+    "named60:40->60",
+    "named60:6->60",
+    "high-named20:6->20",
+    "pin-control:pinned->released",
+    "pin-control:pinned->pinned",
+    "pin-final:pinned->released",
+    "pin-final:pinned->pinned"
+  ],
+  "analysisExitCodes": 0,
+  "versionFiles": [
+    {
+      "path": "scripts/astra-r7-f20.mjs",
+      "sha256": "31aa1254ca125b4039074d70b13644dfdb0c91c3b0b00f1ef57985d60bcffa06",
+      "textSHA256": "31aa1254ca125b4039074d70b13644dfdb0c91c3b0b00f1ef57985d60bcffa06"
+    },
+    {
+      "path": "scripts/astra-r7-heap-graph.mjs",
+      "sha256": "f89e6f9d775783ad900f32962a967aaa69ca5daa8ea63865f519c9b2dcc5c95b",
+      "textSHA256": "f89e6f9d775783ad900f32962a967aaa69ca5daa8ea63865f519c9b2dcc5c95b"
+    },
+    {
+      "path": "scripts/astra-r7-cache-graph.mjs",
+      "sha256": "d769327c70c4bec6e9b676dc9b5dd2c27589229b21d0b34215857dc7b2e6ddf8",
+      "textSHA256": "d769327c70c4bec6e9b676dc9b5dd2c27589229b21d0b34215857dc7b2e6ddf8"
+    },
+    {
+      "path": "scripts/astra-r7-heap-graph.test.mjs",
+      "sha256": "acd94c38a2b6c802b4ad0bc9528815364e0428d23f06de1dba091c6b402a21dd",
+      "textSHA256": "acd94c38a2b6c802b4ad0bc9528815364e0428d23f06de1dba091c6b402a21dd"
+    },
+    {
+      "path": "tests/raid-runtime-r7.test.ts",
+      "sha256": "2a964ffecc04cd3e081916876d33634ce6838fec68d270797a89b5ab3773f2a2",
+      "textSHA256": "2a964ffecc04cd3e081916876d33634ce6838fec68d270797a89b5ab3773f2a2"
+    },
+    {
+      "path": "scripts/sol-r7-tide.mjs",
+      "sha256": "1c4270e045ed15fdc30080b565d7d821f73dc86b56c23c7cb85c793b134f5b89",
+      "textSHA256": "1c4270e045ed15fdc30080b565d7d821f73dc86b56c23c7cb85c793b134f5b89"
+    }
+  ],
+  "scriptChanges": [
+    "The first strict low-tide run used runner-low-executed.mjs. Before named/high runs, high-only extraction lookup was corrected to map.exits[0].at (no failed high run). This branch is not executed for seed42.",
+    "Final runner differs from runner-long-executed.mjs only in the <20-cycle memory label: not assessed. Positive control rerun in pin-final; previous control evidence preserved. Long runs were not rerun for a report-label-only change.",
+    "Graph analyzer later added top three new compiled-code paths, without changing algorithm. All 6->20/20->40/40->60 graphs were regenerated with the final analyzer. Source CRLF/BOM normalization does not change executable text."
+  ],
+  "limitations": [
+    "Strict positive heap growth remains PARTIAL, not tolerance-pass.",
+    "Named snapshots and high seed are auxiliary, not interchangeable with formal seed42 result-page readings.",
+    "Graph retained size excludes external/GPU backing; ephemeron treatment limited to recorded graph.",
+    "No GPU/driver/native-audio attribution; no full CI/device/person/10-minute rerun."
+  ],
+  "historicalConclusions": {
+    "ASTRA-SAVE-01": "unconfirmed",
+    "R7-TEST-STATE-03": "unconfirmed",
+    "R7-L5": "existing rule confirmed; no gameplay changes"
+  }
+}

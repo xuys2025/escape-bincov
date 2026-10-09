@@ -1,0 +1,4980 @@
+{
+  "first": "test-results/astra-r7/pin-control/pinned.heapsnapshot",
+  "last": "test-results/astra-r7/pin-control/pinned.heapsnapshot",
+  "method": "Cooper reverse-postorder immediate dominators on snapshot directed graph after removing weak edges; retained bytes sum reachable self_size in that graph. BFS shortest strong root paths separately. Strings omitted. Not a V8 native-memory/GPU retained-size measurement; ephemeron/shortcut edge treatment is limited to the graph recorded here. Retained examples overlap and MUST NOT be summed as attribution.",
+  "graph": {
+    "nodes": 321222,
+    "strongEdges": 1298154,
+    "reachable": 321143,
+    "passes": 40
+  },
+  "before": {
+    "self": 45472107,
+    "categories": {
+      "other-JS-and-metadata": 1853820,
+      "other-native": 33807886,
+      "strings": 1960133,
+      "VM-shape": 981612,
+      "compiled-code": 6828828,
+      "named-render-runtime-objects": 24692,
+      "browser-performance-records": 15136
+    },
+    "owners": {
+      "CoastSampleHost": 1,
+      "_Container": 20,
+      "_Graphics": 3,
+      "_TextureSource2": 6,
+      "Texture": 5,
+      "SynthAudio": 1,
+      "WebGLRenderer3": 1,
+      "TextureSource3": 163,
+      "Texture3": 22,
+      "Container4": 8,
+      "SampleSound": 1,
+      "CoastRaidRuntime": 1,
+      "Sprite3": 3,
+      "WebGLRenderer": 1,
+      "WebGL2RenderingContext": 2,
+      "CanvasSource": 2,
+      "Scope": 1,
+      "_Sprite": 13,
+      "_Application2": 1,
+      "InventoryPanel": 1,
+      "Fx": 1,
+      "Textures": 1,
+      "Tide": 1,
+      "Weather": 1,
+      "Lighting": 1,
+      "Atlas": 1,
+      "_CoastView": 1,
+      "HTMLCanvasElement": 2
+    }
+  },
+  "after": {
+    "self": 45472107,
+    "categories": {
+      "other-JS-and-metadata": 1853820,
+      "other-native": 33807886,
+      "strings": 1960133,
+      "VM-shape": 981612,
+      "compiled-code": 6828828,
+      "named-render-runtime-objects": 24692,
+      "browser-performance-records": 15136
+    },
+    "owners": {
+      "CoastSampleHost": 1,
+      "_Container": 20,
+      "_Graphics": 3,
+      "_TextureSource2": 6,
+      "Texture": 5,
+      "SynthAudio": 1,
+      "WebGLRenderer3": 1,
+      "TextureSource3": 163,
+      "Texture3": 22,
+      "Container4": 8,
+      "SampleSound": 1,
+      "CoastRaidRuntime": 1,
+      "Sprite3": 3,
+      "WebGLRenderer": 1,
+      "WebGL2RenderingContext": 2,
+      "CanvasSource": 2,
+      "Scope": 1,
+      "_Sprite": 13,
+      "_Application2": 1,
+      "InventoryPanel": 1,
+      "Fx": 1,
+      "Textures": 1,
+      "Tide": 1,
+      "Weather": 1,
+      "Lighting": 1,
+      "Atlas": 1,
+      "_CoastView": 1,
+      "HTMLCanvasElement": 2
+    }
+  },
+  "growth": [],
+  "shrink": [],
+  "categoryDeltas": {
+    "other-JS-and-metadata": 0,
+    "other-native": 0,
+    "strings": 0,
+    "VM-shape": 0,
+    "compiled-code": 0,
+    "named-render-runtime-objects": 0,
+    "browser-performance-records": 0
+  },
+  "examples": [
+    {
+      "id": 7397,
+      "type": "object",
+      "name": "CoastSampleHost",
+      "selfSize": 12,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 1023672,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        }
+      ]
+    },
+    {
+      "id": 70545,
+      "type": "object",
+      "name": "_Container",
+      "selfSize": 12,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 14944,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 282573,
+          "type": "closure",
+          "name": "exportSave",
+          "selfSize": 32,
+          "via": "property:exportBackup"
+        },
+        {
+          "id": 92243,
+          "type": "object",
+          "name": "system / Context / scope @69917",
+          "selfSize": 7884,
+          "via": "internal:context"
+        },
+        {
+          "id": 93469,
+          "type": "closure",
+          "name": "ViewContainer",
+          "selfSize": 32,
+          "via": "context:ViewContainer"
+        },
+        {
+          "id": 70545,
+          "type": "object",
+          "name": "_Container",
+          "selfSize": 12,
+          "via": "property:prototype"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 70545,
+          "type": "object",
+          "name": "_Container",
+          "selfSize": 12,
+          "graphRetainedBytes": 14944
+        }
+      ]
+    },
+    {
+      "id": 75595,
+      "type": "object",
+      "name": "_Graphics",
+      "selfSize": 244,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 660,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        },
+        {
+          "id": 75595,
+          "type": "object",
+          "name": "_Graphics",
+          "selfSize": 244,
+          "via": "property:exitG"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        },
+        {
+          "id": 75595,
+          "type": "object",
+          "name": "_Graphics",
+          "selfSize": 244,
+          "graphRetainedBytes": 660
+        }
+      ]
+    },
+    {
+      "id": 93233,
+      "type": "object",
+      "name": "_TextureSource2",
+      "selfSize": 12,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 288,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 282573,
+          "type": "closure",
+          "name": "exportSave",
+          "selfSize": 32,
+          "via": "property:exportBackup"
+        },
+        {
+          "id": 92243,
+          "type": "object",
+          "name": "system / Context / scope @69917",
+          "selfSize": 7884,
+          "via": "internal:context"
+        },
+        {
+          "id": 93227,
+          "type": "closure",
+          "name": "BufferImageSource",
+          "selfSize": 32,
+          "via": "context:BufferImageSource"
+        },
+        {
+          "id": 93233,
+          "type": "object",
+          "name": "_TextureSource2",
+          "selfSize": 12,
+          "via": "property:prototype"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 93233,
+          "type": "object",
+          "name": "_TextureSource2",
+          "selfSize": 12,
+          "graphRetainedBytes": 288
+        }
+      ]
+    },
+    {
+      "id": 93271,
+      "type": "object",
+      "name": "Texture",
+      "selfSize": 80,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 172,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 282573,
+          "type": "closure",
+          "name": "exportSave",
+          "selfSize": 32,
+          "via": "property:exportBackup"
+        },
+        {
+          "id": 92243,
+          "type": "object",
+          "name": "system / Context / scope @69917",
+          "selfSize": 7884,
+          "via": "internal:context"
+        },
+        {
+          "id": 93267,
+          "type": "closure",
+          "name": "Texture",
+          "selfSize": 32,
+          "via": "context:Texture"
+        },
+        {
+          "id": 93271,
+          "type": "object",
+          "name": "Texture",
+          "selfSize": 80,
+          "via": "property:EMPTY"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 93271,
+          "type": "object",
+          "name": "Texture",
+          "selfSize": 80,
+          "graphRetainedBytes": 172
+        }
+      ]
+    },
+    {
+      "id": 93273,
+      "type": "object",
+      "name": "Texture",
+      "selfSize": 80,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 172,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 282573,
+          "type": "closure",
+          "name": "exportSave",
+          "selfSize": 32,
+          "via": "property:exportBackup"
+        },
+        {
+          "id": 92243,
+          "type": "object",
+          "name": "system / Context / scope @69917",
+          "selfSize": 7884,
+          "via": "internal:context"
+        },
+        {
+          "id": 93267,
+          "type": "closure",
+          "name": "Texture",
+          "selfSize": 32,
+          "via": "context:Texture"
+        },
+        {
+          "id": 93273,
+          "type": "object",
+          "name": "Texture",
+          "selfSize": 80,
+          "via": "property:WHITE"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 93273,
+          "type": "object",
+          "name": "Texture",
+          "selfSize": 80,
+          "graphRetainedBytes": 172
+        }
+      ]
+    },
+    {
+      "id": 93729,
+      "type": "object",
+      "name": "_TextureSource2",
+      "selfSize": 12,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 3172,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 282573,
+          "type": "closure",
+          "name": "exportSave",
+          "selfSize": 32,
+          "via": "property:exportBackup"
+        },
+        {
+          "id": 92243,
+          "type": "object",
+          "name": "system / Context / scope @69917",
+          "selfSize": 7884,
+          "via": "internal:context"
+        },
+        {
+          "id": 93723,
+          "type": "closure",
+          "name": "CanvasSource",
+          "selfSize": 32,
+          "via": "context:CanvasSource"
+        },
+        {
+          "id": 93729,
+          "type": "object",
+          "name": "_TextureSource2",
+          "selfSize": 12,
+          "via": "property:prototype"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 93729,
+          "type": "object",
+          "name": "_TextureSource2",
+          "selfSize": 12,
+          "graphRetainedBytes": 3172
+        }
+      ]
+    },
+    {
+      "id": 93753,
+      "type": "object",
+      "name": "_TextureSource2",
+      "selfSize": 12,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 92,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 282573,
+          "type": "closure",
+          "name": "exportSave",
+          "selfSize": 32,
+          "via": "property:exportBackup"
+        },
+        {
+          "id": 92243,
+          "type": "object",
+          "name": "system / Context / scope @69917",
+          "selfSize": 7884,
+          "via": "internal:context"
+        },
+        {
+          "id": 93747,
+          "type": "closure",
+          "name": "ImageSource",
+          "selfSize": 32,
+          "via": "context:ImageSource"
+        },
+        {
+          "id": 93753,
+          "type": "object",
+          "name": "_TextureSource2",
+          "selfSize": 12,
+          "via": "property:prototype"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 92243,
+          "type": "object",
+          "name": "system / Context / scope @69917",
+          "selfSize": 7884,
+          "graphRetainedBytes": 2947903
+        },
+        {
+          "id": 93747,
+          "type": "closure",
+          "name": "ImageSource",
+          "selfSize": 32,
+          "graphRetainedBytes": 528
+        },
+        {
+          "id": 93753,
+          "type": "object",
+          "name": "_TextureSource2",
+          "selfSize": 12,
+          "graphRetainedBytes": 92
+        }
+      ]
+    },
+    {
+      "id": 94691,
+      "type": "object",
+      "name": "Texture",
+      "selfSize": 12,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 308,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 282573,
+          "type": "closure",
+          "name": "exportSave",
+          "selfSize": 32,
+          "via": "property:exportBackup"
+        },
+        {
+          "id": 92243,
+          "type": "object",
+          "name": "system / Context / scope @69917",
+          "selfSize": 7884,
+          "via": "internal:context"
+        },
+        {
+          "id": 94685,
+          "type": "closure",
+          "name": "_RenderTexture",
+          "selfSize": 32,
+          "via": "context:RenderTexture"
+        },
+        {
+          "id": 94691,
+          "type": "object",
+          "name": "Texture",
+          "selfSize": 12,
+          "via": "property:prototype"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 92243,
+          "type": "object",
+          "name": "system / Context / scope @69917",
+          "selfSize": 7884,
+          "graphRetainedBytes": 2947903
+        },
+        {
+          "id": 94685,
+          "type": "closure",
+          "name": "_RenderTexture",
+          "selfSize": 32,
+          "graphRetainedBytes": 1116
+        },
+        {
+          "id": 94691,
+          "type": "object",
+          "name": "Texture",
+          "selfSize": 12,
+          "graphRetainedBytes": 308
+        }
+      ]
+    },
+    {
+      "id": 97419,
+      "type": "object",
+      "name": "SynthAudio",
+      "selfSize": 52,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 19399,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 146695,
+          "type": "object",
+          "name": "SampleSound",
+          "selfSize": 48,
+          "via": "property:sound"
+        },
+        {
+          "id": 97419,
+          "type": "object",
+          "name": "SynthAudio",
+          "selfSize": 52,
+          "via": "property:out"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 97419,
+          "type": "object",
+          "name": "SynthAudio",
+          "selfSize": 52,
+          "graphRetainedBytes": 19399
+        }
+      ]
+    },
+    {
+      "id": 125909,
+      "type": "object",
+      "name": "WebGLRenderer3",
+      "selfSize": 268,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 21215,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 97403,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 68,
+          "via": "property:session"
+        },
+        {
+          "id": 97413,
+          "type": "object",
+          "name": "Game2",
+          "selfSize": 144,
+          "via": "property:game"
+        },
+        {
+          "id": 125909,
+          "type": "object",
+          "name": "WebGLRenderer3",
+          "selfSize": 268,
+          "via": "property:renderer"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 125909,
+          "type": "object",
+          "name": "WebGLRenderer3",
+          "selfSize": 268,
+          "graphRetainedBytes": 21215
+        }
+      ]
+    },
+    {
+      "id": 126429,
+      "type": "object",
+      "name": "TextureSource3",
+      "selfSize": 76,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 76,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 97403,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 68,
+          "via": "property:session"
+        },
+        {
+          "id": 97413,
+          "type": "object",
+          "name": "Game2",
+          "selfSize": 144,
+          "via": "property:game"
+        },
+        {
+          "id": 126793,
+          "type": "object",
+          "name": "TextureManager2",
+          "selfSize": 76,
+          "via": "property:textures"
+        },
+        {
+          "id": 126443,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 12,
+          "via": "property:list"
+        },
+        {
+          "id": 126603,
+          "type": "object",
+          "name": "Texture3",
+          "selfSize": 44,
+          "via": "property:__WHITE"
+        },
+        {
+          "id": 126427,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16,
+          "via": "property:source"
+        },
+        {
+          "id": 126429,
+          "type": "object",
+          "name": "TextureSource3",
+          "selfSize": 76,
+          "via": "element:0"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 126793,
+          "type": "object",
+          "name": "TextureManager2",
+          "selfSize": 76,
+          "graphRetainedBytes": 617120
+        },
+        {
+          "id": 126443,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 12,
+          "graphRetainedBytes": 614124
+        },
+        {
+          "id": 126603,
+          "type": "object",
+          "name": "Texture3",
+          "selfSize": 44,
+          "graphRetainedBytes": 724
+        },
+        {
+          "id": 126429,
+          "type": "object",
+          "name": "TextureSource3",
+          "selfSize": 76,
+          "graphRetainedBytes": 76
+        }
+      ]
+    },
+    {
+      "id": 126485,
+      "type": "object",
+      "name": "Texture3",
+      "selfSize": 44,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 208,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 97403,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 68,
+          "via": "property:session"
+        },
+        {
+          "id": 97413,
+          "type": "object",
+          "name": "Game2",
+          "selfSize": 144,
+          "via": "property:game"
+        },
+        {
+          "id": 126793,
+          "type": "object",
+          "name": "TextureManager2",
+          "selfSize": 76,
+          "via": "property:textures"
+        },
+        {
+          "id": 126443,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 12,
+          "via": "property:list"
+        },
+        {
+          "id": 126485,
+          "type": "object",
+          "name": "Texture3",
+          "selfSize": 44,
+          "via": "property:title-boat-master-v3"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 126485,
+          "type": "object",
+          "name": "Texture3",
+          "selfSize": 44,
+          "graphRetainedBytes": 208
+        }
+      ]
+    },
+    {
+      "id": 126507,
+      "type": "object",
+      "name": "Texture3",
+      "selfSize": 44,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 736,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 97403,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 68,
+          "via": "property:session"
+        },
+        {
+          "id": 97413,
+          "type": "object",
+          "name": "Game2",
+          "selfSize": 144,
+          "via": "property:game"
+        },
+        {
+          "id": 126793,
+          "type": "object",
+          "name": "TextureManager2",
+          "selfSize": 76,
+          "via": "property:textures"
+        },
+        {
+          "id": 126443,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 12,
+          "via": "property:list"
+        },
+        {
+          "id": 126507,
+          "type": "object",
+          "name": "Texture3",
+          "selfSize": 44,
+          "via": "property:title-rain-new"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 126507,
+          "type": "object",
+          "name": "Texture3",
+          "selfSize": 44,
+          "graphRetainedBytes": 736
+        }
+      ]
+    },
+    {
+      "id": 126519,
+      "type": "object",
+      "name": "Texture3",
+      "selfSize": 44,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 736,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 97403,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 68,
+          "via": "property:session"
+        },
+        {
+          "id": 97413,
+          "type": "object",
+          "name": "Game2",
+          "selfSize": 144,
+          "via": "property:game"
+        },
+        {
+          "id": 126793,
+          "type": "object",
+          "name": "TextureManager2",
+          "selfSize": 76,
+          "via": "property:textures"
+        },
+        {
+          "id": 126443,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 12,
+          "via": "property:list"
+        },
+        {
+          "id": 126519,
+          "type": "object",
+          "name": "Texture3",
+          "selfSize": 44,
+          "via": "property:title-desk-master-v3"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 126793,
+          "type": "object",
+          "name": "TextureManager2",
+          "selfSize": 76,
+          "graphRetainedBytes": 617120
+        },
+        {
+          "id": 126443,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 12,
+          "graphRetainedBytes": 614124
+        },
+        {
+          "id": 126519,
+          "type": "object",
+          "name": "Texture3",
+          "selfSize": 44,
+          "graphRetainedBytes": 736
+        }
+      ]
+    },
+    {
+      "id": 129717,
+      "type": "object",
+      "name": "TextureSource3",
+      "selfSize": 76,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 76,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 97403,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 68,
+          "via": "property:session"
+        },
+        {
+          "id": 97413,
+          "type": "object",
+          "name": "Game2",
+          "selfSize": 144,
+          "via": "property:game"
+        },
+        {
+          "id": 126793,
+          "type": "object",
+          "name": "TextureManager2",
+          "selfSize": 76,
+          "via": "property:textures"
+        },
+        {
+          "id": 126443,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 12,
+          "via": "property:list"
+        },
+        {
+          "id": 126533,
+          "type": "object",
+          "name": "Texture3",
+          "selfSize": 44,
+          "via": "property:__MISSING"
+        },
+        {
+          "id": 127101,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16,
+          "via": "property:source"
+        },
+        {
+          "id": 129717,
+          "type": "object",
+          "name": "TextureSource3",
+          "selfSize": 76,
+          "via": "element:0"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 126793,
+          "type": "object",
+          "name": "TextureManager2",
+          "selfSize": 76,
+          "graphRetainedBytes": 617120
+        },
+        {
+          "id": 126443,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 12,
+          "graphRetainedBytes": 614124
+        },
+        {
+          "id": 126533,
+          "type": "object",
+          "name": "Texture3",
+          "selfSize": 44,
+          "graphRetainedBytes": 724
+        },
+        {
+          "id": 129717,
+          "type": "object",
+          "name": "TextureSource3",
+          "selfSize": 76,
+          "graphRetainedBytes": 76
+        }
+      ]
+    },
+    {
+      "id": 129723,
+      "type": "object",
+      "name": "TextureSource3",
+      "selfSize": 76,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 76,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 97403,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 68,
+          "via": "property:session"
+        },
+        {
+          "id": 97413,
+          "type": "object",
+          "name": "Game2",
+          "selfSize": 144,
+          "via": "property:game"
+        },
+        {
+          "id": 126793,
+          "type": "object",
+          "name": "TextureManager2",
+          "selfSize": 76,
+          "via": "property:textures"
+        },
+        {
+          "id": 133543,
+          "type": "object",
+          "name": "Image3",
+          "selfSize": 48,
+          "via": "property:stamp"
+        },
+        {
+          "id": 129727,
+          "type": "object",
+          "name": "Frame2",
+          "selfSize": 112,
+          "via": "property:frame"
+        },
+        {
+          "id": 129723,
+          "type": "object",
+          "name": "TextureSource3",
+          "selfSize": 76,
+          "via": "property:source"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 126793,
+          "type": "object",
+          "name": "TextureManager2",
+          "selfSize": 76,
+          "graphRetainedBytes": 617120
+        },
+        {
+          "id": 129723,
+          "type": "object",
+          "name": "TextureSource3",
+          "selfSize": 76,
+          "graphRetainedBytes": 76
+        }
+      ]
+    },
+    {
+      "id": 138431,
+      "type": "object",
+      "name": "Container4",
+      "selfSize": 80,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 776,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 97403,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 68,
+          "via": "property:session"
+        },
+        {
+          "id": 97413,
+          "type": "object",
+          "name": "Game2",
+          "selfSize": 144,
+          "via": "property:game"
+        },
+        {
+          "id": 135971,
+          "type": "object",
+          "name": "SceneManager2",
+          "selfSize": 84,
+          "via": "property:scene"
+        },
+        {
+          "id": 126953,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 28,
+          "via": "property:keys"
+        },
+        {
+          "id": 126965,
+          "type": "object",
+          "name": "ResultScene",
+          "selfSize": 56,
+          "via": "property:Result"
+        },
+        {
+          "id": 135863,
+          "type": "object",
+          "name": "DisplayList2",
+          "selfSize": 52,
+          "via": "property:children"
+        },
+        {
+          "id": 137203,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16,
+          "via": "property:list"
+        },
+        {
+          "id": 138431,
+          "type": "object",
+          "name": "Container4",
+          "selfSize": 80,
+          "via": "element:0"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 138431,
+          "type": "object",
+          "name": "Container4",
+          "selfSize": 80,
+          "graphRetainedBytes": 776
+        }
+      ]
+    },
+    {
+      "id": 146695,
+      "type": "object",
+      "name": "SampleSound",
+      "selfSize": 48,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 2376,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 146695,
+          "type": "object",
+          "name": "SampleSound",
+          "selfSize": 48,
+          "via": "property:sound"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 146695,
+          "type": "object",
+          "name": "SampleSound",
+          "selfSize": 48,
+          "graphRetainedBytes": 2376
+        }
+      ]
+    },
+    {
+      "id": 155043,
+      "type": "object",
+      "name": "CoastRaidRuntime",
+      "selfSize": 12,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 77396,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 490481,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 20,
+          "via": "property:handle"
+        },
+        {
+          "id": 144035,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 36,
+          "via": "property:runtime"
+        },
+        {
+          "id": 144037,
+          "type": "closure",
+          "name": "native_bind",
+          "selfSize": 24,
+          "via": "property:advance"
+        },
+        {
+          "id": 155043,
+          "type": "object",
+          "name": "CoastRaidRuntime",
+          "selfSize": 12,
+          "via": "internal:bound_this"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 155043,
+          "type": "object",
+          "name": "CoastRaidRuntime",
+          "selfSize": 12,
+          "graphRetainedBytes": 77396
+        }
+      ]
+    },
+    {
+      "id": 174887,
+      "type": "object",
+      "name": "Sprite3",
+      "selfSize": 28,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 564,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7413,
+          "type": "native",
+          "name": "system / NativeContext / file://",
+          "selfSize": 1244,
+          "via": "internal:21 / gin::ContextHolder::context_"
+        },
+        {
+          "id": 72895,
+          "type": "object",
+          "name": "Window [JSGlobalObject] / file://",
+          "selfSize": 24,
+          "via": "internal:global_object"
+        },
+        {
+          "id": 92187,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 12,
+          "via": "property:Phaser"
+        },
+        {
+          "id": 92195,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 204,
+          "via": "property:GameObjects"
+        },
+        {
+          "id": 168027,
+          "type": "closure",
+          "name": "PathFollower2",
+          "selfSize": 32,
+          "via": "property:PathFollower"
+        },
+        {
+          "id": 174887,
+          "type": "object",
+          "name": "Sprite3",
+          "selfSize": 28,
+          "via": "property:prototype"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 168027,
+          "type": "closure",
+          "name": "PathFollower2",
+          "selfSize": 32,
+          "graphRetainedBytes": 616
+        },
+        {
+          "id": 174887,
+          "type": "object",
+          "name": "Sprite3",
+          "selfSize": 28,
+          "graphRetainedBytes": 564
+        }
+      ]
+    },
+    {
+      "id": 214765,
+      "type": "object",
+      "name": "WebGLRenderer",
+      "selfSize": 96,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 57388,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 317245,
+          "type": "object",
+          "name": "_Application2",
+          "selfSize": 48,
+          "via": "property:app"
+        },
+        {
+          "id": 214765,
+          "type": "object",
+          "name": "WebGLRenderer",
+          "selfSize": 96,
+          "via": "property:renderer"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 214765,
+          "type": "object",
+          "name": "WebGLRenderer",
+          "selfSize": 96,
+          "graphRetainedBytes": 57388
+        }
+      ]
+    },
+    {
+      "id": 214843,
+      "type": "native",
+      "name": "WebGL2RenderingContext",
+      "selfSize": 1520,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 4560,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 317245,
+          "type": "object",
+          "name": "_Application2",
+          "selfSize": 48,
+          "via": "property:app"
+        },
+        {
+          "id": 214765,
+          "type": "object",
+          "name": "WebGLRenderer",
+          "selfSize": 96,
+          "via": "property:renderer"
+        },
+        {
+          "id": 214843,
+          "type": "native",
+          "name": "WebGL2RenderingContext",
+          "selfSize": 1520,
+          "via": "property:gl"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 214843,
+          "type": "native",
+          "name": "WebGL2RenderingContext",
+          "selfSize": 1520,
+          "graphRetainedBytes": 4560
+        }
+      ]
+    },
+    {
+      "id": 214845,
+      "type": "object",
+      "name": "_Container",
+      "selfSize": 188,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 4220,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 317245,
+          "type": "object",
+          "name": "_Application2",
+          "selfSize": 48,
+          "via": "property:app"
+        },
+        {
+          "id": 214845,
+          "type": "object",
+          "name": "_Container",
+          "selfSize": 188,
+          "via": "property:stage"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 214845,
+          "type": "object",
+          "name": "_Container",
+          "selfSize": 188,
+          "graphRetainedBytes": 4220
+        }
+      ]
+    },
+    {
+      "id": 215407,
+      "type": "object",
+      "name": "CanvasSource",
+      "selfSize": 160,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 2272,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 317245,
+          "type": "object",
+          "name": "_Application2",
+          "selfSize": 48,
+          "via": "property:app"
+        },
+        {
+          "id": 214765,
+          "type": "object",
+          "name": "WebGLRenderer",
+          "selfSize": 96,
+          "via": "property:renderer"
+        },
+        {
+          "id": 214787,
+          "type": "object",
+          "name": "_ViewSystem2",
+          "selfSize": 48,
+          "via": "property:view"
+        },
+        {
+          "id": 214937,
+          "type": "object",
+          "name": "Texture",
+          "selfSize": 80,
+          "via": "property:texture"
+        },
+        {
+          "id": 215407,
+          "type": "object",
+          "name": "CanvasSource",
+          "selfSize": 160,
+          "via": "property:_source"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 215407,
+          "type": "object",
+          "name": "CanvasSource",
+          "selfSize": 160,
+          "graphRetainedBytes": 2272
+        }
+      ]
+    },
+    {
+      "id": 247179,
+      "type": "object",
+      "name": "Sprite3",
+      "selfSize": 28,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 1780,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7413,
+          "type": "native",
+          "name": "system / NativeContext / file://",
+          "selfSize": 1244,
+          "via": "internal:21 / gin::ContextHolder::context_"
+        },
+        {
+          "id": 72895,
+          "type": "object",
+          "name": "Window [JSGlobalObject] / file://",
+          "selfSize": 24,
+          "via": "internal:global_object"
+        },
+        {
+          "id": 92187,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 12,
+          "via": "property:Phaser"
+        },
+        {
+          "id": 91999,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 20,
+          "via": "property:Physics"
+        },
+        {
+          "id": 92003,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 72,
+          "via": "property:Matter"
+        },
+        {
+          "id": 120195,
+          "type": "closure",
+          "name": "MatterSprite2",
+          "selfSize": 32,
+          "via": "property:Sprite"
+        },
+        {
+          "id": 247179,
+          "type": "object",
+          "name": "Sprite3",
+          "selfSize": 28,
+          "via": "property:prototype"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 120195,
+          "type": "closure",
+          "name": "MatterSprite2",
+          "selfSize": 32,
+          "graphRetainedBytes": 1844
+        },
+        {
+          "id": 247179,
+          "type": "object",
+          "name": "Sprite3",
+          "selfSize": 28,
+          "graphRetainedBytes": 1780
+        }
+      ]
+    },
+    {
+      "id": 247295,
+      "type": "object",
+      "name": "Sprite3",
+      "selfSize": 28,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 1720,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7413,
+          "type": "native",
+          "name": "system / NativeContext / file://",
+          "selfSize": 1244,
+          "via": "internal:21 / gin::ContextHolder::context_"
+        },
+        {
+          "id": 72895,
+          "type": "object",
+          "name": "Window [JSGlobalObject] / file://",
+          "selfSize": 24,
+          "via": "internal:global_object"
+        },
+        {
+          "id": 92187,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 12,
+          "via": "property:Phaser"
+        },
+        {
+          "id": 91999,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 20,
+          "via": "property:Physics"
+        },
+        {
+          "id": 92001,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 12,
+          "via": "property:Arcade"
+        },
+        {
+          "id": 125363,
+          "type": "closure",
+          "name": "ArcadeSprite2",
+          "selfSize": 32,
+          "via": "property:Sprite"
+        },
+        {
+          "id": 247295,
+          "type": "object",
+          "name": "Sprite3",
+          "selfSize": 28,
+          "via": "property:prototype"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 125363,
+          "type": "closure",
+          "name": "ArcadeSprite2",
+          "selfSize": 32,
+          "graphRetainedBytes": 1772
+        },
+        {
+          "id": 247295,
+          "type": "object",
+          "name": "Sprite3",
+          "selfSize": 28,
+          "graphRetainedBytes": 1720
+        }
+      ]
+    },
+    {
+      "id": 253269,
+      "type": "object",
+      "name": "CanvasSource",
+      "selfSize": 160,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 4024,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        },
+        {
+          "id": 421191,
+          "type": "object",
+          "name": "Lighting",
+          "selfSize": 48,
+          "via": "property:light"
+        },
+        {
+          "id": 421401,
+          "type": "object",
+          "name": "Texture",
+          "selfSize": 80,
+          "via": "property:lightTex"
+        },
+        {
+          "id": 253269,
+          "type": "object",
+          "name": "CanvasSource",
+          "selfSize": 160,
+          "via": "property:_source"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        },
+        {
+          "id": 421191,
+          "type": "object",
+          "name": "Lighting",
+          "selfSize": 48,
+          "graphRetainedBytes": 734392
+        },
+        {
+          "id": 421401,
+          "type": "object",
+          "name": "Texture",
+          "selfSize": 80,
+          "graphRetainedBytes": 4672
+        },
+        {
+          "id": 253269,
+          "type": "object",
+          "name": "CanvasSource",
+          "selfSize": 160,
+          "graphRetainedBytes": 4024
+        }
+      ]
+    },
+    {
+      "id": 266069,
+      "type": "object",
+      "name": "Scope",
+      "selfSize": 52,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 1296,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 266069,
+          "type": "object",
+          "name": "Scope",
+          "selfSize": 52,
+          "via": "property:scope"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 266069,
+          "type": "object",
+          "name": "Scope",
+          "selfSize": 52,
+          "graphRetainedBytes": 1296
+        }
+      ]
+    },
+    {
+      "id": 266891,
+      "type": "object",
+      "name": "_Sprite",
+      "selfSize": 248,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 712,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        },
+        {
+          "id": 421191,
+          "type": "object",
+          "name": "Lighting",
+          "selfSize": 48,
+          "via": "property:light"
+        },
+        {
+          "id": 421399,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16,
+          "via": "property:pool"
+        },
+        {
+          "id": 266891,
+          "type": "object",
+          "name": "_Sprite",
+          "selfSize": 248,
+          "via": "element:2"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        },
+        {
+          "id": 421191,
+          "type": "object",
+          "name": "Lighting",
+          "selfSize": 48,
+          "graphRetainedBytes": 734392
+        },
+        {
+          "id": 421399,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16,
+          "graphRetainedBytes": 5788
+        },
+        {
+          "id": 266891,
+          "type": "object",
+          "name": "_Sprite",
+          "selfSize": 248,
+          "graphRetainedBytes": 712
+        }
+      ]
+    },
+    {
+      "id": 267249,
+      "type": "object",
+      "name": "_Sprite",
+      "selfSize": 248,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 712,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        },
+        {
+          "id": 421191,
+          "type": "object",
+          "name": "Lighting",
+          "selfSize": 48,
+          "via": "property:light"
+        },
+        {
+          "id": 421399,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16,
+          "via": "property:pool"
+        },
+        {
+          "id": 267249,
+          "type": "object",
+          "name": "_Sprite",
+          "selfSize": 248,
+          "via": "element:1"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        },
+        {
+          "id": 421191,
+          "type": "object",
+          "name": "Lighting",
+          "selfSize": 48,
+          "graphRetainedBytes": 734392
+        },
+        {
+          "id": 421399,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16,
+          "graphRetainedBytes": 5788
+        },
+        {
+          "id": 267249,
+          "type": "object",
+          "name": "_Sprite",
+          "selfSize": 248,
+          "graphRetainedBytes": 712
+        }
+      ]
+    },
+    {
+      "id": 267425,
+      "type": "object",
+      "name": "_Sprite",
+      "selfSize": 248,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 712,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        },
+        {
+          "id": 421191,
+          "type": "object",
+          "name": "Lighting",
+          "selfSize": 48,
+          "via": "property:light"
+        },
+        {
+          "id": 421399,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16,
+          "via": "property:pool"
+        },
+        {
+          "id": 267425,
+          "type": "object",
+          "name": "_Sprite",
+          "selfSize": 248,
+          "via": "element:0"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        },
+        {
+          "id": 421191,
+          "type": "object",
+          "name": "Lighting",
+          "selfSize": 48,
+          "graphRetainedBytes": 734392
+        },
+        {
+          "id": 421399,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16,
+          "graphRetainedBytes": 5788
+        },
+        {
+          "id": 267425,
+          "type": "object",
+          "name": "_Sprite",
+          "selfSize": 248,
+          "graphRetainedBytes": 712
+        }
+      ]
+    },
+    {
+      "id": 296293,
+      "type": "object",
+      "name": "WebGL2RenderingContext",
+      "selfSize": 16,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 16,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 609423,
+          "type": "synthetic",
+          "name": "C++ Persistent roots",
+          "selfSize": 0,
+          "via": "element:29"
+        },
+        {
+          "id": 66,
+          "type": "native",
+          "name": "blink::ScriptStateImpl",
+          "selfSize": 112,
+          "via": "internal:blink::ScriptState::ScriptState(v8::Local<v8::Context>, DOMWrapperWorld *, scoped_refptr<scheduler::EventLoop>)@..\\..\\third_party\\blink\\renderer\\platform\\bindings\\script_state.cc:18"
+        },
+        {
+          "id": 22228,
+          "type": "native",
+          "name": "blink::V8PerContextData",
+          "selfSize": 120,
+          "via": "element:1"
+        },
+        {
+          "id": 22230,
+          "type": "native",
+          "name": "blink::HeapHashTableBacking<blink::HashTable<const blink::WrapperTypeInfo *, blink::KeyValuePair<const blink::WrapperTyp",
+          "selfSize": 4104,
+          "via": "element:1"
+        },
+        {
+          "id": 296293,
+          "type": "object",
+          "name": "WebGL2RenderingContext",
+          "selfSize": 16,
+          "via": "element:61"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 66,
+          "type": "native",
+          "name": "blink::ScriptStateImpl",
+          "selfSize": 112,
+          "graphRetainedBytes": 9752
+        },
+        {
+          "id": 22228,
+          "type": "native",
+          "name": "blink::V8PerContextData",
+          "selfSize": 120,
+          "graphRetainedBytes": 9640
+        },
+        {
+          "id": 22230,
+          "type": "native",
+          "name": "blink::HeapHashTableBacking<blink::HashTable<const blink::WrapperTypeInfo *, blink::KeyValuePair<const blink::WrapperTyp",
+          "selfSize": 4104,
+          "graphRetainedBytes": 5416
+        },
+        {
+          "id": 296293,
+          "type": "object",
+          "name": "WebGL2RenderingContext",
+          "selfSize": 16,
+          "graphRetainedBytes": 16
+        }
+      ]
+    },
+    {
+      "id": 316057,
+      "type": "object",
+      "name": "_Container",
+      "selfSize": 188,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 548,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 282573,
+          "type": "closure",
+          "name": "exportSave",
+          "selfSize": 32,
+          "via": "property:exportBackup"
+        },
+        {
+          "id": 92243,
+          "type": "object",
+          "name": "system / Context / scope @69917",
+          "selfSize": 7884,
+          "via": "internal:context"
+        },
+        {
+          "id": 316057,
+          "type": "object",
+          "name": "_Container",
+          "selfSize": 188,
+          "via": "context:tempContainer"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 92243,
+          "type": "object",
+          "name": "system / Context / scope @69917",
+          "selfSize": 7884,
+          "graphRetainedBytes": 2947903
+        },
+        {
+          "id": 316057,
+          "type": "object",
+          "name": "_Container",
+          "selfSize": 188,
+          "graphRetainedBytes": 548
+        }
+      ]
+    },
+    {
+      "id": 317245,
+      "type": "object",
+      "name": "_Application2",
+      "selfSize": 48,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 1400,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 317245,
+          "type": "object",
+          "name": "_Application2",
+          "selfSize": 48,
+          "via": "property:app"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 317245,
+          "type": "object",
+          "name": "_Application2",
+          "selfSize": 48,
+          "graphRetainedBytes": 1400
+        }
+      ]
+    },
+    {
+      "id": 420951,
+      "type": "object",
+      "name": "InventoryPanel",
+      "selfSize": 52,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 1364,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 420951,
+          "type": "object",
+          "name": "InventoryPanel",
+          "selfSize": 52,
+          "via": "property:inv"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 420951,
+          "type": "object",
+          "name": "InventoryPanel",
+          "selfSize": 52,
+          "graphRetainedBytes": 1364
+        }
+      ]
+    },
+    {
+      "id": 421145,
+      "type": "object",
+      "name": "Fx",
+      "selfSize": 60,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 676,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        },
+        {
+          "id": 421145,
+          "type": "object",
+          "name": "Fx",
+          "selfSize": 60,
+          "via": "property:fx"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        },
+        {
+          "id": 421145,
+          "type": "object",
+          "name": "Fx",
+          "selfSize": 60,
+          "graphRetainedBytes": 676
+        }
+      ]
+    },
+    {
+      "id": 421161,
+      "type": "object",
+      "name": "Textures",
+      "selfSize": 48,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 1856,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        },
+        {
+          "id": 421161,
+          "type": "object",
+          "name": "Textures",
+          "selfSize": 48,
+          "via": "property:tex"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        },
+        {
+          "id": 421161,
+          "type": "object",
+          "name": "Textures",
+          "selfSize": 48,
+          "graphRetainedBytes": 1856
+        }
+      ]
+    },
+    {
+      "id": 421165,
+      "type": "object",
+      "name": "Tide",
+      "selfSize": 52,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 2572,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        },
+        {
+          "id": 421165,
+          "type": "object",
+          "name": "Tide",
+          "selfSize": 52,
+          "via": "property:tide"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        },
+        {
+          "id": 421165,
+          "type": "object",
+          "name": "Tide",
+          "selfSize": 52,
+          "graphRetainedBytes": 2572
+        }
+      ]
+    },
+    {
+      "id": 421171,
+      "type": "object",
+      "name": "Weather",
+      "selfSize": 56,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 29980,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        },
+        {
+          "id": 421171,
+          "type": "object",
+          "name": "Weather",
+          "selfSize": 56,
+          "via": "property:weather"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        },
+        {
+          "id": 421171,
+          "type": "object",
+          "name": "Weather",
+          "selfSize": 56,
+          "graphRetainedBytes": 29980
+        }
+      ]
+    },
+    {
+      "id": 421177,
+      "type": "object",
+      "name": "_Graphics",
+      "selfSize": 244,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 660,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        },
+        {
+          "id": 421177,
+          "type": "object",
+          "name": "_Graphics",
+          "selfSize": 244,
+          "via": "property:debugG"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        },
+        {
+          "id": 421177,
+          "type": "object",
+          "name": "_Graphics",
+          "selfSize": 244,
+          "graphRetainedBytes": 660
+        }
+      ]
+    },
+    {
+      "id": 421191,
+      "type": "object",
+      "name": "Lighting",
+      "selfSize": 48,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 734392,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        },
+        {
+          "id": 421191,
+          "type": "object",
+          "name": "Lighting",
+          "selfSize": 48,
+          "via": "property:light"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        },
+        {
+          "id": 421191,
+          "type": "object",
+          "name": "Lighting",
+          "selfSize": 48,
+          "graphRetainedBytes": 734392
+        }
+      ]
+    },
+    {
+      "id": 421295,
+      "type": "object",
+      "name": "Atlas",
+      "selfSize": 52,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 1060,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        },
+        {
+          "id": 421161,
+          "type": "object",
+          "name": "Textures",
+          "selfSize": 48,
+          "via": "property:tex"
+        },
+        {
+          "id": 421295,
+          "type": "object",
+          "name": "Atlas",
+          "selfSize": 52,
+          "via": "property:atlas"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        },
+        {
+          "id": 421161,
+          "type": "object",
+          "name": "Textures",
+          "selfSize": 48,
+          "graphRetainedBytes": 1856
+        },
+        {
+          "id": 421295,
+          "type": "object",
+          "name": "Atlas",
+          "selfSize": 52,
+          "graphRetainedBytes": 1060
+        }
+      ]
+    },
+    {
+      "id": 421393,
+      "type": "object",
+      "name": "_Graphics",
+      "selfSize": 244,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 660,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        },
+        {
+          "id": 421191,
+          "type": "object",
+          "name": "Lighting",
+          "selfSize": 48,
+          "via": "property:light"
+        },
+        {
+          "id": 421393,
+          "type": "object",
+          "name": "_Graphics",
+          "selfSize": 244,
+          "via": "property:backdrop"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        },
+        {
+          "id": 421191,
+          "type": "object",
+          "name": "Lighting",
+          "selfSize": 48,
+          "graphRetainedBytes": 734392
+        },
+        {
+          "id": 421393,
+          "type": "object",
+          "name": "_Graphics",
+          "selfSize": 244,
+          "graphRetainedBytes": 660
+        }
+      ]
+    },
+    {
+      "id": 421563,
+      "type": "object",
+      "name": "_CoastView",
+      "selfSize": 12,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 885252,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "via": "property:view"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "graphRetainedBytes": 1170220
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "graphRetainedBytes": 1023672
+        },
+        {
+          "id": 421563,
+          "type": "object",
+          "name": "_CoastView",
+          "selfSize": 12,
+          "graphRetainedBytes": 885252
+        }
+      ]
+    },
+    {
+      "id": 484631,
+      "type": "object",
+      "name": "HTMLCanvasElement",
+      "selfSize": 16,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 16,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 609423,
+          "type": "synthetic",
+          "name": "C++ Persistent roots",
+          "selfSize": 0,
+          "via": "element:29"
+        },
+        {
+          "id": 90,
+          "type": "native",
+          "name": "blink::ScriptStateImpl",
+          "selfSize": 112,
+          "via": "internal:blink::ScriptState::ScriptState(v8::Local<v8::Context>, DOMWrapperWorld *, scoped_refptr<scheduler::EventLoop>)@..\\..\\third_party\\blink\\renderer\\platform\\bindings\\script_state.cc:18"
+        },
+        {
+          "id": 22234,
+          "type": "native",
+          "name": "blink::V8PerContextData",
+          "selfSize": 120,
+          "via": "element:1"
+        },
+        {
+          "id": 22236,
+          "type": "native",
+          "name": "blink::HeapHashTableBacking<blink::HashTable<const blink::WrapperTypeInfo *, blink::KeyValuePair<const blink::WrapperTyp",
+          "selfSize": 2056,
+          "via": "element:1"
+        },
+        {
+          "id": 484631,
+          "type": "object",
+          "name": "HTMLCanvasElement",
+          "selfSize": 16,
+          "via": "element:32"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 90,
+          "type": "native",
+          "name": "blink::ScriptStateImpl",
+          "selfSize": 112,
+          "graphRetainedBytes": 4936
+        },
+        {
+          "id": 22234,
+          "type": "native",
+          "name": "blink::V8PerContextData",
+          "selfSize": 120,
+          "graphRetainedBytes": 4824
+        },
+        {
+          "id": 22236,
+          "type": "native",
+          "name": "blink::HeapHashTableBacking<blink::HashTable<const blink::WrapperTypeInfo *, blink::KeyValuePair<const blink::WrapperTyp",
+          "selfSize": 2056,
+          "graphRetainedBytes": 2648
+        },
+        {
+          "id": 484631,
+          "type": "object",
+          "name": "HTMLCanvasElement",
+          "selfSize": 16,
+          "graphRetainedBytes": 16
+        }
+      ]
+    },
+    {
+      "id": 490735,
+      "type": "object",
+      "name": "HTMLCanvasElement",
+      "selfSize": 16,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 16,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 609423,
+          "type": "synthetic",
+          "name": "C++ Persistent roots",
+          "selfSize": 0,
+          "via": "element:29"
+        },
+        {
+          "id": 66,
+          "type": "native",
+          "name": "blink::ScriptStateImpl",
+          "selfSize": 112,
+          "via": "internal:blink::ScriptState::ScriptState(v8::Local<v8::Context>, DOMWrapperWorld *, scoped_refptr<scheduler::EventLoop>)@..\\..\\third_party\\blink\\renderer\\platform\\bindings\\script_state.cc:18"
+        },
+        {
+          "id": 22228,
+          "type": "native",
+          "name": "blink::V8PerContextData",
+          "selfSize": 120,
+          "via": "element:1"
+        },
+        {
+          "id": 22230,
+          "type": "native",
+          "name": "blink::HeapHashTableBacking<blink::HashTable<const blink::WrapperTypeInfo *, blink::KeyValuePair<const blink::WrapperTyp",
+          "selfSize": 4104,
+          "via": "element:1"
+        },
+        {
+          "id": 490735,
+          "type": "object",
+          "name": "HTMLCanvasElement",
+          "selfSize": 16,
+          "via": "element:27"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 66,
+          "type": "native",
+          "name": "blink::ScriptStateImpl",
+          "selfSize": 112,
+          "graphRetainedBytes": 9752
+        },
+        {
+          "id": 22228,
+          "type": "native",
+          "name": "blink::V8PerContextData",
+          "selfSize": 120,
+          "graphRetainedBytes": 9640
+        },
+        {
+          "id": 22230,
+          "type": "native",
+          "name": "blink::HeapHashTableBacking<blink::HashTable<const blink::WrapperTypeInfo *, blink::KeyValuePair<const blink::WrapperTyp",
+          "selfSize": 4104,
+          "graphRetainedBytes": 5416
+        },
+        {
+          "id": 490735,
+          "type": "object",
+          "name": "HTMLCanvasElement",
+          "selfSize": 16,
+          "graphRetainedBytes": 16
+        }
+      ]
+    },
+    {
+      "id": 500713,
+      "type": "object",
+      "name": "Container4",
+      "selfSize": 80,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 264,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 97403,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 68,
+          "via": "property:session"
+        },
+        {
+          "id": 97413,
+          "type": "object",
+          "name": "Game2",
+          "selfSize": 144,
+          "via": "property:game"
+        },
+        {
+          "id": 135971,
+          "type": "object",
+          "name": "SceneManager2",
+          "selfSize": 84,
+          "via": "property:scene"
+        },
+        {
+          "id": 126953,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 28,
+          "via": "property:keys"
+        },
+        {
+          "id": 126957,
+          "type": "object",
+          "name": "MenuScene",
+          "selfSize": 56,
+          "via": "property:Menu"
+        },
+        {
+          "id": 210673,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 28,
+          "via": "property:title"
+        },
+        {
+          "id": 393583,
+          "type": "closure",
+          "name": "update",
+          "selfSize": 32,
+          "via": "property:update"
+        },
+        {
+          "id": 210757,
+          "type": "object",
+          "name": "system / Context / scope @205543",
+          "selfSize": 196,
+          "via": "internal:context"
+        },
+        {
+          "id": 512169,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 28,
+          "via": "context:groups"
+        },
+        {
+          "id": 500713,
+          "type": "object",
+          "name": "Container4",
+          "selfSize": 80,
+          "via": "property:desk"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 126957,
+          "type": "object",
+          "name": "MenuScene",
+          "selfSize": 56,
+          "graphRetainedBytes": 282228
+        },
+        {
+          "id": 210673,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 28,
+          "graphRetainedBytes": 280856
+        },
+        {
+          "id": 210757,
+          "type": "object",
+          "name": "system / Context / scope @205543",
+          "selfSize": 196,
+          "graphRetainedBytes": 280480
+        },
+        {
+          "id": 512169,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 28,
+          "graphRetainedBytes": 2356
+        },
+        {
+          "id": 500713,
+          "type": "object",
+          "name": "Container4",
+          "selfSize": 80,
+          "graphRetainedBytes": 264
+        }
+      ]
+    },
+    {
+      "id": 500715,
+      "type": "object",
+      "name": "Container4",
+      "selfSize": 80,
+      "newSinceFirst": false,
+      "graphRetainedBytes": 264,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "selfSize": 0,
+          "via": "element:10"
+        },
+        {
+          "id": 7397,
+          "type": "object",
+          "name": "CoastSampleHost",
+          "selfSize": 12,
+          "via": "internal:9 / DevTools console"
+        },
+        {
+          "id": 97403,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 68,
+          "via": "property:session"
+        },
+        {
+          "id": 97413,
+          "type": "object",
+          "name": "Game2",
+          "selfSize": 144,
+          "via": "property:game"
+        },
+        {
+          "id": 135971,
+          "type": "object",
+          "name": "SceneManager2",
+          "selfSize": 84,
+          "via": "property:scene"
+        },
+        {
+          "id": 126953,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 28,
+          "via": "property:keys"
+        },
+        {
+          "id": 126957,
+          "type": "object",
+          "name": "MenuScene",
+          "selfSize": 56,
+          "via": "property:Menu"
+        },
+        {
+          "id": 210673,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 28,
+          "via": "property:title"
+        },
+        {
+          "id": 393583,
+          "type": "closure",
+          "name": "update",
+          "selfSize": 32,
+          "via": "property:update"
+        },
+        {
+          "id": 210757,
+          "type": "object",
+          "name": "system / Context / scope @205543",
+          "selfSize": 196,
+          "via": "internal:context"
+        },
+        {
+          "id": 512169,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 28,
+          "via": "context:groups"
+        },
+        {
+          "id": 500715,
+          "type": "object",
+          "name": "Container4",
+          "selfSize": 80,
+          "via": "property:chair"
+        }
+      ],
+      "dominators": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": "",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "selfSize": 0,
+          "graphRetainedBytes": 45472107
+        },
+        {
+          "id": 126957,
+          "type": "object",
+          "name": "MenuScene",
+          "selfSize": 56,
+          "graphRetainedBytes": 282228
+        },
+        {
+          "id": 210673,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 28,
+          "graphRetainedBytes": 280856
+        },
+        {
+          "id": 210757,
+          "type": "object",
+          "name": "system / Context / scope @205543",
+          "selfSize": 196,
+          "graphRetainedBytes": 280480
+        },
+        {
+          "id": 512169,
+          "type": "object",
+          "name": "Object",
+          "selfSize": 28,
+          "graphRetainedBytes": 2356
+        },
+        {
+          "id": 500715,
+          "type": "object",
+          "name": "Container4",
+          "selfSize": 80,
+          "graphRetainedBytes": 264
+        }
+      ]
+    }
+  ]
+}
