@@ -18,6 +18,7 @@
 
 | 任务 / 承接入口 | 核对时实际范围 | 下一步与范围边界 |
 | --- | --- | --- |
+| [#30](https://github.com/xuys2025/escape-bincov/pull/30) · `docs/story-adaptation` · [剧情转化工作方案](NARRATIVE-ADAPTATION-PLAN.md) | 2026-10-09 用户明确批准实施本轮内容规格；开工 main `8355b85`，交付同步至 `43a342c`。剧情输入为 #29 `c940128`；#29 已合并，正文不变。开放 #22／#28 无同目标内容规格承接 | 本轮交付总方案、十八事件与线索登记、市场与回站样板（两路线、固定补给、完整条件对白与状态、30项未来验收），等待维护者审阅。代码接入仍排在 #22 后，工厂及其余章节逐批细化；同一目标在此任务续作，文学稿与游戏实现分别验收 |
 | [#27](https://github.com/xuys2025/escape-bincov/pull/27) · `docs/world-regions-story` · [世界观与地图主线](WORLD-REGIONS-STORY.md) | 2026-10-09 已合并为 `8355b85`，接受潮水、盐度、一据点十二区域、五方势力及六阶段三结局的设计文档 | 维护者确认先完成 #22，再实施相关功能；[#26](https://github.com/xuys2025/escape-bincov/issues/26) 只部分被覆盖，保持开放。文学重写由下方登记的独立草稿承接，文档合并不代表玩法已实现 |
 | `ci/parallel-browser-checks` · [CI 工作流](../.github/workflows/ci-pages.yml) | 2026-10-07 维护者明确授权执行 CI 优化；实时 main 为 `f144147`，无同目标开放 PR。单次构建，20 项浏览器检查分四组独立 runner 并行，保留统一门禁、证据与 Pages/镜像检查名 | 本地语法、覆盖、失败门禁、制品哈希及单元/打包检查后提交独立 PR，等待该提交完整 CI。按路径选择测试、缩短诊断循环及缓存调整留待后续明确范围；等待维护者合并 |
 | [#10](https://github.com/xuys2025/escape-bincov/pull/10) · `agent/qol-discovery-20261005` | 原头 `a99c661` 的完整 QOL 与已接受 #16 整合；保留原分支历史，补齐 RPG 商店、多层搜刮/拆分/旋转、真实命中方向和基地离店确认 | [本轮整合记录](QOL-PR16-INTEGRATION.md)；必须在最新组合完整 CI 通过后合并。真机及真人清单继续保留 |

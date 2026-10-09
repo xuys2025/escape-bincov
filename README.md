@@ -177,6 +177,7 @@ PR 会运行 **CI & Pages / Build and test**；合并至 `main` 并验证通过�
 | 想了解什么 | 从这里开始 |
 | --- | --- |
 | 潮水与盐度、十二区域势力分布、六阶段主线（新增内容待实现） | [世界观与地图主线](docs/WORLD-REGIONS-STORY.md) |
+| 剧情转化制作流程、十八事件卡与市场样板（内容规格，待接入） | [工作方案](docs/NARRATIVE-ADAPTATION-PLAN.md) · [事件与线索登记](docs/story/CONTENT-REGISTER.md) · [市场与回站样板](docs/story/CH01-MARKET-SLICE.md) |
 | 长线主线的故事文稿（新增内容待实现） | [《等海退去》](docs/MAIN-STORY.md) |
 | v0.2.0 更新亮点、下载与升级 | [完整发版公告](docs/releases/v0.2.0.md) · [更新记录](CHANGELOG.md) |
 | 箱子与尸体搜刮、操作与验收 | [搜刮说明](docs/LOOTING.md) |
