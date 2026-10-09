@@ -53,11 +53,11 @@ const blocks = (t0, t1 = Infinity) => page.evaluate(([a, b]) => window.__tap.blo
 const events = (t0, t1 = Infinity) => page.evaluate(([a, b]) => window.__events.filter(x => x.t >= a && x.t < b), [t0, t1]);
 const ctxState = () => page.evaluate(() => window.__tap.contexts.map(c => c.state));
 /** Onsets in the high-emphasis band: a block above k x the median of the preceding ~0.4 s, at least 120 ms apart. */
-function onsets(bs, k = 2.5, floor = .0003) {
+function onsets(bs, k = 2.5, floor = .0003, minGap = 120) {
   const out = []; let last = -1e9;
   for (let j = 12; j < bs.length; j++) {
     const prev = bs.slice(Math.max(0, j - 40), j - 2).map(b => b.hf).sort((a, b) => a - b), med = prev[prev.length >> 1];
-    if (bs[j].hf > med * k && bs[j].hf > floor && bs[j].t - last > 120) { out.push(bs[j].t); last = bs[j].t; }
+    if (bs[j].hf > med * k && bs[j].hf > floor && bs[j].t - last > minGap) { out.push(bs[j].t); last = bs[j].t; }
   }
   return out;
 }
@@ -164,12 +164,19 @@ try {
   await check('A6 hits and enemy fire: an adjacent scav and a salt rifleman attack; every hit on the player and every enemy shot is audible', async () => {
     const s = await S(), scav = s.actors.find(a => a.alive && a.kind === 'scav'), salt = s.actors.find(a => a.alive && a.kind === 'salt');
     await drv('placePlayer', { x: 640, y: 456 }, 0, 'coast'); await drv('placeEnemy', scav.uid, { x: 664, y: 456 }); await drv('placeEnemy', salt.uid, { x: 800, y: 456 }); await wait(300);
+    // Diagnostic only: identify actual output calls during A6. The original gate below is unchanged.
+    await page.evaluate(() => { const h = window.__bincovSample.host; window.__a6Cues = []; for (const key of ['hit','heartbeat','shot','impact','whiz','step']) { const normal = h.sound.out[key]; h.sound.out[key] = function (...args) { window.__a6Cues.push({ t: performance.now(), key }); return normal.apply(this,args); }; } });
     const c = await capture('enemy attacks (AI on 3 s)', async () => { await drv('freezeAI', false); await wait(3000); await drv('freezeAI', true); }, 400);
-    const hurt = sounded(c.ev.filter(e => e.type === 'hurt' && e.uid === 'player' && e.cause === 'blow'), c.on), fire = sounded(c.ev.filter(e => e.type === 'shot' && e.shooter !== 'player'), c.on);
+    // Attack cues may overlap inside 120 ms. Retain each above-threshold output block for event matching;
+    // thresholds and [-60,+350] ms remain unchanged. Footstep counts and quiet-bleed gate retain 120 ms dedup.
+    const attackOnsets = onsets(c.bs, 2.5, .0003, 0);
+    const hurt = sounded(c.ev.filter(e => e.type === 'hurt' && e.uid === 'player' && e.cause === 'blow'), attackOnsets), fire = sounded(c.ev.filter(e => e.type === 'shot' && e.shooter !== 'player'), attackOnsets);
+    report.a6 = { attacks: { events: c.ev, output: c.bs, onsets: c.on, attackOnsets }, cues: await page.evaluate(() => window.__a6Cues), hp: (await S()).hud.hp };
     assert.ok(hurt.length >= 1 && hurt.every(x => x.onset), `hurt ${JSON.stringify(hurt)}`); assert.ok(fire.length >= 1 && fire.every(x => x.onset), `enemy shots ${JSON.stringify(fire)}`);
     await drv('placeEnemy', scav.uid, { x: 104, y: 860 }); await drv('placeEnemy', salt.uid, { x: 136, y: 860 }); await wait(300);
     // Bleeding publishes a hurt with cause 'bleed' every frame: standing still while bleeding must stay quiet (no hit cue).
     const bleeding = (await S()).hud.bleeding, quiet = await capture('standing while bleeding', async () => {}, 1500);
+    report.a6 = { attacks: { events: c.ev, output: c.bs, onsets: c.on }, quiet: { events: quiet.ev, output: quiet.bs, onsets: quiet.on, start: quiet.t0, end: quiet.t1 }, cues: await page.evaluate(() => window.__a6Cues), hp: (await S()).hud.hp, bleeding };
     const ticks = quiet.ev.filter(e => e.type === 'hurt' && e.cause === 'bleed').length;
     if (bleeding) { assert.ok(ticks > 20, `bleed ticks ${ticks}`); assert.equal(quiet.on.length, 0, `onsets while bleeding ${quiet.on.length} on=${JSON.stringify(quiet.on)} ev=${JSON.stringify(quiet.ev.filter(e => !(e.type === 'hurt' && e.cause === 'bleed')).map(e => ({ t: Math.round(e.t), type: e.type, cause: e.cause, dmg: e.damage, uid: e.uid })))} hp=${(await S()).hud.hp}`); assert.ok(stats(quiet.bs).peak < .1, `peak while bleeding ${stats(quiet.bs).peak}`); }
     return { hurt: hurt.length, enemyShots: fire.length, hp: Math.round((await S()).hud.hp), ...stats(c.bs), bleeding, bleedTicks: ticks, bleedingOnsets: quiet.on.length, bleedingPeak: stats(quiet.bs).peak };
@@ -294,6 +301,7 @@ try {
 await browser.close();
 report.finishedAt = new Date().toISOString();
 report.passed = report.checks.filter(c => c.status === 'passed').length; report.failed = report.checks.length - report.passed;
+await writeFile(resolve(out, 'audio-output.json'), JSON.stringify({ plots }, null, 2));
 await writeFile(resolve(out, 'audio.json'), JSON.stringify(report, null, 2));
 console.log(`${report.passed}/${report.checks.length} passed; errors ${report.errors.length}; external requests ${report.requests.length}`);
 if (report.failed || report.failure || report.errors.length || report.requests.length) process.exitCode = 1;

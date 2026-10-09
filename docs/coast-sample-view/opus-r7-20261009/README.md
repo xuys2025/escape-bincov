@@ -1,3 +1,5 @@
+> 2026-10-09 Sol从138e899完成独立顺序复验，见[签收报告](../sol-r7-20261009/README.md)与[Opus/Astra清单](../sol-r7-20261009/defects.md)。总体PARTIAL；新增重点自动检查通过，A6明确测试漏检已修复，历史安静起音/ASTRA-SAVE-01未确认，F20正增长保留，真机真人未测。以下保留Opus原报告。
+
 # 城中村样板第七轮：R6 新接口接线与前端表现（Opus）
 
 2026-10-09（UTC+8）。原分支 `docs/coast-2-5d-art-design`，从 Astra 的 `0494b61` 接手，工作区干净。承接 [Astra R6 接口交接](../astra-r6-20261009/README.md)。

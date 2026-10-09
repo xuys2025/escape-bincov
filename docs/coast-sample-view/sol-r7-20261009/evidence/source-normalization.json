@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-09T07:29:19.773Z",
+  "method": "Executed source bytes retained in ignored final-tested-sources; committed source canonicalization verified by exact text equality under the declared transformation. No behavior edits after final tests.",
+  "rows": [
+    {
+      "path": "scripts/coast-audio-test.mjs",
+      "executedBytesSHA256": "41236ed6e8e1a9f362b3c37030b0e9abd47defafe3b192d7a9673c968a9a6d85",
+      "committedCanonicalSHA256": "41236ed6e8e1a9f362b3c37030b0e9abd47defafe3b192d7a9673c968a9a6d85",
+      "normalization": "Only CRLF to LF and terminal whitespace/newlines; executable text unchanged."
+    },
+    {
+      "path": "scripts/sol-r7-audio-isolated.mjs",
+      "executedBytesSHA256": "1dcc10a41770d59fb9ff5e86582e4586d41a4fcb1fe6f44a07f118653a795124",
+      "committedCanonicalSHA256": "2d924ef9b646060fff536fe1a4e931588d400f20ce34ad69083ce93cd4fa6f1e",
+      "normalization": "Only CRLF to LF and terminal whitespace/newlines; executable text unchanged."
+    },
+    {
+      "path": "scripts/sol-r7-drains.mjs",
+      "executedBytesSHA256": "fd5b96afa8ec731db53b2df8217dc374172f2ff367bc4d73803a1a99f420ddcd",
+      "committedCanonicalSHA256": "a86ab4beb4a770071b4b1994a5cad7b08617366d16c5bb48ec1eb1a29a86bbee",
+      "normalization": "Only CRLF to LF and terminal whitespace/newlines; executable text unchanged."
+    },
+    {
+      "path": "scripts/sol-r7-fixture-state.mjs",
+      "executedBytesSHA256": "1fde523cb27715bf825e0ded6dc9a17ff53fe20c7fdfd113057cd5f80b6edbe8",
+      "committedCanonicalSHA256": "d9f0b8874fb7d2efea5849c11185558c4e07b106b6c4e8a80effbd20b71cd167",
+      "normalization": "Only CRLF to LF and terminal whitespace/newlines; executable text unchanged."
+    },
+    {
+      "path": "scripts/sol-r7-hidden.mjs",
+      "executedBytesSHA256": "f3481d5ec145f1283f8de9848128af1635b2ba5a6ee2a67d4baaa71e86d7b4dd",
+      "committedCanonicalSHA256": "2a89ea8a161e9ef44995924b4caaa5d3a46f8149a23d09f7cc542407ef59df3a",
+      "normalization": "Only CRLF to LF and terminal whitespace/newlines; executable text unchanged."
+    },
+    {
+      "path": "scripts/sol-r7-settlement.mjs",
+      "executedBytesSHA256": "4ae666889d962bbeaf70218da5c8c942027f57438e90a792e3fca19a88813cc1",
+      "committedCanonicalSHA256": "3e9dbd456f2e52fe9ac10ef9355e8c039279f02c767b3215725ffd6b439d96da",
+      "normalization": "Only CRLF to LF and terminal whitespace/newlines; executable text unchanged."
+    },
+    {
+      "path": "scripts/sol-r7-tide.mjs",
+      "executedBytesSHA256": "9d8ed43116eb6969a34976d72d7dfc91d0a50857822452741e25099a70a60d7b",
+      "committedCanonicalSHA256": "1c4270e045ed15fdc30080b565d7d821f73dc86b56c23c7cb85c793b134f5b89",
+      "normalization": "Only CRLF to LF and terminal whitespace/newlines; executable text unchanged."
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+passed bleed {
+  simulationSeconds: 3.003800000000851,
+  hpLoss: 1.952470000000936,
+  eventLoss: 1.956500000000453,
+  endpointError: 0,
+  meanRate: 0.6500000000001275,
+  bleed: {
+    actualRate: 0.6500431922386537,
+    shown: 0.7,
+    error: 0.049956807761346256
+  }
+}
+passed pollution {
+  simulationSeconds: 2.999900000000263,
+  hpLoss: 3.2959621500008183,
+  eventLoss: 3.3012889140004944,
+  endpointError: 0,
+  meanRate: 1.0986906730226105,
+  pollution: {
+    actualRate: 1.0982697075751706,
+    shown: 1.2,
+    error: 0.10173029242482934
+  }
+}
+passed dehydration {
+  simulationSeconds: 2.9998000000007505,
+  hpLoss: 1.4999000000007356,
+  eventLoss: 1.5029500000005527,
+  endpointError: 0,
+  meanRate: 0.5000000000001201,
+  dehydration: {
+    actualRate: 0.500000000000121,
+    shown: 0.5,
+    error: 1.2101430968414206e-13
+  }
+}
+passed starvation {
+  simulationSeconds: 3.0120000000000062,
+  hpLoss: 0.7529999999977832,
+  eventLoss: 0.7544999999977762,
+  endpointError: 0,
+  meanRate: 0.2499999999992635,
+  starvation: {
+    actualRate: 0.24999171664221456,
+    shown: 0.2,
+    error: 0.04999171664221455
+  }
+}
+passed mixed {
+  simulationSeconds: 3.0047000000011237,
+  hpLoss: 9.495213665083455,
+  eventLoss: 9.518096598521087,
+  endpointError: 3.552713678800501e-15,
+  meanRate: 3.1601203664525257,
+  bleed: {
+    actualRate: 0.6504967437530842,
+    shown: 0.6,
+    error: 0.05049674375308422
+  },
+  pollution: {
+    actualRate: 1.7615087049833533,
+    shown: 1.7,
+    error: 0.06150870498335337
+  },
+  dehydration: {
+    actualRate: 0.5003821105792955,
+    shown: 0.5,
+    error: 0.0003821105792954915
+  },
+  starvation: {
+    actualRate: 0.25019105528964775,
+    shown: 0.2,
+    error: 0.050191055289647735
+  }
+}
+passed limit-change undefined

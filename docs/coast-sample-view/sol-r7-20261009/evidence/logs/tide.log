@@ -1,0 +1,42 @@
+passed 3-1280x720-false
+failed 42-1280x720-false AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+passed 3-1920x1080-false
+failed 42-1920x1080-false AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+passed 3-844x390-false
+failed 42-844x390-false AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+passed 3-640x300-false
+failed 42-640x300-false AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+passed 3-1280x720-true
+failed 42-1280x720-true AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ [
++   'Missing canvas: loot:water',
++   'Missing canvas: loot:water',
++   'Missing canvas: loot:water',
++   'Missing canvas: loot:water',
++   'Missing canvas: loot:water'
++ ]
+- []
+
+    at file:///D:/bincov/pr22-runtime/scripts/sol-r7-tide.mjs:19:154 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [
+    'Missing canvas: loot:water',
+    'Missing canvas: loot:water',
+    'Missing canvas: loot:water',
+    'Missing canvas: loot:water',
+    'Missing canvas: loot:water'
+  ],
+  expected: [],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

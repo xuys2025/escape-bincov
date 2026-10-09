@@ -1,0 +1,12 @@
+D:\bincov\pr22-runtime\src\raid-runtime\runtime.ts:185
+            throw new Error('Settlement must be committed before disposal.');
+                  ^
+
+Error: Settlement must be committed before disposal.
+    at CoastRaidRuntime.dispose (D:\bincov\pr22-runtime\src\raid-runtime\runtime.ts:185:19)
+    at file:///D:/bincov/pr22-runtime/scripts/sol-r7-fixture-state.mjs:3:886
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.19.0

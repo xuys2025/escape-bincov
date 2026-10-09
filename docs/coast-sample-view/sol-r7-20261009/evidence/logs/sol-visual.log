@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "id": "R09-runtime-mirror",
+      "status": "passed"
+    },
+    {
+      "id": "R10-real-death-sol",
+      "status": "passed",
+      "reason": null,
+      "first": {
+        "at": 1981.800000000745,
+        "dt": 0.0061000000000001366,
+        "deathEvents": 1,
+        "deathT": 0.006200000000000137,
+        "rotation": -0.04843750000000106,
+        "body": true,
+        "weapon": false,
+        "corpse": false
+      }
+    },
+    {
+      "id": "R10-real-death-placeholder",
+      "status": "passed",
+      "reason": null,
+      "first": {
+        "at": 1354.6000000014901,
+        "dt": 0.006,
+        "deathEvents": 1,
+        "deathT": 0.0061,
+        "rotation": -0.04765625,
+        "body": true,
+        "weapon": false,
+        "corpse": false
+      }
+    }
+  ]
+}

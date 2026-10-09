@@ -1,0 +1,326 @@
+{
+  "source": "tide-repeat/tide.json",
+  "method": "Offline reduction of real post-present rows; no new browser run or event injection",
+  "rows": [
+    {
+      "seed": 3,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "reduced": false,
+      "first": {
+        "sim": 300.0031000000005,
+        "high": false,
+        "alpha": 0.9956428571428572,
+        "shown": 106,
+        "viewTime": 1.7382300000011222
+      },
+      "end": {
+        "sim": 301.3969999999949,
+        "high": false,
+        "alpha": 0,
+        "shown": 0,
+        "viewTime": 3.132130000001114
+      },
+      "viewSeconds": 1.3938999999999917,
+      "foam": [
+        0.8296250944455272,
+        0
+      ],
+      "movementX": 2050.848000000002,
+      "pickup": {
+        "exists": false,
+        "bag": 1
+      }
+    },
+    {
+      "seed": 42,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "reduced": false,
+      "first": {
+        "sim": 300.0027999999978,
+        "high": true,
+        "alpha": 0.006777777777777677,
+        "shown": 106,
+        "viewTime": 2.14663000000075
+      },
+      "end": {
+        "sim": 300.90189999999495,
+        "high": true,
+        "alpha": 1,
+        "shown": 106,
+        "viewTime": 3.043630000000743
+      },
+      "viewSeconds": 0.8969999999999927,
+      "foam": [
+        0,
+        0.5759068976203704
+      ],
+      "movementX": 2005.947200000167,
+      "pickup": {
+        "exists": true,
+        "bag": 0
+      }
+    },
+    {
+      "seed": 3,
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "reduced": false,
+      "first": {
+        "sim": 300.0028999999997,
+        "high": false,
+        "alpha": 0.9956428571428572,
+        "shown": 106,
+        "viewTime": 1.7753300000011216
+      },
+      "end": {
+        "sim": 301.4027999999945,
+        "high": false,
+        "alpha": 0,
+        "shown": 0,
+        "viewTime": 3.175130000001113
+      },
+      "viewSeconds": 1.3997999999999915,
+      "foam": [
+        0.8279013069540188,
+        0
+      ],
+      "movementX": 2052.225599999877,
+      "pickup": {
+        "exists": false,
+        "bag": 1
+      }
+    },
+    {
+      "seed": 42,
+      "size": {
+        "width": 1920,
+        "height": 1080
+      },
+      "reduced": false,
+      "first": {
+        "sim": 300.00279999999805,
+        "high": true,
+        "alpha": 0.006666666666666666,
+        "shown": 106,
+        "viewTime": 2.1481300000003785
+      },
+      "end": {
+        "sim": 300.8996999999958,
+        "high": true,
+        "alpha": 1,
+        "shown": 106,
+        "viewTime": 3.045130000000371
+      },
+      "viewSeconds": 0.8969999999999927,
+      "foam": [
+        0,
+        0.5766010714136391
+      ],
+      "movementX": 2005.4431999999583,
+      "pickup": {
+        "exists": true,
+        "bag": 0
+      }
+    },
+    {
+      "seed": 3,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "reduced": false,
+      "first": {
+        "sim": 300.0029999999989,
+        "high": false,
+        "alpha": 0.9956428571428572,
+        "shown": 106,
+        "viewTime": 1.7273280000000037
+      },
+      "end": {
+        "sim": 301.3967999999937,
+        "high": false,
+        "alpha": 0,
+        "shown": 0,
+        "viewTime": 3.121227999999996
+      },
+      "viewSeconds": 1.3938999999999921,
+      "foam": [
+        0.8265734638818724,
+        0
+      ],
+      "movementX": 2050.9040000000014,
+      "pickup": {
+        "exists": false,
+        "bag": 1
+      }
+    },
+    {
+      "seed": 42,
+      "size": {
+        "width": 844,
+        "height": 390
+      },
+      "reduced": false,
+      "first": {
+        "sim": 300.00289999999774,
+        "high": true,
+        "alpha": 0.006777777777777677,
+        "shown": 106,
+        "viewTime": 2.1898960000000045
+      },
+      "end": {
+        "sim": 300.8996999999961,
+        "high": true,
+        "alpha": 1,
+        "shown": 106,
+        "viewTime": 3.086795999999999
+      },
+      "viewSeconds": 0.8968999999999947,
+      "foam": [
+        0,
+        0.5800345073923561
+      ],
+      "movementX": 2005.7568000000417,
+      "pickup": {
+        "exists": true,
+        "bag": 0
+      }
+    },
+    {
+      "seed": 3,
+      "size": {
+        "width": 640,
+        "height": 300
+      },
+      "reduced": false,
+      "first": {
+        "sim": 300.0028999999995,
+        "high": false,
+        "alpha": 0.9956428571428572,
+        "shown": 106,
+        "viewTime": 1.7033299999988853
+      },
+      "end": {
+        "sim": 301.40299999999513,
+        "high": false,
+        "alpha": 0,
+        "shown": 0,
+        "viewTime": 3.103229999998879
+      },
+      "viewSeconds": 1.3998999999999937,
+      "foam": [
+        0.8256709298176672,
+        0
+      ],
+      "movementX": 2052.03519999996,
+      "pickup": {
+        "exists": false,
+        "bag": 1
+      }
+    },
+    {
+      "seed": 42,
+      "size": {
+        "width": 640,
+        "height": 300
+      },
+      "reduced": false,
+      "first": {
+        "sim": 300.0031000000007,
+        "high": true,
+        "alpha": 0.006666666666666666,
+        "shown": 106,
+        "viewTime": 2.1245299999992597
+      },
+      "end": {
+        "sim": 300.899899999997,
+        "high": true,
+        "alpha": 1,
+        "shown": 106,
+        "viewTime": 3.0215299999992524
+      },
+      "viewSeconds": 0.8969999999999927,
+      "foam": [
+        0,
+        0.573462938789728
+      ],
+      "movementX": 2005.7231999999583,
+      "pickup": {
+        "exists": true,
+        "bag": 0
+      }
+    },
+    {
+      "seed": 3,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "reduced": true,
+      "first": {
+        "sim": 300.0031000000008,
+        "high": false,
+        "alpha": 0,
+        "shown": 0,
+        "viewTime": 1.7199300000003768
+      },
+      "end": {
+        "sim": 300.0031000000008,
+        "high": false,
+        "alpha": 0,
+        "shown": 0,
+        "viewTime": 1.7199300000003768
+      },
+      "viewSeconds": 0,
+      "foam": [
+        0.85,
+        0
+      ],
+      "movementX": 2050.9151999999594,
+      "pickup": {
+        "exists": false,
+        "bag": 1
+      }
+    },
+    {
+      "seed": 42,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "reduced": true,
+      "first": {
+        "sim": 300.00299999999896,
+        "high": true,
+        "alpha": 1,
+        "shown": 106,
+        "viewTime": 2.0853300000003774
+      },
+      "end": {
+        "sim": 300.00299999999896,
+        "high": true,
+        "alpha": 1,
+        "shown": 106,
+        "viewTime": 2.0853300000003774
+      },
+      "viewSeconds": 0,
+      "foam": [
+        0,
+        0.85
+      ],
+      "movementX": 2005.8351999999584,
+      "pickup": {
+        "exists": true,
+        "bag": 0
+      }
+    }
+  ]
+}

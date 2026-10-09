@@ -1,0 +1,20 @@
+passed extract false
+passed death false
+passed abandon false
+passed timeout false
+passed extract true
+passed death true
+passed abandon true
+timeout clock true 50
+timeout clock true 100
+timeout clock true 150
+timeout clock true 200
+timeout clock true 250
+timeout clock true 300
+timeout clock true 350
+timeout clock true 400
+timeout clock true 450
+timeout clock true 500
+timeout clock true 550
+timeout clock true 600
+passed timeout true

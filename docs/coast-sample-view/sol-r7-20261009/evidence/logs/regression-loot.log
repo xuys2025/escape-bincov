@@ -1,0 +1,45 @@
+$ node scripts/loot-browser-test.mjs
+PASS 1280x720 · 25 enemies and original 60 loot entries remain conserved
+PASS 1280x720 · pointer crate ↔ bag and crate ↔ safe transfers use exact displayed cells
+PASS 1280x720 · stacks accept partial merges while occupied cells and out-of-bounds shapes preserve items
+PASS 1280x720 · full inventory rejects transfer atomically
+PASS 1280x720 · external selection exposes no direct use or equip; double-click never consumes loot
+PASS 1280x720 · reopening preserves remaining loot and permits an empty container
+PASS 1280x720 · Escape, Tab, E, close button and map clear loot context
+PASS 1280x720 · pointer drag previews exact legal and illegal shapes; blur cancels the pending transfer
+PASS 1280x720 · loot suppresses movement, fire, reload and quick-use while clock and AI continue
+PASS 1280x720 · actual enemy damage keeps loot open
+PASS 1280x720 · invalid range and rising tide close external inventory
+PASS 1280x720 · failed writes roll back both directions and safe checkpoints; retry commits once
+PASS 1280x720 · a held pointer drag cannot mutate a new source after the old context closes
+PASS 1280x720 · scattered ground loot still uses immediate E pickup
+PASS 1280x720 · real kill produces one searchable corpse; repeated damage never generates another
+PASS 1280x720 · three refreshes restore remaining crate/corpse loot and never duplicate taken items
+PASS 1280x720 · a real second-window storage event closes loot and protects the newer record
+PASS 1280x720 · death while looting closes context, loses bag loot and retains safe loot
+PASS 1280x720 · real three-second extraction keeps dragged container loot
+PASS 1280x720 · timeout while looting closes context and resolves as failure
+PASS 1920x1080 · 25 enemies and original 60 loot entries remain conserved
+PASS 1920x1080 · pointer crate ↔ bag and crate ↔ safe transfers use exact displayed cells
+PASS 1920x1080 · stacks accept partial merges while occupied cells and out-of-bounds shapes preserve items
+PASS 1920x1080 · full inventory rejects transfer atomically
+PASS 1920x1080 · external selection exposes no direct use or equip; double-click never consumes loot
+PASS 1920x1080 · reopening preserves remaining loot and permits an empty container
+PASS 1920x1080 · Escape, Tab, E, close button and map clear loot context
+PASS 1920x1080 · pointer drag previews exact legal and illegal shapes; blur cancels the pending transfer
+PASS 1920x1080 · loot suppresses movement, fire, reload and quick-use while clock and AI continue
+PASS 1920x1080 · actual enemy damage keeps loot open
+PASS 1920x1080 · invalid range and rising tide close external inventory
+PASS 1920x1080 · failed writes roll back both directions and safe checkpoints; retry commits once
+PASS 1920x1080 · a held pointer drag cannot mutate a new source after the old context closes
+PASS 1920x1080 · scattered ground loot still uses immediate E pickup
+PASS 1920x1080 · real kill produces one searchable corpse; repeated damage never generates another
+PASS 1920x1080 · three refreshes restore remaining crate/corpse loot and never duplicate taken items
+PASS 1920x1080 · a real second-window storage event closes loot and protects the newer record
+PASS 1920x1080 · death while looting closes context, loses bag loot and retains safe loot
+PASS 1920x1080 · real three-second extraction keeps dragged container loot
+PASS 1920x1080 · timeout while looting closes context and resolves as failure
+PASS touch · trusted touch interaction opens the same live source and character grids
+PASS touch · select and tap transfers only to the chosen backpack cell
+PASS touch · touch safe and return operations preserve the whole stack
+PASS touch · touch close and reload retain container contents and clear selection

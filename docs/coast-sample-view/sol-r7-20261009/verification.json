@@ -1,0 +1,3904 @@
+{
+  "at": "2026-10-09T07:36:02.106Z",
+  "latestBaseline": {
+    "at": "2026-10-09T07:32:17.231Z",
+    "head": "138e8991f5334c95b53801aa3e8b8a05347f9b53",
+    "main": "8355b857736df7fe471301d61208c25e2b7f9d61",
+    "mainIsAncestor": true,
+    "pr": {
+      "url": "https://github.com/xuys2025/escape-bincov/pull/22",
+      "state": "open",
+      "merged": false,
+      "head": "878f5633316a824960091f8f924c0ddd8dd78078"
+    },
+    "pages": {
+      "url": "https://xuys2025.github.io/escape-bincov/",
+      "bytes": 2416678,
+      "sha256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+      "equalsMain": true
+    }
+  },
+  "testedSource": "138e8991f5334c95b53801aa3e8b8a05347f9b53",
+  "parent": "0494b6195cab5c22457f2db9868cdbed8c9f655a",
+  "branch": "docs/coast-2-5d-art-design",
+  "sequence": "All browser processes awaited sequentially; no browser test overlap. Local source reads/image inspection/export do not run browser.",
+  "node": "v24.19.0",
+  "browser": "154.0.8037.98",
+  "machine": {
+    "platform": "win32",
+    "release": "10.0.19045",
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12400F",
+    "totalMemory": 34192441344
+  },
+  "formalArtifacts": [
+    {
+      "file": "dist/index.html",
+      "bytes": 3212805,
+      "sha256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+      "equals138e899": true
+    },
+    {
+      "file": "start the game.html",
+      "bytes": 3212805,
+      "sha256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+      "equals138e899": true
+    },
+    {
+      "file": "城中村试玩.html",
+      "bytes": 1185,
+      "sha256": "9fee91e2d91f97c63ca1b54ce903c4111bb989c404a445c43e72fe7b1dd7f52c",
+      "equals138e899": true
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "bytes": 1088236,
+      "sha256": "bc3792b42d61e110f525ae4dd4e39826d8323b180d40ec411af79fd3bca0b5ad",
+      "equals138e899": true
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "bytes": 1092011,
+      "sha256": "d09aa1f78b91d2614aa35c6c5757422e70a48548d2c90db6725ec98b647fd98e",
+      "equals138e899": true
+    },
+    {
+      "file": "docs/release-manifest.json",
+      "bytes": 747,
+      "sha256": "fbfb951f6b106d08472ccb4a01feea2f730d47bddf5d05315bfcd9c30c04c512",
+      "equals138e899": true
+    }
+  ],
+  "sourcePaths": [
+    {
+      "path": "scripts/coast-audio-test.mjs",
+      "sha256": "41236ed6e8e1a9f362b3c37030b0e9abd47defafe3b192d7a9673c968a9a6d85",
+      "role": "test only; no product edit"
+    },
+    {
+      "path": "scripts/sol-r7-audio-isolated.mjs",
+      "sha256": "2d924ef9b646060fff536fe1a4e931588d400f20ce34ad69083ce93cd4fa6f1e",
+      "role": "test only; no product edit"
+    },
+    {
+      "path": "scripts/sol-r7-drains.mjs",
+      "sha256": "a86ab4beb4a770071b4b1994a5cad7b08617366d16c5bb48ec1eb1a29a86bbee",
+      "role": "test only; no product edit"
+    },
+    {
+      "path": "scripts/sol-r7-fixture-state.mjs",
+      "sha256": "d9f0b8874fb7d2efea5849c11185558c4e07b106b6c4e8a80effbd20b71cd167",
+      "role": "test only; no product edit"
+    },
+    {
+      "path": "scripts/sol-r7-hidden.mjs",
+      "sha256": "2a89ea8a161e9ef44995924b4caaa5d3a46f8149a23d09f7cc542407ef59df3a",
+      "role": "test only; no product edit"
+    },
+    {
+      "path": "scripts/sol-r7-settlement.mjs",
+      "sha256": "3e9dbd456f2e52fe9ac10ef9355e8c039279f02c767b3215725ffd6b439d96da",
+      "role": "test only; no product edit"
+    },
+    {
+      "path": "scripts/sol-r7-tide.mjs",
+      "sha256": "1c4270e045ed15fdc30080b565d7d821f73dc86b56c23c7cb85c793b134f5b89",
+      "role": "test only; no product edit"
+    },
+    {
+      "path": "scripts/sol-r7-export.mjs",
+      "sha256": "a9fa7cacd8b232c3a5697297fa94da2082a09660af25fa053ec126b38455f5e3",
+      "role": "evidence exporter"
+    }
+  ],
+  "commands": [
+    {
+      "group": "core",
+      "id": "test",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:34:32.679Z",
+      "finished": "2026-10-09T06:34:38.550Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "e3d44c670891f0fdcc4d893e9dff5e43797868fafb9922dd91e727f42c47e6ac"
+    },
+    {
+      "group": "core",
+      "id": "package",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "package"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:34:38.550Z",
+      "finished": "2026-10-09T06:34:42.725Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "28c1121a23c626219afbdbc742b9379366249859b3c2d5ffd58c128a1f5f2f1f"
+    },
+    {
+      "group": "target",
+      "id": "sol-visual",
+      "args": [
+        "scripts/sol-round4-visual.mjs"
+      ],
+      "environment": {
+        "BINCOV_VISUAL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/visual"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:35:18.703Z",
+      "finished": "2026-10-09T06:35:23.840Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "acb4f661a77852d0d4194ab15c47b2648deff39acd835120c26b29075313726d"
+    },
+    {
+      "group": "target",
+      "id": "sample",
+      "args": [
+        "scripts/coast-sample-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_SAMPLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/sample"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:35:23.840Z",
+      "finished": "2026-10-09T06:36:53.356Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "f70553fb778765b10bfd0ed795a2ddd9f15af2dbb18e0c9dcb0c7960d917a346"
+    },
+    {
+      "group": "audio",
+      "id": "audio-1",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-1"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:36:53.427Z",
+      "finished": "2026-10-09T06:38:06.623Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "audio",
+      "id": "audio-2",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-2"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:38:06.624Z",
+      "finished": "2026-10-09T06:39:19.965Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "audio",
+      "id": "audio-3",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-3"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:39:19.965Z",
+      "finished": "2026-10-09T06:40:33.462Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "audio-repeat",
+      "id": "audio-4",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-4"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:51:49.216Z",
+      "finished": "2026-10-09T06:53:02.331Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "audio-repeat",
+      "id": "audio-5",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-5"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:53:02.332Z",
+      "finished": "2026-10-09T06:54:13.607Z",
+      "exitCode": 1,
+      "signal": null,
+      "rawLogSHA256": "0d469f0c5fb318da4ea51497cac72c0e8ebe4e967e8dcfc23dbf994ad02d5324"
+    },
+    {
+      "group": "audio-repeat",
+      "id": "audio-6",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-6"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:54:13.607Z",
+      "finished": "2026-10-09T06:55:26.859Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "audio-repeat",
+      "id": "audio-7",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-7"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:55:26.859Z",
+      "finished": "2026-10-09T06:56:40.210Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "audio-repeat",
+      "id": "audio-8",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-8"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:56:40.211Z",
+      "finished": "2026-10-09T06:57:53.602Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "audio-repeat",
+      "id": "audio-9",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-9"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:57:53.602Z",
+      "finished": "2026-10-09T06:59:06.883Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "audio-repeat",
+      "id": "audio-10",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-10"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:59:06.883Z",
+      "finished": "2026-10-09T07:00:20.248Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "focused",
+      "id": "drains",
+      "args": [
+        "scripts/sol-r7-drains.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:42:23.192Z",
+      "finished": "2026-10-09T06:43:35.577Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "6d97320e4f2fc3ff9994419ccc217f72fc5f4693747f810ae3236c0cfdeb9b3b"
+    },
+    {
+      "group": "focused",
+      "id": "settlement",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-r7-settlement.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:43:35.577Z",
+      "finished": "2026-10-09T06:48:03.514Z",
+      "exitCode": 4294967295,
+      "signal": null,
+      "rawLogSHA256": "c179a683185e3d16c16f8551fba665c1d417a9db316f1986011aba2eca31b15f"
+    },
+    {
+      "group": "settlement-repeat",
+      "id": "settlement-repeat",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-r7-settlement.mjs"
+      ],
+      "environment": {
+        "BINCOV_R7_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/settlement-repeat"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:48:20.361Z",
+      "finished": "2026-10-09T06:51:04.267Z",
+      "exitCode": 4294967295,
+      "signal": null,
+      "rawLogSHA256": "4a7d88963ea65500a50a11fa880ca2c709f6576dd0a83f14cf42de5ecba29b23"
+    },
+    {
+      "group": "tide",
+      "id": "tide",
+      "args": [
+        "scripts/sol-r7-tide.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T06:51:04.342Z",
+      "finished": "2026-10-09T06:51:49.140Z",
+      "exitCode": 1,
+      "signal": null,
+      "rawLogSHA256": "77f3d086a5ee4a8f23eab88552224de82293b89a5efb02eeb45df27370c01f51"
+    },
+    {
+      "group": "supplement",
+      "id": "fixture-state",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-r7-fixture-state.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:01:46.933Z",
+      "finished": "2026-10-09T07:01:47.138Z",
+      "exitCode": 1,
+      "signal": null,
+      "rawLogSHA256": "8443d4129555279ca8ca2807446aa1c55d1e561abd29370b0a8594d87c879e8a"
+    },
+    {
+      "group": "supplement",
+      "id": "tide-repeat",
+      "args": [
+        "scripts/sol-r7-tide.mjs"
+      ],
+      "environment": {
+        "BINCOV_R7_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/tide-repeat"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:01:47.139Z",
+      "finished": "2026-10-09T07:02:55.042Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "b2574996d50a41f1d615d724841377557da8089ca7cf104df30ebd58c5ac86cb"
+    },
+    {
+      "group": "supplement",
+      "id": "hidden",
+      "args": [
+        "scripts/sol-r7-hidden.mjs"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:02:55.042Z",
+      "finished": "2026-10-09T07:03:03.795Z",
+      "exitCode": 1,
+      "signal": null,
+      "rawLogSHA256": "b55b6c6724e5bf0d336e71ac66c829061576014fea30b50cd3b67125ddfcb103"
+    },
+    {
+      "group": "supplement",
+      "id": "shots",
+      "args": [
+        "scripts/coast-sample-shots.mjs"
+      ],
+      "environment": {
+        "BINCOV_SHOTS_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/shots"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:03:03.795Z",
+      "finished": "2026-10-09T07:04:51.718Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "7c0f20bfd3b860df8b41cdb7771cf37c893b4e55975cb86af0ddadd8010b5958"
+    },
+    {
+      "group": "supplement",
+      "id": "sample-control",
+      "args": [
+        "scripts/coast-sample-test.mjs"
+      ],
+      "environment": {
+        "BINCOV_SAMPLE_HTML": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/0494b61.html",
+        "BINCOV_SAMPLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/sample-control"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:04:51.718Z",
+      "finished": "2026-10-09T07:06:05.081Z",
+      "exitCode": 1,
+      "signal": null,
+      "rawLogSHA256": "5eb9027756a32915e8fb1d8a0ccfdac8260f74f0404d715844ac3b9bf5e713e4"
+    },
+    {
+      "group": "visual",
+      "id": "regression-ui",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:ui"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:06:05.156Z",
+      "finished": "2026-10-09T07:06:13.280Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "5bbcc0ca21c4c3e253270cf2435d0ceb37bbbf1c6a4b83c70e5520444814668e"
+    },
+    {
+      "group": "visual",
+      "id": "regression-tactical",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:tactical"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:06:13.281Z",
+      "finished": "2026-10-09T07:06:31.860Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "cccfe805390f042d82379d5202ed349d061b8dcbf9a7ff5d165bdc67bf44294f"
+    },
+    {
+      "group": "visual",
+      "id": "regression-art",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:art"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:06:31.860Z",
+      "finished": "2026-10-09T07:06:44.514Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "47d67d1b2760687f4042378a69c9a7e39e76c68e08b35856f36051734797691e"
+    },
+    {
+      "group": "visual",
+      "id": "regression-title",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:title"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:06:44.514Z",
+      "finished": "2026-10-09T07:07:41.055Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "af95a8f3e5c6be595ea2e8472faf07b3e650a0a647c5feac0b45f493d7935d4e"
+    },
+    {
+      "group": "visual",
+      "id": "regression-title-water",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:title-water"
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:07:41.055Z",
+      "finished": "2026-10-09T07:07:50.921Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "6aa30b933d08da34c6d7810d123d173f8794f4194932ffbdbb59f56a60e4e812"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-save-browser",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:save-browser"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:07:50.991Z",
+      "finished": "2026-10-09T07:08:04.010Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "77420714aca24958afbc65e6fcb19970acb0ecb9c627c73f25e2a6341dede2f6"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-expansion",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:expansion"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:08:04.011Z",
+      "finished": "2026-10-09T07:08:12.750Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "cc02c6972e26e7ebd5326ed06c0c0f6a4114a3636a9ffe0c97b85abe341dbae0"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-qol-expansion",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:qol-expansion"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:08:12.750Z",
+      "finished": "2026-10-09T07:08:17.128Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "f6673a79ed9d8fa53103b2f74e4087319f7f7616dd0a9379968d8a107a2a2491"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-loot",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:loot"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:08:17.129Z",
+      "finished": "2026-10-09T07:09:07.302Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "d076d9745949ade92eb81f03d9e43a5d4d3495fd819d376483e87921f6630838"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-loot-target",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:loot-target"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:09:07.303Z",
+      "finished": "2026-10-09T07:09:26.669Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "b6a7ec34990b2131e4e5ee0a38335d8bac76f226e73b80d56a200849c0663dfa"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-qol",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:qol"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:09:26.670Z",
+      "finished": "2026-10-09T07:09:48.573Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "06f5724b78e46309e48210f5d944fec63eaeee3fc3c8bda63fc6433ce98cc591"
+    },
+    {
+      "group": "inventory",
+      "id": "regression-portable",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:portable"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:09:48.574Z",
+      "finished": "2026-10-09T07:09:53.986Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "1297e82b6fa7e6377479d0d9cafa0bfa67ef5af00c2672dc5de58daed32e4b0c"
+    },
+    {
+      "group": "world",
+      "id": "regression-buildings",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:buildings"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:09:54.064Z",
+      "finished": "2026-10-09T07:10:06.535Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "e6232303f56559f9a1de642c328397f63ea0c56c5a35884334670b7b3a6c73ae"
+    },
+    {
+      "group": "world",
+      "id": "regression-systems",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:systems"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:10:06.536Z",
+      "finished": "2026-10-09T07:10:42.786Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "58d33036db5941b8e82d9f38cc6b99b0b3c721ebdc452a6c984844fa91b06598"
+    },
+    {
+      "group": "world",
+      "id": "regression-mall-passages",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:mall-passages"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:10:42.787Z",
+      "finished": "2026-10-09T07:13:29.645Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "f58784f2a76be83b719ffca6b95e505a5101f896993aab94d69481b7c434dd28"
+    },
+    {
+      "group": "world",
+      "id": "regression-mall-landing",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:mall-landing"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:13:29.646Z",
+      "finished": "2026-10-09T07:13:37.691Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "dee46425b91ff092c8744a3b3000690f0c4784d40f8a1cfbf7533e69c5ee466f"
+    },
+    {
+      "group": "input",
+      "id": "regression-browser",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:browser"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:13:37.764Z",
+      "finished": "2026-10-09T07:14:16.983Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bca65270f4169c6c5f66c46d446bbcdcf3d49fb2983429fe91824204bb770edf"
+    },
+    {
+      "group": "input",
+      "id": "regression-desktop-input",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:desktop-input"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:14:16.984Z",
+      "finished": "2026-10-09T07:14:39.039Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "0de5f31a0a38b1c8ebd2dedf4ae5bf1713d9956e2de8b01dd602a1584825e313"
+    },
+    {
+      "group": "input",
+      "id": "regression-mobile",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:mobile"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:14:39.039Z",
+      "finished": "2026-10-09T07:14:58.339Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "fb7aaa9d364f4663e488948d38925c861c0e88b07972b8df3fd060a4ec4fef40"
+    },
+    {
+      "group": "input",
+      "id": "regression-mobile-ux",
+      "args": [
+        "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+        "pnpm",
+        "test:mobile-ux"
+      ],
+      "sources": [],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:14:58.340Z",
+      "finished": "2026-10-09T07:16:08.227Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "751ad3052682f17c386e0a9d747d907eac67d451459818f0acb8ea585663a98d"
+    },
+    {
+      "group": "remaining",
+      "id": "hidden-repeat",
+      "args": [
+        "scripts/sol-r7-hidden.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/sol-r7-hidden.mjs",
+          "sha256": "f3481d5ec145f1283f8de9848128af1635b2ba5a6ee2a67d4baaa71e86d7b4dd"
+        }
+      ],
+      "environment": {
+        "BINCOV_R7_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/hidden-repeat"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:16:31.143Z",
+      "finished": "2026-10-09T07:16:40.900Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "0ca9e3f7be0994b8e74b48a3f9d673f1fbfa50fcda924d8dfa316c9ef4497e38"
+    },
+    {
+      "group": "remaining",
+      "id": "fixture-state-repeat",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-r7-fixture-state.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/sol-r7-fixture-state.mjs",
+          "sha256": "1fde523cb27715bf825e0ded6dc9a17ff53fe20c7fdfd113057cd5f80b6edbe8"
+        }
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:16:40.901Z",
+      "finished": "2026-10-09T07:16:41.116Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "21f6ff0da95651c4860e70982671819c1ba1b29d95bc0966505e14b82548d853"
+    },
+    {
+      "group": "remaining",
+      "id": "audio-isolated",
+      "args": [
+        "scripts/sol-r7-audio-isolated.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/sol-r7-audio-isolated.mjs",
+          "sha256": "1dcc10a41770d59fb9ff5e86582e4586d41a4fcb1fe6f44a07f118653a795124"
+        }
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:16:41.117Z",
+      "finished": "2026-10-09T07:17:02.737Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "d222fa463eccda311e115ebccd4ccf3de240631ac294c7d54619147db121c6c6"
+    },
+    {
+      "group": "remaining",
+      "id": "audio-11",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/coast-audio-test.mjs",
+          "sha256": "41236ed6e8e1a9f362b3c37030b0e9abd47defafe3b192d7a9673c968a9a6d85"
+        }
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-11"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:17:02.737Z",
+      "finished": "2026-10-09T07:18:16.195Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "remaining",
+      "id": "audio-12",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/coast-audio-test.mjs",
+          "sha256": "41236ed6e8e1a9f362b3c37030b0e9abd47defafe3b192d7a9673c968a9a6d85"
+        }
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-12"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:18:16.196Z",
+      "finished": "2026-10-09T07:19:29.583Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "remaining",
+      "id": "audio-13",
+      "args": [
+        "scripts/coast-audio-test.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/coast-audio-test.mjs",
+          "sha256": "41236ed6e8e1a9f362b3c37030b0e9abd47defafe3b192d7a9673c968a9a6d85"
+        }
+      ],
+      "environment": {
+        "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-13"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:19:29.583Z",
+      "finished": "2026-10-09T07:20:42.942Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "bcebe2388e6454e9cd73c774472661c24582dbc0af9a50d3caa7de7731bb077b"
+    },
+    {
+      "group": "remaining",
+      "id": "settlement-final",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-r7-settlement.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/sol-r7-settlement.mjs",
+          "sha256": "4ae666889d962bbeaf70218da5c8c942027f57438e90a792e3fca19a88813cc1"
+        }
+      ],
+      "environment": {
+        "BINCOV_R7_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/settlement-final"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:20:42.942Z",
+      "finished": "2026-10-09T07:28:32.757Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "e084337821fa654faa72f61ab3691dd5001e78c7809d30271a63f1127a24ab38"
+    },
+    {
+      "group": "post",
+      "id": "lifecycle-1280",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/coast-lifecycle-test.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/coast-lifecycle-test.mjs",
+          "sha256": "0ebba499c38f875b7d7ccd0662dc5da900fec717922cd3380258acb8a415f578"
+        }
+      ],
+      "environment": {
+        "BINCOV_LIFECYCLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/lifecycle-1280",
+        "BINCOV_LIFECYCLE_WIDE": ""
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:28:44.690Z",
+      "finished": "2026-10-09T07:29:01.367Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "c79078a78b7f70094485031990f75664f3c0a30c1cc25307f659736a4c1c77ba"
+    },
+    {
+      "group": "post",
+      "id": "lifecycle-1920",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/coast-lifecycle-test.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/coast-lifecycle-test.mjs",
+          "sha256": "0ebba499c38f875b7d7ccd0662dc5da900fec717922cd3380258acb8a415f578"
+        }
+      ],
+      "environment": {
+        "BINCOV_LIFECYCLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/lifecycle-1920",
+        "BINCOV_LIFECYCLE_WIDE": "1"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:29:01.367Z",
+      "finished": "2026-10-09T07:29:18.157Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "c79078a78b7f70094485031990f75664f3c0a30c1cc25307f659736a4c1c77ba"
+    },
+    {
+      "group": "post",
+      "id": "launcher",
+      "args": [
+        "scripts/coast-launcher-check.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/coast-launcher-check.mjs",
+          "sha256": "22542871556ebf2e7a6e6e73d8e6875309abc6d2dd01321ca262b3ef5f5dcb72"
+        }
+      ],
+      "environment": {
+        "BINCOV_LAUNCHER_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/launcher"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:29:18.158Z",
+      "finished": "2026-10-09T07:29:28.213Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "b152651092a3bbf883353b3ae81d54ab8f34825d558f63e2233bff9b37c4bd24"
+    },
+    {
+      "group": "post",
+      "id": "play-empty",
+      "args": [
+        "scripts/coast-playtest.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/coast-playtest.mjs",
+          "sha256": "1639702e8af51f4b0cbe14489451e79f66a80c0a6b8427b3bb20cfef5112ddf4"
+        }
+      ],
+      "environment": {
+        "BINCOV_PLAYTEST_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/play-empty",
+        "BINCOV_PLAYTEST_SEED": "",
+        "BINCOV_PLAYTEST_SIZE": "1280x720"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:29:28.213Z",
+      "finished": "2026-10-09T07:30:02.783Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "fa0a4755535f1bd76e07f9d61a7c0cd79ab92b18e4463a4739c7208e319281f6"
+    },
+    {
+      "group": "post",
+      "id": "play-1280",
+      "args": [
+        "scripts/coast-playtest.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/coast-playtest.mjs",
+          "sha256": "1639702e8af51f4b0cbe14489451e79f66a80c0a6b8427b3bb20cfef5112ddf4"
+        }
+      ],
+      "environment": {
+        "BINCOV_PLAYTEST_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/play-1280",
+        "BINCOV_PLAYTEST_SEED": "20261008",
+        "BINCOV_PLAYTEST_SIZE": "1280x720"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:30:02.784Z",
+      "finished": "2026-10-09T07:30:34.687Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "8674b75a79be56f026d619e0c62d9a73081423b0c014515a5c5ecee1751b4c81"
+    },
+    {
+      "group": "post",
+      "id": "play-1920",
+      "args": [
+        "scripts/coast-playtest.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/coast-playtest.mjs",
+          "sha256": "1639702e8af51f4b0cbe14489451e79f66a80c0a6b8427b3bb20cfef5112ddf4"
+        }
+      ],
+      "environment": {
+        "BINCOV_PLAYTEST_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/play-1920",
+        "BINCOV_PLAYTEST_SEED": "20261008",
+        "BINCOV_PLAYTEST_SIZE": "1920x1080"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:30:34.687Z",
+      "finished": "2026-10-09T07:31:05.324Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "ab27e9cfc58d8211c3300f57af4c91c366c5543fcb8ecaff66e0eb1dbf965644"
+    },
+    {
+      "group": "post",
+      "id": "differential",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/runtime-differential.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/runtime-differential.mjs",
+          "sha256": "a5fd467f5241ef44772609bb4e9c5d63455ec043fabad8700fdd48cc95e55407"
+        }
+      ],
+      "environment": {},
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:31:05.324Z",
+      "finished": "2026-10-09T07:31:14.760Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "0f3919e442b8bf662744ba5164e5f9ab41810c7488b853fe6eda54d71fa8d006"
+    },
+    {
+      "group": "post",
+      "id": "player-death",
+      "args": [
+        "scripts/opus-player-death-probe.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/opus-player-death-probe.mjs",
+          "sha256": "6932044158aaf8a8d4b3914e33840dc9dd89be10575b006ba7bb55aa298e7aea"
+        }
+      ],
+      "environment": {
+        "BINCOV_PLAYER_DEATH_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/player"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:31:14.760Z",
+      "finished": "2026-10-09T07:31:20.758Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "aee242350fa39e32e6f46041bdd075fec183c21960e9b8d68a1892f168357ad2"
+    },
+    {
+      "group": "post",
+      "id": "hidden-original",
+      "args": [
+        "scripts/sol-visibility-probe.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/sol-visibility-probe.mjs",
+          "sha256": "1aa2ca4db98e9149ebbd93437e8962e34ffeb5be84bedc462b226325c96bfdd9"
+        }
+      ],
+      "environment": {
+        "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/hidden-original"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:31:20.758Z",
+      "finished": "2026-10-09T07:31:23.677Z",
+      "exitCode": 1,
+      "signal": null,
+      "rawLogSHA256": "cbe29808781574201883d2e7168849786a8743c2583a8e201f8de1afda47710c"
+    },
+    {
+      "group": "post",
+      "id": "hidden-settled",
+      "args": [
+        "scripts/sol-r6-visibility.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/sol-r6-visibility.mjs",
+          "sha256": "91a4cf9d8b9f342df70cbf9b9da1ced7f3b4c96031112e29562fde925f7e9e70"
+        }
+      ],
+      "environment": {
+        "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/hidden-settled"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:31:23.678Z",
+      "finished": "2026-10-09T07:31:26.909Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "b1e1892d0f08a10740ce10c97c34af85b186998ee8bd10dd856a8e06ecae69fb"
+    },
+    {
+      "group": "post",
+      "id": "F20-strict",
+      "args": [
+        "--import",
+        "tsx",
+        "scripts/sol-sample-boundaries.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/sol-sample-boundaries.mjs",
+          "sha256": "7066289e7a01af3bf35139c595b093e7121c03285b52eb604e89456af68300f8"
+        }
+      ],
+      "environment": {
+        "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/f20",
+        "BINCOV_SOL_ONLY": "F20"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:31:26.910Z",
+      "finished": "2026-10-09T07:32:33.047Z",
+      "exitCode": 1,
+      "signal": null,
+      "rawLogSHA256": "f1f9a60a3e189d557052db7cc36e8967c8ddd5572ff532d2225f7a1a17746304"
+    },
+    {
+      "group": "post",
+      "id": "resources",
+      "args": [
+        "scripts/sol-r6-resources.mjs"
+      ],
+      "sources": [
+        {
+          "path": "scripts/sol-r6-resources.mjs",
+          "sha256": "10a97dda75b8626e9946578d9847898f48572ea76c27e2a29a9d7a1ce73f0e0b"
+        }
+      ],
+      "environment": {
+        "BINCOV_R6_RESOURCE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/resources"
+      },
+      "node": "v24.19.0",
+      "started": "2026-10-09T07:32:33.047Z",
+      "finished": "2026-10-09T07:33:45.520Z",
+      "exitCode": 0,
+      "signal": null,
+      "rawLogSHA256": "c11b3ef06e6988d1e9c98f4aa547d9e9f6cf99580d7094925695d94f0283f0d6"
+    }
+  ],
+  "logNormalization": "Delivery text uses LF and one final newline; logs also trim trailing spaces. Original source snapshots retain raw SHA in source-normalization.json. Only delivery log trailing whitespace is removed. Ignored raw logs unchanged; raw SHA256 supplied. Early commands lack per-process source SHA; historical snapshots and 138e899 source identify those versions, without claiming capture not performed.",
+  "signoff": {
+    "overall": "PARTIAL",
+    "sample": {
+      "passed": 51,
+      "failed": 0
+    },
+    "oldControl": {
+      "passed": 45,
+      "failed": 6
+    },
+    "settlement": [
+      {
+        "reason": "extract",
+        "fault": false,
+        "status": "passed"
+      },
+      {
+        "reason": "death",
+        "fault": false,
+        "status": "passed"
+      },
+      {
+        "reason": "abandon",
+        "fault": false,
+        "status": "passed"
+      },
+      {
+        "reason": "timeout",
+        "fault": false,
+        "status": "passed"
+      },
+      {
+        "reason": "extract",
+        "fault": true,
+        "status": "passed"
+      },
+      {
+        "reason": "death",
+        "fault": true,
+        "status": "passed"
+      },
+      {
+        "reason": "abandon",
+        "fault": true,
+        "status": "passed"
+      },
+      {
+        "reason": "timeout",
+        "fault": true,
+        "status": "passed"
+      }
+    ],
+    "drains": [
+      {
+        "kind": "bleed",
+        "status": "passed",
+        "measure": {
+          "simulationSeconds": 3.003800000000851,
+          "hpLoss": 1.952470000000936,
+          "eventLoss": 1.956500000000453,
+          "endpointError": 0,
+          "meanRate": 0.6500000000001275,
+          "bleed": {
+            "actualRate": 0.6500431922386537,
+            "shown": 0.7,
+            "error": 0.049956807761346256
+          }
+        }
+      },
+      {
+        "kind": "pollution",
+        "status": "passed",
+        "measure": {
+          "simulationSeconds": 2.999900000000263,
+          "hpLoss": 3.2959621500008183,
+          "eventLoss": 3.3012889140004944,
+          "endpointError": 0,
+          "meanRate": 1.0986906730226105,
+          "pollution": {
+            "actualRate": 1.0982697075751706,
+            "shown": 1.2,
+            "error": 0.10173029242482934
+          }
+        }
+      },
+      {
+        "kind": "dehydration",
+        "status": "passed",
+        "measure": {
+          "simulationSeconds": 2.9998000000007505,
+          "hpLoss": 1.4999000000007356,
+          "eventLoss": 1.5029500000005527,
+          "endpointError": 0,
+          "meanRate": 0.5000000000001201,
+          "dehydration": {
+            "actualRate": 0.500000000000121,
+            "shown": 0.5,
+            "error": 1.2101430968414206e-13
+          }
+        }
+      },
+      {
+        "kind": "starvation",
+        "status": "passed",
+        "measure": {
+          "simulationSeconds": 3.0120000000000062,
+          "hpLoss": 0.7529999999977832,
+          "eventLoss": 0.7544999999977762,
+          "endpointError": 0,
+          "meanRate": 0.2499999999992635,
+          "starvation": {
+            "actualRate": 0.24999171664221456,
+            "shown": 0.2,
+            "error": 0.04999171664221455
+          }
+        }
+      },
+      {
+        "kind": "mixed",
+        "status": "passed",
+        "measure": {
+          "simulationSeconds": 3.0047000000011237,
+          "hpLoss": 9.495213665083455,
+          "eventLoss": 9.518096598521087,
+          "endpointError": 3.552713678800501e-15,
+          "meanRate": 3.1601203664525257,
+          "bleed": {
+            "actualRate": 0.6504967437530842,
+            "shown": 0.6,
+            "error": 0.05049674375308422
+          },
+          "pollution": {
+            "actualRate": 1.7615087049833533,
+            "shown": 1.7,
+            "error": 0.06150870498335337
+          },
+          "dehydration": {
+            "actualRate": 0.5003821105792955,
+            "shown": 0.5,
+            "error": 0.0003821105792954915
+          },
+          "starvation": {
+            "actualRate": 0.25019105528964775,
+            "shown": 0.2,
+            "error": 0.050191055289647735
+          }
+        }
+      },
+      {
+        "kind": "limit-change",
+        "status": "passed"
+      }
+    ],
+    "tide": [
+      {
+        "seed": 3,
+        "size": {
+          "width": 1280,
+          "height": 720
+        },
+        "reduced": false,
+        "status": "passed"
+      },
+      {
+        "seed": 42,
+        "size": {
+          "width": 1280,
+          "height": 720
+        },
+        "reduced": false,
+        "status": "passed"
+      },
+      {
+        "seed": 3,
+        "size": {
+          "width": 1920,
+          "height": 1080
+        },
+        "reduced": false,
+        "status": "passed"
+      },
+      {
+        "seed": 42,
+        "size": {
+          "width": 1920,
+          "height": 1080
+        },
+        "reduced": false,
+        "status": "passed"
+      },
+      {
+        "seed": 3,
+        "size": {
+          "width": 844,
+          "height": 390
+        },
+        "reduced": false,
+        "status": "passed"
+      },
+      {
+        "seed": 42,
+        "size": {
+          "width": 844,
+          "height": 390
+        },
+        "reduced": false,
+        "status": "passed"
+      },
+      {
+        "seed": 3,
+        "size": {
+          "width": 640,
+          "height": 300
+        },
+        "reduced": false,
+        "status": "passed"
+      },
+      {
+        "seed": 42,
+        "size": {
+          "width": 640,
+          "height": 300
+        },
+        "reduced": false,
+        "status": "passed"
+      },
+      {
+        "seed": 3,
+        "size": {
+          "width": 1280,
+          "height": 720
+        },
+        "reduced": true,
+        "status": "passed"
+      },
+      {
+        "seed": 42,
+        "size": {
+          "width": 1280,
+          "height": 720
+        },
+        "reduced": true,
+        "status": "passed"
+      }
+    ],
+    "hidden": [
+      {
+        "art": "sol",
+        "status": "passed"
+      },
+      {
+        "art": "placeholder",
+        "status": "passed"
+      }
+    ],
+    "audioOriginalTen": [
+      {
+        "n": 1,
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "n": 2,
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "n": 3,
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "n": 4,
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "n": 5,
+        "passed": 13,
+        "failed": 1
+      },
+      {
+        "n": 6,
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "n": 7,
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "n": 8,
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "n": 9,
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "n": 10,
+        "passed": 14,
+        "failed": 0
+      }
+    ],
+    "audioCorrectedThree": [
+      {
+        "n": 11,
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "n": 12,
+        "passed": 14,
+        "failed": 0
+      },
+      {
+        "n": 13,
+        "passed": 14,
+        "failed": 0
+      }
+    ],
+    "isolated": [
+      {
+        "muted": false,
+        "n": 1,
+        "status": "passed",
+        "heard": true,
+        "peak": 0.16217170655727386
+      },
+      {
+        "muted": false,
+        "n": 2,
+        "status": "passed",
+        "heard": true,
+        "peak": 0.19377072155475616
+      },
+      {
+        "muted": false,
+        "n": 3,
+        "status": "passed",
+        "heard": true,
+        "peak": 0.1873408555984497
+      },
+      {
+        "muted": true,
+        "n": 1,
+        "status": "passed",
+        "heard": false,
+        "peak": 0.053183797746896744
+      },
+      {
+        "muted": true,
+        "n": 2,
+        "status": "passed",
+        "heard": false,
+        "peak": 0.057893961668014526
+      },
+      {
+        "muted": true,
+        "n": 3,
+        "status": "passed",
+        "heard": false,
+        "peak": 0.05409274622797966
+      }
+    ],
+    "regressions": [
+      {
+        "id": "regression-ui",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-tactical",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-art",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-title",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-title-water",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-save-browser",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-expansion",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-qol-expansion",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-loot",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-loot-target",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-qol",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-portable",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-buildings",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-systems",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-mall-passages",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-mall-landing",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-browser",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-desktop-input",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-mobile",
+        "exitCode": 0
+      },
+      {
+        "id": "regression-mobile-ux",
+        "exitCode": 0
+      }
+    ],
+    "lifecycle": [
+      {
+        "size": "1280",
+        "at": "2026-10-09T07:28:45.133Z",
+        "checks": [
+          {
+            "name": "startup-asset-cleanup-and-retry",
+            "beforeRetry": {
+              "roots": 0,
+              "errors": [
+                "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8625:131711)\n    at <anonymous>:14:61"
+              ]
+            },
+            "errors": [
+              "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8625:131711)\n    at <anonymous>:14:61"
+            ],
+            "rootsAfterFailure": 0,
+            "sameRunResumed": true,
+            "expectedErrors": [
+              "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8625:131711)\n    at <anonymous>:14:61"
+            ],
+            "status": "passed"
+          },
+          {
+            "name": "startup-view-cleanup-and-retry",
+            "beforeRetry": {
+              "roots": 0,
+              "errors": [
+                "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at Kf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:46506)\n    at Zf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:54212)\n    at new $f (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:42519)\n    at new Ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:67198)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:2552)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+              ]
+            },
+            "errors": [
+              "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at Kf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:46506)\n    at Zf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:54212)\n    at new $f (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:42519)\n    at new Ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:67198)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:2552)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+            ],
+            "rootsAfterFailure": 0,
+            "sameRunResumed": true,
+            "expectedErrors": [
+              "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at Kf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:46506)\n    at Zf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:54212)\n    at new $f (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:42519)\n    at new Ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:67198)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:2552)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+            ],
+            "status": "passed"
+          },
+          {
+            "name": "startup-observer-cleanup-and-retry",
+            "beforeRetry": {
+              "roots": 0,
+              "errors": [
+                "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:3593)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+              ]
+            },
+            "errors": [
+              "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:3593)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+            ],
+            "rootsAfterFailure": 0,
+            "sameRunResumed": true,
+            "expectedErrors": [
+              "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:3593)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+            ],
+            "status": "passed"
+          },
+          {
+            "name": "ordinary-context-loss-native-restore-and-settlement",
+            "errors": [],
+            "hooksAbsent": true,
+            "lostFrozen": true,
+            "heldMovementBlocked": true,
+            "nativeRestored": true,
+            "restoredRemainedPaused": true,
+            "failedSettlementRetained": true,
+            "nextRaidMounted": true,
+            "status": "passed"
+          }
+        ],
+        "requests": [],
+        "browser": "154.0.8037.98"
+      },
+      {
+        "size": "1920",
+        "at": "2026-10-09T07:29:01.816Z",
+        "checks": [
+          {
+            "name": "startup-asset-cleanup-and-retry",
+            "beforeRetry": {
+              "roots": 0,
+              "errors": [
+                "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8625:131711)\n    at <anonymous>:14:61"
+              ]
+            },
+            "errors": [
+              "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8625:131711)\n    at <anonymous>:14:61"
+            ],
+            "rootsAfterFailure": 0,
+            "sameRunResumed": true,
+            "expectedErrors": [
+              "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8625:131711)\n    at <anonymous>:14:61"
+            ],
+            "status": "passed"
+          },
+          {
+            "name": "startup-view-cleanup-and-retry",
+            "beforeRetry": {
+              "roots": 0,
+              "errors": [
+                "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at Kf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:46506)\n    at Zf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:54212)\n    at new $f (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:42519)\n    at new Ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:67198)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:2552)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+              ]
+            },
+            "errors": [
+              "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at Kf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:46506)\n    at Zf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:54212)\n    at new $f (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:42519)\n    at new Ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:67198)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:2552)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+            ],
+            "rootsAfterFailure": 0,
+            "sameRunResumed": true,
+            "expectedErrors": [
+              "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at Kf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:46506)\n    at Zf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:54212)\n    at new $f (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:42519)\n    at new Ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:67198)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:2552)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+            ],
+            "status": "passed"
+          },
+          {
+            "name": "startup-observer-cleanup-and-retry",
+            "beforeRetry": {
+              "roots": 0,
+              "errors": [
+                "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:3593)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+              ]
+            },
+            "errors": [
+              "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:3593)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+            ],
+            "rootsAfterFailure": 0,
+            "sameRunResumed": true,
+            "expectedErrors": [
+              "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:3593)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+            ],
+            "status": "passed"
+          },
+          {
+            "name": "ordinary-context-loss-native-restore-and-settlement",
+            "errors": [],
+            "hooksAbsent": true,
+            "lostFrozen": true,
+            "heldMovementBlocked": true,
+            "nativeRestored": true,
+            "restoredRemainedPaused": true,
+            "failedSettlementRetained": true,
+            "nextRaidMounted": true,
+            "status": "passed"
+          }
+        ],
+        "requests": [],
+        "browser": "154.0.8037.98"
+      }
+    ],
+    "launcher": {
+      "startedAt": "2026-10-09T07:29:18.432Z",
+      "runs": [
+        {
+          "url": "start%20the%20game.html?sample=village",
+          "world": "buildings",
+          "seed": "",
+          "where": "沿海封锁区 · 室外 / 一楼",
+          "hooks": "undefined",
+          "sample": "undefined"
+        },
+        {
+          "url": "start%20the%20game.html?sample=village",
+          "world": "buildings",
+          "seed": "",
+          "where": "沿海封锁区 · 室外 / 一楼",
+          "hooks": "undefined",
+          "sample": "undefined"
+        },
+        {
+          "url": "start%20the%20game.html?sample=village",
+          "world": "buildings",
+          "seed": "",
+          "where": "沿海封锁区 · 室外 / 一楼",
+          "hooks": "undefined",
+          "sample": "undefined"
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "passed": true
+    },
+    "play": [
+      {
+        "folder": "play-empty",
+        "result": {
+          "outcome": "extract",
+          "kills": 3
+        },
+        "errors": [],
+        "requests": []
+      },
+      {
+        "folder": "play-1280",
+        "result": {
+          "outcome": "extract",
+          "kills": 2
+        },
+        "errors": [],
+        "requests": []
+      },
+      {
+        "folder": "play-1920",
+        "result": {
+          "outcome": "extract",
+          "kills": 2
+        },
+        "errors": [],
+        "requests": []
+      }
+    ],
+    "playerDeath": {
+      "startedAt": "2026-10-09T07:31:15.034Z",
+      "seed": "42",
+      "runs": [
+        {
+          "art": "sol",
+          "secondsToDeath": 1.03,
+          "outcome": "death",
+          "lastAlive": {
+            "alive": true,
+            "hp": 11.791220000000457,
+            "phase": "running",
+            "death": false,
+            "deathT": 0,
+            "rotation": 0,
+            "body": true,
+            "weapon": true,
+            "corpse": false,
+            "panelBefore": null
+          },
+          "presentedAfterDeath": 39,
+          "dead": [
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": true,
+              "deathT": 0.0061,
+              "rotation": -0.04765625,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": null
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.012199999999999909,
+              "rotation": -0.09531249999999929,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.01819999999999991,
+              "rotation": -0.1421874999999993,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.024400000000000185,
+              "rotation": -0.19062500000000146,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.030300000000000278,
+              "rotation": -0.23671875000000217,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.036500000000000095,
+              "rotation": -0.2851562500000007,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.04240000000000019,
+              "rotation": -0.3312500000000015,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.048600000000000004,
+              "rotation": -0.3796875,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.0546,
+              "rotation": -0.4265625,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.060699999999999914,
+              "rotation": -0.47421874999999936,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.06669999999999991,
+              "rotation": -0.5210937499999992,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.07269999999999992,
+              "rotation": -0.5679687499999994,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.07890000000000019,
+              "rotation": -0.6164062500000015,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.0849000000000002,
+              "rotation": -0.6632812500000016,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.09100000000000011,
+              "rotation": -0.7109375000000008,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.09700000000000011,
+              "rotation": -0.7578125000000009,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.10300000000000012,
+              "rotation": -0.8046875000000009,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.10910000000000003,
+              "rotation": -0.8523437500000002,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.11519999999999994,
+              "rotation": -0.8999999999999996,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.12130000000000031,
+              "rotation": -0.9476562500000024,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.1274000000000002,
+              "rotation": -0.9953125000000016,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.1334000000000002,
+              "rotation": -1.0421875000000016,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.13950000000000012,
+              "rotation": -1.0898437500000009,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.14550000000000013,
+              "rotation": -1.136718750000001,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.15150000000000013,
+              "rotation": -1.1835937500000009,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.15760000000000005,
+              "rotation": -1.2312500000000004,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.16369999999999996,
+              "rotation": -1.2312500000000004,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.1698000000000003,
+              "rotation": -1.2312500000000004,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.17580000000000032,
+              "rotation": -1.2312500000000004,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.18190000000000023,
+              "rotation": -1.2312500000000004,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.18800000000000014,
+              "rotation": -1.2312500000000004,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.19400000000000014,
+              "rotation": -1.2312500000000004,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.20010000000000006,
+              "rotation": -1.2312500000000004,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.20610000000000006,
+              "rotation": -1.2312500000000004,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.21219999999999997,
+              "rotation": -1.2312500000000004,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.21830000000000033,
+              "rotation": -1.2312500000000004,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.22430000000000033,
+              "rotation": -1.2312500000000004,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.23040000000000024,
+              "rotation": -1.2312500000000004,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.23650000000000015,
+              "rotation": -1.2312500000000004,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            }
+          ]
+        },
+        {
+          "art": "placeholder",
+          "secondsToDeath": 1.193,
+          "outcome": "death",
+          "lastAlive": {
+            "alive": true,
+            "hp": 11.791220000000465,
+            "phase": "running",
+            "death": false,
+            "deathT": 0,
+            "rotation": 0,
+            "body": true,
+            "weapon": true,
+            "corpse": false,
+            "panelBefore": null
+          },
+          "presentedAfterDeath": 36,
+          "dead": [
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": true,
+              "deathT": 0.006200000000000364,
+              "rotation": -0.048437500000002846,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": null
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.012300000000000273,
+              "rotation": -0.09609375000000213,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.018300000000000274,
+              "rotation": -0.14296875000000214,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.024300000000000273,
+              "rotation": -0.18984375000000214,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.03050000000000009,
+              "rotation": -0.23828125000000067,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.03650000000000009,
+              "rotation": -0.28515625000000067,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.042500000000000086,
+              "rotation": -0.33203125000000067,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.0486,
+              "rotation": -0.37968749999999996,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.054599999999999996,
+              "rotation": -0.42656249999999996,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.06070000000000036,
+              "rotation": -0.4742187500000028,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.06680000000000026,
+              "rotation": -0.5218750000000021,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.07290000000000017,
+              "rotation": -0.5695312500000014,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.07900000000000008,
+              "rotation": -0.6171875000000007,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.08500000000000009,
+              "rotation": -0.6640625000000007,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.0911,
+              "rotation": -0.71171875,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.0971,
+              "rotation": -0.7585937500000001,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.10310000000000001,
+              "rotation": -0.8054687500000001,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.10920000000000038,
+              "rotation": -0.8531250000000029,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.11530000000000029,
+              "rotation": -0.9007812500000023,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.1213000000000003,
+              "rotation": -0.9476562500000023,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.1274000000000002,
+              "rotation": -0.9953125000000016,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.1334000000000002,
+              "rotation": -1.0421875000000016,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.13960000000000003,
+              "rotation": -1.0906250000000002,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.14560000000000003,
+              "rotation": -1.1375000000000004,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.1517000000000004,
+              "rotation": -1.185156250000003,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.1577000000000004,
+              "rotation": -1.232031250000003,
+              "body": true,
+              "weapon": false,
+              "corpse": false,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.1638000000000003,
+              "rotation": -1.232031250000003,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.1698000000000003,
+              "rotation": -1.232031250000003,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.17590000000000022,
+              "rotation": -1.232031250000003,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.18200000000000013,
+              "rotation": -1.232031250000003,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.18810000000000004,
+              "rotation": -1.232031250000003,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.19410000000000005,
+              "rotation": -1.232031250000003,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.20010000000000006,
+              "rotation": -1.232031250000003,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.2062000000000004,
+              "rotation": -1.232031250000003,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.21220000000000042,
+              "rotation": -1.232031250000003,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            },
+            {
+              "alive": false,
+              "hp": 0,
+              "phase": "ending",
+              "death": false,
+              "deathT": 0.21830000000000033,
+              "rotation": -1.232031250000003,
+              "body": false,
+              "weapon": false,
+              "corpse": true,
+              "panelBefore": "ending"
+            }
+          ]
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "browser": "154.0.8037.98",
+      "finishedAt": "2026-10-09T07:31:20.743Z"
+    },
+    "F20": "PARTIAL; historical unattributed growth retained regardless of this single measurement",
+    "historicalSave": "ASTRA-SAVE-01 UNCONFIRMED; no original incident candidate/write result/stack",
+    "historicalA6": "Opus quiet bleed one-onset incident NOT reproduced; detector attack failure is a distinct failure",
+    "physicalHuman": "NOT RUN"
+  },
+  "heapSampling": {
+    "currentStrict": {
+      "phase": "Result page; one CDP GC + window.gc; compare cycles6-10 vs16-20",
+      "acceptanceStatus": "partial",
+      "heapStatus": "growth-observed-not-signed-off",
+      "waitContract": "Every wait returns a primitive boolean; no PublishedView JSHandle is retained.",
+      "resourceCountsPassed": true,
+      "cycles": [
+        {
+          "cycle": 1,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 23502002
+          }
+        },
+        {
+          "cycle": 2,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24217631
+          }
+        },
+        {
+          "cycle": 3,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24412243
+          }
+        },
+        {
+          "cycle": 4,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24602271
+          }
+        },
+        {
+          "cycle": 5,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24840783
+          }
+        },
+        {
+          "cycle": 6,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24937055
+          }
+        },
+        {
+          "cycle": 7,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24952415
+          }
+        },
+        {
+          "cycle": 8,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24998579
+          }
+        },
+        {
+          "cycle": 9,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25157303
+          }
+        },
+        {
+          "cycle": 10,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25210615
+          }
+        },
+        {
+          "cycle": 11,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25216259
+          }
+        },
+        {
+          "cycle": 12,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25298439
+          }
+        },
+        {
+          "cycle": 13,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25304911
+          }
+        },
+        {
+          "cycle": 14,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25319611
+          }
+        },
+        {
+          "cycle": 15,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25336067
+          }
+        },
+        {
+          "cycle": 16,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25382083
+          }
+        },
+        {
+          "cycle": 17,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25408807
+          }
+        },
+        {
+          "cycle": 18,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25450439
+          }
+        },
+        {
+          "cycle": 19,
+          "map": "resident-f2",
+          "outcome": "death",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25451875
+          }
+        },
+        {
+          "cycle": 20,
+          "map": "resident-b1",
+          "outcome": "extract",
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25477643
+          }
+        }
+      ],
+      "afterIdle": 25591643,
+      "gcMethod": "CDP HeapProfiler.collectGarbage and window.gc",
+      "gcAvailable": true,
+      "afterWarmupMean": 25051193.4,
+      "lastFiveMean": 25434169.4,
+      "growthBytes": 382976
+    },
+    "currentResource": {
+      "phase": "Base; one CDP GC; separate art contexts and recovery fixture. Supplemental raw series; not strict statistic.",
+      "cycles": [
+        {
+          "cycle": 1,
+          "art": "sol",
+          "kind": "real-death",
+          "status": "passed",
+          "heap": 23809237,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 23807262
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 2,
+          "art": "sol",
+          "kind": "extract",
+          "status": "passed",
+          "heap": 24385272,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24384821
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 3,
+          "art": "sol",
+          "kind": "abandon",
+          "status": "passed",
+          "heap": 24685025,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24684574
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 4,
+          "art": "sol",
+          "kind": "real-death",
+          "status": "passed",
+          "heap": 24886529,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24886078
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 5,
+          "art": "sol",
+          "kind": "extract",
+          "status": "passed",
+          "heap": 25067509,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25067058
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 6,
+          "art": "sol",
+          "kind": "abandon",
+          "status": "passed",
+          "heap": 25121877,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25121426
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 7,
+          "art": "sol",
+          "kind": "real-death",
+          "status": "passed",
+          "heap": 25151297,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25150846
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 8,
+          "art": "sol",
+          "kind": "extract",
+          "status": "passed",
+          "heap": 25185085,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25184634
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 9,
+          "art": "sol",
+          "kind": "abandon",
+          "status": "passed",
+          "heap": 25357217,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25356766
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 10,
+          "art": "sol",
+          "kind": "real-death",
+          "status": "passed",
+          "heap": 25407709,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25407062
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 11,
+          "art": "placeholder",
+          "kind": "real-death",
+          "status": "passed",
+          "heap": 23787991,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 23786016
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 12,
+          "art": "placeholder",
+          "kind": "extract",
+          "status": "passed",
+          "heap": 24310758,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24310307
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 13,
+          "art": "placeholder",
+          "kind": "abandon",
+          "status": "passed",
+          "heap": 24653651,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24653200
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 14,
+          "art": "placeholder",
+          "kind": "real-death",
+          "status": "passed",
+          "heap": 24884667,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 24884216
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 15,
+          "art": "placeholder",
+          "kind": "extract",
+          "status": "passed",
+          "heap": 25029679,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25029228
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 16,
+          "art": "placeholder",
+          "kind": "abandon",
+          "status": "passed",
+          "heap": 25081051,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25080600
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 17,
+          "art": "placeholder",
+          "kind": "real-death",
+          "status": "passed",
+          "heap": 25114791,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25114340
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 18,
+          "art": "placeholder",
+          "kind": "extract",
+          "status": "passed",
+          "heap": 25148679,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25148228
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 19,
+          "art": "placeholder",
+          "kind": "abandon",
+          "status": "passed",
+          "heap": 25331611,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25331160
+          },
+          "atlasBytes": 27934720
+        },
+        {
+          "cycle": 20,
+          "art": "placeholder",
+          "kind": "real-death",
+          "status": "passed",
+          "heap": 25391831,
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "heap": 25391184
+          },
+          "atlasBytes": 27934720
+        }
+      ]
+    },
+    "historicalR6": {
+      "source": "../sol-r6-20261009/README.md",
+      "strictGrowthBytes": 368605,
+      "baseTripleGCGrowthBytes": [
+        360368,
+        380943,
+        317474
+      ],
+      "attribution": "unresolved; no mixing with current sampling"
+    }
+  },
+  "retainedFailures": [
+    "audio-5 actual output present but 120ms onset merging missed last blow; quiet phase not reached",
+    "tide first five low-tide cases had expected UID still at original world position; native-drop fixture succeeds, exact browser draft/restore discrepancy not proved by standalone control",
+    "settlement first four stored failures and second three failures/partial timeout; wrong schema/count and late clock installation corrected; interrupted cases not accepted",
+    "hidden placeholder first arbitrary peak ratio failed despite real gun cue; time-local output onset positive control passes",
+    "fixture-state first disposal before settlement rejected by lifecycle protection; cleanup corrected",
+    "old HTML45/51 is intentional negative control",
+    "original hidden whole-page pixel tool timing failure if present",
+    "F20 partial if positive trend",
+    "play first failures, if any, preserved without success substitution",
+    "numeric A6 single-window mute replay is non-discriminating because overlapping enemy output remains"
+  ],
+  "notRun": [
+    "Physical mobile/desktop devices and actual people, G12/R6-V5 readability/aim interference/smoothness/headphones",
+    "Remote CI or deployed R7; Pages equals main",
+    "Original Phaser pnpm test:play 10-minute wall-clock and test:layered-play",
+    "40/60-cycle trends, dominator/retainer attribution and independent GPU/driver/native audio memory",
+    "Uncovered save historical incident capture; quiet-A6 historical source identification",
+    "R7-L1..L4 implementation, R7-A1..A4 and R6-A expansion",
+    "Normal timeout is a legal599.5s boundary fixture; only failed timeout uses full600s Playwright clock, not human wall-clock"
+  ],
+  "boundaries": {
+    "tide": "Native E pickup/drop and movement; legal elapsed299.7 + actual frames. Initial four-size PNGs visually inspected; no subjective animation/human readability signoff.",
+    "drains": "Natural enemy bleed and natural low-tide pollution; dehydration/starvation/mixed/constitution expiry use explicit legal body/effect fixtures with real Runtime events, never injected hurt.",
+    "hidden": "Actual Runtime kill plus detached same-stamp synthetic HUD/scene/sound controls; no assertion about every possible path.",
+    "settlement": "Native extraction/death/abandon, Storage terminal transition fault, backup decoder/retry/duplicate checks; timeout-only10fps clock workload."
+  }
+}

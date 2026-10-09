@@ -1,0 +1,86 @@
+{
+  "startedAt": "2026-10-09T06:43:36.014Z",
+  "node": "v24.19.0",
+  "htmlSHA256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+  "method": "Native endings; full 600s Playwright runFor for timeout, preserving rAF and stall protection. Legal bag/safe and AI placement fixtures, native Storage terminal fault. No reason/outcome injection.",
+  "runs": [
+    {
+      "reason": "extract",
+      "fault": false,
+      "status": "failed",
+      "startedAt": "2026-10-09T06:43:36.195Z",
+      "fixture": {
+        "weapon": "pistol",
+        "bagUID": "r7-bag-water",
+        "safeUID": "r7-safe-water"
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n2 !== 1\n\n    at file:///D:/bincov/pr22-runtime/scripts/sol-r7-settlement.mjs:13:755",
+      "failureState": {
+        "state": "result"
+      },
+      "finishedAt": "2026-10-09T06:43:42.381Z"
+    },
+    {
+      "reason": "death",
+      "fault": false,
+      "status": "failed",
+      "startedAt": "2026-10-09T06:43:42.392Z",
+      "fixture": {
+        "weapon": "pistol",
+        "bagUID": "r7-bag-water",
+        "safeUID": "r7-safe-water"
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\nfalse !== true\n\n    at file:///D:/bincov/pr22-runtime/scripts/sol-r7-settlement.mjs:13:1084",
+      "failureState": {
+        "state": "result"
+      },
+      "finishedAt": "2026-10-09T06:43:46.429Z"
+    },
+    {
+      "reason": "abandon",
+      "fault": false,
+      "status": "failed",
+      "startedAt": "2026-10-09T06:43:46.434Z",
+      "fixture": {
+        "weapon": "pistol",
+        "bagUID": "r7-bag-water",
+        "safeUID": "r7-safe-water"
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n2 !== 1\n\n    at file:///D:/bincov/pr22-runtime/scripts/sol-r7-settlement.mjs:13:755",
+      "failureState": {
+        "state": "result"
+      },
+      "finishedAt": "2026-10-09T06:43:48.811Z"
+    },
+    {
+      "reason": "timeout",
+      "fault": false,
+      "status": "failed",
+      "startedAt": "2026-10-09T06:43:48.819Z",
+      "fixture": {
+        "weapon": "pistol",
+        "bagUID": "r7-bag-water",
+        "safeUID": "r7-safe-water"
+      },
+      "clockBefore": 0.5251000000014902,
+      "clockAfter": {
+        "elapsed": 0.5311000000014902,
+        "reason": null,
+        "state": "run"
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n'run' !== 'result'\n\n    at file:///D:/bincov/pr22-runtime/scripts/sol-r7-settlement.mjs:13:588",
+      "failureState": {
+        "state": "run",
+        "panel": null,
+        "elapsed": 0.5311000000014902,
+        "reason": null
+      },
+      "finishedAt": "2026-10-09T06:47:05.899Z"
+    }
+  ],
+  "errors": [
+    "Expected monotonic foreground milliseconds."
+  ],
+  "requests": [],
+  "browser": "154.0.8037.98"
+}

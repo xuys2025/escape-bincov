@@ -1,0 +1,10 @@
+$ node scripts/save-browser-test.mjs
+PASS failed purchase preserves cash and inventory; retry commits once
+PASS all three quest buttons and storage upgrade commit and survive reload
+PASS native backup download, failed import rollback and confirmed import
+PASS failed deployment stays in the hideout with equipment and run count intact
+PASS failed safe transfer rolls back live containers
+PASS real extraction freezes on failed save; backup contains the collected sample
+PASS retry saves once; refresh retains extraction and loot
+PASS pending backup migrates to an HTTPS origin and survives same-origin path updates
+PASS a real cross-window storage event protects a pending settlement and its backup
