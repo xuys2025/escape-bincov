@@ -1,3 +1,5 @@
+> 2026-10-09 R6 增量接口：settlement.reason、hurt.cause、impact.owner、frame.flooded；测试摆位与检查点共用 bodyFits。详见 [R6 契约、旧档兼容与接线说明](coast-sample-view/astra-r6-20261009/README.md)。没有修改游戏规则或存档版本；下文为原阶段交付记录。
+
 # 城中村真实样板 Runtime：实现与接入交接
 
 本轮交付是 Opus 首个真实城中村样板需要的纯规则 Runtime。入口为 [`src/raid-runtime/index.ts`](../src/raid-runtime/index.ts)，v1 端口由 [`host.ts`](../src/raid-runtime/host.ts) 创建。保留经典沿海和 `coast-buildings-v1 / resident-layout-1` 的既有玩法；样板使用后者的真实城中村、二楼和地下层。

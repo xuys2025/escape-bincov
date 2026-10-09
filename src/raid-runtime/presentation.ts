@@ -1,6 +1,8 @@
 import * as D from '../domain';
 import { SURVIVAL as B } from '../balance';
 import { WORLD, type Point } from '../world';
+import type { BulletState } from '../checkpoint';
+import { tideFlooded } from '../spatial';
 import type { CoastRaidRuntime } from './runtime';
 import type { ActorView, MapDef, RegionDef, TerrainCode, ViewFrame, WorldKey } from './contract';
 
@@ -72,6 +74,22 @@ export class Revelation {
     }
 }
 
+export const bulletOwner = (b: BulletState): string | null => b.enemy ? b.owner ?? null : 'player';
+
+const floodCache = new WeakMap<MapDef, readonly number[]>();
+function floodedCells(map: MapDef, high: boolean): readonly number[] {
+    if (!high) return EMPTY_FLOOD;
+    let cells = floodCache.get(map);
+    if (!cells) {
+        const doors = new Set(map.doors.map(d => d.y * map.cols + d.x));
+        cells = Object.freeze(map.cells.flatMap((row, y) => row.flatMap((cell, x) =>
+            tideFlooded(cell, high) && !doors.has(y * map.cols + x) ? [y * map.cols + x] : [])));
+        floodCache.set(map, cells);
+    }
+    return cells;
+}
+const EMPTY_FLOOD: readonly number[] = Object.freeze([]);
+
 export function frameView(r: CoastRaidRuntime, map: MapDef, velocities: ReadonlyMap<string, Point>): ViewFrame {
     const revealed = r.revelation.read(r, map);
     // Overlap fails closed: a containing unrevealed room wins; deterministic ties by stable ID.
@@ -94,12 +112,12 @@ export function frameView(r: CoastRaidRuntime, map: MapDef, velocities: Readonly
     const w = r.currentWeapon, loadout = r.session.loadout ?? r.terminalLoadout;
     return {
         player: actor(r.player, true), actors: r.enemies.map(e => actor(e, false)),
-        bullets: r.bullets.map(b => ({ uid: b.uid, x: b.x, y: b.y, vx: b.vx, vy: b.vy, enemy: b.enemy, owner: b.owner ?? null })),
+        bullets: r.bullets.map(b => ({ uid: b.uid, x: b.x, y: b.y, vx: b.vx, vy: b.vy, enemy: b.enemy, owner: bulletOwner(b) })),
         loot: r.loot.map(l => ({ uid: l.uid, item: l.id, qty: l.qty, x: l.x, y: l.y, regionId: regionAt(l) })),
         containers: r.containers.map(c => ({ id: c.id, runId: c.runId, kind: c.kind, name: c.name, x: c.x, y: c.y,
             stacks: c.inventory.items.length, totalQty: c.inventory.items.reduce((n, i) => n + i.qty, 0),
             ownerUid: c.kind === 'corpse' ? c.id.slice('corpse-'.length) : null, regionId: regionAt(c) })),
-        doors: { ...r.space?.doors }, highTide: r.highTide, revealed: { ...revealed }, interaction: r.targetView(),
+        doors: { ...r.space?.doors }, highTide: r.highTide, flooded: floodedCells(map, r.highTide), revealed: { ...revealed }, interaction: r.targetView(),
         hud: { hp: r.hp, maxHp: limits.hp, stamina: r.stamina, maxStamina: limits.stamina, pollution: r.pollution, bleeding: !!r.bleeding,
             timeLeft: Math.max(0, r.config.duration - r.elapsed), tideWarning: r.warned && !r.tideChanged, highTide: r.highTide,
             weapon: { id: w.id, name: w.name, mag: r.mag, magSize: w.magazine, reserve: w.ammo ? D.count(loadout.bag, w.ammo) : 0, reloading: r.reloadLeft > 0 },

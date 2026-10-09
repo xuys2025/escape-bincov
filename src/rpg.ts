@@ -51,7 +51,7 @@ export function advanceEffects(state: ExpansionState, seconds: number): void {
     const limits = derivedLimits(state);
     state.body.hp = Math.min(state.body.hp, limits.hp); state.body.stamina = Math.min(state.body.stamina, limits.stamina);
 }
-export function advanceRaidBody(state: ExpansionState, seconds: number, sprint: boolean, weight: number, flooded: boolean): number {
+export function advanceRaidBody(state: ExpansionState, seconds: number, sprint: boolean, weight: number, flooded: boolean, observeDamage?: (loss: { bleed: number; dehydration: number; starvation: number; pollution: number; 'limit-change': number }) => void): number {
     const body = state.body, limits = derivedLimits(state), m = rpgMultipliers(state), oldStamina = body.stamina;
     body.mental = clamp(body.mental - .015 * m.deterioration * seconds);
     body.water = clamp(body.water - (.04 + (sprint ? .04 : 0)) * m.deterioration * seconds);
@@ -59,10 +59,20 @@ export function advanceRaidBody(state: ExpansionState, seconds: number, sprint: 
     body.pollution = clamp(body.pollution + (flooded ? (state.raid!.highTide ? 7 : 2.5) * m.deterioration : -.2) * seconds);
     body.stamina = clamp(body.stamina + (sprint ? -(24 + Math.max(0, weight - limits.carry)) * m.drain : 15 * m.recovery) * seconds, 0, limits.stamina);
     if (body.stamina <= 5) body.exhausted = true; if (body.stamina >= 25) body.exhausted = false;
+    const beforeDamage = body.hp;
+    const loss = observeDamage ? { bleed: seconds * (body.bleeding ? .65 : 0), dehydration: seconds * (body.water === 0 ? .5 : 0), starvation: seconds * (body.satiety === 0 ? .25 : 0), pollution: seconds * (body.pollution > 70 ? (body.pollution - 60) * .06 : 0), 'limit-change': 0 } : null;
     body.hp = Math.max(0, body.hp - seconds * ((body.bleeding ? .65 : 0) + (body.water === 0 ? .5 : 0) + (body.satiety === 0 ? .25 : 0)
         + (body.pollution > 70 ? (body.pollution - 60) * .06 : 0)));
     const spent = sprint ? Math.max(0, oldStamina - body.stamina) : 0;
+    const afterDamage = body.hp;
     advanceEffects(state, seconds);
+    if (loss) {
+        const sum = loss.bleed + loss.dehydration + loss.starvation + loss.pollution;
+        const scale = sum ? (beforeDamage - afterDamage) / sum : 0;
+        loss.bleed *= scale; loss.dehydration *= scale; loss.starvation *= scale; loss.pollution *= scale;
+        loss['limit-change'] = Math.max(0, afterDamage - body.hp);
+        observeDamage!(loss);
+    }
     return spent;
 }
 export function recordMotion(state: ExpansionState, before: Point, after: Point, seconds: number, staminaSpent: number, weight: number): void {

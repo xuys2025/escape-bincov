@@ -2,7 +2,7 @@ import * as D from './domain';
 import type { ActorState, BulletState, EnemyState, LootState, RaidCheckpoint } from './checkpoint';
 import type { LootContainer } from './loot';
 import type { Point } from './world';
-import { inSpace, separation, traversable, validateSpaces, type SpaceDefinition } from './spatial';
+import { inSpace, separation, traversable, checkpointBodyFits, validateSpaces, type SpaceDefinition } from './spatial';
 
 export const EXPANSION_VERSION = 1;
 export const ATTRIBUTES = ['strength', 'constitution', 'technique'] as const;
@@ -209,7 +209,7 @@ export function validateExpansion(value: unknown, profile: D.SaveDataV1, legacyR
         || raid.highTide !== (raid.tideChanged ? !raid.initialHigh : raid.initialHigh)) fail();
     // A high-tide checkpoint may legitimately contain a character still escaping water;
     // permanent walls/windows/furniture and closed doors are never valid body positions.
-    const bodyFits = (mapId: string, p: Point) => traversable({ definition: world.maps[mapId], doors: raid.maps[mapId]?.doors ?? {}, highTide: false }, p, 'body', 10);
+    const bodyFits = (mapId: string, p: Point) => checkpointBodyFits({ definition: world.maps[mapId], doors: raid.maps[mapId]?.doors ?? {}, highTide: false }, p);
     if (!bodyFits(raid.currentMap, raid.player)) fail();
     for (const key of ['reloadLeft', 'fireCooldown', 'hitTime'] as const) if (!n(raid[key], 0, 10)) fail();
     const invIds = new Set<string>(state.charm ? [state.charm.uid] : []);

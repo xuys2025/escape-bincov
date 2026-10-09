@@ -1,0 +1,5 @@
+PASS the actual v3 main client creates progress; new client respects its lock then takes over
+PASS activation quota failure preserves original bytes; retry retains one exact rollback record
+PASS the actual old HTML rejects v4 both with and without the writer lock, preserving every byte
+PASS settled native export includes the full extension; cancel/failure/confirmation preserve atomic import
+PASS legacy coast still deploys/resumes; failed abandon exports pending body/growth and retries only once

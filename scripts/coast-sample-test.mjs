@@ -298,7 +298,8 @@ const roomPixels = (page, compare, leak = false) => page.evaluate(([r, compare, 
       await page.evaluate(u => window.__bincovSample.driver.placeEnemy(u, { x: 104, y: 860 }), uid);
       await setup(); await frames(page, 8); await pause(true);
       await probe(false); const before = await state();
-      await page.evaluate(([u, i]) => { const d = window.__bincovSample.driver; d.placeEnemy(u, { x: 352 + i * 30, y: 336 }); d.kill(u); }, [uid, i]);
+      // Use the same body-valid cell in the unrevealed room for all four lifecycle conditions.
+      await page.evaluate(u => { const d = window.__bincovSample.driver; d.placeEnemy(u, { x: 368, y: 336 }); d.kill(u); }, uid);
       await frames(page, 6);
       const hidden = await probe(true), after = await state(), shown = await page.evaluate(u => window.__bincovSample.host.view.actorShown(u), uid);
       const control = i === 0 ? await probe(true, true) : null;
@@ -560,7 +561,7 @@ for (const art of ['sol', 'placeholder']) {
     await page.evaluate(() => window.__bincovSample.driver.door('resident-front', false)); await place(page, 464, 440, -Math.PI / 2, 'coast');
     await putEnemy(hidden, 104, 860); await frames(page, 8); await savable(); await pause(true);
     await roomPixels(page, false);
-    await watchDeaths(page, [hidden]); await page.evaluate(u => { const d = window.__bincovSample.driver; d.placeEnemy(u, { x: 352, y: 336 }); d.kill(u); }, hidden); await frames(page, 12);
+    await watchDeaths(page, [hidden]); await page.evaluate(u => { const d = window.__bincovSample.driver; d.placeEnemy(u, { x: 368, y: 336 }); d.kill(u); }, hidden); await frames(page, 12);
     const px = await roomPixels(page, true), hiddenRows = (await endWatch(page)).rows.filter(r => !r.alive); await pause(false);
     assert.ok(hiddenRows.some(r => r.death), 'the real death event reached the view'); noFall(hiddenRows, 'hidden kill');
     assert.ok(hiddenRows.every(r => !r.corpse && !r.shown)); assert.equal(px.changed, 0, 'hidden kill changes no pixels');

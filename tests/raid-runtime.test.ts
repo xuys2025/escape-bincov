@@ -84,7 +84,7 @@ test('map data retains classic water, real door orientation, stable region IDs a
     assert.equal(map.doors.find(d => d.id === 'resident-west')!.wall, 'ns');
     assert.equal(map.buildings.find(b => b.regionIds.length)!.w, 9 * 32);
     f.driver.placePlayer({ x: 464, y: 352 }); assert.equal(Object.values(r.current().frame.revealed).every(Boolean), true);
-    f.driver.placePlayer({ x: 800, y: 700 }); assert.equal(Object.values(r.current().frame.revealed).some(Boolean), false);
+    f.driver.placePlayer({ x: 640, y: 456 }); assert.equal(Object.values(r.current().frame.revealed).some(Boolean), false);
     const id = map.regions[0].id; f.driver.placePlayer({ x: 464, y: 352 }); assert.equal(r.current().map.regions[0].id, id);
 });
 test('true reload increments epoch; transaction synchronization and repeated view reads do not', () => {

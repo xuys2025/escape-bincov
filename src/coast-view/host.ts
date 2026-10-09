@@ -34,7 +34,7 @@ export interface CoastServices {
   dropItem(uid: string, from?: 'bag' | 'safe'): MutationResult;
   retrySave(): boolean;
   retrySettlement(): boolean;
-  settlement(): { committed: boolean; retryable: boolean; result: unknown };
+  settlement(): { reason: 'extract' | 'death' | 'timeout' | 'abandon' | null; committed: boolean; retryable: boolean; result: unknown };
   abandon(): void;
   checkpoint(): boolean;
   lootContext(): { containerId: string; runId: string } | null;

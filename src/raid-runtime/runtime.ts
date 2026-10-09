@@ -13,8 +13,8 @@ import { advancePursuits } from '../pursuit';
 import { ActiveClock, PlayerInput, type InputFrame } from '../input';
 import { SaveSession, type SessionState, type ExpansionTransaction, type MutationResult } from '../session';
 import type { LootContainer, LootTransfer } from '../loot';
-import type { RaidRuntime, RaidIntent, PublishedView, WorldKey, MapDef, StampedEvent, ViewEventBody, Durability, WeaponLook, TargetRef, Interaction } from './contract';
-import { mapView, frameView, freeze, Revelation } from './presentation';
+import type { RaidRuntime, RaidIntent, PublishedView, WorldKey, MapDef, StampedEvent, ViewEventBody, Durability, WeaponLook, TargetRef, Interaction, HurtCause } from './contract';
+import { mapView, frameView, freeze, Revelation, bulletOwner } from './presentation';
 export const emptyIntent = (): RaidIntent => ({ move: { x: 0, y: 0, sprint: false }, aim: null, precise: false,
     firePressed: false, fireHeld: false, interactPressed: false, interactHeld: false, commands: [], selectTarget: null, source: 'mouse-keyboard' });
 const distance = (a: Point, b: Point) => Math.hypot(a.x - b.x, a.y - b.y);
@@ -77,6 +77,7 @@ export class CoastRaidRuntime implements RaidRuntime {
     locked = false;
     extracted = false;
     ending = false;
+    private endingReason: EndReason | null = null;
     disposed = false;
     private suppressFire = false;
     private suppressInteract = false;
@@ -485,6 +486,7 @@ export class CoastRaidRuntime implements RaidRuntime {
         Object.assign(this.terminalLoadout, structuredClone(this.session.loadout!));
         if (!this.saves.prepareSettlement(reason, this.kills))
             return;
+        this.endingReason = this.session.pendingReason;
         this.ending = this.locked = true;
         this.releaseInput();
         this.retrySettlement();
@@ -503,7 +505,7 @@ export class CoastRaidRuntime implements RaidRuntime {
         this.dirty = true;
         return ok;
     }
-    get settlement() { return { committed: this.ending && !this.session.pendingSettlement && !!this.session.result, retryable: !!this.session.pendingSettlement && !this.session.conflict, result: structuredClone(this.session.result) }; }
+    get settlement() { return { reason: this.ending ? this.saves.terminalReason(this.terminalLoadout.runId!) ?? this.endingReason : null, committed: this.ending && !this.session.pendingSettlement && !!this.session.result, retryable: !!this.session.pendingSettlement && !this.session.conflict, result: structuredClone(this.session.result) }; }
     get layeredWorld(): WorldDefinition | null { return this.layered?.raid ? resolveExpansionWorld(this.layered.raid.worldVersion) ?? null : null; }
     get space(): SpaceContext | null {
         const raid = this.layered?.raid, world = this.layeredWorld;
@@ -768,9 +770,10 @@ export class CoastRaidRuntime implements RaidRuntime {
             }
         }
         const beforeEnvironment = this.hp;
+        let environment: Partial<Record<HurtCause, number>> = {};
         if (this.layered) {
             const state = this.snapshotExpansion(), flooded = this.space!.definition.cells[Math.floor(this.player.y / 32)]?.[Math.floor(this.player.x / 32)] === 'tide';
-            const spent = advanceRaidBody(state, dt, sprint, this.carriedWeight(), flooded);
+            const spent = advanceRaidBody(state, dt, sprint, this.carriedWeight(), flooded, loss => { environment = loss; });
             recordMotion(state, beforeMove, this.player, dt, spent, this.carriedWeight());
             this.restoreExpansion(state);
         }
@@ -791,11 +794,10 @@ export class CoastRaidRuntime implements RaidRuntime {
         const flooded = this.mapData.tiles[Math.floor(this.player.y / TILE)]?.[Math.floor(this.player.x / TILE)] === 4;
         if (!this.layered) {
             this.pollution = clamp(this.pollution + (flooded ? (this.highTide ? B.pollutionHighTide : B.pollutionLowTide) : -B.pollutionRecovery) * dt, 0, 100);
+            environment = { bleed: dt * this.bleeding * B.bleedDamage, pollution: dt * (this.pollution > B.pollutionDamageThreshold ? (this.pollution - B.pollutionDamageBase) * B.pollutionDamageFactor : 0) };
             this.hp -= dt * (this.bleeding * B.bleedDamage + (this.pollution > B.pollutionDamageThreshold ? (this.pollution - B.pollutionDamageBase) * B.pollutionDamageFactor : 0));
         }
-        if (this.hp < beforeEnvironment)
-            this.emit({ type: 'hurt', uid: 'player', at: { x: this.player.x, y: this.player.y },
-                damage: beforeEnvironment - this.hp, critical: false, angle: null });
+        this.environmentHurt(beforeEnvironment - this.hp, environment);
         if (this.hp <= 0) {
             this.emit({ type: 'death', uid: 'player', corpseAngle: this.player.rotation, containerId: null });
             this.finish('death');
@@ -1042,9 +1044,21 @@ export class CoastRaidRuntime implements RaidRuntime {
         }
         const now = this.enemies.find(a => a.uid === e.uid)!;
         this.hurtTimers.set(e.uid, .07);
-        this.emit({ type: 'hurt', uid: e.uid, at: { x: e.x, y: e.y }, damage: hp - now.hp, critical: false, angle });
+        this.emit({ type: 'hurt', cause: 'blow', uid: e.uid, at: { x: e.x, y: e.y }, damage: hp - now.hp, critical: false, angle });
         if (now.hp <= 0)
             this.emit({ type: 'death', uid: e.uid, corpseAngle: now.rotation - (this.layered ? 0 : Math.PI / 2), containerId: `corpse-${e.uid}` });
+    }
+    /** Attribute actual aggregate HP loss without changing damage, clock, or RNG. */
+    private environmentHurt(damage: number, losses: Partial<Record<HurtCause, number>>) {
+        const parts = Object.entries(losses).filter(([, amount]) => amount! > 0) as [HurtCause, number][];
+        const total = parts.reduce((sum, [, amount]) => sum + amount, 0);
+        let left = damage;
+        for (let i = 0; damage > 0 && total > 0 && i < parts.length; i++) {
+            const [cause, amount] = parts[i];
+            const attributed = i === parts.length - 1 ? left : Math.min(left, damage * amount / total);
+            left -= attributed;
+            if (attributed > 0) this.emit({ type: 'hurt', cause, uid: 'player', at: { x: this.player.x, y: this.player.y }, damage: attributed, critical: false, angle: null });
+        }
     }
     private showIncomingHit(source?: Point) {
         if (source) {
@@ -1072,7 +1086,7 @@ export class CoastRaidRuntime implements RaidRuntime {
                 this.bleeding = 1;
         }
         this.extractTime = 0;
-        this.emit({ type: 'hurt', uid: 'player', at: { ...this.player }, damage: hp - this.hp, critical: false,
+        this.emit({ type: 'hurt', cause: 'blow', uid: 'player', at: { ...this.player }, damage: hp - this.hp, critical: false,
             angle: source ? Math.atan2(source.y - this.player.y, source.x - this.player.x) : null });
         if (this.hp <= 0) {
             this.emit({ type: 'death', uid: 'player', corpseAngle: this.player.rotation, containerId: null });
@@ -1080,9 +1094,9 @@ export class CoastRaidRuntime implements RaidRuntime {
         }
     }
     private observeShot(e: ShotObservation) {
-        this.emit({ type: 'impact', bullet: e.bullet.uid, reason: e.reason, lastFree: e.lastFree, contact: e.contact, normal: e.normal, surface: e.surface, target: e.target });
+        this.emit({ type: 'impact', bullet: e.bullet.uid, owner: bulletOwner(e.bullet), reason: e.reason, lastFree: e.lastFree, contact: e.contact, normal: e.normal, surface: e.surface, target: e.target });
         if (e.target) {
-            this.emit({ type: 'hurt', uid: e.target, at: e.contact ?? e.lastFree, damage: e.damage, critical: e.critical, angle: e.angle });
+            this.emit({ type: 'hurt', cause: 'blow', uid: e.target, at: e.contact ?? e.lastFree, damage: e.damage, critical: e.critical, angle: e.angle });
             if (e.dead) {
                 const enemy = this.enemies.find(a => a.uid === e.target);
                 this.emit({ type: 'death', uid: e.target, corpseAngle: enemy?.rotation ?? this.player.rotation, containerId: e.target === 'player' ? null : `corpse-${e.target}` });
@@ -1117,7 +1131,7 @@ export class CoastRaidRuntime implements RaidRuntime {
                     const crossX = Math.floor(previous.x / TILE) !== x, crossY = Math.floor(previous.y / TILE) !== y;
                     const unique = crossX !== crossY;
                     const t = crossX && !crossY ? tx : crossY && !crossX ? ty : Math.min(tx, ty);
-                    this.emit({ type: 'impact', bullet: b.uid, reason: startBlocked ? 'start-blocked' : blocked ? 'blocked' : bounds ? 'bounds' : 'range', lastFree: previous,
+                    this.emit({ type: 'impact', bullet: b.uid, owner: bulletOwner(b), reason: startBlocked ? 'start-blocked' : blocked ? 'blocked' : bounds ? 'bounds' : 'range', lastFree: previous,
                         contact: blocked && Number.isFinite(t) && t >= 0 && t <= 1 ? { x: previous.x + dx * t, y: previous.y + dy * t } : null,
                         normal: blocked && unique && !startBlocked ? crossX ? { x: -Math.sign(dx), y: 0 } : { x: 0, y: -Math.sign(dy) } : null,
                         surface: blocked ? 'wall' : null, target: null });
@@ -1126,7 +1140,7 @@ export class CoastRaidRuntime implements RaidRuntime {
                 }
                 const target = b.enemy ? distance(b, this.player) < 12 ? 'player' : null : this.enemies.find(e => e.hp > 0 && distance(e, b) < 14)?.uid ?? null;
                 if (target) {
-                    this.emit({ type: 'impact', bullet: b.uid, reason: 'hit-actor', lastFree: previous, contact: { x: b.x, y: b.y }, normal: null, surface: 'actor', target });
+                    this.emit({ type: 'impact', bullet: b.uid, owner: bulletOwner(b), reason: 'hit-actor', lastFree: previous, contact: { x: b.x, y: b.y }, normal: null, surface: 'actor', target });
                     if (target === 'player')
                         this.hurt(b.damage, { x: this.player.x - b.vx, y: this.player.y - b.vy });
                     else

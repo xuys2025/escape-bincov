@@ -1,0 +1,11 @@
+PASS seven phone sizes have immediately reachable inventory and detail exits
+PASS placement cancel and close/reopen keep inventory selectable and unchanged
+PASS success toast does not cover nearby text, warning or combat buttons
+PASS three nearby items keep bleeding warnings clear after pickup on short phones
+PASS short phone reading remains visible with reachable exit and a live clock
+PASS short phone reload is visible on its button
+PASS nearby list picks the stackable item without moving; failure restores world and bag
+PASS quick therapy does not consume safe medicine; supply picker explicitly uses it
+PASS rotated safe restores from the durable checkpoint after refresh
+PASS manual rotation preview cancels unchanged and failed placement rolls back
+PASS desktop rotation preview can cancel, leave its tab and commit in both required sizes

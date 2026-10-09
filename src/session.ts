@@ -122,6 +122,11 @@ export class SaveSession {
         }
     }
     original(): string | null { return this.store?.original() ?? null; }
+    /** Reason of this exact terminal record only; older records may have no reason. */
+    terminalReason(runId: string): EndReason | null {
+        const terminal = this.store?.record?.terminal;
+        return terminal?.runId === runId ? terminal.reason ?? null : null;
+    }
     currentRecord(): SessionRecord | null { return this.store?.record ? structuredClone(this.store.record) : null; }
     /** Includes the exact pending growth/body/queue candidate instead of exporting only gear. */
     backupRecord(snapshot?: RaidCheckpoint | null): SessionRecord | null {

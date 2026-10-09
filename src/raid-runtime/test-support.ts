@@ -4,13 +4,23 @@ import { wrapCoastRuntime } from './host';
 import type { SaveSession, SessionState } from '../session';
 import type { Point } from '../world';
 import { WEAPONS } from '../domain';
+import { checkpointBodyFits } from '../spatial';
+import { isWalkable } from '../world';
 
 export function createRuntimeTestDriver(runtime: CoastRaidRuntime, search: string) {
     if (new URLSearchParams(search).get('test') !== '1') throw new Error('Runtime fixtures require ?test=1.');
+    const checkPosition = (point: Point, mapId = runtime.layered?.raid?.currentMap ?? 'coast') => {
+        const raid = runtime.layered?.raid, world = runtime.layeredWorld;
+        const fits = Number.isFinite(point.x) && Number.isFinite(point.y) && (raid && world
+            ? !!world.maps[mapId] && !!raid.maps[mapId] && checkpointBodyFits({ definition: world.maps[mapId], doors: raid.maps[mapId].doors, highTide: false }, point)
+            : mapId === 'coast' && isWalkable(point.x, point.y, false, 10));
+        if (!fits) throw new Error(`Invalid fixture position on ${mapId}: (${point.x}, ${point.y}); body overlaps obstacle or bounds.`);
+    };
     return {
         freezeAI(value: boolean) { runtime.freezeAI = value; },
         placePlayer(point: Point, angle = runtime.player.rotation, mapId?: string) {
-            if (![point.x, point.y, angle].every(Number.isFinite)) throw new Error('Invalid fixture coordinates.');
+            checkPosition(point, mapId);
+            if (!Number.isFinite(angle)) throw new Error(`Invalid fixture angle: ${angle}.`);
             if (runtime.layered) {
                 const state = runtime.snapshotExpansion();
                 if (mapId && !state.raid!.maps[mapId]) throw new Error('Unknown fixture map.');
@@ -25,6 +35,7 @@ export function createRuntimeTestDriver(runtime: CoastRaidRuntime, search: strin
         placeEnemy(uid: string, point: Point, hp?: number) {
             const state = runtime.snapshot(), enemy = state.enemies.find(e => e.uid === uid);
             if (!enemy) throw new Error('Unknown enemy.');
+            checkPosition(point);
             Object.assign(enemy, point, { home: { ...point }, target: { ...point }, path: [] });
             if (hp !== undefined) enemy.hp = hp;
             runtime.restore(state);

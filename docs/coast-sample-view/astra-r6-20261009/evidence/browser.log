@@ -1,0 +1,25 @@
+PASS 1280x720 · offline viewport title and fixed logical canvas
+PASS 1280x720 · hideout, merchant price and pointer inventory drag
+PASS 1280x720 · seeded deployment: 25 enemies and 60 original loot entries across ground and crates
+PASS 1280x720 · real WASD movement and pointer mapping
+PASS 1280x720 · 25-enemy, 60-original-loot battle performance sample
+PASS 1280x720 · actual aimed pistol shot consumes ammunition and hits an enemy
+PASS 1280x720 · real E pickup, pause, map and persisted volume controls
+PASS 1280x720 · tide warning, high-tide transition and real movement out of flood
+PASS 1280x720 · first run: actual three-second extraction retains loot and gear
+PASS 1280x720 · second run: actual enemy attack causes death and protects the safe
+PASS 1280x720 · third run: timeout and three-run persistence after reload
+PASS 1280x720 · fourth run: midrun reload restores carried items and the matching world checkpoint
+PASS 1920x1080 · offline viewport title and fixed logical canvas
+PASS 1920x1080 · hideout, merchant price and pointer inventory drag
+PASS 1920x1080 · seeded deployment: 25 enemies and 60 original loot entries across ground and crates
+PASS 1920x1080 · real WASD movement and pointer mapping
+PASS 1920x1080 · 25-enemy, 60-original-loot battle performance sample
+PASS 1920x1080 · actual aimed pistol shot consumes ammunition and hits an enemy
+PASS 1920x1080 · real E pickup, pause, map and persisted volume controls
+PASS 1920x1080 · tide warning, high-tide transition and real movement out of flood
+PASS 1920x1080 · first run: actual three-second extraction retains loot and gear
+PASS 1920x1080 · second run: actual enemy attack causes death and protects the safe
+PASS 1920x1080 · third run: timeout and three-run persistence after reload
+PASS 1920x1080 · fourth run: midrun reload restores carried items and the matching world checkpoint
+Browser acceptance passed: D:\bincov\pr22-runtime\test-results\browser-report.json

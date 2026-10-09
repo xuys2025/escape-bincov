@@ -1,3 +1,11 @@
+## 2026-10-09 · PR #22 Astra R6-L1～L5，交 Opus / Sol 后停止
+
+从 3a4391c 接手；按用户明确授权将 main 8355b85 正常合入任务分支，本地同步提交 8ae7e29，双方历史交接均保留。授权不包含合并 PR。PR22 仍 OPEN、远端头 878f563，本轮不推送、不合并 PR、不发布。
+
+[接口接线、兼容及 Sol 复验清单](docs/coast-sample-view/astra-r6-20261009/README.md)。新增结算 reason、hurt.cause、impact.owner、frame.flooded；测试摆位即时使用检查点 bodyFits。保留结算规则、旧档、事务原子性、行动 RNG/计时和单文件离线。前端只补服务类型，不改展示与素材；Opus 后续接线。射程仅评估，随机天气未实施。修正被新校验拦住的旧测试坐标，保留全部断言与失败证据。
+
+实际验证：241单测、package、样板48/48、音频14/14、68张截图0异常、4×240帧完整状态差分、八套原入口/存档/输入/便携回归及10分钟真实计时均通过；首轮非法夹具失败及一次计时中断证据保留。F20 继续 PARTIAL；历史 ASTRA-SAVE-01 继续未确认。制品身份及未运行项见本轮报告；本地提交后停止等待交接。
+
 ## 2026-10-09 · PR #22 Sol R6独立验收（14abea3），本地交付后停止
 
 [签收报告](docs/coast-sample-view/sol-r6-20261009/README.md)、[Opus/Astra问题清单](docs/coast-sample-view/sol-r6-20261009/defects.md)、[真实进程与未运行项](docs/coast-sample-view/sol-r6-20261009/verification.json)。正式源码、原tests、运行素材与制品仍为14abea3，附SHA256/证据manifest。

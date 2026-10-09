@@ -1,4 +1,4 @@
-/** Opus v1, 2026-10-07. Type surface unchanged; original commentary lives in the prototype contract. */
+/** Opus v1 with additive R6 facts (2026-10-09); no simulation or save schema changes. */
 export type Point = Readonly<{
     x: number;
     y: number;
@@ -205,6 +205,7 @@ export type HudView = Readonly<{
         left: number;
     }>[];
 }>;
+export type HurtCause = 'blow' | 'bleed' | 'pollution' | 'dehydration' | 'starvation' | 'limit-change';
 export type ViewFrame = Readonly<{
     player: ActorView;
     actors: readonly ActorView[];
@@ -213,6 +214,8 @@ export type ViewFrame = Readonly<{
     containers: readonly ContainerView[];
     doors: Readonly<Record<string, boolean>>;
     highTide: boolean;
+    /** Row-major indices y * map.cols + x of tidal cells currently submerged; permanent water is map.terrain. */
+    flooded: readonly number[];
     revealed: Readonly<Record<string, boolean>>;
     interaction: Interaction | null;
     hud: HudView;
@@ -240,6 +243,8 @@ export type ViewEventBody = {
 } | {
     type: 'impact';
     bullet: string;
+    /** player, enemy UID, or null when an old enemy bullet has no recorded owner. */
+    owner: string | null;
     reason: ImpactReason;
     lastFree: Point;
     contact: Point | null;
@@ -248,6 +253,7 @@ export type ViewEventBody = {
     target: string | null;
 } | {
     type: 'hurt';
+    cause: HurtCause;
     uid: string;
     at: Point;
     damage: number;
