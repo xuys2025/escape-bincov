@@ -29,7 +29,7 @@ test('样板音效：开枪、近战、受击、拾取与开门按原 RaidScene 
   s.event(ev({ type: 'shot', shooter: 'enemy-3', weapon: 'rifle', pellets: [] }), 'coast');
   s.event(ev({ type: 'melee', attacker: 'player' }), 'coast');
   s.event(ev({ type: 'melee', attacker: 'enemy-2' }), 'coast');
-  s.event(ev({ type: 'hurt', uid: 'player', damage: 11, angle: 1, at: { x: 400, y: 300 } }), 'coast');
+  s.event(ev({ type: 'hurt', cause: 'blow', uid: 'player', damage: 11, angle: 1, at: { x: 400, y: 300 } }), 'coast');
   s.event(ev({ type: 'looted', item: 'wire' }), 'coast');
   s.event(ev({ type: 'door', id: 'x', by: 'player' }), 'coast');
   s.event(ev({ type: 'shot', shooter: 'player', weapon: 'pistol' }, 'resident-f2'), 'coast');
@@ -44,7 +44,7 @@ test('样板音效：他人的枪声、受击、撞墙和开门按方位左右�
   const [right, left] = args.shot.map(a => a[1] as { pan: number; gain: number });
   assert.ok(right.pan > .5 && left.pan < -.5, `pans ${right.pan} ${left.pan}`);
   assert.ok(right.gain < 1 && right.gain >= .28);
-  s.event(ev({ type: 'hurt', uid: 'enemy-3', damage: 20, angle: 0, at: { x: 1400, y: 300 } }), 'coast');
+  s.event(ev({ type: 'hurt', cause: 'blow', uid: 'enemy-3', damage: 20, angle: 0, at: { x: 1400, y: 300 } }), 'coast');
   assert.equal((args.hit[0][0] as { gain: number }).gain, .28, 'a far blow is quiet but audible');
   s.event(ev({ type: 'impact', reason: 'blocked', surface: 'wall', lastFree: { x: 420, y: 300 } }), 'coast');
   s.event(ev({ type: 'impact', reason: 'blocked', surface: 'wall', lastFree: { x: 2400, y: 300 } }), 'coast');
@@ -80,13 +80,25 @@ test('样板音效：进入室内房间或楼层时海声闭合，回到室外�
   assert.deepEqual(only(calls, ['setRoomTone', 'start', 'stop']), ['start', 'setRoomTone:0', 'setRoomTone:1', 'stop', 'start', 'setRoomTone:0']);
 });
 
-test('样板音效：流血和污染每帧的小额受伤不播放受击音', () => {
+test('样板音效：只按 Runtime 给出的原因判断受击音——打击无论大小都响，流血、污染、缺水、饱食不足、上限下降都不响', () => {
   const { calls, out } = recorder(), s = new SampleSound(out);
   s.frame(batch(), 1 / 60); calls.length = 0;
-  for (let i = 0; i < 60; i++) s.event(ev({ type: 'hurt', uid: 'player', damage: .03, angle: null, at: { x: 400, y: 300 } }), 'coast');
+  for (const cause of ['bleed', 'pollution', 'dehydration', 'starvation', 'limit-change'])
+    for (const damage of [.03, 1, 6]) s.event(ev({ type: 'hurt', cause, uid: 'player', damage, angle: null, at: { x: 400, y: 300 } }), 'coast');
   assert.deepEqual(calls, []);
-  s.event(ev({ type: 'hurt', uid: 'player', damage: 1, angle: null, at: { x: 400, y: 300 } }), 'coast');
+  s.event(ev({ type: 'hurt', cause: 'blow', uid: 'player', damage: .4, angle: null, at: { x: 400, y: 300 } }), 'coast');
   assert.deepEqual(calls, ['hit']);
+});
+
+test('样板音效：未揭示房间里的命中和弹着点不发声，枪声照常', () => {
+  const { calls, out } = recorder(), s = new SampleSound(out), hidden = (p: { x: number }) => p.x < 300;
+  s.frame(batch({ actors: [{ uid: 'enemy-3', x: 200, y: 300 }] }), 1 / 60); calls.length = 0;
+  s.event(ev({ type: 'hurt', cause: 'blow', uid: 'enemy-3', damage: 20, angle: 0, at: { x: 200, y: 300 } }), 'coast', p => !hidden(p));
+  s.event(ev({ type: 'impact', reason: 'blocked', surface: 'wall', lastFree: { x: 250, y: 300 } }), 'coast', p => !hidden(p));
+  assert.deepEqual(calls, []);
+  s.event(ev({ type: 'shot', shooter: 'enemy-3', weapon: 'rifle', pellets: [] }), 'coast', p => !hidden(p));
+  s.event(ev({ type: 'hurt', cause: 'blow', uid: 'enemy-3', damage: 20, angle: 0, at: { x: 400, y: 300 } }), 'coast', p => !hidden(p));
+  assert.deepEqual(calls, ['shot:enemy,spot', 'hit:spot']);
 });
 
 test('样板音效：暂停时挂起、恢复时重启，结算阶段不挂起；首帧按当前阶段决定', () => {

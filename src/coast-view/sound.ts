@@ -82,8 +82,12 @@ export class SampleSound {
     else this.beatLeft = 0;
   }
 
-  /** Each new event exactly once (the host passes events in sequence order). */
-  event(e: StampedEvent, mapId: string) {
+  /**
+   * Each new event exactly once (the host passes events in sequence order). `shown` tells whether a world point is
+   * outdoors or in a revealed room: a blow landing or a round striking a wall in an unrevealed room makes no sound, as
+   * it shows no marker or spark. Gunfire itself carries through walls and stays audible.
+   */
+  event(e: StampedEvent, mapId: string, shown: (p: { x: number; y: number }) => boolean = () => true) {
     if (e.stamp.world.mapId !== mapId) return;
     const at = (uid: string) => { const p = this.where.get(uid); return p ? this.spot(p.x, p.y) : undefined; };
     switch (e.type) {
@@ -94,14 +98,15 @@ export class SampleSound {
         break;
       }
       case 'melee': if (e.attacker === 'player') this.out.shot('knife'); break;
-      // A blow, not the per-frame bleed/pollution tick (angle null, a fraction of a point each frame).
+      // Blows only, of any size (R6-L2 names the cause): bleeding, pollution, thirst, hunger and a lowered health limit
+      // are silent here; the HUD shows them.
       case 'hurt': {
-        if (e.damage < 1) break;
-        const s = e.uid === 'player' ? undefined : this.spot(e.at.x, e.at.y);
-        if (s) this.out.hit(s); else this.out.hit();
+        if (e.cause !== 'blow') break;
+        if (e.uid === 'player') this.out.hit();
+        else if (shown(e.at)) this.out.hit(this.spot(e.at.x, e.at.y));
         break;
       }
-      case 'impact': if (e.reason === 'blocked' && (e.surface === 'wall' || e.surface === 'door')) { const s = this.spot(e.lastFree.x, e.lastFree.y); if (s.gain > .3) this.out.impact(s); } break;
+      case 'impact': if (e.reason === 'blocked' && (e.surface === 'wall' || e.surface === 'door') && shown(e.lastFree)) { const s = this.spot(e.lastFree.x, e.lastFree.y); if (s.gain > .3) this.out.impact(s); } break;
       case 'looted': this.out.stow(); break;
       case 'door': { const s = e.by === 'player' ? undefined : at(e.by); if (s) this.out.click(s); else this.out.click(); break; }
       default: break;

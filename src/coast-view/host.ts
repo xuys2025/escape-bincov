@@ -14,7 +14,7 @@ import { SURVIVAL } from '../balance';
 import { derivedLimits } from '../expansion-state';
 import { exitBearing, questProgress } from '../qol';
 import type { MutationResult, SaveSession, SessionState } from '../session';
-import type { Interaction, PublishedView, RaidRuntime, StampedEvent, TargetRef } from '../raid-runtime/contract';
+import type { HurtCause, Interaction, PublishedView, RaidRuntime, StampedEvent, TargetRef } from '../raid-runtime/contract';
 import type { LootTransfer } from '../loot';
 import { CoastView, AIM_H, type ViewOptions } from './scene';
 import { InputState } from './input';
@@ -50,8 +50,20 @@ const REASONS: Record<string, string> = {
 };
 const esc = (s: string) => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
 const name = (id: string) => D.ITEMS[id]?.name ?? id;
-type Outro = 'died' | 'extract' | 'timeout' | 'failed';
-const OUTRO_TEXT: Record<Outro, string> = { died: '你倒下了', extract: '撤离成功', timeout: '行动超时', failed: '行动失败' };
+type Outro = 'died' | 'extract' | 'timeout' | 'abandon' | 'failed';
+const OUTRO_TEXT: Record<Outro, string> = { died: '你倒下了', extract: '撤离成功', timeout: '行动超时', abandon: '已放弃行动', failed: '行动失败' };
+/**
+ * The Runtime's settlement reason (R6-L1) picks the outro. It never changes the settlement itself: an abandoned run is
+ * still settled as a failure. 'failed' remains only for a reason this view does not know.
+ */
+const OUTRO_OF: Record<string, Outro> = { extract: 'extract', death: 'died', timeout: 'timeout', abandon: 'abandon' };
+type Drain = Exclude<HurtCause, 'blow'>;
+/** Continuous damage (R6-L2) shown beside the health bar: label and the screen-edge tint while it lasts. */
+const DRAIN: Record<Drain, { label: string; tint: string }> = {
+  bleed: { label: '流血', tint: '150,26,16' }, pollution: { label: '污染', tint: '104,128,36' },
+  dehydration: { label: '缺水', tint: '150,112,48' }, starvation: { label: '饱食不足', tint: '128,96,58' },
+  'limit-change': { label: '生命上限下降', tint: '120,110,140' },
+};
 const ease = (t: number) => t * t * (3 - 2 * t);
 const weaponIcons = new Map<string, string>();
 /** The game's own 32 px item drawing of the held weapon, shown at 2x in the weapon card. */
@@ -71,10 +83,12 @@ const HTML = `
 <div class="cs-hud" aria-live="polite">
   <div class="cs-vignette" aria-hidden="true"></div>
   <div class="cs-hurt" data-hurt aria-hidden="true"></div>
+  <div class="cs-ail" data-ail aria-hidden="true"></div>
   <div class="cs-exitptr" data-exitptr hidden><i></i><span data-exitptr-text></span></div>
   <div class="cs-threats" data-threats aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   <section class="cs-status">
     <div class="cs-meter"><span>生命</span><div class="cs-bar"><div data-hp></div></div><b data-hp-text></b></div>
+    <div class="cs-drain" data-drain aria-hidden="true"></div>
     <div class="cs-meter"><span>体力</span><div class="cs-bar thin"><div data-st></div></div><b data-st-text></b></div>
     <div data-state class="cs-state"></div>
     <div data-where class="cs-where"></div>
@@ -260,11 +274,16 @@ export class CoastSampleHost {
   private readingFor: string | null = null;
   private weaponShown = '';
   // --- combat feedback (display only) ---
-  /** Bullets the player fired that have not ended yet: their hits light the hit marker. */
-  private playerBullets = new Set<string>();
   /** Targets the player hit recently (uid -> ms), so a death in the same burst shows the kill marker. */
   private recentHits = new Map<string, number>();
   private hurtPulse = 0;
+  /**
+   * Continuous damage per cause: `acc` collects this frame's events, `rate` is a smoothed HP per second, `hold` keeps a
+   * readout up briefly after it stops. A lowered health limit is a one-off: `total` sums it and stays up for a few
+   * seconds instead of a rate.
+   */
+  private drains = Object.fromEntries((Object.keys(DRAIN) as Drain[]).map(c => [c, { acc: 0, rate: 0, hold: 0, total: 0 }])) as Record<Drain, { acc: number; rate: number; hold: number; total: number }>;
+  private drainText = '';
   private kick = 0;
   private markT = 0;
   private markAt = { x: 0, y: 0 };
@@ -272,19 +291,22 @@ export class CoastSampleHost {
   private feedback(e: StampedEvent, b: PublishedView) {
     const f = b.frame, shown = (p: { x: number; y: number }) => { const r = this.view.regionAt(p); return r === null || f.revealed[r] === true; };
     if (e.type === 'shot' && e.shooter === 'player') {
-      for (const p of e.pellets) this.playerBullets.add(p.bullet);
-      if (this.playerBullets.size > 200) this.playerBullets = new Set([...this.playerBullets].slice(-100));
       this.kick = Math.min(1.4, this.kick + (e.weapon === 'shotgun' ? 1.2 : .8));
     } else if (e.type === 'impact') {
-      const mine = this.playerBullets.delete(e.bullet), at = e.contact ?? e.lastFree;
-      // Contact is on the ground plane; the marker sits on the chest plane where the bullet is drawn.
-      if (mine && e.reason === 'hit-actor' && e.target && shown(at)) this.mark(e.target, { x: at.x, y: at.y - AIM_H }, false);
+      // The Runtime names the bullet's owner (R6-L3). Contact is on the ground plane; the marker sits on the chest plane
+      // where the bullet is drawn, and only where the hit point is outdoors or in a revealed room.
+      const at = e.contact ?? e.lastFree;
+      if (e.owner === 'player' && e.reason === 'hit-actor' && e.target && shown(at)) this.mark(e.target, { x: at.x, y: at.y - AIM_H }, false);
     } else if (e.type === 'melee' && e.attacker === 'player' && e.hit) {
       const a = f.actors.find(x => x.uid === e.hit); if (a && shown(a)) this.mark(a.uid, { x: a.x, y: a.y - AIM_H }, false);
     } else if (e.type === 'death' && e.uid !== 'player') {
       const at = this.recentHits.get(e.uid), a = f.actors.find(x => x.uid === e.uid);
       if (at !== undefined && performance.now() - at < 500 && a && shown(a)) this.mark(e.uid, { x: a.x, y: a.y - AIM_H }, true);
-    } else if (e.type === 'hurt' && e.uid === 'player' && e.damage >= 1) this.hurtPulse = Math.min(1, this.hurtPulse + .45 + e.damage / 40);
+    } else if (e.type === 'hurt' && e.uid === 'player') {
+      // A blow of any size pulses the red edge; continuous causes add up into the drain readout instead (R6-L2).
+      if (e.cause === 'blow') this.hurtPulse = Math.min(1, this.hurtPulse + .45 + e.damage / 40);
+      else this.drains[e.cause].acc += e.damage;
+    }
     else if (e.type === 'shot' && e.shooter !== 'player') {
       // A shot from off screen by someone standing in the open or in a revealed room: mark the edge toward them.
       const a = f.actors.find(x => x.uid === e.shooter);
@@ -296,6 +318,37 @@ export class CoastSampleHost {
         }
       }
     }
+  }
+  /**
+   * Continuous damage readout under the health bar ("流血 -1.2/秒"), smoothed over about half a second and kept up for a
+   * moment after it stops, plus a screen edge tinted by the largest current cause. A lowered health limit shows its
+   * total for three seconds. Nothing is inferred from amounts: the Runtime names every cause.
+   */
+  private drainFrame(dt: number, alive: boolean) {
+    const parts: string[] = [];
+    let top: Drain | null = null, topRate = 0;
+    for (const c of Object.keys(DRAIN) as Drain[]) {
+      const d = this.drains[c];
+      if (c === 'limit-change') {
+        if (d.acc > 0) { d.total = (d.hold > 0 ? d.total : 0) + d.acc; d.hold = 3; }
+      } else if (dt > 0) {
+        d.rate += (d.acc / dt - d.rate) * Math.min(1, dt / .5);
+        if (d.acc > 0) d.hold = .8;
+      }
+      d.acc = 0; d.hold = Math.max(0, d.hold - dt);
+      if (d.hold <= 0) d.rate = 0;
+      if (!alive || d.hold <= 0) continue;
+      if (c === 'limit-change') { parts.push(`<i data-cause="${c}">${DRAIN[c].label} -${Math.max(.1, d.total).toFixed(1)}</i>`); continue; }
+      parts.push(`<i data-cause="${c}">${DRAIN[c].label} -${Math.max(.1, d.rate).toFixed(1)}/秒</i>`);
+      if (d.rate > topRate) { top = c; topRate = d.rate; }
+    }
+    const text = parts.join('');
+    if (text !== this.drainText) { this.drainText = text; this.q('[data-drain]').innerHTML = text; }
+    const ail = this.q('[data-ail]');
+    if (!top) { ail.style.opacity = '0'; return; }
+    const breathe = this.opts.reducedMotion ? 1 : .85 + .15 * Math.sin(performance.now() / 1000 * 3);
+    ail.style.setProperty('--ail', DRAIN[top].tint);
+    ail.style.opacity = (Math.min(.6, .22 + topRate * .1) * breathe).toFixed(3);
   }
   /** Off-screen shooters (up to four), each fading over 0.9 s. */
   private threats = [0, 1, 2, 3].map(() => ({ uid: '', x: 0, y: 0, left: 0 }));
@@ -520,12 +573,16 @@ export class CoastSampleHost {
   private showEnding() {
     if (this.blocking()) this.inv.closeTransient();
     this.input.suppressHeld(); this.sticks.clear();
-    this.setPanel('ending', '<h2>正在保存结算</h2><p data-ending-text></p><div class="cs-row" data-ending-row></div>', '结算');
+    this.setPanel('ending', '<h2 data-ending-title>正在保存结算</h2><p data-ending-text></p><div class="cs-row" data-ending-row></div>', '结算');
     this.refreshEnding();
   }
   private refreshEnding() {
     const s = this.services.settlement(), text = this.q('[data-ending-text]'), row = this.q('[data-ending-row]');
     if (!text || !row) return;
+    // The reason exists as soon as the settlement is prepared and survives a failed write, so the pending and retry
+    // panels already say which ending is being saved.
+    const kind: Outro = OUTRO_OF[s.reason ?? ''] ?? 'failed';
+    const title = this.q('[data-ending-title]'); if (title) title.textContent = s.reason ? `${OUTRO_TEXT[kind]} · 正在保存结算` : '正在保存结算';
     if (s.committed) {
       if (this.exiting) return;
       this.exiting = true;
@@ -535,8 +592,6 @@ export class CoastSampleHost {
       row.innerHTML = '';
       // The settlement is already saved; what remains is presentation. A death plays the fall under a darkening
       // curtain before the original result screen takes over; extraction and other endings fade out.
-      const died = this.last?.frame.player.alive === false;
-      const kind = outcome === 'extract' ? 'extract' : died ? 'died' : outcome === 'timeout' ? 'timeout' : 'failed';
       const hold = this.opts.reducedMotion ? 400 : kind === 'died' ? 1700 : kind === 'extract' ? 1150 : 900;
       this.ending = { kind, t: 0, hold: hold / 1000 };
       this.q('[data-panel]').hidden = true;
@@ -582,8 +637,9 @@ export class CoastSampleHost {
     if (reload) cross.style.setProperty('--reload', `${Math.round((1 - reload.left / Math.max(.01, reload.total)) * 360)}deg`);
     this.root.classList.toggle('touch', this.input.touch);
     let lootChanged = false;
+    const shown = (p: { x: number; y: number }) => { const r = this.view.regionAt(p); return r === null || f.revealed[r] === true; };
     for (const e of b.events) if (e.seq > this.lastSeq) {
-      this.lastSeq = e.seq; this.onEvent(e); this.sound.event(e, b.stamp.world.mapId); this.feedback(e, b);
+      this.lastSeq = e.seq; this.onEvent(e); this.sound.event(e, b.stamp.world.mapId, shown); this.feedback(e, b);
       if (e.type === 'looted' || e.type === 'rejected') lootChanged = true;
       const { seq, type, durability, stamp, ...detail } = e;
       this.eventLog.push({ seq, type, durability, map: stamp.world.mapId, epoch: stamp.epoch, detail: detail as Record<string, unknown> });
@@ -601,6 +657,7 @@ export class CoastSampleHost {
     this.kick = Math.max(0, this.kick - dt * 9);
     const throb = low > 0 && f.player.alive ? low * (.42 + .18 * Math.sin(performance.now() / 1000 * 5.2)) : 0;
     this.q('[data-hurt]').style.opacity = Math.max(this.hurtPulse * .9, throb).toFixed(3);
+    this.drainFrame(dt, f.player.alive);
     const pop = this.q('[data-hitpop]');
     if (this.markT > 0) {
       this.markT -= dt;

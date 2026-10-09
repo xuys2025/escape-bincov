@@ -165,13 +165,13 @@ try {
     const s = await S(), scav = s.actors.find(a => a.alive && a.kind === 'scav'), salt = s.actors.find(a => a.alive && a.kind === 'salt');
     await drv('placePlayer', { x: 640, y: 456 }, 0, 'coast'); await drv('placeEnemy', scav.uid, { x: 664, y: 456 }); await drv('placeEnemy', salt.uid, { x: 800, y: 456 }); await wait(300);
     const c = await capture('enemy attacks (AI on 3 s)', async () => { await drv('freezeAI', false); await wait(3000); await drv('freezeAI', true); }, 400);
-    const hurt = sounded(c.ev.filter(e => e.type === 'hurt' && e.uid === 'player' && e.damage >= 1), c.on), fire = sounded(c.ev.filter(e => e.type === 'shot' && e.shooter !== 'player'), c.on);
+    const hurt = sounded(c.ev.filter(e => e.type === 'hurt' && e.uid === 'player' && e.cause === 'blow'), c.on), fire = sounded(c.ev.filter(e => e.type === 'shot' && e.shooter !== 'player'), c.on);
     assert.ok(hurt.length >= 1 && hurt.every(x => x.onset), `hurt ${JSON.stringify(hurt)}`); assert.ok(fire.length >= 1 && fire.every(x => x.onset), `enemy shots ${JSON.stringify(fire)}`);
     await drv('placeEnemy', scav.uid, { x: 104, y: 860 }); await drv('placeEnemy', salt.uid, { x: 136, y: 860 }); await wait(300);
-    // Bleeding publishes a tiny hurt every frame: standing still while bleeding must stay quiet (no hit cue per frame).
+    // Bleeding publishes a hurt with cause 'bleed' every frame: standing still while bleeding must stay quiet (no hit cue).
     const bleeding = (await S()).hud.bleeding, quiet = await capture('standing while bleeding', async () => {}, 1500);
-    const ticks = quiet.ev.filter(e => e.type === 'hurt' && e.damage < 1).length;
-    if (bleeding) { assert.ok(ticks > 20, `bleed ticks ${ticks}`); assert.equal(quiet.on.length, 0, `onsets while bleeding ${quiet.on.length}`); assert.ok(stats(quiet.bs).peak < .1, `peak while bleeding ${stats(quiet.bs).peak}`); }
+    const ticks = quiet.ev.filter(e => e.type === 'hurt' && e.cause === 'bleed').length;
+    if (bleeding) { assert.ok(ticks > 20, `bleed ticks ${ticks}`); assert.equal(quiet.on.length, 0, `onsets while bleeding ${quiet.on.length} on=${JSON.stringify(quiet.on)} ev=${JSON.stringify(quiet.ev.filter(e => !(e.type === 'hurt' && e.cause === 'bleed')).map(e => ({ t: Math.round(e.t), type: e.type, cause: e.cause, dmg: e.damage, uid: e.uid })))} hp=${(await S()).hud.hp}`); assert.ok(stats(quiet.bs).peak < .1, `peak while bleeding ${stats(quiet.bs).peak}`); }
     return { hurt: hurt.length, enemyShots: fire.length, hp: Math.round((await S()).hud.hp), ...stats(c.bs), bleeding, bleedTicks: ticks, bleedingOnsets: quiet.on.length, bleedingPeak: stats(quiet.bs).peak };
   });
   await check('A7 heal: Q uses a supply audibly', async () => {

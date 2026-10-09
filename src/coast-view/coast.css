@@ -152,6 +152,15 @@ html[data-coast-sample] #toast { z-index: 120; }
    pointer and the end-of-run curtain. All of it is presentation; positions come from the host every frame. */
 .cs-vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 72% 70% at 50% 47%, transparent 62%, rgba(10,9,7,.34) 100%); }
 .cs-hurt { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(ellipse 70% 66% at 50% 50%, transparent 50%, rgba(122,22,14,.5) 86%, rgba(90,10,6,.72) 100%); }
+.cs-ail { position: absolute; inset: 0; pointer-events: none; opacity: 0; --ail: 150,26,16; background: radial-gradient(ellipse 72% 68% at 50% 50%, transparent 56%, rgba(var(--ail),.34) 88%, rgba(var(--ail),.56) 100%); }
+/* Continuous damage readout under the health bar: one chip per cause the Runtime names. */
+.cs-drain { display: flex; flex-wrap: wrap; gap: 4px; min-height: 0; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 16px; }
+.cs-drain:empty { display: none; }
+.cs-drain i { font-style: normal; padding: 0 5px; border-left: 2px solid #c85a48; background: #1b1a17b3; color: #f0d2c4; }
+.cs-drain i[data-cause="pollution"] { border-color: #9aa851; color: #dfe6b8; }
+.cs-drain i[data-cause="dehydration"] { border-color: #c79a4e; color: #f0dfbd; }
+.cs-drain i[data-cause="starvation"] { border-color: #b08a5c; color: #eadcc4; }
+.cs-drain i[data-cause="limit-change"] { border-color: #8f86a8; color: #e2dcef; }
 .cs-cross .cs-ring { position: absolute; left: 0; top: 0; width: 25px; height: 25px; border-radius: 50%; display: none;
   background: conic-gradient(#e7c873 var(--reload, 0deg), #3a352b66 0); -webkit-mask: radial-gradient(circle, transparent 9.5px, #000 10px, #000 12.5px, transparent 13px); mask: radial-gradient(circle, transparent 9.5px, #000 10px, #000 12.5px, transparent 13px); }
 .cs-cross.reloading .cs-ring { display: block; }
@@ -190,6 +199,6 @@ html[data-coast-sample] #toast { z-index: 120; }
   background: linear-gradient(45deg, transparent 46%, #e8774f 46%, #e8774f 60%, transparent 60%) 0 0/9px 9px no-repeat,
     linear-gradient(-45deg, transparent 46%, #e8774f 46%, #e8774f 60%, transparent 60%) 0 9px/9px 9px no-repeat;
   filter: drop-shadow(0 0 1px #000) drop-shadow(0 0 1px #000); }
-.coast-sample.outro .cs-threats { visibility: hidden; }
+.coast-sample.outro .cs-threats, .coast-sample.outro .cs-ail { visibility: hidden; }
 /* Very short landscape phones: the status card keeps its bars; location and the routine body line give way. */
 @media (max-height: 340px) { .cs-where { display: none; } .cs-state.calm { display: none; } }

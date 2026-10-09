@@ -11,6 +11,7 @@ import { Lighting, MOODS, lamp } from './lighting';
 import { Textures } from './textures';
 import { lifecycle } from './scope';
 import { Weather, type RoofArea, type WeatherKind } from './weather';
+import { Tide, paintWade } from './tide';
 
 export const AIM_H = 22;
 /**
@@ -36,6 +37,8 @@ interface ActorGfx {
   kind: ActorKind; body: Sprite; weapon: Sprite; flash: Sprite; rim: Sprite; wrim: Sprite; shadow: Sprite; corpse: Sprite | null; corpseKey: string;
   /** Trigger and support sleeves from the shoulders to the hands painted on the held weapon. */
   arms: [Sprite, Sprite];
+  /** Water band at the feet while the actor stands in a flooded tide cell. */
+  wade: Sprite;
   /** Player only: faint warm outline so the player separates from dark asphalt (not the occlusion rim). */
   edge: Sprite | null;
   walk: number; dir: number; flashT: number; deathT: number; kick: Point; kickT: number; seen: boolean; swingT: number;
@@ -79,6 +82,7 @@ export class CoastView {
   readonly screen = new Sprite();
   private fx: Fx;
   readonly weather: Weather;
+  readonly tide: Tide;
 
   private map: MapDef | null = null;
   private mapKey = ''; private epoch = -1;
@@ -115,7 +119,9 @@ export class CoastView {
       this.tex = new Textures(opts.art);
       this.light = new Lighting(this.tex);
       this.weather = new Weather(this.tex, opts.weather, opts.reducedMotion);
-      this.groundRoot.addChild(this.groundLayer, this.flat, this.shadows, this.weather.back);
+      this.tide = new Tide(this.tex, opts.reducedMotion);
+      // Tidal water lies on the ground (over the mud flats) and under loot, corpses, shadows and rain.
+      this.groundRoot.addChild(this.groundLayer, this.tide.layer, this.flat, this.shadows, this.weather.back);
       this.sorted.sortableChildren = true;
       this.upper.addChild(this.sorted, this.xray, this.overhead, this.weather.front, this.debugG);
       this.lightOverlay.blendMode = 'multiply';
@@ -176,6 +182,7 @@ export class CoastView {
     // frame turns the body into a corpse. Only this map/epoch counts: a rebuild (load, layer change) never replays a fall.
     const current = (e: StampedEvent) => worldKeyString(e.stamp.world) === this.mapKey && e.stamp.epoch === this.epoch;
     const fallen = new Set(batch.events.flatMap(e => e.type === 'death' && current(e) ? [e.uid] : []));
+    this.tide.sync(f.flooded, dt, this.time);
     const seen = new Set<string>();
     for (const a of [f.player, ...f.actors]) { seen.add(a.uid); this.syncActor(a, dt, visible(a.regionId), fallen.has(a.uid)); }
     for (const [uid, g] of this.actors) if (!seen.has(uid)) { this.dropActor(g); this.actors.delete(uid); }
@@ -299,7 +306,8 @@ export class CoastView {
     if (m.key.mapId === 'coast') this.dressCoast();
     // Awnings keep the pavement under them dry.
     const awnings = m.key.mapId === 'coast' ? [11, 25].map(tx => ({ x: tx * 32, y: 15 * 32 - 8, w: 4 * 32, h: 40 })) : [];
-    this.weather.setMap(m, bake.puddles, roofs, awnings, (x, y) => M[y >> 5]?.[x >> 5] === 'water');
+    this.tide.setMap(m);
+    this.weather.setMap(m, bake.puddles, roofs, awnings, (x, y) => M[y >> 5]?.[x >> 5] === 'water' || this.tide.wet(x, y));
     this.light.mood = MOODS[this.opts.mood % MOODS.length]; this.light.setMap(m);
     this.staticLights(m);
     this.stats.occluders = this.occluders.length;
@@ -452,8 +460,9 @@ export class CoastView {
         break;
       }
       case 'hurt': {
-        // Bleeding and pollution publish a tiny hurt every frame (no angle): no flash, kick or blood spray for those.
-        const g = this.actors.get(e.uid); if (!g || (e.angle === null && e.damage < 1)) break;
+        // Only blows (any size) flash, kick and spray blood; bleeding, pollution, thirst, hunger and a lowered health
+        // limit are shown by the host's HUD, not on the body.
+        const g = this.actors.get(e.uid); if (!g || e.cause !== 'blow') break;
         const ang = e.angle ?? 0;
         g.flashT = .07; g.kick = e.angle === null ? { x: 0, y: 0 } : { x: Math.cos(ang) * 2, y: Math.sin(ang) * 2 }; g.kickT = .08;
         const a = actor(e.uid); if (a && shown(a)) this.fx.blood(a.x, a.y + .5, AIM_H, ang, this.rnd);
@@ -474,9 +483,9 @@ export class CoastView {
       const mk = () => { const s = new Sprite(); s.anchor.set(.5, 1); return s; };
       const arm = () => { const s = new Sprite(this.tex.arm(a.kind)); s.anchor.set(0, .5); return s; };
       g = { kind: a.kind, body: mk(), weapon: new Sprite(), flash: mk(), rim: new Sprite(), wrim: new Sprite(), shadow: new Sprite(this.tex.blob(20, 7)), corpse: null, corpseKey: '',
-        arms: [arm(), arm()], edge: a.kind === 'player' ? new Sprite() : null, walk: 0, dir: dirOf(a.aim), flashT: 0, deathT: 0, kick: { x: 0, y: 0 }, kickT: 0, seen: false, swingT: 0, step: 0 };
-      g.flash.blendMode = 'add'; g.rim.anchor.set(.5, (48 + 1) / 50); g.shadow.anchor.set(.5);
-      this.sorted.addChild(g.body, ...g.arms, g.weapon, g.flash); this.xray.addChild(g.rim, g.wrim);
+        arms: [arm(), arm()], wade: new Sprite(this.tex.ensure('tide:wade', paintWade)), edge: a.kind === 'player' ? new Sprite() : null, walk: 0, dir: dirOf(a.aim), flashT: 0, deathT: 0, kick: { x: 0, y: 0 }, kickT: 0, seen: false, swingT: 0, step: 0 };
+      g.flash.blendMode = 'add'; g.rim.anchor.set(.5, (48 + 1) / 50); g.shadow.anchor.set(.5); g.wade.anchor.set(.5, .5); g.wade.visible = false;
+      this.sorted.addChild(g.body, ...g.arms, g.weapon, g.flash, g.wade); this.xray.addChild(g.rim, g.wrim);
       if (g.edge) { g.edge.anchor.set(.5, (48 + 1) / 50); g.edge.tint = 0xf3dfa8; g.edge.alpha = .38; this.sorted.addChild(g.edge); } this.shadows.addChild(g.shadow);
       this.actors.set(a.uid, g);
     }
@@ -497,6 +506,7 @@ export class CoastView {
     if (g.edge) g.edge.visible = shown && !dead;
     g.seen = shown;
     if (dead) {
+      g.wade.visible = false;
       const facing = corpseFacing(a), key = `corpse:${a.kind}:${facing}`;
       if (!g.corpse || g.corpseKey !== key) {
         const fresh = !g.corpse && g.deathT > 0;
@@ -522,6 +532,10 @@ export class CoastView {
     if (g.edge) { g.edge.texture = this.tex.actorEdge(a.kind, g.dir, frame); g.edge.position.set(bx, by + 1); g.edge.rotation = tilt; g.edge.zIndex = a.y - .002; }
     g.flash.texture = this.tex.actorFlash(a.kind, g.dir, frame); g.flash.position.set(bx, by); g.flash.zIndex = a.y + .01; g.flash.visible = shown && g.flashT > 0; g.flash.alpha = .5; g.flash.rotation = tilt;
     g.shadow.position.set(x + 2, y - 1);
+    // Caught by the tide: the water covers the boots; the shadow drowns. Only for an actor that is drawn at all.
+    const wading = shown && !dying && this.tide.wet(a.x, a.y);
+    g.wade.visible = wading; g.shadow.visible = shown && !wading;
+    if (wading) { g.wade.position.set(x, y - 2); g.wade.zIndex = a.y + .02; g.wade.scale.x = this.opts.reducedMotion ? 1 : 1 + .06 * Math.sin(this.time * 4 + a.x); }
     g.rim.texture = this.tex.actorRim(a.kind, g.dir, frame); g.rim.position.set(x, y + 1); g.rim.tint = a.kind === 'player' ? 0xf0dca0 : 0xe07a5a;
     const art = this.tex.weapon(a.weapon, a.kind);
     const reload = a.state.reloading ? .75 * Math.sign(Math.cos(a.aim) || 1) : 0;
@@ -558,7 +572,7 @@ export class CoastView {
     // Arms share the weapon's depth, just under it so the painted gloves cover the sleeve ends.
     for (const arm of g.arms) { arm.zIndex = g.weapon.zIndex - .001; arm.tint = g.weapon.tint; }
   }
-  private dropActor(g: ActorGfx) { for (const s of [g.body, g.weapon, g.flash, g.rim, g.wrim, g.shadow, g.corpse, g.edge, ...g.arms]) s?.destroy(); }
+  private dropActor(g: ActorGfx) { for (const s of [g.body, g.weapon, g.flash, g.rim, g.wrim, g.shadow, g.wade, g.corpse, g.edge, ...g.arms]) s?.destroy(); }
 
   private syncCrates(f: ViewFrame, visible: (r: string | null) => boolean) {
     const seen = new Set<string>();
@@ -585,7 +599,9 @@ export class CoastView {
       let s = this.loot.get(l.uid);
       if (!s) { s = new Sprite(this.tex.loot(l.item)); s.anchor.set(.5, s.texture.height === LOOT_H ? LOOT_FOOT / LOOT_H : 11 / 14); s.position.set(Math.round(l.x), Math.round(l.y)); this.flat.addChild(s); this.loot.set(l.uid, s); }
       s.visible = visible(l.regionId);
-      s.tint = (this.time % 2) < .12 ? 0xffffff : 0xe8e2d4;
+      // Under the tide an item stays where it is (unreachable until the water goes): drawn through the water, no glint.
+      const under = this.tide.wet(l.x, l.y);
+      s.tint = under ? 0x8a9e96 : (this.time % 2) < .12 ? 0xffffff : 0xe8e2d4; s.alpha = under ? .6 : 1;
     }
     for (const [uid, s] of this.loot) if (!seen.has(uid)) { s.destroy(); this.loot.delete(uid); }
   }

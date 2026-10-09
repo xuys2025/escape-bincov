@@ -43,8 +43,11 @@ export function drawMap(canvas: HTMLCanvasElement, session: SessionState, batch:
   // Canvas pixels per CSS pixel: labels and markers keep their on-screen size at any panel size and DPR.
   const k = canvas.width / Math.max(1, canvas.clientWidth || canvas.width);
   g.fillStyle = '#0e1a1b'; g.fillRect(0, 0, canvas.width, canvas.height);
+  // On the floor being played, tide cells take the flooded colour exactly where the Runtime reports water (R6-L4).
+  const flooded = view === batch.stamp.world.mapId ? new Set(batch.frame.flooded) : null;
   map.tiles.forEach((row, y) => row.forEach((t, x) => {
-    g.fillStyle = ['#384b3e', '#849178', '#12363b', '#141e1b', batch.frame.highTide ? '#724840' : '#44665a', '#69735d', '#8e805b'][t] || '#222';
+    const high = flooded ? flooded.has(y * cols + x) : batch.frame.highTide;
+    g.fillStyle = ['#384b3e', '#849178', '#12363b', '#141e1b', high ? '#724840' : '#44665a', '#69735d', '#8e805b'][t] || '#222';
     g.fillRect(X(x * 32), Y(y * 32), 32 * scale + 1, 32 * scale + 1);
   }));
   const size = Math.round((touch ? 12 : 14) * k);

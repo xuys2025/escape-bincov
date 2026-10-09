@@ -413,22 +413,31 @@ const roomPixels = (page, compare, leak = false) => page.evaluate(([r, compare, 
     await page.keyboard.down('e'); await page.waitForFunction(() => window.__bincovSample.host.lastBatch.frame.phase === 'ending', null, { timeout: 8000 }); await page.keyboard.up('e');
     await frames(page, 4);
     const retry = await page.locator('[data-do="retry-settlement"]').isVisible(), pending = await page.evaluate(() => !!window.__bincov.app.pendingSettlement);
+    // The reason (R6-L1) survives the failed write: the retry panel already names the ending being saved.
+    const failed = await page.evaluate(() => { const s = window.__bincovSample.host.services.settlement(); return { reason: s.reason, committed: s.committed, title: document.querySelector('[data-ending-title]')?.textContent }; });
     await restoreWrites(page); await page.locator('[data-do="retry-settlement"]').click();
+    await page.waitForFunction(() => document.querySelector('.coast-sample')?.dataset.outro === 'extract' || window.__bincov.app.state === 'result');
+    const curtain = await page.evaluate(() => ({ outro: document.querySelector('.coast-sample')?.dataset.outro ?? null, text: document.querySelector('.coast-sample [data-curtain-text]')?.textContent ?? null }));
     await page.waitForFunction(() => window.__bincov.app.state === 'result' && !document.querySelector('.coast-sample'));
     const end = await page.evaluate(() => ({ state: window.__bincov.app.state, outcome: window.__bincov.app.result?.outcome, pending: !!window.__bincov.app.pendingSettlement, counts: window.__bincovSample.counts(), sample: !!window.__bincov.app.coastSample }));
     assert.ok(mid > 2 && mid < 3); assert.equal(reset, 0); assert.equal(retry, true); assert.equal(pending, true);
+    assert.deepEqual(failed, { reason: 'extract', committed: false, title: '撤离成功 · 正在保存结算' });
+    assert.deepEqual(curtain, { outro: 'extract', text: '撤离成功' });
     assert.equal(end.outcome, 'extract'); assert.equal(end.pending, false); assert.equal(end.sample, false);
     for (const k of ['listeners', 'tickers', 'apps', 'views', 'renderTextures', 'liveViews', 'sampleRoots']) assert.equal(end.counts[k], 0, k);
-    return { mid, reset, ...end };
+    return { mid, reset, failed, curtain, ...end };
   });
-  await step('W13 a second run abandons through the pause menu and settles as a failure', async () => {
+  await step('W13 a second run abandons through the pause menu and settles as a failure; the outro says 已放弃行动, not 你倒下了', async () => {
     await action(page, 'return').click(); await deploy(page, { enter: false });
     await page.keyboard.press('Escape'); await frames(page, 2);
     await page.locator('[data-do="abandon"]').click(); await page.locator('[data-do="abandon-yes"]').click();
+    await page.waitForFunction(() => !!document.querySelector('.coast-sample')?.dataset.outro || window.__bincov.app.state === 'result');
+    const curtain = await page.evaluate(() => ({ reason: window.__bincovSample.host.services.settlement().reason, outro: document.querySelector('.coast-sample')?.dataset.outro ?? null, text: document.querySelector('.coast-sample [data-curtain-text]')?.textContent ?? null }));
     await page.waitForFunction(() => window.__bincov.app.state === 'result' && !document.querySelector('.coast-sample'));
     const r = await page.evaluate(() => ({ outcome: window.__bincov.app.result?.outcome, counts: window.__bincovSample.counts() }));
     assert.equal(r.outcome, 'death', 'abandon settles under the original failure rules'); assert.equal(r.counts.apps, 0);
-    return r;
+    assert.deepEqual(curtain, { reason: 'abandon', outro: 'abandon', text: '已放弃行动' });
+    return { ...r, curtain };
   });
   await context.close();
 }
@@ -623,15 +632,23 @@ for (const art of ['sol', 'placeholder']) {
     const target = await screenOf(704, 456 - 22);
     for (const x of m) assert.ok(Math.hypot(x.screen.x - target.x, x.screen.y - target.y) < 28, `marker on the target: ${JSON.stringify(x.screen)} vs ${JSON.stringify(target)}`);
     assert.equal(m.at(-1).kill, true, 'the killing hit shows the kill marker');
-    // Direct check of the boundary rule: a player-bullet hit inside the closed, unrevealed resident room marks nothing.
-    const hidden = await page.evaluate(([room]) => {
+    // The real hits above carried owner 'player' (R6-L3); the marker reads only that field now.
+    const owners = [...new Set((await events(page, 'impact')).filter(e => e.detail.reason === 'hit-actor' && e.detail.target === uid).map(e => e.detail.owner))];
+    assert.deepEqual(owners, ['player'], `owners of the player's hits: ${owners}`);
+    // Contract probes through the real feedback path: a player-owned hit inside the closed, unrevealed resident room marks
+    // nothing; in the open, a hit owned by an enemy or by nobody (an old enemy round) marks nothing, a player's marks once.
+    const probe = await page.evaluate(([room]) => {
       const h = window.__bincovSample.host, b = h.lastBatch, before = window.__marks.length;
-      h.playerBullets.add('probe-bullet');
-      const at = { x: room.x + room.w / 2, y: room.y + room.h / 2 };
-      h.feedback({ type: 'impact', bullet: 'probe-bullet', reason: 'hit-actor', lastFree: at, contact: at, normal: null, surface: 'actor', target: 'enemy-x', seq: 0, stamp: b.stamp, durability: 'accepted' }, b);
-      return { revealed: b.frame.revealed[Object.keys(b.frame.revealed).find(k => k.endsWith('/resident-ground'))], marked: window.__marks.length - before };
+      const hit = (owner, at) => h.feedback({ type: 'impact', bullet: 'probe-bullet', owner, reason: 'hit-actor', lastFree: at, contact: at, normal: null, surface: 'actor', target: 'enemy-x', seq: 0, stamp: b.stamp, durability: 'accepted' }, b);
+      hit('player', { x: room.x + room.w / 2, y: room.y + room.h / 2 }); const hidden = window.__marks.length - before;
+      const open = { x: b.frame.player.x + 40, y: b.frame.player.y };
+      hit('enemy-x', open); hit(null, open); const foreign = window.__marks.length - before - hidden;
+      hit('player', open); const mine = window.__marks.length - before - hidden - foreign;
+      return { revealed: b.frame.revealed[Object.keys(b.frame.revealed).find(k => k.endsWith('/resident-ground'))], hidden, foreign, mine };
     }, [ROOM]);
-    assert.equal(hidden.revealed, false); assert.equal(hidden.marked, 0, 'no marker for a hit inside an unrevealed room');
+    assert.equal(probe.revealed, false); assert.equal(probe.hidden, 0, 'no marker for a hit inside an unrevealed room');
+    assert.equal(probe.foreign, 0, 'no marker for a hit the player did not own'); assert.equal(probe.mine, 1, 'a player-owned hit in the open marks once');
+    const hidden = { marked: probe.hidden };
     // Reload ring: R with a partly used magazine.
     await page.keyboard.press('r'); await frames(page, 6);
     const ring = await page.evaluate(() => ({ on: document.querySelector('[data-cross]').classList.contains('reloading'), deg: parseFloat(document.querySelector('[data-cross]').style.getPropertyValue('--reload')) }));
@@ -649,7 +666,10 @@ for (const art of ['sol', 'placeholder']) {
     const hurt = await page.evaluate(() => { window.__bincovSample.host.app.ticker.remove(window.__hurtTick); return window.__hurtLog; });
     const peak = Math.max(...hurt.map(r => r.op)), last = hurt.at(-1);
     assert.ok(peak > .4, `hurt edge peak ${peak}`); assert.ok(last.hp / 100 >= .35 ? last.op < .05 : true, `hurt edge fades at hp ${last.hp}: ${last.op}`);
-    return { hits, marks: m.length, kill: m.at(-1).kill, hidden, ring: [ring.deg, ring2], hurtPeak: +peak.toFixed(2), hurtEnd: last.op, hp: last.hp };
+    // Every real hurt the player took here names a cause; blows are what raised the edge.
+    const causes = [...new Set((await events(page, 'hurt')).filter(e => e.detail.uid === 'player').map(e => e.detail.cause))];
+    assert.ok(causes.includes('blow') && causes.every(c => ['blow', 'bleed', 'pollution', 'dehydration', 'starvation', 'limit-change'].includes(c)), `hurt causes ${causes}`);
+    return { hits, owners, marks: m.length, kill: m.at(-1).kill, hidden, probe, ring: [ring.deg, ring2], hurtPeak: +peak.toFixed(2), hurtEnd: last.op, hp: last.hp, causes };
   });
   await step('V06b the chosen exit: an edge arrow toward it off screen (clear of the HUD cards), a marker over it on screen; off-screen shooters get an edge chevron', async () => {
     await place(page, 640, 456, 0, 'coast'); await frames(page, 8);
@@ -755,6 +775,24 @@ for (const art of ['sol', 'placeholder']) {
 {
   const { context, page } = await open('?test=1&sample=village');
   await deploy(page);
+  await step('V11b low tide (seed 42): the Runtime floods nothing and nothing is drawn as tidal water by the tide strip', async () => {
+    await place(page, 61 * 32 + 16, 12 * 32 + 16, 0, 'coast'); await frames(page, 30);
+    assert.equal(await page.evaluate(() => window.__bincovSample.host.services.checkpoint()), true, 'fixture position passes checkpoint validation');
+    const low = await page.evaluate(() => {
+      const h = window.__bincovSample.host, v = h.view, b = h.lastBatch; h.app.ticker.stop();
+      const cam = { ...v.camF }, grab = show => {
+        const xray = v.updateXray; v.updateXray = function (...a) { xray.apply(this, a); v.tide.layer.visible = show; };
+        v.camF = { ...cam }; v.time = 1; v.shake = 0; v.present({ ...b, events: [] }, 0); delete v.updateXray; h.app.render();
+        return h.app.renderer.extract.pixels(v.upRT).pixels;
+      };
+      let a, c; try { a = grab(true); c = grab(false); } finally { delete v.updateXray; h.app.ticker.start(); }
+      let changed = 0; for (let i = 0; i < a.length; i += 4) if (a[i] !== c[i] || a[i + 1] !== c[i + 1] || a[i + 2] !== c[i + 2]) changed++;
+      return { high: b.frame.highTide, flooded: b.frame.flooded.length, shown: v.tide.shown.length, changed };
+    });
+    await wait(900); await page.screenshot({ path: resolve(out, 'check-tide-low-1280x720.png') });
+    assert.deepEqual(low, { high: false, flooded: 0, shown: 0, changed: 0 });
+    return low;
+  });
   await step('V09 the player\'s death: fall and corpse presented after the settlement commit, curtain 你倒下了, no simulation, grading cleared after', async () => {
     await page.evaluate(() => {
       const d = window.__bincovSample.driver; d.placePlayer({ x: 640, y: 456 }, 0, 'coast');
@@ -775,6 +813,121 @@ for (const art of ['sol', 'placeholder']) {
     assert.equal(after, '', 'the parked canvas carries no grading');
     assert.equal(await page.evaluate(() => window.__bincov.app.result?.outcome), 'death');
     return { outroFrames: outro.length, fallFrames: outro.filter(r => r.body && r.deathT > 0).length, corpseFrames: outro.filter(r => r.corpse).length, text: outro.at(-1).text };
+  });
+  await context.close();
+}
+{ // Damage causes (R6-L2) and the tide (R6-L4) on a fresh run that starts at high tide (seed 3)
+  const { context, page } = await open('?test=1&sample=village');
+  await action(page, 'enter').click(); await page.locator('#run-world').selectOption('buildings'); await page.locator('#seed').fill('3'); await action(page, 'deploy').click();
+  await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch);
+  await page.evaluate(() => window.__bincovSample.driver.freezeAI(true));
+  const savable = async () => { assert.equal(await page.evaluate(() => window.__bincovSample.host.services.checkpoint()), true, 'fixture positions pass checkpoint validation'); };
+  await step('V10 damage causes: a blow (even under 1 point) pulses the red edge and flashes the body; bleeding, pollution, thirst, hunger and a lowered limit show as readouts under the health bar with a tinted edge and never flash', async () => {
+    await place(page, 640, 456, 0, 'coast'); await frames(page, 30); await savable();
+    // Contract probes through the host's real feedback path and the view's real event path, on the live page. Continuous
+    // causes are fed once per frame for a second, as the Runtime publishes them.
+    const running = page.evaluate(async () => {
+      window.__drainShot = '';
+      const h = window.__bincovSample.host, v = h.view, b = () => h.lastBatch, frame = () => new Promise(res => requestAnimationFrame(() => res()));
+      const ev = (cause, damage, angle = null) => ({ type: 'hurt', cause, uid: 'player', at: { x: b().frame.player.x, y: b().frame.player.y }, damage, critical: false, angle, seq: 0, stamp: b().stamp, durability: 'accepted' });
+      const read = () => ({ chips: [...document.querySelectorAll('[data-drain] i')].map(i => i.textContent), ail: +document.querySelector('[data-ail]').style.opacity || 0, tint: document.querySelector('[data-ail]').style.getPropertyValue('--ail'), edge: +document.querySelector('[data-hurt]').style.opacity || 0 });
+      const flashOf = e => { const g = v.actors.get('player'); g.flashT = 0; v.present({ ...b(), events: [e] }, 0); return g.flashT; };
+      const out = { start: read() };
+      let feeding = null; const feed = () => { if (feeding) for (const [c, perSecond] of feeding) h.feedback(ev(c, perSecond * h.app.ticker.deltaMS / 1000), b()); };
+      h.app.ticker.add(feed);
+      // Waits are in time, not frames: the page may run at 60 or 165 Hz.
+      const forMs = async ms => { const t0 = performance.now(); while (performance.now() - t0 < ms) await frame(); };
+      feeding = [['bleed', 1.2], ['pollution', .5]]; await forMs(2000); out.during = read();
+      // Hold the feed while the test takes a screenshot of the readout.
+      window.__drainShot = 'ready'; while (window.__drainShot !== 'taken') await frame();
+      feeding = null; await forMs(1500); out.after = read();
+      h.feedback(ev('limit-change', 3), b()); await frame(); await frame(); out.limit = read();
+      await forMs(3400); out.limitAfter = read();
+      h.feedback(ev('blow', .4, 1), b()); await frame(); out.blow = read();
+      h.app.ticker.remove(feed);
+      out.flash = Object.fromEntries(['bleed', 'pollution', 'dehydration', 'starvation', 'limit-change', 'blow'].map(c => [c, flashOf(ev(c, c === 'blow' ? .4 : 2, c === 'blow' ? 1 : null))]));
+      return out;
+    });
+    // The page script may fail before it signals; keep its rejection handled and surface it here.
+    const settled = running.then(r => ({ r }), error => ({ error }));
+    const first = await Promise.race([settled, page.waitForFunction(() => window.__drainShot === 'ready', null, { timeout: 15000 }).then(() => null, () => null)]);
+    if (first?.error) throw first.error;
+    await page.screenshot({ path: resolve(out, 'check-drain-1280x720.png') });
+    await page.evaluate(() => { window.__drainShot = 'taken'; });
+    const done = await settled; if (done.error) throw done.error;
+    const r = done.r;
+    assert.deepEqual(r.start.chips, [], 'no readout before any continuous damage');
+    assert.equal(r.during.chips.length, 2, `readouts ${r.during.chips}`);
+    assert.match(r.during.chips[0], /^流血 -1\.[0-3]\/秒$/); assert.match(r.during.chips[1], /^污染 -0\.[4-6]\/秒$/);
+    assert.equal(r.during.tint, '150,26,16', 'the edge takes the largest cause'); assert.ok(r.during.ail > .2, `tinted edge ${r.during.ail}`);
+    assert.ok(r.during.edge < .05, `continuous damage does not pulse the blow edge: ${r.during.edge}`);
+    assert.deepEqual(r.after.chips, []); assert.equal(r.after.ail, 0);
+    assert.deepEqual(r.limit.chips, ['生命上限下降 -3.0']); assert.deepEqual(r.limitAfter.chips, []);
+    assert.ok(r.blow.edge > .3, `a 0.4-point blow still pulses: ${r.blow.edge}`); assert.deepEqual(r.blow.chips, []);
+    for (const [c, t] of Object.entries(r.flash)) assert.equal(t > 0, c === 'blow', `${c} flash ${t}`);
+    return r;
+  });
+  await step('V11 tide: water is drawn exactly on the Runtime\'s flooded cells (none outside, every visible one covered); a body caught there wades; the tide recedes with a fade', async () => {
+    const info = await page.evaluate(() => { const b = window.__bincovSample.host.lastBatch, m = b.map, tide = []; m.cells.forEach((row, y) => row.forEach((c, x) => { if (c === 'tide') tide.push(y * m.cols + x); })); return { high: b.frame.highTide, flooded: [...b.frame.flooded], tide, cols: m.cols }; });
+    assert.equal(info.high, true, 'seed 3 starts at high tide'); assert.ok(info.flooded.length > 50, `flooded ${info.flooded.length}`);
+    assert.ok(info.flooded.every(i => info.tide.includes(i)), 'flooded cells are tide cells');
+    // Dry ground two cells west of the east tide strip.
+    await place(page, 61 * 32 + 16, 12 * 32 + 16, 0, 'coast'); await frames(page, 30); await savable();
+    // The same frame presented twice at a fixed camera and view time, with and without the tide layer: the pixels that
+    // differ are the tide's. Each is mapped back to its world cell (one-pixel tolerance at cell borders).
+    const probe = await page.evaluate(() => {
+      const h = window.__bincovSample.host, v = h.view, b = h.lastBatch, cols = b.map.cols, flooded = new Set(b.frame.flooded); h.app.ticker.stop();
+      const cam = { ...v.camF };
+      // Everything drawn above the ground (loot, actors, shadows, rain, mist) is hidden in both, so the tide is compared
+      // against the bare ground it covers.
+      const above = [v.flat, v.shadows, v.sorted, v.xray, v.overhead, v.weather.back, v.weather.front];
+      const grab = show => {
+        const xray = v.updateXray; v.updateXray = function (...a) { xray.apply(this, a); v.tide.layer.visible = show; for (const c of above) c.visible = false; };
+        v.camF = { ...cam }; v.time = 1; v.shake = 0; v.present({ ...b, events: [] }, 0); delete v.updateXray; h.app.render();
+        for (const c of above) c.visible = true;
+        return h.app.renderer.extract.pixels(v.upRT);
+      };
+      let on, off;
+      try { on = grab(true); off = grab(false); } finally { delete v.updateXray; for (const c of above) if (c) c.visible = true; h.app.ticker.start(); }
+      const k = v.view.k, width = on.width, px = on.pixels, qx = off.pixels;
+      const cell = (x, y) => Math.floor(y / 32) * cols + Math.floor(x / 32), wet = (x, y) => flooded.has(cell(x, y));
+      const perCell = new Map(); let outside = 0, changed = 0;
+      for (let i = 0; i < px.length; i += 4) {
+        if (px[i] === qx[i] && px[i + 1] === qx[i + 1] && px[i + 2] === qx[i + 2]) continue;
+        changed++;
+        const p = i / 4, wx = v.cam.x + (p % width + .5) / k, wy = v.cam.y + (Math.floor(p / width) + .5) / k;
+        if (wet(wx, wy)) perCell.set(cell(wx, wy), (perCell.get(cell(wx, wy)) ?? 0) + 1);
+        else if (![[-1, 0], [1, 0], [0, -1], [0, 1]].some(([dx, dy]) => wet(wx + dx, wy + dy))) outside++;
+      }
+      // Flooded cells wholly inside the view.
+      const inView = [...flooded].filter(i => { const x = (i % cols) * 32, y = Math.floor(i / cols) * 32; return x >= v.cam.x && y >= v.cam.y && x + 32 <= v.cam.x + v.view.w && y + 32 <= v.cam.y + v.view.h; });
+      return { changed, outside, inView: inView.length, covered: inView.filter(i => (perCell.get(i) ?? 0) >= 32 * 32 * k * k * .9).length, minCover: Math.min(...inView.map(i => (perCell.get(i) ?? 0) / (32 * 32 * k * k))), low: inView.filter(i => (perCell.get(i) ?? 0) < 32 * 32 * k * k * .9).map(i => [i % cols, Math.floor(i / cols), +((perCell.get(i) ?? 0) / (32 * 32 * k * k)).toFixed(2)]), cam: [v.cam.x, v.cam.y, v.view.w, v.view.h] };
+    });
+    await wait(900); await page.screenshot({ path: resolve(out, 'check-tide-high-1280x720.png') });
+    assert.ok(probe.inView >= 6, `flooded cells in view ${probe.inView}`); assert.equal(probe.outside, 0, 'no water drawn outside the flooded cells');
+    assert.equal(probe.covered, probe.inView, `every flooded cell in view is covered: ${JSON.stringify(probe)}`);
+    // Caught by the water: the checkpoint rule lets a body stand where the tide came in; it wades until it walks out.
+    await place(page, 63 * 32 + 16, 12 * 32 + 16, Math.PI, 'coast'); await frames(page, 10); await savable();
+    const wade = await page.evaluate(() => { const g = window.__bincovSample.host.view.actors.get('player'); return { wade: g.wade.visible, shadow: g.shadow.visible }; });
+    await wait(900); await page.screenshot({ path: resolve(out, 'check-tide-wade-1280x720.png') });
+    await place(page, 61 * 32 + 16, 12 * 32 + 16, 0, 'coast'); await frames(page, 6);
+    const dry = await page.evaluate(() => { const g = window.__bincovSample.host.view.actors.get('player'); return { wade: g.wade.visible, shadow: g.shadow.visible }; });
+    assert.deepEqual(wade, { wade: true, shadow: false }); assert.deepEqual(dry, { wade: false, shadow: true });
+    // The turn of the tide, presented to the view only (the Runtime turns it at 300 s): 1.4 s fade, then no cells; back in over 0.9 s.
+    const fade = await page.evaluate(() => {
+      const h = window.__bincovSample.host, t = h.view.tide, real = h.lastBatch.frame.flooded, steps = []; h.app.ticker.stop();
+      try {
+        t.sync([], .5, 1); steps.push(+t.alpha.toFixed(2)); t.sync([], 1, 1.5); steps.push(+t.alpha.toFixed(2), t.shown.length);
+        t.sync(real, .45, 2.5); steps.push(+t.alpha.toFixed(2)); t.sync(real, .5, 3); steps.push(+t.alpha.toFixed(2), t.shown.length === real.length);
+      } finally { h.app.ticker.start(); }
+      return steps;
+    });
+    assert.deepEqual(fade, [.64, 0, 0, .5, 1, true]);
+    // The floor map colours tide cells by the same flooded list on the floor being played.
+    await page.keyboard.press('m'); await frames(page, 6); await wait(300);
+    await page.screenshot({ path: resolve(out, 'check-map-tide-1280x720.png') });
+    await page.keyboard.press('m'); await frames(page, 4);
+    return { flooded: info.flooded.length, ...probe, wade, dry, fade };
   });
   await context.close();
 }
