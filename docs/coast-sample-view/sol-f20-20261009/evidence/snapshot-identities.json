@@ -1,0 +1,45 @@
+{
+  "scope": "Raw named diagnostic snapshots remain local in ignored test-results; only read-only extracted paths/counts are promoted.",
+  "files": [
+    {
+      "file": "test-results/sol-f20-20261009/named60-first/cycle-20.heapsnapshot",
+      "bytes": 38621430,
+      "sha256": "209b1c3c8f813cf98f5a12d59f6ea7796c00f4acc315b544e241d636910b717d"
+    },
+    {
+      "file": "test-results/sol-f20-20261009/named60-first/cycle-40.heapsnapshot",
+      "bytes": 38744066,
+      "sha256": "1b03bd6aac284f326ca021f56447faacf63c645bf8069f9698dc8700c63a9e55"
+    },
+    {
+      "file": "test-results/sol-f20-20261009/named60-first/cycle-6.heapsnapshot",
+      "bytes": 38361994,
+      "sha256": "0d8d866237b59de1055db86f2d038f321e1d2544e3bc38ab753216d0dfbf1083"
+    },
+    {
+      "file": "test-results/sol-f20-20261009/named60-first/cycle-60.heapsnapshot",
+      "bytes": 38878685,
+      "sha256": "bdb4edb2aa57c8f9175ad6ee2e5c3821425ff3ebbf359ebbd1b3bdd817094257"
+    },
+    {
+      "file": "test-results/sol-f20-20261009/pin-first/pinned.heapsnapshot",
+      "bytes": 38440171,
+      "sha256": "fc3e2d01ebf4486496d41ccaeb4d24029c24fe01928d8ac61acd61b06829d1f3"
+    },
+    {
+      "file": "test-results/sol-f20-20261009/pin-first/released.heapsnapshot",
+      "bytes": 37602643,
+      "sha256": "9fbfab0d5b785c2a02a8623b0c4907eaf7a894baff3a1225e22a72ed56d346d9"
+    },
+    {
+      "file": "test-results/sol-f20-20261009/hud-no-pin-first/after-native-return.heapsnapshot",
+      "bytes": 37760727,
+      "sha256": "69ce054f46bb6dc6b8d6f732ac7aaec177a98f3c223a3eb30ddd037222d8f081"
+    },
+    {
+      "file": "test-results/sol-f20-20261009/hud-no-pin-first/result-no-pin.heapsnapshot",
+      "bytes": 37599949,
+      "sha256": "2834438f77576e66ad746ea68cd0e656e5a8850c1cc36dfc491e097bc1a0f575"
+    }
+  ]
+}

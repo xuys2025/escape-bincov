@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-08T10:59:07.783Z",
+  "checks": [
+    {
+      "name": "startup-asset-cleanup-and-retry",
+      "beforeRetry": {
+        "roots": 0,
+        "errors": [
+          "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8547:131711)\n    at <anonymous>:14:61"
+        ]
+      },
+      "errors": [
+        "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8547:131711)\n    at <anonymous>:14:61",
+        "Error: This session already has a Runtime.\n    at new zn (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:6832)\n    at hc (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:43180)\n    at l0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:21790)\n    at t.onclick (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:90997)"
+      ],
+      "status": "failed",
+      "failure": "page.waitForSelector: Timeout 6000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.coast-sample [data-do=\"resume\"]') to be visible\u001b[22m\n\n    at D:\\bincov\\pr22-runtime\\scripts\\coast-lifecycle-test.mjs:83:15\n    at async check (D:\\bincov\\pr22-runtime\\scripts\\coast-lifecycle-test.mjs:67:26)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-lifecycle-test.mjs:73:54"
+    },
+    {
+      "name": "startup-view-cleanup-and-retry",
+      "beforeRetry": {
+        "roots": 1,
+        "errors": [
+          "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at vf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:75447)\n    at gf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:85078)\n    at new mf (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:72982)\n    at new ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:89075)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:1949)\n    at async l0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:22259)"
+        ]
+      },
+      "errors": [
+        "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at vf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:75447)\n    at gf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:85078)\n    at new mf (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:72982)\n    at new ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8566:89075)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:1949)\n    at async l0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:22259)"
+      ],
+      "status": "failed",
+      "failure": "locator.click: Timeout 6000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-action=\"enter\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"title-enter\" data-action=\"enter\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <canvas width=\"1280\" height=\"720\"></canvas> from <div class=\"coast-sample\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <canvas width=\"1280\" height=\"720\"></canvas> from <div class=\"coast-sample\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    11 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <canvas width=\"1280\" height=\"720\"></canvas> from <div class=\"coast-sample\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at D:\\bincov\\pr22-runtime\\scripts\\coast-lifecycle-test.mjs:82:48\n    at async check (D:\\bincov\\pr22-runtime\\scripts\\coast-lifecycle-test.mjs:67:26)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-lifecycle-test.mjs:73:54"
+    },
+    {
+      "name": "startup-observer-cleanup-and-retry",
+      "beforeRetry": {
+        "roots": 1,
+        "errors": [
+          "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:2937)\n    at async l0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:22259)"
+        ]
+      },
+      "errors": [
+        "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at uh.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:2937)\n    at async l0 (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8600:22259)"
+      ],
+      "status": "failed",
+      "failure": "locator.click: Timeout 6000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-action=\"enter\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button class=\"title-enter\" data-action=\"enter\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <canvas width=\"1280\" height=\"720\"></canvas> from <div class=\"coast-sample\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <canvas width=\"1280\" height=\"720\"></canvas> from <div class=\"coast-sample\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    12 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <canvas width=\"1280\" height=\"720\"></canvas> from <div class=\"coast-sample\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at D:\\bincov\\pr22-runtime\\scripts\\coast-lifecycle-test.mjs:82:48\n    at async check (D:\\bincov\\pr22-runtime\\scripts\\coast-lifecycle-test.mjs:67:26)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-lifecycle-test.mjs:73:54"
+    },
+    {
+      "name": "ordinary-context-loss-native-restore-and-settlement",
+      "errors": [],
+      "status": "failed",
+      "failure": "AssertionError [ERR_ASSERTION]: context loss must keep the world and saved time frozen\n    at file:///D:/bincov/pr22-runtime/scripts/coast-lifecycle-test.mjs:107:14\n    at async check (file:///D:/bincov/pr22-runtime/scripts/coast-lifecycle-test.mjs:67:26)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-lifecycle-test.mjs:91:3"
+    }
+  ],
+  "requests": [],
+  "browser": "154.0.8037.98"
+}

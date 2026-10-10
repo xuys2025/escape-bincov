@@ -9,6 +9,30 @@ import { luckInventory } from './reputation-luck';
 import { pursuitPosition } from './pursuit';
 import { corridor, findLanding, separation, spacePath, traversable, type SpaceContext } from './spatial';
 
+
+/** Optional observation only: never changes collision order, RNG or persistence. */
+export interface ShotObservation {
+    bullet: BulletState; reason: 'blocked' | 'hit-actor' | 'range' | 'bounds' | 'start-blocked';
+    lastFree: Point; contact: Point | null; normal: Point | null; surface: 'wall' | 'door' | 'actor' | null;
+    target: string | null; damage: number; critical: boolean; dead: boolean; angle: number | null;
+}
+export type ShotObserver = (event: ShotObservation) => void;
+function observeShot(observer: ShotObserver | undefined, context: SpaceContext, bullet: BulletState, distance: number,
+    target: string | null = null, damage = 0, critical = false, dead = false, range = false): void {
+    if (!observer) return;
+    const speed = Math.hypot(bullet.vx, bullet.vy), dx = speed ? bullet.vx / speed : 0, dy = speed ? bullet.vy / speed : 0;
+    const at = { x: bullet.x + dx * distance, y: bullet.y + dy * distance };
+    const tile = context.definition.tile, x = Math.floor((at.x + dx * 1e-7) / tile), y = Math.floor((at.y + dy * 1e-7) / tile);
+    const bounds = !context.definition.cells[y]?.[x];
+    const cornerX = Math.abs(at.x / tile - Math.round(at.x / tile)) < 1e-8;
+    const cornerY = Math.abs(at.y / tile - Math.round(at.y / tile)) < 1e-8;
+    const normal = !target && !range && distance > 0 && cornerX !== cornerY ? (cornerX ? { x: -Math.sign(dx), y: 0 } : { x: 0, y: -Math.sign(dy) }) : null;
+    observer({ bullet: { ...bullet }, reason: target ? 'hit-actor' : range ? 'range' : distance === 0 ? 'start-blocked' : bounds ? 'bounds' : 'blocked',
+        lastFree: { x: bullet.x + dx * Math.max(0, distance - 1e-7), y: bullet.y + dy * Math.max(0, distance - 1e-7) },
+        contact: at, normal, surface: target ? 'actor' : range || bounds ? null : context.definition.doors.some(d => d.x === x && d.y === y && !context.doors[d.id]) ? 'door' : 'wall',
+        target, damage, critical, dead, angle: target ? Math.atan2(-bullet.vy, -bullet.vx) : null });
+}
+
 /** Distance to the first opaque grid boundary along a finite ray (windows transmit bullets). */
 export function shotBarrier(context: SpaceContext, bullet: BulletState, dx: number, dy: number): number {
     const tile = context.definition.tile;
@@ -68,19 +92,22 @@ export function damageLayerEnemy(state: ExpansionState, mapId: string, enemy: En
         name: `${D.ENEMIES[enemy.id].name}遗体`, x: enemy.x, y: enemy.y, inventory });
 }
 
-export function resolveLayerShot(state: ExpansionState, world: WorldDefinition, mapId: string, bullet: BulletState, playerPresent: boolean, hitFeedback?: (uid: string, critical: boolean) => void, playerHitFeedback?: (source: Point) => void): boolean {
+export function resolveLayerShot(state: ExpansionState, world: WorldDefinition, mapId: string, bullet: BulletState, playerPresent: boolean, hitFeedback?: (uid: string, critical: boolean) => void, playerHitFeedback?: (source: Point) => void, observer?: ShotObserver): boolean {
     const raid = state.raid!, layer = raid.maps[mapId], speed = Math.hypot(bullet.vx, bullet.vy);
     if (speed === 0 || bullet.left <= 0 || bullet.damage <= 0) return false;
     const dx = bullet.vx / speed, dy = bullet.vy / speed;
-    const stop = shotBarrier({ definition: world.maps[mapId], doors: layer.doors, highTide: raid.highTide }, bullet, dx, dy);
+    const context = { definition: world.maps[mapId], doors: layer.doors, highTide: raid.highTide };
+    const stop = shotBarrier(context, bullet, dx, dy);
     if (bullet.enemy) {
         if (playerPresent) {
             const hit = shotIntersection(bullet, raid.player, dx, dy, 12);
             if (hit !== null && hit < stop) {
+                const hp = state.body.hp;
                 const random = D.seededRandom(raid.rng);
                 if (raid.version === 2) enemyDamage(state, bullet.damage, bullet.owner, random());
                 else { state.body.hp = Math.max(0, state.body.hp - bullet.damage); raid.hitTime = .25; if (random() < SURVIVAL.bleedChance) state.body.bleeding = true; }
                 raid.rng = random.getState();
+                observeShot(observer, context, bullet, hit, 'player', hp - state.body.hp, false, state.body.hp <= 0);
                 playerHitFeedback?.({ x: raid.player.x - bullet.vx, y: raid.player.y - bullet.vy });
                 return true;
             }
@@ -97,37 +124,43 @@ export function resolveLayerShot(state: ExpansionState, world: WorldDefinition, 
                 const chance = criticalChance(effectiveAttributes(state).technique, 1 - Math.min(1, perpendicular / 14), state.body.effects.focus > 0 ? .05 : 0);
                 const random = D.seededRandom(raid.rng); critical = random() < chance; raid.rng = random.getState();
             }
+            const hp = hits[0].enemy.hp;
             damageLayerEnemy(state, mapId, hits[0].enemy, bullet.damage * (critical ? 1.5 : 1));
+            observeShot(observer, context, bullet, hits[0].distance, hits[0].enemy.uid, hp - hits[0].enemy.hp, critical, hits[0].enemy.hp <= 0);
             hitFeedback?.(hits[0].enemy.uid, critical); return true;
         }
     }
+    if (stop <= bullet.left) observeShot(observer, context, bullet, stop);
     return stop <= bullet.left;
 }
 
 /** The finite segment kernel is shared by normal flight and one-time departure settlement. */
-export function advanceLayerShots(state: ExpansionState, world: WorldDefinition, mapId: string, dt: number, hitFeedback?: (uid: string, critical: boolean) => void, playerHitFeedback?: (source: Point) => void): void {
+export function advanceLayerShots(state: ExpansionState, world: WorldDefinition, mapId: string, dt: number, hitFeedback?: (uid: string, critical: boolean) => void, playerHitFeedback?: (source: Point) => void, observer?: ShotObserver): void {
     const layer = state.raid!.maps[mapId], survivors: BulletState[] = [];
     for (const bullet of [...layer.bullets].sort((a, b) => a.uid.localeCompare(b.uid, 'en'))) {
         const speed = Math.hypot(bullet.vx, bullet.vy), length = Math.min(bullet.left, speed * dt);
         if (speed === 0) continue;
-        if (resolveLayerShot(state, world, mapId, { ...bullet, left: length }, true, hitFeedback, playerHitFeedback)) continue;
+        if (resolveLayerShot(state, world, mapId, { ...bullet, left: length }, true, hitFeedback, playerHitFeedback, observer)) continue;
+        const origin = { ...bullet };
         bullet.x += bullet.vx / speed * length; bullet.y += bullet.vy / speed * length; bullet.left -= length;
         if (bullet.left > 0) survivors.push(bullet);
+        else observeShot(observer, { definition: world.maps[mapId], doors: layer.doors, highTide: state.raid!.highTide }, origin, length, null, 0, false, false, true);
     }
     layer.bullets = survivors;
 }
 
 /** Resolve only existing source projectiles, then remove them. No ordinary AI or local time advances. */
-export function settleDepartingShots(state: ExpansionState, world: WorldDefinition, mapId: string): void {
+export function settleDepartingShots(state: ExpansionState, world: WorldDefinition, mapId: string, observer?: ShotObserver): void {
     const raid = state.raid!, layer = raid.maps[mapId];
     for (const bullet of [...layer.bullets].sort((a, b) => a.uid.localeCompare(b.uid, 'en'))) {
-        resolveLayerShot(state, world, mapId, bullet, false);
+        if (!resolveLayerShot(state, world, mapId, bullet, false, undefined, undefined, observer))
+            observeShot(observer, { definition: world.maps[mapId], doors: layer.doors, highTide: raid.highTide }, bullet, bullet.left, null, 0, false, false, true);
     }
     layer.bullets = [];
 }
 
 /** Mutates only a private candidate. Call through SaveSession.prepareExpansionMutation. */
-export function changeLayer(state: ExpansionState, world: WorldDefinition, entryId: string): boolean {
+export function changeLayer(state: ExpansionState, world: WorldDefinition, entryId: string, observer?: ShotObserver): boolean {
     const raid = state.raid;
     if (!raid || raid.worldVersion !== world.id || raid.layoutRevision !== world.revision) return false;
     const fromId = raid.currentMap, from = world.maps[fromId], source = raid.maps[fromId];
@@ -143,7 +176,7 @@ export function changeLayer(state: ExpansionState, world: WorldDefinition, entry
         && corridor(sourceContext, e, raid.player, 'sight'));
     raid.player = { ...landing, rotation: raid.player.rotation };
     raid.currentMap = entry.targetMap;
-    settleDepartingShots(state, world, fromId);
+    settleDepartingShots(state, world, fromId, observer);
     for (const enemy of witnesses.filter(e => e.hp > 0).sort((a, b) => a.uid.localeCompare(b.uid, 'en'))) {
         const route = spacePath(sourceContext, enemy, entry.at, true);
         if (!route.length) continue;

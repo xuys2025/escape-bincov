@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-10T12:47:20.979Z",
+  "productBaseline": "c24d32b7984fb0b0b62eeb9bc100e349fccdb166",
+  "deliveryParent": "c24d32b7984fb0b0b62eeb9bc100e349fccdb166",
+  "branch": "agent/hideout-runtime",
+  "productHashes": {
+    "dist/index.html": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+    "start the game.html": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+    "release/Escape-Bincov-portable.zip": "ca7c9da0efbf4ac548e97464045231591a2f03e86b62cbf857d1b2b1901f8f4f",
+    "release/Escape-Bincov-web.zip": "cc55ef3e890174a9fc1d213645393590b743a0542dc80771eec6ab2f05944f3d"
+  },
+  "contracts": {
+    "finalMotionSourceEqualsSnapshot": true,
+    "pairedFunctionUnchanged": true,
+    "touchJ1J2Unchanged": true
+  },
+  "testScriptSHA256": "c51b4f38e7f3b08df0a714fa97afde0f7191d691df8d29589823f31c5ba8dc1b",
+  "sourceUnchanged": true,
+  "artUnchanged": true,
+  "push": false,
+  "publish": false,
+  "localCommitRequired": true
+}

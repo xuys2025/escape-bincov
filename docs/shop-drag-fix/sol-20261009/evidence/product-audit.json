@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-09T13:54:08.241Z",
+  "node": "v24.19.0",
+  "head": "4fc30234d1d686a6cb68007f923aff6d7fbd7bdc",
+  "branch": "fix/shop-drag",
+  "protectedDiff": "",
+  "artifacts": [
+    {
+      "file": "dist/index.html",
+      "bytes": 2416251,
+      "sha256": "a9a07a960049d6dc17e54b9fb7c765c99a72041c48e111c9b73b2ae2fa8d852f",
+      "equalsBase": true
+    },
+    {
+      "file": "start the game.html",
+      "bytes": 2416251,
+      "sha256": "a9a07a960049d6dc17e54b9fb7c765c99a72041c48e111c9b73b2ae2fa8d852f",
+      "equalsBase": true
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "bytes": 840803,
+      "sha256": "4b9ed1095dc6fb85fc43795cff31686c8430a81a51bd9cf3ad839235c7c8eaee",
+      "equalsBase": true
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "bytes": 837028,
+      "sha256": "03d1080fdcd32f0e10c41b069e1a0e1be61f456c93284832ca9166a41685fbda",
+      "equalsBase": true
+    },
+    {
+      "file": "docs/release-manifest.json",
+      "bytes": 745,
+      "sha256": "05beffd186bdb381fb358562ad77139102cfbbe3dad2c0be5fc17539a515b6e0",
+      "equalsBase": true
+    }
+  ]
+}

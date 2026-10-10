@@ -1,0 +1,54 @@
+{
+  "method": "Detached synthetic v1 PublishedView batches on real Pixi view; tick stopped during probes. Tests visibility ownership, not gameplay logic.",
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "visibility": {
+    "room": {
+      "x": 320,
+      "y": 224,
+      "w": 288,
+      "h": 192,
+      "name": "褪色居民楼 · 一楼",
+      "id": "coast-buildings-v1/resident-layout-1/coast/region/resident-ground",
+      "inside": true,
+      "sealed": false,
+      "buildingId": "coast-buildings-v1/resident-layout-1/coast/building/resident"
+    },
+    "point": {
+      "x": 464,
+      "y": 320
+    },
+    "hidden": {
+      "actor": false,
+      "weapon": false,
+      "rim": false,
+      "weaponRim": false,
+      "corpse": false,
+      "crate": false,
+      "loot": false,
+      "bullet": false,
+      "muzzleAdded": 0,
+      "particlesAdded": 0,
+      "bloodDecalsAdded": 15,
+      "bloodDecalsVisible": 0,
+      "bloodDecalsWithheld": 15,
+      "visibleLightsInRoom": 0
+    },
+    "stale": {
+      "fxAdded": 0,
+      "dropped": 1
+    },
+    "range": {
+      "fxAdded": 0
+    },
+    "status": "passed",
+    "pixelComparison": {
+      "changedPixels": 0,
+      "method": "Identical hidden PublishedView and camera; only corpse blood decal visibility differs, forced stage rendering before screenshots."
+    },
+    "failures": [],
+    "note": "Decals may be allocated internally; their region-owned sprites must remain withheld. Real Runtime V01, roof-removed negative and positive controls, is recorded separately."
+  },
+  "at": "2026-10-09T07:31:26.740Z"
+}

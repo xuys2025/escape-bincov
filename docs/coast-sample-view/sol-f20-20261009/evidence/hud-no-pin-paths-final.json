@@ -1,0 +1,116 @@
+[
+  {
+    "file": "D:\\bincov\\pr22-runtime\\test-results\\sol-f20-20261009/hud-no-pin-first/result-no-pin.heapsnapshot",
+    "hud": [
+      {
+        "node": {
+          "id": 340701,
+          "type": "native",
+          "name": "<div class=\"cs-hud\" aria-live=\"polite\">"
+        },
+        "reachable": true,
+        "path": [
+          {
+            "id": 1,
+            "type": "synthetic",
+            "name": ""
+          },
+          {
+            "id": 3,
+            "type": "synthetic",
+            "name": "(GC roots)",
+            "via": "element:1"
+          },
+          {
+            "id": 23,
+            "type": "synthetic",
+            "name": "(Global handles)",
+            "via": "element:10"
+          },
+          {
+            "id": 7413,
+            "type": "native",
+            "name": "system / NativeContext / file://",
+            "via": "internal:21 / gin::ContextHolder::context_"
+          },
+          {
+            "id": 72241,
+            "type": "object",
+            "name": "Window [JSGlobalObject] / file://",
+            "via": "internal:global_object"
+          },
+          {
+            "id": 254959,
+            "type": "object",
+            "name": "Object",
+            "via": "property:__bincov"
+          },
+          {
+            "id": 81645,
+            "type": "object",
+            "name": "Object",
+            "via": "property:app"
+          },
+          {
+            "id": 189713,
+            "type": "object",
+            "name": "Game2",
+            "via": "property:game"
+          },
+          {
+            "id": 364675,
+            "type": "object",
+            "name": "InputManager2",
+            "via": "property:input"
+          },
+          {
+            "id": 364703,
+            "type": "object",
+            "name": "Pointer2",
+            "via": "property:mousePointer"
+          },
+          {
+            "id": 88629,
+            "type": "native",
+            "name": "MouseEvent",
+            "via": "property:event"
+          },
+          {
+            "id": 12954,
+            "type": "native",
+            "name": "blink::EventPath",
+            "via": "element:8"
+          },
+          {
+            "id": 12956,
+            "type": "native",
+            "name": "blink::HeapVectorBacking<blink::NodeEventContext>",
+            "via": "element:1"
+          },
+          {
+            "id": 340533,
+            "type": "native",
+            "name": "<section class=\"cs-panel ending\" data-panel=\"\" role=\"dialog\" aria-modal=\"true\" aria-label=\"结算\" hidden=\"\">",
+            "via": "element:7"
+          },
+          {
+            "id": 31846,
+            "type": "native",
+            "name": "Text",
+            "via": "element:8"
+          },
+          {
+            "id": 340701,
+            "type": "native",
+            "name": "<div class=\"cs-hud\" aria-live=\"polite\">",
+            "via": "element:3"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "D:\\bincov\\pr22-runtime\\test-results\\sol-f20-20261009/hud-no-pin-first/after-native-return.heapsnapshot",
+    "hud": []
+  }
+]

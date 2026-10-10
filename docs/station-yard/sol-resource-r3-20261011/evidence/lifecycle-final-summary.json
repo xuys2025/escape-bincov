@@ -1,0 +1,478 @@
+[
+  {
+    "viewport": [
+      1280,
+      720
+    ],
+    "buildSHA256": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+    "scriptSHA256": "af2ee9ccd11e92815e2f2a5c1b0fdedaaae1ab0e9ea4d6e57b54c6a065ea528c",
+    "summary": {
+      "passed": 5,
+      "total": 5
+    },
+    "requests": [],
+    "checks": [
+      {
+        "name": "startup-asset-cleanup-and-retry",
+        "beforeRetry": {
+          "roots": 0,
+          "errors": [
+            "Error: injected cached asset copy failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:26:41)\n    at l6 (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:64681)\n    at file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:94070\n    at Gp.ensure (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:93666)\n    at Gp.actor (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:94033)\n    at Gp.warm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:95411)\n    at new td (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:106432)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:3208)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+          ]
+        },
+        "errors": [
+          "Error: injected cached asset copy failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:26:41)\n    at l6 (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:64681)\n    at file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:94070\n    at Gp.ensure (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:93666)\n    at Gp.actor (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:94033)\n    at Gp.warm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:95411)\n    at new td (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:106432)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:3208)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+        ],
+        "faultState": {
+          "armed": "",
+          "consumed": [
+            {
+              "kind": "asset",
+              "stage": "cached-PNG-copy",
+              "sourceSize": [
+                32,
+                48
+              ]
+            }
+          ]
+        },
+        "rootsAfterFailure": 0,
+        "sameRunResumed": true,
+        "expectedErrors": [
+          "Error: injected cached asset copy failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:26:41)\n    at l6 (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:64681)\n    at file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:94070\n    at Gp.ensure (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:93666)\n    at Gp.actor (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:94033)\n    at Gp.warm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:95411)\n    at new td (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:106432)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:3208)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+        ],
+        "status": "passed"
+      },
+      {
+        "name": "startup-view-cleanup-and-retry",
+        "beforeRetry": {
+          "roots": 0,
+          "errors": [
+            "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:30:41)\n    at Op.add (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:85998)\n    at Gp.ensure (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:93704)\n    at new Dp (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:82006)\n    at new td (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:105886)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:3208)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+          ]
+        },
+        "errors": [
+          "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:30:41)\n    at Op.add (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:85998)\n    at Gp.ensure (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:93704)\n    at new Dp (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:82006)\n    at new td (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:105886)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:3208)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+        ],
+        "faultState": {
+          "armed": "",
+          "consumed": [
+            {
+              "kind": "view",
+              "stage": "view-drawImage"
+            }
+          ]
+        },
+        "rootsAfterFailure": 0,
+        "sameRunResumed": true,
+        "expectedErrors": [
+          "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:30:41)\n    at Op.add (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:85998)\n    at Gp.ensure (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:93704)\n    at new Dp (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:82006)\n    at new td (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:105886)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:3208)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+        ],
+        "status": "passed"
+      },
+      {
+        "name": "startup-observer-cleanup-and-retry",
+        "beforeRetry": {
+          "roots": 0,
+          "errors": [
+            "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:40:41)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:4249)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+          ]
+        },
+        "errors": [
+          "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:40:41)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:4249)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+        ],
+        "faultState": {
+          "armed": "",
+          "consumed": [
+            {
+              "kind": "observer",
+              "stage": "mount-observe"
+            }
+          ]
+        },
+        "rootsAfterFailure": 0,
+        "sameRunResumed": true,
+        "expectedErrors": [
+          "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:40:41)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:4249)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+        ],
+        "status": "passed"
+      },
+      {
+        "name": "ordinary-context-loss-native-restore-and-settlement",
+        "errors": [],
+        "hooksAbsent": true,
+        "lostFrozen": true,
+        "heldMovementBlocked": true,
+        "nativeRestored": true,
+        "restoredRemainedPaused": true,
+        "failedSettlementRetained": true,
+        "nextRaidMounted": true,
+        "initialClock": "9:59",
+        "lostClock": "9:57",
+        "pausedElapsed": 3.890200000002965,
+        "resumedElapsed": 5.890200000002989,
+        "released": {
+          "attached": false,
+          "roots": 0
+        },
+        "status": "passed"
+      },
+      {
+        "name": "direct-raid-runtime-time-freeze-restore-and-release",
+        "errors": [],
+        "method": "Explicit test=1 read-only Runtime/weak-release probe, same real yard departure and UI resume/abandon; no clock mutation or simulated settlement",
+        "running": {
+          "elapsed": 0.2098999999985099,
+          "phase": "running",
+          "player": {
+            "x": 208,
+            "y": 1232
+          },
+          "hp": 100,
+          "frames": 2
+        },
+        "lost": {
+          "elapsed": 0.7461000000014905,
+          "phase": "paused",
+          "player": {
+            "x": 208,
+            "y": 1232
+          },
+          "hp": 100,
+          "frames": 78
+        },
+        "lostEnd": {
+          "elapsed": 0.7461000000014905,
+          "phase": "paused",
+          "player": {
+            "x": 208,
+            "y": 1232
+          },
+          "hp": 100,
+          "frames": 228
+        },
+        "restored": {
+          "elapsed": 0.7461000000014905,
+          "phase": "paused",
+          "player": {
+            "x": 208,
+            "y": 1232
+          },
+          "hp": 100,
+          "frames": 265
+        },
+        "pausedEnd": {
+          "elapsed": 0.7461000000014905,
+          "phase": "paused",
+          "player": {
+            "x": 208,
+            "y": 1232
+          },
+          "hp": 100,
+          "frames": 415
+        },
+        "resumed": {
+          "elapsed": 1.346000000007451,
+          "phase": "running",
+          "player": {
+            "x": 208,
+            "y": 1232
+          },
+          "hp": 100,
+          "frames": 515
+        },
+        "released": {
+          "host": "collected",
+          "runtime": "collected",
+          "view": "collected",
+          "targets": [
+            {
+              "texture": "collected",
+              "source": "collected"
+            },
+            {
+              "texture": "collected",
+              "source": "collected"
+            },
+            {
+              "texture": "collected",
+              "source": "released"
+            }
+          ],
+          "stage": 0,
+          "ticker": false,
+          "attached": false,
+          "events": {
+            "attached": false,
+            "roots": {
+              "_rootPointerEvent": false,
+              "_rootWheelEvent": false,
+              "_rootContextMenuEvent": false
+            },
+            "pooled": 0,
+            "native": 0
+          },
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "managedEmpty": 0,
+            "managedLive": 9,
+            "heap": 26000000
+          }
+        },
+        "status": "passed"
+      }
+    ]
+  },
+  {
+    "viewport": [
+      1920,
+      1080
+    ],
+    "buildSHA256": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+    "scriptSHA256": "af2ee9ccd11e92815e2f2a5c1b0fdedaaae1ab0e9ea4d6e57b54c6a065ea528c",
+    "summary": {
+      "passed": 5,
+      "total": 5
+    },
+    "requests": [],
+    "checks": [
+      {
+        "name": "startup-asset-cleanup-and-retry",
+        "beforeRetry": {
+          "roots": 0,
+          "errors": [
+            "Error: injected cached asset copy failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:26:41)\n    at l6 (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:64681)\n    at file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:94070\n    at Gp.ensure (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:93666)\n    at Gp.actor (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:94033)\n    at Gp.warm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:95411)\n    at new td (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:106432)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:3208)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+          ]
+        },
+        "errors": [
+          "Error: injected cached asset copy failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:26:41)\n    at l6 (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:64681)\n    at file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:94070\n    at Gp.ensure (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:93666)\n    at Gp.actor (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:94033)\n    at Gp.warm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:95411)\n    at new td (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:106432)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:3208)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+        ],
+        "faultState": {
+          "armed": "",
+          "consumed": [
+            {
+              "kind": "asset",
+              "stage": "cached-PNG-copy",
+              "sourceSize": [
+                32,
+                48
+              ]
+            }
+          ]
+        },
+        "rootsAfterFailure": 0,
+        "sameRunResumed": true,
+        "expectedErrors": [
+          "Error: injected cached asset copy failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:26:41)\n    at l6 (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:64681)\n    at file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:94070\n    at Gp.ensure (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:93666)\n    at Gp.actor (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:94033)\n    at Gp.warm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:95411)\n    at new td (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:106432)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:3208)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+        ],
+        "status": "passed"
+      },
+      {
+        "name": "startup-view-cleanup-and-retry",
+        "beforeRetry": {
+          "roots": 0,
+          "errors": [
+            "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:30:41)\n    at Op.add (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:85998)\n    at Gp.ensure (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:93704)\n    at new Dp (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:82006)\n    at new td (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:105886)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:3208)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+          ]
+        },
+        "errors": [
+          "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:30:41)\n    at Op.add (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:85998)\n    at Gp.ensure (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:93704)\n    at new Dp (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:82006)\n    at new td (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:105886)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:3208)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+        ],
+        "faultState": {
+          "armed": "",
+          "consumed": [
+            {
+              "kind": "view",
+              "stage": "view-drawImage"
+            }
+          ]
+        },
+        "rootsAfterFailure": 0,
+        "sameRunResumed": true,
+        "expectedErrors": [
+          "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:30:41)\n    at Op.add (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:85998)\n    at Gp.ensure (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:93704)\n    at new Dp (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:82006)\n    at new td (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9121:105886)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:3208)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+        ],
+        "status": "passed"
+      },
+      {
+        "name": "startup-observer-cleanup-and-retry",
+        "beforeRetry": {
+          "roots": 0,
+          "errors": [
+            "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:40:41)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:4249)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+          ]
+        },
+        "errors": [
+          "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:40:41)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:4249)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+        ],
+        "faultState": {
+          "armed": "",
+          "consumed": [
+            {
+              "kind": "observer",
+              "stage": "mount-observe"
+            }
+          ]
+        },
+        "rootsAfterFailure": 0,
+        "sameRunResumed": true,
+        "expectedErrors": [
+          "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:40:41)\n    at rd.mount (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:4249)\n    at async $p (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:32454)\n    at async mm (file:///D:/bincov/hideout-runtime/dist/index.html?sample=village:9163:53468)"
+        ],
+        "status": "passed"
+      },
+      {
+        "name": "ordinary-context-loss-native-restore-and-settlement",
+        "errors": [],
+        "hooksAbsent": true,
+        "lostFrozen": true,
+        "heldMovementBlocked": true,
+        "nativeRestored": true,
+        "restoredRemainedPaused": true,
+        "failedSettlementRetained": true,
+        "nextRaidMounted": true,
+        "initialClock": "9:59",
+        "lostClock": "9:56",
+        "pausedElapsed": 4.004699999995522,
+        "resumedElapsed": 6.009299999997038,
+        "released": {
+          "attached": false,
+          "roots": 0
+        },
+        "status": "passed"
+      },
+      {
+        "name": "direct-raid-runtime-time-freeze-restore-and-release",
+        "errors": [],
+        "method": "Explicit test=1 read-only Runtime/weak-release probe, same real yard departure and UI resume/abandon; no clock mutation or simulated settlement",
+        "running": {
+          "elapsed": 0.22,
+          "phase": "running",
+          "player": {
+            "x": 208,
+            "y": 1232
+          },
+          "hp": 100,
+          "frames": 2
+        },
+        "lost": {
+          "elapsed": 0.7635000000000005,
+          "phase": "paused",
+          "player": {
+            "x": 208,
+            "y": 1232
+          },
+          "hp": 100,
+          "frames": 82
+        },
+        "lostEnd": {
+          "elapsed": 0.7635000000000005,
+          "phase": "paused",
+          "player": {
+            "x": 208,
+            "y": 1232
+          },
+          "hp": 100,
+          "frames": 231
+        },
+        "restored": {
+          "elapsed": 0.7635000000000005,
+          "phase": "paused",
+          "player": {
+            "x": 208,
+            "y": 1232
+          },
+          "hp": 100,
+          "frames": 268
+        },
+        "pausedEnd": {
+          "elapsed": 0.7635000000000005,
+          "phase": "paused",
+          "player": {
+            "x": 208,
+            "y": 1232
+          },
+          "hp": 100,
+          "frames": 418
+        },
+        "resumed": {
+          "elapsed": 1.379200000002981,
+          "phase": "running",
+          "player": {
+            "x": 208,
+            "y": 1232
+          },
+          "hp": 100,
+          "frames": 511
+        },
+        "released": {
+          "host": "collected",
+          "runtime": "collected",
+          "view": "collected",
+          "targets": [
+            {
+              "texture": "collected",
+              "source": "collected"
+            },
+            {
+              "texture": "collected",
+              "source": "collected"
+            },
+            {
+              "texture": "collected",
+              "source": "released"
+            }
+          ],
+          "stage": 0,
+          "ticker": false,
+          "attached": false,
+          "events": {
+            "attached": false,
+            "roots": {
+              "_rootPointerEvent": false,
+              "_rootWheelEvent": false,
+              "_rootContextMenuEvent": false
+            },
+            "pooled": 0,
+            "native": 0
+          },
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "liveViews": 0,
+            "canvases": 1,
+            "sampleRoots": 0,
+            "art": "placeholder",
+            "atlasPages": 0,
+            "largeTextures": 0,
+            "gpuTextures": 2,
+            "managedEmpty": 0,
+            "managedLive": 9,
+            "heap": 26000000
+          }
+        },
+        "status": "passed"
+      }
+    ]
+  }
+]

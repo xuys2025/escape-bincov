@@ -1,0 +1,59 @@
+[
+  {
+    "id": "wiring-final",
+    "node": "v24.19.0",
+    "command": [
+      "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "scripts/coast-sample-test.mjs"
+    ],
+    "env": {
+      "BINCOV_SAMPLE_OUT": "test-results/sol-round3/wiring-final",
+      "BINCOV_SAMPLE_HTML": "dist/index.html"
+    },
+    "log": "test-results/sol-round3/wiring-final.log",
+    "startedAt": "2026-10-08T04:23:47.084Z",
+    "finishedAt": "2026-10-08T04:24:14.924Z",
+    "exitCode": 0,
+    "signal": null,
+    "error": null
+  },
+  {
+    "id": "target-loot-final",
+    "node": "v24.19.0",
+    "command": [
+      "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "--import",
+      "tsx",
+      "scripts/sol-target-loot-probe.mjs"
+    ],
+    "env": {
+      "BINCOV_SOL_OUT": "test-results/sol-round3/target-final"
+    },
+    "log": "test-results/sol-round3/target-loot-final.log",
+    "startedAt": "2026-10-08T04:24:14.925Z",
+    "finishedAt": "2026-10-08T04:24:19.324Z",
+    "exitCode": 0,
+    "signal": null,
+    "error": null
+  },
+  {
+    "id": "heap-final",
+    "node": "v24.19.0",
+    "command": [
+      "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "scripts/coast-sample-heap.mjs"
+    ],
+    "env": {
+      "BINCOV_HEAP_OUT": "test-results/sol-round3/heap-final",
+      "BINCOV_HEAP_CYCLES": "30",
+      "BINCOV_HEAP_SNAP": "10,30",
+      "BINCOV_HEAP_KEEP": "1"
+    },
+    "log": "test-results/sol-round3/heap-final.log",
+    "startedAt": "2026-10-08T04:24:19.325Z",
+    "finishedAt": "2026-10-08T04:25:37.580Z",
+    "exitCode": 0,
+    "signal": null,
+    "error": null
+  }
+]

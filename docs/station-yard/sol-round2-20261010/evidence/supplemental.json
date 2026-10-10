@@ -1,0 +1,33 @@
+[
+  {
+    "name": "extra-first",
+    "startedAt": "2026-10-10T12:22:27.477Z",
+    "node": "v24.19.0",
+    "command": [
+      "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "--import",
+      "tsx",
+      "scripts/station-round2-recheck.mjs",
+      "--only=J,K",
+      "--out=D:\\bincov\\hideout-runtime\\docs\\station-yard\\sol-round2-20261010\\evidence\\extra-first"
+    ],
+    "exitCode": 1,
+    "finishedAt": "2026-10-10T12:27:13.248Z"
+  },
+  {
+    "name": "paired-first",
+    "startedAt": "2026-10-10T12:27:13.249Z",
+    "node": "v24.19.0",
+    "command": [
+      "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "--import",
+      "tsx",
+      "scripts/station-round2-recheck.mjs",
+      "--only=P",
+      "--pair-old=test-results/station-round2-old.html",
+      "--out=D:\\bincov\\hideout-runtime\\docs\\station-yard\\sol-round2-20261010\\evidence\\paired-first"
+    ],
+    "exitCode": 0,
+    "finishedAt": "2026-10-10T12:29:16.770Z"
+  }
+]

@@ -1,0 +1,47 @@
+{
+  "startedAt": "2026-10-09T09:11:26.849Z",
+  "node": "v24.19.0",
+  "formalSHA256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+  "loadedSHA256": "e49e25af20a2caba6d667e8a27e7b2607bfa9c7704a645200358d2014e85ed9a",
+  "named": true,
+  "seed": 42,
+  "cyclesRequested": 1,
+  "snapshots": [],
+  "pinControl": true,
+  "method": "1280x720 offline; original alternating upstairs/basement and abandon/extract; result page after sample DOM removal; one CDP HeapProfiler.collectGarbage followed by window.gc in original counts evaluation; primitive waits; no page reload or base recovery. 6-10 baseline retained, 16-20/36-40/56-60 compared separately. Snapshots occur AFTER the per-cycle sample; additional snapshot GC can perturb subsequent cycles, so named/snapshot data is auxiliary.",
+  "cycles": [
+    {
+      "cycle": 1,
+      "map": "resident-f2",
+      "outcome": "death",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32847896
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "windows": [],
+  "comparisons": [],
+  "afterIdle": 31850890,
+  "resourceStatus": "passed",
+  "memoryStatus": "no-growth-observed; independent evidence still required",
+  "status": "passed",
+  "finishedAt": "2026-10-09T09:11:33.910Z"
+}

@@ -1,0 +1,93 @@
+{
+  "startedAt": "2026-10-09T04:59:05.626Z",
+  "html": "D:\\bincov\\pr22-runtime\\start the game.html",
+  "size": [
+    1920,
+    1080
+  ],
+  "steps": [
+    {
+      "shot": "01-title.png",
+      "note": "标题页",
+      "at": {
+        "state": "menu",
+        "panel": null,
+        "phase": null,
+        "map": null,
+        "player": null,
+        "where": null
+      }
+    },
+    {
+      "shot": "02-base.png",
+      "note": "水产站整备（行动区域默认居民楼）",
+      "at": {
+        "state": "hideout",
+        "panel": null,
+        "phase": null,
+        "map": null,
+        "player": null,
+        "where": null
+      }
+    },
+    {
+      "shot": "03-spawn.png",
+      "note": "出击落点",
+      "at": {
+        "state": "run",
+        "panel": null,
+        "phase": "running",
+        "map": "coast",
+        "player": {
+          "x": 208,
+          "y": 656,
+          "hp": 100
+        },
+        "where": "沿海封锁区 · 室外 / 一楼"
+      }
+    },
+    {
+      "shot": "04-combat.png",
+      "note": "真实交火：鼠标瞄准、左键点射",
+      "at": {
+        "state": "run",
+        "panel": null,
+        "phase": "running",
+        "map": "coast",
+        "player": {
+          "x": 208,
+          "y": 656,
+          "hp": 100
+        },
+        "where": "沿海封锁区 · 室外 / 一楼"
+      }
+    },
+    {
+      "shot": "05-crate-prompt.png",
+      "note": "靠近物资箱的交互提示",
+      "at": {
+        "state": "result",
+        "panel": "ending",
+        "phase": "ending",
+        "map": "coast",
+        "player": {
+          "x": 208,
+          "y": 656,
+          "hp": 0
+        },
+        "where": "沿海封锁区 · 室外 / 一楼"
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "log": [
+    "spawn 208 656 exits north,station",
+    "crate crate-21 624 272",
+    "crate walk ending shots 87",
+    "FAIL page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')"
+  ],
+  "failure": "page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')\n    at eval (eval at predicate (eval at evaluate (:311:30)), <anonymous>:1:39)\n    at predicate (eval at evaluate (:311:30), <anonymous>:7:27)\n    at next (eval at evaluate (:311:30), <anonymous>:29:33)\n    at D:\\bincov\\pr22-runtime\\scripts\\coast-playtest.mjs:118:46",
+  "shots": 87,
+  "finishedAt": "2026-10-09T04:59:41.597Z"
+}

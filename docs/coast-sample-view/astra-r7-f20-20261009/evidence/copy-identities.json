@@ -1,0 +1,226 @@
+[
+  {
+    "source": "test-results/astra-r7/strict60/report.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/strict60.json",
+    "sourceSHA256": "dd97e2b335ada5219a7e44b56a42d385b5988d0f8a32d9f49e2bedf8ddf45345",
+    "destinationSHA256": "dd97e2b335ada5219a7e44b56a42d385b5988d0f8a32d9f49e2bedf8ddf45345",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/strict60.log",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/strict60.txt",
+    "sourceSHA256": "fc5d12edb16023a048dc646df126bb6ed217b37cb8482d144ad4081a9962e92e",
+    "destinationSHA256": "b68213d93c1106e5ea5784dce37db78de70c5db53e85a75a0c3ec5ba8a072adc",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/named60/report.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/named60.json",
+    "sourceSHA256": "a259975be14d34bae8b364fdd1f69946a3a89483b407f936d542c3b467fc1be6",
+    "destinationSHA256": "a259975be14d34bae8b364fdd1f69946a3a89483b407f936d542c3b467fc1be6",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/named60.log",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/named60.txt",
+    "sourceSHA256": "b73cf95d29773f8709d1e15d2240ccb4d19f14ca2e7ed74d423706ce1b8e62e5",
+    "destinationSHA256": "3b1728c1874b30dd4abff4fb0824c4bd155c1437d3ab04b141ce9e9ba119f968",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/high20/report.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/high20.json",
+    "sourceSHA256": "ed195bd843b151e456c54905f0cd45e457d770116c8799f2d17c971792c2eccf",
+    "destinationSHA256": "ed195bd843b151e456c54905f0cd45e457d770116c8799f2d17c971792c2eccf",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/high20.log",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/high20.txt",
+    "sourceSHA256": "7bc9cde10280412ae1edbf1b3ce555731dc79766599868d3dd22013b5e043d8e",
+    "destinationSHA256": "437fb8d6efff6a905a8e56774120126651cc1cfcbbe1857e69984d9b2d7da564",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/high-named20/report.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/high-named20.json",
+    "sourceSHA256": "646969dbaf8e7c0e3d3e839d0677cd719ac19b2578c6e5404edbfe58f189fb5d",
+    "destinationSHA256": "646969dbaf8e7c0e3d3e839d0677cd719ac19b2578c6e5404edbfe58f189fb5d",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/high-named20.log",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/high-named20.txt",
+    "sourceSHA256": "15c32b61fc9201698c560c993ed2b245ed63005348e9c76d9d0b4c4308c85464",
+    "destinationSHA256": "92d9cf3d07fbc5f12b8fcd77f857a83fed440a03af134a22f89bc234c14772e3",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/pin-control/report.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/pin-control.json",
+    "sourceSHA256": "f3044f01f0d837bf72f9e619c38ff9ef9e33b796ce6948beee75d7835ca4f6ff",
+    "destinationSHA256": "f3044f01f0d837bf72f9e619c38ff9ef9e33b796ce6948beee75d7835ca4f6ff",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/pin-control.log",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/pin-control.txt",
+    "sourceSHA256": "8d0805d3dba50dc1e9f8ee5818242fe0d21b598fc9d6d62d1debe52580a59e87",
+    "destinationSHA256": "4ca765afefe1300e5fbb8f1f4f68223ee5a18d0e6b3cfd1dd3205ac9176467e3",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/pin-final/report.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/pin-final.json",
+    "sourceSHA256": "67de737deead6eba7502f62b147f53092294c41937b44e3fd9a1f2a914dae7fe",
+    "destinationSHA256": "67de737deead6eba7502f62b147f53092294c41937b44e3fd9a1f2a914dae7fe",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/pin-final.log",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/pin-final.txt",
+    "sourceSHA256": "a92a5c5c6c0b2003365c906a8b7fcef5de35fe260cdabb8814ae968192302aee",
+    "destinationSHA256": "cf3b56cd69d8a1b8f4435a3fde4177967319b1dce5a526efedfe0a9582393c90",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/graph-6-20.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/graph-6-20.json",
+    "sourceSHA256": "678a1798c8a61a8c675507e89e52d1fef25878ee2f0264f3eabc895046215f5f",
+    "destinationSHA256": "678a1798c8a61a8c675507e89e52d1fef25878ee2f0264f3eabc895046215f5f",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/graph-20-40.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/graph-20-40.json",
+    "sourceSHA256": "4d57cde9a570f11c33fedcc228cb540371235e8559b6e27f0d5cb4b745ba052a",
+    "destinationSHA256": "4d57cde9a570f11c33fedcc228cb540371235e8559b6e27f0d5cb4b745ba052a",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/graph-40-60.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/graph-40-60.json",
+    "sourceSHA256": "dcb182604012de44516cd7d9e607e4e55f6102f346ad7fed8587406dc9f4fdcc",
+    "destinationSHA256": "dcb182604012de44516cd7d9e607e4e55f6102f346ad7fed8587406dc9f4fdcc",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/graph-6-60.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/graph-6-60.json",
+    "sourceSHA256": "972a269a31a713fe96e3620982b03fbc2d43f9c4ff3dc874220704008acbcb4c",
+    "destinationSHA256": "972a269a31a713fe96e3620982b03fbc2d43f9c4ff3dc874220704008acbcb4c",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/graph-high-6-20.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/graph-high-6-20.json",
+    "sourceSHA256": "d288f06272a11500c29d7e07b0d438ff74e6ffd7bdfc6bdb7d15e12578670a64",
+    "destinationSHA256": "d288f06272a11500c29d7e07b0d438ff74e6ffd7bdfc6bdb7d15e12578670a64",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/graph-pin-release.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/graph-pin-release.json",
+    "sourceSHA256": "98fc5757991c750ecfbfb9cfc82333f6d92d55bf1a0f6449b31f08ea4fa801f1",
+    "destinationSHA256": "98fc5757991c750ecfbfb9cfc82333f6d92d55bf1a0f6449b31f08ea4fa801f1",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/graph-pinned-owner.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/graph-pinned-owner.json",
+    "sourceSHA256": "17a0bb17e867320f489770b5ef62d21b26272d69e17cec1b5025a9fb97d06499",
+    "destinationSHA256": "17a0bb17e867320f489770b5ef62d21b26272d69e17cec1b5025a9fb97d06499",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/graph-pin-final-release.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/graph-pin-final-release.json",
+    "sourceSHA256": "a795b156d41f0096c4de0cd4fbfa1c04783e71af72be99077577b46e168df6cd",
+    "destinationSHA256": "a795b156d41f0096c4de0cd4fbfa1c04783e71af72be99077577b46e168df6cd",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/graph-pin-final-owner.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/graph-pin-final-owner.json",
+    "sourceSHA256": "b45cdaaed03301f8412d848fba9a26d5ce37daee9807ef3c27a28cbfe3c4cb78",
+    "destinationSHA256": "b45cdaaed03301f8412d848fba9a26d5ce37daee9807ef3c27a28cbfe3c4cb78",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/cache-timeline.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/cache-timeline.json",
+    "sourceSHA256": "e5f0c60e9e69b77613db8b4d5fabf356981fa9c6cbc5e65b9d03fef25dcb316e",
+    "destinationSHA256": "e5f0c60e9e69b77613db8b4d5fabf356981fa9c6cbc5e65b9d03fef25dcb316e",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/cache-high-timeline.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/cache-high-timeline.json",
+    "sourceSHA256": "761d6d231a7c771feedca90d41cfdd285a9af93bf7e8556248da9a3c8be2a603",
+    "destinationSHA256": "761d6d231a7c771feedca90d41cfdd285a9af93bf7e8556248da9a3c8be2a603",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/tide.log",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/tide.txt",
+    "sourceSHA256": "5d844c7e20b0acf2a4447584f2d404ba657f941a9a3b1a85668181a524ec749d",
+    "destinationSHA256": "0e6fada15665a62cd0e899b6885876ca60285c4bbd4ed219d768359f4a990ddc",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only; trailing horizontal whitespace on log lines removed"
+  },
+  {
+    "source": "test-results/astra-r7/tests.log",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/tests.txt",
+    "sourceSHA256": "55ab47ba32f75829ee5850dee3ace7c810940840e42fc74662e64fd71132e24e",
+    "destinationSHA256": "bcd8b8bd223e2414db249a66a32dc78721ac068a674c78a75e7839034a35a483",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/package.log",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/package.txt",
+    "sourceSHA256": "5bc23b34ae52ae87ce624f3abd89b2fa248b1d00242377a153901a530c0b3598",
+    "destinationSHA256": "28c1121a23c626219afbdbc742b9379366249859b3c2d5ffd58c128a1f5f2f1f",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/graph-tests-final.log",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/graph-tests-final.txt",
+    "sourceSHA256": "81399b59e57d8899213ccc736c7e03ef4635815c1cf071a8d057fe2f6fd4bb7e",
+    "destinationSHA256": "30c9d4b51d64ff1e06944ff6a2af649fc97eef4d9b6c0edf8a3d889ef1fd7207",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/l5-unit.log",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/l5-unit.txt",
+    "sourceSHA256": "6c67e614a2756ec0f4544ff49b32ffe884380a879305b165faf77902fa65988c",
+    "destinationSHA256": "9c70f98cbb299d39fbe2ba01f843828b655301bc96e6ab022098f52eef4cac16",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/tide/tide.json",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/tide.json",
+    "sourceSHA256": "04c8dd7ffacf2fc831b445b9be946a1060a3e1c74cb99cf4e98339df76dac032",
+    "destinationSHA256": "04c8dd7ffacf2fc831b445b9be946a1060a3e1c74cb99cf4e98339df76dac032",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/sequence.txt",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/sequence.txt",
+    "sourceSHA256": "1ad9b7b7fb487873e84d9f125e4aa8d57a35a5676526e056cb124ec0bafe61a4",
+    "destinationSHA256": "c42d1c3c1fc2309b5af7a2b49b4fc7670ea6cbacdb72eb20bc23d18e0b9b0cdc",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/runner-first.mjs",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/runner-low-executed.mjs",
+    "sourceSHA256": "a55f7f277c601185563587dbd5eb0ac6919032e877458945aa5a9e20f34acc32",
+    "destinationSHA256": "9fa0fbb288566d23ab5fa0cead4a507700895058549b5a44342742339b8f333c",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  },
+  {
+    "source": "test-results/astra-r7/runner-used.mjs",
+    "destination": "docs/coast-sample-view/astra-r7-f20-20261009/evidence/runner-long-executed.mjs",
+    "sourceSHA256": "3324ef3b379122b17bf76d03505f94cf9a67dc465a602f2c99834a9d019a63df",
+    "destinationSHA256": "22f6bf5fc996620101f4727fe80d92d5965ac70f32287125700efbac42524aa9",
+    "normalization": "UTF8 BOM removal, CRLF to LF and one trailing newline only"
+  }
+]

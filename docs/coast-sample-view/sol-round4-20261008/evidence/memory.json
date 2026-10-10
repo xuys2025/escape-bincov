@@ -1,0 +1,117 @@
+[
+  {
+    "id": "strict-full",
+    "node": "v24.19.0",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/sol-sample-boundaries.mjs"
+    ],
+    "environment": {
+      "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-round4/strict-full"
+    },
+    "started": "2026-10-08T12:10:07.930Z",
+    "finished": "2026-10-08T12:11:24.935Z",
+    "exitCode": 1,
+    "signal": null
+  },
+  {
+    "id": "heap-full-a",
+    "node": "v24.19.0",
+    "args": [
+      "scripts/coast-sample-heap.mjs"
+    ],
+    "environment": {
+      "BINCOV_HEAP_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-round4/heap-full-a",
+      "BINCOV_HEAP_KEEP": "1",
+      "BINCOV_HEAP_CYCLES": "20",
+      "BINCOV_HEAP_SNAP": "6,20",
+      "BINCOV_HEAP_ENTRY": ""
+    },
+    "started": "2026-10-08T12:11:24.936Z",
+    "finished": "2026-10-08T12:12:16.606Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "heap-full-a-retainers",
+    "node": "v24.19.0",
+    "args": [
+      "scripts/coast-heap-retainers.mjs",
+      "D:\\bincov\\pr22-runtime\\test-results\\sol-round4/heap-full-a/cycle-6.heapsnapshot",
+      "D:\\bincov\\pr22-runtime\\test-results\\sol-round4/heap-full-a/cycle-20.heapsnapshot",
+      "D:\\bincov\\pr22-runtime\\test-results\\sol-round4/heap-full-a/retainers.json"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:12:16.607Z",
+    "finished": "2026-10-08T12:12:17.002Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "heap-full-b",
+    "node": "v24.19.0",
+    "args": [
+      "scripts/coast-sample-heap.mjs"
+    ],
+    "environment": {
+      "BINCOV_HEAP_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-round4/heap-full-b",
+      "BINCOV_HEAP_KEEP": "1",
+      "BINCOV_HEAP_CYCLES": "20",
+      "BINCOV_HEAP_SNAP": "6,20",
+      "BINCOV_HEAP_ENTRY": ""
+    },
+    "started": "2026-10-08T12:12:17.002Z",
+    "finished": "2026-10-08T12:13:08.663Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "heap-full-b-retainers",
+    "node": "v24.19.0",
+    "args": [
+      "scripts/coast-heap-retainers.mjs",
+      "D:\\bincov\\pr22-runtime\\test-results\\sol-round4/heap-full-b/cycle-6.heapsnapshot",
+      "D:\\bincov\\pr22-runtime\\test-results\\sol-round4/heap-full-b/cycle-20.heapsnapshot",
+      "D:\\bincov\\pr22-runtime\\test-results\\sol-round4/heap-full-b/retainers.json"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:13:08.663Z",
+    "finished": "2026-10-08T12:13:09.053Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "heap-ordinary",
+    "node": "v24.19.0",
+    "args": [
+      "scripts/coast-sample-heap.mjs"
+    ],
+    "environment": {
+      "BINCOV_HEAP_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-round4/heap-ordinary",
+      "BINCOV_HEAP_KEEP": "1",
+      "BINCOV_HEAP_CYCLES": "20",
+      "BINCOV_HEAP_SNAP": "6,20",
+      "BINCOV_HEAP_ENTRY": "ordinary"
+    },
+    "started": "2026-10-08T12:13:09.054Z",
+    "finished": "2026-10-08T12:13:41.404Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "heap-ordinary-retainers",
+    "node": "v24.19.0",
+    "args": [
+      "scripts/coast-heap-retainers.mjs",
+      "D:\\bincov\\pr22-runtime\\test-results\\sol-round4/heap-ordinary/cycle-6.heapsnapshot",
+      "D:\\bincov\\pr22-runtime\\test-results\\sol-round4/heap-ordinary/cycle-20.heapsnapshot",
+      "D:\\bincov\\pr22-runtime\\test-results\\sol-round4/heap-ordinary/retainers.json"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:13:41.405Z",
+    "finished": "2026-10-08T12:13:41.768Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

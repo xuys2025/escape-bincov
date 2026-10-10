@@ -1,0 +1,563 @@
+{
+  "entry": "test: full layer/extract/abandon workload",
+  "memorySignoff": "partial: positive heap trend requires retainer attribution",
+  "remainingOwners": [],
+  "startedAt": "2026-10-08T11:03:18.473Z",
+  "browser": "154.0.8037.98",
+  "cycles": 20,
+  "snapshots": [
+    6,
+    20
+  ],
+  "trend": {
+    "afterWarmupMean": 32360895.6,
+    "lastFiveMean": 32673130,
+    "growthBytes": 312234.3999999985
+  },
+  "selfSize": {
+    "6": 44774476,
+    "20": 45242488,
+    "perCycle": 33429.42857142857,
+    "codePerCycle": 30628.571428571428,
+    "otherPerCycle": 2800.8571428571427
+  },
+  "tracked": {
+    "6": {
+      "_Container": 3,
+      "_Application2": 1,
+      "WebGLRenderer": 1,
+      "HTMLCanvasElement": 8,
+      "Texture3": 22,
+      "TextureSource3": 163,
+      "WebGLRenderer3": 1,
+      "_TextureSource2": 6,
+      "WebGL2RenderingContext": 4,
+      "_Sprite": 1,
+      "Container4": 8,
+      "Texture": 4,
+      "Sprite3": 3,
+      "CanvasSource": 1
+    },
+    "20": {
+      "HTMLCanvasElement": 8,
+      "Texture3": 22,
+      "TextureSource3": 163,
+      "WebGLRenderer3": 1,
+      "WebGL2RenderingContext": 4,
+      "_Container": 3,
+      "WebGLRenderer": 1,
+      "_Application2": 1,
+      "_TextureSource2": 6,
+      "Texture": 4,
+      "Sprite3": 3,
+      "_Sprite": 1,
+      "Container4": 8,
+      "CanvasSource": 1
+    }
+  },
+  "accumulated": [],
+  "sessionChars": [
+    2759,
+    2760
+  ],
+  "perCycleHeap": [
+    {
+      "cycle": 1,
+      "heap": 30975647,
+      "outcome": "death"
+    },
+    {
+      "cycle": 2,
+      "heap": 31633526,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 3,
+      "heap": 31845478,
+      "outcome": "death"
+    },
+    {
+      "cycle": 4,
+      "heap": 32026502,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 5,
+      "heap": 32164398,
+      "outcome": "death"
+    },
+    {
+      "cycle": 6,
+      "heap": 32249818,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 7,
+      "heap": 32274870,
+      "outcome": "death"
+    },
+    {
+      "cycle": 8,
+      "heap": 32332902,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 9,
+      "heap": 32461658,
+      "outcome": "death"
+    },
+    {
+      "cycle": 10,
+      "heap": 32485230,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 11,
+      "heap": 32501510,
+      "outcome": "death"
+    },
+    {
+      "cycle": 12,
+      "heap": 32537666,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 13,
+      "heap": 32563294,
+      "outcome": "death"
+    },
+    {
+      "cycle": 14,
+      "heap": 32578538,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 15,
+      "heap": 32571234,
+      "outcome": "death"
+    },
+    {
+      "cycle": 16,
+      "heap": 32615758,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 17,
+      "heap": 32650362,
+      "outcome": "death"
+    },
+    {
+      "cycle": 18,
+      "heap": 32696130,
+      "outcome": "extract"
+    },
+    {
+      "cycle": 19,
+      "heap": 32697214,
+      "outcome": "death"
+    },
+    {
+      "cycle": 20,
+      "heap": 32706186,
+      "outcome": "extract"
+    }
+  ],
+  "shaderSources": {
+    "6": {
+      "strings": 81,
+      "names": [
+        "BARREL_FS",
+        "BLOOM_FS",
+        "BLUR_HIGH_FS",
+        "BLUR_LOW_FS",
+        "BLUR_MED_FS",
+        "BOKEH_FS",
+        "CIRCLE_FS",
+        "DISPLACEMENT_FS",
+        "GLOW_FS",
+        "GRADIENT_FS",
+        "PHASER_ADD_BLEND_FS",
+        "PHASER_ADD_BLEND_FS\",",
+        "PHASER_BITMAP_MASK_FS",
+        "PHASER_BITMAP_MASK_VS",
+        "PHASER_COLORMATRIX_FS",
+        "PHASER_COPY_FS",
+        "PHASER_LIGHT_FS",
+        "PHASER_LINEAR_BLEND_FS",
+        "PHASER_MESH_FS",
+        "PHASER_MESH_VS",
+        "PHASER_MOBILE_FS",
+        "PHASER_MOBILE_VS",
+        "PHASER_MULTI_FS",
+        "PHASER_MULTI_VS",
+        "PHASER_POINTLIGHT_FS",
+        "PHASER_POINTLIGHT_VS",
+        "PHASER_POSTFX_FS",
+        "PHASER_QUAD_VS",
+        "PHASER_SINGLE_FS",
+        "PHASER_SINGLE_VS",
+        "PIXELATE_FS",
+        "SHADOW_FS",
+        "SHINE_FS",
+        "VIGNETTE_FS",
+        "WIPE_FS",
+        "batch-vertex",
+        "big-triangle-vertex",
+        "graphics-fragment",
+        "graphics-vertex"
+      ]
+    },
+    "20": {
+      "strings": 81,
+      "names": [
+        "BARREL_FS",
+        "BLOOM_FS",
+        "BLUR_HIGH_FS",
+        "BLUR_LOW_FS",
+        "BLUR_MED_FS",
+        "BOKEH_FS",
+        "CIRCLE_FS",
+        "DISPLACEMENT_FS",
+        "GLOW_FS",
+        "GRADIENT_FS",
+        "PHASER_ADD_BLEND_FS",
+        "PHASER_ADD_BLEND_FS\",",
+        "PHASER_BITMAP_MASK_FS",
+        "PHASER_BITMAP_MASK_VS",
+        "PHASER_COLORMATRIX_FS",
+        "PHASER_COPY_FS",
+        "PHASER_LIGHT_FS",
+        "PHASER_LINEAR_BLEND_FS",
+        "PHASER_MESH_FS",
+        "PHASER_MESH_VS",
+        "PHASER_MOBILE_FS",
+        "PHASER_MOBILE_VS",
+        "PHASER_MULTI_FS",
+        "PHASER_MULTI_VS",
+        "PHASER_POINTLIGHT_FS",
+        "PHASER_POINTLIGHT_VS",
+        "PHASER_POSTFX_FS",
+        "PHASER_QUAD_VS",
+        "PHASER_SINGLE_FS",
+        "PHASER_SINGLE_VS",
+        "PIXELATE_FS",
+        "SHADOW_FS",
+        "SHINE_FS",
+        "VIGNETTE_FS",
+        "WIPE_FS",
+        "batch-vertex",
+        "big-triangle-vertex",
+        "graphics-fragment",
+        "graphics-vertex"
+      ]
+    }
+  },
+  "gpuTextures": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+  ],
+  "growth": [
+    {
+      "key": "code:system / InstructionStream",
+      "dCount": 200,
+      "dSize": 247168,
+      "count": 2346,
+      "size": 2882816
+    },
+    {
+      "key": "code:system / TrustedByteArray",
+      "dCount": 434,
+      "dSize": 74552,
+      "count": 4944,
+      "size": 571576
+    },
+    {
+      "key": "native:system / WeakArrayList",
+      "dCount": 183,
+      "dSize": 31196,
+      "count": 1747,
+      "size": 181904
+    },
+    {
+      "key": "code:system / ProtectedFixedArray",
+      "dCount": 75,
+      "dSize": 25536,
+      "count": 412,
+      "size": 109928
+    },
+    {
+      "key": "code:system / FeedbackVector",
+      "dCount": 124,
+      "dSize": 18776,
+      "count": 1910,
+      "size": 318284
+    },
+    {
+      "key": "array:(object elements)",
+      "dCount": 2,
+      "dSize": 17236,
+      "count": 1489,
+      "size": 275340
+    },
+    {
+      "key": "code:system / Code",
+      "dCount": 200,
+      "dSize": 14400,
+      "count": 2346,
+      "size": 168912
+    },
+    {
+      "key": "native:LargestContentfulPaint",
+      "dCount": 32,
+      "dSize": 4352,
+      "count": 46,
+      "size": 6256
+    },
+    {
+      "key": "code:system / LoadHandler",
+      "dCount": 264,
+      "dSize": 4308,
+      "count": 4285,
+      "size": 69812
+    },
+    {
+      "key": "native:LayoutShift",
+      "dCount": 28,
+      "dSize": 4256,
+      "count": 42,
+      "size": 6384
+    },
+    {
+      "key": "object shape:system / Map",
+      "dCount": 103,
+      "dSize": 4120,
+      "count": 12677,
+      "size": 510440
+    },
+    {
+      "key": "native:PerformanceLongAnimationFrameTiming",
+      "dCount": 19,
+      "dSize": 3344,
+      "count": 30,
+      "size": 5280
+    },
+    {
+      "key": "native:InteractionContentfulPaint",
+      "dCount": 32,
+      "dSize": 3328,
+      "count": 46,
+      "size": 4784
+    },
+    {
+      "key": "native:DOMRectReadOnly",
+      "dCount": 56,
+      "dSize": 3136,
+      "count": 84,
+      "size": 4704
+    },
+    {
+      "key": "code:system / TrustedWeakFixedArray",
+      "dCount": 75,
+      "dSize": 2708,
+      "count": 412,
+      "size": 13264
+    },
+    {
+      "key": "object shape:system / DescriptorArray",
+      "dCount": 23,
+      "dSize": 2372,
+      "count": 2681,
+      "size": 388176
+    },
+    {
+      "key": "native:TaskAttributionTiming",
+      "dCount": 16,
+      "dSize": 1920,
+      "count": 28,
+      "size": 3360
+    },
+    {
+      "key": "code:system / AllocationSite",
+      "dCount": 63,
+      "dSize": 1752,
+      "count": 1184,
+      "size": 31416
+    },
+    {
+      "key": "native:PerformanceLongTaskTiming",
+      "dCount": 16,
+      "dSize": 1664,
+      "count": 28,
+      "size": 2912
+    },
+    {
+      "key": "code:system / CodeWrapper",
+      "dCount": 200,
+      "dSize": 1600,
+      "count": 4874,
+      "size": 18768
+    },
+    {
+      "key": "code:system / BytecodeArray",
+      "dCount": 8,
+      "dSize": 1472,
+      "count": 4184,
+      "size": 779088
+    },
+    {
+      "key": "native:system / ProtectedFixedArray",
+      "dCount": 75,
+      "dSize": 1160,
+      "count": 413,
+      "size": 5744
+    },
+    {
+      "key": "native:LayoutShiftAttribution",
+      "dCount": 28,
+      "dSize": 1120,
+      "count": 42,
+      "size": 1680
+    },
+    {
+      "key": "object:Object",
+      "dCount": 33,
+      "dSize": 1012,
+      "count": 7690,
+      "size": 211640
+    },
+    {
+      "key": "code:(constant elements)",
+      "dCount": 42,
+      "dSize": 956,
+      "count": 1853,
+      "size": 41400
+    },
+    {
+      "key": "native:system / SharedFunctionInfoWrapper",
+      "dCount": 75,
+      "dSize": 600,
+      "count": 412,
+      "size": 3296
+    },
+    {
+      "key": "object shape:(enum cache)",
+      "dCount": 10,
+      "dSize": 560,
+      "count": 262,
+      "size": 9056
+    },
+    {
+      "key": "code:system / WeakArrayList",
+      "dCount": 7,
+      "dSize": 556,
+      "count": 194,
+      "size": 6824
+    },
+    {
+      "key": "native:blink::HeapVectorBacking<cppgc::internal::BasicMember<blink::PerformanceEntry, c",
+      "dCount": 0,
+      "dSize": 400,
+      "count": 9,
+      "size": 864
+    },
+    {
+      "key": "native:blink::HeapVectorBacking<cppgc::internal::BasicMember<blink::TaskAttributionTimi",
+      "dCount": 16,
+      "dSize": 384,
+      "count": 28,
+      "size": 672
+    }
+  ],
+  "shrink": [
+    {
+      "key": "native:blink::NodeRareData::DataFieldWrapper<int>",
+      "dCount": -2,
+      "dSize": -48,
+      "count": 13,
+      "size": 312
+    },
+    {
+      "key": "native:blink::NodeRareData",
+      "dCount": -2,
+      "dSize": -64,
+      "count": 59,
+      "size": 2096
+    },
+    {
+      "key": "native:<div data-prompt=\"\" class=\"cs-prompt\" style=\"transform: translate(665px, 300px) ",
+      "dCount": -1,
+      "dSize": -120,
+      "count": 0,
+      "size": 0
+    },
+    {
+      "key": "array:(object properties)",
+      "dCount": -1,
+      "dSize": -128,
+      "count": 383,
+      "size": 238516
+    },
+    {
+      "key": "native:blink::TextRecord",
+      "dCount": -1,
+      "dSize": -152,
+      "count": 9,
+      "size": 1368
+    },
+    {
+      "key": "code:system / UncompiledDataWithoutPreparseData",
+      "dCount": -8,
+      "dSize": -160,
+      "count": 7733,
+      "size": 154660
+    },
+    {
+      "key": "code:system / WeakFixedArray",
+      "dCount": -10,
+      "dSize": -312,
+      "count": 1491,
+      "size": 95748
+    },
+    {
+      "key": "code:(object elements)",
+      "dCount": -42,
+      "dSize": -956,
+      "count": 28,
+      "size": 844
+    },
+    {
+      "key": "native:blink::HeapHashTableBacking<blink::HashTable<cppgc::internal::BasicMember<const ",
+      "dCount": 0,
+      "dSize": -2048,
+      "count": 25,
+      "size": 12680
+    },
+    {
+      "key": "native:blink::HeapHashTableBacking<blink::HashTable<cppgc::internal::BasicMember<blink:",
+      "dCount": 0,
+      "dSize": -6144,
+      "count": 372,
+      "size": 96672
+    }
+  ],
+  "errors": [],
+  "requests": []
+}

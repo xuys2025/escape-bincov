@@ -1,0 +1,282 @@
+[
+  {
+    "id": "regression-browser",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:browser"
+    ],
+    "environment": {},
+    "started": "2026-10-08T11:59:25.732Z",
+    "finished": "2026-10-08T12:00:05.470Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-desktop-input",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:desktop-input"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:00:05.471Z",
+    "finished": "2026-10-08T12:00:28.378Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-save-browser",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:save-browser"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:00:28.378Z",
+    "finished": "2026-10-08T12:00:41.464Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-buildings",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:buildings"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:00:41.464Z",
+    "finished": "2026-10-08T12:00:54.051Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-mobile",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:mobile"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:00:54.052Z",
+    "finished": "2026-10-08T12:01:13.554Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-mobile-ux",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:mobile-ux"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:01:13.555Z",
+    "finished": "2026-10-08T12:02:23.469Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-portable",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:portable"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:02:23.470Z",
+    "finished": "2026-10-08T12:02:28.830Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-ui",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:ui"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:02:28.831Z",
+    "finished": "2026-10-08T12:02:36.839Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-loot",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:loot"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:02:36.839Z",
+    "finished": "2026-10-08T12:03:27.696Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-expansion",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:expansion"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:03:27.696Z",
+    "finished": "2026-10-08T12:03:36.768Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-qol-expansion",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:qol-expansion"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:03:36.769Z",
+    "finished": "2026-10-08T12:03:41.385Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-systems",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:systems"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:03:41.385Z",
+    "finished": "2026-10-08T12:04:17.214Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-art",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:art"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:04:17.214Z",
+    "finished": "2026-10-08T12:04:30.424Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-tactical",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:tactical"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:04:30.425Z",
+    "finished": "2026-10-08T12:04:49.438Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-title",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:title"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:04:49.438Z",
+    "finished": "2026-10-08T12:05:46.832Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-title-water",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:title-water"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:05:46.833Z",
+    "finished": "2026-10-08T12:05:56.696Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-mall-passages",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:mall-passages"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:05:56.697Z",
+    "finished": "2026-10-08T12:08:43.586Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-mall-landing",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:mall-landing"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:08:43.587Z",
+    "finished": "2026-10-08T12:08:51.578Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-qol",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:qol"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:08:51.579Z",
+    "finished": "2026-10-08T12:09:12.940Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-loot-target",
+    "node": "v24.19.0",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:loot-target"
+    ],
+    "environment": {},
+    "started": "2026-10-08T12:09:12.941Z",
+    "finished": "2026-10-08T12:09:32.326Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

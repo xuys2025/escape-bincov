@@ -1,0 +1,77 @@
+{
+  "note": "Working-tree bytes and filtered Git blob IDs of implementation/test files used for the final package; line-ending filters can make their raw bytes differ from committed text. Final containing Git commit identifies delivery.",
+  "files": [
+    {
+      "file": "scripts/coast-sample-test.mjs",
+      "bytes": 88753,
+      "sha256": "abd53271119da0960b1ce17e47e2f5f1122af5149f21da248f1ec2e36202e1a2",
+      "gitBlob": "934c74e3e0a6d276221659dffb513081ce82557a"
+    },
+    {
+      "file": "src/coast-view/host.ts",
+      "bytes": 50505,
+      "sha256": "09d6fcee4cb67cceede85661009ee26abfe5e996f56068cd6f3a5889a3122823",
+      "gitBlob": "e489cfb084b434c3a04401ec459c8202eb4d5585"
+    },
+    {
+      "file": "src/expansion-state.ts",
+      "bytes": 25569,
+      "sha256": "904dbfc10164827ae549f327b748c5f3dc447c9f63f360658c3f102a841b9632",
+      "gitBlob": "d4ca5553f3ccd2030eb3af88e81d0b198cf3612f"
+    },
+    {
+      "file": "src/raid-runtime/contract.ts",
+      "bytes": 8016,
+      "sha256": "af8e812a09ff301bb28a40ab6d644df900fd59118239eb7b1e633ed4c6426109",
+      "gitBlob": "321dfd1582b5d17a8e5d276ea7a3ec672f45be87"
+    },
+    {
+      "file": "src/raid-runtime/presentation.ts",
+      "bytes": 8960,
+      "sha256": "671f79216bcb07bc5c09407b7ebbe836b88511b06be379e9197b6ef21d5df965",
+      "gitBlob": "8fd4ad67ec625138d20f278d79aa0c3972abfeca"
+    },
+    {
+      "file": "src/raid-runtime/runtime.ts",
+      "bytes": 67926,
+      "sha256": "7cf6067e6fcd9812d53ad82ab36ccddac0f6826f212a7e867d375362293cbcb8",
+      "gitBlob": "5bdb0230215cbf9c8a83b12cfcc8787695dde673"
+    },
+    {
+      "file": "src/raid-runtime/test-support.ts",
+      "bytes": 4168,
+      "sha256": "53c34bc25fecb9dc3ffde0ad491a6292b1c36dd499ca12a4a1abd0dfbdd94d10",
+      "gitBlob": "f23d6045d47fe8146d13e87589de3ad249f4c6d2"
+    },
+    {
+      "file": "src/rpg.ts",
+      "bytes": 9999,
+      "sha256": "e848ea36c65e2c597f5cae3dab5d72705d0f99d8dd9dc542f55a145e7b5e7472",
+      "gitBlob": "0c86336dc89abde6a7fb59fd7618509c9cd90ef9"
+    },
+    {
+      "file": "src/session.ts",
+      "bytes": 22776,
+      "sha256": "e9a9974ed149ca913c2e98edf044616acd90e00e110a422218d7941940113c18",
+      "gitBlob": "b1dedb87f4ee079be069d11372d31cab54cd1ef3"
+    },
+    {
+      "file": "src/spatial.ts",
+      "bytes": 9558,
+      "sha256": "d809ac9a1f793126e8bfe0e52283c1d720ce811714f95aaf1a0cb320d159f477",
+      "gitBlob": "f8ad1c68d83726e01198eab0b8ce7d16e91fa192"
+    },
+    {
+      "file": "tests/raid-runtime.test.ts",
+      "bytes": 26407,
+      "sha256": "acfa663285d00210c4a43628fe196e870ea6b26fb5b843b9dda86462606569f7",
+      "gitBlob": "85ca7e6a248bb610693bc9acf8fac727282dc365"
+    },
+    {
+      "file": "tests/raid-runtime-r6.test.ts",
+      "bytes": 11281,
+      "sha256": "c758a10ce6d27c105f4119c6566044374accbcaf0ebf3321df1ab01e34de1b3b",
+      "gitBlob": "336959c1775b56a054dcc1671f9c6ef77ad30645"
+    }
+  ]
+}

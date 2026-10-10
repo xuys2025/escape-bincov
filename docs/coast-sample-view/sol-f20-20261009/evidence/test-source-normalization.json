@@ -1,0 +1,34 @@
+[
+  {
+    "file": "scripts/coast-sample-test.mjs",
+    "executedSHA256": "0bf303d260afb6b64a50c255a4dfc87123d5422b9de7456307fa1f0f5b29f061",
+    "deliverySHA256": "0bf303d260afb6b64a50c255a4dfc87123d5422b9de7456307fa1f0f5b29f061",
+    "bytesBefore": 106993,
+    "bytesAfter": 106993,
+    "change": "CRLF to LF only; no token or assertion change"
+  },
+  {
+    "file": "scripts/pixi-managed-gate.mjs",
+    "executedSHA256": "07efb8c09b5fa5a061436a942e61dec868834821d6c66cc8a58d67db283d5fb5",
+    "deliverySHA256": "0cae5c0da7e22208651c46e249be633c8cca0fcfa28af32be9a0eaf516ea973a",
+    "bytesBefore": 3523,
+    "bytesAfter": 3522,
+    "change": "CRLF to LF only; no token or assertion change"
+  },
+  {
+    "file": "scripts/sol-f20-gates.mjs",
+    "executedSHA256": "bab56edf6a0cf5a011a82ead4f0a4878833040a339349dea37f964283a68c945",
+    "deliverySHA256": "0ecebfbd98bf7c78d685974dd88b6fd127111fe92c38d1c7f6d0cf2f28957d41",
+    "bytesBefore": 7353,
+    "bytesAfter": 7352,
+    "change": "CRLF to LF only; no token or assertion change"
+  },
+  {
+    "file": "scripts/sol-f20-snapshot.mjs",
+    "executedSHA256": "13ba14363e5cdce71f879868853d4d888f5663c0904e816e156a782d6cb1a07d",
+    "deliverySHA256": "ba711e96f690628b39e3bca1d07f1752810347d8bd9a80f1807940177669935d",
+    "bytesBefore": 5406,
+    "bytesAfter": 5405,
+    "change": "CRLF to LF only; no token or assertion change"
+  }
+]

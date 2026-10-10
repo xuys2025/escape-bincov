@@ -1,0 +1,83 @@
+[
+  {
+    "id": "audio-levels",
+    "args": [
+      "scripts/sol-r6-audio-controls.mjs"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:31:36.721Z",
+    "finished": "2026-10-08T18:32:03.735Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "original-current",
+    "args": [
+      "D:/bincov/工作标准/缺陷登记/音频服务丢失恢复期提示音-20261008/repro.mjs",
+      "D:\\bincov\\pr22-runtime/dist/index.html"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:32:03.735Z",
+    "finished": "2026-10-08T18:32:10.673Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "original-old",
+    "args": [
+      "D:/bincov/工作标准/缺陷登记/音频服务丢失恢复期提示音-20261008/repro.mjs",
+      "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/1c1c935.html"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:32:10.674Z",
+    "finished": "2026-10-08T18:32:17.566Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "audio-negative",
+    "args": [
+      "scripts/coast-audio-test.mjs"
+    ],
+    "environment": {
+      "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/audio-negative",
+      "BINCOV_SAMPLE_HTML": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/audio-controls/death-muted.html"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:32:17.567Z",
+    "finished": "2026-10-08T18:33:30.853Z",
+    "exitCode": 1,
+    "signal": null
+  },
+  {
+    "id": "player-death",
+    "args": [
+      "scripts/opus-player-death-probe.mjs"
+    ],
+    "environment": {
+      "BINCOV_PLAYER_DEATH_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/player"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:33:30.854Z",
+    "finished": "2026-10-08T18:33:36.991Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "save-placement",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/sol-r6-save-test.mjs"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:33:36.991Z",
+    "finished": "2026-10-08T18:35:03.375Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

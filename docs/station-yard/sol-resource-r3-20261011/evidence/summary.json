@@ -1,0 +1,381 @@
+{
+  "modes": {
+    "remount": {
+      "heap": {
+        "min": 23395400,
+        "max": 25677188,
+        "first": 24413328,
+        "last": 25128292,
+        "baseline": 23082980,
+        "endpointDelta": 2045312,
+        "mean6to10": 24521458.4,
+        "mean56to60": 24429312,
+        "meanDelta": -92146.39999999851,
+        "slopeBytesPerRound": 5139.428285634897,
+        "last30Slope": -3372.95127919911,
+        "units": "bytes / CDP Performance JSHeapUsedSize; not performance.memory or GPU memory"
+      },
+      "resources": {
+        "scene": {
+          "min": 589,
+          "max": 589,
+          "first": 589,
+          "last": 589
+        },
+        "wallFrameGroups": {
+          "min": 197,
+          "max": 197,
+          "first": 197,
+          "last": 197
+        },
+        "wallFrames": {
+          "min": 4136,
+          "max": 4136,
+          "first": 4136,
+          "last": 4136
+        },
+        "gpuTextures": {
+          "min": 661,
+          "max": 661,
+          "first": 661,
+          "last": 661
+        },
+        "graphics.live": {
+          "min": 9,
+          "max": 9,
+          "first": 9,
+          "last": 9
+        },
+        "graphics.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "graphicsContext.live": {
+          "min": 9,
+          "max": 9,
+          "first": 9,
+          "last": 9
+        },
+        "graphicsContext.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "glBuffer.live": {
+          "min": 28,
+          "max": 28,
+          "first": 28,
+          "last": 28
+        },
+        "glBuffer.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "glTexture.live": {
+          "min": 661,
+          "max": 661,
+          "first": 661,
+          "last": 661
+        },
+        "glTexture.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "glGeometry.live": {
+          "min": 14,
+          "max": 14,
+          "first": 14,
+          "last": 14
+        },
+        "glGeometry.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "tilingSprite.live": {
+          "min": 2,
+          "max": 2,
+          "first": 2,
+          "last": 2
+        },
+        "tilingSprite.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        }
+      },
+      "checks": {
+        "allSameSceneKeys": true,
+        "allSameRenderer": true,
+        "allRetiredHostsCollected": true,
+        "allTrackedResourcesCollected": true,
+        "noPageOrFrameErrors": true,
+        "noExternalRequests": true
+      },
+      "status": "BOUNDED_CHECKS_PASS_HEAP_PENDING",
+      "strictFailures": 0,
+      "ownershipFailures": 0
+    },
+    "shared": {
+      "heap": {
+        "min": 25641428,
+        "max": 28797348,
+        "first": 25641428,
+        "last": 28146728,
+        "baseline": 27272132,
+        "endpointDelta": 874596,
+        "mean6to10": 27504100,
+        "mean56to60": 27976289.6,
+        "meanDelta": 472189.6000000015,
+        "slopeBytesPerRound": 14715.346596276744,
+        "last30Slope": 7987.357508342603,
+        "units": "bytes / CDP Performance JSHeapUsedSize; not performance.memory or GPU memory"
+      },
+      "resources": {
+        "scene": {
+          "min": 589,
+          "max": 589,
+          "first": 589,
+          "last": 589
+        },
+        "wallFrameGroups": {
+          "min": 197,
+          "max": 197,
+          "first": 197,
+          "last": 197
+        },
+        "wallFrames": {
+          "min": 4136,
+          "max": 4136,
+          "first": 4136,
+          "last": 4136
+        },
+        "gpuTextures": {
+          "min": 661,
+          "max": 661,
+          "first": 661,
+          "last": 661
+        },
+        "graphics.live": {
+          "min": 9,
+          "max": 9,
+          "first": 9,
+          "last": 9
+        },
+        "graphics.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "graphicsContext.live": {
+          "min": 9,
+          "max": 9,
+          "first": 9,
+          "last": 9
+        },
+        "graphicsContext.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "glBuffer.live": {
+          "min": 31,
+          "max": 31,
+          "first": 31,
+          "last": 31
+        },
+        "glBuffer.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "glTexture.live": {
+          "min": 661,
+          "max": 661,
+          "first": 661,
+          "last": 661
+        },
+        "glTexture.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "glGeometry.live": {
+          "min": 15,
+          "max": 15,
+          "first": 15,
+          "last": 15
+        },
+        "glGeometry.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "tilingSprite.live": {
+          "min": 2,
+          "max": 2,
+          "first": 2,
+          "last": 2
+        },
+        "tilingSprite.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        }
+      },
+      "checks": {
+        "allSameSceneKeys": true,
+        "allSameRenderer": true,
+        "allRetiredHostsCollected": true,
+        "allTrackedResourcesCollected": true,
+        "noPageOrFrameErrors": true,
+        "noExternalRequests": true,
+        "sameQuadIdentity": true,
+        "sameQuadBuffers": true
+      },
+      "status": "BOUNDED_CHECKS_PASS_HEAP_PENDING",
+      "strictFailures": 0,
+      "ownershipFailures": 0
+    },
+    "context": {
+      "heap": {
+        "min": 22517108,
+        "max": 25167012,
+        "first": 22960856,
+        "last": 23841856,
+        "baseline": 24847564,
+        "endpointDelta": -1005708,
+        "mean6to10": 23950117.6,
+        "mean56to60": 23516015.2,
+        "meanDelta": -434102.40000000224,
+        "slopeBytesPerRound": -12839.466963045288,
+        "last30Slope": -9580.579310344827,
+        "units": "bytes / CDP Performance JSHeapUsedSize; not performance.memory or GPU memory"
+      },
+      "resources": {
+        "scene": {
+          "min": 589,
+          "max": 589,
+          "first": 589,
+          "last": 589
+        },
+        "wallFrameGroups": {
+          "min": 197,
+          "max": 197,
+          "first": 197,
+          "last": 197
+        },
+        "wallFrames": {
+          "min": 4136,
+          "max": 4136,
+          "first": 4136,
+          "last": 4136
+        },
+        "gpuTextures": {
+          "min": 661,
+          "max": 661,
+          "first": 661,
+          "last": 661
+        },
+        "graphics.live": {
+          "min": 9,
+          "max": 9,
+          "first": 9,
+          "last": 9
+        },
+        "graphics.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "graphicsContext.live": {
+          "min": 9,
+          "max": 9,
+          "first": 9,
+          "last": 9
+        },
+        "graphicsContext.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "glBuffer.live": {
+          "min": 28,
+          "max": 28,
+          "first": 28,
+          "last": 28
+        },
+        "glBuffer.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "glTexture.live": {
+          "min": 661,
+          "max": 661,
+          "first": 661,
+          "last": 661
+        },
+        "glTexture.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "glGeometry.live": {
+          "min": 14,
+          "max": 14,
+          "first": 14,
+          "last": 14
+        },
+        "glGeometry.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        },
+        "tilingSprite.live": {
+          "min": 2,
+          "max": 2,
+          "first": 2,
+          "last": 2
+        },
+        "tilingSprite.empty": {
+          "min": 0,
+          "max": 0,
+          "first": 0,
+          "last": 0
+        }
+      },
+      "checks": {
+        "allSameSceneKeys": true,
+        "allSameRenderer": true,
+        "allRetiredHostsCollected": null,
+        "allTrackedResourcesCollected": null,
+        "noPageOrFrameErrors": true,
+        "noExternalRequests": true
+      },
+      "status": "BOUNDED_CHECKS_PASS_HEAP_PENDING",
+      "strictFailures": 0,
+      "ownershipFailures": 0
+    }
+  }
+}

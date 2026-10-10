@@ -1,0 +1,292 @@
+{
+  "startedAt": "2026-10-09T04:38:59.030Z",
+  "method": "Output tap on the destination; onsets in a high-emphasis band (first difference) above 2.5x the trailing median; no autoplay override.",
+  "checks": [
+    {
+      "id": "A1 first entry: the AudioContext runs after the first click, ambience reaches the output",
+      "status": "passed",
+      "detail": {
+        "states": [
+          "running"
+        ],
+        "blocks": 95,
+        "peak": 0.0524,
+        "rmsMedian": 0.0144
+      }
+    },
+    {
+      "id": "A2 gunshots: every player shot is followed by a real onset (peak well above ambience)",
+      "status": "passed",
+      "detail": {
+        "fired": 3,
+        "sounded": 3,
+        "onsets": 4,
+        "blocks": 253,
+        "peak": 0.2347,
+        "rmsMedian": 0.011
+      }
+    },
+    {
+      "id": "A3 footsteps: walking 3 s gives periodic onsets; standing still 2 s gives none",
+      "status": "passed",
+      "detail": {
+        "still": 1,
+        "walking": 8,
+        "medianGapMs": 427
+      }
+    },
+    {
+      "id": "A4 melee: knife swings are audible",
+      "status": "passed",
+      "detail": {
+        "swings": 2,
+        "blocks": 189,
+        "peak": 0.0994,
+        "rmsMedian": 0.0098
+      }
+    },
+    {
+      "id": "A5 pickup: picking up ground loot and taking an item from a crate are audible",
+      "status": "passed",
+      "detail": {
+        "ground": [
+          {
+            "type": "looted",
+            "t": 14967,
+            "onset": true
+          }
+        ],
+        "crate": [
+          {
+            "type": "looted",
+            "t": 16523,
+            "onset": true
+          }
+        ],
+        "groundPeak": 0.0546,
+        "cratePeak": 0.0563
+      }
+    },
+    {
+      "id": "A6 hits and enemy fire: an adjacent scav and a salt rifleman attack; every hit on the player and every enemy shot is audible",
+      "status": "passed",
+      "detail": {
+        "hurt": 6,
+        "enemyShots": 3,
+        "hp": 29,
+        "blocks": 351,
+        "peak": 0.3045,
+        "rmsMedian": 0.0131,
+        "bleeding": true,
+        "bleedTicks": 294,
+        "bleedingOnsets": 0,
+        "bleedingPeak": 0.0824
+      }
+    },
+    {
+      "id": "A7 heal: Q uses a supply audibly",
+      "status": "passed",
+      "detail": {
+        "heals": [
+          3,
+          2
+        ],
+        "onsets": 3,
+        "blocks": 115,
+        "peak": 0.0803,
+        "rmsMedian": 0.0084
+      }
+    },
+    {
+      "id": "B1 Esc pause suspends the output (no rendered blocks); 继续 restores it and shots are audible again",
+      "status": "passed",
+      "detail": {
+        "paused": {
+          "blocksWhilePaused": 0,
+          "states": [
+            "suspended"
+          ],
+          "peak": 0
+        },
+        "after": {
+          "fired": 2,
+          "sounded": 2,
+          "onsets": 3,
+          "blocks": 189,
+          "peak": 0.267,
+          "rmsMedian": 0.0142
+        }
+      }
+    },
+    {
+      "id": "B2 switching to another tab pauses and silences; coming back and pressing 继续 brings the sound back",
+      "status": "passed",
+      "detail": {
+        "method": "window blur + visibilitychange (headless kept the page visible)",
+        "real": {
+          "hidden": false,
+          "focus": true,
+          "panel": null
+        },
+        "away": {
+          "blocksWhilePaused": 0,
+          "states": [
+            "suspended"
+          ],
+          "peak": 0
+        },
+        "back": {
+          "blocksWhilePaused": 0,
+          "states": [
+            "suspended"
+          ],
+          "peak": 0
+        },
+        "after": {
+          "fired": 2,
+          "sounded": 2,
+          "onsets": 3,
+          "blocks": 189,
+          "peak": 0.2012,
+          "rmsMedian": 0.014
+        }
+      }
+    },
+    {
+      "id": "C1 volume from the pause panel: 0% silences shots and ambience; 100% is louder than the 35% default; the value persists",
+      "status": "passed",
+      "detail": {
+        "base": {
+          "fired": 1,
+          "sounded": 1,
+          "onsets": 1,
+          "blocks": 190,
+          "peak": 0.2447,
+          "rmsMedian": 0.0121
+        },
+        "zero": {
+          "fired": 2,
+          "sounded": 0,
+          "onsets": 0,
+          "blocks": 190,
+          "peak": 0,
+          "rmsMedian": 0
+        },
+        "loud": {
+          "fired": 2,
+          "sounded": 2,
+          "onsets": 2,
+          "blocks": 189,
+          "peak": 0.654,
+          "rmsMedian": 0.0403
+        },
+        "saved": 1
+      }
+    },
+    {
+      "id": "D1 refresh: the run resumes paused and silent; after 进入 and 继续 the sound is back at the saved volume",
+      "status": "passed",
+      "detail": {
+        "label": "100%",
+        "paused": {
+          "blocksWhilePaused": 0,
+          "states": [
+            "suspended"
+          ],
+          "peak": 0
+        },
+        "after": {
+          "fired": 2,
+          "sounded": 2,
+          "onsets": 2,
+          "blocks": 190,
+          "peak": 0.7121,
+          "rmsMedian": 0.0409
+        },
+        "back": "35%"
+      }
+    },
+    {
+      "id": "E1 run 1 extracts: the result screen plays the extraction chime",
+      "status": "passed",
+      "detail": {
+        "outcome": "extract",
+        "noteRise": [
+          4.4,
+          3.5,
+          4.5,
+          5.6
+        ],
+        "chime": true,
+        "cuePeak": 0.0501,
+        "states": [
+          "running"
+        ]
+      }
+    },
+    {
+      "id": "E2 run 2: deploy again, shots audible, abandon from the pause menu: the death cue still plays",
+      "status": "passed",
+      "detail": {
+        "shots": {
+          "fired": 2,
+          "sounded": 2,
+          "onsets": 4,
+          "blocks": 188,
+          "peak": 0.2224,
+          "rmsMedian": 0.0131
+        },
+        "cueOnsets": 0,
+        "cuePeak": 0.1384,
+        "ambiencePeak": 0.0625,
+        "blocks": 170,
+        "peak": 0.1384,
+        "rmsMedian": 0.0145,
+        "states": [
+          "running"
+        ]
+      }
+    },
+    {
+      "id": "E3 run 3: deploy again, ambience, shots and footsteps audible, extract with the chime",
+      "status": "passed",
+      "detail": {
+        "ambience": {
+          "blocks": 76,
+          "peak": 0.0329,
+          "rmsMedian": 0.0077
+        },
+        "shots": {
+          "fired": 2,
+          "sounded": 2,
+          "onsets": 2,
+          "blocks": 189,
+          "peak": 0.0879,
+          "rmsMedian": 0.0068
+        },
+        "steps": 5,
+        "result": {
+          "outcome": "extract",
+          "noteRise": [
+            5.1,
+            5.4,
+            5.7,
+            6
+          ],
+          "chime": true,
+          "cuePeak": 0.0445,
+          "states": [
+            "running"
+          ]
+        },
+        "contexts": 1
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "finishedAt": "2026-10-09T04:40:11.999Z",
+  "passed": 14,
+  "failed": 0
+}

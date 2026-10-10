@@ -1,0 +1,902 @@
+{
+  "browser": "154.0.8037.98",
+  "startedAt": "2026-10-09T19:17:32.394Z",
+  "methodology": "Packaged offline build at https://station.test/ (routed, no network). Real session/localStorage, real DOM input in headless Chrome; phone sizes are viewport/touch emulation. ?test=1 fixtures: player placement, save seeding through SaveSession transactions while the yard is closed, storage fault injection, production time shortening. No mock Runtime and no simulated raid result.",
+  "steps": [
+    {
+      "name": "A1 普通入口（无 ?test=1）：标题“进入”直接进院子，无测试接口，存档升级到成长 v2",
+      "status": "passed",
+      "detail": "院子挂载，#frame 隐藏；存档 v4，扩展 v2，现金 700",
+      "ms": 3076
+    },
+    {
+      "name": "A4 院子画面启动失败（WebGL 不可用）：自动退回旧页签界面并提示，存档不受影响",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: no-WebGL whitelist must contain exactly one exact expected error\n+ actual - expected\n\n  [\n+   '[console] Error: Station yard needs WebGL (got canvas).\\n' +\n+     '    at lm (https://station.test/?test=1:9154:35048)'\n-   '[console] Error: Station yard needs WebGL (got canvas).'\n  ]\n\n    at assertFallback (file:///D:/bincov/hideout-runtime/scripts/station-acceptance-gates.mjs:10:10)\n    at file:///D:/bincov/hideout-runtime/scripts/station-browser-test.mjs:168:22\n    at async step (file:///D:/bincov/hideout-runtime/scripts/station-browser-test.mjs:86:18)\n    at async file:///D:/bincov/hideout-runtime/scripts/station-browser-test.mjs:156:3",
+      "ms": 1307
+    },
+    {
+      "name": "C1 整备：Tab 打开，拖动、按 R 旋转、卸下后拖回武器栏、双击回仓库",
+      "status": "passed",
+      "detail": "布料→背包，净水旋转，手枪卸下再拖回武器栏，罐头双击回仓库",
+      "ms": 3520
+    },
+    {
+      "name": "C2 整备：拆分一半、放入安全箱、使用补给（真实 Runtime 接口）",
+      "status": "passed",
+      "detail": "9mm 32 拆成 16 + 16；绷带进安全箱；罐头未使用（Runtime 拒绝，见提示）",
+      "ms": 1043
+    },
+    {
+      "name": "C3 补给成功：低饱食真实使用罐头，消耗一件并按规则恢复35",
+      "status": "passed",
+      "detail": {
+        "before": {
+          "qty": 2,
+          "satiety": 20
+        },
+        "after": {
+          "qty": 1,
+          "satiety": 55.0236
+        }
+      },
+      "ms": 2614
+    },
+    {
+      "name": "E4 训练：真实有效120秒、规则奖励、静止/面板/后台暂停不计时",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\ntrue !== false\n\n    at file:///D:/bincov/hideout-runtime/scripts/station-browser-test.mjs:336:42\n    at async pause (file:///D:/bincov/hideout-runtime/scripts/station-browser-test.mjs:326:7)\n    at async file:///D:/bincov/hideout-runtime/scripts/station-browser-test.mjs:334:5\n    at async step (file:///D:/bincov/hideout-runtime/scripts/station-browser-test.mjs:86:18)\n    at async file:///D:/bincov/hideout-runtime/scripts/station-browser-test.mjs:310:3",
+      "ms": 6581
+    },
+    {
+      "name": "F5 真实购物存档失败：原字节/身体/队列/rev不变，重试不下单，再结算仅一次",
+      "status": "passed",
+      "detail": {
+        "cashBefore": 6000,
+        "cashAfter": 5916,
+        "revBefore": 4,
+        "revFailed": 4
+      },
+      "ms": 4557
+    },
+    {
+      "name": "G1 旧页签备用入口：按 0 回到页签界面（Phaser 宿主），“回到院子”再进院子",
+      "status": "passed",
+      "detail": "页签界面运行 Hideout 场景，院子已卸载；“回到院子”按钮重新挂载院子，Phaser 循环休眠",
+      "ms": 3217
+    },
+    {
+      "name": "H12 素材实景：33张逐项覆盖，四NPC工作/近身/说话、遮挡与供电",
+      "status": "passed",
+      "detail": {
+        "delivered": 33,
+        "selected": 33,
+        "missing": []
+      },
+      "ms": 30345
+    }
+  ],
+  "errors": [
+    "[console] Error: Station yard needs WebGL (got canvas).\n    at lm (https://station.test/?test=1:9154:35048)"
+  ],
+  "external": [],
+  "frameAudit": [],
+  "expectedLogs": [],
+  "coverage": {
+    "supplyRefused": {
+      "before": {
+        "rev": 11,
+        "profile": {
+          "version": 2,
+          "cash": 6000,
+          "stash": {
+            "w": 10,
+            "h": 6,
+            "items": [
+              {
+                "uid": "bc-mv1ckuiz-4",
+                "id": "medkit",
+                "qty": 1,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-5",
+                "id": "ammo9",
+                "qty": 24,
+                "x": 2,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-6",
+                "id": "scrap",
+                "qty": 5,
+                "x": 3,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-7",
+                "id": "wire",
+                "qty": 5,
+                "x": 4,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-8",
+                "id": "fuse",
+                "qty": 3,
+                "x": 5,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-a",
+                "id": "watch",
+                "qty": 1,
+                "x": 7,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-c",
+                "id": "scrap",
+                "qty": 3,
+                "x": 8,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-d",
+                "id": "bandage",
+                "qty": 2,
+                "x": 9,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckx2a-c",
+                "id": "food",
+                "qty": 2,
+                "x": 6,
+                "y": 0
+              }
+            ]
+          },
+          "bag": {
+            "w": 6,
+            "h": 5,
+            "items": [
+              {
+                "uid": "bc-mv1ckuiz-1",
+                "id": "ammo9",
+                "qty": 16,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-9",
+                "id": "cloth",
+                "qty": 4,
+                "x": 4,
+                "y": 2
+              },
+              {
+                "uid": "bc-mv1ckuiz-3",
+                "id": "water",
+                "qty": 1,
+                "x": 3,
+                "y": 3,
+                "rotated": true
+              },
+              {
+                "uid": "bc-mv1ckxd7-d",
+                "id": "ammo9",
+                "qty": 16,
+                "x": 2,
+                "y": 0
+              }
+            ]
+          },
+          "safe": {
+            "w": 2,
+            "h": 2,
+            "items": [
+              {
+                "uid": "bc-mv1ckxmm-e",
+                "id": "bandage",
+                "qty": 2,
+                "x": 0,
+                "y": 0
+              }
+            ]
+          },
+          "equipment": {
+            "weapon": "pistol",
+            "relief": false,
+            "ammo": 0,
+            "ammoRelief": 0
+          },
+          "quests": {
+            "repair": true,
+            "sample": false,
+            "ledger": false
+          },
+          "upgraded": false,
+          "settings": {
+            "volume": 0.35
+          },
+          "stats": {
+            "runs": 0,
+            "extracts": 0,
+            "kills": 0
+          },
+          "activeRun": null
+        },
+        "base": {
+          "facilities": {
+            "rest": 0,
+            "medical": 0,
+            "training": 0,
+            "workbench": 0,
+            "blackmarket": 0
+          },
+          "queue": [],
+          "completed": [],
+          "nextBatch": 1,
+          "cursor": 1791573460798,
+          "location": "base",
+          "restSeconds": 3.096,
+          "energizedGranted": false,
+          "extractedPearl": false,
+          "training": {
+            "startedAt": 1791573457702,
+            "quantity": 0,
+            "credited": {
+              "strength": 0,
+              "constitution": 0,
+              "technique": 0
+            },
+            "activeSeconds": 0,
+            "attribute": null,
+            "windowLeft": 596.573
+          }
+        },
+        "body": {
+          "hp": 100,
+          "stamina": 100,
+          "mental": 100,
+          "water": 100,
+          "satiety": 100,
+          "pollution": 0,
+          "bleeding": false,
+          "exhausted": false,
+          "effects": [],
+          "treatment": {
+            "bleeding": 0,
+            "pain": 0,
+            "injectionFatigue": 0
+          },
+          "luckEffect": 0,
+          "hpMax": 100,
+          "staminaMax": 100,
+          "carry": 24,
+          "attributes": {
+            "strength": {
+              "base": 10,
+              "effective": 10,
+              "progress": 0
+            },
+            "constitution": {
+              "base": 10,
+              "effective": 10,
+              "progress": 0
+            },
+            "technique": {
+              "base": 10,
+              "effective": 10,
+              "progress": 0
+            }
+          }
+        },
+        "power": "restored",
+        "storage": {
+          "ok": true,
+          "conflict": false,
+          "pendingSettlement": false,
+          "pendingBase": false,
+          "upgradeRequired": false
+        },
+        "day": 1,
+        "phase": "hideout",
+        "arrival": null
+      },
+      "after": {
+        "rev": 11,
+        "profile": {
+          "version": 2,
+          "cash": 6000,
+          "stash": {
+            "w": 10,
+            "h": 6,
+            "items": [
+              {
+                "uid": "bc-mv1ckuiz-4",
+                "id": "medkit",
+                "qty": 1,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-5",
+                "id": "ammo9",
+                "qty": 24,
+                "x": 2,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-6",
+                "id": "scrap",
+                "qty": 5,
+                "x": 3,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-7",
+                "id": "wire",
+                "qty": 5,
+                "x": 4,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-8",
+                "id": "fuse",
+                "qty": 3,
+                "x": 5,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-a",
+                "id": "watch",
+                "qty": 1,
+                "x": 7,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-c",
+                "id": "scrap",
+                "qty": 3,
+                "x": 8,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-d",
+                "id": "bandage",
+                "qty": 2,
+                "x": 9,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckx2a-c",
+                "id": "food",
+                "qty": 2,
+                "x": 6,
+                "y": 0
+              }
+            ]
+          },
+          "bag": {
+            "w": 6,
+            "h": 5,
+            "items": [
+              {
+                "uid": "bc-mv1ckuiz-1",
+                "id": "ammo9",
+                "qty": 16,
+                "x": 0,
+                "y": 0
+              },
+              {
+                "uid": "bc-mv1ckuiz-9",
+                "id": "cloth",
+                "qty": 4,
+                "x": 4,
+                "y": 2
+              },
+              {
+                "uid": "bc-mv1ckuiz-3",
+                "id": "water",
+                "qty": 1,
+                "x": 3,
+                "y": 3,
+                "rotated": true
+              },
+              {
+                "uid": "bc-mv1ckxd7-d",
+                "id": "ammo9",
+                "qty": 16,
+                "x": 2,
+                "y": 0
+              }
+            ]
+          },
+          "safe": {
+            "w": 2,
+            "h": 2,
+            "items": [
+              {
+                "uid": "bc-mv1ckxmm-e",
+                "id": "bandage",
+                "qty": 2,
+                "x": 0,
+                "y": 0
+              }
+            ]
+          },
+          "equipment": {
+            "weapon": "pistol",
+            "relief": false,
+            "ammo": 0,
+            "ammoRelief": 0
+          },
+          "quests": {
+            "repair": true,
+            "sample": false,
+            "ledger": false
+          },
+          "upgraded": false,
+          "settings": {
+            "volume": 0.35
+          },
+          "stats": {
+            "runs": 0,
+            "extracts": 0,
+            "kills": 0
+          },
+          "activeRun": null
+        },
+        "base": {
+          "facilities": {
+            "rest": 0,
+            "medical": 0,
+            "training": 0,
+            "workbench": 0,
+            "blackmarket": 0
+          },
+          "queue": [],
+          "completed": [],
+          "nextBatch": 1,
+          "cursor": 1791573460798,
+          "location": "base",
+          "restSeconds": 3.096,
+          "energizedGranted": false,
+          "extractedPearl": false,
+          "training": {
+            "startedAt": 1791573457702,
+            "quantity": 0,
+            "credited": {
+              "strength": 0,
+              "constitution": 0,
+              "technique": 0
+            },
+            "activeSeconds": 0,
+            "attribute": null,
+            "windowLeft": 596.371
+          }
+        },
+        "body": {
+          "hp": 100,
+          "stamina": 100,
+          "mental": 100,
+          "water": 100,
+          "satiety": 100,
+          "pollution": 0,
+          "bleeding": false,
+          "exhausted": false,
+          "effects": [],
+          "treatment": {
+            "bleeding": 0,
+            "pain": 0,
+            "injectionFatigue": 0
+          },
+          "luckEffect": 0,
+          "hpMax": 100,
+          "staminaMax": 100,
+          "carry": 24,
+          "attributes": {
+            "strength": {
+              "base": 10,
+              "effective": 10,
+              "progress": 0
+            },
+            "constitution": {
+              "base": 10,
+              "effective": 10,
+              "progress": 0
+            },
+            "technique": {
+              "base": 10,
+              "effective": 10,
+              "progress": 0
+            }
+          }
+        },
+        "power": "restored",
+        "storage": {
+          "ok": true,
+          "conflict": false,
+          "pendingSettlement": false,
+          "pendingBase": false,
+          "upgradeRequired": false
+        },
+        "day": 1,
+        "phase": "hideout",
+        "arrival": null
+      }
+    },
+    "supplyUsed": {
+      "before": {
+        "qty": 2,
+        "satiety": 20
+      },
+      "after": {
+        "qty": 1,
+        "satiety": 55.0236
+      }
+    },
+    "sharedState": {
+      "cashBefore": 6000,
+      "cashAfter": 5916
+    },
+    "art": [
+      {
+        "look": "xu",
+        "idle": {
+          "actor": {
+            "id": "med",
+            "look": "xu",
+            "x": 912,
+            "y": 407.68,
+            "dir": "s",
+            "pose": "idle",
+            "frame": 932
+          },
+          "feet": 409,
+          "shadow": 408,
+          "depth": 407.88,
+          "maskDepth": 407.88,
+          "maskTextureSame": true
+        },
+        "talk": {
+          "id": "med",
+          "look": "xu",
+          "x": 912,
+          "y": 407.68,
+          "dir": "s",
+          "pose": "talk",
+          "frame": 929
+        },
+        "turn": {
+          "id": "med",
+          "look": "xu",
+          "x": 912,
+          "y": 407.68,
+          "dir": "e",
+          "pose": "idle",
+          "frame": 937
+        }
+      },
+      {
+        "look": "shuan",
+        "idle": {
+          "actor": {
+            "id": "arms",
+            "look": "shuan",
+            "x": 128,
+            "y": 535.68,
+            "dir": "s",
+            "pose": "idle",
+            "frame": 158
+          },
+          "feet": 537,
+          "shadow": 536,
+          "depth": 535.88,
+          "maskDepth": 535.88,
+          "maskTextureSame": true
+        },
+        "talk": {
+          "id": "arms",
+          "look": "shuan",
+          "x": 128,
+          "y": 535.68,
+          "dir": "s",
+          "pose": "talk",
+          "frame": 152
+        },
+        "turn": {
+          "id": "arms",
+          "look": "shuan",
+          "x": 128,
+          "y": 535.68,
+          "dir": "e",
+          "pose": "idle",
+          "frame": 163
+        }
+      },
+      {
+        "look": "cai",
+        "idle": {
+          "actor": {
+            "id": "radio",
+            "look": "cai",
+            "x": 976,
+            "y": 112,
+            "dir": "s",
+            "pose": "idle",
+            "frame": 1016
+          },
+          "feet": 113,
+          "shadow": 112,
+          "depth": 112.2,
+          "maskDepth": 112.2,
+          "maskTextureSame": true
+        },
+        "talk": {
+          "id": "radio",
+          "look": "cai",
+          "x": 976,
+          "y": 112,
+          "dir": "s",
+          "pose": "talk",
+          "frame": 1007
+        },
+        "turn": {
+          "id": "radio",
+          "look": "cai",
+          "x": 976,
+          "y": 112,
+          "dir": "e",
+          "pose": "idle",
+          "frame": 1021
+        }
+      },
+      {
+        "look": "cook",
+        "idle": {
+          "actor": {
+            "id": "cook",
+            "look": "cook",
+            "x": 483.2,
+            "y": 112,
+            "dir": "s",
+            "pose": "idle",
+            "frame": 533
+          },
+          "feet": 113,
+          "shadow": 112,
+          "depth": 112.2,
+          "maskDepth": 112.2,
+          "maskTextureSame": true
+        },
+        "talk": {
+          "id": "cook",
+          "look": "cook",
+          "x": 483.2,
+          "y": 112,
+          "dir": "s",
+          "pose": "talk",
+          "frame": 522
+        },
+        "turn": {
+          "id": "cook",
+          "look": "cook",
+          "x": 483.2,
+          "y": 112,
+          "dir": "e",
+          "pose": "idle",
+          "frame": 538
+        }
+      },
+      {
+        "occlusion": "desk",
+        "fades": [
+          {
+            "id": "pots",
+            "alpha": 0.4502083879989585
+          },
+          {
+            "id": "radio-cot",
+            "alpha": 0.45019588316530934
+          },
+          {
+            "id": "xu-desk",
+            "alpha": 0.4501843279391523
+          }
+        ]
+      },
+      {
+        "occlusion": "counter",
+        "fades": [
+          {
+            "id": "pots",
+            "alpha": 0.4502083879989585
+          },
+          {
+            "id": "radio-cot",
+            "alpha": 0.45019588316530934
+          },
+          {
+            "id": "xu-desk",
+            "alpha": 0.4501843279391523
+          }
+        ]
+      }
+    ],
+    "artAssets": {
+      "delivered": [
+        "station-npc-cai-n-work-f0-v1",
+        "station-npc-cai-n-work-f1-v1",
+        "station-npc-cai-s-idle-f0-v1",
+        "station-npc-cai-s-idle-f1-v1",
+        "station-npc-cai-s-talk-f0-v1",
+        "station-npc-cai-s-talk-f1-v1",
+        "station-npc-cook-n-work-f0-v1",
+        "station-npc-cook-n-work-f1-v1",
+        "station-npc-cook-s-idle-f0-v1",
+        "station-npc-cook-s-idle-f1-v1",
+        "station-npc-cook-s-talk-f0-v1",
+        "station-npc-cook-s-talk-f1-v1",
+        "station-npc-shuan-n-work-f0-v1",
+        "station-npc-shuan-n-work-f1-v1",
+        "station-npc-shuan-s-idle-f0-v1",
+        "station-npc-shuan-s-idle-f1-v1",
+        "station-npc-shuan-s-talk-f0-v1",
+        "station-npc-shuan-s-talk-f1-v1",
+        "station-npc-xu-s-idle-f0-v1",
+        "station-npc-xu-s-idle-f1-v1",
+        "station-npc-xu-s-talk-f0-v1",
+        "station-npc-xu-s-talk-f1-v1",
+        "station-prop-counter-v1",
+        "station-prop-desk-v1",
+        "station-prop-generator-running-emit-v1",
+        "station-prop-generator-running-v1",
+        "station-prop-generator-stopped-emit-v1",
+        "station-prop-generator-stopped-v1",
+        "station-prop-pool-v1",
+        "station-prop-radio-desk-emit-v1",
+        "station-prop-radio-desk-v1",
+        "station-prop-stove-emit-v1",
+        "station-prop-stove-v1"
+      ],
+      "used": [
+        "station-npc-cai-n-work-f0-v1",
+        "station-npc-cai-n-work-f1-v1",
+        "station-npc-cai-s-idle-f0-v1",
+        "station-npc-cai-s-idle-f1-v1",
+        "station-npc-cai-s-talk-f0-v1",
+        "station-npc-cai-s-talk-f1-v1",
+        "station-npc-cook-n-work-f0-v1",
+        "station-npc-cook-n-work-f1-v1",
+        "station-npc-cook-s-idle-f0-v1",
+        "station-npc-cook-s-idle-f1-v1",
+        "station-npc-cook-s-talk-f0-v1",
+        "station-npc-cook-s-talk-f1-v1",
+        "station-npc-shuan-n-work-f0-v1",
+        "station-npc-shuan-n-work-f1-v1",
+        "station-npc-shuan-s-idle-f0-v1",
+        "station-npc-shuan-s-idle-f1-v1",
+        "station-npc-shuan-s-talk-f0-v1",
+        "station-npc-shuan-s-talk-f1-v1",
+        "station-npc-xu-s-idle-f0-v1",
+        "station-npc-xu-s-idle-f1-v1",
+        "station-npc-xu-s-talk-f0-v1",
+        "station-npc-xu-s-talk-f1-v1",
+        "station-prop-counter-v1",
+        "station-prop-desk-v1",
+        "station-prop-generator-running-emit-v1",
+        "station-prop-generator-running-v1",
+        "station-prop-generator-stopped-emit-v1",
+        "station-prop-generator-stopped-v1",
+        "station-prop-pool-v1",
+        "station-prop-radio-desk-emit-v1",
+        "station-prop-radio-desk-v1",
+        "station-prop-stove-emit-v1",
+        "station-prop-stove-v1"
+      ],
+      "rejected": [],
+      "missing": [],
+      "roofGlows": [
+        {
+          "room": "cold",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "canteen",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "dorm",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "gen",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "radio",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "cold",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "cold",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "canteen",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "canteen",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "canteen",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "dorm",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "gen",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "gen",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "radio",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "radio",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "work",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "clinic",
+          "alpha": 0,
+          "visible": false
+        },
+        {
+          "room": "clinic",
+          "alpha": 0,
+          "visible": false
+        }
+      ]
+    }
+  },
+  "finishedAt": "2026-10-09T19:18:28.855Z",
+  "summary": {
+    "passed": 7,
+    "total": 9
+  }
+}

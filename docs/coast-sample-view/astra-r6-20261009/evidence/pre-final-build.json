@@ -1,0 +1,26 @@
+{
+  "note": "These first three reports used the package before the final nonfinite-coordinate error-message refinement; final package reports are separate. No gameplay or frontend assertions were changed.",
+  "artifacts": {
+    "version": "0.2.0",
+    "htmlBytes": 3206664,
+    "htmlSha256": "eae12179403e9bb0c7cc62acb16e1e4f0844a2d8c795e20fa32b5a98831b0f9f",
+    "artifacts": {
+      "dist/index.html": {
+        "bytes": 3206664,
+        "sha256": "eae12179403e9bb0c7cc62acb16e1e4f0844a2d8c795e20fa32b5a98831b0f9f"
+      },
+      "start the game.html": {
+        "bytes": 3206664,
+        "sha256": "eae12179403e9bb0c7cc62acb16e1e4f0844a2d8c795e20fa32b5a98831b0f9f"
+      },
+      "release/Escape-Bincov-portable.zip": {
+        "bytes": 1089983,
+        "sha256": "72494f208e4f5eff7988e24618e91bf433a1e1343bf5c6045d6f76b7bfeb29a7"
+      },
+      "release/Escape-Bincov-web.zip": {
+        "bytes": 1086208,
+        "sha256": "fc5cac0f4266a4743de3c8bcc296387ba2053bf29e2fcbfe56f37bfccb76dba5"
+      }
+    }
+  }
+}

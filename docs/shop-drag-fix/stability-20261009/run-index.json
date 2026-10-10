@@ -1,0 +1,428 @@
+{
+  "records": [
+    {
+      "id": "systems-probe",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:05:30.274Z",
+      "finishedAt": "2026-10-09T14:06:05.804Z",
+      "log": "evidence/runs/systems-probe/run.log"
+    },
+    {
+      "id": "qol-probe-1",
+      "exitCode": 1,
+      "expected": true,
+      "startedAt": "2026-10-09T14:06:05.886Z",
+      "finishedAt": "2026-10-09T14:06:08.540Z",
+      "log": "evidence/runs/qol-probe-1/run.log"
+    },
+    {
+      "id": "qol-probe-2",
+      "exitCode": 1,
+      "expected": true,
+      "startedAt": "2026-10-09T14:06:08.616Z",
+      "finishedAt": "2026-10-09T14:06:11.135Z",
+      "log": "evidence/runs/qol-probe-2/run.log"
+    },
+    {
+      "id": "qol-probe-3",
+      "exitCode": 1,
+      "expected": true,
+      "startedAt": "2026-10-09T14:06:11.211Z",
+      "finishedAt": "2026-10-09T14:06:13.717Z",
+      "log": "evidence/runs/qol-probe-3/run.log"
+    },
+    {
+      "id": "qol-trace-1",
+      "exitCode": 1,
+      "expected": true,
+      "startedAt": "2026-10-09T14:07:57.411Z",
+      "finishedAt": "2026-10-09T14:08:00.025Z",
+      "log": "evidence/runs/qol-trace-1/run.log"
+    },
+    {
+      "id": "qol-trace-2",
+      "exitCode": 1,
+      "expected": true,
+      "startedAt": "2026-10-09T14:08:00.109Z",
+      "finishedAt": "2026-10-09T14:08:02.640Z",
+      "log": "evidence/runs/qol-trace-2/run.log"
+    },
+    {
+      "id": "qol-trace-3",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:08:02.714Z",
+      "finishedAt": "2026-10-09T14:08:06.798Z",
+      "log": "evidence/runs/qol-trace-3/run.log"
+    },
+    {
+      "id": "sampling-proof",
+      "exitCode": 1,
+      "expected": false,
+      "startedAt": "2026-10-09T14:08:06.874Z",
+      "finishedAt": "2026-10-09T14:08:09.111Z",
+      "log": "evidence/runs/sampling-proof/run.log"
+    },
+    {
+      "id": "sampling-proof-v2",
+      "exitCode": 1,
+      "expected": false,
+      "startedAt": "2026-10-09T14:09:03.324Z",
+      "finishedAt": "2026-10-09T14:09:06.124Z",
+      "log": "evidence/runs/sampling-proof-v2/run.log"
+    },
+    {
+      "id": "sampling-proof-v3",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:10:12.971Z",
+      "finishedAt": "2026-10-09T14:10:15.897Z",
+      "log": "evidence/runs/sampling-proof-v3/run.log"
+    },
+    {
+      "id": "unit",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:12:32.069Z",
+      "finishedAt": "2026-10-09T14:12:37.080Z",
+      "log": "evidence/runs/unit/run.log"
+    },
+    {
+      "id": "package",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:12:37.157Z",
+      "finishedAt": "2026-10-09T14:12:40.523Z",
+      "log": "evidence/runs/package/run.log"
+    },
+    {
+      "id": "shop-official",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:12:40.600Z",
+      "finishedAt": "2026-10-09T14:12:58.585Z",
+      "log": "evidence/runs/shop-official/run.log"
+    },
+    {
+      "id": "qol-fixed-1",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:12:58.664Z",
+      "finishedAt": "2026-10-09T14:13:03.100Z",
+      "log": "evidence/runs/qol-fixed-1/run.log"
+    },
+    {
+      "id": "qol-fixed-2",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:13:03.186Z",
+      "finishedAt": "2026-10-09T14:13:07.731Z",
+      "log": "evidence/runs/qol-fixed-2/run.log"
+    },
+    {
+      "id": "qol-fixed-3",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:13:07.805Z",
+      "finishedAt": "2026-10-09T14:13:12.047Z",
+      "log": "evidence/runs/qol-fixed-3/run.log"
+    },
+    {
+      "id": "qol-fixed-4",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:13:12.123Z",
+      "finishedAt": "2026-10-09T14:13:16.649Z",
+      "log": "evidence/runs/qol-fixed-4/run.log"
+    },
+    {
+      "id": "qol-fixed-5",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:13:16.734Z",
+      "finishedAt": "2026-10-09T14:13:21.132Z",
+      "log": "evidence/runs/qol-fixed-5/run.log"
+    },
+    {
+      "id": "systems-fixed-1",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:13:21.206Z",
+      "finishedAt": "2026-10-09T14:13:56.474Z",
+      "log": "evidence/runs/systems-fixed-1/run.log"
+    },
+    {
+      "id": "systems-fixed-2",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:13:56.559Z",
+      "finishedAt": "2026-10-09T14:14:31.695Z",
+      "log": "evidence/runs/systems-fixed-2/run.log"
+    },
+    {
+      "id": "systems-fixed-3",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:14:31.778Z",
+      "finishedAt": "2026-10-09T14:15:06.614Z",
+      "log": "evidence/runs/systems-fixed-3/run.log"
+    },
+    {
+      "id": "qol-cpu4-1",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:15:06.697Z",
+      "finishedAt": "2026-10-09T14:15:17.988Z",
+      "log": "evidence/runs/qol-cpu4-1/run.log"
+    },
+    {
+      "id": "qol-cpu4-2",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:15:18.069Z",
+      "finishedAt": "2026-10-09T14:15:29.875Z",
+      "log": "evidence/runs/qol-cpu4-2/run.log"
+    },
+    {
+      "id": "qol-cpu4-3",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:15:29.950Z",
+      "finishedAt": "2026-10-09T14:15:41.261Z",
+      "log": "evidence/runs/qol-cpu4-3/run.log"
+    },
+    {
+      "id": "qol-cpu4-4",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:15:41.333Z",
+      "finishedAt": "2026-10-09T14:15:52.505Z",
+      "log": "evidence/runs/qol-cpu4-4/run.log"
+    },
+    {
+      "id": "qol-cpu4-5",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:15:52.583Z",
+      "finishedAt": "2026-10-09T14:16:03.916Z",
+      "log": "evidence/runs/qol-cpu4-5/run.log"
+    },
+    {
+      "id": "systems-cpu4-1",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:16:03.994Z",
+      "finishedAt": "2026-10-09T14:17:31.176Z",
+      "log": "evidence/runs/systems-cpu4-1/run.log"
+    },
+    {
+      "id": "systems-cpu4-2",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:17:31.253Z",
+      "finishedAt": "2026-10-09T14:18:59.463Z",
+      "log": "evidence/runs/systems-cpu4-2/run.log"
+    },
+    {
+      "id": "qol-negative",
+      "exitCode": 1,
+      "expected": true,
+      "startedAt": "2026-10-09T14:19:59.057Z",
+      "finishedAt": "2026-10-09T14:20:13.649Z",
+      "log": "evidence/runs/qol-negative/run.log"
+    },
+    {
+      "id": "systems-negative",
+      "exitCode": 1,
+      "expected": true,
+      "startedAt": "2026-10-09T14:20:13.756Z",
+      "finishedAt": "2026-10-09T14:20:31.771Z",
+      "log": "evidence/runs/systems-negative/run.log"
+    },
+    {
+      "id": "shop-main-new",
+      "exitCode": 1,
+      "expected": true,
+      "startedAt": "2026-10-09T14:20:31.852Z",
+      "finishedAt": "2026-10-09T14:21:08.999Z",
+      "log": "evidence/runs/shop-main-new/run.log"
+    },
+    {
+      "id": "qol-negative-v2",
+      "exitCode": 1,
+      "expected": true,
+      "startedAt": "2026-10-09T14:22:28.157Z",
+      "finishedAt": "2026-10-09T14:22:30.806Z",
+      "log": "evidence/runs/qol-negative-v2/run.log"
+    },
+    {
+      "id": "full-browser",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:22:31.042Z",
+      "finishedAt": "2026-10-09T14:23:10.365Z",
+      "log": "evidence/runs/full-browser/run.log"
+    },
+    {
+      "id": "full-desktop-input",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:23:10.460Z",
+      "finishedAt": "2026-10-09T14:23:31.970Z",
+      "log": "evidence/runs/full-desktop-input/run.log"
+    },
+    {
+      "id": "full-shop-drag",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:23:32.054Z",
+      "finishedAt": "2026-10-09T14:23:49.668Z",
+      "log": "evidence/runs/full-shop-drag/run.log"
+    },
+    {
+      "id": "full-ui",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:23:49.752Z",
+      "finishedAt": "2026-10-09T14:23:58.024Z",
+      "log": "evidence/runs/full-ui/run.log"
+    },
+    {
+      "id": "full-tactical",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:23:58.139Z",
+      "finishedAt": "2026-10-09T14:24:16.750Z",
+      "log": "evidence/runs/full-tactical/run.log"
+    },
+    {
+      "id": "full-art",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:24:16.834Z",
+      "finishedAt": "2026-10-09T14:24:29.496Z",
+      "log": "evidence/runs/full-art/run.log"
+    },
+    {
+      "id": "full-title",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:24:29.595Z",
+      "finishedAt": "2026-10-09T14:25:25.639Z",
+      "log": "evidence/runs/full-title/run.log"
+    },
+    {
+      "id": "full-title-water",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:25:25.738Z",
+      "finishedAt": "2026-10-09T14:25:35.663Z",
+      "log": "evidence/runs/full-title-water/run.log"
+    },
+    {
+      "id": "full-save-browser",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:25:35.746Z",
+      "finishedAt": "2026-10-09T14:25:47.922Z",
+      "log": "evidence/runs/full-save-browser/run.log"
+    },
+    {
+      "id": "full-expansion",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:25:48.002Z",
+      "finishedAt": "2026-10-09T14:25:56.629Z",
+      "log": "evidence/runs/full-expansion/run.log"
+    },
+    {
+      "id": "full-buildings",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:25:56.705Z",
+      "finishedAt": "2026-10-09T14:26:09.032Z",
+      "log": "evidence/runs/full-buildings/run.log"
+    },
+    {
+      "id": "full-qol-expansion",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:26:09.119Z",
+      "finishedAt": "2026-10-09T14:26:13.480Z",
+      "log": "evidence/runs/full-qol-expansion/run.log"
+    },
+    {
+      "id": "full-systems",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:26:13.557Z",
+      "finishedAt": "2026-10-09T14:26:48.445Z",
+      "log": "evidence/runs/full-systems/run.log"
+    },
+    {
+      "id": "full-mall-passages",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:26:48.529Z",
+      "finishedAt": "2026-10-09T14:29:36.204Z",
+      "log": "evidence/runs/full-mall-passages/run.log"
+    },
+    {
+      "id": "full-mall-landing",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:29:36.288Z",
+      "finishedAt": "2026-10-09T14:29:44.229Z",
+      "log": "evidence/runs/full-mall-landing/run.log"
+    },
+    {
+      "id": "full-loot",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:29:44.306Z",
+      "finishedAt": "2026-10-09T14:30:33.631Z",
+      "log": "evidence/runs/full-loot/run.log"
+    },
+    {
+      "id": "full-loot-target",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:30:33.727Z",
+      "finishedAt": "2026-10-09T14:30:53.144Z",
+      "log": "evidence/runs/full-loot-target/run.log"
+    },
+    {
+      "id": "full-qol",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:30:53.221Z",
+      "finishedAt": "2026-10-09T14:31:14.812Z",
+      "log": "evidence/runs/full-qol/run.log"
+    },
+    {
+      "id": "full-mobile",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:31:14.925Z",
+      "finishedAt": "2026-10-09T14:31:34.167Z",
+      "log": "evidence/runs/full-mobile/run.log"
+    },
+    {
+      "id": "full-mobile-ux",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:31:34.255Z",
+      "finishedAt": "2026-10-09T14:32:44.393Z",
+      "log": "evidence/runs/full-mobile-ux/run.log"
+    },
+    {
+      "id": "full-portable",
+      "exitCode": 0,
+      "expected": true,
+      "startedAt": "2026-10-09T14:32:44.485Z",
+      "finishedAt": "2026-10-09T14:32:49.942Z",
+      "log": "evidence/runs/full-portable/run.log"
+    }
+  ]
+}

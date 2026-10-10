@@ -19,7 +19,7 @@ try {
   context.on('page', page => page.on('pageerror', e => report.errors.push(String(e))));
   context.on('request', req => { if (/^https?:/.test(req.url())) report.externalRequests.push(req.url()); });
   const page = await context.newPage();
-  await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1');
+  await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs');
   await page.locator('[data-action="enter"]').waitFor();
   const textures = await page.evaluate(() => {
     const manager = window.__bincov.app.game.textures;
@@ -134,7 +134,7 @@ try {
   const layered = await browser.newContext({ viewport: { width: 1280, height: 720 }, offline: true });
   layered.on('request', req => { if (/^https?:/.test(req.url())) report.externalRequests.push(req.url()); });
   const floor = await layered.newPage(); floor.on('pageerror', e => report.errors.push(String(e)));
-  await floor.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1');
+  await floor.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs');
   await floor.locator('[data-action="enter"]').click(); await floor.locator('#run-world').selectOption('buildings');
   await floor.locator('#seed').fill('42'); await floor.locator('[data-action="deploy"]').click();
   await floor.waitForFunction(() => window.__bincov.app.raid?.player?.active);

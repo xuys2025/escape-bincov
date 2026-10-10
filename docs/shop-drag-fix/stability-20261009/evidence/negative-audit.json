@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-09T14:22:30.917Z",
+  "passed": true,
+  "QOL": {
+    "name": "mall containers keep wheel-selected identity and touch-open the exact empty source",
+    "status": "failed",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'crate-2'\n- 'crate-5'\n         ^\n\n    at file:///D:/bincov/shop-drag-fix/test-results/shop-drag-stability-20261009/qol-negative-v2.mjs:61:388\n    at async step (file:///D:/bincov/shop-drag-fix/test-results/shop-drag-stability-20261009/qol-negative-v2.mjs:18:104)\n    at async file:///D:/bincov/shop-drag-fix/test-results/shop-drag-stability-20261009/qol-negative-v2.mjs:53:5"
+  },
+  "systems": {
+    "name": "mall floor preview does not move the player; terrace stays upstairs and reload restores it",
+    "status": "failed",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   rotation: 3.057300583876593,\n-   rotation: 2.9573005838765933,\n    x: 2288,\n    y: 1136\n  }\n\n    at file:///D:/bincov/shop-drag-fix/test-results/shop-drag-stability-20261009/systems-negative.mjs:100:410\n    at async step (file:///D:/bincov/shop-drag-fix/test-results/shop-drag-stability-20261009/systems-negative.mjs:18:93)\n    at async file:///D:/bincov/shop-drag-fix/test-results/shop-drag-stability-20261009/systems-negative.mjs:95:2"
+  },
+  "mainShop": {
+    "passed": 11,
+    "total": 21
+  },
+  "note": "Expected assertion failures verified, not infrastructure or missing-selector errors."
+}

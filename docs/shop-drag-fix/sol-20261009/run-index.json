@@ -1,0 +1,409 @@
+{
+  "sourceCommit": "4fc30234d1d686a6cb68007f923aff6d7fbd7bdc",
+  "records": [
+    {
+      "id": "unit-first",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:26:07.151Z",
+      "finishedAt": "2026-10-09T13:26:12.000Z",
+      "log": "evidence/runs/unit-first/run.log",
+      "reports": []
+    },
+    {
+      "id": "package-first",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:26:12.030Z",
+      "finishedAt": "2026-10-09T13:26:15.225Z",
+      "log": "evidence/runs/package-first/run.log",
+      "reports": []
+    },
+    {
+      "id": "shop-fixed-first",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:26:15.254Z",
+      "finishedAt": "2026-10-09T13:26:29.720Z",
+      "log": "evidence/runs/shop-fixed-first/run.log",
+      "reports": [
+        "evidence/runs/shop-fixed-first/direct/report.json"
+      ]
+    },
+    {
+      "id": "shop-main-control-first",
+      "exitCode": 1,
+      "startedAt": "2026-10-09T13:26:29.749Z",
+      "finishedAt": "2026-10-09T13:27:03.523Z",
+      "log": "evidence/runs/shop-main-control-first/run.log",
+      "reports": [
+        "evidence/runs/shop-main-control-first/direct/report.json"
+      ]
+    },
+    {
+      "id": "ci-browser-first",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:27:05.707Z",
+      "finishedAt": "2026-10-09T13:27:44.475Z",
+      "log": "evidence/runs/ci-browser-first/run.log",
+      "reports": [
+        "evidence/runs/ci-browser-first/outputs/browser-report.json"
+      ]
+    },
+    {
+      "id": "shop-main-control-serial",
+      "exitCode": 1,
+      "startedAt": "2026-10-09T13:28:50.515Z",
+      "finishedAt": "2026-10-09T13:29:24.367Z",
+      "log": "evidence/runs/shop-main-control-serial/run.log",
+      "reports": [
+        "evidence/runs/shop-main-control-serial/direct/report.json"
+      ]
+    },
+    {
+      "id": "ci-browser-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:29:24.400Z",
+      "finishedAt": "2026-10-09T13:30:03.541Z",
+      "log": "evidence/runs/ci-browser-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-browser-serial/outputs/browser-report.json"
+      ]
+    },
+    {
+      "id": "ci-desktop-input-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:30:03.595Z",
+      "finishedAt": "2026-10-09T13:30:24.838Z",
+      "log": "evidence/runs/ci-desktop-input-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-desktop-input-serial/outputs/desktop-input/report.json"
+      ]
+    },
+    {
+      "id": "ci-ui-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:30:24.878Z",
+      "finishedAt": "2026-10-09T13:30:33.023Z",
+      "log": "evidence/runs/ci-ui-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-ui-serial/outputs/ui/report.json"
+      ]
+    },
+    {
+      "id": "ci-tactical-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:30:33.087Z",
+      "finishedAt": "2026-10-09T13:30:51.542Z",
+      "log": "evidence/runs/ci-tactical-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-tactical-serial/outputs/tactical/report.json"
+      ]
+    },
+    {
+      "id": "ci-art-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:30:51.581Z",
+      "finishedAt": "2026-10-09T13:31:04.277Z",
+      "log": "evidence/runs/ci-art-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-art-serial/outputs/art-review/report.json"
+      ]
+    },
+    {
+      "id": "ci-title-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:31:04.331Z",
+      "finishedAt": "2026-10-09T13:32:00.619Z",
+      "log": "evidence/runs/ci-title-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-title-serial/outputs/title/report.json"
+      ]
+    },
+    {
+      "id": "ci-title-water-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:32:00.671Z",
+      "finishedAt": "2026-10-09T13:32:10.660Z",
+      "log": "evidence/runs/ci-title-water-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-title-water-serial/outputs/title-water/report.json"
+      ]
+    },
+    {
+      "id": "ci-save-browser-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:32:10.698Z",
+      "finishedAt": "2026-10-09T13:32:23.066Z",
+      "log": "evidence/runs/ci-save-browser-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-save-browser-serial/outputs/conflict-settlement-backup.json",
+        "evidence/runs/ci-save-browser-serial/outputs/pending-settlement-backup.json",
+        "evidence/runs/ci-save-browser-serial/outputs/save-browser-report.json",
+        "evidence/runs/ci-save-browser-serial/outputs/save-roundtrip.json"
+      ]
+    },
+    {
+      "id": "ci-expansion-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:32:23.106Z",
+      "finishedAt": "2026-10-09T13:32:31.784Z",
+      "log": "evidence/runs/ci-expansion-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-expansion-serial/outputs/expansion-browser-report.json",
+        "evidence/runs/ci-expansion-serial/outputs/expansion-import-fixture.json",
+        "evidence/runs/ci-expansion-serial/outputs/expansion-pending.json",
+        "evidence/runs/ci-expansion-serial/outputs/expansion-settled.json"
+      ]
+    },
+    {
+      "id": "ci-buildings-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:32:31.829Z",
+      "finishedAt": "2026-10-09T13:32:44.534Z",
+      "log": "evidence/runs/ci-buildings-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-buildings-serial/outputs/building-browser-report.json"
+      ]
+    },
+    {
+      "id": "ci-qol-expansion-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:32:44.571Z",
+      "finishedAt": "2026-10-09T13:32:48.832Z",
+      "log": "evidence/runs/ci-qol-expansion-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-qol-expansion-serial/outputs/qol-expansion-report.json"
+      ]
+    },
+    {
+      "id": "ci-systems-serial",
+      "exitCode": 1,
+      "startedAt": "2026-10-09T13:32:48.861Z",
+      "finishedAt": "2026-10-09T13:33:07.716Z",
+      "log": "evidence/runs/ci-systems-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-systems-serial/outputs/systems-browser-report.json"
+      ]
+    },
+    {
+      "id": "ci-mall-passages-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:33:07.748Z",
+      "finishedAt": "2026-10-09T13:35:55.144Z",
+      "log": "evidence/runs/ci-mall-passages-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-mall-passages-serial/outputs/mall-passages-report.json"
+      ]
+    },
+    {
+      "id": "ci-mall-landing-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:35:55.180Z",
+      "finishedAt": "2026-10-09T13:36:03.117Z",
+      "log": "evidence/runs/ci-mall-landing-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-mall-landing-serial/outputs/mall-landing-report.json"
+      ]
+    },
+    {
+      "id": "ci-loot-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:36:03.150Z",
+      "finishedAt": "2026-10-09T13:36:52.351Z",
+      "log": "evidence/runs/ci-loot-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-loot-serial/outputs/loot-browser-report.json"
+      ]
+    },
+    {
+      "id": "ci-loot-target-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:36:52.407Z",
+      "finishedAt": "2026-10-09T13:37:11.507Z",
+      "log": "evidence/runs/ci-loot-target-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-loot-target-serial/outputs/loot-target-report.json"
+      ]
+    },
+    {
+      "id": "ci-qol-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:37:11.545Z",
+      "finishedAt": "2026-10-09T13:37:33.295Z",
+      "log": "evidence/runs/ci-qol-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-qol-serial/outputs/qol-report.json"
+      ]
+    },
+    {
+      "id": "ci-mobile-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:37:33.344Z",
+      "finishedAt": "2026-10-09T13:37:52.448Z",
+      "log": "evidence/runs/ci-mobile-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-mobile-serial/outputs/mobile/live-backup.json",
+        "evidence/runs/ci-mobile-serial/outputs/mobile/report.json",
+        "evidence/runs/ci-mobile-serial/outputs/mobile/unknown-original.json"
+      ]
+    },
+    {
+      "id": "ci-mobile-ux-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:37:52.498Z",
+      "finishedAt": "2026-10-09T13:39:02.268Z",
+      "log": "evidence/runs/ci-mobile-ux-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-mobile-ux-serial/outputs/mobile-ux/report.json"
+      ]
+    },
+    {
+      "id": "ci-portable-serial",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:39:02.308Z",
+      "finishedAt": "2026-10-09T13:39:07.737Z",
+      "log": "evidence/runs/ci-portable-serial/run.log",
+      "reports": [
+        "evidence/runs/ci-portable-serial/outputs/portable-report.json"
+      ]
+    },
+    {
+      "id": "shop-wide-first",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:39:35.670Z",
+      "finishedAt": "2026-10-09T13:39:49.823Z",
+      "log": "evidence/runs/shop-wide-first/run.log",
+      "reports": [
+        "evidence/runs/shop-wide-first/direct/report.json"
+      ]
+    },
+    {
+      "id": "supplement-first",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:39:59.214Z",
+      "finishedAt": "2026-10-09T13:40:03.890Z",
+      "log": "evidence/runs/supplement-first/run.log",
+      "reports": [
+        "evidence/runs/supplement-first/direct/report.json"
+      ]
+    },
+    {
+      "id": "systems-main-1",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:40:12.049Z",
+      "finishedAt": "2026-10-09T13:40:46.654Z",
+      "log": "evidence/runs/systems-main-1/run.log",
+      "reports": [
+        "evidence/runs/systems-main-1/direct/systems-browser-report.json"
+      ]
+    },
+    {
+      "id": "systems-fixed-1",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:40:46.686Z",
+      "finishedAt": "2026-10-09T13:41:20.988Z",
+      "log": "evidence/runs/systems-fixed-1/run.log",
+      "reports": [
+        "evidence/runs/systems-fixed-1/direct/systems-browser-report.json"
+      ]
+    },
+    {
+      "id": "systems-main-2",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:41:21.019Z",
+      "finishedAt": "2026-10-09T13:41:55.792Z",
+      "log": "evidence/runs/systems-main-2/run.log",
+      "reports": [
+        "evidence/runs/systems-main-2/direct/systems-browser-report.json"
+      ]
+    },
+    {
+      "id": "systems-fixed-2",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:41:55.823Z",
+      "finishedAt": "2026-10-09T13:42:29.717Z",
+      "log": "evidence/runs/systems-fixed-2/run.log",
+      "reports": [
+        "evidence/runs/systems-fixed-2/direct/systems-browser-report.json"
+      ]
+    },
+    {
+      "id": "systems-main-3",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:42:29.748Z",
+      "finishedAt": "2026-10-09T13:43:04.042Z",
+      "log": "evidence/runs/systems-main-3/run.log",
+      "reports": [
+        "evidence/runs/systems-main-3/direct/systems-browser-report.json"
+      ]
+    },
+    {
+      "id": "systems-fixed-3",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:43:04.078Z",
+      "finishedAt": "2026-10-09T13:43:38.599Z",
+      "log": "evidence/runs/systems-fixed-3/run.log",
+      "reports": [
+        "evidence/runs/systems-fixed-3/direct/systems-browser-report.json"
+      ]
+    },
+    {
+      "id": "qol-main-1",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:52:04.213Z",
+      "finishedAt": "2026-10-09T13:52:08.109Z",
+      "log": "evidence/runs/qol-main-1/run.log",
+      "reports": [
+        "evidence/runs/qol-main-1/direct/qol-expansion-report.json"
+      ]
+    },
+    {
+      "id": "qol-fixed-1",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:52:08.146Z",
+      "finishedAt": "2026-10-09T13:52:11.987Z",
+      "log": "evidence/runs/qol-fixed-1/run.log",
+      "reports": [
+        "evidence/runs/qol-fixed-1/direct/qol-expansion-report.json"
+      ]
+    },
+    {
+      "id": "qol-main-2",
+      "exitCode": 0,
+      "startedAt": "2026-10-09T13:52:12.016Z",
+      "finishedAt": "2026-10-09T13:52:15.830Z",
+      "log": "evidence/runs/qol-main-2/run.log",
+      "reports": [
+        "evidence/runs/qol-main-2/direct/qol-expansion-report.json"
+      ]
+    },
+    {
+      "id": "qol-fixed-2",
+      "exitCode": 1,
+      "startedAt": "2026-10-09T13:52:15.862Z",
+      "finishedAt": "2026-10-09T13:52:18.286Z",
+      "log": "evidence/runs/qol-fixed-2/run.log",
+      "reports": [
+        "evidence/runs/qol-fixed-2/direct/qol-expansion-report.json"
+      ]
+    },
+    {
+      "id": "qol-main-3",
+      "exitCode": 1,
+      "startedAt": "2026-10-09T13:52:18.317Z",
+      "finishedAt": "2026-10-09T13:52:20.777Z",
+      "log": "evidence/runs/qol-main-3/run.log",
+      "reports": [
+        "evidence/runs/qol-main-3/direct/qol-expansion-report.json"
+      ]
+    },
+    {
+      "id": "qol-fixed-3",
+      "exitCode": 1,
+      "startedAt": "2026-10-09T13:52:20.808Z",
+      "finishedAt": "2026-10-09T13:52:23.228Z",
+      "log": "evidence/runs/qol-fixed-3/run.log",
+      "reports": [
+        "evidence/runs/qol-fixed-3/direct/qol-expansion-report.json"
+      ]
+    }
+  ]
+}

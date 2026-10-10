@@ -1,0 +1,31 @@
+{
+  "methodology": "Short focused replay of the failed navigation snapshot and the auto-aim pixel. Does not rerun three full actions.",
+  "results": [
+    {
+      "file": "D:/bincov/escape-bincov/dist/index.html",
+      "pixel": {
+        "x": 1028.044511793021,
+        "y": 202.9111454911594
+      },
+      "hit": {
+        "tag": "BUTTON",
+        "action": "map",
+        "text": "选择撤离点"
+      },
+      "overlay": "map"
+    },
+    {
+      "file": "D:/bincov/pr22-runtime/dist/index.html",
+      "pixel": {
+        "x": 1028.044511793021,
+        "y": 202.9111454911594
+      },
+      "hit": {
+        "tag": "BUTTON",
+        "action": "map",
+        "text": "选择撤离点"
+      },
+      "overlay": "map"
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "method": "Read-only named snapshot inspection. Numeric indexed items and backing self_size, not native allocation; Null entries are identified by the native null singleton. Inspect pinned-vs-released separately.",
+  "rows": [
+    {
+      "file": "test-results/astra-r7/high-named20/cycle-6.heapsnapshot",
+      "graphics": [
+        {
+          "pipe": {
+            "id": 81347,
+            "type": "object",
+            "name": "GraphicsPipe",
+            "bytes": 60
+          },
+          "items": {
+            "id": 277331,
+            "type": "object",
+            "name": "Object",
+            "bytes": 12
+          },
+          "backing": {
+            "id": 277333,
+            "type": "array",
+            "name": "(object elements)",
+            "bytes": 3096
+          },
+          "indexEntries": 144,
+          "nullEntries": 144,
+          "nonNullValues": []
+        }
+      ],
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 332839,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 133169,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 332841,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 361805,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 332843,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 361805,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 435691,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 361805,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 435695,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        }
+      ],
+      "counts": {
+        "GCManagedHash": 6,
+        "GraphicsPipe": 1,
+        "PointerEvent": 5,
+        "<div class=\"cs-hud\" aria-live=\"polite\">": 2
+      }
+    },
+    {
+      "file": "test-results/astra-r7/high-named20/cycle-20.heapsnapshot",
+      "graphics": [
+        {
+          "pipe": {
+            "id": 81347,
+            "type": "object",
+            "name": "GraphicsPipe",
+            "bytes": 60
+          },
+          "items": {
+            "id": 277331,
+            "type": "object",
+            "name": "Object",
+            "bytes": 12
+          },
+          "backing": {
+            "id": 689189,
+            "type": "array",
+            "name": "(object elements)",
+            "bytes": 12312
+          },
+          "indexEntries": 480,
+          "nullEntries": 480,
+          "nonNullValues": []
+        }
+      ],
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 435691,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 726111,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 435695,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": null
+        },
+        {
+          "event": {
+            "id": 332839,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 771757,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 332843,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 726111,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        },
+        {
+          "event": {
+            "id": 332841,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "bytes": 140
+          },
+          "native": {
+            "id": 726111,
+            "type": "native",
+            "name": "PointerEvent",
+            "bytes": 376
+          }
+        }
+      ],
+      "counts": {
+        "GCManagedHash": 6,
+        "GraphicsPipe": 1,
+        "PointerEvent": 5,
+        "<div class=\"cs-hud\" aria-live=\"polite\">": 2
+      }
+    }
+  ]
+}

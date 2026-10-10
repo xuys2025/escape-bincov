@@ -1,0 +1,318 @@
+{
+  "build": {
+    "dist/index.html": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+    "prefix": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62"
+  },
+  "environment": {
+    "node": "24.19.0",
+    "pnpm": "11.19.0",
+    "chrome": "154.0.8037.99"
+  },
+  "results": {
+    "unit": "275/275 (273 + tests/renderer-lifetime.test.ts 2)",
+    "package": "PASS, reproducible SHA 112e7c8e…",
+    "station-context-program (fixed, --reference=prefix)": [
+      {
+        "name": "S1 context restore: old render-target slots dropped",
+        "status": "passed"
+      },
+      {
+        "name": "S2 window resize: replaced render targets leave no placeholders",
+        "status": "passed"
+      },
+      {
+        "name": "P1 graphics program kept across restores, rebound in each new context",
+        "status": "passed"
+      },
+      {
+        "name": "C1 restored context with fewer texture units gets a program for that count",
+        "status": "passed"
+      },
+      {
+        "name": "C2 same reduced capability again reuses its program",
+        "status": "passed"
+      },
+      {
+        "name": "C3 back to the full capability returns to the first program",
+        "status": "passed"
+      },
+      {
+        "name": "C4 kept program sources equal Pixi's own compile per capability",
+        "status": "passed"
+      },
+      {
+        "name": "R1 yard still draws and takes input after the restores",
+        "status": "passed"
+      }
+    ],
+    "station-context-program (prefix control)": [
+      {
+        "name": "S1 context restore: old render-target slots dropped",
+        "status": "failed",
+        "error": "AssertionError [ERR_ASSERTION]: cycle 1: replaced target placeholders left"
+      },
+      {
+        "name": "S2 window resize: replaced render targets leave no placeholders",
+        "status": "failed",
+        "error": "AssertionError [ERR_ASSERTION]: replaced target placeholders left"
+      },
+      {
+        "name": "P1 graphics program kept across restores, rebound in each new context",
+        "status": "failed",
+        "error": "AssertionError [ERR_ASSERTION]: kept-program adaptor registered"
+      },
+      {
+        "name": "C1 restored context with fewer texture units gets a program for that count",
+        "status": "passed"
+      },
+      {
+        "name": "C2 same reduced capability again reuses its program",
+        "status": "failed",
+        "error": "AssertionError [ERR_ASSERTION]: program for 8 reused"
+      },
+      {
+        "name": "C3 back to the full capability returns to the first program",
+        "status": "failed",
+        "error": "AssertionError [ERR_ASSERTION]: first program reused"
+      },
+      {
+        "name": "C4 kept program sources equal Pixi's own compile per capability",
+        "status": "passed"
+      },
+      {
+        "name": "R1 yard still draws and takes input after the restores",
+        "status": "passed"
+      }
+    ],
+    "test:station": "76/76",
+    "station-round2-recheck --only=R (fixed)": [
+      {
+        "name": "R repeated full-coverage shared-host and context resource diagnostics",
+        "status": "failed",
+        "error": "AssertionError [ERR_ASSERTION]: RESOURCE_PARTIAL: retained strict failures; see coverage.resourceProbe"
+      }
+    ],
+    "station-round2-recheck --only=J,K (fixed)": [
+      {
+        "name": "J1 emergency actual touch centre and four corners of every shortcut",
+        "status": "passed"
+      },
+      {
+        "name": "J1 restored actual touch centre and four corners of every shortcut",
+        "status": "failed",
+        "error": "AssertionError [ERR_ASSERTION]: :is(.panel,.modal):not([hidden]) .phead [data-act=\"close\"]"
+      },
+      {
+        "name": "J2 touch UI hidden for power, departure and return sequences",
+        "status": "passed"
+      },
+      {
+        "name": "K1 full-yard traversal and independent no-culling pixel oracle",
+        "status": "passed"
+      },
+      {
+        "name": "K2 fully visited 20 remounts: wall frames/sources released, six Pixi tables, heap observation",
+        "status": "passed"
+      },
+      {
+        "name": "K3 fully visited yard/village/yard releases shared resources",
+        "status": "failed",
+        "error": "AssertionError [ERR_ASSERTION]: glBuffer live grew"
+      },
+      {
+        "name": "K4 fully visited WebGL context restoration: revisit all walls and release remount",
+        "status": "failed",
+        "error": "AssertionError [ERR_ASSERTION]: glBuffer empty grew"
+      }
+    ],
+    "station-round2-recheck --only=K (prefix control)": [
+      {
+        "name": "K1 full-yard traversal and independent no-culling pixel oracle",
+        "status": "passed"
+      },
+      {
+        "name": "K2 fully visited 20 remounts: wall frames/sources released, six Pixi tables, heap observation",
+        "status": "passed"
+      },
+      {
+        "name": "K3 fully visited yard/village/yard releases shared resources",
+        "status": "failed",
+        "error": "AssertionError [ERR_ASSERTION]: glBuffer live grew"
+      },
+      {
+        "name": "K4 fully visited WebGL context restoration: revisit all walls and release remount",
+        "status": "failed",
+        "error": "AssertionError [ERR_ASSERTION]: glBuffer empty grew"
+      }
+    ],
+    "J1 reruns (intermittent on both builds, same facility-panel close step)": {
+      "fixed": [
+        {
+          "run": "round2-JK",
+          "steps": [
+            {
+              "name": "J1 emergency actual touch centre and four corners of every shortcut",
+              "status": "passed"
+            },
+            {
+              "name": "J1 restored actual touch centre and four corners of every shortcut",
+              "status": "failed",
+              "error": "AssertionError [ERR_ASSERTION]: :is(.panel,.modal):not([hidden]) .phead [data-act=\"close\"]"
+            },
+            {
+              "name": "J2 touch UI hidden for power, departure and return sequences",
+              "status": "passed"
+            },
+            {
+              "name": "K1 full-yard traversal and independent no-culling pixel oracle",
+              "status": "passed"
+            },
+            {
+              "name": "K2 fully visited 20 remounts: wall frames/sources released, six Pixi tables, heap observation",
+              "status": "passed"
+            },
+            {
+              "name": "K3 fully visited yard/village/yard releases shared resources",
+              "status": "failed",
+              "error": "AssertionError [ERR_ASSERTION]: glBuffer live grew"
+            },
+            {
+              "name": "K4 fully visited WebGL context restoration: revisit all walls and release remount",
+              "status": "failed",
+              "error": "AssertionError [ERR_ASSERTION]: glBuffer empty grew"
+            }
+          ]
+        },
+        {
+          "run": "round2-J1-fixed-1",
+          "steps": [
+            {
+              "name": "J1 emergency actual touch centre and four corners of every shortcut",
+              "status": "passed"
+            },
+            {
+              "name": "J1 restored actual touch centre and four corners of every shortcut",
+              "status": "failed",
+              "error": "AssertionError [ERR_ASSERTION]: :is(.panel,.modal):not([hidden]) .phead [data-act=\"close\"]"
+            }
+          ]
+        },
+        {
+          "run": "round2-J1-fixed-2",
+          "steps": [
+            {
+              "name": "J1 emergency actual touch centre and four corners of every shortcut",
+              "status": "passed"
+            },
+            {
+              "name": "J1 restored actual touch centre and four corners of every shortcut",
+              "status": "passed"
+            }
+          ]
+        }
+      ],
+      "prefix": [
+        {
+          "run": "round2-J1-prefix",
+          "steps": [
+            {
+              "name": "J1 emergency actual touch centre and four corners of every shortcut",
+              "status": "passed"
+            },
+            {
+              "name": "J1 restored actual touch centre and four corners of every shortcut",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "run": "round2-J1-prefix-2",
+          "steps": [
+            {
+              "name": "J1 emergency actual touch centre and four corners of every shortcut",
+              "status": "passed"
+            },
+            {
+              "name": "J1 restored actual touch centre and four corners of every shortcut",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "run": "round2-J1-prefix-3",
+          "steps": [
+            {
+              "name": "J1 emergency actual touch centre and four corners of every shortcut",
+              "status": "passed"
+            },
+            {
+              "name": "J1 restored actual touch centre and four corners of every shortcut",
+              "status": "passed"
+            }
+          ]
+        },
+        {
+          "run": "round2-J1-prefix-4",
+          "steps": [
+            {
+              "name": "J1 emergency actual touch centre and four corners of every shortcut",
+              "status": "failed",
+              "error": "AssertionError [ERR_ASSERTION]: :is(.panel,.modal):not([hidden]) .phead [data-act=\"close\"]"
+            },
+            {
+              "name": "J1 restored actual touch centre and four corners of every shortcut",
+              "status": "failed",
+              "error": "AssertionError [ERR_ASSERTION]: :is(.panel,.modal):not([hidden]) .phead [data-act=\"close\"]"
+            }
+          ]
+        },
+        {
+          "run": "round2-J1-prefix-5",
+          "steps": [
+            {
+              "name": "J1 emergency actual touch centre and four corners of every shortcut",
+              "status": "passed"
+            },
+            {
+              "name": "J1 restored actual touch centre and four corners of every shortcut",
+              "status": "passed"
+            }
+          ]
+        }
+      ]
+    },
+    "trend --mode=probe (identity, fixed)": {
+      "status": "PARTIAL",
+      "strictFailures": [
+        {
+          "label": "first-return",
+          "error": "fully visited GPU resources grew"
+        },
+        {
+          "label": "restore-1",
+          "error": "glBuffer empty grew"
+        },
+        {
+          "label": "restore-2",
+          "error": "glBuffer empty grew"
+        },
+        {
+          "label": "restore-3",
+          "error": "glBuffer empty grew"
+        }
+      ]
+    },
+    "coast-sample-test (village, shared renderer)": "51/51",
+    "station-ordinary-acceptance": "3/3",
+    "coast-lifecycle-test": "FAIL 0/4 on both builds at the same entry step (locator #seed after enter, the pre-yard tab entry); pre-existing, not reached",
+    "test:hideout": "8/8",
+    "test:mobile": "10/10",
+    "test:mobile-ux": "11/11",
+    "test:desktop-input": "10/10",
+    "test:shop-drag": "21/21",
+    "test:portable": "6/6",
+    "test:title": "27/27",
+    "test:save-browser": "9/9",
+    "test:systems": "16/16"
+  }
+}

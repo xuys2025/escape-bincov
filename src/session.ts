@@ -2,7 +2,7 @@ import * as D from './domain';
 import { moveQuantity, placementError, type LootContainer, type LootEndpoint, type LootTransfer } from './loot';
 import { initialCheckpoint, type RaidCheckpoint } from './checkpoint';
 import { generateRun } from './world';
-import { decodeSession, RecoveryStore, type SessionRecord } from './recovery-store';
+import { decodeSession, RecoveryStore, StorageConflictError, type SessionRecord } from './recovery-store';
 import { newExpansion, type ExpansionState, type WorldResolver, type EndReason } from './expansion-state';
 import { resolveExpansionWorld } from './expansion-worlds';
 import { initializeMallRaid, mallRunConfig } from './mall-world';
@@ -62,22 +62,25 @@ export class SaveSession {
     private raid: { capture(): RaidCheckpoint; restore(value: RaidCheckpoint): void } | null = null;
     private layered: { capture(): ExpansionState; restore(value: ExpansionState): void } | null = null;
     private owned = true;
+    private deferred: ExpansionTransaction | null = null;
+    private committingDeferred = false;
     private prepared = new WeakMap<ExpansionTransaction, { revision: number; before: string; draft: ExpansionDraft }>();
     constructor(
         private readonly session: SessionState,
         private readonly storage: () => D.StorageLike,
         private readonly resolveWorld: WorldResolver = resolveExpansionWorld,
+        private readonly now: () => number = () => Date.now(),
     ) {}
 
     attachRaid(raid: typeof this.raid) { this.raid = raid; }
     attachExpansion(layered: typeof this.layered) { this.layered = layered; }
     persist(save = this.session.save, snapshot?: RaidCheckpoint | null, terminal?: SessionRecord['terminal'], expansion = this.session.expansion): boolean {
-        if (this.session.conflict || !this.owned) return false;
+        if (this.session.conflict || !this.owned || this.deferred && !this.committingDeferred) return false;
         try {
             if (!this.store) throw new Error('存档尚未加载，请刷新重试。');
             const liveExpansion = expansion === this.session.expansion;
             if (expansion === this.session.expansion && this.layered) expansion = this.layered.capture();
-            if (liveExpansion && expansion?.version === 2) { expansion = structuredClone(expansion); advanceRealTime(expansion, Date.now()); }
+            if (liveExpansion && expansion?.version === 2) { expansion = structuredClone(expansion); advanceRealTime(expansion, this.now()); }
             if (expansion?.raid?.version === 2) { expansion = structuredClone(expansion); creditTraining(expansion, expansion.raid!.training); }
             const checkpoint = save.activeRun ? structuredClone(snapshot === undefined ? this.raid?.capture() ?? this.session.checkpoint : snapshot) : null;
             if (checkpoint && snapshot === undefined && this.session.loadout) checkpoint.loadout = structuredClone(this.session.loadout);
@@ -92,6 +95,7 @@ export class SaveSession {
             if (this.layered && committed.expansion) this.layered.restore(committed.expansion);
             return true;
         } catch (error) {
+            if (error instanceof StorageConflictError) this.markConflict();
             this.session.storageOK = false;
             this.session.storageError = error instanceof Error ? error.message : '存档写入失败。';
             return false;
@@ -102,12 +106,12 @@ export class SaveSession {
         const s = this.session;
         this.owned = owned; this.raid = null; this.layered = null;
         try {
-            this.store = new RecoveryStore(this.storage(), () => Date.now(), this.resolveWorld);
+            this.store = new RecoveryStore(this.storage(), () => this.now(), this.resolveWorld);
             const loaded = this.store.load();
             s.save = loaded.save; s.checkpoint = loaded.raid; s.expansion = loaded.expansion; s.recovery = loaded.legacyRecovery;
-            if (s.expansion?.version === 2) advanceRealTime(s.expansion, Date.now());
+            if (s.expansion?.version === 2) advanceRealTime(s.expansion, this.now());
             if (s.expansion?.base.location === 'settlement' && !s.save.activeRun) {
-                s.expansion.base.location = 'base'; s.expansion.base.cursor = Math.max(s.expansion.base.cursor, Date.now());
+                s.expansion.base.location = 'base'; s.expansion.base.cursor = Math.max(s.expansion.base.cursor, this.now());
             }
             s.lastSavedAt = this.store.record?.savedAt ?? 0;
             if (!owned) {
@@ -121,12 +125,31 @@ export class SaveSession {
             return false;
         }
     }
+    get revision(): number { return this.store?.record?.revision ?? 0; }
+    get ownsStorage(): boolean { return this.owned; }
+    captureExpansion(): ExpansionState | null { return structuredClone(this.layered?.capture() ?? this.session.expansion); }
+    /** Idempotent station-boundary upgrade; never converts a live legacy raid. */
+    ensureRpg(): boolean {
+        const s = this.session;
+        if (s.save.activeRun || s.pendingSettlement || s.conflict || !this.owned) return false;
+        return s.expansion?.version === 2 ? s.storageOK : this.enableRpg();
+    }
     original(): string | null { return this.store?.original() ?? null; }
+    /** Reason of this exact terminal record only; older records may have no reason. */
+    terminalReason(runId: string): EndReason | null {
+        const terminal = this.store?.record?.terminal;
+        return terminal?.runId === runId ? terminal.reason ?? null : null;
+    }
     currentRecord(): SessionRecord | null { return this.store?.record ? structuredClone(this.store.record) : null; }
     /** Includes the exact pending growth/body/queue candidate instead of exporting only gear. */
     backupRecord(snapshot?: RaidCheckpoint | null): SessionRecord | null {
         const s = this.session, record = this.currentRecord();
         if (!record) return null;
+        const deferred = this.deferred && this.prepared.get(this.deferred);
+        if (deferred) {
+            record.profile = structuredClone(deferred.draft.profile); record.raid = structuredClone(deferred.draft.legacyRaid);
+            record.expansion = structuredClone(deferred.draft.expansion); return record;
+        }
         record.profile = structuredClone(s.pendingSettlement ?? s.save);
         record.raid = s.pendingSettlement ? null : structuredClone(snapshot === undefined ? this.raid?.capture() ?? s.checkpoint : snapshot);
         if (s.expansion) record.expansion = structuredClone(s.pendingSettlement ? s.pendingExpansion! : this.layered?.capture() ?? s.expansion);
@@ -138,12 +161,12 @@ export class SaveSession {
     }
 
     /** Explicit, atomic opt-in. M0 does not silently activate unfinished gameplay for players. */
-    enableExpansion(now = Date.now()): boolean {
+    enableExpansion(now = this.now()): boolean {
         const s = this.session;
         if (!this.store?.record || s.expansion || s.pendingSettlement || s.conflict || !this.owned) return false;
         return this.persist(s.save, undefined, undefined, newExpansion(now, s.checkpoint));
     }
-    enableRpg(now = Date.now()): boolean {
+    enableRpg(now = this.now()): boolean {
         const s = this.session;
         if (s.save.activeRun || s.pendingSettlement || s.conflict || !this.owned) return false;
         const expansion = structuredClone(s.expansion ?? newExpansion(now));
@@ -156,10 +179,10 @@ export class SaveSession {
     }
     prepareExpansionMutation(action: (draft: ExpansionDraft) => boolean | void): ExpansionTransaction | null {
         const s = this.session, record = this.store?.record;
-        if (!record || !s.expansion || s.conflict || s.pendingSettlement || !this.owned) return null;
+        if (!record || !s.expansion || s.conflict || s.pendingSettlement || !this.owned || this.deferred) return null;
         const before = this.expansionBefore();
         const draft: ExpansionDraft = { profile: structuredClone(s.save), legacyRaid: structuredClone(this.raid?.capture() ?? s.checkpoint), expansion: structuredClone(this.layered?.capture() ?? s.expansion) };
-        if (draft.expansion.version === 2) advanceRealTime(draft.expansion, Date.now());
+        if (draft.expansion.version === 2) advanceRealTime(draft.expansion, this.now());
         if (action(draft) === false) return null;
         const raid = draft.expansion.raid ?? draft.legacyRaid;
         if (raid) D.checkpointSafe(draft.profile, raid.loadout.safe, raid.runId);
@@ -169,11 +192,19 @@ export class SaveSession {
         this.prepared.set(ticket, { revision: record.revision, before, draft: structuredClone(draft) });
         return ticket;
     }
+    /** Keep a failed base checkpoint exclusive until this exact ticket commits. Old tabs cannot overwrite it. */
+    retainExpansionTransaction(ticket: ExpansionTransaction): void {
+        if (this.prepared.has(ticket) && !this.deferred) this.deferred = ticket;
+    }
     commitExpansionMutation(ticket: ExpansionTransaction): MutationResult {
         const s = this.session, prepared = this.prepared.get(ticket);
-        if (s.conflict || s.pendingSettlement || !this.owned) return 'blocked';
+        if (s.conflict || s.pendingSettlement || !this.owned || this.deferred && this.deferred !== ticket) return 'blocked';
         if (!prepared || this.store?.record?.revision !== prepared.revision || this.expansionBefore() !== prepared.before) return 'rejected';
-        if (!this.persist(prepared.draft.profile, prepared.draft.legacyRaid, undefined, prepared.draft.expansion)) return 'save-failed';
+        this.committingDeferred = this.deferred === ticket;
+        let saved: boolean;
+        try { saved = this.persist(prepared.draft.profile, prepared.draft.legacyRaid, undefined, prepared.draft.expansion); } finally { this.committingDeferred = false; }
+        if (!saved) return 'save-failed';
+        if (this.deferred === ticket) this.deferred = null;
         s.save = structuredClone(prepared.draft.profile);
         s.loadout = structuredClone(prepared.draft.expansion.raid?.loadout ?? prepared.draft.legacyRaid?.loadout ?? null);
         if (prepared.draft.legacyRaid) this.raid?.restore(prepared.draft.legacyRaid);
@@ -201,10 +232,10 @@ export class SaveSession {
         const loadout = D.beginRun(candidate, seed);
         const config = buildings === 'mall' ? mallRunConfig(seed) : buildings ? buildingRunConfig(seed) : generateRun(seed);
         let checkpoint: RaidCheckpoint | null = buildings ? null : initialCheckpoint(config, loadout);
-        const expansion = buildings ? structuredClone(s.expansion ?? newExpansion(Date.now())) : structuredClone(s.expansion);
-        if (expansion?.version === 2) advanceRealTime(expansion, Date.now());
+        const expansion = buildings ? structuredClone(s.expansion ?? newExpansion(this.now())) : structuredClone(s.expansion);
+        if (expansion?.version === 2) advanceRealTime(expansion, this.now());
         if (buildings) {
-            if (expansion!.version === 1) { expansion!.version = 2; expansion!.charm = null; expansion!.awards = []; expansion!.base.cursor = Math.max(expansion!.base.cursor, Date.now()); }
+            if (expansion!.version === 1) { expansion!.version = 2; expansion!.charm = null; expansion!.awards = []; expansion!.base.cursor = Math.max(expansion!.base.cursor, this.now()); }
             Object.assign(loadout, D.reloadMagazine(loadout.weapon || 'knife', loadout.ammo, loadout.ammoRelief, loadout.bag));
             if (buildings === 'mall') initializeMallRaid(expansion!, loadout, config);
             else initializeBuildingRaid(expansion!, loadout, config);
@@ -243,7 +274,7 @@ export class SaveSession {
         s.pendingReason = reason;
         s.pendingExpansion = structuredClone(this.layered?.capture() ?? s.expansion);
         if (s.pendingExpansion) {
-            if (s.pendingExpansion.version === 2) advanceRealTime(s.pendingExpansion, Date.now());
+            if (s.pendingExpansion.version === 2) advanceRealTime(s.pendingExpansion, this.now());
             if (s.pendingExpansion.raid?.version === 2) {
                 creditTraining(s.pendingExpansion, s.pendingExpansion.raid.training);
                 if (reason === 'death') Object.assign(s.pendingExpansion.body, { hp: 1, stamina: 0, mental: 20, water: 40, satiety: 40, pollution: 50 });
@@ -255,7 +286,7 @@ export class SaveSession {
             if (old) Object.assign(s.pendingExpansion.body, { hp: old.hp, stamina: old.stamina, pollution: old.pollution, bleeding: !!old.bleeding, exhausted: old.exhausted });
             s.pendingExpansion.raid = null;
             s.pendingExpansion.base.location = 'settlement';
-            s.pendingExpansion.base.cursor = Math.max(s.pendingExpansion.base.cursor, Date.now());
+            s.pendingExpansion.base.cursor = Math.max(s.pendingExpansion.base.cursor, this.now());
         }
         return true;
     }
@@ -266,7 +297,7 @@ export class SaveSession {
         if (!candidate) return false;
         const expansion = structuredClone(s.pendingExpansion);
         // Waiting for storage is not time spent recovering in the base.
-        if (expansion) { if (expansion.version === 2) advanceRealTime(expansion, Date.now()); expansion.base.location = 'base'; expansion.base.cursor = Math.max(expansion.base.cursor, Date.now()); }
+        if (expansion) { if (expansion.version === 2) advanceRealTime(expansion, this.now()); expansion.base.location = 'base'; expansion.base.cursor = Math.max(expansion.base.cursor, this.now()); }
         if (!this.persist(candidate, null, { runId: s.save.activeRun!.runId!, outcome: candidate.lastResult!.outcome,
             ...(expansion ? { reason: s.pendingReason! } : {}) }, expansion)) return false;
         s.save = candidate;
@@ -290,9 +321,9 @@ export class SaveSession {
     importRecord(record: SessionRecord): boolean {
         const s = this.session;
         const expansion = structuredClone(record.expansion ?? null);
-        if (expansion?.version === 2) advanceRealTime(expansion, Date.now());
+        if (expansion?.version === 2) advanceRealTime(expansion, this.now());
         if (expansion?.base.location === 'settlement' && !record.profile.activeRun) {
-            expansion.base.location = 'base'; expansion.base.cursor = Math.max(expansion.base.cursor, Date.now());
+            expansion.base.location = 'base'; expansion.base.cursor = Math.max(expansion.base.cursor, this.now());
         }
         if (s.state !== 'hideout' || s.pendingSettlement || s.save.activeRun || !this.persist(record.profile, record.raid, record.terminal, expansion)) return false;
         s.save = structuredClone(record.profile); s.recovery = false; s.loadout = null;

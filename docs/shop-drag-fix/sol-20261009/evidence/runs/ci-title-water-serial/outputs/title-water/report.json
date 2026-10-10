@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-09T13:32:01.509Z",
+  "methodology": "Offline file:// current packaged game. Screenshots are unmodified. Water diagnostic uses ?test=1 to disable rain and hold the camera; a separate static capture uses reduced motion. Synthetic state is limited to these controls; no saved-game fixture.",
+  "checks": [
+    {
+      "name": "visible water changes without rain",
+      "changedPixels": 2482
+    },
+    {
+      "name": "visible reflection changes without rain",
+      "changedPixels": 1251
+    },
+    {
+      "name": "fixed-camera diagnostic",
+      "camera": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "motion toggle preserves pose",
+      "before": [
+        {
+          "far": [
+            0,
+            0
+          ],
+          "harbor": [
+            0,
+            0
+          ],
+          "room": [
+            0.9788963168433322,
+            0
+          ],
+          "lamp": [
+            0.9788963168433322,
+            0
+          ],
+          "desk": [
+            1.9577926336866645,
+            0
+          ],
+          "chair": [
+            2.9366889505299967,
+            0
+          ],
+          "fore": [
+            3.915585267373329,
+            0
+          ]
+        },
+        61.46613433415826,
+        2,
+        52
+      ],
+      "after": [
+        {
+          "far": [
+            0,
+            0
+          ],
+          "harbor": [
+            0,
+            0
+          ],
+          "room": [
+            0.9788963168433322,
+            0
+          ],
+          "lamp": [
+            0.9788963168433322,
+            0
+          ],
+          "desk": [
+            1.9577926336866645,
+            0
+          ],
+          "chair": [
+            2.9366889505299967,
+            0
+          ],
+          "fore": [
+            3.915585267373329,
+            0
+          ]
+        },
+        61.46613433415826,
+        2,
+        52
+      ]
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "status": "passed"
+}

@@ -1,0 +1,193 @@
+{
+  "startedAt": "2026-10-08T18:41:36.259Z",
+  "node": "v24.19.0",
+  "method": "Original Phaser ?test=1 on coast-v1, seeded 42 noise, no autoplay override. Explicit position/enemy cooldown fixtures only; native mouse shot, native E pickup/extract, actual adjacent scav AI damage. Native destination output, no direct audio cue calls.",
+  "runs": [
+    {
+      "build": "old-1c1c935",
+      "htmlSHA256": "4be1408745e5f0af39ef2e55ea318c2fe909ddea5f005e45026934a2c7c714e2",
+      "cues": [
+        {
+          "cue": "shot",
+          "evidence": {
+            "before": 8,
+            "after": 7
+          },
+          "output": {
+            "blocks": 131,
+            "peak": 0.2155398577451706,
+            "hfPeak": 0.025434319288872725,
+            "ambiencePeak": 0.05563955381512642
+          }
+        },
+        {
+          "cue": "pickup",
+          "evidence": {
+            "sampleInBag": true
+          },
+          "output": {
+            "blocks": 143,
+            "peak": 0.047680795192718506,
+            "hfPeak": 0.0017329164137573167,
+            "ambiencePeak": 0.04772283509373665
+          }
+        },
+        {
+          "cue": "hit",
+          "evidence": {
+            "before": 100,
+            "after": 89,
+            "actualEnemyAI": true
+          },
+          "output": {
+            "blocks": 132,
+            "peak": 0.20254294574260712,
+            "hfPeak": 0.020497189132629132,
+            "ambiencePeak": 0.026099873706698418
+          }
+        },
+        {
+          "cue": "extract",
+          "evidence": {
+            "outcome": "extract"
+          },
+          "output": {
+            "blocks": 449,
+            "peak": 0.06722346693277359,
+            "hfPeak": 0.002024487754525943,
+            "ambiencePeak": 0.03383491188287735
+          }
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "build": "current-14abea3",
+      "htmlSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "cues": [
+        {
+          "cue": "shot",
+          "evidence": {
+            "before": 8,
+            "after": 7
+          },
+          "output": {
+            "blocks": 132,
+            "peak": 0.2155398577451706,
+            "hfPeak": 0.02543431945860376,
+            "ambiencePeak": 0.05563955381512642
+          }
+        },
+        {
+          "cue": "pickup",
+          "evidence": {
+            "sampleInBag": true
+          },
+          "output": {
+            "blocks": 144,
+            "peak": 0.047680795192718506,
+            "hfPeak": 0.0016659425265431816,
+            "ambiencePeak": 0.04772283509373665
+          }
+        },
+        {
+          "cue": "hit",
+          "evidence": {
+            "before": 100,
+            "after": 89,
+            "actualEnemyAI": true
+          },
+          "output": {
+            "blocks": 133,
+            "peak": 0.20254294574260712,
+            "hfPeak": 0.02583841944199883,
+            "ambiencePeak": 0.026099873706698418
+          }
+        },
+        {
+          "cue": "extract",
+          "evidence": {
+            "outcome": "extract"
+          },
+          "output": {
+            "blocks": 451,
+            "peak": 0.07174935191869736,
+            "hfPeak": 0.001674586100742553,
+            "ambiencePeak": 0.03383491188287735
+          }
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "finishedAt": "2026-10-08T18:42:03.799Z",
+  "comparison": [
+    {
+      "cue": "shot",
+      "old": {
+        "blocks": 131,
+        "peak": 0.2155398577451706,
+        "hfPeak": 0.025434319288872725,
+        "ambiencePeak": 0.05563955381512642
+      },
+      "current": {
+        "blocks": 132,
+        "peak": 0.2155398577451706,
+        "hfPeak": 0.02543431945860376,
+        "ambiencePeak": 0.05563955381512642
+      },
+      "peakRatio": 1
+    },
+    {
+      "cue": "hit",
+      "old": {
+        "blocks": 132,
+        "peak": 0.20254294574260712,
+        "hfPeak": 0.020497189132629132,
+        "ambiencePeak": 0.026099873706698418
+      },
+      "current": {
+        "blocks": 133,
+        "peak": 0.20254294574260712,
+        "hfPeak": 0.02583841944199883,
+        "ambiencePeak": 0.026099873706698418
+      },
+      "peakRatio": 1
+    },
+    {
+      "cue": "pickup",
+      "old": {
+        "blocks": 143,
+        "peak": 0.047680795192718506,
+        "hfPeak": 0.0017329164137573167,
+        "ambiencePeak": 0.04772283509373665
+      },
+      "current": {
+        "blocks": 144,
+        "peak": 0.047680795192718506,
+        "hfPeak": 0.0016659425265431816,
+        "ambiencePeak": 0.04772283509373665
+      },
+      "peakRatio": 1
+    },
+    {
+      "cue": "extract",
+      "old": {
+        "blocks": 449,
+        "peak": 0.06722346693277359,
+        "hfPeak": 0.002024487754525943,
+        "ambiencePeak": 0.03383491188287735
+      },
+      "current": {
+        "blocks": 451,
+        "peak": 0.07174935191869736,
+        "hfPeak": 0.001674586100742553,
+        "ambiencePeak": 0.03383491188287735
+      },
+      "peakRatio": 1.0673259680350888
+    }
+  ]
+}

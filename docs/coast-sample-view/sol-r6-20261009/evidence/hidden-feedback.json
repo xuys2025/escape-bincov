@@ -1,0 +1,51 @@
+{
+  "at": "2026-10-08T18:35:36.534Z",
+  "node": "v24.19.0",
+  "htmlSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+  "method": "Detached cloned PublishedView and same-stamp synthetic events to real host feedback methods, ticker stopped. Negative unrevealed and positive revealed/offscreen controls; no write/no gameplay claim.",
+  "runs": [
+    {
+      "art": "sol",
+      "room": "coast-buildings-v1/resident-layout-1/coast/region/resident-ground",
+      "point": {
+        "x": 464,
+        "y": 320
+      },
+      "screen": {
+        "x": 773.3333333333334,
+        "y": -1123.3333333333335
+      },
+      "hidden": {
+        "marker": false,
+        "chevrons": 0
+      },
+      "positive": {
+        "marker": true,
+        "chevrons": 1
+      }
+    },
+    {
+      "art": "placeholder",
+      "room": "coast-buildings-v1/resident-layout-1/coast/region/resident-ground",
+      "point": {
+        "x": 464,
+        "y": 320
+      },
+      "screen": {
+        "x": 773.3333333333334,
+        "y": -1123.3333333333335
+      },
+      "hidden": {
+        "marker": false,
+        "chevrons": 0
+      },
+      "positive": {
+        "marker": true,
+        "chevrons": 1
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98"
+}

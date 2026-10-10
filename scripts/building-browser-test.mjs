@@ -17,7 +17,7 @@ const info = () => page.evaluate(() => { const a = window.__bincov.app, s = a.ra
 const stand = (x, y) => page.evaluate(({ x, y }) => { const r = window.__bincov.app.raid; r.player.setPosition(x, y); if (!r.checkpoint()) throw new Error('Fixture checkpoint failed'); }, { x, y });
 async function step(name, task) { const entry = { name, status: 'running' }; report.steps.push(entry); try { await task(); assert.deepEqual(report.errors, []); assert.deepEqual(report.requests, []); entry.status = 'passed'; console.log('PASS', name); } catch (e) { entry.status = 'failed'; entry.error = e.stack; throw e; } }
 try {
-    await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1'); await action('enter').click();
+    await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs'); await action('enter').click();
     await page.locator('#run-world').selectOption('buildings'); await page.locator('#seed').fill('42'); await action('deploy').click();
     await page.waitForFunction(() => window.__bincov.app.raid?.player?.active);
     await step('native deployment saves all three maps with one global roster and body', async () => {
@@ -175,7 +175,7 @@ try {
             mobile.on('request', r => { if (/^https?:/.test(r.url())) report.requests.push(r.url()); });
             try {
                 const act = name => p.locator(`[data-action="${name}"]`);
-                await p.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1'); await act('enter').tap();
+                await p.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs'); await act('enter').tap();
                 await p.locator('#run-world').selectOption('buildings'); await p.locator('#seed').fill('42'); await act('deploy').tap();
                 await p.waitForFunction(() => window.__bincov.app.raid?.player?.active);
                 assert.equal(await p.evaluate(() => window.__bincov.playerInput.touch), true);

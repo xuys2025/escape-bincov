@@ -1,0 +1,1033 @@
+{
+  "method": "All six registrations via GCSystem._managedResourceHashes -> descriptor.context[descriptor.hash]; absent/changed structures throw. Numeric keys and backing self_size are V8 graph observations, not GPU allocation. Native DOM cs-hud labels only, no string matches. Native-event absence valid only with EventSystem and both pointer roots and wheel root observed. Owner pin/release is an independent positive control.",
+  "rows": [
+    {
+      "file": "D:\\bincov\\pr22-runtime\\test-results\\sol-f20-20261009/named60-first/cycle-6.heapsnapshot",
+      "bytes": 38361994,
+      "sha256": "0d8d866237b59de1055db86f2d038f321e1d2544e3bc38ab753216d0dfbf1083",
+      "registry": {
+        "gc": {
+          "id": 389143,
+          "type": "object",
+          "name": "_GCSystem2",
+          "selfSize": 68
+        },
+        "list": {
+          "id": 486471,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16
+        },
+        "tables": [
+          {
+            "name": "graphics",
+            "hash": "items",
+            "context": {
+              "id": 467577,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 486527,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          },
+          {
+            "name": "graphicsContext",
+            "hash": "items",
+            "context": {
+              "id": 477361,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 486525,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          },
+          {
+            "name": "glBuffer",
+            "hash": "items",
+            "context": {
+              "id": 287567,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 486521,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 527137,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 232
+            },
+            "keys": 5,
+            "empty": 0,
+            "live": 5,
+            "nonNullValues": [
+              {
+                "id": 511859,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 511797,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 427249,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 277463,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 277493,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              }
+            ]
+          },
+          {
+            "name": "glTexture",
+            "hash": "items",
+            "context": {
+              "id": 213119,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 363791,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 527055,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 76
+            },
+            "keys": 2,
+            "empty": 0,
+            "live": 2,
+            "nonNullValues": [
+              {
+                "id": 193933,
+                "type": "object",
+                "name": "_TextureSource2",
+                "selfSize": 152
+              },
+              {
+                "id": 212753,
+                "type": "object",
+                "name": "BufferImageSource",
+                "selfSize": 268
+              }
+            ]
+          },
+          {
+            "name": "glGeometry",
+            "hash": "items",
+            "context": {
+              "id": 287603,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 486517,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 527059,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 76
+            },
+            "keys": 2,
+            "empty": 0,
+            "live": 2,
+            "nonNullValues": [
+              {
+                "id": 194027,
+                "type": "object",
+                "name": "QuadGeometry",
+                "selfSize": 128
+              },
+              {
+                "id": 277451,
+                "type": "object",
+                "name": "BatchGeometry",
+                "selfSize": 80
+              }
+            ]
+          },
+          {
+            "name": "tilingSprite",
+            "hash": "items",
+            "context": {
+              "id": 477359,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 486515,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          }
+        ]
+      },
+      "eventSystems": 1,
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 501341,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "selfSize": 140
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        },
+        {
+          "event": {
+            "id": 501345,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "selfSize": 140
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        }
+      ],
+      "wheelEvents": [
+        {
+          "event": {
+            "id": 501343,
+            "type": "object",
+            "name": "FederatedWheelEvent",
+            "selfSize": 136
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        }
+      ],
+      "oldHudNativeNodes": [],
+      "ownerCounts": {},
+      "status": "passed"
+    },
+    {
+      "file": "D:\\bincov\\pr22-runtime\\test-results\\sol-f20-20261009/named60-first/cycle-20.heapsnapshot",
+      "bytes": 38621430,
+      "sha256": "209b1c3c8f813cf98f5a12d59f6ea7796c00f4acc315b544e241d636910b717d",
+      "registry": {
+        "gc": {
+          "id": 389143,
+          "type": "object",
+          "name": "_GCSystem2",
+          "selfSize": 68
+        },
+        "list": {
+          "id": 486471,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16
+        },
+        "tables": [
+          {
+            "name": "graphics",
+            "hash": "items",
+            "context": {
+              "id": 467577,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 750971,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          },
+          {
+            "name": "graphicsContext",
+            "hash": "items",
+            "context": {
+              "id": 477361,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 750619,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          },
+          {
+            "name": "glBuffer",
+            "hash": "items",
+            "context": {
+              "id": 287567,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 750613,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 750617,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 232
+            },
+            "keys": 5,
+            "empty": 0,
+            "live": 5,
+            "nonNullValues": [
+              {
+                "id": 511859,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 511797,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 427249,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 277463,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 277493,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              }
+            ]
+          },
+          {
+            "name": "glTexture",
+            "hash": "items",
+            "context": {
+              "id": 213119,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 726809,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 750771,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 76
+            },
+            "keys": 2,
+            "empty": 0,
+            "live": 2,
+            "nonNullValues": [
+              {
+                "id": 193933,
+                "type": "object",
+                "name": "_TextureSource2",
+                "selfSize": 152
+              },
+              {
+                "id": 212753,
+                "type": "object",
+                "name": "BufferImageSource",
+                "selfSize": 268
+              }
+            ]
+          },
+          {
+            "name": "glGeometry",
+            "hash": "items",
+            "context": {
+              "id": 287603,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 750607,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 750611,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 76
+            },
+            "keys": 2,
+            "empty": 0,
+            "live": 2,
+            "nonNullValues": [
+              {
+                "id": 194027,
+                "type": "object",
+                "name": "QuadGeometry",
+                "selfSize": 128
+              },
+              {
+                "id": 277451,
+                "type": "object",
+                "name": "BatchGeometry",
+                "selfSize": 80
+              }
+            ]
+          },
+          {
+            "name": "tilingSprite",
+            "hash": "items",
+            "context": {
+              "id": 477359,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 750603,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          }
+        ]
+      },
+      "eventSystems": 1,
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 501341,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "selfSize": 140
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        },
+        {
+          "event": {
+            "id": 501345,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "selfSize": 140
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        }
+      ],
+      "wheelEvents": [
+        {
+          "event": {
+            "id": 501343,
+            "type": "object",
+            "name": "FederatedWheelEvent",
+            "selfSize": 136
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        }
+      ],
+      "oldHudNativeNodes": [],
+      "ownerCounts": {},
+      "status": "passed"
+    },
+    {
+      "file": "D:\\bincov\\pr22-runtime\\test-results\\sol-f20-20261009/named60-first/cycle-40.heapsnapshot",
+      "bytes": 38744066,
+      "sha256": "1b03bd6aac284f326ca021f56447faacf63c645bf8069f9698dc8700c63a9e55",
+      "registry": {
+        "gc": {
+          "id": 389143,
+          "type": "object",
+          "name": "_GCSystem2",
+          "selfSize": 68
+        },
+        "list": {
+          "id": 486471,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16
+        },
+        "tables": [
+          {
+            "name": "graphics",
+            "hash": "items",
+            "context": {
+              "id": 467577,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 906763,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          },
+          {
+            "name": "graphicsContext",
+            "hash": "items",
+            "context": {
+              "id": 477361,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 906785,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          },
+          {
+            "name": "glBuffer",
+            "hash": "items",
+            "context": {
+              "id": 287567,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 907159,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 907143,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 232
+            },
+            "keys": 5,
+            "empty": 0,
+            "live": 5,
+            "nonNullValues": [
+              {
+                "id": 511859,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 511797,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 427249,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 277463,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 277493,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              }
+            ]
+          },
+          {
+            "name": "glTexture",
+            "hash": "items",
+            "context": {
+              "id": 213119,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 843145,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 907147,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 76
+            },
+            "keys": 2,
+            "empty": 0,
+            "live": 2,
+            "nonNullValues": [
+              {
+                "id": 193933,
+                "type": "object",
+                "name": "_TextureSource2",
+                "selfSize": 152
+              },
+              {
+                "id": 212753,
+                "type": "object",
+                "name": "BufferImageSource",
+                "selfSize": 268
+              }
+            ]
+          },
+          {
+            "name": "glGeometry",
+            "hash": "items",
+            "context": {
+              "id": 287603,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 906757,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 906739,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 76
+            },
+            "keys": 2,
+            "empty": 0,
+            "live": 2,
+            "nonNullValues": [
+              {
+                "id": 194027,
+                "type": "object",
+                "name": "QuadGeometry",
+                "selfSize": 128
+              },
+              {
+                "id": 277451,
+                "type": "object",
+                "name": "BatchGeometry",
+                "selfSize": 80
+              }
+            ]
+          },
+          {
+            "name": "tilingSprite",
+            "hash": "items",
+            "context": {
+              "id": 477359,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 906683,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          }
+        ]
+      },
+      "eventSystems": 1,
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 501341,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "selfSize": 140
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        },
+        {
+          "event": {
+            "id": 501345,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "selfSize": 140
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        }
+      ],
+      "wheelEvents": [
+        {
+          "event": {
+            "id": 501343,
+            "type": "object",
+            "name": "FederatedWheelEvent",
+            "selfSize": 136
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        }
+      ],
+      "oldHudNativeNodes": [],
+      "ownerCounts": {},
+      "status": "passed"
+    },
+    {
+      "file": "D:\\bincov\\pr22-runtime\\test-results\\sol-f20-20261009/named60-first/cycle-60.heapsnapshot",
+      "bytes": 38878685,
+      "sha256": "bdb4edb2aa57c8f9175ad6ee2e5c3821425ff3ebbf359ebbd1b3bdd817094257",
+      "registry": {
+        "gc": {
+          "id": 389143,
+          "type": "object",
+          "name": "_GCSystem2",
+          "selfSize": 68
+        },
+        "list": {
+          "id": 486471,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16
+        },
+        "tables": [
+          {
+            "name": "graphics",
+            "hash": "items",
+            "context": {
+              "id": 467577,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 1086045,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          },
+          {
+            "name": "graphicsContext",
+            "hash": "items",
+            "context": {
+              "id": 477361,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 1086043,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          },
+          {
+            "name": "glBuffer",
+            "hash": "items",
+            "context": {
+              "id": 287567,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 1086041,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 1093129,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 232
+            },
+            "keys": 5,
+            "empty": 0,
+            "live": 5,
+            "nonNullValues": [
+              {
+                "id": 511859,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 511797,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 427249,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 277463,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 277493,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              }
+            ]
+          },
+          {
+            "name": "glTexture",
+            "hash": "items",
+            "context": {
+              "id": 213119,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 967899,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 1093319,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 76
+            },
+            "keys": 2,
+            "empty": 0,
+            "live": 2,
+            "nonNullValues": [
+              {
+                "id": 193933,
+                "type": "object",
+                "name": "_TextureSource2",
+                "selfSize": 152
+              },
+              {
+                "id": 212753,
+                "type": "object",
+                "name": "BufferImageSource",
+                "selfSize": 268
+              }
+            ]
+          },
+          {
+            "name": "glGeometry",
+            "hash": "items",
+            "context": {
+              "id": 287603,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 1086039,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 1093231,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 76
+            },
+            "keys": 2,
+            "empty": 0,
+            "live": 2,
+            "nonNullValues": [
+              {
+                "id": 194027,
+                "type": "object",
+                "name": "QuadGeometry",
+                "selfSize": 128
+              },
+              {
+                "id": 277451,
+                "type": "object",
+                "name": "BatchGeometry",
+                "selfSize": 80
+              }
+            ]
+          },
+          {
+            "name": "tilingSprite",
+            "hash": "items",
+            "context": {
+              "id": 477359,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 1086037,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          }
+        ]
+      },
+      "eventSystems": 1,
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 501341,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "selfSize": 140
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        },
+        {
+          "event": {
+            "id": 501345,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "selfSize": 140
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        }
+      ],
+      "wheelEvents": [
+        {
+          "event": {
+            "id": 501343,
+            "type": "object",
+            "name": "FederatedWheelEvent",
+            "selfSize": 136
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        }
+      ],
+      "oldHudNativeNodes": [],
+      "ownerCounts": {},
+      "status": "passed"
+    }
+  ]
+}

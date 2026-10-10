@@ -1,3 +1,4 @@
+import { RealHideoutRuntime } from './hideout-runtime';
 import type { ShopCart } from './shop';
 import type Phaser from 'phaser';
 import type { RaidScene } from './game';
@@ -13,6 +14,10 @@ export const app = {
     game: null as Phaser.Game | null,
     raid: null as RaidScene | null,
     base: null as BaseScene | null,
+    /** Opt-in Pixi village sample host (?sample=village); while set, the Phaser RaidScene is never started. */
+    coastSample: null as { checkpoint(): boolean } | null,
+    /** Station yard host (default hideout view); while set, no Phaser scene runs and the old tab page is cleared. */
+    station: null as { checkpoint(): boolean } | null,
     baseWalking: false, baseFacility: 'rest', mapView: '',
     tab: 'gear', overlay: '', helpReturn: '', selected: '', selectedSource: '', seed: '',
     runWorld: 'coast' as 'coast' | 'buildings' | 'mall',
@@ -29,3 +34,6 @@ export const app = {
 
 export const audio = new SynthAudio();
 export const saveSession = new SaveSession(app, () => localStorage);
+
+/** Shared by the station host and shortcut tabs; no independent save store. */
+export const hideoutRuntime = new RealHideoutRuntime(app, saveSession, undefined, () => !document.hidden && document.hasFocus() && !app.overlay && !app.baseWalking);

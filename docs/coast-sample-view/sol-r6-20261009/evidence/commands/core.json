@@ -1,0 +1,30 @@
+[
+  {
+    "id": "test",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:18:34.406Z",
+    "finished": "2026-10-08T18:18:40.522Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "package",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "package"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:18:40.522Z",
+    "finished": "2026-10-08T18:18:44.921Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

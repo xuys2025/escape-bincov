@@ -6,7 +6,7 @@ await mkdir('test-results',{recursive:true});
 const browser=await chromium.launch({executablePath:process.env.CHROME_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true,args:['--allow-file-access-from-files']});
 const page=await browser.newPage({viewport:{width:1280,height:720}});
 page.on('pageerror',e=>console.log('PAGE ERROR:',e.message));
-await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1');
+await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1&entry=tabs');
 await page.waitForSelector('[data-action="enter"]');
 await page.screenshot({path:'test-results/menu.png'});
 await page.click('[data-action="enter"]');

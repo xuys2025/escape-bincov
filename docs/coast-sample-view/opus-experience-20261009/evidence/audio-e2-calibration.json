@@ -1,0 +1,151 @@
+{
+  "check": "coast-audio-test.mjs E2: abandon from the pause menu, death cue measured by level (peak of the settlement window vs the ambience after the cue)",
+  "withoutCue": "Original game before the fix (defect repro on 1c1c935): window peak 0.0595, i.e. the ambience level, about 1x",
+  "decision": "The first threshold (2.2x) sat inside the measured with-cue range (2.11-2.89x over 16 runs, peaks 0.113-0.159) and failed 2 of 3 final-battery runs although the cue played (peaks 0.118 and 0.132). Recalibrated to 1.6x with a 0.09 floor, which separates ~1x (no cue) from >=2.11x (cue) with margin on both sides; then 3 reruns on the same final build, all 14/14.",
+  "rows": [
+    {
+      "run": "development audio2",
+      "threshold": 2.2,
+      "e2": "passed",
+      "cuePeak": 0.1257,
+      "ambiencePeak": 0.0566,
+      "ratio": 2.22,
+      "total": "13/14"
+    },
+    {
+      "run": "development audio3-1",
+      "threshold": 2.2,
+      "e2": "passed",
+      "cuePeak": 0.1261,
+      "ambiencePeak": 0.0557,
+      "ratio": 2.26,
+      "total": "13/14"
+    },
+    {
+      "run": "development audio3-2",
+      "threshold": 2.2,
+      "e2": "passed",
+      "cuePeak": 0.1226,
+      "ambiencePeak": 0.0557,
+      "ratio": 2.2,
+      "total": "14/14"
+    },
+    {
+      "run": "development audio4-1",
+      "threshold": 2.2,
+      "e2": "passed",
+      "cuePeak": 0.1383,
+      "ambiencePeak": 0.0478,
+      "ratio": 2.89,
+      "total": "14/14"
+    },
+    {
+      "run": "development audio4-2",
+      "threshold": 2.2,
+      "e2": "passed",
+      "cuePeak": 0.1586,
+      "ambiencePeak": 0.0643,
+      "ratio": 2.47,
+      "total": "14/14"
+    },
+    {
+      "run": "development audio4-3",
+      "threshold": 2.2,
+      "e2": "passed",
+      "cuePeak": 0.1332,
+      "ambiencePeak": 0.0565,
+      "ratio": 2.36,
+      "total": "13/14"
+    },
+    {
+      "run": "development audio5-1",
+      "threshold": 2.2,
+      "e2": "passed",
+      "cuePeak": 0.1287,
+      "ambiencePeak": 0.0562,
+      "ratio": 2.29,
+      "total": "14/14"
+    },
+    {
+      "run": "development audio5-2",
+      "threshold": 2.2,
+      "e2": "passed",
+      "cuePeak": 0.1336,
+      "ambiencePeak": 0.0517,
+      "ratio": 2.58,
+      "total": "14/14"
+    },
+    {
+      "run": "development audio5-3",
+      "threshold": 2.2,
+      "e2": "passed",
+      "cuePeak": 0.1362,
+      "ambiencePeak": 0.0523,
+      "ratio": 2.6,
+      "total": "14/14"
+    },
+    {
+      "run": "battery 1 (pre-cleanup build)",
+      "threshold": 2.2,
+      "e2": "passed",
+      "cuePeak": 0.1391,
+      "ambiencePeak": 0.0578,
+      "ratio": 2.41,
+      "total": "14/14"
+    },
+    {
+      "run": "final battery audio",
+      "threshold": 2.2,
+      "e2": "failed",
+      "cuePeak": 0.1181,
+      "ambiencePeak": 0.054,
+      "ratio": 2.19,
+      "total": "13/14"
+    },
+    {
+      "run": "final battery audio-2",
+      "threshold": 2.2,
+      "e2": "failed",
+      "cuePeak": 0.1318,
+      "ambiencePeak": 0.0626,
+      "ratio": 2.11,
+      "total": "13/14"
+    },
+    {
+      "run": "final battery audio-3",
+      "threshold": 2.2,
+      "e2": "passed",
+      "cuePeak": 0.1426,
+      "ambiencePeak": 0.0606,
+      "ratio": 2.35,
+      "total": "14/14"
+    },
+    {
+      "run": "final audio-rerun-1",
+      "threshold": 1.6,
+      "e2": "passed",
+      "cuePeak": 0.1224,
+      "ambiencePeak": 0.0538,
+      "ratio": 2.28,
+      "total": "14/14"
+    },
+    {
+      "run": "final audio-rerun-2",
+      "threshold": 1.6,
+      "e2": "passed",
+      "cuePeak": 0.113,
+      "ambiencePeak": 0.0528,
+      "ratio": 2.14,
+      "total": "14/14"
+    },
+    {
+      "run": "final audio-rerun-3",
+      "threshold": 1.6,
+      "e2": "passed",
+      "cuePeak": 0.136,
+      "ambiencePeak": 0.0534,
+      "ratio": 2.55,
+      "total": "14/14"
+    }
+  ]
+}

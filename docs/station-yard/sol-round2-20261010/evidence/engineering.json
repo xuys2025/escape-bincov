@@ -1,0 +1,209 @@
+[
+  {
+    "name": "install",
+    "command": [
+      "cmd.exe",
+      "/d",
+      "/c",
+      "pnpm install --frozen-lockfile"
+    ],
+    "startedAt": "2026-10-10T12:06:16.065Z",
+    "exitCode": 0,
+    "ms": 541,
+    "finishedAt": "2026-10-10T12:06:16.606Z"
+  },
+  {
+    "name": "unit",
+    "command": [
+      "cmd.exe",
+      "/d",
+      "/c",
+      "pnpm test"
+    ],
+    "startedAt": "2026-10-10T12:06:16.607Z",
+    "exitCode": 0,
+    "ms": 6916,
+    "finishedAt": "2026-10-10T12:06:23.523Z"
+  },
+  {
+    "name": "package",
+    "command": [
+      "cmd.exe",
+      "/d",
+      "/c",
+      "pnpm package"
+    ],
+    "startedAt": "2026-10-10T12:06:23.524Z",
+    "exitCode": 0,
+    "ms": 5689,
+    "finishedAt": "2026-10-10T12:06:29.213Z",
+    "hashes": {
+      "dist/index.html": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+      "start the game.html": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+      "release/Escape-Bincov-portable.zip": "ca7c9da0efbf4ac548e97464045231591a2f03e86b62cbf857d1b2b1901f8f4f",
+      "release/Escape-Bincov-web.zip": "cc55ef3e890174a9fc1d213645393590b743a0542dc80771eec6ab2f05944f3d"
+    },
+    "hashMatch": true,
+    "productStatus": ""
+  },
+  {
+    "name": "station",
+    "command": [
+      "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "--import",
+      "tsx",
+      "scripts/station-browser-test.mjs",
+      "--out=D:\\bincov\\hideout-runtime\\docs\\station-yard\\sol-round2-20261010\\evidence\\station"
+    ],
+    "startedAt": "2026-10-10T12:06:29.326Z",
+    "exitCode": 0,
+    "ms": 509782,
+    "finishedAt": "2026-10-10T12:14:59.108Z"
+  },
+  {
+    "name": "before",
+    "command": [
+      "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "--import",
+      "tsx",
+      "scripts/station-browser-test.mjs",
+      "--html=D:\\bincov\\hideout-runtime\\test-results\\station-round2-old.html",
+      "--only=H17,I1,I2,I3,I4,I5,L1",
+      "--out=D:\\bincov\\hideout-runtime\\docs\\station-yard\\sol-round2-20261010\\evidence\\before"
+    ],
+    "startedAt": "2026-10-10T12:14:59.115Z",
+    "exitCode": 1,
+    "ms": 66512,
+    "finishedAt": "2026-10-10T12:16:05.627Z"
+  },
+  {
+    "name": "mobile",
+    "command": [
+      "cmd.exe",
+      "/d",
+      "/c",
+      "pnpm test:mobile"
+    ],
+    "startedAt": "2026-10-10T12:16:05.628Z",
+    "exitCode": 0,
+    "ms": 20019,
+    "finishedAt": "2026-10-10T12:16:25.647Z"
+  },
+  {
+    "name": "mobile-ux",
+    "command": [
+      "cmd.exe",
+      "/d",
+      "/c",
+      "pnpm test:mobile-ux"
+    ],
+    "startedAt": "2026-10-10T12:16:25.809Z",
+    "exitCode": 0,
+    "ms": 71267,
+    "finishedAt": "2026-10-10T12:17:37.076Z"
+  },
+  {
+    "name": "desktop-input",
+    "command": [
+      "cmd.exe",
+      "/d",
+      "/c",
+      "pnpm test:desktop-input"
+    ],
+    "startedAt": "2026-10-10T12:17:37.174Z",
+    "exitCode": 0,
+    "ms": 23420,
+    "finishedAt": "2026-10-10T12:18:00.594Z"
+  },
+  {
+    "name": "shop-drag",
+    "command": [
+      "cmd.exe",
+      "/d",
+      "/c",
+      "pnpm test:shop-drag"
+    ],
+    "startedAt": "2026-10-10T12:18:00.688Z",
+    "exitCode": 0,
+    "ms": 19265,
+    "finishedAt": "2026-10-10T12:18:19.953Z"
+  },
+  {
+    "name": "portable",
+    "command": [
+      "cmd.exe",
+      "/d",
+      "/c",
+      "pnpm test:portable"
+    ],
+    "startedAt": "2026-10-10T12:18:20.060Z",
+    "exitCode": 0,
+    "ms": 11146,
+    "finishedAt": "2026-10-10T12:18:31.206Z"
+  },
+  {
+    "name": "title",
+    "command": [
+      "cmd.exe",
+      "/d",
+      "/c",
+      "pnpm test:title"
+    ],
+    "startedAt": "2026-10-10T12:18:31.302Z",
+    "exitCode": 0,
+    "ms": 70807,
+    "finishedAt": "2026-10-10T12:19:42.109Z"
+  },
+  {
+    "name": "save-browser",
+    "command": [
+      "cmd.exe",
+      "/d",
+      "/c",
+      "pnpm test:save-browser"
+    ],
+    "startedAt": "2026-10-10T12:19:42.231Z",
+    "exitCode": 0,
+    "ms": 14869,
+    "finishedAt": "2026-10-10T12:19:57.100Z"
+  },
+  {
+    "name": "systems",
+    "command": [
+      "cmd.exe",
+      "/d",
+      "/c",
+      "pnpm test:systems"
+    ],
+    "startedAt": "2026-10-10T12:19:57.203Z",
+    "exitCode": 0,
+    "ms": 39663,
+    "finishedAt": "2026-10-10T12:20:36.866Z"
+  },
+  {
+    "name": "hideout",
+    "command": [
+      "cmd.exe",
+      "/d",
+      "/c",
+      "pnpm test:hideout"
+    ],
+    "startedAt": "2026-10-10T12:20:36.964Z",
+    "exitCode": 0,
+    "ms": 13998,
+    "finishedAt": "2026-10-10T12:20:50.962Z"
+  },
+  {
+    "name": "coast-sample",
+    "command": [
+      "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "--import",
+      "tsx",
+      "scripts/coast-sample-test.mjs"
+    ],
+    "startedAt": "2026-10-10T12:20:51.058Z",
+    "exitCode": 0,
+    "ms": 95400,
+    "finishedAt": "2026-10-10T12:22:26.458Z"
+  }
+]

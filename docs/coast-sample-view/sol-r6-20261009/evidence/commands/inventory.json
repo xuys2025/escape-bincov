@@ -1,0 +1,100 @@
+[
+  {
+    "id": "regression-save-browser",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:save-browser"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:19:06.030Z",
+    "finished": "2026-10-08T18:19:39.826Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-expansion",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:expansion"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:19:39.829Z",
+    "finished": "2026-10-08T18:19:59.735Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-qol-expansion",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:qol-expansion"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:19:59.736Z",
+    "finished": "2026-10-08T18:20:11.874Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-loot",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:loot"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:20:11.874Z",
+    "finished": "2026-10-08T18:21:34.243Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-loot-target",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:loot-target"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:21:34.243Z",
+    "finished": "2026-10-08T18:21:54.776Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-qol",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:qol"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:21:54.776Z",
+    "finished": "2026-10-08T18:22:17.463Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-portable",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:portable"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:22:17.464Z",
+    "finished": "2026-10-08T18:22:23.111Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

@@ -22,7 +22,7 @@ const diff=(a,b)=>{
  return n;
 };
 try{
- await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1');
+ await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1&entry=tabs');
  await page.locator('.title-enter').waitFor();await page.evaluate(()=>document.fonts.ready);await page.waitForTimeout(250);
  await page.screenshot({path:resolve(out,'static-1920x1080.png')});
  await page.screenshot({path:resolve(out,'boat-static.png'),clip:{x:690,y:330,width:324,height:340}});

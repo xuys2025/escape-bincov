@@ -1,0 +1,174 @@
+[
+  {
+    "file": "D:\\bincov\\pr22-runtime\\test-results\\sol-f20-20261009/pin-first/pinned.heapsnapshot",
+    "hud": [
+      {
+        "node": {
+          "id": 31738,
+          "type": "native",
+          "name": "<div class=\"cs-hud\" aria-live=\"polite\">"
+        },
+        "reachable": true,
+        "path": [
+          {
+            "id": 1,
+            "type": "synthetic",
+            "name": ""
+          },
+          {
+            "id": 3,
+            "type": "synthetic",
+            "name": "(GC roots)",
+            "via": "element:1"
+          },
+          {
+            "id": 23,
+            "type": "synthetic",
+            "name": "(Global handles)",
+            "via": "element:10"
+          },
+          {
+            "id": 7397,
+            "type": "object",
+            "name": "CoastSampleHost",
+            "via": "internal:9 / DevTools console"
+          },
+          {
+            "id": 96993,
+            "type": "object",
+            "name": "InventoryPanel",
+            "via": "property:inv"
+          },
+          {
+            "id": 96995,
+            "type": "native",
+            "name": "<section class=\"cs-panel ending\" data-panel=\"\" role=\"dialog\" aria-modal=\"true\" aria-label=\"结算\" hidden=\"\">",
+            "via": "property:el"
+          },
+          {
+            "id": 31870,
+            "type": "native",
+            "name": "Text",
+            "via": "element:8"
+          },
+          {
+            "id": 31738,
+            "type": "native",
+            "name": "<div class=\"cs-hud\" aria-live=\"polite\">",
+            "via": "element:3"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "file": "D:\\bincov\\pr22-runtime\\test-results\\sol-f20-20261009/pin-first/released.heapsnapshot",
+    "hud": [
+      {
+        "node": {
+          "id": 31738,
+          "type": "native",
+          "name": "<div class=\"cs-hud\" aria-live=\"polite\">"
+        },
+        "reachable": true,
+        "path": [
+          {
+            "id": 1,
+            "type": "synthetic",
+            "name": ""
+          },
+          {
+            "id": 3,
+            "type": "synthetic",
+            "name": "(GC roots)",
+            "via": "element:1"
+          },
+          {
+            "id": 23,
+            "type": "synthetic",
+            "name": "(Global handles)",
+            "via": "element:10"
+          },
+          {
+            "id": 7413,
+            "type": "native",
+            "name": "system / NativeContext / file://",
+            "via": "internal:20 / gin::ContextHolder::context_"
+          },
+          {
+            "id": 72497,
+            "type": "object",
+            "name": "Window [JSGlobalObject] / file://",
+            "via": "internal:global_object"
+          },
+          {
+            "id": 121773,
+            "type": "object",
+            "name": "Object",
+            "via": "property:__bincov"
+          },
+          {
+            "id": 76141,
+            "type": "object",
+            "name": "Object",
+            "via": "property:app"
+          },
+          {
+            "id": 103005,
+            "type": "object",
+            "name": "Game2",
+            "via": "property:game"
+          },
+          {
+            "id": 264809,
+            "type": "object",
+            "name": "InputManager2",
+            "via": "property:input"
+          },
+          {
+            "id": 468419,
+            "type": "object",
+            "name": "Pointer2",
+            "via": "property:mousePointer"
+          },
+          {
+            "id": 365781,
+            "type": "native",
+            "name": "MouseEvent",
+            "via": "property:event"
+          },
+          {
+            "id": 13384,
+            "type": "native",
+            "name": "blink::EventPath",
+            "via": "element:8"
+          },
+          {
+            "id": 13386,
+            "type": "native",
+            "name": "blink::HeapVectorBacking<blink::NodeEventContext>",
+            "via": "element:1"
+          },
+          {
+            "id": 96995,
+            "type": "native",
+            "name": "<section class=\"cs-panel ending\" data-panel=\"\" role=\"dialog\" aria-modal=\"true\" aria-label=\"结算\" hidden=\"\">",
+            "via": "element:7"
+          },
+          {
+            "id": 31870,
+            "type": "native",
+            "name": "Text",
+            "via": "element:8"
+          },
+          {
+            "id": 31738,
+            "type": "native",
+            "name": "<div class=\"cs-hud\" aria-live=\"polite\">",
+            "via": "element:3"
+          }
+        ]
+      }
+    ]
+  }
+]

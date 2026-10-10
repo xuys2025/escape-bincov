@@ -1,6 +1,6 @@
 # Third-party notices
 
-The standalone game includes Phaser 3.90.0 and EventEmitter3 5.0.4 under the MIT license. The notices below are also embedded in `dist/index.html` so that copying that file retains them. Original game code, pixel art, narrative and synthesized audio are authored for this project; no third-party illustrations or audio assets are used. The interface also embeds the OFL-licensed font subset described below.
+The standalone game includes Phaser 3.90.0, PixiJS 8.22.0 (used by the opt-in village sample view) and their bundled dependencies EventEmitter3 5.0.4, @pixi/colord 2.9.6, ismobilejs 1.1.1 and parse-svg-path 0.2.0 under the MIT license, and earcut 3.2.4 under the ISC license. The notices below are also embedded in `dist/index.html` so that copying that file retains them. Original game code, pixel art, narrative and synthesized audio are authored for this project; no third-party illustrations or audio assets are used. The interface also embeds the OFL-licensed font subset described below.
 
 ## Phaser 3.90.0
 
@@ -9,6 +9,22 @@ Copyright (c) 2024 Richard Davey, Phaser Studio Inc.
 ## EventEmitter3 5.0.4
 
 Copyright (c) 2014 Arnout Kazemier
+
+## PixiJS 8.22.0
+
+Copyright (c) 2013-2023 Mathew Groves, Chad Engler
+
+## @pixi/colord 2.9.6
+
+Copyright (c) Vlad Shilov <omgovich@ya.ru>
+
+## ismobilejs 1.1.1
+
+Copyright (c) 2019 Kai Mallea
+
+## parse-svg-path 0.2.0
+
+Copyright (c) 2013 Jake Rosoman <jkroso@gmail.com>
 
 ## The MIT License (MIT)
 
@@ -29,6 +45,24 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## earcut 3.2.4 (ISC License)
+
+ISC License
+
+Copyright (c) 2026, Mapbox
+
+Permission to use, copy, modify, and/or distribute this software for any purpose
+with or without fee is hereby granted, provided that the above copyright notice
+and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS
+OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF
+THIS SOFTWARE.
 
 ## Build and test tools
 

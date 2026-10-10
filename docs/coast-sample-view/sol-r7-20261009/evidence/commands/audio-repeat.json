@@ -1,0 +1,100 @@
+[
+  {
+    "id": "audio-4",
+    "args": [
+      "scripts/coast-audio-test.mjs"
+    ],
+    "environment": {
+      "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-4"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T06:51:49.216Z",
+    "finished": "2026-10-09T06:53:02.331Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "audio-5",
+    "args": [
+      "scripts/coast-audio-test.mjs"
+    ],
+    "environment": {
+      "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-5"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T06:53:02.332Z",
+    "finished": "2026-10-09T06:54:13.607Z",
+    "exitCode": 1,
+    "signal": null
+  },
+  {
+    "id": "audio-6",
+    "args": [
+      "scripts/coast-audio-test.mjs"
+    ],
+    "environment": {
+      "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-6"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T06:54:13.607Z",
+    "finished": "2026-10-09T06:55:26.859Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "audio-7",
+    "args": [
+      "scripts/coast-audio-test.mjs"
+    ],
+    "environment": {
+      "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-7"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T06:55:26.859Z",
+    "finished": "2026-10-09T06:56:40.210Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "audio-8",
+    "args": [
+      "scripts/coast-audio-test.mjs"
+    ],
+    "environment": {
+      "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-8"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T06:56:40.211Z",
+    "finished": "2026-10-09T06:57:53.602Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "audio-9",
+    "args": [
+      "scripts/coast-audio-test.mjs"
+    ],
+    "environment": {
+      "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-9"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T06:57:53.602Z",
+    "finished": "2026-10-09T06:59:06.883Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "audio-10",
+    "args": [
+      "scripts/coast-audio-test.mjs"
+    ],
+    "environment": {
+      "BINCOV_AUDIO_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/audio-10"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T06:59:06.883Z",
+    "finished": "2026-10-09T07:00:20.248Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

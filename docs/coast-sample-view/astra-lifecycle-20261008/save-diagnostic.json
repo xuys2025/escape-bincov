@@ -1,0 +1,114 @@
+{
+  "at": "2026-10-08T11:04:14.445Z",
+  "historicalConclusion": "unconfirmed; no original candidate bytes, stack or write result",
+  "checks": [
+    {
+      "fault": "quota",
+      "writeAttempts": 1,
+      "bytesUnchanged": true,
+      "phase": "paused",
+      "error": "injected quota",
+      "origin": {
+        "message": "injected quota",
+        "stack": "QuotaExceededError: injected quota\n    at new DOMException (node:internal/per_context/domexception:76:18)\n    at Object.setItem (file:///D:/bincov/pr22-runtime/scripts/astra-save-diagnostic.mjs:21:115)\n    at RecoveryStore.commit (D:\\bincov\\pr22-runtime\\src\\recovery-store.ts:121:18)\n    at RecoveryStore.commit (file:///D:/bincov/pr22-runtime/scripts/astra-save-diagnostic.mjs:17:68)\n    at SaveSession.persist (D:\\bincov\\pr22-runtime\\src\\session.ts:86:42)\n    at CoastRaidRuntime.checkpoint (D:\\bincov\\pr22-runtime\\src\\raid-runtime\\runtime.ts:305:31)\n    at file:///D:/bincov/pr22-runtime/scripts/astra-save-diagnostic.mjs:28:26"
+      }
+    },
+    {
+      "fault": "invalid-candidate",
+      "writeAttempts": 0,
+      "bytesUnchanged": true,
+      "phase": "paused",
+      "error": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "origin": {
+        "message": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+        "stack": "Error: 建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。\n    at fail (D:\\bincov\\pr22-runtime\\src\\expansion-state.ts:103:35)\n    at validateExpansion (D:\\bincov\\pr22-runtime\\src\\expansion-state.ts:241:75)\n    at decodeSession (D:\\bincov\\pr22-runtime\\src\\recovery-store.ts:64:38)\n    at RecoveryStore.commit (D:\\bincov\\pr22-runtime\\src\\recovery-store.ts:120:5)\n    at RecoveryStore.commit (file:///D:/bincov/pr22-runtime/scripts/astra-save-diagnostic.mjs:17:68)\n    at SaveSession.persist (D:\\bincov\\pr22-runtime\\src\\session.ts:86:42)\n    at CoastRaidRuntime.checkpoint (D:\\bincov\\pr22-runtime\\src\\raid-runtime\\runtime.ts:305:31)\n    at file:///D:/bincov/pr22-runtime/scripts/astra-save-diagnostic.mjs:28:26"
+      }
+    },
+    {
+      "fault": "revision",
+      "writeAttempts": 0,
+      "bytesUnchanged": true,
+      "phase": "paused",
+      "error": "另一窗口已修改存档，请刷新以加载新进度。",
+      "origin": {
+        "message": "另一窗口已修改存档，请刷新以加载新进度。",
+        "stack": "Error: 另一窗口已修改存档，请刷新以加载新进度。\n    at RecoveryStore.commit (D:\\bincov\\pr22-runtime\\src\\recovery-store.ts:110:68)\n    at RecoveryStore.commit (file:///D:/bincov/pr22-runtime/scripts/astra-save-diagnostic.mjs:17:68)\n    at SaveSession.persist (D:\\bincov\\pr22-runtime\\src\\session.ts:86:42)\n    at CoastRaidRuntime.checkpoint (D:\\bincov\\pr22-runtime\\src\\raid-runtime\\runtime.ts:305:31)\n    at file:///D:/bincov/pr22-runtime/scripts/astra-save-diagnostic.mjs:28:26"
+      }
+    },
+    {
+      "case": "ordinary-entry-outside-village",
+      "hooksAbsent": true,
+      "points": [
+        {
+          "elapsed": 2.53910000000149,
+          "player": {
+            "x": 208,
+            "y": 1232
+          },
+          "outsideVillage": true,
+          "revision": 4,
+          "map": "coast"
+        },
+        {
+          "elapsed": 5.0602000000029665,
+          "player": {
+            "x": 184.92800000000005,
+            "y": 1232
+          },
+          "outsideVillage": true,
+          "revision": 6,
+          "map": "coast"
+        },
+        {
+          "elapsed": 7.581200000002986,
+          "player": {
+            "x": 161.17279999983322,
+            "y": 1232
+          },
+          "outsideVillage": true,
+          "revision": 8,
+          "map": "coast"
+        }
+      ],
+      "writes": [
+        {
+          "result": "written",
+          "bytes": 804
+        },
+        {
+          "result": "written",
+          "bytes": 15691
+        },
+        {
+          "result": "written",
+          "bytes": 19713
+        },
+        {
+          "result": "written",
+          "bytes": 19694
+        },
+        {
+          "result": "written",
+          "bytes": 19565
+        },
+        {
+          "result": "written",
+          "bytes": 19555
+        },
+        {
+          "result": "written",
+          "bytes": 19721
+        },
+        {
+          "result": "written",
+          "bytes": 19871
+        }
+      ],
+      "errors": [],
+      "pageErrors": [],
+      "requests": [],
+      "status": "passed"
+    }
+  ],
+  "browser": "154.0.8037.98"
+}

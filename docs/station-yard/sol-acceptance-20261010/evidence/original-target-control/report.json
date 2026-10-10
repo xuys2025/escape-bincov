@@ -1,0 +1,78 @@
+{
+  "browser": "154.0.8037.99",
+  "startedAt": "2026-10-10T03:52:12.728Z",
+  "methodology": "Packaged offline build at https://station.test/ (routed, no network). Real session/localStorage, real DOM input in headless Chrome; phone sizes are viewport/touch emulation. ?test=1 fixtures: player placement, save seeding through SaveSession transactions while the yard is closed, storage fault injection, production time shortening. No mock Runtime and no simulated raid result.",
+  "steps": [
+    {
+      "name": "H16 真实交互/交易/刷新 1280x720",
+      "status": "passed",
+      "detail": {
+        "size": [
+          1280,
+          720
+        ],
+        "input": "real mouse",
+        "cashBefore": 6000,
+        "cashAfter": 5916,
+        "refreshPreserved": true
+      },
+      "ms": 4763
+    },
+    {
+      "name": "H16 真实交互/交易/刷新 1920x1080",
+      "status": "passed",
+      "detail": {
+        "size": [
+          1920,
+          1080
+        ],
+        "input": "real mouse",
+        "cashBefore": 6000,
+        "cashAfter": 5916,
+        "refreshPreserved": true
+      },
+      "ms": 4127
+    },
+    {
+      "name": "H16 真实交互/交易/刷新 844x390",
+      "status": "passed",
+      "detail": {
+        "size": [
+          844,
+          390
+        ],
+        "input": "CDP touch sequence, tap controls",
+        "cashBefore": 6000,
+        "cashAfter": 5916,
+        "refreshPreserved": true
+      },
+      "ms": 5099
+    },
+    {
+      "name": "H16 真实交互/交易/刷新 390x844",
+      "status": "passed",
+      "detail": {
+        "size": [
+          390,
+          844
+        ],
+        "input": "CDP touch sequence, tap controls",
+        "cashBefore": 6000,
+        "cashAfter": 5916,
+        "refreshPreserved": true
+      },
+      "ms": 5024
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "frameAudit": [],
+  "expectedLogs": [],
+  "warnings": [],
+  "coverage": {},
+  "finishedAt": "2026-10-10T03:52:31.937Z",
+  "summary": {
+    "passed": 4,
+    "total": 4
+  }
+}

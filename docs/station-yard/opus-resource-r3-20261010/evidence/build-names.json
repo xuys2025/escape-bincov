@@ -1,0 +1,25 @@
+{
+  "method": "scripts/station-resource-build-map.mjs deriveNames on each build; prefix equals Astra hand aliases; fixed checked against each declaration (README).",
+  "names": {
+    "prefix": {
+      "idHash": "XT",
+      "QuadGeometry": "Ep",
+      "Buffer": "Fi",
+      "CanvasSource": "xe",
+      "TextureSource": "gb",
+      "Texture": "ft",
+      "RenderTexture": "c",
+      "HideoutScene": "rm"
+    },
+    "fixed": {
+      "idHash": "jT",
+      "QuadGeometry": "wp",
+      "Buffer": "Di",
+      "CanvasSource": "xe",
+      "TextureSource": "Tb",
+      "Texture": "ft",
+      "RenderTexture": "f",
+      "HideoutScene": "am"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "lifecycleOriginalAssertions": 17,
+  "lifecycleRetained": true,
+  "lifecycleNowAssertions": 50,
+  "baselineSourceBoundary": [
+    "src/coast-view/host.ts",
+    "src/coast-view/renderer-lifetime.ts",
+    "src/station-view/scene.ts"
+  ],
+  "node": "v24.19.0"
+}

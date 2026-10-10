@@ -1,0 +1,44 @@
+{
+  "build": "0a5e3da dist/index.html",
+  "htmlSha256": "21373471fe1e0af75005fe11df529ca88b2605317e6d6b0a1727fd61769cdc28",
+  "runner": "u-only.mjs: the U11 and U12 blocks of scripts/coast-sample-test.mjs (this commit) with the gate header, run against the 0a5e3da build",
+  "passed": 0,
+  "total": 6,
+  "browser": "154.0.8037.98",
+  "startedAt": "2026-10-08T17:57:35.904Z",
+  "finishedAt": "2026-10-08T17:57:48.727Z",
+  "steps": [
+    {
+      "name": "U11 item labels at 1280x720: three-character names are not cut (pixel face on desktop, compact face on touch)",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: label cut: {\"uid\":\"bc-label-fuse\",\"text\":\"保险管\",\"tight\":false,\"font\":\"\\\"Bincov Text\\\"\",\"cut\":true,\"width\":42}\n\ntrue !== false\n\n    at u-only.mjs:100:38\n    at async step (u-only.mjs:19:24)\n    at async u-only.mjs:78:5"
+    },
+    {
+      "name": "U11 item labels at 1920x1080: three-character names are not cut (pixel face on desktop, compact face on touch)",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: label cut: {\"uid\":\"bc-label-fuse\",\"text\":\"保险管\",\"tight\":false,\"font\":\"\\\"Bincov Text\\\"\",\"cut\":true,\"width\":42}\n\ntrue !== false\n\n    at u-only.mjs:100:38\n    at async step (u-only.mjs:19:24)\n    at async u-only.mjs:78:5"
+    },
+    {
+      "name": "U11 item labels at 844x390: three-character names are not cut (pixel face on desktop, compact face on touch)",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: label cut: {\"uid\":\"bc-muzua6yq-6\",\"text\":\"9mm\",\"tight\":false,\"font\":\"\\\"Bincov Text\\\"\",\"cut\":true,\"width\":34}\n\ntrue !== false\n\n    at u-only.mjs:100:38\n    at async step (u-only.mjs:19:24)\n    at async u-only.mjs:78:5"
+    },
+    {
+      "name": "U11 item labels at 640x300: three-character names are not cut (pixel face on desktop, compact face on touch)",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: label cut: {\"uid\":\"bc-muzua8ea-6\",\"text\":\"9mm\",\"tight\":false,\"font\":\"\\\"Bincov Text\\\"\",\"cut\":true,\"width\":34}\n\ntrue !== false\n\n    at u-only.mjs:100:38\n    at async step (u-only.mjs:19:24)\n    at async u-only.mjs:78:5"
+    },
+    {
+      "name": "U12 drag at 1280x720: the ghost follows the cursor above the panel, the docked panel never scrolls, closing mid-drag clears it",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: inventory: panel overflow while dragging {\"x\":116,\"y\":434,\"scroll\":[0,67],\"ghost\":{\"left\":157,\"top\":734},\"onTop\":false,\"inPanel\":true}\n+ actual - expected\n\n  [\n    false,\n+   true\n-   false\n  ]\n\n    at u-only.mjs:146:51\n    at async step (u-only.mjs:19:24)\n    at async u-only.mjs:112:5"
+    },
+    {
+      "name": "U12 drag at 1920x1080: the ghost follows the cursor above the panel, the docked panel never scrolls, closing mid-drag clears it",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: inventory: panel overflow while dragging {\"x\":436,\"y\":794,\"scroll\":[0,427],\"ghost\":{\"left\":797,\"top\":1454},\"onTop\":false,\"inPanel\":true}\n+ actual - expected\n\n  [\n    false,\n+   true\n-   false\n  ]\n\n    at u-only.mjs:146:51\n    at async step (u-only.mjs:19:24)\n    at async u-only.mjs:112:5"
+    }
+  ],
+  "errors": [],
+  "requests": []
+}

@@ -1,0 +1,53 @@
+{
+  "startedAt": "2026-10-07T16:06:38.185Z",
+  "node": "v24.19.0",
+  "htmlSha256": "6ee2f43051ed828e93943677935249035bc51bcb1c23a4273d9aa0ae04b68911",
+  "methodology": "Built RaidScene and pure Runtime receive the same restored checkpoint, fixed Date.now, continuous world angle and frame times. Phaser render loop is stopped; AI, collision, RNG and rule updates remain real. Exact checkpoint and full layered state comparison after every frame; generated inventory UIDs are not normalized. This is simulated time, not real-time or visual acceptance.",
+  "cases": [
+    {
+      "layered": false,
+      "seed": 42,
+      "status": "passed",
+      "frames": 240,
+      "shots": 8,
+      "elapsed": 5.827500000000002,
+      "hp": 84,
+      "rng": 3704344736,
+      "errors": []
+    },
+    {
+      "layered": false,
+      "seed": 20261007,
+      "status": "passed",
+      "frames": 240,
+      "shots": 11,
+      "elapsed": 5.823100000001493,
+      "hp": 78.80529999999965,
+      "rng": 3092770031,
+      "errors": []
+    },
+    {
+      "layered": true,
+      "seed": 42,
+      "status": "passed",
+      "frames": 240,
+      "shots": 8,
+      "elapsed": 5.855399999998513,
+      "hp": 83.3610499999998,
+      "rng": 3144026563,
+      "errors": []
+    },
+    {
+      "layered": true,
+      "seed": 20261007,
+      "status": "passed",
+      "frames": 240,
+      "shots": 11,
+      "elapsed": 5.861500000000003,
+      "hp": 80,
+      "rng": 1964557385,
+      "errors": []
+    }
+  ],
+  "browser": "154.0.8037.98"
+}

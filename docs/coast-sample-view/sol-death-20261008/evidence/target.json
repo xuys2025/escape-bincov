@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sol-visual",
+    "args": [
+      "scripts/sol-round4-visual.mjs"
+    ],
+    "environment": {
+      "BINCOV_VISUAL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-death-20261008/visual"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T13:00:10.419Z",
+    "finished": "2026-10-08T13:00:15.086Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "sample",
+    "args": [
+      "scripts/coast-sample-test.mjs"
+    ],
+    "environment": {
+      "BINCOV_SAMPLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-death-20261008/sample"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T13:00:15.087Z",
+    "finished": "2026-10-08T13:00:55.917Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

@@ -1,0 +1,103 @@
+{
+  "startedAt": "2026-10-09T14:23:11.349Z",
+  "browser": "154.0.8037.98",
+  "entry": "dist/index.html",
+  "method": "Offline Chromium keyboard/mouse and native AudioContext. Touch capability is emulated; positions and enemy cooldowns are fixtures. No physical-device or audible-output certification.",
+  "cases": [
+    {
+      "name": "desktop keyboard/mouse 1280x720",
+      "status": "passed",
+      "errors": [],
+      "requests": [],
+      "detail": {
+        "touch": false,
+        "moved": 39.345599999667456,
+        "shots": 1,
+        "afterRelease": 7
+      }
+    },
+    {
+      "name": "touch laptop keyboard/mouse 1280x720",
+      "status": "passed",
+      "errors": [],
+      "requests": [],
+      "detail": {
+        "touch": false,
+        "moved": 40.61120000016774,
+        "shots": 1,
+        "afterRelease": 7
+      }
+    },
+    {
+      "name": "desktop keyboard/mouse 1920x1080",
+      "status": "passed",
+      "errors": [],
+      "requests": [],
+      "detail": {
+        "touch": false,
+        "moved": 40.15200000000084,
+        "shots": 1,
+        "afterRelease": 7
+      }
+    },
+    {
+      "name": "touch laptop keyboard/mouse 1920x1080",
+      "status": "passed",
+      "errors": [],
+      "requests": [],
+      "detail": {
+        "touch": false,
+        "moved": 41.39520000016762,
+        "shots": 1,
+        "afterRelease": 7
+      }
+    },
+    {
+      "name": "keyboard/mouse remain usable in compact touch layout",
+      "status": "passed",
+      "errors": [],
+      "requests": [],
+      "detail": {
+        "touch": true,
+        "moved": 40.0175999996668,
+        "shots": 1,
+        "afterRelease": 7
+      }
+    },
+    {
+      "name": "Esc resumes the native audio context on every pause cycle",
+      "status": "passed",
+      "errors": [],
+      "requests": []
+    },
+    {
+      "name": "manual pause suspends native audio until an explicit resume",
+      "status": "passed",
+      "errors": [],
+      "requests": []
+    },
+    {
+      "name": "blur pauses audio and releases held keys before keyboard resume",
+      "status": "passed",
+      "errors": [],
+      "requests": []
+    },
+    {
+      "name": "ineffective healing preserves held movement and all medical items",
+      "status": "passed",
+      "errors": [],
+      "requests": [],
+      "detail": {
+        "before": 700,
+        "afterQ": 747.3760000000013,
+        "after": 787.4272000001691
+      }
+    },
+    {
+      "name": "failed medical write rolls back and pause still clears held movement",
+      "status": "passed",
+      "errors": [],
+      "requests": []
+    }
+  ]
+}

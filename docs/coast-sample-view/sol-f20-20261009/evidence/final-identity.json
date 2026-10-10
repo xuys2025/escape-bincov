@@ -1,0 +1,224 @@
+{
+  "at": "2026-10-09T12:13:40.643Z",
+  "testedSource": "6e34e96edbefd62d57603ffcde6b19eec4bce5a4",
+  "parent": "5b09c05e93c5fdd6126dd97ebe7575cc4f3dcdef",
+  "node": "v24.19.0",
+  "protectedDiff": "",
+  "identity": [
+    {
+      "file": "dist/index.html",
+      "bytes": 3213763,
+      "sha256": "fe8ee26e6a993d5ed1bf28ab9bc9e88059f73080d6af3ac37aa719a617ea6f62",
+      "equals6e34e96": true
+    },
+    {
+      "file": "start the game.html",
+      "bytes": 3213763,
+      "sha256": "fe8ee26e6a993d5ed1bf28ab9bc9e88059f73080d6af3ac37aa719a617ea6f62",
+      "equals6e34e96": true
+    },
+    {
+      "file": "城中村试玩.html",
+      "bytes": 1185,
+      "sha256": "9fee91e2d91f97c63ca1b54ce903c4111bb989c404a445c43e72fe7b1dd7f52c",
+      "equals6e34e96": true
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "bytes": 1092399,
+      "sha256": "9073a3fca843961d05852319ec514d98ad614091ba0a483e3abb6b4482170ca7",
+      "equals6e34e96": true
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "bytes": 1088624,
+      "sha256": "c81c88105ca3c848f4751549ff29c1dcbdbbdbb4fa960e980e29c349b9274ae9",
+      "equals6e34e96": true
+    },
+    {
+      "file": "docs/release-manifest.json",
+      "bytes": 747,
+      "sha256": "2eafb7da2fd4550322dd1dcc22fb331d31dc99ce8607bf8267cc054c30eaf376",
+      "equals6e34e96": true
+    }
+  ],
+  "unchangedTools": [
+    {
+      "file": "scripts/astra-r7-f20.mjs",
+      "workingSHA256": "31aa1254ca125b4039074d70b13644dfdb0c91c3b0b00f1ef57985d60bcffa06",
+      "canonicalSHA256": "31aa1254ca125b4039074d70b13644dfdb0c91c3b0b00f1ef57985d60bcffa06",
+      "byteEqual": true,
+      "unchangedAfterLFNormalization": true
+    },
+    {
+      "file": "scripts/astra-r7-cache-graph.mjs",
+      "workingSHA256": "d769327c70c4bec6e9b676dc9b5dd2c27589229b21d0b34215857dc7b2e6ddf8",
+      "canonicalSHA256": "d769327c70c4bec6e9b676dc9b5dd2c27589229b21d0b34215857dc7b2e6ddf8",
+      "byteEqual": true,
+      "unchangedAfterLFNormalization": true
+    },
+    {
+      "file": "scripts/astra-r7-heap-graph.mjs",
+      "workingSHA256": "f89e6f9d775783ad900f32962a967aaa69ca5daa8ea63865f519c9b2dcc5c95b",
+      "canonicalSHA256": "f89e6f9d775783ad900f32962a967aaa69ca5daa8ea63865f519c9b2dcc5c95b",
+      "byteEqual": true,
+      "unchangedAfterLFNormalization": true
+    },
+    {
+      "file": "scripts/sol-sample-boundaries.mjs",
+      "workingSHA256": "7066289e7a01af3bf35139c595b093e7121c03285b52eb604e89456af68300f8",
+      "canonicalSHA256": "7066289e7a01af3bf35139c595b093e7121c03285b52eb604e89456af68300f8",
+      "byteEqual": true,
+      "unchangedAfterLFNormalization": true
+    },
+    {
+      "file": "scripts/coast-lifecycle-test.mjs",
+      "workingSHA256": "0ebba499c38f875b7d7ccd0662dc5da900fec717922cd3380258acb8a415f578",
+      "canonicalSHA256": "b719e999c57727aebd27b135a8054a7ebb37c6eb83eabc627301f847fb3635ac",
+      "byteEqual": false,
+      "unchangedAfterLFNormalization": true
+    },
+    {
+      "file": "scripts/desktop-input-test.mjs",
+      "workingSHA256": "0882d78e3cf8a0755f5c83f9fd1743b718f9f0c77abbd75659083caf21121afc",
+      "canonicalSHA256": "0882d78e3cf8a0755f5c83f9fd1743b718f9f0c77abbd75659083caf21121afc",
+      "byteEqual": true,
+      "unchangedAfterLFNormalization": true
+    },
+    {
+      "file": "scripts/mobile-test.mjs",
+      "workingSHA256": "b11cee6e4fa6b2751f74503fc357e6cbd58cb0f367e6c1081b5f1dc3a503bf8a",
+      "canonicalSHA256": "b11cee6e4fa6b2751f74503fc357e6cbd58cb0f367e6c1081b5f1dc3a503bf8a",
+      "byteEqual": true,
+      "unchangedAfterLFNormalization": true
+    },
+    {
+      "file": "scripts/mobile-ux-test.mjs",
+      "workingSHA256": "2bcd94757fb09c75cb904c84001953de071b247edcf54ab0bade53a913d360c7",
+      "canonicalSHA256": "2bcd94757fb09c75cb904c84001953de071b247edcf54ab0bade53a913d360c7",
+      "byteEqual": true,
+      "unchangedAfterLFNormalization": true
+    }
+  ],
+  "ownerRows": [
+    {
+      "name": "CoastSampleHost",
+      "pinned": 1,
+      "released": 0
+    },
+    {
+      "name": "CoastView",
+      "pinned": 1,
+      "released": 0
+    },
+    {
+      "name": "CoastRaidRuntime",
+      "pinned": 1,
+      "released": 0
+    },
+    {
+      "name": "InventoryPanel",
+      "pinned": 1,
+      "released": 0
+    },
+    {
+      "name": "Textures",
+      "pinned": 1,
+      "released": 0
+    },
+    {
+      "name": "Atlas",
+      "pinned": 1,
+      "released": 0
+    },
+    {
+      "name": "Fx",
+      "pinned": 1,
+      "released": 0
+    },
+    {
+      "name": "Lighting",
+      "pinned": 1,
+      "released": 0
+    },
+    {
+      "name": "Weather",
+      "pinned": 1,
+      "released": 0
+    },
+    {
+      "name": "Tide",
+      "pinned": 1,
+      "released": 0
+    },
+    {
+      "name": "SampleSound",
+      "pinned": 1,
+      "released": 0
+    },
+    {
+      "name": "Scope",
+      "pinned": 1,
+      "released": 0
+    }
+  ],
+  "assessments": {
+    "FE01": "PASS (six tables; scoped observation)",
+    "FE02": "Pixi chain PASS; broad old-HUD release PARTIAL (Phaser mousePointer event retained after abandon, zero after return)",
+    "F20": "PARTIAL",
+    "lifecycle": "PASS (headless ordinary entry two sizes)",
+    "physical": "NOT RUN"
+  },
+  "strictComparisons": [
+    {
+      "baseline": "6-10",
+      "tail": "16-20",
+      "baselineMean": 24933337,
+      "tailMean": 25292216.2,
+      "growthBytes": 358879.19999999925
+    },
+    {
+      "baseline": "6-10",
+      "tail": "36-40",
+      "baselineMean": 24933337,
+      "tailMean": 25553358.6,
+      "growthBytes": 620021.6000000015
+    },
+    {
+      "baseline": "6-10",
+      "tail": "56-60",
+      "baselineMean": 24933337,
+      "tailMean": 25727869.8,
+      "growthBytes": 794532.8000000007
+    }
+  ],
+  "namedComparisons": [
+    {
+      "baseline": "6-10",
+      "tail": "16-20",
+      "baselineMean": 33211034.4,
+      "tailMean": 33503356,
+      "growthBytes": 292321.6000000015
+    },
+    {
+      "baseline": "6-10",
+      "tail": "36-40",
+      "baselineMean": 33211034.4,
+      "tailMean": 33756646.4,
+      "growthBytes": 545612
+    },
+    {
+      "baseline": "6-10",
+      "tail": "56-60",
+      "baselineMean": 33211034.4,
+      "tailMean": 33931507.2,
+      "growthBytes": 720472.8000000045
+    }
+  ],
+  "sequenceVerified": true,
+  "unexpectedExitRecords": [
+    "gate-fixed-first",
+    "gate-fixed-corrected",
+    "pin-six-table"
+  ]
+}

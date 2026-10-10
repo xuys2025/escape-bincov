@@ -1,0 +1,268 @@
+{
+  "checkedAt": "2026-10-10T03:53:02.241Z",
+  "node": "v24.19.0",
+  "productBaseline": "ee093814322a570fdebc73945d5501fee9470639",
+  "station": {
+    "passed": 53,
+    "total": 54
+  },
+  "knownProductFailures": [
+    {
+      "name": "H17 390x844 快捷菜单中心点击必须命中整备与修理铺",
+      "error": "AssertionError [ERR_ASSERTION]: OPUS-STATION-INPUT-01: interaction button intercepts quick-menu centres\n+ actual - expected\n\n  [\n    {\n+     actual: 'deploy',\n-     actual: 'gear',\n      expected: 'gear',\n+     hit: null\n-     hit: 'gear'\n    },\n    {\n+     actual: 'deploy',\n-     actual: 'arms',\n      expected: 'arms',\n+     hit: null\n-     hit: 'arms'\n    }\n  ]\n\n    at file:///D:/bincov/hideout-runtime/scripts/station-browser-test.mjs:855:12\n    at async step (file:///D:/bincov/hideout-runtime/scripts/station-browser-test.mjs:88:18)\n    at async file:///D:/bincov/hideout-runtime/scripts/station-browser-test.mjs:840:3"
+    }
+  ],
+  "normalInternalFrameFailures": 0,
+  "pageErrors": 0,
+  "externalRequests": 0,
+  "negativeControls": {
+    "positive": 6,
+    "negative": 18,
+    "total": 24
+  },
+  "completionChildrenMatch": true,
+  "completionShellNote": "The PowerShell wrapper propagated the final deliberately failing probe exit 1; child statuses are preserved and independently checked here. The station product failure is not turned into PASS.",
+  "regressionChildren": [
+    {
+      "name": "unit-final",
+      "exit": 0
+    },
+    {
+      "name": "package-final",
+      "exit": 0
+    },
+    {
+      "name": "station-final",
+      "exit": 0
+    },
+    {
+      "name": "hideout",
+      "exit": 0
+    },
+    {
+      "name": "save-browser",
+      "exit": 0
+    },
+    {
+      "name": "shop-drag",
+      "exit": 0
+    },
+    {
+      "name": "expansion",
+      "exit": 0
+    },
+    {
+      "name": "mobile",
+      "exit": 0
+    },
+    {
+      "name": "mobile-ux",
+      "exit": 0
+    },
+    {
+      "name": "coast-sample",
+      "exit": 0
+    },
+    {
+      "name": "title-first",
+      "exit": 0
+    },
+    {
+      "name": "portable",
+      "exit": 0
+    },
+    {
+      "name": "systems",
+      "exit": 0
+    },
+    {
+      "name": "qol-expansion",
+      "exit": 0
+    },
+    {
+      "name": "browser",
+      "exit": 0
+    },
+    {
+      "name": "desktop-input",
+      "exit": 0
+    },
+    {
+      "name": "ui",
+      "exit": 0
+    }
+  ],
+  "ordinary": {
+    "passed": 3,
+    "total": 3
+  },
+  "originalBagTargetControl": {
+    "passed": 4,
+    "total": 4
+  },
+  "assetHashes": "33/33",
+  "frozenInputs": "all match",
+  "resourceShortTest": "PASS",
+  "heap": {
+    "before": {
+      "listeners": 24,
+      "tickers": 1,
+      "observers": 0,
+      "timers": 0,
+      "apps": 1,
+      "parked": 0,
+      "views": 1,
+      "renderTextures": 0,
+      "canvases": 2,
+      "roots": 1,
+      "gpuTextures": 348,
+      "managed": {
+        "live": 414,
+        "empty": 0
+      },
+      "heap": 30209411,
+      "scene": 336,
+      "tables": {
+        "schema": "pixi-8.22.0-managed-hashes",
+        "running": false,
+        "required": [
+          "graphics",
+          "graphicsContext",
+          "glBuffer",
+          "glTexture",
+          "glGeometry",
+          "tilingSprite"
+        ],
+        "tables": [
+          {
+            "name": "graphics",
+            "hash": "items",
+            "live": 9,
+            "empty": 0,
+            "keys": 9
+          },
+          {
+            "name": "graphicsContext",
+            "hash": "items",
+            "live": 9,
+            "empty": 0,
+            "keys": 9
+          },
+          {
+            "name": "glBuffer",
+            "hash": "items",
+            "live": 31,
+            "empty": 0,
+            "keys": 31
+          },
+          {
+            "name": "glTexture",
+            "hash": "items",
+            "live": 348,
+            "empty": 0,
+            "keys": 348
+          },
+          {
+            "name": "glGeometry",
+            "hash": "items",
+            "live": 15,
+            "empty": 0,
+            "keys": 15
+          },
+          {
+            "name": "tilingSprite",
+            "hash": "items",
+            "live": 2,
+            "empty": 0,
+            "keys": 2
+          }
+        ],
+        "live": 414,
+        "empty": 0
+      }
+    },
+    "after": {
+      "listeners": 24,
+      "tickers": 1,
+      "observers": 0,
+      "timers": 0,
+      "apps": 1,
+      "parked": 0,
+      "views": 1,
+      "renderTextures": 0,
+      "canvases": 2,
+      "roots": 1,
+      "gpuTextures": 348,
+      "managed": {
+        "live": 414,
+        "empty": 0
+      },
+      "heap": 32523551,
+      "scene": 336,
+      "tables": {
+        "schema": "pixi-8.22.0-managed-hashes",
+        "running": false,
+        "required": [
+          "graphics",
+          "graphicsContext",
+          "glBuffer",
+          "glTexture",
+          "glGeometry",
+          "tilingSprite"
+        ],
+        "tables": [
+          {
+            "name": "graphics",
+            "hash": "items",
+            "live": 9,
+            "empty": 0,
+            "keys": 9
+          },
+          {
+            "name": "graphicsContext",
+            "hash": "items",
+            "live": 9,
+            "empty": 0,
+            "keys": 9
+          },
+          {
+            "name": "glBuffer",
+            "hash": "items",
+            "live": 31,
+            "empty": 0,
+            "keys": 31
+          },
+          {
+            "name": "glTexture",
+            "hash": "items",
+            "live": 348,
+            "empty": 0,
+            "keys": 348
+          },
+          {
+            "name": "glGeometry",
+            "hash": "items",
+            "live": 15,
+            "empty": 0,
+            "keys": 15
+          },
+          {
+            "name": "tilingSprite",
+            "hash": "items",
+            "live": 2,
+            "empty": 0,
+            "keys": 2
+          }
+        ],
+        "live": 414,
+        "empty": 0
+      }
+    },
+    "deltaBytes": 2314140,
+    "underSmokeLimit": true,
+    "noGrowth": false,
+    "conclusion": "PARTIAL: short 20-remount observation; historical F20 remains PARTIAL"
+  },
+  "historicalF20": "PARTIAL",
+  "historicalASTRA_SAVE_01": "UNCONFIRMED"
+}

@@ -1,0 +1,6 @@
+{
+  "initialArtifactSourceProbe": {
+    "exitCode": 1,
+    "reason": "Lifecycle script working-tree CRLF differs from Git LF bytes; formal artifacts had matched. Rechecked source after LF normalization; no source or assertions modified."
+  }
+}

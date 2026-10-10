@@ -1,0 +1,126 @@
+{
+  "mode": "offline",
+  "browser": "154.0.8037.98",
+  "results": [
+    {
+      "viewport": "1280x720",
+      "name": "guide returns to pause on close and Escape; loot danger stays above item details",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "name": "all overlapping sources appear, empty sources remain and same-name corpses have distinct numbers",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "name": "wheel moves both ways, wraps, and E opens exactly the highlighted source",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "name": "wheel cannot switch a source inside loot, inventory or pause; closing preserves selection",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "name": "movement, gunfire, clock and enemies continue while the list is visible",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "name": "ground loot remains accessible beside a selected container",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "name": "a departing selection falls back to an accessible target without renumbering corpses",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "name": "crowded lists keep every target reachable and the selected row visible",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "name": "leaving range removes stale targets and E cannot reopen a remote source",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "name": "walls and high tide exclude inaccessible sources; selected flooded corpse disappears",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "name": "extraction takes priority even with a container under the player",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "name": "guide returns to pause on close and Escape; loot danger stays above item details",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "name": "all overlapping sources appear, empty sources remain and same-name corpses have distinct numbers",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "name": "wheel moves both ways, wraps, and E opens exactly the highlighted source",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "name": "wheel cannot switch a source inside loot, inventory or pause; closing preserves selection",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "name": "movement, gunfire, clock and enemies continue while the list is visible",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "name": "ground loot remains accessible beside a selected container",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "name": "a departing selection falls back to an accessible target without renumbering corpses",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "name": "crowded lists keep every target reachable and the selected row visible",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "name": "leaving range removes stale targets and E cannot reopen a remote source",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "name": "walls and high tide exclude inaccessible sources; selected flooded corpse disappears",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "name": "extraction takes priority even with a container under the player",
+      "status": "passed"
+    },
+    {
+      "viewport": "844x390-touch",
+      "name": "guide returns to pause on close and Escape; loot danger stays above item details",
+      "status": "passed"
+    },
+    {
+      "viewport": "844x390-touch",
+      "name": "phone taps an exact source, including an empty corpse, and closes before choosing another",
+      "status": "passed"
+    }
+  ]
+}

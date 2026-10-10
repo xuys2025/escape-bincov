@@ -1,0 +1,16 @@
+[
+  {
+    "id": "shots",
+    "args": [
+      "scripts/coast-sample-shots.mjs"
+    ],
+    "environment": {
+      "BINCOV_SHOTS_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-death-20261008/shots"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T13:01:09.915Z",
+    "finished": "2026-10-08T13:02:54.307Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

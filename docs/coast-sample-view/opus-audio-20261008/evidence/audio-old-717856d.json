@@ -1,0 +1,89 @@
+{
+  "startedAt": "2026-10-08T14:43:28.835Z",
+  "method": "Output tap on the destination; onsets in a high-emphasis band (first difference) above 2.5x the trailing median; no autoplay override.",
+  "checks": [
+    {
+      "id": "A1 first entry: the AudioContext runs after the first click, ambience reaches the output",
+      "status": "passed",
+      "detail": {
+        "states": [
+          "running"
+        ],
+        "blocks": 95,
+        "peak": 0.0586,
+        "rmsMedian": 0.0146
+      }
+    },
+    {
+      "id": "A2 gunshots: every player shot is followed by a real onset (peak well above ambience)",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: {\"fired\":3,\"sounded\":0,\"onsets\":0,\"blocks\":255,\"peak\":0.0586,\"rmsMedian\":0.0111}\n\n0 !== 3\n\n    at file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:132:64\n    at async check (file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:70:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:131:3"
+    },
+    {
+      "id": "A3 footsteps: walking 3 s gives periodic onsets; standing still 2 s gives none",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: steps heard 0\n    at file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:139:89\n    at async check (file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:70:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:134:3"
+    },
+    {
+      "id": "A4 melee: knife swings are audible",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: [{\"type\":\"melee\",\"t\":12107,\"onset\":false},{\"type\":\"melee\",\"t\":12871,\"onset\":false}]\n    at file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:148:12\n    at async check (file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:70:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:143:3"
+    },
+    {
+      "id": "A5 pickup: picking up ground loot and taking an item from a crate are audible",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: ground [{\"type\":\"looted\",\"t\":14746,\"onset\":false}]\n    at file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:161:12\n    at async check (file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:70:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:150:3"
+    },
+    {
+      "id": "A6 hits and enemy fire: an adjacent scav and a salt rifleman attack; every hit on the player and every enemy shot is audible",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: hurt [{\"type\":\"hurt\",\"t\":18272,\"onset\":false},{\"type\":\"hurt\",\"t\":18634,\"onset\":false},{\"type\":\"hurt\",\"t\":19174,\"onset\":false},{\"type\":\"hurt\",\"t\":19858,\"onset\":false},{\"type\":\"hurt\",\"t\":20077,\"onset\":false},{\"type\":\"hurt\",\"t\":21052,\"onset\":false}]\n    at file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:169:12\n    at async check (file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:70:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:164:3"
+    },
+    {
+      "id": "A7 heal: Q uses a supply audibly",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: heal cue onset\n    at file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:180:103\n    at async check (file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:70:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:177:3"
+    },
+    {
+      "id": "B1 Esc pause suspends the output (no rendered blocks); 继续 restores it and shots are audible again",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: blocks while paused 84\n    at file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:187:12\n    at async check (file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:70:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:184:3"
+    },
+    {
+      "id": "B2 switching to another tab pauses and silences; coming back and pressing 继续 brings the sound back",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: {\"fired\":2,\"sounded\":0,\"onsets\":0,\"blocks\":0,\"peak\":0,\"rmsMedian\":0}\n\n0 !== 2\n\n    at file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:209:88\n    at async check (file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:70:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:192:3"
+    },
+    {
+      "id": "C1 volume from the pause panel: 0% silences shots and ambience; 100% is louder than the 35% default; the value persists",
+      "status": "failed",
+      "error": "locator.focus: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.coast-sample [data-volume]')\u001b[22m\n\n    at D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:217:55\n    at async check (D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:70:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:214:3"
+    },
+    {
+      "id": "D1 refresh: the run resumes paused and silent; after 进入 and 继续 the sound is back at the saved volume",
+      "status": "failed",
+      "error": "locator.textContent: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.coast-sample [data-volume-label]')\u001b[22m\n\n    at D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:235:75\n    at async check (D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:70:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:232:3"
+    },
+    {
+      "id": "E1 run 1 extracts: the result screen plays the extraction chime",
+      "status": "failed",
+      "error": "page.waitForFunction: Timeout 8000ms exceeded.\n    at D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:111:16\n    at async capture (D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:76:27)\n    at async exitAndSettle (D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:109:13)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:247:15\n    at async check (D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:70:24)\n    at async file:///D:/bincov/pr22-runtime/scripts/coast-audio-test.mjs:246:3"
+    },
+    {
+      "id": "E2 run 2: deploy again, shots audible, abandon from the pause menu: the death cue still plays",
+      "status": "failed",
+      "error": "locator.click: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-action=\"return\"]')\u001b[22m\n\n    at D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:250:50\n    at check (D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:70:30)\n    at D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:249:9"
+    },
+    {
+      "id": "E3 run 3: deploy again, ambience, shots and footsteps audible, extract with the chime",
+      "status": "failed",
+      "error": "locator.click: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('[data-action=\"return\"]')\u001b[22m\n\n    at D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:260:50\n    at check (D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:70:30)\n    at D:\\bincov\\pr22-runtime\\scripts\\coast-audio-test.mjs:259:9"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "finishedAt": "2026-10-08T14:45:33.443Z",
+  "passed": 1,
+  "failed": 13
+}

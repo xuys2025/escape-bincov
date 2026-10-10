@@ -1,0 +1,238 @@
+[
+  {
+    "name": "unit-final",
+    "args": [
+      "test"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:22:49.6125210+08:00",
+    "finished": "2026-10-10T03:22:56.5873464+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": []
+  },
+  {
+    "name": "package-final",
+    "args": [
+      "package"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:22:57.1603895+08:00",
+    "finished": "2026-10-10T03:23:03.3316022+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": []
+  },
+  {
+    "name": "station-final",
+    "args": [
+      "test:station",
+      "--out=docs/station-yard/sol-acceptance-20261010/evidence/station-final"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:23:04.4722632+08:00",
+    "finished": "2026-10-10T03:29:59.4747426+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": []
+  },
+  {
+    "name": "hideout",
+    "args": [
+      "test:hideout"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:30:00.0350405+08:00",
+    "finished": "2026-10-10T03:30:13.7705370+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": []
+  },
+  {
+    "name": "save-browser",
+    "args": [
+      "test:save-browser"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:30:14.2974261+08:00",
+    "finished": "2026-10-10T03:30:29.0777936+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": []
+  },
+  {
+    "name": "shop-drag",
+    "args": [
+      "test:shop-drag"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:30:29.6428246+08:00",
+    "finished": "2026-10-10T03:30:48.8647011+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": [
+      "docs/station-yard/sol-acceptance-20261010/evidence/shop-drag-report.json"
+    ]
+  },
+  {
+    "name": "expansion",
+    "args": [
+      "test:expansion"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:30:49.4104165+08:00",
+    "finished": "2026-10-10T03:30:59.0957462+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": []
+  },
+  {
+    "name": "mobile",
+    "args": [
+      "test:mobile"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:30:59.6314812+08:00",
+    "finished": "2026-10-10T03:31:19.7141036+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": [
+      "docs/station-yard/sol-acceptance-20261010/evidence/mobile-live-backup.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/mobile-report.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/mobile-unknown-original.json"
+    ]
+  },
+  {
+    "name": "mobile-ux",
+    "args": [
+      "test:mobile-ux"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:31:20.2407694+08:00",
+    "finished": "2026-10-10T03:32:30.9283926+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": [
+      "docs/station-yard/sol-acceptance-20261010/evidence/mobile-ux-report.json"
+    ]
+  },
+  {
+    "name": "coast-sample",
+    "args": [
+      "exec",
+      "node",
+      "scripts/coast-sample-test.mjs"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:32:31.4410104+08:00",
+    "finished": "2026-10-10T03:34:08.0088504+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": [
+      "docs/station-yard/sol-acceptance-20261010/evidence/coast-sample-report.json"
+    ]
+  },
+  {
+    "name": "title-first",
+    "args": [
+      "test:title"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:34:08.5653933+08:00",
+    "finished": "2026-10-10T03:35:17.5669883+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": [
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-report.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-round-trip-1024x768.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-round-trip-1280x720.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-round-trip-1920x1080.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-round-trip-2560x1080.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-round-trip-360x800.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-round-trip-390x844.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-round-trip-412x915.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-round-trip-430x932.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-round-trip-640x360.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-round-trip-740x300.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-round-trip-768x1024.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-round-trip-844x390.json",
+      "docs/station-yard/sol-acceptance-20261010/evidence/title-first-round-trip-932x430.json"
+    ]
+  },
+  {
+    "name": "portable",
+    "args": [
+      "test:portable"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:35:18.1203076+08:00",
+    "finished": "2026-10-10T03:35:27.7396168+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": []
+  },
+  {
+    "name": "systems",
+    "args": [
+      "test:systems"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:35:28.2593109+08:00",
+    "finished": "2026-10-10T03:36:10.2176436+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": []
+  },
+  {
+    "name": "qol-expansion",
+    "args": [
+      "test:qol-expansion"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:36:10.8017139+08:00",
+    "finished": "2026-10-10T03:36:16.0484921+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": []
+  },
+  {
+    "name": "browser",
+    "args": [
+      "test:browser"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:36:16.5843534+08:00",
+    "finished": "2026-10-10T03:36:57.0810617+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": []
+  },
+  {
+    "name": "desktop-input",
+    "args": [
+      "test:desktop-input"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:36:57.6032697+08:00",
+    "finished": "2026-10-10T03:37:21.3690171+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": [
+      "docs/station-yard/sol-acceptance-20261010/evidence/desktop-input-report.json"
+    ]
+  },
+  {
+    "name": "ui",
+    "args": [
+      "test:ui"
+    ],
+    "exit": 0,
+    "started": "2026-10-10T03:37:21.8803117+08:00",
+    "finished": "2026-10-10T03:37:30.7629217+08:00",
+    "node": "v24.19.0",
+    "pnpm": "11.19.0",
+    "reports": [
+      "docs/station-yard/sol-acceptance-20261010/evidence/ui-report.json"
+    ]
+  }
+]

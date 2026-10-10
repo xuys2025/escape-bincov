@@ -1,0 +1,50 @@
+[
+  {
+    "id": "play-empty",
+    "args": [
+      "scripts/coast-playtest.mjs"
+    ],
+    "environment": {
+      "BINCOV_PLAYTEST_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/play-empty",
+      "BINCOV_PLAYTEST_SEED": "",
+      "BINCOV_PLAYTEST_SIZE": "1280x720"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:19:06.412Z",
+    "finished": "2026-10-08T18:19:51.049Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "play-1280",
+    "args": [
+      "scripts/coast-playtest.mjs"
+    ],
+    "environment": {
+      "BINCOV_PLAYTEST_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/play-1280",
+      "BINCOV_PLAYTEST_SEED": "20261008",
+      "BINCOV_PLAYTEST_SIZE": "1280x720"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:19:51.050Z",
+    "finished": "2026-10-08T18:20:29.791Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "play-1920",
+    "args": [
+      "scripts/coast-playtest.mjs"
+    ],
+    "environment": {
+      "BINCOV_PLAYTEST_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/play-1920",
+      "BINCOV_PLAYTEST_SEED": "20261008",
+      "BINCOV_PLAYTEST_SIZE": "1920x1080"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:20:29.793Z",
+    "finished": "2026-10-08T18:21:06.192Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

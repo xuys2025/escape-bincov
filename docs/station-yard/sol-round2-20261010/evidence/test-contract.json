@@ -1,0 +1,13 @@
+{
+  "H17": {
+    "unchanged": true,
+    "sha256": "b8da23c9a4e705ccfb9c45aee677a5561fd74841e650d91e1dd04319c8180cb3"
+  },
+  "H16": "only removal of old 390px med detour; original assertions unchanged; original station script unmodified this round",
+  "scripts": {
+    "scripts/station-browser-test.mjs": "30da821253e8bf0b9393c5c0b61861f0ea814134e406ae04f3ff5302a937c681",
+    "scripts/station-round2-recheck.mjs": "c51b4f38e7f3b08df0a714fa97afde0f7191d691df8d29589823f31c5ba8dc1b",
+    "scripts/station-acceptance-gates.mjs": "64180cd5a495bbbff989b49a46677b166d2728cdd9f924162c21146decf13d2b",
+    "scripts/pixi-managed-gate.mjs": "0cae5c0da7e22208651c46e249be633c8cca0fcfa28af32be9a0eaf516ea973a"
+  }
+}

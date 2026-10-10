@@ -1,0 +1,133 @@
+{
+  "html": "C:\\Users\\xty\\AppData\\Local\\Temp\\f20-base\\dist\\index.html",
+  "browser": "154.0.8037.98",
+  "errors": [],
+  "rows": [
+    {
+      "label": "mounted after mouse input",
+      "attached": true,
+      "rootPointer": {
+        "type": "pointerup",
+        "target": "",
+        "path": []
+      },
+      "pooled": 3,
+      "tables": [
+        {
+          "name": "graphics",
+          "live": 8,
+          "empty": 1
+        },
+        {
+          "name": "graphicsContext",
+          "live": 8,
+          "empty": 1
+        },
+        {
+          "name": "glBuffer",
+          "live": 19,
+          "empty": 0
+        },
+        {
+          "name": "glTexture",
+          "live": 17,
+          "empty": 3
+        },
+        {
+          "name": "glGeometry",
+          "live": 9,
+          "empty": 0
+        },
+        {
+          "name": "tilingSprite",
+          "live": 2,
+          "empty": 0
+        }
+      ]
+    },
+    {
+      "label": "after 20 view remounts",
+      "attached": true,
+      "rootPointer": {
+        "type": "pointermove",
+        "target": "",
+        "path": []
+      },
+      "pooled": 3,
+      "tables": [
+        {
+          "name": "graphics",
+          "live": 8,
+          "empty": 161
+        },
+        {
+          "name": "graphicsContext",
+          "live": 8,
+          "empty": 161
+        },
+        {
+          "name": "glBuffer",
+          "live": 19,
+          "empty": 280
+        },
+        {
+          "name": "glTexture",
+          "live": 17,
+          "empty": 227
+        },
+        {
+          "name": "glGeometry",
+          "live": 9,
+          "empty": 140
+        },
+        {
+          "name": "tilingSprite",
+          "live": 2,
+          "empty": 40
+        }
+      ]
+    },
+    {
+      "label": "parked after a real abandon",
+      "attached": true,
+      "rootPointer": {
+        "type": "pointermove",
+        "target": "overlay",
+        "path": []
+      },
+      "pooled": 3,
+      "tables": [
+        {
+          "name": "graphics",
+          "live": 0,
+          "empty": 169
+        },
+        {
+          "name": "graphicsContext",
+          "live": 0,
+          "empty": 169
+        },
+        {
+          "name": "glBuffer",
+          "live": 5,
+          "empty": 294
+        },
+        {
+          "name": "glTexture",
+          "live": 2,
+          "empty": 242
+        },
+        {
+          "name": "glGeometry",
+          "live": 2,
+          "empty": 147
+        },
+        {
+          "name": "tilingSprite",
+          "live": 0,
+          "empty": 42
+        }
+      ]
+    }
+  ]
+}

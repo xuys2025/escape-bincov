@@ -1,0 +1,62 @@
+[
+  {
+    "path": "test-results/astra-r7/named60/cycle-20.heapsnapshot",
+    "bytes": 38850481,
+    "sha256": "38d3aaadc39f287e9735d54f73ab6834844eb9b2b38cde0c8068a40eaf891c6f",
+    "localIgnored": true
+  },
+  {
+    "path": "test-results/astra-r7/named60/cycle-40.heapsnapshot",
+    "bytes": 39000955,
+    "sha256": "563d8e8bc360119939056654a1fb46fbea57c817eee248111485a4b904008f0f",
+    "localIgnored": true
+  },
+  {
+    "path": "test-results/astra-r7/named60/cycle-6.heapsnapshot",
+    "bytes": 38589724,
+    "sha256": "a9d08f41bf9e07d099f9c5c801faf6aca08351ff65edb890427500ea64124e7f",
+    "localIgnored": true
+  },
+  {
+    "path": "test-results/astra-r7/named60/cycle-60.heapsnapshot",
+    "bytes": 39177260,
+    "sha256": "20e1bba56fe07c016a102586d10843c07f5ee62c9b8bf85105904a0039962f14",
+    "localIgnored": true
+  },
+  {
+    "path": "test-results/astra-r7/high-named20/cycle-20.heapsnapshot",
+    "bytes": 38910983,
+    "sha256": "33dc6c64c15088aa8af6f85e126c50008ff980052c97c91aca72469cf81531e3",
+    "localIgnored": true
+  },
+  {
+    "path": "test-results/astra-r7/high-named20/cycle-6.heapsnapshot",
+    "bytes": 38575811,
+    "sha256": "e1c151d7177d96aa3b0e5c05c4f9b9bbe88a609d7eed852b23e9bd24bab97aeb",
+    "localIgnored": true
+  },
+  {
+    "path": "test-results/astra-r7/pin-control/pinned.heapsnapshot",
+    "bytes": 38472753,
+    "sha256": "cb5b249d99f5108cd3537282b0cb2421c3b8bb0a40cd34efbf76e963a00c2358",
+    "localIgnored": true
+  },
+  {
+    "path": "test-results/astra-r7/pin-control/released.heapsnapshot",
+    "bytes": 37625371,
+    "sha256": "3a84296918881d95fbf5cb4e58614627ead337f902d7a206d96b75ffdb8fa7a1",
+    "localIgnored": true
+  },
+  {
+    "path": "test-results/astra-r7/pin-final/pinned.heapsnapshot",
+    "bytes": 38529832,
+    "sha256": "bdf52842876f30f2b2dffce9a171429eddf536270583cb6ac06c56b64ceaa48a",
+    "localIgnored": true
+  },
+  {
+    "path": "test-results/astra-r7/pin-final/released.heapsnapshot",
+    "bytes": 37671944,
+    "sha256": "ae0550bf08f39c20128822f97dc84b6ed30fb1f9b5a5e63773a31e8109063632",
+    "localIgnored": true
+  }
+]

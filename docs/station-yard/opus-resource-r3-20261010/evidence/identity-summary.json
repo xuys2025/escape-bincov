@@ -1,0 +1,232 @@
+{
+  "status": "PARTIAL",
+  "strictFailures": [
+    {
+      "label": "first-return",
+      "error": "fully visited GPU resources grew"
+    },
+    {
+      "label": "restore-1",
+      "error": "glBuffer empty grew"
+    },
+    {
+      "label": "restore-2",
+      "error": "glBuffer empty grew"
+    },
+    {
+      "label": "restore-3",
+      "error": "glBuffer empty grew"
+    }
+  ],
+  "firstAction": {
+    "freed": {
+      "scene": {
+        "textures": 0,
+        "npc": 0,
+        "frames": 0,
+        "masonry": 0,
+        "targets": [
+          true,
+          true,
+          true
+        ]
+      },
+      "frames": [],
+      "sources": []
+    },
+    "parked": {
+      "children": 0,
+      "ticker": false,
+      "attached": false,
+      "events": {
+        "attached": false,
+        "roots": {
+          "_rootPointerEvent": false,
+          "_rootWheelEvent": false,
+          "_rootContextMenuEvent": false
+        },
+        "pooled": 0,
+        "native": 0
+      },
+      "tables": [
+        {
+          "name": "graphics",
+          "live": 0,
+          "empty": 0
+        },
+        {
+          "name": "graphicsContext",
+          "live": 0,
+          "empty": 0
+        },
+        {
+          "name": "glBuffer",
+          "live": 5,
+          "empty": 0
+        },
+        {
+          "name": "glTexture",
+          "live": 2,
+          "empty": 0
+        },
+        {
+          "name": "glGeometry",
+          "live": 2,
+          "empty": 0
+        },
+        {
+          "name": "tilingSprite",
+          "live": 0,
+          "empty": 0
+        }
+      ]
+    }
+  },
+  "release": {
+    "hostAlive": false,
+    "sceneAlive": false,
+    "tracked": 4913,
+    "collected": 4913,
+    "liveUndestroyed": [],
+    "sceneCaches": null
+  },
+  "added": [
+    {
+      "key": "wall:26,21:1",
+      "id": 5507,
+      "uid": 13861,
+      "source": 5508,
+      "sourceUid": 1252,
+      "width": 32,
+      "height": 62
+    },
+    {
+      "key": "wall:27,21:1",
+      "id": 5509,
+      "uid": 13886,
+      "source": 5510,
+      "sourceUid": 1253,
+      "width": 32,
+      "height": 62
+    },
+    {
+      "key": "wall:28,21:1",
+      "id": 5511,
+      "uid": 13911,
+      "source": 5512,
+      "sourceUid": 1254,
+      "width": 32,
+      "height": 62
+    },
+    {
+      "key": "sol:6:1",
+      "id": 5513,
+      "uid": 13936,
+      "source": 5514,
+      "sourceUid": 1255,
+      "width": 32,
+      "height": 48
+    },
+    {
+      "key": "sol:6:1|edge",
+      "id": 5515,
+      "uid": 13937,
+      "source": 5516,
+      "sourceUid": 1256,
+      "width": 34,
+      "height": 50
+    },
+    {
+      "key": "sol:6:2",
+      "id": 5539,
+      "uid": 13949,
+      "source": 5540,
+      "sourceUid": 1268,
+      "width": 32,
+      "height": 48
+    },
+    {
+      "key": "sol:6:2|edge",
+      "id": 5541,
+      "uid": 13950,
+      "source": 5542,
+      "sourceUid": 1269,
+      "width": 34,
+      "height": 50
+    },
+    {
+      "key": "sol:6:3",
+      "id": 5551,
+      "uid": 13955,
+      "source": 5552,
+      "sourceUid": 1274,
+      "width": 32,
+      "height": 48
+    },
+    {
+      "key": "sol:6:3|edge",
+      "id": 5553,
+      "uid": 13956,
+      "source": 5554,
+      "sourceUid": 1275,
+      "width": 34,
+      "height": 50
+    },
+    {
+      "key": "sol:6:4",
+      "id": 5559,
+      "uid": 13959,
+      "source": 5560,
+      "sourceUid": 1278,
+      "width": 32,
+      "height": 48
+    },
+    {
+      "key": "sol:6:4|edge",
+      "id": 5561,
+      "uid": 13960,
+      "source": 5562,
+      "sourceUid": 1279,
+      "width": 34,
+      "height": 50
+    },
+    {
+      "key": "npc:cook:w:idle:1",
+      "id": 5585,
+      "uid": 13972,
+      "source": 5586,
+      "sourceUid": 1291,
+      "width": 32,
+      "height": 48
+    },
+    {
+      "key": "npc:shuan:w:idle:0",
+      "id": 5593,
+      "uid": 13976,
+      "source": 5594,
+      "sourceUid": 1295,
+      "width": 32,
+      "height": 48
+    }
+  ],
+  "removed": [
+    {
+      "key": "npc:cook:w:idle:0",
+      "id": 673,
+      "uid": 8950,
+      "source": 674,
+      "sourceUid": 822,
+      "width": 32,
+      "height": 48
+    },
+    {
+      "key": "npc:cai:w:idle:1",
+      "id": 675,
+      "uid": 8951,
+      "source": 676,
+      "sourceUid": 823,
+      "width": 32,
+      "height": 48
+    }
+  ]
+}

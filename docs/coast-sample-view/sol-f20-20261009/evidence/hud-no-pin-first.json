@@ -1,0 +1,64 @@
+{
+  "startedAt": "2026-10-09T12:08:08.861Z",
+  "node": "v24.19.0",
+  "html": "D:\\bincov\\pr22-runtime\\test-results\\sol-f20-20261009\\pin-first\\named.html",
+  "loadedSHA256": "be99b9a251f876ab82f334dd1f54400919b75b5f8ceeae8a51deeab09f4d30a2",
+  "method": "Fresh page, no JS owner handle; original seed42, upstairs/downstairs return, native abandon; one CDP GC + window.gc before result snapshot. Auxiliary native return click + same GC before base snapshot. Does not alter strict long-run workload.",
+  "steps": [
+    {
+      "label": "result-no-pin",
+      "state": "result",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "managedEmpty": 0,
+        "managedLive": 9,
+        "heap": 31684571
+      },
+      "file": "D:\\bincov\\pr22-runtime\\test-results\\sol-f20-20261009\\hud-no-pin-first\\result-no-pin.heapsnapshot"
+    },
+    {
+      "label": "after-native-return",
+      "state": "hideout",
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "managedEmpty": 0,
+        "managedLive": 9,
+        "heap": 31736257
+      },
+      "file": "D:\\bincov\\pr22-runtime\\test-results\\sol-f20-20261009\\hud-no-pin-first\\after-native-return.heapsnapshot"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "status": "passed",
+  "finishedAt": "2026-10-09T12:08:13.975Z"
+}

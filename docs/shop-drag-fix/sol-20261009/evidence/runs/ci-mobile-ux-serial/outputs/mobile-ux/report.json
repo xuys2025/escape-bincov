@@ -1,0 +1,1045 @@
+{
+  "startedAt": "2026-10-09T13:37:53.358Z",
+  "method": "Offline Chromium touch emulation, trusted taps and explicit ?test=1 fixtures. Includes failure injection; not physical phone validation.",
+  "steps": [
+    {
+      "name": "seven phone sizes have immediately reachable inventory and detail exits",
+      "status": "passed"
+    },
+    {
+      "name": "placement cancel and close/reopen keep inventory selectable and unchanged",
+      "status": "passed"
+    },
+    {
+      "name": "success toast does not cover nearby text, warning or combat buttons",
+      "status": "passed"
+    },
+    {
+      "name": "three nearby items keep bleeding warnings clear after pickup on short phones",
+      "status": "passed"
+    },
+    {
+      "name": "short phone reading remains visible with reachable exit and a live clock",
+      "status": "passed"
+    },
+    {
+      "name": "short phone reload is visible on its button",
+      "status": "passed"
+    },
+    {
+      "name": "nearby list picks the stackable item without moving; failure restores world and bag",
+      "status": "passed"
+    },
+    {
+      "name": "quick therapy does not consume safe medicine; supply picker explicitly uses it",
+      "status": "passed"
+    },
+    {
+      "name": "rotated safe restores from the durable checkpoint after refresh",
+      "status": "passed"
+    },
+    {
+      "name": "manual rotation preview cancels unchanged and failed placement rolls back",
+      "status": "passed"
+    },
+    {
+      "name": "desktop rotation preview can cancel, leave its tab and commit in both required sizes",
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "threeItemFeedback": [
+    {
+      "label": "640x300: nearby 2",
+      "toast": {
+        "text": "物资已收入背包。",
+        "x": 155,
+        "y": 65,
+        "width": 280,
+        "height": 34,
+        "top": 65,
+        "right": 435,
+        "bottom": 99,
+        "left": 155
+      },
+      "warning": {
+        "x": 195.171875,
+        "y": 116,
+        "width": 199.65625,
+        "height": 31,
+        "top": 116,
+        "right": 394.828125,
+        "bottom": 147,
+        "left": 195.171875
+      },
+      "interaction": {
+        "x": 270,
+        "y": 212.203125,
+        "width": 165,
+        "height": 79.796875,
+        "top": 212.203125,
+        "right": 435,
+        "bottom": 292,
+        "left": 270
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 640,
+      "height": 300
+    },
+    {
+      "label": "640x300: repeated pickup",
+      "toast": {
+        "text": "物资已收入背包。 × 2",
+        "x": 155,
+        "y": 65,
+        "width": 280,
+        "height": 34,
+        "top": 65,
+        "right": 435,
+        "bottom": 99,
+        "left": 155
+      },
+      "warning": {
+        "x": 195.171875,
+        "y": 116,
+        "width": 199.65625,
+        "height": 31,
+        "top": 116,
+        "right": 394.828125,
+        "bottom": 147,
+        "left": 195.171875
+      },
+      "interaction": {
+        "x": 270,
+        "y": 265.203125,
+        "width": 165,
+        "height": 26.796875,
+        "top": 265.203125,
+        "right": 435,
+        "bottom": 292,
+        "left": 270
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 640,
+      "height": 300
+    },
+    {
+      "label": "640x340: nearby 2",
+      "toast": {
+        "text": "物资已收入背包。",
+        "x": 155,
+        "y": 65,
+        "width": 280,
+        "height": 34,
+        "top": 65,
+        "right": 435,
+        "bottom": 99,
+        "left": 155
+      },
+      "warning": {
+        "x": 195.171875,
+        "y": 116,
+        "width": 199.65625,
+        "height": 31,
+        "top": 116,
+        "right": 394.828125,
+        "bottom": 147,
+        "left": 195.171875
+      },
+      "interaction": {
+        "x": 270,
+        "y": 252.203125,
+        "width": 165,
+        "height": 79.796875,
+        "top": 252.203125,
+        "right": 435,
+        "bottom": 332,
+        "left": 270
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 640,
+      "height": 340
+    },
+    {
+      "label": "640x340: repeated pickup",
+      "toast": {
+        "text": "物资已收入背包。 × 2",
+        "x": 155,
+        "y": 65,
+        "width": 280,
+        "height": 34,
+        "top": 65,
+        "right": 435,
+        "bottom": 99,
+        "left": 155
+      },
+      "warning": {
+        "x": 195.171875,
+        "y": 116,
+        "width": 199.65625,
+        "height": 31,
+        "top": 116,
+        "right": 394.828125,
+        "bottom": 147,
+        "left": 195.171875
+      },
+      "interaction": {
+        "x": 270,
+        "y": 305.203125,
+        "width": 165,
+        "height": 26.796875,
+        "top": 305.203125,
+        "right": 435,
+        "bottom": 332,
+        "left": 270
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 640,
+      "height": 340
+    },
+    {
+      "label": "640x341: nearby 2",
+      "toast": {
+        "text": "物资已收入背包。",
+        "x": 175,
+        "y": 64,
+        "width": 260,
+        "height": 34,
+        "top": 64,
+        "right": 435,
+        "bottom": 98,
+        "left": 175
+      },
+      "warning": {
+        "x": 220,
+        "y": 118,
+        "width": 200,
+        "height": 54,
+        "top": 118,
+        "right": 420,
+        "bottom": 172,
+        "left": 220
+      },
+      "interaction": {
+        "x": 220,
+        "y": 236.40625,
+        "width": 200,
+        "height": 92.59375,
+        "top": 236.40625,
+        "right": 420,
+        "bottom": 329,
+        "left": 220
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 640,
+      "height": 341
+    },
+    {
+      "label": "640x341: repeated pickup",
+      "toast": {
+        "text": "物资已收入背包。 × 2",
+        "x": 175,
+        "y": 64,
+        "width": 260,
+        "height": 34,
+        "top": 64,
+        "right": 435,
+        "bottom": 98,
+        "left": 175
+      },
+      "warning": {
+        "x": 220,
+        "y": 118,
+        "width": 200,
+        "height": 54,
+        "top": 118,
+        "right": 420,
+        "bottom": 172,
+        "left": 220
+      },
+      "interaction": {
+        "x": 220,
+        "y": 289.40625,
+        "width": 200,
+        "height": 39.59375,
+        "top": 289.40625,
+        "right": 420,
+        "bottom": 329,
+        "left": 220
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 640,
+      "height": 341
+    },
+    {
+      "label": "667x375: nearby 2",
+      "toast": {
+        "text": "物资已收入背包。",
+        "x": 175,
+        "y": 64,
+        "width": 287,
+        "height": 34,
+        "top": 64,
+        "right": 462,
+        "bottom": 98,
+        "left": 175
+      },
+      "warning": {
+        "x": 228.671875,
+        "y": 118,
+        "width": 209.65625,
+        "height": 35,
+        "top": 118,
+        "right": 438.328125,
+        "bottom": 153,
+        "left": 228.671875
+      },
+      "interaction": {
+        "x": 220,
+        "y": 270.40625,
+        "width": 227,
+        "height": 92.59375,
+        "top": 270.40625,
+        "right": 447,
+        "bottom": 363,
+        "left": 220
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 667,
+      "height": 375
+    },
+    {
+      "label": "667x375: repeated pickup",
+      "toast": {
+        "text": "物资已收入背包。 × 2",
+        "x": 175,
+        "y": 64,
+        "width": 287,
+        "height": 34,
+        "top": 64,
+        "right": 462,
+        "bottom": 98,
+        "left": 175
+      },
+      "warning": {
+        "x": 228.671875,
+        "y": 118,
+        "width": 209.65625,
+        "height": 35,
+        "top": 118,
+        "right": 438.328125,
+        "bottom": 153,
+        "left": 228.671875
+      },
+      "interaction": {
+        "x": 220,
+        "y": 323.40625,
+        "width": 227,
+        "height": 39.59375,
+        "top": 323.40625,
+        "right": 447,
+        "bottom": 363,
+        "left": 220
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 667,
+      "height": 375
+    },
+    {
+      "label": "740x300: nearby 2",
+      "toast": {
+        "text": "物资已收入背包。",
+        "x": 155,
+        "y": 65,
+        "width": 380,
+        "height": 34,
+        "top": 65,
+        "right": 535,
+        "bottom": 99,
+        "left": 155
+      },
+      "warning": {
+        "x": 245.171875,
+        "y": 116,
+        "width": 199.65625,
+        "height": 31,
+        "top": 116,
+        "right": 444.828125,
+        "bottom": 147,
+        "left": 245.171875
+      },
+      "interaction": {
+        "x": 270,
+        "y": 212.203125,
+        "width": 265,
+        "height": 79.796875,
+        "top": 212.203125,
+        "right": 535,
+        "bottom": 292,
+        "left": 270
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 740,
+      "height": 300
+    },
+    {
+      "label": "740x300: repeated pickup",
+      "toast": {
+        "text": "物资已收入背包。 × 2",
+        "x": 155,
+        "y": 65,
+        "width": 380,
+        "height": 34,
+        "top": 65,
+        "right": 535,
+        "bottom": 99,
+        "left": 155
+      },
+      "warning": {
+        "x": 245.171875,
+        "y": 116,
+        "width": 199.65625,
+        "height": 31,
+        "top": 116,
+        "right": 444.828125,
+        "bottom": 147,
+        "left": 245.171875
+      },
+      "interaction": {
+        "x": 270,
+        "y": 265.203125,
+        "width": 265,
+        "height": 26.796875,
+        "top": 265.203125,
+        "right": 535,
+        "bottom": 292,
+        "left": 270
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 740,
+      "height": 300
+    },
+    {
+      "label": "740x340: nearby 2",
+      "toast": {
+        "text": "物资已收入背包。",
+        "x": 155,
+        "y": 65,
+        "width": 380,
+        "height": 34,
+        "top": 65,
+        "right": 535,
+        "bottom": 99,
+        "left": 155
+      },
+      "warning": {
+        "x": 245.171875,
+        "y": 116,
+        "width": 199.65625,
+        "height": 31,
+        "top": 116,
+        "right": 444.828125,
+        "bottom": 147,
+        "left": 245.171875
+      },
+      "interaction": {
+        "x": 270,
+        "y": 252.203125,
+        "width": 265,
+        "height": 79.796875,
+        "top": 252.203125,
+        "right": 535,
+        "bottom": 332,
+        "left": 270
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 740,
+      "height": 340
+    },
+    {
+      "label": "740x340: repeated pickup",
+      "toast": {
+        "text": "物资已收入背包。 × 2",
+        "x": 155,
+        "y": 65,
+        "width": 380,
+        "height": 34,
+        "top": 65,
+        "right": 535,
+        "bottom": 99,
+        "left": 155
+      },
+      "warning": {
+        "x": 245.171875,
+        "y": 116,
+        "width": 199.65625,
+        "height": 31,
+        "top": 116,
+        "right": 444.828125,
+        "bottom": 147,
+        "left": 245.171875
+      },
+      "interaction": {
+        "x": 270,
+        "y": 305.203125,
+        "width": 265,
+        "height": 26.796875,
+        "top": 305.203125,
+        "right": 535,
+        "bottom": 332,
+        "left": 270
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 740,
+      "height": 340
+    },
+    {
+      "label": "740x341: nearby 2",
+      "toast": {
+        "text": "物资已收入背包。",
+        "x": 175,
+        "y": 64,
+        "width": 360,
+        "height": 34,
+        "top": 64,
+        "right": 535,
+        "bottom": 98,
+        "left": 175
+      },
+      "warning": {
+        "x": 265.171875,
+        "y": 118,
+        "width": 209.65625,
+        "height": 35,
+        "top": 118,
+        "right": 474.828125,
+        "bottom": 153,
+        "left": 265.171875
+      },
+      "interaction": {
+        "x": 220,
+        "y": 236.40625,
+        "width": 300,
+        "height": 92.59375,
+        "top": 236.40625,
+        "right": 520,
+        "bottom": 329,
+        "left": 220
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 740,
+      "height": 341
+    },
+    {
+      "label": "740x341: repeated pickup",
+      "toast": {
+        "text": "物资已收入背包。 × 2",
+        "x": 175,
+        "y": 64,
+        "width": 360,
+        "height": 34,
+        "top": 64,
+        "right": 535,
+        "bottom": 98,
+        "left": 175
+      },
+      "warning": {
+        "x": 265.171875,
+        "y": 118,
+        "width": 209.65625,
+        "height": 35,
+        "top": 118,
+        "right": 474.828125,
+        "bottom": 153,
+        "left": 265.171875
+      },
+      "interaction": {
+        "x": 220,
+        "y": 289.40625,
+        "width": 300,
+        "height": 39.59375,
+        "top": 289.40625,
+        "right": 520,
+        "bottom": 329,
+        "left": 220
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 740,
+      "height": 341
+    },
+    {
+      "label": "844x390: nearby 2",
+      "toast": {
+        "text": "物资已收入背包。",
+        "x": 175,
+        "y": 64,
+        "width": 464,
+        "height": 34,
+        "top": 64,
+        "right": 639,
+        "bottom": 98,
+        "left": 175
+      },
+      "warning": {
+        "x": 317.171875,
+        "y": 118,
+        "width": 209.65625,
+        "height": 35,
+        "top": 118,
+        "right": 526.828125,
+        "bottom": 153,
+        "left": 317.171875
+      },
+      "interaction": {
+        "x": 267,
+        "y": 285.40625,
+        "width": 310,
+        "height": 92.59375,
+        "top": 285.40625,
+        "right": 577,
+        "bottom": 378,
+        "left": 267
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 844,
+      "height": 390
+    },
+    {
+      "label": "844x390: repeated pickup",
+      "toast": {
+        "text": "物资已收入背包。 × 2",
+        "x": 175,
+        "y": 64,
+        "width": 464,
+        "height": 34,
+        "top": 64,
+        "right": 639,
+        "bottom": 98,
+        "left": 175
+      },
+      "warning": {
+        "x": 317.171875,
+        "y": 118,
+        "width": 209.65625,
+        "height": 35,
+        "top": 118,
+        "right": 526.828125,
+        "bottom": 153,
+        "left": 317.171875
+      },
+      "interaction": {
+        "x": 267,
+        "y": 338.40625,
+        "width": 310,
+        "height": 39.59375,
+        "top": 338.40625,
+        "right": 577,
+        "bottom": 378,
+        "left": 267
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 844,
+      "height": 390
+    },
+    {
+      "label": "915x412: nearby 2",
+      "toast": {
+        "text": "物资已收入背包。",
+        "x": 175,
+        "y": 64,
+        "width": 535,
+        "height": 34,
+        "top": 64,
+        "right": 710,
+        "bottom": 98,
+        "left": 175
+      },
+      "warning": {
+        "x": 352.671875,
+        "y": 118,
+        "width": 209.65625,
+        "height": 35,
+        "top": 118,
+        "right": 562.328125,
+        "bottom": 153,
+        "left": 352.671875
+      },
+      "interaction": {
+        "x": 302.5,
+        "y": 307.40625,
+        "width": 310,
+        "height": 92.59375,
+        "top": 307.40625,
+        "right": 612.5,
+        "bottom": 400,
+        "left": 302.5
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 915,
+      "height": 412
+    },
+    {
+      "label": "915x412: repeated pickup",
+      "toast": {
+        "text": "物资已收入背包。 × 2",
+        "x": 175,
+        "y": 64,
+        "width": 535,
+        "height": 34,
+        "top": 64,
+        "right": 710,
+        "bottom": 98,
+        "left": 175
+      },
+      "warning": {
+        "x": 352.671875,
+        "y": 118,
+        "width": 209.65625,
+        "height": 35,
+        "top": 118,
+        "right": 562.328125,
+        "bottom": 153,
+        "left": 352.671875
+      },
+      "interaction": {
+        "x": 302.5,
+        "y": 360.40625,
+        "width": 310,
+        "height": 39.59375,
+        "top": 360.40625,
+        "right": 612.5,
+        "bottom": 400,
+        "left": 302.5
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 915,
+      "height": 412
+    },
+    {
+      "label": "932x430: nearby 2",
+      "toast": {
+        "text": "物资已收入背包。",
+        "x": 175,
+        "y": 64,
+        "width": 552,
+        "height": 34,
+        "top": 64,
+        "right": 727,
+        "bottom": 98,
+        "left": 175
+      },
+      "warning": {
+        "x": 361.171875,
+        "y": 118,
+        "width": 209.65625,
+        "height": 35,
+        "top": 118,
+        "right": 570.828125,
+        "bottom": 153,
+        "left": 361.171875
+      },
+      "interaction": {
+        "x": 311,
+        "y": 325.40625,
+        "width": 310,
+        "height": 92.59375,
+        "top": 325.40625,
+        "right": 621,
+        "bottom": 418,
+        "left": 311
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 932,
+      "height": 430
+    },
+    {
+      "label": "932x430: repeated pickup",
+      "toast": {
+        "text": "物资已收入背包。 × 2",
+        "x": 175,
+        "y": 64,
+        "width": 552,
+        "height": 34,
+        "top": 64,
+        "right": 727,
+        "bottom": 98,
+        "left": 175
+      },
+      "warning": {
+        "x": 361.171875,
+        "y": 118,
+        "width": 209.65625,
+        "height": 35,
+        "top": 118,
+        "right": 570.828125,
+        "bottom": 153,
+        "left": 361.171875
+      },
+      "interaction": {
+        "x": 311,
+        "y": 378.40625,
+        "width": 310,
+        "height": 39.59375,
+        "top": 378.40625,
+        "right": 621,
+        "bottom": 418,
+        "left": 311
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 932,
+      "height": 430
+    },
+    {
+      "label": "640x300 safe: nearby 2",
+      "toast": {
+        "text": "物资已收入背包。",
+        "x": 199,
+        "y": 65,
+        "width": 224,
+        "height": 34,
+        "top": 65,
+        "right": 423,
+        "bottom": 99,
+        "left": 199
+      },
+      "warning": {
+        "x": 211.171875,
+        "y": 116,
+        "width": 199.65625,
+        "height": 31,
+        "top": 116,
+        "right": 410.828125,
+        "bottom": 147,
+        "left": 211.171875
+      },
+      "interaction": {
+        "x": 314,
+        "y": 175.40625,
+        "width": 109,
+        "height": 96.59375,
+        "top": 175.40625,
+        "right": 423,
+        "bottom": 272,
+        "left": 314
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 640,
+      "height": 300
+    },
+    {
+      "label": "640x300 safe: repeated pickup",
+      "toast": {
+        "text": "物资已收入背包。 × 2",
+        "x": 199,
+        "y": 65,
+        "width": 224,
+        "height": 34,
+        "top": 65,
+        "right": 423,
+        "bottom": 99,
+        "left": 199
+      },
+      "warning": {
+        "x": 211.171875,
+        "y": 116,
+        "width": 199.65625,
+        "height": 31,
+        "top": 116,
+        "right": 410.828125,
+        "bottom": 147,
+        "left": 211.171875
+      },
+      "interaction": {
+        "x": 314,
+        "y": 228.40625,
+        "width": 109,
+        "height": 43.59375,
+        "top": 228.40625,
+        "right": 423,
+        "bottom": 272,
+        "left": 314
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 640,
+      "height": 300
+    },
+    {
+      "label": "640x341 safe: nearby 2",
+      "toast": {
+        "text": "物资已收入背包。",
+        "x": 219,
+        "y": 64,
+        "width": 204,
+        "height": 34,
+        "top": 64,
+        "right": 423,
+        "bottom": 98,
+        "left": 219
+      },
+      "warning": {
+        "x": 264,
+        "y": 118,
+        "width": 144,
+        "height": 54,
+        "top": 118,
+        "right": 408,
+        "bottom": 172,
+        "left": 264
+      },
+      "interaction": {
+        "x": 264,
+        "y": 216.40625,
+        "width": 144,
+        "height": 92.59375,
+        "top": 216.40625,
+        "right": 408,
+        "bottom": 309,
+        "left": 264
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 640,
+      "height": 341
+    },
+    {
+      "label": "640x341 safe: repeated pickup",
+      "toast": {
+        "text": "物资已收入背包。 × 2",
+        "x": 219,
+        "y": 64,
+        "width": 204,
+        "height": 34,
+        "top": 64,
+        "right": 423,
+        "bottom": 98,
+        "left": 219
+      },
+      "warning": {
+        "x": 264,
+        "y": 118,
+        "width": 144,
+        "height": 54,
+        "top": 118,
+        "right": 408,
+        "bottom": 172,
+        "left": 264
+      },
+      "interaction": {
+        "x": 264,
+        "y": 247.8125,
+        "width": 144,
+        "height": 61.1875,
+        "top": 247.8125,
+        "right": 408,
+        "bottom": 309,
+        "left": 264
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 640,
+      "height": 341
+    },
+    {
+      "label": "740x300 safe: nearby 2",
+      "toast": {
+        "text": "物资已收入背包。",
+        "x": 199,
+        "y": 65,
+        "width": 324,
+        "height": 34,
+        "top": 65,
+        "right": 523,
+        "bottom": 99,
+        "left": 199
+      },
+      "warning": {
+        "x": 261.171875,
+        "y": 116,
+        "width": 199.65625,
+        "height": 31,
+        "top": 116,
+        "right": 460.828125,
+        "bottom": 147,
+        "left": 261.171875
+      },
+      "interaction": {
+        "x": 314,
+        "y": 192.203125,
+        "width": 209,
+        "height": 79.796875,
+        "top": 192.203125,
+        "right": 523,
+        "bottom": 272,
+        "left": 314
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 740,
+      "height": 300
+    },
+    {
+      "label": "740x300 safe: repeated pickup",
+      "toast": {
+        "text": "物资已收入背包。 × 2",
+        "x": 199,
+        "y": 65,
+        "width": 324,
+        "height": 34,
+        "top": 65,
+        "right": 523,
+        "bottom": 99,
+        "left": 199
+      },
+      "warning": {
+        "x": 261.171875,
+        "y": 116,
+        "width": 199.65625,
+        "height": 31,
+        "top": 116,
+        "right": 460.828125,
+        "bottom": 147,
+        "left": 261.171875
+      },
+      "interaction": {
+        "x": 314,
+        "y": 245.203125,
+        "width": 209,
+        "height": 26.796875,
+        "top": 245.203125,
+        "right": 523,
+        "bottom": 272,
+        "left": 314
+      },
+      "overlap": [],
+      "warningOverlap": [],
+      "width": 740,
+      "height": 300
+    }
+  ],
+  "status": "passed",
+  "finishedAt": "2026-10-09T13:39:02.246Z"
+}

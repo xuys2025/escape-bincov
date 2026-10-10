@@ -1,0 +1,146 @@
+{
+  "prefix": {
+    "buildSHA256": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+    "status": "PARTIAL",
+    "strictFailures": 6,
+    "ownershipFailures": 6,
+    "glTexture": [
+      {
+        "label": "round-0",
+        "live": 661,
+        "empty": 9
+      },
+      {
+        "label": "round-1",
+        "live": 661,
+        "empty": 12
+      },
+      {
+        "label": "round-2",
+        "live": 661,
+        "empty": 15
+      },
+      {
+        "label": "round-3",
+        "live": 661,
+        "empty": 18
+      },
+      {
+        "label": "round-4",
+        "live": 661,
+        "empty": 21
+      },
+      {
+        "label": "round-5",
+        "live": 661,
+        "empty": 24
+      },
+      {
+        "label": "round-6",
+        "live": 661,
+        "empty": 27
+      }
+    ],
+    "shaderCache": [
+      {
+        "round": 0,
+        "cacheId": 1461509,
+        "keys": 6,
+        "bytes": 22236
+      },
+      {
+        "round": 6,
+        "cacheId": 1461509,
+        "keys": 12,
+        "bytes": 48252
+      }
+    ],
+    "cacheVariable": "XT",
+    "slots": {
+      "input": "test-results/opus-r3/prefix-context-short/report.json",
+      "buildSHA256": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+      "rounds": 6,
+      "baselineEmpty": 9,
+      "finalEmpty": 27,
+      "removed": 0,
+      "added": 18,
+      "newNulls": 18,
+      "everyRoundThreeOut": false,
+      "everyRoundThreeIn": true,
+      "everyNewNullWasLive": true,
+      "note": "type is the minified constructor name of the recorded build; textureKey null = not a scene.textures entry (the render targets, lighting and atmosphere sources)."
+    }
+  },
+  "fixed": {
+    "buildSHA256": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+    "status": "BOUNDED_CHECKS_PASS_HEAP_PENDING",
+    "strictFailures": 0,
+    "ownershipFailures": 0,
+    "glTexture": [
+      {
+        "label": "round-0",
+        "live": 661,
+        "empty": 0
+      },
+      {
+        "label": "round-1",
+        "live": 661,
+        "empty": 0
+      },
+      {
+        "label": "round-2",
+        "live": 661,
+        "empty": 0
+      },
+      {
+        "label": "round-3",
+        "live": 661,
+        "empty": 0
+      },
+      {
+        "label": "round-4",
+        "live": 661,
+        "empty": 0
+      },
+      {
+        "label": "round-5",
+        "live": 661,
+        "empty": 0
+      },
+      {
+        "label": "round-6",
+        "live": 661,
+        "empty": 0
+      }
+    ],
+    "shaderCache": [
+      {
+        "round": 0,
+        "cacheId": 659421,
+        "keys": 3,
+        "bytes": 9228
+      },
+      {
+        "round": 6,
+        "cacheId": 659421,
+        "keys": 3,
+        "bytes": 9228
+      }
+    ],
+    "cacheVariable": "jT",
+    "slots": {
+      "input": "test-results/opus-r3/fixed-context-short/report.json",
+      "buildSHA256": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+      "rounds": 6,
+      "baselineEmpty": 0,
+      "finalEmpty": 0,
+      "removed": 18,
+      "added": 18,
+      "newNulls": 0,
+      "everyRoundThreeOut": true,
+      "everyRoundThreeIn": true,
+      "everyNewNullWasLive": true,
+      "note": "type is the minified constructor name of the recorded build; textureKey null = not a scene.textures entry (the render targets, lighting and atmosphere sources)."
+    }
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "startedAt": "2026-10-09T14:25:57.374Z",
+  "methodology": "Offline built HTML; native region selector, keyboard/touch actions, storage fault and reload. Explicit fixtures position the player at named anchors, register one validated pursuit with a real map route and normal frame progression, set indoor clock boundaries and extend enemy cooldowns to isolate the indoor warning/tide/terminal transaction; this does not claim natural travel, another unaccelerated 600-second run or human balance.",
+  "htmlSha256": "a9a07a960049d6dc17e54b9fb7c765c99a72041c48e111c9b73b2ae2fa8d852f",
+  "steps": [
+    {
+      "name": "native deployment saves all three maps with one global roster and body",
+      "status": "passed"
+    },
+    {
+      "name": "failed door write leaves the closed door and original bytes; retry opens exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "one held E switches once, releases held movement, and keeps global time and saved doors",
+      "status": "passed"
+    },
+    {
+      "name": "refresh restores upstairs and all maps; reverse and basement entries return to paired anchors",
+      "status": "passed"
+    },
+    {
+      "name": "native E closes a passed pursuit door; subsequent frames and reload keep it closed",
+      "status": "passed"
+    },
+    {
+      "name": "indoor warning and tide use the global clock; failed upstairs timeout retains its candidate and retries once",
+      "status": "passed"
+    },
+    {
+      "name": "native touch entry and map panel at 844x390",
+      "status": "passed"
+    },
+    {
+      "name": "native touch entry and map panel at 640x300",
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "pursuitDoor": {
+    "fixture": {
+      "id": "pursuit-60",
+      "uid": "enemy-2",
+      "path": [
+        {
+          "x": 464,
+          "y": 464
+        },
+        {
+          "x": 464,
+          "y": 464
+        },
+        {
+          "x": 464,
+          "y": 432
+        },
+        {
+          "x": 464,
+          "y": 400
+        },
+        {
+          "x": 464,
+          "y": 368
+        },
+        {
+          "x": 464,
+          "y": 336
+        },
+        {
+          "x": 464,
+          "y": 304
+        },
+        {
+          "x": 464,
+          "y": 272
+        },
+        {
+          "x": 496,
+          "y": 272
+        },
+        {
+          "x": 528,
+          "y": 272
+        },
+        {
+          "x": 560,
+          "y": 272
+        },
+        {
+          "x": 560,
+          "y": 272
+        }
+      ],
+      "distance": 288
+    },
+    "elapsedBeforeClose": 4.513900000005926,
+    "elapsedSaved": 4.97770000000295,
+    "restoredArrivalAt": 11.386600000001492
+  },
+  "indoor": {
+    "warning": {
+      "map": "resident-f2",
+      "elapsed": 270.0044999999999,
+      "warned": true,
+      "tideChanged": false,
+      "high": false,
+      "pollution": 0,
+      "hp": 100,
+      "frozenCoastTime": 4.901100000001459
+    },
+    "tide": {
+      "map": "resident-f2",
+      "elapsed": 300.01,
+      "warned": true,
+      "tideChanged": true,
+      "high": true,
+      "pollution": 0,
+      "hp": 100,
+      "frozenCoastTime": 4.901100000001459
+    },
+    "terminal": {
+      "runId": "bc-mv125sx1-b",
+      "outcome": "timeout",
+      "body": {
+        "hp": 100,
+        "stamina": 100,
+        "mental": 99.91790499999918,
+        "water": 99.7810799999967,
+        "satiety": 99.8631749999968,
+        "pollution": 0,
+        "bleeding": false,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 0,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      }
+    }
+  },
+  "status": "passed",
+  "finishedAt": "2026-10-09T14:26:08.810Z"
+}

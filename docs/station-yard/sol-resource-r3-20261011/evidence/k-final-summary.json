@@ -1,0 +1,821 @@
+{
+  "method": "Complete --only=K preserves K1 setup before K2/K3/K4. Prior --only=K3,K4 null-entry runs INVALID as resource evidence and retained in raw.",
+  "runs": [
+    {
+      "name": "sol-k-all-old",
+      "buildSHA256": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+      "summary": {
+        "passed": 2,
+        "total": 4
+      },
+      "steps": [
+        {
+          "name": "K1 full-yard traversal and independent no-culling pixel oracle",
+          "status": "passed"
+        },
+        {
+          "name": "K2 fully visited 20 remounts: wall frames/sources released, six Pixi tables, heap observation",
+          "status": "passed"
+        },
+        {
+          "name": "K3 fully visited yard/village/yard releases shared resources",
+          "status": "failed",
+          "error": "AssertionError [ERR_ASSERTION]: glBuffer live grew\n    at compare (file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:180:313)\n    at file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:262:307\n    at async step (file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:110:18)\n    at async file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:258:2"
+        },
+        {
+          "name": "K4 fully visited WebGL context restoration: revisit all walls and release remount",
+          "status": "failed",
+          "error": "AssertionError [ERR_ASSERTION]: glBuffer empty grew\n    at compare (file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:180:363)\n    at file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:265:475\n    at async step (file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:110:18)\n    at async file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:264:2"
+        }
+      ],
+      "strictVillage": {
+        "before": {
+          "listeners": 24,
+          "tickers": 1,
+          "observers": 0,
+          "timers": 0,
+          "apps": 1,
+          "parked": 0,
+          "views": 1,
+          "renderTextures": 0,
+          "canvases": 2,
+          "roots": 1,
+          "gpuTextures": 405,
+          "managed": {
+            "live": 467,
+            "empty": 0
+          },
+          "heap": 35584694,
+          "scene": 352,
+          "wallFrameGroups": 194,
+          "wallFrames": 4064,
+          "masonry": 198,
+          "tables": {
+            "schema": "pixi-8.22.0-managed-hashes",
+            "running": false,
+            "required": [
+              "graphics",
+              "graphicsContext",
+              "glBuffer",
+              "glTexture",
+              "glGeometry",
+              "tilingSprite"
+            ],
+            "tables": [
+              {
+                "name": "graphics",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "graphicsContext",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "glBuffer",
+                "hash": "items",
+                "live": 28,
+                "empty": 0,
+                "keys": 28
+              },
+              {
+                "name": "glTexture",
+                "hash": "items",
+                "live": 405,
+                "empty": 0,
+                "keys": 405
+              },
+              {
+                "name": "glGeometry",
+                "hash": "items",
+                "live": 14,
+                "empty": 0,
+                "keys": 14
+              },
+              {
+                "name": "tilingSprite",
+                "hash": "items",
+                "live": 2,
+                "empty": 0,
+                "keys": 2
+              }
+            ],
+            "live": 467,
+            "empty": 0
+          }
+        },
+        "after": {
+          "listeners": 24,
+          "tickers": 1,
+          "observers": 0,
+          "timers": 0,
+          "apps": 1,
+          "parked": 0,
+          "views": 1,
+          "renderTextures": 0,
+          "canvases": 2,
+          "roots": 1,
+          "gpuTextures": 407,
+          "managed": {
+            "live": 473,
+            "empty": 0
+          },
+          "heap": 38993401,
+          "scene": 357,
+          "wallFrameGroups": 197,
+          "wallFrames": 4136,
+          "masonry": 198,
+          "tables": {
+            "schema": "pixi-8.22.0-managed-hashes",
+            "running": false,
+            "required": [
+              "graphics",
+              "graphicsContext",
+              "glBuffer",
+              "glTexture",
+              "glGeometry",
+              "tilingSprite"
+            ],
+            "tables": [
+              {
+                "name": "graphics",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "graphicsContext",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "glBuffer",
+                "hash": "items",
+                "live": 31,
+                "empty": 0,
+                "keys": 31
+              },
+              {
+                "name": "glTexture",
+                "hash": "items",
+                "live": 407,
+                "empty": 0,
+                "keys": 407
+              },
+              {
+                "name": "glGeometry",
+                "hash": "items",
+                "live": 15,
+                "empty": 0,
+                "keys": 15
+              },
+              {
+                "name": "tilingSprite",
+                "hash": "items",
+                "live": 2,
+                "empty": 0,
+                "keys": 2
+              }
+            ],
+            "live": 473,
+            "empty": 0
+          }
+        },
+        "released": {
+          "scene": {
+            "textures": 0,
+            "npc": 0,
+            "frames": 0,
+            "masonry": 0,
+            "targets": [
+              true,
+              true,
+              true
+            ]
+          },
+          "frames": [],
+          "sources": []
+        },
+        "parked": {
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "canvases": 1,
+            "roots": 0,
+            "gpuTextures": 2,
+            "managed": {
+              "live": 9,
+              "empty": 0
+            },
+            "heap": 42883561
+          },
+          "children": 0,
+          "ticker": false,
+          "attached": false,
+          "events": {
+            "attached": false,
+            "roots": {
+              "_rootPointerEvent": false,
+              "_rootWheelEvent": false,
+              "_rootContextMenuEvent": false
+            },
+            "pooled": 0,
+            "native": 0
+          }
+        }
+      },
+      "strictContext": {
+        "before": {
+          "listeners": 24,
+          "tickers": 1,
+          "observers": 0,
+          "timers": 0,
+          "apps": 1,
+          "parked": 0,
+          "views": 1,
+          "renderTextures": 0,
+          "canvases": 2,
+          "roots": 1,
+          "gpuTextures": 407,
+          "managed": {
+            "live": 473,
+            "empty": 0
+          },
+          "heap": 39611553,
+          "scene": 357,
+          "wallFrameGroups": 197,
+          "wallFrames": 4136,
+          "masonry": 198,
+          "tables": {
+            "schema": "pixi-8.22.0-managed-hashes",
+            "running": false,
+            "required": [
+              "graphics",
+              "graphicsContext",
+              "glBuffer",
+              "glTexture",
+              "glGeometry",
+              "tilingSprite"
+            ],
+            "tables": [
+              {
+                "name": "graphics",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "graphicsContext",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "glBuffer",
+                "hash": "items",
+                "live": 31,
+                "empty": 0,
+                "keys": 31
+              },
+              {
+                "name": "glTexture",
+                "hash": "items",
+                "live": 407,
+                "empty": 0,
+                "keys": 407
+              },
+              {
+                "name": "glGeometry",
+                "hash": "items",
+                "live": 15,
+                "empty": 0,
+                "keys": 15
+              },
+              {
+                "name": "tilingSprite",
+                "hash": "items",
+                "live": 2,
+                "empty": 0,
+                "keys": 2
+              }
+            ],
+            "live": 473,
+            "empty": 0
+          }
+        },
+        "restored": {
+          "listeners": 24,
+          "tickers": 1,
+          "observers": 0,
+          "timers": 0,
+          "apps": 1,
+          "parked": 0,
+          "views": 1,
+          "renderTextures": 0,
+          "canvases": 2,
+          "roots": 1,
+          "gpuTextures": 408,
+          "managed": {
+            "live": 470,
+            "empty": 22
+          },
+          "heap": 40504577,
+          "scene": 370,
+          "wallFrameGroups": 197,
+          "wallFrames": 4136,
+          "masonry": 198,
+          "tables": {
+            "schema": "pixi-8.22.0-managed-hashes",
+            "running": false,
+            "required": [
+              "graphics",
+              "graphicsContext",
+              "glBuffer",
+              "glTexture",
+              "glGeometry",
+              "tilingSprite"
+            ],
+            "tables": [
+              {
+                "name": "graphics",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "graphicsContext",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "glBuffer",
+                "hash": "items",
+                "live": 28,
+                "empty": 3,
+                "keys": 31
+              },
+              {
+                "name": "glTexture",
+                "hash": "items",
+                "live": 408,
+                "empty": 18,
+                "keys": 426
+              },
+              {
+                "name": "glGeometry",
+                "hash": "items",
+                "live": 14,
+                "empty": 1,
+                "keys": 15
+              },
+              {
+                "name": "tilingSprite",
+                "hash": "items",
+                "live": 2,
+                "empty": 0,
+                "keys": 2
+              }
+            ],
+            "live": 470,
+            "empty": 22
+          }
+        }
+      },
+      "heapObservation": {
+        "before": 34716147,
+        "after": 35759536,
+        "deltaBytes": 1043389,
+        "conclusion": "PARTIAL: fully visited short 20-remount observation, historical F20 not closed"
+      },
+      "errors": [],
+      "external": []
+    },
+    {
+      "name": "sol-k-all-new",
+      "buildSHA256": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+      "summary": {
+        "passed": 2,
+        "total": 4
+      },
+      "steps": [
+        {
+          "name": "K1 full-yard traversal and independent no-culling pixel oracle",
+          "status": "passed"
+        },
+        {
+          "name": "K2 fully visited 20 remounts: wall frames/sources released, six Pixi tables, heap observation",
+          "status": "passed"
+        },
+        {
+          "name": "K3 fully visited yard/village/yard releases shared resources",
+          "status": "failed",
+          "error": "AssertionError [ERR_ASSERTION]: glBuffer live grew\n    at compare (file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:180:313)\n    at file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:262:307\n    at async step (file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:110:18)\n    at async file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:258:2"
+        },
+        {
+          "name": "K4 fully visited WebGL context restoration: revisit all walls and release remount",
+          "status": "failed",
+          "error": "AssertionError [ERR_ASSERTION]: glBuffer empty grew\n    at compare (file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:180:363)\n    at file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:265:475\n    at async step (file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:110:18)\n    at async file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:264:2"
+        }
+      ],
+      "strictVillage": {
+        "before": {
+          "listeners": 24,
+          "tickers": 1,
+          "observers": 0,
+          "timers": 0,
+          "apps": 1,
+          "parked": 0,
+          "views": 1,
+          "renderTextures": 0,
+          "canvases": 2,
+          "roots": 1,
+          "gpuTextures": 405,
+          "managed": {
+            "live": 467,
+            "empty": 0
+          },
+          "heap": 35067468,
+          "scene": 352,
+          "wallFrameGroups": 194,
+          "wallFrames": 4064,
+          "masonry": 198,
+          "tables": {
+            "schema": "pixi-8.22.0-managed-hashes",
+            "running": false,
+            "required": [
+              "graphics",
+              "graphicsContext",
+              "glBuffer",
+              "glTexture",
+              "glGeometry",
+              "tilingSprite"
+            ],
+            "tables": [
+              {
+                "name": "graphics",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "graphicsContext",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "glBuffer",
+                "hash": "items",
+                "live": 28,
+                "empty": 0,
+                "keys": 28
+              },
+              {
+                "name": "glTexture",
+                "hash": "items",
+                "live": 405,
+                "empty": 0,
+                "keys": 405
+              },
+              {
+                "name": "glGeometry",
+                "hash": "items",
+                "live": 14,
+                "empty": 0,
+                "keys": 14
+              },
+              {
+                "name": "tilingSprite",
+                "hash": "items",
+                "live": 2,
+                "empty": 0,
+                "keys": 2
+              }
+            ],
+            "live": 467,
+            "empty": 0
+          }
+        },
+        "after": {
+          "listeners": 24,
+          "tickers": 1,
+          "observers": 0,
+          "timers": 0,
+          "apps": 1,
+          "parked": 0,
+          "views": 1,
+          "renderTextures": 0,
+          "canvases": 2,
+          "roots": 1,
+          "gpuTextures": 406,
+          "managed": {
+            "live": 472,
+            "empty": 0
+          },
+          "heap": 38419975,
+          "scene": 356,
+          "wallFrameGroups": 197,
+          "wallFrames": 4136,
+          "masonry": 198,
+          "tables": {
+            "schema": "pixi-8.22.0-managed-hashes",
+            "running": false,
+            "required": [
+              "graphics",
+              "graphicsContext",
+              "glBuffer",
+              "glTexture",
+              "glGeometry",
+              "tilingSprite"
+            ],
+            "tables": [
+              {
+                "name": "graphics",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "graphicsContext",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "glBuffer",
+                "hash": "items",
+                "live": 31,
+                "empty": 0,
+                "keys": 31
+              },
+              {
+                "name": "glTexture",
+                "hash": "items",
+                "live": 406,
+                "empty": 0,
+                "keys": 406
+              },
+              {
+                "name": "glGeometry",
+                "hash": "items",
+                "live": 15,
+                "empty": 0,
+                "keys": 15
+              },
+              {
+                "name": "tilingSprite",
+                "hash": "items",
+                "live": 2,
+                "empty": 0,
+                "keys": 2
+              }
+            ],
+            "live": 472,
+            "empty": 0
+          }
+        },
+        "released": {
+          "scene": {
+            "textures": 0,
+            "npc": 0,
+            "frames": 0,
+            "masonry": 0,
+            "targets": [
+              true,
+              true,
+              true
+            ]
+          },
+          "frames": [],
+          "sources": []
+        },
+        "parked": {
+          "counts": {
+            "listeners": 0,
+            "tickers": 0,
+            "observers": 0,
+            "timers": 0,
+            "apps": 0,
+            "parked": 1,
+            "views": 0,
+            "renderTextures": 0,
+            "canvases": 1,
+            "roots": 0,
+            "gpuTextures": 2,
+            "managed": {
+              "live": 9,
+              "empty": 0
+            },
+            "heap": 41530789
+          },
+          "children": 0,
+          "ticker": false,
+          "attached": false,
+          "events": {
+            "attached": false,
+            "roots": {
+              "_rootPointerEvent": false,
+              "_rootWheelEvent": false,
+              "_rootContextMenuEvent": false
+            },
+            "pooled": 0,
+            "native": 0
+          }
+        }
+      },
+      "strictContext": {
+        "before": {
+          "listeners": 24,
+          "tickers": 1,
+          "observers": 0,
+          "timers": 0,
+          "apps": 1,
+          "parked": 0,
+          "views": 1,
+          "renderTextures": 0,
+          "canvases": 2,
+          "roots": 1,
+          "gpuTextures": 406,
+          "managed": {
+            "live": 472,
+            "empty": 0
+          },
+          "heap": 38492443,
+          "scene": 356,
+          "wallFrameGroups": 197,
+          "wallFrames": 4136,
+          "masonry": 198,
+          "tables": {
+            "schema": "pixi-8.22.0-managed-hashes",
+            "running": false,
+            "required": [
+              "graphics",
+              "graphicsContext",
+              "glBuffer",
+              "glTexture",
+              "glGeometry",
+              "tilingSprite"
+            ],
+            "tables": [
+              {
+                "name": "graphics",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "graphicsContext",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "glBuffer",
+                "hash": "items",
+                "live": 31,
+                "empty": 0,
+                "keys": 31
+              },
+              {
+                "name": "glTexture",
+                "hash": "items",
+                "live": 406,
+                "empty": 0,
+                "keys": 406
+              },
+              {
+                "name": "glGeometry",
+                "hash": "items",
+                "live": 15,
+                "empty": 0,
+                "keys": 15
+              },
+              {
+                "name": "tilingSprite",
+                "hash": "items",
+                "live": 2,
+                "empty": 0,
+                "keys": 2
+              }
+            ],
+            "live": 472,
+            "empty": 0
+          }
+        },
+        "restored": {
+          "listeners": 24,
+          "tickers": 1,
+          "observers": 0,
+          "timers": 0,
+          "apps": 1,
+          "parked": 0,
+          "views": 1,
+          "renderTextures": 0,
+          "canvases": 2,
+          "roots": 1,
+          "gpuTextures": 408,
+          "managed": {
+            "live": 470,
+            "empty": 19
+          },
+          "heap": 38983535,
+          "scene": 370,
+          "wallFrameGroups": 197,
+          "wallFrames": 4136,
+          "masonry": 198,
+          "tables": {
+            "schema": "pixi-8.22.0-managed-hashes",
+            "running": false,
+            "required": [
+              "graphics",
+              "graphicsContext",
+              "glBuffer",
+              "glTexture",
+              "glGeometry",
+              "tilingSprite"
+            ],
+            "tables": [
+              {
+                "name": "graphics",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "graphicsContext",
+                "hash": "items",
+                "live": 9,
+                "empty": 0,
+                "keys": 9
+              },
+              {
+                "name": "glBuffer",
+                "hash": "items",
+                "live": 28,
+                "empty": 3,
+                "keys": 31
+              },
+              {
+                "name": "glTexture",
+                "hash": "items",
+                "live": 408,
+                "empty": 15,
+                "keys": 423
+              },
+              {
+                "name": "glGeometry",
+                "hash": "items",
+                "live": 14,
+                "empty": 1,
+                "keys": 15
+              },
+              {
+                "name": "tilingSprite",
+                "hash": "items",
+                "live": 2,
+                "empty": 0,
+                "keys": 2
+              }
+            ],
+            "live": 470,
+            "empty": 19
+          }
+        }
+      },
+      "heapObservation": {
+        "before": 34097401,
+        "after": 35637570,
+        "deltaBytes": 1540169,
+        "conclusion": "PARTIAL: fully visited short 20-remount observation, historical F20 not closed"
+      },
+      "errors": [],
+      "external": []
+    }
+  ]
+}

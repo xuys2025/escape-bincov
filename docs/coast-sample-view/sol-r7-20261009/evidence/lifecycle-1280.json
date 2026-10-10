@@ -1,0 +1,73 @@
+{
+  "at": "2026-10-09T07:28:45.133Z",
+  "checks": [
+    {
+      "name": "startup-asset-cleanup-and-retry",
+      "beforeRetry": {
+        "roots": 0,
+        "errors": [
+          "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8625:131711)\n    at <anonymous>:14:61"
+        ]
+      },
+      "errors": [
+        "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8625:131711)\n    at <anonymous>:14:61"
+      ],
+      "rootsAfterFailure": 0,
+      "sameRunResumed": true,
+      "expectedErrors": [
+        "Error: Coast asset failed to decode: coast-player-body-e-f0-v1\n    at i.onerror (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8625:131711)\n    at <anonymous>:14:61"
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "startup-view-cleanup-and-retry",
+      "beforeRetry": {
+        "roots": 0,
+        "errors": [
+          "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at Kf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:46506)\n    at Zf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:54212)\n    at new $f (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:42519)\n    at new Ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:67198)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:2552)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+        ]
+      },
+      "errors": [
+        "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at Kf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:46506)\n    at Zf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:54212)\n    at new $f (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:42519)\n    at new Ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:67198)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:2552)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+      ],
+      "rootsAfterFailure": 0,
+      "sameRunResumed": true,
+      "expectedErrors": [
+        "Error: injected view texture failure\n    at CanvasRenderingContext2D.drawImage (<anonymous>:21:41)\n    at Kf.add (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:46506)\n    at Zf.ensure (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:54212)\n    at new $f (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:42519)\n    at new Ah (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8709:67198)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:2552)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "startup-observer-cleanup-and-retry",
+      "beforeRetry": {
+        "roots": 0,
+        "errors": [
+          "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:3593)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+        ]
+      },
+      "errors": [
+        "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:3593)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+      ],
+      "rootsAfterFailure": 0,
+      "sameRunResumed": true,
+      "expectedErrors": [
+        "Error: injected mount observer failure\n    at ResizeObserver.observe (<anonymous>:28:41)\n    at Ih.mount (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:3593)\n    at async tg (file:///D:/bincov/pr22-runtime/dist/index.html?sample=village:8751:31793)"
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "ordinary-context-loss-native-restore-and-settlement",
+      "errors": [],
+      "hooksAbsent": true,
+      "lostFrozen": true,
+      "heldMovementBlocked": true,
+      "nativeRestored": true,
+      "restoredRemainedPaused": true,
+      "failedSettlementRetained": true,
+      "nextRaidMounted": true,
+      "status": "passed"
+    }
+  ],
+  "requests": [],
+  "browser": "154.0.8037.98"
+}

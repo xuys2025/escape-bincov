@@ -1,0 +1,763 @@
+{
+  "htmlSha256": "b46c56ef94cd049b71a285989f97f265cbc68788b0be34e026f2ab486c84eedd",
+  "startedAt": "2026-10-09T03:36:02.543Z",
+  "minutes": 10,
+  "methodology": "Automated real-time session. Test hook is read-only: no teleports, no clock changes, no changes to health, enemies, inventory or RNG. All actions use visible buttons and real keyboard/mouse, including E opening and native inventory drag for crates and corpses. This is not a human fun/balance evaluation.",
+  "containerLoot": {
+    "opened": [
+      {
+        "run": 1,
+        "id": "crate-20",
+        "kind": "crate",
+        "elapsed": 7.8787000000001255
+      },
+      {
+        "run": 1,
+        "id": "crate-11",
+        "kind": "crate",
+        "elapsed": 18.889900000000033
+      },
+      {
+        "run": 1,
+        "id": "crate-21",
+        "kind": "crate",
+        "elapsed": 24.246900000000192
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-6",
+        "kind": "corpse",
+        "elapsed": 29.197100000000344
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-14",
+        "kind": "corpse",
+        "elapsed": 35.73620000000027
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-1",
+        "kind": "corpse",
+        "elapsed": 36.673400000000306
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-5",
+        "kind": "corpse",
+        "elapsed": 37.430200000000255
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-16",
+        "kind": "corpse",
+        "elapsed": 40.13100000000017
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-20",
+        "kind": "corpse",
+        "elapsed": 40.77270000000013
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-12",
+        "kind": "corpse",
+        "elapsed": 42.148099999999985
+      },
+      {
+        "run": 1,
+        "id": "crate-13",
+        "kind": "crate",
+        "elapsed": 48.91289999999969
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-21",
+        "kind": "corpse",
+        "elapsed": 51.975999999999644
+      },
+      {
+        "run": 1,
+        "id": "crate-25",
+        "kind": "crate",
+        "elapsed": 54.4966999999995
+      },
+      {
+        "run": 1,
+        "id": "crate-14",
+        "kind": "crate",
+        "elapsed": 61.08269999999929
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-3",
+        "kind": "corpse",
+        "elapsed": 62.11789999999919
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-10",
+        "kind": "corpse",
+        "elapsed": 96.94499999999303
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-19",
+        "kind": "corpse",
+        "elapsed": 97.71369999999288
+      },
+      {
+        "run": 1,
+        "id": "crate-0",
+        "kind": "crate",
+        "elapsed": 100.68369999999236
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-8",
+        "kind": "corpse",
+        "elapsed": 103.55519999999191
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-24",
+        "kind": "corpse",
+        "elapsed": 104.89999999999166
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-0",
+        "kind": "corpse",
+        "elapsed": 106.31139999999148
+      },
+      {
+        "run": 1,
+        "id": "crate-49",
+        "kind": "crate",
+        "elapsed": 113.01269999999029
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-18",
+        "kind": "corpse",
+        "elapsed": 116.2173999999897
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-4",
+        "kind": "corpse",
+        "elapsed": 116.90469999998956
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-23",
+        "kind": "corpse",
+        "elapsed": 117.79329999998947
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-9",
+        "kind": "corpse",
+        "elapsed": 119.5803999999893
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-17",
+        "kind": "corpse",
+        "elapsed": 129.64039999998738
+      },
+      {
+        "run": 1,
+        "id": "crate-15",
+        "kind": "crate",
+        "elapsed": 171.10999999997944
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-2",
+        "kind": "corpse",
+        "elapsed": 173.97489999997885
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-15",
+        "kind": "corpse",
+        "elapsed": 174.78719999997867
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-11",
+        "kind": "corpse",
+        "elapsed": 175.91209999997847
+      },
+      {
+        "run": 1,
+        "id": "corpse-enemy-22",
+        "kind": "corpse",
+        "elapsed": 180.10899999997778
+      },
+      {
+        "run": 2,
+        "id": "crate-14",
+        "kind": "crate",
+        "elapsed": 6.694899999999984
+      },
+      {
+        "run": 2,
+        "id": "crate-26",
+        "kind": "crate",
+        "elapsed": 16.670099999999977
+      },
+      {
+        "run": 2,
+        "id": "corpse-enemy-15",
+        "kind": "corpse",
+        "elapsed": 21.445099999999584
+      },
+      {
+        "run": 2,
+        "id": "corpse-enemy-13",
+        "kind": "corpse",
+        "elapsed": 24.8250999999993
+      },
+      {
+        "run": 2,
+        "id": "crate-2",
+        "kind": "crate",
+        "elapsed": 29.32089999999894
+      },
+      {
+        "run": 2,
+        "id": "crate-48",
+        "kind": "crate",
+        "elapsed": 39.19369999999827
+      }
+    ],
+    "transfers": [
+      {
+        "run": 1,
+        "containerId": "crate-20",
+        "kind": "crate",
+        "item": "watch",
+        "qty": 1,
+        "elapsed": 7.8787000000001255
+      },
+      {
+        "run": 1,
+        "containerId": "crate-20",
+        "kind": "crate",
+        "item": "fuse",
+        "qty": 1,
+        "elapsed": 7.981700000000126
+      },
+      {
+        "run": 1,
+        "containerId": "crate-11",
+        "kind": "crate",
+        "item": "ammo9",
+        "qty": 10,
+        "elapsed": 18.889900000000033
+      },
+      {
+        "run": 1,
+        "containerId": "crate-11",
+        "kind": "crate",
+        "item": "food",
+        "qty": 1,
+        "elapsed": 18.974800000000034
+      },
+      {
+        "run": 1,
+        "containerId": "crate-21",
+        "kind": "crate",
+        "item": "water",
+        "qty": 1,
+        "elapsed": 24.246900000000192
+      },
+      {
+        "run": 1,
+        "containerId": "crate-21",
+        "kind": "crate",
+        "item": "shotgun",
+        "qty": 1,
+        "elapsed": 24.350000000000204
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-14",
+        "kind": "corpse",
+        "item": "bandage",
+        "qty": 1,
+        "elapsed": 35.73620000000027
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-1",
+        "kind": "corpse",
+        "item": "ammo9",
+        "qty": 13,
+        "elapsed": 36.673400000000306
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-5",
+        "kind": "corpse",
+        "item": "ammoR",
+        "qty": 4,
+        "elapsed": 37.430200000000255
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-16",
+        "kind": "corpse",
+        "item": "scrap",
+        "qty": 2,
+        "elapsed": 40.13100000000017
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-20",
+        "kind": "corpse",
+        "item": "medkit",
+        "qty": 1,
+        "elapsed": 40.77270000000013
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-12",
+        "kind": "corpse",
+        "item": "battery",
+        "qty": 1,
+        "elapsed": 42.148099999999985
+      },
+      {
+        "run": 1,
+        "containerId": "crate-13",
+        "kind": "crate",
+        "item": "wire",
+        "qty": 2,
+        "elapsed": 48.91289999999969
+      },
+      {
+        "run": 1,
+        "containerId": "crate-13",
+        "kind": "crate",
+        "item": "battery",
+        "qty": 1,
+        "elapsed": 49.019799999999684
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-21",
+        "kind": "corpse",
+        "item": "bandage",
+        "qty": 1,
+        "elapsed": 51.975999999999644
+      },
+      {
+        "run": 1,
+        "containerId": "crate-25",
+        "kind": "crate",
+        "item": "water",
+        "qty": 1,
+        "elapsed": 54.4966999999995
+      },
+      {
+        "run": 1,
+        "containerId": "crate-25",
+        "kind": "crate",
+        "item": "fuse",
+        "qty": 1,
+        "elapsed": 54.605699999999516
+      },
+      {
+        "run": 1,
+        "containerId": "crate-14",
+        "kind": "crate",
+        "item": "ammo9",
+        "qty": 6,
+        "elapsed": 61.08269999999929
+      },
+      {
+        "run": 1,
+        "containerId": "crate-14",
+        "kind": "crate",
+        "item": "wire",
+        "qty": 2,
+        "elapsed": 61.18589999999924
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-3",
+        "kind": "corpse",
+        "item": "ammo9",
+        "qty": 9,
+        "elapsed": 62.11789999999919
+      },
+      {
+        "run": 1,
+        "containerId": "crate-0",
+        "kind": "crate",
+        "item": "shell",
+        "qty": 2,
+        "elapsed": 100.68369999999236
+      },
+      {
+        "run": 1,
+        "containerId": "crate-49",
+        "kind": "crate",
+        "item": "wire",
+        "qty": 1,
+        "elapsed": 113.01269999999029
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-18",
+        "kind": "corpse",
+        "item": "bandage",
+        "qty": 2,
+        "elapsed": 116.2173999999897
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-4",
+        "kind": "corpse",
+        "item": "fuse",
+        "qty": 1,
+        "elapsed": 116.90469999998956
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-23",
+        "kind": "corpse",
+        "item": "watch",
+        "qty": 1,
+        "elapsed": 117.79329999998947
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-23",
+        "kind": "corpse",
+        "item": "ammo9",
+        "qty": 12,
+        "elapsed": 117.8913999999895
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-9",
+        "kind": "corpse",
+        "item": "wire",
+        "qty": 2,
+        "elapsed": 119.5803999999893
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-17",
+        "kind": "corpse",
+        "item": "ammoR",
+        "qty": 10,
+        "elapsed": 129.64039999998738
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-2",
+        "kind": "corpse",
+        "item": "shell",
+        "qty": 6,
+        "elapsed": 173.97489999997885
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-11",
+        "kind": "corpse",
+        "item": "ammo9",
+        "qty": 6,
+        "elapsed": 175.91209999997847
+      },
+      {
+        "run": 1,
+        "containerId": "corpse-enemy-22",
+        "kind": "corpse",
+        "item": "ammoR",
+        "qty": 5,
+        "elapsed": 180.10899999997778
+      },
+      {
+        "run": 2,
+        "containerId": "crate-26",
+        "kind": "crate",
+        "item": "wire",
+        "qty": 2,
+        "elapsed": 16.670099999999977
+      },
+      {
+        "run": 2,
+        "containerId": "corpse-enemy-15",
+        "kind": "corpse",
+        "item": "shell",
+        "qty": 6,
+        "elapsed": 21.445099999999584
+      },
+      {
+        "run": 2,
+        "containerId": "corpse-enemy-13",
+        "kind": "corpse",
+        "item": "wire",
+        "qty": 1,
+        "elapsed": 24.8250999999993
+      },
+      {
+        "run": 2,
+        "containerId": "crate-2",
+        "kind": "crate",
+        "item": "ammo9",
+        "qty": 6,
+        "elapsed": 29.32089999999894
+      }
+    ],
+    "threatenedClosures": 6
+  },
+  "samples": [
+    {
+      "realSeconds": 1,
+      "run": 1,
+      "elapsed": 0,
+      "hp": 100,
+      "kills": 0,
+      "highTide": false,
+      "x": 208,
+      "y": 1232
+    },
+    {
+      "realSeconds": 31,
+      "run": 1,
+      "elapsed": 30,
+      "hp": 94,
+      "kills": 3,
+      "highTide": false,
+      "x": 853,
+      "y": 1362
+    },
+    {
+      "realSeconds": 61,
+      "run": 1,
+      "elapsed": 60,
+      "hp": 98,
+      "kills": 9,
+      "highTide": false,
+      "x": 450,
+      "y": 405
+    },
+    {
+      "realSeconds": 91,
+      "run": 1,
+      "elapsed": 90,
+      "hp": 98,
+      "kills": 9,
+      "highTide": false,
+      "x": 1056,
+      "y": 638
+    },
+    {
+      "realSeconds": 121,
+      "run": 1,
+      "elapsed": 120,
+      "hp": 100,
+      "kills": 18,
+      "highTide": false,
+      "x": 1943,
+      "y": 719
+    },
+    {
+      "realSeconds": 151,
+      "run": 1,
+      "elapsed": 150,
+      "hp": 100,
+      "kills": 19,
+      "highTide": false,
+      "x": 1292,
+      "y": 846
+    },
+    {
+      "realSeconds": 181,
+      "run": 1,
+      "elapsed": 180,
+      "hp": 80,
+      "kills": 25,
+      "highTide": false,
+      "x": 1416,
+      "y": 1425
+    },
+    {
+      "realSeconds": 211,
+      "run": 1,
+      "elapsed": 210,
+      "hp": 80,
+      "kills": 25,
+      "highTide": false,
+      "x": 2102,
+      "y": 972
+    },
+    {
+      "realSeconds": 241,
+      "run": 1,
+      "elapsed": 240,
+      "hp": 80,
+      "kills": 25,
+      "highTide": false,
+      "x": 443,
+      "y": 1521
+    },
+    {
+      "realSeconds": 271,
+      "run": 1,
+      "elapsed": 270,
+      "hp": 80,
+      "kills": 25,
+      "highTide": false,
+      "x": 202,
+      "y": 110
+    },
+    {
+      "realSeconds": 302,
+      "run": 1,
+      "elapsed": 300,
+      "hp": 80,
+      "kills": 25,
+      "highTide": true,
+      "x": 202,
+      "y": 110
+    },
+    {
+      "realSeconds": 332,
+      "run": 1,
+      "elapsed": 330,
+      "hp": 80,
+      "kills": 25,
+      "highTide": true,
+      "x": 202,
+      "y": 110
+    },
+    {
+      "realSeconds": 362,
+      "run": 1,
+      "elapsed": 360,
+      "hp": 80,
+      "kills": 25,
+      "highTide": true,
+      "x": 202,
+      "y": 110
+    },
+    {
+      "realSeconds": 392,
+      "run": 1,
+      "elapsed": 391,
+      "hp": 80,
+      "kills": 25,
+      "highTide": true,
+      "x": 202,
+      "y": 110
+    },
+    {
+      "realSeconds": 422,
+      "run": 1,
+      "elapsed": 421,
+      "hp": 80,
+      "kills": 25,
+      "highTide": true,
+      "x": 202,
+      "y": 110
+    },
+    {
+      "realSeconds": 452,
+      "run": 1,
+      "elapsed": 451,
+      "hp": 80,
+      "kills": 25,
+      "highTide": true,
+      "x": 202,
+      "y": 110
+    },
+    {
+      "realSeconds": 482,
+      "run": 1,
+      "elapsed": 481,
+      "hp": 80,
+      "kills": 25,
+      "highTide": true,
+      "x": 202,
+      "y": 110
+    },
+    {
+      "realSeconds": 512,
+      "run": 1,
+      "elapsed": 511,
+      "hp": 80,
+      "kills": 25,
+      "highTide": true,
+      "x": 202,
+      "y": 110
+    },
+    {
+      "realSeconds": 542,
+      "run": 1,
+      "elapsed": 541,
+      "hp": 80,
+      "kills": 25,
+      "highTide": true,
+      "x": 202,
+      "y": 110
+    },
+    {
+      "realSeconds": 572,
+      "run": 2,
+      "elapsed": 17,
+      "hp": 100,
+      "kills": 2,
+      "highTide": true,
+      "x": 558,
+      "y": 911
+    },
+    {
+      "realSeconds": 602,
+      "run": 2,
+      "elapsed": 47,
+      "hp": 92,
+      "kills": 9,
+      "highTide": true,
+      "x": 1007,
+      "y": 1158
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome": "extract",
+      "kills": 25,
+      "keptValue": 3427,
+      "lostValue": 0,
+      "seed": 42,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    },
+    {
+      "outcome": "extract",
+      "kills": 10,
+      "keptValue": 3499,
+      "lostValue": 0,
+      "seed": 43,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "browser": "154.0.8037.98",
+  "status": "passed",
+  "finalStats": {
+    "runs": 2,
+    "extracts": 2,
+    "kills": 35
+  },
+  "finishedAt": "2026-10-09T03:46:20.178Z"
+}

@@ -1,0 +1,296 @@
+{
+  "browser": "154.0.8037.98",
+  "startedAt": "2026-10-09T19:10:11.007Z",
+  "methodology": "Packaged offline build at https://station.test/ (routed, no network). Real session/localStorage, real DOM input in headless Chrome; phone sizes are viewport/touch emulation. ?test=1 fixtures: player placement, save seeding through SaveSession transactions while the yard is closed, storage fault injection, production time shortening. No mock Runtime and no simulated raid result.",
+  "steps": [
+    {
+      "name": "A1 普通入口（无 ?test=1）：标题“进入”直接进院子，无测试接口，存档升级到成长 v2",
+      "status": "passed",
+      "detail": "院子挂载，#frame 隐藏；存档 v4，扩展 v2，现金 700",
+      "ms": 3407
+    },
+    {
+      "name": "A2 旧档（v1 键）进入院子：现金、任务、统计、物品保留，成长受控启用，原始字节留在 legacyBackup",
+      "status": "passed",
+      "detail": "现金 1842、修好电源（院子灯亮）、出击 3 次保留；第 4 天；legacyBackup 为原始字节",
+      "ms": 2557
+    },
+    {
+      "name": "A3 刷新恢复：院子里整理的物品刷新后仍在，进入仍是院子",
+      "status": "passed",
+      "detail": "布料在背包 (5, 2)，刷新后相同",
+      "ms": 4295
+    },
+    {
+      "name": "A4 院子画面启动失败（WebGL 不可用）：自动退回旧页签界面并提示，存档不受影响",
+      "status": "passed",
+      "detail": "Pixi 改用 Canvas 时按失败处理；提示「院子画面启动失败，已切换到页签界面。」；页签界面可用，存档已升级",
+      "ms": 1472
+    },
+    {
+      "name": "B1 键盘走动与碰撞（按住 D；向北撞育苗池停住）",
+      "status": "passed",
+      "detail": "右移 113 px；北向停在 y=12.18 格",
+      "ms": 4567
+    },
+    {
+      "name": "B2 点电台屋顶：寻路穿过两道门进电台，打开任务面板",
+      "status": "passed",
+      "detail": "面板 radio，玩家 (30.4, 4.6)",
+      "ms": 3509
+    },
+    {
+      "name": "B3 交付「让灯亮起来」：真实任务事务 → 供电恢复序列（F02 全景）→ 现金 +420",
+      "status": "passed",
+      "detail": "现金 700 → 1120，供电 restored",
+      "ms": 5792
+    },
+    {
+      "name": "C1 整备：Tab 打开，拖动、按 R 旋转、卸下后拖回武器栏、双击回仓库",
+      "status": "passed",
+      "detail": "布料→背包，净水旋转，手枪卸下再拖回武器栏，罐头双击回仓库",
+      "ms": 4358
+    },
+    {
+      "name": "C2 整备：拆分一半、放入安全箱、使用补给（真实 Runtime 接口）",
+      "status": "passed",
+      "detail": "9mm 32 拆成 16 + 16；绷带进安全箱；罐头未使用（Runtime 拒绝，见提示）",
+      "ms": 1091
+    },
+    {
+      "name": "D1 修理铺：走到老栓处，买一包 9mm、卖怀表并结算（真实购物车）",
+      "status": "passed",
+      "detail": "现金 6000 → 6156；9mm 自动放入仓库",
+      "ms": 2140
+    },
+    {
+      "name": "D2 卖出任务物资：Runtime 要求确认 → 弹出确认 → 确认后成交",
+      "status": "passed",
+      "detail": "确认文案「让灯亮起来：泵机零件还需3，出售后剩0」；确认后现金 700 → 805",
+      "ms": 3556
+    },
+    {
+      "name": "E1 休息区：走到宿舍修建 1 级（床铺出现）",
+      "status": "passed",
+      "detail": "休息区 1 级",
+      "ms": 3757
+    },
+    {
+      "name": "E2 工作台：修建、排入一批绷带；生产完成事件（缩短剩余时间的夹具）后领取到仓库",
+      "status": "passed",
+      "detail": "绷带 2 → 4（整批领取到仓库）",
+      "ms": 6026
+    },
+    {
+      "name": "E3 训练区：选练习项目，在育苗池之间走动，五秒检查点写入练习时间",
+      "status": "passed",
+      "detail": "已保存练习时间 0.0 → 6.5 秒（属性 技巧）",
+      "ms": 15039
+    },
+    {
+      "name": "E4 训练满 120 秒：practice-credited 事件、成长增加（真实计时约 2 分钟）",
+      "status": "passed",
+      "detail": "技巧成长 0.0% → 5.8%，训练量 0.29；提示「」",
+      "ms": 125914
+    },
+    {
+      "name": "F1 写入失败：修建被回滚、出现存档对话框；重试保存后关闭，再修建成功",
+      "status": "passed",
+      "detail": "失败时状态不变、对话框出现；故障仍在时重试不关闭；恢复后重试成功，修建一次成功",
+      "ms": 3908
+    },
+    {
+      "name": "F2 五秒检查点失败：练习进度保留，导出备份含未写入进度；重试后写入",
+      "status": "passed",
+      "detail": "备份练习 4.2 秒；重试后存档 4.2 秒",
+      "ms": 9588
+    },
+    {
+      "name": "F3 另一窗口接管存档：院子停止写入，只提供导出与刷新",
+      "status": "passed",
+      "detail": "对话框按钮：close、export、reload",
+      "ms": 700
+    },
+    {
+      "name": "F4 菜单导出存档 → 修建花钱 → 菜单导入刚才的备份：预览后确认覆盖，恢复到导出时",
+      "status": "passed",
+      "detail": "导出 6000 → 修建后 5800 → 导入后 6000，休息区回到 0 级",
+      "ms": 3521
+    },
+    {
+      "name": "G1 旧页签备用入口：按 0 回到页签界面（Phaser 宿主），“回到院子”再进院子",
+      "status": "passed",
+      "detail": "页签界面运行 Hideout 场景，院子已卸载；“回到院子”按钮重新挂载院子，Phaser 循环休眠",
+      "ms": 3158
+    },
+    {
+      "name": "G2 菜单返回主菜单（backToMenu），再进入仍是院子",
+      "status": "passed",
+      "detail": "标题 ⇄ 院子",
+      "ms": 724
+    },
+    {
+      "name": "G3 真实出击（沿海封锁区，Phaser）：开门动画 → 局内 → 撤离 → 返回走进院门并显示行动报告",
+      "status": "passed",
+      "detail": "出击 0 → 1；报告只播放一次",
+      "ms": 10437
+    },
+    {
+      "name": "G4 开门动画中刷新：标题恢复原行动（不重开、不进院子），撤离后回到院子",
+      "status": "passed",
+      "detail": "恢复的行动 bc-mv1cg071-6 与动画前写入的一致",
+      "ms": 7400
+    },
+    {
+      "name": "G5 城中村样板（?sample=village）：院子与局内宿主轮流使用同一个 Pixi 应用，往返无增长",
+      "status": "passed",
+      "detail": "院子 apps 1/parked 0 → 局内 apps 1/parked 0 → 结果页 parked 1 → 回院子相同；GPU 纹理 348（院子 336）→ 359（院子 347）",
+      "ms": 15357
+    },
+    {
+      "name": "G6 院子重挂 20 次：监听、ticker、视图、应用计数回到基线，GPU 纹理与托管槽不增长",
+      "status": "passed",
+      "detail": "listeners 24，tickers 1，GPU 纹理 348 → 348，托管 414/0 → 414/0，强制回收后堆 31.8 → 30.7 MB",
+      "ms": 11298
+    },
+    {
+      "name": "G7 WebGL 上下文丢失后暂停绘制，恢复后继续，循环不中断",
+      "status": "passed",
+      "detail": "丢失期间仍推进 52 帧（不绘制），恢复后 52 帧，无帧错误",
+      "ms": 2659
+    },
+    {
+      "name": "H1 F01 侧门：发电机房→电台、食堂→宿舍、院子→加工间",
+      "status": "passed",
+      "detail": "揭开 gen、radio；门牌“电台 →”；揭开 canteen、dorm；门牌“宿舍 →”；揭开 work；门牌“← 加工间”",
+      "ms": 5696
+    },
+    {
+      "name": "H2 F03：点自己脚下的寻路格不卡死；之后键盘与寻路正常",
+      "status": "passed",
+      "detail": "0.5 秒内刷新 84 帧、85 帧、83 帧",
+      "ms": 4699
+    },
+    {
+      "name": "H3 F03：点在杆身、墙上、池里、门柱，走到最近的空地",
+      "status": "passed",
+      "detail": "杆身 0.52 格，南院墙 0.86 格，育苗池里 1.29 格，院门柱 0.60 格",
+      "ms": 5683
+    },
+    {
+      "name": "H4 F03：四根灯杆八个方向点击寻路都走到（真实鼠标）",
+      "status": "passed",
+      "detail": "15 次全部走到",
+      "ms": 19878
+    },
+    {
+      "name": "H5 F03：斜挤杆与墙角的缝、正对杆子直走不卡住；帧出错不停循环",
+      "status": "passed",
+      "detail": "缝里右移 46 px；绕杆到 y=7.42；注入 3 次帧错误后继续 81 帧",
+      "ms": 2952
+    },
+    {
+      "name": "H6 F02：1280×720 通电序列里所有灯都在画面内，结束后恢复视野",
+      "status": "passed",
+      "detail": "平时 ×2，序列中 ×0.94，结束后 ×2",
+      "ms": 8167
+    },
+    {
+      "name": "H6 F02：1024×720 通电序列里所有灯都在画面内，结束后恢复视野",
+      "status": "passed",
+      "detail": "平时 ×2，序列中 ×0.94，结束后 ×2",
+      "ms": 8222
+    },
+    {
+      "name": "H6 F02：844×390 通电序列里所有灯都在画面内，结束后恢复视野",
+      "status": "passed",
+      "detail": "平时 ×3，序列中 ×1.00，结束后 ×3",
+      "ms": 8162
+    },
+    {
+      "name": "H6 F02：390×844 通电序列里所有灯都在画面内，结束后恢复视野",
+      "status": "passed",
+      "detail": "平时 ×2，序列中 ×0.73，结束后 ×2",
+      "ms": 7726
+    },
+    {
+      "name": "H7 快捷入口：院子里按 2 修理铺结算、3 卫生所、5 设施切到工作台；页签切换；待买未结算时不让离开",
+      "status": "passed",
+      "detail": "修理铺现金 6000 → 5916；卫生所看进 clinic；设施切到工作台",
+      "ms": 3702
+    },
+    {
+      "name": "H8 手机竖屏：收起的“功能”菜单 → 卫生所；面板标题菜单 → 整备；页签按钮",
+      "status": "passed",
+      "detail": "窄屏收起快捷栏；功能菜单与标题菜单可用",
+      "ms": 2609
+    },
+    {
+      "name": "H8b 手机触屏：左下摇杆拖动走路，靠近修理铺后点“交互”打开面板",
+      "status": "passed",
+      "detail": "摇杆左移 63 px；交互按钮打开修理铺",
+      "ms": 2984
+    },
+    {
+      "name": "H9 物品名完整、格子 ≥ 36 px、无横向溢出：844×390 整备与修理铺",
+      "status": "passed",
+      "detail": "整备（紧凑） 42px，修理铺（紧凑） 44px",
+      "ms": 3024
+    },
+    {
+      "name": "H9 物品名完整、格子 ≥ 36 px、无横向溢出：390×844 整备与修理铺",
+      "status": "passed",
+      "detail": "整备（紧凑） 36px，修理铺（紧凑） 36px",
+      "ms": 3019
+    },
+    {
+      "name": "H9 物品名完整、格子 ≥ 36 px、无横向溢出：1280×720 整备与修理铺",
+      "status": "passed",
+      "detail": "整备 40px，修理铺 38px",
+      "ms": 3005
+    },
+    {
+      "name": "H9 物品名完整、格子 ≥ 36 px、无横向溢出：1920×1080 整备与修理铺",
+      "status": "passed",
+      "detail": "整备 56px，修理铺 56px",
+      "ms": 3017
+    },
+    {
+      "name": "H10 手机横屏 844×390：仓库拖进背包、背包拖进安全箱、修理铺买入结算",
+      "status": "passed",
+      "detail": "布料 仓库→背包→安全箱；现金 6000 → 6156",
+      "ms": 4844
+    },
+    {
+      "name": "H11 面板高度：1280×720、1366×768、1920×1080 下整备与修理铺不用滚动",
+      "status": "passed",
+      "detail": "1280×720、1366×768、1920×1080 均无需滚动",
+      "ms": 19375
+    },
+    {
+      "name": "H12 素材：交付 33 张全部按尺寸接入、无退回；四位 NPC 用交付帧",
+      "status": "passed",
+      "detail": "交付 33，已用 19，退回 0",
+      "ms": 2927
+    },
+    {
+      "name": "H13 帧耗时（场景提交，60 帧均值；无头 Chrome，非真机）",
+      "status": "passed",
+      "detail": "均值 2.25 ms，p95 3.20 ms",
+      "ms": 362
+    },
+    {
+      "name": "H14 1920×1080 院子与 1280×720 夜景截图",
+      "status": "passed",
+      "detail": "已截图",
+      "ms": 3728
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "finishedAt": "2026-10-09T19:16:31.213Z",
+  "summary": {
+    "passed": 47,
+    "total": 47
+  }
+}

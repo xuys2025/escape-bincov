@@ -47,7 +47,7 @@ try {
   // States: returning player, resumable raid, storage unavailable, guide open (1280×720).
   {
     const context = await contextFor(1280, 720), page = await context.newPage();
-    await page.goto(url + '?test=1'); await ready(page);
+    await page.goto(url + '?test=1&entry=tabs'); await ready(page);
     await page.evaluate(() => { const b = window.__bincov; b.app.save.stats.runs = 7; b.app.save.stats.extracts = 4; b.persist(); });
     await page.reload(); await ready(page); await page.waitForTimeout(800);
     await page.screenshot({ path: resolve(out, 'state-returning-1280x720.png') });
@@ -92,7 +92,7 @@ try {
   // 4. Demo video (~25 s, 1280×720): idle, corners, centre, leave, motion off and on.
   {
     const context = await contextFor(1280, 720, { recordVideo: { dir: out, size: { width: 1280, height: 720 } } }), page = await context.newPage();
-    await page.goto(url + '?test=1'); await ready(page); await pointerMarker(page);
+    await page.goto(url + '?test=1&entry=tabs'); await ready(page); await pointerMarker(page);
     await page.mouse.move(640, 360); await page.waitForTimeout(3000);
     for (const [x, y, steps, wait] of [[40, 40, 60, 2200], [1240, 680, 90, 2200], [1240, 40, 60, 1800], [40, 680, 90, 1800], [640, 360, 50, 2000]]) { await page.mouse.move(x, y, { steps }); await page.waitForTimeout(wait); }
     await page.evaluate(() => document.documentElement.dispatchEvent(new MouseEvent('mouseleave', { relatedTarget: null })));
@@ -104,7 +104,7 @@ try {
   // 5. 1:1 frame sequence at 960×540 (scene at native scale) for a GIF preview.
   {
     const context = await contextFor(960, 540), page = await context.newPage();
-    await page.goto(url + '?test=1'); await ready(page);
+    await page.goto(url + '?test=1&entry=tabs'); await ready(page);
     await page.mouse.move(480, 270); await page.waitForTimeout(800);
     const times = [];
     const path = [[480, 270], [120, 90], [840, 450], [480, 270]];
@@ -122,7 +122,7 @@ try {
   //    frame poses step by one, the clock never jumps.
   {
     const context = await contextFor(1280, 720), page = await context.newPage();
-    await page.goto(url + '?test=1'); await ready(page);
+    await page.goto(url + '?test=1&entry=tabs'); await ready(page);
     await page.mouse.move(900, 500, { steps: 20 });
     report.continuity60s = await page.evaluate(() => new Promise(done => {
       const title = window.__bincov.app.game.scene.getScene('Menu').title;
@@ -154,7 +154,7 @@ try {
   }), ms);
   {
     const context = await contextFor(1920, 1080), page = await context.newPage();
-    await page.goto(url + '?test=1'); await ready(page);
+    await page.goto(url + '?test=1&entry=tabs'); await ready(page);
     report.load = await page.evaluate(() => {
       const nav = performance.getEntriesByType('navigation')[0], decode = performance.getEntriesByName('title-art-decode')[0];
       return { domContentLoadedMs: Math.round(nav.domContentLoadedEventEnd), loadMs: Math.round(nav.loadEventEnd), titleArtDecodeMs: decode ? +decode.duration.toFixed(1) : null, menuReadyMs: Math.round(performance.now()) };

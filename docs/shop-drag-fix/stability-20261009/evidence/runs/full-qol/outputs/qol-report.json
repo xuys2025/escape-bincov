@@ -1,0 +1,170 @@
+{
+  "mode": "offline",
+  "browser": "154.0.8037.98",
+  "method": "Real mouse, keyboard and emulated touch input. Blur and background transitions use explicit lifecycle event fixtures; no physical-device certification.",
+  "scope": "all",
+  "results": [
+    {
+      "viewport": "1280x720",
+      "input": "hybrid mouse and touch",
+      "name": "mixed transaction stays provisional, cancels both ways, confirms leaving and uses net cash",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "input": "hybrid mouse and touch",
+      "name": "quest sale explains final shortage; cancel and save failure preserve the whole transaction",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "input": "hybrid mouse and touch",
+      "name": "departure shows missing matching ammo and safe-only treatment without blocking light deployment",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "input": "hybrid mouse and touch",
+      "name": "loot rotation and quantity previews cancel cleanly; split and partial merge preserve remainders",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "input": "hybrid mouse and touch",
+      "name": "R previews rotation; Escape, outside release, blur and background cancel; hybrid touch placement and normal reload work",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "input": "hybrid mouse and touch",
+      "name": "exit choice shows straight-line bearing; collapsed quests separate stored and carried goods; hit directions expire",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "input": "desktop mouse",
+      "name": "mixed transaction stays provisional, cancels both ways, confirms leaving and uses net cash",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "input": "desktop mouse",
+      "name": "quest sale explains final shortage; cancel and save failure preserve the whole transaction",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "input": "desktop mouse",
+      "name": "departure shows missing matching ammo and safe-only treatment without blocking light deployment",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "input": "desktop mouse",
+      "name": "loot rotation and quantity previews cancel cleanly; split and partial merge preserve remainders",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "input": "desktop mouse",
+      "name": "R previews rotation; Escape, outside release, blur and background cancel; hybrid touch placement and normal reload work",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "input": "desktop mouse",
+      "name": "exit choice shows straight-line bearing; collapsed quests separate stored and carried goods; hit directions expire",
+      "status": "passed"
+    },
+    {
+      "viewport": "844x390-touch",
+      "input": "phone touch",
+      "name": "mixed transaction stays provisional, cancels both ways, confirms leaving and uses net cash",
+      "status": "passed"
+    },
+    {
+      "viewport": "844x390-touch",
+      "input": "phone touch",
+      "name": "quest sale explains final shortage; cancel and save failure preserve the whole transaction",
+      "status": "passed"
+    },
+    {
+      "viewport": "844x390-touch",
+      "input": "phone touch",
+      "name": "departure shows missing matching ammo and safe-only treatment without blocking light deployment",
+      "status": "passed"
+    },
+    {
+      "viewport": "844x390-touch",
+      "input": "phone touch",
+      "name": "loot rotation and quantity previews cancel cleanly; split and partial merge preserve remainders",
+      "status": "passed"
+    },
+    {
+      "viewport": "844x390-touch",
+      "input": "phone touch",
+      "name": "exit choice shows straight-line bearing; collapsed quests separate stored and carried goods; hit directions expire",
+      "status": "passed"
+    },
+    {
+      "viewport": "667x375-touch",
+      "input": "phone touch",
+      "name": "mixed transaction stays provisional, cancels both ways, confirms leaving and uses net cash",
+      "status": "passed"
+    },
+    {
+      "viewport": "667x375-touch",
+      "input": "phone touch",
+      "name": "quest sale explains final shortage; cancel and save failure preserve the whole transaction",
+      "status": "passed"
+    },
+    {
+      "viewport": "667x375-touch",
+      "input": "phone touch",
+      "name": "departure shows missing matching ammo and safe-only treatment without blocking light deployment",
+      "status": "passed"
+    },
+    {
+      "viewport": "667x375-touch",
+      "input": "phone touch",
+      "name": "loot rotation and quantity previews cancel cleanly; split and partial merge preserve remainders",
+      "status": "passed"
+    },
+    {
+      "viewport": "667x375-touch",
+      "input": "phone touch",
+      "name": "exit choice shows straight-line bearing; collapsed quests separate stored and carried goods; hit directions expire",
+      "status": "passed"
+    },
+    {
+      "viewport": "740x300-touch",
+      "input": "phone touch",
+      "name": "mixed transaction stays provisional, cancels both ways, confirms leaving and uses net cash",
+      "status": "passed"
+    },
+    {
+      "viewport": "740x300-touch",
+      "input": "phone touch",
+      "name": "quest sale explains final shortage; cancel and save failure preserve the whole transaction",
+      "status": "passed"
+    },
+    {
+      "viewport": "740x300-touch",
+      "input": "phone touch",
+      "name": "departure shows missing matching ammo and safe-only treatment without blocking light deployment",
+      "status": "passed"
+    },
+    {
+      "viewport": "740x300-touch",
+      "input": "phone touch",
+      "name": "loot rotation and quantity previews cancel cleanly; split and partial merge preserve remainders",
+      "status": "passed"
+    },
+    {
+      "viewport": "740x300-touch",
+      "input": "phone touch",
+      "name": "exit choice shows straight-line bearing; collapsed quests separate stored and carried goods; hit directions expire",
+      "status": "passed"
+    }
+  ]
+}

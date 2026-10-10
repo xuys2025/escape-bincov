@@ -1,0 +1,33 @@
+{
+  "browser": "154.0.8037.99",
+  "startedAt": "2026-10-10T03:51:24.910Z",
+  "methodology": "Packaged offline build at https://station.test/ (routed, no network). Real session/localStorage, real DOM input in headless Chrome; phone sizes are viewport/touch emulation. ?test=1 fixtures: player placement, save seeding through SaveSession transactions while the yard is closed, storage fault injection, production time shortening. No mock Runtime and no simulated raid result.",
+  "steps": [
+    {
+      "name": "A3 刷新恢复：院子里整理的物品刷新后仍在，进入仍是院子",
+      "status": "failed",
+      "detail": "布料在背包 (5, 2)，刷新后相同",
+      "error": "AssertionError [ERR_ASSERTION]: normal flow internal frame errors\n+ actual - expected\n\n+ [\n+   {\n+     count: 1,\n+     expected: false,\n+     message: 'injected frame error (test)'\n+   }\n+ ]\n- []\n\n    at assertFrames (file:///D:/bincov/hideout-runtime/scripts/station-acceptance-gates.mjs:6:10)\n    at step (file:///D:/bincov/hideout-runtime/scripts/station-browser-test.mjs:89:5)\n    at async file:///D:/bincov/hideout-runtime/scripts/station-browser-test.mjs:147:3",
+      "ms": 3719
+    }
+  ],
+  "errors": [
+    "[console] [station] frame failed, skipped and continuing: Error: injected frame error (test)\n    at R1.frame (https://station.test/?test=1:8750:27099)\n    at Co.r [as _fn] (https://station.test/?test=1:8750:19216)\n    at Co.emit (https://station.test/?test=1:7695:57388)\n    at Ps.update (https://station.test/?test=1:7695:59826)\n    at Ps._tick (https://station.test/?test=1:7695:58185)"
+  ],
+  "external": [],
+  "frameAudit": [
+    {
+      "message": "injected frame error (test)",
+      "count": 1,
+      "expected": false
+    }
+  ],
+  "expectedLogs": [],
+  "warnings": [],
+  "coverage": {},
+  "finishedAt": "2026-10-10T03:51:28.818Z",
+  "summary": {
+    "passed": 0,
+    "total": 1
+  }
+}

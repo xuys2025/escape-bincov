@@ -1,0 +1,34 @@
+[
+  {
+    "name": "extra-recheck",
+    "node": "v24.19.0",
+    "scriptSHA256": "1f407c82f95d72624e0d5755d6415153dabda3ac43a5641760ee9d5d6d1a71bf",
+    "startedAt": "2026-10-10T12:32:05.984Z",
+    "command": [
+      "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "--import",
+      "tsx",
+      "scripts/station-round2-recheck.mjs",
+      "--only=J,K1",
+      "--out=D:\\bincov\\hideout-runtime\\docs\\station-yard\\sol-round2-20261010\\evidence\\extra-recheck"
+    ],
+    "exitCode": 1,
+    "finishedAt": "2026-10-10T12:33:52.943Z"
+  },
+  {
+    "name": "resource-probe",
+    "node": "v24.19.0",
+    "scriptSHA256": "1f407c82f95d72624e0d5755d6415153dabda3ac43a5641760ee9d5d6d1a71bf",
+    "startedAt": "2026-10-10T12:33:52.945Z",
+    "command": [
+      "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "--import",
+      "tsx",
+      "scripts/station-round2-recheck.mjs",
+      "--only=R",
+      "--out=D:\\bincov\\hideout-runtime\\docs\\station-yard\\sol-round2-20261010\\evidence\\resource-probe"
+    ],
+    "exitCode": 1,
+    "finishedAt": "2026-10-10T12:34:08.081Z"
+  }
+]

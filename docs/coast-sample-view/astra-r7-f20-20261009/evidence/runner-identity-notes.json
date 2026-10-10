@@ -1,0 +1,12 @@
+{
+  "lowToLongChangedLines": [
+    [
+      39,
+      "   if(high){const exit=await p.evaluate(()=>window.__bincovSample.host.lastBatch.map.exits.find(e=>e.active));assert(exit,'active exit');await place(exit.x,exit.y);}else await place(208,122);",
+      "   if(high){const exit=await p.evaluate(()=>window.__bincovSample.host.lastBatch.map.exits[0]);assert(exit,'active exit');await place(exit.at.x,exit.at.y);}else await place(208,122);"
+    ]
+  ],
+  "lowRunHasHighBranchDisabled": true,
+  "longToFinal": "Only <20-cycle memoryStatus label; final pin-control rerun",
+  "sourceVersionsVerified": true
+}

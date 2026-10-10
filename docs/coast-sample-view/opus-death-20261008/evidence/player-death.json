@@ -1,0 +1,74 @@
+{
+  "startedAt": "2026-10-08T12:49:40.507Z",
+  "seed": "42",
+  "runs": [
+    {
+      "art": "sol",
+      "secondsToDeath": 1.1,
+      "outcome": "death",
+      "lastAlive": {
+        "alive": true,
+        "hp": 11.791219999998058,
+        "phase": "running",
+        "death": false,
+        "deathT": 0,
+        "rotation": 0,
+        "body": true,
+        "weapon": true,
+        "corpse": false,
+        "panelBefore": null
+      },
+      "presentedAfterDeath": 1,
+      "dead": [
+        {
+          "alive": false,
+          "hp": 0,
+          "phase": "ending",
+          "death": true,
+          "deathT": 0.0061,
+          "rotation": -0.04765625,
+          "body": true,
+          "weapon": false,
+          "corpse": false,
+          "panelBefore": null
+        }
+      ]
+    },
+    {
+      "art": "placeholder",
+      "secondsToDeath": 1.134,
+      "outcome": "death",
+      "lastAlive": {
+        "alive": true,
+        "hp": 11.79128499999902,
+        "phase": "running",
+        "death": false,
+        "deathT": 0,
+        "rotation": 0,
+        "body": true,
+        "weapon": true,
+        "corpse": false,
+        "panelBefore": null
+      },
+      "presentedAfterDeath": 1,
+      "dead": [
+        {
+          "alive": false,
+          "hp": 0,
+          "phase": "ending",
+          "death": true,
+          "deathT": 0.00619999999999991,
+          "rotation": -0.04843749999999929,
+          "body": true,
+          "weapon": false,
+          "corpse": false,
+          "panelBefore": null
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "finishedAt": "2026-10-08T12:49:45.957Z"
+}

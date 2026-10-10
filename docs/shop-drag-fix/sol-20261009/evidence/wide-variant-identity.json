@@ -1,0 +1,13 @@
+{
+  "original": "scripts/shop-drag-test.mjs",
+  "originalSHA256": "639dd5ff9987abf126faae93a41e490cb5347c464d4ef54ab791d5ce71a0ba35",
+  "variant": "test-results/shop-drag-sol-20261009/shop-wide.mjs",
+  "variantSHA256": "674853f6996070a9fb9af1e27251782fd267046297d6a596a7de8245f0054602",
+  "changes": [
+    "Desktop viewport 1280x720 -> 1920x1080",
+    "Screenshot filename reflects 1920x1080",
+    "Two imports adjusted for raw diagnostic location"
+  ],
+  "assertionsChanged": false,
+  "touchViewportUnchanged": "844x390"
+}

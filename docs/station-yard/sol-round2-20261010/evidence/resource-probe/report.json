@@ -1,0 +1,111 @@
+{
+  "build": "dist/index.html",
+  "browser": "154.0.8037.99",
+  "startedAt": "2026-10-10T12:33:53.609Z",
+  "methodology": "Packaged offline build at https://station.test/ (routed, no network). Real session/localStorage, real DOM input in headless Chrome; phone sizes are viewport/touch emulation. ?test=1 fixtures: player placement, save seeding through SaveSession transactions while the yard is closed, player placement and save seeding only. Menu actions use real CDP touch or mouse input. Wall controls recompose the frozen render frame with culling disabled; lighting clock is fixed only for brightness comparison after timing. Village AI/exit placement is an explicit fixture. No mock Runtime or simulated raid result.",
+  "steps": [
+    {
+      "name": "R repeated full-coverage shared-host and context resource diagnostics",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at resourceProbe (file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:157:264)\n    at async step (file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:91:18)\n    at async file:///D:/bincov/hideout-runtime/scripts/station-round2-recheck.mjs:185:26",
+      "ms": 14274
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "frameAudit": [],
+  "expectedLogs": [],
+  "warnings": [],
+  "coverage": {
+    "resourceProbe": {
+      "initial": {
+        "listeners": 24,
+        "tickers": 1,
+        "observers": 0,
+        "timers": 0,
+        "apps": 1,
+        "parked": 0,
+        "views": 1,
+        "renderTextures": 0,
+        "canvases": 2,
+        "roots": 1,
+        "gpuTextures": 395,
+        "managed": {
+          "live": 457,
+          "empty": 0
+        },
+        "heap": 32525465,
+        "scene": 345,
+        "wallFrameGroups": 194,
+        "wallFrames": 4064,
+        "masonry": 198,
+        "tables": {
+          "schema": "pixi-8.22.0-managed-hashes",
+          "running": false,
+          "required": [
+            "graphics",
+            "graphicsContext",
+            "glBuffer",
+            "glTexture",
+            "glGeometry",
+            "tilingSprite"
+          ],
+          "tables": [
+            {
+              "name": "graphics",
+              "hash": "items",
+              "live": 9,
+              "empty": 0,
+              "keys": 9
+            },
+            {
+              "name": "graphicsContext",
+              "hash": "items",
+              "live": 9,
+              "empty": 0,
+              "keys": 9
+            },
+            {
+              "name": "glBuffer",
+              "hash": "items",
+              "live": 28,
+              "empty": 0,
+              "keys": 28
+            },
+            {
+              "name": "glTexture",
+              "hash": "items",
+              "live": 395,
+              "empty": 0,
+              "keys": 395
+            },
+            {
+              "name": "glGeometry",
+              "hash": "items",
+              "live": 14,
+              "empty": 0,
+              "keys": 14
+            },
+            {
+              "name": "tilingSprite",
+              "hash": "items",
+              "live": 2,
+              "empty": 0,
+              "keys": 2
+            }
+          ],
+          "live": 457,
+          "empty": 0
+        }
+      },
+      "village": [],
+      "context": [],
+      "strictFailures": []
+    }
+  },
+  "finishedAt": "2026-10-10T12:34:08.068Z",
+  "summary": {
+    "passed": 0,
+    "total": 1
+  }
+}

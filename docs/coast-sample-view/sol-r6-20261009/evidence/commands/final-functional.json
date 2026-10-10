@@ -1,0 +1,28 @@
+[
+  {
+    "id": "original-cues",
+    "args": [
+      "scripts/sol-r6-original-audio.mjs"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:41:35.968Z",
+    "finished": "2026-10-08T18:42:03.811Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "audio-bounds",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/sol-r6-audio-bounds.mjs"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:42:03.812Z",
+    "finished": "2026-10-08T18:42:03.935Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

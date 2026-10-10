@@ -1,0 +1,621 @@
+{
+  "startedAt": "2026-10-09T11:56:35.802Z",
+  "node": "v24.19.0",
+  "html": "D:\\bincov\\pr22-runtime\\dist\\index.html",
+  "sha256": "fe8ee26e6a993d5ed1bf28ab9bc9e88059f73080d6af3ac37aa719a617ea6f62",
+  "fault": null,
+  "rows": [
+    {
+      "label": "mounted after native mouse input",
+      "managed": {
+        "schema": "pixi-8.22.0-managed-hashes",
+        "running": false,
+        "required": [
+          "graphics",
+          "graphicsContext",
+          "glBuffer",
+          "glTexture",
+          "glGeometry",
+          "tilingSprite"
+        ],
+        "tables": [
+          {
+            "name": "graphics",
+            "hash": "items",
+            "live": 8,
+            "empty": 1,
+            "keys": 9
+          },
+          {
+            "name": "graphicsContext",
+            "hash": "items",
+            "live": 8,
+            "empty": 1,
+            "keys": 9
+          },
+          {
+            "name": "glBuffer",
+            "hash": "items",
+            "live": 19,
+            "empty": 0,
+            "keys": 19
+          },
+          {
+            "name": "glTexture",
+            "hash": "items",
+            "live": 17,
+            "empty": 3,
+            "keys": 20
+          },
+          {
+            "name": "glGeometry",
+            "hash": "items",
+            "live": 9,
+            "empty": 0,
+            "keys": 9
+          },
+          {
+            "name": "tilingSprite",
+            "hash": "items",
+            "live": 2,
+            "empty": 0,
+            "keys": 2
+          }
+        ],
+        "live": 63,
+        "empty": 5
+      },
+      "events": {
+        "attached": false,
+        "roots": {
+          "_rootPointerEvent": false,
+          "_rootWheelEvent": false,
+          "_rootContextMenuEvent": false
+        },
+        "pooled": 0,
+        "native": 0
+      },
+      "style": {
+        "connected": true,
+        "cursor": "auto",
+        "touchAction": "none"
+      }
+    },
+    {
+      "label": "after 20 view remounts",
+      "managed": {
+        "schema": "pixi-8.22.0-managed-hashes",
+        "running": false,
+        "required": [
+          "graphics",
+          "graphicsContext",
+          "glBuffer",
+          "glTexture",
+          "glGeometry",
+          "tilingSprite"
+        ],
+        "tables": [
+          {
+            "name": "graphics",
+            "hash": "items",
+            "live": 8,
+            "empty": 0,
+            "keys": 8
+          },
+          {
+            "name": "graphicsContext",
+            "hash": "items",
+            "live": 8,
+            "empty": 0,
+            "keys": 8
+          },
+          {
+            "name": "glBuffer",
+            "hash": "items",
+            "live": 19,
+            "empty": 0,
+            "keys": 19
+          },
+          {
+            "name": "glTexture",
+            "hash": "items",
+            "live": 17,
+            "empty": 0,
+            "keys": 17
+          },
+          {
+            "name": "glGeometry",
+            "hash": "items",
+            "live": 9,
+            "empty": 0,
+            "keys": 9
+          },
+          {
+            "name": "tilingSprite",
+            "hash": "items",
+            "live": 2,
+            "empty": 0,
+            "keys": 2
+          }
+        ],
+        "live": 63,
+        "empty": 0
+      },
+      "events": {
+        "attached": false,
+        "roots": {
+          "_rootPointerEvent": false,
+          "_rootWheelEvent": false,
+          "_rootContextMenuEvent": false
+        },
+        "pooled": 0,
+        "native": 0
+      },
+      "style": {
+        "connected": true,
+        "cursor": "auto",
+        "touchAction": "none"
+      }
+    },
+    {
+      "label": "parked after native abandon",
+      "managed": {
+        "schema": "pixi-8.22.0-managed-hashes",
+        "running": false,
+        "required": [
+          "graphics",
+          "graphicsContext",
+          "glBuffer",
+          "glTexture",
+          "glGeometry",
+          "tilingSprite"
+        ],
+        "tables": [
+          {
+            "name": "graphics",
+            "hash": "items",
+            "live": 0,
+            "empty": 0,
+            "keys": 0
+          },
+          {
+            "name": "graphicsContext",
+            "hash": "items",
+            "live": 0,
+            "empty": 0,
+            "keys": 0
+          },
+          {
+            "name": "glBuffer",
+            "hash": "items",
+            "live": 5,
+            "empty": 0,
+            "keys": 5
+          },
+          {
+            "name": "glTexture",
+            "hash": "items",
+            "live": 2,
+            "empty": 0,
+            "keys": 2
+          },
+          {
+            "name": "glGeometry",
+            "hash": "items",
+            "live": 2,
+            "empty": 0,
+            "keys": 2
+          },
+          {
+            "name": "tilingSprite",
+            "hash": "items",
+            "live": 0,
+            "empty": 0,
+            "keys": 0
+          }
+        ],
+        "live": 9,
+        "empty": 0
+      },
+      "events": {
+        "attached": false,
+        "roots": {
+          "_rootPointerEvent": false,
+          "_rootWheelEvent": false,
+          "_rootContextMenuEvent": false
+        },
+        "pooled": 0,
+        "native": 0
+      },
+      "style": {
+        "connected": false,
+        "cursor": "",
+        "touchAction": ""
+      }
+    }
+  ],
+  "negativeControls": [
+    {
+      "name": "valid six-table facade",
+      "status": "passed"
+    },
+    {
+      "name": "gc absent",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: renderer.gc missing or changed"
+    },
+    {
+      "name": "list field absent",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: _managedResourceHashes must be an array"
+    },
+    {
+      "name": "list renamed",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: _managedResourceHashes must be an array"
+    },
+    {
+      "name": "list null",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: _managedResourceHashes must be an array"
+    },
+    {
+      "name": "list changed to object",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: _managedResourceHashes must be an array"
+    },
+    {
+      "name": "empty list",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: _managedResourceHashes is empty"
+    },
+    {
+      "name": "running field absent",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: gc._running must be boolean"
+    },
+    {
+      "name": "running type changed",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: gc._running must be boolean"
+    },
+    {
+      "name": "descriptor null",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: descriptor 0 shape changed"
+    },
+    {
+      "name": "context missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: descriptor 0 shape changed"
+    },
+    {
+      "name": "hash missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: descriptor 0 shape changed"
+    },
+    {
+      "name": "hash type changed",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: descriptor 0 shape changed"
+    },
+    {
+      "name": "name missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: descriptor 0 name missing"
+    },
+    {
+      "name": "graphics registration missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: required table graphics missing"
+    },
+    {
+      "name": "graphics items missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphics.items missing"
+    },
+    {
+      "name": "graphics items null",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphics.items must be a plain record"
+    },
+    {
+      "name": "graphics items array",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphics.items must be a plain record"
+    },
+    {
+      "name": "graphics items Map",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphics.items must be a plain record"
+    },
+    {
+      "name": "graphics items number",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphics.items must be a plain record"
+    },
+    {
+      "name": "graphics invalid resource",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphics[999999999] is neither resource object nor null"
+    },
+    {
+      "name": "graphicsContext registration missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: required table graphicsContext missing"
+    },
+    {
+      "name": "graphicsContext items missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphicsContext.items missing"
+    },
+    {
+      "name": "graphicsContext items null",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphicsContext.items must be a plain record"
+    },
+    {
+      "name": "graphicsContext items array",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphicsContext.items must be a plain record"
+    },
+    {
+      "name": "graphicsContext items Map",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphicsContext.items must be a plain record"
+    },
+    {
+      "name": "graphicsContext items number",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphicsContext.items must be a plain record"
+    },
+    {
+      "name": "graphicsContext invalid resource",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphicsContext[999999999] is neither resource object nor null"
+    },
+    {
+      "name": "glBuffer registration missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: required table glBuffer missing"
+    },
+    {
+      "name": "glBuffer items missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glBuffer.items missing"
+    },
+    {
+      "name": "glBuffer items null",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glBuffer.items must be a plain record"
+    },
+    {
+      "name": "glBuffer items array",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glBuffer.items must be a plain record"
+    },
+    {
+      "name": "glBuffer items Map",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glBuffer.items must be a plain record"
+    },
+    {
+      "name": "glBuffer items number",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glBuffer.items must be a plain record"
+    },
+    {
+      "name": "glBuffer invalid resource",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glBuffer[999999999] is neither resource object nor null"
+    },
+    {
+      "name": "glTexture registration missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: required table glTexture missing"
+    },
+    {
+      "name": "glTexture items missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glTexture.items missing"
+    },
+    {
+      "name": "glTexture items null",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glTexture.items must be a plain record"
+    },
+    {
+      "name": "glTexture items array",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glTexture.items must be a plain record"
+    },
+    {
+      "name": "glTexture items Map",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glTexture.items must be a plain record"
+    },
+    {
+      "name": "glTexture items number",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glTexture.items must be a plain record"
+    },
+    {
+      "name": "glTexture invalid resource",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glTexture[999999999] is neither resource object nor null"
+    },
+    {
+      "name": "glGeometry registration missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: required table glGeometry missing"
+    },
+    {
+      "name": "glGeometry items missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glGeometry.items missing"
+    },
+    {
+      "name": "glGeometry items null",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glGeometry.items must be a plain record"
+    },
+    {
+      "name": "glGeometry items array",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glGeometry.items must be a plain record"
+    },
+    {
+      "name": "glGeometry items Map",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glGeometry.items must be a plain record"
+    },
+    {
+      "name": "glGeometry items number",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glGeometry.items must be a plain record"
+    },
+    {
+      "name": "glGeometry invalid resource",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: glGeometry[999999999] is neither resource object nor null"
+    },
+    {
+      "name": "tilingSprite registration missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: required table tilingSprite missing"
+    },
+    {
+      "name": "tilingSprite items missing",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: tilingSprite.items missing"
+    },
+    {
+      "name": "tilingSprite items null",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: tilingSprite.items must be a plain record"
+    },
+    {
+      "name": "tilingSprite items array",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: tilingSprite.items must be a plain record"
+    },
+    {
+      "name": "tilingSprite items Map",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: tilingSprite.items must be a plain record"
+    },
+    {
+      "name": "tilingSprite items number",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: tilingSprite.items must be a plain record"
+    },
+    {
+      "name": "tilingSprite invalid resource",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: tilingSprite[999999999] is neither resource object nor null"
+    },
+    {
+      "name": "duplicate name",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: duplicate table name graphics"
+    },
+    {
+      "name": "aliased table",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: aliased table graphicsContext"
+    },
+    {
+      "name": "nonnumeric key",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphics keys changed"
+    },
+    {
+      "name": "symbol key",
+      "status": "rejected",
+      "error": "PIXI_MANAGED_CONTRACT: graphics keys changed"
+    }
+  ],
+  "assertions": [
+    {
+      "name": "all negative contracts reject; valid facade passes",
+      "status": "passed"
+    },
+    {
+      "name": "mounted after native mouse input events detached and native references clear",
+      "status": "passed"
+    },
+    {
+      "name": "mounted after native mouse input cursor/touch computed styles",
+      "status": "passed"
+    },
+    {
+      "name": "after 20 view remounts events detached and native references clear",
+      "status": "passed"
+    },
+    {
+      "name": "after 20 view remounts cursor/touch computed styles",
+      "status": "passed"
+    },
+    {
+      "name": "parked after native abandon events detached and native references clear",
+      "status": "passed"
+    },
+    {
+      "name": "graphics remount live unchanged / no null growth",
+      "status": "passed"
+    },
+    {
+      "name": "graphicsContext remount live unchanged / no null growth",
+      "status": "passed"
+    },
+    {
+      "name": "glBuffer remount live unchanged / no null growth",
+      "status": "passed"
+    },
+    {
+      "name": "glTexture remount live unchanged / no null growth",
+      "status": "passed"
+    },
+    {
+      "name": "glGeometry remount live unchanged / no null growth",
+      "status": "passed"
+    },
+    {
+      "name": "tilingSprite remount live unchanged / no null growth",
+      "status": "passed"
+    },
+    {
+      "name": "graphics parked table observed, zero nulls",
+      "status": "passed"
+    },
+    {
+      "name": "graphicsContext parked table observed, zero nulls",
+      "status": "passed"
+    },
+    {
+      "name": "glBuffer parked table observed, zero nulls",
+      "status": "passed"
+    },
+    {
+      "name": "glTexture parked table observed, zero nulls",
+      "status": "passed"
+    },
+    {
+      "name": "glGeometry parked table observed, zero nulls",
+      "status": "passed"
+    },
+    {
+      "name": "tilingSprite parked table observed, zero nulls",
+      "status": "passed"
+    },
+    {
+      "name": "no browser errors or HTTP requests",
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "status": "passed",
+  "finishedAt": "2026-10-09T11:56:43.264Z"
+}

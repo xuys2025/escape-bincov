@@ -1,0 +1,839 @@
+{
+  "checkedAt": "2026-10-10T03:56:38.946Z",
+  "localLinks": 208,
+  "result": "PASS",
+  "checked": [
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "issues.md"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "evidence/remote-final.json"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "evidence/baseline-before.json"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "evidence/build-final.json"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "evidence/package-final.log"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "evidence-index.json"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "evidence/regression.json"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "evidence/completion-runs.json"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "evidence/supplemental-runs.json"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "evidence/final-audit.json"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "evidence/ordinary-entry/report.json"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "evidence/station-complete/report.json"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "evidence/station-complete/report.json"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/README.md",
+      "href": "evidence/original-target-control/report.json"
+    },
+    {
+      "file": "docs/station-yard/sol-acceptance-20261010/issues.md",
+      "href": "README.md"
+    },
+    {
+      "file": "docs/station-yard/README.md",
+      "href": "SOL-ACCEPTANCE.md"
+    },
+    {
+      "file": "docs/station-yard/README.md",
+      "href": "VALIDATION.md"
+    },
+    {
+      "file": "docs/station-yard/README.md",
+      "href": "sol-acceptance-20261010/README.md"
+    },
+    {
+      "file": "docs/station-yard/README.md",
+      "href": "VALIDATION.md#素材检查"
+    },
+    {
+      "file": "docs/station-yard/VALIDATION.md",
+      "href": "evidence/unit.log"
+    },
+    {
+      "file": "docs/station-yard/VALIDATION.md",
+      "href": "evidence/package.log"
+    },
+    {
+      "file": "docs/station-yard/VALIDATION.md",
+      "href": "evidence/station-report.json"
+    },
+    {
+      "file": "docs/station-yard/VALIDATION.md",
+      "href": "evidence/regress-summary.txt"
+    },
+    {
+      "file": "docs/station-yard/VALIDATION.md",
+      "href": "evidence/art-npc-1.png"
+    },
+    {
+      "file": "docs/station-yard/VALIDATION.md",
+      "href": "evidence/art-npc-2.png"
+    },
+    {
+      "file": "docs/station-yard/VALIDATION.md",
+      "href": "evidence/art-props.png"
+    },
+    {
+      "file": "docs/station-yard/VALIDATION.md",
+      "href": "evidence/art-occl.png"
+    },
+    {
+      "file": "docs/station-yard/VALIDATION.md",
+      "href": "evidence/npc-frames.png"
+    },
+    {
+      "file": "docs/station-yard/VALIDATION.md",
+      "href": "evidence/zoom-heads.png"
+    },
+    {
+      "file": "docs/station-yard/VALIDATION.md",
+      "href": "sol-acceptance-20261010/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/station-yard/sol-acceptance-20261010/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/station-yard/sol-acceptance-20261010/issues.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/station-yard/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/station-yard/VALIDATION.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/station-yard/SOL-ACCEPTANCE.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/hideout-runtime/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/hideout-runtime/OPUS-WIRING.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/hideout-runtime/VALIDATION.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-f20-20261009/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-f20-20261009/defects.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/opus-f20-20261009/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/astra-r7-f20-20261009/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/astra-r7-f20-20261009/verification.json"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-r7-20261009/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-r7-20261009/defects.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-r7-20261009/verification.json"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/opus-r7-20261009/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/astra-r6-20261009/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-r6-20261009/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-r6-20261009/defects.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-r6-20261009/verification.json"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/opus-experience-20261009/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/opus-experience-20261009/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/opus-experience-20261009/gpt-tasks.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-death-20261008/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-death-20261008/verification.json"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/opus-audio-20261008/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/opus-playtest-20261008/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/opus-playtest-20261008/evidence/compare/"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/opus-playtest-20261008/sol-art-requests.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/opus-death-20261008/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-round4-20261008/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-round4-20261008/defects.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-round4-20261008/material-requirements.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/astra-lifecycle-20261008/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/round4/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/round3/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-round3-20261008/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-round3-20261008/defects.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-round3-20261008/assets/manifest.json"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/round3/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-acceptance-20261008/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-acceptance-20261008/defects.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/sol-acceptance-20261008/assets/manifest.json"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/COAST-SAMPLE-VIEW.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/SOL-ACCEPTANCE.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-sample-view/verification.json"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/COAST-RUNTIME-SAMPLE.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/coast-runtime-sample/verification.json"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/shop-drag-fix/stability-20261009/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/shop-drag-fix/stability-20261009/issues.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/shop-drag-fix/sol-20261009/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/shop-drag-fix/sol-20261009/issues.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/shop-drag-fix/sol-20261009/run-index.json"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/SHOP-DRAG-FIX.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/WORLD-REGIONS-STORY.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/STORY-LITERARY-REWRITE.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/STORY-LITERARY-REWRITE.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/MAIN-STORY.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/WORLD-REGIONS-STORY.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/STORY-LITERARY-REWRITE.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/COAST-2_5D-ART-DESIGN.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/LOOT-CONFLICT-TEST-FIX.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/title-pixel-grid/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/title-parallax/motion-v6/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/title-parallax/motion-v5/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/title-parallax/menu-v4/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/title-parallax/master-v3/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/title-parallax/depth-v2/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/title-parallax/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/title-parallax/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/QOL-PR16-INTEGRATION.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/QOL-INTEGRATION.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/QOL-DECISIONS.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/WORK-QUEUE.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/WORK-QUEUE.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/evidence/pr16-review/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/tactical-ui/validation.json"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/tactical-ui/README.txt"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/evidence/pr16-full/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/PR16-ACCEPTANCE-REGISTER.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/PR16-IMPLEMENTATION.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/evidence/pr16-full"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/evidence/pr16-full/README.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/PR16-ACCEPTANCE-REGISTER.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/M0-STATE-AND-COMPAT.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/PR16-ACCEPTANCE-REGISTER.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/IMPLEMENTATION-PLAN.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/tarkov-ui/review.html"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/tactical-ui/README.txt"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/tarkov-ui/review.html"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/tarkov-ui/README.txt"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/tarkov-ui/review-report.json"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/tarkov-ui/baseline-report.json"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/QOL-IMPLEMENTATION.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/QOL-DISCOVERY.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/BUILDING-LOGIC.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/MALL-VALIDATION-MAP.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/MALL-VALIDATION-MAP.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/RPG-SYSTEM-DESIGN.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/BUILDING-LOGIC.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/ART-REDRAW.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/ART-REDRAW-PLAN.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/ART-RESEARCH-PLAN.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/FONT-RESEARCH.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/LOOTING.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/MOBILE-EXPERIENCE-FIXES.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/PLAYER-FEEDBACK-PLAN.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/releases/v0.2.0.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/DESKTOP-REGRESSION-FIXES.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/MOBILE-IMPLEMENTATION.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "CHANGELOG.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/MOBILE-ADAPTATION-PLAN.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/COPY-GUIDE.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/COPY-REVIEW.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/TITLE-SCREEN.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/ARCHITECTURE.md"
+    },
+    {
+      "file": "handoff.md",
+      "href": "docs/UI-POLISH.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "SHOP-DRAG-FIX.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "shop-drag-fix/sol-20261009/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "shop-drag-fix/stability-20261009/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "WORLD-REGIONS-STORY.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "../.github/workflows/ci-pages.yml"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "QOL-PR16-INTEGRATION.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "PR16-ACCEPTANCE-REGISTER.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "title-parallax/motion-v6/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "LOOT-CONFLICT-TEST-FIX.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "title-pixel-grid/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "station-yard/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "station-yard/VALIDATION.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "station-yard/SOL-ACCEPTANCE.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "station-yard/sol-acceptance-20261010/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "station-yard/sol-acceptance-20261010/issues.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "hideout-runtime/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "hideout-runtime/OPUS-WIRING.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "hideout-runtime/VALIDATION.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/astra-r7-f20-20261009/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "IMPLEMENTATION-PLAN.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "PR16-DEVELOPMENT-PLAN.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "M0-STATE-AND-COMPAT.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "PR16-IMPLEMENTATION.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "PR16-ACCEPTANCE-REGISTER.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "BUILDING-LOGIC.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "MALL-VALIDATION-MAP.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "COAST-2_5D-ART-DESIGN.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "COAST-RUNTIME-SAMPLE.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "COAST-SAMPLE-VIEW.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/SOL-ACCEPTANCE.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "STORY-LITERARY-REWRITE.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "MAIN-STORY.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "QOL-PR16-INTEGRATION.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-acceptance-20261008/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-acceptance-20261008/defects.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-acceptance-20261008/assets/manifest.json"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/round3/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-round3-20261008/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-round3-20261008/defects.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-round3-20261008/assets/manifest.json"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/round4/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/astra-lifecycle-20261008/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-round4-20261008/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-round4-20261008/defects.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-round4-20261008/material-requirements.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/opus-death-20261008/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-death-20261008/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/opus-playtest-20261008/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/opus-audio-20261008/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/opus-experience-20261009/gpt-tasks.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/opus-experience-20261009/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-r6-20261009/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-r6-20261009/defects.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/astra-r6-20261009/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/opus-r7-20261009/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-r7-20261009/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-r7-20261009/defects.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/opus-f20-20261009/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-f20-20261009/README.md"
+    },
+    {
+      "file": "docs/WORK-QUEUE.md",
+      "href": "coast-sample-view/sol-f20-20261009/defects.md"
+    }
+  ]
+}

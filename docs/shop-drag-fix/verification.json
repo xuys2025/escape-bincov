@@ -1,0 +1,261 @@
+{
+  "node": "v24.19.0",
+  "baseline": "origin/main 43a342c",
+  "results": [
+    {
+      "id": "unit",
+      "command": "pnpm test",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T12:59:51.444Z",
+      "seconds": 5.5
+    },
+    {
+      "id": "package",
+      "command": "pnpm package",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T12:59:56.933Z",
+      "seconds": 3.4,
+      "html": {
+        "bytes": 2416251,
+        "sha256": "a9a07a960049d6dc17e54b9fb7c765c99a72041c48e111c9b73b2ae2fa8d852f",
+        "same": true
+      }
+    },
+    {
+      "id": "shop-drag",
+      "command": "pnpm test:shop-drag",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:00:00.318Z",
+      "seconds": 14.8
+    },
+    {
+      "id": "ci:browser",
+      "command": "pnpm test:browser",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:00:15.101Z",
+      "seconds": 39.4
+    },
+    {
+      "id": "ci:desktop-input",
+      "command": "pnpm test:desktop-input",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:00:54.465Z",
+      "seconds": 21.9
+    },
+    {
+      "id": "ci:ui",
+      "command": "pnpm test:ui",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:01:16.329Z",
+      "seconds": 8.3
+    },
+    {
+      "id": "ci:tactical",
+      "command": "pnpm test:tactical",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:01:24.660Z",
+      "seconds": 18.8
+    },
+    {
+      "id": "ci:art",
+      "command": "pnpm test:art",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:01:43.468Z",
+      "seconds": 12.7
+    },
+    {
+      "id": "ci:title",
+      "command": "pnpm test:title",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:01:56.120Z",
+      "seconds": 56.5
+    },
+    {
+      "id": "ci:title-water",
+      "command": "pnpm test:title-water",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:02:52.598Z",
+      "seconds": 10.1
+    },
+    {
+      "id": "ci:save-browser",
+      "command": "pnpm test:save-browser",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:03:02.693Z",
+      "seconds": 12.5
+    },
+    {
+      "id": "ci:expansion",
+      "command": "pnpm test:expansion",
+      "status": 1,
+      "signal": null,
+      "startedAt": "2026-10-09T13:03:15.242Z",
+      "seconds": 0.8
+    },
+    {
+      "id": "ci:buildings",
+      "command": "pnpm test:buildings",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:03:16.006Z",
+      "seconds": 12.4
+    },
+    {
+      "id": "ci:qol-expansion",
+      "command": "pnpm test:qol-expansion",
+      "status": 1,
+      "signal": null,
+      "startedAt": "2026-10-09T13:03:28.452Z",
+      "seconds": 3
+    },
+    {
+      "id": "ci:systems",
+      "command": "pnpm test:systems",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:03:31.463Z",
+      "seconds": 35.1
+    },
+    {
+      "id": "ci:mall-passages",
+      "command": "pnpm test:mall-passages",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:04:06.528Z",
+      "seconds": 167.5
+    },
+    {
+      "id": "ci:mall-landing",
+      "command": "pnpm test:mall-landing",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:06:54.037Z",
+      "seconds": 8
+    },
+    {
+      "id": "ci:loot",
+      "command": "pnpm test:loot",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:07:02.034Z",
+      "seconds": 50.2
+    },
+    {
+      "id": "ci:loot-target",
+      "command": "pnpm test:loot-target",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:07:52.245Z",
+      "seconds": 19.5
+    },
+    {
+      "id": "ci:qol",
+      "command": "pnpm test:qol",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:08:11.767Z",
+      "seconds": 21.6
+    },
+    {
+      "id": "ci:mobile",
+      "command": "pnpm test:mobile",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:08:33.370Z",
+      "seconds": 19.2
+    },
+    {
+      "id": "ci:mobile-ux",
+      "command": "pnpm test:mobile-ux",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:08:52.552Z",
+      "seconds": 69.9
+    },
+    {
+      "id": "ci:portable",
+      "command": "pnpm test:portable",
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T13:10:02.479Z",
+      "seconds": 5.4
+    }
+  ],
+  "reruns": {
+    "expansion": [
+      {
+        "id": "ci:expansion",
+        "command": "pnpm test:expansion",
+        "status": 0,
+        "signal": null,
+        "startedAt": "2026-10-09T13:10:29.969Z",
+        "seconds": 8.9
+      }
+    ],
+    "qolExpansionReruns": [
+      {
+        "run": 1,
+        "status": "passed"
+      },
+      {
+        "run": 2,
+        "status": "failed: lootContext null"
+      },
+      {
+        "run": 3,
+        "status": "failed: lootContext null"
+      },
+      {
+        "run": 4,
+        "status": "passed"
+      }
+    ],
+    "qolExpansionAlternating": [
+      {
+        "run": 1,
+        "base": "passed",
+        "fixed": "failed: lootContext null"
+      },
+      {
+        "run": 2,
+        "base": "passed",
+        "fixed": "passed"
+      },
+      {
+        "run": 3,
+        "base": "failed: lootContext null",
+        "fixed": "passed"
+      },
+      {
+        "run": 4,
+        "base": "failed: lootContext null",
+        "fixed": "passed"
+      },
+      {
+        "run": 5,
+        "base": "passed",
+        "fixed": "passed"
+      },
+      {
+        "run": 6,
+        "base": "passed",
+        "fixed": "passed"
+      }
+    ]
+  },
+  "notes": [
+    "ci:expansion first run exit 1: test-results/pre-m0.html missing (CI downloads it from raw.githubusercontent.com at 07b1414); rerun with the same file from git history (git show 07b1414:dist/index.html) exits 0.",
+    "qol-expansion: pre-existing race in the mall step (lootContext read right after E); untouched main 2/6 failed, this branch 1/6, same error."
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "build": "dist/index.html of this commit",
+  "htmlSha256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+  "runner": "scripts/coast-sample-test.mjs, full run; only U11 and U12 are listed here",
+  "fullRun": "48/48",
+  "passed": 6,
+  "total": 6,
+  "browser": "154.0.8037.98",
+  "startedAt": "2026-10-08T17:55:56.544Z",
+  "finishedAt": "2026-10-08T17:57:14.498Z",
+  "steps": [
+    {
+      "name": "U11 item labels at 1280x720: three-character names are not cut (pixel face on desktop, compact face on touch)",
+      "status": "passed",
+      "detail": {
+        "cell": 0,
+        "labels": [
+          {
+            "uid": "bc-label-fuse",
+            "text": "保险管",
+            "tight": false,
+            "font": "\"Bincov Text\"",
+            "cut": false,
+            "width": 52
+          },
+          {
+            "uid": "bc-label-antidote",
+            "text": "除藻剂",
+            "tight": false,
+            "font": "\"Bincov Text\"",
+            "cut": false,
+            "width": 52
+          },
+          {
+            "uid": "bc-label-ammoR",
+            "text": "卡宾弹",
+            "tight": false,
+            "font": "\"Bincov Text\"",
+            "cut": false,
+            "width": 52
+          },
+          {
+            "uid": "bc-label-strengthDose",
+            "text": "力量针",
+            "tight": false,
+            "font": "\"Bincov Text\"",
+            "cut": false,
+            "width": 52
+          }
+        ]
+      }
+    },
+    {
+      "name": "U11 item labels at 1920x1080: three-character names are not cut (pixel face on desktop, compact face on touch)",
+      "status": "passed",
+      "detail": {
+        "cell": 0,
+        "labels": [
+          {
+            "uid": "bc-label-fuse",
+            "text": "保险管",
+            "tight": false,
+            "font": "\"Bincov Text\"",
+            "cut": false,
+            "width": 52
+          },
+          {
+            "uid": "bc-label-antidote",
+            "text": "除藻剂",
+            "tight": false,
+            "font": "\"Bincov Text\"",
+            "cut": false,
+            "width": 52
+          },
+          {
+            "uid": "bc-label-ammoR",
+            "text": "卡宾弹",
+            "tight": false,
+            "font": "\"Bincov Text\"",
+            "cut": false,
+            "width": 52
+          },
+          {
+            "uid": "bc-label-strengthDose",
+            "text": "力量针",
+            "tight": false,
+            "font": "\"Bincov Text\"",
+            "cut": false,
+            "width": 52
+          }
+        ]
+      }
+    },
+    {
+      "name": "U11 item labels at 844x390: three-character names are not cut (pixel face on desktop, compact face on touch)",
+      "status": "passed",
+      "detail": {
+        "cell": 0,
+        "labels": [
+          {
+            "uid": "bc-label-fuse",
+            "text": "保险管",
+            "tight": true,
+            "font": "\"Microsoft YaHei\"",
+            "cut": false,
+            "width": 38
+          },
+          {
+            "uid": "bc-label-antidote",
+            "text": "除藻剂",
+            "tight": true,
+            "font": "\"Microsoft YaHei\"",
+            "cut": false,
+            "width": 38
+          },
+          {
+            "uid": "bc-label-ammoR",
+            "text": "卡宾弹",
+            "tight": true,
+            "font": "\"Microsoft YaHei\"",
+            "cut": false,
+            "width": 38
+          },
+          {
+            "uid": "bc-label-strengthDose",
+            "text": "力量针",
+            "tight": true,
+            "font": "\"Microsoft YaHei\"",
+            "cut": false,
+            "width": 38
+          }
+        ]
+      }
+    },
+    {
+      "name": "U11 item labels at 640x300: three-character names are not cut (pixel face on desktop, compact face on touch)",
+      "status": "passed",
+      "detail": {
+        "cell": 0,
+        "labels": [
+          {
+            "uid": "bc-label-fuse",
+            "text": "保险管",
+            "tight": true,
+            "font": "\"Microsoft YaHei\"",
+            "cut": false,
+            "width": 38
+          },
+          {
+            "uid": "bc-label-antidote",
+            "text": "除藻剂",
+            "tight": true,
+            "font": "\"Microsoft YaHei\"",
+            "cut": false,
+            "width": 38
+          },
+          {
+            "uid": "bc-label-ammoR",
+            "text": "卡宾弹",
+            "tight": true,
+            "font": "\"Microsoft YaHei\"",
+            "cut": false,
+            "width": 38
+          },
+          {
+            "uid": "bc-label-strengthDose",
+            "text": "力量针",
+            "tight": true,
+            "font": "\"Microsoft YaHei\"",
+            "cut": false,
+            "width": 38
+          }
+        ]
+      }
+    },
+    {
+      "name": "U12 drag at 1280x720: the ghost follows the cursor above the panel, the docked panel never scrolls, closing mid-drag clears it",
+      "status": "passed",
+      "detail": [
+        {
+          "mode": "inventory",
+          "steps": 4,
+          "lastGhost": {
+            "left": 186,
+            "top": 668
+          }
+        },
+        {
+          "mode": "loot",
+          "steps": 4,
+          "lastGhost": {
+            "left": 186,
+            "top": 668
+          }
+        },
+        {
+          "closedMidDrag": "tab",
+          "ghosts": 0
+        },
+        {
+          "closedMidDrag": "blur",
+          "ghosts": 0
+        }
+      ]
+    },
+    {
+      "name": "U12 drag at 1920x1080: the ghost follows the cursor above the panel, the docked panel never scrolls, closing mid-drag clears it",
+      "status": "passed",
+      "detail": [
+        {
+          "mode": "inventory",
+          "steps": 4,
+          "lastGhost": {
+            "left": 506,
+            "top": 1028
+          }
+        },
+        {
+          "mode": "loot",
+          "steps": 4,
+          "lastGhost": {
+            "left": 506,
+            "top": 1028
+          }
+        },
+        {
+          "closedMidDrag": "tab",
+          "ghosts": 0
+        },
+        {
+          "closedMidDrag": "blur",
+          "ghosts": 0
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "requests": []
+}

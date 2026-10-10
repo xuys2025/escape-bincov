@@ -1,0 +1,305 @@
+{
+  "method": "Three old/new pairs after atomic current-node coordinate sampling, plus new untraced control. Real 50ms touch and all original assertions retained; no click retries.",
+  "runs": [
+    {
+      "name": "j1-final-old-1",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "--import",
+        "tsx",
+        "scripts/station-round2-recheck.mjs",
+        "--only=J1",
+        "--input-trace",
+        "--out=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\j1-final-old-1",
+        "--html=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\prefix-ce732ff6.html"
+      ],
+      "scriptSHA256": "df3744e8ef323ae9e58facf6bdc33ce2a6d1cc53e9cdf314597e17aced16abbd",
+      "buildSHA256": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+      "summary": {
+        "passed": 2,
+        "total": 2
+      },
+      "errors": [],
+      "external": [],
+      "steps": [
+        {
+          "name": "J1 emergency actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": {
+            "rows": 1348,
+            "trustedEvents": 747,
+            "closeTouchStarts": 41,
+            "measureCurrent": 97
+          }
+        },
+        {
+          "name": "J1 restored actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": {
+            "rows": 1371,
+            "trustedEvents": 749,
+            "closeTouchStarts": 41,
+            "measureCurrent": 97
+          }
+        }
+      ],
+      "coordinateSampling": "After existing animation wait, requery and measure current connected DOM node atomically; original real 50ms touch and assertions retained. No action retries."
+    },
+    {
+      "name": "j1-final-new-1",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "--import",
+        "tsx",
+        "scripts/station-round2-recheck.mjs",
+        "--only=J1",
+        "--input-trace",
+        "--out=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\j1-final-new-1"
+      ],
+      "scriptSHA256": "df3744e8ef323ae9e58facf6bdc33ce2a6d1cc53e9cdf314597e17aced16abbd",
+      "buildSHA256": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+      "summary": {
+        "passed": 2,
+        "total": 2
+      },
+      "errors": [],
+      "external": [],
+      "steps": [
+        {
+          "name": "J1 emergency actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": {
+            "rows": 1353,
+            "trustedEvents": 751,
+            "closeTouchStarts": 41,
+            "measureCurrent": 97
+          }
+        },
+        {
+          "name": "J1 restored actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": {
+            "rows": 1344,
+            "trustedEvents": 749,
+            "closeTouchStarts": 41,
+            "measureCurrent": 97
+          }
+        }
+      ],
+      "coordinateSampling": "After existing animation wait, requery and measure current connected DOM node atomically; original real 50ms touch and assertions retained. No action retries."
+    },
+    {
+      "name": "j1-final-old-2",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "--import",
+        "tsx",
+        "scripts/station-round2-recheck.mjs",
+        "--only=J1",
+        "--input-trace",
+        "--out=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\j1-final-old-2",
+        "--html=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\prefix-ce732ff6.html"
+      ],
+      "scriptSHA256": "df3744e8ef323ae9e58facf6bdc33ce2a6d1cc53e9cdf314597e17aced16abbd",
+      "buildSHA256": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+      "summary": {
+        "passed": 2,
+        "total": 2
+      },
+      "errors": [],
+      "external": [],
+      "steps": [
+        {
+          "name": "J1 emergency actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": {
+            "rows": 1338,
+            "trustedEvents": 750,
+            "closeTouchStarts": 41,
+            "measureCurrent": 97
+          }
+        },
+        {
+          "name": "J1 restored actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": {
+            "rows": 1338,
+            "trustedEvents": 747,
+            "closeTouchStarts": 41,
+            "measureCurrent": 97
+          }
+        }
+      ],
+      "coordinateSampling": "After existing animation wait, requery and measure current connected DOM node atomically; original real 50ms touch and assertions retained. No action retries."
+    },
+    {
+      "name": "j1-final-new-2",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "--import",
+        "tsx",
+        "scripts/station-round2-recheck.mjs",
+        "--only=J1",
+        "--input-trace",
+        "--out=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\j1-final-new-2"
+      ],
+      "scriptSHA256": "df3744e8ef323ae9e58facf6bdc33ce2a6d1cc53e9cdf314597e17aced16abbd",
+      "buildSHA256": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+      "summary": {
+        "passed": 2,
+        "total": 2
+      },
+      "errors": [],
+      "external": [],
+      "steps": [
+        {
+          "name": "J1 emergency actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": {
+            "rows": 1333,
+            "trustedEvents": 750,
+            "closeTouchStarts": 41,
+            "measureCurrent": 97
+          }
+        },
+        {
+          "name": "J1 restored actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": {
+            "rows": 1335,
+            "trustedEvents": 748,
+            "closeTouchStarts": 41,
+            "measureCurrent": 97
+          }
+        }
+      ],
+      "coordinateSampling": "After existing animation wait, requery and measure current connected DOM node atomically; original real 50ms touch and assertions retained. No action retries."
+    },
+    {
+      "name": "j1-final-old-3",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "--import",
+        "tsx",
+        "scripts/station-round2-recheck.mjs",
+        "--only=J1",
+        "--input-trace",
+        "--out=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\j1-final-old-3",
+        "--html=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\prefix-ce732ff6.html"
+      ],
+      "scriptSHA256": "df3744e8ef323ae9e58facf6bdc33ce2a6d1cc53e9cdf314597e17aced16abbd",
+      "buildSHA256": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+      "summary": {
+        "passed": 2,
+        "total": 2
+      },
+      "errors": [],
+      "external": [],
+      "steps": [
+        {
+          "name": "J1 emergency actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": {
+            "rows": 1334,
+            "trustedEvents": 750,
+            "closeTouchStarts": 41,
+            "measureCurrent": 97
+          }
+        },
+        {
+          "name": "J1 restored actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": {
+            "rows": 1337,
+            "trustedEvents": 750,
+            "closeTouchStarts": 41,
+            "measureCurrent": 97
+          }
+        }
+      ],
+      "coordinateSampling": "After existing animation wait, requery and measure current connected DOM node atomically; original real 50ms touch and assertions retained. No action retries."
+    },
+    {
+      "name": "j1-final-new-3",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "--import",
+        "tsx",
+        "scripts/station-round2-recheck.mjs",
+        "--only=J1",
+        "--input-trace",
+        "--out=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\j1-final-new-3"
+      ],
+      "scriptSHA256": "df3744e8ef323ae9e58facf6bdc33ce2a6d1cc53e9cdf314597e17aced16abbd",
+      "buildSHA256": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+      "summary": {
+        "passed": 2,
+        "total": 2
+      },
+      "errors": [],
+      "external": [],
+      "steps": [
+        {
+          "name": "J1 emergency actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": {
+            "rows": 1334,
+            "trustedEvents": 750,
+            "closeTouchStarts": 41,
+            "measureCurrent": 97
+          }
+        },
+        {
+          "name": "J1 restored actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": {
+            "rows": 1334,
+            "trustedEvents": 747,
+            "closeTouchStarts": 41,
+            "measureCurrent": 97
+          }
+        }
+      ],
+      "coordinateSampling": "After existing animation wait, requery and measure current connected DOM node atomically; original real 50ms touch and assertions retained. No action retries."
+    },
+    {
+      "name": "j1-final-new-untraced",
+      "exitCode": 0,
+      "command": [
+        "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "--import",
+        "tsx",
+        "scripts/station-round2-recheck.mjs",
+        "--only=J1",
+        "--out=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\j1-final-new-untraced"
+      ],
+      "scriptSHA256": "df3744e8ef323ae9e58facf6bdc33ce2a6d1cc53e9cdf314597e17aced16abbd",
+      "buildSHA256": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+      "summary": {
+        "passed": 2,
+        "total": 2
+      },
+      "errors": [],
+      "external": [],
+      "steps": [
+        {
+          "name": "J1 emergency actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": null
+        },
+        {
+          "name": "J1 restored actual touch centre and four corners of every shortcut",
+          "status": "passed",
+          "trace": null
+        }
+      ],
+      "coordinateSampling": "After existing animation wait, requery and measure current connected DOM node atomically; original real 50ms touch and assertions retained. No action retries."
+    }
+  ]
+}

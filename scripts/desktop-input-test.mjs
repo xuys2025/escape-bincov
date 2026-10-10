@@ -38,7 +38,7 @@ async function test(name, options, check) {
     };
   });
   try {
-    await page.goto(pathToFileURL(resolve(values.entry)).href + '?test=1');
+    await page.goto(pathToFileURL(resolve(values.entry)).href + '?test=1&entry=tabs');
     await action(page, 'enter').click();
     await page.locator('#seed').fill('42');
     await action(page, 'deploy').click();

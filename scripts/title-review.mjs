@@ -4,6 +4,8 @@ import { mkdir, writeFile, stat, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
+import { throughYard } from './yard-entry.mjs';
+import { assertTitlePreserved } from './station-acceptance-gates.mjs';
 import { browserOptions } from './browser-options.mjs';
 import { checkPixelEdge } from './title-edge-check.mjs';
 
@@ -94,13 +96,23 @@ try {
       assert.equal(await page.locator('[data-action="title-motion"]').evaluate(el => el === document.activeElement), true, 'Native Tab navigation is blocked');
       await page.keyboard.press('Space');
       assert.equal(await page.locator('[data-action="title-motion"]').getAttribute('aria-pressed'), 'false', 'Reduced motion control misrepresents its effective state');
+      // First entry's intentional v4/expansion-v2 upgrade is tested elsewhere. Establish an ordinary upgraded title
+      // before testing a round-trip, so no progress-bearing expansion fields need to be discarded.
+      await page.locator('.title-enter').click(); await throughYard(page, { tap: width < 600 });
+      await page.locator('[data-action="tab"][data-id="home"]').click(); await page.locator('[data-action="menu"]').click();
+      await page.locator('.title-enter').waitFor();
       const saved = await page.evaluate(() => localStorage.getItem('escape-bincov.session.v2'));
       if (width < 600) await page.locator('.title-enter').tap();
       else { await page.locator('.title-enter').focus(); await page.keyboard.press('Enter'); }
+      // The ordinary entry is the station yard; its 页签 button leads to the old tab page checked here. Leaving the yard
+      // writes a real Runtime checkpoint. Compare the full record with a bounded clock rule and three metadata fields.
+      await throughYard(page, { tap: width < 600 });
       await page.locator('.hideout').waitFor();
       assert.deepEqual(await page.locator('#game canvas').evaluate(c => [c.width, c.height]), [960, 540], 'Title render resolution leaked into gameplay');
       assert.equal(await page.evaluate(() => document.body.dataset.screen), 'hideout');
-      assert.equal(await page.evaluate(() => localStorage.getItem('escape-bincov.session.v2')), saved, 'Title entry alters existing progress');
+      const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('escape-bincov.session.v2')));
+      const saveAudit = assertTitlePreserved(JSON.parse(saved), stored);
+      await writeFile(resolve(out, 'round-trip-'+size+'.json'), JSON.stringify({before:JSON.parse(saved),after:stored,audit:saveAudit},null,2));
       await page.locator('[data-action="tab"][data-id="home"]').click();
       await page.locator('[data-action="menu"]').click();
       await page.locator('.title-enter').waitFor();
@@ -113,7 +125,7 @@ try {
   observe(context);
   try {
     const page = await context.newPage();
-    await page.goto(url + '?test=1');
+    await page.goto(url + '?test=1&entry=tabs');
     await page.locator('.title-enter').waitFor();
     const snap = () => page.evaluate(() => window.__bincov.app.game.scene.getScene('Menu').title.snapshot());
     const settledPointer = x => page.waitForFunction(px => {
@@ -374,7 +386,7 @@ try {
   observe(touch);
   try {
     const page = await touch.newPage();
-    await page.goto(url + '?test=1');
+    await page.goto(url + '?test=1&entry=tabs');
     await page.locator('.title-enter').waitFor();
     const snap = () => page.evaluate(() => window.__bincov.app.game.scene.getScene('Menu').title.snapshot());
     for (const [x, y] of [[830, 380], [10, 10], [830, 10]]) { await page.touchscreen.tap(x, y); await page.waitForTimeout(300); }

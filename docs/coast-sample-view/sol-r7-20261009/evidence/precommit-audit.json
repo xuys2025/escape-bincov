@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-09T07:38:52.749Z",
+  "syntax": [
+    {
+      "path": "scripts/coast-audio-test.mjs",
+      "exitCode": 0
+    },
+    {
+      "path": "scripts/sol-r7-audio-isolated.mjs",
+      "exitCode": 0
+    },
+    {
+      "path": "scripts/sol-r7-drains.mjs",
+      "exitCode": 0
+    },
+    {
+      "path": "scripts/sol-r7-fixture-state.mjs",
+      "exitCode": 0
+    },
+    {
+      "path": "scripts/sol-r7-hidden.mjs",
+      "exitCode": 0
+    },
+    {
+      "path": "scripts/sol-r7-settlement.mjs",
+      "exitCode": 0
+    },
+    {
+      "path": "scripts/sol-r7-tide.mjs",
+      "exitCode": 0
+    },
+    {
+      "path": "scripts/sol-r7-export.mjs",
+      "exitCode": 0
+    }
+  ],
+  "localReportLinks": 64,
+  "overlappingBrowserProcesses": 0,
+  "executedSourceCanonicalizationVerified": 7,
+  "deliveryFiles": 321,
+  "deliveryBytes": 138721266
+}

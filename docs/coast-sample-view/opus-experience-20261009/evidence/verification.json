@@ -1,0 +1,320 @@
+{
+  "at": "2026-10-08T17:18:43.733Z",
+  "base": "1c1c935",
+  "node": "v22.22.2",
+  "unit": {
+    "command": "pnpm test",
+    "tests": 233,
+    "pass": 233,
+    "fail": 0
+  },
+  "package": {
+    "command": "pnpm package"
+  },
+  "artifacts": {
+    "dist/index.html": {
+      "bytes": 3204347,
+      "sha256": "21373471fe1e0af75005fe11df529ca88b2605317e6d6b0a1727fd61769cdc28"
+    },
+    "start the game.html": {
+      "bytes": 3204347,
+      "sha256": "21373471fe1e0af75005fe11df529ca88b2605317e6d6b0a1727fd61769cdc28"
+    },
+    "release/Escape-Bincov-portable.zip": {
+      "bytes": 1089169,
+      "sha256": "2e34ef3f914acee4da3a51abd37709648f8e16556d0549243b198bed03752ace"
+    },
+    "release/Escape-Bincov-web.zip": {
+      "bytes": 1085394,
+      "sha256": "0838fa186f94ee051f03ae80f4b267fba1e0922b49336d7b9f264e082fbeb238"
+    }
+  },
+  "sample": {
+    "passed": 42,
+    "total": 42,
+    "errors": 0,
+    "external": 0,
+    "failed": []
+  },
+  "audio": {
+    "passed": 14,
+    "total": 14,
+    "reruns": [
+      "14/14",
+      "14/14",
+      "14/14"
+    ],
+    "browser": "154.0.8037.98",
+    "note": "E2 threshold 1.6x; see audio-e2-calibration.json for the two runs that failed the earlier 2.2x threshold with the cue playing"
+  },
+  "lifecycle": {
+    "1280x720": {
+      "checks": [
+        "startup-asset-cleanup-and-retry",
+        "startup-view-cleanup-and-retry",
+        "startup-observer-cleanup-and-retry",
+        "ordinary-context-loss-native-restore-and-settlement"
+      ],
+      "external": 0
+    },
+    "1920x1080": {
+      "checks": [
+        "startup-asset-cleanup-and-retry",
+        "startup-view-cleanup-and-retry",
+        "startup-observer-cleanup-and-retry",
+        "ordinary-context-loss-native-restore-and-settlement"
+      ],
+      "external": 0
+    }
+  },
+  "playtest": {
+    "1280": {
+      "result": {
+        "outcome": "extract",
+        "kills": 3
+      },
+      "errors": 0,
+      "external": 0,
+      "failure": null
+    },
+    "1920": {
+      "result": {
+        "outcome": "extract",
+        "kills": 2
+      },
+      "errors": 0,
+      "external": 0,
+      "failure": null
+    },
+    "emptySeed": {
+      "result": {
+        "outcome": "extract",
+        "kills": 1
+      },
+      "errors": 0,
+      "external": 0,
+      "failure": null
+    }
+  },
+  "shots": {
+    "shots": 68,
+    "anomalies": 0,
+    "errors": 0,
+    "external": 0
+  },
+  "runs": [
+    {
+      "name": "sample",
+      "exit": 0,
+      "start": "2026-10-09T00:50:49+08:00",
+      "end": "2026-10-09T00:51:53+08:00"
+    },
+    {
+      "name": "audio",
+      "exit": 1,
+      "start": "2026-10-09T00:51:53+08:00",
+      "end": "2026-10-09T00:53:07+08:00"
+    },
+    {
+      "name": "audio-2",
+      "exit": 1,
+      "start": "2026-10-09T00:53:07+08:00",
+      "end": "2026-10-09T00:54:20+08:00"
+    },
+    {
+      "name": "audio-3",
+      "exit": 0,
+      "start": "2026-10-09T00:54:20+08:00",
+      "end": "2026-10-09T00:55:33+08:00"
+    },
+    {
+      "name": "lifecycle-1280",
+      "exit": 0,
+      "start": "2026-10-09T00:55:33+08:00",
+      "end": "2026-10-09T00:55:50+08:00"
+    },
+    {
+      "name": "lifecycle-1920",
+      "exit": 0,
+      "start": "2026-10-09T00:55:50+08:00",
+      "end": "2026-10-09T00:56:07+08:00"
+    },
+    {
+      "name": "launcher",
+      "exit": 0,
+      "start": "2026-10-09T00:56:07+08:00",
+      "end": "2026-10-09T00:56:17+08:00"
+    },
+    {
+      "name": "playtest-empty",
+      "exit": 0,
+      "start": "2026-10-09T00:56:17+08:00",
+      "end": "2026-10-09T00:57:29+08:00"
+    },
+    {
+      "name": "playtest-1280",
+      "exit": 0,
+      "start": "2026-10-09T00:57:29+08:00",
+      "end": "2026-10-09T00:58:07+08:00"
+    },
+    {
+      "name": "playtest-1920",
+      "exit": 0,
+      "start": "2026-10-09T00:58:07+08:00",
+      "end": "2026-10-09T00:58:39+08:00"
+    },
+    {
+      "name": "shots",
+      "exit": 0,
+      "start": "2026-10-09T00:58:39+08:00",
+      "end": "2026-10-09T01:00:27+08:00"
+    },
+    {
+      "name": "sol-visual",
+      "exit": 0,
+      "start": "2026-10-09T01:00:27+08:00",
+      "end": "2026-10-09T01:00:32+08:00"
+    },
+    {
+      "name": "ci-browser",
+      "exit": 0,
+      "start": "2026-10-09T01:00:32+08:00",
+      "end": "2026-10-09T01:01:12+08:00"
+    },
+    {
+      "name": "ci-desktop-input",
+      "exit": 0,
+      "start": "2026-10-09T01:01:12+08:00",
+      "end": "2026-10-09T01:01:36+08:00"
+    },
+    {
+      "name": "ci-ui",
+      "exit": 0,
+      "start": "2026-10-09T01:01:36+08:00",
+      "end": "2026-10-09T01:01:45+08:00"
+    },
+    {
+      "name": "ci-tactical",
+      "exit": 0,
+      "start": "2026-10-09T01:01:45+08:00",
+      "end": "2026-10-09T01:02:03+08:00"
+    },
+    {
+      "name": "ci-art",
+      "exit": 0,
+      "start": "2026-10-09T01:02:03+08:00",
+      "end": "2026-10-09T01:02:17+08:00"
+    },
+    {
+      "name": "ci-title",
+      "exit": 0,
+      "start": "2026-10-09T01:02:17+08:00",
+      "end": "2026-10-09T01:03:14+08:00"
+    },
+    {
+      "name": "ci-title-water",
+      "exit": 0,
+      "start": "2026-10-09T01:03:14+08:00",
+      "end": "2026-10-09T01:03:25+08:00"
+    },
+    {
+      "name": "ci-save-browser",
+      "exit": 0,
+      "start": "2026-10-09T01:03:25+08:00",
+      "end": "2026-10-09T01:03:38+08:00"
+    },
+    {
+      "name": "ci-expansion",
+      "exit": 0,
+      "start": "2026-10-09T01:03:38+08:00",
+      "end": "2026-10-09T01:03:48+08:00"
+    },
+    {
+      "name": "ci-buildings",
+      "exit": 0,
+      "start": "2026-10-09T01:03:48+08:00",
+      "end": "2026-10-09T01:04:01+08:00"
+    },
+    {
+      "name": "ci-qol-expansion",
+      "exit": 0,
+      "start": "2026-10-09T01:04:01+08:00",
+      "end": "2026-10-09T01:04:05+08:00"
+    },
+    {
+      "name": "ci-systems",
+      "exit": 0,
+      "start": "2026-10-09T01:04:05+08:00",
+      "end": "2026-10-09T01:04:41+08:00"
+    },
+    {
+      "name": "ci-mall-passages",
+      "exit": 0,
+      "start": "2026-10-09T01:04:41+08:00",
+      "end": "2026-10-09T01:07:29+08:00"
+    },
+    {
+      "name": "ci-mall-landing",
+      "exit": 0,
+      "start": "2026-10-09T01:07:29+08:00",
+      "end": "2026-10-09T01:07:38+08:00"
+    },
+    {
+      "name": "ci-loot",
+      "exit": 0,
+      "start": "2026-10-09T01:07:38+08:00",
+      "end": "2026-10-09T01:08:28+08:00"
+    },
+    {
+      "name": "ci-loot-target",
+      "exit": 0,
+      "start": "2026-10-09T01:08:28+08:00",
+      "end": "2026-10-09T01:08:48+08:00"
+    },
+    {
+      "name": "ci-qol",
+      "exit": 0,
+      "start": "2026-10-09T01:08:48+08:00",
+      "end": "2026-10-09T01:09:10+08:00"
+    },
+    {
+      "name": "ci-mobile",
+      "exit": 0,
+      "start": "2026-10-09T01:09:10+08:00",
+      "end": "2026-10-09T01:09:30+08:00"
+    },
+    {
+      "name": "ci-mobile-ux",
+      "exit": 0,
+      "start": "2026-10-09T01:09:30+08:00",
+      "end": "2026-10-09T01:10:40+08:00"
+    },
+    {
+      "name": "ci-portable",
+      "exit": 0,
+      "start": "2026-10-09T01:10:40+08:00",
+      "end": "2026-10-09T01:10:46+08:00"
+    },
+    {
+      "name": "audio-rerun-1",
+      "exit": 0,
+      "start": "2026-10-09T01:10:59+08:00",
+      "end": "2026-10-09T01:12:13+08:00",
+      "note": "E2 threshold recalibrated to 1.6x"
+    },
+    {
+      "name": "audio-rerun-2",
+      "exit": 0,
+      "start": "2026-10-09T01:12:13+08:00",
+      "end": "2026-10-09T01:13:26+08:00",
+      "note": "E2 threshold recalibrated to 1.6x"
+    },
+    {
+      "name": "audio-rerun-3",
+      "exit": 0,
+      "start": "2026-10-09T01:13:26+08:00",
+      "end": "2026-10-09T01:14:40+08:00",
+      "note": "E2 threshold recalibrated to 1.6x"
+    }
+  ]
+}

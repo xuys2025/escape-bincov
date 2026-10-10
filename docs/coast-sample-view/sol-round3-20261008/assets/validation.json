@@ -1,0 +1,832 @@
+{
+  "at": "2026-10-08T04:36:49.737Z",
+  "status": "passed",
+  "count": 43,
+  "checks": [
+    {
+      "id": "coast-player-body-e-f0-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        8,
+        9,
+        23,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "933a3bc99471677ba3dea5bd4ec950d1e93d1eb0a1ded20a4773471dcdb13bea"
+    },
+    {
+      "id": "coast-player-body-e-f1-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        6,
+        10,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "f788886455018cf8c1bf9aada414b6ac1e52b986701213198d2d11abdbe3c543"
+    },
+    {
+      "id": "coast-player-body-e-f2-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        6,
+        9,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "2b9709060e654834ec32908434c456a22157e0722321f367c31db52ba956bb8e"
+    },
+    {
+      "id": "coast-player-body-e-f3-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        6,
+        10,
+        26,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "57c51427bda0bf682ac817924ea27cac4f2196934c65eedb6c917aa9ef2412fe"
+    },
+    {
+      "id": "coast-player-body-e-f4-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        9,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "8a1f473c6c0be5d7ea0f9439cf73218dbd90f51a7e7741eaa52a3191817033b0"
+    },
+    {
+      "id": "coast-player-body-se-f0-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        9,
+        24,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "4991bdee3b7d2be32dbe9cc2deaff1660a46917dce08217dcf03b0d65294850c"
+    },
+    {
+      "id": "coast-player-body-se-f1-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        10,
+        24,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "3fc10d68ef4c8dc3d3475671538a07cd4e5000cf3d9beecf258f929d59e5416e"
+    },
+    {
+      "id": "coast-player-body-se-f2-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        9,
+        24,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "f3f1cbf5fb753afdaadcb6f2599c77167cdcbf555f447f632afa117cceade9ae"
+    },
+    {
+      "id": "coast-player-body-se-f3-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        10,
+        24,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "b2098f780275f939663fcb200afa0d4a924c66beadf13af1626d2c912edc6adc"
+    },
+    {
+      "id": "coast-player-body-se-f4-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        9,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "bacb284c7bcc1fe75e95c7d4b97f2a1f7bea4d70f48511f9becac5ee1ea38bb6"
+    },
+    {
+      "id": "coast-player-body-s-f0-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        6,
+        9,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "3d24329c8ecb36b0da2fa43dda0c87940586b8a910c408b6381f9d948e80c621"
+    },
+    {
+      "id": "coast-player-body-s-f1-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        10,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "700920b70eefddb27db042bd67e83a83cb168a139863b0d054f87aa35e1686d5"
+    },
+    {
+      "id": "coast-player-body-s-f2-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        9,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "2b1bd3c472f2241bc083317930cb45cbfca43445bbcdb6f39010b2150d848630"
+    },
+    {
+      "id": "coast-player-body-s-f3-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        6,
+        10,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "465a668039f3d3ce95a2b19ea63cc00635281f9930786aaad12118b5524d57b2"
+    },
+    {
+      "id": "coast-player-body-s-f4-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        9,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "176a75a5b33e7f02d8b625990cab862ba56da6cbbb96a583d595fef403d92b2f"
+    },
+    {
+      "id": "coast-player-body-ne-f0-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        8,
+        9,
+        24,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "228b5cf5b6498d559c14d2023bc89df446189ca6fdc9ed427d8bada507781358"
+    },
+    {
+      "id": "coast-player-body-ne-f1-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        10,
+        24,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "93cddbdbdd14584e46181440bcdc8841ac849a1859c40ed887b1deafd7ae4547"
+    },
+    {
+      "id": "coast-player-body-ne-f2-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        9,
+        24,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "d7201919db21545d03edbd34d502987024ad24afb180e56a5028f69ce00901eb"
+    },
+    {
+      "id": "coast-player-body-ne-f3-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        10,
+        24,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "a197a865a537f30f07a248278e3bfa8d3bb32fafaf205b803f9e80e061b809fc"
+    },
+    {
+      "id": "coast-player-body-ne-f4-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        9,
+        24,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "2cb730a5eead8ca848ddbd9d9409bde6345d62e8376dd62b40fb9e3a56273147"
+    },
+    {
+      "id": "coast-player-body-n-f0-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        6,
+        9,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "4468b6b6002d6c60f1f3b519cd376272a3c32f3e33c0917bf2b957c5f1908201"
+    },
+    {
+      "id": "coast-player-body-n-f1-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        10,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "81eccafb9e90163dc7be5411d9a0ee736fc27eb2a857f04ea59c1b466b8565d9"
+    },
+    {
+      "id": "coast-player-body-n-f2-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        6,
+        9,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "3c23a39532f079c2d13e79437035ad085cfe28de03ce9e0c32c9d88f95480130"
+    },
+    {
+      "id": "coast-player-body-n-f3-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        7,
+        10,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "b642cba4e19f608e990610b278a66e23c81bf8aafe6b19c7607933c6f8eab687"
+    },
+    {
+      "id": "coast-player-body-n-f4-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        6,
+        9,
+        25,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "ccf7cb63116688ce64cdd9287fe91d31b8a03826b47ffa59c68d4c15d192390b"
+    },
+    {
+      "id": "coast-wall-core-v1",
+      "w": 32,
+      "h": 32,
+      "bounds": [
+        0,
+        0,
+        31,
+        31
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "efa3b3957b74b30ed99697bccb8493ff31f9d05a00442fca5ecfd8f123544299"
+    },
+    {
+      "id": "coast-wall-edge-n-v1",
+      "w": 32,
+      "h": 3,
+      "bounds": [
+        0,
+        0,
+        31,
+        2
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "487932a6d4122e52780b213c34a3702812a5d500a0c243c19abc0cbe2ddd6370"
+    },
+    {
+      "id": "coast-wall-edge-s-v1",
+      "w": 32,
+      "h": 3,
+      "bounds": [
+        0,
+        0,
+        31,
+        2
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "4744ff401660f54d499df5d362937ed2a465fda52b27e7d6ed5523174561062c"
+    },
+    {
+      "id": "coast-wall-edge-e-v1",
+      "w": 3,
+      "h": 32,
+      "bounds": [
+        0,
+        0,
+        2,
+        31
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "86af923ee48f2417309389f1ce0c9961756a01cac688b0ea5e9bab1b8b26c068"
+    },
+    {
+      "id": "coast-wall-edge-w-v1",
+      "w": 3,
+      "h": 32,
+      "bounds": [
+        0,
+        0,
+        2,
+        31
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "f738f368f8cc84f4cd05fcfb307830ffd3d20f087a0cf4b4e1546418dea991b8"
+    },
+    {
+      "id": "coast-wall-exterior-a-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        0,
+        0,
+        31,
+        47
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "184fd2c52a6b17eebb975ee486a8c01e701d226c4734329edef8cf42f089626e"
+    },
+    {
+      "id": "coast-wall-exterior-b-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        0,
+        0,
+        31,
+        47
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "7dbd801ff9f237097fe855a57a9e73daf4a26529a3e4bc82f6ca24948674d450"
+    },
+    {
+      "id": "coast-wall-interior-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        0,
+        0,
+        31,
+        47
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "58a4da49bc2180743b90eaaa1edf19b9908c5192376fd6f0f580a1c472b6a13b"
+    },
+    {
+      "id": "coast-wall-window-ew-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        0,
+        0,
+        31,
+        47
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "7da2d93daa89801c111debef314ffedae6285be2530afbbb0f5c5385bd6c2a5b"
+    },
+    {
+      "id": "coast-wall-door-ew-closed-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        0,
+        0,
+        31,
+        47
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "8533e998c2b068ff436595a694b8903f9e97e16a80a5989032e4fb0579934319"
+    },
+    {
+      "id": "coast-wall-door-ew-open-v1",
+      "w": 32,
+      "h": 48,
+      "bounds": [
+        0,
+        0,
+        31,
+        47
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "67c9d6e27a728334f3b66e3705c96473dd6e7020139158130eeafe6b4e1f33e0"
+    },
+    {
+      "id": "coast-ground-asphalt-a-v1",
+      "w": 32,
+      "h": 32,
+      "bounds": [
+        0,
+        0,
+        31,
+        31
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "09c5ac45deb20f724eb7058663a048dff857643ec105067b514f5796a486bc14"
+    },
+    {
+      "id": "coast-ground-asphalt-b-v1",
+      "w": 32,
+      "h": 32,
+      "bounds": [
+        0,
+        0,
+        31,
+        31
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "e9d163bd9f7743ae4ea0312418fc8041295b6bc730f33fb69b770884369ffdcb"
+    },
+    {
+      "id": "coast-ground-yard-a-v1",
+      "w": 32,
+      "h": 32,
+      "bounds": [
+        0,
+        0,
+        31,
+        31
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "78200ce2a1ca965f314f3cdbeb5bfbfb02461f0d0203a52da7f7a0e50a364918"
+    },
+    {
+      "id": "coast-ground-yard-b-v1",
+      "w": 32,
+      "h": 32,
+      "bounds": [
+        0,
+        0,
+        31,
+        31
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "58bfabf79b209e96aaad5ac2142d657019c54c72be0341d10903924de9079c15"
+    },
+    {
+      "id": "coast-ground-tile-a-v1",
+      "w": 32,
+      "h": 32,
+      "bounds": [
+        0,
+        0,
+        31,
+        31
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "29ab13629f858452fe25836db504feeb8415d0a13f51cd809d6645ce949057bc"
+    },
+    {
+      "id": "coast-ground-tile-b-v1",
+      "w": 32,
+      "h": 32,
+      "bounds": [
+        0,
+        0,
+        31,
+        31
+      ],
+      "alpha": [
+        255
+      ],
+      "sha256": "f937266bb57c6b2893986aa4102780cc961ed2892c598be4b831b433aac3fd08"
+    },
+    {
+      "id": "coast-weapon-carbine-held-v1",
+      "w": 31,
+      "h": 10,
+      "bounds": [
+        0,
+        1,
+        30,
+        9
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "7e4157ac89587045218de25fea996aa83dd047c068df7f5e703551cac3542107"
+    }
+  ],
+  "note": "Mechanical contract and before/after material metrics passed. R08 needs Opus to consume the visual back-weapon policy; R10 has no crouch frame within fixed 43. In-engine review is recorded separately, never inferred from these checks.",
+  "repairs": {
+    "material": [
+      {
+        "id": "coast-ground-asphalt-a-v1",
+        "before": {
+          "mean": 58.037348242188564,
+          "standardDeviation": 11.904220009400053,
+          "brightPixels": 0,
+          "opaquePixels": 1024
+        },
+        "after": {
+          "mean": 58.037348242188564,
+          "standardDeviation": 11.904220009400053,
+          "brightPixels": 0,
+          "opaquePixels": 1024
+        }
+      },
+      {
+        "id": "coast-ground-asphalt-b-v1",
+        "before": {
+          "mean": 68.18388769531215,
+          "standardDeviation": 13.654713081947724,
+          "brightPixels": 0,
+          "opaquePixels": 1024
+        },
+        "after": {
+          "mean": 68.18388769531215,
+          "standardDeviation": 13.654713081947724,
+          "brightPixels": 0,
+          "opaquePixels": 1024
+        }
+      },
+      {
+        "id": "coast-ground-yard-a-v1",
+        "before": {
+          "mean": 102.5200458984365,
+          "standardDeviation": 10.970522754343065,
+          "brightPixels": 15,
+          "opaquePixels": 1024
+        },
+        "after": {
+          "mean": 87.34413359374928,
+          "standardDeviation": 7.971625363043354,
+          "brightPixels": 0,
+          "opaquePixels": 1024
+        }
+      },
+      {
+        "id": "coast-ground-yard-b-v1",
+        "before": {
+          "mean": 104.78928789062404,
+          "standardDeviation": 14.140739088006981,
+          "brightPixels": 32,
+          "opaquePixels": 1024
+        },
+        "after": {
+          "mean": 88.04927382812426,
+          "standardDeviation": 7.803278507832357,
+          "brightPixels": 0,
+          "opaquePixels": 1024
+        }
+      },
+      {
+        "id": "coast-ground-tile-a-v1",
+        "before": {
+          "mean": 151.0163437499989,
+          "standardDeviation": 40.502877200184905,
+          "brightPixels": 806,
+          "opaquePixels": 1024
+        },
+        "after": {
+          "mean": 105.18427675781243,
+          "standardDeviation": 16.484730287470068,
+          "brightPixels": 0,
+          "opaquePixels": 1024
+        }
+      },
+      {
+        "id": "coast-ground-tile-b-v1",
+        "before": {
+          "mean": 147.91520058593613,
+          "standardDeviation": 39.76016155148204,
+          "brightPixels": 785,
+          "opaquePixels": 1024
+        },
+        "after": {
+          "mean": 104.26732871093745,
+          "standardDeviation": 16.5208561636342,
+          "brightPixels": 0,
+          "opaquePixels": 1024
+        }
+      }
+    ],
+    "tileMeanDelta": 0.9169480468749782,
+    "corePairedEdges": true,
+    "exteriorSharedEdges": true,
+    "changedPNGs": 34,
+    "unchangedPNGs": 9,
+    "allSourceReferencesExist": true
+  },
+  "repairDisposition": [
+    {
+      "id": "ART-R01",
+      "status": "repaired-png",
+      "note": "Wall core border removed; paired edges verified"
+    },
+    {
+      "id": "ART-R02",
+      "status": "repaired-png",
+      "note": "No third exterior; A/B source motifs differ and side profiles match"
+    },
+    {
+      "id": "ART-R03",
+      "status": "repaired-png",
+      "note": "Arrow-like marks removed in edited interior"
+    },
+    {
+      "id": "ART-R04",
+      "status": "repaired-png",
+      "note": "Window strip uses low-saturation grey-green"
+    },
+    {
+      "id": "ART-R05",
+      "status": "repaired-png",
+      "note": "Courtyard bright speckles reduced"
+    },
+    {
+      "id": "ART-R06",
+      "status": "repaired-png",
+      "note": "Tile A/B share a darker close-luminance ramp"
+    },
+    {
+      "id": "ART-R07",
+      "status": "repaired-png-awaiting-in-engine-review",
+      "note": "All 25 bodies remove baked hands and dangling forearms"
+    },
+    {
+      "id": "ART-R08",
+      "status": "requires-opus-integration",
+      "note": "Proposal: hide only the visual gun on N/NE/NW; current scene does not consume this field. Simulation unchanged."
+    },
+    {
+      "id": "ART-R09",
+      "status": "mirror-retained-for-Opus-review",
+      "note": "W/SW/NW continue mirroring with diffuse shading; Opus final lighting preference pending, no added directions"
+    },
+    {
+      "id": "ART-R10",
+      "status": "blocked-by-fixed-43-scope",
+      "note": "No crouch sample can be added without expanding frame count or breaking the five-frame contract; existing idle fallback remains unaccepted"
+    }
+  ]
+}
