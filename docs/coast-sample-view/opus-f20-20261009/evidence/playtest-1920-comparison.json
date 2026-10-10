@@ -1,0 +1,104 @@
+[
+  {
+    "id": "fixed",
+    "run": 1,
+    "status": 0,
+    "summary": {
+      "outcome": null,
+      "failure": null,
+      "log": [
+        "spawn 208 656 exits north,seawall",
+        "crate crate-3 368 912",
+        "crate walk arrived shots 92",
+        "exit walk arrived shots 110"
+      ],
+      "errors": 0,
+      "requests": 0
+    }
+  },
+  {
+    "id": "base",
+    "run": 1,
+    "status": 1,
+    "summary": {
+      "outcome": null,
+      "failure": "page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')",
+      "log": [
+        "spawn 208 656 exits seawall,north",
+        "crate crate-0 560 976",
+        "crate walk ending shots 80",
+        "FAIL page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')"
+      ],
+      "errors": 0,
+      "requests": 0
+    }
+  },
+  {
+    "id": "fixed",
+    "run": 2,
+    "status": 1,
+    "summary": {
+      "outcome": null,
+      "failure": "page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')",
+      "log": [
+        "spawn 208 656 exits north,seawall",
+        "crate crate-8 560 912",
+        "crate walk ending shots 177",
+        "FAIL page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')"
+      ],
+      "errors": 0,
+      "requests": 0
+    }
+  },
+  {
+    "id": "base",
+    "run": 2,
+    "status": 1,
+    "summary": {
+      "outcome": null,
+      "failure": "page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')",
+      "log": [
+        "spawn 208 656 exits north,seawall",
+        "crate crate-35 560 1200",
+        "crate walk ending shots 86",
+        "FAIL page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')"
+      ],
+      "errors": 0,
+      "requests": 0
+    }
+  },
+  {
+    "id": "fixed",
+    "run": 3,
+    "status": 0,
+    "summary": {
+      "outcome": null,
+      "failure": null,
+      "log": [
+        "spawn 208 656 exits seawall,north",
+        "crate crate-10 368 560",
+        "crate walk arrived shots 0",
+        "exit walk arrived shots 0"
+      ],
+      "errors": 0,
+      "requests": 0
+    }
+  },
+  {
+    "id": "base",
+    "run": 3,
+    "status": 1,
+    "summary": {
+      "outcome": null,
+      "failure": "page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')",
+      "log": [
+        "spawn 208 656 exits seawall,north",
+        "crate crate-12 560 912",
+        "crate walk ending shots 71",
+        "FAIL page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')"
+      ],
+      "errors": 0,
+      "requests": 0
+    }
+  }
+]

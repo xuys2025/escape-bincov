@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-09T14:25:26.599Z",
+  "methodology": "Offline file:// current packaged game. Screenshots are unmodified. Water diagnostic uses ?test=1 to disable rain and hold the camera; a separate static capture uses reduced motion. Synthetic state is limited to these controls; no saved-game fixture.",
+  "checks": [
+    {
+      "name": "visible water changes without rain",
+      "changedPixels": 2490
+    },
+    {
+      "name": "visible reflection changes without rain",
+      "changedPixels": 2928
+    },
+    {
+      "name": "fixed-camera diagnostic",
+      "camera": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "motion toggle preserves pose",
+      "before": [
+        {
+          "far": [
+            0,
+            0
+          ],
+          "harbor": [
+            0,
+            0
+          ],
+          "room": [
+            0.9789092737950819,
+            0
+          ],
+          "lamp": [
+            0.9789092737950819,
+            0
+          ],
+          "desk": [
+            1.9578185475901637,
+            0
+          ],
+          "chair": [
+            2.9367278213852455,
+            0
+          ],
+          "fore": [
+            3.9156370951803274,
+            0
+          ]
+        },
+        61.443255795016434,
+        2,
+        51
+      ],
+      "after": [
+        {
+          "far": [
+            0,
+            0
+          ],
+          "harbor": [
+            0,
+            0
+          ],
+          "room": [
+            0.9789092737950819,
+            0
+          ],
+          "lamp": [
+            0.9789092737950819,
+            0
+          ],
+          "desk": [
+            1.9578185475901637,
+            0
+          ],
+          "chair": [
+            2.9367278213852455,
+            0
+          ],
+          "fore": [
+            3.9156370951803274,
+            0
+          ]
+        },
+        61.443255795016434,
+        2,
+        51
+      ]
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "status": "passed"
+}

@@ -9,9 +9,10 @@ import { MALL_WORLD, MALL_ANCHORS } from '../src/mall-world.ts';
 import { corridor, spacePath } from '../src/spatial.ts';
 import { browserOptions } from './browser-options.mjs';
 import { buyAffordable } from './inventory-actions.mjs';
-const out=resolve('test-results');await mkdir(out,{recursive:true});
+import { clickUncoveredCanvas } from './canvas-click.mjs';
+const out=resolve(process.env.BINCOV_PLAY_OUT || 'test-results');await mkdir(out,{recursive:true});
 const report={startedAt:new Date().toISOString(),methodology:'Offline packaged HTML, normal unaccelerated clock and ordinary 25-enemy/60-record mall deployment. Hooks are read-only. Native shopping, item transfers, keyboard movement, firing, healing, E stairs and extraction. Automatic navigation knows the immutable map and visible state; this is not human balance or physical-phone evidence.',samples:[],runs:[],errors:[],requests:[],transitions:[]};
-report.htmlSha256=createHash('sha256').update(await readFile(resolve('dist/index.html'))).digest('hex');report.node=process.version;report.platform=process.platform;
+report.htmlSha256=createHash('sha256').update(await readFile(resolve('dist/index.html'))).digest('hex');report.node=process.version;report.platform=process.platform;report.aimClicks={fired:0,occluded:0};
 const browser=await chromium.launch(browserOptions);report.browser=browser.version();const ctx=await browser.newContext({viewport:{width:1280,height:720},offline:true});const page=await ctx.newPage();page.setDefaultTimeout(15000);page.on('pageerror',e=>report.errors.push(e.stack??e.message));ctx.on('request',r=>{if(/^https?:/.test(r.url()))report.requests.push(r.url());});
 await page.addInitScript(()=>{window.__layerFrames=[];let previous=performance.now();function frame(now){if(window.__bincov?.app.state==='run'&&!window.__bincov.app.overlay)window.__layerFrames.push(now-previous);previous=now;requestAnimationFrame(frame);}requestAnimationFrame(frame);});
 const act=(name,id)=>page.locator(`[data-action="${name}"]${id?`[data-id="${id}"]`:''}`);const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
@@ -21,7 +22,7 @@ async function info(){return page.evaluate(()=>{const a=window.__bincov.app,r=a.
 async function deploy(){
  await act('tab','arms').click();await buyAffordable(page,'ammo9',3);await act('tab','med').click();await buyAffordable(page,'medkit');await act('tab','gear').click();
  for(let i=0;i<20;i++){const items=page.locator('[data-source="stash"][data-uid]');const choices=await items.evaluateAll(elements=>elements.filter(el=>/9毫米|绷带|急救|净水|罐头/.test(el.getAttribute('aria-label')??el.textContent??'')).map(el=>el.dataset.uid));if(!choices.length)break;await page.locator(`[data-source="stash"][data-uid="${choices[0]}"]`).dblclick();if((await items.evaluateAll(es=>es.map(e=>e.dataset.uid))).includes(choices[0]))break;}
- await page.locator('#run-world').selectOption('mall');await page.locator('#seed').fill('41');await act('deploy').click();await page.waitForFunction(()=>window.__bincov.app.raid?.player?.active);phase=0;lastSample=-60;lastMap='mall-f1';lastPosition=null;stuck=0;lastObserved=0;runStarted=Date.now();runNo++;console.log('MALL run',runNo);
+ await page.locator('#run-world').selectOption('mall');await page.locator('#seed').fill('41');await act('deploy').click();await page.waitForFunction(()=>!!window.__bincov.app.raid?.player?.active);phase=0;lastSample=-60;lastMap='mall-f1';lastPosition=null;stuck=0;lastObserved=0;runStarted=Date.now();runNo++;console.log('MALL run',runNo);
 }
 function route(s){
  if(phase===0)return{map:'mall-f1',at:MALL_WORLD.maps['mall-f1'].entries.find(e=>e.id==='S-N-up').at,entry:'S-N-up'};
@@ -33,7 +34,7 @@ function route(s){
  return{map:'mall-f1',at:[...s.exits].sort((a,b)=>distance(a,s)-distance(b,s))[0],extract:true};
 }
 try{
- await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1');await act('enter').click();
+ await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1&entry=tabs');await act('enter').click();
  while(report.runs.length<3){
   const s=await info();assert.deepEqual(report.errors,[]);assert.deepEqual(report.requests,[]);
   if(s.state==='hideout'){await deploy();continue;}
@@ -52,7 +53,7 @@ try{
   if(Date.now()-lastHeal>1500&&s.medical&&(s.hp<75||s.bleeding)){await page.keyboard.press('q');lastHeal=Date.now();}
   if(!s.mag&&s.ammo&&!s.reload)await page.keyboard.press('r');
   const enemy=s.enemies.filter(e=>distance(e,s)<400&&corridor(context,s,e,'sight')).sort((a,b)=>distance(a,s)-distance(b,s))[0];
-  if(enemy&&s.mag&&!s.reload&&s.cooldown<=0){const x=s.camera.x+(enemy.x-s.camera.scrollX)*s.camera.scale,y=s.camera.y+(enemy.y-s.camera.scrollY)*s.camera.scale;if(x>0&&x<1280&&y>0&&y<720)await page.mouse.click(x,y,{delay:20});}
+  if(enemy&&s.mag&&!s.reload&&s.cooldown<=0){const x=s.camera.x+(enemy.x-s.camera.scrollX)*s.camera.scale,y=s.camera.y+(enemy.y-s.camera.scrollY)*s.camera.scale;if(x>0&&x<1280&&y>0&&y<720){const clicked=await clickUncoveredCanvas(page,x,y,{delay:20});report.aimClicks[clicked?'fired':'occluded']++;}}
   let goal=route(s);
   if(s.hp<25&&!s.medical){phase=4;goal={map:s.map,at:s.map==='mall-f2'?MALL_WORLD.maps['mall-f2'].entries.find(e=>e.id==='S-E-down').at:[...s.exits].sort((a,b)=>distance(a,s)-distance(b,s))[0],entry:s.map==='mall-f2'?'S-E-down':undefined,extract:s.map==='mall-f1'};}
   if(distance(goal.at,s)<(goal.entry||goal.extract?36:16)){
@@ -66,5 +67,5 @@ try{
   await keys(set);await page.waitForTimeout(Math.max(16,Math.min(80,distance(next,s)/128*450)));
  }
  assert.ok(report.runs.some(r=>r.realSeconds>=599&&r.lastObservedElapsed>=599&&r.result.outcome==='timeout'),'At least one unaccelerated full 600-second action');assert.equal(report.runs.length,3);assert.ok(report.transitions.some(t=>t.to==='mall-f2'));assert.deepEqual(report.errors,[]);assert.deepEqual(report.requests,[]);report.status='passed';
-}catch(e){report.status='failed';report.failure=e.stack;report.diagnostic=await info().catch(()=>null);console.error(e);process.exitCode=1;}
+}catch(e){report.status='failed';report.failure=e.stack;report.diagnostic=await info().catch(()=>null);await page.screenshot({path:resolve(out,'layered-play-failure.png')}).catch(()=>{});console.error(e);process.exitCode=1;}
 finally{await keys(new Set()).catch(()=>{});report.finishedAt=new Date().toISOString();await writeFile(resolve(out,'layered-play-report.json'),JSON.stringify(report,null,2));await ctx.close();await browser.close();}

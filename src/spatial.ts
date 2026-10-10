@@ -61,6 +61,10 @@ export function inSpace(map: SpaceDefinition, p: Point, radius = 0): boolean {
     return [p.x, p.y, radius].every(Number.isFinite) && radius >= 0
         && p.x - radius >= 0 && p.y - radius >= 0 && p.x + radius < size.width && p.y + radius < size.height;
 }
+/** Checkpoint positions allow escape from high tide, but never permanent obstacles or closed doors. */
+export const checkpointBodyFits = (context: SpaceContext, point: Point) => traversable({ ...context, highTide: false }, point, 'body', 10);
+export const tideFlooded = (cell: Cell, highTide: boolean) => cell === 'tide' && highTide;
+
 export function traversable(context: SpaceContext, point: Point, channel: Channel, radius = 0): boolean {
     const map = context.definition;
     if (!inSpace(map, point, radius)) return false;
@@ -76,7 +80,7 @@ export function traversable(context: SpaceContext, point: Point, channel: Channe
         const cell = map.cells[y]?.[x];
         if (!cell || cell === 'wall') return false;
         if ((channel === 'body' || channel === 'path')
-            && (cell === 'window' || cell === 'low' || (cell === 'tide' && context.highTide))) return false;
+            && (cell === 'window' || cell === 'low' || tideFlooded(cell, context.highTide))) return false;
     }
     return true;
 }

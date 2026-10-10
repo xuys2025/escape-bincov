@@ -1,0 +1,54 @@
+{
+  "at": "2026-10-08T18:35:58.699Z",
+  "testedSource": "14abea379d8f70d98d92178b614cd7361462c6ae",
+  "files": [
+    {
+      "file": "dist/index.html",
+      "bytes": 3204789,
+      "sha256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "baselineSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "equals14abea3": true,
+      "gitBlob": "7618961f763bce0f98671bc97939c80a1e2a903a"
+    },
+    {
+      "file": "start the game.html",
+      "bytes": 3204789,
+      "sha256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "baselineSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+      "equals14abea3": true,
+      "gitBlob": "7618961f763bce0f98671bc97939c80a1e2a903a"
+    },
+    {
+      "file": "城中村试玩.html",
+      "bytes": 1185,
+      "sha256": "9fee91e2d91f97c63ca1b54ce903c4111bb989c404a445c43e72fe7b1dd7f52c",
+      "baselineSHA256": "9fee91e2d91f97c63ca1b54ce903c4111bb989c404a445c43e72fe7b1dd7f52c",
+      "equals14abea3": true,
+      "gitBlob": "4d9278e37fb7e3074d50b83fa7f79901e6f8bac7"
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "bytes": 1085528,
+      "sha256": "3e53611a3744e72bca32c02c08b63845d6248826578d5480203b0dfd0f440bfb",
+      "baselineSHA256": "3e53611a3744e72bca32c02c08b63845d6248826578d5480203b0dfd0f440bfb",
+      "equals14abea3": true,
+      "gitBlob": "d4aa1d4b3ed8babac5a56d619f830adf91a9a947"
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "bytes": 1089303,
+      "sha256": "c2d99c0a7addeb000bead9d76a496bc6065703c53323219f7bdfcec66337ae59",
+      "baselineSHA256": "c2d99c0a7addeb000bead9d76a496bc6065703c53323219f7bdfcec66337ae59",
+      "equals14abea3": true,
+      "gitBlob": "d2a995dd02a870b7d5e9ef261acbd26e481d60cb"
+    },
+    {
+      "file": "docs/release-manifest.json",
+      "bytes": 747,
+      "sha256": "30a1962b7963c1ea1a809a7be965cf2cac498d43357ea4cc2d55e296e99763d6",
+      "baselineSHA256": "30a1962b7963c1ea1a809a7be965cf2cac498d43357ea4cc2d55e296e99763d6",
+      "equals14abea3": true,
+      "gitBlob": "d4ea45d31f4f6bee27464ddc6a8e7f723a071b28"
+    }
+  ]
+}

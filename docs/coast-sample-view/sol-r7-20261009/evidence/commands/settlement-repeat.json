@@ -1,0 +1,18 @@
+[
+  {
+    "id": "settlement-repeat",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/sol-r7-settlement.mjs"
+    ],
+    "environment": {
+      "BINCOV_R7_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/settlement-repeat"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T06:48:20.361Z",
+    "finished": "2026-10-09T06:51:04.267Z",
+    "exitCode": 4294967295,
+    "signal": null
+  }
+]

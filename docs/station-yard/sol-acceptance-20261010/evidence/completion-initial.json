@@ -1,0 +1,27 @@
+[
+  {
+    "name": "station-complete",
+    "exit": 1,
+    "expectedExit": 0,
+    "started": "2026-10-10T03:38:36.2985631+08:00",
+    "finished": "2026-10-10T03:46:22.9719288+08:00"
+  },
+  {
+    "name": "negative-controls",
+    "exit": 0,
+    "expectedExit": 0,
+    "finished": "2026-10-10T03:46:23.0791310+08:00"
+  },
+  {
+    "name": "negative-frame",
+    "exit": 1,
+    "expectedExit": 1,
+    "finished": "2026-10-10T03:46:28.6199417+08:00"
+  },
+  {
+    "name": "negative-storage",
+    "exit": 1,
+    "expectedExit": 1,
+    "finished": "2026-10-10T03:46:33.8491062+08:00"
+  }
+]

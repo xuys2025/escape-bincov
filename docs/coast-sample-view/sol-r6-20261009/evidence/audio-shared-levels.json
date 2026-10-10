@@ -1,0 +1,114 @@
+{
+  "startedAt": "2026-10-08T18:31:37.369Z",
+  "node": "v24.19.0",
+  "method": "Same shared SynthAudio source from current/main compiled in isolated browser. Four original public cues after real click/resume; no autoplay override. Seeded noise, native destination output. Service-level volume comparison (not four Phaser gameplay triggers). Separate detached negative control mutes death() only; original audio gate/assertions unchanged.",
+  "formalSHA256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+  "negativeControl": {
+    "htmlSHA256": "010996534aebd39d45b53355f6c62c74fb9fe3cc3d56bcda2ee9b06fcaf4c656",
+    "change": "death(): void { this.tone(170, 1.5, 0.18, 'triangle', 24); this.hiss(0.8, 0.22, 100); } -> death(): void {}",
+    "sourceSHA256": "697f6fde9bca2158d9b2ab4b71a5750e70f1b29630ac555153e4496bdb16431c"
+  },
+  "sources": {
+    "current": "697f6fde9bca2158d9b2ab4b71a5750e70f1b29630ac555153e4496bdb16431c",
+    "main": "250c1c6d52e80abda8b16f0614a24cb7cfad5ee1c955191ea2dc1da897e013be"
+  },
+  "runs": [
+    {
+      "build": "main",
+      "cue": "shot",
+      "cuePeak": 0.24954535067081451,
+      "ambiencePeak": 0.055655110627412796,
+      "blocks": 137,
+      "rms": 0.01762109063174543
+    },
+    {
+      "build": "main",
+      "cue": "hit",
+      "cuePeak": 0.2222997397184372,
+      "ambiencePeak": 0.055655110627412796,
+      "blocks": 141,
+      "rms": 0.01655026178870384
+    },
+    {
+      "build": "main",
+      "cue": "pickup",
+      "cuePeak": 0.05687984824180603,
+      "ambiencePeak": 0.055655110627412796,
+      "blocks": 140,
+      "rms": 0.014756697334024259
+    },
+    {
+      "build": "main",
+      "cue": "extract",
+      "cuePeak": 0.06130829080939293,
+      "ambiencePeak": 0.055655110627412796,
+      "blocks": 138,
+      "rms": 0.015696502045739497
+    },
+    {
+      "build": "current",
+      "cue": "shot",
+      "cuePeak": 0.26105669140815735,
+      "ambiencePeak": 0.055655110627412796,
+      "blocks": 132,
+      "rms": 0.017550309935096382
+    },
+    {
+      "build": "current",
+      "cue": "hit",
+      "cuePeak": 0.2222997397184372,
+      "ambiencePeak": 0.055655110627412796,
+      "blocks": 136,
+      "rms": 0.016607577504424702
+    },
+    {
+      "build": "current",
+      "cue": "pickup",
+      "cuePeak": 0.05687984824180603,
+      "ambiencePeak": 0.055655110627412796,
+      "blocks": 134,
+      "rms": 0.014767776253295634
+    },
+    {
+      "build": "current",
+      "cue": "extract",
+      "cuePeak": 0.06666126847267151,
+      "ambiencePeak": 0.055655110627412796,
+      "blocks": 139,
+      "rms": 0.015920717228447727
+    }
+  ],
+  "errors": [],
+  "browser": "154.0.8037.98",
+  "comparison": [
+    {
+      "cue": "shot",
+      "main": 0.24954535067081451,
+      "current": 0.26105669140815735,
+      "ratio": 1.0461292534859843,
+      "status": "passed"
+    },
+    {
+      "cue": "hit",
+      "main": 0.2222997397184372,
+      "current": 0.2222997397184372,
+      "ratio": 1,
+      "status": "passed"
+    },
+    {
+      "cue": "pickup",
+      "main": 0.05687984824180603,
+      "current": 0.05687984824180603,
+      "ratio": 1,
+      "status": "passed"
+    },
+    {
+      "cue": "extract",
+      "main": 0.06130829080939293,
+      "current": 0.06666126847267151,
+      "ratio": 1.0873124595810533,
+      "status": "passed"
+    }
+  ],
+  "finishedAt": "2026-10-08T18:32:03.720Z"
+}

@@ -1,0 +1,84 @@
+{
+  "productBaseline": "ee093814322a570fdebc73945d5501fee9470639",
+  "branch": "agent/hideout-runtime",
+  "node": "v24.19.0",
+  "capturedAt": "2026-10-10T03:47:33.768Z",
+  "scope": "Frozen inputs for final station-complete and ordinary entry runs; earlier exploratory runs used documented earlier test revisions.",
+  "records": [
+    {
+      "path": "scripts/station-browser-test.mjs",
+      "bytes": 78696,
+      "sha256": "b4bf1e00670b4d5cc208b7138802d06d3f8e7ec7f981fdd01c5c19b24907b31e"
+    },
+    {
+      "path": "scripts/station-acceptance-gates.mjs",
+      "bytes": 3635,
+      "sha256": "64180cd5a495bbbff989b49a46677b166d2728cdd9f924162c21146decf13d2b"
+    },
+    {
+      "path": "scripts/station-acceptance-negative.mjs",
+      "bytes": 3705,
+      "sha256": "32326a96d50fdfc95047af6c9b62850e30e8203bf43ca5a36339ff24d3122b3f"
+    },
+    {
+      "path": "scripts/station-ordinary-acceptance.mjs",
+      "bytes": 4468,
+      "sha256": "20b50f9345d5faa9ef04dd935ac0b7b9d9c142c1da0152070aa6e65dcbe1e3b7"
+    },
+    {
+      "path": "scripts/title-review.mjs",
+      "bytes": 28186,
+      "sha256": "e39e81fb0ba23e5adc8763153c81328b572a0eb6b0f1f1c900e53b2e4953cabc"
+    },
+    {
+      "path": "scripts/pixi-managed-gate.mjs",
+      "bytes": 3522,
+      "sha256": "0cae5c0da7e22208651c46e249be633c8cca0fcfa28af32be9a0eaf516ea973a"
+    },
+    {
+      "path": "scripts/browser-options.mjs",
+      "bytes": 754,
+      "sha256": "a98676bd9f6e381578a34e94ec72feca2e081bc4445120e88ff61eb7031d84a7"
+    },
+    {
+      "path": "scripts/yard-entry.mjs",
+      "bytes": 1661,
+      "sha256": "0001c2b57752c5abbf22815723012960c0a7a3c141e708add48bbae57f5f74e0"
+    },
+    {
+      "path": "assets/station/manifest.json",
+      "bytes": 29301,
+      "sha256": "adbc149648d391a7f2fff8f6a1fc056c544c624938505162ed965629d8085421"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "bytes": 21304,
+      "sha256": "c55c7c2230c9b701029e42fb471053c506352f1640c30fbad43cdb216db82dde"
+    },
+    {
+      "path": "package.json",
+      "bytes": 2444,
+      "sha256": "c8f70222dfe1e3c987d301bf9ef3eaaa11e74074b26d6c395987af9e53493d71"
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 3614559,
+      "sha256": "940a19556bf76ef4d44ed55f76b9f6483d42208f53114d2b090722cd105b7bf3"
+    },
+    {
+      "path": "start the game.html",
+      "bytes": 3614559,
+      "sha256": "940a19556bf76ef4d44ed55f76b9f6483d42208f53114d2b090722cd105b7bf3"
+    },
+    {
+      "path": "release/Escape-Bincov-portable.zip",
+      "bytes": 1289335,
+      "sha256": "ac4dc8ae62c5b652e668fe9fb5de1e5fbcd2dba80f1630a407a98362f1660771"
+    },
+    {
+      "path": "release/Escape-Bincov-web.zip",
+      "bytes": 1285560,
+      "sha256": "00ef0224fc462042c835b7715cce29a6ebbfedce83320a5ff794e4c71d22fc5d"
+    }
+  ]
+}

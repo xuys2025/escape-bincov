@@ -120,7 +120,7 @@ async function suite(viewport) {
     }, { x, y }); await page.mouse.move(p.x, p.y); await page.waitForTimeout(90);
   }
   try {
-    await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1'); await action('enter').click(); await deploy();
+    await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs'); await action('enter').click(); await deploy();
     await step('25 enemies and original 60 loot entries remain conserved', async () => {
       const c = await page.evaluate(() => {
         const r = window.__bincov.app.raid, total = items => items.reduce((sum, i) => sum + i.qty, 0);
@@ -326,7 +326,7 @@ async function suite(viewport) {
       assert.ok(before.context);
       const other = await context.newPage();
       try {
-        await other.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1');
+        await other.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs');
         await other.waitForFunction(() => window.__bincov);
         assert.equal(await other.evaluate(() => window.__bincov.app.storageOK), false, 'The second game page cannot take ownership');
         assert.deepEqual((await snapshot()).context, before.context, 'Loot stays open until the real storage event');
@@ -395,7 +395,7 @@ async function mobileSuite() {
     await grid.tap({ position: { x: (x + .4) * Number(cell), y: (y + .4) * Number(cell) } });
   };
   try {
-    await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1');
+    await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs');
     await action('enter').tap(); await page.locator('#seed').fill('42'); await action('deploy').tap();
     await page.waitForFunction(() => window.__bincov?.app.raid?.containers.length);
     const id = await page.evaluate(() => {
@@ -444,7 +444,7 @@ async function legacySuite(file) {
     context = await browser.newContext({ viewport: { width: 1280, height: 720 }, offline: true });
     if (bytes) await context.addInitScript(({ key, bytes }) => { localStorage.setItem(key, bytes); }, { key: SAVE_KEY, bytes });
     page = await context.newPage(); page.on('pageerror', error => record.errors.push(error.message));
-    await page.goto(pathToFileURL(resolve(path)).href + '?test=1');
+    await page.goto(pathToFileURL(resolve(path)).href + '?test=1&entry=tabs');
   };
   const action = name => page.locator('[data-action="' + name + '"]');
   const step = { name: 'actual old main restores loose loot once; old HTML refuses the container world without overwrite', status: 'running' }; record.steps.push(step);

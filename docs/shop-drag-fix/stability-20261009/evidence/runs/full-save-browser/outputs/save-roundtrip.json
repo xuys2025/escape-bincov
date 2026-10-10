@@ -1,0 +1,82 @@
+{
+  "format": "escape-bincov-backup",
+  "formatVersion": 2,
+  "createdAt": "2026-10-09T14:25:38.510Z",
+  "save": {
+    "version": 2,
+    "cash": 3270,
+    "stash": {
+      "w": 10,
+      "h": 9,
+      "items": [
+        {
+          "uid": "bc-mv125c8g-9",
+          "id": "medkit",
+          "qty": 1,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "uid": "bc-mv125c8g-a",
+          "id": "ammo9",
+          "qty": 36,
+          "x": 2,
+          "y": 0
+        }
+      ]
+    },
+    "bag": {
+      "w": 6,
+      "h": 5,
+      "items": [
+        {
+          "uid": "bc-mv125c8g-6",
+          "id": "ammo9",
+          "qty": 32,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "uid": "bc-mv125c8g-7",
+          "id": "bandage",
+          "qty": 2,
+          "x": 1,
+          "y": 0
+        },
+        {
+          "uid": "bc-mv125c8g-8",
+          "id": "water",
+          "qty": 1,
+          "x": 2,
+          "y": 0
+        }
+      ]
+    },
+    "safe": {
+      "w": 2,
+      "h": 2,
+      "items": []
+    },
+    "equipment": {
+      "weapon": "pistol",
+      "relief": false,
+      "ammo": 0,
+      "ammoRelief": 0
+    },
+    "quests": {
+      "repair": true,
+      "sample": true,
+      "ledger": true
+    },
+    "upgraded": true,
+    "settings": {
+      "volume": 0.35
+    },
+    "stats": {
+      "runs": 0,
+      "extracts": 0,
+      "kills": 0
+    },
+    "activeRun": null
+  }
+}

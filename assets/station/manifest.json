@@ -1,0 +1,1049 @@
+{
+  "schema": 1,
+  "revision": 2,
+  "status": "Xu four-frame identity replacement; in-prototype confirmation pending",
+  "assets": [
+    {
+      "id": "station-npc-xu-s-idle-f0-v1",
+      "file": "assets/station/v1/station-npc-xu-s-idle-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "idle",
+      "frameIndex": 0,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/xu-head-imagegen-original.png",
+      "sourceRect": null,
+      "exportMethod": "Shared generated12x13 head at[10,8] and generated5x3 pen tile at[18,21]; idle f1 offset1px; R1 body/feet retained outside edit areas",
+      "sha256": "6dd36af25f9b263e80cc0a7e9a947a5cccea4ac437ae1ceccf521d6ece4b19d8",
+      "revision": 2,
+      "release": "R1.1",
+      "replacesSha256": "1b4dbab2c6a21d52ba8b880d88ff4427b0374ceac7ae8c0c942b26f61ed63b83",
+      "identityHead": "source/canonical-head-12x13.png",
+      "identityHeadPosition": [
+        10,
+        8
+      ],
+      "penTile": "source/canonical-three-pens-5x3.png",
+      "penTilePosition": [
+        18,
+        21
+      ],
+      "sourceInputs": [
+        "source/xu-head-imagegen-original.png",
+        "source/xu-canonical-imagegen-original.png",
+        "source/r1-station-npc-xu-s-idle-f0-v1.png"
+      ],
+      "derivedFrom": {
+        "release": "R1",
+        "file": "assets/station/v1/station-npc-xu-s-idle-f0-v1.png",
+        "sha256": "1b4dbab2c6a21d52ba8b880d88ff4427b0374ceac7ae8c0c942b26f61ed63b83"
+      }
+    },
+    {
+      "id": "station-npc-xu-s-idle-f1-v1",
+      "file": "assets/station/v1/station-npc-xu-s-idle-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "idle",
+      "frameIndex": 1,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/xu-head-imagegen-original.png",
+      "sourceRect": null,
+      "exportMethod": "Shared generated12x13 head at[10,8] and generated5x3 pen tile at[18,21]; idle f1 offset1px; R1 body/feet retained outside edit areas",
+      "sha256": "0a0eec12d21d7cb3468e6b73077553ebf9dfa9394a0e423c8bb1bbb60ce13aac",
+      "revision": 2,
+      "release": "R1.1",
+      "replacesSha256": "d316881eaeea2c68c38bc91319c992ce646cd063aecc75404f9a69019ed5cce9",
+      "identityHead": "source/canonical-head-12x13.png",
+      "identityHeadPosition": [
+        10,
+        9
+      ],
+      "penTile": "source/canonical-three-pens-5x3.png",
+      "penTilePosition": [
+        18,
+        22
+      ],
+      "sourceInputs": [
+        "source/xu-head-imagegen-original.png",
+        "source/xu-canonical-imagegen-original.png",
+        "source/r1-station-npc-xu-s-idle-f1-v1.png"
+      ],
+      "derivedFrom": {
+        "release": "R1",
+        "file": "assets/station/v1/station-npc-xu-s-idle-f1-v1.png",
+        "sha256": "d316881eaeea2c68c38bc91319c992ce646cd063aecc75404f9a69019ed5cce9"
+      }
+    },
+    {
+      "id": "station-npc-xu-s-talk-f0-v1",
+      "file": "assets/station/v1/station-npc-xu-s-talk-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "talk",
+      "frameIndex": 0,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/xu-head-imagegen-original.png",
+      "sourceRect": null,
+      "exportMethod": "Shared generated12x13 head at[10,8] and generated5x3 pen tile at[18,21]; idle f1 offset1px; R1 body/feet retained outside edit areas",
+      "sha256": "d4f47efaecf8e26743d78745aa49a5ed5a0e2bcf47d94c803988255a8c9a4a32",
+      "revision": 2,
+      "release": "R1.1",
+      "replacesSha256": "fd29d46b198ec267dacc3291e85da1f4ba3472739a4f4b753e27df50d3cb73ea",
+      "identityHead": "source/canonical-head-12x13.png",
+      "identityHeadPosition": [
+        10,
+        8
+      ],
+      "penTile": "source/canonical-three-pens-5x3.png",
+      "penTilePosition": [
+        18,
+        21
+      ],
+      "sourceInputs": [
+        "source/xu-head-imagegen-original.png",
+        "source/xu-canonical-imagegen-original.png",
+        "source/r1-station-npc-xu-s-talk-f0-v1.png"
+      ],
+      "derivedFrom": {
+        "release": "R1",
+        "file": "assets/station/v1/station-npc-xu-s-talk-f0-v1.png",
+        "sha256": "fd29d46b198ec267dacc3291e85da1f4ba3472739a4f4b753e27df50d3cb73ea"
+      }
+    },
+    {
+      "id": "station-npc-xu-s-talk-f1-v1",
+      "file": "assets/station/v1/station-npc-xu-s-talk-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "talk",
+      "frameIndex": 1,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/xu-head-imagegen-original.png",
+      "sourceRect": null,
+      "exportMethod": "Shared generated12x13 head at[10,8] and generated5x3 pen tile at[18,21]; idle f1 offset1px; R1 body/feet retained outside edit areas",
+      "sha256": "2dd3df0908ea279bcf13cab62b8e9dc9d3277c62c86a694f3d7e9e979e4f74f3",
+      "revision": 2,
+      "release": "R1.1",
+      "replacesSha256": "feaa1608599a413810db032c4d531d2fa76abf635fb54a7cf71d0bed8a021201",
+      "identityHead": "source/canonical-head-12x13.png",
+      "identityHeadPosition": [
+        10,
+        8
+      ],
+      "penTile": "source/canonical-three-pens-5x3.png",
+      "penTilePosition": [
+        18,
+        21
+      ],
+      "sourceInputs": [
+        "source/xu-head-imagegen-original.png",
+        "source/xu-canonical-imagegen-original.png",
+        "source/r1-station-npc-xu-s-talk-f1-v1.png"
+      ],
+      "derivedFrom": {
+        "release": "R1",
+        "file": "assets/station/v1/station-npc-xu-s-talk-f1-v1.png",
+        "sha256": "feaa1608599a413810db032c4d531d2fa76abf635fb54a7cf71d0bed8a021201"
+      }
+    },
+    {
+      "id": "station-npc-shuan-s-idle-f0-v1",
+      "file": "assets/station/v1/station-npc-shuan-s-idle-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "idle",
+      "frameIndex": 0,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-shuan-master-v1.png",
+      "sourceRect": [
+        102,
+        94,
+        265,
+        517
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "7109ff69271f7d0ee544634cd7f20f33a5ceabbd8e6c5fbcea0ba6c2985fc6d3",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-shuan-s-idle-f1-v1",
+      "file": "assets/station/v1/station-npc-shuan-s-idle-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "idle",
+      "frameIndex": 1,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-shuan-master-v1.png",
+      "sourceRect": null,
+      "exportMethod": "idle f0 upper body shifted down 1px, fixed boots; source f1 candidate retained in original sheet",
+      "sha256": "b632c0fe58eba7f40020222c898d4181604e54fa79e2a59a0c11332a0447d965",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-shuan-s-talk-f0-v1",
+      "file": "assets/station/v1/station-npc-shuan-s-talk-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "talk",
+      "frameIndex": 0,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-shuan-master-v1.png",
+      "sourceRect": [
+        886,
+        93,
+        282,
+        518
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "83a45915adbc09ff6777c6bd912ae6763c595febc8ad5d7fc62c5574cc54f26a",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-shuan-s-talk-f1-v1",
+      "file": "assets/station/v1/station-npc-shuan-s-talk-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "talk",
+      "frameIndex": 1,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-shuan-master-v1.png",
+      "sourceRect": [
+        102,
+        668,
+        305,
+        517
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "a93f20a8f770f88fd09d5098358a7fbc0934e500b25b1114eb1f771ce505a7a4",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-shuan-n-work-f0-v1",
+      "file": "assets/station/v1/station-npc-shuan-n-work-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "N",
+      "pose": "work",
+      "frameIndex": 0,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-shuan-master-v1.png",
+      "sourceRect": [
+        510,
+        681,
+        269,
+        504
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "abc125d2277ce76731eefddb2a3723305f591b5c593bf13b00cfcd65c196a9a2",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-shuan-n-work-f1-v1",
+      "file": "assets/station/v1/station-npc-shuan-n-work-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "N",
+      "pose": "work",
+      "frameIndex": 1,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-shuan-master-v1.png",
+      "sourceRect": [
+        905,
+        682,
+        263,
+        503
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "b45cf185fb11eef2a3daf5297fc2f0af4a8a13b8cbb438e6fece76de9cace616",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-cai-s-idle-f0-v1",
+      "file": "assets/station/v1/station-npc-cai-s-idle-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "idle",
+      "frameIndex": 0,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-cai-master-v1.png",
+      "sourceRect": [
+        52,
+        120,
+        244,
+        626
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "d4e970a20fdac91bf84bbcd8cd3f797abbb2288e9a9428c0f8bb526e4e9ebe8b",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-cai-s-idle-f1-v1",
+      "file": "assets/station/v1/station-npc-cai-s-idle-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "idle",
+      "frameIndex": 1,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-cai-master-v1.png",
+      "sourceRect": null,
+      "exportMethod": "idle f0 upper body shifted down 1px, fixed boots; source f1 candidate retained in original sheet",
+      "sha256": "7c01ca5d63fdd892db8cf95d1a450dbb5beac0221a1adbf5c9387e78337dd54a",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-cai-s-talk-f0-v1",
+      "file": "assets/station/v1/station-npc-cai-s-talk-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "talk",
+      "frameIndex": 0,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-cai-master-v1.png",
+      "sourceRect": [
+        728,
+        120,
+        245,
+        626
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "e4f9b89bc917f162a9adca4100e59586984edc92eeafc01fc0f3a493a8c8c18e",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-cai-s-talk-f1-v1",
+      "file": "assets/station/v1/station-npc-cai-s-talk-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "talk",
+      "frameIndex": 1,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-cai-master-v1.png",
+      "sourceRect": [
+        52,
+        831,
+        281,
+        624
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "10838cad8808e4e41cd846318c50974b0fcc8bda7097041d2aaeed2dbf886898",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-cai-n-work-f0-v1",
+      "file": "assets/station/v1/station-npc-cai-n-work-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "N",
+      "pose": "work",
+      "frameIndex": 0,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-cai-master-v1.png",
+      "sourceRect": [
+        401,
+        844,
+        244,
+        611
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "e1b9a456581b53bde800e6bcda2d8a7ad6340b77d7cc646ffa58eabac4996213",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-cai-n-work-f1-v1",
+      "file": "assets/station/v1/station-npc-cai-n-work-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "N",
+      "pose": "work",
+      "frameIndex": 1,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-cai-master-v1.png",
+      "sourceRect": [
+        750,
+        845,
+        246,
+        610
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "cb8f7b7587bd2030c3829dda6495c0b632e2eed47de664414f3e8946bfc05c52",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-cook-s-idle-f0-v1",
+      "file": "assets/station/v1/station-npc-cook-s-idle-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "idle",
+      "frameIndex": 0,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-cook-master-v1.png",
+      "sourceRect": [
+        139,
+        118,
+        209,
+        509
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "77efab11185d1723087ccc81423d63b237dc05c90a78b5c85ce2fd886acf00d1",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-cook-s-idle-f1-v1",
+      "file": "assets/station/v1/station-npc-cook-s-idle-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "idle",
+      "frameIndex": 1,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-cook-master-v1.png",
+      "sourceRect": null,
+      "exportMethod": "idle f0 upper body shifted down 1px, fixed boots; source f1 candidate retained in original sheet",
+      "sha256": "e23e6a8bc3a10871504767b689820be43642ff3d7529618f313384d4faeced0d",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-cook-s-talk-f0-v1",
+      "file": "assets/station/v1/station-npc-cook-s-talk-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "talk",
+      "frameIndex": 0,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-cook-master-v1.png",
+      "sourceRect": [
+        900,
+        119,
+        216,
+        508
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "cb3979f082149781d49fbc8ed898523cf38b922f49d9aba12f3cf7316ab67e80",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-cook-s-talk-f1-v1",
+      "file": "assets/station/v1/station-npc-cook-s-talk-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "S",
+      "pose": "talk",
+      "frameIndex": 1,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-cook-master-v1.png",
+      "sourceRect": [
+        136,
+        683,
+        250,
+        499
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "3462cc462460cdbcd0486821a4b8373544e974febe6ef1b4cee28f8b1cff5e2e",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-cook-n-work-f0-v1",
+      "file": "assets/station/v1/station-npc-cook-n-work-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "N",
+      "pose": "work",
+      "frameIndex": 0,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-cook-master-v1.png",
+      "sourceRect": [
+        521,
+        689,
+        224,
+        494
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "0ec2b157ee62cd1dff531f11670bf6749cf6e8822e49b1127eccf42472e07454",
+      "revision": 1
+    },
+    {
+      "id": "station-npc-cook-n-work-f1-v1",
+      "file": "assets/station/v1/station-npc-cook-n-work-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "kind": "npc",
+      "dir": "N",
+      "pose": "work",
+      "frameIndex": 1,
+      "anchor": [
+        16,
+        47
+      ],
+      "frames": 2,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-npc-cook-master-v1.png",
+      "sourceRect": [
+        894,
+        692,
+        227,
+        491
+      ],
+      "exportMethod": "largest alpha>=128 connected figure bounds per cell; nearest 40px height; fixed foot placement; binary alpha",
+      "sha256": "0cede8f1a52ac66c7f455ce68fef4450a028d9fbeb0aa8013db6ad0179b8d103",
+      "revision": 1
+    },
+    {
+      "id": "station-prop-counter-v1",
+      "file": "assets/station/v1/station-prop-counter-v1.png",
+      "w": 128,
+      "h": 54,
+      "kind": "prop",
+      "footprint": [
+        4,
+        1
+      ],
+      "lift": 22,
+      "anchor": [
+        0,
+        54
+      ],
+      "frames": 1,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-prop-counter-master-v1.png",
+      "sourceRect": [
+        111,
+        130,
+        1709,
+        551
+      ],
+      "exportMethod": "main connected alpha bounds; nearest fit to specified world canvas (axis scaling); binary alpha; vertical surface/front plane mapping 30 -> 32 (table/clinic/radio/stove front 22/18/18/18px; pool south rim6px)",
+      "sha256": "272f2ba9c635e631c6fc7689405095929d19ed937984352e7132f8fd36a9422b",
+      "revision": 1
+    },
+    {
+      "id": "station-prop-desk-v1",
+      "file": "assets/station/v1/station-prop-desk-v1.png",
+      "w": 64,
+      "h": 52,
+      "kind": "prop",
+      "footprint": [
+        2,
+        1
+      ],
+      "lift": 20,
+      "anchor": [
+        0,
+        52
+      ],
+      "frames": 1,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-prop-desk-master-v1.png",
+      "sourceRect": [
+        84,
+        258,
+        1225,
+        750
+      ],
+      "exportMethod": "main connected alpha bounds; nearest fit to specified world canvas (axis scaling); binary alpha; vertical surface/front plane mapping 26 -> 34 (table/clinic/radio/stove front 22/18/18/18px; pool south rim6px)",
+      "sha256": "327d4057c062a691b212b83cd048ee826244ff9c0e9065d3d3f44d5011919589",
+      "revision": 1
+    },
+    {
+      "id": "station-prop-radio-desk-v1",
+      "file": "assets/station/v1/station-prop-radio-desk-v1.png",
+      "w": 96,
+      "h": 70,
+      "kind": "prop",
+      "footprint": [
+        3,
+        1
+      ],
+      "lift": 38,
+      "anchor": [
+        0,
+        70
+      ],
+      "frames": 1,
+      "variant": null,
+      "emit": "station-prop-radio-desk-emit-v1",
+      "source": "source/originals/station-prop-radio-desk-master-v1.png",
+      "sourceRect": [
+        104,
+        175,
+        1262,
+        727
+      ],
+      "exportMethod": "main connected alpha bounds; nearest fit to specified world canvas (axis scaling); binary alpha; vertical surface/front plane mapping 45 -> 52 (table/clinic/radio/stove front 22/18/18/18px; pool south rim6px)",
+      "sha256": "972c1627d61a5a103c6a9bce489f3332e38b0864819f8f23b7a390e35cfd6a89",
+      "revision": 1
+    },
+    {
+      "id": "station-prop-generator-stopped-v1",
+      "file": "assets/station/v1/station-prop-generator-stopped-v1.png",
+      "w": 64,
+      "h": 98,
+      "kind": "prop",
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 34,
+      "anchor": [
+        0,
+        98
+      ],
+      "frames": 1,
+      "variant": "stopped",
+      "emit": "station-prop-generator-stopped-emit-v1",
+      "source": "source/originals/station-prop-generator-stopped-master-v1.png",
+      "sourceRect": [
+        80,
+        48,
+        871,
+        1450
+      ],
+      "exportMethod": "main connected alpha bounds; nearest fit to specified world canvas (axis scaling); binary alpha",
+      "sha256": "b8084f1cfc2e3bf32bea9adc450b707e5c8762f0b2b7dcb0bec3db644dd249dc",
+      "revision": 1
+    },
+    {
+      "id": "station-prop-generator-running-v1",
+      "file": "assets/station/v1/station-prop-generator-running-v1.png",
+      "w": 64,
+      "h": 98,
+      "kind": "prop",
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 34,
+      "anchor": [
+        0,
+        98
+      ],
+      "frames": 1,
+      "variant": "running",
+      "emit": "station-prop-generator-running-emit-v1",
+      "source": "source/originals/station-prop-generator-running-master-v1.png",
+      "sourceRect": [
+        80,
+        45,
+        870,
+        1457
+      ],
+      "exportMethod": "main connected alpha bounds; nearest fit to specified world canvas (axis scaling); binary alpha; generated running edit patches composited at [[41,20,12,6],[13,17,9,7],[55,19,8,11]] over stopped export; silhouette and all pixels outside patches locked",
+      "sha256": "be3248dad078571f62a8dc7da4934a84b4530b2265fce0b139a1be4bd000341c",
+      "revision": 1,
+      "derivedFrom": "station-prop-generator-stopped-v1",
+      "patchRects": [
+        [
+          41,
+          20,
+          12,
+          6
+        ],
+        [
+          13,
+          17,
+          9,
+          7
+        ],
+        [
+          55,
+          19,
+          8,
+          11
+        ]
+      ]
+    },
+    {
+      "id": "station-prop-stove-v1",
+      "file": "assets/station/v1/station-prop-stove-v1.png",
+      "w": 96,
+      "h": 62,
+      "kind": "prop",
+      "footprint": [
+        3,
+        1
+      ],
+      "lift": 30,
+      "anchor": [
+        0,
+        62
+      ],
+      "frames": 1,
+      "variant": null,
+      "emit": "station-prop-stove-emit-v1",
+      "source": "source/originals/station-prop-stove-master-v1.png",
+      "sourceRect": [
+        166,
+        188,
+        1229,
+        636
+      ],
+      "exportMethod": "main connected alpha bounds; nearest fit to specified world canvas (axis scaling); binary alpha; vertical surface/front plane mapping 34 -> 44 (table/clinic/radio/stove front 22/18/18/18px; pool south rim6px)",
+      "sha256": "4f66a68ebea2585a13356a58c249d2b8c1660eaf61d8a172cd7f506a485e2e58",
+      "revision": 1
+    },
+    {
+      "id": "station-prop-pool-v1",
+      "file": "assets/station/v1/station-prop-pool-v1.png",
+      "w": 96,
+      "h": 72,
+      "kind": "prop",
+      "footprint": [
+        3,
+        2
+      ],
+      "lift": 8,
+      "anchor": [
+        0,
+        72
+      ],
+      "frames": 1,
+      "variant": null,
+      "emit": null,
+      "source": "source/originals/station-prop-pool-master-v1.png",
+      "sourceRect": [
+        33,
+        197,
+        1383,
+        741
+      ],
+      "exportMethod": "main connected alpha bounds; nearest fit to specified world canvas (axis scaling); binary alpha; vertical surface/front plane mapping 62 -> 66 (table/clinic/radio/stove front 22/18/18/18px; pool south rim6px)",
+      "sha256": "8b5c95d39f8fa4ec3bdfcdc684e989947d61445414a2ab26ae1e44f88af633d0",
+      "revision": 1
+    },
+    {
+      "id": "station-prop-radio-desk-emit-v1",
+      "file": "assets/station/v1/station-prop-radio-desk-emit-v1.png",
+      "w": 96,
+      "h": 70,
+      "kind": "emission",
+      "footprint": [
+        3,
+        1
+      ],
+      "lift": 38,
+      "anchor": [
+        0,
+        70
+      ],
+      "frames": 1,
+      "variant": null,
+      "emit": null,
+      "base": "station-prop-radio-desk-v1",
+      "source": "assets/station/v1/station-prop-radio-desk-v1.png",
+      "maskRegions": [
+        [
+          12,
+          12,
+          10,
+          8
+        ],
+        [
+          12,
+          30,
+          10,
+          9
+        ],
+        [
+          25,
+          13,
+          4,
+          4
+        ],
+        [
+          25,
+          31,
+          4,
+          4
+        ]
+      ],
+      "selection": "all opaque pixels inside inset screen/dial regions",
+      "litPixels": 202,
+      "sha256": "2a96c2daf1895b63f7e6b7a78435c577ba5d75c1e242b6aa60d1ed9f2ba04582",
+      "revision": 1
+    },
+    {
+      "id": "station-prop-generator-stopped-emit-v1",
+      "file": "assets/station/v1/station-prop-generator-stopped-emit-v1.png",
+      "w": 64,
+      "h": 98,
+      "kind": "emission",
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 34,
+      "anchor": [
+        0,
+        98
+      ],
+      "frames": 1,
+      "variant": "stopped",
+      "emit": null,
+      "base": "station-prop-generator-stopped-v1",
+      "source": "assets/station/v1/station-prop-generator-stopped-v1.png",
+      "maskRegions": [
+        [
+          28,
+          40,
+          10,
+          6
+        ]
+      ],
+      "selection": "matte red/green lens color within panel",
+      "litPixels": 7,
+      "sha256": "4e51d4203b8160ae42145a5c4d1cba8b3493c5be4855513c641e6a335c24a69a",
+      "revision": 1
+    },
+    {
+      "id": "station-prop-generator-running-emit-v1",
+      "file": "assets/station/v1/station-prop-generator-running-emit-v1.png",
+      "w": 64,
+      "h": 98,
+      "kind": "emission",
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 34,
+      "anchor": [
+        0,
+        98
+      ],
+      "frames": 1,
+      "variant": "running",
+      "emit": null,
+      "base": "station-prop-generator-running-v1",
+      "source": "assets/station/v1/station-prop-generator-running-v1.png",
+      "maskRegions": [
+        [
+          28,
+          40,
+          10,
+          6
+        ]
+      ],
+      "selection": "matte red/green lens color within panel",
+      "litPixels": 7,
+      "sha256": "4e51d4203b8160ae42145a5c4d1cba8b3493c5be4855513c641e6a335c24a69a",
+      "revision": 1
+    },
+    {
+      "id": "station-prop-stove-emit-v1",
+      "file": "assets/station/v1/station-prop-stove-emit-v1.png",
+      "w": 96,
+      "h": 62,
+      "kind": "emission",
+      "footprint": [
+        3,
+        1
+      ],
+      "lift": 30,
+      "anchor": [
+        0,
+        62
+      ],
+      "frames": 1,
+      "variant": null,
+      "emit": null,
+      "base": "station-prop-stove-v1",
+      "source": "assets/station/v1/station-prop-stove-v1.png",
+      "maskRegions": [
+        [
+          40,
+          51,
+          17,
+          8
+        ]
+      ],
+      "selection": "warm fuel colors only inside firebox",
+      "litPixels": 43,
+      "sha256": "2989892f007861bbaa339c5cd716e5abceda17b10b405bbf3e7195c01bf31f53",
+      "revision": 1
+    }
+  ],
+  "completedAt": "2026-10-09T16:30:28.857Z",
+  "scope": {
+    "npcs": 4,
+    "npcFrames": 22,
+    "propClasses": 6,
+    "propBodies": 7,
+    "emissionMasks": 4,
+    "totalPng": 33
+  },
+  "specification": "02-给GPT-图片规格清单.md section5 first sample batch; 06-产品决策与下一轮计划.md",
+  "release": "R1.1",
+  "basedOn": {
+    "release": "R1",
+    "manifestSha256": "95587d31fd508e99f9ca17a8e8939800efaeb2c96400470e4809bd8c0ca4d11e"
+  },
+  "changedAssetIds": [
+    "station-npc-xu-s-idle-f0-v1",
+    "station-npc-xu-s-idle-f1-v1",
+    "station-npc-xu-s-talk-f0-v1",
+    "station-npc-xu-s-talk-f1-v1"
+  ]
+}

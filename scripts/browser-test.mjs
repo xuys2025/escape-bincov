@@ -12,7 +12,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const out = join(root, 'test-results');
 const smoke = process.argv.includes('--smoke');
 const entry = join(root, 'dist', 'index.html');
-const url = pathToFileURL(entry).href + '?test=1';
+const url = pathToFileURL(entry).href + '?test=1&entry=tabs';
 const SAVE_KEY = 'escape-bincov.session.v2';
 const report = {
   startedAt: new Date().toISOString(), mode: smoke ? 'smoke' : 'full', entry: url,

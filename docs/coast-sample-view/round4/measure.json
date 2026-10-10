@@ -1,0 +1,54 @@
+{
+  "at": "2026-10-08T05:44:15.705Z",
+  "viewport": "1280x720 DPR1",
+  "note": "Local desktop GPU; real Runtime with AI active; present excludes GPU completion; not a phone measurement.",
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "win32",
+    "osRelease": "10.0.19045",
+    "cpu": "12th Gen Intel(R) Core(TM) i5-12400F",
+    "logicalCpus": 12,
+    "ramBytes": 34192441344,
+    "browser": "154.0.8037.98",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+    "dpr": 1,
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3070 (0x00002484) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "vendor": "Google Inc. (NVIDIA)",
+    "memory": 28990674
+  },
+  "frames": 800,
+  "seconds": 5,
+  "frameInterval": {
+    "p50": 6,
+    "p95": 8.4,
+    "p99": 11.4
+  },
+  "runtimeAdvance": {
+    "p50": 2.3,
+    "p95": 3.1,
+    "p99": 5
+  },
+  "viewPresent": {
+    "p50": 1.6,
+    "p95": 3.5,
+    "p99": 7.9
+  },
+  "counts": {
+    "listeners": 27,
+    "tickers": 1,
+    "observers": 1,
+    "timers": 0,
+    "apps": 1,
+    "parked": 0,
+    "views": 1,
+    "renderTextures": 3,
+    "liveViews": 1,
+    "canvases": 2,
+    "sampleRoots": 1,
+    "art": "sol",
+    "atlasPages": 1,
+    "largeTextures": 20,
+    "gpuTextures": 26,
+    "heap": 28278857
+  }
+}

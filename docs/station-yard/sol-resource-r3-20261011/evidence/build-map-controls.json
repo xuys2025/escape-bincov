@@ -1,0 +1,194 @@
+{
+  "at": "2026-10-10T16:49:03.187Z",
+  "mappings": [
+    {
+      "sha256": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+      "idHash": "XT",
+      "QuadGeometry": "Ep",
+      "Buffer": "Fi",
+      "CanvasSource": "xe",
+      "TextureSource": "gb",
+      "Texture": "ft",
+      "RenderTexture": "c",
+      "HideoutScene": "rm"
+    },
+    {
+      "sha256": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+      "idHash": "jT",
+      "QuadGeometry": "wp",
+      "Buffer": "Di",
+      "CanvasSource": "xe",
+      "TextureSource": "Tb",
+      "Texture": "ft",
+      "RenderTexture": "f",
+      "HideoutScene": "am"
+    }
+  ],
+  "declarations": [
+    {
+      "sha256": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+      "rows": [
+        {
+          "role": "idHash",
+          "name": "XT",
+          "classDeclarations": 0,
+          "markerDerived": true
+        },
+        {
+          "role": "QuadGeometry",
+          "name": "Ep",
+          "classDeclarations": 1,
+          "markerDerived": true
+        },
+        {
+          "role": "Buffer",
+          "name": "Fi",
+          "classDeclarations": 1,
+          "markerDerived": true
+        },
+        {
+          "role": "CanvasSource",
+          "name": "xe",
+          "classDeclarations": 1,
+          "markerDerived": true
+        },
+        {
+          "role": "TextureSource",
+          "name": "gb",
+          "classDeclarations": 1,
+          "markerDerived": true
+        },
+        {
+          "role": "Texture",
+          "name": "ft",
+          "classDeclarations": 1,
+          "markerDerived": true
+        },
+        {
+          "role": "RenderTexture",
+          "name": "c",
+          "classDeclarations": 34,
+          "markerDerived": true
+        },
+        {
+          "role": "HideoutScene",
+          "name": "rm",
+          "classDeclarations": 1,
+          "markerDerived": true
+        }
+      ]
+    },
+    {
+      "sha256": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+      "rows": [
+        {
+          "role": "idHash",
+          "name": "jT",
+          "classDeclarations": 0,
+          "markerDerived": true
+        },
+        {
+          "role": "QuadGeometry",
+          "name": "wp",
+          "classDeclarations": 1,
+          "markerDerived": true
+        },
+        {
+          "role": "Buffer",
+          "name": "Di",
+          "classDeclarations": 1,
+          "markerDerived": true
+        },
+        {
+          "role": "CanvasSource",
+          "name": "xe",
+          "classDeclarations": 1,
+          "markerDerived": true
+        },
+        {
+          "role": "TextureSource",
+          "name": "Tb",
+          "classDeclarations": 1,
+          "markerDerived": true
+        },
+        {
+          "role": "Texture",
+          "name": "ft",
+          "classDeclarations": 1,
+          "markerDerived": true
+        },
+        {
+          "role": "RenderTexture",
+          "name": "f",
+          "classDeclarations": 24,
+          "markerDerived": true
+        },
+        {
+          "role": "HideoutScene",
+          "name": "am",
+          "classDeclarations": 1,
+          "markerDerived": true
+        }
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "kind": "unknown",
+      "script": "station-resource-shaders",
+      "command": [
+        "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "scripts/station-resource-shaders.mjs",
+        "D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\negative-map-mismatch",
+        "D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\negative-output.json",
+        "--html=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\unverified-plus-newline.html"
+      ],
+      "exitCode": 1,
+      "reason": "Error: Build 7eb0209074ddb56e3600db4a23f6c6bc71a30680e3dd8e2bb574fa1d23d50709 not verified: derived {\"idHash\":\"jT\",\"QuadGeometry\":\"wp\",\"Buffer\":\"Di\",\"CanvasSource\":\"xe\",\"TextureSource\":\"Tb\",\"Texture\":\"ft\",\"RenderTexture\":\"f\",\"HideoutScene\":\"am\"}; check them against the build and add a VERIFIED row\r"
+    },
+    {
+      "kind": "unknown",
+      "script": "station-resource-heap",
+      "command": [
+        "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "scripts/station-resource-heap.mjs",
+        "D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\negative-map-mismatch\\round-0.heapsnapshot",
+        "D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\negative-map-mismatch\\round-60.heapsnapshot",
+        "D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\negative-output.json",
+        "--html=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\unverified-plus-newline.html"
+      ],
+      "exitCode": 1,
+      "reason": "Error: Build 7eb0209074ddb56e3600db4a23f6c6bc71a30680e3dd8e2bb574fa1d23d50709 not verified: derived {\"idHash\":\"jT\",\"QuadGeometry\":\"wp\",\"Buffer\":\"Di\",\"CanvasSource\":\"xe\",\"TextureSource\":\"Tb\",\"Texture\":\"ft\",\"RenderTexture\":\"f\",\"HideoutScene\":\"am\"}; check them against the build and add a VERIFIED row\r"
+    },
+    {
+      "kind": "mismatch",
+      "script": "station-resource-shaders",
+      "command": [
+        "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "scripts/station-resource-shaders.mjs",
+        "D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\negative-map-mismatch",
+        "D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\negative-output.json",
+        "--html=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\prefix-ce732ff6.html"
+      ],
+      "exitCode": 1,
+      "reason": "Error: Snapshots were recorded with another build\r"
+    },
+    {
+      "kind": "mismatch",
+      "script": "station-resource-heap",
+      "command": [
+        "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "scripts/station-resource-heap.mjs",
+        "D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\negative-map-mismatch\\round-0.heapsnapshot",
+        "D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\negative-map-mismatch\\round-60.heapsnapshot",
+        "D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\negative-output.json",
+        "--html=D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\prefix-ce732ff6.html"
+      ],
+      "exitCode": 1,
+      "reason": "Error: D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\negative-map-mismatch\\round-0.heapsnapshot was recorded with another build\r"
+    }
+  ],
+  "uniqueMarkerNegativePassed": true,
+  "unknownSHANegativePassed": true,
+  "note": "Negative parsers reject before reading snapshot contents. No VERIFIED or filter changes."
+}

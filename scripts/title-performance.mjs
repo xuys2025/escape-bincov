@@ -13,7 +13,7 @@ const context = await browser.newContext({ viewport: { width: 1920, height: 1080
 const page = await context.newPage();
 const errors=[];page.on('pageerror',e=>errors.push(e.message));
 try {
-  await page.goto(pathToFileURL(file).href+'?test=1');
+  await page.goto(pathToFileURL(file).href+'?test=1&entry=tabs');
   await page.locator('.title-enter').waitFor();
   await page.waitForTimeout(1500);
   if (throttle > 1) {const cdp=await context.newCDPSession(page);await cdp.send('Emulation.setCPUThrottlingRate',{rate:throttle});}

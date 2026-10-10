@@ -11,7 +11,7 @@ const entry = process.env.BINCOV_TEST_URL || pathToFileURL(resolve('dist/index.h
 const url = new URL(entry);
 if (url.protocol !== 'file:' && !(url.protocol === 'http:' && ['127.0.0.1', 'localhost'].includes(url.hostname)))
   throw new Error('BINCOV_TEST_URL must use file:// or a local HTTP server.');
-url.searchParams.set('test', '1');
+url.searchParams.set('test', '1'); url.searchParams.set('entry', 'tabs');
 const out = resolve('test-results'); await mkdir(out, { recursive: true });
 const report = { mode: url.protocol === 'file:' ? 'offline' : 'local HTTP diagnostic', browser: '', results: [] };
 const browser = await chromium.launch(browserOptions); report.browser = browser.version();

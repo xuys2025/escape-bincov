@@ -1,0 +1,91 @@
+[
+  {
+    "id": "hidden-contract-settled",
+    "args": [
+      "scripts/sol-r6-visibility.mjs"
+    ],
+    "environment": {
+      "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/hidden-contract-settled"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:36:54.806Z",
+    "finished": "2026-10-08T18:36:58.149Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "F20-strict",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/sol-sample-boundaries.mjs"
+    ],
+    "environment": {
+      "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/f20",
+      "BINCOV_SOL_ONLY": "F20"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:36:58.150Z",
+    "finished": "2026-10-08T18:38:04.360Z",
+    "exitCode": 1,
+    "signal": null
+  },
+  {
+    "id": "heap-extended",
+    "args": [
+      "scripts/sol-r6-heap.mjs"
+    ],
+    "environment": {
+      "BINCOV_HEAP_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/heap-extended",
+      "BINCOV_HEAP_KEEP": "1"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:38:04.360Z",
+    "finished": "2026-10-08T18:39:12.073Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "heap-repeat",
+    "args": [
+      "scripts/sol-r6-heap.mjs"
+    ],
+    "environment": {
+      "BINCOV_HEAP_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/heap-repeat",
+      "BINCOV_HEAP_KEEP": "1"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:39:12.074Z",
+    "finished": "2026-10-08T18:40:20.344Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "heap-ordinary",
+    "args": [
+      "scripts/sol-r6-heap.mjs"
+    ],
+    "environment": {
+      "BINCOV_HEAP_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/heap-ordinary",
+      "BINCOV_HEAP_ENTRY": "ordinary",
+      "BINCOV_HEAP_KEEP": "1"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:40:20.344Z",
+    "finished": "2026-10-08T18:41:07.345Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "resources",
+    "args": [
+      "scripts/sol-r6-resources.mjs"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:41:07.346Z",
+    "finished": "2026-10-08T18:41:24.469Z",
+    "exitCode": 1,
+    "signal": null
+  }
+]

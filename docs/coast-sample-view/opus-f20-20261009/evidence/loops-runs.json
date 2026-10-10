@@ -1,0 +1,101 @@
+{
+  "node": "v24.19.0",
+  "results": [
+    {
+      "id": "base-strict60",
+      "cwd": "C:\\Users\\xty\\AppData\\Local\\Temp\\f20-base",
+      "env": {
+        "R7_CYCLES": "60",
+        "R7_SEED": "42",
+        "R7_NAMED": "",
+        "R7_SNAPS": "",
+        "R7_PIN": ""
+      },
+      "status": 1,
+      "signal": null,
+      "startedAt": "2026-10-09T10:51:27.865Z",
+      "finishedAt": "2026-10-09T10:54:35.739Z",
+      "seconds": 188
+    },
+    {
+      "id": "fixed-strict60",
+      "cwd": "D:\\bincov\\pr22-runtime",
+      "env": {
+        "R7_CYCLES": "60",
+        "R7_SEED": "42",
+        "R7_NAMED": "",
+        "R7_SNAPS": "",
+        "R7_PIN": ""
+      },
+      "status": 1,
+      "signal": null,
+      "startedAt": "2026-10-09T10:54:35.740Z",
+      "finishedAt": "2026-10-09T10:57:43.704Z",
+      "seconds": 188
+    },
+    {
+      "id": "fixed-named60",
+      "cwd": "D:\\bincov\\pr22-runtime",
+      "env": {
+        "R7_CYCLES": "60",
+        "R7_SEED": "42",
+        "R7_NAMED": "1",
+        "R7_SNAPS": "6,20,40,60",
+        "R7_PIN": ""
+      },
+      "status": 1,
+      "signal": null,
+      "startedAt": "2026-10-09T10:57:43.705Z",
+      "finishedAt": "2026-10-09T11:01:00.621Z",
+      "seconds": 197
+    },
+    {
+      "id": "base-named60",
+      "cwd": "C:\\Users\\xty\\AppData\\Local\\Temp\\f20-base",
+      "env": {
+        "R7_CYCLES": "60",
+        "R7_SEED": "42",
+        "R7_NAMED": "1",
+        "R7_SNAPS": "6,20,40,60",
+        "R7_PIN": ""
+      },
+      "status": 1,
+      "signal": null,
+      "startedAt": "2026-10-09T11:01:00.621Z",
+      "finishedAt": "2026-10-09T11:04:18.174Z",
+      "seconds": 198
+    },
+    {
+      "id": "fixed-high20",
+      "cwd": "D:\\bincov\\pr22-runtime",
+      "env": {
+        "R7_CYCLES": "20",
+        "R7_SEED": "3",
+        "R7_NAMED": "",
+        "R7_SNAPS": "",
+        "R7_PIN": ""
+      },
+      "status": 1,
+      "signal": null,
+      "startedAt": "2026-10-09T11:04:18.175Z",
+      "finishedAt": "2026-10-09T11:05:23.846Z",
+      "seconds": 66
+    },
+    {
+      "id": "fixed-pin",
+      "cwd": "D:\\bincov\\pr22-runtime",
+      "env": {
+        "R7_CYCLES": "1",
+        "R7_SEED": "42",
+        "R7_NAMED": "1",
+        "R7_SNAPS": "",
+        "R7_PIN": "1"
+      },
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:05:23.846Z",
+      "finishedAt": "2026-10-09T11:05:31.532Z",
+      "seconds": 8
+    }
+  ]
+}

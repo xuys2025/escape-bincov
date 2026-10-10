@@ -1,0 +1,526 @@
+{
+  "method": "All six registrations via GCSystem._managedResourceHashes -> descriptor.context[descriptor.hash]; absent/changed structures throw. Numeric keys and backing self_size are V8 graph observations, not GPU allocation. Native DOM cs-hud labels only, no string matches. Native-event absence valid only with EventSystem and both pointer roots and wheel root observed. Owner pin/release is an independent positive control.",
+  "rows": [
+    {
+      "file": "D:\\bincov\\pr22-runtime\\test-results\\sol-f20-20261009/hud-no-pin-first/result-no-pin.heapsnapshot",
+      "bytes": 37599949,
+      "sha256": "2834438f77576e66ad746ea68cd0e656e5a8850c1cc36dfc491e097bc1a0f575",
+      "registry": {
+        "gc": {
+          "id": 471847,
+          "type": "object",
+          "name": "_GCSystem2",
+          "selfSize": 68
+        },
+        "list": {
+          "id": 476601,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16
+        },
+        "tables": [
+          {
+            "name": "graphics",
+            "hash": "items",
+            "context": {
+              "id": 476933,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 69799,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          },
+          {
+            "name": "graphicsContext",
+            "hash": "items",
+            "context": {
+              "id": 476609,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 69753,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          },
+          {
+            "name": "glBuffer",
+            "hash": "items",
+            "context": {
+              "id": 422787,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 69985,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 69965,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 232
+            },
+            "keys": 5,
+            "empty": 0,
+            "live": 5,
+            "nonNullValues": [
+              {
+                "id": 69967,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 69969,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 69971,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 69973,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 69975,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              }
+            ]
+          },
+          {
+            "name": "glTexture",
+            "hash": "items",
+            "context": {
+              "id": 476713,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 69979,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 69821,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 76
+            },
+            "keys": 2,
+            "empty": 0,
+            "live": 2,
+            "nonNullValues": [
+              {
+                "id": 69823,
+                "type": "object",
+                "name": "_TextureSource2",
+                "selfSize": 152
+              },
+              {
+                "id": 69825,
+                "type": "object",
+                "name": "BufferImageSource",
+                "selfSize": 268
+              }
+            ]
+          },
+          {
+            "name": "glGeometry",
+            "hash": "items",
+            "context": {
+              "id": 423865,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 73061,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 73039,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 76
+            },
+            "keys": 2,
+            "empty": 0,
+            "live": 2,
+            "nonNullValues": [
+              {
+                "id": 73041,
+                "type": "object",
+                "name": "QuadGeometry",
+                "selfSize": 128
+              },
+              {
+                "id": 73043,
+                "type": "object",
+                "name": "BatchGeometry",
+                "selfSize": 80
+              }
+            ]
+          },
+          {
+            "name": "tilingSprite",
+            "hash": "items",
+            "context": {
+              "id": 476915,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 72989,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          }
+        ]
+      },
+      "eventSystems": 1,
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 474199,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "selfSize": 140
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        },
+        {
+          "event": {
+            "id": 474203,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "selfSize": 140
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        }
+      ],
+      "wheelEvents": [
+        {
+          "event": {
+            "id": 474201,
+            "type": "object",
+            "name": "FederatedWheelEvent",
+            "selfSize": 136
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        }
+      ],
+      "oldHudNativeNodes": [
+        {
+          "id": 340701,
+          "type": "native",
+          "name": "<div class=\"cs-hud\" aria-live=\"polite\">",
+          "selfSize": 120
+        }
+      ],
+      "ownerCounts": {},
+      "status": "failed"
+    },
+    {
+      "file": "D:\\bincov\\pr22-runtime\\test-results\\sol-f20-20261009/hud-no-pin-first/after-native-return.heapsnapshot",
+      "bytes": 37760727,
+      "sha256": "69ce054f46bb6dc6b8d6f732ac7aaec177a98f3c223a3eb30ddd037222d8f081",
+      "registry": {
+        "gc": {
+          "id": 471847,
+          "type": "object",
+          "name": "_GCSystem2",
+          "selfSize": 68
+        },
+        "list": {
+          "id": 476601,
+          "type": "object",
+          "name": "Array",
+          "selfSize": 16
+        },
+        "tables": [
+          {
+            "name": "graphics",
+            "hash": "items",
+            "context": {
+              "id": 476933,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 69799,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          },
+          {
+            "name": "graphicsContext",
+            "hash": "items",
+            "context": {
+              "id": 476609,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 69753,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          },
+          {
+            "name": "glBuffer",
+            "hash": "items",
+            "context": {
+              "id": 422787,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 69985,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 69965,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 232
+            },
+            "keys": 5,
+            "empty": 0,
+            "live": 5,
+            "nonNullValues": [
+              {
+                "id": 69967,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 69969,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 69971,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 69973,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              },
+              {
+                "id": 69975,
+                "type": "object",
+                "name": "Buffer2",
+                "selfSize": 72
+              }
+            ]
+          },
+          {
+            "name": "glTexture",
+            "hash": "items",
+            "context": {
+              "id": 476713,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 69979,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 69821,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 76
+            },
+            "keys": 2,
+            "empty": 0,
+            "live": 2,
+            "nonNullValues": [
+              {
+                "id": 69823,
+                "type": "object",
+                "name": "_TextureSource2",
+                "selfSize": 152
+              },
+              {
+                "id": 69825,
+                "type": "object",
+                "name": "BufferImageSource",
+                "selfSize": 268
+              }
+            ]
+          },
+          {
+            "name": "glGeometry",
+            "hash": "items",
+            "context": {
+              "id": 423865,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 73061,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": {
+              "id": 73039,
+              "type": "array",
+              "name": "(object elements)",
+              "selfSize": 76
+            },
+            "keys": 2,
+            "empty": 0,
+            "live": 2,
+            "nonNullValues": [
+              {
+                "id": 73041,
+                "type": "object",
+                "name": "QuadGeometry",
+                "selfSize": 128
+              },
+              {
+                "id": 73043,
+                "type": "object",
+                "name": "BatchGeometry",
+                "selfSize": 80
+              }
+            ]
+          },
+          {
+            "name": "tilingSprite",
+            "hash": "items",
+            "context": {
+              "id": 476915,
+              "type": "object",
+              "name": "GCManagedHash",
+              "selfSize": 60
+            },
+            "items": {
+              "id": 72989,
+              "type": "object",
+              "name": "Object",
+              "selfSize": 12
+            },
+            "backing": null,
+            "keys": 0,
+            "empty": 0,
+            "live": 0,
+            "nonNullValues": []
+          }
+        ]
+      },
+      "eventSystems": 1,
+      "pointerEvents": [
+        {
+          "event": {
+            "id": 474199,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "selfSize": 140
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        },
+        {
+          "event": {
+            "id": 474203,
+            "type": "object",
+            "name": "FederatedPointerEvent",
+            "selfSize": 140
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        }
+      ],
+      "wheelEvents": [
+        {
+          "event": {
+            "id": 474201,
+            "type": "object",
+            "name": "FederatedWheelEvent",
+            "selfSize": 136
+          },
+          "nativeEvent": null,
+          "nativePresent": false
+        }
+      ],
+      "oldHudNativeNodes": [],
+      "ownerCounts": {},
+      "status": "passed"
+    }
+  ]
+}

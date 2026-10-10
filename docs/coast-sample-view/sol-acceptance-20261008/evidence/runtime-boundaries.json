@@ -1,0 +1,93 @@
+{
+  "startedAt": "2026-10-07T17:25:20.997Z",
+  "method": "Actual headless Runtime and SaveSession with explicit fixtures; fault is the storage setItem call; not browser/native-input evidence.",
+  "steps": [
+    {
+      "id": "F05 move intent with zero displacement, hurt and release reset extraction",
+      "status": "passed",
+      "detail": {
+        "zeroDisplacementIntent": true,
+        "hurt": true,
+        "release": true
+      }
+    },
+    {
+      "id": "F06 duplicate names and adjacent corpse resolve to stable selected ID",
+      "status": "passed",
+      "detail": {
+        "ids": [
+          "crate-0",
+          "sol-corpse",
+          "sol-crate-2"
+        ]
+      }
+    },
+    {
+      "id": "F08 actual coast window/low/door-slit trajectories retain no blocked impact",
+      "status": "passed",
+      "detail": {
+        "checks": [
+          {
+            "x": 11,
+            "y": 7,
+            "kind": "window"
+          },
+          {
+            "x": 17,
+            "y": 7,
+            "kind": "window"
+          },
+          {
+            "x": 11,
+            "y": 9,
+            "kind": "low"
+          },
+          {
+            "x": 10,
+            "y": 10,
+            "kind": "window"
+          },
+          {
+            "door": "resident-front"
+          },
+          {
+            "door": "resident-west"
+          },
+          {
+            "door": "resident-east"
+          }
+        ]
+      }
+    },
+    {
+      "id": "F12 no valid landing preserves map, source bullets and RNG exactly",
+      "status": "passed",
+      "detail": {
+        "entry": "resident-up",
+        "unchanged": true
+      }
+    },
+    {
+      "id": "F14 partial loot and drop write faults roll back exact world/bag/stored bytes",
+      "status": "passed",
+      "detail": [
+        {
+          "kind": "partial",
+          "result": "save-failed",
+          "storageAttempted": true
+        },
+        {
+          "kind": "drop",
+          "result": "save-failed",
+          "storageAttempted": true
+        },
+        {
+          "kind": "full",
+          "result": "rejected",
+          "storageAttempted": false
+        }
+      ]
+    }
+  ],
+  "finishedAt": "2026-10-07T17:25:21.372Z"
+}

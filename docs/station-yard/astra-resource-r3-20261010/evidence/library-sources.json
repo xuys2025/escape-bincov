@@ -1,0 +1,713 @@
+{
+  "version": "8.22.0",
+  "license": "MIT, existing THIRD_PARTY_NOTICES retained",
+  "sources": [
+    {
+      "file": "node_modules/pixi.js/lib/utils/data/GCManagedHash.mjs",
+      "sha256": "2a6472beb90606b407c652c259a57ac60ef3f699ccf8fc77f3e3303934ab7ce5",
+      "excerpt": [
+        {
+          "line": 17,
+          "text": "  add(item) {"
+        },
+        {
+          "line": 18,
+          "text": "    if (this.items[item.uid]) return false;"
+        },
+        {
+          "line": 19,
+          "text": "    this.items[item.uid] = item;"
+        },
+        {
+          "line": 20,
+          "text": "    item.once(\"unload\", this.remove, this);"
+        },
+        {
+          "line": 21,
+          "text": "    item._gcLastUsed = this._renderer.gc.now;"
+        },
+        {
+          "line": 22,
+          "text": "    return true;"
+        },
+        {
+          "line": 24,
+          "text": "  remove(item, ...args) {"
+        },
+        {
+          "line": 25,
+          "text": "    if (!this.items[item.uid]) return;"
+        },
+        {
+          "line": 26,
+          "text": "    const gpuData = item._gpuData[this._renderer.uid];"
+        },
+        {
+          "line": 27,
+          "text": "    if (!gpuData) return;"
+        },
+        {
+          "line": 28,
+          "text": "    this._onUnload?.(item, ...args);"
+        },
+        {
+          "line": 29,
+          "text": "    item.off(\"unload\", this.remove, this);"
+        },
+        {
+          "line": 30,
+          "text": "    gpuData.destroy();"
+        },
+        {
+          "line": 31,
+          "text": "    item._gpuData[this._renderer.uid] = null;"
+        },
+        {
+          "line": 32,
+          "text": "    this.items[item.uid] = null;"
+        },
+        {
+          "line": 33,
+          "text": "  }"
+        },
+        {
+          "line": 34,
+          "text": "  removeAll(...args) {"
+        },
+        {
+          "line": 35,
+          "text": "    Object.values(this.items).forEach((item) => item && this.remove(item, ...args));"
+        },
+        {
+          "line": 36,
+          "text": "  }"
+        },
+        {
+          "line": 37,
+          "text": "  destroy(...args) {"
+        },
+        {
+          "line": 38,
+          "text": "    this.removeAll(...args);"
+        },
+        {
+          "line": 39,
+          "text": "    this.items = /* @__PURE__ */ Object.create(null);"
+        },
+        {
+          "line": 40,
+          "text": "    this._renderer = null;"
+        }
+      ]
+    },
+    {
+      "file": "node_modules/pixi.js/lib/rendering/renderers/shared/GCSystem.mjs",
+      "sha256": "9fbeffcc989a2b488b0e2f4b6ba872374bd33279b7f4768174e43843fe3556aa",
+      "excerpt": [
+        {
+          "line": 248,
+          "text": "        nullCount++;"
+        },
+        {
+          "line": 249,
+          "text": "        if (nullCount === 1e4 && !hashClone) {"
+        },
+        {
+          "line": 250,
+          "text": "          hashClone = this._createHashClone(hashValue, key);"
+        },
+        {
+          "line": 251,
+          "text": "        }"
+        },
+        {
+          "line": 252,
+          "text": "        continue;"
+        },
+        {
+          "line": 273,
+          "text": "        if (!hashClone) {"
+        },
+        {
+          "line": 274,
+          "text": "          if (nullCount + 1 !== 1e4) {"
+        },
+        {
+          "line": 275,
+          "text": "            hashValue[key] = null;"
+        },
+        {
+          "line": 276,
+          "text": "            nullCount++;"
+        },
+        {
+          "line": 277,
+          "text": "          } else {"
+        },
+        {
+          "line": 289,
+          "text": "  /** Cleans up the garbage collection system. Disables GC and removes all tracked resources. */"
+        },
+        {
+          "line": 290,
+          "text": "  destroy() {"
+        },
+        {
+          "line": 291,
+          "text": "    this.enabled = false;"
+        },
+        {
+          "line": 292,
+          "text": "    this._managedResources.forEach((resource) => {"
+        },
+        {
+          "line": 293,
+          "text": "      resource?.off(\"unload\", this.removeResource, this);"
+        }
+      ]
+    },
+    {
+      "file": "node_modules/pixi.js/lib/scene/sprite-tiling/TilingSpritePipe.mjs",
+      "sha256": "1a1e24614d918664739a108a086797234c77ac04c395567546fff64d1bc853af",
+      "excerpt": [
+        {
+          "line": 14,
+          "text": "\"use strict\";"
+        },
+        {
+          "line": 15,
+          "text": "const sharedQuad = new QuadGeometry();"
+        },
+        {
+          "line": 16,
+          "text": "class TilingSpriteGpuData {"
+        },
+        {
+          "line": 17,
+          "text": "  constructor() {"
+        },
+        {
+          "line": 18,
+          "text": "    this.canBatch = true;"
+        },
+        {
+          "line": 19,
+          "text": "    this.geometry = new MeshGeometry({"
+        },
+        {
+          "line": 20,
+          "text": "      indices: sharedQuad.indices.slice(),"
+        },
+        {
+          "line": 21,
+          "text": "      positions: sharedQuad.positions.slice(),"
+        },
+        {
+          "line": 22,
+          "text": "      uvs: sharedQuad.uvs.slice()"
+        },
+        {
+          "line": 23,
+          "text": "    });"
+        },
+        {
+          "line": 24,
+          "text": "  }"
+        },
+        {
+          "line": 25,
+          "text": "  destroy() {"
+        },
+        {
+          "line": 26,
+          "text": "    this.geometry.destroy();"
+        },
+        {
+          "line": 27,
+          "text": "    this.shader?.destroy();"
+        },
+        {
+          "line": 28,
+          "text": "  }"
+        },
+        {
+          "line": 29,
+          "text": "}"
+        },
+        {
+          "line": 30,
+          "text": "class TilingSpritePipe {"
+        },
+        {
+          "line": 87,
+          "text": "    renderer.encoder.draw({"
+        },
+        {
+          "line": 88,
+          "text": "      geometry: sharedQuad,"
+        },
+        {
+          "line": 89,
+          "text": "      shader,"
+        },
+        {
+          "line": 90,
+          "text": "      state: this._state"
+        },
+        {
+          "line": 91,
+          "text": "    });"
+        },
+        {
+          "line": 132,
+          "text": "  }"
+        },
+        {
+          "line": 133,
+          "text": "  destroy() {"
+        },
+        {
+          "line": 134,
+          "text": "    this._managedTilingSprites.destroy();"
+        },
+        {
+          "line": 135,
+          "text": "    this._renderer = null;"
+        },
+        {
+          "line": 136,
+          "text": "  }"
+        },
+        {
+          "line": 137,
+          "text": "  _updateCanBatch(tilingSprite) {"
+        }
+      ]
+    },
+    {
+      "file": "node_modules/pixi.js/lib/scene/sprite-tiling/utils/QuadGeometry.mjs",
+      "sha256": "e21e2346061c5362c333701326557a5ddb3a69939de0cf47ce94afa3e5b69d14",
+      "excerpt": []
+    },
+    {
+      "file": "node_modules/pixi.js/lib/scene/graphics/shared/GraphicsPipe.mjs",
+      "sha256": "ab053b014b4d6519cb0118b0646cec65fd12f878f16ad2efabb15f3fa0a1c780",
+      "excerpt": [
+        {
+          "line": 13,
+          "text": "  }"
+        },
+        {
+          "line": 14,
+          "text": "  destroy() {"
+        },
+        {
+          "line": 15,
+          "text": "    this.batches.forEach((batch) => {"
+        },
+        {
+          "line": 16,
+          "text": "      BigPool.return(batch);"
+        },
+        {
+          "line": 17,
+          "text": "    });"
+        },
+        {
+          "line": 25,
+          "text": "    this._adaptor = adaptor;"
+        },
+        {
+          "line": 26,
+          "text": "    this.renderer.runners.contextChange.add(this);"
+        },
+        {
+          "line": 27,
+          "text": "    this._managedGraphics = new GCManagedHash({ renderer, type: \"renderable\", priority: -1, name: \"graphics\" });"
+        },
+        {
+          "line": 28,
+          "text": "  }"
+        },
+        {
+          "line": 29,
+          "text": "  contextChange() {"
+        },
+        {
+          "line": 30,
+          "text": "    this._adaptor.contextChange(this.renderer);"
+        },
+        {
+          "line": 31,
+          "text": "  }"
+        },
+        {
+          "line": 32,
+          "text": "  validateRenderable(graphics) {"
+        },
+        {
+          "line": 33,
+          "text": "    const context = graphics.context;"
+        },
+        {
+          "line": 86,
+          "text": "    const gpuContext = contextSystem.updateGpuContext(graphics.context);"
+        },
+        {
+          "line": 87,
+          "text": "    gpuData.destroy();"
+        },
+        {
+          "line": 88,
+          "text": "    if (gpuContext.isBatchable) {"
+        },
+        {
+          "line": 89,
+          "text": "      this._updateBatchesForRenderable(graphics, gpuData);"
+        },
+        {
+          "line": 90,
+          "text": "    }"
+        },
+        {
+          "line": 121,
+          "text": "  }"
+        },
+        {
+          "line": 122,
+          "text": "  destroy() {"
+        },
+        {
+          "line": 123,
+          "text": "    this._managedGraphics.destroy();"
+        },
+        {
+          "line": 124,
+          "text": "    this.renderer = null;"
+        },
+        {
+          "line": 125,
+          "text": "    this._adaptor.destroy();"
+        },
+        {
+          "line": 126,
+          "text": "    this._adaptor = null;"
+        },
+        {
+          "line": 127,
+          "text": "    this.state = null;"
+        },
+        {
+          "line": 128,
+          "text": "  }"
+        }
+      ]
+    },
+    {
+      "file": "node_modules/pixi.js/lib/scene/graphics/gl/GlGraphicsAdaptor.mjs",
+      "sha256": "d6fec066411182256ce2af617b82503766ade66618ca6e0b5fe59ee69be64b2c",
+      "excerpt": [
+        {
+          "line": 13,
+          "text": "class GlGraphicsAdaptor {"
+        },
+        {
+          "line": 14,
+          "text": "  contextChange(renderer) {"
+        },
+        {
+          "line": 15,
+          "text": "    const uniforms = new UniformGroup({"
+        },
+        {
+          "line": 16,
+          "text": "      uColor: { value: new Float32Array([1, 1, 1, 1]), type: \"vec4<f32>\" },"
+        },
+        {
+          "line": 17,
+          "text": "      uTransformMatrix: { value: new Matrix(), type: \"mat3x3<f32>\" },"
+        },
+        {
+          "line": 62,
+          "text": "  }"
+        },
+        {
+          "line": 63,
+          "text": "  destroy() {"
+        },
+        {
+          "line": 64,
+          "text": "    this.shader.destroy(true);"
+        },
+        {
+          "line": 65,
+          "text": "    this.shader = null;"
+        },
+        {
+          "line": 66,
+          "text": "  }"
+        },
+        {
+          "line": 67,
+          "text": "}"
+        }
+      ]
+    },
+    {
+      "file": "node_modules/pixi.js/lib/rendering/high-shader/compileHighShaderToProgram.mjs",
+      "sha256": "c5a3bc1ad44d77348678fdfca88437ea46babef05072e3e718ffb6df0c5919a2",
+      "excerpt": [
+        {
+          "line": 31,
+          "text": "function compileHighShaderGlProgram({ bits, name }) {"
+        },
+        {
+          "line": 32,
+          "text": "  return new GlProgram({"
+        },
+        {
+          "line": 33,
+          "text": "    name,"
+        },
+        {
+          "line": 34,
+          "text": "    ...compileHighShaderGl({"
+        },
+        {
+          "line": 35,
+          "text": "      template: {"
+        }
+      ]
+    },
+    {
+      "file": "node_modules/pixi.js/lib/rendering/renderers/gl/shader/GlProgram.mjs",
+      "sha256": "6cd38d2da8e6e73f913a1f8451359c190f973aef4f79e96abafc45d3b881d08c",
+      "excerpt": [
+        {
+          "line": 5,
+          "text": "import { insertVersion } from './program/preprocessors/insertVersion.mjs';"
+        },
+        {
+          "line": 6,
+          "text": "import { setProgramName } from './program/preprocessors/setProgramName.mjs';"
+        },
+        {
+          "line": 7,
+          "text": "import { stripVersion } from './program/preprocessors/stripVersion.mjs';"
+        },
+        {
+          "line": 8,
+          "text": ""
+        },
+        {
+          "line": 9,
+          "text": "\"use strict\";"
+        },
+        {
+          "line": 17,
+          "text": "  // add the program name to the shader"
+        },
+        {
+          "line": 18,
+          "text": "  setProgramName,"
+        },
+        {
+          "line": 19,
+          "text": "  // add the version string to the shader header"
+        },
+        {
+          "line": 20,
+          "text": "  insertVersion"
+        },
+        {
+          "line": 21,
+          "text": "};"
+        },
+        {
+          "line": 24,
+          "text": "  /**"
+        },
+        {
+          "line": 25,
+          "text": "   * Creates a shiny new GlProgram. Used by WebGL renderer."
+        },
+        {
+          "line": 26,
+          "text": "   * @param options - The options for the program."
+        },
+        {
+          "line": 27,
+          "text": "   */"
+        },
+        {
+          "line": 28,
+          "text": "  constructor(options) {"
+        },
+        {
+          "line": 38,
+          "text": "      },"
+        },
+        {
+          "line": 39,
+          "text": "      setProgramName: {"
+        },
+        {
+          "line": 40,
+          "text": "        name: options.name"
+        },
+        {
+          "line": 41,
+          "text": "      },"
+        },
+        {
+          "line": 42,
+          "text": "      addProgramDefines: isES300,"
+        },
+        {
+          "line": 57,
+          "text": "  /** destroys the program */"
+        },
+        {
+          "line": 58,
+          "text": "  destroy() {"
+        },
+        {
+          "line": 59,
+          "text": "    this.fragment = null;"
+        },
+        {
+          "line": 60,
+          "text": "    this.vertex = null;"
+        },
+        {
+          "line": 61,
+          "text": "    this._attributeData = null;"
+        }
+      ]
+    },
+    {
+      "file": "node_modules/pixi.js/lib/rendering/renderers/gl/shader/program/preprocessors/setProgramName.mjs",
+      "sha256": "dccffed7092fff7353339bb7b9fa990851633435ea0035780fedd8d4986cd661",
+      "excerpt": [
+        {
+          "line": 3,
+          "text": "const VertexNameCache = {};"
+        },
+        {
+          "line": 4,
+          "text": "function setProgramName(src, { name = `pixi-program` }, isFragment = true) {"
+        },
+        {
+          "line": 5,
+          "text": "  name = name.replace(/\\s+/g, \"-\");"
+        },
+        {
+          "line": 6,
+          "text": "  name += isFragment ? \"-fragment\" : \"-vertex\";"
+        },
+        {
+          "line": 7,
+          "text": "  const nameCache = isFragment ? fragmentNameCache : VertexNameCache;"
+        },
+        {
+          "line": 13,
+          "text": "  }"
+        },
+        {
+          "line": 14,
+          "text": "  if (src.indexOf(\"#define SHADER_NAME\") !== -1) return src;"
+        },
+        {
+          "line": 15,
+          "text": "  const shaderName = `#define SHADER_NAME ${name}`;"
+        },
+        {
+          "line": 16,
+          "text": "  return `${shaderName}"
+        },
+        {
+          "line": 17,
+          "text": "${src}`;"
+        },
+        {
+          "line": 18,
+          "text": "}"
+        },
+        {
+          "line": 19,
+          "text": ""
+        },
+        {
+          "line": 20,
+          "text": "export { setProgramName };"
+        },
+        {
+          "line": 21,
+          "text": "//# sourceMappingURL=setProgramName.mjs.map"
+        },
+        {
+          "line": 22,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "file": "node_modules/pixi.js/lib/rendering/renderers/shared/utils/createIdFromString.mjs",
+      "sha256": "a4cc848c31d7d54b2f3d8bd2ff8f9792cc7352b6f1272f5c09ba9f84c44e6207",
+      "excerpt": [
+        {
+          "line": 1,
+          "text": "\"use strict\";"
+        },
+        {
+          "line": 2,
+          "text": "const idCounts = /* @__PURE__ */ Object.create(null);"
+        },
+        {
+          "line": 3,
+          "text": "const idHash = /* @__PURE__ */ Object.create(null);"
+        },
+        {
+          "line": 4,
+          "text": "function createIdFromString(value, groupId) {"
+        },
+        {
+          "line": 5,
+          "text": "  let id = idHash[value];"
+        },
+        {
+          "line": 6,
+          "text": "  if (id === void 0) {"
+        },
+        {
+          "line": 7,
+          "text": "    if (idCounts[groupId] === void 0) {"
+        },
+        {
+          "line": 8,
+          "text": "      idCounts[groupId] = 1;"
+        },
+        {
+          "line": 9,
+          "text": "    }"
+        },
+        {
+          "line": 10,
+          "text": "    idHash[value] = id = idCounts[groupId]++;"
+        },
+        {
+          "line": 11,
+          "text": "  }"
+        },
+        {
+          "line": 12,
+          "text": "  return id;"
+        },
+        {
+          "line": 13,
+          "text": "}"
+        }
+      ]
+    }
+  ]
+}

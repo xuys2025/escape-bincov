@@ -21,7 +21,7 @@ const center=async selector=>{const r=await page.locator(selector).boundingBox()
 let cdp;
 const touch=async(type,points)=>cdp.send('Input.dispatchTouchEvent',{type,touchPoints:points.map(p=>({...p,radiusX:2,radiusY:2,force:1}))});
 try{
- await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1');await action('enter').waitFor();cdp=await context.newCDPSession(page);
+ await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1&entry=tabs');await action('enter').waitFor();cdp=await context.newCDPSession(page);
  await step('portrait hideout matrix keeps controls readable and reachable',async()=>{
   await shot('menu-390');await action('enter').tap();
   for(const [width,height] of [[360,800],[390,844],[412,915],[430,932],[375,667]]){
@@ -89,7 +89,7 @@ try{
  });
  await step('live backup round trip and failed medical transaction preserve consistent state',async()=>{
   const promise=page.waitForEvent('download');await action('export-save').tap();const file=resolve(out,'live-backup.json');await (await promise).saveAs(file);
-  const backup=JSON.parse(await readFile(file,'utf8'));assert.equal(backup.formatVersion,3);assert.equal(backup.record.raid.hp,72);
+  const backup=JSON.parse(await readFile(file,'utf8'));assert.equal(backup.formatVersion,4);assert.equal(backup.record.expansion.version,2);assert.equal(backup.record.raid.hp,72);
   await action('close').tap();
   // The restored checkpoint deliberately includes an unfinished reload. Let it
   // settle before comparing the medical transaction's before/after loadout:

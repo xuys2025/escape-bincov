@@ -1,0 +1,272 @@
+{
+  "long-remount": {
+    "cache": [
+      {
+        "round": 0,
+        "id": 1193195,
+        "keys": 3,
+        "bytes": 9228
+      },
+      {
+        "round": 30,
+        "id": 1193195,
+        "keys": 3,
+        "bytes": 9228
+      },
+      {
+        "round": 60,
+        "id": 1193195,
+        "keys": 3,
+        "bytes": 9228
+      }
+    ],
+    "objects": {
+      "before": {
+        "HideoutScene:am": 1,
+        "StationHost:G1": 1,
+        "CoastSampleHost:rd": 0,
+        "CoastRaidRuntime:To": 0,
+        "CoastView:td": 0,
+        "QuadGeometry:wp": 1,
+        "Buffer:Di": 40,
+        "CanvasSource:xe": 666,
+        "TextureSource:Tb": 8,
+        "Texture:ft": 4805,
+        "RenderTexture:shape-verified-f": 3
+      },
+      "after": {
+        "HideoutScene:am": 1,
+        "StationHost:G1": 1,
+        "CoastSampleHost:rd": 0,
+        "CoastRaidRuntime:To": 0,
+        "CoastView:td": 0,
+        "QuadGeometry:wp": 1,
+        "Buffer:Di": 40,
+        "CanvasSource:xe": 666,
+        "TextureSource:Tb": 8,
+        "Texture:ft": 4805,
+        "RenderTexture:shape-verified-f": 3
+      }
+    },
+    "snapshotGraph": {
+      "deltaSelfSize": 1106936,
+      "categories": {
+        "other-JS-and-metadata": 11348,
+        "other-native": 142436,
+        "strings": 3904,
+        "VM-shape": 1396,
+        "compiled-code": 887164,
+        "named-render-runtime-objects": 0,
+        "browser-performance-records": 60688
+      }
+    }
+  },
+  "long-shared": {
+    "cache": [
+      {
+        "round": 0,
+        "id": 1428491,
+        "keys": 4,
+        "bytes": 12520
+      },
+      {
+        "round": 30,
+        "id": 1428491,
+        "keys": 4,
+        "bytes": 12520
+      },
+      {
+        "round": 60,
+        "id": 1428491,
+        "keys": 4,
+        "bytes": 12520
+      }
+    ],
+    "objects": {
+      "before": {
+        "HideoutScene:am": 1,
+        "StationHost:G1": 1,
+        "CoastSampleHost:rd": 0,
+        "CoastRaidRuntime:To": 0,
+        "CoastView:td": 0,
+        "QuadGeometry:wp": 1,
+        "Buffer:Di": 40,
+        "CanvasSource:xe": 666,
+        "TextureSource:Tb": 8,
+        "Texture:ft": 4805,
+        "RenderTexture:shape-verified-f": 3
+      },
+      "after": {
+        "HideoutScene:am": 1,
+        "StationHost:G1": 1,
+        "CoastSampleHost:rd": 0,
+        "CoastRaidRuntime:To": 0,
+        "CoastView:td": 0,
+        "QuadGeometry:wp": 1,
+        "Buffer:Di": 40,
+        "CanvasSource:xe": 666,
+        "TextureSource:Tb": 8,
+        "Texture:ft": 4805,
+        "RenderTexture:shape-verified-f": 3
+      }
+    },
+    "snapshotGraph": {
+      "deltaSelfSize": 1782559,
+      "categories": {
+        "other-JS-and-metadata": -16440,
+        "other-native": 491659,
+        "strings": -41660,
+        "VM-shape": 17240,
+        "compiled-code": 1200880,
+        "named-render-runtime-objects": 0,
+        "browser-performance-records": 130880
+      }
+    }
+  },
+  "long-context": {
+    "cache": [
+      {
+        "round": 0,
+        "id": 497839,
+        "keys": 3,
+        "bytes": 9228
+      },
+      {
+        "round": 30,
+        "id": 497839,
+        "keys": 3,
+        "bytes": 9228
+      },
+      {
+        "round": 60,
+        "id": 497839,
+        "keys": 3,
+        "bytes": 9228
+      }
+    ],
+    "objects": {
+      "before": {
+        "HideoutScene:am": 1,
+        "StationHost:G1": 1,
+        "CoastSampleHost:rd": 0,
+        "CoastRaidRuntime:To": 0,
+        "CoastView:td": 0,
+        "QuadGeometry:wp": 1,
+        "Buffer:Di": 40,
+        "CanvasSource:xe": 666,
+        "TextureSource:Tb": 8,
+        "Texture:ft": 4805,
+        "RenderTexture:shape-verified-f": 3
+      },
+      "after": {
+        "HideoutScene:am": 1,
+        "StationHost:G1": 1,
+        "CoastSampleHost:rd": 0,
+        "CoastRaidRuntime:To": 0,
+        "CoastView:td": 0,
+        "QuadGeometry:wp": 1,
+        "Buffer:Di": 40,
+        "CanvasSource:xe": 666,
+        "TextureSource:Tb": 8,
+        "Texture:ft": 4805,
+        "RenderTexture:shape-verified-f": 3
+      }
+    },
+    "snapshotGraph": {
+      "deltaSelfSize": -264086,
+      "categories": {
+        "other-JS-and-metadata": 37228,
+        "other-native": 77738,
+        "strings": -65748,
+        "VM-shape": 1428,
+        "compiled-code": -358156,
+        "named-render-runtime-objects": 0,
+        "browser-performance-records": 43424
+      }
+    }
+  },
+  "old-long-context": {
+    "cache": [
+      {
+        "round": 0,
+        "id": 1385717,
+        "keys": 6,
+        "bytes": 22236
+      },
+      {
+        "round": 30,
+        "id": 1385717,
+        "keys": 36,
+        "bytes": 152316
+      },
+      {
+        "round": 60,
+        "id": 1385717,
+        "keys": 66,
+        "bytes": 282396
+      }
+    ],
+    "objects": {
+      "before": {
+        "HideoutScene:rm": 1,
+        "StationHost:F1": 1,
+        "CoastSampleHost:Ju": 0,
+        "CoastRaidRuntime:mo": 0,
+        "CoastView:Ku": 0,
+        "QuadGeometry:Ep": 1,
+        "Buffer:Fi": 40,
+        "CanvasSource:xe": 666,
+        "TextureSource:gb": 8,
+        "Texture:ft": 4805,
+        "RenderTexture:shape-verified-c": 3
+      },
+      "after": {
+        "HideoutScene:rm": 1,
+        "StationHost:F1": 1,
+        "CoastSampleHost:Ju": 0,
+        "CoastRaidRuntime:mo": 0,
+        "CoastView:Ku": 0,
+        "QuadGeometry:Ep": 1,
+        "Buffer:Fi": 40,
+        "CanvasSource:xe": 666,
+        "TextureSource:gb": 8,
+        "Texture:ft": 4805,
+        "RenderTexture:shape-verified-c": 3
+      }
+    },
+    "snapshotGraph": {
+      "deltaSelfSize": 24698,
+      "categories": {
+        "other-JS-and-metadata": 40072,
+        "other-native": 111294,
+        "strings": 195376,
+        "VM-shape": 2188,
+        "compiled-code": -387192,
+        "named-render-runtime-objects": 0,
+        "browser-performance-records": 62960
+      }
+    }
+  },
+  "astraOriginal": {
+    "cache": [
+      {
+        "round": 0,
+        "id": 151775,
+        "keys": 6,
+        "bytes": 22236
+      },
+      {
+        "round": 30,
+        "id": 151775,
+        "keys": 36,
+        "bytes": 152316
+      },
+      {
+        "round": 60,
+        "id": 151775,
+        "keys": 66,
+        "bytes": 282396
+      }
+    ]
+  }
+}

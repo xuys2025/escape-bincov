@@ -11,7 +11,7 @@ const browser=await chromium.launch(browserOptions),ctx=await browser.newContext
 ctx.on('request',r=>{if(/^https?:/.test(r.url()))report.externalRequests.push(r.url());});
 const page=await ctx.newPage();page.on('pageerror',e=>report.errors.push(e.message));
 try{
- await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1');await page.locator('.title-enter').waitFor();await page.evaluate(()=>document.fonts.ready);
+ await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1&entry=tabs');await page.locator('.title-enter').waitFor();await page.evaluate(()=>document.fonts.ready);
  await page.screenshot({path:resolve(out,'centre.png')});
  await page.screenshot({path:resolve(out,'threshold-centre.png'),clip:{x:655,y:650,width:470,height:390}});
  await page.emulateMedia({reducedMotion:'no-preference'});await page.locator('.title-motion').click();

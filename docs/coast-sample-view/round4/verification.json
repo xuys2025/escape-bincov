@@ -1,0 +1,221 @@
+{
+  "at": "2026-10-08T05:44:50.557Z",
+  "environment": {
+    "os": "Windows 10 Pro 10.0.19045",
+    "node": "24.19.0",
+    "pnpm": "11.19.0 (corepack)",
+    "browser": "154.0.8037.98"
+  },
+  "baseline": {
+    "head": "87b879b",
+    "main": "841e8bb",
+    "pr22Head": "878f563"
+  },
+  "unit": {
+    "command": "pnpm test",
+    "tests": 223,
+    "pass": 223,
+    "fail": 0
+  },
+  "package": {
+    "command": "pnpm package",
+    "html": "dist/index.html = start the game.html",
+    "bytes": 3145136,
+    "sha256": "f2456655ac6fa89a2cf5671551a1bc1c7cc0d4c0d918c32d2d46786be5f74fb9",
+    "rebuildIdentical": true,
+    "zips": {
+      "portable": "634595728914d1f0cff0ab9c073fb9df7ab9bf3e679323e1ed56de70673fd832",
+      "web": "f8cd2ec000569f2b4ef83f7a3a466342a15a9ab6e0862f6290f1e8f829810c49"
+    }
+  },
+  "assets": {
+    "command": "node scripts/coast-import-assets.mjs docs/coast-sample-view/sol-round3-20261008/assets/manifest.json",
+    "imported": 43,
+    "replaced": 34,
+    "buildHashCheck": "scripts/build.mjs"
+  },
+  "sample": {
+    "command": "node scripts/coast-sample-test.mjs",
+    "passed": 32,
+    "total": 32,
+    "errors": 0,
+    "requests": 0,
+    "report": "report.json"
+  },
+  "heap": {
+    "command": "BINCOV_HEAP_CYCLES=30 BINCOV_HEAP_SNAP=10,30 node scripts/coast-sample-heap.mjs",
+    "exit": 0,
+    "report": "heap-report.json",
+    "selfSizePerCycle": 23320.4,
+    "compiledCodePerCycle": 20280,
+    "otherPerCycle": 3040.4,
+    "shaderSourceStrings": [
+      81,
+      81
+    ],
+    "trendBytes": 572212.799999997,
+    "accumulated": []
+  },
+  "solBoundaries": {
+    "command": "node --import tsx scripts/sol-sample-boundaries.mjs",
+    "exit": 1,
+    "passed": 7,
+    "partial": [
+      "F20"
+    ],
+    "f20": {
+      "acceptanceStatus": "partial",
+      "afterWarmupMean": 25008236.4,
+      "lastFiveMean": 25418717.2,
+      "growthBytes": 410480.80000000075
+    }
+  },
+  "solOcclusion": {
+    "command": "node scripts/sol-occlusion-probe.mjs",
+    "exit": 0,
+    "result": "8/8"
+  },
+  "solVisibility": {
+    "command": "node scripts/sol-visibility-probe.mjs",
+    "exit": 0,
+    "result": "passed"
+  },
+  "shots": {
+    "command": "node scripts/coast-sample-shots.mjs",
+    "count": 68,
+    "anomalies": 0,
+    "errors": 0,
+    "requests": 0,
+    "committed": 13
+  },
+  "art": {
+    "command": "node scripts/coast-sample-art.mjs",
+    "crops": 8,
+    "extra": "art/death-fall.png (one-off probe, not a gate)"
+  },
+  "measure": "measure.json",
+  "regressions": [
+    {
+      "suite": "browser",
+      "exit": 0,
+      "seconds": 39.1
+    },
+    {
+      "suite": "desktop-input",
+      "exit": 0,
+      "seconds": 22.2
+    },
+    {
+      "suite": "save-browser",
+      "exit": 0,
+      "seconds": 13.1
+    },
+    {
+      "suite": "buildings",
+      "exit": 0,
+      "seconds": 12.2
+    },
+    {
+      "suite": "mobile",
+      "exit": 0,
+      "seconds": 19
+    },
+    {
+      "suite": "mobile-ux",
+      "exit": 0,
+      "seconds": 69.6
+    },
+    {
+      "suite": "portable",
+      "exit": 0,
+      "seconds": 5.5
+    },
+    {
+      "suite": "ui",
+      "exit": 0,
+      "seconds": 8.1
+    },
+    {
+      "suite": "loot",
+      "exit": 0,
+      "seconds": 49.6
+    },
+    {
+      "suite": "expansion",
+      "exit": 0,
+      "seconds": 9.1
+    },
+    {
+      "suite": "qol-expansion",
+      "exit": 1,
+      "seconds": 3
+    },
+    {
+      "suite": "systems",
+      "exit": 0,
+      "seconds": 36.4
+    },
+    {
+      "suite": "art",
+      "exit": 0,
+      "seconds": 12.5
+    },
+    {
+      "suite": "tactical",
+      "exit": 0,
+      "seconds": 18.7
+    },
+    {
+      "suite": "title",
+      "exit": 0,
+      "seconds": 56.6
+    },
+    {
+      "suite": "title-water",
+      "exit": 0,
+      "seconds": 9.9
+    },
+    {
+      "suite": "mall-passages",
+      "exit": 0,
+      "seconds": 166.6
+    },
+    {
+      "suite": "mall-landing",
+      "exit": 0,
+      "seconds": 8.1
+    },
+    {
+      "suite": "qol",
+      "exit": 0,
+      "seconds": 21.6
+    },
+    {
+      "suite": "loot-target",
+      "exit": 0,
+      "seconds": 19.5
+    },
+    {
+      "suite": "layered-play",
+      "exit": 0,
+      "seconds": 788.3
+    }
+  ],
+  "qolExpansionFlake": {
+    "note": "Same failure on this build and on the untouched 87b879b build: lootContext is read right after pressing E in the Phaser mall test (no coast-view code loaded).",
+    "thisBuild": {
+      "runs": 10,
+      "failed": 5
+    },
+    "baseline87b879b": {
+      "runs": 10,
+      "failed": 2
+    },
+    "error": "TypeError: Cannot read properties of null (reading 'containerId')"
+  },
+  "notRun": [
+    "real phones",
+    "human play test (G12)",
+    "remote CI for this local commit"
+  ]
+}

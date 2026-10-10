@@ -1,0 +1,31 @@
+{
+  "method": "工作标准/缺陷登记/音频服务丢失恢复期提示音-20261008/repro.mjs: original Phaser raid, Esc pause, abandon; output tap peak after the click",
+  "final": {
+    "shotPeak": 0.22143854200839996,
+    "statesWhenPaused": [
+      "suspended"
+    ],
+    "afterAbandon": {
+      "blocks": 170,
+      "peak": 0.14089341461658478
+    },
+    "statesAtResult": [
+      "running"
+    ],
+    "outcome": "death"
+  },
+  "base1c1c935": {
+    "shotPeak": 0.25234073400497437,
+    "statesWhenPaused": [
+      "suspended"
+    ],
+    "afterAbandon": {
+      "blocks": 169,
+      "peak": 0.05952044203877449
+    },
+    "statesAtResult": [
+      "running"
+    ],
+    "outcome": "death"
+  }
+}

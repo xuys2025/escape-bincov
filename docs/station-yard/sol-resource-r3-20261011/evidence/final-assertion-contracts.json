@@ -1,0 +1,31 @@
+{
+  "baseline": "68daab4",
+  "at": "2026-10-10T18:07:01.068Z",
+  "node": "v24.19.0",
+  "rows": [
+    {
+      "file": "scripts/coast-lifecycle-test.mjs",
+      "originalSHA256": "b719e999c57727aebd27b135a8054a7ebb37c6eb83eabc627301f847fb3635ac",
+      "currentSHA256": "af2ee9ccd11e92815e2f2a5c1b0fdedaaae1ab0e9ea4d6e57b54c6a065ea528c",
+      "originalAssertions": 17,
+      "currentAssertions": 50,
+      "originalAssertionsRetainedWithMultiplicity": true
+    },
+    {
+      "file": "scripts/station-context-program.mjs",
+      "originalSHA256": "0b1a7313e1bef16e42c7b407203581bbf0b669495559957aafee670de8601025",
+      "currentSHA256": "9153c26148af9fa941c28a66da0f2738c63af153b01ad1622ca34db01bd00ce5",
+      "originalAssertions": 29,
+      "currentAssertions": 35,
+      "originalAssertionsRetainedWithMultiplicity": true
+    },
+    {
+      "file": "scripts/station-round2-recheck.mjs",
+      "originalSHA256": "c51b4f38e7f3b08df0a714fa97afde0f7191d691df8d29589823f31c5ba8dc1b",
+      "currentSHA256": "df3744e8ef323ae9e58facf6bdc33ce2a6d1cc53e9cdf314597e17aced16abbd",
+      "originalAssertions": 67,
+      "currentAssertions": 67,
+      "originalAssertionsRetainedWithMultiplicity": true
+    }
+  ]
+}

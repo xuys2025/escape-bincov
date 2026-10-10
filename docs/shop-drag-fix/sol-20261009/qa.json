@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-09T13:55:44.590Z",
+  "node": "v24.19.0",
+  "passed": true,
+  "checks": {
+    "actualCounts": true,
+    "artifactIdentity": true,
+    "allEvidenceHashes": true,
+    "localLinks": 84,
+    "runRecords": 40,
+    "ciFirstBatch": {
+      "pass": 19,
+      "fail": 1
+    },
+    "physicalHuman": "NOT RUN"
+  },
+  "sourceSHA256": {
+    "dist/index.html": "a9a07a960049d6dc17e54b9fb7c765c99a72041c48e111c9b73b2ae2fa8d852f",
+    "src/ui.ts": "6def6f1784af4149909fe864a2874e958a51ac11deaad2fecccf1c2d5e2ee677",
+    "src/shop.ts": "01fde4891d20442dfe888a9e8c09439e43d7332b22fb36bc6d25a4d6217385e8",
+    "scripts/shop-drag-test.mjs": "639dd5ff9987abf126faae93a41e490cb5347c464d4ef54ab791d5ce71a0ba35",
+    "scripts/inventory-actions.mjs": "3000cfcef9007d66fb300427afe987fd4c9f57e81c3b721139d352fa3b896c03",
+    "scripts/browser-options.mjs": "a98676bd9f6e381578a34e94ec72feca2e081bc4445120e88ff61eb7031d84a7"
+  },
+  "notes": [
+    "No assertions modified in original tracked tests. Diagnostic variant diff retained.",
+    "One aborted desktop attempt retained separately, not counted in 40 completed runs."
+  ]
+}

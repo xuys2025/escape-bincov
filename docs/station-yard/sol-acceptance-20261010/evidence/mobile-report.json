@@ -1,0 +1,51 @@
+{
+  "startedAt": "2026-10-09T19:31:00.928Z",
+  "method": "Chromium touch emulation with real CDP multi-touch, fault injection, complete checkpoint comparisons and offline requests blocked. Not physical iPhone/Android or Safari validation.",
+  "steps": [
+    {
+      "name": "portrait hideout matrix keeps controls readable and reachable",
+      "status": "passed"
+    },
+    {
+      "name": "tap inventory transfers, native scroll and explicit grid placement",
+      "status": "passed"
+    },
+    {
+      "name": "two trusted touch pointers move and fire together; release stops fire",
+      "status": "passed"
+    },
+    {
+      "name": "rejected healing preserves the other thumb movement without consuming medicine",
+      "status": "passed"
+    },
+    {
+      "name": "pointer cancellation and rotation never leave movement, fire or extraction held",
+      "status": "passed"
+    },
+    {
+      "name": "loot pickup commits removal with inventory; checkpoint restores bullets and RNG",
+      "status": "passed"
+    },
+    {
+      "name": "live backup round trip and failed medical transaction preserve consistent state",
+      "status": "passed"
+    },
+    {
+      "name": "short landscape layout fits all active touch targets and map text remains readable",
+      "status": "passed"
+    },
+    {
+      "name": "hold extraction is cancellable and successful settlement cannot restore the run",
+      "status": "passed"
+    },
+    {
+      "name": "unsupported record stays untouched and original bytes can be exported",
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "status": "passed",
+  "finishedAt": "2026-10-09T19:31:19.688Z"
+}

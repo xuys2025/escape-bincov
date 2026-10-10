@@ -1,0 +1,130 @@
+{
+  "startedAt": "2026-10-07T17:25:21.862Z",
+  "steps": [
+    {
+      "id": "F01 legacy profile and coast-v1 restore use RaidScene under sample flag",
+      "status": "passed",
+      "detail": [
+        {
+          "kind": "profile-v1",
+          "raidScene": true,
+          "sampleRoots": 0,
+          "storageError": ""
+        },
+        {
+          "kind": "coast-v1",
+          "raidScene": true,
+          "sampleRoots": 0,
+          "storageError": ""
+        }
+      ]
+    },
+    {
+      "id": "Mall click regression: HUD coordinate is rejected; native canvas input still fires",
+      "status": "passed",
+      "detail": {
+        "point": {
+          "x": 1028.0445,
+          "y": 202.9111
+        },
+        "hit": {
+          "tag": "BUTTON",
+          "action": "map",
+          "text": "选择撤离点"
+        },
+        "reproducedOldClick": true,
+        "fixedRejectedHUD": true,
+        "nativeCanvas": true
+      }
+    },
+    {
+      "id": "F14 native bag drop write failure preserves bag and ground, no success event",
+      "status": "passed",
+      "detail": {
+        "rollback": true,
+        "phase": "paused",
+        "error": "Sol fault"
+      }
+    },
+    {
+      "id": "F16 bag/loot blur, pagehide and hidden resume paused and suppress held keys",
+      "status": "passed",
+      "detail": [
+        {
+          "panel": "inventory",
+          "signal": "blur",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "inventory",
+          "signal": "pagehide",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "inventory",
+          "signal": "hidden",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "loot",
+          "signal": "blur",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "loot",
+          "signal": "pagehide",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "loot",
+          "signal": "hidden",
+          "paused": true,
+          "heldSuppressed": true
+        }
+      ]
+    },
+    {
+      "id": "F18 checkpoint immediately after layer, refresh restores only target map and one initial rebuild",
+      "status": "passed",
+      "detail": {
+        "before": "coast",
+        "after": "resident-f2",
+        "epoch": [
+          2,
+          3
+        ],
+        "rebuilds": [
+          2,
+          3,
+          1
+        ],
+        "restored": "resident-f2"
+      }
+    },
+    {
+      "id": "F19 DPR1/2/3 noninteger offset canvas and simulated safe-area aim alignment",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  assert.ok(Math.abs(r.aim-r.expect)<.01)\n\n    at <anonymous> (D:\\bincov\\pr22-runtime\\scripts\\sol-sample-boundaries.mjs:27:1001)\n    at async step (D:\\bincov\\pr22-runtime\\scripts\\sol-sample-boundaries.mjs:21:92)\n    at async <anonymous> (D:\\bincov\\pr22-runtime\\scripts\\sol-sample-boundaries.mjs:27:1)"
+    },
+    {
+      "id": "F20 twenty full deploy-layer-extract/abandon-base cycles, zero owners after each",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: cycle 1 apps\n\n1 !== 0\n\n    at <anonymous> (D:\\bincov\\pr22-runtime\\scripts\\sol-sample-boundaries.mjs:28:1258)\n    at async step (D:\\bincov\\pr22-runtime\\scripts\\sol-sample-boundaries.mjs:21:92)\n    at async <anonymous> (D:\\bincov\\pr22-runtime\\scripts\\sol-sample-boundaries.mjs:28:1)"
+    },
+    {
+      "id": "F21 both HTML and extracted portable ZIP finish offline without test globals",
+      "status": "failed",
+      "error": "Error: Command failed: powershell.exe -NoLogo -NoProfile -NonInteractive -Command Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory($env:BINCOV_SOL_ZIP,$env:BINCOV_SOL_EXTRACT,$true)\nCannot convert argument \"entryNameEncoding\", with value: \"True\", for \"ExtractToDirectory\" to type \"System.Text.Encoding\r\n\": \"Cannot convert value \"True\" to type \"System.Text.Encoding\". Error: \"Invalid cast from 'System.Boolean' to 'System.T\r\next.Encoding'.\"\"\r\nAt line:1 char:58\r\n+ ... FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory($env: ...\r\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (:) [], MethodException\r\n    + FullyQualifiedErrorId : MethodArgumentConversionInvalidCastArgument\r\n \r\n\n    at genericNodeError (node:internal/errors:985:15)\n    at wrappedFn (node:internal/errors:539:14)\n    at checkExecSyncError (node:child_process:942:11)\n    at execFileSync (node:child_process:978:15)\n    at <anonymous> (D:\\bincov\\pr22-runtime\\scripts\\sol-sample-boundaries.mjs:29:244)\n    at async step (D:\\bincov\\pr22-runtime\\scripts\\sol-sample-boundaries.mjs:21:92)\n    at async <anonymous> (D:\\bincov\\pr22-runtime\\scripts\\sol-sample-boundaries.mjs:29:1)"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "method": "Offline real packaged HTML. Explicit test fixtures position actors/freeze AI; all panel and lifecycle actions use native input. Visibility/pagehide are injected events; no physical-phone claim.",
+  "browser": "154.0.8037.98",
+  "finishedAt": "2026-10-07T17:25:38.929Z"
+}

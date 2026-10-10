@@ -1,0 +1,21 @@
+{
+  "htmlSha256": "a9a07a960049d6dc17e54b9fb7c765c99a72041c48e111c9b73b2ae2fa8d852f",
+  "startedAt": "2026-10-09T13:35:56.022Z",
+  "methodology": "Offline native mall E input. Explicit candidates move the original 25 enemy identities to obstruct target landing slots, set long attack cooldowns, and then clear exactly one slot. No fabricated enemy identities or reset population.",
+  "steps": [
+    {
+      "name": "all legal landing slots occupied: stays on F1 without population transfer",
+      "status": "passed",
+      "slots": 13
+    },
+    {
+      "name": "one slot cleared: specified landing accepted once; five-second held E/move/fire stays suppressed",
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "status": "passed",
+  "finishedAt": "2026-10-09T13:36:02.923Z"
+}

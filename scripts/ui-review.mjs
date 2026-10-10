@@ -36,7 +36,7 @@ try {
         report.checks.push({ viewport: size, view: name, status: 'passed' });
         console.log(`PASS ${size} ${name}`);
       };
-      await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1');
+      await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs');
       await action('enter').waitFor(); await page.waitForTimeout(200);
       await shot('menu');
       await action('help').click(); await shot('help'); await action('close').click();

@@ -1,0 +1,16 @@
+{
+  "startedAt": "2026-10-09T11:55:11.913Z",
+  "node": "v24.19.0",
+  "html": "D:\\bincov\\pr22-runtime\\dist\\index.html",
+  "sha256": "fe8ee26e6a993d5ed1bf28ab9bc9e88059f73080d6af3ac37aa719a617ea6f62",
+  "fault": null,
+  "rows": [],
+  "negativeControls": [],
+  "assertions": [],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "status": "failed",
+  "failure": "page.evaluate: Error: PIXI_EVENT_CONTRACT: _rootPointerEvent.nativeEvent missing\n    at fail (eval at <anonymous> (eval at evaluate (:311:30)), <anonymous>:2:35)\n    at readPixiEvents (eval at <anonymous> (eval at evaluate (:311:30)), <anonymous>:7:59)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:252)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at read (D:\\bincov\\pr22-runtime\\scripts\\sol-f20-gates.mjs:9:21)\n    at D:\\bincov\\pr22-runtime\\scripts\\sol-f20-gates.mjs:14:25",
+  "finishedAt": "2026-10-09T11:55:14.623Z"
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "name": "browser",
+    "script": "browser-test.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:10:53.6099958Z",
+    "finishedAt": "2026-10-07T17:11:34.0053207Z"
+  },
+  {
+    "name": "desktop-input",
+    "script": "desktop-input-test.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:11:34.0512089Z",
+    "finishedAt": "2026-10-07T17:11:58.8819338Z"
+  },
+  {
+    "name": "save-browser",
+    "script": "save-browser-test.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:11:58.8951927Z",
+    "finishedAt": "2026-10-07T17:12:12.7965844Z"
+  },
+  {
+    "name": "buildings",
+    "script": "building-browser-test.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:12:12.7993967Z",
+    "finishedAt": "2026-10-07T17:12:26.3681488Z"
+  },
+  {
+    "name": "mobile",
+    "script": "mobile-test.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:12:26.3708442Z",
+    "finishedAt": "2026-10-07T17:12:46.2733304Z"
+  },
+  {
+    "name": "mobile-ux",
+    "script": "mobile-ux-test.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:12:46.2761029Z",
+    "finishedAt": "2026-10-07T17:13:56.0041841Z"
+  },
+  {
+    "name": "portable",
+    "script": "portable-test.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:13:56.0064349Z",
+    "finishedAt": "2026-10-07T17:14:01.4309674Z"
+  },
+  {
+    "name": "ui",
+    "script": "ui-review.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:14:01.4334430Z",
+    "finishedAt": "2026-10-07T17:14:09.9897767Z"
+  },
+  {
+    "name": "loot",
+    "script": "loot-browser-test.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:14:09.9926383Z",
+    "finishedAt": "2026-10-07T17:15:03.1424607Z"
+  },
+  {
+    "name": "expansion",
+    "script": "expansion-browser-test.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:15:03.1448513Z",
+    "finishedAt": "2026-10-07T17:15:13.3386934Z"
+  },
+  {
+    "name": "qol-expansion",
+    "script": "qol-expansion-test.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:15:13.3413628Z",
+    "finishedAt": "2026-10-07T17:15:18.0877704Z"
+  },
+  {
+    "name": "systems",
+    "script": "systems-browser-test.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:15:18.0901571Z",
+    "finishedAt": "2026-10-07T17:15:56.4163688Z"
+  },
+  {
+    "name": "art",
+    "script": "art-review.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:15:56.4184325Z",
+    "finishedAt": "2026-10-07T17:16:09.5686753Z"
+  },
+  {
+    "name": "tactical",
+    "script": "tactical-review.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:16:09.5708683Z",
+    "finishedAt": "2026-10-07T17:16:28.1816548Z"
+  },
+  {
+    "name": "title",
+    "script": "title-review.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:16:28.1838244Z",
+    "finishedAt": "2026-10-07T17:17:27.0767357Z"
+  },
+  {
+    "name": "title-water",
+    "script": "title-water-review.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:17:27.0787702Z",
+    "finishedAt": "2026-10-07T17:17:37.0085018Z"
+  },
+  {
+    "name": "mall-passages",
+    "script": "mall-passages.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:17:37.0108329Z",
+    "finishedAt": "2026-10-07T17:20:24.6751574Z"
+  },
+  {
+    "name": "mall-landing",
+    "script": "mall-landing.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:20:24.6775001Z",
+    "finishedAt": "2026-10-07T17:20:32.6384683Z"
+  },
+  {
+    "name": "qol",
+    "script": "qol-test.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:20:32.6407122Z",
+    "finishedAt": "2026-10-07T17:20:55.3980933Z"
+  },
+  {
+    "name": "loot-target",
+    "script": "loot-target-test.mjs",
+    "exit": 0,
+    "startedAt": "2026-10-07T17:20:55.4060145Z",
+    "finishedAt": "2026-10-07T17:21:14.8685943Z"
+  }
+]

@@ -22,7 +22,7 @@ try {
     const action=(name,id)=>page.locator(`[data-action="${name}"]${id?`[data-id="${id}"]`:''}`);
     const shot=async name=>{await page.evaluate(()=>document.fonts.ready);await page.waitForFunction(()=>getComputedStyle(document.getElementById('toast')).opacity==='0');await page.screenshot({path:resolve(out,`${width}x${height}-${name}.png`)});};
     const check=name=>{report.checks.push(`${width}x${height}: ${name}`);console.log(`PASS ${width}x${height}: ${name}`);};
-    await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1');
+    await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1&entry=tabs');
     await action('enter').click();
     const box=selector=>page.locator(selector).boundingBox();
     const equipment=await box('.equipment-section'),bag=await box('[data-grid="bag"]'),stash=await box('[data-grid="stash"]'),safe=await box('[data-grid="safe"]'),details=await box('.details');

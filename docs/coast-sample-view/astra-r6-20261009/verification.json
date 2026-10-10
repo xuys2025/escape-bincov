@@ -1,0 +1,205 @@
+{
+  "date": "2026-10-09",
+  "start": "3a4391c7f533ce192c7c4cb3fabc4339e2d62ada",
+  "main": "8355b857736df7fe471301d61208c25e2b7f9d61",
+  "localMainSync": "8ae7e29",
+  "branch": "docs/coast-2-5d-art-design",
+  "pr": "https://github.com/xuys2025/escape-bincov/pull/22",
+  "remoteHeadAtStart": "878f5633316a824960091f8f924c0ddd8dd78078",
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "win32",
+    "pnpm": "11.19.0",
+    "chrome": "154.0.8037.98",
+    "desktopDPR": 1,
+    "touchEmulationDPR": 3
+  },
+  "artifacts": {
+    "version": "0.2.0",
+    "htmlBytes": 3206648,
+    "htmlSha256": "b46c56ef94cd049b71a285989f97f265cbc68788b0be34e026f2ab486c84eedd",
+    "artifacts": {
+      "dist/index.html": {
+        "bytes": 3206648,
+        "sha256": "b46c56ef94cd049b71a285989f97f265cbc68788b0be34e026f2ab486c84eedd"
+      },
+      "start the game.html": {
+        "bytes": 3206648,
+        "sha256": "b46c56ef94cd049b71a285989f97f265cbc68788b0be34e026f2ab486c84eedd"
+      },
+      "release/Escape-Bincov-portable.zip": {
+        "bytes": 1089968,
+        "sha256": "075fda3b4a6353426f9d71d6f12184760c7bfca6d492d3a5a580cb8892a42777"
+      },
+      "release/Escape-Bincov-web.zip": {
+        "bytes": 1086193,
+        "sha256": "92e1584fbb76e0236d005c484b0059146146e93dddaeaddb96a30b367f6642b7"
+      }
+    }
+  },
+  "unit": {
+    "command": "pnpm test",
+    "passed": 241,
+    "failed": 0,
+    "log": "evidence/unit-final.log"
+  },
+  "package": {
+    "command": "pnpm package",
+    "status": "passed",
+    "log": "evidence/package-final.log"
+  },
+  "processes": [
+    {
+      "name": "sample-release",
+      "command": "node scripts/coast-sample-test.mjs",
+      "startedAt": "2026-10-08T19:21:47.0150131Z",
+      "finishedAt": "2026-10-08T19:23:05.3757757Z",
+      "exitCode": 0,
+      "rawLogSHA256": "3d402cd0477c497ab38f991ecc1d9b56cc1339ba19358202983e981457cc25d3",
+      "log": "evidence/sample-release.log"
+    },
+    {
+      "name": "audio-release",
+      "command": "node scripts/coast-audio-test.mjs",
+      "startedAt": "2026-10-08T19:23:05.3892989Z",
+      "finishedAt": "2026-10-08T19:24:18.6227049Z",
+      "exitCode": 0,
+      "rawLogSHA256": "89186333bdbbbdb55324566920d750a802ac5c862b3728b4258d3ebb5919ed0c",
+      "log": "evidence/audio-release.log"
+    },
+    {
+      "name": "shots-release",
+      "command": "node scripts/coast-sample-shots.mjs",
+      "startedAt": "2026-10-08T19:24:18.6247879Z",
+      "finishedAt": "2026-10-08T19:26:06.5294139Z",
+      "exitCode": 0,
+      "rawLogSHA256": "cd9aeaad59d1d84ae4d7be495a5469d040562323b5d9ca7ef878027797ff1d98",
+      "log": "evidence/shots-release.log"
+    },
+    {
+      "name": "differential-release",
+      "command": "node scripts/runtime-differential.mjs",
+      "startedAt": "2026-10-08T19:26:06.5307557Z",
+      "finishedAt": "2026-10-08T19:26:16.0348695Z",
+      "exitCode": 0,
+      "rawLogSHA256": "e63914e9b08909cc7c740d305294ea24f5e0d41bf5a91cf102803ac978a5831e",
+      "log": "evidence/differential-release.log"
+    },
+    {
+      "name": "save-browser",
+      "command": "node scripts/save-browser-test.mjs",
+      "startedAt": "2026-10-08T19:26:16.036001Z",
+      "finishedAt": "2026-10-08T19:26:28.8024888Z",
+      "exitCode": 0,
+      "rawLogSHA256": "8a0d4935d3e5b7517581270a535c47de38f1208b5643ddcb699f8c5b0dd03a4b",
+      "log": "evidence/save-browser.log"
+    },
+    {
+      "name": "browser",
+      "command": "node scripts/browser-test.mjs",
+      "startedAt": "2026-10-08T19:26:28.8035878Z",
+      "finishedAt": "2026-10-08T19:27:07.5027463Z",
+      "exitCode": 0,
+      "rawLogSHA256": "cfeab6e0304e70bf5b868b8dd8c8ee79c44d1726a7eb7a15c79f7943d4c501ea",
+      "log": "evidence/browser.log"
+    },
+    {
+      "name": "portable",
+      "command": "node scripts/portable-test.mjs",
+      "startedAt": "2026-10-08T19:27:07.5039391Z",
+      "finishedAt": "2026-10-08T19:27:12.6810224Z",
+      "exitCode": 0,
+      "rawLogSHA256": "4396162c9909537bf09082a4a29a6a2f715141536fa085cd1fa29440d622fefe",
+      "log": "evidence/portable.log"
+    },
+    {
+      "name": "expansion",
+      "command": "node scripts/expansion-browser-test.mjs",
+      "startedAt": "2026-10-08T19:27:12.6819934Z",
+      "finishedAt": "2026-10-08T19:27:21.8618219Z",
+      "exitCode": 0,
+      "rawLogSHA256": "aacdc6946c7a02147dc0ba69a9db0cfde6efde79965bb7ad131279d7237a64c4",
+      "log": "evidence/expansion.log"
+    },
+    {
+      "name": "buildings",
+      "command": "node scripts/building-browser-test.mjs",
+      "startedAt": "2026-10-08T19:27:21.8635665Z",
+      "finishedAt": "2026-10-08T19:27:34.1640289Z",
+      "exitCode": 0,
+      "rawLogSHA256": "ffcf94d53e7da354fc0fba00b826ce25fca6a2fe456568e560071ee272449b99",
+      "log": "evidence/buildings.log"
+    },
+    {
+      "name": "desktop-input",
+      "command": "node scripts/desktop-input-test.mjs",
+      "startedAt": "2026-10-08T19:27:34.1653086Z",
+      "finishedAt": "2026-10-08T19:27:55.9749247Z",
+      "exitCode": 0,
+      "rawLogSHA256": "52631262cc186eacb1b58ffb12d8fe52049dd820874fd832959509d0068b8fe4",
+      "log": "evidence/desktop-input.log"
+    },
+    {
+      "name": "mobile",
+      "command": "node scripts/mobile-test.mjs",
+      "startedAt": "2026-10-08T19:27:55.9760536Z",
+      "finishedAt": "2026-10-08T19:28:14.8979605Z",
+      "exitCode": 0,
+      "rawLogSHA256": "00a99cd829ab09d01f53f4ee107e41c670b342518db0ec4bbf44b942b3883aba",
+      "log": "evidence/mobile.log"
+    },
+    {
+      "name": "mobile-ux",
+      "command": "node --import tsx scripts/mobile-ux-test.mjs",
+      "startedAt": "2026-10-08T19:28:14.8989303Z",
+      "finishedAt": "2026-10-08T19:29:24.1234657Z",
+      "exitCode": 0,
+      "rawLogSHA256": "cf82a1ecfc379ec1db7dfaef3929dcfb3a51c4e74779f03c844374a2093c8ec8",
+      "log": "evidence/mobile-ux.log"
+    },
+    {
+      "name": "play",
+      "command": "node --import tsx scripts/natural-play.mjs",
+      "startedAt": "2026-10-09T03:36:00.7304174Z",
+      "finishedAt": "2026-10-09T03:46:20.2066401Z",
+      "exitCode": 0,
+      "rawLogSHA256": "5428aed13c606d3481375b125e1a86e1afc9828b51d7b9375ef2a8ed352fff10",
+      "log": "evidence/play.log"
+    }
+  ],
+  "limitations": [
+    "No remote CI, push, PR merge or release.",
+    "No human or physical phone acceptance.",
+    "F20 not rerun; remains historical PARTIAL.",
+    "Historical ASTRA-SAVE-01 remains unconfirmed.",
+    "Opus frontend reason/cause/owner/flood rendering wiring is not implemented here.",
+    "Context-loss lifecycle suites not rerun in this R6 scope."
+  ],
+  "interruptedAttempts": [
+    {
+      "command": "node --import tsx scripts/natural-play.mjs",
+      "status": "interrupted",
+      "lastRecordedRealSeconds": 181,
+      "log": "evidence/play-interrupted.log",
+      "note": "Turn interrupted, process absent on resume; no successful exit or fresh final report. Restarted for a full ten minutes."
+    }
+  ],
+  "failedAttempts": [
+    {
+      "report": "evidence/unit-first.log",
+      "passed": 232,
+      "failed": 1
+    },
+    {
+      "report": "evidence/sample-first.json",
+      "passed": 44,
+      "failed": 4
+    },
+    {
+      "report": "evidence/sample-second.json",
+      "passed": 46,
+      "failed": 2
+    }
+  ],
+  "localScreenshots": "test-results/astra-r6/shots-release/ (68 PNGs; not duplicated into repository docs)"
+}

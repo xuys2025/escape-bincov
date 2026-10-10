@@ -1,0 +1,59 @@
+{
+  "startedAt": "2026-10-09T06:48:20.804Z",
+  "node": "v24.19.0",
+  "htmlSHA256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702",
+  "method": "Native endings; full 600s Playwright runFor for timeout, preserving rAF and stall protection. Timeout-only ticker capped at 10fps for clock workload; normal/render-death cases retain native cadence. Legal bag/safe and AI placement fixtures, native Storage terminal fault. No reason/outcome injection.",
+  "runs": [
+    {
+      "reason": "extract",
+      "fault": false,
+      "status": "failed",
+      "startedAt": "2026-10-09T06:48:20.988Z",
+      "fixture": {
+        "weapon": "pistol",
+        "bagUID": "r7-bag-water",
+        "safeUID": "r7-safe-water"
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at file:///D:/bincov/pr22-runtime/scripts/sol-r7-settlement.mjs:13:755",
+      "failureState": {
+        "state": "result"
+      },
+      "finishedAt": "2026-10-09T06:48:27.191Z"
+    },
+    {
+      "reason": "death",
+      "fault": false,
+      "status": "failed",
+      "startedAt": "2026-10-09T06:48:27.200Z",
+      "fixture": {
+        "weapon": "pistol",
+        "bagUID": "r7-bag-water",
+        "safeUID": "r7-safe-water"
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at file:///D:/bincov/pr22-runtime/scripts/sol-r7-settlement.mjs:13:755",
+      "failureState": {
+        "state": "result"
+      },
+      "finishedAt": "2026-10-09T06:48:31.271Z"
+    },
+    {
+      "reason": "abandon",
+      "fault": false,
+      "status": "failed",
+      "startedAt": "2026-10-09T06:48:31.276Z",
+      "fixture": {
+        "weapon": "pistol",
+        "bagUID": "r7-bag-water",
+        "safeUID": "r7-safe-water"
+      },
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at file:///D:/bincov/pr22-runtime/scripts/sol-r7-settlement.mjs:13:755",
+      "failureState": {
+        "state": "result"
+      },
+      "finishedAt": "2026-10-09T06:48:33.694Z"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98"
+}

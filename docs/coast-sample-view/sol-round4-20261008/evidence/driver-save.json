@@ -1,0 +1,64 @@
+{
+  "at": "2026-10-08T12:02:51.609Z",
+  "node": "v24.19.0",
+  "method": "Real offline runtime, repaired ?test=1 weapon/kill driver, wait >2s for actual checkpoint, decode its saved bytes. Illegal candidate copies are rejected only by Node decoder, never written. Saved body is never exported.",
+  "checks": [
+    {
+      "id": "weapon-checkpoint-carbine",
+      "capacity": 12,
+      "savedMagazine": 12,
+      "writesSinceDriver": 1,
+      "illegalCandidateRejected": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。"
+    },
+    {
+      "id": "weapon-checkpoint-shotgun",
+      "capacity": 2,
+      "savedMagazine": 2,
+      "writesSinceDriver": 1,
+      "illegalCandidateRejected": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。"
+    },
+    {
+      "id": "kill-checkpoint",
+      "savedKills": 1,
+      "savedDeadEnemies": 1,
+      "illegalCandidateRejected": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "diagnostic": {
+    "storageError": "",
+    "storageOK": true,
+    "rejected": [],
+    "writes": [
+      {
+        "bytes": 804,
+        "at": 392.30000000074506,
+        "result": "written"
+      },
+      {
+        "bytes": 15823,
+        "at": 1161.6000000014901,
+        "result": "written"
+      },
+      {
+        "bytes": 17072,
+        "at": 3271.60000000149,
+        "result": "written"
+      },
+      {
+        "bytes": 17070,
+        "at": 5277,
+        "result": "written"
+      },
+      {
+        "bytes": 17270,
+        "at": 7285.400000002235,
+        "result": "written"
+      }
+    ],
+    "saveErrors": []
+  },
+  "status": "passed"
+}

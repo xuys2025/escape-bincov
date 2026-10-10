@@ -20,7 +20,7 @@ async function reachable(selector){return page.locator(selector).evaluate(el=>{c
 async function resize(width,height){await page.setViewportSize({width,height});await page.waitForTimeout(150);if(await action('close').count())await action('close').tap();}
 async function fixture(){await page.evaluate(()=>{const r=__bincov.app.raid;r.player.setPosition(700,784);r.hp=100;r.bleeding=0;r.pollution=0;r.enemies.forEach(e=>{e.cooldown=9999;});r.bullets.forEach(b=>b.sprite.destroy());r.bullets=[];});}
 try {
- await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1');await action('enter').tap();await page.locator('#seed').fill('42');await action('deploy').tap();await page.waitForFunction(()=>__bincov.app.raid?.player?.active);await fixture();
+ await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1&entry=tabs');await action('enter').tap();await page.locator('#seed').fill('42');await action('deploy').tap();await page.waitForFunction(()=>__bincov.app.raid?.player?.active);await fixture();
  await step('seven phone sizes have immediately reachable inventory and detail exits',async()=>{
   for(const [width,height] of [[667,375],[740,300],[740,340],[740,341],[844,390],[915,412],[932,430]]){
    await resize(width,height);await page.locator('[data-panel="inventory"]').tap();assert.ok(await reachable('[data-action="close"]'));
@@ -146,7 +146,7 @@ try {
    desktop.on('request',r=>{if(/^https?:/.test(r.url()))report.requests.push(r.url())});
    try{
     const p=await desktop.newPage();p.on('pageerror',e=>report.errors.push(e.message));
-    await p.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1');await p.locator('[data-action="enter"]').click();
+    await p.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1&entry=tabs');await p.locator('[data-action="enter"]').click();
     await p.evaluate(()=>{__bincov.app.save.bag.items=[{uid:'desktop-water',id:'water',qty:1,x:0,y:0},{uid:'desktop-block',id:'bandage',qty:1,x:1,y:0}];});
     await p.locator('[data-action="tab"][data-id="gear"]').click();const before=await p.evaluate(()=>__bincov.app.save.bag);
     await p.locator('[data-uid="desktop-water"]').click();await p.locator('[data-action="rotate-item"]').click();await p.locator('[data-action="clear-selection"]').click();assert.deepEqual(await p.evaluate(()=>__bincov.app.save.bag),before);
@@ -158,13 +158,13 @@ try {
  if(process.env.BINCOV_LEGACY_HTML) await step('actual v0.2.0 raid migrates once; old HTML refuses the rotated record without overwriting',async()=>{
   let legacyContext=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,offline:true});
   const track=c=>{c.on('request',r=>{if(/^https?:/.test(r.url()))report.requests.push(r.url())});c.on('page',p=>p.on('pageerror',e=>report.errors.push(e.message)))};track(legacyContext);
-  const legacyUrl=pathToFileURL(resolve(process.env.BINCOV_LEGACY_HTML)).href+'?test=1';
+  const legacyUrl=pathToFileURL(resolve(process.env.BINCOV_LEGACY_HTML)).href+'?test=1&entry=tabs';
   try{
    const oldPage=await legacyContext.newPage();await oldPage.goto(legacyUrl);await oldPage.locator('[data-action="enter"]').tap();await oldPage.locator('#seed').fill('42');await oldPage.locator('[data-action="deploy"]').tap();await oldPage.waitForFunction(()=>__bincov.app.raid?.player?.active);await oldPage.locator('[data-panel="pause"]').tap();
    const bytes=await oldPage.evaluate(()=>localStorage.getItem('escape-bincov.session.v2'));assert.equal(JSON.parse(bytes).version,2);await legacyContext.close();
    legacyContext=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true,offline:true});
    track(legacyContext);await legacyContext.addInitScript(bytes=>{if(location.protocol!=='file:')return;const key='escape-bincov.session.v2';if(!localStorage.getItem(key))localStorage.setItem(key,bytes);window.__beforeRecord=localStorage.getItem(key);},bytes);
-   const next=await legacyContext.newPage();await next.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1');await next.waitForFunction(()=>window.__bincov);
+   const next=await legacyContext.newPage();await next.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1&entry=tabs');await next.waitForFunction(()=>window.__bincov);
    assert.equal(await next.evaluate(()=>__bincov.saveSession.currentRecord().migrationBackup),bytes);assert.equal(await next.evaluate(()=>__bincov.app.checkpoint.version),2);
    await next.locator('[data-action="enter"]').tap();await next.waitForFunction(()=>__bincov.app.raid?.player?.active);await next.locator('[data-action="close"]').tap();await next.locator('[data-panel="inventory"]').tap();await next.locator('[data-source="bag"][aria-label^="净水瓶"]').tap();await next.locator('[data-action="rotate-item"]').tap();assert.equal(await next.evaluate(()=>__bincov.app.loadout.bag.items.find(i=>i.id==='water').rotated),true);await next.close();
    const refused=await legacyContext.newPage();await refused.goto(legacyUrl);await refused.getByRole('heading',{name:'暂时无法打开存档'}).waitFor();assert.equal(await refused.evaluate(()=>__bincov.app.storageOK),false);assert.match(await refused.evaluate(()=>__bincov.app.storageError),/无法读取这份存档/);assert.equal(await refused.evaluate(()=>localStorage.getItem('escape-bincov.session.v2')===window.__beforeRecord),true);

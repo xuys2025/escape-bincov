@@ -1,0 +1,66 @@
+[
+  {
+    "file": "dist/index.html",
+    "bytes": 3146669,
+    "sha256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e",
+    "baseSHA256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e",
+    "byteEqual": true,
+    "equalsBase": "byte identity"
+  },
+  {
+    "file": "start the game.html",
+    "bytes": 3146669,
+    "sha256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e",
+    "baseSHA256": "6828628e28c006da2c466243e5b9d0c85aa751ed5dc814b0ea658a116eb2e82e",
+    "byteEqual": true,
+    "equalsBase": "byte identity"
+  },
+  {
+    "file": "release/Escape-Bincov-portable.zip",
+    "bytes": 1070057,
+    "sha256": "5e87fca7f44eb3bc847883aabd8eea8eed0080537e19533954697cbbab6adc92",
+    "baseSHA256": "5e87fca7f44eb3bc847883aabd8eea8eed0080537e19533954697cbbab6adc92",
+    "byteEqual": true,
+    "equalsBase": "byte identity"
+  },
+  {
+    "file": "release/Escape-Bincov-web.zip",
+    "bytes": 1066282,
+    "sha256": "37926e2b232aa62bb0704da9888b24de34d41b9c55959d9af7b5f9ff680effeb",
+    "baseSHA256": "37926e2b232aa62bb0704da9888b24de34d41b9c55959d9af7b5f9ff680effeb",
+    "byteEqual": true,
+    "equalsBase": "byte identity"
+  },
+  {
+    "file": "docs/release-manifest.json",
+    "bytes": 747,
+    "sha256": "251d3aa2c9b61767920cf9f700c30508ab6217b78e9ff10ff973b61edb7c43cc",
+    "baseSHA256": "251d3aa2c9b61767920cf9f700c30508ab6217b78e9ff10ff973b61edb7c43cc",
+    "byteEqual": true,
+    "equalsBase": "byte identity"
+  },
+  {
+    "file": "scripts/sol-round4-visual.mjs",
+    "bytes": 5821,
+    "sha256": "6c54a985c64237c0852068d32d87e682b18a538a8d82aa9a1bf019b5ba62d124",
+    "baseSHA256": "6c54a985c64237c0852068d32d87e682b18a538a8d82aa9a1bf019b5ba62d124",
+    "byteEqual": true,
+    "equalsBase": "LF-normalized source identity"
+  },
+  {
+    "file": "scripts/coast-sample-test.mjs",
+    "bytes": 56929,
+    "sha256": "ebbb16698834763f01d9287c6491d6807346bbcb774231ddf38c70e71cd9987e",
+    "baseSHA256": "ebbb16698834763f01d9287c6491d6807346bbcb774231ddf38c70e71cd9987e",
+    "byteEqual": true,
+    "equalsBase": "LF-normalized source identity"
+  },
+  {
+    "file": "scripts/coast-lifecycle-test.mjs",
+    "bytes": 8402,
+    "sha256": "0ebba499c38f875b7d7ccd0662dc5da900fec717922cd3380258acb8a415f578",
+    "baseSHA256": "b719e999c57727aebd27b135a8054a7ebb37c6eb83eabc627301f847fb3635ac",
+    "byteEqual": false,
+    "equalsBase": "LF-normalized source identity"
+  }
+]

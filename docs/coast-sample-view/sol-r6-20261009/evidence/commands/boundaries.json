@@ -1,0 +1,144 @@
+[
+  {
+    "id": "hidden-feedback",
+    "args": [
+      "scripts/sol-r6-hidden-feedback.mjs"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:35:36.247Z",
+    "finished": "2026-10-08T18:35:40.184Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "hidden-contract",
+    "args": [
+      "scripts/sol-visibility-probe.mjs"
+    ],
+    "environment": {
+      "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/hidden-contract"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:35:40.185Z",
+    "finished": "2026-10-08T18:35:43.146Z",
+    "exitCode": 1,
+    "signal": null
+  },
+  {
+    "id": "astra-save-classification",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/astra-save-diagnostic.mjs"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:35:43.147Z",
+    "finished": "2026-10-08T18:35:53.281Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "boundary-F01",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/sol-sample-boundaries.mjs"
+    ],
+    "environment": {
+      "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/boundary-F01",
+      "BINCOV_SOL_ONLY": "F01"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:35:53.281Z",
+    "finished": "2026-10-08T18:35:56.726Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "boundary-F14",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/sol-sample-boundaries.mjs"
+    ],
+    "environment": {
+      "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/boundary-F14",
+      "BINCOV_SOL_ONLY": "F14"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:35:56.726Z",
+    "finished": "2026-10-08T18:35:59.805Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "boundary-F16",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/sol-sample-boundaries.mjs"
+    ],
+    "environment": {
+      "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/boundary-F16",
+      "BINCOV_SOL_ONLY": "F16"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:35:59.806Z",
+    "finished": "2026-10-08T18:36:05.862Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "boundary-F18",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/sol-sample-boundaries.mjs"
+    ],
+    "environment": {
+      "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/boundary-F18",
+      "BINCOV_SOL_ONLY": "F18"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:36:05.862Z",
+    "finished": "2026-10-08T18:36:09.369Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "boundary-F19",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/sol-sample-boundaries.mjs"
+    ],
+    "environment": {
+      "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/boundary-F19",
+      "BINCOV_SOL_ONLY": "F19"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:36:09.370Z",
+    "finished": "2026-10-08T18:36:19.614Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "boundary-F21",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/sol-sample-boundaries.mjs"
+    ],
+    "environment": {
+      "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r6-20261009/boundary-F21",
+      "BINCOV_SOL_ONLY": "F21"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-08T18:36:19.614Z",
+    "finished": "2026-10-08T18:36:30.913Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

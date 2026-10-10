@@ -1,0 +1,183 @@
+{
+  "method": "BFS shortest strong root path (weak edges excluded); not a dominator retained-size calculation",
+  "limitations": "Two snapshots cannot prove bounded caches, exclusively attribute JIT/VM metadata, or measure GPU/driver memory. No universal heap allowance is inferred.",
+  "owners": [],
+  "newPerformanceNodes": {
+    "LargestContentfulPaint": 33,
+    "PerformanceLongAnimationFrameTiming": 21,
+    "LayoutShift": 28
+  },
+  "examples": [
+    {
+      "id": 38402,
+      "type": "native",
+      "name": "LargestContentfulPaint",
+      "strongRootReachable": true,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": ""
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "via": "element:10"
+        },
+        {
+          "id": 7399,
+          "type": "object",
+          "name": "UtilityScript",
+          "via": "internal:10 / DevTools console"
+        },
+        {
+          "id": 478959,
+          "type": "object",
+          "name": "Object",
+          "via": "property:builtins"
+        },
+        {
+          "id": 313993,
+          "type": "native",
+          "name": "Performance",
+          "via": "property:performance"
+        },
+        {
+          "id": 41288,
+          "type": "native",
+          "name": "blink::HeapVectorBacking<cppgc::internal::BasicMember<blink::PerformanceEntry, cppgc::internal::Stro",
+          "via": "element:11"
+        },
+        {
+          "id": 38400,
+          "type": "native",
+          "name": "InteractionContentfulPaint",
+          "via": "element:30"
+        },
+        {
+          "id": 38402,
+          "type": "native",
+          "name": "LargestContentfulPaint",
+          "via": "element:1"
+        }
+      ]
+    },
+    {
+      "id": 40990,
+      "type": "native",
+      "name": "PerformanceLongAnimationFrameTiming",
+      "strongRootReachable": true,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": ""
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "via": "element:10"
+        },
+        {
+          "id": 7399,
+          "type": "object",
+          "name": "UtilityScript",
+          "via": "internal:10 / DevTools console"
+        },
+        {
+          "id": 478959,
+          "type": "object",
+          "name": "Object",
+          "via": "property:builtins"
+        },
+        {
+          "id": 313993,
+          "type": "native",
+          "name": "Performance",
+          "via": "property:performance"
+        },
+        {
+          "id": 41292,
+          "type": "native",
+          "name": "blink::HeapVectorBacking<cppgc::internal::BasicMember<blink::PerformanceEntry, cppgc::internal::Stro",
+          "via": "element:14"
+        },
+        {
+          "id": 40990,
+          "type": "native",
+          "name": "PerformanceLongAnimationFrameTiming",
+          "via": "element:28"
+        }
+      ]
+    },
+    {
+      "id": 40992,
+      "type": "native",
+      "name": "LayoutShift",
+      "strongRootReachable": true,
+      "path": [
+        {
+          "id": 1,
+          "type": "synthetic",
+          "name": ""
+        },
+        {
+          "id": 3,
+          "type": "synthetic",
+          "name": "(GC roots)",
+          "via": "element:1"
+        },
+        {
+          "id": 23,
+          "type": "synthetic",
+          "name": "(Global handles)",
+          "via": "element:10"
+        },
+        {
+          "id": 7399,
+          "type": "object",
+          "name": "UtilityScript",
+          "via": "internal:10 / DevTools console"
+        },
+        {
+          "id": 478959,
+          "type": "object",
+          "name": "Object",
+          "via": "property:builtins"
+        },
+        {
+          "id": 313993,
+          "type": "native",
+          "name": "Performance",
+          "via": "property:performance"
+        },
+        {
+          "id": 41286,
+          "type": "native",
+          "name": "blink::HeapVectorBacking<cppgc::internal::BasicMember<blink::PerformanceEntry, cppgc::internal::Stro",
+          "via": "element:10"
+        },
+        {
+          "id": 40992,
+          "type": "native",
+          "name": "LayoutShift",
+          "via": "element:22"
+        }
+      ]
+    }
+  ]
+}

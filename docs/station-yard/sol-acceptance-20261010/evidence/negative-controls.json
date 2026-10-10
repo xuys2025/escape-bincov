@@ -1,0 +1,152 @@
+{
+  "rows": [
+    {
+      "name": "successful supply capture",
+      "expectedFailure": false,
+      "rejected": false,
+      "error": null
+    },
+    {
+      "name": "supply wrong qty",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "supply not consumed exactly once\n\n2 !== 1\n"
+    },
+    {
+      "name": "supply wrong satiety",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "food rule should restore 35, allowing only passive recovery"
+    },
+    {
+      "name": "refused supply capture",
+      "expectedFailure": false,
+      "rejected": false,
+      "error": null
+    },
+    {
+      "name": "refusal changed cash",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "refused supply changed inventory/profile\n+ actual - expected\n... Skipped lines\n\n  {\n    activeRun: null,\n    bag: {\n      h: 5,\n      items: [\n...\n    },\n+   cash: 5999,\n-   cash: 6000,\n    equipment: {\n      ammo: 0,\n      ammoRelief: 0,\n      relief: false,\n      weapon: 'pistol'\n"
+    },
+    {
+      "name": "refusal changed body",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "refused supply changed body\n+ actual - expected\n... Skipped lines\n\n  {\n    attributes: {\n      constitution: {\n        base: 10,\n        effective: 10,\n...\n    pollution: 0,\n+   satiety: 99,\n-   satiety: 100,\n    stamina: 100,\n    staminaMax: 100,\n    treatment: {\n      bleeding: 0,\n      injectionFatigue: 0,\n"
+    },
+    {
+      "name": "training capture",
+      "expectedFailure": false,
+      "rejected": false,
+      "error": null
+    },
+    {
+      "name": "training wrong reward",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "wrong growth reward"
+    },
+    {
+      "name": "training wrong effectiveTime",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "effective time does not match persisted seconds"
+    },
+    {
+      "name": "training wrong pausedTime",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "静止 counted paused time\n\n1 !== 0\n"
+    },
+    {
+      "name": "training wrong wallClock",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "real foreground walk lasted less than 120 seconds"
+    },
+    {
+      "name": "zero frame errors",
+      "expectedFailure": false,
+      "rejected": false,
+      "error": null
+    },
+    {
+      "name": "internal caught frame errors",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "normal flow internal frame errors\n+ actual - expected\n\n+ [\n+   {\n+     count: 3,\n+     message: 'injected frame error (test)'\n+   }\n+ ]\n- []\n"
+    },
+    {
+      "name": "precise fallback stack",
+      "expectedFailure": false,
+      "rejected": false,
+      "error": null
+    },
+    {
+      "name": "extra error alongside fallback",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "no-WebGL whitelist requires exactly one error\n\n2 !== 1\n"
+    },
+    {
+      "name": "same message substring only",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "unexpected no-WebGL error\n+ actual - expected\n\n+ '[console] Error: Station yard unexpected needs WebGL (got canvas).'\n- '[console] Error: Station yard needs WebGL (got canvas).'\n"
+    },
+    {
+      "name": "extra non-stack text",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "unexpected text appended to expected fallback error"
+    },
+    {
+      "name": "full title save capture",
+      "expectedFailure": false,
+      "rejected": false,
+      "error": null
+    },
+    {
+      "name": "title changed body",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "title round-trip changed non-metadata save fields\n+ actual - expected\n... Skipped lines\n\n  {\n    expansion: {\n      awards: [],\n      base: {\n        completed: [],\n...\n        exhausted: false,\n+       hp: 99,\n-       hp: 100,\n        luckEffect: 0,\n        mental: 100,\n        pollution: 0,\n        satiety: 100,\n        stamina: 100,\n"
+    },
+    {
+      "name": "title changed growth",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "title round-trip changed non-metadata save fields\n+ actual - expected\n... Skipped lines\n\n  {\n    expansion: {\n      awards: [],\n      base: {\n        completed: [],\n...\n          strength: 0,\n+         technique: 0.001\n-         technique: 0\n        },\n        reputation: {}\n      },\n      raid: null,\n      version: 2\n"
+    },
+    {
+      "name": "title changed facility",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "title round-trip changed non-metadata save fields\n+ actual - expected\n... Skipped lines\n\n  {\n    expansion: {\n      awards: [],\n      base: {\n        completed: [],\n...\n          medical: 0,\n+         rest: 1,\n-         rest: 0,\n          training: 0,\n          workbench: 0\n        },\n        location: 'base',\n        nextBatch: 1,\n"
+    },
+    {
+      "name": "title changed queue",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "title round-trip changed non-metadata save fields\n+ actual - expected\n... Skipped lines\n\n  {\n    expansion: {\n      awards: [],\n      base: {\n        completed: [],\n...\n        location: 'base',\n+       nextBatch: 2,\n-       nextBatch: 1,\n        queue: [],\n        restSeconds: 0.868,\n        training: {\n          activeSeconds: 0,\n          attribute: null,\n"
+    },
+    {
+      "name": "title changed backup",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "title round-trip changed non-metadata save fields\n+ actual - expected\n... Skipped lines\n\n  {\n    expansion: {\n      awards: [],\n      base: {\n        completed: [],\n...\n    format: 'escape-bincov-session',\n+   legacyBackup: 'modified',\n-   legacyBackup: null,\n    migrationBackup: null,\n    profile: {\n      activeRun: null,\n      bag: {\n        h: 5,\n"
+    },
+    {
+      "name": "title changed unexpectedField",
+      "expectedFailure": true,
+      "rejected": true,
+      "error": "title round-trip changed non-metadata save fields\n+ actual - expected\n... Skipped lines\n\n  {\n    expansion: {\n      awards: [],\n      base: {\n        completed: [],\n...\n      raid: null,\n+     unknown: 1,\n      version: 2\n    },\n    format: 'escape-bincov-session',\n    legacyBackup: null,\n    migrationBackup: null,\n"
+    }
+  ],
+  "summary": {
+    "passed": 24,
+    "total": 24
+  }
+}

@@ -16,7 +16,7 @@ const legacyClients = {
 assert.ok(Object.hasOwn(legacyClients, hash(legacy)), 'Use an actual pinned pre-expansion main HTML, not a simulated old decoder');
 const report = { startedAt: new Date().toISOString(), baseline: legacyClients[hash(legacy)],
     legacySha256: hash(legacy), currentSha256: hash(current), steps: [], errors: [], unexpectedRequests: [],
-    methodology: 'Real pinned main HTML and current bundle on one locally fulfilled HTTPS origin, offline; explicit test-only extension fixture. No new map/gameplay/UI acceptance is claimed.' };
+    methodology: 'Injected session clock for exact persistence snapshots (not a timing test). Real pinned main HTML and current bundle on one locally fulfilled HTTPS origin, offline; explicit test-only extension fixture. No new map/gameplay/UI acceptance is claimed.' };
 const browser = await chromium.launch(browserOptions); report.browser = browser.version();
 const context = await browser.newContext({ viewport: { width: 1280, height: 720 }, offline: true, acceptDownloads: true });
 await context.route('https://bincov-expansion.test/**', route => route.fulfill({ status: 200, contentType: 'text/html; charset=utf-8',
@@ -25,7 +25,11 @@ context.on('request', request => { if (/^https?:/.test(request.url()) && !reques
 context.on('page', page => page.on('pageerror', error => report.errors.push(error.message)));
 const raw = page => page.evaluate(() => localStorage.getItem('escape-bincov.session.v2'));
 const action = (page, name, id) => page.locator(`[data-action="${name}"]${id ? `[data-id="${id}"]` : ''}`);
-const ready = page => page.waitForFunction(() => !!window.__bincov?.saveSession);
+const ready = async page => {
+    await page.waitForFunction(() => !!window.__bincov?.saveSession);
+    // Persistence fixture only: leave Phaser's browser clock and real input scheduling intact.
+    if (new URL(page.url()).pathname.startsWith('/current')) await page.evaluate(() => { window.__bincov.saveSession.now = () => 1800000000000; });
+};
 async function failStorage(page, on, terminalOnly = false) {
     await page.evaluate(({ on, terminalOnly }) => {
         window.__m0Write ??= Storage.prototype.setItem;
@@ -43,12 +47,12 @@ async function step(name, work) {
 let old = await context.newPage(), page = await context.newPage(), preUpgrade;
 try {
     await step('the actual v3 main client creates progress; new client respects its lock then takes over', async () => {
-        await old.goto('https://bincov-expansion.test/legacy?test=1'); await ready(old); await action(old, 'enter').click();
+        await old.goto('https://bincov-expansion.test/legacy?test=1&entry=tabs'); await ready(old); await action(old, 'enter').click();
         assert.equal(await old.evaluate(() => { window.__bincov.app.save.cash = 1842; return window.__bincov.persist(); }), true);
         const bytes = await raw(old);
-        await page.goto('https://bincov-expansion.test/current?test=1'); await ready(page);
+        await page.goto('https://bincov-expansion.test/current?test=1&entry=tabs'); await ready(page);
         assert.equal(await page.evaluate(() => window.__bincov.app.storageOK), false); assert.equal(await raw(page), bytes);
-        await old.close(); await page.reload(); await ready(page); await action(page, 'enter').click();
+        await old.close(); await page.reload(); await ready(page); // Inspect v3 before the mandatory station-boundary upgrade.
         assert.equal(await page.evaluate(() => window.__bincov.app.save.cash), 1842);
         preUpgrade = await raw(page); assert.equal(JSON.parse(preUpgrade).version, 3);
     });
@@ -67,7 +71,7 @@ try {
     });
     await step('the actual old HTML rejects v4 both with and without the writer lock, preserving every byte', async () => {
         const bytes = await raw(page); old = await context.newPage();
-        await old.goto('https://bincov-expansion.test/legacy?test=1'); await ready(old);
+        await old.goto('https://bincov-expansion.test/legacy?test=1&entry=tabs'); await ready(old);
         assert.equal(await old.evaluate(() => window.__bincov.app.storageOK), false);
         assert.match(await old.evaluate(() => window.__bincov.app.storageError), /兼容|无法读取/);
         assert.equal(await old.evaluate(() => window.__bincov.persist()), false); assert.equal(await raw(old), bytes);
@@ -75,7 +79,7 @@ try {
         assert.equal(await old.evaluate(() => window.__bincov.app.storageOK), false);
         assert.equal(await old.evaluate(() => window.__bincov.persist()), false); assert.equal(await raw(old), bytes);
         await old.close(); page = await context.newPage();
-        await page.goto('https://bincov-expansion.test/current?test=1'); await ready(page); await action(page, 'enter').click();
+        await page.goto('https://bincov-expansion.test/current?test=1&entry=tabs'); await ready(page); await action(page, 'enter').click();
         assert.equal(JSON.parse(await raw(page)).systemsBackup, preUpgrade);
     });
     await step('settled native export includes the full extension; cancel/failure/confirmation preserve atomic import', async () => {
@@ -123,5 +127,5 @@ try {
         assert.equal(JSON.parse(await raw(page)).expansion.base.location, 'base');
     });
     report.status = 'passed';
-} catch (error) { report.status = 'failed'; report.failure = error.stack; console.error(error); process.exitCode = 1; }
+} catch (error) { report.status = 'failed'; report.failure = error.stack; report.diagnostic = await page.evaluate(() => ({state:window.__bincov?.app.state, overlay:window.__bincov?.app.overlay, error:window.__bincov?.app.storageError})).catch(()=>null); console.error(error); process.exitCode = 1; }
 finally { await context.close(); await browser.close(); report.finishedAt = new Date().toISOString(); await writeFile(resolve(root, 'expansion-browser-report.json'), JSON.stringify(report, null, 2)); }

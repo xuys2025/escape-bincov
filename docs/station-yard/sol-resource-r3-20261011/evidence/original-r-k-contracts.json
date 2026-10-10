@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-10T18:07:01.431Z",
+  "baseline": "68daab4",
+  "functions": {
+    "R": {
+      "same": true,
+      "SHA256": "fd1635c2aed56d7e596323c3c0b87772de4b18d9b2de0570e8c8b18cbbfb5f82"
+    },
+    "K3": {
+      "same": true,
+      "SHA256": "0c4304ff0c57f90e5b30afdfe570321427fe214d94dee59f56abe140531f0170"
+    },
+    "K4": {
+      "same": true,
+      "SHA256": "4c6c8db91061faa4c7a050b184819573fae279ee48434c3e60830072c4b998ac"
+    }
+  },
+  "traceOptional": true
+}

@@ -16,7 +16,7 @@ try{
     const context=await browser.newContext({viewport:{width,height},offline:true,reducedMotion:'reduce'});
     context.on('request',r=>{if(/^https?:/.test(r.url()))report.externalRequests.push(r.url());});
     const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));
-    const start=performance.now();await page.goto(pathToFileURL(files[version]).href+'?test=1');
+    const start=performance.now();await page.goto(pathToFileURL(files[version]).href+'?test=1&entry=tabs');
     await page.locator('[data-action="enter"]').waitFor();const bootMs=performance.now()-start;
     await page.locator('[data-action="enter"]').click();await page.locator('#seed').fill('42');
     await page.locator('[data-action="deploy"]').click();await page.waitForFunction(()=>window.__bincov.app.raid?.player?.active);

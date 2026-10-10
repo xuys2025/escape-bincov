@@ -1,0 +1,123 @@
+{
+  "at": "2026-10-10T12:51:58.902Z",
+  "fixedProductBaseline": "c24d32b7984fb0b0b62eeb9bc100e349fccdb166",
+  "stepSummaries": [
+    {
+      "path": "evidence/station/report.json",
+      "passed": 76,
+      "total": 76
+    },
+    {
+      "path": "evidence/before/report.json",
+      "passed": 7,
+      "total": 23
+    },
+    {
+      "path": "evidence/extra-first/report.json",
+      "passed": 2,
+      "total": 7
+    },
+    {
+      "path": "evidence/extra-recheck/report.json",
+      "passed": 1,
+      "total": 4
+    },
+    {
+      "path": "evidence/extra-stable/report.json",
+      "passed": 3,
+      "total": 4
+    },
+    {
+      "path": "evidence/motion-final/report.json",
+      "passed": 1,
+      "total": 1
+    },
+    {
+      "path": "evidence/paired-first/report.json",
+      "passed": 1,
+      "total": 1
+    },
+    {
+      "path": "evidence/resource-probe/report.json",
+      "passed": 0,
+      "total": 1
+    },
+    {
+      "path": "evidence/resource-recheck/report.json",
+      "passed": 0,
+      "total": 1
+    }
+  ],
+  "formalRegressionShapes": [
+    {
+      "path": "mobile/mobile/report.json",
+      "passed": 10,
+      "total": 10,
+      "errors": 0
+    },
+    {
+      "path": "mobile-ux/mobile-ux/report.json",
+      "passed": 11,
+      "total": 11,
+      "errors": 0
+    },
+    {
+      "path": "desktop-input/desktop-input/report.json",
+      "passed": 10,
+      "total": 10,
+      "errors": 0
+    },
+    {
+      "path": "shop-drag/shop-drag/report.json",
+      "passed": 21,
+      "total": 21,
+      "errors": 0
+    },
+    {
+      "path": "portable/portable-report.json",
+      "passed": 6,
+      "total": 6,
+      "errors": 0
+    },
+    {
+      "path": "title/title/report.json",
+      "passed": 27,
+      "total": 27,
+      "errors": 0
+    },
+    {
+      "path": "save-browser/save-browser-report.json",
+      "passed": 9,
+      "total": 9,
+      "errors": 0
+    },
+    {
+      "path": "systems/systems-browser-report.json",
+      "passed": 16,
+      "total": 16,
+      "errors": 0
+    },
+    {
+      "path": "hideout/hideout-browser/report.json",
+      "passed": 8,
+      "total": 8,
+      "errors": 0
+    },
+    {
+      "path": "coast-sample/coast-sample/report.json",
+      "passed": 51,
+      "total": 51,
+      "errors": 0
+    }
+  ],
+  "engineeringJobsSequential": true,
+  "relativeLinksResolved": 58,
+  "resourceRecordedHeapMaxBytes": 39908863,
+  "scriptSHA256": "c51b4f38e7f3b08df0a714fa97afde0f7191d691df8d29589823f31c5ba8dc1b",
+  "contracts": {
+    "finalMotionSourceEqualsSnapshot": true,
+    "pairedFunctionUnchanged": true,
+    "touchJ1J2Unchanged": true
+  },
+  "rawFailureEvidenceRetained": true
+}

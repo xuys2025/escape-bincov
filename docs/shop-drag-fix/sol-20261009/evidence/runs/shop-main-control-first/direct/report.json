@@ -1,0 +1,121 @@
+{
+  "html": "D:\\bincov\\shop-drag-fix\\test-results\\shop-drag-sol-20261009\\main-43a342c.html",
+  "browser": "154.0.8037.98",
+  "startedAt": "2026-10-09T13:26:30.646Z",
+  "steps": [
+    {
+      "name": "修理铺: drag 商人物品 -> 待买 lands on the chosen cell with a live preview; no money or save changes before checkout",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: the pack is in 待买\n+ actual - expected\n\n+ []\n- [\n-   'pistol'\n- ]\n\n    at file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:83:12\n    at async step (file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:27:22)\n    at async file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:80:3"
+    },
+    {
+      "name": "修理铺: drag 待买 -> 商人物品 cancels the purchase",
+      "status": "failed",
+      "error": "locator.boundingBox: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.shop-layout [data-source=\"buy\"][data-item-id=\"pistol\"]').first()\u001b[22m\n\n    at drag (D:\\bincov\\shop-drag-fix\\scripts\\shop-drag-test.mjs:62:24)\n    at D:\\bincov\\shop-drag-fix\\scripts\\shop-drag-test.mjs:92:11\n    at step (D:\\bincov\\shop-drag-fix\\scripts\\shop-drag-test.mjs:27:28)\n    at D:\\bincov\\shop-drag-fix\\scripts\\shop-drag-test.mjs:91:9"
+    },
+    {
+      "name": "修理铺: refused drops say why and move nothing; a catalog item dropped back on the catalog is a quiet cancel",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /先放入待买或待卖区/. Input:\n\n''\n\n    at file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:101:83\n    at async step (file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:27:22)\n    at async file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:97:3"
+    },
+    {
+      "name": "修理铺: focus loss, Esc and R mid-drag: the drag ends cleanly (or keeps the item's orientation) and the next drag works",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: the drag was under way when focus was lost\n\nfalse !== true\n\n    at file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:112:12\n    at async step (file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:27:22)\n    at async file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:108:3"
+    },
+    {
+      "name": "修理铺: click-to-place (选中 → 移动格位 → 点格) still works and does not start a drag",
+      "status": "passed",
+      "detail": {
+        "buy": [
+          "pistol"
+        ]
+      }
+    },
+    {
+      "name": "修理铺: checkout with a failed storage write keeps money, warehouse and cart; the retry buys once",
+      "status": "passed",
+      "detail": {
+        "cash": [
+          700,
+          700,
+          380
+        ],
+        "due": 320,
+        "stash": [
+          "medkit×1",
+          "ammo9×24",
+          "pistol×1"
+        ]
+      }
+    },
+    {
+      "name": "修理铺: drag 仓库 -> 待卖, back to 仓库 (cancel), again to 待卖, then sell",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ []\n- [\n-   'pistol'\n- ]\n\n    at file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:152:12\n    at async step (file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:27:22)\n    at async file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:148:3"
+    },
+    {
+      "name": "卫生所: drag 商人物品 -> 待买 lands on the chosen cell with a live preview; no money or save changes before checkout",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: the pack is in 待买\n+ actual - expected\n\n+ []\n- [\n-   'bandage'\n- ]\n\n    at file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:83:12\n    at async step (file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:27:22)\n    at async file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:80:3"
+    },
+    {
+      "name": "卫生所: drag 待买 -> 商人物品 cancels the purchase",
+      "status": "failed",
+      "error": "locator.boundingBox: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.shop-layout [data-source=\"buy\"][data-item-id=\"bandage\"]').first()\u001b[22m\n\n    at drag (D:\\bincov\\shop-drag-fix\\scripts\\shop-drag-test.mjs:62:24)\n    at D:\\bincov\\shop-drag-fix\\scripts\\shop-drag-test.mjs:92:11\n    at step (D:\\bincov\\shop-drag-fix\\scripts\\shop-drag-test.mjs:27:28)\n    at D:\\bincov\\shop-drag-fix\\scripts\\shop-drag-test.mjs:91:9"
+    },
+    {
+      "name": "卫生所: refused drops say why and move nothing; a catalog item dropped back on the catalog is a quiet cancel",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: The input did not match the regular expression /先放入待买或待卖区/. Input:\n\n''\n\n    at file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:101:83\n    at async step (file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:27:22)\n    at async file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:97:3"
+    },
+    {
+      "name": "卫生所: focus loss, Esc and R mid-drag: the drag ends cleanly (or keeps the item's orientation) and the next drag works",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: the drag was under way when focus was lost\n\nfalse !== true\n\n    at file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:112:12\n    at async step (file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:27:22)\n    at async file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:108:3"
+    },
+    {
+      "name": "卫生所: click-to-place (选中 → 移动格位 → 点格) still works and does not start a drag",
+      "status": "passed",
+      "detail": {
+        "buy": [
+          "bandage"
+        ]
+      }
+    },
+    {
+      "name": "卫生所: checkout with a failed storage write keeps money, warehouse and cart; the retry buys once",
+      "status": "passed",
+      "detail": {
+        "cash": [
+          700,
+          700,
+          655
+        ],
+        "due": 45,
+        "stash": [
+          "medkit×1",
+          "ammo9×24",
+          "bandage×1"
+        ]
+      }
+    },
+    {
+      "name": "卫生所: drag 仓库 -> 待卖, back to 仓库 (cancel), again to 待卖, then sell",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ []\n- [\n-   'bandage'\n- ]\n\n    at file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:152:12\n    at async step (file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:27:22)\n    at async file:///D:/bincov/shop-drag-fix/scripts/shop-drag-test.mjs:148:3"
+    },
+    {
+      "name": "touch 844x390: tap-to-place moves 商人物品 -> 待买 and back; items are not draggable",
+      "status": "passed",
+      "detail": {
+        "buy": [
+          "pistol"
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "finishedAt": "2026-10-09T13:27:03.487Z"
+}

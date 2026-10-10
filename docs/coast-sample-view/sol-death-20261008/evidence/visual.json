@@ -1,0 +1,72 @@
+[
+  {
+    "id": "regression-ui",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:ui"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T13:01:09.549Z",
+    "finished": "2026-10-08T13:01:21.331Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-tactical",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:tactical"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T13:01:21.332Z",
+    "finished": "2026-10-08T13:01:42.216Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-art",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:art"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T13:01:42.217Z",
+    "finished": "2026-10-08T13:01:59.545Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-title",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:title"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T13:01:59.546Z",
+    "finished": "2026-10-08T13:03:04.859Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-title-water",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:title-water"
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-08T13:03:04.860Z",
+    "finished": "2026-10-08T13:03:15.467Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

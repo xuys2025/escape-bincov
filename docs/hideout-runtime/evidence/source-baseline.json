@@ -1,0 +1,165 @@
+{
+  "recordedAt": "2026-10-09T16:30:02.284Z",
+  "worktree": "D:/bincov/hideout-runtime",
+  "branch": "agent/hideout-runtime",
+  "refs": [
+    {
+      "ref": "HEAD",
+      "sha": "37c75810a332ac055a1302f1877cc014bfc2707e"
+    },
+    {
+      "ref": "origin/main",
+      "sha": "43a342ce434c101e4b7058a54f6f29ede9482223"
+    },
+    {
+      "ref": "176ee1d",
+      "sha": "176ee1d294e9410894909ed2889d0512b80215c9"
+    },
+    {
+      "ref": "ddba69f",
+      "sha": "ddba69fc729a98291c57bb94fffb85fddc4a5b3b"
+    }
+  ],
+  "pr22": {
+    "state": "OPEN",
+    "merged": false,
+    "head": "878f5633316a824960091f8f924c0ddd8dd78078",
+    "headRepository": "LMX-323/escape-bincov",
+    "localOnly": true
+  },
+  "sources": [
+    {
+      "path": "D:/bincov/前端原型-水产站-20261009/src/contract/hideout.ts",
+      "sha256": "d84435410447aaf084eab8369593ed11c82e1d9ca9ac52e778f9d21d57a88870"
+    },
+    {
+      "path": "D:/bincov/前端原型-水产站-20261009/docs/03-给GPT-逻辑需求清单.md",
+      "sha256": "78c9d5378024fb5b0264e28fbc5587bcb1e3198cd9f8e122f5608da340aa4e9b"
+    },
+    {
+      "path": "D:/bincov/前端原型-水产站-20261009/docs/06-产品决策与下一轮计划.md",
+      "sha256": "7b50a025e0e465df2b609b81ae220f846ff1067bca47a13094a23f907ca3a288"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "dist/index.html",
+      "sha256": "dabb759d521625ff2510bce2ac610633ccd48fa4dbb01e8715d4cffda3636b17"
+    },
+    {
+      "path": "start the game.html",
+      "sha256": "dabb759d521625ff2510bce2ac610633ccd48fa4dbb01e8715d4cffda3636b17"
+    },
+    {
+      "path": "release/Escape-Bincov-portable.zip",
+      "sha256": "57f5fee482acd9076f70acc2824cc3a4dda8c1fa3d106a6b22420bcb9a61687f"
+    },
+    {
+      "path": "release/Escape-Bincov-web.zip",
+      "sha256": "1277a93367a3c2891b95dc35947b5bd9acf3b6594b3b9a6a54734bf3acc38bfb"
+    },
+    {
+      "path": "docs/release-manifest.json",
+      "sha256": "a5420895b0f4fc42cfbd7b265d548e8699fa44f17faad782cd2d6497f09939d1"
+    }
+  ],
+  "reports": [
+    {
+      "file": "hideout-browser.json",
+      "startedAt": "2026-10-09T16:28:32.320Z",
+      "finishedAt": "2026-10-09T16:28:44.010Z",
+      "status": "passed",
+      "steps": 8,
+      "sha256": "73605f0a1ae5fa8037601a282607ce68c0e82f5a3af02c64f656066f369d691d"
+    },
+    {
+      "file": "save-browser.json",
+      "startedAt": "2026-10-09T16:15:49.830Z",
+      "finishedAt": "2026-10-09T16:16:02.361Z",
+      "status": "passed",
+      "steps": 9,
+      "sha256": "add1bdc8dd4387cf00cb3758f16d04c5787aa045fbf86481e04c6e882da454b5"
+    },
+    {
+      "file": "shop-drag.json",
+      "startedAt": "2026-10-09T16:07:36.402Z",
+      "finishedAt": "2026-10-09T16:07:53.602Z",
+      "status": "passed",
+      "steps": 21,
+      "sha256": "44f50251286e1d2f836834948dd097afbcc24fdc20f8592ca99c7d654749ab40"
+    },
+    {
+      "file": "coast-sample.json",
+      "startedAt": "2026-10-09T16:10:32.478Z",
+      "finishedAt": "2026-10-09T16:12:04.000Z",
+      "status": "passed",
+      "steps": 51,
+      "sha256": "1ff8fa63b683aa3e0c8ee711c7e1c72bcc30e46fbe103b38c6836a1d42345db2"
+    },
+    {
+      "file": "expansion-browser.json",
+      "startedAt": "2026-10-09T16:20:37.692Z",
+      "finishedAt": "2026-10-09T16:20:46.216Z",
+      "status": "passed",
+      "steps": 5,
+      "sha256": "00d272a0489c42b4063dca9b57c45c3a77aacb6a1f9afa22d1175f2d19d4888b"
+    },
+    {
+      "file": "browser.json",
+      "startedAt": "2026-10-09T16:10:32.725Z",
+      "finishedAt": "2026-10-09T16:11:11.283Z",
+      "status": "passed",
+      "sha256": "7394f4cd1e1f18c370a17c4941941c8b8cebc07a7aa0a05ad894fb925705e8ed"
+    },
+    {
+      "file": "desktop-input.json",
+      "startedAt": "2026-10-09T16:11:12.920Z",
+      "sha256": "0aa9193177167633343b5b685760b36eb40b7a0790e2d85570ecb8b6c68fd44f"
+    },
+    {
+      "file": "ui.json",
+      "startedAt": "2026-10-09T16:11:42.234Z",
+      "finishedAt": "2026-10-09T16:11:50.054Z",
+      "status": "passed",
+      "sha256": "661ddd140764c61f9f360e28e73b01622862749e40fef7921ef756adbcf1296c"
+    },
+    {
+      "file": "mobile.json",
+      "startedAt": "2026-10-09T16:20:47.432Z",
+      "finishedAt": "2026-10-09T16:21:06.555Z",
+      "status": "passed",
+      "steps": 10,
+      "sha256": "18480533f1896d6ab6396b689e47c6a527cf6572909c6f391db3e0f2baee08d3"
+    },
+    {
+      "file": "mobile-ux.json",
+      "startedAt": "2026-10-09T16:16:00.591Z",
+      "finishedAt": "2026-10-09T16:17:10.256Z",
+      "status": "passed",
+      "steps": 11,
+      "sha256": "8a4d1a7451522c12160ccb3b9c073a4dbf8e4cec924ff6eb850b60eb126e1aee"
+    },
+    {
+      "file": "systems.json",
+      "startedAt": "2026-10-09T16:17:11.722Z",
+      "finishedAt": "2026-10-09T16:17:47.849Z",
+      "status": "passed",
+      "steps": 16,
+      "sha256": "45a794d014964801cebbf98ad7e9ad10a007c5726ebf868e4c69bcd7184a36ea"
+    },
+    {
+      "file": "qol-expansion.json",
+      "status": "passed",
+      "steps": 4,
+      "sha256": "1fd23426aeed27a8fdca5cf225a14a2a885523491ccceee3aaf2718639a49049"
+    },
+    {
+      "file": "portable.json",
+      "startedAt": "2026-10-09T16:28:45.428Z",
+      "finishedAt": "2026-10-09T16:28:50.346Z",
+      "status": "passed",
+      "steps": 6,
+      "sha256": "63c82039bbcee3524f0184e26cb8bb0b8b20b0092946e1b932d7dc1657c8b3c7"
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
+import { throughYard } from './yard-entry.mjs';
 import { browserOptions } from './browser-options.mjs';
 
 const out = resolve('test-results');
@@ -34,7 +35,7 @@ async function step(name, work) {
 }
 let backupPath;
 try {
-  await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1');
+  await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs');
   await action('enter').click();
   await step('failed purchase preserves cash and inventory; retry commits once', async () => {
     await action('tab', 'arms').click();
@@ -69,13 +70,16 @@ try {
     const downloadPromise = page.waitForEvent('download'); await action('export-save').click();
     const download = await downloadPromise;
     backupPath = resolve(out, 'save-roundtrip.json'); await download.saveAs(backupPath);
-    assert.deepEqual(JSON.parse(await readFile(backupPath, 'utf8')).save, expected);
+    const exported = JSON.parse(await readFile(backupPath, 'utf8'));
+    assert.equal(exported.format, 'escape-bincov-recovery-backup'); assert.equal(exported.formatVersion, 4);
+    assert.equal(exported.record.expansion.version, 2); assert.deepEqual(exported.record.profile, expected);
     await page.evaluate(() => { window.__bincov.app.save.cash = 123; window.__bincov.persist(); });
     await page.locator('#backup-file').setInputFiles(backupPath);
     await action('confirm-import').waitFor(); await failStorage(true); await action('confirm-import').click();
     assert.equal((await state()).save.cash, 123);
     await failStorage(false); await action('confirm-import').click();
     assert.deepEqual((await state()).save, expected);
+    assert.equal((await state()).state, 'menu'); await action('enter').click();
     await page.screenshot({ path: resolve(out, 'save-home.png') });
   });
   await step('failed deployment stays in the hideout with equipment and run count intact', async () => {
@@ -119,7 +123,9 @@ try {
     assert.equal(await page.evaluate(() => window.__bincov.app.raid.elapsed), elapsed);
     const downloadPromise = page.waitForEvent('download'); await action('export-save').click();
     backupPath = resolve(out, 'pending-settlement-backup.json'); await (await downloadPromise).saveAs(backupPath);
-    const backup = JSON.parse(await readFile(backupPath, 'utf8')).save;
+    const envelope = JSON.parse(await readFile(backupPath, 'utf8'));
+    assert.equal(envelope.formatVersion, 4); assert.equal(envelope.record.expansion.base.location, 'settlement');
+    const backup = envelope.record.profile;
     assert.equal(backup.activeRun, null); assert.ok(backup.bag.items.some(i => i.id === 'sample'));
     await page.screenshot({ path: resolve(out, 'save-failure.png') });
   });
@@ -141,7 +147,7 @@ try {
       await fresh.route('https://bincov.test/**', route => route.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: html }));
       await p.goto('https://bincov.test/index.html');
       assert.equal(await p.evaluate(() => '__bincov' in window), false);
-      await p.locator('[data-action="enter"]').click(); await p.locator('[data-action="tab"][data-id="home"]').click();
+      await p.locator('[data-action="enter"]').click(); await throughYard(p); await p.locator('[data-action="tab"][data-id="home"]').click();
       await p.locator('#backup-file').setInputFiles(backupPath); await p.locator('[data-action="confirm-import"]').click();
       const saved = await p.evaluate(() => JSON.parse(localStorage.getItem('escape-bincov.session.v2')).profile);
       assert.equal(saved.stats.extracts, 1); assert.ok(saved.bag.items.some(i => i.id === 'sample'));
@@ -161,7 +167,7 @@ try {
       const p = await shared.newPage();
       p.on('pageerror', error => report.errors.push(error.message));
       p.on('console', message => { if (message.type() === 'error') report.errors.push(message.text()); });
-      await p.goto('https://bincov.test/game?test=1');
+      await p.goto('https://bincov.test/game?test=1&entry=tabs');
       await p.locator('[data-action="enter"]').click();
       await p.locator('[data-action="deploy"]').click();
       await p.waitForFunction(() => window.__bincov.app.raid?.player?.active);
@@ -193,7 +199,8 @@ try {
       await p.locator('[data-action="export-save"]').click();
       const file = resolve(out, 'conflict-settlement-backup.json');
       await (await downloadPromise).saveAs(file);
-      assert.deepEqual(JSON.parse(await readFile(file, 'utf8')).save, pending);
+      const backup = JSON.parse(await readFile(file, 'utf8'));
+      assert.equal(backup.formatVersion, 4); assert.deepEqual(backup.record.profile, pending);
     } finally { await shared.close(); }
   });
   report.status = 'passed';

@@ -33,13 +33,13 @@ const currentRaw = p => p.evaluate(() => localStorage.getItem('escape-bincov.ses
 let original, saved;
 try {
   await step('actual v1 build migrates without altering its original bytes', async () => {
-    await oldPage.goto('https://bincov-compat.test/legacy?test=1');
+    await oldPage.goto('https://bincov-compat.test/legacy?test=1&entry=tabs');
     await oldPage.locator('[data-action="enter"]').click();
     await oldPage.evaluate(() => { window.__bincov.app.save.cash = 1842; assertPersist();
       function assertPersist() { if (!window.__bincov.persist()) throw new Error('Legacy fixture did not save'); }
     });
     original = await oldPage.evaluate(() => localStorage.getItem('escape-bincov.save.v1'));
-    await newPage.goto('https://bincov-compat.test/current?test=1');
+    await newPage.goto('https://bincov-compat.test/current?test=1&entry=tabs');
     await newPage.locator('[data-action="enter"]').click();
     const migrated = JSON.parse(await currentRaw(newPage));
     assert.equal(migrated.profile.cash, 1842); assert.equal(migrated.legacyBackup, original);
@@ -62,7 +62,7 @@ try {
   await step('a second new-build window cannot become a writer until ownership is released', async () => {
     saved = await currentRaw(newPage);
     const peer = await context.newPage();
-    await peer.goto('https://bincov-compat.test/current-second?test=1');
+    await peer.goto('https://bincov-compat.test/current-second?test=1&entry=tabs');
     await peer.waitForFunction(() => !!window.__bincov);
     assert.equal(await peer.evaluate(() => window.__bincov.app.storageOK), false);
     assert.equal(await peer.evaluate(() => window.__bincov.persist()), false);

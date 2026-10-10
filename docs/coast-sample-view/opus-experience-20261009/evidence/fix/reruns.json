@@ -1,0 +1,149 @@
+{
+  "htmlSha256": "2114270ecccfd2c186f6f2d2462814ddf6d2732546003d2af0995a12b0399f9e",
+  "runs": [
+    {
+      "name": "pnpm test",
+      "exit": 0,
+      "note": "233/233"
+    },
+    {
+      "name": "pnpm package",
+      "exit": 0
+    },
+    {
+      "name": "sample gate",
+      "exit": 0,
+      "note": "48/48"
+    },
+    {
+      "name": "lifecycle-1280",
+      "exit": 0,
+      "seconds": 17
+    },
+    {
+      "name": "lifecycle-1920",
+      "exit": 0,
+      "seconds": 17
+    },
+    {
+      "name": "launcher",
+      "exit": 0,
+      "seconds": 10
+    },
+    {
+      "name": "playtest-empty",
+      "exit": 0,
+      "seconds": 45
+    },
+    {
+      "name": "playtest-1280",
+      "exit": 0,
+      "seconds": 31
+    },
+    {
+      "name": "playtest-1920",
+      "exit": 0,
+      "seconds": 31
+    },
+    {
+      "name": "ci-browser",
+      "exit": 0,
+      "seconds": 40
+    },
+    {
+      "name": "ci-desktop-input",
+      "exit": 0,
+      "seconds": 22
+    },
+    {
+      "name": "ci-ui",
+      "exit": 0,
+      "seconds": 9
+    },
+    {
+      "name": "ci-tactical",
+      "exit": 0,
+      "seconds": 19
+    },
+    {
+      "name": "ci-art",
+      "exit": 0,
+      "seconds": 13
+    },
+    {
+      "name": "ci-title",
+      "exit": 0,
+      "seconds": 59
+    },
+    {
+      "name": "ci-title-water",
+      "exit": 0,
+      "seconds": 10
+    },
+    {
+      "name": "ci-save-browser",
+      "exit": 0,
+      "seconds": 13
+    },
+    {
+      "name": "ci-expansion",
+      "exit": 0,
+      "seconds": 10
+    },
+    {
+      "name": "ci-buildings",
+      "exit": 0,
+      "seconds": 13
+    },
+    {
+      "name": "ci-qol-expansion",
+      "exit": 0,
+      "seconds": 4
+    },
+    {
+      "name": "ci-systems",
+      "exit": 0,
+      "seconds": 37
+    },
+    {
+      "name": "ci-mall-passages",
+      "exit": 0,
+      "seconds": 168
+    },
+    {
+      "name": "ci-mall-landing",
+      "exit": 0,
+      "seconds": 8
+    },
+    {
+      "name": "ci-loot",
+      "exit": 0,
+      "seconds": 51
+    },
+    {
+      "name": "ci-loot-target",
+      "exit": 0,
+      "seconds": 20
+    },
+    {
+      "name": "ci-qol",
+      "exit": 0,
+      "seconds": 22
+    },
+    {
+      "name": "ci-mobile",
+      "exit": 0,
+      "seconds": 20
+    },
+    {
+      "name": "ci-mobile-ux",
+      "exit": 0,
+      "seconds": 70
+    },
+    {
+      "name": "ci-portable",
+      "exit": 0,
+      "seconds": 5
+    }
+  ]
+}

@@ -97,6 +97,9 @@ jobs:
       - name: Desktop and hybrid input regression
         if: matrix.group == 'input'
         run: pnpm test:desktop-input
+      - name: Base shop drag and drop regression
+        if: matrix.group == 'input'
+        run: pnpm test:shop-drag
       - name: UI layout and screenshot review
         if: matrix.group == 'visual'
         run: pnpm test:ui

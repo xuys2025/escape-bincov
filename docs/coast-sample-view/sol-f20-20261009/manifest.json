@@ -1,0 +1,408 @@
+{
+  "schema": 1,
+  "scope": "Sol F20 independent verification; no game/art changes; raw heap dumps remain ignored locally",
+  "testedSource": "6e34e96edbefd62d57603ffcde6b19eec4bce5a4",
+  "formalHTMLSHA256": "fe8ee26e6a993d5ed1bf28ab9bc9e88059f73080d6af3ac37aa719a617ea6f62",
+  "manifestExcludesItself": true,
+  "normalization": "Delivery text LF, one final newline; exact raw/copy identities and test-source normalization are recorded separately.",
+  "testTools": [
+    {
+      "path": "scripts/coast-sample-test.mjs",
+      "bytes": 106993,
+      "sha256": "0bf303d260afb6b64a50c255a4dfc87123d5422b9de7456307fa1f0f5b29f061",
+      "role": "test-only"
+    },
+    {
+      "path": "scripts/pixi-managed-gate.mjs",
+      "bytes": 3522,
+      "sha256": "0cae5c0da7e22208651c46e249be633c8cca0fcfa28af32be9a0eaf516ea973a",
+      "role": "test-only"
+    },
+    {
+      "path": "scripts/sol-f20-gates.mjs",
+      "bytes": 7352,
+      "sha256": "0ecebfbd98bf7c78d685974dd88b6fd127111fe92c38d1c7f6d0cf2f28957d41",
+      "role": "test-only"
+    },
+    {
+      "path": "scripts/sol-f20-snapshot.mjs",
+      "bytes": 5405,
+      "sha256": "ba711e96f690628b39e3bca1d07f1752810347d8bd9a80f1807940177669935d",
+      "role": "test-only"
+    },
+    {
+      "path": "scripts/sol-f20-hud-control.mjs",
+      "bytes": 3732,
+      "sha256": "63589164ee069ecbcde1396c0437fa40e10e0f5e1704aa9845a60c5f90cf0c5b",
+      "role": "test-only"
+    },
+    {
+      "path": "scripts/sol-f20-hud-paths.mjs",
+      "bytes": 1800,
+      "sha256": "bd368d1562741d9212bc6fa495a5b6ff421ab9fbd42f017fbe16213cb6631698",
+      "role": "test-only"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/defects.md",
+      "bytes": 3117,
+      "sha256": "f5ebd7f040250ab2cf808eb2b367d9cf867827c690d582b2f14488c9e1892810"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/audit-first-tool-line-endings.json",
+      "bytes": 2732,
+      "sha256": "1736578e1605cff43d90437b4a7967a149dd8de82e10752159b95bf0b6cebee7"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/baseline.json",
+      "bytes": 5799,
+      "sha256": "7bdeb37ce4367f74e525b1bfcf1a6da00fb442f0be1394959308cceeed397af6"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/boundary-F14-first.json",
+      "bytes": 619,
+      "sha256": "4f54ca11f83fc41ef23af1f50f8b2cf0086cf8d380ea2533574723e15cc942c0"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/boundary-F14-first.log",
+      "bytes": 86,
+      "sha256": "96ab74f8d5e18309b5f333dbb704e5975e6c843029c444356c5069dcba7106bd"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/boundary-F16-first.json",
+      "bytes": 1372,
+      "sha256": "cd191d2c748912eccc1a8146cc3c80db64b2e5359f75dd552e095178a8a5573c"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/boundary-F16-first.log",
+      "bytes": 85,
+      "sha256": "dbec2c2be37903bb39e8d31da0f17cfbe9b7b5a21ec83e10ccf385c214c95359"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/cache-original.json",
+      "bytes": 4760,
+      "sha256": "3f7ba16342742586eddd65b1e1e36fdeef2c6ca0222517f6098f8d27760fb468"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/cache-original.log",
+      "bytes": 2386,
+      "sha256": "1e47d60cf643deb99b00b6c80d0c5e6535557bca6c1bd00a1700ef4da50b30ba"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/copy-identities.json",
+      "bytes": 36267,
+      "sha256": "3925cc03aa78e9b1f4b1fb23a27e1a7bb0ff2a1d7df18e5a64f0ca364b0a31d5"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/delivery-audit.mjs.txt",
+      "bytes": 4405,
+      "sha256": "8d79b91bba7b9bdf8e4a292124bdc3a4ffd4572624f9f5a045905e8b2510de18"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/desktop-input-first.log",
+      "bytes": 598,
+      "sha256": "0de5f31a0a38b1c8ebd2dedf4ae5bf1713d9956e2de8b01dd602a1584825e313"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/final-identity.json",
+      "bytes": 6336,
+      "sha256": "dc41073e639c758a286493c3530d9a9dd53f30872df3efb4ad0c96bff13b907f"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-fixed-corrected.json",
+      "bytes": 17038,
+      "sha256": "383163af11e6259b263ac2b5747bceec30829e38edcad565573765dac9953f5b"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-fixed-corrected.log",
+      "bytes": 2658,
+      "sha256": "32c9b81f84685291a62309fd0c198d8d58c82cb95e1f4aa381f24e9f6ab02c68"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-fixed-final.json",
+      "bytes": 16933,
+      "sha256": "10c6c5ca186f3842fa309f53bf67d3d5db2b9ac99f73f6dbd4a778c078717547"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-fixed-final.log",
+      "bytes": 2558,
+      "sha256": "9aa35d5f66ef1d0e978b7d19b6abf0915f6096d10e1db9d283ef9f1ca85a1544"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-fixed-first.json",
+      "bytes": 988,
+      "sha256": "89bcd6bbab81140b9705c32790315b6b34bcae85cc489eaf9711eb2ff73a8421"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-fixed-first.log",
+      "bytes": 640,
+      "sha256": "9e184dbf4f43538de2678d89cb133550ef575f30285592cba00ded0ad83be2b7"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-missing-field-final.json",
+      "bytes": 1005,
+      "sha256": "5dbb931d98eaa57b932c66d4375b7fcef30153714a6f7822192551eb506b3f64"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-missing-field-final.log",
+      "bytes": 657,
+      "sha256": "99b1edccb2ded31ccb040bc02e961ab0adf07469b4d161151c3b603f3c32f781"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-missing-field-negative.json",
+      "bytes": 1005,
+      "sha256": "e380a68f3d1946262e720b213a14046af7b02565a5a57d06f85b30d1d1e6c87c"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-missing-field-negative.log",
+      "bytes": 657,
+      "sha256": "99b1edccb2ded31ccb040bc02e961ab0adf07469b4d161151c3b603f3c32f781"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-old-build-control.json",
+      "bytes": 1019,
+      "sha256": "1d133fbe7f6223f2486bed052014f70f14c40c4dbd3f00d7c62b238b320569eb"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-old-build-control.log",
+      "bytes": 638,
+      "sha256": "b157a43e068bf0039099455c781c82175a9f35b0902267db329f8f7f188ae930"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-old-build-corrected.json",
+      "bytes": 18354,
+      "sha256": "79e752f5917f2fb1c98a971b4c2597e1599cda1f2cb26de8aeb50aed3006cd11"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-old-build-corrected.log",
+      "bytes": 5052,
+      "sha256": "af1e827369beea8973f5f62aadf8551e541e431a6256c04a8aa655e5ef14dd53"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-old-build-final.json",
+      "bytes": 18249,
+      "sha256": "f9d220592ae58373646fb39068aa570c664b9736b0cb169bbb8dc08c6cfc0f67"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/gate-old-build-final.log",
+      "bytes": 4951,
+      "sha256": "ecb6e63458846dfefb24bb64457bd49cb38d5eebea2b3a8e21ff9db0ab553694"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/graph-6-60.json",
+      "bytes": 269572,
+      "sha256": "46c6554f7cd75a1b8e4c420eff49e52b6c9fb719cb47dd9474ce3a9cba16a6dd"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/graph-6-60.log",
+      "bytes": 632,
+      "sha256": "be5fc3f29887dee6dcbe3a188bdb9decae422e3c651491159cb1267046cf5492"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/hud-no-pin-first.json",
+      "bytes": 1977,
+      "sha256": "320a59511d770b3391d239302ae166cd8b9917f073150bb1415e4e8618ec75a5"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/hud-no-pin-first.log",
+      "bytes": 1471,
+      "sha256": "7b9b33a2dfe51640c6b872cbae5b2b0058266174b5d7dd210bc8f68f2c0c4dc9"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/hud-no-pin-paths-final.json",
+      "bytes": 3094,
+      "sha256": "26bb1b8e9225208d79c62d3bad8672b4a78a46e7e46b08497806822d45dded63"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/hud-no-pin-snapshot.json",
+      "bytes": 14026,
+      "sha256": "9ab0ce05c4b5867d21ec981e793649cde5bb80d3c535be88dafb8a6b0bb2e227"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/hud-no-pin-snapshot.log",
+      "bytes": 1136,
+      "sha256": "43e52cf9a90bdd880a02c11a4937e1125482dcb6fe897cdf40a2ad4913407732"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/hud-no-pin-strong-paths.log",
+      "bytes": 1720,
+      "sha256": "5cc7cf6d5fdb3b0978f2bfba41929fe885e020cad5d7c3ad3144205b97192e15"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/hud-pin-paths-final.json",
+      "bytes": 4573,
+      "sha256": "eaf1192afdc3e94056ace870324481fa544ae41ff2e32d39c743cfda5155e7ea"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/hud-pin-strong-paths.log",
+      "bytes": 2486,
+      "sha256": "e7f1421d7693c52c6f885c441332b66fe56d1e9e7c6149d536dd869338df47dc"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/lifecycle-1280-first.json",
+      "bytes": 4736,
+      "sha256": "ab9f08a2b5fdd4c113aaa592e332d713b2a3f8280dc59ab078aff164391510c5"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/lifecycle-1280-first.log",
+      "bytes": 178,
+      "sha256": "07a602e9998d9205bdf2609af646fd0c297b752ba047abf12d978f14f75829f0"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/lifecycle-1920-first.json",
+      "bytes": 4736,
+      "sha256": "23dfddbb48fd4ec16de557dfa57c49f06bff1956c8a55f0aeb6f7b12af186283"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/lifecycle-1920-first.log",
+      "bytes": 178,
+      "sha256": "07a602e9998d9205bdf2609af646fd0c297b752ba047abf12d978f14f75829f0"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/mobile-first.log",
+      "bytes": 832,
+      "sha256": "fb7aaa9d364f4663e488948d38925c861c0e88b07972b8df3fd060a4ec4fef40"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/mobile-ux-first.log",
+      "bytes": 896,
+      "sha256": "751ad3052682f17c386e0a9d747d907eac67d451459818f0acb8ea585663a98d"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/named60-first.json",
+      "bytes": 35622,
+      "sha256": "2df52043c00b91be08864756d3a69a73fb89a38ec4762f8f0e2516a4b116a44c"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/named60-first.log",
+      "bytes": 1943,
+      "sha256": "16051e16df66ccc9d46b842f85febc28a1c9fa811b2a90c8658570ce77ba3ec0"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/package-first.log",
+      "bytes": 422,
+      "sha256": "47722da4fb62d34a2d0db42aac4721eee8d64dc7872c94dba9ace23ccb782c42"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/pin-first.json",
+      "bytes": 1653,
+      "sha256": "d7abd8189e98c67d08a8cb8bd14165c7c51fb1ec90e622e4a107307ad5024814"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/pin-first.log",
+      "bytes": 105,
+      "sha256": "3f084963a70e2f2a474f8af95a532d27e7aad734f5c7d3cdd3431b2f8eeb1701"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/pin-graph.json",
+      "bytes": 196348,
+      "sha256": "3df9b2e5871e0ee88f8e774d80b099f6f1dad1f7ec47d7319a3054fa3c43f7b9"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/pin-graph.log",
+      "bytes": 645,
+      "sha256": "03840ff4114d454cb4aec097f0c3ae8e3b4fa14f81cdc96ed8ace8bc20e23671"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/pin-six-table.json",
+      "bytes": 14485,
+      "sha256": "8da167ba3ad5a7561d6fefca868bfeb07785532b01055db02483611dc19bd9a9"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/pin-six-table.log",
+      "bytes": 1268,
+      "sha256": "fb723b4f8b4b070dacc160569bff681f3534daa26035927b1352807ae3aa8f2a"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/pixi-managed-gate-first.mjs.txt",
+      "bytes": 3327,
+      "sha256": "0091b6e245f9a0d30448f6aa19373dc60b1804fbec63957a1930ac082b865ac3"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/pixi-managed-gate-tested.mjs.txt",
+      "bytes": 3522,
+      "sha256": "0cae5c0da7e22208651c46e249be633c8cca0fcfa28af32be9a0eaf516ea973a"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/remote-final.json",
+      "bytes": 1072,
+      "sha256": "0527c35b453bae8c1fc572bdfb34dcedf097a08040990c91f492cceac1f0e735"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/runner-at-delivery.mjs.txt",
+      "bytes": 6708,
+      "sha256": "879209ddac57ebc17438e30f93bfd7e5a032083c221c015f36d4c1ca0a01230d"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/sample-first.json",
+      "bytes": 38097,
+      "sha256": "c81145e64a7b787d97bcc81db73ad4cbba7c122550df8e633a0bb3b2e6d90ca4"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/sample-first.log",
+      "bytes": 5814,
+      "sha256": "f70553fb778765b10bfd0ed795a2ddd9f15af2dbb18e0c9dcb0c7960d917a346"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/secret-check-first.log",
+      "bytes": 83,
+      "sha256": "72e9e2f48309a5db033d2913eab1261316ad173f0e01cf341064c561df09bf6a"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/six-table-snapshot-first.json",
+      "bytes": 27299,
+      "sha256": "a4f8d8454a55a2d3c0ae792f511fa00f760a641f4075479a2c8b5b47dfa1527e"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/six-table-snapshot-first.log",
+      "bytes": 2227,
+      "sha256": "d6a3ee8c8e35720f9a701833c4ae697be9c18154b2e0b974e8d7a7d74bf63ead"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/snapshot-identities.json",
+      "bytes": 1798,
+      "sha256": "5c556a3e6fec0b85dcf4e6e8d05cb42f393bfe93f34d470ebf4dc96f940ab007"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/sol-f20-gates-first.mjs.txt",
+      "bytes": 7298,
+      "sha256": "302720f2600d576cbf4e5fad60f2b0b8c0dfb8f292490f07546130986621288c"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/sol-f20-gates-tested.mjs.txt",
+      "bytes": 7352,
+      "sha256": "0ecebfbd98bf7c78d685974dd88b6fd127111fe92c38d1c7f6d0cf2f28957d41"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/strict60-first.json",
+      "bytes": 35598,
+      "sha256": "a3b7451f86eacb02f1c4c7f15626f14ea91e25045061460d0040d065bbc0e63b"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/strict60-first.log",
+      "bytes": 1880,
+      "sha256": "67b71144fb81a13d69d274500098210b4bd544201d82747b0d2e93fd554413ad"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/test-source-normalization.json",
+      "bytes": 1382,
+      "sha256": "4599c655f073cfd50f27be4c224207be669fa75beb704d8d72b9e3e0fc6707ab"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/unit-first.log",
+      "bytes": 24462,
+      "sha256": "912789d7d3e451c50de04d68dc3a5fb6ae92251c09308d8387be83d1a28d2e95"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/evidence/verification.json",
+      "bytes": 39733,
+      "sha256": "bdf9a00a5959edc8f3e4ae685bb31ac0b7ae70fb58aeca2ed284a6cddadfc102"
+    },
+    {
+      "path": "docs/coast-sample-view/sol-f20-20261009/README.md",
+      "bytes": 14600,
+      "sha256": "09d62cd9eff33c485ffe18a5ce382ea4205110c26437feb9cac8f8cb33a74f6a"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "htmlSha256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+  "methodology": "Offline exact bundle; explicit funded base, original mall container relocation, item and long-cooldown fixtures. Native buttons, wheel, keyboard and emulated touch; actual bullet flight. Not natural balance or physical-device acceptance.",
+  "steps": [
+    {
+      "name": "RPG medicine cart survives cancelled base return and commits through the ordinary checkout",
+      "status": "passed"
+    },
+    {
+      "name": "mall containers keep wheel-selected identity and touch-open the exact empty source",
+      "status": "failed",
+      "error": "page.evaluate: TypeError: Cannot read properties of null (reading 'containerId')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:39)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at D:\\bincov\\shop-drag-fix\\test-results\\shop-drag-sol-20261009\\qol-compare.mjs:57:65\n    at async step (D:\\bincov\\shop-drag-fix\\test-results\\shop-drag-sol-20261009\\qol-compare.mjs:18:104)\n    at async file:///D:/bincov/shop-drag-fix/test-results/shop-drag-sol-20261009/qol-compare.mjs:53:5"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98"
+}

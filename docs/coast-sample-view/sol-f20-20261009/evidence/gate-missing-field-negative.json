@@ -1,0 +1,16 @@
+{
+  "startedAt": "2026-10-09T11:55:14.928Z",
+  "node": "v24.19.0",
+  "html": "D:\\bincov\\pr22-runtime\\dist\\index.html",
+  "sha256": "fe8ee26e6a993d5ed1bf28ab9bc9e88059f73080d6af3ac37aa719a617ea6f62",
+  "fault": "missing-list",
+  "rows": [],
+  "negativeControls": [],
+  "assertions": [],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "status": "failed",
+  "failure": "page.evaluate: Error: PIXI_MANAGED_CONTRACT: _managedResourceHashes must be an array\n    at fail (eval at <anonymous> (eval at evaluate (:311:30)), <anonymous>:3:35)\n    at readManagedTables (eval at <anonymous> (eval at evaluate (:311:30)), <anonymous>:8:29)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:212)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at read (D:\\bincov\\pr22-runtime\\scripts\\sol-f20-gates.mjs:9:21)\n    at D:\\bincov\\pr22-runtime\\scripts\\sol-f20-gates.mjs:14:25",
+  "finishedAt": "2026-10-09T11:55:17.701Z"
+}

@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-10T16:34:56.467Z",
+  "branch": "agent/hideout-runtime",
+  "head": "68daab4639dcd35eea4001e5de21bc1d5db33c88",
+  "parent": "7a4dc75606b10512defe10b3ee8df0067eb5fab9",
+  "originMain": "43a342ce434c101e4b7058a54f6f29ede9482223",
+  "status": "",
+  "node": "v24.19.0",
+  "nodeExecutable": "C:\\Users\\xty\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+  "old": {
+    "commit": "7a4dc75606b10512defe10b3ee8df0067eb5fab9",
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\sol-resource-r3-20261011\\prefix-ce732ff6.html",
+    "bytes": 3618792,
+    "SHA256": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+    "method": "Node execFileSync git show raw Buffer then writeFile"
+  },
+  "hashes": {
+    "dist/index.html": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+    "start the game.html": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+    "release/Escape-Bincov-portable.zip": "6e789f4bf0902bbc4897bfde56c01a2a7e66c708661556673b136320e4d1ec54",
+    "release/Escape-Bincov-web.zip": "8b75c966f139675b22279c7ad458be9056e368aad5237ac7dffc6057c806b16c"
+  }
+}

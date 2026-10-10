@@ -1,0 +1,284 @@
+{
+  "generatedAt": "2026-10-07T16:07:45.771Z",
+  "platform": "win32",
+  "node": "v24.19.0",
+  "pnpm": "11.19.0",
+  "baseline": {
+    "main": "f14414718f6dd2b9b8d9144b40134b51fcbc8cc9",
+    "pr": 22,
+    "head": "878f5633316a824960091f8f924c0ddd8dd78078",
+    "fork": "LMX-323/escape-bincov",
+    "pushPermission": false,
+    "localMerge": "002435e"
+  },
+  "status": "Runtime checks passed; existing layered-play three-run check failed and is not waived.",
+  "unit": {
+    "command": "pnpm test",
+    "passed": 223,
+    "failed": 0,
+    "addedRuntimeTests": 26
+  },
+  "package": {
+    "command": "pnpm package",
+    "status": "passed",
+    "version": "0.2.0",
+    "htmlBytes": 2417837,
+    "htmlSha256": "6ee2f43051ed828e93943677935249035bc51bcb1c23a4273d9aa0ae04b68911",
+    "artifacts": {
+      "dist/index.html": {
+        "bytes": 2417837,
+        "sha256": "6ee2f43051ed828e93943677935249035bc51bcb1c23a4273d9aa0ae04b68911"
+      },
+      "start the game.html": {
+        "bytes": 2417837,
+        "sha256": "6ee2f43051ed828e93943677935249035bc51bcb1c23a4273d9aa0ae04b68911"
+      },
+      "release/Escape-Bincov-portable.zip": {
+        "bytes": 841565,
+        "sha256": "4e63fdc254e88aebd4bf400eb74d1340f9a537f9a198cb358b984348163b24dd"
+      },
+      "release/Escape-Bincov-web.zip": {
+        "bytes": 837790,
+        "sha256": "dd64deb190640f3a5861cec97a64517ac0b57e9f13be6d07b9c14c74fb64a594"
+      }
+    }
+  },
+  "module": {
+    "command": "node scripts/build-coast-runtime.mjs",
+    "status": "passed",
+    "entry": "src/raid-runtime/index.ts",
+    "bytes": 229839,
+    "sha256": "8099f25c8b46d111b6b457c46b6db7b8f4172c1f1291b0fb6ba90321690d9e37",
+    "inputs": [
+      "src/balance.ts",
+      "src/base.ts",
+      "src/building-world.ts",
+      "src/checkpoint.ts",
+      "src/domain.ts",
+      "src/expansion-state.ts",
+      "src/expansion-worlds.ts",
+      "src/input.ts",
+      "src/layer-transition.ts",
+      "src/loot.ts",
+      "src/mall-world.ts",
+      "src/production-clock.ts",
+      "src/pursuit.ts",
+      "src/raid-runtime/contract.ts",
+      "src/raid-runtime/host.ts",
+      "src/raid-runtime/index.ts",
+      "src/raid-runtime/presentation.ts",
+      "src/raid-runtime/runtime.ts",
+      "src/recovery-store.ts",
+      "src/reputation-luck.ts",
+      "src/rpg.ts",
+      "src/save-backup.ts",
+      "src/session.ts",
+      "src/spatial.ts",
+      "src/world.ts"
+    ]
+  },
+  "contract": {
+    "comparison": "TypeScript AST/printer with comments removed matches Opus src/contract/v1.ts",
+    "sha256": "74f5935dec78d8fb9aefcaba8dd4f782235102eeb4057a9ded61c3d4c7cc9c4d"
+  },
+  "differential": {
+    "command": "node scripts/runtime-differential.mjs",
+    "status": "passed",
+    "frames": 960,
+    "report": "differential.json"
+  },
+  "tests": [
+    {
+      "command": "pnpm test:browser",
+      "status": "passed",
+      "report": "test-results/browser-report.json",
+      "checks": 24,
+      "methodology": [
+        "Each viewport uses a fresh isolated browser context and the single file:// HTML; no development server.",
+        "HTTP(S) access is blocked and attempted requests fail acceptance.",
+        "Travel, enemy positions, health and elapsed time use explicit test fixtures. Movement, aiming, firing, looting, dragging and extraction use browser input.",
+        "Success, combat death and timeout are three consecutive runs per context, followed by reload and a fourth interrupted run.",
+        "FPS is sampled from Phaser actualFps and requestAnimationFrame in headless Chrome; this is not a claim about every physical GPU.",
+        "The test does not establish 30–60 minutes of subjective replay value or natural ten-minute difficulty balance."
+      ],
+      "browser": "154.0.8037.98",
+      "errors": [],
+      "externalRequests": [],
+      "startedAt": "2026-10-07T15:51:11.453Z",
+      "finishedAt": "2026-10-07T15:51:50.192Z"
+    },
+    {
+      "command": "pnpm test:save-browser",
+      "status": "passed",
+      "report": "test-results/save-browser-report.json",
+      "checks": 9,
+      "methodology": "Storage-failure injection and inventory/position fixtures with real UI buttons, downloads, file import and a real three-second E hold. Not a natural-play difficulty test.",
+      "browser": "154.0.8037.98",
+      "errors": [],
+      "externalRequests": [],
+      "startedAt": "2026-10-07T15:51:51.485Z",
+      "finishedAt": "2026-10-07T15:52:03.865Z"
+    },
+    {
+      "command": "pnpm test:desktop-input",
+      "status": "passed",
+      "report": "test-results/desktop-input/report.json",
+      "checks": 10,
+      "methodology": "Offline Chromium keyboard/mouse and native AudioContext. Touch capability is emulated; positions and enemy cooldowns are fixtures. No physical-device or audible-output certification.",
+      "browser": "154.0.8037.98",
+      "startedAt": "2026-10-07T15:52:04.852Z"
+    },
+    {
+      "command": "pnpm test:mobile",
+      "status": "passed",
+      "report": "test-results/mobile/report.json",
+      "checks": 10,
+      "methodology": "Chromium touch emulation with real CDP multi-touch, fault injection, complete checkpoint comparisons and offline requests blocked. Not physical iPhone/Android or Safari validation.",
+      "browser": "154.0.8037.98",
+      "errors": [],
+      "externalRequests": [],
+      "startedAt": "2026-10-07T15:52:27.017Z",
+      "finishedAt": "2026-10-07T15:52:45.673Z"
+    },
+    {
+      "command": "pnpm test:mobile-ux",
+      "status": "passed",
+      "report": "test-results/mobile-ux/report.json",
+      "checks": 11,
+      "methodology": "Offline Chromium touch emulation, trusted taps and explicit ?test=1 fixtures. Includes failure injection; not physical phone validation.",
+      "browser": "154.0.8037.98",
+      "errors": [],
+      "externalRequests": [],
+      "startedAt": "2026-10-07T15:52:46.652Z",
+      "finishedAt": "2026-10-07T15:53:55.833Z"
+    },
+    {
+      "command": "pnpm test:buildings",
+      "status": "passed",
+      "report": "test-results/building-browser-report.json",
+      "checks": 8,
+      "methodology": "Offline built HTML; native region selector, keyboard/touch actions, storage fault and reload. Explicit fixtures position the player at named anchors, register one validated pursuit with a real map route and normal frame progression, set indoor clock boundaries and extend enemy cooldowns to isolate the indoor warning/tide/terminal transaction; this does not claim natural travel, another unaccelerated 600-second run or human balance.",
+      "browser": "154.0.8037.98",
+      "errors": [],
+      "externalRequests": [],
+      "startedAt": "2026-10-07T15:51:09.599Z",
+      "finishedAt": "2026-10-07T15:51:21.917Z"
+    },
+    {
+      "command": "pnpm test:portable",
+      "status": "passed",
+      "report": "test-results/portable-report.json",
+      "checks": 6,
+      "methodology": "Extract the shared ZIP outside the workspace; open its file:// HTML without test hooks; use real buttons and keyboard/mouse input; read the visible HUD. No fixtures, original assets, server, screenshots, or internet access.",
+      "browser": "154.0.8037.98",
+      "errors": [],
+      "externalRequests": [],
+      "startedAt": "2026-10-07T16:02:20.885Z",
+      "finishedAt": "2026-10-07T16:02:25.729Z"
+    },
+    {
+      "command": "pnpm test:ui",
+      "status": "passed",
+      "report": "test-results/ui/report.json",
+      "checks": 38,
+      "methodology": "Offline file HTML, fresh saves, real UI input at both required viewports. Expanded stash, completed quests and raid positions use explicit fixtures. Screenshots are unmodified browser captures; geometry checks do not replace visual review.",
+      "browser": "154.0.8037.98",
+      "errors": [],
+      "externalRequests": [],
+      "startedAt": "2026-10-07T16:02:26.475Z",
+      "finishedAt": "2026-10-07T16:02:34.015Z"
+    },
+    {
+      "command": "pnpm test:play",
+      "status": "passed",
+      "report": "test-results/natural-play-report.json",
+      "methodology": "Automated real-time session. Test hook is read-only: no teleports, no clock changes, no changes to health, enemies, inventory or RNG. All actions use visible buttons and real keyboard/mouse, including E opening and native inventory drag for crates and corpses. This is not a human fun/balance evaluation.",
+      "browser": "154.0.8037.98",
+      "errors": [],
+      "externalRequests": [],
+      "minutes": 10,
+      "outcomes": [
+        {
+          "outcome": "extract",
+          "kills": 25
+        },
+        {
+          "outcome": "extract",
+          "kills": 9
+        }
+      ],
+      "startedAt": "2026-10-07T15:46:19.407Z",
+      "finishedAt": "2026-10-07T15:56:39.653Z"
+    },
+    {
+      "command": "pnpm test:layered-play",
+      "status": "failed",
+      "report": "test-results/layered-play-report.json",
+      "methodology": "Offline packaged HTML, normal unaccelerated clock and ordinary 25-enemy/60-record mall deployment. Hooks are read-only. Native shopping, item transfers, keyboard movement, firing, healing, E stairs and extraction. Automatic navigation knows the immutable map and visible state; this is not human balance or physical-phone evidence.",
+      "browser": "154.0.8037.98",
+      "errors": [],
+      "externalRequests": [],
+      "runs": [
+        {
+          "run": 1,
+          "result": {
+            "outcome": "timeout",
+            "kills": 8,
+            "keptValue": 0,
+            "lostValue": 363,
+            "seed": 41,
+            "recovered": false,
+            "message": "撤离超时，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+          },
+          "realSeconds": 600.461,
+          "lastObservedElapsed": 599.8918999995883
+        }
+      ],
+      "failure": "Error: Navigation stuck at 1316.1395947137723,176.1406646538051\n    at file:///D:/bincov/pr22-runtime/scripts/layered-play.mjs:65:74",
+      "startedAt": "2026-10-07T15:51:23.238Z",
+      "finishedAt": "2026-10-07T16:02:19.840Z"
+    }
+  ],
+  "sources": {
+    "scripts/build-coast-runtime.mjs": "9ee37735ea8f3de75059bc5a90043d28ae4bb6c4b0a15a5958d845af479eae7c",
+    "scripts/runtime-differential.mjs": "a5fd467f5241ef44772609bb4e9c5d63455ec043fabad8700fdd48cc95e55407",
+    "src/balance.ts": "ee433828829b60978f49113c8d12b46ad4da57710adc496c8768a74d1f7c4e39",
+    "src/base.ts": "0856d70db8b506e6f68c6cf4a28b0dce7f2e1a49995c006cc6978aeffd6d5712",
+    "src/building-world.ts": "02b938cca434851fcb45b347865de3f094d0faf2c7460ff7fcf05c156f50fb0f",
+    "src/checkpoint.ts": "5e5ab529865aac927c91b63415be4d0bcbfe53f79fb5161c7df330d199dae832",
+    "src/domain.ts": "73eba84790a4acabbab27cee8bbdd68ad6fce95834ae9acbe5467c6f77643419",
+    "src/expansion-state.ts": "267ca88a9593e320d41b7dbb2d1d2fd89558a5bb70e11892d7dbe4e6f03ee984",
+    "src/expansion-worlds.ts": "94748c290481a82c0ddf335cffdd785f1cac80d338bdcea9a54ca812210e625e",
+    "src/input.ts": "881eef7cdf15150e47149f33f2911843e7f3c31939553989f9d52d0c9921d0ce",
+    "src/layer-transition.ts": "71b3fd8241c8e9b6ded9ffcff48eaf7e4aa7beedef0992c258affaae7ce9bae2",
+    "src/loot.ts": "5a1c864d2ddd56a7b26a7dcb20b9845da529999e6701b9151dabc1b5b5bb562e",
+    "src/mall-world.ts": "6c74936801549d11600387d1cfd556ea6c15127b78a4964153c5b2d646cc250e",
+    "src/production-clock.ts": "d1bf1005f6a2315df4742a604e246ecb9e389982513be5a444d740e45775ddbd",
+    "src/pursuit.ts": "14111b4f51e9c10c77f7a2258c7c9328cfe1ade1bcf2d70e0a7e63552b76d9af",
+    "src/raid-runtime/contract.ts": "88e2e69484009da20ae13a80ab603170e2510661d5436d45e62a7b6948ce5cd4",
+    "src/raid-runtime/host.ts": "183c9cad3df55fe8635207ff0d30fbc09890f59946664d86688d2661c072ae83",
+    "src/raid-runtime/index.ts": "5523b108376ff621d40cefba59ca278afd1e3791a549b26a7b0eaba22d3362c2",
+    "src/raid-runtime/presentation.ts": "7d170e31aacf60aee43886afcc71dc7d72f154d3312d0ce840b28d7a550e0a61",
+    "src/raid-runtime/runtime.ts": "5dc22d942215ac3a807ac0714dccf8aab5a81c30f1804e299041f381e416343e",
+    "src/raid-runtime/test-support.ts": "1544ca25e5824ec4418d7a4fdb441c0867c68d610cf44c48a7fcd8a3fc35e44b",
+    "src/recovery-store.ts": "5c266ed838cbbc2cf33d4b9a3f01870c27f0eaaac819383126c0f2c9c60a2016",
+    "src/reputation-luck.ts": "42d1934fc3e71ada8b9b73d9db21762a686c20d4b6d02854fd5d528670796252",
+    "src/rpg.ts": "6a30a4cc7bffce8ab45fa90210739ea43a43148b428ceb275cb1967ccc2f2919",
+    "src/save-backup.ts": "034984920020be9c7115dfca8b454033bb76da6a4042d7b34a2ee3a358866f63",
+    "src/session.ts": "fddfaf3fb675df6de052b3356bea43a0f0f7856f0b69d35a7e27087fa692311c",
+    "src/spatial.ts": "89653007190811528e8ea958e1109a1141aaa5a3a226a4164288181beaf9047c",
+    "src/world.ts": "8f6289ce7d9df19f14a8ff2d78e767cddf4fa06527d6e214f744e5e42be74c39",
+    "tests/raid-runtime.test.ts": "a7853ad36b46890caf43d223f1ebe85d6dc4f9d44b6648ffb46200001004662f"
+  },
+  "notRun": [
+    "Opus W01-W14 with real Runtime",
+    "Pixi four-size real sample screenshots",
+    "physical devices and human balance",
+    "new PR CI, merge or deployment"
+  ],
+  "navigationFailure": {
+    "report": "navigation-baseline.json",
+    "mainHtmlSha256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+    "conclusion": "Auto-aim pixel hit map HUD button in both main and candidate in focused snapshot replay. Full three-run baseline not rerun. Original failure retained."
+  }
+}

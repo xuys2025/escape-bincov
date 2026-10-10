@@ -8,7 +8,7 @@ import { browserOptions } from './browser-options.mjs';
 import { placeAt, clickSlot } from './inventory-actions.mjs';
 const url = new URL(process.env.BINCOV_TEST_URL || pathToFileURL(resolve('dist/index.html')).href);
 if (url.protocol !== 'file:' && !(url.protocol === 'http:' && ['127.0.0.1', 'localhost'].includes(url.hostname))) throw Error('Only offline or loopback test URLs are supported');
-url.searchParams.set('test', '1');
+url.searchParams.set('test', '1'); url.searchParams.set('entry', 'tabs');
 const out = resolve('test-results'); await mkdir(out, { recursive: true });
 const browser = await chromium.launch(browserOptions);
 const report = { mode: url.protocol === 'file:' ? 'offline' : 'local HTTP diagnostic', browser: browser.version(), method: 'Real mouse, keyboard and emulated touch input. Blur and background transitions use explicit lifecycle event fixtures; no physical-device certification.', scope: process.argv.includes('--shop-only') ? 'shop' : 'all', results: [] };

@@ -1,0 +1,625 @@
+[
+  {
+    "set": "round2",
+    "file": "docs/coast-sample-view/sol-acceptance-20261008/evidence/shots-1/index.json",
+    "keys": [
+      "startedAt",
+      "browser",
+      "seed",
+      "url",
+      "shots",
+      "errors",
+      "requests",
+      "console",
+      "anomalies",
+      "finishedAt"
+    ],
+    "windows": [
+      {
+        "file": "window-1280x720.png",
+        "scene": "window",
+        "note": "贴西墙窗口向外瞄准",
+        "size": "1280x720",
+        "dpr": 1,
+        "touch": false,
+        "map": "coast",
+        "epoch": 10,
+        "player": [
+          360,
+          342
+        ],
+        "phase": "running",
+        "panel": null,
+        "storageError": "",
+        "storageOK": true,
+        "rejected": [],
+        "writes": [
+          {
+            "at": 418,
+            "bytes": 804,
+            "result": "written"
+          },
+          {
+            "at": 1186.4000000059605,
+            "bytes": 15823,
+            "result": "written"
+          },
+          {
+            "at": 3361.3000000044703,
+            "bytes": 17084,
+            "result": "written"
+          },
+          {
+            "at": 5367,
+            "bytes": 17065,
+            "result": "written"
+          },
+          {
+            "at": 7367.30000000447,
+            "bytes": 17065,
+            "result": "written"
+          }
+        ]
+      },
+      {
+        "file": "window-1920x1080.png",
+        "scene": "window",
+        "note": "贴西墙窗口向外瞄准",
+        "size": "1920x1080",
+        "dpr": 1,
+        "touch": false,
+        "map": "coast",
+        "epoch": 10,
+        "player": [
+          360,
+          342
+        ],
+        "phase": "running",
+        "panel": null,
+        "storageError": "",
+        "storageOK": true,
+        "rejected": [],
+        "writes": [
+          {
+            "at": 318.80000000447035,
+            "bytes": 804,
+            "result": "written"
+          },
+          {
+            "at": 1078.3000000044703,
+            "bytes": 15823,
+            "result": "written"
+          },
+          {
+            "at": 3156.7000000029802,
+            "bytes": 17083,
+            "result": "written"
+          },
+          {
+            "at": 5162.60000000149,
+            "bytes": 17065,
+            "result": "written"
+          },
+          {
+            "at": 7168.80000000447,
+            "bytes": 17062,
+            "result": "written"
+          }
+        ]
+      },
+      {
+        "file": "window-844x390.png",
+        "scene": "window",
+        "note": "贴西墙窗口向外瞄准",
+        "size": "844x390",
+        "dpr": 3,
+        "touch": true,
+        "map": "coast",
+        "epoch": 10,
+        "player": [
+          360,
+          342
+        ],
+        "phase": "running",
+        "panel": null,
+        "storageError": "",
+        "storageOK": true,
+        "rejected": [],
+        "writes": [
+          {
+            "at": 350.19999999552965,
+            "bytes": 804,
+            "result": "written"
+          },
+          {
+            "at": 969.1999999955297,
+            "bytes": 15823,
+            "result": "written"
+          },
+          {
+            "at": 3060.89999999851,
+            "bytes": 17036,
+            "result": "written"
+          },
+          {
+            "at": 5066.5,
+            "bytes": 17036,
+            "result": "written"
+          },
+          {
+            "at": 7070.69999999553,
+            "bytes": 17036,
+            "result": "written"
+          }
+        ]
+      },
+      {
+        "file": "window-640x300.png",
+        "scene": "window",
+        "note": "贴西墙窗口向外瞄准",
+        "size": "640x300",
+        "dpr": 3,
+        "touch": true,
+        "map": "coast",
+        "epoch": 10,
+        "player": [
+          360,
+          342
+        ],
+        "phase": "running",
+        "panel": null,
+        "storageError": "",
+        "storageOK": true,
+        "rejected": [],
+        "writes": [
+          {
+            "at": 321.09999999403954,
+            "bytes": 804,
+            "result": "written"
+          },
+          {
+            "at": 974.1999999955297,
+            "bytes": 15823,
+            "result": "written"
+          },
+          {
+            "at": 3072.39999999851,
+            "bytes": 16992,
+            "result": "written"
+          },
+          {
+            "at": 5078.39999999851,
+            "bytes": 16988,
+            "result": "written"
+          },
+          {
+            "at": 7078.39999999851,
+            "bytes": 16989,
+            "result": "written"
+          }
+        ]
+      }
+    ],
+    "anomalies": [],
+    "errors": [],
+    "console": []
+  },
+  {
+    "set": "round3-original",
+    "file": "docs/coast-sample-view/sol-round3-20261008/evidence/shots-original/index.json",
+    "keys": [
+      "startedAt",
+      "browser",
+      "seed",
+      "url",
+      "shots",
+      "errors",
+      "requests",
+      "console",
+      "anomalies",
+      "finishedAt"
+    ],
+    "windows": [
+      {
+        "file": "window-1280x720.png",
+        "scene": "window",
+        "note": "贴西墙窗口向外瞄准",
+        "size": "1280x720",
+        "dpr": 1,
+        "touch": false,
+        "map": "coast",
+        "epoch": 10,
+        "player": [
+          360,
+          342
+        ],
+        "phase": "running",
+        "panel": null,
+        "storageError": "",
+        "storageOK": true,
+        "rejected": [],
+        "writes": [
+          {
+            "at": 395.69999999995343,
+            "bytes": 804,
+            "result": "written"
+          },
+          {
+            "at": 1082,
+            "bytes": 15823,
+            "result": "written"
+          },
+          {
+            "at": 3251.1999999999534,
+            "bytes": 17083,
+            "result": "written"
+          },
+          {
+            "at": 5250.29999999993,
+            "bytes": 17065,
+            "result": "written"
+          },
+          {
+            "at": 7256.29999999993,
+            "bytes": 17064,
+            "result": "written"
+          }
+        ],
+        "saveErrors": []
+      },
+      {
+        "file": "window-1920x1080.png",
+        "scene": "window",
+        "note": "贴西墙窗口向外瞄准",
+        "size": "1920x1080",
+        "dpr": 1,
+        "touch": false,
+        "map": "coast",
+        "epoch": 10,
+        "player": [
+          360,
+          342
+        ],
+        "phase": "running",
+        "panel": null,
+        "storageError": "",
+        "storageOK": true,
+        "rejected": [],
+        "writes": [
+          {
+            "at": 328.5999999999767,
+            "bytes": 804,
+            "result": "written"
+          },
+          {
+            "at": 876.4000000000233,
+            "bytes": 15823,
+            "result": "written"
+          },
+          {
+            "at": 2980.8000000000466,
+            "bytes": 17082,
+            "result": "written"
+          },
+          {
+            "at": 4980,
+            "bytes": 17065,
+            "result": "written"
+          },
+          {
+            "at": 6985.099999999977,
+            "bytes": 17066,
+            "result": "written"
+          }
+        ],
+        "saveErrors": []
+      },
+      {
+        "file": "window-844x390.png",
+        "scene": "window",
+        "note": "贴西墙窗口向外瞄准",
+        "size": "844x390",
+        "dpr": 3,
+        "touch": true,
+        "map": "coast",
+        "epoch": 10,
+        "player": [
+          360,
+          342
+        ],
+        "phase": "running",
+        "panel": null,
+        "storageError": "",
+        "storageOK": true,
+        "rejected": [],
+        "writes": [
+          {
+            "at": 340.4000000000233,
+            "bytes": 804,
+            "result": "written"
+          },
+          {
+            "at": 765.8000000000466,
+            "bytes": 15823,
+            "result": "written"
+          },
+          {
+            "at": 2920.600000000093,
+            "bytes": 17062,
+            "result": "written"
+          },
+          {
+            "at": 4934.300000000047,
+            "bytes": 17058,
+            "result": "written"
+          },
+          {
+            "at": 6936.20000000007,
+            "bytes": 17058,
+            "result": "written"
+          }
+        ],
+        "saveErrors": []
+      },
+      {
+        "file": "window-640x300.png",
+        "scene": "window",
+        "note": "贴西墙窗口向外瞄准",
+        "size": "640x300",
+        "dpr": 3,
+        "touch": true,
+        "map": "coast",
+        "epoch": 10,
+        "player": [
+          360,
+          342
+        ],
+        "phase": "running",
+        "panel": null,
+        "storageError": "",
+        "storageOK": true,
+        "rejected": [],
+        "writes": [
+          {
+            "at": 339.19999999995343,
+            "bytes": 804,
+            "result": "written"
+          },
+          {
+            "at": 913.3999999999069,
+            "bytes": 15823,
+            "result": "written"
+          },
+          {
+            "at": 3022.399999999907,
+            "bytes": 17082,
+            "result": "written"
+          },
+          {
+            "at": 5028.399999999907,
+            "bytes": 17082,
+            "result": "written"
+          },
+          {
+            "at": 7034.399999999907,
+            "bytes": 17083,
+            "result": "written"
+          }
+        ],
+        "saveErrors": []
+      }
+    ],
+    "anomalies": [],
+    "errors": [],
+    "console": []
+  },
+  {
+    "set": "round3-revised",
+    "file": "docs/coast-sample-view/sol-round3-20261008/evidence/shots-revised/index.json",
+    "keys": [
+      "startedAt",
+      "browser",
+      "seed",
+      "url",
+      "shots",
+      "errors",
+      "requests",
+      "console",
+      "anomalies",
+      "finishedAt"
+    ],
+    "windows": [
+      {
+        "file": "window-1280x720.png",
+        "scene": "window",
+        "note": "贴西墙窗口向外瞄准",
+        "size": "1280x720",
+        "dpr": 1,
+        "touch": false,
+        "map": "coast",
+        "epoch": 10,
+        "player": [
+          360,
+          342
+        ],
+        "phase": "running",
+        "panel": null,
+        "storageError": "",
+        "storageOK": true,
+        "rejected": [],
+        "writes": [
+          {
+            "at": 456.5,
+            "bytes": 804,
+            "result": "written"
+          },
+          {
+            "at": 1197,
+            "bytes": 15823,
+            "result": "written"
+          },
+          {
+            "at": 3384.1999999999534,
+            "bytes": 16969,
+            "result": "written"
+          },
+          {
+            "at": 5389.5,
+            "bytes": 16950,
+            "result": "written"
+          },
+          {
+            "at": 7395.199999999953,
+            "bytes": 16949,
+            "result": "written"
+          }
+        ],
+        "saveErrors": []
+      },
+      {
+        "file": "window-1920x1080.png",
+        "scene": "window",
+        "note": "贴西墙窗口向外瞄准",
+        "size": "1920x1080",
+        "dpr": 1,
+        "touch": false,
+        "map": "coast",
+        "epoch": 10,
+        "player": [
+          360,
+          342
+        ],
+        "phase": "running",
+        "panel": null,
+        "storageError": "",
+        "storageOK": true,
+        "rejected": [],
+        "writes": [
+          {
+            "at": 340.39999999990687,
+            "bytes": 804,
+            "result": "written"
+          },
+          {
+            "at": 944.8000000000466,
+            "bytes": 15823,
+            "result": "written"
+          },
+          {
+            "at": 3046.5,
+            "bytes": 17062,
+            "result": "written"
+          },
+          {
+            "at": 5046.800000000047,
+            "bytes": 17040,
+            "result": "written"
+          },
+          {
+            "at": 7049.600000000093,
+            "bytes": 17040,
+            "result": "written"
+          }
+        ],
+        "saveErrors": []
+      },
+      {
+        "file": "window-844x390.png",
+        "scene": "window",
+        "note": "贴西墙窗口向外瞄准",
+        "size": "844x390",
+        "dpr": 3,
+        "touch": true,
+        "map": "coast",
+        "epoch": 10,
+        "player": [
+          360,
+          342
+        ],
+        "phase": "running",
+        "panel": null,
+        "storageError": "",
+        "storageOK": true,
+        "rejected": [],
+        "writes": [
+          {
+            "at": 351.89999999990687,
+            "bytes": 804,
+            "result": "written"
+          },
+          {
+            "at": 908.3000000000466,
+            "bytes": 15823,
+            "result": "written"
+          },
+          {
+            "at": 3061.1999999999534,
+            "bytes": 16464,
+            "result": "written"
+          },
+          {
+            "at": 5067.399999999907,
+            "bytes": 16460,
+            "result": "written"
+          },
+          {
+            "at": 7073.899999999907,
+            "bytes": 16459,
+            "result": "written"
+          }
+        ],
+        "saveErrors": []
+      },
+      {
+        "file": "window-640x300.png",
+        "scene": "window",
+        "note": "贴西墙窗口向外瞄准",
+        "size": "640x300",
+        "dpr": 3,
+        "touch": true,
+        "map": "coast",
+        "epoch": 10,
+        "player": [
+          360,
+          342
+        ],
+        "phase": "running",
+        "panel": null,
+        "storageError": "",
+        "storageOK": true,
+        "rejected": [],
+        "writes": [
+          {
+            "at": 352.89999999990687,
+            "bytes": 804,
+            "result": "written"
+          },
+          {
+            "at": 929.8000000000466,
+            "bytes": 15823,
+            "result": "written"
+          },
+          {
+            "at": 3061.5999999998603,
+            "bytes": 17085,
+            "result": "written"
+          },
+          {
+            "at": 5066.5,
+            "bytes": 17083,
+            "result": "written"
+          },
+          {
+            "at": 7067.199999999953,
+            "bytes": 17081,
+            "result": "written"
+          }
+        ],
+        "saveErrors": []
+      }
+    ],
+    "anomalies": [],
+    "errors": [],
+    "console": []
+  }
+]

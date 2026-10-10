@@ -1,0 +1,807 @@
+{
+  "html": "D:\\bincov\\hideout-runtime\\dist\\index.html",
+  "browser": "154.0.8037.98",
+  "startedAt": "2026-10-09T19:30:31.279Z",
+  "steps": [
+    {
+      "name": "修理铺: drag 商人物品 -> 待买 lands on the chosen cell with a live preview; no money or save changes before checkout",
+      "status": "passed",
+      "detail": {
+        "mid": {
+          "ghost": true,
+          "preview": "true",
+          "previewW": "108px"
+        },
+        "cash": 700
+      }
+    },
+    {
+      "name": "修理铺: drag 待买 -> 商人物品 cancels the purchase",
+      "status": "passed",
+      "detail": {
+        "buy": []
+      }
+    },
+    {
+      "name": "修理铺: refused drops say why and move nothing; a catalog item dropped back on the catalog is a quiet cancel",
+      "status": "passed",
+      "detail": {
+        "refused": "先放入待买或待卖区，再统一结算。"
+      }
+    },
+    {
+      "name": "修理铺: focus loss, Esc and R mid-drag: the drag ends cleanly (or keeps the item's orientation) and the next drag works",
+      "status": "passed",
+      "detail": {
+        "widths": [
+          "108px",
+          "108px"
+        ]
+      }
+    },
+    {
+      "name": "修理铺: click-to-place (选中 → 移动格位 → 点格) still works and does not start a drag",
+      "status": "passed",
+      "detail": {
+        "buy": [
+          "pistol"
+        ]
+      }
+    },
+    {
+      "name": "修理铺: checkout with a failed storage write keeps money, warehouse and cart; the retry buys once",
+      "status": "passed",
+      "detail": {
+        "cash": [
+          700,
+          700,
+          380
+        ],
+        "due": 320,
+        "stash": [
+          "medkit×1",
+          "ammo9×24",
+          "pistol×1"
+        ]
+      }
+    },
+    {
+      "name": "修理铺: drag 仓库 -> 待卖, back to 仓库 (cancel), again to 待卖, then sell",
+      "status": "passed",
+      "detail": {
+        "cash": [
+          380,
+          530
+        ],
+        "income": 150
+      }
+    },
+    {
+      "name": "卫生所: drag 商人物品 -> 待买 lands on the chosen cell with a live preview; no money or save changes before checkout",
+      "status": "passed",
+      "detail": {
+        "mid": {
+          "ghost": true,
+          "preview": "true",
+          "previewW": "54px"
+        },
+        "cash": 700
+      }
+    },
+    {
+      "name": "卫生所: drag 待买 -> 商人物品 cancels the purchase",
+      "status": "passed",
+      "detail": {
+        "buy": []
+      }
+    },
+    {
+      "name": "卫生所: refused drops say why and move nothing; a catalog item dropped back on the catalog is a quiet cancel",
+      "status": "passed",
+      "detail": {
+        "refused": "先放入待买或待卖区，再统一结算。"
+      }
+    },
+    {
+      "name": "卫生所: focus loss, Esc and R mid-drag: the drag ends cleanly (or keeps the item's orientation) and the next drag works",
+      "status": "passed",
+      "detail": {
+        "widths": [
+          "54px",
+          "54px"
+        ]
+      }
+    },
+    {
+      "name": "卫生所: click-to-place (选中 → 移动格位 → 点格) still works and does not start a drag",
+      "status": "passed",
+      "detail": {
+        "buy": [
+          "bandage"
+        ]
+      }
+    },
+    {
+      "name": "卫生所: checkout with a failed storage write keeps money, warehouse and cart; the retry buys once",
+      "status": "passed",
+      "detail": {
+        "cash": [
+          700,
+          700,
+          655
+        ],
+        "due": 45,
+        "stash": [
+          "medkit×1",
+          "ammo9×24",
+          "bandage×1"
+        ]
+      }
+    },
+    {
+      "name": "卫生所: drag 仓库 -> 待卖, back to 仓库 (cancel), again to 待卖, then sell",
+      "status": "passed",
+      "detail": {
+        "cash": [
+          655,
+          673
+        ],
+        "income": 18
+      }
+    },
+    {
+      "name": "touch 844x390: tap-to-place moves 商人物品 -> 待买; items are not draggable",
+      "status": "passed",
+      "detail": {
+        "buy": [
+          "pistol"
+        ]
+      }
+    },
+    {
+      "name": "arms touch merchant -> buy -> merchant, no durable or money changes",
+      "status": "passed",
+      "detail": {
+        "before": {
+          "cash": 700,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1r8r-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1r8r-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            }
+          ],
+          "buy": [],
+          "sell": [],
+          "storedSHA256": "1f85c864c2f1d26a29cdb56923495bf44ac38519bb6326d54a165f864fa4bf95",
+          "ghost": false,
+          "dragging": false
+        },
+        "staged": {
+          "cash": 700,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1r8r-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1r8r-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            }
+          ],
+          "buy": [
+            {
+              "id": "pistol",
+              "qty": 1,
+              "x": 1,
+              "y": 1
+            }
+          ],
+          "sell": [],
+          "storedSHA256": "1f85c864c2f1d26a29cdb56923495bf44ac38519bb6326d54a165f864fa4bf95",
+          "ghost": false,
+          "dragging": false
+        },
+        "back": {
+          "cash": 700,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1r8r-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1r8r-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            }
+          ],
+          "buy": [],
+          "sell": [],
+          "storedSHA256": "1f85c864c2f1d26a29cdb56923495bf44ac38519bb6326d54a165f864fa4bf95",
+          "ghost": false,
+          "dragging": false
+        }
+      }
+    },
+    {
+      "name": "arms touch purchase -> stash -> sell -> stash, staging sale and cancelling preserve save",
+      "status": "passed",
+      "detail": {
+        "due": 320,
+        "purchased": {
+          "cash": 380,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1r8r-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1r8r-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            },
+            {
+              "id": "pistol",
+              "uid": "bc-mv1d1rto-o",
+              "qty": 1,
+              "x": 3,
+              "y": 0
+            }
+          ],
+          "buy": [],
+          "sell": [],
+          "storedSHA256": "9aac06be091c901bee1d8e900293912a7560bc6bbf755d69456f59a7cda365ba",
+          "ghost": false,
+          "dragging": false
+        },
+        "staged": {
+          "cash": 380,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1r8r-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1r8r-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            },
+            {
+              "id": "pistol",
+              "uid": "bc-mv1d1rto-o",
+              "qty": 1,
+              "x": 3,
+              "y": 0
+            }
+          ],
+          "buy": [],
+          "sell": [
+            {
+              "id": "pistol",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "storedSHA256": "9aac06be091c901bee1d8e900293912a7560bc6bbf755d69456f59a7cda365ba",
+          "ghost": false,
+          "dragging": false
+        },
+        "back": {
+          "cash": 380,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1r8r-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1r8r-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            },
+            {
+              "id": "pistol",
+              "uid": "bc-mv1d1rto-o",
+              "qty": 1,
+              "x": 3,
+              "y": 0
+            }
+          ],
+          "buy": [],
+          "sell": [],
+          "storedSHA256": "9aac06be091c901bee1d8e900293912a7560bc6bbf755d69456f59a7cda365ba",
+          "ghost": false,
+          "dragging": false
+        }
+      }
+    },
+    {
+      "name": "arms mixed buy/sell write failure preserves whole save and whole cart; retry settles exactly once",
+      "status": "passed",
+      "detail": {
+        "due": 170,
+        "failedWriteAttempts": 1,
+        "before": {
+          "cash": 380,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1r8r-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1r8r-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            },
+            {
+              "id": "pistol",
+              "uid": "bc-mv1d1rto-o",
+              "qty": 1,
+              "x": 3,
+              "y": 0
+            }
+          ],
+          "buy": [
+            {
+              "id": "pistol",
+              "qty": 1,
+              "x": 1,
+              "y": 1
+            }
+          ],
+          "sell": [
+            {
+              "id": "pistol",
+              "qty": 1,
+              "x": 1,
+              "y": 0
+            }
+          ],
+          "storedSHA256": "9aac06be091c901bee1d8e900293912a7560bc6bbf755d69456f59a7cda365ba",
+          "ghost": false,
+          "dragging": false
+        },
+        "failed": {
+          "cash": 380,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1r8r-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1r8r-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            },
+            {
+              "id": "pistol",
+              "uid": "bc-mv1d1rto-o",
+              "qty": 1,
+              "x": 3,
+              "y": 0
+            }
+          ],
+          "buy": [
+            {
+              "id": "pistol",
+              "qty": 1,
+              "x": 1,
+              "y": 1
+            }
+          ],
+          "sell": [
+            {
+              "id": "pistol",
+              "qty": 1,
+              "x": 1,
+              "y": 0
+            }
+          ],
+          "storedSHA256": "9aac06be091c901bee1d8e900293912a7560bc6bbf755d69456f59a7cda365ba",
+          "ghost": false,
+          "dragging": false
+        },
+        "done": {
+          "cash": 210,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1r8r-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1r8r-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            },
+            {
+              "id": "pistol",
+              "uid": "bc-mv1d1s74-12",
+              "qty": 1,
+              "x": 3,
+              "y": 0
+            }
+          ],
+          "buy": [],
+          "sell": [],
+          "storedSHA256": "36a6dc4328a3e9490e50153f73ac600fc28ed5ab94b34e1a073fee3d522b226d",
+          "ghost": false,
+          "dragging": false
+        }
+      }
+    },
+    {
+      "name": "med touch merchant -> buy -> merchant, no durable or money changes",
+      "status": "passed",
+      "detail": {
+        "before": {
+          "cash": 700,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1slg-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1slg-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            }
+          ],
+          "buy": [],
+          "sell": [],
+          "storedSHA256": "b4bddbf36b3a15576c4e56a9ad137f36120abb0c4338e4e252870ef5ac1f9616",
+          "ghost": false,
+          "dragging": false
+        },
+        "staged": {
+          "cash": 700,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1slg-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1slg-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            }
+          ],
+          "buy": [
+            {
+              "id": "bandage",
+              "qty": 1,
+              "x": 1,
+              "y": 1
+            }
+          ],
+          "sell": [],
+          "storedSHA256": "b4bddbf36b3a15576c4e56a9ad137f36120abb0c4338e4e252870ef5ac1f9616",
+          "ghost": false,
+          "dragging": false
+        },
+        "back": {
+          "cash": 700,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1slg-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1slg-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            }
+          ],
+          "buy": [],
+          "sell": [],
+          "storedSHA256": "b4bddbf36b3a15576c4e56a9ad137f36120abb0c4338e4e252870ef5ac1f9616",
+          "ghost": false,
+          "dragging": false
+        }
+      }
+    },
+    {
+      "name": "med touch purchase -> stash -> sell -> stash, staging sale and cancelling preserve save",
+      "status": "passed",
+      "detail": {
+        "due": 45,
+        "purchased": {
+          "cash": 655,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1slg-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1slg-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            },
+            {
+              "id": "bandage",
+              "uid": "bc-mv1d1t80-k",
+              "qty": 1,
+              "x": 3,
+              "y": 0
+            }
+          ],
+          "buy": [],
+          "sell": [],
+          "storedSHA256": "fc78f101636766e90f228e480a37c7ffa01c0dd0dacb7ac3489fef0f14251694",
+          "ghost": false,
+          "dragging": false
+        },
+        "staged": {
+          "cash": 655,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1slg-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1slg-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            },
+            {
+              "id": "bandage",
+              "uid": "bc-mv1d1t80-k",
+              "qty": 1,
+              "x": 3,
+              "y": 0
+            }
+          ],
+          "buy": [],
+          "sell": [
+            {
+              "id": "bandage",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            }
+          ],
+          "storedSHA256": "fc78f101636766e90f228e480a37c7ffa01c0dd0dacb7ac3489fef0f14251694",
+          "ghost": false,
+          "dragging": false
+        },
+        "back": {
+          "cash": 655,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1slg-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1slg-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            },
+            {
+              "id": "bandage",
+              "uid": "bc-mv1d1t80-k",
+              "qty": 1,
+              "x": 3,
+              "y": 0
+            }
+          ],
+          "buy": [],
+          "sell": [],
+          "storedSHA256": "fc78f101636766e90f228e480a37c7ffa01c0dd0dacb7ac3489fef0f14251694",
+          "ghost": false,
+          "dragging": false
+        }
+      }
+    },
+    {
+      "name": "med mixed buy/sell write failure preserves whole save and whole cart; retry settles exactly once",
+      "status": "passed",
+      "detail": {
+        "due": 27,
+        "failedWriteAttempts": 1,
+        "before": {
+          "cash": 655,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1slg-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1slg-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            },
+            {
+              "id": "bandage",
+              "uid": "bc-mv1d1t80-k",
+              "qty": 1,
+              "x": 3,
+              "y": 0
+            }
+          ],
+          "buy": [
+            {
+              "id": "bandage",
+              "qty": 1,
+              "x": 1,
+              "y": 1
+            }
+          ],
+          "sell": [
+            {
+              "id": "bandage",
+              "qty": 1,
+              "x": 1,
+              "y": 0
+            }
+          ],
+          "storedSHA256": "fc78f101636766e90f228e480a37c7ffa01c0dd0dacb7ac3489fef0f14251694",
+          "ghost": false,
+          "dragging": false
+        },
+        "failed": {
+          "cash": 655,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1slg-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1slg-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            },
+            {
+              "id": "bandage",
+              "uid": "bc-mv1d1t80-k",
+              "qty": 1,
+              "x": 3,
+              "y": 0
+            }
+          ],
+          "buy": [
+            {
+              "id": "bandage",
+              "qty": 1,
+              "x": 1,
+              "y": 1
+            }
+          ],
+          "sell": [
+            {
+              "id": "bandage",
+              "qty": 1,
+              "x": 1,
+              "y": 0
+            }
+          ],
+          "storedSHA256": "fc78f101636766e90f228e480a37c7ffa01c0dd0dacb7ac3489fef0f14251694",
+          "ghost": false,
+          "dragging": false
+        },
+        "done": {
+          "cash": 628,
+          "stash": [
+            {
+              "id": "medkit",
+              "uid": "bc-mv1d1slg-9",
+              "qty": 1,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "id": "ammo9",
+              "uid": "bc-mv1d1slg-a",
+              "qty": 24,
+              "x": 2,
+              "y": 0
+            },
+            {
+              "id": "bandage",
+              "uid": "bc-mv1d1tjr-u",
+              "qty": 1,
+              "x": 3,
+              "y": 0
+            }
+          ],
+          "buy": [],
+          "sell": [],
+          "storedSHA256": "21f41e5f91d6c89bfb5e9f5cf477610e9a35d2af9d6d5db1c18a59b8b59c9dc9",
+          "ghost": false,
+          "dragging": false
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "finishedAt": "2026-10-09T19:30:48.835Z"
+}

@@ -1,0 +1,106 @@
+{
+  "at": "2026-10-07T19:33:09.709Z",
+  "environment": {
+    "os": "Windows 10 Pro 10.0.19045",
+    "node": "24.19.0",
+    "pnpm": "11.19.0 (corepack)",
+    "browser": "154.0.8037.98"
+  },
+  "baseline": {
+    "head": "c836737",
+    "main": "841e8bb",
+    "pr22Head": "878f563"
+  },
+  "unit": {
+    "command": "pnpm test",
+    "tests": 223,
+    "pass": 223,
+    "fail": 0
+  },
+  "package": {
+    "command": "pnpm package",
+    "html": "dist/index.html = start the game.html",
+    "bytes": 3144063,
+    "sha256": "b3c859899cbd2a6754528c0b50dd05f4e27395803f6c96adec768e40bc0f62a6",
+    "rebuildIdentical": true
+  },
+  "wiring": {
+    "command": "node scripts/coast-sample-test.mjs",
+    "passed": 27,
+    "total": 27,
+    "errors": 0,
+    "requests": 0
+  },
+  "heap": {
+    "command": "BINCOV_HEAP_CYCLES=30 BINCOV_HEAP_SNAP=10,30 node scripts/coast-sample-heap.mjs",
+    "report": "heap-report.json"
+  },
+  "shots": {
+    "command": "node scripts/coast-sample-shots.mjs",
+    "count": 68,
+    "anomalies": 0,
+    "errors": 0,
+    "requests": 0
+  },
+  "art": {
+    "command": "node scripts/coast-sample-art.mjs",
+    "crops": 8
+  },
+  "measure": "measure.json",
+  "regressions": [
+    {
+      "suite": "browser",
+      "exit": 0
+    },
+    {
+      "suite": "desktop-input",
+      "exit": 0
+    },
+    {
+      "suite": "save-browser",
+      "exit": 0
+    },
+    {
+      "suite": "buildings",
+      "exit": 0
+    },
+    {
+      "suite": "mobile",
+      "exit": 0
+    },
+    {
+      "suite": "mobile-ux",
+      "exit": 0
+    },
+    {
+      "suite": "portable",
+      "exit": 0
+    },
+    {
+      "suite": "ui",
+      "exit": 0
+    },
+    {
+      "suite": "loot",
+      "exit": 0
+    },
+    {
+      "suite": "expansion",
+      "exit": 0
+    },
+    {
+      "suite": "qol-expansion",
+      "exit": 0
+    },
+    {
+      "suite": "systems",
+      "exit": 0
+    }
+  ],
+  "notRun": [
+    "pnpm test:layered-play (known script issue from earlier rounds)",
+    "WebGL context loss",
+    "real phones / human play",
+    "scripts/sol-sample-boundaries.mjs (Sol owned; F14/F16 selectors need the grid UI)"
+  ]
+}

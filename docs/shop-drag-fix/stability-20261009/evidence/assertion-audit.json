@@ -1,0 +1,38 @@
+{
+  "method": "TypeScript AST canonical assertion call multiset; every original call must occur with the same multiplicity after editing.",
+  "files": [
+    {
+      "file": "systems-browser-test.mjs",
+      "beforeAssertions": 107,
+      "afterAssertions": 109,
+      "allOriginalAssertionsPreserved": true,
+      "beforeSHA256": "5a2784bd171b96ba38d108df4576158657b49987c8fe11f57b2699cac02235ab",
+      "afterSHA256": "6bfb26a1b1fb4280f1c74ecdaf26e94e9ab825b06f5845010329d0bebcb74c13"
+    },
+    {
+      "file": "qol-expansion-test.mjs",
+      "beforeAssertions": 26,
+      "afterAssertions": 26,
+      "allOriginalAssertionsPreserved": true,
+      "beforeSHA256": "8143fa7fd5a81e4ba78965e6a32c95984c9c29d24ab66abda8a5edae5a438d9a",
+      "afterSHA256": "c6cec42d2cdf2b57e1a032f7590e748ecd1008568d9ed2f2b00b77661b4f0a71"
+    },
+    {
+      "file": "shop-drag-test.mjs",
+      "beforeAssertions": 54,
+      "afterAssertions": 54,
+      "allOriginalAssertionsPreserved": true,
+      "beforeSHA256": "639dd5ff9987abf126faae93a41e490cb5347c464d4ef54ab791d5ce71a0ba35",
+      "afterSHA256": "dc77278fe99a27f4585232a79ae18ed3b5b76223f6302668e722983cb1eac3a5"
+    }
+  ],
+  "touchHelper": {
+    "reference": "docs/shop-drag-fix/sol-20261009/diagnostics/supplement.mjs",
+    "target": "scripts/shop-touch-cases.mjs",
+    "referenceSHA256": "c1670c199f3d5c764668fb91077eb8652a99f811591ca124ea10fba7c261f021",
+    "targetSHA256": "66cab6ee8f2dd4aa22f44940d3448091af902dbb49b774f9966993c2a0627e10",
+    "originalTouchAssertions": 34,
+    "formalTouchAssertions": 34,
+    "allPreserved": true
+  }
+}

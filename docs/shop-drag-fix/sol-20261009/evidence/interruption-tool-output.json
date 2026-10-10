@@ -1,0 +1,25 @@
+{
+  "note": "Parent runner status was not awaited before dispatching another batch; executed child timestamps later show no browser overlap. CI desktop step was intentionally terminated, not a product test failure. Original outputs retained.",
+  "entries": [
+    [
+      "initial-parent-completion",
+      {
+        "chunk_id": "39e94e",
+        "wall_time_seconds": 0.0000083,
+        "exit_code": 0,
+        "original_token_count": 39,
+        "output": "{\"id\":\"shop-main-control-first\",\"exitCode\":1,\"expected\":true,\"outputs\":3,\"startedAt\":\"2026-10-09T13:26:29.749Z\",\"finishedAt\":\"2026-10-09T13:27:03.523Z\"}\n"
+      }
+    ],
+    [
+      "premature-ci-parent-completion",
+      {
+        "chunk_id": "9595d6",
+        "wall_time_seconds": 0.0000076,
+        "exit_code": 1,
+        "original_token_count": 37,
+        "output": "{\"id\":\"ci-browser-first\",\"exitCode\":0,\"expected\":true,\"outputs\":19,\"startedAt\":\"2026-10-09T13:27:05.707Z\",\"finishedAt\":\"2026-10-09T13:27:44.475Z\"}\n"
+      }
+    ]
+  ]
+}

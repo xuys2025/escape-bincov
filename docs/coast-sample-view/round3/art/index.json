@@ -1,0 +1,57 @@
+{
+  "startedAt": "2026-10-07T19:28:06.580Z",
+  "crops": [
+    {
+      "id": "player-dirs",
+      "note": "玩家八方向持卡宾枪（E/SE/S/SW/W/NW/N/NE）",
+      "art": "sol",
+      "file": "player-dirs-sol.png"
+    },
+    {
+      "id": "facade",
+      "note": "居民楼南立面：墙帽、外立面 a/b、窗、门（关）",
+      "art": "sol",
+      "file": "facade-sol.png"
+    },
+    {
+      "id": "interior",
+      "note": "一楼室内：内墙、瓷砖、开门",
+      "art": "sol",
+      "file": "interior-sol.png"
+    },
+    {
+      "id": "street",
+      "note": "街口地面：沥青 a/b、院地 a/b 与路缘",
+      "art": "sol",
+      "file": "street-sol.png"
+    },
+    {
+      "id": "player-dirs",
+      "note": "玩家八方向持卡宾枪（E/SE/S/SW/W/NW/N/NE）",
+      "art": "placeholder",
+      "file": "player-dirs-placeholder.png"
+    },
+    {
+      "id": "facade",
+      "note": "居民楼南立面：墙帽、外立面 a/b、窗、门（关）",
+      "art": "placeholder",
+      "file": "facade-placeholder.png"
+    },
+    {
+      "id": "interior",
+      "note": "一楼室内：内墙、瓷砖、开门",
+      "art": "placeholder",
+      "file": "interior-placeholder.png"
+    },
+    {
+      "id": "street",
+      "note": "街口地面：沥青 a/b、院地 a/b 与路缘",
+      "art": "placeholder",
+      "file": "street-placeholder.png"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "sol": "sol",
+  "placeholder": "placeholder"
+}

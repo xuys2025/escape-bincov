@@ -1,0 +1,34 @@
+{
+  "startedAt": "2026-10-08T12:49:46.316Z",
+  "seed": "42",
+  "steps": [
+    {
+      "name": "V03 sol: a real Runtime kill in view tips the standing body over its feet, weapon gone, before the corpse replaces it",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: the death frame starts the fall, not the corpse: {\"uid\":\"enemy-3\",\"dt\":0.0061000000000001366,\"alive\":false,\"death\":true,\"rebuilt\":false,\"map\":\"coast\",\"epoch\":2,\"deathT\":0,\"rotation\":0,\"body\":false,\"weapon\":false,\"corpse\":true,\"hasCorpse\":true,\"corpseKey\":\"corpse:salt:-1\",\"shown\":true}\n    at <scratch>/dev-v03.mjs:145:12\n    at async step (<scratch>/dev-v03.mjs:19:24)\n    at async <scratch>/dev-v03.mjs:127:3"
+    },
+    {
+      "name": "V04 sol: no fall for a kill in an unrevealed room (0 changed pixels), nor for corpses rebuilt by an epoch, the stairs or a reload",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: the indoor kill in view falls\n    at <scratch>/dev-v03.mjs:179:12\n    at async step (<scratch>/dev-v03.mjs:19:24)\n    at async <scratch>/dev-v03.mjs:157:3"
+    },
+    {
+      "name": "V03 placeholder: a real Runtime kill in view tips the standing body over its feet, weapon gone, before the corpse replaces it",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: the death frame starts the fall, not the corpse: {\"uid\":\"enemy-3\",\"dt\":0.006,\"alive\":false,\"death\":true,\"rebuilt\":false,\"map\":\"coast\",\"epoch\":2,\"deathT\":0,\"rotation\":0,\"body\":false,\"weapon\":false,\"corpse\":true,\"hasCorpse\":true,\"corpseKey\":\"corpse:salt:-1\",\"shown\":true}\n    at <scratch>/dev-v03.mjs:145:12\n    at async step (<scratch>/dev-v03.mjs:19:24)\n    at async <scratch>/dev-v03.mjs:127:3"
+    },
+    {
+      "name": "V04 placeholder: no fall for a kill in an unrevealed room (0 changed pixels), nor for corpses rebuilt by an epoch, the stairs or a reload",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: the indoor kill in view falls\n    at <scratch>/dev-v03.mjs:179:12\n    at async step (<scratch>/dev-v03.mjs:19:24)\n    at async <scratch>/dev-v03.mjs:157:3"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "finishedAt": "2026-10-08T12:49:52.533Z",
+  "passed": 0,
+  "failed": 4,
+  "html": "rebuild of 81e1bd0 src/coast-view/scene.ts, sha256 88ca4cf44377533c385284994f41a837aa0004fd3e8d3614d11276a689a1684d (same bytes as the committed 81e1bd0 dist)",
+  "harness": "V03/V04 block of scripts/coast-sample-test.mjs at this commit, run against that HTML via BINCOV_SAMPLE_HTML"
+}

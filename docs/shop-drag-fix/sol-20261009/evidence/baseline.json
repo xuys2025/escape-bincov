@@ -1,0 +1,85 @@
+{
+  "at": "2026-10-09T13:24:58.640Z",
+  "head": "4fc30234d1d686a6cb68007f923aff6d7fbd7bdc",
+  "parent": "43a342ce434c101e4b7058a54f6f29ede9482223",
+  "branch": "fix/shop-drag",
+  "initialStatus": "clean",
+  "main": "43a342ce434c101e4b7058a54f6f29ede9482223",
+  "relatedOpenPRs": [],
+  "allOpenPRs": [
+    {
+      "url": "https://github.com/xuys2025/escape-bincov/pull/30",
+      "title": "docs: 《等海退去》剧情转化规格与市场样板",
+      "headBranch": "docs/story-adaptation",
+      "head": "0a3b485987786034a6ece38861ea175f90bdd9ea"
+    },
+    {
+      "url": "https://github.com/xuys2025/escape-bincov/pull/28",
+      "title": "docs: 改枪系统 20 枪 100 配件规划，排期在 PR22 之后",
+      "headBranch": "docs/gunsmith-after-pr22",
+      "head": "40abeb6552a2e07d9b67d0692cf01c6ecf810a5b"
+    },
+    {
+      "url": "https://github.com/xuys2025/escape-bincov/pull/22",
+      "title": "docs: 沿海地图 2.5D 视角、灰褐材质与 GPT Image 拼板规范",
+      "headBranch": "docs/coast-2-5d-art-design",
+      "head": "878f5633316a824960091f8f924c0ddd8dd78078"
+    }
+  ],
+  "node": "v24.19.0",
+  "platform": "win32",
+  "release": "10.0.19045",
+  "cpu": "12th Gen Intel(R) Core(TM) i5-12400F",
+  "pnpm": "11.19.0 (packageManager)",
+  "identity": [
+    {
+      "file": "dist/index.html",
+      "bytes": 2416251,
+      "sha256": "a9a07a960049d6dc17e54b9fb7c765c99a72041c48e111c9b73b2ae2fa8d852f",
+      "equals4fc3023": true
+    },
+    {
+      "file": "start the game.html",
+      "bytes": 2416251,
+      "sha256": "a9a07a960049d6dc17e54b9fb7c765c99a72041c48e111c9b73b2ae2fa8d852f",
+      "equals4fc3023": true
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "bytes": 840803,
+      "sha256": "4b9ed1095dc6fb85fc43795cff31686c8430a81a51bd9cf3ad839235c7c8eaee",
+      "equals4fc3023": true
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "bytes": 837028,
+      "sha256": "03d1080fdcd32f0e10c41b069e1a0e1be61f456c93284832ca9166a41685fbda",
+      "equals4fc3023": true
+    },
+    {
+      "file": "docs/release-manifest.json",
+      "bytes": 745,
+      "sha256": "05beffd186bdb381fb358562ad77139102cfbbe3dad2c0be5fc17539a515b6e0",
+      "equals4fc3023": true
+    }
+  ],
+  "mainControl": {
+    "commit": "43a342ce434c101e4b7058a54f6f29ede9482223",
+    "file": "test-results/shop-drag-sol-20261009/main-43a342c.html",
+    "sha256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+    "bytes": 2416678
+  },
+  "expansionLegacy": {
+    "commit": "07b1414da9f1ac4c3ad13a23ec914630ccbd7fbb",
+    "file": "test-results/pre-m0.html",
+    "sha256": "e748efcbad1bb2cde79e3898d9faafc62085e9dee51411df64b2c2cd2d708efc",
+    "bytes": 1791037,
+    "source": "git show exact pinned CI old client, prepared before first regression"
+  },
+  "pages": {
+    "url": "https://xuys2025.github.io/escape-bincov/",
+    "sha256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+    "bytes": 2416678,
+    "equalsMain": true
+  }
+}

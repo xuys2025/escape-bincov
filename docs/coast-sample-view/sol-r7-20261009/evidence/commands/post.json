@@ -1,0 +1,257 @@
+[
+  {
+    "id": "lifecycle-1280",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/coast-lifecycle-test.mjs"
+    ],
+    "sources": [
+      {
+        "path": "scripts/coast-lifecycle-test.mjs",
+        "sha256": "0ebba499c38f875b7d7ccd0662dc5da900fec717922cd3380258acb8a415f578"
+      }
+    ],
+    "environment": {
+      "BINCOV_LIFECYCLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/lifecycle-1280",
+      "BINCOV_LIFECYCLE_WIDE": ""
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:28:44.690Z",
+    "finished": "2026-10-09T07:29:01.367Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "lifecycle-1920",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/coast-lifecycle-test.mjs"
+    ],
+    "sources": [
+      {
+        "path": "scripts/coast-lifecycle-test.mjs",
+        "sha256": "0ebba499c38f875b7d7ccd0662dc5da900fec717922cd3380258acb8a415f578"
+      }
+    ],
+    "environment": {
+      "BINCOV_LIFECYCLE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/lifecycle-1920",
+      "BINCOV_LIFECYCLE_WIDE": "1"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:29:01.367Z",
+    "finished": "2026-10-09T07:29:18.157Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "launcher",
+    "args": [
+      "scripts/coast-launcher-check.mjs"
+    ],
+    "sources": [
+      {
+        "path": "scripts/coast-launcher-check.mjs",
+        "sha256": "22542871556ebf2e7a6e6e73d8e6875309abc6d2dd01321ca262b3ef5f5dcb72"
+      }
+    ],
+    "environment": {
+      "BINCOV_LAUNCHER_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/launcher"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:29:18.158Z",
+    "finished": "2026-10-09T07:29:28.213Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "play-empty",
+    "args": [
+      "scripts/coast-playtest.mjs"
+    ],
+    "sources": [
+      {
+        "path": "scripts/coast-playtest.mjs",
+        "sha256": "1639702e8af51f4b0cbe14489451e79f66a80c0a6b8427b3bb20cfef5112ddf4"
+      }
+    ],
+    "environment": {
+      "BINCOV_PLAYTEST_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/play-empty",
+      "BINCOV_PLAYTEST_SEED": "",
+      "BINCOV_PLAYTEST_SIZE": "1280x720"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:29:28.213Z",
+    "finished": "2026-10-09T07:30:02.783Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "play-1280",
+    "args": [
+      "scripts/coast-playtest.mjs"
+    ],
+    "sources": [
+      {
+        "path": "scripts/coast-playtest.mjs",
+        "sha256": "1639702e8af51f4b0cbe14489451e79f66a80c0a6b8427b3bb20cfef5112ddf4"
+      }
+    ],
+    "environment": {
+      "BINCOV_PLAYTEST_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/play-1280",
+      "BINCOV_PLAYTEST_SEED": "20261008",
+      "BINCOV_PLAYTEST_SIZE": "1280x720"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:30:02.784Z",
+    "finished": "2026-10-09T07:30:34.687Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "play-1920",
+    "args": [
+      "scripts/coast-playtest.mjs"
+    ],
+    "sources": [
+      {
+        "path": "scripts/coast-playtest.mjs",
+        "sha256": "1639702e8af51f4b0cbe14489451e79f66a80c0a6b8427b3bb20cfef5112ddf4"
+      }
+    ],
+    "environment": {
+      "BINCOV_PLAYTEST_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/play-1920",
+      "BINCOV_PLAYTEST_SEED": "20261008",
+      "BINCOV_PLAYTEST_SIZE": "1920x1080"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:30:34.687Z",
+    "finished": "2026-10-09T07:31:05.324Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "differential",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/runtime-differential.mjs"
+    ],
+    "sources": [
+      {
+        "path": "scripts/runtime-differential.mjs",
+        "sha256": "a5fd467f5241ef44772609bb4e9c5d63455ec043fabad8700fdd48cc95e55407"
+      }
+    ],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:31:05.324Z",
+    "finished": "2026-10-09T07:31:14.760Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "player-death",
+    "args": [
+      "scripts/opus-player-death-probe.mjs"
+    ],
+    "sources": [
+      {
+        "path": "scripts/opus-player-death-probe.mjs",
+        "sha256": "6932044158aaf8a8d4b3914e33840dc9dd89be10575b006ba7bb55aa298e7aea"
+      }
+    ],
+    "environment": {
+      "BINCOV_PLAYER_DEATH_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/player"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:31:14.760Z",
+    "finished": "2026-10-09T07:31:20.758Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "hidden-original",
+    "args": [
+      "scripts/sol-visibility-probe.mjs"
+    ],
+    "sources": [
+      {
+        "path": "scripts/sol-visibility-probe.mjs",
+        "sha256": "1aa2ca4db98e9149ebbd93437e8962e34ffeb5be84bedc462b226325c96bfdd9"
+      }
+    ],
+    "environment": {
+      "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/hidden-original"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:31:20.758Z",
+    "finished": "2026-10-09T07:31:23.677Z",
+    "exitCode": 1,
+    "signal": null
+  },
+  {
+    "id": "hidden-settled",
+    "args": [
+      "scripts/sol-r6-visibility.mjs"
+    ],
+    "sources": [
+      {
+        "path": "scripts/sol-r6-visibility.mjs",
+        "sha256": "91a4cf9d8b9f342df70cbf9b9da1ced7f3b4c96031112e29562fde925f7e9e70"
+      }
+    ],
+    "environment": {
+      "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/hidden-settled"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:31:23.678Z",
+    "finished": "2026-10-09T07:31:26.909Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "F20-strict",
+    "args": [
+      "--import",
+      "tsx",
+      "scripts/sol-sample-boundaries.mjs"
+    ],
+    "sources": [
+      {
+        "path": "scripts/sol-sample-boundaries.mjs",
+        "sha256": "7066289e7a01af3bf35139c595b093e7121c03285b52eb604e89456af68300f8"
+      }
+    ],
+    "environment": {
+      "BINCOV_SOL_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/f20",
+      "BINCOV_SOL_ONLY": "F20"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:31:26.910Z",
+    "finished": "2026-10-09T07:32:33.047Z",
+    "exitCode": 1,
+    "signal": null
+  },
+  {
+    "id": "resources",
+    "args": [
+      "scripts/sol-r6-resources.mjs"
+    ],
+    "sources": [
+      {
+        "path": "scripts/sol-r6-resources.mjs",
+        "sha256": "10a97dda75b8626e9946578d9847898f48572ea76c27e2a29a9d7a1ce73f0e0b"
+      }
+    ],
+    "environment": {
+      "BINCOV_R6_RESOURCE_OUT": "D:\\bincov\\pr22-runtime\\test-results\\sol-r7-20261009/resources"
+    },
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:32:33.047Z",
+    "finished": "2026-10-09T07:33:45.520Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

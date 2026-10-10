@@ -161,9 +161,11 @@ with zipfile.ZipFile(os.environ['BINCOV_PORTABLE_ARCHIVE']) as archive:
 
   await step('enter the safe house and deploy seed 42 using real buttons', async () => {
     await action('enter').click();
-    await page.locator('#seed').fill('42');
-    assert.equal(await page.locator('#seed').inputValue(), '42');
-    await action('deploy').click();
+    // The ordinary entry is the station yard; its departure panel deploys with the same seed field.
+    await page.locator('#station-yard [data-quick="deploy"]').click();
+    await page.locator('#station-yard #seed').fill('42');
+    assert.equal(await page.locator('#station-yard #seed').inputValue(), '42');
+    await page.locator('#station-yard [data-act="deploy"]').click();
     await page.locator('#timer').waitFor({ state: 'visible' });
     await page.waitForFunction(() => /^08\s*\//.test(document.getElementById('ammo')?.textContent || ''));
     const timerAtDeploy = (await page.locator('#timer').innerText()).trim();

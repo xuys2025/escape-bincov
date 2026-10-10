@@ -1,0 +1,935 @@
+{
+  "startedAt": "2026-10-07T17:10:24.474Z",
+  "methodology": "Offline packaged HTML, normal unaccelerated clock and ordinary 25-enemy/60-record mall deployment. Hooks are read-only. Native shopping, item transfers, keyboard movement, firing, healing, E stairs and extraction. Automatic navigation knows the immutable map and visible state; this is not human balance or physical-phone evidence.",
+  "samples": [
+    {
+      "run": 1,
+      "elapsed": 0.0415,
+      "hp": 100,
+      "map": "mall-f1",
+      "high": false,
+      "x": 144,
+      "y": 336,
+      "phase": 0,
+      "body": {
+        "hp": 100,
+        "stamina": 100,
+        "mental": 99.9993775,
+        "water": 99.99833999999998,
+        "satiety": 99.99896249999999,
+        "pollution": 0,
+        "bleeding": false,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 0,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      },
+      "entities": {
+        "mall-f1": {
+          "alive": 16,
+          "dead": 0,
+          "loot": 26,
+          "containers": 7,
+          "bullets": 0
+        },
+        "mall-f2": {
+          "alive": 9,
+          "dead": 0,
+          "loot": 14,
+          "containers": 3,
+          "bullets": 0
+        }
+      },
+      "pursuits": 0,
+      "children": 86,
+      "textures": 187,
+      "heap": 24500000
+    },
+    {
+      "run": 1,
+      "elapsed": 60.187999999998354,
+      "hp": 100,
+      "map": "mall-f2",
+      "high": false,
+      "x": 2288.581690047985,
+      "y": 1121.7161069404674,
+      "phase": 2,
+      "body": {
+        "hp": 100,
+        "stamina": 100,
+        "mental": 99.09717999999441,
+        "water": 97.59247999997127,
+        "satiety": 98.49529999997002,
+        "pollution": 0,
+        "bleeding": false,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 0,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      },
+      "entities": {
+        "mall-f1": {
+          "alive": 15,
+          "dead": 1,
+          "loot": 26,
+          "containers": 8,
+          "bullets": 0
+        },
+        "mall-f2": {
+          "alive": 8,
+          "dead": 1,
+          "loot": 14,
+          "containers": 4,
+          "bullets": 0
+        }
+      },
+      "pursuits": 0,
+      "children": 56,
+      "textures": 182,
+      "heap": 24500000
+    },
+    {
+      "run": 1,
+      "elapsed": 120.32990000001185,
+      "hp": 100,
+      "map": "mall-f2",
+      "high": false,
+      "x": 2288.581690047985,
+      "y": 1121.7161069404674,
+      "phase": 2,
+      "body": {
+        "hp": 100,
+        "stamina": 100,
+        "mental": 98.19505149998827,
+        "water": 95.18680399994386,
+        "satiety": 96.99175249993912,
+        "pollution": 0,
+        "bleeding": false,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 0,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      },
+      "entities": {
+        "mall-f1": {
+          "alive": 15,
+          "dead": 1,
+          "loot": 26,
+          "containers": 8,
+          "bullets": 0
+        },
+        "mall-f2": {
+          "alive": 8,
+          "dead": 1,
+          "loot": 14,
+          "containers": 4,
+          "bullets": 0
+        }
+      },
+      "pursuits": 0,
+      "children": 56,
+      "textures": 182,
+      "heap": 24500000
+    },
+    {
+      "run": 1,
+      "elapsed": 180.38729999999097,
+      "hp": 100,
+      "map": "mall-f2",
+      "high": false,
+      "x": 2288.581690047985,
+      "y": 1121.7161069404674,
+      "phase": 2,
+      "body": {
+        "hp": 100,
+        "stamina": 100,
+        "mental": 97.29419049997941,
+        "water": 92.78450799990753,
+        "satiety": 95.4903174999022,
+        "pollution": 0,
+        "bleeding": false,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 0,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      },
+      "entities": {
+        "mall-f1": {
+          "alive": 15,
+          "dead": 1,
+          "loot": 26,
+          "containers": 8,
+          "bullets": 0
+        },
+        "mall-f2": {
+          "alive": 8,
+          "dead": 1,
+          "loot": 14,
+          "containers": 4,
+          "bullets": 0
+        }
+      },
+      "pursuits": 0,
+      "children": 56,
+      "textures": 182,
+      "heap": 24500000
+    },
+    {
+      "run": 1,
+      "elapsed": 240.52979999997015,
+      "hp": 100,
+      "map": "mall-f2",
+      "high": false,
+      "x": 2288.581690047985,
+      "y": 1121.7161069404674,
+      "phase": 2,
+      "body": {
+        "hp": 100,
+        "stamina": 100,
+        "mental": 96.39205299997171,
+        "water": 90.37880799987379,
+        "satiety": 93.98675499986655,
+        "pollution": 0,
+        "bleeding": false,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 0,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      },
+      "entities": {
+        "mall-f1": {
+          "alive": 15,
+          "dead": 1,
+          "loot": 26,
+          "containers": 8,
+          "bullets": 0
+        },
+        "mall-f2": {
+          "alive": 8,
+          "dead": 1,
+          "loot": 14,
+          "containers": 4,
+          "bullets": 0
+        }
+      },
+      "pursuits": 0,
+      "children": 56,
+      "textures": 182,
+      "heap": 24500000
+    },
+    {
+      "run": 1,
+      "elapsed": 300.6055999998901,
+      "hp": 100,
+      "map": "mall-f2",
+      "high": true,
+      "x": 2288.581690047985,
+      "y": 1121.7161069404674,
+      "phase": 2,
+      "body": {
+        "hp": 100,
+        "stamina": 100,
+        "mental": 95.49091599996359,
+        "water": 87.97577599984142,
+        "satiety": 92.48485999983137,
+        "pollution": 0,
+        "bleeding": false,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 0,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      },
+      "entities": {
+        "mall-f1": {
+          "alive": 15,
+          "dead": 1,
+          "loot": 26,
+          "containers": 8,
+          "bullets": 0
+        },
+        "mall-f2": {
+          "alive": 8,
+          "dead": 1,
+          "loot": 14,
+          "containers": 4,
+          "bullets": 0
+        }
+      },
+      "pursuits": 0,
+      "children": 56,
+      "textures": 182,
+      "heap": 24500000
+    },
+    {
+      "run": 1,
+      "elapsed": 360.6448999998008,
+      "hp": 100,
+      "map": "mall-f2",
+      "high": true,
+      "x": 2288.581690047985,
+      "y": 1121.7161069404674,
+      "phase": 2,
+      "body": {
+        "hp": 100,
+        "stamina": 100,
+        "mental": 94.59032649995572,
+        "water": 85.57420399981031,
+        "satiety": 90.98387749979518,
+        "pollution": 0,
+        "bleeding": false,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 0,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      },
+      "entities": {
+        "mall-f1": {
+          "alive": 15,
+          "dead": 1,
+          "loot": 26,
+          "containers": 8,
+          "bullets": 0
+        },
+        "mall-f2": {
+          "alive": 8,
+          "dead": 1,
+          "loot": 14,
+          "containers": 4,
+          "bullets": 0
+        }
+      },
+      "pursuits": 0,
+      "children": 56,
+      "textures": 182,
+      "heap": 24500000
+    },
+    {
+      "run": 1,
+      "elapsed": 420.76919999968936,
+      "hp": 100,
+      "map": "mall-f2",
+      "high": true,
+      "x": 2288.581690047985,
+      "y": 1121.7161069404674,
+      "phase": 2,
+      "body": {
+        "hp": 100,
+        "stamina": 100,
+        "mental": 93.68846199994645,
+        "water": 83.16923199977413,
+        "satiety": 89.48076999975791,
+        "pollution": 0,
+        "bleeding": false,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 0,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      },
+      "entities": {
+        "mall-f1": {
+          "alive": 15,
+          "dead": 1,
+          "loot": 26,
+          "containers": 8,
+          "bullets": 0
+        },
+        "mall-f2": {
+          "alive": 8,
+          "dead": 1,
+          "loot": 14,
+          "containers": 4,
+          "bullets": 0
+        }
+      },
+      "pursuits": 0,
+      "children": 56,
+      "textures": 182,
+      "heap": 24500000
+    },
+    {
+      "run": 1,
+      "elapsed": 480.8024999995925,
+      "hp": 100,
+      "map": "mall-f2",
+      "high": true,
+      "x": 2288.581690047985,
+      "y": 1121.7161069404674,
+      "phase": 2,
+      "body": {
+        "hp": 100,
+        "stamina": 100,
+        "mental": 92.78796249993874,
+        "water": 80.76789999974572,
+        "satiety": 87.97993749972349,
+        "pollution": 0,
+        "bleeding": false,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 0,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      },
+      "entities": {
+        "mall-f1": {
+          "alive": 15,
+          "dead": 1,
+          "loot": 26,
+          "containers": 8,
+          "bullets": 0
+        },
+        "mall-f2": {
+          "alive": 8,
+          "dead": 1,
+          "loot": 14,
+          "containers": 4,
+          "bullets": 0
+        }
+      },
+      "pursuits": 0,
+      "children": 56,
+      "textures": 182,
+      "heap": 24500000
+    },
+    {
+      "run": 1,
+      "elapsed": 540.9146999995678,
+      "hp": 100,
+      "map": "mall-f2",
+      "high": true,
+      "x": 2288.581690047985,
+      "y": 1121.7161069404674,
+      "phase": 2,
+      "body": {
+        "hp": 100,
+        "stamina": 100,
+        "mental": 91.88627949993081,
+        "water": 78.3634119997169,
+        "satiety": 86.4771324996883,
+        "pollution": 0,
+        "bleeding": false,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 0,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      },
+      "entities": {
+        "mall-f1": {
+          "alive": 15,
+          "dead": 1,
+          "loot": 26,
+          "containers": 8,
+          "bullets": 0
+        },
+        "mall-f2": {
+          "alive": 8,
+          "dead": 1,
+          "loot": 14,
+          "containers": 4,
+          "bullets": 0
+        }
+      },
+      "pursuits": 0,
+      "children": 56,
+      "textures": 182,
+      "heap": 24500000
+    },
+    {
+      "run": 2,
+      "elapsed": 0.050799999997019764,
+      "hp": 92.51593333333334,
+      "map": "mall-f1",
+      "high": false,
+      "x": 144,
+      "y": 336,
+      "phase": 0,
+      "body": {
+        "hp": 92.51593333333334,
+        "stamina": 100,
+        "mental": 91.51526283325862,
+        "water": 77.03007866635852,
+        "satiety": 85.77278249966022,
+        "pollution": 0,
+        "bleeding": false,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 0,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      },
+      "entities": {
+        "mall-f1": {
+          "alive": 16,
+          "dead": 0,
+          "loot": 26,
+          "containers": 7,
+          "bullets": 0
+        },
+        "mall-f2": {
+          "alive": 9,
+          "dead": 0,
+          "loot": 14,
+          "containers": 3,
+          "bullets": 0
+        }
+      },
+      "pursuits": 0,
+      "children": 86,
+      "textures": 187,
+      "heap": 24500000
+    },
+    {
+      "run": 2,
+      "elapsed": 60.126599999992095,
+      "hp": 42.29596000000351,
+      "map": "mall-f1",
+      "high": false,
+      "x": 1807.181656263006,
+      "y": 1068.0063584162785,
+      "phase": 3,
+      "body": {
+        "hp": 42.29596000000351,
+        "stamina": 100,
+        "mental": 90.61412583325162,
+        "water": 74.62704666632676,
+        "satiety": 84.27088749962735,
+        "pollution": 0,
+        "bleeding": true,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 0,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      },
+      "entities": {
+        "mall-f1": {
+          "alive": 13,
+          "dead": 3,
+          "loot": 26,
+          "containers": 10,
+          "bullets": 0
+        },
+        "mall-f2": {
+          "alive": 8,
+          "dead": 1,
+          "loot": 14,
+          "containers": 4,
+          "bullets": 0
+        }
+      },
+      "pursuits": 0,
+      "children": 86,
+      "textures": 187,
+      "heap": 24500000
+    },
+    {
+      "run": 3,
+      "elapsed": 0.0375,
+      "hp": 1.4826750000000002,
+      "map": "mall-f1",
+      "high": false,
+      "x": 144,
+      "y": 336,
+      "phase": 0,
+      "body": {
+        "hp": 1.4826750000000002,
+        "stamina": 100,
+        "mental": 20.5064875,
+        "water": 41.01259999999999,
+        "satiety": 40.7596375,
+        "pollution": 49.738975,
+        "bleeding": true,
+        "exhausted": false,
+        "effects": {
+          "pain": 0,
+          "energized": 0,
+          "analgesia": 0,
+          "focus": 0,
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0,
+          "injectionFatigue": 0,
+          "luck": 0
+        },
+        "treatment": {
+          "bleeding": 30.423,
+          "pain": 0,
+          "injectionFatigue": 0
+        },
+        "luckEffect": 0
+      },
+      "entities": {
+        "mall-f1": {
+          "alive": 16,
+          "dead": 0,
+          "loot": 26,
+          "containers": 7,
+          "bullets": 0
+        },
+        "mall-f2": {
+          "alive": 9,
+          "dead": 0,
+          "loot": 14,
+          "containers": 3,
+          "bullets": 0
+        }
+      },
+      "pursuits": 0,
+      "children": 86,
+      "textures": 187,
+      "heap": 24500000
+    }
+  ],
+  "runs": [
+    {
+      "run": 1,
+      "result": {
+        "outcome": "timeout",
+        "kills": 7,
+        "keptValue": 0,
+        "lostValue": 372,
+        "seed": 41,
+        "recovered": false,
+        "message": "撤离超时，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+      },
+      "realSeconds": 600.406,
+      "lastObservedElapsed": 599.9845999995955,
+      "frames": {
+        "count": 98733,
+        "p50": 6.099999999976717,
+        "p95": 6.19999999999709,
+        "p99": 6.2000000000116415,
+        "maximum": 127.29999999999927
+      },
+      "heap": 24500000,
+      "textures": 159,
+      "children": [
+        1
+      ],
+      "menu": {
+        "state": "hideout",
+        "result": {
+          "outcome": "timeout",
+          "kills": 7,
+          "keptValue": 0,
+          "lostValue": 372,
+          "seed": 41,
+          "recovered": false,
+          "message": "撤离超时，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+        },
+        "stats": {
+          "runs": 1,
+          "extracts": 0,
+          "kills": 7
+        },
+        "heap": 24500000,
+        "textures": 159,
+        "children": [
+          2
+        ]
+      }
+    },
+    {
+      "run": 2,
+      "result": {
+        "outcome": "death",
+        "kills": 4,
+        "keptValue": 0,
+        "lostValue": 0,
+        "seed": 41,
+        "recovered": false,
+        "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+      },
+      "realSeconds": 61.353,
+      "lastObservedElapsed": 61.271899999996556,
+      "frames": {
+        "count": 10050,
+        "p50": 6.099999999976717,
+        "p95": 6.199999999953434,
+        "p99": 6.200000000069849,
+        "maximum": 133.39999999990687
+      },
+      "heap": 24500000,
+      "textures": 159,
+      "children": [
+        1
+      ],
+      "menu": {
+        "state": "hideout",
+        "result": {
+          "outcome": "death",
+          "kills": 4,
+          "keptValue": 0,
+          "lostValue": 0,
+          "seed": 41,
+          "recovered": false,
+          "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+        },
+        "stats": {
+          "runs": 2,
+          "extracts": 0,
+          "kills": 11
+        },
+        "heap": 24500000,
+        "textures": 159,
+        "children": [
+          2
+        ]
+      }
+    },
+    {
+      "run": 3,
+      "result": {
+        "outcome": "extract",
+        "kills": 1,
+        "keptValue": 0,
+        "lostValue": 0,
+        "seed": 41,
+        "recovered": false,
+        "message": "成功撤离，装备和物资已带回水产站。"
+      },
+      "realSeconds": 30.435,
+      "lastObservedElapsed": 27.131900000005515,
+      "frames": {
+        "count": 4976,
+        "p50": 6.099999999976717,
+        "p95": 6.199999999953434,
+        "p99": 6.200000000069849,
+        "maximum": 78.70000000006985
+      },
+      "heap": 24500000,
+      "textures": 159,
+      "children": [
+        1
+      ],
+      "menu": {
+        "state": "hideout",
+        "result": {
+          "outcome": "extract",
+          "kills": 1,
+          "keptValue": 0,
+          "lostValue": 0,
+          "seed": 41,
+          "recovered": false,
+          "message": "成功撤离，装备和物资已带回水产站。"
+        },
+        "stats": {
+          "runs": 3,
+          "extracts": 1,
+          "kills": 12
+        },
+        "heap": 24500000,
+        "textures": 159,
+        "children": [
+          2
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "transitions": [
+    {
+      "run": 1,
+      "from": "mall-f1",
+      "to": "mall-f2",
+      "elapsed": 28.237499999999667,
+      "inputToObservedMilliseconds": 256
+    },
+    {
+      "run": 1,
+      "from": "mall-f2",
+      "to": "mall-f1",
+      "elapsed": 580.041699999592,
+      "inputToObservedMilliseconds": 143
+    },
+    {
+      "run": 2,
+      "from": "mall-f1",
+      "to": "mall-f2",
+      "elapsed": 26.807099999993607,
+      "inputToObservedMilliseconds": 148
+    },
+    {
+      "run": 2,
+      "from": "mall-f2",
+      "to": "mall-f1",
+      "elapsed": 52.63599999999833,
+      "inputToObservedMilliseconds": 148
+    }
+  ],
+  "htmlSha256": "7b2c950cc22b888eb6ae34ca9d67c81e3de52fa9f8737d74b7cd82ecad436e17",
+  "node": "v24.19.0",
+  "platform": "win32",
+  "aimClicks": {
+    "fired": 33,
+    "occluded": 38
+  },
+  "browser": "154.0.8037.98",
+  "status": "passed",
+  "finishedAt": "2026-10-07T17:23:30.233Z"
+}

@@ -1,0 +1,52 @@
+{
+  "startedAt": "2026-10-09T12:01:07.802Z",
+  "steps": [
+    {
+      "id": "F16 bag/loot blur, pagehide and hidden resume paused and suppress held keys",
+      "status": "passed",
+      "detail": [
+        {
+          "panel": "inventory",
+          "signal": "blur",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "inventory",
+          "signal": "pagehide",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "inventory",
+          "signal": "hidden",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "loot",
+          "signal": "blur",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "loot",
+          "signal": "pagehide",
+          "paused": true,
+          "heldSuppressed": true
+        },
+        {
+          "panel": "loot",
+          "signal": "hidden",
+          "paused": true,
+          "heldSuppressed": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "method": "Offline real packaged HTML. Explicit test fixtures position actors/freeze AI; all panel and lifecycle actions use native input. Visibility/pagehide are injected events; no physical-phone claim.",
+  "browser": "154.0.8037.98",
+  "finishedAt": "2026-10-09T12:01:13.413Z"
+}

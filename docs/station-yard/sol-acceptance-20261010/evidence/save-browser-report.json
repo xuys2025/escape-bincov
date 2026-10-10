@@ -1,0 +1,47 @@
+{
+  "startedAt": "2026-10-09T19:30:15.957Z",
+  "browser": "154.0.8037.98",
+  "steps": [
+    {
+      "name": "failed purchase preserves cash and inventory; retry commits once",
+      "status": "passed"
+    },
+    {
+      "name": "all three quest buttons and storage upgrade commit and survive reload",
+      "status": "passed"
+    },
+    {
+      "name": "native backup download, failed import rollback and confirmed import",
+      "status": "passed"
+    },
+    {
+      "name": "failed deployment stays in the hideout with equipment and run count intact",
+      "status": "passed"
+    },
+    {
+      "name": "failed safe transfer rolls back live containers",
+      "status": "passed"
+    },
+    {
+      "name": "real extraction freezes on failed save; backup contains the collected sample",
+      "status": "passed"
+    },
+    {
+      "name": "retry saves once; refresh retains extraction and loot",
+      "status": "passed"
+    },
+    {
+      "name": "pending backup migrates to an HTTPS origin and survives same-origin path updates",
+      "status": "passed"
+    },
+    {
+      "name": "a real cross-window storage event protects a pending settlement and its backup",
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "methodology": "Storage-failure injection and inventory/position fixtures with real UI buttons, downloads, file import and a real three-second E hold. Not a natural-play difficulty test.",
+  "status": "passed",
+  "finishedAt": "2026-10-09T19:30:29.048Z"
+}

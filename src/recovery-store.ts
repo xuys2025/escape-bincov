@@ -65,6 +65,9 @@ export function decodeSession(text: string, resolveWorld: WorldResolver = resolv
   return { ...structuredClone(r), version: r.version === 4 ? 4 : 3, migrationBackup: legacy ? text : r.migrationBackup };
 }
 
+/** A real compare/write ownership failure, distinct from quota or serialization errors. */
+export class StorageConflictError extends Error {}
+
 /** Synchronous single-record commit. A failed setItem leaves the previous revision intact. */
 export class RecoveryStore {
   private expected: string | null = null;
@@ -107,7 +110,7 @@ export class RecoveryStore {
   }
   commit(profile: D.SaveDataV1, raid: RaidCheckpoint | null, terminal?: SessionRecord['terminal'], expansion = this.record?.expansion ?? null): SessionRecord {
     if (!this.loaded || !this.writable) throw new Error('存档未就绪或另一窗口正在使用。');
-    if (this.storage.getItem(SESSION_KEY) !== this.expected) throw new Error('另一窗口已修改存档，请刷新以加载新进度。');
+    if (this.storage.getItem(SESSION_KEY) !== this.expected) throw new StorageConflictError('另一窗口已修改存档，请刷新以加载新进度。');
     // Once v4 has been enabled, imports cannot downgrade and silently discard its state.
     if (this.record?.version === 4 && expansion === null) throw new Error('请导入包含角色与基地状态的完整备份，不能降级覆盖当前存档。');
     const systems = this.systems ?? (expansion && this.record?.version !== 4 ? this.expected : null);

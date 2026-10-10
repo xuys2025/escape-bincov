@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-09T12:14:11.152Z",
+  "main": "43a342ce434c101e4b7058a54f6f29ede9482223",
+  "localHead": "6e34e96edbefd62d57603ffcde6b19eec4bce5a4",
+  "branch": "docs/coast-2-5d-art-design",
+  "pr": {
+    "url": "https://github.com/xuys2025/escape-bincov/pull/22",
+    "state": "open",
+    "merged": false,
+    "head": "878f5633316a824960091f8f924c0ddd8dd78078",
+    "headRepo": "LMX-323/escape-bincov",
+    "headBranch": "docs/coast-2-5d-art-design",
+    "headPermissions": null
+  },
+  "pages": {
+    "url": "https://xuys2025.github.io/escape-bincov/",
+    "sha256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+    "bytes": 2416678,
+    "equalsLatestMain": true
+  },
+  "latestMainDelta": " README.md                      |   1 +\n docs/MAIN-STORY.md             | 433 +++++++++++++++++++++++++++++++++++++++++\n docs/STORY-LITERARY-REWRITE.md |  79 ++++++++\n docs/WORK-QUEUE.md             |   3 +-\n docs/WORLD-REGIONS-STORY.md    |  42 +++-\n handoff.md                     |  30 +++\n 6 files changed, 586 insertions(+), 2 deletions(-)\n"
+}

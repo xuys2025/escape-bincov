@@ -1,0 +1,607 @@
+[
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\analyse.txt",
+    "bytes": 269,
+    "sha256": "6b9c16d8ba997156ba979a2a8879396444fdbd2d1c5e4412b2c36810a387d7be"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\check-astra-shader-cache.json",
+    "bytes": 136410,
+    "sha256": "ebe6888b76abb192c689974f2d8ec7b84587b352f55b5f70b0799aad076be2a6"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\coast-lifecycle\\lifecycle.json",
+    "bytes": 2370,
+    "sha256": "fec8b90c04872bf1ca179f20f26120a498e29c0761fc51f8328545f4df504b70"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\coast-lifecycle-prefix\\lifecycle.json",
+    "bytes": 2370,
+    "sha256": "1096c0b9dc03ed0b9e64a50bec5d81bd779a029ce35c4096384b6354e1c68aca"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\coast-sample\\report.json",
+    "bytes": 38020,
+    "sha256": "89943f315c61f246bdf60dc1938cb8197eb18dbdb022d8e8e2d93bcf5eedde22"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\fixed-context-short\\after-final-remount-identities.json",
+    "bytes": 941995,
+    "sha256": "d6d3a776ae6b068036dc0e971ea5b31cc1f0fb9785ffff3fc9b71d5e588446cc"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\fixed-context-short\\cold-identities.json",
+    "bytes": 448260,
+    "sha256": "f6a61a17efece45d9b176f1e6a9c379454c1b32fa76cef4fdfe8cb12085106c1"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\fixed-context-short\\progress.json",
+    "bytes": 84,
+    "sha256": "d0151ca9e09a1b6bf449bfe2e3900d7bcd5c8df40867d9c83f616292ba113e91"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\fixed-context-short\\report.json",
+    "bytes": 12032754,
+    "sha256": "3d508dc777005d46e8f90b8a039532ba1c7d758e15e464a2211ef144301ea4a4"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\fixed-context-short\\round-0-identities.json",
+    "bytes": 942598,
+    "sha256": "92ec737e2353d2b6f2c70aed3bb9f17729ba9c02d27ed6b24b9ac8b5c152f475"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\fixed-context-short\\round-0.heapsnapshot",
+    "bytes": 70099194,
+    "sha256": "2879d0b82f7122e6f9b6f128c06cf147b5fc1c3ac5c13e43e84e63f7edccd60e"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\fixed-context-short\\round-6-identities.json",
+    "bytes": 942595,
+    "sha256": "6cc2b26382049a06fd1616b8e3c6f93b821e0ce08f6e176d9e54059cc737df89"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\fixed-context-short\\round-6.heapsnapshot",
+    "bytes": 70079134,
+    "sha256": "e33cc0041e54067a02a0da1da5e613565cffd0368b96283874649554735804fb"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\fixed-context-short\\shader-cache.json",
+    "bytes": 47970,
+    "sha256": "7960eba85c0436cc0e3ac2e33075409bb4863fd753021ac05054b6c2108bbec7"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\fixed-context-short\\target-slots.json",
+    "bytes": 6552,
+    "sha256": "06e5509cb6e5862aa9cecfc7360da4dd62c746bc755aca720368919deb187d42"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\identity-probe\\cold-identities.json",
+    "bytes": 446226,
+    "sha256": "9f945e4821d6d91d125a914f4761d5f8f50cee29073aff74e22d35f491edab67"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\identity-probe\\final-remount-identities.json",
+    "bytes": 678891,
+    "sha256": "b69f65d5e801c9e5b0cc117df3846b539da74db941db5642c7bc2687010bb6a2"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\identity-probe\\first-return-identities.json",
+    "bytes": 690802,
+    "sha256": "5bd024912313aba241c5ddc72ffacbe1d1a3f29fdd662445104fbfe73f484da6"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\identity-probe\\report.json",
+    "bytes": 4279506,
+    "sha256": "e6120e2b3648a12c53cfbd6df24976dc4b7e90d2c9bf6f143f74f1076b039b7a"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\identity-probe\\restore-1-identities.json",
+    "bytes": 691070,
+    "sha256": "4e975dc4dd326b97c27e09c3617d4ee5dcdfede22ce926fa93fdc45e25d34800"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\identity-probe\\restore-2-identities.json",
+    "bytes": 688946,
+    "sha256": "598bda60424f51449f6ef40ab1f1fa75f8ab674312924c500bdda4643d8892cd"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\identity-probe\\restore-3-identities.json",
+    "bytes": 692815,
+    "sha256": "8995f66141e537177fd8b5be3505beefe27804214cadb8f3a77ebeaaf6a26948"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-build.txt",
+    "bytes": 82,
+    "sha256": "22555934588d1423785fcd043ea971b6c73e7efe6673a1f8ecd503b4e872bfb2"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-console.txt",
+    "bytes": 7547,
+    "sha256": "e07e13e81982be20cd0a62c6fa8c343e70c6a4d30a7cc4a12595c13558cf54aa"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\after-final-remount-identities.json",
+    "bytes": 943333,
+    "sha256": "bfb2bb02b5d59e0ccb10d15040a33ab2bc148ee7844f832aa4df1281db66300c"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\cold-identities.json",
+    "bytes": 446226,
+    "sha256": "d6b16cb81ac59e3610166cfc4728ce4dcc01a3424070a7d6c26b8e158fcf73c8"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\heap-0-60.json",
+    "bytes": 158848,
+    "sha256": "1df7ced73bc298dd6c81a7730d49899069d40a242e836b0d089cfa69d23c2b04"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\heap-0-60.txt",
+    "bytes": 405,
+    "sha256": "8516923c3726f65746bf598ce6b24cc7af4bdcfb066a5ace4056dde7697128f1"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\heap-30-60.json",
+    "bytes": 174811,
+    "sha256": "d640c29c09b79f159fed55ff25fc9cafc1b1756529adda044a1b017ae6f43018"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\heap-30-60.txt",
+    "bytes": 397,
+    "sha256": "b829ad62c003b8838ad721b7adb1d8b791182cb1ba4b01aa87b5e15d80883e79"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\owners-0-60.json",
+    "bytes": 90912,
+    "sha256": "e1443c5d70d113a36788b6cbc16043bf1687bcc7778ecf7fae43b337db6b9d1f"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\owners.txt",
+    "bytes": 695,
+    "sha256": "f2d731919993ebee2487cfe58e63a9c4089c3e0414d8d98c7c4f7bd4cb2143b5"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\progress.json",
+    "bytes": 85,
+    "sha256": "bd5b0c0670e609905672d67ce189dedc73b9e48e0b17f0ffaada5172521fe904"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\report.json",
+    "bytes": 69097976,
+    "sha256": "656f7718f992de2b79a725e8125c472b682994d09dfde293db096331be7c08ec"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\round-0-identities.json",
+    "bytes": 942338,
+    "sha256": "12ffe0bb60951915d4e5de8372003e8cf8c617c06497091822f4dcec8e445d4a"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\round-0.heapsnapshot",
+    "bytes": 69872462,
+    "sha256": "d0a600d02db030b46282dd5493826748a63a7f33cc9f07aa5b595a33aad30e1f"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\round-30.heapsnapshot",
+    "bytes": 69024455,
+    "sha256": "bba24673cf9e815a469792ddc2e8dcda6f7085272a54d06795971cae886d306f"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\round-60-identities.json",
+    "bytes": 942339,
+    "sha256": "bf2d3c136f8aec5672d4373c48171af418e61d7164777cd14d656e477bc8b1de"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\round-60.heapsnapshot",
+    "bytes": 69223669,
+    "sha256": "03d854b435f263dcd202fc1559b3a72625cc3283949f2158d0e6e1679fb4ffae"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\shader-cache.json",
+    "bytes": 71986,
+    "sha256": "99581e4c82d97e97ba998967c3bcfae955103b5f4cf6b729f34e4a691e89bd68"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\shaders.txt",
+    "bytes": 1070,
+    "sha256": "16a88a57cee314a091e2ef905b0787f2989f4d392eb35dd7b5548774c284a354"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-context\\target-slots.json",
+    "bytes": 60329,
+    "sha256": "65a39f48ce3a314c2fc265e53afb44130fc655e53f54351f6127f2cf312a5216"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\cold-identities.json",
+    "bytes": 446199,
+    "sha256": "326a7f9e17ed5953f6a30b1717bac7132e56ab8ea9c627761c97819c6a6eca26"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\heap-0-60.json",
+    "bytes": 165746,
+    "sha256": "da83a111638365c751c59112c255d12aa75224489dd3855397a87bb1f02a3c2a"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\heap-0-60.txt",
+    "bytes": 401,
+    "sha256": "dc9b2b57e4e3b57847bf4e04258baa0f2f07779567f8280b8460d337fbc3fc73"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\heap-30-60.json",
+    "bytes": 166556,
+    "sha256": "0f7a68b5a7092701273d12ad6c92cfd5bbef8d2c86152e2a6b2879ae74885205"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\heap-30-60.txt",
+    "bytes": 398,
+    "sha256": "df41bda4bc7d65ba769ff8ce04ff5264c68380867d961c2b27a247a7c334dd59"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\owners-0-60.json",
+    "bytes": 92792,
+    "sha256": "c3f73ed04e118a0280b5347e57d78597b259a51ab53d6c5da32b0b90e72693e3"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\owners.txt",
+    "bytes": 695,
+    "sha256": "9b950c6ac78b32c41ba4a13e9c2d5d9e1e14d7002480ee0c1885d8bab9a011ad"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\progress.json",
+    "bytes": 85,
+    "sha256": "165d3a2b5037863f91431281d89b30d7bc9459aa72174547a02b043d8ed83739"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\report.json",
+    "bytes": 68534284,
+    "sha256": "1dea7d1e71502bfa477dddfdea558f24b96ec20de245e8ec63f78aafc22257d0"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\round-0-identities.json",
+    "bytes": 942479,
+    "sha256": "9bf372ae7db1cda770103ab30d4da5c46f8ccada8c21332c7c88c06e27f51365"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\round-0.heapsnapshot",
+    "bytes": 70400402,
+    "sha256": "7180f3ba8da0e6a174a931fc320ed852882309029bab59759e1f5018f104d9b8"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\round-30.heapsnapshot",
+    "bytes": 71558965,
+    "sha256": "7b3c6ea719779db87856563d25be4383bcda05b83859be53fd7914d6c8d5fe5c"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\round-60-identities.json",
+    "bytes": 952077,
+    "sha256": "9269dc9eda01769d2f1460a6146b811df62c6b5faf97cb910b1719fb924f7032"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\round-60.heapsnapshot",
+    "bytes": 71683405,
+    "sha256": "44d6ca003aa219d186669181b5453bee40af03582d169ff2c9c9d4300b5382b3"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\shader-cache.json",
+    "bytes": 71219,
+    "sha256": "306e7e6ead9a5564fa3c5e48e104791d510288277ac97c5dd151ca19863d942c"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-remount\\shaders.txt",
+    "bytes": 1056,
+    "sha256": "0fc8bb81a4e8e70672c6b65cc423d3977dc7d94301ba0860009e79cd49fcf4ef"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\cold-identities.json",
+    "bytes": 444340,
+    "sha256": "38eebff151c0e8c8968bcc3577f8f41d6b524d9f9658c091f7f27e03fbac36f0"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\heap-0-60.json",
+    "bytes": 203611,
+    "sha256": "646b36f780c6d2f843acd17cefd30c9ab089699ee5a8495570b28b5d22447009"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\heap-0-60.txt",
+    "bytes": 406,
+    "sha256": "6bc00960bbd47a7923eaf8f740510d7fc35f44f5e4465d670806c78310d8fb69"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\heap-30-60.json",
+    "bytes": 176283,
+    "sha256": "2b708831e3881f5763b7e043e75c55d2ba53c8da58fadc6e76608db2f227fab6"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\heap-30-60.txt",
+    "bytes": 398,
+    "sha256": "8ae2c67d376474028d2eba5a86002f0beea8f2067c0511ee7fd7c2f4f7902239"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\owners-0-60.json",
+    "bytes": 89377,
+    "sha256": "de48a3b2c683d395f584253ab0b0616adadc319302bf2494db587f4eb0e7d86c"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\owners.txt",
+    "bytes": 694,
+    "sha256": "ac0847793e7593927627f90497ad4a2b1ee1c6b553e595a53a6833c9026546d9"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\progress.json",
+    "bytes": 84,
+    "sha256": "186a8bcfa6d7265517975b96b0815d792183662fe728f7b482704bb4c3147782"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\report.json",
+    "bytes": 69278587,
+    "sha256": "2df8cb68482295028b818ee9b35b5aa95f4445fdefeadc2a27f3369c56f29f81"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\round-0-identities.json",
+    "bytes": 950949,
+    "sha256": "ac4a0911bf07f12b062468e7906c9105814c5b9408d92c486704b1048b44e24e"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\round-0.heapsnapshot",
+    "bytes": 73005717,
+    "sha256": "5f7e22a26c07b746723868cb3f536fba511aac4904962ca6379343c77d8323d4"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\round-30.heapsnapshot",
+    "bytes": 73535082,
+    "sha256": "df6927510e274ec2d2411d035505c1affcb3b905c96050e9b625b6a9a8479fb6"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\round-60-identities.json",
+    "bytes": 960248,
+    "sha256": "30137f088e0388954c4f64bf89d0ecfb61be5fae19ba0ca27e1e8456a1a79201"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\round-60.heapsnapshot",
+    "bytes": 73635076,
+    "sha256": "e1f0dae6101dc7d5d18911e8a1e6a3c429020b0d02c87f75bb4f6647273e9319"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\shader-cache.json",
+    "bytes": 72955,
+    "sha256": "e70ec30d8d99c7d807b5657846e6b3a33fe7d34533c17bae2093a962c5dc7c6c"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\long-shared\\shaders.txt",
+    "bytes": 1069,
+    "sha256": "66ddfb2840406d0f2b4179d2e6d2d50754a5063d2264f2d12292ac0fc790885c"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-context-short\\after-final-remount-identities.json",
+    "bytes": 941995,
+    "sha256": "cc34f29fcd17f40ba6a5db9fddef3a5e23fa7772233ece3bdc7b5297d462cf99"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-context-short\\cold-identities.json",
+    "bytes": 446226,
+    "sha256": "52bd8fa885660d158fc8bea4458c9e4c75b80492f6f5a1222f1361ef683ee8a3"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-context-short\\progress.json",
+    "bytes": 84,
+    "sha256": "340c77b54ff8803cde73c290f9fcc46062bab825ebbd4934fed45386803b5915"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-context-short\\report.json",
+    "bytes": 12045019,
+    "sha256": "3ccf9cfb3f7d821ea0c4e9a031f2fc0a92aa4f98a23e5a51b40fd8d570072eb1"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-context-short\\round-0-identities.json",
+    "bytes": 943163,
+    "sha256": "b399d5ff272d83f093a76ef95577d724ed193881abc3d0a0ea015b2f1e566419"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-context-short\\round-0.heapsnapshot",
+    "bytes": 69724637,
+    "sha256": "34173c62158dc8a0411f071c5c894705a8a736b887e83c7916467f7ccebdba46"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-context-short\\round-6-identities.json",
+    "bytes": 944819,
+    "sha256": "bb5e0cc3e4702167682715d08f395b99a0aa0615e309604b38a76128ebe2c207"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-context-short\\round-6.heapsnapshot",
+    "bytes": 70167316,
+    "sha256": "fcb1c16824059db69c4576785280bf08fb6a7548b68163eac95d31608028b895"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-context-short\\shader-cache.json",
+    "bytes": 53217,
+    "sha256": "413b2f9033a851f8cbec5cd347c5b6e307c552427c777cdeae420c7492fa8e12"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-context-short\\target-slots.json",
+    "bytes": 6561,
+    "sha256": "8c56c02b41f55c9a644d91b613b511ab3a659e096da8328d2c772764d8db14ed"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-context-short.txt",
+    "bytes": 195,
+    "sha256": "f72bffc68d0a8f6eab0f29543e9051bac380c9f3cb1c999348653a7bba0d5105"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\after-final-remount-identities.json",
+    "bytes": 942943,
+    "sha256": "aad30f30aefa559dc990a3b376e68726fcfe5da4a82707be48f666991a6cda3b"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\cold-identities.json",
+    "bytes": 445500,
+    "sha256": "726f6e354404ae683c621beeddd95570f5aaa5013584496f707aa94cf8bd912f"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\heap-0-60.json",
+    "bytes": 158296,
+    "sha256": "9f89160eaa29a89127d2594fc4a2e97b546a530c8ec10b61d9cb85e61a131478"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\heap-0-60.txt",
+    "bytes": 411,
+    "sha256": "9d6ecf4ac31a2f1b5fdb7a6fc30e545af97a903cca7682f646233512f4c42fe2"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\heap-30-60.json",
+    "bytes": 161546,
+    "sha256": "89fa1beaa44ce16877ae0bf71cf11b85bd9f25c0c3259182d3f6d64c79e8a637"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\heap-30-60.txt",
+    "bytes": 409,
+    "sha256": "4c5f51c1f1100dae1c7e86e628f760d1c031d863459d427f886ad6b43b179cd9"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\progress.json",
+    "bytes": 87,
+    "sha256": "67f7f2e3626fa3eff2faf150c90b43e440b79e486dbd4c265422750daa1288fd"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\report.json",
+    "bytes": 69786005,
+    "sha256": "e9f9ca362baade2421ffaf6e21df593808768806c58401ed0dceb8920abeb22d"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\round-0-identities.json",
+    "bytes": 943167,
+    "sha256": "bc1e8d3567c6104b7d9fdaef956963fcd392b7bb6b4761cb60773349b42ad639"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\round-0.heapsnapshot",
+    "bytes": 69799287,
+    "sha256": "8624097e8bae99e3689000b0bc9785c4226227b10c1e1ef9d3889823b3caabbf"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\round-30.heapsnapshot",
+    "bytes": 70643769,
+    "sha256": "a19e4c18bf7f1607a775efd3742437d43edc95fcfe8a31c4bbd5da9fef33b636"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\round-60-identities.json",
+    "bytes": 959734,
+    "sha256": "12645918ff49b43e122b1915826ed5f528dbc642af977df35684ab654b44d1fc"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\round-60.heapsnapshot",
+    "bytes": 69475463,
+    "sha256": "96e1c6d222ee14317f8f6f7623ead6b406f8087331755297f8b3ccf5872b8ad8"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\shader-cache.json",
+    "bytes": 146032,
+    "sha256": "4be1657d4fbfa9bca94c12174d36b2af59e0c0db3f6cc9243da63e91ed77235c"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\shaders.txt",
+    "bytes": 1105,
+    "sha256": "3a60a80b28ef5ebe945e4ee13085d6a746143bd2d5daf12f5299cf85a8614fe6"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\prefix-long-context\\target-slots.json",
+    "bytes": 60429,
+    "sha256": "cd18516be7fe5a022bf39874a1193dfc7fb70b4d1a079324b025f1b69252eda3"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\program-fixed\\report.json",
+    "bytes": 17875,
+    "sha256": "d2697d61fc5cc9857817de6e3edf311220307a14f8b197d05c212e005522e161"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\program-fixed-try\\report.json",
+    "bytes": 14459,
+    "sha256": "7cb50ca3f48eb2f3f7b9cf80bc0947e94a14047d9eea53257ca8285bb31b7a01"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\program-prefix\\report.json",
+    "bytes": 13849,
+    "sha256": "d84f885c76e9b998074b88c95932f3d8833220ee593111c78a4435b038ea054c"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\reg\\index.txt",
+    "bytes": 1160,
+    "sha256": "3c1690c1ff551b91fd23d7202887bcf365ac4e6783fb536445dfacc0cfc0d7f4"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\round2-J1-fixed-1\\report.json",
+    "bytes": 26480,
+    "sha256": "615440816508304c654066dcce60d443f06569944b483a28936b6dfbe21be71d"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\round2-J1-fixed-2\\report.json",
+    "bytes": 44247,
+    "sha256": "6acb1f5b458e38a34ee52ed1e43e5400218e6361d11ada337e708c1cccc9d52f"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\round2-J1-prefix\\report.json",
+    "bytes": 44260,
+    "sha256": "c84604c7ffb390ae54743731a32d9f811a95a49ff9e9e59a919e1fe6bc3409e9"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\round2-J1-prefix-2\\report.json",
+    "bytes": 44221,
+    "sha256": "849ac64167bfa54dcf231955c33a686370cde064032eaea1f1ff600f081e50ab"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\round2-J1-prefix-3\\report.json",
+    "bytes": 43967,
+    "sha256": "8417bcfa7b88fead1884bf73ad0b8a43a4f642f236463a408398c0124a536579"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\round2-J1-prefix-4\\report.json",
+    "bytes": 8438,
+    "sha256": "a7c35105a3f5265f3d9f2e61945702541062e966cba96bb7c9f397dfae978e82"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\round2-J1-prefix-5\\report.json",
+    "bytes": 44225,
+    "sha256": "31db350019e19695aa0645f5c1f93f92b7e4895d944d44269c9132630cf5d808"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\round2-JK\\report.json",
+    "bytes": 528743,
+    "sha256": "31e085d8f923b423023cf8de09c6947b87acc8b3c646b0031cd62e77f3cb8749"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\round2-K-prefix\\report.json",
+    "bytes": 504342,
+    "sha256": "5789f2410208676a25857368ebfcd4dc396b18773e56b32c0dc66505100d4731"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\sol-r-repro\\report.json",
+    "bytes": 82855,
+    "sha256": "0f4e2915e9e78293911d43080e7f1ee859f80302b1b7c531994567d7fc05ae36"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\station\\F2-backup.json",
+    "bytes": 3275,
+    "sha256": "eab87c15716dd906e0900565eda79ce65d80aa0ce1a96f10d1cee1826d94c0f2"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\station\\F4-export.json",
+    "bytes": 3242,
+    "sha256": "80b98dbf29097578e8e2819e0c527ae4f1146d238b35d74d1a89f06777a5cec7"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\station\\report.json",
+    "bytes": 106268,
+    "sha256": "5fd52ec9f889c22f95435cb068e5581af37532758b794b0a78f7473cd27247f1"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\station-ordinary\\report.json",
+    "bytes": 44841,
+    "sha256": "ad92b62fceac7e05d65b3c3c437db4b34bc4def6e8d06fa385bb13e533cc742a"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\summarize.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\opus-r3\\unit-tests.txt",
+    "bytes": 27583,
+    "sha256": "a643fe3fda8d1b5df2f6a401832bc5b959ee9868b2a4ea1a40e9490365c0401b"
+  }
+]

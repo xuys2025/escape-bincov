@@ -1,0 +1,11 @@
+{
+  "original": "scripts/qol-expansion-test.mjs",
+  "originalSHA256": "8143fa7fd5a81e4ba78965e6a32c95984c9c29d24ab66abda8a5edae5a438d9a",
+  "variant": "test-results/shop-drag-sol-20261009/qol-compare.mjs",
+  "variantSHA256": "19464fa2186b28ffc24a094a0f0e75dbbea561f28872dbadf60aa2a137de8138",
+  "changes": [
+    "HTML and output location made arguments via environment",
+    "Imports adjusted for raw diagnostic location"
+  ],
+  "assertionsAndWaitsChanged": false
+}

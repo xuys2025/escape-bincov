@@ -1,0 +1,89 @@
+{
+  "startedAt": "2026-10-10T12:19:58.730Z",
+  "htmlSha256": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62",
+  "methodology": "Offline built HTML; native buttons, keyboard, touch and reload. Explicit fixtures fund ordinary materials, restore damaged body, position at registered mall anchors, extend enemy attack cooldowns for transaction/connector checks, trigger terminal conditions and rewind the saved base cursor to verify offline recovery. Scoped write failures target the intended bag, floor or terminal transaction while allowing unrelated periodic checkpoints. These fixtures do not prove natural balance or reference-image fidelity. Ordinary entry has a separate context without test hooks.",
+  "steps": [
+    {
+      "name": "station movement is real, blocked movement earns no practice; menus close and rearm input",
+      "status": "passed"
+    },
+    {
+      "name": "failed facility payment rolls back cash, material, grade and bytes; next click commits once",
+      "status": "passed"
+    },
+    {
+      "name": "all five facilities expose costs and gates; finite recipe queue debits each batch once",
+      "status": "passed"
+    },
+    {
+      "name": "offline time restores damaged body and finishes only paid batches; claim rollback and single receipt",
+      "status": "passed"
+    },
+    {
+      "name": "charm swap, body panel and medical use commit the item and effect together",
+      "status": "passed"
+    },
+    {
+      "name": "mall native deployment has 39 regions, 25 enemies, one clock and two valid exits",
+      "status": "passed"
+    },
+    {
+      "name": "mall native crate transfer keeps both inventories atomic and persists remaining contents after a floor round trip",
+      "status": "passed"
+    },
+    {
+      "name": "map and backpack block a nearby connector; a failed floor write preserves successful loot and retries once",
+      "status": "passed"
+    },
+    {
+      "name": "all four paired mall connectors support ten round trips each with no duplicated population",
+      "status": "passed"
+    },
+    {
+      "name": "upstairs fixed crate supports failed and successful native transfer, floor round trip and refresh without duplicating either end",
+      "status": "passed"
+    },
+    {
+      "name": "mall floor preview does not move the player; terrace stays upstairs and reload restores it",
+      "status": "passed"
+    },
+    {
+      "name": "scene tide flip reroutes the persisted source pursuit once and leaves upstairs dry",
+      "status": "passed"
+    },
+    {
+      "name": "station and mall native touch at 844x390",
+      "status": "passed"
+    },
+    {
+      "name": "station and mall native touch at 640x300",
+      "status": "passed"
+    },
+    {
+      "name": "native terminal scenes commit death, timeout, abandonment and extraction once; failed settlement retains its candidate",
+      "status": "passed"
+    },
+    {
+      "name": "ordinary offline mall entry exposes no test hook and saves native movement, map view and refresh recovery",
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.99",
+  "terraceCheckpointSample": {
+    "ok": true,
+    "live": {
+      "x": 2288,
+      "y": 1136,
+      "rotation": 2.9573005838765933
+    },
+    "durable": {
+      "x": 2288,
+      "y": 1136,
+      "rotation": 2.9573005838765933
+    }
+  },
+  "status": "passed",
+  "finishedAt": "2026-10-10T12:20:36.639Z"
+}

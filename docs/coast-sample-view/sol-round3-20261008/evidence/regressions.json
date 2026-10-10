@@ -1,0 +1,142 @@
+[
+  {
+    "name": "browser",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:17:06.2268444Z",
+    "finishedAt": "2026-10-08T04:17:45.7817571Z"
+  },
+  {
+    "name": "desktop-input",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:17:45.7870394Z",
+    "finishedAt": "2026-10-08T04:18:10.5436893Z"
+  },
+  {
+    "name": "save-browser",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:18:10.5462738Z",
+    "finishedAt": "2026-10-08T04:18:24.0127052Z"
+  },
+  {
+    "name": "buildings",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:18:24.0143610Z",
+    "finishedAt": "2026-10-08T04:18:36.9547696Z"
+  },
+  {
+    "name": "mobile",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:18:36.9566340Z",
+    "finishedAt": "2026-10-08T04:18:56.5213148Z"
+  },
+  {
+    "name": "mobile-ux",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:18:56.5229929Z",
+    "finishedAt": "2026-10-08T04:20:06.4846498Z"
+  },
+  {
+    "name": "portable",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:20:06.4863961Z",
+    "finishedAt": "2026-10-08T04:20:12.2269167Z"
+  },
+  {
+    "name": "ui",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:20:12.2287576Z",
+    "finishedAt": "2026-10-08T04:20:20.7092353Z"
+  },
+  {
+    "name": "loot",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:20:20.7107983Z",
+    "finishedAt": "2026-10-08T04:21:11.0359293Z"
+  },
+  {
+    "name": "expansion",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:21:11.0378887Z",
+    "finishedAt": "2026-10-08T04:21:20.1809038Z"
+  },
+  {
+    "name": "qol-expansion",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:21:20.1824031Z",
+    "finishedAt": "2026-10-08T04:21:24.6760200Z"
+  },
+  {
+    "name": "systems",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:21:24.6775936Z",
+    "finishedAt": "2026-10-08T04:21:59.3264460Z"
+  },
+  {
+    "name": "art",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:21:59.3279845Z",
+    "finishedAt": "2026-10-08T04:22:11.9017511Z"
+  },
+  {
+    "name": "tactical",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:22:11.9058922Z",
+    "finishedAt": "2026-10-08T04:22:30.4317492Z"
+  },
+  {
+    "name": "title",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:22:30.4331900Z",
+    "finishedAt": "2026-10-08T04:23:26.9516638Z"
+  },
+  {
+    "name": "title-water",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:23:26.9532984Z",
+    "finishedAt": "2026-10-08T04:23:37.3321519Z"
+  },
+  {
+    "name": "mall-passages",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:23:37.3337090Z",
+    "finishedAt": "2026-10-08T04:26:24.9272959Z"
+  },
+  {
+    "name": "mall-landing",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:26:24.9287343Z",
+    "finishedAt": "2026-10-08T04:26:33.5430476Z"
+  },
+  {
+    "name": "qol",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:26:33.5452715Z",
+    "finishedAt": "2026-10-08T04:26:55.9370981Z"
+  },
+  {
+    "name": "loot-target",
+    "exitCode": 0,
+    "node": "v24.19.0",
+    "startedAt": "2026-10-08T04:26:55.9385028Z",
+    "finishedAt": "2026-10-08T04:27:15.4966672Z"
+  }
+]

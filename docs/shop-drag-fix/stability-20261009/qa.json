@@ -1,0 +1,56 @@
+{
+  "at": "2026-10-09T14:33:05.159Z",
+  "passed": true,
+  "records": 53,
+  "focused": {
+    "pass": 15,
+    "fail": 0
+  },
+  "full": {
+    "pass": 21,
+    "fail": 0
+  },
+  "linksVerified": 42,
+  "negativeControls": true,
+  "originalAssertionsPreserved": true,
+  "mainControlSHA256": "3262b648beff16f16c2594d492b90ee079c7724ca2d99ac8254c4ecef7f0d754",
+  "artifacts": [
+    {
+      "file": "dist/index.html",
+      "bytes": 2416251,
+      "sha256": "a9a07a960049d6dc17e54b9fb7c765c99a72041c48e111c9b73b2ae2fa8d852f",
+      "equalsBase": true
+    },
+    {
+      "file": "start the game.html",
+      "bytes": 2416251,
+      "sha256": "a9a07a960049d6dc17e54b9fb7c765c99a72041c48e111c9b73b2ae2fa8d852f",
+      "equalsBase": true
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "bytes": 840803,
+      "sha256": "4b9ed1095dc6fb85fc43795cff31686c8430a81a51bd9cf3ad839235c7c8eaee",
+      "equalsBase": true
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "bytes": 837028,
+      "sha256": "03d1080fdcd32f0e10c41b069e1a0e1be61f456c93284832ca9166a41685fbda",
+      "equalsBase": true
+    },
+    {
+      "file": "docs/release-manifest.json",
+      "bytes": 745,
+      "sha256": "05beffd186bdb381fb358562ad77139102cfbbe3dad2c0be5fc17539a515b6e0",
+      "equalsBase": true
+    }
+  ],
+  "sourceHashes": {
+    "scripts/systems-browser-test.mjs": "6bfb26a1b1fb4280f1c74ecdaf26e94e9ab825b06f5845010329d0bebcb74c13",
+    "scripts/qol-expansion-test.mjs": "c6cec42d2cdf2b57e1a032f7590e748ecd1008568d9ed2f2b00b77661b4f0a71",
+    "scripts/shop-drag-test.mjs": "dc77278fe99a27f4585232a79ae18ed3b5b76223f6302668e722983cb1eac3a5",
+    "scripts/shop-touch-cases.mjs": "66cab6ee8f2dd4aa22f44940d3448091af902dbb49b774f9966993c2a0627e10"
+  },
+  "physicalHuman": "NOT RUN"
+}

@@ -1,0 +1,11 @@
+{
+  "original": "scripts/systems-browser-test.mjs",
+  "originalSHA256": "5a2784bd171b96ba38d108df4576158657b49987c8fe11f57b2699cac02235ab",
+  "variant": "test-results/shop-drag-sol-20261009/systems-compare.mjs",
+  "variantSHA256": "ce76ad05b5c9c3454173a677a1a9726678ef3854839b1fc5127ded6c2636fbc3",
+  "changes": [
+    "HTML and output path via environment",
+    "Imports adjusted for raw diagnostic directory"
+  ],
+  "assertionsAndWaitsChanged": false
+}

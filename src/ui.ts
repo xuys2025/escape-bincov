@@ -6,7 +6,7 @@ import { SURVIVAL } from './balance';
 import { encodeBackup, encodeRecoveryBackup, decodePortableBackup } from './save-backup';
 import { SESSION_MAX_BYTES } from './recovery-store';
 import { playerInput } from './input';
-import { app, audio, saveSession } from './app';
+import { app, audio, saveSession, hideoutRuntime } from './app';
 import type { SessionMutation } from './session';
 import { titleScreen } from './title-screen';
 import { moveQuantity, placementError, type LootEndpoint } from './loot';
@@ -20,6 +20,8 @@ import { criticalChance, useRpgItem } from './rpg';
 import type { ExpansionDraft } from './session';
 import { PIXEL_FONT } from './font';
 import { inventoryArtSize } from './art/inventory';
+import { sampleEnabled, sampleSupports, startCoastSample, villageSeed } from './coast-view/sample';
+import { enterStation, returnToStation, stationDefault } from './station-view/route';
 type InventoryDrag = { uid: string; source: string; token: number; runId: string | null; containerId: string | null; rotated?: boolean };
 let activeDrag: InventoryDrag | null = null;
 let dragToken = 0;
@@ -55,7 +57,25 @@ export function initSave(owned = true) {
     saved(saveSession.initialize(owned));
     audio.setVolume(app.save.settings.volume);
 }
-export function changeState(state: typeof app.state, walking = app.baseWalking) { if (app.pendingSettlement) { setOverlay('save-error'); return; } clearLootContext(); app.raid?.releaseInput(); if (app.base && !app.base.checkpoint()) { setOverlay('base-save-error'); return; } playerInput.clear(); app.state = state; app.overlay = ''; app.baseWalking = state === 'hideout' && walking; clearSelection(); if (state === 'hideout') {
+/**
+ * Hand the hideout view to the station yard: state is already 'hideout' (set by the Runtime), no Phaser scene runs and
+ * the old page is cleared. A walking BaseScene that cannot save first keeps its error overlay instead.
+ */
+export function hideoutExternal(): boolean {
+    if (app.pendingSettlement) { setOverlay('save-error'); return false; }
+    if (app.base && !app.base.checkpoint()) { setOverlay('base-save-error'); return false; }
+    clearLootContext(); app.raid?.releaseInput(); playerInput.clear(); app.overlay = ''; app.baseWalking = false; app.shop = null; clearSelection();
+    app.game?.scene.getScenes(true).forEach(scene => app.game!.scene.stop(scene.scene.key)); render(); return true;
+}
+/** The old tab page's way into the walking hideout: the station yard, or the earlier BaseScene for the legacy fixture. */
+function walkIn() {
+    if (stationDefault()) { void enterStation(); return; }
+    if (saved(saveSession.enableRpg())) { app.baseWalking = true; changeState('hideout'); }
+}
+const walkInLabel = () => stationDefault() ? '回到院子' : '走进水产站';
+/** Enter the run state for an external renderer (village sample) without starting the Phaser RaidScene. */
+export function enterExternalRun() { clearLootContext(); playerInput.clear(); app.state = 'run'; app.overlay = ''; app.baseWalking = false; clearSelection(); app.game?.scene.getScenes(true).forEach(scene => app.game!.scene.stop(scene.scene.key)); render(); }
+export function changeState(state: typeof app.state, walking = app.baseWalking) { if (state === 'hideout' && !app.pendingSettlement && !saved(saveSession.ensureRpg())) return; if (app.pendingSettlement) { setOverlay('save-error'); return; } clearLootContext(); app.raid?.releaseInput(); if (app.base && !app.base.checkpoint()) { setOverlay('base-save-error'); return; } playerInput.clear(); app.state = state; app.overlay = ''; app.baseWalking = state === 'hideout' && walking; clearSelection(); if (state === 'hideout') {
     saved(saveSession.grantRelief());
 } app.game?.scene.getScenes(true).forEach(scene => app.game!.scene.stop(scene.scene.key)); app.game?.scene.start(state === 'hideout' && app.baseWalking ? 'Base' : ({ menu: 'Menu', hideout: 'Hideout', run: 'Raid', result: 'Result' })[state]); render(); }
 const esc = (s: string) => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
@@ -64,7 +84,7 @@ export const weaponName = () => D.WEAPONS[app.loadout?.weapon || 'knife']?.name 
 function preparedWeight(){const s=app.save,w=D.WEAPONS[s.equipment.weapon||'knife'];return D.weight(s.bag)+D.weight(s.safe)+D.ITEMS.knife.weight+(s.equipment.weapon?D.ITEMS[s.equipment.weapon].weight:0)+(w.ammo?D.ITEMS[w.ammo].weight*s.equipment.ammo:0)+(app.expansion?.charm ? D.ITEMS[app.expansion.charm.id].weight : 0);}
 const iconCache = new Map<string, string>();
 function inventoryCell() { return !playerInput.touch && innerWidth >= 1700 && innerHeight >= 900 ? 80 : 54; }
-function itemArtwork(id: string, maxWidth: number, maxHeight: number, rotated = false) {
+export function itemArtwork(id: string, maxWidth: number, maxHeight: number, rotated = false) {
     const key = `item-inventory-${id}`;
     let url = iconCache.get(key);
     if (!url && app.game?.textures.exists(key)) {
@@ -142,7 +162,7 @@ function grid(inv: D.Inventory, source: string, cell = inventoryCell()) {
     return `<div class="grid" data-grid="${source}" data-cell="${cell}" style="width:${inv.w * cell}px;height:${inv.h * cell}px;--cell:${cell}px">${inv.items.map(i => {
         const d = D.ITEMS[i.id];
         const size = D.itemSize(i);
-        return `<div tabindex="0" role="button" aria-label="${d.name} × ${i.qty}" aria-pressed="${app.selected === i.uid}" title="${d.name} × ${i.qty} · ${(d.weight * i.qty).toFixed(2)} kg" draggable="${!playerInput.touch && shopping()}" data-uid="${i.uid}" data-item-id="${i.id}" data-source="${source}" data-kind="${d.kind}" class="item ${app.selected === i.uid ? 'selected' : ''}" style="left:${i.x * cell + 1}px;top:${i.y * cell + 1}px;width:${size.w * cell - 2}px;height:${size.h * cell - 2}px"><span class="inventory-art">${itemArtwork(i.id, size.w * cell - 10, size.h * cell - 27, !!i.rotated)}</span><span class="item-label ${i.relief ? 'relief' : ''}">${d.short || d.name}</span>${i.qty > 1 ? `<span class="qty">${i.qty}</span>` : ''}</div>`;
+        return `<div tabindex="0" role="button" aria-label="${d.name} × ${i.qty}" aria-pressed="${app.selected === i.uid}" title="${d.name} × ${i.qty} · ${(d.weight * i.qty).toFixed(2)} kg" draggable="false" data-uid="${i.uid}" data-item-id="${i.id}" data-source="${source}" data-kind="${d.kind}" class="item ${app.selected === i.uid ? 'selected' : ''}" style="left:${i.x * cell + 1}px;top:${i.y * cell + 1}px;width:${size.w * cell - 2}px;height:${size.h * cell - 2}px"><span class="inventory-art">${itemArtwork(i.id, size.w * cell - 10, size.h * cell - 27, !!i.rotated)}</span><span class="item-label ${i.relief ? 'relief' : ''}">${d.short || d.name}</span>${i.qty > 1 ? `<span class="qty">${i.qty}</span>` : ''}</div>`;
     }).join('')}${placementCells(inv, source, cell)}${!inv.items.length ? '<div class="empty-hint">暂无物品</div>' : ''}</div>`;
 }
 function placementCells(inv: D.Inventory, source: string, cell: number) {
@@ -197,9 +217,19 @@ function details() {
     const size = D.itemSize(item);
     return `<aside class="details"><div class="item-heading"><div class="detail-icon">${itemIcon(item.id)}</div><div><div class="section-label">${kindName[d.kind]}</div><h3>${d.name}</h3></div>${playerInput.touch ? btn('关闭详情', 'clear-selection', 'detail-close') : ''}</div><div class="detail-body"><p class="item-description">${itemDescription(item.id)}</p><dl class="item-facts"><div><dt>占用</dt><dd>${size.w} × ${size.h} 格</dd></div><div><dt>重量</dt><dd>${(d.weight * item.qty).toFixed(2)} kg</dd></div><div><dt>数量</dt><dd>${item.qty}</dd></div><div><dt>售价</dt><dd>${item.relief ? '不可出售' : '¥ ' + d.sell * item.qty}</dd></div></dl>${item.relief ? '<p class="small orange">救济物资 · 不可出售</p>' : ''}<div class="item-actions">${actions}${baseActions}${d.w !== d.h ? btn('旋转', 'rotate-item') : ''}${btn('移动格位', 'place-item')}${splitControl(item)}</div></div></aside>`;
 }
+/** Host calls after a successful runtime.deploy and its animation. Uses the committed checkpoint. */
+export async function startPreparedHideoutRaid(runId: string): Promise<boolean> {
+    const result = hideoutRuntime.startRaid(runId); if (!result.ok) return false;
+    app.shop = null;
+    if (sampleEnabled() && sampleSupports()) { await startCoastSample(); return !!app.coastSample; }
+    const raid = app.expansion?.raid, seed = app.save.activeRun!.seed;
+    app.game?.registry.set('runConfig', raid?.worldVersion.startsWith('mall') ? mallRunConfig(seed) : generateRun(seed));
+    changeState('run'); return true;
+}
 function deploy() {
-    const cfg = app.runWorld === 'mall' ? mallRunConfig(app.seed || Date.now()) : generateRun(app.seed || Date.now());
+    const cfg = app.runWorld === 'mall' ? mallRunConfig(app.seed || Date.now()) : generateRun(app.seed || (sampleEnabled() && app.runWorld === 'buildings' ? villageSeed() : Date.now()));
     if (!saved(saveSession.beginRun(cfg.seed, app.runWorld === 'mall' ? 'mall' : app.runWorld === 'buildings'))) return;
+    if (sampleEnabled() && sampleSupports()) { app.shop = null; void startCoastSample(); return; }
     app.shop = null; app.game!.registry.set('runConfig', cfg); changeState('run');
 }
 function checkout() {
@@ -255,10 +285,12 @@ export function render() {
         return;
     }
     document.documentElement.dataset.baseWalking = String(app.baseWalking);
+    if (app.state === 'hideout' && app.station) { ui().innerHTML = ''; return; }
     if (app.state === 'hideout') {
         if (app.baseWalking && !['base-menu', 'shop-leave', 'shop-quest'].includes(app.overlay)) { renderBase(); return; }
         renderHideout();
     }
+    if (app.state === 'run' && app.coastSample) { ui().innerHTML = ''; return; }
     if (app.state === 'run') {
         ui().innerHTML = `<div class="hud"><div class="hud-top"><div class="location"><div class="section-label">滨科夫 · 沿海封锁区</div><strong id="zone">封锁区</strong><div class="small" id="tide">潮位确认中</div></div><div class="timer"><strong id="timer">10:00</strong><small>撤离倒计时</small></div></div><div id="radio" class="radio">水产站：信号接通。撤离点已标记在地图上，别等到最后一分钟。</div><div class="hud-bottom"><div class="vitals ${app.expansion?.raid ? 'rpg-vitals' : ''}"><div class="vital-row"><span>生命</span><span id="hp">100 / 100</span></div><div class="bar"><i id="hpbar"></i></div><div class="vital-row"><span>耐力</span><span id="stamina">100</span></div><div class="bar stamina"><i id="staminabar"></i></div><div class="vital-row vital-status" style="margin-bottom:0"><span id="status">状态正常</span><span id="weight">0 kg</span></div></div><div class="weapon-hud"><div class="eyebrow" id="gunname">${weaponName()}</div><div class="ammo" id="ammo">—</div><div class="small muted" id="reload">R 换弹　1 主武器　2 匕首</div></div></div><div class="keytips"><kbd>E</kbd>拾取 / 撤离　<kbd>Tab</kbd>背包　<kbd>Q</kbd>治疗　<kbd>M</kbd>地图　<kbd>Esc</kbd>暂停 ${app.expansion?.raid ? btn('身体', 'property') : ''}</div><div id="hit-directions" aria-hidden="true"></div><div class="raid-information"><button id="exit-navigation" data-action="map">选择撤离点</button><details id="raid-quests" ${app.tasksExpanded ? 'open' : ''}><summary>任务 <span id="raid-quest-count"></span></summary><div id="raid-quest-list"></div><small title="携带数量包含背包、安全箱和出门带上的物资">携带含带入物资 · 回站交付</small></details></div><div id="interaction" class="interaction" style="display:none"></div><div id="warning"></div></div>${overlayHtml()}`;
         bind();
@@ -333,9 +365,9 @@ function renderHideout() {
             }).join('')}</ul>`}<div class="quest-footer"><div><strong>¥ ${q.reward}</strong><span>${id === 'repair' ? '另解锁仓库扩建' : '任务报酬'}</span></div>${complete ? '<span class="completion-mark">✓ 已完成</span>' : btn('交付物资', 'quest', ready ? 'primary' : '', `data-id="${id}"`)}</div></article>`;
         }).join('')}</div><p class="content-note">交付时会扣除仓库、背包或安全箱中的所需物资。放进安全箱的任务物品，撤离失败也保留。</p>`;
     } else {
-        body = `<div class="station-layout"><section class="station-log"><div class="section-label">水产站值守记录 · 第 17 天</div><h3>${s.quests.repair ? '供电已恢复。' : '目前靠应急电源供电。'}</h3><p class="station-copy">出击前查好路线，涉水会积累污染。<br>以下时间从出击开始计算。</p><dl class="tide-notes"><div><dt>04:30</dt><dd>电台预警，离开浅滩。</dd></div><div><dt>05:00</dt><dd>潮位变化，高架路与海堤仍可通行。</dd></div></dl><div class="station-upgrade">${btn(s.upgraded ? '仓库已扩建' : `扩建仓库 · ¥ ${D.STASH_UPGRADE_COST}`, 'upgrade', '', s.upgraded ? 'disabled' : '')}<p class="inv-help">${s.upgraded ? '仓库容量已增至 90 格。' : `完成「${D.QUESTS.repair.name}」后可扩建至 90 格。`}</p></div></section><section class="station-controls"><div class="station-stats"><div><strong>${s.stats.runs}</strong><span>累计出击</span></div><div><strong>${s.stats.extracts}</strong><span>成功撤离</span></div><div><strong>${s.stats.kills}</strong><span>击败敌人</span></div></div><label class="volume-control"><span>游戏音量 <span id="volume-label">${Math.round(s.settings.volume * 100)}%</span></span><input aria-label="游戏音量" id="volume" type="range" min="0" max="1" step="0.05" value="${s.settings.volume}"></label><div class="save-controls"><div><h3>本地存档</h3><p>更换浏览器或游玩地址前，请先导出备份。</p></div><div class="save-actions">${btn('导出存档', 'export-save')}${btn('导入存档', 'import-save')}</div><input id="backup-file" type="file" accept=".json,application/json" hidden></div><div class="station-links">${btn('行动指南', 'help', 'text-button')}${btn('返回主菜单', 'menu', 'text-button')}${btn('走进水产站', 'base-enter')}</div></section></div>`;
+        body = `<div class="station-layout"><section class="station-log"><div class="section-label">水产站值守记录 · 第 17 天</div><h3>${s.quests.repair ? '供电已恢复。' : '目前靠应急电源供电。'}</h3><p class="station-copy">出击前查好路线，涉水会积累污染。<br>以下时间从出击开始计算。</p><dl class="tide-notes"><div><dt>04:30</dt><dd>电台预警，离开浅滩。</dd></div><div><dt>05:00</dt><dd>潮位变化，高架路与海堤仍可通行。</dd></div></dl><div class="station-upgrade">${btn(s.upgraded ? '仓库已扩建' : `扩建仓库 · ¥ ${D.STASH_UPGRADE_COST}`, 'upgrade', '', s.upgraded ? 'disabled' : '')}<p class="inv-help">${s.upgraded ? '仓库容量已增至 90 格。' : `完成「${D.QUESTS.repair.name}」后可扩建至 90 格。`}</p></div></section><section class="station-controls"><div class="station-stats"><div><strong>${s.stats.runs}</strong><span>累计出击</span></div><div><strong>${s.stats.extracts}</strong><span>成功撤离</span></div><div><strong>${s.stats.kills}</strong><span>击败敌人</span></div></div><label class="volume-control"><span>游戏音量 <span id="volume-label">${Math.round(s.settings.volume * 100)}%</span></span><input aria-label="游戏音量" id="volume" type="range" min="0" max="1" step="0.05" value="${s.settings.volume}"></label><div class="save-controls"><div><h3>本地存档</h3><p>更换浏览器或游玩地址前，请先导出备份。</p></div><div class="save-actions">${btn('导出存档', 'export-save')}${btn('导入存档', 'import-save')}</div><input id="backup-file" type="file" accept=".json,application/json" hidden></div><div class="station-links">${btn('行动指南', 'help', 'text-button')}${btn('返回主菜单', 'menu', 'text-button')}${btn(walkInLabel(), 'base-enter')}</div></section></div>`;
     }
-    ui().innerHTML = `<div class="panel hideout ${shopping() ? 'shopping' : ''}"><header class="topbar"><div class="station-identity"><span class="section-label">滨科夫 · 沿海避难点</span><h2>滨科夫水产站</h2></div><div class="right"><span class="station-signal"><i></i>${s.quests.repair ? '供电已恢复 · 信号稳定' : '应急供电 · 信号微弱'}</span><div class="cash"><span>可用现金</span><strong>¥ ${s.cash.toLocaleString()}</strong></div></div></header><nav class="tabs" aria-label="水产站功能">${[['gear', '整备'], ['arms', '修理铺'], ['med', '卫生所'], ['quests', '电台任务'], ['home', '水产站'], ...(app.expansion?.version === 2 ? [['body', '身体与成长'], ['facilities', '基地设施']] : [])].map(([id, name]) => btn(name, 'tab', app.tab === id ? 'active' : '', `data-id="${id}" ${app.tab === id ? 'aria-current="page"' : ''}`)).join('')}</nav><div class="content ${shopping() ? 'shop-content' : app.tab === 'gear' ? 'gear-content' : ''}">${body}</div><footer class="bottom-bar">${shopping() ? shopCheckout() : `<div class="departure-note"><strong>沿海封锁区 <span>每局限时 10 分钟</span></strong><p>撤离失败会丢失背包物资和主武器，安全箱保留。</p></div>`}<label class="seed-label">行动区域<select id="run-world" aria-label="行动区域"><option value="coast" ${app.runWorld === 'coast' ? 'selected' : ''}>沿海封锁区 · 经典规则</option><option value="buildings" ${app.runWorld === 'buildings' ? 'selected' : ''}>沿海街区 · 居民楼</option><option value="mall" ${app.runWorld === 'mall' ? 'selected' : ''}>滨湾商场 · 两层与露台</option></select></label><label class="seed-label">行动种子 <input class="seed" aria-label="行动种子" title="留空随机生成；输入相同的数字或文字，可重现本局初始配置。" id="seed" placeholder="留空随机" value="${esc(app.seed)}" maxlength="16"></label>${app.baseWalking ? btn('返回站内', 'base-return') : btn('走进水产站', 'base-enter')}<div class="departure-check"><p id="departure-warnings">${departureWarnings(s).join(' · ') || '装备与快捷补给已备齐'}</p>${btn('出击 <span aria-hidden="true">→</span>', 'deploy', 'primary')}</div></footer></div>${overlayHtml()}`;
+    ui().innerHTML = `<div class="panel hideout ${shopping() ? 'shopping' : ''}"><header class="topbar"><div class="station-identity"><span class="section-label">滨科夫 · 沿海避难点</span><h2>滨科夫水产站</h2></div><div class="right"><span class="station-signal"><i></i>${s.quests.repair ? '供电已恢复 · 信号稳定' : '应急供电 · 信号微弱'}</span><div class="cash"><span>可用现金</span><strong>¥ ${s.cash.toLocaleString()}</strong></div></div></header><nav class="tabs" aria-label="水产站功能">${[['gear', '整备'], ['arms', '修理铺'], ['med', '卫生所'], ['quests', '电台任务'], ['home', '水产站'], ...(app.expansion?.version === 2 ? [['body', '身体与成长'], ['facilities', '基地设施']] : [])].map(([id, name]) => btn(name, 'tab', app.tab === id ? 'active' : '', `data-id="${id}" ${app.tab === id ? 'aria-current="page"' : ''}`)).join('')}</nav><div class="content ${shopping() ? 'shop-content' : app.tab === 'gear' ? 'gear-content' : ''}">${body}</div><footer class="bottom-bar">${shopping() ? shopCheckout() : `<div class="departure-note"><strong>沿海封锁区 <span>每局限时 10 分钟</span></strong><p>撤离失败会丢失背包物资和主武器，安全箱保留。</p></div>`}<label class="seed-label">行动区域<select id="run-world" aria-label="行动区域"><option value="coast" ${app.runWorld === 'coast' ? 'selected' : ''}>沿海封锁区 · 经典规则</option><option value="buildings" ${app.runWorld === 'buildings' ? 'selected' : ''}>沿海街区 · 居民楼</option><option value="mall" ${app.runWorld === 'mall' ? 'selected' : ''}>滨湾商场 · 两层与露台</option></select></label><label class="seed-label">行动种子 <input class="seed" aria-label="行动种子" title="留空随机生成；输入相同的数字或文字，可重现本局初始配置。" id="seed" placeholder="留空随机" value="${esc(app.seed)}" maxlength="16"></label>${app.baseWalking ? btn('返回站内', 'base-return') : btn(walkInLabel(), 'base-enter')}<div class="departure-check"><p id="departure-warnings">${departureWarnings(s).join(' · ') || '装备与快捷补给已备齐'}</p>${btn('出击 <span aria-hidden="true">→</span>', 'deploy', 'primary')}</div></footer></div>${overlayHtml()}`;
     bind();
     ui().querySelectorAll<HTMLElement>('.shop-layout [data-grid]').forEach(grid => {
         grid.parentElement!.scrollTop = scrollPositions.get(grid.dataset.grid!) || 0;
@@ -494,10 +526,14 @@ function drawPointerDrag() {
     const dangerBottom = app.overlay === 'loot' ? document.querySelector('.loot-header')?.getBoundingClientRect().bottom || 0 : 0;
     Object.assign(dragGhost.style, { left: `${pointerDrag.x + 10}px`, top: `${Math.max(pointerDrag.y + 10, dangerBottom + 4)}px`, width: `${size.w * pointerDrag.cell}px`, height: `${size.h * pointerDrag.cell}px` });
     const target = document.elementFromPoint(pointerDrag.x, pointerDrag.y)?.closest<HTMLElement>('[data-grid]');
-    if (target && ui().contains(target)) previewDrop(target, { clientX: pointerDrag.x, clientY: pointerDrag.y } as DragEvent);
+    if (target && ui().contains(target)) previewDrop(target, { clientX: pointerDrag.x, clientY: pointerDrag.y });
     else clearPlacementPreview();
 }
-/** Pointer dragging keeps keyboard events available for R. Native shop drag still uses the same commit guard. */
+/**
+ * Mouse dragging for every grid (gear, loot and the base shops) uses pointer events: the browser's native drag would be
+ * cancelled at once by the pointercancel/pointerout guards below and is blocked by -webkit-user-drag: none. Keyboard
+ * events stay available, so R rotates (except in a shop cart, which keeps each item's orientation) and Esc cancels.
+ */
 export function installInventoryDrag() {
     addEventListener('pointermove', e => {
         if (!pointerDrag || e.pointerId !== pointerDrag.pointerId) return;
@@ -513,9 +549,10 @@ export function installInventoryDrag() {
         if (started) {
             suppressDragClick = true; setTimeout(() => { suppressDragClick = false; }, 0);
             const target = document.elementFromPoint(e.clientX, e.clientY)?.closest<HTMLElement>('[data-grid]');
-            if (target && ui().contains(target) && drag && dragContextValid(drag)) {
-                const dataTransfer = new DataTransfer(); dataTransfer.setData('text/plain', JSON.stringify(drag));
-                commitDrop(target, new DragEvent('drop', { clientX: e.clientX, clientY: e.clientY, dataTransfer }));
+            // Released over a grid: place, or say why not. Released anywhere else: the item simply stays where it was.
+            if (target && ui().contains(target)) {
+                if (drag && dragContextValid(drag)) commitDrop(target, e, drag);
+                else toast('拖放未完成，物品仍在原处。');
             }
         }
         cancelInventoryDrag();
@@ -526,7 +563,7 @@ export function installInventoryDrag() {
         if (e.key === 'Escape') { e.preventDefault(); e.stopImmediatePropagation(); cancelInventoryDrag(); }
         else if (e.key.toLowerCase() === 'r') {
             e.preventDefault(); e.stopImmediatePropagation();
-            if (e.repeat || !dragContextValid(activeDrag)) return;
+            if (e.repeat || shopping() || !dragContextValid(activeDrag)) return;
             activeDrag.rotated = !(activeDrag.rotated ?? false); drawPointerDrag();
         }
     }, true);
@@ -546,11 +583,12 @@ function dragContextValid(drag: InventoryDrag) {
     if (drag.containerId && (!app.lootContext || !app.raid?.canLootContainer(drag.containerId, app.lootContext.runId))) return false;
     return true;
 }
-function dropPosition(el: HTMLElement, e: DragEvent) {
+type DropPoint = { clientX: number; clientY: number };
+function dropPosition(el: HTMLElement, e: DropPoint) {
     const cell = Number(el.dataset.cell), r = el.getBoundingClientRect(), scale = r.width / el.offsetWidth;
     return { x: Math.floor((e.clientX - r.left) / scale / cell), y: Math.floor((e.clientY - r.top) / scale / cell), cell };
 }
-function previewDrop(el: HTMLElement, e: DragEvent) {
+function previewDrop(el: HTMLElement, e: DropPoint) {
     clearPlacementPreview();
     if (!activeDrag || !dragContextValid(activeDrag)) return;
     const from = inventory(activeDrag.source), to = inventory(el.dataset.grid!);
@@ -579,14 +617,15 @@ function transferLootItem(source: string, target: string, uid: string, x: number
     }
     render();
 }
-function commitDrop(el: HTMLElement, e: DragEvent) {
-    e.preventDefault(); clearPlacementPreview();
+function commitDrop(el: HTMLElement, e: DropPoint, drag: InventoryDrag) {
+    clearPlacementPreview();
     try {
-        const drag = JSON.parse(e.dataTransfer?.getData('text/plain') || 'null') as InventoryDrag | null;
-        if (!drag || !dragContextValid(drag)) return;
+        if (!dragContextValid(drag)) { toast('拖放未完成，物品仍在原处。'); return; }
         const target = el.dataset.grid!, { x, y } = dropPosition(el, e), rotated = activeDrag!.rotated;
+        // A catalog item dropped back on the catalog is a change of mind, not a placement: nothing to say.
+        if (shopping() && drag.source === 'merchant' && target === 'merchant') { activeDrag = null; return; }
         const error = shopping() ? Shop.shopPlacementError(cart(), drag.source as Shop.ShopSource, target as Shop.ShopSource, drag.uid, x, y) : placementError(inventory(drag.source), inventory(target), drag.uid, x, y, rotated);
-        // Consume the browser drag once, including rejected placements.
+        // Consume the drag once, including rejected placements.
         activeDrag = null;
         if (error) { toast(error); render(); return; }
         if (shopping()) { Shop.moveShopItem(cart(), drag.source as Shop.ShopSource, target as Shop.ShopSource, drag.uid, x, y); clearSelection(); render(); }
@@ -622,7 +661,7 @@ function bind() {
                 else if (next?.action === 'menu') changeState('menu');
                 else if (next?.action === 'deploy') deploy();
                 else if (next?.action === 'base-return') setOverlay('');
-                else if (next?.action === 'base-enter' && saved(saveSession.enableRpg())) { app.baseWalking = true; changeState('hideout'); }
+                else if (next?.action === 'base-enter') walkIn();
                 break;
             }
             case 'container': app.mobileContainer = id; if (!app.placement) clearSelection(); render(); break;
@@ -680,19 +719,22 @@ function bind() {
             case 'enter':
                 if (app.checkpoint || app.expansion?.raid) {
                     if (saveSession.resumeRun()) {
+                        if (sampleEnabled() && sampleSupports()) { void startCoastSample(true); break; }
                         app.game!.registry.set('runConfig', app.expansion?.raid?.worldVersion === 'mall-v1' ? mallRunConfig(app.expansion.raid.seed) : generateRun(app.expansion?.raid?.seed ?? app.checkpoint!.seed));
                         changeState('run'); app.overlay = 'pause'; render();
                     }
                     break;
                 }
-                changeState('hideout');
+                if (stationDefault()) void enterStation(); else changeState('hideout');
                 if (app.recovery) {
                     toast('上次行动中断，已按撤离失败处理。安全箱内的物品和水手匕首保留。');
                     app.recovery = false;
                 }
                 break;
             case 'return':
-                changeState('hideout');
+                // The yard plays the walk-in with the Runtime's one-time arrival; if it cannot, the tab page still works.
+                if (stationDefault()) void returnToStation().then(ok => { if (!ok && app.state === 'result') changeState('hideout'); });
+                else changeState('hideout');
                 break;
             case 'menu':
                 changeState('menu');
@@ -754,9 +796,7 @@ function bind() {
                 mutate(() => D.transferItem(inventory(app.selectedSource), inventory(to), app.selected), '物资已转移。', '放不下这件物品，请先整理目标容器。');
                 break;
             }
-            case 'base-enter':
-                if (!saved(saveSession.enableRpg())) break;
-                app.baseWalking = true; changeState('hideout'); break;
+            case 'base-enter': walkIn(); break;
             case 'base-return': setOverlay(''); break;
             case 'base-menu': setOverlay('base-menu'); break;
             case 'base-exit': changeState('hideout', false); break;
@@ -795,19 +835,13 @@ function bind() {
         el.click(); }; el.ondblclick = () => { if (app.state !== 'hideout' || app.conflict || shopping())
         return; const from = el.dataset.source!; mutate(() => D.transferItem(inventory(from), inventory(from === 'stash' ? 'bag' : 'stash'), el.dataset.uid!)); };
         el.onpointerdown = e => {
-            if (playerInput.touch || shopping() || e.button !== 0 || app.placement || app.conflict || app.pendingSettlement) return;
+            if (playerInput.touch || e.button !== 0 || app.placement || app.conflict || app.pendingSettlement) return;
             const grid = el.closest<HTMLElement>('[data-grid]'); if (!grid) return;
             const drag = beginDrag(el.dataset.uid!, el.dataset.source!);
             pointerDrag = { pointerId: e.pointerId, drag, startX: e.clientX, startY: e.clientY, x: e.clientX, y: e.clientY,
                 cell: Number(grid.dataset.cell) * grid.getBoundingClientRect().width / grid.offsetWidth, started: false };
             el.setPointerCapture(e.pointerId);
         };
-        el.ondragstart = e => {
-            if (app.conflict || app.pendingSettlement || !e.dataTransfer) { e.preventDefault(); return; }
-            activeDrag = beginDrag(el.dataset.uid!, el.dataset.source!);
-            e.dataTransfer.setData('text/plain', JSON.stringify(activeDrag)); e.dataTransfer.effectAllowed = 'move';
-        };
-        el.ondragend = () => { activeDrag = null; clearPlacementPreview(); };
     });
     ui().querySelectorAll<HTMLElement>('[data-grid]').forEach(el => {
         el.onclick = e => {
@@ -819,9 +853,6 @@ function bind() {
             if (mutate(() => moveQuantity(inventory(app.selectedSource), inventory(el.dataset.grid!), app.selected, x, y, app.placementRotated, app.placementQuantity))) { clearSelection(); render(); }
         };
 
-        el.ondragover = e => { e.preventDefault(); if (e.dataTransfer) e.dataTransfer.dropEffect = 'move'; previewDrop(el, e); };
-        el.ondragleave = e => { if (!el.contains(e.relatedTarget as Node | null)) clearPlacementPreview(); };
-        el.ondrop = e => commitDrop(el, e);
     });
     const exitChoice = document.getElementById('exit-choice') as HTMLSelectElement | null;
     if (exitChoice) exitChoice.onchange = () => { app.selectedExit = exitChoice.value; app.raid?.updateHud(); };

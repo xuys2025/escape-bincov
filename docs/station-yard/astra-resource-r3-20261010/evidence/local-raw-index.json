@@ -1,0 +1,312 @@
+[
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\driver-used.mjs",
+    "bytes": 25076,
+    "sha256": "a1dac589fbae03ac6fc019e076c8fbc687c47555c32b242d85c25540464b0e82"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\graph-tests.txt",
+    "bytes": 295,
+    "sha256": "2223f44611ff8a529d0cae3bbebf796581fd7fa6a9e681cfb2abe137f75a0adb"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\identity-probe\\cold-identities.json",
+    "bytes": 447242,
+    "sha256": "64b500f2f7b5b459561eb244b56b00dd87d9acae75d624ba43064dfcbbde02de"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\identity-probe\\final-remount-identities.json",
+    "bytes": 679082,
+    "sha256": "b447e626d1a4ba494cb12621d748e8209d30f49183006e58a8bc8dbbd17b3dd0"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\identity-probe\\first-return-identities.json",
+    "bytes": 690802,
+    "sha256": "ea94e83661a9a35655f50bc0d22e53cb3127da032c76fb3bb890fe6b5c618bab"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\identity-probe\\report.json",
+    "bytes": 4285014,
+    "sha256": "46789caebc529d0c274ffe4df3c3e15488676f5b22d27882e08676b49bcf28a8"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\identity-probe\\restore-1-identities.json",
+    "bytes": 692287,
+    "sha256": "cfb1db038507cea733844b753020f5e12c021f98c042c6659407735225192b80"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\identity-probe\\restore-2-identities.json",
+    "bytes": 691660,
+    "sha256": "c0e013c6431b4a41a51636ead274abf245dd7671220614e71298e87046227f83"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\identity-probe\\restore-3-identities.json",
+    "bytes": 692708,
+    "sha256": "e48796e10046aa554c26c998359f2f88779e4c0ecde95f30ef6f0ead1f53c4f7"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\after-final-remount-identities.json",
+    "bytes": 943333,
+    "sha256": "f813679b87698f8b65bfd6d955cf047ccad059216e9baa4abd11107b33e8366a"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\cold-identities.json",
+    "bytes": 446226,
+    "sha256": "5aea8af811d470a462bf6c920d81b31b18907862280ff1a0cfdecee4fc2e374b"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\heap-0-60.json",
+    "bytes": 156859,
+    "sha256": "3e0a278240f659dad155259e071ca0ad22e576720e72bc9103e4695b9eff3b3d"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\heap-30-60.json",
+    "bytes": 159587,
+    "sha256": "00bf4aecee516f79e23ffd3d4336bd8a19c1501341d48601d904e2ccb3a84324"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\null-source-audit.json",
+    "bytes": 203006,
+    "sha256": "001fbbb22227c264bcf92fe778a299e1ef0bedee19b201f9088b81b4ba9133b3"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\owners-0-60.json",
+    "bytes": 89950,
+    "sha256": "dfd84fcf389e3a32f05d753e831928fcb89b03af7b7e88a081f2fc2d51d1d977"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\progress.json",
+    "bytes": 87,
+    "sha256": "a88409aa98848deda0b9bfa7ec3c73b1c75d0fda73d9a50aaeb23bec8d563d00"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\report.json",
+    "bytes": 69786869,
+    "sha256": "527ba1e3bb11dc648a4010a03a143631d66d6ae0002e2df7c6b1bd187ec2929a"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\round-0-identities.json",
+    "bytes": 943163,
+    "sha256": "b7c7a64afc69e111855ac10d2afaad1659212d9222f74318016f45ed662bbf7d"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\round-0.heapsnapshot",
+    "bytes": 69586009,
+    "sha256": "d2e2dc3c2dfc73160c96d4bc4ef74cac5d462fed002533b003f1801943786065"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\round-30.heapsnapshot",
+    "bytes": 69200669,
+    "sha256": "78a2dca97de9b7fdb3d9141737ddd9001eee24131f661e6e7abfbf2a8e8094ac"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\round-60-identities.json",
+    "bytes": 959730,
+    "sha256": "d6083670efba8daaa87ea6ddc1a34595f87813599c482ce9c493e1ce08d79350"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\round-60.heapsnapshot",
+    "bytes": 69295563,
+    "sha256": "dcb3b8751941d883836941544482bd8af6787556e6e284b44548aba899f6cdf4"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-context\\shader-cache.json",
+    "bytes": 136190,
+    "sha256": "f89fdee97be05d0293afd3f1c3cb081264b5983ab27d15f59e79867c387efc74"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-remount\\cold-identities.json",
+    "bytes": 446226,
+    "sha256": "b0fe819cbba1988915bf5c238e8023b7d84194032ad03c7c67c83f82dd1ca87e"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-remount\\heap-0-60.json",
+    "bytes": 166141,
+    "sha256": "25738cae6c389b979e05898e258747236827647fece269869aa1c73135a1d17f"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-remount\\heap-30-60.json",
+    "bytes": 165299,
+    "sha256": "1a539bec9bdf879b669e5039291971cedb0840a7e1af12d8335e5fdc7e3f0289"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-remount\\owners-0-60.json",
+    "bytes": 90911,
+    "sha256": "1a383d6506dfc245dcc46eee3ddc63988014747b7daef4d6e0c22ad5ab458820"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-remount\\progress.json",
+    "bytes": 85,
+    "sha256": "88ae4343b033dc0bd31b86133cf2bd5209a68b0443164d7f603d42c671eb7fe3"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-remount\\report.json",
+    "bytes": 68537127,
+    "sha256": "699e389a82e929918a422582d99e021284571244fa38b3b8936e6022aadd88fe"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-remount\\round-0-identities.json",
+    "bytes": 942479,
+    "sha256": "783a5a0da63932d1b779a354e92e85e9fa95fce0140ac2fc635f17ef232821fa"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-remount\\round-0.heapsnapshot",
+    "bytes": 70279753,
+    "sha256": "0961d1fa87470393763bf573df9e131a7d3d73a78e4ff974643fa788e5c7f339"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-remount\\round-30.heapsnapshot",
+    "bytes": 71302200,
+    "sha256": "ffccb88736267eff8c349371a38975d803e30010fdd2e1f94920aed3ab9e2fc8"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-remount\\round-60-identities.json",
+    "bytes": 952077,
+    "sha256": "b8e5d75a8f7079c1eb9d6dbce85cb3fa425e9c5364b9ee2a1f74704b5a36da28"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-remount\\round-60.heapsnapshot",
+    "bytes": 71500827,
+    "sha256": "e13e39a845ff382f6e050b2a5daabf58ad7d818ae61256e22739e63326948bd2"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-remount\\shader-cache.json",
+    "bytes": 70912,
+    "sha256": "5c8863f99119bf0baa2f59a76f63b15585ae4b2928cbf92a4505b25a6d000192"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-shared\\cold-identities.json",
+    "bytes": 446226,
+    "sha256": "788c2483ce2e688421b87b6cea40af202aab505d7770085019ff1929e7258d9a"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-shared\\heap-0-60.json",
+    "bytes": 206518,
+    "sha256": "03a02f6862b31976827db9153bfca7614ce5fd609f5b3343e462ef75531f844d"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-shared\\heap-30-60.json",
+    "bytes": 176108,
+    "sha256": "a8d2d049320d118482c65101eac27abfac70d0b1233b0aa19ed20802a9c9eaca"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-shared\\owners-0-60.json",
+    "bytes": 91325,
+    "sha256": "05ef91be4561ee8a11cfd53463df11d2093cdf5a3c7c0d6c1a98a7b1d102e2e6"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-shared\\progress.json",
+    "bytes": 84,
+    "sha256": "d3345d6708cdc103e3998058d0defe2c1bb68a1b1c76ed905b1a0816cb3903be"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-shared\\report.json",
+    "bytes": 69280519,
+    "sha256": "345d106ec8019ce258b50395230176c76d594866d9b1a6997de2011dcf791876"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-shared\\round-0-identities.json",
+    "bytes": 950949,
+    "sha256": "c2255c35804f1597cc74998d90c632ee781a4e4f45952d827e554cbf24fe2ef0"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-shared\\round-0.heapsnapshot",
+    "bytes": 73059273,
+    "sha256": "0a3f3b271a14874ea49e2c6306e61391c5ff2cffa70a4d827ad036c9f30b8ef2"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-shared\\round-30.heapsnapshot",
+    "bytes": 73364779,
+    "sha256": "0d4b05bc31c3f31e3796a312f563db3559cbad627f35863a061126ff9c4d1e72"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-shared\\round-60-identities.json",
+    "bytes": 960248,
+    "sha256": "032850a42bb854a8da7ba11d55cfb647c5441cd0d1699c26db5838c63b73a50c"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-shared\\round-60.heapsnapshot",
+    "bytes": 73841133,
+    "sha256": "983c2fdb726999e38033f81fd8c1ab2f6c4c8a5b50a2847f697e1c42cb75e185"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\long-shared\\shader-cache.json",
+    "bytes": 72720,
+    "sha256": "49bcab3400526dfe3b32c67b2cbaa6a1943529a5707c6e67e658381e9ddb011a"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\package.txt",
+    "bytes": 399,
+    "sha256": "8b2bd91deb70aedcf9c6fdcf3ce748bf7cfccd0fe73bde71f8e78a2ba6869462"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\pilot-remount\\cold-identities.json",
+    "bytes": 446226,
+    "sha256": "f90872385cbca2fecb3173b444a410890af61f58cca14a93cbb92ea5d50a3763"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\pilot-remount\\report.json",
+    "bytes": 484086,
+    "sha256": "35daa08c37aa006123c297f4a521c9716702a03ff11f1bdb59312dd2f67c754b"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\pilot-remount-v2\\cold-identities.json",
+    "bytes": 446226,
+    "sha256": "04c94c2b0b7e5934511381dcf02a3281d7afa3e14a359f09e27708942153d6ea"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\pilot-remount-v2\\progress.json",
+    "bytes": 84,
+    "sha256": "0b4ae2384f1549b3ed44b6451022b27add0700c84cf6b98ae199cf88e0fe46c8"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\pilot-remount-v2\\report.json",
+    "bytes": 6791419,
+    "sha256": "d9bb9c22beeecbdde9b506ad93d4dd13f88b581cf28640ef0fce06dfb30b6630"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\pilot-remount-v2\\round-0-identities.json",
+    "bytes": 942479,
+    "sha256": "e8b5278ceedd932052fd48dc5d40fa1ae07af659d0096ef289e631282472e3e7"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\pilot-remount-v2\\round-2-identities.json",
+    "bytes": 941750,
+    "sha256": "79ba2641ead3ca197748f30e550b051ff09e10be6f1cde776d77bb226140df3f"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\probe-tests.txt",
+    "bytes": 303,
+    "sha256": "8c12369f2c31cd2d07f5728c4e9ba4ea39bf35432b14b9202ecd240e96f781d2"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\probe-used.mjs",
+    "bytes": 6239,
+    "sha256": "cc54012eb84adfdfa28cf7b64ca740a82c89b8b46fb33a6cf587bdbe09ebcac6"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\sol-r-repro\\report.json",
+    "bytes": 82628,
+    "sha256": "ccedfb6c7b6247d4769e161e8d7b225d18ebd674673ac3228e0f6474c591b93d"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\solR-used.mjs",
+    "bytes": 35084,
+    "sha256": "c51b4f38e7f3b08df0a714fa97afde0f7191d691df8d29589823f31c5ba8dc1b"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\summary-console-final.txt",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\summary-console.txt",
+    "bytes": 8765,
+    "sha256": "7281fa7ee886f8385d575c05129f8257024d387325b5cb07a2ec0d57759bbe11"
+  },
+  {
+    "path": "D:\\bincov\\hideout-runtime\\test-results\\astra-resource-r3\\unit-tests.txt",
+    "bytes": 27868,
+    "sha256": "efef053c568e1e723c51775f881cc1b3eb7e2e9f0d7f1e3d7467427f593af170"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "regression-buildings",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:buildings"
+    ],
+    "sources": [],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:09:54.064Z",
+    "finished": "2026-10-09T07:10:06.535Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-systems",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:systems"
+    ],
+    "sources": [],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:10:06.536Z",
+    "finished": "2026-10-09T07:10:42.786Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-mall-passages",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:mall-passages"
+    ],
+    "sources": [],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:10:42.787Z",
+    "finished": "2026-10-09T07:13:29.645Z",
+    "exitCode": 0,
+    "signal": null
+  },
+  {
+    "id": "regression-mall-landing",
+    "args": [
+      "C:/Program Files/nodejs/node_modules/corepack/dist/corepack.js",
+      "pnpm",
+      "test:mall-landing"
+    ],
+    "sources": [],
+    "environment": {},
+    "node": "v24.19.0",
+    "started": "2026-10-09T07:13:29.646Z",
+    "finished": "2026-10-09T07:13:37.691Z",
+    "exitCode": 0,
+    "signal": null
+  }
+]

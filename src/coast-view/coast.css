@@ -1,0 +1,206 @@
+/* Village sample host (?sample=village): full-viewport Pixi view; the Phaser frame is hidden while it runs. */
+html[data-coast-sample] #frame { visibility: hidden; }
+html[data-coast-sample] #toast { z-index: 120; }
+.coast-sample { --cs-ink: #242321; --cs-panel: #1b1a17f0; --cs-line: #4b4842; --cs-text: #ddd5c3; --cs-muted: #a49b88; --cs-accent: #c9a65e; --cs-bad: #d07a5a;
+  position: fixed; inset: 0; z-index: 60; color: var(--cs-text); font-family: "Bincov Text", "Microsoft YaHei", "PingFang SC", sans-serif; user-select: none; -webkit-user-select: none; touch-action: none;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+.coast-sample .cs-canvas { position: absolute; inset: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+/* Pixi's event system used to write touch-action none and cursor inherit on the canvas; it is detached now (host.ts),
+   so the same two values live here: no browser panning or zooming on the play area, and the ordinary pointer. */
+.coast-sample .cs-canvas canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: inherit; touch-action: none; }
+.coast-sample .cs-hud { position: absolute; inset: 0; pointer-events: none; }
+.coast-sample button { font: inherit; font-size: 16px; pointer-events: auto; cursor: pointer; padding: 4px 12px; background: #2b2a26; color: var(--cs-text); border: 1px solid var(--cs-line); }
+.coast-sample button:hover, .coast-sample button:focus-visible { border-color: var(--cs-accent); outline: none; }
+.coast-sample button:disabled { opacity: .45; cursor: default; }
+/* HUD cards sit on a dark translucent plate so text never fights the asphalt; numbers that change in a fight are large. */
+.cs-status, .cs-arms, .cs-clock, .cs-keys { background: linear-gradient(#17160fe0, #17160fc4); border: 1px solid #3f3b33; box-shadow: 0 2px 0 #0008; }
+.cs-status { position: absolute; left: 12px; top: 12px; display: grid; gap: 5px; padding: 8px 10px 7px; font-size: 16px; line-height: 16px; min-width: 236px; }
+.cs-meter { display: flex; align-items: center; gap: 8px; }
+.cs-meter span { color: var(--cs-muted); width: 2.2em; }
+.cs-meter b { font-weight: 400; color: #efe5cc; font-variant-numeric: tabular-nums; min-width: 4.5em; }
+.cs-bar { width: 140px; height: 10px; background: #0f0e0b; border: 1px solid #000; box-shadow: inset 0 0 0 1px #2e2b25; }
+.cs-bar.thin { height: 6px; }
+.cs-bar > div { height: 100%; width: 100%; background: linear-gradient(#d06a50 0 30%, #a9473a 30%); }
+.cs-bar.thin > div { background: linear-gradient(#b7bd8f 0 40%, #8c9268 40%); }
+.cs-status.low .cs-bar:not(.thin) > div { animation: cs-low 1s steps(2) infinite; }
+@keyframes cs-low { 50% { background: #e8785a; } }
+.cs-state { color: #cfc6b2; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 12px; line-height: 16px; }
+.cs-where { color: var(--cs-muted); font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 12px; line-height: 16px; border-top: 1px solid #3a372f; padding-top: 4px; }
+.cs-arms { position: absolute; right: 14px; bottom: 14px; display: grid; grid-template-columns: 64px auto; grid-template-rows: auto auto; column-gap: 10px; align-items: center; padding: 6px 12px 6px 8px; min-width: 210px; }
+.cs-arms img { grid-row: 1 / 3; width: 64px; height: 64px; image-rendering: pixelated; }
+.cs-arms-text { display: grid; line-height: 1; gap: 4px; }
+.cs-arms-text span { font-size: 14px; color: var(--cs-muted); }
+.cs-arms-text b { font-weight: 400; font-size: 32px; color: #f3e8c8; font-variant-numeric: tabular-nums; letter-spacing: 1px; }
+.cs-arms-text small { font-size: 14px; color: #cfc6b2; }
+.cs-arms.reloading .cs-arms-text b { font-size: 20px; color: var(--cs-accent); }
+.cs-arms.empty .cs-arms-text b { color: var(--cs-bad); }
+.cs-heal { grid-column: 2; font-size: 14px; color: #cfc6b2; display: flex; align-items: center; gap: 4px; }
+.cs-heal b { font-weight: 400; color: #f3e8c8; }
+.cs-heal kbd, .cs-keys kbd { display: inline-block; min-width: 16px; padding: 0 4px; margin-right: 2px; background: #3a372f; color: #f0e3bd; border: 1px solid #5a554a; font: inherit; font-size: 13px; line-height: 16px; text-align: center; }
+.cs-keys { position: absolute; left: 12px; bottom: 12px; padding: 4px 10px; font-size: 14px; line-height: 20px; color: #cfc6b2; }
+.cs-clock { position: absolute; left: 50%; top: 8px; transform: translateX(-50%); display: grid; justify-items: center; padding: 3px 14px 4px; font-size: 20px; line-height: 22px; color: #f3e8c8; font-variant-numeric: tabular-nums; }
+.cs-clock small { font-size: 12px; color: #e0a070; font-family: "Microsoft YaHei", sans-serif; }
+.cs-hits { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
+.cs-hits i { position: absolute; left: -60px; top: -3px; width: 120px; height: 6px; background: linear-gradient(90deg, transparent 80%, #d0573f 80%); transform-origin: 60px 3px; }
+.cs-prompt, .cs-choices { position: absolute; left: 0; top: 0; white-space: nowrap; font-size: 16px; line-height: 16px; padding: 4px 8px; background: #191815b3; border: 1px solid #c9a65e88; color: #f0e3bd; margin: 0; }
+.cs-prompt kbd { display: inline-block; min-width: 18px; margin-right: 6px; padding: 0 4px; background: var(--cs-accent); color: #1b1a17; font: inherit; text-align: center; }
+.cs-choices { list-style: none; pointer-events: auto; }
+.cs-choices li { padding: 2px 0; cursor: pointer; }
+.cs-choices li[aria-current] { color: #fff3cf; }
+.cs-choices .cs-hint { color: var(--cs-muted); cursor: default; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; }
+.cs-toast { position: absolute; left: 50%; top: 52px; transform: translateX(-50%); padding: 6px 14px; background: #1b1a17e6; border: 1px solid var(--cs-line); font-size: 16px; line-height: 16px; opacity: 0; transition: opacity .2s; max-width: 90vw; text-align: center; }
+.cs-toast.on { opacity: 1; } .cs-toast.bad { border-color: var(--cs-bad); color: #f1c4b4; }
+.cs-cross { position: absolute; left: -12px; top: -12px; width: 25px; height: 25px; pointer-events: none;
+  background: linear-gradient(#f0e3bd, #f0e3bd) 12px 0/1px 8px no-repeat, linear-gradient(#f0e3bd, #f0e3bd) 12px 17px/1px 8px no-repeat,
+    linear-gradient(#f0e3bd, #f0e3bd) 0 12px/8px 1px no-repeat, linear-gradient(#f0e3bd, #f0e3bd) 17px 12px/8px 1px no-repeat;
+  filter: drop-shadow(0 0 1px #000) drop-shadow(0 0 1px #000); }
+.cs-cross.precise { background-size: 1px 5px, 1px 5px, 5px 1px, 5px 1px; background-position: 12px 3px, 12px 17px, 3px 12px, 17px 12px; }
+.cs-fade { position: absolute; inset: 0; background: #0b0a09; opacity: 0; pointer-events: none; }
+.cs-fade.on { animation: cs-fade .45s ease-out; }
+@keyframes cs-fade { from { opacity: 1; } to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .cs-fade.on { animation-duration: .01s; } .cs-toast { transition: none; } }
+.cs-touch { display: none; position: absolute; right: 16px; bottom: 16px; gap: 8px; }
+.coast-sample.touch .cs-keys { display: none; }
+.coast-sample.touch .cs-arms { bottom: 76px; }
+.coast-sample.touch .cs-touch { display: flex; }
+.cs-touch button { min-width: 60px; min-height: 48px; background: #1b1a17cc; color: #f0e3bd; border-color: #c9a65e99; }
+.coast-sample.touch .cs-cross { display: none; }
+.cs-panel { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(620px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto; padding: 16px 18px; background: var(--cs-panel); border: 1px solid var(--cs-line); font-size: 16px; line-height: 24px; pointer-events: auto; }
+.cs-panel h2 { margin: 0 0 8px; font-size: 16px; font-weight: 400; color: #f0e3bd; }
+.cs-panel h3 { margin: 4px 0; font-size: 16px; font-weight: 400; color: var(--cs-muted); }
+.cs-panel p { margin: 0 0 10px; }
+.cs-panel .cs-sub { color: var(--cs-muted); font-family: "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 18px; }
+.cs-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; }
+.cs-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.cs-items li { display: flex; align-items: center; gap: 6px; }
+.cs-items li span { flex: 1; }
+.cs-items button { padding: 0 8px; }
+.cs-items .cs-empty { color: var(--cs-muted); }
+.cs-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.cs-volume { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; color: var(--cs-muted); }
+.cs-volume input { flex: 1; max-width: 220px; accent-color: var(--cs-accent); pointer-events: auto; }
+/* Short landscape phones: the 16px pixel font is too tall for the status block; use the small system face there. */
+@media (max-height: 480px) {
+  .cs-status { gap: 2px; padding: 4px 6px; min-width: 0; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 12px; line-height: 14px; }
+  .cs-arms { grid-template-columns: 32px auto; min-width: 0; padding: 3px 8px 3px 4px; } .cs-arms img { width: 32px; height: 32px; }
+  .cs-arms-text b { font-size: 20px; } .cs-arms-text span, .cs-arms-text small, .cs-heal { font-size: 12px; }
+  .cs-meter span { width: 2.4em; } .cs-bar { height: 6px; } .cs-bar.thin { height: 4px; }
+  .cs-clock { font-size: 14px; }
+  .cs-prompt, .cs-choices { font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 12px; line-height: 14px; padding: 3px 6px; }
+  .cs-touch button { min-width: 52px; min-height: 44px; font-size: 14px; }
+}
+@media (max-width: 900px), (max-height: 480px) {
+  .cs-status { top: 6px; left: 8px; } .cs-bar { width: 84px; }
+  .cs-cols { grid-template-columns: 1fr; }
+  .cs-panel { padding: 10px 12px; line-height: 20px; }
+}
+/* Inventory / loot panels reuse the original .grid/.item styles; only the layout around them lives here. */
+/* The world keeps running while looting or sorting: dock the panel to the bottom so the player and the street above
+   stay in view (the camera lifts the player into the free band, see CoastView.panelInset). */
+.cs-panel.cs-inv-panel { width: min(1180px, calc(100vw - 24px)); max-height: calc(100vh - 24px); padding: 12px 14px; top: auto; bottom: 10px; transform: translateX(-50%); box-shadow: 0 -2px 0 #0008; }
+.cs-inv-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+.cs-inv-head h2 { margin: 0; }
+.cs-inv { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; }
+.cs-inv > section { display: grid; gap: 6px; }
+.cs-inv h3 { margin: 0; display: flex; gap: 8px; align-items: baseline; }
+.cs-inv h3 span { font-family: "Microsoft YaHei", sans-serif; font-size: 12px; color: var(--cs-muted); }
+.cs-help { margin: 0; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 18px; color: var(--cs-muted); }
+.cs-help b { color: var(--cs-text); font-weight: 400; }
+.cs-details { flex: 1 1 220px; min-width: 200px; max-width: 320px; display: grid; gap: 6px; align-content: start; }
+.cs-details h3 { color: #f0e3bd; }
+.cs-desc { font-family: "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 18px; margin: 0; }
+.cs-actions button { padding: 2px 10px; }
+.cs-danger { border-color: #7a4a3c !important; }
+.cs-split { display: inline-flex; align-items: center; gap: 4px; font-size: 16px; }
+.cs-split input { width: 3.5em; font: inherit; background: #2b2a26; color: var(--cs-text); border: 1px solid var(--cs-line); padding: 2px 4px; }
+.cs-inv-foot { margin-top: 8px; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; color: var(--cs-muted); }
+.cs-ghost { box-shadow: 0 4px 12px #0008; }
+/* Labels too long for a compact cell (touch, very short screens) use the small system face rather than being cut. */
+.cs-inv-panel .item .item-label.tight { font: 11px/18px "Microsoft YaHei", "PingFang SC", sans-serif; padding: 0; text-align: center; }
+.cs-panel.map { width: min(1000px, calc(100vw - 24px)); }
+.cs-map { display: block; width: 100%; height: auto; max-height: calc(100vh - 180px); object-fit: contain; image-rendering: pixelated; border: 1px solid var(--cs-line); }
+.cs-map-tabs { display: flex; gap: 6px; margin-bottom: 6px; }
+.cs-map-tabs [aria-current] { border-color: var(--cs-accent); color: #f0e3bd; }
+.cs-exit { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
+.cs-exit select { font: inherit; background: #2b2a26; color: var(--cs-text); border: 1px solid var(--cs-line); padding: 2px 6px; }
+.cs-reading { white-space: pre-wrap; margin: 0; max-width: 60ch; }
+.cs-state { font-family: "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 16px; color: #c9c0ac; }
+.cs-radio { position: absolute; left: 50%; top: 36px; transform: translateX(-50%); max-width: min(560px, 70vw); padding: 6px 12px; background: #1b1a17d9; border-left: 3px solid #9aa07a; font-size: 16px; line-height: 20px; color: #e6dcc0; }
+.cs-info { position: absolute; right: 12px; top: 10px; display: grid; gap: 4px; justify-items: end; max-width: 280px; pointer-events: auto; }
+.coast-sample .cs-info button { font-size: 14px; font-family: "Microsoft YaHei", sans-serif; padding: 4px 10px; background: linear-gradient(#17160fe0, #17160fc4); border-color: #6b5f45; color: #f0e3bd; }
+.cs-info details { background: linear-gradient(#17160fe0, #17160fc4); border: 1px solid #3f3b33; padding: 4px 10px; font-family: "Microsoft YaHei", sans-serif; font-size: 13px; line-height: 18px; color: #e6dcc0; }
+.cs-info summary { cursor: pointer; }
+.cs-info section p { margin: 0; color: var(--cs-muted); }
+.cs-info small { color: var(--cs-muted); }
+@media (max-height: 480px) {
+  .cs-radio { top: 30px; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 16px; }
+  .cs-info { top: 6px; right: 8px; } .cs-info details:not([open]) { padding: 2px 6px; }
+  .cs-panel.cs-inv-panel { padding: 8px; }
+}
+/* Map panel: wider on desktop; on short landscape screens floor tabs and the exit choice sit beside the map. */
+.cs-panel.map { width: min(980px, calc(100vw - 24px)); }
+@media (max-height: 480px) {
+  /* The header joins the side column so the map gets the full panel height (the old 100vh-180px cap left 120px). */
+  .cs-panel.map { display: grid; grid-template-columns: minmax(0, 9.5em) minmax(0, 1fr); grid-template-rows: auto auto 1fr; grid-template-areas: "head map" "tabs map" "exit map"; column-gap: 10px; row-gap: 6px; align-content: start; padding: 8px 10px; }
+  .cs-panel.map .cs-inv-head { grid-area: head; margin: 0; flex-direction: column-reverse; gap: 4px; }
+  .cs-panel.map .cs-inv-head h2 { margin: 0; font-family: "Microsoft YaHei", sans-serif; font-size: 13px; line-height: 16px; }
+  .cs-panel.map .cs-map-tabs { grid-area: tabs; flex-direction: column; margin: 0; }
+  .cs-panel.map .cs-map { grid-area: map; width: auto; height: calc(100vh - 52px); max-height: none; max-width: 100%; justify-self: center; }
+  .cs-panel.map .cs-exit { grid-area: exit; flex-direction: column; align-items: stretch; gap: 2px; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; }
+  .cs-panel.map .cs-exit select { max-width: 9em; }
+}
+@media (max-height: 480px) { .coast-sample .cs-panel.map .cs-map-tabs button { min-height: 30px; padding: 0 10px; } }
+/* Feedback layer (round 6): a fixed lens vignette, the hurt edge, hit markers, the reload ring on the reticle, the exit
+   pointer and the end-of-run curtain. All of it is presentation; positions come from the host every frame. */
+.cs-vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 72% 70% at 50% 47%, transparent 62%, rgba(10,9,7,.34) 100%); }
+.cs-hurt { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(ellipse 70% 66% at 50% 50%, transparent 50%, rgba(122,22,14,.5) 86%, rgba(90,10,6,.72) 100%); }
+.cs-ail { position: absolute; inset: 0; pointer-events: none; opacity: 0; --ail: 150,26,16; background: radial-gradient(ellipse 72% 68% at 50% 50%, transparent 56%, rgba(var(--ail),.34) 88%, rgba(var(--ail),.56) 100%); }
+/* Continuous damage readout under the health bar: one chip per cause the Runtime names. */
+.cs-drain { display: flex; flex-wrap: wrap; gap: 4px; min-height: 0; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 16px; }
+.cs-drain:empty { display: none; }
+.cs-drain i { font-style: normal; padding: 0 5px; border-left: 2px solid #c85a48; background: #1b1a17b3; color: #f0d2c4; }
+.cs-drain i[data-cause="pollution"] { border-color: #9aa851; color: #dfe6b8; }
+.cs-drain i[data-cause="dehydration"] { border-color: #c79a4e; color: #f0dfbd; }
+.cs-drain i[data-cause="starvation"] { border-color: #b08a5c; color: #eadcc4; }
+.cs-drain i[data-cause="limit-change"] { border-color: #8f86a8; color: #e2dcef; }
+.cs-cross .cs-ring { position: absolute; left: 0; top: 0; width: 25px; height: 25px; border-radius: 50%; display: none;
+  background: conic-gradient(#e7c873 var(--reload, 0deg), #3a352b66 0); -webkit-mask: radial-gradient(circle, transparent 9.5px, #000 10px, #000 12.5px, transparent 13px); mask: radial-gradient(circle, transparent 9.5px, #000 10px, #000 12.5px, transparent 13px); }
+.cs-cross.reloading .cs-ring { display: block; }
+/* The host moves .cs-hitpop with a translate; the pop itself scales on the inner wrapper, around the hit point. */
+.cs-hitpop { position: absolute; left: 0; top: 0; width: 0; height: 0; pointer-events: none; }
+.cs-hitpop b { position: absolute; left: 0; top: 0; width: 0; height: 0; opacity: 0; }
+.cs-hitpop i { position: absolute; width: 6px; height: 2px; background: #f4ead2; box-shadow: 0 0 0 1px #0009; }
+.cs-hitpop i:nth-child(1) { left: -11px; top: -9px; transform: rotate(45deg); }
+.cs-hitpop i:nth-child(2) { left: 5px; top: -9px; transform: rotate(-45deg); }
+.cs-hitpop i:nth-child(3) { left: -11px; top: 7px; transform: rotate(-45deg); }
+.cs-hitpop i:nth-child(4) { left: 5px; top: 7px; transform: rotate(45deg); }
+.cs-hitpop.on b { animation: cs-hitpop .2s steps(4) forwards; }
+.cs-hitpop.kill i { background: #e8664c; width: 8px; }
+.cs-hitpop.kill.on b { animation: cs-hitkill .42s steps(6) forwards; }
+@keyframes cs-hitpop { 0% { opacity: 1; transform: scale(.7); } 50% { opacity: 1; transform: scale(1.15); } 100% { opacity: 0; transform: scale(1.25); } }
+@keyframes cs-hitkill { 0% { opacity: 1; transform: scale(.7); } 30% { opacity: 1; transform: scale(1.4); } 100% { opacity: 0; transform: scale(1.6); } }
+.cs-exitptr { position: absolute; left: 0; top: 0; width: 0; height: 0; pointer-events: none; }
+.cs-exitptr i { position: absolute; left: -10px; top: -6px; width: 20px; height: 12px; transform: rotate(var(--dir, 90deg)); filter: drop-shadow(0 0 1px #000) drop-shadow(0 1px 0 #000); }
+.cs-exitptr i::before { content: ""; position: absolute; left: 0; top: 5px; width: 11px; height: 2px; background: #d6ec9a; }
+.cs-exitptr i::after { content: ""; position: absolute; left: 10px; top: 0; border: 6px solid transparent; border-left: 10px solid #d6ec9a; border-right: 0; }
+.cs-exitptr span { position: absolute; left: 0; top: 14px; transform: translateX(var(--lx, -50%)); white-space: nowrap; padding: 1px 6px; font-size: 16px; line-height: 16px; color: #e8f2c4; background: #12140fcc; border: 1px solid #6f8250; }
+.cs-exitptr:not(.edge) span { top: -32px; }
+.cs-curtain { position: absolute; inset: 0; display: none; place-items: center; pointer-events: none; }
+.coast-sample.outro .cs-curtain { display: grid; }
+.cs-curtain b { font-weight: 400; font-size: 32px; line-height: 32px; letter-spacing: 6px; color: #efe5cc; text-shadow: 0 2px 0 #000, 0 0 12px #000; opacity: 0; }
+.coast-sample[data-outro="died"] .cs-curtain b { color: #f0c8b8; }
+.coast-sample[data-outro="extract"] .cs-curtain b { color: #e2f0b4; }
+.coast-sample.outro .cs-status, .coast-sample.outro .cs-arms, .coast-sample.outro .cs-clock, .coast-sample.outro .cs-keys, .coast-sample.outro .cs-info,
+.coast-sample.outro .cs-prompt, .coast-sample.outro .cs-choices, .coast-sample.outro .cs-touch, .coast-sample.outro .cs-exitptr, .coast-sample.outro .cs-cross,
+.coast-sample.outro .cs-hits, .coast-sample.outro .cs-radio, .coast-sample.outro .cs-toast, .coast-sample.outro .cs-hitpop { visibility: hidden; }
+/* The pixel face is drawn for 16 px and its integer multiples; short screens use the small system face instead. */
+@media (max-height: 480px) { .cs-exitptr span { font-family: "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 14px; } }
+@media (prefers-reduced-motion: reduce) { .cs-hitpop.on b, .cs-hitpop.kill.on b { animation-duration: .01s; } }
+/* Off-screen shooters: an orange chevron on the screen edge pointing out toward them, fading in under a second. */
+.cs-threats i { position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; opacity: 0; pointer-events: none;
+  background: linear-gradient(45deg, transparent 46%, #e8774f 46%, #e8774f 60%, transparent 60%) 0 0/9px 9px no-repeat,
+    linear-gradient(-45deg, transparent 46%, #e8774f 46%, #e8774f 60%, transparent 60%) 0 9px/9px 9px no-repeat;
+  filter: drop-shadow(0 0 1px #000) drop-shadow(0 0 1px #000); }
+.coast-sample.outro .cs-threats, .coast-sample.outro .cs-ail { visibility: hidden; }
+/* Very short landscape phones: the status card keeps its bars; location and the routine body line give way. */
+@media (max-height: 340px) { .cs-where { display: none; } .cs-state.calm { display: none; } }

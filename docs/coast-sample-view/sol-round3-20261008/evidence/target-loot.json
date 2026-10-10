@@ -1,0 +1,52 @@
+{
+  "steps": [
+    {
+      "id": "F06 native wheel/E select exact duplicate-name crate and adjacent corpse ID",
+      "status": "passed",
+      "detail": {
+        "selected": [
+          {
+            "id": "crate-0",
+            "name": "搜刮 · 同名物资箱 1",
+            "actual": "crate-0"
+          },
+          {
+            "id": "corpse-enemy-2",
+            "name": "搜刮 · 邻近尸体",
+            "actual": "corpse-enemy-2"
+          },
+          {
+            "id": "crate-11",
+            "name": "搜刮 · 同名物资箱 2",
+            "actual": "crate-11"
+          }
+        ],
+        "labels": [
+          "▶ 同名物资箱 1",
+          "邻近尸体",
+          "同名物资箱 2"
+        ],
+        "numbered": true,
+        "frontendNumbering": "Runtime supplies suffix1/2 for duplicate names; labels and actual target ID agree."
+      }
+    },
+    {
+      "id": "F14 real sample partial transfer fault preserves both ends; retry then takes one",
+      "status": "passed",
+      "detail": {
+        "result": "save-failed",
+        "committed": "committed",
+        "quantities": {
+          "bag": 1,
+          "box": 2
+        },
+        "uiQuantityControl": "This probe calls the real service; native split/place UI is tested separately by U03/U06."
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "method": "Decoder-validated saved-world fixtures. Native wheel and E choose duplicate crates/corpse; real Runtime services and actual localStorage.setItem fault test partial transfer. No frontend change.",
+  "browser": "154.0.8037.98",
+  "at": "2026-10-08T04:24:19.310Z"
+}

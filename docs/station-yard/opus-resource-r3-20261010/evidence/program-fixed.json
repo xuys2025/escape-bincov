@@ -1,0 +1,836 @@
+{
+  "build": "dist/index.html",
+  "buildSHA256": "112e7c8e37c91a218351b2fee03c008872bee5ca563d4262e431a57a845c5ef1",
+  "browser": "154.0.8037.99",
+  "startedAt": "2026-10-10T15:14:58.256Z",
+  "steps": [
+    {
+      "name": "S1 context restore: old render-target slots dropped",
+      "status": "passed",
+      "detail": {
+        "initialEmpty": 0,
+        "rows": [
+          {
+            "cycle": 1,
+            "oldTargets": [
+              387,
+              388,
+              389
+            ],
+            "newTargets": [
+              418,
+              419,
+              420
+            ],
+            "staleTargetSlots": [],
+            "empty": 0,
+            "live": 166,
+            "released": [
+              {
+                "texture": "collected",
+                "source": "collected"
+              },
+              {
+                "texture": "collected",
+                "source": "collected"
+              },
+              {
+                "texture": "collected",
+                "source": "collected"
+              }
+            ],
+            "lost": true,
+            "activeWhileLost": false,
+            "framesWhileLost": 84,
+            "secondsWhileLost": 0.509,
+            "restored": {
+              "lost": false,
+              "active": true,
+              "maxBatchable": 16
+            }
+          },
+          {
+            "cycle": 2,
+            "oldTargets": [
+              418,
+              419,
+              420
+            ],
+            "newTargets": [
+              421,
+              422,
+              423
+            ],
+            "staleTargetSlots": [],
+            "empty": 4,
+            "live": 166,
+            "released": [
+              {
+                "texture": "collected",
+                "source": "collected"
+              },
+              {
+                "texture": "collected",
+                "source": "collected"
+              },
+              {
+                "texture": "collected",
+                "source": "collected"
+              }
+            ],
+            "lost": true,
+            "activeWhileLost": false,
+            "framesWhileLost": 84,
+            "secondsWhileLost": 0.509,
+            "restored": {
+              "lost": false,
+              "active": true,
+              "maxBatchable": 16
+            }
+          },
+          {
+            "cycle": 3,
+            "oldTargets": [
+              421,
+              422,
+              423
+            ],
+            "newTargets": [
+              428,
+              429,
+              430
+            ],
+            "staleTargetSlots": [],
+            "empty": 5,
+            "live": 165,
+            "released": [
+              {
+                "texture": "collected",
+                "source": "collected"
+              },
+              {
+                "texture": "collected",
+                "source": "collected"
+              },
+              {
+                "texture": "collected",
+                "source": "collected"
+              }
+            ],
+            "lost": true,
+            "activeWhileLost": false,
+            "framesWhileLost": 85,
+            "secondsWhileLost": 0.515,
+            "restored": {
+              "lost": false,
+              "active": true,
+              "maxBatchable": 16
+            }
+          },
+          {
+            "cycle": 4,
+            "oldTargets": [
+              428,
+              429,
+              430
+            ],
+            "newTargets": [
+              431,
+              432,
+              433
+            ],
+            "staleTargetSlots": [],
+            "empty": 9,
+            "live": 165,
+            "released": [
+              {
+                "texture": "collected",
+                "source": "collected"
+              },
+              {
+                "texture": "collected",
+                "source": "collected"
+              },
+              {
+                "texture": "collected",
+                "source": "collected"
+              }
+            ],
+            "lost": true,
+            "activeWhileLost": false,
+            "framesWhileLost": 85,
+            "secondsWhileLost": 0.515,
+            "restored": {
+              "lost": false,
+              "active": true,
+              "maxBatchable": 16
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "S2 window resize: replaced render targets leave no placeholders",
+      "status": "passed",
+      "detail": [
+        {
+          "size": [
+            1100,
+            700
+          ],
+          "oldTargets": [
+            431,
+            432,
+            433
+          ],
+          "newTargets": [
+            438,
+            439,
+            440
+          ],
+          "empty": [
+            6,
+            4
+          ]
+        },
+        {
+          "size": [
+            1920,
+            1080
+          ],
+          "oldTargets": [
+            438,
+            439,
+            440
+          ],
+          "newTargets": [
+            441,
+            442,
+            443
+          ],
+          "empty": [
+            4,
+            4
+          ]
+        },
+        {
+          "size": [
+            1280,
+            720
+          ],
+          "oldTargets": [
+            441,
+            442,
+            443
+          ],
+          "newTargets": [
+            444,
+            445,
+            446
+          ],
+          "empty": [
+            4,
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "name": "P1 graphics program kept across restores, rebound in each new context",
+      "status": "passed",
+      "detail": [
+        {
+          "label": "start",
+          "programIndex": 0,
+          "shaderName": "graphics-fragment",
+          "samplerListeners": 2,
+          "maxBatchable": 16
+        },
+        {
+          "label": "restore-1",
+          "programIndex": 0,
+          "shaderName": "graphics-fragment",
+          "samplerListeners": 2,
+          "maxBatchable": 16
+        },
+        {
+          "label": "restore-2",
+          "programIndex": 0,
+          "shaderName": "graphics-fragment",
+          "samplerListeners": 2,
+          "maxBatchable": 16
+        },
+        {
+          "label": "restore-3",
+          "programIndex": 0,
+          "shaderName": "graphics-fragment",
+          "samplerListeners": 2,
+          "maxBatchable": 16
+        }
+      ]
+    },
+    {
+      "name": "C1 restored context with fewer texture units gets a program for that count",
+      "status": "passed",
+      "detail": {
+        "maxBatchable": 8,
+        "programIndex": 1,
+        "shaderName": "graphics-fragment-2",
+        "samplerValues": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "name": "C2 same reduced capability again reuses its program",
+      "status": "passed",
+      "detail": {
+        "programIndex": 1,
+        "shaderName": "graphics-fragment-2"
+      }
+    },
+    {
+      "name": "C3 back to the full capability returns to the first program",
+      "status": "passed",
+      "detail": {
+        "programIndex": 0,
+        "programsSeen": 2,
+        "shaderName": "graphics-fragment"
+      }
+    },
+    {
+      "name": "C4 kept program sources equal Pixi's own compile per capability",
+      "status": "passed",
+      "detail": {
+        "sources": {
+          "8": [
+            "bffe31528909ecc648190f2a7a7249aed53c0efa511e668993d4e8941ddd3288:b9744cf5379fb386d171a50389ee34fb6e2389e3319c1ae70726d1f7abce4dd7"
+          ],
+          "16": [
+            "bffe31528909ecc648190f2a7a7249aed53c0efa511e668993d4e8941ddd3288:a3e9421ffe3cfc674d418127da8622bd7aceea8ba081856128cc2d7d0f4d22c0"
+          ]
+        },
+        "reference": "ce732ff66cc80c5da1b5a041eec16d16438ad977f3f52c706a18a771159a6a62"
+      }
+    },
+    {
+      "name": "R1 yard still draws and takes input after the restores",
+      "status": "passed",
+      "detail": {
+        "picture": {
+          "mean": 41.3,
+          "sd": 14.9
+        },
+        "walked": 45.5
+      }
+    }
+  ],
+  "probes": [
+    {
+      "label": "start",
+      "adaptorIsSubclass": true,
+      "programIndex": 0,
+      "programsSeen": 1,
+      "shaderName": "graphics-fragment",
+      "samplerArray": 16,
+      "maxBatchable": 16,
+      "gpu": {
+        "isProgram": true,
+        "linked": true,
+        "uniforms": [
+          "uColor",
+          "uProjectionMatrix",
+          "uResolution",
+          "uRound",
+          "uTextures",
+          "uTransformMatrix",
+          "uWorldColorAlpha",
+          "uWorldTransformMatrix"
+        ],
+        "uniformErrors": 0,
+        "samplerValues": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "glError": 0,
+      "samplerListeners": 2,
+      "pixels": {
+        "red": [
+          128,
+          0,
+          0,
+          255
+        ],
+        "green": [
+          0,
+          128,
+          0,
+          255
+        ],
+        "blue": [
+          0,
+          0,
+          128,
+          255
+        ],
+        "outside": [
+          0,
+          0,
+          0,
+          255
+        ]
+      },
+      "vertexSHA256": "bffe31528909ecc648190f2a7a7249aed53c0efa511e668993d4e8941ddd3288",
+      "fragmentSHA256": "a3e9421ffe3cfc674d418127da8622bd7aceea8ba081856128cc2d7d0f4d22c0"
+    },
+    {
+      "label": "restore-1",
+      "adaptorIsSubclass": true,
+      "programIndex": 0,
+      "programsSeen": 1,
+      "shaderName": "graphics-fragment",
+      "samplerArray": 16,
+      "maxBatchable": 16,
+      "gpu": {
+        "isProgram": true,
+        "linked": true,
+        "uniforms": [
+          "uColor",
+          "uProjectionMatrix",
+          "uResolution",
+          "uRound",
+          "uTextures",
+          "uTransformMatrix",
+          "uWorldColorAlpha",
+          "uWorldTransformMatrix"
+        ],
+        "uniformErrors": 0,
+        "samplerValues": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "glError": 0,
+      "samplerListeners": 2,
+      "pixels": {
+        "red": [
+          128,
+          0,
+          0,
+          255
+        ],
+        "green": [
+          0,
+          128,
+          0,
+          255
+        ],
+        "blue": [
+          0,
+          0,
+          128,
+          255
+        ],
+        "outside": [
+          0,
+          0,
+          0,
+          255
+        ]
+      },
+      "vertexSHA256": "bffe31528909ecc648190f2a7a7249aed53c0efa511e668993d4e8941ddd3288",
+      "fragmentSHA256": "a3e9421ffe3cfc674d418127da8622bd7aceea8ba081856128cc2d7d0f4d22c0"
+    },
+    {
+      "label": "restore-2",
+      "adaptorIsSubclass": true,
+      "programIndex": 0,
+      "programsSeen": 1,
+      "shaderName": "graphics-fragment",
+      "samplerArray": 16,
+      "maxBatchable": 16,
+      "gpu": {
+        "isProgram": true,
+        "linked": true,
+        "uniforms": [
+          "uColor",
+          "uProjectionMatrix",
+          "uResolution",
+          "uRound",
+          "uTextures",
+          "uTransformMatrix",
+          "uWorldColorAlpha",
+          "uWorldTransformMatrix"
+        ],
+        "uniformErrors": 0,
+        "samplerValues": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "glError": 0,
+      "samplerListeners": 2,
+      "pixels": {
+        "red": [
+          128,
+          0,
+          0,
+          255
+        ],
+        "green": [
+          0,
+          128,
+          0,
+          255
+        ],
+        "blue": [
+          0,
+          0,
+          128,
+          255
+        ],
+        "outside": [
+          0,
+          0,
+          0,
+          255
+        ]
+      },
+      "vertexSHA256": "bffe31528909ecc648190f2a7a7249aed53c0efa511e668993d4e8941ddd3288",
+      "fragmentSHA256": "a3e9421ffe3cfc674d418127da8622bd7aceea8ba081856128cc2d7d0f4d22c0"
+    },
+    {
+      "label": "restore-3",
+      "adaptorIsSubclass": true,
+      "programIndex": 0,
+      "programsSeen": 1,
+      "shaderName": "graphics-fragment",
+      "samplerArray": 16,
+      "maxBatchable": 16,
+      "gpu": {
+        "isProgram": true,
+        "linked": true,
+        "uniforms": [
+          "uColor",
+          "uProjectionMatrix",
+          "uResolution",
+          "uRound",
+          "uTextures",
+          "uTransformMatrix",
+          "uWorldColorAlpha",
+          "uWorldTransformMatrix"
+        ],
+        "uniformErrors": 0,
+        "samplerValues": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "glError": 0,
+      "samplerListeners": 2,
+      "pixels": {
+        "red": [
+          128,
+          0,
+          0,
+          255
+        ],
+        "green": [
+          0,
+          128,
+          0,
+          255
+        ],
+        "blue": [
+          0,
+          0,
+          128,
+          255
+        ],
+        "outside": [
+          0,
+          0,
+          0,
+          255
+        ]
+      },
+      "vertexSHA256": "bffe31528909ecc648190f2a7a7249aed53c0efa511e668993d4e8941ddd3288",
+      "fragmentSHA256": "a3e9421ffe3cfc674d418127da8622bd7aceea8ba081856128cc2d7d0f4d22c0"
+    },
+    {
+      "label": "units-8",
+      "adaptorIsSubclass": true,
+      "programIndex": 1,
+      "programsSeen": 2,
+      "shaderName": "graphics-fragment-2",
+      "samplerArray": 8,
+      "maxBatchable": 8,
+      "gpu": {
+        "isProgram": true,
+        "linked": true,
+        "uniforms": [
+          "uColor",
+          "uProjectionMatrix",
+          "uResolution",
+          "uRound",
+          "uTextures",
+          "uTransformMatrix",
+          "uWorldColorAlpha",
+          "uWorldTransformMatrix"
+        ],
+        "uniformErrors": 0,
+        "samplerValues": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "glError": 0,
+      "samplerListeners": 2,
+      "pixels": {
+        "red": [
+          128,
+          0,
+          0,
+          255
+        ],
+        "green": [
+          0,
+          128,
+          0,
+          255
+        ],
+        "blue": [
+          0,
+          0,
+          128,
+          255
+        ],
+        "outside": [
+          0,
+          0,
+          0,
+          255
+        ]
+      },
+      "vertexSHA256": "bffe31528909ecc648190f2a7a7249aed53c0efa511e668993d4e8941ddd3288",
+      "fragmentSHA256": "b9744cf5379fb386d171a50389ee34fb6e2389e3319c1ae70726d1f7abce4dd7"
+    },
+    {
+      "label": "units-8-again",
+      "adaptorIsSubclass": true,
+      "programIndex": 1,
+      "programsSeen": 2,
+      "shaderName": "graphics-fragment-2",
+      "samplerArray": 8,
+      "maxBatchable": 8,
+      "gpu": {
+        "isProgram": true,
+        "linked": true,
+        "uniforms": [
+          "uColor",
+          "uProjectionMatrix",
+          "uResolution",
+          "uRound",
+          "uTextures",
+          "uTransformMatrix",
+          "uWorldColorAlpha",
+          "uWorldTransformMatrix"
+        ],
+        "uniformErrors": 0,
+        "samplerValues": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      "glError": 0,
+      "samplerListeners": 2,
+      "pixels": {
+        "red": [
+          128,
+          0,
+          0,
+          255
+        ],
+        "green": [
+          0,
+          128,
+          0,
+          255
+        ],
+        "blue": [
+          0,
+          0,
+          128,
+          255
+        ],
+        "outside": [
+          0,
+          0,
+          0,
+          255
+        ]
+      },
+      "vertexSHA256": "bffe31528909ecc648190f2a7a7249aed53c0efa511e668993d4e8941ddd3288",
+      "fragmentSHA256": "b9744cf5379fb386d171a50389ee34fb6e2389e3319c1ae70726d1f7abce4dd7"
+    },
+    {
+      "label": "units-native",
+      "adaptorIsSubclass": true,
+      "programIndex": 0,
+      "programsSeen": 2,
+      "shaderName": "graphics-fragment",
+      "samplerArray": 16,
+      "maxBatchable": 16,
+      "gpu": {
+        "isProgram": true,
+        "linked": true,
+        "uniforms": [
+          "uColor",
+          "uProjectionMatrix",
+          "uResolution",
+          "uRound",
+          "uTextures",
+          "uTransformMatrix",
+          "uWorldColorAlpha",
+          "uWorldTransformMatrix"
+        ],
+        "uniformErrors": 0,
+        "samplerValues": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "glError": 0,
+      "samplerListeners": 3,
+      "pixels": {
+        "red": [
+          128,
+          0,
+          0,
+          255
+        ],
+        "green": [
+          0,
+          128,
+          0,
+          255
+        ],
+        "blue": [
+          0,
+          0,
+          128,
+          255
+        ],
+        "outside": [
+          0,
+          0,
+          0,
+          255
+        ]
+      },
+      "vertexSHA256": "bffe31528909ecc648190f2a7a7249aed53c0efa511e668993d4e8941ddd3288",
+      "fragmentSHA256": "a3e9421ffe3cfc674d418127da8622bd7aceea8ba081856128cc2d7d0f4d22c0"
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "limits": {
+    "maxTextures": 16,
+    "maxBatchable": 16
+  },
+  "finishedAt": "2026-10-10T15:15:22.566Z",
+  "summary": {
+    "passed": 8,
+    "total": 8
+  }
+}

@@ -23,6 +23,9 @@
     "test:loot": "node scripts/loot-browser-test.mjs",
     "test:loot-target": "node --import tsx scripts/loot-target-test.mjs",
     "test:qol": "node scripts/qol-test.mjs",
+    "test:hideout": "node scripts/hideout-browser-test.mjs",
+    "test:station": "node --import tsx scripts/station-browser-test.mjs",
+    "test:shop-drag": "node scripts/shop-drag-test.mjs",
     "test:qol-expansion": "node scripts/qol-expansion-test.mjs",
     "test:expansion": "node scripts/expansion-browser-test.mjs",
     "test:expansion-benchmark": "node --import tsx scripts/expansion-benchmark.mjs",
@@ -36,7 +39,8 @@
     "test:title-water": "node --import tsx scripts/title-water-review.mjs"
   },
   "dependencies": {
-    "phaser": "3.90.0"
+    "phaser": "3.90.0",
+    "pixi.js": "8.22.0"
   },
   "devDependencies": {
     "@types/node": "^24.0.0",

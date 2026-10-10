@@ -1,0 +1,403 @@
+{
+  "manifest": "assets/station/manifest.json",
+  "count": 33,
+  "assets": [
+    {
+      "id": "station-npc-xu-s-idle-f0-v1",
+      "path": "assets/station/v1/station-npc-xu-s-idle-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "6dd36af25f9b263e80cc0a7e9a947a5cccea4ac437ae1ceccf521d6ece4b19d8"
+    },
+    {
+      "id": "station-npc-xu-s-idle-f1-v1",
+      "path": "assets/station/v1/station-npc-xu-s-idle-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "0a0eec12d21d7cb3468e6b73077553ebf9dfa9394a0e423c8bb1bbb60ce13aac"
+    },
+    {
+      "id": "station-npc-xu-s-talk-f0-v1",
+      "path": "assets/station/v1/station-npc-xu-s-talk-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "d4f47efaecf8e26743d78745aa49a5ed5a0e2bcf47d94c803988255a8c9a4a32"
+    },
+    {
+      "id": "station-npc-xu-s-talk-f1-v1",
+      "path": "assets/station/v1/station-npc-xu-s-talk-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "2dd3df0908ea279bcf13cab62b8e9dc9d3277c62c86a694f3d7e9e979e4f74f3"
+    },
+    {
+      "id": "station-npc-shuan-s-idle-f0-v1",
+      "path": "assets/station/v1/station-npc-shuan-s-idle-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "7109ff69271f7d0ee544634cd7f20f33a5ceabbd8e6c5fbcea0ba6c2985fc6d3"
+    },
+    {
+      "id": "station-npc-shuan-s-idle-f1-v1",
+      "path": "assets/station/v1/station-npc-shuan-s-idle-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "b632c0fe58eba7f40020222c898d4181604e54fa79e2a59a0c11332a0447d965"
+    },
+    {
+      "id": "station-npc-shuan-s-talk-f0-v1",
+      "path": "assets/station/v1/station-npc-shuan-s-talk-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "83a45915adbc09ff6777c6bd912ae6763c595febc8ad5d7fc62c5574cc54f26a"
+    },
+    {
+      "id": "station-npc-shuan-s-talk-f1-v1",
+      "path": "assets/station/v1/station-npc-shuan-s-talk-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "a93f20a8f770f88fd09d5098358a7fbc0934e500b25b1114eb1f771ce505a7a4"
+    },
+    {
+      "id": "station-npc-shuan-n-work-f0-v1",
+      "path": "assets/station/v1/station-npc-shuan-n-work-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "abc125d2277ce76731eefddb2a3723305f591b5c593bf13b00cfcd65c196a9a2"
+    },
+    {
+      "id": "station-npc-shuan-n-work-f1-v1",
+      "path": "assets/station/v1/station-npc-shuan-n-work-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "b45cf185fb11eef2a3daf5297fc2f0af4a8a13b8cbb438e6fece76de9cace616"
+    },
+    {
+      "id": "station-npc-cai-s-idle-f0-v1",
+      "path": "assets/station/v1/station-npc-cai-s-idle-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "d4e970a20fdac91bf84bbcd8cd3f797abbb2288e9a9428c0f8bb526e4e9ebe8b"
+    },
+    {
+      "id": "station-npc-cai-s-idle-f1-v1",
+      "path": "assets/station/v1/station-npc-cai-s-idle-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "7c01ca5d63fdd892db8cf95d1a450dbb5beac0221a1adbf5c9387e78337dd54a"
+    },
+    {
+      "id": "station-npc-cai-s-talk-f0-v1",
+      "path": "assets/station/v1/station-npc-cai-s-talk-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "e4f9b89bc917f162a9adca4100e59586984edc92eeafc01fc0f3a493a8c8c18e"
+    },
+    {
+      "id": "station-npc-cai-s-talk-f1-v1",
+      "path": "assets/station/v1/station-npc-cai-s-talk-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "10838cad8808e4e41cd846318c50974b0fcc8bda7097041d2aaeed2dbf886898"
+    },
+    {
+      "id": "station-npc-cai-n-work-f0-v1",
+      "path": "assets/station/v1/station-npc-cai-n-work-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "e1b9a456581b53bde800e6bcda2d8a7ad6340b77d7cc646ffa58eabac4996213"
+    },
+    {
+      "id": "station-npc-cai-n-work-f1-v1",
+      "path": "assets/station/v1/station-npc-cai-n-work-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "cb8f7b7587bd2030c3829dda6495c0b632e2eed47de664414f3e8946bfc05c52"
+    },
+    {
+      "id": "station-npc-cook-s-idle-f0-v1",
+      "path": "assets/station/v1/station-npc-cook-s-idle-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "77efab11185d1723087ccc81423d63b237dc05c90a78b5c85ce2fd886acf00d1"
+    },
+    {
+      "id": "station-npc-cook-s-idle-f1-v1",
+      "path": "assets/station/v1/station-npc-cook-s-idle-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "e23e6a8bc3a10871504767b689820be43642ff3d7529618f313384d4faeced0d"
+    },
+    {
+      "id": "station-npc-cook-s-talk-f0-v1",
+      "path": "assets/station/v1/station-npc-cook-s-talk-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "cb3979f082149781d49fbc8ed898523cf38b922f49d9aba12f3cf7316ab67e80"
+    },
+    {
+      "id": "station-npc-cook-s-talk-f1-v1",
+      "path": "assets/station/v1/station-npc-cook-s-talk-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "3462cc462460cdbcd0486821a4b8373544e974febe6ef1b4cee28f8b1cff5e2e"
+    },
+    {
+      "id": "station-npc-cook-n-work-f0-v1",
+      "path": "assets/station/v1/station-npc-cook-n-work-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "0ec2b157ee62cd1dff531f11670bf6749cf6e8822e49b1127eccf42472e07454"
+    },
+    {
+      "id": "station-npc-cook-n-work-f1-v1",
+      "path": "assets/station/v1/station-npc-cook-n-work-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "sha256": "0cede8f1a52ac66c7f455ce68fef4450a028d9fbeb0aa8013db6ad0179b8d103"
+    },
+    {
+      "id": "station-prop-counter-v1",
+      "path": "assets/station/v1/station-prop-counter-v1.png",
+      "w": 128,
+      "h": 54,
+      "sha256": "272f2ba9c635e631c6fc7689405095929d19ed937984352e7132f8fd36a9422b"
+    },
+    {
+      "id": "station-prop-desk-v1",
+      "path": "assets/station/v1/station-prop-desk-v1.png",
+      "w": 64,
+      "h": 52,
+      "sha256": "327d4057c062a691b212b83cd048ee826244ff9c0e9065d3d3f44d5011919589"
+    },
+    {
+      "id": "station-prop-radio-desk-v1",
+      "path": "assets/station/v1/station-prop-radio-desk-v1.png",
+      "w": 96,
+      "h": 70,
+      "sha256": "972c1627d61a5a103c6a9bce489f3332e38b0864819f8f23b7a390e35cfd6a89"
+    },
+    {
+      "id": "station-prop-generator-stopped-v1",
+      "path": "assets/station/v1/station-prop-generator-stopped-v1.png",
+      "w": 64,
+      "h": 98,
+      "sha256": "b8084f1cfc2e3bf32bea9adc450b707e5c8762f0b2b7dcb0bec3db644dd249dc"
+    },
+    {
+      "id": "station-prop-generator-running-v1",
+      "path": "assets/station/v1/station-prop-generator-running-v1.png",
+      "w": 64,
+      "h": 98,
+      "sha256": "be3248dad078571f62a8dc7da4934a84b4530b2265fce0b139a1be4bd000341c"
+    },
+    {
+      "id": "station-prop-stove-v1",
+      "path": "assets/station/v1/station-prop-stove-v1.png",
+      "w": 96,
+      "h": 62,
+      "sha256": "4f66a68ebea2585a13356a58c249d2b8c1660eaf61d8a172cd7f506a485e2e58"
+    },
+    {
+      "id": "station-prop-pool-v1",
+      "path": "assets/station/v1/station-prop-pool-v1.png",
+      "w": 96,
+      "h": 72,
+      "sha256": "8b5c95d39f8fa4ec3bdfcdc684e989947d61445414a2ab26ae1e44f88af633d0"
+    },
+    {
+      "id": "station-prop-radio-desk-emit-v1",
+      "path": "assets/station/v1/station-prop-radio-desk-emit-v1.png",
+      "w": 96,
+      "h": 70,
+      "sha256": "2a96c2daf1895b63f7e6b7a78435c577ba5d75c1e242b6aa60d1ed9f2ba04582"
+    },
+    {
+      "id": "station-prop-generator-stopped-emit-v1",
+      "path": "assets/station/v1/station-prop-generator-stopped-emit-v1.png",
+      "w": 64,
+      "h": 98,
+      "sha256": "4e51d4203b8160ae42145a5c4d1cba8b3493c5be4855513c641e6a335c24a69a"
+    },
+    {
+      "id": "station-prop-generator-running-emit-v1",
+      "path": "assets/station/v1/station-prop-generator-running-emit-v1.png",
+      "w": 64,
+      "h": 98,
+      "sha256": "4e51d4203b8160ae42145a5c4d1cba8b3493c5be4855513c641e6a335c24a69a"
+    },
+    {
+      "id": "station-prop-stove-emit-v1",
+      "path": "assets/station/v1/station-prop-stove-emit-v1.png",
+      "w": 96,
+      "h": 62,
+      "sha256": "2989892f007861bbaa339c5cd716e5abceda17b10b405bbf3e7195c01bf31f53"
+    }
+  ],
+  "live": {
+    "delivered": [
+      "station-npc-cai-n-work-f0-v1",
+      "station-npc-cai-n-work-f1-v1",
+      "station-npc-cai-s-idle-f0-v1",
+      "station-npc-cai-s-idle-f1-v1",
+      "station-npc-cai-s-talk-f0-v1",
+      "station-npc-cai-s-talk-f1-v1",
+      "station-npc-cook-n-work-f0-v1",
+      "station-npc-cook-n-work-f1-v1",
+      "station-npc-cook-s-idle-f0-v1",
+      "station-npc-cook-s-idle-f1-v1",
+      "station-npc-cook-s-talk-f0-v1",
+      "station-npc-cook-s-talk-f1-v1",
+      "station-npc-shuan-n-work-f0-v1",
+      "station-npc-shuan-n-work-f1-v1",
+      "station-npc-shuan-s-idle-f0-v1",
+      "station-npc-shuan-s-idle-f1-v1",
+      "station-npc-shuan-s-talk-f0-v1",
+      "station-npc-shuan-s-talk-f1-v1",
+      "station-npc-xu-s-idle-f0-v1",
+      "station-npc-xu-s-idle-f1-v1",
+      "station-npc-xu-s-talk-f0-v1",
+      "station-npc-xu-s-talk-f1-v1",
+      "station-prop-counter-v1",
+      "station-prop-desk-v1",
+      "station-prop-generator-running-emit-v1",
+      "station-prop-generator-running-v1",
+      "station-prop-generator-stopped-emit-v1",
+      "station-prop-generator-stopped-v1",
+      "station-prop-pool-v1",
+      "station-prop-radio-desk-emit-v1",
+      "station-prop-radio-desk-v1",
+      "station-prop-stove-emit-v1",
+      "station-prop-stove-v1"
+    ],
+    "used": [
+      "station-npc-cai-n-work-f0-v1",
+      "station-npc-cai-n-work-f1-v1",
+      "station-npc-cai-s-idle-f0-v1",
+      "station-npc-cai-s-idle-f1-v1",
+      "station-npc-cai-s-talk-f0-v1",
+      "station-npc-cai-s-talk-f1-v1",
+      "station-npc-cook-n-work-f0-v1",
+      "station-npc-cook-n-work-f1-v1",
+      "station-npc-cook-s-idle-f0-v1",
+      "station-npc-cook-s-idle-f1-v1",
+      "station-npc-cook-s-talk-f0-v1",
+      "station-npc-cook-s-talk-f1-v1",
+      "station-npc-shuan-n-work-f0-v1",
+      "station-npc-shuan-n-work-f1-v1",
+      "station-npc-shuan-s-idle-f0-v1",
+      "station-npc-shuan-s-idle-f1-v1",
+      "station-npc-shuan-s-talk-f0-v1",
+      "station-npc-shuan-s-talk-f1-v1",
+      "station-npc-xu-s-idle-f0-v1",
+      "station-npc-xu-s-idle-f1-v1",
+      "station-npc-xu-s-talk-f0-v1",
+      "station-npc-xu-s-talk-f1-v1",
+      "station-prop-counter-v1",
+      "station-prop-desk-v1",
+      "station-prop-generator-running-emit-v1",
+      "station-prop-generator-running-v1",
+      "station-prop-generator-stopped-emit-v1",
+      "station-prop-generator-stopped-v1",
+      "station-prop-pool-v1",
+      "station-prop-radio-desk-emit-v1",
+      "station-prop-radio-desk-v1",
+      "station-prop-stove-emit-v1",
+      "station-prop-stove-v1"
+    ],
+    "rejected": [],
+    "missing": [],
+    "roofGlows": [
+      {
+        "room": "cold",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "canteen",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "dorm",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "gen",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "radio",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "cold",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "cold",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "canteen",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "canteen",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "canteen",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "dorm",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "gen",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "gen",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "radio",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "radio",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "work",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "clinic",
+        "alpha": 0,
+        "visible": false
+      },
+      {
+        "room": "clinic",
+        "alpha": 0,
+        "visible": false
+      }
+    ]
+  }
+}

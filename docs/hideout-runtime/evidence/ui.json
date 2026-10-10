@@ -1,0 +1,201 @@
+{
+  "startedAt": "2026-10-09T16:11:42.234Z",
+  "checks": [
+    {
+      "viewport": "1280x720",
+      "view": "menu",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "help",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "gear",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "item",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "arms",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "med",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "quests",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "home",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "ready-quest",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "expanded-stash",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "completed-quests",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "upgraded-home",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "raid",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "inventory",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "inventory-item",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "map",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "pause",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "abandon",
+      "status": "passed"
+    },
+    {
+      "viewport": "1280x720",
+      "view": "result",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "menu",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "help",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "gear",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "item",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "arms",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "med",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "quests",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "home",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "ready-quest",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "expanded-stash",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "completed-quests",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "upgraded-home",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "raid",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "inventory",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "inventory-item",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "map",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "pause",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "abandon",
+      "status": "passed"
+    },
+    {
+      "viewport": "1920x1080",
+      "view": "result",
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "methodology": "Offline file HTML, fresh saves, real UI input at both required viewports. Expanded stash, completed quests and raid positions use explicit fixtures. Screenshots are unmodified browser captures; geometry checks do not replace visual review.",
+  "browser": "154.0.8037.98",
+  "status": "passed",
+  "finishedAt": "2026-10-09T16:11:50.054Z"
+}

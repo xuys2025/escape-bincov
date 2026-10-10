@@ -1,0 +1,248 @@
+{
+  "startedAt": "2026-10-08T18:19:07.012Z",
+  "html": "D:\\bincov\\pr22-runtime\\start the game.html",
+  "size": [
+    1280,
+    720
+  ],
+  "steps": [
+    {
+      "shot": "01-title.png",
+      "note": "标题页",
+      "at": {
+        "state": "menu",
+        "panel": null,
+        "phase": null,
+        "map": null,
+        "player": null,
+        "where": null
+      }
+    },
+    {
+      "shot": "02-base.png",
+      "note": "水产站整备（行动区域默认居民楼）",
+      "at": {
+        "state": "hideout",
+        "panel": null,
+        "phase": null,
+        "map": null,
+        "player": null,
+        "where": null
+      }
+    },
+    {
+      "shot": "03-spawn.png",
+      "note": "出击落点",
+      "at": {
+        "state": "run",
+        "panel": null,
+        "phase": "running",
+        "map": "coast",
+        "player": {
+          "x": 208,
+          "y": 656,
+          "hp": 100
+        },
+        "where": "沿海封锁区 · 室外 / 一楼"
+      }
+    },
+    {
+      "shot": "04-walk.png",
+      "note": "WASD 行进中",
+      "at": {
+        "state": "run",
+        "panel": null,
+        "phase": "running",
+        "map": "coast",
+        "player": {
+          "x": 310,
+          "y": 656,
+          "hp": 100
+        },
+        "where": "沿海封锁区 · 室外 / 一楼"
+      }
+    },
+    {
+      "shot": "05-combat.png",
+      "note": "真实交火：鼠标瞄准、左键点射",
+      "at": {
+        "state": "run",
+        "panel": null,
+        "phase": "running",
+        "map": "coast",
+        "player": {
+          "x": 302,
+          "y": 1038,
+          "hp": 100
+        },
+        "where": "沿海封锁区 · 室外 / 一楼 · 样板外（通用占位画面）"
+      }
+    },
+    {
+      "shot": "06-crate-prompt.png",
+      "note": "靠近物资箱的交互提示",
+      "at": {
+        "state": "run",
+        "panel": null,
+        "phase": "running",
+        "map": "coast",
+        "player": {
+          "x": 373,
+          "y": 951,
+          "hp": 100
+        },
+        "where": "沿海封锁区 · 室外 / 一楼 · 样板外（通用占位画面）"
+      }
+    },
+    {
+      "shot": "07-loot-open.png",
+      "note": "搜刮面板（世界仍运行）",
+      "at": {
+        "state": "run",
+        "panel": "loot",
+        "phase": "blocked",
+        "map": "coast",
+        "player": {
+          "x": 373,
+          "y": 951,
+          "hp": 100
+        },
+        "where": "沿海封锁区 · 室外 / 一楼 · 样板外（通用占位画面）"
+      }
+    },
+    {
+      "shot": "08-loot-detail.png",
+      "note": "选中物品：名称、描述与操作",
+      "at": {
+        "state": "run",
+        "panel": "loot",
+        "phase": "blocked",
+        "map": "coast",
+        "player": {
+          "x": 373,
+          "y": 951,
+          "hp": 100
+        },
+        "where": "沿海封锁区 · 室外 / 一楼 · 样板外（通用占位画面）"
+      }
+    },
+    {
+      "shot": "09-loot-taken.png",
+      "note": "拿取后的背包",
+      "at": {
+        "state": "run",
+        "panel": "loot",
+        "phase": "blocked",
+        "map": "coast",
+        "player": {
+          "x": 373,
+          "y": 951,
+          "hp": 100
+        },
+        "where": "沿海封锁区 · 室外 / 一楼 · 样板外（通用占位画面）"
+      }
+    },
+    {
+      "shot": "10-inventory.png",
+      "note": "Tab 随身物资",
+      "at": {
+        "state": "run",
+        "panel": "inventory",
+        "phase": "blocked",
+        "map": "coast",
+        "player": {
+          "x": 373,
+          "y": 951,
+          "hp": 100
+        },
+        "where": "沿海封锁区 · 室外 / 一楼 · 样板外（通用占位画面）"
+      }
+    },
+    {
+      "shot": "11-map.png",
+      "note": "M 地图",
+      "at": {
+        "state": "run",
+        "panel": "map",
+        "phase": "blocked",
+        "map": "coast",
+        "player": {
+          "x": 373,
+          "y": 951,
+          "hp": 100
+        },
+        "where": "沿海封锁区 · 室外 / 一楼 · 样板外（通用占位画面）"
+      }
+    },
+    {
+      "shot": "12-exit-zone.png",
+      "note": "撤离点",
+      "at": {
+        "state": "run",
+        "panel": null,
+        "phase": "running",
+        "map": "coast",
+        "player": {
+          "x": 204,
+          "y": 134,
+          "hp": 100
+        },
+        "where": "沿海封锁区 · 室外 / 一楼"
+      }
+    },
+    {
+      "shot": "13-exit-hold.png",
+      "note": "按住 E 撤离计时",
+      "at": {
+        "state": "run",
+        "panel": null,
+        "phase": "running",
+        "map": "coast",
+        "player": {
+          "x": 204,
+          "y": 134,
+          "hp": 100
+        },
+        "where": "沿海封锁区 · 室外 / 一楼"
+      }
+    },
+    {
+      "shot": "14-settling.png",
+      "note": "结算写入",
+      "at": {
+        "state": "result",
+        "panel": null,
+        "phase": null,
+        "map": null,
+        "player": null,
+        "where": null
+      }
+    },
+    {
+      "shot": "15-result.png",
+      "note": "结算页",
+      "at": {
+        "state": "result",
+        "panel": null,
+        "phase": null,
+        "map": null,
+        "player": null,
+        "where": null
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "log": [
+    "spawn 208 656 exits north,station",
+    "crate crate-47 368 912",
+    "crate walk arrived shots 11",
+    "exit walk arrived shots 11"
+  ],
+  "result": {
+    "outcome": "extract",
+    "kills": 3
+  },
+  "shots": 11,
+  "finishedAt": "2026-10-08T18:19:50.286Z"
+}

@@ -74,7 +74,7 @@ async function lootOpenContainer(s) {
   else { visited.add(`${container.x},${container.y}`); goal = null; await page.keyboard.press('Escape'); }
 }
 try {
-  await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1');
+  await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs');
   await action('enter').click();
   const start = Date.now(), deadline = start + minutes * 60000;
   while (Date.now() < deadline || (await snapshot()).state === 'run') {

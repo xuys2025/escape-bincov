@@ -1,0 +1,582 @@
+{
+  "node": "v24.19.0",
+  "browser": "154.0.8037.98",
+  "baseline": {
+    "parent": "5b09c05",
+    "baselineHtmlSha256": "aad83438f01bf69ec414e386b3d7ab1561ab0c6c94f62696fc751b587c34a702"
+  },
+  "results": [
+    {
+      "id": "unit",
+      "command": "pnpm test",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:06:36.022Z",
+      "seconds": 6.1
+    },
+    {
+      "id": "package",
+      "command": "pnpm package",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:06:42.095Z",
+      "seconds": 4.3,
+      "html": {
+        "bytes": 3213763,
+        "sha256": "fe8ee26e6a993d5ed1bf28ab9bc9e88059f73080d6af3ac37aa719a617ea6f62",
+        "same": true
+      }
+    },
+    {
+      "id": "sample",
+      "command": "node scripts/coast-sample-test.mjs",
+      "env": {
+        "BINCOV_SAMPLE_OUT": "test-results/f20/sample"
+      },
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:06:46.378Z",
+      "seconds": 89.3
+    },
+    {
+      "id": "audio-1",
+      "command": "node scripts/coast-audio-test.mjs",
+      "env": {
+        "BINCOV_AUDIO_OUT": "test-results/f20/audio-1"
+      },
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:08:15.701Z",
+      "seconds": 73.1
+    },
+    {
+      "id": "audio-2",
+      "command": "node scripts/coast-audio-test.mjs",
+      "env": {
+        "BINCOV_AUDIO_OUT": "test-results/f20/audio-2"
+      },
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:09:28.785Z",
+      "seconds": 73
+    },
+    {
+      "id": "shots",
+      "command": "node scripts/coast-sample-shots.mjs",
+      "env": {
+        "BINCOV_SHOTS_OUT": "test-results/f20/shots"
+      },
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:10:41.827Z",
+      "seconds": 107.4
+    },
+    {
+      "id": "player-death-probe",
+      "command": "node scripts/opus-player-death-probe.mjs",
+      "env": {
+        "BINCOV_PLAYER_DEATH_OUT": "test-results/f20/player-death"
+      },
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:12:29.188Z",
+      "seconds": 6.1
+    },
+    {
+      "id": "lifecycle-1280",
+      "command": "node --import tsx scripts/coast-lifecycle-test.mjs",
+      "env": {
+        "BINCOV_LIFECYCLE_OUT": "test-results/f20/lifecycle-1280"
+      },
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:12:35.297Z",
+      "seconds": 16.8
+    },
+    {
+      "id": "lifecycle-1920",
+      "command": "node --import tsx scripts/coast-lifecycle-test.mjs",
+      "env": {
+        "BINCOV_LIFECYCLE_OUT": "test-results/f20/lifecycle-1920",
+        "BINCOV_LIFECYCLE_WIDE": "1"
+      },
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:12:52.089Z",
+      "seconds": 16.8
+    },
+    {
+      "id": "launcher",
+      "command": "node scripts/coast-launcher-check.mjs",
+      "env": {
+        "BINCOV_LAUNCHER_OUT": "test-results/f20/launcher"
+      },
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:13:08.905Z",
+      "seconds": 9.9
+    },
+    {
+      "id": "playtest-empty-seed",
+      "command": "node scripts/coast-playtest.mjs",
+      "env": {
+        "BINCOV_PLAYTEST_OUT": "test-results/f20/playtest-1280"
+      },
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:13:18.848Z",
+      "seconds": 36.5
+    },
+    {
+      "id": "playtest-1920",
+      "command": "node scripts/coast-playtest.mjs",
+      "env": {
+        "BINCOV_PLAYTEST_OUT": "test-results/f20/playtest-1920",
+        "BINCOV_PLAYTEST_SIZE": "1920x1080"
+      },
+      "status": 1,
+      "signal": null,
+      "startedAt": "2026-10-09T11:13:55.381Z",
+      "seconds": 172.2
+    },
+    {
+      "id": "sol-visibility-probe",
+      "command": "node scripts/sol-visibility-probe.mjs",
+      "env": {
+        "BINCOV_SOL_OUT": "test-results/f20/sol-visibility"
+      },
+      "status": 1,
+      "signal": null,
+      "startedAt": "2026-10-09T11:16:47.612Z",
+      "seconds": 3.1
+    },
+    {
+      "id": "sol-r6-visibility",
+      "command": "node scripts/sol-r6-visibility.mjs",
+      "env": {
+        "BINCOV_SOL_OUT": "test-results/f20/sol-r6-visibility"
+      },
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:16:50.677Z",
+      "seconds": 3.3
+    },
+    {
+      "id": "sol-round4-visual",
+      "command": "node scripts/sol-round4-visual.mjs",
+      "env": {
+        "BINCOV_VISUAL_OUT": "test-results/f20/sol-visual"
+      },
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:16:53.972Z",
+      "seconds": 5.1
+    },
+    {
+      "id": "runtime-differential",
+      "command": "node scripts/runtime-differential.mjs",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:16:59.115Z",
+      "seconds": 9.5
+    },
+    {
+      "id": "sol-sample-boundaries",
+      "command": "node --import tsx scripts/sol-sample-boundaries.mjs",
+      "env": {
+        "BINCOV_SOL_OUT": "test-results/f20/sol-boundaries"
+      },
+      "status": 1,
+      "signal": null,
+      "startedAt": "2026-10-09T11:17:08.588Z",
+      "seconds": 96.2
+    },
+    {
+      "id": "slots-probe",
+      "command": "node test-results/f20/slots-probe.mjs dist/index.html test-results/f20/slots-fixed-final.json",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:18:44.797Z",
+      "seconds": 7.6
+    },
+    {
+      "id": "ci:browser",
+      "command": "pnpm test:browser",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:18:52.390Z",
+      "seconds": 39
+    },
+    {
+      "id": "ci:desktop-input",
+      "command": "pnpm test:desktop-input",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:19:31.433Z",
+      "seconds": 22.1
+    },
+    {
+      "id": "ci:ui",
+      "command": "pnpm test:ui",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:19:53.484Z",
+      "seconds": 8
+    },
+    {
+      "id": "ci:tactical",
+      "command": "pnpm test:tactical",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:20:01.459Z",
+      "seconds": 18.4
+    },
+    {
+      "id": "ci:art",
+      "command": "pnpm test:art",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:20:19.890Z",
+      "seconds": 12.2
+    },
+    {
+      "id": "ci:title",
+      "command": "pnpm test:title",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:20:32.126Z",
+      "seconds": 56.8
+    },
+    {
+      "id": "ci:title-water",
+      "command": "pnpm test:title-water",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:21:28.970Z",
+      "seconds": 9.9
+    },
+    {
+      "id": "ci:save-browser",
+      "command": "pnpm test:save-browser",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:21:38.831Z",
+      "seconds": 13
+    },
+    {
+      "id": "ci:expansion",
+      "command": "pnpm test:expansion",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:21:51.828Z",
+      "seconds": 8.6
+    },
+    {
+      "id": "ci:buildings",
+      "command": "pnpm test:buildings",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:22:00.476Z",
+      "seconds": 12.4
+    },
+    {
+      "id": "ci:qol-expansion",
+      "command": "pnpm test:qol-expansion",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:22:12.867Z",
+      "seconds": 4.2
+    },
+    {
+      "id": "ci:systems",
+      "command": "pnpm test:systems",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:22:17.057Z",
+      "seconds": 35.8
+    },
+    {
+      "id": "ci:mall-passages",
+      "command": "pnpm test:mall-passages",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:22:52.838Z",
+      "seconds": 166.3
+    },
+    {
+      "id": "ci:mall-landing",
+      "command": "pnpm test:mall-landing",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:25:39.156Z",
+      "seconds": 8
+    },
+    {
+      "id": "ci:loot",
+      "command": "pnpm test:loot",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:25:47.191Z",
+      "seconds": 48.9
+    },
+    {
+      "id": "ci:loot-target",
+      "command": "pnpm test:loot-target",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:26:36.102Z",
+      "seconds": 19.2
+    },
+    {
+      "id": "ci:qol",
+      "command": "pnpm test:qol",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:26:55.278Z",
+      "seconds": 21.5
+    },
+    {
+      "id": "ci:mobile",
+      "command": "pnpm test:mobile",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:27:16.809Z",
+      "seconds": 19.4
+    },
+    {
+      "id": "ci:mobile-ux",
+      "command": "pnpm test:mobile-ux",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:27:36.240Z",
+      "seconds": 69.6
+    },
+    {
+      "id": "ci:portable",
+      "command": "pnpm test:portable",
+      "env": {},
+      "status": 0,
+      "signal": null,
+      "startedAt": "2026-10-09T11:28:45.842Z",
+      "seconds": 5.3
+    }
+  ],
+  "shots": {
+    "count": 68,
+    "anomalies": 0,
+    "errors": 0,
+    "requests": 0
+  },
+  "loops": [
+    {
+      "id": "base-strict60",
+      "status": 1,
+      "seconds": 188,
+      "env": {
+        "R7_CYCLES": "60",
+        "R7_SEED": "42",
+        "R7_NAMED": "",
+        "R7_SNAPS": "",
+        "R7_PIN": ""
+      },
+      "tree": "5b09c05 worktree"
+    },
+    {
+      "id": "fixed-strict60",
+      "status": 1,
+      "seconds": 188,
+      "env": {
+        "R7_CYCLES": "60",
+        "R7_SEED": "42",
+        "R7_NAMED": "",
+        "R7_SNAPS": "",
+        "R7_PIN": ""
+      },
+      "tree": "this tree"
+    },
+    {
+      "id": "fixed-named60",
+      "status": 1,
+      "seconds": 197,
+      "env": {
+        "R7_CYCLES": "60",
+        "R7_SEED": "42",
+        "R7_NAMED": "1",
+        "R7_SNAPS": "6,20,40,60",
+        "R7_PIN": ""
+      },
+      "tree": "this tree"
+    },
+    {
+      "id": "base-named60",
+      "status": 1,
+      "seconds": 198,
+      "env": {
+        "R7_CYCLES": "60",
+        "R7_SEED": "42",
+        "R7_NAMED": "1",
+        "R7_SNAPS": "6,20,40,60",
+        "R7_PIN": ""
+      },
+      "tree": "5b09c05 worktree"
+    },
+    {
+      "id": "fixed-high20",
+      "status": 1,
+      "seconds": 66,
+      "env": {
+        "R7_CYCLES": "20",
+        "R7_SEED": "3",
+        "R7_NAMED": "",
+        "R7_SNAPS": "",
+        "R7_PIN": ""
+      },
+      "tree": "this tree"
+    },
+    {
+      "id": "fixed-pin",
+      "status": 0,
+      "seconds": 8,
+      "env": {
+        "R7_CYCLES": "1",
+        "R7_SEED": "42",
+        "R7_NAMED": "1",
+        "R7_SNAPS": "",
+        "R7_PIN": "1"
+      },
+      "tree": "this tree"
+    }
+  ],
+  "playtest1920": [
+    {
+      "id": "fixed",
+      "run": 1,
+      "status": 0,
+      "summary": {
+        "outcome": null,
+        "failure": null,
+        "log": [
+          "spawn 208 656 exits north,seawall",
+          "crate crate-3 368 912",
+          "crate walk arrived shots 92",
+          "exit walk arrived shots 110"
+        ],
+        "errors": 0,
+        "requests": 0
+      }
+    },
+    {
+      "id": "base",
+      "run": 1,
+      "status": 1,
+      "summary": {
+        "outcome": null,
+        "failure": "page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')",
+        "log": [
+          "spawn 208 656 exits seawall,north",
+          "crate crate-0 560 976",
+          "crate walk ending shots 80",
+          "FAIL page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')"
+        ],
+        "errors": 0,
+        "requests": 0
+      }
+    },
+    {
+      "id": "fixed",
+      "run": 2,
+      "status": 1,
+      "summary": {
+        "outcome": null,
+        "failure": "page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')",
+        "log": [
+          "spawn 208 656 exits north,seawall",
+          "crate crate-8 560 912",
+          "crate walk ending shots 177",
+          "FAIL page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')"
+        ],
+        "errors": 0,
+        "requests": 0
+      }
+    },
+    {
+      "id": "base",
+      "run": 2,
+      "status": 1,
+      "summary": {
+        "outcome": null,
+        "failure": "page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')",
+        "log": [
+          "spawn 208 656 exits north,seawall",
+          "crate crate-35 560 1200",
+          "crate walk ending shots 86",
+          "FAIL page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')"
+        ],
+        "errors": 0,
+        "requests": 0
+      }
+    },
+    {
+      "id": "fixed",
+      "run": 3,
+      "status": 0,
+      "summary": {
+        "outcome": null,
+        "failure": null,
+        "log": [
+          "spawn 208 656 exits seawall,north",
+          "crate crate-10 368 560",
+          "crate walk arrived shots 0",
+          "exit walk arrived shots 0"
+        ],
+        "errors": 0,
+        "requests": 0
+      }
+    },
+    {
+      "id": "base",
+      "run": 3,
+      "status": 1,
+      "summary": {
+        "outcome": null,
+        "failure": "page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')",
+        "log": [
+          "spawn 208 656 exits seawall,north",
+          "crate crate-12 560 912",
+          "crate walk ending shots 71",
+          "FAIL page.waitForFunction: TypeError: Cannot read properties of null (reading 'panel')"
+        ],
+        "errors": 0,
+        "requests": 0
+      }
+    }
+  ],
+  "notes": [
+    "sol-visibility-probe exit 1 is pre-existing (fails the same way on 0494b61 and later: it diffs two screenshots taken at different moments while the round-6 weather animates); sol-r6-visibility exits 0.",
+    "sol-sample-boundaries exit 1: F20 PARTIAL (heap growth); the other seven checks pass.",
+    "playtest-1920 is a nondeterministic walkthrough bot: see playtest1920 for three alternating runs per build."
+  ]
+}

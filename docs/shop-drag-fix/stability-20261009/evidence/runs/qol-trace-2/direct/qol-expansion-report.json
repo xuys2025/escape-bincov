@@ -1,0 +1,48 @@
+{
+  "htmlSha256": "a9a07a960049d6dc17e54b9fb7c765c99a72041c48e111c9b73b2ae2fa8d852f",
+  "methodology": "Offline exact bundle; explicit funded base, original mall container relocation, item and long-cooldown fixtures. Native buttons, wheel, keyboard and emulated touch; actual bullet flight. Not natural balance or physical-device acceptance.",
+  "steps": [
+    {
+      "name": "RPG medicine cart survives cancelled base return and commits through the ordinary checkout",
+      "status": "passed"
+    },
+    {
+      "name": "mall containers keep wheel-selected identity and touch-open the exact empty source",
+      "status": "failed",
+      "error": "page.evaluate: TypeError: Cannot read properties of null (reading 'containerId')\n    at eval (eval at evaluate (:311:30), <anonymous>:1:39)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at D:\\bincov\\shop-drag-fix\\test-results\\shop-drag-stability-20261009\\qol-trace.mjs:58:65\n    at async step (D:\\bincov\\shop-drag-fix\\test-results\\shop-drag-stability-20261009\\qol-trace.mjs:18:104)\n    at async file:///D:/bincov/shop-drag-fix/test-results/shop-drag-stability-20261009/qol-trace.mjs:53:5"
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "154.0.8037.98",
+  "inputRace": {
+    "trace": [
+      {
+        "tag": "keydown-after-handler",
+        "at": 1657.5,
+        "frame": 88,
+        "overlay": "",
+        "context": null,
+        "queuedActions": [
+          "interact"
+        ]
+      },
+      {
+        "tag": "two-render-frames",
+        "at": 1675.2000000029802,
+        "frame": 90,
+        "overlay": "loot",
+        "context": {
+          "containerId": "crate-5",
+          "runId": "bc-mv11iqbu-z"
+        },
+        "queuedActions": []
+      }
+    ],
+    "overlay": "loot",
+    "context": {
+      "containerId": "crate-5",
+      "runId": "bc-mv11iqbu-z"
+    }
+  }
+}

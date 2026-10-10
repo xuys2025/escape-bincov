@@ -17,7 +17,7 @@ const action = (name, id) => page.locator(`[data-action="${name}"]${id ? `[data-
 const overlay = () => page.evaluate(() => window.__bincov.app.overlay);
 async function step(name, fn) { const row = { name, status: 'running' }; report.steps.push(row); try { await fn(); assert.deepEqual(report.errors, []); assert.deepEqual(report.requests, []); row.status = 'passed'; console.log('PASS', name); } catch (e) { row.status = 'failed'; row.error = e.stack; await page.screenshot({ path: resolve(out, 'qol-expansion-failed.png') }); throw e; } }
 try {
-    await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1'); await action('enter').click(); await action('base-enter').click();
+    await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs'); await action('enter').click(); await action('base-enter').click();
     await page.waitForFunction(() => window.__bincov.app.base?.player?.active);
     await page.evaluate(() => { const s = window.__bincov.saveSession, t = s.prepareExpansionMutation(d => { d.profile.cash = 10000; }); if (!t || s.commitExpansionMutation(t) !== 'committed') throw Error('Funding fixture'); });
     await action('base-menu').click(); await action('tab', 'med').click();
@@ -54,7 +54,10 @@ try {
         await page.waitForFunction(() => document.querySelectorAll('#interaction [data-loot-target]').length === 2);
         await page.mouse.move(640, 350); await page.mouse.wheel(0, 100);
         await page.waitForFunction(id => document.querySelector('#interaction [aria-current]')?.getAttribute('data-loot-target') === id, fixture.ids[1]);
-        await page.keyboard.press('e'); assert.equal(await page.evaluate(() => window.__bincov.app.lootContext.containerId), fixture.ids[1]);
+        await page.keyboard.press('e');
+        // E queues an intention; the next game frame opens loot. Wait for readiness, then check the exact target below.
+        await page.waitForFunction(() => window.__bincov.app.overlay === 'loot' && window.__bincov.app.lootContext !== null);
+        assert.equal(await page.evaluate(() => window.__bincov.app.lootContext.containerId), fixture.ids[1]);
         await action('close').click();
         await page.setViewportSize({ width: 844, height: 390 });
         await page.waitForFunction(() => document.documentElement.classList.contains('mobile') && window.__bincov.app.overlay === 'pause');

@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-07T16:45:17.388Z",
+  "viewport": "1280x720 DPR1",
+  "note": "Local desktop GPU; real Runtime with AI active; present excludes GPU completion; not a phone measurement.",
+  "frames": 800,
+  "seconds": 4.9,
+  "frameInterval": {
+    "p50": 6,
+    "p95": 7.5,
+    "p99": 8.9
+  },
+  "runtimeAdvance": {
+    "p50": 2.3,
+    "p95": 3.4,
+    "p99": 3.8
+  },
+  "viewPresent": {
+    "p50": 1,
+    "p95": 1.5,
+    "p99": 2
+  },
+  "counts": {
+    "listeners": 22,
+    "tickers": 1,
+    "observers": 1,
+    "timers": 0,
+    "apps": 1,
+    "views": 1,
+    "renderTextures": 3,
+    "liveViews": 1,
+    "canvases": 2,
+    "sampleRoots": 1,
+    "atlasPages": 1,
+    "largeTextures": 20,
+    "heap": 27887208
+  }
+}

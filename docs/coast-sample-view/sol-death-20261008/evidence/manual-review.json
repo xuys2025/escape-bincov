@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-08T13:02:52.249Z",
+  "method": "Viewed eight original PNGs from this execution, not prior Opus screenshots.",
+  "images": [
+    "sample/death-fall-sol.png",
+    "sample/death-fall-placeholder.png",
+    "sample/death-midfall-sol.png",
+    "sample/death-midfall-placeholder.png",
+    "sample/death-hidden-sol.png",
+    "sample/death-hidden-placeholder.png",
+    "sample/death-reload-sol.png",
+    "sample/death-reload-placeholder.png"
+  ],
+  "conclusions": {
+    "visibleEnemyFall": "Both modes show progressive tipping before the corpse, with no visible held weapon. Final body orientation and corpse direction agree; no conspicuous lateral jump in the inspected strips.",
+    "hiddenRoom": "Target room has no visible falling actor/corpse. The visible street corpse is the preceding public kill, not the hidden-room target. Zero-pixel claim is from V04, not screenshot alone.",
+    "reload": "Paused reload screenshots show existing corpses lying down. Non-replay conclusion also relies on V04 recorded deathT=0 and no death events, not screenshots alone."
+  },
+  "boundary": "Enemy path only; player complete terminal fall is not signed off; no subjective claim for every angle, enemy type or device."
+}

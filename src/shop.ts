@@ -56,21 +56,31 @@ export function saleWarnings(save: D.SaveDataV1, cart: ShopCart) {
         return sold && remaining < needed ? [{ quest: quest.name, id, needed, sold, remaining }] : [];
     }));
 }
-/** Validate again at checkout; a rejected transaction never mutates the save. */
-export function settleCart(save: D.SaveDataV1, cart: ShopCart, rpg = false): boolean {
-    if (save.activeRun || JSON.stringify(save.stash) !== cart.original || !cartDirty(cart)) return false;
+export type CartRejection = 'rule' | 'stale' | 'space' | 'funds';
+export type CartSettlement = { ok: true } | { ok: false; reason: CartRejection };
+/** Same automatic stash-placement rules, now with precise rejection reasons. Failure never edits the profile. */
+export function settleCartResult(save: D.SaveDataV1, cart: ShopCart, rpg = false): CartSettlement {
+    const fail = (reason: CartRejection): CartSettlement => ({ ok: false, reason });
+    if (save.activeRun || !Object.hasOwn(D.MERCHANTS, cart.merchant)) return fail('rule');
+    if (JSON.stringify(save.stash) !== cart.original) return fail('stale');
+    if (!cartDirty(cart)) return fail('rule');
     const owned = [...cart.stash.items, ...cart.sell.items];
-    if (owned.length !== save.stash.items.length || new Set(owned.map(i => i.uid)).size !== owned.length) return false;
+    if (owned.length !== save.stash.items.length || new Set(owned.map(i => i.uid)).size !== owned.length) return fail('rule');
     for (const item of owned) {
         const original = save.stash.items.find(i => i.uid === item.uid);
-        if (!original || item.id !== original.id || item.qty !== original.qty || !!item.relief !== !!original.relief || !!item.rotated !== !!original.rotated) return false;
+        if (!original || item.id !== original.id || item.qty !== original.qty || !!item.relief !== !!original.relief || !!item.rotated !== !!original.rotated) return fail('rule');
     }
-    if (cart.sell.items.some(i => i.relief || D.ITEMS[i.id].sell <= 0)) return false;
-    if (cart.buy.items.some(i => i.relief || !merchantStock(cart.merchant, rpg).includes(i.id) || i.qty !== D.buyQuantity(i.id))) return false;
+    if (cart.sell.items.some(i => i.relief || !Object.hasOwn(D.ITEMS, i.id) || D.ITEMS[i.id].sell <= 0)) return fail('rule');
+    if (cart.buy.items.some(i => i.relief || !Object.hasOwn(D.ITEMS, i.id) || !merchantStock(cart.merchant, rpg).includes(i.id) || i.qty !== D.buyQuantity(i.id))) return fail('rule');
     const stash = structuredClone(cart.stash), { net } = cartTotals(cart);
-    if (save.cash < net || !Number.isFinite(net)) return false;
-    for (const item of stash.items) if (!D.fits(stash, item.id, item.x, item.y, item.uid, !!item.rotated)) return false;
-    for (const item of cart.buy.items) if (D.addItem(stash, item.id, item.qty)) return false;
+    if (!Number.isFinite(net)) return fail('rule');
+    if (save.cash < net) return fail('funds');
+    for (const item of stash.items) if (!D.fits(stash, item.id, item.x, item.y, item.uid, !!item.rotated)) return fail('space');
+    for (const item of cart.buy.items) if (D.addItem(stash, item.id, item.qty)) return fail('space');
     save.stash = stash; save.cash -= net;
-    return true;
+    return { ok: true };
+}
+/** Existing tabs keep the boolean API; both entrances execute the same settlement. */
+export function settleCart(save: D.SaveDataV1, cart: ShopCart, rpg = false): boolean {
+    return settleCartResult(save, cart, rpg).ok;
 }

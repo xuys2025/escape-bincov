@@ -1,0 +1,1129 @@
+{
+  "entry": "test: full layer/extract/abandon workload",
+  "memorySignoff": "partial: positive heap trend requires retainer attribution",
+  "remainingOwners": [],
+  "startedAt": "2026-10-08T12:11:25.229Z",
+  "finishedAt": "2026-10-08T12:12:16.357Z",
+  "node": "v24.19.0",
+  "packagedSHA256": "88ca4cf44377533c385284994f41a837aa0004fd3e8d3614d11276a689a1684d",
+  "unminifiedSHA256": "4f2a9fc6af81bd82565618b221a0f8702cf458be0b1595abb2df94d11705e8a6",
+  "sampling": "1280x720; base after return; three CDP GCs; snapshots 6/20; primitive waits; read-only scalar page-pool probe in detached unminified bundle",
+  "browser": "154.0.8037.98",
+  "cycles": 20,
+  "snapshots": [
+    6,
+    20
+  ],
+  "trend": {
+    "warmupMean": 31746135.8,
+    "afterWarmupMean": 32372047.6,
+    "lastFiveMean": 32689751.6,
+    "growthBytes": 317704
+  },
+  "selfSize": {
+    "6": 44774198,
+    "20": 45274286,
+    "perCycle": 35720.57142857143,
+    "codePerCycle": 31937.14285714286,
+    "otherPerCycle": 3783.4285714285716
+  },
+  "tracked": {
+    "6": {
+      "TextureSource3": 163,
+      "Texture3": 22,
+      "WebGLRenderer3": 1,
+      "_TextureSource2": 6,
+      "HTMLCanvasElement": 8,
+      "WebGLRenderer": 1,
+      "WebGL2RenderingContext": 4,
+      "_Container": 3,
+      "Texture": 4,
+      "CanvasSource": 1,
+      "Sprite3": 3,
+      "Container4": 8,
+      "_Application2": 1,
+      "_Sprite": 1
+    },
+    "20": {
+      "Sprite3": 3,
+      "Texture": 4,
+      "_TextureSource2": 6,
+      "Texture3": 22,
+      "WebGLRenderer3": 1,
+      "TextureSource3": 163,
+      "Container4": 8,
+      "_Container": 3,
+      "HTMLCanvasElement": 8,
+      "WebGLRenderer": 1,
+      "WebGL2RenderingContext": 4,
+      "CanvasSource": 1,
+      "_Application2": 1,
+      "_Sprite": 1
+    }
+  },
+  "accumulated": [],
+  "sessionChars": [
+    2768,
+    2759
+  ],
+  "perCycleHeap": [
+    {
+      "cycle": 1,
+      "heap": 30974171,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 30980792
+      },
+      "session": 2768,
+      "outcome": "death",
+      "map": "resident-f2",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 2,
+      "heap": 31648630,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 31656006
+      },
+      "session": 2756,
+      "outcome": "extract",
+      "map": "resident-b1",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 3,
+      "heap": 31857590,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 31866266
+      },
+      "session": 2766,
+      "outcome": "death",
+      "map": "resident-f2",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 4,
+      "heap": 32059710,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32075226
+      },
+      "session": 2757,
+      "outcome": "extract",
+      "map": "resident-b1",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 5,
+      "heap": 32190578,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32207546
+      },
+      "session": 2767,
+      "outcome": "death",
+      "map": "resident-f2",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 6,
+      "heap": 32255186,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32273702
+      },
+      "session": 2757,
+      "outcome": "extract",
+      "map": "resident-b1",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 7,
+      "heap": 32278186,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32308754
+      },
+      "session": 2767,
+      "outcome": "death",
+      "map": "resident-f2",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 8,
+      "heap": 32346986,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32378762
+      },
+      "session": 2756,
+      "outcome": "extract",
+      "map": "resident-b1",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 9,
+      "heap": 32477710,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32511030
+      },
+      "session": 2766,
+      "outcome": "death",
+      "map": "resident-f2",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 10,
+      "heap": 32502170,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32537086
+      },
+      "session": 2757,
+      "outcome": "extract",
+      "map": "resident-b1",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 11,
+      "heap": 32512662,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32548738
+      },
+      "session": 2768,
+      "outcome": "death",
+      "map": "resident-f2",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 12,
+      "heap": 32549126,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32586902
+      },
+      "session": 2757,
+      "outcome": "extract",
+      "map": "resident-b1",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 13,
+      "heap": 32579674,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32618750
+      },
+      "session": 2767,
+      "outcome": "death",
+      "map": "resident-f2",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 14,
+      "heap": 32595338,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32656614
+      },
+      "session": 2757,
+      "outcome": "extract",
+      "map": "resident-b1",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 15,
+      "heap": 32588834,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32651410
+      },
+      "session": 2768,
+      "outcome": "death",
+      "map": "resident-f2",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 16,
+      "heap": 32632098,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32696374
+      },
+      "session": 2758,
+      "outcome": "extract",
+      "map": "resident-b1",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 17,
+      "heap": 32662206,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32727782
+      },
+      "session": 2768,
+      "outcome": "death",
+      "map": "resident-f2",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 18,
+      "heap": 32712334,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32779610
+      },
+      "session": 2757,
+      "outcome": "extract",
+      "map": "resident-b1",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 19,
+      "heap": 32716030,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32784606
+      },
+      "session": 2768,
+      "outcome": "death",
+      "map": "resident-f2",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    },
+    {
+      "cycle": 20,
+      "heap": 32726090,
+      "counts": {
+        "listeners": 0,
+        "tickers": 0,
+        "observers": 0,
+        "timers": 0,
+        "apps": 0,
+        "parked": 1,
+        "views": 0,
+        "renderTextures": 0,
+        "liveViews": 0,
+        "canvases": 1,
+        "sampleRoots": 0,
+        "art": "placeholder",
+        "atlasPages": 0,
+        "largeTextures": 0,
+        "gpuTextures": 2,
+        "heap": 32796366
+      },
+      "session": 2759,
+      "outcome": "extract",
+      "map": "resident-b1",
+      "pool": {
+        "parked": true,
+        "currentIsParked": true,
+        "stageChildren": 0,
+        "tickerStarted": false,
+        "canvasConnected": false,
+        "gpuTextures": 2
+      }
+    }
+  ],
+  "shaderSources": {
+    "6": {
+      "strings": 81,
+      "names": [
+        "BARREL_FS",
+        "BLOOM_FS",
+        "BLUR_HIGH_FS",
+        "BLUR_LOW_FS",
+        "BLUR_MED_FS",
+        "BOKEH_FS",
+        "CIRCLE_FS",
+        "DISPLACEMENT_FS",
+        "GLOW_FS",
+        "GRADIENT_FS",
+        "PHASER_ADD_BLEND_FS",
+        "PHASER_ADD_BLEND_FS\",",
+        "PHASER_BITMAP_MASK_FS",
+        "PHASER_BITMAP_MASK_VS",
+        "PHASER_COLORMATRIX_FS",
+        "PHASER_COPY_FS",
+        "PHASER_LIGHT_FS",
+        "PHASER_LINEAR_BLEND_FS",
+        "PHASER_MESH_FS",
+        "PHASER_MESH_VS",
+        "PHASER_MOBILE_FS",
+        "PHASER_MOBILE_VS",
+        "PHASER_MULTI_FS",
+        "PHASER_MULTI_VS",
+        "PHASER_POINTLIGHT_FS",
+        "PHASER_POINTLIGHT_VS",
+        "PHASER_POSTFX_FS",
+        "PHASER_QUAD_VS",
+        "PHASER_SINGLE_FS",
+        "PHASER_SINGLE_VS",
+        "PIXELATE_FS",
+        "SHADOW_FS",
+        "SHINE_FS",
+        "VIGNETTE_FS",
+        "WIPE_FS",
+        "batch-vertex",
+        "big-triangle-vertex",
+        "graphics-fragment",
+        "graphics-vertex"
+      ]
+    },
+    "20": {
+      "strings": 81,
+      "names": [
+        "BARREL_FS",
+        "BLOOM_FS",
+        "BLUR_HIGH_FS",
+        "BLUR_LOW_FS",
+        "BLUR_MED_FS",
+        "BOKEH_FS",
+        "CIRCLE_FS",
+        "DISPLACEMENT_FS",
+        "GLOW_FS",
+        "GRADIENT_FS",
+        "PHASER_ADD_BLEND_FS",
+        "PHASER_ADD_BLEND_FS\",",
+        "PHASER_BITMAP_MASK_FS",
+        "PHASER_BITMAP_MASK_VS",
+        "PHASER_COLORMATRIX_FS",
+        "PHASER_COPY_FS",
+        "PHASER_LIGHT_FS",
+        "PHASER_LINEAR_BLEND_FS",
+        "PHASER_MESH_FS",
+        "PHASER_MESH_VS",
+        "PHASER_MOBILE_FS",
+        "PHASER_MOBILE_VS",
+        "PHASER_MULTI_FS",
+        "PHASER_MULTI_VS",
+        "PHASER_POINTLIGHT_FS",
+        "PHASER_POINTLIGHT_VS",
+        "PHASER_POSTFX_FS",
+        "PHASER_QUAD_VS",
+        "PHASER_SINGLE_FS",
+        "PHASER_SINGLE_VS",
+        "PIXELATE_FS",
+        "SHADOW_FS",
+        "SHINE_FS",
+        "VIGNETTE_FS",
+        "WIPE_FS",
+        "batch-vertex",
+        "big-triangle-vertex",
+        "graphics-fragment",
+        "graphics-vertex"
+      ]
+    }
+  },
+  "gpuTextures": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+  ],
+  "growth": [
+    {
+      "key": "code:system / InstructionStream",
+      "dCount": 201,
+      "dSize": 254784,
+      "count": 2347,
+      "size": 2897280
+    },
+    {
+      "key": "code:system / TrustedByteArray",
+      "dCount": 437,
+      "dSize": 77148,
+      "count": 4947,
+      "size": 577808
+    },
+    {
+      "key": "native:system / WeakArrayList",
+      "dCount": 203,
+      "dSize": 37364,
+      "count": 1761,
+      "size": 181356
+    },
+    {
+      "key": "code:system / ProtectedFixedArray",
+      "dCount": 78,
+      "dSize": 26916,
+      "count": 412,
+      "size": 111944
+    },
+    {
+      "key": "code:system / FeedbackVector",
+      "dCount": 123,
+      "dSize": 18768,
+      "count": 1911,
+      "size": 318428
+    },
+    {
+      "key": "array:(object elements)",
+      "dCount": 2,
+      "dSize": 17236,
+      "count": 1489,
+      "size": 275324
+    },
+    {
+      "key": "code:system / Code",
+      "dCount": 201,
+      "dSize": 14472,
+      "count": 2347,
+      "size": 168984
+    },
+    {
+      "key": "object shape:system / Map",
+      "dCount": 109,
+      "dSize": 4360,
+      "count": 12683,
+      "size": 510680
+    },
+    {
+      "key": "code:system / LoadHandler",
+      "dCount": 263,
+      "dSize": 4296,
+      "count": 4288,
+      "size": 69864
+    },
+    {
+      "key": "native:LayoutShift",
+      "dCount": 28,
+      "dSize": 4256,
+      "count": 42,
+      "size": 6384
+    },
+    {
+      "key": "native:LargestContentfulPaint",
+      "dCount": 30,
+      "dSize": 4080,
+      "count": 43,
+      "size": 5848
+    },
+    {
+      "key": "native:PerformanceLongAnimationFrameTiming",
+      "dCount": 19,
+      "dSize": 3344,
+      "count": 27,
+      "size": 4752
+    },
+    {
+      "key": "native:blink::HeapHashTableBacking<blink::HashTable<cppgc::internal::BasicMember<blink:",
+      "dCount": 0,
+      "dSize": 3200,
+      "count": 372,
+      "size": 102912
+    },
+    {
+      "key": "native:DOMRectReadOnly",
+      "dCount": 56,
+      "dSize": 3136,
+      "count": 84,
+      "size": 4704
+    },
+    {
+      "key": "native:InteractionContentfulPaint",
+      "dCount": 30,
+      "dSize": 3120,
+      "count": 43,
+      "size": 4472
+    },
+    {
+      "key": "code:system / TrustedWeakFixedArray",
+      "dCount": 78,
+      "dSize": 2816,
+      "count": 412,
+      "size": 13432
+    },
+    {
+      "key": "object shape:system / DescriptorArray",
+      "dCount": 24,
+      "dSize": 2424,
+      "count": 2682,
+      "size": 388348
+    },
+    {
+      "key": "native:blink::HeapHashTableBacking<blink::HashTable<cppgc::internal::BasicMember<const ",
+      "dCount": 0,
+      "dSize": 2048,
+      "count": 25,
+      "size": 14728
+    },
+    {
+      "key": "native:TaskAttributionTiming",
+      "dCount": 17,
+      "dSize": 2040,
+      "count": 26,
+      "size": 3120
+    },
+    {
+      "key": "code:system / AllocationSite",
+      "dCount": 64,
+      "dSize": 1780,
+      "count": 1185,
+      "size": 31444
+    },
+    {
+      "key": "native:PerformanceLongTaskTiming",
+      "dCount": 17,
+      "dSize": 1768,
+      "count": 26,
+      "size": 2704
+    },
+    {
+      "key": "code:system / CodeWrapper",
+      "dCount": 201,
+      "dSize": 1608,
+      "count": 4875,
+      "size": 18776
+    },
+    {
+      "key": "code:system / BytecodeArray",
+      "dCount": 8,
+      "dSize": 1472,
+      "count": 4185,
+      "size": 779264
+    },
+    {
+      "key": "code:(object elements)",
+      "dCount": 43,
+      "dSize": 1268,
+      "count": 122,
+      "size": 3208
+    },
+    {
+      "key": "native:system / ProtectedFixedArray",
+      "dCount": 78,
+      "dSize": 1196,
+      "count": 413,
+      "size": 5780
+    },
+    {
+      "key": "native:LayoutShiftAttribution",
+      "dCount": 28,
+      "dSize": 1120,
+      "count": 42,
+      "size": 1680
+    },
+    {
+      "key": "object:Object",
+      "dCount": 34,
+      "dSize": 1048,
+      "count": 7691,
+      "size": 211676
+    },
+    {
+      "key": "object shape:(enum cache)",
+      "dCount": 12,
+      "dSize": 624,
+      "count": 264,
+      "size": 9120
+    },
+    {
+      "key": "native:system / SharedFunctionInfoWrapper",
+      "dCount": 78,
+      "dSize": 624,
+      "count": 412,
+      "size": 3296
+    },
+    {
+      "key": "code:system / WeakArrayList",
+      "dCount": 8,
+      "dSize": 408,
+      "count": 195,
+      "size": 6772
+    }
+  ],
+  "shrink": [
+    {
+      "key": "object shape:system / WeakArrayList",
+      "dCount": 0,
+      "dSize": 28,
+      "count": 84,
+      "size": 4120
+    },
+    {
+      "key": "string:(string)",
+      "dCount": 26,
+      "dSize": 24,
+      "count": 68397,
+      "size": 1420137
+    },
+    {
+      "key": "object shape:system / Cell",
+      "dCount": 2,
+      "dSize": 16,
+      "count": 471,
+      "size": 3760
+    },
+    {
+      "key": "native:DOMTokenList",
+      "dCount": 0,
+      "dSize": 16,
+      "count": 13,
+      "size": 856
+    },
+    {
+      "key": "native:<div data-fade=\"\" class=\"cs-fade on\">",
+      "dCount": 0,
+      "dSize": 16,
+      "count": 2,
+      "size": 224
+    },
+    {
+      "key": "code:system / WeakFixedArray",
+      "dCount": 2,
+      "dSize": -40,
+      "count": 1485,
+      "size": 95632
+    },
+    {
+      "key": "native:<div data-prompt=\"\" class=\"cs-prompt\" style=\"transform: translate(668px, 300px) ",
+      "dCount": -1,
+      "dSize": -120,
+      "count": 0,
+      "size": 0
+    },
+    {
+      "key": "array:(object properties)",
+      "dCount": -1,
+      "dSize": -128,
+      "count": 383,
+      "size": 238516
+    },
+    {
+      "key": "code:system / UncompiledDataWithoutPreparseData",
+      "dCount": -8,
+      "dSize": -160,
+      "count": 7733,
+      "size": 154660
+    },
+    {
+      "key": "code:(constant elements)",
+      "dCount": -43,
+      "dSize": -1268,
+      "count": 1759,
+      "size": 39036
+    }
+  ],
+  "errors": [],
+  "requests": []
+}

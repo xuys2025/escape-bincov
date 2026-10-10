@@ -1,0 +1,113 @@
+{
+  "at": "2026-10-08T11:15:34.500Z",
+  "base": "bcf7304595e6a01b406189e899dff35b9e929f8d",
+  "node": "v24.19.0",
+  "browser": "154.0.8037.98",
+  "checks": [
+    {
+      "name": "pnpm test",
+      "status": "passed",
+      "count": 224
+    },
+    {
+      "name": "Runtime subset",
+      "status": "passed",
+      "count": 27
+    },
+    {
+      "name": "pnpm package",
+      "status": "passed",
+      "identicalHtml": true,
+      "sha256": "88ca4cf44377533c385284994f41a837aa0004fd3e8d3614d11276a689a1684d"
+    },
+    {
+      "name": "test:browser",
+      "exit": 0,
+      "log": "test-results/astra-lifecycle/test-browser.log",
+      "status": "passed"
+    },
+    {
+      "name": "test:ui",
+      "exit": 0,
+      "log": "test-results/astra-lifecycle/test-ui.log",
+      "status": "passed"
+    },
+    {
+      "name": "test:desktop-input",
+      "exit": 0,
+      "log": "test-results/astra-lifecycle/test-desktop-input.log",
+      "status": "passed"
+    },
+    {
+      "name": "test:mobile",
+      "exit": 0,
+      "log": "test-results/astra-lifecycle/test-mobile.log",
+      "status": "passed"
+    },
+    {
+      "name": "test:mobile-ux",
+      "exit": 0,
+      "log": "test-results/astra-lifecycle/test-mobile-ux.log",
+      "status": "passed"
+    },
+    {
+      "name": "test:portable",
+      "exit": 0,
+      "log": "test-results/astra-lifecycle/test-portable.log",
+      "status": "passed"
+    },
+    {
+      "name": "test:save-browser",
+      "status": "passed",
+      "exit": 0
+    },
+    {
+      "name": "coast-sample-test",
+      "status": "passed",
+      "count": 32
+    },
+    {
+      "name": "ordinary lifecycle 1280/1920",
+      "status": "passed",
+      "count": "4/4 each"
+    },
+    {
+      "name": "astra-save-diagnostic",
+      "status": "passed",
+      "historical": "unconfirmed"
+    },
+    {
+      "name": "sol repaired-driver save diagnostic",
+      "status": "passed",
+      "count": 3
+    },
+    {
+      "name": "F20 full + ordinary ownership snapshots",
+      "status": "passed",
+      "remainingOwners": 0
+    },
+    {
+      "name": "F20 helper total heap",
+      "status": "partial",
+      "fullGrowthBytes": 312234.4,
+      "ordinaryGrowthBytes": 318312.8
+    },
+    {
+      "name": "Sol original packaged boundaries",
+      "status": "partial",
+      "passed": 7,
+      "partial": 1,
+      "exit": 1,
+      "F20GrowthBytes": 380136,
+      "errors": 0,
+      "externalRequests": 0
+    }
+  ],
+  "notRun": [
+    "physical devices/GPU driver crash",
+    "human balance play",
+    "remote CI/Pages deployment",
+    "qol-expansion intermittent baseline recheck",
+    "10-minute combat replay (no combat, RNG or clock changes)"
+  ]
+}

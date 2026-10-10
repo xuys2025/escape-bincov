@@ -1,0 +1,69 @@
+{
+  "failure": "initial delivery audit incorrectly required byte equality between the pre-existing checkout CRLF files and canonical LF Git blobs; product artifact equality was already checked and passed. No tool edits made to resolve this.",
+  "rows": [
+    {
+      "file": "scripts/astra-r7-f20.mjs",
+      "workingSHA": "31aa1254ca125b4039074d70b13644dfdb0c91c3b0b00f1ef57985d60bcffa06",
+      "baselineSHA": "31aa1254ca125b4039074d70b13644dfdb0c91c3b0b00f1ef57985d60bcffa06",
+      "byteEqual": true,
+      "normalizedEqual": true,
+      "crlf": 0
+    },
+    {
+      "file": "scripts/astra-r7-cache-graph.mjs",
+      "workingSHA": "d769327c70c4bec6e9b676dc9b5dd2c27589229b21d0b34215857dc7b2e6ddf8",
+      "baselineSHA": "d769327c70c4bec6e9b676dc9b5dd2c27589229b21d0b34215857dc7b2e6ddf8",
+      "byteEqual": true,
+      "normalizedEqual": true,
+      "crlf": 0
+    },
+    {
+      "file": "scripts/astra-r7-heap-graph.mjs",
+      "workingSHA": "f89e6f9d775783ad900f32962a967aaa69ca5daa8ea63865f519c9b2dcc5c95b",
+      "baselineSHA": "f89e6f9d775783ad900f32962a967aaa69ca5daa8ea63865f519c9b2dcc5c95b",
+      "byteEqual": true,
+      "normalizedEqual": true,
+      "crlf": 0
+    },
+    {
+      "file": "scripts/sol-sample-boundaries.mjs",
+      "workingSHA": "7066289e7a01af3bf35139c595b093e7121c03285b52eb604e89456af68300f8",
+      "baselineSHA": "7066289e7a01af3bf35139c595b093e7121c03285b52eb604e89456af68300f8",
+      "byteEqual": true,
+      "normalizedEqual": true,
+      "crlf": 0
+    },
+    {
+      "file": "scripts/coast-lifecycle-test.mjs",
+      "workingSHA": "0ebba499c38f875b7d7ccd0662dc5da900fec717922cd3380258acb8a415f578",
+      "baselineSHA": "b719e999c57727aebd27b135a8054a7ebb37c6eb83eabc627301f847fb3635ac",
+      "byteEqual": false,
+      "normalizedEqual": true,
+      "crlf": 1
+    },
+    {
+      "file": "scripts/desktop-input-test.mjs",
+      "workingSHA": "0882d78e3cf8a0755f5c83f9fd1743b718f9f0c77abbd75659083caf21121afc",
+      "baselineSHA": "0882d78e3cf8a0755f5c83f9fd1743b718f9f0c77abbd75659083caf21121afc",
+      "byteEqual": true,
+      "normalizedEqual": true,
+      "crlf": 0
+    },
+    {
+      "file": "scripts/mobile-test.mjs",
+      "workingSHA": "b11cee6e4fa6b2751f74503fc357e6cbd58cb0f367e6c1081b5f1dc3a503bf8a",
+      "baselineSHA": "b11cee6e4fa6b2751f74503fc357e6cbd58cb0f367e6c1081b5f1dc3a503bf8a",
+      "byteEqual": true,
+      "normalizedEqual": true,
+      "crlf": 0
+    },
+    {
+      "file": "scripts/mobile-ux-test.mjs",
+      "workingSHA": "2bcd94757fb09c75cb904c84001953de071b247edcf54ab0bade53a913d360c7",
+      "baselineSHA": "2bcd94757fb09c75cb904c84001953de071b247edcf54ab0bade53a913d360c7",
+      "byteEqual": true,
+      "normalizedEqual": true,
+      "crlf": 0
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "browser": "154.0.8037.98",
+  "startedAt": "2026-10-09T19:19:37.606Z",
+  "methodology": "Packaged offline build at https://station.test/ (routed, no network). Real session/localStorage, real DOM input in headless Chrome; phone sizes are viewport/touch emulation. ?test=1 fixtures: player placement, save seeding through SaveSession transactions while the yard is closed, storage fault injection, production time shortening. No mock Runtime and no simulated raid result.",
+  "steps": [
+    {
+      "name": "A4 院子画面启动失败（WebGL 不可用）：自动退回旧页签界面并提示，存档不受影响",
+      "status": "passed",
+      "detail": "Pixi 改用 Canvas 时按失败处理；提示「院子画面启动失败，已切换到页签界面。」；页签界面可用，存档已升级",
+      "ms": 1553
+    },
+    {
+      "name": "E4 训练：真实有效120秒、规则奖励、静止/面板/后台暂停不计时",
+      "status": "passed",
+      "detail": {
+        "wallSeconds": 125.44,
+        "before": {
+          "startedAt": 1791573580064,
+          "quantity": 0,
+          "credited": {
+            "strength": 0,
+            "constitution": 0,
+            "technique": 0
+          },
+          "activeSeconds": 0,
+          "attribute": "technique",
+          "windowLeft": 591.366
+        },
+        "after": {
+          "startedAt": 1791573580064,
+          "quantity": 0.2875,
+          "credited": {
+            "strength": 0,
+            "constitution": 0,
+            "technique": 0.057499999999999996
+          },
+          "activeSeconds": 2.883399999986853,
+          "attribute": "technique",
+          "windowLeft": 465.929
+        },
+        "beforeProgress": 0,
+        "afterProgress": 0.057499999999999996,
+        "level": 3,
+        "trace": {
+          "acceptedSeconds": 122.88339999998631,
+          "accepted": 20273,
+          "offered": 20661,
+          "events": [
+            {
+              "type": "practice-credited",
+              "attribute": "technique",
+              "amount": 0.057499999999999996
+            }
+          ]
+        },
+        "pauses": [
+          {
+            "name": "静止",
+            "before": 0,
+            "after": 0
+          },
+          {
+            "name": "面板打开且按住移动键",
+            "before": 0,
+            "after": 0
+          },
+          {
+            "name": "失焦门控模拟（实际切窗未测）",
+            "before": 0,
+            "after": 0
+          },
+          {
+            "name": "隐藏门控模拟",
+            "before": 0,
+            "after": 0
+          }
+        ]
+      },
+      "ms": 135054
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "frameAudit": [],
+  "expectedLogs": [
+    {
+      "step": "A4",
+      "lines": [
+        "[console] Error: Station yard needs WebGL (got canvas).\n    at lm (https://station.test/?test=1:9154:35048)"
+      ]
+    }
+  ],
+  "coverage": {
+    "training": {
+      "wallSeconds": 125.44,
+      "before": {
+        "startedAt": 1791573580064,
+        "quantity": 0,
+        "credited": {
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0
+        },
+        "activeSeconds": 0,
+        "attribute": "technique",
+        "windowLeft": 591.366
+      },
+      "after": {
+        "startedAt": 1791573580064,
+        "quantity": 0.2875,
+        "credited": {
+          "strength": 0,
+          "constitution": 0,
+          "technique": 0.057499999999999996
+        },
+        "activeSeconds": 2.883399999986853,
+        "attribute": "technique",
+        "windowLeft": 465.929
+      },
+      "beforeProgress": 0,
+      "afterProgress": 0.057499999999999996,
+      "level": 3,
+      "trace": {
+        "acceptedSeconds": 122.88339999998631,
+        "accepted": 20273,
+        "offered": 20661,
+        "events": [
+          {
+            "type": "practice-credited",
+            "attribute": "technique",
+            "amount": 0.057499999999999996
+          }
+        ]
+      },
+      "pauses": [
+        {
+          "name": "静止",
+          "before": 0,
+          "after": 0
+        },
+        {
+          "name": "面板打开且按住移动键",
+          "before": 0,
+          "after": 0
+        },
+        {
+          "name": "失焦门控模拟（实际切窗未测）",
+          "before": 0,
+          "after": 0
+        },
+        {
+          "name": "隐藏门控模拟",
+          "before": 0,
+          "after": 0
+        }
+      ]
+    }
+  },
+  "finishedAt": "2026-10-09T19:21:54.393Z",
+  "summary": {
+    "passed": 2,
+    "total": 2
+  }
+}

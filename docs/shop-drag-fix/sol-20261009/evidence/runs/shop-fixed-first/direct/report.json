@@ -1,0 +1,165 @@
+{
+  "html": "D:\\bincov\\shop-drag-fix\\dist\\index.html",
+  "browser": "154.0.8037.98",
+  "startedAt": "2026-10-09T13:26:16.116Z",
+  "steps": [
+    {
+      "name": "修理铺: drag 商人物品 -> 待买 lands on the chosen cell with a live preview; no money or save changes before checkout",
+      "status": "passed",
+      "detail": {
+        "mid": {
+          "ghost": true,
+          "preview": "true",
+          "previewW": "108px"
+        },
+        "cash": 700
+      }
+    },
+    {
+      "name": "修理铺: drag 待买 -> 商人物品 cancels the purchase",
+      "status": "passed",
+      "detail": {
+        "buy": []
+      }
+    },
+    {
+      "name": "修理铺: refused drops say why and move nothing; a catalog item dropped back on the catalog is a quiet cancel",
+      "status": "passed",
+      "detail": {
+        "refused": "先放入待买或待卖区，再统一结算。"
+      }
+    },
+    {
+      "name": "修理铺: focus loss, Esc and R mid-drag: the drag ends cleanly (or keeps the item's orientation) and the next drag works",
+      "status": "passed",
+      "detail": {
+        "widths": [
+          "108px",
+          "108px"
+        ]
+      }
+    },
+    {
+      "name": "修理铺: click-to-place (选中 → 移动格位 → 点格) still works and does not start a drag",
+      "status": "passed",
+      "detail": {
+        "buy": [
+          "pistol"
+        ]
+      }
+    },
+    {
+      "name": "修理铺: checkout with a failed storage write keeps money, warehouse and cart; the retry buys once",
+      "status": "passed",
+      "detail": {
+        "cash": [
+          700,
+          700,
+          380
+        ],
+        "due": 320,
+        "stash": [
+          "medkit×1",
+          "ammo9×24",
+          "pistol×1"
+        ]
+      }
+    },
+    {
+      "name": "修理铺: drag 仓库 -> 待卖, back to 仓库 (cancel), again to 待卖, then sell",
+      "status": "passed",
+      "detail": {
+        "cash": [
+          380,
+          530
+        ],
+        "income": 150
+      }
+    },
+    {
+      "name": "卫生所: drag 商人物品 -> 待买 lands on the chosen cell with a live preview; no money or save changes before checkout",
+      "status": "passed",
+      "detail": {
+        "mid": {
+          "ghost": true,
+          "preview": "true",
+          "previewW": "54px"
+        },
+        "cash": 700
+      }
+    },
+    {
+      "name": "卫生所: drag 待买 -> 商人物品 cancels the purchase",
+      "status": "passed",
+      "detail": {
+        "buy": []
+      }
+    },
+    {
+      "name": "卫生所: refused drops say why and move nothing; a catalog item dropped back on the catalog is a quiet cancel",
+      "status": "passed",
+      "detail": {
+        "refused": "先放入待买或待卖区，再统一结算。"
+      }
+    },
+    {
+      "name": "卫生所: focus loss, Esc and R mid-drag: the drag ends cleanly (or keeps the item's orientation) and the next drag works",
+      "status": "passed",
+      "detail": {
+        "widths": [
+          "54px",
+          "54px"
+        ]
+      }
+    },
+    {
+      "name": "卫生所: click-to-place (选中 → 移动格位 → 点格) still works and does not start a drag",
+      "status": "passed",
+      "detail": {
+        "buy": [
+          "bandage"
+        ]
+      }
+    },
+    {
+      "name": "卫生所: checkout with a failed storage write keeps money, warehouse and cart; the retry buys once",
+      "status": "passed",
+      "detail": {
+        "cash": [
+          700,
+          700,
+          655
+        ],
+        "due": 45,
+        "stash": [
+          "medkit×1",
+          "ammo9×24",
+          "bandage×1"
+        ]
+      }
+    },
+    {
+      "name": "卫生所: drag 仓库 -> 待卖, back to 仓库 (cancel), again to 待卖, then sell",
+      "status": "passed",
+      "detail": {
+        "cash": [
+          655,
+          673
+        ],
+        "income": 18
+      }
+    },
+    {
+      "name": "touch 844x390: tap-to-place moves 商人物品 -> 待买 and back; items are not draggable",
+      "status": "passed",
+      "detail": {
+        "buy": [
+          "pistol"
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "finishedAt": "2026-10-09T13:26:29.697Z"
+}

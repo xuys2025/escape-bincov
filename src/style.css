@@ -615,3 +615,7 @@ html[data-overlay]:not([data-overlay=""]) .raid-information { visibility: hidden
 .mobile .base-hud p { bottom: 4px; max-width: 55%; font-size: 12px; }
 .mobile .rpg-cards { gap: 6px; margin: 8px 0; }
 .mobile .rpg-cards > div { min-width: 85px; padding: 8px; }
+
+/* Station yard (src/station-view): its own shadow root covers the page while the Phaser frame sleeps. */
+html[data-station] #frame { visibility: hidden; }
+#station-yard { position: fixed; inset: 0; z-index: 2; background: #0a0c0e; }

@@ -1,0 +1,69 @@
+{
+  "format": "escape-bincov-backup",
+  "formatVersion": 2,
+  "createdAt": "2026-10-09T13:32:22.781Z",
+  "save": {
+    "version": 2,
+    "cash": 700,
+    "stash": {
+      "w": 10,
+      "h": 6,
+      "items": [
+        {
+          "uid": "bc-mv108uz6-9",
+          "id": "medkit",
+          "qty": 1,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "uid": "bc-mv108uz6-a",
+          "id": "ammo9",
+          "qty": 24,
+          "x": 2,
+          "y": 0
+        }
+      ]
+    },
+    "bag": {
+      "w": 6,
+      "h": 5,
+      "items": []
+    },
+    "safe": {
+      "w": 2,
+      "h": 2,
+      "items": []
+    },
+    "equipment": {
+      "weapon": null,
+      "relief": false,
+      "ammo": 0,
+      "ammoRelief": 0
+    },
+    "quests": {
+      "repair": false,
+      "sample": false,
+      "ledger": false
+    },
+    "upgraded": false,
+    "settings": {
+      "volume": 0.35
+    },
+    "stats": {
+      "runs": 1,
+      "extracts": 0,
+      "kills": 0
+    },
+    "activeRun": null,
+    "lastResult": {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 296,
+      "seed": 551380089,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    }
+  }
+}

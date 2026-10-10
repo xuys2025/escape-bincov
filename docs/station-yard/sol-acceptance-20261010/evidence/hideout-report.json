@@ -1,0 +1,46 @@
+{
+  "browser": "154.0.8037.98",
+  "startedAt": "2026-10-09T19:30:01.608Z",
+  "methodology": "Real offline release HTML, real session and localStorage. Test-only hooks seed facilities and inject quota; no prototype renderer or image acceptance.",
+  "steps": [
+    {
+      "name": "normal offline entry has no test globals; default old shortcut shares upgraded v2",
+      "status": "passed"
+    },
+    {
+      "name": "facade buy and old tab use the same profile; cart itself is disposable",
+      "status": "passed"
+    },
+    {
+      "name": "quota injection rolls back facility, cash and success events; retry is single",
+      "status": "passed"
+    },
+    {
+      "name": "real five-second practice checkpoint failure retains export and blocks shortcut writes",
+      "status": "passed"
+    },
+    {
+      "name": "prepared departure survives reload during animation without duplicate run count",
+      "status": "passed",
+      "detail": {
+        "runId": "bc-mv1d0zi4-14"
+      }
+    },
+    {
+      "name": "real city settlement disposes host; return marker is nonpersistent and single-use",
+      "status": "passed"
+    },
+    {
+      "name": "animation-complete bridge starts the existing city host exactly once",
+      "status": "passed"
+    },
+    {
+      "name": "real storage peer conflict is read-only and keeps the latest bytes",
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "status": "passed",
+  "finishedAt": "2026-10-09T19:30:13.578Z"
+}

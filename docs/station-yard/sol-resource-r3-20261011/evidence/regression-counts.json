@@ -1,0 +1,56 @@
+[
+  {
+    "name": "hideout",
+    "passed": 8,
+    "method": "PASS lines in actual run log",
+    "failedLines": []
+  },
+  {
+    "name": "mobile",
+    "passed": 10,
+    "method": "PASS lines in actual run log",
+    "failedLines": []
+  },
+  {
+    "name": "mobile-ux",
+    "passed": 11,
+    "method": "PASS lines in actual run log",
+    "failedLines": []
+  },
+  {
+    "name": "desktop-input",
+    "passed": 10,
+    "method": "PASS lines in actual run log",
+    "failedLines": []
+  },
+  {
+    "name": "shop-drag",
+    "passed": 21,
+    "method": "PASS lines in actual run log",
+    "failedLines": []
+  },
+  {
+    "name": "portable",
+    "passed": 6,
+    "method": "structured portable-report steps",
+    "failedLines": []
+  },
+  {
+    "name": "title",
+    "passed": 27,
+    "method": "PASS lines in actual run log",
+    "failedLines": []
+  },
+  {
+    "name": "save-browser",
+    "passed": 9,
+    "method": "PASS lines in actual run log",
+    "failedLines": []
+  },
+  {
+    "name": "systems",
+    "passed": 16,
+    "method": "PASS lines in actual run log",
+    "failedLines": []
+  }
+]
