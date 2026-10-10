@@ -81,7 +81,7 @@ Astra按维护者要求从5075ed6续作，见[第三轮资源报告](station-yar
 
 | 事项 | 来源 / 当前归属 | 当前处理 |
 | --- | --- | --- |
-| 沿海地图 2.5D 视角与像素材质 | 用户 2026-10-07 确认，随后明确授权首个真实城中村 Runtime；[#22](https://github.com/xuys2025/escape-bincov/pull/22) · `docs/coast-2-5d-art-design`；[设计文档](COAST-2_5D-ART-DESIGN.md) | 2026-10-08 本地交付纯数据 Runtime、v1 端口、地图/输入/事务事件与测试；[接入及实际回归](COAST-RUNTIME-SAMPLE.md)。基线 main `f144147`，原 PR 头 `878f563`；原 fork 无 push 权限，提交暂存本地，远端仍为文档版本。等待 Opus/Sol 接线验收后续指令；不扩展全沿海、不制作素材、不合并发布。2026-10-08 Opus 在原分支本地完成城中村/二楼/地下层可玩样板：`?sample=village` 挂 Pixi 画面于真实 Runtime 与事务服务，见 [样板接入](COAST-SAMPLE-VIEW.md) 与 [Sol 验收清单](coast-sample-view/SOL-ACCEPTANCE.md)；等待用户确认画面 |
+| 沿海地图 2.5D 视角与像素材质 | 用户确认；设计 [#22](https://github.com/xuys2025/escape-bincov/pull/22)，实现 [#33](https://github.com/xuys2025/escape-bincov/pull/33)；[设计文档](COAST-2_5D-ART-DESIGN.md) | 2026-10-11 设计已合并（9e5173b）；维护者授权 #33 承接 c565d97 的城中村样板、水产站院子及既有修复，按最终 CI 门禁合并。当前交付、历史证据和范围见[实现交付](IMPLEMENTATION-RELEASE.md)，AI 遗留见 #32。以下按日期保留历史实现与验收记录，不继续扩量。 |
 | 故事文学性重写 | 用户 2026-10-09 明确要求；[#29](https://github.com/xuys2025/escape-bincov/pull/29) · `docs/story-literary-rewrite`；[写作交接](STORY-LITERARY-REWRITE.md) | #27 已合并，维护者认为现有故事缺少文学性，交给 Opus 5.5 续写。2026-10-09 已在同一草稿 PR 提交[《等海退去》](MAIN-STORY.md)初稿，设定索引补充第 6 节，取舍列在写作交接的修订说明中。LMX-323 已回复六项取舍（五项接受，人物去向改为随条件变化），同日完成第二轮修订。创作者批准后转 Ready，按维护者授权合并。文稿合并不代表故事已接入游戏：接入仍排在 #22 之后，#26 保持开放。功能实施仍排在 #22 完成后，#26 未决建议保留 |
 | QOL 与建筑/RPG 主线整合 | #10 原分支，基线 `9045139` | 本轮修复与验证见 [整合记录](QOL-PR16-INTEGRATION.md)，完整 CI 通过后按维护者授权合并；未完真机验收保留 |
 | 美术及界面前序成果收尾 | #11 / #18，承接实现 #20 | 方向与核心资产已采用；原 PR 留档收尾，历史报告不冒充新版本验收 |
