@@ -1,0 +1,192 @@
+{
+  "date": "2026-10-12",
+  "sourceMain": "64505046fb737af195bc808d2f8e4274df21cf24",
+  "productChanged": false,
+  "browser": {
+    "scope": "diagnosis of unchanged main HTML; explicit test fixtures; real mouse/keyboard; not human playtest",
+    "pageErrors": [],
+    "externalRequests": [],
+    "aim": [
+      {
+        "pointer": {
+          "x": 1050,
+          "y": 260
+        },
+        "publishedAim": -0.2280447980695044,
+        "convertedAim": -0.22804479806950528,
+        "player": "640,456"
+      },
+      {
+        "pointer": {
+          "x": 1060,
+          "y": 570
+        },
+        "publishedAim": 0.4431025549674068,
+        "convertedAim": 0.44310255496740586,
+        "player": "640,456"
+      }
+    ],
+    "htmlSha256": "2320bd31ef8a192e7e3ca2e1175e93742ba19001eb88ab4f9c44046503b88231",
+    "browser": "154.0.8037.99",
+    "held": {
+      "milliseconds": 1500,
+      "shots": 1,
+      "mag": 7
+    },
+    "precise": {
+      "state": true,
+      "reticle": "cs-cross precise"
+    },
+    "clicks": [
+      {
+        "shotId": "player:entity-bc-mv44b59n-b-61",
+        "shooter": "player",
+        "weapon": "pistol",
+        "pellets": [
+          {
+            "bullet": "entity-bc-mv44b59n-b-61",
+            "origin": {
+              "x": 655.5449660359219,
+              "y": 462.88142651940973
+            },
+            "angle": 0.41674893867549684
+          }
+        ]
+      },
+      {
+        "shotId": "player:entity-bc-mv44b59n-b-62",
+        "shooter": "player",
+        "weapon": "pistol",
+        "pellets": [
+          {
+            "bullet": "entity-bc-mv44b59n-b-62",
+            "origin": {
+              "x": 655.4213709905462,
+              "y": 463.15411187862907
+            },
+            "angle": 0.4343602119114394
+          }
+        ]
+      }
+    ],
+    "result": "passed"
+  },
+  "runtimeIsolation": {
+    "scope": "existing runtime fire-function isolation and analytic collision geometry; no balancing or new gameplay",
+    "shotsPerModePerWeapon": 64,
+    "results": [
+      {
+        "id": "pistol",
+        "spreadRadians": 0.07,
+        "hipHalfAngleDegrees": 2.0053522829578814,
+        "preciseHalfAngleDegrees": 0.7018732990352585,
+        "hipHalfWidthAt320": 11.204575575378348,
+        "preciseHalfWidthAt320": 3.920196093437184,
+        "geometricOnly": {
+          "distance": 320,
+          "targetRadius": 14,
+          "count": 1000,
+          "hits": 1000,
+          "excludes": [
+            "walls",
+            "moving targets",
+            "camera",
+            "RPG multipliers"
+          ],
+          "shotgunNote": "pellet paths only; not trigger hit rate"
+        },
+        "sameRngPreciseRatio": 0.35,
+        "rotationUnchangedAfter64Triggers": true
+      },
+      {
+        "id": "carbine",
+        "spreadRadians": 0.035,
+        "hipHalfAngleDegrees": 1.0026761414789407,
+        "preciseHalfAngleDegrees": 0.35093664951762926,
+        "hipHalfWidthAt320": 5.6005717367045165,
+        "preciseHalfWidthAt320": 1.9600245105761451,
+        "geometricOnly": {
+          "distance": 320,
+          "targetRadius": 14,
+          "count": 1000,
+          "hits": 1000,
+          "excludes": [
+            "walls",
+            "moving targets",
+            "camera",
+            "RPG multipliers"
+          ],
+          "shotgunNote": "pellet paths only; not trigger hit rate"
+        },
+        "sameRngPreciseRatio": 0.35,
+        "rotationUnchangedAfter64Triggers": true
+      }
+    ],
+    "shotgun": {
+      "spreadRadians": 0.27,
+      "sameRngPreciseRatio": 0.35,
+      "rotationUnchangedAfter64Triggers": true,
+      "geometry": "excluded from the center-hit example: different range and pellet pattern"
+    },
+    "input": {
+      "mouseFirst": {
+        "move": {
+          "x": 0,
+          "y": 0,
+          "sprint": false
+        },
+        "aim": 0,
+        "precise": false,
+        "firePressed": true,
+        "fireHeld": false,
+        "interactPressed": false,
+        "interactHeld": false,
+        "commands": [],
+        "selectTarget": null,
+        "source": "mouse-keyboard"
+      },
+      "mouseHeldNext": {
+        "move": {
+          "x": 0,
+          "y": 0,
+          "sprint": false
+        },
+        "aim": 0,
+        "precise": false,
+        "firePressed": false,
+        "fireHeld": false,
+        "interactPressed": false,
+        "interactHeld": false,
+        "commands": [],
+        "selectTarget": null,
+        "source": "mouse-keyboard"
+      },
+      "touchFullStick": {
+        "move": {
+          "x": 0,
+          "y": 0,
+          "sprint": false
+        },
+        "aim": 0,
+        "precise": false,
+        "firePressed": false,
+        "fireHeld": true,
+        "interactPressed": false,
+        "interactHeld": false,
+        "commands": [],
+        "selectTarget": null,
+        "source": "touch"
+      }
+    }
+  },
+  "limitations": [
+    "Not human playtesting",
+    "No real phones",
+    "No new mechanics implemented or accepted",
+    "Target geometry excludes walls, movement, camera and RPG multipliers",
+    "Repeated runtime fire calls reset magazine/cooldown; not a natural cadence test"
+  ],
+  "executionNotes": [
+    "Initial diagnostic loader invocation used a Windows path; Node rejected its URL before running the probe. Retried with file:/// and passed."
+  ]
+}
