@@ -1,3 +1,7 @@
+## 2026-10-12 · 游戏射击系统改造（PR #28 实现前置）
+
+维护者明确要求独立建 PR，由 `feat/shooting-system-rework` 承接原 PR #28 规划的 M0-S 射击基础。见[范围、分工与验收门槛](SHOOTING-SYSTEM-REWORK.md)。射击实现、独立验收和维护者试玩完成并获准合入 main 后，[PR #28](https://github.com/xuys2025/escape-bincov/pull/28) 再同步主线进入改装实现；#28 文档可继续审阅。今天只建档，完成后停止，等下次指令再实施；文档或 CI 通过不等于前置功能完成。以下历史记录保留。
+
 ## 2026-10-12 · SOL-R3-CAP-LISTENER-01（AI 遗留三级单项）
 
 #36 已合并，main `1dbacb4`。按维护者指令在独立分支 `fix/cap-listener-r3` 只收口 #32 的 SOL-R3-CAP-LISTENER-01：区分测试 scratch 绘制与产品往返各自触发的 Pixi DefaultShader 替换，渲染层改为每个纹理数一个 DefaultShader，修复前 C5 失败对照保留。见[复现、根因与验证](station-yard/opus-cap-listener-20261012/README.md)。本批为独立小 PR，不改 Runtime/存档/图片；F20 总堆、ASTRA-SAVE-01、原 R/K 及其它二三级保持原状态，不自行合并/发布/更新试玩站。

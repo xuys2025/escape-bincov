@@ -1,3 +1,9 @@
+## 2026-10-12 · 游戏射击系统改造独立建档
+
+按维护者明确要求，从 main `64505046fb737af195bc808d2f8e4274df21cf24` 建立 `feat/shooting-system-rework`，仅交付[任务书](docs/SHOOTING-SYSTEM-REWORK.md)和任务索引，建立名为「游戏射击系统改造」的草稿 PR。射击实现、独立验收、维护者试玩及获准合入构成 #28 改枪实现前置；仅合入文档不解除依赖。#28 保留目录、品牌详情、实例和改装扩量，本 PR 不反向依赖 #28 合并，调研固定引用 a3ff524。
+
+完成建档后停止，等待下一次明确指令再实施。未改产品、依赖、素材或制品，未派发 Astra/Opus/Sol 工作，未合并发布。本轮验证限文档、差异范围及密钥钩子，实际射击验收全部未完成。以下历史交接保留。
+
 ## 2026-10-12 · SOL-R3-CAP-LISTENER-01 能力切换监听
 
 从 main `1dbacb4` 建 `fix/cap-listener-r3`，只处理 #32 三级的 SOL-R3-CAP-LISTENER-01。根因是 Pixi 8.22 `DefaultBatcher._updateMaxTextures`：能力变化后池里复用的 Graphics 渲染数据每次新建 DefaultShader、不销毁旧的，旧 Shader 的 BindGroup 永久挂在模块缓存的 batch-sampler 组上。C5 的增长来自测试 scratch 绘制，真实院子→城中村往返也会触发。`src/coast-view/renderer-lifetime.ts` 改为整页每个纹理数一个 DefaultShader，批处理器的 Shader 与自身纹理数保持一致。
