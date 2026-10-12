@@ -1,3 +1,9 @@
+## 2026-10-12 · 暴击与三属性Perk修订（独立设计文档）
+
+维护者已批准方案并要求提交设计文档PR，由 `docs/critical-perk-design` 承接：[专项规格](CRITICAL-PERK-DESIGN.md)、[RPG总设计](RPG-SYSTEM-DESIGN.md)。基于main `64505046fb737af195bc808d2f8e4274df21cf24`：取消新行动暴击与命中部位相关性，按未暴击概率乘法合并、上限100%；永久15/20/25/30级独立二选一，24候选/12节点；屏息每秒独立10%、3秒30%，基地500现金重置单属性perk。
+
+本次只交付文档、公式与兼容/验收要求，不启动代码实现或新增派工。[#39](https://github.com/xuys2025/escape-bincov/pull/39)承担射击/真实后坐基础，[#28](https://github.com/xuys2025/escape-bincov/pull/28)承担完整改枪目录，本规格的控枪perk将来接入其正式契约；不改动两者分支或已有范围。原RPG #13/#16已结束，当前没有同目标perk设计承接PR，因此建立独立文档交付。完成条件为规则/链接/公式/范围核对、PR检查及维护者审阅；功能实现、迁移和真人平衡后续另行授权，历史未测状态保留。
+
 ## 2026-10-12 · SOL-R3-CAP-LISTENER-01（AI 遗留三级单项）
 
 #36 已合并，main `1dbacb4`。按维护者指令在独立分支 `fix/cap-listener-r3` 只收口 #32 的 SOL-R3-CAP-LISTENER-01：区分测试 scratch 绘制与产品往返各自触发的 Pixi DefaultShader 替换，渲染层改为每个纹理数一个 DefaultShader，修复前 C5 失败对照保留。见[复现、根因与验证](station-yard/opus-cap-listener-20261012/README.md)。本批为独立小 PR，不改 Runtime/存档/图片；F20 总堆、ASTRA-SAVE-01、原 R/K 及其它二三级保持原状态，不自行合并/发布/更新试玩站。
