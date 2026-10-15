@@ -1,3 +1,10 @@
+## 2026-10-15 · 种子超过 10 亿的行动无法结算（`fix/run-seed-limit`）
+
+- `src/domain.ts` `migrateSave`：`lastResult.seed` 用 `integer(..., 0, 0xffffffff)`，与 `activeRun.seed`、检查点 `seed` 的上限一致。原来默认上限 1e9 会把大种子截成 1e9，`recovery-store.ts` 的 `decodeSession` 发现规范化前后不同就拒绝，结算写不进去（`pendingSettlement` 一直挂着），导出恢复备份也失败。
+- 时间种子 `Date.now() >>> 0` 在 2026-10-14T18:09Z 越过 1e9，到 2026-11-21T21:25Z 回落；所以 main 昨天 CI 通过，今天所有 PR 的 `test:save-browser` 第 9 步（冲突时导出结算备份）都失败。
+- 回归：`tests/session.test.ts` 新增一项（修复前在 1000000001 失败）。浏览器实测（离线包，`?test=1&entry=tabs`）：种子 1500000000 放弃行动后正常进入结果页，刷新后存档正常；`test:save-browser` 全部通过。
+- 已经卡住的玩家：挂起的结算只在内存里，存档里仍是进行中的行动；更新后从标题页继续，再结束即可正常结算。
+
 ## 2026-10-14 · 商场 2.5D：遗留几项处理（#47 / #48，维护者授权合并）
 
 维护者说“按你的想法改，改完就合并”。先对 5 项分别调查，每项再由一名复核者检查方案（决策记录在会话 scratchpad 的 decisions/*.json）。然后各在独立工作区实现，测试都先在旧代码上确认会失败，最后拣回本分支。

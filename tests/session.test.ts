@@ -45,6 +45,21 @@ test('sessions isolate progress, storage and pending outcomes', () => {
     assert.equal(b.writes, 0);
 });
 
+test('a run seeded anywhere in the 32-bit range settles, stores and reloads its seed', () => {
+    // Empty seed fields take the clock (Date.now() >>> 0), which is above 1e9 for most of every 49.7-day cycle.
+    for (const seed of [42, 1_000_000_001, 1_039_392_627, 0xffffffff]) {
+        const f = fixture();
+        assert.equal(f.session.beginRun(seed), true);
+        f.state.state = 'run';
+        assert.equal(f.session.prepareSettlement('death', 0), true);
+        assert.equal(f.session.retrySettlement(), true, `seed ${seed} settles`);
+        assert.equal(f.state.pendingSettlement, null);
+        assert.equal(f.state.result?.seed, seed);
+        assert.equal(read(f.storage).lastResult?.seed, seed);
+        assert.equal(D.migrateSave(structuredClone(read(f.storage))).lastResult?.seed, seed);
+    }
+});
+
 test('a denied storage accessor is handled without publishing a raid loadout', () => {
     const state = createSessionState();
     const session = new SaveSession(state, () => { throw new Error('SecurityError'); });
