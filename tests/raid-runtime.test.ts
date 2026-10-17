@@ -286,7 +286,7 @@ test('production host exposes no mutable core or fixture controls and preserves 
     const saves = new SaveSession(state, () => ({ getItem: k => data.get(k) ?? null, setItem: (k, v) => { if (fail) throw Error('quota'); data.set(k, v); } }));
     assert.equal(saves.initialize(), true); state.state = 'hideout'; assert.equal(saves.beginRun(42, true), true); state.state = 'run';
     const host = createCoastRaidHost(state, saves);
-    assert.deepEqual(Object.keys(host.runtime).sort(), ['advance', 'current', 'dispose', 'pause', 'resume', 'setBlocked']);
+    assert.deepEqual(Object.keys(host.runtime).sort(), ['advance', 'current', 'dispose', 'pause', 'resetClock', 'resume', 'setBlocked']);
     assert.equal('test' in host, false); assert.equal('freezeAI' in host.runtime, false);
     fail = true; host.services.abandon(); assert.equal(host.runtime.current().frame.phase, 'ending');
     assert.equal(host.services.settlement().retryable, true); assert.ok(host.services.backup()!.terminal);

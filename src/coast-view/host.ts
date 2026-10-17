@@ -299,8 +299,12 @@ export class CoastSampleHost {
     const intent = this.input.read(playing, (x, y) => this.view.aimFromClient(x, y));
     if (intent.firePressed) this.sound.trigger(this.last?.frame.hud.weapon);
     const note = playing && intent.interactPressed && this.last?.frame.interaction?.kind === 'note' ? this.last.frame.interaction.ref.id : null;
+    // The frame after a mount or a floor rebuild starts after the view's first bake and texture upload. That gap is the
+    // page's own work, not a frozen tab, so the Runtime discards it rather than stall-pausing; later gaps still pause.
+    if (this.resync) { this.resync = false; this.runtime.resetClock(); }
     const batch = this.runtime.advance(t0, intent);
     const t1 = performance.now();
+    if (!this.last || batch.map !== this.last.map) this.resync = true;
     if (batch.map !== this.last?.map) this.noteTitles = new Set(batch.map.notes.map(n => n.title));
     this.view.openContainer = this.panel === 'loot' ? this.services.lootContext()?.containerId ?? null : null;
     if (!this.contextLost) this.view.present(batch, this.app.ticker.deltaMS / 1000, follow);
@@ -508,7 +512,11 @@ export class CoastSampleHost {
     s.on(this.q('[data-swap]'), 'pointerdown', e => { e.preventDefault(); this.input.press(this.weaponShown === 'knife' ? 'primary' : 'knife'); });
     s.on(this.q('[data-bag]'), 'click', () => { if (!this.panel) this.openInventory(); else if (this.panel === 'inventory') this.closePanel(true); });
     s.on(this.q('[data-choices]'), 'click', e => {
-      const id = (e.target as HTMLElement).closest('[data-id]')?.getAttribute('data-id'), w = this.last?.stamp.world; if (!id || !w || this.panel) return;
+      const el = e.target as HTMLElement, w = this.last?.stamp.world; if (!w || this.panel) return;
+      if (el.closest('[data-near-toggle]')) { this.nearbyOpen = !this.nearbyOpen; return; }
+      const ground = el.closest('[data-ground]')?.getAttribute('data-ground');
+      if (ground) { this.services.activate({ runId: w.runId, mapId: w.mapId, kind: 'ground', id: ground }); return; }
+      const id = el.closest('[data-id]')?.getAttribute('data-id'); if (!id) return;
       // A tap names the exact source to open, as the action button cannot; a click (mouse) selects it for E.
       if (this.input.touch) this.services.activate({ runId: w.runId, mapId: w.mapId, kind: 'container', id }); else this.input.select(id);
     });
@@ -901,9 +909,15 @@ export class CoastSampleHost {
     el.style.transform = `translate(${Math.round(px)}px, ${Math.round(p.y)}px) translate(-50%, ${above ? -100 : 0}%)`;
     act.textContent = t.kind === 'exit' ? '按住撤离' : t.kind === 'container' ? '搜刮' : t.kind === 'ground' ? '拾取' : t.kind === 'door' || t.kind === 'entry' ? t.label.split(' · ')[0] : t.kind === 'note' ? '阅读' : '交互';
     act.setAttribute('aria-label', t.kind === 'exit' ? `${t.label} · 按住撤离` : t.label);
-    if (t.choices.length > 1) {
+    // 附近 (docs/LOOTING.md): ground items beside the container E opens, or several loose items where E takes the
+    // nearest, picked up one by one from the list.
+    const nearby = t.kind === 'container' || t.kind === 'ground' && t.nearby.length > 1 ? t.nearby : [];
+    if (!nearby.length) this.nearbyOpen = false;
+    if (t.choices.length > 1 || nearby.length) {
       list.hidden = false;
-      const html = t.choices.map(c => `<li data-id="${c.id}"${c.selected ? ' aria-current="true"' : ''}>${c.selected ? '▶ ' : ''}${esc(c.name)}${c.empty ? ' · 已搜空' : ''}</li>`).join('') + `<li class="cs-hint">${this.input.touch ? '点名称打开' : '滚轮切换'}</li>`;
+      const near = nearby.length ? `<li class="cs-near" data-near-toggle aria-expanded="${this.nearbyOpen}">附近 ${nearby.length}${this.nearbyOpen ? '　收起' : '　打开'}</li>`
+        + (this.nearbyOpen ? nearby.map(n => `<li data-ground="${esc(n.id)}">拾取 · ${esc(name(n.item))} ×${n.qty}</li>`).join('') : '') : '';
+      const html = (t.choices.length > 1 ? t.choices.map(c => `<li data-id="${c.id}"${c.selected ? ' aria-current="true"' : ''}>${c.selected ? '▶ ' : ''}${esc(c.name)}${c.empty ? ' · 已搜空' : ''}</li>`).join('') : '') + near + (t.choices.length > 1 ? `<li class="cs-hint">${this.input.touch ? '点名称打开' : '滚轮切换'}</li>` : '');
       // Rewritten only when it changes: a row replaced between a finger's press and release loses the tap.
       if (html !== this.choicesHtml) { this.choicesHtml = html; list.innerHTML = html; list.querySelector('[aria-current]')?.scrollIntoView({ block: 'nearest' }); }
       const side = this.view.worldToClient({ x: t.at.x + 26, y: t.at.y - AIM_H }), w = list.offsetWidth || 160;
@@ -912,6 +926,10 @@ export class CoastSampleHost {
     } else { list.hidden = true; this.choicesHtml = ''; }
   }
   private choicesHtml = '';
+  /** Whether the 附近 rows are shown under the sources; closed again when no ground item is in reach. */
+  private nearbyOpen = false;
+  /** Set on a mount or floor rebuild: the next frame discards the gap of the view's first bake (RaidRuntime.resetClock). */
+  private resync = false;
   private onEvent(e: StampedEvent) {
     if (e.type === 'layer') { this.input.suppressHeld(); this.sticks.clear(); return; }
     if (e.type === 'notice') {
@@ -923,11 +941,14 @@ export class CoastSampleHost {
     else if (e.type === 'rejected') {
       this.lastRejected = e.action === 'checkpoint' ? 'checkpoint' : e.reason === 'save-failed' ? 'save-failed' : e.action;
       if (e.action === 'select-target') return;
+      // A door with someone in the doorway says so; one out of reach says nothing, as the original.
+      if (e.action === 'door' && (e.reason === 'occupied' || e.reason === 'unreachable')) {
+        if (e.reason === 'occupied') this.toast('门口有人，暂时不能关门。', true);
+        return;
+      }
       if (e.reason === 'unreachable-or-rejected') {
-        // A floor change or door toggle the Runtime refused: a crowded landing, or someone standing in an open doorway.
-        const t = this.last?.frame.interaction;
+        // A floor change the Runtime refused: a crowded landing.
         if (e.action.startsWith('entry:')) this.toast('入口被挡住，暂时无法进入。', true);
-        else if (e.action === 'door' && t?.kind === 'door' && this.last?.frame.doors[t.ref.id]) this.toast('门口有人，暂时不能关门。', true);
         return;
       }
       this.toast(e.action === 'equip' && e.reason === 'rejected' ? '无法装备，背包装不下换下的武器和弹药。请先腾出空间。' : reasonText(e.reason), true);

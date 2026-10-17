@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { browserOptions } from './browser-options.mjs';
-import { batch, drive, frames, gap, raidReady, stand, waitPanel } from './raid-view.mjs';
+import { batch, drive, frames, raidReady, stand, waitPanel } from './raid-view.mjs';
 import { openPause, resumeStalls, running } from './stall-resume.mjs';
 
 const out = resolve('test-results/ui');
@@ -122,10 +122,8 @@ try {
       await page.locator('.coast-sample [data-do="inv-use"]').click();
       // The panel's own notice is replaced by the host's once the Runtime's rejection is published.
       await page.waitForFunction(() => window.__bincovSample.host.eventLog.some(e => e.type === 'rejected' && e.detail.action === 'use-item')); await frames(page, 2);
-      // Known gap: today's generic toast is asserted, so a fix turns this red and the /生命已满/ check comes back.
       const toast = await page.locator('.coast-sample [data-toast]').innerText();
-      gap(report, `${size}: unnecessary treatment says why`, 'The Runtime drops its own 生命已满… line with the rolled-back use transaction, so the toast is generic (Runtime, Astra).');
-      assert.equal(toast, '操作未完成，请检查空间与条件。'); assert.doesNotMatch(toast, /生命已满/);
+      assert.match(toast, /生命已满/);
       assert.equal(await bandages(), bandagesBefore, 'Unnecessary treatment consumed a bandage');
       await page.locator('.coast-sample [data-panel] [data-do="close"]').click(); await waitPanel(page, null);
       await running(page);

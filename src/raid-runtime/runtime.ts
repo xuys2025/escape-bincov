@@ -8,7 +8,7 @@ import { isMallWorld, mallRunConfig } from '../mall-world';
 import { resolveExpansionWorld } from '../expansion-worlds';
 import { derivedLimits, entityUid, type ExpansionState, type WorldDefinition, type EndReason } from '../expansion-state';
 import { activeRaidCheckpoint, applyActiveRaidSnapshot, type ActiveRaidSnapshot } from '../raid-state-projection';
-import { advanceRaidBody, enemyDamage, recordMotion, rpgMultipliers, useRpgItem } from '../rpg';
+import { advanceRaidBody, enemyDamage, recordMotion, rpgMultipliers, useRpgItemResult } from '../rpg';
 import { corridor, doorAnchor, interactionTarget, spacePath, toggleDoor, traversable, type Interaction as SpatialInteraction, type SpaceContext } from '../spatial';
 import { advanceLayerShots, changeLayer, damageLayerEnemy, type ShotObservation } from '../layer-transition';
 import { advancePursuits } from '../pursuit';
@@ -177,6 +177,7 @@ export class CoastRaidRuntime implements RaidRuntime {
     }
     resume() { this.assertLive(); if (this.ending || this.session.conflict || !this.session.storageOK)
         return; this.setOverlay(''); }
+    resetClock() { this.assertLive(); this.clock.reset(); }
     setBlocked(blocked: boolean) { this.assertLive(); if (this.ending || this.paused)
         return; this.setOverlay(blocked ? 'inventory' : ''); if (!blocked)
         this.lootContext = null; }
@@ -397,8 +398,12 @@ export class CoastRaidRuntime implements RaidRuntime {
             for (const e of this.queue.slice(mark))
                 e.durability = 'committed';
         else {
-            this.queue.splice(mark);
-            this.rejected(action, result);
+            const discarded = this.queue.splice(mark);
+            // A no-effect supply explains its refusal before returning false. Keep that explanation
+            // in the rejection, never any tentative success events or notices from a failed write.
+            const explanation = result === 'rejected' && (action === 'heal' || action === 'use-item')
+                ? discarded.find(e => e.body.type === 'notice')?.body : undefined;
+            this.rejected(action, explanation?.type === 'notice' ? explanation.text : result);
             if (result === 'save-failed')
                 this.setOverlay('checkpoint-error');
         }
@@ -619,8 +624,9 @@ export class CoastRaidRuntime implements RaidRuntime {
             if (!D.count(inv, id))
                 return false;
             const state = this.snapshotExpansion();
-            if (!useRpgItem(state, id)) {
-                this.say('当前状态无需使用这件补给。');
+            const effect = useRpgItemResult(state, id);
+            if (!effect.ok) {
+                this.say(effect.message);
                 return false;
             }
             if (chosen) {
@@ -922,11 +928,16 @@ export class CoastRaidRuntime implements RaidRuntime {
             this.move(e, Math.cos(angle) * def.speed * dt, Math.sin(angle) * def.speed * dt, true);
         }
     }
-    private layerMutation(action: (state: ExpansionState) => boolean | void, suppress = false, name = 'world', events: ViewEventBody[] = []): boolean {
+    private layerMutation(action: (state: ExpansionState) => boolean | void | 'unreachable' | 'occupied', suppress = false, name = 'world', events: ViewEventBody[] = []): boolean {
         const mark = this.queue.length, from = this.worldKey().mapId;
         let ticket: ExpansionTransaction | null;
+        let refusal = 'unreachable-or-rejected';
         try {
-            ticket = this.saves.prepareExpansionMutation(draft => action(draft.expansion));
+            ticket = this.saves.prepareExpansionMutation(draft => {
+                const result = action(draft.expansion);
+                if (typeof result === 'string') { refusal = result; return false; }
+                return result;
+            });
         }
         catch (error) {
             this.queue.splice(mark);
@@ -935,7 +946,7 @@ export class CoastRaidRuntime implements RaidRuntime {
         }
         const staged = this.queue.splice(mark);
         if (!ticket) {
-            this.rejected(name, 'unreachable-or-rejected');
+            this.rejected(name, refusal);
             return false;
         }
         for (const body of events)
@@ -1198,18 +1209,29 @@ export class CoastRaidRuntime implements RaidRuntime {
             return null;
         return { kind: t.kind, ref: { runId: this.worldKey().runId, mapId: this.worldKey().mapId, kind: t.kind, id: t.id },
             at: { x: t.at.x, y: t.at.y }, label: t.label, hold: t.kind === 'exit' ? { required: B.extractionSeconds, progress: this.extractTime } : null,
-            choices: t.kind === 'exit' || this.space && !['container', 'ground'].includes(t.kind) ? [] : this.lootTargets().map(c => ({ id: c.id, name: this.lootTargetName(c), empty: !c.inventory.items.length, selected: c.id === this.lootTargetId })) };
+            choices: t.kind === 'exit' || this.space && !['container', 'ground'].includes(t.kind) ? [] : this.lootTargets().map(c => ({ id: c.id, name: this.lootTargetName(c), empty: !c.inventory.items.length, selected: c.id === this.lootTargetId })),
+            nearby: t.kind === 'container' || t.kind === 'ground' ? this.nearbyLoot().map(l => ({ id: l.uid, item: l.id, qty: l.qty })) : [] };
     }
+    /** Explicit ground refs use nearbyLoot's range/tide/occlusion rules, independent of E's
+     * preferred target. Inventory and remaining ground loot commit together or both roll back.
+     * A ref is scoped to its run/map; overlays and pauses still block activation.
+     */
     activate(ref: TargetRef): boolean {
         if (!this.validRef(ref) || this.paused || this.overlay) {
             this.rejected('interact', 'stale-or-blocked');
             return false;
         }
+        if (ref.kind === 'ground')
+            return this.pickupLoot(ref.id);
         if (ref.kind === 'container' && this.canLootContainer(ref.id, ref.runId)) {
             this.lootContext = { containerId: ref.id, runId: ref.runId };
             this.suppressHeldInput();
             this.setOverlay('loot');
             return true;
+        }
+        if (ref.kind === 'door' && (!this.space || !doorAnchor(this.space, ref.id, this.player))) {
+            this.rejected('door', 'unreachable');
+            return false;
         }
         const target = this.target();
         if (!target || target.id !== ref.id || target.kind !== ref.kind) {
@@ -1224,11 +1246,9 @@ export class CoastRaidRuntime implements RaidRuntime {
                 const raid = state.raid!, layer = raid.maps[raid.currentMap];
                 const living = [...layer.enemies, ...raid.pursuits.filter(p => p.sourceMap === raid.currentMap).map(p => p.enemy)].filter(e => e.hp > 0);
                 const result = toggleDoor({ definition: this.space!.definition, doors: layer.doors, highTide: raid.highTide }, target.id, raid.player, living);
-                return result !== 'unreachable' && result !== 'occupied';
+                return result === 'unreachable' || result === 'occupied' ? result : true;
             }, true, 'door', [{ type: 'door', id: target.id, open, by: 'player' }]);
         }
-        if (target.kind === 'ground')
-            return this.pickupLoot(target.id);
         if (target.kind === 'note') {
             const note = this.mapData.notes.find(n => n.title === target.id)!;
             this.say(`${note.title}：${note.text}`, 14);

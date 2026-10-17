@@ -3,6 +3,7 @@
 当前任务从 [WORK-QUEUE 顶部](docs/WORK-QUEUE.md) 和相关 PR 的最新 head/检查接手。读代码先用 [CODEMAP](docs/CODEMAP.md)；每个在途交付维护一份[短摘要](docs/TASK-HANDOFF-TEMPLATE.md)，不把本文件全部放入默认上下文。
 
 - 2026-10-16 · [PR #64 2.5D 收尾](https://github.com/xuys2025/escape-bincov/pull/64)：旧行动在 2.5D 上打完，Phaser 删除，旧局内测试迁到 2.5D；剩余美术与 Runtime 缺口见 [收尾说明](docs/2-5d-closeout/README.md)。
+- 2026-10-17 · [Runtime 缺口与复验](docs/tasks/runtime-gaps.md)：从 #64 `92a0b23` 独立续作，目标 main、依赖 #64；包含对旧行动/存档的固定 head 复验、四项接口和死亡规则依据，前端接入归 Opus。
 - 2026-10-15 · [#60 质量与减熵实施摘要](docs/tasks/quality-entropy.md)：代码导航、局部契约与共享投影。实际测试状态随该摘要及 PR 更新。
 - 2026-10-15 · [#61 / PR #62 CI 改造](https://github.com/xuys2025/escape-bincov/pull/62)：完整 36 套件八组重排、存档前置与计时门禁；维护者已授权合并，最新基线与已验/未验结果以 PR 为准。
 - 下方保留以往交接全文；其中“当前”“未合并”“已通过”等仅对各自日期/提交有效。按任务索引、标题或符号检索相关段落，需要首败/兼容依据时再展开。

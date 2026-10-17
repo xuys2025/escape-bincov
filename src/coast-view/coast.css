@@ -54,6 +54,10 @@ html.mobile[data-coast-sample] #toast { bottom: calc(76px + var(--safe-bottom, 0
 .cs-choices li { padding: 2px 0; cursor: pointer; }
 .cs-choices li[aria-current] { color: #fff3cf; }
 .cs-choices .cs-hint { color: var(--cs-muted); cursor: default; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; }
+/* 附近: a toggle under the sources, then one row per ground item in reach (a click or tap picks that one up). */
+.cs-choices .cs-near { color: #d6ec9a; border-top: 1px solid #c9a65e44; margin-top: 2px; padding-top: 4px; }
+.cs-choices li[data-ground] { padding-left: 12px; color: #e8f2c4; }
+.coast-sample.touch .cs-choices .cs-near, .coast-sample.touch .cs-choices li[data-ground] { padding-top: 8px; padding-bottom: 8px; }
 .cs-toast { position: absolute; left: 50%; top: 52px; transform: translateX(-50%); padding: 6px 14px; background: #1b1a17e6; border: 1px solid var(--cs-line); font-size: 16px; line-height: 16px; opacity: 0; transition: opacity .2s; max-width: 90vw; text-align: center; }
 .cs-toast.on { opacity: 1; } .cs-toast.bad { border-color: var(--cs-bad); color: #f1c4b4; }
 .cs-cross { position: absolute; left: calc(var(--cs-ox) - 12px); top: calc(var(--cs-oy) - 12px); width: 25px; height: 25px; pointer-events: none;

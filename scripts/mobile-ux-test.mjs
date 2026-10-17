@@ -128,8 +128,14 @@ try {
    assert.match(geometry.drain,/流血/,`${label}: bleeding readout`);
    assert.doesNotMatch(await page.locator('.coast-sample .cs-heal').innerText(),/Q/);
    if(width===640&&height===300)await shot('feedback-640');
-   // 2.5D gap (Runtime, Astra): no 附近 list for loose items beside each other (the action button takes the nearest);
-   // restore that check once it exists.
+   // 附近 (docs/LOOTING.md): with several loose items in reach, the list picks the chosen one without moving (once, at 844).
+   if(width===844){
+    const toggle=page.locator('.coast-sample [data-choices] [data-near-toggle]');await toggle.waitFor();assert.match(await toggle.innerText(),/附近 [2-9]/);
+    const at=await host(()=>({...window.__bincovSample.host.lastBatch.frame.player}));
+    await toggle.tap();const row=page.locator(`.coast-sample [data-choices] [data-ground="${uids[2]}"]`);await row.waitFor();await row.tap();
+    await page.waitForFunction(uid=>!window.__bincovSample.host.lastBatch.frame.loot.some(l=>l.uid===uid),uids[2]);
+    const now=await host(()=>({...window.__bincovSample.host.lastBatch.frame.player}));assert.ok(Math.hypot(now.x-at.x,now.y-at.y)<1,'附近 picks the item without moving');
+   }
    await page.waitForFunction(()=>(document.querySelector('.coast-sample [data-prompt]')?.textContent??'').includes('净水瓶'));
    await toastOff();
   }
@@ -215,7 +221,8 @@ try {
   const after=await snapshot();
   assert.deepEqual(after.loot.map(l=>[l.uid===id?'stack':'water',l.qty]).sort(),[['stack',2],['water',1]],'one bandage fits; the rest and the water stay on the ground');
   await shot('nearby-844');
-  // 2.5D gap (Runtime, Astra): no 附近 list to pick a specific loose item, nor its "附近没有…" empty state.
+  // Picking one named loose item through 附近 is checked in the three-items step; the old "附近没有…" empty state is gone
+  // by design (the 附近 row leaves with the last item in reach).
  });
  await step('quick therapy does not consume safe medicine; supply picker explicitly uses it',async()=>{
   await fixture();await drive('vitals',{hp:40});

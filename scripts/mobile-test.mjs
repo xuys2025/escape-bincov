@@ -5,7 +5,6 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { browserOptions } from './browser-options.mjs';
 import { failSessionWritesOnClick, restoreSessionWrites } from './storage-fault.mjs';
-import { gap } from './raid-view.mjs';
 import { openPause, resumeStalls, running, stallResumes } from './stall-resume.mjs';
 
 const out=resolve('test-results/mobile'); await mkdir(out,{recursive:true});
@@ -107,9 +106,7 @@ try{
   let after;
   try{await page.waitForFunction(x=>window.__bincovSample.host.lastBatch.frame.player.x>x+15,rejected.x,{timeout:20000});after=(await runtime()).raid;}
   finally{await touch('touchEnd',[]);}
-  // Known gap: today's generic toast is asserted, so a fix turns this red and the /生命已满/ check comes back.
-  gap(report,'rejected heal says why','The Runtime drops its own 生命已满… line with the rolled-back heal transaction, so the toast is generic (Runtime, Astra).');
-  assert.equal(toast,'操作未完成，请检查空间与条件。');assert.doesNotMatch(toast,/生命已满/);
+  assert.match(toast, /生命已满/);
   assert.equal(after.hp,max);assert.ok(after.x>rejected.x+15,JSON.stringify({rejected,after}));
   assert.deepEqual(await page.evaluate(()=>__bincov.app.loadout.bag),before);
  });

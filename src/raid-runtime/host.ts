@@ -12,7 +12,7 @@ export function createCoastRaidHost(session: SessionState, saves: SaveSession, f
 export function wrapCoastRuntime(core: CoastRaidRuntime, session: SessionState, saves: SaveSession) {
     const runtime: RaidRuntime = Object.freeze({
         advance: core.advance.bind(core), current: core.current.bind(core), pause: core.pause.bind(core),
-        resume: core.resume.bind(core), setBlocked: core.setBlocked.bind(core), dispose: core.dispose.bind(core),
+        resume: core.resume.bind(core), resetClock: core.resetClock.bind(core), setBlocked: core.setBlocked.bind(core), dispose: core.dispose.bind(core),
     });
     const services = Object.freeze({
         cancelStart: core.cancelStart.bind(core),

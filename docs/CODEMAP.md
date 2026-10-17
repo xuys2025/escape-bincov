@@ -56,6 +56,8 @@
 
 **调用契约的维护位置。** `RaidIntent` 旁说明坐标/时间单位和边沿消费；输入类说明释放及面板抑制；`RaidRuntime` 旁说明暂停、屏蔽和销毁。不在每个按钮复制这些规定。
 
+宿主挂载/换层烘焙后的重新对时见 `RaidRuntime.resetClock` 契约；按编号拾取看 `CoastRaidRuntime.activate` 的 ground 引用路径及 `nearbyLoot`。拒绝事件的文案/门原因码见 `ViewEventBody`，原子性与重对时回归见 [runtime-gaps.test.ts](../tests/runtime-gaps.test.ts)，旧世界恢复与六种夹具严格校验见 [runtime-closeout.test.ts](../tests/runtime-closeout.test.ts)。
+
 **验证入口。**
 
 - [input.test.ts](../tests/input.test.ts)：单次按下、取消、held-input 释放和面板切换。

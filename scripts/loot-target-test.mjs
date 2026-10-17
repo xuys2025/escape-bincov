@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { browserOptions } from './browser-options.mjs';
 import { resumeStalls } from './stall-resume.mjs';
-import { batch, drive, frames, gap, panel, raidReady, waitPanel } from './raid-view.mjs';
+import { batch, drive, frames, panel, raidReady, waitPanel } from './raid-view.mjs';
 import { BUILDING_WORLD } from '../src/building-world.ts';
 import { corridor, traversable } from '../src/spatial.ts';
 
@@ -241,24 +241,26 @@ async function suite(viewport, touch = false) {
       for (let i = 0; i < 3 && (await state()).selected !== fixture.corpses[1]; i++) await wheel(100);
       await selected(fixture.corpses[1]);
     });
-    // Known gap: docs/LOOTING.md's 附近 list (ground loot picked one by one while a container is selected) has no
-    // Runtime service. Today's behaviour is asserted, so a fix turns this red and the original check comes back.
-    gap(report, `${label}: ground loot remains accessible beside a selected container`, 'No 附近 list: the Runtime offers no pickup of a ground item that is not the interaction target, so E opens the selected container (Runtime, Astra).');
-    await step('known gap: ground loot beside a selected container is not offered, and E opens the container', async () => {
+    await step('ground loot beside a selected container is picked up one by one from 附近, while E still opens the container', async () => {
+      // docs/LOOTING.md: with a container in reach, 附近 lists the ground items for pickup one by one.
       const uid = await drive(page, 'spawnLoot', 'bandage', 1, { x: fixture.x + 8, y: fixture.y }); await frames(page, 4);
       const s = await state();
       assert.ok(s.selected, 'a container stays selected');
-      assert.ok(!s.choices.includes(uid) && !s.rows.some(r => r.id === uid), 'the ground item is not offered beside the containers');
+      const toggle = page.locator('.coast-sample [data-choices] [data-near-toggle]');
+      await toggle.waitFor(); assert.match(await toggle.innerText(), /附近 1/);
       await page.keyboard.press('e'); await waitPanel(page, 'loot');
       assert.equal((await state()).target, s.selected, 'E opens the selected container');
-      assert.ok((await batch(page)).frame.loot.some(l => l.uid === uid), 'the ground item stays where it lies');
       await page.keyboard.press('Escape'); await waitPanel(page, null);
-      // The item leaves again through the session's transaction, so the next steps see the fixture unchanged.
-      await page.evaluate(uid => {
-        const s = window.__bincov.saveSession, t = s.prepareExpansionMutation(d => { const r = d.expansion.raid, m = r.maps[r.currentMap]; m.loot = m.loot.filter(l => l.uid !== uid); });
-        if (!t || s.commitExpansionMutation(t) !== 'committed') throw new Error(`Ground item removal rejected: ${window.__bincov.app.storageError}`);
-      }, uid);
+      const bandages = () => page.evaluate(() => window.__bincov.app.loadout.bag.items.filter(i => i.id === 'bandage').reduce((n, i) => n + i.qty, 0));
+      const before = await bandages();
+      await toggle.click();
+      const row = page.locator(`.coast-sample [data-choices] [data-ground="${uid}"]`); await row.waitFor();
+      assert.match(await row.innerText(), /拾取 · .+×1/);
+      await row.click();
       await page.waitForFunction(uid => !window.__bincovSample.host.lastBatch.frame.loot.some(l => l.uid === uid), uid);
+      assert.equal(await bandages(), before + 1, 'the picked item is in the bag');
+      await page.waitForFunction(() => !document.querySelector('.coast-sample [data-choices] [data-near-toggle]'));
+      assert.equal((await state()).selected, s.selected, 'the selected container is unchanged');
     });
     await step('a departing selection falls back to an accessible target without renumbering corpses', async () => {
       const away = [{ x: fixture.x + 100, y: fixture.y }, { x: fixture.x - 100, y: fixture.y }, { x: fixture.x, y: fixture.y + 100 }, { x: fixture.x, y: fixture.y - 100 }]

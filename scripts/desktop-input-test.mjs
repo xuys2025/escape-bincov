@@ -6,7 +6,6 @@ import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 import { chromium } from 'playwright';
 import { browserOptions } from './browser-options.mjs';
-import { gap } from './raid-view.mjs';
 import { openPause, resumeStalls, running, stallResumes } from './stall-resume.mjs';
 
 const { values } = parseArgs({ options: { entry: { type: 'string', default: 'dist/index.html' }, filter: { type: 'string', default: '' }, report: { type: 'string', default: 'desktop-input' } } });
@@ -194,9 +193,7 @@ try {
       }
       after = await state(page);
     } finally { await page.keyboard.up('d'); }
-    // Known gap: today's generic toast is asserted, so a fix turns this red and the /生命已满/ check comes back.
-    gap(report, 'rejected heal says why', 'The Runtime drops its own 生命已满… line with the rolled-back heal transaction, so the toast is generic (Runtime, Astra).');
-    assert.equal(toast, '操作未完成，请检查空间与条件。'); assert.doesNotMatch(toast, /生命已满/);
+    assert.match(toast, /生命已满/);
     assert.deepEqual(after.bag, before.bag); assert.equal(after.hp, before.maxHp); assert.equal(after.bleeding, false);
     assert.equal(after.panel, null);
     assert.ok(after.x > rejected.x + 15, `Held D stopped after Q: ${rejected.x} -> ${after.x}`);
