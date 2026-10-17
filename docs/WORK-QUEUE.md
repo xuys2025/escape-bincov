@@ -1,12 +1,14 @@
 # 当前任务入口
 
-最近核对：2026-10-16，main `1764874`（已合入 #56）。下表用于找到承接入口，合并状态、head 与检查结果以对应 GitHub 页面实时信息为准；旧快照不作为当前指令。
+最近核对：2026-10-17，main `345aff4`（已合入 #64）。下表用于找到承接入口，合并状态、head 与检查结果以对应 GitHub 页面实时信息为准；旧快照不作为当前指令。
 
 | 目标 | 承接入口 | 接手提示 |
 | --- | --- | --- |
 | CI 八组均衡与执行证据 | [#61](https://github.com/xuys2025/escape-bincov/issues/61) · [PR #62](https://github.com/xuys2025/escape-bincov/pull/62) | 已授权合并；同步 eb512ea 后以准确 head 全量 CI 为准，后续性能验收与自然运行观察仍归 #61 |
 | 代码质量与低上下文 AI 接手 | [#60](https://github.com/xuys2025/escape-bincov/issues/60) · [当前实施摘要](tasks/quality-entropy.md) | `agent/quality-entropy`；导航/契约与共享投影，后续阶段继续原总单 |
-| 2.5D 收尾：去掉 Phaser | [PR #64](https://github.com/xuys2025/escape-bincov/pull/64) · [收尾说明](2-5d-closeout/README.md) | `feat/2-5d-closeout`；存档里的旧行动也在 2.5D 上打完，标题改 Pixi，旧测试迁到 2.5D；剩余美术（Sol）和 Runtime 缺口（Astra）见说明的“剩余工作” |
+| 敌人与尸体的 2.5D 角色图 | [PR #66](https://github.com/xuys2025/escape-bincov/pull/66) · [说明](enemy-art/README.md) | `feat/enemy-art`；Sol P0+P1 接入（四种敌人、尸体、持握图）；原始交付在仓库外 |
+| Runtime 缺口与「附近」拾取 | [PR #65](https://github.com/xuys2025/escape-bincov/pull/65) | `agent/runtime-gaps`（Astra 与 Opus）；治疗原因、逐件拾取、门原因码、`resetClock` |
+| 2.5D 收尾：去掉 Phaser | [PR #64](https://github.com/xuys2025/escape-bincov/pull/64) · [收尾说明](2-5d-closeout/README.md) | 已合入 345aff4；剩余美术与 Runtime 缺口见说明的“剩余工作” |
 | 行动默认 2.5D | [PR #57](https://github.com/xuys2025/escape-bincov/pull/57) | 已合入 a2d716d；后续输入/旧行动问题继续相关任务，保留该版本依据 |
 | 开场制作与分镜 | [PR #56](https://github.com/xuys2025/escape-bincov/pull/56) · [PR #41](https://github.com/xuys2025/escape-bincov/pull/41) | 实现、素材与原方案继续原 PR |
 | 射击与改枪 | [PR #39](https://github.com/xuys2025/escape-bincov/pull/39) · [PR #28](https://github.com/xuys2025/escape-bincov/pull/28) | 行动规则收敛前核对在途设计 |

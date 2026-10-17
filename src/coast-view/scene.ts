@@ -603,7 +603,7 @@ export class CoastView {
       if (!g.corpse || g.corpseKey !== key) {
         const fresh = !g.corpse && g.deathT > 0;
         g.corpse?.destroy();
-        g.corpse = new Sprite(this.tex.corpse(a.kind, facing)); g.corpse.anchor.set(.5, 14 / 24); g.corpseKey = key;
+        g.corpse = new Sprite(this.tex.corpse(a.kind, facing)); g.corpse.anchor.set(.5, this.tex.corpseAnchorY(a.kind)); g.corpseKey = key;
         this.flat.addChild(g.corpse);
         const seed = fresh ? null : [...a.uid].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
         let k = seed ?? 0; const r = () => seed === null ? this.rnd() : ((k = (k * 1103515245 + 12345) >>> 0) / 4294967296);
@@ -864,7 +864,7 @@ export class CoastView {
       const c = f.containers.find(x => x.id === t.ref.id); if (!c || !visible(c.regionId)) return;
       if (c.kind === 'corpse') {
         const g = c.ownerUid ? this.actors.get(c.ownerUid) : null; if (!g?.corpse) return;
-        h.texture = this.tex.ensure(`${g.corpseKey}|rim`, () => rimOf(this.tex.canvas(g.corpseKey))); h.anchor.set(.5, 15 / 26); h.position.copyFrom(g.corpse.position);
+        h.texture = this.tex.ensure(`${g.corpseKey}|rim`, () => rimOf(this.tex.canvas(g.corpseKey))); h.anchor.set(.5, (g.corpse.anchor.y * g.corpse.texture.height + 1) / (g.corpse.texture.height + 2)); h.position.copyFrom(g.corpse.position);
       } else {
         const key = `crate:${this.crates.get(c.id)?.look ?? (c.stacks ? 'full' : 'empty')}`;
         h.texture = this.tex.ensure(`${key}|rim`, () => rimOf(this.tex.canvas(key))); h.anchor.set(.5, 23 / 30); h.position.set(Math.round(c.x), Math.round(c.y));

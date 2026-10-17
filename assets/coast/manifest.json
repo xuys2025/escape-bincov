@@ -865,6 +865,2322 @@
       ],
       "sha256": "7e4157ac89587045218de25fea996aa83dd047c068df7f5e703551cac3542107",
       "revision": 2
+    },
+    {
+      "id": "coast-scav-body-s-f0-v1",
+      "file": "assets/coast/v1/coast-scav-body-s-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 0,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "de7f86279df05fccb2ccd7aafc3419e29ef3dfe0c9dc9faa7eef2fd95f8a04c8",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-s-f1-v1",
+      "file": "assets/coast/v1/coast-scav-body-s-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 1,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "7ffe62ecd9ed84b36e135659b20eebc2b8276424f1a4c021dfb8bd672dcae91b",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-s-f2-v1",
+      "file": "assets/coast/v1/coast-scav-body-s-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 2,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "b96ac63c246b1f359650acf89471d592d2c1ca1ccadc04c862d76a23776a0c98",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-s-f3-v1",
+      "file": "assets/coast/v1/coast-scav-body-s-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 3,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "ee7c8009a2dc4e70e10c1c639ee4850b5c4c854d55f9eef6308e1334342bdc07",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-s-f4-v1",
+      "file": "assets/coast/v1/coast-scav-body-s-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 4,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "6375be03ca6de717ca2875c7e18746e87c9be6ad02e0d49425debff2bf682b96",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-se-f0-v1",
+      "file": "assets/coast/v1/coast-scav-body-se-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 0,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "f1a0df3801f0a656efe013c12916f27ffaa389e729149d2cabb1da708fd286de",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-se-f1-v1",
+      "file": "assets/coast/v1/coast-scav-body-se-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 1,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "9b625eadcac54116848fd75b05442ee4d7717f3687571dd7c97e90b06b947660",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-se-f2-v1",
+      "file": "assets/coast/v1/coast-scav-body-se-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 2,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "2c5b2ad617be9d56b2f7ad27296968eb2abebec9d0faadfc1e12fadd91bf9547",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-se-f3-v1",
+      "file": "assets/coast/v1/coast-scav-body-se-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 3,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "f484719bf70a6b6dd4732681eb0829b77b53d38d49bcdf33d5951f4cdbb3d692",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-se-f4-v1",
+      "file": "assets/coast/v1/coast-scav-body-se-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 4,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "cfe92e6b0101bd79010ca3be88ac83f3a2a4ea8c605e867c25fb08cc18aa7ae0",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-e-f0-v1",
+      "file": "assets/coast/v1/coast-scav-body-e-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 0,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "39044161b7c9f42e2fe83cdd7246c89c21ac59f3262f7b1944758bb457538cf3",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-e-f1-v1",
+      "file": "assets/coast/v1/coast-scav-body-e-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 1,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "ff40bf9ec4d7a75115974b3bca5f724668b9a488310d8bae91f4a9a2da59eff3",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-e-f2-v1",
+      "file": "assets/coast/v1/coast-scav-body-e-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 2,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "3a025b5d55284a5fe5a320028b93716cb35d13d11d628070e87616cbf8bc8559",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-e-f3-v1",
+      "file": "assets/coast/v1/coast-scav-body-e-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 3,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "6f967030279ba36660d8c43cbfa185dd8665a3ec2191204d0bbc95ec734e50a8",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-e-f4-v1",
+      "file": "assets/coast/v1/coast-scav-body-e-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 4,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "ea69f0235a4c851bd8d37b271b4745933468c8532a8a08a733e5f25ef7dc2280",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-ne-f0-v1",
+      "file": "assets/coast/v1/coast-scav-body-ne-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 0,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "151bf1902577c2124c4022e99282874a574d9e52837970996f69bc903a9dae36",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-ne-f1-v1",
+      "file": "assets/coast/v1/coast-scav-body-ne-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 1,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "98c3f2cd17c13460b491e0e096b9938ebbe4756c83a4eac5385472b60dea009b",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-ne-f2-v1",
+      "file": "assets/coast/v1/coast-scav-body-ne-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 2,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "fd1fb771f1ec0cc411fe2b00352202d96ffcec7317156b1184759501468ade35",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-ne-f3-v1",
+      "file": "assets/coast/v1/coast-scav-body-ne-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 3,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "1405eaee4afa5550e9710573d5dd1881211d8749dbf0302f87da6d56b5c63901",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-ne-f4-v1",
+      "file": "assets/coast/v1/coast-scav-body-ne-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 4,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "4423bb4a0171c43b749e8b9ef6ae202ce9f4488ef05a457c28c98a108e26bd20",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-n-f0-v1",
+      "file": "assets/coast/v1/coast-scav-body-n-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 0,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "30becc2aaa7550913b508aecf04a6c055f46938b83b223a3b6c5b4cc6ca25e58",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-n-f1-v1",
+      "file": "assets/coast/v1/coast-scav-body-n-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 1,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "ab7e808b5e89b2da8b0f2dff49bbe369ed0f16874320b23f4e2b9d0bfbacac55",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-n-f2-v1",
+      "file": "assets/coast/v1/coast-scav-body-n-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 2,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "3e13308745d5c4ae2fdb2e1e7eb135042dabfcab8dd37e511d34642cdf3d53c3",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-n-f3-v1",
+      "file": "assets/coast/v1/coast-scav-body-n-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 3,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "4b4b00b4799b49a6e77178b66b835fcc281ea5b77d5878f9628a9637df0f5518",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-scav-body-n-f4-v1",
+      "file": "assets/coast/v1/coast-scav-body-n-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 4,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "1fe77d59592f51c73d20675d5ff3a790d286af109907aa7602b044ca613d0e7e",
+      "revision": 2,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-weapon-pistol-held-v1",
+      "file": "assets/coast/v1/coast-weapon-pistol-held-v1.png",
+      "w": 18,
+      "h": 10,
+      "anchor": [
+        6,
+        6
+      ],
+      "kind": "weapon",
+      "dir": "E",
+      "frameIndex": null,
+      "part": "coast-weapon-pistol",
+      "grip": [
+        6,
+        6
+      ],
+      "muzzle": [
+        16,
+        3
+      ],
+      "sha256": "7c48d7a4c4a280db4882f3520082c09143369628f259e206996c5a8ecaeb9a78",
+      "revision": 1
+    },
+    {
+      "id": "coast-weapon-club-held-v1",
+      "file": "assets/coast/v1/coast-weapon-club-held-v1.png",
+      "w": 24,
+      "h": 10,
+      "anchor": [
+        6,
+        5
+      ],
+      "kind": "weapon",
+      "dir": "E",
+      "frameIndex": null,
+      "part": "coast-weapon-club",
+      "grip": [
+        6,
+        5
+      ],
+      "muzzle": [
+        22,
+        5
+      ],
+      "sha256": "e0a07d9cae8630b717b5a3e935597c0700d94ca3f1ab4279f0678103a915cc25",
+      "revision": 2
+    },
+    {
+      "id": "coast-scav-corpse-e-v1",
+      "file": "assets/coast/v1/coast-scav-corpse-e-v1.png",
+      "w": 48,
+      "h": 24,
+      "anchor": [
+        24,
+        12
+      ],
+      "kind": "corpse",
+      "dir": "E",
+      "frameIndex": null,
+      "part": "coast-scav",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "ce0189c606f0d56c3f8242687b3a9b0fbea0a4b39ee2ba0e9f9619cf4ce815d7",
+      "revision": 2
+    },
+    {
+      "id": "coast-salt-body-s-f0-v1",
+      "file": "assets/coast/v1/coast-salt-body-s-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 0,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "1e86c1369afedb60f03638d30e26246f3a5e6584021802a078f38bdd3bcb32a2",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-s-f1-v1",
+      "file": "assets/coast/v1/coast-salt-body-s-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 1,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "21edd1076b33349c00303ada6d98bc4ac209e59cfa2bf1707d237cfc55444d7f",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-s-f2-v1",
+      "file": "assets/coast/v1/coast-salt-body-s-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 2,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "c5b78a7a6473d6ae44b3f96296c5c5b3772bd71d7a9d2cc3da5aa4158c20ba81",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-s-f3-v1",
+      "file": "assets/coast/v1/coast-salt-body-s-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 3,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "eae16a55ad6b3f9caf31fa2b99d5686cd3b0ceeb60f63c1657cfc886816b90ed",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-s-f4-v1",
+      "file": "assets/coast/v1/coast-salt-body-s-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 4,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "19ffae27f7a922c82ccd0da0dca595ae1b51d5b4856305a4d2d24f1e9bc684d7",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-se-f0-v1",
+      "file": "assets/coast/v1/coast-salt-body-se-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 0,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "b0dc2573098f975432d07bed13751800c695b685f570c9f8fc27002634523164",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-se-f1-v1",
+      "file": "assets/coast/v1/coast-salt-body-se-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 1,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "e42d7e407051f921c4c840c2804c71651737e6335ea85ab9cb053f67bac59972",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-se-f2-v1",
+      "file": "assets/coast/v1/coast-salt-body-se-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 2,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "5c7192b0e9d233e572aea90b43e81ec16d1db29b455effc558fbd77e602d70c0",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-se-f3-v1",
+      "file": "assets/coast/v1/coast-salt-body-se-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 3,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "b1a99b0aa17b257490dd0f8d446cd67877116b685d0c23b2ada057a56ad66422",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-se-f4-v1",
+      "file": "assets/coast/v1/coast-salt-body-se-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 4,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "5c7b46c3afef3e0b5baba67fb4a61c078bae2b6a7935b9cc289338866ceb2002",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-e-f0-v1",
+      "file": "assets/coast/v1/coast-salt-body-e-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 0,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "643a92c864e4fa8ffc5c8a0325e3574069c39242184d06a462292c56464c5780",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-e-f1-v1",
+      "file": "assets/coast/v1/coast-salt-body-e-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 1,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "a56c63bb6226ddbf42c0cffbc13da2f390b9cd3576ed1f8dd6d688dd29a3d80b",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-e-f2-v1",
+      "file": "assets/coast/v1/coast-salt-body-e-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 2,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "cd48e63f912cf1fb51f8538c3c1e0b4d67e2263059b2a59ec6f0fbc54967e5a4",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-e-f3-v1",
+      "file": "assets/coast/v1/coast-salt-body-e-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 3,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "0a1b5dbc4c475ffb06499d91a458b2aa0c648a9f4ce28fb1cc82f11b5bf3c03e",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-e-f4-v1",
+      "file": "assets/coast/v1/coast-salt-body-e-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 4,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "fb00e0b5ed367040a21519fc93a34da3890b6efb0f988436e11dcc5421469db1",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-ne-f0-v1",
+      "file": "assets/coast/v1/coast-salt-body-ne-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 0,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "4f73cdc6d61939bc53eee1fb3f225c652480592babeac0f9bd8245e38bbecc06",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-ne-f1-v1",
+      "file": "assets/coast/v1/coast-salt-body-ne-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 1,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "2f6a18f16552287a5bada11d130d8a1e698f6977549db614a6532f3e96ca25a7",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-ne-f2-v1",
+      "file": "assets/coast/v1/coast-salt-body-ne-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 2,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "8f9d7d831561b882c0d8c2acc743371c79db526c44066e2c73004cbdc86f0f21",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-ne-f3-v1",
+      "file": "assets/coast/v1/coast-salt-body-ne-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 3,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "011828c1047e93a46e3cea1fb8d028d6ade3400d92eed5299fd5813d8e1ced87",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-ne-f4-v1",
+      "file": "assets/coast/v1/coast-salt-body-ne-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 4,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "89952322439dd8ce53d6dcb8ed72e66c2879f35ef4a5a992fd7dcd6c67263500",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-n-f0-v1",
+      "file": "assets/coast/v1/coast-salt-body-n-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 0,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "b5396cbb5b5596a889be74563ce977998c997bd5ea5f48b9147c6fff5ca8a85e",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-n-f1-v1",
+      "file": "assets/coast/v1/coast-salt-body-n-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 1,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "a5123ca92998c2885b5e397feeb90c7d368cecb3963b2609a2c266811525faa1",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-n-f2-v1",
+      "file": "assets/coast/v1/coast-salt-body-n-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 2,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "8b808c6f0b18e11fb81d091577d88b184cb571a2b9aececde570bd2d8f5a5e9a",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-n-f3-v1",
+      "file": "assets/coast/v1/coast-salt-body-n-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 3,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "183c3c72022a204b9134d3a6caa0feabe156a44d3a02091e2b3a1d8b8ab97dd0",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-salt-body-n-f4-v1",
+      "file": "assets/coast/v1/coast-salt-body-n-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 4,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "179a2dc2a0043b49547a959f6f73a0ccdcc44129b0641ac2d3fac24b7af12d20",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-s-f0-v1",
+      "file": "assets/coast/v1/coast-elite-body-s-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 0,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "051cb9607988fcb4a106fb32c01295a16a2fe2c47faa74e8f0f59294c4c15b82",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-s-f1-v1",
+      "file": "assets/coast/v1/coast-elite-body-s-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 1,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "477636c988ae5168872a7585b5c462a276ff86c555dbc27ee6eb384f686e51ae",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-s-f2-v1",
+      "file": "assets/coast/v1/coast-elite-body-s-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 2,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "9cd9a4d9f4a5d60b3c48400b78b94e755622eac4316696cfe8b6c8a1679b1939",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-s-f3-v1",
+      "file": "assets/coast/v1/coast-elite-body-s-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 3,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "c17a0a9e67c4c8803ec2f634293ea72d6e473316eb4d1f1e1968606ff9f0d89f",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-s-f4-v1",
+      "file": "assets/coast/v1/coast-elite-body-s-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 4,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "1907e74f5d1b52ea86a02a55276694931266d81a62da1bba915000ec3e5638cd",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-se-f0-v1",
+      "file": "assets/coast/v1/coast-elite-body-se-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 0,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "ddcdffe99abdb1f5c26fbef0c9cf2045efc9581571fa984748f20dfc815188ea",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-se-f1-v1",
+      "file": "assets/coast/v1/coast-elite-body-se-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 1,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "26a474f04892f4b8e5501ad323ab091126683c3ec2337c8ad5d966dc01c7651c",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-se-f2-v1",
+      "file": "assets/coast/v1/coast-elite-body-se-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 2,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "52a0728b0910916f4c9bc3a899c379e90f4607be47b2ffc46d6915cfc2e832c8",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-se-f3-v1",
+      "file": "assets/coast/v1/coast-elite-body-se-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 3,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "f1383d13ef6633ebae753183f0b5e64f9c5f50079e1bf69eb10ed41097f1be8c",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-se-f4-v1",
+      "file": "assets/coast/v1/coast-elite-body-se-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 4,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "08aabf1701e7d9e8d3d8044e914594d7e48ff5515fb93f904febbf26ab469d79",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-e-f0-v1",
+      "file": "assets/coast/v1/coast-elite-body-e-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 0,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "e45c08f649ae5a2c637d617de5b8963eaf7f92c1f10684bb4bb5eb3cf91b5b34",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-e-f1-v1",
+      "file": "assets/coast/v1/coast-elite-body-e-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 1,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "33ee36528dfeea980c416e53f46fae80337b96dd64376cd3f3e0fabf82c1feba",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-e-f2-v1",
+      "file": "assets/coast/v1/coast-elite-body-e-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 2,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "441d82f7bc48fbf66e63fca61ebccf18a840cc34756368f7208bd6948a10eab4",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-e-f3-v1",
+      "file": "assets/coast/v1/coast-elite-body-e-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 3,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "c6a83be7a3de805c447a5b78c34632cbb892910bb59b6598f74b91bfa1a141b2",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-e-f4-v1",
+      "file": "assets/coast/v1/coast-elite-body-e-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 4,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "cace56fd285cb41a750fae0e880f5f9e25dc10fc513dc1963f59b894b52f5c1d",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-ne-f0-v1",
+      "file": "assets/coast/v1/coast-elite-body-ne-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 0,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "fb854cedf3396f3e04d4cda73030d445fedf0ee98d4661d7e07300307591438a",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-ne-f1-v1",
+      "file": "assets/coast/v1/coast-elite-body-ne-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 1,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "2eb390fd73e79b95c43b3ca452e5deb46d03beaf3e30a87982f0438aa8edb9a0",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-ne-f2-v1",
+      "file": "assets/coast/v1/coast-elite-body-ne-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 2,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "a0bab1ad98b1b85c87f9648d4a2284a36e6831dcb54899cfb614f086a4e01fa4",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-ne-f3-v1",
+      "file": "assets/coast/v1/coast-elite-body-ne-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 3,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "8fc96999d7a50631ca1a8249d69bbd206dfebea1bf768a61d3787c7855ec9837",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-ne-f4-v1",
+      "file": "assets/coast/v1/coast-elite-body-ne-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 4,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "7e572c36f74d32ddade90e17c3e179d9ae2c93936691170f1dfe66c09b9af7f3",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-n-f0-v1",
+      "file": "assets/coast/v1/coast-elite-body-n-f0-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 0,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "cca2661d5d94a2b4540d380729e23364b42da44d960281e61e0f9fafeb99f75b",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-n-f1-v1",
+      "file": "assets/coast/v1/coast-elite-body-n-f1-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 1,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "6b9b2235eaace44c2cb36c040f3f07145a6506b0a96c9c2f9ca408c593ef217b",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-n-f2-v1",
+      "file": "assets/coast/v1/coast-elite-body-n-f2-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 2,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "c6aa6faedc3f823207288581671167775f015e759afb4dbfe9e35134a9cfbff3",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-n-f3-v1",
+      "file": "assets/coast/v1/coast-elite-body-n-f3-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 3,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "0684d17503e8e5ff0adff2a0c9740e7c0d7e486a703d46f410ccce97bc0e161f",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-elite-body-n-f4-v1",
+      "file": "assets/coast/v1/coast-elite-body-n-f4-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 4,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "14dcfcb51c9e41a2f9d979d9273b64a2bd830a00b34b3882897bf26c6b628d48",
+      "revision": 1,
+      "heldGripLocal": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "coast-creature-body-s-f0-v1",
+      "file": "assets/coast/v1/coast-creature-body-s-f0-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 0,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "185ff565f55cb6d86d6c0116ea24ea1d4ee241b1bb12d939142e107b795d5d30",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-s-f1-v1",
+      "file": "assets/coast/v1/coast-creature-body-s-f1-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 1,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "4adea7048dcdf98e62a0f9e1ddbde0513b29b3b6df52caa30d0f797b6b9341e8",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-s-f2-v1",
+      "file": "assets/coast/v1/coast-creature-body-s-f2-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 2,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "56aef7aeb8b5092b66f701f66e64449d263c6586117ec0813dd45aa59972b1d4",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-s-f3-v1",
+      "file": "assets/coast/v1/coast-creature-body-s-f3-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 3,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "471b34c5fbd631c9bfcf4a03464bc695e29305768f0d2f5c0d07e4b0da1041ca",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-s-f4-v1",
+      "file": "assets/coast/v1/coast-creature-body-s-f4-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "S",
+      "frameIndex": 4,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "f6e18d014d7ad593e42bf23c13302c03b2803c29f25da0092c3bbc7fa87cbdab",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-se-f0-v1",
+      "file": "assets/coast/v1/coast-creature-body-se-f0-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 0,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "b84bbc2cd415b4793cc0933935112b75bb8caa7f953a0e8f7775782b8b66d96b",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-se-f1-v1",
+      "file": "assets/coast/v1/coast-creature-body-se-f1-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 1,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "458c5dd2a42b4799b128f15264d3f6095886a76bba1dde6c60764d3af4ad215a",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-se-f2-v1",
+      "file": "assets/coast/v1/coast-creature-body-se-f2-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 2,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "6211475fa7f64849e6837884422b6acf46c7f397e5c597b581dd4cabdf8367cc",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-se-f3-v1",
+      "file": "assets/coast/v1/coast-creature-body-se-f3-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 3,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "c7378cf4fe8a39c56c80dea58c73531cf85bb0f18645ea2cc4c179bb24069ae0",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-se-f4-v1",
+      "file": "assets/coast/v1/coast-creature-body-se-f4-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "SE",
+      "frameIndex": 4,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "f640972fc4a8ad262432740a9676c09db9bb6de80f1df4003adb73d071ecda8f",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-e-f0-v1",
+      "file": "assets/coast/v1/coast-creature-body-e-f0-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 0,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "dd7b1c50b884d0d6320eb5f383004b4781985e43acb09dedc5d192bdd44cedb7",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-e-f1-v1",
+      "file": "assets/coast/v1/coast-creature-body-e-f1-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 1,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "bef5cf4b184b9aefeb2a2137c95746bd16bb528a60fa1c8bdf21aa955e14b7d1",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-e-f2-v1",
+      "file": "assets/coast/v1/coast-creature-body-e-f2-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 2,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "1ed922a7afc0e19e3ac13faeb5848f5f3e734cfda7fe4cf320a67d2a2c6b8b56",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-e-f3-v1",
+      "file": "assets/coast/v1/coast-creature-body-e-f3-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 3,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "7012c21c8f6136db8bccee3d06dc0dfb63a9430370f09e507cddf75f477a3dcc",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-e-f4-v1",
+      "file": "assets/coast/v1/coast-creature-body-e-f4-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "E",
+      "frameIndex": 4,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "fe407be2dfa11e08e4e6f698c9a9779d9e4f99e6a95876d49d6eba07d1fbe712",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-ne-f0-v1",
+      "file": "assets/coast/v1/coast-creature-body-ne-f0-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 0,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "c5a6637a6faf5499d7d3fc63ff4645b3d6914411fd1aae7f6c3e92105c1a4e65",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-ne-f1-v1",
+      "file": "assets/coast/v1/coast-creature-body-ne-f1-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 1,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "e6d6871cea0246b6295bca380bf6d54f5da999e3f3697897888750ab316f395c",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-ne-f2-v1",
+      "file": "assets/coast/v1/coast-creature-body-ne-f2-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 2,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "012b0b66e1f7906c05f5f5121289bbfb6d8504ea5f7ec0d4ccd15ef49a74f88c",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-ne-f3-v1",
+      "file": "assets/coast/v1/coast-creature-body-ne-f3-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 3,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "08e1264aa69aa36898cbc3b44633c7f1535a1fe2b6d2b0ad565a5d5555c02e04",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-ne-f4-v1",
+      "file": "assets/coast/v1/coast-creature-body-ne-f4-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "NE",
+      "frameIndex": 4,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "38db1391e588df63fa353736fca45f92ff66f9965ff5306e82caba0f29112e30",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-n-f0-v1",
+      "file": "assets/coast/v1/coast-creature-body-n-f0-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 0,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "ffa28970b4af03c1515167da30d04a441c58263849d07b7853f28108cb950eaf",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-n-f1-v1",
+      "file": "assets/coast/v1/coast-creature-body-n-f1-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 1,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "250935e29e1926ae409b07b193a735580c3592f55df8f21c5d69e680f5cb9b07",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-n-f2-v1",
+      "file": "assets/coast/v1/coast-creature-body-n-f2-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 2,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "5978bb1b35f49cf2300d469029bdc39085bb48ec735ff8fd214b99d869dde4b9",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-n-f3-v1",
+      "file": "assets/coast/v1/coast-creature-body-n-f3-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 3,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "c49bff9bf95e132f7bdb0a897ddb383d28c1e99f1a71a57650047ccc38b2c874",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-body-n-f4-v1",
+      "file": "assets/coast/v1/coast-creature-body-n-f4-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "enemy",
+      "dir": "N",
+      "frameIndex": 4,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "15b97bf31f8f749a69a206633f900af96b8db385913940effdec482e77fa6107",
+      "revision": 1
+    },
+    {
+      "id": "coast-salt-corpse-e-v1",
+      "file": "assets/coast/v1/coast-salt-corpse-e-v1.png",
+      "w": 48,
+      "h": 24,
+      "anchor": [
+        24,
+        12
+      ],
+      "kind": "corpse",
+      "dir": "E",
+      "frameIndex": null,
+      "part": "coast-salt",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "9473b03deffc1c2fc70acd070e16ad720ffb97a44e2b376101853f9710872596",
+      "revision": 1
+    },
+    {
+      "id": "coast-elite-corpse-e-v1",
+      "file": "assets/coast/v1/coast-elite-corpse-e-v1.png",
+      "w": 48,
+      "h": 24,
+      "anchor": [
+        24,
+        12
+      ],
+      "kind": "corpse",
+      "dir": "E",
+      "frameIndex": null,
+      "part": "coast-elite",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "66ac2d8ffc720cef0569bb71bc905f8db0c7d6eba6c0ce4cf414758f4cefaabf",
+      "revision": 1
+    },
+    {
+      "id": "coast-creature-corpse-e-v1",
+      "file": "assets/coast/v1/coast-creature-corpse-e-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        14
+      ],
+      "kind": "corpse",
+      "dir": "E",
+      "frameIndex": null,
+      "part": "coast-creature",
+      "grip": null,
+      "muzzle": null,
+      "sha256": "bbd8cb2a9dfc394b2219adf2398f4fcebf417418088b0178802c1453d775d240",
+      "revision": 1
+    },
+    {
+      "id": "coast-weapon-salt-rifle-held-v1",
+      "file": "assets/coast/v1/coast-weapon-salt-rifle-held-v1.png",
+      "w": 31,
+      "h": 10,
+      "anchor": [
+        10,
+        7
+      ],
+      "kind": "weapon",
+      "dir": "E",
+      "frameIndex": null,
+      "part": "coast-weapon-salt-rifle",
+      "grip": [
+        10,
+        7
+      ],
+      "muzzle": [
+        29,
+        3
+      ],
+      "sha256": "9eac5dffcb784b4e99c2bb6030d47cbde9d4c7de948008b72db317ffdb122e14",
+      "revision": 1
+    },
+    {
+      "id": "coast-weapon-elite-rifle-held-v1",
+      "file": "assets/coast/v1/coast-weapon-elite-rifle-held-v1.png",
+      "w": 35,
+      "h": 12,
+      "anchor": [
+        10,
+        8
+      ],
+      "kind": "weapon",
+      "dir": "E",
+      "frameIndex": null,
+      "part": "coast-weapon-elite-rifle",
+      "grip": [
+        10,
+        8
+      ],
+      "muzzle": [
+        33,
+        4
+      ],
+      "sha256": "af07588f28588f5c33cb5fe8f60bf33ce0497fd5e8210304e426f6fa5af3dbd2",
+      "revision": 1
+    },
+    {
+      "id": "coast-weapon-shotgun-held-v1",
+      "file": "assets/coast/v1/coast-weapon-shotgun-held-v1.png",
+      "w": 33,
+      "h": 10,
+      "anchor": [
+        11,
+        6
+      ],
+      "kind": "weapon",
+      "dir": "E",
+      "frameIndex": null,
+      "part": "coast-weapon-shotgun",
+      "grip": [
+        11,
+        6
+      ],
+      "muzzle": [
+        31,
+        2
+      ],
+      "sha256": "dce0144a844cf9ceabcbdfcac859023fe8607a7c95a88cbed57ff4d3e4f69914",
+      "revision": 1
+    },
+    {
+      "id": "coast-weapon-knife-held-v1",
+      "file": "assets/coast/v1/coast-weapon-knife-held-v1.png",
+      "w": 19,
+      "h": 8,
+      "anchor": [
+        5,
+        4
+      ],
+      "kind": "weapon",
+      "dir": "E",
+      "frameIndex": null,
+      "part": "coast-weapon-knife",
+      "grip": [
+        5,
+        4
+      ],
+      "muzzle": [
+        16,
+        4
+      ],
+      "sha256": "cd6e21142e3c3c153e56f4ef2f40fcee7358255774fd94e8096d0ee438403ce8",
+      "revision": 1
     }
   ]
 }

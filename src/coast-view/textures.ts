@@ -4,7 +4,7 @@ import { Atlas } from './atlas';
 import { WALK_FRAMES, paintActorFrame, paintArm, paintCorpse, paintMuzzle, paintWeapon, type WeaponArt } from './art/actors';
 import { dithered, edge, rim, silhouette } from './art/paint';
 import { blob, paintCrate, paintExitDecal, paintLoot, pixel } from './art/props';
-import { solPlayerFrame, solWeapon, type SolArt } from './art/sol';
+import { solActorFrame, solCorpse, solWeapon, type SolArt } from './art/sol';
 
 export const FADE_LEVELS = [1, .7, .45, .25, 0];
 
@@ -29,8 +29,7 @@ export class Textures {
 
   actor(kind: ActorKind, dir: number, frame: number): Texture {
     const key = `actor:${kind}:${dir}:${frame}`;
-    return this.ensure(key, () => (kind === 'player' && this.art && solPlayerFrame(this.art, dir, frame))
-      || paintActorFrame(kind, dir, frame));
+    return this.ensure(key, () => (this.art && solActorFrame(this.art, kind, dir, frame)) || paintActorFrame(kind, dir, frame));
   }
   actorFlash(kind: ActorKind, dir: number, frame: number): Texture {
     const base = `actor:${kind}:${dir}:${frame}`; this.actor(kind, dir, frame);
@@ -45,13 +44,17 @@ export class Textures {
     return this.ensure(`${base}|rim`, () => rim(this.canvas(base)));
   }
   arm(kind: ActorKind): Texture { return this.ensure(`arm:${kind}`, () => paintArm(kind)); }
-  corpse(kind: ActorKind, facing: 1 | -1): Texture { return this.ensure(`corpse:${kind}:${facing}`, () => paintCorpse(kind, facing)); }
+  corpse(kind: ActorKind, facing: 1 | -1): Texture {
+    return this.ensure(`corpse:${kind}:${facing}`, () => (this.art && solCorpse(this.art, kind, facing)) || paintCorpse(kind, facing));
+  }
+  /** Where a corpse texture sits on the body's point: Sol corpses are anchored at their centre, painted ones at 14 of 24. */
+  corpseAnchorY(kind: ActorKind): number { return this.art && solCorpse(this.art, kind, 1) ? .5 : 14 / 24; }
 
   weapon(id: string, kind: ActorKind): WeaponArt & { texture: Texture; rim: Texture } {
     const glove = kind === 'player' ? '#4a463c' : kind === 'salt' ? '#7f7a6b' : '#3e3a33';
-    const key = `weapon:${id}:${glove}`;
+    const key = `weapon:${id}:${kind === 'salt' || kind === 'elite' ? kind : glove}`;
     let art = this.weapons.get(key);
-    if (!art) { art = (this.art && solWeapon(this.art, id)) || paintWeapon(id, glove); this.weapons.set(key, art); this.canvases.set(key, art.canvas); this.atlas.add(key, art.canvas); }
+    if (!art) { art = (this.art && solWeapon(this.art, id, kind)) || paintWeapon(id, glove); this.weapons.set(key, art); this.canvases.set(key, art.canvas); this.atlas.add(key, art.canvas); }
     const rimKey = `${key}|rim`;
     if (!this.atlas.has(rimKey)) { const r = rim(art.canvas); this.canvases.set(rimKey, r); this.atlas.add(rimKey, r); }
     return { ...art, texture: this.atlas.get(key), rim: this.atlas.get(rimKey) };

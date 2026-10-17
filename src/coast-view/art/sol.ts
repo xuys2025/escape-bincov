@@ -41,9 +41,10 @@ function soft(art: SolArt, name: string): HTMLCanvasElement | null {
  */
 const PLAYER_DIR: Record<number, [string, boolean]> = { 0: ['e', false], 1: ['se', false], 2: ['s', false], 3: ['se', true], 4: ['e', true], 5: ['ne', true], 6: ['n', false], 7: ['ne', false] };
 
-export function solPlayerFrame(art: SolArt, dir: number, frame: number): HTMLCanvasElement | null {
+/** A body frame of an actor kind with Sol samples (the player, and enemies as their batches arrive). */
+export function solActorFrame(art: SolArt, kind: string, dir: number, frame: number): HTMLCanvasElement | null {
   const [d, mirror] = PLAYER_DIR[dir] ?? PLAYER_DIR[0];
-  const src = get(art, `player-body-${d}-f${frame}`);
+  const src = get(art, `${kind}-body-${d}-f${frame}`);
   if (!src) return null;
   const { c, g } = canvas(src.width, src.height);
   if (mirror) { g.translate(src.width, 0); g.scale(-1, 1); }
@@ -51,12 +52,36 @@ export function solPlayerFrame(art: SolArt, dir: number, frame: number): HTMLCan
   return c;
 }
 
-/** Grip (8,4) is the rotation pivot and the muzzle sits at x=28 on the barrel axis row 4. */
-export function solWeapon(art: SolArt, weapon: string) {
-  const src = weapon === 'carbine' ? get(art, 'weapon-carbine-held') : null;
-  if (!src) return null;
+/**
+ * Held weapons, drawn pointing east. The manifest's grip is the rotation pivot and its muzzle (a melee weapon's tip) sets
+ * the reach along the aim; `forward` and the support hand follow the procedural weapon of the same id (art/actors.ts).
+ */
+const HELD: Record<string, { art: string; grip: [number, number]; tip: number; forward: number; support?: number; oneHanded?: boolean }> = {
+  carbine: { art: 'weapon-carbine-held', grip: [8, 4], tip: 28, forward: 0, support: 12 },
+  pistol: { art: 'weapon-pistol-held', grip: [6, 6], tip: 16, forward: 8, support: 0 },
+  shotgun: { art: 'weapon-shotgun-held', grip: [11, 6], tip: 31, forward: 0, support: 10 },
+  knife: { art: 'weapon-knife-held', grip: [5, 4], tip: 16, forward: 6, oneHanded: true },
+  club: { art: 'weapon-club-held', grip: [6, 5], tip: 22, forward: 4, oneHanded: true },
+  // Salt smugglers and tide wardens both carry the Runtime's 'rifle'; each has its own drawing.
+  'salt:rifle': { art: 'weapon-salt-rifle-held', grip: [10, 7], tip: 29, forward: 0, support: 12 },
+  'elite:rifle': { art: 'weapon-elite-rifle-held', grip: [10, 8], tip: 33, forward: 0, support: 12 },
+};
+export function solWeapon(art: SolArt, weapon: string, kind?: string) {
+  const held = HELD[`${kind}:${weapon}`] ?? HELD[weapon], src = held ? get(art, held.art) : null;
+  if (!held || !src) return null;
   const { c, g } = canvas(src.width, src.height); g.drawImage(src, 0, 0);
-  return { canvas: c, pivotX: 8, pivotY: 4, forward: 0, muzzle: 28 - 8, support: 12 };
+  const [pivotX, pivotY] = held.grip;
+  return { canvas: c, pivotX, pivotY, forward: held.forward, muzzle: held.forward + held.tip - pivotX, support: held.support, oneHanded: held.oneHanded };
+}
+
+/** A corpse lying head east, mirrored for a body that fell west; its manifest anchor is the body's centre. */
+export function solCorpse(art: SolArt, kind: string, facing: 1 | -1): HTMLCanvasElement | null {
+  const src = get(art, `${kind}-corpse-e`);
+  if (!src) return null;
+  const { c, g } = canvas(src.width, src.height);
+  if (facing < 0) { g.translate(src.width, 0); g.scale(-1, 1); }
+  g.drawImage(src, 0, 0);
+  return c;
 }
 
 /**
