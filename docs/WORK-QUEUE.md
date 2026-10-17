@@ -4,6 +4,7 @@
 
 | 目标 | 承接入口 | 接手提示 |
 | --- | --- | --- |
+| 地图敌人详细设定（纯文档） | [设计提案](ENEMY-DESIGN.md) · `docs/map-enemy-design` | 2026-10-17 用户明确授权上传 PR；五大类/18 原型/十二规划区域。盐枭并入拾荒者头目，守潮人归入盐蚀者相关人群；未接入游戏。与 #66 现有四类素材接入分开交付，不要求其重做；设计审阅与未来实施另记 |
 | CI 八组均衡与执行证据 | [#61](https://github.com/xuys2025/escape-bincov/issues/61) · [PR #62](https://github.com/xuys2025/escape-bincov/pull/62) | 已授权合并；同步 eb512ea 后以准确 head 全量 CI 为准，后续性能验收与自然运行观察仍归 #61 |
 | 代码质量与低上下文 AI 接手 | [#60](https://github.com/xuys2025/escape-bincov/issues/60) · [当前实施摘要](tasks/quality-entropy.md) | `agent/quality-entropy`；导航/契约与共享投影，后续阶段继续原总单 |
 | 2.5D 收尾：去掉 Phaser | [PR #64](https://github.com/xuys2025/escape-bincov/pull/64) · [收尾说明](2-5d-closeout/README.md) | `feat/2-5d-closeout`；存档里的旧行动也在 2.5D 上打完，标题改 Pixi，旧测试迁到 2.5D；剩余美术（Sol）和 Runtime 缺口（Astra）见说明的“剩余工作” |

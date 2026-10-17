@@ -2,6 +2,7 @@
 
 当前任务从 [WORK-QUEUE 顶部](docs/WORK-QUEUE.md) 和相关 PR 的最新 head/检查接手。读代码先用 [CODEMAP](docs/CODEMAP.md)；每个在途交付维护一份[短摘要](docs/TASK-HANDOFF-TEMPLATE.md)，不把本文件全部放入默认上下文。
 
+- 2026-10-17 · [地图敌人详细设定](docs/ENEMY-DESIGN.md)：基于 main `345aff4`，分支 `docs/map-enemy-design`；按用户确认整理五大类、18 原型、十二规划区域及条件敌对规则。纯文档提案，源码/存档/素材/制品未改；与 #66 现有四类素材接入分开。链接、原型/字段/区域完整性及差异检查结果、准确 head 与 CI 见承接 PR 正文；本地不运行游戏测试或打包，设计合入不等于已实现。
 - 2026-10-16 · [PR #64 2.5D 收尾](https://github.com/xuys2025/escape-bincov/pull/64)：旧行动在 2.5D 上打完，Phaser 删除，旧局内测试迁到 2.5D；剩余美术与 Runtime 缺口见 [收尾说明](docs/2-5d-closeout/README.md)。
 - 2026-10-15 · [#60 质量与减熵实施摘要](docs/tasks/quality-entropy.md)：代码导航、局部契约与共享投影。实际测试状态随该摘要及 PR 更新。
 - 2026-10-15 · [#61 / PR #62 CI 改造](https://github.com/xuys2025/escape-bincov/pull/62)：完整 36 套件八组重排、存档前置与计时门禁；维护者已授权合并，最新基线与已验/未验结果以 PR 为准。
