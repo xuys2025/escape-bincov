@@ -2,7 +2,9 @@
 
 当前任务从 [WORK-QUEUE 顶部](docs/WORK-QUEUE.md) 和相关 PR 的最新 head/检查接手。读代码先用 [CODEMAP](docs/CODEMAP.md)；每个在途交付维护一份[短摘要](docs/TASK-HANDOFF-TEMPLATE.md)，不把本文件全部放入默认上下文。
 
-- 2026-10-23 · [#60 Q-E08 检查导航](docs/tasks/check-navigation.md)（`agent/quality-checks`，起点 main `04736f7`）：按风险列出最少检查、前置与人工证据；脚本分类明确现役/诊断/历史/待确认，两个行动堆报告默认分目录。单测 647 项、CI 守卫 62 项、Perk 手动入口 14 项通过，打包产物与基线字节一致。原有两个 20 轮堆探针均完成，生命周期通过、堆趋势仍 PARTIAL，未跑 strict60，未替 #32 签收。使用与维护见 [CHECKS](docs/CHECKS.md)，等待承接 PR 的 CI 与维护者审阅。
+- 2026-10-24 · [#61 手动落幕检查](docs/CI.md#手动落幕检查的时序)（`fix/coast-outro-checks`，基线 `98c69b4`）：W12/W13 等实际落幕再读文案；600 ms 呈现延迟使旧 W13 误报，修复后桌面流程 26/26，完整套件 53/53。缺少标记和错误文案仍失败；不改游戏、断言、计时或 CI 分组。准确 head 与 CI 以承接 PR 为准。
+
+- 2026-10-23 · [#60 Q-E08 检查导航](docs/tasks/check-navigation.md)（`agent/quality-checks`，起点 main `04736f7`）：按风险列出最少检查、前置与人工证据；脚本分类明确现役/诊断/历史/待确认，两个行动堆报告默认分目录。单测 647 项、CI 守卫 62 项、Perk 手动入口 14 项通过，打包产物与基线字节一致。原有两个 20 轮堆探针均完成，生命周期通过、堆趋势仍 PARTIAL，未跑 strict60，未替 #32 签收。使用与维护见 [CHECKS](docs/CHECKS.md)。2026-10-24 已审核并按维护者授权合并 [PR #93](https://github.com/xuys2025/escape-bincov/pull/93) 为 `98c69b4`，合并树与完整 CI 通过的 `e7b2019` 相同。
 
 - 2026-10-23 · [#60 Q-B06 诊断 bundle 同源](docs/tasks/quality-entropy.md#q-b06-诊断-bundle-同源)（[PR #90](https://github.com/xuys2025/escape-bincov/pull/90)，`agent/diagnostic-bundle`）：游戏脚本的 esbuild 配置抽到导入无副作用的 `scripts/game-bundle.mjs`，正式构建与现役堆/F20 诊断共用 loader、target、define，诊断只在调用处覆盖压缩和探针；`pnpm package` 产物逐字节不变。调用 esbuild 的 8 个脚本已分现役/待确认/归档，CI 新增 `scripts/ci/game-bundle.test.mjs`。三个诊断现在能进入流程，#32 F20 仍 PARTIAL；两个堆诊断间歇出现 canvas 7→8（7 次里 4 次），未归因。
 - 2026-10-23 · [暴击与三属性 Perk 实现（#77）](docs/tasks/critical-perk-contract.md)：分支 `agent/critical-perk`，基于 main `44494ea`，已同步 #79（`76adbd6`）与 #88（`b38f23d`）。CP-T01～T09 分阶段实现并逐段合入：共用纯规则 `src/perks.ts`、`src/breath.ts`；存档 session v5 / expansion v3 / raid v3，固定旧客户端拒绝新档；开枪暴击快照与 v3 命中；18 项被动效果与控枪；屏息接入 Runtime；基地选择与 500 现金重置服务；院子与旧页签界面（字体子集重建）。实现取舍见契约第 7 节；真人平衡、真机未验。

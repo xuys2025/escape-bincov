@@ -441,7 +441,8 @@ if (!group) { // Desktop flow: one run through every wiring point, ending in a s
     const failed = await page.evaluate(() => { const s = window.__bincovSample.host.services.settlement(); return { reason: s.reason, committed: s.committed, title: document.querySelector('[data-ending-title]')?.textContent }; });
     await page.evaluate(()=>{ window.__solGateRenderer=window.__bincovSample.host.app.renderer; });
     await restoreWrites(page); await page.locator('[data-do="retry-settlement"]').click();
-    await page.waitForFunction(() => document.querySelector('.coast-sample')?.dataset.outro === 'extract' || window.__bincov.app.state === 'result');
+    // A committed result can precede the host's next presentation frame; wait for the curtain itself.
+    await page.waitForFunction(() => document.querySelector('.coast-sample')?.dataset.outro === 'extract');
     const curtain = await page.evaluate(() => ({ outro: document.querySelector('.coast-sample')?.dataset.outro ?? null, text: document.querySelector('.coast-sample [data-curtain-text]')?.textContent ?? null }));
     await page.waitForFunction(() => window.__bincov.app.state === 'result' && !document.querySelector('.coast-sample'));
     const end = await page.evaluate(() => ({ state: window.__bincov.app.state, outcome: window.__bincov.app.result?.outcome, pending: !!window.__bincov.app.pendingSettlement, counts: window.__bincovSample.counts(), sample: !!window.__bincov.app.coastSample }));
@@ -463,7 +464,7 @@ if (!group) { // Desktop flow: one run through every wiring point, ending in a s
     await action(page, 'return').click(); await deploy(page, { enter: false });
     await page.keyboard.press('Escape'); await frames(page, 2);
     await page.locator('[data-do="abandon"]').click(); await page.locator('[data-do="abandon-yes"]').click();
-    await page.waitForFunction(() => !!document.querySelector('.coast-sample')?.dataset.outro || window.__bincov.app.state === 'result');
+    await page.waitForFunction(() => document.querySelector('.coast-sample')?.dataset.outro === 'abandon');
     const curtain = await page.evaluate(() => ({ reason: window.__bincovSample.host.services.settlement().reason, outro: document.querySelector('.coast-sample')?.dataset.outro ?? null, text: document.querySelector('.coast-sample [data-curtain-text]')?.textContent ?? null }));
     await page.waitForFunction(() => window.__bincov.app.state === 'result' && !document.querySelector('.coast-sample'));
     const r = await page.evaluate(() => ({ outcome: window.__bincov.app.result?.outcome, counts: window.__bincovSample.counts() }));

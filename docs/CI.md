@@ -57,6 +57,21 @@ CI 策略测试还守住四件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 
 每组可在依赖和 Chromium 安装后用 `node scripts/ci/run-browser.mjs batch-2` 运行；batch-8 另需按工作流下载真实旧客户端。执行失败会立即停止本组后续套件并标记未运行，其他组照常完成。保留 45 分钟 job 超时，不额外缩短套件预算。
 
+## 手动落幕检查的时序
+
+2026-10-24（UTC+8），`fix/coast-outro-checks` 从 main `98c69b4` 承接 [#61 的 W13 误报](https://github.com/xuys2025/escape-bincov/issues/61#issuecomment-6338851506)。[coast-sample-test.mjs](../scripts/coast-sample-test.mjs) 的 W12/W13 现在等待实际 `data-outro` 为 `extract` / `abandon`，再核对原文案和结算结果。`result` 只说明结算已保存，放弃流程的宿主可能下一帧才显示落幕，不能作为画面就绪的替代条件。W12 当前重试按钮同步刷新落幕，也去掉无效的替代条件。
+
+本地 Windows / Chrome 155.0.8059.85，正式离线 HTML SHA-256 为 `340e6a41fe4ce842edaf7cda258cd5674abc8a00972d3ddf9cfe675fa0b12f28`：
+
+| 场景 | 实测结果 |
+| --- | --- |
+| 原版完整手动套件 | 53/53；本轮自然运行未触发误报 |
+| 确认放弃的真实点击前，用捕获监听暂停 Pixi ticker，600 ms 后恢复；保留真实结算 | 原等待条件 25/26，W13 在 `result` / `outro: null` 时过早读取；修复后相同桌面流程 26/26 |
+| 修复后完整 `pnpm test:coast-sample` | 53/53，页面异常和外部请求均为 0 |
+| 同一控制流程中移除落幕标记 / 将文案改成“你倒下了” | 均为 25/26；W13 分别按原 15 秒等待上限超时 / 在原文案断言失败 |
+
+对照仅在临时测试副本里注入，不修改游戏或正式套件的运行时间。原撤离 3 秒、写失败重试、结算结果、文案和资源释放断言保留，没有加固定等待或重试。完整套件仍为手动，是否加固后进入 CI 继续归 #61；这次没有验证软件渲染下 V-CAM 后续页面的已知问题，也不替代真机验收。
+
 ## 浏览器 job 的主机环境：字体、Chromium 与渲染器
 
 2026-10-22 起（#61）。浏览器 job 准备环境时不再经过 apt 镜像：
