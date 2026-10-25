@@ -191,6 +191,7 @@ async function suite(viewport) {
     try {
       await waitPanel(page, null);
       await page.waitForFunction(([x, sprint]) => { const p = window.__bincovSample.host.lastBatch.frame.player; return p.x < x - 8 && (!sprint || p.state.sprinting); }, [x, sprint], { timeout: 15000 });
+      return await page.evaluate(() => window.__bincovSample.host.lastBatch.frame.player.state.sprinting);
     } finally { await page.keyboard.up('a'); }
   }
   async function failStorage(on) {
@@ -372,6 +373,13 @@ async function suite(viewport) {
       await frames(page, 3); const stopped = await snapshot(); await frames(page, 6);
       assert.equal((await snapshot()).x, stopped.x, 'releasing A stops the walk');
       assert.deepEqual(participants(await snapshot()), kept);
+      // A Shift held before entry stays suppressed: the A event's shiftKey is not a new Shift press (#60 D8).
+      await fixture({ items: [item('f13-drag', 'fuse')], bag: [item('f13-ammo', 'ammo9', 10)] });
+      await page.keyboard.down('Shift');
+      try {
+        await open(c.id);
+        assert.equal(await walkWest((await snapshot()).x), false, 'leaving loot must not revive the old held Shift');
+      } finally { await page.keyboard.up('Shift'); }
       // Shift pressed in the window makes the escape a sprint.
       await fixture({ items: [item('f13-drag', 'fuse')], bag: [item('f13-ammo', 'ammo9', 10)] }); await open(c.id);
       await page.keyboard.down('Shift');
