@@ -39,7 +39,7 @@
 | 失焦后首按被抑制（已知 D8） | `InputState.suppressHeld` 和宿主 blur/pause；要区分失焦丢失释放事件与面板切换保护，保住 E 关闭搜刮不重开的断言 |
 | 内容身份依赖文案（Q-E06） | `raid-runtime/presentation.ts` 的 region 名称表和楼梯中文前缀；改变文案前必须检查身份/方向，不能顺便改旧世界编号 |
 | 单测通过不等于真机/完整资源签收 | 帧率、真实输入、WebGL 上下文恢复、F20 总堆与真人手感仍按原任务验收，不把本轮结果替代这些结论 |
-| 自然游玩探针的击杀采样不是累计值 | `scripts/natural-play.mjs` 从宿主至多 1000 条的 `eventLog` 计数，旧死亡事件淘汰后 samples.kills 会下降；累计击杀应读最终结算，不根据这条采样推断游戏进度丢失 |
+| 自然游玩探针的击杀采样（独立修复） | 原[真实报告](audit-contracts/natural-play-report.json)同一 run 的 kills 在 332 秒为 25、363 秒为 0；只有至多 1000 条事件的采样失真，Runtime 和最终结算未丢击杀。`fix/natural-play-kill-count` 将实时采样改读显式 `?test=1` driver 的 `killCount()`，终态继续读已提交结算。`natural-play-state.test.mjs` 覆盖日志淘汰和视图重挂，`raid-runtime.test.ts` 覆盖经典/分层检查点恢复、零写入与结算对账；十分钟真实计时、真人验收和 #32 原边界保持 |
 
 ## 首轮验证（同步射击主线之前）
 

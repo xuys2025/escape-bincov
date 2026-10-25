@@ -1,3 +1,11 @@
+## 2026-10-25 自然游玩报告累计击杀
+
+承接 #60 原审计登记，独立本地分支 `fix/natural-play-kill-count`，基线 `974a3a8d1ad2a7662c3a828226295d6c9b31eb64`。原[真实报告](docs/tasks/audit-contracts/natural-play-report.json)同一 run 的采样在 332→363 秒从 25→0，最终结算仍为 25；不是游戏丢击杀。`?test=1` driver 的 `killCount()` 只读 Runtime 真值，采样回调移至 `scripts/natural-play-state.mjs`，不从有界事件日志重建累计值；终态仍读已提交结算。普通端口、战斗/存档/HUD/输入规则不变。
+
+Linux、Node 24.19.0、pnpm 11.25.0：全量 `pnpm test` 876/876、`pnpm check:ci` 67/67、`pnpm package` 通过。定向 Runtime 31/31、真实采样回调 3/3；把回调换回旧计数的有效负对照为 1 通过 / 2 失败。经典/分层检查点恢复、累计观察零写入/零 RNG/不消费事件以及最终结算对账均有反例；日志淘汰和视图重挂由同一序列化采样回调验证。HTML 8,133,499 字节，SHA-256 `31ca729a4a900a327160f7a2e46add41267e2aada3d215b7b32ca4e66dc7c251`；生成物不提交。链接现有依赖，使用 `pnpm_config_verify_deps_before_run=false`；首轮 pnpm 自动安装在测试前因 `ERR_PNPM_UNSAFE_MODULES_DIR` 停止，未改依赖或锁文件。
+
+完整默认十分钟自动输入尚未运行：按主调度优先级，在启动浏览器前停止了等待 `/tmp/bincov-browser-validation.lock` 的进程；后续重新排队，不能缩短计时替代。真人/真机、#32 F20、56 个 review 工具的状态保持。仅本地交付，未推送、未创建 PR、未合并或发布；原错误报告保留。[审计入口](docs/tasks/audit-contracts.md#审计覆盖与未修范围)与测试为下一步定位点。
+
 ## 2026-10-24 打包产物改由 CI 构建和发布（`ci/no-committed-builds`）
 
 维护者在 #103 因 #102 合入出现生成物冲突时提出：产物应由 CI 编译发布。基线 main `49894e9`，随后同步 `c587685`（#104）与 `5adc64a`（#103），两次的生成物冲突都按本规则保留删除。五个生成物移出仓库并加入 `.gitignore`，`generated-files.test.mjs` 拒绝再提交；发布清单移到 `release/`。CI 删去“提交的产物与源码一致”检查，main 的 `Build and test` 通过后新增 `Publish offline release`，把同一份已验证构建发布到滚动预发布 `main-latest`（标签移到本次提交、文件同名替换），README 下载改指向它；Pages 不变。规则只写在 [CI 说明](docs/CI.md#构建与离线包发布)，AGENTS、手册、模板、README 链接过去。
