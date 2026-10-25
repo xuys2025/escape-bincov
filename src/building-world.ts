@@ -22,6 +22,9 @@ export function connect(a: SpaceDefinition, aId: string, aAt: Point, aLabel: str
 }
 
 function residentWorld(): WorldDefinition {
+    const id = 'coast-buildings-v1', revision = 'resident-layout-1';
+    // These are the existing view identities; display copy and region ordering must not change them.
+    const regionId = (mapId: string, key: string) => `${id}/${revision}/${mapId}/region/${key}`;
     const coast: SpaceDefinition = { id: 'coast', name: '沿海街区', floor: '室外 / 一楼', tile: 32, doors: [], entries: [],
         cells: WORLD.tiles.map(row => row.map((t): Cell => t === 2 || t === 3 ? 'wall' : t === 4 ? 'tide' : 'floor')) };
     // Enlarge only the new world's resident footprint. Original coast-v1/v2 remain untouched.
@@ -32,24 +35,24 @@ function residentWorld(): WorldDefinition {
     addDoor(coast, 'resident-east', 16, 10);
     coast.cells[7][11] = 'window'; coast.cells[7][17] = 'window'; coast.cells[10][10] = 'window';
     coast.cells[9][11] = 'low'; coast.cells[11][17] = 'low';
-    coast.regions = [{ x: 10 * 32, y: 7 * 32, w: 9 * 32, h: 6 * 32, name: '褪色居民楼 · 一楼' }];
+    coast.regions = [{ x: 10 * 32, y: 7 * 32, w: 9 * 32, h: 6 * 32, name: '褪色居民楼 · 一楼', id: regionId(coast.id, 'resident-ground') }];
     const upstairs = roomMap('resident-f2', 12, 10, '褪色居民楼', '二楼');
     const basement = roomMap('resident-b1', 12, 9, '褪色居民楼', '地下');
     for (const map of [upstairs, basement]) {
         for (const x of [4, 7]) for (let y = 3; y < map.cells.length - 1; y++) map.cells[y][x] = 'wall';
         addDoor(map, `${map.id}-west`, 4, 5); addDoor(map, `${map.id}-east`, 7, 5);
         map.cells[4][2] = 'low'; map.cells[6][9] = 'low';
-        map.regions = [{ x: 32, y: 96, w: 96, h: 160, name: map === upstairs ? '西侧住户' : '工具间' },
-            { x: 256, y: 96, w: 96, h: 128, name: map === upstairs ? '东侧住户' : '设备间' },
-            { x: 160, y: 96, w: 64, h: 160, name: '公共走廊' }];
+        map.regions = [{ x: 32, y: 96, w: 96, h: 160, name: map === upstairs ? '西侧住户' : '工具间', id: regionId(map.id, map === upstairs ? 'west-home' : 'tools') },
+            { x: 256, y: 96, w: 96, h: 128, name: map === upstairs ? '东侧住户' : '设备间', id: regionId(map.id, map === upstairs ? 'east-home' : 'equipment') },
+            { x: 160, y: 96, w: 64, h: 160, name: '公共走廊', id: regionId(map.id, 'hall') }];
     }
     for (let x = 8; x <= 10; x++) upstairs.cells[3][x] = 'wall';
     addDoor(upstairs, 'resident-storage', 9, 3, false);
-    upstairs.regions!.push({ x: 256, y: 32, w: 96, h: 64, name: '储藏室' });
+    upstairs.regions!.push({ x: 256, y: 32, w: 96, h: 64, name: '储藏室', id: regionId(upstairs.id, 'storage') });
     upstairs.cells[0][2] = 'window'; upstairs.cells[4][11] = 'window';
     connect(coast, 'resident-up', at(17, 8), '上楼 · 二楼', upstairs, 'resident-down', at(9, 2), '下楼 · 一楼');
     connect(coast, 'resident-basement', at(15, 8), '下楼 · 地下', basement, 'resident-back', at(7, 2), '上楼 · 一楼');
-    return { id: 'coast-buildings-v1', revision: 'resident-layout-1', maps: { coast, [upstairs.id]: upstairs, [basement.id]: basement },
+    return { id, revision, maps: { coast, [upstairs.id]: upstairs, [basement.id]: basement },
         enemyCount: 25, spawnMap: coast.id, spawn: WORLD.spawns[0] };
 }
 export const BUILDING_WORLD = residentWorld();

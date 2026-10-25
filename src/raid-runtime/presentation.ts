@@ -14,13 +14,6 @@ import { critBreakdown } from '../perks';
 import type { CoastRaidRuntime } from './runtime';
 import type { ActorView, CritChanceView, MapDef, RegionDef, TerrainCode, ViewFrame, WorldKey } from './contract';
 
-/** Explicit definition keys survive array reordering; these IDs never enter a save. */
-const regionKeys: Record<string, string> = {
-    'coast:褪色居民楼 · 一楼': 'resident-ground',
-    'resident-f2:西侧住户': 'west-home', 'resident-f2:东侧住户': 'east-home',
-    'resident-f2:公共走廊': 'hall', 'resident-f2:储藏室': 'storage',
-    'resident-b1:工具间': 'tools', 'resident-b1:设备间': 'equipment', 'resident-b1:公共走廊': 'hall',
-};
 export function freeze<T>(value: T): T {
     if (value && typeof value === 'object' && !Object.isFrozen(value)) {
         Object.freeze(value);
@@ -36,9 +29,9 @@ export function mapView(r: CoastRaidRuntime, key: WorldKey): MapDef {
     const mall = isMallWorld(key.worldVersion);
     const buildingId = `${prefix}/building/${mall ? 'mall' : 'resident'}`;
     const regions: RegionDef[] = (space?.regions ?? []).map(region => {
-        const definitionKey = region.id ?? regionKeys[`${key.mapId}:${region.name}`];
-        if (!definitionKey) throw new Error(`Unmapped region: ${key.mapId}/${region.name}`);
-        return { ...region, id: region.id ?? `${prefix}/region/${definitionKey}`, inside: region.inside !== false,
+        // Identity is authored metadata, never display copy. These existing view IDs do not enter a save.
+        if (!region.id) throw new Error(`Missing region id: ${key.mapId}/${region.name}`);
+        return { ...region, id: region.id, inside: region.inside !== false,
             sealed: !!region.sealed, buildingId: mall && region.inside === false ? null : buildingId };
     });
     const buildings = data.buildings.map(b => ({ ...b, id: `${prefix}/building/${b.kind}/${b.x},${b.y}`, regionIds: [] as string[] }));
