@@ -13,6 +13,7 @@ import { critBreakdown, critSources, snapshotChance, type CritBreakdown, type Cr
 import { SAMPLE_GUNS } from '../src/shooting';
 import { critHud } from '../src/perk-copy';
 import { arm, perkBench, reopen, LANE, type Bench } from './fixtures/shooting-bench';
+import { oldRecord } from './fixtures/old-saves';
 
 // CP-T09 of #77 (docs/CRITICAL-PERK-DESIGN.md section 2.3): the raid HUD's critical chance. The Runtime projects it into
 // HudView.crit from the very snapshot a shot fired now takes (CoastRaidRuntime.shotCrit), the breath charge left out and,
@@ -59,8 +60,8 @@ function shotOf(b: Bench, events: readonly StampedEvent[]): BulletState[] {
 }
 /** The record a v4 client wrote for the same deployment, holding a raid of `version`, resumed by a reopened page. */
 function oldRaid(version: 1 | 2): Bench {
-    const b = perkBench(['technique-15-a'], 15), record = JSON.parse(b.data.get(SESSION_KEY)!);
-    record.version = 4; delete record.perksBackup;
+    const b = perkBench(['technique-15-a'], 15), record = oldRecord(JSON.parse(b.data.get(SESSION_KEY)!), 4);
+    delete record.perksBackup;
     record.expansion.version = version; delete record.expansion.growth.perks; record.expansion.raid.version = version;
     if (version === 1) { delete record.expansion.charm; delete record.expansion.awards; delete record.expansion.raid.shockAt; delete record.expansion.raid.mapEvent; }
     b.data.set(SESSION_KEY, JSON.stringify(record));

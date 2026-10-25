@@ -28,7 +28,7 @@ try {
  await step('normal offline entry has no test globals; default old shortcut shares upgraded v2', async () => {
   await page.goto('https://station.test/'); await action('enter').click(); await skipOpening(page);
   assert.equal(await page.evaluate(() => '__bincov' in window), false);
-  const r = await page.evaluate(() => JSON.parse(localStorage.getItem('escape-bincov.session.v2'))); assert.equal(r.version,5); assert.equal(r.expansion.version,3); assert.equal(r.profile.cash,700);
+  const r = await page.evaluate(() => JSON.parse(localStorage.getItem('escape-bincov.session.v2'))); assert.equal(r.version,8); assert.equal(r.expansion.version,3); assert.equal(r.profile.cash,700);
   await page.screenshot({ path: resolve(out,'ordinary-1280.png') });
   await page.goto('https://station.test/?test=1&entry=tabs'); await action('enter').click();
   assert.equal((await get()).storage.upgradeRequired,false);

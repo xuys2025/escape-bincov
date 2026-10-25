@@ -16,6 +16,7 @@ import { SAMPLE_GUNS } from '../src/shooting';
 import type { Cell } from '../src/spatial';
 import { arm, perkBench, reopen, LANE, type Bench } from './fixtures/shooting-bench';
 import { plainCrit, prototypeRaid, prototypeWorld } from './fixtures/layered';
+import { makeV4 } from './fixtures/old-saves';
 
 // CP-T04 of #77 (docs/CRITICAL-PERK-DESIGN.md sections 2 and 4.2, docs/tasks/critical-perk-contract.md section 3): a
 // gun shot in a v3 raid snapshots its critical sources once, every pellet keeps its own copy, and each hit on a live
@@ -336,7 +337,7 @@ test('CP-22: classic and v2 raids fire rounds without a snapshot, and a v2 hit s
     // The record a v4 client wrote for the same deployment: a v2 raid, resumed by this page.
     const b = perkBench(), record = JSON.parse(b.data.get(SESSION_KEY)!);
     assert.deepEqual(record.expansion.raid.maps.coast.bullets, []);
-    record.version = 4; delete record.perksBackup; record.expansion.version = 2; delete record.expansion.growth.perks; record.expansion.raid.version = 2;
+    makeV4(record);
     b.data.set(SESSION_KEY, JSON.stringify(record));
     const page = reopen(b), v2 = arm({ ...b, ...page, driver: createRuntimeTestDriver(page.runtime, '?test=1') }, 'pistol');
     assert.equal(v2.runtime.layered!.raid!.version, 2);
@@ -418,13 +419,11 @@ test('the validator wants the exact snapshot on every v3 player round and nowher
         ['a breath charge of 0', crit => breath(crit, 0)],
         ['a breath charge without technique-15-a', (crit, _round, record) => { breath(crit); record.expansion.growth.perks = ['technique-20-a']; }],
         ['a snapshot on an enemy round', (_crit, x) => { x.enemy = true; x.owner = uid; }],
-        ['a snapshot in a v2 raid', (_crit, _round, record) => {
-            record.version = 4; delete record.perksBackup; record.expansion.version = 2; delete record.expansion.growth.perks; record.expansion.raid.version = 2;
-        }],
+        ['a snapshot in a v2 raid', (_crit, _round, record) => { makeV4(record); }],
     ];
     for (const [why, change] of rejected) assert.throws(() => decodeSession(edited(change)), why);
     // The same v2 record without the snapshot is a valid v2 raid: only the snapshot was wrong there.
     assert.doesNotThrow(() => decodeSession(edited((_crit, x, record) => {
-        delete x.crit; record.version = 4; delete record.perksBackup; record.expansion.version = 2; delete record.expansion.growth.perks; record.expansion.raid.version = 2;
+        delete x.crit; makeV4(record);
     })));
 });

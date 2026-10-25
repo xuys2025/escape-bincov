@@ -1,10 +1,15 @@
 import * as D from './domain';
+import { getLegacyEnemyProfile } from './enemy-profile';
+import { archetype, enemyDefinition } from './enemy-archetypes';
+import { canDamageEnemy } from './enemy-relations';
+import { enemyDamageAfterArmor } from './enemy-defense';
+import { enemyPost } from './enemy-posts';
 import type { BulletState, EnemyState } from './checkpoint';
 import type { ExpansionState, LayeredRaid, WorldDefinition } from './expansion-state';
 import type { Point } from './world';
 import { SURVIVAL } from './balance';
 import { criticalChance, enemyDamage, trainingEfficiency } from './rpg';
-import { effectiveAttributes, entityUid, rpgEnabled } from './expansion-state';
+import { effectiveAttributes, entityUid, rpgEnabled, enemyRules, perkRaidRules } from './expansion-state';
 import { luckInventory } from './reputation-luck';
 import { snapshotChance } from './perks';
 import { pursuitPosition } from './pursuit';
@@ -89,30 +94,50 @@ export function aimTarget(raid: LayeredRaid, world: WorldDefinition, reach: numb
 }
 
 /** Actual damage and corpse ownership shared by ordinary and departing shots. */
-export function damageLayerEnemy(state: ExpansionState, mapId: string, enemy: EnemyState, amount: number, gun = true): void {
+export function damageLayerEnemy(state: ExpansionState, mapId: string, enemy: EnemyState, amount: number, gun = true,
+    source: { owner: string; at: Point; incomingAngle?: number } = { owner: 'player', at: state.raid!.player }): void {
     if (enemy.hp <= 0 || amount <= 0) return;
-    const raid = state.raid!, layer = raid.maps[mapId], actual = Math.min(enemy.hp, amount);
+    if (source.owner !== 'player') {
+        const attacker = [...state.raid!.maps[mapId].enemies, ...state.raid!.pursuits.filter(p => p.sourceMap === mapId).map(p => p.enemy)]
+            .find(e => e.uid === source.owner);
+        if (!enemyRules(state.raid) || !attacker || !canDamageEnemy(attacker, enemy)) return;
+    }
+    const raid = state.raid!, layer = raid.maps[mapId], actual = Math.min(enemy.hp, enemyDamageAfterArmor(enemy, source.at, amount, source.incomingAngle));
     enemy.hp -= actual;
-    if (mapId === raid.currentMap) { enemy.state = 'chase'; enemy.alert = 6; enemy.target = { x: raid.player.x, y: raid.player.y }; }
-    if (gun) raid.training.quantity.technique += actual / 400 * (rpgEnabled(raid) ? trainingEfficiency(state) : 1);
+    if (mapId === raid.currentMap) {
+        const at = enemy.tactics ? source.at : raid.player;
+        enemy.state = 'chase'; enemy.alert = 6; enemy.target = { x: at.x, y: at.y };
+        if (enemy.tactics) {
+            enemy.tactics.stance = 'hostile'; enemy.tactics.awareness = 1;
+            enemy.tactics.memory = { at: { ...enemy.target }, time: raid.elapsed, source: 'damage', target: source.owner };
+        }
+    }
+    if (gun && source.owner === 'player') raid.training.quantity.technique += actual / 400 * (raid.version >= 2 ? trainingEfficiency(state) : 1);
     if (enemy.hp > 0) return;
-    raid.kills++;
+    if (source.owner === 'player') raid.kills++;
+    if (enemy.tactics) { enemy.tactics.killedBy = source.owner; enemy.tactics.phase = 'idle'; enemy.tactics.phaseLeft = 0; }
     const event = raid.pursuits.find(p => p.enemy.uid === enemy.uid);
     if (event) {
         raid.pursuits = raid.pursuits.filter(p => p !== event);
         layer.enemies.push(enemy);
     }
     const inventory = D.createInventory(6, 5);
-    const drops = D.rollLoot(raid.seed + raid.kills * 47, enemy.id === 'elite' ? 3 : 1);
+    const tactics = enemy.tactics;
+    const gunDef = tactics?.equipment ? D.WEAPONS[tactics.equipment] : undefined;
+    const drops = tactics ? [
+        ...(tactics.equipment ? [{ id: tactics.equipment, qty: 1 }] : []),
+        ...(gunDef?.ammo && tactics.magazine + tactics.reserve > 0 ? [{ id: gunDef.ammo, qty: tactics.magazine + tactics.reserve }] : []),
+        ...tactics.supplies,
+    ] : D.rollLoot(raid.seed + raid.kills * 47, getLegacyEnemyProfile(enemy.id).corpseLootRolls);
     const random = D.seededRandom(raid.rng);
     for (const drop of drops) {
         if (D.addItem(inventory, drop.id, drop.qty, false, false, true, () => entityUid(raid, raid.nextEntity++))) throw new Error('尸体容器容量不足。');
-        random(); random();
+        if (!tactics) { random(); random(); }
     }
     raid.rng = random.getState();
-    if (rpgEnabled(raid)) luckInventory(state, mapId, inventory, enemy);
+    if (raid.version >= 2 && !tactics) luckInventory(state, mapId, inventory, enemy);
     layer.containers.push({ id: `corpse-${enemy.uid}`, runId: raid.runId, kind: 'corpse',
-        name: `${D.ENEMIES[enemy.id].name}遗体`, x: enemy.x, y: enemy.y, inventory });
+        name: `${enemyDefinition(enemy.id).name}遗体`, x: enemy.x, y: enemy.y, inventory });
 }
 
 export function resolveLayerShot(state: ExpansionState, world: WorldDefinition, mapId: string, bullet: BulletState, playerPresent: boolean, hitFeedback?: (uid: string, critical: boolean) => void, playerHitFeedback?: (source: Point) => void, observer?: ShotObserver): boolean {
@@ -122,6 +147,22 @@ export function resolveLayerShot(state: ExpansionState, world: WorldDefinition, 
     const context = { definition: world.maps[mapId], doors: layer.doors, highTide: raid.highTide };
     const stop = shotBarrier(context, bullet, dx, dy);
     if (bullet.enemy) {
+        const actors = [...layer.enemies, ...raid.pursuits.filter(p => p.sourceMap === mapId).map(p => p.enemy)];
+        const owner = enemyRules(raid) ? actors.find(e => e.uid === bullet.owner && e.tactics) : undefined;
+        if (owner) {
+            const playerDistance = playerPresent ? shotIntersection(bullet, raid.player, dx, dy, 12) : null;
+            const first = actors.filter(e => e.hp > 0 && e.uid !== owner.uid).map(enemy => ({ enemy, distance: shotIntersection(bullet, enemy, dx, dy) }))
+                .filter((h): h is { enemy: EnemyState; distance: number } => h.distance !== null && h.distance < stop && h.distance < (playerDistance ?? Infinity))
+                .sort((a, b) => a.distance - b.distance || a.enemy.uid.localeCompare(b.enemy.uid, 'en'))[0];
+            if (first) {
+                const hp = first.enemy.hp;
+                damageLayerEnemy(state, mapId, first.enemy, bullet.damage, true, { owner: owner.uid, at: { x: bullet.x, y: bullet.y }, incomingAngle: Math.atan2(-dy, -dx) });
+                const damage = hp - first.enemy.hp;
+                observeShot(observer, context, bullet, first.distance, first.enemy.uid, damage, false, first.enemy.hp <= 0);
+                if (damage > 0) hitFeedback?.(first.enemy.uid, false);
+                return true;
+            }
+        }
         if (playerPresent) {
             const hit = shotIntersection(bullet, raid.player, dx, dy, 12);
             if (hit !== null && hit < stop) {
@@ -145,17 +186,17 @@ export function resolveLayerShot(state: ExpansionState, world: WorldDefinition, 
             // multiplies the damage once by the snapshot's multiplier. Either roll draws raid.rng once per hit on a live
             // enemy; a miss, a wall or a corpse draws nothing. A v3 player round without a snapshot is corrupt and
             // throws: it never falls back to another rule.
-            if (raid.version === 2) {
+            if (raid.version === 2 || raid.version === 4) {
                 const enemy = hits[0].enemy, perpendicular = Math.abs((enemy.x - bullet.x) * dy - (enemy.y - bullet.y) * dx);
                 const chance = criticalChance(effectiveAttributes(state).technique, 1 - Math.min(1, perpendicular / 14), state.body.effects.focus > 0 ? .05 : 0);
                 const random = D.seededRandom(raid.rng); critical = random() < chance; raid.rng = random.getState();
-            } else if (raid.version === 3) {
+            } else if (perkRaidRules(raid)) {
                 if (!bullet.crit) throw new Error('命中参数无效。');
                 const chance = snapshotChance(bullet.crit, hits[0].enemy.uid), random = D.seededRandom(raid.rng);
                 critical = random() < chance; raid.rng = random.getState(); multiplier = bullet.crit.multiplier;
             }
             const hp = hits[0].enemy.hp;
-            damageLayerEnemy(state, mapId, hits[0].enemy, bullet.damage * (critical ? multiplier : 1));
+            damageLayerEnemy(state, mapId, hits[0].enemy, bullet.damage * (critical ? multiplier : 1), true, { owner: 'player', at: { x: bullet.x, y: bullet.y }, incomingAngle: Math.atan2(-dy, -dx) });
             observeShot(observer, context, bullet, hits[0].distance, hits[0].enemy.uid, hp - hits[0].enemy.hp, critical, hits[0].enemy.hp <= 0);
             hitFeedback?.(hits[0].enemy.uid, critical); return true;
         }
@@ -204,18 +245,25 @@ export function changeLayer(state: ExpansionState, world: WorldDefinition, entry
     occupied.push(...raid.pursuits.filter(p => p.sourceMap === entry.targetMap && p.enemy.hp > 0).map(p => pursuitPosition(p, raid.elapsed)));
     const landing = findLanding({ definition: targetMap, doors: target.doors, highTide: raid.highTide }, entry.landing, occupied);
     if (!landing) return false; // No damage, RNG draws, entity allocations, or pursuit registration before this point.
-    const witnesses = source.enemies.filter(e => e.hp > 0 && (e.state === 'chase' || e.state === 'attack') && e.alert > 0 && separation(e, raid.player) <= D.ENEMIES[e.id].vision
+    const witnesses = source.enemies.filter(e => e.hp > 0 && (!archetype(e.id) || enemyRules(raid) &&
+        ['raider-melee', 'mercenary-assault'].includes(e.id) && !enemyPost(e)
+        && !(e.tactics?.version===2&&e.tactics.program.kind==='recovery') && e.tactics?.stance === 'hostile' && e.tactics.phase === 'idle'
+        && e.tactics.memory?.target === 'player' && e.tactics.memory.source === 'sight' && raid.elapsed - e.tactics.memory.time <= 1)
+        && (e.state === 'chase' || e.state === 'attack') && e.alert > 0 && separation(e, raid.player) <= enemyDefinition(e.id).vision
         && corridor(sourceContext, e, raid.player, 'sight'));
     raid.player = { ...landing, rotation: raid.player.rotation };
     raid.currentMap = entry.targetMap;
     settleDepartingShots(state, world, fromId, observer);
+    let tacticalBudget = Math.max(0, 2 - raid.pursuits.filter(p => p.enemy.tactics).length);
     for (const enemy of witnesses.filter(e => e.hp > 0).sort((a, b) => a.uid.localeCompare(b.uid, 'en'))) {
+        if (enemy.tactics && tacticalBudget === 0) continue;
         const route = spacePath(sourceContext, enemy, entry.at, true);
         if (!route.length) continue;
         const path = [{ x: enemy.x, y: enemy.y }, ...route, { ...entry.at }];
         const distance = path.slice(1).reduce((sum, point, i) => sum + separation(path[i], point), 0);
-        const speed = D.ENEMIES[enemy.id].speed;
+        const speed = enemyDefinition(enemy.id).speed;
         if (speed <= 0) continue;
+        if (enemy.tactics) tacticalBudget--;
         source.enemies = source.enemies.filter(e => e.uid !== enemy.uid);
         raid.pursuits.push({ id: `pursuit-${raid.nextEntity++}`, enemy, sourceMap: fromId, targetMap: entry.targetMap, entry: entry.id,
             path, distance, speed, registeredAt: raid.elapsed, arrivalAt: raid.elapsed + distance / speed + 1, waiting: false });

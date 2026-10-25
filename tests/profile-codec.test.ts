@@ -4,18 +4,20 @@ import * as D from '../src/domain';
 import { PROFILE_MAX_BYTES, decodeProfileDocument, decodeStoredProfile, validInventory } from '../src/profile-codec';
 import { RecoveryStore } from '../src/recovery-store';
 import { newExpansion, upgradeToRpg, type LayeredRaid } from '../src/expansion-state';
+import { oldProfile } from './fixtures/old-saves';
 
-const item = (uid: string, id: string, x: number, y: number, extra: Partial<D.Item> = {}): D.Item => ({ uid, id, qty: 1, x, y, ...extra });
+// A gun item carries its factory state, as D.addItem makes one (profile v3).
+const item = (uid: string, id: string, x: number, y: number, extra: Partial<D.Item> = {}): D.Item => ({ uid, id, qty: 1, x, y, ...D.factoryGun(id), ...extra });
 
 test('stored profiles keep the 1 MiB limit on their compact JSON, never on source whitespace', () => {
   const save = D.newSave();
   save.lastResult = { outcome: 'extract', kills: 0, keptValue: 0, lostValue: 0, message: '', seed: 1, recovered: false };
   const legacyKey = (text: string) => ({ getItem: (key: string) => key === D.SAVE_KEY ? text : null, setItem() {} });
-  // The old key may be padded past 1 MiB and still loads; content past 1 MiB is refused like a backup file.
-  const padded = JSON.stringify(save).replace('{', '{' + ' '.repeat(PROFILE_MAX_BYTES));
+  // The old key (a v2 profile at most) may be padded past 1 MiB and still loads; content past 1 MiB is refused like a backup file.
+  const padded = JSON.stringify(oldProfile(save)).replace('{', '{' + ' '.repeat(PROFILE_MAX_BYTES));
   assert.equal(new RecoveryStore(legacyKey(padded)).load().save.cash, save.cash);
   const oversized = { ...save, lastResult: { ...save.lastResult, message: 'x'.repeat(PROFILE_MAX_BYTES) } };
-  assert.throws(() => new RecoveryStore(legacyKey(JSON.stringify(oversized))).load(), /1 MiB/);
+  assert.throws(() => new RecoveryStore(legacyKey(JSON.stringify(oldProfile(oversized)))).load(), /1 MiB/);
   assert.throws(() => decodeStoredProfile(oversized), /1 MiB/);
   assert.equal(decodeStoredProfile(save).cash, save.cash);
 });
@@ -29,22 +31,22 @@ test('a stored profile decodes from parsed data into a copy that shares nothing 
 
 test('one inventory check serves every format: rotation and unknown fields are per format, uids share the caller scope', () => {
   const inv = (...items: unknown[]) => ({ w: 6, h: 5, items });
-  const check = (value: unknown, rules = { rotation: true, exact: false }, seen = new Set<string>()) => validInventory(value, 6, 5, seen, rules);
+  const check = (value: unknown, rules = { rotation: true, exact: false, guns: true }, seen = new Set<string>()) => validInventory(value, 6, 5, seen, rules);
   assert.ok(check(inv(item('a', 'pistol', 0, 0), item('b', 'pistol', 0, 1))));
   assert.ok(check(inv(item('a', 'pistol', 0, 0, { rotated: true }))));
-  assert.equal(check(inv(item('a', 'pistol', 0, 0, { rotated: true })), { rotation: false, exact: false }), false);
+  assert.equal(check(inv(item('a', 'pistol', 0, 0, { rotated: true })), { rotation: false, exact: false, guns: true }), false);
   const noted = { ...item('a', 'ammo9', 0, 0), note: 'x' };
   assert.ok(check(inv(noted)));
-  assert.equal(check(inv(noted), { rotation: true, exact: true }), false);
+  assert.equal(check(inv(noted), { rotation: true, exact: true, guns: true }), false);
   assert.equal(check(inv(item('a', 'pistol', 0, 0), item('b', 'pistol', 1, 0))), false, 'overlap');
   assert.equal(check(inv(item('a', 'pistol', 5, 0))), false, 'outside the grid');
   assert.equal(check(inv(item('a', 'pistol', 0, 0, { qty: 2 }))), false, 'above the stack size');
-  for (const bad of [null, 5, 'x', []]) assert.equal(check(inv(bad), { rotation: true, exact: true }), false);
+  for (const bad of [null, 5, 'x', []]) assert.equal(check(inv(bad), { rotation: true, exact: true, guns: true }), false);
   const seen = new Set(['a']);
   assert.equal(check(inv(item('a', 'ammo9', 0, 0)), undefined, seen), false, 'uid taken by another inventory');
   assert.ok(check(inv(item('b', 'ammo9', 0, 0)), undefined, seen)); assert.ok(seen.has('b'));
   const visited: string[] = [];
-  assert.ok(validInventory(inv(item('c', 'ammo9', 0, 0), item('d', 'ammo9', 1, 0)), 6, 5, new Set(), { rotation: true, exact: true }, i => visited.push(i.uid)));
+  assert.ok(validInventory(inv(item('c', 'ammo9', 0, 0), item('d', 'ammo9', 1, 0)), 6, 5, new Set(), { rotation: true, exact: true, guns: true }, i => visited.push(i.uid)));
   assert.deepEqual(visited, ['c', 'd']);
 });
 

@@ -39,7 +39,8 @@ export async function startRange(): Promise<void> {
             scale: params.get('crisp') === '1' ? 'near' : params.get('crisp') === '0' ? 'fit' : 'whole',
             art: null, mallArt: null, sampleMarks: false,
         };
-        if (params.get('art') !== 'placeholder') opts.art = await import('../coast-view/assets').then(m => m.loadCoastAssets());
+        if (params.get('art') !== 'placeholder') opts.art = await import('../coast-view/assets').then(m => m.loadCoastAssets())
+            .then(art => import('../coast-view/pose-assets').then(m => m.withPoses(art)).catch(error => { console.error(error); return art; }));
         const wrapped = wrapCoastRuntime(core, session, saves);
         let panel: RangePanel | null = null;
         // Every batch the Runtime publishes passes the range right after the advance (counts, targets, bag), then the panel.

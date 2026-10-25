@@ -1,0 +1,797 @@
+{
+  "protocol": "enemy-native-performance-v1",
+  "at": "2026-10-24T00:40:46.681Z",
+  "seed": 45,
+  "policy": "strafe",
+  "budgets": {
+    "worldEnemies": 25,
+    "advanceP95Ms": 8,
+    "advanceP99Ms": 16,
+    "pathP95Ms": 4,
+    "pathMaxMs": 16,
+    "presentP95Ms": 8,
+    "presentP99Ms": 16,
+    "frameP95Ms": 33.4,
+    "frameP99Ms": 50,
+    "atlasPages": 3,
+    "estimatedTextureBytes": 100663296,
+    "htmlBytes": 8388608,
+    "portableBytes": 5242880
+  },
+  "source": {
+    "head": "e28b51686372e8634711bc66f8e8ccec79bb1fec",
+    "dirty": "M dist/index.html\n M docs/CODEMAP.md\n M docs/ENEMY-DESIGN.md\n M docs/WORK-QUEUE.md\n M docs/release-manifest.json\n M docs/tasks/enemy-foundation-catalog.md\n M docs/tasks/enemy-foundation.md\n M docs/tasks/enemy-street-art.md\n M docs/tasks/enemy-street-encounter.md\n M release/Escape-Bincov-portable.zip\n M release/Escape-Bincov-web.zip\n M scripts/enemy-browser-test.mjs\n M scripts/enemy-catalog-data.ts\n M scripts/enemy-performance.mjs\n M src/enemy-encounters.ts\n M src/layer-transition.ts\n M src/raid-runtime/tactical-enemy.ts\n M \"start the game.html\"\n M tests/enemy-catalog.test.ts\n M tests/enemy-pursuit.test.ts\n M tests/enemy-tactics.test.ts\n?? docs/enemy-street/native-market-1280.png\n?? docs/enemy-street/native-market-1920.png\n?? docs/enemy-street/native-market-844.png\n?? docs/tasks/enemy-market.md\n?? src/enemy-posts.ts\n?? tests/enemy-posts.test.ts"
+  },
+  "scope": "Native roster at the recorded seed; only player observation position and initial tide changed in a strictly decoded save. No extra enemies, freezing, invulnerability or virtual time. Node paths exclude dryRefuge direct spacePath calls. Browser present is CPU submission, not GPU completion. Not natural play or phone acceptance.",
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "win32",
+    "os": "10.0.19045",
+    "cpu": "Intel(R) Core(TM) Ultra 5 230F",
+    "logicalCpus": 10,
+    "browser": "155.0.8059.85"
+  },
+  "runtime": [
+    {
+      "highTide": false,
+      "hz": 60,
+      "repeat": 0,
+      "seconds": 11.999999999999853,
+      "initialEnemies": 23,
+      "worldEnemies": 25,
+      "advance": {
+        "count": 720,
+        "total": 1522.2621000000008,
+        "p50": 2.0394000000000005,
+        "p95": 2.5457999999999856,
+        "p99": 2.870900000000006,
+        "max": 5.874700000000075
+      },
+      "path": {
+        "count": 59,
+        "total": 3.536700000000451,
+        "p50": 0.020599999999831198,
+        "p95": 0.27920000000005984,
+        "p99": 0.469600000000014,
+        "max": 0.5203999999999951
+      },
+      "ending": false
+    },
+    {
+      "highTide": false,
+      "hz": 60,
+      "repeat": 1,
+      "seconds": 11.999999999999853,
+      "initialEnemies": 23,
+      "worldEnemies": 25,
+      "advance": {
+        "count": 720,
+        "total": 1468.3375000000085,
+        "p50": 1.9279999999998836,
+        "p95": 2.5594999999998436,
+        "p99": 3.365299999999934,
+        "max": 5.079499999999825
+      },
+      "path": {
+        "count": 59,
+        "total": 1.8145999999978812,
+        "p50": 0.018999999999778083,
+        "p95": 0.10140000000001237,
+        "p99": 0.10239999999976135,
+        "max": 0.14969999999993888
+      },
+      "ending": false
+    },
+    {
+      "highTide": false,
+      "hz": 20,
+      "repeat": 0,
+      "seconds": 12.000000000000036,
+      "initialEnemies": 23,
+      "worldEnemies": 25,
+      "advance": {
+        "count": 240,
+        "total": 987.8039000000003,
+        "p50": 4.034299999999803,
+        "p95": 4.808100000000195,
+        "p99": 6.69399999999996,
+        "max": 7.828099999999722
+      },
+      "path": {
+        "count": 67,
+        "total": 1.4577000000017506,
+        "p50": 0.01650000000017826,
+        "p95": 0.05600000000004002,
+        "p99": 0.06539999999995416,
+        "max": 0.0682000000001608
+      },
+      "ending": false
+    },
+    {
+      "highTide": false,
+      "hz": 20,
+      "repeat": 1,
+      "seconds": 12.000000000000036,
+      "initialEnemies": 23,
+      "worldEnemies": 25,
+      "advance": {
+        "count": 240,
+        "total": 971.2382999999918,
+        "p50": 3.9390999999995984,
+        "p95": 4.848500000000058,
+        "p99": 5.976199999999153,
+        "max": 6.8145999999997
+      },
+      "path": {
+        "count": 67,
+        "total": 1.4653999999964071,
+        "p50": 0.017300000000432192,
+        "p95": 0.06199999999989814,
+        "p99": 0.0694999999996071,
+        "max": 0.07129999999961001
+      },
+      "ending": false
+    },
+    {
+      "highTide": false,
+      "hz": 5,
+      "repeat": 0,
+      "seconds": 11.99999999999999,
+      "initialEnemies": 23,
+      "worldEnemies": 25,
+      "advance": {
+        "count": 60,
+        "total": 661.6165000000055,
+        "p50": 10.170900000000074,
+        "p95": 13.989900000000489,
+        "p99": 18.117599999999584,
+        "max": 33.22990000000027
+      },
+      "path": {
+        "count": 76,
+        "total": 1.8690000000060536,
+        "p50": 0.019400000000132422,
+        "p95": 0.06700000000000728,
+        "p99": 0.0886000000000422,
+        "max": 0.09540000000015425
+      },
+      "ending": false
+    },
+    {
+      "highTide": false,
+      "hz": 5,
+      "repeat": 1,
+      "seconds": 11.99999999999999,
+      "initialEnemies": 23,
+      "worldEnemies": 25,
+      "advance": {
+        "count": 60,
+        "total": 608.9759999999978,
+        "p50": 9.978500000000167,
+        "p95": 12.205299999999625,
+        "p99": 12.43960000000061,
+        "max": 15.474199999999655
+      },
+      "path": {
+        "count": 76,
+        "total": 2.5608000000020184,
+        "p50": 0.011800000000221189,
+        "p95": 0.07099999999991269,
+        "p99": 0.45970000000033906,
+        "max": 0.5816000000004351
+      },
+      "ending": false
+    },
+    {
+      "highTide": true,
+      "hz": 60,
+      "repeat": 0,
+      "seconds": 11.999999999999853,
+      "initialEnemies": 23,
+      "worldEnemies": 25,
+      "advance": {
+        "count": 720,
+        "total": 1492.8975999999884,
+        "p50": 1.984599999999773,
+        "p95": 2.5796000000000276,
+        "p99": 3.3437000000003536,
+        "max": 4.460500000000138
+      },
+      "path": {
+        "count": 62,
+        "total": 1.3516999999983454,
+        "p50": 0.015900000000328873,
+        "p95": 0.05490000000008877,
+        "p99": 0.06289999999989959,
+        "max": 0.0632000000005064
+      },
+      "ending": false
+    },
+    {
+      "highTide": true,
+      "hz": 60,
+      "repeat": 1,
+      "seconds": 11.999999999999853,
+      "initialEnemies": 23,
+      "worldEnemies": 25,
+      "advance": {
+        "count": 720,
+        "total": 1455.346500000027,
+        "p50": 1.9338999999999942,
+        "p95": 2.4443000000010215,
+        "p99": 3.0890999999992346,
+        "max": 4.790100000000166
+      },
+      "path": {
+        "count": 62,
+        "total": 1.3121000000082859,
+        "p50": 0.014100000000325963,
+        "p95": 0.051499999999577994,
+        "p99": 0.06550000000061118,
+        "max": 0.07159999999930733
+      },
+      "ending": false
+    },
+    {
+      "highTide": true,
+      "hz": 20,
+      "repeat": 0,
+      "seconds": 12.000000000000036,
+      "initialEnemies": 23,
+      "worldEnemies": 25,
+      "advance": {
+        "count": 240,
+        "total": 997.4847999999929,
+        "p50": 4.009099999999307,
+        "p95": 5.240900000000693,
+        "p99": 6.460100000000239,
+        "max": 10.569600000000719
+      },
+      "path": {
+        "count": 68,
+        "total": 1.4837999999890599,
+        "p50": 0.015900000000328873,
+        "p95": 0.05519999999887659,
+        "p99": 0.062399999998888234,
+        "max": 0.06369999999878928
+      },
+      "ending": false
+    },
+    {
+      "highTide": true,
+      "hz": 20,
+      "repeat": 1,
+      "seconds": 12.000000000000036,
+      "initialEnemies": 23,
+      "worldEnemies": 25,
+      "advance": {
+        "count": 240,
+        "total": 964.2455000000009,
+        "p50": 3.95679999999993,
+        "p95": 4.522300000000541,
+        "p99": 6.081299999999828,
+        "max": 6.5306000000000495
+      },
+      "path": {
+        "count": 68,
+        "total": 1.4324000000087835,
+        "p50": 0.014300000000730506,
+        "p95": 0.05639999999948486,
+        "p99": 0.06559999999990396,
+        "max": 0.069100000000617
+      },
+      "ending": false
+    },
+    {
+      "highTide": true,
+      "hz": 5,
+      "repeat": 0,
+      "seconds": 11.99999999999999,
+      "initialEnemies": 23,
+      "worldEnemies": 25,
+      "advance": {
+        "count": 60,
+        "total": 593.5764999999956,
+        "p50": 9.841599999999744,
+        "p95": 11.30029999999897,
+        "p99": 12.352100000000064,
+        "max": 12.358900000001086
+      },
+      "path": {
+        "count": 76,
+        "total": 2.114800000008472,
+        "p50": 0.011000000000422006,
+        "p95": 0.06660000000010768,
+        "p99": 0.10900000000037835,
+        "max": 0.4621999999999389
+      },
+      "ending": false
+    },
+    {
+      "highTide": true,
+      "hz": 5,
+      "repeat": 1,
+      "seconds": 11.99999999999999,
+      "initialEnemies": 23,
+      "worldEnemies": 25,
+      "advance": {
+        "count": 60,
+        "total": 614.9789999999975,
+        "p50": 9.791199999999662,
+        "p95": 12.822000000000116,
+        "p99": 13.953899999998612,
+        "max": 15.03939999999966
+      },
+      "path": {
+        "count": 76,
+        "total": 1.5627000000040425,
+        "p50": 0.012899999999717693,
+        "p95": 0.06420000000071013,
+        "p99": 0.07600000000093132,
+        "max": 0.07970000000022992
+      },
+      "ending": false
+    }
+  ],
+  "browser": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "highTide": false,
+      "gap": {
+        "count": 1959,
+        "total": 12004.39999999106,
+        "p50": 6,
+        "p95": 8.200000002980232,
+        "p99": 11,
+        "max": 26.299999997019768
+      },
+      "advance": {
+        "count": 1959,
+        "total": 3998.0999996364117,
+        "p50": 2,
+        "p95": 2.5999999940395355,
+        "p99": 3.2000000029802322,
+        "max": 5.700000002980232
+      },
+      "present": {
+        "count": 1959,
+        "total": 2203.0000000596046,
+        "p50": 0.7999999970197678,
+        "p95": 2.7999999970197678,
+        "p99": 5.299999997019768,
+        "max": 19.5
+      },
+      "seconds": 12.00439999999106,
+      "phases": [
+        "running"
+      ],
+      "attackPhases": [
+        "idle",
+        "windup",
+        "release",
+        "recovery"
+      ],
+      "counts": {
+        "listeners": 31,
+        "tickers": 1,
+        "observers": 1,
+        "timers": 0,
+        "apps": 1,
+        "parked": 0,
+        "views": 1,
+        "renderTextures": 3,
+        "liveViews": 1,
+        "canvases": 1,
+        "sampleRoots": 1,
+        "art": "sol",
+        "mallArt": "placeholder",
+        "atlasPages": 1,
+        "largeTextures": 16,
+        "gpuTextures": 23,
+        "managedEmpty": 54,
+        "managedLive": 80,
+        "heap": 42100000
+      },
+      "atlas": {
+        "frames": 680,
+        "pages": 1,
+        "largeTextures": 16,
+        "bytes": 30408704
+      },
+      "estimatedTextureBytes": 38371328,
+      "activeEnemies": 23,
+      "environment": {
+        "dpr": 1,
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3070 (0x00002484) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"
+      }
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "highTide": true,
+      "gap": {
+        "count": 1968,
+        "total": 12000,
+        "p50": 6,
+        "p95": 8,
+        "p99": 10.5,
+        "max": 29
+      },
+      "advance": {
+        "count": 1968,
+        "total": 4132.999999940395,
+        "p50": 2,
+        "p95": 2.5999999940395355,
+        "p99": 3.5,
+        "max": 8.299999997019768
+      },
+      "present": {
+        "count": 1968,
+        "total": 2281.600000232458,
+        "p50": 0.800000011920929,
+        "p95": 2.7999999970197678,
+        "p99": 4.800000011920929,
+        "max": 20.200000002980232
+      },
+      "seconds": 12,
+      "phases": [
+        "running"
+      ],
+      "attackPhases": [
+        "idle",
+        "windup",
+        "release",
+        "recovery"
+      ],
+      "counts": {
+        "listeners": 31,
+        "tickers": 1,
+        "observers": 1,
+        "timers": 0,
+        "apps": 1,
+        "parked": 0,
+        "views": 1,
+        "renderTextures": 3,
+        "liveViews": 1,
+        "canvases": 1,
+        "sampleRoots": 1,
+        "art": "sol",
+        "mallArt": "placeholder",
+        "atlasPages": 1,
+        "largeTextures": 16,
+        "gpuTextures": 23,
+        "managedEmpty": 54,
+        "managedLive": 78,
+        "heap": 27600000
+      },
+      "atlas": {
+        "frames": 672,
+        "pages": 1,
+        "largeTextures": 16,
+        "bytes": 30408704
+      },
+      "estimatedTextureBytes": 38371328,
+      "activeEnemies": 23,
+      "environment": {
+        "dpr": 1,
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3070 (0x00002484) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"
+      }
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "highTide": false,
+      "gap": {
+        "count": 1968,
+        "total": 12003.70000000298,
+        "p50": 6,
+        "p95": 8.200000002980232,
+        "p99": 10.600000008940697,
+        "max": 30.5
+      },
+      "advance": {
+        "count": 1968,
+        "total": 4089.499999925494,
+        "p50": 2,
+        "p95": 2.5,
+        "p99": 3.2999999970197678,
+        "max": 8.099999994039536
+      },
+      "present": {
+        "count": 1968,
+        "total": 2406.6000001579523,
+        "p50": 0.8999999910593033,
+        "p95": 3.300000011920929,
+        "p99": 5.0999999940395355,
+        "max": 21.600000008940697
+      },
+      "seconds": 12.003700000002981,
+      "phases": [
+        "running"
+      ],
+      "attackPhases": [
+        "idle",
+        "windup",
+        "release",
+        "recovery"
+      ],
+      "counts": {
+        "listeners": 31,
+        "tickers": 1,
+        "observers": 1,
+        "timers": 0,
+        "apps": 1,
+        "parked": 0,
+        "views": 1,
+        "renderTextures": 3,
+        "liveViews": 1,
+        "canvases": 1,
+        "sampleRoots": 1,
+        "art": "sol",
+        "mallArt": "placeholder",
+        "atlasPages": 1,
+        "largeTextures": 16,
+        "gpuTextures": 23,
+        "managedEmpty": 72,
+        "managedLive": 82,
+        "heap": 29400000
+      },
+      "atlas": {
+        "frames": 674,
+        "pages": 1,
+        "largeTextures": 16,
+        "bytes": 30408704
+      },
+      "estimatedTextureBytes": 42850304,
+      "activeEnemies": 23,
+      "environment": {
+        "dpr": 1,
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3070 (0x00002484) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"
+      }
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "highTide": true,
+      "gap": {
+        "count": 1962,
+        "total": 12003.29999999702,
+        "p50": 6.0999999940395355,
+        "p95": 8.099999994039536,
+        "p99": 10,
+        "max": 25.899999991059303
+      },
+      "advance": {
+        "count": 1962,
+        "total": 4049.5999997109175,
+        "p50": 2,
+        "p95": 2.5,
+        "p99": 3.2000000029802322,
+        "max": 6.600000008940697
+      },
+      "present": {
+        "count": 1962,
+        "total": 2333.5000004321337,
+        "p50": 0.9000000059604645,
+        "p95": 3,
+        "p99": 4.700000002980232,
+        "max": 17.099999994039536
+      },
+      "seconds": 12.00329999999702,
+      "phases": [
+        "running"
+      ],
+      "attackPhases": [
+        "idle",
+        "windup",
+        "release",
+        "recovery"
+      ],
+      "counts": {
+        "listeners": 31,
+        "tickers": 1,
+        "observers": 1,
+        "timers": 0,
+        "apps": 1,
+        "parked": 0,
+        "views": 1,
+        "renderTextures": 3,
+        "liveViews": 1,
+        "canvases": 1,
+        "sampleRoots": 1,
+        "art": "sol",
+        "mallArt": "placeholder",
+        "atlasPages": 1,
+        "largeTextures": 16,
+        "gpuTextures": 23,
+        "managedEmpty": 64,
+        "managedLive": 82,
+        "heap": 53500000
+      },
+      "atlas": {
+        "frames": 689,
+        "pages": 1,
+        "largeTextures": 16,
+        "bytes": 30408704
+      },
+      "estimatedTextureBytes": 42850304,
+      "activeEnemies": 23,
+      "environment": {
+        "dpr": 1,
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3070 (0x00002484) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"
+      }
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "highTide": false,
+      "gap": {
+        "count": 1942,
+        "total": 12004.70000000298,
+        "p50": 6,
+        "p95": 8.700000002980232,
+        "p99": 11.5,
+        "max": 29.100000008940697
+      },
+      "advance": {
+        "count": 1942,
+        "total": 4019.799999654293,
+        "p50": 2,
+        "p95": 2.699999988079071,
+        "p99": 3.5999999940395355,
+        "max": 9.799999997019768
+      },
+      "present": {
+        "count": 1942,
+        "total": 3009.6999998539686,
+        "p50": 1.2999999970197678,
+        "p95": 3.7000000029802322,
+        "p99": 5.299999997019768,
+        "max": 20.399999991059303
+      },
+      "seconds": 12.00470000000298,
+      "phases": [
+        "running"
+      ],
+      "attackPhases": [
+        "idle",
+        "windup",
+        "release",
+        "recovery"
+      ],
+      "counts": {
+        "listeners": 31,
+        "tickers": 1,
+        "observers": 1,
+        "timers": 0,
+        "apps": 1,
+        "parked": 0,
+        "views": 1,
+        "renderTextures": 3,
+        "liveViews": 1,
+        "canvases": 1,
+        "sampleRoots": 1,
+        "art": "sol",
+        "mallArt": "placeholder",
+        "atlasPages": 1,
+        "largeTextures": 16,
+        "gpuTextures": 23,
+        "managedEmpty": 86,
+        "managedLive": 80,
+        "heap": 37300000
+      },
+      "atlas": {
+        "frames": 665,
+        "pages": 1,
+        "largeTextures": 16,
+        "bytes": 30408704
+      },
+      "estimatedTextureBytes": 34358624,
+      "activeEnemies": 23,
+      "environment": {
+        "dpr": 1,
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3070 (0x00002484) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"
+      }
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "highTide": true,
+      "gap": {
+        "count": 1954,
+        "total": 12004.09999999404,
+        "p50": 6.0999999940395355,
+        "p95": 8.400000005960464,
+        "p99": 11.100000008940697,
+        "max": 26.700000002980232
+      },
+      "advance": {
+        "count": 1954,
+        "total": 3980.8999997228384,
+        "p50": 2,
+        "p95": 2.5999999940395355,
+        "p99": 3.0999999940395355,
+        "max": 9
+      },
+      "present": {
+        "count": 1954,
+        "total": 2455.3000001460314,
+        "p50": 0.800000011920929,
+        "p95": 3.2000000029802322,
+        "p99": 5.4000000059604645,
+        "max": 18.700000002980232
+      },
+      "seconds": 12.00409999999404,
+      "phases": [
+        "running"
+      ],
+      "attackPhases": [
+        "idle",
+        "windup",
+        "release",
+        "recovery"
+      ],
+      "counts": {
+        "listeners": 31,
+        "tickers": 1,
+        "observers": 1,
+        "timers": 0,
+        "apps": 1,
+        "parked": 0,
+        "views": 1,
+        "renderTextures": 3,
+        "liveViews": 1,
+        "canvases": 1,
+        "sampleRoots": 1,
+        "art": "sol",
+        "mallArt": "placeholder",
+        "atlasPages": 1,
+        "largeTextures": 16,
+        "gpuTextures": 23,
+        "managedEmpty": 74,
+        "managedLive": 82,
+        "heap": 50400000
+      },
+      "atlas": {
+        "frames": 632,
+        "pages": 1,
+        "largeTextures": 16,
+        "bytes": 30408704
+      },
+      "estimatedTextureBytes": 34358624,
+      "activeEnemies": 23,
+      "environment": {
+        "dpr": 1,
+        "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3070 (0x00002484) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36"
+      }
+    }
+  ],
+  "failures": [],
+  "errors": [],
+  "external": [],
+  "status": "PASS",
+  "artifact": {
+    "bytes": 7297822,
+    "sha256": "7ba664aeca05ccfc01a27b85c9dd0739be552880529a23cb44bfd1f9a39766f0",
+    "portableBytes": 4693576
+  }
+}

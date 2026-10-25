@@ -9,6 +9,9 @@ import type { HideoutEvent, Result } from '../src/hideout-runtime';
 import { equipCharm } from '../src/reputation-luck';
 import { useRpgItem, useRpgItemResult } from '../src/rpg';
 import { derivedLimits } from '../src/expansion-state';
+import { oldProfile, oldRecord } from './fixtures/old-saves';
+import { migrateProfile } from '../src/gunsmith/migrate';
+import { factoryState } from '../src/gunsmith/instance';
 function fixture(raw?: string, enter = true, allowed = () => true) {
     let now = 1800000000000, failed = false, writes = 0;
     if (raw?.includes('escape-bincov-session')) now = JSON.parse(raw).savedAt;
@@ -26,7 +29,7 @@ function reason(result: Result) { assert.equal(result.ok, false); return !result
 function poorStation(full = false) {
     const f = fixture();
     f.setup(d => {
-        d.profile.cash = 0; d.profile.equipment = { weapon: null, relief: false, ammo: 0, ammoRelief: 0 };
+        d.profile.cash = 0; d.profile.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 };
         d.profile.bag = D.createInventory(6, 5); d.profile.stash = D.createInventory(10, 6); d.profile.safe = D.createInventory(2, 2);
         if (full) { D.addItem(d.profile.bag, 'watch', 60); D.addItem(d.profile.stash, 'watch', 120); }
     });
@@ -88,7 +91,8 @@ test('selling the last gun to reach ¥210 issues the relief kit in the same shop
     const saved = decodeSession(f.raw).profile;
     for (const save of [f.state.save, saved]) {
         assert.equal(save.cash, 210); assert.equal(save.stash.items.some(i => i.id === 'pistol'), false);
-        assert.deepEqual(save.equipment, { weapon: 'pistol', relief: true, ammo: 0, ammoRelief: 0 });
+        assert.deepEqual(save.equipment, { weapon: 'pistol', weaponUid: save.equipment.weaponUid, gun: factoryState(), relief: true, ammo: 0, ammoRelief: 0 });
+        assert.ok(save.equipment.weaponUid, 'the relief pistol is an instance with its own uid');
         assert.equal(D.count(save.bag, 'ammo9'), 12); assert.equal(D.count(save.bag, 'bandage'), 1); assert.ok(save.bag.items.every(i => i.relief));
     }
     const raw = f.raw; assert.ok(f.runtime.enter().ok); assert.equal(f.raw, raw);
@@ -110,12 +114,14 @@ function train(f: ReturnType<typeof fixture>, seconds: number) {
     }
 }
 test('station upgrades legacy bytes atomically, preserves progress and is idempotent', () => {
-    const profile = D.newSave(); profile.cash = 4321; profile.stats.runs = 7;
-    const old = JSON.stringify(profile), f = fixture(old, false), v3 = f.raw;
+    const save = D.newSave(); save.cash = 4321; save.stats.runs = 7;
+    const profile = oldProfile(save), old = JSON.stringify(profile), f = fixture(old, false), v3 = f.raw;
     assert.equal(f.runtime.enter().ok, true); const record = decodeSession(f.raw);
-    assert.deepEqual(record.profile, profile); assert.equal(record.version, 5); assert.equal(record.expansion?.version, 3);
-    // Straight from a record without an expansion to v5: the pre-v4 bytes are kept once, and there is no v4 record to keep.
-    assert.equal(record.legacyBackup, old); assert.equal(record.systemsBackup, v3); assert.equal(record.perksBackup, null);
+    // The legacy key's v2 profile arrives migrated (gunsmith M0-06): the same profile with factory guns.
+    assert.deepEqual(record.profile, migrateProfile(profile)); assert.equal(record.version, 8); assert.equal(record.expansion?.version, 3);
+    // Straight from a record without an expansion to expansion v3: the bytes without one are kept once, and there is
+    // no v1/v2 expansion to keep; the legacy bytes stay in legacyBackup, so there is no gunsBackup.
+    assert.equal(record.legacyBackup, old); assert.equal(record.systemsBackup, v3); assert.equal(record.perksBackup, null); assert.equal(record.gunsBackup, null);
     const rev = record.revision; assert.equal(f.runtime.enter().ok, true); assert.equal(f.saves.revision, rev);
 });
 test('failed upgrade preserves v3 raw and profile; retry succeeds once', () => {
@@ -184,7 +190,7 @@ test('failed charm replacement and removal preserve committed snapshots, raw byt
 test('run count begins at zero, preserves legacy seven, and increments only on committed departure', () => {
     assert.equal(fixture().runtime.snapshot().profile.stats.runs, 0);
     const profile = D.newSave(); profile.stats.runs = 7;
-    const f = fixture(JSON.stringify(profile)); assert.equal(f.runtime.snapshot().profile.stats.runs, 7);
+    const f = fixture(JSON.stringify(oldProfile(profile))); assert.equal(f.runtime.snapshot().profile.stats.runs, 7);
     assert.equal(f.runtime.snapshot().day, 8); // Keep the existing log-sequence contract.
     const raw = f.raw; f.fail(); assert.equal(reason(f.runtime.deploy({ world: 'buildings', seed: '42' })), 'storage');
     assert.equal(f.raw, raw); assert.equal(f.runtime.snapshot().profile.stats.runs, 7);
@@ -398,14 +404,16 @@ test('failed full-backup import preserves profile, growth, queue and confirmatio
     assert.ok(f.runtime.importBackup(text, next.token!).ok); assert.equal(f.state.save.cash, 4321); assert.equal(f.state.expansion!.growth.permanent.strength, 14); assert.equal(f.state.expansion!.base.facilities.rest, 2);
 });
 test('v1 expansion upgrade preserves body, facilities and growth without double upgrade', () => {
-    const f = fixture(); const record = decodeSession(f.raw); record.expansion!.version = 1; delete record.expansion!.charm; delete record.expansion!.awards;
-    record.version = 4; delete record.perksBackup; delete record.expansion!.growth.perks;
-    record.expansion!.body.hp = 47; record.expansion!.growth.permanent.technique = 13; record.expansion!.base.facilities.rest = 2;
+    const f = fixture(); const record = oldRecord(decodeSession(f.raw), 4); record.expansion.version = 1; delete record.expansion.charm; delete record.expansion.awards;
+    delete record.perksBackup; delete record.expansion.growth.perks;
+    record.expansion.body.hp = 47; record.expansion.growth.permanent.technique = 13; record.expansion.base.facilities.rest = 2;
     const g = fixture(JSON.stringify(record)); assert.equal(g.state.expansion!.version, 3); assert.equal(g.state.expansion!.body.hp, 47);
     assert.deepEqual(g.state.expansion!.growth.perks, []);
     assert.equal(g.state.expansion!.growth.permanent.technique, 13); assert.equal(g.state.expansion!.base.facilities.rest, 2); assert.equal(g.saves.currentRecord()!.systemsBackup, record.systemsBackup);
+    // Loading wrote the record as v8 with the v1 expansion (the old text is gunsBackup); the perk upgrade then kept that text.
     const v4 = JSON.parse(g.saves.currentRecord()!.perksBackup!);
-    assert.equal(v4.version, 4); assert.equal(v4.expansion.version, 1); assert.equal('perksBackup' in v4, false);
+    assert.equal(v4.version, 8); assert.equal(v4.expansion.version, 1); assert.equal('perksBackup' in v4, false);
+    assert.equal(g.saves.currentRecord()!.gunsBackup, JSON.stringify(record));
 });
 test('offline production remains finite and cannot bank blocked time; offline movement is never credited', () => {
     const f = fixture(); f.setup(d => { d.profile.cash = 100000; d.expansion.base.facilities.workbench = 3; d.expansion.base.facilities.training = 1; D.addItem(d.profile.stash, 'cloth', 20); });

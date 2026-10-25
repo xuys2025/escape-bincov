@@ -7,6 +7,8 @@ import { chromium } from 'playwright';
 import { browserOptions } from './browser-options.mjs';
 import { skipOpening, throughYard } from './yard-entry.mjs';
 import * as D from '../src/domain.ts';
+/** The legacy key only ever held profiles up to v2: the same profile without gun fields (save v6 added them). */
+const legacyProfile = s => { const p = structuredClone(s); p.version = 2; delete p.equipment.weaponUid; delete p.equipment.gun; for (const inv of [p.stash, p.bag, p.safe]) for (const i of inv.items) delete i.gun; return p; };
 
 const option = (name, fallback) => process.argv.find(a => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const cpuRate = Number(option('cpu-rate', '1'));
@@ -30,7 +32,7 @@ async function open({ size = [1280, 720], legacy, test = true, mobile = false, f
   mobileInput = mobile;
   await context.route('https://station.test/**', r => r.fulfill({ contentType: 'text/html', body: html }));
   context.on('request', r => { if (/^https?:/.test(r.url()) && !r.url().startsWith('https://station.test/')) report.external.push(r.url()); });
-  if (legacy) await context.addInitScript(s => { if (!localStorage.getItem('escape-bincov.session.v2')) localStorage.setItem('escape-bincov.save.v1', s); }, JSON.stringify(legacy));
+  if (legacy) await context.addInitScript(s => { if (!localStorage.getItem('escape-bincov.session.v2')) localStorage.setItem('escape-bincov.save.v1', s); }, JSON.stringify(legacyProfile(legacy)));
   page = await context.newPage(); page.setDefaultTimeout(15000);
   if (fixedTime) await page.clock.setFixedTime(new Date());
   if (cpuRate > 1) await (await context.newCDPSession(page)).send('Emulation.setCPUThrottlingRate', { rate: cpuRate });
@@ -149,7 +151,7 @@ try {
       await readable('.station-log .section-label'); await shot(`seven-tabs-${w}`);
       assert.equal(radio, '水产站值守记录 · 累计出击 7 次');
       assert.equal(await page.locator('.station-log .section-label').innerText(), radio);
-      assert.equal(JSON.parse(await raw()).legacyBackup, JSON.stringify(legacy));
+      assert.equal(JSON.parse(await raw()).legacyBackup, JSON.stringify(legacyProfile(legacy)));
       await tap(page.locator('[data-action="base-enter"]').first()); await ready(); await assertCounts(7);
       await page.reload(); await tap(page.locator('[data-action="enter"]')); await ready(); await assertCounts(7);
     });

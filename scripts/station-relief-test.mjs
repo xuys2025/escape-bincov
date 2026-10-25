@@ -24,7 +24,7 @@ async function open(size = [1280, 720], tabs = false) {
     const { app, saveSession: s, hideoutRuntime: r } = window.__bincov;
     if (!s.ensureRpg()) throw Error('fixture upgrade');
     const ticket = s.prepareExpansionMutation(d => {
-      d.profile.cash = 0; d.profile.equipment = { weapon: null, relief: false, ammo: 0, ammoRelief: 0 };
+      d.profile.cash = 0; d.profile.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 };
       for (const key of ['bag', 'stash', 'safe']) d.profile[key].items = [];
       delete d.profile.reliefSupplies;
     });
@@ -58,7 +58,7 @@ try {
     await page.evaluate(async () => {
       await window.__station.reseed(() => {
         const s = window.__bincov.saveSession, ticket = s.prepareExpansionMutation(d => {
-          d.profile.equipment = { weapon: null, relief: false, ammo: 0, ammoRelief: 0 }; d.profile.bag.items = [];
+          d.profile.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 }; d.profile.bag.items = [];
         });
         if (s.commitExpansionMutation(ticket) !== 'committed') throw Error('view-only fixture');
       });

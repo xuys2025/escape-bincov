@@ -71,7 +71,7 @@ export class InventoryPanel {
     const ref = this.mode === 'loot' ? this.host.lootRef() : null, box = ref ? this.host.services.lootInventory(ref) : null;
     if (this.mode === 'loot' && !box) { this.host.close(); return; }
     if (this.selected && !this.item()) { this.selected = null; this.placement = null; }
-    const weight = this.host.services.carriedWeight(), limit = this.host.services.carryLimit(), w = D.WEAPONS[l.weapon || 'knife'];
+    const weight = this.host.services.carriedWeight(), limit = this.host.services.carryLimit(), w = D.equippedWeapon(l);
     const container = this.mode === 'loot' && box ? `<section class="cs-inv-src"><h3>${esc(this.containerName())} <span>${box.items.length ? '可取出 · 可放回' : '已搜空'}</span></h3>${this.grid(box, 'container')}<p class="cs-help">留在这里的物资仅保留至本局结束。</p></section>` : '';
     // docs/LOOTING.md: on a desktop your own gear is on the left and the source on the right; a phone keeps the source first.
     const own = `<section><h3>背包 <span>${l.bag.w} × ${l.bag.h}</span></h3>${this.grid(l.bag, 'bag')}<p class="cs-help">负重 <b data-weight>${weight.toFixed(1)}</b> / <span data-carry-limit>${limit.toFixed(1)}</span> kg · 含装备</p></section>
@@ -111,7 +111,7 @@ export class InventoryPanel {
     const cell = this.cell(), sel = this.selected;
     const items = inv.items.map(i => {
       const d = D.ITEMS[i.id], size = D.itemSize(i), on = sel?.uid === i.uid && sel.source === source;
-      return `<div tabindex="0" role="button" aria-label="${esc(d.name)} × ${i.qty}" aria-pressed="${on}" title="${esc(d.name)} × ${i.qty} · ${(d.weight * i.qty).toFixed(2)} kg" data-uid="${i.uid}" data-source="${source}" data-kind="${d.kind}" class="item ${on ? 'selected' : ''}" style="left:${i.x * cell + 1}px;top:${i.y * cell + 1}px;width:${size.w * cell - 2}px;height:${size.h * cell - 2}px"><span class="inventory-art">${itemArtwork(i.id, size.w * cell - 10, size.h * cell - 27, !!i.rotated)}</span><span class="item-label ${i.relief ? 'relief' : ''} ${labelFits(d.short || d.name, size.w * cell) ? '' : 'tight'}">${esc(d.short || d.name)}</span>${i.qty > 1 ? `<span class="qty">${i.qty}</span>` : ''}</div>`;
+      return `<div tabindex="0" role="button" aria-label="${esc(d.name)} × ${i.qty}" aria-pressed="${on}" title="${esc(d.name)} × ${i.qty} · ${D.itemWeight(i).toFixed(2)} kg" data-uid="${i.uid}" data-source="${source}" data-kind="${d.kind}" class="item ${on ? 'selected' : ''}" style="left:${i.x * cell + 1}px;top:${i.y * cell + 1}px;width:${size.w * cell - 2}px;height:${size.h * cell - 2}px"><span class="inventory-art">${itemArtwork(i.id, size.w * cell - 10, size.h * cell - 27, !!i.rotated)}</span><span class="item-label ${i.relief ? 'relief' : ''} ${labelFits(d.short || d.name, size.w * cell) ? '' : 'tight'}">${esc(d.short || d.name)}</span>${i.qty > 1 ? `<span class="qty">${i.qty}</span>` : ''}</div>`;
     }).join('');
     return `<div class="grid" data-grid="${source}" data-cell="${cell}" style="width:${inv.w * cell}px;height:${inv.h * cell}px;--cell:${cell}px">${items}${this.placementCells(inv, source, cell)}${inv.items.length ? '' : '<div class="empty-hint">暂无物品</div>'}</div>`;
   }
@@ -139,7 +139,7 @@ export class InventoryPanel {
       carried ? btn('丢弃', 'inv-drop', 'class="cs-danger"') : '',
     ].join('');
     const gun = !!D.WEAPONS[i.id] && i.id !== 'knife';
-    return `<h3>${esc(d.name)}</h3><p class="cs-sub">${LABEL[sel.source]} · ${size.w} × ${size.h} 格 · ${i.qty} 件 · ${(d.weight * i.qty).toFixed(2)} kg${i.relief ? ' · 救济' : ''}</p><p class="cs-desc">${esc(d.description ?? '')}</p><div class="cs-row cs-actions">${actions}</div>${gun && sel.source !== 'bag' ? '<p class="cs-sub">枪械先放入背包，再选中并装备主武器。</p>' : carried ? '' : '<p class="cs-sub">收入背包或安全箱后，才能使用。</p>'}`;
+    return `<h3>${esc(d.name)}</h3><p class="cs-sub">${LABEL[sel.source]} · ${size.w} × ${size.h} 格 · ${i.qty} 件 · ${D.itemWeight(i).toFixed(2)} kg${i.relief ? ' · 救济' : ''}</p><p class="cs-desc">${esc(d.description ?? '')}</p><div class="cs-row cs-actions">${actions}</div>${gun && sel.source !== 'bag' ? '<p class="cs-sub">枪械先放入背包，再选中并装备主武器。</p>' : carried ? '' : '<p class="cs-sub">收入背包或安全箱后，才能使用。</p>'}`;
   }
 
   // --- actions ---

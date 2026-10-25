@@ -34,7 +34,7 @@ const SEED = `(fx => {
     if ('cash' in fx) d.profile.cash = fx.cash;
     if (fx.permanent) d.expansion.growth.permanent = fx.permanent;
     if (fx.perks) d.expansion.growth.perks = fx.perks;
-    if ('weapon' in fx) d.profile.equipment = { weapon: fx.weapon, ammo: 0, ammoRelief: 0, relief: false };
+    if ('weapon' in fx) d.profile.equipment = { weapon: fx.weapon, weaponUid: fx.weapon ? 'fixture-weapon' : null, gun: fx.weapon ? { parts: [], devices: { laser: false, light: false } } : null, ammo: 0, ammoRelief: 0, relief: false };
     if (fx.effects) Object.assign(d.expansion.body.effects, fx.effects);
     if (fx.body) Object.assign(d.expansion.body, fx.body);
   });

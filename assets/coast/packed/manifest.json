@@ -1,0 +1,5730 @@
+{
+  "schema": 1,
+  "encoding": "lossless WebP, exact RGBA, Pillow 11.0.0",
+  "sheets": [
+    {
+      "file": "assets/coast/packed/legacy.webp",
+      "sha256": "dafd9962815c0e7a825081cbbd9ae162ad0962d8b08877034de5043e813519e5",
+      "bytes": 21516,
+      "w": 384,
+      "h": 960
+    },
+    {
+      "file": "assets/coast/packed/raider-melee.webp",
+      "sha256": "a54e461fbe997fff8ae40899d7446c685374f6f922987405b17e7f679cb9686a",
+      "bytes": 37662,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/raider-gunner.webp",
+      "sha256": "642f8b6223f887be68ef34564635211ba861c55814f41d744db43937c4e53217",
+      "bytes": 34948,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/raider-lookout.webp",
+      "sha256": "a5ec7ccf5d4214a383d4139967989ec90f1fdc391837b7ff344173076bf8adcb",
+      "bytes": 35614,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/raider-boss.webp",
+      "sha256": "4910c101aafa5aeadab44029be53bfb4e454af1ab589f609da358c9fbd2adb3d",
+      "bytes": 40490,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/tidal-crab.webp",
+      "sha256": "a23c11005c2c9276dca77bf61bfa89c71cc7c3754b4e15be3b4b807796f74bdd",
+      "bytes": 30156,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/saltback-dog.webp",
+      "sha256": "63ad346dda2d46f45f132c2d9629baeeaa1320010b1b93d93a96c448426e37a8",
+      "bytes": 23788,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/sac-spitter.webp",
+      "sha256": "360277752ab2e6b5312b33082441c1596698021bd2e3276c23f62c4dc89f1c5e",
+      "bytes": 28194,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/salt-dazed.webp",
+      "sha256": "5138cc7f326eb055d3063b75421091b2a636f5bd3ea791d05ce10c73ddbe44b8",
+      "bytes": 41058,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/tide-chaser.webp",
+      "sha256": "964ccbdf1929d974312c265f1e9e172e30650d0805dcf82e834a44557e3cef15",
+      "bytes": 46172,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/tide-ritualist.webp",
+      "sha256": "f076780c0b7a451278c92a75a8340e2a9c8f43aa30696c0fc27ec25050ebbcf6",
+      "bytes": 42240,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/salt-hulk.webp",
+      "sha256": "63ba982e34a82da0b8b5c8a901db5a2c391b57b6695f399d162d1b82563e3d1f",
+      "bytes": 52550,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/mercenary-scout.webp",
+      "sha256": "1a8c9531375a3483953b6f5ba45498787baca63efe1fb0a92f86e04f8b35b8ab",
+      "bytes": 36474,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/mercenary-assault.webp",
+      "sha256": "c3d0c8cd707da3aec75b8a15699c85748a551c9f3b0513c16b7ecb04140ec5c7",
+      "bytes": 42738,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/mercenary-support.webp",
+      "sha256": "62058cc879fd8424679e3e59842cbb3b199dfeca0fb8288bd958331390fc845d",
+      "bytes": 45788,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/recovery-leader.webp",
+      "sha256": "d6ec8e38a49a2cb6edf0f34748f27227b1721ca290558f383911ea80eb355511",
+      "bytes": 42138,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/blockade-sentry.webp",
+      "sha256": "32b734425ec36937c0d9908f89705fa482b4982115cb58f1cc06de18d4876b58",
+      "bytes": 35394,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/blockade-patrol.webp",
+      "sha256": "7d6ae0d70d2b43db745295f65a4fc0ded5982c3e8173b5bbb9c1aee57cb35216",
+      "bytes": 41712,
+      "w": 160,
+      "h": 272
+    },
+    {
+      "file": "assets/coast/packed/blockade-sergeant.webp",
+      "sha256": "c677cb2e6f31ece303bc4f314441d9c9beca88d0d01a7105bc73430da8289c81",
+      "bytes": 41928,
+      "w": 160,
+      "h": 272
+    }
+  ],
+  "frames": [
+    {
+      "id": "coast-player-body-e-f0-v1",
+      "sourceSha256": "933a3bc99471677ba3dea5bd4ec950d1e93d1eb0a1ded20a4773471dcdb13bea",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-e-f1-v1",
+      "sourceSha256": "f788886455018cf8c1bf9aada414b6ac1e52b986701213198d2d11abdbe3c543",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-e-f2-v1",
+      "sourceSha256": "2b9709060e654834ec32908434c456a22157e0722321f367c31db52ba956bb8e",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-e-f3-v1",
+      "sourceSha256": "57c51427bda0bf682ac817924ea27cac4f2196934c65eedb6c917aa9ef2412fe",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-e-f4-v1",
+      "sourceSha256": "8a1f473c6c0be5d7ea0f9439cf73218dbd90f51a7e7741eaa52a3191817033b0",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-se-f0-v1",
+      "sourceSha256": "4991bdee3b7d2be32dbe9cc2deaff1660a46917dce08217dcf03b0d65294850c",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-se-f1-v1",
+      "sourceSha256": "3fc10d68ef4c8dc3d3475671538a07cd4e5000cf3d9beecf258f929d59e5416e",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-se-f2-v1",
+      "sourceSha256": "f3f1cbf5fb753afdaadcb6f2599c77167cdcbf555f447f632afa117cceade9ae",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-se-f3-v1",
+      "sourceSha256": "b2098f780275f939663fcb200afa0d4a924c66beadf13af1626d2c912edc6adc",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-se-f4-v1",
+      "sourceSha256": "bacb284c7bcc1fe75e95c7d4b97f2a1f7bea4d70f48511f9becac5ee1ea38bb6",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-s-f0-v1",
+      "sourceSha256": "3d24329c8ecb36b0da2fa43dda0c87940586b8a910c408b6381f9d948e80c621",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-s-f1-v1",
+      "sourceSha256": "700920b70eefddb27db042bd67e83a83cb168a139863b0d054f87aa35e1686d5",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-s-f2-v1",
+      "sourceSha256": "2b1bd3c472f2241bc083317930cb45cbfca43445bbcdb6f39010b2150d848630",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-s-f3-v1",
+      "sourceSha256": "465a668039f3d3ce95a2b19ea63cc00635281f9930786aaad12118b5524d57b2",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-s-f4-v1",
+      "sourceSha256": "176a75a5b33e7f02d8b625990cab862ba56da6cbbb96a583d595fef403d92b2f",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-ne-f0-v1",
+      "sourceSha256": "228b5cf5b6498d559c14d2023bc89df446189ca6fdc9ed427d8bada507781358",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-ne-f1-v1",
+      "sourceSha256": "93cddbdbdd14584e46181440bcdc8841ac849a1859c40ed887b1deafd7ae4547",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-ne-f2-v1",
+      "sourceSha256": "d7201919db21545d03edbd34d502987024ad24afb180e56a5028f69ce00901eb",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-ne-f3-v1",
+      "sourceSha256": "a197a865a537f30f07a248278e3bfa8d3bb32fafaf205b803f9e80e061b809fc",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-ne-f4-v1",
+      "sourceSha256": "2cb730a5eead8ca848ddbd9d9409bde6345d62e8376dd62b40fb9e3a56273147",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-n-f0-v1",
+      "sourceSha256": "4468b6b6002d6c60f1f3b519cd376272a3c32f3e33c0917bf2b957c5f1908201",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-n-f1-v1",
+      "sourceSha256": "81eccafb9e90163dc7be5411d9a0ee736fc27eb2a857f04ea59c1b466b8565d9",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-n-f2-v1",
+      "sourceSha256": "3c23a39532f079c2d13e79437035ad085cfe28de03ce9e0c32c9d88f95480130",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-n-f3-v1",
+      "sourceSha256": "b642cba4e19f608e990610b278a66e23c81bf8aafe6b19c7607933c6f8eab687",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-player-body-n-f4-v1",
+      "sourceSha256": "ccf7cb63116688ce64cdd9287fe91d31b8a03826b47ffa59c68d4c15d192390b",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-wall-core-v1",
+      "sourceSha256": "efa3b3957b74b30ed99697bccb8493ff31f9d05a00442fca5ecfd8f123544299",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 144,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "id": "coast-wall-edge-n-v1",
+      "sourceSha256": "487932a6d4122e52780b213c34a3702812a5d500a0c243c19abc0cbe2ddd6370",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 3
+    },
+    {
+      "id": "coast-wall-edge-s-v1",
+      "sourceSha256": "4744ff401660f54d499df5d362937ed2a465fda52b27e7d6ed5523174561062c",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 144,
+      "w": 32,
+      "h": 3
+    },
+    {
+      "id": "coast-wall-edge-e-v1",
+      "sourceSha256": "86af923ee48f2417309389f1ce0c9961756a01cac688b0ea5e9bab1b8b26c068",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 144,
+      "w": 3,
+      "h": 32
+    },
+    {
+      "id": "coast-wall-edge-w-v1",
+      "sourceSha256": "f738f368f8cc84f4cd05fcfb307830ffd3d20f087a0cf4b4e1546418dea991b8",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 144,
+      "w": 3,
+      "h": 32
+    },
+    {
+      "id": "coast-wall-exterior-a-v1",
+      "sourceSha256": "184fd2c52a6b17eebb975ee486a8c01e701d226c4734329edef8cf42f089626e",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-wall-exterior-b-v1",
+      "sourceSha256": "7dbd801ff9f237097fe855a57a9e73daf4a26529a3e4bc82f6ca24948674d450",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-wall-interior-v1",
+      "sourceSha256": "58a4da49bc2180743b90eaaa1edf19b9908c5192376fd6f0f580a1c472b6a13b",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-wall-window-ew-v1",
+      "sourceSha256": "7da2d93daa89801c111debef314ffedae6285be2530afbbb0f5c5385bd6c2a5b",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-wall-door-ew-closed-v1",
+      "sourceSha256": "8533e998c2b068ff436595a694b8903f9e97e16a80a5989032e4fb0579934319",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-wall-door-ew-open-v1",
+      "sourceSha256": "67c9d6e27a728334f3b66e3705c96473dd6e7020139158130eeafe6b4e1f33e0",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-ground-asphalt-a-v1",
+      "sourceSha256": "09c5ac45deb20f724eb7058663a048dff857643ec105067b514f5796a486bc14",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "id": "coast-ground-asphalt-b-v1",
+      "sourceSha256": "e9d163bd9f7743ae4ea0312418fc8041295b6bc730f33fb69b770884369ffdcb",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "id": "coast-ground-yard-a-v1",
+      "sourceSha256": "78200ce2a1ca965f314f3cdbeb5bfbfb02461f0d0203a52da7f7a0e50a364918",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "id": "coast-ground-yard-b-v1",
+      "sourceSha256": "58bfabf79b209e96aaad5ac2142d657019c54c72be0341d10903924de9079c15",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 192,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "id": "coast-ground-tile-a-v1",
+      "sourceSha256": "29ab13629f858452fe25836db504feeb8415d0a13f51cd809d6645ce949057bc",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 240,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "id": "coast-ground-tile-b-v1",
+      "sourceSha256": "f937266bb57c6b2893986aa4102780cc961ed2892c598be4b831b433aac3fd08",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 240,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "id": "coast-weapon-carbine-held-v1",
+      "sourceSha256": "7e4157ac89587045218de25fea996aa83dd047c068df7f5e703551cac3542107",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 240,
+      "w": 31,
+      "h": 10
+    },
+    {
+      "id": "coast-scav-body-s-f0-v1",
+      "sourceSha256": "de7f86279df05fccb2ccd7aafc3419e29ef3dfe0c9dc9faa7eef2fd95f8a04c8",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 240,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-s-f1-v1",
+      "sourceSha256": "7ffe62ecd9ed84b36e135659b20eebc2b8276424f1a4c021dfb8bd672dcae91b",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 240,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-s-f2-v1",
+      "sourceSha256": "b96ac63c246b1f359650acf89471d592d2c1ca1ccadc04c862d76a23776a0c98",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 240,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-s-f3-v1",
+      "sourceSha256": "ee7c8009a2dc4e70e10c1c639ee4850b5c4c854d55f9eef6308e1334342bdc07",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 240,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-s-f4-v1",
+      "sourceSha256": "6375be03ca6de717ca2875c7e18746e87c9be6ad02e0d49425debff2bf682b96",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 240,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-se-f0-v1",
+      "sourceSha256": "f1a0df3801f0a656efe013c12916f27ffaa389e729149d2cabb1da708fd286de",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 288,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-se-f1-v1",
+      "sourceSha256": "9b625eadcac54116848fd75b05442ee4d7717f3687571dd7c97e90b06b947660",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 288,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-se-f2-v1",
+      "sourceSha256": "2c5b2ad617be9d56b2f7ad27296968eb2abebec9d0faadfc1e12fadd91bf9547",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 288,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-se-f3-v1",
+      "sourceSha256": "f484719bf70a6b6dd4732681eb0829b77b53d38d49bcdf33d5951f4cdbb3d692",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 288,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-se-f4-v1",
+      "sourceSha256": "cfe92e6b0101bd79010ca3be88ac83f3a2a4ea8c605e867c25fb08cc18aa7ae0",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 288,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-e-f0-v1",
+      "sourceSha256": "39044161b7c9f42e2fe83cdd7246c89c21ac59f3262f7b1944758bb457538cf3",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 288,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-e-f1-v1",
+      "sourceSha256": "ff40bf9ec4d7a75115974b3bca5f724668b9a488310d8bae91f4a9a2da59eff3",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 288,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-e-f2-v1",
+      "sourceSha256": "3a025b5d55284a5fe5a320028b93716cb35d13d11d628070e87616cbf8bc8559",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 288,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-e-f3-v1",
+      "sourceSha256": "6f967030279ba36660d8c43cbfa185dd8665a3ec2191204d0bbc95ec734e50a8",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 336,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-e-f4-v1",
+      "sourceSha256": "ea69f0235a4c851bd8d37b271b4745933468c8532a8a08a733e5f25ef7dc2280",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 336,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-ne-f0-v1",
+      "sourceSha256": "151bf1902577c2124c4022e99282874a574d9e52837970996f69bc903a9dae36",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 336,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-ne-f1-v1",
+      "sourceSha256": "98c3f2cd17c13460b491e0e096b9938ebbe4756c83a4eac5385472b60dea009b",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 336,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-ne-f2-v1",
+      "sourceSha256": "fd1fb771f1ec0cc411fe2b00352202d96ffcec7317156b1184759501468ade35",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 336,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-ne-f3-v1",
+      "sourceSha256": "1405eaee4afa5550e9710573d5dd1881211d8749dbf0302f87da6d56b5c63901",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 336,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-ne-f4-v1",
+      "sourceSha256": "4423bb4a0171c43b749e8b9ef6ae202ce9f4488ef05a457c28c98a108e26bd20",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 336,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-n-f0-v1",
+      "sourceSha256": "30becc2aaa7550913b508aecf04a6c055f46938b83b223a3b6c5b4cc6ca25e58",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 336,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-n-f1-v1",
+      "sourceSha256": "ab7e808b5e89b2da8b0f2dff49bbe369ed0f16874320b23f4e2b9d0bfbacac55",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 384,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-n-f2-v1",
+      "sourceSha256": "3e13308745d5c4ae2fdb2e1e7eb135042dabfcab8dd37e511d34642cdf3d53c3",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 384,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-n-f3-v1",
+      "sourceSha256": "4b4b00b4799b49a6e77178b66b835fcc281ea5b77d5878f9628a9637df0f5518",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 384,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-scav-body-n-f4-v1",
+      "sourceSha256": "1fe77d59592f51c73d20675d5ff3a790d286af109907aa7602b044ca613d0e7e",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 384,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-weapon-pistol-held-v1",
+      "sourceSha256": "7c48d7a4c4a280db4882f3520082c09143369628f259e206996c5a8ecaeb9a78",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 384,
+      "w": 18,
+      "h": 10
+    },
+    {
+      "id": "coast-weapon-club-held-v1",
+      "sourceSha256": "e0a07d9cae8630b717b5a3e935597c0700d94ca3f1ab4279f0678103a915cc25",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 384,
+      "w": 24,
+      "h": 10
+    },
+    {
+      "id": "coast-scav-corpse-e-v1",
+      "sourceSha256": "ce0189c606f0d56c3f8242687b3a9b0fbea0a4b39ee2ba0e9f9619cf4ce815d7",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 384,
+      "w": 48,
+      "h": 24
+    },
+    {
+      "id": "coast-salt-body-s-f0-v1",
+      "sourceSha256": "1e86c1369afedb60f03638d30e26246f3a5e6584021802a078f38bdd3bcb32a2",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 384,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-s-f1-v1",
+      "sourceSha256": "21edd1076b33349c00303ada6d98bc4ac209e59cfa2bf1707d237cfc55444d7f",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 432,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-s-f2-v1",
+      "sourceSha256": "c5b78a7a6473d6ae44b3f96296c5c5b3772bd71d7a9d2cc3da5aa4158c20ba81",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 432,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-s-f3-v1",
+      "sourceSha256": "eae16a55ad6b3f9caf31fa2b99d5686cd3b0ceeb60f63c1657cfc886816b90ed",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 432,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-s-f4-v1",
+      "sourceSha256": "19ffae27f7a922c82ccd0da0dca595ae1b51d5b4856305a4d2d24f1e9bc684d7",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 432,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-se-f0-v1",
+      "sourceSha256": "b0dc2573098f975432d07bed13751800c695b685f570c9f8fc27002634523164",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 432,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-se-f1-v1",
+      "sourceSha256": "e42d7e407051f921c4c840c2804c71651737e6335ea85ab9cb053f67bac59972",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 432,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-se-f2-v1",
+      "sourceSha256": "5c7192b0e9d233e572aea90b43e81ec16d1db29b455effc558fbd77e602d70c0",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 432,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-se-f3-v1",
+      "sourceSha256": "b1a99b0aa17b257490dd0f8d446cd67877116b685d0c23b2ada057a56ad66422",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 432,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-se-f4-v1",
+      "sourceSha256": "5c7b46c3afef3e0b5baba67fb4a61c078bae2b6a7935b9cc289338866ceb2002",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 480,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-e-f0-v1",
+      "sourceSha256": "643a92c864e4fa8ffc5c8a0325e3574069c39242184d06a462292c56464c5780",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 480,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-e-f1-v1",
+      "sourceSha256": "a56c63bb6226ddbf42c0cffbc13da2f390b9cd3576ed1f8dd6d688dd29a3d80b",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 480,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-e-f2-v1",
+      "sourceSha256": "cd48e63f912cf1fb51f8538c3c1e0b4d67e2263059b2a59ec6f0fbc54967e5a4",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 480,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-e-f3-v1",
+      "sourceSha256": "0a1b5dbc4c475ffb06499d91a458b2aa0c648a9f4ce28fb1cc82f11b5bf3c03e",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 480,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-e-f4-v1",
+      "sourceSha256": "fb00e0b5ed367040a21519fc93a34da3890b6efb0f988436e11dcc5421469db1",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 480,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-ne-f0-v1",
+      "sourceSha256": "4f73cdc6d61939bc53eee1fb3f225c652480592babeac0f9bd8245e38bbecc06",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 480,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-ne-f1-v1",
+      "sourceSha256": "2f6a18f16552287a5bada11d130d8a1e698f6977549db614a6532f3e96ca25a7",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 480,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-ne-f2-v1",
+      "sourceSha256": "8f9d7d831561b882c0d8c2acc743371c79db526c44066e2c73004cbdc86f0f21",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 528,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-ne-f3-v1",
+      "sourceSha256": "011828c1047e93a46e3cea1fb8d028d6ade3400d92eed5299fd5813d8e1ced87",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 528,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-ne-f4-v1",
+      "sourceSha256": "89952322439dd8ce53d6dcb8ed72e66c2879f35ef4a5a992fd7dcd6c67263500",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 528,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-n-f0-v1",
+      "sourceSha256": "b5396cbb5b5596a889be74563ce977998c997bd5ea5f48b9147c6fff5ca8a85e",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 528,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-n-f1-v1",
+      "sourceSha256": "a5123ca92998c2885b5e397feeb90c7d368cecb3963b2609a2c266811525faa1",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 528,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-n-f2-v1",
+      "sourceSha256": "8b808c6f0b18e11fb81d091577d88b184cb571a2b9aececde570bd2d8f5a5e9a",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 528,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-n-f3-v1",
+      "sourceSha256": "183c3c72022a204b9134d3a6caa0feabe156a44d3a02091e2b3a1d8b8ab97dd0",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 528,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-body-n-f4-v1",
+      "sourceSha256": "179a2dc2a0043b49547a959f6f73a0ccdcc44129b0641ac2d3fac24b7af12d20",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 528,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-s-f0-v1",
+      "sourceSha256": "051cb9607988fcb4a106fb32c01295a16a2fe2c47faa74e8f0f59294c4c15b82",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 576,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-s-f1-v1",
+      "sourceSha256": "477636c988ae5168872a7585b5c462a276ff86c555dbc27ee6eb384f686e51ae",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 576,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-s-f2-v1",
+      "sourceSha256": "9cd9a4d9f4a5d60b3c48400b78b94e755622eac4316696cfe8b6c8a1679b1939",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 576,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-s-f3-v1",
+      "sourceSha256": "c17a0a9e67c4c8803ec2f634293ea72d6e473316eb4d1f1e1968606ff9f0d89f",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 576,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-s-f4-v1",
+      "sourceSha256": "1907e74f5d1b52ea86a02a55276694931266d81a62da1bba915000ec3e5638cd",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 576,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-se-f0-v1",
+      "sourceSha256": "ddcdffe99abdb1f5c26fbef0c9cf2045efc9581571fa984748f20dfc815188ea",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 576,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-se-f1-v1",
+      "sourceSha256": "26a474f04892f4b8e5501ad323ab091126683c3ec2337c8ad5d966dc01c7651c",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 576,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-se-f2-v1",
+      "sourceSha256": "52a0728b0910916f4c9bc3a899c379e90f4607be47b2ffc46d6915cfc2e832c8",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 576,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-se-f3-v1",
+      "sourceSha256": "f1383d13ef6633ebae753183f0b5e64f9c5f50079e1bf69eb10ed41097f1be8c",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 624,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-se-f4-v1",
+      "sourceSha256": "08aabf1701e7d9e8d3d8044e914594d7e48ff5515fb93f904febbf26ab469d79",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 624,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-e-f0-v1",
+      "sourceSha256": "e45c08f649ae5a2c637d617de5b8963eaf7f92c1f10684bb4bb5eb3cf91b5b34",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 624,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-e-f1-v1",
+      "sourceSha256": "33ee36528dfeea980c416e53f46fae80337b96dd64376cd3f3e0fabf82c1feba",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 624,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-e-f2-v1",
+      "sourceSha256": "441d82f7bc48fbf66e63fca61ebccf18a840cc34756368f7208bd6948a10eab4",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 624,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-e-f3-v1",
+      "sourceSha256": "c6a83be7a3de805c447a5b78c34632cbb892910bb59b6598f74b91bfa1a141b2",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 624,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-e-f4-v1",
+      "sourceSha256": "cace56fd285cb41a750fae0e880f5f9e25dc10fc513dc1963f59b894b52f5c1d",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 624,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-ne-f0-v1",
+      "sourceSha256": "fb854cedf3396f3e04d4cda73030d445fedf0ee98d4661d7e07300307591438a",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 624,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-ne-f1-v1",
+      "sourceSha256": "2eb390fd73e79b95c43b3ca452e5deb46d03beaf3e30a87982f0438aa8edb9a0",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 672,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-ne-f2-v1",
+      "sourceSha256": "a0bab1ad98b1b85c87f9648d4a2284a36e6831dcb54899cfb614f086a4e01fa4",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 672,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-ne-f3-v1",
+      "sourceSha256": "8fc96999d7a50631ca1a8249d69bbd206dfebea1bf768a61d3787c7855ec9837",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 672,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-ne-f4-v1",
+      "sourceSha256": "7e572c36f74d32ddade90e17c3e179d9ae2c93936691170f1dfe66c09b9af7f3",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 672,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-n-f0-v1",
+      "sourceSha256": "cca2661d5d94a2b4540d380729e23364b42da44d960281e61e0f9fafeb99f75b",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 672,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-n-f1-v1",
+      "sourceSha256": "6b9b2235eaace44c2cb36c040f3f07145a6506b0a96c9c2f9ca408c593ef217b",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 672,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-n-f2-v1",
+      "sourceSha256": "c6aa6faedc3f823207288581671167775f015e759afb4dbfe9e35134a9cfbff3",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 672,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-n-f3-v1",
+      "sourceSha256": "0684d17503e8e5ff0adff2a0c9740e7c0d7e486a703d46f410ccce97bc0e161f",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 672,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-elite-body-n-f4-v1",
+      "sourceSha256": "14dcfcb51c9e41a2f9d979d9273b64a2bd830a00b34b3882897bf26c6b628d48",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 720,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-creature-body-s-f0-v1",
+      "sourceSha256": "185ff565f55cb6d86d6c0116ea24ea1d4ee241b1bb12d939142e107b795d5d30",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 720,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-s-f1-v1",
+      "sourceSha256": "4adea7048dcdf98e62a0f9e1ddbde0513b29b3b6df52caa30d0f797b6b9341e8",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 720,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-s-f2-v1",
+      "sourceSha256": "56aef7aeb8b5092b66f701f66e64449d263c6586117ec0813dd45aa59972b1d4",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 720,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-s-f3-v1",
+      "sourceSha256": "471b34c5fbd631c9bfcf4a03464bc695e29305768f0d2f5c0d07e4b0da1041ca",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 720,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-s-f4-v1",
+      "sourceSha256": "f6e18d014d7ad593e42bf23c13302c03b2803c29f25da0092c3bbc7fa87cbdab",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 720,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-se-f0-v1",
+      "sourceSha256": "b84bbc2cd415b4793cc0933935112b75bb8caa7f953a0e8f7775782b8b66d96b",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 720,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-se-f1-v1",
+      "sourceSha256": "458c5dd2a42b4799b128f15264d3f6095886a76bba1dde6c60764d3af4ad215a",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 720,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-se-f2-v1",
+      "sourceSha256": "6211475fa7f64849e6837884422b6acf46c7f397e5c597b581dd4cabdf8367cc",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 768,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-se-f3-v1",
+      "sourceSha256": "c7378cf4fe8a39c56c80dea58c73531cf85bb0f18645ea2cc4c179bb24069ae0",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 768,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-se-f4-v1",
+      "sourceSha256": "f640972fc4a8ad262432740a9676c09db9bb6de80f1df4003adb73d071ecda8f",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 768,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-e-f0-v1",
+      "sourceSha256": "dd7b1c50b884d0d6320eb5f383004b4781985e43acb09dedc5d192bdd44cedb7",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 768,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-e-f1-v1",
+      "sourceSha256": "bef5cf4b184b9aefeb2a2137c95746bd16bb528a60fa1c8bdf21aa955e14b7d1",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 768,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-e-f2-v1",
+      "sourceSha256": "1ed922a7afc0e19e3ac13faeb5848f5f3e734cfda7fe4cf320a67d2a2c6b8b56",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 768,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-e-f3-v1",
+      "sourceSha256": "7012c21c8f6136db8bccee3d06dc0dfb63a9430370f09e507cddf75f477a3dcc",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 768,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-e-f4-v1",
+      "sourceSha256": "fe407be2dfa11e08e4e6f698c9a9779d9e4f99e6a95876d49d6eba07d1fbe712",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 768,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-ne-f0-v1",
+      "sourceSha256": "c5a6637a6faf5499d7d3fc63ff4645b3d6914411fd1aae7f6c3e92105c1a4e65",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 816,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-ne-f1-v1",
+      "sourceSha256": "e6d6871cea0246b6295bca380bf6d54f5da999e3f3697897888750ab316f395c",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 816,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-ne-f2-v1",
+      "sourceSha256": "012b0b66e1f7906c05f5f5121289bbfb6d8504ea5f7ec0d4ccd15ef49a74f88c",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 816,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-ne-f3-v1",
+      "sourceSha256": "08e1264aa69aa36898cbc3b44633c7f1535a1fe2b6d2b0ad565a5d5555c02e04",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 816,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-ne-f4-v1",
+      "sourceSha256": "38db1391e588df63fa353736fca45f92ff66f9965ff5306e82caba0f29112e30",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 816,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-n-f0-v1",
+      "sourceSha256": "ffa28970b4af03c1515167da30d04a441c58263849d07b7853f28108cb950eaf",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 816,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-n-f1-v1",
+      "sourceSha256": "250935e29e1926ae409b07b193a735580c3592f55df8f21c5d69e680f5cb9b07",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 816,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-n-f2-v1",
+      "sourceSha256": "5978bb1b35f49cf2300d469029bdc39085bb48ec735ff8fd214b99d869dde4b9",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 816,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-n-f3-v1",
+      "sourceSha256": "c49bff9bf95e132f7bdb0a897ddb383d28c1e99f1a71a57650047ccc38b2c874",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 864,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-creature-body-n-f4-v1",
+      "sourceSha256": "15b97bf31f8f749a69a206633f900af96b8db385913940effdec482e77fa6107",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 48,
+      "y": 864,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-salt-corpse-e-v1",
+      "sourceSha256": "9473b03deffc1c2fc70acd070e16ad720ffb97a44e2b376101853f9710872596",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 96,
+      "y": 864,
+      "w": 48,
+      "h": 24
+    },
+    {
+      "id": "coast-elite-corpse-e-v1",
+      "sourceSha256": "66ac2d8ffc720cef0569bb71bc905f8db0c7d6eba6c0ce4cf414758f4cefaabf",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 144,
+      "y": 864,
+      "w": 48,
+      "h": 24
+    },
+    {
+      "id": "coast-creature-corpse-e-v1",
+      "sourceSha256": "bbd8cb2a9dfc394b2219adf2398f4fcebf417418088b0178802c1453d775d240",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 192,
+      "y": 864,
+      "w": 40,
+      "h": 28
+    },
+    {
+      "id": "coast-weapon-salt-rifle-held-v1",
+      "sourceSha256": "9eac5dffcb784b4e99c2bb6030d47cbde9d4c7de948008b72db317ffdb122e14",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 240,
+      "y": 864,
+      "w": 31,
+      "h": 10
+    },
+    {
+      "id": "coast-weapon-elite-rifle-held-v1",
+      "sourceSha256": "af07588f28588f5c33cb5fe8f60bf33ce0497fd5e8210304e426f6fa5af3dbd2",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 288,
+      "y": 864,
+      "w": 35,
+      "h": 12
+    },
+    {
+      "id": "coast-weapon-shotgun-held-v1",
+      "sourceSha256": "dce0144a844cf9ceabcbdfcac859023fe8607a7c95a88cbed57ff4d3e4f69914",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 336,
+      "y": 864,
+      "w": 33,
+      "h": 10
+    },
+    {
+      "id": "coast-weapon-knife-held-v1",
+      "sourceSha256": "cd6e21142e3c3c153e56f4ef2f40fcee7358255774fd94e8096d0ee438403ce8",
+      "sheet": "assets/coast/packed/legacy.webp",
+      "x": 0,
+      "y": 912,
+      "w": 19,
+      "h": 8
+    },
+    {
+      "id": "coast-raider-melee-body-e-f0-v1",
+      "sourceSha256": "0b33dfdf48f5122d787ba1e2b68a9788ae4487a22673fc2d56c1708496bf6fef",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-e-f1-v1",
+      "sourceSha256": "b082315546fea3eb75b9accd7ec89d728b2b51ab89202c564e496cc90e333d15",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-e-f2-v1",
+      "sourceSha256": "0fc6b0b50d2a0d72fbdf38fd1b1e3066bfe95dcc908b84e5b342a4b6590bdd6f",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-e-f3-v1",
+      "sourceSha256": "ec7a0f9eaae15af3adc22def587834aa4c3dad4ed591ef36db2737995cecf92e",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-e-f4-v1",
+      "sourceSha256": "d178ed98c66ad8694fa042e26021b24cbea0aa5669a5fe30159c8287b39897a1",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-se-f0-v1",
+      "sourceSha256": "06252d3328307d6410dd8728cf5de262f1211acc724743cfd46ec0e3cc75660c",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-se-f1-v1",
+      "sourceSha256": "b753e638a18f033806e735a5decda3cba6d8c84af576c3bd94527ae8e2a9e1bf",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-se-f2-v1",
+      "sourceSha256": "da1104c5a95c02ba5ac253eb3c66f4c2b67309b07d4a31fdc1a59e733b18fabc",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-se-f3-v1",
+      "sourceSha256": "ddf0f4f23e64b37deed0bcb947c4009512e7b2b528e356ed35d5a18fa5de4beb",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-se-f4-v1",
+      "sourceSha256": "11aac9cdd6dfbce71fbc00b3a871e8a5be5ec51c0ccc84c698265d17640a88b5",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-s-f0-v1",
+      "sourceSha256": "083b60e553ed6b60c2e8d8a5c408959dfb5cbc19cf1fb56cd53027e679c74e79",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-s-f1-v1",
+      "sourceSha256": "9ec0ac17612f036b033d84f47807580f387d6823821d71e2c226c7f2cf918670",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-s-f2-v1",
+      "sourceSha256": "46648f5a83b6216395378f140da9ce1783001b139d56133631fbaede33c3da83",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-s-f3-v1",
+      "sourceSha256": "ed3a739225707f31689477fd57fc033d1184a81da7c07647129b5cb2a2d3bc09",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-s-f4-v1",
+      "sourceSha256": "3835a5b7e4fdfe4eecf76f01378d90044c6ec918b549353d890e4646df987c53",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-ne-f0-v1",
+      "sourceSha256": "e67febad6585cd1462faf515c00eb384d60a089f6d0b2ee51a5cd5f94d81b1c1",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-ne-f1-v1",
+      "sourceSha256": "cfae096d7212212312abed8d41ed7a2f2b5dcfac506be8a120695e6260759b1b",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-ne-f2-v1",
+      "sourceSha256": "04656609e38675e75e6f9d0bd0b16a50fb25d16c3856753e9f94290777c57c08",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-ne-f3-v1",
+      "sourceSha256": "6631e4b16b1cea0d13c2d51e4ea4b10ac3288ad6cb22ead25fddbd9363067535",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-ne-f4-v1",
+      "sourceSha256": "cee967ff6982f73397910d28c36f1dc089fe97993a2056f22c4a79a275045bf9",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-n-f0-v1",
+      "sourceSha256": "0daea2435757b4f0a32db31fc660df7362918e4eb88d5291bd392eea31ccdadd",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-n-f1-v1",
+      "sourceSha256": "8d6a5e8caa66f4b98473c952fa66570bf067aac7392e6c268d271b4d186c650d",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-n-f2-v1",
+      "sourceSha256": "1cd2767454675d57f540a5f19e92c1f2ea6bbb41e8a9bd3716c7d97fbfac98d6",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-n-f3-v1",
+      "sourceSha256": "a64f2a24e35de621467d128a09c1f1d47d65bd4dd3c8f79d49cf971b7d5d040b",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-body-n-f4-v1",
+      "sourceSha256": "6cf962a6ba04b354561b348fef7705460b9dff82d95b73c19e71095b8b142906",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-melee-corpse-e-v1",
+      "sourceSha256": "c701374dd72f44d32f95fdc806300437fb279f0dde941cedd551f11024219c19",
+      "sheet": "assets/coast/packed/raider-melee.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-raider-gunner-body-e-f0-v1",
+      "sourceSha256": "dc2b39971594a22f66c1fff092ec2b8f071bb550408a78e1fd527fc3b952697d",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-e-f1-v1",
+      "sourceSha256": "25c459643233960305c9edf6c855a5c9056328a4458098a182219f34b686733b",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-e-f2-v1",
+      "sourceSha256": "fe398c6fdc495eaf5fc5009b2b0f2105ebc2e9438c62f9a86654496c57f6b80e",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-e-f3-v1",
+      "sourceSha256": "ee63cd7e625cab316d9658e688bd451d77852f0836a783c4242a65d71149cda4",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-e-f4-v1",
+      "sourceSha256": "a32224d6b7bf63463260cdbbfeab280bbddd2e65873ecb733485681d96b033c6",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-se-f0-v1",
+      "sourceSha256": "495f367a322643bbe78f7f1f3142d08e7eb00c3a7393da29c7c802e05e47e940",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-se-f1-v1",
+      "sourceSha256": "c2160c2b5e545ab15127405808c16b5eb83efbc24ad94cf736767eb67f764961",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-se-f2-v1",
+      "sourceSha256": "390ff4ea9fc6a6e1d342e0bc8dea98216fdf4be7f0affec10b2c30d01a7ba053",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-se-f3-v1",
+      "sourceSha256": "348b483d203c6de5e3567ef7d8159cee5f1758c26ebe163f09a71f58cc3124fe",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-se-f4-v1",
+      "sourceSha256": "9ef8ddeec99ddb13a55f4180e4308f1c146d79d2ed177bdcc83b3803aa41007b",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-s-f0-v1",
+      "sourceSha256": "78b7bc45059730e7eaf7dd783996c2d18e41309fa7ca0e75f168be45b434d559",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-s-f1-v1",
+      "sourceSha256": "04a154cfc638932f934cfc6acc6b481f17082e1cd4bc1036f357be271c1ccb5c",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-s-f2-v1",
+      "sourceSha256": "7bca9d510acebf758d86e6570dd0913fd26f4340280bc49671fd2daca1909525",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-s-f3-v1",
+      "sourceSha256": "eadc88033e2c009f3ac9352b819d33b03039f8ab785164a8fbf4412f07eb4a09",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-s-f4-v1",
+      "sourceSha256": "63a5f54e53128400dc89be21e798aaf41f967fc76fe37860bff9d5cdeab68f00",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-ne-f0-v1",
+      "sourceSha256": "4dc8098e0fb0def8907545a6df8051023bfa03b736bb186b2b4d6ef62f3071db",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-ne-f1-v1",
+      "sourceSha256": "461a29cdf85baf3b4f995467f96aeb81a7a31bf070e80f6be07b1b50ccf128e5",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-ne-f2-v1",
+      "sourceSha256": "a44e9fbf655aa5a3c50ed49dfa9a027eec074defa4546b5b7b5012733e4579af",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-ne-f3-v1",
+      "sourceSha256": "adf0c24a7605b9e5633ff1f5e1fff9a5295af32645ff562c42375f9a74d7957a",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-ne-f4-v1",
+      "sourceSha256": "bd15e8bc4ae5d924ba9fdff737fd2cb18992813d982608b5b3d6534d87f2790b",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-n-f0-v1",
+      "sourceSha256": "f7f5daa8191e554a0835920ed0185ef614000d96dfcb0937999049210f6ba9a4",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-n-f1-v1",
+      "sourceSha256": "963f1472d49ef893bbcff9b3b5f7eeeabf51a118baefb34fec3994bd5c317e36",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-n-f2-v1",
+      "sourceSha256": "986766675e255e2ca696ca3001685b8a56b7bb58f927af497f1bfee66d65c1ee",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-n-f3-v1",
+      "sourceSha256": "7cf20b1fc112ff8cd053a9e467bc7ea6e578d2e8d4b9ff3736d7d4d4928b1640",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-body-n-f4-v1",
+      "sourceSha256": "019025aaa466ee548d0866cea1f46c47385467bd20c7658eddc80379c8be4fd0",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-gunner-corpse-e-v1",
+      "sourceSha256": "f997ef7c56ba453ab4603d8dfb93630ab04d917b346c8d36ad9716c791053e97",
+      "sheet": "assets/coast/packed/raider-gunner.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-raider-lookout-body-e-f0-v1",
+      "sourceSha256": "82a9d0cc1b30840eb6f8f07c50bd9d2d022cb6149d9b58831f94c8a3436aabbe",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-e-f1-v1",
+      "sourceSha256": "bfa98e51465b61c40fbe5fe7f23b7d974a9de391b2f816a21c4c577abef5b9f3",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-e-f2-v1",
+      "sourceSha256": "96449d8078843f1940bac69bd09d1d750f05b4d7f919dd027ed45a243ce3086b",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-e-f3-v1",
+      "sourceSha256": "ee4393c71421644e57acd45255d1325b078946cdca8ed958e70490f306a5ba13",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-e-f4-v1",
+      "sourceSha256": "8a5eafd5e8e601cff302ec2bbeabfe61b26526a580bc27dd24ac82cdab6a166c",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-se-f0-v1",
+      "sourceSha256": "a6488b79af6974cfbc4285183f6c475e9c5070befce790c39369c6742ac6c9fe",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-se-f1-v1",
+      "sourceSha256": "2f35d8e921214080bdd07f5890d3429a66566063b9f4f1d3c653b1ac97bd4dba",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-se-f2-v1",
+      "sourceSha256": "9c09627e6bf9605a8c265f82dea415a7d48454065fffd70eb8f5b9d2324e403c",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-se-f3-v1",
+      "sourceSha256": "5fc18fa26f5a1ff35d39e2d3878364b1405785b7ea4a05e7569c632030836df9",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-se-f4-v1",
+      "sourceSha256": "69e0b1f9ec2cd198b348db405ee0303bfcd22048e0a044eea12c4d4291f08bae",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-s-f0-v1",
+      "sourceSha256": "cda7abab805c89c674babc2549a61772da88f69b58ba53fa85187046f754bdd8",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-s-f1-v1",
+      "sourceSha256": "f618f0ed3c12e092cac384b3c52136b7ac393a2fb6f6844065c5408a3dac491b",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-s-f2-v1",
+      "sourceSha256": "3d0cfa95e4ad925d14839a47d4471e3cab386c5d88bfb343240fb6be1c276f58",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-s-f3-v1",
+      "sourceSha256": "56498dd0759151ee1182230635fd9d959441f7d4cfe47e4129dfcc50ab874af2",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-s-f4-v1",
+      "sourceSha256": "7ca4a0ba320c6e25ddd1dc581facfc09f0842242fa66811b04af5bddc31419b4",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-ne-f0-v1",
+      "sourceSha256": "81e5868f8bf6e0227761286fbe7c433beaa9681ca5c3acf857262ed51d5b09e5",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-ne-f1-v1",
+      "sourceSha256": "3ed5b3104a0f4ea6eba98a184cf55152d67dab47d5e34d1bb1ff3285f83f8aec",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-ne-f2-v1",
+      "sourceSha256": "a02aa9cfd5021e544f3662e9aa5e0269ced0f99d09d5bf74912e53948f0bfa8a",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-ne-f3-v1",
+      "sourceSha256": "2b3a866bde1ac411134050c1f77f88d45ecf77fb0078a43284c7e9e7b77ab414",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-ne-f4-v1",
+      "sourceSha256": "bf6cfe19351771be4b099f823adb4895aa35333244a6a4186ea3d05d4073fd9b",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-n-f0-v1",
+      "sourceSha256": "d2293145c3d6bc1159586fcd82928a4c78b4299d84ad2c5ad4aac8f6b4dea51a",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-n-f1-v1",
+      "sourceSha256": "24b9afb7fb2210dcd04c8723969b1194e9f6b17a4c120de75b6d9c011c51fed2",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-n-f2-v1",
+      "sourceSha256": "87d948205f8329ec87a7213245ebd0a0cb7ac3107cff0d96ca504497c3ce8759",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-n-f3-v1",
+      "sourceSha256": "cb8962d8d60f2624a7280af56da9a45d76a809291bde84211b215a6cbeb6a205",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-body-n-f4-v1",
+      "sourceSha256": "c1c69187cd7333298ce26f8bbeed2a058ba4ee262e38dbaea2bfd922548300f9",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-lookout-corpse-e-v1",
+      "sourceSha256": "baae150f358645488078b2ecb835dda665d4782bee9cfa56bddf91042245d380",
+      "sheet": "assets/coast/packed/raider-lookout.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-raider-boss-body-e-f0-v1",
+      "sourceSha256": "c7e2e1680534bc98ac177882261e91c79b15c8900af7ea011ba2085d40297126",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-e-f1-v1",
+      "sourceSha256": "c544f551df89ad529d08723dfe33e67d16755c637d8caf47cc82ba51e3955f5f",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-e-f2-v1",
+      "sourceSha256": "543e5241cf2eb320475a3a7c69aadca68e392d9a6efa40198d8f69abdf2b370a",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-e-f3-v1",
+      "sourceSha256": "e92c3c12d7b47b68d013d9c237caad7496287ab3245c0fca669888b6eab3a4de",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-e-f4-v1",
+      "sourceSha256": "f42498cd0e5e1cf0825c9c11f9d03ccf2432da4a61e968ec0eb63d99561f6870",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-se-f0-v1",
+      "sourceSha256": "85d7320fcfab11ac389992337e55d98ab08dccadb0fa0305d5c0e148fc637228",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-se-f1-v1",
+      "sourceSha256": "60754ce998a9fd64c02dd55609464ab9a7b03e42d630b64efbbc7df1883a5a85",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-se-f2-v1",
+      "sourceSha256": "95c127670802ad34eb94d561c633f318c8c16102da256a1aec56cc0207c0cba8",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-se-f3-v1",
+      "sourceSha256": "d2d6b6cfb0b7a87707b96b30ea64254c78f59462863d49d7d06ea520b62b564d",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-se-f4-v1",
+      "sourceSha256": "869079b0403abbdf02b9e3a1b419b54b6174c2aa1ab58ae540c663e683ee3e1d",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-s-f0-v1",
+      "sourceSha256": "4266b6c1b7c065a2ea2d6376b2fba68ee06b47a7eb89e89d074de6b502e654b7",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-s-f1-v1",
+      "sourceSha256": "51c8b92b0c2aeab1e1087451856f42e4a048d545ad000ca0f3d38cdb4eccd8f0",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-s-f2-v1",
+      "sourceSha256": "57a278e62b05daca86370f5043b9fc7c046ac1b88c20971f4e82fce7c3e8c726",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-s-f3-v1",
+      "sourceSha256": "4aba8df8ee275f56ab2b219cc3d4ca97f1e3c9710dd915bbaca5b55e63186f10",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-s-f4-v1",
+      "sourceSha256": "ab5152e7dc5d5350bea1ee0e1cdf9151bc4d5947a259b7858dad2b45fea50b5a",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-ne-f0-v1",
+      "sourceSha256": "02f31373cf92c5bc18fb4d2ac17cd2394c64ab4169afbee5e42f4b63713d0995",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-ne-f1-v1",
+      "sourceSha256": "8917d4a7961a337caa1c84c246058773772da0691c87733bdbfc5a7a7e325d08",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-ne-f2-v1",
+      "sourceSha256": "8537027bd188537b2582378b5184ce08934cf95fd105194cb2679a75bd6233c0",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-ne-f3-v1",
+      "sourceSha256": "0260a3925eb4a5f826e2a81a3324b8ed13b9d700725270e14639115a7c253940",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-ne-f4-v1",
+      "sourceSha256": "3cd00824433ea0e27f06ca6ac3416d2740240fcaf52e19e580e2af61e9c2cde6",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-n-f0-v1",
+      "sourceSha256": "858015c51e701092357fe5368c3c6d88018c576a3b14b2d0d5119f8b0e9e7c28",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-n-f1-v1",
+      "sourceSha256": "166ab33e5206660ef4f3fe47b50328a925313820e46821922c405bf775d65ccc",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-n-f2-v1",
+      "sourceSha256": "6508ee5260b91fa5c9d4828ec8424ad1d69e4f8c468dc5aad799c7cff7c502f9",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-n-f3-v1",
+      "sourceSha256": "04626afdc9d9946ba1bd0e360dda80f3c5c9356c89c35e4c317c9e27d9b9ea75",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-body-n-f4-v1",
+      "sourceSha256": "7d34a24145e8016850560c45996ff942577975d6edd8fc96ea959674a7cbd394",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-raider-boss-corpse-e-v1",
+      "sourceSha256": "a65985d6b4af8958c56a4f62f75cc9d55ef56ebd7939a4a34d937fc9343deb7a",
+      "sheet": "assets/coast/packed/raider-boss.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-tidal-crab-body-e-f0-v1",
+      "sourceSha256": "b52f7ce6e6e2532d47e443c0fa08c17b9f440380404b617ac03fe3dd9480ffac",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-e-f1-v1",
+      "sourceSha256": "765edda0969e8f8633764496c6c7d5a88000050a3e0dc1570082e554f14b5a75",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-e-f2-v1",
+      "sourceSha256": "a41baf767d0d2d6b3cb13de6b1296c0d20cf2e13584a70ededdb9a473a5d4350",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-e-f3-v1",
+      "sourceSha256": "ac516553f232979d9033d813d3a0da5da881451fc1cd995d27ebe469c27b6ba2",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-e-f4-v1",
+      "sourceSha256": "74ab5ff368ed3333baea5821414e977bd6ef8437edcc289883c362f76036db78",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-se-f0-v1",
+      "sourceSha256": "5f8dab601a31b60a3f5e72c1cee168befb3ba6260422cb8e8f10877f1b6e233b",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-se-f1-v1",
+      "sourceSha256": "73adae23add808910e7bf0ab6833d537d3c55dece37200d716becdea4efebbc3",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-se-f2-v1",
+      "sourceSha256": "bcd59c9f92d8a8fc13e8b30dac47bd215501d2aaacd5f406e0f92ec4fdd95428",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-se-f3-v1",
+      "sourceSha256": "6833656a0112cd8f3692c73549879ba8f33f0a231209b37d173894d2c3ae74db",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-se-f4-v1",
+      "sourceSha256": "089c17a8491f87a9fddff9648523ed041357e3647466733c0d55e45525de0c0f",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-s-f0-v1",
+      "sourceSha256": "49d36cf04400a59d9ba30a500ed2d84ad484a50ce7c188ceb02adaa294d96fdf",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-s-f1-v1",
+      "sourceSha256": "480b1a8d60ca847acc0f716db29378bcfaddff8b2b1400d2d89d53318b96f7ad",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-s-f2-v1",
+      "sourceSha256": "50eba772071d76c35f4c86dc159393c7026846f4e11afdb3a51e58448f6e9bb1",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-s-f3-v1",
+      "sourceSha256": "4610b8197a63a24fe2248f96743f5cc861232e37412f56947bc89de8d5488ce0",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-s-f4-v1",
+      "sourceSha256": "b19934564a52fae426398ca12ed032ae2e611a1082460acf4f8edc189db40b36",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-ne-f0-v1",
+      "sourceSha256": "369019ac8334598dc0b80308c3cced2a8609578667d7f3a8c92a46df4e02d5be",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-ne-f1-v1",
+      "sourceSha256": "4c3d4f7b305d28dedad8468a8e427302a793a4292b116d53b47c26e43bf201a7",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-ne-f2-v1",
+      "sourceSha256": "a68db4b9b511c41f47632e98e0c455f30bc3ab6880a7f02b534644b849955446",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-ne-f3-v1",
+      "sourceSha256": "732667582fc783d6626516e92baaf5c3133b1764bd068834ce7d1688a1eb5bd7",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-ne-f4-v1",
+      "sourceSha256": "a00a86cf6ac07157f7b1f9e3c75fa6813933ecce72e3c5992edb68859f4a5047",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-n-f0-v1",
+      "sourceSha256": "bc165556cf453aa1ceb4d40ff3711af872977e73ed53e53f9589b32c35946bb4",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-n-f1-v1",
+      "sourceSha256": "8a11dfc3e9db5b6920a25cb314008fe0be355984e6b2062964e53fa0ff728719",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-n-f2-v1",
+      "sourceSha256": "c1d7114c0a60327c3a08d5f71b4def4c7899f1b74a6dc1bc822f61f8c6be900b",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-n-f3-v1",
+      "sourceSha256": "1893b1ce17251b8fcbc85106b1649a94ee12edeb197457944843c0ad8145df4b",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-body-n-f4-v1",
+      "sourceSha256": "643b1566acc5841e9320510e55f05b08f244470dd16eeb1d62b947ec04ffe28b",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tidal-crab-corpse-e-v1",
+      "sourceSha256": "a8be501a44630a13711c5a313b886c322dcfe879c0f656141b47fb1b86a652a9",
+      "sheet": "assets/coast/packed/tidal-crab.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-saltback-dog-body-e-f0-v1",
+      "sourceSha256": "5c85397989bfbe1aa1a7d8782cb81ade9d87054f79244c91c2aa0ecfcd701768",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-e-f1-v1",
+      "sourceSha256": "df6dd37a14f01a8203eb083a973bf9c5fcb91b0119ca26d3f38b8caaaa6c6ec9",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-e-f2-v1",
+      "sourceSha256": "b1ce2352374e2550e3b310f4c176e6b6de178405be692e91a351ac716644fc7d",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-e-f3-v1",
+      "sourceSha256": "7a91115f6aa9bcc1d1a3c1a013300eadb4432393cffeb9d8b16289c0fc9ca2ae",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-e-f4-v1",
+      "sourceSha256": "f2d42129ef973fdba250fcbc9beab0a15fcd4e44f348387c52f3d5360867f8d6",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-se-f0-v1",
+      "sourceSha256": "74be30e529e6a2483a5fd7d4c6659c3c33b7281e52a2f11fa790010df6d98543",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-se-f1-v1",
+      "sourceSha256": "aa2f9c7c45e0b2285acbf862a66712df930711b996237458ebf9c760e05fba1f",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-se-f2-v1",
+      "sourceSha256": "e0d4dabd755a931b40b4b02ff07deb1dc06ef9ba163881b7f03b659f9e22eb48",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-se-f3-v1",
+      "sourceSha256": "c54296c52d46a696a2cffd924ae4fa8ca1fa73e68ba2827ced0289055280c6a4",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-se-f4-v1",
+      "sourceSha256": "34ab1ed194d174006eb147a3a97d1b659fbd8956c328aa3e40d8d9b05c228642",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-s-f0-v1",
+      "sourceSha256": "d9cf51d96a4e71dfe79e7eb08e06c916ea03fc188ee30381693bf90fcb90e7a2",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-s-f1-v1",
+      "sourceSha256": "60b4b802a5fd8591bacc69b7fa1da62d9485fb7ad0f493496ced3c13c105f905",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-s-f2-v1",
+      "sourceSha256": "fe1e1d323117763dec51b05144c256e6bb160341a263e8f9701a1b4f5a16492a",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-s-f3-v1",
+      "sourceSha256": "b2d6feb45c11c7e9e80b4f5d00dd6783cb4e93f894e9b51516f1a320feb5a03c",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-s-f4-v1",
+      "sourceSha256": "e28595b115f4399ba6c5470aaaf063aaa1822df7df6ebdbf5f448ddac4db8142",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-ne-f0-v1",
+      "sourceSha256": "e8a0273290ece5031247e660167af18f43b038a1a955e748200adab1d6131d0e",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-ne-f1-v1",
+      "sourceSha256": "adb64bd9606ce6bb3d7042cf3d0d74a1056f79daba1b855b155dfc157565b246",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-ne-f2-v1",
+      "sourceSha256": "a857de381b072834ebce5055205b509b1179c502d996073ae8a0751b2d2ca764",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-ne-f3-v1",
+      "sourceSha256": "fffb439abb8f0a2eedd71e6cde11a968a710a9acccdb6c1b356a0b7695fa1c18",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-ne-f4-v1",
+      "sourceSha256": "df4773eb58a1e071779816b7d410776948ad18c10c84fa58c5c95c2016fb8931",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-n-f0-v1",
+      "sourceSha256": "6c2207c26e1df3b26e93bc0cb9bec613606be5bff3778d3cb5a0c8b108f1efca",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-n-f1-v1",
+      "sourceSha256": "8e6e03bcd4a74685e7f0074649a2aafc1cf4d68c65a22f2a19b32a05d25150d4",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-n-f2-v1",
+      "sourceSha256": "9959eca7fa4448344e9be84d571e45cf01065618b0433dbb342b04c7a34f58b4",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-n-f3-v1",
+      "sourceSha256": "4cf49029528a28b00820a719c17bfba8caa0b309ab71a51c890989c4fe759c5a",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-body-n-f4-v1",
+      "sourceSha256": "4d3fbf0338006d42b173f35a893d9d15c9b4fad5c92732216717d5cbcf70a9ab",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-saltback-dog-corpse-e-v1",
+      "sourceSha256": "c58bf16dcba521d1e0db487d46242067e655589de7bb92bddef8a09ef464eb32",
+      "sheet": "assets/coast/packed/saltback-dog.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-sac-spitter-body-e-f0-v1",
+      "sourceSha256": "a86e0e32bb90d12d55d732d84809ff370ee80cf45b8bf88b77cf5372020228de",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-e-f1-v1",
+      "sourceSha256": "2fd553e9d77b86e9a68a9110a2725f929b191a1b082f79a212f5a87aa3a9ea7d",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-e-f2-v1",
+      "sourceSha256": "e40a34d5e1794853ed1b71b4aca6ae1d0ab382c49d7e59f0deb28bf6f1c4f7e7",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-e-f3-v1",
+      "sourceSha256": "048941df6d4530a74dbe95ea8fce3f952f6a3c119bed8158d9b7bafc64f22336",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-e-f4-v1",
+      "sourceSha256": "7c6287c7ee57efcaa0fd0f6002f0fe383da05f1f322b84be73ebc1f77ef98458",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-se-f0-v1",
+      "sourceSha256": "dc52e401d4f26a66cfb76afe0a4875e7a774cdd40e88d4d4fe2a8c6c182a12b2",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-se-f1-v1",
+      "sourceSha256": "a8ab438b2b76ba15b9e0c1167fb4fadd6254a711122135fcb25b569b800be4d2",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-se-f2-v1",
+      "sourceSha256": "1de38311f87c69d9e01d0375223ef468ba01d1124fe0f641d1d6ac4a81e75854",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-se-f3-v1",
+      "sourceSha256": "5024ad7e647aa8851ee1696f543fb019b1b29acbdde25e389d8774a5a48fd90d",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-se-f4-v1",
+      "sourceSha256": "682a09ddc5fe2858a69d01f9ccc08d8d0da25177f51c2626e805de6d7a154e62",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-s-f0-v1",
+      "sourceSha256": "e9927f14a623fd190d49a2d393fd1728b0fb3a3e9604717a1d4143c9c1008af2",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-s-f1-v1",
+      "sourceSha256": "608a0d1b8e8ad835607e4213348b5943323033493bdef6d4cd701c4d5b6101f2",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-s-f2-v1",
+      "sourceSha256": "6cce43a762a2f1df3502594451652f2ee6685ca4f7ad4763518619b9028b3b2e",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-s-f3-v1",
+      "sourceSha256": "59ff2181ecc5cdfb3bc3099505cd859570536d67e8d4546b8d387e091396a025",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-s-f4-v1",
+      "sourceSha256": "07db17f21a31be0c07fb3f483bf373f43faa8a3b8fed2ab20d14d9f90f0850ed",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-ne-f0-v1",
+      "sourceSha256": "b967f6e2e48e2336001f4084f23595619166f31870db2747b8510dba82266fa6",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-ne-f1-v1",
+      "sourceSha256": "8c410f1ff3e1ec220a06fe03807d237e527b4aff3eccc5736892f7c220ac33f8",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-ne-f2-v1",
+      "sourceSha256": "2d0daafb77d3a020dd17ad82280ae972f69668e50d659a9f070a6c294fd1d350",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-ne-f3-v1",
+      "sourceSha256": "ff53a87e691d0b1ea9d61b34bf096ea6d4895f7e77deac1bdc526860645a8bbf",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-ne-f4-v1",
+      "sourceSha256": "ec5d21bc84cc22829f2b72ddf03ba21f2ace765c407eb1e82aa703ef2723450c",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-n-f0-v1",
+      "sourceSha256": "5be21fbd6c95f6a843108ec0878eaa907f3509c4af41a86ba4a9902273c7119f",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-n-f1-v1",
+      "sourceSha256": "9205c6cff86d0ad92e9862a5cd858553d4332fb6f890063fd77f67fd6fb22b0c",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-n-f2-v1",
+      "sourceSha256": "1231b4f22d510f569a988a8d2aaa29a739b8e5c738d7987754b61e352d06b4bc",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-n-f3-v1",
+      "sourceSha256": "51fb0eda1a54087869aa79d31e6380332ed48f7205afa0ed2a65c58b0c230a6c",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-body-n-f4-v1",
+      "sourceSha256": "05185a028c63b3b46fa5707a527108944e7bfa582cdddb60084fe6e87cbdf2e6",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-sac-spitter-corpse-e-v1",
+      "sourceSha256": "14fae82070e00a3274d99209933a8cd3c480c34d83a574f59ebb33ac00aec612",
+      "sheet": "assets/coast/packed/sac-spitter.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-salt-dazed-body-e-f0-v1",
+      "sourceSha256": "38ce15c8ef444ea4ca051837a2785416272ac37480a87e1dfc8fa5b98027d82a",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-e-f1-v1",
+      "sourceSha256": "ab136e3dd9435c6aa00af32d57c948eff6f1edb97cbe7ec18888489b28f826ce",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-e-f2-v1",
+      "sourceSha256": "4c77c7d8ba34a4400fbf110be1deb41ca64e1a2951d1cf68b6ce2dd00b47ffdb",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-e-f3-v1",
+      "sourceSha256": "38a11195e30b933e4f4b5a666b8de87e95ebb7009b391079bae67c1b25d73a56",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-e-f4-v1",
+      "sourceSha256": "9530c2c7799ee08a0e5f6021bc1f403ec904b91a8d7c273e09758be665640ac1",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-se-f0-v1",
+      "sourceSha256": "a11ed9ff6389c4b0f3428a3980f7985027849f9671156d471703b1f1dc780bae",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-se-f1-v1",
+      "sourceSha256": "33d06a3896e1ee5df93f13444a31017c97e372ef29f0787754e979be947ea82d",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-se-f2-v1",
+      "sourceSha256": "8eee0b9c2be787b9918c0079b93b88921085718952db9d165f62e57b7f1dce0c",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-se-f3-v1",
+      "sourceSha256": "4a92e5936fa4ffd1e082eacaee3f593548b50b4290db6adfba8b5eaeb1c3571a",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-se-f4-v1",
+      "sourceSha256": "a708504f653c2a3f727976108d7e6c36d13b717881f0d92830a420cf6f0c7fa7",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-s-f0-v1",
+      "sourceSha256": "b9794623e2c9b0445a33bf5c1e2b7a475a73bc7ecc70ce64b15dbf86657b8d75",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-s-f1-v1",
+      "sourceSha256": "28ba733e7b2a109fd454b10af09dc756af722cffe6a8e69b5e594403ffa3a266",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-s-f2-v1",
+      "sourceSha256": "c7c339da564f403599e5d41d321335185f2b7bd3480ef80bd6697ad833eb8c02",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-s-f3-v1",
+      "sourceSha256": "25b4f91c9b09f92a1dcb8d814b879d5bbd97dc4035af6d95a922ce58eedd27ad",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-s-f4-v1",
+      "sourceSha256": "08764c9c891648c4b3014d86f75076aa62b4a45ab5a8024b4c2921a230ac16e6",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-ne-f0-v1",
+      "sourceSha256": "aaa5948d295e36221a250da2ffde5c32cbb8fca76400c39a749a2c005c71fefd",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-ne-f1-v1",
+      "sourceSha256": "935f1dc712adddea8084a0e60b211260e238a726f37f915b8769f71dc67daabe",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-ne-f2-v1",
+      "sourceSha256": "e0ff9ac89b83103e5352a3cf8747af130257d08f620c8c8632bfc36d27c93b8f",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-ne-f3-v1",
+      "sourceSha256": "54ab08021b9541bcf32cd99617ec8b42e05cec568dcd994869d9aed79e765b03",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-ne-f4-v1",
+      "sourceSha256": "3397ac370b37670369b9c3a7ef6bf7a1c40c627673ba794a9e9302a970f603ea",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-n-f0-v1",
+      "sourceSha256": "0a3e8c5415cf1d786947ff3c297540aee61ccbc2ded2f98bab560a0da794d6dd",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-n-f1-v1",
+      "sourceSha256": "9323438e80623917f283cab8acf25be0698960bb05c0a6ac7b2ed856a4fea2e4",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-n-f2-v1",
+      "sourceSha256": "3c7dfafc3b1e5794f0b078eb3a1abe142a14dff72040e9ef63f14f66cb4b0c16",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-n-f3-v1",
+      "sourceSha256": "b013339e63e1e688cd10be40c34a2d21a9189299eacb30e3e283ff2fcf06bf7c",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-body-n-f4-v1",
+      "sourceSha256": "09f6483dd860e3c4a0d71f4e14003ce99854ec0ef90c7680cff24684059974c5",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-dazed-corpse-e-v1",
+      "sourceSha256": "67c433af37052f4eaff7eb6b1dcb637daaeaffe7bcb1343df49b9796bbe48c55",
+      "sheet": "assets/coast/packed/salt-dazed.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-tide-chaser-body-e-f0-v1",
+      "sourceSha256": "d8cd8001c2288afd27140f7add29a741ea598f5b7a15e5d273986c1e4a64a916",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-e-f1-v1",
+      "sourceSha256": "cf21ab51f4de35d1e9c81d144e6a94e921e89bbf7ba49fae78b4767bcd6b26fb",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-e-f2-v1",
+      "sourceSha256": "045e50fcf23c8080795e8867543bf6383c0356e79b9ff926dcd02f63067d9594",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-e-f3-v1",
+      "sourceSha256": "cde432fd489ae82bf46998aeb45337339bd863446e5c84e4a8989799e26baba4",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-e-f4-v1",
+      "sourceSha256": "620424c68d9420f7c3237ea8f0f13c607074b71bcc2ab534b49771be39195733",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-se-f0-v1",
+      "sourceSha256": "3c2ea7b63eb82a26a99525de697633cc2f52a7de2c77ea288e0f09e53f35c005",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-se-f1-v1",
+      "sourceSha256": "3bc3138855673072a5755aafd2ccdcd8a1ea260096aa88a6dbba06b4738f471f",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-se-f2-v1",
+      "sourceSha256": "134bcba4297b39228102bffaa8003b550861e6ed9bee7745d6a5d525f2b514aa",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-se-f3-v1",
+      "sourceSha256": "41bc537fc22d19f3ea1007031ea70d285b3ec294e7369a2b9bdb5ded3b344515",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-se-f4-v1",
+      "sourceSha256": "adce649768ed96f599dd976e367d3ea0baf80422c57b9f9e45e6a2bd998513d5",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-s-f0-v1",
+      "sourceSha256": "ac2ac041c33c7c30df209f9c4fc957b69dcfc7ac8f132f04c1a364a1309cc53d",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-s-f1-v1",
+      "sourceSha256": "ae9682936bfb6ca62b0a2e9f340f90ae898ecdf6ab2b1438bebe8167d696264d",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-s-f2-v1",
+      "sourceSha256": "ba3e9a8a0b18fe8b0d59ad1b4b22db79e0187a44d2c3dfc7310c038c54353a42",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-s-f3-v1",
+      "sourceSha256": "bd32c24d1a665f2a264b71f99808281affd206b2be0bac1d4042e85432480c8e",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-s-f4-v1",
+      "sourceSha256": "5c9081b265e1b57cea35a983222e7270cad9212842215f780d4206682650f00f",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-ne-f0-v1",
+      "sourceSha256": "4de4f31763a6c333f98a4ae2f8adcdf0c40c73bb3da2fdaf618bcd2188634bd3",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-ne-f1-v1",
+      "sourceSha256": "75221c7cc7a355832581466ba346bf8653800f1651d3ea9cae854a2fbbca5ea9",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-ne-f2-v1",
+      "sourceSha256": "a09726fd4aea6b8581ae6395145e3042a6d1d4c77c803a2f2410d05125f05fd3",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-ne-f3-v1",
+      "sourceSha256": "556dda9d6c573c0da2cf8b146fda35b705bffbdd942a7ed3f8bedec262767825",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-ne-f4-v1",
+      "sourceSha256": "eb25b0bbe5a80e83edc8376cee9fd6c48c4f394527252d6369d4912bce64dbe1",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-n-f0-v1",
+      "sourceSha256": "fcec4cbb95aeb3e62ab708a81a2ccce0a8998496d5d3da5d926864648c7b7340",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-n-f1-v1",
+      "sourceSha256": "0bd5c0890093ae93af4e7e1f749445180831c74ffba3c19c2d4ecc01d82c5ae7",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-n-f2-v1",
+      "sourceSha256": "708076b295327bd0859fe779e3be93788bf89e651796d6e07e9a83e016e11486",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-n-f3-v1",
+      "sourceSha256": "c91f181d3d35188474bbee1d6963566b2c6251e41b66daba83f106b9c7cd6520",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-body-n-f4-v1",
+      "sourceSha256": "5fc440adcec7ce00b6861639f7d3995541292db7b96b12e45eca3f1cce06ab1e",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-chaser-corpse-e-v1",
+      "sourceSha256": "0f470b21a7b2e1b6752400873c133e1f525c36e1ec51099885fce193ff6d7c9e",
+      "sheet": "assets/coast/packed/tide-chaser.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-tide-ritualist-body-e-f0-v1",
+      "sourceSha256": "e3fac3eb79619d088bb2a9a03a87a6063f8532585f221286f905dca73a13f8c8",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-e-f1-v1",
+      "sourceSha256": "ef262c27e14da08770095604c9099fdfb7dcc149229eba40815c5055343b4a68",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-e-f2-v1",
+      "sourceSha256": "c065c7c1e35a331f59b4b66482e28b708a3a5c8e49e621377957874b497301f6",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-e-f3-v1",
+      "sourceSha256": "fa8f2e5db97f0f15b849b276c59114f6c69c9754aa57df56f674edb907b4fc71",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-e-f4-v1",
+      "sourceSha256": "7aa94eb001a35ae2168a0a3bb1571efc26b0dfa4439bcc757eb5ea556a008fb6",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-se-f0-v1",
+      "sourceSha256": "b7be333bf0f6b55ffde3435ce481a217e6da15e3c4d969988558a11bcedd630b",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-se-f1-v1",
+      "sourceSha256": "24e7f946e75a3a07d77b112164a3eb8b56a754ca47ec604c5229830df9e41fd0",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-se-f2-v1",
+      "sourceSha256": "2c25e194e5716968d0c24507d661c564056d43e8761ba5a590781c895b70d64c",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-se-f3-v1",
+      "sourceSha256": "91a2a05a2b052f8f2db2380650dc6a029b5c3db6d5331c62fcd55e015f643ca1",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-se-f4-v1",
+      "sourceSha256": "9422ffc3780facea47a21360a14312eb961ca9e0a371f613b7036fdbe8341da6",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-s-f0-v1",
+      "sourceSha256": "5c739096324c031cbbde9e34a9a9bc72bba3ea0dcaff4f1c3bd1f086245fb12c",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-s-f1-v1",
+      "sourceSha256": "6d6e9f95acf984c9fdd027fb3a00706a6909462cb2761f6762a89a90649fcbef",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-s-f2-v1",
+      "sourceSha256": "16cb06b4e842769e46cad2ceed0d6472cd119a198509b4bfbb2d58edf638a23d",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-s-f3-v1",
+      "sourceSha256": "2858294522ff20d9f01f6883ebaea66f94b3bdc1c88cb393875d9cece8ca1c90",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-s-f4-v1",
+      "sourceSha256": "88c95470ea8b66e8aec3ec53883e33b253d38a84ec97b1e0ab78482b89776e74",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-ne-f0-v1",
+      "sourceSha256": "be84f1baa5a38b7279c5a086d5724334a9a2033c67010f4e575594e67e3c4677",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-ne-f1-v1",
+      "sourceSha256": "07f79698e36cda58dd554621839217d6c2be5bce523ac5d76fb5e4bd702be506",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-ne-f2-v1",
+      "sourceSha256": "7dc035d92ca477cf2803c7d83be47dad8268e2582867c27a53b6063e217209e0",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-ne-f3-v1",
+      "sourceSha256": "eb4b4a2c21b009e0b04f0a49f266964dea5e2a2ec11730b0188efa81812df0ef",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-ne-f4-v1",
+      "sourceSha256": "25b238f9bf0ad985322aa0764423e13a7e63712baf97f8610c2d6c68f8cbc9d3",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-n-f0-v1",
+      "sourceSha256": "a4c49aa5d42a680660d0443c1ce0a485efd2c5d6fb36c58dc0294b31978f4437",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-n-f1-v1",
+      "sourceSha256": "43a6ada9d45ad7a23c23ff4ecc2f14ed996fc2988b1de4094f01beefa702e83c",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-n-f2-v1",
+      "sourceSha256": "81ddf84ce679df128df166f70044a7623bcd73d931da57fc8f8fca078264986a",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-n-f3-v1",
+      "sourceSha256": "7536f3ce33740ed265fb3070cc276c497fba55f365df82edd375e7331417fe0e",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-body-n-f4-v1",
+      "sourceSha256": "691073707228f58d8e98f79ab368bebf14648c32cd8156efec776d4174463a68",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-tide-ritualist-corpse-e-v1",
+      "sourceSha256": "2517122ede8b978ba97e6cd41373a283088063ae7aa365766b81eefdeee8db27",
+      "sheet": "assets/coast/packed/tide-ritualist.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-salt-hulk-body-e-f0-v1",
+      "sourceSha256": "c2d16b90c3d76fb92de7849143fde0dbae11e0d824448f52da0b757f6f8d6301",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-e-f1-v1",
+      "sourceSha256": "8d0284708c454cb7e41a4f2bc1f6a7dfd712ab472218e2b6bc00ee65111eecf5",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-e-f2-v1",
+      "sourceSha256": "f966329d936e848591ab561b60beb046766d58b38ab96cba75304b55c8405394",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-e-f3-v1",
+      "sourceSha256": "e8a757187dc5dd15bdaa762802423ec047ae2b831746378c111cd0109d79aaaa",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-e-f4-v1",
+      "sourceSha256": "e0bf4fce214af205aa31eb64b98ca6ec7fd1c5fb9ad4047ae38ed3cf52130233",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-se-f0-v1",
+      "sourceSha256": "32a7e5397b4d437b1c173f3fab20cb93b1778777221aeb51c3a4e6aa9bd1c49c",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-se-f1-v1",
+      "sourceSha256": "bec0a7bb36fdcd8e6062792087e46c9d204ef72d8ee5486c934c5c0c1be9186b",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-se-f2-v1",
+      "sourceSha256": "1bcefa9ac5830ba45a1e85f3b1ea23b3fac96e362cf0402489246f23724fc0d4",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-se-f3-v1",
+      "sourceSha256": "cec3d4b8da766edebfeccccc7d05ce4281ba2c7eb13141eee386835bf5ce84a9",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-se-f4-v1",
+      "sourceSha256": "46b27a98a285d10d5ba93927e530f0953854c3c011c7778f6ccb3149c066bf57",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-s-f0-v1",
+      "sourceSha256": "2d89e67aedd4065b54babe95c6b2870c2e1452cc4e3c71e1fa11decf73bbc8fd",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-s-f1-v1",
+      "sourceSha256": "8b389c92f2b3030547e23d1782431120f6bd1d71b0c2d5ea753a7b193d0c79a5",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-s-f2-v1",
+      "sourceSha256": "1f0e07a099f962e4a1b9ee781a1ac5c3043d0c4fd44e7c956464778d59e37ba1",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-s-f3-v1",
+      "sourceSha256": "f0ca94077dd9b9722cce108f6d821e536b1e2a2039405fd1afe057bb18202cb6",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-s-f4-v1",
+      "sourceSha256": "603b726528e97148222a5422b507ecd489717520ec244a4857e90b65e300155c",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-ne-f0-v1",
+      "sourceSha256": "06d127cdea52148bab917a1fbcc5c54d3b0b8c547424ff5c0ee9d799c7a98860",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-ne-f1-v1",
+      "sourceSha256": "e24bea51c701fb06ff457edf2f0b1a017730f50c5ebef013b327f4ab13c5d001",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-ne-f2-v1",
+      "sourceSha256": "38696f04d4a39835996209cc48dd96e1b54b40f5842235a24cdd4c723ed40716",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-ne-f3-v1",
+      "sourceSha256": "dc5dc8c7377b32c1c3b21d0c947ebbb1543f59b0a5959afac8bed5f8efb5c34a",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-ne-f4-v1",
+      "sourceSha256": "4beff3a3b42e2c4d9b70aaaa2f382a750a28232dd4ada9144da23c9f62362a66",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-n-f0-v1",
+      "sourceSha256": "cfcdab63306fbe88d06183b9db4ea144c47cc6997136a77561630d00b367f4b0",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-n-f1-v1",
+      "sourceSha256": "c515544e60f43b0cd7c18d312656456e876a4ec540434e664accb7d83fc79e96",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-n-f2-v1",
+      "sourceSha256": "5d7563e96e99086ad9906bc3a30344c29bd667eaad4c884a866c61792ff54d3f",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-n-f3-v1",
+      "sourceSha256": "b0cfb8439eaf0b37b86ca94ed54c7c045e994a4134f0a6b027b365c1d36da834",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-body-n-f4-v1",
+      "sourceSha256": "b4fa1d677c46143e03267a18ac50f36333fa299f18c115ab1440fb8537db9fdd",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-salt-hulk-corpse-e-v1",
+      "sourceSha256": "004bb2ac8f73fc3bbf6bb7f4047c7f4d2188cc6acdec621bc78475bbc0379c2a",
+      "sheet": "assets/coast/packed/salt-hulk.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-mercenary-scout-body-e-f0-v1",
+      "sourceSha256": "4a3c6876cd37d281dfe239db700061e26e968dac8333049dfe8075aa9c448adf",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-e-f1-v1",
+      "sourceSha256": "2a10637b323368f1b401c4ab99029195187d3b7f3b346e4b2f304da06f0e8fd7",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-e-f2-v1",
+      "sourceSha256": "186fd4112d833d1254d48d75cbde1051c2365b59fa2059c90d4ad87679497d31",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-e-f3-v1",
+      "sourceSha256": "3e19a0446b863eca06245d5349e58410df01abd1e7be93fd2d24faa1070d7808",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-e-f4-v1",
+      "sourceSha256": "9a435ee8f4b7a4f945a6540a051cf4410a79609a71cbb53a015a8472e1f21549",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-se-f0-v1",
+      "sourceSha256": "4e79e98fd52dde8565aa58536afae9c46d0e1a9e091055b6dfca5cf1c110931e",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-se-f1-v1",
+      "sourceSha256": "b921466c483444f9747a64f4d1db059fc3c4bf3c70170c7ef16248f837737d89",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-se-f2-v1",
+      "sourceSha256": "b74cebb652d31d19c8bf4856ea9b659d1c23016d21588f4134d334200849a16c",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-se-f3-v1",
+      "sourceSha256": "257a892e783ce0095c7f6d88289ea6d87bf0eaf094bcfee7f576e4e7e0fed676",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-se-f4-v1",
+      "sourceSha256": "1d4115ce708c1ad66a7f2713c622d7347b03c6316a5b578429cee4bd03a45b61",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-s-f0-v1",
+      "sourceSha256": "2a6ffacd29c0e55fd557b30e169134b0ee565a462c6ab10db3c2bd71b4cfc8d0",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-s-f1-v1",
+      "sourceSha256": "9b8472bbb43cb50526a998a613e0b8917d05c44798d33cb9e213bd4e2fa285b3",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-s-f2-v1",
+      "sourceSha256": "0f5b6ecf2f1bcd30883482b1fe693ecbcbf962480eae9719bb3f323327adc484",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-s-f3-v1",
+      "sourceSha256": "49f40594fedb0654443f0ed49a532763a380199e452ddaea6edfb412cea50c6a",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-s-f4-v1",
+      "sourceSha256": "8f06df79fd45482e08466a01fbfa2bcd9383f5c6a9c7a6cf09137199d67e8eb9",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-ne-f0-v1",
+      "sourceSha256": "1183078612a666705311f63d11a711018744f9277b497117f7bf5ef3c25ca899",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-ne-f1-v1",
+      "sourceSha256": "d6c778ddc049d02b9bef7f0d7771fcee30b7d58be0847e48182a256adb9f238b",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-ne-f2-v1",
+      "sourceSha256": "17b5a8955049e17933fd3babab9bcdd53132378e8629e385bdc22c88a6d011fb",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-ne-f3-v1",
+      "sourceSha256": "78d28e1e1575b6e4533240ef1c7c5381b1117f92938f92ae8d4c445c39d503cf",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-ne-f4-v1",
+      "sourceSha256": "aa7475b029c25bb9dade1c40704a6ad882f10f72172089561cc4422afd8637de",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-n-f0-v1",
+      "sourceSha256": "41ea9f011dcf53e5288090643821dd0b48ca59797ee91e7a6bc00ed0a2e21bfb",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-n-f1-v1",
+      "sourceSha256": "e11f0fb4b28ae4b50ce2b2e4a79278df6c6edaf09a025690f42372f1881d3d4b",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-n-f2-v1",
+      "sourceSha256": "78ace4a3b5dfa1911a5c5e51ddce748b7cb845ccca56c429b59011a4094cb3da",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-n-f3-v1",
+      "sourceSha256": "c8305d20de0274c45eb1056a50cbed24098319b35cf57b78080772addb621f0a",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-body-n-f4-v1",
+      "sourceSha256": "b7bdaef130764da4b3b048c33b6db177d4985ef83c463c9cf2d54b56f1d16c55",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-scout-corpse-e-v1",
+      "sourceSha256": "9f6ce423512889d080dfd674a76e639fb7ec2b7f2c36785a7f9079703b8877e3",
+      "sheet": "assets/coast/packed/mercenary-scout.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-mercenary-assault-body-e-f0-v1",
+      "sourceSha256": "0bc8d4d3837c666cc8c7f2fac59b13ed00e8109da1ade9bb99fa8e0388358b1d",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-e-f1-v1",
+      "sourceSha256": "7cee9bf31dd3cce56bb033a2867a4f7ba33c00cfc46df07fc8d0a31bcf4ef75f",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-e-f2-v1",
+      "sourceSha256": "063b9237b70cc0ac7f4e47300a845ba174f5df796f8d098184eb77fe509fd97b",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-e-f3-v1",
+      "sourceSha256": "5f0e652c1d486c68c335e99b0bfae22751f65b81cbee012c58424e30a5c6d959",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-e-f4-v1",
+      "sourceSha256": "98d99e4741a61683c45bfc68109cb03a70f960b71288e84ee91a9a2748029bd4",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-se-f0-v1",
+      "sourceSha256": "27f38c66084a0ea12815851765bc079ec5d2de368f39dd0de5d4ffb6a6e8aac4",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-se-f1-v1",
+      "sourceSha256": "82839dbe494d79d91aea8b4222b76c697410fbbf7f9cba3a1805060ebd701a65",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-se-f2-v1",
+      "sourceSha256": "fde7e5fe22fbbdf20ddffd87b38257d8b460e67b95d69764f46b9f352ee8170b",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-se-f3-v1",
+      "sourceSha256": "e25d3d633439950daccd3acfb77f93cfe08ada159229af4e8be65859496b54e8",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-se-f4-v1",
+      "sourceSha256": "62f84583cd557e18a271d2afd4f70a86cef4ab0b63b6f1d541e5f36e07d7fb1e",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-s-f0-v1",
+      "sourceSha256": "23ab5e1078274bda02f6093359131a4c3ab4b78893771d8cd92ffda6a6f1198e",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-s-f1-v1",
+      "sourceSha256": "7dda8441af932e1f36bff41656fe6db5e1535650920060fa3cdf8856a0b15734",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-s-f2-v1",
+      "sourceSha256": "9bf58a71dd0c9123c8fa8576b1f02ae7a0bb524d0e831accbd8258ffd33cbecb",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-s-f3-v1",
+      "sourceSha256": "f65fd03d40fe5e3bb6477d880ee130f154045dbe14d3902d4b30185dc7533ebe",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-s-f4-v1",
+      "sourceSha256": "a8a6b3abad80b620ebca8554699d2ca80ad4de80c9309497338546e656b8122c",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-ne-f0-v1",
+      "sourceSha256": "7c0f09ad84a1b884ddffed2e7ccffd45fd38974ee16e4e271975099c433fec31",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-ne-f1-v1",
+      "sourceSha256": "53895c8853f9cba9b53930d1fd749e3f9e9d23b13fba8923f1911e1406bb701c",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-ne-f2-v1",
+      "sourceSha256": "9a101a3d37be04a1e9719dfe4eac44f0dfc4a8b87e241ae720a574c8b7e68e69",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-ne-f3-v1",
+      "sourceSha256": "e7113f0ab4acb7607c1540fe57cc63a301505d9868356d63234112f0a1d2f423",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-ne-f4-v1",
+      "sourceSha256": "b2faa46d866e96ea0540d1da2fc4095fee67f0ed8f8663cd6675d19aa5eec2b6",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-n-f0-v1",
+      "sourceSha256": "d30a6341d1414317557a2922629d2ca039ccda5214261aacdbc32593c7bc4445",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-n-f1-v1",
+      "sourceSha256": "063cf762f2677cc86acec9644747dfe2f5a6017540c3b8f799be6dfdad36ea5e",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-n-f2-v1",
+      "sourceSha256": "34fbf6a13a448a3bf7db644fb314a52350e6b6c4c76881511ca8834ee5085c8b",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-n-f3-v1",
+      "sourceSha256": "47f73d1bf4ea980e8dd75717e51b4a91eef9d830c599cd989be43a6ef4135fca",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-body-n-f4-v1",
+      "sourceSha256": "5b052f8386047b691950c55f3973f30ad4861dadf87755566e4e9fba0868aa2e",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-assault-corpse-e-v1",
+      "sourceSha256": "d0974ec95c48f1f77e8421838dd389773cf05c940fb49d31523ba6e069eaab0b",
+      "sheet": "assets/coast/packed/mercenary-assault.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-mercenary-support-body-e-f0-v1",
+      "sourceSha256": "62ebcc1f307070826947414a832f253977eb951c657dcef277c94fc3bf599847",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-e-f1-v1",
+      "sourceSha256": "5e4961b05cfe5cdcc64e92a8340d80b36aa1f6a40de8bd264518b6f1ef5a75af",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-e-f2-v1",
+      "sourceSha256": "e04432823d3bdab40cb03f5d858484b463d03498905a4bf883eb24f6aa921c81",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-e-f3-v1",
+      "sourceSha256": "c8a8153e90064f428ffa513a668379883c83c08f77aded15691fcc5dd3c2bdb3",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-e-f4-v1",
+      "sourceSha256": "edcb7305d5c7fe2f04c97c2c82e808cbf8d60694e09932752df83d1f36fe2782",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-se-f0-v1",
+      "sourceSha256": "fe91458cc5fcbbf5cbf02b6372e8a33b61a12547c5c45ae085fe9542ec874bfa",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-se-f1-v1",
+      "sourceSha256": "3533d9f376ca47e3ee4fe741366a209f5104de5620efd8e18cabb3ce0c1279e6",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-se-f2-v1",
+      "sourceSha256": "b43c0b607d50be379534301de1f277c241c3c760de39a58eab1d3f197641f346",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-se-f3-v1",
+      "sourceSha256": "a8372c3a04cf879e43e8ab983dba32beb20b1798c3792ec14b591d08faf743b2",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-se-f4-v1",
+      "sourceSha256": "ab5e099e5c8fde1d083a8fb9ecd4aedcf61e4f93937338dfb06617b719866c64",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-s-f0-v1",
+      "sourceSha256": "524ffd03b13a55acc12fd941b7f13c57253915a906b6d20a17e3a0f1e92c7a91",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-s-f1-v1",
+      "sourceSha256": "5894050cd8b5fc255b4bb2948ba237e0c4c87ad104ff5428f38fcf2966c4b2dd",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-s-f2-v1",
+      "sourceSha256": "2713ec13c187caad7a67ee364e0bf1f4d45cf7851084b9a630e8feeb0e0a85b2",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-s-f3-v1",
+      "sourceSha256": "b9d4619396ed7dd3de0d386b5b0969b72ca23fe2c0133bc224f1dee00ab271e9",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-s-f4-v1",
+      "sourceSha256": "b0955dda3fa692550a6ed8985b37821f926f6324b60e10af217c73c318973140",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-ne-f0-v1",
+      "sourceSha256": "62b40af57ed687dc3499d6a1e66c6e9364f9b19bcfdf07189a826bfea352f855",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-ne-f1-v1",
+      "sourceSha256": "5ad8edebb0cb30e1faeb5a563e91d8819a527c869a5c23240515c11794849415",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-ne-f2-v1",
+      "sourceSha256": "02eb82e0bf3d17c741f986e94abedbf848ea6957df8a14208a71efe0226e57a1",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-ne-f3-v1",
+      "sourceSha256": "0d86b38ad7ce68a063442fcf0aafbc33710d605039ff1fc7844b1fb64e8bfa2c",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-ne-f4-v1",
+      "sourceSha256": "26bc1facab9cf7d066d450736fc4dc89c1cd2256b49d0a401ad4c67960605f26",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-n-f0-v1",
+      "sourceSha256": "b9523e822dfab93bda76f84b8e1b286b95c2acd5b8573e8410ce08af801bf60b",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-n-f1-v1",
+      "sourceSha256": "d84a4dfe3c7a7e67234549a2decb5ed929c16876268c5e7bccc223503e19bfc7",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-n-f2-v1",
+      "sourceSha256": "66d3e0e8e6734a1baf1346f40f1195d44f11057f5e3340c339b1d15d7ba83e27",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-n-f3-v1",
+      "sourceSha256": "2bc3167c0a53eceff1feac51ea8f75847eaffb848320c11e696a5fe39c725eb0",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-body-n-f4-v1",
+      "sourceSha256": "50a8aebef06c62c3a03b80f7e74645dfc05519ae3eb423c257b879e8b260f1f1",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-mercenary-support-corpse-e-v1",
+      "sourceSha256": "5309bdafcf2c17c6c054964035fcae6ef8164f1dab5e80997af65eb33126f6b0",
+      "sheet": "assets/coast/packed/mercenary-support.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-recovery-leader-body-e-f0-v1",
+      "sourceSha256": "7014a9683ecd90ca6064bc8054dcadce3c8a10cf9b0520648f062f12bfe045e4",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-e-f1-v1",
+      "sourceSha256": "737aaf5e43eb50124ee52a846d3e5e17c5506b774156ec9aee976528f56dbcf5",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-e-f2-v1",
+      "sourceSha256": "d741514982a422fb9aafea4943fd4d30c041d505db50d225e2ec89bbf6206ea6",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-e-f3-v1",
+      "sourceSha256": "1298105dbf6b6d89ed67ea6fdb2fc43feca8c274020cf1660dbf2417e760d531",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-e-f4-v1",
+      "sourceSha256": "78918c76e7367dcd5f67365d2ff2c6f1e9b0660502f9a71bd94e97ff4d4e7154",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-se-f0-v1",
+      "sourceSha256": "950e28ba166c681a1e02fcd0457c2e56b1466556be4cf75d4aa2adbb5b0a0975",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-se-f1-v1",
+      "sourceSha256": "17ce071574772a7f8a6f34a6204da9b544598f86fef1f67271d81be1704fb483",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-se-f2-v1",
+      "sourceSha256": "dc4e5318123906c7822d6c999ab80f79a9e8d2d0c1bdf5b31066000c1cd6e7a7",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-se-f3-v1",
+      "sourceSha256": "a0280695767c20d1e74db377213aa7039d83238af1c8af79cc7879e601462e03",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-se-f4-v1",
+      "sourceSha256": "1d8b2a509d049a2ca3c1444cfae340eeafbb8b492d7cbd16a398abd4ced3e261",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-s-f0-v1",
+      "sourceSha256": "580c8073c0eaffaaad0ff950cf78ad25caaa66e4067fe0dcab659563cfc3720f",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-s-f1-v1",
+      "sourceSha256": "ac8f97e9fafb86afdb8feaac21b598fda8cb3554e844fea78d4775d576160eaa",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-s-f2-v1",
+      "sourceSha256": "25141f22d90473eda148ed7dc4f73c725cd3cdc85ebc8a1011090a333c97e1bf",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-s-f3-v1",
+      "sourceSha256": "567381435760330c7e7eecbf05e7c3150f06331d09afda12f35feda17961a5bd",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-s-f4-v1",
+      "sourceSha256": "9da13a1ecfe25e0bfa3b568104b6bde7ddb965781e3275140787f92900c8a0aa",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-ne-f0-v1",
+      "sourceSha256": "7349a7f87d904a214beb49f3bf27541d63526a77282f365447a9ef43aeca0140",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-ne-f1-v1",
+      "sourceSha256": "c9e99a6a96775a1b859df64503a4fff403215052e30d1ab18cc3410a48a1f391",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-ne-f2-v1",
+      "sourceSha256": "e0fde65dac665c28d98612c981f3de59a398142f3465a16fa2b0dc2bdac38808",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-ne-f3-v1",
+      "sourceSha256": "a66d643ff6a2f183447b2b0927d0e66bca099f9a26f8ad1b62dcfb2d954d6294",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-ne-f4-v1",
+      "sourceSha256": "d4a37b609219b1e66d613bf3c8dad5d7affd420613f988e2c51bbe24722341d6",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-n-f0-v1",
+      "sourceSha256": "2a484fb3f847c37c0562403d31f61c3fce46adaa5a3f0f1452163ff014ca3355",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-n-f1-v1",
+      "sourceSha256": "ee74a30c7c8bb5c3161b7b642d7bbadcc978378760115a8b217d445e06c70692",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-n-f2-v1",
+      "sourceSha256": "7c92493ee7484e6a86cda11c329c8f09066a5280fcb5e84ce554f9c183db0568",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-n-f3-v1",
+      "sourceSha256": "a4115d3c7c549888df83fd0cf308b02cc96d2e08076de08f75d7364cac19d9a1",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-body-n-f4-v1",
+      "sourceSha256": "2b045ec038956a83f6d5ef8fe7d95406fac5cc0d964e5051f8095c03d010c125",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-recovery-leader-corpse-e-v1",
+      "sourceSha256": "72308c608b1b4f60d84472be44590608952d1cceab0a5f6c93f9c201490eff28",
+      "sheet": "assets/coast/packed/recovery-leader.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-blockade-sentry-body-e-f0-v1",
+      "sourceSha256": "9f1f9674485d4ecb75b27521069e4487eaa596938f1933f7129cc1d8eab93c77",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-e-f1-v1",
+      "sourceSha256": "d8034109caa0a0e976b61c217a4e9990914d971807e14af4a00978b1f75183b0",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-e-f2-v1",
+      "sourceSha256": "a1beda78ac54c0f6806e67db53667f6532833970fcadcb423d149e7b68d240a3",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-e-f3-v1",
+      "sourceSha256": "f77bcd98b67a284236c15a3b34d2b5f52e5fd9640eb87b318f81f01e1ec2c90d",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-e-f4-v1",
+      "sourceSha256": "ece3963b52a8d80b30bd39a7ad6a57e96204b9b7718a01835a2a85e6582e0ae7",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-se-f0-v1",
+      "sourceSha256": "dd6ba95c4adf09083bec6036b5cab19a528665bdc4a943860b4e181c92c8e577",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-se-f1-v1",
+      "sourceSha256": "49967dd3dec05eba6ce24fadc4e4cedf74c09f95fd2f83cecbdf43ad7150bfa2",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-se-f2-v1",
+      "sourceSha256": "575b73a6b79151efb5dcd621b322f958bd4c08d23beb9dd68a3e33348fc1cc31",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-se-f3-v1",
+      "sourceSha256": "77bae05987e1987e01ff87708b1e79d7f4d55a4f79a144e4bc8c60923814941c",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-se-f4-v1",
+      "sourceSha256": "b2cc4303b88ae51ad71414123f7846519a14dc258a18246a21f95cf980896616",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-s-f0-v1",
+      "sourceSha256": "40b42b4abcfe529a09d9f2d579dd1f2db37c2598a51cc14222f617e8b05fd13d",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-s-f1-v1",
+      "sourceSha256": "5aed69f98e3df31fe9622ddea571ee291a60b62ac4890331e1b0645e5d01e581",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-s-f2-v1",
+      "sourceSha256": "b63a0fb1839946c0291fe7d90886fb0e130c1d270c143fdfd20d59865c6e0583",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-s-f3-v1",
+      "sourceSha256": "8c217c08aa36f8378a542871a124c95e9560de3bc7027719c69e0cbe61ce8568",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-s-f4-v1",
+      "sourceSha256": "6b368421aed364c3a9f453c16305e5e6713a0197c761f71c2e1d34c12864205b",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-ne-f0-v1",
+      "sourceSha256": "8250f423b106d1e4917484f32df79ae02bde2660583e56a2e3416e3410ae7771",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-ne-f1-v1",
+      "sourceSha256": "85dd3680c39c4a8772f28c65ffb145616a187570bb757bfb859f291f2b0050af",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-ne-f2-v1",
+      "sourceSha256": "a6c1f606096ffa1b24199a6ee5eb35cb59c12b92430a72d5ac76e310d783fc44",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-ne-f3-v1",
+      "sourceSha256": "3adc53c609481f737058d5c43a7fe183a286565300e42e8ea61648d5be5f9a42",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-ne-f4-v1",
+      "sourceSha256": "bfc26caa4a06551c855ad7921941cca9269f7a4546385e2c0aef5ca9b07ada76",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-n-f0-v1",
+      "sourceSha256": "deb7957a920d86db4db0096a2ce089e1f32bcbf6e64a2eeaa625e11c039b71f9",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-n-f1-v1",
+      "sourceSha256": "c47004772a5d4af79d81abb352b6ece4008e5d816df8d66a82fa888c439dab03",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-n-f2-v1",
+      "sourceSha256": "d8903136480bf126ace23efe5f8c8f6c9afaccc1156996987924106c58fb18f8",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-n-f3-v1",
+      "sourceSha256": "0d6a771de112a60d8b92ce1194507549ad764de491d9d598b6a7bdfcebc751ef",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-body-n-f4-v1",
+      "sourceSha256": "0da46b50123ad99387cb6c2794b18b58d740607607b269ca0328a356e38365d9",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sentry-corpse-e-v1",
+      "sourceSha256": "c681e6ade019a2a5dc71dfe0cc1c10b1c9388665cbb224fc895cd22552cb3d50",
+      "sheet": "assets/coast/packed/blockade-sentry.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-blockade-patrol-body-e-f0-v1",
+      "sourceSha256": "5d23804157d5212a2302ea89bd8c051569f235b61fb044133d3c3b5d2b9706eb",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-e-f1-v1",
+      "sourceSha256": "d5098e880282e59d70873e67ec3ccdb4acb9daa4b0bb06aa1e2c909e6e229619",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-e-f2-v1",
+      "sourceSha256": "553e536fa4f57630a6ba073aa9713d1de653e2df2de0e0dc460d61715846ec78",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-e-f3-v1",
+      "sourceSha256": "dc6ca334a44fd7b389f9896b04218aa4f2e0aa9859ac7de5bb200ccf4eac14e2",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-e-f4-v1",
+      "sourceSha256": "e830821ed342a0143a08dcdc363661ced7892379341ec9d9d516faff58bf696b",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-se-f0-v1",
+      "sourceSha256": "fe73204b2c1ac4f18ed64e7865592c4ad3898c064713d62ea85502604dfb9fae",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-se-f1-v1",
+      "sourceSha256": "ea80affb6e49d18ce16e461c57c51c13de50759776de7bd828682b7a4800f313",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-se-f2-v1",
+      "sourceSha256": "316909511cb0254c19a547059d28bf86858f09914fa7dcdf549a005a9013a211",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-se-f3-v1",
+      "sourceSha256": "9b96c934e5e3612b83532f2f7b8c4e0988f36d660fd4f4d162626e0f34a8041b",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-se-f4-v1",
+      "sourceSha256": "6b33c41a7c830a6a48a75d9c7ac915ddf43ff434bf78b809b521d3152e4349cd",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-s-f0-v1",
+      "sourceSha256": "c8856f07ef0d59de144ad7de6555cca551db800d20be67c05eed76138d812e3a",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-s-f1-v1",
+      "sourceSha256": "5b2553110e641a89345e4e89981faa7f94e634e9d95ef257a4fe0eb173af69d2",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-s-f2-v1",
+      "sourceSha256": "3194b9cf037e0e2195bf94329a29bc7519dfc2b9beee5c81f0668a4a2e3d2969",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-s-f3-v1",
+      "sourceSha256": "f936983934d98d877cbdaf281137c5740d6da1fda1545a625f5acde26e6ebd8d",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-s-f4-v1",
+      "sourceSha256": "4eb3793a35427c310a79c8e3580e1f9e143d6c02a00023e897da8df1408c105c",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-ne-f0-v1",
+      "sourceSha256": "6ccc51048d5dbd0c043c5c26dc74216948828a6c89dac60ddb41c7d5c28a4de0",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-ne-f1-v1",
+      "sourceSha256": "70d9a0ef95657edd44b59a47feb1a015afee48818889b8f6b4621f949fbc7b86",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-ne-f2-v1",
+      "sourceSha256": "924720b7e0ac08fc25b5870b8df3978704fb80fbaa03f50681c93300d8634ae4",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-ne-f3-v1",
+      "sourceSha256": "3e63488f45387f6351c2419a43070a64c396629e05e08e686df588c9e6c8f13b",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-ne-f4-v1",
+      "sourceSha256": "2ee7842f8caf66d37174dbd491d22e95760066f0485b0ba5eaa9319cbf81eeea",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-n-f0-v1",
+      "sourceSha256": "270e3e0ed303901ba675e706018716a3f42399d0418c59fde4c8410b37d40245",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-n-f1-v1",
+      "sourceSha256": "e8689501b007a7e114aa3f898133a90ff856a8829002bb950b3a5d59a29a0a62",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-n-f2-v1",
+      "sourceSha256": "37a73d2d12a6b58a915babe080dc36cd4101595b3d4eb88508089629dbb1191f",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-n-f3-v1",
+      "sourceSha256": "33eb3eb8e5485389d1c7cd659e59722da7747e90b26694eeaa8c03be2820627c",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-body-n-f4-v1",
+      "sourceSha256": "6cb4d6de55d5e31777aa9002beda16acd075bc2b655f8e886c43bb89e85776d2",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-patrol-corpse-e-v1",
+      "sourceSha256": "cca6050f3734e545e1333e71b9fc9c380e34de59d72663cedf18e17f8e4bde0b",
+      "sheet": "assets/coast/packed/blockade-patrol.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    },
+    {
+      "id": "coast-blockade-sergeant-body-e-f0-v1",
+      "sourceSha256": "88a9041cbe80eed6df0bbcb0b8ce1ec52ec89aec5108ef32372357e0d802fdce",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-e-f1-v1",
+      "sourceSha256": "606a761b7083406de841cfa0eb98264f3588a7c313af72eb05ab1ef33740a8df",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-e-f2-v1",
+      "sourceSha256": "acbd92e7d0c8cf2669be5e483a1ade68bef3e25710c6a38086e01b91a56994ff",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-e-f3-v1",
+      "sourceSha256": "21eb6efa4a6b416e334a70f51ac1c98851fab73dcdf893bfaa533d4ff997002f",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-e-f4-v1",
+      "sourceSha256": "6924de05b30f1feeaaa63c3ef71fbc7854365e8535d92fd58e4fca2f016e49e8",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-se-f0-v1",
+      "sourceSha256": "2c0a0c90a0f54fec2e60897a85869381ed3930f0075db8dac66ec2b43e362fb8",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 0,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-se-f1-v1",
+      "sourceSha256": "91873ced14af81afe43bfb2eafc316fc2bad381d9486d0388066a78a8e7a948f",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 32,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-se-f2-v1",
+      "sourceSha256": "bb232a3e7d95967665454cc18843c9f311b310b1c81ec9f6f1404a95747ae104",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 64,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-se-f3-v1",
+      "sourceSha256": "90de96c85ba8f33f468047496259d9c9c855ca5068d7bcb9e46e6fe281800835",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 96,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-se-f4-v1",
+      "sourceSha256": "bb6b7779caf2d205a74fccd8a577ea5954967cc9ed31c800d5c4ee60316ce892",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 128,
+      "y": 48,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-s-f0-v1",
+      "sourceSha256": "51802e60316b4f2dbdcb97376d18eaa01c98de05b469256e13667429cf2bc2a9",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 0,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-s-f1-v1",
+      "sourceSha256": "8f89aa93c1c8056235931f9fc2d847d5eac9ae96452f8c940647583c51ba6e80",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 32,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-s-f2-v1",
+      "sourceSha256": "6401bca4c3b00d6fb542e13202d4a0b2b5445a08685c9eb26636e85ae785352a",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 64,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-s-f3-v1",
+      "sourceSha256": "79645f8e7df4fb69f67c83cdc4b3822a73ca84062916c7229dd6d5f592985075",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 96,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-s-f4-v1",
+      "sourceSha256": "df83e7b689f3bc26b89bd51e24587d0ee42a968fc9b76ded1391b08460dd591a",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 128,
+      "y": 96,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-ne-f0-v1",
+      "sourceSha256": "837e3dfcfaf0477e6ad0d2af6b9b74fafe6c84c7a6b25914e51f363f741abfe8",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 0,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-ne-f1-v1",
+      "sourceSha256": "d2caa1b25f494a900d34693db867d8029ef9df904c8d522190a2d037e96c08f1",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 32,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-ne-f2-v1",
+      "sourceSha256": "2581af9a62b86e16393b88877cfb68d740909ccf7303fa8946ff1b46888576e7",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 64,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-ne-f3-v1",
+      "sourceSha256": "4eb6df60c9cbbf31d26942181a8a62b9162a5a891ce24a9a4988c140953ddd85",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 96,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-ne-f4-v1",
+      "sourceSha256": "7789eb3dc08e50f0f703a60351388721d0c1a801dc79fe7ed44933ed955c517f",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 128,
+      "y": 144,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-n-f0-v1",
+      "sourceSha256": "7198b6036659e8424549ed26f68d03e2978e21cde4bc5e5bd37641ad7dc6f42d",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 0,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-n-f1-v1",
+      "sourceSha256": "d4aa618374bdf605263722ae6851389167e6e5547d6920604e87e38ae378680b",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 32,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-n-f2-v1",
+      "sourceSha256": "a41cbbbcd238a91b673bed513e7d253d48d3ce75891487dcac820958e136b519",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 64,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-n-f3-v1",
+      "sourceSha256": "4b1efca1ab5dc9b2ba0339af876323fb29a992ad70239afe3811a4899153aa3e",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 96,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-body-n-f4-v1",
+      "sourceSha256": "eea6d398378311adc84e5e5494d15ebb77cd8309c291225c606d7b0dd6246523",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 128,
+      "y": 192,
+      "w": 32,
+      "h": 48
+    },
+    {
+      "id": "coast-blockade-sergeant-corpse-e-v1",
+      "sourceSha256": "50ad11c96c55fb1961c647cab6b4c98e83cf81bb04d01011a1c809d172ee83e4",
+      "sheet": "assets/coast/packed/blockade-sergeant.webp",
+      "x": 0,
+      "y": 240,
+      "w": 48,
+      "h": 32
+    }
+  ]
+}

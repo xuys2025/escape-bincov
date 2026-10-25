@@ -34,7 +34,7 @@ async function open(size, kind, tabs = false, fixedTime = true) {
     const ticket = s.prepareExpansionMutation(d => {
       d.profile.cash = kind === 'funds' ? 0 : 5000;
       d.profile.stash.items = kind === 'space' ? Array.from({ length: 60 }, (_, i) => ({ uid: `full-${i}`, id: 'scrap', qty: 5, x: i % 10, y: Math.floor(i / 10) }))
-        : kind.startsWith('goods') ? [{ uid: 'st-watch', id: 'watch', qty: 1, x: 0, y: 0 }, { uid: 'st-relief', id: 'ammo9', qty: 12, relief: true, x: 1, y: 0 }, { uid: 'st-pistol', id: 'pistol', qty: 1, x: 2, y: 0 }] : [];
+        : kind.startsWith('goods') ? [{ uid: 'st-watch', id: 'watch', qty: 1, x: 0, y: 0 }, { uid: 'st-relief', id: 'ammo9', qty: 12, relief: true, x: 1, y: 0 }, { uid: 'st-pistol', id: 'pistol', qty: 1, x: 2, y: 0, gun: { parts: [], devices: { laser: false, light: false } } }] : [];
       // 'goods': one sellable watch still in the bag; 'goods-clear': nothing outside the stash.
       if (kind.startsWith('goods')) { d.profile.bag.items = kind === 'goods' ? [{ uid: 'bag-watch', id: 'watch', qty: 1, x: 0, y: 0 }] : []; d.profile.safe.items = []; }
     });

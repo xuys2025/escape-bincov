@@ -35,7 +35,7 @@ test('risk unions preserve save/input gates, baseline order, prerequisites and h
   assert.deepEqual(ids.slice(0, 2), ['test', 'package']);
   for (const id of ['test:save-browser', 'test:browser', 'test:ui', 'test:title', 'test:desktop-input', 'test:mobile', 'test:mobile-ux', 'test:expansion']) assert.ok(ids.includes(id), id);
   assert.equal(new Set(ids).size, ids.length);
-  assert.match(plan.checks.find(c => c.id === 'test:expansion').prerequisites.join(' '), /pre-m0\.html.*pre-perk\.html/);
+  assert.match(plan.checks.find(c => c.id === 'test:expansion').prerequisites.join(' '), /pre-m0\.html.*pre-perk\.html.*pre-enemy\.html.*pre-gunsmith\.html/);
   assert.match(plan.checks.find(c => c.id === 'test:mobile-ux').prerequisites.join(' '), /未设置时不会运行/);
   assert.ok(plan.evidence.some(text => text.includes('真机')));
   assert.ok(plan.evidence.some(text => text.includes('多窗口')));

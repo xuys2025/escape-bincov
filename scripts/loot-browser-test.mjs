@@ -20,7 +20,8 @@ const report = { startedAt: new Date().toISOString(), status: 'running', viewpor
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch(browserOptions); report.browser = browser.version();
 const writeReport = () => writeFile(resolve(out, 'loot-browser-report.json'), JSON.stringify(report, null, 2));
-const item = (uid, id, qty = 1, x = 0, y = 0) => ({ uid, id, qty, x, y });
+// A gun item carries its factory state (save v6).
+const item = (uid, id, qty = 1, x = 0, y = 0) => ({ uid, id, qty, x, y, ...(['pistol', 'shotgun', 'carbine'].includes(id) ? { gun: { parts: [], devices: { laser: false, light: false } } } : {}) });
 /** The seed's original records from the game's own generator (tsx in a child process). */
 function seedLoot(seed) {
   const code = `import('./src/building-world.ts').then(m => { const c = m.buildingRunConfig(${Number(seed)}), all = [...c.loot, ...c.containers.flatMap(x => x.items)];
@@ -110,11 +111,16 @@ async function suite(viewport) {
     }
     finally { result.durationMs = Math.round(performance.now() - start); await writeReport(); }
   }
-  /** Enemies frozen and parked far down the quay road; the player whole again. */
+  /** Freeze the loot fixture's enemies. Authored program posts must retain their validated homes. */
   async function quiet() {
     await page.evaluate(() => {
       const { driver, host } = window.__bincovSample; driver.freezeAI(true);
-      for (const e of host.lastBatch.frame.actors) if (e.alive) driver.placeEnemy(e.uid, { x: 208, y: 1456 });
+      const raid = window.__bincov.saveSession.captureExpansion().raid;
+      // placeEnemy also replaces home. Keep these frozen members at their native posts instead
+      // of invalidating the next real SaveSession transaction (seed44 includes a checkpoint).
+      const posts = new Set(raid.maps[raid.currentMap].enemies.filter(e => e.tactics?.version === 2
+        && ['recovery', 'blockade'].includes(e.tactics.program.kind)).map(e => e.uid));
+      for (const e of host.lastBatch.frame.actors) if (e.alive && !posts.has(e.uid)) driver.placeEnemy(e.uid, { x: 208, y: 1456 });
       driver.vitals({ hp: 100, bleeding: false, pollution: 0 });
     });
     await frames(page, 2);
@@ -158,7 +164,8 @@ async function suite(viewport) {
       const ticket = saves.prepareExpansionMutation(draft => {
         const r = draft.expansion.raid, c = r.maps[r.currentMap].containers.find(c => c.id === box.id);
         c.inventory = { w: 6, h: 5, items }; r.loadout.bag.items = bag; r.loadout.safe.items = safe;
-        Object.assign(r.loadout, { weapon: 'pistol', ammo: 8, ammoRelief: 0, relief: false }); r.knife = false; r.reloadLeft = 0;
+        // A pistol in hand is a gun instance (save v6): a factory one under a fixture uid.
+        Object.assign(r.loadout, { weapon: 'pistol', weaponUid: 'fixture-pistol', gun: { parts: [], devices: { laser: false, light: false } }, ammo: 8, ammoRelief: 0, relief: false }); r.knife = false; r.reloadLeft = 0;
         r.player = { x: x ?? box.x, y: y ?? box.y + 12, rotation: -Math.PI / 2 };
         // Back before the warning when a step ran the clock to the tide; map clocks and the training window follow it.
         if (r.elapsed > 200) { r.elapsed = 10; for (const m of Object.values(r.maps)) m.localTime = Math.min(m.localTime, 10); r.training.motion.windowStarted = Math.min(r.training.motion.windowStarted, 10); }
@@ -674,7 +681,9 @@ async function legacySuite(file) {
     await action('enter').click(); await raidReady(page);
     const nextBytes = await page.evaluate(key => localStorage.getItem(key), SAVE_KEY), migrated = JSON.parse(nextBytes);
     assert.equal(migrated.raid.worldVersion, 'coast-v2'); assert.deepEqual(migrated.raid.containers, []);
-    assert.deepEqual(migrated.raid.loot, old.raid.loot); assert.deepEqual(migrated.raid.loadout, old.raid.loadout); await context.close();
+    // The migration only adds the gun fields (save v6): without them the loose loot and the loadout are the old ones.
+    const withoutGuns = value => JSON.parse(JSON.stringify(value), (key, inner) => key === 'gun' || key === 'weaponUid' ? undefined : inner);
+    assert.deepEqual(withoutGuns(migrated.raid.loot), old.raid.loot); assert.deepEqual(withoutGuns(migrated.raid.loadout), old.raid.loadout); await context.close();
     await open(file, nextBytes); await page.getByRole('heading', { name: '暂时无法打开存档' }).waitFor();
     const rejected = await page.evaluate(key => ({ ok: window.__bincov.app.storageOK, bytes: localStorage.getItem(key) }), SAVE_KEY);
     assert.equal(rejected.ok, false); assert.equal(rejected.bytes, nextBytes);

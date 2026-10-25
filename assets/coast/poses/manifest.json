@@ -1,0 +1,1137 @@
+{
+  "schema": 1,
+  "source": "assets/hit-feel/sources/*-hurt-sheet-pixel-v2.png (#96)",
+  "generator": "scripts/export-hurt-poses.ts",
+  "note": "Runtime hurt (frame 5) and recovery (frame 6) bodies cut from the pixel-v2 sheets, with the one-level canvas drift on semi-transparent pixels restored to the idle frames' colours. Anchors are the idle frames'.",
+  "sources": {
+    "assets/hit-feel/sources/scav-hurt-sheet-pixel-v2.png": "d67145acbf78a66658e95365f488dd2cc51740a6fa7941dc7335deadef6806a9",
+    "assets/hit-feel/sources/salt-hurt-sheet-pixel-v2.png": "28a3cab61f3aa489b7f694dd1e6b7f9d55746642cc369b880fac836496819fd3",
+    "assets/hit-feel/sources/elite-hurt-sheet-pixel-v2.png": "ec40cccda41a94374e5c47cbb701831b57073c564a070d524c605721d1cbf152",
+    "assets/hit-feel/sources/creature-hurt-sheet-pixel-v2.png": "97e63923350200660ed4a6cf6b54b1171e56d3ed1629d5b1f8b1e078e4ad3b9a",
+    "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v2.png": "b3a7a9a97a14d1275f6851a7ed2706ab68415353fec2bbf33b135eb00e769461",
+    "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v2.png": "1f2a7f05e14c98afd335f23a4f3272ca90143575aba3dddbf5daca73df0192c1",
+    "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png": "c89abeab69a36119951c26eeded4905d3310917ecf9653c32429de90d8925654"
+  },
+  "assets": [
+    {
+      "id": "coast-scav-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-scav-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "scav",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v2.png",
+      "sha256": "de5d0a951dcf7d3894ceee41ac8b9523ac4468e4782e7abc6e509cd9f2bdd554"
+    },
+    {
+      "id": "coast-scav-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-scav-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "scav",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v2.png",
+      "sha256": "62561b11eaa9c73c97e3de2495ab641110f4ab648dae773dc4141ccb02dff54a"
+    },
+    {
+      "id": "coast-scav-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-scav-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "scav",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v2.png",
+      "sha256": "6372a79fbaf95f28e422f95a56df8c97acb53e8be4df08fcf8d0b05ea4394494"
+    },
+    {
+      "id": "coast-scav-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-scav-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "scav",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v2.png",
+      "sha256": "faa1b05a5f3672ec2ecea7995025698e170668af8947603c1dd5bec23ffed199"
+    },
+    {
+      "id": "coast-scav-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-scav-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "scav",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v2.png",
+      "sha256": "3872b3dcfc6c15a37ea397cc6635d5bf72fa15a4a97d53382b431f50390e8467"
+    },
+    {
+      "id": "coast-scav-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-scav-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "scav",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v2.png",
+      "sha256": "2b1e929373061f67433fd6dcdcd93fff0f84a91247c03cafea27959b43121b2c"
+    },
+    {
+      "id": "coast-scav-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-scav-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "scav",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v2.png",
+      "sha256": "a0fea265b003b67d02d995925f77b07dd9e25ced5e4cbb7fc4a35d71af74b3a1"
+    },
+    {
+      "id": "coast-scav-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-scav-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "scav",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v2.png",
+      "sha256": "fd014b80c07ebdac89daeb033ff2b9c83af1f4b331fa8a769ecf6912d4af5b96"
+    },
+    {
+      "id": "coast-scav-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-scav-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "scav",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v2.png",
+      "sha256": "70aa6b9d9f765a4b081b22f0d376e4d70e62857614c0971256c3ad368c4d7438"
+    },
+    {
+      "id": "coast-scav-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-scav-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "scav",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v2.png",
+      "sha256": "923dac9d4540aef1ae0536fbaf2132a0a19c47559f58f8850717d06b858df4d2"
+    },
+    {
+      "id": "coast-salt-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-salt-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v2.png",
+      "sha256": "92e55f12ac2c2ab003491c5151928b702fed8a43ce4f3f0d1b682f1eae24e9b2"
+    },
+    {
+      "id": "coast-salt-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-salt-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v2.png",
+      "sha256": "04b7ef5e6e0ca4407c3a2496b29bfcbaf550ae48fb86878af99bb6f95dd063e0"
+    },
+    {
+      "id": "coast-salt-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-salt-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v2.png",
+      "sha256": "c46b45242a26f1d61922a068aec1c27adafbe3f8ad08690c6a9b529b24002c4c"
+    },
+    {
+      "id": "coast-salt-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-salt-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v2.png",
+      "sha256": "3c3752f558ff600ac84091cd8b52ae73e06214be21d2e6234a6db58138548033"
+    },
+    {
+      "id": "coast-salt-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-salt-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v2.png",
+      "sha256": "2dc34b77fca8d106b06dd5b9fa1e569f3105554aea9e775e05d8cd7c71085f18"
+    },
+    {
+      "id": "coast-salt-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-salt-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v2.png",
+      "sha256": "7bcd62df6c419af8e391d3962c9f814f4fbd31f11995e6b4894ee0dfabf1809d"
+    },
+    {
+      "id": "coast-salt-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-salt-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v2.png",
+      "sha256": "ad34c45052b0701308d3e13dc484702fb82307ed561ac97f75a499fc799a80bb"
+    },
+    {
+      "id": "coast-salt-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-salt-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v2.png",
+      "sha256": "9bfeb5087228df220ab2ed7b9540d1a86514d74f6b3e2b23d302265b8b9e5947"
+    },
+    {
+      "id": "coast-salt-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-salt-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v2.png",
+      "sha256": "a5a23ad23822f608d8be629aa421f2bb16f1e8fcba4f1d77c3560bdd1767ccdb"
+    },
+    {
+      "id": "coast-salt-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-salt-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v2.png",
+      "sha256": "81b516d3b8a987254735a833a13a00233b098d09ede109360462ed5b0f4b9543"
+    },
+    {
+      "id": "coast-elite-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-elite-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "elite",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v2.png",
+      "sha256": "ec136e44d64385285310b64b11b44c88e88b01d9abe566f588b81ed88d28d95d"
+    },
+    {
+      "id": "coast-elite-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-elite-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "elite",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v2.png",
+      "sha256": "9cc313c0ce8d2f92a196106af0cf283e5d959576467e0f9b5ab7c25b30b1e348"
+    },
+    {
+      "id": "coast-elite-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-elite-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "elite",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v2.png",
+      "sha256": "56d9af84bf95aabf8f62b101406c0bfe14ccaa3f1f0535e1fc77ea531949211c"
+    },
+    {
+      "id": "coast-elite-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-elite-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "elite",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v2.png",
+      "sha256": "10ce85d8e07ab82f6178e3d6bb4d848395e9f1dd5bce1125384ca19adccccbfd"
+    },
+    {
+      "id": "coast-elite-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-elite-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "elite",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v2.png",
+      "sha256": "b8e374fab2a9a4d0507e8f8fb481b66de0eb092addb752bfe2fb09513ff5c2d2"
+    },
+    {
+      "id": "coast-elite-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-elite-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "elite",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v2.png",
+      "sha256": "92b2c0f49422a6ae961b54b5e996e4f299a0eb5f0ec16f34c7fac08caeb00107"
+    },
+    {
+      "id": "coast-elite-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-elite-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "elite",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v2.png",
+      "sha256": "58052dfba7fc1afcc09e666b04ee6c61e9c8dd596417b7f7aac17147d0dc5b2b"
+    },
+    {
+      "id": "coast-elite-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-elite-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "elite",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v2.png",
+      "sha256": "757a5e5b5340ce21164b1b15f6be4fcea4f358e11085e5555e876f84795ee206"
+    },
+    {
+      "id": "coast-elite-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-elite-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "elite",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v2.png",
+      "sha256": "1a0c82edb3638f7edb56ddc4949326acfb0149066046cda31d98c95329011c73"
+    },
+    {
+      "id": "coast-elite-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-elite-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "elite",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v2.png",
+      "sha256": "24b3cb246fc17b2c2d8bfa38ec9b4858fcb0c365c08564454e663a11b2988182"
+    },
+    {
+      "id": "coast-creature-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-creature-body-e-f5-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "creature",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v2.png",
+      "sha256": "63e9e94f3e103d10d39468425e36fc7b14d59856729354076f3c871de778b438"
+    },
+    {
+      "id": "coast-creature-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-creature-body-e-f6-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "creature",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v2.png",
+      "sha256": "abad5e6f9996b98db579354906a50d0df912b4edd464422ec16b914aa7f127ba"
+    },
+    {
+      "id": "coast-creature-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-creature-body-se-f5-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "creature",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v2.png",
+      "sha256": "fe328a6b2bed5ac19b41d52dff680f7d9ba771f0b1e9d2a8971f9de9d4746d36"
+    },
+    {
+      "id": "coast-creature-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-creature-body-se-f6-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "creature",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v2.png",
+      "sha256": "5167ee1e934c5ca77795a6ea2a7e28e4c568ebd3647d6d6fe43438cbdf830783"
+    },
+    {
+      "id": "coast-creature-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-creature-body-s-f5-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "creature",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v2.png",
+      "sha256": "40f5e8dd80511836f9d522e891821be945856170d330002421151a9c65b80250"
+    },
+    {
+      "id": "coast-creature-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-creature-body-s-f6-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "creature",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v2.png",
+      "sha256": "38fd0815283ea779eeb96b8d2e4285b16b7ad9f95fb17505c2b7e7cc35df51fb"
+    },
+    {
+      "id": "coast-creature-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-creature-body-ne-f5-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "creature",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v2.png",
+      "sha256": "30b388afa3b02ba75fda2e04316158734941831e4951ed9e6f0d449ded7b39cd"
+    },
+    {
+      "id": "coast-creature-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-creature-body-ne-f6-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "creature",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v2.png",
+      "sha256": "3850f0c8f6c78c9a4bfd063f99e8a8131f01f0aa97d14a7d3a4cb103a1504ad9"
+    },
+    {
+      "id": "coast-creature-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-creature-body-n-f5-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "creature",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v2.png",
+      "sha256": "90a9bac8032e8d8873dc7d26c3e0a38555cefef355c1a86f04df6180e27598e1"
+    },
+    {
+      "id": "coast-creature-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-creature-body-n-f6-v1.png",
+      "w": 40,
+      "h": 28,
+      "anchor": [
+        20,
+        28
+      ],
+      "kind": "creature",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v2.png",
+      "sha256": "c5de738db3b2dc7c983f4b653b7056df9189be015cc2090538c0d2da6bd1f5ef"
+    },
+    {
+      "id": "coast-raider-melee-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-raider-melee-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-melee",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v2.png",
+      "sha256": "a009fe2ef1dd5ae5312fb3c13911ac80e3a2a7288f693bc102002ea0f8b96e82"
+    },
+    {
+      "id": "coast-raider-melee-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-raider-melee-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-melee",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v2.png",
+      "sha256": "8c72beaa015e8d52a82648adb0c7e61ada99183888d73e246356c544f8b4936f"
+    },
+    {
+      "id": "coast-raider-melee-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-raider-melee-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-melee",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v2.png",
+      "sha256": "5addd00b61db28a1adadb33320f2012c32d9269c4219560a2e09a413d4875a3e"
+    },
+    {
+      "id": "coast-raider-melee-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-raider-melee-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-melee",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v2.png",
+      "sha256": "c7d39a9eeab14819bd22152c2fb4e1bcf1a2bbcc98b6696271a0359545d29cce"
+    },
+    {
+      "id": "coast-raider-melee-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-raider-melee-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-melee",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v2.png",
+      "sha256": "493e09a215862be751063033bca309627302d33e9d48eb18050be0fc3913558b"
+    },
+    {
+      "id": "coast-raider-melee-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-raider-melee-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-melee",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v2.png",
+      "sha256": "c2c45ccb22f24bcab269a85adf95fda88a028ff3a8ff3ae7b1d4fd544fac6f50"
+    },
+    {
+      "id": "coast-raider-melee-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-raider-melee-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-melee",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v2.png",
+      "sha256": "b50cb6838f018549ad292ddf524a0cbec074162754ad54a410402a681868c68d"
+    },
+    {
+      "id": "coast-raider-melee-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-raider-melee-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-melee",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v2.png",
+      "sha256": "741f0e02827855c680653974717eb3cf69bf7581abe42e1c01b2341719800805"
+    },
+    {
+      "id": "coast-raider-melee-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-raider-melee-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-melee",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v2.png",
+      "sha256": "123881e2710b1660775a8a9797461e4cd53614390664edc83ce4264cccbc0068"
+    },
+    {
+      "id": "coast-raider-melee-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-raider-melee-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-melee",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v2.png",
+      "sha256": "da6ebe74817233fbd2ddc1fc12d28bdb1e4df219bcae945de65dc77130f67462"
+    },
+    {
+      "id": "coast-raider-gunner-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-raider-gunner-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-gunner",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v2.png",
+      "sha256": "eb749dce71df49af9be9dae17a5cbb9b35e1ff86fc05f6e58679834e48b0e8a6"
+    },
+    {
+      "id": "coast-raider-gunner-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-raider-gunner-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-gunner",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v2.png",
+      "sha256": "90fe5991228eeaf4661ff558bdda069f69cd867be3fe6392dbe8832693c892cb"
+    },
+    {
+      "id": "coast-raider-gunner-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-raider-gunner-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-gunner",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v2.png",
+      "sha256": "f8883e91490951d357c3bf2e21955639020502af7e6bd9eff15ce391a764cff7"
+    },
+    {
+      "id": "coast-raider-gunner-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-raider-gunner-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-gunner",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v2.png",
+      "sha256": "2a41778d4a136d7342e41d5d9e72ad564751f1b7686c3110152a69429efa3882"
+    },
+    {
+      "id": "coast-raider-gunner-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-raider-gunner-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-gunner",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v2.png",
+      "sha256": "a9fa9926a998bdc552b01b57566c5d10273a6168fdc771e19d6b4573c27a7086"
+    },
+    {
+      "id": "coast-raider-gunner-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-raider-gunner-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-gunner",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v2.png",
+      "sha256": "3e6bb68709d99adfd04a5847755338b1d244d306fe303ad626049cab41342d09"
+    },
+    {
+      "id": "coast-raider-gunner-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-raider-gunner-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-gunner",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v2.png",
+      "sha256": "8e569fda0106f6219bc69ebc5bca5dc96b5b973b034218395f8b35899755918f"
+    },
+    {
+      "id": "coast-raider-gunner-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-raider-gunner-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-gunner",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v2.png",
+      "sha256": "d3d7d1153525677ef4f6bd0f08dbee60235445a8f3fe2bee4f848be0936ada84"
+    },
+    {
+      "id": "coast-raider-gunner-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-raider-gunner-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-gunner",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v2.png",
+      "sha256": "98986f6fc158f10ea9ddc897a5edfdce2c26032fb78b4157d20014d4ec39351e"
+    },
+    {
+      "id": "coast-raider-gunner-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-raider-gunner-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-gunner",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v2.png",
+      "sha256": "48d7abc54a524b1c307de05ea45b1eaafccbd2f8fb31bc76eeb253154d05eb7d"
+    },
+    {
+      "id": "coast-raider-lookout-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-raider-lookout-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-lookout",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png",
+      "sha256": "b1d4ce5ba1e3f292ed4550cb935f5106923b535c0b09d1032e60513a3816a36f"
+    },
+    {
+      "id": "coast-raider-lookout-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-raider-lookout-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-lookout",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png",
+      "sha256": "34613dd48cc29ad0b18a4b8d033e981b84a2a4650e3aa5dbf80e0a637af21faa"
+    },
+    {
+      "id": "coast-raider-lookout-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-raider-lookout-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-lookout",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png",
+      "sha256": "fd4089e6fd2dd477395758f16a8a10cde5f3b14d0adfe84ab732b61d37ae0fce"
+    },
+    {
+      "id": "coast-raider-lookout-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-raider-lookout-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-lookout",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png",
+      "sha256": "23cb3e445e55928bd601fc1bfb7aa64828fabd8d17206543c68cdd61f531690a"
+    },
+    {
+      "id": "coast-raider-lookout-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-raider-lookout-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-lookout",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png",
+      "sha256": "9154fd40f79de22ef2c1d86c9dc6520528c7b8d592fe8ee93b52b9ef16f447e4"
+    },
+    {
+      "id": "coast-raider-lookout-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-raider-lookout-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-lookout",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png",
+      "sha256": "1a6a7f5cf086cc1b49118f2a7803a1b1c80f16421bad9f040b527b4a0d417257"
+    },
+    {
+      "id": "coast-raider-lookout-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-raider-lookout-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-lookout",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png",
+      "sha256": "7203703730bc9fecdf39f7da10696c9db95c232bff35d2c7f7ba9cdbe763e5ed"
+    },
+    {
+      "id": "coast-raider-lookout-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-raider-lookout-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-lookout",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png",
+      "sha256": "aebdaf984db542e2bc981640fbdf3ef679948a66191197e7ae3fb2d13cd7df18"
+    },
+    {
+      "id": "coast-raider-lookout-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-raider-lookout-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-lookout",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png",
+      "sha256": "dcee977c8f81d566e965d92082ffb9ffe7b8491bbb1ed73e40c1f7eadcbc3284"
+    },
+    {
+      "id": "coast-raider-lookout-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-raider-lookout-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-lookout",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png",
+      "sha256": "99bedcd75f59c24895da14cc476a1294ddf8b955e9be7f809445a647cbdc06e8"
+    }
+  ]
+}

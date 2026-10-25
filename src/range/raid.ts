@@ -58,7 +58,7 @@ export function createRangeRaid() {
 
 /** The loadout gun's ammunition and the rounds the bag lacks for a full stack, once it holds less than `below` of one. */
 function short(loadout: D.RunLoadout, below: number) {
-    const ammo = D.WEAPONS[loadout.weapon || 'knife'].ammo;
+    const ammo = D.equippedWeapon(loadout).ammo;
     if (!ammo) return null;
     const stack = D.ITEMS[ammo].stack, have = D.count(loadout.bag, ammo);
     return have < stack * below ? { ammo, rounds: stack - have } : null;
@@ -150,9 +150,10 @@ export class ShootingRange {
     private get live() { return !this.core.disposed && !this.core.ending; }
 
     /**
-     * Hand the player a weapon. A gun of the game comes with a full magazine and its ammunition in the bag, set the way
-     * the test driver sets it; the sample rifle (SAMPLE_GUNS) carries its own endless reserve. Every switch draws the new
-     * weapon as the game does: the aim starts from the hip and the body sways.
+     * Hand the player a weapon. A gun of the game is its own instance, a factory one under a new uid unless that gun is
+     * already in hand, with a full magazine (its effective capacity) and its ammunition in the bag, set the way the test
+     * driver sets it; the sample rifle (SAMPLE_GUNS) carries its own endless reserve. Every switch draws the new weapon
+     * as the game does: the aim starts from the hip and the body sways.
      */
     arm(weapon: RangeWeapon) {
         const c = this.core;
@@ -160,8 +161,12 @@ export class ShootingRange {
         if (weapon === 'knife') return this.knife(true);
         if (weapon === 'm4a1') { if (c.sampleGun === 'm4a1') this.knife(false); else c.setSampleGun('m4a1'); return; }
         c.setSampleGun(null);
-        const state = c.snapshot(), w = D.WEAPONS[weapon];
-        state.loadout.weapon = weapon; state.loadout.ammo = w.magazine; state.loadout.ammoRelief = 0; // a full magazine; more fails checkpoint validation
+        const state = c.snapshot(), l = state.loadout;
+        if (l.weapon !== weapon || l.weaponUid === null) {
+            const scratch = D.createInventory(6, 5); D.addItem(scratch, weapon); // a new item uid and a factory state
+            Object.assign(l, { weaponUid: scratch.items[0].uid, gun: scratch.items[0].gun });
+        }
+        l.weapon = weapon; l.ammo = D.equippedWeapon(l).magazine; l.ammoRelief = 0; // a full magazine; more fails checkpoint validation
         state.knife = false; state.reloadLeft = 0; state.fireCooldown = 0;
         stock(state.loadout, 1);
         c.restore(state);

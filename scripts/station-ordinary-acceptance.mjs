@@ -5,6 +5,8 @@ import {resolve} from 'node:path';
 import {chromium} from 'playwright';
 import {browserOptions} from './browser-options.mjs';
 import * as D from '../src/domain.ts';
+/** The legacy key only ever held profiles up to v2: the same profile without gun fields (save v6 added them). */
+const legacyProfile = s => { const p = structuredClone(s); p.version = 2; delete p.equipment.weaponUid; delete p.equipment.gun; for (const inv of [p.stash, p.bag, p.safe]) for (const i of inv.items) delete i.gun; return p; };
 const out=resolve(process.argv.find(x=>x.startsWith('--out='))?.slice(6)??'test-results/station-ordinary');
 await mkdir(out,{recursive:true});
 const html=await readFile('dist/index.html','utf8'),browser=await chromium.launch(browserOptions);
@@ -17,7 +19,7 @@ try {
       let profile=null,bytes=null;
       if(fixture!=='new') {
         profile=D.newSave();profile.cash=1842;profile.quests.repair=fixture==='legacy-restored';profile.stats={runs:3,extracts:2,kills:5};
-        assert.equal(D.addItem(profile.stash,'watch',1),0);assert.equal(D.addItem(profile.stash,'scrap',2),0);bytes=JSON.stringify(profile);
+        assert.equal(D.addItem(profile.stash,'watch',1),0);assert.equal(D.addItem(profile.stash,'scrap',2),0);bytes=JSON.stringify(legacyProfile(profile));
         await ctx.addInitScript(b=>{if(!localStorage.getItem('escape-bincov.session.v2'))localStorage.setItem('escape-bincov.save.v1',b);},bytes);
       }
       await ctx.route('https://station.test/',r=>r.fulfill({contentType:'text/html',body:html}));
@@ -29,7 +31,7 @@ try {
       const inspect=()=>page.evaluate(()=>{const root=document.querySelector('#station-yard')?.shadowRoot;return{url:location.href,bincov:'__bincov'in window,station:'__station'in window,frame:getComputedStyle(document.querySelector('#frame')).visibility,sub:root?.querySelector('#hud-sub')?.textContent,quickVisible:!!root?.querySelector('.quick')&&getComputedStyle(root.querySelector('.quick')).display!=='none',save:JSON.parse(localStorage.getItem('escape-bincov.session.v2'))};});
       const first=await inspect();
       assert.equal(first.url,'https://station.test/');assert.equal(first.bincov,false);assert.equal(first.station,false);assert.equal(first.frame,'hidden');assert.equal(first.quickVisible,true);
-      assert.equal(first.save.version,5);assert.equal(first.save.expansion.version,3);
+      assert.equal(first.save.version,8);assert.equal(first.save.expansion.version,3);
       if(profile) {assert.deepEqual(first.save.profile,profile);assert.equal(first.save.legacyBackup,bytes);assert.match(first.sub,fixture==='legacy-restored'?/供电正常/:/应急供电/);}
       await page.screenshot({path:resolve(out,fixture+'.png')});
       await page.reload();await page.locator('[data-action="enter"]').click();await page.locator('#station-yard canvas').waitFor();await page.waitForTimeout(400);

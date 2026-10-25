@@ -41,7 +41,7 @@ export function perkBench(perks: PerkId[] = [], technique = 10): Bench {
     const saves = new SaveSession(state, () => storage); assert.equal(saves.initialize(), true); assert.equal(saves.enableRpg(), true);
     const ticket = saves.prepareExpansionMutation(d => { d.expansion.growth.permanent.technique = technique; d.expansion.growth.perks = [...perks]; });
     assert.ok(ticket); assert.equal(saves.commitExpansionMutation(ticket), 'committed');
-    state.state = 'hideout'; assert.equal(saves.beginRun(42, true), true); state.state = 'run';
+    state.state = 'hideout'; assert.equal(saves.beginRun(42, true, { legacyEnemies: true }), true); state.state = 'run';
     const runtime = new CoastRaidRuntime(state, saves), driver = createRuntimeTestDriver(runtime, '?test=1');
     return { state, saves, runtime, driver, storage, data, fail(full: boolean) { quota.full = full; } };
 }

@@ -20,7 +20,7 @@ function fixture() {
 test('legacy coast-v1 checkpoints keep their original loose loot without adding crates', () => {
     const f = fixture(), old: any = structuredClone(f.state.checkpoint!);
     old.worldVersion = 'coast-v1'; delete old.containers;
-    old.loot = generateRunBase(42).loot.map((item, i) => ({ ...item, uid: `loot-${i}`, relief: false }));
+    old.loot = generateRunBase(42).loot.map((item, i) => ({ ...item, uid: `loot-${i}`, relief: false, ...D.factoryGun(item.id) }));
     const record = JSON.parse(f.data.get(SESSION_KEY)!); record.raid = old;
     f.data.set(SESSION_KEY, JSON.stringify(record));
     const restored = new RecoveryStore(f.storage).load();
@@ -33,7 +33,7 @@ test('legacy coast-v1 checkpoints keep their original loose loot without adding 
 test('a reloaded coast-v1 raid resumes on the Runtime (the only raid executor) with its loose loot and settles once', () => {
     const f = fixture(), old: any = structuredClone(f.state.checkpoint!);
     old.worldVersion = 'coast-v1'; delete old.containers;
-    old.loot = generateRunBase(42).loot.map((item, i) => ({ ...item, uid: `loot-${i}`, relief: false }));
+    old.loot = generateRunBase(42).loot.map((item, i) => ({ ...item, uid: `loot-${i}`, relief: false, ...D.factoryGun(item.id) }));
     const record = JSON.parse(f.data.get(SESSION_KEY)!); record.raid = old;
     f.data.set(SESSION_KEY, JSON.stringify(record));
     // A fresh page: the session reads the old record, the title resumes it, and the 2.5D host builds its Runtime on it.

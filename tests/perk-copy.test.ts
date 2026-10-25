@@ -6,6 +6,7 @@ import { RealHideoutRuntime, type PerkBoard, type Result } from '../src/hideout-
 import { derivedLimits, type Attribute } from '../src/expansion-state';
 import { BREATH_MAX, PERK_IDS, perkModifiers, type PerkId, type PerkModifiers } from '../src/perks';
 import { ATTRIBUTE_NAMES, PERK_TEXT, choicePreview, critContext, critView, defaultPerkAttribute, perkDone, perkFailure, perkPanel, perkPendingName, perkRetried, perkWaiting, resetPreview, type CritContext } from '../src/perk-copy';
+import { factoryState } from '../src/gunsmith/instance';
 
 // CP-T09 (#77): the perk copy and the view models both base screens draw (docs/CRITICAL-PERK-DESIGN.md sections 2.3,
 // 3 and 5). The names are the spec's; every number in an effect line must be the rule's number from perkModifiers.
@@ -73,7 +74,7 @@ function station(permanent: Record<Attribute, number>, perks: PerkId[] = [], cas
     return { runtime, fail: (value = true) => { failing = value; }, ctx: (): CritContext => critContext(runtime.snapshot(), runtime.perkBoard()) };
 }
 const levels = (strength: number, constitution: number, technique: number) => ({ strength, constitution, technique });
-const carbine = (d: ExpansionDraft) => { d.profile.equipment = { weapon: 'carbine', ammo: 0, ammoRelief: 0, relief: false }; };
+const carbine = (d: ExpansionDraft) => { d.profile.equipment = { weapon: 'carbine', weaponUid: 'test-gun', gun: factoryState(), ammo: 0, ammoRelief: 0, relief: false }; };
 
 test('the board view: locked cards name the permanent level, open cards are buttons, a chosen node shows its pick and closes the other', () => {
     const s = station(levels(26, 10, 15), ['strength-20-b']), board = s.runtime.perkBoard(), v = perkPanel(board, 'strength');
@@ -148,7 +149,7 @@ test('a choice preview lists scope and value changes, says a raised limit does n
     // A critical source: the new independent source and the gun's static chance before and after (technique 20).
     const crit = station(levels(10, 10, 20), [], 1200, carbine), sure = crit.runtime.previewPerk('technique-20-a');
     assert.deepEqual(choicePreview(sure.preview!, crit.ctx()).changes, ['新增一个独立 5% 暴击来源（致命直觉）', '半自动卡宾枪暴击 11.22% → 15.66%']);
-    const knife = (d: ExpansionDraft) => { d.profile.equipment = { weapon: null, ammo: 0, ammoRelief: 0, relief: false }; };
+    const knife = (d: ExpansionDraft) => { d.profile.equipment = { weapon: null, weaponUid: null, gun: null, ammo: 0, ammoRelief: 0, relief: false }; };
     const bare = station(levels(10, 10, 25), [], 1200, knife), multiplier = bare.runtime.previewPerk('technique-25-a'), late = bare.runtime.previewPerk('technique-20-a');
     assert.ok(multiplier.ok && late.ok);
     assert.deepEqual(choicePreview(multiplier.preview!, bare.ctx()).changes, ['暴击伤害倍率 1.5 → 1.7']);

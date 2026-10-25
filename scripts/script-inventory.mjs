@@ -2,15 +2,18 @@
 // Package entries and CI infrastructure are derived; unregistered legacy tools
 // are explicitly held for review, never silently deleted or promoted to gates.
 const groups = [
+  { kind: 'diagnostic', reason: 'EN-04 当前正式街区 AI/寻路与三尺寸真实帧时、纹理、包体预算。先 pnpm package，再 node --import tsx scripts/enemy-performance.mjs；独占测量，预算未过返回非零，不代表真机或自然游玩。', files: ['enemy-performance.mjs'] },
+  { kind: 'diagnostic', reason: '单次浏览器同比出现噪声后的固定五组交错A/B；显式提供基线HTML、严格输入和原预算报告。每样本保持绝对门槛，五个p95的中位值仍限20%，保留原失败，不替代完整矩阵/Node/真机。', files: ['enemy-performance-paired.mjs'] },
+  { kind: 'check', reason: '敌人存档交给固定历史源码客户端验证拒绝和零写入；需显式 --candidate 与匹配的旧源码检出。详见 enemy-save-contract，不用当前客户端替代。', files: ['enemy-old-client-probe.ts'] },
   { kind: 'support', reason: '被现役构建或测试导入的共用模块，不是独立验收命令。', files: [
     'browser-options.mjs', 'canvas-click.mjs', 'font-characters.mjs', 'game-bundle.mjs', 'inventory-actions.mjs',
     'pixi-managed-gate.mjs', 'stall-resume.mjs', 'step-filter.mjs', 'storage-fault.mjs', 'title-edge-check.mjs', 'yard-entry.mjs',
-    'check-catalog.mjs', 'script-inventory.mjs',
-    'shop-touch-cases.mjs', 'station-acceptance-gates.mjs',
+    'check-catalog.mjs', 'script-inventory.mjs', 'enemy-catalog-data.ts',
+    'shop-touch-cases.mjs', 'station-acceptance-gates.mjs', 'enemy-mall-browser.mjs',
   ] },
   { kind: 'tool', reason: '素材生成、导入或交付工具；会写源码或资产，不能当作只读测试执行。开工前检查输入清单、哈希、字体环境和输出。', files: [
     'coast-import-assets.mjs', 'mall-assets.mjs', 'opening-assets.mjs', 'station-assets.mjs', 'subset-font.py', 'build-coast-runtime.mjs',
-    'format.mjs',
+    'format.mjs', 'enemy-export-art.mjs', 'prepare-county-map.mjs', 'pack-coast-art.py',
   ] },
   { kind: 'diagnostic', reason: '帧时、标题性能或确定性射击测量；参数见源码头部，独立运行并记录环境。本轮未重测这些性能工具，不把输出数值当作真人手感或 GPU 完成时间。', files: [
     'coast-sample-measure.mjs', 'title-performance.mjs', 'shooting-bench.ts',
@@ -18,6 +21,7 @@ const groups = [
   { kind: 'diagnostic', reason: '读取已有 V8 快照的分析工具；先看各脚本参数。强路径/支配关系是记录图内的证据，不自动证明原生内存归属或泄漏。', files: [
     'astra-r7-heap-graph.mjs', 'astra-r7-cache-graph.mjs', 'coast-heap-retainers.mjs',
   ] },
+  { kind: 'tool', reason: '把 #96 的受击/恢复图集切成运行帧，写 assets/coast/poses 与 src/coast-view/pose-assets.ts（node --import tsx 运行）；--check 只核对、不写入。', files: ['export-hurt-poses.ts'] },
   { kind: 'archive', reason: 'R6 历史音频对照；写死旧工作目录，main 与工作区同源码也会越过 ±20% 门槛（#60 / #90 实测）。保留原证据和负对照制作代码，不能用作当前回归门禁。', files: ['sol-r6-audio-controls.mjs'] },
   { kind: 'archive', reason: '旧商场兼容实验要求 main 新建一版商场；当前 main 已改变新局布局。只在明确历史基线复放，现役兼容入口为 test:expansion / test:mall-sample。', files: ['mall-runtime-compat.mjs'] },
   { kind: 'archive', reason: 'R3 固定构建的压缩名/哈希分析链，build-map 只登记两个历史 HTML；需要对应旧 HTML 和快照，不能直接分析新构建。', files: [

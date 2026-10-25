@@ -8,6 +8,8 @@ import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import * as D from '../src/domain.ts';
 import { browserOptions } from './browser-options.mjs';
+/** The legacy key only ever held profiles up to v2: the same profile without gun fields (save v6 added them). */
+const legacyProfile = s => { const p = structuredClone(s); p.version = 2; delete p.equipment.weaponUid; delete p.equipment.gun; for (const inv of [p.stash, p.bag, p.safe]) for (const i of inv.items) delete i.gun; return p; };
 
 const out = resolve('test-results', 'opening'); await mkdir(out, { recursive: true });
 const html = pathToFileURL(resolve('dist/index.html')).href;
@@ -19,7 +21,7 @@ const browser = await chromium.launch(browserOptions); report.browser = browser.
 async function open({ query = '?test=1&opening=auto', viewport = { width: 1280, height: 720 }, mobile = false, reducedMotion = 'no-preference', legacy } = {}) {
   const context = await browser.newContext({ viewport, isMobile: mobile, hasTouch: mobile, reducedMotion, offline: true });
   context.on('request', r => { if (/^https?:/.test(r.url())) report.requests.push(r.url()); });
-  if (legacy) await context.addInitScript(s => { if (!localStorage.getItem('escape-bincov.session.v2')) localStorage.setItem('escape-bincov.save.v1', s); }, JSON.stringify(legacy));
+  if (legacy) await context.addInitScript(s => { if (!localStorage.getItem('escape-bincov.session.v2')) localStorage.setItem('escape-bincov.save.v1', s); }, JSON.stringify(legacyProfile(legacy)));
   const page = await context.newPage();
   page.on('pageerror', e => report.errors.push(String(e.stack ?? e)));
   page.on('console', m => { if (m.type() === 'error') report.errors.push(m.text()); });

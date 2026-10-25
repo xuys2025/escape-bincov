@@ -3,7 +3,7 @@
 import { browserGroups, manualSuites, suitesForGroup } from './ci/browser-suites.mjs';
 
 const descriptions = {
-  browser: '普通行动入口与基本操作', 'desktop-input': '真实键鼠、组合输入与释放', shooting: '射击、镜头、弹道与慢帧反馈',
+  enemy: '新敌人保存场景、攻击阶段、素材和条件交涉', browser: '普通行动入口与基本操作', 'desktop-input': '真实键鼠、组合输入与释放', shooting: '射击、镜头、弹道与慢帧反馈',
   'save-browser': '保存失败、重试、导入导出与多窗口', play: '约十分钟真实计时行动', portable: '解压两种 ZIP、离线入口与操作',
   ui: '桌面界面布局', mobile: '触屏行动与按钮', 'mobile-ux': '手机横竖屏、短屏与操作边界', title: '标题页与输入',
   opening: '序幕播放、跳过与持久化', loot: '搜刮、物品转移与退出输入', 'loot-target': '附近搜刮目标与选择',
@@ -35,7 +35,7 @@ export const diagnosticChecks = {
 const browserPrerequisites = ['先运行 pnpm package；安装 Playwright Chromium 或设置 BINCOV_CHROME。'];
 const extraPrerequisites = {
   'test:portable': ['Windows 使用 .NET 解压；Linux/macOS 需要 Python 3。'],
-  'test:expansion': ['按 .github/workflows/ci-pages.yml 准备 test-results/pre-m0.html 和 test-results/pre-perk.html；脚本核对固定旧客户端哈希，不能用当前包代替。'],
+  'test:expansion': ['按 .github/workflows/ci-pages.yml 准备 test-results/pre-m0.html、test-results/pre-perk.html、test-results/pre-enemy.html 和 test-results/pre-gunsmith.html；脚本核对固定旧客户端哈希，不能用当前包代替。'],
   'test:mobile-ux': ['BINCOV_LEGACY_HTML 未设置时不会运行其中的真实旧客户端迁移检查；如验证迁移，必须提供对应旧 HTML 并记录实际覆盖。'],
   'test:station-tier2': ['保留真实 120 秒训练；固定时钟的拒绝/回滚用例不能代替计时验收。'],
   'test:station-capability': ['需要真实 GPU 及 16 个原生 batchable textures；CI 软件渲染不能签收此项。'],
@@ -52,7 +52,7 @@ export const risks = {
   inventory: { title: '背包与搜刮操作', extends: ['ui', 'save', 'input'], checks: ['test:loot', 'test:loot-target', 'test:issue26-inventory', 'test:issue26-station'], evidence: ['角色和世界同笔提交；取消、双端守恒与下次操作正常。'] },
   shop: { title: '商店与据点交易', extends: ['ui', 'save', 'input'], checks: ['test:shop-drag', 'test:shop-feedback', 'test:hideout', 'test:station'], evidence: ['院子与旧页签都检查；救济品、净额交易与确认取消不退化。'] },
   world: { title: '地图、建筑与分层', extends: ['rules'], checks: ['test:buildings', 'test:mall-passages', 'test:mall-landing', 'test:mall-sample', 'test:raid-default'], evidence: ['检查旧布局身份、可达性、门/楼梯和隐藏内容；改画面/输入再叠加对应风险。'] },
-  combat: { title: '战斗、AI、潮汐或持续负载', extends: ['rules'], checks: ['test:shooting', 'test:range', 'test:play'], evidence: ['真人手感和平衡另验；改分层战斗再叠加 layered，改输入再叠加 input。'] },
+  combat: { title: '战斗、AI、潮汐或持续负载', extends: ['rules'], checks: ['test:shooting', 'test:range', 'test:enemy', 'test:play'], evidence: ['真人手感和平衡另验；改分层战斗再叠加 layered，改输入再叠加 input。'] },
   layered: { title: '分层自然行动', extends: ['world', 'combat'], checks: ['test:layered-play'], evidence: [] },
   base: { title: 'RPG 与据点成长', extends: ['ui', 'save'], checks: ['test:systems', 'test:station', 'test:station-tier1', 'test:station-tier2', 'test:station-relief', 'check:perk-ui'], evidence: ['训练保留真实计时；Perk 自动化不代表首次解锁、选择率或重置成本的真人平衡。'] },
   opening: { title: '序幕播放与状态', extends: ['ui', 'input', 'save'], checks: ['test:opening'], evidence: ['检查跳过、首次播放标记和静音；保存失败不假成功。'] },
@@ -67,7 +67,7 @@ export function checksFrom(scripts) {
   const manual = new Map(manualSuites.map(s => [s.command, s.reason]));
   const checks = [
     { id: 'test', kind: 'regression', purpose: '领域、世界与存档单测', ci: 'build', prerequisites: ['Node.js 24；pnpm install --frozen-lockfile。'] },
-    { id: 'package', kind: 'regression', purpose: '类型检查、HTML、ZIP 与发布清单', ci: 'build', prerequisites: ['锁定依赖已安装；生成物必须与源码一致。'] },
+    { id: 'package', kind: 'regression', purpose: '类型检查、HTML、ZIP 与发布清单', ci: 'build', prerequisites: ['锁定依赖已安装；生成物不入库，CI 自己构建并在 main 验证后发布。'] },
     { id: 'check:ci', kind: 'regression', purpose: 'CI 策略、清单覆盖与源码守卫', ci: 'build', prerequisites: ['Node.js 24、项目依赖与 Git；完整 CI 守卫在 Windows 还需 Git Bash 可用。'] },
     ...Object.entries(scripts).filter(([id]) => id.startsWith('test:')).map(([id]) => {
       const purpose = descriptions[id.slice(5)];

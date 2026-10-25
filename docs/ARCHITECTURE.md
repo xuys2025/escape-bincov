@@ -55,9 +55,9 @@
 
 ## 格式与恢复兼容
 
-主键仍是 `escape-bincov.session.v2`，旧 `escape-bincov.save.v1` 只作首次迁移来源。单条记录包含 profile 与检查点/扩展状态；`legacyBackup`、`migrationBackup`、`systemsBackup`、`perksBackup` 分别保留相应升级前原字节（`perksBackup` 是首次写 v5 时被替换的 v4 记录原文）。它们不能被反复嵌套的新备份替代。
+主键仍是 `escape-bincov.session.v2`，旧 `escape-bincov.save.v1` 只作首次迁移来源。单条记录包含 profile 与检查点/扩展状态；`legacyBackup`、`migrationBackup`、`systemsBackup`、`perksBackup`、`enemyBackup`、`gunsBackup` 分别保留相应升级前原字节（`perksBackup` 是第一次写扩展 v3 时被替换的、带扩展 v1/v2 的记录原文；`enemyBackup` 是第一次写进敌人行动时被替换的记录原文；`gunsBackup` 是第一次写 v8 时被替换的 v3–v7 记录原文）。它们不能被反复嵌套的新备份替代。
 
-profile/已结算备份版本、session/完整备份封套版本、`ExpansionState.version`、`LayeredRaid.version`、`worldVersion` 与 `layoutRevision` 各自保护不同边界。当前 profile 为 v2；无扩展会话为 v3，扩展 v1/v2 的会话为 v4，扩展 v3（v2 加 Perk 选择）的会话为 v5；扩展 v1/v2 均有兼容路径。分层行动的版本是规则身份：v1 无暴击、v2 旧暴击、v3 只从扩展 v3 出击，各自保持到结算。普通提交不会把 v5 降写为 v4，只有确认导入的旧备份可以，下一次据点边界再升级。不能为了统一命名而合并版本或重写活动行动的世界/布局。
+profile/已结算备份版本、session/完整备份封套版本、`ExpansionState.version`、`LayeredRaid.version`、`worldVersion` 与 `layoutRevision` 各自保护不同边界。当前 profile 为 v3、会话记录和完整备份为 v8（枪械实例：枪物品、地上的枪和装备栏带枪的状态，见[改枪契约](gunsmith/CONTRACTS.md#存档与迁移m0-06)），带不带扩展、扩展是哪版由扩展自己的 `version` 说明，敌人规则开没开由记录有没有 `enemyBackup` 说明（#81 的记录 6、7 先占了号，见[记录版本 v8 与敌人规则](gunsmith/CONTRACTS.md#记录版本-v8-与敌人规则与-81-合并)）；v2–v7 记录、v1/v2 profile 只读，读档时校验后迁移（进行中的行动也就地迁移），扩展 v1/v2 均有兼容路径。分层行动的版本是规则身份：v1 无暴击、v2 旧暴击、v3 只从扩展 v3 出击，v4 是旧暴击加敌人战术、v5 是 Perk 加敌人战术，各自保持到结算。敌人规则一开就保持，普通提交不会去掉。普通提交不会把扩展 v3 降写为 v1/v2，只有确认导入的旧备份可以，下一次据点边界再升级。不能为了统一命名而合并版本或重写活动行动的世界/布局。
 
 [expansion-worlds.ts](../src/expansion-worlds.ts) 已登记正式建筑和商场布局，M0 两图原型只在测试夹具中。普通据点边界（`ensureRpg`、出击、院子导入、重开）通过唯一的 `upgradeToRpg` 升级到当前扩展版本；活动旧行动不会被强转，结算后的下一次据点边界才升级。多层快照保存每图的门、实体、弹丸、噪声与本地时间，RNG、身体、成长和队列随同一候选提交。
 
@@ -65,7 +65,7 @@ profile/已结算备份版本、session/完整备份封套版本、`ExpansionSta
 
 导入先经 `decodePortableBackup` 分流，再由 `decodeSession` / `decodeBackup` 严格校验。备份文件、会话里的 profile、旧键和经典行动的携带物共用 [profile-codec.ts](../src/profile-codec.ts) 的 profile/物品栏规则（1 MiB 上限对嵌入的 profile 按紧凑 JSON 计），`checkpoint`、`recovery-store`、`save-backup` 只单向调用它；`importRecord` 依赖已验证的完整记录，类型断言不能代替解码。水产站 `previewImport` / `importBackup` 的确认绑定原始文本和会话 revision；据点已启用成长时拒绝无扩展的降级覆盖。`fresh-start.ts` 的 `confirmImport` 在玩家实际确认时重新预览，仍受 Runtime 守卫和写前比对约束。
 
-`freshStartRecord` 也是完整 v5 新档构造入口，仅保留音量；`startOver` 通过同一确认导入路径替换主档。重开前的本机恢复副本使用单独的 `escape-bincov.reset-copy.v1` 槽位，不是第二个正在运行的会话。新增持久字段必须同时检查新建、升级、导入、重开、结算候选和同一 Runtime 的经典/分层捕获恢复路径。
+`freshStartRecord` 也是完整 v8 新档构造入口（敌人规则未开），仅保留音量；`startOver` 通过同一确认导入路径替换主档。重开前的本机恢复副本使用单独的 `escape-bincov.reset-copy.v1` 槽位，不是第二个正在运行的会话。新增持久字段必须同时检查新建、升级、导入、重开、结算候选和同一 Runtime 的经典/分层捕获恢复路径。
 
 多窗口保护由 `ownSession` 的页面生命周期锁和 `RecoveryStore.commit` 写前记录比对共同承担。`markConflict` 禁止后续持久化；窗口事件负责锁定画面并提示刷新/导出，不得用强制覆盖或改存档键消除冲突。
 

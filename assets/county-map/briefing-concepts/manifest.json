@@ -1,0 +1,235 @@
+{
+  "generator": "OpenAI built-in image_gen",
+  "use": "Region briefing concepts, not gameplay screenshots or implemented levels",
+  "encoding": "Exact four-quadrant crop, unchanged scale, WebP quality 0.88",
+  "browser": "155.0.8059.85",
+  "sources": [
+    {
+      "file": "atlas-civic.png",
+      "sha256": "584a863e829eea7af2119cc94ef5735a792511ba8b4afb39dcd55cfc7b2296a2",
+      "bytes": 1947317,
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "file": "atlas-infrastructure.png",
+      "sha256": "916b8f1d1dff641371edf191253b9c0f1dd90bff1d86519ca53cb95afaefe178",
+      "bytes": 1918709,
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "file": "atlas-coast.png",
+      "sha256": "a9cb3b37a7ad6708c844d384c988cddb3373cbc082222195001fdb387787ed52",
+      "bytes": 1991803,
+      "width": 1536,
+      "height": 1024
+    }
+  ],
+  "assets": [
+    {
+      "id": "old-town",
+      "name": "老城街区",
+      "file": "old-town.webp",
+      "source": "atlas-civic.png",
+      "crop": [
+        0,
+        0,
+        768,
+        512
+      ],
+      "width": 768,
+      "height": 512,
+      "bytes": 57408,
+      "sha256": "b44c17754606098bb818267e27491e4d5e49b08adcd0ea4edee0a9ce2c6f780d",
+      "status": "briefing-art"
+    },
+    {
+      "id": "mall",
+      "name": "滨湾商场",
+      "file": "mall.webp",
+      "source": "atlas-civic.png",
+      "crop": [
+        768,
+        0,
+        768,
+        512
+      ],
+      "width": 768,
+      "height": 512,
+      "bytes": 54224,
+      "sha256": "709e7a35d119a6746052853f180de93084cb98e0ca17170bdd3d07ba8e681d45",
+      "status": "briefing-art"
+    },
+    {
+      "id": "hospital",
+      "name": "县医院",
+      "file": "hospital.webp",
+      "source": "atlas-civic.png",
+      "crop": [
+        0,
+        512,
+        768,
+        512
+      ],
+      "width": 768,
+      "height": 512,
+      "bytes": 55154,
+      "sha256": "50040d0014697b1d46da443e6a9becfb164a0c974ac531ce65a1845cfbbb7113",
+      "status": "briefing-art"
+    },
+    {
+      "id": "old-hospital",
+      "name": "县医院旧址",
+      "file": "old-hospital.webp",
+      "source": "atlas-civic.png",
+      "crop": [
+        768,
+        512,
+        768,
+        512
+      ],
+      "width": 768,
+      "height": 512,
+      "bytes": 50544,
+      "sha256": "7defdc121f2ed178da998371b44ccc1d483ee2c526d3ae4031848d48b7b7a2c3",
+      "status": "briefing-art"
+    },
+    {
+      "id": "factory",
+      "name": "工厂区",
+      "file": "factory.webp",
+      "source": "atlas-infrastructure.png",
+      "crop": [
+        0,
+        0,
+        768,
+        512
+      ],
+      "width": 768,
+      "height": 512,
+      "bytes": 56622,
+      "sha256": "3d269020046b6b0001db7ae896267fe2e6a5ff99c09248350b9d851026171b3b",
+      "status": "briefing-art"
+    },
+    {
+      "id": "laboratory",
+      "name": "隐秘实验室",
+      "file": "laboratory.webp",
+      "source": "atlas-infrastructure.png",
+      "crop": [
+        768,
+        0,
+        768,
+        512
+      ],
+      "width": 768,
+      "height": 512,
+      "bytes": 60282,
+      "sha256": "1ee1507533e03b6a7ab8f84d06beac8cac0f3be6aefd81b03c1957669826a0fc",
+      "status": "briefing-art"
+    },
+    {
+      "id": "highway",
+      "name": "西线国道",
+      "file": "highway.webp",
+      "source": "atlas-infrastructure.png",
+      "crop": [
+        0,
+        512,
+        768,
+        512
+      ],
+      "width": 768,
+      "height": 512,
+      "bytes": 55658,
+      "sha256": "f0dd1dccc087ee8c6130721fd250d00752dc40755f4757b84932801c6d491604",
+      "status": "briefing-art"
+    },
+    {
+      "id": "market",
+      "name": "水产市场",
+      "file": "market.webp",
+      "source": "atlas-infrastructure.png",
+      "crop": [
+        768,
+        512,
+        768,
+        512
+      ],
+      "width": 768,
+      "height": 512,
+      "bytes": 58718,
+      "sha256": "352341545553623a3fb4b0e135a4c277bf5dc896be75143f350a5e70237ace9e",
+      "status": "briefing-art"
+    },
+    {
+      "id": "observatory",
+      "name": "观测站与泵房",
+      "file": "observatory.webp",
+      "source": "atlas-coast.png",
+      "crop": [
+        0,
+        0,
+        768,
+        512
+      ],
+      "width": 768,
+      "height": 512,
+      "bytes": 60972,
+      "sha256": "33a730a222f2bae57f61732412249b18ffc1c5e49f11f65d1034da8db4261928",
+      "status": "briefing-art"
+    },
+    {
+      "id": "lighthouse",
+      "name": "灯塔岬角",
+      "file": "lighthouse.webp",
+      "source": "atlas-coast.png",
+      "crop": [
+        768,
+        0,
+        768,
+        512
+      ],
+      "width": 768,
+      "height": 512,
+      "bytes": 54692,
+      "sha256": "b55bd9dc36d49a1fcb411ed61d82ff05c3694412fc1a060e028c38102f563307",
+      "status": "briefing-art"
+    },
+    {
+      "id": "harbor",
+      "name": "旧渔港",
+      "file": "harbor.webp",
+      "source": "atlas-coast.png",
+      "crop": [
+        0,
+        512,
+        768,
+        512
+      ],
+      "width": 768,
+      "height": 512,
+      "bytes": 67806,
+      "sha256": "87f4b18494355b5a01ba88026de39540a51c3bde3a7764b75ab5d7623e080994",
+      "status": "briefing-art"
+    },
+    {
+      "id": "freighter",
+      "name": "远汐号",
+      "file": "freighter.webp",
+      "source": "atlas-coast.png",
+      "crop": [
+        768,
+        512,
+        768,
+        512
+      ],
+      "width": 768,
+      "height": 512,
+      "bytes": 64098,
+      "sha256": "81d60ce72b89fca2150f8b6e7e8277434280af009ada867923a72706c4efeba4",
+      "status": "briefing-art"
+    }
+  ]
+}

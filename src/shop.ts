@@ -24,12 +24,22 @@ export const SHOP_SPACE_MESSAGE = '请选空格，待买按包、待卖按整组
 export type ShopQuote = { side: 'buy' | 'sell'; total: number | null };
 /**
  * Price on the side an item trades, with the same numbers cartTotals uses: merchant and buy-list packs cost buy × qty,
- * stash and sell-list stacks earn sell × qty. A null total means the item cannot be sold (relief or no sale value).
+ * stash and sell-list items earn their sale value (D.itemSale: a gun is its body plus each installed part). A null
+ * total means the item cannot be sold (saleRefusal says why).
  */
-export function shopQuote(source: ShopSource, item: Pick<D.Item, 'id' | 'qty' | 'relief'>): ShopQuote {
+export function shopQuote(source: ShopSource, item: Pick<D.Item, 'id' | 'qty' | 'relief' | 'gun'>): ShopQuote {
     const def = D.ITEMS[item.id];
     if (source === 'merchant' || source === 'buy') return { side: 'buy', total: def.buy * item.qty };
-    return { side: 'sell', total: item.relief || def.sell <= 0 ? null : def.sell * item.qty };
+    return { side: 'sell', total: saleRefusal(item) ? null : D.itemSale(item).value };
+}
+/**
+ * Why an item cannot go on the sell list, or null when it can: relief goods and anything without a sale value, and a
+ * gun that holds a relief part, which is refused whole with its own reason rather than stripped or destroyed.
+ */
+export function saleRefusal(item: Pick<D.Item, 'id' | 'qty' | 'relief' | 'gun'>): string | null {
+    const sale = D.itemSale(item);
+    if (sale.restricted && !item.relief) return '这把枪装有救济配件，不能整枪出售。';
+    return sale.restricted || sale.value <= 0 ? '这件物品不可出售。' : null;
 }
 /**
  * Row-major scan for a quick move's first accepted cell. When no cell accepts, the first reason that is not about room
@@ -51,8 +61,8 @@ export function shopPlacementError(cart: ShopCart, from: ShopSource, to: ShopSou
     if (!item) return '请重新选择物品。';
     if (from === 'buy' && to === 'merchant') return null;
     if (!((from === 'merchant' && to === 'buy') || (from === 'stash' && to === 'sell') || (from === 'sell' && to === 'stash') || (from === to && from !== 'merchant'))) return '先放入待买或待卖区，再统一结算。';
-    if (to === 'sell' && (item.relief || D.ITEMS[item.id].sell <= 0)) return '这件物品不可出售。';
-    return D.fits(shopInventory(cart, to), item.id, x, y, from === to ? uid : undefined, !!item.rotated) ? null : SHOP_SPACE_MESSAGE;
+    if (to === 'sell') { const refusal = saleRefusal(item); if (refusal) return refusal; }
+    return D.fits(shopInventory(cart, to), item, x, y, from === to ? uid : undefined, !!item.rotated) ? null : SHOP_SPACE_MESSAGE;
 }
 /** Only edits the disposable cart. Owned goods and money remain untouched. */
 export function moveShopItem(cart: ShopCart, from: ShopSource, to: ShopSource, uid: string, x: number, y: number): boolean {
@@ -68,7 +78,7 @@ export function moveShopItem(cart: ShopCart, from: ShopSource, to: ShopSource, u
 }
 export function cartTotals(cart: ShopCart) {
     const buy = cart.buy.items.reduce((n, i) => n + D.ITEMS[i.id].buy * i.qty, 0);
-    const sell = cart.sell.items.reduce((n, i) => n + D.ITEMS[i.id].sell * i.qty, 0);
+    const sell = cart.sell.items.reduce((n, i) => n + D.itemSale(i).value, 0);
     return { buy, sell, net: buy - sell };
 }
 export function questUses(save: D.SaveDataV1, id: string) {
@@ -100,14 +110,15 @@ export function settleCartResult(save: D.SaveDataV1, cart: ShopCart, rpg = false
     if (owned.length !== save.stash.items.length || new Set(owned.map(i => i.uid)).size !== owned.length) return fail('rule');
     for (const item of owned) {
         const original = save.stash.items.find(i => i.uid === item.uid);
-        if (!original || item.id !== original.id || item.qty !== original.qty || !!item.relief !== !!original.relief || !!item.rotated !== !!original.rotated) return fail('rule');
+        if (!original || item.id !== original.id || item.qty !== original.qty || !!item.relief !== !!original.relief || !!item.rotated !== !!original.rotated
+            || D.gunKey(item.gun) !== D.gunKey(original.gun)) return fail('rule');
     }
-    if (cart.sell.items.some(i => i.relief || !Object.hasOwn(D.ITEMS, i.id) || D.ITEMS[i.id].sell <= 0)) return fail('rule');
+    if (cart.sell.items.some(i => !Object.hasOwn(D.ITEMS, i.id) || saleRefusal(i) !== null)) return fail('rule');
     if (cart.buy.items.some(i => i.relief || !Object.hasOwn(D.ITEMS, i.id) || !merchantStock(cart.merchant, rpg).includes(i.id) || i.qty !== D.buyQuantity(i.id))) return fail('rule');
     const stash = structuredClone(cart.stash), { net } = cartTotals(cart);
     if (!Number.isFinite(net)) return fail('rule');
     if (save.cash < net) return fail('funds');
-    for (const item of stash.items) if (!D.fits(stash, item.id, item.x, item.y, item.uid, !!item.rotated)) return fail('space');
+    for (const item of stash.items) if (!D.fits(stash, item, item.x, item.y, item.uid, !!item.rotated)) return fail('space');
     for (const item of cart.buy.items) if (D.addItem(stash, item.id, item.qty)) return fail('space');
     save.stash = stash; save.cash -= net;
     return { ok: true };

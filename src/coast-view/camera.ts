@@ -35,11 +35,36 @@ export function pointerLead(qx: number, qy: number, precise: boolean): Lead {
  * One frame of the mouse look-ahead with easing share k: the direction follows the pointer at once and only the length
  * eases. Turning keeps just the part of the old length along the new direction, so no sideways swing is left to run
  * after the pointer stops; easing the length moves the camera along the pointer's line and never turns the aim.
+ * `room` (leadRoom) caps the length at once, the part kept from the old length included, so the camera stops on the map
+ * edge instead of being held there by the clamp while the length keeps easing.
  */
-export function stepLead(prev: Lead, want: Lead, k: number): Lead {
-  const along = Math.max(0, prev.ux * want.ux + prev.uy * want.uy) * prev.m;
-  return { m: along + (want.m - along) * k, ux: want.ux, uy: want.uy };
+export function stepLead(prev: Lead, want: Lead, k: number, room = Infinity): Lead {
+  const along = Math.min(room, Math.max(0, prev.ux * want.ux + prev.uy * want.uy) * prev.m), to = Math.min(room, want.m);
+  return { m: along + (to - along) * k, ux: want.ux, uy: want.uy };
 }
+
+/** The camera's allowed top-left range, world px (CoastView.camBounds). An axis whose lo exceeds hi (view wider than the
+ *  map there) holds the camera at its midpoint. */
+export interface CameraBounds { x0: number; x1: number; y0: number; y1: number }
+/**
+ * Look-ahead a follow camera keeps per world px between it and its nearest bound. The follow camera reaching a bound
+ * leaves no room at all (leadRoom), so without this a walk toward the edge with the right button held dropped the whole
+ * look-ahead in one frame (64 world px at 1280 x 720); with it the look-ahead runs out over the follow camera's last
+ * 27 px, the camera moving at most four times as fast as the follow camera.
+ */
+export const EDGE_FADE = 3;
+const axisRoom = (f: number, u: number, lo: number, hi: number) => !(f >= lo && f <= hi) ? 0
+  : Math.min(EDGE_FADE * Math.min(f - lo, hi - f), u > 0 ? (hi - f) / u : u < 0 ? (f - lo) / -u : Infinity);
+/**
+ * How far a mouse look-ahead along (ux, uy) may carry the camera from the follow camera (fx, fy): it stops where the
+ * camera meets the map edge (#80). A still pointer keeps its aim only while the camera moves along the pointer's line;
+ * once the clamp held one axis, easing the length moved the other alone and turned the aim (8.4 degrees at 1280 x 720 on
+ * the range's firing line). A follow camera already beyond a bound (the player drawn off centre near the edge, or a map
+ * narrower than the view) leaves no room, since any look-ahead there would leave the line from the player through the
+ * pointer; EDGE_FADE lets the room run out before that.
+ */
+export const leadRoom = (fx: number, fy: number, ux: number, uy: number, b: CameraBounds) =>
+  Math.min(axisRoom(fx, ux, b.x0, b.x1), axisRoom(fy, uy, b.y0, b.y1));
 
 /** How far the smoothed offset may stray from the held whole-pixel offset before the camera moves. It absorbs the
  *  frame-to-frame wobble of the follow; that wobble stays far below it only while the smoothing runs on the clock the

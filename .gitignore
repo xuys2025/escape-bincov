@@ -2,3 +2,8 @@ node_modules/
 .pnpm-store/
 test-results/
 *.log
+# Built by pnpm build / pnpm package; CI builds, deploys and publishes its own copy (docs/CI.md).
+/dist/
+/release/
+/start the game.html
+/docs/release-manifest.json

@@ -4,6 +4,7 @@ import * as D from '../src/domain';
 import { generateRun } from '../src/world';
 import { initialCheckpoint, validateCheckpoint } from '../src/checkpoint';
 import { RecoveryStore, SESSION_KEY, decodeSession } from '../src/recovery-store';
+import { oldProfile } from './fixtures/old-saves';
 
 function fixture() {
   const data = new Map<string, string>(); let fail = false;
@@ -31,7 +32,8 @@ test('failed checkpoint leaves the complete previous revision; retry cannot resu
   assert.throws(() => stale.commit(settled, raid));
 });
 test('old client writes cannot overwrite the v2 record; migration keeps exact original bytes', () => {
-  const data = new Map<string, string>(), old = { ...D.newSave(), version: 1 }; old.cash = 1842;
+  // A profile as the client before gun instances stored it (no gun fields; a v1 profile holding one is refused).
+  const data = new Map<string, string>(), old = { ...oldProfile(D.newSave()), version: 1 }; old.cash = 1842;
   const bytes = JSON.stringify(old); data.set(D.SAVE_KEY, bytes);
   const storage = { getItem: (k: string) => data.get(k) ?? null, setItem: (k: string, v: string) => { data.set(k, v); } };
   const store = new RecoveryStore(storage), loaded = store.load(); store.commit(loaded.save, null);

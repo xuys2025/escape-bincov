@@ -1,4 +1,8 @@
 /** Pure game rules. No renderer, browser globals, or wall-clock timers are required. */
+import { effectiveWeapon } from './gunsmith/stats';
+import { buildOf, factoryState, gunSale, gunSize, gunUids, gunWeight, isGunId, validateGun, type GunInstance, type GunState } from './gunsmith/instance';
+import { migrateProfile, type ProfileV2 } from './gunsmith/migrate';
+
 export type ItemKind = 'weapon' | 'ammo' | 'medical' | 'food' | 'part' | 'valuable' | 'quest' | 'accessory';
 export interface ItemDef {
   id: string; name: string; short: string; w: number; h: number; weight: number;
@@ -16,18 +20,27 @@ export interface EnemyDef {
 }
 export interface LootEntry { id: string; weight: number; min: number; max: number }
 export type LootTable = LootEntry[];
-export interface Item { uid: string; id: string; qty: number; x: number; y: number; relief?: boolean; rotated?: boolean }
+/**
+ * `gun`: a gun item's installed parts and device switches (src/gunsmith/instance.ts). Every gun item has it and no
+ * other item does (profile v3, record v8); the gun's uid, type and body relief flag are this item's `uid`, `id`, `relief`.
+ */
+export interface Item { uid: string; id: string; qty: number; x: number; y: number; relief?: boolean; rotated?: boolean; gun?: GunState }
 export interface Inventory { w: number; h: number; items: Item[] }
 /** ammo is the total loaded count; ammoRelief is its unsellable subset. */
 export interface Magazine { ammo: number; ammoRelief: number }
-export interface Equipment extends Magazine { weapon: string | null; relief: boolean }
+/**
+ * The equipped slot. `weapon` is the gun type; `weaponUid` and `gun` are the equipped gun's uid and state, the same
+ * instance it has as an item (equip and unequip move it), all three null with no gun. The magazine stays here.
+ */
+export interface Equipment extends Magazine { weapon: string | null; weaponUid: string | null; gun: GunState | null; relief: boolean }
 export type Outcome = 'extract' | 'death' | 'timeout';
 export interface RunSummary {
   outcome: Outcome; kills: number; keptValue: number; lostValue: number; message: string;
   seed: number; recovered: boolean;
 }
+/** The profile. Version 3 holds gun instances; older versions are only read, through migrateSave or migrateProfile. */
 export interface SaveDataV1 {
-  version: 2; cash: number; stash: Inventory; bag: Inventory; safe: Inventory;
+  version: 3; cash: number; stash: Inventory; bag: Inventory; safe: Inventory;
   equipment: Equipment; quests: Record<string, boolean>;
   upgraded: boolean; settings: { volume: number }; stats: { runs: number; extracts: number; kills: number };
   activeRun: null | { seed: number; runId?: string }; lastResult?: RunSummary;
@@ -115,23 +128,87 @@ const integer = (value: unknown, fallback = 0, max = 1e9): number =>
   typeof value === 'number' && Number.isFinite(value) ? Math.max(0, Math.min(max, Math.floor(value))) : fallback;
 const isObject = (value: unknown): value is Record<string, any> => !!value && typeof value === 'object' && !Array.isArray(value);
 const isGun = (id: unknown): id is string => typeof id === 'string' && id !== 'knife' && Object.hasOwn(WEAPONS, id);
-function cleanMagazine(weaponId: unknown, current: unknown, relief: unknown): Magazine {
-  const ammo = isGun(weaponId) ? integer(current, 0, WEAPONS[weaponId].magazine) : 0;
+/** The equipped slot as the gun readers below take it: a profile's equipment or a raid loadout. */
+type GunSlot = Pick<Equipment, 'weapon' | 'weaponUid' | 'gun' | 'relief'>;
+/**
+ * The gun the slot holds, as the one instance it is: its uid, type, body relief flag, installed parts and switches;
+ * null without a gun (no weapon, or the knife). Every reader of the equipped gun starts here (#28 M1-05): its effective
+ * numbers through buildOf of these parts (equippedWeapon, the Runtime's currentWeapon and grip), its weight and its
+ * value. A slot that names a gun always carries its uid and state (profile v3, record v8, validEquipment); one that
+ * does not is a bug, and reading it throws rather than fire, weigh or price a modified gun as a factory one.
+ */
+export function equippedGun(slot: GunSlot): GunInstance | null {
+  if (!isGunId(slot.weapon)) return null;
+  if (slot.weaponUid === null || !slot.gun) throw new Error(`The equipped ${slot.weapon} holds no gun instance.`);
+  return { uid: slot.weaponUid, id: slot.weapon, relief: slot.relief, ...slot.gun };
+}
+/**
+ * The equipped gun as it fires: the effective WeaponDef of its build (gunsmith/stats.ts), attachments and their
+ * guardrails included; WEAPONS for no gun (the knife). Fresh objects every call: the Runtime caches its own.
+ */
+export function equippedWeapon(slot: GunSlot): WeaponDef {
+  const gun = equippedGun(slot);
+  return gun ? effectiveWeapon(buildOf(gun)) : WEAPONS[slot.weapon || 'knife'];
+}
+/** Kg of the equipped gun, every installed part counted once (gunsmith gunWeight); 0 without a gun. */
+export function equippedWeight(slot: GunSlot): number {
+  const gun = equippedGun(slot);
+  return gun ? gunWeight(gun) : 0;
+}
+/** `current` rounds, `relief` of them relief, clamped to a magazine of `capacity`. */
+function fillMagazine(capacity: number, current: unknown, relief: unknown): Magazine {
+  const ammo = integer(current, 0, capacity);
   return { ammo, ammoRelief: integer(relief, 0, ammo) };
 }
-const emptyEquipment = (): Equipment => ({ weapon: null, relief: false, ammo: 0, ammoRelief: 0 });
+/**
+ * A stored magazine as the gun in `slot` holds it: clamped to that instance's effective capacity (equippedWeapon),
+ * relief to what is loaded; nothing without a gun. migrateSave, beginRun and settleRun clean the magazine this way;
+ * unloading never clamps (unloadMagazine).
+ */
+function cleanMagazine(slot: GunSlot, current: unknown, relief: unknown): Magazine {
+  return fillMagazine(isGunId(slot.weapon) ? equippedWeapon(slot).magazine : 0, current, relief);
+}
+const emptyEquipment = (): Equipment => ({ weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 });
+/** What a new item of this id is born with: a gun leaves the factory with nothing installed, anything else has no state. */
+export const factoryGun = (id: string): Pick<Item, 'gun'> => isGunId(id) ? { gun: factoryState() } : {};
+/** Every uid an item holds: its own and, for a gun, each installed part's (record-wide unique). For a checked item. */
+export const itemUids = (item: Pick<Item, 'uid' | 'gun'>): string[] => item.gun ? gunUids({ uid: item.uid, parts: item.gun.parts }) : [item.uid];
+/**
+ * What an item is worth to the shop, component by component: the sell price of everything in it that is not relief (a
+ * gun's body at the gun's price and each installed part at its loose price, gunSale; any other item its price times the
+ * quantity), and whether a relief component (the item itself, a relief gun body or a relief part) bars selling it
+ * whole. Such a sale is refused with the reason, never made by stripping or destroying the relief parts.
+ */
+export function itemSale(item: Pick<Item, 'id' | 'qty' | 'relief' | 'gun'>): { value: number; restricted: boolean } {
+  if (item.gun && isGunId(item.id)) return gunSale({ id: item.id, relief: !!item.relief, parts: item.gun.parts });
+  return { value: item.relief ? 0 : ITEMS[item.id].sell * item.qty, restricted: !!item.relief };
+}
+/** Every uid the equipped slot holds: the gun's and its parts', none without a gun. */
+export const equipmentUids = (e: Equipment): string[] => e.weaponUid !== null && e.gun ? gunUids({ uid: e.weaponUid, parts: e.gun.parts }) : [];
+/** A gun state as text with its keys sorted, so two equal states compare equal whatever order their keys were read in. */
+export function gunKey(gun: GunState | null | undefined): string {
+  const sorted = (value: unknown): unknown => Array.isArray(value) ? value.map(sorted) : value && typeof value === 'object'
+    ? Object.fromEntries(Object.keys(value).sort().map(key => [key, sorted((value as Record<string, unknown>)[key])])) : value;
+  return JSON.stringify(sorted(gun ?? null));
+}
+/** What placement reads of the thing being placed: an item id, or an item, whose gun state can grow its footprint. */
+export type Footprint = string | Pick<Item, 'id' | 'gun'>;
 
 export function createInventory(w: number, h: number): Inventory {
   return { w: Math.max(1, integer(w, 1, 30)), h: Math.max(1, integer(h, 1, 30)), items: [] };
 }
-export function itemSize(item: Pick<Item, 'id' | 'rotated'>) {
+/** Cells an item takes. A gun with parts may be larger than its type (gunSize); a factory gun is exactly its ITEMS size. */
+export function itemSize(item: Pick<Item, 'id' | 'rotated' | 'gun'>) {
+  if (item.gun && isGunId(item.id)) return gunSize({ id: item.id, parts: item.gun.parts }, !!item.rotated);
   const d = ITEMS[item.id];
   return item.rotated ? { w: d.h, h: d.w } : { w: d.w, h: d.h };
 }
-export function fits(inv: Inventory, id: string, x: number, y: number, ignoreUid?: string, rotated = false): boolean {
+/** `what`: an id for something new, or the item itself (its gun state counts) when an existing item moves. */
+export function fits(inv: Inventory, what: Footprint, x: number, y: number, ignoreUid?: string, rotated = false): boolean {
+  const id = typeof what === 'string' ? what : what.id;
   const def = Object.hasOwn(ITEMS, id) ? ITEMS[id] : undefined;
   if (!def) return false;
-  const size = itemSize({ id, rotated });
+  const size = itemSize({ id, rotated, gun: typeof what === 'string' ? undefined : what.gun });
   if (!Number.isInteger(x) || !Number.isInteger(y) || x < 0 || y < 0 || x + size.w > inv.w || y + size.h > inv.h) return false;
   return inv.items.every(other => {
     if (other.uid === ignoreUid) return true;
@@ -139,12 +216,14 @@ export function fits(inv: Inventory, id: string, x: number, y: number, ignoreUid
     return x + size.w <= other.x || x >= other.x + d.w || y + size.h <= other.y || y >= other.y + d.h;
   });
 }
-function space(inv: Inventory, id: string, rotated = false, autoRotate = true): { x: number; y: number; rotated?: boolean } | null {
-  const orientations = autoRotate && ITEMS[id].w !== ITEMS[id].h ? [rotated, !rotated] : [rotated];
+function space(inv: Inventory, what: Footprint, rotated = false, autoRotate = true): { x: number; y: number; rotated?: boolean } | null {
+  const size = typeof what === 'string' ? itemSize({ id: what }) : itemSize({ id: what.id, gun: what.gun });
+  const orientations = autoRotate && size.w !== size.h ? [rotated, !rotated] : [rotated];
   for (const direction of orientations) for (let y = 0; y < inv.h; y++) for (let x = 0; x < inv.w; x++)
-    if (fits(inv, id, x, y, undefined, direction)) return { x, y, ...(direction ? { rotated: true } : {}) };
+    if (fits(inv, what, x, y, undefined, direction)) return { x, y, ...(direction ? { rotated: true } : {}) };
   return null;
 }
+/** New items. A gun is born a factory instance under a new uid (factoryGun); stacks merge first. */
 export function addItem(inv: Inventory, id: string, qty = 1, relief = false, rotated = false, autoRotate = true, allocate = uid): number {
   let left = integer(qty);
   const def = Object.hasOwn(ITEMS, id) ? ITEMS[id] : undefined;
@@ -160,16 +239,41 @@ export function addItem(inv: Inventory, id: string, qty = 1, relief = false, rot
     const pos = space(inv, id, rotated, autoRotate);
     if (!pos) break;
     const take = Math.min(left, def.stack);
-    inv.items.push({ uid: allocate(), id, qty: take, ...pos, ...(relief ? { relief: true } : {}) });
+    inv.items.push({ uid: allocate(), id, qty: take, ...pos, ...(relief ? { relief: true } : {}), ...factoryGun(id) });
     left -= take;
   }
   return left;
+}
+/**
+ * Put an existing item that is in no inventory yet into `inv` whole, at the first free cell (its own orientation
+ * first, then the other with `autoRotate`). It keeps its uid and every field, a gun its state: this is how a gun moves
+ * without becoming another gun. False, and nothing changes, when it does not fit.
+ */
+export function placeItem(inv: Inventory, item: Item, autoRotate = true): boolean {
+  const pos = space(inv, item, !!item.rotated, autoRotate);
+  if (!pos) return false;
+  const placed: Item = { ...item, x: pos.x, y: pos.y };
+  if (pos.rotated) placed.rotated = true; else delete placed.rotated;
+  inv.items.push(placed);
+  return true;
+}
+/** Ground uids a classic or v1 raid deals out from a counter (loot-3, entity-12): a later raid deals the same ones again. */
+const RAID_LOCAL = /^(?:enemy|loot|entity|pursuit)-[0-9]+$/;
+/**
+ * A gun from the ground into `inv` whole, as the same instance: its state and relief flag, and its uid unless that is
+ * raid-local. A dropped gun kept its item uid and v2/v3 raids name their entities with the run id, so those stay; a gun
+ * born on the ground of a classic or v1 raid takes a new item uid, or a later raid's ground loot could collide with it.
+ * False, and nothing changes, when it does not fit.
+ */
+export function placeGroundGun(inv: Inventory, loot: Pick<Item, 'uid' | 'id' | 'gun'> & { relief: boolean }): boolean {
+  return placeItem(inv, { uid: RAID_LOCAL.test(loot.uid) ? uid() : loot.uid, id: loot.id, qty: 1, x: 0, y: 0,
+    ...(loot.relief ? { relief: true } : {}), gun: loot.gun ? clone(loot.gun) : factoryState() });
 }
 export function moveItem(inv: Inventory, itemUid: string, x: number, y: number, rotated?: boolean): boolean {
   const selected = inv.items.find(i => i.uid === itemUid);
   if (!selected) return false;
   const direction = rotated ?? !!selected.rotated;
-  if (fits(inv, selected.id, x, y, itemUid, direction)) { selected.x = x; selected.y = y; if (direction) selected.rotated = true; else delete selected.rotated; return true; }
+  if (fits(inv, selected, x, y, itemUid, direction)) { selected.x = x; selected.y = y; if (direction) selected.rotated = true; else delete selected.rotated; return true; }
   const target = inv.items.find(i => i.uid !== itemUid && i.x === x && i.y === y);
   if (target && target.id === selected.id && !!target.relief === !!selected.relief && target.qty + selected.qty <= ITEMS[target.id].stack) {
     target.qty += selected.qty;
@@ -179,8 +283,8 @@ export function moveItem(inv: Inventory, itemUid: string, x: number, y: number, 
   return false;
 }
 export function rotateItem(inv: Inventory, itemUid: string): boolean {
-  const item = inv.items.find(i => i.uid === itemUid);
-  return !!item && ITEMS[item.id].w !== ITEMS[item.id].h && moveItem(inv, itemUid, item.x, item.y, !item.rotated);
+  const item = inv.items.find(i => i.uid === itemUid), size = item && itemSize({ id: item.id, gun: item.gun });
+  return !!item && !!size && size.w !== size.h && moveItem(inv, itemUid, item.x, item.y, !item.rotated);
 }
 export function transferItem(from: Inventory, to: Inventory, itemUid: string, x?: number, y?: number): boolean {
   const selected = from.items.find(i => i.uid === itemUid);
@@ -188,19 +292,26 @@ export function transferItem(from: Inventory, to: Inventory, itemUid: string, x?
   if (from === to) return x !== undefined && y !== undefined && moveItem(from, itemUid, x, y);
   const trial = clone(to);
   if (x !== undefined && y !== undefined) {
-    if (fits(trial, selected.id, x, y, undefined, !!selected.rotated)) trial.items.push({ ...selected, x, y });
+    if (fits(trial, selected, x, y, undefined, !!selected.rotated)) trial.items.push({ ...selected, x, y });
     else {
       const target = trial.items.find(i => i.x === x && i.y === y);
       if (!target || target.id !== selected.id || !!target.relief !== !!selected.relief || target.qty + selected.qty > ITEMS[target.id].stack) return false;
       target.qty += selected.qty;
     }
-  } else if (addItem(trial, selected.id, selected.qty, !!selected.relief, !!selected.rotated) > 0) return false;
+  } else if (selected.gun ? !placeItem(trial, clone(selected)) : addItem(trial, selected.id, selected.qty, !!selected.relief, !!selected.rotated) > 0) return false;
   to.items = trial.items;
   from.items.splice(from.items.indexOf(selected), 1);
   return true;
 }
 export const count = (inv: Inventory, id: string): number => inv.items.reduce((sum, i) => sum + (i.id === id ? i.qty : 0), 0);
-export const weight = (inv: Inventory): number => Math.round(inv.items.reduce((sum, i) => sum + ITEMS[i.id].weight * i.qty, 0) * 1000) / 1000;
+/**
+ * Kg of one inventory entry. A gun weighs with its installed parts (gunsmith gunWeight), as it does equipped
+ * (equippedWeight), so moving it between a container and the slot never changes a carried total; a factory gun is
+ * exactly its ITEMS weight. Anything else is its ITEMS weight times the quantity.
+ */
+export const itemWeight = (item: Pick<Item, 'id' | 'qty' | 'gun'>): number =>
+  item.gun && isGunId(item.id) ? gunWeight({ id: item.id, parts: item.gun.parts }) * item.qty : ITEMS[item.id].weight * item.qty;
+export const weight = (inv: Inventory): number => Math.round(inv.items.reduce((sum, i) => sum + itemWeight(i), 0) * 1000) / 1000;
 export function removeItem(inv: Inventory, id: string, qty: number): boolean {
   if (!Number.isInteger(qty) || qty < 0 || count(inv, id) < qty) return false;
   let left = qty;
@@ -216,8 +327,8 @@ export function removeItem(inv: Inventory, id: string, qty: number): boolean {
 }
 export function newSave(): SaveDataV1 {
   const save: SaveDataV1 = {
-    version: 2, cash: 700, stash: createInventory(10, 6), bag: createInventory(6, 5), safe: createInventory(2, 2),
-    equipment: { weapon: 'pistol', relief: false, ammo: 0, ammoRelief: 0 }, quests: { repair: false, sample: false, ledger: false },
+    version: 3, cash: 700, stash: createInventory(10, 6), bag: createInventory(6, 5), safe: createInventory(2, 2),
+    equipment: { weapon: 'pistol', weaponUid: uid(), gun: factoryState(), relief: false, ammo: 0, ammoRelief: 0 }, quests: { repair: false, sample: false, ledger: false },
     upgraded: false, settings: { volume: 0.35 }, stats: { runs: 0, extracts: 0, kills: 0 }, activeRun: null,
   };
   addItem(save.bag, 'ammo9', 32);
@@ -227,46 +338,91 @@ export function newSave(): SaveDataV1 {
   addItem(save.stash, 'ammo9', 24);
   return save;
 }
-function cleanInventory(raw: unknown, w: number, h: number, used = new Set<string>(), allowRotation = true): Inventory {
+const ITEM_UID = /^[a-zA-Z0-9_-]{1,100}$/;
+/** A uid of `used` or a fresh one, recorded in `used`. */
+function claim(used: Set<string>, wanted: unknown): string {
+  let itemUid = typeof wanted === 'string' && ITEM_UID.test(wanted) && !used.has(wanted) ? wanted : uid();
+  while (used.has(itemUid)) itemUid = uid();
+  used.add(itemUid);
+  return itemUid;
+}
+/**
+ * The state a gun keeps through cleaning: its stored one when that is valid under `gunUid` and none of its part uids
+ * is taken yet (then they are taken), otherwise a factory state. Strict decoders check first, so they never reach the
+ * fallback; it only keeps a lenient repair from inventing an invalid gun.
+ */
+function keptGun(id: string, gunUid: string, stored: unknown, used: Set<string>): GunState {
+  const state = stored as GunState;
+  if (!validateGun(id, gunUid, stored).ok) return factoryState();
+  const parts = gunUids({ uid: gunUid, parts: state.parts }).slice(1);
+  if (parts.some(part => used.has(part))) return factoryState();
+  parts.forEach(part => used.add(part));
+  return clone(state);
+}
+/**
+ * Lenient inventory repair (legacy key, migrateSave): unknown items dropped, overlaps placed anew, bad or repeated uids
+ * reissued. `guns`: the format carries gun states (profile v3); a gun keeps its state (keptGun) and, when it has to be
+ * placed anew, its uid. Without it no item gets a `gun` field: migrateProfile adds the factory states afterwards.
+ */
+function cleanInventory(raw: unknown, w: number, h: number, used = new Set<string>(), allowRotation = true, guns = true): Inventory {
   const inv = createInventory(w, h);
   const entries = isObject(raw) && Array.isArray(raw.items) ? raw.items : Array.isArray(raw) ? raw : [];
   for (const entry of entries.slice(0, 900)) {
     if (!isObject(entry) || typeof entry.id !== 'string' || !Object.hasOwn(ITEMS, entry.id)) continue;
-    const qty = integer(entry.qty ?? entry.quantity, 1, ITEMS[entry.id].stack * w * h);
+    let qty = integer(entry.qty ?? entry.quantity, 1, ITEMS[entry.id].stack * w * h);
     if (!qty) continue;
-    if (qty <= ITEMS[entry.id].stack && fits(inv, entry.id, entry.x, entry.y, undefined, allowRotation && entry.rotated === true)) {
-      let itemUid = typeof entry.uid === 'string' && /^[a-zA-Z0-9_-]{1,100}$/.test(entry.uid) && !used.has(entry.uid) ? entry.uid : uid();
-      while (used.has(itemUid)) itemUid = uid();
-      used.add(itemUid);
-      inv.items.push({ uid: itemUid, id: entry.id, qty, x: entry.x, y: entry.y, ...(entry.relief === true ? { relief: true } : {}), ...(allowRotation && typeof entry.rotated === 'boolean' ? { rotated: entry.rotated } : {}) });
-    } else {
-      const firstNewItem = inv.items.length;
-      addItem(inv, entry.id, qty, entry.relief === true, allowRotation && entry.rotated === true, false);
-      for (const added of inv.items.slice(firstNewItem)) {
-        while (used.has(added.uid)) added.uid = uid();
-        used.add(added.uid);
-      }
+    const kept = { ...(entry.relief === true ? { relief: true } : {}), ...(allowRotation && typeof entry.rotated === 'boolean' ? { rotated: entry.rotated } : {}) };
+    if (guns && isGunId(entry.id)) {
+      // The gun keeps its uid and state wherever it lands; only extra copies of a forged quantity are new factory guns.
+      const itemUid = claim(used, entry.uid), gun: Item = { uid: itemUid, id: entry.id, qty: 1, x: entry.x, y: entry.y, ...kept, gun: keptGun(entry.id, itemUid, entry.gun, used) };
+      if (fits(inv, gun, entry.x, entry.y, undefined, !!gun.rotated)) inv.items.push(gun);
+      else if (!placeItem(inv, gun, false)) continue;
+      if (!--qty) continue;
+    } else if (qty <= ITEMS[entry.id].stack && fits(inv, entry.id, entry.x, entry.y, undefined, allowRotation && entry.rotated === true)) {
+      inv.items.push({ uid: claim(used, entry.uid), id: entry.id, qty, x: entry.x, y: entry.y, ...kept });
+      continue;
+    }
+    const firstNewItem = inv.items.length;
+    addItem(inv, entry.id, qty, entry.relief === true, allowRotation && entry.rotated === true, false);
+    for (const added of inv.items.slice(firstNewItem)) {
+      while (used.has(added.uid)) added.uid = uid();
+      used.add(added.uid);
+      if (!guns) delete added.gun; // the old format: migrateProfile gives every gun its state
     }
   }
   return inv;
 }
-export function migrateSave(raw: unknown): SaveDataV1 {
-  if (!isObject(raw) || (raw.version !== undefined && ![0, 1, 2].includes(raw.version))) return newSave();
-  const upgraded = raw.upgraded === true;
+/** A gun uid and state for the equipped slot of a v3 profile being cleaned (keptGun), both null without a gun. */
+function keptSlot(weapon: string | null, equipped: Record<string, any>, used: Set<string>): Pick<Equipment, 'weaponUid' | 'gun'> {
+  if (weapon === null) return { weaponUid: null, gun: null };
+  const weaponUid = claim(used, equipped.weaponUid);
+  return { weaponUid, gun: keptGun(weapon, weaponUid, equipped.gun, used) };
+}
+/** The lenient normalization shared by both formats; `guns`: the stored profile is v3 and carries gun states. */
+function cleanSave(raw: Record<string, any>, guns: boolean): SaveDataV1 | ProfileV2 {
+  const upgraded = raw.upgraded === true, rotation = raw.version === 2 || raw.version === 3;
   const equipped = isObject(raw.equipment) ? raw.equipment : {};
   const quests = isObject(raw.quests) ? raw.quests : {};
   const stats = isObject(raw.stats) ? raw.stats : {};
   const settings = isObject(raw.settings) ? raw.settings : {};
   const used = new Set<string>();
-  const save: SaveDataV1 = {
-    version: 2, cash: integer(raw.cash, 0), stash: cleanInventory(raw.stash ?? raw.inventory, 10, upgraded ? 9 : 6, used, raw.version === 2),
-    bag: cleanInventory(raw.bag, 6, 5, used, raw.version === 2), safe: cleanInventory(raw.safe, 2, 2, used, raw.version === 2),
-    equipment: { weapon: isGun(equipped.weapon) ? equipped.weapon : null, relief: equipped.relief === true, ...cleanMagazine(equipped.weapon, equipped.ammo, equipped.ammoRelief) },
+  const stash = cleanInventory(raw.stash ?? raw.inventory, 10, upgraded ? 9 : 6, used, rotation, guns);
+  const bag = cleanInventory(raw.bag, 6, 5, used, rotation, guns), safe = cleanInventory(raw.safe, 2, 2, used, rotation, guns);
+  const weapon = isGun(equipped.weapon) ? equipped.weapon : null, relief = equipped.relief === true;
+  // A v3 slot keeps its stored gun (keptSlot) and its magazine is clamped to that instance. An old slot held a factory
+  // gun that has no uid until migrateProfile issues one, so the old rule stands there: a factory gun's capacity.
+  const held = guns ? keptSlot(weapon, equipped, used) : null;
+  const magazine = held ? cleanMagazine({ weapon, relief, ...held }, equipped.ammo, equipped.ammoRelief)
+    : fillMagazine(isGunId(weapon) ? effectiveWeapon(buildOf({ id: weapon, parts: [] })).magazine : 0, equipped.ammo, equipped.ammoRelief);
+  const slot = { weapon, relief, ...magazine };
+  const save = {
+    version: guns ? 3 : 2, cash: integer(raw.cash, 0), stash, bag, safe,
+    equipment: held ? { ...slot, ...held } : slot,
     quests: Object.fromEntries(Object.keys(QUESTS).map(key => [key, quests[key] === true])), upgraded,
     settings: { volume: typeof settings.volume === 'number' && Number.isFinite(settings.volume) ? Math.max(0, Math.min(1, settings.volume)) : 0.35 },
     stats: { runs: integer(stats.runs), extracts: integer(stats.extracts), kills: integer(stats.kills) },
     activeRun: isObject(raw.activeRun) ? { seed: integer(raw.activeRun.seed, 1, 0xffffffff), ...(typeof raw.activeRun.runId === 'string' ? { runId: raw.activeRun.runId } : {}) } : null,
-  };
+  } as SaveDataV1 | ProfileV2;
   if (Array.isArray(raw.reliefSupplies)) {
     const pending = raw.reliefSupplies.filter(isObject);
     const supplies = ['ammo9', 'bandage'].map(id => ({ id, qty: Math.min(id === 'ammo9' ? 12 : 1, pending.reduce((sum, entry) => sum + (entry.id === id ? integer(entry.qty) : 0), 0)) })).filter(entry => entry.qty > 0);
@@ -278,10 +434,22 @@ export function migrateSave(raw: unknown): SaveDataV1 {
   }
   return save;
 }
+/** A profile v0–v2 normalized by the old lenient rules and kept in that format (v2): what a stored v2 profile is compared with. */
+export function cleanOldSave(raw: Record<string, any>): ProfileV2 { return cleanSave(raw, false) as ProfileV2; }
+/**
+ * Any stored profile as the current version (3). A v3 profile is normalized keeping its gun states; v0–v2 is
+ * normalized by the old rules, then migrated (migrateProfile: every gun a factory instance, the equipped one a new
+ * uid). Anything else starts a new save, as before.
+ */
+export function migrateSave(raw: unknown): SaveDataV1 {
+  if (isObject(raw) && raw.version === 3) return cleanSave(raw, true) as SaveDataV1;
+  if (!isObject(raw) || (raw.version !== undefined && ![0, 1, 2].includes(raw.version))) return newSave();
+  return migrateProfile(cleanOldSave(raw));
+}
 export function beginRun(save: SaveDataV1, seed: number): RunLoadout {
   if (save.activeRun) throw new Error('上次行动尚未结算，暂时不能出击。');
   const runId = uid();
-  const loadout: RunLoadout = { bag: clone(save.bag), safe: clone(save.safe), ...save.equipment, ...cleanMagazine(save.equipment.weapon, save.equipment.ammo, save.equipment.ammoRelief), runId };
+  const loadout: RunLoadout = { bag: clone(save.bag), safe: clone(save.safe), ...clone(save.equipment), ...cleanMagazine(save.equipment, save.equipment.ammo, save.equipment.ammoRelief), runId };
   save.bag = createInventory(6, 5);
   save.equipment = emptyEquipment();
   save.activeRun = { seed: seed >>> 0, runId };
@@ -292,12 +460,15 @@ export function checkpointSafe(save: SaveDataV1, safe: Inventory, runId?: string
   if (!save.activeRun || (runId !== undefined && save.activeRun.runId !== runId)) return;
   save.safe = cleanInventory(safe, 2, 2);
 }
-const inventoryValue = (inv: Inventory) => inv.items.reduce((sum, i) => sum + (i.relief ? 0 : ITEMS[i.id].sell * i.qty), 0);
+/** Settlement value: every component that is not relief, a gun's parts included (itemSale). */
+const inventoryValue = (inv: Inventory) => inv.items.reduce((sum, i) => sum + itemSale(i).value, 0);
+/** The equipped gun's settlement value: its body unless relief, plus its parts that are not relief. */
+const equippedValue = (e: Equipment) => { const held = equippedGun(e); return held ? gunSale(held).value : 0; };
 export function settleRun(save: SaveDataV1, loadout: RunLoadout, outcome: Outcome, kills: number): RunSummary | null {
   if (!save.activeRun?.runId || save.activeRun.runId !== loadout.runId) return null;
-  const magazine = cleanMagazine(loadout.weapon, loadout.ammo, loadout.ammoRelief);
-  const ammoId = isGun(loadout.weapon) ? WEAPONS[loadout.weapon].ammo : null;
-  const carriedValue = inventoryValue(loadout.bag) + (loadout.weapon && !loadout.relief ? ITEMS[loadout.weapon].sell : 0) + (ammoId ? (magazine.ammo - magazine.ammoRelief) * ITEMS[ammoId].sell : 0);
+  const magazine = cleanMagazine(loadout, loadout.ammo, loadout.ammoRelief);
+  const ammoId = isGunId(loadout.weapon) ? equippedWeapon(loadout).ammo : null;
+  const carriedValue = inventoryValue(loadout.bag) + equippedValue(loadout) + (ammoId ? (magazine.ammo - magazine.ammoRelief) * ITEMS[ammoId].sell : 0);
   save.safe = clone(loadout.safe);
   const summary: RunSummary = {
     outcome, kills: integer(kills), keptValue: inventoryValue(loadout.safe) + (outcome === 'extract' ? carriedValue : 0),
@@ -305,7 +476,7 @@ export function settleRun(save: SaveDataV1, loadout: RunLoadout, outcome: Outcom
     message: outcome === 'extract' ? '成功撤离，装备和物资已带回水产站。' : outcome === 'death' ? '撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。' : '撤离超时，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。',
   };
   save.bag = outcome === 'extract' ? clone(loadout.bag) : createInventory(6, 5);
-  save.equipment = outcome === 'extract' ? { weapon: loadout.weapon, relief: loadout.relief, ...magazine } : emptyEquipment();
+  save.equipment = outcome === 'extract' ? { weapon: loadout.weapon, weaponUid: loadout.weaponUid, gun: clone(loadout.gun), relief: loadout.relief, ...magazine } : emptyEquipment();
   save.stats.kills += summary.kills;
   if (outcome === 'extract') save.stats.extracts++;
   save.activeRun = null;
@@ -325,7 +496,8 @@ export function recoverInterrupted(save: SaveDataV1): RunSummary | null {
 }
 /**
  * Cash plus what the shop would pay for everything stored in the stash, bag and safe.
- * Relief goods are unsellable, and the copies an unfinished quest still needs are not counted
+ * Relief goods are unsellable, a gun counts with its parts (itemSale) and not at all while a relief part bars
+ * selling it whole, and the copies an unfinished quest still needs are not counted
  * (the same quest needs that Shop.questUses / saleWarnings warn about, read from QUESTS here).
  * The equipped weapon and its magazine are left out: relief only asks this when that weapon is
  * absent or a relief gun with an empty magazine.
@@ -340,6 +512,7 @@ export function liquidValue(save: SaveDataV1): number {
   let value = save.cash;
   for (const inv of [save.stash, save.bag, save.safe]) for (const entry of inv.items) {
     if (entry.relief) continue;
+    if (entry.gun) { const sale = itemSale(entry); if (!sale.restricted) value += sale.value; continue; } // no quest needs a gun
     const kept = Math.min(entry.qty, reserved.get(entry.id) ?? 0);
     if (kept) reserved.set(entry.id, reserved.get(entry.id)! - kept);
     value += ITEMS[entry.id].sell * (entry.qty - kept);
@@ -362,7 +535,7 @@ export function grantRelief(save: SaveDataV1): boolean {
   // Rule A: no gun, and selling everything sellable still cannot buy a pistol. The old
   // cash < 200 test is kept on purpose so the rule is never stricter than before.
   if (!ownedGuns(save).length && (save.cash < 200 || liquidValue(save) < ITEMS.pistol.buy)) {
-    save.equipment = { weapon: 'pistol', relief: true, ammo: 0, ammoRelief: 0 };
+    save.equipment = { weapon: 'pistol', weaponUid: uid(), gun: factoryState(), relief: true, ammo: 0, ammoRelief: 0 };
     // A waiting kit is reused after a failed raid instead of issuing a second pending kit.
     if (!save.reliefSupplies?.length) save.reliefSupplies = [{ id: 'ammo9', qty: 12 }, { id: 'bandage', qty: 1 }];
     changed = true;
@@ -388,51 +561,67 @@ export function grantRelief(save: SaveDataV1): boolean {
 }
 /** Purchases enter the stash. Ammo is bought in packs; prices are still per round. */
 export function buyQuantity(id: string): number { return id === 'ammo9' ? 12 : id === 'shell' ? 4 : id === 'ammoR' ? 10 : 1; }
+/**
+ * The equipped gun as the item it becomes when it leaves the slot: the same uid, state and body relief flag, so it
+ * comes back as the gun it is. Null without a gun.
+ */
+function heldItem(e: Equipment): Item | null {
+  if (!isGun(e.weapon)) return null;
+  return { uid: e.weaponUid ?? uid(), id: e.weapon, qty: 1, x: 0, y: 0, ...(e.relief ? { relief: true } : {}), gun: e.gun ? clone(e.gun) : factoryState() };
+}
+/** The slot holding `item`, a gun item, as that same instance: its uid, state and relief flag, an empty magazine. */
+const slotOf = (item: Item): Equipment =>
+  ({ weapon: item.id, weaponUid: item.uid, gun: item.gun ? clone(item.gun) : factoryState(), relief: !!item.relief, ammo: 0, ammoRelief: 0 });
+/**
+ * Swap at the hideout: the chosen gun item becomes the equipped gun and the one it replaces goes back into the same
+ * container as the same instance, then the old magazine's rounds (ordinary and relief kept apart). All or nothing.
+ */
 export function equip(save: SaveDataV1, itemUid: string): boolean {
   if (save.activeRun) return false;
   for (const inv of [save.bag, save.stash]) {
     const selected = inv.items.find(i => i.uid === itemUid);
     if (!selected || !isGun(selected.id)) continue;
-    const trial = clone(inv);
+    const trial = clone(inv), held = heldItem(save.equipment);
     trial.items.splice(inv.items.indexOf(selected), 1);
-    if (save.equipment.weapon && addItem(trial, save.equipment.weapon, 1, save.equipment.relief)) return false;
+    if (held && !placeItem(trial, held)) return false;
     if (!unloadMagazine(trial, save.equipment)) return false;
     inv.items = trial.items;
-    save.equipment = { weapon: selected.id, relief: !!selected.relief, ammo: 0, ammoRelief: 0 };
+    save.equipment = slotOf(selected);
     return true;
   }
   return false;
 }
+/** The equipped gun goes to the stash as the same instance, with its rounds; nothing changes when either does not fit. */
 export function unequip(save: SaveDataV1): boolean {
   if (save.activeRun || !save.equipment.weapon) return false;
-  const stash = clone(save.stash);
-  if (addItem(stash, save.equipment.weapon, 1, save.equipment.relief)) return false;
+  const stash = clone(save.stash), held = heldItem(save.equipment);
+  if (!held || !placeItem(stash, held)) return false;
   if (!unloadMagazine(stash, save.equipment)) return false;
   save.stash = stash;
   save.equipment = emptyEquipment();
   return true;
 }
-/** Raid weapon swaps use the backpack only; safe contents remain untouched. */
+/** Raid weapon swaps use the backpack only; safe contents remain untouched. The guns move as the same instances. */
 export function equipRun(loadout: RunLoadout, itemUid: string): boolean {
   const selected = loadout.bag.items.find(entry => entry.uid === itemUid);
   if (!selected || !isGun(selected.id)) return false;
-  const trial = clone(loadout.bag);
+  const trial = clone(loadout.bag), held = heldItem(loadout);
   trial.items.splice(loadout.bag.items.indexOf(selected), 1);
-  if (loadout.weapon && addItem(trial, loadout.weapon, 1, loadout.relief)) return false;
+  if (held && !placeItem(trial, held)) return false;
   if (!unloadMagazine(trial, loadout)) return false;
   loadout.bag = trial;
-  loadout.weapon = selected.id;
-  loadout.relief = !!selected.relief;
-  loadout.ammo = 0;
-  loadout.ammoRelief = 0;
+  Object.assign(loadout, slotOf(selected));
   return true;
 }
-/** Called only against a trial inventory so a failed unload cannot partially commit. */
+/**
+ * The rounds in `equipment`'s magazine back into `inv`, ordinary and relief kept apart. Called only against a trial
+ * inventory so a failed unload cannot partially commit. The stored count comes back as it is, never clamped to the
+ * gun's capacity first: rounds a changed build no longer holds (the M2 workbench) must not vanish on the way out.
+ */
 function unloadMagazine(inv: Inventory, equipment: Equipment): boolean {
   if (!isGun(equipment.weapon)) return true;
-  const magazine = cleanMagazine(equipment.weapon, equipment.ammo, equipment.ammoRelief);
-  const ammoId = WEAPONS[equipment.weapon].ammo!;
-  return addItem(inv, ammoId, magazine.ammo - magazine.ammoRelief) === 0 && addItem(inv, ammoId, magazine.ammoRelief, true) === 0;
+  const ammo = integer(equipment.ammo), relief = integer(equipment.ammoRelief, 0, ammo), ammoId = equippedWeapon(equipment).ammo!;
+  return addItem(inv, ammoId, ammo - relief) === 0 && addItem(inv, ammoId, relief, true) === 0;
 }
 export function submitQuest(save: SaveDataV1, id: string): boolean {
   const quest = QUESTS[id];
@@ -459,13 +648,13 @@ export function upgradeStash(save: SaveDataV1): boolean {
   return true;
 }
 /**
- * Takes exactly the missing rounds of the gun's own ammunition out of `bag` (edited in place). Relief rounds are
- * loaded first and retain their identity, independently of the gun's origin.
+ * Takes exactly the missing rounds of the equipped gun's own ammunition out of `bag` (edited in place), up to the
+ * effective capacity of the gun in `slot` (equippedWeapon). Relief rounds are loaded first and retain their identity,
+ * independently of the gun's origin.
  */
-export function reloadMagazine(weaponId: string, current: number, currentRelief: number, bag: Inventory): Magazine {
-  const magazine = cleanMagazine(weaponId, current, currentRelief);
-  if (!isGun(weaponId)) return magazine;
-  const weapon = WEAPONS[weaponId];
+export function reloadMagazine(slot: GunSlot, current: number, currentRelief: number, bag: Inventory): Magazine {
+  if (!isGunId(slot.weapon)) return fillMagazine(0, current, currentRelief);
+  const weapon = equippedWeapon(slot), magazine = fillMagazine(weapon.magazine, current, currentRelief);
   for (const relief of [true, false]) for (const entry of bag.items) {
     if (entry.id !== weapon.ammo || !!entry.relief !== relief) continue;
     const take = Math.min(entry.qty, weapon.magazine - magazine.ammo);

@@ -172,6 +172,11 @@ export class SynthAudio {
   }
 
   shot(kind = 'pistol', spot?: Spot): void {
+    if (kind === 'spit') {
+      this.hiss(.22, .28, 180, 0, spot); this.hiss(.12, .2, 260, .09, spot);
+      this.tone(150, .18, .12, 'triangle', 48, 0, spot); return;
+    }
+    if (kind === 'acid-hit') { this.hiss(.2, .16, 240, 0, spot); this.tone(100, .09, .05, 'sine', 38, 0, spot); return; }
     if (kind === 'knife') { this.hiss(0.12, 0.35, 900, 0, spot); this.tone(320, 0.08, 0.05, 'triangle', 90, 0, spot); return; }
     const shotgun = kind === 'shotgun';
     const level = kind === 'enemy' ? 0.55 : 1;
@@ -181,6 +186,36 @@ export class SynthAudio {
     this.hiss(0.06, 0.09 * level, 1500, 0.11, spot);
   }
 
+  /** Short, positional enemy action cues; shared timbres keep simultaneous encounters within the voice budget. */
+  enemy(voice: string, phase: 'prepare' | 'release' | 'warning' | 'reload', spot?: Spot): void {
+    if (phase === 'reload') { this.hiss(.10, .13, 1400, 0, spot); this.tone(420, .05, .055, 'square', 220, .07, spot); return; }
+    if (voice === 'radio' || voice === 'raider') {
+      if (phase === 'warning') {
+        this.tone(voice === 'radio' ? 680 : 270, .10, .075, 'triangle', 390, 0, spot);
+        this.hiss(.13, .10, 800, .08, spot);
+      } else { this.hiss(.09, .10, 950, 0, spot); this.tone(330, .05, .04, 'triangle', 180, .04, spot); }
+      return;
+    }
+    const release = phase === 'release';
+    if (voice === 'crab') {
+      this.tone(release ? 720 : 920, .055, .08, 'square', 310, 0, spot);
+      this.tone(610, .045, .06, 'triangle', 240, release ? .04 : .13, spot);
+    } else if (voice === 'dog') {
+      this.tone(release ? 190 : 100, release ? .12 : .26, .13, 'sawtooth', 55, 0, spot);
+      this.hiss(.13, .11, 200, .02, spot);
+    } else if (voice === 'spit') {
+      this.tone(85, .25, .10, 'triangle', 155, 0, spot); this.hiss(.18, .12, 160, .06, spot);
+    } else if (voice === 'heavy') {
+      this.tone(release ? 80 : 120, .23, release ? .20 : .10, 'triangle', 28, 0, spot);
+      this.hiss(release ? .16 : .30, .16, 100, 0, spot);
+    } else if (voice === 'polearm') {
+      this.hiss(release ? .12 : .20, .18, release ? 1000 : 380, 0, spot);
+      this.tone(180, .08, .04, 'triangle', 95, 0, spot);
+    } else {
+      this.hiss(.20, .14, 260, 0, spot); this.tone(release ? 165 : 95, .19, .07, 'sawtooth', 45, 0, spot);
+    }
+  }
+
   step(): void {
     if (!this.context || this.context.currentTime - this.lastStep < 0.17) return;
     this.lastStep = this.context.currentTime;
@@ -188,6 +223,15 @@ export class SynthAudio {
     this.tone(78 + Math.random() * 22, 0.08, 0.07, 'triangle', 40);
   }
   hit(spot?: Spot): void { this.hiss(0.16, 0.6, 80, 0, spot); this.tone(110, 0.17, 0.15, 'sawtooth', 30, 0, spot); }
+  /**
+   * The player's own body taking a blow, centred: a short falling grunt over a close smack, one onset like the other
+   * cues. Its harmonics and the smack carry on small speakers, where a low sine thump alone would not.
+   */
+  pain(): void { this.tone(150, 0.16, 0.2, 'sawtooth', 70); this.hiss(0.12, 0.62, 240); }
+  /** A critical hit confirmed: two quick bright ticks over the blow's own sound. */
+  crit(spot?: Spot): void { this.tone(1700, 0.035, 0.16, 'square', 1300, 0, spot); this.tone(2300, 0.05, 0.11, 'triangle', 2100, 0.03, spot); }
+  /** A kill confirmed: a short low thunk with a falling tail, centred like the kill marker it comes with. */
+  kill(): void { this.tone(150, 0.2, 0.22, 'triangle', 55); this.tone(300, 0.06, 0.09, 'square', 160); this.hiss(0.12, 0.22, 500, 0.02); }
   pickup(): void { this.tone(660, 0.08, 0.08, 'triangle', 880); this.tone(990, 0.1, 0.06, 'sine', 1100, 0.07); }
   /** An item going into the bag: a short cloth rustle under the pickup chime, so looting reads clearly over the sea. */
   stow(): void { this.hiss(0.07, 0.24, 1700); this.hiss(0.05, 0.14, 2800, 0.05); this.pickup(); }

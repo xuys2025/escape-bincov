@@ -62,7 +62,7 @@ const summary = `### Browser regression decision\n\n${plan.reason}\n\n` +
   (plan.browserRequired ? 'All browser groups are required.\n' :
     `Reused full browser evidence: [run ${plan.validatedRun}](https://github.com/${repository}/actions/runs/${plan.validatedRun})\n\n` +
     `Validated commit: \`${plan.validatedSha}\`\n\nNon-documentation fingerprint: \`${plan.fingerprint}\`\n\n` +
-    'Unit tests, packaging, committed-artifact checks and main Pages deployment still run.\n');
+    'Unit tests, packaging, and on main the Pages deployment and offline release still run.\n');
 console.log(summary);
 if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
 if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT, `browser_required=${plan.browserRequired}\n`);

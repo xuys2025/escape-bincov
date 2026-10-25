@@ -87,6 +87,11 @@ export function advancePursuits(state: ExpansionState, world: WorldDefinition, t
         const landing = findLanding({ definition: world.maps[event.targetMap], doors: target.doors, highTide: raid.highTide }, entry.landing, occupied);
         if (!landing) { if (!event.waiting) changed = true; event.waiting = true; continue; }
         Object.assign(event.enemy, landing, { target: { ...landing }, home: { ...landing }, path: [], repath: 0, state: 'patrol' });
+        if (event.enemy.tactics) {
+            // The witnessed connector is the only known destination. Acquire fresh sight on arrival;
+            // source-map coordinates are not meaningful on another floor. Ammo and report latch stay paid.
+            Object.assign(event.enemy.tactics, { memory: null, awareness: 0, stance: 'idle', warning: 0 });
+        }
         target.enemies.push(event.enemy); raid.pursuits = raid.pursuits.filter(p => p !== event); changed = true;
     }
     return changed;

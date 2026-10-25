@@ -1,12 +1,18 @@
 /** Headless coastal raid. Rules transplanted from RaidScene at f144147; no renderer/DOM imports. */
 import * as D from '../domain';
+import { getLegacyEnemyProfile } from '../enemy-profile';
+import { actorArchetype, actorDefinition, enemyDefinition } from '../enemy-archetypes';
+import { advanceTacticalEnemy, type TacticalEffects } from './tactical-enemy';
+import { advanceLegacyEnemy, type LegacyEnemyEffects } from './enemy-ai';
+import { syncRecoveryCargo } from '../enemy-recovery';
+import { blockadeProgram, requestBlockadeRegistration, BLOCKADE_WAIT, inCheckpointRect } from '../enemy-blockade';
 import { SURVIVAL as B } from '../balance';
 import { WORLD, TILE, isWalkable, lineOfSight, findPath, findDryRefuge, generateRun, type RunConfig, type Point, type MapData } from '../world';
 import { WORLD_VERSION, type ActorState, type RaidCheckpoint, type EnemyState as Enemy, type LootState, type BulletState } from '../checkpoint';
 import { mapPresentation, buildingRunConfig } from '../building-world';
 import { isMallWorld, mallRunConfig } from '../mall-world';
 import { resolveExpansionWorld } from '../expansion-worlds';
-import { derivedLimits, effectiveAttributes, entityUid, type ExpansionState, type WorldDefinition, type EndReason } from '../expansion-state';
+import { derivedLimits, effectiveAttributes, entityUid, enemyRules, perkRaidRules, type ExpansionState, type WorldDefinition, type EndReason } from '../expansion-state';
 import { activeRaidCheckpoint, applyActiveRaidSnapshot, type ActiveRaidSnapshot } from '../raid-state-projection';
 import { advanceRaidBody, enemyDamage, perkEffects, recordMotion, rpgMultipliers, useRpgItemResult } from '../rpg';
 import { corridor, doorAnchor, interactionTarget, spacePath, toggleDoor, traversable, type Interaction as SpatialInteraction, type SpaceContext } from '../spatial';
@@ -14,7 +20,9 @@ import { advanceLayerShots, aimTarget, changeLayer, damageLayerEnemy, type ShotO
 import { critMultiplier, critSources, type CritSnapshot } from '../perks';
 import { advanceBreath, breathChance, clearBreath, idleBreath } from '../breath';
 import { advancePursuits } from '../pursuit';
-import { advanceAim, coneOf, drawAim, driftOf, handlingOf, preciseHeld, recoil, turnAim, unsteadyAim, SAMPLE_GUNS, SWAY, type AimState, type Motion } from '../shooting';
+import { advanceAim, coneOf, drawAim, driftOf, handlingOf, preciseHeld, recoil, turnAim, unsteadyAim, SAMPLE_GUNS, SWAY, type AimState, type Handling, type Motion } from '../shooting';
+import { effectiveStats } from '../gunsmith/stats';
+import { buildOf, gunWeight } from '../gunsmith/instance';
 import { ActiveClock, idleFrame, type InputFrame } from '../input';
 import { SaveSession, type SessionState, type ExpansionTransaction, type MutationResult } from '../session';
 import type { LootContainer, LootTransfer } from '../loot';
@@ -88,6 +96,13 @@ export class CoastRaidRuntime implements RaidRuntime {
     private newbornFlight: Map<string, number> | null = null;
     /** Playtest sample gun with its own magazine; the loadout keeps the real weapon and its rounds (`base`). */
     private sample: { def: D.WeaponDef; base: { mag: number; relief: number } } | null = null;
+    /**
+     * The loadout gun's effective numbers (gunsmith/stats.ts) and weight, for the instance `key` names: its uid, type,
+     * installed parts and switches. The gun in hand is read several times a frame, so they are worked out once per
+     * instance (docs/gunsmith/CONTRACTS.md, M1-05) and frozen, since every reader shares them. Never saved. The
+     * switches are in the key already; M2-03 passes the switched-on devices to effectiveStats.
+     */
+    private armed: { key: string; weapon: D.WeaponDef; grip: Handling; weight: number } | null = null;
     extractTime = 0;
     warned = false;
     tideChanged = false;
@@ -108,6 +123,58 @@ export class CoastRaidRuntime implements RaidRuntime {
     noteSeen = new Set<string>();
     private random = D.seededRandom(0);
     private nextEntity = 1;
+    /** Bind once. The controller can request effects but cannot allocate IDs, publish events or commit storage. */
+    private readonly enemyEffects: LegacyEnemyEffects = {
+        random: () => this.random(),
+        fire: (enemy, angle) => {
+            const def = D.ENEMIES[enemy.id];
+            const bullet = { uid: this.allocateEntityUid(), x: enemy.x + Math.cos(angle) * 18, y: enemy.y + Math.sin(angle) * 18,
+                rotation: wrap(angle), vx: Math.cos(angle) * 365, vy: Math.sin(angle) * 365, left: def.range + 70,
+                damage: def.damage, enemy: true, ...(this.layered ? { owner: enemy.uid } : {}) };
+            this.bullets.push(bullet);
+            this.shotEvent(enemy.uid, getLegacyEnemyProfile(enemy.id).weapon, [bullet], [angle]);
+        },
+        strike: enemy => {
+            const def = D.ENEMIES[enemy.id];
+            this.emit({ type: 'melee', attacker: enemy.uid, angle: enemy.rotation, range: def.range, hit: 'player' });
+            this.hurt(def.damage, enemy, enemy.uid);
+        },
+        openDoor: (enemy, id) => {
+            this.layerMutation(state => { state.raid!.maps[state.raid!.currentMap].doors[id] = true; }, false,
+                'door', [{ type: 'door', id, open: true, by: enemy.uid }]);
+        },
+    };
+    private readonly tacticalEffects: TacticalEffects = {
+        openDoor: (enemy, id) => this.enemyEffects.openDoor(enemy, id),
+        notice: (enemy, message) => {
+            if (distance(this.player, enemy) < 360 && this.sight(this.player, enemy)) this.say(`${enemyDefinition(enemy.id).name}：${message}`, 3);
+        },
+        strike: (enemy, targetId) => {
+            this.emit({ type: 'melee', attacker: enemy.uid, angle: enemy.rotation, range: actorDefinition(enemy).range, hit: targetId });
+            if (targetId === 'player') this.hurt(actorDefinition(enemy).damage, enemy, enemy.uid);
+            else {
+                const state = this.snapshotExpansion(), raid = state.raid!, map = raid.currentMap;
+                const target = raid.maps[map].enemies.find(e => e.uid === targetId);
+                if (target) {
+                    const hp = target.hp;
+                    damageLayerEnemy(state, map, target, actorDefinition(enemy).damage, false, { owner: enemy.uid, at: { x: enemy.x, y: enemy.y } });
+                    this.restoreExpansion(state);
+                    if (target.hp < hp) {
+                        this.emit({ type: 'hurt', cause: 'blow', uid: targetId, at: { x: target.x, y: target.y },
+                            damage: hp - target.hp, critical: false, angle: Math.atan2(enemy.y - target.y, enemy.x - target.x) });
+                        if (target.hp <= 0) this.emit({ type: 'death', uid: targetId, killer: enemy.uid, corpseAngle: target.rotation, containerId: `corpse-${targetId}` });
+                    }
+                }
+            }
+        },
+        fire: (enemy, angle) => {
+            const def = actorArchetype(enemy)!, speed = def.attack === 'spit' ? 180 : 365;
+            // Start at the body: the normal segment collision cannot shoot through a wall beside a muzzle.
+            const bullet: BulletState = { uid: this.allocateEntityUid(), x: enemy.x, y: enemy.y, rotation: angle,
+                vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, left: def.range, damage: def.damage, enemy: true, owner: enemy.uid };
+            this.bullets.push(bullet); this.shotEvent(enemy.uid, def.weapon, [bullet], [angle]);
+        },
+    };
     private checkpointAt = 0;
     private clock = new ActiveClock();
     private lastNow: number | null = null;
@@ -179,10 +246,29 @@ export class CoastRaidRuntime implements RaidRuntime {
     }
     get limits() { return this.layered ? derivedLimits(this.layered) : { hp: B.maxHealth, stamina: B.maxStamina, carry: B.carryLimit }; }
     get paused() { return this.locked || ['pause', 'help', 'abandon', 'rotate', 'checkpoint-error'].includes(this.overlay); }
-    get currentWeapon(): D.WeaponDef { return this.knife ? D.WEAPONS.knife : this.sample?.def ?? D.WEAPONS[(this.session.loadout ?? this.terminalLoadout).weapon || 'knife']; }
+    /**
+     * The loadout gun's effective numbers (#28 M1-05: buildOf of the instance D.equippedGun returns, through
+     * effectiveStats), recomputed only when that instance changes; null when the loadout has no gun.
+     */
+    private equipped() {
+        const gun = D.equippedGun(this.session.loadout ?? this.terminalLoadout);
+        if (!gun) return null;
+        const key = JSON.stringify(gun);
+        if (this.armed?.key !== key) {
+            const stats = effectiveStats(buildOf(gun));
+            this.armed = { key, weapon: Object.freeze(stats.weapon), grip: Object.freeze(stats.handling), weight: gunWeight(gun) };
+        }
+        return this.armed;
+    }
+    /**
+     * The weapon in hand as it fires: the loadout gun's effective stats, the knife's, or the #39 sample rifle's. The
+     * knife and the sample keep WEAPONS, SAMPLE_GUNS and handlingOf (M2-01 retires the sample).
+     */
+    get currentWeapon(): D.WeaponDef { return this.knife ? D.WEAPONS.knife : this.sample?.def ?? this.equipped()?.weapon ?? D.WEAPONS.knife; }
     /** How the held weapon is drawn: the sample rifle borrows the rifle look. */
     get weaponLook(): WeaponLook { return this.currentWeapon.id === 'm4a1' ? 'rifle' : this.currentWeapon.id as WeaponLook; }
-    get grip() { return handlingOf(this.currentWeapon.id); }
+    /** Handling of the weapon in hand, from the same source as currentWeapon. */
+    get grip(): Handling { const gun = !this.knife && !this.sample && this.equipped(); return gun ? gun.grip : handlingOf(this.currentWeapon.id); }
     get sampleGun() { return this.sample?.def.id ?? null; }
     private worldKey(): WorldKey {
         const r = this.layered?.raid;
@@ -446,7 +532,8 @@ export class CoastRaidRuntime implements RaidRuntime {
         this.dirty = true;
     }
     private allocateEntityUid() { const serial = this.nextEntity++; return this.layered?.raid ? entityUid(this.layered.raid, serial) : `entity-${serial}`; }
-    spawnLoot(x: number, y: number, id: string, qty: number, relief = false) { this.loot.push({ uid: this.allocateEntityUid(), x, y, id, qty, relief }); }
+    /** New ground loot under a new entity uid; a gun is born a factory instance. */
+    spawnLoot(x: number, y: number, id: string, qty: number, relief = false) { this.loot.push({ uid: this.allocateEntityUid(), x, y, id, qty, relief, ...D.factoryGun(id) }); }
     nearbyLoot() { return this.loot.filter(l => distance(l, this.player) < 43 && this.sight(l, this.player, this.highTide, this.space ? 10 : 0)).sort((a, b) => distance(a, this.player) - distance(b, this.player) || a.uid.localeCompare(b.uid)); }
     private transaction(action: string, mutate: () => boolean | void): MutationResult {
         if (this.disposed || this.ending || this.locked || this.session.state !== 'run' || this.session.conflict || this.paused) {
@@ -487,6 +574,13 @@ export class CoastRaidRuntime implements RaidRuntime {
             return false;
         }
         return this.transaction('pickup', () => {
+            if (loot.gun) {
+                // A gun comes off the ground whole, as the same instance (D.placeGroundGun), or stays where it lies.
+                if (!D.placeGroundGun(this.session.loadout!.bag, loot)) return false;
+                this.loot.splice(this.loot.indexOf(loot), 1);
+                this.emit({ type: 'looted', source: uid, item: loot.id, qty: 1, partial: false, to: 'bag' });
+                return;
+            }
             const before = loot.qty, left = D.addItem(this.session.loadout!.bag, loot.id, before, !!loot.relief);
             if (left === before)
                 return false;
@@ -513,7 +607,9 @@ export class CoastRaidRuntime implements RaidRuntime {
             const inventory = this.session.loadout![from], item = inventory.items.find(i => i.uid === uid);
             if (!item) return false;
             inventory.items = inventory.items.filter(i => i.uid !== uid);
-            this.spawnLoot(this.player.x, this.player.y, item.id, item.qty, !!item.relief);
+            // A gun lies on the ground as itself, under its item uid with its state; anything else becomes new ground loot.
+            if (item.gun) this.loot.push({ uid: item.uid, x: this.player.x, y: this.player.y, id: item.id, qty: 1, relief: !!item.relief, gun: item.gun });
+            else this.spawnLoot(this.player.x, this.player.y, item.id, item.qty, !!item.relief);
         });
     }
     equipItem(uid: string) {
@@ -687,7 +783,7 @@ export class CoastRaidRuntime implements RaidRuntime {
     }
     loadMagazine() {
         if (this.sample) { this.mag = this.sample.def.magazine; return; }
-        const loaded = D.reloadMagazine(this.session.loadout!.weapon || 'knife', this.mag, this.magRelief, this.session.loadout!.bag); this.mag = loaded.ammo; this.magRelief = loaded.ammoRelief; this.syncMagazine();
+        const loaded = D.reloadMagazine(this.session.loadout!, this.mag, this.magRelief, this.session.loadout!.bag); this.mag = loaded.ammo; this.magRelief = loaded.ammoRelief; this.syncMagazine();
     }
     /**
      * Hand the player a playtest sample gun (SAMPLE_GUNS) or take it back. The loadout, its weapon and its rounds stay
@@ -707,7 +803,8 @@ export class CoastRaidRuntime implements RaidRuntime {
     }
     /** Another weapon comes to hand: the aim starts from the hip again (drawAim) and the breath charge is gone. */
     private draw() { drawAim(this.handling, SWAY); clearBreath(this.breath); }
-    carriedWeight() { const l = this.session.loadout!, w = D.WEAPONS[l.weapon || 'knife']; return D.weight(l.bag) + D.weight(l.safe) + (l.weapon ? D.ITEMS[l.weapon].weight : 0) + D.ITEMS.knife.weight + (w.ammo ? D.ITEMS[w.ammo].weight * (this.sample?.base.mag ?? this.mag) : 0) + (this.layered?.charm ? D.ITEMS[this.layered.charm.id].weight : 0); }
+    /** Kg carried: bag, safe, the loadout gun with its parts (gunsmith gunWeight) and loaded rounds, the knife, the charm. */
+    carriedWeight() { const l = this.session.loadout!, gun = this.equipped(); return D.weight(l.bag) + D.weight(l.safe) + (gun?.weight ?? 0) + D.ITEMS.knife.weight + (gun?.weapon.ammo ? D.ITEMS[gun.weapon.ammo].weight * (this.sample?.base.mag ?? this.mag) : 0) + (this.layered?.charm ? D.ITEMS[this.layered.charm.id].weight : 0); }
     carryLimit() { return this.layered ? derivedLimits(this.layered).carry : B.carryLimit; }
     useItem(id: string, inv: D.Inventory = this.session.loadout!.bag, itemUid?: string) {
         const chosen = itemUid ? inv.items.find(i => i.uid === itemUid && i.id === id && i.qty > 0) : null;
@@ -779,7 +876,10 @@ export class CoastRaidRuntime implements RaidRuntime {
         if (this.walkable(sprite.x, sprite.y + dy, high, 10))
             sprite.y += dy;
     }
-    /** Seconds a reload of the held weapon takes: the reload perks (technique-20-b, 30-b) shorten it in a v3 raid. */
+    /**
+     * Seconds a reload of the held weapon takes: its effective reload time (attachments within their guardrail), which
+     * the reload perks (technique-20-b, 30-b) shorten once more in a v3 raid.
+     */
     get reloadTime() { return this.currentWeapon.reload * perkEffects(this.layered).reload; }
     startReload() {
         const w = this.currentWeapon;
@@ -794,7 +894,7 @@ export class CoastRaidRuntime implements RaidRuntime {
         }
     }
     /** The raid owns technique-15-a: a v3 raid whose selection holds it. v1, v2 and classic raids never charge. */
-    get breathOwned() { return this.layered?.raid?.version === 3 && perkEffects(this.layered).breath; }
+    get breathOwned() { return perkRaidRules(this.layered?.raid) && perkEffects(this.layered).breath; }
     /**
      * aimTarget (layer-transition.ts) for the body, aim, tide and enemies as they stand now: the current layer read from
      * the live Runtime fields, its own enemies and the pursuers it still owns together as `enemies` holds them, and the
@@ -953,97 +1053,10 @@ export class CoastRaidRuntime implements RaidRuntime {
             return;
     }
     updateEnemy(e: Enemy, dt: number) {
-        const def = D.ENEMIES[e.id], dist = distance(e, this.player), sees = dist < def.vision && this.sight(e, this.player);
-        e.timer -= dt;
-        e.cooldown -= dt;
-        e.repath -= dt;
-        e.alert = Math.max(0, e.alert - dt);
-        const escaping = this.highTide && !this.walkable(e.x, e.y, true, 10);
-        if (escaping) {
-            const refuge = this.dryRefuge(e);
-            if (refuge) {
-                if (!e.path.length || e.repath <= 0) {
-                    e.path = this.path(e, refuge, false);
-                    e.repath = 1;
-                }
-                while (e.path.length && distance(e, e.path[0]) < 10)
-                    e.path.shift();
-                const target = e.path[0] || refuge, angle = Math.atan2(target.y - e.y, target.x - e.x);
-                e.rotation = wrap(angle);
-                this.move(e, Math.cos(angle) * def.speed * dt, Math.sin(angle) * def.speed * dt, true);
-            }
-            return;
-        }
-        if (sees) {
-            e.state = dist < def.range ? 'attack' : 'chase';
-            e.target = { x: this.player.x, y: this.player.y };
-            e.alert = 5;
-        }
-        else if (this.noiseTime > 0 && this.shotNoise && distance(e, this.shotNoise) < this.noiseRadius) {
-            e.state = 'investigate';
-            e.target = { ...this.shotNoise };
-            e.alert = 5;
-        }
-        else if ((e.state === 'chase' || e.state === 'attack') && e.alert <= 0) {
-            e.state = 'return';
-            e.target = e.home;
-        }
-        if (e.state === 'investigate' && distance(e, e.target) < 24 && e.alert <= 0) {
-            e.state = 'return';
-            e.target = e.home;
-        }
-        if (e.state === 'return' && distance(e, e.home) < 28) {
-            e.state = 'patrol';
-            e.timer = 0;
-        }
-        if (e.state === 'patrol' && e.timer <= 0) {
-            const p = { x: e.home.x + (this.random() - .5) * 170, y: e.home.y + (this.random() - .5) * 170 };
-            if (this.walkable(p.x, p.y, this.highTide))
-                e.target = p;
-            e.timer = 3 + this.random() * 4;
-        }
-        if (e.state === 'attack' && sees) {
-            e.rotation = wrap(Math.atan2(this.player.y - e.y, this.player.x - e.x));
-            if (e.cooldown <= 0) {
-                e.cooldown = def.cooldown;
-                const angle = e.rotation + (this.random() - .5) * .16;
-                if (e.id === 'salt' || e.id === 'elite') {
-                    const bullet = { uid: this.allocateEntityUid(), x: e.x + Math.cos(angle) * 18, y: e.y + Math.sin(angle) * 18, rotation: wrap(angle), vx: Math.cos(angle) * 365, vy: Math.sin(angle) * 365, left: def.range + 70, damage: def.damage, enemy: true, ...(this.layered ? { owner: e.uid } : {}) };
-                    this.bullets.push(bullet);
-                    this.shotEvent(e.uid, 'rifle', [bullet], [angle]);
-                }
-                else if (!this.space || this.sight(e, this.player, this.highTide, 10)) {
-                    this.emit({ type: 'melee', attacker: e.uid, angle: e.rotation, range: def.range, hit: 'player' });
-                    this.hurt(def.damage, e, e.uid);
-                }
-            }
-            return;
-        }
-        if (distance(e, e.target) > 12) {
-            if (e.repath <= 0) {
-                e.path = this.path(e, e.target, this.highTide);
-                e.repath = .9 + this.random() * .6;
-            }
-            let target = e.target;
-            if (!this.sight(e, target, this.highTide, 10) || !this.walkable(target.x, target.y, this.highTide)) {
-                while (e.path.length && distance(e, e.path[0]) < 14)
-                    e.path.shift();
-                if (e.path.length)
-                    target = e.path[0];
-                else
-                    return;
-            }
-            const angle = Math.atan2(target.y - e.y, target.x - e.x);
-            if (this.space) {
-                const next = { x: e.x + Math.cos(angle) * (def.speed * dt + 12), y: e.y + Math.sin(angle) * (def.speed * dt + 12) };
-                const door = this.space.definition.doors.find(d => Math.floor(next.x / 32) === d.x && Math.floor(next.y / 32) === d.y);
-                if (door && !this.space.doors[door.id]) {
-                    this.layerMutation(state => { state.raid!.maps[state.raid!.currentMap].doors[door.id] = true; }, false, 'door', [{ type: 'door', id: door.id, open: true, by: e.uid }]);
-                    return;
-                }
-            }
-            e.rotation = wrap(angle);
-            this.move(e, Math.cos(angle) * def.speed * dt, Math.sin(angle) * def.speed * dt, true);
+        if (enemyRules(this.layered?.raid) && e.tactics) advanceTacticalEnemy(this, this.tacticalEffects, e, dt);
+        else advanceLegacyEnemy(this, this.enemyEffects, e, dt);
+        if(e.tactics?.version===2&&e.tactics.program.kind==='recovery') {
+            const live=this.enemies.find(a=>a.uid===e.uid);if(live)syncRecoveryCargo(live,this.containers);
         }
     }
     private layerMutation(action: (state: ExpansionState) => boolean | void | 'unreachable' | 'occupied', suppress = false, name = 'world', events: ViewEventBody[] = []): boolean {
@@ -1215,7 +1228,8 @@ export class CoastRaidRuntime implements RaidRuntime {
         this.shotNoise = { x: at.x, y: at.y };
         this.noiseRadius = B.gunNoiseRange;
         this.noiseTime = .6;
-        // Random scatter over the cone, around a centre that recoil has pushed toward the shooter's right.
+        // Random scatter over the cone, around a centre that recoil has pushed toward the shooter's right. `w` and `h` are
+        // the gun's effective stats; the RPG body multiplier and the recoil perk scale apply once each, here.
         const body = this.layered ? rpgMultipliers(this.layered).recoil : 1;
         const cone = coneOf(this.handling, w, h, body), centre = this.player.rotation + driftOf(this.handling, h, body);
         const pellets: BulletState[] = [], angles: number[] = [];
@@ -1245,7 +1259,7 @@ export class CoastRaidRuntime implements RaidRuntime {
      */
     shotCrit(w: D.WeaponDef, breath: { chance: number; target: string | null }): CritSnapshot | undefined {
         const state = this.layered;
-        if (state?.raid?.version !== 3) return undefined;
+        if (!state || !perkRaidRules(state.raid)) return undefined;
         const perks = state.growth.perks ?? [], charge = breath.target === null ? 0 : breath.chance;
         const sources = critSources({ technique: effectiveAttributes(state).technique, weapon: w, perks, focus: state.body.effects.focus > 0, breath: charge });
         return sources ? { sources, multiplier: critMultiplier(perks), target: sources.some(s => s.id === 'technique-15-a') ? breath.target : null } : undefined;
@@ -1270,7 +1284,7 @@ export class CoastRaidRuntime implements RaidRuntime {
             if (e.hp <= 0) {
                 this.kills++;
                 e.rotation = wrap(e.rotation + Math.PI / 2);
-                const drops = D.rollLoot(this.config.seed + this.kills * 47, e.id === 'elite' ? 3 : 1);
+                const drops = D.rollLoot(this.config.seed + this.kills * 47, getLegacyEnemyProfile(e.id).corpseLootRolls);
                 for (let i = 0; i < drops.length; i++) {
                     this.random();
                     this.random();
@@ -1282,7 +1296,7 @@ export class CoastRaidRuntime implements RaidRuntime {
         this.hurtTimers.set(e.uid, .07);
         this.emit({ type: 'hurt', cause: 'blow', uid: e.uid, at: { x: e.x, y: e.y }, damage: hp - now.hp, critical: false, angle });
         if (now.hp <= 0) {
-            this.emit({ type: 'death', uid: e.uid, corpseAngle: now.rotation - (this.layered ? 0 : Math.PI / 2), containerId: `corpse-${e.uid}` });
+            this.emit({ type: 'death', uid: e.uid, ...(enemyRules(this.layered?.raid) ? { killer: 'player' } : {}), corpseAngle: now.rotation - (this.layered ? 0 : Math.PI / 2), containerId: `corpse-${e.uid}` });
             this.targetDied(e.uid);
         }
     }
@@ -1338,11 +1352,12 @@ export class CoastRaidRuntime implements RaidRuntime {
     }
     private observeShot(e: ShotObservation) {
         this.emit({ type: 'impact', bullet: e.bullet.uid, owner: bulletOwner(e.bullet), reason: e.reason, lastFree: e.lastFree, contact: e.contact, normal: e.normal, surface: e.surface, target: e.target });
-        if (e.target) {
+        if (e.target && e.damage > 0) {
             this.emit({ type: 'hurt', cause: 'blow', uid: e.target, at: e.contact ?? e.lastFree, damage: e.damage, critical: e.critical, angle: e.angle });
             if (e.dead) {
                 const enemy = this.enemies.find(a => a.uid === e.target);
-                this.emit({ type: 'death', uid: e.target, corpseAngle: enemy?.rotation ?? this.player.rotation, containerId: e.target === 'player' ? null : `corpse-${e.target}` });
+                const killer = enemyRules(this.layered?.raid) ? bulletOwner(e.bullet) : null;
+                this.emit({ type: 'death', uid: e.target, ...(killer ? { killer } : {}), corpseAngle: enemy?.rotation ?? this.player.rotation, containerId: e.target === 'player' ? null : `corpse-${e.target}` });
                 this.targetDied(e.target);
             }
         }
@@ -1428,6 +1443,8 @@ export class CoastRaidRuntime implements RaidRuntime {
             ...this.loot.map(l => ({ id: l.uid, kind: 'ground' as const, at: l, label: `拾取 · ${D.ITEMS[l.id].name} × ${l.qty}` })),
             ...this.containers.map(c => ({ id: c.id, kind: 'container' as const, at: c, label: `搜刮 · ${c.name}${c.inventory.items.length ? '' : ' · 已搜空'}` })),
             ...this.mapData.notes.map(n => ({ id: n.title, kind: 'note' as const, at: n, label: `阅读 · ${n.title}` })),
+            ...this.enemies.filter(e => e.hp > 0 && e.tactics && actorArchetype(e)?.stance === 'conditional')
+                .map(e => ({ id: e.uid, kind: 'talk' as const, at: e, label: `询问 · ${enemyDefinition(e.id).name}` })),
         ];
         for (const door of this.space.definition.doors) {
             const at = doorAnchor(this.space, door.id, this.player);
@@ -1435,6 +1452,12 @@ export class CoastRaidRuntime implements RaidRuntime {
                 candidates.push({ id: door.id, kind: 'door', at, label: this.space.doors[door.id] ? '关门' : '开门' });
         }
         let target = interactionTarget(this.space, this.player, candidates);
+        // In the marked area registration outranks the old notice, while loot/doors/entries keep their normal priority.
+        // Reuse the real talk range/corridor filter rather than accepting an arbitrary officer reference.
+        if(target?.kind==='note'&&inCheckpointRect(BLOCKADE_WAIT,this.player)) {
+            const registration=interactionTarget(this.space,this.player,candidates.filter(c=>c.kind==='talk'&&blockadeProgram(this.enemies.find(e=>e.uid===c.id)!)));
+            if(registration)target={...registration,label:'登记 / 通行查询'};
+        }
         if ((target?.kind === 'container' || target?.kind === 'ground') && !this.inputFrame.touch) {
             const c = targets.find(c => c.id === this.lootTargetId);
             if (c)
@@ -1477,8 +1500,40 @@ export class CoastRaidRuntime implements RaidRuntime {
             this.rejected('interact', 'stale-target');
             return false;
         }
-        if (target.kind === 'entry')
-            return this.layerMutation(state => changeLayer(state, this.layeredWorld!, target.id, e => this.observeShot(e)), true, `entry:${target.id}`);
+        if (target.kind === 'entry') {
+            const previous = new Set(this.layered!.raid!.pursuits.map(p => p.id));
+            return this.layerMutation(state => {
+                const changed = changeLayer(state, this.layeredWorld!, target.id, e => this.observeShot(e));
+                if (changed && state.raid!.pursuits.some(p => p.enemy.tactics && !previous.has(p.id)))
+                    this.say('有人看见你进入楼梯，正在从原入口跟来。', 5);
+                return changed;
+            }, true, `entry:${target.id}`);
+        }
+        if (target.kind === 'talk') {
+            const enemy = this.enemies.find(e => e.uid === target.id)!;
+            const access=blockadeProgram(enemy);
+            if(access) {
+                if(access.phase==='none') {
+                    if(!this.enemies.some(e=>e.uid===access.leader&&e.hp>0)) {
+                        this.say('登记暂不可用，请从外围公共道路绕行。',10);return true;
+                    }
+                    const accepted=this.layerMutation(state=>requestBlockadeRegistration(state.raid!,enemy.uid),true,'registration');
+                    if(accepted)this.say('登记已受理。请到哨兵左侧的金色等候标记内连续停留四秒；许可只限公共通道。',10);
+                    return accepted;
+                }
+                this.say(access.phase==='engaged'?'通行许可已暂停，请脱离交火区域。':access.phase==='granted'
+                    ?'本次行动已登记，请沿绿色公共通道通过，后场仍受限。':'请在金色等候标记内连续停留四秒；离开后需重新等待。',10);
+                return true;
+            }
+            const t=enemy.tactics!,program=t.version===2?t.program:null;
+            const text = enemy.tactics!.stance === 'hostile' ? '正在交火，请远离现场。' :
+                program?.kind==='recovery' ? program.phase==='delivered' ? '回收完成，请从公共通道绕行。'
+                    : program.phase==='withdraw' ? '正在撤回，请从公共通道绕行。'
+                    : '正在回收物资，请从外围公共通道绕行。进入黄色边界后请在四秒警告结束前退出。' :
+                '黄色边界内是限制区，请从外围公共通道绕行。可以在边界外询问；进入后请在四秒警告结束前退出。';
+            // Information only: asking never buys immunity, clears a warning or resets combat on refresh.
+            this.say(`${enemyDefinition(enemy.id).name}：${text}`, 9); return true;
+        }
         if (target.kind === 'door') {
             const open = !this.space!.doors[target.id];
             return this.layerMutation(state => {

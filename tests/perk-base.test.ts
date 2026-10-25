@@ -7,6 +7,7 @@ import { decodePortableBackup } from '../src/save-backup';
 import { RealHideoutRuntime, type HideoutEvent, type PerkBoard, type Result } from '../src/hideout-runtime';
 import { derivedLimits, type Attribute } from '../src/expansion-state';
 import { PERK_IDS, perkModifiers, type PerkId } from '../src/perks';
+import { makeV4 } from './fixtures/old-saves';
 
 // CP-T08 (#77): choosing perks at the base and the 500-cash reset, as one HideoutRuntime service for the yard and the
 // old tab page (docs/CRITICAL-PERK-DESIGN.md section 5). Acceptance CP-07..09, CP-19..23 and CP-25 at service level.
@@ -46,11 +47,10 @@ function grown(p: Page, permanent: Record<Attribute, number>, perks: PerkId[] = 
         const limits = derivedLimits(d.expansion); d.expansion.body.hp = limits.hp; d.expansion.body.stamina = limits.stamina;
     });
 }
-/** The record the previous client (session v4) writes for the same state: expansion and raid v2, no perks. */
+/** The record the previous client (session v4) writes for the same state: expansion and raid v2, no perks, no gun fields. */
 function asV4(text: string): string {
-    const r = JSON.parse(text); assert.equal(r.version, 5); assert.deepEqual(r.expansion.growth.perks, []);
-    r.version = 4; delete r.perksBackup; r.expansion.version = 2; delete r.expansion.growth.perks;
-    if (r.expansion.raid) r.expansion.raid.version = 2;
+    const r = JSON.parse(text); assert.equal(r.version, 8); assert.deepEqual(r.expansion.growth.perks, []);
+    makeV4(r);
     return JSON.stringify(r);
 }
 
@@ -326,12 +326,12 @@ test('CP-22: a station state not yet upgraded (v2) and a live v2 raid refuse eve
     const board = p.runtime.perkBoard();
     assert.equal(board.blocked?.reason, 'locked'); assert.equal(board.attributes.strength.reset.blocked?.reason, 'locked');
     assert.equal(reason(p.runtime.previewPerk('strength-15-a')), 'locked'); assert.equal(reason(p.runtime.previewPerkReset('strength')), 'locked');
-    assert.equal(p.raw, raw); assert.equal(p.record.version, 4);
+    assert.equal(p.raw, raw); assert.equal(p.record.expansion!.version, 2);
     // The station entry upgrades to v3 with nothing chosen; then the choice works.
-    p.state.state = 'menu'; assert.ok(p.runtime.enter().ok); assert.equal(p.record.version, 5);
+    p.state.state = 'menu'; assert.ok(p.runtime.enter().ok); assert.equal(p.record.expansion!.version, 3);
     assert.equal(p.runtime.perkBoard().blocked, null); assert.ok(choose(p, 'strength-15-a').ok);
     // A live v2 raid in a v4 record stays locked until it settles, and nothing is written.
-    const raider = page(); assert.ok(raider.runtime.deploy({ world: 'buildings', seed: 'cp-22' }).ok);
+    const raider = page(); assert.ok(raider.runtime.deploy({ world: 'mall', seed: 'cp-22' }).ok);
     const live = origin(); live.data.set(SESSION_KEY, asV4(raider.raw));
     const q = page(live, false), bytes = q.raw;
     assert.equal(q.state.expansion!.raid!.version, 2);

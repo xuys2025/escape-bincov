@@ -7,6 +7,11 @@ import {
   submitQuest, upgradeStash, reloadMagazine, applyDamage, seededRandom, rollLoot,
 } from '../src/domain';
 import * as S from '../src/shop';
+import { factoryState } from '../src/gunsmith/instance';
+
+/** An equipped slot holding a factory `weapon` (or nothing for null and the knife), as the gun readers take it. */
+const held = (weapon: string | null) => weapon && weapon !== 'knife'
+  ? { weapon, weaponUid: `held-${weapon}`, gun: factoryState(), relief: false } : { weapon, weaponUid: null, gun: null, relief: false };
 
 test('20 original items plus production/RPG items have coherent footprints, stacks and prices', () => {
   const original = ['knife', 'pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'bandage', 'medkit', 'antidote', 'water', 'food', 'scrap', 'wire', 'fuse', 'battery', 'watch', 'pearl', 'sample', 'ledger'];
@@ -81,17 +86,17 @@ test('equipping swaps safely and returns the gun to storage on unequip', () => {
 test('reload consumes exactly missing rounds and never invents ammunition', () => {
   const bag = createInventory(6, 5);
   addItem(bag, 'ammo9', 10);
-  assert.deepEqual(reloadMagazine('pistol', 3, 0, bag), { ammo: 8, ammoRelief: 0 });
+  assert.deepEqual(reloadMagazine(held('pistol'), 3, 0, bag), { ammo: 8, ammoRelief: 0 });
   assert.equal(count(bag, 'ammo9'), 5);
-  assert.deepEqual(reloadMagazine('pistol', 8, 0, bag), { ammo: 8, ammoRelief: 0 });
+  assert.deepEqual(reloadMagazine(held('pistol'), 8, 0, bag), { ammo: 8, ammoRelief: 0 });
   assert.equal(count(bag, 'ammo9'), 5);
-  assert.deepEqual(reloadMagazine('pistol', 0, 0, bag), { ammo: 5, ammoRelief: 0 });
-  assert.deepEqual(reloadMagazine('pistol', 0, 0, bag), { ammo: 0, ammoRelief: 0 });
+  assert.deepEqual(reloadMagazine(held('pistol'), 0, 0, bag), { ammo: 5, ammoRelief: 0 });
+  assert.deepEqual(reloadMagazine(held('pistol'), 0, 0, bag), { ammo: 0, ammoRelief: 0 });
   assert.deepEqual(bag.items, []);
   // Only the gun's own ammunition is taken; the knife has none.
   addItem(bag, 'ammo9', 4);
-  assert.deepEqual(reloadMagazine('shotgun', 0, 0, bag), { ammo: 0, ammoRelief: 0 });
-  assert.deepEqual(reloadMagazine('knife', 0, 0, bag), { ammo: 0, ammoRelief: 0 });
+  assert.deepEqual(reloadMagazine(held('shotgun'), 0, 0, bag), { ammo: 0, ammoRelief: 0 });
+  assert.deepEqual(reloadMagazine(held('knife'), 0, 0, bag), { ammo: 0, ammoRelief: 0 });
   assert.equal(count(bag, 'ammo9'), 4);
 });
 
@@ -210,7 +215,7 @@ test('relief is conditional, cannot be repeatedly claimed and cannot be sold', (
 test('a gun inside the safe prevents relief duplication after save recovery', () => {
   let save = newSave();
   save.cash = 0;
-  save.equipment = { weapon: null, relief: false, ammo: 0, ammoRelief: 0 };
+  save.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 };
   save.bag = createInventory(6, 5);
   assert.equal(grantRelief(save), true);
   assert.equal(unequip(save), true);
@@ -285,7 +290,7 @@ test('quest submission consumes across inventories atomically and rewards once',
 
 test('version-zero inventory upgrades; corrupt and unknown fields cannot inject items', () => {
   const save = migrateSave({ version: 0, cash: 32, inventory: [{ id: 'bandage', quantity: 2 }], settings: { volume: 8 } });
-  assert.equal(save.version, 2);
+  assert.equal(save.version, 3);
   assert.equal(save.cash, 32);
   assert.equal(count(save.stash, 'bandage'), 2);
   assert.equal(save.settings.volume, 1);
@@ -296,19 +301,19 @@ test('version-zero inventory upgrades; corrupt and unknown fields cannot inject 
   assert.equal(bad.settings.volume, 0.35);
   assert.equal(count(bad.stash, 'water'), 2);
   assert.equal(count(bad.stash, 'ammo9'), 0);
-  assert.equal(migrateSave(null).version, 2);
-  assert.equal(migrateSave({ version: 99 }).version, 2);
+  assert.equal(migrateSave(null).version, 3);
+  assert.equal(migrateSave({ version: 99 }).version, 3);
 });
 
 test('mixed magazines load relief rounds first without changing ordinary ammo provenance', () => {
   const bag = createInventory(6, 5);
   addItem(bag, 'ammo9', 10);
   addItem(bag, 'ammo9', 3, true);
-  const result = reloadMagazine('pistol', 2, 1, bag);
+  const result = reloadMagazine(held('pistol'), 2, 1, bag);
   assert.deepEqual(result, { ammo: 8, ammoRelief: 4 });
   assert.equal(count(bag, 'ammo9'), 7);
   assert.equal(bag.items.every(i => !i.relief), true);
-  assert.deepEqual(reloadMagazine('pistol', result.ammo, result.ammoRelief, bag), result);
+  assert.deepEqual(reloadMagazine(held('pistol'), result.ammo, result.ammoRelief, bag), result);
   assert.equal(count(bag, 'ammo9'), 7);
 });
 
@@ -360,7 +365,7 @@ test('equipment swaps reject insufficient unloading space without losing gun or 
 test('full inventories queue one relief kit, persist it, and deliver only when room opens', () => {
   let save = newSave();
   save.cash = 0;
-  save.equipment = { weapon: null, relief: false, ammo: 0, ammoRelief: 0 };
+  save.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 };
   save.bag = createInventory(6, 5);
   save.stash = createInventory(10, 6);
   addItem(save.bag, 'watch', 60);
@@ -389,7 +394,7 @@ test('full inventories queue one relief kit, persist it, and deliver only when r
 test('relief can use stash space while a full bag remains unchanged', () => {
   const save = newSave();
   save.cash = 0;
-  save.equipment = { weapon: null, relief: false, ammo: 0, ammoRelief: 0 };
+  save.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 };
   save.bag = createInventory(6, 5);
   save.stash = createInventory(10, 6);
   addItem(save.bag, 'watch', 60);
@@ -405,7 +410,7 @@ test('relief can use stash space while a full bag remains unchanged', () => {
 function brokeSave(cash: number) {
   const save = newSave();
   save.cash = cash;
-  save.equipment = { weapon: null, relief: false, ammo: 0, ammoRelief: 0 };
+  save.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 };
   save.bag = createInventory(6, 5);
   save.stash = createInventory(10, 6);
   save.safe = createInventory(2, 2);
@@ -472,7 +477,7 @@ test('S2: a broke player with only a relief pistol and no 9mm anywhere gets 12 r
   const pack = buyQuantity('ammo9') * ITEMS.ammo9.buy;
   const reliefOnly = (cash: number) => {
     const save = brokeSave(cash);
-    save.equipment = { weapon: 'pistol', relief: true, ammo: 0, ammoRelief: 0 };
+    save.equipment = { weapon: 'pistol', weaponUid: 'test-gun', gun: factoryState(), relief: true, ammo: 0, ammoRelief: 0 };
     return save;
   };
   const save = reliefOnly(50);
@@ -532,7 +537,7 @@ test('S2: a broke player with only a relief pistol and no 9mm anywhere gets 12 r
 
 test('S2: extracting broke with an empty relief pistol refills it at the hideout, never inside the raid', () => {
   let save = brokeSave(50);
-  save.equipment = { weapon: 'pistol', relief: true, ammo: 8, ammoRelief: 8 };
+  save.equipment = { weapon: 'pistol', weaponUid: 'test-gun', gun: factoryState(), relief: true, ammo: 8, ammoRelief: 8 };
   const run = beginRun(save, 905);
   assert.equal(grantRelief(save), false);
   assert.equal(save.reliefSupplies, undefined);
@@ -540,7 +545,7 @@ test('S2: extracting broke with an empty relief pistol refills it at the hideout
   run.ammo = 0;
   run.ammoRelief = 0;
   assert.ok(settleRun(save, run, 'extract', 0));
-  assert.deepEqual(save.equipment, { weapon: 'pistol', relief: true, ammo: 0, ammoRelief: 0 });
+  assert.deepEqual(save.equipment, { weapon: 'pistol', weaponUid: 'test-gun', gun: factoryState(), relief: true, ammo: 0, ammoRelief: 0 });
   assert.equal(count(save.bag, 'ammo9'), 12);
   assert.equal(save.bag.items.every(i => i.relief), true);
   save = migrateSave(JSON.parse(JSON.stringify(save)));
@@ -550,7 +555,7 @@ test('S2: extracting broke with an empty relief pistol refills it at the hideout
 
 test('S3: selling the last ordinary gun to reach ¥210 grants the kit', () => {
   const save = brokeSave(60);
-  save.equipment = { weapon: 'pistol', relief: false, ammo: 0, ammoRelief: 0 };
+  save.equipment = { weapon: 'pistol', weaponUid: 'test-gun', gun: factoryState(), relief: false, ammo: 0, ammoRelief: 0 };
   assert.equal(grantRelief(save), false);
   assert.equal(unequip(save), true);
   assert.equal(grantRelief(save), false);
@@ -569,7 +574,7 @@ test('S3: selling the last ordinary gun to reach ¥210 grants the kit', () => {
 
 test('rule B rounds wait once when the bag and stash are full and arrive when space opens', () => {
   let save = brokeSave(0);
-  save.equipment = { weapon: 'pistol', relief: true, ammo: 0, ammoRelief: 0 };
+  save.equipment = { weapon: 'pistol', weaponUid: 'test-gun', gun: factoryState(), relief: true, ammo: 0, ammoRelief: 0 };
   // Unsellable relief bandages fill every cell without adding sellable value.
   assert.equal(addItem(save.bag, 'bandage', 120, true), 0);
   assert.equal(addItem(save.stash, 'bandage', 240, true), 0);
@@ -598,7 +603,8 @@ test('migration normalizes magazine bounds and unique item IDs across every cont
   const all = [...save.stash.items, ...save.bag.items, ...save.safe.items];
   assert.equal(all.length, 3);
   assert.equal(new Set(all.map(i => i.uid)).size, 3);
-  assert.deepEqual(save.equipment, { weapon: 'pistol', relief: false, ammo: 8, ammoRelief: 8 });
+  // The old profile's equipped pistol becomes a factory instance under the migration's uid (gunsmith M0-06).
+  assert.deepEqual(save.equipment, { weapon: 'pistol', relief: false, ammo: 8, ammoRelief: 8, weaponUid: 'gun-v6', gun: factoryState() });
   const legacy = migrateSave({ version: 1, equipment: { weapon: 'carbine', relief: false } });
   assert.equal(legacy.equipment.ammo, 0);
   assert.equal(legacy.equipment.ammoRelief, 0);
@@ -625,7 +631,7 @@ test('stale safe checkpoints cannot alter the current run and legacy active runs
 test('raid gun swaps unload a mixed magazine with both ammo origins preserved', () => {
   const save = newSave();
   save.bag = createInventory(6, 5);
-  save.equipment = { weapon: 'pistol', relief: true, ammo: 8, ammoRelief: 3 };
+  save.equipment = { weapon: 'pistol', weaponUid: 'test-gun', gun: factoryState(), relief: true, ammo: 8, ammoRelief: 3 };
   addItem(save.bag, 'carbine');
   addItem(save.safe, 'pistol');
   const run = beginRun(save, 903), beforeSafe = JSON.stringify(run.safe);
@@ -646,7 +652,7 @@ test('a full raid backpack rejects a loaded gun swap atomically', () => {
   save.bag = createInventory(6, 5);
   addItem(save.bag, 'shotgun');
   addItem(save.bag, 'watch', 54);
-  save.equipment = { weapon: 'pistol', relief: false, ammo: 8, ammoRelief: 4 };
+  save.equipment = { weapon: 'pistol', weaponUid: 'test-gun', gun: factoryState(), relief: false, ammo: 8, ammoRelief: 4 };
   const run = beginRun(save, 904), before = JSON.stringify(run);
   assert.equal(equipRun(run, run.bag.items.find(i => i.id === 'shotgun')!.uid), false);
   assert.equal(JSON.stringify(run), before);

@@ -5,6 +5,7 @@ import { decodeBackup, encodeBackup, decodePortableBackup, encodeRecoveryBackup 
 import { RecoveryStore, SESSION_KEY, decodeSession } from '../src/recovery-store';
 import { initialCheckpoint } from '../src/checkpoint';
 import { generateRun } from '../src/world';
+import { oldProfile } from './fixtures/old-saves';
 
 test('either insertion order fits medkit and water in four cells, without moving existing items', () => {
   for (const order of [['medkit','water'],['water','medkit']]) {
@@ -32,15 +33,15 @@ test('rotated settled backups survive validation and reject malformed or legacy 
   }
 });
 test('v2 session migration keeps exact bytes and a failed commit leaves the original record', () => {
-  const profile = { ...D.newSave(), version:1 }, old = JSON.stringify({format:'escape-bincov-session',version:2,revision:4,savedAt:10,profile,raid:null,terminal:null,legacyBackup:null});
+  const profile = { ...oldProfile(D.newSave()), version:1 }, old = JSON.stringify({format:'escape-bincov-session',version:2,revision:4,savedAt:10,profile,raid:null,terminal:null,legacyBackup:null});
   const data = new Map([[SESSION_KEY,old]]); let fail=true;
   const storage={getItem:(k:string)=>data.get(k)??null,setItem:(k:string,v:string)=>{if(fail)throw Error('quota');data.set(k,v);}};
   const store=new RecoveryStore(storage), loaded=store.load();
-  assert.equal(loaded.save.version,2); assert.equal(store.record?.migrationBackup,old);
+  assert.equal(loaded.save.version,3); assert.equal(store.record?.migrationBackup,old); assert.equal(store.record?.gunsBackup,null);
   assert.throws(()=>store.commit(loaded.save,null)); assert.equal(data.get(SESSION_KEY),old);
-  fail=false; const current=store.commit(loaded.save,null); assert.equal(current.version,3); assert.equal(current.migrationBackup,old);
+  fail=false; const current=store.commit(loaded.save,null); assert.equal(current.version, 8); assert.equal(current.migrationBackup,old); assert.equal(current.gunsBackup,null);
   const decoded=decodeSession(data.get(SESSION_KEY)!); assert.deepEqual(decoded,current);
-  const legacy=decodeBackup(JSON.stringify(profile)); assert.equal(legacy.version,2); assert.deepEqual(legacy.bag,profile.bag);
+  const legacy=decodeBackup(JSON.stringify(profile)); assert.equal(legacy.version,3); assert.deepEqual(legacy.bag,profile.bag);
 });
 test('rotated safe survives checkpoint, death settlement and recovery backup round trip', () => {
   const save=D.newSave(); save.safe.items=[]; D.addItem(save.safe,'medkit'); D.addItem(save.safe,'water');

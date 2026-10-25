@@ -1,0 +1,265 @@
+{
+  "note": "Reference idle frames used for column 0 of each hurt template (8x nearest-neighbour). Group B frames come from PR #81 (feat/enemy-foundation) and are not on main yet; if #81 changes these bodies, regenerate the template and compare these hashes.",
+  "groupBRef": "feat/enemy-foundation@2fcad9d1d91a864b68a9d38ffb7f11a426475043",
+  "templates": [
+    {
+      "id": "scav",
+      "group": "A",
+      "template": "assets/hit-feel/templates/scav-hurt-template-v1.png",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/v1/coast-scav-body-e-f0-v1.png",
+          "from": "main",
+          "sha256": "39044161b7c9f42e2fe83cdd7246c89c21ac59f3262f7b1944758bb457538cf3"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/v1/coast-scav-body-se-f0-v1.png",
+          "from": "main",
+          "sha256": "f1a0df3801f0a656efe013c12916f27ffaa389e729149d2cabb1da708fd286de"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/v1/coast-scav-body-s-f0-v1.png",
+          "from": "main",
+          "sha256": "de7f86279df05fccb2ccd7aafc3419e29ef3dfe0c9dc9faa7eef2fd95f8a04c8"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/v1/coast-scav-body-ne-f0-v1.png",
+          "from": "main",
+          "sha256": "151bf1902577c2124c4022e99282874a574d9e52837970996f69bc903a9dae36"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/v1/coast-scav-body-n-f0-v1.png",
+          "from": "main",
+          "sha256": "30becc2aaa7550913b508aecf04a6c055f46938b83b223a3b6c5b4cc6ca25e58"
+        }
+      ]
+    },
+    {
+      "id": "salt",
+      "group": "A",
+      "template": "assets/hit-feel/templates/salt-hurt-template-v1.png",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/v1/coast-salt-body-e-f0-v1.png",
+          "from": "main",
+          "sha256": "643a92c864e4fa8ffc5c8a0325e3574069c39242184d06a462292c56464c5780"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/v1/coast-salt-body-se-f0-v1.png",
+          "from": "main",
+          "sha256": "b0dc2573098f975432d07bed13751800c695b685f570c9f8fc27002634523164"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/v1/coast-salt-body-s-f0-v1.png",
+          "from": "main",
+          "sha256": "1e86c1369afedb60f03638d30e26246f3a5e6584021802a078f38bdd3bcb32a2"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/v1/coast-salt-body-ne-f0-v1.png",
+          "from": "main",
+          "sha256": "4f73cdc6d61939bc53eee1fb3f225c652480592babeac0f9bd8245e38bbecc06"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/v1/coast-salt-body-n-f0-v1.png",
+          "from": "main",
+          "sha256": "b5396cbb5b5596a889be74563ce977998c997bd5ea5f48b9147c6fff5ca8a85e"
+        }
+      ]
+    },
+    {
+      "id": "elite",
+      "group": "A",
+      "template": "assets/hit-feel/templates/elite-hurt-template-v1.png",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/v1/coast-elite-body-e-f0-v1.png",
+          "from": "main",
+          "sha256": "e45c08f649ae5a2c637d617de5b8963eaf7f92c1f10684bb4bb5eb3cf91b5b34"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/v1/coast-elite-body-se-f0-v1.png",
+          "from": "main",
+          "sha256": "ddcdffe99abdb1f5c26fbef0c9cf2045efc9581571fa984748f20dfc815188ea"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/v1/coast-elite-body-s-f0-v1.png",
+          "from": "main",
+          "sha256": "051cb9607988fcb4a106fb32c01295a16a2fe2c47faa74e8f0f59294c4c15b82"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/v1/coast-elite-body-ne-f0-v1.png",
+          "from": "main",
+          "sha256": "fb854cedf3396f3e04d4cda73030d445fedf0ee98d4661d7e07300307591438a"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/v1/coast-elite-body-n-f0-v1.png",
+          "from": "main",
+          "sha256": "cca2661d5d94a2b4540d380729e23364b42da44d960281e61e0f9fafeb99f75b"
+        }
+      ]
+    },
+    {
+      "id": "creature",
+      "group": "A",
+      "template": "assets/hit-feel/templates/creature-hurt-template-v1.png",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/v1/coast-creature-body-e-f0-v1.png",
+          "from": "main",
+          "sha256": "dd7b1c50b884d0d6320eb5f383004b4781985e43acb09dedc5d192bdd44cedb7"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/v1/coast-creature-body-se-f0-v1.png",
+          "from": "main",
+          "sha256": "b84bbc2cd415b4793cc0933935112b75bb8caa7f953a0e8f7775782b8b66d96b"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/v1/coast-creature-body-s-f0-v1.png",
+          "from": "main",
+          "sha256": "185ff565f55cb6d86d6c0116ea24ea1d4ee241b1bb12d939142e107b795d5d30"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/v1/coast-creature-body-ne-f0-v1.png",
+          "from": "main",
+          "sha256": "c5a6637a6faf5499d7d3fc63ff4645b3d6914411fd1aae7f6c3e92105c1a4e65"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/v1/coast-creature-body-n-f0-v1.png",
+          "from": "main",
+          "sha256": "ffa28970b4af03c1515167da30d04a441c58263849d07b7853f28108cb950eaf"
+        }
+      ]
+    },
+    {
+      "id": "raider-melee",
+      "group": "B",
+      "template": "assets/hit-feel/templates/raider-melee-hurt-template-v1.png",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-raider-melee-body-e-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "0b33dfdf48f5122d787ba1e2b68a9788ae4487a22673fc2d56c1708496bf6fef"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-raider-melee-body-se-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "06252d3328307d6410dd8728cf5de262f1211acc724743cfd46ec0e3cc75660c"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-raider-melee-body-s-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "083b60e553ed6b60c2e8d8a5c408959dfb5cbc19cf1fb56cd53027e679c74e79"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-raider-melee-body-ne-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "e67febad6585cd1462faf515c00eb384d60a089f6d0b2ee51a5cd5f94d81b1c1"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-raider-melee-body-n-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "0daea2435757b4f0a32db31fc660df7362918e4eb88d5291bd392eea31ccdadd"
+        }
+      ]
+    },
+    {
+      "id": "raider-gunner",
+      "group": "B",
+      "template": "assets/hit-feel/templates/raider-gunner-hurt-template-v1.png",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-raider-gunner-body-e-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "dc2b39971594a22f66c1fff092ec2b8f071bb550408a78e1fd527fc3b952697d"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-raider-gunner-body-se-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "495f367a322643bbe78f7f1f3142d08e7eb00c3a7393da29c7c802e05e47e940"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-raider-gunner-body-s-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "78b7bc45059730e7eaf7dd783996c2d18e41309fa7ca0e75f168be45b434d559"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-raider-gunner-body-ne-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "4dc8098e0fb0def8907545a6df8051023bfa03b736bb186b2b4d6ef62f3071db"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-raider-gunner-body-n-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "f7f5daa8191e554a0835920ed0185ef614000d96dfcb0937999049210f6ba9a4"
+        }
+      ]
+    },
+    {
+      "id": "raider-lookout",
+      "group": "B",
+      "template": "assets/hit-feel/templates/raider-lookout-hurt-template-v1.png",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-raider-lookout-body-e-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "82a9d0cc1b30840eb6f8f07c50bd9d2d022cb6149d9b58831f94c8a3436aabbe"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-raider-lookout-body-se-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "a6488b79af6974cfbc4285183f6c475e9c5070befce790c39369c6742ac6c9fe"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-raider-lookout-body-s-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "cda7abab805c89c674babc2549a61772da88f69b58ba53fa85187046f754bdd8"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-raider-lookout-body-ne-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "81e5868f8bf6e0227761286fbe7c433beaa9681ca5c3acf857262ed51d5b09e5"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-raider-lookout-body-n-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "d2293145c3d6bc1159586fcd82928a4c78b4299d84ad2c5ad4aac8f6b4dea51a"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "schema": 1,
+  "method": "User-authorized part-based edits on the native logical grid, followed by exact 8x nearest-neighbour enlargement. Original generated sources preserved.",
+  "rowOrder": [
+    "E",
+    "SE",
+    "S",
+    "NE",
+    "N"
+  ],
+  "columnOrder": [
+    "idle",
+    "hurt",
+    "recovery"
+  ],
+  "plans": {
+    "scav": {
+      "headEnd": 17,
+      "torsoRows": [
+        22,
+        33
+      ],
+      "recoveryTorsoRows": [
+        25,
+        29
+      ],
+      "kneeRows": [
+        36,
+        41
+      ],
+      "recoveryKneeRows": [
+        38,
+        39
+      ],
+      "fixedFootFrom": 43
+    },
+    "salt": {
+      "headEnd": 17,
+      "torsoRows": [
+        22,
+        33
+      ],
+      "recoveryTorsoRows": [
+        25,
+        29
+      ],
+      "kneeRows": [
+        36,
+        41
+      ],
+      "recoveryKneeRows": [
+        38,
+        39
+      ],
+      "fixedFootFrom": 43
+    },
+    "elite": {
+      "headEnd": 16,
+      "torsoRows": [
+        24,
+        29
+      ],
+      "recoveryTorsoRows": [
+        26,
+        27
+      ],
+      "kneeRows": [
+        37,
+        39
+      ],
+      "recoveryKneeRows": [
+        38,
+        39
+      ],
+      "fixedFootFrom": 43
+    },
+    "raider-melee": {
+      "headEnd": 17,
+      "torsoRows": [
+        22,
+        32
+      ],
+      "recoveryTorsoRows": [
+        25,
+        28
+      ],
+      "kneeRows": [
+        35,
+        39
+      ],
+      "recoveryKneeRows": [
+        37,
+        38
+      ],
+      "fixedFootFrom": 40
+    },
+    "raider-gunner": {
+      "headEnd": 17,
+      "torsoRows": [
+        22,
+        30
+      ],
+      "recoveryTorsoRows": [
+        25,
+        28
+      ],
+      "kneeRows": [
+        35,
+        39
+      ],
+      "recoveryKneeRows": [
+        37,
+        38
+      ],
+      "fixedFootFrom": 40
+    },
+    "raider-lookout": {
+      "headEnd": 17,
+      "torsoRows": [
+        22,
+        31
+      ],
+      "recoveryTorsoRows": [
+        25,
+        28
+      ],
+      "kneeRows": [
+        35,
+        39
+      ],
+      "recoveryKneeRows": [
+        37,
+        38
+      ],
+      "fixedFootFrom": 40
+    }
+  },
+  "sheets": [
+    {
+      "id": "scav",
+      "template": "assets/hit-feel/templates/scav-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v1.png",
+      "sha256": "3a3cfbde8b7cbdb38768644df9cff5181fb5b36b20ae2f429119e804dcedd8af",
+      "width": 768,
+      "height": 1920,
+      "fixedFootFrom": 43
+    },
+    {
+      "id": "salt",
+      "template": "assets/hit-feel/templates/salt-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v1.png",
+      "sha256": "97456af28d03f057b608c916ec8c4ae28b4d5c2ec0cf7aeaf5651be3bebfe506",
+      "width": 768,
+      "height": 1920,
+      "fixedFootFrom": 43
+    },
+    {
+      "id": "elite",
+      "template": "assets/hit-feel/templates/elite-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v1.png",
+      "sha256": "db5b2c751cb3d5f21af6bc6eea29c5423efe46bc74d3b3a91c678286c357171e",
+      "width": 768,
+      "height": 1920,
+      "fixedFootFrom": 43
+    },
+    {
+      "id": "creature",
+      "template": "assets/hit-feel/templates/creature-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v1.png",
+      "sha256": "3011829901689e9544fe8f3549840125445bcff1709c9726485a2d700632601b",
+      "width": 960,
+      "height": 1120,
+      "fixedFootFrom": 24
+    },
+    {
+      "id": "raider-melee",
+      "template": "assets/hit-feel/templates/raider-melee-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v1.png",
+      "sha256": "fdedc315042ce33e1a332638b62924323c7abd70e23f2c61f59850b9bcfdab3d",
+      "width": 768,
+      "height": 1920,
+      "fixedFootFrom": 40
+    },
+    {
+      "id": "raider-gunner",
+      "template": "assets/hit-feel/templates/raider-gunner-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v1.png",
+      "sha256": "6ccf06b73a0b894f434979358a1547b1fdec86c764e13088be07eca5d67b0c55",
+      "width": 768,
+      "height": 1920,
+      "fixedFootFrom": 40
+    },
+    {
+      "id": "raider-lookout",
+      "template": "assets/hit-feel/templates/raider-lookout-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v1.png",
+      "sha256": "ef6b030e2ccc6fcd0159254655964bb639e721ef8d387d444b36dc61da2e4efd",
+      "width": 768,
+      "height": 1920,
+      "fixedFootFrom": 40
+    }
+  ]
+}

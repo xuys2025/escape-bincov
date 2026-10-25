@@ -10,6 +10,7 @@ import { Fx } from './fx';
 import { gait, walkFrame } from '../gait';
 import { Lighting, MOODS, lamp } from './lighting';
 import { Textures } from './textures';
+import { enemyMotion } from './enemy-motion';
 import { lifecycle } from './scope';
 import { Weather, type RoofArea, type WeatherKind } from './weather';
 import { Tide, paintWade } from './tide';
@@ -20,7 +21,7 @@ import type { MallArt } from './mall-art';
 import { MALL_FOOTPRINT, insideFootprint } from './mall-dressing';
 import { MALL_V2_REGIONS } from '../mall-layout-v2';
 import { releaseManagedSlots } from './renderer-lifetime';
-import { aimLead, pointerLead, snapAxis, stepLead, type AxisHold, type Lead } from './camera';
+import { aimLead, leadRoom, pointerLead, snapAxis, stepLead, type AxisHold, type CameraBounds, type Lead } from './camera';
 import { viewScale, type ViewScaleMode } from './view-scale';
 
 export const AIM_H = 22;
@@ -51,6 +52,8 @@ function barrelTip(canvas: HTMLCanvasElement): Point {
 const FALL_T = .16;
 /** The feet slide back this far (world px, plus a little down) while the body tips, so the fallen body lies where the corpse is drawn. */
 const FALL_SLIDE = 18;
+/** Seconds a blow shows the hurt body (frame 5), then the recovery body (frame 6), on art that has them (#75). */
+const HURT_POSE = .09, RECOVERY_POSE = .06;
 
 interface Occluder {
   sprite: Sprite; key: string; kind: OccluderKind;
@@ -69,12 +72,14 @@ interface ActorGfx {
   arms: [Sprite, Sprite];
   /** Water band at the feet while the actor stands in a flooded tide cell. */
   wade: Sprite;
+  telegraph: Graphics;
   /** Player only: faint warm outline so the player separates from dark asphalt (not the occlusion rim). */
   edge: Sprite | null;
   walk: number; dir: number; flashT: number; deathT: number; kick: Point; kickT: number; seen: boolean; swingT: number;
-  /** A blow read after this actor was drawn (present takes a batch's events after its actors): the next frame draws its
-   *  flash and kick even when that frame's delta outlives them (see syncActor). */
+  /** A blow not drawn yet: the next syncActor draws its flash and kick even when that frame's delta outlives them. */
   hit: boolean;
+  /** Seconds left of a blow's body pose, like flashT: the hurt frame while more than RECOVERY_POSE is left, then recovery. */
+  hurtT?: number;
   /** Walk-cycle direction from the gait rule: 1 forward, -1 reversed while backpedalling (F08). */
   sense: 1 | -1;
   /** Half-cycles of the walk, to put a puff of dust under each sprinting step. */
@@ -243,6 +248,13 @@ export class CoastView {
     // frame turns the body into a corpse. Only this map/epoch counts: a rebuild (load, layer change) never replays a fall.
     const current = (e: StampedEvent) => worldKeyString(e.stamp.world) === this.mapKey && e.stamp.epoch === this.epoch;
     const fallen = new Set(batch.events.flatMap(e => e.type === 'death' && current(e) ? [e.uid] : []));
+    // A blow flashes and kicks its body on the frame that brings it, so it is set before the body is drawn (#75); the
+    // blood still comes with the event below. A body drawn for the first time in this batch gets it from the next frame.
+    const blown = new Set<string>();
+    for (const e of batch.events) {
+      if (e.type !== 'hurt' || e.cause !== 'blow' || !current(e)) continue;
+      const g = this.actors.get(e.uid); if (g) { this.blow(g, e.angle); blown.add(e.uid); }
+    }
     this.tide.sync(f.flooded, dt, this.time);
     const seen = new Set<string>();
     for (const a of [f.player, ...f.actors]) { seen.add(a.uid); this.syncActor(a, dt, visible(a.regionId), fallen.has(a.uid)); }
@@ -252,7 +264,7 @@ export class CoastView {
     for (const e of batch.events) {
       this.stats.events++;
       if (!current(e)) { this.stats.droppedEvents++; continue; }
-      this.onEvent(e, f);
+      this.onEvent(e, f, blown);
     }
     this.bakeAhead(dt);
     this.fx.update(dt);
@@ -531,7 +543,25 @@ export class CoastView {
     }
   }
 
-  private onEvent(e: StampedEvent, f: ViewFrame) {
+  /**
+   * A blow's 70 ms flash and 80 ms kick: 2 px the way it travelled, as its angle points back at the source (#75); and its
+   * hurt and recovery pose, which syncActor shows where the art has those frames.
+   */
+  private blow(g: ActorGfx, angle: number | null) {
+    g.flashT = .07; g.kick = angle === null ? { x: 0, y: 0 } : { x: -Math.cos(angle) * 2, y: -Math.sin(angle) * 2 }; g.kickT = .08; g.hit = true;
+    g.hurtT = HURT_POSE + RECOVERY_POSE;
+  }
+
+  /**
+   * Whether this actor may show pose frames: the art has them (assets/coast/poses) in the style its body is drawn with,
+   * its archetype's own or else its kind's. An archetype with its own body but no poses keeps its own frames.
+   */
+  private posable(a: ActorView) {
+    return this.tex.hasBodyFrame(a.kind, 5, a.tactics?.archetype);
+  }
+
+  /** `blown`: bodies whose blow present() already set before drawing them. */
+  private onEvent(e: StampedEvent, f: ViewFrame, blown: ReadonlySet<string>) {
     const all = [f.player, ...f.actors], actor = (uid: string) => all.find(a => a.uid === uid);
     // Rooms may overlap: a point is shown only when every room containing it is revealed (the Runtime's rule).
     const regionAt = (p: Point) => regionAtClosed(this.map!, f.revealed, p);
@@ -551,7 +581,8 @@ export class CoastView {
         }
         if (!shown(a)) break;
         const angle = tip?.angle ?? e.pellets.reduce((s, p) => s + p.angle, 0) / Math.max(1, e.pellets.length);
-        const art = this.tex.weapon(a.weapon, a.kind), c = Math.cos(angle), s = Math.sin(angle);
+        if (a.tactics?.archetype === 'sac-spitter') { this.fx.acid(a.x, a.y, angle, this.rnd); break; }
+        const art = this.tex.weapon(a.weapon, a.kind, a.tactics?.archetype), c = Math.cos(angle), s = Math.sin(angle);
         const sp = new Sprite(this.tex.muzzle(0)); sp.anchor.set(.5); sp.blendMode = 'add';
         const reach = art.muzzle * heldLength(angle);
         if (tip) sp.position.set(Math.round(tip.at.x + c * 1.5), Math.round(tip.at.y + s * 1.5));
@@ -579,6 +610,9 @@ export class CoastView {
       }
       case 'impact': {
         if (!shown(e.lastFree)) break;
+        if (e.owner && actor(e.owner)?.tactics?.archetype === 'sac-spitter') {
+          this.fx.acid(e.lastFree.x, e.lastFree.y, 0, this.rnd, true); break;
+        }
         if (e.reason === 'blocked') {
           const b = this.bullets.get(e.bullet), v = b ? Math.hypot(b.vx, b.vy) || 1 : 1;
           const n = e.normal ?? (b ? { x: -b.vx / v, y: -b.vy / v } : { x: 0, y: 1 });
@@ -591,9 +625,9 @@ export class CoastView {
         // Only blows (any size) flash, kick and spray blood; bleeding, pollution, thirst, hunger and a lowered health
         // limit are shown by the host's HUD, not on the body.
         const g = this.actors.get(e.uid); if (!g || e.cause !== 'blow') break;
-        const ang = e.angle ?? 0;
-        g.flashT = .07; g.kick = e.angle === null ? { x: 0, y: 0 } : { x: Math.cos(ang) * 2, y: Math.sin(ang) * 2 }; g.kickT = .08; g.hit = true;
-        const a = actor(e.uid); if (a && shown(a)) this.fx.blood(a.x, a.y + .5, AIM_H, ang, this.rnd);
+        if (!blown.has(e.uid)) this.blow(g, e.angle);
+        // The angle points back at the blow's source, and the blood sprays that way.
+        const a = actor(e.uid); if (a && shown(a)) this.fx.blood(a.x, a.y + .5, AIM_H, e.angle ?? 0, this.rnd);
         break;
       }
       case 'door': { const d = this.map!.doors.find(x => x.id === e.id); if (d) this.fx.dust(d.x * 32 + 16, d.y * 32 + 30, this.rnd, 4); break; }
@@ -609,15 +643,47 @@ export class CoastView {
     if (fell && g && !g.corpse && g.deathT === 0 && shown) g.deathT = .0001;
     if (!g) {
       const mk = () => { const s = new Sprite(); s.anchor.set(.5, 1); return s; };
-      const arm = () => { const s = new Sprite(this.tex.arm(a.kind)); s.anchor.set(0, .5); return s; };
+      const arm = () => { const s = new Sprite(this.tex.arm(a.kind, a.tactics?.archetype)); s.anchor.set(0, .5); return s; };
       g = { kind: a.kind, body: mk(), weapon: new Sprite(), flash: mk(), rim: new Sprite(), wrim: new Sprite(), shadow: new Sprite(this.tex.blob(20, 7)), corpse: null, corpseKey: '',
-        arms: [arm(), arm()], wade: new Sprite(this.tex.ensure('tide:wade', paintWade)), edge: a.kind === 'player' ? new Sprite() : null, walk: 0, dir: dirOf(a.aim), flashT: 0, deathT: 0, kick: { x: 0, y: 0 }, kickT: 0, seen: false, swingT: 0, hit: false, step: 0, sense: 1 };
+        arms: [arm(), arm()], wade: new Sprite(this.tex.ensure('tide:wade', paintWade)), telegraph: new Graphics(), edge: a.kind === 'player' ? new Sprite() : null, walk: 0, dir: dirOf(a.aim), flashT: 0, deathT: 0, kick: { x: 0, y: 0 }, kickT: 0, seen: false, swingT: 0, hit: false, step: 0, sense: 1 };
       g.flash.blendMode = 'add'; g.rim.anchor.set(.5, (48 + 1) / 50); g.shadow.anchor.set(.5); g.wade.anchor.set(.5, .5); g.wade.visible = false;
       this.sorted.addChild(g.body, ...g.arms, g.weapon, g.flash, g.wade); this.xray.addChild(g.rim, g.wrim);
+      this.sorted.addChild(g.telegraph);
       if (g.edge) { g.edge.anchor.set(.5, (48 + 1) / 50); g.edge.tint = 0xf3dfa8; g.edge.alpha = .38; this.sorted.addChild(g.edge); } this.shadows.addChild(g.shadow);
       this.actors.set(a.uid, g);
     }
     g.kind = a.kind;
+    // The same room visibility as the body owns every cue. Never reveal an attack in a hidden room.
+    g.telegraph.clear(); g.telegraph.visible = shown && a.alive && !!a.tactics;
+    if (a.tactics && shown && a.alive) {
+      const t = a.tactics, warning = t.stance === 'warning', windup = t.phase === 'windup';
+      const color = warning ? 0xe4c46e : t.phase === 'reload' ? 0x86bed2 : t.stance === 'hostile' ? 0xe38969 : 0x97b7a3;
+      g.telegraph.position.set(a.x, a.y); g.telegraph.zIndex = a.y + .09;
+        if (t.boundary) g.telegraph.circle(t.boundary.at.x - a.x, t.boundary.at.y - a.y, t.boundary.radius).stroke({ width: 1.5, color: 0xe4c46e, alpha: .65 });
+      if(t.checkpoint) {
+        const p=t.checkpoint,permitted=p.phase==='granted',closed=p.phase==='engaged';
+        const color=closed?0xe38969:permitted?0x8bd4b8:0xe4c46e;
+        const wait=p.waiting,pass=p.passage;
+        g.telegraph.rect(wait.x-a.x,wait.y-a.y,wait.w,wait.h).fill({color,alpha:.12}).stroke({width:1.5,color,alpha:.8});
+        g.telegraph.rect(pass.x-a.x,pass.y-a.y,pass.w,pass.h).fill({color:permitted?color:0x8b9eac,alpha:permitted ? .16 : .04})
+          .stroke({width:1,color:permitted?color:0x8b9eac,alpha:.6});
+        const x=wait.x+wait.w/2-24-a.x,y=wait.y-8-a.y;
+        g.telegraph.rect(x,y,48,4).fill({color:0x171b1b,alpha:.9});
+        if(p.phase==='waiting'||permitted)g.telegraph.rect(x,y,48*p.waited/4,4).fill(color);
+      }
+      if (windup) {
+        const length = Math.min(t.range, 90), c = Math.cos(t.aim), s = Math.sin(t.aim);
+        g.telegraph.moveTo(0, 0).lineTo(c * length, s * length).stroke({ width: 2, color, alpha: .8 });
+      }
+      if (t.phase !== 'idle' || warning || t.awareness > 0) {
+          const progress = warning ? 1 - t.warningLeft / (t.boundary ? 4 : 1.5) : t.phase === 'idle' ? t.awareness : 1 - Math.min(1, t.left / t.total);
+        g.telegraph.rect(-10, -49, 20, 3).fill({ color: 0x171b1b, alpha: .9 });
+        g.telegraph.rect(-10, -49, Math.max(1, 20 * progress), 3).fill(color);
+      }
+      // Temporary role badges make the three prototype roles distinct while their formal art is produced.
+      const marks = t.archetype === 'raider-lookout' ? 3 : t.archetype === 'raider-gunner' ? 2 : 1;
+      for (let i = 0; i < marks; i++) g.telegraph.rect(-marks * 3 + i * 6, -54, 3, 2).fill(color);
+    }
     const speed = Math.hypot(a.vx, a.vy);
     g.walk = speed > 5 ? (g.walk + dt * speed / 22) % 4 : 0;
     const step = Math.floor(g.walk / 2);
@@ -625,14 +691,23 @@ export class CoastView {
     // Backpedalling plays reversed steps on the aim's body; strafing turns the hips toward the movement (F08). The dead
     // and the falling face the aim as before: a death batch still carries the velocity of the step the actor died in.
     const gt = gait(a.aim, a.vx, a.vy, speed > 5 && a.alive, g.sense); g.sense = gt.sense; g.dir = gt.dir;
-    // A blow's 70 ms flash and 80 ms kick start ageing on the frame after the hit, the first that can draw them: below
-    // about 14 frames a second (12.5 for the kick) that frame used to age them away unseen (#75). It draws them at least
-    // once now; faster frames age them exactly as before.
+    // A blow's 70 ms flash and 80 ms kick age from the first frame that draws them: the hit's own (present sets them
+    // before drawing), or the next for a body first drawn with the blow. Below about 14 frames a second (12.5 for the
+    // kick) that frame's delta outlives them, so it draws them at least once (#75).
     const hit = g.hit; g.hit = false;
     g.flashT = Math.max(0, g.flashT - dt); g.kickT = Math.max(0, g.kickT - dt); g.swingT = Math.max(0, g.swingT - dt);
     if (g.deathT > 0) g.deathT += dt;
     const dying = !a.alive && g.deathT > 0 && g.deathT < FALL_T;
-    const frame = dying ? 0 : speed > 5 ? walkFrame(g.walk, g.sense) : 0;
+    // A blow's pose replaces the idle or walk frame: hurt (5) first, recovery (6) for the last RECOVERY_POSE seconds. The
+    // frame that first draws the blow shows hurt however long it is, like the flash.
+    let hurtFrame = 0;
+    if (g.hurtT !== undefined) {
+      // Under a microsecond counts as over: 0.15 s is 9 frames at 60 Hz, and the float left after them may not be 0.
+      g.hurtT = g.hurtT - dt > 1e-6 ? g.hurtT - dt : 0;
+      if (a.alive && this.posable(a)) hurtFrame = hit || g.hurtT > RECOVERY_POSE ? 5 : g.hurtT > 0 ? 6 : 0;
+      if (g.hurtT === 0) g.hurtT = undefined;
+    }
+    const frame = dying ? 0 : hurtFrame || (speed > 5 ? walkFrame(g.walk, g.sense) : 0);
     const dead = !a.alive && !dying;
     const kicked = g.kickT > 0 || hit, kx = kicked ? g.kick.x : 0, ky = kicked ? g.kick.y : 0;
     const x = Math.round(a.x + kx), y = Math.round(a.y + ky);
@@ -641,11 +716,11 @@ export class CoastView {
     g.seen = shown;
     if (dead) {
       g.wade.visible = false;
-      const facing = corpseFacing(a), key = `corpse:${a.kind}:${facing}`;
+      const facing = corpseFacing(a), key = `corpse:${a.tactics?.archetype ?? a.kind}:${facing}`;
       if (!g.corpse || g.corpseKey !== key) {
         const fresh = !g.corpse && g.deathT > 0;
         g.corpse?.destroy();
-        g.corpse = new Sprite(this.tex.corpse(a.kind, facing)); g.corpse.anchor.set(.5, this.tex.corpseAnchorY(a.kind)); g.corpseKey = key;
+        g.corpse = new Sprite(this.tex.corpse(a.kind, facing, a.tactics?.archetype)); g.corpse.anchor.set(.5, this.tex.corpseAnchorY(a.kind, a.tactics?.archetype)); g.corpseKey = key;
         this.flat.addChild(g.corpse);
         const seed = fresh ? null : [...a.uid].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
         let k = seed ?? 0; const r = () => seed === null ? this.rnd() : ((k = (k * 1103515245 + 12345) >>> 0) / 4294967296);
@@ -662,29 +737,35 @@ export class CoastView {
     }
     if (g.corpse) { g.corpse.destroy(); g.corpse = null; g.corpseKey = ''; }
     // Dying: the standing frame tips over its feet toward the side the corpse will lie on, then the corpse replaces it.
-    const fall = dying ? Math.min(1, g.deathT / FALL_T) : 0, side = dying ? corpseFacing(a) : 0, tilt = side * 1.25 * fall;
+    const pose = enemyMotion(a, this.opts.reducedMotion);
+    const fall = dying ? Math.min(1, g.deathT / FALL_T) : 0, side = dying ? corpseFacing(a) : 0, tilt = dying ? side * 1.25 * fall : pose.tilt;
     const bx = x - Math.round(side * FALL_SLIDE * fall), by = y + Math.round(4 * fall);
-    g.body.texture = this.tex.actor(a.kind, g.dir, frame); g.body.position.set(bx, by); g.body.zIndex = a.y; g.body.rotation = tilt;
-    if (g.edge) { g.edge.texture = this.tex.actorEdge(a.kind, g.dir, frame); g.edge.position.set(bx, by + 1); g.edge.rotation = tilt; g.edge.zIndex = a.y - .002; }
-    g.flash.texture = this.tex.actorFlash(a.kind, g.dir, frame); g.flash.position.set(bx, by); g.flash.zIndex = a.y + .01; g.flash.visible = shown && (g.flashT > 0 || hit); g.flash.alpha = .5; g.flash.rotation = tilt;
+    g.body.texture = this.tex.actor(a.kind, g.dir, frame, a.tactics?.archetype); g.body.position.set(bx, by); g.body.zIndex = a.y; g.body.rotation = tilt;
+    if (g.edge) { g.edge.texture = this.tex.actorEdge(a.kind, g.dir, frame, a.tactics?.archetype); g.edge.position.set(bx, by + 1); g.edge.rotation = tilt; g.edge.zIndex = a.y - .002; }
+    g.flash.texture = this.tex.actorFlash(a.kind, g.dir, frame, a.tactics?.archetype); g.flash.position.set(bx, by); g.flash.zIndex = a.y + .01; g.flash.visible = shown && (g.flashT > 0 || hit); g.flash.alpha = .5; g.flash.rotation = tilt;
+    for (const sprite of [g.body, g.flash, g.rim]) sprite.scale.set(pose.x, pose.y);
     g.shadow.position.set(x + 2, y - 1);
     // Caught by the tide: the water covers the boots; the shadow drowns. Only for an actor that is drawn at all.
     const wading = shown && !dying && this.tide.wet(a.x, a.y);
     g.wade.visible = wading; g.shadow.visible = shown && !wading;
     if (wading) { g.wade.position.set(x, y - 2); g.wade.zIndex = a.y + .02; g.wade.scale.x = this.opts.reducedMotion ? 1 : 1 + .06 * Math.sin(this.time * 4 + a.x); }
-    g.rim.texture = this.tex.actorRim(a.kind, g.dir, frame); g.rim.position.set(x, y + 1); g.rim.tint = a.kind === 'player' ? 0xf0dca0 : 0xe07a5a;
-    const art = this.tex.weapon(a.weapon, a.kind);
+    g.rim.texture = this.tex.actorRim(a.kind, g.dir, frame, a.tactics?.archetype); g.rim.position.set(x, y + 1); g.rim.tint = a.kind === 'player' ? 0xf0dca0 : 0xe07a5a;
+    g.rim.rotation = tilt;
+    const art = this.tex.weapon(a.weapon, a.kind, a.tactics?.archetype);
+    const polearm = a.tactics?.archetype === 'tide-ritualist' && a.weapon === 'club';
     const reload = a.state.reloading ? .75 * Math.sign(Math.cos(a.aim) || 1) : 0;
-    const swing = g.swingT > 0 ? (g.swingT / .14 - .5) * 1.4 : 0;
+    const swing = polearm ? 0 : a.tactics?.phase === 'windup' ? -.6 * Math.sign(Math.cos(a.aim) || 1) : g.swingT > 0 ? (g.swingT / .14 - .5) * 1.4 : 0;
     // The player's gun turns with recoil (hud.aim.drift): it points where the next shot is centred, not at the pointer.
     const drift = a.uid === 'player' ? this.last?.hud.aim.drift ?? 0 : 0;
     const angle = a.aim + reload + swing + drift, c = Math.cos(angle), s = Math.sin(angle);
     g.weapon.texture = art.texture; g.weapon.anchor.set(art.pivotX / art.canvas.width, art.pivotY / art.canvas.height);
     // The barrel lies on the line from the chest along the gun, where the shots fly: an art's barrel row may sit off its
     // grip pivot (Sol's guns by 3-4 px), so the gun moves across by that much (`off`, in the sprite's flipped frame).
-    const off = a.weapon === 'claw' ? 0 : (this.barrelTip(a.weapon, a.kind).y - art.pivotY) * (Math.cos(a.aim) < 0 ? -1 : 1);
+    const off = a.weapon === 'claw' ? 0 : (this.barrelTip(a.weapon, a.kind, a.tactics?.archetype).y - art.pivotY) * (Math.cos(a.aim) < 0 ? -1 : 1);
     // Weapon and arms round their offsets, not their positions: on the body's whole pixel they never shimmer against it.
-    g.weapon.position.set(x + Math.round(c * art.forward + s * off), y - AIM_H + Math.round(s * art.forward - c * off));
+    const thrust = polearm && a.tactics ? a.tactics.phase === 'windup' ? -4 : a.tactics.phase === 'release' ? 8
+      : a.tactics.phase === 'recovery' ? 8 * Math.max(0, 1 - (a.tactics.total - a.tactics.left) / .22) : 0 : 0;
+    g.weapon.position.set(x + Math.round(c * (art.forward + thrust) + s * off), y - AIM_H + Math.round(s * (art.forward + thrust) - c * off));
     g.weapon.rotation = angle; g.weapon.scale.set(heldLength(angle), Math.cos(a.aim) < 0 ? -1 : 1);
     g.weapon.zIndex = a.y + (Math.sin(a.aim) < -.35 ? -.05 : .05);
     g.weapon.visible = shown && a.weapon !== 'claw' && !dying;
@@ -715,7 +796,7 @@ export class CoastView {
     // Arms share the weapon's depth, just under it so the painted gloves cover the sleeve ends.
     for (const arm of g.arms) { arm.zIndex = g.weapon.zIndex - .001; arm.tint = g.weapon.tint; }
   }
-  private dropActor(g: ActorGfx) { for (const s of [g.body, g.weapon, g.flash, g.rim, g.wrim, g.shadow, g.wade, g.corpse, g.edge, ...g.arms]) s?.destroy(); }
+  private dropActor(g: ActorGfx) { for (const s of [g.body, g.weapon, g.flash, g.rim, g.wrim, g.shadow, g.wade, g.telegraph, g.corpse, g.edge, ...g.arms]) s?.destroy(); }
 
   private syncCrates(f: ViewFrame, visible: (r: string | null) => boolean) {
     const seen = new Set<string>();
@@ -750,8 +831,10 @@ export class CoastView {
   }
   private syncBullets(f: ViewFrame) {
     const seen = new Set<string>();
+    const spitters = new Set(f.actors.filter(a => a.tactics?.archetype === 'sac-spitter').map(a => a.uid));
     for (const b of f.bullets) {
       seen.add(b.uid);
+      const acid = spitters.has(b.owner ?? ''), height = acid ? 7 : AIM_H;
       let e = this.bullets.get(b.uid);
       if (!e) { e = { g: new Graphics(), born: { x: b.x, y: b.y }, vx: b.vx, vy: b.vy, from: null, seen: null, off: { x: 0, y: 0 } }; this.sorted.addChild(e.g); this.bullets.set(b.uid, e); }
       e.vx = b.vx; e.vy = b.vy;
@@ -759,18 +842,21 @@ export class CoastView {
       const v = Math.hypot(b.vx, b.vy) || 1, ux = b.vx / v, uy = b.vy / v;
       // The tracer runs parallel to the bullet's own path, shifted by `off` so it leaves the drawn muzzle (a pellet's spread
       // carries it at most a few px from the gun's line there); hits and impacts stay on the bullet itself.
-      const headX = b.x + e.off.x, headY = b.y - AIM_H + e.off.y, hx = Math.round(headX), hy = Math.round(headY);
+      const headX = b.x + e.off.x, headY = b.y - height + e.off.y, hx = Math.round(headX), hy = Math.round(headY);
       if (show && !e.seen) e.seen = { x: headX, y: headY };
       // A tracer leaves the drawn muzzle: inside the barrel nothing shows, and the tail never reaches back past the muzzle
       // or past where the head was first shown. Without a known muzzle (a bullet already flying at load) it starts where
       // it was first published.
-      const start = e.from ?? { x: e.born.x, y: e.born.y - AIM_H };
+      const start = e.from ?? { x: e.born.x, y: e.born.y - height };
       const out = (headX - start.x) * ux + (headY - start.y) * uy - (e.from ? 0 : 3);
       const back = e.seen ? (headX - e.seen.x) * ux + (headY - e.seen.y) * uy : 0;
       const len = Math.min(b.enemy ? 8 : 14, out, back);
       e.g.clear();
-      if (len > 0) e.g.moveTo(hx - ux * len, hy - uy * len).lineTo(hx, hy).stroke({ width: 1, color: b.enemy ? 0xe48c64 : 0xffe6a8, alpha: .55 });
-      if (out > 0) e.g.rect(hx, hy, 1, 1).fill(b.enemy ? 0xffc29a : 0xfff6d8);
+      if (len > 0) e.g.moveTo(hx - ux * len, hy - uy * len).lineTo(hx, hy).stroke({ width: acid ? 2 : 1, color: acid ? 0x9da758 : b.enemy ? 0xe48c64 : 0xffe6a8, alpha: .55 });
+      if (out > 0) {
+        if (acid) e.g.circle(hx, hy, 2).fill(0xb6c16e);
+        else e.g.rect(hx, hy, 1, 1).fill(b.enemy ? 0xffc29a : 0xfff6d8);
+      }
       e.g.zIndex = b.y + .1; e.g.visible = show;
     }
     for (const [uid, e] of this.bullets) if (!seen.has(uid)) { e.g.visible = false; queueMicrotask(() => { if (this.bullets.get(uid) === e) { e.g.destroy(); this.bullets.delete(uid); } }); }
@@ -935,7 +1021,7 @@ export class CoastView {
   /** Half the docked panel's height, world px: the camera centres the player that much higher. */
   private inset() { return this.panelInset * this.view.dpr / this.view.s / 2; }
   /** The camera's allowed top-left range. Mall floors end in hoarding or the drop at the map edge: no margin beyond it. */
-  private camBounds() {
+  private camBounds(): CameraBounds {
     const b = this.map!.bounds, pad = this.map!.key.mapId === 'coast' || isMall(this.map!) ? 0 : 96, top = this.hudTop * this.view.dpr / this.view.s;
     return { x0: b.x - pad, x1: b.x + b.w + pad - this.view.w, y0: b.y - pad - (pad ? 40 : 0) - top, y1: b.y + b.h + pad - this.view.h };
   }
@@ -950,23 +1036,26 @@ export class CoastView {
     return pointerLead(c.x - this.view.w / 2, c.y - (this.view.h / 2 - this.inset()), precise);
   }
   private camera(f: ViewFrame, dt: number, follow = dt) {
-    const p = f.player, k = 1 - Math.exp(-follow * 8);
+    const p = f.player, k = 1 - Math.exp(-follow * 8), bd = this.camBounds();
     // The follow eases toward the player's chest; the look-ahead goes on top. With a mouse it comes from the pointer's
-    // place on screen (pointerLead / stepLead: no feedback from the aim); on touch it eases toward the aim's lead.
+    // place on screen (pointerLead / stepLead: no feedback from the aim) and stops on the map edge (leadRoom); on touch it
+    // eases toward the aim's lead.
     const mx = (p.x - this.view.w / 2 - this.camF.x) * k, my = (p.y - AIM_H - this.view.h / 2 + this.inset() - this.camF.y) * k;
+    const fx = this.camF.x + mx, fy = this.camF.y + my;
     const old = this.camF.lead ?? { m: 0, ux: 1, uy: 0 }, ox = old.m * old.ux, oy = old.m * old.uy;
     let lead: Lead;
-    if (this.pointer) lead = stepLead(old, this.pointerWant(this.pointer, p.state.precise), k);
-    else {
+    if (this.pointer) {
+      const want = this.pointerWant(this.pointer, p.state.precise);
+      lead = stepLead(old, want, k, leadRoom(fx, fy, want.ux, want.uy, bd));
+    } else {
       const t = aimLead(p.aim, p.state.precise), lx = ox + (t.x - ox) * k, ly = oy + (t.y - oy) * k, m = Math.hypot(lx, ly);
       lead = m > 1e-9 ? { m, ux: lx / m, uy: ly / m } : { m: 0, ux: 1, uy: 0 };
     }
     const lx = lead.m * lead.ux, ly = lead.m * lead.uy;
-    this.camF = { ...this.camF, x: this.camF.x + mx, y: this.camF.y + my, lead };
-    const bd = this.camBounds();
+    this.camF = { ...this.camF, x: fx, y: fy, lead };
     // Whole-pixel camera on the player's own rounding: a steady walk keeps the player still on screen (playtest F-04).
-    const X = snapAxis(this.camF.x + lx, p.x, bd.x0, bd.x1, this.camF.hx, mx + lx - ox);
-    const Y = snapAxis(this.camF.y + ly, p.y, bd.y0, bd.y1, this.camF.hy, my + ly - oy);
+    const X = snapAxis(fx + lx, p.x, bd.x0, bd.x1, this.camF.hx, mx + lx - ox);
+    const Y = snapAxis(fy + ly, p.y, bd.y0, bd.y1, this.camF.hy, my + ly - oy);
     this.camF.hx = { held: X.held, raw: X.raw }; this.camF.hy = { held: Y.held, raw: Y.raw };
     this.shake = Math.max(0, this.shake - dt * 30);
     const settle = Math.exp(-dt * 16); this.recoil.x *= settle; this.recoil.y *= settle;
@@ -1033,13 +1122,18 @@ export class CoastView {
    * The aim of a pointer: from the player's chest to the world point under it. It reads through the smoothed camera
    * (follow plus the look-ahead this pointer is about to ask for), without the whole-pixel rounding, the recoil kick and
    * the shake, which are drawing only (a kick moved the aim up to 2.6 px; the rounding moves the drawn world under 1 px).
-   * Easing the look-ahead's length then slides the camera along the pointer's line and leaves the aim as it is (PR #39).
+   * Easing the look-ahead's length then slides the camera along the pointer's line and leaves the aim as it is (PR #39);
+   * the length stops where the camera meets the map edge (leadRoom, #80), so the clamp below never holds one axis of it.
    * Touch never aims through here.
    */
   aimFromClient(clientX: number, clientY: number): number | null {
     const p = this.last?.player; if (!p) return null;
     const at = this.canvasPoint(clientX, clientY), old = this.camF.lead ?? { m: 0, ux: 1, uy: 0 }, bd = this.camBounds();
-    const next = this.pointer ? stepLead(old, this.pointerWant({ x: clientX, y: clientY }, p.state.precise), 0) : old;
+    let next = old;
+    if (this.pointer) {
+      const want = this.pointerWant({ x: clientX, y: clientY }, p.state.precise);
+      next = stepLead(old, want, 0, leadRoom(this.camF.x, this.camF.y, want.ux, want.uy, bd));
+    }
     const clamp = (v: number, lo: number, hi: number) => lo > hi ? (lo + hi) / 2 : Math.min(hi, Math.max(lo, v));
     const cx = clamp(this.camF.x + next.m * next.ux, bd.x0, bd.x1), cy = clamp(this.camF.y + next.m * next.uy, bd.y0, bd.y1);
     return Math.atan2(at.y + cy + AIM_H - p.y, at.x + cx - p.x);
@@ -1048,15 +1142,15 @@ export class CoastView {
    * The tip of an actor's drawn gun (chest plane, world px) and the direction it points: the weapon art's barrel tip put
    * through the weapon sprite's own transform, so the flash and the tracers leave the barrel the player sees.
    */
-  private barrelTip(weapon: string, kind: ActorKind): Point {
-    const key = `${weapon}:${kind}`;
+  private barrelTip(weapon: string, kind: ActorKind, variant?: string): Point {
+    const key = `${weapon}:${kind}:${variant ?? ''}`;
     let tip = this.barrelTips.get(key);
-    if (!tip) { tip = barrelTip(this.tex.weapon(weapon, kind).canvas); this.barrelTips.set(key, tip); }
+    if (!tip) { tip = barrelTip(this.tex.weapon(weapon, kind, variant).canvas); this.barrelTips.set(key, tip); }
     return tip;
   }
   private muzzleOf(a: ActorView): { at: Point; angle: number } | null {
     const g = this.actors.get(a.uid); if (!g || !g.weapon.texture || a.weapon === 'claw') return null;
-    const art = this.tex.weapon(a.weapon, a.kind), tip = this.barrelTip(a.weapon, a.kind);
+    const art = this.tex.weapon(a.weapon, a.kind, a.tactics?.archetype), tip = this.barrelTip(a.weapon, a.kind, a.tactics?.archetype);
     const w = g.weapon, c = Math.cos(w.rotation), s = Math.sin(w.rotation);
     const lx = (tip.x - art.pivotX) * w.scale.x, ly = (tip.y - art.pivotY) * w.scale.y;
     return { at: { x: w.x + lx * c - ly * s, y: w.y + lx * s + ly * c }, angle: w.rotation };

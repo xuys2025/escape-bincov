@@ -74,7 +74,7 @@ test('taking from and returning to a container updates the restored safe and wor
     assert.equal(D.count(afterReturn.safe, 'pearl'), 0);
     assert.equal(D.count(afterReturn.bag, 'pearl'), 0);
     assert.equal(D.count(f.container.inventory, 'pearl'), 1);
-    assert.equal(afterReturn.version, 2);
+    assert.equal(afterReturn.version, 3);
     assert.equal(read(f.storage).raid!.containers![0].inventory.items[0].uid, uid);
 });
 
@@ -145,7 +145,7 @@ test('bag and safe can exchange items through the same exact-slot transaction', 
 });
 
 test('merging consumes the source UID while keeping target identity and relief restrictions', () => {
-    const f = fixture(save => { save.equipment.weapon = null; save.equipment.ammo = 0; save.equipment.ammoRelief = 0; D.addItem(save.bag, 'ammo9', 35); }), uid = add(f.container.inventory, 'ammo9', 5);
+    const f = fixture(save => { Object.assign(save.equipment, { weapon: null, weaponUid: null, gun: null, ammo: 0, ammoRelief: 0 }); D.addItem(save.bag, 'ammo9', 35); }), uid = add(f.container.inventory, 'ammo9', 5);
     const targetUid = f.state.loadout!.bag.items[0].uid;
     const request = f.request('container', 'bag', uid);
     assert.equal(f.session.transferLoot(f.container, request), 'committed');

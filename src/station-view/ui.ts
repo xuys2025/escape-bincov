@@ -7,6 +7,8 @@ import { GridDrag, type DragHooks } from './grid';
 import { esc } from '../html';
 import * as P from './panels';
 import { confirmImport, readResetCopy, startOver } from '../fresh-start';
+import { deploymentRegion, deploymentWorld, type CountyArt } from './deploy-map';
+import { morph } from './morph';
 import { PERK_UI, choicePreview, critContext, defaultPerkAttribute, perkDone, perkFailure, perkPendingName, perkRetried, resetPreview, type PerkPreviewView } from '../perk-copy';
 
 export type PanelKind = 'gear' | 'arms' | 'med' | 'radio' | 'generator' | 'deploy' | 'facility' | 'board' | 'chat' | 'body' | 'menu' | 'help' | 'report';
@@ -57,6 +59,13 @@ const TITLES: Partial<Record<PanelKind, [string, string]>> = {
 const DIALOG_TITLES: Record<Dialog['kind'], string> = { sale: '确认出售', import: '导入存档', reset: '清空存档', storage: '存档没有写入', perk: PERK_UI.choiceDialog, 'perk-reset': PERK_UI.resetDialog };
 /** Browser storage for the pre-reset copy; even reading the localStorage property can throw. */
 const browserStorage = () => localStorage;
+const smooth = (): ScrollBehavior => matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+/** The county map's light and lock glide between picks on these; without CSS.registerProperty they jump instead. */
+function registerMapFocus() {
+  for (const name of ['--map-x', '--map-y']) {
+    try { CSS.registerProperty({ name, syntax: '<number>', inherits: true, initialValue: '50' }); } catch { /* registered by an earlier yard */ }
+  }
+}
 
 export class UI {
   readonly root: HTMLElement;
@@ -71,6 +80,8 @@ export class UI {
   private shopMode: 'buy' | 'sell' = 'buy';
   private shop: ShopSession | null = null;
   private world: RunWorld = 'buildings'; private seed = ''; private worlds: readonly RunWorld[];
+  private regionPreview: string | null = null;
+  private countyArt: CountyArt['regions'];
   private dialog: Dialog | null = null;
   /** The body panel's perk attribute; chosen on first paint (the first with a node to choose). */
   private perkAttr: Attribute | null = null;
@@ -84,9 +95,13 @@ export class UI {
   private tagEls = new Map<StationId, HTMLElement>();
   private timers = new Set<number>();
 
-  constructor(parent: HTMLElement, shadow: ShadowRoot, private rt: HideoutRuntime, private host: UIHost, scope: Scope, opts: { world: RunWorld; seed: string; worlds: readonly RunWorld[] }) {
+  constructor(parent: HTMLElement, shadow: ShadowRoot, private rt: HideoutRuntime, private host: UIHost, scope: Scope, opts: { world: RunWorld; seed: string; worlds: readonly RunWorld[]; countyArt: CountyArt }) {
+    this.countyArt = opts.countyArt.regions;
     this.worlds = opts.worlds; this.world = opts.worlds.includes(opts.world) ? opts.world : opts.worlds[0]; this.seed = opts.seed;
     this.root = document.createElement('div'); this.root.className = 'ui'; parent.appendChild(this.root);
+    // The county map paints its terrain from this one property, so its HTML never repeats the data URL.
+    this.root.style.setProperty('--county-terrain', `url("${opts.countyArt.terrain}")`);
+    registerMapFocus();
     this.root.innerHTML = `<div class="tags"></div><div class="bubbles"></div>
       <header class="hud"><div class="id"><i class="sig"></i><div><b>滨科夫水产站</b><span id="hud-sub"></span></div></div><div class="cash"><span>可用现金</span><b id="hud-cash"></b><small id="hud-prod"></small></div></header>
       <button class="alarm" data-alarm hidden>存档没有写入 · 点这里处理</button>
@@ -198,7 +213,7 @@ export class UI {
       }
       case 'radio': body = P.questsHtml(s); break;
       case 'generator': body = P.generatorHtml(s); break;
-      case 'deploy': body = P.deployHtml(s, this.rt.departure(), this.world, this.seed, this.worlds); break;
+      case 'deploy': body = P.deployHtml(s, this.rt.departure(), this.world, this.seed, this.worlds, this.regionPreview, this.countyArt, innerWidth < 600); break;
       case 'facility': body = `<nav class="seg facs">${FACILITY_ORDER.map(f => P.btn(`${FACILITY_LABEL[f]}${s.base.facilities[f] ? ` <small>${s.base.facilities[f]} 级</small>` : ''}`, `fac:${f}`, f === this.facility ? 'on' : '')).join('')}</nav>` + P.facilityHtml(this.rt.facility(this.facility), s, this.rt.trainingProgress()); break;
       case 'body': { const board = this.rt.perkBoard(); this.perkAttr ??= defaultPerkAttribute(board); body = P.bodyHtml(s, board, this.perkAttr); break; }
       case 'board': body = P.boardHtml(); break;
@@ -216,7 +231,9 @@ export class UI {
     const heading = this.compact && tabbed ? `<button class="tabmenu" data-tabmenu aria-label="切换功能"><h2>${esc(title)}</h2><i class="caret" aria-hidden="true"></i></button>` : `<h2>${esc(title)}</h2>`;
     // Repaints (five-second checkpoints, events) keep the keyboard on the same control, e.g. a perk card.
     const active = (this.root.getRootNode() as ShadowRoot).activeElement as HTMLElement | null, focused = active && el.contains(active) ? active.dataset.act : undefined;
-    el.innerHTML = `<header class="phead"><div>${heading}${sub ? `<small>${esc(sub)}</small>` : ''}</div>${cash}${kind === 'gear' && !this.compact ? P.gearActions(s.profile, false) : ''}${P.btn('关闭 <kbd>Esc</kbd>', 'close', 'x')}</header>${tabs}${line ? `<p class="line">“${esc(line)}”</p>` : ''}<div class="pbody">${body}</div>`;
+    const html = `<header class="phead"><div>${heading}${sub ? `<small>${esc(sub)}</small>` : ''}</div>${cash}${kind === 'gear' && !this.compact ? P.gearActions(s.profile, false) : ''}${P.btn('关闭 <kbd>Esc</kbd>', 'close', 'x')}</header>${tabs}${line ? `<p class="line">“${esc(line)}”</p>` : ''}<div class="pbody">${body}</div>`;
+    // The deploy map is patched in place, so its light, lock and route animate between picks instead of restarting.
+    if (kind === 'deploy' && el.querySelector(':scope > .pbody > .county-deploy')) morph(el, html); else el.innerHTML = html;
     el.querySelector('.pbody')!.scrollTop = scroll;
     el.hidden = false;
     if (focused) el.querySelector<HTMLElement>(`[data-act="${focused}"]`)?.focus({ preventScroll: true });
@@ -259,7 +276,8 @@ export class UI {
   /** Re-render when the runtime committed something (production ticks refresh the facility panel too). */
   refresh(force = false) {
     // Never rebuild under the pointer or the caret: a drag, a typed seed or a held volume slider would be lost.
-    if (this.dragging || (this.root.getRootNode() as ShadowRoot).activeElement?.tagName === 'INPUT') return;
+    const focused = (this.root.getRootNode() as ShadowRoot).activeElement;
+    if (this.dragging || focused?.tagName === 'INPUT') return;
     if (this.dialog?.kind === 'storage') this.renderDialog();
     if (!this.kind) return;
     const s = this.rt.snapshot(); if (force || s.rev !== this.lastSnapshotRev || this.kind === 'facility') this.render();
@@ -424,6 +442,12 @@ export class UI {
     const tab = t.closest<HTMLElement>('[data-tab]');
     if (tab) { if (tab.dataset.tab !== this.kind) this.switchTo(tab.dataset.tab as PanelKind); else this.root.querySelector('.ptabs')?.classList.remove('open'); return; }
     if (t.closest('[data-tabmenu]')) { this.root.querySelector('.ptabs')?.classList.toggle('open'); return; }
+    const region = t.closest<HTMLElement>('[data-region]');
+    if (region && this.kind === 'deploy' && !this.dialog) {
+      this.regionPreview = region.dataset.region!; this.host.sound('pick'); this.render();
+      this.root.querySelector<HTMLButtonElement>(`[data-region="${this.regionPreview}"]`)?.focus({ preventScroll: true });
+      this.showRegionBrief(); return;
+    }
     const b = t.closest<HTMLElement>('[data-act]');
     if (!b || (b as HTMLButtonElement).disabled) return;
     const [act, a1, a2] = b.dataset.act!.split(':');
@@ -458,7 +482,12 @@ export class UI {
       case 'perk': this.previewPerk(a1); break;
       case 'perk-reset': this.previewPerkReset(a1 as Attribute); break;
       case 'perk-ok': this.confirmPerk(); break;
-      case 'deploy': this.host.deploy(this.world, this.seed); break;
+      case 'deploy': {
+        const world = deploymentWorld(deploymentRegion(this.worlds, this.world, this.regionPreview), this.worlds);
+        if (world) this.host.deploy(world, this.seed);
+        break;
+      }
+      case 'county-map': this.root.querySelector('.county-heading')?.scrollIntoView({ block: 'start', behavior: smooth() }); break;
       case 'help': this.show('help'); break;
       case 'tabs': this.host.tabs(); break;
       case 'title': this.host.title(); break;
@@ -476,7 +505,11 @@ export class UI {
   };
   private input = (e: Event) => {
     const t = e.target as HTMLInputElement;
-    if (t.name === 'world') { this.world = t.value as RunWorld; this.render(); }
+    if (t.name === 'world' && this.worlds.includes(t.value as RunWorld)) {
+      this.world = t.value as RunWorld; this.regionPreview = null; this.render();
+      this.root.querySelector<HTMLInputElement>(`input[name="world"][value="${this.world}"]`)?.focus({ preventScroll: true });
+      this.showRegionBrief();
+    }
     else if (t.id === 'seed') this.seed = t.value;
     else if (t.id === 'vol') {
       this.volume = Number(t.value); const l = this.root.querySelector('#volv'); if (l) l.textContent = `${Math.round(this.volume * 100)}%`;
@@ -484,6 +517,10 @@ export class UI {
       if (e.type === 'change') this.host.volume(this.volume);
     } else if (t.id === 'backup-file' && e.type === 'change' && t.files?.[0]) { const f = t.files[0]; t.value = ''; void this.importFile(f); }
   };
+  /** Upright phones: a pick whose picture lies below the fold scrolls just far enough to show it (the map stays near). */
+  private showRegionBrief() {
+    if (innerWidth < 600) this.root.querySelector('.region-art')?.scrollIntoView({ block: 'nearest', behavior: smooth() });
+  }
   quickOpen(kind: PanelKind) {
     if (this.dialog) return;
     if (this.kind === kind) { this.close(); return; }

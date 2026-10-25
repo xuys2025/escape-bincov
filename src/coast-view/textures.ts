@@ -27,30 +27,45 @@ export class Textures {
     return this.ensure(k, () => dithered(this.canvas(key), FADE_LEVELS[level], keepBottom, ox, oy));
   }
 
-  actor(kind: ActorKind, dir: number, frame: number): Texture {
-    const key = `actor:${kind}:${dir}:${frame}`;
-    return this.ensure(key, () => (this.art && solActorFrame(this.art, kind, dir, frame)) || paintActorFrame(kind, dir, frame));
+  private actorStyle(kind: ActorKind, variant?: string): string {
+    return variant && this.art?.has(`coast-${variant}-body-e-f0-v1`) ? variant : kind;
   }
-  actorFlash(kind: ActorKind, dir: number, frame: number): Texture {
-    const base = `actor:${kind}:${dir}:${frame}`; this.actor(kind, dir, frame);
+  actor(kind: ActorKind, dir: number, frame: number, variant?: string): Texture {
+    const style = this.actorStyle(kind, variant), key = `actor:${style}:${dir}:${frame}`;
+    return this.ensure(key, () => (this.art && solActorFrame(this.art, style, dir, frame)) || paintActorFrame(kind, dir, frame));
+  }
+  /** Whether the art has this body frame in the style actor() draws: the archetype's own when it has one, else the kind's. */
+  hasBodyFrame(kind: ActorKind, frame: number, variant?: string): boolean {
+    return !!this.art?.has(`coast-${this.actorStyle(kind, variant)}-body-e-f${frame}-v1`);
+  }
+  actorFlash(kind: ActorKind, dir: number, frame: number, variant?: string): Texture {
+    const base = `actor:${this.actorStyle(kind, variant)}:${dir}:${frame}`; this.actor(kind, dir, frame, variant);
     return this.ensure(`${base}|white`, () => silhouette(this.canvas(base)));
   }
-  actorEdge(kind: ActorKind, dir: number, frame: number): Texture {
-    const base = `actor:${kind}:${dir}:${frame}`; this.actor(kind, dir, frame);
+  actorEdge(kind: ActorKind, dir: number, frame: number, variant?: string): Texture {
+    const base = `actor:${this.actorStyle(kind, variant)}:${dir}:${frame}`; this.actor(kind, dir, frame, variant);
     return this.ensure(`${base}|edge`, () => edge(this.canvas(base)));
   }
-  actorRim(kind: ActorKind, dir: number, frame: number): Texture {
-    const base = `actor:${kind}:${dir}:${frame}`; this.actor(kind, dir, frame);
+  actorRim(kind: ActorKind, dir: number, frame: number, variant?: string): Texture {
+    const base = `actor:${this.actorStyle(kind, variant)}:${dir}:${frame}`; this.actor(kind, dir, frame, variant);
     return this.ensure(`${base}|rim`, () => rim(this.canvas(base)));
   }
-  arm(kind: ActorKind): Texture { return this.ensure(`arm:${kind}`, () => paintArm(kind)); }
-  corpse(kind: ActorKind, facing: 1 | -1): Texture {
-    return this.ensure(`corpse:${kind}:${facing}`, () => (this.art && solCorpse(this.art, kind, facing)) || paintCorpse(kind, facing));
+  arm(kind: ActorKind, variant?: string): Texture {
+    const style = this.actorStyle(kind, variant);
+    return this.ensure(`arm:${style}`, () => paintArm(kind, style));
+  }
+  corpse(kind: ActorKind, facing: 1 | -1, variant?: string): Texture {
+    const style = this.actorStyle(kind, variant);
+    return this.ensure(`corpse:${style}:${facing}`, () => (this.art && (solCorpse(this.art, style, facing) || solCorpse(this.art, kind, facing))) || paintCorpse(kind, facing));
   }
   /** Where a corpse texture sits on the body's point: Sol corpses are anchored at their centre, painted ones at 14 of 24. */
-  corpseAnchorY(kind: ActorKind): number { return this.art && solCorpse(this.art, kind, 1) ? .5 : 14 / 24; }
+  corpseAnchorY(kind: ActorKind, variant?: string): number {
+    return this.art && (solCorpse(this.art, this.actorStyle(kind, variant), 1) || solCorpse(this.art, kind, 1)) ? .5 : 14 / 24;
+  }
 
-  weapon(id: string, kind: ActorKind): WeaponArt & { texture: Texture; rim: Texture } {
+  weapon(id: string, kind: ActorKind, variant?: string): WeaponArt & { texture: Texture; rim: Texture } {
+    // The ritualist's existing long-reach melee rule has a two-handed fishing tool; this is a view style, not a new item.
+    if (id === 'club' && variant === 'tide-ritualist') id = 'polearm';
     const glove = kind === 'player' ? '#4a463c' : kind === 'salt' ? '#7f7a6b' : '#3e3a33';
     const key = `weapon:${id}:${kind === 'salt' || kind === 'elite' ? kind : glove}`;
     let art = this.weapons.get(key);

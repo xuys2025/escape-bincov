@@ -25,7 +25,7 @@ const ready = () => page.waitForFunction(() => window.__station?.mounted && wind
 const shot = async name => { await page.screenshot({ path: resolve(out, `${name}.png`) }); report.screenshots.push(`${name}.png`); };
 function fixture() {
   const p = D.newSave(); p.stash = D.createInventory(10, 6); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
-  p.cash = 700; p.equipment = { weapon: null, ammo: 0, ammoRelief: 0, relief: false }; return p;
+  p.cash = 700; p.equipment = { weapon: null, weaponUid: null, gun: null, ammo: 0, ammoRelief: 0, relief: false }; return p;
 }
 function add(inv, id, qty = 1) { assert.equal(D.addItem(inv, id, qty), 0, `fixture ${id}`); return inv.items.at(-1); }
 function totals(p) {
@@ -275,7 +275,7 @@ try {
   });
   await step('F05-old-weapon-return-space-explained', async () => {
     const p = fixture(); full(p.bag); p.bag.items = p.bag.items.filter(i => i.y !== 0 || i.x > 1); const gun = add(p.bag, 'pistol');
-    p.equipment = { weapon: 'carbine', ammo: 2, ammoRelief: 0, relief: false }; await open(p); const before = await raw();
+    p.equipment = { weapon: 'carbine', weaponUid: 'fixture-carbine', gun: { parts: [], devices: { laser: false, light: false } }, ammo: 2, ammoRelief: 0, relief: false }; await open(p); const before = await raw();
     await select('bag', gun.uid); await tap(yard('[data-act="equip"]'));
     assert.deepEqual((await snapshot()).profile.bag, p.bag); assert.deepEqual((await snapshot()).profile.equipment, p.equipment); assert.equal(await raw(), before);
     assert.match(await yard('.toasts').innerText(), /空间|放不下/); assert.equal(await yard('[data-act="equip"]').count(), 1);

@@ -26,7 +26,7 @@
 
 1. 在 Pages／Makers 控制台创建项目，选择“直接上传”。
 2. 填写项目名称，按域名备案情况选择加速区域。
-3. 上传 `release/Escape-Bincov-web.zip`。其根目录直接包含 `index.html`，不需要解压源码、安装依赖或执行构建命令。
+3. 上传 `Escape-Bincov-web.zip`（从 [`main-latest` 发布页](https://github.com/xuys2025/escape-bincov/releases/tag/main-latest)下载，或本地 `pnpm package` 后在 `release/` 里）。其根目录直接包含 `index.html`，不需要解压源码、安装依赖或执行构建命令。
 4. 部署后先用预览链接检查菜单、出击和声音。
 5. 在域名管理中绑定一个固定的子域名，例如 `bincov.example.com`（示例，不是实际地址），按控制台指引添加验证及 CNAME 记录，确认 HTTPS 证书生效。
 6. 用最终 HTTPS 域名验证本地存档、下载备份与导入；后续更新始终部署到同一项目和域名。

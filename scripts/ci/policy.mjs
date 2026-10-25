@@ -5,7 +5,7 @@ export { browserGroups };
 const rootDocs = new Set(['README.md', 'AGENTS.md', 'CONTRIBUTING.md', 'handoff.md', '.github/PULL_REQUEST_TEMPLATE.md']);
 
 // This is an allowlist, not an extension-based exclusion of build inputs.
-// In particular THIRD_PARTY_NOTICES.md, the portable readme and release manifest
+// In particular THIRD_PARTY_NOTICES.md and the portable readme are packaged, so they
 // participate in the fingerprint. New/unclassified files require full regression.
 export function isDocumentation(entry) {
   return entry.type === 'blob' && entry.mode === '100644' && (

@@ -1,0 +1,222 @@
+{
+  "schema": 1,
+  "method": "User-authorized part-based edits on the native logical grid, followed by exact 8x nearest-neighbour enlargement. Original generated sources preserved.",
+  "rowOrder": [
+    "E",
+    "SE",
+    "S",
+    "NE",
+    "N"
+  ],
+  "columnOrder": [
+    "idle",
+    "hurt",
+    "recovery"
+  ],
+  "plans": {
+    "scav": {
+      "headEnd": 17,
+      "torsoRows": [
+        22,
+        33
+      ],
+      "recoveryTorsoRows": [
+        25,
+        29
+      ],
+      "kneeRows": [
+        36,
+        41
+      ],
+      "recoveryKneeRows": [
+        38,
+        39
+      ],
+      "fixedFootFrom": 43
+    },
+    "salt": {
+      "headEnd": 17,
+      "torsoRows": [
+        22,
+        33
+      ],
+      "recoveryTorsoRows": [
+        25,
+        29
+      ],
+      "kneeRows": [
+        36,
+        41
+      ],
+      "recoveryKneeRows": [
+        38,
+        39
+      ],
+      "fixedFootFrom": 43
+    },
+    "elite": {
+      "headEnd": 16,
+      "torsoRows": [
+        24,
+        29
+      ],
+      "recoveryTorsoRows": [
+        26,
+        27
+      ],
+      "kneeRows": [
+        37,
+        39
+      ],
+      "recoveryKneeRows": [
+        38,
+        39
+      ],
+      "fixedFootFrom": 43
+    },
+    "raider-melee": {
+      "headEnd": 17,
+      "torsoRows": [
+        22,
+        32
+      ],
+      "recoveryTorsoRows": [
+        25,
+        28
+      ],
+      "kneeRows": [
+        35,
+        39
+      ],
+      "recoveryKneeRows": [
+        37,
+        38
+      ],
+      "fixedFootFrom": 40
+    },
+    "raider-gunner": {
+      "headEnd": 17,
+      "torsoRows": [
+        22,
+        30
+      ],
+      "recoveryTorsoRows": [
+        25,
+        28
+      ],
+      "kneeRows": [
+        35,
+        39
+      ],
+      "recoveryKneeRows": [
+        37,
+        38
+      ],
+      "fixedFootFrom": 40
+    },
+    "raider-lookout": {
+      "headEnd": 17,
+      "torsoRows": [
+        22,
+        31
+      ],
+      "recoveryTorsoRows": [
+        25,
+        28
+      ],
+      "kneeRows": [
+        35,
+        39
+      ],
+      "recoveryKneeRows": [
+        37,
+        38
+      ],
+      "fixedFootFrom": 40
+    }
+  },
+  "sheets": [
+    {
+      "id": "scav",
+      "template": "assets/hit-feel/templates/scav-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v2.png",
+      "sha256": "d67145acbf78a66658e95365f488dd2cc51740a6fa7941dc7335deadef6806a9",
+      "width": 768,
+      "height": 1920,
+      "fixedFootFrom": 43,
+      "baseFile": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v1.png",
+      "baseSha256": "3a3cfbde8b7cbdb38768644df9cff5181fb5b36b20ae2f429119e804dcedd8af"
+    },
+    {
+      "id": "salt",
+      "template": "assets/hit-feel/templates/salt-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v2.png",
+      "sha256": "28a3cab61f3aa489b7f694dd1e6b7f9d55746642cc369b880fac836496819fd3",
+      "width": 768,
+      "height": 1920,
+      "fixedFootFrom": 43,
+      "baseFile": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v1.png",
+      "baseSha256": "97456af28d03f057b608c916ec8c4ae28b4d5c2ec0cf7aeaf5651be3bebfe506"
+    },
+    {
+      "id": "elite",
+      "template": "assets/hit-feel/templates/elite-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v2.png",
+      "sha256": "ec40cccda41a94374e5c47cbb701831b57073c564a070d524c605721d1cbf152",
+      "width": 768,
+      "height": 1920,
+      "fixedFootFrom": 43,
+      "baseFile": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v1.png",
+      "baseSha256": "db5b2c751cb3d5f21af6bc6eea29c5423efe46bc74d3b3a91c678286c357171e"
+    },
+    {
+      "id": "creature",
+      "template": "assets/hit-feel/templates/creature-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v2.png",
+      "sha256": "97e63923350200660ed4a6cf6b54b1171e56d3ed1629d5b1f8b1e078e4ad3b9a",
+      "width": 960,
+      "height": 1120,
+      "fixedFootFrom": 24,
+      "baseFile": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v1.png",
+      "baseSha256": "3011829901689e9544fe8f3549840125445bcff1709c9726485a2d700632601b"
+    },
+    {
+      "id": "raider-melee",
+      "template": "assets/hit-feel/templates/raider-melee-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v2.png",
+      "sha256": "b3a7a9a97a14d1275f6851a7ed2706ab68415353fec2bbf33b135eb00e769461",
+      "width": 768,
+      "height": 1920,
+      "fixedFootFrom": 40,
+      "baseFile": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v1.png",
+      "baseSha256": "fdedc315042ce33e1a332638b62924323c7abd70e23f2c61f59850b9bcfdab3d"
+    },
+    {
+      "id": "raider-gunner",
+      "template": "assets/hit-feel/templates/raider-gunner-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v2.png",
+      "sha256": "1f2a7f05e14c98afd335f23a4f3272ca90143575aba3dddbf5daca73df0192c1",
+      "width": 768,
+      "height": 1920,
+      "fixedFootFrom": 40,
+      "baseFile": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v1.png",
+      "baseSha256": "6ccf06b73a0b894f434979358a1547b1fdec86c764e13088be07eca5d67b0c55"
+    },
+    {
+      "id": "raider-lookout",
+      "template": "assets/hit-feel/templates/raider-lookout-hurt-template-v1.png",
+      "file": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png",
+      "sha256": "c89abeab69a36119951c26eeded4905d3310917ecf9653c32429de90d8925654",
+      "width": 768,
+      "height": 1920,
+      "fixedFootFrom": 40,
+      "baseFile": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v1.png",
+      "baseSha256": "ef6b030e2ccc6fcd0159254655964bb639e721ef8d387d444b36dc61da2e4efd"
+    }
+  ],
+  "revision": "Rework of 24 human S/N knee cells and 6 creature E/SE/NE head/upper-limb cells only; all other cells preserved from pixel-v1.",
+  "review": "https://github.com/xuys2025/escape-bincov/pull/96#issuecomment-6379082043",
+  "humanEdit": "S/N only: keep the standing lower-body alpha mask, use original trouser colours for patella/crease shading; head, shoulders and feet unchanged from v1.",
+  "creatureEdit": "E/SE/NE only: move connected head and upper-front-limb pixels at x>=26, 12<=y<24 left 2/1 pixels; shell ridge and support feet unchanged from v1.",
+  "headMetricDefinitionPending": true
+}

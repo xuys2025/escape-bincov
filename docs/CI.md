@@ -6,9 +6,9 @@
 
 ## 每次仍然执行的检查
 
-PR、main push 和手动运行都执行纯规则/世界/存档单测、CI 策略测试、严格类型检查、构建和打包。重新生成的两份 HTML、两份 ZIP 和发布清单必须与提交一致。只构建一次，浏览器任务下载同一制品并校验 SHA-256。
+PR、main push 和手动运行都执行纯规则/世界/存档单测、CI 策略测试、严格类型检查、构建和打包。只构建一次，浏览器任务下载同一制品并校验 SHA-256；生成物不入库，见[构建与离线包发布](#构建与离线包发布)。
 
-CI 策略测试还守住四件事。[entry-docs.test.mjs](../scripts/ci/entry-docs.test.mjs) 要求 AGENTS、README、CODEMAP、开发手册、架构、本页和任务清单当前入口里的链接、标题锚点与反引号路径都存在；其余三件：[browser-suites.mjs](../scripts/ci/browser-suites.mjs) 里每条 `test:*` 不是排进下面的八组，就是登记在同文件的手动表并写明原因（policy.test.mjs），套件不会悄悄掉出两边；[source-health.test.mjs](../scripts/ci/source-health.test.mjs) 拒绝无使用者的导出、新的运行时 import 环和规则模块的 DOM 依赖；[game-bundle.test.mjs](../scripts/ci/game-bundle.test.mjs) 构建堆诊断换进打包页的未压缩带探针游戏脚本，并拒绝在 [game-bundle.mjs](../scripts/game-bundle.mjs) 之外复制游戏脚本的 esbuild 配置（#60 Q-B06）。它只证明这些诊断能构建，不代表诊断通过。手动套件不在 CI 里跑，改动对应区域时按表中原因自行运行。
+CI 策略测试还守住五件事。[entry-docs.test.mjs](../scripts/ci/entry-docs.test.mjs) 要求 AGENTS、README、CODEMAP、开发手册、架构、本页和任务清单当前入口里的链接、标题锚点与反引号路径都存在；[generated-files.test.mjs](../scripts/ci/generated-files.test.mjs) 拒绝提交生成物；其余三件：[browser-suites.mjs](../scripts/ci/browser-suites.mjs) 里每条 `test:*` 不是排进下面的八组，就是登记在同文件的手动表并写明原因（policy.test.mjs），套件不会悄悄掉出两边；[source-health.test.mjs](../scripts/ci/source-health.test.mjs) 拒绝无使用者的导出、新的运行时 import 环和规则模块的 DOM 依赖；[game-bundle.test.mjs](../scripts/ci/game-bundle.test.mjs) 构建堆诊断换进打包页的未压缩带探针游戏脚本，并拒绝在 [game-bundle.mjs](../scripts/game-bundle.mjs) 之外复制游戏脚本的 esbuild 配置（#60 Q-B06）。它只证明这些诊断能构建，不代表诊断通过。手动套件不在 CI 里跑，改动对应区域时按表中原因自行运行。
 
 `Build and test` 是保持名称不变的必需检查。它在依赖失败或跳过后也运行，只接受：
 
@@ -21,7 +21,7 @@ CI 策略测试还守住四件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 
 白名单为根目录 `README.md`、`AGENTS.md`、`CONTRIBUTING.md`、`handoff.md`、`.github/PULL_REQUEST_TEMPLATE.md`、`docs/` 内的 Markdown，以及已确认只作文学交接的 `docs/story/GEMINI-RETURN-MANIFEST-20261014.json`。必须是普通非可执行文件；符号链接和未知路径走全量。
 
-`THIRD_PARTY_NOTICES.md` 嵌入 HTML，`README-游玩说明.txt` 进入便携 ZIP，`docs/release-manifest.json` 是制品依据，均不属于可跳过输入。代码、素材、测试、脚本、锁文件、配置和生成物也全部参与验证指纹。
+`THIRD_PARTY_NOTICES.md` 嵌入 HTML，`README-游玩说明.txt` 进入便携 ZIP，均不属于可跳过输入。代码、素材、测试、脚本、锁文件和配置也全部参与验证指纹。生成物不入库，指纹只看源码：构建可复现，同一份源码和锁文件在本地与 CI 上打出相同字节（移出仓库前，每次 CI 都逐字节核对过提交的生成物与 CI 构建）。
 
 快速通道同时要求：
 
@@ -36,7 +36,7 @@ CI 策略测试还守住四件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 
 ## 八组分配
 
-各组在独立 Ubuntu runner 上顺序执行，最多同时八组，`fail-fast: false` 保留其他组的失败诊断。当前完整保留 **39** 条浏览器命令，包括 #48 的商场样板、#57 的普通 2.5D 行动检查、#56 的开场动画验收（约 20 秒，排在 batch-3）、2026-10-22 从手动转入 batch-6 的 `test:hideout`（旧页签普通入口、商店门面、写入故障与出发，本地限 2 核软件渲染 14 秒），以及同日射击改造（#39）新增的两条：`test:shooting`（静止指针下瞄准不漂、开枪不动瞄准、枪口火光与曳光对齐枪管、贴墙与门角挡弹、隐藏房间不漏曳光、开火方式、慢帧下受击闪白与抖动至少画一帧）排在 batch-1 末尾，试枪场 `test:range` 排在 batch-5 末尾。两条起初都放在 batch-2，但 PR 运行里 batch-2 原有五条已要约 22 分钟，加上这两条（CI 上 `test:shooting` 约 8 分钟、`test:range` 约 2.5 分钟）后，遇到安装步骤慢的 runner 就超过 45 分钟被取消；batch-1 与 batch-5 是 2026-10-22 几次运行中耗时最短的两组（套件合计约 8–17 分钟）。其余未排入 CI 的套件见下方“每次仍然执行的检查”提到的手动表。2.5D 收尾移除 Phaser 后，只检查 Phaser 场景的 `test:issue26-phaser-spatial` 退役（空间检查由 `test:issue26-spatial` 在 2.5D 上保留）。完整的 `test:coast-sample` 只在本地运行：CI 的软件渲染下，动画组最后一步 V-CAM 之后再开页面会超时，完整套件要先把 V-CAM 挪到最后并验证计时检查，才能进 CI。除随 Phaser 退役、在 [2.5D 收尾说明](2-5d-closeout/README.md#测试迁移) 中逐项列出的检查外，没有拆分套件、减少断言、调整原浏览器参数或真实训练计时。
+各组在独立 Ubuntu runner 上顺序执行，最多同时八组，`fail-fast: false` 保留其他组的失败诊断。当前完整保留 **40** 条浏览器命令，包括 #48 的商场样板、#57 的普通 2.5D 行动检查、#56 的开场动画验收（约 20 秒，排在 batch-3）、2026-10-22 从手动转入 batch-6 的 `test:hideout`（旧页签普通入口、商店门面、写入故障与出发，本地限 2 核软件渲染 14 秒），以及同日射击改造（#39）新增的两条：`test:shooting`（静止指针下瞄准不漂（空地与地图边）、开枪不动瞄准、枪口火光与曳光对齐枪管、贴墙与门角挡弹、隐藏房间不漏曳光、开火方式、受击闪白与抖动从命中当帧画起且慢帧至少一帧、抖动顺着子弹方向而血迹朝射手、暴击与击杀的命中标记和击杀确认音）排在 batch-1 末尾，试枪场 `test:range` 排在 batch-5 末尾。两条起初都放在 batch-2，但 PR 运行里 batch-2 原有五条已要约 22 分钟，加上这两条（CI 上 `test:shooting` 约 8 分钟、`test:range` 约 2.5 分钟）后，遇到安装步骤慢的 runner 就超过 45 分钟被取消；batch-1 与 batch-5 是 2026-10-22 几次运行中耗时最短的两组（套件合计约 8–17 分钟）。其余未排入 CI 的套件见下方“每次仍然执行的检查”提到的手动表。2.5D 收尾移除 Phaser 后，只检查 Phaser 场景的 `test:issue26-phaser-spatial` 退役（空间检查由 `test:issue26-spatial` 在 2.5D 上保留）。完整的 `test:coast-sample` 只在本地运行：CI 的软件渲染下，动画组最后一步 V-CAM 之后再开页面会超时，完整套件要先把 V-CAM 挪到最后并验证计时检查，才能进 CI。除随 Phaser 退役、在 [2.5D 收尾说明](2-5d-closeout/README.md#测试迁移) 中逐项列出的检查外，没有拆分套件、减少断言、调整原浏览器参数或真实训练计时。
 
 [scripts/ci/browser-suites.mjs](../scripts/ci/browser-suites.mjs) 是执行顺序和覆盖核对的清单；[run-browser.mjs](../scripts/ci/run-browser.mjs) 逐条执行原 `pnpm test:<id>`，因此 package.json 中的原参数仍生效。组合命令现在分开计时，存档检查在 batch-2 首个执行。旧客户端固定 HTML 在 batch-8 下载，随后由 expansion 校验并使用。
 
@@ -53,7 +53,9 @@ CI 策略测试还守住四件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 
 2.5D 收尾（#64）后，CI 没有显卡、2.5D 用软件渲染，迁移到 2.5D 的行动套件变慢：loot 一套约 30 分钟，原 batch-8 超过 45 分钟的 job 上限。因此把 mall-passages 移到 batch-2 末尾、systems 和 mobile 移到 batch-4 末尾，batch-8 只留 expansion（带旧客户端）和 loot。
 
-#61 当时按较慢运行样本重排，并将新增 raid-default 的实测 124 秒纳入负载。此前 35 套件的中位 17:33 和约 13–14 分钟调度回放仅为 #61 的研究输入；当前已经是 39 套件，实际收益必须使用同产品字节的新基线/候选对照，结果见承接 PR，不能把旧回放当成本次 CI 通过。
+#61 当时按较慢运行样本重排，并将新增 raid-default 的实测 124 秒纳入负载。此前 35 套件的中位 17:33 和约 13–14 分钟调度回放仅为 #61 的研究输入；当前已经是 40 套件，实际收益必须使用同产品字节的新基线/候选对照，结果见承接 PR，不能把旧回放当成本次 CI 通过。
+
+2026-10-23 的 #78 新增 `test:enemy` 到 batch-8：真实合法新档在两个分辨率恢复前摇/换弹/恢复阶段，核对展示与离线请求；本地六组合约 8 秒。旧完整套件保留，命令计数和证据验证同步为 40。
 
 每组可在依赖和 Chromium 安装后用 `node scripts/ci/run-browser.mjs batch-2` 运行；batch-8 另需按工作流下载真实旧客户端。执行失败会立即停止本组后续套件并标记未运行，其他组照常完成。保留 45 分钟 job 超时，不额外缩短套件预算。
 
@@ -71,6 +73,10 @@ CI 策略测试还守住四件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 | 同一控制流程中移除落幕标记 / 将文案改成“你倒下了” | 均为 25/26；W13 分别按原 15 秒等待上限超时 / 在原文案断言失败 |
 
 对照仅在临时测试副本里注入，不修改游戏或正式套件的运行时间。原撤离 3 秒、写失败重试、结算结果、文案和资源释放断言保留，没有加固定等待或重试。完整套件仍为手动，是否加固后进入 CI 继续归 #61；这次没有验证软件渲染下 V-CAM 后续页面的已知问题，也不替代真机验收。
+
+2026-10-25 续作正常合并 main `974a3a8`（保留 #105 的生成物删除），只保留本节与两处等待的原交付范围。Linux / Node 24.19.0 / pnpm 11.25.0 的本轮 `pnpm test` 874/874、`pnpm check:ci` 64/64 与 `pnpm package` 通过；共享现有依赖时以 `pnpm_config_verify_deps_before_run=false` 禁止 pnpm 自动安装，未在 worktree 安装依赖。正式 HTML SHA-256 为 `b309e11f248f46e9c10ba08d0056aab8160212adb20ecab35bedf54c1d8bfe7f`。
+
+本轮完整手动套件在并行软件渲染负载下 W00–W02 通过、W03 首败，随后写失败注入造成级联；已中断，不能记为完整回归通过。使用同制品、main 原样 W00–W03 前缀（与本 PR 对应前缀逐字节相同）作对照，1/4 通过、零页面异常/外部请求；W03 前后均为 `panel=pause` / `phase=paused`，页面明确提示“画面暂时停顿，行动已暂停。准备好后继续。”，没有门事件。该阻塞早于 W12/W13；没有修改暂停规则、正式断言、阈值或重试。原始中断日志、main 对照报告在本地忽略目录 `test-results/coast-outro-review-linux/`，上表 Windows 53/53 属于原 head 的历史验证。本轮准确 head 的完整 CI 与定向结果以 [PR #95](https://github.com/xuys2025/escape-bincov/pull/95) 正文为准。
 
 ## 浏览器 job 的主机环境：字体、Chromium 与渲染器
 
@@ -109,9 +115,26 @@ CI 策略测试还守住四件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 
 ## Pages 与镜像
 
-main 即便走文档快速通道，也从本次重新构建并校验的制品正常执行 `Deploy Pages`。相同游戏字节已有完整 main 回归证据，本次单测、构建与制品一致性仍需通过。
+main 即便走文档快速通道，也从本次重新构建并校验的制品正常执行 `Deploy Pages` 和离线包发布。相同游戏字节已有完整 main 回归证据，本次单测与构建仍需通过。
 
-这样保留镜像对 `Build and test`、`Deploy Pages` 的成功要求及固定提交/清单/实际 Pages 字节一致校验，不需要修改服务器脚本或部署权限。PR 不部署，main 新代码必须完整回归；浏览器首次采用本策略的 PR 和合并后主线都需要全量通过。
+镜像对 `Build and test`、`Deploy Pages` 的成功要求和检查名不变。提交里已经没有 HTML 和发布清单，镜像（服务器脚本不在本仓库）改读 `main-latest` 发布页的清单 `https://github.com/xuys2025/escape-bincov/releases/download/main-latest/release-manifest.json`：
+
+1. 清单的 `commit` 是构建这些文件的 main 提交，`run` 是那次 CI 运行。用 `run` 照旧核对运行（main push、成功、必需 job 齐全），并要求运行的 `head_sha` 等于 `commit`。
+2. 要同步的 HTML（Pages 上的，或发布页 `Escape-Bincov-web.zip` 里的 `index.html`）SHA-256 等于 `htmlSha256`。
+3. 不一致时本轮不同步，下次再试。Pages 部署和发布是两个并行的 job，期间又有新的 main 合入时会短暂不一致；不要退回去读旧提交里的文件。
+
+PR 不部署，main 新代码必须完整回归；浏览器首次采用本策略的 PR 和合并后主线都需要全量通过。
+
+## 构建与离线包发布
+
+`pnpm build` 和 `pnpm package` 写出的 `dist/index.html`、`start the game.html`、`release/` 下的两个 ZIP 与 `release-manifest.json` 都是生成物：不入库，由 `.gitignore` 忽略，[generated-files.test.mjs](../scripts/ci/generated-files.test.mjs) 拒绝提交。本地浏览器测试、`test:portable` 和根目录的三个试玩跳转页（`试枪场.html`、`城中村试玩.html`、`商场试玩.html`）都读本地生成的文件，所以要先打包。2026-10-24 以前这些文件随源码提交，任意两个改游戏代码的 PR 都会在它们上冲突，只能合并后重新打包、再跑一轮 CI。
+
+- 每次运行由 build job 打包一次，上传为 `built-game` 制品（保留 1 天），浏览器组与发布都用它并先核对 SHA-256。PR 不发布任何东西。
+- CI 打包时设置 `BINCOV_BUILD_COMMIT`、`BINCOV_BUILD_RUN`，清单因此多出 `commit` 和 `run` 两项；本地打包没有这两项。发布 job 在清单的 `commit` 不是本次提交时拒绝发布。
+- main 的 `Build and test` 通过后，`Deploy Pages` 部署 `dist/`，`Publish offline release` 用 [publish-release.sh](../scripts/ci/publish-release.sh) 更新滚动预发布 [`main-latest`](https://github.com/xuys2025/escape-bincov/releases/tag/main-latest)：标签移到本次提交，两个 ZIP 和清单按同名替换，所以 [README](../README.md) 的下载地址不变；发布说明写明提交和运行。`main-latest` 是预发布，不抢正式版本（v0.2.0）的 Latest 标记。只有这一个 job 有 `contents: write`。
+- 发布 job 失败会让这次 main 运行失败，它也就不能作为文档快速通道的复用证据。一天内只重跑失败的 job 即可（`built-game` 只保留 1 天，过期后整体重跑）。较新的 main push 会取消还在跑的旧运行；万一恰好取消在替换文件的几秒里，缺的文件要等较新的运行发布后才补上。
+- 旧客户端：batch-8 下载的四份旧 HTML 来自历史提交里的 `dist/index.html`，历史保留，固定链接仍然有效。以后的提交里没有 HTML，新增固定旧客户端时，要么从该提交的源码重新构建（构建可复现，脚本照样核对哈希），要么在 `main-latest` 被替换前保存它的文件；用哪种由新增固定的 PR 一并定下。
+- 同步 main 时，若旧分支还改着这些文件，Git 会报“对方删除、我方修改”的冲突：保留删除（`git rm` 这几个路径），不要把它们加回来。
 
 ## 本次未改变的验收
 

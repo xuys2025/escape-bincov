@@ -1,5 +1,7 @@
 # 暴击与 Perk 实现契约（#77 CP-T01）
 
+**敌人分支整合说明（2026-10-23）：** #92 已合入 main `8b6192d`。以下保留 Perk 原实现合同；#81 新增组合 `SessionRecord 7 / LayeredRaid 5`，角色仍为 `ExpansionState 3`，同时保留历史 Perk 5/3 和敌人 6/4。组合行动玩家弹丸也严格携带这里定义的快照；旧敌人行动 4 继续原暴击公式。升级边界、双备份及矩阵统一见[敌人存档合同](enemy-save-contract.md)。
+
 **状态：契约已定，CP-T01～T09 已在分支 `agent/critical-perk` 实现，集成验收（T10）进行中；未合并、未上线。** 数值与玩法以[专项规格](../CRITICAL-PERK-DESIGN.md)为准，本页只定实现必须共用的数据形状、版本、时序和归属；勾选进度只在 [#77](https://github.com/xuys2025/escape-bincov/issues/77)。基线 main `44494ea`（含 #39 射击、#40 设计）。
 
 共用纯规则在 [src/perks.ts](../../src/perks.ts)：24 个稳定 ID、选择校验、上限加成、暴击来源与 `1 − Π(1 − p)` 合并、弹丸快照的命中概率。它只 `import type` 存档模块，避免和校验器形成运行时环。

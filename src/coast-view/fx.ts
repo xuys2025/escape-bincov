@@ -45,6 +45,16 @@ export class Fx {
     for (let i = 0; i < n; i++) this.spawn({ x: x + (rnd() - .5) * 10, y: y + (rnd() - .5) * 4, h: 1, vx: (rnd() - .5) * 18, vy: (rnd() - .5) * 6, vh: 8 + rnd() * 8, ttl: .35 + rnd() * .2, color: 0x8a8273, g: 10, size: 2 });
   }
 
+  /** Spit has a short-lived wet trace, never a casing, permanent decal or damaging ground state. */
+  acid(x: number, y: number, angle: number, rnd: () => number, impact = false) {
+    for (let i = 0; i < (impact ? 7 : 4); i++) {
+      const a = angle + (rnd() - .5) * 1.1, v = impact ? 0 : 18 + rnd() * 20;
+      this.spawn({ x: x + (rnd() - .5) * (impact ? 12 : 3), y: y + (rnd() - .5) * (impact ? 6 : 2),
+        h: impact ? 0 : 7, vx: Math.cos(a) * v, vy: Math.sin(a) * v, vh: 0,
+        ttl: impact ? 1.4 : .25, color: i % 2 ? 0x9da758 : 0x737d3e, g: impact ? 0 : 80, size: impact ? 3 : 2 });
+    }
+  }
+
   /** Gun smoke: a few grey puffs that rise slowly, drift west with the wind and thin out. */
   smoke(x: number, y: number, h: number, rnd: () => number, n = 3) {
     for (let i = 0; i < n; i++) this.spawn({ x: x + (rnd() - .5) * 4, y: y + (rnd() - .5) * 3, h, vx: -10 - rnd() * 8, vy: (rnd() - .5) * 4, vh: 6 + rnd() * 8, ttl: .5 + rnd() * .45, color: i % 2 ? 0x9a958a : 0x7d796f, g: -6, size: 2 });

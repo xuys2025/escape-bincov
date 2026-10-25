@@ -1,0 +1,1734 @@
+{
+  "schema": 1,
+  "method": "Independent exact-pixel validation of saved sheets, not their authoring functions. World anchor uses the original cell origin; no per-frame recentering. Pixel movement thresholds are in logical pixels.",
+  "sheets": [
+    {
+      "id": "scav",
+      "file": "assets/hit-feel/sources/scav-hurt-sheet-pixel-v1.png",
+      "sha256": "3a3cfbde8b7cbdb38768644df9cff5181fb5b36b20ae2f429119e804dcedd8af",
+      "checks": {
+        "canvas": true,
+        "idleColumnExact": true,
+        "hasTrueTransparency": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": -0.0285,
+              "outlineChangedPixels": 24,
+              "changedPixels": 186,
+              "bounds": [
+                9,
+                11,
+                24,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0085,
+              "outlineChangedPixels": 12,
+              "changedPixels": 94,
+              "bounds": [
+                9,
+                10,
+                24,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": -0.0026,
+              "outlineChangedPixels": 24,
+              "changedPixels": 205,
+              "bounds": [
+                8,
+                11,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0182,
+              "outlineChangedPixels": 12,
+              "changedPixels": 98,
+              "bounds": [
+                8,
+                10,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.0002,
+              "outlineChangedPixels": 24,
+              "changedPixels": 213,
+              "bounds": [
+                7,
+                11,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0048,
+              "outlineChangedPixels": 13,
+              "changedPixels": 96,
+              "bounds": [
+                7,
+                10,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": -0.0053,
+              "outlineChangedPixels": 22,
+              "changedPixels": 179,
+              "bounds": [
+                8,
+                11,
+                24,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": -0.0081,
+              "outlineChangedPixels": 11,
+              "changedPixels": 86,
+              "bounds": [
+                8,
+                10,
+                24,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.0033,
+              "outlineChangedPixels": 20,
+              "changedPixels": 172,
+              "bounds": [
+                7,
+                11,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0044,
+              "outlineChangedPixels": 10,
+              "changedPixels": 82,
+              "bounds": [
+                7,
+                10,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salt",
+      "file": "assets/hit-feel/sources/salt-hurt-sheet-pixel-v1.png",
+      "sha256": "97456af28d03f057b608c916ec8c4ae28b4d5c2ec0cf7aeaf5651be3bebfe506",
+      "checks": {
+        "canvas": true,
+        "idleColumnExact": true,
+        "hasTrueTransparency": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": -0.0165,
+              "outlineChangedPixels": 26,
+              "changedPixels": 199,
+              "bounds": [
+                9,
+                11,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0148,
+              "outlineChangedPixels": 13,
+              "changedPixels": 100,
+              "bounds": [
+                9,
+                10,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": -0.0033,
+              "outlineChangedPixels": 27,
+              "changedPixels": 208,
+              "bounds": [
+                8,
+                11,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0031,
+              "outlineChangedPixels": 13,
+              "changedPixels": 100,
+              "bounds": [
+                8,
+                10,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.0042,
+              "outlineChangedPixels": 22,
+              "changedPixels": 236,
+              "bounds": [
+                7,
+                11,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0018,
+              "outlineChangedPixels": 11,
+              "changedPixels": 107,
+              "bounds": [
+                7,
+                10,
+                27,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": -0.001,
+              "outlineChangedPixels": 23,
+              "changedPixels": 182,
+              "bounds": [
+                9,
+                11,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": -0.0003,
+              "outlineChangedPixels": 12,
+              "changedPixels": 89,
+              "bounds": [
+                8,
+                10,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.0016,
+              "outlineChangedPixels": 23,
+              "changedPixels": 203,
+              "bounds": [
+                7,
+                11,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0036,
+              "outlineChangedPixels": 11,
+              "changedPixels": 90,
+              "bounds": [
+                7,
+                10,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "elite",
+      "file": "assets/hit-feel/sources/elite-hurt-sheet-pixel-v1.png",
+      "sha256": "db5b2c751cb3d5f21af6bc6eea29c5423efe46bc74d3b3a91c678286c357171e",
+      "checks": {
+        "canvas": true,
+        "idleColumnExact": true,
+        "hasTrueTransparency": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.0316,
+              "outlineChangedPixels": 28,
+              "changedPixels": 140,
+              "bounds": [
+                9,
+                9,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.004,
+              "outlineChangedPixels": 14,
+              "changedPixels": 82,
+              "bounds": [
+                8,
+                8,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.0081,
+              "outlineChangedPixels": 28,
+              "changedPixels": 144,
+              "bounds": [
+                6,
+                9,
+                27,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0041,
+              "outlineChangedPixels": 15,
+              "changedPixels": 85,
+              "bounds": [
+                6,
+                8,
+                27,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.0049,
+              "outlineChangedPixels": 28,
+              "changedPixels": 148,
+              "bounds": [
+                6,
+                9,
+                28,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": -0.0013,
+              "outlineChangedPixels": 14,
+              "changedPixels": 78,
+              "bounds": [
+                5,
+                8,
+                28,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.014,
+              "outlineChangedPixels": 25,
+              "changedPixels": 135,
+              "bounds": [
+                6,
+                9,
+                27,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0011,
+              "outlineChangedPixels": 13,
+              "changedPixels": 82,
+              "bounds": [
+                5,
+                8,
+                27,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "fixedFootFrom": 43,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.0033,
+              "outlineChangedPixels": 28,
+              "changedPixels": 141,
+              "bounds": [
+                5,
+                9,
+                28,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": -0.0009,
+              "outlineChangedPixels": 14,
+              "changedPixels": 67,
+              "bounds": [
+                5,
+                8,
+                28,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "creature",
+      "file": "assets/hit-feel/sources/creature-hurt-sheet-pixel-v1.png",
+      "sha256": "3011829901689e9544fe8f3549840125445bcff1709c9726485a2d700632601b",
+      "checks": {
+        "canvas": true,
+        "idleColumnExact": true,
+        "hasTrueTransparency": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "fixedFootFrom": 24,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.0042,
+              "outlineChangedPixels": 88,
+              "changedPixels": 313,
+              "bounds": [
+                2,
+                10,
+                38,
+                28
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0429,
+              "outlineChangedPixels": 49,
+              "changedPixels": 294,
+              "bounds": [
+                2,
+                9,
+                39,
+                28
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "fixedFootFrom": 24,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.0006,
+              "outlineChangedPixels": 100,
+              "changedPixels": 334,
+              "bounds": [
+                2,
+                8,
+                39,
+                28
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": -0.0326,
+              "outlineChangedPixels": 53,
+              "changedPixels": 299,
+              "bounds": [
+                2,
+                7,
+                39,
+                28
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "fixedFootFrom": 24,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.0637,
+              "outlineChangedPixels": 91,
+              "changedPixels": 310,
+              "bounds": [
+                3,
+                8,
+                38,
+                28
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0923,
+              "outlineChangedPixels": 43,
+              "changedPixels": 268,
+              "bounds": [
+                2,
+                7,
+                38,
+                28
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "fixedFootFrom": 24,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1153,
+              "outlineChangedPixels": 93,
+              "changedPixels": 334,
+              "bounds": [
+                3,
+                8,
+                36,
+                28
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.1443,
+              "outlineChangedPixels": 44,
+              "changedPixels": 270,
+              "bounds": [
+                3,
+                7,
+                37,
+                28
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "fixedFootFrom": 24,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.085,
+              "outlineChangedPixels": 86,
+              "changedPixels": 280,
+              "bounds": [
+                4,
+                8,
+                36,
+                28
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0486,
+              "outlineChangedPixels": 42,
+              "changedPixels": 233,
+              "bounds": [
+                3,
+                7,
+                37,
+                28
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "raider-melee",
+      "file": "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v1.png",
+      "sha256": "fdedc315042ce33e1a332638b62924323c7abd70e23f2c61f59850b9bcfdab3d",
+      "checks": {
+        "canvas": true,
+        "idleColumnExact": true,
+        "hasTrueTransparency": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1437,
+              "outlineChangedPixels": 24,
+              "changedPixels": 244,
+              "bounds": [
+                7,
+                10,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.086,
+              "outlineChangedPixels": 11,
+              "changedPixels": 129,
+              "bounds": [
+                7,
+                9,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1153,
+              "outlineChangedPixels": 23,
+              "changedPixels": 262,
+              "bounds": [
+                7,
+                10,
+                24,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0375,
+              "outlineChangedPixels": 12,
+              "changedPixels": 142,
+              "bounds": [
+                6,
+                9,
+                24,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1692,
+              "outlineChangedPixels": 24,
+              "changedPixels": 260,
+              "bounds": [
+                8,
+                10,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0475,
+              "outlineChangedPixels": 11,
+              "changedPixels": 133,
+              "bounds": [
+                7,
+                9,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1652,
+              "outlineChangedPixels": 23,
+              "changedPixels": 269,
+              "bounds": [
+                8,
+                10,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0439,
+              "outlineChangedPixels": 13,
+              "changedPixels": 145,
+              "bounds": [
+                7,
+                9,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1348,
+              "outlineChangedPixels": 24,
+              "changedPixels": 274,
+              "bounds": [
+                8,
+                10,
+                24,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0193,
+              "outlineChangedPixels": 12,
+              "changedPixels": 147,
+              "bounds": [
+                7,
+                9,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "raider-gunner",
+      "file": "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v1.png",
+      "sha256": "6ccf06b73a0b894f434979358a1547b1fdec86c764e13088be07eca5d67b0c55",
+      "checks": {
+        "canvas": true,
+        "idleColumnExact": true,
+        "hasTrueTransparency": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1377,
+              "outlineChangedPixels": 23,
+              "changedPixels": 207,
+              "bounds": [
+                9,
+                11,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.09,
+              "outlineChangedPixels": 11,
+              "changedPixels": 116,
+              "bounds": [
+                9,
+                10,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.0826,
+              "outlineChangedPixels": 22,
+              "changedPixels": 221,
+              "bounds": [
+                9,
+                11,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0016,
+              "outlineChangedPixels": 11,
+              "changedPixels": 120,
+              "bounds": [
+                9,
+                10,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1475,
+              "outlineChangedPixels": 21,
+              "changedPixels": 230,
+              "bounds": [
+                8,
+                11,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0332,
+              "outlineChangedPixels": 11,
+              "changedPixels": 126,
+              "bounds": [
+                8,
+                10,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1201,
+              "outlineChangedPixels": 24,
+              "changedPixels": 236,
+              "bounds": [
+                9,
+                11,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0525,
+              "outlineChangedPixels": 12,
+              "changedPixels": 138,
+              "bounds": [
+                9,
+                10,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1137,
+              "outlineChangedPixels": 21,
+              "changedPixels": 222,
+              "bounds": [
+                8,
+                11,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0179,
+              "outlineChangedPixels": 11,
+              "changedPixels": 125,
+              "bounds": [
+                8,
+                10,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "raider-lookout",
+      "file": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v1.png",
+      "sha256": "ef6b030e2ccc6fcd0159254655964bb639e721ef8d387d444b36dc61da2e4efd",
+      "checks": {
+        "canvas": true,
+        "idleColumnExact": true,
+        "hasTrueTransparency": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.129,
+              "outlineChangedPixels": 28,
+              "changedPixels": 245,
+              "bounds": [
+                8,
+                10,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0764,
+              "outlineChangedPixels": 14,
+              "changedPixels": 139,
+              "bounds": [
+                8,
+                9,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1206,
+              "outlineChangedPixels": 28,
+              "changedPixels": 262,
+              "bounds": [
+                9,
+                9,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0684,
+              "outlineChangedPixels": 15,
+              "changedPixels": 152,
+              "bounds": [
+                8,
+                8,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1632,
+              "outlineChangedPixels": 26,
+              "changedPixels": 264,
+              "bounds": [
+                8,
+                9,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0467,
+              "outlineChangedPixels": 14,
+              "changedPixels": 150,
+              "bounds": [
+                8,
+                8,
+                25,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1668,
+              "outlineChangedPixels": 29,
+              "changedPixels": 273,
+              "bounds": [
+                8,
+                9,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0501,
+              "outlineChangedPixels": 14,
+              "changedPixels": 163,
+              "bounds": [
+                8,
+                8,
+                26,
+                48
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "fixedFootFrom": 40,
+          "recoveryFewerChangedPixels": true,
+          "phases": [
+            {
+              "pose": "hurt",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 2,
+              "centreShift": 0.1263,
+              "outlineChangedPixels": 26,
+              "changedPixels": 279,
+              "bounds": [
+                7,
+                9,
+                26,
+                47
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            },
+            {
+              "pose": "recovery",
+              "footBandExact": true,
+              "onlyOriginalColours": true,
+              "headOrShellTopDrop": 1,
+              "centreShift": 0.0101,
+              "outlineChangedPixels": 15,
+              "changedPixels": 166,
+              "bounds": [
+                7,
+                8,
+                26,
+                47
+              ],
+              "visibleWithinCell": true,
+              "topDropCorrect": true,
+              "centreWithinOnePixel": true,
+              "outlineReadableDifference": true,
+              "shoulderBandExact": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "status": "PASS"
+}

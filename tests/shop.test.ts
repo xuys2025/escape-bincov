@@ -4,6 +4,7 @@ import * as D from '../src/domain';
 import * as S from '../src/shop';
 import { createSessionState, SaveSession } from '../src/session';
 import { SESSION_KEY } from '../src/recovery-store';
+import { factoryState } from '../src/gunsmith/instance';
 function fixture() {
     const save = D.newSave(); save.stash.items = []; save.bag.items = []; save.safe.items = [];
     return save;
@@ -69,7 +70,7 @@ test('each merchant settles only its own stock; a pack from the other counter is
 });
 test('unloading a mixed magazine preserves saleability independently of a relief gun', () => {
     const save = fixture(); save.stash = D.createInventory(10, 6);
-    save.equipment = { weapon: 'pistol', relief: true, ammo: 7, ammoRelief: 3 };
+    save.equipment = { weapon: 'pistol', weaponUid: 'test-gun', gun: factoryState(), relief: true, ammo: 7, ammoRelief: 3 };
     assert.equal(D.unequip(save), true);
     const ordinary = save.stash.items.find(i => i.id === 'ammo9' && !i.relief)!, relief = save.stash.items.find(i => i.id === 'ammo9' && i.relief)!;
     assert.equal(ordinary.qty, 4); assert.equal(relief.qty, 3);

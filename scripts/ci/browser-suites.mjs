@@ -8,7 +8,7 @@ const schedule = {
   'batch-5': ['buildings', 'station-tier1', 'shop-feedback', 'mobile-ux', 'range'],
   'batch-6': ['loot-target', 'mall-sample', 'qol', 'coast-render-targets', 'hideout'],
   'batch-7': ['raid-default', 'ui', 'mall-landing', 'coast-animation', 'station-relief', 'station-reset'],
-  'batch-8': ['expansion', 'loot'],
+  'batch-8': ['expansion', 'loot', 'enemy'],
 };
 
 export const browserGroups = Object.freeze(Object.keys(schedule));

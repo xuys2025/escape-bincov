@@ -7,6 +7,7 @@ import { decodePortableBackup } from '../src/save-backup';
 import { RealHideoutRuntime, type Result } from '../src/hideout-runtime';
 import { FACILITIES } from '../src/expansion-state';
 import { RESET_COPY_KEY, confirmImport, freshStartRecord, freshStartText, isPristine, readResetCopy, startOver } from '../src/fresh-start';
+import { factoryState } from '../src/gunsmith/instance';
 
 const NOW = 1800000000000;
 /** One browser origin: every page shares this Map; `failing` injects a quota error for chosen keys only. */
@@ -49,15 +50,16 @@ function assertFresh(f: Page, volume: number) {
     assert.equal(s.body.hp, 100); assert.equal(f.state.state, 'hideout'); assert.ok(isPristine(decodeSession(f.raw!)));
 }
 
-test('fresh start record is a strict v5 session with the starter kit and the old volume only', () => {
+test('fresh start record is a strict v8 session with the starter kit and the old volume only', () => {
     const data = decodePortableBackup(freshStartText(.6, NOW));
     assert.equal(data.kind, 'session'); if (data.kind !== 'session') return;
     const r = data.record, p = r.profile, e = r.expansion!;
-    assert.equal(r.version, 5); assert.equal(r.perksBackup, null); assert.equal(e.version, 3); assert.deepEqual(e.growth.perks, []);
+    assert.equal(r.version, 8); assert.equal(r.perksBackup, null); assert.equal(r.gunsBackup, null); assert.equal(e.version, 3); assert.deepEqual(e.growth.perks, []);
     assert.equal(e.charm, null); assert.deepEqual(e.awards, []); assert.equal(e.raid, null);
     assert.equal(r.raid, null); assert.equal(r.terminal, null); assert.equal(p.activeRun, null);
     assert.equal(p.cash, 700); assert.deepEqual(p.stats, { runs: 0, extracts: 0, kills: 0 }); assert.equal(p.settings.volume, .6);
-    assert.deepEqual(p.equipment, { weapon: 'pistol', relief: false, ammo: 0, ammoRelief: 0 });
+    assert.deepEqual(p.equipment, { weapon: 'pistol', weaponUid: p.equipment.weaponUid, gun: factoryState(), relief: false, ammo: 0, ammoRelief: 0 });
+    assert.ok(p.equipment.weaponUid);
     assert.deepEqual(['ammo9', 'bandage', 'water', 'medkit'].map(id => owned(p, id)), [56, 2, 1, 1]);
     assert.ok(FACILITIES.every(id => e.base.facilities[id] === 0)); assert.deepEqual(e.growth.permanent, { strength: 10, constitution: 10, technique: 10 });
     assert.equal(e.base.cursor, NOW); assert.ok(isPristine(r));

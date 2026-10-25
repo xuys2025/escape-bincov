@@ -67,7 +67,7 @@ export function luckInventory(state: ExpansionState, mapId: string, inventory: D
     const result = rollLuckUnit(original, luck, random); raid.rng = random.getState();
     if (result.length > original.length) {
         const extra = result.at(-1)!;
-        if (D.addItem(inventory, extra.id, extra.qty, false, false, true, () => entityUid(raid, raid.nextEntity++))) raid.maps[mapId].loot.push({ uid: entityUid(raid, raid.nextEntity++), id: extra.id, qty: 1, relief: false, x: at.x, y: at.y });
+        if (D.addItem(inventory, extra.id, extra.qty, false, false, true, () => entityUid(raid, raid.nextEntity++))) raid.maps[mapId].loot.push({ uid: entityUid(raid, raid.nextEntity++), id: extra.id, qty: 1, relief: false, x: at.x, y: at.y, ...D.factoryGun(extra.id) });
     } else {
         for (const generated of original) {
             const remaining = result.find(i => i.key === generated.key), difference = generated.qty - (remaining?.qty ?? 0);
@@ -84,7 +84,7 @@ export function initialLuck(state: ExpansionState): void {
             const random = D.seededRandom(raid.rng), result = rollLuckUnit([{ id: loot.id, qty: loot.qty,
                 protected: loot.relief || ['sample', 'ledger', 'scrap', 'wire', 'fuse'].includes(loot.id) || mapId === raid.currentMap && Math.hypot(loot.x - raid.player.x, loot.y - raid.player.y) < 240 }], luck, random);
             raid.rng = random.getState(); loot.qty = result[0].qty;
-            if (result.length === 2) layer.loot.push({ uid: entityUid(raid, raid.nextEntity++), id: result[1].id, qty: 1, relief: false, x: loot.x, y: loot.y });
+            if (result.length === 2) layer.loot.push({ uid: entityUid(raid, raid.nextEntity++), id: result[1].id, qty: 1, relief: false, x: loot.x, y: loot.y, ...D.factoryGun(result[1].id) });
         }
         for (const container of layer.containers) luckInventory(state, mapId, container.inventory, container, mapId === raid.currentMap && Math.hypot(container.x - raid.player.x, container.y - raid.player.y) < 240);
     }

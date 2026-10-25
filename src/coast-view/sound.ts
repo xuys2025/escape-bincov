@@ -12,15 +12,19 @@
 import type { Spot, SynthAudio } from '../audio';
 import type { PublishedView, StampedEvent } from '../raid-runtime/contract';
 import { insideFootprint } from './mall-dressing';
+import { enemyVoice } from './enemy-motion';
 
 export type SoundOut = Pick<SynthAudio, 'start' | 'stop' | 'shot' | 'step' | 'hit' | 'pickup' | 'click' | 'radio' | 'extract' | 'death'
-  | 'whiz' | 'impact' | 'dry' | 'heartbeat' | 'setRoomTone' | 'stow'>;
+  | 'whiz' | 'impact' | 'dry' | 'heartbeat' | 'setRoomTone' | 'stow' | 'enemy'>;
 
 /** Closest distance from point p to the segment a-b. */
 function segmentDistance(ax: number, ay: number, bx: number, by: number, px: number, py: number) {
   const dx = bx - ax, dy = by - ay, l = dx * dx + dy * dy, t = l ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / l)) : 0;
   return Math.hypot(ax + dx * t - px, ay + dy * t - py);
 }
+
+/** Hit confirmation (#75): the player's own pain, a confirmed critical and a confirmed kill. */
+export type HitCueOut = Pick<SynthAudio, 'pain' | 'crit' | 'kill'>;
 
 export class SampleSound {
   private live: boolean | null = null;
@@ -30,11 +34,14 @@ export class SampleSound {
   private beatLeft = 0;
   private listener = { x: 0, y: 0 };
   private where = new Map<string, { x: number; y: number }>();
+  private spitters = new Set<string>();
   private trail = new Map<string, { x: number; y: number }>();
   private whizzed = new Set<string>();
   private ambience = '';
+  private enemyStates = new Map<string, { phase: string; stance: string; archetype: string }>();
+  private enemyMap = '';
 
-  constructor(private readonly out: SoundOut) {}
+  constructor(private readonly out: SoundOut & HitCueOut) {}
 
   /** Stereo position and level of a sound at world (x, y) for the player standing at the listener. */
   spot(x: number, y: number): Spot {
@@ -43,7 +50,7 @@ export class SampleSound {
   }
 
   /** Once per presented batch, before its events. */
-  frame(b: PublishedView, dt: number) {
+  frame(b: PublishedView, dt: number, actorShown: (uid: string) => boolean = () => true) {
     const f = b.frame, live = f.phase !== 'paused';
     if (live !== this.live) {
       this.live = live;
@@ -53,7 +60,29 @@ export class SampleSound {
     const p = f.player, w = f.hud.weapon;
     this.listener = { x: p.x, y: p.y };
     this.where.clear();
+    this.spitters.clear();
     for (const a of f.actors ?? []) this.where.set(a.uid, { x: a.x, y: a.y });
+    for (const a of f.actors ?? []) if (a.tactics?.archetype === 'sac-spitter') this.spitters.add(a.uid);
+    // Visible phase edges only: hidden/paused edges are remembered silently, so revealing a room or
+    // resuming cannot replay an old warning. No per-frame sounds and no second animation clock.
+    if (this.enemyMap !== b.stamp.world.mapId) { this.enemyStates.clear(); this.enemyMap = b.stamp.world.mapId; }
+    const actorsSeen = new Set<string>();
+    for (const a of f.actors ?? []) {
+      const t = a.tactics;
+      if (!t || !a.alive) continue;
+      actorsSeen.add(a.uid);
+      const previous = this.enemyStates.get(a.uid);
+      this.enemyStates.set(a.uid, { phase: t.phase, stance: t.stance, archetype: t.archetype });
+      if (f.phase !== 'running' || !actorShown(a.uid) || Math.hypot(a.x - p.x, a.y - p.y) > 560) continue;
+      const changed = !previous || previous.archetype !== t.archetype || previous.phase !== t.phase;
+      const voice = enemyVoice(t.archetype), spot = this.spot(a.x, a.y);
+      if (changed && t.phase === 'windup') this.out.enemy(voice, 'prepare', spot);
+      else if (changed && t.phase === 'reload') this.out.enemy(voice, 'reload', spot);
+      else if (changed && t.phase === 'recovery' && previous && ['windup', 'release'].includes(previous.phase)
+        && (a.weapon === 'claw' || a.weapon === 'club') && t.archetype !== 'sac-spitter') this.out.enemy(voice, 'release', spot);
+      else if (t.stance === 'warning' && previous?.stance !== 'warning') this.out.enemy(voice, 'warning', spot);
+    }
+    for (const id of this.enemyStates.keys()) if (!actorsSeen.has(id)) this.enemyStates.delete(id);
     if (!live || f.phase === 'ending') { this.stepLeft = 0; this.reloading = w.reloading; this.heals = f.hud.heals; return; }
     // Room tone: indoors (a revealed room or a layered floor) the sea closes in. A mall floor is indoors inside the
     // building's footprint only: its plaza and terrace are open air.
@@ -73,7 +102,7 @@ export class SampleSound {
     // Near misses: an enemy round whose path this frame passes within 30 px of the player.
     const seen = new Set<string>();
     for (const bl of f.bullets ?? []) {
-      if (!bl.enemy) continue;
+      if (!bl.enemy || this.spitters.has(bl.owner ?? '')) continue;
       seen.add(bl.uid);
       const from = this.trail.get(bl.uid) ?? { x: bl.x - bl.vx * dt, y: bl.y - bl.vy * dt };
       this.trail.set(bl.uid, { x: bl.x, y: bl.y });
@@ -97,6 +126,7 @@ export class SampleSound {
       case 'shot': {
         if (e.shooter === 'player') { this.out.shot(e.weapon); break; }
         const s = at(e.shooter) ?? (e.pellets[0] ? this.spot(e.pellets[0].origin.x, e.pellets[0].origin.y) : undefined);
+        if (this.spitters.has(e.shooter)) { if (actorShown(e.shooter)) this.out.shot('spit', s); break; }
         if (s) this.out.shot('enemy', s); else this.out.shot('enemy');
         break;
       }
@@ -105,16 +135,34 @@ export class SampleSound {
       // are silent here; the HUD shows them.
       case 'hurt': {
         if (e.cause !== 'blow') break;
-        if (e.uid === 'player') this.out.hit();
+        if (e.uid === 'player') this.struck(e, undefined);
         // The blow lands on an actor: both the actor (as the Runtime shows it) and the hit point must be visible.
-        else if (shown(e.at) && actorShown(e.uid)) this.out.hit(this.spot(e.at.x, e.at.y));
+        else if (shown(e.at) && actorShown(e.uid)) this.struck(e, this.spot(e.at.x, e.at.y));
         break;
       }
-      case 'impact': if (e.reason === 'blocked' && (e.surface === 'wall' || e.surface === 'door') && shown(e.lastFree)) { const s = this.spot(e.lastFree.x, e.lastFree.y); if (s.gain > .3) this.out.impact(s); } break;
+      case 'impact':
+        if (this.spitters.has(e.owner ?? '')) {
+          if (shown(e.lastFree)) this.out.shot('acid-hit', this.spot(e.lastFree.x, e.lastFree.y));
+        } else if (e.reason === 'blocked' && (e.surface === 'wall' || e.surface === 'door') && shown(e.lastFree)) {
+          const s = this.spot(e.lastFree.x, e.lastFree.y); if (s.gain > .3) this.out.impact(s);
+        }
+        break;
       case 'looted': this.out.stow(); break;
       case 'door': { const s = e.by === 'player' ? undefined : at(e.by); if (s) this.out.click(s); else this.out.click(); break; }
       default: break;
     }
+  }
+
+  /** Who was heard being struck in the batch being played (all its events share one revision), and who took a crit. */
+  private heard = { revision: -1 as number | undefined, hit: new Set<string>(), crit: new Set<string>() };
+  /**
+   * One blow heard: the player's pain centred, anyone else's hit where it lands (#75). Several blows on one body in one
+   * batch, such as a shotgun's pellets, sound once, with one critical tick if any of them crit.
+   */
+  private struck(e: Extract<StampedEvent, { type: 'hurt' }>, spot: Spot | undefined) {
+    if (this.heard.revision !== e.stamp.revision) this.heard = { revision: e.stamp.revision, hit: new Set(), crit: new Set() };
+    if (!this.heard.hit.has(e.uid)) { this.heard.hit.add(e.uid); if (e.uid === 'player') this.out.pain(); else this.out.hit(spot); }
+    if (e.critical && !this.heard.crit.has(e.uid)) { this.heard.crit.add(e.uid); this.out.crit(spot); }
   }
 
   /** The trigger was pulled on an empty magazine with nothing left to load (otherwise the reload click follows). */
@@ -134,6 +182,8 @@ export class SampleSound {
 
   /** A supply used from the inventory panel (bag or safe) committed. */
   used() { this.out.pickup(); }
+  /** The host showed the kill marker for the player's kill: the confirm sound, centred like the marker (#75). */
+  killed() { this.out.kill(); }
   /** A radio line is shown (not a note being read). */
   radio() { this.out.radio(); }
 }

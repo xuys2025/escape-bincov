@@ -1,0 +1,1599 @@
+{
+  "schema": 1,
+  "method": "Read-only Pillow inspection; nearest-neighbour resampling is in memory for comparison only. No PNG is modified.",
+  "referenceCommits": {
+    "origin/main": "1af0fecdbcc5eb9790fd34bd5a8701a5c2fbb329",
+    "origin/feat/enemy-foundation": "174341b02c6c3efe32fbd7f0151473b97ec42812"
+  },
+  "templates": [
+    {
+      "id": "scav",
+      "referenceRef": "origin/main",
+      "references": [
+        {
+          "dir": "E",
+          "file": "assets/coast/v1/coast-scav-body-e-f0-v1.png",
+          "from": "main",
+          "sha256": "39044161b7c9f42e2fe83cdd7246c89c21ac59f3262f7b1944758bb457538cf3",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/v1/coast-scav-body-se-f0-v1.png",
+          "from": "main",
+          "sha256": "f1a0df3801f0a656efe013c12916f27ffaa389e729149d2cabb1da708fd286de",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/v1/coast-scav-body-s-f0-v1.png",
+          "from": "main",
+          "sha256": "de7f86279df05fccb2ccd7aafc3419e29ef3dfe0c9dc9faa7eef2fd95f8a04c8",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/v1/coast-scav-body-ne-f0-v1.png",
+          "from": "main",
+          "sha256": "151bf1902577c2124c4022e99282874a574d9e52837970996f69bc903a9dae36",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/v1/coast-scav-body-n-f0-v1.png",
+          "from": "main",
+          "sha256": "30becc2aaa7550913b508aecf04a6c055f46938b83b223a3b6c5b4cc6ca25e58",
+          "matchesCurrentRef": true
+        }
+      ],
+      "deliveries": [
+        {
+          "file": "assets/hit-feel/sources/scav-hurt-sheet-v1.png",
+          "sha256": "a56e7f56113f22850b93f57e2ac2252522d827bbf43c10e1dd29ffbb54366502",
+          "bytes": 808651,
+          "width": 793,
+          "height": 1983,
+          "templateWidth": 768,
+          "templateHeight": 1920,
+          "exactCanvas": false,
+          "gridDivisible": false,
+          "transparentPixels": 1039901,
+          "opaquePixels": 1294,
+          "partialAlphaPixels": 531324,
+          "cells": [
+            {
+              "dir": "E",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  8,
+                  9,
+                  25,
+                  48
+                ],
+                [
+                  6,
+                  13,
+                  26,
+                  48
+                ],
+                [
+                  5,
+                  11,
+                  23,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "SE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  7,
+                  9,
+                  26,
+                  48
+                ],
+                [
+                  7,
+                  13,
+                  25,
+                  48
+                ],
+                [
+                  5,
+                  11,
+                  24,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "S",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  6,
+                  9,
+                  26,
+                  48
+                ],
+                [
+                  7,
+                  13,
+                  25,
+                  47
+                ],
+                [
+                  5,
+                  10,
+                  25,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "NE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  7,
+                  9,
+                  25,
+                  48
+                ],
+                [
+                  6,
+                  12,
+                  25,
+                  48
+                ],
+                [
+                  6,
+                  10,
+                  24,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "N",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  6,
+                  9,
+                  26,
+                  48
+                ],
+                [
+                  7,
+                  11,
+                  25,
+                  46
+                ],
+                [
+                  5,
+                  9,
+                  25,
+                  48
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "file": "assets/hit-feel/sources/scav-hurt-sheet-v2.png",
+          "sha256": "927b2520f1ecd4f5b2b700b53e3f4c601683272a571cdc1e1338b75dcd72b143",
+          "bytes": 781571,
+          "width": 793,
+          "height": 1983,
+          "templateWidth": 768,
+          "templateHeight": 1920,
+          "exactCanvas": false,
+          "gridDivisible": false,
+          "transparentPixels": 1053909,
+          "opaquePixels": 2278,
+          "partialAlphaPixels": 516332,
+          "cells": [
+            {
+              "dir": "E",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  8,
+                  9,
+                  24,
+                  48
+                ],
+                [
+                  6,
+                  12,
+                  24,
+                  48
+                ],
+                [
+                  4,
+                  9,
+                  20,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "SE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  8,
+                  9,
+                  26,
+                  48
+                ],
+                [
+                  7,
+                  12,
+                  25,
+                  48
+                ],
+                [
+                  4,
+                  9,
+                  22,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "S",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  6,
+                  9,
+                  27,
+                  48
+                ],
+                [
+                  6,
+                  12,
+                  26,
+                  48
+                ],
+                [
+                  3,
+                  9,
+                  23,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "NE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  7,
+                  9,
+                  25,
+                  48
+                ],
+                [
+                  7,
+                  13,
+                  25,
+                  48
+                ],
+                [
+                  4,
+                  9,
+                  22,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "N",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  6,
+                  9,
+                  26,
+                  48
+                ],
+                [
+                  6,
+                  12,
+                  25,
+                  48
+                ],
+                [
+                  3,
+                  9,
+                  23,
+                  48
+                ]
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salt",
+      "referenceRef": "origin/main",
+      "references": [
+        {
+          "dir": "E",
+          "file": "assets/coast/v1/coast-salt-body-e-f0-v1.png",
+          "from": "main",
+          "sha256": "643a92c864e4fa8ffc5c8a0325e3574069c39242184d06a462292c56464c5780",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/v1/coast-salt-body-se-f0-v1.png",
+          "from": "main",
+          "sha256": "b0dc2573098f975432d07bed13751800c695b685f570c9f8fc27002634523164",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/v1/coast-salt-body-s-f0-v1.png",
+          "from": "main",
+          "sha256": "1e86c1369afedb60f03638d30e26246f3a5e6584021802a078f38bdd3bcb32a2",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/v1/coast-salt-body-ne-f0-v1.png",
+          "from": "main",
+          "sha256": "4f73cdc6d61939bc53eee1fb3f225c652480592babeac0f9bd8245e38bbecc06",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/v1/coast-salt-body-n-f0-v1.png",
+          "from": "main",
+          "sha256": "b5396cbb5b5596a889be74563ce977998c997bd5ea5f48b9147c6fff5ca8a85e",
+          "matchesCurrentRef": true
+        }
+      ],
+      "deliveries": [
+        {
+          "file": "assets/hit-feel/sources/salt-hurt-sheet-v1.png",
+          "sha256": "03a1e5f9af6beeb34f866b7d3b138636d1888b701a86703c151b505f35d78937",
+          "bytes": 833633,
+          "width": 793,
+          "height": 1983,
+          "templateWidth": 768,
+          "templateHeight": 1920,
+          "exactCanvas": false,
+          "gridDivisible": false,
+          "transparentPixels": 1039836,
+          "opaquePixels": 1517,
+          "partialAlphaPixels": 531166,
+          "cells": [
+            {
+              "dir": "E",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  8,
+                  9,
+                  25,
+                  48
+                ],
+                [
+                  6,
+                  12,
+                  25,
+                  48
+                ],
+                [
+                  6,
+                  9,
+                  24,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "SE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  7,
+                  9,
+                  26,
+                  48
+                ],
+                [
+                  7,
+                  12,
+                  25,
+                  48
+                ],
+                [
+                  5,
+                  9,
+                  24,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "S",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  6,
+                  9,
+                  27,
+                  48
+                ],
+                [
+                  6,
+                  12,
+                  26,
+                  48
+                ],
+                [
+                  5,
+                  9,
+                  26,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "NE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  8,
+                  9,
+                  26,
+                  48
+                ],
+                [
+                  7,
+                  13,
+                  25,
+                  48
+                ],
+                [
+                  6,
+                  9,
+                  24,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "N",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  6,
+                  9,
+                  27,
+                  48
+                ],
+                [
+                  6,
+                  12,
+                  26,
+                  48
+                ],
+                [
+                  5,
+                  9,
+                  25,
+                  48
+                ]
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "elite",
+      "referenceRef": "origin/main",
+      "references": [
+        {
+          "dir": "E",
+          "file": "assets/coast/v1/coast-elite-body-e-f0-v1.png",
+          "from": "main",
+          "sha256": "e45c08f649ae5a2c637d617de5b8963eaf7f92c1f10684bb4bb5eb3cf91b5b34",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/v1/coast-elite-body-se-f0-v1.png",
+          "from": "main",
+          "sha256": "ddcdffe99abdb1f5c26fbef0c9cf2045efc9581571fa984748f20dfc815188ea",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/v1/coast-elite-body-s-f0-v1.png",
+          "from": "main",
+          "sha256": "051cb9607988fcb4a106fb32c01295a16a2fe2c47faa74e8f0f59294c4c15b82",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/v1/coast-elite-body-ne-f0-v1.png",
+          "from": "main",
+          "sha256": "fb854cedf3396f3e04d4cda73030d445fedf0ee98d4661d7e07300307591438a",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/v1/coast-elite-body-n-f0-v1.png",
+          "from": "main",
+          "sha256": "cca2661d5d94a2b4540d380729e23364b42da44d960281e61e0f9fafeb99f75b",
+          "matchesCurrentRef": true
+        }
+      ],
+      "deliveries": [
+        {
+          "file": "assets/hit-feel/sources/elite-hurt-sheet-v1.png",
+          "sha256": "167c15c3b3feaa26d3628a26745f8bace20e94fad4f7c7cd856756d3b9f6f07b",
+          "bytes": 966234,
+          "width": 793,
+          "height": 1983,
+          "templateWidth": 768,
+          "templateHeight": 1920,
+          "exactCanvas": false,
+          "gridDivisible": false,
+          "transparentPixels": 944292,
+          "opaquePixels": 1620,
+          "partialAlphaPixels": 626607,
+          "cells": [
+            {
+              "dir": "E",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  8,
+                  7,
+                  25,
+                  48
+                ],
+                [
+                  6,
+                  10,
+                  24,
+                  48
+                ],
+                [
+                  5,
+                  7,
+                  22,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "SE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  6,
+                  7,
+                  27,
+                  48
+                ],
+                [
+                  6,
+                  9,
+                  26,
+                  48
+                ],
+                [
+                  4,
+                  7,
+                  25,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "S",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  6,
+                  7,
+                  28,
+                  48
+                ],
+                [
+                  5,
+                  10,
+                  27,
+                  48
+                ],
+                [
+                  3,
+                  7,
+                  26,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "NE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  5,
+                  7,
+                  27,
+                  48
+                ],
+                [
+                  5,
+                  10,
+                  26,
+                  48
+                ],
+                [
+                  3,
+                  7,
+                  24,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "N",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  5,
+                  7,
+                  28,
+                  48
+                ],
+                [
+                  5,
+                  8,
+                  27,
+                  48
+                ],
+                [
+                  4,
+                  7,
+                  27,
+                  48
+                ]
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "creature",
+      "referenceRef": "origin/main",
+      "references": [
+        {
+          "dir": "E",
+          "file": "assets/coast/v1/coast-creature-body-e-f0-v1.png",
+          "from": "main",
+          "sha256": "dd7b1c50b884d0d6320eb5f383004b4781985e43acb09dedc5d192bdd44cedb7",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/v1/coast-creature-body-se-f0-v1.png",
+          "from": "main",
+          "sha256": "b84bbc2cd415b4793cc0933935112b75bb8caa7f953a0e8f7775782b8b66d96b",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/v1/coast-creature-body-s-f0-v1.png",
+          "from": "main",
+          "sha256": "185ff565f55cb6d86d6c0116ea24ea1d4ee241b1bb12d939142e107b795d5d30",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/v1/coast-creature-body-ne-f0-v1.png",
+          "from": "main",
+          "sha256": "c5a6637a6faf5499d7d3fc63ff4645b3d6914411fd1aae7f6c3e92105c1a4e65",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/v1/coast-creature-body-n-f0-v1.png",
+          "from": "main",
+          "sha256": "ffa28970b4af03c1515167da30d04a441c58263849d07b7853f28108cb950eaf",
+          "matchesCurrentRef": true
+        }
+      ],
+      "deliveries": [
+        {
+          "file": "assets/hit-feel/sources/creature-hurt-sheet-v1.png",
+          "sha256": "5b550f51e5e34c6596bc3f85726b735e62787189022c025fbefe1dfb1adf9448",
+          "bytes": 941679,
+          "width": 1161,
+          "height": 1355,
+          "templateWidth": 960,
+          "templateHeight": 1120,
+          "exactCanvas": false,
+          "gridDivisible": true,
+          "transparentPixels": 954282,
+          "opaquePixels": 2945,
+          "partialAlphaPixels": 615928,
+          "cells": [
+            {
+              "dir": "E",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  2,
+                  9,
+                  38,
+                  28
+                ],
+                [
+                  4,
+                  13,
+                  35,
+                  28
+                ],
+                [
+                  4,
+                  11,
+                  37,
+                  28
+                ]
+              ]
+            },
+            {
+              "dir": "SE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  3,
+                  7,
+                  38,
+                  27
+                ],
+                [
+                  4,
+                  9,
+                  35,
+                  26
+                ],
+                [
+                  3,
+                  8,
+                  37,
+                  27
+                ]
+              ]
+            },
+            {
+              "dir": "S",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  3,
+                  6,
+                  38,
+                  27
+                ],
+                [
+                  5,
+                  8,
+                  35,
+                  26
+                ],
+                [
+                  4,
+                  7,
+                  37,
+                  27
+                ]
+              ]
+            },
+            {
+              "dir": "NE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  3,
+                  6,
+                  36,
+                  27
+                ],
+                [
+                  4,
+                  7,
+                  35,
+                  25
+                ],
+                [
+                  3,
+                  6,
+                  36,
+                  26
+                ]
+              ]
+            },
+            {
+              "dir": "N",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  3,
+                  5,
+                  37,
+                  26
+                ],
+                [
+                  4,
+                  8,
+                  34,
+                  25
+                ],
+                [
+                  3,
+                  5,
+                  36,
+                  25
+                ]
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "raider-melee",
+      "referenceRef": "origin/feat/enemy-foundation",
+      "references": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-raider-melee-body-e-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "0b33dfdf48f5122d787ba1e2b68a9788ae4487a22673fc2d56c1708496bf6fef",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-raider-melee-body-se-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "06252d3328307d6410dd8728cf5de262f1211acc724743cfd46ec0e3cc75660c",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-raider-melee-body-s-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "083b60e553ed6b60c2e8d8a5c408959dfb5cbc19cf1fb56cd53027e679c74e79",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-raider-melee-body-ne-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "e67febad6585cd1462faf515c00eb384d60a089f6d0b2ee51a5cd5f94d81b1c1",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-raider-melee-body-n-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "0daea2435757b4f0a32db31fc660df7362918e4eb88d5291bd392eea31ccdadd",
+          "matchesCurrentRef": true
+        }
+      ],
+      "deliveries": [
+        {
+          "file": "assets/hit-feel/sources/raider-melee-hurt-sheet-v1.png",
+          "sha256": "5d1a2834d689fa6062ee9772aa425c70ff122c5735dbd4dcd88fd233709be427",
+          "bytes": 940081,
+          "width": 793,
+          "height": 1983,
+          "templateWidth": 768,
+          "templateHeight": 1920,
+          "exactCanvas": false,
+          "gridDivisible": false,
+          "transparentPixels": 1020720,
+          "opaquePixels": 1632,
+          "partialAlphaPixels": 550167,
+          "cells": [
+            {
+              "dir": "E",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  7,
+                  8,
+                  25,
+                  48
+                ],
+                [
+                  7,
+                  12,
+                  23,
+                  48
+                ],
+                [
+                  3,
+                  8,
+                  22,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "SE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  6,
+                  8,
+                  24,
+                  48
+                ],
+                [
+                  7,
+                  11,
+                  23,
+                  48
+                ],
+                [
+                  3,
+                  8,
+                  20,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "S",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  8,
+                  9,
+                  25,
+                  48
+                ],
+                [
+                  7,
+                  11,
+                  24,
+                  47
+                ],
+                [
+                  5,
+                  9,
+                  22,
+                  47
+                ]
+              ]
+            },
+            {
+              "dir": "NE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  7,
+                  8,
+                  25,
+                  48
+                ],
+                [
+                  7,
+                  11,
+                  23,
+                  47
+                ],
+                [
+                  4,
+                  8,
+                  22,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "N",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  8,
+                  8,
+                  24,
+                  47
+                ],
+                [
+                  8,
+                  11,
+                  24,
+                  47
+                ],
+                [
+                  4,
+                  8,
+                  21,
+                  47
+                ]
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "raider-gunner",
+      "referenceRef": "origin/feat/enemy-foundation",
+      "references": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-raider-gunner-body-e-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "dc2b39971594a22f66c1fff092ec2b8f071bb550408a78e1fd527fc3b952697d",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-raider-gunner-body-se-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "495f367a322643bbe78f7f1f3142d08e7eb00c3a7393da29c7c802e05e47e940",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-raider-gunner-body-s-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "78b7bc45059730e7eaf7dd783996c2d18e41309fa7ca0e75f168be45b434d559",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-raider-gunner-body-ne-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "4dc8098e0fb0def8907545a6df8051023bfa03b736bb186b2b4d6ef62f3071db",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-raider-gunner-body-n-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "f7f5daa8191e554a0835920ed0185ef614000d96dfcb0937999049210f6ba9a4",
+          "matchesCurrentRef": true
+        }
+      ],
+      "deliveries": [
+        {
+          "file": "assets/hit-feel/sources/raider-gunner-hurt-sheet-v1.png",
+          "sha256": "f3b9ee4b3584981d46f0b012cd72c1252390a1750ce8d37cd70a7ec1fd1bcc87",
+          "bytes": 865628,
+          "width": 793,
+          "height": 1983,
+          "templateWidth": 768,
+          "templateHeight": 1920,
+          "exactCanvas": false,
+          "gridDivisible": false,
+          "transparentPixels": 1012074,
+          "opaquePixels": 1133,
+          "partialAlphaPixels": 559312,
+          "cells": [
+            {
+              "dir": "E",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  9,
+                  9,
+                  25,
+                  48
+                ],
+                [
+                  7,
+                  13,
+                  23,
+                  48
+                ],
+                [
+                  6,
+                  10,
+                  22,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "SE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  9,
+                  10,
+                  24,
+                  48
+                ],
+                [
+                  7,
+                  13,
+                  23,
+                  48
+                ],
+                [
+                  7,
+                  10,
+                  22,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "S",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  8,
+                  10,
+                  25,
+                  48
+                ],
+                [
+                  8,
+                  13,
+                  25,
+                  48
+                ],
+                [
+                  6,
+                  10,
+                  24,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "NE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  9,
+                  10,
+                  24,
+                  48
+                ],
+                [
+                  7,
+                  13,
+                  23,
+                  48
+                ],
+                [
+                  6,
+                  9,
+                  22,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "N",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  7,
+                  10,
+                  25,
+                  46
+                ],
+                [
+                  7,
+                  13,
+                  25,
+                  46
+                ],
+                [
+                  6,
+                  9,
+                  24,
+                  46
+                ]
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "raider-lookout",
+      "referenceRef": "origin/feat/enemy-foundation",
+      "references": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-raider-lookout-body-e-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "82a9d0cc1b30840eb6f8f07c50bd9d2d022cb6149d9b58831f94c8a3436aabbe",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-raider-lookout-body-se-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "a6488b79af6974cfbc4285183f6c475e9c5070befce790c39369c6742ac6c9fe",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-raider-lookout-body-s-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "cda7abab805c89c674babc2549a61772da88f69b58ba53fa85187046f754bdd8",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-raider-lookout-body-ne-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "81e5868f8bf6e0227761286fbe7c433beaa9681ca5c3acf857262ed51d5b09e5",
+          "matchesCurrentRef": true
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-raider-lookout-body-n-f0-v1.png",
+          "from": "feat/enemy-foundation@2fcad9d",
+          "sha256": "d2293145c3d6bc1159586fcd82928a4c78b4299d84ad2c5ad4aac8f6b4dea51a",
+          "matchesCurrentRef": true
+        }
+      ],
+      "deliveries": [
+        {
+          "file": "assets/hit-feel/sources/raider-lookout-hurt-sheet-v1.png",
+          "sha256": "3ebeacb0625249c394eb35cce1bc785afd07c49c6bbef391ddecbc3caacecb7a",
+          "bytes": 913441,
+          "width": 793,
+          "height": 1983,
+          "templateWidth": 768,
+          "templateHeight": 1920,
+          "exactCanvas": false,
+          "gridDivisible": false,
+          "transparentPixels": 1054002,
+          "opaquePixels": 1568,
+          "partialAlphaPixels": 516949,
+          "cells": [
+            {
+              "dir": "E",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  9,
+                  8,
+                  26,
+                  47
+                ],
+                [
+                  6,
+                  11,
+                  22,
+                  47
+                ],
+                [
+                  5,
+                  8,
+                  21,
+                  47
+                ]
+              ]
+            },
+            {
+              "dir": "SE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  8,
+                  9,
+                  25,
+                  48
+                ],
+                [
+                  6,
+                  12,
+                  22,
+                  48
+                ],
+                [
+                  4,
+                  9,
+                  21,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "S",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  8,
+                  9,
+                  25,
+                  48
+                ],
+                [
+                  7,
+                  13,
+                  23,
+                  48
+                ],
+                [
+                  5,
+                  9,
+                  22,
+                  48
+                ]
+              ]
+            },
+            {
+              "dir": "NE",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  8,
+                  8,
+                  25,
+                  47
+                ],
+                [
+                  7,
+                  13,
+                  23,
+                  47
+                ],
+                [
+                  5,
+                  8,
+                  22,
+                  47
+                ]
+              ]
+            },
+            {
+              "dir": "N",
+              "occupiedColumns": [
+                true,
+                true,
+                true
+              ],
+              "idleMatchesTemplateAfterNearestDownsample": false,
+              "alphaBoundsAtLogicalSize": [
+                [
+                  8,
+                  9,
+                  25,
+                  46
+                ],
+                [
+                  7,
+                  11,
+                  24,
+                  46
+                ],
+                [
+                  4,
+                  9,
+                  22,
+                  46
+                ]
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,331 +1,667 @@
-/**
- * Sol samples (153 x 1x PNG), inlined by esbuild as data URLs and decoded once per page into canvases.
- * Generated from assets/coast/manifest.json; build.mjs verifies every file hash against that manifest.
- */
-import acoast_player_body_e_f0_v1 from '../../assets/coast/v1/coast-player-body-e-f0-v1.png';
-import acoast_player_body_e_f1_v1 from '../../assets/coast/v1/coast-player-body-e-f1-v1.png';
-import acoast_player_body_e_f2_v1 from '../../assets/coast/v1/coast-player-body-e-f2-v1.png';
-import acoast_player_body_e_f3_v1 from '../../assets/coast/v1/coast-player-body-e-f3-v1.png';
-import acoast_player_body_e_f4_v1 from '../../assets/coast/v1/coast-player-body-e-f4-v1.png';
-import acoast_player_body_se_f0_v1 from '../../assets/coast/v1/coast-player-body-se-f0-v1.png';
-import acoast_player_body_se_f1_v1 from '../../assets/coast/v1/coast-player-body-se-f1-v1.png';
-import acoast_player_body_se_f2_v1 from '../../assets/coast/v1/coast-player-body-se-f2-v1.png';
-import acoast_player_body_se_f3_v1 from '../../assets/coast/v1/coast-player-body-se-f3-v1.png';
-import acoast_player_body_se_f4_v1 from '../../assets/coast/v1/coast-player-body-se-f4-v1.png';
-import acoast_player_body_s_f0_v1 from '../../assets/coast/v1/coast-player-body-s-f0-v1.png';
-import acoast_player_body_s_f1_v1 from '../../assets/coast/v1/coast-player-body-s-f1-v1.png';
-import acoast_player_body_s_f2_v1 from '../../assets/coast/v1/coast-player-body-s-f2-v1.png';
-import acoast_player_body_s_f3_v1 from '../../assets/coast/v1/coast-player-body-s-f3-v1.png';
-import acoast_player_body_s_f4_v1 from '../../assets/coast/v1/coast-player-body-s-f4-v1.png';
-import acoast_player_body_ne_f0_v1 from '../../assets/coast/v1/coast-player-body-ne-f0-v1.png';
-import acoast_player_body_ne_f1_v1 from '../../assets/coast/v1/coast-player-body-ne-f1-v1.png';
-import acoast_player_body_ne_f2_v1 from '../../assets/coast/v1/coast-player-body-ne-f2-v1.png';
-import acoast_player_body_ne_f3_v1 from '../../assets/coast/v1/coast-player-body-ne-f3-v1.png';
-import acoast_player_body_ne_f4_v1 from '../../assets/coast/v1/coast-player-body-ne-f4-v1.png';
-import acoast_player_body_n_f0_v1 from '../../assets/coast/v1/coast-player-body-n-f0-v1.png';
-import acoast_player_body_n_f1_v1 from '../../assets/coast/v1/coast-player-body-n-f1-v1.png';
-import acoast_player_body_n_f2_v1 from '../../assets/coast/v1/coast-player-body-n-f2-v1.png';
-import acoast_player_body_n_f3_v1 from '../../assets/coast/v1/coast-player-body-n-f3-v1.png';
-import acoast_player_body_n_f4_v1 from '../../assets/coast/v1/coast-player-body-n-f4-v1.png';
-import acoast_wall_core_v1 from '../../assets/coast/v1/coast-wall-core-v1.png';
-import acoast_wall_edge_n_v1 from '../../assets/coast/v1/coast-wall-edge-n-v1.png';
-import acoast_wall_edge_s_v1 from '../../assets/coast/v1/coast-wall-edge-s-v1.png';
-import acoast_wall_edge_e_v1 from '../../assets/coast/v1/coast-wall-edge-e-v1.png';
-import acoast_wall_edge_w_v1 from '../../assets/coast/v1/coast-wall-edge-w-v1.png';
-import acoast_wall_exterior_a_v1 from '../../assets/coast/v1/coast-wall-exterior-a-v1.png';
-import acoast_wall_exterior_b_v1 from '../../assets/coast/v1/coast-wall-exterior-b-v1.png';
-import acoast_wall_interior_v1 from '../../assets/coast/v1/coast-wall-interior-v1.png';
-import acoast_wall_window_ew_v1 from '../../assets/coast/v1/coast-wall-window-ew-v1.png';
-import acoast_wall_door_ew_closed_v1 from '../../assets/coast/v1/coast-wall-door-ew-closed-v1.png';
-import acoast_wall_door_ew_open_v1 from '../../assets/coast/v1/coast-wall-door-ew-open-v1.png';
-import acoast_ground_asphalt_a_v1 from '../../assets/coast/v1/coast-ground-asphalt-a-v1.png';
-import acoast_ground_asphalt_b_v1 from '../../assets/coast/v1/coast-ground-asphalt-b-v1.png';
-import acoast_ground_yard_a_v1 from '../../assets/coast/v1/coast-ground-yard-a-v1.png';
-import acoast_ground_yard_b_v1 from '../../assets/coast/v1/coast-ground-yard-b-v1.png';
-import acoast_ground_tile_a_v1 from '../../assets/coast/v1/coast-ground-tile-a-v1.png';
-import acoast_ground_tile_b_v1 from '../../assets/coast/v1/coast-ground-tile-b-v1.png';
-import acoast_weapon_carbine_held_v1 from '../../assets/coast/v1/coast-weapon-carbine-held-v1.png';
-import acoast_scav_body_s_f0_v1 from '../../assets/coast/v1/coast-scav-body-s-f0-v1.png';
-import acoast_scav_body_s_f1_v1 from '../../assets/coast/v1/coast-scav-body-s-f1-v1.png';
-import acoast_scav_body_s_f2_v1 from '../../assets/coast/v1/coast-scav-body-s-f2-v1.png';
-import acoast_scav_body_s_f3_v1 from '../../assets/coast/v1/coast-scav-body-s-f3-v1.png';
-import acoast_scav_body_s_f4_v1 from '../../assets/coast/v1/coast-scav-body-s-f4-v1.png';
-import acoast_scav_body_se_f0_v1 from '../../assets/coast/v1/coast-scav-body-se-f0-v1.png';
-import acoast_scav_body_se_f1_v1 from '../../assets/coast/v1/coast-scav-body-se-f1-v1.png';
-import acoast_scav_body_se_f2_v1 from '../../assets/coast/v1/coast-scav-body-se-f2-v1.png';
-import acoast_scav_body_se_f3_v1 from '../../assets/coast/v1/coast-scav-body-se-f3-v1.png';
-import acoast_scav_body_se_f4_v1 from '../../assets/coast/v1/coast-scav-body-se-f4-v1.png';
-import acoast_scav_body_e_f0_v1 from '../../assets/coast/v1/coast-scav-body-e-f0-v1.png';
-import acoast_scav_body_e_f1_v1 from '../../assets/coast/v1/coast-scav-body-e-f1-v1.png';
-import acoast_scav_body_e_f2_v1 from '../../assets/coast/v1/coast-scav-body-e-f2-v1.png';
-import acoast_scav_body_e_f3_v1 from '../../assets/coast/v1/coast-scav-body-e-f3-v1.png';
-import acoast_scav_body_e_f4_v1 from '../../assets/coast/v1/coast-scav-body-e-f4-v1.png';
-import acoast_scav_body_ne_f0_v1 from '../../assets/coast/v1/coast-scav-body-ne-f0-v1.png';
-import acoast_scav_body_ne_f1_v1 from '../../assets/coast/v1/coast-scav-body-ne-f1-v1.png';
-import acoast_scav_body_ne_f2_v1 from '../../assets/coast/v1/coast-scav-body-ne-f2-v1.png';
-import acoast_scav_body_ne_f3_v1 from '../../assets/coast/v1/coast-scav-body-ne-f3-v1.png';
-import acoast_scav_body_ne_f4_v1 from '../../assets/coast/v1/coast-scav-body-ne-f4-v1.png';
-import acoast_scav_body_n_f0_v1 from '../../assets/coast/v1/coast-scav-body-n-f0-v1.png';
-import acoast_scav_body_n_f1_v1 from '../../assets/coast/v1/coast-scav-body-n-f1-v1.png';
-import acoast_scav_body_n_f2_v1 from '../../assets/coast/v1/coast-scav-body-n-f2-v1.png';
-import acoast_scav_body_n_f3_v1 from '../../assets/coast/v1/coast-scav-body-n-f3-v1.png';
-import acoast_scav_body_n_f4_v1 from '../../assets/coast/v1/coast-scav-body-n-f4-v1.png';
-import acoast_weapon_pistol_held_v1 from '../../assets/coast/v1/coast-weapon-pistol-held-v1.png';
-import acoast_salt_body_s_f0_v1 from '../../assets/coast/v1/coast-salt-body-s-f0-v1.png';
-import acoast_salt_body_s_f1_v1 from '../../assets/coast/v1/coast-salt-body-s-f1-v1.png';
-import acoast_salt_body_s_f2_v1 from '../../assets/coast/v1/coast-salt-body-s-f2-v1.png';
-import acoast_salt_body_s_f3_v1 from '../../assets/coast/v1/coast-salt-body-s-f3-v1.png';
-import acoast_salt_body_s_f4_v1 from '../../assets/coast/v1/coast-salt-body-s-f4-v1.png';
-import acoast_salt_body_se_f0_v1 from '../../assets/coast/v1/coast-salt-body-se-f0-v1.png';
-import acoast_salt_body_se_f1_v1 from '../../assets/coast/v1/coast-salt-body-se-f1-v1.png';
-import acoast_salt_body_se_f2_v1 from '../../assets/coast/v1/coast-salt-body-se-f2-v1.png';
-import acoast_salt_body_se_f3_v1 from '../../assets/coast/v1/coast-salt-body-se-f3-v1.png';
-import acoast_salt_body_se_f4_v1 from '../../assets/coast/v1/coast-salt-body-se-f4-v1.png';
-import acoast_salt_body_e_f0_v1 from '../../assets/coast/v1/coast-salt-body-e-f0-v1.png';
-import acoast_salt_body_e_f1_v1 from '../../assets/coast/v1/coast-salt-body-e-f1-v1.png';
-import acoast_salt_body_e_f2_v1 from '../../assets/coast/v1/coast-salt-body-e-f2-v1.png';
-import acoast_salt_body_e_f3_v1 from '../../assets/coast/v1/coast-salt-body-e-f3-v1.png';
-import acoast_salt_body_e_f4_v1 from '../../assets/coast/v1/coast-salt-body-e-f4-v1.png';
-import acoast_salt_body_ne_f0_v1 from '../../assets/coast/v1/coast-salt-body-ne-f0-v1.png';
-import acoast_salt_body_ne_f1_v1 from '../../assets/coast/v1/coast-salt-body-ne-f1-v1.png';
-import acoast_salt_body_ne_f2_v1 from '../../assets/coast/v1/coast-salt-body-ne-f2-v1.png';
-import acoast_salt_body_ne_f3_v1 from '../../assets/coast/v1/coast-salt-body-ne-f3-v1.png';
-import acoast_salt_body_ne_f4_v1 from '../../assets/coast/v1/coast-salt-body-ne-f4-v1.png';
-import acoast_salt_body_n_f0_v1 from '../../assets/coast/v1/coast-salt-body-n-f0-v1.png';
-import acoast_salt_body_n_f1_v1 from '../../assets/coast/v1/coast-salt-body-n-f1-v1.png';
-import acoast_salt_body_n_f2_v1 from '../../assets/coast/v1/coast-salt-body-n-f2-v1.png';
-import acoast_salt_body_n_f3_v1 from '../../assets/coast/v1/coast-salt-body-n-f3-v1.png';
-import acoast_salt_body_n_f4_v1 from '../../assets/coast/v1/coast-salt-body-n-f4-v1.png';
-import acoast_elite_body_s_f0_v1 from '../../assets/coast/v1/coast-elite-body-s-f0-v1.png';
-import acoast_elite_body_s_f1_v1 from '../../assets/coast/v1/coast-elite-body-s-f1-v1.png';
-import acoast_elite_body_s_f2_v1 from '../../assets/coast/v1/coast-elite-body-s-f2-v1.png';
-import acoast_elite_body_s_f3_v1 from '../../assets/coast/v1/coast-elite-body-s-f3-v1.png';
-import acoast_elite_body_s_f4_v1 from '../../assets/coast/v1/coast-elite-body-s-f4-v1.png';
-import acoast_elite_body_se_f0_v1 from '../../assets/coast/v1/coast-elite-body-se-f0-v1.png';
-import acoast_elite_body_se_f1_v1 from '../../assets/coast/v1/coast-elite-body-se-f1-v1.png';
-import acoast_elite_body_se_f2_v1 from '../../assets/coast/v1/coast-elite-body-se-f2-v1.png';
-import acoast_elite_body_se_f3_v1 from '../../assets/coast/v1/coast-elite-body-se-f3-v1.png';
-import acoast_elite_body_se_f4_v1 from '../../assets/coast/v1/coast-elite-body-se-f4-v1.png';
-import acoast_elite_body_e_f0_v1 from '../../assets/coast/v1/coast-elite-body-e-f0-v1.png';
-import acoast_elite_body_e_f1_v1 from '../../assets/coast/v1/coast-elite-body-e-f1-v1.png';
-import acoast_elite_body_e_f2_v1 from '../../assets/coast/v1/coast-elite-body-e-f2-v1.png';
-import acoast_elite_body_e_f3_v1 from '../../assets/coast/v1/coast-elite-body-e-f3-v1.png';
-import acoast_elite_body_e_f4_v1 from '../../assets/coast/v1/coast-elite-body-e-f4-v1.png';
-import acoast_elite_body_ne_f0_v1 from '../../assets/coast/v1/coast-elite-body-ne-f0-v1.png';
-import acoast_elite_body_ne_f1_v1 from '../../assets/coast/v1/coast-elite-body-ne-f1-v1.png';
-import acoast_elite_body_ne_f2_v1 from '../../assets/coast/v1/coast-elite-body-ne-f2-v1.png';
-import acoast_elite_body_ne_f3_v1 from '../../assets/coast/v1/coast-elite-body-ne-f3-v1.png';
-import acoast_elite_body_ne_f4_v1 from '../../assets/coast/v1/coast-elite-body-ne-f4-v1.png';
-import acoast_elite_body_n_f0_v1 from '../../assets/coast/v1/coast-elite-body-n-f0-v1.png';
-import acoast_elite_body_n_f1_v1 from '../../assets/coast/v1/coast-elite-body-n-f1-v1.png';
-import acoast_elite_body_n_f2_v1 from '../../assets/coast/v1/coast-elite-body-n-f2-v1.png';
-import acoast_elite_body_n_f3_v1 from '../../assets/coast/v1/coast-elite-body-n-f3-v1.png';
-import acoast_elite_body_n_f4_v1 from '../../assets/coast/v1/coast-elite-body-n-f4-v1.png';
-import acoast_creature_body_s_f0_v1 from '../../assets/coast/v1/coast-creature-body-s-f0-v1.png';
-import acoast_creature_body_s_f1_v1 from '../../assets/coast/v1/coast-creature-body-s-f1-v1.png';
-import acoast_creature_body_s_f2_v1 from '../../assets/coast/v1/coast-creature-body-s-f2-v1.png';
-import acoast_creature_body_s_f3_v1 from '../../assets/coast/v1/coast-creature-body-s-f3-v1.png';
-import acoast_creature_body_s_f4_v1 from '../../assets/coast/v1/coast-creature-body-s-f4-v1.png';
-import acoast_creature_body_se_f0_v1 from '../../assets/coast/v1/coast-creature-body-se-f0-v1.png';
-import acoast_creature_body_se_f1_v1 from '../../assets/coast/v1/coast-creature-body-se-f1-v1.png';
-import acoast_creature_body_se_f2_v1 from '../../assets/coast/v1/coast-creature-body-se-f2-v1.png';
-import acoast_creature_body_se_f3_v1 from '../../assets/coast/v1/coast-creature-body-se-f3-v1.png';
-import acoast_creature_body_se_f4_v1 from '../../assets/coast/v1/coast-creature-body-se-f4-v1.png';
-import acoast_creature_body_e_f0_v1 from '../../assets/coast/v1/coast-creature-body-e-f0-v1.png';
-import acoast_creature_body_e_f1_v1 from '../../assets/coast/v1/coast-creature-body-e-f1-v1.png';
-import acoast_creature_body_e_f2_v1 from '../../assets/coast/v1/coast-creature-body-e-f2-v1.png';
-import acoast_creature_body_e_f3_v1 from '../../assets/coast/v1/coast-creature-body-e-f3-v1.png';
-import acoast_creature_body_e_f4_v1 from '../../assets/coast/v1/coast-creature-body-e-f4-v1.png';
-import acoast_creature_body_ne_f0_v1 from '../../assets/coast/v1/coast-creature-body-ne-f0-v1.png';
-import acoast_creature_body_ne_f1_v1 from '../../assets/coast/v1/coast-creature-body-ne-f1-v1.png';
-import acoast_creature_body_ne_f2_v1 from '../../assets/coast/v1/coast-creature-body-ne-f2-v1.png';
-import acoast_creature_body_ne_f3_v1 from '../../assets/coast/v1/coast-creature-body-ne-f3-v1.png';
-import acoast_creature_body_ne_f4_v1 from '../../assets/coast/v1/coast-creature-body-ne-f4-v1.png';
-import acoast_creature_body_n_f0_v1 from '../../assets/coast/v1/coast-creature-body-n-f0-v1.png';
-import acoast_creature_body_n_f1_v1 from '../../assets/coast/v1/coast-creature-body-n-f1-v1.png';
-import acoast_creature_body_n_f2_v1 from '../../assets/coast/v1/coast-creature-body-n-f2-v1.png';
-import acoast_creature_body_n_f3_v1 from '../../assets/coast/v1/coast-creature-body-n-f3-v1.png';
-import acoast_creature_body_n_f4_v1 from '../../assets/coast/v1/coast-creature-body-n-f4-v1.png';
-import acoast_salt_corpse_e_v1 from '../../assets/coast/v1/coast-salt-corpse-e-v1.png';
-import acoast_elite_corpse_e_v1 from '../../assets/coast/v1/coast-elite-corpse-e-v1.png';
-import acoast_creature_corpse_e_v1 from '../../assets/coast/v1/coast-creature-corpse-e-v1.png';
-import acoast_weapon_salt_rifle_held_v1 from '../../assets/coast/v1/coast-weapon-salt-rifle-held-v1.png';
-import acoast_weapon_elite_rifle_held_v1 from '../../assets/coast/v1/coast-weapon-elite-rifle-held-v1.png';
-import acoast_weapon_shotgun_held_v1 from '../../assets/coast/v1/coast-weapon-shotgun-held-v1.png';
-import acoast_weapon_knife_held_v1 from '../../assets/coast/v1/coast-weapon-knife-held-v1.png';
-import acoast_weapon_club_held_v1 from '../../assets/coast/v1/coast-weapon-club-held-v1.png';
-import acoast_scav_corpse_e_v1 from '../../assets/coast/v1/coast-scav-corpse-e-v1.png';
+/** Pixel-exact coast sheets; generated by scripts/pack-coast-art.py. */
+import sheet0 from '../../assets/coast/packed/legacy.webp';
+import sheet1 from '../../assets/coast/packed/raider-melee.webp';
+import sheet2 from '../../assets/coast/packed/raider-gunner.webp';
+import sheet3 from '../../assets/coast/packed/raider-lookout.webp';
+import sheet4 from '../../assets/coast/packed/raider-boss.webp';
+import sheet5 from '../../assets/coast/packed/tidal-crab.webp';
+import sheet6 from '../../assets/coast/packed/saltback-dog.webp';
+import sheet7 from '../../assets/coast/packed/sac-spitter.webp';
+import sheet8 from '../../assets/coast/packed/salt-dazed.webp';
+import sheet9 from '../../assets/coast/packed/tide-chaser.webp';
+import sheet10 from '../../assets/coast/packed/tide-ritualist.webp';
+import sheet11 from '../../assets/coast/packed/salt-hulk.webp';
+import sheet12 from '../../assets/coast/packed/mercenary-scout.webp';
+import sheet13 from '../../assets/coast/packed/mercenary-assault.webp';
+import sheet14 from '../../assets/coast/packed/mercenary-support.webp';
+import sheet15 from '../../assets/coast/packed/recovery-leader.webp';
+import sheet16 from '../../assets/coast/packed/blockade-sentry.webp';
+import sheet17 from '../../assets/coast/packed/blockade-patrol.webp';
+import sheet18 from '../../assets/coast/packed/blockade-sergeant.webp';
 
-export const COAST_ASSET_URLS: Record<string, string> = {
-  'coast-player-body-e-f0-v1': acoast_player_body_e_f0_v1,
-  'coast-player-body-e-f1-v1': acoast_player_body_e_f1_v1,
-  'coast-player-body-e-f2-v1': acoast_player_body_e_f2_v1,
-  'coast-player-body-e-f3-v1': acoast_player_body_e_f3_v1,
-  'coast-player-body-e-f4-v1': acoast_player_body_e_f4_v1,
-  'coast-player-body-se-f0-v1': acoast_player_body_se_f0_v1,
-  'coast-player-body-se-f1-v1': acoast_player_body_se_f1_v1,
-  'coast-player-body-se-f2-v1': acoast_player_body_se_f2_v1,
-  'coast-player-body-se-f3-v1': acoast_player_body_se_f3_v1,
-  'coast-player-body-se-f4-v1': acoast_player_body_se_f4_v1,
-  'coast-player-body-s-f0-v1': acoast_player_body_s_f0_v1,
-  'coast-player-body-s-f1-v1': acoast_player_body_s_f1_v1,
-  'coast-player-body-s-f2-v1': acoast_player_body_s_f2_v1,
-  'coast-player-body-s-f3-v1': acoast_player_body_s_f3_v1,
-  'coast-player-body-s-f4-v1': acoast_player_body_s_f4_v1,
-  'coast-player-body-ne-f0-v1': acoast_player_body_ne_f0_v1,
-  'coast-player-body-ne-f1-v1': acoast_player_body_ne_f1_v1,
-  'coast-player-body-ne-f2-v1': acoast_player_body_ne_f2_v1,
-  'coast-player-body-ne-f3-v1': acoast_player_body_ne_f3_v1,
-  'coast-player-body-ne-f4-v1': acoast_player_body_ne_f4_v1,
-  'coast-player-body-n-f0-v1': acoast_player_body_n_f0_v1,
-  'coast-player-body-n-f1-v1': acoast_player_body_n_f1_v1,
-  'coast-player-body-n-f2-v1': acoast_player_body_n_f2_v1,
-  'coast-player-body-n-f3-v1': acoast_player_body_n_f3_v1,
-  'coast-player-body-n-f4-v1': acoast_player_body_n_f4_v1,
-  'coast-wall-core-v1': acoast_wall_core_v1,
-  'coast-wall-edge-n-v1': acoast_wall_edge_n_v1,
-  'coast-wall-edge-s-v1': acoast_wall_edge_s_v1,
-  'coast-wall-edge-e-v1': acoast_wall_edge_e_v1,
-  'coast-wall-edge-w-v1': acoast_wall_edge_w_v1,
-  'coast-wall-exterior-a-v1': acoast_wall_exterior_a_v1,
-  'coast-wall-exterior-b-v1': acoast_wall_exterior_b_v1,
-  'coast-wall-interior-v1': acoast_wall_interior_v1,
-  'coast-wall-window-ew-v1': acoast_wall_window_ew_v1,
-  'coast-wall-door-ew-closed-v1': acoast_wall_door_ew_closed_v1,
-  'coast-wall-door-ew-open-v1': acoast_wall_door_ew_open_v1,
-  'coast-ground-asphalt-a-v1': acoast_ground_asphalt_a_v1,
-  'coast-ground-asphalt-b-v1': acoast_ground_asphalt_b_v1,
-  'coast-ground-yard-a-v1': acoast_ground_yard_a_v1,
-  'coast-ground-yard-b-v1': acoast_ground_yard_b_v1,
-  'coast-ground-tile-a-v1': acoast_ground_tile_a_v1,
-  'coast-ground-tile-b-v1': acoast_ground_tile_b_v1,
-  'coast-weapon-carbine-held-v1': acoast_weapon_carbine_held_v1,
-  'coast-scav-body-s-f0-v1': acoast_scav_body_s_f0_v1,
-  'coast-scav-body-s-f1-v1': acoast_scav_body_s_f1_v1,
-  'coast-scav-body-s-f2-v1': acoast_scav_body_s_f2_v1,
-  'coast-scav-body-s-f3-v1': acoast_scav_body_s_f3_v1,
-  'coast-scav-body-s-f4-v1': acoast_scav_body_s_f4_v1,
-  'coast-scav-body-se-f0-v1': acoast_scav_body_se_f0_v1,
-  'coast-scav-body-se-f1-v1': acoast_scav_body_se_f1_v1,
-  'coast-scav-body-se-f2-v1': acoast_scav_body_se_f2_v1,
-  'coast-scav-body-se-f3-v1': acoast_scav_body_se_f3_v1,
-  'coast-scav-body-se-f4-v1': acoast_scav_body_se_f4_v1,
-  'coast-scav-body-e-f0-v1': acoast_scav_body_e_f0_v1,
-  'coast-scav-body-e-f1-v1': acoast_scav_body_e_f1_v1,
-  'coast-scav-body-e-f2-v1': acoast_scav_body_e_f2_v1,
-  'coast-scav-body-e-f3-v1': acoast_scav_body_e_f3_v1,
-  'coast-scav-body-e-f4-v1': acoast_scav_body_e_f4_v1,
-  'coast-scav-body-ne-f0-v1': acoast_scav_body_ne_f0_v1,
-  'coast-scav-body-ne-f1-v1': acoast_scav_body_ne_f1_v1,
-  'coast-scav-body-ne-f2-v1': acoast_scav_body_ne_f2_v1,
-  'coast-scav-body-ne-f3-v1': acoast_scav_body_ne_f3_v1,
-  'coast-scav-body-ne-f4-v1': acoast_scav_body_ne_f4_v1,
-  'coast-scav-body-n-f0-v1': acoast_scav_body_n_f0_v1,
-  'coast-scav-body-n-f1-v1': acoast_scav_body_n_f1_v1,
-  'coast-scav-body-n-f2-v1': acoast_scav_body_n_f2_v1,
-  'coast-scav-body-n-f3-v1': acoast_scav_body_n_f3_v1,
-  'coast-scav-body-n-f4-v1': acoast_scav_body_n_f4_v1,
-  'coast-weapon-pistol-held-v1': acoast_weapon_pistol_held_v1,
-  'coast-salt-body-s-f0-v1': acoast_salt_body_s_f0_v1,
-  'coast-salt-body-s-f1-v1': acoast_salt_body_s_f1_v1,
-  'coast-salt-body-s-f2-v1': acoast_salt_body_s_f2_v1,
-  'coast-salt-body-s-f3-v1': acoast_salt_body_s_f3_v1,
-  'coast-salt-body-s-f4-v1': acoast_salt_body_s_f4_v1,
-  'coast-salt-body-se-f0-v1': acoast_salt_body_se_f0_v1,
-  'coast-salt-body-se-f1-v1': acoast_salt_body_se_f1_v1,
-  'coast-salt-body-se-f2-v1': acoast_salt_body_se_f2_v1,
-  'coast-salt-body-se-f3-v1': acoast_salt_body_se_f3_v1,
-  'coast-salt-body-se-f4-v1': acoast_salt_body_se_f4_v1,
-  'coast-salt-body-e-f0-v1': acoast_salt_body_e_f0_v1,
-  'coast-salt-body-e-f1-v1': acoast_salt_body_e_f1_v1,
-  'coast-salt-body-e-f2-v1': acoast_salt_body_e_f2_v1,
-  'coast-salt-body-e-f3-v1': acoast_salt_body_e_f3_v1,
-  'coast-salt-body-e-f4-v1': acoast_salt_body_e_f4_v1,
-  'coast-salt-body-ne-f0-v1': acoast_salt_body_ne_f0_v1,
-  'coast-salt-body-ne-f1-v1': acoast_salt_body_ne_f1_v1,
-  'coast-salt-body-ne-f2-v1': acoast_salt_body_ne_f2_v1,
-  'coast-salt-body-ne-f3-v1': acoast_salt_body_ne_f3_v1,
-  'coast-salt-body-ne-f4-v1': acoast_salt_body_ne_f4_v1,
-  'coast-salt-body-n-f0-v1': acoast_salt_body_n_f0_v1,
-  'coast-salt-body-n-f1-v1': acoast_salt_body_n_f1_v1,
-  'coast-salt-body-n-f2-v1': acoast_salt_body_n_f2_v1,
-  'coast-salt-body-n-f3-v1': acoast_salt_body_n_f3_v1,
-  'coast-salt-body-n-f4-v1': acoast_salt_body_n_f4_v1,
-  'coast-elite-body-s-f0-v1': acoast_elite_body_s_f0_v1,
-  'coast-elite-body-s-f1-v1': acoast_elite_body_s_f1_v1,
-  'coast-elite-body-s-f2-v1': acoast_elite_body_s_f2_v1,
-  'coast-elite-body-s-f3-v1': acoast_elite_body_s_f3_v1,
-  'coast-elite-body-s-f4-v1': acoast_elite_body_s_f4_v1,
-  'coast-elite-body-se-f0-v1': acoast_elite_body_se_f0_v1,
-  'coast-elite-body-se-f1-v1': acoast_elite_body_se_f1_v1,
-  'coast-elite-body-se-f2-v1': acoast_elite_body_se_f2_v1,
-  'coast-elite-body-se-f3-v1': acoast_elite_body_se_f3_v1,
-  'coast-elite-body-se-f4-v1': acoast_elite_body_se_f4_v1,
-  'coast-elite-body-e-f0-v1': acoast_elite_body_e_f0_v1,
-  'coast-elite-body-e-f1-v1': acoast_elite_body_e_f1_v1,
-  'coast-elite-body-e-f2-v1': acoast_elite_body_e_f2_v1,
-  'coast-elite-body-e-f3-v1': acoast_elite_body_e_f3_v1,
-  'coast-elite-body-e-f4-v1': acoast_elite_body_e_f4_v1,
-  'coast-elite-body-ne-f0-v1': acoast_elite_body_ne_f0_v1,
-  'coast-elite-body-ne-f1-v1': acoast_elite_body_ne_f1_v1,
-  'coast-elite-body-ne-f2-v1': acoast_elite_body_ne_f2_v1,
-  'coast-elite-body-ne-f3-v1': acoast_elite_body_ne_f3_v1,
-  'coast-elite-body-ne-f4-v1': acoast_elite_body_ne_f4_v1,
-  'coast-elite-body-n-f0-v1': acoast_elite_body_n_f0_v1,
-  'coast-elite-body-n-f1-v1': acoast_elite_body_n_f1_v1,
-  'coast-elite-body-n-f2-v1': acoast_elite_body_n_f2_v1,
-  'coast-elite-body-n-f3-v1': acoast_elite_body_n_f3_v1,
-  'coast-elite-body-n-f4-v1': acoast_elite_body_n_f4_v1,
-  'coast-creature-body-s-f0-v1': acoast_creature_body_s_f0_v1,
-  'coast-creature-body-s-f1-v1': acoast_creature_body_s_f1_v1,
-  'coast-creature-body-s-f2-v1': acoast_creature_body_s_f2_v1,
-  'coast-creature-body-s-f3-v1': acoast_creature_body_s_f3_v1,
-  'coast-creature-body-s-f4-v1': acoast_creature_body_s_f4_v1,
-  'coast-creature-body-se-f0-v1': acoast_creature_body_se_f0_v1,
-  'coast-creature-body-se-f1-v1': acoast_creature_body_se_f1_v1,
-  'coast-creature-body-se-f2-v1': acoast_creature_body_se_f2_v1,
-  'coast-creature-body-se-f3-v1': acoast_creature_body_se_f3_v1,
-  'coast-creature-body-se-f4-v1': acoast_creature_body_se_f4_v1,
-  'coast-creature-body-e-f0-v1': acoast_creature_body_e_f0_v1,
-  'coast-creature-body-e-f1-v1': acoast_creature_body_e_f1_v1,
-  'coast-creature-body-e-f2-v1': acoast_creature_body_e_f2_v1,
-  'coast-creature-body-e-f3-v1': acoast_creature_body_e_f3_v1,
-  'coast-creature-body-e-f4-v1': acoast_creature_body_e_f4_v1,
-  'coast-creature-body-ne-f0-v1': acoast_creature_body_ne_f0_v1,
-  'coast-creature-body-ne-f1-v1': acoast_creature_body_ne_f1_v1,
-  'coast-creature-body-ne-f2-v1': acoast_creature_body_ne_f2_v1,
-  'coast-creature-body-ne-f3-v1': acoast_creature_body_ne_f3_v1,
-  'coast-creature-body-ne-f4-v1': acoast_creature_body_ne_f4_v1,
-  'coast-creature-body-n-f0-v1': acoast_creature_body_n_f0_v1,
-  'coast-creature-body-n-f1-v1': acoast_creature_body_n_f1_v1,
-  'coast-creature-body-n-f2-v1': acoast_creature_body_n_f2_v1,
-  'coast-creature-body-n-f3-v1': acoast_creature_body_n_f3_v1,
-  'coast-creature-body-n-f4-v1': acoast_creature_body_n_f4_v1,
-  'coast-salt-corpse-e-v1': acoast_salt_corpse_e_v1,
-  'coast-elite-corpse-e-v1': acoast_elite_corpse_e_v1,
-  'coast-creature-corpse-e-v1': acoast_creature_corpse_e_v1,
-  'coast-weapon-salt-rifle-held-v1': acoast_weapon_salt_rifle_held_v1,
-  'coast-weapon-elite-rifle-held-v1': acoast_weapon_elite_rifle_held_v1,
-  'coast-weapon-shotgun-held-v1': acoast_weapon_shotgun_held_v1,
-  'coast-weapon-knife-held-v1': acoast_weapon_knife_held_v1,
-  'coast-weapon-club-held-v1': acoast_weapon_club_held_v1,
-  'coast-scav-corpse-e-v1': acoast_scav_corpse_e_v1,
-};
+const frames: readonly (readonly [string, string, number, number, number, number])[] = [
+  ['coast-player-body-e-f0-v1', sheet0, 0, 0, 32, 48],
+  ['coast-player-body-e-f1-v1', sheet0, 48, 0, 32, 48],
+  ['coast-player-body-e-f2-v1', sheet0, 96, 0, 32, 48],
+  ['coast-player-body-e-f3-v1', sheet0, 144, 0, 32, 48],
+  ['coast-player-body-e-f4-v1', sheet0, 192, 0, 32, 48],
+  ['coast-player-body-se-f0-v1', sheet0, 240, 0, 32, 48],
+  ['coast-player-body-se-f1-v1', sheet0, 288, 0, 32, 48],
+  ['coast-player-body-se-f2-v1', sheet0, 336, 0, 32, 48],
+  ['coast-player-body-se-f3-v1', sheet0, 0, 48, 32, 48],
+  ['coast-player-body-se-f4-v1', sheet0, 48, 48, 32, 48],
+  ['coast-player-body-s-f0-v1', sheet0, 96, 48, 32, 48],
+  ['coast-player-body-s-f1-v1', sheet0, 144, 48, 32, 48],
+  ['coast-player-body-s-f2-v1', sheet0, 192, 48, 32, 48],
+  ['coast-player-body-s-f3-v1', sheet0, 240, 48, 32, 48],
+  ['coast-player-body-s-f4-v1', sheet0, 288, 48, 32, 48],
+  ['coast-player-body-ne-f0-v1', sheet0, 336, 48, 32, 48],
+  ['coast-player-body-ne-f1-v1', sheet0, 0, 96, 32, 48],
+  ['coast-player-body-ne-f2-v1', sheet0, 48, 96, 32, 48],
+  ['coast-player-body-ne-f3-v1', sheet0, 96, 96, 32, 48],
+  ['coast-player-body-ne-f4-v1', sheet0, 144, 96, 32, 48],
+  ['coast-player-body-n-f0-v1', sheet0, 192, 96, 32, 48],
+  ['coast-player-body-n-f1-v1', sheet0, 240, 96, 32, 48],
+  ['coast-player-body-n-f2-v1', sheet0, 288, 96, 32, 48],
+  ['coast-player-body-n-f3-v1', sheet0, 336, 96, 32, 48],
+  ['coast-player-body-n-f4-v1', sheet0, 0, 144, 32, 48],
+  ['coast-wall-core-v1', sheet0, 48, 144, 32, 32],
+  ['coast-wall-edge-n-v1', sheet0, 96, 144, 32, 3],
+  ['coast-wall-edge-s-v1', sheet0, 144, 144, 32, 3],
+  ['coast-wall-edge-e-v1', sheet0, 192, 144, 3, 32],
+  ['coast-wall-edge-w-v1', sheet0, 240, 144, 3, 32],
+  ['coast-wall-exterior-a-v1', sheet0, 288, 144, 32, 48],
+  ['coast-wall-exterior-b-v1', sheet0, 336, 144, 32, 48],
+  ['coast-wall-interior-v1', sheet0, 0, 192, 32, 48],
+  ['coast-wall-window-ew-v1', sheet0, 48, 192, 32, 48],
+  ['coast-wall-door-ew-closed-v1', sheet0, 96, 192, 32, 48],
+  ['coast-wall-door-ew-open-v1', sheet0, 144, 192, 32, 48],
+  ['coast-ground-asphalt-a-v1', sheet0, 192, 192, 32, 32],
+  ['coast-ground-asphalt-b-v1', sheet0, 240, 192, 32, 32],
+  ['coast-ground-yard-a-v1', sheet0, 288, 192, 32, 32],
+  ['coast-ground-yard-b-v1', sheet0, 336, 192, 32, 32],
+  ['coast-ground-tile-a-v1', sheet0, 0, 240, 32, 32],
+  ['coast-ground-tile-b-v1', sheet0, 48, 240, 32, 32],
+  ['coast-weapon-carbine-held-v1', sheet0, 96, 240, 31, 10],
+  ['coast-scav-body-s-f0-v1', sheet0, 144, 240, 32, 48],
+  ['coast-scav-body-s-f1-v1', sheet0, 192, 240, 32, 48],
+  ['coast-scav-body-s-f2-v1', sheet0, 240, 240, 32, 48],
+  ['coast-scav-body-s-f3-v1', sheet0, 288, 240, 32, 48],
+  ['coast-scav-body-s-f4-v1', sheet0, 336, 240, 32, 48],
+  ['coast-scav-body-se-f0-v1', sheet0, 0, 288, 32, 48],
+  ['coast-scav-body-se-f1-v1', sheet0, 48, 288, 32, 48],
+  ['coast-scav-body-se-f2-v1', sheet0, 96, 288, 32, 48],
+  ['coast-scav-body-se-f3-v1', sheet0, 144, 288, 32, 48],
+  ['coast-scav-body-se-f4-v1', sheet0, 192, 288, 32, 48],
+  ['coast-scav-body-e-f0-v1', sheet0, 240, 288, 32, 48],
+  ['coast-scav-body-e-f1-v1', sheet0, 288, 288, 32, 48],
+  ['coast-scav-body-e-f2-v1', sheet0, 336, 288, 32, 48],
+  ['coast-scav-body-e-f3-v1', sheet0, 0, 336, 32, 48],
+  ['coast-scav-body-e-f4-v1', sheet0, 48, 336, 32, 48],
+  ['coast-scav-body-ne-f0-v1', sheet0, 96, 336, 32, 48],
+  ['coast-scav-body-ne-f1-v1', sheet0, 144, 336, 32, 48],
+  ['coast-scav-body-ne-f2-v1', sheet0, 192, 336, 32, 48],
+  ['coast-scav-body-ne-f3-v1', sheet0, 240, 336, 32, 48],
+  ['coast-scav-body-ne-f4-v1', sheet0, 288, 336, 32, 48],
+  ['coast-scav-body-n-f0-v1', sheet0, 336, 336, 32, 48],
+  ['coast-scav-body-n-f1-v1', sheet0, 0, 384, 32, 48],
+  ['coast-scav-body-n-f2-v1', sheet0, 48, 384, 32, 48],
+  ['coast-scav-body-n-f3-v1', sheet0, 96, 384, 32, 48],
+  ['coast-scav-body-n-f4-v1', sheet0, 144, 384, 32, 48],
+  ['coast-weapon-pistol-held-v1', sheet0, 192, 384, 18, 10],
+  ['coast-weapon-club-held-v1', sheet0, 240, 384, 24, 10],
+  ['coast-scav-corpse-e-v1', sheet0, 288, 384, 48, 24],
+  ['coast-salt-body-s-f0-v1', sheet0, 336, 384, 32, 48],
+  ['coast-salt-body-s-f1-v1', sheet0, 0, 432, 32, 48],
+  ['coast-salt-body-s-f2-v1', sheet0, 48, 432, 32, 48],
+  ['coast-salt-body-s-f3-v1', sheet0, 96, 432, 32, 48],
+  ['coast-salt-body-s-f4-v1', sheet0, 144, 432, 32, 48],
+  ['coast-salt-body-se-f0-v1', sheet0, 192, 432, 32, 48],
+  ['coast-salt-body-se-f1-v1', sheet0, 240, 432, 32, 48],
+  ['coast-salt-body-se-f2-v1', sheet0, 288, 432, 32, 48],
+  ['coast-salt-body-se-f3-v1', sheet0, 336, 432, 32, 48],
+  ['coast-salt-body-se-f4-v1', sheet0, 0, 480, 32, 48],
+  ['coast-salt-body-e-f0-v1', sheet0, 48, 480, 32, 48],
+  ['coast-salt-body-e-f1-v1', sheet0, 96, 480, 32, 48],
+  ['coast-salt-body-e-f2-v1', sheet0, 144, 480, 32, 48],
+  ['coast-salt-body-e-f3-v1', sheet0, 192, 480, 32, 48],
+  ['coast-salt-body-e-f4-v1', sheet0, 240, 480, 32, 48],
+  ['coast-salt-body-ne-f0-v1', sheet0, 288, 480, 32, 48],
+  ['coast-salt-body-ne-f1-v1', sheet0, 336, 480, 32, 48],
+  ['coast-salt-body-ne-f2-v1', sheet0, 0, 528, 32, 48],
+  ['coast-salt-body-ne-f3-v1', sheet0, 48, 528, 32, 48],
+  ['coast-salt-body-ne-f4-v1', sheet0, 96, 528, 32, 48],
+  ['coast-salt-body-n-f0-v1', sheet0, 144, 528, 32, 48],
+  ['coast-salt-body-n-f1-v1', sheet0, 192, 528, 32, 48],
+  ['coast-salt-body-n-f2-v1', sheet0, 240, 528, 32, 48],
+  ['coast-salt-body-n-f3-v1', sheet0, 288, 528, 32, 48],
+  ['coast-salt-body-n-f4-v1', sheet0, 336, 528, 32, 48],
+  ['coast-elite-body-s-f0-v1', sheet0, 0, 576, 32, 48],
+  ['coast-elite-body-s-f1-v1', sheet0, 48, 576, 32, 48],
+  ['coast-elite-body-s-f2-v1', sheet0, 96, 576, 32, 48],
+  ['coast-elite-body-s-f3-v1', sheet0, 144, 576, 32, 48],
+  ['coast-elite-body-s-f4-v1', sheet0, 192, 576, 32, 48],
+  ['coast-elite-body-se-f0-v1', sheet0, 240, 576, 32, 48],
+  ['coast-elite-body-se-f1-v1', sheet0, 288, 576, 32, 48],
+  ['coast-elite-body-se-f2-v1', sheet0, 336, 576, 32, 48],
+  ['coast-elite-body-se-f3-v1', sheet0, 0, 624, 32, 48],
+  ['coast-elite-body-se-f4-v1', sheet0, 48, 624, 32, 48],
+  ['coast-elite-body-e-f0-v1', sheet0, 96, 624, 32, 48],
+  ['coast-elite-body-e-f1-v1', sheet0, 144, 624, 32, 48],
+  ['coast-elite-body-e-f2-v1', sheet0, 192, 624, 32, 48],
+  ['coast-elite-body-e-f3-v1', sheet0, 240, 624, 32, 48],
+  ['coast-elite-body-e-f4-v1', sheet0, 288, 624, 32, 48],
+  ['coast-elite-body-ne-f0-v1', sheet0, 336, 624, 32, 48],
+  ['coast-elite-body-ne-f1-v1', sheet0, 0, 672, 32, 48],
+  ['coast-elite-body-ne-f2-v1', sheet0, 48, 672, 32, 48],
+  ['coast-elite-body-ne-f3-v1', sheet0, 96, 672, 32, 48],
+  ['coast-elite-body-ne-f4-v1', sheet0, 144, 672, 32, 48],
+  ['coast-elite-body-n-f0-v1', sheet0, 192, 672, 32, 48],
+  ['coast-elite-body-n-f1-v1', sheet0, 240, 672, 32, 48],
+  ['coast-elite-body-n-f2-v1', sheet0, 288, 672, 32, 48],
+  ['coast-elite-body-n-f3-v1', sheet0, 336, 672, 32, 48],
+  ['coast-elite-body-n-f4-v1', sheet0, 0, 720, 32, 48],
+  ['coast-creature-body-s-f0-v1', sheet0, 48, 720, 40, 28],
+  ['coast-creature-body-s-f1-v1', sheet0, 96, 720, 40, 28],
+  ['coast-creature-body-s-f2-v1', sheet0, 144, 720, 40, 28],
+  ['coast-creature-body-s-f3-v1', sheet0, 192, 720, 40, 28],
+  ['coast-creature-body-s-f4-v1', sheet0, 240, 720, 40, 28],
+  ['coast-creature-body-se-f0-v1', sheet0, 288, 720, 40, 28],
+  ['coast-creature-body-se-f1-v1', sheet0, 336, 720, 40, 28],
+  ['coast-creature-body-se-f2-v1', sheet0, 0, 768, 40, 28],
+  ['coast-creature-body-se-f3-v1', sheet0, 48, 768, 40, 28],
+  ['coast-creature-body-se-f4-v1', sheet0, 96, 768, 40, 28],
+  ['coast-creature-body-e-f0-v1', sheet0, 144, 768, 40, 28],
+  ['coast-creature-body-e-f1-v1', sheet0, 192, 768, 40, 28],
+  ['coast-creature-body-e-f2-v1', sheet0, 240, 768, 40, 28],
+  ['coast-creature-body-e-f3-v1', sheet0, 288, 768, 40, 28],
+  ['coast-creature-body-e-f4-v1', sheet0, 336, 768, 40, 28],
+  ['coast-creature-body-ne-f0-v1', sheet0, 0, 816, 40, 28],
+  ['coast-creature-body-ne-f1-v1', sheet0, 48, 816, 40, 28],
+  ['coast-creature-body-ne-f2-v1', sheet0, 96, 816, 40, 28],
+  ['coast-creature-body-ne-f3-v1', sheet0, 144, 816, 40, 28],
+  ['coast-creature-body-ne-f4-v1', sheet0, 192, 816, 40, 28],
+  ['coast-creature-body-n-f0-v1', sheet0, 240, 816, 40, 28],
+  ['coast-creature-body-n-f1-v1', sheet0, 288, 816, 40, 28],
+  ['coast-creature-body-n-f2-v1', sheet0, 336, 816, 40, 28],
+  ['coast-creature-body-n-f3-v1', sheet0, 0, 864, 40, 28],
+  ['coast-creature-body-n-f4-v1', sheet0, 48, 864, 40, 28],
+  ['coast-salt-corpse-e-v1', sheet0, 96, 864, 48, 24],
+  ['coast-elite-corpse-e-v1', sheet0, 144, 864, 48, 24],
+  ['coast-creature-corpse-e-v1', sheet0, 192, 864, 40, 28],
+  ['coast-weapon-salt-rifle-held-v1', sheet0, 240, 864, 31, 10],
+  ['coast-weapon-elite-rifle-held-v1', sheet0, 288, 864, 35, 12],
+  ['coast-weapon-shotgun-held-v1', sheet0, 336, 864, 33, 10],
+  ['coast-weapon-knife-held-v1', sheet0, 0, 912, 19, 8],
+  ['coast-raider-melee-body-e-f0-v1', sheet1, 0, 0, 32, 48],
+  ['coast-raider-melee-body-e-f1-v1', sheet1, 32, 0, 32, 48],
+  ['coast-raider-melee-body-e-f2-v1', sheet1, 64, 0, 32, 48],
+  ['coast-raider-melee-body-e-f3-v1', sheet1, 96, 0, 32, 48],
+  ['coast-raider-melee-body-e-f4-v1', sheet1, 128, 0, 32, 48],
+  ['coast-raider-melee-body-se-f0-v1', sheet1, 0, 48, 32, 48],
+  ['coast-raider-melee-body-se-f1-v1', sheet1, 32, 48, 32, 48],
+  ['coast-raider-melee-body-se-f2-v1', sheet1, 64, 48, 32, 48],
+  ['coast-raider-melee-body-se-f3-v1', sheet1, 96, 48, 32, 48],
+  ['coast-raider-melee-body-se-f4-v1', sheet1, 128, 48, 32, 48],
+  ['coast-raider-melee-body-s-f0-v1', sheet1, 0, 96, 32, 48],
+  ['coast-raider-melee-body-s-f1-v1', sheet1, 32, 96, 32, 48],
+  ['coast-raider-melee-body-s-f2-v1', sheet1, 64, 96, 32, 48],
+  ['coast-raider-melee-body-s-f3-v1', sheet1, 96, 96, 32, 48],
+  ['coast-raider-melee-body-s-f4-v1', sheet1, 128, 96, 32, 48],
+  ['coast-raider-melee-body-ne-f0-v1', sheet1, 0, 144, 32, 48],
+  ['coast-raider-melee-body-ne-f1-v1', sheet1, 32, 144, 32, 48],
+  ['coast-raider-melee-body-ne-f2-v1', sheet1, 64, 144, 32, 48],
+  ['coast-raider-melee-body-ne-f3-v1', sheet1, 96, 144, 32, 48],
+  ['coast-raider-melee-body-ne-f4-v1', sheet1, 128, 144, 32, 48],
+  ['coast-raider-melee-body-n-f0-v1', sheet1, 0, 192, 32, 48],
+  ['coast-raider-melee-body-n-f1-v1', sheet1, 32, 192, 32, 48],
+  ['coast-raider-melee-body-n-f2-v1', sheet1, 64, 192, 32, 48],
+  ['coast-raider-melee-body-n-f3-v1', sheet1, 96, 192, 32, 48],
+  ['coast-raider-melee-body-n-f4-v1', sheet1, 128, 192, 32, 48],
+  ['coast-raider-melee-corpse-e-v1', sheet1, 0, 240, 48, 32],
+  ['coast-raider-gunner-body-e-f0-v1', sheet2, 0, 0, 32, 48],
+  ['coast-raider-gunner-body-e-f1-v1', sheet2, 32, 0, 32, 48],
+  ['coast-raider-gunner-body-e-f2-v1', sheet2, 64, 0, 32, 48],
+  ['coast-raider-gunner-body-e-f3-v1', sheet2, 96, 0, 32, 48],
+  ['coast-raider-gunner-body-e-f4-v1', sheet2, 128, 0, 32, 48],
+  ['coast-raider-gunner-body-se-f0-v1', sheet2, 0, 48, 32, 48],
+  ['coast-raider-gunner-body-se-f1-v1', sheet2, 32, 48, 32, 48],
+  ['coast-raider-gunner-body-se-f2-v1', sheet2, 64, 48, 32, 48],
+  ['coast-raider-gunner-body-se-f3-v1', sheet2, 96, 48, 32, 48],
+  ['coast-raider-gunner-body-se-f4-v1', sheet2, 128, 48, 32, 48],
+  ['coast-raider-gunner-body-s-f0-v1', sheet2, 0, 96, 32, 48],
+  ['coast-raider-gunner-body-s-f1-v1', sheet2, 32, 96, 32, 48],
+  ['coast-raider-gunner-body-s-f2-v1', sheet2, 64, 96, 32, 48],
+  ['coast-raider-gunner-body-s-f3-v1', sheet2, 96, 96, 32, 48],
+  ['coast-raider-gunner-body-s-f4-v1', sheet2, 128, 96, 32, 48],
+  ['coast-raider-gunner-body-ne-f0-v1', sheet2, 0, 144, 32, 48],
+  ['coast-raider-gunner-body-ne-f1-v1', sheet2, 32, 144, 32, 48],
+  ['coast-raider-gunner-body-ne-f2-v1', sheet2, 64, 144, 32, 48],
+  ['coast-raider-gunner-body-ne-f3-v1', sheet2, 96, 144, 32, 48],
+  ['coast-raider-gunner-body-ne-f4-v1', sheet2, 128, 144, 32, 48],
+  ['coast-raider-gunner-body-n-f0-v1', sheet2, 0, 192, 32, 48],
+  ['coast-raider-gunner-body-n-f1-v1', sheet2, 32, 192, 32, 48],
+  ['coast-raider-gunner-body-n-f2-v1', sheet2, 64, 192, 32, 48],
+  ['coast-raider-gunner-body-n-f3-v1', sheet2, 96, 192, 32, 48],
+  ['coast-raider-gunner-body-n-f4-v1', sheet2, 128, 192, 32, 48],
+  ['coast-raider-gunner-corpse-e-v1', sheet2, 0, 240, 48, 32],
+  ['coast-raider-lookout-body-e-f0-v1', sheet3, 0, 0, 32, 48],
+  ['coast-raider-lookout-body-e-f1-v1', sheet3, 32, 0, 32, 48],
+  ['coast-raider-lookout-body-e-f2-v1', sheet3, 64, 0, 32, 48],
+  ['coast-raider-lookout-body-e-f3-v1', sheet3, 96, 0, 32, 48],
+  ['coast-raider-lookout-body-e-f4-v1', sheet3, 128, 0, 32, 48],
+  ['coast-raider-lookout-body-se-f0-v1', sheet3, 0, 48, 32, 48],
+  ['coast-raider-lookout-body-se-f1-v1', sheet3, 32, 48, 32, 48],
+  ['coast-raider-lookout-body-se-f2-v1', sheet3, 64, 48, 32, 48],
+  ['coast-raider-lookout-body-se-f3-v1', sheet3, 96, 48, 32, 48],
+  ['coast-raider-lookout-body-se-f4-v1', sheet3, 128, 48, 32, 48],
+  ['coast-raider-lookout-body-s-f0-v1', sheet3, 0, 96, 32, 48],
+  ['coast-raider-lookout-body-s-f1-v1', sheet3, 32, 96, 32, 48],
+  ['coast-raider-lookout-body-s-f2-v1', sheet3, 64, 96, 32, 48],
+  ['coast-raider-lookout-body-s-f3-v1', sheet3, 96, 96, 32, 48],
+  ['coast-raider-lookout-body-s-f4-v1', sheet3, 128, 96, 32, 48],
+  ['coast-raider-lookout-body-ne-f0-v1', sheet3, 0, 144, 32, 48],
+  ['coast-raider-lookout-body-ne-f1-v1', sheet3, 32, 144, 32, 48],
+  ['coast-raider-lookout-body-ne-f2-v1', sheet3, 64, 144, 32, 48],
+  ['coast-raider-lookout-body-ne-f3-v1', sheet3, 96, 144, 32, 48],
+  ['coast-raider-lookout-body-ne-f4-v1', sheet3, 128, 144, 32, 48],
+  ['coast-raider-lookout-body-n-f0-v1', sheet3, 0, 192, 32, 48],
+  ['coast-raider-lookout-body-n-f1-v1', sheet3, 32, 192, 32, 48],
+  ['coast-raider-lookout-body-n-f2-v1', sheet3, 64, 192, 32, 48],
+  ['coast-raider-lookout-body-n-f3-v1', sheet3, 96, 192, 32, 48],
+  ['coast-raider-lookout-body-n-f4-v1', sheet3, 128, 192, 32, 48],
+  ['coast-raider-lookout-corpse-e-v1', sheet3, 0, 240, 48, 32],
+  ['coast-raider-boss-body-e-f0-v1', sheet4, 0, 0, 32, 48],
+  ['coast-raider-boss-body-e-f1-v1', sheet4, 32, 0, 32, 48],
+  ['coast-raider-boss-body-e-f2-v1', sheet4, 64, 0, 32, 48],
+  ['coast-raider-boss-body-e-f3-v1', sheet4, 96, 0, 32, 48],
+  ['coast-raider-boss-body-e-f4-v1', sheet4, 128, 0, 32, 48],
+  ['coast-raider-boss-body-se-f0-v1', sheet4, 0, 48, 32, 48],
+  ['coast-raider-boss-body-se-f1-v1', sheet4, 32, 48, 32, 48],
+  ['coast-raider-boss-body-se-f2-v1', sheet4, 64, 48, 32, 48],
+  ['coast-raider-boss-body-se-f3-v1', sheet4, 96, 48, 32, 48],
+  ['coast-raider-boss-body-se-f4-v1', sheet4, 128, 48, 32, 48],
+  ['coast-raider-boss-body-s-f0-v1', sheet4, 0, 96, 32, 48],
+  ['coast-raider-boss-body-s-f1-v1', sheet4, 32, 96, 32, 48],
+  ['coast-raider-boss-body-s-f2-v1', sheet4, 64, 96, 32, 48],
+  ['coast-raider-boss-body-s-f3-v1', sheet4, 96, 96, 32, 48],
+  ['coast-raider-boss-body-s-f4-v1', sheet4, 128, 96, 32, 48],
+  ['coast-raider-boss-body-ne-f0-v1', sheet4, 0, 144, 32, 48],
+  ['coast-raider-boss-body-ne-f1-v1', sheet4, 32, 144, 32, 48],
+  ['coast-raider-boss-body-ne-f2-v1', sheet4, 64, 144, 32, 48],
+  ['coast-raider-boss-body-ne-f3-v1', sheet4, 96, 144, 32, 48],
+  ['coast-raider-boss-body-ne-f4-v1', sheet4, 128, 144, 32, 48],
+  ['coast-raider-boss-body-n-f0-v1', sheet4, 0, 192, 32, 48],
+  ['coast-raider-boss-body-n-f1-v1', sheet4, 32, 192, 32, 48],
+  ['coast-raider-boss-body-n-f2-v1', sheet4, 64, 192, 32, 48],
+  ['coast-raider-boss-body-n-f3-v1', sheet4, 96, 192, 32, 48],
+  ['coast-raider-boss-body-n-f4-v1', sheet4, 128, 192, 32, 48],
+  ['coast-raider-boss-corpse-e-v1', sheet4, 0, 240, 48, 32],
+  ['coast-tidal-crab-body-e-f0-v1', sheet5, 0, 0, 32, 48],
+  ['coast-tidal-crab-body-e-f1-v1', sheet5, 32, 0, 32, 48],
+  ['coast-tidal-crab-body-e-f2-v1', sheet5, 64, 0, 32, 48],
+  ['coast-tidal-crab-body-e-f3-v1', sheet5, 96, 0, 32, 48],
+  ['coast-tidal-crab-body-e-f4-v1', sheet5, 128, 0, 32, 48],
+  ['coast-tidal-crab-body-se-f0-v1', sheet5, 0, 48, 32, 48],
+  ['coast-tidal-crab-body-se-f1-v1', sheet5, 32, 48, 32, 48],
+  ['coast-tidal-crab-body-se-f2-v1', sheet5, 64, 48, 32, 48],
+  ['coast-tidal-crab-body-se-f3-v1', sheet5, 96, 48, 32, 48],
+  ['coast-tidal-crab-body-se-f4-v1', sheet5, 128, 48, 32, 48],
+  ['coast-tidal-crab-body-s-f0-v1', sheet5, 0, 96, 32, 48],
+  ['coast-tidal-crab-body-s-f1-v1', sheet5, 32, 96, 32, 48],
+  ['coast-tidal-crab-body-s-f2-v1', sheet5, 64, 96, 32, 48],
+  ['coast-tidal-crab-body-s-f3-v1', sheet5, 96, 96, 32, 48],
+  ['coast-tidal-crab-body-s-f4-v1', sheet5, 128, 96, 32, 48],
+  ['coast-tidal-crab-body-ne-f0-v1', sheet5, 0, 144, 32, 48],
+  ['coast-tidal-crab-body-ne-f1-v1', sheet5, 32, 144, 32, 48],
+  ['coast-tidal-crab-body-ne-f2-v1', sheet5, 64, 144, 32, 48],
+  ['coast-tidal-crab-body-ne-f3-v1', sheet5, 96, 144, 32, 48],
+  ['coast-tidal-crab-body-ne-f4-v1', sheet5, 128, 144, 32, 48],
+  ['coast-tidal-crab-body-n-f0-v1', sheet5, 0, 192, 32, 48],
+  ['coast-tidal-crab-body-n-f1-v1', sheet5, 32, 192, 32, 48],
+  ['coast-tidal-crab-body-n-f2-v1', sheet5, 64, 192, 32, 48],
+  ['coast-tidal-crab-body-n-f3-v1', sheet5, 96, 192, 32, 48],
+  ['coast-tidal-crab-body-n-f4-v1', sheet5, 128, 192, 32, 48],
+  ['coast-tidal-crab-corpse-e-v1', sheet5, 0, 240, 48, 32],
+  ['coast-saltback-dog-body-e-f0-v1', sheet6, 0, 0, 32, 48],
+  ['coast-saltback-dog-body-e-f1-v1', sheet6, 32, 0, 32, 48],
+  ['coast-saltback-dog-body-e-f2-v1', sheet6, 64, 0, 32, 48],
+  ['coast-saltback-dog-body-e-f3-v1', sheet6, 96, 0, 32, 48],
+  ['coast-saltback-dog-body-e-f4-v1', sheet6, 128, 0, 32, 48],
+  ['coast-saltback-dog-body-se-f0-v1', sheet6, 0, 48, 32, 48],
+  ['coast-saltback-dog-body-se-f1-v1', sheet6, 32, 48, 32, 48],
+  ['coast-saltback-dog-body-se-f2-v1', sheet6, 64, 48, 32, 48],
+  ['coast-saltback-dog-body-se-f3-v1', sheet6, 96, 48, 32, 48],
+  ['coast-saltback-dog-body-se-f4-v1', sheet6, 128, 48, 32, 48],
+  ['coast-saltback-dog-body-s-f0-v1', sheet6, 0, 96, 32, 48],
+  ['coast-saltback-dog-body-s-f1-v1', sheet6, 32, 96, 32, 48],
+  ['coast-saltback-dog-body-s-f2-v1', sheet6, 64, 96, 32, 48],
+  ['coast-saltback-dog-body-s-f3-v1', sheet6, 96, 96, 32, 48],
+  ['coast-saltback-dog-body-s-f4-v1', sheet6, 128, 96, 32, 48],
+  ['coast-saltback-dog-body-ne-f0-v1', sheet6, 0, 144, 32, 48],
+  ['coast-saltback-dog-body-ne-f1-v1', sheet6, 32, 144, 32, 48],
+  ['coast-saltback-dog-body-ne-f2-v1', sheet6, 64, 144, 32, 48],
+  ['coast-saltback-dog-body-ne-f3-v1', sheet6, 96, 144, 32, 48],
+  ['coast-saltback-dog-body-ne-f4-v1', sheet6, 128, 144, 32, 48],
+  ['coast-saltback-dog-body-n-f0-v1', sheet6, 0, 192, 32, 48],
+  ['coast-saltback-dog-body-n-f1-v1', sheet6, 32, 192, 32, 48],
+  ['coast-saltback-dog-body-n-f2-v1', sheet6, 64, 192, 32, 48],
+  ['coast-saltback-dog-body-n-f3-v1', sheet6, 96, 192, 32, 48],
+  ['coast-saltback-dog-body-n-f4-v1', sheet6, 128, 192, 32, 48],
+  ['coast-saltback-dog-corpse-e-v1', sheet6, 0, 240, 48, 32],
+  ['coast-sac-spitter-body-e-f0-v1', sheet7, 0, 0, 32, 48],
+  ['coast-sac-spitter-body-e-f1-v1', sheet7, 32, 0, 32, 48],
+  ['coast-sac-spitter-body-e-f2-v1', sheet7, 64, 0, 32, 48],
+  ['coast-sac-spitter-body-e-f3-v1', sheet7, 96, 0, 32, 48],
+  ['coast-sac-spitter-body-e-f4-v1', sheet7, 128, 0, 32, 48],
+  ['coast-sac-spitter-body-se-f0-v1', sheet7, 0, 48, 32, 48],
+  ['coast-sac-spitter-body-se-f1-v1', sheet7, 32, 48, 32, 48],
+  ['coast-sac-spitter-body-se-f2-v1', sheet7, 64, 48, 32, 48],
+  ['coast-sac-spitter-body-se-f3-v1', sheet7, 96, 48, 32, 48],
+  ['coast-sac-spitter-body-se-f4-v1', sheet7, 128, 48, 32, 48],
+  ['coast-sac-spitter-body-s-f0-v1', sheet7, 0, 96, 32, 48],
+  ['coast-sac-spitter-body-s-f1-v1', sheet7, 32, 96, 32, 48],
+  ['coast-sac-spitter-body-s-f2-v1', sheet7, 64, 96, 32, 48],
+  ['coast-sac-spitter-body-s-f3-v1', sheet7, 96, 96, 32, 48],
+  ['coast-sac-spitter-body-s-f4-v1', sheet7, 128, 96, 32, 48],
+  ['coast-sac-spitter-body-ne-f0-v1', sheet7, 0, 144, 32, 48],
+  ['coast-sac-spitter-body-ne-f1-v1', sheet7, 32, 144, 32, 48],
+  ['coast-sac-spitter-body-ne-f2-v1', sheet7, 64, 144, 32, 48],
+  ['coast-sac-spitter-body-ne-f3-v1', sheet7, 96, 144, 32, 48],
+  ['coast-sac-spitter-body-ne-f4-v1', sheet7, 128, 144, 32, 48],
+  ['coast-sac-spitter-body-n-f0-v1', sheet7, 0, 192, 32, 48],
+  ['coast-sac-spitter-body-n-f1-v1', sheet7, 32, 192, 32, 48],
+  ['coast-sac-spitter-body-n-f2-v1', sheet7, 64, 192, 32, 48],
+  ['coast-sac-spitter-body-n-f3-v1', sheet7, 96, 192, 32, 48],
+  ['coast-sac-spitter-body-n-f4-v1', sheet7, 128, 192, 32, 48],
+  ['coast-sac-spitter-corpse-e-v1', sheet7, 0, 240, 48, 32],
+  ['coast-salt-dazed-body-e-f0-v1', sheet8, 0, 0, 32, 48],
+  ['coast-salt-dazed-body-e-f1-v1', sheet8, 32, 0, 32, 48],
+  ['coast-salt-dazed-body-e-f2-v1', sheet8, 64, 0, 32, 48],
+  ['coast-salt-dazed-body-e-f3-v1', sheet8, 96, 0, 32, 48],
+  ['coast-salt-dazed-body-e-f4-v1', sheet8, 128, 0, 32, 48],
+  ['coast-salt-dazed-body-se-f0-v1', sheet8, 0, 48, 32, 48],
+  ['coast-salt-dazed-body-se-f1-v1', sheet8, 32, 48, 32, 48],
+  ['coast-salt-dazed-body-se-f2-v1', sheet8, 64, 48, 32, 48],
+  ['coast-salt-dazed-body-se-f3-v1', sheet8, 96, 48, 32, 48],
+  ['coast-salt-dazed-body-se-f4-v1', sheet8, 128, 48, 32, 48],
+  ['coast-salt-dazed-body-s-f0-v1', sheet8, 0, 96, 32, 48],
+  ['coast-salt-dazed-body-s-f1-v1', sheet8, 32, 96, 32, 48],
+  ['coast-salt-dazed-body-s-f2-v1', sheet8, 64, 96, 32, 48],
+  ['coast-salt-dazed-body-s-f3-v1', sheet8, 96, 96, 32, 48],
+  ['coast-salt-dazed-body-s-f4-v1', sheet8, 128, 96, 32, 48],
+  ['coast-salt-dazed-body-ne-f0-v1', sheet8, 0, 144, 32, 48],
+  ['coast-salt-dazed-body-ne-f1-v1', sheet8, 32, 144, 32, 48],
+  ['coast-salt-dazed-body-ne-f2-v1', sheet8, 64, 144, 32, 48],
+  ['coast-salt-dazed-body-ne-f3-v1', sheet8, 96, 144, 32, 48],
+  ['coast-salt-dazed-body-ne-f4-v1', sheet8, 128, 144, 32, 48],
+  ['coast-salt-dazed-body-n-f0-v1', sheet8, 0, 192, 32, 48],
+  ['coast-salt-dazed-body-n-f1-v1', sheet8, 32, 192, 32, 48],
+  ['coast-salt-dazed-body-n-f2-v1', sheet8, 64, 192, 32, 48],
+  ['coast-salt-dazed-body-n-f3-v1', sheet8, 96, 192, 32, 48],
+  ['coast-salt-dazed-body-n-f4-v1', sheet8, 128, 192, 32, 48],
+  ['coast-salt-dazed-corpse-e-v1', sheet8, 0, 240, 48, 32],
+  ['coast-tide-chaser-body-e-f0-v1', sheet9, 0, 0, 32, 48],
+  ['coast-tide-chaser-body-e-f1-v1', sheet9, 32, 0, 32, 48],
+  ['coast-tide-chaser-body-e-f2-v1', sheet9, 64, 0, 32, 48],
+  ['coast-tide-chaser-body-e-f3-v1', sheet9, 96, 0, 32, 48],
+  ['coast-tide-chaser-body-e-f4-v1', sheet9, 128, 0, 32, 48],
+  ['coast-tide-chaser-body-se-f0-v1', sheet9, 0, 48, 32, 48],
+  ['coast-tide-chaser-body-se-f1-v1', sheet9, 32, 48, 32, 48],
+  ['coast-tide-chaser-body-se-f2-v1', sheet9, 64, 48, 32, 48],
+  ['coast-tide-chaser-body-se-f3-v1', sheet9, 96, 48, 32, 48],
+  ['coast-tide-chaser-body-se-f4-v1', sheet9, 128, 48, 32, 48],
+  ['coast-tide-chaser-body-s-f0-v1', sheet9, 0, 96, 32, 48],
+  ['coast-tide-chaser-body-s-f1-v1', sheet9, 32, 96, 32, 48],
+  ['coast-tide-chaser-body-s-f2-v1', sheet9, 64, 96, 32, 48],
+  ['coast-tide-chaser-body-s-f3-v1', sheet9, 96, 96, 32, 48],
+  ['coast-tide-chaser-body-s-f4-v1', sheet9, 128, 96, 32, 48],
+  ['coast-tide-chaser-body-ne-f0-v1', sheet9, 0, 144, 32, 48],
+  ['coast-tide-chaser-body-ne-f1-v1', sheet9, 32, 144, 32, 48],
+  ['coast-tide-chaser-body-ne-f2-v1', sheet9, 64, 144, 32, 48],
+  ['coast-tide-chaser-body-ne-f3-v1', sheet9, 96, 144, 32, 48],
+  ['coast-tide-chaser-body-ne-f4-v1', sheet9, 128, 144, 32, 48],
+  ['coast-tide-chaser-body-n-f0-v1', sheet9, 0, 192, 32, 48],
+  ['coast-tide-chaser-body-n-f1-v1', sheet9, 32, 192, 32, 48],
+  ['coast-tide-chaser-body-n-f2-v1', sheet9, 64, 192, 32, 48],
+  ['coast-tide-chaser-body-n-f3-v1', sheet9, 96, 192, 32, 48],
+  ['coast-tide-chaser-body-n-f4-v1', sheet9, 128, 192, 32, 48],
+  ['coast-tide-chaser-corpse-e-v1', sheet9, 0, 240, 48, 32],
+  ['coast-tide-ritualist-body-e-f0-v1', sheet10, 0, 0, 32, 48],
+  ['coast-tide-ritualist-body-e-f1-v1', sheet10, 32, 0, 32, 48],
+  ['coast-tide-ritualist-body-e-f2-v1', sheet10, 64, 0, 32, 48],
+  ['coast-tide-ritualist-body-e-f3-v1', sheet10, 96, 0, 32, 48],
+  ['coast-tide-ritualist-body-e-f4-v1', sheet10, 128, 0, 32, 48],
+  ['coast-tide-ritualist-body-se-f0-v1', sheet10, 0, 48, 32, 48],
+  ['coast-tide-ritualist-body-se-f1-v1', sheet10, 32, 48, 32, 48],
+  ['coast-tide-ritualist-body-se-f2-v1', sheet10, 64, 48, 32, 48],
+  ['coast-tide-ritualist-body-se-f3-v1', sheet10, 96, 48, 32, 48],
+  ['coast-tide-ritualist-body-se-f4-v1', sheet10, 128, 48, 32, 48],
+  ['coast-tide-ritualist-body-s-f0-v1', sheet10, 0, 96, 32, 48],
+  ['coast-tide-ritualist-body-s-f1-v1', sheet10, 32, 96, 32, 48],
+  ['coast-tide-ritualist-body-s-f2-v1', sheet10, 64, 96, 32, 48],
+  ['coast-tide-ritualist-body-s-f3-v1', sheet10, 96, 96, 32, 48],
+  ['coast-tide-ritualist-body-s-f4-v1', sheet10, 128, 96, 32, 48],
+  ['coast-tide-ritualist-body-ne-f0-v1', sheet10, 0, 144, 32, 48],
+  ['coast-tide-ritualist-body-ne-f1-v1', sheet10, 32, 144, 32, 48],
+  ['coast-tide-ritualist-body-ne-f2-v1', sheet10, 64, 144, 32, 48],
+  ['coast-tide-ritualist-body-ne-f3-v1', sheet10, 96, 144, 32, 48],
+  ['coast-tide-ritualist-body-ne-f4-v1', sheet10, 128, 144, 32, 48],
+  ['coast-tide-ritualist-body-n-f0-v1', sheet10, 0, 192, 32, 48],
+  ['coast-tide-ritualist-body-n-f1-v1', sheet10, 32, 192, 32, 48],
+  ['coast-tide-ritualist-body-n-f2-v1', sheet10, 64, 192, 32, 48],
+  ['coast-tide-ritualist-body-n-f3-v1', sheet10, 96, 192, 32, 48],
+  ['coast-tide-ritualist-body-n-f4-v1', sheet10, 128, 192, 32, 48],
+  ['coast-tide-ritualist-corpse-e-v1', sheet10, 0, 240, 48, 32],
+  ['coast-salt-hulk-body-e-f0-v1', sheet11, 0, 0, 32, 48],
+  ['coast-salt-hulk-body-e-f1-v1', sheet11, 32, 0, 32, 48],
+  ['coast-salt-hulk-body-e-f2-v1', sheet11, 64, 0, 32, 48],
+  ['coast-salt-hulk-body-e-f3-v1', sheet11, 96, 0, 32, 48],
+  ['coast-salt-hulk-body-e-f4-v1', sheet11, 128, 0, 32, 48],
+  ['coast-salt-hulk-body-se-f0-v1', sheet11, 0, 48, 32, 48],
+  ['coast-salt-hulk-body-se-f1-v1', sheet11, 32, 48, 32, 48],
+  ['coast-salt-hulk-body-se-f2-v1', sheet11, 64, 48, 32, 48],
+  ['coast-salt-hulk-body-se-f3-v1', sheet11, 96, 48, 32, 48],
+  ['coast-salt-hulk-body-se-f4-v1', sheet11, 128, 48, 32, 48],
+  ['coast-salt-hulk-body-s-f0-v1', sheet11, 0, 96, 32, 48],
+  ['coast-salt-hulk-body-s-f1-v1', sheet11, 32, 96, 32, 48],
+  ['coast-salt-hulk-body-s-f2-v1', sheet11, 64, 96, 32, 48],
+  ['coast-salt-hulk-body-s-f3-v1', sheet11, 96, 96, 32, 48],
+  ['coast-salt-hulk-body-s-f4-v1', sheet11, 128, 96, 32, 48],
+  ['coast-salt-hulk-body-ne-f0-v1', sheet11, 0, 144, 32, 48],
+  ['coast-salt-hulk-body-ne-f1-v1', sheet11, 32, 144, 32, 48],
+  ['coast-salt-hulk-body-ne-f2-v1', sheet11, 64, 144, 32, 48],
+  ['coast-salt-hulk-body-ne-f3-v1', sheet11, 96, 144, 32, 48],
+  ['coast-salt-hulk-body-ne-f4-v1', sheet11, 128, 144, 32, 48],
+  ['coast-salt-hulk-body-n-f0-v1', sheet11, 0, 192, 32, 48],
+  ['coast-salt-hulk-body-n-f1-v1', sheet11, 32, 192, 32, 48],
+  ['coast-salt-hulk-body-n-f2-v1', sheet11, 64, 192, 32, 48],
+  ['coast-salt-hulk-body-n-f3-v1', sheet11, 96, 192, 32, 48],
+  ['coast-salt-hulk-body-n-f4-v1', sheet11, 128, 192, 32, 48],
+  ['coast-salt-hulk-corpse-e-v1', sheet11, 0, 240, 48, 32],
+  ['coast-mercenary-scout-body-e-f0-v1', sheet12, 0, 0, 32, 48],
+  ['coast-mercenary-scout-body-e-f1-v1', sheet12, 32, 0, 32, 48],
+  ['coast-mercenary-scout-body-e-f2-v1', sheet12, 64, 0, 32, 48],
+  ['coast-mercenary-scout-body-e-f3-v1', sheet12, 96, 0, 32, 48],
+  ['coast-mercenary-scout-body-e-f4-v1', sheet12, 128, 0, 32, 48],
+  ['coast-mercenary-scout-body-se-f0-v1', sheet12, 0, 48, 32, 48],
+  ['coast-mercenary-scout-body-se-f1-v1', sheet12, 32, 48, 32, 48],
+  ['coast-mercenary-scout-body-se-f2-v1', sheet12, 64, 48, 32, 48],
+  ['coast-mercenary-scout-body-se-f3-v1', sheet12, 96, 48, 32, 48],
+  ['coast-mercenary-scout-body-se-f4-v1', sheet12, 128, 48, 32, 48],
+  ['coast-mercenary-scout-body-s-f0-v1', sheet12, 0, 96, 32, 48],
+  ['coast-mercenary-scout-body-s-f1-v1', sheet12, 32, 96, 32, 48],
+  ['coast-mercenary-scout-body-s-f2-v1', sheet12, 64, 96, 32, 48],
+  ['coast-mercenary-scout-body-s-f3-v1', sheet12, 96, 96, 32, 48],
+  ['coast-mercenary-scout-body-s-f4-v1', sheet12, 128, 96, 32, 48],
+  ['coast-mercenary-scout-body-ne-f0-v1', sheet12, 0, 144, 32, 48],
+  ['coast-mercenary-scout-body-ne-f1-v1', sheet12, 32, 144, 32, 48],
+  ['coast-mercenary-scout-body-ne-f2-v1', sheet12, 64, 144, 32, 48],
+  ['coast-mercenary-scout-body-ne-f3-v1', sheet12, 96, 144, 32, 48],
+  ['coast-mercenary-scout-body-ne-f4-v1', sheet12, 128, 144, 32, 48],
+  ['coast-mercenary-scout-body-n-f0-v1', sheet12, 0, 192, 32, 48],
+  ['coast-mercenary-scout-body-n-f1-v1', sheet12, 32, 192, 32, 48],
+  ['coast-mercenary-scout-body-n-f2-v1', sheet12, 64, 192, 32, 48],
+  ['coast-mercenary-scout-body-n-f3-v1', sheet12, 96, 192, 32, 48],
+  ['coast-mercenary-scout-body-n-f4-v1', sheet12, 128, 192, 32, 48],
+  ['coast-mercenary-scout-corpse-e-v1', sheet12, 0, 240, 48, 32],
+  ['coast-mercenary-assault-body-e-f0-v1', sheet13, 0, 0, 32, 48],
+  ['coast-mercenary-assault-body-e-f1-v1', sheet13, 32, 0, 32, 48],
+  ['coast-mercenary-assault-body-e-f2-v1', sheet13, 64, 0, 32, 48],
+  ['coast-mercenary-assault-body-e-f3-v1', sheet13, 96, 0, 32, 48],
+  ['coast-mercenary-assault-body-e-f4-v1', sheet13, 128, 0, 32, 48],
+  ['coast-mercenary-assault-body-se-f0-v1', sheet13, 0, 48, 32, 48],
+  ['coast-mercenary-assault-body-se-f1-v1', sheet13, 32, 48, 32, 48],
+  ['coast-mercenary-assault-body-se-f2-v1', sheet13, 64, 48, 32, 48],
+  ['coast-mercenary-assault-body-se-f3-v1', sheet13, 96, 48, 32, 48],
+  ['coast-mercenary-assault-body-se-f4-v1', sheet13, 128, 48, 32, 48],
+  ['coast-mercenary-assault-body-s-f0-v1', sheet13, 0, 96, 32, 48],
+  ['coast-mercenary-assault-body-s-f1-v1', sheet13, 32, 96, 32, 48],
+  ['coast-mercenary-assault-body-s-f2-v1', sheet13, 64, 96, 32, 48],
+  ['coast-mercenary-assault-body-s-f3-v1', sheet13, 96, 96, 32, 48],
+  ['coast-mercenary-assault-body-s-f4-v1', sheet13, 128, 96, 32, 48],
+  ['coast-mercenary-assault-body-ne-f0-v1', sheet13, 0, 144, 32, 48],
+  ['coast-mercenary-assault-body-ne-f1-v1', sheet13, 32, 144, 32, 48],
+  ['coast-mercenary-assault-body-ne-f2-v1', sheet13, 64, 144, 32, 48],
+  ['coast-mercenary-assault-body-ne-f3-v1', sheet13, 96, 144, 32, 48],
+  ['coast-mercenary-assault-body-ne-f4-v1', sheet13, 128, 144, 32, 48],
+  ['coast-mercenary-assault-body-n-f0-v1', sheet13, 0, 192, 32, 48],
+  ['coast-mercenary-assault-body-n-f1-v1', sheet13, 32, 192, 32, 48],
+  ['coast-mercenary-assault-body-n-f2-v1', sheet13, 64, 192, 32, 48],
+  ['coast-mercenary-assault-body-n-f3-v1', sheet13, 96, 192, 32, 48],
+  ['coast-mercenary-assault-body-n-f4-v1', sheet13, 128, 192, 32, 48],
+  ['coast-mercenary-assault-corpse-e-v1', sheet13, 0, 240, 48, 32],
+  ['coast-mercenary-support-body-e-f0-v1', sheet14, 0, 0, 32, 48],
+  ['coast-mercenary-support-body-e-f1-v1', sheet14, 32, 0, 32, 48],
+  ['coast-mercenary-support-body-e-f2-v1', sheet14, 64, 0, 32, 48],
+  ['coast-mercenary-support-body-e-f3-v1', sheet14, 96, 0, 32, 48],
+  ['coast-mercenary-support-body-e-f4-v1', sheet14, 128, 0, 32, 48],
+  ['coast-mercenary-support-body-se-f0-v1', sheet14, 0, 48, 32, 48],
+  ['coast-mercenary-support-body-se-f1-v1', sheet14, 32, 48, 32, 48],
+  ['coast-mercenary-support-body-se-f2-v1', sheet14, 64, 48, 32, 48],
+  ['coast-mercenary-support-body-se-f3-v1', sheet14, 96, 48, 32, 48],
+  ['coast-mercenary-support-body-se-f4-v1', sheet14, 128, 48, 32, 48],
+  ['coast-mercenary-support-body-s-f0-v1', sheet14, 0, 96, 32, 48],
+  ['coast-mercenary-support-body-s-f1-v1', sheet14, 32, 96, 32, 48],
+  ['coast-mercenary-support-body-s-f2-v1', sheet14, 64, 96, 32, 48],
+  ['coast-mercenary-support-body-s-f3-v1', sheet14, 96, 96, 32, 48],
+  ['coast-mercenary-support-body-s-f4-v1', sheet14, 128, 96, 32, 48],
+  ['coast-mercenary-support-body-ne-f0-v1', sheet14, 0, 144, 32, 48],
+  ['coast-mercenary-support-body-ne-f1-v1', sheet14, 32, 144, 32, 48],
+  ['coast-mercenary-support-body-ne-f2-v1', sheet14, 64, 144, 32, 48],
+  ['coast-mercenary-support-body-ne-f3-v1', sheet14, 96, 144, 32, 48],
+  ['coast-mercenary-support-body-ne-f4-v1', sheet14, 128, 144, 32, 48],
+  ['coast-mercenary-support-body-n-f0-v1', sheet14, 0, 192, 32, 48],
+  ['coast-mercenary-support-body-n-f1-v1', sheet14, 32, 192, 32, 48],
+  ['coast-mercenary-support-body-n-f2-v1', sheet14, 64, 192, 32, 48],
+  ['coast-mercenary-support-body-n-f3-v1', sheet14, 96, 192, 32, 48],
+  ['coast-mercenary-support-body-n-f4-v1', sheet14, 128, 192, 32, 48],
+  ['coast-mercenary-support-corpse-e-v1', sheet14, 0, 240, 48, 32],
+  ['coast-recovery-leader-body-e-f0-v1', sheet15, 0, 0, 32, 48],
+  ['coast-recovery-leader-body-e-f1-v1', sheet15, 32, 0, 32, 48],
+  ['coast-recovery-leader-body-e-f2-v1', sheet15, 64, 0, 32, 48],
+  ['coast-recovery-leader-body-e-f3-v1', sheet15, 96, 0, 32, 48],
+  ['coast-recovery-leader-body-e-f4-v1', sheet15, 128, 0, 32, 48],
+  ['coast-recovery-leader-body-se-f0-v1', sheet15, 0, 48, 32, 48],
+  ['coast-recovery-leader-body-se-f1-v1', sheet15, 32, 48, 32, 48],
+  ['coast-recovery-leader-body-se-f2-v1', sheet15, 64, 48, 32, 48],
+  ['coast-recovery-leader-body-se-f3-v1', sheet15, 96, 48, 32, 48],
+  ['coast-recovery-leader-body-se-f4-v1', sheet15, 128, 48, 32, 48],
+  ['coast-recovery-leader-body-s-f0-v1', sheet15, 0, 96, 32, 48],
+  ['coast-recovery-leader-body-s-f1-v1', sheet15, 32, 96, 32, 48],
+  ['coast-recovery-leader-body-s-f2-v1', sheet15, 64, 96, 32, 48],
+  ['coast-recovery-leader-body-s-f3-v1', sheet15, 96, 96, 32, 48],
+  ['coast-recovery-leader-body-s-f4-v1', sheet15, 128, 96, 32, 48],
+  ['coast-recovery-leader-body-ne-f0-v1', sheet15, 0, 144, 32, 48],
+  ['coast-recovery-leader-body-ne-f1-v1', sheet15, 32, 144, 32, 48],
+  ['coast-recovery-leader-body-ne-f2-v1', sheet15, 64, 144, 32, 48],
+  ['coast-recovery-leader-body-ne-f3-v1', sheet15, 96, 144, 32, 48],
+  ['coast-recovery-leader-body-ne-f4-v1', sheet15, 128, 144, 32, 48],
+  ['coast-recovery-leader-body-n-f0-v1', sheet15, 0, 192, 32, 48],
+  ['coast-recovery-leader-body-n-f1-v1', sheet15, 32, 192, 32, 48],
+  ['coast-recovery-leader-body-n-f2-v1', sheet15, 64, 192, 32, 48],
+  ['coast-recovery-leader-body-n-f3-v1', sheet15, 96, 192, 32, 48],
+  ['coast-recovery-leader-body-n-f4-v1', sheet15, 128, 192, 32, 48],
+  ['coast-recovery-leader-corpse-e-v1', sheet15, 0, 240, 48, 32],
+  ['coast-blockade-sentry-body-e-f0-v1', sheet16, 0, 0, 32, 48],
+  ['coast-blockade-sentry-body-e-f1-v1', sheet16, 32, 0, 32, 48],
+  ['coast-blockade-sentry-body-e-f2-v1', sheet16, 64, 0, 32, 48],
+  ['coast-blockade-sentry-body-e-f3-v1', sheet16, 96, 0, 32, 48],
+  ['coast-blockade-sentry-body-e-f4-v1', sheet16, 128, 0, 32, 48],
+  ['coast-blockade-sentry-body-se-f0-v1', sheet16, 0, 48, 32, 48],
+  ['coast-blockade-sentry-body-se-f1-v1', sheet16, 32, 48, 32, 48],
+  ['coast-blockade-sentry-body-se-f2-v1', sheet16, 64, 48, 32, 48],
+  ['coast-blockade-sentry-body-se-f3-v1', sheet16, 96, 48, 32, 48],
+  ['coast-blockade-sentry-body-se-f4-v1', sheet16, 128, 48, 32, 48],
+  ['coast-blockade-sentry-body-s-f0-v1', sheet16, 0, 96, 32, 48],
+  ['coast-blockade-sentry-body-s-f1-v1', sheet16, 32, 96, 32, 48],
+  ['coast-blockade-sentry-body-s-f2-v1', sheet16, 64, 96, 32, 48],
+  ['coast-blockade-sentry-body-s-f3-v1', sheet16, 96, 96, 32, 48],
+  ['coast-blockade-sentry-body-s-f4-v1', sheet16, 128, 96, 32, 48],
+  ['coast-blockade-sentry-body-ne-f0-v1', sheet16, 0, 144, 32, 48],
+  ['coast-blockade-sentry-body-ne-f1-v1', sheet16, 32, 144, 32, 48],
+  ['coast-blockade-sentry-body-ne-f2-v1', sheet16, 64, 144, 32, 48],
+  ['coast-blockade-sentry-body-ne-f3-v1', sheet16, 96, 144, 32, 48],
+  ['coast-blockade-sentry-body-ne-f4-v1', sheet16, 128, 144, 32, 48],
+  ['coast-blockade-sentry-body-n-f0-v1', sheet16, 0, 192, 32, 48],
+  ['coast-blockade-sentry-body-n-f1-v1', sheet16, 32, 192, 32, 48],
+  ['coast-blockade-sentry-body-n-f2-v1', sheet16, 64, 192, 32, 48],
+  ['coast-blockade-sentry-body-n-f3-v1', sheet16, 96, 192, 32, 48],
+  ['coast-blockade-sentry-body-n-f4-v1', sheet16, 128, 192, 32, 48],
+  ['coast-blockade-sentry-corpse-e-v1', sheet16, 0, 240, 48, 32],
+  ['coast-blockade-patrol-body-e-f0-v1', sheet17, 0, 0, 32, 48],
+  ['coast-blockade-patrol-body-e-f1-v1', sheet17, 32, 0, 32, 48],
+  ['coast-blockade-patrol-body-e-f2-v1', sheet17, 64, 0, 32, 48],
+  ['coast-blockade-patrol-body-e-f3-v1', sheet17, 96, 0, 32, 48],
+  ['coast-blockade-patrol-body-e-f4-v1', sheet17, 128, 0, 32, 48],
+  ['coast-blockade-patrol-body-se-f0-v1', sheet17, 0, 48, 32, 48],
+  ['coast-blockade-patrol-body-se-f1-v1', sheet17, 32, 48, 32, 48],
+  ['coast-blockade-patrol-body-se-f2-v1', sheet17, 64, 48, 32, 48],
+  ['coast-blockade-patrol-body-se-f3-v1', sheet17, 96, 48, 32, 48],
+  ['coast-blockade-patrol-body-se-f4-v1', sheet17, 128, 48, 32, 48],
+  ['coast-blockade-patrol-body-s-f0-v1', sheet17, 0, 96, 32, 48],
+  ['coast-blockade-patrol-body-s-f1-v1', sheet17, 32, 96, 32, 48],
+  ['coast-blockade-patrol-body-s-f2-v1', sheet17, 64, 96, 32, 48],
+  ['coast-blockade-patrol-body-s-f3-v1', sheet17, 96, 96, 32, 48],
+  ['coast-blockade-patrol-body-s-f4-v1', sheet17, 128, 96, 32, 48],
+  ['coast-blockade-patrol-body-ne-f0-v1', sheet17, 0, 144, 32, 48],
+  ['coast-blockade-patrol-body-ne-f1-v1', sheet17, 32, 144, 32, 48],
+  ['coast-blockade-patrol-body-ne-f2-v1', sheet17, 64, 144, 32, 48],
+  ['coast-blockade-patrol-body-ne-f3-v1', sheet17, 96, 144, 32, 48],
+  ['coast-blockade-patrol-body-ne-f4-v1', sheet17, 128, 144, 32, 48],
+  ['coast-blockade-patrol-body-n-f0-v1', sheet17, 0, 192, 32, 48],
+  ['coast-blockade-patrol-body-n-f1-v1', sheet17, 32, 192, 32, 48],
+  ['coast-blockade-patrol-body-n-f2-v1', sheet17, 64, 192, 32, 48],
+  ['coast-blockade-patrol-body-n-f3-v1', sheet17, 96, 192, 32, 48],
+  ['coast-blockade-patrol-body-n-f4-v1', sheet17, 128, 192, 32, 48],
+  ['coast-blockade-patrol-corpse-e-v1', sheet17, 0, 240, 48, 32],
+  ['coast-blockade-sergeant-body-e-f0-v1', sheet18, 0, 0, 32, 48],
+  ['coast-blockade-sergeant-body-e-f1-v1', sheet18, 32, 0, 32, 48],
+  ['coast-blockade-sergeant-body-e-f2-v1', sheet18, 64, 0, 32, 48],
+  ['coast-blockade-sergeant-body-e-f3-v1', sheet18, 96, 0, 32, 48],
+  ['coast-blockade-sergeant-body-e-f4-v1', sheet18, 128, 0, 32, 48],
+  ['coast-blockade-sergeant-body-se-f0-v1', sheet18, 0, 48, 32, 48],
+  ['coast-blockade-sergeant-body-se-f1-v1', sheet18, 32, 48, 32, 48],
+  ['coast-blockade-sergeant-body-se-f2-v1', sheet18, 64, 48, 32, 48],
+  ['coast-blockade-sergeant-body-se-f3-v1', sheet18, 96, 48, 32, 48],
+  ['coast-blockade-sergeant-body-se-f4-v1', sheet18, 128, 48, 32, 48],
+  ['coast-blockade-sergeant-body-s-f0-v1', sheet18, 0, 96, 32, 48],
+  ['coast-blockade-sergeant-body-s-f1-v1', sheet18, 32, 96, 32, 48],
+  ['coast-blockade-sergeant-body-s-f2-v1', sheet18, 64, 96, 32, 48],
+  ['coast-blockade-sergeant-body-s-f3-v1', sheet18, 96, 96, 32, 48],
+  ['coast-blockade-sergeant-body-s-f4-v1', sheet18, 128, 96, 32, 48],
+  ['coast-blockade-sergeant-body-ne-f0-v1', sheet18, 0, 144, 32, 48],
+  ['coast-blockade-sergeant-body-ne-f1-v1', sheet18, 32, 144, 32, 48],
+  ['coast-blockade-sergeant-body-ne-f2-v1', sheet18, 64, 144, 32, 48],
+  ['coast-blockade-sergeant-body-ne-f3-v1', sheet18, 96, 144, 32, 48],
+  ['coast-blockade-sergeant-body-ne-f4-v1', sheet18, 128, 144, 32, 48],
+  ['coast-blockade-sergeant-body-n-f0-v1', sheet18, 0, 192, 32, 48],
+  ['coast-blockade-sergeant-body-n-f1-v1', sheet18, 32, 192, 32, 48],
+  ['coast-blockade-sergeant-body-n-f2-v1', sheet18, 64, 192, 32, 48],
+  ['coast-blockade-sergeant-body-n-f3-v1', sheet18, 96, 192, 32, 48],
+  ['coast-blockade-sergeant-body-n-f4-v1', sheet18, 128, 192, 32, 48],
+  ['coast-blockade-sergeant-corpse-e-v1', sheet18, 0, 240, 48, 32],
+];
 
 let loaded: Promise<Map<string, HTMLCanvasElement>> | null = null;
-/** Decode all sample PNGs once; the canvases are copied into each view's atlas, so they stay valid across remounts. */
+/** Decode each sheet once, then restore the original frame canvases and anchors.
+ * A failed cold load clears the complete candidate so an ordinary retry decodes again. */
 export function loadCoastAssets(): Promise<Map<string, HTMLCanvasElement>> {
-  loaded ??= Promise.all(Object.entries(COAST_ASSET_URLS).map(([id, url]) => new Promise<[string, HTMLCanvasElement]>((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => {
-      try {
-        const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
-        const g = c.getContext('2d'); if (!g) throw new Error('Canvas 2D unavailable');
-        g.drawImage(img, 0, 0); resolve([id, c]);
-      } catch (error) { reject(new Error(`Coast asset failed to prepare: ${id}`, { cause: error })); }
-    };
-    img.onerror = () => reject(new Error(`Coast asset failed to decode: ${id}`));
-    img.src = url;
-  }))).then(entries => new Map(entries)).catch(error => { loaded = null; throw error; });
+  loaded ??= (async () => {
+    const images = new Map(await Promise.all([...new Set(frames.map(f => f[1]))].map(url =>
+      new Promise<[string, HTMLImageElement]>((resolve, reject) => {
+        const img = new Image(); img.onload = () => resolve([url, img]);
+        img.onerror = () => reject(new Error('Coast sheet failed to decode')); img.src = url;
+      }))));
+    const result = new Map<string, HTMLCanvasElement>();
+    for (const [id, url, x, y, w, h] of frames) {
+      const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+      const g = canvas.getContext('2d'); if (!g) throw new Error('Canvas 2D unavailable');
+      try { g.drawImage(images.get(url)!, x, y, w, h, 0, 0, w, h); }
+      catch (error) { throw new Error(`Coast asset failed to prepare: ${id}`, { cause: error }); }
+      result.set(id, canvas);
+    }
+    return result;
+  })().catch(error => { loaded = null; throw error; });
   return loaded;
 }

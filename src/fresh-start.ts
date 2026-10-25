@@ -19,25 +19,32 @@ import type { HideoutRuntime, Result } from './hideout-runtime/contract';
 export const RESET_COPY_KEY = 'escape-bincov.reset-copy.v1';
 type CopyStorage = () => D.StorageLike;
 
-/** A complete current-version record (v5, expansion v3) equal to a new player's, keeping only the volume setting. */
+/**
+ * A complete current-version record (v8, profile v3, expansion v3, enemy rules off until the first enemy raid) equal to
+ * a new player's, keeping only the volume setting.
+ */
 export function freshStartRecord(volume: number, now: number): SessionRecord {
   const profile = D.newSave(); profile.settings.volume = volume;
   // The fresh record is already past the station-boundary upgrade, as after SaveSession.enableRpg.
   const expansion = newExpansion(now);
   upgradeToRpg(expansion, now);
-  return { format: 'escape-bincov-session', version: 5, revision: 1, savedAt: now, profile, raid: null, terminal: null,
-    legacyBackup: null, migrationBackup: null, expansion, systemsBackup: null, perksBackup: null };
+  return { format: 'escape-bincov-session', version: 8, revision: 1, savedAt: now, profile, raid: null, terminal: null,
+    legacyBackup: null, migrationBackup: null, gunsBackup: null, expansion, systemsBackup: null, perksBackup: null };
 }
 /** Portable backup text for the import pipeline; encoding validates the record with the strict session decoder. */
 export function freshStartText(volume: number, now: number): string { return encodeRecoveryBackup(freshStartRecord(volume, now)); }
 
-/** Owned goods per item and relief flag, wherever they sit: stash, bag, safe, the equipped gun and its magazine. */
+/**
+ * Owned goods per item and relief flag, wherever they sit: stash, bag, safe, the equipped gun and its magazine. A gun
+ * with anything installed is listed with its parts, so a fresh start (factory guns only) never equals it.
+ */
 function goods(p: D.SaveDataV1): string {
   const totals = new Map<string, number>();
   const add = (id: string, relief: boolean, qty: number) => { if (qty > 0) totals.set(`${id}:${relief}`, (totals.get(`${id}:${relief}`) ?? 0) + qty); };
-  for (const inv of [p.stash, p.bag, p.safe]) for (const item of inv.items) add(item.id, !!item.relief, item.qty);
+  const gun = (id: string, state: D.Item['gun'] | null) => state?.parts.length ? `${id}+${D.gunKey(state)}` : id;
+  for (const inv of [p.stash, p.bag, p.safe]) for (const item of inv.items) add(gun(item.id, item.gun), !!item.relief, item.qty);
   const weapon = p.equipment.weapon, ammo = weapon ? D.WEAPONS[weapon]?.ammo : null;
-  if (weapon) add(weapon, p.equipment.relief, 1);
+  if (weapon) add(gun(weapon, p.equipment.gun), p.equipment.relief, 1);
   if (ammo) { add(ammo, true, p.equipment.ammoRelief); add(ammo, false, p.equipment.ammo - p.equipment.ammoRelief); }
   return JSON.stringify([...totals].sort(([a], [b]) => a.localeCompare(b)));
 }

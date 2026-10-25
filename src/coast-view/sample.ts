@@ -49,7 +49,8 @@ export async function startCoastSample(paused = false): Promise<boolean> {
     // Loaded on demand: esbuild still inlines the modules, but the app's module graph (and Node tests) never import PNGs.
     // The mall samples are optional: without them the mall floors keep the generic placeholder pipeline.
     if (p.get('art') !== 'placeholder') [opts.art, opts.mallArt] = await Promise.all([
-      import('./assets').then(m => m.loadCoastAssets()),
+      // The hurt and recovery frames (#75) are optional too: without them a blow keeps the idle body.
+      import('./assets').then(m => m.loadCoastAssets()).then(art => import('./pose-assets').then(m => m.withPoses(art)).catch(error => { console.error(error); return art; })),
       isMallWorld(app.expansion?.raid?.worldVersion) ? import('./mall-art-load').then(m => m.loadMallAssets()).catch(error => { console.error(error); return null; }) : null,
     ]);
     created = test ? createTestCoastHost(app, saveSession, location.search) : createCoastRaidHost(app, saveSession);

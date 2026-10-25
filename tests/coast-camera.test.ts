@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { AIM_LEAD, CAMERA_HOLD, PRECISE_LEAD, aimLead, pointerLead, snapAxis, stepLead, type AxisHold } from '../src/coast-view/camera';
+import { AIM_LEAD, CAMERA_HOLD, EDGE_FADE, PRECISE_LEAD, aimLead, leadRoom, pointerLead, snapAxis, stepLead, type AxisHold, type CameraBounds, type Lead } from '../src/coast-view/camera';
 
 // Playtest F-04: while walking, the player trembled 1 world px on screen (round(p) - round(camF) flips with the two
 // fractions). The replay below is the host loop after the fix: frame i starts at its vsync plus U(0..J ms) of
@@ -208,4 +208,172 @@ test('mouse look-ahead follows the pointer on screen, never the aim, so a still 
     const want = pointerLead(qx, qy, true), aim = (m: number) => Math.atan2(qy + m * want.uy, qx + m * want.ux);
     for (const m of [0, want.m * .3, want.m, want.m * 2]) assert.ok(Math.abs(aim(m) - Math.atan2(qy, qx)) < 1e-12);
   }
+});
+
+// #80 (found by the gunsmith M0-07 scope prototype): where the camera meets the map edge, the clamp held one axis of the
+// precise look-ahead while the other kept easing, and a still pointer's aim turned for about a second (8.4 degrees at
+// 1280 x 720 on the range's firing line). The replay below is scene.ts camera() and aimFromClient() for a standing
+// player (the follow has settled) at the scale of 1280 x 720 (a 768 x 432 world px view at 5/3) and of 1920 x 1080
+// (960 x 540 at 2), on the coast map (72 x 52 tiles, no margin past its edge) and on the resident building's second
+// floor (12 x 10 tiles, 96 px margin, 40 more on top), which is narrower than the view: the camera's x stays at the
+// midpoint there. Bounds as CoastView.camBounds gives them; `edge: false` is the old rule.
+const COAST = { w: 2304, h: 1664, pad: 0 }, FLOOR = { w: 384, h: 320, pad: 96 };
+const VIEWS = [{ name: '1280x720', w: 768, h: 432, s: 5 / 3 }, { name: '1920x1080', w: 960, h: 540, s: 2 }];
+type View = typeof VIEWS[number];
+type At = { x: number; y: number };
+const boundsOf = (m: typeof COAST, v: View): CameraBounds => ({ x0: -m.pad, x1: m.w + m.pad - v.w, y0: -m.pad - (m.pad ? 40 : 0), y1: m.h + m.pad - v.h });
+const wrap = (a: number) => Math.atan2(Math.sin(a), Math.cos(a));
+function edgeScene(view: View, player: At, edge = true, map = COAST) {
+  const bd = boundsOf(map, view);
+  const chest = { x: player.x, y: player.y - 22 }, camF = { x: chest.x - view.w / 2, y: chest.y - view.h / 2 };
+  const clamp = (v: number, lo: number, hi: number) => lo > hi ? (lo + hi) / 2 : Math.min(hi, Math.max(lo, v));
+  const want = (at: At) => pointerLead(at.x - view.w / 2, at.y - view.h / 2, true);
+  const room = (w: Lead) => edge ? leadRoom(camF.x, camF.y, w.ux, w.uy, bd) : Infinity;
+  const cam = (l: Lead) => ({ x: clamp(camF.x + l.m * l.ux, bd.x0, bd.x1), y: clamp(camF.y + l.m * l.uy, bd.y0, bd.y1) });
+  const s = {
+    bd, camF, lead: { m: 0, ux: 1, uy: 0 } as Lead,
+    cam: () => cam(s.lead),
+    /** The canvas point (world px) `r` css px from the drawn chest toward theta. */
+    pointer(theta: number, r: number): At { const c = cam(s.lead); return { x: chest.x - c.x + Math.cos(theta) * r / view.s, y: chest.y - c.y + Math.sin(theta) * r / view.s }; },
+    /** aimFromClient: through the camera this pointer is about to ask for. */
+    aim(at: At) { const w = want(at), c = cam(stepLead(s.lead, w, 0, room(w))); return Math.atan2(at.y + c.y - chest.y, at.x + c.x - chest.x); },
+    /** camera(): one 60 Hz frame of the look-ahead (the settled follow stays put). */
+    frame(at: At) { const w = want(at); s.lead = stepLead(s.lead, w, 1 - Math.exp(-8 / 60), room(w)); },
+  };
+  return s;
+}
+/** test:shooting step a in the replay, right button held: settle on theta0, turn 45 degrees, then 90 more, and take the
+ *  largest change of the aim over the 1.2 s after each turn. `each` sees every frame. */
+function edgeDrift(s: ReturnType<typeof edgeScene>, theta0: number, r: number, each = () => {}) {
+  let worst = 0, theta = theta0;
+  const hold = (at: At, frames: number, a0?: number) => {
+    for (let i = 0; i < frames; i++) { const a = s.aim(at); if (a0 !== undefined) worst = Math.max(worst, Math.abs(wrap(a - a0))); s.frame(at); each(); }
+  };
+  hold(s.pointer(theta, r), 120);
+  for (const turn of [45, 90]) {
+    theta += turn * Math.PI / 180;
+    const at = s.pointer(theta, r);
+    hold(at, 72, s.aim(at)); hold(at, 48);
+  }
+  return worst;
+}
+const SPOTS = (v: View) => [
+  { name: 'firing line (the follow is held by the west edge)', at: { x: 208, y: 1104 }, map: COAST },
+  { name: '24 px inside the edge', at: { x: v.w / 2 + 24, y: 1104 }, map: COAST },
+  { name: 'open ground', at: { x: 1150, y: 1128 }, map: COAST },
+  { name: 'middle of the resident second floor', at: { x: 192, y: 160 }, map: FLOOR },
+];
+
+test('the mouse look-ahead stops on the map edge, so a still pointer keeps its aim there as in open ground (#80)', () => {
+  for (const v of VIEWS) for (const spot of SPOTS(v)) {
+    let worst = 0, control = 0;
+    for (const r of [100, 300]) for (let d = 0; d < 360; d += 15) {
+      const s = edgeScene(v, spot.at, true, spot.map);
+      // The camera never rests on a bound with a look-ahead on it: the clamp never holds an axis of the look-ahead.
+      worst = Math.max(worst, edgeDrift(s, d * Math.PI / 180, r, () => {
+        if (s.lead.m === 0) return;
+        const x = s.camF.x + s.lead.m * s.lead.ux, y = s.camF.y + s.lead.m * s.lead.uy;
+        assert.ok(x >= s.bd.x0 - 1e-9 && x <= s.bd.x1 + 1e-9 && y >= s.bd.y0 - 1e-9 && y <= s.bd.y1 + 1e-9, `${v.name} ${spot.name}: look-ahead past the edge`);
+      }));
+      control = Math.max(control, edgeDrift(edgeScene(v, spot.at, false, spot.map), d * Math.PI / 180, r));
+    }
+    assert.ok(worst < 1e-9, `${v.name}, ${spot.name}: the aim turned ${worst} rad under a still pointer`);
+    // Control: the old rule turns it wherever an edge holds the camera, never in open ground. Over these 48 cases the
+    // replay's worst at 1280 x 720 / 1920 x 1080 is 16.3 / 3.9 degrees on the firing line, 3.9 / 3.1 degrees 24 px inside
+    // the edge and 8.2 / 7.3 degrees on the resident floor. For test:shooting a-edge's first case (from 0 degrees, 300 px)
+    // it gives 8.47 / 3.69 degrees, where the browser measured 8.47 / 3.64-3.74 on main f73e9de.
+    if (spot.name === 'open ground') assert.ok(control < 1e-9, `${v.name}: open ground control ${control}`);
+    else assert.ok(control > .05, `${v.name}, ${spot.name}: control only ${(control * 180 / Math.PI).toFixed(2)} degrees`);
+  }
+});
+
+test('open ground keeps the #39 look-ahead bit for bit; inside the edge it reaches the edge and stops there', () => {
+  for (const v of VIEWS) {
+    // Open ground: the same lengths and camera, frame by frame, with and without the edge rule.
+    const now = edgeScene(v, { x: 1150, y: 1128 }), old = edgeScene(v, { x: 1150, y: 1128 }, false);
+    const seen: Lead[] = [], seenOld: Lead[] = [];
+    for (let d = 0; d < 360; d += 30) { edgeDrift(now, d * Math.PI / 180, 300, () => seen.push(now.lead)); edgeDrift(old, d * Math.PI / 180, 300, () => seenOld.push(old.lead)); }
+    assert.deepEqual(seen, seenOld);
+    assert.ok(Math.max(...seen.map(l => l.m)) > 60, 'open ground looks ahead');
+    // 24 px inside the west edge, the pointer far out to the north-west (the last turn of the drift case from south): the
+    // look-ahead carries the camera onto the edge and stops there, 24 px west, shorter than the length it asks for.
+    const s = edgeScene(v, { x: v.w / 2 + 24, y: 1104 }), free = edgeScene(v, { x: v.w / 2 + 24, y: 1104 }, false);
+    edgeDrift(s, Math.PI / 2, 300); edgeDrift(free, Math.PI / 2, 300);
+    assert.ok(Math.abs(s.cam().x - s.bd.x0) < 1e-3, `${v.name}: the camera stopped at x ${s.cam().x}`);
+    assert.ok(Math.abs(s.lead.m * s.lead.ux + 24) < 1e-3 && s.lead.uy < 0, `${v.name}: look-ahead ${JSON.stringify(s.lead)}`);
+    assert.ok(s.lead.m < free.lead.m - 10, `${v.name}: ${s.lead.m} px, the old rule ${free.lead.m}`);
+    // On the firing line the follow camera is already held by the edge: no room, so no look-ahead at all.
+    const line = edgeScene(v, { x: 208, y: 1104 });
+    edgeDrift(line, 0, 300, () => assert.equal(line.lead.m, 0));
+  }
+});
+
+test('leadRoom: the length a look-ahead may take before the camera meets a bound, fading near the bounds', () => {
+  const b: CameraBounds = { x0: 0, x1: 1536, y0: 0, y1: 1232 };
+  assert.equal(EDGE_FADE, 3);
+  assert.equal(leadRoom(700, 700, 1, 0, b), 836, 'far from the bounds: up to the bound along the line');
+  assert.ok(leadRoom(700, 700, .6, .8, b) > PRECISE_LEAD.x, 'open ground never limits the look-ahead');
+  assert.equal(leadRoom(24, 866, -1, 0, b), 24);
+  assert.ok(Math.abs(leadRoom(24, 866, -.6, -.8, b) - 40) < 1e-12, 'the nearer bound along the line');
+  assert.ok(Math.abs(leadRoom(24, 20, -.6, -.8, b) - 25) < 1e-12, 'whichever axis meets its bound first');
+  // 24 px from the west bound, any look-ahead keeps 3 x 24 px at most, also along the edge and away from it.
+  assert.equal(leadRoom(24, 866, 1, 0, b), 72);
+  assert.equal(leadRoom(24, 866, 0, -1, b), 72);
+  assert.equal(leadRoom(0, 866, -1, 0, b), 0, 'on the bound, looking out');
+  assert.equal(leadRoom(0, 866, 1, 0, b), 0, 'on the bound, looking in');
+  // A follow camera beyond a bound (the player drawn off centre) leaves no room in any direction, along the edge too.
+  for (const [ux, uy] of [[1, 0], [0, 1], [0, -1], [.6, .8], [-1, 0]]) assert.equal(leadRoom(-176, 866, ux, uy, b), 0);
+  // A view wider than the map (the camera held at the midpoint) leaves none either.
+  assert.equal(leadRoom(10, 866, 0, 1, { x0: 30, x1: 20, y0: 0, y1: 1232 }), 0);
+});
+
+test('walking toward the edge with the right button held, the look-ahead runs out smoothly instead of dropping at once', () => {
+  // The plain stop at the edge (no EDGE_FADE), for the control: no room once the follow camera reaches a bound.
+  const plain = (fx: number, fy: number, ux: number, uy: number, b: CameraBounds) => {
+    const axis = (f: number, u: number, lo: number, hi: number) => !(f >= lo && f <= hi) ? 0 : u > 0 ? (hi - f) / u : u < 0 ? (f - lo) / -u : Infinity;
+    return Math.min(axis(fx, ux, b.x0, b.x1), axis(fy, uy, b.y0, b.y1));
+  };
+  /** Largest camera step (world px) in one 60 Hz frame while the player walks west from x 900 to the firing line, the
+   *  pointer still on screen 300 css px from the centring point toward `deg`, the look-ahead settled before the walk. */
+  const walk = (v: View, deg: number, speed: number, room: typeof leadRoom) => {
+    const bd = boundsOf(COAST, v), k = 1 - Math.exp(-8 / 60), chestY = 1104 - 22;
+    const want = pointerLead(Math.cos(deg * Math.PI / 180) * 300 / v.s, Math.sin(deg * Math.PI / 180) * 300 / v.s, true);
+    const clamp = (x: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, x));
+    let px = 900, camF = { x: px - v.w / 2, y: chestY - v.h / 2 }, lead: Lead = { m: 0, ux: 1, uy: 0 }, last: At | null = null, worst = 0;
+    for (let i = 0; i < 60 * 12; i++) {
+      if (i >= 120) px = Math.max(208, px - speed / 60);
+      camF = { x: camF.x + (px - v.w / 2 - camF.x) * k, y: camF.y + (chestY - v.h / 2 - camF.y) * k };
+      lead = stepLead(lead, want, k, room(camF.x, camF.y, want.ux, want.uy, bd));
+      const cam = { x: clamp(camF.x + lead.m * lead.ux, bd.x0, bd.x1), y: clamp(camF.y + lead.m * lead.uy, bd.y0, bd.y1) };
+      if (last && i > 120) worst = Math.max(worst, Math.hypot(cam.x - last.x, cam.y - last.y));
+      last = cam;
+    }
+    assert.equal(lead.m, 0, 'no look-ahead left on the firing line');
+    return worst;
+  };
+  for (const v of VIEWS) for (const speed of [78.4, 112, 190]) for (let deg = 0; deg < 360; deg += 30) {
+    // The follow camera moves at most speed / 60 a frame and the look-ahead shrinks at most EDGE_FADE times as fast.
+    const step = walk(v, deg, speed, leadRoom), most = (1 + EDGE_FADE) * speed / 60;
+    assert.ok(step <= most + 1e-9, `${v.name}, ${speed} px/s, pointer at ${deg} degrees: the camera stepped ${step.toFixed(2)} px (most ${most.toFixed(2)})`);
+    // Control: the plain stop drops the whole look-ahead in one frame unless the pointer looks at the edge it walks into.
+    const control = walk(v, deg, speed, plain);
+    if (deg < 90 || deg > 270) assert.ok(control > 40, `${v.name}, ${speed} px/s, ${deg} degrees: control stepped only ${control.toFixed(1)} px`);
+  }
+});
+
+test('stepLead: no room keeps #39 bit for bit; the room caps the eased length and the length a turn keeps at once', () => {
+  // The #39 step (main f73e9de), for the bit-for-bit comparison.
+  const old = (prev: Lead, want: Lead, k: number) => { const along = Math.max(0, prev.ux * want.ux + prev.uy * want.uy) * prev.m; return { m: along + (want.m - along) * k, ux: want.ux, uy: want.uy }; };
+  const r = rng(80), dir = () => { const a = r() * 2 * Math.PI; return { ux: Math.cos(a), uy: Math.sin(a) }; };
+  for (let i = 0; i < 20000; i++) {
+    const prev = { m: r() * 90, ...dir() }, want = { m: r() * 90, ...dir() }, k = i % 7 ? r() : 0;
+    assert.deepEqual(stepLead(prev, want, k), old(prev, want, k));
+    // A room the step does not reach changes nothing either (open ground).
+    assert.deepEqual(stepLead(prev, want, k, 90 + r() * 1e4), old(prev, want, k));
+  }
+  const east = { ux: 1, uy: 0 };
+  assert.deepEqual(stepLead({ m: 0, ...east }, { m: 60, ...east }, .5, 20), { m: 10, ...east }, 'eases toward the room, not past it');
+  assert.deepEqual(stepLead({ m: 50, ...east }, { m: 60, ...east }, .5, 20), { m: 20, ...east }, 'a length over the room drops to it at once');
+  assert.deepEqual(stepLead({ m: 50, ...east }, { m: 10, ...east }, .5, 20), { m: 15, ...east }, 'and eases on from there');
+  assert.deepEqual(stepLead({ m: 50, ux: 0, uy: 1 }, { m: 60, ...east }, .5, 0), { m: 0, ...east }, 'no room, no look-ahead');
 });

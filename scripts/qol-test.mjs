@@ -91,7 +91,7 @@ async function suite(viewport, touch = false) {
     await step('departure shows missing matching ammo and safe-only treatment without blocking light deployment', async () => {
       await page.evaluate(() => {
         const {app,persist,setOverlay}=window.__bincov;
-        app.save.equipment = {weapon:'pistol',ammo:8,ammoRelief:0,relief:false};
+        app.save.equipment = {weapon:'pistol',weaponUid:'fixture-pistol',gun:{parts:[],devices:{laser:false,light:false}},ammo:8,ammoRelief:0,relief:false};
         app.save.bag.items=[{uid:'warning-shell',id:'shell',qty:4,x:0,y:0}];
         app.save.safe.items=[{uid:'warning-bandage',id:'bandage',qty:1,x:0,y:0}]; persist();setOverlay('');
       });
@@ -110,7 +110,7 @@ async function suite(viewport, touch = false) {
     await step('loot rotation and quantity previews cancel cleanly; split and partial merge preserve remainders', async () => {
       await page.evaluate(() => {
         const { app, persist } = window.__bincov;
-        app.save.equipment = {weapon:'pistol',ammo:8,ammoRelief:0,relief:false};
+        app.save.equipment = {weapon:'pistol',weaponUid:'fixture-pistol',gun:{parts:[],devices:{laser:false,light:false}},ammo:8,ammoRelief:0,relief:false};
         app.save.bag.items = [{ uid: 'qol-ammo', id: 'ammo9', qty: 35, x: 0, y: 0 }]; app.save.safe.items = []; persist();
       });
       await page.locator('#seed').fill('42'); await action('deploy').click();

@@ -119,7 +119,7 @@ function bench(perks: readonly PerkId[], layered: boolean, version: Version = 3)
     assert.ok(saves.initialize()); state.state = 'hideout'; assert.ok(saves.enableRpg());
     const ticket = saves.prepareExpansionMutation(d => { d.expansion.growth.permanent = { ...MAXED }; d.expansion.growth.perks = [...perks]; });
     assert.ok(ticket); assert.equal(saves.commitExpansionMutation(ticket), 'committed');
-    assert.ok(saves.beginRun(42, layered)); state.state = 'run';
+    assert.ok(saves.beginRun(42, layered, { legacyEnemies: true })); state.state = 'run';
     const r = new CoastRaidRuntime(state, saves), driver = createRuntimeTestDriver(r, '?test=1');
     assert.equal(r.layered?.raid?.version ?? null, layered ? 3 : null); assert.deepEqual(state.expansion!.growth.perks, perks);
     driver.freezeAI(true); driver.placePlayer(LANE, 0); driver.weapon('pistol');

@@ -9,7 +9,7 @@ import { build } from 'esbuild';
 
 const options = {
   entryPoints: ['src/main.ts'], bundle: true, write: false, minify: true, target: 'es2020', format: 'iife', legalComments: 'inline',
-  loader: { '.png': 'dataurl', '.css': 'text' }, define: { 'process.env.NODE_ENV': '"production"' },
+  loader: { '.png': 'dataurl', '.webp': 'dataurl', '.css': 'text' }, define: { 'process.env.NODE_ENV': '"production"' },
 };
 
 /** Builds the game script in memory. Each override replaces a whole top-level esbuild option. */

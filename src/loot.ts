@@ -30,9 +30,9 @@ export function firstAvailableSlot(to: D.Inventory, item: D.Item): { x: number; 
     const def = D.ITEMS[item.id]; if (!def) return null;
     const stack = to.items.find(target => target.uid !== item.uid && target.id === item.id && !!target.relief === !!item.relief && target.qty < def.stack);
     if (stack) return { x: stack.x, y: stack.y, rotated: !!stack.rotated };
-    const orientations = def.w === def.h ? [!!item.rotated] : [!!item.rotated, !item.rotated];
+    const size = D.itemSize({ id: item.id, gun: item.gun }), orientations = size.w === size.h ? [!!item.rotated] : [!!item.rotated, !item.rotated];
     for (const rotated of orientations) for (let y = 0; y < to.h; y++) for (let x = 0; x < to.w; x++)
-        if (D.fits(to, item.id, x, y, undefined, rotated)) return { x, y, rotated };
+        if (D.fits(to, item, x, y, undefined, rotated)) return { x, y, rotated };
     return null;
 }
 
@@ -54,7 +54,7 @@ function placement(from: D.Inventory, to: D.Inventory, uid: string, x: number, y
     if (x < 0 || y < 0 || x + size.w > to.w || y + size.h > to.h) return '物品超出目标格子边界。';
     if (from.items.filter(item => item.uid === uid).length !== 1 ||
         (from !== to && to.items.some(item => item.uid === uid))) return '物品标识冲突，无法移动。';
-    if (D.fits(to, selected.id, x, y, from === to && qty === selected.qty ? uid : undefined, rotated ?? !!selected.rotated)) return { kind: 'place' };
+    if (D.fits(to, selected, x, y, from === to && qty === selected.qty ? uid : undefined, rotated ?? !!selected.rotated)) return { kind: 'place' };
     const overlaps = to.items.filter(item => {
         if (item.uid === uid && qty === selected.qty) return false;
         const other = D.itemSize(item);
@@ -75,8 +75,8 @@ function placement(from: D.Inventory, to: D.Inventory, uid: string, x: number, y
     if (qty !== selected.qty) return '拆分物品不能交换，请选择空位。';
     const remaining = { ...from, items: from.items.filter(item => item.uid !== uid && (from !== to || item.uid !== target.uid)) };
     if (from === to) remaining.items.push(at(selected, x, y, rotated ?? !!selected.rotated));
-    const orientations = targetDef.w === targetDef.h ? [!!target.rotated] : [!!target.rotated, !target.rotated];
-    for (const direction of orientations) if (D.fits(remaining, target.id, selected.x, selected.y, undefined, direction))
+    const shape = D.itemSize({ id: target.id, gun: target.gun }), orientations = shape.w === shape.h ? [!!target.rotated] : [!!target.rotated, !target.rotated];
+    for (const direction of orientations) if (D.fits(remaining, target, selected.x, selected.y, undefined, direction))
         return { kind: 'swap', target, rotated: direction };
     return '原位置放不下交换物品，请腾出空间。';
 }

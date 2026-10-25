@@ -68,7 +68,7 @@ PR #7 导出的已结算备份封套 formatVersion = 2（profile = 2），活动
 
 ## 初次移动实现的本地验收结果（桌面回归修复前）
 
-环境为 Linux x64、Node 24.19.0、pnpm 11.25.0、Chromium 138.0.7204.0 / SwiftShader；仓库与 CI 仍固定 pnpm 11.19.0。当时单文件 HTML 为 **1,668,822 字节**，与原版精修基线相比约增加 65 KiB，未增加运行时请求。两个 HTML、两个 ZIP 与 SHA-256 清单由 `pnpm package` 生成；最新大小和哈希以 [发布清单](release-manifest.json) 为准。
+环境为 Linux x64、Node 24.19.0、pnpm 11.25.0、Chromium 138.0.7204.0 / SwiftShader；仓库与 CI 仍固定 pnpm 11.19.0。当时单文件 HTML 为 **1,668,822 字节**，与原版精修基线相比约增加 65 KiB，未增加运行时请求。两个 HTML、两个 ZIP 与 SHA-256 清单由 `pnpm package` 生成；最新大小和哈希以 [`main-latest` 发布页](https://github.com/xuys2025/escape-bincov/releases/tag/main-latest)的发布清单为准。
 
 | 检查 | 结果 | 证据 |
 | --- | --- | --- |

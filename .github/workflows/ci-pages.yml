@@ -42,15 +42,19 @@ jobs:
         run: pnpm test
       - name: CI selection and coverage safeguards
         run: pnpm check:ci
+      # The game files are not committed (check:ci rejects them): this build is the one every job tests, Pages
+      # deploys and the release job publishes.
       - name: Build and package
+        env:
+          # Recorded in release/release-manifest.json; on main this is the commit the release job publishes.
+          BINCOV_BUILD_COMMIT: ${{ github.sha }}
+          BINCOV_BUILD_RUN: ${{ github.run_id }}
         run: pnpm package
-      - name: Verify committed game matches source
-        run: git diff --exit-code -- dist/index.html 'start the game.html' release/Escape-Bincov-portable.zip release/Escape-Bincov-web.zip docs/release-manifest.json
       - name: Record shared artifact checksums
         run: |
           sha256sum dist/index.html 'start the game.html' \
             release/Escape-Bincov-portable.zip release/Escape-Bincov-web.zip \
-            docs/release-manifest.json > build-checksums.sha256
+            release/release-manifest.json > build-checksums.sha256
       - name: Select browser regression from validated main history
         id: scope
         env:
@@ -74,7 +78,7 @@ jobs:
             start the game.html
             release/Escape-Bincov-portable.zip
             release/Escape-Bincov-web.zip
-            docs/release-manifest.json
+            release/release-manifest.json
             build-checksums.sha256
           if-no-files-found: error
           retention-days: 1
@@ -165,6 +169,10 @@ jobs:
           curl --fail --location --retry 3 https://raw.githubusercontent.com/xuys2025/escape-bincov/07b1414da9f1ac4c3ad13a23ec914630ccbd7fbb/dist/index.html --output test-results/pre-m0.html
           # The last client before session v5 (perks): test:expansion checks it refuses v5 without overwriting it.
           curl --fail --location --retry 3 https://raw.githubusercontent.com/xuys2025/escape-bincov/44494eaccc45315dc0c5b36b9e66c4e92f463308/dist/index.html --output test-results/pre-perk.html
+          # The last client before session v6/v7 (enemy rules): test:expansion checks it refuses v8 without overwriting it.
+          curl --fail --location --retry 3 https://raw.githubusercontent.com/xuys2025/escape-bincov/30781f4497203103d7faee707f427f9e0d4f3055/dist/index.html --output test-results/pre-enemy.html
+          # The last client before session v8 (gun instances), main 67a7468, which writes v7: it must refuse v8 as well.
+          curl --fail --location --retry 3 https://raw.githubusercontent.com/xuys2025/escape-bincov/67a74688eef7e43563e61a2ebf86c26fe03ef8d4/dist/index.html --output test-results/pre-gunsmith.html
       - name: Run browser suites with timing evidence
         env:
           BROWSER_GROUP: ${{ matrix.group }}
@@ -263,3 +271,28 @@ jobs:
       - name: Deploy game
         id: deployment
         uses: actions/deploy-pages@v4
+
+  release:
+    # README's offline download: the same validated build as Pages, as the rolling main-latest prerelease.
+    name: Publish offline release
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Download validated game
+        uses: actions/download-artifact@v8
+        with:
+          name: built-game
+          digest-mismatch: error
+      - name: Verify release artifact checksums
+        run: sha256sum --check build-checksums.sha256
+      - name: Replace the main-latest release files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash scripts/ci/publish-release.sh main-latest

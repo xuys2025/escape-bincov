@@ -209,7 +209,7 @@ export function initializeMallRaid(state: ExpansionState, loadout: D.RunLoadout,
             for (const source of groupUnits.splice(0, 2)) if (D.addItem(inventory, source.id, source.qty, false, false, true, () => entityUid({ version: 2, runId: loadout.runId! }, serial++))) throw new Error('商场容器容量不足。');
             layer.containers.push({ id: `crate-${serial++}`, runId: loadout.runId!, name: '商场周转箱', kind: 'crate', ...p, inventory });
         }
-        for (const source of groupUnits) layer.loot.push({ uid: entityUid({ version: 2, runId: loadout.runId! }, serial++), id: source.id, qty: source.qty, relief: false, ...nextPoint() });
+        for (const source of groupUnits) layer.loot.push({ uid: entityUid({ version: 2, runId: loadout.runId! }, serial++), id: source.id, qty: source.qty, relief: false, ...nextPoint(), ...D.factoryGun(source.id) });
     }
     state.base.location = 'raid'; state.base.restSeconds = 0; state.base.energizedGranted = false;
     // As in initializeBuildingRaid: a v3 raid only from a v3 expansion.

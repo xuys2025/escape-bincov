@@ -5,6 +5,7 @@ import { SESSION_KEY, decodeSession } from '../src/recovery-store';
 import { CoastRaidRuntime, emptyIntent } from '../src/raid-runtime/runtime';
 import { createRuntimeTestDriver } from '../src/raid-runtime/test-support';
 import { generateRunBase } from '../src/world';
+import { factoryGun } from '../src/domain';
 
 function fixture(layout: 0 | 1 | 2 | 3, legacy = false) {
   const data = new Map<string, string>(); let fail = false, writes = 0;
@@ -15,7 +16,7 @@ function fixture(layout: 0 | 1 | 2 | 3, legacy = false) {
   if (legacy) {
     const record = JSON.parse(data.get(SESSION_KEY)!);
     record.raid.worldVersion = 'coast-v1'; delete record.raid.containers;
-    record.raid.loot = generateRunBase(42).loot.map((l, i) => ({ ...l, uid: `loot-${i}`, relief: false }));
+    record.raid.loot = generateRunBase(42).loot.map((l, i) => ({ ...l, uid: `loot-${i}`, relief: false, ...factoryGun(l.id) }));
     data.set(SESSION_KEY, JSON.stringify(record));
   }
   state = createSessionState(); saves = new SaveSession(state, () => storage, undefined, () => 1800000000000);

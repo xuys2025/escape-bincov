@@ -1,0 +1,223 @@
+{
+  "startedAt": "2026-10-23T17:31:05.147Z",
+  "browser": "156.0.8078.48",
+  "entry": "dist/index.html",
+  "method": "Offline Chromium, real CDP mouse (1280x720) and multi-touch (844x390, DPR 2) on the 2.5D raid host, seed 42, layered coast map. Fixtures place the player and enemies, hand weapons and freeze AI.",
+  "steps": [
+    {
+      "id": "g",
+      "name": "a blow's flash and kick are drawn on slow frames",
+      "status": "passed",
+      "detail": {
+        "cases": [
+          {
+            "hz": 60,
+            "dir": "east",
+            "enemy": "scav enemy-2",
+            "flashFrames": 4,
+            "kickFrames": 4,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "111100000000000",
+            "kickByFrame": "111100000000000",
+            "bloodAlongBullet": [
+              -96,
+              -56,
+              -72,
+              -42,
+              -64,
+              -105
+            ]
+          },
+          {
+            "hz": 30,
+            "dir": "east",
+            "enemy": "scav enemy-2",
+            "flashFrames": 2,
+            "kickFrames": 2,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "11000000",
+            "kickByFrame": "11000000",
+            "bloodAlongBullet": [
+              -43,
+              -104,
+              -97,
+              -57,
+              -86,
+              -65
+            ]
+          },
+          {
+            "hz": 15,
+            "dir": "east",
+            "enemy": "scav enemy-2",
+            "flashFrames": 1,
+            "kickFrames": 1,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "1000",
+            "kickByFrame": "1000",
+            "bloodAlongBullet": [
+              -90,
+              -75,
+              -91,
+              -92,
+              -52,
+              -66
+            ]
+          },
+          {
+            "hz": 12,
+            "dir": "east",
+            "enemy": "scav enemy-2",
+            "flashFrames": 1,
+            "kickFrames": 1,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "100",
+            "kickByFrame": "100",
+            "bloodAlongBullet": [
+              -87,
+              -96,
+              -90,
+              -55,
+              -53,
+              -87
+            ]
+          },
+          {
+            "hz": 10,
+            "dir": "east",
+            "enemy": "scav enemy-2",
+            "flashFrames": 1,
+            "kickFrames": 1,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "100",
+            "kickByFrame": "100",
+            "bloodAlongBullet": [
+              -67,
+              -90,
+              -82,
+              -108,
+              -54,
+              -45
+            ]
+          },
+          {
+            "hz": 60,
+            "dir": "south",
+            "enemy": "scav enemy-2",
+            "flashFrames": 4,
+            "kickFrames": 4,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "0,2"
+            ],
+            "wantPx": "0,2",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "0,2"
+            },
+            "flashByFrame": "111100000000000",
+            "kickByFrame": "111100000000000",
+            "bloodAlongBullet": [
+              -52,
+              -40,
+              -52,
+              -50,
+              -35,
+              -49
+            ]
+          }
+        ]
+      },
+      "seconds": 0.1
+    },
+    {
+      "id": "h",
+      "name": "a critical hit turns the hit marker critical; each kill marker asks for one confirm sound",
+      "status": "passed",
+      "detail": {
+        "plain": {
+          "on": true,
+          "crit": false,
+          "kill": false,
+          "markT": 0.2,
+          "kills": 0
+        },
+        "crit": {
+          "on": true,
+          "crit": true,
+          "kill": false,
+          "markT": 0.3,
+          "kills": 0
+        },
+        "critKill": {
+          "on": true,
+          "crit": true,
+          "kill": true,
+          "markT": 0.42,
+          "kills": 1
+        },
+        "plainAgain": {
+          "on": true,
+          "crit": false,
+          "kill": false,
+          "markT": 0.2,
+          "kills": 1
+        },
+        "plainKill": {
+          "on": true,
+          "crit": false,
+          "kill": true,
+          "markT": 0.42,
+          "kills": 2
+        }
+      },
+      "seconds": 0
+    }
+  ]
+}

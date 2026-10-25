@@ -1,0 +1,144 @@
+{
+  "status": "PASS",
+  "scope": "Fifteen distinct roles deploy natively: first three, seed mod 5 = 0 boss, mod 5 = 1 fauna, mod 15 = 2 affected, mod 5 = 3 recovery with one existing cargo. Three blockade art roles still use valid saved fixtures.",
+  "htmlSha256": "35146fc8c291086ec656d218de8ff05c493a24ef70b32ab09cf6eba2ba51f953",
+  "note": "144 cases/136 screenshots ran before the final strict map/home validation guard. Final package has independent save-browser/portable, full performance and real-time natural checks; exact commit CI is tracked on PR81. Player observation uses an explicit driver; NPC AI, cargo and time remain live. Not a human/phone acceptance.",
+  "cases": 144,
+  "screenshots": 136,
+  "errors": [],
+  "external": [],
+  "nativeRecovery": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "scenario": "native-recovery-recovery-leader",
+      "population": 25,
+      "team": 4,
+      "carried": true,
+      "screenshot": "native-recovery-recovery-leader-1280.png"
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "scenario": "native-recovery-mercenary-scout",
+      "population": 25,
+      "team": 4,
+      "carried": false,
+      "screenshot": "native-recovery-mercenary-scout-1280.png"
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "scenario": "native-recovery-mercenary-assault",
+      "population": 25,
+      "team": 4,
+      "carried": false,
+      "screenshot": "native-recovery-mercenary-assault-1280.png"
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "scenario": "native-recovery-mercenary-support",
+      "population": 25,
+      "team": 4,
+      "carried": false,
+      "screenshot": "native-recovery-mercenary-support-1280.png"
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "scenario": "native-recovery-recovery-leader",
+      "population": 25,
+      "team": 4,
+      "carried": true,
+      "screenshot": "native-recovery-recovery-leader-1920.png"
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "scenario": "native-recovery-mercenary-scout",
+      "population": 25,
+      "team": 4,
+      "carried": false,
+      "screenshot": "native-recovery-mercenary-scout-1920.png"
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "scenario": "native-recovery-mercenary-assault",
+      "population": 25,
+      "team": 4,
+      "carried": false,
+      "screenshot": "native-recovery-mercenary-assault-1920.png"
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "scenario": "native-recovery-mercenary-support",
+      "population": 25,
+      "team": 4,
+      "carried": false,
+      "screenshot": "native-recovery-mercenary-support-1920.png"
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "scenario": "native-recovery-recovery-leader",
+      "population": 25,
+      "team": 4,
+      "carried": true,
+      "screenshot": "native-recovery-recovery-leader-844.png"
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "scenario": "native-recovery-mercenary-scout",
+      "population": 25,
+      "team": 4,
+      "carried": false,
+      "screenshot": "native-recovery-mercenary-scout-844.png"
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "scenario": "native-recovery-mercenary-assault",
+      "population": 25,
+      "team": 4,
+      "carried": false,
+      "screenshot": "native-recovery-mercenary-assault-844.png"
+    },
+    {
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "scenario": "native-recovery-mercenary-support",
+      "population": 25,
+      "team": 4,
+      "carried": false,
+      "screenshot": "native-recovery-mercenary-support-844.png"
+    }
+  ]
+}

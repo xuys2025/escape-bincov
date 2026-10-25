@@ -6,8 +6,10 @@ import { organizeStash, transferBagToStash } from '../src/inventory-actions';
 import { createSessionState, SaveSession, type ExpansionDraft } from '../src/session';
 import { SESSION_KEY, decodeSession } from '../src/recovery-store';
 import { RealHideoutRuntime } from '../src/hideout-runtime';
+import { factoryState } from '../src/gunsmith/instance';
 
-const item = (uid: string, id: string, x = 0, y = 0, qty = 1, relief = false): D.Item => ({ uid, id, x, y, qty, ...(relief ? { relief: true } : {}) });
+// A gun item is born a factory instance, as D.addItem makes one (record v6).
+const item = (uid: string, id: string, x = 0, y = 0, qty = 1, relief = false): D.Item => ({ uid, id, x, y, qty, ...(relief ? { relief: true } : {}), ...D.factoryGun(id) });
 const inv = (w: number, h: number, ...items: D.Item[]): D.Inventory => ({ w, h, items });
 function contents(...inventories: D.Inventory[]) {
     const totals: Record<string, number> = {};
@@ -86,7 +88,7 @@ test('bulk deposit is all-or-none even after a candidate partially merged a stac
 });
 test('bulk deposit keeps equipment and safe untouched, preserves remaining UIDs and does not merge relief into ordinary stock', () => {
     const profile = { bag: inv(4, 2, item('ammo', 'ammo9', 0, 0, 10), item('relief', 'ammo9', 1, 0, 12, true), item('gun', 'pistol', 2)), stash: inv(4, 2, item('stash-ammo', 'ammo9', 0, 0, 35)),
-        safe: inv(2, 2, item('safe', 'pearl')), equipment: { weapon: 'shotgun', ammo: 2, ammoRelief: 1, relief: true } };
+        safe: inv(2, 2, item('safe', 'pearl')), equipment: { weapon: 'shotgun', weaponUid: 'eq-shotgun', gun: factoryState(), ammo: 2, ammoRelief: 1, relief: true } };
     const before = structuredClone(profile), total = contents(profile.bag, profile.stash);
     assert.ok(transferBagToStash(profile)); assert.deepEqual(profile.bag.items, []); assert.deepEqual(profile.safe, before.safe); assert.deepEqual(profile.equipment, before.equipment);
     assert.deepEqual(contents(profile.bag, profile.stash), total); assert.equal(profile.stash.items.find(entry => entry.uid === 'ammo')!.qty, 5);
@@ -132,7 +134,7 @@ test('station batch actions respect stale-writer and active-raid guards, and ins
 test('station equipment rejection explains the occupied return space without losing a loaded gun or either ammo origin', () => {
     const f = station(); f.setup(d => {
         d.profile.bag.items = [item('new-gun', 'pistol')]; D.addItem(d.profile.bag, 'sample', 28);
-        d.profile.equipment = { weapon: 'pistol', ammo: 8, ammoRelief: 3, relief: true };
+        d.profile.equipment = { weapon: 'pistol', weaponUid: 'test-gun', gun: factoryState(), ammo: 8, ammoRelief: 3, relief: true };
     });
     const profile = structuredClone(f.state.save), raw = f.raw, writes = f.writes;
     const result = f.runtime.equip('bag', 'new-gun'); assert.ok(!result.ok); assert.equal(result.reason, 'space'); assert.match(result.message, /原武器及弹匣余弹/);

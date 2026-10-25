@@ -6,14 +6,21 @@ import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { findPath, lineOfSight } from '../src/world.ts';
+import { corridor, spacePath } from '../src/spatial.ts';
 import { ITEMS, fits } from '../src/domain.ts';
 import { browserOptions } from './browser-options.mjs';
 import { buyAffordable } from './inventory-actions.mjs';
 
 const minutes = Number(process.env.BINCOV_PLAY_MINUTES || 10);
 assert.ok(minutes >= 1 && minutes <= 60);
-const report = { htmlSha256: createHash('sha256').update(await readFile('dist/index.html')).digest('hex'), startedAt: new Date().toISOString(), minutes, methodology: 'Automated real-time session on the classic coast map (2.5D view). Test hook is read-only: no teleports, no clock changes, no changes to health, enemies, inventory or RNG. All actions use visible buttons and real keyboard/mouse, including E opening and native inventory drag for crates and corpses. This is not a human fun/balance evaluation.', containerLoot: { opened: [], transfers: [], threatenedClosures: 0 }, samples: [], outcomes: [], errors: [], externalRequests: [] };
-const out = resolve('test-results'); await mkdir(out, { recursive: true });
+const world = process.env.BINCOV_PLAY_WORLD || 'coast';
+const firstSeed = Number(process.env.BINCOV_PLAY_SEED || 42);
+assert.ok(Number.isInteger(firstSeed) && firstSeed > 0 && firstSeed <= 0xffffffff - 60);
+const entry = resolve(process.env.BINCOV_PLAY_ENTRY || 'dist/index.html');
+assert.ok(['coast', 'buildings'].includes(world), 'BINCOV_PLAY_WORLD must be coast or buildings');
+const report = { htmlSha256: createHash('sha256').update(await readFile(entry)).digest('hex'), entry, startedAt: new Date().toISOString(), minutes, world, firstSeed,
+  methodology: `Automated real-time session on ${world === 'coast' ? 'the classic coast' : 'the layered street with new enemy encounters'} (2.5D view). Test hook is read-only: no teleports, no clock changes, no changes to health, enemies, inventory or RNG. All actions use visible buttons and real keyboard/mouse, including E opening and native inventory drag for crates and corpses. This is not a human fun/balance evaluation.`, enemyPhases: {}, containerLoot: { opened: [], transfers: [], threatenedClosures: 0 }, samples: [], outcomes: [], errors: [], externalRequests: [] };
+const out = resolve(process.env.BINCOV_PLAY_OUT || 'test-results'); await mkdir(out, { recursive: true });
 const browser = await chromium.launch(browserOptions); report.browser = browser.version();
 const context = await browser.newContext({ viewport: { width: 1280, height: 720 }, offline: true });
 const page = await context.newPage();
@@ -21,7 +28,12 @@ page.on('pageerror', e => report.errors.push(e.message));
 context.on('request', r => { if (/^https?:/.test(r.url())) report.externalRequests.push(r.url()); });
 const action = (name, id) => page.locator(`[data-action="${name}"]${id ? `[data-id="${id}"]` : ''}`);
 const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
-let held = new Set(), runNumber = 0, goal = null, path = [], repathAt = 0, lastSample = 0;
+const space = s => ({ definition: s.map, doors: s.doors, highTide: s.high });
+const route = (s, to) => world === 'coast' ? findPath(s, to, s.high) : spacePath(space(s), s, to);
+const sight = (s, to) => world === 'coast' ? lineOfSight(s, to) : corridor(space(s), s, to, 'sight');
+let held = new Set(), runNumber = 0, goal = null, path = [], repathAt = 0, lastSample = 0, streetStep = 0;
+const streetApproach = [{ x:6.5*32,y:24.5*32 },{ x:20.5*32,y:24.5*32 }];
+report.observationPolicy = 'Before the first street windup: walk the authored public west/cross street, approach a visible new enemy, and wait for its real preparation before shooting it. No game-state mutations.';
 let visited = new Set(), lastPosition, stuckAt = Date.now(), lastHeal = 0;
 async function keys(next) {
   for (const key of held) if (!next.has(key)) await page.keyboard.up(key);
@@ -36,13 +48,14 @@ async function snapshot() {
     const b = h.lastBatch, f = b.frame, hud = f.hud, w = b.stamp.world, context = h.services.lootContext();
     const inventory = c => c.id === context?.containerId ? h.services.lootInventory({ runId: w.runId, mapId: w.mapId, kind: 'container', id: c.id }) : null;
     return { state: a.state, hp: hud.hp, bleeding: hud.bleeding, elapsed: b.stamp.simulationTime, high: hud.highTide,
-      kills: h.eventLog.filter(e => e.type === 'death' && e.detail.uid !== 'player').length,
+      map: { id: w.mapId, tile: b.map.tile, cells: b.map.cells, doors: b.map.doors, entries: b.map.entries }, doors: f.doors,
+      kills: h.eventLog.filter(e => e.type === 'death' && e.detail.uid !== 'player' && (e.detail.killer === undefined || e.detail.killer === 'player')).length,
       mag: hud.weapon.mag, reload: hud.weapon.reloading, cooldown: f.player.state.attackCooldown, x: f.player.x, y: f.player.y,
       exits: b.map.exits.map(e => ({ ...e.at, id: e.id, name: e.name })), loot: f.loot.map(l => ({ x: l.x, y: l.y, id: l.item })),
       overlay: h.panel, saveError: !!document.querySelector('.coast-sample [data-do="retry-save"], .coast-sample [data-do="retry-settlement"]'),
       lootContext: context, bag: a.loadout.bag,
       containers: f.containers.map(c => ({ id: c.id, kind: c.kind, x: c.x, y: c.y, items: c.totalQty, inventory: inventory(c) })),
-      enemies: f.actors.filter(e => e.alive).map(e => ({ x: e.x, y: e.y, id: e.kind })),
+      enemies: f.actors.filter(e => e.alive).map(e => ({ x: e.x, y: e.y, id: e.kind, tactics: e.tactics })),
       ammo: a.loadout.bag.items.filter(i => i.id === 'ammo9').reduce((sum, i) => sum + i.qty, 0),
       medical: a.loadout.bag.items.filter(i => ['medkit', 'bandage'].includes(i.id)).reduce((sum, i) => sum + i.qty, 0),
       pending: !!a.pendingSettlement };
@@ -64,7 +77,7 @@ async function lootOpenContainer(s) {
     report.containerLoot.opened.push({ run: runNumber, id: container.id, kind: container.kind, elapsed: s.elapsed });
     await page.screenshot({ path: resolve(out, `natural-play-container-${runNumber}-${report.containerLoot.opened.length}.png`) });
   }
-  if (s.hp < 60 || s.bleeding || s.enemies.some(e => dist(e, s) < 220 && lineOfSight(s, e))) {
+  if (s.hp < 60 || s.bleeding || s.enemies.some(e => dist(e, s) < 220 && sight(s, e))) {
     report.containerLoot.threatenedClosures++;
     visited.add(`${container.x},${container.y}`); goal = null;
     await page.keyboard.press('Escape'); return;
@@ -88,7 +101,7 @@ async function lootOpenContainer(s) {
   else { visited.add(`${container.x},${container.y}`); goal = null; await page.keyboard.press('Escape'); }
 }
 try {
-  await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs');
+  await page.goto(pathToFileURL(entry).href + '?test=1&entry=tabs');
   await action('enter').click();
   const start = Date.now(), deadline = start + minutes * 60000;
   while (Date.now() < deadline || (await snapshot()).state === 'run') {
@@ -118,14 +131,23 @@ try {
         if (!count) break;
         await items.first().dblclick(); if (await items.count() >= count) break;
       }
-      // The classic coast map: findPath and lineOfSight below navigate its collision.
-      await page.locator('#run-world').selectOption('coast');
-      await page.locator('#seed').fill(String(42 + runNumber++)); await action('deploy').click();
+      await page.locator('#run-world').selectOption(world);
+      await page.locator('#seed').fill(String(firstSeed + runNumber++)); await action('deploy').click();
       await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch, null, { timeout: 30000 });
-      goal = null; path = []; visited = new Set(); lastPosition = null; stuckAt = now;
+      goal = null; path = []; visited = new Set(); lastPosition = null; stuckAt = now; streetStep = 0;
       continue;
     }
     if (s.state !== 'run') throw new Error('Unexpected state ' + s.state);
+    for (const e of s.enemies.filter(e => e.tactics && dist(e, s) < 430 && sight(s, e))) {
+      const key = `${e.tactics.archetype}/${e.tactics.phase}`;
+      report.enemyPhases[key] = (report.enemyPhases[key] ?? 0) + 1;
+    }
+    // A street run may incidentally interact with stairs while looting. Its published landing is the route back;
+    // traversal remains native E and keyboard movement, never a fixture teleport.
+    if (world === 'buildings' && s.map.id !== 'coast') {
+      goal = s.map.entries[0]?.at ?? goal;
+      if (goal && dist(goal, s) < 35 && !s.overlay) { await keys(new Set()); await page.keyboard.press('e'); continue; }
+    }
     // A loot overlay keeps the world running. Finish or close it before combat input.
     if (s.overlay === 'loot') { await lootOpenContainer(s); continue; }
     if (s.overlay) {
@@ -140,30 +162,40 @@ try {
     }
     if (now - lastHeal > 1500 && s.medical && (s.hp < 70 || s.bleeding)) { await page.keyboard.press('q'); lastHeal = now; }
     if (s.mag === 0 && s.ammo && !s.reload) await page.keyboard.press('r');
-    const target = s.enemies.filter(e => dist(e, s) < 430 && lineOfSight(s, e)).sort((a, b) => dist(a, s) - dist(b, s))[0];
-    if (target && s.mag && !s.reload && s.cooldown <= 0) {
+    const target = s.enemies.filter(e => dist(e, s) < 430 && sight(s, e)).sort((a, b) => dist(a, s) - dist(b, s))[0];
+    const observedWindup = Object.keys(report.enemyPhases).some(key => key.endsWith('/windup'));
+    const waitingForTell = world === 'buildings' && !observedWindup;
+    if (target && !(waitingForTell && target.tactics) && s.mag && !s.reload && s.cooldown <= 0) {
       const { x, y } = await screenOf(target);
       if (x > 0 && x < 1280 && y > 0 && y < 720) await page.mouse.click(x, y, { delay: 40 });
     }
     const evacuate = now >= deadline || s.elapsed >= 550 || (s.hp < 35 && !s.medical) || (!s.mag && !s.ammo);
     if (evacuate) {
-      goal = [...s.exits].sort((a, b) => dist(a, s) - dist(b, s))[0];
+      goal = [...s.exits].sort((a, b) => dist(a, s) - dist(b, s))[0] ?? s.map.entries[0]?.at;
       if (dist(goal, s) < 43) {
         await keys(new Set()); await page.keyboard.down('e'); await page.waitForTimeout(3300); await page.keyboard.up('e'); continue;
       }
+    } else if (waitingForTell && s.map.id === 'coast' && streetStep < streetApproach.length) {
+      if(dist(streetApproach[streetStep],s)<35)streetStep++;
+      goal=streetApproach[Math.min(streetStep,streetApproach.length-1)];
+    } else if (waitingForTell && s.map.id === 'coast' && target?.tactics) {
+      const radius=Math.min(160,Math.max(28,target.tactics.range*.75)),bearing=Math.atan2(s.y-target.y,s.x-target.x);
+      const candidates=Array.from({length:8},(_,i)=>({x:target.x+Math.cos(bearing+i*Math.PI/4)*radius,y:target.y+Math.sin(bearing+i*Math.PI/4)*radius}));
+      goal=candidates.filter(p=>route(s,p).length).sort((a,b)=>dist(a,s)-dist(b,s))[0]??target;
+      if(dist(goal,s)<12){await keys(new Set());await page.waitForTimeout(120);continue;}
     } else if (!goal || dist(goal, s) < 35) {
       if (goal) {
         await keys(new Set()); await page.keyboard.press('e', { delay: 70 });
         if ((await snapshot()).overlay === 'loot') continue;
         visited.add(`${goal.x},${goal.y}`);
       }
-      const choices = [...s.containers.filter(c => c.items && (!s.high || findPath(s, c, s.high).length)).map(c => ({ ...c, container: true })), ...s.loot]
+      const choices = [...s.containers.filter(c => c.items && (world === 'coast' && !s.high || route(s, c).length)).map(c => ({ ...c, container: true })), ...s.loot]
         .filter(l => !visited.has(`${l.x},${l.y}`) && !s.enemies.some(e => dist(e, l) < 100));
       goal = choices.sort((a, b) => dist(a, s) * (a.container ? .55 : 1) - dist(b, s) * (b.container ? .55 : 1))[0] ?? s.exits[0];
     }
     if (!lastPosition || dist(lastPosition, s) > 10) { lastPosition = { x: s.x, y: s.y }; stuckAt = now; }
     if (now - stuckAt > 7000) { visited.add(`${goal.x},${goal.y}`); goal = null; stuckAt = now; await keys(new Set()); continue; }
-    if (now >= repathAt || !path.length) { path = findPath(s, goal, s.high); repathAt = now + 750; }
+    if (now >= repathAt || !path.length) { path = route(s, goal); repathAt = now + 750; }
     while (path.length && dist(path[0], s) < 12) path.shift();
     const point = path[0] ?? goal, next = new Set();
     if (point.x - s.x > 6) next.add('d'); if (point.x - s.x < -6) next.add('a');
@@ -177,6 +209,7 @@ try {
   await page.screenshot({ path: resolve(out, 'natural-play-end.png') });
   assert.deepEqual(report.errors, []); assert.deepEqual(report.externalRequests, []);
   assert.ok(report.containerLoot.transfers.length > 0, 'Natural play must visibly open a container and complete at least one native drag transfer');
+  if (world === 'buildings') assert.ok(Object.keys(report.enemyPhases).some(key => key.endsWith('/windup')), 'observe a new enemy preparing an attack during real play');
   report.status = 'passed'; report.finalStats = final.stats;
 } catch (error) { report.status = 'failed'; report.failure = error.stack; console.error(error); process.exitCode = 1; }
 finally {

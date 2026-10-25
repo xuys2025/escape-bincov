@@ -27,15 +27,15 @@ git rev-parse HEAD
 - 模块定位由 [CODEMAP](CODEMAP.md)维护，状态所有权与调用边界由 [ARCHITECTURE](ARCHITECTURE.md)维护；本手册不再复制源码职责表。新规则沿现有纯领域/Runtime边界实现，视图调用服务，不另造交易或结算路径。
 - 涉及存档、结算、迁移或库存时，先核对 [AGENTS 的存档约束](../AGENTS.md)：共同提交角色与世界、成功写入后发布、失败回滚/候选保留、重复重试与多窗口保护都须保住；不能通过换键、强制覆盖或忽略异常绕过。
 - 添加能捕捉实际风险的断言；修复保留有效反例。画面改动提供真实截图并标明测试夹具；文档默认中文，文案遵循 [COPY-GUIDE](COPY-GUIDE.md)，不因措辞调整改变存档 ID。
-- 保持单文件离线运行及原授权范围。生成 HTML、ZIP 和发布清单由正式打包更新，不手改；新增依赖说明必要性和许可，不提交凭据或真实玩家个人存档。
+- 保持单文件离线运行及原授权范围。HTML、ZIP 和发布清单是本地打包的生成物，不提交（[CI 说明](CI.md#构建与离线包发布)）；新增依赖说明必要性和许可，不提交凭据或真实玩家个人存档。
 
 ## 3. 环境与运行前提
 
 - Node.js 24；pnpm 版本以 [package.json](../package.json) 的 `packageManager` 为准，当前为11.19.0。`pnpm install --frozen-lockfile`；源不可达时可显式使用 `--registry=https://registry.npmjs.org`，无需重写锁文件。
-- `pnpm dev` 在 `http://127.0.0.1:4173` 提供刷新后重建；`pnpm package` 执行类型检查、构建、两种 ZIP 和 SHA-256 清单。浏览器脚本读取打包 HTML，源码改动后先重建，避免测试旧制品。游戏脚本的 esbuild 配置（loader、target、define）只在 [game-bundle.mjs](../scripts/game-bundle.mjs) 维护，正式构建与诊断共用：新资源类型的 loader 改这一处，诊断只在调用处覆盖压缩、探针等差异。
+- `pnpm dev` 在 `http://127.0.0.1:4173` 提供刷新后重建；`pnpm package` 执行类型检查、构建，并在 `release/` 写出两种 ZIP 和 SHA-256 清单。浏览器脚本读取打包 HTML，新检出或源码改动后先打包，避免测试旧制品或找不到文件。游戏脚本的 esbuild 配置（loader、target、define）只在 [game-bundle.mjs](../scripts/game-bundle.mjs) 维护，正式构建与诊断共用：新资源类型的 loader 改这一处，诊断只在调用处覆盖压缩、探针等差异。
 - Playwright 用 `pnpm exec playwright install chromium`；Linux 缺系统库时用 `pnpm exec playwright install --with-deps chromium`。浏览器选择统一见 [browser-options.mjs](../scripts/browser-options.mjs)：可设置 `BINCOV_CHROME`，`BINCOV_CHROME_ARGS` 为 JSON 字符串数组。
 - `test:portable` 在 Windows 用 .NET 解压，在 Linux/macOS 需要 Python 3。证据默认写入忽略的 `test-results/`；只将经过审核、具有长期价值的报告和截图提升到 `docs/`。
-- `test:expansion` 需要两份真实固定旧客户端：扩展前的 `test-results/pre-m0.html` 和 session v5 之前最后的 v4 客户端 `test-results/pre-perk.html`，准备方式见 [CI 工作流](../.github/workflows/ci-pages.yml)，脚本会核对哈希。`test:mobile-ux` 的另一项旧客户端检查仅在提供 `BINCOV_LEGACY_HTML` 时执行；不能拿当前 HTML 或不匹配旧包替代。
+- `test:expansion` 需要四份真实固定旧客户端：扩展前的 `test-results/pre-m0.html`、session v5 之前最后的 v4 客户端 `test-results/pre-perk.html`、session v6/v7（敌人规则）之前最后的 v5 客户端 `test-results/pre-enemy.html`（main `30781f4`），以及 session v8（枪械实例）之前最后的 v7 客户端 `test-results/pre-gunsmith.html`（main `67a7468`），准备方式见 [CI 工作流](../.github/workflows/ci-pages.yml)，脚本会核对哈希；本地可用 `git show <提交>:dist/index.html` 取同一文件。`test:mobile-ux` 的另一项旧客户端检查仅在提供 `BINCOV_LEGACY_HTML` 时执行；不能拿当前 HTML 或不匹配旧包替代。
 
 安装或浏览器失败时记录具体命令和错误。未运行成功不能记为通过，不得修改断言来掩盖环境故障。
 
@@ -70,9 +70,9 @@ git rev-parse HEAD
 
 CI的分组、前置和制品位置查 [CI.md](CI.md) 与 [实际工作流](../.github/workflows/ci-pages.yml)。新增检查按[检查导航的维护规则](CHECKS.md#唯一维护位置)更新元数据：新的 `test:*` 要么排进 CI，要么登记为手动套件，否则 CI 策略测试失败；风险、诊断与非 package 脚本也有覆盖检查。导航不改变现行 CI 执行策略。
 
-文档快速通道只在相同非文档内容已有成功主线完整回归证据时复用浏览器结果；本次单测、打包和制品一致性仍运行。策略不足回退全量，手动工作流始终全量。`Build and test` 接受的按策略跳过与异常跳过不同；只有主线验证成功后才能更新Pages，PR不发布，镜像所用检查名和发布契约保留。
+文档快速通道只在相同非文档内容已有成功主线完整回归证据时复用浏览器结果；本次单测和打包仍运行。策略不足回退全量，手动工作流始终全量。`Build and test` 接受的按策略跳过与异常跳过不同；只有主线验证成功后才能更新Pages和离线包，PR不发布，镜像所用检查名和发布契约保留。
 
-提交前完成对应检查、`git diff --check`和最终文件审阅。源码、打包或游玩说明变动后正式重新打包并提交相关生成物；遵守本地密钥检查和正常Git钩子，不用绕过参数。只暂存本任务文件，推到任务分支/原PR head；不直接推main、不强推、不自行合并，具体维护者授权除外。
+提交前完成对应检查、`git diff --check`和最终文件审阅。生成物不提交，同步 main 时遇到生成物冲突按 [CI 说明](CI.md#构建与离线包发布) 保留删除；遵守本地密钥检查和正常Git钩子，不用绕过参数。只暂存本任务文件，推到任务分支/原PR head；不直接推main、不强推、不自行合并，具体维护者授权除外。
 
 PR正文使用[仓库模板](../.github/pull_request_template.md)：说明问题、最终行为、实际验证、兼容边界和遗留，必要时附真实截图。长正文用文件配合`--body-file`，实现范围变化后更新原正文和标题。提交后核对准确head的CI并处理本任务引入的失败；“已提交”“已合并”“已上线”分别凭对应证据说明。
 

@@ -14,6 +14,8 @@ import { assertFrames, assertFallback, assertSupplyRefused, assertSupplyUsed, as
 import { skipOpening } from './yard-entry.mjs';
 import { readManagedTables, readPixiEvents } from './pixi-managed-gate.mjs';
 import { reportFilter, stepFilter } from './step-filter.mjs';
+/** The legacy key only ever held profiles up to v2: the same profile without gun fields (save v6 added them). */
+const legacyProfile = s => { const p = structuredClone(s); p.version = 2; delete p.equipment.weaponUid; delete p.equipment.gun; for (const inv of [p.stash, p.bag, p.safe]) for (const i of inv.items) delete i.gun; return p; };
 
 const out = resolve(process.argv.find(a => a.startsWith('--out='))?.slice(6) ?? 'test-results/station'); await mkdir(out, { recursive: true });
 // --html=<file> runs the same checks against another build (the saved pre-fix build for failure controls).
@@ -132,13 +134,13 @@ try {
     await page.waitForTimeout(1200);
     const g = await page.evaluate(() => ({ bincov: '__bincov' in window, station: '__station' in window, frame: getComputedStyle(document.querySelector('#frame')).visibility, quick: !!document.querySelector('#station-yard').shadowRoot.querySelector('[data-quick="gear"]') }));
     assert.deepEqual(g, { bincov: false, station: false, frame: 'hidden', quick: true });
-    const r = await record(); assert.equal(r.version, 5); assert.equal(r.expansion.version, 3); assert.equal(r.profile.cash, 700);
+    const r = await record(); assert.equal(r.version, 8); assert.equal(r.expansion.version, 3); assert.equal(r.profile.cash, 700);
     await shot('A1-yard-1280x720');
     return `院子挂载，#frame 隐藏；存档 v${r.version}，扩展 v${r.expansion.version}，现金 ${r.profile.cash}`;
   });
   await step('A2 旧档（v1 键）进入院子：现金、任务、统计、物品保留，成长受控启用，原始字节留在 legacyBackup', async () => {
     const s = D.newSave(); s.cash = 1842; s.quests.repair = true; s.stats = { runs: 3, extracts: 2, kills: 5 }; D.addItem(s.stash, 'watch', 1); D.addItem(s.stash, 'scrap', 2);
-    const bytes = JSON.stringify(s);
+    const bytes = JSON.stringify(legacyProfile(s));
     await newPage({ init: { fn: b => { if (!localStorage.getItem('escape-bincov.session.v2')) localStorage.setItem('escape-bincov.save.v1', b); }, arg: bytes } });
     await page.goto('https://station.test/?test=1'); await page.locator('[data-action="enter"]').click(); await yardReady();
     const x = await snap(), r = await record();

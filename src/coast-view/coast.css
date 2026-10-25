@@ -226,6 +226,12 @@ html.mobile[data-coast-sample] #toast { bottom: calc(76px + var(--safe-bottom, 0
 .cs-hitpop.kill.on b { animation: cs-hitkill .42s steps(6) forwards; }
 @keyframes cs-hitpop { 0% { opacity: 1; transform: scale(.7); } 50% { opacity: 1; transform: scale(1.15); } 100% { opacity: 0; transform: scale(1.25); } }
 @keyframes cs-hitkill { 0% { opacity: 1; transform: scale(.7); } 30% { opacity: 1; transform: scale(1.4); } 100% { opacity: 0; transform: scale(1.6); } }
+/* A critical hit (#75): gold, longer and a bigger pop. A critical kill keeps the kill's red and pop with a gold rim. */
+.cs-hitpop.crit i { background: #ffd36b; width: 8px; }
+.cs-hitpop.crit.on b { animation: cs-hitcrit .3s steps(5) forwards; }
+.cs-hitpop.crit.kill i { background: #e8664c; box-shadow: 0 0 0 1px #0009, 0 0 0 2px #ffd36b; }
+.cs-hitpop.crit.kill.on b { animation: cs-hitkill .42s steps(6) forwards; }
+@keyframes cs-hitcrit { 0% { opacity: 1; transform: scale(.75); } 35% { opacity: 1; transform: scale(1.35); } 100% { opacity: 0; transform: scale(1.45); } }
 /* Stair destinations: HUD text in the pixel face, placed by the view under the stair marker. */
 .cs-stairs { position: absolute; left: var(--cs-ox); top: var(--cs-oy); width: 0; height: 0; pointer-events: none; }
 .cs-stair { position: absolute; left: 0; top: 0; white-space: nowrap; font-size: 16px; line-height: 16px; padding: 2px 6px; color: #e6dcb8; background: #191815a6; border: 1px solid #c9a65e55; }
@@ -245,7 +251,7 @@ html.mobile[data-coast-sample] #toast { bottom: calc(76px + var(--safe-bottom, 0
 .coast-sample.outro .cs-hits, .coast-sample.outro .cs-radio, .coast-sample.outro .cs-toast, .coast-sample.outro .cs-hitpop, .coast-sample.outro .cs-stairs { visibility: hidden; }
 /* The pixel face is drawn for 16 px and its integer multiples; short screens use the small system face instead. */
 @media (max-height: 480px) { .cs-exitptr span, .cs-stair { font-family: "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 14px; } }
-@media (prefers-reduced-motion: reduce) { .cs-hitpop.on b, .cs-hitpop.kill.on b { animation-duration: .01s; } }
+@media (prefers-reduced-motion: reduce) { .cs-hitpop.on b, .cs-hitpop.kill.on b, .cs-hitpop.crit.on b, .cs-hitpop.crit.kill.on b { animation-duration: .01s; } }
 /* Off-screen shooters: an orange chevron on the screen edge pointing out toward them, fading in under a second. */
 .cs-threats { position: absolute; left: var(--cs-ox); top: var(--cs-oy); width: 0; height: 0; }
 .cs-threats i { position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; opacity: 0; pointer-events: none;

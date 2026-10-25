@@ -183,6 +183,121 @@ await check('R7 the view follows the raid, not the playtest flag: ?sample=villag
   return r;
 });
 
+await check('R10 county map: previews cannot deploy, selections preserve the seed, and desktop/phone layouts remain reachable', async () => {
+  await yard(); await yardWorlds();
+  const root = page.locator('#station-yard'), go = root.locator('[data-act="deploy"]');
+  assert.equal(await root.locator('.county-node').count(), 12);
+  assert.equal(await root.locator('.county-node.unbuilt').count(), 10);
+  await root.locator('#seed').fill('county-82');
+  for (const id of ['hospital', 'old-hospital', 'factory', 'laboratory', 'highway', 'market', 'observatory', 'lighthouse', 'harbor', 'freighter']) {
+    await root.locator(`[data-region="${id}"]`).click();
+    assert.equal(await go.isDisabled(), true, id);
+    assert.match(await root.locator('.region-development').innerText(), /暂未开发/);
+    assert.match(await root.locator('.region-eyebrow strong').innerText(), /暂未开发/);
+    assert.equal(await root.locator('input[name="world"]:checked').count(), 0);
+    assert.equal(await root.locator('#seed').inputValue(), 'county-82');
+    // Even if a stale/modified DOM enables the button, a preview must never deploy the previous playable world.
+    await go.evaluate(b => { b.disabled = false; b.click(); });
+    assert.equal(await root.count(), 1, 'unbuilt region stays in the yard');
+    assert.deepEqual(await stored(), [], 'preview must not create an active raid');
+  }
+  await root.locator('input[value="mall"]').check();
+  assert.equal(await go.isDisabled(), false);
+  assert.equal(await root.locator('#seed').inputValue(), 'county-82');
+  assert.equal(await root.locator('.region-brief h3').innerText(), '滨湾商场');
+  // Radio keyboard navigation survives rendering the new briefing, rather than losing focus to the page.
+  await root.locator('input[value="mall"]').focus(); await page.keyboard.press('ArrowLeft');
+  assert.equal(await root.locator('input[value="buildings"]').isChecked(), true);
+  const layout = [];
+  for (const [width, height] of [[1280, 720], [1920, 1080], [844, 390], [390, 844]]) {
+    await page.setViewportSize({ width, height });
+    await page.waitForTimeout(300);
+    // Resize repaints the panel while Playwright waits for element stability.
+    // Scroll the freshly resolved node synchronously before measuring its layout.
+    await root.locator('.county-heading').evaluate(el => el.scrollIntoView({ block: 'nearest' }));
+    const geometry = await root.locator('.county-chart').evaluate(chart => {
+      // Focus and scrollIntoView scroll any scroll container; the chart must not be one, or the map slides off its frame.
+      chart.scrollLeft = chart.scrollTop = 999;
+      const box = r => ({ left: r.left, right: r.right, top: r.top, bottom: r.bottom });
+      const meet = (a, b) => Math.min(a.right, b.right) > Math.max(a.left, b.left) && Math.min(a.bottom, b.bottom) > Math.max(a.top, b.top);
+      const frame = chart.getBoundingClientRect(), stage = chart.querySelector('.county-stage').getBoundingClientRect(), shadow = chart.getRootNode();
+      const overlays = [...chart.closest('.county-survey').querySelectorAll('.county-heading, .county-legend')].map(o => box(o.getBoundingClientRect())).filter(o => o.right > o.left);
+      // Markers are the twelve region nodes and the station; each is a landmark pin with its label on one side.
+      const marks = [...chart.querySelectorAll('.county-node, .county-base')].map(n => {
+        const pin = n.querySelector('.node-pin').getBoundingClientRect();
+        const x = stage.left + stage.width * parseFloat(n.style.getPropertyValue('--x')) / 100, y = stage.top + stage.height * parseFloat(n.style.getPropertyValue('--y')) / 100;
+        return { el: n, name: n.querySelector('b').textContent, r: box(n.getBoundingClientRect()), off: Math.hypot(pin.left + pin.width / 2 - x, pin.top + pin.height / 2 - y), pin: [pin.left + pin.width / 2, pin.top + pin.height / 2] };
+      });
+      return { clipped: marks.filter(({ r }) => r.left < frame.left - 1 || r.right > frame.right + 1 || r.top < frame.top - 1 || r.bottom > frame.bottom + 1).map(m => m.name),
+        overlapping: marks.flatMap((a, i) => marks.slice(i + 1).filter(b => meet(a.r, b.r)).map(b => [a.name, b.name])),
+        covered: marks.filter(m => overlays.some(o => meet(m.r, o))).map(m => m.name),
+        // The pin centre is the landmark on the art, and a click there reaches that region's control.
+        misplaced: marks.filter(m => m.off > 1.5).map(m => [m.name, Math.round(m.off * 10) / 10]),
+        missed: marks.filter(m => m.el.matches('.county-node') && !m.el.contains(shadow.elementFromPoint(...m.pin))).map(m => m.name),
+        // The art keeps its 3:2 proportions, is centred and is cropped by at most 6% per axis to fill the chart.
+        stretched: Math.abs(stage.width / stage.height - 1.5) > .01, cropped: Math.max(1 - frame.width / stage.width, 1 - frame.height / stage.height) > .065,
+        offCentre: Math.abs(stage.left + stage.right - frame.left - frame.right) > 2 || Math.abs(stage.top + stage.bottom - frame.top - frame.bottom) > 2,
+        overflow: chart.closest('.pbody').scrollWidth > chart.closest('.pbody').clientWidth + 1 };
+    });
+    assert.deepEqual(geometry, { clipped: [], overlapping: [], covered: [], misplaced: [], missed: [], stretched: false, cropped: false, offCentre: false, overflow: false }, `${width}x${height}`);
+    await shot(`R10-county-map-${width}x${height}`);
+    // An unbuilt pick shows its briefing art without hiding the 暂未开发 status or the planning note.
+    await root.locator('[data-region="lighthouse"]').click();
+    const brief = await root.locator('.region-brief').evaluate(b => {
+      const r = s => b.querySelector(s).getBoundingClientRect(), meet = (a, c) => Math.min(a.right, c.right) > Math.max(a.left, c.left) && Math.min(a.bottom, c.bottom) > Math.max(a.top, c.top);
+      const art = r('.region-art');
+      return { status: meet(art, r('.region-eyebrow strong')), note: meet(art, r('.region-development')), image: (b.querySelector('.region-art img')?.naturalWidth ?? 0) > 0 };
+    });
+    assert.deepEqual(brief, { status: false, note: false, image: true }, `${width}x${height} briefing`);
+    await shot(`R10-county-preview-${width}x${height}`);
+    await root.locator('input[value="buildings"]').check();
+    await go.evaluate(el => el.scrollIntoView({ block: 'nearest' })); assert.equal(await go.isVisible(), true);
+    assert.equal(await go.isDisabled(), false);
+    await go.screenshot({ path: resolve(out, `R10-deploy-${width}x${height}.png`) });
+    layout.push({ width, height, ...geometry });
+  }
+  await page.setViewportSize({ width: 1280, height: 720 });
+  return layout;
+});
+
+await check('R11 county map motion: a pick patches the map in place, every animation ends, reduced motion stops them and closing the panel ends them', async () => {
+  await yard(); await yardWorlds();
+  const root = page.locator('#station-yard');
+  const panel = () => page.evaluate(() => {
+    const r = document.querySelector('#station-yard').shadowRoot;
+    return r.getAnimations().filter(a => a.effect?.target?.isConnected && a.effect.target.closest('.k-deploy'))
+      .map(a => ({ name: a.animationName ?? a.transitionProperty, iterations: a.effect.getComputedTiming().iterations }));
+  });
+  // Tag the live nodes, pick 旧渔港 and look in the same task: a rebuilt map would hand back new elements without the
+  // tags, and getAnimations() flushes style, so the glide is seen however slow the runner is.
+  const kept = await page.evaluate(() => {
+    const r = document.querySelector('#station-yard').shadowRoot;
+    for (const s of ['.county-stage', '#seed', '[data-region="harbor"]', '.region-art']) r.querySelector(s).__kept = true;
+    r.querySelector('[data-region="harbor"]').click();
+    const stage = r.querySelector('.county-stage');
+    return { stage: stage.__kept === true, seed: r.querySelector('#seed').__kept === true, node: r.querySelector('[data-region="harbor"]').__kept === true,
+      art: r.querySelector('.region-art').__kept === true, glide: stage.getAnimations().some(a => a.transitionProperty === '--map-x'), focus: r.activeElement?.dataset.region ?? null,
+      moving: r.getAnimations().filter(a => a.effect?.target?.isConnected && a.effect.target.closest('.k-deploy'))
+        .map(a => ({ name: a.animationName ?? a.transitionProperty, iterations: a.effect.getComputedTiming().iterations })) };
+  });
+  // The briefing art is keyed per region, so its reveal replays; everything else is the same element, mid-glide.
+  const { moving, ...identity } = kept;
+  assert.deepEqual(identity, { stage: true, seed: true, node: true, art: false, glide: true, focus: 'harbor' });
+  assert.ok(moving.length > 0, 'a pick animates');
+  assert.deepEqual(moving.filter(a => !Number.isFinite(a.iterations)), [], 'nothing in the panel loops forever');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await root.locator('[data-region="factory"]').click();
+  await root.locator('input[value="mall"]').check();
+  assert.deepEqual(await panel(), [], 'reduced motion: picks change at once');
+  assert.equal(await root.locator('.county-route .route-bed').evaluate(p => getComputedStyle(p).strokeDashoffset), '0px', 'reduced motion still draws the whole route');
+  await page.emulateMedia({ reducedMotion: null });
+  await root.locator('[data-region="observatory"]').click();
+  await page.keyboard.press('Escape');
+  await root.locator('.county-deploy').waitFor({ state: 'detached' });
+  assert.deepEqual(await panel(), [], 'closing the panel leaves no animation running');
+  return { moving };
+});
+
 await check('R8 without WebGL the page shows the notice instead of the game and leaves the save untouched', async () => {
   await title();
   const before = await storage();

@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "htmlSha256": "de251b2a63aea6e3e5bf2ee4d7466f30aebed0848a30cc8c319739ff165dfb54",
+  "startedAt": "2026-10-24T04:40:03.396Z",
+  "finishedAt": "2026-10-24T04:50:18.091Z",
+  "methodology": "Automated real-time session on the layered street with new enemy encounters (2.5D view). Test hook is read-only: no teleports, no clock changes, no changes to health, enemies, inventory or RNG. All actions use visible buttons and real keyboard/mouse, including E opening and native inventory drag for crates and corpses. This is not a human fun/balance evaluation.",
+  "enemyPhases": {
+    "raider-melee/idle": 65,
+    "raider-gunner/idle": 77,
+    "raider-gunner/windup": 31,
+    "raider-melee/windup": 2,
+    "raider-melee/recovery": 6,
+    "raider-lookout/idle": 4,
+    "raider-lookout/windup": 6,
+    "raider-lookout/recovery": 1,
+    "raider-gunner/recovery": 23,
+    "blockade-patrol/idle": 19,
+    "blockade-sergeant/idle": 10,
+    "blockade-patrol/windup": 7,
+    "blockade-sergeant/windup": 12,
+    "blockade-sentry/idle": 15,
+    "blockade-patrol/recovery": 7,
+    "blockade-sergeant/recovery": 9,
+    "blockade-sentry/windup": 17,
+    "blockade-sentry/recovery": 11,
+    "raider-boss/idle": 81,
+    "raider-boss/windup": 4,
+    "raider-boss/recovery": 2
+  },
+  "errors": [],
+  "externalRequests": [],
+  "finalStats": {
+    "runs": 2,
+    "extracts": 2,
+    "kills": 30
+  },
+  "firstSeed": 49,
+  "outcomes": 2,
+  "nativeTransfers": 34,
+  "scope": "Pre registration/loot-priority and surviving-patrol marker fix; not final ac1f acceptance"
+}

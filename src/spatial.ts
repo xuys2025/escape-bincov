@@ -40,11 +40,12 @@ export function toggleDoor(context: SpaceContext, id: string, player: Point, liv
     return context.doors[id] ? 'opened' : 'closed';
 }
 
-export type Interaction = { id: string; kind: 'exit' | 'entry' | 'door' | 'ground' | 'container' | 'note'; at: Point; label: string };
+export type Interaction = { id: string; kind: 'exit' | 'entry' | 'door' | 'ground' | 'container' | 'note' | 'talk'; at: Point; label: string };
 /** One target is shared by the displayed hint, touch label, and performed action. */
 export function interactionTarget(context: SpaceContext, player: Point, candidates: readonly Interaction[]): Interaction | null {
-    const ranks = { entry: 0, door: 1, ground: 2, container: 2, note: 3, exit: -1 };
-    const eligible = candidates.filter(t => separation(player, t.at) < (t.kind === 'exit' ? 48 : 43)
+    const ranks = { entry: 0, door: 1, ground: 2, container: 2, note: 3, talk: 4, exit: -1 };
+    // Questions must be possible from outside a conditional guard's 90 px restricted boundary.
+    const eligible = candidates.filter(t => separation(player, t.at) < (t.kind === 'exit' ? 48 : t.kind === 'talk' ? 156 : 43)
         && corridor(context, player, t.at, 'body', 10));
     return eligible.sort((a, b) => Number(b.kind === 'exit') - Number(a.kind === 'exit')
         || separation(player, a.at) - separation(player, b.at) || ranks[a.kind] - ranks[b.kind] || a.id.localeCompare(b.id, 'en'))[0] ?? null;

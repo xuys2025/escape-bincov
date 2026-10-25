@@ -85,7 +85,7 @@ export function initializeBuildingRaid(state: ExpansionState, loadout: D.RunLoad
     config.loot.forEach((entry, i) => {
         const mapId = i < 2 && !['sample', 'ledger'].includes(entry.id) ? (i === 0 ? 'resident-f2' : 'resident-b1') : 'coast';
         const point = place(mapId, mapId === 'coast' ? entry : at(9, 6));
-        maps[mapId].loot.push({ uid: entityUid({ version: 2, runId: loadout.runId! }, serial++), id: entry.id, qty: entry.qty, relief: false, ...point });
+        maps[mapId].loot.push({ uid: entityUid({ version: 2, runId: loadout.runId! }, serial++), id: entry.id, qty: entry.qty, relief: false, ...point, ...D.factoryGun(entry.id) });
     });
     config.containers.forEach(entry => {
         const point = place('coast', entry), inventory = D.createInventory(6, 5);

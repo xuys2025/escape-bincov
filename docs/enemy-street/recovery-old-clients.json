@@ -1,0 +1,1857 @@
+{
+  "generatedAt": "2026-10-24T03:22:41.563Z",
+  "node": "v24.22.1",
+  "scope": "Real fixed historical readers/writers. Built-in fixtures are protocol sentinels; optional supplied candidates require separate new-client validity evidence.",
+  "versions": [
+    "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+    "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+    "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+    "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+    "174341b02c6c3efe32fbd7f0151473b97ec42812",
+    "71cf986e620de38eaf5b3ca015fa52cacb47923f"
+  ],
+  "candidatePaths": [
+    "D:\\bincov\\enemy-foundation\\test-results\\enemy-recovery-candidates\\advance.json",
+    "D:\\bincov\\enemy-foundation\\test-results\\enemy-recovery-candidates\\delivered.json",
+    "D:\\bincov\\enemy-foundation\\test-results\\enemy-recovery-candidates\\withdraw.json"
+  ],
+  "cases": 132,
+  "results": [
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "base-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "678002669821eefaf8e612a896827ca4c5e336dfc9b77c8e0f603e0f3eec6249",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "base-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "0528e90c354b9d66985e21a1c5c8d1f681f938aedec1db9dc21549df6eed365f",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "classic-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "9eb67770a62bfa63f502a005e3b94fbbb93f7a9397985c13d16f80ff6736d616",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "classic-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "d6c48e00871013300e74122b3c3bbd5dfd9cf59b0d5432e4498a492f03780646",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "buildings-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "47d51f7c74c348b343cc481300faefd97e05646f5bd615254270f6112e7d4b47",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "buildings-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "6c607938f5d21f378b7fd250c35731ee4f0cceb309dc86d4edfc660a8354559d",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "buildings-layer3",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "fc4d32b1806516a5c40070262cb129265a44c4c7a97dc397f1a70f8c53ece667",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "1-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "737901b942f8bfce8286243f14a25bece7a590a77e6c8eec95299eaa9ea9746b",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "1-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "a88ee1be73a749057863b66472ffbcf1b92998048c409488672f93b790ec2b6c",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "1-layer3",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "2732fed8622c8eceaf938bd7f0170a8e780e3111d6cd30cfb9357322225d411a",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "2-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "a2408fcc5fb295685a29c5ec189fb967ee3b2bb5c06e7a2f4760788ddeb96494",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "2-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "85b23f3a2e947fed7523f86bfd5686ea439c0c38416ef24fbaeb81e6d7f74c33",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "2-layer3",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "f18d76cf405b22ead02c9df8bfd84b0f457da2651dc9f4eb3b8d32ace7c9f349",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "3-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "cee03207e2b5b3844d015734dafd1f6b13a3cd637232bdbee59ab7f8891170e7",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "3-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "c42e1041e3b6a015814ae5a0eba41b822cfd01df8f19dd800e9a880e286ed133",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "3-layer3",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "3fa392982c7e5d7e54274bbf880d3d5a6fc6b886f38708ce47ade55d81b35131",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "prototype-layer1-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "7107ce657a2a20af4cbeb10d07a2f2680322579a726258d99a20d710a6eaa1d7",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "prototype-layer1-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "d199a18a86fbfdc2e9e7f6e6d1d63b5300839df757927855b4b4d138b4241904",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "prototype-layer1-layer3",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "0531d14e839ee8e2115cfdae59d21939dde4db2cd6c8b8e0745ff62ff24070e5",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "candidate-0",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "422c8c7db1a6a7fdf263cffe061479ec144f631f2bcd84735dd9eb24ef3daecb",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "candidate-1",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "64460eae4bdae71fc45ff8a847c803c274d419174e77ed8580d6689397f96569",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "35b3a38223a7bb0020db25e9b2d0bb5476caa993",
+      "case": "candidate-2",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "c19113b336519859de04c34f50a49b11ae87acde0d60ad4b34264351adf33cb2",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "base-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "2e5e02752f7f83bb951b530e920638dd33c71fa08ad7a6155f2353ccd7a3ad3d",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "base-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "17c0264da7277afa14e39de95da89dfc510e5b748f2dbb3d933aab14f666bb20",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "classic-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "9c42ce24b0e095596ba54ef8c47aee45a261df79bf0010a02586aa2c7faf165f",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "classic-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "830665ea83cbc2e7539dc402e1b55c2f5f0f86cda2d251b508e1ba15a63f13b3",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "buildings-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "1f8ceb1d4293a72a0bdcc5274d15ad3d4eccff60bc18a30052ddd88cd6ceb4f6",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "buildings-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "9973300c2976542dbe9adbd0831527560130848d20435f8a16e77a8d1da9d70e",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "buildings-layer3",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "989cc2662a9ad22e777020e33bdb350c1cf7c7e4870a593bcd7cd221744fb17f",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "1-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "83d2ba277c84fae53e7fedad620ffb13c3fc475077cf9e59303608cccc6a0cf5",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "1-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "f5306a9f7bd2410735a09ca3d9f9fe6fbe4915abe3bdd74a9f17c38fcaa544ab",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "1-layer3",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "5ed14ac77a881f7ca2abd77fed115060a4f65c41d255f3327b128e4e8b601220",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "2-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "9197bfe4c9cb1894c83c4b1c41e7541a9c1262bfeb7f97063061388d835c81c0",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "2-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "d0e3b77c6541cf6d438c4eb6b8f1fb6555530fd8c1b28f2cc77a418c5739c00d",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "2-layer3",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "6edc3c4fe1fb115f209fd8df7fac515fe476083693eb62b7db723ce090dbbbdf",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "3-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "a3a2f864d19566ba4e2fe3e63575777bdf0ff10bac242df105ce93ef0a9bbb10",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "3-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "8d8c408baf60c30dcf693965a4dc345a7d35d84d51b7367498aacf65a38b97df",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "3-layer3",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "208fb01572d29faa5785a0be6e0579a6dc33ea33f1d106fc892284986ad6ea6c",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "prototype-layer1-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "1982fc1cb63b08f3354e5457002d92803d28f6da1a0c85271868cb4ddf2d41ee",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "prototype-layer1-session5",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "064aec14bafc688c0526205ed3cec2ca4297784c6fd8d32c2e08740d973a3c06",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "prototype-layer1-layer3",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "2be442a2a14b8ae8faa40dda30585b5a29125fe676a12f51ece45bc1f6297075",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "candidate-0",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "422c8c7db1a6a7fdf263cffe061479ec144f631f2bcd84735dd9eb24ef3daecb",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "candidate-1",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "64460eae4bdae71fc45ff8a847c803c274d419174e77ed8580d6689397f96569",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "76adbd627f582d063cc6f80a4551e8b8cbe2dddd",
+      "case": "candidate-2",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "c19113b336519859de04c34f50a49b11ae87acde0d60ad4b34264351adf33cb2",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "base-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "31d4d1d08021383683a96c7c116b7c383524774d0677db93e9007c3f0f504651",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "base-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "3c5ac3ea545da826ab363c3dc5f1be8be24a1c86556d1f661aa799b2b9d01da8",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "classic-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "8b7acc8eff266dcb05942af6329dbacddd8e389b7c0dbf9a4e5d7a832e9cce05",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "classic-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "6471374b14b5ebd475287afc7e280cb347be10f99f8db5c1de5967ba4f089f91",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "buildings-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "ec6a2ec23df2bd92742ad8c8e0ab117c02034c0e267517c0999f21b59d3f1f9f",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "buildings-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "429e9a395555d1e21714b303206ce37d721bdac26fe9c7755d1f057abbc2c7ec",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "buildings-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "b422d6eb9c04365c368793260582cf01340a3f46d9c9a2d1e60dad04c31b3abf",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "1-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "f3d0d5823580da86adf660294feba0d9b5658e4b20a1251875749c7d33c92d35",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "1-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "51de69901de7065ea1bffd319a99169012008162bdca3c557632939d40d48517",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "1-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "02420458f7e2355c97f6f3bcbf504923aeccff7ce7c2eee52d287c1d6c8dda77",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "2-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "61eb1cfe01f9959aa501e731ad64a06308086b1e097068601c631b983eec83f9",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "2-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "928a585d5020f242d20ce65e3ab03dd3235ad8fb1f60997cca3859dd620991bd",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "2-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "184964c22a0761a7a093abd1d9f35e2223f20eb059dcd72a8e535ae10982352e",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "3-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "48d36619ab31efbbb26f98789ed0548cbbc7ebcc4c8295495145b33ebfbe4ad3",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "3-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "f68fa1577d9604ca91cb9ee39a5c7818bdad191ced5f71775952679f52f7b401",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "3-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "b2d0761d247b7d1f13be7d8ec03621df06b48d9b0d0dfdbb2a3b7be5a454e53f",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "prototype-layer1-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "321763ca305551b65777bb9f3a82776a7680657cc37ef094b44e2690055a4df3",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "prototype-layer1-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "70b85cdfaead9d11f5b4d56c33a013ec6524bbff4bd35414200967e20e5a3f12",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "prototype-layer1-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "c3abefbb01ec439c23107606aca15c4aa1869366ef95648b62a3537610466f66",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "candidate-0",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "422c8c7db1a6a7fdf263cffe061479ec144f631f2bcd84735dd9eb24ef3daecb",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "candidate-1",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "64460eae4bdae71fc45ff8a847c803c274d419174e77ed8580d6689397f96569",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "dc14ad5c38008d36392ad2cf02a73a2badc51d87",
+      "case": "candidate-2",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "c19113b336519859de04c34f50a49b11ae87acde0d60ad4b34264351adf33cb2",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "base-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "a382eca3f423b5a2a7e770a078e86899c3011cd7ff2e0d8df2ae5ade03b3a2b0",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "base-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "84c3b4a55447f4b769be7975564a29f822ffdb7c813f1e57d47f32a503c815e8",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "classic-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "7994815a65a6ba7ba758f888f33babdaf5a3cd5edbd9659c52aaa200c4ed11c4",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "classic-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "0c812dabeddb1e3d7c2325f3bed80974a48ab7dd15d81eb7b03b35a1c51fd308",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "buildings-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "39a2266d844ab2e2d0621e40364394b9baa9fe4f80af3218403f61f02d4e87d7",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "buildings-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "c3ad872d36f64785cc43a9510b6c65648452a26971f415db9a34492679cd41a0",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "buildings-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "538e2492853b6c42ae8609e1eb81b23f6e9f97ece6a8e636dc0f8ac481338a37",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "1-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "b6484490715ae0fcca0a907534cd573e7c1194b6c262e996c73c93c0274953a9",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "1-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "b99ea258b04b6d4faaa683fe99383f8649ea0bddd50598073fcd7daeb7c32dea",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "1-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "16384e8afeef2bd0433fa5e09988b316d624a3a23ca307ca28f2da1c444957cd",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "2-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "6fac6db7fd30a3340da833db66bd0f9a50814c863909ccccef9a9785e0601b30",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "2-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "777d32bc0e58be0bf8035f5594d20fd7cd687ccaf8239fa7a75ad01e49287143",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "2-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "53d176467f9c5896dc64af285e4d200c910f53e1ea7fbcffa843e5c74f90b733",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "3-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "b117cb1f536213f6d0f50bfafcddb3e1d11811b4c7edcef147d8db15a3d667a7",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "3-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "83a16ae7364bc5362bfb671d26fdafc806ad995f9132f598baff14d2cc305f55",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "3-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "9af9592125ce095c8e377ebbfbb378f003c3382c6cbf0f27e4151836180e9e01",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "prototype-layer1-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "89cb9e63bf90ba1c3afd3225f95cab443ce3965ee2050fb8990ec9a4266839d7",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "prototype-layer1-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "5b356e11e98ccbdd8fcf53baaa5bf4a332a42f0c0bf1e8f584959cf3668491e2",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "prototype-layer1-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "b5c27958511848437fc43fc345f225f079d13354f1f169adb92cb9199a3f6290",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "candidate-0",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "422c8c7db1a6a7fdf263cffe061479ec144f631f2bcd84735dd9eb24ef3daecb",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "candidate-1",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "64460eae4bdae71fc45ff8a847c803c274d419174e77ed8580d6689397f96569",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "8b6192d9987b6e65dc458095f690cd6e017e7d23",
+      "case": "candidate-2",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "c19113b336519859de04c34f50a49b11ae87acde0d60ad4b34264351adf33cb2",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "base-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "ff51a06cd579ac7216f91efb05ff3d5e3165d32a7a251f1a5850b14117433509",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "base-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "d7e599e83499d837e84a181a3e9c8b936a76d0ba9ed150e138b4192be41c6aca",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "classic-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "3c3190be6df57ddea9bbea4aaea6b34011694d66429eca067aa991252dcb84a4",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "classic-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "660b55b7c0203afc8ace0f92400725963adbafd989e368ad7b6e17a4b9ea3027",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "buildings-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "4896557ec352efdf80666e9400bad6bdd8579e5d19082ea7533c503a22933976",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "buildings-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "a6ead25dd7c05a2f47901aca0815f050b8ea196c19ae0c8b8fb96e9980d77bd7",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "buildings-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "a67204403b9546f15517d764825a40ec1ae71581ab94ec0526a29522ce509448",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "1-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "1a273f059687c49133aa04488540a55db910efd8c5363d93cf951248ce13eb9e",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "1-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "5fe9a1a5f30daf7b208268a1bf020c02247bd576a0767aaa073e501797015901",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "1-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "1d7f37349b8a001f1ab7a5c04b9fd4b364366fb66a366addbb4c02312073187b",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "2-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "bfb0da1e54a6e63d08f96a5c04aec77e327d48be270d08b99e3fa4a390e57c24",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "2-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "960c897f302b411ebb11443585954e9039688f39caaf3957c6b2b2d939a2b737",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "2-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "a2df34ddb0e0dda919e36c37288a96c018f86f8659389d5aa1d4dd1932cfd359",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "3-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "166ef7a6438ff3a3fcd2110cc627ca3b02f34b56268d8c224ff3fb0be153c81b",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "3-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "f67d15233fb404ebc347bffd818016eaf48cef332569b88dda67d89dcb49fcce",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "3-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "de4fa4bd82008e10929218ec48b69afe7f1954eb5050fccf7dd7548b9c4dc645",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "prototype-layer1-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "318efda076971b586008368e105659a778e51a231e5b92b3209b090abb53b18b",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "prototype-layer1-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "f9ce0e5eb99eabfcd5a2b44aad1920256787abe2efbd90da225a9ad3efb90283",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "prototype-layer1-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "ab318073d1db40f63e168e28c0d010ec4e737c7fde4b578983d6dcce7c28ed48",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "candidate-0",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "422c8c7db1a6a7fdf263cffe061479ec144f631f2bcd84735dd9eb24ef3daecb",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "candidate-1",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "64460eae4bdae71fc45ff8a847c803c274d419174e77ed8580d6689397f96569",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "174341b02c6c3efe32fbd7f0151473b97ec42812",
+      "case": "candidate-2",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "c19113b336519859de04c34f50a49b11ae87acde0d60ad4b34264351adf33cb2",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "base-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "068e2958bd241cf6547402abc4975fc453862527984ccf542adda644d701552d",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "base-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "b3afeaa28d7ccf1f22493be4a891fb7bd00ea5c80c24e87dce21f7557d98cdc8",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "classic-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "813479b06ed51b23117a6c8224e47ea7fd8fd515780f469ecbebe6b8247abb99",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "classic-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "00c4e35f135c8755178637994b6cf1712b0eb80f73d7fa6eb4e4e879284d725f",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "buildings-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "bf07c937402070267c8b2aa5784d433fac1364668cc0ca04597235be0e6bc005",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "buildings-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "68b4dff6910bf353ef0339c87999d5e8bbec6b930bbc3cb636ecb8ba4c1595a5",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "buildings-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "510f6a120b92d13c20dc18a429964f056a9c629c48778ccb60712ec3741885f8",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "1-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "acec8754430a36c8a02dadf6fae8e6fe94165b9596978e2a9aee761b9f8040b7",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "1-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "fee44f77e22b4079c749a19448fe8f18adbf81f7e1b31d62aa62a41c7ff8cf57",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "1-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "199de9c9e771aec6fd56a5f77e20b3e13e217778751e33e1ba539c209960f3c3",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "2-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "4520f9f21fcc4a2e489ce055461a1282ef580007c58b02079a4e39ac88e65f5d",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "2-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "af3f56036d38b65c6f82c9f1f0982043f7e985d3c629ede3f70aeb7219a87363",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "2-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "b884d8e651013bb500fb67ee9ce6b22697343cbef7825b4fff9054a9142d2177",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "3-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "10c2e9860a10b772bc8070ce55c50ea27f8e022f6ca42cce5f28d1df23fac357",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "3-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "d66c852e21f73cfa4092cf152affdabcdbb1b96356cd5a84d24c0bebf92dcc7d",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "3-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "9b9b8c9167d151f51a594b26ee1cfa481d401d582b69f28cf9359ee760775f9a",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup"
+      ]
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "prototype-layer1-positive",
+      "reads": true,
+      "initializes": true,
+      "persists": true,
+      "writes": 2,
+      "sourceSha256": "2530bd8be2e2d2892e4ad30000130bb1f12a4531af9b866a57e772164f8d8c05",
+      "backupRoundTrip": true
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "prototype-layer1-session99",
+      "expectedError": "无法读取这份存档。请导出原始备份后使用兼容版本，当前进度未被覆盖。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "73a14aab24f93da7fb059f2e1e0a9cea11dc94d5ecd2a3b64f1fbf08a42c7992",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "prototype-layer1-layer99",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "be9ef597bda4393079ea2fd096a3b652a5282a0bf8c0ab2c030fe72234a48e3c",
+      "rawBackupPreserved": true,
+      "embeddedBackups": []
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "candidate-0",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "422c8c7db1a6a7fdf263cffe061479ec144f631f2bcd84735dd9eb24ef3daecb",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "candidate-1",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "64460eae4bdae71fc45ff8a847c803c274d419174e77ed8580d6689397f96569",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    },
+    {
+      "client": "71cf986e620de38eaf5b3ca015fa52cacb47923f",
+      "case": "candidate-2",
+      "expectedError": "建筑、角色或基地存档损坏或版本不兼容。原始数据已保留。",
+      "rejectedRead": true,
+      "rejectedInitialize": true,
+      "rejectedDirectCommit": true,
+      "rejectedPersistAttempts": 2,
+      "rejectedImport": true,
+      "writes": 0,
+      "originalSha256": "c19113b336519859de04c34f50a49b11ae87acde0d60ad4b34264351adf33cb2",
+      "rawBackupPreserved": true,
+      "embeddedBackups": [
+        "systemsBackup",
+        "enemyBackup"
+      ]
+    }
+  ]
+}

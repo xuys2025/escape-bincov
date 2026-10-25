@@ -1,0 +1,299 @@
+{
+  "base": "49894e990bc2eb01b325349ef53c945ce917e01e",
+  "artifact": {
+    "version": "0.2.0",
+    "htmlBytes": 8056122,
+    "htmlSha256": "7d25ceb34e543884c9e5d4c5d7171026ae3440543f9121ca6b22da378e4b05d1",
+    "artifacts": {
+      "dist/index.html": {
+        "bytes": 8056122,
+        "sha256": "7d25ceb34e543884c9e5d4c5d7171026ae3440543f9121ca6b22da378e4b05d1"
+      },
+      "start the game.html": {
+        "bytes": 8056122,
+        "sha256": "7d25ceb34e543884c9e5d4c5d7171026ae3440543f9121ca6b22da378e4b05d1"
+      },
+      "release/Escape-Bincov-portable.zip": {
+        "bytes": 5266798,
+        "sha256": "2248bffc43a61e0b0a52f8b9cc074327e1467255a0cf4f5c7395f4a494545c08"
+      },
+      "release/Escape-Bincov-web.zip": {
+        "bytes": 5262317,
+        "sha256": "6d579bbde30639326e98efee0ee07d6f3e1ec646034385524831f42c2060e162"
+      }
+    }
+  },
+  "sourceFilesSha256": {
+    "src/enemy-mall.ts": "ceca8f7a525a52d5fb558570dc35594b8a86a2922b74c6473d3a8cffd586c958",
+    "src/session.ts": "17b8e052c40ba781c41b58f779decdd0048922e3673502e557b118b5fe56bb86",
+    "src/gunsmith/migrate.ts": "67e0c18e3315b4b90fac3f180645c22ca4227d6c339b3b8c8aa762f587db17e3"
+  },
+  "unit": {
+    "passed": 873,
+    "failed": 0
+  },
+  "ciGuards": {
+    "passed": 62,
+    "failed": 0
+  },
+  "package": "PASS",
+  "nativeBrowser": {
+    "status": "PASS",
+    "cases": 11,
+    "screenshots": [
+      "native-mall-raiders-1280.png",
+      "native-mall-raiders-1920.png",
+      "native-mall-raiders-844.png"
+    ],
+    "priorClientCommit": "49894e990bc2eb01b325349ef53c945ce917e01e",
+    "priorClientSha256": "f54ea3910dfa7e00133149c802d6ee01cb4f5cac861e158c6210f0e5cc82b08a",
+    "exactRaidAndAllBackupsRestored": true,
+    "actualV7MallMigration": {
+      "scenario": "actual-v7-native-mall-migrates-to-v8",
+      "sourceCommit": "649b791f79de0f973c256fb793a1e12dfe92a4ee",
+      "sourceHtmlSha256": "132c931ebcaf430f5ca51ca7128976a16e25aeabc0f5836eae563b27514df978",
+      "exactMigratedRaid": true,
+      "originalGunsBackup": true,
+      "otherBackupByteIdentity": true
+    }
+  },
+  "finalSignoff": "Exact clean-head full regression, natural runs and exclusive fixed-retreat performance are recorded in original PR104 and Issue78. Older hashes below are history, not current signoff.",
+  "boundaries": "Only existing mall-v3 F2 encounter. EN19-22 and all twelve region rows stay open; no phone, human balance or stationary firefight signoff.",
+  "preGunsmithSync": {
+    "base": "f74ff918d645755c873f7ea097188ae81904496c",
+    "artifact": {
+      "version": "0.2.0",
+      "htmlBytes": 8021186,
+      "htmlSha256": "132c931ebcaf430f5ca51ca7128976a16e25aeabc0f5836eae563b27514df978",
+      "artifacts": {
+        "dist/index.html": {
+          "bytes": 8021186,
+          "sha256": "132c931ebcaf430f5ca51ca7128976a16e25aeabc0f5836eae563b27514df978"
+        },
+        "start the game.html": {
+          "bytes": 8021186,
+          "sha256": "132c931ebcaf430f5ca51ca7128976a16e25aeabc0f5836eae563b27514df978"
+        },
+        "release/Escape-Bincov-portable.zip": {
+          "bytes": 5253735,
+          "sha256": "2a1d9379e1f4018671d2ef6dfc7dfda7409f1d1f2600bb1bf1adf058e2889f03"
+        },
+        "release/Escape-Bincov-web.zip": {
+          "bytes": 5249254,
+          "sha256": "0777ae88a8f368a112cc5f5dcaec17519d1c7699bf6d46bb2f41b911e9a09ec3"
+        }
+      }
+    },
+    "sourceFilesSha256": {
+      "src/enemy-mall.ts": "ceca8f7a525a52d5fb558570dc35594b8a86a2922b74c6473d3a8cffd586c958",
+      "src/session.ts": "f2cec49db56ba76ae138bc92081dc1874d6945f06e1c073cf356cc6270b677d6",
+      "src/coast-view/camera.ts": "91a3a3896dbb4211ab7efa767efa791c3ae12c7c0382bc1d7deff53310a3fde1",
+      "src/coast-view/scene.ts": "9644d2935fb2fe456bb64aeabcfc3c432b053a0a30d1339cadb2f9df71b1648f"
+    },
+    "unit": {
+      "passed": 774,
+      "failed": 0
+    },
+    "ciGuards": {
+      "passed": 62,
+      "failed": 0
+    },
+    "package": "PASS",
+    "nativeBrowser": {
+      "status": "PASS",
+      "cases": 10,
+      "screenshots": [
+        "native-mall-raiders-1280.png",
+        "native-mall-raiders-1920.png",
+        "native-mall-raiders-844.png"
+      ],
+      "priorClientCommit": "f74ff918d645755c873f7ea097188ae81904496c",
+      "priorClientSha256": "ca22b280fd99a0cebafab7de9ba66a5cd7a28e00d1d3a380758f2a74714add91",
+      "exactRaidAndBackupRestored": true
+    },
+    "fullEnemy": {
+      "status": "PASS",
+      "cases": 165,
+      "screenshots": 151,
+      "errors": [],
+      "external": []
+    },
+    "shooting": "PASS, including accepted #102 map-edge cases",
+    "portable": "PASS",
+    "mallNatural": {
+      "startedAt": "2026-10-24T12:17:34.262Z",
+      "finishedAt": "2026-10-24T12:30:05.146Z",
+      "status": "passed",
+      "htmlSha256": "132c931ebcaf430f5ca51ca7128976a16e25aeabc0f5836eae563b27514df978",
+      "runs": [
+        {
+          "outcome": "timeout",
+          "realSeconds": 600.516,
+          "lastObservedElapsed": 599.9829999998028
+        },
+        {
+          "outcome": "death",
+          "realSeconds": 34.296,
+          "lastObservedElapsed": 34.08800000000063
+        },
+        {
+          "outcome": "extract",
+          "realSeconds": 8.223,
+          "lastObservedElapsed": 4.9624000000059425
+        }
+      ],
+      "transitions": 4,
+      "errors": [],
+      "requests": []
+    },
+    "classicNatural": {
+      "startedAt": "2026-10-24T12:17:32.093Z",
+      "finishedAt": "2026-10-24T12:27:41.490Z",
+      "status": "passed",
+      "htmlSha256": "132c931ebcaf430f5ca51ca7128976a16e25aeabc0f5836eae563b27514df978",
+      "realSeconds": 609.397,
+      "outcomes": 12,
+      "extracts": 4,
+      "deaths": 8,
+      "lootTransfers": 61,
+      "errors": [],
+      "externalRequests": []
+    },
+    "boundaries": "Concurrent functional/natural runs are not exclusive performance evidence. Only real inputs, not human balance or physical phone. Clean combined-head performance and exact CI are recorded separately in original PR104.",
+    "preMainSync": {
+      "base": "67a74688eef7e43563e61a2ebf86c26fe03ef8d4",
+      "artifact": {
+        "version": "0.2.0",
+        "htmlBytes": 8020914,
+        "htmlSha256": "c35fdd152d46d327f8814a23cdbdf43d4a9c0bd941a9cfac3fb455a089c69774",
+        "artifacts": {
+          "dist/index.html": {
+            "bytes": 8020914,
+            "sha256": "c35fdd152d46d327f8814a23cdbdf43d4a9c0bd941a9cfac3fb455a089c69774"
+          },
+          "start the game.html": {
+            "bytes": 8020914,
+            "sha256": "c35fdd152d46d327f8814a23cdbdf43d4a9c0bd941a9cfac3fb455a089c69774"
+          },
+          "release/Escape-Bincov-portable.zip": {
+            "bytes": 5253582,
+            "sha256": "4bdb8cb65e967ad95a9640529d3308f61c916c984b45ed5604a07e1e5d79ddd8"
+          },
+          "release/Escape-Bincov-web.zip": {
+            "bytes": 5249101,
+            "sha256": "7abb389578ba4258b85c936c17e921ec296cb2d88485799114747a04eb4a16c1"
+          }
+        }
+      },
+      "sourceFilesSha256": {
+        "src/enemy-mall.ts": "ceca8f7a525a52d5fb558570dc35594b8a86a2922b74c6473d3a8cffd586c958",
+        "src/session.ts": "f2cec49db56ba76ae138bc92081dc1874d6945f06e1c073cf356cc6270b677d6"
+      },
+      "nativeBrowser": {
+        "cases": 10,
+        "screenshots": [
+          "native-mall-raiders-1280.png",
+          "native-mall-raiders-1920.png",
+          "native-mall-raiders-844.png"
+        ],
+        "status": "PASS",
+        "priorClientSha256": "eda19651f349f6523641da16b48957c93552c2d2e51b9dda5e1ea0e98d46cc7d",
+        "priorClientCase": {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "scenario": "native-mall-prior-67a7468-client",
+          "exactRaidRestored": true,
+          "backupByteIdentity": true
+        }
+      },
+      "fullEnemy": {
+        "status": "PASS",
+        "cases": 165,
+        "screenshots": 151,
+        "errors": [],
+        "external": []
+      },
+      "mallNatural": {
+        "startedAt": "2026-10-24T10:20:09.027Z",
+        "finishedAt": "2026-10-24T10:32:34.478Z",
+        "htmlSha256": "c35fdd152d46d327f8814a23cdbdf43d4a9c0bd941a9cfac3fb455a089c69774",
+        "status": "passed",
+        "runs": [
+          {
+            "outcome": "timeout",
+            "seconds": 600.583,
+            "lastObservedElapsed": 599.8611999998902
+          },
+          {
+            "outcome": "death",
+            "seconds": 37.389,
+            "lastObservedElapsed": 36.932300000027254
+          },
+          {
+            "outcome": "extract",
+            "seconds": 8.832,
+            "lastObservedElapsed": 5.772200000002968
+          }
+        ],
+        "transitions": [
+          {
+            "run": 1,
+            "from": "mall-f1",
+            "to": "mall-f2",
+            "elapsed": 9.138500000000008,
+            "inputToObservedMilliseconds": 120
+          },
+          {
+            "run": 1,
+            "from": "mall-f2",
+            "to": "mall-f1",
+            "elapsed": 578.5238999998998,
+            "inputToObservedMilliseconds": 212
+          },
+          {
+            "run": 2,
+            "from": "mall-f1",
+            "to": "mall-f2",
+            "elapsed": 13.68030000001201,
+            "inputToObservedMilliseconds": 178
+          },
+          {
+            "run": 2,
+            "from": "mall-f2",
+            "to": "mall-f1",
+            "elapsed": 33.17420000001849,
+            "inputToObservedMilliseconds": 127
+          }
+        ],
+        "errors": [],
+        "requests": [],
+        "scope": "Natural east-side bypass and original outcomes; not human balance or a native raider engagement claim."
+      },
+      "classicNatural": {
+        "startedAt": "2026-10-24T10:21:48.328Z",
+        "finishedAt": "2026-10-24T10:32:11.481Z",
+        "htmlSha256": "c35fdd152d46d327f8814a23cdbdf43d4a9c0bd941a9cfac3fb455a089c69774",
+        "status": "passed",
+        "outcomes": 13,
+        "totals": {
+          "extract": 6,
+          "death": 7,
+          "timeout": 0
+        },
+        "nativeLootTransfers": 49,
+        "errors": [],
+        "external": []
+      },
+      "notSignedOff": [
+        "R06 full region",
+        "remaining 11 region identities and routes",
+        "EN19-22 overall completion",
+        "physical phones",
+        "human readability and balance"
+      ],
+      "performance": "Independent final-source run is recorded in the PR after normal hooks and other tests finish; these natural frame samples are not exclusive performance signoff."
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "htmlSha256": "ac1f62b3b8920330e01c0a3e739d14efd7763cbed2366060b28a9ff61a61de9f",
+  "entry": "D:\\bincov\\enemy-foundation\\dist\\index.html",
+  "startedAt": "2026-10-24T05:06:20.218Z",
+  "minutes": 10,
+  "world": "buildings",
+  "firstSeed": 49,
+  "methodology": "Automated real-time session on the layered street with new enemy encounters (2.5D view). Test hook is read-only: no teleports, no clock changes, no changes to health, enemies, inventory or RNG. All actions use visible buttons and real keyboard/mouse, including E opening and native inventory drag for crates and corpses. This is not a human fun/balance evaluation.",
+  "enemyPhases": {
+    "raider-melee/idle": 56,
+    "raider-gunner/idle": 50,
+    "raider-gunner/windup": 31,
+    "raider-melee/windup": 6,
+    "raider-melee/recovery": 6,
+    "raider-lookout/idle": 7,
+    "raider-lookout/windup": 5,
+    "raider-lookout/recovery": 1,
+    "raider-gunner/recovery": 10,
+    "blockade-sentry/idle": 37,
+    "blockade-patrol/idle": 1,
+    "blockade-patrol/windup": 4,
+    "blockade-sergeant/windup": 14,
+    "blockade-patrol/recovery": 2,
+    "blockade-sergeant/recovery": 11,
+    "blockade-sergeant/idle": 8,
+    "raider-boss/idle": 54,
+    "raider-boss/windup": 4,
+    "raider-boss/recovery": 3,
+    "raider-gunner/release": 1
+  },
+  "outcomes": [
+    {
+      "outcome": "extract",
+      "kills": 23,
+      "keptValue": 4918,
+      "lostValue": 0,
+      "seed": 49,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    },
+    {
+      "outcome": "extract",
+      "kills": 2,
+      "keptValue": 4875,
+      "lostValue": 0,
+      "seed": 50,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    },
+    {
+      "outcome": "extract",
+      "kills": 0,
+      "keptValue": 4947,
+      "lostValue": 0,
+      "seed": 51,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "browser": "155.0.8059.85",
+  "observationPolicy": "Before the first street windup: walk the authored public west/cross street, approach a visible new enemy, and wait for its real preparation before shooting it. No game-state mutations.",
+  "status": "passed",
+  "finalStats": {
+    "runs": 3,
+    "extracts": 3,
+    "kills": 25
+  },
+  "finishedAt": "2026-10-24T05:16:26.220Z",
+  "containerLoot": {
+    "opened": 27,
+    "transfers": 29,
+    "threatenedClosures": 9
+  },
+  "realSeconds": 606.002
+}

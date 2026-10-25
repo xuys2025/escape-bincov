@@ -32,7 +32,8 @@ const target = symbol => {
 };
 
 // Rule modules (AGENTS.md section 3): they import only each other and use nothing that only the DOM provides.
-const PURE = ['src/domain.ts', 'src/balance.ts', 'src/world.ts', 'src/perks.ts', 'src/breath.ts'];
+const PURE = ['src/domain.ts', 'src/balance.ts', 'src/world.ts', 'src/perks.ts', 'src/breath.ts', 'src/gunsmith/catalog.ts', 'src/gunsmith/compat.ts',
+  'src/gunsmith/stats.ts', 'src/gunsmith/instance.ts', 'src/gunsmith/migrate.ts'];
 // Known runtime cycles, tracked in #60; the two it listed (Q-E05 save codecs, Q-E02 view routers) are gone. A listed
 // cycle may shrink or disappear; a new or larger one fails.
 const KNOWN_CYCLES = [];

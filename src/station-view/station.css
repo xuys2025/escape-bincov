@@ -409,3 +409,239 @@ button.pcard:hover:not(:disabled) { border-color: var(--amber); background: #2b3
 .charm { display: flex; gap: 8px; align-items: center; padding: 4px 8px; margin: -2px 0 8px; background: #1c2321; border: 1px solid var(--line); font-size: 12px; color: var(--dim); }
 .charm span { flex: 1; }
 @media (prefers-reduced-motion: reduce) { .panel, .modal, .toast, .bubble, .alarm { animation: none; } }
+
+/* County deployment terminal: one fixed 3:2 survey map beside the briefing and the existing departure transaction.
+   The stage holds art, overlay, light and markers in one percent space and is fitted into the chart with container
+   units: it covers the chart, cropping at most 6% per axis, and the blurred ambient copy fills anything left over.
+   Selections glide on the registered --map-x/--map-y (src/station-view/ui.ts); keyed parts replay their entry. */
+.panel.k-deploy { inset: 20px 24px; width: auto; background: #0b1413; border-color: #46594f; box-shadow: 0 20px 100px #000c; }
+.k-deploy .phead { align-items: center; padding: 10px 18px; }
+.k-deploy .phead h2 { font: 24px/1.2 var(--sys); font-weight: 700; letter-spacing: 3px; }
+.k-deploy .phead small { display: none; }
+.k-deploy .ptabs { padding-left: 12px; }
+.k-deploy > .line { display: none; }
+.k-deploy .pbody { padding: 0; display: flex; min-height: 0; }
+.county-deploy { --brief: 340px; display: grid; grid-template-columns: minmax(0, 1fr) var(--brief); width: 100%; height: 100%; min-height: 0; }
+.county-survey { position: relative; display: grid; grid-template: 'chart' minmax(0, 1fr) / minmax(0, 1fr); min-width: 0; min-height: 0; background: #08100f; }
+/* clip, not hidden: a hidden-overflow chart is still a scroll container, so focus or scrollIntoView could slide the map
+   (the ambient copy overflows it) and a kept element would keep that offset across repaints. */
+.county-chart { grid-area: chart; position: relative; min-height: 0; overflow: hidden; overflow: clip; isolation: isolate; container-type: size; }
+.county-heading, .county-legend, .county-legacy { grid-area: chart; z-index: 4; }
+.county-ambient { position: absolute; inset: -6%; background: var(--county-terrain) center / cover no-repeat; filter: blur(14px) saturate(.4) brightness(.36); }
+.county-stage { --lock: 64px; position: absolute; left: 50%; top: 50%; width: 100%; width: min(max(100cqw, 150cqh), 106cqw, 159cqh); aspect-ratio: 3 / 2; translate: -50% -50%; container-type: size;
+  transition: --map-x .55s cubic-bezier(.22, .8, .24, 1), --map-y .55s cubic-bezier(.22, .8, .24, 1); }
+.county-art, .county-lit { position: absolute; inset: 0; background: var(--county-terrain) 0 0 / 100% 100% no-repeat; pointer-events: none; }
+.county-art { filter: saturate(.45) brightness(.55) contrast(1.06); }
+/* The pick is lit in near-true colour: a feathered disc of the same art, 30% of the stage wide, centred on it. */
+.county-lit { filter: saturate(1) brightness(1.02); transition: opacity .3s;
+  -webkit-mask: radial-gradient(closest-side, #000 38%, #0000) no-repeat; mask: radial-gradient(closest-side, #000 38%, #0000) no-repeat;
+  -webkit-mask-size: 30cqw 45cqh; mask-size: 30cqw 45cqh;
+  -webkit-mask-position: calc((var(--map-x) - 15) * 1cqw) calc((var(--map-y) - 22.5) * 1cqh); mask-position: calc((var(--map-x) - 15) * 1cqw) calc((var(--map-y) - 22.5) * 1cqh); }
+.county-stage.unbuilt .county-lit { filter: saturate(.6) brightness(.94); }
+.county-stage.off .county-lit { opacity: 0; }
+.county-overlay { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.county-grid { fill: url(#county-grid); }
+#county-grid path { fill: none; stroke: #d3ecd5; stroke-opacity: .07; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.county-route path { fill: none; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.route-bed { stroke: #e2b45c; stroke-opacity: .32; stroke-width: 6px; stroke-dasharray: 1; animation: route-draw .7s cubic-bezier(.35, .1, .25, 1) backwards; }
+.route-line { stroke: #ffd88a; stroke-width: 2px; stroke-dasharray: 10 8; animation: route-show .3s .5s backwards; }
+.county-lock { position: absolute; left: calc(var(--map-x) * 1%); top: calc(var(--map-y) * 1%); width: var(--lock); aspect-ratio: 1; translate: -50% -50%; pointer-events: none;
+  border: 1.5px solid #ffd88abf; border-radius: 50%; box-shadow: 0 0 0 1px #0a100f80, inset 0 0 0 1px #0a100f66;
+  background: linear-gradient(#ffd88a 0 0) 50% 0 / 1.5px 20% no-repeat, linear-gradient(#ffd88a 0 0) 50% 100% / 1.5px 20% no-repeat,
+    linear-gradient(#ffd88a 0 0) 0 50% / 20% 1.5px no-repeat, linear-gradient(#ffd88a 0 0) 100% 50% / 20% 1.5px no-repeat;
+  animation: lock-in .45s cubic-bezier(.2, .8, .2, 1) backwards; }
+.county-lock i { position: absolute; inset: -8px; border: 1px solid #ffd88a73; border-radius: 50%; opacity: 0; animation: lock-pulse 2.4s ease-out .5s 3; }
+.county-stage.unbuilt .county-lock { border: 1.5px dashed #e3e9dfb3;
+  background: linear-gradient(#e3e9df 0 0) 50% 0 / 1.5px 16% no-repeat, linear-gradient(#e3e9df 0 0) 50% 100% / 1.5px 16% no-repeat,
+    linear-gradient(#e3e9df 0 0) 0 50% / 16% 1.5px no-repeat, linear-gradient(#e3e9df 0 0) 100% 50% / 16% 1.5px no-repeat; }
+.county-stage.unbuilt .county-lock i { display: none; }
+.county-nodes { position: absolute; inset: 0; pointer-events: none; }
+/* A marker is its landmark pin plus a label on one side; the pin centre sits exactly on the landmark. */
+.county-node, .county-base { --pin: 14px; position: absolute; z-index: 1; left: calc(var(--x) * 1%); top: calc(var(--y) * 1%); display: flex; flex-direction: var(--dir); align-items: center; gap: 4px;
+  margin: 0; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; translate: var(--tx) var(--ty); pointer-events: auto; cursor: pointer; }
+.county-node.world, .county-node.on { padding: 0; border: 0; background: none; }
+[data-side="r"] { --dir: row; --tx: calc(var(--pin) / -2); --ty: -50%; }
+[data-side="l"] { --dir: row-reverse; --tx: calc(var(--pin) / 2 - 100%); --ty: -50%; text-align: right; }
+[data-side="b"] { --dir: column; --tx: -50%; --ty: calc(var(--pin) / -2); text-align: center; }
+[data-side="t"] { --dir: column-reverse; --tx: -50%; --ty: calc(var(--pin) / 2 - 100%); text-align: center; }
+.county-node.on { z-index: 2; }
+.county-node:hover { z-index: 3; }
+.county-node:focus { outline: none; }
+.county-node input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.node-pin { position: relative; flex: none; width: var(--pin); height: var(--pin); }
+.node-pin::before { content: ''; position: absolute; inset: 22%; rotate: 45deg; background: #101a18; border: 1.5px solid #c9d3c7; box-shadow: 0 0 0 1.5px #050a09b3; transition: inset .2s; }
+.available .node-pin::before { background: var(--amber); border-color: #fff0c8; }
+.county-node.on .node-pin::before { inset: 8%; }
+.county-node.unbuilt.on .node-pin::before { background: #e6ece2; border-color: #fff; }
+.node-label { display: flex; flex-direction: column; padding: 3px 8px 4px; background: #0a1211e0; border: 1px solid #ffffff24; box-shadow: 0 2px 10px #0008; transition: background .15s, border-color .15s; }
+.node-label b { font: 600 13px/17px var(--sys); color: #e3e5da; letter-spacing: .5px; white-space: nowrap; }
+.node-label small { font: 10px/13px var(--sys); color: #93a296; letter-spacing: 1px; white-space: nowrap; }
+.available .node-label { background: #16180fe8; border-color: #e2b45c8c; }
+.available .node-label b { color: #fff2d2; }
+.available .node-label small { color: #eec57a; }
+.county-node:not(.on):hover .node-label { background: #18231fee; border-color: #ffffff66; }
+.county-node.available:not(.on):hover .node-label { background: #2a2614f0; border-color: #ffd88a; }
+.county-node.on .node-label { background: #e2b45c; border-color: #ffe2a2; box-shadow: 0 0 0 3px #e2b45c26, 0 4px 18px #000a; }
+.county-node.on .node-label b { color: #17150e; }
+.county-node.on .node-label small { color: #4a3d1f; }
+.county-node.unbuilt.on .node-label { background: #dfe5db; border-color: #fff; box-shadow: 0 0 0 3px #dfe5db1f, 0 4px 18px #000a; }
+.county-node.unbuilt.on .node-label small { color: #4d564c; }
+.county-node:focus-visible .node-label, .county-node input:focus-visible ~ .node-label { outline: 2px solid var(--amber2); outline-offset: 2px; }
+.county-base { pointer-events: none; cursor: default; }
+.county-base .node-pin::before { inset: 12%; rotate: 0deg; background: #7fbf86; border-color: #e1f6dc; }
+.county-base .node-label { background: #0c1a14e6; border-color: #7fbf8680; }
+.county-base .node-label b { color: #e4f3df; }
+.county-base .node-label small { color: #9fcf9c; }
+.county-heading { align-self: start; justify-self: end; margin: 14px 16px 0 0; display: grid; grid-template-columns: auto 22px; column-gap: 12px; align-items: center; padding: 10px 14px 11px; text-align: right;
+  background: #08100fd9; border: 1px solid #ffffff1c; pointer-events: none; }
+.county-heading > :not(svg) { grid-column: 1; }
+.county-heading small { color: #8fa79b; font-size: 10px; letter-spacing: 3px; }
+.county-heading h3 { display: block; margin: 4px 0 0; font: 32px/1 var(--px); letter-spacing: 2px; color: #efe9d6; }
+.county-heading h3 span { display: block; margin-top: 5px; font: 10px/1 monospace; letter-spacing: 4px; color: #7f988e; }
+.county-count { margin: 8px 0 0; color: #93a79c; font-size: 11px; white-space: nowrap; }
+.county-count strong { margin-right: 4px; font: 16px/1 var(--px); color: var(--amber); }
+.county-compass { grid-column: 2; grid-row: 1 / span 3; width: 22px; height: 32px; fill: #cfd9cd; stroke: #cfd9cd; stroke-width: 1.2; opacity: .7; }
+.county-legend { align-self: end; justify-self: start; margin: 0 0 12px 14px; display: flex; gap: 14px; align-items: center; padding: 6px 10px;
+  background: #08100fcc; border: 1px solid #ffffff17; color: #b3bfb1; font-size: 11px; pointer-events: none; }
+.county-legend span { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.county-legend i { width: 7px; height: 7px; rotate: 45deg; background: #101a18; border: 1.5px solid #c9d3c7; }
+.county-legend i.live { background: var(--amber); border-color: #fff0c8; }
+.county-legend small { color: #839387; font-size: 10px; white-space: nowrap; }
+.county-legacy { align-self: start; justify-self: start; margin: 14px; display: flex; align-items: center; gap: 10px; padding: 6px 12px; min-height: 32px; background: #0c1513e6; }
+.county-legacy b { font: 12px var(--sys); }
+.county-briefing { display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-gutter: stable;
+  border-left: 1px solid #3b4d45; background: linear-gradient(170deg, #16211e, #0d1615 58%); }
+.region-brief { padding: 16px 16px 0; }
+.county-back { display: none; }
+.region-eyebrow { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 8px; color: #8fa395; font-size: 10px; letter-spacing: 2px; }
+.region-eyebrow strong { font-size: 11px; font-weight: 400; letter-spacing: 1px; color: var(--amber); }
+.region-brief.unbuilt .region-eyebrow strong { color: #d3d9cf; }
+.region-art { position: relative; margin: 0; aspect-ratio: 3 / 2; overflow: hidden; overflow: clip; background: #0c1514; border: 1px solid #ffffff1f; scroll-margin-bottom: 128px;
+  animation: art-in .42s cubic-bezier(.2, .7, .2, 1) backwards; }
+.region-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% var(--focus); filter: saturate(.86) brightness(.95); }
+.region-brief.unbuilt .region-art img { filter: grayscale(.7) brightness(.8) contrast(.95); }
+.region-art::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #0000 42%, #0a1110db 90%); pointer-events: none; }
+.region-tag { position: absolute; z-index: 1; top: 8px; right: 8px; padding: 1px 6px; background: #0a1110b3; color: #c3ccc0; font-size: 10px; letter-spacing: 1px; }
+.region-art figcaption { position: absolute; z-index: 1; left: 0; right: 0; bottom: 0; padding: 0 14px 12px; }
+.region-art.bare { aspect-ratio: auto; background: none; border: 0; animation: none; }
+.region-art.bare::after { display: none; }
+.region-art.bare figcaption { position: static; padding: 0; }
+.region-area { display: block; color: #c4cbbd; font-size: 10px; letter-spacing: 1px; text-shadow: 0 1px 3px #000; }
+.region-brief h3 { display: block; margin: 6px 0 0; font: 32px/1.05 var(--px); letter-spacing: 2px; color: #fbf3dc; text-shadow: 0 2px 10px #000c, 0 0 2px #000; }
+.region-copy { animation: copy-in .35s .1s ease-out backwards; }
+.region-description { margin: 12px 0 8px; color: #c1c8b9; font-size: 12px; line-height: 1.75; }
+.region-features { display: flex; flex-wrap: wrap; gap: 4px 6px; margin: 0; padding: 0; list-style: none; }
+.region-features li { padding: 1px 7px; border: 1px solid #c6b7803d; color: #d2c18a; font-size: 10px; line-height: 16px; }
+.region-brief.unbuilt .region-features li { border-color: #ffffff21; color: #aab4a7; }
+.region-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.region-stats > span { padding-left: 10px; border-left: 2px solid #5d7253; color: #879c8a; font-size: 10px; }
+.region-stats b { display: block; font: 16px/1.5 var(--px); color: #e8dfc6; }
+.region-stats small { font: 11px var(--sys); }
+.region-development { margin: 10px 0 0; color: #a8ad9b; font-size: 10px; line-height: 1.7; }
+.region-brief.unbuilt .region-development { padding: 7px 10px; border-left: 2px solid #988766; background: #b9a5740d; color: #c9c3ae; }
+.county-preflight { margin-top: 12px; padding: 12px 16px; border-top: 1px solid #33463d; }
+.county-preflight h3 { display: flex; justify-content: space-between; margin: 0 0 8px; font: 600 12px var(--sys); letter-spacing: 2px; color: #b6c4b4; }
+.county-preflight h3 span { font-weight: 400; letter-spacing: 1px; color: var(--ok); }
+.county-preflight h3 span.bad { color: var(--bad); }
+.county-preflight .checks { gap: 3px; margin-bottom: 10px; }
+.county-preflight .checks li { gap: 7px; font-size: 11px; }
+.county-preflight .checks i { width: 6px; height: 6px; border-width: 1px; }
+.county-preflight .rule { margin: 0; color: #93a08f; font-size: 10px; line-height: 1.6; }
+/* The departure stays in reach while the briefing scrolls: sticky at the foot of its column (or of the phone page). */
+.county-briefing > .go { position: sticky; bottom: 0; z-index: 2; margin-top: auto; display: flex; flex-direction: column; align-items: stretch; gap: 8px; padding: 12px 16px 16px;
+  border-top: 1px solid #33463d; background: linear-gradient(#0e1716f2, #0d1615); }
+.county-briefing > .go > span { color: #e0b38f; font-size: 11px; }
+.county-briefing > .go > span.ok { color: #a9c79f; }
+.go-row { display: flex; gap: 8px; align-items: stretch; }
+.go-row .seedrow { display: flex; flex: none; align-items: center; gap: 6px; margin: 0; color: #9fae9f; font-size: 11px; }
+.go-row .seedrow input { width: 96px; min-height: 0; height: 100%; margin: 0; padding: 4px 8px; }
+.county-briefing > .go button { flex: 1; min-width: 0; min-height: 46px; padding: 10px 16px; font: 16px var(--px); letter-spacing: 4px; color: #1a1d14; text-align: left; cursor: pointer;
+  background: #e2b45c; border: 1px solid #ffe0a0; transition: background .15s, box-shadow .15s; }
+.county-briefing > .go button span { float: right; }
+.county-briefing > .go button:hover:not(:disabled) { background: #f1c977; box-shadow: 0 0 24px #e2b45c38; }
+.county-briefing > .go button:disabled { background: #222a25; color: #9aa898; border-color: #4a584c; opacity: 1; cursor: not-allowed; }
+@keyframes route-draw { from { stroke-dashoffset: 1; } }
+@keyframes route-show { from { opacity: 0; } }
+@keyframes lock-in { from { opacity: 0; scale: 1.7; } }
+@keyframes lock-pulse { from { opacity: .9; scale: .85; } to { opacity: 0; scale: 1.5; } }
+@keyframes art-in { from { clip-path: inset(0 0 100% 0); } }
+@keyframes copy-in { from { opacity: 0; translate: 0 6px; } }
+@media (min-width: 1500px) and (min-height: 850px) {
+  .panel.k-deploy { inset: 5vh 5vw; }
+  .county-deploy { --brief: 420px; }
+  .county-stage { --lock: 80px; }
+  .county-node, .county-base { --pin: 16px; }
+  .node-label { padding: 4px 10px 5px; }
+  .node-label b { font-size: 15px; line-height: 19px; }
+  .node-label small { font-size: 11px; line-height: 14px; }
+  .county-heading { margin: 20px 22px 0 0; padding: 14px 18px; }
+  .county-legend { margin: 0 0 18px 20px; font-size: 12px; }
+  .region-brief { padding: 24px 22px 0; }
+  .region-description { font-size: 13px; }
+  .county-preflight { margin-top: 16px; padding: 16px 22px; }
+  .county-preflight .checks { gap: 6px; }
+  .county-preflight .checks li { font-size: 12px; }
+  .county-briefing > .go { padding: 16px 22px 22px; }
+}
+@media (max-height: 800px) and (min-width: 900px) {
+  .region-brief { padding-top: 12px; }
+  .region-eyebrow { margin-bottom: 6px; }
+  .region-art { aspect-ratio: 2 / 1; }
+  .region-description { margin: 7px 0 5px; line-height: 1.65; }
+  .region-stats { margin-top: 7px; }
+  .region-development { margin-top: 5px; }
+  .county-preflight { margin-top: 8px; padding: 8px 16px; }
+  .county-briefing > .go { gap: 6px; padding: 8px 16px 12px; }
+  .county-briefing > .go button { min-height: 42px; }
+}
+@media (max-width: 899px), (max-height: 559px) {
+  .panel.k-deploy.compact { inset: 0; width: 100%; }
+  .k-deploy.compact .pbody { display: block; padding: 0; }
+  .county-deploy { grid-template-columns: minmax(0, 1fr) clamp(250px, 38%, 340px); }
+  .county-stage { --lock: 44px; }
+  .county-node, .county-base { --pin: 12px; gap: 3px; }
+  .node-label { padding: 2px 5px 3px; }
+  .node-label b { font-size: 11px; line-height: 14px; letter-spacing: 0; }
+  .node-label small { font-size: 9px; line-height: 11px; letter-spacing: 0; }
+  .county-heading { margin: 6px 6px 0 0; padding: 5px 8px; grid-template-columns: auto; }
+  .county-heading small, .county-heading h3 span, .county-compass { display: none; }
+  .county-heading h3 { margin: 0; font-size: 16px; }
+  .county-count { margin-top: 3px; font-size: 10px; }
+  .county-legend { display: none; }
+  .region-brief { padding: 12px 12px 0; }
+  .region-art { aspect-ratio: 2 / 1; }
+  .region-art figcaption { padding: 0 10px 8px; }
+  .region-brief h3 { font-size: 16px; }
+  .region-description { margin: 8px 0 6px; line-height: 1.65; }
+  .county-preflight { margin-top: 8px; padding: 8px 12px; }
+  .county-briefing > .go { gap: 6px; padding: 8px 12px 10px; }
+}
+@media (max-width: 599px) {
+  .county-deploy { display: flex; flex-direction: column; height: auto; }
+  .county-survey { grid-template: 'head' auto 'chart' auto 'legend' auto / minmax(0, 1fr); }
+  .county-heading { grid-area: head; justify-self: stretch; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; margin: 0; padding: 10px 14px; text-align: left; background: #0b1413; border: 0; border-bottom: 1px solid #2c3d36; }
+  .county-heading small { display: block; flex-basis: 100%; letter-spacing: 2px; }
+  .county-heading h3 { font-size: 32px; }
+  .county-count { margin: 0 0 0 auto; font-size: 11px; }
+  .county-chart { grid-area: chart; aspect-ratio: 3 / 2; }
+  .county-legend { grid-area: legend; justify-self: stretch; display: flex; margin: 0; padding: 8px 14px; background: #0b1413; border: 0; border-top: 1px solid #2c3d36; }
+  .county-legend small { margin-left: auto; }
+  .county-legacy { margin: 8px; }
+  .county-briefing { overflow: visible; border-left: 0; border-top: 1px solid #3b4d45; }
+  .region-brief { padding: 14px 16px 0; }
+  .county-back { display: block; min-height: 40px; margin: 0 0 12px; color: var(--amber2); }
+  .region-brief h3 { font-size: 32px; }
+  .region-description { font-size: 13px; }
+  .county-preflight { padding: 12px 16px 16px; }
+  .county-preflight .checks li { font-size: 13px; }
+  .go-row .seedrow input { width: 112px; }
+  .county-briefing > .go { padding: 10px 16px 14px; box-shadow: 0 -10px 24px #0009; }
+  .county-briefing > .go button { min-height: 48px; }
+}
+/* Without container units the stage falls back to the chart width and the light could not be placed: leave it out. */
+@supports not (width: 1cqw) { .county-lit { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .county-stage { transition: none; }
+  .route-bed, .route-line, .county-lock, .county-lock i, .region-art, .region-copy { animation: none; }
+  .node-pin::before, .node-label, .county-lit, .county-briefing > .go button { transition: none; }
+}

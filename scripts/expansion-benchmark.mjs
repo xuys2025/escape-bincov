@@ -31,10 +31,10 @@ for (let i = 0; i < 10; i++) {
     raid.maps[Object.keys(world.maps)[i % 3]].containers.push({ id: `crate-${i}`, name: '容量夹具', kind: 'crate', runId: raid.runId, x: 48 + i * 32, y: 208, inventory });
 }
 const oldProfile = D.newSave(), oldRaid = initialCheckpoint(generateRun(42), D.beginRun(oldProfile, 42));
-const archive = { format: 'escape-bincov-session', version: 3, revision: 5, savedAt: 1000, profile: oldProfile, raid: oldRaid, terminal: null,
-    legacyBackup: JSON.stringify({ ...D.newSave(), version: 1 }), migrationBackup: null };
+const archive = { format: 'escape-bincov-session', version: 8, revision: 5, savedAt: 1000, profile: oldProfile, raid: oldRaid, terminal: null,
+    legacyBackup: JSON.stringify({ ...D.newSave(), version: 1 }), migrationBackup: null, gunsBackup: null };
 decodeSession(JSON.stringify(archive));
-const record = { ...archive, version: 4, revision: 6, profile, raid: null, expansion: state, systemsBackup: JSON.stringify(archive) };
+const record = { ...archive, revision: 6, profile, raid: null, expansion: state, systemsBackup: JSON.stringify(archive) };
 const resolver = id => id === world.id ? world : undefined;
 const bytes = text => new TextEncoder().encode(text).length;
 const summary = numbers => { const sorted = numbers.sort((a, b) => a - b); return { samples: sorted.length, p50: sorted[Math.floor(sorted.length * .5)], p95: sorted[Math.floor(sorted.length * .95)], max: sorted.at(-1) }; };

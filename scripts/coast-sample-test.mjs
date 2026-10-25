@@ -179,7 +179,7 @@ if (!group) { // Desktop flow: one run through every wiring point, ending in a s
   });
   await step('U02 inventory: rotate turns a 3x1 carbine (in place, or through the rotated placement preview when it does not fit); fixture item added through the real save session', async () => {
     await page.keyboard.press('Tab'); await frames(page, 2);
-    const added = await page.evaluate(() => window.__bincov.saveSession.mutate(() => { window.__bincov.app.loadout.bag.items.push({ uid: 'bc-fixture-carbine', id: 'carbine', qty: 1, x: 0, y: 4 }); }));
+    const added = await page.evaluate(() => window.__bincov.saveSession.mutate(() => { window.__bincov.app.loadout.bag.items.push({ uid: 'bc-fixture-carbine', id: 'carbine', qty: 1, x: 0, y: 4, gun: { parts: [], devices: { laser: false, light: false } } }); }));
     assert.equal(added, 'committed', await page.evaluate(() => window.__bincov.app.storageError));
     await page.keyboard.press('Tab'); await frames(page, 3);
     const before = await itemEl(page, 'bc-fixture-carbine').boundingBox();

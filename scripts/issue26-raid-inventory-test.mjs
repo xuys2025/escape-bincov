@@ -34,7 +34,9 @@ const report = {
 };
 const browser = await chromium.launch(browserOptions); report.browser = browser.version();
 const writeReport = () => writeFile(resolve(out, 'report.json'), JSON.stringify(report, null, 2));
-const item = (uid, id, qty = 1, x = 0, y = 0) => ({ uid, id, qty, x, y });
+// A gun item carries its factory state (save v6); the slot names its gun the same way.
+const factory = () => ({ parts: [], devices: { laser: false, light: false } });
+const item = (uid, id, qty = 1, x = 0, y = 0) => ({ uid, id, qty, x, y, ...(['pistol', 'shotgun', 'carbine'].includes(id) ? { gun: factory() } : {}) });
 const fullBag = () => Array.from({ length: 30 }, (_, i) => item(`full-${i}`, 'fuse', 4, i % 6, Math.floor(i / 6)));
 const frames = (page, count = 3) => page.evaluate(n => new Promise(done => {
   let i = 0; const step = () => ++i >= n ? done() : requestAnimationFrame(step); requestAnimationFrame(step);
@@ -109,7 +111,7 @@ async function runCase(entry, viewport, name, test) {
         const ticket = saves.prepareExpansionMutation(draft => {
           const r = draft.expansion.raid, c = r.maps[r.currentMap].containers.find(c => c.id === box.id);
           c.inventory = { w: 6, h: 5, items }; r.loadout.bag.items = bag; r.loadout.safe.items = safe;
-          Object.assign(r.loadout, { weapon, ammo, ammoRelief: 0, relief: false }); r.knife = false; r.reloadLeft = 0;
+          Object.assign(r.loadout, { weapon, weaponUid: weapon ? 'fixture-weapon' : null, gun: weapon ? { parts: [], devices: { laser: false, light: false } } : null, ammo, ammoRelief: 0, relief: false }); r.knife = false; r.reloadLeft = 0;
           Object.assign(draft.expansion.body, { hp: 100, pollution: 0, bleeding: false });
         });
         if (!ticket || saves.commitExpansionMutation(ticket) !== 'committed') throw new Error(`Sample fixture failed strict validation: ${a.storageError}`);

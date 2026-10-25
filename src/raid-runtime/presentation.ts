@@ -1,4 +1,7 @@
 import * as D from '../domain';
+import { getLegacyEnemyProfile } from '../enemy-profile';
+import { actorArchetype, actorDefinition, enemyBoundary } from '../enemy-archetypes';
+import { blockadeProgram, BLOCKADE_WAIT, BLOCKADE_PASSAGE } from '../enemy-blockade';
 import { WORLD, type Point } from '../world';
 import type { BulletState } from '../checkpoint';
 import { tideFlooded } from '../spatial';
@@ -6,6 +9,7 @@ import { isMallWorld } from '../mall-world';
 import { rpgMultipliers } from '../rpg';
 import { coneOf, driftOf } from '../shooting';
 import { BREATH_FULL, breathChance } from '../breath';
+import { perkRaidRules } from '../expansion-state';
 import { critBreakdown } from '../perks';
 import type { CoastRaidRuntime } from './runtime';
 import type { ActorView, CritChanceView, MapDef, RegionDef, TerrainCode, ViewFrame, WorldKey } from './contract';
@@ -107,7 +111,7 @@ const EMPTY_FLOOD: readonly number[] = Object.freeze([]);
 function critChanceView(r: CoastRaidRuntime): CritChanceView | null {
     const version = r.layered?.raid?.version;
     if (version === undefined) return null;
-    if (version !== 3) return { rule: 'old', gun: null, onTarget: null };
+    if (!perkRaidRules(r.layered?.raid)) return { rule: 'old', gun: null, onTarget: null };
     const w = r.currentWeapon, { target, seconds } = r.breath, plain = r.shotCrit(w, { chance: 0, target: null });
     const aimed = plain && target !== null ? r.shotCrit(w, { chance: breathChance(seconds), target }) : undefined;
     return { rule: 'v3', gun: plain ? critBreakdown(plain.sources) : null, onTarget: aimed ? critBreakdown(aimed.sources) : null };
@@ -115,6 +119,9 @@ function critChanceView(r: CoastRaidRuntime): CritChanceView | null {
 
 export function frameView(r: CoastRaidRuntime, map: MapDef, velocities: ReadonlyMap<string, Point>): ViewFrame {
     const revealed = r.revelation.read(r, map);
+    const checkpointOwner=r.enemies.find(e=>e.hp>0&&e.id==='blockade-sentry'&&blockadeProgram(e))
+        ??r.enemies.find(e=>e.hp>0&&e.id==='blockade-sergeant'&&blockadeProgram(e))
+        ??r.enemies.find(e=>e.hp>0&&e.id==='blockade-patrol'&&blockadeProgram(e));
     // Overlap fails closed: a containing unrevealed room wins; deterministic ties by stable ID.
     const regionAt = (p: Point) => map.regions.filter(a => a.inside && contains(a, p))
         .sort((a, b) => Number(!!revealed[a.id]) - Number(!!revealed[b.id]) || a.id.localeCompare(b.id, 'en'))[0]?.id ?? null;
@@ -122,12 +129,22 @@ export function frameView(r: CoastRaidRuntime, map: MapDef, velocities: Readonly
     const actor = (e: typeof r.player | typeof r.enemies[number], player: boolean): ActorView => {
         const enemy = player ? null : e as typeof r.enemies[number], hp = enemy?.hp ?? r.hp;
         const uid = enemy?.uid ?? 'player', velocity = velocities.get(uid) ?? { x: 0, y: 0 };
-        const containerId = `corpse-${uid}`;
-        return { uid, kind: enemy ? enemy.id as ActorView['kind'] : 'player', x: e.x, y: e.y, aim: e.rotation,
-            vx: velocity.x, vy: velocity.y, hp, maxHp: enemy ? D.ENEMIES[enemy.id].hp : limits.hp, alive: hp > 0,
-            weapon: enemy ? enemy.id === 'scav' ? 'club' : enemy.id === 'creature' ? 'claw' : 'rifle' : r.weaponLook,
+        const spec = enemy ? actorArchetype(enemy) : undefined;
+        const registration=enemy&&enemy.uid===checkpointOwner?.uid?blockadeProgram(enemy):null;
+        const containerId = `corpse-${uid}`, profile = spec ? { bodyKind: spec.body, weapon: spec.weapon } : enemy ? getLegacyEnemyProfile(enemy.id) : null;
+        return { uid, kind: profile?.bodyKind ?? 'player', x: e.x, y: e.y, aim: e.rotation,
+            vx: velocity.x, vy: velocity.y, hp, maxHp: enemy ? actorDefinition(enemy).hp : limits.hp, alive: hp > 0,
+            weapon: profile?.weapon ?? r.weaponLook,
+            ...(enemy?.tactics && spec ? { tactics: { archetype: enemy.id, name: spec.name, phase: enemy.tactics.phase,
+                stance: enemy.tactics.stance, awareness: enemy.tactics.awareness, left: enemy.tactics.phaseLeft,
+                total: enemy.tactics.phase === 'windup' ? spec.windup : enemy.tactics.phase === 'reload' ? spec.reload
+                    : enemy.tactics.phase === 'recovery' ? spec.recovery : enemy.tactics.phase === 'release' && spec.attack === 'pounce' ? .3 : 0,
+                range: spec.range, aim: enemy.tactics.lockedAim,
+                warningLeft: Math.max(0, (spec.stance === 'conditional' ? 4 : 1.5) - enemy.tactics.warning),
+                boundary: enemyBoundary(enemy),
+                ...(registration?{checkpoint:{phase:registration.phase,waited:registration.waited,waiting:BLOCKADE_WAIT,passage:BLOCKADE_PASSAGE}}:{}) } } : {}),
             state: { moving: !!(velocity.x || velocity.y), sprinting: player && r.sprinting, precise: player && r.intent.precise,
-                reloading: player && r.reloadLeft > 0 ? { left: r.reloadLeft, total: r.reloadTime } : null,
+                reloading: enemy?.tactics?.phase === 'reload' ? { left: enemy.tactics.phaseLeft, total: spec!.reload } : player && r.reloadLeft > 0 ? { left: r.reloadLeft, total: r.reloadTime } : null,
                 attackCooldown: Math.max(0, enemy?.cooldown ?? r.fireCooldown), hurtLeft: player ? r.hitTime : r.hurtTimers.get(uid) ?? 0, ai: enemy?.state ?? null },
             regionId: regionAt(e), corpse: hp > 0 ? null : { angle: e.rotation - (enemy && !r.layered ? Math.PI / 2 : 0),
                 containerId: r.containers.some(c => c.id === containerId) ? containerId : null } };

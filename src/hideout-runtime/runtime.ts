@@ -405,8 +405,8 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
         return this.transaction('volume', d => { d.profile.settings.volume = volume; return true; });
     }
     departure() {
-        const s = this.snapshot(), p = s.profile, weapon = D.WEAPONS[p.equipment.weapon || 'knife'];
-        const weight = D.weight(p.bag) + D.weight(p.safe) + D.ITEMS.knife.weight + (p.equipment.weapon ? D.ITEMS[p.equipment.weapon].weight : 0)
+        const s = this.snapshot(), p = s.profile, weapon = D.equippedWeapon(p.equipment);
+        const weight = D.weight(p.bag) + D.weight(p.safe) + D.ITEMS.knife.weight + D.equippedWeight(p.equipment)
             + (weapon.ammo ? D.ITEMS[weapon.ammo].weight * p.equipment.ammo : 0) + (this.state.expansion?.charm ? D.ITEMS[this.state.expansion.charm.id].weight : 0);
         return { warnings: [...departureWarnings(s.profile), ...(weight > s.body.carry ? ['携行重量超过当前负重'] : []), ...(s.body.hp < s.body.hpMax ? ['生命尚未恢复'] : [])], weight, carry: s.body.carry };
     }

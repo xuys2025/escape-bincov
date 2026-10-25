@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import * as D from '../src/domain';
 import { createSessionState, SaveSession } from '../src/session';
 import { RecoveryStore, SESSION_KEY } from '../src/recovery-store';
+import { oldProfile } from './fixtures/old-saves';
 const read = (storage: D.StorageLike) => new RecoveryStore(storage).load().save;
 
 /** No global storage, document, Phaser, UI mocks or timers are needed here. */
@@ -62,7 +63,7 @@ test('initialization migrates version-zero but refuses to overwrite malformed sa
     assert.equal(old.session.initialize(), true);
     assert.equal(old.state.save.cash, 1234);
     assert.equal(D.count(old.state.save.stash, 'pearl'), 2);
-    assert.equal(read(old.storage).version, 2);
+    assert.equal(read(old.storage).version, 3);
     const corrupt = fixture('{');
     assert.equal(corrupt.session.initialize(), false);
     assert.equal(corrupt.stored, '{');
@@ -71,10 +72,11 @@ test('initialization migrates version-zero but refuses to overwrite malformed sa
 });
 
 test('interrupted recovery survives a failed startup write without duplicating relief', () => {
-    const old = D.newSave();
-    old.cash = 0; old.stash.items = []; old.bag.items = [];
-    D.addItem(old.safe, 'pearl');
-    D.beginRun(old, 42);
+    const save = D.newSave();
+    save.cash = 0; save.stash.items = []; save.bag.items = [];
+    D.addItem(save.safe, 'pearl');
+    D.beginRun(save, 42);
+    const old = oldProfile(save); // the legacy key only ever holds profiles up to v2
     const f = fixture(JSON.stringify(old));
     f.failWrites(true);
     assert.equal(f.session.initialize(), false);
@@ -168,7 +170,7 @@ test('a committed safe transfer restores the matching live loadout without dupli
 test('relief and volume writes retain the last durable values on failure', () => {
     const f = fixture();
     f.state.save.cash = 0; f.state.save.stash.items = []; f.state.save.bag.items = [];
-    f.state.save.equipment = { weapon: null, relief: false, ammo: 0, ammoRelief: 0 };
+    f.state.save.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 };
     const before = structuredClone(f.state.save);
     f.failWrites(true);
     assert.equal(f.session.grantRelief(), false);

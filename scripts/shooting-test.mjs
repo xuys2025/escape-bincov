@@ -3,6 +3,8 @@
  * hand weapons and freeze enemies. Each step reads the host's published batches through a wrapped frame() and the
  * view's own drawing (weapon sprite transform, muzzle-flash sprites, tracer Graphics instructions, spark particles).
  *   a. a still pointer keeps the published aim while the camera eases (45 and 90 degree moves, 100 and 300 px, hip and precise);
+ *      a-edge: the same with precise aim at the map's west edge (#80), at 1280x720 and 1920x1080, where the look-ahead
+ *      must stop on the edge (the range's firing line, where the follow camera is held, and 24 px inside the edge);
  *   b. firing with a still pointer does not move the aim (pistol, shotgun, carbine);
  *   c. eight directions x pistol, shotgun, carbine, sample M4A1: the flash sits on the barrel tip read from the weapon art
  *      through the sprite's transform, and tracers leave that tip (their line passes it, they never start behind it);
@@ -11,8 +13,11 @@
  *   e. a salt firing out of an unrevealed room draws no tracer pixel over that room;
  *   f. fire modes: a held mouse fires a pistol once and the M4A1 every 0.1 s; a held touch stick repeats the pistol; the
  *      inner ring never fires and precise aim stays off on touch;
- *   g. a blow's flash and kick on an enemy are drawn on at least one frame at 12 and 10 frames a second (#75), and on as
- *      many frames as before at 60, 30 and 15.
+ *   g. a blow's flash and kick on an enemy are drawn from the hit's own frame (#75), on as many frames as before at 60,
+ *      30 and 15 frames a second and on one at 12 and 10; the kick goes 2 px the way the bullet flew (east and south) and
+ *      the blood sprays back toward the shooter; the enemy's body shows its hurt frame, then its recovery frame;
+ *   h. on the host, a critical hit turns the hit marker critical and a kill of that target keeps it; every kill marker
+ *      asks for one kill confirm sound.
  * Waits use raid time or published state; a stall pause resumed during a step (slow software GL) repeats that step.
  */
 import assert from 'node:assert/strict';
@@ -63,6 +68,7 @@ function install() {
     if (!P.rec) return;
     const ptr = this.input.pointer;
     const row = { t: P.t, rev: b.stamp.revision, phase: f.phase, stalls: window.__stallResumes ?? 0, ptr: { x: ptr.x, y: ptr.y },
+      cam: { x: v.cam.x, y: v.cam.y }, lead: v.camF.lead?.m ?? 0,
       p: { x: p.x, y: p.y, aim: p.aim, precise: p.state.precise, weapon: p.weapon }, hudAim: f.hud.aim ? { ...f.hud.aim } : null, revealed: { ...f.revealed },
       ev: b.events.filter(e => e.type === 'shot' || e.type === 'impact').map(e => { const { stamp, ...rest } = e; return JSON.parse(JSON.stringify(rest)); }),
       bl: f.bullets.map(q => ({ uid: q.uid, x: q.x, y: q.y, vx: q.vx, vy: q.vy, enemy: q.enemy })) };
@@ -185,33 +191,77 @@ const save = () => writeFile(resolve(out, 'report.json'), JSON.stringify(report,
 
 /* ---------------------------------------------------------------- the steps ---------------------------------------------------------------- */
 
+/** Step a's moves: the pointer `radius` css px from the chest at theta0, then turned 45 and 90 degrees more, with the right
+ *  button held for precise aim. After each turn the published aim is recorded for 1.2 s of raid time from the first frame
+ *  that read the new pointer; each case ends with the camera and the look-ahead (world px) its last frame drew. */
+async function turnsAt(page, precise, radius, theta0 = 0) {
+  const cases = [];
+  if (precise) await page.mouse.down({ button: 'right' });
+  let theta = theta0;
+  for (const turn of [0, 45, 90]) {
+    theta += turn * Math.PI / 180;
+    const before = await state(page), target = { x: Math.round(before.chest.x + Math.cos(theta) * radius), y: Math.round(before.chest.y + Math.sin(theta) * radius) };
+    assert.ok(await onCanvas(page, target), `pointer target covered: ${JSON.stringify(target)}`);
+    if (turn) await rec(page);
+    await page.mouse.move(target.x, target.y);
+    if (turn) {
+      await page.waitForFunction(([x, y]) => window.__shoot.log.some(r => Math.abs(r.ptr.x - x) < .01 && Math.abs(r.ptr.y - y) < .01), [target.x, target.y], { polling: 'raf' });
+      const t0 = await page.evaluate(([x, y]) => window.__shoot.log.find(r => Math.abs(r.ptr.x - x) < .01 && Math.abs(r.ptr.y - y) < .01).t, [target.x, target.y]);
+      await waitRaid(page, 1.2, t0);
+      const log = (await stop(page)).filter(r => Math.abs(r.ptr.x - target.x) < .01 && Math.abs(r.ptr.y - target.y) < .01);
+      const drift = max(log.map(r => Math.abs(wrap(r.p.aim - log[0].p.aim))));
+      cases.push({ precise, radius, turnDeg: turn, toDeg: r3(theta * 180 / Math.PI, 1), aimAtStopDeg: r3(log[0].p.aim * 180 / Math.PI, 3), seconds: r3(log.at(-1).t - log[0].t, 3),
+        maxDriftRad: r3(drift, 5), maxDriftDeg: r3(drift * 180 / Math.PI, 2), camEnd: log.at(-1).cam, leadEnd: r3(log.at(-1).lead, 2) });
+    }
+    await settle(page);
+  }
+  if (precise) { await page.mouse.up({ button: 'right' }); await settle(page); }
+  return cases;
+}
+
 /** a. A still pointer: the camera eases after the move, the published aim must not. */
 async function stillPointer(page) {
   const cases = [];
-  for (const precise of [false, true]) for (const radius of [100, 300]) {
-    if (precise) await page.mouse.down({ button: 'right' });
-    let theta = 0;
-    for (const turn of [0, 45, 90]) {
-      theta += turn * Math.PI / 180;
-      const before = await state(page), target = { x: Math.round(before.chest.x + Math.cos(theta) * radius), y: Math.round(before.chest.y + Math.sin(theta) * radius) };
-      assert.ok(await onCanvas(page, target), `pointer target covered: ${JSON.stringify(target)}`);
-      if (turn) await rec(page);
-      await page.mouse.move(target.x, target.y);
-      if (turn) {
-        await page.waitForFunction(([x, y]) => window.__shoot.log.some(r => Math.abs(r.ptr.x - x) < .01 && Math.abs(r.ptr.y - y) < .01), [target.x, target.y], { polling: 'raf' });
-        const t0 = await page.evaluate(([x, y]) => window.__shoot.log.find(r => Math.abs(r.ptr.x - x) < .01 && Math.abs(r.ptr.y - y) < .01).t, [target.x, target.y]);
-        await waitRaid(page, 1.2, t0);
-        const log = (await stop(page)).filter(r => Math.abs(r.ptr.x - target.x) < .01 && Math.abs(r.ptr.y - target.y) < .01);
-        const drift = max(log.map(r => Math.abs(wrap(r.p.aim - log[0].p.aim))));
-        cases.push({ precise, radius, turnDeg: turn, toDeg: r3(theta * 180 / Math.PI, 1), aimAtStopDeg: r3(log[0].p.aim * 180 / Math.PI, 3), seconds: r3(log.at(-1).t - log[0].t, 3),
-          maxDriftRad: r3(drift, 5), maxDriftDeg: r3(drift * 180 / Math.PI, 2) });
-      }
-      await settle(page);
-    }
-    if (precise) { await page.mouse.up({ button: 'right' }); await settle(page); }
-  }
+  for (const precise of [false, true]) for (const radius of [100, 300]) cases.push(...await turnsAt(page, precise, radius));
   const worst = cases.reduce((m, c) => c.maxDriftRad > m.maxDriftRad ? c : m);
   check(worst.maxDriftRad <= .01, `aim turned ${worst.maxDriftRad} rad (${worst.maxDriftDeg} deg) under a still pointer`, { cases });
+  return { cases };
+}
+
+/**
+ * a-edge. Step a's precise moves where the camera meets the map's west edge (#80, found by the gunsmith M0-07 prototype).
+ * There the clamp held one axis of the look-ahead while the other kept easing and turned the aim under a still pointer
+ * (main f73e9de on the range's firing line: 8.47 degrees at 1280x720, 3.6-3.7 at 1920x1080); the look-ahead now stops on
+ * the edge. Both desktop sizes, step a's 300 px moves (the 100 px ones turned the aim by at most 2.9 degrees there), on two
+ * spots of the range's street: the firing line, where the follow camera is already held by the edge (no room, so no
+ * look-ahead), and 24 px inside the edge, where the moves toward it must carry the camera onto the edge and stop there.
+ * Without the right button there is no look-ahead, so hip aim is step a's alone.
+ */
+async function stillPointerAtEdge(page) {
+  const cases = [], line = { x: 208, y: 1104 }; // FIRING_LINE in src/range/raid.ts: the same seed 42 coast map
+  try {
+    for (const [width, height] of [[1280, 720], [1920, 1080]]) {
+      await page.setViewportSize({ width, height });
+      await page.waitForFunction(w => window.__bincovSample.host.view.view.W === w, width);
+      await running(page);
+      const w = await page.evaluate(() => window.__bincovSample.host.view.view.w);
+      for (const spot of [{ name: 'firing line', at: line, theta0: 0 }, { name: '24 px inside the edge', at: { x: w / 2 + 24, y: line.y }, theta0: Math.PI / 2 }]) {
+        await place(page, spot.at, 0); await settle(page);
+        // The follow camera's left edge against the map's (CoastView.camBounds): negative while the edge holds it.
+        const followX = await page.evaluate(() => { const v = window.__bincovSample.host.view; return v.camF.x - v.camBounds().x0; });
+        for (const c of await turnsAt(page, true, 300, spot.theta0)) cases.push({ size: `${width}x${height}`, spot: spot.name, followX: r3(followX, 2), ...c });
+      }
+    }
+  } finally {
+    await page.setViewportSize({ width: 1280, height: 720 });
+    await page.waitForFunction(() => window.__bincovSample.host.view.view.W === 1280);
+    await place(page, HOME); await settle(page);
+  }
+  const worst = cases.reduce((m, c) => c.maxDriftRad > m.maxDriftRad ? c : m);
+  check(worst.maxDriftRad <= .01, `aim turned ${worst.maxDriftRad} rad (${worst.maxDriftDeg} deg) under a still pointer at the edge (${worst.size} ${worst.spot}, ${worst.radius} px to ${worst.toDeg} deg)`, { cases });
+  // The spots must stay where the edge holds the camera, or this would pass in open ground.
+  const off = cases.filter(c => c.spot === 'firing line' ? !(c.followX < -100 && c.camEnd.x === 0) : !(c.followX > 20 && c.followX < 28 && c.camEnd.x === 0 && c.leadEnd > 10));
+  check(!off.length, `${off.length} cases not at the edge (firing line: follow camera beyond it, camera on it; 24 px inside: the moves end on it with a look-ahead)`, { cases, off });
   return { cases };
 }
 
@@ -449,53 +499,110 @@ async function touchModes(page, c) {
   return detail;
 }
 
-/** Frames after the hit's own frame that draw a blow's flash (70 ms) and kick (80 ms): 4 each at 60 Hz, 2 at 30 and 1 at
- *  15, as before #75. At 12 and 10 Hz (Pixi caps a frame at 100 ms) the first frame used to outlive both and draw neither. */
+/** Frames that draw a blow's flash (70 ms) and kick (80 ms), from the hit's own frame on: 4 each at 60 Hz, 2 at 30 and 1
+ *  at 15, 12 and 10 (Pixi caps a frame at 100 ms). They used to start a frame after the hit, and at 12 and 10 Hz that
+ *  frame outlived both and drew neither (#75). */
 const BLOW_FRAMES = { 60: [4, 4], 30: [2, 2], 15: [1, 1], 12: [1, 1], 10: [1, 1] };
-/** g. A blow on slow frames: copies of the live batch, one living enemy 64 px east of the player and hit by a bullet flying
- *  east, are presented at each rate's fixed delta with the ticker stopped (the Runtime, input and save never see them). */
+/** Body poses from the hit's own frame on, for a kind whose art has pose frames (#75): H hurt (90 ms), R recovery (60 ms),
+ *  then the idle body. At 12 and 10 Hz the hit's frame shows hurt and the next is already past the recovery. */
+const POSE_FRAMES = { 60: 'HHHHHRRR', 30: 'HHRR', 15: 'HR', 12: 'H', 10: 'H' };
+/** Bullets for g: flying east at every rate in BLOW_FRAMES, and south at 60 Hz so that each axis of the kick is checked. */
+const BLOWS = [...Object.keys(BLOW_FRAMES).map(Number).reverse().map(hz => ({ hz, dir: 'east', vx: 1, vy: 0 })), { hz: 60, dir: 'south', vx: 0, vy: 1 }];
+/** More bullets for g, east at 60 Hz, on the enemy drawn as one of #81's archetypes (#75): group B's three have their own
+ *  hurt and recovery bodies; the raider boss has its own body but no poses, so it keeps its own frames throughout. */
+const STYLED_BLOWS = [['raider-melee', POSE_FRAMES[60]], ['raider-gunner', POSE_FRAMES[60]], ['raider-lookout', POSE_FRAMES[60]], ['raider-boss', '']]
+  .map(([style, pose]) => ({ hz: 60, dir: 'east', vx: 1, vy: 0, style, pose }));
+/** g. A blow on slow frames: copies of the live batch, one living enemy 64 px east of the player and hit by a bullet from
+ *  BLOWS (drawn in its kind's style) or STYLED_BLOWS, are presented at each rate's fixed delta with the ticker stopped (the
+ *  Runtime, input and save never see them). */
 async function blowOnSlowFrames(page) {
-  const runs = await page.evaluate(rates => {
+  const runs = await page.evaluate(blows => {
     const h = window.__bincovSample.host, v = h.view, b = h.lastBatch, f = b.frame, p = f.player, foe = f.actors.find(a => a.alive);
     if (!foe) return null;
-    const at = { x: Math.round(p.x) + 64, y: Math.round(p.y) }, moved = { ...foe, ...at, vx: 0, vy: 0, regionId: p.regionId };
-    const batch = events => ({ ...b, events, frame: { ...f, actors: f.actors.map(a => a.uid === foe.uid ? moved : a) } });
-    // The Runtime's angle for a bullet's hit (layer-transition.ts): atan2(-vy, -vx), toward the shooter.
-    const vx = 1, vy = 0, hit = { type: 'hurt', cause: 'blow', uid: foe.uid, at, damage: 10, critical: false, angle: Math.atan2(-vy, -vx), seq: 0, stamp: b.stamp, durability: 'accepted' };
+    const { tactics: _, ...plain } = foe, at = { x: Math.round(p.x) + 64, y: Math.round(p.y) };
     h.app.ticker.stop();
     try {
-      return rates.map(hz => {
+      return blows.map(({ hz, dir, vx, vy, style, pose: want }) => {
+        // A styled enemy carries the tactics fields the view reads, with that archetype.
+        const tactics = style ? { tactics: { archetype: style, name: style, phase: 'idle', stance: 'idle', awareness: 0, left: 0, total: 1, range: 30, aim: Math.PI, warningLeft: 0, boundary: null } } : {};
+        const moved = { ...plain, ...at, vx: 0, vy: 0, regionId: p.regionId, ...tactics };
+        const batch = events => ({ ...b, events, frame: { ...f, actors: f.actors.map(a => a.uid === foe.uid ? moved : a) } });
+        // The Runtime's angle for a bullet's hit (layer-transition.ts): atan2(-vy, -vx), back toward the shooter.
+        const hit = { type: 'hurt', cause: 'blow', uid: foe.uid, at, damage: 10, critical: false, angle: Math.atan2(-vy, -vx), seq: 0, stamp: b.stamp, durability: 'accepted' };
         const dt = 1 / hz;
         // Idle frames age any earlier flash or kick away; the body then stands where no kick puts it.
         for (let i = 0; i < 3; i++) v.present(batch([]), .1);
-        const g = v.actors.get(foe.uid), rest = { x: g.body.x, y: g.body.y };
-        const read = () => ({ body: g.body.visible, flash: g.flash.visible, kick: [g.body.x - rest.x, g.body.y - rest.y] });
+        const g = v.actors.get(foe.uid), rest = { x: g.body.x, y: g.body.y }, before = new Set(v.fx.live);
+        // H hurt, R recovery, - one of the body's own idle and walk frames, ? anything else (another style, the placeholder).
+        const own = n => g.body.texture === v.tex.actor(moved.kind, g.dir, n, style);
+        const pose = () => own(5) ? 'H' : own(6) ? 'R' : [0, 1, 2, 3, 4].some(own) ? '-' : '?';
+        const read = () => ({ body: g.body.visible, flash: g.flash.visible, kick: [g.body.x - rest.x, g.body.y - rest.y], pose: pose() });
         v.present(batch([hit]), dt);
-        const hitFrame = read(), frames = [];
-        for (let i = 0; i * dt < .25; i++) { v.present(batch([]), dt); frames.push(read()); }
-        return { hz, uid: foe.uid, kind: foe.kind, hitFrame, frames };
+        // The blow's blood drops, still in the air after one frame: each one's speed along the bullet (px/s).
+        const blood = v.fx.live.filter(q => !before.has(q) && q.settle === 'decal').map(q => Math.round(q.vx * vx + q.vy * vy));
+        // The hit's own frame first, then a quarter of a second.
+        const frames = [read()];
+        for (let i = 1; i * dt < .25; i++) { v.present(batch([]), dt); frames.push(read()); }
+        return { hz, dir, style, want, bullet: [vx, vy], uid: foe.uid, kind: foe.kind, frames, blood };
       });
     } finally { h.app.ticker.start(); }
-  }, Object.keys(BLOW_FRAMES).map(Number).reverse());
+  }, [...BLOWS, ...STYLED_BLOWS]);
   check(runs, 'no living enemy to hit');
   const cases = runs.map(r => {
     const flash = r.frames.map(q => q.flash), kick = r.frames.map(q => q.kick[0] !== 0 || q.kick[1] !== 0);
     const count = s => s.filter(Boolean).length, leading = s => s.slice(0, count(s)).every(Boolean);
-    return { hz: r.hz, enemy: `${r.kind} ${r.uid}`, flashFrames: count(flash), kickFrames: count(kick), fromFirstFrame: leading(flash) && leading(kick),
-      kicksPx: [...new Set(r.frames.filter((q, i) => kick[i]).map(q => q.kick.join(',')))], drawn: r.frames.every(q => q.body),
-      hitFrame: { flash: r.hitFrame.flash, kickPx: r.hitFrame.kick.join(',') }, flashByFrame: flash.map(Number).join(''), kickByFrame: kick.map(Number).join('') };
+    return { hz: r.hz, dir: r.dir, style: r.style ?? null, enemy: `${r.kind} ${r.uid}`, flashFrames: count(flash), kickFrames: count(kick), fromFirstFrame: leading(flash) && leading(kick),
+      kicksPx: [...new Set(r.frames.filter((q, i) => kick[i]).map(q => q.kick.join(',')))], wantPx: r.bullet.map(d => d * 2).join(','), drawn: r.frames.every(q => q.body),
+      hitFrame: { flash: r.frames[0].flash, kickPx: r.frames[0].kick.join(',') }, flashByFrame: flash.map(Number).join(''), kickByFrame: kick.map(Number).join(''),
+      bloodAlongBullet: r.blood, poseByFrame: r.frames.map(q => q.pose).join(''), wantPose: (r.want ?? POSE_FRAMES[r.hz]).padEnd(r.frames.length, '-') };
   });
   const fail = cases.flatMap(c => {
-    const [flash, kick] = BLOW_FRAMES[c.hz], out = [];
-    if (!c.drawn) out.push(`${c.hz} Hz: the enemy was not drawn`);
-    if (c.flashFrames !== flash || c.kickFrames !== kick || !c.fromFirstFrame) out.push(`${c.hz} Hz: flash on ${c.flashFrames} and kick on ${c.kickFrames} frames (want ${flash} and ${kick} from the first frame after the hit)`);
-    // Toward the shooter, as before: whether it should follow the bullet instead is left to the maintainer (#75).
-    if (c.kicksPx.some(k => k !== '-2,0')) out.push(`${c.hz} Hz: kicked ${c.kicksPx.join(' / ')} px (want -2,0)`);
+    const [flash, kick] = BLOW_FRAMES[c.hz], out = [], at = `${c.hz} Hz ${c.dir}${c.style ? ` as ${c.style}` : ''}`;
+    if (!c.drawn) out.push(`${at}: the enemy was not drawn`);
+    if (c.flashFrames !== flash || c.kickFrames !== kick || !c.fromFirstFrame) out.push(`${at}: flash on ${c.flashFrames} and kick on ${c.kickFrames} frames, by frame ${c.flashByFrame} / ${c.kickByFrame} (want ${flash} and ${kick} from the hit's own frame)`);
+    // Knocked 2 px the way the bullet flew (#75), while the blood still sprays back toward the shooter.
+    if (c.kicksPx.some(k => k !== c.wantPx)) out.push(`${at}: kicked ${c.kicksPx.join(' / ')} px (want ${c.wantPx})`);
+    if (!c.bloodAlongBullet.length || c.bloodAlongBullet.some(s => s >= 0)) out.push(`${at}: blood speeds along the bullet ${c.bloodAlongBullet.join(' / ') || 'none'} (want all below 0, back toward the shooter)`);
+    if (c.poseByFrame !== c.wantPose) out.push(`${at}: body poses ${c.poseByFrame} (want ${c.wantPose})`);
     return out;
   });
   check(!fail.length, fail.join('; '), { cases });
   await running(page);
   return { cases };
+}
+
+/** h. Hit confirmation on the host (#75): the impact, hurt and death events a player's round publishes, for one living
+ *  enemy moved next to the player, go through the host's own feedback (as coast-sample's marker checks do). A critical
+ *  hit turns the marker critical, a kill of that target keeps it, a plain hit starts plain again, and every kill marker
+ *  asks for one confirm sound. The Runtime and the save never see these events. */
+async function hitConfirm(page) {
+  const r = await page.evaluate(() => {
+    const h = window.__bincovSample.host, b = h.lastBatch, f = b.frame, p = f.player, foe = f.actors.find(a => a.alive);
+    if (!foe) return null;
+    const at = { x: Math.round(p.x) + 48, y: Math.round(p.y) }, moved = { ...foe, ...at, vx: 0, vy: 0, regionId: p.regionId };
+    const copy = { ...b, events: [], frame: { ...f, actors: f.actors.map(a => a.uid === foe.uid ? moved : a) } };
+    const ev = body => ({ ...body, seq: 0, stamp: b.stamp, durability: 'accepted' });
+    const impact = ev({ type: 'impact', bullet: 'probe-bullet', owner: 'player', reason: 'hit-actor', lastFree: at, contact: at, normal: null, surface: 'actor', target: foe.uid });
+    const hurt = critical => ev({ type: 'hurt', cause: 'blow', uid: foe.uid, at, damage: 10, critical, angle: Math.PI });
+    const death = ev({ type: 'death', uid: foe.uid, corpseAngle: 0, containerId: null });
+    const pop = document.querySelector('[data-hitpop]'), out = h.sound.out, kill = out.kill;
+    let kills = 0;
+    out.kill = function (...a) { kills++; return kill.apply(this, a); };
+    const read = () => ({ on: pop.classList.contains('on'), crit: pop.classList.contains('crit'), kill: pop.classList.contains('kill'), markT: Math.round(h.markT * 100) / 100, kills });
+    const feed = (...events) => { for (const e of events) h.feedback(e, copy); return read(); };
+    try {
+      return { plain: feed(impact, hurt(false)), crit: feed(impact, hurt(true)), critKill: feed(death),
+        plainAgain: feed(impact, hurt(false)), plainKill: feed(death) };
+    } finally { out.kill = kill; }
+  });
+  check(r, 'no living enemy to mark');
+  const want = { plain: [false, false, .2, 0], crit: [true, false, .3, 0], critKill: [true, true, .42, 1], plainAgain: [false, false, .2, 1], plainKill: [false, true, .42, 2] };
+  const fail = Object.entries(want).flatMap(([k, [crit, kill, markT, kills]]) => {
+    const s = r[k];
+    return s.on && s.crit === crit && s.kill === kill && s.markT === markT && s.kills === kills ? [] : [`${k}: ${JSON.stringify(s)} (want crit ${crit}, kill ${kill}, ${markT} s, ${kills} confirm sounds)`];
+  });
+  check(!fail.length, fail.join('; '), r);
+  return r;
 }
 
 /* ---------------------------------------------------------------- run ---------------------------------------------------------------- */
@@ -504,9 +611,11 @@ let desktop, phone;
 try {
   desktop = await context('desktop', {});
   await step('a', 'a still pointer keeps the aim while the camera eases', desktop, stillPointer);
+  await step('a-edge', 'at the map edge a still pointer keeps the aim too: the look-ahead stops on the edge', desktop, stillPointerAtEdge);
   await step('b', 'firing with a still pointer keeps the aim', desktop, kickKeepsAim);
   await step('c', 'muzzle flash on the barrel tip; tracers leave the tip', desktop, muzzleAndTracers);
   await step('g', 'a blow\'s flash and kick are drawn on slow frames', desktop, blowOnSlowFrames);
+  await step('h', 'a critical hit turns the hit marker critical; each kill marker asks for one confirm sound', desktop, hitConfirm);
   await step('f-desktop', 'mouse fire modes: pistol once, M4A1 every 0.1 s', desktop, desktopModes);
   await step('e', 'a shot out of an unrevealed room draws nothing over it', desktop, hiddenRoom);
   desktop.stallResumes = await stallResumes(desktop.page);

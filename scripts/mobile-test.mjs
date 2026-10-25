@@ -166,7 +166,7 @@ try{
  await step('live backup round trip and failed medical transaction preserve consistent state',async()=>{
   // The pause panel offers the live backup.
   const promise=page.waitForEvent('download');await raid('backup').tap();const file=resolve(out,'live-backup.json');await (await promise).saveAs(file);
-  const backup=JSON.parse(await readFile(file,'utf8'));assert.equal(backup.formatVersion,5);assert.equal(backup.record.expansion.version,3);assert.equal(backup.record.expansion.body.hp,72);
+  const backup=JSON.parse(await readFile(file,'utf8'));assert.equal(backup.formatVersion,8);assert.equal(backup.record.expansion.version,3);assert.equal(backup.record.expansion.raid.version,5);assert.ok('enemyBackup' in backup.record);assert.equal(backup.record.expansion.body.hp,72);
   await raid('resume').tap();await panelIs(null);await running(page);
   // Inventory stays live: let any reload finish before comparing the medical transaction's before/after loadout.
   await page.waitForFunction(()=>!window.__bincovSample.host.lastBatch.frame.hud.weapon.reloading);

@@ -12,6 +12,7 @@ import { changeLayer } from '../src/layer-transition';
 import { BREATH_FULL, breathChance } from '../src/breath';
 import { characterCritChance, snapshotChance, type CritSnapshot, type PerkId } from '../src/perks';
 import { arm, perkBench, reopen, LANE, type Bench, type Gun } from './fixtures/shooting-bench';
+import { makeV4 } from './fixtures/old-saves';
 
 // CP-T07 of #77 (docs/CRITICAL-PERK-DESIGN.md section 4, docs/tasks/critical-perk-contract.md section 4): the breath
 // charge of technique-15-a inside the one raid Runtime, through real frames and real shots. src/breath.ts and
@@ -492,7 +493,7 @@ test('v2 and classic raids never charge: no published breath, and a held precise
     };
     // v2: the record a v4 client wrote for a deployment at the breath perk's level, resumed by this page.
     const v4 = perkBench(['technique-15-a'], 15), record = JSON.parse(v4.data.get(SESSION_KEY)!);
-    record.version = 4; delete record.perksBackup; record.expansion.version = 2; delete record.expansion.growth.perks; record.expansion.raid.version = 2;
+    makeV4(record);
     v4.data.set(SESSION_KEY, JSON.stringify(record));
     const page = reopen(v4), v2 = arm({ ...v4, ...page, driver: createRuntimeTestDriver(page.runtime, '?test=1') }, 'carbine');
     assert.equal(v2.runtime.layered!.raid!.version, 2);

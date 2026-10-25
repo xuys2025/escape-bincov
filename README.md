@@ -11,7 +11,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-77a79d?style=flat-square&labelColor=142323)
 ![PixiJS](https://img.shields.io/badge/PixiJS-8.22.0-cb906b?style=flat-square&labelColor=142323)
 
-### [▶️ 在线试玩](https://xuys2025.github.io/escape-bincov/) · [🎯 试枪场](https://xuys2025.github.io/escape-bincov/?range=1) · [📦 下载离线版](https://github.com/xuys2025/escape-bincov/raw/refs/heads/main/release/Escape-Bincov-portable.zip)
+### [▶️ 在线试玩](https://xuys2025.github.io/escape-bincov/) · [🎯 试枪场](https://xuys2025.github.io/escape-bincov/?range=1) · [📦 下载离线版](https://github.com/xuys2025/escape-bincov/releases/download/main-latest/Escape-Bincov-portable.zip)
 
 <a href="https://xuys2025.github.io/escape-bincov/">
   <img src="docs/station-relief-20261011/evidence/entry-1920x1080.png" alt="水产站雨夜院子：院门、火桶、居民与整备快捷入口" width="100%">
@@ -43,7 +43,7 @@
 | 潮汐与生存 | 行动第 4 分 30 秒预警、第 5 分钟潮位变化；留意污染、流血、水分、饱食与携行重量。 |
 | 存档与恢复 | 浏览器本地保存、检查点续局、JSON 备份迁移；交易与结算写入失败可重试，多窗口冲突有保护。 |
 
-出击面板提供两个区域，都使用 2.5D 画面，美术仍在补齐：
+出击面板以县域地图展示十二个规划区域：沿海街区、滨湾商场可以出击，其余十区标记「暂未开发」，可查看规划简介和区域情报示意图（概念插图，不是关卡截图）。老城街区位置提供现有沿海街区入口，完整老城仍待扩展。当前两处可玩区域都使用 2.5D 画面，美术仍在补齐：
 
 | 区域 | 内容 | 美术进度 |
 | --- | --- | --- |
@@ -52,11 +52,20 @@
 
 原「沿海封锁区」和沿海街区是同一张地图，已经关闭，之后作为新地图重做。此前开始、还没结束的封锁区行动和商场旧布局行动，仍可从标题页「继续」，同样在 2.5D 画面上打完。
 
+![出击面板的县域战术地图：滨湾商场已选中，路线从水产站沿公路画出，右侧是区域情报插图与出发前检查](docs/tasks/county-map-select/1920x1080.png)
+
+<p align="center">
+  <img src="docs/tasks/county-map-select/1280x720-unbuilt.png" alt="选中暂未开发的灯塔岬角：周围局部点亮、灰白虚线准星，出击按钮显示暂未开发" width="76%">
+  <img src="docs/tasks/county-map-select/390x844.png" alt="手机竖屏的出击面板：完整县域地图、区域情报插图，出击按钮贴在屏幕底部" width="20%">
+</p>
+
+<sub>2026-10-24 实际构建截图（新档，无资源或进度修改）：桌面 1920×1080 与 1280×720、手机竖屏 390×844。地图底图和区域插图是示意美术，插图不是关卡截图。实现与验证见[县域选图记录](docs/tasks/county-map-select.md#opus-视觉深化2026-10-24)。</sub>
+
 标题页、院子和所有行动都由 PixiJS 绘制；旧页签界面和结算页是 HTML 界面，背景为固定的站外画。各画面共用正式的会话、存档和交易服务。院子画面启动失败时会回到旧页签界面；玩家也可以主动切换。
 
 ![训练区与设施面板：真实训练进度、修建材料与功能页签](docs/station-tier2-20261011/evidence/final/training-panel-1280x720.png)
 
-<sub>本页复用 2026-10-11 的实际构建验收截图，包含测试用进度和物资配置，不代表新档初始资源。截图来源：[进站验收](docs/station-relief-20261011/README.md)、[训练与补给验收](docs/station-tier2-20261011/README.md)。</sub>
+<sub>首图与训练面板复用 2026-10-11 的实际构建验收截图，包含测试用进度和物资配置，不代表新档初始资源。截图来源：[进站验收](docs/station-relief-20261011/README.md)、[训练与补给验收](docs/station-tier2-20261011/README.md)。</sub>
 
 ## ▶️ 开始第一局
 
@@ -64,7 +73,7 @@
 
 **在线：** 用电脑端 Chrome 或 Edge 打开 [GitHub Pages](https://xuys2025.github.io/escape-bincov/)。页面加载完成后，游戏运行无需外部素材、账号或服务器连接。
 
-**离线：** 下载 [便携 ZIP](https://github.com/xuys2025/escape-bincov/raw/refs/heads/main/release/Escape-Bincov-portable.zip)，解压到固定目录，双击 `start the game.html`。游玩无需 Node.js 或联网；若打开了编辑器，请右键选择 Chrome 或 Edge。
+**离线：** 下载 [便携 ZIP](https://github.com/xuys2025/escape-bincov/releases/download/main-latest/Escape-Bincov-portable.zip)，解压到固定目录，双击 `start the game.html`。它是 `main` 最近一次通过全部检查的构建，每次验证成功后自动更新（[发布页](https://github.com/xuys2025/escape-bincov/releases/tag/main-latest)写明对应提交）。游玩无需 Node.js 或联网；若打开了编辑器，请右键选择 Chrome 或 Edge。
 
 1. **进站整备**：标题页点击「进入」，新档会先播放序幕，可点「跳过」或按 `Esc`。进入院子后按 `Tab` 打开整备，检查主武器、备用弹药和药品。购买的物资结算后进入仓库，需要自行整理到背包。
 2. **选择区域**：走到院门互动，或按 `G` 打开「出击准备」，选区域后出击。第一次可将行动种子留空。
@@ -77,13 +86,13 @@
 
 打开 [试枪场](https://xuys2025.github.io/escape-bincov/?range=1)，可切换手枪、卡宾枪、霰弹枪、匕首与 M4A1 自动枪样本，对固定靶和移动靶练习。面板显示命中数、散布、后坐偏移与举枪进度；试枪场使用内存中的临时进度，**不读取或改写正式存档**，刷新后重置。
 
-本地源码仓库可双击 `试枪场.html`；下载的便携版则打开 `start the game.html`，在浏览器地址末尾加 `?range=1`。M4A1 目前仅供试枪场和显式样板/测试入口使用，尚未加入正式商店、搜刮或存档；二十枪、一百配件的完整改枪系统仍在开发。
+本地源码仓库先运行 `pnpm build`，再双击 `试枪场.html`；下载的便携版则打开 `start the game.html`，在浏览器地址末尾加 `?range=1`。M4A1 目前仅供试枪场和显式样板/测试入口使用，尚未加入正式商店、搜刮或存档；二十枪、一百配件的完整改枪系统仍在开发。
 
 ### 样板入口（看美术进度用）
 
 普通入口已经是 2.5D 画面。另有两个样板入口，方便看美术做到哪里：[`?sample=village`](https://xuys2025.github.io/escape-bincov/?sample=village) 预选沿海街区，种子留空时挑一个从精修街口出发的种子；[`?sample=mall`](https://xuys2025.github.io/escape-bincov/?sample=mall) 预选滨湾商场。两个入口都会把还没精修的地方压暗，并在左上角地点后标「样板外」。
 
-本地仓库可双击根目录的 `城中村试玩.html` 或 `商场试玩.html`。样板和普通入口在同一网站使用同一份存档。
+本地仓库运行 `pnpm build` 后，可双击根目录的 `城中村试玩.html` 或 `商场试玩.html`。样板和普通入口在同一网站使用同一份存档。
 
 ### 保存与迁移
 
@@ -132,7 +141,8 @@
 ## 🚧 当前边界与反馈
 
 - **美术仍在补齐**：院子四位主要人物、关键道具、城中村首批素材，以及现有四类敌人的行走、尸体和持握图已接入。其余居民、环境与动画仍有占位或画风差异；全沿海精修、商场其余区域和院子昼夜变化尚未完成。
-- **设计与可玩内容有区别**：十二地区地图、市场剧情与后续主线/人物结局尚未落地；十八敌人原型、完整改枪系统及新暴击/三属性 Perk 正在规划或开发，尚未进入当前正式玩法。进度见下方文档导航与任务清单。
+- **敌人体系正在扩展**：新街区行动有近身掠夺者、枪手和望风者样板，可利用前摇、换弹和失联搜索的空隙；近身掠夺者亲眼看见你上楼时可能沿入口跟来。现有活动行动保持原规则。完整十八原型及其正式美术仍在开发，详见[样板范围](docs/tasks/enemy-street-encounter.md)。
+- **设计与可玩内容有区别**：十二地区地图、市场剧情与后续主线/人物结局尚未落地；完整改枪系统及新暴击/三属性 Perk 正在规划或开发，尚未进入当前正式玩法。进度见下方文档导航与任务清单。
 - **长期稳定性仍需验证**：资源释放、行动恢复、交易与结算已有修复和回归；长期内存验收仍未完成。历史未签收项与后续缺陷分别见 [#32](https://github.com/xuys2025/escape-bincov/issues/32) 和 [#60](https://github.com/xuys2025/escape-bincov/issues/60)。
 - **自动通过不等于真人验收**：真机、实际 GPU 性能、长时间手感与平衡性仍需试玩反馈。多人联机、云存档未实现。
 
@@ -155,8 +165,8 @@ pnpm dev
 | 命令 | 用途 |
 | --- | --- |
 | `pnpm test` | 领域规则、世界、Runtime、存档与事务单测 |
-| `pnpm build` | 严格类型检查，生成 `dist/index.html` 与 `start the game.html` |
-| `pnpm package` | 构建并生成离线 ZIP、网页 ZIP 和 `docs/release-manifest.json` |
+| `pnpm build` | 严格类型检查，生成 `dist/index.html` 与 `start the game.html`（生成物不入库，下同） |
+| `pnpm package` | 构建并在 `release/` 生成离线 ZIP、网页 ZIP 和发布清单 |
 | `pnpm test:station` / `pnpm test:hideout` | 院子交互与宿主切换 / 据点接口浏览器回归 |
 | `pnpm test:station-tier1` / `pnpm test:station-tier2` / `pnpm test:station-relief` | 计数与护符 / 训练与补给 / 进站救济专项 |
 | `pnpm test:raid-default` | 普通入口：两个区域、街区和商场走 2.5D、旧行动续玩、无 WebGL 提示 |
@@ -178,9 +188,9 @@ pnpm dev
 
 当前只有一个行动 Runtime，兼容经典与分层两类存档；界面展示、实时模拟和最近检查点不是同一个状态。修改前先沿 [架构中的状态边界](docs/ARCHITECTURE.md) 确认权威值和提交入口。新增外部 ID、库存自动落格或计时逻辑时，保留非法输入、失败回滚和时间边界反例；本次审计及剩余风险见 [审计记录](docs/tasks/audit-contracts.md)。
 
-同一交付目标继续原分支与 PR，独立任务才另开分支；不得覆盖他人工作或直接推送 `main`。源码、打包脚本或游玩说明变化后按仓库要求重新打包。存档兼容、写入失败回滚与单文件离线能力必须保留。
+同一交付目标继续原分支与 PR，独立任务才另开分支；不得覆盖他人工作或直接推送 `main`。打包生成的 HTML 和 ZIP 不提交，由 CI 构建。存档兼容、写入失败回滚与单文件离线能力必须保留。
 
-PR 经 CI 验证、维护者确认合并后，`main` 的 CI 成功才会更新 GitHub Pages。**PR 提交、PR 合并和试玩上线是三个不同状态**；公开试玩以最后一次成功部署为准。托管与存档迁移见 [部署手册](docs/DEPLOYMENT.md) 和 [大陆在线游玩指南](docs/ONLINE-CHINA.md)。
+PR 经 CI 验证、维护者确认合并后，`main` 的 CI 成功才会更新 GitHub Pages 和离线下载包。**PR 提交、PR 合并和试玩上线是三个不同状态**；公开试玩以最后一次成功部署为准。托管与存档迁移见 [部署手册](docs/DEPLOYMENT.md) 和 [大陆在线游玩指南](docs/ONLINE-CHINA.md)。
 
 ## 📚 文档导航
 
@@ -196,6 +206,7 @@ PR 经 CI 验证、维护者确认合并后，`main` 的 CI 成功才会更新 G
 | 游戏规则、物品与搜刮 | [游玩手册](docs/PLAYING.md) · [搜刮说明](docs/LOOTING.md) |
 | 成长、基地、建筑与商场设计 | [RPG 系统](docs/RPG-SYSTEM-DESIGN.md) · [暴击与 Perk（已排期，待实现）](docs/CRITICAL-PERK-DESIGN.md) · [可行性与实施安排](docs/tasks/critical-perk-plan.md) · [建筑逻辑](docs/BUILDING-LOGIC.md) · [商场地图](docs/MALL-VALIDATION-MAP.md) |
 | 现有四类敌人素材（已接入）、十八原型体系（开发中） | [素材与验收](docs/enemy-art/README.md) · [敌人详细设定](docs/ENEMY-DESIGN.md) · [实施进度 #78](https://github.com/xuys2025/escape-bincov/issues/78) |
+| 改枪系统：20 枪、100 配件（已排期，M0 进行中） | [改枪计划](docs/gunsmith/README.md) · [任务与排期](docs/gunsmith/TASKS.md) · [进度 #80](https://github.com/xuys2025/escape-bincov/issues/80) |
 | 世界观与长线故事（文稿已合入，后续玩法待开发） | [世界与主线](docs/WORLD-REGIONS-STORY.md) · [《等海退去》](docs/MAIN-STORY.md) · [文学改写记录](docs/story/GEMINI-REWRITE-20261014.md) |
 | 地图、主线与人物结局的后续实施 | [十二地区 #82](https://github.com/xuys2025/escape-bincov/issues/82) · [市场首批 #83](https://github.com/xuys2025/escape-bincov/issues/83) · [后续主线 #84](https://github.com/xuys2025/escape-bincov/issues/84) · [人物与结局 #85](https://github.com/xuys2025/escape-bincov/issues/85) |
 | 技术架构与贡献流程 | [架构](docs/ARCHITECTURE.md) · [贡献指南](CONTRIBUTING.md) · [任务清单](docs/WORK-QUEUE.md) |

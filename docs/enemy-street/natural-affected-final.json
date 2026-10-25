@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "htmlSha256": "94d0d453601ec5800c85c08ebf074486504ed929ebb41e14d66b63837ebb4475",
+  "startedAt": "2026-10-24T02:52:04.943Z",
+  "finishedAt": "2026-10-24T03:02:19.804Z",
+  "methodology": "Automated real-time session on the layered street with new enemy encounters (2.5D view). Test hook is read-only: no teleports, no clock changes, no changes to health, enemies, inventory or RNG. All actions use visible buttons and real keyboard/mouse, including E opening and native inventory drag for crates and corpses. This is not a human fun/balance evaluation.",
+  "observationPolicy": "Before the first street windup: walk the authored public west/cross street, approach a visible new enemy, and wait for its real preparation before shooting it. No game-state mutations.",
+  "enemyPhases": {
+    "raider-melee/idle": 42,
+    "raider-gunner/idle": 27,
+    "raider-gunner/windup": 20,
+    "raider-melee/windup": 3,
+    "raider-lookout/idle": 8,
+    "raider-gunner/recovery": 8,
+    "raider-lookout/windup": 3
+  },
+  "errors": [],
+  "externalRequests": [],
+  "finalStats": {
+    "runs": 2,
+    "extracts": 2,
+    "kills": 26
+  },
+  "outcomes": 2,
+  "nativeTransfers": 32
+}
