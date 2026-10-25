@@ -4,6 +4,9 @@ import { browserGroups, manualSuites, suitesForGroup } from './ci/browser-suites
 
 const descriptions = {
   enemy: '新敌人保存场景、攻击阶段、素材和条件交涉', browser: '普通行动入口与基本操作', 'desktop-input': '真实键鼠、组合输入与释放', shooting: '射击、镜头、弹道与慢帧反馈',
+  'enemy-720': '完整敌人验收的 1280×720 视口链（街区与商场）',
+  'enemy-1080': '完整敌人验收的 1920×1080 视口链（街区与商场）',
+  'enemy-touch': '完整敌人验收的 844×390 原生触控视口链（街区与商场）',
   'save-browser': '保存失败、重试、导入导出与多窗口', play: '约十分钟真实计时行动', portable: '解压两种 ZIP、离线入口与操作',
   ui: '桌面界面布局', mobile: '触屏行动与按钮', 'mobile-ux': '手机横竖屏、短屏与操作边界', title: '标题页与输入',
   opening: '序幕播放、跳过与持久化', loot: '搜刮、物品转移与退出输入', 'loot-target': '附近搜刮目标与选择',

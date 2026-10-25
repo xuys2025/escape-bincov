@@ -141,7 +141,7 @@ test('schedule preserves every baseline browser command exactly once and runs th
     'issue26-station', 'issue26-inventory', 'issue26-spatial', 'ui', 'coast-animation', 'tactical', 'art', 'opening',
     'title', 'title-water', 'save-browser', 'expansion', 'buildings', 'qol-expansion', 'systems', 'station-tier1', 'station-tier2',
     'station-relief', 'station-reset', 'mall-passages', 'mall-landing', 'mall-sample', 'loot', 'loot-target', 'qol', 'mobile', 'mobile-ux', 'portable', 'raid-default', 'hideout',
-    'range', 'shooting', 'enemy'];
+    'range', 'shooting', 'enemy-720', 'enemy-1080', 'enemy-touch'];
   assert.deepEqual([...allSuiteIds].sort(), expected.sort());
   assert.equal(new Set(allSuiteIds).size, expected.length);
   const scripts = JSON.parse(readFileSync(resolve('package.json'), 'utf8')).scripts;

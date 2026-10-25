@@ -5,11 +5,13 @@ import { raidReady, drive, frames } from './raid-view.mjs';
 import { resumeStalls } from './stall-resume.mjs';
 import { decodeSession, SESSION_KEY } from '../src/recovery-store.ts';
 import { MALL_RAIDERS } from '../src/enemy-mall.ts';
+import { enemyViewports } from './enemy-browser-plan.mjs';
 
 /** Native deployment, real stair activation and paid phases; only observation positions use test fixtures. */
-export async function runMallEnemyCases(browser, report, out, { priorClient, priorClientCommit = '67a7468' } = {}) {
+export async function runMallEnemyCases(browser, report, out, { priorClient, priorClientCommit = '67a7468',
+    viewports = enemyViewports, onViewportComplete = () => {} } = {}) {
     const entry = pathToFileURL(resolve('dist/index.html')).href;
-    for (const viewport of [{ width: 1280, height: 720 }, { width: 1920, height: 1080 }, { width: 844, height: 390 }]) {
+    for (const viewport of viewports) {
         const touch = viewport.width < 1000;
         const context = await browser.newContext({ viewport, offline: true, hasTouch: touch, isMobile: touch });
         await resumeStalls(context);
@@ -79,5 +81,6 @@ export async function runMallEnemyCases(browser, report, out, { priorClient, pri
             }
             console.log(`PASS native mall ${viewport.width}: deployment, hidden F1, real stair, own art, paid phase and exact refresh`);
         } finally { await context.close(); }
+        onViewportComplete(viewport);
     }
 }

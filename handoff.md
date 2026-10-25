@@ -228,6 +228,12 @@ EN-13 接入每五种子之一的头目＋两护卫，替换已有名册三人�
 - 已知仍是缺口、留在测试里作回归守卫的（`scripts/raid-view.mjs` 的 `gap()` 打印 `GAP` 并断言现状，修好后测试变红、恢复原断言）：治疗被拒时 Runtime 丢掉自己的原因说明（ui、desktop-input、mobile，Astra）；「附近」逐件拾取（loot-target、mobile-ux，Astra）；楼梯名盖住正下方的敌人（issue26-spatial S03c 的 `KNOWN_GAPS`，前端）。
 - 刘海安全区可以在 Chromium 里模拟：CDP `Emulation.setSafeAreaInsetsOverride`（mobile-ux 的 `insets()`）。`test:play` 失败时会打印存储错误和最近的拒绝事件。
 
+## 2026-10-25 · #61 敌人套件完整视口分片
+
+从 main `974a3a8` 在 `ci/enemy-suite-shards` 续作。三个成功 main 的 batch-8 套件步骤为 15:14–17:45，其余组明显较短；缓存及排队仅秒级。此次保留原敌人断言主体，将相互独立的 1280×720、1920×1080、844×390 完整街区/商场链分给 batch-6、batch-8、batch-7；其他套件和旧客户端消费者不迁组。默认 `pnpm test:enemy` 仍跑完整三视口。
+
+唯一分片计划、165 条 case 清单与证据协议见 [CI 分片说明](docs/CI.md#敌人套件的完整视口分片61)。三片在原 timing 行附加精确单元/case、输入配置、run/SHA/attempt 和时段证明，执行器及独立门禁均拒绝缺片、空选择、重复/遗漏、未完成链及旧报告；保留八 runner、失败/取消门禁和真实 120 秒训练。游戏源码、格式和原断言未改。此处不宣称候选 CI、main 或性能对照已经完成；本地实际验证在交付时补齐，最终提交和远端检查以承接 PR 为准。
+
 ## 2026-10-15 · CI 第二阶段：八组均衡与执行耗时（#61）
 
 维护者授权开始推进 [#61](https://github.com/xuys2025/escape-bincov/issues/61)。分支 `ci/balanced-regressions` 从最新 main `a2d716d` 开始，纳入刚合入 #57 的第 36 条 raid-default。首批集中在整套件八组重排、存档检查前置、逐命令耗时与完整执行记录门禁；保留游戏/测试行为、真实训练、单文件离线和发布契约。后续 case 分片与诊断采样优化仍由 #61 承接，见 [CI 说明](docs/CI.md)。同一目标保持一个 PR。

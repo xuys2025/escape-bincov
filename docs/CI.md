@@ -36,7 +36,7 @@ CI 策略测试还守住五件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 
 ## 八组分配
 
-各组在独立 Ubuntu runner 上顺序执行，最多同时八组，`fail-fast: false` 保留其他组的失败诊断。当前完整保留 **40** 条浏览器命令，包括 #48 的商场样板、#57 的普通 2.5D 行动检查、#56 的开场动画验收（约 20 秒，排在 batch-3）、2026-10-22 从手动转入 batch-6 的 `test:hideout`（旧页签普通入口、商店门面、写入故障与出发，本地限 2 核软件渲染 14 秒），以及同日射击改造（#39）新增的两条：`test:shooting`（静止指针下瞄准不漂（空地与地图边）、开枪不动瞄准、枪口火光与曳光对齐枪管、贴墙与门角挡弹、隐藏房间不漏曳光、开火方式、受击闪白与抖动从命中当帧画起且慢帧至少一帧、抖动顺着子弹方向而血迹朝射手、暴击与击杀的命中标记和击杀确认音）排在 batch-1 末尾，试枪场 `test:range` 排在 batch-5 末尾。两条起初都放在 batch-2，但 PR 运行里 batch-2 原有五条已要约 22 分钟，加上这两条（CI 上 `test:shooting` 约 8 分钟、`test:range` 约 2.5 分钟）后，遇到安装步骤慢的 runner 就超过 45 分钟被取消；batch-1 与 batch-5 是 2026-10-22 几次运行中耗时最短的两组（套件合计约 8–17 分钟）。其余未排入 CI 的套件见下方“每次仍然执行的检查”提到的手动表。2.5D 收尾移除 Phaser 后，只检查 Phaser 场景的 `test:issue26-phaser-spatial` 退役（空间检查由 `test:issue26-spatial` 在 2.5D 上保留）。完整的 `test:coast-sample` 只在本地运行：CI 的软件渲染下，动画组最后一步 V-CAM 之后再开页面会超时，完整套件要先把 V-CAM 挪到最后并验证计时检查，才能进 CI。除随 Phaser 退役、在 [2.5D 收尾说明](2-5d-closeout/README.md#测试迁移) 中逐项列出的检查外，没有拆分套件、减少断言、调整原浏览器参数或真实训练计时。
+各组在独立 Ubuntu runner 上顺序执行，最多同时八组，`fail-fast: false` 保留其他组的失败诊断。当前执行 **42** 条浏览器命令，覆盖原有 **40** 条完整逻辑套件（仅敌人套件按三个独立视口分片），包括 #48 的商场样板、#57 的普通 2.5D 行动检查、#56 的开场动画验收（约 20 秒，排在 batch-3）、2026-10-22 从手动转入 batch-6 的 `test:hideout`（旧页签普通入口、商店门面、写入故障与出发，本地限 2 核软件渲染 14 秒），以及同日射击改造（#39）新增的两条：`test:shooting`（静止指针下瞄准不漂（空地与地图边）、开枪不动瞄准、枪口火光与曳光对齐枪管、贴墙与门角挡弹、隐藏房间不漏曳光、开火方式、受击闪白与抖动从命中当帧画起且慢帧至少一帧、抖动顺着子弹方向而血迹朝射手、暴击与击杀的命中标记和击杀确认音）排在 batch-1 末尾，试枪场 `test:range` 排在 batch-5 末尾。两条起初都放在 batch-2，但 PR 运行里 batch-2 原有五条已要约 22 分钟，加上这两条（CI 上 `test:shooting` 约 8 分钟、`test:range` 约 2.5 分钟）后，遇到安装步骤慢的 runner 就超过 45 分钟被取消；batch-1 与 batch-5 是 2026-10-22 几次运行中耗时最短的两组（套件合计约 8–17 分钟）。其余未排入 CI 的套件见下方“每次仍然执行的检查”提到的手动表。2.5D 收尾移除 Phaser 后，只检查 Phaser 场景的 `test:issue26-phaser-spatial` 退役（空间检查由 `test:issue26-spatial` 在 2.5D 上保留）。完整的 `test:coast-sample` 只在本地运行：CI 的软件渲染下，动画组最后一步 V-CAM 之后再开页面会超时，完整套件要先把 V-CAM 挪到最后并验证计时检查，才能进 CI。除随 Phaser 退役、在 [2.5D 收尾说明](2-5d-closeout/README.md#测试迁移) 中逐项列出的检查外，原回归内容保留；本批仅将敌人套件按完整视口分片，断言、浏览器参数与真实训练计时保持原要求。
 
 [scripts/ci/browser-suites.mjs](../scripts/ci/browser-suites.mjs) 是执行顺序和覆盖核对的清单；[run-browser.mjs](../scripts/ci/run-browser.mjs) 逐条执行原 `pnpm test:<id>`，因此 package.json 中的原参数仍生效。组合命令现在分开计时，存档检查在 batch-2 首个执行。旧客户端固定 HTML 在 batch-8 下载，随后由 expansion 校验并使用。
 
@@ -47,15 +47,25 @@ CI 策略测试还守住五件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 | batch-3 | `test:desktop-input`、`test:portable`、`test:shop-drag`、`test:title`、`test:title-water`、`test:opening` |
 | batch-4 | `test:issue26-station`、`test:issue26-spatial`、`test:tactical`、`test:art`、`test:systems`、`test:mobile` |
 | batch-5 | `test:buildings`、`test:station-tier1`、`test:shop-feedback`、`test:mobile-ux`、`test:range` |
-| batch-6 | `test:loot-target`、`test:mall-sample`、`test:qol`、`test:coast-render-targets`、`test:hideout` |
-| batch-7 | `test:raid-default`、`test:ui`、`test:mall-landing`、`test:coast-animation`、`test:station-relief`、`test:station-reset` |
-| batch-8 | `test:expansion`、`test:loot` |
+| batch-6 | `test:enemy-720`、`test:loot-target`、`test:mall-sample`、`test:qol`、`test:coast-render-targets`、`test:hideout` |
+| batch-7 | `test:enemy-touch`、`test:raid-default`、`test:ui`、`test:mall-landing`、`test:coast-animation`、`test:station-relief`、`test:station-reset` |
+| batch-8 | `test:enemy-1080`、`test:expansion`、`test:loot` |
 
 2.5D 收尾（#64）后，CI 没有显卡、2.5D 用软件渲染，迁移到 2.5D 的行动套件变慢：loot 一套约 30 分钟，原 batch-8 超过 45 分钟的 job 上限。因此把 mall-passages 移到 batch-2 末尾、systems 和 mobile 移到 batch-4 末尾，batch-8 只留 expansion（带旧客户端）和 loot。
 
-#61 当时按较慢运行样本重排，并将新增 raid-default 的实测 124 秒纳入负载。此前 35 套件的中位 17:33 和约 13–14 分钟调度回放仅为 #61 的研究输入；当前已经是 40 套件，实际收益必须使用同产品字节的新基线/候选对照，结果见承接 PR，不能把旧回放当成本次 CI 通过。
+#61 当时按较慢运行样本重排，并将新增 raid-default 的实测 124 秒纳入负载。此前 35 套件的中位 17:33 和约 13–14 分钟调度回放仅为 #61 的研究输入；当前已经是原 40 套件的 42 条执行命令，实际收益必须使用同产品字节的新基线/候选对照，结果见承接 PR，不能把旧回放当成本次 CI 通过。
 
-2026-10-23 的 #78 新增 `test:enemy` 到 batch-8：真实合法新档在两个分辨率恢复前摇/换弹/恢复阶段，核对展示与离线请求；本地六组合约 8 秒。旧完整套件保留，命令计数和证据验证同步为 40。
+2026-10-23 的 #78 最初新增 `test:enemy` 到 batch-8。#81 与 #104 随后扩展至十八原型、三视口的街区及商场验收；早期“六组合约 8 秒”不再代表当前套件。
+
+### 敌人套件的完整视口分片（#61）
+
+2026-10-25 研究最近三个成功 main 完整运行：[40102916226](https://github.com/xuys2025/escape-bincov/actions/runs/40102916226)、[40101157725](https://github.com/xuys2025/escape-bincov/actions/runs/40101157725)、[40099269052](https://github.com/xuys2025/escape-bincov/actions/runs/40099269052)。触发到必需门禁分别为 18:32、21:22、20:43；batch-8 的套件步骤为 15:14、17:45、17:38，第二慢 batch-1 约 7:45。主机缓存全命中、浏览器组排队仅 2–3 秒，当前瓶颈在套件执行。三个运行不是相同产品版本，且逐套制品/日志下载在调研环境返回 403，因此这些组总时长只用于定位，不能当作分片收益的配对证据。
+
+[enemy-browser-plan.mjs](../scripts/enemy-browser-plan.mjs) 声明三个互斥视口链：`enemy-720`（1280×720）、`enemy-1080`（1920×1080）、`enemy-touch`（844×390，原生触控仿真）。每片完整执行该视口原有的街区与商场流程：阶段/美术夹具、部署、真实输入、付费攻击、暂停与刷新链均不切断；不共享跨 runner 的页面或存档。三片分别覆盖 67、59、39 条既有 case，共 165 条。较大的 1920 片放在原 batch-8，其余两片分担给历史较短的 batch-6、batch-7，仍最多八台 runner。
+
+`pnpm test:enemy` 保留原全量入口与先全部街区、再全部商场的顺序；本地也可单独运行 `pnpm test:enemy-720`、`pnpm test:enemy-1080`、`pnpm test:enemy-touch`。全量报告仍写 `test-results/enemy-browser/report.json`，三片分别写同目录下各片 ID 的子目录。完整入口登记为手动聚合命令，其全部内容在 CI 由三片精确覆盖；没有将原回归改为可省略诊断。
+
+每条视口链完成全部原断言后才写完成证明。组执行器将通过的证明装入原耗时行，独立门禁再核对六个完整街区/商场单元、全部 case ID、原视口/离线/触控配置，以及 run/SHA/attempt 和当前套件执行时间窗。缺片、零选择、重复/遗漏 case、未完成链、旧报告或配置变化均失败；原退出状态门禁同时保留。覆盖证明不新增每 case 耗时，也不宣称已有性能收益：准确候选 CI、合并后完整 main 及同产品对照仍须实际运行。
 
 每组可在依赖和 Chromium 安装后用 `node scripts/ci/run-browser.mjs batch-2` 运行；batch-8 另需按工作流下载真实旧客户端。执行失败会立即停止本组后续套件并标记未运行，其他组照常完成。保留 45 分钟 job 超时，不额外缩短套件预算。
 
@@ -86,7 +96,7 @@ CI 策略测试还守住五件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 
 每条套件开始和结束时写 JSON，记录组、套件 ID/命令、状态、退出码/信号、单调时钟耗时、run/attempt/SHA 及 Node、Playwright、对应 Chromium 构建元信息。Chromium 元信息来自已安装 Playwright 的浏览器清单，实际浏览器版本仍以原浏览器报告为准。不记录环境变量全集或凭据。
 
-浏览器组 Summary 展示每条套件时长；`Build and test` 在原结果门禁之外下载并核对全部预期组和套件报告，再汇总耗时。缺报告、错误运行/提交、失败/中断、未执行/重复/遗漏套件及无效时长均不能放行。报告只代表完整套件的实际执行，不宣称本批已经完成每个 case 的新计时或分片清单；原测试报告仍保留。后续分片必须另验 case 全集、空选择及分片完整性。
+浏览器组 Summary 展示每条套件时长；`Build and test` 在原结果门禁之外下载并核对全部预期组和套件报告，再汇总耗时。缺报告、错误运行/提交、失败/中断、未执行/重复/遗漏套件及无效时长均不能放行。报告代表完整套件或已声明完整视口分片的实际执行，不宣称已经完成每个 case 的新计时；原测试报告仍保留。敌人分片另验上述 case 全集、空选择及分片完整性，其他套件没有自动获得分片能力。
 
 这些耗时表不含 runner 排队、安装、构建或 Pages 等待；评估整条 CI 时用 Actions job/step 时间另行拆分，既报告触发到必需门禁的墙钟等待，也报告累计 runner 分钟。Pages 与镜像激活另计。
 

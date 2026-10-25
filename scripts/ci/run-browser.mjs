@@ -6,6 +6,7 @@ import { availableParallelism, constants, cpus } from 'node:os';
 import { delimiter, dirname, join, resolve } from 'node:path';
 import { performance } from 'node:perf_hooks';
 import { pathToFileURL } from 'node:url';
+import { enemyReportPath, enemyShardIds, validateEnemyCoverage } from '../enemy-browser-plan.mjs';
 
 const require = createRequire(import.meta.url);
 const signalCode = signal => 128 + (constants.signals[signal] ?? 1);
@@ -89,6 +90,8 @@ const executeSuite = (suite, options) => {
   return runCommand(invocation.file, invocation.args, options);
 };
 
+const readEnemyCoverage = suite => JSON.parse(readFileSync(resolve(enemyReportPath(suite.id)), 'utf8')).coverage;
+
 function writeReport(path, report) {
   mkdirSync(dirname(path), { recursive: true });
   const temporary = `${path}.${process.pid}.tmp`;
@@ -103,7 +106,8 @@ function appendSummary(path, report) {
 }
 
 export async function runGroup({ group, suites, reportPath,
-  summaryPath, execute = executeSuite, metadata = runtimeMetadata(), signal, timeoutMs, log = console.log }) {
+  summaryPath, execute = executeSuite, metadata = runtimeMetadata(), signal, timeoutMs, log = console.log,
+  readCoverage = readEnemyCoverage }) {
   if (!/^batch-[1-8]$/.test(group)) throw new Error(`Unknown browser group: ${group}`);
   const attempt = metadata.runAttempt ?? 'local';
   if (attempt !== 'local' && !/^[1-9]\d*$/.test(attempt)) throw new Error('Invalid browser run attempt.');
@@ -134,6 +138,15 @@ export async function runGroup({ group, suites, reportPath,
     else if (result?.interrupted || signal?.aborted || row.signal) row.status = 'interrupted';
     else row.status = row.exitCode === 0 && !row.error ? 'passed' : 'failed';
     if (!result || (row.exitCode === null && !row.signal && !row.error)) row.error = 'Process produced no exit result.';
+    if (row.status === 'passed' && enemyShardIds.includes(row.id)) {
+      try {
+        const coverage = readCoverage(suites[index], { metadata, row });
+        row.enemyCoverage = validateEnemyCoverage(coverage, row.id, metadata,
+          { start: Date.parse(row.startedAt), finish: Date.parse(row.finishedAt) });
+      } catch (error) {
+        row.status = 'failed'; row.exitCode = 1; row.error = `Invalid enemy shard evidence: ${error.message}`;
+      }
+    }
     log(`<<< ${row.id}: ${row.status} (${(row.durationMs / 1000).toFixed(2)} s)`);
     if (row.status !== 'passed') {
       report.status = row.status; report.signal = row.signal;
