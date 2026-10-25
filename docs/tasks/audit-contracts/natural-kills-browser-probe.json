@@ -1,0 +1,16 @@
+{
+  "startedAt": "2026-10-25T04:15:37.156Z",
+  "htmlSha256": "31ca729a4a900a327160f7a2e46add41267e2aada3d215b7b32ca4e66dc7c251",
+  "methodology": "Controlled browser fixture: real packaged Runtime/host/sampler. Explicit driver freezes AI and kills one enemy; only diagnostic log is evicted and view is remounted. Separate from full natural-play acceptance.",
+  "errors": [],
+  "observations": {
+    "before": 1,
+    "afterEviction": 1,
+    "afterRemount": 1,
+    "settled": 1
+  },
+  "browser": "153.0.8010.12",
+  "ordinaryEntryHasNoDriver": true,
+  "status": "passed",
+  "finishedAt": "2026-10-25T04:16:10.618Z"
+}

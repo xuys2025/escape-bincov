@@ -24,7 +24,11 @@
 
 Linux、Node 24.19.0、pnpm 11.25.0：全量 `pnpm test` 876/876、`pnpm check:ci` 67/67、`pnpm package` 通过。定向 Runtime 31/31、真实采样回调 3/3；把回调换回旧计数的有效负对照为 1 通过 / 2 失败。经典/分层检查点恢复、累计观察零写入/零 RNG/不消费事件以及最终结算对账均有反例；日志淘汰和视图重挂由同一序列化采样回调验证。HTML 8,133,499 字节，SHA-256 `31ca729a4a900a327160f7a2e46add41267e2aada3d215b7b32ca4e66dc7c251`；生成物不提交。链接现有依赖，使用 `pnpm_config_verify_deps_before_run=false`；首轮 pnpm 自动安装在测试前因 `ERR_PNPM_UNSAFE_MODULES_DIR` 停止，未改依赖或锁文件。
 
-完整默认十分钟自动输入尚未运行：按主调度优先级，在启动浏览器前停止了等待 `/tmp/bincov-browser-validation.lock` 的进程；后续重新排队，不能缩短计时替代。真人/真机、#32 F20、56 个 review 工具的状态保持。仅本地交付，未推送、未创建 PR、未合并或发布；原错误报告保留。[审计入口](docs/tasks/audit-contracts.md#审计覆盖与未修范围)与测试为下一步定位点。
+[真实浏览器控制探针](docs/tasks/audit-contracts/natural-kills-browser-probe.json)通过：Chromium 153.0.8010.12、1280×720、33.462 秒；普通入口无 driver，真实杀敌后 1→淘汰 1000 事件后 1→实际视图重挂后 1→正式 abandon 结算 1，零页面错误。冻结 AI / 杀一敌属于明确夹具，不计自然输入。
+
+[完整默认十分钟自然输入](docs/tasks/audit-contracts/natural-kills-buildings-report.json)实际运行于 04:29:45.027～04:40:07.244 UTC，共 622.217 秒，`minutes=10`、`world=buildings`；独占 `/tmp/bincov-browser-validation.lock`，不改时间、生命或 RNG。**exit 1：原生容器拖放断言失败，打开/转移均为 0；不计整套 PASS。** 29 个真实结算为 19 死亡、10 撤离，合计 8 击杀；20 个样本覆盖 16 个 run，同 run 未下降且不高于对应结算。三个新敌人 windup 有实际记录，页面错误/外部请求均为 0。连续低血再出击与零拖放的自动策略原因未在本次修复，不能据此改战斗/恢复规则或放宽断言；失败发生在 `finalStats` 赋值前，所以没有补造该字段。
+
+已正常推送源码提交 `56b4068` 并创建 [Draft PR #109](https://github.com/xuys2025/escape-bincov/pull/109)，该准确源码 head 的[完整 CI 40161221476](https://github.com/xuys2025/escape-bincov/actions/runs/40161221476)成功；后续证据提交的准确 head / CI 见 PR。真人/真机、#32 F20、56 个 review 工具的状态保持；未合并或发布。原错误报告保留。[审计入口](docs/tasks/audit-contracts.md#审计覆盖与未修范围)与测试为下一步定位点。
 
 ## 2026-10-25 行动精神/水分/饱食 HUD 实时投影（`fix/live-vitals-hud`）
 
