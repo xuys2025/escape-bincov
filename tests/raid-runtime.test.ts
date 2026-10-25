@@ -27,6 +27,39 @@ function fixture(layered = false, seed = 42) {
 const intent = (patch: Partial<RaidIntent> = {}): RaidIntent => ({ ...emptyIntent(), ...patch });
 function safe(f: ReturnType<typeof fixture>) { f.driver.freezeAI(true); f.driver.placePlayer({ x: 208, y: 80 }); }
 
+test('test-only kill observations read live cumulative kills without writes, RNG changes or event consumption', () => {
+    for (const layered of [false, true]) {
+        const f = fixture(layered), r = f.runtime;
+        assert.equal(f.driver.killCount(), 0);
+        f.driver.kill(r.enemies.find(e => e.hp > 0)!.uid);
+        const before = r.snapshot(), batch = r.current(), stored = f.data.get(SESSION_KEY), writes = f.writes;
+        for (let i = 0; i < 1001; i++) assert.equal(f.driver.killCount(), 1);
+        assert.deepEqual(r.snapshot(), before); assert.equal(r.current(), batch);
+        assert.equal(f.data.get(SESSION_KEY), stored); assert.equal(f.writes, writes);
+        assert.ok(batch.events.some(e => e.type === 'death'));
+    }
+});
+
+test('cumulative kill observations survive checkpoint reload and agree with the committed settlement', () => {
+    for (const layered of [false, true]) {
+        const f = fixture(layered);
+        f.driver.kill(f.runtime.enemies.find(e => e.hp > 0)!.uid);
+        assert.equal(f.runtime.checkpoint(), true);
+        const state = createSessionState(), data = new Map(f.data);
+        const saves = new SaveSession(state, () => ({ getItem: key => data.get(key) ?? null, setItem: (key, value) => { data.set(key, value); } }));
+        assert.equal(saves.initialize(), true); assert.equal(saves.resumeRun(), true); state.state = 'run';
+        const restored = new CoastRaidRuntime(state, saves), driver = createRuntimeTestDriver(restored, '?test=1');
+        assert.equal(driver.killCount(), 1);
+        assert.ok(!restored.current().events.some(e => e.type === 'death'), 'restoration has no past death events to recount');
+        driver.kill(restored.enemies.find(e => e.hp > 0)!.uid);
+        assert.equal(driver.killCount(), 2);
+        restored.finish('abandon');
+        assert.equal(state.pendingSettlement, null); assert.equal(state.result!.kills, driver.killCount());
+        assert.equal(state.save.lastResult!.kills, 2); assert.equal(state.save.stats.kills, 2);
+        restored.dispose();
+    }
+});
+
 test('v1 Runtime loads both real routes without DOM and publishes detached immutable batches', () => {
     for (const layered of [false, true]) {
         const f = fixture(layered), before = f.runtime.snapshot(), batch = f.runtime.current();
@@ -326,7 +359,7 @@ test('production host exposes no mutable core or fixture controls and preserves 
     assert.equal(saves.initialize(), true); state.state = 'hideout'; assert.equal(saves.beginRun(42, true), true); state.state = 'run';
     const host = createCoastRaidHost(state, saves);
     assert.deepEqual(Object.keys(host.runtime).sort(), ['advance', 'current', 'dispose', 'pause', 'resetClock', 'resume', 'setBlocked']);
-    assert.equal('test' in host, false); assert.equal('freezeAI' in host.runtime, false);
+    assert.equal('test' in host, false); assert.equal('driver' in host, false); assert.equal('freezeAI' in host.runtime, false);
     fail = true; host.services.abandon(); assert.equal(host.runtime.current().frame.phase, 'ending');
     assert.equal(host.services.settlement().retryable, true); assert.ok(host.services.backup()!.terminal);
     fail = false; assert.equal(host.services.retrySettlement(), true); host.runtime.dispose();
