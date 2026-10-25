@@ -1,3 +1,13 @@
+## 2026-10-25 Shader cache 快照消费字段校验（`fix/heap-cache-input`）
+
+从 main `974a3a8d1ad2a7662c3a828226295d6c9b31eb64` 独立承接 #32/#60。纯 Node `sol-heap-cache-inspect.mjs` 原先把 shader string 的 null `self_size` 加成零：两节点最小图中，cycle-30 新字符串应有 80 bytes，改成 null 后旧 CLI 仍 exit 0 并写 `newRetainedBytes: 0`。本工具没有 PASS/status，原有“不是全部 retained heap 归因证明”限制保留，不能把此问题称为 F20 假签收。
+
+现在只校验实际消费的 V8 flat-table 字段，在写 `shader-cache.json` 前拒绝无效类型/索引、缺字段/不完整行、非安全整数 identity/bytes、重复 node id，以及 cycle-30 incoming-edge 计数/偏移和引用字段；shader bytes 求和也必须安全。保留额外 V8 metadata/列，type 枚举按对应 field 索引读取；合法零 shader 匹配和 `MAX_SAFE_INTEGER` 单计数字节保留，不设业务内存预算。cycle-10 不额外要求未消费的 edge 图；`snapshot.node_count` 等未消费 metadata 也不作完整 V8 schema 校验。
+
+五组真实 CLI Node 正反例，V8 7 列形状的合成小图含额外 metadata、node/edge 字段重排、合法 element 数字索引；旧 main 相同测试 1 通过/4 失败，新版专项 5/5。合法同一输入的原/新报告除生成时间外所有字段一致。它们是合成图，不是实际 heap capture。root 另用清空环境的隔离 Node v24.19.0 生成两份约 5.28 MB 的真实 V8 快照作格式正例：CLI exit 0，新增人工字符串 2 节点/176 bytes、2 owner paths；只证明格式可消费，不是浏览器/游戏堆或 shader 泄漏证据。`pnpm test` 874/874（210.3 秒）、`pnpm check:ci` 69/69、`pnpm package`、最终专项 5/5、入口文档 3/3 与 `git diff --check` 通过；产品 HTML/两个 ZIP 哈希与 main 相同。
+
+脚本仍为 review，没有新增采样命令或 F20 门禁，没有浏览器/游戏堆采样/60 轮，没有修改阈值、历史快照或归档。本地提交交 root 复核，不推送、开 PR、合并或发布。
+
 ## 2026-10-24 打包产物改由 CI 构建和发布（`ci/no-committed-builds`）
 
 维护者在 #103 因 #102 合入出现生成物冲突时提出：产物应由 CI 编译发布。基线 main `49894e9`，随后同步 `c587685`（#104）与 `5adc64a`（#103），两次的生成物冲突都按本规则保留删除。五个生成物移出仓库并加入 `.gitignore`，`generated-files.test.mjs` 拒绝再提交；发布清单移到 `release/`。CI 删去“提交的产物与源码一致”检查，main 的 `Build and test` 通过后新增 `Publish offline release`，把同一份已验证构建发布到滚动预发布 `main-latest`（标签移到本次提交、文件同名替换），README 下载改指向它；Pages 不变。规则只写在 [CI 说明](docs/CI.md#构建与离线包发布)，AGENTS、手册、模板、README 链接过去。
