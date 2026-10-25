@@ -1,0 +1,502 @@
+{
+  "htmlSha256": "31ca729a4a900a327160f7a2e46add41267e2aada3d215b7b32ca4e66dc7c251",
+  "entry": "/workspace/natural-kills/dist/index.html",
+  "startedAt": "2026-10-25T04:29:45.027Z",
+  "minutes": 10,
+  "world": "buildings",
+  "firstSeed": 42,
+  "methodology": "Automated real-time session on the layered street with new enemy encounters (2.5D view). Test hook is read-only: no teleports, no clock changes, no changes to health, enemies, inventory or RNG. All actions use visible buttons and real keyboard/mouse, including E opening and native inventory drag for crates and corpses. This is not a human fun/balance evaluation.",
+  "enemyPhases": {
+    "raider-gunner/idle": 18,
+    "raider-melee/idle": 41,
+    "raider-gunner/windup": 8,
+    "raider-melee/windup": 2,
+    "raider-gunner/recovery": 10,
+    "raider-lookout/windup": 8,
+    "raider-gunner/reload": 2,
+    "raider-lookout/idle": 6,
+    "raider-melee/recovery": 2,
+    "raider-lookout/reload": 2,
+    "raider-lookout/recovery": 4,
+    "tidal-crab/idle": 6,
+    "recovery-leader/idle": 1,
+    "salt-dazed/idle": 2
+  },
+  "containerLoot": {
+    "opened": [],
+    "transfers": [],
+    "threatenedClosures": 0
+  },
+  "samples": [
+    {
+      "realSeconds": 2,
+      "run": 1,
+      "elapsed": 0,
+      "hp": 100,
+      "kills": 0,
+      "highTide": false,
+      "x": 208,
+      "y": 1232
+    },
+    {
+      "realSeconds": 33,
+      "run": 1,
+      "elapsed": 30,
+      "hp": 89,
+      "kills": 0,
+      "highTide": false,
+      "x": 555,
+      "y": 538
+    },
+    {
+      "realSeconds": 64,
+      "run": 1,
+      "elapsed": 62,
+      "hp": 49,
+      "kills": 2,
+      "highTide": false,
+      "x": 726,
+      "y": 758
+    },
+    {
+      "realSeconds": 96,
+      "run": 2,
+      "elapsed": 13,
+      "hp": 71,
+      "kills": 0,
+      "highTide": true,
+      "x": 280,
+      "y": 656
+    },
+    {
+      "realSeconds": 126,
+      "run": 2,
+      "elapsed": 43,
+      "hp": 38,
+      "kills": 0,
+      "highTide": true,
+      "x": 516,
+      "y": 715
+    },
+    {
+      "realSeconds": 157,
+      "run": 4,
+      "elapsed": 1,
+      "hp": 1,
+      "kills": 0,
+      "highTide": true,
+      "x": 208,
+      "y": 1520
+    },
+    {
+      "realSeconds": 188,
+      "run": 6,
+      "elapsed": 14,
+      "hp": 17,
+      "kills": 0,
+      "highTide": false,
+      "x": 208,
+      "y": 1385
+    },
+    {
+      "realSeconds": 224,
+      "run": 7,
+      "elapsed": 1,
+      "hp": 17,
+      "kills": 0,
+      "highTide": true,
+      "x": 208,
+      "y": 656
+    },
+    {
+      "realSeconds": 255,
+      "run": 8,
+      "elapsed": 19,
+      "hp": 17,
+      "kills": 0,
+      "highTide": true,
+      "x": 208,
+      "y": 204
+    },
+    {
+      "realSeconds": 288,
+      "run": 12,
+      "elapsed": 1,
+      "hp": 0,
+      "kills": 0,
+      "highTide": false,
+      "x": 208,
+      "y": 1520
+    },
+    {
+      "realSeconds": 318,
+      "run": 14,
+      "elapsed": 2,
+      "hp": 17,
+      "kills": 0,
+      "highTide": false,
+      "x": 208,
+      "y": 1216
+    },
+    {
+      "realSeconds": 348,
+      "run": 15,
+      "elapsed": 16,
+      "hp": 6,
+      "kills": 1,
+      "highTide": true,
+      "x": 208,
+      "y": 1200
+    },
+    {
+      "realSeconds": 384,
+      "run": 17,
+      "elapsed": 2,
+      "hp": 1,
+      "kills": 0,
+      "highTide": true,
+      "x": 208,
+      "y": 1232
+    },
+    {
+      "realSeconds": 417,
+      "run": 18,
+      "elapsed": 1,
+      "hp": 3,
+      "kills": 0,
+      "highTide": true,
+      "x": 208,
+      "y": 1232
+    },
+    {
+      "realSeconds": 447,
+      "run": 21,
+      "elapsed": 2,
+      "hp": 17,
+      "kills": 0,
+      "highTide": true,
+      "x": 208,
+      "y": 745
+    },
+    {
+      "realSeconds": 480,
+      "run": 23,
+      "elapsed": 0,
+      "hp": 1,
+      "kills": 0,
+      "highTide": true,
+      "x": 208,
+      "y": 656
+    },
+    {
+      "realSeconds": 510,
+      "run": 26,
+      "elapsed": 4,
+      "hp": 17,
+      "kills": 0,
+      "highTide": true,
+      "x": 94,
+      "y": 656
+    },
+    {
+      "realSeconds": 541,
+      "run": 26,
+      "elapsed": 34,
+      "hp": 6,
+      "kills": 1,
+      "highTide": true,
+      "x": 350,
+      "y": 126
+    },
+    {
+      "realSeconds": 571,
+      "run": 28,
+      "elapsed": 18,
+      "hp": 17,
+      "kills": 0,
+      "highTide": false,
+      "x": 265,
+      "y": 906
+    },
+    {
+      "realSeconds": 601,
+      "run": 29,
+      "elapsed": 21,
+      "hp": 17,
+      "kills": 0,
+      "highTide": true,
+      "x": 308,
+      "y": 1257
+    }
+  ],
+  "outcomes": [
+    {
+      "outcome": "death",
+      "kills": 2,
+      "keptValue": 0,
+      "lostValue": 338,
+      "seed": 42,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 72,
+      "seed": 43,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "death",
+      "kills": 1,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 44,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "extract",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 45,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 46,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "extract",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 47,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 48,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 49,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 50,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 51,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 52,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "extract",
+      "kills": 1,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 53,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 54,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "extract",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 55,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    },
+    {
+      "outcome": "extract",
+      "kills": 1,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 56,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 57,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "extract",
+      "kills": 1,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 58,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 59,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "extract",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 60,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    },
+    {
+      "outcome": "extract",
+      "kills": 1,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 61,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 62,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 63,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 64,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 65,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 66,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "extract",
+      "kills": 1,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 67,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 68,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "death",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 69,
+      "recovered": false,
+      "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+    },
+    {
+      "outcome": "extract",
+      "kills": 0,
+      "keptValue": 0,
+      "lostValue": 0,
+      "seed": 70,
+      "recovered": false,
+      "message": "成功撤离，装备和物资已带回水产站。"
+    }
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "browser": "153.0.8010.12",
+  "observationPolicy": "Before the first street windup: walk the authored public west/cross street, approach a visible new enemy, and wait for its real preparation before shooting it. No game-state mutations.",
+  "status": "failed",
+  "failure": "AssertionError [ERR_ASSERTION]: Natural play must visibly open a container and complete at least one native drag transfer\n    at file:///workspace/natural-kills/scripts/natural-play.mjs:195:10",
+  "finishedAt": "2026-10-25T04:40:07.244Z"
+}
