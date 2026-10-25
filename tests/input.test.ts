@@ -82,7 +82,7 @@ test('closing a loot panel does not reuse held movement, fire, aim or interactio
   input.key('w', true); input.key('shift', true); input.key('e', true);
   input.mouse(0, true); input.mouse(2, true);
   input.suppressHeld(); input.clear();
-  input.key('w', true); input.key('shift', true); input.key('e', true);
+  input.key('w', true, true); input.key('shift', true, true); input.key('e', true, true);
   input.mouse(0, true); input.mouse(2, true);
   const blocked = read(input);
   assert.equal(blocked.move.y, 0); assert.equal(blocked.move.sprint, false); assert.equal(blocked.interactHeld, false);
@@ -100,10 +100,45 @@ test('closing a loot panel does not reuse held movement, fire, aim or interactio
 
 test('the E press used to close loot is blocked even when the overlay did not forward keydown', () => {
   const input = new InputState();
-  input.suppressHeld('E'); input.clear(); input.key('e', true);
+  input.suppressHeld('E'); input.clear(); input.key('e', true, true);
   assert.equal(read(input).interactHeld, false);
   input.key('e', false); input.key('e', true);
   assert.equal(read(input).interactHeld, true);
+});
+
+test('a fresh keydown recovers a suppressed key whose keyup was lost outside the window (issue #60 D8)', () => {
+  const input = new InputState();
+  for (const key of ['w', 'shift', 'r', 'q', '1', '2', 'e']) input.key(key, true);
+  read(input);
+  input.suppressHeld();
+  // No keyup arrives while the window is unfocused. Held repeats must stay blocked after resuming.
+  for (const key of ['w', 'shift', 'r', 'q', '1', '2', 'e']) input.key(key, true, true);
+  const held = read(input);
+  assert.equal(held.move.y, 0); assert.equal(held.move.sprint, false);
+  assert.equal(held.interactHeld, false); assert.equal(held.interactPressed, false);
+  assert.deepEqual(held.commands, []);
+  input.key('w', true, false);
+  const walking = read(input);
+  assert.equal(walking.move.y, -1); assert.equal(walking.move.sprint, false);
+  assert.equal(walking.interactHeld, false); assert.equal(walking.interactPressed, false);
+  assert.deepEqual(walking.commands, []);
+  // A new non-repeat press proves that this key was released, even without its keyup.
+  for (const key of ['w', 'shift', 'r', 'q', '1', '2', 'e']) input.key(key, true, false);
+  const fresh = read(input);
+  assert.equal(fresh.move.y, -1); assert.equal(fresh.move.sprint, true);
+  assert.equal(fresh.interactHeld, true); assert.equal(fresh.interactPressed, true);
+  assert.deepEqual(fresh.commands, ['reload', 'heal', 'primary', 'knife']);
+  assert.deepEqual(read(input).commands, []);
+});
+
+test('the Shift modifier observed when leaving loot preserves suppression of an old held key', () => {
+  const input = new InputState();
+  input.key('shift', true); input.suppressHeld();
+  input.key('shift', true, true); input.key('a', true, false);
+  assert.deepEqual(read(input).move, { x: -1, y: 0, sprint: false });
+  input.key('shift', false);
+  input.key('shift', true, true);
+  assert.equal(read(input).move.sprint, true, 'a Shift first pressed in the window still enables sprint');
 });
 
 test('opening loot cancels active touch sticks and does not resume them on pointer movement', () => {
