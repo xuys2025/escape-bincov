@@ -59,13 +59,17 @@ CI 策略测试还守住五件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 
 ### 敌人套件的完整视口分片（#61）
 
-2026-10-25 研究最近三个成功 main 完整运行：[40102916226](https://github.com/xuys2025/escape-bincov/actions/runs/40102916226)、[40101157725](https://github.com/xuys2025/escape-bincov/actions/runs/40101157725)、[40099269052](https://github.com/xuys2025/escape-bincov/actions/runs/40099269052)。触发到必需门禁分别为 18:32、21:22、20:43；batch-8 的套件步骤为 15:14、17:45、17:38，第二慢 batch-1 约 7:45。主机缓存全命中、浏览器组排队仅 2–3 秒，当前瓶颈在套件执行。三个运行不是相同产品版本，且逐套制品/日志下载在调研环境返回 403，因此这些组总时长只用于定位，不能当作分片收益的配对证据。
+2026-10-25 研究最近三个成功 main 完整运行：[40102916226](https://github.com/xuys2025/escape-bincov/actions/runs/40102916226)、[40101157725](https://github.com/xuys2025/escape-bincov/actions/runs/40101157725)、[40099269052](https://github.com/xuys2025/escape-bincov/actions/runs/40099269052)。触发到必需门禁分别为 18:32、21:22、20:43；batch-8 的套件步骤为 15:14、17:45、17:38，第二慢 batch-1 约 7:45。主机缓存全命中、浏览器组排队仅 2–3 秒，瓶颈在套件执行。单 timing artifact 和单 job logs 下载在调研环境返回代理 403，官方整 run logs ZIP 可读，补得完整 enemy 命令分别为 689.25、796.50、792.04 秒；对应 CPU 为 EPYC 9V74、Xeon 8573C、EPYC 7763（均 4 核）。三轮均为 Node 24.21.0、Chromium build 1243、lavapipe（llvmpipe / LLVM 20.1.2，Vulkan 1.4.318）。
+
+[PR #112 首轮 be62a79](https://github.com/xuys2025/escape-bincov/actions/runs/40161563791) 的三片实际为 207.37、265.70、195.42 秒（720、1080、touch），共 165 条原 case 通过，页面错误/外部请求均为零；CPU 分别为 EPYC 9V45、9V45、7763（均 4 核），浏览器/Node/renderer 与基线相同。各片身份、配置和六单元/case 并集也从真实输出独立复核。portable 输出证明候选与最近两轮 main 的实际 HTML SHA-256 均为 `b309e11f248f46e9c10ba08d0056aab8160212adb20ecab35bedf54c1d8bfe7f`；更早 `c587685` 的游戏字节不同，不混入同产品对照。首轮整体因既有 station-reset S6 的精确 toast 等待失败，最终门禁正确阻断，不能把 10:18 到失败门禁算作完整通过或提速验收；CPU 不同的小样本也不是受控三轮性能结论。
 
 [enemy-browser-plan.mjs](../scripts/enemy-browser-plan.mjs) 声明三个互斥视口链：`enemy-720`（1280×720）、`enemy-1080`（1920×1080）、`enemy-touch`（844×390，原生触控仿真）。每片完整执行该视口原有的街区与商场流程：阶段/美术夹具、部署、真实输入、付费攻击、暂停与刷新链均不切断；不共享跨 runner 的页面或存档。三片分别覆盖 67、59、39 条既有 case，共 165 条。较大的 1920 片放在原 batch-8，其余两片分担给历史较短的 batch-6、batch-7，仍最多八台 runner。
 
 `pnpm test:enemy` 保留原全量入口与先全部街区、再全部商场的顺序；本地也可单独运行 `pnpm test:enemy-720`、`pnpm test:enemy-1080`、`pnpm test:enemy-touch`。全量报告仍写 `test-results/enemy-browser/report.json`，三片分别写同目录下各片 ID 的子目录。完整入口登记为手动聚合命令，其全部内容在 CI 由三片精确覆盖；没有将原回归改为可省略诊断。
 
 每条视口链完成全部原断言后才写完成证明。组执行器将通过的证明装入原耗时行，独立门禁再核对六个完整街区/商场单元、全部 case ID、原视口/离线/触控配置，以及 run/SHA/attempt 和当前套件执行时间窗。缺片、零选择、重复/遗漏 case、未完成链、旧报告或配置变化均失败；原退出状态门禁同时保留。覆盖证明不新增每 case 耗时，也不宣称已有性能收益：准确候选 CI、合并后完整 main 及同产品对照仍须实际运行。
+
+同一 PR 的 S6 后续只修观测顺序：确认点击前先断言没有旧的同文案 toast，再预先等待本次精确可见反馈，点击后仍等待原 promise；20 秒、存储对话框、peer 原始字节/副本、写次数及无下载断言保留。该 toast 在 3.1 秒后删除，旧脚本在点击返回后才开始观察。main 旧脚本与候选均在真实 UI 下加入相同 3.5 秒控制端延迟，并记录实际 DOM：旧版只有 S6 失败（其他 13 步通过），候选 14 步全过，两者都实际显示并删除了正确错误反馈。这个负对照证明后置等待的测试缺口，不证明已经还原首轮 CI 的具体时序；正常不加延迟的完整回归也为 14/14，通过时页面错误/外部请求均为零；控制诊断与正常验收分别记录。准确新 head CI 与后续性能结果以 [PR #112](https://github.com/xuys2025/escape-bincov/pull/112) 为准。
 
 每组可在依赖和 Chromium 安装后用 `node scripts/ci/run-browser.mjs batch-2` 运行；batch-8 另需按工作流下载真实旧客户端。执行失败会立即停止本组后续套件并标记未运行，其他组照常完成。保留 45 分钟 job 超时，不额外缩短套件预算。
 
