@@ -19,7 +19,7 @@ CI 策略测试还守住五件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 
 ## 纯文档快速通道
 
-白名单为根目录 `README.md`、`AGENTS.md`、`CONTRIBUTING.md`、`handoff.md`、`.github/PULL_REQUEST_TEMPLATE.md`、`docs/` 内的 Markdown，以及已确认只作文学交接的 `docs/story/GEMINI-RETURN-MANIFEST-20261014.json`。必须是普通非可执行文件；符号链接和未知路径走全量。
+白名单为根目录 `README.md`、`AGENTS.md`、`CONTRIBUTING.md`、`handoff.md`、`.github/pull_request_template.md`、`docs/` 内的 Markdown，以及已确认只作文学交接的 `docs/story/GEMINI-RETURN-MANIFEST-20261014.json`。路径按仓库中的大小写精确匹配；必须是普通非可执行文件，符号链接和未知路径走全量。
 
 `THIRD_PARTY_NOTICES.md` 嵌入 HTML，`README-游玩说明.txt` 进入便携 ZIP，均不属于可跳过输入。代码、素材、测试、脚本、锁文件和配置也全部参与验证指纹。生成物不入库，指纹只看源码：构建可复现，同一份源码和锁文件在本地与 CI 上打出相同字节（移出仓库前，每次 CI 都逐字节核对过提交的生成物与 CI 构建）。
 

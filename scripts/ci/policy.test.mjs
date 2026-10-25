@@ -20,10 +20,10 @@ const fixture = (extra = {}) => ({ eventName: 'pull_request', repository, curren
 
 test('documentation allowlist excludes build inputs, arbitrary files, symlinks and submodules', () => {
   for (const path of ['README.md', 'handoff.md', 'AGENTS.md', 'docs/story/CH01-MARKET-SLICE.md',
-    'docs/story/GEMINI-RETURN-MANIFEST-20261014.json']) assert.ok(isDocumentation(entry(path)), path);
+    'docs/story/GEMINI-RETURN-MANIFEST-20261014.json', '.github/pull_request_template.md']) assert.ok(isDocumentation(entry(path)), path);
   for (const path of ['THIRD_PARTY_NOTICES.md', 'README-游玩说明.txt', 'docs/release-manifest.json',
     'docs/runtime.json', 'assets/license.md', 'scripts/test.mjs', 'tests/save.test.ts',
-    '.github/workflows/ci-pages.yml', 'package.json', 'pnpm-lock.yaml', 'docs/new.png', 'new.md']) {
+    '.github/workflows/ci-pages.yml', '.github/PULL_REQUEST_TEMPLATE.md', 'package.json', 'pnpm-lock.yaml', 'docs/new.png', 'new.md']) {
     assert.ok(!isDocumentation(entry(path)), path);
     assert.notEqual(fingerprint([source]), fingerprint([source, entry(path)]));
   }
@@ -44,6 +44,22 @@ test('docs PR and docs main reuse only the same fully validated content', async 
     const plan = await choosePlan(fixture({ eventName }));
     assert.equal(plan.browserRequired, false); assert.equal(plan.validatedRun, run.id);
     assert.deepEqual(plan.changed, ['docs/MAIN-STORY.md']);
+  }
+});
+
+test('the tracked PR template can reuse only matching fully tested main content', async () => {
+  const path = '.github/pull_request_template.md';
+  readFileSync(resolve(path), 'utf8'); // Check the actual case-sensitive repository path before planning a change.
+  const original = entry(path), edited = entry(path, 'b'.repeat(40));
+  for (const eventName of ['pull_request', 'push']) {
+    const inputs = fixture({ eventName, base: [source, original], current: [source, edited], tree: async () => [source, original] });
+    const plan = await choosePlan(inputs);
+    assert.equal(plan.browserRequired, false);
+    assert.equal(plan.validatedRun, run.id);
+    assert.deepEqual(plan.changed, [path]);
+    assert.equal((await choosePlan({ ...inputs, runs: async () => [] })).browserRequired, true);
+    assert.equal((await choosePlan({ ...inputs, current: [entry(source.path, 'c'.repeat(40)), edited] })).browserRequired, true);
+    assert.equal((await choosePlan({ ...inputs, current: [source, entry(path, edited.sha, '100755')] })).browserRequired, true);
   }
 });
 
