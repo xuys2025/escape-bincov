@@ -1,3 +1,11 @@
+## 2026-10-25 资源报告工具拒绝不完整或无效输入（`fix/resource-report-validation`）
+
+基线 main `974a3a8d1ad2a7662c3a828226295d6c9b31eb64`，承接 #32/#60。`station-resource-summarize.mjs` 原先接受 60 份重复 `round-1`、将缺失的回收计数/共享几何身份比较为真，并把 null heap 算成零；`station-resource-target-slots.mjs` 原先接受重复轮次和字符串 live。新增纯输入校验：只检查实际消费字段，在写输出前指出非法字段；完整摘要仍要求原有 60 轮，槽位审计保留合法的 1 轮前缀。PARTIAL/status、报告公式、阈值和两个工具的 review 分类保持。
+
+仓库历史仅有聚合摘要/身份摘要与原始文件散列索引，未发现可直接喂这两个 CLI 的原始 60 轮树。正对照由当前 `inventory` / `readManagedTables` / `checkRelease` 在纯 Node 合成资源上生成；包括 source 本来就省略 identity 的 null 占位，不能误拒绝。现仓库历史聚合摘要作为非 raw schema 明确拒绝，不静默适配。七项真实 CLI 正反例通过（含 PARTIAL 保留、重复/缺轮、null/字符串/溢出数值 heap、缺计数/identity、slots 重复键/非布尔 live）。`pnpm test` 874/874、最终 `pnpm check:ci` 71/71、`pnpm package`、入口文档与 `git diff --check` 通过；HTML/两个 ZIP 哈希保持主线。另用同一有效合成输入运行 main 旧 CLI 与新 CLI，摘要 13 个输出文件、槽位 1 个输出文件逐字节一致，未改算法结果。
+
+本轮没有浏览器、trend 或堆采样，没有运行 60 轮/F20；输入拒绝不等于资源签收。未推送/开 PR/合并或发布，交 root 审阅。
+
 ## 2026-10-24 打包产物改由 CI 构建和发布（`ci/no-committed-builds`）
 
 维护者在 #103 因 #102 合入出现生成物冲突时提出：产物应由 CI 编译发布。基线 main `49894e9`，随后同步 `c587685`（#104）与 `5adc64a`（#103），两次的生成物冲突都按本规则保留删除。五个生成物移出仓库并加入 `.gitignore`，`generated-files.test.mjs` 拒绝再提交；发布清单移到 `release/`。CI 删去“提交的产物与源码一致”检查，main 的 `Build and test` 通过后新增 `Publish offline release`，把同一份已验证构建发布到滚动预发布 `main-latest`（标签移到本次提交、文件同名替换），README 下载改指向它；Pages 不变。规则只写在 [CI 说明](docs/CI.md#构建与离线包发布)，AGENTS、手册、模板、README 链接过去。
