@@ -145,6 +145,8 @@ EN-13 接入每五种子之一的头目＋两护卫，替换已有名册三人�
 
 当前任务从 [WORK-QUEUE 顶部](docs/WORK-QUEUE.md) 和相关 PR 的最新 head/检查接手。读代码先用 [CODEMAP](docs/CODEMAP.md)；每个在途交付维护一份[短摘要](docs/TASK-HANDOFF-TEMPLATE.md)，不把本文件全部放入默认上下文。
 
+- 2026-10-25 · [#61 手动落幕检查](docs/CI.md#手动落幕检查的时序)（[原 PR #95](https://github.com/xuys2025/escape-bincov/pull/95)，`fix/coast-outro-checks`）：从原 head `14ad1b7` 正常合并 main `974a3a8`，只解任务入口/本交接冲突并保留双方内容及 #105 生成物删除。W12/W13 等实际落幕再读文案，游戏源码/资产/依赖与 main 相同。原 Windows head 的延迟对照 26/26、完整 53/53 和负对照保留历史归属。本轮 Linux 单测 874/874、CI 守卫 64/64、package 通过；完整手动套件 W03 自动暂停首败后中断，main 同码前缀对照明确复现暂停，不能写完整通过。定向结果、准确 head 和完整 CI 见原 PR；后续继续原分支，不改阈值/重试，不自行合并或发布。
+
 - 2026-10-24 · 地图边瞄准偏转（`fix/aim-map-edge`，起点 main `f73e9de`；改枪 M0-07 原型发现，见 [#80](https://github.com/xuys2025/escape-bincov/issues/80)，M0 评审决定单独修）：
   - **问题**：按住右键精瞄、镜头被地图边挡住时，夹紧只卡住前探的一个轴，另一个轴照常缓动，光标不动瞄准也转约 1 秒。主线上试枪场射击线 1280×720 测得 8.47°，1920×1080 3.6–3.7°；居民楼楼层比画面窄，同样会转。#39 的检查都在空地上。
   - **修法**：`camera.ts` 的 `leadRoom` 给前探长度封顶，到镜头沿光标方向碰边为止；跟随镜头已被地图边挡住时没有前探；离边界不到 27 像素时再按距离的 3 倍收窄（`EDGE_FADE`），走向地图边时前探平滑收完，不会一帧跳回 64 像素。`stepLead` 多一个 `room` 参数，`scene.ts` 的 `camera()` 和 `aimFromClient` 用同一上限。空地上逐位不变，触屏不变。
@@ -176,7 +178,7 @@ EN-13 接入每五种子之一的头目＋两护卫，替换已有名册三人�
   - **与 #81**：只改了 #81 没碰的段落；试合并 #81 的 `2fcad9d` 后，src/tests 无新增冲突，类型检查通过，单测 708/708。
   - 音色只做了离线响度测量，好不好听待维护者试听。证据见[说明](docs/evidence/issue75-hit-confirm/README.md)，准确 head 与 CI 见本分支 PR。
 - 2026-10-24 · [#75](https://github.com/xuys2025/escape-bincov/issues/75) 受击抖动方向（`fix/hurt-kick-direction`，起点 main `04736f7`，已同步 #93 `98c69b4`）：维护者决定受击抖动改为顺着子弹方向被打退，血迹返溅和来弹方向提示不变。`hurt` 事件的 `angle` 不变，仍从受击者指回打击来源（逆着子弹、指向近战攻击者），契约里补了这句说明；`CoastView.onEvent` 只把 2 像素抖动取反。血迹仍按 `angle` 朝来源喷，HUD 来弹方向由 Runtime 另算，都没动；玩家自己中弹也改为顺弹道后移。`test:shooting` 检查 g 改为断言东向子弹抖 2,0、南向子弹抖 0,2，且这次命中的血滴全部朝射手；main 构建上实测只在方向一项失败（[报告与裁图](docs/evidence/issue75-kick-direction/README.md)）。命中当帧不闪白（60 帧/秒晚一帧）和 #75 其余 P0–P2 未动。准确 head、验证结果与 CI 见本分支 PR。
-- 2026-10-23 · [#60 Q-E08 检查导航](docs/tasks/check-navigation.md)（`agent/quality-checks`，起点 main `04736f7`）：按风险列出最少检查、前置与人工证据；脚本分类明确现役/诊断/历史/待确认，两个行动堆报告默认分目录。单测 647 项、CI 守卫 62 项、Perk 手动入口 14 项通过，打包产物与基线字节一致。原有两个 20 轮堆探针均完成，生命周期通过、堆趋势仍 PARTIAL，未跑 strict60，未替 #32 签收。使用与维护见 [CHECKS](docs/CHECKS.md)，等待承接 PR 的 CI 与维护者审阅。
+- 2026-10-23 · [#60 Q-E08 检查导航](docs/tasks/check-navigation.md)（`agent/quality-checks`，起点 main `04736f7`）：按风险列出最少检查、前置与人工证据；脚本分类明确现役/诊断/历史/待确认，两个行动堆报告默认分目录。单测 647 项、CI 守卫 62 项、Perk 手动入口 14 项通过，打包产物与基线字节一致。原有两个 20 轮堆探针均完成，生命周期通过、堆趋势仍 PARTIAL，未跑 strict60，未替 #32 签收。使用与维护见 [CHECKS](docs/CHECKS.md)。2026-10-24 已审核并按维护者授权合并 [PR #93](https://github.com/xuys2025/escape-bincov/pull/93) 为 `98c69b4`，合并树与完整 CI 通过的 `e7b2019` 相同。
 
 - 2026-10-23 · PR #81 本批代码/素材已保存为 `fc56573`，随后正常同步已接受 main `160c6f3`（#89 退役旧测试接口）。唯一冲突在本文件，同时保留双方记录；合入后 601 单测及 package 通过，HTML/ZIP/清单与 `fc56573` 逐字节一致，所以下方 22 场景、UI/便携和 10 分 4 秒实际游玩仍对应最终运行制品。当前准确提交和 CI 见原 PR，不自行合并或部署。
 
