@@ -2,7 +2,7 @@
 
 基线 main `974a3a8d1ad2a7662c3a828226295d6c9b31eb64`，承接 #32 的诊断证据边界。`scripts/station-resource-trend.mjs` 原先在创建输出目录、读取 HTML、启动 Chromium 后才解析轮数；`--rounds=NaN`、`0`、空值和负数会跳过循环，却可能写出 `BOUNDED_CHECKS_PASS_HEAP_PENDING`。只修参数入口：`station-resource-args.mjs` 在副作用前校验，默认 60，保留 `--rounds=N` 的正安全整数；拒绝缺值、非整数、非有限、非正和重复选项，不新增空格传值语法。原工具继续归 `review`，没有调整 F20 阈值、采样循环或状态公式。
 
-新增 CI Node 测试启动真实 CLI，以不存在的 HTML 为前置哨兵：非法轮数必须先报参数错误且不创建输出目录；默认和合法轮数只走到原 HTML 前置，不启动浏览器。未执行六十轮、缩短轮数浏览器或 F20 签收。`pnpm test` 874/874、`pnpm check:ci` 67/67 与 `pnpm package` 全部通过；任务入口文档与 `git diff --check` 通过。打包 HTML、portable/web ZIP 分别保持主线哈希 `b309e11f…`、`ec356f01…`、`854bc3cd…`。首次受限沙箱的 Git 子进程报 EPERM，按环境允许方式重验通过，不改断言。本轮未推送、未开 PR、未合并或发布。
+新增 CI Node 测试启动真实 CLI，以不存在的 HTML 为前置哨兵：非法轮数必须先报参数错误且不创建输出目录；默认和合法轮数只走到原 HTML 前置，不启动浏览器。未执行六十轮、缩短轮数浏览器或 F20 签收。`pnpm test` 874/874、`pnpm check:ci` 67/67 与 `pnpm package` 全部通过；任务入口文档与 `git diff --check` 通过。打包 HTML、portable/web ZIP 分别保持主线哈希 `b309e11f…`、`ec356f01…`、`854bc3cd…`。首次受限沙箱的 Git 子进程报 EPERM，按环境允许方式重验通过，不改断言。已推送并建立[草稿 PR #111](https://github.com/xuys2025/escape-bincov/pull/111)；准确 head 与远端 CI 见该 PR，未合并或发布。
 
 ## 2026-10-24 打包产物改由 CI 构建和发布（`ci/no-committed-builds`）
 
