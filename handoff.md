@@ -40,6 +40,12 @@ Linux、Node 24.19.0、pnpm 11.25.0：全量 `pnpm test` 876/876、`pnpm check:c
 
 新增回归在 [shotgun-hit-sounds.test.ts](tests/shotgun-hit-sounds.test.ts)，声音规则在 [sound.ts](src/coast-view/sound.ts)，可选字段在 [事件契约](src/raid-runtime/contract.ts)。本地完整单测 884/884（含新增 10 项）、专项与原声音测试 25/25、工程守卫 64/64、类型检查及打包已通过。HTML SHA-256 为 `da677d7e3f8dbdcfc97524383fbf111ee8752abb660b76dd2fee8e61bf8d0979`；独立只读审阅无阻断。共享 node_modules 的 pnpm 依赖预检拒绝工作树链接后，实际验证使用相同 package scripts 的 Node 命令，未安装依赖。浏览器、真机和试听未运行；产品改动已由 root 与独立审阅者复核，获准推送并创建关联 #75 的草稿 PR；不自行合并或发布，最终 head 与 CI 以 PR 正文为准。#106 的改枪 M2 仍走原分支，后续正常处理公共模块冲突。
 
+## 2026-10-25 诊断辅助算法的四项纯 Node 回归接入 CI（`ci/resource-helper-tests`）
+
+基线 main `974a3a8d1ad2a7662c3a828226295d6c9b31eb64`，承接 #60 Q-E08。`scripts/ci/resource-helpers.test.mjs` 只导入原 `astra-r7-heap-graph.test.mjs` 与 `station-resource-probe.test.mjs`，让现有 `check:ci` glob 执行四项纯 Node 回归；原文件、算法、阈值与断言不改、不复制。范围是合成有向图的支配关系与独立移点可达性 oracle，以及缺少资源表、故意保留未销毁对象的负对照。两份旧测试从 review 登记为 support，浏览器 probe/trend 等其余 review 工具保持待确认。
+
+直接运行原两文件 4/4 通过，Node 报告 224 ms、进程墙钟 0.302 s；无硬编码环境或输出写入，临时 window fixture 在 finally 恢复。聚合入口单独运行 4/4、168 ms；完整 `pnpm test` 874/874、`pnpm check:ci` 68/68、`pnpm package` 全部通过，入口文档检查与 `git diff --check` 通过，HTML/两个 ZIP 与基线发行哈希一致。没有启动浏览器、trend 或 F20，四项通过不代表资源签收。root 已审阅；后续仅移除元数据测试对中文说明文字的无关约束，保留分类断言，并复验检查导航测试与入口文档。本地实现已完成，远端 PR 与准确 head 以交付消息为准；未合并或发布。
+
 ## 2026-10-24 打包产物改由 CI 构建和发布（`ci/no-committed-builds`）
 
 维护者在 #103 因 #102 合入出现生成物冲突时提出：产物应由 CI 编译发布。基线 main `49894e9`，随后同步 `c587685`（#104）与 `5adc64a`（#103），两次的生成物冲突都按本规则保留删除。五个生成物移出仓库并加入 `.gitignore`，`generated-files.test.mjs` 拒绝再提交；发布清单移到 `release/`。CI 删去“提交的产物与源码一致”检查，main 的 `Build and test` 通过后新增 `Publish offline release`，把同一份已验证构建发布到滚动预发布 `main-latest`（标签移到本次提交、文件同名替换），README 下载改指向它；Pages 不变。规则只写在 [CI 说明](docs/CI.md#构建与离线包发布)，AGENTS、手册、模板、README 链接过去。

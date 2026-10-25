@@ -66,6 +66,13 @@ test('all script files are classified; unknown and stale entries fail without de
   assert.ok(inventory.some(item => item.kind === 'review'));
   assert.equal(inventory.find(item => item.path === 'scripts/sol-r6-audio-controls.mjs').kind, 'archive');
   assert.equal(inventory.find(item => item.path === 'scripts/coast-sample-heap.mjs').kind, 'diagnostic');
+  for (const path of ['scripts/astra-r7-heap-graph.test.mjs', 'scripts/station-resource-probe.test.mjs']) {
+    const item = inventory.find(item => item.path === path);
+    assert.equal(item.kind, 'support');
+  }
+  for (const path of ['scripts/station-resource-probe.mjs', 'scripts/station-resource-trend.mjs']) {
+    assert.equal(inventory.find(item => item.path === path).kind, 'review', 'importing the pure tests does not promote their browser tools');
+  }
   assert.throws(() => scriptInventory([...files, 'scripts/unregistered-probe.mjs'], scripts), /Unclassified script/);
   assert.throws(() => scriptInventory(files.filter(p => p !== 'scripts/sol-r6-audio-controls.mjs'), scripts), /Stale script/);
   assert.throws(() => scriptInventory(files, { ...scripts, future: 'node scripts/missing.mjs' }), /Missing package entry/);
