@@ -1,3 +1,11 @@
+## 2026-10-25 自然准备与首搜候选（未并入 #109）
+
+从受检 `6629ab1` 在 `research/natural-play-preparation` 续同一自然工具可靠性目标，#109 head不改、不另开PR。仅改测试侧真实UI准备、只读报告、动态首搜及源/背包守恒；70HP/医疗1份/匹配弹12发为明确bot政策，候选不足或写失败即blocked。游戏源码/HTML、原60HP/220px关闭、native/windup和600秒保持。
+
+876单测、75守卫、package通过，HTML仍 `31ca729a4a900a327160f7a2e46add41267e2aada3d215b7b32ca4e66dc7c251`。短真实UI33.638秒通过（实际敌人致死HP1→quota不发布→真实准备HP72.065/药1/弹24）；最终两药有界报价756状态0差异；短同源首搜+windup65.405秒通过，实际拖cloth×2、零错误/请求。短UI早于最后报价收束，最后报价仅经领域/756 oracle验证，边界与原始方法见[候选摘要](docs/tasks/audit-contracts.md#自然准备与首搜候选未并入-109)。
+
+维护者按额度收尾明确取消候选最终十分钟，故该项**未运行**；原#109的622秒0拖放失败保留。下一次从原109接手评论的固定候选commit/compare续作，先按原完整十分钟验收，不另建重复PR，不自行合并/发布。
+
 ## 2026-10-25 自然游玩报告累计击杀
 
 承接 #60 原审计登记，独立本地分支 `fix/natural-play-kill-count`，基线 `974a3a8d1ad2a7662c3a828226295d6c9b31eb64`。原[真实报告](docs/tasks/audit-contracts/natural-play-report.json)同一 run 的采样在 332→363 秒从 25→0，最终结算仍为 25；不是游戏丢击杀。`?test=1` driver 的 `killCount()` 只读 Runtime 真值，采样回调移至 `scripts/natural-play-state.mjs`，不从有界事件日志重建累计值；终态仍读已提交结算。普通端口、战斗/存档/HUD/输入规则不变。

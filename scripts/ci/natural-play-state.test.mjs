@@ -42,3 +42,10 @@ test('natural-play refuses a missing cumulative observation rather than silently
   sample.driver = null;
   assert.throws(read, /killCount/);
 });
+
+test('natural-play ammunition uses the published reserve of the current gun rather than counting pistol rounds', () => {
+  const { app, host, read } = fixture();
+  app.loadout.bag.items = [{ id: 'ammo9', qty: 99 }, { id: 'shell', qty: 4 }];
+  host.lastBatch.frame.hud.weapon = { id: 'shotgun', mag: 2, reserve: 4, reloading: false };
+  assert.equal(read().ammo, 4);
+});

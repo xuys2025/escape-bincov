@@ -1,0 +1,136 @@
+{
+  "htmlSha256": "31ca729a4a900a327160f7a2e46add41267e2aada3d215b7b32ca4e66dc7c251",
+  "entry": "/workspace/natural-play-preparation/dist/index.html",
+  "startedAt": "2026-10-25T05:20:32.692Z",
+  "minutes": 10,
+  "world": "buildings",
+  "firstSeed": 42,
+  "methodology": "Automated real-time session on the layered street with new enemy encounters (2.5D view). Test hook is read-only: no teleports, no clock changes, no changes to health, enemies, inventory or RNG. All actions use visible buttons and real keyboard/mouse, including E opening and native inventory drag for crates and corpses. This is not a human fun/balance evaluation.",
+  "preparationPolicy": {
+    "readyHp": 70,
+    "carriedMedical": 1,
+    "totalRounds": 12
+  },
+  "preparation": [
+    {
+      "run": 1,
+      "at": "2026-10-25T05:20:35.993Z",
+      "kind": "decision",
+      "reason": "verified-preparation-ready",
+      "before": {
+        "phase": "hideout",
+        "storageOK": true,
+        "conflict": false,
+        "pending": false,
+        "confirmed": true,
+        "publishedMatches": true,
+        "revision": 2,
+        "activeRun": false,
+        "hp": 100,
+        "hpMax": 100,
+        "bleeding": false,
+        "stamina": 100,
+        "mental": 100,
+        "water": 100,
+        "satiety": 100,
+        "pollution": 0,
+        "cash": 700,
+        "bagMedical": 2,
+        "gunReady": true,
+        "ammoId": "ammo9",
+        "totalRounds": 32,
+        "spareCells": 26,
+        "quantities": {
+          "bc-mvndq1aw-8": 32,
+          "bc-mvndq1aw-9": 2,
+          "bc-mvndq1aw-a": 1,
+          "bc-mvndq1aw-b": 1,
+          "bc-mvndq1aw-c": 24
+        }
+      }
+    }
+  ],
+  "decisions": [
+    {
+      "run": 1,
+      "elapsed": 0.2958999999994412,
+      "reason": "safe-first-container",
+      "target": "crate-20",
+      "routePoints": 22
+    }
+  ],
+  "timing": {
+    "method": "Wall intervals attributed to the previous observed UI state (including its UI actions); simulation sums nonnegative published run-clock deltas. Neither is a GPU/active-fun measurement.",
+    "runWallSeconds": 60.29800000000001,
+    "baseWallSeconds": 1.461,
+    "resultWallSeconds": 0,
+    "otherWallSeconds": 0,
+    "simulationSeconds": 57.99499999999911,
+    "playStartedAt": "2026-10-25T05:20:35.980Z"
+  },
+  "enemyPhases": {
+    "raider-gunner/idle": 1,
+    "raider-melee/idle": 1,
+    "raider-lookout/idle": 2,
+    "raider-melee/windup": 1
+  },
+  "containerLoot": {
+    "opened": [
+      {
+        "run": 1,
+        "id": "crate-20",
+        "kind": "crate",
+        "elapsed": 19.470399999999437
+      }
+    ],
+    "transfers": [
+      {
+        "run": 1,
+        "containerId": "crate-20",
+        "kind": "crate",
+        "item": "cloth",
+        "qty": 2,
+        "elapsed": 19.470399999999437
+      }
+    ],
+    "threatenedClosures": 0
+  },
+  "samples": [
+    {
+      "realSeconds": 1,
+      "run": 1,
+      "elapsed": 0,
+      "hp": 100,
+      "kills": 0,
+      "highTide": false,
+      "ammo": 24,
+      "medical": 2,
+      "goal": null,
+      "x": 208,
+      "y": 1232
+    },
+    {
+      "realSeconds": 32,
+      "run": 1,
+      "elapsed": 31,
+      "hp": 100,
+      "kills": 0,
+      "highTide": false,
+      "ammo": 24,
+      "medical": 2,
+      "goal": null,
+      "x": 471,
+      "y": 976
+    }
+  ],
+  "outcomes": [],
+  "errors": [],
+  "externalRequests": [],
+  "probeScope": "Source-derived short native-transfer + windup control; default minutes stays 10 but this diagnostic stops after coverage. NEVER ten-minute acceptance.",
+  "controllerSourceSha256": "62338395f613e60f6afcb41dee7c070c6725363c824f2ed5b257ac0d89caa0fe",
+  "browser": "153.0.8010.12",
+  "observationPolicy": "First complete a native transfer at a dynamically reachable container whose route passes the original 220px/LOS danger boundary. Then approach a visible new enemy and observe its actual windup. No game-state mutations.",
+  "coverageProbeComplete": true,
+  "status": "coverage-probe-passed",
+  "finishedAt": "2026-10-25T05:21:38.097Z"
+}

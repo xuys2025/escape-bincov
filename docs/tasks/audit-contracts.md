@@ -41,6 +41,21 @@
 | 单测通过不等于真机/完整资源签收 | 帧率、真实输入、WebGL 上下文恢复、F20 总堆与真人手感仍按原任务验收，不把本轮结果替代这些结论 |
 | 自然游玩探针的击杀采样（独立修复） | 原[真实报告](audit-contracts/natural-play-report.json)同一 run 的 kills 在 332 秒为 25、363 秒为 0；只有至多 1000 条事件的采样失真，Runtime 和最终结算未丢击杀。[PR #109](https://github.com/xuys2025/escape-bincov/pull/109) 将实时采样改读显式 `?test=1` driver 的 `killCount()`，终态继续读已提交结算。采样与 Runtime 反例覆盖日志淘汰、视图重挂、经典/分层检查点恢复、零写入与结算对账；[打包页控制探针](audit-contracts/natural-kills-browser-probe.json)实测 1→1→1→1。[默认十分钟原脚本](audit-contracts/natural-kills-buildings-report.json)实际 622.217 秒，同 run 样本无下降，但失败于 0 次容器拖放，**不能记整套 PASS**；原始失败与真人/真机、#32 边界保持 |
 
+### 自然准备与首搜候选（未并入 #109）
+
+`research/natural-play-preparation` 从 #109 的 `6629ab1` 续同一工具可靠性目标，不另开 PR，不改 #109 受检 head。候选仅改测试控制器/只读报告：70HP、无流血、医疗至少1份、现有枪匹配总弹至少12发为 bot 政策；通过 `currentRecord()` 核对发布状态，每次真实 UI 动作后确认 revision 与实际身体/库存/现金变化，失败或不足明确 blocked。两药报价只在官方 RPG 克隆中搜索最多6次治疗加1份储备；首搜按动态路径与原220px/LOS危险门槛选择，原生拖放须同 run/map/context 且源减、背包等量增。原60HP关闭条件、native/windup断言和默认600秒未放宽，游戏源码及HTML不变。
+
+| 证据 | 实际结果 |
+| --- | --- |
+| Node / guards / package | 876/876、75/75、打包通过；HTML仍 `31ca729a4a900a327160f7a2e46add41267e2aada3d215b7b32ca4e66dc7c251` |
+| [真实 UI / quota](audit-contracts/natural-preparation/ui-control.json) | 33.638秒：真实死亡HP1后，quota不改原字节/revision/药/HP、不出击；实际UI恢复后HP72.065、医疗1、匹配弹24、cash290 |
+| [医疗 oracle](audit-contracts/natural-preparation/medical-oracle.json) | 756状态0差异、原record不变；[中间版6个错价](audit-contracts/natural-preparation/medical-oracle-before.json)保留，正式反例含HP40/150→预算135及HP1/绷带2/160→预算160 |
+| [短首搜 / windup](audit-contracts/natural-preparation/coverage-probe.json) | 65.405秒：19.4704模拟秒原生拖 cloth×2，随后真实 raider-melee/windup，错误/请求0；`coverage-probe-passed` **不是十分钟验收** |
+
+短 UI 正向路径在最终报价收束前完成，最后只改医疗报价；该UI状态报价仍为90，最终函数由正式领域反例与756 oracle验证，未重复UI。方法保留为 [UI source](audit-contracts/natural-preparation/ui-probe.source.txt)、[coverage source](audit-contracts/natural-preparation/coverage-probe.source.txt)、[oracle source](audit-contracts/natural-preparation/medical-oracle.source.txt)；前两份复放时复制为 `.drafts/natural-play-preparation/*.mjs`，使用 `node --import tsx` 和独占浏览器锁，异地检出调整本轮 `/workspace/natural-play-preparation` 入口/输出/import前缀。coverage只给同源副本增加停止条件/诊断标签，正式 `test:play` 没有缩时入口。
+
+按维护者本轮额度收尾指令，候选最终完整默认十分钟 **未运行**。下一次从原#109接手评论的固定候选commit/compare续作，先跑原十分钟并读run/base计时、blocked原因、原生拖放、windup和结算；不覆盖原622秒失败，不替真人/真机或#32 F20签收。
+
 ## 首轮验证（同步射击主线之前）
 
 Windows，Node 24.21.0、pnpm 11.19.0、本地 Chrome 155.0.8059.85。下列结果对应 HTML SHA-256 `5ce124f9ab9585f29e30e29df5892f0492115ce04dbf9fdba51fb82aa9c64b5c`；完整日志位于工作区忽略目录 `test-results/audit-*.log`，CI 和准确 head 的长期入口为关联 PR。

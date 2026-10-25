@@ -1,0 +1,65 @@
+{
+  "checked": 756,
+  "mismatches": [
+    {
+      "hp": 1,
+      "bleed": false,
+      "b": 2,
+      "k": 0,
+      "perks": [],
+      "got": 180,
+      "expected": 160
+    },
+    {
+      "hp": 1,
+      "bleed": true,
+      "b": 2,
+      "k": 0,
+      "perks": [],
+      "got": 180,
+      "expected": 160
+    },
+    {
+      "hp": 16,
+      "bleed": false,
+      "b": 1,
+      "k": 0,
+      "perks": [],
+      "got": 180,
+      "expected": 160
+    },
+    {
+      "hp": 16,
+      "bleed": true,
+      "b": 1,
+      "k": 0,
+      "perks": [],
+      "got": 180,
+      "expected": 160
+    },
+    {
+      "hp": 8,
+      "bleed": false,
+      "b": 1,
+      "k": 0,
+      "perks": [
+        "constitution-15-b"
+      ],
+      "got": 180,
+      "expected": 160
+    },
+    {
+      "hp": 8,
+      "bleed": true,
+      "b": 1,
+      "k": 0,
+      "perks": [
+        "constitution-15-b"
+      ],
+      "got": 180,
+      "expected": 160
+    }
+  ],
+  "mismatchCount": 6,
+  "scope": "bounded two-medical cost oracle with official useRpgItemResult; private cloned legal-shaped base states, not real UI or all game states"
+}
