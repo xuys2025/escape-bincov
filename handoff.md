@@ -1,3 +1,9 @@
+## 2026-10-25 资源趋势工具轮数参数拒绝（`fix/trend-rounds-validation`）
+
+基线 main `974a3a8d1ad2a7662c3a828226295d6c9b31eb64`，承接 #32 的诊断证据边界。`scripts/station-resource-trend.mjs` 原先在创建输出目录、读取 HTML、启动 Chromium 后才解析轮数；`--rounds=NaN`、`0`、空值和负数会跳过循环，却可能写出 `BOUNDED_CHECKS_PASS_HEAP_PENDING`。只修参数入口：`station-resource-args.mjs` 在副作用前校验，默认 60，保留 `--rounds=N` 的正安全整数；拒绝缺值、非整数、非有限、非正和重复选项，不新增空格传值语法。原工具继续归 `review`，没有调整 F20 阈值、采样循环或状态公式。
+
+新增 CI Node 测试启动真实 CLI，以不存在的 HTML 为前置哨兵：非法轮数必须先报参数错误且不创建输出目录；默认和合法轮数只走到原 HTML 前置，不启动浏览器。未执行六十轮、缩短轮数浏览器或 F20 签收。`pnpm test` 874/874、`pnpm check:ci` 67/67 与 `pnpm package` 全部通过；任务入口文档与 `git diff --check` 通过。打包 HTML、portable/web ZIP 分别保持主线哈希 `b309e11f…`、`ec356f01…`、`854bc3cd…`。首次受限沙箱的 Git 子进程报 EPERM，按环境允许方式重验通过，不改断言。本轮未推送、未开 PR、未合并或发布。
+
 ## 2026-10-24 打包产物改由 CI 构建和发布（`ci/no-committed-builds`）
 
 维护者在 #103 因 #102 合入出现生成物冲突时提出：产物应由 CI 编译发布。基线 main `49894e9`，随后同步 `c587685`（#104）与 `5adc64a`（#103），两次的生成物冲突都按本规则保留删除。五个生成物移出仓库并加入 `.gitignore`，`generated-files.test.mjs` 拒绝再提交；发布清单移到 `release/`。CI 删去“提交的产物与源码一致”检查，main 的 `Build and test` 通过后新增 `Publish offline release`，把同一份已验证构建发布到滚动预发布 `main-latest`（标签移到本次提交、文件同名替换），README 下载改指向它；Pages 不变。规则只写在 [CI 说明](docs/CI.md#构建与离线包发布)，AGENTS、手册、模板、README 链接过去。

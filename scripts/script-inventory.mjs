@@ -8,7 +8,7 @@ const groups = [
   { kind: 'support', reason: '被现役构建或测试导入的共用模块，不是独立验收命令。', files: [
     'browser-options.mjs', 'canvas-click.mjs', 'font-characters.mjs', 'game-bundle.mjs', 'inventory-actions.mjs',
     'pixi-managed-gate.mjs', 'stall-resume.mjs', 'step-filter.mjs', 'storage-fault.mjs', 'title-edge-check.mjs', 'yard-entry.mjs',
-    'check-catalog.mjs', 'script-inventory.mjs', 'enemy-catalog-data.ts',
+    'check-catalog.mjs', 'script-inventory.mjs', 'enemy-catalog-data.ts', 'station-resource-args.mjs',
     'shop-touch-cases.mjs', 'station-acceptance-gates.mjs', 'enemy-mall-browser.mjs',
   ] },
   { kind: 'tool', reason: '素材生成、导入或交付工具；会写源码或资产，不能当作只读测试执行。开工前检查输入清单、哈希、字体环境和输出。', files: [
