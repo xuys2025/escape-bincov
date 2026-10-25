@@ -82,6 +82,8 @@ test('summary CLI rejects incomplete and duplicate rounds before creating any pr
 test('summary CLI rejects missing observations instead of equating undefined identities or coercing invalid numbers', () => {
   const cases = [
     ['counts.heap', r => { r.rows[0].counts.heap = null; }], ['counts.heap', r => { r.rows[0].counts.heap = '1000'; }],
+    ['counts.heap', r => { r.rows[0].counts.heap = 1e308; }], ['counts.heap', r => { r.rows[0].counts.heap = Number.MAX_SAFE_INTEGER + 1; }],
+    ['counts.heap', r => { r.rows[0].counts.heap = 1.5; }],
     ['release.tracked', r => { delete r.rows[0].release.tracked; delete r.rows[0].release.collected; }],
     ['rendererId', r => { delete r.rows[0].objects.rendererId; }],
     ['geometries', r => { r.rows.forEach(row => { row.objects.geometries = []; }); }],
@@ -99,6 +101,20 @@ test('summary CLI rejects missing observations instead of equating undefined ide
     assert.equal(result.status, 1); assert.match(result.stderr, /counts\.heap/); assert.equal(existsSync(out), false);
   });
 });
+
+test('summary CLI accepts the technical safe-integer byte limit without overflowing derived statistics', () => temporary(root => {
+  input(root, r => { r.baseline.counts.heap = Number.MAX_SAFE_INTEGER; for (const row of r.rows) row.counts.heap = Number.MAX_SAFE_INTEGER; });
+  const out = join(root, '..', `${root.split(/[\\/]/).at(-1)}-output`);
+  try {
+    const result = cli('summarize', root, out); assert.equal(result.status, 0, result.stderr);
+    const summary = JSON.parse(readFileSync(join(out, 'summary.json'), 'utf8'));
+    for (const mode of ['remount', 'shared', 'context']) {
+      const heap = summary.modes[mode].heap;
+      assert.equal(heap.max, Number.MAX_SAFE_INTEGER);
+      for (const [key, value] of Object.entries(heap)) if (key !== 'units') assert.ok(Number.isFinite(value), `${mode}.heap.${key}`);
+    }
+  } finally { rmSync(out, { recursive: true, force: true }); }
+}));
 
 test('slot CLI preserves a valid partial one-round audit and its explicit observed round count', () => temporary(root => {
   const { baseline, next } = observations(), file = join(root, 'input.json'), out = join(root, 'out.json');

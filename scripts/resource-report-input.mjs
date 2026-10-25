@@ -2,7 +2,6 @@
 const requireField = (ok, path, expected) => { if (!ok) throw Error(`Invalid resource report ${path}: expected ${expected}`); };
 const record = (value, path) => { requireField(value !== null && typeof value === 'object' && !Array.isArray(value), path, 'an object'); return value; };
 const array = (value, path) => { requireField(Array.isArray(value), path, 'an array'); return value; };
-const number = (value, path) => requireField(typeof value === 'number' && Number.isFinite(value) && value >= 0, path, 'a finite nonnegative number');
 const count = (value, path) => requireField(Number.isSafeInteger(value) && value >= 0, path, 'a nonnegative safe integer');
 const identity = (value, path) => requireField(Number.isSafeInteger(value) && value > 0, path, 'a positive safe integer identity');
 const boolean = (value, path) => requireField(typeof value === 'boolean', path, 'a boolean');
@@ -30,7 +29,8 @@ function roundRows(report, path, complete) {
 }
 function counts(sample, path) {
   const c = record(sample.counts, `${path}.counts`);
-  number(c.heap, `${path}.counts.heap`);
+  // CDP JSHeapUsedSize is a byte count: require exact Number representation, not a project memory budget.
+  count(c.heap, `${path}.counts.heap`);
   for (const key of ['scene', 'wallFrameGroups', 'wallFrames', 'gpuTextures']) count(c[key], `${path}.counts.${key}`);
   record(c.tables, `${path}.counts.tables`);
   const tables = array(c.tables.tables, `${path}.counts.tables.tables`), names = new Set();
