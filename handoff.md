@@ -1,3 +1,9 @@
+## 2026-10-25 行动背包有限服务（`refactor/raid-inventory-services`）
+
+#60 Q-E02 B，同一交付完成B1三有限命令+B2 detached窄读投影；起点 main `974a3a8d1ad2a7662c3a828226295d6c9b31eb64`，实现/验证入口见 [摘要](docs/tasks/quality-entropy.md#q-e02-b-行动背包有限服务)、[派生读数](docs/CODEMAP.md#派生读数)和正式工厂单测 `tests/raid-inventory-services.test.ts`。面板不持Session/SaveSession，命令回调内取fresh loadout，保留原 mutate接受集合、世界同事务、失败引用替换和原UI错误反馈；inventory全量quick/loot部分quick分别保持，不改存档/时钟/规则，不搬Scope/renderer。
+
+本地正式工厂10项+原负重11/11，完整884/884、工程守卫64/64、package/最终类型检查通过。浅读投影及错误部分quick两种副本回归均被断言拦下；两尺寸键鼠与保存失败/嵌套枪件的既有issue26定向case 3/3通过，页面异常/外网0，真实截图和[验证记录](docs/tasks/raid-inventory-services/validation.json)已归档；完整其余浏览器风险由准确head CI复核。尚未推送或创建本任务PR，等待root审阅后授权；#110已完整CI通过并转Ready，head未改；本任务不合并发布。
+
 ## 2026-10-25 #60 D8：失焦后第一次按键恢复
 
 分支 `fix/first-key-after-blur`，已接受基线 `974a3a8d1ad2a7662c3a828226295d6c9b31eb64`。核对开放 PR #95/#106 后独立承接 #60 的既存 D8，不接管改枪或落幕测试。`InputState.key` 区分新的独立按下与连发，只解除本键的抑制；WASD 离开搜刮时补的 Shift 继续按旧 held 观察，避免恢复旧冲刺。E 关闭面板直接返回、旧 held 不复活和鼠标/触屏规则保留。

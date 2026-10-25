@@ -173,6 +173,46 @@ async function runCase(entry, viewport, name, test) {
 }
 
 const cases = [
+  ['carried-inventory-commands', async t => {
+    await t.fixture({ bag: [item('own-water', 'water', 2)] });
+    await running(t.page); await t.page.keyboard.press('Tab'); await t.waitPanel('inventory');
+    await t.page.locator(t.selector('bag', 'own-water')).click(); await t.resetAudit();
+    await t.page.locator('[data-do="inv-rotate"]').click(); await frames(t.page);
+    let s = await t.snapshot(); assert.equal(s.live.loadout.bag.items[0].rotated, true); t.assertSynced(s);
+    assert.equal((await t.inputWrites()).length, 1, 'original in-place rotation commits once');
+    await t.resetAudit(); await t.button('quick').click(); await frames(t.page); s = await t.snapshot(); t.assertSynced(s);
+    assert.equal(s.live.loadout.bag.items.length, 0); assert.equal(s.live.loadout.safe.items[0].qty, 2); assert.equal((await t.inputWrites()).length, 1);
+    const secureUid = s.live.loadout.safe.items[0].uid;
+    await t.page.locator(t.selector('safe', secureUid)).click(); await t.resetAudit(); await t.button('quick').click(); await frames(t.page);
+    s = await t.snapshot(); t.assertSynced(s); assert.equal(s.live.loadout.safe.items.length, 0); assert.equal((await t.inputWrites()).length, 1);
+    const uid = s.live.loadout.bag.items[0].uid;
+    await t.page.locator(t.selector('bag', uid)).click(); await t.page.locator('[data-split]').fill('1');
+    await t.page.locator('[data-do="inv-split"]').click(); await t.resetAudit();
+    const grid = t.page.locator('[data-grid="bag"]'), cell = Number(await grid.getAttribute('data-cell'));
+    await grid.click({ position: { x: 2.4 * cell, y: 1.4 * cell } }); await frames(t.page);
+    s = await t.snapshot(); t.assertSynced(s); assert.equal(s.live.loadout.bag.items.length, 2); assert.equal((await t.inputWrites()).length, 1);
+    assert.equal(s.live.loadout.bag.items.find(i => i.uid === uid).qty, 1);
+    await t.resetAudit(); assert.equal(await t.drag('bag', uid, 'bag', 0, 3), 'true'); s = await t.snapshot(); t.assertSynced(s);
+    assert.equal((await t.inputWrites()).length, 1); assert.equal(s.live.loadout.bag.items.find(i => i.uid === uid).y, 3);
+    assert.equal(await t.page.locator('.cs-ghost,.drop-preview').count(), 0);
+    return { mode: await t.panel(), rotate: true, wholeQuickBothWays: true, split: true, sameBagDrag: true };
+  }],
+  ['carried-inventory-quota-rollback', async t => {
+    const gun = item('own-gun', 'pistol');
+    gun.gun.parts = [{ uid: 'own-base', id: 'A01', slot: 'base', relief: false, children: [{ uid: 'own-dot', id: 'O01', slot: 'micro', relief: true, children: [] }] }];
+    await t.fixture({ bag: [gun] }); await running(t.page); await t.page.keyboard.press('Tab'); await t.waitPanel('inventory');
+    await t.page.locator(t.selector('bag', gun.uid)).click(); const before = t.participants(await t.snapshot()); await t.resetAudit();
+    await t.armFault('click', '[data-do="inv-quick"]'); await t.button('quick').click(); await t.waitPanel('pause');
+    const failed = await t.snapshot(); assert.deepEqual(t.participants(failed), before);
+    assert.equal(failed.bytes, await t.page.evaluate(() => window.__issue26BytesAtFault));
+    assert.ok((await t.audit()).some(w => !w.ok)); await t.screenshot('carried-save-rejected');
+    await t.recover(); assert.deepEqual(t.participants(await t.snapshot()), before, 'save retry does not replay the item action');
+    await t.page.keyboard.press('Tab'); await t.waitPanel('inventory'); await t.page.locator(t.selector('bag', gun.uid)).click(); await t.resetAudit();
+    await t.button('quick').click(); await frames(t.page); const after = await t.snapshot(); t.assertSynced(after);
+    assert.equal((await t.inputWrites()).length, 1); assert.deepEqual(after.live.loadout.safe.items[0].gun, gun.gun);
+    assert.equal(after.live.loadout.safe.items[0].uid, gun.uid); assert.equal(after.live.loadout.bag.items.length, 0);
+    return { rollbackBytes: true, nestedGunPreserved: true, explicitActionRetryWrites: 1 };
+  }],
   ['pickup-once', async t => {
     const crate = await t.fixture({ items: [item('double-pickup', 'bandage', 2), item('button-pickup', 'pistol', 1, 1)] }); await t.open(crate);
     await t.page.locator(t.selector('container', 'double-pickup')).dblclick(); await frames(t.page);
@@ -291,7 +331,7 @@ const cases = [
 try {
   for (const entry of ['village']) for (const viewport of [{ width: 1280, height: 720 }, { width: 1920, height: 1080 }]) {
     for (const [name, test] of cases) {
-      if (viewport.width === 1920 && !['pickup-once', 'equip-gun-and-specific-rejection', 'drag-swaps-and-invalid-overlap'].includes(name)) continue;
+      if (viewport.width === 1920 && !['carried-inventory-commands', 'pickup-once', 'equip-gun-and-specific-rejection', 'drag-swaps-and-invalid-overlap'].includes(name)) continue;
       if (only && !only.test(`${entry}-${viewport.width}x${viewport.height}-${name}`)) continue;
       await runCase(entry, viewport, name, test);
     }

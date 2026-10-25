@@ -161,7 +161,7 @@ export class CoastSampleHost {
       this.view.onRebuild = () => this.fade();
       this.input.touch = document.documentElement.classList.contains('mobile') || matchMedia('(pointer: coarse)').matches && !matchMedia('(any-pointer: fine)').matches;
       this.inv = new InventoryPanel(this.q('[data-panel]'), {
-        session: this.session, saves: this.saves, services: this.services,
+        services: this.services,
         lootRef: () => this.lootRef(), touch: () => this.input.touch, toast: (t, bad) => this.toast(t, bad),
         saveFailed: () => { if (!this.services.checkpoint()) this.lastRejected = 'checkpoint'; },
         close: () => this.closePanel(true),

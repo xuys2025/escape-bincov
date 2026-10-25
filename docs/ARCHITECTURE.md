@@ -19,7 +19,7 @@
 
 [app.ts](../src/app.ts) 组装 `saveSession`、`hideoutRuntime`、音效和宿主引用（`coastSample`、`station`）。`SessionState` 是共享数据，调用者应在事务后重新读取 `save` / `loadout`，不要长期缓存可能被回滚或恢复替换的对象。
 
-新行动的公开端口和画面服务类型 `CoastHandle` / `CoastServices` 在 [raid-runtime/contract.ts](../src/raid-runtime/contract.ts)，[host.ts](../src/raid-runtime/host.ts) 绑定 Runtime 和事务服务并在工厂检查类型；据点端口在 [hideout-runtime/contract.ts](../src/hideout-runtime/contract.ts)。这是现有边界，尚非完全隔离：旧 UI 仍负责部分路由，coast 库存仍接收会话并直接通过 `SaveSession.mutate` 整理包内物品；场景无关的 `Scope` / 渲染资源工具还存放在 coast 目录。后续收敛应逐步缩窄这些依赖，不能据此假设视图已完全只读。
+新行动的公开端口和画面服务类型 `CoastHandle` / `CoastServices` 在 [raid-runtime/contract.ts](../src/raid-runtime/contract.ts)，[host.ts](../src/raid-runtime/host.ts) 绑定 Runtime 和事务服务并在工厂检查类型；据点端口在 [hideout-runtime/contract.ts](../src/hideout-runtime/contract.ts)。行动背包面板只收到有限服务：按需读取 detached 库存/装备投影，随身整理发三个值/UID 命令，适配器保留原 `SaveSession.mutate`；搜刮模式仍走容器事务，连 bag/safe 内整理也不绕过它。面板不持有 Session/SaveSession，不维护库存副本。尚非所有视图完全隔离：宿主与旧 UI 仍协调会话/路由，场景无关的 `Scope` / 渲染资源工具仍在 coast 目录。
 
 行动期间区分三种状态：Runtime 的实时模拟、Session 最近提交后的检查点、失败后保留的候选。`captureExpansion()` 取得实时状态的独立副本；`session.expansion` 本身不随每个模拟子步更新。负重及上限由 Runtime 的只读服务提供，视图不能从最近检查点重新计算临时效果。编译期类型只约束调用端；外部 JSON 仍须严格运行时校验，字符串 ID 通过 `hasOwnStringKey` 拒绝原型键与数组隐式转换。
 
@@ -32,6 +32,7 @@
 | 初始化/升级 | `initialize`、`ensureRpg` / `enableRpg`，经 `persist` 写入 | 未知/损坏数据不覆盖；旧原始字节保留；活动旧行动先恢复 |
 | 据点/扩展动作 | `prepareExpansionMutation` 生成私有票据，`commitExpansionMutation` 校验基线并提交 | 拒绝不发布；写入失败不发成功事件；已保留票据只能按原候选重试 |
 | 旧页签库存/医疗 | `mutate` 捕获参与状态，同步执行规则，再持久化 | 规则拒绝、异常和写入失败恢复库存、身体及参与世界 |
+| 行动随身整理（非搜刮） | 有限 carried 命令调用同一 `mutate`，事务内重取当前 loadout | 保留原接受集合和一笔完整记录；拒绝/失败后重读投影，不缓存被恢复替换的对象 |
 | 出击 | `beginRun` 生成装备和完整初始世界，一次写入后才启动宿主 | 不先扣账再另存世界；出击动画之后不能重复 `beginRun` |
 | 箱子/尸体转移 | `transferLoot` 将候选容器与角色库存放入同一完整记录 | 来源、负载、世界一并回滚；重新取得恢复后的容器引用 |
 | 结算 | `prepareSettlement` 冻结结果；`retrySettlement` 写入后发布 `result` | 保留 `pendingSettlement` / `pendingExpansion`，重试不重新发奖；未成功不得卸载唯一候选 |
@@ -73,6 +74,6 @@ profile/已结算备份版本、session/完整备份封套版本、`ExpansionSta
 
 调用者必须知道的副作用、单位、提交点、引用失效和兼容条件贴在正式类型/方法旁；本页维护跨模块责任与格式边界，CODEMAP 维护定位路径，验收结果留在对应 PR/报告。价格、字段清单和全部函数签名不在三处重复。
 
-按职责和可验证边界拆分文件；只有代码变短、依赖仍共同写一组状态时，并未降低接手成本。当前只有一个行动 Runtime，存档 codec 与视图路由的已登记运行时 import 环已消除；剩余重点是背包有限服务、事务失败分类以及内容身份与文案分离，不再按旧的“双执行器”计划开发。
+按职责和可验证边界拆分文件；只有代码变短、依赖仍共同写一组状态时，并未降低接手成本。当前只有一个行动 Runtime，存档 codec 与视图路由的已登记运行时 import 环已消除；背包已收敛到有限服务，事务失败分类、内容身份与文案分离等剩余事项继续按 #60 跟踪，不再按旧的“双执行器”计划开发。
 
 PR #2/#3/M0 的原始叙述见[本轮更新前的固定版本](https://github.com/xuys2025/escape-bincov/blob/773dcdf37c69c9441f7687627b89b582087eb021/docs/ARCHITECTURE.md)。历史验收只证明其受检提交；当前修改的验证从 [CODEMAP](CODEMAP.md) 和[开发手册](AGENT-HANDBOOK.md#4-按风险验证)选择。

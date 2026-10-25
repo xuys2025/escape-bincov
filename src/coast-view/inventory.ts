@@ -5,12 +5,12 @@
  * bag/safe transfer.
  *
  * Commit routing mirrors the original UI: inside the loot panel every move (container, bag, safe) goes through the
- * Runtime transferLoot service; in the inventory panel bag/safe edits go through SaveSession.mutate, which captures and
- * rolls back the attached Runtime world. The panel never edits PublishedView data or inventory copies.
+ * Runtime transferLoot service; inventory-mode bag/safe edits use bounded carried-item services, which retain the
+ * same SaveSession.mutate transaction and attached world. Reads are detached; the panel only edits its UI state.
  */
 import * as D from '../domain';
-import { firstAvailableSlot, moveQuantity, placementError, type LootEndpoint } from '../loot';
-import type { MutationResult, SaveSession, SessionState } from '../session';
+import { firstAvailableSlot, placementError, type LootEndpoint } from '../loot';
+import type { MutationResult } from '../session';
 import type { CoastServices, TargetRef } from '../raid-runtime/contract';
 import { itemArtwork } from '../art/item-images';
 import { esc } from '../html';
@@ -25,7 +25,7 @@ export const labelFits = (label: string, width: number) => [...label].reduce((n,
 const LABEL: Record<Source, string> = { container: '来源', bag: '背包', safe: '安全箱' };
 
 export interface InventoryHost {
-  session: SessionState; saves: SaveSession; services: CoastServices;
+  services: CoastServices;
   lootRef(): TargetRef | null;
   touch(): boolean;
   toast(text: string, bad?: boolean): void;
@@ -61,13 +61,13 @@ export class InventoryPanel {
   private cell() { return this.host.touch() ? 40 : innerHeight < 600 ? 44 : 54; }
   private inv(source: Source): D.Inventory | null {
     if (source === 'container') { const ref = this.host.lootRef(); return ref ? this.host.services.lootInventory(ref) : null; }
-    return this.host.session.loadout?.[source] ?? null;
+    return this.host.services.inventoryView()?.[source] ?? null;
   }
   private item(sel = this.selected) { return sel ? this.inv(sel.source)?.items.find(i => i.uid === sel.uid) ?? null : null; }
 
   // --- rendering ---
   render() {
-    const l = this.host.session.loadout; if (!l) return;
+    const l = this.host.services.inventoryView(); if (!l) return;
     const ref = this.mode === 'loot' ? this.host.lootRef() : null, box = ref ? this.host.services.lootInventory(ref) : null;
     if (this.mode === 'loot' && !box) { this.host.close(); return; }
     if (this.selected && !this.item()) { this.selected = null; this.placement = null; }
@@ -87,8 +87,8 @@ export class InventoryPanel {
   }
   /** Inventory/loot do not pause simulation. Refresh derived numbers without rebuilding the grid or losing a drag. */
   refreshWeight() {
-    if (!this.host.session.loadout) return;
-    for (const [selector, value] of [['[data-weight]', this.host.services.carriedWeight()], ['[data-carry-limit]', this.host.services.carryLimit()]] as const) {
+    const values = this.host.services.inventoryReadout(); if (!values) return;
+    for (const [selector, value] of [['[data-weight]', values.weight], ['[data-carry-limit]', values.limit]] as const) {
       const el = this.el.querySelector<HTMLElement>(selector), text = value.toFixed(1);
       if (el && el.textContent !== text) el.textContent = text;
     }
@@ -168,7 +168,6 @@ export class InventoryPanel {
   }
   private action(a: string) {
     const sel = this.selected, i = this.item(); if (!sel || !i) return;
-    const loadout = this.host.session.loadout!;
     switch (a) {
       case 'inv-place-rotate': if (this.placement) { this.placement.rotated = !(this.placement.rotated ?? i.rotated); this.render(); } break;
       case 'inv-place-cancel': this.placement = null; this.status = ''; this.render(); break;
@@ -183,7 +182,7 @@ export class InventoryPanel {
       case 'inv-place': this.placement = {}; this.status = ''; this.render(); break;
       case 'inv-rotate': {
         const inv = this.inv(sel.source)!;
-        if (this.mode === 'inventory' && sel.source !== 'container' && D.fits(inv, i.id, i.x, i.y, i.uid, !i.rotated)) this.result(this.host.saves.mutate(() => D.rotateItem(loadout[sel.source as 'bag' | 'safe'], i.uid)), false);
+        if (this.mode === 'inventory' && sel.source !== 'container' && D.fits(inv, i.id, i.x, i.y, i.uid, !i.rotated)) this.result(this.host.services.rotateCarried(sel.source, i.uid), false);
         else { this.placement = { rotated: !i.rotated }; this.status = ''; this.render(); }
         break;
       }
@@ -195,7 +194,7 @@ export class InventoryPanel {
       case 'inv-quick': {
         const to: Source = sel.source === 'safe' ? 'bag' : sel.source === 'bag' ? 'safe' : 'bag';
         const dst = this.inv(to)!;
-        if (this.mode === 'inventory') { this.result(this.host.saves.mutate(() => D.transferItem(loadout[sel.source as 'bag' | 'safe'], loadout[to as 'bag' | 'safe'], i.uid)), true, '放不下这件物品，请先整理目标容器。'); break; }
+        if (this.mode === 'inventory' && sel.source !== 'container') { this.result(this.host.services.quickTransferCarried(sel.source, i.uid), true, '放不下这件物品，请先整理目标容器。'); break; }
         const at = firstAvailableSlot(dst, i);
         if (!at) { this.host.toast(`${LABEL[to]}空间不足。`, true); break; }
         this.commit(sel.source, to, i.uid, at.x, at.y, at.rotated);
@@ -214,8 +213,8 @@ export class InventoryPanel {
       const ref = this.host.lootRef(); if (!ref) return 'invalid';
       result = this.host.services.transferLoot(ref, { runId: ref.runId, containerId: ref.id, from: from as LootEndpoint, to: to as LootEndpoint, uid, x, y, rotated, quantity });
     } else {
-      const l = this.host.session.loadout!;
-      result = this.host.saves.mutate(() => moveQuantity(l[from as 'bag' | 'safe'], l[to as 'bag' | 'safe'], uid, x, y, rotated, quantity));
+      if (from === 'container' || to === 'container') return 'invalid';
+      result = this.host.services.moveCarried({ from, to, uid, x, y, rotated, quantity });
     }
     this.result(result);
     return result;

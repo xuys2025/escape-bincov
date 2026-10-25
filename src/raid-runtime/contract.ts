@@ -1,8 +1,16 @@
 /** Opus v1 with additive R6 facts (2026-10-09); no simulation or save schema changes. */
-import type { Inventory } from '../domain';
+import type { Inventory, RunLoadout } from '../domain';
 import type { LootTransfer } from '../loot';
 import type { CritBreakdown } from '../perks';
 import type { MutationResult } from '../session';
+
+export type CarriedEndpoint = 'bag' | 'safe';
+/** Detached display inputs, read afresh after a transaction; never a second inventory owner. */
+export type CarriedInventoryView = Readonly<Pick<RunLoadout, 'bag' | 'safe' | 'weapon' | 'weaponUid' | 'gun' | 'relief'>>;
+export type CarriedPlacement = Readonly<{
+    from: CarriedEndpoint; to: CarriedEndpoint; uid: string; x: number; y: number;
+    rotated?: boolean; quantity?: number;
+}>;
 
 /** Durable actions and detached reads offered to a raid view. Implemented by raid-runtime/host, never by a view.
  * Read again after any transaction: rollback/restore may replace loadout and world objects. */
@@ -17,6 +25,14 @@ export interface CoastServices {
     carriedWeight(): number;
     /** Live movement limit in kg. Session expansion is the last checkpoint and can still contain expired buffs. */
     carryLimit(): number;
+    inventoryView(): CarriedInventoryView | null;
+    /** Live numbers only: no inventory/world clone for the panel's periodic refresh. */
+    inventoryReadout(): Readonly<{ weight: number; limit: number }> | null;
+    /** Own-inventory mode only. Loot mode keeps transferLoot, even for a bag/safe-only move. */
+    moveCarried(request: CarriedPlacement): MutationResult;
+    /** Whole-item, all-or-none quick transfer, preserving the original inventory-mode rule. */
+    quickTransferCarried(from: CarriedEndpoint, uid: string): MutationResult;
+    rotateCarried(source: CarriedEndpoint, uid: string): MutationResult;
     retrySave(): boolean;
     retrySettlement(): boolean;
     settlement(): { reason: 'extract' | 'death' | 'timeout' | 'abandon' | null; committed: boolean; retryable: boolean; result: unknown };
