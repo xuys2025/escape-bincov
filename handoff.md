@@ -1,3 +1,9 @@
+## 2026-10-25 行动精神/水分/饱食 HUD 实时投影（`fix/live-vitals-hud`）
+
+从已接受 main `974a3a8d1ad2a7662c3a828226295d6c9b31eb64` 独立承接 #60 / 已合并 #79 的读旧检查点保留项。开工核对开放 #95/#106/#107 无重复；D8 仍归 #107。实现和验证入口见 [审计摘要](docs/tasks/audit-contracts.md#精神水分饱食-hud-的实时投影)、[派生读数](docs/CODEMAP.md#派生读数)。
+
+`frameView` 从实时 `Runtime.layered.body` 复制三个数到只读 `HudView.needs`，宿主按原每八帧节奏舍入显示；不共享可变身体，不读取最近检查点，经典旧行动为 null。规则、存档及事务不变。新增单测旧代码 3/3 失败、修复后 3/3 通过；完整单测877/877、工程守卫64/64、正式package和两尺寸HUD读数通过。完整qol在原容器关闭处按钮detach超时，通用browser中断，UI/完整default未运行，准确head CI另核。两尺寸基线负对照均有效失败（elapsed=0、保存值未变、旧HUD100/100/100而实时值不同），前后原始读数和后续套件失败保存在[对照记录](docs/tasks/audit-contracts/live-needs/report.json)；普通暂停后的实时身体夹具用于避免慢渲染跨 autosave，自然衰减和无写入另由单测验证。没有真机或真人验收，不合并发布；#60 其余事项继续开放。
+
 ## 2026-10-24 打包产物改由 CI 构建和发布（`ci/no-committed-builds`）
 
 维护者在 #103 因 #102 合入出现生成物冲突时提出：产物应由 CI 编译发布。基线 main `49894e9`，随后同步 `c587685`（#104）与 `5adc64a`（#103），两次的生成物冲突都按本规则保留删除。五个生成物移出仓库并加入 `.gitignore`，`generated-files.test.mjs` 拒绝再提交；发布清单移到 `release/`。CI 删去“提交的产物与源码一致”检查，main 的 `Build and test` 通过后新增 `Publish offline release`，把同一份已验证构建发布到滚动预发布 `main-latest`（标签移到本次提交、文件同名替换），README 下载改指向它；Pages 不变。规则只写在 [CI 说明](docs/CI.md#构建与离线包发布)，AGENTS、手册、模板、README 链接过去。

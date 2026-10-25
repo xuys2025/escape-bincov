@@ -1,0 +1,356 @@
+{
+  "baseline": "974a3a8d1ad2a7662c3a828226295d6c9b31eb64",
+  "method": "Offline exact builds. Existing vitals driver only; ordinary UI pause, unchanged checkpoint and zero simulated elapsed during eight real host frames. Natural live decay/no writes also covered by unit tests. No clock or rule changes.",
+  "before": {
+    "htmlSha256": "b309e11f248f46e9c10ba08d0056aab8160212adb20ecab35bedf54c1d8bfe7f",
+    "browser": "153.0.8010.12",
+    "steps": [
+      {
+        "name": "body HUD reads the live raid rather than its saved checkpoint at both desktop sizes",
+        "status": "failed",
+        "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   '1280×720: The input did not match the regular expression /精神 71 · 水分 62 · 饱食 53/. Input:\\n' +\n+     '\\n' +\n+     \"'精神 100 · 水分 100 · 饱食 100　2.4 kg'\\n\",\n+   '1920×1080: The input did not match the regular expression /精神 48 · 水分 37 · 饱食 26/. Input:\\n' +\n+     '\\n' +\n+     \"'精神 100 · 水分 100 · 饱食 100　2.4 kg'\\n\"\n+ ]\n- []\n\n    at file:///workspace/live-vitals-baseline/scripts/qol-expansion-test.mjs:79:16\n    at async step (file:///workspace/live-vitals-baseline/scripts/qol-expansion-test.mjs:21:104)\n    at async file:///workspace/live-vitals-baseline/scripts/qol-expansion-test.mjs:40:5"
+      }
+    ],
+    "errors": [],
+    "requests": [],
+    "samples": [
+      {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "checkpoint": {
+          "hp": 100,
+          "stamina": 100,
+          "mental": 99.9234984999997,
+          "water": 99.7959959999998,
+          "satiety": 99.87249749999953,
+          "pollution": 0,
+          "bleeding": false,
+          "exhausted": false,
+          "effects": {
+            "pain": 0,
+            "energized": 0,
+            "analgesia": 0,
+            "focus": 0,
+            "strength": 0,
+            "constitution": 0,
+            "technique": 0,
+            "injectionFatigue": 0,
+            "luck": 0
+          },
+          "treatment": {
+            "bleeding": 0,
+            "pain": 0,
+            "injectionFatigue": 0
+          },
+          "luckEffect": 0
+        },
+        "saved": {
+          "hp": 100,
+          "stamina": 100,
+          "mental": 99.9234984999997,
+          "water": 99.7959959999998,
+          "satiety": 99.87249749999953,
+          "pollution": 0,
+          "bleeding": false,
+          "exhausted": false,
+          "effects": {
+            "pain": 0,
+            "energized": 0,
+            "analgesia": 0,
+            "focus": 0,
+            "strength": 0,
+            "constitution": 0,
+            "technique": 0,
+            "injectionFatigue": 0,
+            "luck": 0
+          },
+          "treatment": {
+            "bleeding": 0,
+            "pain": 0,
+            "injectionFatigue": 0
+          },
+          "luckEffect": 0
+        },
+        "live": {
+          "mental": 71.2,
+          "water": 62.2,
+          "satiety": 53.2
+        },
+        "elapsed": 0,
+        "text": "精神 100 · 水分 100 · 饱食 100　2.4 kg",
+        "rect": {
+          "x": 23,
+          "y": 63,
+          "right": 286.1875,
+          "bottom": 79
+        },
+        "fits": true
+      },
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "checkpoint": {
+          "hp": 100,
+          "stamina": 100,
+          "mental": 99.8722599999999,
+          "water": 99.65935999999971,
+          "satiety": 99.78709999999963,
+          "pollution": 0,
+          "bleeding": false,
+          "exhausted": false,
+          "effects": {
+            "pain": 0,
+            "energized": 0,
+            "analgesia": 0,
+            "focus": 0,
+            "strength": 0,
+            "constitution": 0,
+            "technique": 0,
+            "injectionFatigue": 0,
+            "luck": 0
+          },
+          "treatment": {
+            "bleeding": 0,
+            "pain": 0,
+            "injectionFatigue": 0
+          },
+          "luckEffect": 0
+        },
+        "saved": {
+          "hp": 100,
+          "stamina": 100,
+          "mental": 99.8722599999999,
+          "water": 99.65935999999971,
+          "satiety": 99.78709999999963,
+          "pollution": 0,
+          "bleeding": false,
+          "exhausted": false,
+          "effects": {
+            "pain": 0,
+            "energized": 0,
+            "analgesia": 0,
+            "focus": 0,
+            "strength": 0,
+            "constitution": 0,
+            "technique": 0,
+            "injectionFatigue": 0,
+            "luck": 0
+          },
+          "treatment": {
+            "bleeding": 0,
+            "pain": 0,
+            "injectionFatigue": 0
+          },
+          "luckEffect": 0
+        },
+        "live": {
+          "mental": 48.2,
+          "water": 37.2,
+          "satiety": 26.2
+        },
+        "elapsed": 0,
+        "text": "精神 100 · 水分 100 · 饱食 100　2.4 kg",
+        "rect": {
+          "x": 23,
+          "y": 63,
+          "right": 286.1875,
+          "bottom": 79
+        },
+        "fits": true
+      }
+    ]
+  },
+  "after": {
+    "htmlSha256": "aa3b1174126b119d98c075d93e404c74d78d3d0a31f4d868094568c47027a534",
+    "browser": "153.0.8010.12",
+    "steps": [
+      {
+        "name": "RPG medicine cart survives a cancelled leave and commits through the ordinary checkout",
+        "status": "passed"
+      },
+      {
+        "name": "body HUD reads the live raid rather than its saved checkpoint at both desktop sizes",
+        "status": "passed"
+      },
+      {
+        "name": "mall containers keep wheel-selected identity and touch-open the exact empty source",
+        "status": "failed",
+        "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.coast-sample [data-panel] [data-do=\"close\"]')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" data-do=\"close\">关闭（E / Tab / Esc）</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    - waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m  - element was detached from the DOM, retrying\u001b[22m\n\n    at /workspace/live-vitals/scripts/qol-expansion-test.mjs:120:76\n    at async step (/workspace/live-vitals/scripts/qol-expansion-test.mjs:21:104)\n    at async file:///workspace/live-vitals/scripts/qol-expansion-test.mjs:112:5"
+      }
+    ],
+    "errors": [],
+    "requests": [],
+    "samples": [
+      {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "checkpoint": {
+          "hp": 100,
+          "stamina": 100,
+          "mental": 99.95152450000003,
+          "water": 99.87073199999989,
+          "satiety": 99.91920750000034,
+          "pollution": 0,
+          "bleeding": false,
+          "exhausted": false,
+          "effects": {
+            "pain": 0,
+            "energized": 0,
+            "analgesia": 0,
+            "focus": 0,
+            "strength": 0,
+            "constitution": 0,
+            "technique": 0,
+            "injectionFatigue": 0,
+            "luck": 0
+          },
+          "treatment": {
+            "bleeding": 0,
+            "pain": 0,
+            "injectionFatigue": 0
+          },
+          "luckEffect": 0
+        },
+        "saved": {
+          "hp": 100,
+          "stamina": 100,
+          "mental": 99.95152450000003,
+          "water": 99.87073199999989,
+          "satiety": 99.91920750000034,
+          "pollution": 0,
+          "bleeding": false,
+          "exhausted": false,
+          "effects": {
+            "pain": 0,
+            "energized": 0,
+            "analgesia": 0,
+            "focus": 0,
+            "strength": 0,
+            "constitution": 0,
+            "technique": 0,
+            "injectionFatigue": 0,
+            "luck": 0
+          },
+          "treatment": {
+            "bleeding": 0,
+            "pain": 0,
+            "injectionFatigue": 0
+          },
+          "luckEffect": 0
+        },
+        "live": {
+          "mental": 71.2,
+          "water": 62.2,
+          "satiety": 53.2
+        },
+        "projected": {
+          "mental": 71.2,
+          "water": 62.2,
+          "satiety": 53.2
+        },
+        "elapsed": 0,
+        "text": "精神 71 · 水分 62 · 饱食 53　2.4 kg",
+        "rect": {
+          "x": 23,
+          "y": 63,
+          "right": 286.1875,
+          "bottom": 79
+        },
+        "fits": true
+      },
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "checkpoint": {
+          "hp": 100,
+          "stamina": 100,
+          "mental": 71.13611950000016,
+          "water": 62.02965200000004,
+          "satiety": 53.093532500000066,
+          "pollution": 0,
+          "bleeding": false,
+          "exhausted": false,
+          "effects": {
+            "pain": 0,
+            "energized": 0,
+            "analgesia": 0,
+            "focus": 0,
+            "strength": 0,
+            "constitution": 0,
+            "technique": 0,
+            "injectionFatigue": 0,
+            "luck": 0
+          },
+          "treatment": {
+            "bleeding": 0,
+            "pain": 0,
+            "injectionFatigue": 0
+          },
+          "luckEffect": 0
+        },
+        "saved": {
+          "hp": 100,
+          "stamina": 100,
+          "mental": 71.13611950000016,
+          "water": 62.02965200000004,
+          "satiety": 53.093532500000066,
+          "pollution": 0,
+          "bleeding": false,
+          "exhausted": false,
+          "effects": {
+            "pain": 0,
+            "energized": 0,
+            "analgesia": 0,
+            "focus": 0,
+            "strength": 0,
+            "constitution": 0,
+            "technique": 0,
+            "injectionFatigue": 0,
+            "luck": 0
+          },
+          "treatment": {
+            "bleeding": 0,
+            "pain": 0,
+            "injectionFatigue": 0
+          },
+          "luckEffect": 0
+        },
+        "live": {
+          "mental": 48.2,
+          "water": 37.2,
+          "satiety": 26.2
+        },
+        "projected": {
+          "mental": 48.2,
+          "water": 37.2,
+          "satiety": 26.2
+        },
+        "elapsed": 0,
+        "text": "精神 48 · 水分 37 · 饱食 26　2.4 kg",
+        "rect": {
+          "x": 23,
+          "y": 63,
+          "right": 286.1875,
+          "bottom": 79
+        },
+        "fits": true
+      }
+    ]
+  },
+  "validation": {
+    "unitBefore": "0 pass / 3 fail",
+    "unitAfter": "3/3",
+    "test": "877/877",
+    "checkCi": "64/64",
+    "package": "passed"
+  },
+  "limitations": "After HUD passed, the original full qol container-close step timed out with a detached button. General browser interrupted; UI/full raid-default not run. Pending exact-head CI; no device/performance signoff."
+}

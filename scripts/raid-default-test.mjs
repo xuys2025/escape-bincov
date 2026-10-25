@@ -154,6 +154,8 @@ await check('R5 a classic coast raid started before the area closed resumes on t
   assert.ok((await stored()).includes('coast-v2'), 'a classic checkpoint raid was deployed');
   const r = await resumeOrdinary();
   assert.deepEqual(r, { where: '沿海封锁区 · 室外 / 一楼', testInterface: false });
+  await page.waitForFunction(() => !!document.querySelector('.coast-sample [data-state]')?.textContent.trim());
+  assert.doesNotMatch(await page.locator('.coast-sample [data-state]').textContent(), /精神|水分|饱食/, 'classic raids keep their original status line');
   await page.waitForTimeout(1200); await shot('R5-classic-resume-2.5d');
   await abandonPixi();
   assert.ok((await page.locator('#ui').innerText()).includes('行动报告'), 'the result page follows');

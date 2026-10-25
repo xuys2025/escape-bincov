@@ -275,6 +275,8 @@ export type HudView = Readonly<{
     maxStamina: number;
     pollution: number;
     bleeding: boolean;
+    /** Live layered body values, detached from simulation state; null for classic raids. Never checkpoint-derived. */
+    needs: Readonly<{ mental: number; water: number; satiety: number }> | null;
     timeLeft: number;
     tideWarning: boolean;
     highTide: boolean;

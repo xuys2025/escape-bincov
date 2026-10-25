@@ -159,6 +159,8 @@
 
 行动中的 `Runtime.layered` 随模拟推进，`SessionState.expansion` 是最近提交后的状态，不能拿它重新计算实时上限。优先复用帧或只读服务里的权威值；显示层只做舍入与排版。背包打开时世界仍推进，更新读数只改对应文本，不能重建网格打断拖放。回归入口：[carried-weight.test.ts](../tests/carried-weight.test.ts)，覆盖护符、弹药、临时力量过期及保持放置状态。
 
+精神/水分/饱食走 [presentation.frameView](../src/raid-runtime/presentation.ts) → `HudView.needs` → [host.slowHud](../src/coast-view/host.ts)。投影只复制实时 `Runtime.layered.body` 的三个数，经典旧行动为 `null`；宿主沿原每八帧节奏舍入显示，不读取最近检查点。回归入口：[hud-needs.test.ts](../tests/hud-needs.test.ts)、`test:qol-expansion` 的两尺寸读数检查与 `test:raid-default` 的经典行动状态行。
+
 **结束定位的判据。** 能指出数值由谁计算、使用哪个时钟、什么时候刷新；修改展示不会写存档，临时效果过期后玩法与显示保持一致。
 
 ## 维护本页
