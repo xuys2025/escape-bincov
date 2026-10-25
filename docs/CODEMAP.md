@@ -90,6 +90,8 @@
 - 试枪场：[range/](../src/range/index.ts)（`?range=1`，内存存档，不碰正式存档）。
 - 动作新增可恢复计时器/状态：继续[存档卡](#存档)，检查点投影与展示投影不是同一契约。
 
+- 开火与命中音关联（#75）：临时 `hurt.bullet` 的来源在 [Runtime](../src/raid-runtime/runtime.ts) 的 `observeShot`、`damageEnemy` / `hurt`；[sound.ts](../src/coast-view/sound.ts) 用已有 `shot.pellets` 关联一次开火与目标，缓存释放和旧恢复弹的降级规则见源码旁契约。跨批霰弹、同批多枪、经典路径与刷新回归见 [shotgun-hit-sounds.test.ts](../tests/shotgun-hit-sounds.test.ts)。弹道与持久弹丸不增加字段。
+
 **结束定位的判据。** 能跟踪一次输入到实际动作，并指出重复消费、失焦/面板释放的断言。资源生命周期只有在本次改变宿主归属时才展开。
 
 ## 敌人

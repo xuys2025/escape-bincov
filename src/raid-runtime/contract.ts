@@ -352,6 +352,9 @@ export type ViewEventBody = {
     at: Point;
     damage: number;
     critical: boolean;
+    /** Live bullet identity for presentation correlation with shot.pellets. Not persisted; melee/other blows omit it.
+     * A restored bullet may have an identity without a witnessed shot, so consumers must retain an unknown-source fallback. */
+    bullet?: string;
     /**
      * Radians from the hurt actor back toward the blow's source: against a bullet's flight, toward a melee attacker. Null
      * when the source is unknown. The view sprays blood this way and knocks the body the opposite way.
