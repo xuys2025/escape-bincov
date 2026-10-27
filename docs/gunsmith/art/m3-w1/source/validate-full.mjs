@@ -19,14 +19,15 @@ run('exact first-wave inventory: 269 core images and five declared legacy varian
  assert.equal(expected.length,269);const variants=['gs-m01-h-pistol-v1','gs-m01-i-pistol-v1','gs-m01-w-pistol-v1','gs-m05-h-carbine-v1','gs-m07-h-carbine-v1'];
  assert.deepEqual(manifest.assets.map(a=>a.id).sort(),[...expected,...variants].sort());assert.equal(new Set(manifest.assets.map(a=>a.id)).size,274);
  assert.deepEqual(readdirSync(resolve(root,incoming)).filter(f=>f.endsWith('.png')).sort(),manifest.assets.map(a=>a.id+'.png').sort());
- assert.deepEqual([...new Set(manifest.assets.map(a=>a.item).filter(Boolean))].sort(),parts.sort());return{core:269,variants:5,total:274};
+ assert.deepEqual([...new Set(manifest.assets.filter(a=>a.role==='part').map(a=>a.item))].sort(),parts.sort());return{core:269,variants:5,total:274};
 });
 for(const a of manifest.assets)run(a.id,()=>{
  assert.equal(a.file,`${incoming}/${a.id}.png`);const b=readFileSync(resolve(root,a.file)),c=decode(resolve(root,a.file));assert.deepEqual([c.w,c.h,b.length,sha(b),colors(c)],[a.w,a.h,a.bytes,a.sha256,a.colors]);
  let opaque=0;for(let i=3;i<c.data.length;i+=4){assert.ok(c.data[i]===0||c.data[i]===255,'binary alpha');if(c.data[i])opaque++;}assert.ok(opaque);
  const exception=a.id===approval.asset&&a.originalSource===approval.source&&a.colors===approval.colors&&sha(readFileSync(resolve(root,approval.source)))===approval.sourceSha256&&sha(c.data)===approval.rgbaSha256&&c.data.equals(decode(resolve(root,approval.source)).data);
  assert.ok(a.colors<=(a.output==='bench'?12:8)||exception,`${a.colors} colors exceed the single-image cap without the exact approved legacy original`);if(exception)approvedExceptions.push(approval);
- if(a.output.startsWith('icon')){const n=a.output==='icon24'?24:32;assert.deepEqual([a.w,a.h],[n,n]);}
+ if(a.output.startsWith('icon')){const n=a.output==='icon24'?24:32;assert.deepEqual([a.w,a.h],[n,n]);assert.ok(a.item,'icon names its item, including gun icons');}
+ if(a.role==='receiver')assert.ok(a.gun&&a.mounts);if(a.role==='factory')assert.ok(a.gun&&a.slot&&a.anchor);if(a.role==='part')assert.ok(a.item&&a.slot&&a.anchor);
  const point=(p,edge=false)=>{assert.ok(p.every(Number.isFinite));assert.ok(p[0]>=0&&p[0]<(edge?a.w+1:a.w)&&p[1]>=0&&p[1]<a.h,`${p} in ${a.w}x${a.h}`);};
  if(a.anchor){point(a.anchor);assert.ok(a.anchor.every(Number.isInteger));assert.equal(c.data[(a.anchor[1]*c.w+a.anchor[0])*4+3],255,'anchor on artwork');}
  for(const p of Object.values(a.mounts??{})){point(p);assert.ok(p.every(Number.isInteger));}for(const k of ['grip','hand','beam'])if(a[k])point(a[k]);if(a.tip)point(a.tip,true);

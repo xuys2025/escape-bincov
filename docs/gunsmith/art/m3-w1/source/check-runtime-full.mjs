@@ -25,7 +25,7 @@ for(const [gun,configs]of Object.entries(configurations))for(const [configuratio
  }
 }
 for(const gun of newGuns){const a=gunArtLayout(gun,[],'h',false),b=saved.bareFactories.find(b=>b.gun===gun);assert.deepEqual(a.layers.map(l=>({key:l.key,label:l.label,origin:[l.x,l.y]})),b.layers);}
-const newIds=[...new Set(manifest.assets.map(a=>a.item).filter(Boolean))],required=[...new Set([...newIds,'O01','O03','O08','M03','M06','B01','F01','F03','T01','T05'])],available=new Set([...required,...Object.keys(ATTACHMENTS).filter(id=>GUNSMITH_ART[`gs-${id.toLowerCase()}-i`])]);
+const newIds=[...new Set(manifest.assets.filter(a=>a.role==='part').map(a=>a.item))],required=[...new Set([...newIds,'O01','O03','O08','M03','M06','B01','F01','F03','T01','T05'])],available=new Set([...required,...Object.keys(ATTACHMENTS).filter(id=>GUNSMITH_ART[`gs-${id.toLowerCase()}-i`])]);
 const fitChecks=[];
 for(const gun of Object.keys(configurations))for(const id of required){const a=ATTACHMENTS[id],node=[id,a.mount],prefix=a.needs.filter(n=>n.on.includes(gun)).map(n=>[n.part,ATTACHMENTS[n.part].mount]);
  const candidates=[[...prefix,node]];

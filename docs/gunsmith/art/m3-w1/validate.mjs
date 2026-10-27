@@ -15,7 +15,7 @@ const parts=['S03','H03','P04','B07','M05','S04','H04','P03','A08','G08','M07'];
 run('P0 exact inventory: AK-74 20 + eleven attachments 42 = 62',()=>{
   assert.equal(manifest.assets.length,62);assert.equal(new Set(manifest.assets.map(a=>a.id)).size,62);
   assert.equal(manifest.assets.filter(a=>a.gun==='akb74').length,20);
-  assert.deepEqual([...new Set(manifest.assets.map(a=>a.item).filter(Boolean))].sort(),parts.toSorted());
+  assert.deepEqual([...new Set(manifest.assets.filter(a=>a.role==='part').map(a=>a.item))].sort(),parts.toSorted());
   const expected=[];for(const stem of ['receiver','stock-factory','reargrip-factory','mag-factory','barrel-factory','handguard-factory'])for(const code of ['h','i','w'])expected.push(`gs-akb74-${stem}-${code}-v1`);
   expected.push('gs-akb74-q24-v1','gs-akb74-q32-v1');
   for(const id of parts)for(const code of ['i','w','q24',...(['P03','P04'].includes(id)?[]:['h'])])expected.push(`gs-${id.toLowerCase()}-${code}-v1`);

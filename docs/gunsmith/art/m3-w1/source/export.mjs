@@ -21,6 +21,7 @@ export function make(name,code,w,h,meta,draw) {
     output:{h:'held',i:'inventory',w:'bench',q24:'icon24',q32:'icon32'}[baseCode],gun:null,item:null,role:'part',slot:null,anchor:null,
     colors:colors(c),source:`${docs}/source/pixel-artwork.json`,sourceRect:null,
     exportMethod:'original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling',...meta};
+  if(a.role==='icon'&&a.gun&&a.item===null)a.item=a.gun;
   all.push(a);pictures.set(id.replace(/-v\d+$/,''),c);artwork.push({id,w,h,palette:P,ops:c.ops});return a;
 }
 const geometry={
