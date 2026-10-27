@@ -1,7 +1,6 @@
 /**
- * Procedural stand-ins for the layout-4 mall furniture (issue #47), drawn until Sol's samples arrive: the same footprint,
- * canvas and anchor the samples will use (mall-dressing.ts `PAINTED_LIFT`), so swapping in a drawn sample changes no
- * placement or collision. Projection as the samples: a point at depth `d` px into the footprint (north 0) and height `z`
+ * Procedural stand-ins for the layout-4 mall furniture (issue #47), the fallback behind Sol's M2 samples: the same
+ * footprint, canvas and anchor as the samples (mall-dressing.ts `PAINTED_LIFT`), so either draws in the same place. Projection as the samples: a point at depth `d` px into the footprint (north 0) and height `z`
  * px stands at canvas y = lift + d - z; 24 px is about a metre. Light from the top left; nothing here bakes shadows of
  * other objects. Run pieces are painted per module: `end` says which sides close the run ('w', 'e', 'we', or 'm').
  */

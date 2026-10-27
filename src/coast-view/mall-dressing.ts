@@ -55,8 +55,8 @@ const SINGLE: Partial<Record<FurnitureName, string>> = {
     'gondola-toppled': 'prop-gondola-toppled', debris: 'prop-debris',
 };
 /**
- * Layout-4 pieces painted by the view (art/mall-furniture.ts) until Sol's samples arrive: canvas height above the
- * footprint, so a drawn sample of the same size can replace one without moving anything.
+ * Layout-4 pieces (Sol's M2 samples, with the view's painted piece of art/mall-furniture.ts as fallback): canvas height
+ * above the footprint. Sample and painted piece share canvas and anchor, so either can stand in for the other.
  */
 export const PAINTED_LIFT: Partial<Record<FurnitureName, number>> = {
     'shelf-wall': 48, rack: 56, counter: 24, 'glass-case': 26, 'kitchen-line': 24, sink: 26, stall: 44, lockers: 46, switchgear: 48,
@@ -64,42 +64,57 @@ export const PAINTED_LIFT: Partial<Record<FurnitureName, number>> = {
     checkout: 24, 'ball-pool': 36, slide: 24, 'bamboo-screen': 48, car: 18, dumpster: 40, container: 62, 'ac-unit': 24,
 };
 /**
- * Drawn base of a painted piece narrower than its footprint (x, y, w, h in px inside the footprint), for its shadow:
- * a shadow under the whole footprint would sit apart from a thin rail or a mannequin's stand.
+ * Drawn base of a layout-4 piece narrower than its footprint (x, y, w, h in px inside the footprint), for its shadow,
+ * measured on the samples: a shadow under the whole footprint would sit apart from a thin rail, a mannequin's stand,
+ * the diner set's stools or the bamboo screen on its midline. Every other sample fills its footprint.
  */
-const PAINTED_BASE: Partial<Record<FurnitureName, readonly [number, number, number, number]>> = {
-    mannequin: [10, 14, 12, 8], 'clothes-rail': [0, 12, 32, 9], vending: [3, 6, 26, 20], cabinet: [5, 8, 22, 18], safe: [4, 8, 24, 18],
-    'ac-unit': [2, 8, 28, 20], barrier: [0, 9, 32, 14], 'diner-table': [4, 6, 56, 24], slide: [4, 8, 58, 16], 'bamboo-screen': [12, 0, 8, 96],
-    checkout: [6, 2, 20, 60], dumpster: [2, 6, 60, 22], car: [6, 14, 84, 38],
+const DRAWN_BASE: Partial<Record<FurnitureName, readonly [number, number, number, number]>> = {
+    mannequin: [10, 15, 12, 8], 'clothes-rail': [0, 22, 32, 9], 'diner-table': [4, 8, 56, 24], slide: [2, 16, 60, 16], 'bamboo-screen': [12, 0, 8, 96],
 };
-/** Look of a painted piece by the region it stands in (the stock on a wall shelf, a counter's finish). */
+/** Look of a layout-4 piece by the region it stands in (the stock on a wall shelf, a counter's finish); `*` elsewhere. */
 const LOOKS: Partial<Record<FurnitureName, Record<string, string>>> = {
-    'shelf-wall': { 'F1-01': 'pharmacy', 'F1-06': 'grocery', 'F1-07': 'phones', 'F1-08': 'hardware', 'F2-01': 'clothes' },
-    counter: { 'F1-02': 'diner', 'F2-01': 'boutique', 'F1-08': 'wood' },
+    'shelf-wall': { 'F1-01': 'pharmacy', 'F1-06': 'grocery', 'F1-07': 'phones', 'F1-08': 'hardware', 'F2-01': 'clothes', '*': 'grocery' },
+    counter: { 'F1-02': 'diner', 'F2-01': 'boutique', 'F1-08': 'wood', '*': 'service' },
 };
-const EMITS = new Set(['prop-fridge-a', 'prop-fridge-b', 'prop-directory', 'prop-pylon', 'prop-floor-lamp', 'wall-curtain', 'wall-curtain-broken', 'wall-window-2f']);
+/**
+ * Delivered M2 run modules left out until Sol re-exports them, and the module standing in: a transparent strip inside
+ * the diner counter's second middle and east end and the sink's second middle reads as a gap the player could pass,
+ * and the rack's east end carries smeared export columns (the rack's single closes the run with an upright instead).
+ */
+export const SAMPLE_STAND_IN: Readonly<Record<string, string>> = {
+    'prop-counter-diner-mid-b': 'prop-counter-diner-mid-a', 'prop-counter-diner-end-e': 'prop-counter-diner-mid-a',
+    'prop-sink-mid-b': 'prop-sink-mid-a', 'prop-rack-end-e': 'prop-rack-single',
+};
+const EMITS = new Set(['prop-fridge-a', 'prop-fridge-b', 'prop-directory', 'prop-pylon', 'prop-floor-lamp', 'wall-curtain', 'wall-curtain-broken', 'wall-window-2f',
+    'prop-glass-case', 'prop-vending', 'prop-switchgear']);
 
 const contains = (r: DressRegion, x: number, y: number) => x * TILE >= r.x && x * TILE < r.x + r.w && y * TILE >= r.y && y * TILE < r.y + r.h;
 const regionAt = (m: DressMap, x: number, y: number) => m.regions.find(r => r.inside !== false && contains(r, x, y)) ?? m.regions.find(r => contains(r, x, y));
+/** The innermost room at a cell (rooms may overlap: the F2 switch room lies inside the play area), else `regionAt`. */
+const innermost = (m: DressMap, x: number, y: number) =>
+    m.regions.filter(r => r.inside !== false && contains(r, x, y)).sort((a, b) => a.w * a.h - b.w * b.h)[0] ?? regionAt(m, x, y);
 /** The building's cells (both floors): x 8..64, y 6..48. */
 export const insideFootprint = (x: number, y: number) => x >= 8 && x <= 64 && y >= 6 && y <= 48;
 export const MALL_FOOTPRINT = { x: 8 * TILE, y: 6 * TILE, w: 57 * TILE, h: 43 * TILE } as const;
 
 /** Ground material ids, preferred first. Unlisted regions keep the large tile inside and the plaza paving outside. */
 export function mallGround(m: DressMap, x: number, y: number): string[] {
-    const r = regionAt(m, x, y)?.id ?? '';
+    const r = innermost(m, x, y)?.id ?? '';
     const by: Record<string, string> = {
         'O-02': 'ground-plaza', 'F1-11': 'ground-terrazzo', 'F2-14': 'ground-terrazzo', 'F1-12': 'ground-terrazzo', 'F2-15': 'ground-terrazzo',
         'F1-04': 'ground-tile-fresh', 'F1-05': 'ground-tile-cold', 'F2-13': 'ground-wood', 'F2-18': 'ground-deck',
     };
-    // Layout 4 floors the rest from the same samples (Sol's M2 batch adds concrete, carpet, rubber and asphalt).
+    // Layout 4 floors the rest: Sol's M2 batch adds concrete for the back of house, carpet in the offices, rubber in the
+    // play area, small tiles in the toilets and asphalt on the south street and the loading yard.
     const full: Record<string, string> = {
         'F1-01': 'ground-tile-cold', 'F1-02': 'ground-tile-fresh', 'F1-07': 'ground-terrazzo', 'F1-14': 'ground-terrazzo', 'F2-01': 'ground-wood',
-        'F2-04': 'ground-wood', 'F2-06': 'ground-deck', 'F2-07': 'ground-wood', 'F2-08': 'ground-wood', 'F2-11': 'ground-tile-cold',
+        'F2-04': 'ground-wood', 'F2-06': 'ground-rubber', 'F2-07': 'ground-carpet', 'F2-08': 'ground-carpet', 'F2-11': 'ground-tile-wc',
+        'F1-09': 'ground-concrete', 'F1-10': 'ground-concrete', 'F1-13': 'ground-concrete', 'F2-09': 'ground-concrete', 'F2-10': 'ground-concrete',
+        'F2-12': 'ground-concrete', 'F2-16': 'ground-concrete', 'O-04': 'ground-asphalt', 'O-05': 'ground-asphalt',
     };
-    const base = by[r] ?? (m.full ? full[r] : undefined) ?? (r.startsWith('O-') || !insideFootprint(x, y) ? 'ground-plaza' : 'ground-tile-large');
-    const fallback = base === 'ground-plaza' ? [] : ['ground-tile-large'];
-    return [...[`${base}-${hash(x >> 1, y >> 1, 3) < .5 ? 'a' : 'b'}`, `${base}-a`].map(id), ...fallback.map(f => id(`${f}-a`))];
+    const outside = r.startsWith('O-') || !insideFootprint(x, y), base = by[r] ?? (m.full ? full[r] : undefined) ?? (outside ? 'ground-plaza' : 'ground-tile-large');
+    const fallback = outside ? 'ground-plaza' : 'ground-tile-large';
+    return [...[`${base}-${hash(x >> 1, y >> 1, 3) < .5 ? 'a' : 'b'}`, `${base}-a`].map(id), ...fallback === base ? [] : [id(`${fallback}-a`)]];
 }
 
 const furnitureAt = (m: DressMap) => {
@@ -163,8 +178,7 @@ export function mallOpenings(m: DressMap): MallOpening[] {
     const open = (x: number, y: number) => { const c = m.cells[y]?.[x]; return !!c && c !== 'wall'; };
     const lone = (x: number, y: number) => !wall(x - 1, y) && !wall(x + 1, y) && !wall(x, y - 1) && !wall(x, y + 1);
     // The innermost room on each side (rooms may overlap), a corridor, or the outside.
-    const place = (x: number, y: number) => insideFootprint(x, y)
-        ? m.regions.filter(r => r.inside !== false && contains(r, x, y)).sort((a, b) => a.w * a.h - b.w * b.h)[0]?.id ?? regionAt(m, x, y)?.id ?? '' : 'outside';
+    const place = (x: number, y: number) => insideFootprint(x, y) ? innermost(m, x, y)?.id ?? '' : 'outside';
     const band = (x: number, y: number) => insideFootprint(x, y) && (x <= 9 || x >= 63 || y <= 7 || y >= 47);
     const out: MallOpening[] = [];
     // `along(i)` steps along the wall line, `across(i, s)` to either side of it.
@@ -250,12 +264,17 @@ export function mallProps(m: DressMap): DressSprite[] {
     for (const [key, f] of at) {
         if (!f || f.dx !== 0 || f.dy !== 0) continue;
         const [x, y] = key.split(',').map(Number), t = MALL_FURNITURE[f.type];
-        let names: string[];
+        let names: string[], painter: string | null = null;
         const painted = f.type in PAINTED_LIFT;
         if (painted) {
-            // Run modules close where the run ends; the seed varies stock and wear between a few versions per piece.
+            // Run modules close where the run ends (a lone module is closed both ways); the two middle versions alternate by
+            // cell. The painted fallback's seed varies stock and wear between a few versions per piece.
             const run = 'run' in t, end = run ? `${same(x - 1, y, f.type) ? '' : 'w'}${same(x + 1, y, f.type) ? '' : 'e'}` || 'm' : '';
-            names = [`furniture:${f.type}:${LOOKS[f.type]?.[regionAt(m, x, y)?.id ?? ''] ?? ''}:${end}:${Math.floor(hash(x, y, 101) * 4)}`];
+            const looks = LOOKS[f.type], look = looks ? looks[regionAt(m, x, y)?.id ?? ''] ?? looks['*'] : '';
+            const part = !run ? '' : end === 'we' ? '-single' : end === 'm' ? `-mid-${hash(x, y, 103) < .5 ? 'a' : 'b'}` : `-end-${end}`;
+            const sample = `prop-${f.type}${look ? '-' + look : ''}${part}`;
+            names = [SAMPLE_STAND_IN[sample] ?? sample];
+            painter = `${PROCEDURAL}furniture:${f.type}:${look}:${end}:${Math.floor(hash(x, y, 101) * 4)}`;
         } else if (f.type === 'gondola') {
             const w = same(x - 1, y, 'gondola'), e = same(x + 1, y, 'gondola');
             names = !w ? ['prop-gondola-end-w'] : !e ? ['prop-gondola-end-e']
@@ -266,18 +285,17 @@ export function mallProps(m: DressMap): DressSprite[] {
         const size = painted ? [t.w * TILE, t.h * TILE + PAINTED_LIFT[f.type]!] as const
             : MALL_SPRITE_SIZE[names[0].replace(/-(end-[ew]|mid-.*|[ab])$/, '')] ?? MALL_SPRITE_SIZE[names[0]] ?? [t.w * TILE, t.h * TILE];
         const south = (y + t.h) * TILE, stairs = f.type === 'stairs-up' || f.type === 'stairs-down';
-        // Painted by the view: the stairs, the cafe set (the drawn sample fits a whole set into one cell, too small) and the
-        // layout-4 pieces that have no sample yet.
+        // Painted by the view: the stairs and the cafe set (the drawn sample fits a whole set into one cell, too small).
         const cafe = names[0] === 'cafe-set', lamp = f.type === 'floor-lamp';
-        const procedural = stairs ? PROCEDURAL + f.type : cafe ? PROCEDURAL + 'cafe-set' : painted ? PROCEDURAL + names[0] : null;
+        const procedural = stairs ? PROCEDURAL + f.type : cafe ? PROCEDURAL + 'cafe-set' : null;
         // Every piece is centred on its footprint. Most fill it exactly; the one-cell cafe table's set is wider (chairs
         // reaching into the cells beside), the two-cell table of layout 3 narrower (it spans the sofa behind it).
         // The floor lamp stands in the middle of its cell on a small round base: only the base touches the floor.
         // A piece narrower than its footprint casts its shadow from the drawn piece, not from the whole footprint.
         const left = x * TILE + (t.w * TILE - size[0]) / 2;
-        const base = painted ? PAINTED_BASE[f.type] : undefined;
-        out.push({ assets: procedural ? [procedural] : names.map(id), x: left, y: south - size[1], z: south, layer: 'sorted',
-            emit: names.some(n => EMITS.has(n)), foot: cafe ? { x: left + 6, y: y * TILE, w: size[0] - 12, h: t.h * TILE, lift: size[1] - t.h * TILE }
+        const base = DRAWN_BASE[f.type];
+        out.push({ assets: procedural ? [procedural] : [...names.map(id), ...painter ? [painter] : []], x: left, y: south - size[1], z: south, layer: 'sorted',
+            emit: names.some(n => EMITS.has(n.replace(/-(end-[ew]|mid-[ab]|single)$/, ''))), foot: cafe ? { x: left + 6, y: y * TILE, w: size[0] - 12, h: t.h * TILE, lift: size[1] - t.h * TILE }
                 : lamp ? { x: x * TILE + 11, y: y * TILE + 12, w: 10, h: 8, lift: 8 }
                 : base ? { x: x * TILE + base[0], y: y * TILE + base[1], w: base[2], h: base[3], lift: size[1] - t.h * TILE }
                 : { x: Math.max(x * TILE, left), y: y * TILE, w: Math.min(t.w * TILE, size[0]), h: t.h * TILE, lift: stairs ? 0 : size[1] - t.h * TILE } });
