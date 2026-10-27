@@ -104,5 +104,63 @@
   "screenshots": [
     "d8-first-key-1280x720.png",
     "d8-first-key-1920x1080.png"
-  ]
+  ],
+  "mergeCandidate": {
+    "acceptedBaseline": "3b61d52e898459f3e197584ae202285e7ade65e2",
+    "context": "After maintainer authorized review and merge, main #130 was merged normally. Original screenshots above remain the reviewed 9389ff9 evidence; this entry records the subsequent candidate.",
+    "artifactSha256": {
+      "dist/index.html": "f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb",
+      "release/Escape-Bincov-portable.zip": "66a0d6f2d3bdb72dbdca233d3c71fcae696d2ef69197b0f8c5696346d5d5cb6b",
+      "release/Escape-Bincov-web.zip": "cc311e1d76a0b04d6d7d9b86d060bfb6ca37d06e56010af1a6d83b423d33ae3a"
+    },
+    "sourceSha256": {
+      "src/coast-view/input.ts": "eec6db9a4791235b0a2f005b712bd0e16afd8dc3d1f799ea7296e9d37a7dfba4",
+      "src/coast-view/host.ts": "9cc857778bcddafc7e45a08e195dbdb3344cd4809e01490e3b044f7280ad8cf0",
+      "tests/input.test.ts": "85d462f4178b6a5c411ae16f7e3d50d48e983d49aa0bc0c82bcf432bda9c429c",
+      "scripts/desktop-input-test.mjs": "1fcb3acf88b96cf9714b0b25cce314ee538ebd78bd191409f601c3fca41cd9e4",
+      "scripts/loot-browser-test.mjs": "f242953724fa73f959950fdb2dd76762bdf25ebe1e22e49ec4c57c2bf56d79d1"
+    },
+    "unit": {
+      "passed": 1022,
+      "failed": 0
+    },
+    "ciGuards": {
+      "passed": 77,
+      "failed": 0
+    },
+    "package": "passed",
+    "desktop": {
+      "startedAt": "2026-10-27T17:58:58.080Z",
+      "browser": "156.0.8078.48",
+      "passed": 12,
+      "failed": 0,
+      "cases": [
+        {
+          "name": "first key after blur works when keyup was lost 1280x720",
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "detail": {
+            "resumed": 701.8704000020027,
+            "firstPress": 718.6928000040052,
+            "stopped": 718.6928000040052
+          },
+          "stallResumes": 0
+        },
+        {
+          "name": "first key after blur works when keyup was lost 1920x1080",
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "detail": {
+            "resumed": 701.8704000020027,
+            "firstPress": 718.6591999993325,
+            "stopped": 718.6591999993325
+          },
+          "stallResumes": 0
+        }
+      ]
+    },
+    "finalCi": "See PR #107 exact-head checks; auto-merge is authorized only after required checks pass."
+  }
 }
