@@ -1000,9 +1000,13 @@ export class CoastView {
     }
   }
 
-  /** Pieces under the indoor wall rule now, the building they belong to (undefined until the first frame of a scene), and the rows' modes. */
+  /**
+   * Pieces under the indoor wall rule now, the building they belong to (undefined until the first frame of a scene), the
+   * rows of their east-west runs and those rows' modes.
+   */
   private indoor: Occluder[] = [];
   private indoorOf: string | null | undefined;
+  private indoorRowIds: number[] = [];
   private indoorRows = new Map<number, 'full' | 'base'>();
   /**
    * Walls of the building the player stands in follow wall-display.ts instead of the fades: switched outright between
@@ -1024,14 +1028,14 @@ export class CoastView {
           this.indoor.push(o);
         }
       }
+      this.indoorRowIds = [...new Set(this.indoor.filter(o => o.wall!.rule === 'row').map(o => o.cell!.y))];
     }
     if (!this.indoor.length) return;
-    this.indoorRows = rowModes(new Set(this.indoor.filter(o => o.wall!.rule === 'row').map(o => o.cell!.y)), f.player.y, this.indoorRows);
+    this.indoorRows = rowModes(this.indoorRowIds, f.player.y, this.indoorRows);
     for (const o of this.indoor) {
       const w = o.wall!, mode: WallMode = w.rule === 'row' ? this.indoorRows.get(o.cell!.y)! : w.rule;
       w.mode = mode; o.level = o.target = 0;
       o.sprite.visible = mode !== 'hidden';
-      if (o.links) for (const l of o.links) l.sprite.visible = mode === 'full';
       if (mode === 'hidden') { o.shown = undefined; continue; }
       const key = this.tex.wallCut(o.key, mode === 'base' ? this.footKey(o) : null, w.cut);
       o.shown = key === o.key ? undefined : key;
