@@ -1,6 +1,6 @@
 ## 2026-10-28 室内墙体与视野：第一阶段（居民楼）
 
-承接 [PR #PRNUM](https://github.com/xuys2025/escape-bincov/pull/PRNUM)，分支 `feat/indoor-wall-visibility`，基于 [PR #133](https://github.com/xuys2025/escape-bincov/pull/133) 的方案（其 head `6147282` 已含 main `3b61d52`）。维护者同意方案后要求合并 #133 并另开 PR 开始实现；#133 的冲突（任务清单、handoff 两处都保留）经维护者同意推到原 fork 分支，合并由维护者在 GitHub 上操作。
+承接 [PR #135](https://github.com/xuys2025/escape-bincov/pull/135)，分支 `feat/indoor-wall-visibility`，基于 [PR #133](https://github.com/xuys2025/escape-bincov/pull/133) 的方案（其 head `6147282` 已含 main `3b61d52`）。维护者同意方案后要求合并 #133 并另开 PR 开始实现；#133 的冲突（任务清单、handoff 两处都保留）经维护者同意推到原 fork 分支，合并由维护者在 GitHub 上操作。
 
 已实施：居民楼一楼、二楼、地下的墙按[方案](docs/INDOOR-WALL-VISIBILITY-PLAN.md)五项规则显示，实施时定下的细节和验证记在方案的[实施进度](docs/INDOOR-WALL-VISIBILITY-PLAN.md#6-实施进度)。只改显示，存档、地图、碰撞、子弹和房间揭示都不变。
 
