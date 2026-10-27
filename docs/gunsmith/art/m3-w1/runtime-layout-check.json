@@ -1,0 +1,90 @@
+{
+  "status": "pass",
+  "codeHead": "d84956ff0ebe82ed2e0a3d2aa2b8819794d07904",
+  "method": "Incoming metadata injected into a process-local copy of the current exported metadata table; real validateBuild and gunArtLayout; no runtime or build files written",
+  "checks": [
+    {
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        33,
+        10
+      ]
+    },
+    {
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        87,
+        16
+      ]
+    },
+    {
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        175,
+        32
+      ]
+    },
+    {
+      "configuration": "light",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        29,
+        10
+      ]
+    },
+    {
+      "configuration": "light",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        79,
+        16
+      ]
+    },
+    {
+      "configuration": "light",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        160,
+        32
+      ]
+    },
+    {
+      "configuration": "steady",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        41,
+        16
+      ]
+    },
+    {
+      "configuration": "steady",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        107,
+        26
+      ]
+    },
+    {
+      "configuration": "steady",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        216,
+        52
+      ]
+    }
+  ],
+  "bareFactory": "pass",
+  "scope": "Importer rehearsal only. In-game render, eight headings, fire effects, two desktop sizes and maintainer review remain M3-04."
+}

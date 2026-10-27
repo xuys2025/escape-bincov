@@ -1,0 +1,565 @@
+{
+  "schema": 1,
+  "stage": "P0",
+  "status": "pass",
+  "passed": 77,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "P0 exact inventory: AK-74 20 + eleven attachments 42 = 62",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-barrel-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b07-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-barrel-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b07-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-barrel-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b07-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-handguard-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h03-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h04-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-handguard-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h03-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-handguard-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h03-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-stock-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s03-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s04-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-stock-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s03-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-stock-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s03-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-reargrip-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-reargrip-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p03-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-reargrip-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p03-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-mag-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g08-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-mag-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g08-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-mag-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g08-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m05-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m07-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m05-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m07-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m05-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m07-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a08-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a08-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a08-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s03-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h03-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b07-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m05-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p03-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a08-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g08-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m07-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "W artwork is independently drawn; W/I mounts and anchors agree within 2px",
+      "status": "pass",
+      "detail": [
+        {
+          "id": "gs-akb74-receiver-w-v1",
+          "pixelsDifferentFromScaledI": 476
+        },
+        {
+          "id": "gs-akb74-barrel-factory-w-v1",
+          "pixelsDifferentFromScaledI": 269
+        },
+        {
+          "id": "gs-b07-w-v1",
+          "pixelsDifferentFromScaledI": 199
+        },
+        {
+          "id": "gs-akb74-handguard-factory-w-v1",
+          "pixelsDifferentFromScaledI": 288
+        },
+        {
+          "id": "gs-h03-w-v1",
+          "pixelsDifferentFromScaledI": 259
+        },
+        {
+          "id": "gs-h04-w-v1",
+          "pixelsDifferentFromScaledI": 301
+        },
+        {
+          "id": "gs-akb74-stock-factory-w-v1",
+          "pixelsDifferentFromScaledI": 239
+        },
+        {
+          "id": "gs-s03-w-v1",
+          "pixelsDifferentFromScaledI": 294
+        },
+        {
+          "id": "gs-s04-w-v1",
+          "pixelsDifferentFromScaledI": 511
+        },
+        {
+          "id": "gs-akb74-reargrip-factory-w-v1",
+          "pixelsDifferentFromScaledI": 120
+        },
+        {
+          "id": "gs-p03-w-v1",
+          "pixelsDifferentFromScaledI": 157
+        },
+        {
+          "id": "gs-p04-w-v1",
+          "pixelsDifferentFromScaledI": 107
+        },
+        {
+          "id": "gs-akb74-mag-factory-w-v1",
+          "pixelsDifferentFromScaledI": 135
+        },
+        {
+          "id": "gs-g08-w-v1",
+          "pixelsDifferentFromScaledI": 189
+        },
+        {
+          "id": "gs-m05-w-v1",
+          "pixelsDifferentFromScaledI": 76
+        },
+        {
+          "id": "gs-m07-w-v1",
+          "pixelsDifferentFromScaledI": 242
+        },
+        {
+          "id": "gs-a08-w-v1",
+          "pixelsDifferentFromScaledI": 56
+        }
+      ]
+    },
+    {
+      "name": "factory h assembly",
+      "status": "pass",
+      "detail": {
+        "size": [
+          33,
+          10
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "factory i assembly",
+      "status": "pass",
+      "detail": {
+        "size": [
+          87,
+          16
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "factory w assembly",
+      "status": "pass",
+      "detail": {
+        "size": [
+          175,
+          32
+        ],
+        "colors": 12
+      }
+    },
+    {
+      "name": "light h assembly",
+      "status": "pass",
+      "detail": {
+        "size": [
+          29,
+          10
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "light i assembly",
+      "status": "pass",
+      "detail": {
+        "size": [
+          79,
+          16
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "light w assembly",
+      "status": "pass",
+      "detail": {
+        "size": [
+          160,
+          32
+        ],
+        "colors": 12
+      }
+    },
+    {
+      "name": "steady h assembly",
+      "status": "pass",
+      "detail": {
+        "size": [
+          41,
+          16
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "steady i assembly",
+      "status": "pass",
+      "detail": {
+        "size": [
+          107,
+          26
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "steady w assembly",
+      "status": "pass",
+      "detail": {
+        "size": [
+          216,
+          52
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "bare factory for ground / HUD has no glove layers",
+      "status": "pass"
+    },
+    {
+      "name": "M2 source images are unchanged and retain manifest hashes",
+      "status": "pass",
+      "detail": {
+        "files": 115
+      }
+    },
+    {
+      "name": "previews and generated design reference below 1 MiB each",
+      "status": "pass"
+    },
+    {
+      "name": "byte totals",
+      "status": "pass",
+      "detail": {
+        "p0Bytes": 9216,
+        "m2Bytes": 24419,
+        "cumulativeBytes": 33635,
+        "firstWaveBudgetBytes": 90112
+      }
+    }
+  ],
+  "assemblies": [
+    {
+      "configuration": "factory",
+      "code": "h",
+      "w": 33,
+      "h": 10,
+      "colors": 8,
+      "tip": [
+        33,
+        2
+      ]
+    },
+    {
+      "configuration": "factory",
+      "code": "i",
+      "w": 87,
+      "h": 16,
+      "colors": 8,
+      "tip": [
+        87,
+        3
+      ]
+    },
+    {
+      "configuration": "factory",
+      "code": "w",
+      "w": 175,
+      "h": 32,
+      "colors": 12,
+      "tip": [
+        175,
+        6
+      ]
+    },
+    {
+      "configuration": "light",
+      "code": "h",
+      "w": 29,
+      "h": 10,
+      "colors": 9,
+      "tip": [
+        29,
+        2
+      ]
+    },
+    {
+      "configuration": "light",
+      "code": "i",
+      "w": 79,
+      "h": 16,
+      "colors": 8,
+      "tip": [
+        79,
+        3
+      ]
+    },
+    {
+      "configuration": "light",
+      "code": "w",
+      "w": 160,
+      "h": 32,
+      "colors": 12,
+      "tip": [
+        160,
+        6
+      ]
+    },
+    {
+      "configuration": "steady",
+      "code": "h",
+      "w": 41,
+      "h": 16,
+      "colors": 9,
+      "tip": [
+        41,
+        7
+      ]
+    },
+    {
+      "configuration": "steady",
+      "code": "i",
+      "w": 107,
+      "h": 26,
+      "colors": 6,
+      "tip": [
+        107,
+        13
+      ]
+    },
+    {
+      "configuration": "steady",
+      "code": "w",
+      "w": 216,
+      "h": 52,
+      "colors": 8,
+      "tip": [
+        216,
+        25
+      ]
+    }
+  ],
+  "legacyReconstruction": {
+    "status": "not-applicable",
+    "reason": "P0 adds AK-74 only. Old pistol/shotgun/carbine splits belong to P1; no legacy images replaced."
+  },
+  "visualReview": "Manual inspection required for silhouette recognition and single-ink seams; not claimed by geometric touch checks."
+}

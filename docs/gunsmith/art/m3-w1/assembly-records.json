@@ -1,0 +1,987 @@
+{
+  "source": "Original M3-W1 P0 AK-74 artwork; M2 O08/F01/T01 and gloves referenced unchanged",
+  "method": "Saved manifest anchors only; no manual component placement",
+  "virtual": [],
+  "configurations": {
+    "factory": [],
+    "light": [
+      [
+        "S03",
+        "stock"
+      ],
+      [
+        "H03",
+        "handguard"
+      ],
+      [
+        "P04",
+        "grip"
+      ],
+      [
+        "B07",
+        "barrel"
+      ],
+      [
+        "M05",
+        "muzzle"
+      ]
+    ],
+    "steady": [
+      [
+        "S04",
+        "stock"
+      ],
+      [
+        "H04",
+        "handguard",
+        [
+          [
+            "F01",
+            "under"
+          ],
+          [
+            "T01",
+            "side"
+          ]
+        ]
+      ],
+      [
+        "P03",
+        "grip"
+      ],
+      [
+        "A08",
+        "base",
+        [
+          [
+            "O08",
+            "top"
+          ]
+        ]
+      ],
+      [
+        "M07",
+        "muzzle"
+      ],
+      [
+        "G08",
+        "mag"
+      ]
+    ]
+  },
+  "assemblies": [
+    {
+      "gun": "akb74",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 33,
+      "h": 10,
+      "tip": [
+        33,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-akb74-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-akb74-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb74-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            17,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb74-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            21,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-h",
+          "label": "receiver",
+          "origin": [
+            8,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            21,
+            2
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-glove-front-h",
+          "label": "glove-front",
+          "origin": [
+            23,
+            5
+          ]
+        }
+      ],
+      "grip": [
+        12,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        24,
+        5
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "code": "i",
+      "configuration": "factory",
+      "items": [],
+      "w": 87,
+      "h": 16,
+      "tip": [
+        87,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-akb74-stock-factory-i",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-reargrip-factory-i",
+          "label": "rearGrip",
+          "origin": [
+            30,
+            6
+          ]
+        },
+        {
+          "key": "gs-akb74-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            45,
+            6
+          ]
+        },
+        {
+          "key": "gs-akb74-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            57,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-i",
+          "label": "receiver",
+          "origin": [
+            23,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-handguard-factory-i",
+          "label": "handguard",
+          "origin": [
+            57,
+            2
+          ]
+        }
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "code": "w",
+      "configuration": "factory",
+      "items": [],
+      "w": 175,
+      "h": 32,
+      "tip": [
+        175,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-akb74-stock-factory-w",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-reargrip-factory-w",
+          "label": "rearGrip",
+          "origin": [
+            61,
+            12
+          ]
+        },
+        {
+          "key": "gs-akb74-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            91,
+            12
+          ]
+        },
+        {
+          "key": "gs-akb74-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            115,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-w",
+          "label": "receiver",
+          "origin": [
+            47,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-handguard-factory-w",
+          "label": "handguard",
+          "origin": [
+            115,
+            4
+          ]
+        }
+      ],
+      "colors": 12
+    },
+    {
+      "gun": "akb74",
+      "code": "h",
+      "configuration": "light",
+      "items": [
+        "S03",
+        "H03",
+        "P04",
+        "B07",
+        "M05"
+      ],
+      "w": 29,
+      "h": 10,
+      "tip": [
+        29,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-s03-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-akb74-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            8,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb74-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            14,
+            4
+          ]
+        },
+        {
+          "key": "gs-b07-h",
+          "label": "barrel",
+          "origin": [
+            18,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-h",
+          "label": "receiver",
+          "origin": [
+            5,
+            0
+          ]
+        },
+        {
+          "key": "gs-h03-h",
+          "label": "handguard",
+          "origin": [
+            18,
+            2
+          ]
+        },
+        {
+          "key": "gs-m05-h",
+          "label": "muzzle",
+          "origin": [
+            26,
+            1
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            8,
+            4
+          ]
+        },
+        {
+          "key": "gs-glove-front-h",
+          "label": "glove-front",
+          "origin": [
+            20,
+            5
+          ]
+        }
+      ],
+      "grip": [
+        9,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        21,
+        5
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "akb74",
+      "code": "i",
+      "configuration": "light",
+      "items": [
+        "S03",
+        "H03",
+        "P04",
+        "B07",
+        "M05"
+      ],
+      "w": 79,
+      "h": 16,
+      "tip": [
+        79,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-s03-i",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-p04-i",
+          "label": "rearGrip",
+          "origin": [
+            23,
+            6
+          ]
+        },
+        {
+          "key": "gs-akb74-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            38,
+            6
+          ]
+        },
+        {
+          "key": "gs-b07-i",
+          "label": "barrel",
+          "origin": [
+            50,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-i",
+          "label": "receiver",
+          "origin": [
+            16,
+            0
+          ]
+        },
+        {
+          "key": "gs-h03-i",
+          "label": "handguard",
+          "origin": [
+            50,
+            2
+          ]
+        },
+        {
+          "key": "gs-m05-i",
+          "label": "muzzle",
+          "origin": [
+            72,
+            1
+          ]
+        }
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "code": "w",
+      "configuration": "light",
+      "items": [
+        "S03",
+        "H03",
+        "P04",
+        "B07",
+        "M05"
+      ],
+      "w": 160,
+      "h": 32,
+      "tip": [
+        160,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-s03-w",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-p04-w",
+          "label": "rearGrip",
+          "origin": [
+            47,
+            12
+          ]
+        },
+        {
+          "key": "gs-akb74-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            77,
+            12
+          ]
+        },
+        {
+          "key": "gs-b07-w",
+          "label": "barrel",
+          "origin": [
+            101,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-w",
+          "label": "receiver",
+          "origin": [
+            33,
+            0
+          ]
+        },
+        {
+          "key": "gs-h03-w",
+          "label": "handguard",
+          "origin": [
+            101,
+            4
+          ]
+        },
+        {
+          "key": "gs-m05-w",
+          "label": "muzzle",
+          "origin": [
+            146,
+            2
+          ]
+        }
+      ],
+      "colors": 12
+    },
+    {
+      "gun": "akb74",
+      "code": "h",
+      "configuration": "steady",
+      "items": [
+        "S04",
+        "H04",
+        "P03",
+        "A08",
+        "M07",
+        "G08"
+      ],
+      "w": 41,
+      "h": 16,
+      "tip": [
+        41,
+        7
+      ],
+      "layers": [
+        {
+          "key": "gs-s04-h",
+          "label": "stock",
+          "origin": [
+            0,
+            6
+          ]
+        },
+        {
+          "key": "gs-akb74-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            12,
+            9
+          ]
+        },
+        {
+          "key": "gs-g08-h",
+          "label": "mag",
+          "origin": [
+            18,
+            9
+          ]
+        },
+        {
+          "key": "gs-akb74-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            22,
+            5
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-h",
+          "label": "receiver",
+          "origin": [
+            9,
+            5
+          ]
+        },
+        {
+          "key": "gs-h04-h",
+          "label": "handguard",
+          "origin": [
+            22,
+            7
+          ]
+        },
+        {
+          "key": "gs-f01-h",
+          "label": "under",
+          "origin": [
+            25,
+            10
+          ]
+        },
+        {
+          "key": "gs-a08-h",
+          "label": "mount",
+          "origin": [
+            13,
+            3
+          ]
+        },
+        {
+          "key": "gs-o08-h",
+          "label": "top",
+          "origin": [
+            12,
+            0
+          ]
+        },
+        {
+          "key": "gs-m07-h",
+          "label": "muzzle",
+          "origin": [
+            33,
+            6
+          ]
+        },
+        {
+          "key": "gs-t01-h",
+          "label": "side1",
+          "origin": [
+            26,
+            8
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            12,
+            9
+          ]
+        },
+        {
+          "key": "gs-glove-foregrip-h",
+          "label": "glove-foregrip",
+          "origin": [
+            24,
+            11
+          ]
+        }
+      ],
+      "grip": [
+        13,
+        9
+      ],
+      "bore": 7,
+      "forward": 0,
+      "hand": [
+        25,
+        11
+      ],
+      "beam": [
+        29,
+        9
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "akb74",
+      "code": "i",
+      "configuration": "steady",
+      "items": [
+        "S04",
+        "H04",
+        "P03",
+        "A08",
+        "M07",
+        "G08"
+      ],
+      "w": 107,
+      "h": 26,
+      "tip": [
+        107,
+        13
+      ],
+      "layers": [
+        {
+          "key": "gs-s04-i",
+          "label": "stock",
+          "origin": [
+            0,
+            10
+          ]
+        },
+        {
+          "key": "gs-p03-i",
+          "label": "rearGrip",
+          "origin": [
+            32,
+            16
+          ]
+        },
+        {
+          "key": "gs-g08-i",
+          "label": "mag",
+          "origin": [
+            47,
+            16
+          ]
+        },
+        {
+          "key": "gs-akb74-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            59,
+            10
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-i",
+          "label": "receiver",
+          "origin": [
+            25,
+            10
+          ]
+        },
+        {
+          "key": "gs-h04-i",
+          "label": "handguard",
+          "origin": [
+            59,
+            12
+          ]
+        },
+        {
+          "key": "gs-f01-i",
+          "label": "under",
+          "origin": [
+            65,
+            18
+          ]
+        },
+        {
+          "key": "gs-a08-i",
+          "label": "mount",
+          "origin": [
+            34,
+            8
+          ]
+        },
+        {
+          "key": "gs-o08-i",
+          "label": "top",
+          "origin": [
+            32,
+            0
+          ]
+        },
+        {
+          "key": "gs-m07-i",
+          "label": "muzzle",
+          "origin": [
+            88,
+            11
+          ]
+        },
+        {
+          "key": "gs-t01-i",
+          "label": "side1",
+          "origin": [
+            68,
+            14
+          ]
+        }
+      ],
+      "beam": [
+        75,
+        17
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "akb74",
+      "code": "w",
+      "configuration": "steady",
+      "items": [
+        "S04",
+        "H04",
+        "P03",
+        "A08",
+        "M07",
+        "G08"
+      ],
+      "w": 216,
+      "h": 52,
+      "tip": [
+        216,
+        25
+      ],
+      "layers": [
+        {
+          "key": "gs-s04-w",
+          "label": "stock",
+          "origin": [
+            0,
+            19
+          ]
+        },
+        {
+          "key": "gs-p03-w",
+          "label": "rearGrip",
+          "origin": [
+            65,
+            31
+          ]
+        },
+        {
+          "key": "gs-g08-w",
+          "label": "mag",
+          "origin": [
+            95,
+            31
+          ]
+        },
+        {
+          "key": "gs-akb74-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            119,
+            19
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-w",
+          "label": "receiver",
+          "origin": [
+            51,
+            19
+          ]
+        },
+        {
+          "key": "gs-h04-w",
+          "label": "handguard",
+          "origin": [
+            119,
+            23
+          ]
+        },
+        {
+          "key": "gs-f01-w",
+          "label": "under",
+          "origin": [
+            131,
+            36
+          ]
+        },
+        {
+          "key": "gs-a08-w",
+          "label": "mount",
+          "origin": [
+            69,
+            15
+          ]
+        },
+        {
+          "key": "gs-o08-w",
+          "label": "top",
+          "origin": [
+            64,
+            0
+          ]
+        },
+        {
+          "key": "gs-m07-w",
+          "label": "muzzle",
+          "origin": [
+            178,
+            21
+          ]
+        },
+        {
+          "key": "gs-t01-w",
+          "label": "side1",
+          "origin": [
+            137,
+            27
+          ]
+        }
+      ],
+      "beam": [
+        153,
+        33
+      ],
+      "colors": 8
+    }
+  ],
+  "bareFactory": {
+    "gun": "akb74",
+    "code": "h",
+    "configuration": "factory",
+    "items": [],
+    "w": 33,
+    "h": 10,
+    "tip": [
+      33,
+      2
+    ],
+    "layers": [
+      {
+        "key": "gs-akb74-stock-factory-h",
+        "label": "stock",
+        "origin": [
+          0,
+          1
+        ]
+      },
+      {
+        "key": "gs-akb74-reargrip-factory-h",
+        "label": "rearGrip",
+        "origin": [
+          11,
+          4
+        ]
+      },
+      {
+        "key": "gs-akb74-mag-factory-h",
+        "label": "mag",
+        "origin": [
+          17,
+          4
+        ]
+      },
+      {
+        "key": "gs-akb74-barrel-factory-h",
+        "label": "barrel",
+        "origin": [
+          21,
+          0
+        ]
+      },
+      {
+        "key": "gs-akb74-receiver-h",
+        "label": "receiver",
+        "origin": [
+          8,
+          0
+        ]
+      },
+      {
+        "key": "gs-akb74-handguard-factory-h",
+        "label": "handguard",
+        "origin": [
+          21,
+          2
+        ]
+      }
+    ],
+    "grip": [
+      12,
+      4
+    ],
+    "bore": 2,
+    "forward": 0,
+    "hand": [
+      24,
+      5
+    ],
+    "colors": 6
+  }
+}
