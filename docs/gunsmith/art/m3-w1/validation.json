@@ -1,18 +1,24 @@
 {
   "schema": 1,
   "stage": "P0+P1",
-  "status": "fail",
-  "passed": 385,
-  "failed": 1,
-  "knownIssues": [
+  "status": "pass",
+  "passed": 386,
+  "failed": 0,
+  "knownIssues": [],
+  "approvedExceptions": [
     {
-      "id": "legacy-shotgun-held-palette",
       "asset": "gs-shotgun-receiver-h-v1",
-      "actualColors": 10,
-      "singleImageCap": 8,
       "source": "assets/coast/v1/coast-weapon-shotgun-held-v1.png",
-      "decision": "Preserve original pixels exactly per BRIEF section 6; retain the strict color-cap failure visibly rather than quantize an accepted original or silently waive the cap.",
-      "requires": "Maintainer decision on the old whole-gun image color exception. All new parts and new receivers satisfy their palette caps."
+      "sourceSha256": "dce0144a844cf9ceabcbdfcac859023fe8607a7c95a88cbed57ff4d3e4f69914",
+      "rgbaSha256": "1d38c8c6321498144281b275c5b9ab54772b9b413a23dd8ede045f72799209f2",
+      "w": 33,
+      "h": 10,
+      "colors": 10,
+      "normalSingleImageCap": 8,
+      "approvedOn": "2026-10-28",
+      "reviewedHead": "175b559bf0c989e8a77d1e148f4228ffff53aa6e",
+      "humanInstruction": "保留原图，作为旧整枪色数例外（推荐）",
+      "scope": "Only this accepted whole-gun original, with its fixed original PNG and RGBA hashes. Preserve zero pixel difference; no relaxation for new guns or parts."
     }
   ],
   "checks": [
@@ -1083,8 +1089,7 @@
     },
     {
       "name": "gs-shotgun-receiver-h-v1",
-      "status": "fail",
-      "error": "10 colors exceed the single-image cap; the approved original shotgun H has 10 colors and BRIEF section 6 also requires exact pixel preservation"
+      "status": "pass"
     },
     {
       "name": "gs-carbine-receiver-h-v2",
