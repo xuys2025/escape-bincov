@@ -66,7 +66,7 @@ export function previews(){const dir=resolve(root,docs+'/preview');mkdirSync(dir
    for(const code of ['h','i','w']){const {record,image}=assemble(gun,name,code);records.push(record);for(const s of code==='w'?[1,2]:[1,3])save(resolve(dir,`${gun}-${name}-${code}-${s}x.png`),scaled(image,s));
     const x=code==='h'?18:code==='i'?225:560,s=code==='h'?3:code==='i'?2:1;text(sheet,`${code} ${s}X`,x,y+24);blit(sheet,image,x,y+42,s);
    }
-   const held=assemble(gun,name,'h'),body=decode(resolve(root,'assets/coast/v1/coast-player-body-e-f0-v1.png')),person=canvas(gun==='akb74'?80:96,Math.max(64,body.h+8));blit(person,body,16,4);blit(person,held.image,32+held.record.forward-held.record.grip[0],30-held.record.bore);
+   const held=assemble(gun,name,'h'),body=decode(resolve(root,'assets/coast/v1/coast-player-body-e-f0-v1.png')),person=canvas(gun==='akb74'?80:96,Math.max(64,body.h+8));blit(person,body,16,4);blit(person,held.image,32+held.record.forward-held.record.grip[0],Math.round(30-held.record.bore));
    for(const s of [1,3])save(resolve(dir,`${gun}-${name}-body-${s}x.png`),scaled(person,s));
   }
   // Keep the already-delivered AK-74 P0 overview as historical evidence; add a full-batch sheet under a distinct name.

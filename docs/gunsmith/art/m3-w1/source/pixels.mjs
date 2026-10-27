@@ -25,6 +25,8 @@ export function poly(c,color,points) {
   }
 }
 export function blit(dst,src,x,y,scale=1,gray=false) {
+  // A fractional row would otherwise become a horizontal byte offset in the RGBA buffer.
+  if(!Number.isInteger(x)||!Number.isInteger(y)||!Number.isInteger(scale)||scale<1)throw Error('Pixel blit requires integer translation and scale');
   for(let j=0;j<src.h;j++) for(let i=0;i<src.w;i++) {
     let p=Array.from(src.data.subarray((j*src.w+i)*4,(j*src.w+i)*4+4));
     if(!p[3]) continue;
