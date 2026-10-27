@@ -8,20 +8,20 @@ const root=fileURLToPath(new URL('../../../../..',import.meta.url));
 const dir='assets/gunsmith/incoming/m3-w1',docs='docs/gunsmith/art/m3-w1';
 for(const p of [dir,docs+'/preview',docs+'/source'])mkdirSync(resolve(root,p),{recursive:true});
 const H={K:'#242321',D:'#393733',S:'#625b4f',L:'#a49b88',W:'#a27351',T:'#784d3d',B:'#75634e',E:'#4b4842'};
-const I={K:'#122027',D:'#425a60',S:'#829c9d',L:'#bdcfca',W:'#996749',T:'#5c4236',B:'#cb9362',E:'#24373d'};
+const I={K:'#122027',D:'#425a60',S:'#829c9d',L:'#bdcfca',W:'#996749',T:'#5c4236',B:'#cb9362',E:'#24373d',J:'#425a60'};
 const W={...I,J:'#63797c',N:'#a7bab7',O:'#b57c53',V:'#77513b'};
-const all=[],pictures=new Map(),artwork=[];
-function make(name,code,w,h,meta,draw) {
-  const c=canvas(w,h),P=code==='h'?H:code==='w'?W:I;
+export const all=[],pictures=new Map(),artwork=[];
+export function make(name,code,w,h,meta,draw) {
+  const baseCode=code.split('-')[0],c=canvas(w,h),P=baseCode==='h'?H:baseCode==='w'?W:I;
   const r=(k,x,y,w,h)=>rect(c,P[k]??k,x,y,w,h),p=(k,pts)=>poly(c,P[k]??k,pts);
   draw(r,p,P,c);
-  const id=`gs-${name}-${code}-v1`,file=`${dir}/${id}.png`,b=png(c);
+  const id=`gs-${name}-${code}-v${meta.revision??1}`,file=`${dir}/${id}.png`,b=png(c);
   writeFileSync(resolve(root,file),b);
   const a={id,file,w,h,bytes:b.length,sha256:createHash('sha256').update(b).digest('hex'),revision:1,
-    output:{h:'held',i:'inventory',w:'bench',q24:'icon24',q32:'icon32'}[code],gun:null,item:null,role:'part',slot:null,anchor:null,
+    output:{h:'held',i:'inventory',w:'bench',q24:'icon24',q32:'icon32'}[baseCode],gun:null,item:null,role:'part',slot:null,anchor:null,
     colors:colors(c),source:`${docs}/source/pixel-artwork.json`,sourceRect:null,
     exportMethod:'original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling',...meta};
-  all.push(a);pictures.set(id.replace(/-v1$/,''),c);artwork.push({id,w,h,palette:P,ops:c.ops});return a;
+  all.push(a);pictures.set(id.replace(/-v\d+$/,''),c);artwork.push({id,w,h,palette:P,ops:c.ops});return a;
 }
 const geometry={
   h:{receiver:[14,6],mounts:{barrel:[13,1],handguard:[13,3],stock:[0,2],rearGrip:[3,4],mag:[9,4],mount:[7,0]},grip:[4,4],bore:2},
@@ -126,7 +126,10 @@ for(const item of ['S03','H03','P04','B07','M05','S04','H04','P03','A08','G08','
   if(item==='A08'){r('K',1,5,22,4);r('D',2,6,20,2);for(let x=3;x<22;x+=4)r('S',x,5,2,1);r('K',7,8,10,12);r('D',8,9,8,10);r('S',8,10,2,7);r('K',11,12,3,3);r('L',11,12,1,1);}
   if(item==='G08'){p('K',[[3,1],[12,1],[14,9],[18,15],[23,18],[19,23],[11,18],[6,10]]);p('D',[[4,2],[11,2],[13,10],[17,16],[21,18],[19,21],[12,17],[7,10]]);p('S',[[5,2],[7,2],[9,10],[14,17],[18,20],[17,20],[12,17],[8,10]]);p('E',[[9,3],[10,3],[12,10],[17,16],[16,17],[11,10]]);r('L',5,3,1,3);}
 });
-const m2=JSON.parse(readFileSync(resolve(root,'assets/gunsmith/manifest.json')));
-writeFileSync(resolve(root,dir+'/manifest.json'),JSON.stringify({schema:1,revision:1,batch:'M3-W1',stage:'P0',totals:{files:all.length,pngBytes:all.reduce((s,a)=>s+a.bytes,0)},assets:all,virtual:[]},null,2)+'\n');
-writeFileSync(resolve(root,docs+'/source/pixel-artwork.json'),JSON.stringify({method:'Original integer-grid drawing recipes; no cross-output raster scaling',assets:artwork},null,2)+'\n');
-console.log(JSON.stringify({files:all.length,pngBytes:all.reduce((s,a)=>s+a.bytes,0),m2Bytes:m2.totals.pngBytes}));
+export function finish(stage='P0',virtual=[]) {
+  const m2=JSON.parse(readFileSync(resolve(root,'assets/gunsmith/manifest.json')));
+  writeFileSync(resolve(root,dir+'/manifest.json'),JSON.stringify({schema:1,revision:stage==='P0'?1:2,batch:'M3-W1',stage,totals:{files:all.length,pngBytes:all.reduce((s,a)=>s+a.bytes,0)},assets:all,virtual},null,2)+'\n');
+  writeFileSync(resolve(root,docs+'/source/pixel-artwork.json'),JSON.stringify({method:'Original integer-grid drawing recipes; no cross-output raster scaling',assets:artwork},null,2)+'\n');
+  console.log(JSON.stringify({stage,files:all.length,pngBytes:all.reduce((s,a)=>s+a.bytes,0),m2Bytes:m2.totals.pngBytes}));
+}
+if(process.argv[1]===fileURLToPath(import.meta.url))finish();

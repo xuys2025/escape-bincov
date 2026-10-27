@@ -9,6 +9,7 @@ import { GUNSMITH_ART } from '../../../../../src/art/gunsmith-art-meta.ts';
 import { gunArtLayout } from '../../../../../src/art/gunsmith-layout.ts';
 import { validateBuild } from '../../../../../src/gunsmith/compat.ts';
 import { buildOf } from '../../../../../src/gunsmith/instance.ts';
+if(manifest.stage==='P0+P1'){await import('./check-runtime-full.mjs');process.exit(0);}
 const saved=JSON.parse(readFileSync(resolve(root,docs+'/assembly-records.json')));
 for(const a of manifest.assets)GUNSMITH_ART[a.id.replace(/-v\d+$/,'')]=a;
 let next=0;const tree=parts=>parts.map(([id,slot,children=[]])=>({uid:`p0-${++next}`,id,slot,relief:false,children:tree(children)}));

@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { canvas,rect,poly,decode,colors,blit } from './source/pixels.mjs';
 import { assemble,assets,configurations,root,docs,incoming,m2,manifest,picture } from './source/assemble.mjs';
+if(manifest.stage==='P0+P1'){await import('./source/validate-full.mjs');process.exit(process.exitCode??0);}
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const checks=[],run=(name,fn)=>{try {const detail=fn();checks.push({name,status:'pass',...(detail===undefined?{}:{detail})});}catch(e){checks.push({name,status:'fail',error:e.message});}};
 const originals=JSON.parse(readFileSync(resolve(root,docs+'/source/pixel-artwork.json')));

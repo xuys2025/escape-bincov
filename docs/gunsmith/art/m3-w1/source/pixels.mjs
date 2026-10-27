@@ -9,17 +9,19 @@ export function dot(c,x,y,color) {
 }
 export function rect(c,color,x,y,w,h) {
   c.ops.push(['r',color,x,y,w,h]);
-  for(let j=y;j<y+h;j++) for(let i=x;i<x+w;i++) dot(c,i,j,color);
+  const pixel=typeof color==='string'?rgba(color):color;
+  for(let j=y;j<y+h;j++) for(let i=x;i<x+w;i++) dot(c,i,j,pixel);
 }
 export function poly(c,color,points) {
   c.ops.push(['p',color,points]);
+  const pixel=typeof color==='string'?rgba(color):color;
   const min=Math.min(...points.map(p=>p[1])),max=Math.max(...points.map(p=>p[1]));
   for(let y=min;y<max;y++) {
     const edges=[];
     points.forEach(([x1,y1],i)=>{const [x2,y2]=points[(i+1)%points.length];
       if((y1<=y+.5&&y2>y+.5)||(y2<=y+.5&&y1>y+.5)) edges.push(x1+(y+.5-y1)*(x2-x1)/(y2-y1));});
     edges.sort((a,b)=>a-b);
-    for(let i=0;i+1<edges.length;i+=2) for(let x=Math.ceil(edges[i]-.5);x<Math.ceil(edges[i+1]-.5);x++) dot(c,x,y,color);
+    for(let i=0;i+1<edges.length;i+=2) for(let x=Math.ceil(edges[i]-.5);x<Math.ceil(edges[i+1]-.5);x++) dot(c,x,y,pixel);
   }
 }
 export function blit(dst,src,x,y,scale=1,gray=false) {
