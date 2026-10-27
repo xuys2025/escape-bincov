@@ -1,3 +1,10 @@
+## 2026-10-28 · 新一轮减熵：架构门禁与依赖查询（#60）
+
+- 基线：`3b61d52e898459f3e197584ae202285e7ade65e2`；分支 `codex/entropy-architecture`；[全库扫描/候选清单](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6449666799)。原改枪 M3 检出保留。
+- 本批：统一源码 AST 图、动态加载/类型导出/自环检查、沿核心依赖闭包约束 61 个模块，以及只读 `pnpm architecture [src/path.ts] [--json]`。入口：[实现摘要](docs/tasks/quality-entropy.md#2026-10-28-架构门禁与按文件查询)、[代码导航](docs/CODEMAP.md)、[共享分析](scripts/source-graph.mjs)。
+- 实测：1020/1020 单测、85/85 工程守卫、package；动态反向依赖负对照旧守卫 3/3 放行、新守卫拒绝，注入后已还原。HTML、portable、web 三份制品哈希与基线相同，src/assets/锁文件没有差异。
+- 未验：本地浏览器、真机/F20/性能未运行；产品行为未变。准确提交与完整 CI 以本批 PR 为准，未合并/发布；后续候选按 #60 原归属推进，既有修复 PR 保持原承接。
+
 ## 2026-10-28 #47 M2：家具与地面素材接进布置表（PR #130，`agent/mall-m2-sprites`）
 
 维护者 10-27 说“接着做 #47 M2，把已有的家具和地面素材接进布置表”。基线 main `98968e1`（含 #127、#128、#115、#129、#108、#112），独立工作树开发，不碰 C:\bincov 里其他会话的分支。
