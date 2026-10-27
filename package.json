@@ -39,6 +39,7 @@
     "test:qol": "node scripts/qol-test.mjs",
     "test:hideout": "node scripts/hideout-browser-test.mjs",
     "test:station": "node --import tsx scripts/station-browser-test.mjs",
+    "test:station-hands": "node --import tsx scripts/station-browser-test.mjs --only=H15 --out=test-results/station-hands",
     "test:station-tier1": "node --import tsx scripts/station-tier1-test.mjs",
     "test:station-tier2": "node --import tsx scripts/station-tier2-test.mjs",
     "test:station-relief": "node scripts/station-relief-test.mjs",

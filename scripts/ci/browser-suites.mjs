@@ -2,7 +2,7 @@
 // Whole suites stay sequential on each runner; no test assertions are removed.
 const schedule = {
   'batch-1': ['browser', 'qol-expansion', 'station-tier2', 'shooting'],
-  'batch-2': ['save-browser', 'asset-load', 'hud-release', 'issue26-inventory', 'mall-passages'],
+  'batch-2': ['save-browser', 'asset-load', 'hud-release', 'issue26-inventory', 'mall-passages', 'station-hands'],
   'batch-3': ['desktop-input', 'portable', 'shop-drag', 'title', 'title-water', 'opening'],
   'batch-4': ['issue26-station', 'issue26-spatial', 'tactical', 'art', 'systems', 'mobile'],
   'batch-5': ['buildings', 'station-tier1', 'shop-feedback', 'mobile-ux', 'range', 'gunsmith-bench'],
