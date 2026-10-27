@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "browser": "156.0.8078.48",
+  "manifestRevision": 5,
+  "totalAssets": 174,
+  "legacyAssetsUnchanged": 110,
+  "sourceHashes": 14,
+  "deliveryPngs": 64,
+  "bodies": 58,
+  "masks": 6,
+  "joinedPairs": 33,
+  "checks": [
+    "all PNG SHA-256 and dimensions",
+    "legacy metadata unchanged",
+    "source provenance",
+    "binary alpha",
+    "28-colour native palette",
+    "footprint/lift canvas and south anchor",
+    "B full footprint",
+    "nonempty emit masks only on authored body pixels",
+    "matching open-edge RGBA at every row"
+  ],
+  "runtimeIntegration": "PENDING: new IDs registered; layout-4 procedural dressing fallback retained",
+  "remaining": [
+    "M2 P1",
+    "M2 P2",
+    "M2 P3",
+    "in-game visual acceptance",
+    "human/device review"
+  ]
+}

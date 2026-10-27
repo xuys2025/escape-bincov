@@ -7,7 +7,7 @@ import { generateRun } from './world';
 import { decodeSession, recordUpgradeFields, RecoveryStore, StorageConflictError, type SessionRecord } from './recovery-store';
 import { newExpansion, rpgEnabled, stationUpgraded, upgradeToRpg, type ExpansionState, type WorldResolver, type EndReason } from './expansion-state';
 import { resolveExpansionWorld } from './expansion-worlds';
-import { initializeMallRaid, mallRunConfig, mallWorldV2, mallWorldV3 } from './mall-world';
+import { initializeMallRaid, mallRunConfig, mallWorldV2, mallWorldV3, mallWorldV4 } from './mall-world';
 import { initializeBuildingRaid, buildingRunConfig } from './building-world';
 import { creditTraining } from './rpg';
 import { advanceRealTime } from './base';
@@ -261,7 +261,7 @@ export class SaveSession {
     }
 
     /** Layout is chosen only on deployment; active raids restore their saved world/revision. */
-    beginRun(seed: number, buildings: boolean | 'mall' = false, options: { mallLayout?: 1 | 2 | 3; legacyEnemies?: boolean } = {}): boolean {
+    beginRun(seed: number, buildings: boolean | 'mall' = false, options: { mallLayout?: 1 | 2 | 3 | 4; legacyEnemies?: boolean } = {}): boolean {
         const s = this.session;
         if (s.state !== 'hideout' || s.conflict || s.pendingSettlement || s.save.activeRun) return false;
         // Layered raids store seeds 1..0xffffffff (older pages reject 0), so seed 0 deploys as seed 1; the coast keeps 0.
@@ -276,10 +276,10 @@ export class SaveSession {
             // Deploying is a station boundary: an older expansion upgrades in this same candidate, so the raid is v3.
             upgradeToRpg(expansion!, this.now());
             Object.assign(loadout, D.reloadMagazine(loadout, loadout.ammo, loadout.ammoRelief, loadout.bag));
-            if (buildings === 'mall') initializeMallRaid(expansion!, loadout, config, options.mallLayout === 3 ? mallWorldV3() : options.mallLayout === 2 ? mallWorldV2() : undefined);
+            if (buildings === 'mall') initializeMallRaid(expansion!, loadout, config, options.mallLayout === 4 ? mallWorldV4() : options.mallLayout === 3 ? mallWorldV3() : options.mallLayout === 2 ? mallWorldV2() : undefined);
             else initializeBuildingRaid(expansion!, loadout, config);
             if (buildings === true && !options.legacyEnemies) installStreetEncounter(expansion!.raid!, this.resolveWorld(expansion!.raid!.worldVersion)!);
-            if (buildings === 'mall' && options.mallLayout === 3 && !options.legacyEnemies) installMallEncounter(expansion!.raid!, this.resolveWorld(expansion!.raid!.worldVersion)!);
+            if (buildings === 'mall' && (options.mallLayout === 3 || options.mallLayout === 4) && !options.legacyEnemies) installMallEncounter(expansion!.raid!, this.resolveWorld(expansion!.raid!.worldVersion)!);
         }
         if (expansion) expansion.base.location = 'raid';
         if (!this.persist(candidate, checkpoint, null, expansion)) return false;

@@ -2,7 +2,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as D from '../src/domain';
 import { emptyIntent } from '../src/raid-runtime/runtime';
-import { advanceAim, coneOf, driftOf, handlingOf, recoil, unsteadyAim, SAMPLE_GUNS, SWAY, type AimState } from '../src/shooting';
+import { advanceAim, coneOf, driftOf, handlingOf, recoil, unsteadyAim, SWAY, type AimState } from '../src/shooting';
+import { GUNS as CATALOG } from '../src/gunsmith/catalog';
 import { benchRaid, arm, replay, mouse, mouseHold, touchHold, deviations, cadence, dummy, GUNS, LANE, DUMMY_RADIUS, type Gun, type Script } from './fixtures/shooting-bench';
 
 // PR #39 shooting bench. S0 recorded the old shooting (see docs/SHOOTING-SYSTEM-REWORK.md); these are the S2/S3
@@ -27,7 +28,7 @@ test('shooting bench: clicks and held fire give the same shots and aim at 20 and
     // is at 0, because elsewhere they sample the press later and the shot really is later.
     const scripts: [Gun, Script, number, boolean][] = [
         ['pistol', mouse([0, .25, .5, .75]), 1.2, false], ['carbine', touchHold(0, 1.3), 1.5, true], ['shotgun', mouse([0, .75]), 1, false],
-        ['m4a1', mouseHold(0, .95), 1.4, true], ['m4a1', (t, p) => t < .75 ? mouseHold(0, .45)(t, p) : mouseHold(.75, 1.2)(t, p), 1.6, false],
+        ['mb4a1', mouseHold(0, .95), 1.4, true], ['mb4a1', (t, p) => t < .75 ? mouseHold(0, .45)(t, p) : mouseHold(.75, 1.2)(t, p), 1.6, false],
     ];
     for (const [gun, script, seconds, uneven] of scripts) {
         const logs = [20, 144, ...uneven ? [[7, 23, 16, 41]] : []].map(fps => replay(arm(benchRaid(), gun), script, seconds, fps));
@@ -53,8 +54,8 @@ test('shooting bench: desktop semi-automatic guns fire once per click, automatic
         pistol.shots.forEach((s, i) => assert.ok(s.t >= i * .29 - 1e-9 && s.t < i * .29 + 1 / fps + 1e-9, `${fps} Hz shot ${i} at ${s.t}`));
         // A click more than .15 s before the gun is ready is dropped, not queued.
         assert.equal(replay(arm(benchRaid(), 'pistol'), mouse([0, .1]), 1, fps).shots.length, 1, `${fps} Hz`);
-        // The sample rifle fires every .1 s while held and stops when released: 0 to .9 s is ten shots.
-        const m4 = replay(arm(benchRaid(), 'm4a1'), mouseHold(0, .95), 1.5, fps);
+        // The M4A1 fires every .1 s while held and stops when released: 0 to .9 s is ten shots.
+        const m4 = replay(arm(benchRaid(), 'mb4a1'), mouseHold(0, .95), 1.5, fps);
         assert.equal(m4.shots.length, 10, `${fps} Hz`);
         assert.ok(near(cadence(m4), .1, 1 / fps), `${fps} Hz cadence ${cadence(m4)}`);
     }
@@ -81,7 +82,7 @@ test('shooting bench: a frame that sees the trigger released lets no held shot o
 
 test('shooting bench: pause, a panel, a layer of suppression or losing focus drop the trigger and a waiting click', () => {
     // A held rifle: pausing stops it, and after resuming the still-held button stays dead until it is released.
-    const b = arm(benchRaid(), 'm4a1'), r = b.runtime, held = { ...emptyIntent(), aim: 0, firePressed: false, fireHeld: true };
+    const b = arm(benchRaid(), 'mb4a1'), r = b.runtime, held = { ...emptyIntent(), aim: 0, firePressed: false, fireHeld: true };
     r.advance(1000, { ...held, firePressed: true }); r.advance(1150, held);
     const before = r.mag;
     r.pause('blur'); r.advance(1300, held); r.advance(1600, held); assert.equal(r.mag, before);
@@ -95,9 +96,9 @@ test('shooting bench: pause, a panel, a layer of suppression or losing focus dro
 });
 
 test('shooting bench: recoil moves the centre of the cone and the random draw is unchanged (replayed shot by shot)', () => {
-    const b = arm(benchRaid(), 'm4a1'), random = D.seededRandom(b.runtime.snapshot().rng);
+    const b = arm(benchRaid(), 'mb4a1'), random = D.seededRandom(b.runtime.snapshot().rng);
     const log = replay(b, mouseHold(0, 1.25), 1.6, 60);
-    const h = handlingOf('m4a1'), w = SAMPLE_GUNS.m4a1, aim = settled();
+    const h = CATALOG.mb4a1.handling, w = D.WEAPONS.mb4a1, aim = settled();
     assert.equal(log.shots.length, 13);
     log.shots.forEach((s, i) => {
         if (i) advanceAim(aim, h, SWAY, w.cooldown, still);
@@ -126,12 +127,12 @@ test('shooting bench: a precise aim takes time to rise; motion, sprinting and sh
 });
 
 test('shooting bench: held fire blooms and drifts right, and a short pause recovers both', () => {
-    const log = replay(arm(benchRaid(), 'm4a1'), mouseHold(0, .65), 1.7, 60);
+    const log = replay(arm(benchRaid(), 'mb4a1'), mouseHold(0, .65), 1.7, 60);
     const at = (t: number) => aimAt(log, t);
     assert.ok(at(.2).cone < at(.4).cone && at(.4).cone < at(.6).cone);
     assert.ok(at(.2).drift > 0 && at(.2).drift < at(.6).drift);
     // About a second after the last shot (.6 s) both are back within 5% of a calm gun.
-    const calm = coneOf(settled(), SAMPLE_GUNS.m4a1, handlingOf('m4a1')), peak = Math.max(...log.aims.map(a => a.drift));
+    const calm = coneOf(settled(), D.WEAPONS.mb4a1, CATALOG.mb4a1.handling), peak = Math.max(...log.aims.map(a => a.drift));
     assert.ok(at(1.6).cone < calm * 1.05 && at(1.6).drift < .05 * peak, JSON.stringify(at(1.6)));
 });
 
@@ -140,7 +141,7 @@ test('shooting bench: a raid built from its checkpoint starts unsteady; a weapon
     replay(b, mouseHold(0, .1), .1, 60);
     r.reloadCommitted();
     assert.deepEqual(r.handling, unsteadyAim());
-    const m4 = arm(benchRaid(), 'm4a1');
+    const m4 = arm(benchRaid(), 'mb4a1');
     replay(m4, mouseHold(0, .35), .35, 60);
     const before = { ...m4.runtime.handling };
     m4.runtime.advance(1400, { ...emptyIntent(), aim: 0, commands: ['knife'] });
@@ -153,8 +154,8 @@ test('shooting bench: a raid built from its checkpoint starts unsteady; a weapon
 test('shooting bench: chance that one pellet crosses a 14 px dummy, from the published cone (report)', t => {
     // A pellet is uniform over the cone, so its chance to cross a circle of radius r at distance d is 2 asin(r/d) / cone.
     const share = (cone: number, d: number) => +Math.min(1, 2 * Math.asin(DUMMY_RADIUS / d) / cone).toFixed(2);
-    for (const gun of [...GUNS, 'm4a1'] as const) {
-        const range = [160, 320, 480, 640].filter(d => d <= (gun === 'm4a1' ? SAMPLE_GUNS.m4a1 : D.WEAPONS[gun]).range);
+    for (const gun of [...GUNS, 'mb4a1'] as const) {
+        const range = [160, 320, 480, 640].filter(d => d <= (gun === 'mb4a1' ? D.WEAPONS.mb4a1 : D.WEAPONS[gun]).range);
         const cone = (script: Script, seconds: number) => replay(arm(benchRaid(), gun), script, seconds, 20).aims.at(-1)!.cone;
         // Raising takes at most .4 s and sway reaches its target within .5 s (rate 10/s).
         const rows = { hip: cone(() => ({}), .05), precise: cone(() => ({ precise: true }), .5), walking: cone(() => ({ move: { x: 0, y: 1, sprint: false } }), .6),

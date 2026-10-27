@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Texture, type Sprite } from 'pixi.js';
-import { Lighting, REVEAL_FADE, type Light } from '../src/coast-view/lighting';
+import { Lighting, REVEAL_FADE, UNSEEN_TINT, unseenTint, type Light } from '../src/coast-view/lighting';
+import type { MapDef, RegionDef } from '../src/raid-runtime/contract';
 import type { Textures } from '../src/coast-view/textures';
 
 /** A Lighting with no map (ambient = the mood's outdoor colour, kept dark so `at` never saturates) and the given lights. */
@@ -98,4 +99,71 @@ test('房间灯光：重叠房间的灯要等每个房间都揭示后才开始�
   L.sync(FRAME, gate({ A: true, B: true }));
   assert.ok(Math.abs(lamp.lit! - 1 / 18) < 1e-12, `ramps once both are revealed: ${lamp.lit}`);
   assert.equal(shown().length, 1);
+});
+
+/**
+ * Unrevealed-room shade (#26 F14): a 10x8-cell floor with room A at cells 2..5 x 2..4 and room B (inside A) at 3..4 x 3.
+ * Ambient is mid grey so the multiplied result stays exact in whole numbers.
+ */
+const FLOOR = { cols: 10, rows: 8, tile: 32 } as MapDef;
+const room = (id: string, x: number, y: number, w: number, h: number) => ({ id, x: x * 32, y: y * 32, w: w * 32, h: h * 32, inside: true, sealed: false }) as RegionDef;
+const ROOM_A = room('A', 2, 2, 4, 3), ROOM_B = room('B', 3, 3, 2, 1), GREY = 0x808080;
+const shadeRig = (...rooms: RegionDef[]) => {
+  const { L } = rig(); L.mood = { ...L.mood, outdoor: GREY }; L.setUnseen(FLOOR, rooms);
+  const g = (L as unknown as { shade: { getLocalBounds(): { x: number; y: number; width: number; height: number } } }).shade;
+  const bounds = () => { const b = g.getLocalBounds(); return b.width ? [b.x, b.y, b.width, b.height] : []; };
+  return { L, bounds, at: (cx: number, cy: number, rv: Record<string, boolean>) => L.at({ x: cx * 32 + 16, y: cy * 32 + 16 }, null, rv) };
+};
+const times = (c: number, m: number) => { const ch = (s: number) => Math.floor(((c >> s) & 255) * ((m >> s) & 255) / 255); return (ch(16) << 16) | (ch(8) << 8) | ch(0); };
+
+test('未揭示房间压暗：倍率从 UNSEEN_TINT 线性升到白色', () => {
+  assert.equal(unseenTint(0), UNSEEN_TINT); assert.equal(unseenTint(1), 0xffffff);
+  const mid = unseenTint(.5), ch = (c: number, s: number) => (c >> s) & 255;
+  for (const s of [16, 8, 0]) assert.ok(ch(mid, s) > ch(UNSEEN_TINT, s) && ch(mid, s) < 255, `channel ${s}: ${mid.toString(16)}`);
+  assert.ok([16, 8, 0].every(s => ch(UNSEEN_TINT, s) < 200) && ch(UNSEEN_TINT, 0) > ch(UNSEEN_TINT, 16), 'darker, and a little cooler (more blue than red)');
+});
+
+test('未揭示房间压暗：只压房间内的格子；画面上的压暗范围就是房间；不传房间的楼层没有压暗', () => {
+  const { L, bounds, at } = shadeRig(ROOM_A);
+  L.syncUnseen(FRAME, HIDDEN);
+  assert.equal(at(3, 3, HIDDEN), times(GREY, UNSEEN_TINT), 'inside the hidden room: ambient times UNSEEN_TINT');
+  assert.equal(at(2, 2, HIDDEN), times(GREY, UNSEEN_TINT), 'its corner cell too');
+  for (const [x, y] of [[1, 3], [6, 3], [3, 1], [3, 5], [0, 0]]) assert.equal(at(x, y, HIDDEN), GREY, `outside the room (${x},${y}) is untouched`);
+  assert.deepEqual(bounds(), [64, 64, 128, 96], 'the multiplied floor rectangle is exactly the room');
+  L.syncUnseen(FRAME, { A: true });
+  // A fresh room in a revealed state starts unshaded, as a fresh light starts lit.
+  const fresh = shadeRig(ROOM_A); fresh.L.syncUnseen(FRAME, SHOWN);
+  assert.equal(fresh.at(3, 3, SHOWN), GREY); assert.deepEqual(fresh.bounds(), []);
+  const none = shadeRig(); none.L.syncUnseen(FRAME, HIDDEN);
+  assert.equal(none.at(3, 3, HIDDEN), GREY, 'a floor that passes no rooms (coast, resident building, placeholder mall) is never shaded');
+  assert.deepEqual(none.bounds(), []);
+});
+
+test('未揭示房间压暗：揭示后跟灯光一起 0.3 秒恢复；隐藏时同一帧压回，dt 为 0 也一样；dt 为 0 时揭示不动', () => {
+  const { L, bounds, at } = shadeRig(ROOM_A);
+  L.syncUnseen(FRAME, HIDDEN);
+  L.syncUnseen(0, SHOWN);
+  assert.equal(at(3, 3, SHOWN), times(GREY, UNSEEN_TINT), 'a reveal during a dt-0 present leaves the shade where it was');
+  L.syncUnseen(FRAME, SHOWN);
+  assert.equal(at(3, 3, SHOWN), times(GREY, unseenTint(1 / 18)), 'first frame: 1/18 of the way, the same step as the lights');
+  let prev = at(3, 3, SHOWN);
+  for (let n = 2; n <= 18; n++) { L.syncUnseen(FRAME, SHOWN); const cur = at(3, 3, SHOWN); assert.ok(cur > prev, `frame ${n} brightens`); prev = cur; }
+  assert.equal(at(3, 3, SHOWN), GREY, 'after 0.3 s nothing is left'); assert.deepEqual(bounds(), []);
+  L.syncUnseen(0, HIDDEN);
+  assert.equal(at(3, 3, HIDDEN), times(GREY, UNSEEN_TINT), 'hidden again in the same frame, even at dt 0');
+  assert.deepEqual(bounds(), [64, 64, 128, 96]);
+  // Missing from `revealed`: shaded, as the Runtime hides it.
+  const other = shadeRig(ROOM_A); other.L.syncUnseen(FRAME, {});
+  assert.equal(other.at(3, 3, {}), times(GREY, UNSEEN_TINT));
+});
+
+test('未揭示房间压暗：重叠房间按最暗的一层算，不叠加；内层未揭示时只压内层', () => {
+  const { L, bounds, at } = shadeRig(ROOM_A, ROOM_B);
+  L.syncUnseen(FRAME, { A: false, B: false });
+  assert.equal(at(3, 3, {}), times(GREY, UNSEEN_TINT), 'both hidden: the shared cells are shaded once, not twice');
+  L.syncUnseen(FRAME, { A: true, B: false }); for (let n = 0; n < 18; n++) L.syncUnseen(FRAME, { A: true, B: false });
+  const rv = { A: true, B: false };
+  assert.equal(at(3, 3, rv), times(GREY, UNSEEN_TINT), 'the hidden inner room stays shaded inside a revealed one');
+  assert.equal(at(2, 2, rv), GREY, 'the revealed outer room is clear');
+  assert.deepEqual(bounds(), [96, 96, 64, 32]);
 });

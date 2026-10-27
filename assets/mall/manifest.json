@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "source": "Sol batch 1 delivery for issue #47 (external working folder), manifest revision 4 (F-05 furniture proportions: sofa, coffee table, bed, bench, floor lamp); originals and prompts kept with the delivery",
-  "note": "Runtime copies of the mall samples (1x PNG, alpha 0/255, -emit masks). Stairs, hanging tubes and hanging signs are painted or omitted by the view and not copied.",
-  "revision": 4,
+  "source": "Sol batch 1 plus built-in image_gen M2 delivery for issue #47; originals and prompts retained in repository",
+  "note": "1x PNG, alpha 0/255. M2 art is registered for integration; procedural layout-4 fallback remains until the dressing table selects the new ids.",
+  "revision": 5,
   "assets": [
     {
       "id": "mall-ground-plaza-a-v1",
@@ -5092,6 +5092,4416 @@
       "phase": "P1-supplement",
       "flatGroundDecoration": false,
       "sha256": "d83e40991c6f8116e9cbc18924f95a86d370fec322da5da4087686f96b0c5f31"
+    },
+    {
+      "id": "mall-prop-rack-end-w-v1",
+      "file": "assets/mall/m2-p1/mall-prop-rack-end-w-v1.png",
+      "w": 32,
+      "h": 88,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 56,
+      "anchor": [
+        0,
+        88
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/rack.png",
+      "sourceSha256": "2980cbb7d3465a47e9a62f6fb518c3277ee8d7b0430f6f0eb51edb2ca2f7901f",
+      "sourceRect": [
+        116,
+        127,
+        222,
+        646
+      ],
+      "sourceTopRows": 168,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "1db4a341d00caea3da22ec3a5faca52080e02a88e742ff4173ae989c3d4f727a"
+    },
+    {
+      "id": "mall-prop-rack-end-e-v1",
+      "file": "assets/mall/m2-p1/mall-prop-rack-end-e-v1.png",
+      "w": 32,
+      "h": 88,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 56,
+      "anchor": [
+        0,
+        88
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/rack.png",
+      "sourceSha256": "2980cbb7d3465a47e9a62f6fb518c3277ee8d7b0430f6f0eb51edb2ca2f7901f",
+      "sourceRect": [
+        338,
+        127,
+        312,
+        646
+      ],
+      "sourceTopRows": 168,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "7a1079c97451871d5e60526ff597a60cf42a2b428131e0ec582544d8dc08def7"
+    },
+    {
+      "id": "mall-prop-rack-mid-a-v1",
+      "file": "assets/mall/m2-p1/mall-prop-rack-mid-a-v1.png",
+      "w": 32,
+      "h": 88,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 56,
+      "anchor": [
+        0,
+        88
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/rack.png",
+      "sourceSha256": "2980cbb7d3465a47e9a62f6fb518c3277ee8d7b0430f6f0eb51edb2ca2f7901f",
+      "sourceRect": [
+        723,
+        142,
+        246,
+        631
+      ],
+      "sourceTopRows": 164,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "4ad7162872dfde4e62acaa66915e7980e30160e340dc106e807a3aea4f7fe55f"
+    },
+    {
+      "id": "mall-prop-rack-mid-b-v1",
+      "file": "assets/mall/m2-p1/mall-prop-rack-mid-b-v1.png",
+      "w": 32,
+      "h": 88,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 56,
+      "anchor": [
+        0,
+        88
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/rack.png",
+      "sourceSha256": "2980cbb7d3465a47e9a62f6fb518c3277ee8d7b0430f6f0eb51edb2ca2f7901f",
+      "sourceRect": [
+        1026,
+        127,
+        327,
+        646
+      ],
+      "sourceTopRows": 168,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "70519947cfbe25ab559006e064348edb920721bd44dfc0aa3e813ab75a900ec4"
+    },
+    {
+      "id": "mall-prop-rack-single-v1",
+      "file": "assets/mall/m2-p1/mall-prop-rack-single-v1.png",
+      "w": 32,
+      "h": 88,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 56,
+      "anchor": [
+        0,
+        88
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/rack.png",
+      "sourceSha256": "2980cbb7d3465a47e9a62f6fb518c3277ee8d7b0430f6f0eb51edb2ca2f7901f",
+      "sourceRect": [
+        1353,
+        128,
+        225,
+        645
+      ],
+      "sourceTopRows": 168,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "fdd3942141750d1dc8cb2438d4cf33c07f390ae12d46553a928f441f73b4beea"
+    },
+    {
+      "id": "mall-prop-switchgear-end-w-v1",
+      "file": "assets/mall/m2-p1/mall-prop-switchgear-end-w-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/switchgear.png",
+      "sourceSha256": "aab4d37674c0c4064a60a4bc0486dd64a979127a8b63d9179369208418c54999",
+      "sourceRect": [
+        48,
+        46,
+        319,
+        695
+      ],
+      "sourceTopRows": 188,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": "mall-prop-switchgear-end-w-emit-v1",
+      "variant": "end-w",
+      "sha256": "b55dd04f56df47d72f74a7db7459fa0d4a457773fc7d97b8a807ae33938fd1f9"
+    },
+    {
+      "id": "mall-prop-switchgear-end-w-emit-v1",
+      "file": "assets/mall/m2-p1/mall-prop-switchgear-end-w-emit-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/switchgear.png",
+      "sourceSha256": "aab4d37674c0c4064a60a4bc0486dd64a979127a8b63d9179369208418c54999",
+      "sourceRect": [
+        48,
+        46,
+        319,
+        695
+      ],
+      "sourceTopRows": 188,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "emit",
+      "collision": null,
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "1e0a5eb9ddf38277f3dc0b5dc5ce24844ef2d1bd0e89c1a1376ed1b4008e31a9"
+    },
+    {
+      "id": "mall-prop-switchgear-end-e-v1",
+      "file": "assets/mall/m2-p1/mall-prop-switchgear-end-e-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/switchgear.png",
+      "sourceSha256": "aab4d37674c0c4064a60a4bc0486dd64a979127a8b63d9179369208418c54999",
+      "sourceRect": [
+        445,
+        46,
+        306,
+        695
+      ],
+      "sourceTopRows": 188,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": "mall-prop-switchgear-end-e-emit-v1",
+      "variant": "end-e",
+      "sha256": "d877775891b8a1eca3076682665e106947516cee32d0ef6bde69fdf4ba1366f2"
+    },
+    {
+      "id": "mall-prop-switchgear-end-e-emit-v1",
+      "file": "assets/mall/m2-p1/mall-prop-switchgear-end-e-emit-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/switchgear.png",
+      "sourceSha256": "aab4d37674c0c4064a60a4bc0486dd64a979127a8b63d9179369208418c54999",
+      "sourceRect": [
+        445,
+        46,
+        306,
+        695
+      ],
+      "sourceTopRows": 188,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "emit",
+      "collision": null,
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "4868733a1a6b9cf356f2f4efc90fe8d2ae4025d5f21469d9e98619beaa3eba54"
+    },
+    {
+      "id": "mall-prop-switchgear-mid-a-v1",
+      "file": "assets/mall/m2-p1/mall-prop-switchgear-mid-a-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/switchgear.png",
+      "sourceSha256": "aab4d37674c0c4064a60a4bc0486dd64a979127a8b63d9179369208418c54999",
+      "sourceRect": [
+        839,
+        50,
+        308,
+        690
+      ],
+      "sourceTopRows": 186,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": "mall-prop-switchgear-mid-a-emit-v1",
+      "variant": "mid-a",
+      "sha256": "a02e6a9b4d61812f8a3118a1c361013a131dc62a305208217831175711ef0bbb"
+    },
+    {
+      "id": "mall-prop-switchgear-mid-a-emit-v1",
+      "file": "assets/mall/m2-p1/mall-prop-switchgear-mid-a-emit-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/switchgear.png",
+      "sourceSha256": "aab4d37674c0c4064a60a4bc0486dd64a979127a8b63d9179369208418c54999",
+      "sourceRect": [
+        839,
+        50,
+        308,
+        690
+      ],
+      "sourceTopRows": 186,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "emit",
+      "collision": null,
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "73ea456458478d3ff9b1139bb2920f0ad16a978d5d87183683761c6b6724d5f6"
+    },
+    {
+      "id": "mall-prop-switchgear-mid-b-v1",
+      "file": "assets/mall/m2-p1/mall-prop-switchgear-mid-b-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/switchgear.png",
+      "sourceSha256": "aab4d37674c0c4064a60a4bc0486dd64a979127a8b63d9179369208418c54999",
+      "sourceRect": [
+        1233,
+        50,
+        306,
+        690
+      ],
+      "sourceTopRows": 186,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": "mall-prop-switchgear-mid-b-emit-v1",
+      "variant": "mid-b",
+      "sha256": "34c8cdc9908be12ccec84bac6e13fc923b2c58edc733a19a6bb413d7b1dd790d"
+    },
+    {
+      "id": "mall-prop-switchgear-mid-b-emit-v1",
+      "file": "assets/mall/m2-p1/mall-prop-switchgear-mid-b-emit-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/switchgear.png",
+      "sourceSha256": "aab4d37674c0c4064a60a4bc0486dd64a979127a8b63d9179369208418c54999",
+      "sourceRect": [
+        1233,
+        50,
+        306,
+        690
+      ],
+      "sourceTopRows": 186,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "emit",
+      "collision": null,
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "73ea456458478d3ff9b1139bb2920f0ad16a978d5d87183683761c6b6724d5f6"
+    },
+    {
+      "id": "mall-prop-switchgear-single-v1",
+      "file": "assets/mall/m2-p1/mall-prop-switchgear-single-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/switchgear.png",
+      "sourceSha256": "aab4d37674c0c4064a60a4bc0486dd64a979127a8b63d9179369208418c54999",
+      "sourceRect": [
+        1614,
+        46,
+        322,
+        695
+      ],
+      "sourceTopRows": 188,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": "mall-prop-switchgear-single-emit-v1",
+      "variant": "single",
+      "sha256": "ebde1c5cac9e7dfc1c83aaaa29bbe31cf5adff5fa1b286a6ab08291a5f9854f3"
+    },
+    {
+      "id": "mall-prop-switchgear-single-emit-v1",
+      "file": "assets/mall/m2-p1/mall-prop-switchgear-single-emit-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/switchgear.png",
+      "sourceSha256": "aab4d37674c0c4064a60a4bc0486dd64a979127a8b63d9179369208418c54999",
+      "sourceRect": [
+        1614,
+        46,
+        322,
+        695
+      ],
+      "sourceTopRows": 188,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "emit",
+      "collision": null,
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "8e3b0ecfdff0b6013b1ea1a9351a33f3162bb31eaaec724593a89774fa2ad50e"
+    },
+    {
+      "id": "mall-prop-lockers-end-w-v1",
+      "file": "assets/mall/m2-p1/mall-prop-lockers-end-w-v1.png",
+      "w": 32,
+      "h": 78,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 46,
+      "anchor": [
+        0,
+        78
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/lockers.png",
+      "sourceSha256": "28fdddf41745f2d0ab472f5173bb1bea392366b78b1b26fb9aa5a2c594b511fe",
+      "sourceRect": [
+        80,
+        97,
+        284,
+        644
+      ],
+      "sourceTopRows": 135,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "f29d16e193cbd83319be7a8ef230f0f9d7eb1ef6cc5c1e5fcb3635bd6faa5e75"
+    },
+    {
+      "id": "mall-prop-lockers-end-e-v1",
+      "file": "assets/mall/m2-p1/mall-prop-lockers-end-e-v1.png",
+      "w": 32,
+      "h": 78,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 46,
+      "anchor": [
+        0,
+        78
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/lockers.png",
+      "sourceSha256": "28fdddf41745f2d0ab472f5173bb1bea392366b78b1b26fb9aa5a2c594b511fe",
+      "sourceRect": [
+        364,
+        97,
+        327,
+        644
+      ],
+      "sourceTopRows": 135,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "9a4a435bed78ff7ed8e4ee656be0450b059bfc63405952dccabc00175cc1a24a"
+    },
+    {
+      "id": "mall-prop-lockers-mid-a-v1",
+      "file": "assets/mall/m2-p1/mall-prop-lockers-mid-a-v1.png",
+      "w": 32,
+      "h": 78,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 46,
+      "anchor": [
+        0,
+        78
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/lockers.png",
+      "sourceSha256": "28fdddf41745f2d0ab472f5173bb1bea392366b78b1b26fb9aa5a2c594b511fe",
+      "sourceRect": [
+        758,
+        100,
+        284,
+        635
+      ],
+      "sourceTopRows": 133,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "750918357833edfe85b884a380b347cea0bccfddd22e3f05ac80c335cd2308ec"
+    },
+    {
+      "id": "mall-prop-lockers-mid-b-v1",
+      "file": "assets/mall/m2-p1/mall-prop-lockers-mid-b-v1.png",
+      "w": 32,
+      "h": 78,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 46,
+      "anchor": [
+        0,
+        78
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/lockers.png",
+      "sourceSha256": "28fdddf41745f2d0ab472f5173bb1bea392366b78b1b26fb9aa5a2c594b511fe",
+      "sourceRect": [
+        1099,
+        100,
+        358,
+        635
+      ],
+      "sourceTopRows": 133,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "50bb541243bb58c6dd5aab2a78869b603f84368328c1592aa64d3461dd96e7fd"
+    },
+    {
+      "id": "mall-prop-lockers-single-v1",
+      "file": "assets/mall/m2-p1/mall-prop-lockers-single-v1.png",
+      "w": 32,
+      "h": 78,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 46,
+      "anchor": [
+        0,
+        78
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/lockers.png",
+      "sourceSha256": "28fdddf41745f2d0ab472f5173bb1bea392366b78b1b26fb9aa5a2c594b511fe",
+      "sourceRect": [
+        1457,
+        97,
+        285,
+        645
+      ],
+      "sourceTopRows": 135,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "3d445f3d3da27ba13440e4b9a3f218947e30001330dec9847277ae34ded6df45"
+    },
+    {
+      "id": "mall-prop-stall-end-w-v1",
+      "file": "assets/mall/m2-p1/mall-prop-stall-end-w-v1.png",
+      "w": 32,
+      "h": 76,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 44,
+      "anchor": [
+        0,
+        76
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/stall.png",
+      "sourceSha256": "ab36e97ed1a340a65570abb141e1427aefcb52b15e7782d9c164923f8810921c",
+      "sourceRect": [
+        128,
+        97,
+        234,
+        555
+      ],
+      "sourceTopRows": 289,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "cc220da3f6e46a9f5b21fe2aadc3e60be326221117c925806c1715796e112d5a"
+    },
+    {
+      "id": "mall-prop-stall-end-e-v1",
+      "file": "assets/mall/m2-p1/mall-prop-stall-end-e-v1.png",
+      "w": 32,
+      "h": 76,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 44,
+      "anchor": [
+        0,
+        76
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/stall.png",
+      "sourceSha256": "ab36e97ed1a340a65570abb141e1427aefcb52b15e7782d9c164923f8810921c",
+      "sourceRect": [
+        496,
+        111,
+        240,
+        541
+      ],
+      "sourceTopRows": 275,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "e5801ad1082d4600f4a3a47fa27be86cc1fa5b1bc9c63fc5ac9c048e12f7e1bc"
+    },
+    {
+      "id": "mall-prop-stall-mid-a-v1",
+      "file": "assets/mall/m2-p1/mall-prop-stall-mid-a-v1.png",
+      "w": 32,
+      "h": 76,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 44,
+      "anchor": [
+        0,
+        76
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/stall.png",
+      "sourceSha256": "ab36e97ed1a340a65570abb141e1427aefcb52b15e7782d9c164923f8810921c",
+      "sourceRect": [
+        871,
+        110,
+        241,
+        584
+      ],
+      "sourceTopRows": 276,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "68e89bbcb8af1bfc7e6457bdb63a04d76d21ce17ab21093534cdf100b77585d6"
+    },
+    {
+      "id": "mall-prop-stall-mid-b-v1",
+      "file": "assets/mall/m2-p1/mall-prop-stall-mid-b-v1.png",
+      "w": 32,
+      "h": 76,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 44,
+      "anchor": [
+        0,
+        76
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/stall.png",
+      "sourceSha256": "ab36e97ed1a340a65570abb141e1427aefcb52b15e7782d9c164923f8810921c",
+      "sourceRect": [
+        1247,
+        101,
+        240,
+        551
+      ],
+      "sourceTopRows": 285,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "db89821c305ef16bc8dadb50e825e4fb83bfa3ee5eb35d2a59ea5bb2a45ba49b"
+    },
+    {
+      "id": "mall-prop-stall-single-v1",
+      "file": "assets/mall/m2-p1/mall-prop-stall-single-v1.png",
+      "w": 32,
+      "h": 76,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 44,
+      "anchor": [
+        0,
+        76
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/stall.png",
+      "sourceSha256": "ab36e97ed1a340a65570abb141e1427aefcb52b15e7782d9c164923f8810921c",
+      "sourceRect": [
+        1623,
+        111,
+        237,
+        541
+      ],
+      "sourceTopRows": 275,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "299a109e5302bcc8dea496b6f25589f6bd0d2a7acdd72c169afc66822fa2ae4c"
+    },
+    {
+      "id": "mall-prop-sink-end-w-v1",
+      "file": "assets/mall/m2-p1/mall-prop-sink-end-w-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/sink.png",
+      "sourceSha256": "0fc01daab8933dc6060c776d3d306294662695a74b2a928366dd7716011b30b5",
+      "sourceRect": [
+        111,
+        218,
+        300,
+        379
+      ],
+      "sourceTopRows": 197,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "7a7cfb4e3b277b37d7a44534388919d7790b2bec7c3baa265b8c66e8ace78eef"
+    },
+    {
+      "id": "mall-prop-sink-end-e-v1",
+      "file": "assets/mall/m2-p1/mall-prop-sink-end-e-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/sink.png",
+      "sourceSha256": "0fc01daab8933dc6060c776d3d306294662695a74b2a928366dd7716011b30b5",
+      "sourceRect": [
+        501,
+        218,
+        286,
+        379
+      ],
+      "sourceTopRows": 197,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "fe61f5338b2aab10d31f1c57631ac6c2b2064da76a1ca5f6fbd13422070073c2"
+    },
+    {
+      "id": "mall-prop-sink-mid-a-v1",
+      "file": "assets/mall/m2-p1/mall-prop-sink-mid-a-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/sink.png",
+      "sourceSha256": "0fc01daab8933dc6060c776d3d306294662695a74b2a928366dd7716011b30b5",
+      "sourceRect": [
+        876,
+        218,
+        288,
+        379
+      ],
+      "sourceTopRows": 197,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "6e6c52037105895ebba0c1e8b0ef1124d7c6e885bc92b7b159d2e3a7dda95257"
+    },
+    {
+      "id": "mall-prop-sink-mid-b-v1",
+      "file": "assets/mall/m2-p1/mall-prop-sink-mid-b-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/sink.png",
+      "sourceSha256": "0fc01daab8933dc6060c776d3d306294662695a74b2a928366dd7716011b30b5",
+      "sourceRect": [
+        1251,
+        218,
+        403,
+        379
+      ],
+      "sourceTopRows": 197,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "5107bc067bfe7f5616a929362368a044488d8d7fb4f1828c8cc75e1c252147ff"
+    },
+    {
+      "id": "mall-prop-sink-single-v1",
+      "file": "assets/mall/m2-p1/mall-prop-sink-single-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/sink.png",
+      "sourceSha256": "0fc01daab8933dc6060c776d3d306294662695a74b2a928366dd7716011b30b5",
+      "sourceRect": [
+        1654,
+        218,
+        310,
+        379
+      ],
+      "sourceTopRows": 197,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "eae6662ad08292b65c185aaf46851a0cf89c45d7fdbe22f5db5be468fda557af"
+    },
+    {
+      "id": "mall-prop-cabinet-v1",
+      "file": "assets/mall/m2-p1/mall-prop-cabinet-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/cabinet.png",
+      "sourceSha256": "bff009206f80beb81c66eb7fe1ccb3b6dd39b8d500357d24b75cd8360be1bf85",
+      "sourceRect": [
+        201,
+        431,
+        529,
+        1110
+      ],
+      "sourceTopRows": 278,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "24ec34b27cc6576d4e5ae54e92e6ff106fec77eb4740755a5bc2dccab6821732"
+    },
+    {
+      "id": "mall-prop-safe-v1",
+      "file": "assets/mall/m2-p1/mall-prop-safe-v1.png",
+      "w": 32,
+      "h": 52,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 20,
+      "anchor": [
+        0,
+        52
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/safe.png",
+      "sourceSha256": "c0a37285782541f0e676b4f0def642d1d1de707da56877f8d632705314415e7a",
+      "sourceRect": [
+        203,
+        404,
+        578,
+        858
+      ],
+      "sourceTopRows": 283,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "26c51bd19bd9b036658e255a41bfc2d93607f4f45ded3b96e530e7ff9fffe805"
+    },
+    {
+      "id": "mall-prop-desk-v1",
+      "file": "assets/mall/m2-p1/mall-prop-desk-v1.png",
+      "w": 64,
+      "h": 62,
+      "footprint": [
+        2,
+        1
+      ],
+      "lift": 30,
+      "anchor": [
+        0,
+        62
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p1/desk.png",
+      "sourceSha256": "2c2740e7786eda72f4ba43440d6eaf948487c1c69ed184226aa250ef4205d725",
+      "sourceRect": [
+        520,
+        126,
+        759,
+        590
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p1",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "ad44cefb323f094e789267dc738aa9adfecd5302df5d847a1782a5ff53129ee0"
+    },
+    {
+      "id": "mall-prop-clothes-rail-end-w-v1",
+      "file": "assets/mall/m2-p2/mall-prop-clothes-rail-end-w-v1.png",
+      "w": 32,
+      "h": 54,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 22,
+      "anchor": [
+        0,
+        54
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p2/clothes-rail.png",
+      "sourceSha256": "5ef889bf13611c2859461d8fc07f402075270b6fae6c13cabe5484496319f3fc",
+      "sourceRect": [
+        32,
+        273,
+        341,
+        293
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p2",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "d7eb272be68e9843425071b247dd6d1c7508cda83695897f0461ae782e582bd4"
+    },
+    {
+      "id": "mall-prop-clothes-rail-end-e-v1",
+      "file": "assets/mall/m2-p2/mall-prop-clothes-rail-end-e-v1.png",
+      "w": 32,
+      "h": 54,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 22,
+      "anchor": [
+        0,
+        54
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p2/clothes-rail.png",
+      "sourceSha256": "5ef889bf13611c2859461d8fc07f402075270b6fae6c13cabe5484496319f3fc",
+      "sourceRect": [
+        1172,
+        273,
+        364,
+        293
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p2",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "caed0cd332344eca89accf5d0294186be4fe96665fdab8b04135a8350da913e5"
+    },
+    {
+      "id": "mall-prop-clothes-rail-mid-a-v1",
+      "file": "assets/mall/m2-p2/mall-prop-clothes-rail-mid-a-v1.png",
+      "w": 32,
+      "h": 54,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 22,
+      "anchor": [
+        0,
+        54
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p2/clothes-rail.png",
+      "sourceSha256": "5ef889bf13611c2859461d8fc07f402075270b6fae6c13cabe5484496319f3fc",
+      "sourceRect": [
+        436,
+        273,
+        306,
+        293
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p2",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "2ae4cc8f090267f43250e019a161e1f99d96632293f5df123e621c45163e4f91"
+    },
+    {
+      "id": "mall-prop-clothes-rail-mid-b-v1",
+      "file": "assets/mall/m2-p2/mall-prop-clothes-rail-mid-b-v1.png",
+      "w": 32,
+      "h": 54,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 22,
+      "anchor": [
+        0,
+        54
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p2/clothes-rail.png",
+      "sourceSha256": "5ef889bf13611c2859461d8fc07f402075270b6fae6c13cabe5484496319f3fc",
+      "sourceRect": [
+        804,
+        273,
+        303,
+        293
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p2",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "e8fb8f9d2574a4a72638ba7681e7f4c3b9a58d21fa0d3db0c9ad87d27d1cca8c"
+    },
+    {
+      "id": "mall-prop-clothes-rail-single-v1",
+      "file": "assets/mall/m2-p2/mall-prop-clothes-rail-single-v1.png",
+      "w": 32,
+      "h": 54,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 22,
+      "anchor": [
+        0,
+        54
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p2/clothes-rail.png",
+      "sourceSha256": "5ef889bf13611c2859461d8fc07f402075270b6fae6c13cabe5484496319f3fc",
+      "sourceRect": [
+        1536,
+        273,
+        352,
+        293
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p2",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "dfaee5d4531da009447d69f8a5c7f208e5715afe9db6652c9ecac0a3982933c8"
+    },
+    {
+      "id": "mall-prop-mannequin-v1",
+      "file": "assets/mall/m2-p2/mall-prop-mannequin-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p2/mannequin.png",
+      "sourceSha256": "08949d01e2127c47e72abb3a071ea17fa7e2168491897e428b83cdb3776b93d3",
+      "sourceRect": [
+        212,
+        202,
+        525,
+        1365
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p2",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "5181851bd192d94cad66594520dc9b2ff31a9e824620957fb750489f95b169e3"
+    },
+    {
+      "id": "mall-prop-fitting-room-v1",
+      "file": "assets/mall/m2-p2/mall-prop-fitting-room-v1.png",
+      "w": 64,
+      "h": 108,
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 44,
+      "anchor": [
+        0,
+        108
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p2/fitting-room.png",
+      "sourceSha256": "735cef995d6a15fb6b81dc94c3dcc831755e91aa48f21128f880f3ea7ccfe61d",
+      "sourceRect": [
+        105,
+        140,
+        755,
+        1312
+      ],
+      "sourceTopRows": 656,
+      "revision": 1,
+      "batch": "m2-p2",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "f2ddf5db7884d4a215f3425cabdc07d4b7240a37a77d528cec917861b2d00a33"
+    },
+    {
+      "id": "mall-prop-ball-pool-v1",
+      "file": "assets/mall/m2-p2/mall-prop-ball-pool-v1.png",
+      "w": 128,
+      "h": 132,
+      "footprint": [
+        4,
+        3
+      ],
+      "lift": 36,
+      "anchor": [
+        0,
+        132
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p2/ball-pool.png",
+      "sourceSha256": "50bfef382145583dd8a15ef6a8db0c48407eb65e86db7c39a8988a5268a61445",
+      "sourceRect": [
+        100,
+        186,
+        1036,
+        921
+      ],
+      "sourceTopRows": 635,
+      "revision": 1,
+      "batch": "m2-p2",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "6ff5b1ad32707a4a7e383d3b6adfe5c784d3699f3ab73857cd4ddb62a75b26b4"
+    },
+    {
+      "id": "mall-prop-slide-v1",
+      "file": "assets/mall/m2-p2/mall-prop-slide-v1.png",
+      "w": 64,
+      "h": 56,
+      "footprint": [
+        2,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p2/slide.png",
+      "sourceSha256": "11fd3b358f652985e09c6af65097ec2073e7c320047ad7eea36da1866b014935",
+      "sourceRect": [
+        492,
+        190,
+        795,
+        531
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p2",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "2dad6d01d5621e90a424bc17fe1752cc6fdb78541b47e4a678cf5e1d1338b0b7"
+    },
+    {
+      "id": "mall-prop-bamboo-screen-v1",
+      "file": "assets/mall/m2-p2/mall-prop-bamboo-screen-v1.png",
+      "w": 32,
+      "h": 144,
+      "footprint": [
+        1,
+        3
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        144
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p2/bamboo-screen.png",
+      "sourceSha256": "ec23fee116c2b038f2bf4e376865915a14f03fa0f19941407f651dab6c9ba72e",
+      "sourceRect": [
+        427,
+        85,
+        171,
+        1362
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p2",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "18677a233a02e99d8a10cc3967734a80239432a3b54c35f8ea5e3ac260b979c2"
+    },
+    {
+      "id": "mall-prop-car-v1",
+      "file": "assets/mall/m2-p3/mall-prop-car-v1.png",
+      "w": 96,
+      "h": 82,
+      "footprint": [
+        3,
+        2
+      ],
+      "lift": 18,
+      "anchor": [
+        0,
+        82
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/car.png",
+      "sourceSha256": "b1b27eb7a4fc12c0372372ba334167a11d5f75fc481e802c49f7b29783464a19",
+      "sourceRect": [
+        38,
+        324,
+        1281,
+        612
+      ],
+      "sourceTopRows": 428,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "9bd7a14ee64b9de3cfa1e093edd3421a613e19c6fd988d8d1bf93d3975a59216"
+    },
+    {
+      "id": "mall-prop-barrier-end-w-v1",
+      "file": "assets/mall/m2-p3/mall-prop-barrier-end-w-v1.png",
+      "w": 32,
+      "h": 44,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 12,
+      "anchor": [
+        0,
+        44
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/barrier.png",
+      "sourceSha256": "314720eb39d5f8183f17b0da7955bf2424650bef864be0c903be4bf3b7eaa2f9",
+      "sourceRect": [
+        81,
+        197,
+        311,
+        398
+      ],
+      "sourceTopRows": 283,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "1fa2c1501890b62ae302ae827c39550d652cffe6dbccf1c2b8edeb93bb14e8a0"
+    },
+    {
+      "id": "mall-prop-barrier-end-e-v1",
+      "file": "assets/mall/m2-p3/mall-prop-barrier-end-e-v1.png",
+      "w": 32,
+      "h": 44,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 12,
+      "anchor": [
+        0,
+        44
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/barrier.png",
+      "sourceSha256": "314720eb39d5f8183f17b0da7955bf2424650bef864be0c903be4bf3b7eaa2f9",
+      "sourceRect": [
+        461,
+        197,
+        316,
+        398
+      ],
+      "sourceTopRows": 283,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "fbb79c9a7ef1ef9e1c8af19d873e1d2a3e3684133101ea660a213b80db617aa4"
+    },
+    {
+      "id": "mall-prop-barrier-mid-a-v1",
+      "file": "assets/mall/m2-p3/mall-prop-barrier-mid-a-v1.png",
+      "w": 32,
+      "h": 44,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 12,
+      "anchor": [
+        0,
+        44
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/barrier.png",
+      "sourceSha256": "314720eb39d5f8183f17b0da7955bf2424650bef864be0c903be4bf3b7eaa2f9",
+      "sourceRect": [
+        847,
+        197,
+        289,
+        398
+      ],
+      "sourceTopRows": 283,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "5c306720f472f885d64230af59e0f93622c97e567b3a03af2d59fd7df4246e2c"
+    },
+    {
+      "id": "mall-prop-barrier-mid-b-v1",
+      "file": "assets/mall/m2-p3/mall-prop-barrier-mid-b-v1.png",
+      "w": 32,
+      "h": 44,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 12,
+      "anchor": [
+        0,
+        44
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/barrier.png",
+      "sourceSha256": "314720eb39d5f8183f17b0da7955bf2424650bef864be0c903be4bf3b7eaa2f9",
+      "sourceRect": [
+        1218,
+        197,
+        300,
+        398
+      ],
+      "sourceTopRows": 283,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "ac264f68418c52d0e7be72c8efa35aaaf52ba0dcf2c036bb7c27b6e54eba467e"
+    },
+    {
+      "id": "mall-prop-barrier-single-v1",
+      "file": "assets/mall/m2-p3/mall-prop-barrier-single-v1.png",
+      "w": 32,
+      "h": 44,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 12,
+      "anchor": [
+        0,
+        44
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/barrier.png",
+      "sourceSha256": "314720eb39d5f8183f17b0da7955bf2424650bef864be0c903be4bf3b7eaa2f9",
+      "sourceRect": [
+        1592,
+        197,
+        293,
+        398
+      ],
+      "sourceTopRows": 283,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "d012e6d925fd6af64d0b639bc23d5f60a66bbf4bc7aef65bd5344ee9e88c6360"
+    },
+    {
+      "id": "mall-prop-dumpster-v1",
+      "file": "assets/mall/m2-p3/mall-prop-dumpster-v1.png",
+      "w": 64,
+      "h": 72,
+      "footprint": [
+        2,
+        1
+      ],
+      "lift": 40,
+      "anchor": [
+        0,
+        72
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/dumpster.png",
+      "sourceSha256": "57134707a391eba8a2a48f01c0082ac350b1252154b99e4ff5290edc80635519",
+      "sourceRect": [
+        34,
+        213,
+        1115,
+        1004
+      ],
+      "sourceTopRows": 452,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "ce818e4c3885450f034e7424e514dc496f5c71de72c16e5c1199a650beafb12c"
+    },
+    {
+      "id": "mall-prop-container-v1",
+      "file": "assets/mall/m2-p3/mall-prop-container-v1.png",
+      "w": 128,
+      "h": 126,
+      "footprint": [
+        4,
+        2
+      ],
+      "lift": 62,
+      "anchor": [
+        0,
+        126
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/container.png",
+      "sourceSha256": "b3483343d6f81501642ec14792eb5711978cb135f26ca42a833b642271ad2e7d",
+      "sourceRect": [
+        75,
+        83,
+        1635,
+        730
+      ],
+      "sourceTopRows": 358,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "2d1ce7adf177ab59b6f62de49e65c164c9274d4c75a077f3a5a5df5cac8a4063"
+    },
+    {
+      "id": "mall-prop-ac-unit-v1",
+      "file": "assets/mall/m2-p3/mall-prop-ac-unit-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/ac-unit.png",
+      "sourceSha256": "814f449eb3a8538205d4e7f4924cce1e0ff854167a94b2a88013503396f236d9",
+      "sourceRect": [
+        166,
+        468,
+        617,
+        791
+      ],
+      "sourceTopRows": 483,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "6e66477bf53ac95ef89dd8ba8ee3c8f83aaab6ae892ea99a2769cccedebef48f"
+    },
+    {
+      "id": "mall-ground-concrete-a-v1",
+      "file": "assets/mall/m2-p3/mall-ground-concrete-a-v1.png",
+      "w": 64,
+      "h": 64,
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 0,
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/ground-concrete.png",
+      "sourceSha256": "e4f7a7f887f36f5da2e586d67be70bb98a4401aaf069d804e7947cb7373382c5",
+      "sourceRect": [
+        81,
+        80,
+        763,
+        727
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 12,
+      "kind": "ground",
+      "collision": null,
+      "tile": "xy",
+      "emit": null,
+      "variant": "a",
+      "sha256": "e516ca8af09fdfca2399e83ae526a70af04aaec4c484aff1c8165961ab563254"
+    },
+    {
+      "id": "mall-ground-concrete-b-v1",
+      "file": "assets/mall/m2-p3/mall-ground-concrete-b-v1.png",
+      "w": 64,
+      "h": 64,
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 0,
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/ground-concrete.png",
+      "sourceSha256": "e4f7a7f887f36f5da2e586d67be70bb98a4401aaf069d804e7947cb7373382c5",
+      "sourceRect": [
+        930,
+        80,
+        764,
+        727
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 12,
+      "kind": "ground",
+      "collision": null,
+      "tile": "xy",
+      "emit": null,
+      "variant": "b",
+      "sha256": "cd7aa290e76400adefa967401b68b3d4c799da32f0f75ac5356940ef1d50d97e"
+    },
+    {
+      "id": "mall-ground-carpet-a-v1",
+      "file": "assets/mall/m2-p3/mall-ground-carpet-a-v1.png",
+      "w": 64,
+      "h": 64,
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 0,
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/ground-carpet.png",
+      "sourceSha256": "e511cb425d5a1005edac324b884a7c88e0f7c1af4ba48aa4745088b239cebd3f",
+      "sourceRect": [
+        49,
+        49,
+        789,
+        788
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 12,
+      "kind": "ground",
+      "collision": null,
+      "tile": "xy",
+      "emit": null,
+      "variant": "a",
+      "sha256": "4bc65a3023f1e3dc1e28c0180aa439e4bcc60155b33cfb5d51f8e8426e14006e"
+    },
+    {
+      "id": "mall-ground-carpet-b-v1",
+      "file": "assets/mall/m2-p3/mall-ground-carpet-b-v1.png",
+      "w": 64,
+      "h": 64,
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 0,
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/ground-carpet.png",
+      "sourceSha256": "e511cb425d5a1005edac324b884a7c88e0f7c1af4ba48aa4745088b239cebd3f",
+      "sourceRect": [
+        936,
+        49,
+        789,
+        788
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 12,
+      "kind": "ground",
+      "collision": null,
+      "tile": "xy",
+      "emit": null,
+      "variant": "b",
+      "sha256": "684296623b8ff88f213c825c7adf88b11631eedd9242770cd5f044ca2a2b8bd6"
+    },
+    {
+      "id": "mall-ground-rubber-a-v1",
+      "file": "assets/mall/m2-p3/mall-ground-rubber-a-v1.png",
+      "w": 64,
+      "h": 64,
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 0,
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/ground-rubber.png",
+      "sourceSha256": "dd2156670aab1c9af382287295477da630a398b88cd33ad194b40cb5116e4809",
+      "sourceRect": [
+        77,
+        76,
+        756,
+        738
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 12,
+      "kind": "ground",
+      "collision": null,
+      "tile": "xy",
+      "emit": null,
+      "variant": "a",
+      "sha256": "904954af4c6d22107a82cc8292f404396d078eb90c6825eecbf422b5727f7901"
+    },
+    {
+      "id": "mall-ground-rubber-b-v1",
+      "file": "assets/mall/m2-p3/mall-ground-rubber-b-v1.png",
+      "w": 64,
+      "h": 64,
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 0,
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/ground-rubber.png",
+      "sourceSha256": "dd2156670aab1c9af382287295477da630a398b88cd33ad194b40cb5116e4809",
+      "sourceRect": [
+        941,
+        77,
+        757,
+        737
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 12,
+      "kind": "ground",
+      "collision": null,
+      "tile": "xy",
+      "emit": null,
+      "variant": "b",
+      "sha256": "d69738c83cdb1131e9fb580fe363f309e83e6b6263905ea2eb095d7b6ec5836c"
+    },
+    {
+      "id": "mall-ground-tile-wc-a-v1",
+      "file": "assets/mall/m2-p3/mall-ground-tile-wc-a-v1.png",
+      "w": 64,
+      "h": 64,
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 0,
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/ground-tile-wc.png",
+      "sourceSha256": "d55f912c9e68b2b895d1b0667787708624fa412c5d4d396844189a6cb3a6eb66",
+      "sourceRect": [
+        58,
+        58,
+        793,
+        793
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 12,
+      "kind": "ground",
+      "collision": null,
+      "tile": "xy",
+      "emit": null,
+      "variant": "a",
+      "sha256": "d942f63af44722dc438d72e77fa091d543bb04bf10ffde31d3bb59da0dfabbdd"
+    },
+    {
+      "id": "mall-ground-tile-wc-b-v1",
+      "file": "assets/mall/m2-p3/mall-ground-tile-wc-b-v1.png",
+      "w": 64,
+      "h": 64,
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 0,
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/ground-tile-wc.png",
+      "sourceSha256": "d55f912c9e68b2b895d1b0667787708624fa412c5d4d396844189a6cb3a6eb66",
+      "sourceRect": [
+        924,
+        58,
+        794,
+        793
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 12,
+      "kind": "ground",
+      "collision": null,
+      "tile": "xy",
+      "emit": null,
+      "variant": "b",
+      "sha256": "cc54e31a6d2d568ec0b516d637d22f2f6ae95a30e4dce5a3132fd7f544054a2c"
+    },
+    {
+      "id": "mall-ground-asphalt-a-v1",
+      "file": "assets/mall/m2-p3/mall-ground-asphalt-a-v1.png",
+      "w": 64,
+      "h": 64,
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 0,
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/ground-asphalt.png",
+      "sourceSha256": "824f57af39d77e2225ca1cafa7b36d3df4ff2c7b360d1f343fc1176a45c24d3c",
+      "sourceRect": [
+        59,
+        54,
+        788,
+        779
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 12,
+      "kind": "ground",
+      "collision": null,
+      "tile": "xy",
+      "emit": null,
+      "variant": "a",
+      "sha256": "cdd13b41b0e176969a3b4ad5520b2cdc0ef6c35d53f2253bb0fdf84aa7c1ae1c"
+    },
+    {
+      "id": "mall-ground-asphalt-b-v1",
+      "file": "assets/mall/m2-p3/mall-ground-asphalt-b-v1.png",
+      "w": 64,
+      "h": 64,
+      "footprint": [
+        2,
+        2
+      ],
+      "lift": 0,
+      "anchor": [
+        0,
+        0
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p3/ground-asphalt.png",
+      "sourceSha256": "824f57af39d77e2225ca1cafa7b36d3df4ff2c7b360d1f343fc1176a45c24d3c",
+      "sourceRect": [
+        928,
+        54,
+        788,
+        779
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p3",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 12,
+      "kind": "ground",
+      "collision": null,
+      "tile": "xy",
+      "emit": null,
+      "variant": "b",
+      "sha256": "ddd3bbbc5eea60de44bc755bbb3a3be4a3461f152b3e78e81126bec42c86ecd1"
+    },
+    {
+      "id": "mall-prop-shelf-wall-pharmacy-end-w-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-pharmacy-end-w-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-pharmacy.png",
+      "sourceSha256": "89ea1f74aefc6d6c35ebe316801d4047e69ac51a6a4d3a7ee79b1af3b2628444",
+      "sourceRect": [
+        82,
+        88,
+        257,
+        620
+      ],
+      "sourceTopRows": 155,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "a2791d9151ce8647a0c36847b102d6eb7cc5b86f6d195bd9a523276130e4bc57"
+    },
+    {
+      "id": "mall-prop-shelf-wall-pharmacy-end-e-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-pharmacy-end-e-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-pharmacy.png",
+      "sourceSha256": "89ea1f74aefc6d6c35ebe316801d4047e69ac51a6a4d3a7ee79b1af3b2628444",
+      "sourceRect": [
+        471,
+        93,
+        259,
+        615
+      ],
+      "sourceTopRows": 154,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "a91d858d8279c6aaa27141f2b606824206d720981ea25c60f428123c4988a459"
+    },
+    {
+      "id": "mall-prop-shelf-wall-pharmacy-mid-a-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-pharmacy-mid-a-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-pharmacy.png",
+      "sourceSha256": "89ea1f74aefc6d6c35ebe316801d4047e69ac51a6a4d3a7ee79b1af3b2628444",
+      "sourceRect": [
+        862,
+        93,
+        260,
+        615
+      ],
+      "sourceTopRows": 154,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "0bad4a406425bd7ce282d2f0e8178747681b4d2f4a71ee37c7863e4dfd679337"
+    },
+    {
+      "id": "mall-prop-shelf-wall-pharmacy-mid-b-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-pharmacy-mid-b-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-pharmacy.png",
+      "sourceSha256": "89ea1f74aefc6d6c35ebe316801d4047e69ac51a6a4d3a7ee79b1af3b2628444",
+      "sourceRect": [
+        1253,
+        89,
+        272,
+        619
+      ],
+      "sourceTopRows": 155,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "96317c3f578894fc3c3f27ab1adbf3eb4a93357e976760903ac49d95be2ab2f1"
+    },
+    {
+      "id": "mall-prop-shelf-wall-pharmacy-single-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-pharmacy-single-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-pharmacy.png",
+      "sourceSha256": "89ea1f74aefc6d6c35ebe316801d4047e69ac51a6a4d3a7ee79b1af3b2628444",
+      "sourceRect": [
+        1644,
+        85,
+        258,
+        623
+      ],
+      "sourceTopRows": 156,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "91ff9e182c6d654565aa491d6e9313683e73cef4f75d96520085856f8b1653e5"
+    },
+    {
+      "id": "mall-prop-shelf-wall-grocery-end-w-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-grocery-end-w-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-grocery.png",
+      "sourceSha256": "21e0de52be87a7f6eff81a75a89bc836dc77416c24a45eba380eeb95d1b750db",
+      "sourceRect": [
+        64,
+        65,
+        301,
+        650
+      ],
+      "sourceTopRows": 163,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "bb7020f246494be7d835e884d75cc1e1e44b71edb752231e7169025cb310e5e2"
+    },
+    {
+      "id": "mall-prop-shelf-wall-grocery-end-e-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-grocery-end-e-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-grocery.png",
+      "sourceSha256": "21e0de52be87a7f6eff81a75a89bc836dc77416c24a45eba380eeb95d1b750db",
+      "sourceRect": [
+        462,
+        64,
+        279,
+        651
+      ],
+      "sourceTopRows": 163,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "c6f473cdd39acf4a33be3ef0537eea0489b7c7682582dab1f280c93c40533275"
+    },
+    {
+      "id": "mall-prop-shelf-wall-grocery-mid-a-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-grocery-mid-a-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-grocery.png",
+      "sourceSha256": "21e0de52be87a7f6eff81a75a89bc836dc77416c24a45eba380eeb95d1b750db",
+      "sourceRect": [
+        851,
+        65,
+        281,
+        650
+      ],
+      "sourceTopRows": 163,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "864a56cdeecf1a612b5e9edf155c775bffe0e1fd56d7ecab73d3bfc05a62219a"
+    },
+    {
+      "id": "mall-prop-shelf-wall-grocery-mid-b-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-grocery-mid-b-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-grocery.png",
+      "sourceSha256": "21e0de52be87a7f6eff81a75a89bc836dc77416c24a45eba380eeb95d1b750db",
+      "sourceRect": [
+        1227,
+        65,
+        295,
+        650
+      ],
+      "sourceTopRows": 163,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "903c14c3509d3fd29400a9ed75deede8b7377116175ad4ddc1e9f01939b7dd6e"
+    },
+    {
+      "id": "mall-prop-shelf-wall-grocery-single-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-grocery-single-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-grocery.png",
+      "sourceSha256": "21e0de52be87a7f6eff81a75a89bc836dc77416c24a45eba380eeb95d1b750db",
+      "sourceRect": [
+        1618,
+        65,
+        301,
+        650
+      ],
+      "sourceTopRows": 163,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "192c438d3caae20c6016dffca0e3cbd6098c8ba914222d774558664e0aa8eb73"
+    },
+    {
+      "id": "mall-prop-shelf-wall-phones-end-w-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-phones-end-w-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-phones.png",
+      "sourceSha256": "c5849f9bb0761cf73a5b167a298720010b38f6a3c73a0282f8ba574122e67ccd",
+      "sourceRect": [
+        68,
+        59,
+        259,
+        662
+      ],
+      "sourceTopRows": 166,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "7735557d141520f2bf6871aeb6c166e538a6c4fa7e414cfcd22d4ab506e027c0"
+    },
+    {
+      "id": "mall-prop-shelf-wall-phones-end-e-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-phones-end-e-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-phones.png",
+      "sourceSha256": "c5849f9bb0761cf73a5b167a298720010b38f6a3c73a0282f8ba574122e67ccd",
+      "sourceRect": [
+        460,
+        59,
+        250,
+        662
+      ],
+      "sourceTopRows": 166,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "d403ff7b6b719930fcff00fcdbcff24e75308dabb2271530fc09a26d32969de4"
+    },
+    {
+      "id": "mall-prop-shelf-wall-phones-mid-a-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-phones-mid-a-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-phones.png",
+      "sourceSha256": "c5849f9bb0761cf73a5b167a298720010b38f6a3c73a0282f8ba574122e67ccd",
+      "sourceRect": [
+        846,
+        59,
+        269,
+        662
+      ],
+      "sourceTopRows": 166,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "261ac8ebeafc738649905afae272d3a67f1031dd98d2a4186b0536f75fd228aa"
+    },
+    {
+      "id": "mall-prop-shelf-wall-phones-mid-b-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-phones-mid-b-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-phones.png",
+      "sourceSha256": "c5849f9bb0761cf73a5b167a298720010b38f6a3c73a0282f8ba574122e67ccd",
+      "sourceRect": [
+        1246,
+        59,
+        266,
+        662
+      ],
+      "sourceTopRows": 166,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "0f59d3b85d1bdd4641c0d3db0842c8a4b699a1e9cf0d62345fb63ae2c2d21d19"
+    },
+    {
+      "id": "mall-prop-shelf-wall-phones-single-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-phones-single-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-phones.png",
+      "sourceSha256": "c5849f9bb0761cf73a5b167a298720010b38f6a3c73a0282f8ba574122e67ccd",
+      "sourceRect": [
+        1636,
+        60,
+        280,
+        661
+      ],
+      "sourceTopRows": 165,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "c0f4b52b36dcce6fa20f109681f1ee7d894cc67e62370b856aa07b895c262756"
+    },
+    {
+      "id": "mall-prop-shelf-wall-hardware-end-w-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-hardware-end-w-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-hardware.png",
+      "sourceSha256": "05745ee8f458d72df037bf910ae3c389052fcabc7fd3df13b8dfbef5864988a1",
+      "sourceRect": [
+        97,
+        71,
+        272,
+        655
+      ],
+      "sourceTopRows": 164,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "c408c1bc89c8160fba415bbace5f77394a260f2c7ba05a6790b89cc27ef278e2"
+    },
+    {
+      "id": "mall-prop-shelf-wall-hardware-end-e-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-hardware-end-e-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-hardware.png",
+      "sourceSha256": "05745ee8f458d72df037bf910ae3c389052fcabc7fd3df13b8dfbef5864988a1",
+      "sourceRect": [
+        484,
+        71,
+        238,
+        655
+      ],
+      "sourceTopRows": 164,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "81e8136a9c4114483664b1c85f39f4a59bf3eeb4f8986ac2e190a46b38048726"
+    },
+    {
+      "id": "mall-prop-shelf-wall-hardware-mid-a-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-hardware-mid-a-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-hardware.png",
+      "sourceSha256": "05745ee8f458d72df037bf910ae3c389052fcabc7fd3df13b8dfbef5864988a1",
+      "sourceRect": [
+        837,
+        71,
+        265,
+        655
+      ],
+      "sourceTopRows": 164,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "82ccd74d6b27c03a70e41f8ed45ed0c6d24e4db343da00e5ba2489dd582b6f2a"
+    },
+    {
+      "id": "mall-prop-shelf-wall-hardware-mid-b-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-hardware-mid-b-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-hardware.png",
+      "sourceSha256": "05745ee8f458d72df037bf910ae3c389052fcabc7fd3df13b8dfbef5864988a1",
+      "sourceRect": [
+        1214,
+        71,
+        279,
+        655
+      ],
+      "sourceTopRows": 164,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "792d0c1a78124765b2f13d0c26f19741103ae103f408f58ff6e7edf7bd5d8fca"
+    },
+    {
+      "id": "mall-prop-shelf-wall-hardware-single-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-hardware-single-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-hardware.png",
+      "sourceSha256": "05745ee8f458d72df037bf910ae3c389052fcabc7fd3df13b8dfbef5864988a1",
+      "sourceRect": [
+        1603,
+        71,
+        285,
+        655
+      ],
+      "sourceTopRows": 164,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "64665485d50ab6031385433cea39b3381d8896e05cca47e57e65e65798688988"
+    },
+    {
+      "id": "mall-prop-shelf-wall-clothes-end-w-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-clothes-end-w-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-clothes.png",
+      "sourceSha256": "748f59740af1176be66db3e907d6b606b7fdf0dfd3695747eb6985efabcf76bf",
+      "sourceRect": [
+        92,
+        79,
+        256,
+        628
+      ],
+      "sourceTopRows": 157,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "b1b936f5868c45dd6677464b466bb0ad3d659ae870c112b5cff95aa905e2bccc"
+    },
+    {
+      "id": "mall-prop-shelf-wall-clothes-end-e-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-clothes-end-e-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-clothes.png",
+      "sourceSha256": "748f59740af1176be66db3e907d6b606b7fdf0dfd3695747eb6985efabcf76bf",
+      "sourceRect": [
+        472,
+        96,
+        266,
+        612
+      ],
+      "sourceTopRows": 153,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "8b5d68681616990a0a69a404c31a33f2050764f6d822ec5a27c74122f47f9a98"
+    },
+    {
+      "id": "mall-prop-shelf-wall-clothes-mid-a-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-clothes-mid-a-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-clothes.png",
+      "sourceSha256": "748f59740af1176be66db3e907d6b606b7fdf0dfd3695747eb6985efabcf76bf",
+      "sourceRect": [
+        860,
+        98,
+        266,
+        610
+      ],
+      "sourceTopRows": 153,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "5448519970480cdc06539f79cd9d9b7501043c955ddcce5e86a303ae5feb14f7"
+    },
+    {
+      "id": "mall-prop-shelf-wall-clothes-mid-b-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-clothes-mid-b-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-clothes.png",
+      "sourceSha256": "748f59740af1176be66db3e907d6b606b7fdf0dfd3695747eb6985efabcf76bf",
+      "sourceRect": [
+        1244,
+        98,
+        266,
+        610
+      ],
+      "sourceTopRows": 153,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "35fec66b10d93f00db1caec2f31c9505d4cc24c6a12e2cd85420fca998775863"
+    },
+    {
+      "id": "mall-prop-shelf-wall-clothes-single-v1",
+      "file": "assets/mall/m2-p0/mall-prop-shelf-wall-clothes-single-v1.png",
+      "w": 32,
+      "h": 80,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 48,
+      "anchor": [
+        0,
+        80
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/shelf-wall-clothes.png",
+      "sourceSha256": "748f59740af1176be66db3e907d6b606b7fdf0dfd3695747eb6985efabcf76bf",
+      "sourceRect": [
+        1628,
+        79,
+        265,
+        629
+      ],
+      "sourceTopRows": 157,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "c3f2b964ec25d92f12b345f3acbf01cb2cee06cce6b43ee554035c1b29296bc7"
+    },
+    {
+      "id": "mall-prop-counter-service-end-w-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-service-end-w-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-service.png",
+      "sourceSha256": "b3a37d6e2e17fb8d85564df0413371639ba3a739c29b10943afbe9fb2fe98840",
+      "sourceRect": [
+        72,
+        222,
+        320,
+        379
+      ],
+      "sourceTopRows": 192,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "59a8330a1536f820e63f718844ccd5b21c7c163600289faf2b4d3423a1c80718"
+    },
+    {
+      "id": "mall-prop-counter-service-end-e-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-service-end-e-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-service.png",
+      "sourceSha256": "b3a37d6e2e17fb8d85564df0413371639ba3a739c29b10943afbe9fb2fe98840",
+      "sourceRect": [
+        455,
+        222,
+        317,
+        379
+      ],
+      "sourceTopRows": 192,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "048944c4b84e138fcaeb5cc05e699e113ff816889bf9a7552c948515d7b596b4"
+    },
+    {
+      "id": "mall-prop-counter-service-mid-a-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-service-mid-a-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-service.png",
+      "sourceSha256": "b3a37d6e2e17fb8d85564df0413371639ba3a739c29b10943afbe9fb2fe98840",
+      "sourceRect": [
+        835,
+        222,
+        315,
+        379
+      ],
+      "sourceTopRows": 192,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "d5c61bab1e67d9df40f7f5503622fdd06330eb08ed9e3825651bc619deec1921"
+    },
+    {
+      "id": "mall-prop-counter-service-mid-b-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-service-mid-b-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-service.png",
+      "sourceSha256": "b3a37d6e2e17fb8d85564df0413371639ba3a739c29b10943afbe9fb2fe98840",
+      "sourceRect": [
+        1211,
+        222,
+        317,
+        379
+      ],
+      "sourceTopRows": 192,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "16f475dc1c83cc8c6c56fef2b8ffb1ce27896ddf576cc5ddf045743587bf7009"
+    },
+    {
+      "id": "mall-prop-counter-service-single-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-service-single-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-service.png",
+      "sourceSha256": "b3a37d6e2e17fb8d85564df0413371639ba3a739c29b10943afbe9fb2fe98840",
+      "sourceRect": [
+        1592,
+        205,
+        322,
+        396
+      ],
+      "sourceTopRows": 209,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "ba2b0a3a317f75e2a06a4e09ba4642efd16454c650d540971ec2085b792f4503"
+    },
+    {
+      "id": "mall-prop-counter-diner-end-w-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-diner-end-w-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-diner.png",
+      "sourceSha256": "c2dc5f11d5afb18c8514f3eb4d0cbf52139ddbf6fcbe64a74870aa78d10b1abe",
+      "sourceRect": [
+        82,
+        273,
+        315,
+        380
+      ],
+      "sourceTopRows": 157,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "fdc80d6f5df52d37c053d4c19fa1d40f7b4389fba2f6c9173a6b7d422e024a14"
+    },
+    {
+      "id": "mall-prop-counter-diner-end-e-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-diner-end-e-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-diner.png",
+      "sourceSha256": "c2dc5f11d5afb18c8514f3eb4d0cbf52139ddbf6fcbe64a74870aa78d10b1abe",
+      "sourceRect": [
+        397,
+        193,
+        390,
+        460
+      ],
+      "sourceTopRows": 237,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "12622ba27272f6b2614143d158cfe447926e127d701e796b564bb6f703350e49"
+    },
+    {
+      "id": "mall-prop-counter-diner-mid-a-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-diner-mid-a-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-diner.png",
+      "sourceSha256": "c2dc5f11d5afb18c8514f3eb4d0cbf52139ddbf6fcbe64a74870aa78d10b1abe",
+      "sourceRect": [
+        835,
+        273,
+        314,
+        380
+      ],
+      "sourceTopRows": 157,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "f0696500c93d92cbe66794a2a95ca5a98d9c0274913ce3b2420cd3c5edfa41aa"
+    },
+    {
+      "id": "mall-prop-counter-diner-mid-b-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-diner-mid-b-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-diner.png",
+      "sourceSha256": "c2dc5f11d5afb18c8514f3eb4d0cbf52139ddbf6fcbe64a74870aa78d10b1abe",
+      "sourceRect": [
+        1206,
+        249,
+        380,
+        404
+      ],
+      "sourceTopRows": 181,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "ab5098e3b639c4f236748de2f1f563f50e63410c89fed2946fdab3a0aa45c056"
+    },
+    {
+      "id": "mall-prop-counter-diner-single-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-diner-single-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-diner.png",
+      "sourceSha256": "c2dc5f11d5afb18c8514f3eb4d0cbf52139ddbf6fcbe64a74870aa78d10b1abe",
+      "sourceRect": [
+        1586,
+        166,
+        316,
+        487
+      ],
+      "sourceTopRows": 264,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "d6e697843943f9c464af78f4debfa137d19a84048a40c412b11181c6d8a6fa58"
+    },
+    {
+      "id": "mall-prop-counter-boutique-end-w-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-boutique-end-w-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-boutique.png",
+      "sourceSha256": "2b736bcc0e3c88febd2bd321c19809fc8c1d3263afdbf1542f7c421ae7cab291",
+      "sourceRect": [
+        82,
+        248,
+        292,
+        400
+      ],
+      "sourceTopRows": 192,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "d7af716bdeb98dc3a0c975e25f2077eca39666a0ce7b78e9b613acf53389864c"
+    },
+    {
+      "id": "mall-prop-counter-boutique-end-e-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-boutique-end-e-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-boutique.png",
+      "sourceSha256": "2b736bcc0e3c88febd2bd321c19809fc8c1d3263afdbf1542f7c421ae7cab291",
+      "sourceRect": [
+        480,
+        248,
+        264,
+        400
+      ],
+      "sourceTopRows": 192,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "7cc4da6eef4652c4da8054565768b00a3b0bc7efc164022825e84ad47f4fefb3"
+    },
+    {
+      "id": "mall-prop-counter-boutique-mid-a-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-boutique-mid-a-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-boutique.png",
+      "sourceSha256": "2b736bcc0e3c88febd2bd321c19809fc8c1d3263afdbf1542f7c421ae7cab291",
+      "sourceRect": [
+        841,
+        248,
+        299,
+        400
+      ],
+      "sourceTopRows": 192,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "c9f2cdd76fe80b5432b838290a10aaf9ed2e931193b538b853c28e357ac84b3c"
+    },
+    {
+      "id": "mall-prop-counter-boutique-mid-b-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-boutique-mid-b-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-boutique.png",
+      "sourceSha256": "2b736bcc0e3c88febd2bd321c19809fc8c1d3263afdbf1542f7c421ae7cab291",
+      "sourceRect": [
+        1215,
+        248,
+        298,
+        400
+      ],
+      "sourceTopRows": 192,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "8bf43a003f86e90891de128c2c303235516da40b384343df6d04610625bc2642"
+    },
+    {
+      "id": "mall-prop-counter-boutique-single-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-boutique-single-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-boutique.png",
+      "sourceSha256": "2b736bcc0e3c88febd2bd321c19809fc8c1d3263afdbf1542f7c421ae7cab291",
+      "sourceRect": [
+        1609,
+        142,
+        292,
+        506
+      ],
+      "sourceTopRows": 298,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "f8b8f7f310df97c95233307eb0e3a53641abd8399083163d76257852c758e378"
+    },
+    {
+      "id": "mall-prop-counter-wood-end-w-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-wood-end-w-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-wood.png",
+      "sourceSha256": "a46afba939c7a78f7150f4d0acaefdf557ac8abea7e8c0dd423c6e7c9e58d0f6",
+      "sourceRect": [
+        51,
+        189,
+        316,
+        454
+      ],
+      "sourceTopRows": 197,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "50d949874a1764d1474ecf8a7e973aa96dca79a5ccbe3616c2ca74ee1d1baca7"
+    },
+    {
+      "id": "mall-prop-counter-wood-end-e-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-wood-end-e-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-wood.png",
+      "sourceSha256": "a46afba939c7a78f7150f4d0acaefdf557ac8abea7e8c0dd423c6e7c9e58d0f6",
+      "sourceRect": [
+        455,
+        189,
+        288,
+        454
+      ],
+      "sourceTopRows": 197,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "04ccd03329cae14d703bbd6c43f3083764f75a7a709549d9504c8e44fe70ee00"
+    },
+    {
+      "id": "mall-prop-counter-wood-mid-a-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-wood-mid-a-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-wood.png",
+      "sourceSha256": "a46afba939c7a78f7150f4d0acaefdf557ac8abea7e8c0dd423c6e7c9e58d0f6",
+      "sourceRect": [
+        839,
+        196,
+        303,
+        441
+      ],
+      "sourceTopRows": 190,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "a3e131c50c52e2409536182845a1dbbcf35ac6189a73a51859de7af69d9007fc"
+    },
+    {
+      "id": "mall-prop-counter-wood-mid-b-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-wood-mid-b-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-wood.png",
+      "sourceSha256": "a46afba939c7a78f7150f4d0acaefdf557ac8abea7e8c0dd423c6e7c9e58d0f6",
+      "sourceRect": [
+        1216,
+        196,
+        303,
+        441
+      ],
+      "sourceTopRows": 190,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "36f9145e42c287e58c2b61c7c4e83784cdff1b80b6bd7be9422845c6d4587b4f"
+    },
+    {
+      "id": "mall-prop-counter-wood-single-v1",
+      "file": "assets/mall/m2-p0/mall-prop-counter-wood-single-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/counter-wood.png",
+      "sourceSha256": "a46afba939c7a78f7150f4d0acaefdf557ac8abea7e8c0dd423c6e7c9e58d0f6",
+      "sourceRect": [
+        1613,
+        130,
+        319,
+        513
+      ],
+      "sourceTopRows": 256,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "e000790ce673bae794d281c7a4978667fb99cc5e1d1d3aa36b58dd25494679a2"
+    },
+    {
+      "id": "mall-prop-glass-case-end-w-v1",
+      "file": "assets/mall/m2-p0/mall-prop-glass-case-end-w-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/glass-case.png",
+      "sourceSha256": "9bf592fd7549917308d4c6fe8c6410aa6dff60693296acd6c7342a8a1ea15b51",
+      "sourceRect": [
+        75,
+        188,
+        307,
+        416
+      ],
+      "sourceTopRows": 187,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": "mall-prop-glass-case-end-w-emit-v1",
+      "variant": "end-w",
+      "sha256": "6e62ff39260f292a4d076b9f30529e4a0718de9a838585a4514c6ee13eeb38cf"
+    },
+    {
+      "id": "mall-prop-glass-case-end-w-emit-v1",
+      "file": "assets/mall/m2-p0/mall-prop-glass-case-end-w-emit-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/glass-case.png",
+      "sourceSha256": "9bf592fd7549917308d4c6fe8c6410aa6dff60693296acd6c7342a8a1ea15b51",
+      "sourceRect": [
+        75,
+        188,
+        307,
+        416
+      ],
+      "sourceTopRows": 187,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "emit",
+      "collision": null,
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "4098aada92c2d782a990c85c4c60dc7617d450a869a253eb22c715205adab697"
+    },
+    {
+      "id": "mall-prop-glass-case-end-e-v1",
+      "file": "assets/mall/m2-p0/mall-prop-glass-case-end-e-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/glass-case.png",
+      "sourceSha256": "9bf592fd7549917308d4c6fe8c6410aa6dff60693296acd6c7342a8a1ea15b51",
+      "sourceRect": [
+        476,
+        188,
+        296,
+        416
+      ],
+      "sourceTopRows": 187,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": "mall-prop-glass-case-end-e-emit-v1",
+      "variant": "end-e",
+      "sha256": "4ef3ea9d54a031930fecb64777aa76b0d088aa97ee70a5c61d894c625f8f0fbe"
+    },
+    {
+      "id": "mall-prop-glass-case-end-e-emit-v1",
+      "file": "assets/mall/m2-p0/mall-prop-glass-case-end-e-emit-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/glass-case.png",
+      "sourceSha256": "9bf592fd7549917308d4c6fe8c6410aa6dff60693296acd6c7342a8a1ea15b51",
+      "sourceRect": [
+        476,
+        188,
+        296,
+        416
+      ],
+      "sourceTopRows": 187,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "emit",
+      "collision": null,
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "8aeaecaf27867056a640e221d2ef1a7a534206754c0aab019977f8a3cbb4357d"
+    },
+    {
+      "id": "mall-prop-glass-case-mid-a-v1",
+      "file": "assets/mall/m2-p0/mall-prop-glass-case-mid-a-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/glass-case.png",
+      "sourceSha256": "9bf592fd7549917308d4c6fe8c6410aa6dff60693296acd6c7342a8a1ea15b51",
+      "sourceRect": [
+        846,
+        188,
+        288,
+        416
+      ],
+      "sourceTopRows": 187,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": "mall-prop-glass-case-mid-a-emit-v1",
+      "variant": "mid-a",
+      "sha256": "65061fa790e61918cbc5885a21e06feb01154663dc66ccab2643be4a7bea83f2"
+    },
+    {
+      "id": "mall-prop-glass-case-mid-a-emit-v1",
+      "file": "assets/mall/m2-p0/mall-prop-glass-case-mid-a-emit-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/glass-case.png",
+      "sourceSha256": "9bf592fd7549917308d4c6fe8c6410aa6dff60693296acd6c7342a8a1ea15b51",
+      "sourceRect": [
+        846,
+        188,
+        288,
+        416
+      ],
+      "sourceTopRows": 187,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "emit",
+      "collision": null,
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "07ace93db8878047bb161af4611dc6a944903dda07e218a49b3369df98cfce52"
+    },
+    {
+      "id": "mall-prop-glass-case-mid-b-v1",
+      "file": "assets/mall/m2-p0/mall-prop-glass-case-mid-b-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/glass-case.png",
+      "sourceSha256": "9bf592fd7549917308d4c6fe8c6410aa6dff60693296acd6c7342a8a1ea15b51",
+      "sourceRect": [
+        1213,
+        188,
+        295,
+        416
+      ],
+      "sourceTopRows": 187,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": "mall-prop-glass-case-mid-b-emit-v1",
+      "variant": "mid-b",
+      "sha256": "12dc2ade091e32ed849d424776fe6196d1f0d1b29f781be1e908646308a21f81"
+    },
+    {
+      "id": "mall-prop-glass-case-mid-b-emit-v1",
+      "file": "assets/mall/m2-p0/mall-prop-glass-case-mid-b-emit-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/glass-case.png",
+      "sourceSha256": "9bf592fd7549917308d4c6fe8c6410aa6dff60693296acd6c7342a8a1ea15b51",
+      "sourceRect": [
+        1213,
+        188,
+        295,
+        416
+      ],
+      "sourceTopRows": 187,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "emit",
+      "collision": null,
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "0ae64924fe24778dfe3f2845dadeec769812ea0c13c0ab2ff74dc519322dfc3d"
+    },
+    {
+      "id": "mall-prop-glass-case-single-v1",
+      "file": "assets/mall/m2-p0/mall-prop-glass-case-single-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/glass-case.png",
+      "sourceSha256": "9bf592fd7549917308d4c6fe8c6410aa6dff60693296acd6c7342a8a1ea15b51",
+      "sourceRect": [
+        1599,
+        188,
+        308,
+        416
+      ],
+      "sourceTopRows": 187,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": "ew",
+      "emit": "mall-prop-glass-case-single-emit-v1",
+      "variant": "single",
+      "sha256": "dd69042a89b7cb9fdf0390c38e475fd36f503d69120e36d5cd89ea2223395aee"
+    },
+    {
+      "id": "mall-prop-glass-case-single-emit-v1",
+      "file": "assets/mall/m2-p0/mall-prop-glass-case-single-emit-v1.png",
+      "w": 32,
+      "h": 58,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 26,
+      "anchor": [
+        0,
+        58
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/glass-case.png",
+      "sourceSha256": "9bf592fd7549917308d4c6fe8c6410aa6dff60693296acd6c7342a8a1ea15b51",
+      "sourceRect": [
+        1599,
+        188,
+        308,
+        416
+      ],
+      "sourceTopRows": 187,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "emit",
+      "collision": null,
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "2fd94464077489fd446dfbb6815f8b559e5f546cbdbd8beb29d8e6e2f63f17d6"
+    },
+    {
+      "id": "mall-prop-kitchen-line-end-w-v1",
+      "file": "assets/mall/m2-p0/mall-prop-kitchen-line-end-w-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/kitchen-line.png",
+      "sourceSha256": "82a462fe70ebde10e671373dfa4bf39a33994f87c51341350c32264cda0c9042",
+      "sourceRect": [
+        104,
+        112,
+        299,
+        510
+      ],
+      "sourceTopRows": 224,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-w",
+      "sha256": "f1536ec730e09d09fab7925301b88f5b1c51f3cd9539cf110806fe4e78875a0d"
+    },
+    {
+      "id": "mall-prop-kitchen-line-end-e-v1",
+      "file": "assets/mall/m2-p0/mall-prop-kitchen-line-end-e-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/kitchen-line.png",
+      "sourceSha256": "82a462fe70ebde10e671373dfa4bf39a33994f87c51341350c32264cda0c9042",
+      "sourceRect": [
+        464,
+        110,
+        361,
+        512
+      ],
+      "sourceTopRows": 225,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "end-e",
+      "sha256": "c167752a78385ff87f1ae4d94fa2f5df44bbf2e630991ecb466599624914d0f6"
+    },
+    {
+      "id": "mall-prop-kitchen-line-mid-a-v1",
+      "file": "assets/mall/m2-p0/mall-prop-kitchen-line-mid-a-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/kitchen-line.png",
+      "sourceSha256": "82a462fe70ebde10e671373dfa4bf39a33994f87c51341350c32264cda0c9042",
+      "sourceRect": [
+        884,
+        142,
+        338,
+        480
+      ],
+      "sourceTopRows": 211,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-a",
+      "sha256": "2ae74a03f888e5b233154e5fc9eb5e30097f739737d0da3c72c6fff0f2076b8d"
+    },
+    {
+      "id": "mall-prop-kitchen-line-mid-b-v1",
+      "file": "assets/mall/m2-p0/mall-prop-kitchen-line-mid-b-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/kitchen-line.png",
+      "sourceSha256": "82a462fe70ebde10e671373dfa4bf39a33994f87c51341350c32264cda0c9042",
+      "sourceRect": [
+        1280,
+        112,
+        402,
+        511
+      ],
+      "sourceTopRows": 225,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "mid-b",
+      "sha256": "54b7a19f8611557ca2554e6b205653b07c828deb1a5971daf90f36abdcfcce18"
+    },
+    {
+      "id": "mall-prop-kitchen-line-single-v1",
+      "file": "assets/mall/m2-p0/mall-prop-kitchen-line-single-v1.png",
+      "w": 32,
+      "h": 56,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        56
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/kitchen-line.png",
+      "sourceSha256": "82a462fe70ebde10e671373dfa4bf39a33994f87c51341350c32264cda0c9042",
+      "sourceRect": [
+        1682,
+        112,
+        324,
+        511
+      ],
+      "sourceTopRows": 225,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": "ew",
+      "emit": null,
+      "variant": "single",
+      "sha256": "29ffe8c8b8716721c3ed3b6a33ff0282f9e0fbb514d535431fbbb68165b257e9"
+    },
+    {
+      "id": "mall-prop-vending-v1",
+      "file": "assets/mall/m2-p0/mall-prop-vending-v1.png",
+      "w": 32,
+      "h": 72,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 40,
+      "anchor": [
+        0,
+        72
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/vending.png",
+      "sourceSha256": "0248910cb51a359b25d4534dbbda174e15f1234e4455ccb4bcaa3a1b333378c1",
+      "sourceRect": [
+        89,
+        278,
+        660,
+        1362
+      ],
+      "sourceTopRows": 184,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "B",
+      "tile": null,
+      "emit": "mall-prop-vending-emit-v1",
+      "variant": null,
+      "sha256": "92a700a1f6942dcb76141c4fd7031c6673800d8b4e59fb088194a14e6dd89b54"
+    },
+    {
+      "id": "mall-prop-vending-emit-v1",
+      "file": "assets/mall/m2-p0/mall-prop-vending-emit-v1.png",
+      "w": 32,
+      "h": 72,
+      "footprint": [
+        1,
+        1
+      ],
+      "lift": 40,
+      "anchor": [
+        0,
+        72
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/vending.png",
+      "sourceSha256": "0248910cb51a359b25d4534dbbda174e15f1234e4455ccb4bcaa3a1b333378c1",
+      "sourceRect": [
+        89,
+        278,
+        660,
+        1362
+      ],
+      "sourceTopRows": 184,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "emit",
+      "collision": null,
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "5b27a237129cb016a6ea134ef7c2f482c7393c27b5744576f2c0d50cda056a87"
+    },
+    {
+      "id": "mall-prop-diner-table-v1",
+      "file": "assets/mall/m2-p0/mall-prop-diner-table-v1.png",
+      "w": 64,
+      "h": 52,
+      "footprint": [
+        2,
+        1
+      ],
+      "lift": 20,
+      "anchor": [
+        0,
+        52
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/diner-table.png",
+      "sourceSha256": "15090ca1a6316c0831a1a3bc3a4983825fa1f89d61f0844c5411ecf5a9787b5e",
+      "sourceRect": [
+        161,
+        303,
+        1070,
+        653
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "028aec3626622710aee5221445a0c1945d3405dc9ea7fdd9f4c6f84ee86ed346"
+    },
+    {
+      "id": "mall-prop-checkout-v1",
+      "file": "assets/mall/m2-p0/mall-prop-checkout-v1.png",
+      "w": 32,
+      "h": 88,
+      "footprint": [
+        1,
+        2
+      ],
+      "lift": 24,
+      "anchor": [
+        0,
+        88
+      ],
+      "frames": 1,
+      "source": "assets/mall/sources/m2-p0/checkout.png",
+      "sourceSha256": "2f189361e34b8ade03d0b4a42b8e213ce84ceb561bd5634d3d1edc5811342143",
+      "sourceRect": [
+        185,
+        156,
+        387,
+        1689
+      ],
+      "sourceTopRows": null,
+      "revision": 1,
+      "batch": "m2-p0",
+      "exportMethod": "Reviewed alpha crop; nearest-neighbour axis-aligned top/front projection; preserve authored subpixel vending lamp by brightest-source-bin sampling; hard alpha; shared 28-colour palette; two-column open-edge seam normalization. No creative redraw.",
+      "paletteSize": 28,
+      "kind": "prop",
+      "collision": "M",
+      "tile": null,
+      "emit": null,
+      "variant": null,
+      "sha256": "ac5d7912fca843c289963ec98912c41a800cfb17279fc6d4a37e6069e4aaf60d"
     }
   ]
 }

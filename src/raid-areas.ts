@@ -19,8 +19,8 @@ export const sampleEnabled = () => sampleMode() !== null;
 export const raidWorlds = (): RunWorld[] => params().get('test') === '1' ? ['coast', 'buildings', 'mall'] : ['buildings', 'mall'];
 /** Area selected when the page opens. */
 export const defaultWorld = (): RunWorld => sampleMode() === 'mall' ? 'mall' : 'buildings';
-/** Layout revision for a new mall raid: revision 3, the one the view furnishes (older raids keep theirs). */
-export const sampleMallLayout = (world: string): 3 | undefined => world === 'mall' ? 3 : undefined;
+/** Layout revision for a new mall raid: revision 4, every region furnished (older raids keep theirs). */
+export const sampleMallLayout = (world: string): 4 | undefined => world === 'mall' ? 4 : undefined;
 
 /**
  * Playtest deploy with an empty seed field: take the first seed from the clock whose spawn lies in the dressed village

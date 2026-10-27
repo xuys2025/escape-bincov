@@ -25,7 +25,7 @@ test('raid weight readouts show the Runtime carried weight with the charm worn a
     const readouts = { '[data-weight]': { textContent: '' }, '[data-carry-limit]': { textContent: '' } };
     const el = { innerHTML: '', querySelectorAll: () => [], querySelector: (s: string) => readouts[s as keyof typeof readouts] ?? null };
     const panel = new InventoryPanel(el as unknown as HTMLElement, {
-        session: state, saves, services, lootRef: () => null, touch: () => false, toast() {}, saveFailed() {}, close() {},
+        services, lootRef: () => null, touch: () => false, toast() {}, saveFailed() {}, close() {},
         magazine: () => runtime.mag,
     });
     const wear = (charm: D.Item | null) => { const s = runtime.snapshotExpansion(); s.charm = charm; runtime.restoreExpansion(s); };
