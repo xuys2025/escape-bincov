@@ -1,5 +1,5 @@
 import * as D from './domain';
-import { WORLD, generateRun, type Point, type RunConfig, type MapData } from './world';
+import { TILE, WORLD, generateRun, type Point, type RunConfig, type MapData } from './world';
 import type { EnemyState } from './checkpoint';
 import { entityUid, newTraining, type ExpansionState, type LayeredRaid, type WorldDefinition } from './expansion-state';
 import { findLanding, type Cell, type SpaceDefinition } from './spatial';
@@ -111,5 +111,17 @@ export function buildingRunConfig(seed: number | string): RunConfig {
         if (rolled < .04) { entry.id = rare[Math.floor(random() * rare.length)]; entry.qty = 1; }
         else if (rolled < .14) { entry.id = 'cloth'; entry.qty = 1 + Math.floor(random() * 2); }
     }
+    // #28 M2-13: gunsmith finds (D.gunsmithFind) replace only gun and valuable records, after the pass above and on a
+    // stream of their own, so every other record stays as it was and the budget stays 60. A flooded cache (a tide tile)
+    // is a high-risk spot. The mall deals out these same records, finds included.
+    const finds = D.seededRandom(config.seed + 31991);
+    const judge = (entry: { id: string; qty: number }, risky: boolean) => {
+        const found = D.gunsmithFind(entry.id, finds, { risky, rifle: true });
+        if (found) { entry.id = found; entry.qty = 1; }
+    };
+    const flooded = (p: Point) => WORLD.tiles[Math.floor(p.y / TILE)][Math.floor(p.x / TILE)] === 4;
+    for (const entry of config.loot) judge(entry, flooded(entry));
+    // Crates take only spots that stay dry at high tide, so their records are never flooded.
+    for (const item of config.containers.flatMap(c => c.items)) judge(item, false);
     return config;
 }

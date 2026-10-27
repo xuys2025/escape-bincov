@@ -11,6 +11,8 @@
  *   4. guardrails: each combined factor is clamped once (GUARDRAILS), then the hip and aimed cones are held to
  *      CONE_FLOOR (M0 review decision 3, see liftCones), and only then do the factors scale the factory values;
  *   5. output: GunStats.
+ * The hip factor is hip fire's alone (M0 review decision 9, wired in M2-03): the hip grip and a laser tighten the cone
+ * from the hip and fade out as the aim rises, so the aimed cone leaves them out (liftCones, scaled, laserHandling).
  * Character modifiers stay out. The Runtime keeps applying the RPG body multiplier (coneOf and driftOf `body`), the #92
  * recoil perk (recoil `scale`) and the reload perk (reloadTime) where it does today, once each, on top of these numbers.
  * Weight, footprint and value belong to the gun instance (M0-05).
@@ -41,29 +43,30 @@ const product = (factors: number[]) => factors.sort((a, b) => a - b).reduce((tot
 
 /**
  * Cone guardrail (M0 review 2026-10-24, decision 3): on top of the per-dimension clamps, the hip cone (spread x hip)
- * and the aimed cone (spread x hip x precise) each keep at least this share of the factory cone. These are the
- * settled cones coneOf scatters over at rest; sway and bloom widen them and keep only their own clamps.
+ * and the aimed cone each keep at least this share of the factory cone. The hip factor is hip fire's alone (decision 9:
+ * the hip grip and the laser fade out as the aim rises), so the aimed cone is spread x precise. These are the settled
+ * cones coneOf scatters over at rest; sway and bloom widen them and keep only their own clamps.
  */
 export const CONE_FLOOR = .6;
 /**
- * `floor / base`, one ulp up when rounding left `base` times it under `floor`, so the cone products formed left to
- * right (spread * hip, then * precise) never land below the floor by rounding. `base` is at least `floor`. At 0.6 the
- * division alone already holds; the step matters only if M4 moves the floor to 0.5 or below, where it can fall short.
+ * `floor / base`, one ulp up when rounding left `base` times it under `floor`, so a cone product (spread * hip, or
+ * spread * precise) never lands below the floor by rounding. `base` is at least `floor`. At 0.6 the division alone
+ * already holds; the step matters only if M4 moves the floor to 0.5 or below, where it can fall short.
  */
 function lift(base: number, floor: number): number {
     const f = floor / base;
     return base * f >= floor ? f : f + f * Number.EPSILON;
 }
 /**
- * The cone guardrail, after the per-dimension clamps. Spread keeps its clamp, since it scales both cones alike; each
- * cone under CONE_FLOOR gives back through the factor it adds last: the hip factor lifts the hip cone to the floor,
- * then the precise factor lifts the aimed cone. So a hip grip keeps its whole hip gain while a sight's gain shrinks
- * to what the aimed floor leaves. A factor only rises, and never past 1, because spread and hip are each at least
- * the floor already: no gain turns into a cost. Reads only the combined factors, so install order changes no bit.
+ * The cone guardrail, after the per-dimension clamps. Spread keeps its clamp, since it scales both cones alike; a cone
+ * under CONE_FLOOR gives back through its own factor: the hip factor lifts the hip cone to the floor, the precise factor
+ * the aimed cone. So a hip grip keeps its whole hip gain while a sight's gain shrinks to what the aimed floor leaves,
+ * and neither touches the other's cone. A factor only rises, and never past 1, because spread is at least the floor
+ * already: no gain turns into a cost. Reads only the combined factors, so install order changes no bit.
  */
 function liftCones(f: Record<Dimension, number>): FactorSet {
     if (f.spread * f.hip < CONE_FLOOR) f.hip = lift(f.spread, CONE_FLOOR);
-    if (f.spread * f.hip * f.precise < CONE_FLOOR) f.precise = lift(f.spread * f.hip, CONE_FLOOR);
+    if (f.spread * f.precise < CONE_FLOOR) f.precise = lift(f.spread, CONE_FLOOR);
     return f;
 }
 
@@ -79,18 +82,24 @@ export function combineFactors(list: readonly Partial<Record<Dimension, number>>
 export interface GunStats {
     /** The gun as it fires: the factory WeaponDef with spread, range and reload scaled, and the feed module's capacity. */
     weapon: GunDef['stats'];
-    /** Every handling field may change except the fire mode. */
+    /**
+     * Every handling field may change except the fire mode. `hip` is the cone multiple from the hip, the hip grip's
+     * included; `precise` is the aimed cone's share of that, so the aimed cone leaves the hip grip out (decision 9).
+     */
     handling: GunHandling;
     /** Handling while braced on a bipod (standing still), with its factors joining the build's; null without a bipod. */
     braced: GunHandling | null;
-    /** Factor on the gunshot noise radius, today SURVIVAL.gunNoiseRange for every gun. */
+    /** Factor on the radius within which enemies hear a shot: SURVIVAL.gunNoiseRange times this (the Runtime, M2-11). */
     noise: number;
+    /** A suppressor is installed: the shots sound muffled (M2-11). */
+    suppressed: boolean;
     /** Factor on the precise-aim look-ahead for each sight mode; [1] without a sight that changes it (M0-07 sets the cap). */
     view: number[];
     /**
-     * A laser switched on: within `range` px the hip cone multiple is `hip` instead of the handling's. The laser's factor
-     * joins the build's hip factors under the one hip guardrail and the hip cone floor. A bipod never changes hip, so
-     * it holds braced as well. The aimed cone is the handling's: the laser fades out as the aim rises (M2-03).
+     * A laser switched on: while its beam rests on a target within `range` px, the hip cone multiple is `hip` instead of
+     * the handling's (laserHandling). The laser's factor joins the build's hip factors under the one hip guardrail and
+     * the hip cone floor. A bipod never changes hip, so it holds braced as well. The aimed cone stays the handling's: the
+     * laser fades out as the aim rises (decision 9, M2-03).
      */
     laser: { hip: number; range: number } | null;
     /** A light switched on: interactables within `radius` px across `arc` radians are outlined. */
@@ -99,16 +108,30 @@ export interface GunStats {
     spot: number;
 }
 
+/**
+ * The factory handling scaled by a factor set. The hip factor scales the hip cone alone: `precise` is the aimed cone's
+ * share of the hip cone (coneOf raises from one to the other), so it is divided by the hip factor, which leaves the
+ * aimed cone factory hip x factory precise x the precise factor (decision 9). Without a hip factor the division is by 1,
+ * which changes no bit.
+ */
 const scaled = (h: GunHandling, f: FactorSet): GunHandling => ({
-    mode: h.mode, hip: h.hip * f.hip, precise: h.precise * f.precise, raise: h.raise * f.raise, sway: h.sway * f.sway,
+    mode: h.mode, hip: h.hip * f.hip, precise: h.precise * f.precise / f.hip, raise: h.raise * f.raise, sway: h.sway * f.sway,
     bloom: h.bloom * f.bloom, bloomMax: h.bloomMax * f.bloom, kick: h.kick * f.kick, kickMax: h.kickMax * f.kick,
     settle: h.settle * f.settle, recover: h.recover * f.recover,
 });
 
 /**
+ * The handling of a shot while the laser rests on a target within its range (M2-03): the laser's hip cone from the hip
+ * and the same aimed cone as `h` once the aim is raised, so the laser's help fades out as the aim rises (decision 9).
+ * `h` is the handling in use, the build's or braced on a bipod (no bipod changes hip).
+ */
+export const laserHandling = (h: GunHandling, laser: { hip: number }): GunHandling =>
+    ({ ...h, hip: laser.hip, precise: h.hip * h.precise / laser.hip });
+
+/**
  * The effective stats of a valid build, with the tactical devices whose uids are in `on` switched on. Anything
- * validateBuild refuses throws, the knife and the #39 sample `m4a1` included. Uids in `on` that name no installed
- * device count for nothing. Reads only its arguments and the catalog: no character, raid or save state.
+ * validateBuild refuses throws, the knife and every other id that is no catalog gun included. Uids in `on` that name
+ * no installed device count for nothing. Reads only its arguments and the catalog: no character, raid or save state.
  */
 export function effectiveStats(build: Build, on: readonly string[] = []): GunStats {
     const valid = validateBuild(build);
@@ -126,6 +149,7 @@ export function effectiveStats(build: Build, on: readonly string[] = []): GunSta
         handling: scaled(gun.handling, factors),
         braced: braced && scaled(gun.handling, braced),
         noise: factors.noise,
+        suppressed: mods.some(m => m.suppressor === true),
         view: [...(sight?.view ?? [1])],
         laser: laser ? { hip: gun.handling.hip * combineFactors([...mods, { hip: laser.hip }]).hip, range: laser.range } : null,
         light: light ? { ...light } : null,
@@ -135,7 +159,7 @@ export function effectiveStats(build: Build, on: readonly string[] = []): GunSta
 
 /**
  * Runtime adapters, for M1-05 to put in place of WEAPONS[id] and handlingOf(id). A bare build gives today's values: the
- * old three equal WEAPONS and handlingOf, and mb4a1 equals the #39 sample rifle but for its id and name.
+ * old three equal WEAPONS and handlingOf, and mb4a1 its WEAPONS row (the #39 sample rifle's numbers, M2-01).
  */
 export const effectiveWeapon = (build: Build): WeaponDef => effectiveStats(build).weapon;
 export const effectiveHandling = (build: Build): GunHandling => effectiveStats(build).handling;

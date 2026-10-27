@@ -192,8 +192,13 @@ try {
     const peer = await b.evaluate(key => { const r = JSON.parse(localStorage.getItem(key)); r.profile.cash += 111; r.revision += 1; const text = JSON.stringify(r); localStorage.setItem(key, text); return text; }, SESSION);
     await a.waitForFunction(() => window.__bincov.app.conflict);
     page = a; const aWrites = (await writes(a)).length, aDownloads = a.downloads.length;
-    await tap(yard('.modal.k-menu [data-act="reset"]')); await tap(yard('.dialog [data-act="reset-confirm"]'));
-    await toastWith('存档已由另一窗口接管，本页不能写入。').waitFor(); await yard('.dialog.k-storage').waitFor();
+    await tap(yard('.modal.k-menu [data-act="reset"]'));
+    const refusalToast = toastWith('存档已由另一窗口接管，本页不能写入。');
+    assert.equal(await refusalToast.count(), 0, 'the confirmation must produce new conflict feedback');
+    // The toast expires after 3.1 seconds; observe it before the click's protocol reply can be delayed.
+    const refused = refusalToast.waitFor(); refused.catch(() => {});
+    await tap(yard('.dialog [data-act="reset-confirm"]'));
+    await refused; await yard('.dialog.k-storage').waitFor();
     await a.waitForTimeout(500);
     assert.equal(await read(a, SESSION), peer); assert.equal(await read(a, COPY), copy);
     assert.equal((await writes(a)).length, aWrites); assert.equal(a.downloads.length, aDownloads, 'no download for a refused reset');

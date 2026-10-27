@@ -3,6 +3,7 @@ import { appendFileSync, readFileSync, readdirSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { browserGroups, suitesForGroup } from './browser-suites.mjs';
+import { enemyShardIds, validateEnemyCoverage, validateEnemyPartition } from '../enemy-browser-plan.mjs';
 
 function requireCondition(condition, message) {
   if (!condition) throw new Error(message);
@@ -45,6 +46,7 @@ function reportIdentity(report, expected, label) {
 /** Pure validation: selected records follow group order; successful earlier attempts may be reused. */
 export function validateTimingReports(reports, identity) {
   const expectedIdentity = currentIdentity(identity);
+  const enemyCoverages = [];
   requireCondition(Array.isArray(reports) && reports.length === browserGroups.length, 'Missing or unexpected browser group reports');
   for (const [index, group] of browserGroups.entries()) {
     const report = reports[index];
@@ -65,9 +67,11 @@ export function validateTimingReports(reports, identity) {
       const suitePeriod = completedPeriod(row, label);
       requireCondition(suitePeriod.start >= previousFinish && suitePeriod.finish <= period.finish,
         `${label}: timestamps do not describe sequential execution inside the group`);
+      if (enemyShardIds.includes(suite.id)) enemyCoverages.push(validateEnemyCoverage(row.enemyCoverage, suite.id, report, suitePeriod));
       previousFinish = suitePeriod.finish;
     }
   }
+  validateEnemyPartition(enemyCoverages);
   return reports;
 }
 
@@ -96,6 +100,7 @@ export function timingSummary(reports) {
   const suiteRows = reports.flatMap(report => report.suites.map(row => `| ${report.group} | \`pnpm ${row.command}\` | ${seconds(row.durationMs)} |`));
   return `\n### Validated browser timing evidence\n\nAll ${reports.length} groups and ${reports.reduce((count, report) => count + report.suites.length, 0)} suites passed for this run and commit. Each group uses its newest recorded attempt; a failed-jobs-only rerun may retain earlier successful groups. The workflow also requires GitHub's browser job result to succeed.\n\n` +
     'Durations cover the browser suite processes and group wrapper only. Runner setup, queue time and Pages deployment are excluded; these tables do not measure total workflow time.\n\n' +
+    'Enemy shard evidence also covers every original street/mall viewport chain and case exactly once, with the original offline and touch configuration.\n\n' +
     `| Group | Recorded attempt | Suites | Duration | CPU | WebGL renderer |\n| --- | ---: | ---: | ---: | --- | --- |\n${groupRows.join('\n')}\n\n` +
     `| Group | Suite | Duration |\n| --- | --- | ---: |\n${suiteRows.join('\n')}\n`;
 }

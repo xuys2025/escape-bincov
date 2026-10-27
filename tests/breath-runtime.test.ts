@@ -128,10 +128,10 @@ test('CP-12: 0, 1, 1.5, 3 and 4.5 s of breath give 0, 10, 15, 30 and 30% in the 
 });
 
 test('CP-12: a held automatic trigger splits the charge at each shot instant, the same at every frame rate', () => {
-    // The sample rifle held with the precise aim for 0.95 s from the clock's start: a round every 0.1 s, each taking the
+    // The M4A1 held with the precise aim for 0.95 s from the clock's start: a round every 0.1 s, each taking the
     // 0.1 s (1%) charged since the round before, the first one none.
     const run = (rate: number | readonly number[]) => {
-        const b = breathBench('m4a1'), uid = foe(b, 320), p = pilot(b, uid), rounds = roundsIn(b, p.frame(0, { ...AIM, firePressed: true, fireHeld: true }).events);
+        const b = breathBench('mb4a1'), uid = foe(b, 320), p = pilot(b, uid), rounds = roundsIn(b, p.frame(0, { ...AIM, firePressed: true, fireHeld: true }).events);
         for (const ms of frames(.95, rate)) rounds.push(...roundsIn(b, p.frame(ms, { ...AIM, fireHeld: true }).events));
         return { uid, shots: rounds.map(x => ({ ...breathIn(x.crit), chance: Math.round(breathIn(x.crit).chance * 1e9) / 1e9 })) };
     };
@@ -266,15 +266,13 @@ test('CP-14 and weapons: a sprint, a reload and drawing another weapon clear the
     charged(b, p.play(frames(.5), AIM).frame.hud.breath, null, 0, 'knife in hand');
     // The gun again comes out in the first substep, which then charges.
     charged(b, p.frame(FRAME, { ...AIM, commands: ['primary'] }).frame.hud.breath, uid, FRAME / 1000, 'gun drawn');
-    // The sample rifle handed over and taken back, and another gun equipped from the bag: each clears it.
+    // Another gun equipped from the bag clears it, each time: the M4A1, then the pistol.
+    stock(b, { mb4a1: 1, pistol: 1 });
     p.play(frames(.5), AIM);
-    b.driver.sampleGun('m4a1');
-    charged(b, hud(b), null, 0, 'sample rifle');
+    assert.equal(r.equipItem(r.session.loadout!.bag.items.find(i => i.id === 'mb4a1')!.uid), 'committed');
+    assert.equal(r.currentWeapon.id, 'mb4a1');
+    charged(b, hud(b), null, 0, 'M4A1 equipped');
     charged(b, p.play(frames(.5), AIM).frame.hud.breath, uid, .5);
-    b.driver.sampleGun(null);
-    charged(b, hud(b), null, 0, 'sample rifle returned');
-    stock(b, { pistol: 1 });
-    p.play(frames(.5), AIM);
     assert.equal(r.equipItem(r.session.loadout!.bag.items.find(i => i.id === 'pistol')!.uid), 'committed');
     assert.equal(r.currentWeapon.id, 'pistol');
     charged(b, hud(b), null, 0, 'pistol equipped');

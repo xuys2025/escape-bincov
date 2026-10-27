@@ -16,7 +16,8 @@ import {
   PROCEDURAL, WALL_LIFT, mallDecals, mallGround, mallLights, mallLintels, mallOpenings, mallProps, mallSigns, mallStandIns,
   mallWallCells, mallWallParts, mallWallProps, mallWallRole, mallZone, type DressMap, type DressSprite, type WallRole,
 } from './mall-dressing';
-import { MALL_FURNITURE, MALL_V2_REGIONS, parseFurnitureName } from '../mall-layout-v2';
+import { MALL_FURNITURE, parseFurnitureName } from '../mall-layout-v2';
+import { mallFullyDressed, mallRegionDressed } from '../mall-layout-v4';
 import type { Textures } from './textures';
 
 export type OccluderKind = 'wall' | 'door' | 'roof' | 'ceiling' | 'canopy' | 'lintel' | 'prop';
@@ -63,7 +64,7 @@ const glowOf = (asset: string) => /fridge|freezer/.test(asset) ? 0xbfe0ea : /exi
 
 /** Everything about a mall floor that depends only on the map and the samples. */
 export function mallDress(m: MapDef, art: MallArt, reduced: boolean): MallDress {
-  const dress: DressMap = { mapId: m.key.mapId, cells: m.cells, regions: m.regions, decorations: m.decorations };
+  const dress: DressMap = { mapId: m.key.mapId, cells: m.cells, regions: m.regions, decorations: m.decorations, full: mallFullyDressed(m.key.layoutRevision) };
   const cols = m.cols, rows = m.rows, zones = new Uint8Array(cols * rows);
   for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) zones[y * cols + x] = ZONES.indexOf(mallZone(dress, x, y));
   const zoneAt = (x: number, y: number) => x < 0 || y < 0 || x >= cols || y >= rows ? 1 : zones[y * cols + x];
@@ -144,6 +145,7 @@ export function mallDress(m: MapDef, art: MallArt, reduced: boolean): MallDress 
     else if (/freezer/.test(p.asset)) light(p.x + 32, p.z + 8, 54, 0x7aa0aa, .32);
     else if (/floor-lamp/.test(p.asset)) light(p.x + 16, p.z - 16, 64, 0xc89a5a, .5);
     else if (/directory|pylon/.test(p.asset)) light(p.x + 16, p.z + 6, 40, 0x8fb8a8, .3);
+    else if (/furniture:vending/.test(p.asset)) light(p.x + 16, p.z + 10, 44, 0xb8c8d0, .34);
   }
   const wallProps = resolve(mallWallProps(dress));
   for (const p of wallProps) {
@@ -152,8 +154,8 @@ export function mallDress(m: MapDef, art: MallArt, reduced: boolean): MallDress 
   }
   for (const w of walls) if (w.face && /curtain|window/.test(w.face) && zoneAt(w.x, w.y + 1) === 0) light(w.x * T + 16, (w.y + 1.6) * T, 70, 0x8796a0, .45);
 
-  const dressed = new Set<string>(MALL_V2_REGIONS), rooms = m.regions.filter(r => r.inside);
-  const undressed = (x: number, y: number) => { const r = rooms.find(r => x >= r.x && x < r.x + r.w && y >= r.y && y < r.y + r.h); return !!r && !dressed.has(r.id); };
+  const rooms = m.regions.filter(r => r.inside);
+  const undressed = (x: number, y: number) => { const r = rooms.find(r => x >= r.x && x < r.x + r.w && y >= r.y && y < r.y + r.h); return !!r && !mallRegionDressed(m.key.layoutRevision, r.id); };
   const flights = new Set(m.entries.filter(e => {
     const ex = Math.floor(e.at.x / T), ey = Math.floor(e.at.y / T);
     for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) if (/^stairs-/.test(furniture.get(`${ex + dx},${ey + dy}`) ?? '')) return true;

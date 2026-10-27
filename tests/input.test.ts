@@ -108,11 +108,12 @@ test('the E press used to close loot is blocked even when the overlay did not fo
 
 test('a fresh keydown recovers a suppressed key whose keyup was lost outside the window (issue #60 D8)', () => {
   const input = new InputState();
-  for (const key of ['w', 'shift', 'r', 'q', '1', '2', 'e']) input.key(key, true);
+  const keys = ['w', 'shift', 'r', 'q', '1', '2', 'e', 'f', 'g'];
+  for (const key of keys) input.key(key, true);
   read(input);
   input.suppressHeld();
   // No keyup arrives while the window is unfocused. Held repeats must stay blocked after resuming.
-  for (const key of ['w', 'shift', 'r', 'q', '1', '2', 'e']) input.key(key, true, true);
+  for (const key of keys) input.key(key, true, true);
   const held = read(input);
   assert.equal(held.move.y, 0); assert.equal(held.move.sprint, false);
   assert.equal(held.interactHeld, false); assert.equal(held.interactPressed, false);
@@ -123,11 +124,11 @@ test('a fresh keydown recovers a suppressed key whose keyup was lost outside the
   assert.equal(walking.interactHeld, false); assert.equal(walking.interactPressed, false);
   assert.deepEqual(walking.commands, []);
   // A new non-repeat press proves that this key was released, even without its keyup.
-  for (const key of ['w', 'shift', 'r', 'q', '1', '2', 'e']) input.key(key, true, false);
+  for (const key of keys) input.key(key, true, false);
   const fresh = read(input);
   assert.equal(fresh.move.y, -1); assert.equal(fresh.move.sprint, true);
   assert.equal(fresh.interactHeld, true); assert.equal(fresh.interactPressed, true);
-  assert.deepEqual(fresh.commands, ['reload', 'heal', 'primary', 'knife']);
+  assert.deepEqual(fresh.commands, ['reload', 'heal', 'primary', 'knife', 'light', 'laser']);
   assert.deepEqual(read(input).commands, []);
 });
 

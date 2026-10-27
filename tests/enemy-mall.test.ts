@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createSessionState, SaveSession } from '../src/session';
 import { decodeSession, SESSION_KEY } from '../src/recovery-store';
 import { encodeRecoveryBackup, decodePortableBackup } from '../src/save-backup';
-import { MALL_ANCHORS, mallWorldV3 } from '../src/mall-world';
+import { MALL_ANCHORS, mallWorldV3, mallWorldV4 } from '../src/mall-world';
 import { MALL_RAIDERS, MALL_RAIDER_POSTS, MALL_RAIDER_STORES } from '../src/enemy-mall';
 import { separation, spacePath, traversable } from '../src/spatial';
 import { damageLayerEnemy } from '../src/layer-transition';
@@ -17,15 +17,16 @@ function fixture(raw?: string) {
     assert.ok(saves.initialize(), state.storageError); state.state = 'hideout';
     return { state, saves, deny: (value: boolean) => { denied = value; }, get raw() { return data.get(SESSION_KEY)!; }, get writes() { return writes; } };
 }
-const deploy = (seed: number, legacyEnemies = false) => {
-    const f = fixture(); assert.ok(f.saves.beginRun(seed, 'mall', { mallLayout: 3, legacyEnemies }), f.state.storageError); return f;
+const deploy = (seed: number, legacyEnemies = false, mallLayout: 3 | 4 = 3) => {
+    const f = fixture(); assert.ok(f.saves.beginRun(seed, 'mall', { mallLayout, legacyEnemies }), f.state.storageError); return f;
 };
+/** The layouts a new mall raid installs the squad on: layout 3 (still deployable explicitly) and layout 4 (the default). */
+const ENCOUNTER_LAYOUTS = [[3, mallWorldV3()], [4, mallWorldV4()]] as const;
 const normalizeRun = (value: unknown, runId: string) => JSON.parse(JSON.stringify(value).replaceAll(runId, '<same-run>'));
 
-test('new layout3 mall uses three existing upstairs slots, one existing crate and no new RNG or scene goods across 100 seeds', () => {
-    const world = mallWorldV3();
-    for (let seed = 1; seed <= 100; seed++) {
-        const f = deploy(seed), old = deploy(seed, true), raid = f.state.expansion!.raid!, baseline = old.state.expansion!.raid!;
+test('new layout3/4 mall uses three existing upstairs slots, one existing crate and no new RNG or scene goods across 100 seeds', () => {
+    for (const [layout, world] of ENCOUNTER_LAYOUTS) for (let seed = 1; seed <= 100; seed++) {
+        const f = deploy(seed, false, layout), old = deploy(seed, true, layout), raid = f.state.expansion!.raid!, baseline = old.state.expansion!.raid!;
         const actors = Object.values(raid.maps).flatMap(m => m.enemies), native = actors.filter(e => e.tactics?.squad === MALL_RAIDERS);
         assert.equal(actors.length, 25); assert.equal(new Set(actors.map(e => e.uid)).size, 25);
         assert.equal(native.length, 3); assert.equal(raid.maps['mall-f2'].enemies.length, 9);
@@ -90,8 +91,8 @@ test('mall tactical phases and original backups survive reload and portable impo
 });
 
 test('two east stair returns and terrace through-route stay clear of the authored raider pocket at either tide', () => {
-    const map = mallWorldV3().maps['mall-f2'];
-    for (const highTide of [false, true]) {
+    for (const [, world] of ENCOUNTER_LAYOUTS) for (const highTide of [false, true]) {
+        const map = world.maps['mall-f2'];
         const context = { definition: map, doors: {}, highTide };
         const north = map.entries.find(e => e.id === 'S-N-down')!, south = map.entries.find(e => e.id === 'S-E-down')!;
         const route = spacePath(context, north.at, south.at);

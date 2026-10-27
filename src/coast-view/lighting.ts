@@ -1,5 +1,5 @@
 import { CanvasSource, Container, Graphics, Sprite, Texture } from 'pixi.js';
-import type { MapDef, Point, Rect } from '../raid-runtime/contract';
+import type { MapDef, Point, Rect, RegionDef } from '../raid-runtime/contract';
 import { hasRoof } from './appearance';
 import { hash, hex, radialLight } from './art/paint';
 import type { Textures } from './textures';
@@ -22,6 +22,18 @@ export const MOODS: Mood[] = [
 const rgb = (c: number) => [(c >> 16) & 255, (c >> 8) & 255, c & 255];
 /** Ambient samples per world pixel: one sample every 8 px, drawn with linear filtering (soft, wall-shaped transitions). */
 const AMB = 8;
+/**
+ * Multiplied over a room the Runtime has not revealed, on floors without ceilings (mall floors, #26 F14): darker and a
+ * little cooler, so an unrevealed room reads as out of sight rather than empty. The layout stays readable through it.
+ */
+export const UNSEEN_TINT = 0x8d96a6;
+const UNSEEN_RGB = rgb(UNSEEN_TINT);
+/** The multiplier of a room at reveal level `lit` (0 unrevealed .. 1 revealed): UNSEEN_TINT rising to white. */
+export function unseenTint(lit: number): number {
+  if (lit >= 1) return 0xffffff;
+  const [r, g, b] = UNSEEN_RGB, k = (c: number) => Math.round(c + (255 - c) * lit);
+  return (k(r) << 16) | (k(g) << 8) | k(b);
+}
 /** Seconds a room's lights take to come up once it is revealed; hiding is immediate. */
 export const REVEAL_FADE = .3;
 /** Next reveal level: 0 at once when hidden; a fresh light (`prev` unset) or a flash (`snap`) goes straight to 1; otherwise +dt/REVEAL_FADE. */
@@ -42,6 +54,9 @@ export class Lighting {
   private backdrop = new Graphics();
   private base = new Sprite();
   private dynamic = new Container();
+  /** Unrevealed rooms (setUnseen), multiplied over ambient and lights; `at` applies the same shade to upright sprites. */
+  private shade = Object.assign(new Graphics(), { blendMode: 'multiply' as const });
+  private unseen: { rooms: { id: string; lit?: number }[]; cells: (number[] | undefined)[]; cols: number; rows: number; tile: number } | null = null;
   private pool: Sprite[] = [];
   lights: Light[] = [];
   mood: Mood = MOODS[0];
@@ -53,7 +68,7 @@ export class Lighting {
 
   constructor(tex: Textures) {
     this.lightTex = tex.ensure('light:radial', () => radialLight(64, 6));
-    this.layer.addChild(this.backdrop, this.base, this.dynamic);
+    this.layer.addChild(this.backdrop, this.base, this.dynamic, this.shade);
   }
 
   /** Ambient zone of a world point for maps the default rule gets wrong (the mall: outdoor plaza and terrace, the drop). */
@@ -111,6 +126,58 @@ export class Lighting {
     for (; i < this.pool.length; i++) this.pool[i].visible = false;
   }
 
+  /**
+   * Rooms to shade while unrevealed (#26 F14), or none. Only floors without ceilings ask (the mall builder's); elsewhere a
+   * roof or a ceiling already covers an unrevealed room. A cell belongs to every room whose rectangle holds its centre.
+   */
+  setUnseen(m: MapDef, rooms: readonly RegionDef[]) {
+    this.shade.clear();
+    if (!rooms.length) { this.unseen = null; return; }
+    const T = m.tile, cells: (number[] | undefined)[] = new Array(m.cols * m.rows);
+    rooms.forEach((r, i) => {
+      for (let y = Math.max(0, Math.floor(r.y / T)); y < Math.min(m.rows, Math.ceil((r.y + r.h) / T)); y++)
+        for (let x = Math.max(0, Math.floor(r.x / T)); x < Math.min(m.cols, Math.ceil((r.x + r.w) / T)); x++) {
+          const cx = x * T + T / 2, cy = y * T + T / 2;
+          if (cx >= r.x && cx < r.x + r.w && cy >= r.y && cy < r.y + r.h) (cells[y * m.cols + x] ??= []).push(i);
+        }
+    });
+    this.unseen = { rooms: rooms.map(r => ({ id: r.id })), cells, cols: m.cols, rows: m.rows, tile: T };
+  }
+  /**
+   * A room's shade follows its lights (`revealLevel`): it lifts over REVEAL_FADE once the room is revealed and is back at once
+   * when it is hidden; the first sync takes the current state. Rooms may overlap, and a point shows only when all of its
+   * rooms are revealed, so a cell takes the least revealed of them. Redrawn only when a level moved. It reads nothing but
+   * `revealed`: it shows where a hidden room is (its walls and furniture are drawn anyway), never what is in it.
+   */
+  syncUnseen(dt: number, revealed: Readonly<Record<string, boolean>>) {
+    const u = this.unseen;
+    if (!u) return;
+    let moved = false;
+    for (const r of u.rooms) { const lit = revealLevel(r.lit, revealed[r.id] === true, dt, false); moved ||= lit !== r.lit; r.lit = lit; }
+    if (!moved) return;
+    const g = this.shade.clear();
+    for (let y = 0; y < u.rows; y++) for (let x = 0; x < u.cols;) {
+      const lit = this.cellLit(y * u.cols + x);
+      let n = 1;
+      while (x + n < u.cols && this.cellLit(y * u.cols + x + n) === lit) n++;
+      if (lit < 1) g.rect(x * u.tile, y * u.tile, n * u.tile, u.tile).fill(unseenTint(lit));
+      x += n;
+    }
+  }
+  private cellLit(i: number): number {
+    const u = this.unseen!;
+    let lit = 1;
+    for (const r of u.cells[i] ?? []) lit = Math.min(lit, u.rooms[r].lit ?? 1);
+    return lit;
+  }
+  /** Multiplier of the unrevealed-room shade at a world point (white outside unrevealed rooms). */
+  unseenAt(p: Point): number {
+    const u = this.unseen;
+    if (!u) return 0xffffff;
+    const x = Math.floor(p.x / u.tile), y = Math.floor(p.y / u.tile);
+    return x < 0 || y < 0 || x >= u.cols || y >= u.rows ? 0xffffff : unseenTint(this.cellLit(y * u.cols + x));
+  }
+
   /** Brightness factor of a light now: fade for short-lived ones, a slow waver and rare brief dips for flickering lamps. */
   level(l: Light): number {
     if (l.ttl) return 1 - (l.age ?? 0) / l.ttl;
@@ -121,7 +188,7 @@ export class Lighting {
     return waver * dip;
   }
 
-  /** Ambient at a world point (bilinear on the baked map; open sky outside the map) plus every visible light. */
+  /** Ambient at a world point (bilinear on the baked map; open sky outside the map) plus every visible light, under the unrevealed-room shade. */
   at(p: Point, _region: string | null | undefined, revealed: Record<string, boolean>, _indoorHint = false): number {
     let r: number, g: number, b: number;
     const a = this.amb, m = this.map;
@@ -141,7 +208,11 @@ export class Lighting {
       const f = Math.pow(1 - d / l.r, 1.6) * l.k * this.level(l) * (l.lit ?? 1), [lr, lg, lb] = rgb(l.color);
       r += lr * f; g += lg * f; b += lb * f;
     }
-    return (Math.min(255, r | 0) << 16) | (Math.min(255, g | 0) << 8) | Math.min(255, b | 0);
+    // Clamp first, as the light layer's 8-bit target does before the shade multiplies it.
+    r = Math.min(255, r | 0); g = Math.min(255, g | 0); b = Math.min(255, b | 0);
+    const shade = this.unseenAt(p);
+    if (shade !== 0xffffff) { const [sr, sg, sb] = rgb(shade); r = r * sr / 255 | 0; g = g * sg / 255 | 0; b = b * sb / 255 | 0; }
+    return (r << 16) | (g << 8) | b;
   }
 
   /** The baked ambient texture is this object's own (never the shared empty texture a fresh Sprite starts with). */

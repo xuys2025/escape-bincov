@@ -74,6 +74,18 @@ async function compile() {
     if (createHash('sha256').update(bytes).digest('hex') !== a.sha256) throw new Error(`Opening asset hash mismatch: ${a.file}`);
     if (bytes.readUInt32BE(16) !== a.w || bytes.readUInt32BE(20) !== a.h) throw new Error(`Opening asset size mismatch: ${a.file}`);
   }
+  // Gunsmith art (Sol, #28 M2-09; ART-SPEC section 7): the importer covers exactly the manifest and every PNG matches its
+  // hash and size. The art budget (224 KiB) only reports, never fails the build (M0 review decision 4).
+  const gunsmith = JSON.parse(await readFile('assets/gunsmith/manifest.json', 'utf8'));
+  const gunsmithImports = [...(await readFile('src/art/gunsmith-assets.ts', 'utf8')).matchAll(/from '\.\.\/\.\.\/(assets\/gunsmith\/[^']+\.png)'/g)].map(m => m[1]).sort();
+  if (JSON.stringify(gunsmithImports) !== JSON.stringify(gunsmith.assets.map(a => a.file).sort())) throw new Error('Gunsmith art imports do not match assets/gunsmith/manifest.json. Run node scripts/gunsmith-assets.mjs.');
+  let gunsmithBytes = 0;
+  for (const a of gunsmith.assets) {
+    const bytes = await readFile(a.file); gunsmithBytes += bytes.length;
+    if (createHash('sha256').update(bytes).digest('hex') !== a.sha256) throw new Error(`Gunsmith art hash mismatch: ${a.file}`);
+    if (bytes.readUInt32BE(16) !== a.w || bytes.readUInt32BE(20) !== a.h) throw new Error(`Gunsmith art size mismatch: ${a.file}`);
+  }
+  console.log(`Gunsmith art: ${gunsmith.assets.length} PNG, ${gunsmithBytes} bytes (budget 229376, report only).`);
   const county = JSON.parse(await readFile('assets/county-map/manifest.json', 'utf8'));
   for (const [file, hash] of [[county.source, county.sourceSha256], [county.output, county.sha256]]) {
     if (createHash('sha256').update(await readFile(file)).digest('hex') !== hash) throw new Error(`County map hash mismatch: ${file}`);
@@ -98,7 +110,7 @@ async function compile() {
   const missing = [...await fontCharacters()].filter(c => !manifest.codepoints.includes(c.codePointAt(0)));
   if (missing.length) throw new Error('Regenerate the embedded font for: ' + missing.join(''));
   const fontCss = `@font-face{font-family:"Bincov Text";src:url(data:font/woff2;base64,${font.toString('base64')}) format("woff2");font-weight:400;font-style:normal;font-display:swap;}\n`;
-  const css = fontCss + (await Promise.all(['src/style.css', 'src/title.css', 'src/tactical.css', 'src/coast-view/coast.css'].map(path => readFile(path, 'utf8')))).join('\n');
+  const css = fontCss + (await Promise.all(['src/style.css', 'src/title.css', 'src/tactical.css', 'src/coast-view/coast.css', 'src/gunsmith-view/bench.css'].map(path => readFile(path, 'utf8')))).join('\n');
   const notices = (await readFile('THIRD_PARTY_NOTICES.md','utf8')).replace(/-->/g,'--&gt;');
   const html = `<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><!--\n${notices}\n--><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#10272b"><title>逃离滨科夫 · Escape Bincov</title><style>${css}</style></head><body><main id="frame"><div id="game"></div><div id="ui"></div></main><div id="toast" role="status"></div><script>${js}</script></body></html>`;
   await mkdir('dist',{recursive:true});

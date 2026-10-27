@@ -1,5 +1,5 @@
 /**
- * Crowded stair landing on the 2.5D mall (layout 3, the layout a new mall raid deploys): with every legal landing slot
+ * Crowded stair landing on the 2.5D mall (layout 4, the layout a new mall raid deploys): with every legal landing slot
  * on F2 occupied, E keeps the player on F1 with no population transfer and says why; with one slot cleared, exactly one
  * transition happens, to the specified landing, and five seconds of held E / W do nothing on F2. (A held mouse button
  * fires only on its press, so it cannot fire again on F2; held touch fire after a landing is checked in
@@ -11,21 +11,21 @@ import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
-import { mallWorldV3 } from '../src/mall-world.ts';
+import { mallWorldV4 } from '../src/mall-world.ts';
 import { traversable } from '../src/spatial.ts';
 import { browserOptions } from './browser-options.mjs';
 import { raidReady, frames } from './raid-view.mjs';
 const out=resolve('test-results');await mkdir(out,{recursive:true});
-const report={htmlSha256:createHash('sha256').update(await readFile('dist/index.html')).digest('hex'),startedAt:new Date().toISOString(),methodology:'Offline native mall E input on the 2.5D view (layout 3). Explicit candidates move the original 25 enemy identities to obstruct target landing slots and freeze enemy AI, then clear exactly one slot. No fabricated enemy identities or reset population.',steps:[],errors:[],requests:[]};
+const report={htmlSha256:createHash('sha256').update(await readFile('dist/index.html')).digest('hex'),startedAt:new Date().toISOString(),methodology:'Offline native mall E input on the 2.5D view (layout 4). Explicit candidates move the original 25 enemy identities to obstruct target landing slots and freeze enemy AI, then clear exactly one slot. No fabricated enemy identities or reset population.',steps:[],errors:[],requests:[]};
 const browser=await chromium.launch(browserOptions);report.browser=browser.version();const ctx=await browser.newContext({viewport:{width:1280,height:720},offline:true}),page=await ctx.newPage();page.setDefaultTimeout(30000);page.on('pageerror',e=>report.errors.push(e.stack??e.message));ctx.on('request',r=>{if(/^https?:/.test(r.url()))report.requests.push(r.url());});
-const WORLD=mallWorldV3(),entry=WORLD.maps['mall-f1'].entries.find(e=>e.id==='S-N-up'),at=entry.landing,slots=[];
+const WORLD=mallWorldV4(),entry=WORLD.maps['mall-f1'].entries.find(e=>e.id==='S-N-up'),at=entry.landing,slots=[];
 for(let y=-2;y<=2;y++)for(let x=-2;x<=2;x++){const p={x:at.x+x*32,y:at.y+y*32};if(Math.hypot(p.x-at.x,p.y-at.y)<=64&&traversable({definition:WORLD.maps['mall-f2'],doors:{},highTide:true},p,'body',10))slots.push(p);}
 const snapshot=()=>page.evaluate(()=>{const s=window.__bincov.saveSession.captureExpansion(),b=window.__bincovSample.host.lastBatch;return{map:s.raid.currentMap,shown:b.stamp.world.mapId,player:s.raid.player,enemies:Object.values(s.raid.maps).flatMap(m=>m.enemies).map(e=>e.uid).sort(),roster:s.raid.roster,pursuits:s.raid.pursuits,mag:b.frame.hud.weapon.mag};});
 const mapShown=id=>page.waitForFunction(id=>window.__bincovSample.host.lastBatch?.stamp.world.mapId===id,id);
 async function fixture(count){await page.evaluate(({entry,slots,count})=>{window.__bincovSample.driver.freezeAI(true);const s=window.__bincov.saveSession,t=s.prepareExpansionMutation(d=>{const r=d.expansion.raid;r.currentMap='mall-f1';r.player={...entry.at,rotation:0};d.expansion.body.hp=100;d.expansion.body.stamina=100;d.expansion.body.bleeding=false;const source=r.maps['mall-f1'],target=r.maps['mall-f2'];const moved=source.enemies.splice(0,count);moved.forEach((e,i)=>Object.assign(e,slots[i],{home:{...slots[i]},target:{...slots[i]},state:'patrol',timer:1000,cooldown:1000,path:[],alert:0}));target.enemies.push(...moved);for(const m of Object.values(r.maps))for(const e of m.enemies)e.cooldown=1000;});if(!t||s.commitExpansionMutation(t)!=='committed')throw new Error('Landing fixture rejected');window.__bincovSample.host.eventLog.length=0;},{entry,slots,count});await mapShown('mall-f1');await frames(page,3);}
 try{
  await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1&entry=tabs');await page.locator('[data-action="enter"]').click();await page.locator('#run-world').selectOption('mall');await page.locator('#seed').fill('41');await page.locator('[data-action="deploy"]').click();
- const world=await raidReady(page);assert.equal(world.worldVersion,'mall-v3','a new mall raid deploys layout 3');
+ const world=await raidReady(page);assert.equal(world.worldVersion,'mall-v4','a new mall raid deploys layout 4');
  await fixture(slots.length);const before=await snapshot();
  await page.keyboard.press('e');
  await page.waitForFunction(()=>window.__bincovSample.host.eventLog.some(e=>e.type==='rejected'&&e.detail.reason==='unreachable-or-rejected'));

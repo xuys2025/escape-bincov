@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as D from '../src/domain';
-import { MALL_WORLD, MALL_ANCHORS, MALL_PASSAGES, initializeMallRaid, mallRunConfig, mallWorldV2, mallWorldV3 } from '../src/mall-world';
+import { MALL_WORLD, MALL_ANCHORS, MALL_PASSAGES, initializeMallRaid, mallRunConfig, mallWorldV2, mallWorldV3, mallWorldV4 } from '../src/mall-world';
 import { newExpansion, validateExpansion, type WorldDefinition, type WorldResolver } from '../src/expansion-state';
 import { resolveExpansionWorld } from '../src/expansion-worlds';
 import { corridor, spacePath, traversable, validateSpaces } from '../src/spatial';
 import { advanceLayerShots } from '../src/layer-transition';
 
-const V2 = mallWorldV2(), V3 = mallWorldV3();
+const V2 = mallWorldV2(), V3 = mallWorldV3(), V4 = mallWorldV4();
 /** Every saved revision validates through the production registry. */
-const REVISIONS: [string, WorldDefinition, WorldResolver][] = [['', MALL_WORLD, resolveExpansionWorld], ['（布局二版）', V2, resolveExpansionWorld], ['（布局三版）', V3, resolveExpansionWorld]];
+const REVISIONS: [string, WorldDefinition, WorldResolver][] = [['', MALL_WORLD, resolveExpansionWorld], ['（布局二版）', V2, resolveExpansionWorld], ['（布局三版）', V3, resolveExpansionWorld], ['（布局四版）', V4, resolveExpansionWorld]];
 
 for (const [label, MALL, resolveWorld] of REVISIONS) {
     test(`商场39区域、7同层开口、4成对连接及固定验证锚点合法，两层同坐标各自拥有楼板${label}`, () => {

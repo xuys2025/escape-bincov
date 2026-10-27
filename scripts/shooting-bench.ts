@@ -9,18 +9,17 @@
 import { writeFileSync } from 'node:fs';
 import { parseArgs } from 'node:util';
 import * as D from '../src/domain';
-import { SAMPLE_GUNS } from '../src/shooting';
 import { benchRaid, arm, replay, mouse, mouseHold, touchHold, cadence, dummy, DUMMY_RADIUS, GUNS, type Gun, type Script } from '../tests/fixtures/shooting-bench';
 
 const { values } = parseArgs({ options: { json: { type: 'string' } } });
 const RATES = [20, 30, 60, 120, 144];
 const deg = (r: number) => +(r * 180 / Math.PI).toFixed(3);
 const report: Record<string, unknown> = {};
-const weapon = (gun: Gun) => gun === 'm4a1' ? SAMPLE_GUNS.m4a1 : D.WEAPONS[gun];
+const weapon = (gun: Gun) => D.WEAPONS[gun];
 
-// Held touch fire (semi-automatic) or held button (sample rifle) for 6 s with reloads, and desktop clicks at 10 Hz for 3 s.
-for (const gun of [...GUNS, 'm4a1'] as const) {
-    const hold = gun === 'm4a1' ? mouseHold(0, 6) : touchHold(0, 6);
+// Held touch fire (semi-automatic) or held button (the automatic M4A1) for 6 s with reloads, and desktop clicks at 10 Hz for 3 s.
+for (const gun of [...GUNS, 'mb4a1'] as const) {
+    const hold = gun === 'mb4a1' ? mouseHold(0, 6) : touchHold(0, 6);
     report[`hold 6 s: ${gun}`] = Object.fromEntries(RATES.map(fps => {
         const log = replay(arm(benchRaid(), gun, { reserve: 120 }), hold, 6, fps);
         return [fps, { shots: log.shots.length, interval: +cadence(log).toFixed(4) }];
@@ -34,17 +33,17 @@ const stances: Record<string, [Script, number]> = {
     walking: [() => ({ move: { x: 0, y: 1, sprint: false } }), .6], sprinting: [() => ({ move: { x: 0, y: 1, sprint: true } }), .6],
     'stopped .3 s after sprinting': [t => ({ move: { x: 0, y: t < .6 ? 1 : 0, sprint: t < .6 } }), .9],
 };
-for (const gun of [...GUNS, 'm4a1'] as const) {
+for (const gun of [...GUNS, 'mb4a1'] as const) {
     const range = [160, 320, 480, 640].filter(d => d <= weapon(gun).range);
     report[`cone ${gun}`] = Object.fromEntries(Object.entries(stances).map(([name, [script, seconds]]) => {
         const cone = replay(arm(benchRaid(), gun), script, seconds, 60).aims.at(-1)!.cone;
         return [name, { deg: deg(cone), hit: Object.fromEntries(range.map(d => [d, +Math.min(1, 2 * Math.asin(DUMMY_RADIUS / d) / cone).toFixed(2)])) }];
     }));
 }
-// Bloom and drift over a 1 s burst of the sample rifle, then recovery.
+// Bloom and drift over a 1 s burst of the M4A1, then recovery.
 {
-    const log = replay(arm(benchRaid(), 'm4a1'), mouseHold(0, 1), 2, 60);
-    report['m4a1 burst: cone/drift deg at t'] = Object.fromEntries([0, .25, .5, .75, 1, 1.25, 1.5, 2].map(t => {
+    const log = replay(arm(benchRaid(), 'mb4a1'), mouseHold(0, 1), 2, 60);
+    report['mb4a1 burst: cone/drift deg at t'] = Object.fromEntries([0, .25, .5, .75, 1, 1.25, 1.5, 2].map(t => {
         const a = [...log.aims].reverse().find(x => x.t <= t + 1e-9)!;
         return [t, `${deg(a.cone)} / ${deg(a.drift)}`];
     }));

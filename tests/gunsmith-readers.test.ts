@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import * as D from '../src/domain';
-import { coneOf, driftOf, handlingOf, SAMPLE_GUNS } from '../src/shooting';
+import { coneOf, driftOf, handlingOf } from '../src/shooting';
 import { perkEffects, rpgMultipliers } from '../src/rpg';
 import type { PerkId } from '../src/perks';
 import { createRangeRaid, ShootingRange } from '../src/range/raid';
@@ -62,13 +62,14 @@ test('the equipped gun\'s instance, weapon and weight: the old three read as fro
         assert.notEqual(w, D.WEAPONS[id], 'the effective stats, worked out fresh, not the table row');
         assert.equal(D.equippedWeight(held), D.ITEMS[id].weight);
     }
-    // No gun is the knife: its row, no weight. Neither the knife nor the #39 sample rifle is a catalog gun.
+    // No gun is the knife: its row, no weight. Neither the knife nor the retired #39 sample id is a gun, and nor is a
+    // catalog gun that is not an item yet (D.isGun, #28 M2-01).
     for (const weapon of [null, 'knife']) {
         assert.equal(D.equippedGun(slot(weapon)), null);
         assert.equal(D.equippedWeapon(slot(weapon)), D.WEAPONS.knife);
         assert.equal(D.equippedWeight(slot(weapon)), 0);
     }
-    assert.equal(D.equippedGun({ ...slot(null), weapon: SAMPLE_GUNS.m4a1.id }), null);
+    for (const weapon of ['m4a1', 'mpb5']) assert.equal(D.equippedGun({ ...slot(null), weapon }), null, weapon);
 });
 
 test('the readers take the equipped instance\'s own parts, and refuse a gun slot without its instance', () => {
@@ -181,12 +182,10 @@ test('the Runtime reads the effective stats: the old three fire, reload, weigh a
             assert.deepEqual([{ ammo: r.mag, ammoRelief: r.magRelief }, r.session.loadout!.bag], [expected, bag], id);
             assert.equal(r.mag, row.magazine, id);
         }
-        // The knife and the #39 sample rifle keep their own tables.
+        // The knife keeps its own tables.
         const s = r.snapshot(); s.knife = true; r.restore(s);
-        assert.ok(r.currentWeapon === D.WEAPONS.knife && r.grip === handlingOf('knife'));
-        b.driver.sampleGun('m4a1');
-        assert.ok(r.currentWeapon === SAMPLE_GUNS.m4a1 && r.grip === handlingOf('m4a1') && r.weaponLook === 'rifle');
-        b.driver.sampleGun(null);
+        assert.ok(r.currentWeapon === D.WEAPONS.knife && r.grip === handlingOf('knife') && r.weaponLook === 'knife');
+        const back = r.snapshot(); back.knife = false; r.restore(back);
         assert.deepEqual(r.currentWeapon, D.WEAPONS.carbine);
     }
 });
@@ -271,7 +270,7 @@ test('item weights are shown through the one item reader, so a gun\'s parts coun
 });
 
 test('the raid readers no longer look the held gun up by id', () => {
-    // The knife's own row (WEAPONS.knife) and the sample's (SAMPLE_GUNS, handlingOf) stay; a gun goes through D.equippedGun.
+    // The knife's own row (WEAPONS.knife, handlingOf) stays; a gun goes through D.equippedGun.
     // Before M1-05 this found five WEAPONS lookups and the gun's ITEMS weight in these files.
     for (const file of ['src/raid-runtime/runtime.ts', 'src/raid-runtime/presentation.ts', 'src/raid-runtime/test-support.ts', 'src/range/raid.ts']) {
         const text = readFileSync(file, 'utf8');

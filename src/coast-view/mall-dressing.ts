@@ -13,6 +13,8 @@ export interface DressMap {
     cells: readonly (readonly string[])[];
     regions: readonly DressRegion[];
     decorations: readonly DressDecoration[];
+    /** Layout 4: every region is furnished, so every room gets its floor, lights and clutter (layouts 2 and 3: the route). */
+    full?: boolean;
 }
 /**
  * `x, y`: top-left of the canvas in world px; `z`: south edge used for depth sorting; `layer` overhead draws above actors.
@@ -52,6 +54,29 @@ const SINGLE: Partial<Record<FurnitureName, string>> = {
     'planter-box': 'prop-planter-box', stanchions: 'prop-stanchions', adboard: 'prop-adboard-fallen', partition: 'prop-partition',
     'gondola-toppled': 'prop-gondola-toppled', debris: 'prop-debris',
 };
+/**
+ * Layout-4 pieces painted by the view (art/mall-furniture.ts) until Sol's samples arrive: canvas height above the
+ * footprint, so a drawn sample of the same size can replace one without moving anything.
+ */
+export const PAINTED_LIFT: Partial<Record<FurnitureName, number>> = {
+    'shelf-wall': 48, rack: 56, counter: 24, 'glass-case': 26, 'kitchen-line': 24, sink: 26, stall: 44, lockers: 46, switchgear: 48,
+    'clothes-rail': 22, barrier: 12, 'diner-table': 20, desk: 30, cabinet: 26, safe: 20, mannequin: 24, 'fitting-room': 44, vending: 40,
+    checkout: 24, 'ball-pool': 36, slide: 24, 'bamboo-screen': 48, car: 18, dumpster: 40, container: 62, 'ac-unit': 24,
+};
+/**
+ * Drawn base of a painted piece narrower than its footprint (x, y, w, h in px inside the footprint), for its shadow:
+ * a shadow under the whole footprint would sit apart from a thin rail or a mannequin's stand.
+ */
+const PAINTED_BASE: Partial<Record<FurnitureName, readonly [number, number, number, number]>> = {
+    mannequin: [10, 14, 12, 8], 'clothes-rail': [0, 12, 32, 9], vending: [3, 6, 26, 20], cabinet: [5, 8, 22, 18], safe: [4, 8, 24, 18],
+    'ac-unit': [2, 8, 28, 20], barrier: [0, 9, 32, 14], 'diner-table': [4, 6, 56, 24], slide: [4, 8, 58, 16], 'bamboo-screen': [12, 0, 8, 96],
+    checkout: [6, 2, 20, 60], dumpster: [2, 6, 60, 22], car: [6, 14, 84, 38],
+};
+/** Look of a painted piece by the region it stands in (the stock on a wall shelf, a counter's finish). */
+const LOOKS: Partial<Record<FurnitureName, Record<string, string>>> = {
+    'shelf-wall': { 'F1-01': 'pharmacy', 'F1-06': 'grocery', 'F1-07': 'phones', 'F1-08': 'hardware', 'F2-01': 'clothes' },
+    counter: { 'F1-02': 'diner', 'F2-01': 'boutique', 'F1-08': 'wood' },
+};
 const EMITS = new Set(['prop-fridge-a', 'prop-fridge-b', 'prop-directory', 'prop-pylon', 'prop-floor-lamp', 'wall-curtain', 'wall-curtain-broken', 'wall-window-2f']);
 
 const contains = (r: DressRegion, x: number, y: number) => x * TILE >= r.x && x * TILE < r.x + r.w && y * TILE >= r.y && y * TILE < r.y + r.h;
@@ -67,7 +92,12 @@ export function mallGround(m: DressMap, x: number, y: number): string[] {
         'O-02': 'ground-plaza', 'F1-11': 'ground-terrazzo', 'F2-14': 'ground-terrazzo', 'F1-12': 'ground-terrazzo', 'F2-15': 'ground-terrazzo',
         'F1-04': 'ground-tile-fresh', 'F1-05': 'ground-tile-cold', 'F2-13': 'ground-wood', 'F2-18': 'ground-deck',
     };
-    const base = by[r] ?? (r.startsWith('O-') || !insideFootprint(x, y) ? 'ground-plaza' : 'ground-tile-large');
+    // Layout 4 floors the rest from the same samples (Sol's M2 batch adds concrete, carpet, rubber and asphalt).
+    const full: Record<string, string> = {
+        'F1-01': 'ground-tile-cold', 'F1-02': 'ground-tile-fresh', 'F1-07': 'ground-terrazzo', 'F1-14': 'ground-terrazzo', 'F2-01': 'ground-wood',
+        'F2-04': 'ground-wood', 'F2-06': 'ground-deck', 'F2-07': 'ground-wood', 'F2-08': 'ground-wood', 'F2-11': 'ground-tile-cold',
+    };
+    const base = by[r] ?? (m.full ? full[r] : undefined) ?? (r.startsWith('O-') || !insideFootprint(x, y) ? 'ground-plaza' : 'ground-tile-large');
     const fallback = base === 'ground-plaza' ? [] : ['ground-tile-large'];
     return [...[`${base}-${hash(x >> 1, y >> 1, 3) < .5 ? 'a' : 'b'}`, `${base}-a`].map(id), ...fallback.map(f => id(`${f}-a`))];
 }
@@ -201,8 +231,16 @@ export function mallWallProps(m: DressMap): DressSprite[] {
  * lying on the floor. `x, y`: the lit floor point in world px; broken tubes flicker.
  */
 export interface MallLight { x: number; y: number; r: number; broken: boolean }
+/** Tubes of the rooms layout 4 furnishes: about one per shop and two in the big halls, a few broken. */
+const FULL_TUBES: Record<string, readonly [number, number, boolean][]> = {
+    'mall-f1': [[17, 13, false], [22, 10, true], [17, 27, false], [17, 34, false], [14, 22, true], [60, 21, false], [60, 31, false], [60, 40, true],
+        [36, 10, false], [49, 16, true], [60, 46, false], [14, 45, false], [22, 45, true], [35, 46, false], [47, 46, false]],
+    'mall-f2': [[16, 12, false], [28, 11, false], [38, 12, false], [20, 18, true], [48, 17, false], [37, 23, false], [45, 30, false], [52, 26, true],
+        [44, 39, false], [52, 42, false], [35, 43, false], [34, 36, true], [24, 39, false], [24, 45, false], [13, 25, false], [26, 24, true],
+        [25, 31, false], [26, 37, true], [12, 38, false], [12, 45, true], [60, 46, false], [17, 32, false]],
+};
 export function mallLights(m: DressMap): MallLight[] {
-    return (TUBES[m.mapId] ?? []).map(([x, y, broken]) => ({ x: x * TILE + 16, y: y * TILE + 16, r: broken ? 80 : 115, broken }));
+    return [...TUBES[m.mapId] ?? [], ...m.full ? FULL_TUBES[m.mapId] ?? [] : []].map(([x, y, broken]) => ({ x: x * TILE + 16, y: y * TILE + 16, r: broken ? 80 : 115, broken }));
 }
 
 /** One sprite per furniture piece (multi-cell pieces at their north-west part) plus the umbrellas over cafe sets. */
@@ -213,26 +251,35 @@ export function mallProps(m: DressMap): DressSprite[] {
         if (!f || f.dx !== 0 || f.dy !== 0) continue;
         const [x, y] = key.split(',').map(Number), t = MALL_FURNITURE[f.type];
         let names: string[];
-        if (f.type === 'gondola') {
+        const painted = f.type in PAINTED_LIFT;
+        if (painted) {
+            // Run modules close where the run ends; the seed varies stock and wear between a few versions per piece.
+            const run = 'run' in t, end = run ? `${same(x - 1, y, f.type) ? '' : 'w'}${same(x + 1, y, f.type) ? '' : 'e'}` || 'm' : '';
+            names = [`furniture:${f.type}:${LOOKS[f.type]?.[regionAt(m, x, y)?.id ?? ''] ?? ''}:${end}:${Math.floor(hash(x, y, 101) * 4)}`];
+        } else if (f.type === 'gondola') {
             const w = same(x - 1, y, 'gondola'), e = same(x + 1, y, 'gondola');
             names = !w ? ['prop-gondola-end-w'] : !e ? ['prop-gondola-end-e']
                 : [`prop-gondola-${pick(x, y, 17, ['mid-full-a', 'mid-full-b', 'mid-full-a', 'mid-sparse', 'mid-looted'])}`, 'prop-gondola-mid-full-a'];
         } else if (f.type === 'fridge') names = [`prop-fridge-${hash(x, y, 19) < .7 ? 'a' : 'b'}`, 'prop-fridge-a'];
         else if (f.type === 'cafe-table' || f.type === 'bistro-set') names = ['cafe-set'];
         else names = [SINGLE[f.type]!];
-        const size = MALL_SPRITE_SIZE[names[0].replace(/-(end-[ew]|mid-.*|[ab])$/, '')] ?? MALL_SPRITE_SIZE[names[0]] ?? [t.w * TILE, t.h * TILE];
+        const size = painted ? [t.w * TILE, t.h * TILE + PAINTED_LIFT[f.type]!] as const
+            : MALL_SPRITE_SIZE[names[0].replace(/-(end-[ew]|mid-.*|[ab])$/, '')] ?? MALL_SPRITE_SIZE[names[0]] ?? [t.w * TILE, t.h * TILE];
         const south = (y + t.h) * TILE, stairs = f.type === 'stairs-up' || f.type === 'stairs-down';
-        // Painted by the view: the stairs, and the cafe set (the drawn sample fits a whole set into one cell, too small).
+        // Painted by the view: the stairs, the cafe set (the drawn sample fits a whole set into one cell, too small) and the
+        // layout-4 pieces that have no sample yet.
         const cafe = names[0] === 'cafe-set', lamp = f.type === 'floor-lamp';
-        const painted = stairs ? PROCEDURAL + f.type : cafe ? PROCEDURAL + 'cafe-set' : null;
+        const procedural = stairs ? PROCEDURAL + f.type : cafe ? PROCEDURAL + 'cafe-set' : painted ? PROCEDURAL + names[0] : null;
         // Every piece is centred on its footprint. Most fill it exactly; the one-cell cafe table's set is wider (chairs
         // reaching into the cells beside), the two-cell table of layout 3 narrower (it spans the sofa behind it).
         // The floor lamp stands in the middle of its cell on a small round base: only the base touches the floor.
         // A piece narrower than its footprint casts its shadow from the drawn piece, not from the whole footprint.
         const left = x * TILE + (t.w * TILE - size[0]) / 2;
-        out.push({ assets: painted ? [painted] : names.map(id), x: left, y: south - size[1], z: south, layer: 'sorted',
+        const base = painted ? PAINTED_BASE[f.type] : undefined;
+        out.push({ assets: procedural ? [procedural] : names.map(id), x: left, y: south - size[1], z: south, layer: 'sorted',
             emit: names.some(n => EMITS.has(n)), foot: cafe ? { x: left + 6, y: y * TILE, w: size[0] - 12, h: t.h * TILE, lift: size[1] - t.h * TILE }
                 : lamp ? { x: x * TILE + 11, y: y * TILE + 12, w: 10, h: 8, lift: 8 }
+                : base ? { x: x * TILE + base[0], y: y * TILE + base[1], w: base[2], h: base[3], lift: size[1] - t.h * TILE }
                 : { x: Math.max(x * TILE, left), y: y * TILE, w: Math.min(t.w * TILE, size[0]), h: t.h * TILE, lift: stairs ? 0 : size[1] - t.h * TILE } });
         if (cafe) {
             const [uw, uh] = MALL_SPRITE_SIZE['overhead-umbrella'];
@@ -292,8 +339,9 @@ export function mallDecals(m: DressMap): MallDecalSpot[] {
     const rate: Record<string, number> = { 'O-02': .07, 'F1-03': .1, 'F1-04': .08, 'F1-05': .08, 'F1-11': .1, 'F2-13': .05, 'F2-14': .06, 'F2-18': .08 };
     m.cells.forEach((row, y) => row.forEach((_, x) => {
         const r = regionAt(m, x, y)?.id ?? '', aisle = m.mapId === 'mall-f1' && y >= 14 && y <= 19 && x >= 27 && x <= 56;
-        // Rooms outside the dressed route get a little litter too, so their floors do not read as untouched.
-        const other = r && !r.startsWith('O-') ? .025 : 0;
+        // Rooms outside the dressed route get a little litter too, so their floors do not read as untouched; layout 4
+        // dresses every room and street.
+        const other = m.full ? (r.startsWith('O-') ? .04 : .05) : r && !r.startsWith('O-') ? .025 : 0;
         if (hash(x, y, 23) >= (rate[r] ?? (aisle ? .08 : other))) return;
         const k = hash(x, y, 29);
         if (r === 'F1-05' || r === 'F1-04' || r === 'F2-18') put(k < .35 ? 'water' : 'litter', x, y, k < .35);

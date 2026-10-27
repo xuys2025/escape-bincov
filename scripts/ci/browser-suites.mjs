@@ -5,10 +5,10 @@ const schedule = {
   'batch-2': ['save-browser', 'asset-load', 'hud-release', 'issue26-inventory', 'mall-passages'],
   'batch-3': ['desktop-input', 'portable', 'shop-drag', 'title', 'title-water', 'opening'],
   'batch-4': ['issue26-station', 'issue26-spatial', 'tactical', 'art', 'systems', 'mobile'],
-  'batch-5': ['buildings', 'station-tier1', 'shop-feedback', 'mobile-ux', 'range'],
-  'batch-6': ['loot-target', 'mall-sample', 'qol', 'coast-render-targets', 'hideout'],
-  'batch-7': ['raid-default', 'ui', 'mall-landing', 'coast-animation', 'station-relief', 'station-reset'],
-  'batch-8': ['expansion', 'loot', 'enemy'],
+  'batch-5': ['buildings', 'station-tier1', 'shop-feedback', 'mobile-ux', 'range', 'gunsmith-bench'],
+  'batch-6': ['enemy-720', 'loot-target', 'mall-sample', 'qol', 'coast-render-targets', 'hideout', 'gunsmith-flow'],
+  'batch-7': ['enemy-touch', 'raid-default', 'ui', 'mall-landing', 'coast-animation', 'station-relief', 'station-reset'],
+  'batch-8': ['enemy-1080', 'expansion', 'loot'],
 };
 
 export const browserGroups = Object.freeze(Object.keys(schedule));
@@ -23,6 +23,7 @@ export const oldClientGroup = browserGroups.find(group => schedule[group].includ
 // Package suites that CI does not run, and why. Every package.json test:* script is scheduled above or listed here
 // (policy.test.mjs), so no suite drops out of both unnoticed. Run these by hand when their area changes.
 const manual = {
+  'enemy': 'Full local enemy acceptance entry; CI executes its exact three independent viewport chains as enemy-720, enemy-1080 and enemy-touch, with exhaustive case and configuration evidence at the gate.',
   'coast-sample': 'Whole 2.5D sample suite: on CI software GL the pages opened after V-CAM time out, so CI runs its animation group (coast-animation).',
   'station': 'Original yard acceptance from #33 (76 steps, about 9 minutes locally); not yet hardened for CI software GL.',
   'station-capability': 'Pixi capability-switch listener probe from #38 (about 3 minutes): needs 16 native batchable textures, which CI software GL lacks; run it on a GPU after renderer or shader lifetime changes.',

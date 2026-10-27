@@ -1,8 +1,9 @@
 import { Container, Sprite } from 'pixi.js';
 import type { Textures } from './textures';
 import { canvas, hash } from './art/paint';
+import { PARTICLE_BUDGET, admit } from '../feedback-budget';
 
-interface Particle { region: readonly string[]; s: Sprite; x: number; y: number; h: number; vx: number; vy: number; vh: number; age: number; ttl: number; g: number; settle: 'decal' | 'fade' | 'stay'; color: number }
+interface Particle { region: readonly string[]; s: Sprite; x: number; y: number; h: number; vx: number; vy: number; vh: number; age: number; ttl: number; g: number; settle: 'decal' | 'fade' | 'stay'; color: number; decor: boolean }
 
 const rooms = (own: readonly string[], owner: readonly string[]) => owner.length ? [...new Set([...own, ...owner])] : own;
 
@@ -18,31 +19,62 @@ export class Fx {
 
   private sprite(): Sprite { const s = this.free.pop() ?? new Sprite(this.tex.pixel()); s.visible = true; s.alpha = 1; s.scale.set(1); s.blendMode = 'normal'; return s; }
 
-  spawn(o: { x: number; y: number; h: number; vx: number; vy: number; vh: number; ttl: number; color: number; g?: number; size?: number; settle?: Particle['settle']; add?: boolean }) {
+  /** The player's position, set by the view each frame: particles farther than PARTICLE_BUDGET.far count as decorative. */
+  focus: { x: number; y: number } | null = null;
+  private decorLive = 0;
+  /** Particles the budget turned away or cut short since the scene was built, by kind (diagnostics and checks). */
+  dropped = { decor: 0, core: 0 };
+
+  /**
+   * One particle, unless a crowded fight has spent the budget (feedback-budget.ts, #75 H-07): `decor` marks smoke, dust,
+   * casings, chips and splinters, and anything far from the player counts as decorative too. Blood, impact sparks and
+   * spit stay core, so the player's own hits still show when the street is full.
+   */
+  spawn(o: { x: number; y: number; h: number; vx: number; vy: number; vh: number; ttl: number; color: number; g?: number; size?: number; settle?: Particle['settle']; add?: boolean; decor?: boolean }) {
+    const decor = !!o.decor || (this.focus !== null && Math.hypot(o.x - this.focus.x, o.y - this.focus.y) > PARTICLE_BUDGET.far);
+    const verdict = admit(this.live.length, decor, this.decorLive, PARTICLE_BUDGET.soft, PARTICLE_BUDGET.hard);
+    if (verdict === 'drop') { this.dropped[decor ? 'decor' : 'core']++; return; }
+    if (verdict === 'evict') { this.release(this.live.findIndex(p => p.decor)); this.dropped.decor++; }
     const s = this.sprite(); s.tint = o.color; s.scale.set(o.size ?? 1); if (o.add) s.blendMode = 'add';
     this.sorted.addChild(s);
-    this.live.push({ region: [], s, x: o.x, y: o.y, h: o.h, vx: o.vx, vy: o.vy, vh: o.vh, age: 0, ttl: o.ttl, g: o.g ?? 520, settle: o.settle ?? 'fade', color: o.color });
+    this.live.push({ region: [], s, x: o.x, y: o.y, h: o.h, vx: o.vx, vy: o.vy, vh: o.vh, age: 0, ttl: o.ttl, g: o.g ?? 520, settle: o.settle ?? 'fade', color: o.color, decor });
+    if (decor) this.decorLive++;
   }
 
-  sparks(x: number, y: number, h: number, nx: number, ny: number, rnd: () => number) {
-    for (let i = 0; i < 7; i++) {
+  /**
+   * A round stopped by a surface: warm sparks and drifting grey chips along the normal. Given its surface (#75 H-05), a
+   * wall also puffs pale dust, and a door throws a few sparks and falling wooden splinters instead. Without one (null:
+   * the classic A/B setting, or an unknown surface) it is the one spray every surface shared before.
+   */
+  sparks(x: number, y: number, h: number, nx: number, ny: number, rnd: () => number, surface: 'wall' | 'door' | 'actor' | null = null) {
+    const door = surface === 'door';
+    for (let i = 0; i < (door ? 3 : 7); i++) {
       const a = Math.atan2(ny, nx) + (rnd() - .5) * 2.2, v = 60 + rnd() * 120;
       this.spawn({ x, y, h, vx: Math.cos(a) * v, vy: Math.sin(a) * v * .6, vh: 40 + rnd() * 90, ttl: .18 + rnd() * .22, color: i % 3 ? 0xffd27a : 0xfff1c8, add: true });
     }
-    for (let i = 0; i < 4; i++) this.spawn({ x, y, h, vx: nx * 20 + (rnd() - .5) * 30, vy: ny * 12 + (rnd() - .5) * 10, vh: 10 + rnd() * 20, ttl: .45 + rnd() * .3, color: 0x8d8576, g: 30, size: 2 });
+    if (door) {
+      for (let i = 0; i < 6; i++) {
+        const a = Math.atan2(ny, nx) + (rnd() - .5) * 1.6, v = 40 + rnd() * 70;
+        this.spawn({ x, y, h, vx: Math.cos(a) * v, vy: Math.sin(a) * v * .6, vh: 30 + rnd() * 50, ttl: .5 + rnd() * .3, color: i % 2 ? 0xb48c5e : 0x8c6a46, g: 360, size: rnd() < .4 ? 2 : 1, decor: true });
+      }
+      return;
+    }
+    for (let i = 0; i < 4; i++) this.spawn({ x, y, h, vx: nx * 20 + (rnd() - .5) * 30, vy: ny * 12 + (rnd() - .5) * 10, vh: 10 + rnd() * 20, ttl: .45 + rnd() * .3, color: 0x8d8576, g: 30, size: 2, decor: true });
+    if (surface === 'wall') for (let i = 0; i < 3; i++) this.spawn({ x: x + nx * 2, y: y + ny * 2, h, vx: nx * 10 + (rnd() - .5) * 12, vy: ny * 6 + (rnd() - .5) * 6, vh: 6 + rnd() * 10, ttl: .6 + rnd() * .3, color: 0xa39b8a, g: -4, size: 2, decor: true });
   }
-  blood(x: number, y: number, h: number, angle: number, rnd: () => number) {
-    for (let i = 0; i < 6; i++) {
+  /** `drops`: how many (#75 H-04 sprays once per blow, more for more rounds; 6 is one round's). */
+  blood(x: number, y: number, h: number, angle: number, rnd: () => number, drops = 6) {
+    for (let i = 0; i < drops; i++) {
       const a = angle + (rnd() - .5) * 1.2, v = 40 + rnd() * 70;
       this.spawn({ x, y, h, vx: Math.cos(a) * v, vy: Math.sin(a) * v * .7, vh: rnd() * 60, ttl: 1.5, color: i % 2 ? 0x6e2f2a : 0x8c3b33, settle: 'decal', size: rnd() < .3 ? 2 : 1 });
     }
   }
   casing(x: number, y: number, h: number, angle: number, rnd: () => number) {
     const a = angle + Math.PI / 2 + (rnd() - .5) * .6, v = 35 + rnd() * 30;
-    this.spawn({ x, y, h, vx: Math.cos(a) * v, vy: Math.sin(a) * v * .6, vh: 70 + rnd() * 40, ttl: 6, color: 0xc9a24e, settle: 'stay' });
+    this.spawn({ x, y, h, vx: Math.cos(a) * v, vy: Math.sin(a) * v * .6, vh: 70 + rnd() * 40, ttl: 6, color: 0xc9a24e, settle: 'stay', decor: true });
   }
   dust(x: number, y: number, rnd: () => number, n = 3) {
-    for (let i = 0; i < n; i++) this.spawn({ x: x + (rnd() - .5) * 10, y: y + (rnd() - .5) * 4, h: 1, vx: (rnd() - .5) * 18, vy: (rnd() - .5) * 6, vh: 8 + rnd() * 8, ttl: .35 + rnd() * .2, color: 0x8a8273, g: 10, size: 2 });
+    for (let i = 0; i < n; i++) this.spawn({ x: x + (rnd() - .5) * 10, y: y + (rnd() - .5) * 4, h: 1, vx: (rnd() - .5) * 18, vy: (rnd() - .5) * 6, vh: 8 + rnd() * 8, ttl: .35 + rnd() * .2, color: 0x8a8273, g: 10, size: 2, decor: true });
   }
 
   /** Spit has a short-lived wet trace, never a casing, permanent decal or damaging ground state. */
@@ -57,7 +89,7 @@ export class Fx {
 
   /** Gun smoke: a few grey puffs that rise slowly, drift west with the wind and thin out. */
   smoke(x: number, y: number, h: number, rnd: () => number, n = 3) {
-    for (let i = 0; i < n; i++) this.spawn({ x: x + (rnd() - .5) * 4, y: y + (rnd() - .5) * 3, h, vx: -10 - rnd() * 8, vy: (rnd() - .5) * 4, vh: 6 + rnd() * 8, ttl: .5 + rnd() * .45, color: i % 2 ? 0x9a958a : 0x7d796f, g: -6, size: 2 });
+    for (let i = 0; i < n; i++) this.spawn({ x: x + (rnd() - .5) * 4, y: y + (rnd() - .5) * 3, h, vx: -10 - rnd() * 8, vy: (rnd() - .5) * 4, vh: 6 + rnd() * 8, ttl: .5 + rnd() * .45, color: i % 2 ? 0x9a958a : 0x7d796f, g: -6, size: 2, decor: true });
   }
   /**
    * Blood pool under a body: a fresh kill spreads it over about three seconds; a body met already dead (loaded, revealed
@@ -108,10 +140,10 @@ export class Fx {
     this.hidden = hidden;
   }
   hidden = 0;
-  private release(i: number) { const p = this.live[i]; p.s.removeFromParent(); p.s.visible = false; this.free.push(p.s); this.live.splice(i, 1); }
+  private release(i: number) { const p = this.live[i]; if (p.decor) this.decorLive--; p.s.removeFromParent(); p.s.visible = false; this.free.push(p.s); this.live.splice(i, 1); }
 
   clear() {
-    for (const p of this.live) p.s.destroy(); this.live = [];
+    for (const p of this.live) p.s.destroy(); this.live = []; this.decorLive = 0; this.dropped = { decor: 0, core: 0 };
     for (const s of this.free) s.destroy(); this.free = [];
     for (const d of this.decals) d.s.destroy(); this.decals = []; this.hidden = 0; this.pools = [];
   }

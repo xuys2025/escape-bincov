@@ -58,29 +58,18 @@ const STILL = .05;
 export const SWAY: SwayRules = { walk: .7, sprint: 1, up: 10, down: 3, turn: .55, draw: .9 };
 const semi = (h: Omit<Handling, 'mode'>): Handling => ({ mode: 'semi', ...h });
 const NONE = semi({ hip: 1, precise: 1, raise: .2, sway: 0, bloom: 0, bloomMax: 0, kick: 0, kickMax: 0, settle: 0, recover: 1 });
+/**
+ * The knife's row, and the old three guns as #39 tuned them. A gun in hand reads its handling from the gunsmith catalog
+ * (#28 M1-05, its effective handling), which copies these three exactly (tests/gunsmith-catalog.test.ts); the #39 sample
+ * rifle `m4a1` retired in M2-01, when the real M4A1 (`mb4a1`) took its handling over unchanged.
+ */
 const HANDLING: Record<string, Handling> = {
     knife: NONE,
     pistol: semi({ hip: 1.8, precise: .22, raise: .3, sway: 1.8, bloom: .016, bloomMax: .07, kick: .009, kickMax: .05, settle: .15, recover: 5 }),
     carbine: semi({ hip: 2.2, precise: .2, raise: .4, sway: 2, bloom: .014, bloomMax: .06, kick: .012, kickMax: .06, settle: .18, recover: 4.5 }),
     shotgun: semi({ hip: 1, precise: .5, raise: .25, sway: 1.2, bloom: .04, bloomMax: .08, kick: .03, kickMax: .06, settle: .25, recover: 4 }),
-    m4a1: { mode: 'auto', hip: 2.4, precise: .22, raise: .4, sway: 2.2, bloom: .009, bloomMax: .08, kick: .008, kickMax: .08, settle: .15, recover: 4 },
 };
 export const handlingOf = (weaponId: string): Handling => HANDLING[weaponId] ?? NONE;
-
-/**
- * Sample automatic rifle for the playtest (maintainer, 2026-10-22): only the ?test=1 driver, an explicit sample URL
- * and the 试枪场 page hand it out. It is not an item, never enters a shop, a loot table or a save, and reloads from an
- * endless reserve; #28 adds the real one.
- */
-export const SAMPLE_GUNS: Readonly<Record<'m4a1', WeaponDef>> = {
-    m4a1: { id: 'm4a1', name: 'M4A1 样本', ammo: 'ammoR', magazine: 30, damage: 24, range: 600, cooldown: .1, reload: 2.1, pellets: 1, spread: .03, crit: .05 },
-};
-
-/** Playtest mark a maintainer may add to the raid URL: `gun=m4a1` beside a `sample=` mark hands the sample rifle. Not saved. */
-export function playtestMarks(search: string): { gun: 'm4a1' | null } {
-    const p = new URLSearchParams(search);
-    return { gun: p.has('sample') && p.get('gun') === 'm4a1' ? 'm4a1' : null };
-}
 
 /**
  * What `motion` does to a precise aim: the precise button raises it unless sprinting. On touch, standing with the aim
