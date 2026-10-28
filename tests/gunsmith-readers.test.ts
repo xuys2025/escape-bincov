@@ -69,7 +69,7 @@ test('the equipped gun\'s instance, weapon and weight: the old three read as fro
         assert.equal(D.equippedWeapon(slot(weapon)), D.WEAPONS.knife);
         assert.equal(D.equippedWeight(slot(weapon)), 0);
     }
-    for (const weapon of ['m4a1', 'mpb5']) assert.equal(D.equippedGun({ ...slot(null), weapon }), null, weapon);
+    for (const weapon of ['m4a1', 'umpb45']) assert.equal(D.equippedGun({ ...slot(null), weapon }), null, weapon);
 });
 
 test('the readers take the equipped instance\'s own parts, and refuse a gun slot without its instance', () => {

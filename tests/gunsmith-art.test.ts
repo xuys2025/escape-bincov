@@ -6,16 +6,24 @@ import * as D from '../src/domain';
 import { ATTACHMENTS, GUNS, type GunId } from '../src/gunsmith/catalog';
 import { checkInstall, validateBuild } from '../src/gunsmith/compat';
 import { buildOf, gunSize, type PartNode } from '../src/gunsmith/instance';
-import { GUNSMITH_ART, GUNSMITH_ART_REVISION } from '../src/art/gunsmith-art-meta';
+import { GUNSMITH_ART, GUNSMITH_ART_REVISION, GUNSMITH_VIRTUAL } from '../src/art/gunsmith-art-meta';
 import { artFrame, gunArtLayout, type ArtCode } from '../src/art/gunsmith-layout';
 import { partsOfSignature, partsSignature } from '../src/gunsmith/signature';
 
 const fixture = JSON.parse(readFileSync('tests/fixtures/gunsmith-assemblies.json', 'utf8'));
+/** Sol's wave-one records (#28 M3-03, docs/gunsmith/art/m3-w1): 31 configurations of 12 guns, as part trees. */
+const wave = JSON.parse(readFileSync('tests/fixtures/gunsmith-assemblies-m3.json', 'utf8'));
 import { CONFIGS, part } from './fixtures/gunsmith-configs';
+type Tree = [string, PartNode['slot'], Tree[]?];
+const grow = (trees: readonly Tree[]): PartNode[] => trees.map(([id, slot, kids]) => part(id, slot, grow(kids ?? [])));
+/** The guns with art: M2's five and the wave-one seven. */
+const ART_GUNS = ['gb17', 'mb4a1', 'carbine', 'pistol', 'shotgun', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103'] as const;
 
-test('the imported art: 115 images, every key drops its version, the revision is the manifest\'s', () => {
+test('the imported art: 387 images and 5 virtual layers, every key drops its version, the revision is the manifest\'s', () => {
     const manifest = JSON.parse(readFileSync('assets/gunsmith/manifest.json', 'utf8'));
-    assert.equal(Object.keys(GUNSMITH_ART).length, 115);
+    // M2's 115, less the carbine's two receivers that wave one replaced (v2), plus wave one's 274 (#28 M3-03).
+    assert.equal(Object.keys(GUNSMITH_ART).length, 387);
+    assert.deepEqual(Object.keys(GUNSMITH_VIRTUAL).sort(), ['gs-carbine-barrel-factory-i', 'gs-carbine-handguard-factory-i', 'gs-carbine-receiver-i', 'gs-pistol-receiver-i', 'gs-shotgun-receiver-i']);
     assert.equal(GUNSMITH_ART_REVISION, manifest.revision);
     assert.deepEqual(Object.keys(GUNSMITH_ART).sort(), manifest.assets.map((a: { id: string }) => a.id.replace(/-v\d+$/, '')).sort());
     // Every part image belongs to an attachment item, every icon to an item.
@@ -33,8 +41,29 @@ test('the layout reproduces every approved preview assembly: size, tip, grip, bo
         const got = gunArtLayout(a.gun, parts, a.code as ArtCode)!, name = `${a.gun} ${a.code} ${a.configuration}`;
         assert.ok(got, name);
         assert.deepEqual([got.w, got.h, got.tip], [a.w, a.h, a.tip], `${name}: size and tip`);
+        // Wave one cut the carbine's factory barrel out (#28 M3-03), so its layers differ from M2's records; the stack
+        // still gives M2's pixels (gunsmith-bench A1 compares them with the approved previews).
+        if (a.gun !== 'carbine') assert.deepEqual(got.layers.map(l => [l.key, l.label, l.x, l.y]), a.layers.map((l: { key: string; label: string; origin: number[] }) => [l.key, l.label, ...l.origin]), `${name}: layers`);
+        if (a.code === 'h') assert.deepEqual([got.grip, got.bore, got.forward, got.hand], [a.grip, a.bore, a.forward, a.hand], `${name}: held geometry`);
+    }
+});
+
+test('the layout reproduces Sol\'s wave-one assemblies: 31 configurations of 12 guns, three outputs each', () => {
+    assert.equal(wave.assemblies.length, 93);
+    for (const a of wave.assemblies) {
+        const parts = grow(wave.configurations[a.gun][a.configuration]), name = `${a.gun} ${a.code} ${a.configuration}`;
+        assert.ok(validateBuild(buildOf({ id: a.gun as GunId, parts })).ok, `${name} is a legal build`);
+        const got = gunArtLayout(a.gun, parts, a.code as ArtCode)!;
+        assert.ok(got, name);
+        assert.deepEqual([got.w, got.h, got.tip], [a.w, a.h, a.tip], `${name}: size and tip`);
         assert.deepEqual(got.layers.map(l => [l.key, l.label, l.x, l.y]), a.layers.map((l: { key: string; label: string; origin: number[] }) => [l.key, l.label, ...l.origin]), `${name}: layers`);
         if (a.code === 'h') assert.deepEqual([got.grip, got.bore, got.forward, got.hand], [a.grip, a.bore, a.forward, a.hand], `${name}: held geometry`);
+    }
+    // The bare factory pictures (the ground and the HUD card): the held one without the gloves.
+    assert.equal(wave.bareFactories.length, 12);
+    for (const a of wave.bareFactories) {
+        const got = gunArtLayout(a.gun, [], 'h', false)!;
+        assert.deepEqual([got.w, got.h, got.layers.map(l => [l.key, l.x, l.y])], [a.w, a.h, a.layers.map((l: { key: string; origin: number[] }) => [l.key, ...l.origin])], a.gun);
     }
 });
 
@@ -44,27 +73,32 @@ test('the carbine with the P0 muzzle brake keeps the known half pixel between ti
     assert.deepEqual(fixture.assemblies.find((a: { gun: string; code: string; configuration: string }) => a.gun === 'carbine' && a.code === 'h' && a.configuration === 'custom').tipBoreDelta, .5);
 });
 
-test('every sample part that fits a gun with art has a mount in all three outputs, within the size limits', () => {
+/**
+ * A legal tree with part `id` on `gun`, or null when it can never go on: the part alone, else on (or beside) one other
+ * item part that opens its slot or that it needs (F01 on a handguard, O01 on a micro base, M03 on the G17's barrel).
+ */
+function fitted(gun: GunId, id: string, items: readonly string[]): PartNode[] | null {
+    const a = ATTACHMENTS[id], legal = (tree: PartNode[]) => validateBuild(buildOf({ id: gun, parts: tree })).ok;
+    if (a.guns && !a.guns.includes(gun)) return null;
+    if (legal([part(id, a.mount)])) return [part(id, a.mount)];
+    for (const q of items) {
+        const b = ATTACHMENTS[q];
+        if (q === id || b.guns && !b.guns.includes(gun)) continue;
+        const on = [part(q, b.mount, [part(id, a.mount)])], beside = [part(q, b.mount), part(id, a.mount)];
+        if (b.provides[a.mount] && legal(on)) return on;
+        if (legal(beside)) return beside;
+    }
+    return null;
+}
+
+test('every part that is an item has a mount in all three outputs on each gun with art it fits, within the size limits', () => {
     const parts = Object.keys(D.ITEMS).filter(D.isAttachment);
     const checked: string[] = [];
-    for (const gun of ['mb4a1', 'gb17', 'carbine'] as const) {
-        // An opener first when the part needs one (F01 on a handguard, O08 on the carbine's base).
-        const openers: Record<string, PartNode[]> = { under: [part(gun === 'carbine' ? 'H05' : 'H01', 'handguard')], side: [part(gun === 'carbine' ? 'H05' : 'H01', 'handguard')], top: gun === 'carbine' ? [part('A07', 'base')] : [] };
+    assert.deepEqual(Object.keys(GUNS).filter(g => artFrame(g, 'h')).sort(), [...ART_GUNS].sort());
+    for (const gun of ART_GUNS) {
         for (const id of parts) {
-            const a = ATTACHMENTS[id];
-            if (a.guns && !a.guns.includes(gun)) continue;
-            let base: PartNode[] = [];
-            if (!checkInstall(buildOf({ id: gun, parts: [] }), id).ok) {
-                base = structuredClone(openers[a.mount] ?? []);
-                if (id === 'M03' && gun === 'gb17') base = [part('B01', 'barrel')];
-            }
-            const tree = (() => {
-                const all = structuredClone(base), opener = all[0];
-                const placed = part(id, a.mount);
-                if (opener && (a.mount === 'under' || a.mount === 'side' || a.mount === 'top' && gun === 'carbine')) opener.children.push(placed); else all.push(placed);
-                return all;
-            })();
-            if (!validateBuild(buildOf({ id: gun, parts: tree })).ok) continue;
+            const a = ATTACHMENTS[id], tree = checkInstall(buildOf({ id: gun, parts: [] }), id).ok ? [part(id, a.mount)] : fitted(gun, id, parts);
+            if (!tree) continue;
             checked.push(`${gun}:${id}`);
             for (const code of ['h', 'i', 'w'] as const) {
                 const layout = gunArtLayout(gun, tree, code)!;
@@ -81,14 +115,16 @@ test('every sample part that fits a gun with art has a mount in all three output
     assert.deepEqual([...new Set(checked.map(c => c.split(':')[1]))].sort(), [...parts].sort(), `checked ${checked.length}: ${checked.join(' ')}`);
 });
 
-test('the side view for the ground and the HUD card: the factory held picture without hands, within the 32 px card', () => {
-    for (const gun of ['mb4a1', 'gb17']) {
+test('the side view for the ground and the HUD card: the factory held picture without hands, within the 34 px card', () => {
+    for (const gun of ['mb4a1', 'gb17', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103']) {
         const bare = gunArtLayout(gun, [], 'h', false)!, held = gunArtLayout(gun, [], 'h')!;
         assert.ok(!bare.layers.some(l => l.label.startsWith('glove')), gun);
         assert.deepEqual(bare.layers.map(l => l.key), held.layers.filter(l => !l.label.startsWith('glove')).map(l => l.key), gun);
-        assert.ok(bare.w <= 32 && bare.h <= 32, `${gun} ${bare.w}x${bare.h}`);
+        assert.ok(bare.w <= 34 && bare.h <= 32, `${gun} ${bare.w}x${bare.h}`);
         assert.notEqual(bare.key, held.key);
     }
+    // The old guns' held pictures have the hands painted on: they keep their item icons (the compose hook's side()).
+    for (const gun of ['pistol', 'shotgun', 'carbine']) assert.equal(GUNSMITH_ART[`gs-${gun}-receiver-h`]?.wholeCanvasLayer, true, gun);
 });
 
 test('the cache key: the output, the gun, the parts by place and the art revision, never a uid', () => {
@@ -105,19 +141,23 @@ test('the cache key: the output, the gun, the parts by place and the art revisio
         for (const code of ['h', 'i', 'w'] as const) assert.deepEqual(gunArtLayout(gun, back, code), gunArtLayout(gun, parts, code), `${gun} ${code}`);
     }
     for (const bad of ['top', '=O03', 'handguard/under=F01', 'nowhere=O03', 'top=O03,top=O08']) assert.equal(partsOfSignature(bad), null, bad);
-    // Guns without images in an output keep their old art.
-    assert.equal(gunArtLayout('pistol', [], 'h'), null);
-    assert.equal(gunArtLayout('shotgun', [], 'i'), null);
-    assert.ok(GUNS.pistol && gunArtLayout('pistol', [], 'w'));
+    // Guns without images keep their old art (the wave-two guns until M3-07); the old pistol and double-barrel have all
+    // three outputs since wave one (their inventory pictures cut from the procedural ones).
+    for (const code of ['h', 'i', 'w'] as const) assert.equal(gunArtLayout('mb1911', [], code), null, code);
+    for (const gun of ['pistol', 'shotgun']) for (const code of ['h', 'i', 'w'] as const) assert.ok(gunArtLayout(gun, [], code), `${gun} ${code}`);
 });
 
 test('the workbench frame: every build fits around the same receiver point, so a new part moves nothing else', () => {
-    assert.deepEqual(artFrame('mb4a1', 'w'), { x: -43, y: -15, w: 194, h: 50 });
+    // Wave one's long parts widened the M2 frames: M07 and H02 on the M4A1, B09 and M07 on the carbine (#28 M3).
+    assert.deepEqual(artFrame('mb4a1', 'w'), { x: -43, y: -15, w: 216, h: 50 });
     assert.deepEqual(artFrame('gb17', 'w'), { x: 0, y: -9, w: 118, h: 51 });
-    assert.deepEqual(artFrame('carbine', 'w'), { x: 0, y: -10, w: 171, h: 52 }, 'an optic on the A07 base sits above the receiver');
-    assert.equal(artFrame('pistol', 'w')?.w, gunArtLayout('pistol', [], 'w')!.w, 'a gun without parts: its own picture');
-    for (const [gun, configs] of Object.entries(CONFIGS)) for (const [name, make] of Object.entries(configs)) {
-        const f = artFrame(gun, 'w'), l = gunArtLayout(gun, make(), 'w');
+    assert.deepEqual(artFrame('carbine', 'w'), { x: 0, y: -10, w: 209, h: 52 }, 'an optic on the A07 base sits above the receiver');
+    assert.deepEqual(artFrame('akb103', 'w'), { x: -51, y: -19, w: 216, h: 54 });
+    assert.equal(artFrame('mb1911', 'w'), null, 'a gun without art has no frame');
+    const all = [...Object.entries(CONFIGS).flatMap(([gun, configs]) => Object.entries(configs).map(([name, make]) => [gun, name, make()] as const)),
+        ...Object.entries(wave.configurations as Record<string, Record<string, Tree[]>>).flatMap(([gun, configs]) => Object.entries(configs).map(([name, t]) => [gun, name, grow(t)] as const))];
+    for (const [gun, name, parts] of all) {
+        const f = artFrame(gun, 'w'), l = gunArtLayout(gun, parts, 'w');
         if (!f || !l) continue;
         const r = l.layers.find(x => x.label === 'receiver')!;
         assert.ok(-r.x >= f.x && -r.y >= f.y && l.w - r.x <= f.x + f.w && l.h - r.y <= f.y + f.h, `${gun} ${name} inside the frame`);

@@ -10,7 +10,7 @@
 import { ATTACHMENTS } from '../gunsmith/catalog';
 import type { PartNode } from '../gunsmith/instance';
 import { MOUNT, partsSignature } from '../gunsmith/signature';
-import { GUNSMITH_ART, GUNSMITH_ART_REVISION } from './gunsmith-art-meta';
+import { GUNSMITH_ART, GUNSMITH_ART_REVISION, GUNSMITH_VIRTUAL } from './gunsmith-art-meta';
 import type { ArtPoint, GunsmithArt } from './gunsmith-art-types';
 
 export type ArtCode = 'h' | 'i' | 'w';
@@ -38,15 +38,11 @@ const ORDER: Readonly<Record<string, number>> = {
     muzzle: 9, side1: 10, side2: 10, pistolSide: 10, 'glove-rear': 11, 'glove-front': 12, 'glove-foregrip': 12,
 };
 /**
- * The old carbine's inventory image is the procedural one (art/inventory.ts), split as Sol split it for the approved
- * previews: the factory handguard is rows 8 and 9 of columns 44 to 58, and the receiver is the rest with those pixels
- * filled (gunsmith-compose.ts paints both).
+ * The old guns' inventory images are the procedural ones (art/inventory.ts), cut into layers as Sol cut them (the
+ * manifest's `virtual`, #28 M3-03): the pistol's and the double-barrel's whole receivers, the carbine's receiver,
+ * factory handguard and factory barrel. gunsmith-compose.ts paints them.
  */
-export const VIRTUAL_ART: Readonly<Record<string, GunsmithArt>> = {
-    'gs-carbine-receiver-i': { w: 78, h: 17, output: 'inventory', gun: 'carbine', role: 'receiver', mounts: { handguard: [44, 8], mount: [33, 4], muzzle: [77, 5] }, tip: [78, 6] },
-    'gs-carbine-handguard-factory-i': { w: 78, h: 17, output: 'inventory', gun: 'carbine', role: 'factory', slot: 'handguard', anchor: [44, 8] },
-};
-export const artOf = (key: string): GunsmithArt | undefined => GUNSMITH_ART[key] ?? VIRTUAL_ART[key];
+export const artOf = (key: string): GunsmithArt | undefined => GUNSMITH_ART[key] ?? GUNSMITH_VIRTUAL[key];
 /** A part's image in an output: the variant drawn for this gun first (gs-h04-h-akb103), else the shared one. */
 const partArt = (id: string, code: ArtCode, gun: string) => {
     const shared = `gs-${id.toLowerCase()}-${code}`, own = `${shared}-${gun}`;

@@ -28,3 +28,14 @@ export interface GunsmithArt {
     embeddedFrontGlove?: boolean;
     wholeGunCanvas?: boolean;
 }
+/**
+ * An old gun's inventory layer (#28 M3-03): the procedural picture of `sourceKey` (art/inventory.ts), cut by rectangles
+ * [x, y, w, h]. With `rect`, only that area, kept at its place on the whole canvas (`wholeCanvasLayer`) or cropped to it;
+ * otherwise the whole picture with `clearRects` emptied, then `fillRects` ([colour, x, y, w, h]) filled.
+ */
+export interface VirtualArt extends GunsmithArt {
+    sourceKey: string;
+    rect?: readonly [number, number, number, number];
+    clearRects?: readonly (readonly [number, number, number, number])[];
+    fillRects?: readonly (readonly [string, number, number, number, number])[];
+}

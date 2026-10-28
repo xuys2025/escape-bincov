@@ -97,7 +97,7 @@ kbd { display: inline-block; min-width: 18px; padding: 0 4px; border: 1px solid 
 .modal { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: min(520px, calc(100vw - 24px)); max-height: calc(100vh - 40px); display: flex; flex-direction: column; background: var(--bg2); border: 1px solid var(--line2); box-shadow: 0 20px 60px rgba(0,0,0,.6); animation: pop .2s ease-out; }
 .modal.k-help { width: min(600px, calc(100vw - 24px)); }
 /* The gunsmith workbench (#28 M2-05): one fixed box, centred (DESK in gunsmith-view/bench.ts); its own stylesheet is bench.css. */
-.modal.k-gunsmith { width: min(1480px, calc(100vw - 24px)); height: min(780px, calc(100vh - 24px)); max-height: none; }
+.modal.k-gunsmith { width: min(1600px, calc(100vw - 24px)); height: min(780px, calc(100vh - 24px)); max-height: none; }
 .modal.k-gunsmith .pbody { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
 .modal.k-gunsmith .pbody > .gs { flex: 1; }
 .modal.compact.k-gunsmith { left: 0; top: 0; translate: none; width: 100%; height: 100%; border: 0; }

@@ -11,8 +11,14 @@ export interface ShopCart {
     sell: D.Inventory;
     stash: D.Inventory;
 }
+/**
+ * A counter's stock, with the RPG extras right after the old goods: since #28 M3 the arms counter's gunsmith goods fill
+ * more than a page, and the cloth a crafter buys often stays on the first.
+ */
 export function merchantStock(merchant: Merchant, rpg = false): string[] {
-    return [...D.MERCHANTS[merchant].stock, ...(rpg ? merchant === 'arms' ? ['cloth'] : ['analgesic', 'focus'] : [])];
+    const stock = D.MERCHANTS[merchant].stock, extras = rpg ? merchant === 'arms' ? ['cloth'] : ['analgesic', 'focus'] : [];
+    const gunsmith = stock.findIndex(id => D.isAttachment(id) || D.isGun(id) && !['pistol', 'shotgun', 'carbine'].includes(id));
+    return gunsmith < 0 ? [...stock, ...extras] : [...stock.slice(0, gunsmith), ...extras, ...stock.slice(gunsmith)];
 }
 /**
  * What the catalog shows (#28 M2-08): one item kind or all, `fits` keeping only what serves a gun at the base (the
@@ -22,6 +28,8 @@ export interface ShopBrowse { kind: D.ItemKind | 'all'; fits: boolean; page: num
 export const BROWSE_ALL: ShopBrowse = Object.freeze({ kind: 'all', fits: false, page: 0 });
 /** The catalog's size: one page of the stock at a time. */
 export const CATALOG_W = 6, CATALOG_H = 5;
+/** The buy and sell lists: 6 x 2 since #28 M3, so the longest legal gun (6 cells, an AK with a long suppressor) fits. */
+export const CART_W = 6, CART_H = 2;
 /** The stock the browse selects, in stock order. */
 export function browseStock(save: Readonly<D.SaveDataV1>, merchant: Merchant, rpg: boolean, browse: ShopBrowse): string[] {
     const ammo = new Set(D.isGun(save.equipment.weapon) ? [D.WEAPONS[save.equipment.weapon].ammo] : []);
@@ -42,7 +50,7 @@ export function catalogPages(ids: readonly string[]): string[][] {
 /** The kinds in a merchant's stock, in stock order: the catalog's category buttons. */
 export const stockKinds = (merchant: Merchant, rpg: boolean): D.ItemKind[] => [...new Set(merchantStock(merchant, rpg).map(id => D.ITEMS[id].kind))];
 export function createCart(save: D.SaveDataV1, merchant: Merchant, rpg = false, browse: ShopBrowse = BROWSE_ALL): ShopCart {
-    return { merchant, original: JSON.stringify(save.stash), catalog: catalogPage(save, merchant, rpg, browse).catalog, buy: D.createInventory(4, 3), sell: D.createInventory(4, 3), stash: structuredClone(save.stash) };
+    return { merchant, original: JSON.stringify(save.stash), catalog: catalogPage(save, merchant, rpg, browse).catalog, buy: D.createInventory(CART_W, CART_H), sell: D.createInventory(CART_W, CART_H), stash: structuredClone(save.stash) };
 }
 /** One catalog page of the browse (the page clamped to those there are), and how many pages there are. */
 export function catalogPage(save: Readonly<D.SaveDataV1>, merchant: Merchant, rpg: boolean, browse: ShopBrowse): { catalog: D.Inventory; page: number; pages: number } {

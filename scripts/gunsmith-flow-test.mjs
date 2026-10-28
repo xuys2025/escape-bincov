@@ -125,7 +125,12 @@ try {
       await open(size); await fixture({ bag: { w: 6, h: 5, items: [] } });
       // Buy: the G17, the micro sight and the long magazine (老栓 stocks all three, M2 decision 8).
       await tap(action('tab', 'arms'));
-      for (const [id, x] of [['gb17', 0], ['O01', 2], ['G01', 3]]) await placeAt(page, 'merchant', id, 'buy', x, 0);
+      // Since #28 M3 the arms counter's gunsmith goods run onto a second catalog page: turn to it for the two parts; the
+      // buy list keeps the G17.
+      for (const [id, x] of [['gb17', 0], ['O01', 2], ['G01', 3]]) {
+        if (id === 'O01') await tap(page.locator('[data-action="shop-browse"][data-id="page:1"]'));
+        await placeAt(page, 'merchant', id, 'buy', x, 0);
+      }
       await tap(action('checkout'));
       let p = await save();
       const g17 = p.stash.items.find(i => i.id === 'gb17');

@@ -75,7 +75,8 @@ const gunItem = (id: GunId, short: string, description: string, color: number): 
  * The 20 sample attachments of #28 M2-02 that are items, with each one's cell label and description (its benefit, then
  * its cost, from ATTACHMENTS.md). Name (the function name; the brand stays in the details), footprint, weight and
  * prices are the catalog's. They are unique items under their own uids, never stacked, and their item id is the
- * catalog id, which a part keeps on a gun (PartNode.id). M3 makes the other 80 items.
+ * catalog id, which a part keeps on a gun (PartNode.id). #28 M3-02 adds the forty wave-one parts (ART-SPEC 8.2), M3-06
+ * the other forty.
  */
 const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, description: string]>> = {
   O01: ['点瞄', '快速举枪，手枪点射较清楚。稳定收益较小。'],
@@ -98,6 +99,46 @@ const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, descrip
   T01: ['激光器', '近距离腰射更集中。开启时增加被正面敌人发现的风险。'],
   T05: ['泛光灯', '较宽的近距可交互物轮廓提示。照亮范围也会暴露自己。'],
   A07: ['顶基座', '开放顶部导轨，并让半自动卡宾枪能装远距瞄具。增重。'],
+  A01: ['微基座', '开放微型瞄具位，能装点瞄。自身不提供射击增益，增重。'],
+  A02: ['微基座', '开放微型瞄具位，能装点瞄。自身不提供射击增益，增重。'],
+  A04: ['顶基座', '开放顶部导轨，能装瞄具。增重，举枪略慢。'],
+  A05: ['顶基座', '开放顶部导轨，能装瞄具。增重。'],
+  A06: ['顶基座', '开放顶部导轨，能装瞄具。增重。'],
+  A08: ['侧基座', '从机匣侧面开放顶部导轨，能装瞄具。增重。'],
+  B03: ['短枪管', '举枪和移动后恢复更快，枪身更轻。有效距离降低。'],
+  B05: ['短枪管', '举枪快，近距弹丸覆盖更宽。中距命中集中度下降。'],
+  B06: ['收束管', '霰弹在中距更集中。重量和举枪时间增加。'],
+  B07: ['紧凑管', '近距操控更好，枪身更轻。有效距离和持续控制下降。'],
+  B09: ['精确管', '旧卡宾的精瞄更稳。增重，转向后恢复较慢。'],
+  H02: ['长护木', '提供 1 个下导轨、2 个侧位，连续射击更稳。更重、举枪慢。'],
+  H03: ['木护木', '轻便、便宜，举枪快。不提供下导轨或侧位。'],
+  H04: ['导轨护木', '提供 1 个下导轨、2 个侧位。增重。'],
+  H06: ['紧凑护木', '轻便，提供 1 个侧位。没有前握把接口。'],
+  H07: ['扩展护木', '提供 1 个下导轨、2 个侧位。比紧凑护木重。'],
+  H08: ['导轨护木', '提供 1 个下导轨、1 个侧位。增重，换弹略慢。'],
+  H09: ['稳固护木', '提供 1 个下导轨、1 个侧位，连续射击更稳。增重，举枪略慢。'],
+  S03: ['紧凑托', '移动和转向后恢复快，减轻重量。精瞄稳定性下降。'],
+  S04: ['实心托', '点射和连续射击更稳。重量增加。'],
+  S05: ['伸缩托', '举枪快、轻。稳定收益小。'],
+  S07: ['缓冲托', '射击后恢复更快。增重。'],
+  S08: ['控制托', '连续射击更容易收束。增重，举枪慢。'],
+  P03: ['防滑握', '射击后恢复较快。略重。'],
+  P04: ['木握把', '轻、便宜。稳定收益小。'],
+  P06: ['控制握', '近距连续射击更稳。增重，举枪略慢。'],
+  P07: ['握片', '手枪连续点射恢复更快。增加少量重量。'],
+  G03: ['快换匣', '容量 25 发，换弹快。持续射击时间缩短。'],
+  G06: ['扩弹仓', '弹仓增加到 8 发。补满更慢、增重。'],
+  G07: ['扩弹仓', '弹仓增加到 9 发。补满更慢、增重。'],
+  G08: ['扩容匣', '容量提高到 45 发。换弹变慢、增重。'],
+  G09: ['弹鼓', '容量提高到 60 发。很重，举枪和换弹都慢；装上后枪多占一行格子。'],
+  M01: ['消焰器', '枪声吸引范围略减，后坐略减。收益很小。'],
+  M02: ['补偿器', '减少连续射击的散布增长和后坐。枪声传播更明显。'],
+  M05: ['消焰器', '枪声吸引范围略减，连续射击略稳。稳定收益小。'],
+  M07: ['消音器', '大幅降低枪声吸引范围。枪身变长、增重、举枪慢。'],
+  M10: ['收束器', '霰弹弹丸散布更小。近距覆盖面积变小。'],
+  M11: ['收束组', '双管霰弹的弹丸更集中。牺牲近距离容错。'],
+  T04: ['小激光', '手枪近距离腰射更集中。开启时增加被正面敌人发现的风险。'],
+  T08: ['组合器', '手枪激光加小范围照明。比单一激光器重，开启时同样会暴露自己。'],
 };
 const attachmentItem = (id: string, [short, description]: readonly [string, string]): ItemDef => {
   const a = ATTACHMENTS[id];
@@ -137,6 +178,14 @@ export const ITEMS: Record<string, ItemDef> = {
   ledger: item('ledger', '港口船册', '船册', 2, 1, 0.45, 1, 0, 130, 'quest', '旧渔港的值班船册，用于任务「未归的第七艘船」。', 0xd2c396),
   gb17: gunItem('gb17', 'G17', '使用 9 毫米弹，弹匣容量 17 发。轻便的通用手枪，能装微型瞄具、枪口件和手枪侧挂设备。', 0x8a9390),
   mb4a1: gunItem('mb4a1', 'M4A1', '使用卡宾枪弹，弹匣容量 30 发，全自动。模块化步枪，护木、枪托、握把和弹匣都能更换。', 0x7c8775),
+  // #28 M3-01: the wave-one guns, on the three existing ammunition groups.
+  pb226: gunItem('pb226', 'P226', '使用 9 毫米弹，弹匣容量 15 发。稳重的手枪，装上基座能用微型瞄具，也能换枪管、握片、枪口件和手枪侧挂设备。', 0x8b8e86),
+  mpb5: gunItem('mpb5', 'MP5', '使用 9 毫米弹，弹匣容量 30 发，全自动。近战冲锋枪，枪管、护木、枪托和弹匣都能更换，装上基座能用顶部瞄具。', 0x7f8a86),
+  vb9: gunItem('vb9', 'Vector', '使用 9 毫米弹，弹匣容量 25 发，全自动，射速很高。机身自带顶部、下方和侧面导轨。', 0x6f7672),
+  mb870: gunItem('mb870', 'M870', '使用霰弹，管状弹仓 6 发，泵动。枪管、护木、枪托、握把和弹仓都能更换，装上基座能用顶部瞄具。', 0xa0784f),
+  mb1014: gunItem('mb1014', 'M1014', '使用霰弹，管状弹仓 7 发，半自动。自带顶部导轨，枪管、护木、枪托、握把和弹仓都能更换。', 0x7a807a),
+  akb74: gunItem('akb74', 'AK-74', '使用卡宾枪弹，弹匣容量 30 发，全自动。后坐平稳；护木、枪托、握把、枪管和弹匣都能更换，侧置基座能装顶部瞄具。', 0x9a7650),
+  akb103: gunItem('akb103', 'AK-103', '使用卡宾枪弹，弹匣容量 30 发，全自动。单发伤害更高、后坐更重；配件和 AK-74 通用，另能装重弹鼓。', 0x6d726c),
   ...Object.fromEntries(Object.entries(ATTACHMENT_ITEMS).map(([id, text]) => [id, attachmentItem(id, text)])),
 };
 
@@ -149,6 +198,13 @@ export const WEAPONS: Record<string, WeaponDef> = {
   // #28 M2-01: the gunsmith catalog's factory rows. The old three above stay literal; the catalog test keeps them equal.
   gb17: { ...GUNS.gb17.stats },
   mb4a1: { ...GUNS.mb4a1.stats },
+  pb226: { ...GUNS.pb226.stats },
+  mpb5: { ...GUNS.mpb5.stats },
+  vb9: { ...GUNS.vb9.stats },
+  mb870: { ...GUNS.mb870.stats },
+  mb1014: { ...GUNS.mb1014.stats },
+  akb74: { ...GUNS.akb74.stats },
+  akb103: { ...GUNS.akb103.stats },
 };
 export const ENEMIES: Record<string, EnemyDef> = {
   scav: { id: 'scav', name: '拾荒者', hp: 56, speed: 69, damage: 11, range: 30, vision: 220, cooldown: 0.9, color: 0xab9370 },
@@ -790,25 +846,33 @@ export function rollLoot(seed: number, amount: number, table: LootTable = LOOT_T
   });
 }
 /**
- * Gunsmith finds (#28 M2-13; the acquisition section of docs/gunsmith/CONTRACTS.md). The M4A1 and the common and rare
- * attachments that are items come only out of the gun and valuable shares of the loot: each gun or valuable record or
- * drop is a find with chance `share`, so quest, food, medicine and ammunition supply stays exactly what it was. A find
- * from a gun record of a map's loot is the M4A1 with chance `rifle` (never on a corpse: an enemy's sidearm does not turn
- * into a rifle); any other find is an attachment, rare with chance `rare` at a high-risk source (a flooded cache, an
- * elite's corpse), common otherwise. Basic parts are the shop's (MERCHANTS). Proposals, tuned in M4-02.
+ * Gunsmith finds (#28 M2-13 and M3; the acquisition section of docs/gunsmith/CONTRACTS.md). The gunsmith guns but the
+ * shop's G17, and the common and rare attachments that are items, come only out of the gun and valuable shares of the
+ * loot: each gun or valuable record or drop is a find with chance `share`, so quest, food, medicine and ammunition supply
+ * stays exactly what it was. A find from a gun record of a map's loot is a gun with chance `gun` (never on a corpse: an
+ * enemy's sidearm does not turn into another gun), a rare one with chance `rareGun` wherever it lies (a flooded cache
+ * holds too few gun records to carry them). Any other find is an attachment, rare with chance `rare` at a high-risk
+ * source (a flooded cache, an elite's corpse), common otherwise. Basic parts are the shop's (MERCHANTS). Proposals,
+ * tuned in M4-02; #28 M3 lowered `rare` from 1/3 so that each of the five rare parts stays rarer than each of the 39
+ * common ones.
  */
-export const GUNSMITH_FINDS = { share: 1 / 6, rifle: 1 / 4, rare: 1 / 3 } as const;
+export const GUNSMITH_FINDS = { share: 1 / 6, gun: 1 / 4, rareGun: 1 / 8, rare: 1 / 6 } as const;
 const FIND_PARTS = { common: partsOf('common').filter(id => !SHELF_COMMON.includes(id)), rare: partsOf('rare') };
+/** The guns that are found, by the catalog's tier (#28 M3): every gunsmith gun that is an item but the shop's G17. */
+const FIND_GUNS = (() => {
+  const found = Object.keys(WEAPONS).filter((id): id is GunId => isGun(id) && !(['pistol', 'shotgun', 'carbine', 'gb17'] as string[]).includes(id));
+  return { common: found.filter(id => GUNS[id].tier !== 'rare'), rare: found.filter(id => GUNS[id].tier === 'rare') };
+})();
 /**
  * What the record or drop `id` becomes, or null when it stays as it is. Draws from `random` only for a gun or a
- * valuable, so a caller's own stream decides finds and nothing else. `risky`: a high-risk source; `rifle`: the find
- * may be the M4A1.
+ * valuable, so a caller's own stream decides finds and nothing else. `risky`: a high-risk source; `gun`: the find may
+ * be a gun.
  */
-export function gunsmithFind(id: string, random: () => number, source: { risky: boolean; rifle: boolean }): string | null {
+export function gunsmithFind(id: string, random: () => number, source: { risky: boolean; gun: boolean }): string | null {
   const carved = isGun(id) || Object.hasOwn(ITEMS, id) && ITEMS[id].kind === 'valuable';
   if (!carved || random() >= GUNSMITH_FINDS.share) return null;
-  if (source.rifle && isGun(id) && random() < GUNSMITH_FINDS.rifle) return 'mb4a1';
-  const pool = FIND_PARTS[source.risky && random() < GUNSMITH_FINDS.rare ? 'rare' : 'common'];
+  const pool = source.gun && isGun(id) && random() < GUNSMITH_FINDS.gun ? FIND_GUNS[random() < GUNSMITH_FINDS.rareGun ? 'rare' : 'common']
+    : FIND_PARTS[source.risky && random() < GUNSMITH_FINDS.rare ? 'rare' : 'common'];
   return pool[Math.floor(random() * pool.length)];
 }
 /**
@@ -819,7 +883,7 @@ export function gunsmithFind(id: string, random: () => number, source: { risky: 
 export function corpseLoot(seed: number, rolls: number, elite: boolean): { id: string; qty: number }[] {
   const drops = rollLoot(seed, rolls), random = seededRandom(seed + 61211);
   for (const drop of drops) {
-    const found = gunsmithFind(drop.id, random, { risky: elite, rifle: false });
+    const found = gunsmithFind(drop.id, random, { risky: elite, gun: false });
     if (found) { drop.id = found; drop.qty = 1; }
   }
   return drops;

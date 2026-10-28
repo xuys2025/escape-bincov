@@ -7,7 +7,7 @@
   position: relative; display: grid; grid-template-columns: var(--gs-left) minmax(0, 1fr) var(--gs-right); grid-template-rows: minmax(0, 1fr) 76px;
   height: 100%; min-height: 0; color: var(--gs-ink); background: var(--gs-bg); font-size: 13px; line-height: 1.45;
 }
-@media (min-width: 1200px) { .gs { --gs-left: 224px; --gs-right: 360px; } }
+@media (min-width: 1200px) { .gs { --gs-left: 200px; --gs-right: 360px; } }
 @media (min-width: 1600px) { .gs { --gs-left: 240px; --gs-right: 404px; } }
 .gs * { box-sizing: border-box; }
 .gs h3, .gs h4 { margin: 0; font-weight: 400; color: var(--gs-ink); }
@@ -60,7 +60,7 @@
 .gs-compact .gs-rename input { min-height: 36px; }
 
 /* Gun body: a fixed header, a fixed stage, then the comparison fills what is left. */
-.gs-mid { padding: 12px 14px; gap: 10px; overflow: auto; scrollbar-width: thin; }
+.gs-mid { padding: 12px; gap: 10px; overflow: auto; scrollbar-width: thin; }
 .gs-head { flex: none; display: flex; align-items: flex-start; gap: 12px; height: 42px; }
 .gs-head > div { flex: 1; min-width: 0; }
 .gs-head h3 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -171,7 +171,7 @@
 .gs-empty { display: flex; flex-direction: column; gap: 12px; padding: 24px; }
 
 /* The old tab page's overlay around the same panel: the same largest box as the yard's (DESK in bench.ts). */
-.gs-page .gs-host { position: fixed; inset: auto; left: 50%; top: 50%; translate: -50% -50%; width: min(1480px, calc(100vw - 24px)); height: min(780px, calc(100vh - 24px)); max-width: none; max-height: none; margin: 0; padding: 0; display: flex; flex-direction: column; overflow: hidden; }
+.gs-page .gs-host { position: fixed; inset: auto; left: 50%; top: 50%; translate: -50% -50%; width: min(1600px, calc(100vw - 24px)); height: min(780px, calc(100vh - 24px)); max-width: none; max-height: none; margin: 0; padding: 0; display: flex; flex-direction: column; overflow: hidden; }
 .gs-page .gs-host > header { display: flex; align-items: baseline; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #36423e; }
 .gs-page .gs-host > header h2 { margin: 0; }
 .gs-page .gs-host > header span { flex: 1; font-size: 13px; opacity: .75; }

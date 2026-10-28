@@ -302,8 +302,9 @@ test('the gun must still fit where it lies, and the stash must take what comes o
 
 test('a part that is not an item yet stays on the gun: it cannot lie loose', () => {
     const p = base();
-    hold(p, 'cb', 'carbine', [node('m05', 'M05', 'muzzle')]);
-    assert.equal(refused(planGunEdit(p, 'cb', [{ kind: 'remove', uid: 'm05' }]), 'loose').reason, '步枪消焰器暂时不能拆下。');
+    // F02 is a wave-two part (#28 M3-06): not an item yet.
+    hold(p, 'cb', 'carbine', [node('h05', 'H05', 'handguard', [node('f02', 'F02', 'under')])]);
+    assert.equal(refused(planGunEdit(p, 'cb', [{ kind: 'remove', uid: 'f02' }]), 'loose').reason, '长垂直前握把暂时不能拆下。');
 });
 
 // ---- The hideout Runtime's GunsmithSession -----------------------------------------------------------------------

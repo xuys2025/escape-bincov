@@ -285,9 +285,9 @@ test('a gun is moved, swapped, sorted and sold at its own footprint: a part that
     save.stash.items = save.stash.items.filter(i => i.uid !== 's-3-0'); assert.ok(transferBagToStash(save)); assert.ok(organizeStash(save));
     assert.deepEqual(save.stash.items.find(i => i.uid === 'long')!.gun, suppressed());
     assert.doesNotThrow(() => decodeStoredProfile({ ...save, activeRun: null }));
-    // The sell list (4x3) takes it only where four cells are free.
+    // The sell list (6x2 since #28 M3) takes it only where four cells are free.
     const shop = D.newSave(); shop.stash.items = [gunItem('sell-long', 'carbine', 0, 0, suppressed())]; shop.bag.items = []; shop.safe.items = [];
     const cart = S.createCart(shop, 'arms');
-    assert.equal(S.shopPlacementError(cart, 'stash', 'sell', 'sell-long', 1, 0), S.SHOP_SPACE_MESSAGE);
+    assert.equal(S.shopPlacementError(cart, 'stash', 'sell', 'sell-long', 3, 0), S.SHOP_SPACE_MESSAGE);
     assert.equal(S.shopPlacementError(cart, 'stash', 'sell', 'sell-long', 0, 0), null);
 });
