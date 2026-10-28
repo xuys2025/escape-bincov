@@ -129,13 +129,14 @@ try {
       parts: CONFIGS[a.gun][a.configuration](), png: (await readFile(a.file)).toString('base64') })));
     const grow = trees => trees.map(([id, slot, kids]) => partNode(id, slot, grow(kids ?? [])));
     // Sol drew wave one's factory Vector before the receiver's front glove (ART-SPEC 5; d3eb43f): the glove is checked on
-    // its own. Wave two's previews have it.
+    // its own. The approved P0 AUG preview keeps its pixels too; its glove version is `-front-glove` (92f7a7f), compared whole.
     const beforeGlove = ['tests/fixtures/gunsmith-assemblies-m3.json:vb9-factory-h'];
+    const previewOf = (dir, name) => existsSync(`${dir}/${name}-front-glove-1x.png`) ? `${dir}/${name}-front-glove-1x.png` : `${dir}/${name}-1x.png`;
     for (const [file, dir] of [['tests/fixtures/gunsmith-assemblies-m3.json', 'docs/gunsmith/art/m3-w1/preview'], ['tests/fixtures/gunsmith-assemblies-m3-w2.json', 'docs/gunsmith/art/m3-w2/preview']]) {
       const wave = JSON.parse(await readFile(file, 'utf8'));
       for (const a of wave.assemblies) {
         const name = `${a.gun}-${a.configuration}-${a.code}`;
-        cases.push({ name, gun: a.gun, code: a.code, parts: grow(wave.configurations[a.gun][a.configuration]), png: (await readFile(`${dir}/${name}-1x.png`)).toString('base64'), dropFrontGlove: beforeGlove.includes(`${file}:${name}`) });
+        cases.push({ name, gun: a.gun, code: a.code, parts: grow(wave.configurations[a.gun][a.configuration]), png: (await readFile(previewOf(dir, name))).toString('base64'), dropFrontGlove: beforeGlove.includes(`${file}:${name}`) });
       }
       for (const b of wave.bareFactories) {
         const png = `${dir}/${b.gun}-factory-ground-hud-1x.png`;
