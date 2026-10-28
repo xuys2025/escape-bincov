@@ -68,7 +68,7 @@
 **首读路径：增加一种命令或修改按下/按住语义。**
 
 1. [raid-runtime/contract.ts](../src/raid-runtime/contract.ts)：`RaidIntent`、`RaidRuntime`，先区分边沿、持续输入、暂停与屏蔽。
-2. [coast-view/input.ts](../src/coast-view/input.ts)：`Action`、`ACTION_KEYS`、`InputState.read` / `suppressHeld`。
+2. [coast-view/input.ts](../src/coast-view/input.ts)：`Action`、`ACTION_KEYS`、`InputState.key` / `read` / `suppressHeld`。`key` 的 `repeat` 区分新的独立按下与旧 held 状态：漏收 `keyup` 后新按只解除该键抑制；根据 WASD 的 `shiftKey` 补齐修饰键状态不算 Shift 新按下。
 3. [input.ts](../src/input.ts)：`InputFrame`、`idleFrame` 与 `ActiveClock`，Runtime 内部把意图转成逐子步输入时使用；设备状态只在 `InputState` 一处。
 4. [raid-runtime/runtime.ts](../src/raid-runtime/runtime.ts)：`CoastRaidRuntime.advance` 中的转换与子步消费，再看 `step`；开火走 `pull`（本帧的点击/按住在帧末生效）→ `runTrigger`（子步内按冷却、换弹到期时刻开火）→ `shoot`。
 5. [shooting.ts](../src/shooting.ts)：开火方式、精瞄举枪、晃动、连射散布和后坐的纯规则与参数（维护者选定的“稳定”一套；#39 的样本自动枪已在改枪 M2-01 由正式的 M4A1 接替）；状态只在 Runtime 内存里，不进存档。手中枪的散布、射程、换弹、弹量、手感和重量不按 id 查表：经 [domain.ts](../src/domain.ts) 的 `equippedGun`（装备栏里的枪械实例）和 [gunsmith/stats.ts](../src/gunsmith/stats.ts) 的有效属性得出，Runtime 的 `currentWeapon` / `grip` 按实例缓存，见[改枪契约](gunsmith/CONTRACTS.md)的 M1-05 一节。
