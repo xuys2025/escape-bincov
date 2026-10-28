@@ -1,12 +1,14 @@
-## 2026-10-25 Shader cache 快照消费字段校验（`fix/heap-cache-input`）
+## 2026-10-28 Shader cache 快照消费字段校验（PR #118，`fix/heap-cache-input`）
 
-从 main `974a3a8d1ad2a7662c3a828226295d6c9b31eb64` 独立承接 #32/#60。纯 Node `sol-heap-cache-inspect.mjs` 原先把 shader string 的 null `self_size` 加成零：两节点最小图中，cycle-30 新字符串应有 80 bytes，改成 null 后旧 CLI 仍 exit 0 并写 `newRetainedBytes: 0`。本工具没有 PASS/status，原有“不是全部 retained heap 归因证明”限制保留，不能把此问题称为 F20 假签收。
+复用 [PR #118](https://github.com/xuys2025/escape-bincov/pull/118)，续作前 head `039bac0d7e27905857ac989b2f6e9bc061f547dc`。本轮正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`（合入提交 `3613b04`），保留主线全部文档条目；准确交付 head 与远程检查见原 PR。职责仍是 #32/#60 的 shader-cache review 分析器输入校验，与 #116 station 报告消费字段校验分开。
 
-现在只校验实际消费的 V8 flat-table 字段，在写 `shader-cache.json` 前拒绝无效类型/索引、缺字段/不完整行、非安全整数 identity/bytes、重复 node id，以及 cycle-30 incoming-edge 计数/偏移和引用字段；shader bytes 求和也必须安全。保留额外 V8 metadata/列，type 枚举按对应 field 索引读取；合法零 shader 匹配和 `MAX_SAFE_INTEGER` 单计数字节保留，不设业务内存预算。cycle-10 不额外要求未消费的 edge 图；`snapshot.node_count` 等未消费 metadata 也不作完整 V8 schema 校验。
+原脚本把 shader string 的 null `self_size` 加成零：最小图 cycle-30 应有 80 bytes，旧 CLI 仍 exit 0 并写 `newRetainedBytes: 0`。现在 [`validateSnapshot`](scripts/sol-heap-cache-inspect.mjs) 只校验实际消费的 flat-table 字段：缺失/重复字段、类型与表索引、不完整行、非安全整数 id/bytes、重复 id，以及 cycle-30 incoming edge 计数/偏移/命名；`sumBytes` 拒绝不精确求和。只在所有消费校验和报告准备成功后写 `shader-cache.json`，拒绝时保留已有报告字节。未消费的 metadata、额外列/类型允许，cycle-10 不要求未消费的 edge 图。不做完整 V8 schema 或业务内存预算校验。
 
-五组真实 CLI Node 正反例，V8 7 列形状的合成小图含额外 metadata、node/edge 字段重排、合法 element 数字索引；旧 main 相同测试 1 通过/4 失败，新版专项 5/5。合法同一输入的原/新报告除生成时间外所有字段一致。它们是合成图，不是实际 heap capture。root 另用清空环境的隔离 Node v24.19.0 生成两份约 5.28 MB 的真实 V8 快照作格式正例：CLI exit 0，新增人工字符串 2 节点/176 bytes、2 owner paths；只证明格式可消费，不是浏览器/游戏堆或 shader 泄漏证据。`pnpm test` 874/874（210.3 秒）、`pnpm check:ci` 69/69、`pnpm package`、最终专项 5/5、入口文档 3/3 与 `git diff --check` 通过；产品 HTML/两个 ZIP 哈希与 main 相同。
+本轮 [CLI 测试](scripts/ci/heap-cache-input.test.mjs) 从原五组扩成十组：新增已有报告保留、重复字段、坏表/identity、edge_count 求和溢出、未消费 metadata/额外列与类型/空图、稳定 node id、weak/hidden edge、两端 MAX_SAFE_INTEGER 精确字节和、七跳边界与十二样本截断。原五组在当前 main 旧脚本实际为 1 通过/4 失败；候选扩展十组实际 10/10，不把两者写成同一测试集。合法合成图新旧报告除生成时间外所有字段 deepEqual。
 
-脚本仍为 review，没有新增采样命令或 F20 门禁，没有浏览器/游戏堆采样/60 轮，没有修改阈值、历史快照或归档。本地提交交 root 复核，不推送、开 PR、合并或发布。
+Node v24.22.1 本轮实际生成两份 V8 快照（5,210,690 / 5,211,160 bytes），候选 CLI exit 0，新增人工字符串 2 节点/176 bytes、3 owner paths。这只是 Node 人工字符串图的格式兼容证据，不是浏览器/游戏 shader 泄漏或 F20 签收。原始快照、采集脚本和日志只在忽略的 `test-results/pr118/`；首轮未扁平化人工字符串只得到零匹配，已修 fixture 重新捕获并核对非零观察。没有变更分析算法、阈值、游戏、历史证据或测试分类。
+
+本轮完整 `pnpm test` 1022/1022（63.87 秒）、`pnpm check:ci` 87/87（16.88 秒）、`pnpm package`、CLI 十组与入口文档三组合跑 13/13、`git diff --check` 均通过。日志为 `test-results/pr118/pnpm-test.log`、`check-ci.log`、`package.log`，产品哈希见同目录 `product-hashes.json`；生成物未提交。本机重负载验证时段已释放。未运行浏览器、游戏堆采样、trend 或 60 轮/F20，不关闭 #32/#60；远程准确 head 的完整 CI 待提交后核对。仍为 draft，未合并或发布。
 
 ## 2026-10-28 室内墙体与视野设计（功能未实施）
 
