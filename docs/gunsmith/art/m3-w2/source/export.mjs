@@ -7,11 +7,11 @@ import { canvas,rect,poly,png,colors } from './pixels.mjs';
 const root=fileURLToPath(new URL('../../../../..',import.meta.url));
 const docs='docs/gunsmith/art/m3-w2',incoming='assets/gunsmith/incoming/m3-w2';
 for(const p of [incoming,docs+'/source',docs+'/preview'])mkdirSync(resolve(root,p),{recursive:true});
-const H={K:'#242321',E:'#4b4842',D:'#393733',S:'#625b4f',L:'#a49b88',V:'#59604a',G:'#8a7a61',B:'#75634e'};
-const I={K:'#122027',E:'#24373d',D:'#425a60',S:'#829c9d',L:'#bdcfca',V:'#485c4b',G:'#7d9168',B:'#b4bf89'};
+const H={K:'#242321',E:'#4b4842',D:'#393733',S:'#625b4f',L:'#a49b88',V:'#59604a',G:'#8a7a61',B:'#75634e',T:'#784d3d',W:'#a27351',U:'#ab9370'};
+const I={K:'#122027',E:'#24373d',D:'#425a60',S:'#829c9d',L:'#bdcfca',V:'#485c4b',G:'#7d9168',B:'#b4bf89',T:'#5c4236',W:'#996749',U:'#cb9362',P:'#ece3bf',A:'#c09a55',Y:'#f0cf83'};
 const W={...I,J:'#63797c',N:'#a7bab7'};
-const all=[],sources=[];
-function make(stem,code,w,h,meta,draw){
+export const all=[],sources=[];
+export function make(stem,code,w,h,meta,draw){
  const c=canvas(w,h),P=code==='h'?H:code==='w'?W:I;
  const r=(k,x,y,w,h)=>rect(c,P[k]??k,x,y,w,h),p=(k,pts)=>poly(c,P[k]??k,pts);draw(r,p);
  const id=`gs-${stem}-${code}-v1`,file=`${incoming}/${id}.png`,b=png(c);writeFileSync(resolve(root,file),b);
@@ -106,7 +106,10 @@ for(const id of ['O05','O10','F04','F07','T02','T10'])make(id.toLowerCase(),'q24
  if(id==='T02'){r('K',3,9,18,9);r('K',8,6,8,3);r('D',4,10,16,7);r('S',5,10,11,2);r('L',19,12,1,3);r('K',14,10,2,7);r('K',7,13,4,3);r('S',8,13,2,1);}
  if(id==='T10'){r('K',1,8,22,12);r('K',7,5,8,3);r('D',2,9,20,10);r('S',3,9,15,2);r('L',4,9,11,1);r('E',3,17,17,1);r('K',13,11,2,7);r('S',19,11,2,5);r('L',20,12,1,3);r('K',17,4,5,5);r('S',18,5,3,1);r('K',5,13,5,3);r('S',6,13,3,1);}
 });
-const baseline=JSON.parse(readFileSync(resolve(root,'assets/gunsmith/manifest.json')));
-writeFileSync(resolve(root,docs+'/source/pixel-artwork.json'),JSON.stringify({schema:1,method:'Native editable integer-grid drawing recipes. Reference generated with built-in image_gen; runtime pixels independently authored at final resolution.',assets:sources},null,2)+'\n');
-writeFileSync(resolve(root,incoming+'/manifest.json'),JSON.stringify({schema:1,revision:1,batch:'M3-W2',stage:'P0',totals:{files:all.length,pngBytes:all.reduce((s,a)=>s+a.bytes,0),baselineFiles:baseline.assets.length,baselinePngBytes:baseline.totals.pngBytes},assets:all,virtual:[]},null,2)+'\n');
-console.log(JSON.stringify({files:all.length,bytes:all.reduce((s,a)=>s+a.bytes,0)}));
+export function finish(stage='P0'){
+ const baseline=JSON.parse(readFileSync(resolve(root,'assets/gunsmith/manifest.json'))),known=new Set(baseline.assets.map(a=>a.id)),pending=all.filter(a=>!known.has(a.id));
+ writeFileSync(resolve(root,docs+'/source/pixel-artwork.json'),JSON.stringify({schema:1,method:'Native editable integer-grid drawing recipes. References generated with built-in image_gen; runtime pixels independently authored at final resolution.',assets:sources},null,2)+'\n');
+ writeFileSync(resolve(root,incoming+'/manifest.json'),JSON.stringify({schema:1,revision:stage==='P0'?1:2,batch:'M3-W2',stage,totals:{files:all.length,pngBytes:all.reduce((s,a)=>s+a.bytes,0),baselineFiles:baseline.assets.length,baselinePngBytes:baseline.totals.pngBytes,pendingFiles:pending.length,pendingPngBytes:pending.reduce((s,a)=>s+a.bytes,0),cumulativeUniqueFiles:baseline.assets.length+pending.length,cumulativeUniquePngBytes:baseline.totals.pngBytes+pending.reduce((s,a)=>s+a.bytes,0)},assets:all,virtual:[]},null,2)+'\n');
+ console.log(JSON.stringify({stage,files:all.length,bytes:all.reduce((s,a)=>s+a.bytes,0)}));
+}
+if(process.argv[1]===fileURLToPath(import.meta.url))finish();
