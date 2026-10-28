@@ -84,6 +84,37 @@ export function rowModes(rows: Iterable<number>, feetY: number, previous: Readon
   return out;
 }
 
+/** Seconds a wall takes to sink into its cell (whole picture to base) or to rise back out of it. */
+export const WALL_SINK_T = .2;
+/**
+ * How far a wall has sunk, from 0 (the whole picture) to 1 (down to its cell), `dt` seconds later on its way to `goal`.
+ * It moves at a constant rate, so a wall turned back half-way returns from where it is.
+ */
+export function sinkStep(sunk: number, goal: 0 | 1, dt: number): number {
+  const step = dt / WALL_SINK_T;
+  return goal > sunk ? Math.min(goal, sunk + step) : Math.max(goal, sunk - step);
+}
+/**
+ * The picture of a wall `h` px tall (its cell the bottom 32 rows) sunk `sunk` of the way: lowered `drop` whole px, eased
+ * at both ends; the rows lowered past its cell are not drawn, and its top `clear` rows (doorway cuts) stay clear where
+ * they are. Source rows [from, to) are drawn from canvas row `at`, nothing when `from >= to`. All the way down, the top
+ * 32 rows (the wall's top) stand on its cell, as in the base picture.
+ */
+export function sunkRows(h: number, sunk: number, clear: number): { drop: number; at: number; from: number; to: number } {
+  const drop = Math.round(sunk * sunk * (3 - 2 * sunk) * (h - T)), at = Math.max(drop, clear);
+  return { drop, at, from: at - drop, to: h - drop };
+}
+/**
+ * The top rows a piece `w` px wide keeps clear for doorways when its cuts are all whole-width bands from its top, the
+ * shape a doorway north of a 32 px piece gives: it can sink with them left in place. Null for any other shape, which
+ * switches outright.
+ */
+export function topClear(cut: readonly Rect[], w: number): number | null {
+  let k = 0;
+  for (const r of cut) { if (r.y > 0 || r.x > 0 || r.x + r.w < w) return null; k = Math.max(k, r.y + r.h); }
+  return k;
+}
+
 /** A doorway: its cells and the wall height above them, where the door's (or the header's) picture stands. */
 export interface Clearance { rect: Rect; z: number }
 /** One clearance per doorway, given as its cells (both lines of a thick wall's opening together). */

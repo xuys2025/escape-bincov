@@ -47,10 +47,15 @@ const place = (page, x, y, angle = 0, map) => page.evaluate(([x, y, a, m]) => {
 }, [x, y, angle, map]);
 const shot = (page, name) => page.screenshot({ path: resolve(out, name) });
 /**
- * Wall pieces under the indoor rule now (docs/INDOOR-WALL-VISIBILITY-PLAN.md): rule, mode and how the picture is drawn,
- * read from its pixels (above its cell, on its cell, in its doorway cuts); and the footprint's other wall pieces.
+ * Wall pieces under the indoor rule now (docs/INDOOR-WALL-VISIBILITY-PLAN.md), once every wall has sunk or risen to its
+ * mode: rule, mode, how far sunk and how the picture is drawn, read from its pixels (above its cell, on its cell, in its
+ * doorway cuts); and the footprint's other wall pieces.
  */
-const walls = page => page.evaluate(() => {
+const settled = page => page.waitForFunction(() => {
+  const v = window.__bincovSample.host.view;
+  return !v.rising.length && v.occluders.every(o => !o.wall || o.wall.sunk === (o.wall.mode === 'base' ? 1 : 0));
+}, null, { timeout: 10000 });
+const walls = async page => { await settled(page); return page.evaluate(() => {
   const v = window.__bincovSample.host.view, p = window.__bincovSample.host.lastBatch.frame.player;
   const alpha = (o, r) => {
     const c = v.tex.canvas(o.shown ?? o.key), x0 = Math.max(0, r.x), y0 = Math.max(0, r.y), x1 = Math.min(c.width, r.x + r.w), y1 = Math.min(c.height, r.y + r.h);
@@ -63,14 +68,14 @@ const walls = page => page.evaluate(() => {
     player: { x: p.x, y: p.y }, rebuilds: v.stats.rebuilds,
     pieces: v.occluders.filter(o => o.wall).map(o => {
       const { w, h } = o.rect, shown = o.sprite.visible;
-      return { x: o.cell.x, y: o.cell.y, kind: o.kind, rule: o.wall.rule, mode: o.wall.mode, level: o.level, visible: shown, curtain: o.key.includes('curtain'),
-        drawn: !shown || o.sprite.texture === v.tex.atlas.get(o.shown ?? o.key), cut: o.wall.cut,
+      return { x: o.cell.x, y: o.cell.y, kind: o.kind, rule: o.wall.rule, mode: o.wall.mode, sunk: o.wall.sunk, level: o.level, visible: shown, curtain: o.key.includes('curtain'),
+        drawn: !shown || o.sprite.texture === v.tex.atlas.get(o.shown ?? o.key) && o.sprite.y === o.rect.y, cut: o.wall.cut,
         above: shown ? alpha(o, { x: 0, y: 0, w, h: h - 32 }) : 0, foot: shown ? alpha(o, { x: 0, y: h - 32, w, h: 32 }) : 0,
         inCut: shown ? o.wall.cut.reduce((n, r) => n + alpha(o, r), 0) : 0, links: (o.links ?? []).map(l => l.sprite.visible) };
     }),
     others: v.occluders.filter(o => o.cell && !o.wall && inFootprint(o)).map(o => ({ x: o.cell.x, y: o.cell.y, level: o.level, renderable: o.sprite.renderable })),
   };
-});
+}); };
 /**
  * The indoor rule on a mall floor, from `walls`: nothing fades; headers are hidden; row 48 (the south front) shows only
  * its cells and row 6 and the sides stay whole; each run row goes by the side of its centre line the feet are on (outside
@@ -82,7 +87,8 @@ function checkWalls(s, label) {
   assert.ok(s.pieces.length > 300, `${at}: ${s.pieces.length} pieces under the rule`);
   for (const w of s.pieces) {
     const where = `${at}: ${w.kind} ${w.x},${w.y} ${w.rule}/${w.mode}`, c = (w.y + .5) * 32;
-    assert.equal(w.level, 0, `${where} never fades`); assert.ok(w.drawn, `${where} shows its picture`);
+    assert.equal(w.level, 0, `${where} never fades`); assert.ok(w.drawn, `${where} shows its picture where it was built`);
+    assert.equal(w.sunk, w.mode === 'base' ? 1 : 0, `${where}: sunk to its mode`);
     if (w.kind === 'lintel') { assert.ok(w.mode === 'hidden' && !w.visible, where); continue; }
     if (w.y === 48) assert.equal(w.mode, 'base', `${where}: south front`);
     else if (w.y === 6 || w.x === 8 || w.x === 64) assert.equal(w.mode, 'full', `${where}: facade`);
@@ -483,21 +489,76 @@ async function deployTabs(page) {
     assert.equal(counts.core, 63, 'one wall piece per core cell, outside the rule'); assert.equal(s.others.filter(o => o.renderable).length, 63, 'the whole core is in view');
     return { counts, levels: [...new Set(s.others.map(o => o.level))].sort() };
   });
-  await step('M21 walking out through a shop entrance switches its wall row whole, with no rebuild (1280x720 and 1920x1080)', async () => {
+  await step('M21 walking out through a shop entrance raises its wall row whole over 0.2 s, with no rebuild (1280x720 and 1920x1080)', async () => {
     const result = {};
+    // Row 13 (x29-43) fronts the F1 shops north of the central aisle; their entrance is x36-38.
+    const inRun = o => o.wall && o.kind === 'wall' && o.cell.y === 13 && o.cell.x >= 29 && o.cell.x <= 43;
+    const geometry = `o => ({ x: o.cell.x, sunk: o.wall.sunk, clear: o.wall.clear, mode: o.wall.mode, visible: o.sprite.visible, dy: o.sprite.y - o.rect.y,
+      h: o.sprite.texture.height, full: o.rect.h, bottom: o.sprite.y + o.sprite.texture.height - o.rect.y - o.rect.h,
+      links: (o.links ?? []).filter(l => l.sprite.visible).map(l => l.sprite.y + l.sprite.texture.height - o.rect.y - o.rect.h) })`;
     for (const [w, h] of [[1280, 720], [1920, 1080]]) {
       await page.setViewportSize({ width: w, height: h }); await frames(page, 4);
-      // Row 13 (x29-43) fronts the F1 shops north of the central aisle; their entrance is x36-38.
       await place(page, 37.5, 11.5, Math.PI / 2, 'mall-f1'); await frames(page, 10);
       const north = await walls(page); await shot(page, `m21-f1-north-of-run-${w}.png`);
+      // Watched every frame from the first step south: the frame the run is between its cells and its whole picture.
+      const between = page.waitForFunction(([inRun, geometry]) => {
+        const run = window.__bincovSample.host.view.occluders.filter(eval(inRun));
+        return run.some(o => o.wall.sunk > 0 && o.wall.sunk < 1) && run.map(eval(geometry));
+      }, [String(inRun), geometry], { polling: 'raf', timeout: 10000 }).then(r => r.jsonValue());
+      let mid;
       await page.keyboard.down('s');
-      try { await page.waitForFunction(() => window.__bincovSample.host.lastBatch.frame.player.y >= 14.3 * 32); } finally { await page.keyboard.up('s'); }
+      try { mid = await between; await page.waitForFunction(() => window.__bincovSample.host.lastBatch.frame.player.y >= 14.3 * 32); } finally { await page.keyboard.up('s'); }
       await frames(page, 10);
       const south = await walls(page); await shot(page, `m21-f1-south-of-run-${w}.png`);
       const row = s => [...new Set(s.pieces.filter(p => p.y === 13 && p.x >= 29 && p.x <= 43 && p.kind === 'wall').map(p => p.mode))];
       assert.deepEqual([row(north), row(south)], [['base'], ['full']], 'the whole run x29-43 switches as the feet cross row 13');
       assert.equal(south.rebuilds, north.rebuilds, 'walking never rebuilds the scene');
-      result[w] = { north: checkWalls(north, `north of row 13, ${w}`), south: checkWalls(south, `south of row 13, ${w}`) };
+      assert.equal(new Set(mid.map(p => p.sunk)).size, 1, `the run rises as one: ${JSON.stringify(mid.map(p => p.sunk))}`);
+      for (const p of mid) {
+        assert.ok(p.mode === 'full' && p.clear === 0 && p.visible, `${p.x}: rising to the whole picture ${JSON.stringify(p)}`);
+        assert.ok(p.dy > 0 && p.dy < p.full - 32 && p.h === p.full - p.dy && p.bottom === 0, `${p.x}: lowered whole px, drawn down to its cell's south edge ${JSON.stringify(p)}`);
+        assert.ok(p.links.every(b => b <= 0), `${p.x}: its links never hang below its cell`);
+      }
+      result[w] = { north: checkWalls(north, `north of row 13, ${w}`), south: checkWalls(south, `south of row 13, ${w}`), between: { sunk: mid[0].sunk, dy: mid[0].dy } };
+    }
+    // Five steps of the run going down at both sizes, each drawn by the scene's own showWall with the step held (dt 0),
+    // for the strips in docs/indoor-walls/screens: whole, a quarter, half and three quarters of the way, then the base
+    // picture on its cells. Lowered round(smoothstep(sunk) * the height above the cell) (wall-display.ts sunkRows); all
+    // the way down the base picture stands where it was built.
+    const sinks = [0, .25, .5, .75, 1], drop = (s, full) => s === 1 ? 0 : Math.round(s * s * (3 - 2 * s) * (full - 32));
+    for (const [w, h] of [[1280, 720], [1920, 1080]]) {
+      // The camera settles on the size first, so every step is cut from the same world rectangle.
+      await page.setViewportSize({ width: w, height: h }); await wait(1500); await frames(page, 10);
+      const steps = [], clips = [];
+      for (const sunk of sinks) {
+        await page.evaluate(([inRun, sunk]) => {
+          const v = window.__bincovSample.host.view, show = v.__showWall ??= v.showWall, held = eval(inRun);
+          v.showWall = function (o, mode, dt, snap) { if (!held(o)) return show.call(this, o, mode, dt, snap); o.wall.sunk = sunk; return show.call(this, o, 'full', 0, false); };
+        }, [String(inRun), sunk]);
+        await frames(page, 3);
+        const s = await page.evaluate(([inRun, geometry]) => {
+          const v = window.__bincovSample.host.view, run = v.occluders.filter(eval(inRun)), a = v.worldToClient({ x: 29 * 32, y: 13 * 32 - 56 }), b = v.worldToClient({ x: 44 * 32, y: 14 * 32 + 8 });
+          return { run: run.map(eval(geometry)), clip: { x: a.x, y: a.y, width: b.x - a.x, height: b.y - a.y } };
+        }, [String(inRun), geometry]);
+        steps.push(s.run); clips.push((await page.screenshot({ clip: s.clip })).toString('base64'));
+      }
+      await page.evaluate(() => { const v = window.__bincovSample.host.view; v.showWall = v.__showWall; delete v.__showWall; });
+      const strip = await page.evaluate(async shots => {
+        const imgs = await Promise.all(shots.map(b => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = `data:image/png;base64,${b}`; })));
+        const c = document.createElement('canvas'); c.width = imgs[0].width; c.height = imgs.reduce((n, i) => n + i.height + 4, -4);
+        const g = c.getContext('2d'); g.fillStyle = '#000'; g.fillRect(0, 0, c.width, c.height);
+        let y = 0; for (const i of imgs) { g.drawImage(i, 0, y); y += i.height + 4; }
+        return c.toDataURL('image/png').split(',')[1];
+      }, clips);
+      await writeFile(resolve(out, `m21-f1-run-sinking-${w}.png`), Buffer.from(strip, 'base64'));
+      steps.forEach((run, i) => {
+        for (const p of run) {
+          assert.ok(p.dy === drop(sinks[i], p.full) && p.h === p.full - p.dy && p.bottom === 0, `${w}, step ${sinks[i]}, ${p.x}: ${JSON.stringify(p)}`);
+          assert.equal(p.sunk, sinks[i]);
+        }
+      });
+      await walls(page);
+      result[w].steps = steps.map(run => [...new Set(run.map(p => `${p.dy}/${p.h}`))]);
     }
     await page.setViewportSize({ width: 1280, height: 720 }); await frames(page, 4);
     return result;
