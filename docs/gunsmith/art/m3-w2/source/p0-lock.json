@@ -226,5 +226,17 @@
       "w": 24,
       "h": 24
     }
+  ],
+  "historicalPreviews": [
+    {
+      "file": "docs/gunsmith/art/m3-w2/preview/augb-factory-h-1x.png",
+      "source": "docs/gunsmith/art/m3-w2/source/p0-augb-factory-h-1x.png",
+      "sha256": "4e44077d08560fe0288713218241f3194d85cfa4aad793676f6e1331394956b9"
+    },
+    {
+      "file": "docs/gunsmith/art/m3-w2/preview/augb-factory-h-3x.png",
+      "source": "docs/gunsmith/art/m3-w2/source/p0-augb-factory-h-3x.png",
+      "sha256": "99391559ab900ff391b9831bf79d61cf8c16958a8fd9c5c1ee3d6470aa7ee343"
+    }
   ]
 }

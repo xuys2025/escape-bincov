@@ -39,7 +39,7 @@ P0 的 32 张原图保持核准哈希；已由 Opus 在 `d3eb43f` 复制进正�
 
 [六种弹药的彩色对照](preview/ammunition-six-color.png) · [灰度对照](preview/ammunition-six-gray.png)。旧三种由实际 `paintItem` 捕获，三种新图各在 Q24、Q32 下与它们一起比较。
 
-每套 H/I 有 1、3 倍，W 有 1、2 倍；人物比例有 1、3 倍。逐件图以 `contact-full-{guns|parts}-{h|i|w|q}-<页>-{color|gray}.png` 分页，每件在三种指定底色上放 1 倍与 3 倍。共 **430 张预览**，最大 66,075 字节；均不是游戏截图。
+每套 H/I 有 1、3 倍，W 有 1、2 倍；人物比例有 1、3 倍。逐件图以 `contact-full-{guns|parts}-{h|i|w|q}-<页>-{color|gray}.png` 分页，每件在三种指定底色上放 1 倍与 3 倍。共 **432 张预览**，最大 66,075 字节；均不是游戏截图。
 
 [assembly-records.json](assembly-records.json) 包含 **39 套配置、117 份 H/I/W 拼装、11 份无手原厂记录**。包含任务书 22 套改装、八把新枪原厂，并保留 P0 复用与必要旧枪原厂对照。每层位置只由清单锚点计算。
 
@@ -68,6 +68,8 @@ node --import tsx docs/gunsmith/art/m3-w2/source/check-runtime.mjs
 
 前三条仅依赖本批脚本和已有图片/清单。可选运行 `node --import tsx docs/gunsmith/art/m3-w2/source/capture-ammo.mjs` 重抓旧弹药参照；现有快照在 `source/legacy-ammo.json`。真实布局复核只在进程内注入暂存元数据，不改游戏和正式清单。
 
+旧浏览器 A1 对 P0 的 AUG 原厂 H 仍按补前手之前的核准图比较。因此保留原路径 `augb-factory-h-1x/3x.png` 和核准哈希；本批带前手手套的完整预览使用 [augb-factory-h-front-glove-1x.png](preview/augb-factory-h-front-glove-1x.png) 及 3 倍版本。全批自查使用新文件，旧路径仅供历史 P0 浏览器夹具比较。原始两张预览保存在 `source/p0-augb-factory-h-*`，生成脚本自动保留它们。M3-08 更新浏览器夹具时请保留这一历史/当前预览的区别。
+
 ## 本次验证
 
 已接受 main 为 `6758d654`。P1 起点 `d3eb43f`；并行实现方随后追加浏览器专项 `7d7490db`，本机检查均在该代码 head 上运行。419 张正式素材基线按维护者留言更新为修订 4，P0 核准 32 图另行锁定。
@@ -82,8 +84,9 @@ node --import tsx docs/gunsmith/art/m3-w2/source/check-runtime.mjs
 | `pnpm test` | **1057/1057 通过** |
 | `pnpm check:ci` | **110/110 通过** |
 | `pnpm package` | **通过**；便携 ZIP 6,071,052 字节，仅报数，不提交生成物 |
+| 修正后的浏览器 A1 | **1/1 通过，151 张成枪图逐像素一致**；[本机证据](source/ci-a1-local/report.json) |
 
-真实复核覆盖二十枪、四十件第二波配件、全部任务指定的旧件复用以及 22 套任务改装；并非所有配装的穷举。RPK 重火 W 为 199×52，达到高度上限；其余配置也在限额内。首轮 P0 的 O10 超高已修正，[首败记录](source/first-layout-failure.json)保留。
+真实复核覆盖二十枪、四十件第二波配件、全部任务指定的旧件复用以及 22 套任务改装；并非所有配装的穷举。RPK 重火 W 为 199×52，达到高度上限；其余配置也在限额内。首轮 P1 CI 的 A1 因全批生成器覆盖历史 AUG 预览而失败（26 个通道值差异），已按上述独立文件名修复；[首败记录](source/p1-ci-first-failure.json)保留，游戏代码和浏览器断言未改。首轮 P0 的 O10 超高已修正，[首败记录](source/first-layout-failure.json)保留。
 
 本机 Node 24.21.0、pnpm 11.19.0，沿用共享依赖 junction；检查进程使用 `pnpm_config_verify_deps_before_run=warn`，没有安装依赖或修改项目配置。[仓库检查摘要](source/repository-checks.json)保存准确代码 head、计数与制品哈希。远端准确提交 CI 以 #132 本轮交付留言为准，CI 不执行本目录的独立美术自查。
 

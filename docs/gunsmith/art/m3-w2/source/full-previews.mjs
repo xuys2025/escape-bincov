@@ -1,16 +1,16 @@
-import { writeFileSync } from 'node:fs';
+import { writeFileSync,copyFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { root,docs,manifest,baseline,assets,picture,configurations,assemble,scaled } from './assemble.mjs';
+import { root,docs,manifest,baseline,assets,picture,configurations,assemble,scaled,previewStem } from './assemble.mjs';
 import { canvas,rect,blit,decode,save,text,colors } from './pixels.mjs';
 export const newGuns=['mb1911','umpb45','pb90','svdb','mb14','mb700','augb','rpkb'];
 export function fullPreviews(){
- const path=resolve(root,docs+'/preview'),records=[],bare=[];
+ const path=resolve(root,docs+'/preview'),records=[],bare=[];for(const s of [1,3])copyFileSync(resolve(root,docs+`/source/p0-augb-factory-h-${s}x.png`),resolve(path,`augb-factory-h-${s}x.png`));
  const overview=canvas(1100,900);rect(overview,'#101c22',0,0,overview.w,overview.h);text(overview,'M3 W2 / EIGHT GUNS AND FORTY PARTS',16,14,'#bdcfca',2);text(overview,'ANCHOR ASSEMBLIES / NOT GAME SCREENSHOTS / H 3X - I 1X',16,36);
  for(const [index,[gun,configs]]of Object.entries(configurations).entries()){
   const sheet=canvas(1120,55+Object.keys(configs).length*124);rect(sheet,'#101c22',0,0,sheet.w,sheet.h);text(sheet,gun+' / ANCHOR ASSEMBLIES',16,13,'#bdcfca',2);text(sheet,'NOT GAME SCREENSHOTS',16,34);
   for(const [row,name]of Object.keys(configs).entries()){
    const y=63+row*124;text(sheet,name,16,y,'#cb9362',2);
-   for(const code of ['h','i','w']){const {record,image}=assemble(gun,name,code);records.push(record);for(const s of code==='w'?[1,2]:[1,3])save(resolve(path,`${gun}-${name}-${code}-${s}x.png`),scaled(image,s));const x=code==='h'?18:code==='i'?230:610,s=code==='h'?3:code==='i'?2:1;text(sheet,`${code} ${s}X`,x,y+20);blit(sheet,image,x,y+34,s);}
+   for(const code of ['h','i','w']){const {record,image}=assemble(gun,name,code);records.push(record);for(const s of code==='w'?[1,2]:[1,3])save(resolve(path,`${previewStem(gun,name,code)}-${s}x.png`),scaled(image,s));const x=code==='h'?18:code==='i'?230:610,s=code==='h'?3:code==='i'?2:1;text(sheet,`${code} ${s}X`,x,y+20);blit(sheet,image,x,y+34,s);}
    const held=assemble(gun,name,'h'),body=decode(resolve(root,'assets/coast/v1/coast-player-body-e-f0-v1.png')),person=canvas(112,72);blit(person,body,16,4);blit(person,held.image,32+held.record.forward-held.record.grip[0],Math.round(30-held.record.bore));for(const s of [1,3])save(resolve(path,`${gun}-${name}-body-${s}x.png`),scaled(person,s));
   }
   save(resolve(path,`${gun}-wave2-configurations.png`),sheet);

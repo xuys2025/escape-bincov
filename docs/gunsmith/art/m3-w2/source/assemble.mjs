@@ -63,6 +63,9 @@ export function assemble(gun,configuration,code,gloves=true){
  return {record,image,nodes};
 }
 export const scaled=(c,s,gray=false)=>{const d=canvas(c.w*s,c.h*s);blit(d,c,0,0,s,gray);return d;};
+// The browser's P0 fixture deliberately compares the pre-d3eb43f factory preview with the front glove removed.
+// Keep its approved path stable; full-wave records and previews use the new explicit front-glove name.
+export const previewStem=(gun,name,code)=>gun==='augb'&&name==='factory'&&code==='h'?'augb-factory-h-front-glove':`${gun}-${name}-${code}`;
 export function previews(){
  const dir=resolve(root,docs+'/preview');mkdirSync(dir,{recursive:true});const records=[],bare=[];
  const overview=canvas(1024,830);rect(overview,'#101c22',0,0,overview.w,overview.h);text(overview,'M3 W2 P0 / AUG AND SIX PARTS',18,16,'#bdcfca',2);text(overview,'ANCHOR ASSEMBLIES / NOT GAME SCREENSHOTS',18,38);

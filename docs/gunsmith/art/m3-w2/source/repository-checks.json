@@ -57,5 +57,17 @@
     "note": "Existing shared node_modules junction; pnpm_config_verify_deps_before_run=warn set only for the checking processes. No dependency installation or project config change."
   },
   "browserAcceptance": "P0 was integrated by Opus; new P1 incoming artwork is not yet integrated. Full P1 live-game acceptance belongs to M3-08.",
-  "generatedFilesCommitted": false
+  "generatedFilesCommitted": false,
+  "focusedAfterCiCorrection": {
+    "command": "node --import tsx scripts/gunsmith-bench-test.mjs --only=A1 --out=docs/gunsmith/art/m3-w2/source/ci-a1-local",
+    "status": "pass",
+    "comparedImages": 151,
+    "passed": 1,
+    "total": 1,
+    "report": "docs/gunsmith/art/m3-w2/source/ci-a1-local/report.json",
+    "reportSha256": "c49c8e9053baa5bd9187501010656e406f2a29f3ad191fc14d08152d648bd776",
+    "buildSha256": "9e965ee363f02e349b7b51db489690d060e50d2ee5d4ed9d19109420775a9a61",
+    "originalFailure": "source/p1-ci-first-failure.json",
+    "change": "Only preview generation, preview path preservation and their documentation; runtime PNG and game code unchanged."
+  }
 }
