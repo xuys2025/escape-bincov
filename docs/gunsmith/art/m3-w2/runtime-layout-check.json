@@ -1,0 +1,2720 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "codeHead": "7cb90766087ab54ed3cf1ee546681d2d2d8ddd32",
+  "method": "Process-local metadata injection; actual validateBuild, gunSize, gunArtLayout; no game or formal asset files written",
+  "configurations": 7,
+  "checks": [
+    {
+      "gun": "augb",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        26,
+        10
+      ]
+    },
+    {
+      "gun": "augb",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        65,
+        18
+      ]
+    },
+    {
+      "gun": "augb",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        130,
+        36
+      ]
+    },
+    {
+      "gun": "augb",
+      "configuration": "close",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        26,
+        12
+      ]
+    },
+    {
+      "gun": "augb",
+      "configuration": "close",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        65,
+        23
+      ]
+    },
+    {
+      "gun": "augb",
+      "configuration": "close",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        130,
+        47
+      ]
+    },
+    {
+      "gun": "augb",
+      "configuration": "steady",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        28,
+        13
+      ]
+    },
+    {
+      "gun": "augb",
+      "configuration": "steady",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        72,
+        24
+      ]
+    },
+    {
+      "gun": "augb",
+      "configuration": "steady",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        145,
+        49
+      ]
+    },
+    {
+      "gun": "augb",
+      "configuration": "reuse",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        28,
+        11
+      ]
+    },
+    {
+      "gun": "augb",
+      "configuration": "reuse",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        72,
+        23
+      ]
+    },
+    {
+      "gun": "augb",
+      "configuration": "reuse",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        145,
+        47
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        32,
+        11
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        80,
+        17
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        160,
+        34
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "close",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        32,
+        13
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "close",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        80,
+        21
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "close",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        160,
+        43
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "steady",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        32,
+        14
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "steady",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        80,
+        23
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "steady",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        160,
+        48
+      ]
+    }
+  ],
+  "bareFactories": 1,
+  "supportedGuns": [
+    "pistol",
+    "gb17",
+    "pb226",
+    "mpb5",
+    "vb9",
+    "shotgun",
+    "mb870",
+    "mb1014",
+    "carbine",
+    "akb74",
+    "akb103",
+    "mb4a1",
+    "augb"
+  ],
+  "fitRelations": 61,
+  "fits": [
+    {
+      "gun": "mpb5",
+      "part": "O05",
+      "configuration": [
+        [
+          "A04",
+          "base",
+          [
+            [
+              "O05",
+              "top"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            14
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            25
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            131,
+            51
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "F04",
+      "configuration": [
+        [
+          "H07",
+          "handguard",
+          [
+            [
+              "F04",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            17
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            131,
+            34
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "F07",
+      "configuration": [
+        [
+          "H07",
+          "handguard",
+          [
+            [
+              "F07",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            11
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            17
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            131,
+            34
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "T02",
+      "configuration": [
+        [
+          "H06",
+          "handguard",
+          [
+            [
+              "T02",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            17
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            131,
+            34
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "T10",
+      "configuration": [
+        [
+          "H06",
+          "handguard",
+          [
+            [
+              "T10",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            17
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            131,
+            34
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "O05",
+      "configuration": [
+        [
+          "O05",
+          "top"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            24,
+            13
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            55,
+            23
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            110,
+            47
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "F04",
+      "configuration": [
+        [
+          "F04",
+          "under"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            24,
+            11
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            55,
+            17
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            110,
+            34
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "F07",
+      "configuration": [
+        [
+          "F07",
+          "under"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            24,
+            12
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            55,
+            17
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            110,
+            34
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "T02",
+      "configuration": [
+        [
+          "T02",
+          "side"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            24,
+            10
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            55,
+            17
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            110,
+            34
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "T10",
+      "configuration": [
+        [
+          "T10",
+          "side"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            24,
+            10
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            55,
+            17
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            110,
+            34
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "shotgun",
+      "part": "O05",
+      "configuration": [
+        [
+          "A05",
+          "base",
+          [
+            [
+              "O05",
+              "top"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            14
+          ],
+          "colors": 10
+        },
+        {
+          "code": "i",
+          "size": [
+            78,
+            22
+          ],
+          "colors": 7
+        },
+        {
+          "code": "w",
+          "size": [
+            156,
+            45
+          ],
+          "colors": 9
+        }
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "O05",
+      "configuration": [
+        [
+          "A06",
+          "base",
+          [
+            [
+              "O05",
+              "top"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            14
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            88,
+            24
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            177,
+            49
+          ],
+          "colors": 12
+        }
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "F04",
+      "configuration": [
+        [
+          "H08",
+          "handguard",
+          [
+            [
+              "F04",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 8
+        },
+        {
+          "code": "i",
+          "size": [
+            88,
+            16
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            177,
+            32
+          ],
+          "colors": 12
+        }
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "F07",
+      "configuration": [
+        [
+          "H08",
+          "handguard",
+          [
+            [
+              "F07",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            11
+          ],
+          "colors": 8
+        },
+        {
+          "code": "i",
+          "size": [
+            88,
+            16
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            177,
+            33
+          ],
+          "colors": 12
+        }
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "T02",
+      "configuration": [
+        [
+          "H08",
+          "handguard",
+          [
+            [
+              "T02",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 8
+        },
+        {
+          "code": "i",
+          "size": [
+            88,
+            16
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            177,
+            32
+          ],
+          "colors": 12
+        }
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "T10",
+      "configuration": [
+        [
+          "H08",
+          "handguard",
+          [
+            [
+              "T10",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 8
+        },
+        {
+          "code": "i",
+          "size": [
+            88,
+            16
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            177,
+            32
+          ],
+          "colors": 12
+        }
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "O05",
+      "configuration": [
+        [
+          "O05",
+          "top"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            13
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            86,
+            22
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            173,
+            45
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "F04",
+      "configuration": [
+        [
+          "H09",
+          "handguard",
+          [
+            [
+              "F04",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            10
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            86,
+            16
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            173,
+            32
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "F07",
+      "configuration": [
+        [
+          "H09",
+          "handguard",
+          [
+            [
+              "F07",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            11
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            86,
+            16
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            173,
+            33
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "T02",
+      "configuration": [
+        [
+          "H09",
+          "handguard",
+          [
+            [
+              "T02",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            10
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            86,
+            16
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            173,
+            32
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "T10",
+      "configuration": [
+        [
+          "H09",
+          "handguard",
+          [
+            [
+              "T10",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            10
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            86,
+            16
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            173,
+            32
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "O05",
+      "configuration": [
+        [
+          "A07",
+          "base",
+          [
+            [
+              "O05",
+              "top"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            31,
+            11
+          ],
+          "colors": 8
+        },
+        {
+          "code": "i",
+          "size": [
+            78,
+            20
+          ],
+          "colors": 7
+        },
+        {
+          "code": "w",
+          "size": [
+            156,
+            42
+          ],
+          "colors": 10
+        }
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "O10",
+      "configuration": [
+        [
+          "A07",
+          "base",
+          [
+            [
+              "O10",
+              "top"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            31,
+            11
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            78,
+            21
+          ],
+          "colors": 7
+        },
+        {
+          "code": "w",
+          "size": [
+            156,
+            44
+          ],
+          "colors": 11
+        }
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "F04",
+      "configuration": [
+        [
+          "H05",
+          "handguard",
+          [
+            [
+              "F04",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            31,
+            11
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            78,
+            17
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            156,
+            34
+          ],
+          "colors": 10
+        }
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "F07",
+      "configuration": [
+        [
+          "H05",
+          "handguard",
+          [
+            [
+              "F07",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            31,
+            12
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            78,
+            21
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            156,
+            42
+          ],
+          "colors": 10
+        }
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "T02",
+      "configuration": [
+        [
+          "H05",
+          "handguard",
+          [
+            [
+              "T02",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            31,
+            10
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            78,
+            17
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            156,
+            34
+          ],
+          "colors": 10
+        }
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "T10",
+      "configuration": [
+        [
+          "H05",
+          "handguard",
+          [
+            [
+              "T10",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            31,
+            10
+          ],
+          "colors": 10
+        },
+        {
+          "code": "i",
+          "size": [
+            78,
+            17
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            156,
+            34
+          ],
+          "colors": 10
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "O05",
+      "configuration": [
+        [
+          "A08",
+          "base",
+          [
+            [
+              "O05",
+              "top"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            15
+          ],
+          "colors": 8
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            24
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            49
+          ],
+          "colors": 12
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "O10",
+      "configuration": [
+        [
+          "A08",
+          "base",
+          [
+            [
+              "O10",
+              "top"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            15
+          ],
+          "colors": 8
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            25
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            51
+          ],
+          "colors": 12
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "F04",
+      "configuration": [
+        [
+          "H04",
+          "handguard",
+          [
+            [
+              "F04",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 8
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            16
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            32
+          ],
+          "colors": 12
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "F07",
+      "configuration": [
+        [
+          "H04",
+          "handguard",
+          [
+            [
+              "F07",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            11
+          ],
+          "colors": 8
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            16
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            33
+          ],
+          "colors": 12
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "T02",
+      "configuration": [
+        [
+          "H04",
+          "handguard",
+          [
+            [
+              "T02",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 8
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            16
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            32
+          ],
+          "colors": 12
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "T10",
+      "configuration": [
+        [
+          "H04",
+          "handguard",
+          [
+            [
+              "T10",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 8
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            16
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            32
+          ],
+          "colors": 12
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "O05",
+      "configuration": [
+        [
+          "A08",
+          "base",
+          [
+            [
+              "O05",
+              "top"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            15
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            24
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            49
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "O10",
+      "configuration": [
+        [
+          "A08",
+          "base",
+          [
+            [
+              "O10",
+              "top"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            15
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            25
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            51
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "F04",
+      "configuration": [
+        [
+          "H04",
+          "handguard",
+          [
+            [
+              "F04",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            16
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            32
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "F07",
+      "configuration": [
+        [
+          "H04",
+          "handguard",
+          [
+            [
+              "F07",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            11
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            16
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            33
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "T02",
+      "configuration": [
+        [
+          "H04",
+          "handguard",
+          [
+            [
+              "T02",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            16
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            32
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "T10",
+      "configuration": [
+        [
+          "H04",
+          "handguard",
+          [
+            [
+              "T10",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            16
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            32
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "O05",
+      "configuration": [
+        [
+          "O05",
+          "top"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            13
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            80,
+            21
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            160,
+            43
+          ],
+          "colors": 6
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "O10",
+      "configuration": [
+        [
+          "O10",
+          "top"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            13
+          ],
+          "colors": 7
+        },
+        {
+          "code": "i",
+          "size": [
+            80,
+            22
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            160,
+            45
+          ],
+          "colors": 7
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "F04",
+      "configuration": [
+        [
+          "H01",
+          "handguard",
+          [
+            [
+              "F04",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            11
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            80,
+            17
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            160,
+            34
+          ],
+          "colors": 6
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "F07",
+      "configuration": [
+        [
+          "H01",
+          "handguard",
+          [
+            [
+              "F07",
+              "under"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            12
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            80,
+            19
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            160,
+            39
+          ],
+          "colors": 6
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "T02",
+      "configuration": [
+        [
+          "H01",
+          "handguard",
+          [
+            [
+              "T02",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            11
+          ],
+          "colors": 6
+        },
+        {
+          "code": "i",
+          "size": [
+            80,
+            17
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            160,
+            34
+          ],
+          "colors": 6
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "T10",
+      "configuration": [
+        [
+          "H01",
+          "handguard",
+          [
+            [
+              "T10",
+              "side"
+            ]
+          ]
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            11
+          ],
+          "colors": 7
+        },
+        {
+          "code": "i",
+          "size": [
+            80,
+            17
+          ],
+          "colors": 5
+        },
+        {
+          "code": "w",
+          "size": [
+            160,
+            34
+          ],
+          "colors": 6
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "O05",
+      "configuration": [
+        [
+          "O05",
+          "top"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            12
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            23
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            47
+          ],
+          "colors": 9
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "O10",
+      "configuration": [
+        [
+          "O10",
+          "top"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            12
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            24
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            49
+          ],
+          "colors": 10
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "F04",
+      "configuration": [
+        [
+          "F04",
+          "under"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            18
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            36
+          ],
+          "colors": 9
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "F07",
+      "configuration": [
+        [
+          "F07",
+          "under"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            11
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            18
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            36
+          ],
+          "colors": 9
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "T02",
+      "configuration": [
+        [
+          "T02",
+          "side"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            18
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            36
+          ],
+          "colors": 9
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "T10",
+      "configuration": [
+        [
+          "T10",
+          "side"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            18
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            36
+          ],
+          "colors": 9
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "O03",
+      "configuration": [
+        [
+          "O03",
+          "top"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            11
+          ],
+          "colors": 10
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            23
+          ],
+          "colors": 9
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            47
+          ],
+          "colors": 10
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "O08",
+      "configuration": [
+        [
+          "O08",
+          "top"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            12
+          ],
+          "colors": 10
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            25
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            49
+          ],
+          "colors": 9
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "F01",
+      "configuration": [
+        [
+          "F01",
+          "under"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            18
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            36
+          ],
+          "colors": 9
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "F03",
+      "configuration": [
+        [
+          "F03",
+          "under"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            18
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            36
+          ],
+          "colors": 9
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "T01",
+      "configuration": [
+        [
+          "T01",
+          "side"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 10
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            18
+          ],
+          "colors": 9
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            36
+          ],
+          "colors": 10
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "T05",
+      "configuration": [
+        [
+          "T05",
+          "side"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 10
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            18
+          ],
+          "colors": 9
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            36
+          ],
+          "colors": 10
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "G10",
+      "configuration": [
+        [
+          "G10",
+          "mag"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 8
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            18
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            36
+          ],
+          "colors": 9
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "M05",
+      "configuration": [
+        [
+          "M05",
+          "muzzle"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            28,
+            10
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            71,
+            18
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            143,
+            36
+          ],
+          "colors": 9
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "M06",
+      "configuration": [
+        [
+          "M06",
+          "muzzle"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            28,
+            10
+          ],
+          "colors": 10
+        },
+        {
+          "code": "i",
+          "size": [
+            72,
+            18
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            145,
+            36
+          ],
+          "colors": 9
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "M07",
+      "configuration": [
+        [
+          "M07",
+          "muzzle"
+        ]
+      ],
+      "status": "pass",
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 9
+        },
+        {
+          "code": "i",
+          "size": [
+            83,
+            18
+          ],
+          "colors": 8
+        },
+        {
+          "code": "w",
+          "size": [
+            167,
+            36
+          ],
+          "colors": 9
+        }
+      ]
+    }
+  ],
+  "limits": "Existing 12 guns plus AUG where catalog compatibility permits. The seven remaining wave-two guns and their new adapters wait for P1. Single-part fits plus designated P0 compound builds, not every possible loadout.",
+  "integrationNote": "Current gunArtLayout returns receiver.hand without adding a front glove. Default AUG preview follows that implementation. For assembled foregrips the normal front glove is added; M3-08 must verify the receiver-native front hand and all eight headings in game.",
+  "scope": "Art importer rehearsal, not live game acceptance. Official import and maintainer review remain outstanding."
+}

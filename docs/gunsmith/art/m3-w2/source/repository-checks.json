@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "date": "2026-10-28",
+  "codeHead": "7cb90766087ab54ed3cf1ee546681d2d2d8ddd32",
+  "node": "24.21.0",
+  "pnpm": "11.19.0",
+  "status": "pass",
+  "checks": [
+    {
+      "command": "pnpm test",
+      "status": "pass",
+      "tests": 1037,
+      "failed": 0,
+      "rawLogSha256": "72a91c6f377f85d741bca84c91287d4fcafa0054a441527558e8e5ba252b4b54"
+    },
+    {
+      "command": "pnpm check:ci",
+      "status": "pass",
+      "tests": 110,
+      "failed": 0,
+      "rawLogSha256": "69dab9f6a67b0460524d94295d3deac26ac349aa2f446c6147f06149fd48556e"
+    },
+    {
+      "command": "pnpm package",
+      "status": "pass",
+      "rawLogSha256": "f7c842227b8f04b96a8d23acd1689ccf7d4d14d17897a7f6eb5a257b1dc4ce85",
+      "generatedFiles": [
+        {
+          "file": "dist/index.html",
+          "bytes": 9357340,
+          "sha256": "c8c15575e24e3e8fe09bb35f88c6d650d0a2822b2104f85c66d5c30e2e52fbaa"
+        },
+        {
+          "file": "start the game.html",
+          "bytes": 9357340,
+          "sha256": "c8c15575e24e3e8fe09bb35f88c6d650d0a2822b2104f85c66d5c30e2e52fbaa"
+        },
+        {
+          "file": "release/Escape-Bincov-portable.zip",
+          "bytes": 6064513,
+          "sha256": "6c293ff34cc414f8061bf3ef05214cd7f65a168e1f4198e1d14b6859073de998"
+        },
+        {
+          "file": "release/Escape-Bincov-web.zip",
+          "bytes": 6060004,
+          "sha256": "ab4254b92b75d22348e641292df092615ed1ae0e36cec50874db9d0b781945b8"
+        }
+      ],
+      "formalGunsmithImages": 387,
+      "formalGunsmithPngBytes": 62146,
+      "incomingP0Consumed": false
+    }
+  ],
+  "environment": {
+    "firstAttempt": "pnpm rejected automatic reinstall because the existing node_modules junction resolves outside this worktree (ERR_PNPM_UNSAFE_MODULES_DIR). Tests had not started.",
+    "resolution": "Set pnpm_config_verify_deps_before_run=warn in this process only, then used the existing shared dependencies. No install or project configuration change.",
+    "warning": "node_modules workspace structure differs from lockfile workspace metadata. Clean GitHub CI remains independent validation."
+  },
+  "browserAcceptance": "not run: incoming artwork is not integrated into game code",
+  "generatedFilesCommitted": false
+}

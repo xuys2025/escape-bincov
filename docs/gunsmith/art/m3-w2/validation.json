@@ -1,0 +1,664 @@
+{
+  "schema": 1,
+  "stage": "P0",
+  "status": "pass",
+  "passed": 62,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "P0 exactly AUG 8 plus six parts 24; flat directory and manifest bijection",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-mag-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-mag-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-mag-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o05-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o10-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f04-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f07-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t02-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t10-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o05-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o10-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f07-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t02-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t10-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o05-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o10-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f07-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t02-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t10-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o05-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o10-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f07-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t02-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t10-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "All W independently detailed; W/I coordinates within two pixels",
+      "status": "pass",
+      "detail": [
+        {
+          "id": "gs-augb-receiver-w-v1",
+          "differentPixelsFromScaledI": 839
+        },
+        {
+          "id": "gs-augb-mag-factory-w-v1",
+          "differentPixelsFromScaledI": 153
+        },
+        {
+          "id": "gs-o05-w-v1",
+          "differentPixelsFromScaledI": 104
+        },
+        {
+          "id": "gs-o10-w-v1",
+          "differentPixelsFromScaledI": 304
+        },
+        {
+          "id": "gs-f04-w-v1",
+          "differentPixelsFromScaledI": 59
+        },
+        {
+          "id": "gs-f07-w-v1",
+          "differentPixelsFromScaledI": 98
+        },
+        {
+          "id": "gs-t02-w-v1",
+          "differentPixelsFromScaledI": 36
+        },
+        {
+          "id": "gs-t10-w-v1",
+          "differentPixelsFromScaledI": 173
+        }
+      ]
+    },
+    {
+      "name": "augb/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          26,
+          10
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "augb/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          65,
+          18
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "augb/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          130,
+          36
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "augb/close/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          26,
+          12
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "augb/close/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          65,
+          23
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "augb/close/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          130,
+          47
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "augb/steady/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          28,
+          13
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "augb/steady/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          72,
+          24
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "augb/steady/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          145,
+          49
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "augb/reuse/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          28,
+          11
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "augb/reuse/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          72,
+          23
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "augb/reuse/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          145,
+          47
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "mb4a1/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          32,
+          11
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mb4a1/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          80,
+          17
+        ],
+        "colors": 4
+      }
+    },
+    {
+      "name": "mb4a1/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          160,
+          34
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mb4a1/close/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          32,
+          13
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb4a1/close/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          80,
+          21
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mb4a1/close/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          160,
+          43
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "mb4a1/steady/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          32,
+          14
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb4a1/steady/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          80,
+          23
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mb4a1/steady/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          160,
+          48
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "AUG bullpup magazine behind grip; F04 hand behind forward stop",
+      "status": "pass"
+    },
+    {
+      "name": "AUG bare ground/HUD image has no gloves and exact 1x/2x previews",
+      "status": "pass"
+    },
+    {
+      "name": "Formal 387 M2/W1 images retain original bytes and hashes",
+      "status": "pass",
+      "detail": {
+        "files": 387
+      }
+    },
+    {
+      "name": "Native held/world and UI palette; W alone may add its middle tones",
+      "status": "pass"
+    },
+    {
+      "name": "Preview/source images below one MiB; icon grayscale silhouettes distinct",
+      "status": "pass"
+    },
+    {
+      "name": "Held close and steady silhouettes distinct at 1x",
+      "status": "pass"
+    },
+    {
+      "name": "Byte accounting",
+      "status": "pass",
+      "detail": {
+        "p0Bytes": 5129,
+        "formalBaselineBytes": 62146,
+        "cumulativeBytes": 67275,
+        "waveReferenceBytes": 98304
+      }
+    }
+  ],
+  "assemblies": [
+    {
+      "gun": "augb",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        26,
+        10
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "augb",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        65,
+        18
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "augb",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        130,
+        36
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "augb",
+      "configuration": "close",
+      "code": "h",
+      "size": [
+        26,
+        12
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "augb",
+      "configuration": "close",
+      "code": "i",
+      "size": [
+        65,
+        23
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "augb",
+      "configuration": "close",
+      "code": "w",
+      "size": [
+        130,
+        47
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "augb",
+      "configuration": "steady",
+      "code": "h",
+      "size": [
+        28,
+        13
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "augb",
+      "configuration": "steady",
+      "code": "i",
+      "size": [
+        72,
+        24
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "augb",
+      "configuration": "steady",
+      "code": "w",
+      "size": [
+        145,
+        49
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "augb",
+      "configuration": "reuse",
+      "code": "h",
+      "size": [
+        28,
+        11
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "augb",
+      "configuration": "reuse",
+      "code": "i",
+      "size": [
+        72,
+        23
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "augb",
+      "configuration": "reuse",
+      "code": "w",
+      "size": [
+        145,
+        47
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        32,
+        11
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        80,
+        17
+      ],
+      "colors": 4
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        160,
+        34
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "close",
+      "code": "h",
+      "size": [
+        32,
+        13
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "close",
+      "code": "i",
+      "size": [
+        80,
+        21
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "close",
+      "code": "w",
+      "size": [
+        160,
+        43
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "steady",
+      "code": "h",
+      "size": [
+        32,
+        14
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "steady",
+      "code": "i",
+      "size": [
+        80,
+        23
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "steady",
+      "code": "w",
+      "size": [
+        160,
+        48
+      ],
+      "colors": 7
+    }
+  ],
+  "oldBareSprites": {
+    "status": "pending-P1",
+    "reason": "The three legacy no-hand sprites are outside P0; formal source images are unchanged."
+  },
+  "visualReview": "Native 1x and enlarged sheets, three backgrounds, grayscale and body scale reviewed. Anchor contact checks do not by themselves prove every contour seam."
+}
