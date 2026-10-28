@@ -1,3 +1,22 @@
+## 2026-10-28 改枪 M3 第一波：七枪四十件进游戏（#132）
+
+`feat/gunsmith-m3` / [PR #132](https://github.com/xuys2025/escape-bincov/pull/132)（草稿），已同步 main `f66ee79`。
+
+- 美术（M3-03）：Sol 按 [任务书](docs/gunsmith/art/m3-w1/BRIEF.md) 在 #132 交齐 274 张（P0 AK-74 后经维护者授权一次画完），自查 386/386，旧枪叠回 0 差异。
+- 接入（`f0b3570`）：
+  - 七把枪（P226、MP5、Vector、M870、M1014、AK-74、AK-103）和四十件配件成为物品；
+  - 图搬进 `assets/gunsmith/v1/`（387 张，62,146 字节），旧枪格子图按 `virtual` 切层；
+  - HUD 武器卡 34 宽，工作台最大 1600 宽；
+  - 获取提案：新枪只靠搜刮，稀有枪 1/8，稀有件 1/6；商店两页，待买、待卖区 6×2。细节和待定事项见 CONTRACTS「M3 第一波」。
+- 检查：
+  - 单测 1027/1027、check:ci 86/86；
+  - 浏览器 art、gunsmith-bench 18/18、gunsmith-flow 3/3、shop-drag、shop-feedback、hideout、range、loot、issue26-inventory 通过；
+  - 本机 mall-sample M03c、shooting k 是已知的环境失败。
+- 下一步：
+  - M3-04 剩下的：浏览器专项扩到 12 把枪，第一波预览逐像素比对；
+  - 第二波任务书（M3-05～08）；
+  - 等维护者对获取提案的意见。
+
 ## 2026-10-28 Q-E02：公共视图生命周期归位
 
 串联集成：本分支按明确授权正常合入 #117 候选 `4ba5b72c70983f3eefe4affdd31e2d674b3223a3`（fetch 后核对 `origin/fix/content-identity` 同一提交），只消除共同文档冲突，不修改其源码。**必须先 #117 合入 main，再合 #136。** 该候选尚非已接受 main；此前浏览器和制品证据仍只归属原 `14df8ce`，候选集成已通过 1026/1026 单测、86/86 守卫及 package；两份 HTML/两份 ZIP 与明确标注的 #117 候选构建逐字节相同（HTML `bdd50dec…7fc25`），没有将其称为已接受 main。最新已接受 `630e68f` 已确认包含在被测集成中；完整 CI 在新 head 推送后核对，详情见原质量摘要。
