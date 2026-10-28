@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import test from 'node:test';
 import { pnpmInvocation, runCommand, runGroup, runtimeMetadata } from './run-browser.mjs';
+import { createEnemyCoverage, enemyReportPath, enemySelection, enemyUnits } from '../enemy-browser-plan.mjs';
 
 const suites = ['first', 'second', 'third'].map(id => ({ id, command: `test:${id}` }));
 const metadata = { runId: '123', runAttempt: '2', commit: 'a'.repeat(40), node: process.version, playwright: 'fixture', chromium: null };
@@ -38,6 +39,38 @@ test('a real nonzero child stops remaining suites and records its exact exit cod
   assert.equal(report.status, 'failed'); assert.equal(report.exitCode, 7);
   assert.deepEqual(report.suites.map(s => s.status), ['passed', 'failed', 'not_run']);
   assert.equal(report.suites[2].startedAt, null); assert.equal(report.suites[1].exitCode, 7);
+});
+
+test('enemy process success requires a fresh complete report and persists its coverage in the timing row', async t => {
+  const f = fixture(t), suite = { id: 'enemy-720', command: 'test:enemy-720' };
+  let data;
+  const report = await runGroup({ ...f, suites: [suite], execute: async () => {
+    const selection = enemySelection(['--shard=enemy-720']);
+    data = { ...createEnemyCoverage(selection, metadata), finishedAt: new Date().toISOString(), status: 'passed', units: enemyUnits(selection) };
+    return { exitCode: 0, signal: null };
+  }, readCoverage: () => data });
+  assert.equal(report.status, 'passed'); assert.deepEqual(stored(f.reportPath).suites[0].enemyCoverage, data);
+  for (const bad of [undefined, { ...data, status: 'running' }, { ...data, startedAt: '2020-01-01T00:00:00.000Z' },
+    { ...data, units: [] }, { ...data, commit: 'b'.repeat(40) }]) {
+    const failed = await runGroup({ ...f, suites: [suite, suites[1]], execute: async () => ({ exitCode: 0, signal: null }), readCoverage: () => bad });
+    assert.equal(failed.status, 'failed'); assert.equal(failed.exitCode, 1);
+    assert.match(failed.suites[0].error, /Invalid enemy shard evidence/); assert.equal(failed.suites[1].status, 'not_run');
+  }
+});
+
+test('default enemy report reader rejects a missing file after a zero-exit child', async t => {
+  const f = fixture(t), previous = process.cwd();
+  try {
+    mkdirSync(dirname(f.reportPath), { recursive: true });
+    process.chdir(dirname(f.reportPath));
+    const report = await runGroup({ ...f, suites: [{ id: 'enemy-720', command: 'test:enemy-720' }],
+      execute: async () => ({ exitCode: 0, signal: null }) });
+    assert.equal(report.status, 'failed'); assert.match(report.suites[0].error, /ENOENT/);
+    const path = enemyReportPath('enemy-720'); mkdirSync(dirname(path), { recursive: true }); writeFileSync(path, '{invalid');
+    const malformed = await runGroup({ ...f, suites: [{ id: 'enemy-720', command: 'test:enemy-720' }],
+      execute: async () => ({ exitCode: 0, signal: null }) });
+    assert.equal(malformed.status, 'failed'); assert.match(malformed.suites[0].error, /Invalid enemy shard evidence/);
+  } finally { process.chdir(previous); }
 });
 
 test('spawn errors fail closed and leave later suites not_run', async t => {

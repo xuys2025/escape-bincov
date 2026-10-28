@@ -14,7 +14,7 @@
  */
 import type { Equipment, SaveDataV1 } from '../domain';
 import type { SessionRecord } from '../recovery-store';
-import type { GunId } from './catalog';
+import { ATTACHMENTS, type GunId } from './catalog';
 import { factoryState, gunUids, isGunId, repeatedUids, validateGun } from './instance';
 
 /** The guns a save from before the catalog can hold: the three that were items. The test ties them to domain WEAPONS. */
@@ -99,10 +99,14 @@ function allocate(taken: Set<string>): string {
     return uid;
 }
 
-/** Old format to new, in place: an old gun item or ground gun gets a factory state, an equipped slot its gun's uid. */
+/**
+ * Old format to new, in place: an old gun item or ground gun gets a factory state, an equipped slot its gun's uid. An
+ * old save cannot hold what came with the gunsmith: a gun other than OLD_GUNS or an attachment (M2-02) is refused.
+ */
 function upgrade(h: Holders, taken: Set<string>) {
     for (const holder of [...h.items, ...h.loot]) {
         if (own(holder, 'gun')) reject(); // An old save never has the field: a mixed or forged value.
+        if (typeof holder.id === 'string' && own(ATTACHMENTS, holder.id)) reject();
         if (!isGunId(holder.id)) continue;
         if (!OLD_GUNS.includes(holder.id)) reject();
         holder.gun = factoryState();

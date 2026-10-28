@@ -1,3 +1,4 @@
+import { gunsmithArt } from '../../art/gunsmith-hooks';
 import { ITEM_ART_IDS, paintItem, type ItemArtId } from '../../art/items';
 import { P, canvas, disc, dot, rect } from './paint';
 
@@ -41,19 +42,32 @@ const ARTED = new Set<string>(ITEM_ART_IDS);
  */
 export function paintLoot(item: string): HTMLCanvasElement {
   if (!ARTED.has(item)) return paintLootFallback(item);
+  // The gunsmith guns lie as their whole side view at world scale, wider than the cell but on the same foot row: their
+  // square icons are close-ups that do not read on the ground (#28 M2-10, maintainer 2026-10-27).
+  const side = gunsmithArt?.side(item);
+  if (side) {
+    const w = Math.max(LOOT_W, side.width + 4), { c, g } = canvas(w, LOOT_H);
+    disc(g, 'rgba(14,12,10,.45)', w / 2, LOOT_FOOT + 1, side.width / 2 + 2, 2.5);
+    g.drawImage(haloed(side), Math.round((w - side.width) / 2) - 1, LOOT_FOOT - side.height);
+    return c;
+  }
   const { c, g } = canvas(LOOT_W, LOOT_H);
   const icon = canvas(24, 24); paintItem(icon.g, item as ItemArtId, 24);
-  const halo = canvas(26, 26); halo.g.drawImage(icon.c, 1, 1);
-  const d = halo.g.getImageData(0, 0, 26, 26), out = halo.g.createImageData(26, 26);
-  const solid = (x: number, y: number) => x >= 0 && y >= 0 && x < 26 && y < 26 && d.data[(y * 26 + x) * 4 + 3] > 40;
-  for (let y = 0; y < 26; y++) for (let x = 0; x < 26; x++) {
-    if (solid(x, y) || !(solid(x - 1, y) || solid(x + 1, y) || solid(x, y - 1) || solid(x, y + 1))) continue;
-    const i = (y * 26 + x) * 4; out.data[i] = 236; out.data[i + 1] = 226; out.data[i + 2] = 196; out.data[i + 3] = 120;
-  }
   disc(g, 'rgba(14,12,10,.45)', 14, LOOT_FOOT + 1, 10, 2.5);
-  halo.g.putImageData(out, 0, 0); halo.g.drawImage(icon.c, 1, 1);
-  g.drawImage(halo.c, 1, 0);
+  g.drawImage(haloed(icon.c), 1, 0);
   return c;
+}
+/** The art one pixel larger all round with a one-pixel pale halo, so its ink outline reads on dark asphalt. */
+function haloed(art: HTMLCanvasElement): HTMLCanvasElement {
+  const W = art.width + 2, H = art.height + 2, halo = canvas(W, H); halo.g.drawImage(art, 1, 1);
+  const d = halo.g.getImageData(0, 0, W, H), out = halo.g.createImageData(W, H);
+  const solid = (x: number, y: number) => x >= 0 && y >= 0 && x < W && y < H && d.data[(y * W + x) * 4 + 3] > 40;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    if (solid(x, y) || !(solid(x - 1, y) || solid(x + 1, y) || solid(x, y - 1) || solid(x, y + 1))) continue;
+    const i = (y * W + x) * 4; out.data[i] = 236; out.data[i + 1] = 226; out.data[i + 2] = 196; out.data[i + 3] = 120;
+  }
+  halo.g.putImageData(out, 0, 0); halo.g.drawImage(art, 1, 1);
+  return halo.c;
 }
 function paintLootFallback(item: string): HTMLCanvasElement {
   const { c, g } = canvas(16, 14), cat = lootCategory(item);

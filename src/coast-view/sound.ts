@@ -11,8 +11,13 @@
  */
 import type { Spot, SynthAudio } from '../audio';
 import type { PublishedView, StampedEvent } from '../raid-runtime/contract';
+import { worldKeyString } from '../raid-runtime/contract';
 import { insideFootprint } from './mall-dressing';
 import { enemyVoice } from './enemy-motion';
+import { timbreOfGun, timbreOfLook } from '../gun-timbre';
+
+/** Other people's gunfire is quieter than the player's own, as the single shared report was (#75 H-02). */
+const ENEMY_SHOT = .55;
 
 export type SoundOut = Pick<SynthAudio, 'start' | 'stop' | 'shot' | 'step' | 'hit' | 'pickup' | 'click' | 'radio' | 'extract' | 'death'
   | 'whiz' | 'impact' | 'dry' | 'heartbeat' | 'setRoomTone' | 'stow' | 'enemy'>;
@@ -25,6 +30,7 @@ function segmentDistance(ax: number, ay: number, bx: number, by: number, px: num
 
 /** Hit confirmation (#75): the player's own pain, a confirmed critical and a confirmed kill. */
 export type HitCueOut = Pick<SynthAudio, 'pain' | 'crit' | 'kill'>;
+type HeardHits = { hit: Set<string>; crit: Set<string> };
 
 export class SampleSound {
   private live: boolean | null = null;
@@ -40,8 +46,15 @@ export class SampleSound {
   private ambience = '';
   private enemyStates = new Map<string, { phase: string; stance: string; archetype: string }>();
   private enemyMap = '';
+  private shotScope = '';
+  private bulletShots = new Map<string, string>();
+  private shotHits = new Map<string, HeardHits>();
+  /** The device parts of the gun in hand last frame (uids) and their switches (#28 M2-03). */
+  private deviceParts = '';
+  private switches = '';
 
-  constructor(private readonly out: SoundOut & HitCueOut) {}
+  /** `feel` is read at every shot: the range's A/B switch (ViewOptions.feel). */
+  constructor(private readonly out: SoundOut & HitCueOut, private readonly feel: () => 'enhanced' | 'classic' = () => 'enhanced') {}
 
   /** Stereo position and level of a sound at world (x, y) for the player standing at the listener. */
   spot(x: number, y: number): Spot {
@@ -52,6 +65,24 @@ export class SampleSound {
   /** Once per presented batch, before its events. */
   frame(b: PublishedView, dt: number, actorShown: (uid: string) => boolean = () => true) {
     const f = b.frame, live = f.phase !== 'paused';
+    const scope = this.scope(b.stamp);
+    if (scope !== this.shotScope) {
+      this.bulletShots.clear(); this.shotHits.clear(); this.shotScope = scope;
+      this.heard = { revision: -1, hit: new Set(), crit: new Set() };
+    }
+    // Keep only live bullets and this batch's referenced bullets. A final impact removes a bullet from the frame
+    // before its hurt is presented; it must retain its group through this batch, then expire on the next frame.
+    // Thus paused/repeated batches stay bounded by their contents; no timer, historical shot queue or event adjacency.
+    const retained = new Set((f.bullets ?? []).map(bullet => bullet.uid));
+    for (const event of b.events ?? []) {
+      if (this.scope(event.stamp) !== scope) continue;
+      if (event.type === 'shot') for (const pellet of event.pellets) retained.add(pellet.bullet);
+      else if (event.type === 'impact') retained.add(event.bullet);
+      else if (event.type === 'hurt' && event.bullet !== undefined) retained.add(event.bullet);
+    }
+    for (const bullet of this.bulletShots.keys()) if (!retained.has(bullet)) this.bulletShots.delete(bullet);
+    const shots = new Set(this.bulletShots.values());
+    for (const shot of this.shotHits.keys()) if (!shots.has(shot)) this.shotHits.delete(shot);
     if (live !== this.live) {
       this.live = live;
       // A restarted context has a fresh ambience: the room tone is applied again below.
@@ -96,6 +127,10 @@ export class SampleSound {
     } else this.stepLeft = 0;
     // Reload start and finish each click, as in the original.
     if (w.reloading !== this.reloading) { this.reloading = w.reloading; this.out.click(); }
+    // A device switched on the same gun clicks too (#28 M2-03); drawing another weapon or gun does not.
+    const devices = f.hud.devices, parts = devices ? devices.parts.map(d => d.uid).join() : '', switches = devices ? devices.parts.map(d => +d.on).join('') : '';
+    if (parts && parts === this.deviceParts && switches !== this.switches) this.out.click();
+    this.deviceParts = parts; this.switches = switches;
     // A heal (Q) spends a supply: the original plays the pickup cue for any used supply.
     if (this.heals !== null && f.hud.heals < this.heals) this.out.pickup();
     this.heals = f.hud.heals;
@@ -120,14 +155,26 @@ export class SampleSound {
    * it shows no marker or spark. Gunfire itself carries through walls and stays audible.
    */
   event(e: StampedEvent, mapId: string, shown: (p: { x: number; y: number }) => boolean = () => true, actorShown: (uid: string) => boolean = () => true) {
-    if (e.stamp.world.mapId !== mapId) return;
+    if (e.stamp.world.mapId !== mapId || this.shotScope && this.scope(e.stamp) !== this.shotScope) return;
     const at = (uid: string) => { const p = this.where.get(uid); return p ? this.spot(p.x, p.y) : undefined; };
     switch (e.type) {
       case 'shot': {
-        if (e.shooter === 'player') { this.out.shot(e.weapon); break; }
+        // Each gun family's own report (#75 H-02): the gun the event names picks it (#28 M2-11), older events and enemies
+        // go by look; the classic A/B setting plays the one report every gun shared before. A suppressor muffles the
+        // player's shot on top of its family's report.
+        const timbre = this.feel() === 'classic' ? null : timbreOfGun(e.gun?.id) ?? timbreOfLook(e.weapon);
+        if (this.scope(e.stamp) === this.shotScope && e.pellets?.length) {
+          if (!this.shotHits.has(e.shotId)) this.shotHits.set(e.shotId, { hit: new Set(), crit: new Set() });
+          for (const pellet of e.pellets) this.bulletShots.set(pellet.bullet, e.shotId);
+        }
+        if (e.shooter === 'player') {
+          const kind = timbre ?? (e.weapon === 'shotgun' ? 'shotgun' : 'pistol');
+          if (e.suppressed) this.out.shot(kind, undefined, 1, true); else this.out.shot(kind);
+          break;
+        }
         const s = at(e.shooter) ?? (e.pellets[0] ? this.spot(e.pellets[0].origin.x, e.pellets[0].origin.y) : undefined);
         if (this.spitters.has(e.shooter)) { if (actorShown(e.shooter)) this.out.shot('spit', s); break; }
-        if (s) this.out.shot('enemy', s); else this.out.shot('enemy');
+        if (timbre) this.out.shot(timbre, s, ENEMY_SHOT); else if (s) this.out.shot('enemy', s); else this.out.shot('enemy');
         break;
       }
       case 'melee': if (e.attacker === 'player') this.out.shot('knife'); break;
@@ -144,7 +191,8 @@ export class SampleSound {
         if (this.spitters.has(e.owner ?? '')) {
           if (shown(e.lastFree)) this.out.shot('acid-hit', this.spot(e.lastFree.x, e.lastFree.y));
         } else if (e.reason === 'blocked' && (e.surface === 'wall' || e.surface === 'door') && shown(e.lastFree)) {
-          const s = this.spot(e.lastFree.x, e.lastFree.y); if (s.gain > .3) this.out.impact(s);
+          // Stone or wood (#75 H-05); the classic A/B setting plays the one cue both shared before.
+          const s = this.spot(e.lastFree.x, e.lastFree.y); if (s.gain > .3) this.out.impact(s, this.feel() === 'classic' ? undefined : e.surface);
         }
         break;
       case 'looted': this.out.stow(); break;
@@ -155,14 +203,19 @@ export class SampleSound {
 
   /** Who was heard being struck in the batch being played (all its events share one revision), and who took a crit. */
   private heard = { revision: -1 as number | undefined, hit: new Set<string>(), crit: new Set<string>() };
+  private scope(stamp: Pick<PublishedView['stamp'], 'world' | 'epoch'>): string { return `${worldKeyString(stamp.world)}:${stamp.epoch}`; }
   /**
    * One blow heard: the player's pain centred, anyone else's hit where it lands (#75). Several blows on one body in one
-   * batch, such as a shotgun's pellets, sound once, with one critical tick if any of them crit.
+   * witnessed shot sound once per target, even across batches; another shot retains its own cue in the same batch.
+   * A later critical pellet can add one critical tick. Restored bullets/other blows without a witnessed shot retain
+   * the batch fallback; no new shot is invented or replayed from persisted bullets.
    */
   private struck(e: Extract<StampedEvent, { type: 'hurt' }>, spot: Spot | undefined) {
     if (this.heard.revision !== e.stamp.revision) this.heard = { revision: e.stamp.revision, hit: new Set(), crit: new Set() };
-    if (!this.heard.hit.has(e.uid)) { this.heard.hit.add(e.uid); if (e.uid === 'player') this.out.pain(); else this.out.hit(spot); }
-    if (e.critical && !this.heard.crit.has(e.uid)) { this.heard.crit.add(e.uid); this.out.crit(spot); }
+    const shot = e.bullet !== undefined && this.scope(e.stamp) === this.shotScope ? this.bulletShots.get(e.bullet) : undefined;
+    const heard = shot === undefined ? this.heard : this.shotHits.get(shot)!;
+    if (!heard.hit.has(e.uid)) { heard.hit.add(e.uid); if (e.uid === 'player') this.out.pain(); else this.out.hit(spot); }
+    if (e.critical && !heard.crit.has(e.uid)) { heard.crit.add(e.uid); this.out.crit(spot); }
   }
 
   /** The trigger was pulled on an empty magazine with nothing left to load (otherwise the reload click follows). */

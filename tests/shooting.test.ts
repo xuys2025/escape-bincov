@@ -1,15 +1,18 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as D from '../src/domain';
-import { advanceAim, coneOf, drawAim, driftOf, handlingOf, playtestMarks, recoil, turnAim, unsteadyAim, SAMPLE_GUNS, SWAY, type AimState, type Handling, type Motion } from '../src/shooting';
+import { advanceAim, coneOf, drawAim, driftOf, handlingOf, recoil, turnAim, unsteadyAim, SWAY, type AimState, type Handling, type Motion } from '../src/shooting';
+import { GUNS } from '../src/gunsmith/catalog';
 
 const near = (a: number, b: number) => Math.abs(a - b) < 1e-12;
 const aim = (patch: Partial<AimState> = {}): AimState => ({ raise: 0, sway: 0, bloom: 0, drift: 0, settle: 0, ...patch });
 const MOTIONS: Motion[] = [{ pace: 0, sprint: false, precise: true }, { pace: .7, sprint: false, precise: false }, { pace: 1.6, sprint: true, precise: true }];
+/** A weapon's factory handling: the knife's and the old three's table rows, the M4A1's from the gunsmith catalog. */
+const grip = (id: string): Handling => id === 'mb4a1' ? GUNS.mb4a1.handling : handlingOf(id);
 
 test('aim rules are closed forms of time: splitting an interval changes nothing but rounding', () => {
-    for (const id of ['pistol', 'carbine', 'shotgun', 'm4a1']) for (const motion of MOTIONS) {
-        const h = handlingOf(id), rules = SWAY;
+    for (const id of ['pistol', 'carbine', 'shotgun', 'mb4a1']) for (const motion of MOTIONS) {
+        const h = grip(id), rules = SWAY;
         const start = () => aim({ raise: .3, sway: .4, bloom: .8, drift: .6, settle: .07 });
         const whole = advanceAim(start(), h, rules, .23, motion);
         const split = start();
@@ -41,7 +44,7 @@ test('the cone: hip at rest is spread times hip, a raised aim narrows it, sway a
 });
 
 test('recoil adds bloom and drift up to their caps and restarts the settle delay; recovery waits for it', () => {
-    const h = handlingOf('m4a1'), rules = SWAY, a = aim();
+    const h = grip('mb4a1'), rules = SWAY, a = aim();
     recoil(a, h);
     assert.ok(near(a.bloom, h.bloom / h.bloomMax) && near(a.drift, h.kick / h.kickMax) && a.settle === h.settle);
     for (let i = 0; i < 40; i++) recoil(a, h);
@@ -61,17 +64,13 @@ test('turns and draws shake the aim; the worst state is fully unsteady and bloom
     assert.deepEqual(unsteadyAim(), { raise: 0, sway: 1, bloom: 1, drift: 0, settle: 0 });
 });
 
-test('playtest marks: the sample rifle only beside an explicit sample mark; the retired feel mark is ignored', () => {
-    assert.deepEqual(playtestMarks(''), { gun: null });
-    assert.deepEqual(playtestMarks('?feel=brisk&gun=m4a1'), { gun: null });
-    assert.deepEqual(playtestMarks('?sample=village&gun=m4a1&feel=brisk'), { gun: 'm4a1' });
-    assert.deepEqual(playtestMarks('?sample=mall&gun=ak'), { gun: null });
-});
-test('the sample rifle is automatic and kept out of the item and weapon tables a save can hold', () => {
-    assert.equal(handlingOf('m4a1').mode, 'auto');
+test('the M4A1 is the automatic one; the retired #39 sample rifle has no row anywhere (#28 M2-01)', () => {
+    assert.equal(grip('mb4a1').mode, 'auto');
     assert.ok(['pistol', 'carbine', 'shotgun', 'knife'].every(id => handlingOf(id).mode === 'semi'));
-    assert.equal(Object.hasOwn(D.ITEMS, SAMPLE_GUNS.m4a1.id), false);
-    assert.equal(Object.hasOwn(D.WEAPONS, SAMPLE_GUNS.m4a1.id), false);
+    assert.ok(D.isGun('mb4a1') && Object.hasOwn(D.ITEMS, 'mb4a1'));
+    // The sample's id names nothing: no item, no weapon, no handling of its own (an unknown id has no recoil).
+    assert.equal(Object.hasOwn(D.ITEMS, 'm4a1') || Object.hasOwn(D.WEAPONS, 'm4a1') || D.isGun('m4a1'), false);
+    assert.deepEqual(handlingOf('m4a1'), handlingOf('knife'));
 });
 
 test('touch: standing with the aim stick inside the fire ring raises the aim, firing past it holds, walking lowers it', () => {
@@ -91,8 +90,8 @@ test('recoil scale: 1 is the #39 recoil bit for bit; 0.68 adds 0.68 of a shot\'s
         a.settle = h.settle;
     };
     const random = D.seededRandom(39), scale = .8 * .85;
-    for (const id of ['knife', 'pistol', 'carbine', 'shotgun', 'm4a1']) {
-        const h = handlingOf(id), w = id === 'm4a1' ? SAMPLE_GUNS.m4a1 : D.WEAPONS[id];
+    for (const id of ['knife', 'pistol', 'carbine', 'shotgun', 'mb4a1']) {
+        const h = grip(id), w = D.WEAPONS[id];
         for (let i = 0; i < 50; i++) {
             const start = aim({ raise: random(), sway: random(), bloom: random(), drift: random(), settle: random() * .2 });
             const old = structuredClone(start), plain = structuredClone(start), one = structuredClone(start);
@@ -113,8 +112,8 @@ test('recoil scale: 1 is the #39 recoil bit for bit; 0.68 adds 0.68 of a shot\'s
 
 test('sustained fire at 0.68: with the same motion and draws every increment is 0.68 of the plain one until a cap; caps, settle and recovery stay', () => {
     const scale = .8 * .85, motion: Motion = { pace: 0, sprint: false, precise: true };
-    for (const id of ['carbine', 'm4a1'] as const) {
-        const h = handlingOf(id), w = id === 'm4a1' ? SAMPLE_GUNS.m4a1 : D.WEAPONS[id];
+    for (const id of ['carbine', 'mb4a1'] as const) {
+        const h = grip(id), w = D.WEAPONS[id];
         const fire = (k: number) => {
             const a = aim({ raise: 1 }), random = D.seededRandom(28), shots: { aim: AimState; draw: number; angle: number }[] = [];
             for (let i = 0; i < 30; i++) {
@@ -144,8 +143,8 @@ test('sustained fire at 0.68: with the same motion and draws every increment is 
             capped ||= u.aim.bloom + h.bloom / h.bloomMax > 1 || u.aim.drift + h.kick / h.kickMax > 1;
         }
         assert.ok(checked >= 9, `${id}: ${checked} shots in proportion`);
-        // The automatic sample rifle reaches both caps either way; recovery after the burst runs at the same rate.
-        if (id === 'm4a1') { assert.deepEqual([full.a.bloom, full.a.drift, scaled.a.bloom, scaled.a.drift], [1, 1, 1, 1]); }
+        // The automatic M4A1 reaches both caps either way; recovery after the burst runs at the same rate.
+        if (id === 'mb4a1') { assert.deepEqual([full.a.bloom, full.a.drift, scaled.a.bloom, scaled.a.drift], [1, 1, 1, 1]); }
         const rest = { u: { ...full.a }, s: { ...scaled.a } };
         assert.equal(rest.s.settle, rest.u.settle);
         advanceAim(full.a, h, SWAY, 1, motion); advanceAim(scaled.a, h, SWAY, 1, motion);

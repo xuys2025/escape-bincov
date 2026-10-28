@@ -5,6 +5,7 @@ import { initialLuck } from './reputation-luck';
 import { traversable, type SpaceDefinition } from './spatial';
 import type { Point, RunConfig } from './world';
 import { MALL_FURNITURE, MALL_V2_LAYOUT, MALL_V2_REGIONS, MALL_V2_SPAWN, MALL_V2_STAIRS, MALL_V3_LAYOUT, furnitureCellName, type FurnitureType, type Placement } from './mall-layout-v2';
+import { MALL_V4_LAYOUT } from './mall-layout-v4';
 
 const at = (x: number, y: number): Point => ({ x: (x + .5) * 32, y: (y + .5) * 32 });
 export const MALL_ANCHORS = {
@@ -144,29 +145,35 @@ function furnish(map: SpaceDefinition, placements: readonly Placement[], revisio
         }
     }
 }
-/** Revisions 2 and 3: the same skeleton, stairs and dressed regions, furnished from their own table. */
-function buildDressedMall(worldId: string, revision: string, layout: Record<'mall-f1' | 'mall-f2', readonly Placement[]>): WorldDefinition {
+/**
+ * Revisions 2 and 3: the same skeleton, stairs and dressed regions, furnished from their own table. Revision 4 (`full`)
+ * dresses every region from its table alone: no revision-1 corner markers, F2 shelves or F2 fixtures.
+ */
+function buildDressedMall(worldId: string, revision: string, layout: Record<'mall-f1' | 'mall-f2', readonly Placement[]>, full = false): WorldDefinition {
     const { f1, f2 } = mallSkeleton(), dressed = new Set<string>(MALL_V2_REGIONS);
     for (const [id, a, b] of MALL_V2_STAIRS) connect(f1, `${id}-up`, a, '上楼至二层', f2, `${id}-down`, b, '下楼至一层');
-    for (const map of [f1, f2]) cornerMarkers(map, dressed);
-    shelves(f2);
-    floorTwoFixtures(f2);
+    if (!full) {
+        for (const map of [f1, f2]) cornerMarkers(map, dressed);
+        shelves(f2);
+        floorTwoFixtures(f2);
+    }
     settle(f1, f2);
     furnish(f1, layout['mall-f1'], revision); furnish(f2, layout['mall-f2'], revision);
     // The ground floor is indoors and out; its name says only which floor it is (the HUD adds the place).
     f1.floor = '一层';
     return { id: worldId, revision, maps: { [f1.id]: f1, [f2.id]: f2 }, enemyCount: 25, spawnMap: f1.id, spawn: MALL_V2_SPAWN };
 }
-let worldV2: WorldDefinition | null = null, worldV3: WorldDefinition | null = null;
+let worldV2: WorldDefinition | null = null, worldV3: WorldDefinition | null = null, worldV4: WorldDefinition | null = null;
 /**
- * Layout revisions 2 and 3, built on first use. Both stay registered for recovery (a raid restores on the revision it
+ * Layout revisions 2 to 4, built on first use. All stay registered for recovery (a raid restores on the revision it
  * was deployed on); new deployments must explicitly choose one. The ordinary deployment path defaults to revision 1.
  * URL/sample selection belongs to the host.
  */
 export function mallWorldV2(): WorldDefinition { return worldV2 ??= buildDressedMall('mall-v2', 'mall-layout-2', MALL_V2_LAYOUT); }
 export function mallWorldV3(): WorldDefinition { return worldV3 ??= buildDressedMall('mall-v3', 'mall-layout-3', MALL_V3_LAYOUT); }
+export function mallWorldV4(): WorldDefinition { return worldV4 ??= buildDressedMall('mall-v4', 'mall-layout-4', MALL_V4_LAYOUT, true); }
 /** Every registered mall world id: these raids use the mall run config and draw as the mall building. */
-export const MALL_WORLD_IDS = ['mall-v1', 'mall-v2', 'mall-v3'] as const;
+export const MALL_WORLD_IDS = ['mall-v1', 'mall-v2', 'mall-v3', 'mall-v4'] as const;
 export const isMallWorld = (id?: string | null): boolean => !!id && (MALL_WORLD_IDS as readonly string[]).includes(id);
 export function mallRunConfig(seed: number | string): RunConfig {
     const config = buildingRunConfig(seed), random = D.seededRandom(config.seed + 23191);

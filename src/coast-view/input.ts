@@ -1,8 +1,9 @@
 import type { RaidIntent } from '../raid-runtime/contract';
 
-type Action = 'reload' | 'heal' | 'primary' | 'knife' | 'interact';
+type Action = 'reload' | 'heal' | 'primary' | 'knife' | 'laser' | 'light' | 'interact';
 type Stick = { id: number; x: number; y: number; distance: number };
-const ACTION_KEYS: Record<string, Action> = { r: 'reload', q: 'heal', '1': 'primary', '2': 'knife', e: 'interact' };
+/** F and G flip the light and the laser of the gun in hand (#28 M2-03); a combiner answers to either. Physical keys (inputKey). */
+const ACTION_KEYS: Record<string, Action> = { r: 'reload', q: 'heal', '1': 'primary', '2': 'knife', e: 'interact', f: 'light', g: 'laser' };
 
 /** The InputState name of a key event, the same for its press and release. Letters, digits and Shift go by the physical
  *  key (e.code): with Shift held a US layout reports 2 as "@" and a 1 released as "!", and AZERTY digits are symbols
@@ -30,10 +31,14 @@ export class InputState {
   private suppressedButtons = new Set<number>();
   private selected: string | null = null;
 
-  key(key: string, down: boolean) {
+  /** A non-repeat keydown is a fresh press, even if blur hid the preceding keyup. Keep repeats suppressed across panels. */
+  key(key: string, down: boolean, repeat = false) {
     key = key.toLowerCase();
     if (!down) { this.suppressedKeys.delete(key); this.keys.delete(key); return; }
-    if (this.suppressedKeys.has(key)) return;
+    if (this.suppressedKeys.has(key)) {
+      if (repeat) return;
+      this.suppressedKeys.delete(key);
+    }
     if (!this.keys.has(key) && ACTION_KEYS[key]) this.actions.add(ACTION_KEYS[key]);
     this.keys.add(key);
   }

@@ -2,7 +2,6 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import * as D from '../src/domain';
-import { SAMPLE_GUNS } from '../src/shooting';
 import { addPerk, canChoosePerk, characterCritChance, critBreakdown, critChance, critMultiplier, critSources, perkLimitBonus, perkModifiers, perkNodes,
     removeAttributePerks, snapshotChance, validPerkSelection, CRIT_SOURCE_IDS, PERK_IDS,
     type CritInput, type CritSource, type PerkId, type PerkModifiers } from '../src/perks';
@@ -61,15 +60,14 @@ test('every id counts once, the input order never matters, and ids outside the c
 });
 
 test('every weapon states its own critical source; the knife and an empty hand get no sources at all', () => {
-    assert.deepEqual(Object.fromEntries(Object.values(D.WEAPONS).map(w => [w.id, w.crit])), { knife: 0, pistol: .05, shotgun: .03, carbine: .08 });
-    assert.equal(SAMPLE_GUNS.m4a1.crit, .05);
+    assert.deepEqual(Object.fromEntries(Object.values(D.WEAPONS).map(w => [w.id, w.crit])), { knife: 0, pistol: .05, shotgun: .03, carbine: .08, gb17: .05, mb4a1: .05 });
     // @ts-expect-error a weapon that does not state `crit` does not compile
     const unstated: D.WeaponDef = { id: 'x', name: 'x', ammo: 'ammo9', magazine: 1, damage: 1, range: 1, cooldown: 1, reload: 1, pellets: 1, spread: 0 };
     assert.equal(unstated.crit, undefined);
     const all: PerkId[] = ['technique-15-a', 'technique-20-a', 'technique-30-a'];
     assert.equal(critSources(shot({ technique: 40, weapon: D.WEAPONS.knife, perks: all, focus: true, breath: .3 })), null);
     assert.equal(critSources(shot({ technique: 40, weapon: null, perks: all, focus: true, breath: .3 })), null);
-    assert.ok(critSources(shot({ weapon: SAMPLE_GUNS.m4a1 }))!.some(s => s.id === 'weapon' && s.chance === .05));
+    assert.ok(critSources(shot({ weapon: D.WEAPONS.mb4a1 }))!.some(s => s.id === 'weapon' && s.chance === .05));
 });
 
 test('a shot gathers its sources: the design examples with the real guns (CP-04)', () => {

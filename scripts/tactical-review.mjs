@@ -42,12 +42,6 @@ try {
     const {fonts}=await cdp.send('CSS.getPlatformFontsForNode',{nodeId});
     assert.ok(fonts.some(f=>f.familyName==='Bincov Text'&&f.isCustomFont&&f.glyphCount>0));await cdp.detach();
     check('equipment / bag / stash order, visible safe, fixed details, actual font B at 16px');
-    const fixture={w:10,h:6,items:[]};
-    for(const id of Object.keys(D.ITEMS))assert.equal(D.addItem(fixture,id,1),0);
-    await page.evaluate(stash=>{window.__bincov.app.save.stash=stash;},fixture);
-    await action('tab','gear').click();
-    assert.equal(await page.locator('[data-source="stash"] .inventory-art-image').count(),Object.keys(D.ITEMS).length);
-    await shot('all-items');
     async function noClipping() {
       const bad=await page.locator('.item .inventory-art-image').evaluateAll(images=>images.filter(img=>{
         const r=img.getBoundingClientRect(),p=img.parentElement.getBoundingClientRect();
@@ -55,13 +49,26 @@ try {
       }).map(img=>img.dataset.art));
       assert.deepEqual(bad,[],'Proportioned and rotated art must stay inside its reserved area');
     }
-    await noClipping();
+    // One of every item in the 10x6 stash, drawn by the real page. Since the gunsmith items (#28 M2-01/02) they no longer
+    // fit one stash, so they fill as many stashes as they need, in item order, each shown, counted and checked alone.
+    const stashes=[];
+    for(const id of Object.keys(D.ITEMS)){
+      if(!stashes.length||D.addItem(stashes.at(-1),id,1)!==0){stashes.push({w:10,h:6,items:[]});assert.equal(D.addItem(stashes.at(-1),id,1),0,`${id} fits an empty stash`);}
+    }
+    assert.equal(stashes.reduce((n,s)=>n+s.items.length,0),Object.keys(D.ITEMS).length);
+    for(const [i,fixture] of stashes.entries()){
+      await page.evaluate(stash=>{window.__bincov.app.save.stash=stash;},fixture);
+      await action('tab','gear').click();
+      assert.equal(await page.locator('[data-source="stash"] .inventory-art-image').count(),fixture.items.length);
+      await shot(i?`all-items-${i+1}`:'all-items');
+      await noClipping();
+    }
     const rotated={w:10,h:6,items:[]};
-    for(const id of ['pistol','shotgun','carbine','medkit','ledger','water','battery','knife']) {
+    for(const id of ['pistol','shotgun','carbine','gb17','mb4a1','medkit','ledger','water','battery','knife']) {
       assert.equal(D.addItem(rotated,id,1,false,true,false),0);
     }
     await page.evaluate(stash=>{window.__bincov.app.save.stash=stash;},rotated);await action('tab','gear').click();
-    await noClipping();await shot('rotated-items');check(`${Object.keys(D.ITEMS).length} inventory objects, eight rotated shapes, no clipped artwork`);
+    await noClipping();await shot('rotated-items');check(`${Object.keys(D.ITEMS).length} inventory objects in ${stashes.length} stashes, ten rotated shapes, no clipped artwork`);
     // Keep the accepted art and inspection while buying/selling through the QOL cart.
     await page.evaluate(()=>{const s=window.__bincov.app.save;s.stash.items=[];s.cash=5000;});
     await action('tab','arms').click();

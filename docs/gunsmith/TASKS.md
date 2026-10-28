@@ -13,7 +13,7 @@
 - 手感在 `src/shooting.ts`：`Handling`（mode、hip、precise、raise、sway、bloom/bloomMax、kick/kickMax、settle、recover）按武器 id 由 `handlingOf(id)` 查表，未知 id 静默落到没有后坐的默认值。身体晃动 `SWAY` 是全局的。
 - 维护者选定“稳定”一套参数；“轻快”一套记在 [射击系统改造](../SHOOTING-SYSTEM-REWORK.md)，可作为“改好的枪”的参考。
 - 其余武器数值在 `src/domain.ts` 的 `WeaponDef`（ammo、magazine、damage、range、cooldown、reload、pellets、spread），重量和价格在 `ITEMS`。
-- 样本 M4A1 只在测试夹具、显式样板网址和试枪场出现，id 是 `m4a1`，不是物品，不进存档。
+- 样本 M4A1 只在测试夹具、显式样板网址和试枪场出现，id 是 `m4a1`，不是物品，不进存档。M2-01 起样本已退役：试枪场和测试驱动改发正式的 `mb4a1`，数值和手感不变，网址标记已删除（见 [CONTRACTS](CONTRACTS.md#g17m4a1-与样板配件m2-0102)）。
 - RPG 的后坐倍率（技巧、精神、疼痛）只在分层行动里，乘在整个散布锥和后坐偏移上。
 - #92 的 Perk 另有两处：`perkEffects().recoil` 只缩放每发新增的散布和后坐（`recoil(aim, h, scale)`），`perkEffects().reload` 乘换弹时间（`CoastRaidRuntime.reloadTime`）。配件改的是枪本身的手感和换弹时间，与 RPG 倍率、Perk 各乘一次，不能叠两遍。
 - Runtime 读武器的入口是 `CoastRaidRuntime` 的 `currentWeapon` 和 `grip`；`reloadMagazine`、`cleanMagazine`、`carriedWeight`、各存档校验、测试夹具和试枪场绕过它们直接按 id 查表。
@@ -41,11 +41,13 @@
 - 目录是一张 6×5，待买、待卖各 4×3。购买不看待买区的摆放，结算时自动放进仓库。
 - 每局 60 份物资（58 个随机点加样本和账册）；普通点里每把枪 1/26；尸体掉落有手枪和霰弹枪，没有卡宾枪。商场把同一批记录分到三层。
 - #81（开发中）在重做敌人体系，尸体掉落以它合入后的版本为准，M2-13、M4-02 开工时核对。
+- M2-13 已接上样板获取：老栓在旧货后面加 G17、三件基础件和 G17 的 O01、G01（M2 决定 8），目录仍一页放下；新街区和商场的枪、贵重品记录，以及旧敌人尸体的枪、贵重品掉落，各有六分之一变成 M4A1 或配件，其余记录和 #81 战术敌人的掉落都不变。见 [CONTRACTS](CONTRACTS.md#样板获取路径m2-13)。
 
 **会被新物品打破的检查**
 
 - `tests/domain.test.ts` 断言正好 30 种物品；`test:art` 要求每种物品有独立图标；`test:tactical` 把每种物品各放一件进 10×6 仓库。
 - `tests/shooting.test.ts` 断言样本 M4A1 不在物品表，`tests/shooting-save.test.ts` 断言存档里没有手感字段。
+- M2-01/02 已按原意更新这些检查：物品表 52 种；`test:tactical` 按需用几个 10×6 仓库放下全部物品；样本退役，`shooting-save` 仍检查手感不进存档，只是 `mb4a1` 的 id 现在会出现在存档里。
 - 新增浏览器套件要同时改 `package.json`、`scripts/ci/browser-suites.mjs`、`scripts/ci/policy.test.mjs` 和 `docs/CI.md`。
 
 **模块边界**：`domain.ts`、`balance.ts`、`world.ts` 只能互相引用（`scripts/ci/source-health.test.mjs` 的 `PURE`），domain 不能读 `shooting.ts`。改枪的纯规则模块加入这个名单，由 domain 单向引用，不能反过来。

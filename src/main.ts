@@ -1,3 +1,5 @@
+import { drawGunLayout, gunArtCaches, loadGunsmithArt } from './art/gunsmith-compose';
+import { gunArtLayout } from './art/gunsmith-layout';
 import { loadPixelFont } from './font';
 import { loadTitleArt } from './title/art';
 import { prepareTitleRenderer } from './title/scene';
@@ -15,7 +17,8 @@ async function boot() {
     if (!webglSupported()) { showWebglRequired(); return; }
     // 试枪场 (?range=1): a playtest page on an in-memory save (src/range). It leaves here, before the real save is opened.
     const range = new URLSearchParams(location.search).get('range') === '1';
-    await Promise.all([loadPixelFont(), range ? null : loadTitleArt()]);
+    // Sol's gunsmith images (24 KB) decode once here, so every view draws them synchronously (art/gunsmith-compose.ts).
+    await Promise.all([loadPixelFont(), range ? null : loadTitleArt(), loadGunsmithArt()]);
     if (range) { const { startRange } = await import('./range'); await startRange(); return; }
     const ownership = await ownSession(navigator.locks);
     initSave(ownership.owned);
@@ -93,6 +96,6 @@ async function boot() {
     });
     // Explicitly opt-in acceptance hooks; never available in the normal game.
     if (new URLSearchParams(location.search).get('test') === '1')
-        (window as any).__bincov = { app, persist, setOverlay, saveSession, hideoutRuntime, startPreparedHideoutRaid, get title() { return titleScene(); } };
+        (window as any).__bincov = { app, persist, setOverlay, saveSession, hideoutRuntime, startPreparedHideoutRaid, gunsmithArt: { layout: gunArtLayout, draw: drawGunLayout, caches: gunArtCaches }, get title() { return titleScene(); } };
 }
 void boot();
