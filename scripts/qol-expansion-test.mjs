@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { browserOptions } from './browser-options.mjs';
-import { resumeStalls } from './stall-resume.mjs';
+import { openPause, resumeStalls } from './stall-resume.mjs';
 import { placeAt, clickSlot } from './inventory-actions.mjs';
 import { batch, frames, raidReady, waitPanel } from './raid-view.mjs';
 const out = resolve('test-results'); await mkdir(out, { recursive: true });
@@ -54,6 +54,47 @@ try {
     await action('tab', 'gear').click(); await page.locator('#run-world').selectOption('mall'); await page.locator('#seed').fill('42'); await action('deploy').click();
     await raidReady(page);
     assert.deepEqual((await batch(page)).map.key.worldVersion, 'mall-v4');
+    await step('body HUD reads the live raid rather than its saved checkpoint at both desktop sizes', async () => {
+        const failures = []; report.liveNeeds = [];
+        for (const [index, viewport] of [{ width: 1280, height: 720 }, { width: 1920, height: 1080 }].entries()) {
+            await page.setViewportSize(viewport);
+            await page.evaluate(() => window.__bincovSample.driver.freezeAI(true));
+            // A normal pause writes a checkpoint. Keep it paused while the explicit driver changes only live body:
+            // slow software GL may take longer than the autosave interval to render eight HUD frames.
+            await openPause(page);
+            const sample = await page.evaluate(index => new Promise(resolve => {
+                const h = window.__bincovSample.host, s = window.__bincov.saveSession, app = window.__bincov.app;
+                const checkpoint = structuredClone(app.expansion.body), elapsed = h.lastBatch.stamp.simulationTime, frame = h.stats.frames;
+                // Clocks, pause/save semantics and HUD cadence all remain the ordinary implementation.
+                window.__bincovSample.driver.vitals(index ? { mental: 48.2, water: 37.2, satiety: 26.2 } : { mental: 71.2, water: 62.2, satiety: 53.2 });
+                const poll = () => {
+                    if (h.stats.frames < frame + 8) { requestAnimationFrame(poll); return; }
+                    const body = s.captureExpansion().body;
+                    const needs = { mental: body.mental, water: body.water, satiety: body.satiety };
+                    const el = document.querySelector('.coast-sample [data-state]'), rect = el.getBoundingClientRect();
+                    resolve({ checkpoint, saved: structuredClone(app.expansion.body), live: needs, projected: h.lastBatch.frame.hud.needs,
+                        elapsed: h.lastBatch.stamp.simulationTime - elapsed, text: el.textContent,
+                        rect: { x: rect.x, y: rect.y, right: rect.right, bottom: rect.bottom },
+                        fits: el.scrollWidth <= el.clientWidth && el.scrollHeight <= el.clientHeight });
+                }; requestAnimationFrame(poll);
+            }), index);
+            report.liveNeeds.push({ viewport, ...sample });
+            await page.screenshot({ path: resolve(out, `live-needs-${viewport.width}x${viewport.height}.png`) });
+            try {
+                assert.deepEqual(sample.saved, sample.checkpoint, 'the next autosave has not happened');
+                assert.equal(sample.elapsed, 0, 'ordinary pause freezes simulation without a clock fixture');
+                assert.notEqual(Math.round(sample.live.water), Math.round(sample.saved.water), 'the fixture must distinguish live from saved');
+                const n = sample.live;
+                assert.match(sample.text, new RegExp(`精神 ${Math.round(n.mental)} · 水分 ${Math.round(n.water)} · 饱食 ${Math.round(n.satiety)}`));
+                assert.deepEqual(sample.projected, sample.live, 'the frame carries the live values without recomputing');
+                assert.ok(sample.fits && sample.rect.x >= 0 && sample.rect.y >= 0 && sample.rect.right <= viewport.width && sample.rect.bottom <= viewport.height, 'status stays inside its viewport');
+            } catch (e) { failures.push(`${viewport.width}×${viewport.height}: ${e.message}`); }
+            await page.evaluate(b => window.__bincovSample.driver.vitals({ mental: b.mental, water: b.water, satiety: b.satiety }), sample.checkpoint);
+            await page.keyboard.press('Escape'); await waitPanel(page, null);
+        }
+        await page.setViewportSize({ width: 1280, height: 720 });
+        assert.deepEqual(failures, []);
+    });
     // Two crates of the first floor moved onto the player (a walkable spot by construction); enemies frozen.
     const fixture = await page.evaluate(() => {
         const s = window.__bincov.saveSession; let ids;

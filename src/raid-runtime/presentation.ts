@@ -149,7 +149,7 @@ export function frameView(r: CoastRaidRuntime, map: MapDef, velocities: Readonly
     // Overlap fails closed: a containing unrevealed room wins; deterministic ties by stable ID.
     const regionAt = (p: Point) => map.regions.filter(a => a.inside && contains(a, p))
         .sort((a, b) => Number(!!revealed[a.id]) - Number(!!revealed[b.id]) || a.id.localeCompare(b.id, 'en'))[0]?.id ?? null;
-    const limits = r.limits;
+    const limits = r.limits, needs = r.layered?.raid ? r.layered.body : null;
     const actor = (e: typeof r.player | typeof r.enemies[number], player: boolean): ActorView => {
         const enemy = player ? null : e as typeof r.enemies[number], hp = enemy?.hp ?? r.hp;
         const uid = enemy?.uid ?? 'player', velocity = velocities.get(uid) ?? { x: 0, y: 0 };
@@ -184,6 +184,7 @@ export function frameView(r: CoastRaidRuntime, map: MapDef, velocities: Readonly
             ownerUid: c.kind === 'corpse' ? c.id.slice('corpse-'.length) : null, regionId: regionAt(c) })),
         doors: { ...r.space?.doors }, highTide: r.highTide, flooded: floodedCells(map, r.highTide), revealed: { ...revealed }, interaction: r.targetView(),
         hud: { hp: r.hp, maxHp: limits.hp, stamina: r.stamina, maxStamina: limits.stamina, pollution: r.pollution, bleeding: !!r.bleeding,
+            needs: needs ? { mental: needs.mental, water: needs.water, satiety: needs.satiety } : null,
             timeLeft: Math.max(0, r.config.duration - r.elapsed), tideWarning: r.warned && !r.tideChanged, highTide: r.highTide,
             weapon: { id: w.id, name: w.name, mag: r.mag, magSize: w.magazine, reserve: w.ammo ? D.count(loadout.bag, w.ammo) : 0, reloading: r.reloadLeft > 0 },
             // The cone a shot fired now meets: with the laser resting on a body in range, the laser's (shotGrip).
