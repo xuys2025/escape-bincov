@@ -6,6 +6,7 @@
   "description": "逃离滨科夫：单人像素撤离生存游戏",
   "scripts": {
     "checks": "node scripts/checks.mjs",
+    "architecture": "node scripts/architecture.mjs",
     "check:ci": "node --test scripts/ci/*.test.mjs",
     "check:perk-ui": "node scripts/perk-ui-browser.mjs",
     "diagnose:coast-heap": "node scripts/coast-sample-heap.mjs",

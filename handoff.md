@@ -4,6 +4,13 @@
 
 在未改动的 `03ea261` 独立捕获 mall-v4 两层完整静态投影哈希，合成后逐项相等；原九图 / 28 入口基线及改名、重排、缺 ID 反例亦通过（4/4）。Windows / Node 24 / pnpm 11.19：`pnpm test` 1026/1026、`pnpm check:ci` 77/77、`pnpm package` 通过，HTML SHA-256 `bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25`。`pnpm test:raid-default` 11/11 通过（打包 HTML，含居民楼、mall-v4 和旧行动恢复）；准确 head CI 状态见 PR 正文。真人体验不由自动测试替代。
 
+## 2026-10-28 · 新一轮减熵：架构门禁与依赖查询（#60）
+
+- 基线：`3b61d52e898459f3e197584ae202285e7ade65e2`；分支 `codex/entropy-architecture`；[全库扫描/候选清单](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6449666799)。原改枪 M3 检出保留。
+- 本批：统一源码 AST 图、动态加载/类型导出/自环检查、沿核心依赖闭包约束 61 个模块，以及只读 `pnpm architecture [src/path.ts] [--json]`。入口：[实现摘要](docs/tasks/quality-entropy.md#2026-10-28-架构门禁与按文件查询)、[代码导航](docs/CODEMAP.md)、[共享分析](scripts/source-graph.mjs)。
+- 实测：原始基线 1020/1020 单测、85/85 工程守卫、package，三份制品与该基线字节相同；正常合入 main `0f73a67386bac196b87c983668295be6d1a99f1e` 后重跑 1022/1022、85/85 与 package 均通过。动态反向依赖负对照旧守卫 3/3 放行、新守卫拒绝，已还原。独立源码审阅无阻塞，src/assets/锁文件相对最新 main 无差异；准确 head CI 与合并状态见 [PR #134](https://github.com/xuys2025/escape-bincov/pull/134)。
+- 未验：本地浏览器、真机/F20/性能未运行；产品行为未变。准确提交与完整 CI 以本批 PR 为准，未合并/发布；后续候选按 #60 原归属推进，既有修复 PR 保持原承接。
+
 ## 2026-10-28 室内墙体与视野设计（功能未实施）
 
 维护者要求只生成文本，核验后提交文档 PR。本轮基于 main `b5bd63b7896b3b0697d4ba38d02d000e78903047`，分支 `docs/indoor-wall-visibility`，新增[室内视野设计](docs/INDOOR-WALL-VISIBILITY-PLAN.md)并同步任务入口。所有室内适用、完整基础格、连续横墙段切换三个选项已由维护者确认；五项显示规则、缓冲、兼容边界和后续验收统一维护在方案内。
