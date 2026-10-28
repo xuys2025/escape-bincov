@@ -256,8 +256,9 @@ jobs:
           path: dist
 
   deploy:
+    # Explicit status check (here and in release): the implicit success() also sees the browser groups the docs fast path skips.
     name: Deploy Pages
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    if: ${{ !cancelled() && needs.verify.result == 'success' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
     needs: verify
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -275,7 +276,7 @@ jobs:
   release:
     # README's offline download: the same validated build as Pages, as the rolling main-latest prerelease.
     name: Publish offline release
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    if: ${{ !cancelled() && needs.verify.result == 'success' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
     needs: verify
     runs-on: ubuntu-24.04
     timeout-minutes: 10

@@ -1,3 +1,9 @@
+## 2026-10-28 · CI：文档快速通道的 main 也要部署和发布
+
+分支 `fix/ci-docs-fastpath-deploy`，起点 main `8c6589b`。#133（纯文档）合入后，main 运行 40623228494（`03ea261`）走了快速通道：浏览器组跳过、`Build and test` 成功，但 `Deploy Pages` 和 `Publish offline release` 都被跳过，`main-latest` 和发布清单停在 `0f73a67`。原因是两个 job 的 `if` 没写状态函数，默认 `success()` 连带检查被跳过的浏览器组。现在两个 job 显式写 `!cancelled() && needs.verify.result == 'success'`，`policy.test.mjs` 守住浏览器组之后的 job，详见 [CI 说明](docs/CI.md#pages-与镜像)。
+
+只改工作流、守卫测试和文档，游戏字节不变。真正的证明要等下一次纯文档 PR 合入 main：两个 job 实际执行，`main-latest` 移到那次提交。准确 head 与 CI 见承接 PR。
+
 ## 2026-10-28 Q-E02：公共视图生命周期归位
 
 串联集成：本分支按明确授权正常合入 #117 候选 `4ba5b72c70983f3eefe4affdd31e2d674b3223a3`（fetch 后核对 `origin/fix/content-identity` 同一提交），只消除共同文档冲突，不修改其源码。**必须先 #117 合入 main，再合 #136。** 该候选尚非已接受 main；此前浏览器和制品证据仍只归属原 `14df8ce`，候选集成已通过 1026/1026 单测、86/86 守卫及 package；两份 HTML/两份 ZIP 与明确标注的 #117 候选构建逐字节相同（HTML `bdd50dec…7fc25`），没有将其称为已接受 main。最新已接受 `630e68f` 已确认包含在被测集成中；完整 CI 在新 head 推送后核对，详情见原质量摘要。
