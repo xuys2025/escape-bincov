@@ -94,6 +94,20 @@
 
 维护者 10-27 要求查看 #115 去向并合入后再做 #26 F15。#115 自 10-25 起无人续作、无评论，准确 head `3e1047b` 当时 CI 全过。本次在隔离工作树把 main `86add10`（#126、#127 等已合入）合进原分支：源码自动合并，只有本文件冲突，保留双方小节。实现和接口不变；同步后的验证结果见 PR 正文。F15 另由 PR #129 承接（基于本分支）。10-27 晚 #128（F14）合入后，再把 main `8b59019` 合进来一次，同样只有本文件冲突，保留双方小节。
 
+## 2026-10-28 Shader cache 快照消费字段校验（PR #118，`fix/heap-cache-input`）
+
+复用 [PR #118](https://github.com/xuys2025/escape-bincov/pull/118)，续作前 head `039bac0d7e27905857ac989b2f6e9bc061f547dc`。本轮先正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`（`3613b04`），交付 head `bb507f1` 的完整 CI [40624444343](https://github.com/xuys2025/escape-bincov/actions/runs/40624444343) 已通过。main 新进 #134 后，再正常合入共同截止点 `630e68f517edea34bfbcc548473897bd36bdfa08`；只在本文件顶部冲突并保留双方小节，#134 的架构工具、分类与入口完整保留；准确交付 head 与远程检查见原 PR。职责仍是 #32/#60 的 shader-cache review 分析器输入校验，与 #116 station 报告消费字段校验分开。
+
+原脚本把 shader string 的 null `self_size` 加成零：最小图 cycle-30 应有 80 bytes，旧 CLI 仍 exit 0 并写 `newRetainedBytes: 0`。现在 [`validateSnapshot`](scripts/sol-heap-cache-inspect.mjs) 只校验实际消费的 flat-table 字段：缺失/重复字段、类型与表索引、不完整行、非安全整数 id/bytes、重复 id，以及 cycle-30 incoming edge 计数/偏移/命名；`sumBytes` 拒绝不精确求和。只在所有消费校验和报告准备成功后写 `shader-cache.json`，拒绝时保留已有报告字节。未消费的 metadata、额外列/类型允许，cycle-10 不要求未消费的 edge 图。不做完整 V8 schema 或业务内存预算校验。
+
+本轮 [CLI 测试](scripts/ci/heap-cache-input.test.mjs) 从原五组扩成十组：新增已有报告保留、重复字段、坏表/identity、edge_count 求和溢出、未消费 metadata/额外列与类型/空图、稳定 node id、weak/hidden edge、两端 MAX_SAFE_INTEGER 精确字节和、七跳边界与十二样本截断。原五组在当前 main 旧脚本实际为 1 通过/4 失败；候选扩展十组实际 10/10，不把两者写成同一测试集。合法合成图新旧报告除生成时间外所有字段 deepEqual。
+
+Node v24.22.1 本轮实际生成两份 V8 快照（5,210,690 / 5,211,160 bytes），候选 CLI exit 0，新增人工字符串 2 节点/176 bytes、3 owner paths。这只是 Node 人工字符串图的格式兼容证据，不是浏览器/游戏 shader 泄漏或 F20 签收。原始快照、采集脚本和日志只在忽略的 `test-results/pr118/`；首轮未扁平化人工字符串只得到零匹配，已修 fixture 重新捕获并核对非零观察。没有变更分析算法、阈值、游戏、历史证据或测试分类。
+
+此前 `bb507f1` 已实际通过完整 `pnpm test` 1022/1022（63.87 秒）、`pnpm check:ci` 87/87、`pnpm package`、CLI 十组与入口文档三组合跑 13/13，且其完整 CI 已通过。合入 #134 时逐字节核对本任务生产脚本、十组 CLI 测试与锁文件不变，依赖声明和 test/check:ci/package/build 命令不变，游戏 src/assets/tests 不变；1022 单测与真实快照兼容证据按同代码复用，不声称重新采样。当前合成树已重新实际通过 `pnpm check:ci` 95/95（18.56 秒，含 CLI 十组）、`pnpm package` 与 `git diff --check`，三产品 SHA-256/字节数与此前及 main 一致。新日志为 `test-results/pr118/check-ci-630.log`、`package-630.log`，输入核对与三哈希为 `merge-630-inputs.json`、`product-hashes-630.json`；生成物不提交。首次本地输入比对发现测试工作副本 mixed 换行，归一为已提交 LF 后字节一致；冲突解决前误启动的一次守卫日志仅留 before-resolution，不作为当前验证。未另跑本机游戏单测/浏览器、游戏堆采样、trend 或 60 轮/F20，不关闭 #32/#60；新 head 完整 CI 以原 PR 实时链接为准，旧成功不代表新 head。已 Ready，未启用自动合并、未合并或发布。
+
+维护者已明确授权复查后自动合并；本次正常同步 main `f66ee79af6b84ef64319891e82d7dc4e82985350`（含 #117/#136），保留上游身份与共享生命周期归位。本节原验证证据保留历史归属，当前守卫、打包及准确新 head CI / 自动合并状态以原 PR 为准，不绕过检查或保护。
+
 ## 2026-10-27 #26 F14：商场里没揭示的房间压暗（PR #128）
 
 维护者 10-27 在局域网试玩商场四版后反馈：“目前可视范围指示不太清晰：有时候敌人看不见，我又不知道他在视野盲区里，会让人感到疑惑。”分支 `claude/issue26-f14-reveal-cue-a98142`，基线 main `0d20857`，#127 合入后正常合并 main `86add10`（无冲突），在四版上复查。
