@@ -79,6 +79,20 @@ test('headless boundary follows new helper modules and type edges, reporting the
   assert.throws(() => dependencyPaths(adjacency(model), ['src/typo.ts']), /Unknown source module/);
 });
 
+test('headless boundary rejects pure type borrowing from shared view lifecycle', t => {
+  const { model, program } = fixture(t, {
+    'src/session.ts': "import type { Scope } from './view-lifecycle/scope'; export type HostScope = Scope;",
+    // No browser globals or renderer import: this counterexample isolates the directory ownership boundary.
+    'src/view-lifecycle/scope.ts': 'export type Scope = number;',
+  });
+  assert.deepEqual(model.problems, []);
+  assert.equal(adjacency(model).get('src/session.ts').size, 0, 'a type borrow does not become a runtime edge');
+  assert.deepEqual(model.nodes.get('src/session.ts').edges.map(e => e.kind), ['type']);
+  assert.ok(headlessProblems(model, program, ['src/session.ts'])
+    .some(p => p.includes('src/session.ts -> src/view-lifecycle/scope.ts')),
+  'a shared browser lifecycle type stays outside the headless core');
+});
+
 test('headless browser global detection follows aliases but allows encoding, injected locks and local names', t => {
   const { model, program } = fixture(t, {
     'src/session.ts': "export { save } from './helper';",

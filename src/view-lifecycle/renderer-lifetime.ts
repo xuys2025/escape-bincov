@@ -1,4 +1,7 @@
 /**
+ * Page-wide Pixi registration/cache owner, shared by every view. Importing this module patches Pixi once; keep the
+ * side-effect import in pixi-app.ts before renderer construction, and import helpers directly from this same module.
+ *
  * Three context-restore lifetimes on the shared renderer that Pixi 8.22 leaves to its user (ASTRA-R3, SOL-R3).
  *
  * 1. Graphics program (ASTRA-R3-PIXI-01). Pixi's GlGraphicsAdaptor compiles a new GlProgram on every contextChange,

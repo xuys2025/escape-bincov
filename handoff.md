@@ -1,3 +1,9 @@
+## 2026-10-28 Q-E02：公共视图生命周期归位
+
+串联集成：本分支按明确授权正常合入 #117 候选 `4ba5b72c70983f3eefe4affdd31e2d674b3223a3`（fetch 后核对 `origin/fix/content-identity` 同一提交），只消除共同文档冲突，不修改其源码。**必须先 #117 合入 main，再合 #136。** 该候选尚非已接受 main；此前浏览器和制品证据仍只归属原 `14df8ce`，候选集成已通过 1026/1026 单测、86/86 守卫及 package；两份 HTML/两份 ZIP 与明确标注的 #117 候选构建逐字节相同（HTML `bdd50dec…7fc25`），没有将其称为已接受 main。最新已接受 `630e68f` 已确认包含在被测集成中；完整 CI 在新 head 推送后核对，详情见原质量摘要。
+
+[PR #136](https://github.com/xuys2025/escape-bincov/pull/136)，实现 `476086d7dc6e4f3821064c0b8d6d3b47f09680c3`，分支 `codex/shared-view-lifecycle`，起点 main `0f73a67386bac196b87c983668295be6d1a99f1e`。将场景无关 `Scope`/唯一 `lifecycle` 和页面级 Pixi 注册/缓存归位到 `src/view-lifecycle/`，保持直接导入和初始化顺序；原生产/测试引用同步，现役脚本不引用旧路径。职责入口见 [CODEMAP](docs/CODEMAP.md)，决定、首败与验证见[原质量摘要](docs/tasks/quality-entropy.md#q-e02-公共视图生命周期归位)。SAMPLE_AREA/raid-areas 身份、Q-E04 和其他在途 PR 均不在本交付。1022 单测、77 守卫、package、render-targets 5/5、两尺寸程序恢复各 8/8、能力四负载 4/4 通过；两份 HTML/两份 ZIP 与真实 main 构建同字节。旧 lifecycle 1/5 的普通入口首败在 main 同样复现，保留原边界。已正常合入 main `630e68f`（#134）并保留双方文档，新目录纯类型依赖正反例已通过；集成后重跑 1022/1022、86/86、package 全过，四份制品仍同基线。准确 head CI 见原 PR，未合并/发布。
+
 ## 2026-10-28 · 居民楼 region 身份（PR #117 续作）
 
 `fix/content-identity` 保留原 PR 历史并依次合入 main `03ea261`、`630e68f`（#134）。居民楼 8 个已有完整 region ID 写入世界定义，投影不按中文名补身份；不变更世界/布局编号或存档格式。楼梯方向和内容登记仍属 Q-E06，未在本 PR 实施。
