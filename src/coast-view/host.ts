@@ -378,11 +378,12 @@ export class CoastSampleHost {
       // shortcuts do not count; a Shift pressed in the window makes the walk a sprint, as it would outside.
       if (this.panel === 'loot' && isMoveKey(inputKey(e)) && !e.ctrlKey && !e.altKey && !e.metaKey) {
         this.closePanel(true);
-        if (e.shiftKey) this.input.key('shift', true);
+        // This is a held modifier observation, not a fresh Shift press: do not revive a Shift suppressed on entry.
+        if (e.shiftKey) this.input.key('shift', true, true);
       }
       if (k === 'm') { if (this.panel === 'map') this.closePanel(true); else if (!this.panel || this.blocking()) { if (this.panel) this.closePanel(true); this.openMap(); } return; }
       if (this.panel) return;
-      this.input.key(inputKey(e), true);
+      this.input.key(inputKey(e), true, e.repeat);
     });
     s.on(window, 'keyup', e => this.input.key(inputKey(e), false));
     s.on(canvas, 'contextmenu', e => e.preventDefault());
