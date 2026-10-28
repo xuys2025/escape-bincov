@@ -39,7 +39,7 @@
 | 结算 | `prepareSettlement` 冻结结果；`retrySettlement` 写入后发布 `result` | 保留 `pendingSettlement` / `pendingExpansion`，重试不重新发奖；未成功不得卸载唯一候选 |
 | 完整导入 | 严格解码和确认后调用 `importRecord`，经 `persist` 原子替换 | 写入失败保留旧记录；活动导入回菜单恢复，不重新出击 |
 
-事务回调为同步规则操作；不得在其中发网络请求、换场景或修改未参与回滚的外部对象。`MutationResult` 区分 `committed`、`rejected`、`blocked`、`save-failed`。UI 只在 `committed` 后发成功反馈，冲突与待结算状态不能当一般失败强行重试。
+事务回调为同步规则操作；不得在其中发网络请求、换场景或修改未参与回滚的外部对象。`MutationResult` 区分 `committed`、`rejected`、`blocked`、`save-failed` 与 `publish-failed`。UI 只在 `committed` 后发成功反馈，冲突与待结算状态不能当一般失败强行重试。上表的回滚/重试只适用于写入前失败；`publish-failed` 已落盘，当前页停止操作，导出已提交记录后刷新。阶段、返回值及端口失败的契约以 [SaveSession](../src/session.ts) 的 `persist` / `requiresReload` / `mutate` 为准。
 
 现有商店有两条适配路径，但共用 `Shop.settleCartResult`：水产站 `RealHideoutRuntime.openShop` → `transaction`，旧页签 `checkout` → `SaveSession.mutate`。购物车 `place` 只改临时清单，`settle` 才提交；新增交易规则应放纯规则层，并检查两个调用端。领域层没有绕过购物车的单件买卖函数，新交易也不要另开结算路径。
 
@@ -75,6 +75,6 @@ profile/已结算备份版本、session/完整备份封套版本、`ExpansionSta
 
 调用者必须知道的副作用、单位、提交点、引用失效和兼容条件贴在正式类型/方法旁；本页维护跨模块责任与格式边界，CODEMAP 维护定位路径，验收结果留在对应 PR/报告。价格、字段清单和全部函数签名不在三处重复。
 
-按职责和可验证边界拆分文件；只有代码变短、依赖仍共同写一组状态时，并未降低接手成本。当前只有一个行动 Runtime，存档 codec 与视图路由的已登记运行时 import 环已消除；背包已收敛到有限服务，事务失败分类、内容身份与文案分离等剩余事项继续按 #60 跟踪，不再按旧的“双执行器”计划开发。
+按职责和可验证边界拆分文件；只有代码变短、依赖仍共同写一组状态时，并未降低接手成本。当前只有一个行动 Runtime，存档 codec 与视图路由的已登记运行时 import 环已消除；背包已收敛到有限服务，事务失败分类的本轮交付见[Q-E04](tasks/quality-entropy.md#q-e04-提交后的发布失败)；内容身份与文案分离等剩余事项继续按 #60 跟踪，不再按旧的“双执行器”计划开发。
 
 PR #2/#3/M0 的原始叙述见[本轮更新前的固定版本](https://github.com/xuys2025/escape-bincov/blob/773dcdf37c69c9441f7687627b89b582087eb021/docs/ARCHITECTURE.md)。历史验收只证明其受检提交；当前修改的验证从 [CODEMAP](CODEMAP.md) 和[开发手册](AGENT-HANDBOOK.md#4-按风险验证)选择。

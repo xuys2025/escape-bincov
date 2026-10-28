@@ -231,3 +231,21 @@ CI 自测失败的 1 项是 `policy.test.mjs:199` 写死 `C:/Program Files/Git/b
 
 - **F20 仍是 PARTIAL**，归 #32。诊断能进入流程，不等于 F20 总堆通过；本次只跑了默认 20 轮，没有跑严格 60 轮。`HTMLCanvasElement` 7→8 是间歇出现的，两个堆诊断都会遇到（7 次里 4 次），原因未归因，交 F20 调查；本 PR 不改断言和判定条件。
 - 两个堆诊断工作负载相同，默认输出目录都是 `test-results/coast-sample/heap`，后跑的覆盖先跑的；两者是否合并、`sol-r6-audio-controls` 是否保留（它对同一份源码也会越过 ±20% 门槛），归 Q-E08。全部脚本的用途分类也仍归 Q-E08。
+
+## Q-E04 提交后的发布失败
+
+2026-10-28，`codex/transaction-failure-phases` 从 main `0f73a67386bac196b87c983668295be6d1a99f1e` 开始；[开工登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553)。与 #134 架构门禁、公共生命周期归位各自验收，#60 总单保持开放。
+
+原代码反例：挂接 expansion 端口只在首次 restore 抛错；`mutate` 扣 20 现金的那一次 setItem 已成功写出 680，内存却被回滚为 700。另一次始终抛错的注入会在错误回滚中再次抛出。原实现返回克隆也位于 `RecoveryStore.commit` 的 setItem 之后，扩展事务还执行重复 restore。
+
+本轮让 Store 在写入前完成返回副本分配；Session 区分准备、存储、发布阶段。已落盘发布失败使用独立 `publish-failed` 结果，消费事务票据，保留已提交进度，不回滚、不继续运行、不重复写；页面提示导出后刷新。`pendingSettlement` 保留到刷新或导出流程，但备份以已落盘完整记录为准。Runtime 仍能渲染故障画面；据点不会因 revision 改变补发成功事件。真实冲突继续优先展示并阻止写入。无新存档格式、存储键、依赖或离线网络请求。
+
+入口：[Session](../../src/session.ts)、[Store](../../src/recovery-store.ts)、[定向故障回归](../../tests/session-publication.test.ts)、[浏览器验收](../../scripts/save-browser-test.mjs)。成功路径保险箱三方一致性属于契约测试，未声称它是额外复现的旧缺陷。
+
+据点 `transaction` / `enter` / `retrySave` / `importBackup` / `deploy` / `returnToBase` 的提交后时钟与 `sync` 也走 `publishCommitted` 同步保护；外部 revision 同步异常不能再进入可重做状态。一次性时钟反例在修复前实际抛错，修复后停止后续写入。成功发布副本与保留提交记录隔离，后续候选回滚不能污染故障恢复来源。
+
+浏览器发现并修正：已经打开的暂停面板在保存阶段变化时未重绘，曾只显示错误 toast 而缺刷新按钮；现按存储状态更新该面板，正式用例保留“先暂停，再注入”的前置。第一轮院子选择器命中隐藏 alarm，随后改为只读可见节点；没有放宽结果、下载或刷新断言。
+
+验证进行中：19 项定向回归待最终整轮复核；首轮 `pnpm test` 1032/1032、`pnpm check:ci` 77/77、`pnpm package` 通过。完整存档浏览器已 17/17 通过（原 9 项 + 两尺寸四场景 8 项），页面异常/外网请求均为 0；最终合入最新 main 后复核结果待填写。Windows / Node 24 / pnpm 11.19.0；链接现有依赖，设置 `pnpm_config_verify_deps_before_run=false`，避免 pnpm 自动重装 junction。首次未设置时 tsc 命令在运行前被 pnpm 依赖检查阻断，未记为类型失败。
+
+未验：真人、真机、长时性能；准确 head CI 待提交后运行。此项修复异常语义，不宣称全库减熵或 #60 全部完成。

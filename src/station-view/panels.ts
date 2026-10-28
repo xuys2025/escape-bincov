@@ -282,6 +282,7 @@ export function resetConfirmHtml() {
  * perk change whose write failed: the Runtime keeps it, and only the retry writes it (once).
  */
 export function storageHtml(s: HideoutSnapshot, pending = '') {
+  if (s.storage.reloadRequired && !s.storage.conflict) return `<div class="storage"><p>进度已写入存档，但当前页面恢复失败。请导出备份后刷新页面；本页不会再次写入。</p><div class="acts">${btn('导出存档', 'export')}${btn('刷新页面', 'reload')}</div></div>`;
   const conflict = s.storage.conflict;
   return `<div class="storage"><p>${conflict ? '另一个窗口已经接管了存档，本页不能再写入。请先导出需要保留的进度，再刷新本页。' : pending ? esc(perkWaiting(pending)) : '最近一次操作没能写入浏览器存档，已经回滚；训练和基地进度还保留在本页，重试成功前不会丢失。'}</p>
   <div class="acts">${conflict ? '' : btn('重试保存', 'retry-save', 'primary')}${btn('导出存档', 'export')}${conflict ? btn('刷新页面', 'reload') : ''}</div>

@@ -136,6 +136,8 @@
 
 ## 存档
 
+事务故障从 [session.ts](../src/session.ts) 的 `persist` / `requiresReload` 和 [recovery-store.ts](../src/recovery-store.ts) 的 `commit` 进入：写前错误与已落盘发布错误有不同回滚/重试边界。专门反例在 [session-publication.test.ts](../tests/session-publication.test.ts)，真实下载、刷新及两尺寸错误提示由 [save-browser-test.mjs](../scripts/save-browser-test.mjs) 覆盖。
+
 **职责与所有者。** `SaveSession` 协调唯一会话和完整候选；`RecoveryStore` 比对旧记录、验证并单次写入。场景通过捕获/恢复端口提供活动世界，UI 不自行组装另一套提交过程。
 
 **首读路径：增加持久字段或修改恢复行为。**

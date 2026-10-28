@@ -267,7 +267,7 @@ export class CoastRaidRuntime implements RaidRuntime {
         this.publish(new Map());
     }
     get limits() { return this.layered ? derivedLimits(this.layered) : { hp: B.maxHealth, stamina: B.maxStamina, carry: B.carryLimit }; }
-    get paused() { return this.locked || ['pause', 'help', 'abandon', 'rotate', 'checkpoint-error'].includes(this.overlay); }
+    get paused() { return this.saves.requiresReload || this.locked || ['pause', 'help', 'abandon', 'rotate', 'checkpoint-error'].includes(this.overlay); }
     /**
      * The loadout gun's effective numbers (#28 M1-05: buildOf of the instance D.equippedGun returns, through
      * effectiveStats), recomputed only when that instance changes; null when the loadout has no gun.
@@ -476,6 +476,7 @@ export class CoastRaidRuntime implements RaidRuntime {
         const epoch = this.epoch;
         let seconds = 0;
         try {
+            if (this.saves.requiresReload) this.setOverlay('checkpoint-error');
             if (this.session.conflict) {
                 this.locked = true;
                 this.releaseInput();
@@ -619,7 +620,7 @@ export class CoastRaidRuntime implements RaidRuntime {
     /** Rebuild from a SaveSession-validated checkpoint (not arbitrary imported JSON). */
     reloadCommitted() {
         this.assertLive();
-        if (this.ending || this.session.conflict)
+        if (this.ending || this.session.conflict || this.saves.requiresReload)
             throw new Error('Cannot reload this raid.');
         const record = this.saves.currentRecord();
         if (!record || record.profile.activeRun?.runId !== this.terminalLoadout.runId)
@@ -670,7 +671,7 @@ export class CoastRaidRuntime implements RaidRuntime {
             const explanation = result === 'rejected' && (action === 'heal' || action === 'use-item')
                 ? discarded.find(e => e.body.type === 'notice')?.body : undefined;
             this.rejected(action, explanation?.type === 'notice' ? explanation.text : result);
-            if (result === 'save-failed')
+            if (result === 'save-failed' || result === 'publish-failed')
                 this.setOverlay('checkpoint-error');
         }
         this.dirty = true;
@@ -768,7 +769,7 @@ export class CoastRaidRuntime implements RaidRuntime {
         }
         else if (result !== 'committed') {
             this.rejected('transfer', result);
-            if (result === 'save-failed')
+            if (result === 'save-failed' || result === 'publish-failed')
                 this.setOverlay('checkpoint-error');
         }
         this.dirty = true;
@@ -785,7 +786,7 @@ export class CoastRaidRuntime implements RaidRuntime {
         return true;
     }
     finish(reason: EndReason) {
-        if (this.ending || this.session.conflict)
+        if (this.ending || this.session.conflict || this.saves.requiresReload)
             return;
         this.syncMagazine();
         Object.assign(this.terminalLoadout, structuredClone(this.session.loadout!));
@@ -810,7 +811,7 @@ export class CoastRaidRuntime implements RaidRuntime {
         this.dirty = true;
         return ok;
     }
-    get settlement() { return { reason: this.ending ? this.saves.terminalReason(this.terminalLoadout.runId!) ?? this.endingReason : null, committed: this.ending && !this.session.pendingSettlement && !!this.session.result, retryable: !!this.session.pendingSettlement && !this.session.conflict, result: structuredClone(this.session.result) }; }
+    get settlement() { return { reason: this.ending ? this.saves.terminalReason(this.terminalLoadout.runId!) ?? this.endingReason : null, committed: this.ending && !this.session.pendingSettlement && !!this.session.result, retryable: !!this.session.pendingSettlement && !this.session.conflict && !this.saves.requiresReload, result: structuredClone(this.session.result) }; }
     get layeredWorld(): WorldDefinition | null { return this.layered?.raid ? resolveExpansionWorld(this.layered.raid.worldVersion) ?? null : null; }
     get space(): SpaceContext | null {
         const raid = this.layered?.raid, world = this.layeredWorld;
@@ -1202,6 +1203,7 @@ export class CoastRaidRuntime implements RaidRuntime {
         const result = this.saves.commitExpansionMutation(pending.ticket);
         if (result !== 'committed') {
             this.rejected(pending.action, result);
+            if (result === 'publish-failed') { this.pendingLayer = null; this.setOverlay('checkpoint-error'); return false; }
             if (result === 'save-failed') {
                 this.pendingLayer = pending;
                 this.setOverlay('checkpoint-error');
@@ -1227,6 +1229,7 @@ export class CoastRaidRuntime implements RaidRuntime {
     }
     retrySave(): boolean {
         this.assertLive();
+        if (this.saves.requiresReload) return false;
         if (this.ending)
             return this.retrySettlement();
         const pending = this.pendingLayer;

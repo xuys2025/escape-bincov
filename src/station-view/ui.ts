@@ -295,7 +295,7 @@ export class UI {
     const body = d.kind === 'sale' ? P.saleConfirmHtml(d.warnings) : d.kind === 'import' ? P.importConfirmHtml(d.name) : d.kind === 'reset' ? P.resetConfirmHtml()
       : d.kind === 'perk' || d.kind === 'perk-reset' ? P.perkConfirmHtml(d.view, d.kind === 'perk-reset') : P.storageHtml(s, this.perkPending);
     this.dialogEl.className = `modal dialog k-${d.kind}`;
-    const title = d.kind === 'storage' && s.storage.conflict ? '存档已被另一个窗口接管' : DIALOG_TITLES[d.kind];
+    const title = d.kind === 'storage' && s.storage.conflict ? '存档已被另一个窗口接管' : d.kind === 'storage' && s.storage.reloadRequired ? '进度已保存' : DIALOG_TITLES[d.kind];
     this.dialogEl.setAttribute('aria-label', title);
     // Panel refreshes (five-second checkpoints) paint the dialog again: keep the keyboard on the same button.
     const buttons = () => Array.from(this.dialogEl.querySelectorAll<HTMLElement>('button'));
@@ -316,7 +316,7 @@ export class UI {
     const broken = !s.storage.ok || s.storage.conflict;
     if (!broken && !s.storage.pendingBase) this.perkPending = '';
     this.alarm.hidden = !broken || this.dialog?.kind === 'storage';
-    if (broken) this.alarm.textContent = s.storage.conflict ? '存档已被另一个窗口接管 · 点这里处理' : '存档没有写入 · 点这里处理';
+    if (broken) this.alarm.textContent = s.storage.conflict ? '存档已被另一个窗口接管 · 点这里处理' : s.storage.reloadRequired ? '进度已保存，页面恢复失败 · 点这里处理' : '存档没有写入 · 点这里处理';
     if (!broken && this.dialog?.kind === 'storage') { this.dialog = null; this.renderDialog(); if (!this.kind) this.host.panelChanged(null, null); }
   }
   showStorage() { this.openDialog({ kind: 'storage' }); this.alarm.hidden = true; }

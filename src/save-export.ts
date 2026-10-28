@@ -6,7 +6,8 @@ import { toast } from './toast';
 export function exportSave() {
     try {
         let text: string;
-        if (app.state === 'hideout' && app.expansion && !app.pendingSettlement) {
+        if (saveSession.requiresReload) text = encodeRecoveryBackup(saveSession.backupRecord()!);
+        else if (app.state === 'hideout' && app.expansion && !app.pendingSettlement) {
             // At the base the HideoutRuntime's backup also carries a change whose write failed and waits for its retry
             // (a perk choice or reset): the same backup the yard exports.
             text = hideoutRuntime.exportBackup();

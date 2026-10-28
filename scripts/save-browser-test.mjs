@@ -246,6 +246,72 @@ try {
       assert.equal(backup.formatVersion, 8); assert.deepEqual(backup.record.profile, pending);
     } finally { await shared.close(); }
   });
+  for (const viewport of [{ width: 1280, height: 720 }, { width: 1920, height: 1080 }]) {
+    for (const mode of ['tabs', 'yard', 'checkpoint', 'terminal']) await step(`durable publication failure stops ${mode} at ${viewport.width}`, async () => {
+      const fresh = await browser.newContext({ viewport, offline: true, acceptDownloads: true });
+      fresh.on('request', request => { if (/^https?:/.test(request.url())) report.externalRequests.push(request.url()); });
+      try {
+        const p = await fresh.newPage(); p.setDefaultTimeout(30000);
+        p.on('pageerror', error => report.errors.push(error.message));
+        p.on('dialog', dialog => dialog.accept());
+        await p.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs');
+        await p.locator('[data-action="enter"]').click();
+        if (mode === 'yard') {
+          await p.locator('[data-action="base-enter"]').click();
+          await p.waitForFunction(() => !!document.querySelector('#station-yard')?.shadowRoot?.querySelector('[data-alarm]'));
+        } else if (mode === 'checkpoint' || mode === 'terminal') {
+          await p.locator('[data-action="deploy"]').click(); await raidReady(p);
+          await p.evaluate(() => window.__bincovSample.host.runtime.pause()); await waitPanel(p, 'pause');
+          if (mode === 'terminal') await p.locator('.coast-sample [data-do="abandon"]').click();
+        }
+        // Bounded injection: the native setItem really succeeds; only the next publication clone throws once.
+        // All production entry points and download/reload controls remain unchanged; hooks require ?test=1.
+        await p.evaluate(() => {
+          const write = Storage.prototype.setItem, clone = window.structuredClone;
+          window.__publicationWrites = 0; let armed = false, fired = false;
+          Storage.prototype.setItem = function(key, value) {
+            write.call(this, key, value);
+            if (key === 'escape-bincov.session.v2') { window.__publicationWrites++; armed = !fired; }
+          };
+          window.structuredClone = function(value, options) {
+            if (armed) { armed = false; fired = true; window.structuredClone = clone; throw new Error('Injected publication failure'); }
+            return clone(value, options);
+          };
+        });
+        if (mode === 'terminal') await p.locator('.coast-sample [data-do="abandon-yes"]').click();
+        else await p.evaluate(mode => {
+          const { saveSession, hideoutRuntime, setOverlay } = window.__bincov;
+          if (mode === 'checkpoint') window.__bincovSample.host.services.checkpoint();
+          else if (mode === 'yard') hideoutRuntime.setVolume(.31);
+          else { saveSession.setVolume(.31); setOverlay(''); }
+        }, mode);
+        await p.waitForFunction(() => window.__bincov.app.storageFailure === 'publish');
+        const root = mode === 'yard' ? p.locator('#station-yard') : mode === 'tabs' ? p.locator('#ui .overlay') : p.locator('.coast-sample');
+        await root.getByText(/进度已保存|结算已保存/).filter({ visible: true }).first().waitFor();
+        assert.equal(await root.getByRole('button', { name: '重试保存', exact: true }).count(), 0);
+        const stored = await p.evaluate(() => JSON.parse(localStorage.getItem('escape-bincov.session.v2')));
+        const attempts = await p.evaluate(() => {
+          const { saveSession, hideoutRuntime } = window.__bincov;
+          return [saveSession.persist(), saveSession.retrySettlement(), hideoutRuntime.retrySave().ok,
+            window.__bincovSample?.host.services.retrySave() ?? false];
+        });
+        assert.deepEqual(attempts, [false, false, false, false]);
+        assert.equal(await p.evaluate(() => window.__publicationWrites), 1);
+        assert.deepEqual(await p.evaluate(() => window.__bincov.saveSession.backupRecord()), stored);
+        await root.getByRole('button', { name: '刷新页面', exact: true }).waitFor();
+        if (mode === 'yard') await root.locator('.dialog').evaluate(el => Promise.all(el.getAnimations().map(animation => animation.finished)));
+        await p.screenshot({ path: resolve(out, `publication-${mode}-${viewport.width}.png`) });
+        const download = p.waitForEvent('download');
+        await root.getByRole('button', { name: mode === 'yard' ? '导出存档' : '导出备份', exact: true }).click();
+        const file = resolve(out, `publication-${mode}-${viewport.width}.json`);
+        await (await download).saveAs(file);
+        assert.deepEqual(JSON.parse(await readFile(file, 'utf8')).record, stored);
+        await root.getByRole('button', { name: '刷新页面', exact: true }).click();
+        await p.waitForFunction(() => !!window.__bincov && window.__bincov.app.storageOK);
+        assert.deepEqual(await p.evaluate(() => window.__bincov.app.save), stored.profile);
+      } finally { await fresh.close(); }
+    });
+  }
   report.status = 'passed';
 } catch (error) { report.status = 'failed'; report.failure = error.stack; console.error(error); process.exitCode = 1; await page.screenshot({ path: resolve(out, 'save-regression-failure.png') }).catch(() => {}); }
 finally { await context.close(); await browser.close(); report.finishedAt = new Date().toISOString(); await writeFile(resolve(out, 'save-browser-report.json'), JSON.stringify(report, null, 2)); }

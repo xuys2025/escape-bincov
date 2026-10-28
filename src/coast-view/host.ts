@@ -32,7 +32,7 @@ type Panel = null | 'pause' | 'inventory' | 'loot' | 'map' | 'reading' | 'ending
 
 const REASONS: Record<string, string> = {
   'stale-target': '目标已失效，请重新靠近。', 'stale-or-blocked': '现在无法交互。', 'out-of-range': '离目标过远。',
-  rejected: '操作未完成，请检查空间与条件。', blocked: '现在无法操作。', 'save-failed': '存档保存失败，状态已恢复到操作前。',
+  rejected: '操作未完成，请检查空间与条件。', blocked: '现在无法操作。', 'save-failed': '存档保存失败，状态已恢复到操作前。', 'publish-failed': '进度已保存，但当前页面恢复失败。请导出备份后刷新页面。',
 };
 /** A storage error arrives as the browser's own (translated) message; any other unknown code gets a plain sentence. */
 const reasonText = (reason: string) => REASONS[reason] ?? (/[\u4e00-\u9fff]/.test(reason) ? reason : '操作未完成。');
@@ -354,7 +354,7 @@ export class CoastSampleHost {
     if (phase === 'running' && this.blockPending > 0) { this.blockPending--; return; }
     this.blockPending = 0;
     if (phase !== 'blocked' && (this.panel === 'loot' || this.panel === 'inventory' || this.panel === 'map' || this.panel === 'reading')) this.closePanel(false);
-    if (phase === 'paused' && this.panel !== 'pause') this.showPause();
+    if (phase === 'paused' && (this.panel !== 'pause' || this.pauseStorageKey !== this.storagePanelKey)) this.showPause();
     if (this.panel === 'pause' && phase === 'running') this.closePanel(false);
     if (this.panel === 'map' && (this.stats.frames & 7) === 0) this.redrawMap();
   }
@@ -503,18 +503,24 @@ export class CoastSampleHost {
    *  a touchscreen laptop in a tall window plays on. */
   private upright() { return document.documentElement.classList.contains('mobile') && (innerWidth < innerHeight || innerHeight < 280); }
   private guideOpen = false;
+  private pauseStorageKey = '';
+  private get storagePanelKey() { return this.session.conflict ? 'conflict' : this.session.storageFailure ?? (this.session.storageOK ? '' : 'storage'); }
   private showPause(reason?: string) {
+    this.pauseStorageKey = this.storagePanelKey;
     this.guideOpen = false;
     if (this.contextLost) reason = 'context-lost';
+    const publication = this.session.storageFailure === 'publish';
     const conflict = this.session.conflict, saveError = !this.session.storageOK || this.lastRejected === 'checkpoint' || this.lastRejected === 'save-failed';
     const rotate = !conflict && !saveError && !this.contextLost && this.upright();
     this.pausedUpright = rotate;
-    const title = conflict ? '存档已被其他窗口更新' : saveError ? '存档保存失败' : reason === 'context-lost' ? '画面中断' : rotate ? '横过来，准备出发。' : '已暂停';
+    const title = conflict ? '存档已被其他窗口更新' : publication ? '进度已保存，请刷新页面' : saveError ? '存档保存失败' : reason === 'context-lost' ? '画面中断' : rotate ? '横过来，准备出发。' : '已暂停';
     const text = conflict ? '本页已停止操作。请导出需要保留的进度，再刷新本页。'
+      : publication ? '进度已写入存档，但当前页面恢复失败。请导出备份后刷新页面；本页不会再次写入。'
       : saveError ? '最近的操作或检查点没有写入，世界已保持在保存前的状态。检查浏览器存储后重试，或先导出备份。'
       : reason === 'context-lost' ? '图形上下文丢失，行动已暂停。画面恢复后可继续，也可导出备份。'
       : rotate ? '横屏能看清街道，也能同时移动和瞄准。转回横屏后，点「继续」回到行动。' : '行动时间已停止。';
     const buttons = conflict ? `<button type="button" data-do="backup">导出备份</button>`
+      : publication ? `<button type="button" data-do="backup">导出备份</button><button type="button" data-do="reload">刷新页面</button>`
       : saveError ? `<button type="button" data-do="retry-save">重试保存</button><button type="button" data-do="backup">导出备份</button>`
       : `<button type="button" data-do="resume" ${this.contextLost || rotate ? 'disabled' : ''}>继续</button><button type="button" data-do="guide">行动指南</button><button type="button" data-do="backup">导出备份</button><button type="button" data-do="abandon">放弃行动</button>`;
     this.input.suppressHeld(); this.sticks.clear();
@@ -605,6 +611,7 @@ export class CoastSampleHost {
       case 'abandon-yes': this.services.abandon(); break;
       // A successful retry resumes the Runtime. Held upright or with the picture lost, the raid pauses again at once (the
       // guard resume() keeps) and the panel turns into the rotate or context-lost notice; 继续 comes back with landscape.
+      case 'reload': location.reload(); break;
       case 'retry-save':
         if (this.services.retrySave()) {
           this.lastRejected = ''; this.toast('已保存。');
@@ -631,7 +638,8 @@ export class CoastSampleHost {
     // The reason exists as soon as the settlement is prepared and survives a failed write, so the pending and retry
     // panels already say which ending is being saved.
     const kind: Outro = OUTRO_OF[s.reason ?? ''] ?? 'failed';
-    const title = this.q('[data-ending-title]'); if (title) title.textContent = s.reason ? `${OUTRO_TEXT[kind]} · 正在保存结算` : '正在保存结算';
+    const publication = this.session.storageFailure === 'publish';
+    const title = this.q('[data-ending-title]'); if (title) title.textContent = publication && !this.session.conflict ? '结算已保存，请刷新页面' : s.reason ? `${OUTRO_TEXT[kind]} · 正在保存结算` : '正在保存结算';
     if (s.committed) {
       if (this.exiting) return;
       this.exiting = true;
@@ -649,10 +657,10 @@ export class CoastSampleHost {
       this.scope.timeout(() => this.onExit({ kind: 'settled' }), hold);
       return;
     }
-    text.textContent = s.retryable ? '结算还没有写入存档。结算记录已保留，可以重试或先导出备份。'
+    text.textContent = publication && !this.session.conflict ? '结算已保存，但当前页面恢复失败。请导出备份后刷新页面。' : s.retryable ? '结算还没有写入存档。结算记录已保留，可以重试或先导出备份。'
       : this.session.conflict ? '另一个窗口已更新存档，本页不能再写入。结算记录已保留，请先导出备份。' : '等待结算保存';
     // Another window's newer save must not be overwritten: no retry then, but the pending result stays exportable.
-    const want = `${s.retryable ? '<button type="button" data-do="retry-settlement">重试保存</button>' : ''}${s.retryable || this.session.conflict ? '<button type="button" data-do="backup">导出备份</button>' : ''}`;
+    const want = `${s.retryable ? '<button type="button" data-do="retry-settlement">重试保存</button>' : ''}${s.retryable || this.session.conflict || publication ? '<button type="button" data-do="backup">导出备份</button>' : ''}${publication ? '<button type="button" data-do="reload">刷新页面</button>' : ''}`;
     if (row.dataset.buttons !== want) { row.dataset.buttons = want; row.innerHTML = want; }
   }
 
