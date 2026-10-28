@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import type { Application } from 'pixi.js';
-import { releaseManagedSlots } from '../src/coast-view/renderer-lifetime';
+import { releaseManagedSlots } from '../src/view-lifecycle/renderer-lifetime';
 
 type Table = Record<string, object | null>;
 const app = (tables: Record<string, Table>, running = false) => ({

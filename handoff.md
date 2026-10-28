@@ -1,12 +1,8 @@
-2026-10-28 维护者已明确授权 #110 复查无问题后自动合并。本次正常合入 main `100858502b30c78965d1a308b2d6280172763716`（#117），保留双方任务记录；业务修复源码未再改变。当前组合实际通过 85 项 CI 守卫及严格打包，HUD 与内容身份专项 7/7 通过。准确新 head CI、自动合并配置及最终合入状态以原 PR 平台记录为准；不跳过必需检查或分支保护。
+## 2026-10-28 Q-E02：公共视图生命周期归位
 
-## 2026-10-28 行动精神/水分/饱食 HUD 实时投影（PR #110）
+串联集成：本分支按明确授权正常合入 #117 候选 `4ba5b72c70983f3eefe4affdd31e2d674b3223a3`（fetch 后核对 `origin/fix/content-identity` 同一提交），只消除共同文档冲突，不修改其源码。**必须先 #117 合入 main，再合 #136。** 该候选尚非已接受 main；此前浏览器和制品证据仍只归属原 `14df8ce`，候选集成已通过 1026/1026 单测、86/86 守卫及 package；两份 HTML/两份 ZIP 与明确标注的 #117 候选构建逐字节相同（HTML `bdd50dec…7fc25`），没有将其称为已接受 main。最新已接受 `630e68f` 已确认包含在被测集成中；完整 CI 在新 head 推送后核对，详情见原质量摘要。
 
-沿原 `fix/live-vitals-hud` 正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，随后同步共同截止主线 `630e68f517edea34bfbcc548473897bd36bdfa08`（#134），保留商场四版/M2、背包服务和其他任务交接；受检源码 head `19dea0bfa59042281b4c7ec1f085aa3e8587e3b8`，随后只更新证据文档，最终 head / CI 见 [PR #110](https://github.com/xuys2025/escape-bincov/pull/110)。投影从实时身体复制精神/水分/饱食三个标量；宿主沿原八帧节奏舍入显示；经典行动为 null，存档、生理规则及事务不变。
-
-本轮 1025 单测、77 工程守卫、正式打包、完整 QoL 5/5、默认行动 11/11 首次通过。新 main 两尺寸负对照有效失败、修复后实时/帧/DOM 一致，保存值未变；已亲看双尺寸截图，原始失败和本轮结果留在同一[摘要](docs/tasks/audit-contracts.md#精神水分饱食-hud-的实时投影)/[报告](docs/tasks/audit-contracts/live-needs/report.json)，不拿旧 CI 代替新 head。没有真机、真人或性能签收，#60 其余范围继续开放；等待准确 head CI 与维护者审阅，不自行合并发布。
-
-最新同步后实际重跑工程守卫 **85/85** 和 package 通过；src/tests/assets、全部浏览器流程与依赖输入相对已验 `d0ebc57` 未变，正式 HTML SHA-256 仍为 `f61862ed972f8efaab0c8abf7c9360ab2aebbd751d943dfa77ad8211c5568b72`。上段单测/浏览器/截图据此复用，没有重复执行或新拍；旧 head CI 40624184384 已成功但仅作历史，新准确 head 完整 CI 以原 PR 为准。输入一致性和新结果记录在同报告 `main630Integration`。
+[PR #136](https://github.com/xuys2025/escape-bincov/pull/136)，实现 `476086d7dc6e4f3821064c0b8d6d3b47f09680c3`，分支 `codex/shared-view-lifecycle`，起点 main `0f73a67386bac196b87c983668295be6d1a99f1e`。将场景无关 `Scope`/唯一 `lifecycle` 和页面级 Pixi 注册/缓存归位到 `src/view-lifecycle/`，保持直接导入和初始化顺序；原生产/测试引用同步，现役脚本不引用旧路径。职责入口见 [CODEMAP](docs/CODEMAP.md)，决定、首败与验证见[原质量摘要](docs/tasks/quality-entropy.md#q-e02-公共视图生命周期归位)。SAMPLE_AREA/raid-areas 身份、Q-E04 和其他在途 PR 均不在本交付。1022 单测、77 守卫、package、render-targets 5/5、两尺寸程序恢复各 8/8、能力四负载 4/4 通过；两份 HTML/两份 ZIP 与真实 main 构建同字节。旧 lifecycle 1/5 的普通入口首败在 main 同样复现，保留原边界。已正常合入 main `630e68f`（#134）并保留双方文档，新目录纯类型依赖正反例已通过；集成后重跑 1022/1022、86/86、package 全过，四份制品仍同基线。准确 head CI 见原 PR，未合并/发布。
 
 ## 2026-10-28 · 居民楼 region 身份（PR #117 续作）
 
@@ -47,6 +43,16 @@
 维护者授权修复并开 PR。基线 main `02b5e1e5c5261f5caea55dccc875c8ae93e3120b`，隔离分支 `codex/f16-station-hands`。`src/station-view/art/player.ts` 的 `paintStationPlayer` 在站内生成完整空手帧，`HideoutScene.playerTex` 沿用原纹理缓存；不改共用身体 PNG 或行动手臂/武器分层，脚底、碰撞、存档与离线能力不变。
 
 源码入口、80帧浏览器检查、修复前负对照和两尺寸真实截图见[本项记录](docs/tasks/station-player-hands/README.md)。当前通过：1020 单测、打包、CI 策略 73/73、H15 两尺寸、行动动画 8/8 与冷素材加载；完整站内 78/79，I3 手机菜单切修理铺在原 main 对照和修复构建中均同样超时，保留失败，不拼为完整通过。准确 head、CI 与审阅状态见本项 PR；尚未合并/发布，真机与真人姿态观感待验。#26 其他反馈保留原归属。
+
+## 2026-10-28 行动精神/水分/饱食 HUD 实时投影（PR #110）
+
+沿原 `fix/live-vitals-hud` 正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，随后同步共同截止主线 `630e68f517edea34bfbcc548473897bd36bdfa08`（#134），保留商场四版/M2、背包服务和其他任务交接；受检源码 head `19dea0bfa59042281b4c7ec1f085aa3e8587e3b8`，随后只更新证据文档，最终 head / CI 见 [PR #110](https://github.com/xuys2025/escape-bincov/pull/110)。投影从实时身体复制精神/水分/饱食三个标量；宿主沿原八帧节奏舍入显示；经典行动为 null，存档、生理规则及事务不变。
+
+本轮 1025 单测、77 工程守卫、正式打包、完整 QoL 5/5、默认行动 11/11 首次通过。新 main 两尺寸负对照有效失败、修复后实时/帧/DOM 一致，保存值未变；已亲看双尺寸截图，原始失败和本轮结果留在同一[摘要](docs/tasks/audit-contracts.md#精神水分饱食-hud-的实时投影)/[报告](docs/tasks/audit-contracts/live-needs/report.json)，不拿旧 CI 代替新 head。没有真机、真人或性能签收，#60 其余范围继续开放；等待准确 head CI 与维护者审阅，不自行合并发布。
+
+最新同步后实际重跑工程守卫 **85/85** 和 package 通过；src/tests/assets、全部浏览器流程与依赖输入相对已验 `d0ebc57` 未变，正式 HTML SHA-256 仍为 `f61862ed972f8efaab0c8abf7c9360ab2aebbd751d943dfa77ad8211c5568b72`。上段单测/浏览器/截图据此复用，没有重复执行或新拍；旧 head CI 40624184384 已成功但仅作历史，新准确 head 完整 CI 以原 PR 为准。输入一致性和新结果记录在同报告 `main630Integration`。
+
+维护者已明确授权复查后自动合并；本次正常同步 main `f66ee79af6b84ef64319891e82d7dc4e82985350`（含 #117/#136），保留上游身份与共享生命周期归位。本节原验证证据保留历史归属，当前守卫、打包及准确新 head CI / 自动合并状态以原 PR 为准，不绕过检查或保护。
 
 ## 2026-10-27 改枪 M2：工作台、预设、美术、详情与商店、全流程检查（#106）
 
