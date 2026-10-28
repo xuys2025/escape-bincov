@@ -115,6 +115,8 @@ CI 策略测试还守住五件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 
 四组对照均为 0 页面异常、0 外部请求。600 ms 延迟及两个界面变异仅位于忽略目录的临时副本；正式测试脚本只保留两处等待修复。原始报告、控制条件及读取时刻在本地 `test-results/pr95/`，准确 head 完整 CI 与最终交付状态统一维护在原 PR。完整套件仍为手动，本次不改变 CI 分组或签收 F20、真人/真机。
 
+2026-10-29 维护者要求复核必要性并在完成后合并。最新 main 仍保留两处提前放行条件，宿主也仍在后续帧呈现已保存的放弃落幕，因此沿原 PR 正常合入 main `ae177b42369fe2cf4d1769db6496ee785e1bb7e7`，不改游戏、断言、等待上限或 CI 分组。Windows / Node 24.21.0 / pnpm 11.19.0 / Chrome 156.0.8078.48：首轮 main `6758d654` 的组合通过 1055 单测、110 守卫、严格打包及完整手动套件 53/53。该轮正式 HTML SHA-256 为 `86aa90b7f34f0f31b4cd071ad027f9aa915cd217a71a910c695387b2d55c2bd1`；四组临时桌面对照重新生成自当前正式脚本，600 ms 延迟下旧等待 25/26、新等待 26/26，缺失标记与错误文案各 25/26，所有预期失败均只在 W13，页面异常与外部请求均为 0。随后 main 合入 #141（宿主与本测试没有变化），已同步并通过 1056 单测及严格打包，新 HTML SHA-256 为 `a190498102bdf579ed82b70627ea2c1e36ce339ac76881db85e4977a99c21c45`；最终组合的完整手动套件、准确 head CI 和实际合并状态统一见 [原 PR #95](https://github.com/xuys2025/escape-bincov/pull/95)。本轮日志与对照在忽略目录 `test-results/pr95-20261029/`；完整套件仍为手动，F20 与真机仍归原任务。
+
 ## 浏览器 job 的主机环境：字体、Chromium 与渲染器
 
 2026-10-22 起（#61）。浏览器 job 准备环境时不再经过 apt 镜像：
@@ -153,6 +155,8 @@ CI 策略测试还守住五件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 ## Pages 与镜像
 
 main 即便走文档快速通道，也从本次重新构建并校验的制品正常执行 `Deploy Pages` 和离线包发布。相同游戏字节已有完整 main 回归证据，本次单测与构建仍需通过。
+
+这两个 job 只直接依赖 `Build and test`，但 GitHub 会把被跳过的 job 沿依赖链往下传：`if` 里没有状态函数时，默认的 `success()` 也检查更上游的浏览器组，快速通道跳过浏览器组，部署和发布就跟着被跳过（2026-10-28 main `03ea261` 就是这样，`main-latest` 停在上一次提交）。所以两个 job 的 `if` 显式写 `!cancelled() && needs.verify.result == 'success'`，再加 main push 条件；`Build and test` 失败或运行被取消时仍不部署。[policy.test.mjs](../scripts/ci/policy.test.mjs) 要求浏览器组之后的每个 job 都带状态函数。
 
 镜像对 `Build and test`、`Deploy Pages` 的成功要求和检查名不变。提交里已经没有 HTML 和发布清单，镜像（服务器脚本不在本仓库）改读 `main-latest` 发布页的清单 `https://github.com/xuys2025/escape-bincov/releases/download/main-latest/release-manifest.json`：
 

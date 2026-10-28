@@ -66,7 +66,7 @@ const ui = () => document.getElementById('ui')!;
 function clearSelection() { app.selected = ''; app.placement = false; app.placementRotated = undefined; app.placementQuantity = undefined; }
 function saved(ok: boolean): boolean {
     if (!ok && !app.conflict && !app.storageOK)
-        toast('存档保存失败。请检查浏览器是否允许保存数据，然后重试。');
+        toast(saveSession.requiresReload ? app.storageError : '存档保存失败。请检查浏览器是否允许保存数据，然后重试。');
     return ok;
 }
 export function persist(save: D.SaveDataV1 = app.save): boolean {
@@ -346,6 +346,7 @@ function storageAlarm() {
     if (app.pendingSettlement) return '';
     const { storage } = hideoutRuntime.snapshot();
     if (storage.conflict) return `<div class="save-alarm" role="alert"><span>存档已被另一个窗口接管，本页不能写入。请先导出需要保留的进度，再刷新本页。</span>${btn('导出存档', 'export-save')}${btn('刷新页面', 'refresh')}</div>`;
+    if (storage.reloadRequired) return `<div class="save-alarm" role="alert"><span>进度已保存，但当前页面恢复失败。请导出备份后刷新页面。</span>${btn('导出存档', 'export-save')}${btn('刷新页面', 'refresh')}</div>`;
     // A kept candidate always comes with a failed write (storage not ok) until retrySave commits it.
     if (storage.ok) { perkPending = ''; return ''; }
     return `<div class="save-alarm" role="alert"><span>${perkPending ? esc(perkWaiting(perkPending)) : '最近一次操作没能写入存档。请重试保存，或先导出备份。'}</span>${btn('重试保存', 'retry-save', 'primary')}${btn('导出存档', 'export-save')}</div>`;
@@ -398,6 +399,7 @@ function renderHideout() {
     if (app.overlay === 'perk') ui().querySelector<HTMLElement>('.perk-modal .perk-cancel')?.focus({ preventScroll: true });
 }
 function overlayHtml() {
+    if (saveSession.requiresReload && !app.conflict) return `<div class="overlay"><div class="panel modal"><h2>进度已保存，请刷新页面</h2><p>当前页面恢复失败。本页不会再次写入，请导出备份后刷新页面。</p><div class="actions">${btn('导出备份', 'export-save')}${btn('刷新页面', 'refresh')}</div></div></div>`;
     if (!app.storageOK && app.state === 'menu')
         return `<div class="overlay"><div class="panel modal"><div class="section-label orange">本地存档</div><h2>暂时无法打开存档</h2><p>${esc(app.storageError || '请允许浏览器存储后刷新重试。')}</p><div class="actions">${btn('导出原始存档', 'export-original')}${btn('刷新重试', 'refresh', 'primary')}</div></div></div>`;
     if (app.pendingSettlement)
@@ -452,6 +454,7 @@ export function mutate(action: SessionMutation, message = '', rejectionMessage: 
         render();
         return false;
     }
+    if (result === 'publish-failed') { clearSelection(); toast(app.storageError); render(); return false; }
     if (result === 'save-failed') {
         clearSelection();
         toast('保存失败，物资和进度已恢复到操作前。请检查浏览器存储设置后重试。');

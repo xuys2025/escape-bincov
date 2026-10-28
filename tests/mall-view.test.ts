@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mallWorldV2, mallWorldV3 } from '../src/mall-world';
 import { MALL_FURNITURE, MALL_V2_LAYOUT, MALL_V3_LAYOUT, parseFurnitureName } from '../src/mall-layout-v2';
 import { MALL_FOOTPRINT, MALL_SPRITE_SIZE, PROCEDURAL, insideFootprint, mallProps, mallSigns, mallStandIns, mallZone, type DressMap } from '../src/coast-view/mall-dressing';
-import { actorShown, isMall, mallCorridorWalls, mallCutRooms, mallCutaway, regionAtClosed, shownAt } from '../src/coast-view/structure-guide';
+import { actorShown, isMall, regionAtClosed, shownAt } from '../src/coast-view/structure-guide';
 import { SampleSound } from '../src/coast-view/sound';
 import type { MapDef, PublishedView } from '../src/raid-runtime/contract';
 
@@ -14,7 +14,6 @@ const mapOf = (id: string, kind = 'mall') => {
   const m = V2.maps[id];
   return { key: { mapId: id }, cells: m.cells, regions: m.regions!.map(r => ({ ...r, inside: r.inside !== false })), buildings: [{ id: 'mall', kind, x: MALL_FOOTPRINT.x, y: MALL_FOOTPRINT.y, w: MALL_FOOTPRINT.w, h: MALL_FOOTPRINT.h, regionIds: ['F1-03'] }] } as unknown as MapDef;
 };
-const centre = (x: number, y: number) => ({ x: x * 32 + 16, y: y * 32 + 16 });
 
 test('商场 2.5D：房间重叠时按“未揭示优先”判断，内层房间未揭示就不显示（与 Runtime 同规则）', () => {
   const m = mapOf('mall-f2'), outer = m.regions.find(r => r.id === 'F2-06')!, inner = m.regions.find(r => r.id === 'F2-10')!;
@@ -29,50 +28,8 @@ test('商场 2.5D：房间重叠时按“未揭示优先”判断，内层房间
   assert.equal(shownAt(m, {}, { x: 70 * 32, y: 30 * 32 }), true, 'the terrace is no room');
 });
 
-test('商场 2.5D：只切开玩家所在房间（含南墙），进出各有一格缓冲；外立面永远不切', () => {
-  const m = mapOf('mall-f1'), room = m.regions.find(r => r.id === 'F1-03')!;
-  const deep = { x: room.x + room.w / 2, y: room.y + 64 }, rooms = mallCutRooms(m, deep), cut = mallCutaway(m, rooms);
-  assert.ok(rooms.has('F1-03'));
-  assert.equal(cut({ x: room.x + 16, y: room.y + room.h + 16 }), true, 'the room\'s south wall row');
-  assert.equal(cut({ x: room.x + room.w - 16, y: room.y + 16 }), true, 'a wall cell inside the room');
-  assert.equal(cut({ x: room.x - 200, y: deep.y + 400 }), false, 'a wall far from the room');
-  // Hysteresis: half a cell inside the edge does not join; once joined, half a cell outside does not leave.
-  const edge = { x: room.x + 16, y: room.y + room.h / 2 }, outside = { x: room.x - 16, y: room.y + room.h / 2 };
-  assert.equal(mallCutRooms(m, edge).has('F1-03'), false);
-  assert.equal(mallCutRooms(m, edge, new Set(['F1-03'])).has('F1-03'), true);
-  assert.equal(mallCutRooms(m, outside, new Set(['F1-03'])).has('F1-03'), true);
-  assert.equal(mallCutRooms(m, { x: room.x - 48, y: room.y + room.h / 2 }, new Set(['F1-03'])).has('F1-03'), false);
-  // Facade cells inside a cut room's rectangle stay solid (F1-06 reaches the east facade at x 63); the south facade is the
-  // room's south wall and is cut with it (F1-14), so the room's last row shows.
-  const store = m.regions.find(r => r.id === 'F1-06')!;
-  assert.ok(store.x + store.w > 63 * 32, 'F1-06 reaches the east facade');
-  assert.equal(mallCutaway(m, new Set(['F1-06']))(centre(63, 20)), false);
-  assert.equal(mallCutaway(m, new Set(['F1-06']))(centre(60, 18)), true);
-  assert.equal(mallCutaway(m, new Set(['F1-14']))(centre(35, 48)), true);
-  assert.equal(mallCutaway(m, new Set(['F1-01']))(centre(10, 8)), false, 'the stepped north-west facade');
-  // In a corridor (no room) the walls just south of the player's corridor run are cut, and nothing else.
-  const f2 = mapOf('mall-f2'), walls = mallCorridorWalls(f2, { x: 22.5 * 32, y: 27.5 * 32 });
-  assert.ok(walls.has('25,28') && walls.has('22,28'), [...walls].join(' '));
-  assert.ok([...walls].every(k => k.endsWith(',28') || k.endsWith(',29')), [...walls].join(' '));
-  assert.equal(mallCutaway(f2, new Set(), walls)(centre(25, 28)), true);
-  assert.equal(mallCorridorWalls(f2, { x: 20.5 * 32, y: 40.5 * 32 }).size, 0, 'inside a room the room rule applies');
-  assert.equal(isMall(m), true); assert.equal(isMall(mapOf('mall-f1', 'resident')), false);
-});
-
-test('商场 2.5D：封存检修核后面没有地面，任何房间或走廊剖开都不切它（二层它在 F2-01 里面）', () => {
-  // The F2 hall contains the core, so standing in it must not vacuously miss the case this guards.
-  assert.ok(mallCutRooms(mapOf('mall-f2'), centre(49, 16)).has('F2-01'));
-  for (const id of ['mall-f1', 'mall-f2']) {
-    const m = mapOf(id), core = m.regions.filter(r => r.sealed);
-    assert.deepEqual(core.map(r => [r.x, r.y, r.w, r.h]), [[45 * 32, 7 * 32, 9 * 32, 7 * 32]], `${id} has one sealed core at x45 y7, 9x7`);
-    const hits = new Set<string>();
-    m.cells.forEach((row, y) => row.forEach((c, x) => {
-      if (c === 'wall') return;
-      const p = centre(x, y), rooms = mallCutRooms(m, p), cut = mallCutaway(m, rooms, rooms.size ? undefined : mallCorridorWalls(m, p));
-      for (let cy = 7; cy <= 13; cy++) for (let cx = 45; cx <= 53; cx++) if (cut(centre(cx, cy))) hits.add(`${cx},${cy}`);
-    }));
-    assert.deepEqual([...hits], [], `${id}: core walls cut from some open cell`);
-  }
+test('商场 2.5D：商场楼层按建筑类型认定（墙体显示规则见 wall-display.test.ts）', () => {
+  assert.equal(isMall(mapOf('mall-f1')), true); assert.equal(isMall(mapOf('mall-f1', 'resident')), false);
 });
 
 test('商场 2.5D：环境光分区——楼体内为室内，二层楼外只有露台一圈是室外，其余是临空', () => {

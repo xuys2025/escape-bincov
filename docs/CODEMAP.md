@@ -4,6 +4,8 @@
 
 定位影响面后，用[检查导航](CHECKS.md)选择相关风险、真实旧客户端等前置和诊断；它只列出要求，不能替代下面各卡片的具体反例与调用边界。
 
+需要核对影响面时运行 `pnpm architecture src/session.ts`（替换为目标源码路径）；省略路径可看全库摘要，`--json` 输出同一关系。命令只读当前源码，列出带行号的依赖、源码直接使用者和运行时传递依赖；类型边单列。测试入口和状态责任继续由本页卡片定位，执行策略见 [CHECKS](CHECKS.md)。共享分析与约束在 [source-graph.mjs](../scripts/source-graph.mjs)，由现有 `check:ci` 执行。
+
 先读任务对应的卡片，再定位所列符号和测试；发现新的调用者或兼容路径时扩展阅读。这里不是允许改动的文件白名单，也不要求把链接文件全部读完。
 
 | 要做什么 | 首读卡片 | 扩展条件 |
@@ -14,7 +16,9 @@
 | 新持久字段、迁移、导入、恢复 | [存档](#存档) | 活动行动字段必须核对两端捕获/恢复 |
 | 负重、上限等画面读数不一致 | [派生读数](#派生读数) | 先分清实时模拟、最近检查点与失败候选，再查格式化 |
 
-地图/碰撞从 [expansion-worlds.ts](../src/expansion-worlds.ts) 的 `resolveExpansionWorld` 和 [spatial.ts](../src/spatial.ts) 进入；画面/资源从 [station-view/route.ts](../src/station-view/route.ts)、[coast-view/sample.ts](../src/coast-view/sample.ts) 追宿主；两者经 [navigation.ts](../src/navigation.ts) 请页面（[ui.ts](../src/ui.ts) 注册）换画面，不直接导入页面，轮用 [pixi-app.ts](../src/pixi-app.ts) 的同一个 Pixi 应用。只改素材时无需先读交易和迁移实现。
+地图/碰撞从 [expansion-worlds.ts](../src/expansion-worlds.ts) 的 `resolveExpansionWorld` 和 [spatial.ts](../src/spatial.ts) 进入；画面/资源从 [station-view/route.ts](../src/station-view/route.ts)、[coast-view/sample.ts](../src/coast-view/sample.ts) 追宿主；两者经 [navigation.ts](../src/navigation.ts) 请页面（[ui.ts](../src/ui.ts) 注册）换画面，不直接导入页面，轮用 [pixi-app.ts](../src/pixi-app.ts) 的同一个 Pixi 应用。只改素材时无需先读交易和迁移实现。区域身份由世界定义的 `region.id` 提供（[居民楼](../src/building-world.ts)与商场相同）；[投影](../src/raid-runtime/presentation.ts)不按显示名称补身份。楼梯方向的中文前缀依赖仍归 #60 Q-E06。
+
+共享视图生命周期：宿主的 DOM 监听、计时器与清理栈由 [view-lifecycle/scope.ts](../src/view-lifecycle/scope.ts) 的 `Scope` 管理，`lifecycle` 是院子、行动与共享 Pixi 应用共同更新的唯一计数；[view-lifecycle/renderer-lifetime.ts](../src/view-lifecycle/renderer-lifetime.ts) 管理页面级 Pixi 适配器注册、程序/着色器缓存与已释放纹理空槽。`pixi-app.ts` 保留初始化前的显式副作用导入，各视图直接导入所需模块。释放边界见 [renderer-lifetime.test.ts](../tests/renderer-lifetime.test.ts)，实际共享渲染器往返与上下文恢复见 [coast-render-target-test.mjs](../scripts/coast-render-target-test.mjs) 和 [station-context-program.mjs](../scripts/station-context-program.mjs)。
 
 商场布局：骨架与各版本世界在 [mall-world.ts](../src/mall-world.ts)（`mallWorldV2`～`mallWorldV4`），家具类型与二、三版家具表在 [mall-layout-v2.ts](../src/mall-layout-v2.ts)，四版家具表与“哪些区域已布置”在 [mall-layout-v4.ts](../src/mall-layout-v4.ts)；新出击选哪一版看 [raid-areas.ts](../src/raid-areas.ts) 的 `sampleMallLayout`。改碰撞要开新版本（已存行动按原版本恢复），只换图不用。画面按格选素材在 [coast-view/mall-dressing.ts](../src/coast-view/mall-dressing.ts)（四版家具选 Sol 的 M2 素材，暂不用的模块和替代见 `SAMPLE_STAND_IN`），[art/mall-furniture.ts](../src/coast-view/art/mall-furniture.ts) 的程序绘制件是同画布的后备；约束测试 [mall-layout-v2.test.ts](../tests/mall-layout-v2.test.ts)、[mall-layout-v4.test.ts](../tests/mall-layout-v4.test.ts)，记录见[商场 2.5D](mall-2-5d/README.md)。
 
@@ -100,6 +104,7 @@
 - 鼠标瞄准与镜头：[coast-view/scene.ts](../src/coast-view/scene.ts) 的 `aimFromClient` 经平滑镜头换算瞄准，镜头前探由 [coast-view/camera.ts](../src/coast-view/camera.ts) 的 `pointerLead` / `stepLead`（鼠标，只在精瞄时）或 `aimLead`（触屏）决定；鼠标前探碰到地图边就停，上限由 `leadRoom` 给出（#80）。改前探前先跑 `test:shooting` 的“静止指针不漂”（检查 a 在空地，a-edge 在地图边）和 [coast-camera.test.ts](../tests/coast-camera.test.ts)。
 - 受击反馈（#75）：画面从 [coast-view/scene.ts](../src/coast-view/scene.ts) 的 `blow()` 开始，负责闪白、顺弹道后退和受击/恢复姿态；档位、同一枪合并成一次受击和玩家中弹的镜头推动由 `landBlows` 按 [coast-view/blow-feel.ts](../src/coast-view/blow-feel.ts) 的规则（`blowTier`、`ShotBlows`、`pushCamera`）处理，墙和门的弹着点特效在 [coast-view/fx.ts](../src/coast-view/fx.ts) 的 `sparks`；姿态只在角色身体所用的样式（原型自己的，否则种类的）有受击帧时换帧（`posable` 调用 [coast-view/textures.ts](../src/coast-view/textures.ts) 的 `hasBodyFrame`）。姿态帧由 [export-hurt-poses.ts](../scripts/export-hurt-poses.ts) 从 #96、#122 的图集切出（各类采用的图集版本记在 `POSE_KINDS`，不画手臂的爪击类记在 `ARMLESS`），B 组图集的画布取整误差由其中的 `driftMap` 还原；[coast-view/pose-assets.ts](../src/coast-view/pose-assets.ts) 加载。声音在 [coast-view/sound.ts](../src/coast-view/sound.ts) 的 `struck`；枪声按音色族合成（[gun-timbre.ts](../src/gun-timbre.ts) 给出改枪目录每把枪和现有外观的音色族，`SynthAudio.shot` 的 `REPORTS` 是配方），试枪场面板的“打击感：新版 / 旧版”切换 `ViewOptions.feel`，旧版回到改动前的声音。暴击与击杀标记在 [coast-view/host.ts](../src/coast-view/host.ts) 的 `mark` / `critMark`。回归看 `test:shooting` 检查 g、h、i 与 [hurt-poses.test.ts](../tests/hurt-poses.test.ts)、[blow-feel.test.ts](../tests/blow-feel.test.ts)。
 - 拥挤时的反馈预算（#75 H-07）：规则只有 [feedback-budget.ts](../src/feedback-budget.ts) 的 `admit` 一处，反馈分核心和装饰两类。粒子在 [coast-view/fx.ts](../src/coast-view/fx.ts) 的 `spawn` 应用（离玩家远的算装饰，玩家位置由 scene 每帧写进 `fx.focus`），声音在 [audio.ts](../src/audio.ts) 的 `SynthAudio.ready` 应用（枪声尾音、机械声、脚步和远处的声音算装饰）；两边都按类计数 `dropped`。回归看 `test:shooting` 检查 k 与 [feedback-budget.test.ts](../tests/feedback-budget.test.ts)。
+- 室内墙体显示（[方案](INDOOR-WALL-VISIBILITY-PLAN.md)）：玩家所在建筑（商场为楼体占地）的墙按 [coast-view/wall-display.ts](../src/coast-view/wall-display.ts) 的 `indoorArea` / `underRule` / `wallRule` / `rowModes` / `clearanceCuts` 显示整面、只留占地格或不画，两者之间按 `sinkStep` / `sunkRows` / `topClear` 在 0.2 秒内下沉或升起，[scene.ts](../src/coast-view/scene.ts) 的 `updateWalls` / `showWall` 应用到带 `cell` 的墙块（`buildGeneric`、[mall-scene.ts](../src/coast-view/mall-scene.ts) 的 `buildMall` 设置），墙上的附着物随整面显示、随墙下沉；这些墙不走 `updateFades`，离开建筑后先升回完整再交还（`rising`），其余结构只有挡住角色时淡出。图由 [textures.ts](../src/coast-view/textures.ts) 的 `wallCut` 生成，下沉中的墙用同一张图重新取景。只是显示：碰撞、子弹、门和房间揭示都不读它。回归看 [wall-display.test.ts](../tests/wall-display.test.ts)、`test:issue26-spatial` 的 S03、S04、S04c、S04d 与 `test:mall-sample` 的 M02、M11、M18、M19、M21。
 - 房间揭示在画面上的表现：哪些房间算揭示由 [presentation.ts](../src/raid-runtime/presentation.ts) 的 `Revelation` 决定，这是 Runtime 规则，改它会改变玩家能看到的敌人信息；画面只读 `ViewFrame.revealed`，未揭示房间里的敌人、物资、灯光和特效不画（[structure-guide.ts](../src/coast-view/structure-guide.ts) 的 `shownAt` / `actorShown`）。城中村和居民楼用屋顶、天花板盖住未揭示的房间；商场不画天花板，由 [lighting.ts](../src/coast-view/lighting.ts) 的 `Lighting.setUnseen` / `syncUnseen` 把未揭示的房间压暗（#26 F14），立着的图经 `at` 乘同一层暗色，只有 scene 的 `rebuild` 给商场楼层传房间。回归看 [coast-lighting.test.ts](../tests/coast-lighting.test.ts) 与 `test:mall-sample` 的 M03c。
 - 试枪场：[range/](../src/range/index.ts)（`?range=1`，内存存档，不碰正式存档）。
 - 动作新增可恢复计时器/状态：继续[存档卡](#存档)，检查点投影与展示投影不是同一契约。
@@ -135,6 +140,8 @@
 **验证入口。** [目录边界](../tests/enemy-catalog.test.ts)、[真实旧档/事务/追击回归](../tests/enemy-compatibility.test.ts)、[固定输入 Runtime 夹具](../tests/fixtures/enemy-benchmark.ts)及其[测量协议](tasks/enemy-foundation-benchmark.md)。A/B 必须使用相同主线机制和输入协议；Node 测量不替代 `test:play`、浏览器和真人验收。当前交付与未来合同边界见[实施摘要](tasks/enemy-foundation.md)。
 
 ## 存档
+
+事务故障从 [session.ts](../src/session.ts) 的 `persist` / `requiresReload` 和 [recovery-store.ts](../src/recovery-store.ts) 的 `commit` 进入：写前错误与已落盘发布错误有不同回滚/重试边界。专门反例在 [session-publication.test.ts](../tests/session-publication.test.ts)，真实下载、刷新及两尺寸错误提示由 [save-browser-test.mjs](../scripts/save-browser-test.mjs) 覆盖。
 
 **职责与所有者。** `SaveSession` 协调唯一会话和完整候选；`RecoveryStore` 比对旧记录、验证并单次写入。场景通过捕获/恢复端口提供活动世界，UI 不自行组装另一套提交过程。
 
@@ -174,6 +181,8 @@
 **首读路径。** [raid-runtime/contract.ts](../src/raid-runtime/contract.ts) 的 `CoastServices` / `HudView` → [raid-runtime/host.ts](../src/raid-runtime/host.ts) 接线 → [raid-runtime/runtime.ts](../src/raid-runtime/runtime.ts) 的 `carriedWeight` / `carryLimit` → [coast-view/inventory.ts](../src/coast-view/inventory.ts) 的 `render` / `refreshWeight`。
 
 行动中的 `Runtime.layered` 随模拟推进，`SessionState.expansion` 是最近提交后的状态，不能拿它重新计算实时上限。优先复用帧或只读服务里的权威值；显示层只做舍入与排版。背包打开时世界仍推进，更新读数只改对应文本，不能重建网格打断拖放。回归入口：[carried-weight.test.ts](../tests/carried-weight.test.ts)，覆盖护符、弹药、临时力量过期及保持放置状态。
+
+精神/水分/饱食走 [presentation.frameView](../src/raid-runtime/presentation.ts) → `HudView.needs` → [host.slowHud](../src/coast-view/host.ts)。投影只复制实时 `Runtime.layered.body` 的三个数，经典旧行动为 `null`；宿主沿原每八帧节奏舍入显示，不读取最近检查点。回归入口：[hud-needs.test.ts](../tests/hud-needs.test.ts)、`test:qol-expansion` 的两尺寸读数检查与 `test:raid-default` 的经典行动状态行。
 
 行动背包按需读 `CoastServices.inventoryView` 的 detached bag/safe 与装备字段，周期读数走不克隆世界的 `inventoryReadout`；不从会话拿活对象。包内写入由 `raid-runtime/host.ts` 的三个 carried 命令调用原 `SaveSession.mutate`，搜刮全部移动仍走 `transferLoot`。主武器槽（#26 F15）装备背包里的枪走 `equipItem`、来源里的枪走 `equipLoot`，两者共用 runtime 的 `equip` 与 `D.equipRun`。规则差异、引用恢复和正式工厂断言见 [raid-inventory-services.test.ts](../tests/raid-inventory-services.test.ts)；当前边界与验证见 [Q-E02 B](tasks/quality-entropy.md#q-e02-b-行动背包有限服务)。
 

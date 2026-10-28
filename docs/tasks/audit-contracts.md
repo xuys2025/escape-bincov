@@ -34,10 +34,10 @@
 | 剩余项 | 接手入口与验收边界 |
 | --- | --- |
 | 背包有限服务未完成（Q-E02 B） | `coast-view/inventory.ts` 仍直接持有 Session/SaveSession 整理背包；本轮只收敛类型和读数。迁移必须覆盖库存/世界同事务、失败引用替换及旧行动兼容 |
-| 实时状态与最近检查点混用 | `coast-view/host.ts` 的精神/水分/饱食仍按最近检查点显示，可能滞后保存间隔；未把它写成严格实时读数保证。新增展示应进入帧/只读服务，不复制公式 |
+| 实时状态与最近检查点混用（本分支已修） | 精神/水分/饱食改走 `HudView.needs`，见[实时投影](#精神水分饱食-hud-的实时投影)；本表保留首轮审计范围，其余状态收敛仍归 #60 |
 | 事务错误分类（Q-E04） | `persist` 的 catch 同时接收校验和存储异常；后续分开诊断时不能改变候选保留或把写入后的恢复异常当成可安全重做 |
 | 失焦后首按被抑制（已知 D8） | `InputState.suppressHeld` 和宿主 blur/pause；要区分失焦丢失释放事件与面板切换保护，保住 E 关闭搜刮不重开的断言 |
-| 内容身份依赖文案（Q-E06） | `raid-runtime/presentation.ts` 的 region 名称表和楼梯中文前缀；改变文案前必须检查身份/方向，不能顺便改旧世界编号 |
+| 内容身份依赖文案（Q-E06） | `fix/content-identity` 只把居民楼 8 个既有完整 region ID 放回定义，投影不再按中文名称补身份；楼梯中文前缀仍待处理。世界/布局不改号，不表示 Q-E06 全部完成 |
 | 单测通过不等于真机/完整资源签收 | 帧率、真实输入、WebGL 上下文恢复、F20 总堆与真人手感仍按原任务验收，不把本轮结果替代这些结论 |
 | 自然游玩探针的击杀采样不是累计值 | `scripts/natural-play.mjs` 从宿主至多 1000 条的 `eventLog` 计数，旧死亡事件淘汰后 samples.kills 会下降；累计击杀应读最终结算，不根据这条采样推断游戏进度丢失 |
 
@@ -62,6 +62,22 @@ Windows，Node 24.21.0、pnpm 11.19.0、本地 Chrome 155.0.8059.85。下列结�
 合法存档格式、存档键、世界/布局编号与单文件离线能力保持不变；故意收紧非法 ID 的接受范围，不自动修复或覆盖损坏数据。存档浏览器检查包括失败重试、备份导入导出与多窗口冲突。`test:loot` 的实际旧 HTML 兼容分支在本地未配置，完整 CI 另以固定旧客户端执行 `test:expansion`；不能把本地成功写成该兼容分支已执行。
 
 没有真实手机、真人平衡或原生 GPU 长循环结论。本任务不合并或部署，等待维护者审阅。
+
+## 精神/水分/饱食 HUD 的实时投影
+
+2026-10-28 续作 [PR #110](https://github.com/xuys2025/escape-bincov/pull/110)，沿原分支 `fix/live-vitals-hud` 正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`；受检源码 head `19dea0bfa59042281b4c7ec1f085aa3e8587e3b8`。保留 M2、商场四版、背包服务与双方交接，随后仅补本轮证据和文字，准确最终 head / CI 见原 PR。#60 总单保持开放。
+
+**最新共同基线同步（同日）。** 随后正常合入 main `630e68f517edea34bfbcc548473897bd36bdfa08`（#134 架构查询与门禁），只解决 WORK-QUEUE / handoff 的追加记录冲突，双方入口和新 source-graph / architecture 均保留。相对已验 `d0ebc57`，src、tests、assets、浏览器脚本、构建/打包输入和依赖完全未变，package.json 仅增加只读 architecture 命令；实际重跑当前 `check:ci` **85/85** 与 `package` 均通过，HTML 仍精确为下述 `f61862ed…`。因此复用下方 1025 单测、QoL 5/5、raid-default 11/11 和原双尺寸截图，本地未重复游戏回归或负对照。[同份报告](audit-contracts/live-needs/report.json) 的 `main630Integration` 保存输入一致性和重跑结果；`d0ebc57` 的成功 [CI 40624184384](https://github.com/xuys2025/escape-bincov/actions/runs/40624184384) 仅为历史，新准确 head 全量 CI 另见原 PR。
+
+**修复边界。** 实时身体是 `CoastRaidRuntime.layered.body`，`SessionState.expansion.body` 是最近成功检查点。`frameView` 将三个数复制到只读 `HudView.needs`；宿主只按原来每八帧的刷新节奏舍入与排版。没有复制生理公式，也没有把实时对象直接放进帧；禁用测试帧冻结时同样不共享引用。经典旧行动即使会话含扩展身体，也保持 `needs: null`，状态行不显示这三项。不改存档格式、检查点、规则或事务。
+
+**本轮实际验证。** Windows，Node 24.22.1、pnpm 11.19.0、Chrome 156.0.8078.49。完整 `pnpm test` **1025/1025**、`pnpm check:ci` **77/77**、正式 `pnpm package`、完整 `test:qol-expansion` **5/5**、`test:raid-default` **11/11** 均首次通过。后者包含经典行动无身体读数、商场一版恢复、商场四版出击、选图和触屏。日志在 `test-results/pr110-20261028/`；[同一份对照记录](audit-contracts/live-needs/report.json) 的 `integration20261028` 留存新基线、制品、环境、两尺寸读数与完整套件结果。
+
+新基线负对照将三个产品文件还原为准确 main `03ea261` 后构建（HTML SHA-256 `f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb`，本次主线只增加文档、产品未变）：两尺寸均有效失败，普通暂停 elapsed 为 0、保存值未变，实时值分别 71.2/62.2/53.2 和 48.2/37.2/26.2，旧 HUD 两次仍显示 100/100/100。main 投影单独代入时新增单测 0/3；恢复修复后 3/3，覆盖自然衰减跨整数、暂停、旧帧不变、双向引用隔离与经典空投影。源文件恢复原字节后才打包修复版；没有更改时钟、自动保存或生理规则。
+
+修复版两尺寸保存值仍未变，实时/帧/DOM 一致、文本 fits 为 true，页面异常与外网请求均为 0。正式 HTML SHA-256：`f61862ed972f8efaab0c8abf7c9360ab2aebbd751d943dfa77ad8211c5568b72`。已逐张查看真实截图：[1280×720](audit-contracts/live-needs/1280x720.png)、[1920×1080](audit-contracts/live-needs/1920x1080.png)。没有真机、真人手感或性能验收；不合并或发布。
+
+**历史首败保留。** 10-25 原 head `1ba5a79` 基于 `974a3a8`，当时 877 单测、64 守卫和 HUD 步通过，但完整 QoL 在容器关闭按钮 detach 后超时；通用 browser 中断，UI / 完整 raid-default 未运行。随后该 head [CI 40161314063](https://github.com/xuys2025/escape-bincov/actions/runs/40161314063) 全部成功。本轮没有更改容器断言，完整 QoL 实际通过；原始前后读数与超时仍保留在上述报告，旧截图可从[原 head 目录](https://github.com/xuys2025/escape-bincov/tree/1ba5a7940fffcb434c6b6ff51e071b5d757b69d4/docs/tasks/audit-contracts/live-needs)读取，当前同名截图已替换为本轮实际构建。初次运行中八帧探针因跨 autosave 而无效，未计为产品反例；有效浏览器对照采用普通暂停，正常衰减和无写入另由单测验证。
 
 ## 同步 #39 后的复核
 
