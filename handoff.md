@@ -378,6 +378,10 @@ EN-13 接入每五种子之一的头目＋两护卫，替换已有名册三人�
 
 当前任务从 [WORK-QUEUE 顶部](docs/WORK-QUEUE.md) 和相关 PR 的最新 head/检查接手。读代码先用 [CODEMAP](docs/CODEMAP.md)；每个在途交付维护一份[短摘要](docs/TASK-HANDOFF-TEMPLATE.md)，不把本文件全部放入默认上下文。
 
+- 2026-10-29 · [PR #95](https://github.com/xuys2025/escape-bincov/pull/95) 复核：最新 main 的 W12/W13 仍可能在实际落幕前读取文案，修复有必要，维护者已明确授权完成验证后合并。沿原 `fix/coast-outro-checks` 正常同步 main `ae177b4`，保留双方历史及任务登记；正式代码差异仍只有两处等待。首轮完整手动套件 53/53、延迟与两个负对照重新验证，见 [CI 原记录](docs/CI.md#手动落幕检查的时序)；最终组合的复验、准确 head CI 与实际合并状态统一维护在原 PR。游戏、存档、离线及原检查断言不变，不替代 F20 或真机签收。
+
+- 2026-10-28 · [#61 手动落幕检查](docs/CI.md#手动落幕检查的时序)（[原 PR #95](https://github.com/xuys2025/escape-bincov/pull/95)，`fix/coast-outro-checks`）：从原 head `7176bee` 正常合入 main `0f73a67386bac196b87c983668295be6d1a99f1e`，保留双方记录与 #112/#114 检查登记。正式变更仍只有 W12/W13 等实际落幕再读文案，游戏源码/素材/依赖与 main 相同。Windows / Node 24.22.1 / pnpm 11.19.0 / Chrome 156.0.8078.49：1022 单测、77 守卫、严格打包、完整 coast-sample 53/53 通过。600 ms 延迟对照旧等待 25/26（仅 W13 过早读 null）、新等待 26/26；移除标记与错误文案各 25/26，仅原 W13 超时/断言失败，四组均无页面异常或外部请求。HTML SHA-256 `f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb`，日志在忽略目录 `test-results/pr95/`。旧 Linux 自动暂停首败保留在 CI 说明的历史段；完整套件仍为手动，准确 head CI 和待审状态见原 PR，未获本任务合并授权。
+
 - 2026-10-24 · 地图边瞄准偏转（`fix/aim-map-edge`，起点 main `f73e9de`；改枪 M0-07 原型发现，见 [#80](https://github.com/xuys2025/escape-bincov/issues/80)，M0 评审决定单独修）：
   - **问题**：按住右键精瞄、镜头被地图边挡住时，夹紧只卡住前探的一个轴，另一个轴照常缓动，光标不动瞄准也转约 1 秒。主线上试枪场射击线 1280×720 测得 8.47°，1920×1080 3.6–3.7°；居民楼楼层比画面窄，同样会转。#39 的检查都在空地上。
   - **修法**：`camera.ts` 的 `leadRoom` 给前探长度封顶，到镜头沿光标方向碰边为止；跟随镜头已被地图边挡住时没有前探；离边界不到 27 像素时再按距离的 3 倍收窄（`EDGE_FADE`），走向地图边时前探平滑收完，不会一帧跳回 64 像素。`stepLead` 多一个 `room` 参数，`scene.ts` 的 `camera()` 和 `aimFromClient` 用同一上限。空地上逐位不变，触屏不变。
