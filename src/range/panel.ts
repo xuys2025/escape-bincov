@@ -8,9 +8,12 @@ import css from './range.css';
 import { esc } from '../html';
 import type { PublishedView } from '../raid-runtime/contract';
 import type { CoastSampleHost } from '../coast-view/host';
-import { MOVER, RANGE_WEAPONS, TARGETS, type RangeWeapon, type ShootingRange } from './raid';
+import { MOVER, RANGE_BUILDS, RANGE_WEAPONS, TARGETS, type RangeWeapon, type ShootingRange, type RangeBuild } from './raid';
+import { partsSignature } from '../gunsmith/signature';
+/** Each build's signature, as the view publishes it for the gun in hand. */
+const BUILD_SIGS = Object.fromEntries((Object.keys(RANGE_BUILDS) as RangeBuild[]).map(b => [b, partsSignature(RANGE_BUILDS[b]())])) as Record<RangeBuild, string>;
 
-const WEAPON_NAMES: Record<RangeWeapon, string> = { pistol: '手枪', carbine: '卡宾枪', shotgun: '霰弹枪', m4a1: 'M4A1 样本', knife: '匕首' };
+const WEAPON_NAMES: Record<RangeWeapon, string> = { pistol: '手枪', gb17: 'G17', carbine: '卡宾枪', shotgun: '霰弹枪', mb4a1: 'M4A1 步枪', knife: '匕首' };
 /** Aim angles are radians (contract AimView); the panel shows degrees and shares as percentages. */
 const degrees = (radians: number) => `${(radians * 180 / Math.PI).toFixed(1)} 度`;
 const percent = (share: number) => `${Math.round(share * 100)}%`;
@@ -22,8 +25,9 @@ const markup = (exit: string) => `<section class="rg" aria-label="试枪场">
 <div class="rg-body">
 <p class="rg-note">内存存档 · 不保存进度</p>
 <div class="rg-label">枪械</div>
-<div class="rg-grid">${RANGE_WEAPONS.map(w => `<button type="button" data-gun="${w}" aria-pressed="false"${w === 'm4a1' ? ' class="rg-wide"' : ''}>${WEAPON_NAMES[w]}</button>`).join('')}</div>
+<div class="rg-grid">${RANGE_WEAPONS.map(w => `<button type="button" data-gun="${w}" aria-pressed="false"${w === 'mb4a1' ? ' class="rg-wide"' : ''}>${WEAPON_NAMES[w]}</button>`).join('')}<button type="button" data-build="light" aria-pressed="false" title="轻托、短护木加斜握把、开放红点、快换匣、轻握把">M4A1 轻快</button><button type="button" data-build="steady" aria-pressed="false" title="稳定托、精确枪管组、制退器、短护木加短前握、远距镜、稳握把">M4A1 稳定</button></div>
 <div class="rg-grid two rg-gap"><button type="button" data-act="mover" aria-pressed="true">移动目标：开</button><button type="button" data-act="reset">重新开始</button></div>
+<div class="rg-grid rg-gap"><button type="button" data-act="feel" class="rg-full" aria-pressed="true">打击感：新版</button></div>
 <table><thead><tr><th>目标</th><th>命中</th></tr></thead>
 <tbody>${[...TARGETS.map(t => [t.id, `${t.tiles} 格`]), [MOVER.id, '移动目标']].map(([id, label]) => `<tr><td>${label}</td><td data-hits="${id}">0</td></tr>`).join('')}</tbody>
 <tfoot><tr><td>射击</td><td data-shots>0</td></tr></tfoot></table>
@@ -56,10 +60,13 @@ export class RangePanel {
     private press(e: Event) {
         const button = (e.target as Element).closest<HTMLButtonElement>('button');
         if (!button) return;
-        const { gun, act } = button.dataset;
+        const { gun, act, build } = button.dataset;
         if (gun) this.range.arm(gun as RangeWeapon);
+        else if (build) this.range.arm('mb4a1', build as RangeBuild);
         else if (act === 'mover') this.range.setMoving(!this.range.moving);
         else if (act === 'reset') this.range.reset();
+        // A/B for #75's hit-feel rounds (ViewOptions.feel): the next shot already sounds the other way.
+        else if (act === 'feel') this.host.opts.feel = this.host.opts.feel === 'classic' ? 'enhanced' : 'classic';
         else if (act === 'fold') this.fold(!this.box.classList.contains('folded'));
         button.blur();
     }
@@ -95,9 +102,14 @@ export class RangePanel {
         if (hidden) return;
         this.place();
         const { weapon: w, aim } = b.frame.hud, stats = this.range.stats;
-        for (const id of RANGE_WEAPONS) press(this.q(`[data-gun="${id}"]`), w.id === id);
+        // The factory M4A1 and its two builds are told apart by the configuration the view draws (#28 M2-15).
+        const sig = b.frame.player.gun?.sig ?? '';
+        for (const id of RANGE_WEAPONS) press(this.q(`[data-gun="${id}"]`), w.id === id && (id !== 'mb4a1' || sig === ''));
+        for (const build of Object.keys(RANGE_BUILDS) as RangeBuild[]) press(this.q(`[data-build="${build}"]`), w.id === 'mb4a1' && sig === BUILD_SIGS[build]);
         const mover = this.q('[data-act="mover"]');
         press(mover, this.range.moving); text(mover, this.range.moving ? '移动目标：开' : '移动目标：关');
+        const feel = this.q('[data-act="feel"]'), classic = this.host.opts.feel === 'classic';
+        press(feel, !classic); text(feel, classic ? '打击感：旧版' : '打击感：新版');
         for (const [id, hits] of Object.entries(stats.hits)) text(this.q(`[data-hits="${id}"]`), String(hits));
         text(this.q('[data-shots]'), String(stats.shots));
         this.q('[data-tip]').hidden = w.id !== 'shotgun';

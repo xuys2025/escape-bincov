@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "method": "TASK-C exact native-grid RGBA pixel copies, head/torso/knee edits and species-specific contractions; Pillow direct PNG, no canvas, no new colours, no whole-frame recentering.",
+  "baseMain": "dfa1199b29efd2628a8029d750f80156a1b5051d",
+  "templateIndex": "assets/hit-feel/templates/sources-c.json",
+  "rows": [
+    "E",
+    "SE",
+    "S",
+    "NE",
+    "N"
+  ],
+  "columns": [
+    "idle",
+    "hurt",
+    "recovery"
+  ],
+  "sheets": [
+    {
+      "id": "raider-boss",
+      "file": "assets/hit-feel/sources/raider-boss-hurt-sheet-v1.png",
+      "sha256": "78f510a5f9c315efbd84d5988f5b8b2b6fd35e4b3b64d0efbc71c72ba6c41136"
+    },
+    {
+      "id": "tide-ritualist",
+      "file": "assets/hit-feel/sources/tide-ritualist-hurt-sheet-v1.png",
+      "sha256": "26c373a375c35fa82afbd20166eeef242b11f94a13abfb60428db873edabc2b7"
+    },
+    {
+      "id": "mercenary-scout",
+      "file": "assets/hit-feel/sources/mercenary-scout-hurt-sheet-v1.png",
+      "sha256": "69508c9042ea01de8757aaaaa4ee59f544f6eb6a8bd0ca139dbe8130ac9093ca"
+    },
+    {
+      "id": "mercenary-assault",
+      "file": "assets/hit-feel/sources/mercenary-assault-hurt-sheet-v1.png",
+      "sha256": "b725df6a6ff6097a50d25d3d6291dd6d53ad265a5a5e3dddde640721e2b98a25"
+    },
+    {
+      "id": "mercenary-support",
+      "file": "assets/hit-feel/sources/mercenary-support-hurt-sheet-v1.png",
+      "sha256": "82401532201bb9be1529588c4c71aa8ddc1ead32f5c45caee3b77257468447d9"
+    },
+    {
+      "id": "recovery-leader",
+      "file": "assets/hit-feel/sources/recovery-leader-hurt-sheet-v1.png",
+      "sha256": "8ce4cc2fcacdb038936aee2bbe9b5e6892f135b235d83e884c4ca8966c31d116"
+    },
+    {
+      "id": "blockade-sentry",
+      "file": "assets/hit-feel/sources/blockade-sentry-hurt-sheet-v1.png",
+      "sha256": "88fdae58e11339d21052724720916f2955bcf76b89535a12e5cddd8c28c777a3"
+    },
+    {
+      "id": "blockade-patrol",
+      "file": "assets/hit-feel/sources/blockade-patrol-hurt-sheet-v1.png",
+      "sha256": "37289b74e3bab512b534516d10977f65d559c378eb9c7a5fb0c2d139e25e8840"
+    },
+    {
+      "id": "blockade-sergeant",
+      "file": "assets/hit-feel/sources/blockade-sergeant-hurt-sheet-v1.png",
+      "sha256": "85d9bdeb39d4aaba544458d8620e1d7772049dccc551580728312d164e77665f"
+    },
+    {
+      "id": "salt-dazed",
+      "file": "assets/hit-feel/sources/salt-dazed-hurt-sheet-v1.png",
+      "sha256": "575304224fcd4d45f7645e429420cf99edb62d08a37b345f54dee9733f0aef4f"
+    },
+    {
+      "id": "tide-chaser",
+      "file": "assets/hit-feel/sources/tide-chaser-hurt-sheet-v1.png",
+      "sha256": "4b1674869035bd783ef3559994b61d8fee2dbc78f52801adf7be73cfa73ba202"
+    },
+    {
+      "id": "salt-hulk",
+      "file": "assets/hit-feel/sources/salt-hulk-hurt-sheet-v1.png",
+      "sha256": "06eb7a708aa05fd2d1b037ccb4db78b128d9e182b25a4f9bca28eb9c24264c7a"
+    },
+    {
+      "id": "tidal-crab",
+      "file": "assets/hit-feel/sources/tidal-crab-hurt-sheet-v1.png",
+      "sha256": "4c31ccf92eb5cf0ecad309fa0f41019480248279eb48491c10f1a8fe80b35269"
+    },
+    {
+      "id": "saltback-dog",
+      "file": "assets/hit-feel/sources/saltback-dog-hurt-sheet-v1.png",
+      "sha256": "0c62be135d2a445f283ce7d2a8c73aee5a9ffbb7a0984079bd6cedea0ed002e5"
+    },
+    {
+      "id": "sac-spitter",
+      "file": "assets/hit-feel/sources/sac-spitter-hurt-sheet-v1.png",
+      "sha256": "80dc0c84fa0dd39551c5ed57f06af2a5e7de2e9beee0897e6775e99cc44958ff"
+    }
+  ],
+  "artReviewPlates": [
+    "docs/hit-feel-art/c-armed-1x-v1.png",
+    "docs/hit-feel-art/c-armed-3x-v1.png",
+    "docs/hit-feel-art/c-unarmed-1x-v1.png",
+    "docs/hit-feel-art/c-unarmed-3x-v1.png",
+    "docs/hit-feel-art/c-beast-1x-v1.png",
+    "docs/hit-feel-art/c-beast-3x-v1.png"
+  ]
+}

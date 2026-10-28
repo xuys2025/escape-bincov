@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "source": "assets/hit-feel/sources/*-hurt-sheet-pixel-v2.png (#96)",
+  "source": "assets/hit-feel/sources/*-hurt-sheet-<edition>.png (#96 pixel-v2, #122 v1 and v2); editions in POSE_KINDS",
   "generator": "scripts/export-hurt-poses.ts",
   "note": "Runtime hurt (frame 5) and recovery (frame 6) bodies cut from the pixel-v2 sheets, with the one-level canvas drift on semi-transparent pixels restored to the idle frames' colours. Anchors are the idle frames'.",
   "sources": {
@@ -10,7 +10,22 @@
     "assets/hit-feel/sources/creature-hurt-sheet-pixel-v2.png": "97e63923350200660ed4a6cf6b54b1171e56d3ed1629d5b1f8b1e078e4ad3b9a",
     "assets/hit-feel/sources/raider-melee-hurt-sheet-pixel-v2.png": "b3a7a9a97a14d1275f6851a7ed2706ab68415353fec2bbf33b135eb00e769461",
     "assets/hit-feel/sources/raider-gunner-hurt-sheet-pixel-v2.png": "1f2a7f05e14c98afd335f23a4f3272ca90143575aba3dddbf5daca73df0192c1",
-    "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png": "c89abeab69a36119951c26eeded4905d3310917ecf9653c32429de90d8925654"
+    "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png": "c89abeab69a36119951c26eeded4905d3310917ecf9653c32429de90d8925654",
+    "assets/hit-feel/sources/raider-boss-hurt-sheet-v1.png": "78f510a5f9c315efbd84d5988f5b8b2b6fd35e4b3b64d0efbc71c72ba6c41136",
+    "assets/hit-feel/sources/tide-ritualist-hurt-sheet-v1.png": "26c373a375c35fa82afbd20166eeef242b11f94a13abfb60428db873edabc2b7",
+    "assets/hit-feel/sources/mercenary-scout-hurt-sheet-v1.png": "69508c9042ea01de8757aaaaa4ee59f544f6eb6a8bd0ca139dbe8130ac9093ca",
+    "assets/hit-feel/sources/mercenary-assault-hurt-sheet-v1.png": "b725df6a6ff6097a50d25d3d6291dd6d53ad265a5a5e3dddde640721e2b98a25",
+    "assets/hit-feel/sources/mercenary-support-hurt-sheet-v1.png": "82401532201bb9be1529588c4c71aa8ddc1ead32f5c45caee3b77257468447d9",
+    "assets/hit-feel/sources/recovery-leader-hurt-sheet-v1.png": "8ce4cc2fcacdb038936aee2bbe9b5e6892f135b235d83e884c4ca8966c31d116",
+    "assets/hit-feel/sources/blockade-sentry-hurt-sheet-v1.png": "88fdae58e11339d21052724720916f2955bcf76b89535a12e5cddd8c28c777a3",
+    "assets/hit-feel/sources/blockade-patrol-hurt-sheet-v1.png": "37289b74e3bab512b534516d10977f65d559c378eb9c7a5fb0c2d139e25e8840",
+    "assets/hit-feel/sources/blockade-sergeant-hurt-sheet-v1.png": "85d9bdeb39d4aaba544458d8620e1d7772049dccc551580728312d164e77665f",
+    "assets/hit-feel/sources/salt-dazed-hurt-sheet-v1.png": "575304224fcd4d45f7645e429420cf99edb62d08a37b345f54dee9733f0aef4f",
+    "assets/hit-feel/sources/tide-chaser-hurt-sheet-v1.png": "4b1674869035bd783ef3559994b61d8fee2dbc78f52801adf7be73cfa73ba202",
+    "assets/hit-feel/sources/salt-hulk-hurt-sheet-v1.png": "06eb7a708aa05fd2d1b037ccb4db78b128d9e182b25a4f9bca28eb9c24264c7a",
+    "assets/hit-feel/sources/tidal-crab-hurt-sheet-v1.png": "4c31ccf92eb5cf0ecad309fa0f41019480248279eb48491c10f1a8fe80b35269",
+    "assets/hit-feel/sources/saltback-dog-hurt-sheet-v2.png": "6cac25a8c128644ba2a9d85cce260de24e1b93a48f459a076fc64449b4207a74",
+    "assets/hit-feel/sources/sac-spitter-hurt-sheet-v2.png": "161f6b3f78b840bf494252a97ff059e232f33fdc6b55deebe71b06beb57d5da0"
   },
   "assets": [
     {
@@ -1132,6 +1147,2406 @@
       "pose": "recovery",
       "sheet": "assets/hit-feel/sources/raider-lookout-hurt-sheet-pixel-v2.png",
       "sha256": "99bedcd75f59c24895da14cc476a1294ddf8b955e9be7f809445a647cbdc06e8"
+    },
+    {
+      "id": "coast-raider-boss-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-raider-boss-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-boss",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-boss-hurt-sheet-v1.png",
+      "sha256": "b81e540a721916598bcb964235da7f60a1e22d50b879d03f909aa982737e7948"
+    },
+    {
+      "id": "coast-raider-boss-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-raider-boss-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-boss",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-boss-hurt-sheet-v1.png",
+      "sha256": "6d9dfc953750ffb03bbf6a18aef58691a94a116d5f5de435e76f440d30564575"
+    },
+    {
+      "id": "coast-raider-boss-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-raider-boss-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-boss",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-boss-hurt-sheet-v1.png",
+      "sha256": "17e7a612edad65fa37f11faf1c45cbb115d1e7f8b922d993488214523c019236"
+    },
+    {
+      "id": "coast-raider-boss-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-raider-boss-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-boss",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-boss-hurt-sheet-v1.png",
+      "sha256": "62ce89e935a272ec6d3a42c61a4dbfd1b6d5dd905d0e1d8f4e5a71213c9c1670"
+    },
+    {
+      "id": "coast-raider-boss-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-raider-boss-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-boss",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-boss-hurt-sheet-v1.png",
+      "sha256": "c2f6e6ec8f78cb63c7831ed05817d45406d8682e4e4d09c5337c881bb6706eca"
+    },
+    {
+      "id": "coast-raider-boss-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-raider-boss-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-boss",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-boss-hurt-sheet-v1.png",
+      "sha256": "de0eeeb77a7a44df3f2634d03f865999cee18d87fdc7f3d8d1d5836fc015e28e"
+    },
+    {
+      "id": "coast-raider-boss-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-raider-boss-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-boss",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-boss-hurt-sheet-v1.png",
+      "sha256": "ded25e5d5f537f4850fc46b0d69094ae802dbdcbbde766cd298d73b201c775b9"
+    },
+    {
+      "id": "coast-raider-boss-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-raider-boss-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-boss",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-boss-hurt-sheet-v1.png",
+      "sha256": "4496d0a65b380d64d7039385ea0814437e19ba259c06e71282f45a2e9df7c26b"
+    },
+    {
+      "id": "coast-raider-boss-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-raider-boss-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-boss",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/raider-boss-hurt-sheet-v1.png",
+      "sha256": "6b96926f35d3ce6ee87a3ec6cc922726ef5c2407e11466cd5fa54a65fd739309"
+    },
+    {
+      "id": "coast-raider-boss-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-raider-boss-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "raider-boss",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/raider-boss-hurt-sheet-v1.png",
+      "sha256": "5f5367ff112c437f11810d8037dceb58f53469916321ff3ce1ca1cddf4f15294"
+    },
+    {
+      "id": "coast-tide-ritualist-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-tide-ritualist-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-ritualist",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tide-ritualist-hurt-sheet-v1.png",
+      "sha256": "39354e6a8155c03f9701dc34c64fc9fd3e9c4f598890c06d7dfa4d81f28014b8"
+    },
+    {
+      "id": "coast-tide-ritualist-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-tide-ritualist-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-ritualist",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tide-ritualist-hurt-sheet-v1.png",
+      "sha256": "1921e7f08e596417bf65454ca2bee15d3e1a7af2d6fc9a93d53c51802646157b"
+    },
+    {
+      "id": "coast-tide-ritualist-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-tide-ritualist-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-ritualist",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tide-ritualist-hurt-sheet-v1.png",
+      "sha256": "c1190401becd104ca6aa4524da2046f165cb216cc48eab299f4022bd4322eb7a"
+    },
+    {
+      "id": "coast-tide-ritualist-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-tide-ritualist-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-ritualist",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tide-ritualist-hurt-sheet-v1.png",
+      "sha256": "2c6e1ffe683a8b61c11bada22603d5159d7a278d9a194304ee08e3752d7fd1d9"
+    },
+    {
+      "id": "coast-tide-ritualist-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-tide-ritualist-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-ritualist",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tide-ritualist-hurt-sheet-v1.png",
+      "sha256": "d0f1f5a422468341176ae1bbf7eee67a4e5bcb7ebb6ef875781b3db39b4e15dd"
+    },
+    {
+      "id": "coast-tide-ritualist-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-tide-ritualist-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-ritualist",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tide-ritualist-hurt-sheet-v1.png",
+      "sha256": "999abfdda6f40430b8aaac42f454364abb6a6dd63318781a13da713e2262c993"
+    },
+    {
+      "id": "coast-tide-ritualist-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-tide-ritualist-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-ritualist",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tide-ritualist-hurt-sheet-v1.png",
+      "sha256": "31889dc8bdb3b8f97a1fe97382ec1342b83afca6ec0cb7197fe0394cccd7946e"
+    },
+    {
+      "id": "coast-tide-ritualist-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-tide-ritualist-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-ritualist",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tide-ritualist-hurt-sheet-v1.png",
+      "sha256": "f73233e49981a2682f09b4575859f2819e3a2c72e42a86fed944d78b9560640f"
+    },
+    {
+      "id": "coast-tide-ritualist-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-tide-ritualist-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-ritualist",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tide-ritualist-hurt-sheet-v1.png",
+      "sha256": "6377a3222d8d65ba5845688a251658b7413ee9f073e22cad440c150b6b96aacb"
+    },
+    {
+      "id": "coast-tide-ritualist-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-tide-ritualist-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-ritualist",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tide-ritualist-hurt-sheet-v1.png",
+      "sha256": "bb41e406b4b958adbc7ec7fe9d813babd42c7437fe17ca32b9f99999ac9242cb"
+    },
+    {
+      "id": "coast-mercenary-scout-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-scout-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-scout",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-scout-hurt-sheet-v1.png",
+      "sha256": "cfde190907454ad50180d17d4af2483a898df1686c55700ee12d5d7f315e0bb4"
+    },
+    {
+      "id": "coast-mercenary-scout-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-scout-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-scout",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-scout-hurt-sheet-v1.png",
+      "sha256": "58c4015421fbbacd490430bb37e10f53d99404b4a1d320e77cb70d61859d095c"
+    },
+    {
+      "id": "coast-mercenary-scout-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-scout-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-scout",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-scout-hurt-sheet-v1.png",
+      "sha256": "0bbb67149383f92b7ba1e094d4fba5205ba5c6995bc1c3e5a5c5404aa454120d"
+    },
+    {
+      "id": "coast-mercenary-scout-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-scout-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-scout",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-scout-hurt-sheet-v1.png",
+      "sha256": "4d6eaeb275c918a64679ef6f8da531f899bf881e3c86bf681e41378ba69e313d"
+    },
+    {
+      "id": "coast-mercenary-scout-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-scout-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-scout",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-scout-hurt-sheet-v1.png",
+      "sha256": "a7df9b4adb855c251b135b6ba50b7995fcd894aa99902aea9ef239b6dd5eaf05"
+    },
+    {
+      "id": "coast-mercenary-scout-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-scout-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-scout",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-scout-hurt-sheet-v1.png",
+      "sha256": "90761e2b1fa8bdec6e51a168c9f96547fe42321ffea91401f9636e53264e6951"
+    },
+    {
+      "id": "coast-mercenary-scout-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-scout-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-scout",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-scout-hurt-sheet-v1.png",
+      "sha256": "00baddcec47d1f8c4d775b227d8550178fd60230fad1cf41819b17344eebf02b"
+    },
+    {
+      "id": "coast-mercenary-scout-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-scout-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-scout",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-scout-hurt-sheet-v1.png",
+      "sha256": "a73c9206c0b155e38428421f223917acec369304eb8d87c233c63e281055659f"
+    },
+    {
+      "id": "coast-mercenary-scout-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-scout-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-scout",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-scout-hurt-sheet-v1.png",
+      "sha256": "2523253a3c9425e6c61df4771b170b46ef896e45a2a96aba91e8fe00853d22a9"
+    },
+    {
+      "id": "coast-mercenary-scout-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-scout-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-scout",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-scout-hurt-sheet-v1.png",
+      "sha256": "de2f08d4d18c5760d1ce1014c647c334916dc9a2aeb1cfff729507c45ebf1fff"
+    },
+    {
+      "id": "coast-mercenary-assault-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-assault-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-assault",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-assault-hurt-sheet-v1.png",
+      "sha256": "b790a30ccef2fe42c8fc99d04723319bf8de8dd68df0f148054ce4a573aaac5c"
+    },
+    {
+      "id": "coast-mercenary-assault-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-assault-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-assault",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-assault-hurt-sheet-v1.png",
+      "sha256": "17052ba575c58c2bcf3adf126a12444a916f68e405a89a6de54b6cc14dacdf8c"
+    },
+    {
+      "id": "coast-mercenary-assault-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-assault-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-assault",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-assault-hurt-sheet-v1.png",
+      "sha256": "34f3b59dd99310ab6057170279c3b4931e8f706eace4d524ef98fda9d7f63c21"
+    },
+    {
+      "id": "coast-mercenary-assault-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-assault-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-assault",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-assault-hurt-sheet-v1.png",
+      "sha256": "6430df4c17b7f2b8f6b891dfdf4ebf09e19d69979ad279050eb99a3297781539"
+    },
+    {
+      "id": "coast-mercenary-assault-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-assault-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-assault",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-assault-hurt-sheet-v1.png",
+      "sha256": "9bd0c6b6d4dc184dac906be5420a686fb4b81e72df81819f47dce98cf9a8b383"
+    },
+    {
+      "id": "coast-mercenary-assault-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-assault-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-assault",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-assault-hurt-sheet-v1.png",
+      "sha256": "90e0e10b12e3d224ed1fce99ee1eafbcd618735ff3696b29f5e6a4443d8a0315"
+    },
+    {
+      "id": "coast-mercenary-assault-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-assault-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-assault",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-assault-hurt-sheet-v1.png",
+      "sha256": "248ccd609e6e1a30a38736a56b979c14b518d0b49568f5c7a26a6a563992e344"
+    },
+    {
+      "id": "coast-mercenary-assault-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-assault-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-assault",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-assault-hurt-sheet-v1.png",
+      "sha256": "065f65173a36b106a367619295bae82bc615c1802f88866ed7b886dbc2f33635"
+    },
+    {
+      "id": "coast-mercenary-assault-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-assault-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-assault",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-assault-hurt-sheet-v1.png",
+      "sha256": "469b13780896b00ed119a973b3602bacd65a01f658f8041e387acafadd89908e"
+    },
+    {
+      "id": "coast-mercenary-assault-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-assault-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-assault",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-assault-hurt-sheet-v1.png",
+      "sha256": "85ac8b4f28e4cc4a9d4be80fdbb5ba3365396b0d4f631477ea259793e6fcc4c8"
+    },
+    {
+      "id": "coast-mercenary-support-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-support-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-support",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-support-hurt-sheet-v1.png",
+      "sha256": "c1b9c06b296135443c63ba6996da8d7d4509217cea11f7d07a18e7a5e0330bfa"
+    },
+    {
+      "id": "coast-mercenary-support-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-support-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-support",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-support-hurt-sheet-v1.png",
+      "sha256": "eb0538108323faada3a19d35097941a337b5d59cda2d52bba7b35f9127e19fd3"
+    },
+    {
+      "id": "coast-mercenary-support-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-support-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-support",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-support-hurt-sheet-v1.png",
+      "sha256": "87e01b027c40857379efcea167b1fff715401c4bf878e5bf66bfddcfc0b497fc"
+    },
+    {
+      "id": "coast-mercenary-support-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-support-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-support",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-support-hurt-sheet-v1.png",
+      "sha256": "3114f63176fd5671f3b9a0e672f41044d19275483bc4527cca46918f780cb365"
+    },
+    {
+      "id": "coast-mercenary-support-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-support-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-support",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-support-hurt-sheet-v1.png",
+      "sha256": "fda195db9bf0696656d14fb50d443b549edd0f90e46a454fc77d2714ea37f01c"
+    },
+    {
+      "id": "coast-mercenary-support-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-support-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-support",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-support-hurt-sheet-v1.png",
+      "sha256": "e6fdb1b8357c57985cbe76dc75fceeeb79b8564a980ab19f0986c1fb158d8fe4"
+    },
+    {
+      "id": "coast-mercenary-support-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-support-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-support",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-support-hurt-sheet-v1.png",
+      "sha256": "925e2e49712c6097414b970d1b4ded44b37a387ed239b96ed510173f574a2e38"
+    },
+    {
+      "id": "coast-mercenary-support-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-support-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-support",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-support-hurt-sheet-v1.png",
+      "sha256": "2268a877ba856c604ac573e1acae9735cb99aee074c8fe327abab71dffc9ec9f"
+    },
+    {
+      "id": "coast-mercenary-support-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-mercenary-support-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-support",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/mercenary-support-hurt-sheet-v1.png",
+      "sha256": "06196c92553124e4f53ea52cc708844f6389f494e96658448f9992238eb0a8b3"
+    },
+    {
+      "id": "coast-mercenary-support-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-mercenary-support-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "mercenary-support",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/mercenary-support-hurt-sheet-v1.png",
+      "sha256": "bcf0cbade3546eac38ffc29dcbddc85d5ac64ed74428fc8838e66a24340f7cae"
+    },
+    {
+      "id": "coast-recovery-leader-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-recovery-leader-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "recovery-leader",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/recovery-leader-hurt-sheet-v1.png",
+      "sha256": "954424b6d11e23b3cd3ec81d0a6dbf3d26319d67bc21990222ae1351c262e30c"
+    },
+    {
+      "id": "coast-recovery-leader-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-recovery-leader-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "recovery-leader",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/recovery-leader-hurt-sheet-v1.png",
+      "sha256": "8d4f79ea91ba0dcd71ade961cc6c44ad44c9fad76d214d38c14941dd9f9ea74a"
+    },
+    {
+      "id": "coast-recovery-leader-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-recovery-leader-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "recovery-leader",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/recovery-leader-hurt-sheet-v1.png",
+      "sha256": "db45527ed8a6aa2b75bfbc3eab09b66f6ba4c086fd3d4b982f8c767c16cce2d1"
+    },
+    {
+      "id": "coast-recovery-leader-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-recovery-leader-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "recovery-leader",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/recovery-leader-hurt-sheet-v1.png",
+      "sha256": "2ea83a099848242d71fe175995d8faee041fce16680903e5a96b13ab238ab42b"
+    },
+    {
+      "id": "coast-recovery-leader-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-recovery-leader-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "recovery-leader",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/recovery-leader-hurt-sheet-v1.png",
+      "sha256": "e9eade36176da478385965d16a481bb45dd126b0b3d23822d244f684594efb44"
+    },
+    {
+      "id": "coast-recovery-leader-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-recovery-leader-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "recovery-leader",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/recovery-leader-hurt-sheet-v1.png",
+      "sha256": "e7b71484fb8b17222de71e2ee66176029b5f5656b9a0604d03a3f5e9d6078ba2"
+    },
+    {
+      "id": "coast-recovery-leader-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-recovery-leader-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "recovery-leader",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/recovery-leader-hurt-sheet-v1.png",
+      "sha256": "1b7ebb2ff16c09b153dbe59f89358e97806316de96149bc52255b7c6d9ad27f0"
+    },
+    {
+      "id": "coast-recovery-leader-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-recovery-leader-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "recovery-leader",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/recovery-leader-hurt-sheet-v1.png",
+      "sha256": "cd8eaf9b11a698b60e4f7604591e845199d1b545188108271bb69d40870f3921"
+    },
+    {
+      "id": "coast-recovery-leader-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-recovery-leader-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "recovery-leader",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/recovery-leader-hurt-sheet-v1.png",
+      "sha256": "a90cae63d9c9d62461c9069b3c0b5f0205a056cc681d57c957f06d79378b800e"
+    },
+    {
+      "id": "coast-recovery-leader-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-recovery-leader-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "recovery-leader",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/recovery-leader-hurt-sheet-v1.png",
+      "sha256": "67b5b0677e0b2b14b78c27c6d769422530f7c3d711a40341cb8921e410dc0706"
+    },
+    {
+      "id": "coast-blockade-sentry-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-sentry-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sentry",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-sentry-hurt-sheet-v1.png",
+      "sha256": "ed769070c369362796a5363a19da52bf551764eb5037f32e82fe83f32a446d26"
+    },
+    {
+      "id": "coast-blockade-sentry-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-sentry-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sentry",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-sentry-hurt-sheet-v1.png",
+      "sha256": "ee1bec6ca02f80afbd2760091c1f1c7cc198f2ab8bb05f9eb74b2a007fe35b58"
+    },
+    {
+      "id": "coast-blockade-sentry-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-sentry-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sentry",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-sentry-hurt-sheet-v1.png",
+      "sha256": "cbb555688f3efcf423519825997860e7bdc69a1b28ffbb41444647601967c378"
+    },
+    {
+      "id": "coast-blockade-sentry-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-sentry-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sentry",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-sentry-hurt-sheet-v1.png",
+      "sha256": "37aa1c46c06c79c0c5f417a178db51cc8719a05b07ce8fc2251d41ec18106e9d"
+    },
+    {
+      "id": "coast-blockade-sentry-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-sentry-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sentry",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-sentry-hurt-sheet-v1.png",
+      "sha256": "19ea4b9f2d19c43dd6bc92c4bb5270765cebe13dcc3d87d7f5bde5301118e6e2"
+    },
+    {
+      "id": "coast-blockade-sentry-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-sentry-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sentry",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-sentry-hurt-sheet-v1.png",
+      "sha256": "30edf639b64753a9834ea3e67fd9d3f013f359ccaac052a84dd6c77913ced897"
+    },
+    {
+      "id": "coast-blockade-sentry-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-sentry-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sentry",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-sentry-hurt-sheet-v1.png",
+      "sha256": "ae2a231cb3e6f0e1116b905c1f82d9d57288b252c638e9d8b2ba9951070aeda6"
+    },
+    {
+      "id": "coast-blockade-sentry-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-sentry-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sentry",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-sentry-hurt-sheet-v1.png",
+      "sha256": "81a14d2e9964981852203e24cbd34c644756995b2543093016261f9f18e53b06"
+    },
+    {
+      "id": "coast-blockade-sentry-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-sentry-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sentry",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-sentry-hurt-sheet-v1.png",
+      "sha256": "bc8269beea616b1b8e5ff781291317538ba0e08286b3067f72d29297bb089a21"
+    },
+    {
+      "id": "coast-blockade-sentry-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-sentry-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sentry",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-sentry-hurt-sheet-v1.png",
+      "sha256": "dd9504043c59923480ad25b9d6230c7796a70a35701b0fcc6ed2eb1dee8722e3"
+    },
+    {
+      "id": "coast-blockade-patrol-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-patrol-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-patrol",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-patrol-hurt-sheet-v1.png",
+      "sha256": "cd21e083bdab2a3aa04a748deba22f1a588969913992782e808ce2783f4c4446"
+    },
+    {
+      "id": "coast-blockade-patrol-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-patrol-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-patrol",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-patrol-hurt-sheet-v1.png",
+      "sha256": "25053e1fb342229d382f55073fe05ccbf7d84a5781d69da91176fc2c82dc2d06"
+    },
+    {
+      "id": "coast-blockade-patrol-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-patrol-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-patrol",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-patrol-hurt-sheet-v1.png",
+      "sha256": "12f220e217384ab90722a623c37aeaddba925e553b60db0473e52d2e6f7b972a"
+    },
+    {
+      "id": "coast-blockade-patrol-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-patrol-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-patrol",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-patrol-hurt-sheet-v1.png",
+      "sha256": "885f12d4f61e4392f1785c4134ddb0cd69cebcf40c4f88414db7edbe84e09eba"
+    },
+    {
+      "id": "coast-blockade-patrol-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-patrol-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-patrol",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-patrol-hurt-sheet-v1.png",
+      "sha256": "e7d2efbb94f480bff4ad0eb9a5300e674caa4d2606b710f7435acf93caf62c24"
+    },
+    {
+      "id": "coast-blockade-patrol-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-patrol-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-patrol",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-patrol-hurt-sheet-v1.png",
+      "sha256": "d5ca3d81d30b4b879ade34faa5fa47021033f0f53fd7c7ec8b66b705482c9c5b"
+    },
+    {
+      "id": "coast-blockade-patrol-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-patrol-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-patrol",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-patrol-hurt-sheet-v1.png",
+      "sha256": "aae864f07cf5430f534382a629478dc8c3f90831a750ef43ddcd988060964b20"
+    },
+    {
+      "id": "coast-blockade-patrol-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-patrol-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-patrol",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-patrol-hurt-sheet-v1.png",
+      "sha256": "4de5703595ec45ccbf3519b3783de90dd151cfcb9f35c4ea940568e77f692736"
+    },
+    {
+      "id": "coast-blockade-patrol-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-patrol-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-patrol",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-patrol-hurt-sheet-v1.png",
+      "sha256": "92e6cd30567fbb97b344fcb5ca1396f47626523de179d126b8550b89614188ac"
+    },
+    {
+      "id": "coast-blockade-patrol-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-patrol-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-patrol",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-patrol-hurt-sheet-v1.png",
+      "sha256": "8cadb41b8429e6c339a457528be80346e76a75141646d614328022f54c8eb5c3"
+    },
+    {
+      "id": "coast-blockade-sergeant-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-sergeant-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sergeant",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-sergeant-hurt-sheet-v1.png",
+      "sha256": "45d4291faf265099345a0c77bacd153215b7be613db69ec1e888998aa9bc34b8"
+    },
+    {
+      "id": "coast-blockade-sergeant-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-sergeant-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sergeant",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-sergeant-hurt-sheet-v1.png",
+      "sha256": "9624868c8d80e51af8906e9cee2283c0332fe1f64e5777f6760c4fe50d53ff56"
+    },
+    {
+      "id": "coast-blockade-sergeant-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-sergeant-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sergeant",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-sergeant-hurt-sheet-v1.png",
+      "sha256": "c5a853491c8891efb3f9f64e214384457d41f21a617a5607bdb5a3eb02f4018f"
+    },
+    {
+      "id": "coast-blockade-sergeant-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-sergeant-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sergeant",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-sergeant-hurt-sheet-v1.png",
+      "sha256": "90c733e5ae1afd4ca99fa0e960d82d8a222b50cd9fc890a25de4b316e47f804e"
+    },
+    {
+      "id": "coast-blockade-sergeant-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-sergeant-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sergeant",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-sergeant-hurt-sheet-v1.png",
+      "sha256": "533081614e6154f03f8dc370c0da113c0ca7dad09b4bef1f4ee91de8cb8cd688"
+    },
+    {
+      "id": "coast-blockade-sergeant-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-sergeant-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sergeant",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-sergeant-hurt-sheet-v1.png",
+      "sha256": "d870d366fdb90cde4e7b9956e0e52e07948db6b63db276510f0b404f9ceb3246"
+    },
+    {
+      "id": "coast-blockade-sergeant-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-sergeant-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sergeant",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-sergeant-hurt-sheet-v1.png",
+      "sha256": "ac05360d19810e69cef7c5814a51d6015423d76502abbb9bf610c99fc37e183e"
+    },
+    {
+      "id": "coast-blockade-sergeant-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-sergeant-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sergeant",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-sergeant-hurt-sheet-v1.png",
+      "sha256": "104bc1cb9f3154ff89ff813c9767e6be6a46041152df109be7e1979c8d601e4d"
+    },
+    {
+      "id": "coast-blockade-sergeant-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-blockade-sergeant-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sergeant",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/blockade-sergeant-hurt-sheet-v1.png",
+      "sha256": "b5938f45b9302d1793b990b1c8829ee08edd25983a5a70d107e92da5e52bd9e5"
+    },
+    {
+      "id": "coast-blockade-sergeant-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-blockade-sergeant-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "blockade-sergeant",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/blockade-sergeant-hurt-sheet-v1.png",
+      "sha256": "dcafe65ae81d8123a4b8e937781d38d63860f3cb90a7238e0c12b0d5f431fd7f"
+    },
+    {
+      "id": "coast-salt-dazed-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-salt-dazed-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-dazed",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-dazed-hurt-sheet-v1.png",
+      "sha256": "e4e1737a2564498bb77213a209bc3cbc39111c5e6ca2f398645a795742c4dc6c"
+    },
+    {
+      "id": "coast-salt-dazed-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-salt-dazed-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-dazed",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-dazed-hurt-sheet-v1.png",
+      "sha256": "2475d5f0da7ac3c6afad3a768057d9ac12a2952861b16825c7edad2192a263b4"
+    },
+    {
+      "id": "coast-salt-dazed-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-salt-dazed-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-dazed",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-dazed-hurt-sheet-v1.png",
+      "sha256": "658847e35825dfb288e7f59cfbabf8fcef1306e839871fb615e0cc7583ad7e93"
+    },
+    {
+      "id": "coast-salt-dazed-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-salt-dazed-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-dazed",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-dazed-hurt-sheet-v1.png",
+      "sha256": "6179e4a7a95ed391dd82a807abc1265af94be109aed797211dae2fb8250ce00b"
+    },
+    {
+      "id": "coast-salt-dazed-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-salt-dazed-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-dazed",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-dazed-hurt-sheet-v1.png",
+      "sha256": "c309a491d485979dea833fcabe10cf0c3bb6dc5f90e0c104cab89bbeb3117d8b"
+    },
+    {
+      "id": "coast-salt-dazed-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-salt-dazed-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-dazed",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-dazed-hurt-sheet-v1.png",
+      "sha256": "95ff4c3c655ec5ac04b344342dcafd3bb4e94cee4edabbd608cc5894581808b6"
+    },
+    {
+      "id": "coast-salt-dazed-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-salt-dazed-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-dazed",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-dazed-hurt-sheet-v1.png",
+      "sha256": "4e9a3fde82cdfa3c54f24c2347fc5912f791e93056b4b7dc3421b8418131fcbc"
+    },
+    {
+      "id": "coast-salt-dazed-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-salt-dazed-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-dazed",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-dazed-hurt-sheet-v1.png",
+      "sha256": "a0f59bb9b69460342ab1c496440210fd01ee2c71b1e6d755d421b593f3814dbb"
+    },
+    {
+      "id": "coast-salt-dazed-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-salt-dazed-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-dazed",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-dazed-hurt-sheet-v1.png",
+      "sha256": "9c9d495d490f8c7427a4e69bbe42278820a5dc338e85047d7a0bdfe6038da3a2"
+    },
+    {
+      "id": "coast-salt-dazed-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-salt-dazed-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-dazed",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-dazed-hurt-sheet-v1.png",
+      "sha256": "88948e03a061d921e60764952606f887838df1c94d001b36642231ae947ba46e"
+    },
+    {
+      "id": "coast-tide-chaser-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-tide-chaser-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-chaser",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tide-chaser-hurt-sheet-v1.png",
+      "sha256": "e267564b74453d873c1b594b6e0a2a71d63fc7c1edadbc31b9e482fbdc7e942a"
+    },
+    {
+      "id": "coast-tide-chaser-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-tide-chaser-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-chaser",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tide-chaser-hurt-sheet-v1.png",
+      "sha256": "57cbcedc9a42e41f88dad710f1bb5e3fec17aaf2581843ba284b8366b4b31ea7"
+    },
+    {
+      "id": "coast-tide-chaser-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-tide-chaser-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-chaser",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tide-chaser-hurt-sheet-v1.png",
+      "sha256": "1c9a022982cac69152290284ab095d9487cccfa7cd664f9e67f6dc5252eafa18"
+    },
+    {
+      "id": "coast-tide-chaser-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-tide-chaser-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-chaser",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tide-chaser-hurt-sheet-v1.png",
+      "sha256": "bd1b11f549871a7beac1864daa3d76726786e9c94ce63b034822d86242395671"
+    },
+    {
+      "id": "coast-tide-chaser-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-tide-chaser-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-chaser",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tide-chaser-hurt-sheet-v1.png",
+      "sha256": "e61f0294d38c1bb248d6b84477f07d05660c4eb049861a88668aacaeea574750"
+    },
+    {
+      "id": "coast-tide-chaser-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-tide-chaser-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-chaser",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tide-chaser-hurt-sheet-v1.png",
+      "sha256": "d618dd3b271c1ea73a50f8e4a1c1b5835924c8377f76a3a6c7a2948df10b1a7f"
+    },
+    {
+      "id": "coast-tide-chaser-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-tide-chaser-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-chaser",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tide-chaser-hurt-sheet-v1.png",
+      "sha256": "06068d00f248fa04050ea26af43af69ff62f1c97afe8b3f65fc18e1fb54938dd"
+    },
+    {
+      "id": "coast-tide-chaser-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-tide-chaser-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-chaser",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tide-chaser-hurt-sheet-v1.png",
+      "sha256": "2f4c74c81b1a44140408ae4d72acd5b10b472a6426ff99e3a326cee13ff6de20"
+    },
+    {
+      "id": "coast-tide-chaser-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-tide-chaser-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-chaser",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tide-chaser-hurt-sheet-v1.png",
+      "sha256": "b0165cbc666cade26970f9ca36f48124b2dd2e43d268cca09e3c39075ef4bc91"
+    },
+    {
+      "id": "coast-tide-chaser-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-tide-chaser-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tide-chaser",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tide-chaser-hurt-sheet-v1.png",
+      "sha256": "8d1a67aae61cbf49abe095c7e0417192dbd1cf8f4837042fdc28dbd8d6c3da58"
+    },
+    {
+      "id": "coast-salt-hulk-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-salt-hulk-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-hulk",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-hulk-hurt-sheet-v1.png",
+      "sha256": "c34180dfc3d8fbe0afa173ebcbc0d00073825749f93eaa243fe554a7e635f0e0"
+    },
+    {
+      "id": "coast-salt-hulk-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-salt-hulk-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-hulk",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-hulk-hurt-sheet-v1.png",
+      "sha256": "3f0c9142fed0ad465fc1b59fdce4fd8b6637b4ea8dd53474330983a3cccf71c2"
+    },
+    {
+      "id": "coast-salt-hulk-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-salt-hulk-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-hulk",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-hulk-hurt-sheet-v1.png",
+      "sha256": "4e7c1c7c78275714fed841480e85ae82d45f3ff83ee1f9920ed13927c4840688"
+    },
+    {
+      "id": "coast-salt-hulk-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-salt-hulk-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-hulk",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-hulk-hurt-sheet-v1.png",
+      "sha256": "5683ac67dc7c3ae2d52bcac8048a000623bf3de8b1cc8be50f611b9e33601603"
+    },
+    {
+      "id": "coast-salt-hulk-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-salt-hulk-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-hulk",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-hulk-hurt-sheet-v1.png",
+      "sha256": "76e925b6b3ff45fafede6b5ad770875ec6685cea2aa52911439170528ce71a63"
+    },
+    {
+      "id": "coast-salt-hulk-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-salt-hulk-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-hulk",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-hulk-hurt-sheet-v1.png",
+      "sha256": "efe853ac6e39af88e86a7ea32ba520187279a7816b266243bd31a8e371fb5f11"
+    },
+    {
+      "id": "coast-salt-hulk-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-salt-hulk-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-hulk",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-hulk-hurt-sheet-v1.png",
+      "sha256": "2b9ee01b474bd894cad2e6e6e60ebc376a10e3452c326c60a61c62cac88c2aa9"
+    },
+    {
+      "id": "coast-salt-hulk-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-salt-hulk-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-hulk",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-hulk-hurt-sheet-v1.png",
+      "sha256": "62a602ea3a893e58fd209d6c8837ae3074e9cbd31887ee90f75bf5840126ee91"
+    },
+    {
+      "id": "coast-salt-hulk-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-salt-hulk-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-hulk",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/salt-hulk-hurt-sheet-v1.png",
+      "sha256": "21b2764ba8f4ae8acdcb8732f465ceb79176c61a260cf59e2719b6a48f146ba0"
+    },
+    {
+      "id": "coast-salt-hulk-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-salt-hulk-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "salt-hulk",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/salt-hulk-hurt-sheet-v1.png",
+      "sha256": "8cda6b5b2901abcbc48740112e064b684ea8cd505cdfc844b6f69dd957548a8b"
+    },
+    {
+      "id": "coast-tidal-crab-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-tidal-crab-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tidal-crab",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tidal-crab-hurt-sheet-v1.png",
+      "sha256": "6cffd07b6cdea025becfcf818671d9ff52ad02fd9bd961438388d2182e83d74b"
+    },
+    {
+      "id": "coast-tidal-crab-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-tidal-crab-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tidal-crab",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tidal-crab-hurt-sheet-v1.png",
+      "sha256": "dd3d9b4c028bdf3342b92bd4ccce939581ce81654a4f6db0ce1226bc25daeb1c"
+    },
+    {
+      "id": "coast-tidal-crab-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-tidal-crab-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tidal-crab",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tidal-crab-hurt-sheet-v1.png",
+      "sha256": "6ce866a6c312ef89a473300da9e2701552dd2bc847230412489c7d38cd4d022c"
+    },
+    {
+      "id": "coast-tidal-crab-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-tidal-crab-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tidal-crab",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tidal-crab-hurt-sheet-v1.png",
+      "sha256": "c2a66686946d884ed498a0f6034d115c0746e8be2d2b533ad8d77135ff7289e5"
+    },
+    {
+      "id": "coast-tidal-crab-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-tidal-crab-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tidal-crab",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tidal-crab-hurt-sheet-v1.png",
+      "sha256": "4560621902dc331e17e348583e3c38319c63aba71543740bffbcdbd5f0a35098"
+    },
+    {
+      "id": "coast-tidal-crab-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-tidal-crab-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tidal-crab",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tidal-crab-hurt-sheet-v1.png",
+      "sha256": "4dab83e9984a024acb4334ee473811203bff3c61c8c32fa41e6d2b6dff0eaaa7"
+    },
+    {
+      "id": "coast-tidal-crab-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-tidal-crab-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tidal-crab",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tidal-crab-hurt-sheet-v1.png",
+      "sha256": "cb04963a0af22bf8ccae1423dd778358ac096c93bc5e41501d8506b3b8afb597"
+    },
+    {
+      "id": "coast-tidal-crab-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-tidal-crab-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tidal-crab",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tidal-crab-hurt-sheet-v1.png",
+      "sha256": "cc6ef4160d0e2032fedd5b91971fb41af6ec3c0ebefdeaaa4b10d653c2908665"
+    },
+    {
+      "id": "coast-tidal-crab-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-tidal-crab-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tidal-crab",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/tidal-crab-hurt-sheet-v1.png",
+      "sha256": "10d53063b08b5a12751a397ba500cbd4e331648b5bd8f6472c915524f17cacba"
+    },
+    {
+      "id": "coast-tidal-crab-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-tidal-crab-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "tidal-crab",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/tidal-crab-hurt-sheet-v1.png",
+      "sha256": "3cdb66262fff7867c247007943c2c4ebd9139396440cff76cba9c409d1c9a141"
+    },
+    {
+      "id": "coast-saltback-dog-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-saltback-dog-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "saltback-dog",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/saltback-dog-hurt-sheet-v2.png",
+      "sha256": "a9651bc85c81ed3be4f8cf1750266f4d3b7f4350aefe68af861a84ec0dca6a1d"
+    },
+    {
+      "id": "coast-saltback-dog-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-saltback-dog-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "saltback-dog",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/saltback-dog-hurt-sheet-v2.png",
+      "sha256": "f582f2ed9837f1630f7a4c25473790ec63a322a1b9f245b4a453dd68983ff37a"
+    },
+    {
+      "id": "coast-saltback-dog-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-saltback-dog-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "saltback-dog",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/saltback-dog-hurt-sheet-v2.png",
+      "sha256": "14e765122b98e3062e70fa04783f5f80c2d6e1f8b9e9551f13a2a3124276228e"
+    },
+    {
+      "id": "coast-saltback-dog-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-saltback-dog-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "saltback-dog",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/saltback-dog-hurt-sheet-v2.png",
+      "sha256": "a05dbcb9f2425428582233c78149f6bf351d4f2d204e40dc04e93f437cb0b156"
+    },
+    {
+      "id": "coast-saltback-dog-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-saltback-dog-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "saltback-dog",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/saltback-dog-hurt-sheet-v2.png",
+      "sha256": "10744e1e0a7b645900b72d7b12cb70b67b161a33dcb13ca857f8fa4b2aa1072f"
+    },
+    {
+      "id": "coast-saltback-dog-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-saltback-dog-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "saltback-dog",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/saltback-dog-hurt-sheet-v2.png",
+      "sha256": "31e4179043ac21777cfcccaa42d54666596d1159f3cabb43928918c2c31b03e9"
+    },
+    {
+      "id": "coast-saltback-dog-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-saltback-dog-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "saltback-dog",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/saltback-dog-hurt-sheet-v2.png",
+      "sha256": "e6b4ea6c1503e7740ab5ad4aeeba734b76a9621629adbf2263dad7e1d9beba2d"
+    },
+    {
+      "id": "coast-saltback-dog-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-saltback-dog-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "saltback-dog",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/saltback-dog-hurt-sheet-v2.png",
+      "sha256": "19a29330d83ba9823d69fe43a5f2eea0ae403e543888afb7ab275e3e8efcfdfd"
+    },
+    {
+      "id": "coast-saltback-dog-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-saltback-dog-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "saltback-dog",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/saltback-dog-hurt-sheet-v2.png",
+      "sha256": "8da339e5d3f9f95fa1fbb923aca592ed815bbd00e8eb596a24e8af848809b224"
+    },
+    {
+      "id": "coast-saltback-dog-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-saltback-dog-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "saltback-dog",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/saltback-dog-hurt-sheet-v2.png",
+      "sha256": "eabd6a9203ecf77e330601a603ec2c3072f7e712b875921ed3db48579e687e2b"
+    },
+    {
+      "id": "coast-sac-spitter-body-e-f5-v1",
+      "file": "assets/coast/poses/coast-sac-spitter-body-e-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "sac-spitter",
+      "dir": "E",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/sac-spitter-hurt-sheet-v2.png",
+      "sha256": "1376cae21d6f792570b984378f1e15f7fe62d144a0f78643ecd96e6e2c647204"
+    },
+    {
+      "id": "coast-sac-spitter-body-e-f6-v1",
+      "file": "assets/coast/poses/coast-sac-spitter-body-e-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "sac-spitter",
+      "dir": "E",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/sac-spitter-hurt-sheet-v2.png",
+      "sha256": "80b087ad471c9e95aa882b550808fde9f7602d2d9dbd55c8216f01d70854599b"
+    },
+    {
+      "id": "coast-sac-spitter-body-se-f5-v1",
+      "file": "assets/coast/poses/coast-sac-spitter-body-se-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "sac-spitter",
+      "dir": "SE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/sac-spitter-hurt-sheet-v2.png",
+      "sha256": "cb9aa493a864499c88d1c8129156efccafc37bce4e3ed18e82707abb0a3d6803"
+    },
+    {
+      "id": "coast-sac-spitter-body-se-f6-v1",
+      "file": "assets/coast/poses/coast-sac-spitter-body-se-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "sac-spitter",
+      "dir": "SE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/sac-spitter-hurt-sheet-v2.png",
+      "sha256": "83bdb6374a0c7fe3ea855276da6a99c09ac6fc06ca7721cde9725f1a0cd311ea"
+    },
+    {
+      "id": "coast-sac-spitter-body-s-f5-v1",
+      "file": "assets/coast/poses/coast-sac-spitter-body-s-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "sac-spitter",
+      "dir": "S",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/sac-spitter-hurt-sheet-v2.png",
+      "sha256": "5ae193255dc46e18f7e9bf7577540c98c716b8b606f905ee97fb34c11a090355"
+    },
+    {
+      "id": "coast-sac-spitter-body-s-f6-v1",
+      "file": "assets/coast/poses/coast-sac-spitter-body-s-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "sac-spitter",
+      "dir": "S",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/sac-spitter-hurt-sheet-v2.png",
+      "sha256": "27f4fa642847b450ff3787a9facead012a97f5b659ade163e465db7befdc4d2f"
+    },
+    {
+      "id": "coast-sac-spitter-body-ne-f5-v1",
+      "file": "assets/coast/poses/coast-sac-spitter-body-ne-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "sac-spitter",
+      "dir": "NE",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/sac-spitter-hurt-sheet-v2.png",
+      "sha256": "e44ebf1f035a1dff03976017c28f769ee446804e79cbdb289031f984872be8e5"
+    },
+    {
+      "id": "coast-sac-spitter-body-ne-f6-v1",
+      "file": "assets/coast/poses/coast-sac-spitter-body-ne-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "sac-spitter",
+      "dir": "NE",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/sac-spitter-hurt-sheet-v2.png",
+      "sha256": "e19b0bb8476b8dad429b10878f94450fa89f1ab560f1244010dd127f67183196"
+    },
+    {
+      "id": "coast-sac-spitter-body-n-f5-v1",
+      "file": "assets/coast/poses/coast-sac-spitter-body-n-f5-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "sac-spitter",
+      "dir": "N",
+      "frameIndex": 5,
+      "pose": "hurt",
+      "sheet": "assets/hit-feel/sources/sac-spitter-hurt-sheet-v2.png",
+      "sha256": "9ebee49d551a6f2342d21cdeee4ededf5a2cc519d97d191712f766deacee8feb"
+    },
+    {
+      "id": "coast-sac-spitter-body-n-f6-v1",
+      "file": "assets/coast/poses/coast-sac-spitter-body-n-f6-v1.png",
+      "w": 32,
+      "h": 48,
+      "anchor": [
+        16,
+        48
+      ],
+      "kind": "sac-spitter",
+      "dir": "N",
+      "frameIndex": 6,
+      "pose": "recovery",
+      "sheet": "assets/hit-feel/sources/sac-spitter-hurt-sheet-v2.png",
+      "sha256": "a73566afcf1d5f0d3cdc2ab301deef9b6304cc0808ed87e8f0b6122909a33aea"
     }
   ]
 }

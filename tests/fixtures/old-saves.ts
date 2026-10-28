@@ -1,10 +1,11 @@
 /**
  * Saves as the clients before gun instances wrote them (profile v2, session records v3 to v7), made from current ones by
  * taking away exactly what the migration adds (src/gunsmith/migrate.ts): every `gun` state, the equipped slots' `gun`
- * and `weaponUid`, `gunsBackup`, and the versions. Real old bytes are frozen in gunsmith-v5-saves.json; these helpers
- * are for tests that need an old save of their own shape (a legacy key, a v4 backup with a live v2 raid ...).
+ * and `weaponUid`, `gunsBackup`, and the versions; goods those clients never had stand in as older ones (oldGoods).
+ * Real old bytes are frozen in gunsmith-v5-saves.json; these helpers are for tests that need an old save of their own
+ * shape (a legacy key, a v4 backup with a live v2 raid ...).
  */
-import type * as D from '../../src/domain';
+import * as D from '../../src/domain';
 import type { SessionRecord } from '../../src/recovery-store';
 
 /** Every object that holds a gun or could: items and ground loot (an id and a qty) and equipped slots (a weapon and ammoRelief). */
@@ -25,8 +26,23 @@ export function withoutGuns<T>(value: T): T {
     for (const slot of h.slots) { delete slot.weaponUid; delete slot.gun; }
     return copy;
 }
+/**
+ * In place: goods no client before gun instances could hold become stand-ins from the share they were carved from (#28
+ * M2-13 deals them out in raids and sells some): the G17 a pistol and the M4A1 a carbine (guns), an attachment a watch
+ * (the gun or valuable share). Each keeps its uid and its place, and is no larger than before. Real old saves hold none,
+ * so their bytes come back as stored; a test that wants such goods refused puts them in after this.
+ */
+function oldGoods(value: unknown): void {
+    for (const item of holders(value).items) {
+        const id = item.id === 'gb17' ? 'pistol' : item.id === 'mb4a1' ? 'carbine' : D.isAttachment(item.id) ? 'watch' : null;
+        if (id) { item.id = id; item.qty = 1; }
+    }
+}
 /** The v2 profile an old client would have stored for this one. */
-export const oldProfile = (profile: D.SaveDataV1): any => ({ ...withoutGuns(profile), version: 2 });
+export function oldProfile(profile: D.SaveDataV1): any {
+    const copy = withoutGuns(profile); oldGoods(copy);
+    return { ...copy, version: 2 };
+}
 /**
  * The record an old client would have stored for this v8 one: v3 without an expansion, v4 with a v1/v2 one, v5 with a v3
  * one, v6 and v7 as v4 and v5 with enemy rules on (it holds enemyBackup), or `version` when a test relabels it on
@@ -34,6 +50,7 @@ export const oldProfile = (profile: D.SaveDataV1): any => ({ ...withoutGuns(prof
  */
 export function oldRecord(record: SessionRecord, version?: 3 | 4 | 5 | 6 | 7): any {
     const copy: any = withoutGuns(record), enemies = copy.enemyBackup !== undefined;
+    oldGoods(copy);
     delete copy.gunsBackup; copy.profile.version = 2;
     copy.version = version ?? (!copy.expansion ? 3 : (copy.expansion.version === 3 ? 5 : 4) + (enemies ? 2 : 0));
     return copy;

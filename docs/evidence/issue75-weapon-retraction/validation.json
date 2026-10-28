@@ -1,0 +1,45 @@
+{
+  "base": "974a3a8d1ad2a7662c3a828226295d6c9b31eb64",
+  "htmlSha256": "e3721554484db962221a03f11a9d7bacf48c7005a82129017ba294f3e73179a7",
+  "browser": "153.0.8010.12",
+  "entry": "file:///workspace/weapon-retraction-prototype/dist/index.html?test=1&entry=tabs",
+  "commentOnlyRebuildByteIdentityVerified": true,
+  "verifiedAt": "2026-10-25T05:19:14.070674+00:00",
+  "domain": {
+    "passed": 880,
+    "failed": 0,
+    "command": "node --import tsx --test tests/*.test.ts"
+  },
+  "ciGuards": {
+    "passed": 64,
+    "failed": 0,
+    "command": "node --test scripts/ci/*.test.mjs"
+  },
+  "finalSourceAndDocsGuards": {
+    "passed": 6,
+    "failed": 0
+  },
+  "finalTypeBuildPackage": true,
+  "AB": {
+    "passed": 12,
+    "failed": 0,
+    "report": "ab-report.json",
+    "metadataAttachedAfterRun": true
+  },
+  "S1": {
+    "passed": 10,
+    "failed": 0,
+    "report": "shooting-report.json",
+    "startedAt": "2026-10-25T05:05:57.814Z",
+    "finishedAt": "2026-10-25T05:17:56.930Z",
+    "command": "node scripts/shooting-test.mjs --report=weapon-retraction-s1",
+    "entryArgument": "dist/index.html"
+  },
+  "untested": [
+    "human dynamic feel",
+    "real devices",
+    "final visual acceptance",
+    "audio listening"
+  ],
+  "generatedFilesTracked": false
+}

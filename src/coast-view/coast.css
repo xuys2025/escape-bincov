@@ -56,7 +56,12 @@ html.mobile[data-coast-sample] #toast { bottom: calc(76px + var(--safe-bottom, 0
 .cs-breath i b { display: block; width: 0; height: 100%; background: linear-gradient(#e7c873 0 40%, #b08d3c 40%); }
 .cs-breath.full i b { background: linear-gradient(#fbe7a4 0 40%, #e0bd62 40%); }
 .cs-breath small { min-width: 5.8em; font-size: inherit; color: #cfc6b2; font-variant-numeric: tabular-nums; white-space: nowrap; text-align: right; }
-.cs-heal kbd, .cs-keys kbd { display: inline-block; min-width: 16px; padding: 0 4px; margin-right: 2px; background: #3a372f; color: #f0e3bd; border: 1px solid #5a554a; font: inherit; font-size: 13px; line-height: 16px; text-align: center; }
+.cs-heal kbd, .cs-keys kbd, .cs-dev kbd { display: inline-block; min-width: 16px; padding: 0 4px; margin-right: 2px; background: #3a372f; color: #f0e3bd; border: 1px solid #5a554a; font: inherit; font-size: 13px; line-height: 16px; text-align: center; }
+/* The gun's device switches (#28 M2-03): one line under the magazine, only for a gun with a device. */
+.cs-dev { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 2px 12px; margin-top: 3px; padding-top: 4px; border-top: 1px solid #3a372f; font-size: 14px; line-height: 18px; color: var(--cs-muted); }
+.cs-dev[hidden] { display: none; }
+.cs-dev span { white-space: nowrap; }
+.cs-dev .on { color: #f3d98a; }
 .cs-keys { position: absolute; left: 12px; bottom: 12px; padding: 4px 10px; font-size: 14px; line-height: 20px; color: #cfc6b2; }
 .cs-clock { position: absolute; left: 50%; top: 8px; transform: translateX(-50%); display: grid; justify-items: center; padding: 3px 14px 4px; font-size: 20px; line-height: 22px; color: #f3e8c8; font-variant-numeric: tabular-nums; }
 .cs-clock small { font-size: 12px; color: #e0a070; font-family: "Microsoft YaHei", sans-serif; }
@@ -99,6 +104,7 @@ html.mobile[data-coast-sample] #toast { bottom: calc(76px + var(--safe-bottom, 0
 .coast-sample.touch .cs-touch { display: flex; }
 .coast-sample.touch.upright .cs-touch { display: none; }
 .cs-touch button { min-width: 60px; min-height: 48px; background: #1b1a17cc; color: #f0e3bd; border-color: #c9a65e99; }
+.cs-touch button.on { background: #3d3524cc; border-color: #f3d98a; color: #fff3cf; }
 /* Phones have no keys: the medical shortcut shows no Q. */
 .coast-sample.touch .cs-heal kbd { display: none; }
 .coast-sample.touch .cs-cross, .coast-sample.touch .cs-cone { display: none; }
@@ -116,6 +122,7 @@ html.mobile[data-coast-sample] #toast { bottom: calc(76px + var(--safe-bottom, 0
   .cs-arms { grid-template-columns: 32px auto; min-width: 0; padding: 3px 8px 3px 4px; } .cs-arms img { width: 32px; height: 32px; }
   .cs-arms-text b { font-size: 20px; } .cs-arms-text span, .cs-arms-text small, .cs-heal { font-size: 12px; }
   .cs-crit { gap: 2px; margin-top: 2px; padding-top: 3px; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 12px; line-height: 14px; }
+  .cs-dev { gap: 2px 8px; margin-top: 2px; padding-top: 3px; font-family: "Microsoft YaHei", "PingFang SC", sans-serif; font-size: 12px; line-height: 14px; }
   .cs-breath i { min-width: 32px; height: 4px; }
   .cs-meter span { width: 2.4em; } .cs-bar { height: 6px; } .cs-bar.thin { height: 4px; }
   .cs-clock { font-size: 14px; }
@@ -153,6 +160,15 @@ html.mobile[data-coast-sample] #toast { bottom: calc(76px + var(--safe-bottom, 0
 .cs-split { display: inline-flex; align-items: center; gap: 4px; font-size: 16px; }
 .cs-split input { width: 3.5em; font: inherit; background: #2b2a26; color: var(--cs-text); border: 1px solid var(--cs-line); padding: 2px 4px; }
 .cs-inv-foot { margin-top: 8px; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; color: var(--cs-muted); }
+/* Primary-weapon slot (#26 F15): a drop target above the safe, styled like the grid cells beside it. */
+.cs-slot { display: grid; justify-items: center; gap: 2px; padding: 6px 8px; background: #0d1815; border: 1px solid #5d6e50; cursor: pointer; user-select: none; font-family: "Microsoft YaHei", sans-serif; font-size: 12px; line-height: 16px; color: var(--cs-muted); }
+.cs-slot .inventory-art { position: static; }
+.cs-slot b { font-weight: 400; font-size: 14px; line-height: 18px; color: #dce3c7; }
+.cs-slot.empty { border-style: dashed; }
+.cs-slot:hover, .cs-slot.ready { border-color: #b9c58e; background: #1b2a20; }
+.cs-slot.ready { box-shadow: 0 0 0 1px #dae4ad inset; }
+.cs-slot.over { border-color: #dae4ad; background: #2c3d2a; box-shadow: 0 0 0 2px #dae4ad66; }
+.cs-slot.over.invalid { border-color: #ce9672; background: #3a2721; box-shadow: 0 0 0 2px #ce967266; }
 .cs-place-bar { margin-bottom: 8px; }
 .cs-guide { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; margin: 0 0 10px; }
 .cs-guide kbd { display: inline-block; min-width: 7em; margin-right: 8px; padding: 0 4px; background: #3a372f; color: #f0e3bd; border: 1px solid #5a554a; font: inherit; font-size: 13px; line-height: 18px; }

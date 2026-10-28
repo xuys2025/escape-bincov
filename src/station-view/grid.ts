@@ -1,5 +1,5 @@
 import * as D from '../domain';
-import { itemArt, itemArtSize } from './items';
+import { MODIFIED_MARK, itemPicture } from '../art/item-images';
 import type { Scope } from '../coast-view/scope';
 import { esc } from '../html';
 
@@ -9,10 +9,10 @@ export function gridHtml(inv: D.Inventory, source: string, cell: number, selecte
   const items = inv.items.map(i => {
     const d = D.ITEMS[i.id], size = D.itemSize(i), w = size.w * cell, h = size.h * cell;
     // The game's artwork at the largest whole scale that fits the cell box above the label (rotated items turn the art).
-    const [aw0, ah0] = itemArtSize(i.id), boxW = w - 6, boxH = h - (cell >= 40 ? 15 : 11);
+    const boxW = w - 6, boxH = h - (cell >= 40 ? 15 : 11), pic = itemPicture(i, boxW, boxH, !!i.rotated), aw0 = pic.w, ah0 = pic.h;
     const art = Math.max(1, Math.floor(Math.min(boxW / (i.rotated ? ah0 : aw0), boxH / (i.rotated ? aw0 : ah0))));
-    const img = `<img alt="" draggable="false" src="${itemArt(i.id)}" style="width:${aw0 * art}px;height:${ah0 * art}px;transform:translate(-50%,-50%)${i.rotated ? ' rotate(90deg)' : ''}">`;
-    return `<div class="item k-${d.kind}${selected === i.uid ? ' sel' : ''}${i.relief ? ' relief' : ''}" data-uid="${i.uid}" data-src="${source}" tabindex="0" role="button" aria-label="${esc(d.name)} × ${i.qty}" title="${esc(d.name)} × ${i.qty}" style="left:${i.x * cell}px;top:${i.y * cell}px;width:${w}px;height:${h}px"><span class="art">${img}</span><span class="lbl">${esc(d.short || d.name)}</span>${i.qty > 1 ? `<span class="qty">${i.qty}</span>` : ''}</div>`;
+    const img = `<img alt="" draggable="false" src="${pic.url}" style="width:${aw0 * art}px;height:${ah0 * art}px;transform:translate(-50%,-50%)${i.rotated ? ' rotate(90deg)' : ''}">`;
+    return `<div class="item k-${d.kind}${selected === i.uid ? ' sel' : ''}${i.relief ? ' relief' : ''}" data-uid="${i.uid}" data-src="${source}" tabindex="0" role="button" aria-label="${esc(d.name)} × ${i.qty}" title="${esc(d.name)} × ${i.qty}" style="left:${i.x * cell}px;top:${i.y * cell}px;width:${w}px;height:${h}px"><span class="art">${img}</span>${pic.modified ? MODIFIED_MARK : ''}<span class="lbl">${esc(d.short || d.name)}</span>${i.qty > 1 ? `<span class="qty">${i.qty}</span>` : ''}</div>`;
   }).join('');
   return `<div class="grid" data-grid="${source}" data-cell="${cell}" style="width:${inv.w * cell}px;height:${inv.h * cell}px;--cell:${cell}px">${items}<div class="preview" hidden></div>${!inv.items.length && opts.empty ? `<div class="empty">${esc(opts.empty)}</div>` : ''}</div>`;
 }

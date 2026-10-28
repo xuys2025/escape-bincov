@@ -18,6 +18,21 @@ function textures(sample, path) {
   record(sample, path); record(sample.objects, `${path}.objects`);
   keys(sample.objects.textures, `${path}.objects.textures`);
 }
+function managedRows(sample, path, selectedTable) {
+  const rows = array(sample.objects.rows, path), seen = new Set(), selected = [];
+  for (const [index, row] of rows.entries()) {
+    const p = `${path}[${index}]`; record(row, p);
+    // table selects the population being audited; an absent table must not silently disappear in filter().
+    requireField(typeof row.table === 'string' && row.table.length > 0, `${p}.table`, 'a nonempty table name');
+    if (selectedTable && row.table !== selectedTable) continue;
+    selected.push(row);
+    requireField(typeof row.key === 'string', `${p}.key`, 'a string key');
+    const key = JSON.stringify([row.table, row.key]);
+    requireField(!seen.has(key), `${p}.key`, 'a unique key within its table'); seen.add(key);
+    boolean(row.live, `${p}.live`);
+  }
+  return selected;
+}
 function roundRows(report, path, complete) {
   const rows = array(report.rows, `${path}.rows`);
   requireField(complete ? rows.length === 60 : rows.length > 0, `${path}.rows`, complete ? 'exactly 60 rounds' : 'at least one round');
@@ -62,10 +77,16 @@ export function validateResourceSummaryReport(report, mode) {
     const p = `${path}.rows[${index}]`; textures(row, p); identity(row.objects.rendererId, `${p}.objects.rendererId`);
     const current = counts(row, p);
     for (const name of names) requireField(current.has(name), `${p}.counts.tables.tables`, `baseline table ${name}`);
-    for (const [i, item] of array(row.objects.rows, `${p}.objects.rows`).entries()) { record(item, `${p}.objects.rows[${i}]`); boolean(item.live, `${p}.objects.rows[${i}].live`); }
+    managedRows(row, `${p}.objects.rows`);
     if (mode !== 'context') release(row.release, `${p}.release`);
     if (mode === 'shared') { quad(row.objects.geometries, '0', `${p}.objects.geometries`); for (const key of ['0', '1', '2']) quad(row.objects.buffers, key, `${p}.objects.buffers`); }
-    if (row.action?.freed) for (const key of ['frames', 'sources']) for (const [i, value] of array(row.action.freed[key], `${p}.action.freed.${key}`).entries()) boolean(value, `${p}.action.freed.${key}[${i}]`);
+    if (row.action?.freed) {
+      record(row.action.freed, `${p}.action.freed`);
+      // These observations are copied unchanged, not interpreted as a release verdict or validated recursively.
+      requireField(Object.hasOwn(row.action.freed, 'scene'), `${p}.action.freed.scene`, 'a recorded scene observation (null is allowed)');
+      requireField(Object.hasOwn(row.action, 'parked'), `${p}.action.parked`, 'a recorded parked observation');
+      for (const key of ['frames', 'sources']) for (const [i, value] of array(row.action.freed[key], `${p}.action.freed.${key}`).entries()) boolean(value, `${p}.action.freed.${key}[${i}]`);
+    }
   }
   for (const key of ['errors', 'frameAudit', 'external', 'strictFailures', 'ownershipFailures']) array(report[key], `${path}.${key}`);
   return report;
@@ -82,13 +103,16 @@ export function validateResourceSlotReport(report) {
   const rows = roundRows(report, 'context', false);
   for (const [index, sample] of [report.baseline, ...rows].entries()) {
     const path = index === 0 ? 'context.baseline' : `context.rows[${index - 1}]`; record(sample, path); record(sample.objects, `${path}.objects`);
-    const entries = array(sample.objects.rows, `${path}.objects.rows`);
-    for (const [i, item] of entries.entries()) record(item, `${path}.objects.rows[${i}]`);
-    const slots = keys(entries.filter(item => item.table === 'glTexture'), `${path}.objects.rows.glTexture`);
+    const slots = managedRows(sample, `${path}.objects.rows`, 'glTexture');
     for (const [i, slot] of slots.entries()) {
       boolean(slot.live, `${path}.objects.rows.glTexture[${i}].live`);
       // inventory() deliberately omits identity metadata on null placeholders; it is read only for live slots.
-      if (slot.live) requireField(slot.textureKey === null || typeof slot.textureKey === 'string', `${path}.objects.rows.glTexture[${i}].textureKey`, 'a scene texture key or null');
+      if (slot.live) {
+        const p = `${path}.objects.rows.glTexture[${i}]`;
+        requireField(slot.textureKey === null || typeof slot.textureKey === 'string', `${p}.textureKey`, 'a scene texture key or null');
+        requireField(typeof slot.type === 'string', `${p}.type`, 'a constructor name');
+        requireField(slot.label === null || typeof slot.label === 'string', `${p}.label`, 'a resource label or null');
+      }
     }
   }
   return report;

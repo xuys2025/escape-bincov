@@ -1,20 +1,23 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { MALL_WORLD, MALL_ANCHORS, MALL_PASSAGES, isMallWorld, mallWorldV2, mallWorldV3 } from '../src/mall-world';
+import { MALL_WORLD, MALL_ANCHORS, MALL_PASSAGES, isMallWorld, mallWorldV2, mallWorldV3, mallWorldV4 } from '../src/mall-world';
+import { MALL_V4_LAYOUT } from '../src/mall-layout-v4';
 import { MALL_FURNITURE, MALL_V2_LAYOUT, MALL_V2_REGIONS, MALL_V2_SPAWN, MALL_V3_LAYOUT, parseFurnitureName, type Placement } from '../src/mall-layout-v2';
 import { resolveExpansionWorld } from '../src/expansion-worlds';
 import { traversable, type SpaceDefinition } from '../src/spatial';
 import type { WorldDefinition } from '../src/expansion-state';
 
-const V1 = MALL_WORLD, V2 = mallWorldV2(), V3 = mallWorldV3();
+const V1 = MALL_WORLD, V2 = mallWorldV2(), V3 = mallWorldV3(), V4 = mallWorldV4();
 type Layout = Record<'mall-f1' | 'mall-f2', readonly Placement[]>;
-/** The dressed revisions and their tables: every layout rule below holds for both. */
-const DRESSED: [string, WorldDefinition, Layout][] = [['二版', V2, MALL_V2_LAYOUT], ['三版', V3, MALL_V3_LAYOUT]];
+/** The dressed revisions and their tables: every layout rule below holds for all three (layout 4 dresses every cell). */
+const DRESSED: [string, WorldDefinition, Layout][] = [['二版', V2, MALL_V2_LAYOUT], ['三版', V3, MALL_V3_LAYOUT], ['四版', V4, MALL_V4_LAYOUT]];
 const cellOf = (p: { x: number; y: number }) => [Math.floor(p.x / 32), Math.floor(p.y / 32)] as const;
 const regionCells = (map: SpaceDefinition, id: string) => { const r = map.regions!.find(r => r.id === id)!; return { x0: r.x / 32, y0: r.y / 32, x1: r.x / 32 + r.w / 32 - 1, y1: r.y / 32 + r.h / 32 - 1 }; };
-/** Cells revisions 2 and 3 may redraw: their dressed regions plus the supermarket frontage on the F1 north aisle. */
-function dressed(map: SpaceDefinition, x: number, y: number) {
+/** Cells revisions 2 and 3 may redraw: their dressed regions plus the supermarket frontage on the F1 north aisle. Revision 4 may
+ * redraw any cell; tests/mall-layout-v4.test.ts checks which of its cells differ from revision 1. */
+function dressed(map: SpaceDefinition, x: number, y: number, world?: WorldDefinition) {
+    if (world === V4) return true;
     if (map.id === 'mall-f1' && y === 19 && x >= 30 && x <= 44) return true;
     return MALL_V2_REGIONS.some(id => { const r = map.regions!.find(r => r.id === id); if (!r) return false; const c = regionCells(map, id); return x >= c.x0 && x <= c.x1 && y >= c.y0 && y <= c.y1; });
 }
@@ -70,7 +73,7 @@ for (const [label, W, LAYOUT] of DRESSED) {
             const a = V1.maps[id], b = W.maps[id];
             assert.deepEqual(b.regions, a.regions); assert.deepEqual(b.doors, a.doors);
             for (let y = 0; y < a.cells.length; y++) for (let x = 0; x < a.cells[y].length; x++)
-                if (!dressed(a, x, y)) assert.equal(b.cells[y][x], a.cells[y][x], `${id} ${x},${y} changed outside the dressed area`);
+                if (!dressed(a, x, y, W)) assert.equal(b.cells[y][x], a.cells[y][x], `${id} ${x},${y} changed outside the dressed area`);
             const coords = (m: SpaceDefinition) => Object.fromEntries(m.entries.map(e => [e.id, cellOf(e.at)]));
             const before = coords(a), after = coords(b), sn = Object.keys(after).find(k => k.startsWith('S-N'))!;
             assert.deepEqual(after[sn], [62, 13]); assert.deepEqual(before[sn], [60, 11]);
@@ -87,7 +90,7 @@ for (const [label, W, LAYOUT] of DRESSED) {
                 const [x, y] = cellOf(d), parsed = parseFurnitureName(d.name)!, type = MALL_FURNITURE[parsed.type];
                 assert.equal(d.kind, type.kind, `${map.id} ${d.name}`);
                 assert.equal(map.cells[y][x], type.kind === 'B' ? 'wall' : type.kind === 'M' ? 'low' : 'floor');
-                assert.ok(dressed(map, x, y), `${map.id} ${d.name} at ${x},${y} outside the dressed area`);
+                assert.ok(dressed(map, x, y, W), `${map.id} ${d.name} at ${x},${y} outside the dressed area`);
                 parts.set(`${x},${y}`, d.name);
             }
             for (const p of LAYOUT[map.id as 'mall-f1' | 'mall-f2']) {

@@ -9,10 +9,13 @@ const groups = [
     'browser-options.mjs', 'canvas-click.mjs', 'font-characters.mjs', 'game-bundle.mjs', 'inventory-actions.mjs',
     'pixi-managed-gate.mjs', 'stall-resume.mjs', 'step-filter.mjs', 'storage-fault.mjs', 'title-edge-check.mjs', 'yard-entry.mjs',
     'check-catalog.mjs', 'script-inventory.mjs', 'enemy-catalog-data.ts', 'resource-report-input.mjs',
-    'shop-touch-cases.mjs', 'station-acceptance-gates.mjs', 'enemy-mall-browser.mjs',
+    'shop-touch-cases.mjs', 'station-acceptance-gates.mjs', 'enemy-mall-browser.mjs', 'enemy-browser-plan.mjs',
+  ] },
+  { kind: 'support', reason: '由 scripts/ci/resource-helpers.test.mjs 导入的四项纯 Node 回归：合成图支配关系的独立 oracle、缺表和未释放对象负对照；不运行浏览器/堆采样，不代表资源或 F20 签收。', files: [
+    'astra-r7-heap-graph.test.mjs', 'station-resource-probe.test.mjs',
   ] },
   { kind: 'tool', reason: '素材生成、导入或交付工具；会写源码或资产，不能当作只读测试执行。开工前检查输入清单、哈希、字体环境和输出。', files: [
-    'coast-import-assets.mjs', 'mall-assets.mjs', 'opening-assets.mjs', 'station-assets.mjs', 'subset-font.py', 'build-coast-runtime.mjs',
+    'coast-import-assets.mjs', 'gunsmith-assets.mjs', 'mall-assets.mjs', 'opening-assets.mjs', 'station-assets.mjs', 'subset-font.py', 'build-coast-runtime.mjs',
     'format.mjs', 'enemy-export-art.mjs', 'prepare-county-map.mjs', 'pack-coast-art.py',
   ] },
   { kind: 'diagnostic', reason: '帧时、标题性能或确定性射击测量；参数见源码头部，独立运行并记录环境。本轮未重测这些性能工具，不把输出数值当作真人手感或 GPU 完成时间。', files: [
@@ -29,7 +32,6 @@ const groups = [
   ] },
   { kind: 'review', reason: '未登记为现役 package 检查或 CI 工具；保留待核对夹具、基线、参数及调用点。未运行，不据文件名推定已退役或当前可用。', files: [
     // Explicitly held for review on 2026-10-23; adding another file requires a classification.
-    'astra-r7-heap-graph.test.mjs',
     'astra-save-diagnostic.mjs',
     'coast-audio-test.mjs',
     'coast-launcher-check.mjs',
@@ -79,7 +81,6 @@ const groups = [
     'station-ordinary-acceptance.mjs',
     'station-original-target-control.mjs',
     'station-resource-probe.mjs',
-    'station-resource-probe.test.mjs',
     'station-resource-summarize.mjs',
     'station-resource-target-slots.mjs',
     'station-resource-trend.mjs',

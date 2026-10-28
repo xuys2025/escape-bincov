@@ -15,11 +15,12 @@ export const MALL_RAIDER_POSTS: readonly Readonly<{ id: ArchetypeId; positions: 
 ];
 export const MALL_RAIDER_STORES = [at(27, 17), at(26, 17), at(28, 17)] as const;
 
-/** Only a new layout-3 deployment candidate calls this, before its one atomic commit.
+/** Only a new layout-3 or layout-4 deployment candidate calls this, before its one atomic commit (layout 4 keeps the
+ * posts, their alternatives and the crate stores open, tests/mall-layout-v4.test.ts).
  * Same 25 identities, floor allocation, two elites, loot contents and RNG state. Existing v1 tactics suffice:
- * no new persistent fields, controller or world revision; old active mall raids never call this initializer. */
+ * no new persistent fields or controller; old active mall raids never call this initializer. */
 export function installMallEncounter(raid: LayeredRaid, world: WorldDefinition): void {
-    if (raid.elapsed !== 0 || ![2, 3].includes(raid.version) || world.id !== 'mall-v3') throw new Error('遭遇只能在新商场三版行动初始化。');
+    if (raid.elapsed !== 0 || ![2, 3].includes(raid.version) || !['mall-v3', 'mall-v4'].includes(world.id)) throw new Error('遭遇只能在新商场三版或四版行动初始化。');
     const layer = raid.maps['mall-f2'], map = world.maps['mall-f2'];
     const used = new Set<string>();
     const fits = (p: Point) => traversable({ definition: map, doors: layer.doors, highTide: true }, p, 'body', 10)

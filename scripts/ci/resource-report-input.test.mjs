@@ -155,3 +155,74 @@ test('a real archived aggregate is explicitly rejected as raw input rather than 
   const out = join(root, 'out.json'), result = cli('target-slots', historical, out);
   assert.equal(result.status, 1); assert.match(result.stderr, /Invalid resource report context\.mode/); assert.equal(existsSync(out), false);
 }));
+
+test('summary CLI rejects malformed table identities and transformed release observations before output', () => {
+  const cases = [
+    ['table', r => { delete r.rows[0].objects.rows[0].table; }],
+    ['table', r => { r.rows[0].objects.rows[0].table = 7; }],
+    ['key', r => { delete r.rows[0].objects.rows[0].key; }],
+    ['key', r => { r.rows[0].objects.rows.push({ ...r.rows[0].objects.rows[0] }); }],
+    ['live', r => { r.rows[0].objects.rows[0].live = null; }],
+    ['name', r => { r.rows[0].counts.tables.tables.push({ ...r.rows[0].counts.tables.tables[0] }); }],
+    ['live', r => { delete r.rows[0].counts.tables.tables[0].live; }],
+    ['empty', r => { r.rows[0].counts.tables.tables[0].empty = -1; }],
+    ['collected', r => { r.rows[0].release.collected = r.rows[0].release.tracked + 1; }],
+    ['hostAlive', r => { r.rows[0].release.hostAlive = 'false'; }],
+    ['geometries', r => { r.rows[0].objects.geometries.push({ ...r.rows[0].objects.geometries[0] }); }],
+    ['id', r => { r.rows[0].objects.buffers[0].id = 0; }],
+    ['scene', r => { r.rows[0].action = { parked: {}, freed: { frames: [], sources: [] } }; }],
+    ['parked', r => { r.rows[0].action = { freed: { scene: null, frames: [], sources: [] } }; }],
+    ['frames', r => { r.rows[0].action = { parked: {}, freed: { scene: null, frames: ['false'], sources: [] } }; }],
+  ];
+  for (const [field, change] of cases) temporary(root => {
+    input(root, (r, mode) => { if (mode === 'shared') change(r); });
+    const out = join(root, 'output'), result = cli('summarize', root, out);
+    assert.equal(result.status, 1); assert.match(result.stderr, /Invalid resource report shared\.rows/);
+    assert.ok(result.stderr.includes(field), result.stderr); assert.equal(existsSync(out), false);
+  });
+});
+
+test('slot CLI rejects filtered-away tables and missing live identity metadata in either sample', () => {
+  const cases = [
+    ['table', slot => { delete slot.table; }], ['table', slot => { slot.table = false; }],
+    ['key', slot => { delete slot.key; }], ['textureKey', slot => { delete slot.textureKey; }],
+    ['type', slot => { delete slot.type; }], ['type', slot => { slot.type = null; }],
+    ['label', slot => { delete slot.label; }], ['label', slot => { slot.label = 42; }],
+  ];
+  for (const sample of ['baseline', 'next']) for (const [field, change] of cases) temporary(root => {
+    const data = observations(); change(data[sample].objects.rows.find(row => row.table === 'glTexture'));
+    const file = join(root, 'input.json'), out = join(root, 'out.json');
+    save(file, { mode: 'context', baseline: data.baseline, rows: [data.next] });
+    writeFileSync(out, 'existing report must survive invalid input');
+    const result = cli('target-slots', file, out); assert.equal(result.status, 1);
+    assert.match(result.stderr, /Invalid resource report context\./); assert.ok(result.stderr.includes(field), result.stderr);
+    assert.equal(readFileSync(out, 'utf8'), 'existing report must survive invalid input');
+  });
+});
+
+test('summary validates the identity probe before modifying an existing output directory', () => temporary(root => {
+  input(root); const file = join(root, 'identity-probe', 'report.json');
+  const probe = JSON.parse(readFileSync(file, 'utf8')); probe.firstReturn.objects.textures.push({ ...probe.firstReturn.objects.textures[0] }); save(file, probe);
+  const out = join(root, 'output'); mkdirSync(out); writeFileSync(join(out, 'long-remount.json'), 'existing report');
+  const result = cli('summarize', root, out); assert.equal(result.status, 1);
+  assert.match(result.stderr, /Invalid resource report identity-probe\.firstReturn\.objects\.textures/);
+  assert.equal(readFileSync(join(out, 'long-remount.json'), 'utf8'), 'existing report');
+  assert.equal(existsSync(join(out, 'summary.json')), false);
+}));
+
+test('summary preserves copied observations and false destruction observations without inventing a verdict', () => temporary(root => {
+  const action = { parked: { fixture: 'opaque observation' }, freed: { scene: null, frames: [false, true], sources: [] } };
+  input(root, (r, mode) => { if (mode === 'shared') r.rows[0].action = action; });
+  const out = join(root, 'output'), result = cli('summarize', root, out); assert.equal(result.status, 0, result.stderr);
+  const compact = JSON.parse(readFileSync(join(out, 'long-shared.json'), 'utf8'));
+  assert.deepEqual(compact.rows[0].action, { parked: action.parked, freed: { scene: null, framesObserved: 2, allObservedFramesDestroyed: false, sourcesObserved: 0, allObservedSourcesDestroyed: true } });
+  assert.equal(compact.status, 'PARTIAL');
+}));
+
+test('slot CLI ignores unused metadata outside the selected glTexture table', () => temporary(root => {
+  const { baseline, next } = observations();
+  baseline.objects.rows.push({ table: 'unrelated-table', key: null, live: 'unused' });
+  const file = join(root, 'input.json'), out = join(root, 'out.json'); save(file, { mode: 'context', baseline, rows: [next] });
+  const result = cli('target-slots', file, out); assert.equal(result.status, 0, result.stderr);
+  const { summary } = JSON.parse(readFileSync(out, 'utf8')); assert.equal(summary.rounds, 1); assert.equal(summary.everyRoundThreeOut, true);
+}));
