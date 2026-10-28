@@ -872,9 +872,9 @@ export class CoastSampleHost {
   private slowHud(b: PublishedView) {
     this.placeRadio(); // the task card may have opened or the screen turned since the line came up
     if (this.panel === 'inventory' || this.panel === 'loot') this.inv.refreshWeight();
-    const h = b.frame.hud, l = this.session.loadout, body = this.session.expansion?.body;
+    const h = b.frame.hud, l = this.session.loadout, body = h.needs;
     const status = [h.bleeding ? '流血' : '', h.pollution > 10 ? `污染 ${Math.round(h.pollution)}%` : '',
-      body && this.session.expansion?.raid ? `精神 ${Math.round(body.mental)} · 水分 ${Math.round(body.water)} · 饱食 ${Math.round(body.satiety)}` : ''].filter(Boolean).join(' · ') || '状态正常';
+      body ? `精神 ${Math.round(body.mental)} · 水分 ${Math.round(body.water)} · 饱食 ${Math.round(body.satiety)}` : ''].filter(Boolean).join(' · ') || '状态正常';
     let weight = '';
     // A no-break space keeps the number and its unit together when the line wraps, as the original weight readout did.
     if (l) weight = `${this.services.carriedWeight().toFixed(1)}\u00a0kg`;

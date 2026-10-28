@@ -63,6 +63,16 @@
 
 源码入口、80帧浏览器检查、修复前负对照和两尺寸真实截图见[本项记录](docs/tasks/station-player-hands/README.md)。当前通过：1020 单测、打包、CI 策略 73/73、H15 两尺寸、行动动画 8/8 与冷素材加载；完整站内 78/79，I3 手机菜单切修理铺在原 main 对照和修复构建中均同样超时，保留失败，不拼为完整通过。准确 head、CI 与审阅状态见本项 PR；尚未合并/发布，真机与真人姿态观感待验。#26 其他反馈保留原归属。
 
+## 2026-10-28 行动精神/水分/饱食 HUD 实时投影（PR #110）
+
+沿原 `fix/live-vitals-hud` 正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，随后同步共同截止主线 `630e68f517edea34bfbcc548473897bd36bdfa08`（#134），保留商场四版/M2、背包服务和其他任务交接；受检源码 head `19dea0bfa59042281b4c7ec1f085aa3e8587e3b8`，随后只更新证据文档，最终 head / CI 见 [PR #110](https://github.com/xuys2025/escape-bincov/pull/110)。投影从实时身体复制精神/水分/饱食三个标量；宿主沿原八帧节奏舍入显示；经典行动为 null，存档、生理规则及事务不变。
+
+本轮 1025 单测、77 工程守卫、正式打包、完整 QoL 5/5、默认行动 11/11 首次通过。新 main 两尺寸负对照有效失败、修复后实时/帧/DOM 一致，保存值未变；已亲看双尺寸截图，原始失败和本轮结果留在同一[摘要](docs/tasks/audit-contracts.md#精神水分饱食-hud-的实时投影)/[报告](docs/tasks/audit-contracts/live-needs/report.json)，不拿旧 CI 代替新 head。没有真机、真人或性能签收，#60 其余范围继续开放；等待准确 head CI 与维护者审阅，不自行合并发布。
+
+最新同步后实际重跑工程守卫 **85/85** 和 package 通过；src/tests/assets、全部浏览器流程与依赖输入相对已验 `d0ebc57` 未变，正式 HTML SHA-256 仍为 `f61862ed972f8efaab0c8abf7c9360ab2aebbd751d943dfa77ad8211c5568b72`。上段单测/浏览器/截图据此复用，没有重复执行或新拍；旧 head CI 40624184384 已成功但仅作历史，新准确 head 完整 CI 以原 PR 为准。输入一致性和新结果记录在同报告 `main630Integration`。
+
+维护者已明确授权复查后自动合并；本次正常同步 main `f66ee79af6b84ef64319891e82d7dc4e82985350`（含 #117/#136），保留上游身份与共享生命周期归位。本节原验证证据保留历史归属，当前守卫、打包及准确新 head CI / 自动合并状态以原 PR 为准，不绕过检查或保护。
+
 ## 2026-10-27 改枪 M2：工作台、预设、美术、详情与商店、全流程检查（#106）
 
 `feat/gunsmith-m2` / [PR #106](https://github.com/xuys2025/escape-bincov/pull/106)（草稿），已同步 main `0d20857`。本日合入暂停的 M2-03/04/11/13 分支，并完成 M2-05～08、M2-10、M2-12、M2-14；M2-15（维护者试玩、合入）待办。
@@ -87,9 +97,35 @@
 
 存档格式、版本、时钟和其他规则不变。本机结果和截图见 PR 正文与 `docs/tasks/raid-equip-slot/`。未做：真机、真人手感。和 #106（改枪 M2，草稿）在 `inventory.ts` 详情两行、`runtime.ts` 的 `equipItem` 会有文本冲突，谁后合谁解。
 
+## 2026-10-28 资源报告消费校验续作（PR #116）
+
+继续原分支 `fix/resource-report-validation` / [PR #116](https://github.com/xuys2025/escape-bincov/pull/116)，原 head `902a449ccf34d817a41a7260f30eb55bf3779239`，先正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，本次再正常同步共同截止 main `630e68f517edea34bfbcc548473897bd36bdfa08`。只改两份 review CLI 的输入消费边界与纯 Node 回归，不改游戏、算法、阈值或采样器；#111 的 rounds 与 #118 的堆输入各由原 PR 承接，#32 F20 仍 PARTIAL。
+
+旧 main CLI 实际接受 13 类反例：重复轮次、缺 release/quad 身份、null/巨大 heap、缺 table/type/label、字符串 live、重复槽位键和缺释放观察。原 PR 已拒绝其中七类，本轮补全另六类：在过滤前验证 table；摘要与槽位检查各自消费的键/布尔值并拒绝表内重复身份；live 槽位要求用于身份输出的 type/label，null 占位继续无需这些字段；freed 分支仅要求被复制的 scene/parked 属性存在，保留 null 和原值，不扩展为深层 schema。identity-probe 仅检查用于 added/removed 的纹理键；其他状态与附件原样保留。
+
+本次 Windows / Node 24.22.1 / pnpm 11.19.0：13 项真实 CLI 回归通过（含逐项字段矩阵、晚到的非法 probe 在写任何报告前拒绝、已有输出不被覆盖、合法 1 轮 partial 与 null 占位）。同一输入对比 main 旧 CLI：普通值、MAX_SAFE_INTEGER 和 0/上界交替三组共 39 份摘要输出逐字节一致；两组有/无 null 占位的槽位输出也逐字节一致。13 类反例旧 CLI 均 exit 0，修复后均 exit 1。原始证据保留在忽略的 `test-results/pr116/`。前次集成提交 `04c4218` 的完整 `pnpm test` 1022/1022、`pnpm check:ci` 90/90 与打包均通过。本次同步后实际 `check:ci` 98/98（含重跑 CLI 13 项）、严格打包通过；游戏/测试/依赖与两 CLI/helper/测试/producer 输入逐字节未变，复用该提交的 1022 单测及 41 文件对照，不重跑旧反例。重新生成 HTML/portable/web 的 SHA-256 分别为 `f3b7c3e1...` / `66a0d6f2...` / `cc311e1d...`，均与前次逐字节相同；证明和新日志在原证据目录。相对截止 main 的 `git diff --check` 通过。准确最终 head 与远端完整 CI 在原 PR 更新，不引用 10-25 旧 CI 代替。
+
+本地未运行浏览器、trend、实际 60 轮或堆采样，不宣称资源/F20 签收。代码父审与本机完整验证已通过，继续原 PR 正常提交推送并核对准确 head 完整 CI；仍为 draft，未转 Ready、未合并或发布。
+
+维护者已明确授权复查后自动合并；本次正常同步 main `f66ee79af6b84ef64319891e82d7dc4e82985350`（含 #117/#136），保留上游身份与共享生命周期归位。本节原验证证据保留历史归属，当前守卫、打包及准确新 head CI / 自动合并状态以原 PR 为准，不绕过检查或保护。
+
 ## 2026-10-27 #115：行动背包有限服务同步 main（续作）
 
 维护者 10-27 要求查看 #115 去向并合入后再做 #26 F15。#115 自 10-25 起无人续作、无评论，准确 head `3e1047b` 当时 CI 全过。本次在隔离工作树把 main `86add10`（#126、#127 等已合入）合进原分支：源码自动合并，只有本文件冲突，保留双方小节。实现和接口不变；同步后的验证结果见 PR 正文。F15 另由 PR #129 承接（基于本分支）。10-27 晚 #128（F14）合入后，再把 main `8b59019` 合进来一次，同样只有本文件冲突，保留双方小节。
+
+## 2026-10-28 Shader cache 快照消费字段校验（PR #118，`fix/heap-cache-input`）
+
+复用 [PR #118](https://github.com/xuys2025/escape-bincov/pull/118)，续作前 head `039bac0d7e27905857ac989b2f6e9bc061f547dc`。本轮先正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`（`3613b04`），交付 head `bb507f1` 的完整 CI [40624444343](https://github.com/xuys2025/escape-bincov/actions/runs/40624444343) 已通过。main 新进 #134 后，再正常合入共同截止点 `630e68f517edea34bfbcc548473897bd36bdfa08`；只在本文件顶部冲突并保留双方小节，#134 的架构工具、分类与入口完整保留；准确交付 head 与远程检查见原 PR。职责仍是 #32/#60 的 shader-cache review 分析器输入校验，与 #116 station 报告消费字段校验分开。
+
+原脚本把 shader string 的 null `self_size` 加成零：最小图 cycle-30 应有 80 bytes，旧 CLI 仍 exit 0 并写 `newRetainedBytes: 0`。现在 [`validateSnapshot`](scripts/sol-heap-cache-inspect.mjs) 只校验实际消费的 flat-table 字段：缺失/重复字段、类型与表索引、不完整行、非安全整数 id/bytes、重复 id，以及 cycle-30 incoming edge 计数/偏移/命名；`sumBytes` 拒绝不精确求和。只在所有消费校验和报告准备成功后写 `shader-cache.json`，拒绝时保留已有报告字节。未消费的 metadata、额外列/类型允许，cycle-10 不要求未消费的 edge 图。不做完整 V8 schema 或业务内存预算校验。
+
+本轮 [CLI 测试](scripts/ci/heap-cache-input.test.mjs) 从原五组扩成十组：新增已有报告保留、重复字段、坏表/identity、edge_count 求和溢出、未消费 metadata/额外列与类型/空图、稳定 node id、weak/hidden edge、两端 MAX_SAFE_INTEGER 精确字节和、七跳边界与十二样本截断。原五组在当前 main 旧脚本实际为 1 通过/4 失败；候选扩展十组实际 10/10，不把两者写成同一测试集。合法合成图新旧报告除生成时间外所有字段 deepEqual。
+
+Node v24.22.1 本轮实际生成两份 V8 快照（5,210,690 / 5,211,160 bytes），候选 CLI exit 0，新增人工字符串 2 节点/176 bytes、3 owner paths。这只是 Node 人工字符串图的格式兼容证据，不是浏览器/游戏 shader 泄漏或 F20 签收。原始快照、采集脚本和日志只在忽略的 `test-results/pr118/`；首轮未扁平化人工字符串只得到零匹配，已修 fixture 重新捕获并核对非零观察。没有变更分析算法、阈值、游戏、历史证据或测试分类。
+
+此前 `bb507f1` 已实际通过完整 `pnpm test` 1022/1022（63.87 秒）、`pnpm check:ci` 87/87、`pnpm package`、CLI 十组与入口文档三组合跑 13/13，且其完整 CI 已通过。合入 #134 时逐字节核对本任务生产脚本、十组 CLI 测试与锁文件不变，依赖声明和 test/check:ci/package/build 命令不变，游戏 src/assets/tests 不变；1022 单测与真实快照兼容证据按同代码复用，不声称重新采样。当前合成树已重新实际通过 `pnpm check:ci` 95/95（18.56 秒，含 CLI 十组）、`pnpm package` 与 `git diff --check`，三产品 SHA-256/字节数与此前及 main 一致。新日志为 `test-results/pr118/check-ci-630.log`、`package-630.log`，输入核对与三哈希为 `merge-630-inputs.json`、`product-hashes-630.json`；生成物不提交。首次本地输入比对发现测试工作副本 mixed 换行，归一为已提交 LF 后字节一致；冲突解决前误启动的一次守卫日志仅留 before-resolution，不作为当前验证。未另跑本机游戏单测/浏览器、游戏堆采样、trend 或 60 轮/F20，不关闭 #32/#60；新 head 完整 CI 以原 PR 实时链接为准，旧成功不代表新 head。已 Ready，未启用自动合并、未合并或发布。
+
+维护者已明确授权复查后自动合并；本次正常同步 main `f66ee79af6b84ef64319891e82d7dc4e82985350`（含 #117/#136），保留上游身份与共享生命周期归位。本节原验证证据保留历史归属，当前守卫、打包及准确新 head CI / 自动合并状态以原 PR 为准，不绕过检查或保护。
 
 ## 2026-10-27 #26 F14：商场里没揭示的房间压暗（PR #128）
 
