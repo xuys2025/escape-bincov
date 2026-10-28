@@ -12,6 +12,7 @@ export interface EntryDefinition {
 export interface SpaceDefinition {
     id: string; name: string; floor: string; tile: number; cells: Cell[][];
     doors: DoorDefinition[]; entries: EntryDefinition[];
+    /** Maps projected into a raid view author a stable id; name is display copy, not an identity key. */
     regions?: { x: number; y: number; w: number; h: number; name: string; id?: string; inside?: boolean; theme?: number; sealed?: boolean }[];
     /** B blocks every channel, M blocks bodies, V is purely visual. */
     decorations?: { x: number; y: number; kind: 'B' | 'M' | 'V'; name: string }[];
