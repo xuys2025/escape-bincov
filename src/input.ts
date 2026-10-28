@@ -2,7 +2,7 @@
  * The Runtime's per-substep input frame and its foreground clock. Devices are read by coast-view/input.ts (InputState)
  * and reach the Runtime as a RaidIntent; no gameplay rules or renderer objects live here.
  */
-export type InputAction = 'reload' | 'heal' | 'primary' | 'knife' | 'interact';
+export type InputAction = 'reload' | 'heal' | 'primary' | 'knife' | 'laser' | 'light' | 'interact';
 export interface InputFrame {
   x: number; y: number; sprint: boolean; aim: { x: number; y: number } | null;
   pointer: { x: number; y: number }; precise: boolean;

@@ -12,7 +12,6 @@ import { resolveLayerShot, type ShotObservation } from '../src/layer-transition'
 import { criticalChance } from '../src/rpg';
 import type { ExpansionState } from '../src/expansion-state';
 import { characterCritChance, critChance, critMultiplier, critSources, snapshotChance, type CritInput, type CritSnapshot, type PerkId } from '../src/perks';
-import { SAMPLE_GUNS } from '../src/shooting';
 import type { Cell } from '../src/spatial';
 import { arm, perkBench, reopen, LANE, type Bench } from './fixtures/shooting-bench';
 import { plainCrit, prototypeRaid, prototypeWorld } from './fixtures/layered';
@@ -108,11 +107,11 @@ test('CP-16: a shot that spends its round snapshots once and hands every pellet 
     assert.deepEqual(r.bullets, []); assert.ok(r.reloadLeft > 0); assert.equal(r.snapshot().rng, emptied);
 });
 
-test('CP-04: a real shot snapshots the technique of that instant (dose included), the gun fired (sample gun included), focus and the owned perks', () => {
-    // Technique 10 and nothing else: the pistol 6.9%, the shotgun 4.94%, the carbine 9.84% (spec 2.1); the sample rifle
+test('CP-04: a real shot snapshots the technique of that instant (dose included), the gun fired (the M4A1 included), focus and the owned perks', () => {
+    // Technique 10 and nothing else: the pistol 6.9%, the shotgun 4.94%, the carbine 9.84% (spec 2.1); the M4A1
     // states its own 5% weapon source.
     for (const [gun, weapon, chance] of [['pistol', D.WEAPONS.pistol, .069], ['shotgun', D.WEAPONS.shotgun, .0494], ['carbine', D.WEAPONS.carbine, .0984],
-        ['m4a1', SAMPLE_GUNS.m4a1, 1 - .98 * .95]] as const) {
+        ['mb4a1', D.WEAPONS.mb4a1, 1 - .98 * .95]] as const) {
         const b = arm(perkBench(), gun), [round] = shotRounds(b, fire(b, 1000));
         assert.deepEqual(round.crit, snapshotOf({ weapon }), gun); assert.ok(near(critChance(round.crit!.sources), chance), gun);
     }

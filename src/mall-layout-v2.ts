@@ -43,6 +43,34 @@ export const MALL_FURNITURE = {
     // Revision 3 only (names: letters and hyphens). The table spans the sofa's width; the whole bistro set blocks.
     'coffee-table-wide': { w: 2, h: 1, kind: 'M' },
     'bistro-set': { w: 2, h: 1, kind: 'M' },
+    // Revision 4 only (src/mall-layout-v4.ts): the shops, back-of-house rooms, the second floor and the streets around.
+    // Tall fixtures block (B); counters, tables, rails and low street barriers only block bodies (M).
+    'shelf-wall': { w: 1, h: 1, kind: 'B', run: true },
+    rack: { w: 1, h: 1, kind: 'B', run: true },
+    counter: { w: 1, h: 1, kind: 'M', run: true },
+    'glass-case': { w: 1, h: 1, kind: 'M', run: true },
+    'kitchen-line': { w: 1, h: 1, kind: 'B', run: true },
+    'diner-table': { w: 2, h: 1, kind: 'M' },
+    desk: { w: 2, h: 1, kind: 'M' },
+    cabinet: { w: 1, h: 1, kind: 'B' },
+    safe: { w: 1, h: 1, kind: 'B' },
+    'clothes-rail': { w: 1, h: 1, kind: 'M', run: true },
+    mannequin: { w: 1, h: 1, kind: 'M' },
+    'fitting-room': { w: 2, h: 2, kind: 'B' },
+    switchgear: { w: 1, h: 1, kind: 'B', run: true },
+    lockers: { w: 1, h: 1, kind: 'B', run: true },
+    stall: { w: 1, h: 1, kind: 'B', run: true },
+    sink: { w: 1, h: 1, kind: 'M', run: true },
+    vending: { w: 1, h: 1, kind: 'B' },
+    checkout: { w: 1, h: 2, kind: 'M' },
+    'ball-pool': { w: 4, h: 3, kind: 'B' },
+    slide: { w: 2, h: 1, kind: 'M' },
+    'bamboo-screen': { w: 1, h: 3, kind: 'B' },
+    car: { w: 3, h: 2, kind: 'B' },
+    barrier: { w: 1, h: 1, kind: 'M', run: true },
+    dumpster: { w: 2, h: 1, kind: 'B' },
+    container: { w: 4, h: 2, kind: 'B' },
+    'ac-unit': { w: 1, h: 1, kind: 'B' },
 } as const satisfies Record<string, FurnitureType>;
 export type FurnitureName = keyof typeof MALL_FURNITURE;
 /** `x, y`: north-west cell. `n`: number of modules for run furniture (east-west). */

@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-27",
+  "tool": "built-in image_gen",
+  "transparent_background": true,
+  "referenceRole": "Shipped art and stand-in sheet define geometry/palette; ground reference is assets/mall/v1/mall-ground-terrazzo-a-v1.png",
+  "prompts": [
+    {
+      "id": "clothes-rail",
+      "prompt": "Use case: stylized-concept. Production pixel-art game sprite strip. Clothing rack module, thin dark steel horizontal rail with full row of hanging garments: denim jackets, faded red and sage shirts, cream coats. Outer west/east modules have the matching support posts and small T feet, middles no posts, single both posts. Transparent gaps around clothing and under rail, no solid back panel.32x32 footprint+22px lift. Body48? native full canvas54. No random clothes outside frame.\nFive isolated modules in one horizontal row, west end/east end/middle A/middle B/standalone, identical alignment, open edges join along X.\nNative canvas32x54,scale24pixels per metre,player39px tall. Match reference game's clothes-rail. Elevated due-south orthographic projection: horizontal X lines, vertical depth lines, TOP face an axis-aligned rectangle, south face directly below, no isometric skew or visible side planes. Crisp low-res handplaced pixel clusters, muted dusty coastal mall, upper-left light, restrained28colour palette. No floor, cast shadow, glow, text, logo, label, border or watermark. True transparent background, hard alpha, generous margins."
+    },
+    {
+      "id": "mannequin",
+      "prompt": "Use case: stylized-concept. ONE isolated native pixel-art GAME prop. One faceless shop mannequin on a small round dark stand, wearing a faded denim-blue jacket and beige trousers. Neutral standing pose, arms relaxed at sides, no human skin/face detail, stylized cream display dummy. Footprint32x32 canvas32x56,actual figure39pixels scale. Background transparent around narrow body.\nMatch mannequin object in reference sheet. Exact native canvas32x56 pixels, shown at enlarged integer pixel zoom. 24px per metre, player39px tall. Axis-aligned elevated due-SOUTH view, top face rectangle, front below, X horizontal/depth vertical, NO isometric diamond, skew or vanishing point. Worn but recognizable abandoned coastal mall, upper-left light, desaturated palette28colors, strong readable pixel clusters at native size. True transparent background and hard alpha, no ground plane, cast shadow, glow, characters, lettering, logos, frames or watermarks."
+    },
+    {
+      "id": "fitting-room",
+      "prompt": "Use case: stylized-concept. ONE isolated native pixel-art GAME prop. A double fitting room booth, two side-by-side cubicles, worn cream wall partitions, TOP view reveals small interior floor, SOUTH/front muted sage curtains half-pulled open, one small mirror visible inside. Footprint64x64 plus44px lift. Exact rectangular outer body, no floor outside.\nMatch fitting-room object in reference sheet. Exact native canvas64x108 pixels, shown at enlarged integer pixel zoom. 24px per metre, player39px tall. Axis-aligned elevated due-SOUTH view, top face rectangle, front below, X horizontal/depth vertical, NO isometric diamond, skew or vanishing point. Worn but recognizable abandoned coastal mall, upper-left light, desaturated palette28colors, strong readable pixel clusters at native size. True transparent background and hard alpha, no ground plane, cast shadow, glow, characters, lettering, logos, frames or watermarks."
+    },
+    {
+      "id": "ball-pool",
+      "prompt": "Use case: stylized-concept. ONE isolated native pixel-art GAME prop. One children's ball pit enclosure, footprint128x96 plus36px lift. Rectangular padded low blue walls with faded yellow top trim, slender corner posts and dark safety NET around perimeter, many small muted red/yellow/blue/green balls inside. See pit interior from above. Due south elevated view with X horizontal and depth vertical, rectangular top, no isometric side planes. Full footprint width/depth, no slides or other toys.\nMatch ball-pool object in reference sheet. Exact native canvas128x132 pixels, shown at enlarged integer pixel zoom. 24px per metre, player39px tall. Axis-aligned elevated due-SOUTH view, top face rectangle, front below, X horizontal/depth vertical, NO isometric diamond, skew or vanishing point. Worn but recognizable abandoned coastal mall, upper-left light, desaturated palette28colors, strong readable pixel clusters at native size. True transparent background and hard alpha, no ground plane, cast shadow, glow, characters, lettering, logos, frames or watermarks."
+    },
+    {
+      "id": "slide",
+      "prompt": "Use case: stylized-concept. ONE isolated low-res pixel-art game prop. A small abandoned children's slide, ladder at WEST/left, downward chute slopes EAST/right, faded ochre platform and muted red ladder, blue slide, compact low frame. Footprint64x32,24px lift. The slide's travel direction exactly left-to-right, not diagonal. All parts within footprint.\nExact native canvas64x56 pixels, enlarged pixel zoom. Elevated due-SOUTH axis-aligned orthographic projection. X edges horizontal, depth vertical, no isometric diamond, skew or vanishing point. Match the game's reference geometry. Upper-left light, restrained desaturated colors, abandoned coastal mall wear, crisp handplaced pixel clusters readable at native size. No floor, cast shadow, labels, text, logos, extra toys or frame. True transparent background, hard alpha, generous margins."
+    },
+    {
+      "id": "bamboo-screen",
+      "prompt": "Use case: stylized-concept. ONE isolated low-res pixel-art game prop. A long thin bamboo room divider running NORTH-SOUTH, along the centerline of a32x96 footprint,48px lift. In this projection its narrow visible bamboo lattice is only8 native pixels wide, centered horizontally with transparent margins12pixels each side, extending144pixels vertically. Greenish weathered bamboo poles with rope lashings, foot rails. This is the very thin long upright screen shown bottom row of reference, NOT a broad horizontal fence.\nExact native canvas32x144 pixels, enlarged pixel zoom. Elevated due-SOUTH axis-aligned orthographic projection. X edges horizontal, depth vertical, no isometric diamond, skew or vanishing point. Match the game's reference geometry. Upper-left light, restrained desaturated colors, abandoned coastal mall wear, crisp handplaced pixel clusters readable at native size. No floor, cast shadow, labels, text, logos, extra toys or frame. True transparent background, hard alpha, generous margins."
+    },
+    {
+      "id": "bamboo-screen-background-repair",
+      "prompt": "Edit ONLY the background/alpha of this bamboo screen sprite. Remove ALL yellow-green halo, bloom, glow and cast shadow around the bamboo. Keep the bamboo poles, weave, ropes, colors, pixel edges, shape and tall narrow proportions unchanged. The background outside the solid bamboo silhouette must be fully transparent, not black or colored. No new elements. This is an unlit pixel-art game cutout, hard alpha. Preserve original transparency elsewhere."
+    }
+  ]
+}

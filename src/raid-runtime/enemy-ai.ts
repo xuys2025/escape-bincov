@@ -12,6 +12,11 @@ export interface LegacyEnemyWorld {
     readonly noiseTime: number;
     readonly noiseRadius: number;
     readonly space: SpaceContext | null;
+    /**
+     * Factor on how far an enemy standing at `from` notices the player (#28 M2-03): the gun's devices switched on give
+     * the player away to those in front of it. Absent (a bare test world) or 1: the enemy's own vision.
+     */
+    exposure?(from: Point): number;
     sight(from: Point, to: Point, highTide?: boolean, radius?: number): boolean;
     walkable(x: number, y: number, highTide?: boolean, radius?: number): boolean;
     path(from: Point, to: Point, highTide?: boolean): Point[];
@@ -41,7 +46,7 @@ const wrap = (angle: number) => ((angle + Math.PI) % (2 * Math.PI) + 2 * Math.PI
  */
 export function advanceLegacyEnemy(world: LegacyEnemyWorld, effects: LegacyEnemyEffects, e: EnemyState, dt: number): void {
     const profile = getLegacyEnemyProfile(e.id);
-    const def = ENEMIES[e.id], dist = distance(e, world.player), sees = dist < def.vision && world.sight(e, world.player);
+    const def = ENEMIES[e.id], dist = distance(e, world.player), sees = dist < def.vision * (world.exposure?.(e) ?? 1) && world.sight(e, world.player);
     e.timer -= dt;
     e.cooldown -= dt;
     e.repath -= dt;

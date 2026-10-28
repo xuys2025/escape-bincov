@@ -139,6 +139,17 @@ async function runCase(entry, viewport, name, test) {
     if (release) { await page.mouse.up(); await frames(page); }
     return valid;
   }
+  /** Trusted mouse drag of an item onto the primary-weapon slot (#26 F15); returns the slot's hover state before release. */
+  async function dragToSlot(source, uid, { release = true } = {}) {
+    const from = await page.locator(selector(source, uid)).boundingBox(), to = await page.locator('[data-equip-slot]').boundingBox();
+    assert.ok(from && to);
+    await page.mouse.move(from.x + 6, from.y + 6); await page.mouse.down();
+    await page.mouse.move(from.x + 22, from.y + 22, { steps: 3 }); await page.mouse.move(to.x + to.width / 2, to.y + to.height / 2, { steps: 6 });
+    const state = await page.locator('[data-equip-slot]').evaluate(el => el.classList.contains('invalid') ? 'invalid' : el.classList.contains('over') ? 'over' : 'none');
+    const foot = await page.locator('.cs-inv-foot').textContent();
+    if (release) { await page.mouse.up(); await frames(page); }
+    return { state, foot };
+  }
   async function armFault(eventType, targetSelector) {
     await page.evaluate(({ eventType, targetSelector, key }) => {
       const arm = e => {
@@ -159,7 +170,7 @@ async function runCase(entry, viewport, name, test) {
     await page.locator('#run-world').selectOption('buildings'); await page.locator('#seed').fill('42'); await action(page, 'deploy').click();
     await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch, null, { timeout: 30000 });
     await installAudit();
-    record.detail = await test({ page, context, sample, query, fixture, open, drag, panel, waitPanel, snapshot, participants, assertSynced, audit, inputWrites, resetAudit, selector, button, armFault, recover, screenshot });
+    record.detail = await test({ page, context, sample, query, fixture, open, drag, dragToSlot, panel, waitPanel, snapshot, participants, assertSynced, audit, inputWrites, resetAudit, selector, button, armFault, recover, screenshot });
     assert.deepEqual(record.errors, [], 'no browser errors'); assert.deepEqual(record.externalRequests, [], 'no external requests');
     await screenshot('accepted'); record.status = 'passed';
   } catch (error) {
@@ -173,6 +184,46 @@ async function runCase(entry, viewport, name, test) {
 }
 
 const cases = [
+  ['carried-inventory-commands', async t => {
+    await t.fixture({ bag: [item('own-water', 'water', 2)] });
+    await running(t.page); await t.page.keyboard.press('Tab'); await t.waitPanel('inventory');
+    await t.page.locator(t.selector('bag', 'own-water')).click(); await t.resetAudit();
+    await t.page.locator('[data-do="inv-rotate"]').click(); await frames(t.page);
+    let s = await t.snapshot(); assert.equal(s.live.loadout.bag.items[0].rotated, true); t.assertSynced(s);
+    assert.equal((await t.inputWrites()).length, 1, 'original in-place rotation commits once');
+    await t.resetAudit(); await t.button('quick').click(); await frames(t.page); s = await t.snapshot(); t.assertSynced(s);
+    assert.equal(s.live.loadout.bag.items.length, 0); assert.equal(s.live.loadout.safe.items[0].qty, 2); assert.equal((await t.inputWrites()).length, 1);
+    const secureUid = s.live.loadout.safe.items[0].uid;
+    await t.page.locator(t.selector('safe', secureUid)).click(); await t.resetAudit(); await t.button('quick').click(); await frames(t.page);
+    s = await t.snapshot(); t.assertSynced(s); assert.equal(s.live.loadout.safe.items.length, 0); assert.equal((await t.inputWrites()).length, 1);
+    const uid = s.live.loadout.bag.items[0].uid;
+    await t.page.locator(t.selector('bag', uid)).click(); await t.page.locator('[data-split]').fill('1');
+    await t.page.locator('[data-do="inv-split"]').click(); await t.resetAudit();
+    const grid = t.page.locator('[data-grid="bag"]'), cell = Number(await grid.getAttribute('data-cell'));
+    await grid.click({ position: { x: 2.4 * cell, y: 1.4 * cell } }); await frames(t.page);
+    s = await t.snapshot(); t.assertSynced(s); assert.equal(s.live.loadout.bag.items.length, 2); assert.equal((await t.inputWrites()).length, 1);
+    assert.equal(s.live.loadout.bag.items.find(i => i.uid === uid).qty, 1);
+    await t.resetAudit(); assert.equal(await t.drag('bag', uid, 'bag', 0, 3), 'true'); s = await t.snapshot(); t.assertSynced(s);
+    assert.equal((await t.inputWrites()).length, 1); assert.equal(s.live.loadout.bag.items.find(i => i.uid === uid).y, 3);
+    assert.equal(await t.page.locator('.cs-ghost,.drop-preview').count(), 0);
+    return { mode: await t.panel(), rotate: true, wholeQuickBothWays: true, split: true, sameBagDrag: true };
+  }],
+  ['carried-inventory-quota-rollback', async t => {
+    const gun = item('own-gun', 'pistol');
+    gun.gun.parts = [{ uid: 'own-base', id: 'A01', slot: 'base', relief: false, children: [{ uid: 'own-dot', id: 'O01', slot: 'micro', relief: true, children: [] }] }];
+    await t.fixture({ bag: [gun] }); await running(t.page); await t.page.keyboard.press('Tab'); await t.waitPanel('inventory');
+    await t.page.locator(t.selector('bag', gun.uid)).click(); const before = t.participants(await t.snapshot()); await t.resetAudit();
+    await t.armFault('click', '[data-do="inv-quick"]'); await t.button('quick').click(); await t.waitPanel('pause');
+    const failed = await t.snapshot(); assert.deepEqual(t.participants(failed), before);
+    assert.equal(failed.bytes, await t.page.evaluate(() => window.__issue26BytesAtFault));
+    assert.ok((await t.audit()).some(w => !w.ok)); await t.screenshot('carried-save-rejected');
+    await t.recover(); assert.deepEqual(t.participants(await t.snapshot()), before, 'save retry does not replay the item action');
+    await t.page.keyboard.press('Tab'); await t.waitPanel('inventory'); await t.page.locator(t.selector('bag', gun.uid)).click(); await t.resetAudit();
+    await t.button('quick').click(); await frames(t.page); const after = await t.snapshot(); t.assertSynced(after);
+    assert.equal((await t.inputWrites()).length, 1); assert.deepEqual(after.live.loadout.safe.items[0].gun, gun.gun);
+    assert.equal(after.live.loadout.safe.items[0].uid, gun.uid); assert.equal(after.live.loadout.bag.items.length, 0);
+    return { rollbackBytes: true, nestedGunPreserved: true, explicitActionRetryWrites: 1 };
+  }],
   ['pickup-once', async t => {
     const crate = await t.fixture({ items: [item('double-pickup', 'bandage', 2), item('button-pickup', 'pistol', 1, 1)] }); await t.open(crate);
     await t.page.locator(t.selector('container', 'double-pickup')).dblclick(); await frames(t.page);
@@ -180,7 +231,7 @@ const cases = [
     assert.equal(s.live.containers.find(c => c.id === crate.id).inventory.items.some(i => i.uid === 'double-pickup'), false);
     assert.equal((await t.inputWrites()).length, 1, 'one trusted double click persists exactly once'); t.assertSynced(s);
     await t.page.locator(t.selector('container', 'button-pickup')).click();
-    assert.equal(await t.button('equip').count(), 0, 'external gun cannot be equipped directly');
+    assert.match(await t.button('equip').textContent(), /装备主武器/, 'a container gun can be equipped directly (#26 F15)');
     assert.equal(await t.page.locator('[data-do="inv-use"]').count(), 0);
     assert.match(await t.button('quick').textContent(), /拿到背包/); await t.resetAudit(); await t.button('quick').click(); await frames(t.page);
     s = await t.snapshot(); assert.equal(s.live.loadout.bag.items.filter(i => i.uid === 'button-pickup').length, 1);
@@ -221,6 +272,70 @@ const cases = [
     assert.deepEqual(t.participants(s), before, 'failed equipment change preserves weapon, magazine and inventories');
     assert.match(s.toast, /无法装备.*背包装不下.*武器和弹药/, 'specific equipment-space rejection remains visible after Runtime events');
     assert.equal((await t.inputWrites()).length, 0); return { equipped: 'carbine', recoveredRounds: 8, rejection: s.toast };
+  }],
+  ['equip-slot-drag-from-container-and-bag', async t => {
+    // #26 F15: drag a gun onto the weapon slot, straight from the open container and from the backpack.
+    const crate = await t.fixture({ items: [item('crate-gun', 'carbine')], bag: [item('bag-gun', 'shotgun', 1, 0, 0), item('bag-water', 'water', 1, 4, 0)], safe: [item('safe-gun', 'pistol')], ammo: 8 });
+    await t.open(crate); await t.screenshot('slot-before');
+    assert.match(await t.page.locator('[data-equip-slot]').textContent(), /旧式手枪.*弹匣 8/);
+    let hover = await t.dragToSlot('container', 'crate-gun');
+    assert.deepEqual(hover, { state: 'over', foot: '松开即装备 半自动卡宾枪' });
+    let s = await t.snapshot(); t.assertSynced(s);
+    assert.equal(s.live.loadout.weapon, 'carbine'); assert.equal(s.live.loadout.weaponUid, 'crate-gun');
+    assert.equal(s.live.containers.find(c => c.id === crate.id).inventory.items.some(i => i.uid === 'crate-gun'), false, 'the gun left the container');
+    assert.equal(s.live.loadout.bag.items.filter(i => i.uid === 'fixture-weapon').length, 1, 'the replaced pistol is back in the bag as itself');
+    assert.equal(s.live.loadout.bag.items.filter(i => i.id === 'ammo9').reduce((n, i) => n + i.qty, 0), 8, 'its rounds too');
+    assert.equal((await t.inputWrites()).length, 1, 'container, bag and slot share one write');
+    assert.equal(s.toast, '已装备半自动卡宾枪。', 'one announcement, not the panel and the Runtime event both');
+    assert.match(await t.page.locator('[data-equip-slot]').textContent(), /半自动卡宾枪/);
+    await t.screenshot('slot-equipped-from-crate');
+    await t.resetAudit(); hover = await t.dragToSlot('bag', 'bag-gun');
+    assert.equal(hover.state, 'over'); s = await t.snapshot(); t.assertSynced(s);
+    assert.equal(s.live.loadout.weapon, 'shotgun'); assert.equal(s.live.loadout.bag.items.filter(i => i.uid === 'crate-gun').length, 1);
+    assert.equal((await t.inputWrites()).length, 1);
+    const before = t.participants(s); await t.resetAudit();
+    for (const [source, uid, reason] of [['bag', 'bag-water', /只有枪械/], ['safe', 'safe-gun', /安全箱里的枪械请先移回背包/]]) {
+      hover = await t.dragToSlot(source, uid); assert.equal(hover.state, 'invalid'); assert.match(hover.foot, reason);
+      s = await t.snapshot(); assert.deepEqual(t.participants(s), before, `${uid} cannot be equipped`); assert.match(s.toast, reason);
+    }
+    assert.equal((await t.inputWrites()).length, 0);
+    return { fromContainer: 'carbine', fromBag: 'shotgun', refused: ['water', 'safe pistol'] };
+  }],
+  ['equip-slot-select-then-tap', async t => {
+    // Click-to-place and touch: select the gun, then tap the slot; the details button equips from the container too.
+    const crate = await t.fixture({ items: [item('tap-gun', 'carbine'), item('button-gun', 'shotgun', 1, 0, 2)] }); await t.open(crate);
+    await t.page.evaluate(() => { window.__bincovSample.host.input.touch = true; window.__bincovSample.host.inv.render(); });
+    await t.page.locator('[data-equip-slot]').click(); assert.match(await t.page.locator('.cs-inv-foot').textContent(), /先选中.*枪/);
+    await t.page.locator(t.selector('container', 'tap-gun')).click();
+    assert.equal(await t.page.locator('[data-equip-slot].ready').count(), 1, 'the slot lights up for a selected gun');
+    await t.screenshot('slot-ready-touch'); await t.resetAudit();
+    await t.page.locator('[data-equip-slot]').click(); await frames(t.page); let s = await t.snapshot(); t.assertSynced(s);
+    assert.equal(s.live.loadout.weaponUid, 'tap-gun'); assert.equal((await t.inputWrites()).length, 1);
+    await t.page.locator(t.selector('container', 'button-gun')).click(); await t.resetAudit();
+    await t.button('equip').click(); await frames(t.page); s = await t.snapshot(); t.assertSynced(s);
+    assert.equal(s.live.loadout.weaponUid, 'button-gun'); assert.equal(s.live.loadout.bag.items.filter(i => i.uid === 'tap-gun').length, 1);
+    assert.equal((await t.inputWrites()).length, 1);
+    return { tapped: 'carbine', button: 'shotgun' };
+  }],
+  ['equip-slot-full-bag-and-quota-rollback', async t => {
+    // No room for the replaced pistol: the whole swap is refused and nothing moves. Then a failed write rolls back.
+    const crate = await t.fixture({ items: [item('crate-gun', 'carbine')], bag: fullBag(), ammo: 8 }); await t.open(crate);
+    let before = t.participants(await t.snapshot()); await t.resetAudit();
+    await t.dragToSlot('container', 'crate-gun'); await frames(t.page, 5); let s = await t.snapshot();
+    assert.deepEqual(t.participants(s), before, 'refused swap keeps weapon, magazine, bag and container');
+    assert.match(s.toast, /无法装备.*背包装不下.*武器和弹药/); assert.equal((await t.inputWrites()).length, 0);
+    const room = await t.fixture({ items: [item('crate-gun', 'carbine')], ammo: 8 }); await t.open(room);
+    before = t.participants(await t.snapshot()); await t.resetAudit();
+    await t.armFault('pointerup', '[data-equip-slot]'); await t.dragToSlot('container', 'crate-gun'); await t.waitPanel('pause');
+    const failed = await t.snapshot();
+    assert.deepEqual(t.participants(failed), before, 'failed write rolls back the slot, bag and the container');
+    assert.equal(failed.bytes, await t.page.evaluate(() => window.__issue26BytesAtFault));
+    assert.ok((await t.audit()).some(w => !w.ok)); await t.screenshot('slot-save-rejected');
+    await t.recover(); await t.open(room);
+    assert.deepEqual(t.participants(await t.snapshot()), before, 'retry saves the rolled-back state, not the equip');
+    await t.resetAudit(); await t.dragToSlot('container', 'crate-gun'); s = await t.snapshot(); t.assertSynced(s);
+    assert.equal(s.live.loadout.weaponUid, 'crate-gun'); assert.equal((await t.inputWrites()).length, 1, 'explicit retry writes once');
+    return { fullBagRefused: true, rollback: true, retryWrites: 1 };
   }],
   ['drag-swaps-and-invalid-overlap', async t => {
     const crate = await t.fixture({ items: [item('swap-source', 'fuse')], bag: [item('swap-gun', 'pistol', 1, 2, 2), item('block-a', 'sample', 1, 0, 4), item('block-b', 'wire', 1, 1, 4)] }); await t.open(crate);
@@ -291,7 +406,7 @@ const cases = [
 try {
   for (const entry of ['village']) for (const viewport of [{ width: 1280, height: 720 }, { width: 1920, height: 1080 }]) {
     for (const [name, test] of cases) {
-      if (viewport.width === 1920 && !['pickup-once', 'equip-gun-and-specific-rejection', 'drag-swaps-and-invalid-overlap'].includes(name)) continue;
+      if (viewport.width === 1920 && !['carried-inventory-commands', 'pickup-once', 'equip-gun-and-specific-rejection', 'equip-slot-drag-from-container-and-bag', 'equip-slot-select-then-tap', 'drag-swaps-and-invalid-overlap'].includes(name)) continue;
       if (only && !only.test(`${entry}-${viewport.width}x${viewport.height}-${name}`)) continue;
       await runCase(entry, viewport, name, test);
     }

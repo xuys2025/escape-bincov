@@ -191,6 +191,7 @@ async function suite(viewport) {
     try {
       await waitPanel(page, null);
       await page.waitForFunction(([x, sprint]) => { const p = window.__bincovSample.host.lastBatch.frame.player; return p.x < x - 8 && (!sprint || p.state.sprinting); }, [x, sprint], { timeout: 15000 });
+      return await page.evaluate(() => window.__bincovSample.host.lastBatch.frame.player.state.sprinting);
     } finally { await page.keyboard.up('a'); }
   }
   async function failStorage(on) {
@@ -274,12 +275,13 @@ async function suite(viewport) {
       const c = await fixture({ items: [item('corner-source', 'sample', 1, 5, 4)], bag: [item('corner-target', 'pistol')] }); await open(c.id);
       const before = participants(await snapshot()); await drag('container', 'corner-source', 'bag', 0, 0); assert.deepEqual(participants(await snapshot()), before);
     });
-    await step('external selection exposes no direct use or equip; double-click picks up without using or equipping', async () => {
+    await step('external selection exposes no direct use (a gun may be equipped, #26 F15); double-click picks up without using or equipping', async () => {
       const c = await fixture({ items: [item('external-medical', 'bandage'), item('external-gun', 'pistol', 1, 1)] }); await open(c.id);
       for (const uid of ['external-medical', 'external-gun']) {
         const before = await snapshot(), el = page.locator(`.coast-sample [data-source="container"][data-uid="${uid}"]`);
         const sourceItem = before.containers.find(box => box.id === c.id).inventory.items.find(i => i.uid === uid);
-        await el.click(); assert.equal(await page.locator('.coast-sample [data-do="inv-use"]').count(), 0); assert.equal(await page.locator('.coast-sample [data-do="inv-equip"]').count(), 0);
+        await el.click(); assert.equal(await page.locator('.coast-sample [data-do="inv-use"]').count(), 0);
+        assert.equal(await page.locator('.coast-sample [data-do="inv-equip"]').count(), uid === 'external-gun' ? 1 : 0);
         assert.equal(await page.locator('.coast-sample [data-do="inv-quick"]').count(), 1); await el.dblclick(); await frames(page, 2);
         const after = await snapshot(), saved = JSON.parse(after.storage).expansion.raid;
         assert.equal(after.containers.find(box => box.id === c.id).inventory.items.some(i => i.uid === uid), false);
@@ -372,6 +374,13 @@ async function suite(viewport) {
       await frames(page, 3); const stopped = await snapshot(); await frames(page, 6);
       assert.equal((await snapshot()).x, stopped.x, 'releasing A stops the walk');
       assert.deepEqual(participants(await snapshot()), kept);
+      // A Shift held before entry stays suppressed: the A event's shiftKey is not a new Shift press (#60 D8).
+      await fixture({ items: [item('f13-drag', 'fuse')], bag: [item('f13-ammo', 'ammo9', 10)] });
+      await page.keyboard.down('Shift');
+      try {
+        await open(c.id);
+        assert.equal(await walkWest((await snapshot()).x), false, 'leaving loot must not revive the old held Shift');
+      } finally { await page.keyboard.up('Shift'); }
       // Shift pressed in the window makes the escape a sprint.
       await fixture({ items: [item('f13-drag', 'fuse')], bag: [item('f13-ammo', 'ammo9', 10)] }); await open(c.id);
       await page.keyboard.down('Shift');

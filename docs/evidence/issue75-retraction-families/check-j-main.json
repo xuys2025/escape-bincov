@@ -1,0 +1,228 @@
+{
+  "startedAt": "2026-10-26T15:06:09.705Z",
+  "browser": "156.0.8078.48",
+  "entry": "../wt-main-h09/dist/index.html",
+  "method": "Offline Chromium, real CDP mouse (1280x720) and multi-touch (844x390, DPR 2) on the 2.5D raid host, seed 42, layered coast map. Fixtures place the player and enemies, hand weapons and freeze AI.",
+  "steps": [
+    {
+      "id": "j",
+      "name": "the gun pulls back after the shot frame, a pistol least and a shotgun most, and is home when its pulse ends; classic and reduced motion keep it still",
+      "status": "failed",
+      "error": "pistol180: back 0,2,2,1,1,0,0,0,0,0 across 0 (want 0 on the shot frame, 1-2 px next, falling to 0 by frame 4, at most 1 px across); pistol270: back 0,2,2,1,1,0,0,0,0,0 across 0 (want 0 on the shot frame, 1-2 px next, falling to 0 by frame 4, at most 1 px across); shotgun0: back 0,2,2,1,1,0,0,0,0,0 across 0 (want 0 on the shot frame, 4-5 px next, falling to 0 by frame 8, at most 1 px across)",
+      "detail": {
+        "weapon": "pistol",
+        "cases": {
+          "pistol0": {
+            "look": "pistol",
+            "back": [
+              0,
+              2,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          "pistol90": {
+            "look": "pistol",
+            "back": [
+              0,
+              2,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          "pistol180": {
+            "look": "pistol",
+            "back": [
+              0,
+              2,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          "pistol270": {
+            "look": "pistol",
+            "back": [
+              0,
+              2,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          "carbine0": {
+            "look": "carbine",
+            "back": [
+              0,
+              2,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          "rifle0": {
+            "look": "rifle",
+            "back": [
+              0,
+              2,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          "shotgun0": {
+            "look": "shotgun",
+            "back": [
+              0,
+              2,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          }
+        },
+        "classic": [
+          {
+            "look": "pistol",
+            "back": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          {
+            "look": "shotgun",
+            "back": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          }
+        ],
+        "reduced": [
+          {
+            "look": "pistol",
+            "back": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          {
+            "look": "shotgun",
+            "back": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          }
+        ]
+      },
+      "seconds": 0.2
+    }
+  ],
+  "stallResumes": {
+    "desktop": 0,
+    "phone": 0
+  },
+  "finishedAt": "2026-10-26T15:06:13.211Z",
+  "status": "failed"
+}

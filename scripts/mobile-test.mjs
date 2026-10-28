@@ -208,8 +208,9 @@ try{
   for(const [width,height] of [[800,360],[844,390],[915,412],[932,430],[667,375],[740,300]]){
    await page.setViewportSize({width,height});await frames(3);
    await page.waitForFunction(()=>window.__bincovSample.host.panel===null);
-   // Every touch button of the raid view (the sticks float under the thumbs, so there are none to measure).
-   const bad=await page.locator('.coast-sample .cs-touch button').evaluateAll(nodes=>nodes.filter(el=>{const r=el.getBoundingClientRect();return r.width<48||r.height<48||r.left<0||r.top<0||r.right>innerWidth+1||r.bottom>innerHeight+1}).map(el=>el.getAttribute('aria-label')||el.textContent));
+   // Every touch button the raid view shows (the sticks float under the thumbs, so there are none to measure); a hidden
+   // one, such as 设备 on a gun without devices (#28 M2-03), is not a target.
+   const bad=await page.locator('.coast-sample .cs-touch button').evaluateAll(nodes=>nodes.filter(el=>{if(el.hidden||!el.getClientRects().length)return false;const r=el.getBoundingClientRect();return r.width<48||r.height<48||r.left<0||r.top<0||r.right>innerWidth+1||r.bottom>innerHeight+1}).map(el=>el.getAttribute('aria-label')||el.textContent));
    assert.deepEqual(bad,[],`${width}x${height}`);
   }
   await shot('combat-740');await page.locator('.coast-sample .cs-touch [data-do="map"]').tap();await panelIs('map');await page.locator('.coast-sample [data-map]').waitFor();await shot('map-740');await raid('close').tap();await panelIs(null);

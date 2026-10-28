@@ -1,0 +1,117 @@
+{
+  "base": "974a3a8d1ad2a7662c3a828226295d6c9b31eb64",
+  "sourceState": "Task working tree before local commit; browser checkoutCommit is the unchanged base, not a claim that base builds this changed HTML. Exact-head CI follows publication.",
+  "unit": {
+    "productionFactoryAndWeight": "11/11",
+    "full": "884/884",
+    "engineeringGuards": "64/64",
+    "package": "passed",
+    "finalTypes": "passed"
+  },
+  "controls": [
+    {
+      "control": "shallow-read",
+      "exitCode": 1,
+      "expected": "test rejects the seeded regression"
+    },
+    {
+      "control": "partial-quick",
+      "exitCode": 1,
+      "expected": "test rejects the seeded regression"
+    }
+  ],
+  "browser": {
+    "startedAt": "2026-10-25T04:40:08.029Z",
+    "status": "passed",
+    "platform": "linux/x64",
+    "node": "v24.19.0",
+    "html": "/workspace/raid-inventory-services/dist/index.html",
+    "htmlSHA256": "986cb8777270ae92468dbf8fe922da6a9647713a755f5a1f939f39061dab1e85",
+    "checkoutCommit": "974a3a8d1ad2a7662c3a828226295d6c9b31eb64",
+    "cases": [
+      {
+        "entry": "village",
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "name": "carried-inventory-commands",
+        "status": "passed",
+        "errors": [],
+        "externalRequests": [],
+        "screenshots": [
+          "/workspace/raid-inventory-services/test-results/raid-inventory-services/village-1280x720-carried-inventory-commands-accepted.png"
+        ],
+        "detail": {
+          "mode": "inventory",
+          "rotate": true,
+          "wholeQuickBothWays": true,
+          "split": true,
+          "sameBagDrag": true
+        },
+        "durationMs": 32744
+      },
+      {
+        "entry": "village",
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "name": "carried-inventory-quota-rollback",
+        "status": "passed",
+        "errors": [],
+        "externalRequests": [],
+        "screenshots": [
+          "/workspace/raid-inventory-services/test-results/raid-inventory-services/village-1280x720-carried-inventory-quota-rollback-carried-save-rejected.png",
+          "/workspace/raid-inventory-services/test-results/raid-inventory-services/village-1280x720-carried-inventory-quota-rollback-accepted.png"
+        ],
+        "detail": {
+          "rollbackBytes": true,
+          "nestedGunPreserved": true,
+          "explicitActionRetryWrites": 1
+        },
+        "durationMs": 19544
+      },
+      {
+        "entry": "village",
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "name": "carried-inventory-commands",
+        "status": "passed",
+        "errors": [],
+        "externalRequests": [],
+        "screenshots": [
+          "/workspace/raid-inventory-services/test-results/raid-inventory-services/village-1920x1080-carried-inventory-commands-accepted.png"
+        ],
+        "detail": {
+          "mode": "inventory",
+          "rotate": true,
+          "wholeQuickBothWays": true,
+          "split": true,
+          "sameBagDrag": true
+        },
+        "durationMs": 47632
+      }
+    ],
+    "methodology": [
+      "Each independent case starts a fresh offline file:// browser context and deploys through ordinary menu controls.",
+      "Fixtures only arrange inventory, player position, equipment and enemy readiness through the explicit ?test=1 hooks. Gameplay operations use trusted Playwright mouse/keyboard input.",
+      "Raids run on the 2.5D view (the Phaser view and its classic-coast entry were removed). Inventory assertions compare live carried/world state, profile safe contents and every persisted container.",
+      "Storage.prototype.setItem is observed, not replaced with a fake save service. Successful transaction writes are counted inside their trusted browser input event; unrelated periodic checkpoints do not inflate this count.",
+      "Quota faults arm at capture of the trusted action, retain the exact pre-action bytes, and exercise the ordinary retry flow. The second window writes a newer real record and triggers the native storage event.",
+      "1280×720 runs all cases; 1920×1080 repeats pickup, equipment and swap with actual screenshots. No claimed touch-device or human balance acceptance."
+    ],
+    "browser": "153.0.8010.12",
+    "finishedAt": "2026-10-25T04:41:50.218Z",
+    "passed": 3,
+    "failed": 0
+  },
+  "reviewScreenshots": [
+    "1280x720.png",
+    "1920x1080.png",
+    "save-failed.png"
+  ],
+  "limitations": "Native keyboard/mouse with explicit inventory/position/AI and storage-fault fixtures. No physical device, human balance or performance signoff. Full broader browser suites are reserved for exact-head CI."
+}

@@ -10,7 +10,6 @@ import { createRuntimeTestDriver } from '../src/raid-runtime/test-support';
 import type { BreathView, CritChanceView, HudView, PublishedView, RaidIntent, StampedEvent } from '../src/raid-runtime/contract';
 import { BREATH_FULL, breathChance } from '../src/breath';
 import { critBreakdown, critSources, snapshotChance, type CritBreakdown, type CritInput, type PerkId } from '../src/perks';
-import { SAMPLE_GUNS } from '../src/shooting';
 import { critHud } from '../src/perk-copy';
 import { arm, perkBench, reopen, LANE, type Bench } from './fixtures/shooting-bench';
 import { oldRecord } from './fixtures/old-saves';
@@ -70,17 +69,17 @@ function oldRaid(version: 1 | 2): Bench {
     return old;
 }
 
-test('v3: the static chance of the gun in hand is critBreakdown of the inputs a shot takes, the sample rifle and doses included', () => {
-    // Technique 10 and nothing else (spec 2.1): the pistol 6.9%, the shotgun 4.94%, the carbine 9.84%; the sample rifle
+test('v3: the static chance of the gun in hand is critBreakdown of the inputs a shot takes, the M4A1 and doses included', () => {
+    // Technique 10 and nothing else (spec 2.1): the pistol 6.9%, the shotgun 4.94%, the carbine 9.84%; the M4A1
     // carries its own 5% weapon source (maintainer, 2026-10-23), the pistol's figure.
     for (const [gun, weapon, text] of [['pistol', D.WEAPONS.pistol, '6.90%'], ['shotgun', D.WEAPONS.shotgun, '4.94%'],
-        ['carbine', D.WEAPONS.carbine, '9.84%'], ['m4a1', SAMPLE_GUNS.m4a1, '6.90%']] as const) {
+        ['carbine', D.WEAPONS.carbine, '9.84%'], ['mb4a1', D.WEAPONS.mb4a1, '6.90%']] as const) {
         const b = arm(perkBench(), gun), view = hud(b);
         assert.deepEqual(view.crit, still({ weapon }), gun);
         assert.equal(view.crit!.gun!.text, text, gun);
         assert.equal(view.breath, null, `${gun}: no breath perk, no charge`);
     }
-    assert.deepEqual(hud(arm(perkBench(), 'm4a1')).crit!.gun!.sources.find(s => s.id === 'weapon'), { id: 'weapon', chance: .05, text: '5.00%' });
+    assert.deepEqual(hud(arm(perkBench(), 'mb4a1')).crit!.gun!.sources.find(s => s.id === 'weapon'), { id: 'weapon', chance: .05, text: '5.00%' });
     // The technique A line at 30: two independent perk sources and the 1.7 multiplier (which the chance ignores).
     const perks: PerkId[] = ['technique-20-a', 'technique-25-a', 'technique-30-a'], b = arm(perkBench(perks, 30), 'carbine'), r = b.runtime;
     assert.deepEqual(hud(b).crit, still({ technique: 30, weapon: D.WEAPONS.carbine, perks }));

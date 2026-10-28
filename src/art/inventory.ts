@@ -1,11 +1,13 @@
 import { brush, C, type PixelContext } from './pixel';
 import { paintItem, type ItemArtId } from './items';
+import { gunsmithArt } from './gunsmith-hooks';
 
 /** Inventory views have room for the object's proportions; world icons stay compact. */
 export const inventoryArtSize = (id: string): readonly [number, number] => {
   switch (id) {
     case 'shotgun': case 'carbine': return [78, 17];
-    case 'pistol': return [38, 17];
+    case 'pistol': case 'gb17': return [38, 17];
+    case 'mb4a1': return [80, 17];
     case 'medkit': case 'ledger': return [48, 16];
     case 'water': return [12, 32];
     case 'battery': return [22, 32];
@@ -15,6 +17,10 @@ export const inventoryArtSize = (id: string): readonly [number, number] => {
 };
 
 export function paintInventoryItem(c: PixelContext, id: ItemArtId): void {
+  // The gunsmith guns' factory pictures and the parts' icons from Sol's art (#28 M2-10), once decoded. The old carbine
+  // keeps its painted picture here: gunsmith-compose.ts splits that one for configured carbines.
+  const sol = id === 'carbine' ? null : gunsmithArt?.inventory(id);
+  if (sol) { c.drawImage(sol, 0, 0); return; }
   const { r, p } = brush(c), S = C;
   switch (id) {
     case 'shotgun':
@@ -73,6 +79,25 @@ export function paintInventoryItem(c: PixelContext, id: ItemArtId): void {
       r(S.paperShade,25,2,19,10); r(S.paper,26,2,17,8); r(S.wood,22,2,3,12);
       for(const x of [7,28]) { r(S.steelDark,x,5,12,1); r(S.steelDark,x,7,10,1); r(S.steel,x,9,6,1); }
       r(S.red,38,10,3,6); r(S.redLight,38,10,1,5); break;
+    // Placeholders until Sol's inventory art (ART-SPEC I, M2-10): the G17's squared slide and polymer frame.
+    case 'gb17':
+      p(S.ink,[[1,1],[36,1],[37,2],[37,8],[34,8],[34,10],[24,10],[24,14],[17,14],[16,17],[5,17],[8,10],[1,9]]);
+      r(S.edge,2,2,35,6); r(S.steelDark,2,2,35,2); r(S.steel,3,2,32,1); r(S.steelDark,36,3,1,4);
+      for (const x of [3,5,7]) r(S.ink,x,4,1,3); r(S.ink,21,3,7,2);
+      r(S.clothDark,8,8,26,2); r(S.cloth,27,8,6,1); for (const x of [28,30,32]) r(S.ink,x,8,1,1);
+      r(S.clothDark,18,12,6,2); r(S.clothDark,22,10,2,3); r(S.steel,19,10,1,2);
+      p(S.clothDark,[[9,10],[17,10],[16,16],[6,16]]); for (const [x,y] of [[10,11],[13,11],[9,13],[12,13],[8,15],[11,15],[14,15]]) r(S.cloth,x,y,1,1); break;
+    // The M4A1: sliding stock and buffer tube, railed receiver, slotted handguard, front sight, barrel, grip, magazine.
+    case 'mb4a1':
+      p(S.ink,[[0,3],[13,4],[13,11],[0,14]]); r(S.ink,12,5,9,4); r(S.ink,20,1,22,10); r(S.ink,41,3,21,7); r(S.ink,56,0,4,4); r(S.ink,61,5,15,3); r(S.ink,74,4,6,5);
+      p(S.ink,[[25,10],[30,10],[27,17],[22,17]]); p(S.ink,[[32,10],[39,10],[40,17],[33,17]]);
+      p(S.steelDark,[[1,4],[12,5],[12,10],[1,13]]); r(S.steel,2,5,9,1); r(S.edge,4,9,6,2);
+      r(S.steel,13,6,7,2); r(S.steelDark,21,3,20,7); r(S.steel,21,3,20,1); r(S.ink,27,5,6,2); r(S.brass,28,5,2,1);
+      for (let x = 21; x < 41; x += 2) r(S.steel,x,2,1,1);
+      r(S.edge,42,4,19,5); for (let x = 44; x < 60; x += 4) r(S.ink,x,5,2,2); r(S.steelDark,57,1,2,3);
+      r(S.steel,62,6,13,1); r(S.steelDark,75,5,4,3); r(S.ink,77,5,1,3);
+      p(S.steelDark,[[26,11],[29,11],[26,16],[23,16]]); r(S.ink,30,10,2,3);
+      p(S.steel,[[33,11],[38,11],[39,16],[34,16]]); r(S.steelLight,34,11,1,5); r(S.steelDark,37,12,1,4); break;
     default: paintItem(c, id, 24);
   }
 }
