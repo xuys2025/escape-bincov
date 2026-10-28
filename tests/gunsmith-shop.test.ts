@@ -47,7 +47,7 @@ test('the catalog: by kind, only what fits the base\'s guns, and pages that each
     const p = base(), all = Shop.browseStock(p, 'arms', true, Shop.BROWSE_ALL);
     assert.deepEqual(all, Shop.merchantStock('arms', true));
     assert.ok(Shop.browseStock(p, 'arms', true, { kind: 'attachment', fits: false, page: 0 }).every(D.isAttachment));
-    assert.deepEqual(Shop.browseStock(p, 'arms', true, { kind: 'weapon', fits: false, page: 0 }), ['pistol', 'shotgun', 'carbine', 'gb17']);
+    assert.deepEqual(Shop.browseStock(p, 'arms', true, { kind: 'weapon', fits: false, page: 0 }), ['pistol', 'shotgun', 'carbine', 'gb17', 'pb226', 'mb870']);
     // Fits: the M4A1's and the G17's parts on the shelf (the bases and the AK parts are other guns'), and the rounds they fire.
     const fits = Shop.browseStock(p, 'arms', true, { kind: 'all', fits: true, page: 0 });
     assert.deepEqual(fits, Shop.merchantStock('arms', true).filter(id => ['ammo9', 'ammoR', 'P01', 'F01', 'P07', 'M01', 'M05', 'O01', 'G01'].includes(id)));

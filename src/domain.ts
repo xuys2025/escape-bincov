@@ -230,6 +230,11 @@ const partsOf = (tier: PartTier): string[] => Object.keys(ATTACHMENT_ITEMS).filt
  */
 const SHELF_COMMON = ['O01', 'G01'];
 /**
+ * Wave-one guns the arms counter stocks as well (maintainer 2026-10-28, #28 M3): the P226 and the M870. The other
+ * gunsmith guns are found only; what the shop sells is to be studied (M4-01).
+ */
+const SHELF_GUNS = ['pb226', 'mb870'];
+/**
  * Fixed stock, no rotation (that is #28 M4-01). The arms counter also stocks the G17, every basic-tier attachment that
  * is an item (#28 M2-13, PLAN section 10: basic parts are stocked steadily) and SHELF_COMMON, after the old goods so their places
  * in the catalog do not move. The catalog is one 6x5 page: every stocked pack must fit it, which
@@ -237,7 +242,7 @@ const SHELF_COMMON = ['O01', 'G01'];
  */
 export const MERCHANTS: Record<'arms' | 'med', { name: string; subtitle: string; stock: string[] }> = {
   arms: { name: '老栓', subtitle: '武器 · 零件', stock: ['pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'scrap', 'wire', 'fuse', 'battery',
-    'gb17', ...partsOf('basic'), ...SHELF_COMMON] },
+    'gb17', ...SHELF_GUNS, ...partsOf('basic'), ...SHELF_COMMON] },
   med: { name: '许医生', subtitle: '医疗用品 · 食品', stock: ['bandage', 'medkit', 'antidote', 'water', 'food'] },
 };
 export const QUESTS: Record<string, { name: string; description: string; needs: Record<string, number>; reward: number; radio: string }> = {
@@ -846,8 +851,8 @@ export function rollLoot(seed: number, amount: number, table: LootTable = LOOT_T
   });
 }
 /**
- * Gunsmith finds (#28 M2-13 and M3; the acquisition section of docs/gunsmith/CONTRACTS.md). The gunsmith guns but the
- * shop's G17, and the common and rare attachments that are items, come only out of the gun and valuable shares of the
+ * Gunsmith finds (#28 M2-13 and M3; the acquisition section of docs/gunsmith/CONTRACTS.md). The gunsmith guns the shop
+ * does not stock, and the common and rare attachments that are items, come only out of the gun and valuable shares of the
  * loot: each gun or valuable record or drop is a find with chance `share`, so quest, food, medicine and ammunition supply
  * stays exactly what it was. A find from a gun record of a map's loot is a gun with chance `gun` (never on a corpse: an
  * enemy's sidearm does not turn into another gun), a rare one with chance `rareGun` wherever it lies (a flooded cache
@@ -858,9 +863,9 @@ export function rollLoot(seed: number, amount: number, table: LootTable = LOOT_T
  */
 export const GUNSMITH_FINDS = { share: 1 / 6, gun: 1 / 4, rareGun: 1 / 8, rare: 1 / 6 } as const;
 const FIND_PARTS = { common: partsOf('common').filter(id => !SHELF_COMMON.includes(id)), rare: partsOf('rare') };
-/** The guns that are found, by the catalog's tier (#28 M3): every gunsmith gun that is an item but the shop's G17. */
+/** The guns that are found, by the catalog's tier (#28 M3): every gun that is an item but those the arms counter stocks. */
 const FIND_GUNS = (() => {
-  const found = Object.keys(WEAPONS).filter((id): id is GunId => isGun(id) && !(['pistol', 'shotgun', 'carbine', 'gb17'] as string[]).includes(id));
+  const found = Object.keys(WEAPONS).filter((id): id is GunId => isGun(id) && !MERCHANTS.arms.stock.includes(id));
   return { common: found.filter(id => GUNS[id].tier !== 'rare'), rare: found.filter(id => GUNS[id].tier === 'rare') };
 })();
 /**
