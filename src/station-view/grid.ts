@@ -1,6 +1,6 @@
 import * as D from '../domain';
 import { MODIFIED_MARK, itemPicture } from '../art/item-images';
-import type { Scope } from '../coast-view/scope';
+import type { Scope } from '../view-lifecycle/scope';
 import { esc } from '../html';
 
 
