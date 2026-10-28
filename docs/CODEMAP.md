@@ -4,6 +4,8 @@
 
 定位影响面后，用[检查导航](CHECKS.md)选择相关风险、真实旧客户端等前置和诊断；它只列出要求，不能替代下面各卡片的具体反例与调用边界。
 
+需要核对影响面时运行 `pnpm architecture src/session.ts`（替换为目标源码路径）；省略路径可看全库摘要，`--json` 输出同一关系。命令只读当前源码，列出带行号的依赖、源码直接使用者和运行时传递依赖；类型边单列。测试入口和状态责任继续由本页卡片定位，执行策略见 [CHECKS](CHECKS.md)。共享分析与约束在 [source-graph.mjs](../scripts/source-graph.mjs)，由现有 `check:ci` 执行。
+
 先读任务对应的卡片，再定位所列符号和测试；发现新的调用者或兼容路径时扩展阅读。这里不是允许改动的文件白名单，也不要求把链接文件全部读完。
 
 | 要做什么 | 首读卡片 | 扩展条件 |
@@ -14,7 +16,7 @@
 | 新持久字段、迁移、导入、恢复 | [存档](#存档) | 活动行动字段必须核对两端捕获/恢复 |
 | 负重、上限等画面读数不一致 | [派生读数](#派生读数) | 先分清实时模拟、最近检查点与失败候选，再查格式化 |
 
-地图/碰撞从 [expansion-worlds.ts](../src/expansion-worlds.ts) 的 `resolveExpansionWorld` 和 [spatial.ts](../src/spatial.ts) 进入；画面/资源从 [station-view/route.ts](../src/station-view/route.ts)、[coast-view/sample.ts](../src/coast-view/sample.ts) 追宿主；两者经 [navigation.ts](../src/navigation.ts) 请页面（[ui.ts](../src/ui.ts) 注册）换画面，不直接导入页面，轮用 [pixi-app.ts](../src/pixi-app.ts) 的同一个 Pixi 应用。只改素材时无需先读交易和迁移实现。
+地图/碰撞从 [expansion-worlds.ts](../src/expansion-worlds.ts) 的 `resolveExpansionWorld` 和 [spatial.ts](../src/spatial.ts) 进入；画面/资源从 [station-view/route.ts](../src/station-view/route.ts)、[coast-view/sample.ts](../src/coast-view/sample.ts) 追宿主；两者经 [navigation.ts](../src/navigation.ts) 请页面（[ui.ts](../src/ui.ts) 注册）换画面，不直接导入页面，轮用 [pixi-app.ts](../src/pixi-app.ts) 的同一个 Pixi 应用。只改素材时无需先读交易和迁移实现。区域身份由世界定义的 `region.id` 提供（[居民楼](../src/building-world.ts)与商场相同）；[投影](../src/raid-runtime/presentation.ts)不按显示名称补身份。楼梯方向的中文前缀依赖仍归 #60 Q-E06。
 
 商场布局：骨架与各版本世界在 [mall-world.ts](../src/mall-world.ts)（`mallWorldV2`～`mallWorldV4`），家具类型与二、三版家具表在 [mall-layout-v2.ts](../src/mall-layout-v2.ts)，四版家具表与“哪些区域已布置”在 [mall-layout-v4.ts](../src/mall-layout-v4.ts)；新出击选哪一版看 [raid-areas.ts](../src/raid-areas.ts) 的 `sampleMallLayout`。改碰撞要开新版本（已存行动按原版本恢复），只换图不用。画面按格选素材在 [coast-view/mall-dressing.ts](../src/coast-view/mall-dressing.ts)（四版家具选 Sol 的 M2 素材，暂不用的模块和替代见 `SAMPLE_STAND_IN`），[art/mall-furniture.ts](../src/coast-view/art/mall-furniture.ts) 的程序绘制件是同画布的后备；约束测试 [mall-layout-v2.test.ts](../tests/mall-layout-v2.test.ts)、[mall-layout-v4.test.ts](../tests/mall-layout-v4.test.ts)，记录见[商场 2.5D](mall-2-5d/README.md)。
 
