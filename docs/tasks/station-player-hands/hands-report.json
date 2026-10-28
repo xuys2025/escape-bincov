@@ -1,0 +1,1002 @@
+{
+  "build": "dist/index.html",
+  "browser": "156.0.8078.48",
+  "startedAt": "2026-10-27T16:12:45.959Z",
+  "methodology": "Packaged offline build at https://station.test/ (routed, no network). Real session/localStorage, real DOM input in headless Chrome; phone sizes are viewport/touch emulation. ?test=1 fixtures: player placement, save seeding through SaveSession transactions while the yard is closed, storage fault injection, production time shortening. No mock Runtime and no simulated raid result.",
+  "steps": [
+    {
+      "name": "H15 F16 空手玩家：八方向站立/行走手部完整，身体素材与脚底不变",
+      "status": "passed",
+      "detail": "两尺寸各40帧；新增手部连通、镜像一致、头脚和共用素材不变",
+      "ms": 8716
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "frameAudit": [],
+  "expectedLogs": [],
+  "warnings": [
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    },
+    {
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "url": "https://station.test/?test=1"
+    }
+  ],
+  "coverage": {
+    "playerHands": [
+      {
+        "size": [
+          1280,
+          720
+        ],
+        "frames": [
+          {
+            "dir": 0,
+            "frame": 0,
+            "added": 19,
+            "changedHands": 25,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 0,
+            "frame": 1,
+            "added": 14,
+            "changedHands": 28,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 0,
+            "frame": 2,
+            "added": 8,
+            "changedHands": 26,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 0,
+            "frame": 3,
+            "added": 9,
+            "changedHands": 29,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 0,
+            "frame": 4,
+            "added": 23,
+            "changedHands": 29,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 1,
+            "frame": 0,
+            "added": 52,
+            "changedHands": 52,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 1,
+            "frame": 1,
+            "added": 45,
+            "changedHands": 47,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 1,
+            "frame": 2,
+            "added": 33,
+            "changedHands": 53,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 1,
+            "frame": 3,
+            "added": 51,
+            "changedHands": 54,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 1,
+            "frame": 4,
+            "added": 50,
+            "changedHands": 53,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 2,
+            "frame": 0,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 2,
+            "frame": 1,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 2,
+            "frame": 2,
+            "added": 49,
+            "changedHands": 49,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 2,
+            "frame": 3,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 2,
+            "frame": 4,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 3,
+            "frame": 0,
+            "added": 52,
+            "changedHands": 52,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 3,
+            "frame": 1,
+            "added": 45,
+            "changedHands": 47,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 3,
+            "frame": 2,
+            "added": 33,
+            "changedHands": 53,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 3,
+            "frame": 3,
+            "added": 51,
+            "changedHands": 54,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 3,
+            "frame": 4,
+            "added": 50,
+            "changedHands": 53,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 4,
+            "frame": 0,
+            "added": 19,
+            "changedHands": 25,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 4,
+            "frame": 1,
+            "added": 14,
+            "changedHands": 28,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 4,
+            "frame": 2,
+            "added": 8,
+            "changedHands": 26,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 4,
+            "frame": 3,
+            "added": 9,
+            "changedHands": 29,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 4,
+            "frame": 4,
+            "added": 23,
+            "changedHands": 29,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 5,
+            "frame": 0,
+            "added": 32,
+            "changedHands": 32,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 5,
+            "frame": 1,
+            "added": 31,
+            "changedHands": 31,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 5,
+            "frame": 2,
+            "added": 32,
+            "changedHands": 32,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 5,
+            "frame": 3,
+            "added": 31,
+            "changedHands": 31,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 5,
+            "frame": 4,
+            "added": 32,
+            "changedHands": 32,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 6,
+            "frame": 0,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 6,
+            "frame": 1,
+            "added": 55,
+            "changedHands": 55,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 6,
+            "frame": 2,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 6,
+            "frame": 3,
+            "added": 55,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 6,
+            "frame": 4,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 7,
+            "frame": 0,
+            "added": 32,
+            "changedHands": 32,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 7,
+            "frame": 1,
+            "added": 31,
+            "changedHands": 31,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 7,
+            "frame": 2,
+            "added": 32,
+            "changedHands": 32,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 7,
+            "frame": 3,
+            "added": 31,
+            "changedHands": 31,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 7,
+            "frame": 4,
+            "added": 32,
+            "changedHands": 32,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          }
+        ],
+        "sourceMutated": false,
+        "mirrors": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "size": [
+          1920,
+          1080
+        ],
+        "frames": [
+          {
+            "dir": 0,
+            "frame": 0,
+            "added": 19,
+            "changedHands": 25,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 0,
+            "frame": 1,
+            "added": 14,
+            "changedHands": 28,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 0,
+            "frame": 2,
+            "added": 8,
+            "changedHands": 26,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 0,
+            "frame": 3,
+            "added": 9,
+            "changedHands": 29,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 0,
+            "frame": 4,
+            "added": 23,
+            "changedHands": 29,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 1,
+            "frame": 0,
+            "added": 52,
+            "changedHands": 52,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 1,
+            "frame": 1,
+            "added": 45,
+            "changedHands": 47,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 1,
+            "frame": 2,
+            "added": 33,
+            "changedHands": 53,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 1,
+            "frame": 3,
+            "added": 51,
+            "changedHands": 54,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 1,
+            "frame": 4,
+            "added": 50,
+            "changedHands": 53,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 2,
+            "frame": 0,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 2,
+            "frame": 1,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 2,
+            "frame": 2,
+            "added": 49,
+            "changedHands": 49,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 2,
+            "frame": 3,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 2,
+            "frame": 4,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 3,
+            "frame": 0,
+            "added": 52,
+            "changedHands": 52,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 3,
+            "frame": 1,
+            "added": 45,
+            "changedHands": 47,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 3,
+            "frame": 2,
+            "added": 33,
+            "changedHands": 53,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 3,
+            "frame": 3,
+            "added": 51,
+            "changedHands": 54,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 3,
+            "frame": 4,
+            "added": 50,
+            "changedHands": 53,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 4,
+            "frame": 0,
+            "added": 19,
+            "changedHands": 25,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 4,
+            "frame": 1,
+            "added": 14,
+            "changedHands": 28,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 4,
+            "frame": 2,
+            "added": 8,
+            "changedHands": 26,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 4,
+            "frame": 3,
+            "added": 9,
+            "changedHands": 29,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 4,
+            "frame": 4,
+            "added": 23,
+            "changedHands": 29,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 5,
+            "frame": 0,
+            "added": 32,
+            "changedHands": 32,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 5,
+            "frame": 1,
+            "added": 31,
+            "changedHands": 31,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 5,
+            "frame": 2,
+            "added": 32,
+            "changedHands": 32,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 5,
+            "frame": 3,
+            "added": 31,
+            "changedHands": 31,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 5,
+            "frame": 4,
+            "added": 32,
+            "changedHands": 32,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 6,
+            "frame": 0,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 6,
+            "frame": 1,
+            "added": 55,
+            "changedHands": 55,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 6,
+            "frame": 2,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 6,
+            "frame": 3,
+            "added": 55,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 6,
+            "frame": 4,
+            "added": 56,
+            "changedHands": 56,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 7,
+            "frame": 0,
+            "added": 32,
+            "changedHands": 32,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 7,
+            "frame": 1,
+            "added": 31,
+            "changedHands": 31,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 7,
+            "frame": 2,
+            "added": 32,
+            "changedHands": 32,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 7,
+            "frame": 3,
+            "added": 31,
+            "changedHands": 31,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          },
+          {
+            "dir": 7,
+            "frame": 4,
+            "added": 32,
+            "changedHands": 32,
+            "changedProtected": 0,
+            "removed": 0,
+            "detached": 0
+          }
+        ],
+        "sourceMutated": false,
+        "mirrors": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "wallLight": []
+  },
+  "finishedAt": "2026-10-27T16:12:57.092Z",
+  "summary": {
+    "passed": 1,
+    "total": 1
+  }
+}

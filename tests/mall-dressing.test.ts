@@ -1,9 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { mallWorldV2, mallWorldV3, mallWorldV4 } from '../src/mall-world';
 import { MALL_FURNITURE, MALL_V2_LAYOUT, MALL_V3_LAYOUT, parseFurnitureName, type FurnitureName } from '../src/mall-layout-v2';
 import { MALL_V4_LAYOUT, mallRegionDressed } from '../src/mall-layout-v4';
-import { MALL_SPRITE_SIZE, PAINTED_LIFT, PROCEDURAL, WALL_LIFT, mallDecals, mallGround, mallLights, mallLintels, mallOpenings, mallProps, mallSigns, mallWallCells, mallWallFace, mallWallParts, mallWallProps, mallWallRole, type DressMap } from '../src/coast-view/mall-dressing';
+import { MALL_SPRITE_SIZE, PAINTED_LIFT, PROCEDURAL, SAMPLE_STAND_IN, WALL_LIFT, mallDecals, mallGround, mallLights, mallLintels, mallOpenings, mallProps, mallSigns, mallWallCells, mallWallFace, mallWallParts, mallWallProps, mallWallRole, type DressMap } from '../src/coast-view/mall-dressing';
 import { DECAL_SIZE } from '../src/coast-view/art/mall';
 import { PAINTED_TYPES } from '../src/coast-view/art/mall-furniture';
 import { mallPick } from '../src/coast-view/mall-art';
@@ -133,32 +134,56 @@ test('商场入口：连接两个不同地方的门洞都算（两个方向、�
 const V4 = mallWorldV4(), full = (id: string): DressMap => ({ ...dress(id, V4), full: true });
 const REVISION_4_ONLY = Object.keys(MALL_FURNITURE).slice(Object.keys(MALL_FURNITURE).indexOf('shelf-wall'));
 
-test('布局四版：没有素材的新家具都由视图程序绘制，画布＝占地＋高度，立在占地南边线上；连排件按两端收口', () => {
-    assert.deepEqual([...PAINTED_TYPES].sort(), REVISION_4_ONLY.sort(), 'every revision-4 type, and nothing else, is painted');
+const SAMPLES = new Map<string, { w: number; h: number; batch?: string }>(JSON.parse(readFileSync('assets/mall/manifest.json', 'utf8')).assets.map((a: { id: string; w: number; h: number; batch?: string }) => [a.id, a]));
+
+test('布局四版：新家具都用 Sol 的 M2 素材（程序绘制件留作后备），画布＝占地＋高度，立在占地南边线上；连排件按两端收口', () => {
+    assert.deepEqual([...PAINTED_TYPES].sort(), REVISION_4_ONLY.sort(), 'every revision-4 type, and nothing else, has a painted fallback');
     assert.deepEqual(Object.keys(PAINTED_LIFT).sort(), REVISION_4_ONLY.sort());
+    const used = new Set<string>();
     for (const id of ['mall-f1', 'mall-f2'] as const) {
         const m = full(id), sorted = mallProps(m).filter(p => p.layer === 'sorted');
         const pieces = MALL_V4_LAYOUT[id].reduce((n, p) => { const t = MALL_FURNITURE[p.type]; return n + ('run' in t ? p.n ?? 1 : 1); }, 0);
         assert.equal(sorted.length, pieces, `${id} one sprite per piece or run module`);
-        for (const p of sorted.filter(p => p.assets[0].startsWith(PROCEDURAL + 'furniture:'))) {
-            const [type, look, end, variant] = p.assets[0].slice(PROCEDURAL.length + 'furniture:'.length).split(':'), t = MALL_FURNITURE[type as FurnitureName];
-            assert.equal(mallPick(null, p.assets), p.assets[0], `${p.assets[0]} is drawable without samples`);
+        for (const p of sorted.filter(p => p.assets.at(-1)!.startsWith(PROCEDURAL + 'furniture:'))) {
+            const [sample, painter] = p.assets, [type, look, end, variant] = painter.slice(PROCEDURAL.length + 'furniture:'.length).split(':'), t = MALL_FURNITURE[type as FurnitureName];
+            assert.equal(p.assets.length, 2);
+            // The sample: delivered in Sol's M2 batch, at the painted piece's canvas size.
+            const meta = SAMPLES.get(sample);
+            assert.ok(meta && /^m2-p[0-3]$/.test(meta.batch ?? ''), `${sample} is an M2 sample`); used.add(sample);
+            assert.deepEqual([meta.w, meta.h], [t.w * 32, t.h * 32 + PAINTED_LIFT[type as FurnitureName]!], `${sample} canvas`);
+            const part = !('run' in t) ? '' : { w: '-end-w', e: '-end-e', we: '-single', m: '-mid-[ab]' }[end], own = `prop-${type}${look ? '-' + look : ''}`;
+            // The module for its place in the run, or the stand-in of a module left out.
+            const at = (name: string) => new RegExp(`^${own}${part}$`).test(name), named = sample.replace(/^mall-|-v1$/g, '');
+            assert.ok(at(named) && !(named in SAMPLE_STAND_IN) || Object.entries(SAMPLE_STAND_IN).some(([from, to]) => to === named && at(from)), `${sample} at its place (${end})`);
+            assert.equal(mallPick(null, p.assets), painter, `${type} is drawable without samples`);
             assert.equal(p.y, p.z - t.h * 32 - PAINTED_LIFT[type as FurnitureName]!, `${type} canvas height`);
             assert.ok(['0', '1', '2', '3'].includes(variant));
             assert.ok(p.foot && p.foot.x >= p.x && p.foot.x + p.foot.w <= p.x + t.w * 32 && p.foot.y + p.foot.h <= p.z, `${type} shadow inside its footprint`);
             if ('run' in t) assert.match(end, /^(w|e|we|m)$/); else assert.equal(end, '');
-            if (type === 'shelf-wall') assert.ok(look, 'wall shelves carry their shop');
+            if (type === 'shelf-wall' || type === 'counter') assert.ok(look, `${type} carries its shop`);
+            assert.equal(p.emit, ['glass-case', 'vending', 'switchgear'].includes(type), `${type} glows`);
         }
-        // Run ends: each run of a painted type closes west and east and is open in between.
+        // Run ends: each run of a layout-4 type closes west and east and is open in between, alternating middles.
         for (const run of MALL_V4_LAYOUT[id].filter(p => (p.n ?? 1) > 1 && PAINTED_TYPES.has(p.type))) {
-            const ends = sorted.filter(p => p.z === (run.y + 1) * 32 && p.x >= run.x * 32 && p.x < (run.x + run.n!) * 32).sort((a, b) => a.x - b.x).map(p => p.assets[0].split(':')[4]);
-            assert.deepEqual(ends, ['w', ...Array(run.n! - 2).fill('m'), 'e'], `${id} ${run.type} at ${run.x},${run.y}`);
+            const row = sorted.filter(p => p.z === (run.y + 1) * 32 && p.x >= run.x * 32 && p.x < (run.x + run.n!) * 32).sort((a, b) => a.x - b.x);
+            assert.deepEqual(row.map(p => p.assets[1].split(':')[4]), ['w', ...Array(run.n! - 2).fill('m'), 'e'], `${id} ${run.type} at ${run.x},${run.y}`);
+            assert.match(row[0].assets[0], /-end-w-v1$/); assert.match(row.at(-1)!.assets[0], /-(end-e|single|mid-a)-v1$/);
+            for (const mid of row.slice(1, -1)) assert.match(mid.assets[0], /-mid-[ab]-v1$/);
         }
+        // Modules left out stand in only where they would have been used, and never show.
+        assert.ok(sorted.every(p => !(p.assets[0].replace(/^mall-|-v1$/g, '') in SAMPLE_STAND_IN)));
+        // Thin pieces cast their shadow from the drawn base: the mannequin's stand, the bamboo screen on its midline.
+        for (const p of sorted.filter(p => /mannequin|bamboo-screen/.test(p.assets[0]))) assert.ok(p.foot!.w <= 12, `${p.assets[0]} base`);
     }
-    // Shop looks: the pharmacy's shelves hold medicine, the fried-chicken counter is the diner's.
+    // Every M2 piece stands somewhere in layout 4; only run modules may go unused (no run of a look needs its single).
+    const unused = [...SAMPLES].filter(([key, a]) => /^m2-/.test(a.batch ?? '') && key.startsWith('mall-prop-') && !key.includes('-emit-') && !used.has(key)).map(([key]) => key);
+    assert.ok(unused.every(key => /-(end-[ew]|mid-[ab]|single)-v1$/.test(key)), unused.join(' '));
+    // Shop looks: the pharmacy's shelves hold medicine, the fried-chicken counter is the diner's, the till by the
+    // convenience store's door the plain service counter.
     const f1 = mallProps(full('mall-f1'));
-    assert.ok(f1.some(p => p.assets[0].startsWith(PROCEDURAL + 'furniture:shelf-wall:pharmacy:')));
-    assert.ok(f1.some(p => p.assets[0].startsWith(PROCEDURAL + 'furniture:counter:diner:')));
+    assert.ok(f1.some(p => p.assets[0].startsWith('mall-prop-shelf-wall-pharmacy-')));
+    assert.ok(f1.some(p => p.assets[0].startsWith('mall-prop-counter-diner-')));
+    assert.ok(f1.some(p => p.assets[0] === 'mall-prop-counter-service-single-v1' && p.x === 58 * 32));
 });
 
 test('布局四版：门洞、门头与三版相同；新房间的灯管、地面与杂物只在四版生效，二、三版画面不变', () => {
@@ -173,7 +198,18 @@ test('布局四版：门洞、门头与三版相同；新房间的灯管、地�
     // Pharmacy floor: the cold-case tile in layout 4, the large tile it always had in layouts 2 and 3.
     assert.ok(mallGround(full('mall-f1'), 18, 13)[0].startsWith('mall-ground-tile-cold-'));
     assert.ok(mallGround(dress('mall-f1', V3), 18, 13)[0].startsWith('mall-ground-tile-large-'));
-    assert.ok(mallGround(full('mall-f2'), 15, 25)[0].startsWith('mall-ground-wood-'), 'the office has a wooden floor');
+    // M2 floors, layout 4 only: carpet in the office, rubber in the play area, small tiles in the toilets, concrete in the
+    // back of house (the switch room inside the play area too), asphalt on the south street; every material's `-a` is
+    // delivered, and the list ends on the large tile indoors, the plaza paving outside.
+    const floor = (id: string, x: number, y: number) => mallGround(full(id), x, y)[0].replace(/-[ab]-v1$/, '');
+    assert.deepEqual([floor('mall-f2', 15, 25), floor('mall-f2', 24, 44), floor('mall-f2', 12, 38), floor('mall-f2', 24, 37), floor('mall-f1', 36, 10), floor('mall-f1', 30, 50)],
+        ['mall-ground-carpet', 'mall-ground-rubber', 'mall-ground-tile-wc', 'mall-ground-concrete', 'mall-ground-concrete', 'mall-ground-asphalt']);
+    assert.ok(mallGround(dress('mall-f2', V3), 15, 25)[0].startsWith('mall-ground-tile-large-'), 'layouts 2 and 3 keep their floors');
+    for (const id of ['mall-f1', 'mall-f2'] as const) full(id).cells.forEach((row, y) => row.forEach((_, x) => {
+        const ids = mallGround(full(id), x, y);
+        assert.ok(SAMPLES.has(ids[1]) && ids[1].endsWith('-a-v1'), ids.join(' '));
+        assert.match(ids.at(-1)!, /^mall-ground-(tile-large|plaza)-a-v1$/);
+    }));
     for (const d of mallDecals(full('mall-f2'))) assert.equal(full('mall-f2').cells[d.y / 32][d.x / 32], 'floor');
     // Which regions count as furnished: all of them in layout 4, the demo route before it.
     assert.equal(mallRegionDressed('mall-layout-4', 'F2-11'), true); assert.equal(mallRegionDressed('mall-layout-3', 'F2-11'), false);

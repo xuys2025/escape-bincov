@@ -19,7 +19,7 @@
 
 [app.ts](../src/app.ts) 组装 `saveSession`、`hideoutRuntime`、音效和宿主引用（`coastSample`、`station`）。`SessionState` 是共享数据，调用者应在事务后重新读取 `save` / `loadout`，不要长期缓存可能被回滚或恢复替换的对象。
 
-新行动的公开端口和画面服务类型 `CoastHandle` / `CoastServices` 在 [raid-runtime/contract.ts](../src/raid-runtime/contract.ts)，[host.ts](../src/raid-runtime/host.ts) 绑定 Runtime 和事务服务并在工厂检查类型；据点端口在 [hideout-runtime/contract.ts](../src/hideout-runtime/contract.ts)。行动背包面板只收到有限服务：按需读取 detached 库存/装备投影，随身整理发三个值/UID 命令，适配器保留原 `SaveSession.mutate`；搜刮模式仍走容器事务，连 bag/safe 内整理也不绕过它。面板不持有 Session/SaveSession，不维护库存副本。尚非所有视图完全隔离：宿主与旧 UI 仍协调会话/路由，场景无关的 `Scope` / 渲染资源工具仍在 coast 目录。
+新行动的公开端口和画面服务类型 `CoastHandle` / `CoastServices` 在 [raid-runtime/contract.ts](../src/raid-runtime/contract.ts)，[host.ts](../src/raid-runtime/host.ts) 绑定 Runtime 和事务服务并在工厂检查类型；据点端口在 [hideout-runtime/contract.ts](../src/hideout-runtime/contract.ts)。行动背包面板只收到有限服务：按需读取 detached 库存/装备投影，随身整理发三个值/UID 命令，适配器保留原 `SaveSession.mutate`；搜刮模式仍走容器事务，连 bag/safe 内整理也不绕过它。面板不持有 Session/SaveSession，不维护库存副本。尚非所有视图完全隔离：宿主与旧 UI 仍协调会话/路由。场景无关的 DOM 资源作用域与唯一计数在 [view-lifecycle/scope.ts](../src/view-lifecycle/scope.ts)，页面级 Pixi 注册与渲染缓存在 [view-lifecycle/renderer-lifetime.ts](../src/view-lifecycle/renderer-lifetime.ts)；两者不导入场景或玩法，调用者直接导入，避免仅使用 `Scope` 时触发 Pixi 注册。
 
 行动期间区分三种状态：Runtime 的实时模拟、Session 最近提交后的检查点、失败后保留的候选。`captureExpansion()` 取得实时状态的独立副本；`session.expansion` 本身不随每个模拟子步更新。负重及上限由 Runtime 的只读服务提供，视图不能从最近检查点重新计算临时效果。编译期类型只约束调用端；外部 JSON 仍须严格运行时校验，字符串 ID 通过 `hasOwnStringKey` 拒绝原型键与数组隐式转换。
 
@@ -70,6 +70,12 @@ profile/已结算备份版本、session/完整备份封套版本、`ExpansionSta
 `freshStartRecord` 也是完整 v8 新档构造入口（敌人规则未开），仅保留音量；`startOver` 通过同一确认导入路径替换主档。重开前的本机恢复副本使用单独的 `escape-bincov.reset-copy.v1` 槽位，不是第二个正在运行的会话。新增持久字段必须同时检查新建、升级、导入、重开、结算候选和同一 Runtime 的经典/分层捕获恢复路径。
 
 多窗口保护由 `ownSession` 的页面生命周期锁和 `RecoveryStore.commit` 写前记录比对共同承担。`markConflict` 禁止后续持久化；窗口事件负责锁定画面并提示刷新/导出，不得用强制覆盖或改存档键消除冲突。
+
+## 可执行的依赖边界
+
+[source-graph.mjs](../scripts/source-graph.mjs) 的 `HEADLESS_ROOTS` 从规则、Session、存档编解码和两个 Runtime 入口展开类型与值依赖；[source-health](../scripts/ci/source-health.test.mjs) 阻止闭包引入视图、组装层、资源、外部包和浏览器全局。新 helper 自动跟随依赖进入检查，独立的新核心入口需登记根。既有 TextEncoder 编码与注入的 LockManager 端口允许；存储和页面访问仍由外层注入。
+
+全源码循环检查区分 type-only 与值形式导入，并纳入字面量动态加载和自环；未知目标/非字面量加载直接报告。查询与 CI 使用同一模型（[CODEMAP](CODEMAP.md) 的 `pnpm architecture`）；静态值形式导入保守计入，运行时反射和任意调用不在此模型内。原导出使用检查仍含 tests/scripts 使用者，查询里的消费者只统计 src。
 
 ## 维护与历史
 

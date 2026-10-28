@@ -115,7 +115,9 @@ export function mallDress(m: MapDef, art: MallArt, reduced: boolean): MallDress 
       // No floor under the stairwell: the opening is dark wherever its sprite does not cover it.
       const ids = drop[i] || well || c === 'tide' ? [] : mallGround(dress, x, y), sample = mallCanvas(art, ids);
       floor[y].push(sample);
-      mat[y].push(drop[i] || well ? 'void' : c === 'tide' ? 'mud' : outdoor[i] ? 'concrete' : /wood|deck/.test(mallPick(art, ids) ?? '') ? 'wood' : 'tile');
+      const picked = mallPick(art, ids) ?? '';
+      mat[y].push(drop[i] || well ? 'void' : c === 'tide' ? 'mud' : /asphalt/.test(picked) ? 'asphalt' : outdoor[i] || /concrete/.test(picked) ? 'concrete'
+        : /wood|deck/.test(picked) ? 'wood' : 'tile');
     }
   }
   const W = cols * T, H = rows * T;
@@ -145,7 +147,7 @@ export function mallDress(m: MapDef, art: MallArt, reduced: boolean): MallDress 
     else if (/freezer/.test(p.asset)) light(p.x + 32, p.z + 8, 54, 0x7aa0aa, .32);
     else if (/floor-lamp/.test(p.asset)) light(p.x + 16, p.z - 16, 64, 0xc89a5a, .5);
     else if (/directory|pylon/.test(p.asset)) light(p.x + 16, p.z + 6, 40, 0x8fb8a8, .3);
-    else if (/furniture:vending/.test(p.asset)) light(p.x + 16, p.z + 10, 44, 0xb8c8d0, .34);
+    else if (/vending/.test(p.asset)) light(p.x + 16, p.z + 10, 44, 0xb8c8d0, .34);
   }
   const wallProps = resolve(mallWallProps(dress));
   for (const p of wallProps) {

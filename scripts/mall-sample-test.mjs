@@ -1,5 +1,5 @@
-// Mall sample (?sample=mall) on the real mall Runtime: the 2.5D view of layout revision 4 with Sol's samples and the painted
-// layout-4 furniture (issue #47). Deploys through the ordinary tab page and the station yard, then checks the layout-4 world, the dressed scene, the
+// Mall sample (?sample=mall) on the real mall Runtime: the 2.5D view of layout revision 4 with Sol's samples, layout-4 furniture
+// and floors included (issue #47). Deploys through the ordinary tab page and the station yard, then checks the layout-4 world, the dressed scene, the
 // cutaway from outside, overlap-safe visibility, the stairs between floors, exits per floor, weather, remounts, the
 // placeholder fallback and screenshots at 1280x720 and 1920x1080. Fixtures use the explicit ?test=1 driver only to
 // place the player and enemies.
@@ -492,7 +492,7 @@ async function deployTabs(page) {
     assert.ok(r.hide.lit.every(l => l === 0), `hidden again: ${r.hide.lit}`); assert.equal(r.hide.leaks, 0); assert.equal(r.hide.vsHidden, 0, 'hiding is immediate');
     return r;
   });
-  await step('M20 layout 4 furnishes every region: painted pieces in the shops, back rooms, upstairs halls and streets; no room is dimmed or outside the sample', async () => {
+  await step('M20 layout 4 furnishes every region with the M2 pieces and floors (shops, back rooms, upstairs halls, streets); none falls back to the painted piece; no room is dimmed or outside the sample', async () => {
     const spots = [['pharmacy', 'mall-f1', 18, 13, '滨湾药房'], ['chicken', 'mall-f1', 17, 30, '红帆炸鸡'], ['storeroom', 'mall-f1', 36, 10, '北侧仓库'],
       ['service', 'mall-f1', 18, 45, '西侧服务间'], ['street', 'mall-f1', 30, 49, '车库入口及南街'], ['yard', 'mall-f1', 66, 49, '卸货区'],
       ['fashion', 'mall-f2', 20, 13, '海风服装'], ['office', 'mall-f2', 15, 25, '商场办公室'], ['play', 'mall-f2', 24, 40, '儿童乐园'], ['toilet', 'mall-f2', 12, 38, '厕所']];
@@ -505,17 +505,18 @@ async function deployTabs(page) {
           const v = window.__bincovSample.host.view, m = v.map;
           return { map: m.key.mapId, revision: m.key.layoutRevision, where: document.querySelector('[data-where]').textContent, note: v.sampleNote(),
             painted: v.mall.props.filter(p => p.asset.startsWith('procedural:furniture:')).length,
+            m2: v.mall.props.filter(p => /^mall-prop-(shelf-wall|rack|counter|glass-case|kitchen-line|sink|stall|lockers|switchgear|clothes-rail|barrier|diner-table|desk|cabinet|safe|mannequin|fitting-room|vending|checkout|ball-pool|slide|bamboo-screen|car|dumpster|container|ac-unit)-/.test(p.asset)).length,
             dim: m.regions.filter(r => r.inside && v.mall.zone(r.x + r.w / 2, r.y + r.h / 2) === 'dim').map(r => r.id) };
         });
         assert.equal(s.revision, 'mall-layout-4'); assert.equal(s.map, map);
         assert.ok(s.where.includes(place_), `${name}: ${s.where}`); assert.ok(!s.where.includes('样板外'), s.where); assert.equal(s.note, null);
         assert.deepEqual(s.dim, [], 'no room sits darker as outside the sample');
-        floors[map] = s.painted; places.push({ name, size: size.width, where: s.where });
+        floors[map] = [s.m2, s.painted]; places.push({ name, size: size.width, where: s.where });
         await shot(page, `m20-${name}-${size.width}.png`);
       }
     }
-    // Every layout-4 piece or run module without a sample is painted; none falls back to nothing.
-    assert.deepEqual(floors, { 'mall-f1': 132, 'mall-f2': 107 });
+    // Every layout-4 piece or run module is drawn from its M2 sample; none falls back to the painted piece or to nothing.
+    assert.deepEqual(floors, { 'mall-f1': [132, 0], 'mall-f2': [107, 0] });
     await page.setViewportSize({ width: 1280, height: 720 }); await frames(page, 4);
     return { floors, places };
   });

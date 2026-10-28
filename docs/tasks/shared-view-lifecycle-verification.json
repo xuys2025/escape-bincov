@@ -1,0 +1,541 @@
+{
+  "task": "Q-E02 shared view lifecycle ownership",
+  "implementation": "476086d7dc6e4f3821064c0b8d6d3b47f09680c3",
+  "startedBaseline": "0f73a67386bac196b87c983668295be6d1a99f1e",
+  "acceptedBaseline": "03ea26198259fa66ee7a39c32c06466a1545e76f",
+  "environment": {
+    "platform": "Windows",
+    "node": "24.22.1",
+    "pnpm": "11.19.0",
+    "browser": "156.0.8078.49"
+  },
+  "artifacts": {
+    "baseline": "03ea26198259fa66ee7a39c32c06466a1545e76f",
+    "implementation": "476086d7dc6e4f3821064c0b8d6d3b47f09680c3",
+    "method": "Exact current main sources and formal scripts via git archive, real archived source paths and tsconfig; shared unchanged asset directory. Built with node scripts/build.mjs and package.mjs. Windows tar mangled the Unicode README filename; restored exact Git blob bytes before packaging.",
+    "files": [
+      {
+        "file": "dist/index.html",
+        "equal": true,
+        "bytes": 9249145,
+        "sha256": "f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb",
+        "baselineSha256": "f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb"
+      },
+      {
+        "file": "start the game.html",
+        "equal": true,
+        "bytes": 9249145,
+        "sha256": "f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb",
+        "baselineSha256": "f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb"
+      },
+      {
+        "file": "release/Escape-Bincov-portable.zip",
+        "equal": true,
+        "bytes": 6032080,
+        "sha256": "66a0d6f2d3bdb72dbdca233d3c71fcae696d2ef69197b0f8c5696346d5d5cb6b",
+        "baselineSha256": "66a0d6f2d3bdb72dbdca233d3c71fcae696d2ef69197b0f8c5696346d5d5cb6b"
+      },
+      {
+        "file": "release/Escape-Bincov-web.zip",
+        "equal": true,
+        "bytes": 6027571,
+        "sha256": "cc311e1d76a0b04d6d7d9b86d060bfb6ca37d06e56010af1a6d83b423d33ae3a",
+        "baselineSha256": "cc311e1d76a0b04d6d7d9b86d060bfb6ca37d06e56010af1a6d83b423d33ae3a"
+      }
+    ]
+  },
+  "renderTargets": {
+    "browser": "156.0.8078.49",
+    "summary": {
+      "passed": 5,
+      "total": 5
+    },
+    "errors": [],
+    "external": [],
+    "checks": [
+      {
+        "name": "20 actual viewport changes release each replaced target slot",
+        "status": "passed"
+      },
+      {
+        "name": "view-size changes release targets without deleting other live resources or null slots",
+        "status": "passed"
+      },
+      {
+        "name": "six native context restores release old targets and preserve paused Runtime time",
+        "status": "passed"
+      },
+      {
+        "name": "restored world pixels and real keyboard input remain usable",
+        "status": "passed"
+      },
+      {
+        "name": "real settlement, parked shared renderer and another yard departure release and rebuild cleanly",
+        "status": "passed"
+      }
+    ]
+  },
+  "programRestore": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "hardware": {
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "vendor": "Google Inc. (AMD)",
+        "renderer": "ANGLE (AMD, AMD Radeon RX 6600 (0x000073FF) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "browser": "156.0.8078.49",
+      "summary": {
+        "passed": 8,
+        "total": 8
+      },
+      "errors": [],
+      "external": [],
+      "checks": [
+        {
+          "name": "S1 context restore: old render-target slots dropped",
+          "status": "passed"
+        },
+        {
+          "name": "S2 window resize: replaced render targets leave no placeholders",
+          "status": "passed"
+        },
+        {
+          "name": "P1 graphics program kept across restores, rebound in each new context",
+          "status": "passed"
+        },
+        {
+          "name": "C1 restored context with fewer texture units gets a program for that count",
+          "status": "passed"
+        },
+        {
+          "name": "C2 same reduced capability again reuses its program",
+          "status": "passed"
+        },
+        {
+          "name": "C3 back to the full capability returns to the first program",
+          "status": "passed"
+        },
+        {
+          "name": "C4 kept program sources equal Pixi's own compile per capability",
+          "status": "passed"
+        },
+        {
+          "name": "R1 yard still draws and takes input after the restores",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "hardware": {
+        "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "vendor": "Google Inc. (AMD)",
+        "renderer": "ANGLE (AMD, AMD Radeon RX 6600 (0x000073FF) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "browser": "156.0.8078.49",
+      "summary": {
+        "passed": 8,
+        "total": 8
+      },
+      "errors": [],
+      "external": [],
+      "checks": [
+        {
+          "name": "S1 context restore: old render-target slots dropped",
+          "status": "passed"
+        },
+        {
+          "name": "S2 window resize: replaced render targets leave no placeholders",
+          "status": "passed"
+        },
+        {
+          "name": "P1 graphics program kept across restores, rebound in each new context",
+          "status": "passed"
+        },
+        {
+          "name": "C1 restored context with fewer texture units gets a program for that count",
+          "status": "passed"
+        },
+        {
+          "name": "C2 same reduced capability again reuses its program",
+          "status": "passed"
+        },
+        {
+          "name": "C3 back to the full capability returns to the first program",
+          "status": "passed"
+        },
+        {
+          "name": "C4 kept program sources equal Pixi's own compile per capability",
+          "status": "passed"
+        },
+        {
+          "name": "R1 yard still draws and takes input after the restores",
+          "status": "passed"
+        }
+      ]
+    }
+  ],
+  "capability": {
+    "browser": "156.0.8078.49",
+    "summary": {
+      "passed": 4,
+      "total": 4
+    },
+    "errors": [],
+    "external": [],
+    "checks": [
+      {
+        "name": "probe: 3×(8,8,16,16) simulated capability switches",
+        "status": "passed"
+      },
+      {
+        "name": "idle: 3×(8,8,16,16) simulated capability switches",
+        "status": "passed"
+      },
+      {
+        "name": "remount: 3×(8,8,16,16) simulated capability switches",
+        "status": "passed"
+      },
+      {
+        "name": "trip: 3×(8,8,16,16) simulated capability switches",
+        "status": "passed"
+      }
+    ],
+    "rounds": 3,
+    "method": "MAX_TEXTURE_IMAGE_UNITS only"
+  },
+  "legacyLifecycle": {
+    "inventory": "review in scripts/script-inventory.mjs; not a CI regression gate",
+    "current": {
+      "summary": {
+        "passed": 1,
+        "total": 5
+      },
+      "htmlSHA256": "f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb",
+      "checks": [
+        {
+          "name": "startup-asset-cleanup-and-retry",
+          "status": "failed",
+          "failure": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#station-yard [data-quick=\"deploy\"]') to be visible\u001b[22m\n\n    at departure (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:84:58)\n    at open (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:79:9)\n    at async file:///C:/Users/xty/.codex/worktrees/shared-view-lifecycle/bincov/scripts/coast-lifecycle-test.mjs:101:32\n    at async check (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:94:26)\n    at async file:///C:/Users/xty/.codex/worktrees/shared-view-lifecycle/bincov/scripts/coast-lifecycle-test.mjs:100:54"
+        },
+        {
+          "name": "startup-view-cleanup-and-retry",
+          "status": "failed",
+          "failure": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#station-yard [data-quick=\"deploy\"]') to be visible\u001b[22m\n\n    at departure (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:84:58)\n    at open (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:79:9)\n    at async file:///C:/Users/xty/.codex/worktrees/shared-view-lifecycle/bincov/scripts/coast-lifecycle-test.mjs:101:32\n    at async check (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:94:26)\n    at async file:///C:/Users/xty/.codex/worktrees/shared-view-lifecycle/bincov/scripts/coast-lifecycle-test.mjs:100:54"
+        },
+        {
+          "name": "startup-observer-cleanup-and-retry",
+          "status": "failed",
+          "failure": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#station-yard [data-quick=\"deploy\"]') to be visible\u001b[22m\n\n    at departure (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:84:58)\n    at open (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:79:9)\n    at async file:///C:/Users/xty/.codex/worktrees/shared-view-lifecycle/bincov/scripts/coast-lifecycle-test.mjs:101:32\n    at async check (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:94:26)\n    at async file:///C:/Users/xty/.codex/worktrees/shared-view-lifecycle/bincov/scripts/coast-lifecycle-test.mjs:100:54"
+        },
+        {
+          "name": "ordinary-context-loss-native-restore-and-settlement",
+          "status": "failed",
+          "failure": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#station-yard [data-quick=\"deploy\"]') to be visible\u001b[22m\n\n    at departure (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:84:58)\n    at open (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:79:9)\n    at async file:///C:/Users/xty/.codex/worktrees/shared-view-lifecycle/bincov/scripts/coast-lifecycle-test.mjs:122:32\n    at async check (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:94:26)\n    at async file:///C:/Users/xty/.codex/worktrees/shared-view-lifecycle/bincov/scripts/coast-lifecycle-test.mjs:121:3"
+        },
+        {
+          "name": "direct-raid-runtime-time-freeze-restore-and-release",
+          "errors": [],
+          "method": "Explicit test=1 read-only Runtime/weak-release probe, same real yard departure and UI resume/abandon; no clock mutation or simulated settlement",
+          "running": {
+            "elapsed": 0,
+            "phase": "running",
+            "player": {
+              "x": 208,
+              "y": 1232
+            },
+            "hp": 100,
+            "frames": 2
+          },
+          "lost": {
+            "elapsed": 0.5349000000059606,
+            "phase": "paused",
+            "player": {
+              "x": 208,
+              "y": 1232
+            },
+            "hp": 100,
+            "frames": 33
+          },
+          "lostEnd": {
+            "elapsed": 0.5349000000059606,
+            "phase": "paused",
+            "player": {
+              "x": 208,
+              "y": 1232
+            },
+            "hp": 100,
+            "frames": 87
+          },
+          "restored": {
+            "elapsed": 0.5349000000059606,
+            "phase": "paused",
+            "player": {
+              "x": 208,
+              "y": 1232
+            },
+            "hp": 100,
+            "frames": 102
+          },
+          "pausedEnd": {
+            "elapsed": 0.5349000000059606,
+            "phase": "paused",
+            "player": {
+              "x": 208,
+              "y": 1232
+            },
+            "hp": 100,
+            "frames": 157
+          },
+          "resumed": {
+            "elapsed": 1.1355999999940392,
+            "phase": "running",
+            "player": {
+              "x": 208,
+              "y": 1232
+            },
+            "hp": 100,
+            "frames": 196
+          },
+          "released": {
+            "host": "collected",
+            "runtime": "collected",
+            "view": "collected",
+            "targets": [
+              {
+                "texture": "collected",
+                "source": "collected"
+              },
+              {
+                "texture": "collected",
+                "source": "collected"
+              },
+              {
+                "texture": "collected",
+                "source": "released"
+              }
+            ],
+            "stage": 0,
+            "ticker": false,
+            "attached": false,
+            "events": {
+              "attached": false,
+              "roots": {
+                "_rootPointerEvent": false,
+                "_rootWheelEvent": false,
+                "_rootContextMenuEvent": false
+              },
+              "pooled": 0,
+              "native": 0
+            },
+            "counts": {
+              "listeners": 0,
+              "tickers": 0,
+              "observers": 0,
+              "timers": 0,
+              "apps": 0,
+              "parked": 1,
+              "views": 0,
+              "renderTextures": 0,
+              "liveViews": 0,
+              "canvases": 1,
+              "sampleRoots": 0,
+              "art": "placeholder",
+              "mallArt": "placeholder",
+              "atlasPages": 0,
+              "largeTextures": 0,
+              "gpuTextures": 2,
+              "managedEmpty": 0,
+              "managedLive": 9,
+              "heap": 24500000
+            }
+          },
+          "status": "passed"
+        }
+      ]
+    },
+    "baseline": {
+      "summary": {
+        "failed": 1,
+        "remaining": "interrupted after first matching failure to release the shared browser queue; no other baseline result claimed"
+      },
+      "htmlSHA256": "f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb",
+      "checks": [
+        {
+          "name": "startup-asset-cleanup-and-retry",
+          "status": "failed",
+          "failure": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#station-yard [data-quick=\"deploy\"]') to be visible\u001b[22m\n\n    at departure (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:84:58)\n    at open (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:79:9)\n    at async file:///C:/Users/xty/.codex/worktrees/shared-view-lifecycle/bincov/scripts/coast-lifecycle-test.mjs:101:32\n    at async check (C:\\Users\\xty\\.codex\\worktrees\\shared-view-lifecycle\\bincov\\scripts\\coast-lifecycle-test.mjs:94:26)\n    at async file:///C:/Users/xty/.codex/worktrees/shared-view-lifecycle/bincov/scripts/coast-lifecycle-test.mjs:100:54"
+        }
+      ]
+    }
+  },
+  "limits": [
+    "No test assertions changed",
+    "No physical phone, human visual/feel, performance or F20 signoff",
+    "Only the passing browser probes above support current regression claims; the legacy tool remains failed"
+  ],
+  "integratedBaseline": "630e68f517edea34bfbcc548473897bd36bdfa08",
+  "headlessBoundary": {
+    "fixture": "Pure type-only import from core session into view-lifecycle/scope.ts; helper has no browser globals or Pixi import",
+    "positive": {
+      "tests": 1,
+      "pass": 1,
+      "fail": 0
+    },
+    "negative": {
+      "mutation": "Temporarily remove view-lifecycle from browserModule directory matcher; restore original bytes in finally",
+      "exit": 1,
+      "tests": 1,
+      "pass": 0,
+      "fail": 1,
+      "assertion": "a shared browser lifecycle type stays outside the headless core"
+    }
+  },
+  "finalChecks": {
+    "ci": {
+      "tests": 86,
+      "pass": 86,
+      "fail": 0
+    },
+    "package": "passed",
+    "unit": {
+      "tests": 1022,
+      "pass": 1022,
+      "fail": 0
+    }
+  },
+  "finalArtifactComparison": [
+    {
+      "file": "dist/index.html",
+      "equal": true,
+      "sha256": "f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb"
+    },
+    {
+      "file": "start the game.html",
+      "equal": true,
+      "sha256": "f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb"
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "equal": true,
+      "sha256": "66a0d6f2d3bdb72dbdca233d3c71fcae696d2ef69197b0f8c5696346d5d5cb6b"
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "equal": true,
+      "sha256": "cc311e1d76a0b04d6d7d9b86d060bfb6ca37d06e56010af1a6d83b423d33ae3a"
+    }
+  ],
+  "integratedMainSourceTree": "a29fcaf48f42dfb1b6d5cb951df9d57bef5cd846",
+  "scopeQuery": {
+    "file": "src/view-lifecycle/scope.ts",
+    "dependencies": [],
+    "consumers": [
+      {
+        "from": "src/coast-view/host.ts",
+        "kind": "static",
+        "line": 23
+      },
+      {
+        "from": "src/coast-view/sample.ts",
+        "kind": "static",
+        "line": 19
+      },
+      {
+        "from": "src/coast-view/scene.ts",
+        "kind": "static",
+        "line": 15
+      },
+      {
+        "from": "src/pixi-app.ts",
+        "kind": "static",
+        "line": 13
+      },
+      {
+        "from": "src/station-view/grid.ts",
+        "kind": "type",
+        "line": 3
+      },
+      {
+        "from": "src/station-view/host.ts",
+        "kind": "static",
+        "line": 6
+      },
+      {
+        "from": "src/station-view/route.ts",
+        "kind": "static",
+        "line": 14
+      },
+      {
+        "from": "src/station-view/ui.ts",
+        "kind": "type",
+        "line": 3
+      }
+    ]
+  },
+  "candidate117Integration": {
+    "acceptedMain": "630e68f517edea34bfbcc548473897bd36bdfa08",
+    "candidateHead": "4ba5b72c70983f3eefe4affdd31e2d674b3223a3",
+    "candidateStatus": "PR117 candidate, not accepted main when integrated; must merge PR117 before PR136",
+    "mergeCommit": "9a6212f63905fbc6622f6c8ba6891d543b58ee7b",
+    "candidateSourcesUntouched": [
+      "src/building-world.ts",
+      "src/raid-runtime/presentation.ts",
+      "src/spatial.ts",
+      "tests/content-identity.test.ts",
+      "tests/fixtures/content-map-baseline.json",
+      "tests/fixtures/content-map-v4-baseline.json"
+    ],
+    "checks": {
+      "unit": {
+        "tests": 1026,
+        "pass": 1026,
+        "fail": 0
+      },
+      "ci": {
+        "tests": 86,
+        "pass": 86,
+        "fail": 0
+      },
+      "package": "passed"
+    },
+    "artifacts": [
+      {
+        "file": "dist/index.html",
+        "equal": true,
+        "bytes": 9248874,
+        "sha256": "bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25",
+        "candidateSha256": "bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25"
+      },
+      {
+        "file": "start the game.html",
+        "equal": true,
+        "bytes": 9248874,
+        "sha256": "bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25",
+        "candidateSha256": "bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25"
+      },
+      {
+        "file": "release/Escape-Bincov-portable.zip",
+        "equal": true,
+        "bytes": 6031991,
+        "sha256": "86eed1c6c9c9872397ae60b7366355b87deed130f5217d71bbab00a142d559c5",
+        "candidateSha256": "86eed1c6c9c9872397ae60b7366355b87deed130f5217d71bbab00a142d559c5"
+      },
+      {
+        "file": "release/Escape-Bincov-web.zip",
+        "equal": true,
+        "bytes": 6027482,
+        "sha256": "7d43dd9042f0c00b07342ae17a5b058d8400621310c2a27c3e245872f3c782e0",
+        "candidateSha256": "7d43dd9042f0c00b07342ae17a5b058d8400621310c2a27c3e245872f3c782e0"
+      }
+    ],
+    "method": "Exact candidate source archive + unchanged formal build/package scripts and real tsconfig; candidate assets confirmed unchanged before sharing the asset directory",
+    "browserEvidence": "Previously recorded browser probes belong to lifecycle head 14df8ce and its exact artifacts. No new integrated browser result claimed; integrated complete CI will run."
+  }
+}
