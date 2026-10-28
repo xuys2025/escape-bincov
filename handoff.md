@@ -49,6 +49,16 @@
 
 源码入口、80帧浏览器检查、修复前负对照和两尺寸真实截图见[本项记录](docs/tasks/station-player-hands/README.md)。当前通过：1020 单测、打包、CI 策略 73/73、H15 两尺寸、行动动画 8/8 与冷素材加载；完整站内 78/79，I3 手机菜单切修理铺在原 main 对照和修复构建中均同样超时，保留失败，不拼为完整通过。准确 head、CI 与审阅状态见本项 PR；尚未合并/发布，真机与真人姿态观感待验。#26 其他反馈保留原归属。
 
+## 2026-10-28 行动精神/水分/饱食 HUD 实时投影（PR #110）
+
+沿原 `fix/live-vitals-hud` 正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，随后同步共同截止主线 `630e68f517edea34bfbcc548473897bd36bdfa08`（#134），保留商场四版/M2、背包服务和其他任务交接；受检源码 head `19dea0bfa59042281b4c7ec1f085aa3e8587e3b8`，随后只更新证据文档，最终 head / CI 见 [PR #110](https://github.com/xuys2025/escape-bincov/pull/110)。投影从实时身体复制精神/水分/饱食三个标量；宿主沿原八帧节奏舍入显示；经典行动为 null，存档、生理规则及事务不变。
+
+本轮 1025 单测、77 工程守卫、正式打包、完整 QoL 5/5、默认行动 11/11 首次通过。新 main 两尺寸负对照有效失败、修复后实时/帧/DOM 一致，保存值未变；已亲看双尺寸截图，原始失败和本轮结果留在同一[摘要](docs/tasks/audit-contracts.md#精神水分饱食-hud-的实时投影)/[报告](docs/tasks/audit-contracts/live-needs/report.json)，不拿旧 CI 代替新 head。没有真机、真人或性能签收，#60 其余范围继续开放；等待准确 head CI 与维护者审阅，不自行合并发布。
+
+最新同步后实际重跑工程守卫 **85/85** 和 package 通过；src/tests/assets、全部浏览器流程与依赖输入相对已验 `d0ebc57` 未变，正式 HTML SHA-256 仍为 `f61862ed972f8efaab0c8abf7c9360ab2aebbd751d943dfa77ad8211c5568b72`。上段单测/浏览器/截图据此复用，没有重复执行或新拍；旧 head CI 40624184384 已成功但仅作历史，新准确 head 完整 CI 以原 PR 为准。输入一致性和新结果记录在同报告 `main630Integration`。
+
+维护者已明确授权复查后自动合并；本次正常同步 main `f66ee79af6b84ef64319891e82d7dc4e82985350`（含 #117/#136），保留上游身份与共享生命周期归位。本节原验证证据保留历史归属，当前守卫、打包及准确新 head CI / 自动合并状态以原 PR 为准，不绕过检查或保护。
+
 ## 2026-10-27 改枪 M2：工作台、预设、美术、详情与商店、全流程检查（#106）
 
 `feat/gunsmith-m2` / [PR #106](https://github.com/xuys2025/escape-bincov/pull/106)（草稿），已同步 main `0d20857`。本日合入暂停的 M2-03/04/11/13 分支，并完成 M2-05～08、M2-10、M2-12、M2-14；M2-15（维护者试玩、合入）待办。
@@ -72,6 +82,18 @@
 - 测试：领域反例（安全箱、非枪、错容器、满包原子拒绝），正式工厂三种地图的单写、失败回滚和重试、拒绝不写；`test:issue26-inventory` 新增三组（拖箱/拖包/非法、点选/按钮、满包与配额回滚），原“外部枪不能直接装备”断言改为能装备。
 
 存档格式、版本、时钟和其他规则不变。本机结果和截图见 PR 正文与 `docs/tasks/raid-equip-slot/`。未做：真机、真人手感。和 #106（改枪 M2，草稿）在 `inventory.ts` 详情两行、`runtime.ts` 的 `equipItem` 会有文本冲突，谁后合谁解。
+
+## 2026-10-28 资源报告消费校验续作（PR #116）
+
+继续原分支 `fix/resource-report-validation` / [PR #116](https://github.com/xuys2025/escape-bincov/pull/116)，原 head `902a449ccf34d817a41a7260f30eb55bf3779239`，先正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，本次再正常同步共同截止 main `630e68f517edea34bfbcc548473897bd36bdfa08`。只改两份 review CLI 的输入消费边界与纯 Node 回归，不改游戏、算法、阈值或采样器；#111 的 rounds 与 #118 的堆输入各由原 PR 承接，#32 F20 仍 PARTIAL。
+
+旧 main CLI 实际接受 13 类反例：重复轮次、缺 release/quad 身份、null/巨大 heap、缺 table/type/label、字符串 live、重复槽位键和缺释放观察。原 PR 已拒绝其中七类，本轮补全另六类：在过滤前验证 table；摘要与槽位检查各自消费的键/布尔值并拒绝表内重复身份；live 槽位要求用于身份输出的 type/label，null 占位继续无需这些字段；freed 分支仅要求被复制的 scene/parked 属性存在，保留 null 和原值，不扩展为深层 schema。identity-probe 仅检查用于 added/removed 的纹理键；其他状态与附件原样保留。
+
+本次 Windows / Node 24.22.1 / pnpm 11.19.0：13 项真实 CLI 回归通过（含逐项字段矩阵、晚到的非法 probe 在写任何报告前拒绝、已有输出不被覆盖、合法 1 轮 partial 与 null 占位）。同一输入对比 main 旧 CLI：普通值、MAX_SAFE_INTEGER 和 0/上界交替三组共 39 份摘要输出逐字节一致；两组有/无 null 占位的槽位输出也逐字节一致。13 类反例旧 CLI 均 exit 0，修复后均 exit 1。原始证据保留在忽略的 `test-results/pr116/`。前次集成提交 `04c4218` 的完整 `pnpm test` 1022/1022、`pnpm check:ci` 90/90 与打包均通过。本次同步后实际 `check:ci` 98/98（含重跑 CLI 13 项）、严格打包通过；游戏/测试/依赖与两 CLI/helper/测试/producer 输入逐字节未变，复用该提交的 1022 单测及 41 文件对照，不重跑旧反例。重新生成 HTML/portable/web 的 SHA-256 分别为 `f3b7c3e1...` / `66a0d6f2...` / `cc311e1d...`，均与前次逐字节相同；证明和新日志在原证据目录。相对截止 main 的 `git diff --check` 通过。准确最终 head 与远端完整 CI 在原 PR 更新，不引用 10-25 旧 CI 代替。
+
+本地未运行浏览器、trend、实际 60 轮或堆采样，不宣称资源/F20 签收。代码父审与本机完整验证已通过，继续原 PR 正常提交推送并核对准确 head 完整 CI；仍为 draft，未转 Ready、未合并或发布。
+
+维护者已明确授权复查后自动合并；本次正常同步 main `f66ee79af6b84ef64319891e82d7dc4e82985350`（含 #117/#136），保留上游身份与共享生命周期归位。本节原验证证据保留历史归属，当前守卫、打包及准确新 head CI / 自动合并状态以原 PR 为准，不绕过检查或保护。
 
 ## 2026-10-27 #115：行动背包有限服务同步 main（续作）
 
