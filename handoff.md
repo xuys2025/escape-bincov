@@ -2,6 +2,18 @@
 
 任务 `codex/transaction-failure-phases`，基线 `0f73a67386bac196b87c983668295be6d1a99f1e`；本轮交付与证据集中在[原质量摘要 Q-E04](docs/tasks/quality-entropy.md#q-e04-提交后的发布失败)。先读 Session `persist` / `requiresReload`、Store `commit` 及 `tests/session-publication.test.ts`。已确认旧代码写后 restore 失败会使现金磁盘 680 / 内存 700；本轮独立发布失败结果、停写/暂停和精确已提交备份。最终回归及 PR 状态继续更新上述入口，不把已提交视为合并。
 
+## 2026-10-28 · 新一轮减熵：架构门禁与依赖查询（#60）
+
+- 基线：`3b61d52e898459f3e197584ae202285e7ade65e2`；分支 `codex/entropy-architecture`；[全库扫描/候选清单](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6449666799)。原改枪 M3 检出保留。
+- 本批：统一源码 AST 图、动态加载/类型导出/自环检查、沿核心依赖闭包约束 61 个模块，以及只读 `pnpm architecture [src/path.ts] [--json]`。入口：[实现摘要](docs/tasks/quality-entropy.md#2026-10-28-架构门禁与按文件查询)、[代码导航](docs/CODEMAP.md)、[共享分析](scripts/source-graph.mjs)。
+- 实测：原始基线 1020/1020 单测、85/85 工程守卫、package，三份制品与该基线字节相同；正常合入 main `0f73a67386bac196b87c983668295be6d1a99f1e` 后重跑 1022/1022、85/85 与 package 均通过。动态反向依赖负对照旧守卫 3/3 放行、新守卫拒绝，已还原。独立源码审阅无阻塞，src/assets/锁文件相对最新 main 无差异；准确 head CI 与合并状态见 [PR #134](https://github.com/xuys2025/escape-bincov/pull/134)。
+- 未验：本地浏览器、真机/F20/性能未运行；产品行为未变。准确提交与完整 CI 以本批 PR 为准，未合并/发布；后续候选按 #60 原归属推进，既有修复 PR 保持原承接。
+
+## 2026-10-28 室内墙体与视野设计（功能未实施）
+
+维护者要求只生成文本，核验后提交文档 PR。本轮基于 main `b5bd63b7896b3b0697d4ba38d02d000e78903047`，分支 `docs/indoor-wall-visibility`，新增[室内视野设计](docs/INDOOR-WALL-VISIBILITY-PLAN.md)并同步任务入口。所有室内适用、完整基础格、连续横墙段切换三个选项已由维护者确认；五项显示规则、缓冲、兼容边界和后续验收统一维护在方案内。
+
+已静态核对通用墙体与商场绘制、淡出和揭示路径及现有测试命令。没有同目标开放 PR，#130 仍承接商场家具和地面换图。默认沙箱启动失败后，提权完成 Git 状态检查与 fetch，使用独立工作树验证，保留原工作区已有修改。上游连接无分支写权限，改用已有 fork `LMX-323/escape-bincov` 提交。文档链接、源码事实和差异已核对；纯文档交付未运行游戏测试或打包；准确 head 与 CI 状态见承接 PR。游戏代码及两尺寸、真人、真机验收均未实施，不表示已上线，不自行合并。
 ## 2026-10-28 #47 M2：家具与地面素材接进布置表（PR #130，`agent/mall-m2-sprites`）
 
 维护者 10-27 说“接着做 #47 M2，把已有的家具和地面素材接进布置表”。基线 main `98968e1`（含 #127、#128、#115、#129、#108、#112），独立工作树开发，不碰 C:\bincov 里其他会话的分支。

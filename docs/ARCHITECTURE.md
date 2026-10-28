@@ -71,6 +71,12 @@ profile/已结算备份版本、session/完整备份封套版本、`ExpansionSta
 
 多窗口保护由 `ownSession` 的页面生命周期锁和 `RecoveryStore.commit` 写前记录比对共同承担。`markConflict` 禁止后续持久化；窗口事件负责锁定画面并提示刷新/导出，不得用强制覆盖或改存档键消除冲突。
 
+## 可执行的依赖边界
+
+[source-graph.mjs](../scripts/source-graph.mjs) 的 `HEADLESS_ROOTS` 从规则、Session、存档编解码和两个 Runtime 入口展开类型与值依赖；[source-health](../scripts/ci/source-health.test.mjs) 阻止闭包引入视图、组装层、资源、外部包和浏览器全局。新 helper 自动跟随依赖进入检查，独立的新核心入口需登记根。既有 TextEncoder 编码与注入的 LockManager 端口允许；存储和页面访问仍由外层注入。
+
+全源码循环检查区分 type-only 与值形式导入，并纳入字面量动态加载和自环；未知目标/非字面量加载直接报告。查询与 CI 使用同一模型（[CODEMAP](CODEMAP.md) 的 `pnpm architecture`）；静态值形式导入保守计入，运行时反射和任意调用不在此模型内。原导出使用检查仍含 tests/scripts 使用者，查询里的消费者只统计 src。
+
 ## 维护与历史
 
 调用者必须知道的副作用、单位、提交点、引用失效和兼容条件贴在正式类型/方法旁；本页维护跨模块责任与格式边界，CODEMAP 维护定位路径，验收结果留在对应 PR/报告。价格、字段清单和全部函数签名不在三处重复。

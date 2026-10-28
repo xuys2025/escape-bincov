@@ -274,7 +274,7 @@ export class SaveSession {
         const s = this.session, prepared = this.prepared.get(ticket);
         if (s.conflict || s.pendingSettlement || !this.owned || this.requiresReload || this.deferred && this.deferred !== ticket) return 'blocked';
         if (!prepared || this.store?.record?.revision !== prepared.revision || this.expansionBefore() !== prepared.before) return 'rejected';
-        // All detached publication allocations precede the write.
+        // Prepare the classic port input before writing; later publication copies remain inside publishCommitted.
         const legacyRaid = structuredClone(prepared.draft.legacyRaid);
         this.committingDeferred = this.deferred === ticket;
         let saved: boolean;
