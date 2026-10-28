@@ -336,17 +336,18 @@ try {
       // docs/INDOOR-WALL-VISIBILITY-PLAN.md on the floor of its marks, from the drawn pictures: the inner east-west run (row 3)
       // switches whole with the side of its centre line (y 112, buffer 4) the feet are on, keeps its mode while walked into
       // the buffer and starts there as base after a rebuild (a fixture placement is one); the south front shows only its cells; walls in front of a doorway are cut clear over it.
-      const read = () => page.evaluate(() => {
+      // Read once every wall has sunk or risen to its mode (0.2 s after a switch).
+      const read = async () => { await page.waitForFunction(() => window.__bincovSample.host.view.occluders.every(o => !o.wall || o.wall.sunk === (o.wall.mode === 'base' ? 1 : 0)), null, { timeout: 10000 }); return page.evaluate(() => {
         const v = window.__bincovSample.host.view, alpha = (o, y0, y1) => {
           const c = v.tex.canvas(o.shown ?? o.key), d = c.getContext('2d').getImageData(0, y0, c.width, y1 - y0).data;
           let n = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 0) n++; return n;
         };
         const at = (x, y) => v.occluders.find(o => o.cell?.x === x && o.cell?.y === y);
-        const piece = (x, y) => { const o = at(x, y), h = o.rect.h; return { mode: o.wall?.mode, level: o.level, drawn: o.sprite.texture === v.tex.atlas.get(o.shown ?? o.key),
+        const piece = (x, y) => { const o = at(x, y), h = o.rect.h; return { mode: o.wall?.mode, level: o.level, drawn: o.sprite.texture === v.tex.atlas.get(o.shown ?? o.key) && o.sprite.y === o.rect.y,
           above: alpha(o, 0, h - 32), foot: alpha(o, h - 32, h) }; };
         return { player: v.last.player.y, rebuilds: v.stats.rebuilds, run: [7, 8, 9, 10].map(x => at(x, 3).wall?.mode), south: piece(5, 9), north: piece(5, 0), side: piece(0, 5), inner: piece(7, 4),
           door: piece(9, 3), front: piece(4, 6), cuts: at(4, 6).wall?.cut };
-      });
+      }); };
       const steps = {};
       const go = async (name, y, map = 'resident-f2') => { await place(176, y, map); await settle(); steps[name] = await read(); };
       // Real movement up and down the corridor (x 176): stop as soon as the feet pass `y` going that way.
@@ -376,6 +377,43 @@ try {
       assert.deepEqual(c.cuts, [{ x: 0, y: 0, w: 32, h: 48 }]);
       assert.ok(c.front.mode === 'full' && c.front.above === 0 && c.front.foot > 0, `the wall south of the west door is cut over the doorway: ${JSON.stringify(c.front)}`);
       return steps;
+    });
+    await check('S04d walking-out-and-back-in-moves-the-south-front', async () => {
+      // Real walks through the open front door (a fixture placement rebuilds the scene and switches outright): leaving, the
+      // south front, on its cells while inside, rises back whole over 0.2 s, then the fades take it again; coming back
+      // in it sinks to its cells the same way. One frame between is caught each way: lowered whole px, drawn down to the
+      // south edge of its cells and no further.
+      await place(464, 448); await settle();
+      const door = await page.evaluate(() => { const d = window.__bincovSample.host.lastBatch.map.doors.find(d => d.id === 'resident-front'); return { x: d.x, y: d.y }; });
+      await place(door.x * 32 + 16, (door.y - 2) * 32 + 16); await page.evaluate(() => window.__bincovSample.driver.door('resident-front', true)); await settle();
+      const front = () => page.evaluate(y => {
+        const v = window.__bincovSample.host.view;
+        return v.occluders.filter(o => o.cell?.y === y && ['wall', 'door'].includes(o.kind)).map(o => ({ x: o.cell.x, mode: o.wall?.mode ?? null, sunk: o.wall?.sunk ?? null, level: o.level, home: o.sprite.y === o.rect.y, visible: o.sprite.visible }));
+      }, door.y);
+      const between = () => page.waitForFunction(y => {
+        const v = window.__bincovSample.host.view, run = v.occluders.filter(o => o.cell?.y === y && o.wall && o.wall.mode !== 'hidden');
+        return run.some(o => o.wall.sunk > 0 && o.wall.sunk < 1) && run.filter(o => o.wall.sunk > 0 && o.wall.sunk < 1)
+          .map(o => ({ x: o.cell.x, sunk: o.wall.sunk, dy: o.sprite.y - o.rect.y, bottom: o.sprite.y + o.sprite.texture.height - o.rect.y - o.rect.h, rising: v.rising.includes(o) }));
+      }, door.y, { polling: 'raf', timeout: 10000 }).then(r => r.jsonValue());
+      const walk = async (key, y) => {
+        const watch = between(); let mid;
+        await page.keyboard.down(key);
+        try { mid = await watch; await page.waitForFunction(([n, y]) => { const p = window.__bincovSample.host.lastBatch.frame.player.y; return n ? p <= y : p >= y; }, [key === 'w', y]); }
+        finally { await page.keyboard.up(key); }
+        await settle(); await page.waitForFunction(() => !window.__bincovSample.host.view.rising.length, null, { timeout: 10000 });
+        return mid;
+      };
+      // The row also holds walls of other buildings: only this one's pieces (under the rule while inside) are followed.
+      const inside = (await front()).filter(p => p.mode), ours = new Set(inside.map(p => p.x)), own = list => list.filter(p => ours.has(p.x));
+      const leaving = await walk('s', (door.y + 1) * 32 + 40), outside = own(await front());
+      const entering = await walk('w', (door.y - 1) * 32 + 16), again = own(await front());
+      assert.ok(inside.length >= 5 && inside.every(p => p.mode === 'base' && p.sunk === 1 && p.home), `inside: the south front on its cells ${JSON.stringify(inside)}`);
+      assert.ok(leaving.every(p => p.rising && p.dy > 0 && p.bottom === 0), `leaving: rising, drawn down to its cells' edge ${JSON.stringify(leaving)}`);
+      assert.equal(new Set(leaving.map(p => p.sunk)).size, 1, 'the front rises as one');
+      assert.ok(outside.every(p => p.mode === null && p.level >= 0 && p.home && p.visible), `outside: the fades have it back, standing where it was built ${JSON.stringify(outside)}`);
+      assert.ok(entering.every(p => !p.rising && p.dy > 0 && p.bottom === 0), `coming in: sinking ${JSON.stringify(entering)}`);
+      assert.ok(again.every(p => p.mode === 'base' && p.sunk === 1 && p.home), `inside again ${JSON.stringify(again)}`);
+      return { door, leaving: leaving.map(p => `${p.x}:${p.dy}`), entering: entering.map(p => `${p.x}:${p.dy}`) };
     });
     await check('S05 hidden-room-zero-pixels-with-positive-control', async () => {
       await place(176, 176, 'resident-f2'); await settle();
