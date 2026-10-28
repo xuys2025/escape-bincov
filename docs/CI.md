@@ -118,6 +118,8 @@ CI 策略测试还守住五件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 
 main 即便走文档快速通道，也从本次重新构建并校验的制品正常执行 `Deploy Pages` 和离线包发布。相同游戏字节已有完整 main 回归证据，本次单测与构建仍需通过。
 
+这两个 job 只直接依赖 `Build and test`，但 GitHub 会把被跳过的 job 沿依赖链往下传：`if` 里没有状态函数时，默认的 `success()` 也检查更上游的浏览器组，快速通道跳过浏览器组，部署和发布就跟着被跳过（2026-10-28 main `03ea261` 就是这样，`main-latest` 停在上一次提交）。所以两个 job 的 `if` 显式写 `!cancelled() && needs.verify.result == 'success'`，再加 main push 条件；`Build and test` 失败或运行被取消时仍不部署。[policy.test.mjs](../scripts/ci/policy.test.mjs) 要求浏览器组之后的每个 job 都带状态函数。
+
 镜像对 `Build and test`、`Deploy Pages` 的成功要求和检查名不变。提交里已经没有 HTML 和发布清单，镜像（服务器脚本不在本仓库）改读 `main-latest` 发布页的清单 `https://github.com/xuys2025/escape-bincov/releases/download/main-latest/release-manifest.json`：
 
 1. 清单的 `commit` 是构建这些文件的 main 提交，`run` 是那次 CI 运行。用 `run` 照旧核对运行（main push、成功、必需 job 齐全），并要求运行的 `head_sha` 等于 `commit`。
