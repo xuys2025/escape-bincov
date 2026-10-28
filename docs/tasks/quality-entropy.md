@@ -246,3 +246,6 @@ CI 自测失败的 1 项是 `policy.test.mjs:199` 写死 `C:/Program Files/Git/b
 **可复验入口。** `pnpm architecture src/session.ts`，或 `pnpm --silent architecture src/session.ts --json`；查看全库摘要时省略文件。CI 的真实临时文件正反例覆盖动态环、纯类型回边、空/混合导出、require/本地同名函数、资源/缺失目标、间接视图/DOM、别名和存储访问，以及 CLI 非法参数。
 
 **实际验证（Windows / Node 24.22.1 / pnpm 11.19.0）。** 全单测 1020/1020、工程守卫 85/85、package 通过；新增图/CLI 6 项加现役源码守卫 5 项共 11 项专项通过。临时在 balance 动态导入 scene，旧守卫 3/3 放行，新守卫在循环、纯规则和无视图边界拒绝；脚本在 finally 还原原字节。开发时的 LockManager 合并声明误报与 Node/browser 同名 localStorage 漏检均由正反例修正。最终入口链接/差异检查通过。HTML SHA-256 为 `5623d98946aada792ba7bb7d299908eb7b6418222a95e9555fb3cd543a4f94c1`，portable/web 分别为 `49caa6da7e77228f094ccc349aa04c016213ccd93a5b3986e342755019c89c85` / `81c1e812ececc4e6ac45da2ce744fe037e9908f110e4bf39f1d274df24db7aa0`，三份与基线逐字节相同。原始日志在忽略目录 `test-results/entropy/`。本地浏览器、真机、F20 与性能未运行；准确 head 完整 CI 见承接 PR。只改工具和文档，游戏源码/素材/依赖锁保持基线。后续公共生命周期归位、事务失败分类、内容身份与文案分离按上述 issue 的原归属推进，未计为本 PR 已完成。
+
+
+**合并前复核（2026-10-28）。** 正常合入最新 main `0f73a67386bac196b87c983668295be6d1a99f1e`（#107）后，重新通过 1022/1022 单测、85/85 工程守卫和 package，`git diff --check origin/main` 通过，任务差异仍不含 src/assets/依赖锁。上面的三个制品哈希只对应原始基线 `3b61d52`，不冒充 #107 后的字节对照。独立代理完成源码与 11 项专项审阅，未发现阻塞项；集成版本准确 head 的 CI 和合并状态以 PR #134 为准。
