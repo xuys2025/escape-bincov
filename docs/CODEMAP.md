@@ -16,7 +16,7 @@
 | 新持久字段、迁移、导入、恢复 | [存档](#存档) | 活动行动字段必须核对两端捕获/恢复 |
 | 负重、上限等画面读数不一致 | [派生读数](#派生读数) | 先分清实时模拟、最近检查点与失败候选，再查格式化 |
 
-地图/碰撞从 [expansion-worlds.ts](../src/expansion-worlds.ts) 的 `resolveExpansionWorld` 和 [spatial.ts](../src/spatial.ts) 进入；画面/资源从 [station-view/route.ts](../src/station-view/route.ts)、[coast-view/sample.ts](../src/coast-view/sample.ts) 追宿主；两者经 [navigation.ts](../src/navigation.ts) 请页面（[ui.ts](../src/ui.ts) 注册）换画面，不直接导入页面，轮用 [pixi-app.ts](../src/pixi-app.ts) 的同一个 Pixi 应用。只改素材时无需先读交易和迁移实现。
+地图/碰撞从 [expansion-worlds.ts](../src/expansion-worlds.ts) 的 `resolveExpansionWorld` 和 [spatial.ts](../src/spatial.ts) 进入；画面/资源从 [station-view/route.ts](../src/station-view/route.ts)、[coast-view/sample.ts](../src/coast-view/sample.ts) 追宿主；两者经 [navigation.ts](../src/navigation.ts) 请页面（[ui.ts](../src/ui.ts) 注册）换画面，不直接导入页面，轮用 [pixi-app.ts](../src/pixi-app.ts) 的同一个 Pixi 应用。只改素材时无需先读交易和迁移实现。区域身份由世界定义的 `region.id` 提供（[居民楼](../src/building-world.ts)与商场相同）；[投影](../src/raid-runtime/presentation.ts)不按显示名称补身份。楼梯方向的中文前缀依赖仍归 #60 Q-E06。
 
 共享视图生命周期：宿主的 DOM 监听、计时器与清理栈由 [view-lifecycle/scope.ts](../src/view-lifecycle/scope.ts) 的 `Scope` 管理，`lifecycle` 是院子、行动与共享 Pixi 应用共同更新的唯一计数；[view-lifecycle/renderer-lifetime.ts](../src/view-lifecycle/renderer-lifetime.ts) 管理页面级 Pixi 适配器注册、程序/着色器缓存与已释放纹理空槽。`pixi-app.ts` 保留初始化前的显式副作用导入，各视图直接导入所需模块。释放边界见 [renderer-lifetime.test.ts](../tests/renderer-lifetime.test.ts)，实际共享渲染器往返与上下文恢复见 [coast-render-target-test.mjs](../scripts/coast-render-target-test.mjs) 和 [station-context-program.mjs](../scripts/station-context-program.mjs)。
 
