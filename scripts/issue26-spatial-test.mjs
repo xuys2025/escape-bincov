@@ -64,7 +64,8 @@ const guides = () => page.evaluate(() => {
     doors: b.map.doors.map(d => ({ id: d.id, wall: d.wall, open: !!b.frame.doors[d.id], visible: !!v.doorGuides?.get(d.id)?.visible,
       x: v.doorGuides?.get(d.id)?.x, y: v.doorGuides?.get(d.id)?.y })),
     labels: b.map.entries.map(e => ({ label: e.label, visible: !!v.stairLabels?.get(e.id)?.visible })),
-    structures: v.occluders.map(o => ({ kind: o.kind, x: o.rect.x, y: o.z - 16, region: o.region, level: o.level, target: o.target, visible: o.sprite.visible })) };
+    structures: v.occluders.map(o => ({ kind: o.kind, x: o.rect.x, y: o.z - 16, region: o.region, level: o.level, target: o.target, visible: o.sprite.visible,
+      cell: o.cell, rule: o.wall?.rule, mode: o.wall?.mode })) };
 });
 /**
  * Occlusion of an entity by a guide or label (the rule of the retired Phaser checks P08/P09), from four reads of the same
@@ -147,7 +148,9 @@ try {
       assert.equal(result.doors.filter(d => d.wall === 'ns' && d.visible).length, 2);
       assert.deepEqual(result.labels.filter(e => e.visible).map(e => e.label).sort(), ['上楼 · 二楼', '下楼 · 地下'].sort());
       const walls = result.structures.filter(o => ['wall', 'door'].includes(o.kind) && o.x >= 320 && o.x < 608 && o.y >= 224 && o.y < 416);
-      assert.ok(walls.length > 10 && walls.every(o => o.target === 3 && o.level === 3));
+      // Indoor wall rule (docs/INDOOR-WALL-VISIBILITY-PLAN.md): no dither; the south front only its cells, the rest whole.
+      assert.ok(walls.length > 10 && walls.every(o => o.level === 0 && o.mode && o.visible));
+      assert.ok(walls.filter(o => o.cell.y === 12).every(o => o.mode === 'base') && walls.filter(o => o.cell.y < 12).every(o => o.mode === 'full'));
       const roof = result.structures.find(o => o.kind === 'roof' && o.region?.endsWith('/resident-ground'));
       assert.ok(roof && roof.level === 4 && !roof.visible);
       return { doors: result.doors, labels: result.labels, walls, roof };
@@ -297,7 +300,11 @@ try {
       for (const floor of [upstairs, basement]) {
         assert.ok(floor.structures.filter(o => o.kind === 'ceiling').length >= 3);
         assert.ok(floor.structures.filter(o => o.kind === 'ceiling').every(o => o.level === 4 && !o.visible));
-        assert.ok(floor.structures.filter(o => o.kind === 'wall').every(o => o.level === 3));
+        const walls = floor.structures.filter(o => o.kind === 'wall' || o.kind === 'door'), south = Math.max(...walls.map(o => o.cell.y));
+        assert.ok(walls.every(o => o.level === 0 && o.mode), 'every wall follows the indoor rule');
+        assert.ok(walls.filter(o => o.cell.y === south).every(o => o.mode === 'base') && walls.filter(o => o.cell.y === 0).every(o => o.mode === 'full'));
+        assert.ok(walls.filter(o => o.rule === 'row').every(o => o.mode === 'base'), 'the landing is north of the inner east-west run');
+        assert.ok(floor.structures.filter(o => o.kind === 'lintel').every(o => !o.visible));
         assert.ok(floor.doors.every(d => d.visible)); assert.ok(floor.labels.every(e => e.visible));
         assert.ok(Object.values(floor.revealed).some(v => !v), 'structural cutaway must not reveal closed rooms');
       }
@@ -324,6 +331,51 @@ try {
         samples.push(sample);
       }
       return samples;
+    });
+    await check('S04c indoor-wall-rule-on-the-second-floor', async () => {
+      // docs/INDOOR-WALL-VISIBILITY-PLAN.md on the floor of its marks, from the drawn pictures: the inner east-west run (row 3)
+      // switches whole with the side of its centre line (y 112, buffer 4) the feet are on, keeps its mode while walked into
+      // the buffer and starts there as base after a rebuild (a fixture placement is one); the south front shows only its cells; walls in front of a doorway are cut clear over it.
+      const read = () => page.evaluate(() => {
+        const v = window.__bincovSample.host.view, alpha = (o, y0, y1) => {
+          const c = v.tex.canvas(o.shown ?? o.key), d = c.getContext('2d').getImageData(0, y0, c.width, y1 - y0).data;
+          let n = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 0) n++; return n;
+        };
+        const at = (x, y) => v.occluders.find(o => o.cell?.x === x && o.cell?.y === y);
+        const piece = (x, y) => { const o = at(x, y), h = o.rect.h; return { mode: o.wall?.mode, level: o.level, drawn: o.sprite.texture === v.tex.atlas.get(o.shown ?? o.key),
+          above: alpha(o, 0, h - 32), foot: alpha(o, h - 32, h) }; };
+        return { player: v.last.player.y, rebuilds: v.stats.rebuilds, run: [7, 8, 9, 10].map(x => at(x, 3).wall?.mode), south: piece(5, 9), north: piece(5, 0), side: piece(0, 5), inner: piece(7, 4),
+          door: piece(9, 3), front: piece(4, 6), cuts: at(4, 6).wall?.cut };
+      });
+      const steps = {};
+      const go = async (name, y, map = 'resident-f2') => { await place(176, y, map); await settle(); steps[name] = await read(); };
+      // Real movement up and down the corridor (x 176): stop as soon as the feet pass `y` going that way.
+      const walk = async (name, key, y) => {
+        await page.keyboard.down(key);
+        try { await page.waitForFunction(([n, y]) => { const p = window.__bincovSample.host.lastBatch.frame.player.y; return n ? p <= y : p >= y; }, [key === 'w', y]); }
+        finally { await page.keyboard.up(key); }
+        await settle(); steps[name] = await read();
+      };
+      await go('corridor', 176);
+      await page.screenshot({ path: resolve(out, `${size.join('x')}-S04c-corridor.png`) });
+      await walk('buffer-from-south', 'w', 116); await walk('north', 'w', 103);
+      await page.screenshot({ path: resolve(out, `${size.join('x')}-S04c-north-of-run.png`) });
+      await walk('buffer-from-north', 's', 108); await walk('south-again', 's', 121);
+      await place(464, 336); await settle(); await go('reload-in-buffer', 115);
+      for (const k of ['buffer-from-south', 'buffer-from-north']) assert.ok(steps[k].player >= 108 && steps[k].player <= 116, `${k} stopped in the buffer: ${steps[k].player}`);
+      assert.ok(steps.north.player < 108 && steps['south-again'].player > 116);
+      assert.equal(new Set(['corridor', 'buffer-from-south', 'north', 'buffer-from-north', 'south-again'].map(k => steps[k].rebuilds)).size, 1, 'walking never rebuilds the scene');
+      const run = Object.fromEntries(Object.entries(steps).map(([k, s]) => [k, s.run]));
+      assert.deepEqual(run, { corridor: Array(4).fill('full'), 'buffer-from-south': Array(4).fill('full'), north: Array(4).fill('base'),
+        'buffer-from-north': Array(4).fill('base'), 'south-again': Array(4).fill('full'), 'reload-in-buffer': Array(4).fill('base') });
+      const { corridor: c, north: n } = steps;
+      assert.ok(c.south.mode === 'base' && c.south.above === 0 && c.south.foot > 900 && c.south.drawn, `south front: footprint only ${JSON.stringify(c.south)}`);
+      for (const w of [c.north, c.side, c.inner]) assert.ok(w.mode === 'full' && w.level === 0 && w.above > 1000 && w.drawn, `whole wall ${JSON.stringify(w)}`);
+      assert.ok(c.door.mode === 'full' && c.door.above > 0, 'the storage door shows whole from the south');
+      assert.ok(n.door.mode === 'base' && n.door.above === 0 && n.door.foot > 0 && n.door.drawn, `the storage door cut to its cell: ${JSON.stringify(n.door)}`);
+      assert.deepEqual(c.cuts, [{ x: 0, y: 0, w: 32, h: 48 }]);
+      assert.ok(c.front.mode === 'full' && c.front.above === 0 && c.front.foot > 0, `the wall south of the west door is cut over the doorway: ${JSON.stringify(c.front)}`);
+      return steps;
     });
     await check('S05 hidden-room-zero-pixels-with-positive-control', async () => {
       await place(176, 176, 'resident-f2'); await settle();

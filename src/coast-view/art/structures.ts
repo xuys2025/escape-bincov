@@ -154,6 +154,21 @@ export function paintWall(s: WallSpec): HTMLCanvasElement {
   return c;
 }
 
+/**
+ * A door of an east-west wall cut down to its own cell (wall-display.ts): a jamb at each end and, between them, the
+ * closed leaf across the cell or the sill of the open doorway, so a closed door still reads as a barrier.
+ */
+export function paintDoorFoot(open: boolean): HTMLCanvasElement {
+  const { c, g } = canvas(32, 32);
+  for (const x of [0, 28]) { rect(g, '#46433d', x, 0, 4, 32); rect(g, '#a49b88', x, 0, 4, 2); rect(g, '#9a927f', x, 30, 4, 2); }
+  if (open) { rect(g, '#6c675d', 4, 14, 24, 3); rect(g, '#857e70', 4, 14, 24, 1); }
+  else {
+    rect(g, P.char, 4, 11, 24, 10); rect(g, P.woodDark, 4, 12, 24, 8); rect(g, P.wood, 5, 13, 22, 5);
+    rect(g, P.woodLight, 5, 13, 22, 1); rect(g, P.lamp, 22, 15, 2, 2);
+  }
+  return c;
+}
+
 export function paintLintel(width: number): HTMLCanvasElement {
   const { c, g } = canvas(width, 32 + WALL_H);
   rect(g, '#46433d', 0, 0, width, 32); rect(g, '#9a927f', 0, 30, width, 2); rect(g, '#a49b88', 0, 0, width, 2);
