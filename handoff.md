@@ -1,3 +1,5 @@
+2026-10-28 维护者已明确授权 #110 复查无问题后自动合并。本次正常合入 main `100858502b30c78965d1a308b2d6280172763716`（#117），保留双方任务记录；业务修复源码未再改变。当前组合实际通过 85 项 CI 守卫及严格打包，HUD 与内容身份专项 7/7 通过。准确新 head CI、自动合并配置及最终合入状态以原 PR 平台记录为准；不跳过必需检查或分支保护。
+
 ## 2026-10-28 行动精神/水分/饱食 HUD 实时投影（PR #110）
 
 沿原 `fix/live-vitals-hud` 正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，随后同步共同截止主线 `630e68f517edea34bfbcc548473897bd36bdfa08`（#134），保留商场四版/M2、背包服务和其他任务交接；受检源码 head `19dea0bfa59042281b4c7ec1f085aa3e8587e3b8`，随后只更新证据文档，最终 head / CI 见 [PR #110](https://github.com/xuys2025/escape-bincov/pull/110)。投影从实时身体复制精神/水分/饱食三个标量；宿主沿原八帧节奏舍入显示；经典行动为 null，存档、生理规则及事务不变。
@@ -5,6 +7,12 @@
 本轮 1025 单测、77 工程守卫、正式打包、完整 QoL 5/5、默认行动 11/11 首次通过。新 main 两尺寸负对照有效失败、修复后实时/帧/DOM 一致，保存值未变；已亲看双尺寸截图，原始失败和本轮结果留在同一[摘要](docs/tasks/audit-contracts.md#精神水分饱食-hud-的实时投影)/[报告](docs/tasks/audit-contracts/live-needs/report.json)，不拿旧 CI 代替新 head。没有真机、真人或性能签收，#60 其余范围继续开放；等待准确 head CI 与维护者审阅，不自行合并发布。
 
 最新同步后实际重跑工程守卫 **85/85** 和 package 通过；src/tests/assets、全部浏览器流程与依赖输入相对已验 `d0ebc57` 未变，正式 HTML SHA-256 仍为 `f61862ed972f8efaab0c8abf7c9360ab2aebbd751d943dfa77ad8211c5568b72`。上段单测/浏览器/截图据此复用，没有重复执行或新拍；旧 head CI 40624184384 已成功但仅作历史，新准确 head 完整 CI 以原 PR 为准。输入一致性和新结果记录在同报告 `main630Integration`。
+
+## 2026-10-28 · 居民楼 region 身份（PR #117 续作）
+
+`fix/content-identity` 保留原 PR 历史并依次合入 main `03ea261`、`630e68f`（#134）。居民楼 8 个已有完整 region ID 写入世界定义，投影不按中文名补身份；不变更世界/布局编号或存档格式。楼梯方向和内容登记仍属 Q-E06，未在本 PR 实施。
+
+在未改动的 `03ea261` 独立捕获 mall-v4 两层完整静态投影哈希，合成后逐项相等；原九图 / 28 入口基线及改名、重排、缺 ID 反例亦通过（4/4）。Windows / Node 24 / pnpm 11.19：`pnpm test` 1026/1026、`pnpm check:ci` 77/77、`pnpm package` 通过，HTML SHA-256 `bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25`。同步 `630e68f` 后重跑：专项 4/4、`pnpm test` 1026/1026、`pnpm check:ci` 85/85、`pnpm package` 通过。两次 main 的游戏源码与素材无变化，复用此前打包 HTML 的 `pnpm test:raid-default` 11/11（含居民楼、mall-v4 和旧行动恢复）；准确 head CI 状态见 PR 正文。真人体验不由自动测试替代。
 
 ## 2026-10-28 · 新一轮减熵：架构门禁与依赖查询（#60）
 
