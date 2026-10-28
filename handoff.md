@@ -1,6 +1,6 @@
 ## 2026-10-28 Shader cache 快照消费字段校验（PR #118，`fix/heap-cache-input`）
 
-复用 [PR #118](https://github.com/xuys2025/escape-bincov/pull/118)，续作前 head `039bac0d7e27905857ac989b2f6e9bc061f547dc`。本轮正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`（合入提交 `3613b04`），保留主线全部文档条目；准确交付 head 与远程检查见原 PR。职责仍是 #32/#60 的 shader-cache review 分析器输入校验，与 #116 station 报告消费字段校验分开。
+复用 [PR #118](https://github.com/xuys2025/escape-bincov/pull/118)，续作前 head `039bac0d7e27905857ac989b2f6e9bc061f547dc`。本轮先正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`（`3613b04`），交付 head `bb507f1` 的完整 CI [40624444343](https://github.com/xuys2025/escape-bincov/actions/runs/40624444343) 已通过。main 新进 #134 后，再正常合入共同截止点 `630e68f517edea34bfbcc548473897bd36bdfa08`；只在本文件顶部冲突并保留双方小节，#134 的架构工具、分类与入口完整保留；准确交付 head 与远程检查见原 PR。职责仍是 #32/#60 的 shader-cache review 分析器输入校验，与 #116 station 报告消费字段校验分开。
 
 原脚本把 shader string 的 null `self_size` 加成零：最小图 cycle-30 应有 80 bytes，旧 CLI 仍 exit 0 并写 `newRetainedBytes: 0`。现在 [`validateSnapshot`](scripts/sol-heap-cache-inspect.mjs) 只校验实际消费的 flat-table 字段：缺失/重复字段、类型与表索引、不完整行、非安全整数 id/bytes、重复 id，以及 cycle-30 incoming edge 计数/偏移/命名；`sumBytes` 拒绝不精确求和。只在所有消费校验和报告准备成功后写 `shader-cache.json`，拒绝时保留已有报告字节。未消费的 metadata、额外列/类型允许，cycle-10 不要求未消费的 edge 图。不做完整 V8 schema 或业务内存预算校验。
 
@@ -8,7 +8,14 @@
 
 Node v24.22.1 本轮实际生成两份 V8 快照（5,210,690 / 5,211,160 bytes），候选 CLI exit 0，新增人工字符串 2 节点/176 bytes、3 owner paths。这只是 Node 人工字符串图的格式兼容证据，不是浏览器/游戏 shader 泄漏或 F20 签收。原始快照、采集脚本和日志只在忽略的 `test-results/pr118/`；首轮未扁平化人工字符串只得到零匹配，已修 fixture 重新捕获并核对非零观察。没有变更分析算法、阈值、游戏、历史证据或测试分类。
 
-本轮完整 `pnpm test` 1022/1022（63.87 秒）、`pnpm check:ci` 87/87（16.88 秒）、`pnpm package`、CLI 十组与入口文档三组合跑 13/13、`git diff --check` 均通过。日志为 `test-results/pr118/pnpm-test.log`、`check-ci.log`、`package.log`，产品哈希见同目录 `product-hashes.json`；生成物未提交。本机重负载验证时段已释放。未运行浏览器、游戏堆采样、trend 或 60 轮/F20，不关闭 #32/#60；远程准确 head 的完整 CI 待提交后核对。仍为 draft，未合并或发布。
+此前 `bb507f1` 已实际通过完整 `pnpm test` 1022/1022（63.87 秒）、`pnpm check:ci` 87/87、`pnpm package`、CLI 十组与入口文档三组合跑 13/13，且其完整 CI 已通过。合入 #134 时逐字节核对本任务生产脚本、十组 CLI 测试与锁文件不变，依赖声明和 test/check:ci/package/build 命令不变，游戏 src/assets/tests 不变；1022 单测与真实快照兼容证据按同代码复用，不声称重新采样。当前合成树已重新实际通过 `pnpm check:ci` 95/95（18.56 秒，含 CLI 十组）、`pnpm package` 与 `git diff --check`，三产品 SHA-256/字节数与此前及 main 一致。新日志为 `test-results/pr118/check-ci-630.log`、`package-630.log`，输入核对与三哈希为 `merge-630-inputs.json`、`product-hashes-630.json`；生成物不提交。首次本地输入比对发现测试工作副本 mixed 换行，归一为已提交 LF 后字节一致；冲突解决前误启动的一次守卫日志仅留 before-resolution，不作为当前验证。未另跑本机游戏单测/浏览器、游戏堆采样、trend 或 60 轮/F20，不关闭 #32/#60；新 head 完整 CI 以原 PR 实时链接为准，旧成功不代表新 head。已 Ready，未启用自动合并、未合并或发布。
+
+## 2026-10-28 · 新一轮减熵：架构门禁与依赖查询（#60）
+
+- 基线：`3b61d52e898459f3e197584ae202285e7ade65e2`；分支 `codex/entropy-architecture`；[全库扫描/候选清单](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6449666799)。原改枪 M3 检出保留。
+- 本批：统一源码 AST 图、动态加载/类型导出/自环检查、沿核心依赖闭包约束 61 个模块，以及只读 `pnpm architecture [src/path.ts] [--json]`。入口：[实现摘要](docs/tasks/quality-entropy.md#2026-10-28-架构门禁与按文件查询)、[代码导航](docs/CODEMAP.md)、[共享分析](scripts/source-graph.mjs)。
+- 实测：原始基线 1020/1020 单测、85/85 工程守卫、package，三份制品与该基线字节相同；正常合入 main `0f73a67386bac196b87c983668295be6d1a99f1e` 后重跑 1022/1022、85/85 与 package 均通过。动态反向依赖负对照旧守卫 3/3 放行、新守卫拒绝，已还原。独立源码审阅无阻塞，src/assets/锁文件相对最新 main 无差异；准确 head CI 与合并状态见 [PR #134](https://github.com/xuys2025/escape-bincov/pull/134)。
+- 未验：本地浏览器、真机/F20/性能未运行；产品行为未变。准确提交与完整 CI 以本批 PR 为准，未合并/发布；后续候选按 #60 原归属推进，既有修复 PR 保持原承接。
 
 ## 2026-10-28 室内墙体与视野设计（功能未实施）
 
