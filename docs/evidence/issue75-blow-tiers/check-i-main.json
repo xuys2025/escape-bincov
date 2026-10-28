@@ -1,0 +1,63 @@
+{
+  "startedAt": "2026-10-25T19:14:18.563Z",
+  "browser": "156.0.8078.48",
+  "entry": "C:\\Users\\xty\\AppData\\Local\\Temp\\claude\\C--bincov\\0efb0a00-f6d6-438c-82bd-ffd412f66c89\\scratchpad\\wt-main-build\\dist\\index.html",
+  "method": "Offline Chromium, real CDP mouse (1280x720) and multi-touch (844x390, DPR 2) on the 2.5D raid host, seed 42, layered coast map. Fixtures place the player and enemies, hand weapons and freeze AI.",
+  "steps": [
+    {
+      "id": "i",
+      "name": "heavier blows kick further and hold longer; one shot is one blow; the player's blow pushes the camera",
+      "status": "failed",
+      "error": "critical: {\"flash\":4,\"kick\":2,\"poses\":\"HHHHHRRR--------\",\"blood\":[6,0]} (want {\"flash\":5,\"kick\":3,\"poses\":\"HHHHHHHRRR------\",\"blood\":[6,0]}); fourPellets: {\"flash\":4,\"kick\":2,\"poses\":\"HHHHHRRR--------\",\"blood\":[24,0]} (want {\"flash\":5,\"kick\":3,\"poses\":\"HHHHHHHRRR------\",\"blood\":[12,0]}); splitShot: {\"flash\":5,\"kick\":2,\"poses\":\"HHHHHHRRR-------\",\"blood\":[18,18]} (want {\"flash\":5,\"kick\":3,\"poses\":\"HHHHHHHRRR------\",\"blood\":[10,6]}); camera push {\"x\":0,\"y\":0} (want about -1.9, 0)",
+      "detail": {
+        "critical": {
+          "flash": 4,
+          "kick": 2,
+          "poses": "HHHHHRRR--------",
+          "blood": [
+            6,
+            0
+          ]
+        },
+        "fourPellets": {
+          "flash": 4,
+          "kick": 2,
+          "poses": "HHHHHRRR--------",
+          "blood": [
+            24,
+            0
+          ]
+        },
+        "splitShot": {
+          "flash": 5,
+          "kick": 2,
+          "poses": "HHHHHHRRR-------",
+          "blood": [
+            18,
+            18
+          ]
+        },
+        "classic": {
+          "flash": 4,
+          "kick": 2,
+          "poses": "HHHHHRRR--------",
+          "blood": [
+            6,
+            0
+          ]
+        },
+        "push": {
+          "x": 0,
+          "y": 0
+        }
+      },
+      "seconds": 0.1
+    }
+  ],
+  "stallResumes": {
+    "desktop": 0,
+    "phone": 0
+  },
+  "finishedAt": "2026-10-25T19:14:21.945Z",
+  "status": "failed"
+}

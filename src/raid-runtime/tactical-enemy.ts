@@ -33,7 +33,9 @@ function observedTarget(world: TacticalWorld, e: EnemyState) {
     const candidates = [{ uid: 'player', point: world.player, relation: def.stance === 'hostile' || blockadeProgram(e)?.phase==='engaged' ? 'hostile' : 'neutral' },
         ...world.enemies.filter(other => other !== e && other.hp > 0 && other.tactics)
             .map(other => ({ uid: other.uid, point: other, relation: enemyRelation(e, other) }))];
-    return candidates.filter(c => c.relation !== 'friendly' && distance(e, c.point) <= def.vision && world.sight(e, c.point)
+    // The player's devices switched on carry farther to those in front of the gun (#28 M2-03, LegacyEnemyWorld.exposure).
+    return candidates.filter(c => c.relation !== 'friendly' && distance(e, c.point) <= def.vision * (c.uid === 'player' ? world.exposure?.(e) ?? 1 : 1)
+        && world.sight(e, c.point)
         && (!(t.phase === 'windup' || t.phase === 'release') || !t.memory || t.memory.target === c.uid))
         .map(c => ({ ...c, engaged: t.stance === 'hostile' && t.memory?.target === c.uid,
             inside: !(c.uid==='player'&&blockadePassageAllowed(e,c.point)) && distance(boundary?.at??e.home, c.point) < (boundary?.radius??def.territory * .55) }))

@@ -74,3 +74,20 @@ Windows，Node 24.21.0、pnpm 11.19.0、本地 Chrome 155.0.8059.85。下列结�
 最终制品的两分辨率实时负重检查重新通过，网格节点保持原对象，0 页面异常、0 外部请求；已逐张检查：[1280×720](audit-contracts/final-1280x720-inventory.png)、[1920×1080](audit-contracts/final-1920x1080-inventory.png)、[记录](audit-contracts/final-live-weight-report.json)。
 
 最终制品另外运行 14 套浏览器回归（首轮 12 套加 `shooting`、`range`）和完整 10 分钟 `test:play`。它们的最终结论、准确 head 和 CI 运行链接统一维护在 [PR #79 验证表](https://github.com/xuys2025/escape-bincov/pull/79)，本地日志为 `test-results/audit-integrated-*.log`；上节首轮记录不能替代这些结果。
+
+
+## D8 失焦后第一次按键恢复
+
+2026-10-28（+08:00）续作 [PR #107](https://github.com/xuys2025/escape-bincov/pull/107)，保留原分支 `fix/first-key-after-blur` 和原 head `a169e7a5d5c984a74fb94291c4bbfa10d444fcfa` 的历史；正常合入已接受 main `efe2bede6af0ed33fec065a26755e1f8ff7d0256`（含改枪 M2、#114、#131）。独立承接 [#60](https://github.com/xuys2025/escape-bincov/issues/60) 的 D8，其他余项仍由总单跟踪。
+
+**问题与修复。** 按住按键切出窗口、在别处松开，浏览器可能不向游戏发送 `keyup`；旧的 `suppressedKeys` 因而吞掉回焦后的第一次新按。`InputState.key` 接收 `repeat`，新的独立按下只解除当前键的抑制，旧 held 与连发继续受抑制。宿主仍在面板操作前拦连发，E 关闭搜刮仍直接返回；WASD 离开搜刮时根据 `shiftKey` 补的 Shift 明确作为 held 状态观察，避免恢复进入窗口前已被抑制的冲刺。
+
+**有效反例。** 本轮以 main `b5bd63b7896b3b0697d4ba38d02d000e78903047` 的原输入/宿主代码运行同一新增单测：12 通过 / 1 预期失败，首按 W 为 `0` 而非 `-1`；同一基线离线 HTML 的两档桌面检查均在首次新按 D 等待移动时达到原 20 秒超时，页面仍正常运行，异常/外部请求均为 0。浏览器只用合成 blur 和捕获阶段丢弃一次 D 松键事件模拟丢失 `keyup`，随后用可信键鼠事件恢复；没有改变游戏时钟、生命或移动规则。
+
+**9389ff9 构建验证。** Windows、Node 24.22.1、pnpm 11.19.0、Chrome 156.0.8078.48：输入单测 13/13，全量单测 1022/1022，CI 工程守卫 77/77，`pnpm package` 严格类型检查和打包通过；`test:desktop-input` 12/12，两档首按 D 均移动超过 15 px，松开后位置稳定，页面异常/外部请求为 0。新按恢复单测包含 M2 的 F/G 命令；搜刮 F13 增加旧 Shift 不复活的断言，保留窗口内新按 Shift 可冲刺的原检查。完整搜刮、触屏和准确 head CI 的最终结果统一维护在原 PR 验证表。
+
+已检查真实截图：[1280×720](audit-contracts/d8-first-key-1280x720.png)、[1920×1080](audit-contracts/d8-first-key-1920x1080.png)，HUD 与操作提示无裁切；截图为松键后的静止帧，行为结论来自[制品哈希、负对照与坐标断言](audit-contracts/d8-first-key-validation.json)。本地完整日志在忽略目录 `test-results/pr107/`。HTML SHA-256：`e8018ec5b33679d81a5616286261ecf3dd117c59e32aed8f7726b3a06eacf3a1`。
+
+仅修改输入适配、回归与说明；存档版本、规则、鼠标按钮和触屏逻辑不变。浏览器失焦/松键丢失为事件夹具，触屏为仿真，不替代真实系统切窗、真机或真人手感验收。合并与发布分别以原 PR 和主线 CI 的实际状态为准。
+
+**授权合并前同步 #130。** 维护者要求自行复查、无问题后合并。再次 fetch 后发现主线已到 `3b61d52e898459f3e197584ae202285e7ade65e2`，正常合入且无冲突；输入、宿主及回归源码哈希与上述证据一致。新组合实际通过全量单测 1022/1022、工程守卫 77/77、严格打包与键鼠 12/12，HTML SHA-256 为 `f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb`；相应两档坐标断言补入原验证 JSON 的 `mergeCandidate`。完整搜刮复核、准确 head CI 和自动合并结果见原 PR。维护者允许的平台自动合并方式已记入 `AGENTS.md`，仍保留必需检查与分支保护。

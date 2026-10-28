@@ -8,18 +8,18 @@ import { deployFromYard } from './yard-entry.mjs';
 import { batch, dragItem, frames, raidReady, waitPanel } from './raid-view.mjs';
 import * as D from '../src/domain.ts';
 import { spacePath, traversable } from '../src/spatial.ts';
-import { MALL_ANCHORS, mallWorldV3 } from '../src/mall-world.ts';
+import { MALL_ANCHORS, mallWorldV4 } from '../src/mall-world.ts';
 import { browserOptions } from './browser-options.mjs';
 import { resumeStalls } from './stall-resume.mjs';
 const out = resolve('test-results'); await mkdir(out, {recursive:true});
-const report = {startedAt:new Date().toISOString(), htmlSha256:createHash('sha256').update(await readFile(resolve('dist/index.html'))).digest('hex'), methodology:'Offline built HTML; native buttons, keyboard, touch and reload. Raids run on the 2.5D host (mall layout 3), the walking base is the station yard. Explicit fixtures fund ordinary materials, restore damaged body, position at registered mall anchors through the ?test=1 driver, freeze enemy AI for transaction/connector checks, trigger terminal conditions and rewind the saved base cursor to verify offline recovery. Scoped write failures target the intended bag, floor or terminal transaction while allowing unrelated periodic checkpoints. These fixtures do not prove natural balance or reference-image fidelity. Ordinary entry has a separate context without test hooks.', steps:[],errors:[],requests:[]};
+const report = {startedAt:new Date().toISOString(), htmlSha256:createHash('sha256').update(await readFile(resolve('dist/index.html'))).digest('hex'), methodology:'Offline built HTML; native buttons, keyboard, touch and reload. Raids run on the 2.5D host (mall layout 4), the walking base is the station yard. Explicit fixtures fund ordinary materials, restore damaged body, position at registered mall anchors through the ?test=1 driver, freeze enemy AI for transaction/connector checks, trigger terminal conditions and rewind the saved base cursor to verify offline recovery. Scoped write failures target the intended bag, floor or terminal transaction while allowing unrelated periodic checkpoints. These fixtures do not prove natural balance or reference-image fidelity. Ordinary entry has a separate context without test hooks.', steps:[],errors:[],requests:[]};
 const browser = await chromium.launch(browserOptions); report.browser=browser.version();
 const ctx = await browser.newContext({viewport:{width:1280,height:720},offline:true});
 await resumeStalls(ctx);
 const page = await ctx.newPage(); page.setDefaultTimeout(30000); page.on('pageerror',e=>report.errors.push(e.stack ?? e.message)); ctx.on('request',r=>{if(/^https?:/.test(r.url()))report.requests.push(r.url());});
 const action=(name,id)=>page.locator(`[data-action="${name}"]${id?`[data-id="${id}"]`:''}`);
 const doButton=(name,p=page)=>p.locator(`.coast-sample [data-do="${name}"]`);
-const MALL=mallWorldV3();
+const MALL=mallWorldV4();
 // Stored record, profile, live expansion (the raid Runtime's capture during a raid) and the open panel (old page or raid host).
 const state=()=>page.evaluate(()=>{const a=window.__bincov.app;return {raw:localStorage.getItem('escape-bincov.session.v2'),profile:a.save,expansion:window.__bincov.saveSession.captureExpansion(),overlay:a.overlay,panel:window.__bincovSample?.host?.panel??null};});
 async function step(name,task){const row={name,status:'running'};report.steps.push(row);try{await task();assert.deepEqual(report.errors,[]);assert.deepEqual(report.requests,[]);row.status='passed';console.log('PASS',name);}catch(e){row.status='failed';row.error=e.stack;throw e;}}
@@ -92,9 +92,9 @@ try {
   const dose=(await state()).profile.stash.items.find(i=>i.id==='strengthDose');await page.locator(`[data-source="stash"][data-uid="${dose.uid}"]`).click();await action('use-base').click();assert.ok((await state()).expansion.body.effects.strength>170);assert.equal((await state()).profile.stash.items.some(i=>i.uid===dose.uid),false);await action('tab','body').click();assert.match(await page.locator('.rpg-property').innerText(),/力量[\s\S]*10 \+ 5/);assert.doesNotMatch(await page.locator('.rpg-property').innerText(),/幸运.*[0-9]/);
   await page.screenshot({path:resolve(out,'rpg-base-1280x720.png')});await page.setViewportSize({width:1920,height:1080});await page.screenshot({path:resolve(out,'rpg-base-1920x1080.png')});await page.setViewportSize({width:1280,height:720});
  });
- await step('mall native deployment (layout 3) has 25 enemies, two floors, one clock and two valid exits',async()=>{
+ await step('mall native deployment (layout 4) has 25 enemies, two floors, one clock and two valid exits',async()=>{
   await action('tab','gear').click();await page.locator('#run-world').selectOption('mall');await page.locator('#seed').fill('42');await action('deploy').click();await raidReady(page);await freeze();
-  const s=await state();assert.equal(s.expansion.raid.worldVersion,'mall-v3');assert.equal(s.expansion.raid.roster.length,25);assert.equal(Object.keys(s.expansion.raid.maps).length,2);assert.equal(s.expansion.raid.currentMap,'mall-f1');assert.equal((await batch(page)).map.exits.length,2);
+  const s=await state();assert.equal(s.expansion.raid.worldVersion,'mall-v4');assert.equal(s.expansion.raid.roster.length,25);assert.equal(Object.keys(s.expansion.raid.maps).length,2);assert.equal(s.expansion.raid.currentMap,'mall-f1');assert.equal((await batch(page)).map.exits.length,2);
   await page.evaluate(()=>{const s=window.__bincov.saveSession,t=s.prepareExpansionMutation(d=>{d.expansion.body.hp=100;d.expansion.body.bleeding=false;});if(!t||s.commitExpansionMutation(t)!=='committed')throw new Error('Transaction combat fixture rejected');});
  });
  /** Drag the crate's first item into the first bag cell that fits it; a scoped fault can make the write fail. */
@@ -104,7 +104,7 @@ try {
   return {before,container,item,drop:()=>dragItem(page,page.locator(`.coast-sample [data-source="container"][data-uid="${item.uid}"]`),'bag',dest.x,dest.y)};
  }
  await step('mall native crate transfer keeps both inventories atomic and persists remaining contents after a floor round trip',async()=>{
-  const box=crateAt(await state(),'mall-f1',MALL_ANCHORS.box1);assert.ok(box,'layout 3 keeps the first-floor crate on its anchor');
+  const box=crateAt(await state(),'mall-f1',MALL_ANCHORS.box1);assert.ok(box,'layout 4 keeps the first-floor crate on its anchor');
   await standAt(MALL_ANCHORS.box1,'mall-f1');await openLoot(box.id);
   const {before,container,item,drop}=await crateDrop('mall-f1',MALL_ANCHORS.box1);
   await fault('bag');await drop();await waitPanel(page,'pause');{const now=await state(),saved=stored(now),pre=await preFailure();assert.deepEqual(saved.loadout.bag,pre.loadout.bag);assert.deepEqual(saved.maps['mall-f1'].containers,pre.maps['mall-f1'].containers);assert.deepEqual(saved.loadout.bag,before.expansion.raid.loadout.bag);}assert.deepEqual((await state()).expansion.raid.loadout.bag,before.expansion.raid.loadout.bag);assert.deepEqual(crateAt(await state(),'mall-f1',MALL_ANCHORS.box1).inventory,container.inventory);
@@ -137,7 +137,7 @@ try {
  });
  await step('upstairs fixed crate supports failed and successful native transfer, floor round trip and refresh without duplicating either end',async()=>{
   const up=MALL.maps['mall-f1'].entries.find(e=>e.id==='S-N-up');await stand(up.at);await page.keyboard.press('e');await onMap('mall-f2');
-  const target=crateAt(await state(),'mall-f2',MALL_ANCHORS.box2);assert.ok(target,'layout 3 keeps the upstairs crate on its anchor');
+  const target=crateAt(await state(),'mall-f2',MALL_ANCHORS.box2);assert.ok(target,'layout 4 keeps the upstairs crate on its anchor');
   await standAt(MALL_ANCHORS.box2,'mall-f2');await openLoot(target.id);
   const {before,container:box,item,drop}=await crateDrop('mall-f2',MALL_ANCHORS.box2),bag=before.expansion.raid.loadout.bag;
   await fault('bag');await drop();await waitPanel(page,'pause');const failed=await state();{const saved=stored(failed),pre=await preFailure();assert.deepEqual(saved.loadout.bag,pre.loadout.bag);assert.deepEqual(saved.maps['mall-f2'].containers,pre.maps['mall-f2'].containers);assert.deepEqual(saved.loadout.bag,bag);}assert.deepEqual(failed.expansion.raid.loadout.bag,bag);assert.deepEqual(crateAt(failed,'mall-f2',MALL_ANCHORS.box2).inventory,box.inventory);
@@ -159,7 +159,7 @@ try {
  });
  await step('scene tide flip reroutes the persisted source pursuit once and leaves upstairs dry',async()=>{
   await waitPanel(page,'pause');await freeze();await doButton('resume').click();await waitPanel(page,null);
-  // A body-walkable start on the first floor's east side with a real route to the S-N stairs (layout 3 geometry).
+  // A body-walkable start on the first floor's east side with a real route to the S-N stairs (layout 4 geometry).
   const f1={definition:MALL.maps['mall-f1'],doors:{},highTide:false},entry=MALL.maps['mall-f1'].entries.find(e=>e.id==='S-N-up');
   let start=null,route=null;
   for(const [tx,ty] of [[71,25],[70,25],[69,25],[71,24],[71,26],[68,25],[66,25],[63,25],[60,25]]){const p={x:tx*32+16,y:ty*32+16};if(!traversable(f1,p,'body',10))continue;const path=spacePath(f1,p,entry.at,true);if(path.length){start=p;route=[p,...path,entry.at];break;}}
@@ -203,10 +203,10 @@ try {
    await settled();const s=await state();assert.equal(await stats(),before);assert.equal(s.profile.stats.extracts,beforeState.profile.stats.extracts+(reason==='extract'?1:0));assert.equal(JSON.parse(s.raw).terminal.runId,runId);assert.equal(s.profile.activeRun,null);assert.equal(s.expansion.raid,null);assert.equal(s.expansion.base.location,'base');assert.equal(s.profile.lastResult.outcome,reason==='abandon'?'death':reason);assert.equal(s.overlay,'');assert.equal(await page.evaluate(()=>window.__bincov.saveSession.retrySettlement()),false);await frames(page,6);assert.equal(await stats(),before);
   }
  });
- await step('ordinary offline mall entry (2.5D view, layout 3) exposes no test hook and saves native movement, map view and refresh recovery',async()=>{
+ await step('ordinary offline mall entry (2.5D view, layout 4) exposes no test hook and saves native movement, map view and refresh recovery',async()=>{
   // A fresh page boots the game, the yard and the raid view on a slow machine (CI): waits get 30 s, the first tap 60 s.
   const ordinary=await browser.newContext({viewport:{width:1280,height:720},offline:true}),p=await ordinary.newPage();p.setDefaultTimeout(30000);p.on('pageerror',e=>report.errors.push(e.stack??e.message));ordinary.on('request',r=>{if(/^https?:/.test(r.url()))report.requests.push(r.url());});const a=name=>p.locator(`[data-action="${name}"]`);
-  try{await p.goto(pathToFileURL(resolve('dist/index.html')).href);assert.equal(await p.evaluate(()=>typeof window.__bincov),'undefined');await a('enter').click({timeout:60000});await deployFromYard(p,{world:'mall',seed:41});await p.waitForSelector('.coast-sample [data-where]');const saved=()=>p.evaluate(()=>JSON.parse(localStorage.getItem('escape-bincov.session.v2')).expansion.raid);const before=await saved();await p.keyboard.down('w');await p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(r)))));await p.keyboard.up('w');/* W stays down across drawn frames; the walk then reaches the record with the next two-second checkpoint, however long a frame is. */await p.waitForFunction(([key,y])=>JSON.parse(localStorage.getItem(key)).expansion.raid.player.y<y,['escape-bincov.session.v2',before.player.y],{timeout:30000});const after=await saved();assert.equal(after.worldVersion,'mall-v3');assert.ok(after.player.y<before.player.y);assert.ok(after.elapsed>before.elapsed);await p.keyboard.press('m');await p.locator('[data-do="map-floor"][data-id="mall-f2"]').click();assert.equal((await saved()).currentMap,'mall-f1');await p.keyboard.press('m');await p.waitForSelector('.coast-sample [data-panel]',{state:'hidden'});await p.screenshot({path:resolve(out,'mall-ordinary-1280x720.png')});await p.reload();await a('enter').click();await p.waitForSelector('.coast-sample [data-where]');assert.equal((await saved()).currentMap,'mall-f1');assert.equal(await p.evaluate(()=>typeof window.__bincov),'undefined');}
+  try{await p.goto(pathToFileURL(resolve('dist/index.html')).href);assert.equal(await p.evaluate(()=>typeof window.__bincov),'undefined');await a('enter').click({timeout:60000});await deployFromYard(p,{world:'mall',seed:41});await p.waitForSelector('.coast-sample [data-where]');const saved=()=>p.evaluate(()=>JSON.parse(localStorage.getItem('escape-bincov.session.v2')).expansion.raid);const before=await saved();await p.keyboard.down('w');await p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(()=>requestAnimationFrame(r)))));await p.keyboard.up('w');/* W stays down across drawn frames; the walk then reaches the record with the next two-second checkpoint, however long a frame is. */await p.waitForFunction(([key,y])=>JSON.parse(localStorage.getItem(key)).expansion.raid.player.y<y,['escape-bincov.session.v2',before.player.y],{timeout:30000});const after=await saved();assert.equal(after.worldVersion,'mall-v4');assert.ok(after.player.y<before.player.y);assert.ok(after.elapsed>before.elapsed);await p.keyboard.press('m');await p.locator('[data-do="map-floor"][data-id="mall-f2"]').click();assert.equal((await saved()).currentMap,'mall-f1');await p.keyboard.press('m');await p.waitForSelector('.coast-sample [data-panel]',{state:'hidden'});await p.screenshot({path:resolve(out,'mall-ordinary-1280x720.png')});await p.reload();await a('enter').click();await p.waitForSelector('.coast-sample [data-where]');assert.equal((await saved()).currentMap,'mall-f1');assert.equal(await p.evaluate(()=>typeof window.__bincov),'undefined');}
   finally{await ordinary.close();}
  });
  report.status='passed';

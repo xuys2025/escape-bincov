@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "browser": "156.0.8078.48",
+  "manifestRevision": 5,
+  "totalAssets": 236,
+  "legacyAssetsUnchanged": 110,
+  "sourceHashes": 40,
+  "deliveryPngs": 126,
+  "furnitureTypes": 26,
+  "bodies": 105,
+  "groundTiles": 10,
+  "masks": 11,
+  "joinedPairs": 54,
+  "tilePairs": 20,
+  "checks": [
+    "all PNG SHA-256 and dimensions",
+    "legacy metadata unchanged",
+    "source provenance",
+    "live MALL_FURNITURE and PAINTED_LIFT contracts for all 26 types",
+    "binary alpha",
+    "28-colour native palette",
+    "footprint/lift canvas and anchors",
+    "rectangular B full footprint; shaped B extent; explicit bamboo centreline exception",
+    "nonempty emit masks only on authored body pixels",
+    "matching open-edge RGBA at every row",
+    "A/B periodic ground edge combinations"
+  ],
+  "runtimeIntegration": "PENDING: new IDs registered; layout-4 procedural dressing fallback retained",
+  "remaining": [
+    "in-game visual acceptance",
+    "human/device review",
+    "facades/cores/stairs and optional signs"
+  ]
+}

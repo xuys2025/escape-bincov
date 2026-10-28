@@ -1,0 +1,1443 @@
+{
+  "startedAt": "2026-10-26T15:07:59.476Z",
+  "browser": "156.0.8078.48",
+  "entry": "dist/index.html",
+  "method": "Offline Chromium, real CDP mouse (1280x720) and multi-touch (844x390, DPR 2) on the 2.5D raid host, seed 42, layered coast map. Fixtures place the player and enemies, hand weapons and freeze AI.",
+  "steps": [
+    {
+      "id": "c",
+      "name": "muzzle flash on the barrel tip; tracers leave the tip",
+      "status": "passed",
+      "detail": {
+        "summary": {
+          "pistol": {
+            "flashToTipMaxPx": 2.12,
+            "flashToDesignMaxPx": 0.69,
+            "tracerOffTipMaxPx": 0.62,
+            "tracerStartBehindTipMaxPx": 0.45,
+            "undrawn": 0
+          },
+          "shotgun": {
+            "flashToTipMaxPx": 1.71,
+            "flashToDesignMaxPx": 0.5,
+            "tracerOffTipMaxPx": 0.56,
+            "tracerStartBehindTipMaxPx": 0.53,
+            "undrawn": 0
+          },
+          "carbine": {
+            "flashToTipMaxPx": 1.57,
+            "flashToDesignMaxPx": 0.65,
+            "tracerOffTipMaxPx": 0.5,
+            "tracerStartBehindTipMaxPx": 0.48,
+            "undrawn": 0
+          },
+          "m4a1": {
+            "flashToTipMaxPx": 1.57,
+            "flashToDesignMaxPx": 0.65,
+            "tracerOffTipMaxPx": 0.48,
+            "tracerStartBehindTipMaxPx": 0.55,
+            "undrawn": 0
+          }
+        },
+        "cases": [
+          {
+            "gun": "pistol",
+            "dirDeg": 0,
+            "look": "pistol",
+            "aimDeg": 0,
+            "gunDeg": 0.52,
+            "cone": 0.1477,
+            "tip": {
+              "x": 718.98,
+              "y": 762.6
+            },
+            "flash": {
+              "x": 720,
+              "y": 763,
+              "t": 0
+            },
+            "flashToTipPx": 1.09,
+            "flashToDesignPx": 0.62,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-60",
+                "drawn": true,
+                "offTipPx": 0.08,
+                "startsBeyondTipPx": -0.06,
+                "spreadRad": 0.0436
+              }
+            ]
+          },
+          {
+            "gun": "shotgun",
+            "dirDeg": 0,
+            "look": "shotgun",
+            "aimDeg": 0,
+            "gunDeg": 1.77,
+            "cone": 0.3124,
+            "tip": {
+              "x": 720.77,
+              "y": 762.14
+            },
+            "flash": {
+              "x": 722,
+              "y": 762,
+              "t": 0
+            },
+            "flashToTipPx": 1.23,
+            "flashToDesignPx": 0.33,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-61",
+                "drawn": true,
+                "offTipPx": 0.02,
+                "startsBeyondTipPx": -0.33,
+                "spreadRad": -0.0696
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-62",
+                "drawn": true,
+                "offTipPx": 0.23,
+                "startsBeyondTipPx": -0.41,
+                "spreadRad": -0.1193
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-63",
+                "drawn": true,
+                "offTipPx": 0.41,
+                "startsBeyondTipPx": -0.34,
+                "spreadRad": 0.0745
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-64",
+                "drawn": true,
+                "offTipPx": 0.14,
+                "startsBeyondTipPx": -0.36,
+                "spreadRad": -0.0966
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-65",
+                "drawn": true,
+                "offTipPx": 0,
+                "startsBeyondTipPx": -0.32,
+                "spreadRad": -0.0648
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-66",
+                "drawn": true,
+                "offTipPx": 0.35,
+                "startsBeyondTipPx": -0.34,
+                "spreadRad": 0.0179
+              }
+            ]
+          },
+          {
+            "gun": "carbine",
+            "dirDeg": 0,
+            "look": "carbine",
+            "aimDeg": 0,
+            "gunDeg": 0.74,
+            "cone": 0.092,
+            "tip": {
+              "x": 722.86,
+              "y": 761.8
+            },
+            "flash": {
+              "x": 724,
+              "y": 762,
+              "t": 0
+            },
+            "flashToTipPx": 1.16,
+            "flashToDesignPx": 0.4,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-68",
+                "drawn": true,
+                "offTipPx": 0.28,
+                "startsBeyondTipPx": -0.48,
+                "spreadRad": -0.0497
+              }
+            ]
+          },
+          {
+            "gun": "m4a1",
+            "dirDeg": 0,
+            "look": "rifle",
+            "aimDeg": 0,
+            "gunDeg": 0.47,
+            "cone": 0.085,
+            "tip": {
+              "x": 720.92,
+              "y": 761.67
+            },
+            "flash": {
+              "x": 722,
+              "y": 762,
+              "t": 0
+            },
+            "flashToTipPx": 1.13,
+            "flashToDesignPx": 0.52,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-69",
+                "drawn": true,
+                "offTipPx": 0.3,
+                "startsBeyondTipPx": -0.38,
+                "spreadRad": -0.0023
+              }
+            ]
+          },
+          {
+            "gun": "pistol",
+            "dirDeg": 45,
+            "look": "pistol",
+            "aimDeg": 44.78,
+            "gunDeg": 45.3,
+            "cone": 0.1476,
+            "tip": {
+              "x": 710.48,
+              "y": 772.58
+            },
+            "flash": {
+              "x": 712,
+              "y": 774,
+              "t": 0
+            },
+            "flashToTipPx": 2.08,
+            "flashToDesignPx": 0.59,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-70",
+                "drawn": true,
+                "offTipPx": 0.2,
+                "startsBeyondTipPx": 0.07,
+                "spreadRad": 0.0069
+              }
+            ]
+          },
+          {
+            "gun": "shotgun",
+            "dirDeg": 45,
+            "look": "shotgun",
+            "aimDeg": 44.78,
+            "gunDeg": 46.55,
+            "cone": 0.3123,
+            "tip": {
+              "x": 708.74,
+              "y": 771.3
+            },
+            "flash": {
+              "x": 710,
+              "y": 772,
+              "t": 0
+            },
+            "flashToTipPx": 1.44,
+            "flashToDesignPx": 0.46,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-71",
+                "drawn": true,
+                "offTipPx": 0.4,
+                "startsBeyondTipPx": -0.06,
+                "spreadRad": -0.087
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-72",
+                "drawn": true,
+                "offTipPx": 0.4,
+                "startsBeyondTipPx": -0.04,
+                "spreadRad": -0.0086
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-73",
+                "drawn": true,
+                "offTipPx": 0.4,
+                "startsBeyondTipPx": -0.08,
+                "spreadRad": 0.0529
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-74",
+                "drawn": true,
+                "offTipPx": 0.4,
+                "startsBeyondTipPx": -0.04,
+                "spreadRad": -0.0189
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-75",
+                "drawn": true,
+                "offTipPx": 0.4,
+                "startsBeyondTipPx": -0.04,
+                "spreadRad": -0.0194
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-76",
+                "drawn": true,
+                "offTipPx": 0.4,
+                "startsBeyondTipPx": -0.06,
+                "spreadRad": 0.0222
+              }
+            ]
+          },
+          {
+            "gun": "carbine",
+            "dirDeg": 45,
+            "look": "carbine",
+            "aimDeg": 44.78,
+            "gunDeg": 45.52,
+            "cone": 0.092,
+            "tip": {
+              "x": 710.72,
+              "y": 772.21
+            },
+            "flash": {
+              "x": 712,
+              "y": 773,
+              "t": 0
+            },
+            "flashToTipPx": 1.5,
+            "flashToDesignPx": 0.36,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-77",
+                "drawn": true,
+                "offTipPx": 0.07,
+                "startsBeyondTipPx": 0.06,
+                "spreadRad": 0.0185
+              }
+            ]
+          },
+          {
+            "gun": "m4a1",
+            "dirDeg": 45,
+            "look": "rifle",
+            "aimDeg": 44.78,
+            "gunDeg": 45.25,
+            "cone": 0.0852,
+            "tip": {
+              "x": 709.89,
+              "y": 771.27
+            },
+            "flash": {
+              "x": 711,
+              "y": 772,
+              "t": 0
+            },
+            "flashToTipPx": 1.33,
+            "flashToDesignPx": 0.34,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-78",
+                "drawn": true,
+                "offTipPx": 0.06,
+                "startsBeyondTipPx": -0.55,
+                "spreadRad": -0.023
+              }
+            ]
+          },
+          {
+            "gun": "pistol",
+            "dirDeg": 90,
+            "look": "pistol",
+            "aimDeg": 89.38,
+            "gunDeg": 89.9,
+            "cone": 0.1473,
+            "tip": {
+              "x": 700.51,
+              "y": 775.49
+            },
+            "flash": {
+              "x": 701,
+              "y": 777,
+              "t": 0
+            },
+            "flashToTipPx": 1.58,
+            "flashToDesignPx": 0.49,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-79",
+                "drawn": true,
+                "offTipPx": 0.05,
+                "startsBeyondTipPx": -0.29,
+                "spreadRad": -0.0453
+              }
+            ]
+          },
+          {
+            "gun": "shotgun",
+            "dirDeg": 90,
+            "look": "shotgun",
+            "aimDeg": 89.38,
+            "gunDeg": 91.15,
+            "cone": 0.3123,
+            "tip": {
+              "x": 700.29,
+              "y": 772.57
+            },
+            "flash": {
+              "x": 700,
+              "y": 774,
+              "t": 0
+            },
+            "flashToTipPx": 1.46,
+            "flashToDesignPx": 0.27,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-80",
+                "drawn": true,
+                "offTipPx": 0.15,
+                "startsBeyondTipPx": 0.21,
+                "spreadRad": 0.0377
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-81",
+                "drawn": true,
+                "offTipPx": 0.24,
+                "startsBeyondTipPx": 0.23,
+                "spreadRad": -0.0021
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-82",
+                "drawn": true,
+                "offTipPx": 0.06,
+                "startsBeyondTipPx": 0.18,
+                "spreadRad": 0.0728
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-83",
+                "drawn": true,
+                "offTipPx": 0.39,
+                "startsBeyondTipPx": 0.25,
+                "spreadRad": -0.1488
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-84",
+                "drawn": true,
+                "offTipPx": 0.41,
+                "startsBeyondTipPx": 0.26,
+                "spreadRad": -0.1442
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-85",
+                "drawn": true,
+                "offTipPx": 0.03,
+                "startsBeyondTipPx": 0.16,
+                "spreadRad": 0.0857
+              }
+            ]
+          },
+          {
+            "gun": "carbine",
+            "dirDeg": 90,
+            "look": "carbine",
+            "aimDeg": 89.38,
+            "gunDeg": 90.12,
+            "cone": 0.092,
+            "tip": {
+              "x": 700.48,
+              "y": 773.5
+            },
+            "flash": {
+              "x": 700,
+              "y": 775,
+              "t": 0
+            },
+            "flashToTipPx": 1.57,
+            "flashToDesignPx": 0.47,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-86",
+                "drawn": true,
+                "offTipPx": 0.47,
+                "startsBeyondTipPx": 0.23,
+                "spreadRad": 0.0038
+              }
+            ]
+          },
+          {
+            "gun": "m4a1",
+            "dirDeg": 90,
+            "look": "rifle",
+            "aimDeg": 89.38,
+            "gunDeg": 89.85,
+            "cone": 0.0852,
+            "tip": {
+              "x": 700.53,
+              "y": 772.5
+            },
+            "flash": {
+              "x": 701,
+              "y": 774,
+              "t": 0
+            },
+            "flashToTipPx": 1.57,
+            "flashToDesignPx": 0.47,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-87",
+                "drawn": true,
+                "offTipPx": 0.48,
+                "startsBeyondTipPx": 0.23,
+                "spreadRad": 0.0211
+              }
+            ]
+          },
+          {
+            "gun": "pistol",
+            "dirDeg": 135,
+            "look": "pistol",
+            "aimDeg": 134.78,
+            "gunDeg": 135.3,
+            "cone": 0.1476,
+            "tip": {
+              "x": 689.47,
+              "y": 772.53
+            },
+            "flash": {
+              "x": 688,
+              "y": 774,
+              "t": 0
+            },
+            "flashToTipPx": 2.08,
+            "flashToDesignPx": 0.58,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-88",
+                "drawn": true,
+                "offTipPx": 0.25,
+                "startsBeyondTipPx": -0.01,
+                "spreadRad": -0.0291
+              }
+            ]
+          },
+          {
+            "gun": "shotgun",
+            "dirDeg": 135,
+            "look": "shotgun",
+            "aimDeg": 134.78,
+            "gunDeg": 136.55,
+            "cone": 0.3123,
+            "tip": {
+              "x": 689.59,
+              "y": 771.93
+            },
+            "flash": {
+              "x": 689,
+              "y": 773,
+              "t": 0
+            },
+            "flashToTipPx": 1.22,
+            "flashToDesignPx": 0.5,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-89",
+                "drawn": true,
+                "offTipPx": 0.43,
+                "startsBeyondTipPx": 0.04,
+                "spreadRad": 0.031
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-90",
+                "drawn": true,
+                "offTipPx": 0.24,
+                "startsBeyondTipPx": -0.04,
+                "spreadRad": -0.0787
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-91",
+                "drawn": true,
+                "offTipPx": 0.44,
+                "startsBeyondTipPx": 0.04,
+                "spreadRad": 0.0306
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-92",
+                "drawn": true,
+                "offTipPx": 0.11,
+                "startsBeyondTipPx": -0.01,
+                "spreadRad": -0.0476
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-93",
+                "drawn": true,
+                "offTipPx": 0.19,
+                "startsBeyondTipPx": 0.03,
+                "spreadRad": 0.0533
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-94",
+                "drawn": true,
+                "offTipPx": 0.31,
+                "startsBeyondTipPx": 0.03,
+                "spreadRad": 0.0421
+              }
+            ]
+          },
+          {
+            "gun": "carbine",
+            "dirDeg": 135,
+            "look": "carbine",
+            "aimDeg": 134.78,
+            "gunDeg": 135.52,
+            "cone": 0.092,
+            "tip": {
+              "x": 688.99,
+              "y": 772.11
+            },
+            "flash": {
+              "x": 688,
+              "y": 773,
+              "t": 0
+            },
+            "flashToTipPx": 1.33,
+            "flashToDesignPx": 0.18,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-95",
+                "drawn": true,
+                "offTipPx": 0.4,
+                "startsBeyondTipPx": 0.11,
+                "spreadRad": 0.0267
+              }
+            ]
+          },
+          {
+            "gun": "m4a1",
+            "dirDeg": 135,
+            "look": "rifle",
+            "aimDeg": 134.78,
+            "gunDeg": 135.25,
+            "cone": 0.0852,
+            "tip": {
+              "x": 689.98,
+              "y": 771.22
+            },
+            "flash": {
+              "x": 689,
+              "y": 772,
+              "t": 0
+            },
+            "flashToTipPx": 1.25,
+            "flashToDesignPx": 0.29,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-96",
+                "drawn": true,
+                "offTipPx": 0.06,
+                "startsBeyondTipPx": -0.55,
+                "spreadRad": 0.0142
+              }
+            ]
+          },
+          {
+            "gun": "pistol",
+            "dirDeg": 180,
+            "look": "pistol",
+            "aimDeg": 179.38,
+            "gunDeg": 179.9,
+            "cone": 0.1476,
+            "tip": {
+              "x": 681,
+              "y": 762.52
+            },
+            "flash": {
+              "x": 680,
+              "y": 763,
+              "t": 0
+            },
+            "flashToTipPx": 1.11,
+            "flashToDesignPx": 0.69,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-97",
+                "drawn": true,
+                "offTipPx": 0.14,
+                "startsBeyondTipPx": -0.37,
+                "spreadRad": -0.0546
+              }
+            ]
+          },
+          {
+            "gun": "shotgun",
+            "dirDeg": 180,
+            "look": "shotgun",
+            "aimDeg": 179.38,
+            "gunDeg": 181.15,
+            "cone": 0.3123,
+            "tip": {
+              "x": 679.29,
+              "y": 761.08
+            },
+            "flash": {
+              "x": 678,
+              "y": 761,
+              "t": 0
+            },
+            "flashToTipPx": 1.29,
+            "flashToDesignPx": 0.22,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-98",
+                "drawn": true,
+                "offTipPx": 0.33,
+                "startsBeyondTipPx": 0.46,
+                "spreadRad": -0.131
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-99",
+                "drawn": true,
+                "offTipPx": 0.41,
+                "startsBeyondTipPx": 0.5,
+                "spreadRad": -0.1162
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-100",
+                "drawn": true,
+                "offTipPx": 0.4,
+                "startsBeyondTipPx": -0.53,
+                "spreadRad": -0.0952
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-101",
+                "drawn": true,
+                "offTipPx": 0.39,
+                "startsBeyondTipPx": 0.49,
+                "spreadRad": -0.1189
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-102",
+                "drawn": true,
+                "offTipPx": 0.29,
+                "startsBeyondTipPx": -0.39,
+                "spreadRad": 0.0678
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-103",
+                "drawn": true,
+                "offTipPx": 0.04,
+                "startsBeyondTipPx": -0.38,
+                "spreadRad": -0.0111
+              }
+            ]
+          },
+          {
+            "gun": "carbine",
+            "dirDeg": 180,
+            "look": "carbine",
+            "aimDeg": 179.38,
+            "gunDeg": 180.12,
+            "cone": 0.092,
+            "tip": {
+              "x": 677.03,
+              "y": 761.45
+            },
+            "flash": {
+              "x": 676,
+              "y": 761,
+              "t": 0
+            },
+            "flashToTipPx": 1.12,
+            "flashToDesignPx": 0.65,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-104",
+                "drawn": true,
+                "offTipPx": 0.47,
+                "startsBeyondTipPx": -0.48,
+                "spreadRad": -0.0417
+              }
+            ]
+          },
+          {
+            "gun": "m4a1",
+            "dirDeg": 180,
+            "look": "rifle",
+            "aimDeg": 179.38,
+            "gunDeg": 179.85,
+            "cone": 0.0852,
+            "tip": {
+              "x": 679.03,
+              "y": 761.55
+            },
+            "flash": {
+              "x": 678,
+              "y": 762,
+              "t": 0
+            },
+            "flashToTipPx": 1.12,
+            "flashToDesignPx": 0.65,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-105",
+                "drawn": true,
+                "offTipPx": 0.33,
+                "startsBeyondTipPx": -0.39,
+                "spreadRad": -0.0257
+              }
+            ]
+          },
+          {
+            "gun": "pistol",
+            "dirDeg": 225,
+            "look": "pistol",
+            "aimDeg": -135.22,
+            "gunDeg": -134.7,
+            "cone": 0.1476,
+            "tip": {
+              "x": 689.5,
+              "y": 751.5
+            },
+            "flash": {
+              "x": 688,
+              "y": 750,
+              "t": 0
+            },
+            "flashToTipPx": 2.12,
+            "flashToDesignPx": 0.62,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-106",
+                "drawn": true,
+                "offTipPx": 0.43,
+                "startsBeyondTipPx": 0.05,
+                "spreadRad": -0.0456
+              }
+            ]
+          },
+          {
+            "gun": "shotgun",
+            "dirDeg": 225,
+            "look": "shotgun",
+            "aimDeg": -135.22,
+            "gunDeg": -133.45,
+            "cone": 0.3122,
+            "tip": {
+              "x": 690.34,
+              "y": 751.88
+            },
+            "flash": {
+              "x": 689,
+              "y": 751,
+              "t": 0
+            },
+            "flashToTipPx": 1.6,
+            "flashToDesignPx": 0.37,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-107",
+                "drawn": true,
+                "offTipPx": 0.53,
+                "startsBeyondTipPx": -0.08,
+                "spreadRad": -0.1018
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-108",
+                "drawn": true,
+                "offTipPx": 0.01,
+                "startsBeyondTipPx": 0.01,
+                "spreadRad": 0.0689
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-109",
+                "drawn": true,
+                "offTipPx": 0.53,
+                "startsBeyondTipPx": 0.03,
+                "spreadRad": 0.0213
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-110",
+                "drawn": true,
+                "offTipPx": 0.52,
+                "startsBeyondTipPx": 0.03,
+                "spreadRad": 0.0221
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-111",
+                "drawn": true,
+                "offTipPx": 0.36,
+                "startsBeyondTipPx": 0.03,
+                "spreadRad": 0.0364
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-112",
+                "drawn": true,
+                "offTipPx": 0.05,
+                "startsBeyondTipPx": 0.66,
+                "spreadRad": -0.1157
+              }
+            ]
+          },
+          {
+            "gun": "carbine",
+            "dirDeg": 225,
+            "look": "carbine",
+            "aimDeg": -135.22,
+            "gunDeg": -134.48,
+            "cone": 0.092,
+            "tip": {
+              "x": 689.99,
+              "y": 751.09
+            },
+            "flash": {
+              "x": 689,
+              "y": 750,
+              "t": 0
+            },
+            "flashToTipPx": 1.48,
+            "flashToDesignPx": 0.06,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-113",
+                "drawn": true,
+                "offTipPx": 0.28,
+                "startsBeyondTipPx": 0.06,
+                "spreadRad": -0.0424
+              }
+            ]
+          },
+          {
+            "gun": "m4a1",
+            "dirDeg": 225,
+            "look": "rifle",
+            "aimDeg": -135.22,
+            "gunDeg": -134.75,
+            "cone": 0.0852,
+            "tip": {
+              "x": 690.82,
+              "y": 752.03
+            },
+            "flash": {
+              "x": 690,
+              "y": 751,
+              "t": 0
+            },
+            "flashToTipPx": 1.32,
+            "flashToDesignPx": 0.24,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-114",
+                "drawn": true,
+                "offTipPx": 0.06,
+                "startsBeyondTipPx": -0.55,
+                "spreadRad": 0.0141
+              }
+            ]
+          },
+          {
+            "gun": "pistol",
+            "dirDeg": 270,
+            "look": "pistol",
+            "aimDeg": -90.62,
+            "gunDeg": -90.1,
+            "cone": 0.1476,
+            "tip": {
+              "x": 699.49,
+              "y": 748.49
+            },
+            "flash": {
+              "x": 699,
+              "y": 747,
+              "t": 0
+            },
+            "flashToTipPx": 1.57,
+            "flashToDesignPx": 0.49,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-115",
+                "drawn": true,
+                "offTipPx": 0.33,
+                "startsBeyondTipPx": -0.45,
+                "spreadRad": -0.012
+              }
+            ]
+          },
+          {
+            "gun": "shotgun",
+            "dirDeg": 270,
+            "look": "shotgun",
+            "aimDeg": -90.62,
+            "gunDeg": -88.85,
+            "cone": 0.3123,
+            "tip": {
+              "x": 700.71,
+              "y": 751.57
+            },
+            "flash": {
+              "x": 701,
+              "y": 750,
+              "t": 0
+            },
+            "flashToTipPx": 1.6,
+            "flashToDesignPx": 0.27,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-116",
+                "drawn": true,
+                "offTipPx": 0.08,
+                "startsBeyondTipPx": 0.19,
+                "spreadRad": 0.0614
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-117",
+                "drawn": true,
+                "offTipPx": 0.31,
+                "startsBeyondTipPx": 0.15,
+                "spreadRad": -0.0279
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-118",
+                "drawn": true,
+                "offTipPx": 0.35,
+                "startsBeyondTipPx": 0.13,
+                "spreadRad": -0.0439
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-119",
+                "drawn": true,
+                "offTipPx": 0.02,
+                "startsBeyondTipPx": 0.18,
+                "spreadRad": 0.1014
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-120",
+                "drawn": true,
+                "offTipPx": 0.49,
+                "startsBeyondTipPx": 0.04,
+                "spreadRad": -0.0994
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-121",
+                "drawn": true,
+                "offTipPx": 0.15,
+                "startsBeyondTipPx": 0.19,
+                "spreadRad": 0.035
+              }
+            ]
+          },
+          {
+            "gun": "carbine",
+            "dirDeg": 270,
+            "look": "carbine",
+            "aimDeg": -90.62,
+            "gunDeg": -89.88,
+            "cone": 0.092,
+            "tip": {
+              "x": 700.52,
+              "y": 750.5
+            },
+            "flash": {
+              "x": 701,
+              "y": 749,
+              "t": 0
+            },
+            "flashToTipPx": 1.57,
+            "flashToDesignPx": 0.47,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-122",
+                "drawn": true,
+                "offTipPx": 0.5,
+                "startsBeyondTipPx": 0.21,
+                "spreadRad": -0.018
+              }
+            ]
+          },
+          {
+            "gun": "m4a1",
+            "dirDeg": 270,
+            "look": "rifle",
+            "aimDeg": -90.62,
+            "gunDeg": -90.15,
+            "cone": 0.0852,
+            "tip": {
+              "x": 700.47,
+              "y": 751.5
+            },
+            "flash": {
+              "x": 700,
+              "y": 750,
+              "t": 0
+            },
+            "flashToTipPx": 1.57,
+            "flashToDesignPx": 0.47,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-123",
+                "drawn": true,
+                "offTipPx": 0.4,
+                "startsBeyondTipPx": 0.15,
+                "spreadRad": -0.0262
+              }
+            ]
+          },
+          {
+            "gun": "pistol",
+            "dirDeg": 315,
+            "look": "pistol",
+            "aimDeg": -45.22,
+            "gunDeg": -44.7,
+            "cone": 0.1476,
+            "tip": {
+              "x": 710.61,
+              "y": 751.5
+            },
+            "flash": {
+              "x": 712,
+              "y": 750,
+              "t": 0
+            },
+            "flashToTipPx": 2.04,
+            "flashToDesignPx": 0.55,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-124",
+                "drawn": true,
+                "offTipPx": 0.62,
+                "startsBeyondTipPx": -0.04,
+                "spreadRad": 0.047
+              }
+            ]
+          },
+          {
+            "gun": "shotgun",
+            "dirDeg": 315,
+            "look": "shotgun",
+            "aimDeg": -45.22,
+            "gunDeg": -43.45,
+            "cone": 0.3122,
+            "tip": {
+              "x": 709.6,
+              "y": 752.98
+            },
+            "flash": {
+              "x": 711,
+              "y": 752,
+              "t": 0
+            },
+            "flashToTipPx": 1.71,
+            "flashToDesignPx": 0.32,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-125",
+                "drawn": true,
+                "offTipPx": 0.13,
+                "startsBeyondTipPx": -0.06,
+                "spreadRad": 0.065
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-126",
+                "drawn": true,
+                "offTipPx": 0.27,
+                "startsBeyondTipPx": -0.07,
+                "spreadRad": 0.0768
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-127",
+                "drawn": true,
+                "offTipPx": 0.44,
+                "startsBeyondTipPx": -0.14,
+                "spreadRad": -0.0963
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-128",
+                "drawn": true,
+                "offTipPx": 0.26,
+                "startsBeyondTipPx": -0.04,
+                "spreadRad": 0.0334
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-129",
+                "drawn": true,
+                "offTipPx": 0.25,
+                "startsBeyondTipPx": -0.12,
+                "spreadRad": -0.0804
+              },
+              {
+                "uid": "entity-bc-mvpe5bzh-d-130",
+                "drawn": true,
+                "offTipPx": 0.56,
+                "startsBeyondTipPx": -0.16,
+                "spreadRad": -0.1059
+              }
+            ]
+          },
+          {
+            "gun": "carbine",
+            "dirDeg": 315,
+            "look": "carbine",
+            "aimDeg": -45.22,
+            "gunDeg": -44.48,
+            "cone": 0.092,
+            "tip": {
+              "x": 710.31,
+              "y": 751.17
+            },
+            "flash": {
+              "x": 711,
+              "y": 750,
+              "t": 0
+            },
+            "flashToTipPx": 1.36,
+            "flashToDesignPx": 0.4,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-131",
+                "drawn": true,
+                "offTipPx": 0.14,
+                "startsBeyondTipPx": 0.07,
+                "spreadRad": 0.0121
+              }
+            ]
+          },
+          {
+            "gun": "m4a1",
+            "dirDeg": 315,
+            "look": "rifle",
+            "aimDeg": -45.22,
+            "gunDeg": -44.75,
+            "cone": 0.0852,
+            "tip": {
+              "x": 709.31,
+              "y": 752.07
+            },
+            "flash": {
+              "x": 710,
+              "y": 751,
+              "t": 0
+            },
+            "flashToTipPx": 1.27,
+            "flashToDesignPx": 0.38,
+            "pellets": [
+              {
+                "uid": "entity-bc-mvpe5bzh-d-132",
+                "drawn": true,
+                "offTipPx": 0.21,
+                "startsBeyondTipPx": 0.22,
+                "spreadRad": 0.0147
+              }
+            ]
+          }
+        ]
+      },
+      "seconds": 34.2
+    },
+    {
+      "id": "j",
+      "name": "the gun pulls back after the shot frame, a pistol least and a shotgun most, and is home when its pulse ends; classic and reduced motion keep it still",
+      "status": "passed",
+      "detail": {
+        "weapon": "pistol",
+        "cases": {
+          "pistol0": {
+            "look": "pistol",
+            "back": [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0.01,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          "pistol90": {
+            "look": "pistol",
+            "back": [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0.01,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          "pistol180": {
+            "look": "pistol",
+            "back": [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0.01,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          "pistol270": {
+            "look": "pistol",
+            "back": [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0.01,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          "carbine0": {
+            "look": "carbine",
+            "back": [
+              0,
+              2,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0.01,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          "rifle0": {
+            "look": "rifle",
+            "back": [
+              0,
+              2,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0.01,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          "shotgun0": {
+            "look": "shotgun",
+            "back": [
+              0,
+              4,
+              4,
+              3,
+              2,
+              2,
+              1,
+              1,
+              0,
+              0
+            ],
+            "across": 0.02,
+            "flashFrames": 5,
+            "flashDrift": 0
+          }
+        },
+        "classic": [
+          {
+            "look": "pistol",
+            "back": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          {
+            "look": "shotgun",
+            "back": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          }
+        ],
+        "reduced": [
+          {
+            "look": "pistol",
+            "back": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          },
+          {
+            "look": "shotgun",
+            "back": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "across": 0,
+            "flashFrames": 5,
+            "flashDrift": 0
+          }
+        ]
+      },
+      "seconds": 0.2
+    }
+  ],
+  "stallResumes": {
+    "desktop": 0,
+    "phone": 0
+  },
+  "finishedAt": "2026-10-26T15:08:37.052Z",
+  "status": "passed"
+}

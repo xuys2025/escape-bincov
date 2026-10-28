@@ -7,16 +7,23 @@ import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import { browserGroups, suitesForGroup } from './browser-suites.mjs';
 import { selectTimingReports, validateTimingReports, verifyTimings } from './verify-timings.mjs';
+import { createEnemyCoverage, enemySelection, enemyShardIds, enemyUnits } from '../enemy-browser-plan.mjs';
 
 const identity = { runId: '123456', runAttempt: '2', commit: 'a'.repeat(40) };
 const env = { GITHUB_RUN_ID: identity.runId, GITHUB_RUN_ATTEMPT: identity.runAttempt, GITHUB_SHA: identity.commit };
 const iso = offset => new Date(Date.UTC(2026, 9, 15) + offset).toISOString();
 const records = () => browserGroups.map(group => {
   const suites = suitesForGroup(group).map((suite, i) => ({ ...suite, status: 'passed', exitCode: 0, signal: null,
-    startedAt: iso(i * 1000), finishedAt: iso((i + 1) * 1000), durationMs: 1000 }));
+    startedAt: iso(i * 1000), finishedAt: iso((i + 1) * 1000), durationMs: 1000,
+    ...(enemyShardIds.includes(suite.id) ? { enemyCoverage: enemyCoverage(suite.id, identity, iso(i * 1000), iso((i + 1) * 1000)) } : {}) }));
   return { schemaVersion: 1, group, ...identity, status: 'passed', exitCode: 0, signal: null, startedAt: iso(0),
     finishedAt: iso(suites.length * 1000), durationMs: suites.length * 1000, suites };
 });
+
+function enemyCoverage(id, metadata, startedAt, finishedAt) {
+  const selection = enemySelection([`--shard=${id}`]);
+  return { ...createEnemyCoverage(selection, metadata, startedAt), finishedAt, status: 'passed', units: enemyUnits(selection) };
+}
 
 function fixture(t) {
   const root = mkdtempSync(join(tmpdir(), 'bincov-ci-timing-'));
@@ -34,7 +41,7 @@ test('all current-run groups and exact suites validate and produce a complete ti
   const result = verifyTimings({ directory: f.directory, env, summaryPath });
   assert.equal(result.reports.length, 8);
   const suites = browserGroups.flatMap(suitesForGroup);
-  assert.equal(suites.length, 40);
+  assert.equal(suites.length, 45);
   for (const suite of suites) assert.ok(result.summary.includes(`pnpm ${suite.command}`), suite.id);
   assert.match(result.summary, /queue time and Pages deployment are excluded/);
   assert.equal(readFileSync(summaryPath, 'utf8'), result.summary);
@@ -44,7 +51,8 @@ test('the actual group runner writes the schema accepted by the independent timi
   const f = fixture(t), { runGroup } = await import('./run-browser.mjs');
   for (const group of browserGroups) {
     await runGroup({ group, suites: suitesForGroup(group), metadata: identity, log: () => {},
-      reportPath: join(f.directory, `${group}-attempt-2.json`), execute: async () => ({ exitCode: 0, signal: null }) });
+      reportPath: join(f.directory, `${group}-attempt-2.json`), execute: async () => ({ exitCode: 0, signal: null }),
+      readCoverage: (suite, { metadata, row }) => enemyCoverage(suite.id, metadata, row.startedAt, row.finishedAt) });
   }
   assert.equal(verifyTimings({ directory: f.directory, env }).reports.length, 8);
 });
@@ -78,6 +86,7 @@ test('failed-only reruns retain earlier passed groups and select only the newest
   for (const report of f.reports) {
     rmSync(join(f.directory, `${report.group}-attempt-2.json`));
     report.runAttempt = '1';
+    for (const row of report.suites) if (row.enemyCoverage) row.enemyCoverage.runAttempt = '1';
   }
   f.reports[0].status = 'failed'; f.reports[0].exitCode = 1; f.save();
   const retried = records()[0];
@@ -119,6 +128,16 @@ test('missing, extra, duplicate, reordered or renamed suites cannot produce a gr
     suites => { suites[0].id = 'unknown'; }, suites => { suites[0].command = 'test:other'; }]) {
     const reports = records(); modify(reports[0].suites);
     assert.throws(() => validateTimingReports(reports, identity), /suites|suite order/);
+  }
+});
+
+test('successful suite processes still need exact current enemy shard coverage at the independent gate', () => {
+  for (const change of [row => { delete row.enemyCoverage; }, row => { row.enemyCoverage.status = 'running'; },
+    row => { row.enemyCoverage.runAttempt = '1'; }, row => { row.enemyCoverage.units.pop(); },
+    row => { row.enemyCoverage.units[0].caseIds.pop(); }, row => { row.enemyCoverage.units[1].caseIds = []; },
+    row => { row.enemyCoverage.startedAt = iso(-1); }, row => { row.enemyCoverage.units[0].context.offline = false; }]) {
+    const reports = records(), row = reports.flatMap(report => report.suites).find(row => row.id === 'enemy-720');
+    change(row); assert.throws(() => validateTimingReports(reports, identity), /enemy/i);
   }
 });
 
@@ -174,7 +193,7 @@ test('CLI validates real JSON files without project dependencies and exits nonze
     env: { ...process.env, ...env, GITHUB_STEP_SUMMARY: join(f.root, 'summary.md') }, encoding: 'utf8' });
   const passed = run();
   assert.equal(passed.status, 0, passed.stderr);
-  assert.match(passed.stdout, /All 8 groups and 40 suites passed/);
+  assert.match(passed.stdout, /All 8 groups and 45 suites passed/);
   f.reports[0].commit = 'b'.repeat(40); f.save();
   const failed = run();
   assert.equal(failed.status, 1);

@@ -420,3 +420,7 @@ html[data-station] #frame { visibility: hidden; }
 #station-yard { position: fixed; inset: 0; z-index: 2; background: #0a0c0e; }
 .inventory-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 8px 0; }
 .inventory-tools span { color: var(--muted, #9daba4); font-size: 12px; }
+/* The shop catalog's filter (#28 M2-08). */
+.shop-browse { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin: 0 0 6px; }
+.shop-browse button { padding: 2px 8px; font-size: 12px; min-height: 0; }
+.shop-browse small { opacity: .75; font-size: 12px; padding: 0 2px; }

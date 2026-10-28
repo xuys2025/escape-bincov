@@ -6,14 +6,14 @@
 import { canvas, dot, hash, line, rect, type Ctx } from './paint';
 
 const RISE = 48;
-const mix = (a: string, b: string, t: number) => {
+export const mix = (a: string, b: string, t: number) => {
     const p = (c: string) => [1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16));
     const [x, y] = [p(a), p(b)];
     return `#${x.map((v, i) => Math.round(v + (y[i] - v) * Math.max(0, Math.min(1, t))).toString(16).padStart(2, '0')).join('')}`;
 };
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5];
 /** Ordered-dither shade over a rectangle: `level` 0..1 of pixels take the colour (keeps hard pixel edges). */
-function shade(g: Ctx, color: string, x: number, y: number, w: number, h: number, level: number) {
+export function shade(g: Ctx, color: string, x: number, y: number, w: number, h: number, level: number) {
     g.fillStyle = color;
     for (let j = 0; j < h; j++) for (let i = 0; i < w; i++) if (BAYER[(((y + j) & 3) << 2) | ((x + i) & 3)] < level * 16) g.fillRect(x + i, y + j, 1, 1);
 }

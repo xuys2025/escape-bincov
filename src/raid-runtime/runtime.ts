@@ -1,4 +1,5 @@
 /** Headless coastal raid. Rules transplanted from RaidScene at f144147; no renderer/DOM imports. */
+import { partsSignature } from '../gunsmith/signature';
 import * as D from '../domain';
 import { getLegacyEnemyProfile } from '../enemy-profile';
 import { actorArchetype, actorDefinition, enemyDefinition } from '../enemy-archetypes';
@@ -16,18 +17,20 @@ import { derivedLimits, effectiveAttributes, entityUid, enemyRules, perkRaidRule
 import { activeRaidCheckpoint, applyActiveRaidSnapshot, type ActiveRaidSnapshot } from '../raid-state-projection';
 import { advanceRaidBody, enemyDamage, perkEffects, recordMotion, rpgMultipliers, useRpgItemResult } from '../rpg';
 import { corridor, doorAnchor, interactionTarget, spacePath, toggleDoor, traversable, type Interaction as SpatialInteraction, type SpaceContext } from '../spatial';
-import { advanceLayerShots, aimTarget, changeLayer, damageLayerEnemy, type ShotObservation } from '../layer-transition';
+import { advanceLayerShots, aimTarget, changeLayer, damageLayerEnemy, shotIntersection, type ShotObservation } from '../layer-transition';
 import { critMultiplier, critSources, type CritSnapshot } from '../perks';
 import { advanceBreath, breathChance, clearBreath, idleBreath } from '../breath';
 import { advancePursuits } from '../pursuit';
-import { advanceAim, coneOf, drawAim, driftOf, handlingOf, preciseHeld, recoil, turnAim, unsteadyAim, SAMPLE_GUNS, SWAY, type AimState, type Handling, type Motion } from '../shooting';
-import { effectiveStats } from '../gunsmith/stats';
+import { advanceAim, coneOf, drawAim, driftOf, handlingOf, preciseHeld, recoil, turnAim, unsteadyAim, SWAY, type AimState, type Handling, type Motion } from '../shooting';
+import { GUNS, type GunClass } from '../gunsmith/catalog';
+import { effectiveStats, laserHandling } from '../gunsmith/stats';
 import { buildOf, gunWeight } from '../gunsmith/instance';
+import { deviceParts, devicesOn, partOn, toggleDevice, type DeviceEffect, type DevicePart } from '../gunsmith/devices';
 import { ActiveClock, idleFrame, type InputFrame } from '../input';
 import { SaveSession, type SessionState, type ExpansionTransaction, type MutationResult } from '../session';
 import type { LootContainer, LootTransfer } from '../loot';
 import type { RaidRuntime, RaidIntent, PublishedView, WorldKey, MapDef, StampedEvent, ViewEventBody, Durability, WeaponLook, TargetRef, Interaction, HurtCause } from './contract';
-import { mapView, frameView, freeze, Revelation, bulletOwner } from './presentation';
+import { mapView, frameView, freeze, Revelation, bulletOwner, pointShown } from './presentation';
 export const emptyIntent = (): RaidIntent => ({ move: { x: 0, y: 0, sprint: false }, aim: null, precise: false,
     firePressed: false, fireHeld: false, aimHeld: false, interactPressed: false, interactHeld: false, commands: [], selectTarget: null, source: 'mouse-keyboard' });
 const distance = (a: Point, b: Point) => Math.hypot(a.x - b.x, a.y - b.y);
@@ -43,6 +46,27 @@ const DUE = 1e-9;
  * counts from this old muzzle distance (px), so walls, doors and corners stop it by the same collision as in flight.
  */
 const MUZZLE = 17;
+/**
+ * How a gun is drawn in hand until M2-10 composes the art of each gun and build: the old three keep their own looks,
+ * and any other gun borrows its class's (a pistol the pistol, a shotgun the shotgun, everything longer the rifle).
+ */
+const CLASS_LOOK: Readonly<Record<GunClass, WeaponLook>> = { pistol: 'pistol', shotgun: 'shotgun', smg: 'rifle', rifle: 'rifle', dmr: 'rifle', bolt: 'rifle', lmg: 'rifle' };
+const heldLook = (id: string): WeaponLook => id === 'knife' || id === 'pistol' || id === 'shotgun' || id === 'carbine' ? id
+    : CLASS_LOOK[GUNS[id as keyof typeof GUNS].cls];
+/** A laser's beam is cast this many times its range: past the range it is only drawn, fading (#28 M2-03). */
+const LASER_REACH = 2;
+/** Step (px) of the laser's walk along the aim for walls, doors and the edge of what is shown; bodies are met exactly. */
+const BEAM_STEP = 4;
+/** The loadout gun's numbers as equipped() works them out: effective stats for its build and switches (frozen). */
+type Armed = {
+    key: string; weapon: D.WeaponDef; grip: Handling; weight: number;
+    /** Factor on the hearing radius of a shot, and whether a suppressor muffles it (#28 M2-11). */
+    noise: number; suppressed: boolean;
+    /** The laser while on: its range and the handling of a shot while the beam rests on a body within it (#28 M2-03). */
+    laser: { range: number; grip: Handling } | null;
+    /** The light while on, and the spot factor of the devices on (#28 M2-03). */
+    light: { radius: number; arc: number } | null; spot: number;
+};
 type PendingEvent = {
     body: ViewEventBody;
     world: WorldKey;
@@ -94,15 +118,13 @@ export class CoastRaidRuntime implements RaidRuntime {
     private clickLeft = 0;
     /** Remaining flight time for rounds born in this substep. Consumed before flight, never part of a checkpoint. */
     private newbornFlight: Map<string, number> | null = null;
-    /** Playtest sample gun with its own magazine; the loadout keeps the real weapon and its rounds (`base`). */
-    private sample: { def: D.WeaponDef; base: { mag: number; relief: number } } | null = null;
     /**
      * The loadout gun's effective numbers (gunsmith/stats.ts) and weight, for the instance `key` names: its uid, type,
      * installed parts and switches. The gun in hand is read several times a frame, so they are worked out once per
      * instance (docs/gunsmith/CONTRACTS.md, M1-05) and frozen, since every reader shares them. Never saved. The
-     * switches are in the key already; M2-03 passes the switched-on devices to effectiveStats.
+     * switches are in the key, and the devices switched on reach effectiveStats (M2-03), so flipping one recomputes.
      */
-    private armed: { key: string; weapon: D.WeaponDef; grip: Handling; weight: number } | null = null;
+    private armed: Armed | null = null;
     extractTime = 0;
     warned = false;
     tideChanged = false;
@@ -250,26 +272,117 @@ export class CoastRaidRuntime implements RaidRuntime {
      * The loadout gun's effective numbers (#28 M1-05: buildOf of the instance D.equippedGun returns, through
      * effectiveStats), recomputed only when that instance changes; null when the loadout has no gun.
      */
-    private equipped() {
+    private equipped(): Armed | null {
         const gun = D.equippedGun(this.session.loadout ?? this.terminalLoadout);
         if (!gun) return null;
         const key = JSON.stringify(gun);
         if (this.armed?.key !== key) {
-            const stats = effectiveStats(buildOf(gun));
-            this.armed = { key, weapon: Object.freeze(stats.weapon), grip: Object.freeze(stats.handling), weight: gunWeight(gun) };
+            const stats = effectiveStats(buildOf(gun), devicesOn(gun)), grip = Object.freeze(stats.handling);
+            this.armed = { key, weapon: Object.freeze(stats.weapon), grip, weight: gunWeight(gun), noise: stats.noise, suppressed: stats.suppressed,
+                laser: stats.laser && Object.freeze({ range: stats.laser.range, grip: Object.freeze(laserHandling(grip, stats.laser)) }),
+                light: stats.light && Object.freeze(stats.light), spot: stats.spot };
         }
         return this.armed;
     }
+    /** The gun in hand's numbers: the loadout gun's unless the knife is drawn (its devices count only in hand, M2-03). */
+    private held(): Armed | null { return this.knife ? null : this.equipped(); }
     /**
-     * The weapon in hand as it fires: the loadout gun's effective stats, the knife's, or the #39 sample rifle's. The
-     * knife and the sample keep WEAPONS, SAMPLE_GUNS and handlingOf (M2-01 retires the sample).
+     * The weapon in hand as it fires: the loadout gun's effective stats, or the knife's. The knife keeps WEAPONS and
+     * handlingOf; the #39 sample rifle is gone (M2-01): the real M4A1 is a loadout gun like any other.
      */
-    get currentWeapon(): D.WeaponDef { return this.knife ? D.WEAPONS.knife : this.sample?.def ?? this.equipped()?.weapon ?? D.WEAPONS.knife; }
-    /** How the held weapon is drawn: the sample rifle borrows the rifle look. */
-    get weaponLook(): WeaponLook { return this.currentWeapon.id === 'm4a1' ? 'rifle' : this.currentWeapon.id as WeaponLook; }
+    get currentWeapon(): D.WeaponDef { return this.knife ? D.WEAPONS.knife : this.equipped()?.weapon ?? D.WEAPONS.knife; }
+    /** The gun in hand's type and configuration signature, for its picture (#28 M2-10); null with the knife or no gun. */
+    get heldGun(): { id: string; sig: string } | null {
+        const gun = this.knife ? null : D.equippedGun(this.session.loadout ?? this.terminalLoadout);
+        return gun ? { id: gun.id, sig: partsSignature(gun.parts) } : null;
+    }
+    /** How the held weapon is drawn (heldLook). */
+    get weaponLook(): WeaponLook { return heldLook(this.currentWeapon.id); }
     /** Handling of the weapon in hand, from the same source as currentWeapon. */
-    get grip(): Handling { const gun = !this.knife && !this.sample && this.equipped(); return gun ? gun.grip : handlingOf(this.currentWeapon.id); }
-    get sampleGun() { return this.sample?.def.id ?? null; }
+    get grip(): Handling { const gun = !this.knife && this.equipped(); return gun ? gun.grip : handlingOf(this.currentWeapon.id); }
+    /**
+     * The handling a shot fired now meets (shoot, and the HUD's cone): the grip, or while the laser of the gun in hand is
+     * on and its beam rests on a body within range, the laser's (#28 M2-03): tighter from the hip, the same once the aim
+     * is raised, so its help fades as the aim rises. Only the cone differs; recoil and the raise read the grip.
+     */
+    get shotGrip(): Handling { return this.gripAt(this.player); }
+    /** shotGrip for a shot leaving `from` (runTrigger fires each shot from where the body was at its instant). */
+    private gripAt(from: Point): Handling {
+        const laser = this.held()?.laser;
+        return laser && this.laserBeam(from)?.inRange ? laser.grip : this.grip;
+    }
+    /**
+     * The device parts of the gun in hand with their switches, the light's reach while it is on and the spot factor of
+     * the devices on (#28 M2-03); null with the knife drawn, without a gun, or with a gun that has no device.
+     */
+    get devices(): { parts: (DevicePart & { on: boolean })[]; light: { radius: number; arc: number } | null; spot: number } | null {
+        const gun = this.knife ? null : D.equippedGun(this.session.loadout ?? this.terminalLoadout), armed = gun && this.equipped();
+        const parts = gun ? deviceParts(gun.parts) : [];
+        return gun && armed && parts.length ? { parts: parts.map(p => ({ ...p, on: partOn(p, gun.devices) })), light: armed.light, spot: armed.spot } : null;
+    }
+    /**
+     * The laser of the gun in hand while it is on (#28 M2-03). Its beam leaves the body along the aim and stops at the
+     * first wall or closed door (windows and low cover let it through, as they do bullets and sight), at the first living
+     * body on its line, at the edge of what is shown (a room not revealed: the beam never enters one), or at LASER_REACH
+     * times its range. A body counts only where it is shown, so a hidden one neither stops the beam nor tightens the HUD's
+     * cone. `hit`: it lands on a surface or body (the view's dot). `inRange`: it rests on a body within the laser's range,
+     * when a shot from the hip takes the laser's handling. Null while the laser is off or the knife is drawn. `from` is
+     * where the body is (a shot's own point inside a substep); the aim is the body's.
+     */
+    laserBeam(from: Point = this.player): { to: Point; hit: boolean; target: string | null; inRange: boolean } | null {
+        const laser = this.held()?.laser;
+        if (!laser) return null;
+        const { x, y } = from, rotation = this.player.rotation, dx = Math.cos(rotation), dy = Math.sin(rotation), reach = laser.range * LASER_REACH;
+        const map = this.mapNow(), revealed = this.revelation.read(this, map), at = (d: number) => ({ x: x + dx * d, y: y + dy * d });
+        const clear = (p: Point) => this.space ? traversable({ ...this.space, highTide: false }, p, 'sight') : isWalkable(p.x, p.y, false, 0);
+        // Walls, doors and the edge of what is shown, BEAM_STEP px at a time; a wall's face is then found to a quarter pixel.
+        let stop = reach, hit = false;
+        for (let d = BEAM_STEP; d <= reach; d += BEAM_STEP) {
+            if (!clear(at(d))) {
+                let free = d - BEAM_STEP, blocked = d;
+                while (blocked - free > .25) { const mid = (free + blocked) / 2; if (clear(at(mid))) free = mid; else blocked = mid; }
+                stop = free; hit = true; break;
+            }
+            if (!pointShown(map, revealed, at(d))) { stop = d - BEAM_STEP; break; }
+        }
+        // The first living body shown on the line before that, nearest first and ties by uid, met exactly as a bullet is.
+        const probe: BulletState = { uid: 'laser', x, y, rotation, vx: dx, vy: dy, left: stop, damage: 0, enemy: false };
+        const body = this.enemies.filter(e => e.hp > 0 && pointShown(map, revealed, e))
+            .map(e => ({ uid: e.uid, d: shotIntersection(probe, e, dx, dy) }))
+            .filter((h): h is { uid: string; d: number } => h.d !== null && h.d < stop)
+            .sort((a, b) => a.d - b.d || a.uid.localeCompare(b.uid, 'en'))[0];
+        return body ? { to: at(body.d), hit: true, target: body.uid, inRange: body.d <= laser.range } : { to: at(stop), hit, target: null, inRange: false };
+    }
+    /**
+     * LegacyEnemyWorld.exposure (#28 M2-03): how much farther an enemy at `from` notices the player. The devices switched
+     * on on the gun in hand give the player away to anyone in front of it (the half it points into), by the product of
+     * their spot factors; 1 behind, with none on and with the knife drawn. Sight is still needed: only the reach grows.
+     */
+    exposure(from: Point): number {
+        const spot = this.held()?.spot ?? 1;
+        if (spot === 1) return 1;
+        const { x, y, rotation } = this.player;
+        return (from.x - x) * Math.cos(rotation) + (from.y - y) * Math.sin(rotation) > 0 ? spot : 1;
+    }
+    /**
+     * A device switch (F, G, the touch 设备 button; #28 M2-03): flips the part on the gun in hand that has `effect`, a
+     * combiner both its effects. The switch is the gun instance's (`gun.devices`), so the next checkpoint saves it with the
+     * loadout and it stays with the gun; nothing is committed here. Refused, with a reason, with the knife drawn, without
+     * a gun, or without such a part.
+     */
+    private switchDevice(effect: DeviceEffect) {
+        const loadout = this.session.loadout, gun = loadout && D.isGun(loadout.weapon) ? loadout.gun : null;
+        if (!gun) { this.rejected('device', '没有装备枪械。'); return; }
+        if (this.knife) { this.rejected('device', '先换回主武器，再开关设备。'); return; }
+        if (!toggleDevice(gun, effect)) { this.rejected('device', effect === 'laser' ? '这把枪没有装激光。' : '这把枪没有装灯光。'); return; }
+        this.dirty = true;
+    }
+    /** The published map of the floor the player stands on, as publish shows it; built again only when the floor changed. */
+    private mapNow(): MapDef {
+        const world = this.worldKey();
+        if (!this.viewMap || this.viewMap.key.mapId !== world.mapId) this.viewMap = mapView(this, world);
+        return this.viewMap;
+    }
     private worldKey(): WorldKey {
         const r = this.layered?.raid;
         return { runId: this.terminalLoadout.runId!, worldVersion: r?.worldVersion ?? WORLD_VERSION, layoutRevision: r?.layoutRevision ?? null, mapId: r?.currentMap ?? 'coast' };
@@ -484,12 +597,8 @@ export class CoastRaidRuntime implements RaidRuntime {
             'warned', 'tideChanged', 'noiseRadius', 'noiseTime', 'hitTime', 'exhausted', 'stepTime', 'nextEntity'] as const;
         Object.assign(this, Object.fromEntries(keys.map(k => [k, c[k]])));
         Object.assign(this.player, c.player);
-        if (this.sample)
-            this.sample.base = { mag: c.loadout.ammo, relief: c.loadout.ammoRelief };
-        else {
-            this.mag = c.loadout.ammo;
-            this.magRelief = c.loadout.ammoRelief;
-        }
+        this.mag = c.loadout.ammo;
+        this.magRelief = c.loadout.ammoRelief;
         this.player.rotation = wrap(c.player.rotation);
         this.random = D.seededRandom(c.rng);
         this.noteSeen = new Set(c.noteSeen);
@@ -612,18 +721,36 @@ export class CoastRaidRuntime implements RaidRuntime {
             else this.spawnLoot(this.player.x, this.player.y, item.id, item.qty, !!item.relief);
         });
     }
-    equipItem(uid: string) {
-        this.setSampleGun(null);
+    equipItem(uid: string) { return this.equip(uid, null); }
+    /** #26 F15: equip a gun straight from the open container; same rules and checks as transferLoot's target. */
+    equipLoot(ref: TargetRef, uid: string): MutationResult {
+        if (!this.validRef(ref) || ref.kind !== 'container' || !this.canLootContainer(ref.id, ref.runId)) {
+            this.rejected('equip', 'stale-target');
+            return 'rejected';
+        }
+        return this.equip(uid, ref.id);
+    }
+    /**
+     * The gun swap (D.equipRun) from the backpack or a live container. The container is world state: its change is
+     * captured and rolled back with the carried inventory, and persists in the same write as the loadout.
+     */
+    private equip(uid: string, containerId: string | null) {
         return this.transaction('equip', () => {
+            const from = containerId === null ? undefined : this.getLootContainer(containerId)?.inventory;
+            const taken = from?.items.find(i => i.uid === uid);
+            if (containerId !== null && !taken)
+                return false;
             this.draw();
             this.syncMagazine();
-            if (!D.equipRun(this.session.loadout!, uid))
+            if (!D.equipRun(this.session.loadout!, uid, from))
                 return false;
             this.mag = this.session.loadout!.ammo;
             this.magRelief = this.session.loadout!.ammoRelief;
             this.knife = false;
             this.reloadLeft = 0;
             this.startReload();
+            if (taken)
+                this.emit({ type: 'looted', source: containerId!, item: taken.id, qty: 1, partial: false, to: 'equip' });
         });
     }
     transferLoot(ref: TargetRef, request: LootTransfer): MutationResult {
@@ -777,34 +904,17 @@ export class CoastRaidRuntime implements RaidRuntime {
     }
     syncMagazine() {
         if (this.session.loadout) {
-            this.session.loadout.ammo = this.sample?.base.mag ?? this.mag;
-            this.session.loadout.ammoRelief = this.sample?.base.relief ?? this.magRelief;
+            this.session.loadout.ammo = this.mag;
+            this.session.loadout.ammoRelief = this.magRelief;
         }
     }
     loadMagazine() {
-        if (this.sample) { this.mag = this.sample.def.magazine; return; }
         const loaded = D.reloadMagazine(this.session.loadout!, this.mag, this.magRelief, this.session.loadout!.bag); this.mag = loaded.ammo; this.magRelief = loaded.ammoRelief; this.syncMagazine();
-    }
-    /**
-     * Hand the player a playtest sample gun (SAMPLE_GUNS) or take it back. The loadout, its weapon and its rounds stay
-     * untouched and are what every checkpoint saves; the sample's own magazine reloads from an endless reserve.
-     */
-    setSampleGun(id: keyof typeof SAMPLE_GUNS | null) {
-        this.assertLive();
-        if ((this.sample?.def.id ?? null) === id) return;
-        if (id !== null && !Object.hasOwn(SAMPLE_GUNS, id)) throw new Error(`Unknown sample gun: ${id}.`);
-        if (this.sample) { this.mag = this.sample.base.mag; this.magRelief = this.sample.base.relief; }
-        this.sample = id ? { def: SAMPLE_GUNS[id], base: { mag: this.mag, relief: this.magRelief } } : null;
-        if (this.sample) { this.mag = this.sample.def.magazine; this.magRelief = 0; }
-        this.knife = false;
-        this.reloadLeft = 0;
-        this.draw();
-        this.dirty = true;
     }
     /** Another weapon comes to hand: the aim starts from the hip again (drawAim) and the breath charge is gone. */
     private draw() { drawAim(this.handling, SWAY); clearBreath(this.breath); }
     /** Kg carried: bag, safe, the loadout gun with its parts (gunsmith gunWeight) and loaded rounds, the knife, the charm. */
-    carriedWeight() { const l = this.session.loadout!, gun = this.equipped(); return D.weight(l.bag) + D.weight(l.safe) + (gun?.weight ?? 0) + D.ITEMS.knife.weight + (gun?.weapon.ammo ? D.ITEMS[gun.weapon.ammo].weight * (this.sample?.base.mag ?? this.mag) : 0) + (this.layered?.charm ? D.ITEMS[this.layered.charm.id].weight : 0); }
+    carriedWeight() { const l = this.session.loadout!, gun = this.equipped(); return D.weight(l.bag) + D.weight(l.safe) + (gun?.weight ?? 0) + D.ITEMS.knife.weight + (gun?.weapon.ammo ? D.ITEMS[gun.weapon.ammo].weight * this.mag : 0) + (this.layered?.charm ? D.ITEMS[this.layered.charm.id].weight : 0); }
     carryLimit() { return this.layered ? derivedLimits(this.layered).carry : B.carryLimit; }
     useItem(id: string, inv: D.Inventory = this.session.loadout!.bag, itemUid?: string) {
         const chosen = itemUid ? inv.items.find(i => i.uid === itemUid && i.id === id && i.qty > 0) : null;
@@ -884,7 +994,7 @@ export class CoastRaidRuntime implements RaidRuntime {
     startReload() {
         const w = this.currentWeapon;
         if (w.ammo && !this.reloadLeft && this.mag < w.magazine) {
-            if (!this.sample && !D.count(this.session.loadout!.bag, w.ammo)) {
+            if (!D.count(this.session.loadout!.bag, w.ammo)) {
                 this.say('背包中没有适用的备用弹药。');
                 return;
             }
@@ -959,6 +1069,10 @@ export class CoastRaidRuntime implements RaidRuntime {
                 this.knife = true;
                 this.reloadLeft = 0;
             }
+            if (frame.actions.has('laser'))
+                this.switchDevice('laser');
+            if (frame.actions.has('light'))
+                this.switchDevice('light');
         }
         if (this.paused)
             return;
@@ -1124,9 +1238,11 @@ export class CoastRaidRuntime implements RaidRuntime {
             this.setOverlay('');
         return ok;
     }
-    private shotEvent(shooter: string, weapon: WeaponLook, bullets: BulletState[], angles: number[]) {
+    /** `gun`: the player's gun, its id, class and whether a suppressor muffles it, for the view's sound (#28 M2-11). */
+    private shotEvent(shooter: string, weapon: WeaponLook, bullets: BulletState[], angles: number[], gun?: { id: string; cls: GunClass; suppressed: boolean }) {
         this.emit({ type: 'shot', shotId: `${shooter}:${bullets[0].uid}`, shooter, weapon,
-            pellets: bullets.map((b, i) => ({ bullet: b.uid, origin: { x: b.x, y: b.y }, angle: angles[i] })) });
+            pellets: bullets.map((b, i) => ({ bullet: b.uid, origin: { x: b.x, y: b.y }, angle: angles[i] })),
+            ...(gun ? { gun: { id: gun.id, cls: gun.cls }, suppressed: gun.suppressed } : {}) });
     }
     /**
      * The trigger over one substep of `dt` seconds: the cooldown, a reload and the aim advance, and each shot falls due at
@@ -1225,13 +1341,17 @@ export class CoastRaidRuntime implements RaidRuntime {
         // The round is spent: the shot's one critical snapshot is taken now, the breath charge included, and every pellet
         // carries its own copy.
         const crit = this.shotCrit(w, { chance: breathChance(this.breath.seconds), target: this.breath.target });
+        // Enemies hear the shot within the gun's own radius (#28 M2-11): the effective noise factor of its build (a
+        // suppressor's or a brake's) on the one SURVIVAL range; a factory gun's factor is 1, the old 510 exactly.
+        const gun = this.held();
         this.shotNoise = { x: at.x, y: at.y };
-        this.noiseRadius = B.gunNoiseRange;
+        this.noiseRadius = B.gunNoiseRange * (gun?.noise ?? 1);
         this.noiseTime = .6;
         // Random scatter over the cone, around a centre that recoil has pushed toward the shooter's right. `w` and `h` are
-        // the gun's effective stats; the RPG body multiplier and the recoil perk scale apply once each, here.
+        // the gun's effective stats; the RPG body multiplier and the recoil perk scale apply once each, here. The cone is
+        // the laser's while its beam rests on a body in range (shotGrip, #28 M2-03); recoil and drift stay the grip's.
         const body = this.layered ? rpgMultipliers(this.layered).recoil : 1;
-        const cone = coneOf(this.handling, w, h, body), centre = this.player.rotation + driftOf(this.handling, h, body);
+        const cone = coneOf(this.handling, w, this.gripAt(at), body), centre = this.player.rotation + driftOf(this.handling, h, body);
         const pellets: BulletState[] = [], angles: number[] = [];
         for (let i = 0; i < w.pellets; i++) {
             const angle = centre + (this.random() - .5) * cone;
@@ -1246,12 +1366,12 @@ export class CoastRaidRuntime implements RaidRuntime {
         // The charge went into this shot (spec 4.2): a precise aim held on charges again from zero, hit or miss.
         clearBreath(this.breath);
         recoil(this.handling, h, perkEffects(this.layered).recoil);
-        this.shotEvent('player', this.weaponLook, pellets, angles);
+        this.shotEvent('player', this.weaponLook, pellets, angles, gun ? { id: w.id, cls: GUNS[w.id as keyof typeof GUNS].cls, suppressed: gun.suppressed } : undefined);
         return true;
     }
     /**
      * The critical snapshot of a gun shot fired now (docs/tasks/critical-perk-contract.md section 3), in v3 raids only:
-     * the effective technique (the technique drug included), the gun fired `w` (a sample gun included), the owned perks
+     * the effective technique (the technique drug included), the gun fired `w`, the owned perks
      * and whether the focus drug lasts, all as they are at this instant, plus the breath charge `breath` with the enemy
      * it rests on (a charge without a target counts nothing). Classic, v1 and v2 raids keep their own rules: undefined;
      * so does the knife. The HUD (presentation.ts, HudView.crit) reads the same snapshot, so it prints what a shot takes.
@@ -1264,7 +1384,7 @@ export class CoastRaidRuntime implements RaidRuntime {
         const sources = critSources({ technique: effectiveAttributes(state).technique, weapon: w, perks, focus: state.body.effects.focus > 0, breath: charge });
         return sources ? { sources, multiplier: critMultiplier(perks), target: sources.some(s => s.id === 'technique-15-a') ? breath.target : null } : undefined;
     }
-    damageEnemy(e: Enemy, damage: number, incomingAngle = Math.atan2(this.player.y - e.y, this.player.x - e.x)) {
+    damageEnemy(e: Enemy, damage: number, incomingAngle = Math.atan2(this.player.y - e.y, this.player.x - e.x), bullet?: string) {
         if (e.hp <= 0)
             return;
         const hp = e.hp, angle = incomingAngle;
@@ -1294,7 +1414,8 @@ export class CoastRaidRuntime implements RaidRuntime {
         }
         const now = this.enemies.find(a => a.uid === e.uid)!;
         this.hurtTimers.set(e.uid, .07);
-        this.emit({ type: 'hurt', cause: 'blow', uid: e.uid, at: { x: e.x, y: e.y }, damage: hp - now.hp, critical: false, angle });
+        this.emit({ type: 'hurt', cause: 'blow', uid: e.uid, at: { x: e.x, y: e.y }, damage: hp - now.hp, critical: false, angle,
+            ...(bullet === undefined ? {} : { bullet }) });
         if (now.hp <= 0) {
             this.emit({ type: 'death', uid: e.uid, ...(enemyRules(this.layered?.raid) ? { killer: 'player' } : {}), corpseAngle: now.rotation - (this.layered ? 0 : Math.PI / 2), containerId: `corpse-${e.uid}` });
             this.targetDied(e.uid);
@@ -1322,7 +1443,7 @@ export class CoastRaidRuntime implements RaidRuntime {
         }
         this.hitNotice = 1;
     }
-    hurt(amount: number, source?: Point, owner?: string) {
+    hurt(amount: number, source?: Point, owner?: string, bullet?: string) {
         if (this.extracted)
             return;
         const hp = this.hp;
@@ -1344,7 +1465,8 @@ export class CoastRaidRuntime implements RaidRuntime {
             clearBreath(this.breath);
         this.extractTime = 0;
         this.emit({ type: 'hurt', cause: 'blow', uid: 'player', at: { ...this.player }, damage: hp - this.hp, critical: false,
-            angle: source ? Math.atan2(source.y - this.player.y, source.x - this.player.x) : null });
+            angle: source ? Math.atan2(source.y - this.player.y, source.x - this.player.x) : null,
+            ...(bullet === undefined ? {} : { bullet }) });
         if (this.hp <= 0) {
             this.emit({ type: 'death', uid: 'player', corpseAngle: this.player.rotation, containerId: null });
             this.finish('death');
@@ -1353,7 +1475,7 @@ export class CoastRaidRuntime implements RaidRuntime {
     private observeShot(e: ShotObservation) {
         this.emit({ type: 'impact', bullet: e.bullet.uid, owner: bulletOwner(e.bullet), reason: e.reason, lastFree: e.lastFree, contact: e.contact, normal: e.normal, surface: e.surface, target: e.target });
         if (e.target && e.damage > 0) {
-            this.emit({ type: 'hurt', cause: 'blow', uid: e.target, at: e.contact ?? e.lastFree, damage: e.damage, critical: e.critical, angle: e.angle });
+            this.emit({ type: 'hurt', cause: 'blow', uid: e.target, at: e.contact ?? e.lastFree, damage: e.damage, critical: e.critical, angle: e.angle, bullet: e.bullet.uid });
             if (e.dead) {
                 const enemy = this.enemies.find(a => a.uid === e.target);
                 const killer = enemyRules(this.layered?.raid) ? bulletOwner(e.bullet) : null;
@@ -1407,9 +1529,9 @@ export class CoastRaidRuntime implements RaidRuntime {
                 if (target) {
                     this.emit({ type: 'impact', bullet: b.uid, owner: bulletOwner(b), reason: 'hit-actor', lastFree: previous, contact: { x: b.x, y: b.y }, normal: null, surface: 'actor', target });
                     if (target === 'player')
-                        this.hurt(b.damage, { x: this.player.x - b.vx, y: this.player.y - b.vy });
+                        this.hurt(b.damage, { x: this.player.x - b.vx, y: this.player.y - b.vy }, undefined, b.uid);
                     else
-                        this.damageEnemy(this.enemies.find(e => e.uid === target)!, b.damage, Math.atan2(-b.vy, -b.vx));
+                        this.damageEnemy(this.enemies.find(e => e.uid === target)!, b.damage, Math.atan2(-b.vy, -b.vx), b.uid);
                     remove = true;
                     break;
                 }

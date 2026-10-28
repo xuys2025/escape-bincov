@@ -8,7 +8,7 @@ import type { LootContainer } from './loot';
 import type { Point } from './world';
 import { inSpace, separation, checkpointBodyFits, validateSpaces, type SpaceDefinition } from './spatial';
 import { finite, hasExactKeys, hasOwnStringKey, identity, validInventory, whole, COUNT_MAX, UINT32_MAX } from './profile-codec';
-import { gunUids, isGunId, validateGun } from './gunsmith/instance';
+import { gunUids, validateGun } from './gunsmith/instance';
 import type { ProfileV2 } from './gunsmith/migrate';
 
 export const EXPANSION_VERSION = 1;
@@ -298,9 +298,9 @@ export function validateExpansion(value: unknown, profile: D.SaveDataV1 | Profil
     };
     inventory(profile.stash, 10, profile.upgraded ? 9 : 6); inventory(raid.loadout.bag, 6, 5); inventory(raid.loadout.safe, 2, 2);
     exactKeys(raid.loadout, ['bag', 'safe', 'weapon', 'ammo', 'ammoRelief', 'relief', 'runId', ...(guns ? ['weaponUid', 'gun'] : [])]);
-    const magazine = raid.loadout, gun = magazine.weapon === null ? null : hasOwnStringKey(D.WEAPONS, magazine.weapon) ? D.WEAPONS[magazine.weapon] : undefined;
+    const magazine = raid.loadout, gun = magazine.weapon === null ? null : D.isGun(magazine.weapon) ? D.WEAPONS[magazine.weapon] : undefined;
     // The old format caps the magazine at the gun type's size; the gun format at its instance's, below.
-    if ((magazine.weapon !== null && (!gun || magazine.weapon === 'knife')) || !whole(magazine.ammo, 0, guns ? COUNT_MAX : gun?.magazine ?? 0)
+    if (gun === undefined || !whole(magazine.ammo, 0, guns ? COUNT_MAX : gun?.magazine ?? 0)
         || !whole(magazine.ammoRelief, 0, magazine.ammo) || typeof magazine.relief !== 'boolean'
         || profile.bag.items.length || profile.equipment.weapon !== null) fail();
     // The equipped gun (gun format): its own uid and its parts' join the item uids, like a gun in the bag. The magazine
@@ -388,7 +388,7 @@ export function validateExpansion(value: unknown, profile: D.SaveDataV1 | Profil
         layer.enemies.forEach(e => enemy(e, map));
         for (const l of layer.loot) {
             // A gun on the ground (gun format) carries its state: its uid is an entity's, its part uids are item uids.
-            const ground = guns && isGunId(l.id);
+            const ground = guns && D.isGun(l.id);
             exactKeys(l, ['uid', 'id', 'qty', 'relief', 'x', 'y', ...(ground ? ['gun'] : [])]); entity(l.uid); point(l, map);
             if (!hasOwnStringKey(D.ITEMS, l.id) || !whole(l.qty, 1, D.ITEMS[l.id].stack) || typeof l.relief !== 'boolean') fail();
             if (ground) {

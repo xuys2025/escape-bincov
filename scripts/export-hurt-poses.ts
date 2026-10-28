@@ -1,5 +1,6 @@
-// Cut the hurt and recovery frames out of the #96 pixel-v2 sheets into runtime PNGs under assets/coast/poses, and write
-// their manifest and the importer src/coast-view/pose-assets.ts. A sheet is 3 columns (idle, hurt, recovery) by 5 rows
+// Cut the hurt and recovery frames out of the accepted art sheets (#96 pixel-v2 for groups A and B, #122 for group C) into
+// runtime PNGs under assets/coast/poses, and write their manifest and the importer src/coast-view/pose-assets.ts. A sheet
+// is 3 columns (idle, hurt, recovery) by 5 rows
 // (E, SE, S, NE, N) at exactly 8x nearest-neighbour. Every 8x8 block must be one colour, and column 0 must equal the
 // runtime idle frame once driftMap's one-level canvas drift is restored, or nothing is written.
 // Usage: node --import tsx scripts/export-hurt-poses.ts [--check]
@@ -9,21 +10,33 @@ import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { decodePng, encodePng, type RGBA } from './title-art/png';
 
-/** [art style, logical width, logical height, folder of the style's runtime body frames in assets/coast] of each sheet:
- *  group A is main's four enemy kinds, group B three of #81's archetypes (src/enemy-archetypes.ts) in their own style. */
-export const POSE_KINDS = [['scav', 32, 48, 'v1'], ['salt', 32, 48, 'v1'], ['elite', 32, 48, 'v1'], ['creature', 40, 28, 'v1'],
-  ['raider-melee', 32, 48, 'enemy-v1'], ['raider-gunner', 32, 48, 'enemy-v1'], ['raider-lookout', 32, 48, 'enemy-v1']] as const;
+/** [art style, logical width, logical height, folder of the style's runtime body frames in assets/coast, accepted sheet
+ *  edition] of each sheet: group A is main's four enemy kinds; groups B (#96) and C (#122) are #81's 18 archetypes
+ *  (src/enemy-archetypes.ts) in their own style. */
+export const POSE_KINDS = [
+  ['scav', 32, 48, 'v1', 'pixel-v2'], ['salt', 32, 48, 'v1', 'pixel-v2'], ['elite', 32, 48, 'v1', 'pixel-v2'], ['creature', 40, 28, 'v1', 'pixel-v2'],
+  ['raider-melee', 32, 48, 'enemy-v1', 'pixel-v2'], ['raider-gunner', 32, 48, 'enemy-v1', 'pixel-v2'], ['raider-lookout', 32, 48, 'enemy-v1', 'pixel-v2'],
+  ['raider-boss', 32, 48, 'enemy-v1', 'v1'], ['tide-ritualist', 32, 48, 'enemy-v1', 'v1'], ['mercenary-scout', 32, 48, 'enemy-v1', 'v1'],
+  ['mercenary-assault', 32, 48, 'enemy-v1', 'v1'], ['mercenary-support', 32, 48, 'enemy-v1', 'v1'], ['recovery-leader', 32, 48, 'enemy-v1', 'v1'],
+  ['blockade-sentry', 32, 48, 'enemy-v1', 'v1'], ['blockade-patrol', 32, 48, 'enemy-v1', 'v1'], ['blockade-sergeant', 32, 48, 'enemy-v1', 'v1'],
+  ['salt-dazed', 32, 48, 'enemy-v1', 'v1'], ['tide-chaser', 32, 48, 'enemy-v1', 'v1'], ['salt-hulk', 32, 48, 'enemy-v1', 'v1'],
+  ['tidal-crab', 32, 48, 'enemy-v1', 'v1'], ['saltback-dog', 32, 48, 'enemy-v1', 'v2'], ['sac-spitter', 32, 48, 'enemy-v1', 'v2'],
+] as const;
+/** Styles the game draws no arms on: they attack with claws, and CoastView.syncArms shows arms only with a visible weapon.
+ *  A pose may move their shoulder rows. */
+export const ARMLESS: ReadonlySet<string> = new Set(['creature', 'salt-dazed', 'tide-chaser', 'salt-hulk', 'tidal-crab', 'saltback-dog', 'sac-spitter']);
 /** [pose, sheet column, body frame index]: Sol's idle and walk frames are 0-4. */
 export const POSES = [['hurt', 1, 5], ['recovery', 2, 6]] as const;
 export const DIRS = ['e', 'se', 's', 'ne', 'n'] as const;
 const SCALE = 8, OUT_DIR = 'assets/coast/poses';
 export const MANIFEST = `${OUT_DIR}/manifest.json`, IMPORTER = 'src/coast-view/pose-assets.ts';
-export const sheetPath = (kind: string) => `assets/hit-feel/sources/${kind}-hurt-sheet-pixel-v2.png`;
-export function idlePath(kind: string, dir: string): string {
-  const folder = POSE_KINDS.find(k => k[0] === kind)?.[3];
-  if (!folder) throw new Error(`${kind} has no pose sheet`);
-  return `assets/coast/${folder}/coast-${kind}-body-${dir}-f0-v1.png`;
+function poseKind(kind: string) {
+  const k = POSE_KINDS.find(k => k[0] === kind);
+  if (!k) throw new Error(`${kind} has no pose sheet`);
+  return k;
 }
+export const sheetPath = (kind: string) => `assets/hit-feel/sources/${kind}-hurt-sheet-${poseKind(kind)[4]}.png`;
+export const idlePath = (kind: string, dir: string) => `assets/coast/${poseKind(kind)[3]}/coast-${kind}-body-${dir}-f0-v1.png`;
 const sha = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const colour = (f: RGBA, i: number) => ((f.data[i] << 24) | (f.data[i + 1] << 16) | (f.data[i + 2] << 8) | f.data[i + 3]) >>> 0;
 
@@ -109,7 +122,7 @@ export function cutPoses() {
 
 export const manifestText = (sources: Record<string, string>, assets: readonly PoseAsset[]) => JSON.stringify({
   schema: 1,
-  source: 'assets/hit-feel/sources/*-hurt-sheet-pixel-v2.png (#96)',
+  source: 'assets/hit-feel/sources/*-hurt-sheet-<edition>.png (#96 pixel-v2, #122 v1 and v2); editions in POSE_KINDS',
   generator: 'scripts/export-hurt-poses.ts',
   note: 'Runtime hurt (frame 5) and recovery (frame 6) bodies cut from the pixel-v2 sheets, with the one-level canvas drift on semi-transparent pixels restored to the idle frames\' colours. Anchors are the idle frames\'.',
   sources,
@@ -119,7 +132,7 @@ export const manifestText = (sources: Record<string, string>, assets: readonly P
 export function importerText(assets: readonly { id: string; file: string }[]): string {
   const name = (a: { id: string }) => `p${a.id.replace(/^coast-/, '').replace(/-v1$/, '').replaceAll('-', '_')}`;
   return `/**
- * Hurt and recovery body frames (#75; art from #96 pixel-v2): frame indices 5 and 6 beside Sol's idle and walk frames
+ * Hurt and recovery body frames (#75; art from #96 and #122): frame indices 5 and 6 beside Sol's idle and walk frames
  * 0-4, named the same way (an archetype's under its own style), so Textures.actor and its flash, rim and edge find them
  * by frame. Generated by scripts/export-hurt-poses.ts from ${MANIFEST}; build.mjs checks every hash.
  */

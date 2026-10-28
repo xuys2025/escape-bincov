@@ -13,7 +13,8 @@ import type { AimView, RaidIntent } from '../../src/raid-runtime/contract';
 import type { PerkId } from '../../src/perks';
 import type { Point } from '../../src/world';
 
-export type Gun = 'pistol' | 'carbine' | 'shotgun' | 'm4a1';
+/** The old three and the real M4A1 (`mb4a1`, which took over the #39 sample rifle's handling in #28 M2-01). */
+export type Gun = 'pistol' | 'carbine' | 'shotgun' | 'mb4a1';
 export const GUNS: readonly Gun[] = ['pistol', 'carbine', 'shotgun'];
 /**
  * Outdoor spot on the coast map of coast-buildings-v1 (seed 42): from here a bullet flies at least 700 px east without
@@ -60,12 +61,11 @@ export type Bench = ReturnType<typeof benchRaid>;
 export function arm(b: Bench, gun: Gun, { reserve = 60 } = {}): Bench {
     b.driver.freezeAI(true);
     b.driver.placePlayer(LANE.at, LANE.aim);
-    b.driver.weapon(gun === 'm4a1' ? 'carbine' : gun);
-    const c = b.runtime.snapshot(), ammo = D.WEAPONS[gun === 'm4a1' ? 'carbine' : gun].ammo!;
+    b.driver.weapon(gun);
+    const c = b.runtime.snapshot(), ammo = D.WEAPONS[gun].ammo!;
     let left = reserve;
     while (left > 0) { const qty = Math.min(left, D.ITEMS[ammo].stack); assert.equal(D.addItem(c.loadout.bag, ammo, qty), 0); left -= qty; }
     b.runtime.restore(c);
-    if (gun === 'm4a1') b.driver.sampleGun('m4a1');
     b.runtime.handling = { raise: 0, sway: 0, bloom: 0, drift: 0, settle: 0 };
     const lane = b.runtime.enemies.filter(e => e.hp > 0 && e.x > LANE.at.x - 40 && e.x < LANE.at.x + 740 && Math.abs(e.y - LANE.at.y) < 40);
     assert.deepEqual(lane.map(e => e.uid), [], 'an enemy stands on the bench lane');

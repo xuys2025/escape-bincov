@@ -1,10 +1,10 @@
 # 受击姿态美术需求（#75 打击感）
 
-七类角色的受击／恢复 **pixel-v2 已通过独立复验**（[复验评论](https://github.com/xuys2025/escape-bincov/pull/96#issuecomment-6379336021)），是游戏接入的输入；v1、8 张 image_gen 原图与实际提示词完整保留。A 组已经 #99 接进游戏，B 组随 `feat/hurt-poses-b` 的 PR 接入，见下方“接入状态”。生物“头部前缘”按足底以上的头部测区验收，见下方记录。
+七类角色的受击／恢复 **pixel-v2 已通过独立复验**（[复验评论](https://github.com/xuys2025/escape-bincov/pull/96#issuecomment-6379336021)），是游戏接入的输入；v1、8 张 image_gen 原图与实际提示词完整保留。A 组已经 #99、B 组已经 #103 接进游戏，见下方“接入状态”。#81 其余 15 类原型（C 组）由 Sol 按 [C 组任务书](TASK-C.md) 在 #122 交付，独立复验通过，随 `feat/hurt-poses-c` 的 PR 接入。生物“头部前缘”按足底以上的头部测区验收，见下方记录。
 
 ## 接入状态
 
-**A 组（拾荒者、盐枭、守潮人、潮蚀生物）已经 #99 接入（`f73e9de`）；B 组（#81 的近身掠夺者、拾荒枪手、望风者）随 `feat/hurt-poses-b` 的 PR 接入。**
+**A 组（拾荒者、盐枭、守潮人、潮蚀生物）已经 #99 接入（`f73e9de`）；B 组（#81 的近身掠夺者、拾荒枪手、望风者）已经 #103 接入（`5adc64a`）。**
 
 - **切帧**：[export-hurt-poses.ts](../../scripts/export-hurt-poses.ts) 从七张 pixel-v2 图集切出 70 张运行帧，放在 `assets/coast/poses`。
   - 受击帧是帧号 5，恢复帧是帧号 6，和 Sol 的站立、走路帧（0–4）同样命名；B 组用原型自己的样式名，例如 `coast-raider-melee-body-e-f5-v1`。闪白、描边和遮挡轮廓都从同一帧派生。
@@ -15,7 +15,11 @@
 - **播放**：[scene.ts](../../src/coast-view/scene.ts) 中弹后先放受击帧约 90 ms，再放恢复帧约 60 ms，命中那一帧至少显示一次受击帧。敌人走动时也会切换，因此有一瞬间脚步停住。帧序列与实景见 [A 组接入证据](../evidence/issue75-hurt-poses/README.md)和 [B 组接入证据](../evidence/issue75-hurt-poses-b/README.md)。
 - **适用范围**：按角色身体实际使用的样式判断（`posable` 调用 [textures.ts](../../src/coast-view/textures.ts) 的 `hasBodyFrame`）。原型有自己的身体图就用原型的，否则用种类的；这个样式有受击帧才换帧。
 
-**其余原型**：#81 合入了 18 类有自己身体图的原型，只有 B 组三类有姿态图集。其余 15 类（如盐枭头目、潮蚀蟹、盐背犬）中弹时保持自身的帧，只有闪白和后退。要给它们加姿态，需要新一轮美术；图集交付后在 `POSE_KINDS` 加一行即可切帧。
+**C 组（#81 其余 15 类原型）**：Sol 按 [C 组任务书](TASK-C.md) 在 #122 交付，[首轮验收](https://github.com/xuys2025/escape-bincov/pull/122#issuecomment-6398466408)让盐背犬、囊腹喷吐兽返工（整只缩小），[复验](https://github.com/xuys2025/escape-bincov/pull/122#issuecomment-6398909150)后 15 类全部签收，随 `feat/hurt-poses-c` 的 PR 接入。
+
+- 图集版本按类记在 `POSE_KINDS`：A、B 组用 pixel-v2，C 组用 v1，返工的犬和喷吐兽用 v2。
+- 游戏不给爪击类原型画手臂（`CoastView.syncArms` 只在武器可见时画），这 6 类和 A 组潮蚀生物记在 `ARMLESS`，单测不检查它们的肩线。
+- 接入后，A 组四类和 #81 的 18 类原型中弹时都有受击和恢复帧。证据见 [C 组接入证据](../evidence/issue75-hurt-poses-c/README.md)。
 
 ## 2026-10-24 v2 返工
 
