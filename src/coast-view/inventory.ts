@@ -255,6 +255,7 @@ export class InventoryPanel {
   }
   private result(r: MutationResult, clear = true, rejected = '操作未完成，请检查所需物资和可用空间。') {
     if (r === 'committed') { if (clear) { this.selected = null; } this.placement = null; this.status = ''; }
+    else if (r === 'publish-failed') { this.host.toast('进度已保存，但当前页面恢复失败。请导出备份后刷新页面。', true); this.selected = null; this.placement = null; this.host.saveFailed(); }
     else if (r === 'save-failed') { this.host.toast('保存失败，物资和进度已恢复到操作前。', true); this.selected = null; this.placement = null; this.host.saveFailed(); }
     else if (r === 'blocked') this.host.toast('当前无法转移物品，请先处理存档状态。', true);
     else this.host.toast(rejected, true);

@@ -195,11 +195,31 @@ try {
     await tap(yard('.modal.k-menu [data-act="reset"]'));
     const refusalToast = toastWith('存档已由另一窗口接管，本页不能写入。');
     assert.equal(await refusalToast.count(), 0, 'the confirmation must produce new conflict feedback');
-    // The toast expires after 3.1 seconds; observe it before the click's protocol reply can be delayed.
-    const refused = refusalToast.waitFor(); refused.catch(() => {});
+    // The peer page was last opened. Observe the real foreground feedback in-page: protocol polling can miss
+    // this 3.1-second toast on a busy software renderer, even when waitFor starts before the click.
+    await a.bringToFront();
+    await a.evaluate(() => {
+      window.__resetRefusalSeen = false;
+      const root = document.querySelector('#station-yard').shadowRoot;
+      const observer = new MutationObserver(records => {
+        for (const record of records) for (const node of record.addedNodes) {
+          if (!(node instanceof HTMLElement) || !node.matches('.toast') ||
+              node.textContent !== '存档已由另一窗口接管，本页不能写入。') continue;
+          const style = getComputedStyle(node);
+          if (node.isConnected && node.getClientRects().length && style.visibility !== 'hidden' && style.display !== 'none') {
+            window.__resetRefusalSeen = true; observer.disconnect();
+          }
+        }
+      });
+      observer.observe(root, { childList: true, subtree: true });
+    });
     await tap(yard('.dialog [data-act="reset-confirm"]'));
-    await refused; await yard('.dialog.k-storage').waitFor();
-    await a.waitForTimeout(500);
+    await a.waitForFunction(() => window.__resetRefusalSeen === true);
+    await yard('.dialog.k-storage').waitFor();
+    // Keep the evidence after the transient UI expires; the persistent conflict dialog must remain visible.
+    await refusalToast.waitFor({ state: 'detached' });
+    assert.equal(await a.evaluate(() => window.__resetRefusalSeen), true);
+    assert.equal(await yard('.dialog.k-storage').isVisible(), true);
     assert.equal(await read(a, SESSION), peer); assert.equal(await read(a, COPY), copy);
     assert.equal((await writes(a)).length, aWrites); assert.equal(a.downloads.length, aDownloads, 'no download for a refused reset');
     await shot('1280x720-refused-conflict');

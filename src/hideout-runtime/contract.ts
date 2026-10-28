@@ -50,7 +50,7 @@ export interface HideoutSnapshot {
     rev: number; profile: Readonly<SaveDataV1>; base: BaseView; body: BodyView; power: 'emergency' | 'restored';
     /** Detached view of the equipped item in the committed session; null when none is equipped. */
     readonly charm: Readonly<Item> | null;
-    storage: { ok: boolean; conflict: boolean; pendingSettlement: boolean; pendingBase: boolean; upgradeRequired: boolean };
+    storage: { ok: boolean; reloadRequired: boolean; conflict: boolean; pendingSettlement: boolean; pendingBase: boolean; upgradeRequired: boolean };
     /** Log sequence derived from run count, not a new day/night clock. */
     day: number; phase: 'menu' | 'hideout' | 'departing' | 'run' | 'result';
     arrival: { runId: string; summary: RunSummary } | null;
@@ -164,7 +164,7 @@ export type HideoutEvent =
     | { type: 'facility-built'; facility: Facility; level: number }
     | { type: 'production-complete'; batch: string }
     | { type: 'practice-credited'; attribute: Attribute; amount: number }
-    | { type: 'save-failed'; action: string };
+    | { type: 'save-failed' | 'publish-failed'; action: string };
 /** Position/time input replaces unverified moved/inZone claims. World pixels; clock is epoch milliseconds. */
 export interface PracticeSample { from: { x: number; y: number }; to: { x: number; y: number }; seconds: number; now: number }
 export interface HideoutRuntime {

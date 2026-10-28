@@ -17,6 +17,19 @@
   - 第二波任务书（M3-05～08）；
   - 等维护者对获取提案的意见。
 
+## 2026-10-28 · PR #137 合并前主线复核
+
+原 head `8c68a3f2` 完整 CI 40632571602 已通过（构建、8组浏览器和最终门禁）；合并前 fetch 发现 main 新增 #135/#138 等，正常合入 `681426b022540dc94421ec06505ccf77b11ce470`。冲突仅任务清单与交接，两边全部保留；游戏代码无需人工冲突修正。最新集成验证和合并状态以原 PR #137 为准。
+
+## 2026-10-28 · PR #137 CI S6 补修
+
+同步 main `d27306b4`（保留 #110/#116）。旧 CI 唯一套件失败为 station-reset S6 短暂冲突提示观测超时，本地旧脚本14/14；现恢复前台并在真实点击前记录新出现的可见 DOM 提示，保留拒绝写入/备份/下载及持久弹框断言，测试提示消失后的证据保留。1048单测、99守卫、package、station-reset14/14均通过。准确新head完整CI见原PR；旧失败保留，不声称已合并。详情见原质量摘要Q-E04。
+
+## 2026-10-28 · Q-E04 事务发布失败
+
+最终串联：正常合入 #136 `07babfa8`（含 #117 `4ba5b72`），集成源码 head `a46cfd8798c9b9f3c7c7345a456647956e308793`。1045/1045 单测、86/86 守卫、package、17/17 save-browser 全过；新截图/报告在 `docs/tasks/transaction-phases/integrated/`，旧证据保留原归属。PR base 仍 main，必须按 #117 → #136 → #137 合并，各准确集成 head 完整 CI 通过后由 root 执行；没有改动前两项源码逻辑。
+
+承接 [PR #137](https://github.com/xuys2025/escape-bincov/pull/137)，实现及浏览器证据提交 `e703f14dae521ea91951f61c533581558885f42e`；最终 head/CI 以 PR 为准。任务 `codex/transaction-failure-phases`，基线 `0f73a67386bac196b87c983668295be6d1a99f1e`；本轮交付与证据集中在[原质量摘要 Q-E04](docs/tasks/quality-entropy.md#q-e04-提交后的发布失败)。先读 Session `persist` / `requiresReload`、Store `commit` 及 `tests/session-publication.test.ts`。已确认旧代码写后 restore 失败会使现金磁盘 680 / 内存 700；本轮独立发布失败结果、停写/暂停和精确已提交备份。产品源码 head `cf5e49eb0a940234ea189d2cc534a6bfc6ca2709`（含 main `630e68f`），1041/1041 单测、85/85 工程守卫、package 与两尺寸 17/17 存档浏览器通过；后续只有测试观测/证据归档。截图与准确 CI 状态见上述入口及承接 PR；真机、长时性能未验，不把已提交视为合并。
 ## 2026-10-28 · CI：文档快速通道的 main 也要部署和发布
 
 分支 `fix/ci-docs-fastpath-deploy`，起点 main `8c6589b`。#133（纯文档）合入后，main 运行 40623228494（`03ea261`）走了快速通道：浏览器组跳过、`Build and test` 成功，但 `Deploy Pages` 和 `Publish offline release` 都被跳过，`main-latest` 和发布清单停在 `0f73a67`。原因是两个 job 的 `if` 没写状态函数，默认 `success()` 连带检查被跳过的浏览器组。现在两个 job 显式写 `!cancelled() && needs.verify.result == 'success'`，`policy.test.mjs` 守住浏览器组之后的 job，详见 [CI 说明](docs/CI.md#pages-与镜像)。

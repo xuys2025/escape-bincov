@@ -105,42 +105,49 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
         for (const listener of [...this.listeners]) { try { listener(structuredClone(event)); } catch { /* A view cannot undo an already durable transaction. */ } }
     }
     private sync(action = 'external') {
-        if (this.observed === this.saves.revision || this.publishing) return;
-        const initialLoad = this.observed === 0, before = this.previous, after = this.capture();
-        // Another entry committed independently: samples belonged to the previous revision, never its replacement.
-        if (action === 'external') {
-            this.samples = []; this.lastPosition = null; this.activityStart = this.lastInput = this.now(); this.acceptedMilliseconds = 0;
-        }
-        this.observed = this.saves.revision; this.previous = after;
-        this.publishing = true;
-        try {
-            this.emit({ type: 'committed', rev: this.observed, action });
-            if (initialLoad || action === 'import') return;
-            if (!before.profile.quests.repair && after.profile.quests.repair) this.emit({ type: 'power-restored' });
-            if (after.expansion) {
-                for (const f of FACILITIES) if (after.expansion.base.facilities[f] > (before.expansion?.base.facilities[f] ?? 0))
-                    this.emit({ type: 'facility-built', facility: f, level: after.expansion.base.facilities[f] });
-                for (const batch of after.expansion.base.completed) if (!before.expansion?.base.completed.some(b => b.id === batch.id))
-                    this.emit({ type: 'production-complete', batch: batch.id });
-                for (const a of ATTRIBUTES) {
-                    const old = before.expansion?.base.training, next = after.expansion.base.training;
-                    const amount = next.credited[a] - (old?.startedAt === next.startedAt ? old.credited[a] : 0);
-                    if (amount > 0) this.emit({ type: 'practice-credited', attribute: a, amount });
-                }
+        if (this.saves.requiresReload || this.observed === this.saves.revision || this.publishing) return;
+        this.saves.publishCommitted(() => {
+            const initialLoad = this.observed === 0, before = this.previous, after = this.capture();
+            // Another entry committed independently: samples belonged to the previous revision, never its replacement.
+            if (action === 'external') {
+                this.samples = []; this.lastPosition = null; this.activityStart = this.lastInput = this.now(); this.acceptedMilliseconds = 0;
             }
-        } finally { this.publishing = false; }
+            this.observed = this.saves.revision; this.previous = after;
+            this.publishing = true;
+            try {
+                this.emit({ type: 'committed', rev: this.observed, action });
+                if (initialLoad || action === 'import') return;
+                if (!before.profile.quests.repair && after.profile.quests.repair) this.emit({ type: 'power-restored' });
+                if (after.expansion) {
+                    for (const f of FACILITIES) if (after.expansion.base.facilities[f] > (before.expansion?.base.facilities[f] ?? 0))
+                        this.emit({ type: 'facility-built', facility: f, level: after.expansion.base.facilities[f] });
+                    for (const batch of after.expansion.base.completed) if (!before.expansion?.base.completed.some(b => b.id === batch.id))
+                        this.emit({ type: 'production-complete', batch: batch.id });
+                    for (const a of ATTRIBUTES) {
+                        const old = before.expansion?.base.training, next = after.expansion.base.training;
+                        const amount = next.credited[a] - (old?.startedAt === next.startedAt ? old.credited[a] : 0);
+                        if (amount > 0) this.emit({ type: 'practice-credited', attribute: a, amount });
+                    }
+                }
+            } finally { this.publishing = false; }
+        });
     }
+    private complete(action: string, publish: () => void = () => {}): C.Result {
+        return this.saves.publishCommitted(() => { publish(); this.sync(action); }) ? ok() : this.failed(action);
+    }
+
     /** `reading`: a read-only view asks, which an event listener may do while this Runtime publishes. */
     private guard(base = true, retry = false, reading = false): C.Result | null {
         if (this.disposed || this.publishing && !reading) return fail('locked');
         if (this.state.conflict || !this.saves.ownsStorage) return fail('conflict', '存档已由另一窗口接管，本页不能写入。');
+        if (this.saves.requiresReload) return fail('storage', this.state.storageError);
         if (!retry && (!this.state.storageOK || this.pending)) return fail('storage', '请先重试保存或导出备份。');
         if (this.state.pendingSettlement) return fail('locked', '结算尚未保存。');
         if (base && (this.state.state !== 'hideout' || this.state.save.activeRun || !rpgEnabled(this.state.expansion))) return fail('locked');
         return null;
     }
     private failed(action: string): C.Result {
-        this.publishing = true; try { this.emit({ type: 'save-failed', action }); } finally { this.publishing = false; }
+        this.publishing = true; try { this.emit({ type: this.saves.requiresReload ? 'publish-failed' : 'save-failed', action }); } finally { this.publishing = false; }
         return fail(this.state.conflict ? 'conflict' : 'storage', this.state.storageError || '存档未写入，操作已回滚。');
     }
     private applySamples(draft: Pick<ExpansionDraft, 'expansion'>) {
@@ -163,10 +170,11 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
         if (!ticket) return rejection;
         const result = this.saves.commitExpansionMutation(ticket);
         if (result !== 'committed') {
+            if (result === 'publish-failed') { this.pending = null; this.samples = []; return this.failed(action); }
             if (result === 'save-failed') { if (keep) { this.pending = { ticket, draft: candidate!, seconds, revision: this.saves.revision, before: JSON.stringify(this.capture()) }; this.saves.retainExpansionTransaction(ticket); } return this.failed(action); }
             return fail(result === 'rejected' ? 'stale' : 'conflict');
         }
-        this.samples = []; this.lastTick = this.now(); this.sync(action); return ok();
+        this.samples = []; return this.complete(action, () => { this.lastTick = this.now(); });
     }
     enter(): C.Result {
         const blocked = this.guard(false); if (blocked) return blocked;
@@ -177,8 +185,8 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
         if (this.samples.length) { const flushed = this.flush(); if (!flushed.ok) return flushed; }
         const relief = this.saves.grantReliefResult();
         if (relief === 'blocked') return this.guard(false) ?? fail('storage', '请先重试保存或导出备份。');
-        if (relief === 'save-failed') return this.failed('relief');
-        this.state.state = 'hideout'; this.lastTick = this.now(); this.sync('enter'); return ok();
+        if (relief === 'save-failed' || relief === 'publish-failed') return this.failed('relief');
+        return this.complete('enter', () => { this.state.state = 'hideout'; this.lastTick = this.now(); });
     }
     snapshot(): C.HideoutSnapshot {
         this.sync(); const s = this.state, e = structuredClone(s.expansion) ?? newExpansion(this.now()), limits = derivedLimits(e), effective = effectiveAttributes(e);
@@ -188,7 +196,7 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
                 effects: Object.entries(e.body.effects).filter(([, seconds]) => seconds > 0).map(([name, seconds]) => ({ name, seconds })),
                 attributes: Object.fromEntries(ATTRIBUTES.map(a => [a, { base: e.growth.permanent[a], effective: effective[a], progress: e.growth.progress[a] }])) as C.BodyView['attributes'] },
             power: s.save.quests.repair ? 'restored' : 'emergency',
-            storage: { ok: s.storageOK, conflict: s.conflict || !this.saves.ownsStorage, pendingSettlement: !!s.pendingSettlement, pendingBase: !!this.pending || !!this.samples.length, upgradeRequired: !stationUpgraded(s.expansion) },
+            storage: { ok: s.storageOK, reloadRequired: this.saves.requiresReload, conflict: s.conflict || !this.saves.ownsStorage, pendingSettlement: !!s.pendingSettlement, pendingBase: !!this.pending || !!this.samples.length, upgradeRequired: !stationUpgraded(s.expansion) },
             day: s.save.stats.runs + 1, phase: s.state === 'hideout' && this.preparedRun && s.save.activeRun?.runId === this.preparedRun ? 'departing' : s.state, arrival: this.arrival });
     }
     trainingProgress(): C.TrainingProgress {
@@ -379,13 +387,14 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
         if (this.pending) {
             const result = this.saves.commitExpansionMutation(this.pending.ticket);
             if (result === 'rejected') return fail('stale', '旧入口已改变存档，请先导出待保存进度。');
-            if (result !== 'committed') return this.failed('retry');
-            this.pending = null; this.samples = []; this.lastTick = this.now(); this.sync('retry'); return ok();
+            if (result !== 'committed') { if (result === 'publish-failed') { this.pending = null; this.samples = []; } return this.failed('retry'); }
+            this.pending = null; this.samples = []; return this.complete('retry', () => { this.lastTick = this.now(); });
         }
-        if (!this.saves.persist()) return this.failed('retry'); this.sync('retry'); return ok();
+        if (!this.saves.persist()) return this.failed('retry'); return this.complete('retry');
     }
     exportBackup(): string {
         const record = this.saves.backupRecord(); if (!record) return this.saves.original() ?? '';
+        if (this.saves.requiresReload) return encodeRecoveryBackup(record);
         if (this.pending) { record.profile = structuredClone(this.pending.draft.profile); record.expansion = structuredClone(this.pending.draft.expansion); record.raid = null; }
         else if (record.expansion && this.samples.length) { const draft = { profile: record.profile, expansion: record.expansion, legacyRaid: record.raid }; this.applySamples(draft); }
         return encodeRecoveryBackup(record);
@@ -407,7 +416,7 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
         if (!this.saves.importRecord(record)) return this.failed('import');
         this.importPreview = null; this.samples = []; this.arrival = null; this.preparedRun = null;
         if (this.state.save.activeRun) this.state.state = 'menu';
-        this.sync('import'); return ok();
+        return this.complete('import');
     }
     setVolume(volume: number): C.Result {
         const blocked = this.guard(); if (blocked) return blocked;
@@ -426,8 +435,8 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
         if (this.samples.length) { const flushed = this.transaction('checkpoint', () => true, true); if (!flushed.ok) return flushed; }
         const seed = generateRun(req.seed.trim() || this.now()).seed;
         if (!this.saves.beginRun(seed, req.world === 'mall' ? 'mall' : req.world === 'buildings', { mallLayout: req.mallLayout })) return this.failed('deploy');
-        this.preparedRun = this.state.save.activeRun!.runId!; this.arrival = null; this.setActivity(false); this.sync('deploy');
-        return { ok: true, runId: this.preparedRun };
+        const completed = this.complete('deploy', () => { this.preparedRun = this.state.save.activeRun!.runId!; this.arrival = null; this.setActivity(false); });
+        return completed.ok ? { ok: true, runId: this.preparedRun! } : completed;
     }
     startRaid(runId: string): C.Result {
         const blocked = this.guard(false); if (blocked) return blocked;
@@ -439,7 +448,7 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
         const terminal = this.saves.currentRecord()?.terminal;
         if (this.state.state !== 'result' || this.state.save.activeRun || !terminal || !this.state.result || !this.state.save.lastResult) return fail('locked');
         if (!this.saves.ensureRpg()) return this.failed('return');
-        this.arrival = { runId: terminal.runId, summary: structuredClone(this.state.result) }; this.state.state = 'hideout'; this.lastTick = this.now(); this.sync('return'); return ok();
+        return this.complete('return', () => { this.arrival = { runId: terminal.runId, summary: structuredClone(this.state.result!) }; this.state.state = 'hideout'; this.lastTick = this.now(); });
     }
     consumeArrival() { const value = structuredClone(this.arrival); this.arrival = null; return value; }
     flush(): C.Result {

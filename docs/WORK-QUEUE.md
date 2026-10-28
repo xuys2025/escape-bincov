@@ -4,6 +4,7 @@
 
 | 目标 | 承接入口 | 接手提示 |
 | --- | --- | --- |
+| 事务失败阶段（Q-E04） | [#60 登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553) · [PR #137](https://github.com/xuys2025/escape-bincov/pull/137) · `codex/transaction-failure-phases` · [实现与验证](tasks/quality-entropy.md#q-e04-提交后的发布失败) | 写后发布异常不再当作可回滚/重试的存储失败；消费票据、停止本页、导出已提交记录后刷新。独立验收，#117/#136 已合入，现同步 main d27306b4；CI 的 station-reset S6 短提示观测补修后1048单测/99守卫/package/14项重开浏览器通过，原17项存档浏览器CI通过；准确新head完整CI见承接PR |
 | 文档快速通道的 main 也部署和发布 | [CI 说明](CI.md#pages-与镜像) · [交接](../handoff.md) | `fix/ci-docs-fastpath-deploy`，起点 main `8c6589b`：`03ea261` 纯文档合入时 Pages 与 `main-latest` 发布被连带跳过；两个 job 改为显式状态检查并加守卫测试。真正证明要等下一次纯文档合入实际部署；准确 head 与 CI 见承接 PR |
 | 室内墙体与视野（两阶段已实施） | [方案](INDOOR-WALL-VISIBILITY-PLAN.md) · [实施进度](INDOOR-WALL-VISIBILITY-PLAN.md#6-实施进度) · [PR #135](https://github.com/xuys2025/escape-bincov/pull/135) `feat/indoor-wall-visibility` | 方案见 [PR #133](https://github.com/xuys2025/escape-bincov/pull/133)。居民楼和商场（新旧布局、程序绘制后备）已按五项规则显示：竖墙、顶墙、两侧整面，底墙只留占地格，横墙整行按脚底在中心线南北切换（4 像素缓冲），门洞前的墙块裁空；商场原剖切已删除，封闭检修核保持原样。准确 head、CI 与验收见该 PR |
 | 行动精神/水分/饱食实时 HUD | [PR #110](https://github.com/xuys2025/escape-bincov/pull/110) · [修复与验证](tasks/audit-contracts.md#精神水分饱食-hud-的实时投影) | 实时身体三标量经只读 HudView.needs 显示；经典为空。已获复查后自动合并授权，最新 head / 检查以原 PR 为准；存档与生理规则不变 |
