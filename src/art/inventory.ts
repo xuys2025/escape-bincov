@@ -16,6 +16,14 @@ export const inventoryArtSize = (id: string): readonly [number, number] => {
     case 'mb1014': return [86, 16];
     case 'akb74': case 'akb103': return [87, 16];
     case 'augb': return [65, 18];
+    // #28 M3-05: wave two's factory inventory pictures (Sol, M3-07).
+    case 'mb1911': return [42, 17];
+    case 'umpb45': return [66, 18];
+    case 'pb90': return [56, 17];
+    case 'svdb': return [92, 17];
+    case 'mb14': return [89, 17];
+    case 'mb700': return [92, 15];
+    case 'rpkb': return [97, 16];
     case 'medkit': case 'ledger': return [48, 16];
     case 'water': return [12, 32];
     case 'battery': return [22, 32];

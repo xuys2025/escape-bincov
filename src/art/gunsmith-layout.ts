@@ -118,6 +118,10 @@ export function gunArtLayout(gun: string, parts: readonly PartNode[], code: ArtC
     const shift = (p: ArtPoint): [number, number] => [p[0] - lo[0], p[1] - lo[1]];
     const rank = (n: Node) => n.art.layer === 'aboveReceiver' ? 4.5 : ORDER[n.label] ?? 8;
     const layers = [...nodes].sort((a, b) => rank(a) - rank(b)).map(n => ({ key: n.key, label: n.label, x: n.x - lo[0], y: n.y - lo[1], w: n.art.w, h: n.art.h }));
+    // An old gun's factory side view (no hands, no parts): Sol's bare picture (#28 M3-07), the approved held picture with
+    // its painted hands taken out, on the same canvas, in place of the receiver and its factory layers.
+    const bareKey = `gs-${gun}-bare-${code}`, bare = !gloves && rootArt.wholeCanvasLayer && !parts.length ? artOf(bareKey) : undefined;
+    if (bare) layers.splice(0, layers.length, { key: bareKey, label: 'bare', x: root.x - lo[0], y: root.y - lo[1], w: bare.w, h: bare.h });
     const tipNode = nodes.find(n => n.label === 'muzzle' && n.art.tip) ?? nodes.find(n => n.label === 'barrel' && n.art.tip) ?? root;
     const device = nodes.find(n => n.art.beam);
     const layout: ArtLayout = {

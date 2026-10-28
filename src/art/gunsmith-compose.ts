@@ -34,9 +34,10 @@ export function loadGunsmithArt(): Promise<void> {
         benchFrame: gun => { if (!frames.has(gun)) frames.set(gun, artFrame(gun, 'w')); return frames.get(gun)!; },
         side: id => {
             if (sides.has(id)) return sides.get(id)!;
-            // The old guns' approved held pictures have the hands painted on (wholeCanvasLayer, #28 M3-03): on the ground
-            // and the HUD card they keep their item icons.
-            const layout = artOf(`gs-${id}-receiver-h`)?.wholeCanvasLayer ? null : gunArtLayout(id, [], 'h', false), canvas = layout && drawGunLayout(layout);
+            // The old guns' approved held pictures have the hands painted on (wholeCanvasLayer, #28 M3-03): their side view
+            // is Sol's bare picture (M3-07), and without one they keep their item icons.
+            const old = artOf(`gs-${id}-receiver-h`)?.wholeCanvasLayer, layout = old && !artOf(`gs-${id}-bare-h`) ? null : gunArtLayout(id, [], 'h', false);
+            const canvas = layout && drawGunLayout(layout);
             sides.set(id, canvas ?? null);
             return canvas ?? null;
         },

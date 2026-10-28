@@ -43,6 +43,8 @@ for (const a of manifest.assets) {
     case 'part': if (!a.item || !a.slot || !point(a.anchor)) fail(`${a.id}: a part names its item, slot and anchor`); break;
     case 'glove': if (a.output !== 'held' || !GLOVES.includes(a.slot) || !point(a.anchor)) fail(`${a.id}: a glove is held, one of ${GLOVES}, with an anchor`); break;
     case 'icon': if (!a.item || a.w !== a.h || a.w !== (a.output === 'icon24' ? 24 : 32)) fail(`${a.id}: an icon is a ${a.output} square of its item`); break;
+    // An old gun's approved held picture without its painted hands (#28 M3-07): the ground and the HUD card.
+    case 'bare': if (!a.gun || a.output !== 'held') fail(`${a.id}: a bare side view is a held picture of its gun`); break;
     default: fail(`${a.id}: role ${a.role}`);
   }
 }

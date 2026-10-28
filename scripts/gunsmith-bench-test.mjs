@@ -122,19 +122,20 @@ async function step(name, fn) {
 try {
   await step('A1-composites-equal-the-approved-previews', async () => {
     // M2-10: every approved preview assembly (Sol, M2-09) drawn by the game's compositor in the packaged page, compared
-    // with the preview PNG channel by channel. #28 M3-04 adds Sol's wave-one records and M3-07 wave two's P0, each against
+    // with the preview PNG channel by channel. #28 M3-04 adds Sol's wave-one records and M3-08 wave two's, each against
     // its 1x preview, and the bare side views (the ground and the HUD card) where Sol drew one.
     const { assemblies } = JSON.parse(await readFile('tests/fixtures/gunsmith-assemblies.json', 'utf8'));
     const cases = await Promise.all(assemblies.map(async a => ({ name: `${a.gun}-${a.configuration}-${a.code}`, gun: a.gun, code: a.code,
       parts: CONFIGS[a.gun][a.configuration](), png: (await readFile(a.file)).toString('base64') })));
     const grow = trees => trees.map(([id, slot, kids]) => partNode(id, slot, grow(kids ?? [])));
-    // Sol drew these two before the receiver's front glove (ART-SPEC 5; d3eb43f): the glove is checked on its own.
-    const beforeGlove = ['vb9-factory-h', 'augb-factory-h'];
+    // Sol drew wave one's factory Vector before the receiver's front glove (ART-SPEC 5; d3eb43f): the glove is checked on
+    // its own. Wave two's previews have it.
+    const beforeGlove = ['tests/fixtures/gunsmith-assemblies-m3.json:vb9-factory-h'];
     for (const [file, dir] of [['tests/fixtures/gunsmith-assemblies-m3.json', 'docs/gunsmith/art/m3-w1/preview'], ['tests/fixtures/gunsmith-assemblies-m3-w2.json', 'docs/gunsmith/art/m3-w2/preview']]) {
       const wave = JSON.parse(await readFile(file, 'utf8'));
       for (const a of wave.assemblies) {
         const name = `${a.gun}-${a.configuration}-${a.code}`;
-        cases.push({ name, gun: a.gun, code: a.code, parts: grow(wave.configurations[a.gun][a.configuration]), png: (await readFile(`${dir}/${name}-1x.png`)).toString('base64'), dropFrontGlove: beforeGlove.includes(name) });
+        cases.push({ name, gun: a.gun, code: a.code, parts: grow(wave.configurations[a.gun][a.configuration]), png: (await readFile(`${dir}/${name}-1x.png`)).toString('base64'), dropFrontGlove: beforeGlove.includes(`${file}:${name}`) });
       }
       for (const b of wave.bareFactories) {
         const png = `${dir}/${b.gun}-factory-ground-hud-1x.png`;
@@ -430,11 +431,12 @@ try {
     await shot('20-desktop-1280x720-part-details');
     // The arms counter: all, one kind, only what fits; the lists stay.
     await yard('[data-tab="arms"]').click(); await yard('.seg.browse').waitFor();
-    const catalog = () => page.evaluate(() => [...document.querySelector('#station-yard').shadowRoot.querySelectorAll('[data-grid="merchant"] .item')].map(e => e.dataset.uid));
+    const catalog = () => page.evaluate(() => [...document.querySelector('#station-yard').shadowRoot.querySelectorAll('[data-grid="merchant"] .item')].map(e => e.classList.contains('k-attachment')));
     const all = (await catalog()).length;
+    // The stock runs onto a second page (#28 M3), so a page of parts alone can hold more than the first page of all.
     await yard('.seg.browse [data-act="browse-kind:attachment"]').click();
-    const parts = (await catalog()).length;
-    assert.ok(parts > 0 && parts < all, `${parts} of ${all}`);
+    const shown = await catalog(), parts = shown.length;
+    assert.ok(parts > 0 && shown.every(Boolean), `${parts} parts, all attachments`);
     await yard('.seg.browse [data-act="browse-fits"]').click();
     const fitting = (await catalog()).length;
     assert.ok(fitting > 0 && fitting < parts, 'A07 is the carbine\'s: it goes');
@@ -455,7 +457,7 @@ try {
     await page.locator('.shop-browse').waitFor();
     const count = () => page.locator('[data-grid="merchant"] .item').count(), all = await count();
     await page.locator('.shop-browse [data-id="kind:ammo"]').click();
-    assert.equal(await count(), 3, 'the three rounds');
+    assert.equal(await count(), 6, 'the six rounds (#28 M3-05)');
     await page.locator('.shop-browse [data-id="kind:all"]').click();
     assert.equal(await count(), all);
     // Phones: the buy pane carries the same filter.

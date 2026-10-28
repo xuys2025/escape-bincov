@@ -255,7 +255,7 @@ Sol 的样板任务书在本机 `D:/bincov/工作标准/PR28排期-20261022/Sol-
 | `output` | `held`、`inventory`、`bench`、`icon24`、`icon32` |
 | `gun` | 机匣和原厂件写枪型 id；配件写 null，只有给某把枪单画的变体才写枪型 |
 | `item` | 配件编号（如 `O03`），方图写枪型 id 或配件编号 |
-| `role` | `receiver`、`factory`、`part`、`glove`、`icon` |
+| `role` | `receiver`、`factory`、`part`、`glove`、`icon`；`bare` 是旧枪去掉画死的手的持枪图（M3-07），只给地上和 HUD 武器卡用 |
 | `slot` | 装在哪个挂点（第 3.3 节的 id）；机匣和图标写 null；手套写 `gloveRear`、`gloveFront`、`gloveForegrip` |
 | `anchor`、`mounts` | 自己的锚点；自己提供的挂点，如 `{ "top": [12, 0] }` |
 | `grip`、`bore`、`forward` | 只在 H 机匣上 |

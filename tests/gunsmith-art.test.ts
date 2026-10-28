@@ -14,21 +14,22 @@ const fixture = JSON.parse(readFileSync('tests/fixtures/gunsmith-assemblies.json
 /** Sol's wave-one records (#28 M3-03, docs/gunsmith/art/m3-w1): 31 configurations of 12 guns, as part trees. */
 const wave = JSON.parse(readFileSync('tests/fixtures/gunsmith-assemblies-m3.json', 'utf8'));
 /**
- * Sol's wave-two P0 records (#28 M3-07, docs/gunsmith/art/m3-w2): the AUG and the M4A1 with its six parts. The factory
- * AUG's held record gained the front glove on the receiver's hand (ART-SPEC 5), as did the factory Vector's in `wave`.
+ * Sol's wave-two records (#28 M3-07, docs/gunsmith/art/m3-w2): 39 configurations of 14 guns, and the bare side views of
+ * the eight new guns and the old three. They follow the receiver's front glove (ART-SPEC 5); the factory Vector's record
+ * in `wave` gained that layer when the glove came (d3eb43f).
  */
 const waveTwo = JSON.parse(readFileSync('tests/fixtures/gunsmith-assemblies-m3-w2.json', 'utf8'));
 import { CONFIGS, part } from './fixtures/gunsmith-configs';
 type Tree = [string, PartNode['slot'], Tree[]?];
 const grow = (trees: readonly Tree[]): PartNode[] => trees.map(([id, slot, kids]) => part(id, slot, grow(kids ?? [])));
-/** The guns with art: M2's five, the wave-one seven and wave two's P0 AUG. */
-const ART_GUNS = ['gb17', 'mb4a1', 'carbine', 'pistol', 'shotgun', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103', 'augb'] as const;
+/** The guns with art: every catalog gun since #28 M3-08 (M2's five, wave one's seven, wave two's eight). */
+const ART_GUNS = ['gb17', 'mb4a1', 'carbine', 'pistol', 'shotgun', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103', 'augb', 'mb1911', 'umpb45', 'pb90', 'svdb', 'mb14', 'mb700', 'rpkb'] as const;
 
-test('the imported art: 419 images and 5 virtual layers, every key drops its version, the revision is the manifest\'s', () => {
+test('the imported art: 636 images and 5 virtual layers, every key drops its version, the revision is the manifest\'s', () => {
     const manifest = JSON.parse(readFileSync('assets/gunsmith/manifest.json', 'utf8'));
     // M2's 115, less the carbine's two receivers that wave one replaced (v2), plus wave one's 274 (#28 M3-03) and wave
-    // two's P0 32 (M3-07).
-    assert.equal(Object.keys(GUNSMITH_ART).length, 419);
+    // two's 249 (M3-07).
+    assert.equal(Object.keys(GUNSMITH_ART).length, 636);
     assert.deepEqual(Object.keys(GUNSMITH_VIRTUAL).sort(), ['gs-carbine-barrel-factory-i', 'gs-carbine-handguard-factory-i', 'gs-carbine-receiver-i', 'gs-pistol-receiver-i', 'gs-shotgun-receiver-i']);
     assert.equal(GUNSMITH_ART_REVISION, manifest.revision);
     assert.deepEqual(Object.keys(GUNSMITH_ART).sort(), manifest.assets.map((a: { id: string }) => a.id.replace(/-v\d+$/, '')).sort());
@@ -54,9 +55,9 @@ test('the layout reproduces every approved preview assembly: size, tip, grip, bo
     }
 });
 
-test('the layout reproduces Sol\'s wave-one assemblies (31 configurations of 12 guns) and wave two\'s P0 (7), three outputs each', () => {
+test('the layout reproduces Sol\'s wave-one assemblies (31 configurations of 12 guns) and wave two\'s (39 of 14), three outputs each', () => {
     assert.equal(wave.assemblies.length, 93);
-    assert.equal(waveTwo.assemblies.length, 21);
+    assert.equal(waveTwo.assemblies.length, 117);
     for (const [a, records] of [...wave.assemblies.map((a: unknown) => [a, wave]), ...waveTwo.assemblies.map((a: unknown) => [a, waveTwo])]) {
         const parts = grow(records.configurations[a.gun][a.configuration]), name = `${a.gun} ${a.code} ${a.configuration}`;
         assert.ok(validateBuild(buildOf({ id: a.gun as GunId, parts })).ok, `${name} is a legal build`);
@@ -68,8 +69,9 @@ test('the layout reproduces Sol\'s wave-one assemblies (31 configurations of 12 
     }
     // The bare factory pictures (the ground and the HUD card): the held one without the gloves.
     assert.equal(wave.bareFactories.length, 12);
-    assert.equal(waveTwo.bareFactories.length, 1);
-    for (const a of [...wave.bareFactories, ...waveTwo.bareFactories]) {
+    assert.equal(waveTwo.bareFactories.length, 11);
+    // Wave two drew the old three without hands (#28 M3-07): its records replace wave one's for them.
+    for (const a of [...wave.bareFactories.filter((b: { gun: string }) => !waveTwo.bareFactories.some((n: { gun: string }) => n.gun === b.gun)), ...waveTwo.bareFactories]) {
         const got = gunArtLayout(a.gun, [], 'h', false)!;
         assert.deepEqual([got.w, got.h, got.layers.map(l => [l.key, l.x, l.y])], [a.w, a.h, a.layers.map((l: { key: string; origin: number[] }) => [l.key, ...l.origin])], a.gun);
     }
@@ -77,10 +79,10 @@ test('the layout reproduces Sol\'s wave-one assemblies (31 configurations of 12 
 
 test('the front glove: on the foregrip, the handguard or the receiver\'s hand (ART-SPEC 5), never on a pistol\'s grip or painted hands', () => {
     const gloves = (gun: string, parts: PartNode[] = []) => gunArtLayout(gun, parts, 'h')!.layers.filter(l => l.label.startsWith('glove')).map(l => l.label);
-    // The receiver's hand: the Vector and the AUG (the P90 in wave two) have no handguard.
-    for (const gun of ['vb9', 'augb', 'mb4a1', 'akb74', 'mpb5', 'mb870']) assert.deepEqual(gloves(gun), ['glove-rear', 'glove-front'], gun);
+    // The receiver's hand: the Vector, the AUG and the P90 have no handguard.
+    for (const gun of ['vb9', 'augb', 'pb90', 'mb4a1', 'akb74', 'mpb5', 'mb870']) assert.deepEqual(gloves(gun), ['glove-rear', 'glove-front'], gun);
     // A pistol's front hand is its grip; the old guns have their hands painted on.
-    for (const gun of ['gb17', 'pb226']) assert.deepEqual(gloves(gun), ['glove-rear'], gun);
+    for (const gun of ['gb17', 'pb226', 'mb1911']) assert.deepEqual(gloves(gun), ['glove-rear'], gun);
     for (const gun of ['pistol', 'shotgun', 'carbine']) assert.ok(!gloves(gun).includes('glove-front'), gun);
     assert.deepEqual(gloves('augb', [part('F07', 'under')]), ['glove-rear', 'glove-foregrip']);
 });
@@ -133,16 +135,24 @@ test('every part that is an item has a mount in all three outputs on each gun wi
     assert.deepEqual([...new Set(checked.map(c => c.split(':')[1]))].sort(), [...parts].sort(), `checked ${checked.length}: ${checked.join(' ')}`);
 });
 
-test('the side view for the ground and the HUD card: the factory held picture without hands, within the 34 px card', () => {
-    for (const gun of ['mb4a1', 'gb17', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103', 'augb']) {
+test('the side view for the ground and the HUD card: the factory held picture without hands, within the 38 px card', () => {
+    for (const gun of ART_GUNS.filter(g => !['pistol', 'shotgun', 'carbine'].includes(g))) {
         const bare = gunArtLayout(gun, [], 'h', false)!, held = gunArtLayout(gun, [], 'h')!;
         assert.ok(!bare.layers.some(l => l.label.startsWith('glove')), gun);
         assert.deepEqual(bare.layers.map(l => l.key), held.layers.filter(l => !l.label.startsWith('glove')).map(l => l.key), gun);
-        assert.ok(bare.w <= 34 && bare.h <= 32, `${gun} ${bare.w}x${bare.h}`);
+        assert.ok(bare.w <= 38 && bare.h <= 32, `${gun} ${bare.w}x${bare.h}`);
         assert.notEqual(bare.key, held.key);
     }
-    // The old guns' held pictures have the hands painted on: they keep their item icons (the compose hook's side()).
-    for (const gun of ['pistol', 'shotgun', 'carbine']) assert.equal(GUNSMITH_ART[`gs-${gun}-receiver-h`]?.wholeCanvasLayer, true, gun);
+    // The old guns' held pictures have the hands painted on: their side view is Sol's bare picture on the same canvas
+    // (#28 M3-07), and a configured old gun still draws its layers.
+    for (const gun of ['pistol', 'shotgun', 'carbine']) {
+        const art = GUNSMITH_ART[`gs-${gun}-receiver-h`]!, bare = gunArtLayout(gun, [], 'h', false)!;
+        assert.equal(art.wholeCanvasLayer, true, gun);
+        assert.deepEqual(bare.layers.map(l => [l.key, l.x, l.y]), [[`gs-${gun}-bare-h`, 0, 0]], gun);
+        assert.deepEqual([bare.w, bare.h], [GUNSMITH_ART[`gs-${gun}-bare-h`]!.w, GUNSMITH_ART[`gs-${gun}-bare-h`]!.h], gun);
+        assert.ok(bare.w <= 38, gun);
+    }
+    assert.ok(gunArtLayout('carbine', CONFIGS.carbine.custom(), 'h', false)!.layers.length > 1, 'a configured carbine keeps its layers');
 });
 
 test('the cache key: the output, the gun, the parts by place and the art revision, never a uid', () => {
@@ -159,19 +169,22 @@ test('the cache key: the output, the gun, the parts by place and the art revisio
         for (const code of ['h', 'i', 'w'] as const) assert.deepEqual(gunArtLayout(gun, back, code), gunArtLayout(gun, parts, code), `${gun} ${code}`);
     }
     for (const bad of ['top', '=O03', 'handguard/under=F01', 'nowhere=O03', 'top=O03,top=O08']) assert.equal(partsOfSignature(bad), null, bad);
-    // Guns without images keep their old art (the wave-two guns until M3-07); the old pistol and double-barrel have all
+    // A gun without images keeps its old art (the retired #39 sample id; every catalog gun has art since M3-08); the old pistol and double-barrel have all
     // three outputs since wave one (their inventory pictures cut from the procedural ones).
-    for (const code of ['h', 'i', 'w'] as const) assert.equal(gunArtLayout('mb1911', [], code), null, code);
+    for (const code of ['h', 'i', 'w'] as const) assert.equal(gunArtLayout('m4a1', [], code), null, code);
     for (const gun of ['pistol', 'shotgun']) for (const code of ['h', 'i', 'w'] as const) assert.ok(gunArtLayout(gun, [], code), `${gun} ${code}`);
 });
 
 test('the workbench frame: every build fits around the same receiver point, so a new part moves nothing else', () => {
-    // Wave one's long parts widened the M2 frames: M07 and H02 on the M4A1, B09 and M07 on the carbine (#28 M3).
-    assert.deepEqual(artFrame('mb4a1', 'w'), { x: -43, y: -15, w: 216, h: 50 });
+    // Wave one's long parts widened the M2 frames: M07 and H02 on the M4A1, B09 and M07 on the carbine (#28 M3); wave
+    // two's taller optics and foregrips deepened them.
+    assert.deepEqual(artFrame('mb4a1', 'w'), { x: -43, y: -15, w: 216, h: 52 });
     assert.deepEqual(artFrame('gb17', 'w'), { x: 0, y: -9, w: 118, h: 51 });
-    assert.deepEqual(artFrame('carbine', 'w'), { x: 0, y: -10, w: 209, h: 52 }, 'an optic on the A07 base sits above the receiver');
+    assert.deepEqual(artFrame('carbine', 'w'), { x: 0, y: -10, w: 209, h: 54 }, 'an optic on the A07 base sits above the receiver');
     assert.deepEqual(artFrame('akb103', 'w'), { x: -51, y: -19, w: 216, h: 54 });
-    assert.equal(artFrame('mb1911', 'w'), null, 'a gun without art has no frame');
+    // The longest: the RPK with its long handguard and a suppressor.
+    assert.deepEqual(artFrame('rpkb', 'w'), { x: -51, y: -19, w: 236, h: 54 });
+    assert.equal(artFrame('m4a1', 'w'), null, 'a gun without art has no frame');
     const all = [...Object.entries(CONFIGS).flatMap(([gun, configs]) => Object.entries(configs).map(([name, make]) => [gun, name, make()] as const)),
         ...Object.entries(wave.configurations as Record<string, Record<string, Tree[]>>).flatMap(([gun, configs]) => Object.entries(configs).map(([name, t]) => [gun, name, grow(t)] as const))];
     for (const [gun, name, parts] of all) {

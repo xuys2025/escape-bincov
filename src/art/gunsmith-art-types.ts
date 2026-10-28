@@ -12,7 +12,8 @@ export interface GunsmithArt {
     gun?: string;
     /** The attachment id of a part, or the item id of an icon. */
     item?: string;
-    role: 'receiver' | 'factory' | 'part' | 'glove' | 'icon';
+    /** `bare`: an old gun's held picture without its painted hands, for the ground and the HUD card (#28 M3-07). */
+    role: 'receiver' | 'factory' | 'part' | 'glove' | 'icon' | 'bare';
     /** The mount it sits on (ART-SPEC 3.3), or a glove's place. */
     slot?: string;
     anchor?: ArtPoint;

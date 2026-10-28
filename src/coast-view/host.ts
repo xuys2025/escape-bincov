@@ -56,17 +56,18 @@ const weaponIcons = new Map<string, string>();
 /**
  * The game's own 32 px item drawing of the held weapon, shown at 2x in the weapon card. Every gun is an item with art.
  * The gunsmith guns show their whole side view instead (the held picture without hands, centred), since their square
- * icons are close-ups that do not read on the card (#28 M2-10, maintainer 2026-10-27). The card is 34 px wide for every
- * weapon, so the 33 px long guns of #28 M3 fit whole and the card keeps its size whichever gun is in hand.
+ * icons are close-ups that do not read on the card (#28 M2-10, maintainer 2026-10-27), and so do the old three since
+ * Sol drew them without hands (M3-07). The card is 38 px wide for every weapon, shown at whole multiples (coast.css), so
+ * the 37 px rifles of #28 M3 fit whole and the card keeps its size whichever gun is in hand.
  */
 function weaponIcon(id: string): string {
   let url = weaponIcons.get(id);
   if (!url) {
-    const c = document.createElement('canvas'); c.width = 34; c.height = 32;
+    const c = document.createElement('canvas'); c.width = 38; c.height = 32;
     const g = c.getContext('2d')!; g.imageSmoothingEnabled = false;
     const side = gunsmithArt?.side(id);
-    if (side) g.drawImage(side, Math.floor((34 - side.width) / 2), Math.floor((32 - side.height) / 2));
-    else if ((ITEM_ART_IDS as readonly string[]).includes(id)) { g.translate(1, 0); paintItem(g, id as ItemArtId, 32); }
+    if (side) g.drawImage(side, Math.floor((38 - side.width) / 2), Math.floor((32 - side.height) / 2));
+    else if ((ITEM_ART_IDS as readonly string[]).includes(id)) { g.translate(3, 0); paintItem(g, id as ItemArtId, 32); }
     url = c.toDataURL(); weaponIcons.set(id, url);
   }
   return url;
@@ -89,7 +90,7 @@ const HTML = `
     <div data-where class="cs-where"></div>
   </section>
   <section class="cs-clock"><b data-time></b><small data-tide></small></section>
-  <section class="cs-arms" data-weapon><img data-weapon-icon alt="" width="68" height="64"><div class="cs-arms-text"><span data-weapon-name></span><b data-mag></b><small><span data-reserve></span> <em data-mode></em></small></div><div class="cs-heal"><kbd>Q</kbd>医疗 <b data-heals></b></div>
+  <section class="cs-arms" data-weapon><img data-weapon-icon alt="" width="76" height="64"><div class="cs-arms-text"><span data-weapon-name></span><b data-mag></b><small><span data-reserve></span> <em data-mode></em></small></div><div class="cs-heal"><kbd>Q</kbd>医疗 <b data-heals></b></div>
     <div class="cs-dev" data-devices hidden></div>
     <div class="cs-crit" data-crit hidden><div><span data-crit-label></span><b data-crit-chance></b><em data-crit-target aria-hidden="true"></em></div><div class="cs-breath" data-breath hidden aria-hidden="true"><span data-breath-label></span><i><b data-breath-bar></b></i><small data-breath-time></small></div></div></section>
   <div data-radio class="cs-radio" hidden></div>
