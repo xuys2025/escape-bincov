@@ -1,8 +1,8 @@
 ## 2026-10-28 · 居民楼 region 身份（PR #117 续作）
 
-`fix/content-identity` 保留原 PR 历史并合入 main `03ea261`。居民楼 8 个已有完整 region ID 写入世界定义，投影不按中文名补身份；不变更世界/布局编号或存档格式。楼梯方向和内容登记仍属 Q-E06，未在本 PR 实施。
+`fix/content-identity` 保留原 PR 历史并依次合入 main `03ea261`、`630e68f`（#134）。居民楼 8 个已有完整 region ID 写入世界定义，投影不按中文名补身份；不变更世界/布局编号或存档格式。楼梯方向和内容登记仍属 Q-E06，未在本 PR 实施。
 
-在未改动的 `03ea261` 独立捕获 mall-v4 两层完整静态投影哈希，合成后逐项相等；原九图 / 28 入口基线及改名、重排、缺 ID 反例亦通过（4/4）。Windows / Node 24 / pnpm 11.19：`pnpm test` 1026/1026、`pnpm check:ci` 77/77、`pnpm package` 通过，HTML SHA-256 `bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25`。`pnpm test:raid-default` 11/11 通过（打包 HTML，含居民楼、mall-v4 和旧行动恢复）；准确 head CI 状态见 PR 正文。真人体验不由自动测试替代。
+在未改动的 `03ea261` 独立捕获 mall-v4 两层完整静态投影哈希，合成后逐项相等；原九图 / 28 入口基线及改名、重排、缺 ID 反例亦通过（4/4）。Windows / Node 24 / pnpm 11.19：`pnpm test` 1026/1026、`pnpm check:ci` 77/77、`pnpm package` 通过，HTML SHA-256 `bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25`。同步 `630e68f` 后重跑：专项 4/4、`pnpm test` 1026/1026、`pnpm check:ci` 85/85、`pnpm package` 通过。两次 main 的游戏源码与素材无变化，复用此前打包 HTML 的 `pnpm test:raid-default` 11/11（含居民楼、mall-v4 和旧行动恢复）；准确 head CI 状态见 PR 正文。真人体验不由自动测试替代。
 
 ## 2026-10-28 · 新一轮减熵：架构门禁与依赖查询（#60）
 
