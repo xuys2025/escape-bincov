@@ -6,6 +6,9 @@
  *   with the same gun; extract: the gun comes home with its parts; deploy again and die: the gun goes with its parts,
  *   nothing of it left anywhere.
  *   phone 740x300 (touch): the same G17 put in hand through the save session, deploy, resume after a reload, die.
+ *   found guns (#28 M3-04): wave one's AK-74 at 1280x720 and wave two's AUG at 1920x1080. Both are found only: the gun
+ *   and a found part lie on the ground in one raid, picked up with E and carried out; at home a shelf part is bought,
+ *   both fitted on the workbench (the AK's optic on its side base), the gun equipped and deployed as built, then lost.
  * Enemy positions and health use the explicit ?test=1 driver; buying, the workbench, equipping, deploying and the
  * three-second extraction use real input.
  */
@@ -175,6 +178,82 @@ try {
       assert.equal(p.lastResult.outcome, 'death'); assert.equal(p.equipment.weapon, null);
       assert.deepEqual([copies(p, 'O01'), copies(p, 'G01'), p.stash.items.filter(i => i.id === 'gb17').length], [0, 0, 0]);
       return { tag };
+    });
+  }
+
+  // The found guns: the gun and a part from one raid, a shelf part bought at home; `fit` is [slot, part] in order, a
+  // child's slot found among the positions the bench opens after its parent is previewed.
+  const FOUND = [
+    { size: [1280, 720], gun: 'akb74', found: 'O03', bought: 'A08', fit: [['base', 'A08'], ['top', 'O03']], mag: 30 },
+    { size: [1920, 1080], gun: 'augb', found: 'O05', bought: 'F04', fit: [['under', 'F04'], ['top', 'O05']], mag: 30 },
+  ];
+  for (const f of FOUND) {
+    const tag = `${f.size[0]}x${f.size[1]}`;
+    await step(`F-${tag}-found-${f.gun}-carry-fit-deploy-die`, async () => {
+      await open(f.size); await fixture({ bag: { w: 6, h: 5, items: [] } });
+      // Raid one: the gun and the part on the ground under the player, each picked up with E, away from the exit the
+      // raid starts on (there E is the extraction).
+      await deploy(94);
+      const at = { x: 700, y: 784 }; await standAt(at);
+      for (const id of [f.gun, f.found]) {
+        await drive(page, 'spawnLoot', id, 1, at); await frames(page, 4);
+        await page.keyboard.press('e');
+        await page.waitForFunction(id => window.__bincov.app.loadout.bag.items.some(i => i.id === id), id, { timeout: 20000 });
+      }
+      const exit = await page.evaluate(() => window.__bincovSample.host.lastBatch.map.exits[0].at);
+      await standAt(exit);
+      await page.keyboard.down('e'); try { await resultShown(); } finally { await page.keyboard.up('e'); }
+      let p = await save();
+      assert.equal(p.lastResult.outcome, 'extract');
+      const gun = p.bag.items.find(i => i.id === f.gun);
+      assert.ok(gun, `the ${f.gun} came home`); assert.deepEqual(gun.gun, { parts: [], devices: { laser: false, light: false } }, 'a factory instance');
+      assert.equal(copies(p, f.found), 1);
+      // At home: the shelf part from 老栓, on whichever catalog page it sits.
+      await tap(action('return')); await waitState('hideout'); await fixture();
+      await tap(action('tab', 'arms'));
+      const offer = page.locator(`[data-source="merchant"][data-item-id="${f.bought}"]`);
+      for (let n = 1; !await offer.count(); n++) {
+        const next = page.locator(`[data-action="shop-browse"][data-id="page:${n}"]`);
+        assert.ok(await next.count(), `${f.bought} on no catalog page`); await tap(next);
+      }
+      await placeAt(page, 'merchant', f.bought, 'buy', 0, 0); await tap(action('checkout'));
+      p = await save(); assert.equal(copies(p, f.bought), 1, 'bought');
+      // The workbench from the bag: both parts on, one save.
+      await tap(action('tab', 'gear'));
+      await tap(page.locator(`[data-grid="bag"] [data-uid="${gun.uid}"]`)); await tap(action('gunsmith-open', gun.uid));
+      const bench = s => page.locator(`.gs-page ${s}`);
+      await bench('.gs').waitFor();
+      for (const [slot, id] of f.fit) {
+        const keys = await bench('[data-gs="pos"]').evaluateAll(els => els.map(e => e.dataset.arg));
+        const key = keys.find(k => k.startsWith('gun/') && k.split('/')[1] === slot) ?? keys.find(k => !k.startsWith('gun/') && k.split('/')[1] === slot);
+        assert.ok(key, `a ${slot} position: ${keys.join(' ')}`);
+        await tap(bench(`[data-gs="pos"][data-arg="${key}"]`)); await tap(bench(`.gs-list [data-gs="part"][data-arg="${id}"]`));
+      }
+      await tap(bench('[data-gs="confirm"]'));
+      await page.waitForFunction(([uid, n]) => {
+        const s = window.__bincov.app.save, all = [...s.stash.items, ...s.bag.items], g = all.find(i => i.uid === uid);
+        const count = parts => parts.reduce((k, x) => k + 1 + count(x.children), 0);
+        return g && count(g.gun.parts) === n;
+      }, [gun.uid, f.fit.length]);
+      await tap(bench('[data-gs="close"]')); await page.locator('.gs-page').waitFor({ state: 'detached' });
+      // Equip it and deploy: the gun in hand is drawn as built.
+      const where = (await save()).bag.items.some(i => i.uid === gun.uid) ? 'bag' : 'stash';
+      await tap(page.locator(`[data-grid="${where}"] [data-uid="${gun.uid}"]`)); await tap(action('equip'));
+      p = await save();
+      assert.equal(p.equipment.weapon, f.gun);
+      const nodes = parts => parts.flatMap(n => [n.id, ...nodes(n.children)]);
+      assert.deepEqual(nodes(p.equipment.gun.parts).sort(), f.fit.map(([, id]) => id).sort());
+      await deploy(95);
+      const now = await held(), sig = now.gun?.sig ?? '';
+      assert.equal(now.gun?.id, f.gun); assert.ok(f.fit.every(([, id]) => sig.includes(id)), `the gun in hand is the built one: ${sig}`);
+      assert.equal(now.magSize, f.mag); assert.ok(now.composite && now.card);
+      await shot(`23-${tag}-${f.gun}-raid`);
+      // Death: the gun goes with its parts, no copy anywhere.
+      await die();
+      p = await save();
+      assert.equal(p.lastResult.outcome, 'death'); assert.equal(p.equipment.weapon, null);
+      assert.deepEqual([copies(p, f.found), copies(p, f.bought), [...p.stash.items, ...p.bag.items].filter(i => i.id === f.gun).length], [0, 0, 0]);
+      return { tag, gun: f.gun, sig };
     });
   }
 

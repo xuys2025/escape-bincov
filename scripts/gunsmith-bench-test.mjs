@@ -4,9 +4,11 @@
  * once; replacing a handguard takes its rail parts along; a smaller magazine unloads into the stash; switching guns or
  * closing with a preview asks first. Screenshots at 1280x720 and 1920x1080. Phones (M2-06, touch): three pages, cancel
  * and confirm in the bottom bar at 844x390, 740x300, 640x300 and 390x844, every step a tap, rotation keeps the preview.
- * Fixtures use the session with ?test=1.
+ * A1 compares the game's composites with Sol's approved previews pixel by pixel: M2's, wave one's and wave two's P0
+ * (#28 M3-04, M3-07). Fixtures use the session with ?test=1.
  */
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
@@ -15,7 +17,7 @@ import { browserOptions } from './browser-options.mjs';
 import { reportFilter, stepFilter } from './step-filter.mjs';
 import * as D from '../src/domain.ts';
 import { factoryState } from '../src/gunsmith/instance.ts';
-import { CONFIGS } from '../tests/fixtures/gunsmith-configs.ts';
+import { CONFIGS, part as partNode } from '../tests/fixtures/gunsmith-configs.ts';
 
 const option = (name, fallback) => process.argv.find(a => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const htmlPath = option('html', 'dist/index.html'), html = await readFile(htmlPath, 'utf8');
@@ -120,15 +122,35 @@ async function step(name, fn) {
 try {
   await step('A1-composites-equal-the-approved-previews', async () => {
     // M2-10: every approved preview assembly (Sol, M2-09) drawn by the game's compositor in the packaged page, compared
-    // with the preview PNG channel by channel.
+    // with the preview PNG channel by channel. #28 M3-04 adds Sol's wave-one records and M3-07 wave two's P0, each against
+    // its 1x preview, and the bare side views (the ground and the HUD card) where Sol drew one.
     const { assemblies } = JSON.parse(await readFile('tests/fixtures/gunsmith-assemblies.json', 'utf8'));
     const cases = await Promise.all(assemblies.map(async a => ({ name: `${a.gun}-${a.configuration}-${a.code}`, gun: a.gun, code: a.code,
       parts: CONFIGS[a.gun][a.configuration](), png: (await readFile(a.file)).toString('base64') })));
+    const grow = trees => trees.map(([id, slot, kids]) => partNode(id, slot, grow(kids ?? [])));
+    // Sol drew these two before the receiver's front glove (ART-SPEC 5; d3eb43f): the glove is checked on its own.
+    const beforeGlove = ['vb9-factory-h', 'augb-factory-h'];
+    for (const [file, dir] of [['tests/fixtures/gunsmith-assemblies-m3.json', 'docs/gunsmith/art/m3-w1/preview'], ['tests/fixtures/gunsmith-assemblies-m3-w2.json', 'docs/gunsmith/art/m3-w2/preview']]) {
+      const wave = JSON.parse(await readFile(file, 'utf8'));
+      for (const a of wave.assemblies) {
+        const name = `${a.gun}-${a.configuration}-${a.code}`;
+        cases.push({ name, gun: a.gun, code: a.code, parts: grow(wave.configurations[a.gun][a.configuration]), png: (await readFile(`${dir}/${name}-1x.png`)).toString('base64'), dropFrontGlove: beforeGlove.includes(name) });
+      }
+      for (const b of wave.bareFactories) {
+        const png = `${dir}/${b.gun}-factory-ground-hud-1x.png`;
+        if (existsSync(png)) cases.push({ name: `${b.gun}-bare`, gun: b.gun, code: 'h', parts: [], png: (await readFile(png)).toString('base64'), bare: true });
+      }
+    }
     await open();
     const bad = await page.evaluate(async cases => {
       const art = window.__bincov.gunsmithArt, out = [];
       for (const c of cases) {
-        const layout = art.layout(c.gun, c.parts, c.code), canvas = layout && art.draw(layout);
+        let layout = art.layout(c.gun, c.parts, c.code, !c.bare);
+        if (layout && c.dropFrontGlove) {
+          if (!layout.layers.some(l => l.label === 'glove-front')) out.push(`${c.name}: no front glove on the receiver's hand`);
+          layout = { ...layout, layers: layout.layers.filter(l => l.label !== 'glove-front') };
+        }
+        const canvas = layout && art.draw(layout);
         if (!canvas) { out.push(`${c.name}: not drawn`); continue; }
         const img = new Image(); img.src = `data:image/png;base64,${c.png}`; await img.decode();
         if (img.width !== canvas.width || img.height !== canvas.height) { out.push(`${c.name}: ${canvas.width}x${canvas.height}, preview ${img.width}x${img.height}`); continue; }
