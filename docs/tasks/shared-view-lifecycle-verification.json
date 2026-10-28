@@ -379,5 +379,104 @@
     "No test assertions changed",
     "No physical phone, human visual/feel, performance or F20 signoff",
     "Only the passing browser probes above support current regression claims; the legacy tool remains failed"
-  ]
+  ],
+  "integratedBaseline": "630e68f517edea34bfbcc548473897bd36bdfa08",
+  "headlessBoundary": {
+    "fixture": "Pure type-only import from core session into view-lifecycle/scope.ts; helper has no browser globals or Pixi import",
+    "positive": {
+      "tests": 1,
+      "pass": 1,
+      "fail": 0
+    },
+    "negative": {
+      "mutation": "Temporarily remove view-lifecycle from browserModule directory matcher; restore original bytes in finally",
+      "exit": 1,
+      "tests": 1,
+      "pass": 0,
+      "fail": 1,
+      "assertion": "a shared browser lifecycle type stays outside the headless core"
+    }
+  },
+  "finalChecks": {
+    "ci": {
+      "tests": 86,
+      "pass": 86,
+      "fail": 0
+    },
+    "package": "passed",
+    "unit": {
+      "tests": 1022,
+      "pass": 1022,
+      "fail": 0
+    }
+  },
+  "finalArtifactComparison": [
+    {
+      "file": "dist/index.html",
+      "equal": true,
+      "sha256": "f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb"
+    },
+    {
+      "file": "start the game.html",
+      "equal": true,
+      "sha256": "f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb"
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "equal": true,
+      "sha256": "66a0d6f2d3bdb72dbdca233d3c71fcae696d2ef69197b0f8c5696346d5d5cb6b"
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "equal": true,
+      "sha256": "cc311e1d76a0b04d6d7d9b86d060bfb6ca37d06e56010af1a6d83b423d33ae3a"
+    }
+  ],
+  "integratedMainSourceTree": "a29fcaf48f42dfb1b6d5cb951df9d57bef5cd846",
+  "scopeQuery": {
+    "file": "src/view-lifecycle/scope.ts",
+    "dependencies": [],
+    "consumers": [
+      {
+        "from": "src/coast-view/host.ts",
+        "kind": "static",
+        "line": 23
+      },
+      {
+        "from": "src/coast-view/sample.ts",
+        "kind": "static",
+        "line": 19
+      },
+      {
+        "from": "src/coast-view/scene.ts",
+        "kind": "static",
+        "line": 15
+      },
+      {
+        "from": "src/pixi-app.ts",
+        "kind": "static",
+        "line": 13
+      },
+      {
+        "from": "src/station-view/grid.ts",
+        "kind": "type",
+        "line": 3
+      },
+      {
+        "from": "src/station-view/host.ts",
+        "kind": "static",
+        "line": 6
+      },
+      {
+        "from": "src/station-view/route.ts",
+        "kind": "static",
+        "line": 14
+      },
+      {
+        "from": "src/station-view/ui.ts",
+        "kind": "type",
+        "line": 3
+      }
+    ]
+  }
 }

@@ -239,12 +239,13 @@ CI 自测失败的 1 项是 `policy.test.mjs:199` 写死 `C:/Program Files/Git/b
 - `view-lifecycle/scope.ts` 统一拥有原 `Scope` 与 `lifecycle` 对象；院子、行动和 `pixi-app.ts` 的所有引用直接指向这一模块。没有兼容转发或第二份计数。
 - `view-lifecycle/renderer-lifetime.ts` 保持原页面级 Pixi 程序、着色器缓存和注册副作用；`pixi-app.ts` 仍在初始化前显式导入，两个场景从同一模块取 `releaseManagedSlots`。无 barrel，DOM 作用域不间接引入 Pixi 注册。
 - 全部生产和单测引用已迁移；现役脚本没有引用旧路径，页面池探针仍在 `pixi-app.ts`。源码旁保留释放/上下文恢复细节，导航只定位所有者与检查入口。
+- 正常合入 #134 后，`source-graph.mjs` 的核心边界匹配纳入 `view-lifecycle`；纯类型借用反例故意没有 DOM/Pixi 引用，证明新目录本身仍在核心之外。临时去掉匹配时唯一断言有效失败，finally 恢复原字节。
 
 本地 Windows / Node 24.22.1 / pnpm 11.19.0 / Chrome 156.0.8078.49，AMD Radeon RX 6600 / ANGLE D3D11；浏览器按协调窗口串行运行。[实际证据](shared-view-lifecycle-verification.json)保留原首败、通过项与制品哈希。
 
 | 检查 | 实际结果 |
 | --- | --- |
-| 全量单测 / 工程守卫 / 严格打包 | 1022/1022、77/77、`pnpm package` 通过（同步 #134 前） |
+| 全量单测 / 工程守卫 / 严格打包 | 同步 #134 前 1022/1022、77/77、打包通过；正常合入 `630e68f` 并维护路径后重新通过 1022/1022、86/86 与 `pnpm package`，最终四份制品仍与原 main 构建同字节 |
 | `test:coast-render-targets` | 5/5；20 次实际 resize、6 次真实 context restore、像素/键盘、结算及共享 renderer 院子↔行动重挂 |
 | `station-context-program` | 1280×720、1920×1080 各 8/8；真实恢复、8/16 能力切换、程序复用及恢复后键盘；原工具仍归用途清单 review，不擅自提升为 CI 门禁 |
 | `test:station-capability` | 4/4；probe/idle/remount/trip 各三轮 (8,8,16,16)，真实上下文丢失/恢复与模拟能力查询；原生起点 16，着色器监听/计数稳定 |
@@ -252,7 +253,7 @@ CI 自测失败的 1 项是 `policy.test.mjs:199` 写死 `C:/Program Files/Git/b
 | 待 review 的旧 `coast-lifecycle-test` | 本轮完整 1/5；显式 test=1 Runtime 冻结/恢复/释放通过（host/runtime/view/targets 回收、空 stage、停 ticker、唯一计数归零）；普通入口四项等旧按钮超时，未进入故障注入边界 |
 | 同一旧工具 main 基线 | 原首项同样在旧院子出击按钮等 20 秒超时；按共享浏览器协调在首败后停止精确进程及子树，其余基线项未运行/中断，未冒领通过 |
 
-通过的渲染/能力专项页面异常和外部请求均为 0。HTML SHA-256 `f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb`；ZIP 哈希见实际证据。尚待 #134 合入后的新共享目录核心依赖负例和准确 head CI，不修改旧工具断言或接管其修复。
+通过的渲染/能力专项页面异常和外部请求均为 0。HTML SHA-256 `f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb`；ZIP 哈希见实际证据。已正常合入 main `630e68f517edea34bfbcc548473897bd36bdfa08`（#134），保留双方文档；新目录纯类型边界正反例已通过。准确 head CI 待提交后核对，不修改旧工具断言或接管其修复。
 
 首次 `pnpm test` 因 pnpm 自动安装试图重建共享 node_modules junction，在运行测试前以 `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY` 停止。改用现有已装依赖并显式设置 `pnpm_config_verify_deps_before_run=false`，没有允许删除共享目录或改锁文件。
 

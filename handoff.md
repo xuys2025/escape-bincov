@@ -1,6 +1,6 @@
 ## 2026-10-28 Q-E02：公共视图生命周期归位
 
-[PR #136](https://github.com/xuys2025/escape-bincov/pull/136)，实现 `476086d7dc6e4f3821064c0b8d6d3b47f09680c3`，分支 `codex/shared-view-lifecycle`，起点 main `0f73a67386bac196b87c983668295be6d1a99f1e`。将场景无关 `Scope`/唯一 `lifecycle` 和页面级 Pixi 注册/缓存归位到 `src/view-lifecycle/`，保持直接导入和初始化顺序；原生产/测试引用同步，现役脚本不引用旧路径。职责入口见 [CODEMAP](docs/CODEMAP.md)，决定、首败与验证见[原质量摘要](docs/tasks/quality-entropy.md#q-e02-公共视图生命周期归位)。SAMPLE_AREA/raid-areas 身份、Q-E04 和其他在途 PR 均不在本交付。1022 单测、77 守卫、package、render-targets 5/5、两尺寸程序恢复各 8/8、能力四负载 4/4 通过；两份 HTML/两份 ZIP 与真实 main 构建同字节。旧 lifecycle 1/5 的普通入口首败在 main 同样复现，保留原边界。下一步正常同步 #134、补新目录类型依赖负例，重跑工程检查并等准确 head CI；未合并/发布。
+[PR #136](https://github.com/xuys2025/escape-bincov/pull/136)，实现 `476086d7dc6e4f3821064c0b8d6d3b47f09680c3`，分支 `codex/shared-view-lifecycle`，起点 main `0f73a67386bac196b87c983668295be6d1a99f1e`。将场景无关 `Scope`/唯一 `lifecycle` 和页面级 Pixi 注册/缓存归位到 `src/view-lifecycle/`，保持直接导入和初始化顺序；原生产/测试引用同步，现役脚本不引用旧路径。职责入口见 [CODEMAP](docs/CODEMAP.md)，决定、首败与验证见[原质量摘要](docs/tasks/quality-entropy.md#q-e02-公共视图生命周期归位)。SAMPLE_AREA/raid-areas 身份、Q-E04 和其他在途 PR 均不在本交付。1022 单测、77 守卫、package、render-targets 5/5、两尺寸程序恢复各 8/8、能力四负载 4/4 通过；两份 HTML/两份 ZIP 与真实 main 构建同字节。旧 lifecycle 1/5 的普通入口首败在 main 同样复现，保留原边界。已正常合入 main `630e68f`（#134）并保留双方文档，新目录纯类型依赖正反例已通过；集成后重跑 1022/1022、86/86、package 全过，四份制品仍同基线。准确 head CI 见原 PR，未合并/发布。
 
 ## 2026-10-28 · 新一轮减熵：架构门禁与依赖查询（#60）
 
