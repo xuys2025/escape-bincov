@@ -78,6 +78,18 @@
 
 存档格式、版本、时钟和其他规则不变。本机结果和截图见 PR 正文与 `docs/tasks/raid-equip-slot/`。未做：真机、真人手感。和 #106（改枪 M2，草稿）在 `inventory.ts` 详情两行、`runtime.ts` 的 `equipItem` 会有文本冲突，谁后合谁解。
 
+## 2026-10-28 资源报告消费校验续作（PR #116）
+
+继续原分支 `fix/resource-report-validation` / [PR #116](https://github.com/xuys2025/escape-bincov/pull/116)，原 head `902a449ccf34d817a41a7260f30eb55bf3779239`，先正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，本次再正常同步共同截止 main `630e68f517edea34bfbcc548473897bd36bdfa08`。只改两份 review CLI 的输入消费边界与纯 Node 回归，不改游戏、算法、阈值或采样器；#111 的 rounds 与 #118 的堆输入各由原 PR 承接，#32 F20 仍 PARTIAL。
+
+旧 main CLI 实际接受 13 类反例：重复轮次、缺 release/quad 身份、null/巨大 heap、缺 table/type/label、字符串 live、重复槽位键和缺释放观察。原 PR 已拒绝其中七类，本轮补全另六类：在过滤前验证 table；摘要与槽位检查各自消费的键/布尔值并拒绝表内重复身份；live 槽位要求用于身份输出的 type/label，null 占位继续无需这些字段；freed 分支仅要求被复制的 scene/parked 属性存在，保留 null 和原值，不扩展为深层 schema。identity-probe 仅检查用于 added/removed 的纹理键；其他状态与附件原样保留。
+
+本次 Windows / Node 24.22.1 / pnpm 11.19.0：13 项真实 CLI 回归通过（含逐项字段矩阵、晚到的非法 probe 在写任何报告前拒绝、已有输出不被覆盖、合法 1 轮 partial 与 null 占位）。同一输入对比 main 旧 CLI：普通值、MAX_SAFE_INTEGER 和 0/上界交替三组共 39 份摘要输出逐字节一致；两组有/无 null 占位的槽位输出也逐字节一致。13 类反例旧 CLI 均 exit 0，修复后均 exit 1。原始证据保留在忽略的 `test-results/pr116/`。前次集成提交 `04c4218` 的完整 `pnpm test` 1022/1022、`pnpm check:ci` 90/90 与打包均通过。本次同步后实际 `check:ci` 98/98（含重跑 CLI 13 项）、严格打包通过；游戏/测试/依赖与两 CLI/helper/测试/producer 输入逐字节未变，复用该提交的 1022 单测及 41 文件对照，不重跑旧反例。重新生成 HTML/portable/web 的 SHA-256 分别为 `f3b7c3e1...` / `66a0d6f2...` / `cc311e1d...`，均与前次逐字节相同；证明和新日志在原证据目录。相对截止 main 的 `git diff --check` 通过。准确最终 head 与远端完整 CI 在原 PR 更新，不引用 10-25 旧 CI 代替。
+
+本地未运行浏览器、trend、实际 60 轮或堆采样，不宣称资源/F20 签收。代码父审与本机完整验证已通过，继续原 PR 正常提交推送并核对准确 head 完整 CI；仍为 draft，未转 Ready、未合并或发布。
+
+维护者已明确授权复查后自动合并；本次正常同步 main `f66ee79af6b84ef64319891e82d7dc4e82985350`（含 #117/#136），保留上游身份与共享生命周期归位。本节原验证证据保留历史归属，当前守卫、打包及准确新 head CI / 自动合并状态以原 PR 为准，不绕过检查或保护。
+
 ## 2026-10-27 #115：行动背包有限服务同步 main（续作）
 
 维护者 10-27 要求查看 #115 去向并合入后再做 #26 F15。#115 自 10-25 起无人续作、无评论，准确 head `3e1047b` 当时 CI 全过。本次在隔离工作树把 main `86add10`（#126、#127 等已合入）合进原分支：源码自动合并，只有本文件冲突，保留双方小节。实现和接口不变；同步后的验证结果见 PR 正文。F15 另由 PR #129 承接（基于本分支）。10-27 晚 #128（F14）合入后，再把 main `8b59019` 合进来一次，同样只有本文件冲突，保留双方小节。
