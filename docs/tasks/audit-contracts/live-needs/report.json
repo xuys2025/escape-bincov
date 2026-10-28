@@ -352,5 +352,661 @@
     "checkCi": "64/64",
     "package": "passed"
   },
-  "limitations": "After HUD passed, the original full qol container-close step timed out with a detached button. General browser interrupted; UI/full raid-default not run. Pending exact-head CI; no device/performance signoff."
+  "limitations": "After HUD passed, the original full qol container-close step timed out with a detached button. General browser interrupted; UI/full raid-default not run. Pending exact-head CI; no device/performance signoff.",
+  "integration20261028": {
+    "baseline": "03ea26198259fa66ee7a39c32c06466a1545e76f",
+    "testedHead": "19dea0bfa59042281b4c7ec1f085aa3e8587e3b8",
+    "environment": {
+      "platform": "win32",
+      "node": "v24.22.1",
+      "pnpm": "11.19.0",
+      "browser": "156.0.8078.49"
+    },
+    "method": "Normal merges of main; exact main product source restored for negative offline build, then restored byte-for-byte to candidate before pnpm package. Native ordinary pause and live vitals driver only, eight host frames; no clock or rule changes. All suites first attempt, no assertion changes.",
+    "before": {
+      "htmlSha256": "f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb",
+      "methodology": "Offline exact bundle; explicit funded base, mall container relocation (layout 4, 2.5D raid host), item and frozen-enemy fixtures. Native buttons, wheel, keyboard and emulated touch; actual bullet flight. Not natural balance or physical-device acceptance.",
+      "steps": [
+        {
+          "name": "RPG medicine cart survives a cancelled leave and commits through the ordinary checkout",
+          "status": "passed"
+        },
+        {
+          "name": "body HUD reads the live raid rather than its saved checkpoint at both desktop sizes",
+          "status": "failed",
+          "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ [\n+   '1280×720: The input did not match the regular expression /精神 71 · 水分 62 · 饱食 53/. Input:\\n' +\n+     '\\n' +\n+     \"'精神 100 · 水分 100 · 饱食 100　2.4 kg'\\n\",\n+   '1920×1080: The input did not match the regular expression /精神 48 · 水分 37 · 饱食 26/. Input:\\n' +\n+     '\\n' +\n+     \"'精神 100 · 水分 100 · 饱食 100　2.4 kg'\\n\"\n+ ]\n- []\n\n    at file:///C:/Users/xty/.codex/worktrees/pr111-trend-rounds/bincov/scripts/qol-expansion-test.mjs:96:16\n    at async step (file:///C:/Users/xty/.codex/worktrees/pr111-trend-rounds/bincov/scripts/qol-expansion-test.mjs:21:104)\n    at async file:///C:/Users/xty/.codex/worktrees/pr111-trend-rounds/bincov/scripts/qol-expansion-test.mjs:57:5"
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "browser": "156.0.8078.49",
+      "liveNeeds": [
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "checkpoint": {
+            "hp": 100,
+            "stamina": 100,
+            "mental": 99.99837700000018,
+            "water": 99.99567200000048,
+            "satiety": 99.99729500000029,
+            "pollution": 0,
+            "bleeding": false,
+            "exhausted": false,
+            "effects": {
+              "pain": 0,
+              "energized": 0,
+              "analgesia": 0,
+              "focus": 0,
+              "strength": 0,
+              "constitution": 0,
+              "technique": 0,
+              "injectionFatigue": 0,
+              "luck": 0
+            },
+            "treatment": {
+              "bleeding": 0,
+              "pain": 0,
+              "injectionFatigue": 0
+            },
+            "luckEffect": 0
+          },
+          "saved": {
+            "hp": 100,
+            "stamina": 100,
+            "mental": 99.99837700000018,
+            "water": 99.99567200000048,
+            "satiety": 99.99729500000029,
+            "pollution": 0,
+            "bleeding": false,
+            "exhausted": false,
+            "effects": {
+              "pain": 0,
+              "energized": 0,
+              "analgesia": 0,
+              "focus": 0,
+              "strength": 0,
+              "constitution": 0,
+              "technique": 0,
+              "injectionFatigue": 0,
+              "luck": 0
+            },
+            "treatment": {
+              "bleeding": 0,
+              "pain": 0,
+              "injectionFatigue": 0
+            },
+            "luckEffect": 0
+          },
+          "live": {
+            "mental": 71.2,
+            "water": 62.2,
+            "satiety": 53.2
+          },
+          "elapsed": 0,
+          "text": "精神 100 · 水分 100 · 饱食 100　2.4 kg",
+          "rect": {
+            "x": 23,
+            "y": 63,
+            "right": 286.1875,
+            "bottom": 79
+          },
+          "fits": true
+        },
+        {
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          },
+          "checkpoint": {
+            "hp": 100,
+            "stamina": 100,
+            "mental": 99.99808149999991,
+            "water": 99.99488399999977,
+            "satiety": 99.99680249999984,
+            "pollution": 0,
+            "bleeding": false,
+            "exhausted": false,
+            "effects": {
+              "pain": 0,
+              "energized": 0,
+              "analgesia": 0,
+              "focus": 0,
+              "strength": 0,
+              "constitution": 0,
+              "technique": 0,
+              "injectionFatigue": 0,
+              "luck": 0
+            },
+            "treatment": {
+              "bleeding": 0,
+              "pain": 0,
+              "injectionFatigue": 0
+            },
+            "luckEffect": 0
+          },
+          "saved": {
+            "hp": 100,
+            "stamina": 100,
+            "mental": 99.99808149999991,
+            "water": 99.99488399999977,
+            "satiety": 99.99680249999984,
+            "pollution": 0,
+            "bleeding": false,
+            "exhausted": false,
+            "effects": {
+              "pain": 0,
+              "energized": 0,
+              "analgesia": 0,
+              "focus": 0,
+              "strength": 0,
+              "constitution": 0,
+              "technique": 0,
+              "injectionFatigue": 0,
+              "luck": 0
+            },
+            "treatment": {
+              "bleeding": 0,
+              "pain": 0,
+              "injectionFatigue": 0
+            },
+            "luckEffect": 0
+          },
+          "live": {
+            "mental": 48.2,
+            "water": 37.2,
+            "satiety": 26.2
+          },
+          "elapsed": 0,
+          "text": "精神 100 · 水分 100 · 饱食 100　2.4 kg",
+          "rect": {
+            "x": 23,
+            "y": 63,
+            "right": 286.1875,
+            "bottom": 79
+          },
+          "fits": true
+        }
+      ]
+    },
+    "after": {
+      "htmlSha256": "f61862ed972f8efaab0c8abf7c9360ab2aebbd751d943dfa77ad8211c5568b72",
+      "methodology": "Offline exact bundle; explicit funded base, mall container relocation (layout 4, 2.5D raid host), item and frozen-enemy fixtures. Native buttons, wheel, keyboard and emulated touch; actual bullet flight. Not natural balance or physical-device acceptance.",
+      "steps": [
+        {
+          "name": "RPG medicine cart survives a cancelled leave and commits through the ordinary checkout",
+          "status": "passed"
+        },
+        {
+          "name": "body HUD reads the live raid rather than its saved checkpoint at both desktop sizes",
+          "status": "passed"
+        },
+        {
+          "name": "mall containers keep wheel-selected identity and touch-open the exact empty source",
+          "status": "passed"
+        },
+        {
+          "name": "native layered split and rotation persist one part and retain the original remainder after reload",
+          "status": "passed"
+        },
+        {
+          "name": "actual layered enemy projectile displays its direction without closing loot; floor map keeps connector controls",
+          "status": "passed"
+        }
+      ],
+      "errors": [],
+      "requests": [],
+      "browser": "156.0.8078.49",
+      "liveNeeds": [
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "checkpoint": {
+            "hp": 100,
+            "stamina": 100,
+            "mental": 99.99687999999999,
+            "water": 99.99167999999997,
+            "satiety": 99.9948,
+            "pollution": 0,
+            "bleeding": false,
+            "exhausted": false,
+            "effects": {
+              "pain": 0,
+              "energized": 0,
+              "analgesia": 0,
+              "focus": 0,
+              "strength": 0,
+              "constitution": 0,
+              "technique": 0,
+              "injectionFatigue": 0,
+              "luck": 0
+            },
+            "treatment": {
+              "bleeding": 0,
+              "pain": 0,
+              "injectionFatigue": 0
+            },
+            "luckEffect": 0
+          },
+          "saved": {
+            "hp": 100,
+            "stamina": 100,
+            "mental": 99.99687999999999,
+            "water": 99.99167999999997,
+            "satiety": 99.9948,
+            "pollution": 0,
+            "bleeding": false,
+            "exhausted": false,
+            "effects": {
+              "pain": 0,
+              "energized": 0,
+              "analgesia": 0,
+              "focus": 0,
+              "strength": 0,
+              "constitution": 0,
+              "technique": 0,
+              "injectionFatigue": 0,
+              "luck": 0
+            },
+            "treatment": {
+              "bleeding": 0,
+              "pain": 0,
+              "injectionFatigue": 0
+            },
+            "luckEffect": 0
+          },
+          "live": {
+            "mental": 71.2,
+            "water": 62.2,
+            "satiety": 53.2
+          },
+          "projected": {
+            "mental": 71.2,
+            "water": 62.2,
+            "satiety": 53.2
+          },
+          "elapsed": 0,
+          "text": "精神 71 · 水分 62 · 饱食 53　2.4 kg",
+          "rect": {
+            "x": 23,
+            "y": 63,
+            "right": 286.1875,
+            "bottom": 79
+          },
+          "fits": true
+        },
+        {
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          },
+          "checkpoint": {
+            "hp": 100,
+            "stamina": 100,
+            "mental": 99.9952179999998,
+            "water": 99.98724799999948,
+            "satiety": 99.99202999999969,
+            "pollution": 0,
+            "bleeding": false,
+            "exhausted": false,
+            "effects": {
+              "pain": 0,
+              "energized": 0,
+              "analgesia": 0,
+              "focus": 0,
+              "strength": 0,
+              "constitution": 0,
+              "technique": 0,
+              "injectionFatigue": 0,
+              "luck": 0
+            },
+            "treatment": {
+              "bleeding": 0,
+              "pain": 0,
+              "injectionFatigue": 0
+            },
+            "luckEffect": 0
+          },
+          "saved": {
+            "hp": 100,
+            "stamina": 100,
+            "mental": 99.9952179999998,
+            "water": 99.98724799999948,
+            "satiety": 99.99202999999969,
+            "pollution": 0,
+            "bleeding": false,
+            "exhausted": false,
+            "effects": {
+              "pain": 0,
+              "energized": 0,
+              "analgesia": 0,
+              "focus": 0,
+              "strength": 0,
+              "constitution": 0,
+              "technique": 0,
+              "injectionFatigue": 0,
+              "luck": 0
+            },
+            "treatment": {
+              "bleeding": 0,
+              "pain": 0,
+              "injectionFatigue": 0
+            },
+            "luckEffect": 0
+          },
+          "live": {
+            "mental": 48.2,
+            "water": 37.2,
+            "satiety": 26.2
+          },
+          "projected": {
+            "mental": 48.2,
+            "water": 37.2,
+            "satiety": 26.2
+          },
+          "elapsed": 0,
+          "text": "精神 48 · 水分 37 · 饱食 26　2.4 kg",
+          "rect": {
+            "x": 23,
+            "y": 63,
+            "right": 286.1875,
+            "bottom": 79
+          },
+          "fits": true
+        }
+      ]
+    },
+    "raidDefault": {
+      "html": "dist/index.html",
+      "sha256": "f61862ed972f8efaab0c8abf7c9360ab2aebbd751d943dfa77ad8211c5568b72",
+      "browser": "156.0.8078.49",
+      "checks": [
+        {
+          "name": "R1 yard: the deploy panel offers 沿海街区 (selected) and 滨湾商场; 沿海封锁区 is closed",
+          "result": {
+            "worlds": [
+              "buildings",
+              "mall"
+            ],
+            "checked": "buildings",
+            "names": [
+              "沿海街区",
+              "滨湾商场"
+            ]
+          },
+          "status": "passed"
+        },
+        {
+          "name": "R2 old tab page (页签 from the yard): the area list has the same two areas",
+          "result": {
+            "options": [
+              [
+                "buildings",
+                "沿海街区 · 居民楼",
+                true
+              ],
+              [
+                "mall",
+                "滨湾商场 · 两层与露台",
+                false
+              ]
+            ],
+            "note": "行动规则 每局限时 10 分钟"
+          },
+          "status": "passed"
+        },
+        {
+          "name": "R3 沿海街区 deploys on the 2.5D view; outside the dressed corner there is no playtest mark",
+          "result": {
+            "where": "沿海街区 · 室外 / 一楼"
+          },
+          "status": "passed"
+        },
+        {
+          "name": "R4 滨湾商场 deploys layout 4 on the 2.5D view",
+          "result": {
+            "where": "滨湾商场 · 一层 · 正门广场 · 室外"
+          },
+          "status": "passed"
+        },
+        {
+          "name": "R5 a classic coast raid started before the area closed resumes on the 2.5D view and settles",
+          "result": {
+            "where": "沿海封锁区 · 室外 / 一楼",
+            "testInterface": false
+          },
+          "status": "passed"
+        },
+        {
+          "name": "R6 a mall layout 1 raid started before the switch resumes on the 2.5D view and settles",
+          "result": {
+            "where": "滨湾商场 · 一层 / 地面室外 · 弧形步行街 · 室外",
+            "testInterface": false
+          },
+          "status": "passed"
+        },
+        {
+          "name": "R7 the view follows the raid, not the playtest flag: ?sample=village draws a mall raid with the mall art",
+          "result": {
+            "mallArt": "sol",
+            "art": "sol"
+          },
+          "status": "passed"
+        },
+        {
+          "name": "R10 county map: previews cannot deploy, selections preserve the seed, and desktop/phone layouts remain reachable",
+          "result": [
+            {
+              "width": 1280,
+              "height": 720,
+              "clipped": [],
+              "overlapping": [],
+              "covered": [],
+              "misplaced": [],
+              "missed": [],
+              "stretched": false,
+              "cropped": false,
+              "offCentre": false,
+              "overflow": false
+            },
+            {
+              "width": 1920,
+              "height": 1080,
+              "clipped": [],
+              "overlapping": [],
+              "covered": [],
+              "misplaced": [],
+              "missed": [],
+              "stretched": false,
+              "cropped": false,
+              "offCentre": false,
+              "overflow": false
+            },
+            {
+              "width": 844,
+              "height": 390,
+              "clipped": [],
+              "overlapping": [],
+              "covered": [],
+              "misplaced": [],
+              "missed": [],
+              "stretched": false,
+              "cropped": false,
+              "offCentre": false,
+              "overflow": false
+            },
+            {
+              "width": 390,
+              "height": 844,
+              "clipped": [],
+              "overlapping": [],
+              "covered": [],
+              "misplaced": [],
+              "missed": [],
+              "stretched": false,
+              "cropped": false,
+              "offCentre": false,
+              "overflow": false
+            }
+          ],
+          "status": "passed"
+        },
+        {
+          "name": "R11 county map motion: a pick patches the map in place, every animation ends, reduced motion stops them and closing the panel ends them",
+          "result": {
+            "moving": [
+              {
+                "name": "--map-y",
+                "iterations": 1
+              },
+              {
+                "name": "--map-x",
+                "iterations": 1
+              },
+              {
+                "name": "bottom",
+                "iterations": 1
+              },
+              {
+                "name": "left",
+                "iterations": 1
+              },
+              {
+                "name": "right",
+                "iterations": 1
+              },
+              {
+                "name": "top",
+                "iterations": 1
+              },
+              {
+                "name": "background-color",
+                "iterations": 1
+              },
+              {
+                "name": "border-bottom-color",
+                "iterations": 1
+              },
+              {
+                "name": "border-left-color",
+                "iterations": 1
+              },
+              {
+                "name": "border-right-color",
+                "iterations": 1
+              },
+              {
+                "name": "border-top-color",
+                "iterations": 1
+              },
+              {
+                "name": "bottom",
+                "iterations": 1
+              },
+              {
+                "name": "left",
+                "iterations": 1
+              },
+              {
+                "name": "right",
+                "iterations": 1
+              },
+              {
+                "name": "top",
+                "iterations": 1
+              },
+              {
+                "name": "background-color",
+                "iterations": 1
+              },
+              {
+                "name": "border-bottom-color",
+                "iterations": 1
+              },
+              {
+                "name": "border-left-color",
+                "iterations": 1
+              },
+              {
+                "name": "border-right-color",
+                "iterations": 1
+              },
+              {
+                "name": "border-top-color",
+                "iterations": 1
+              },
+              {
+                "name": "background-color",
+                "iterations": 1
+              },
+              {
+                "name": "slide",
+                "iterations": 1
+              },
+              {
+                "name": "lock-in",
+                "iterations": 1
+              },
+              {
+                "name": "art-in",
+                "iterations": 1
+              },
+              {
+                "name": "copy-in",
+                "iterations": 1
+              }
+            ]
+          },
+          "status": "passed"
+        },
+        {
+          "name": "R8 without WebGL the page shows the notice instead of the game and leaves the save untouched",
+          "result": {
+            "heading": "需要支持 WebGL 的浏览器",
+            "frame": false,
+            "canvases": 0
+          },
+          "status": "passed"
+        },
+        {
+          "name": "R9 phone (844x390 touch): the 2.5D raid has a weapon button that switches to the knife and back",
+          "result": {
+            "start": {
+              "weapon": "旧式手枪",
+              "label": "匕首"
+            },
+            "knife": {
+              "weapon": "水手匕首",
+              "label": "主武器"
+            },
+            "back": {
+              "weapon": "旧式手枪",
+              "label": "匕首"
+            }
+          },
+          "status": "passed"
+        }
+      ],
+      "errors": [],
+      "requests": []
+    },
+    "validation": {
+      "negativeUnit": "0 pass / 3 expected failures",
+      "targetedUnit": "3/3",
+      "test": "1025/1025",
+      "checkCi": "77/77",
+      "package": "passed",
+      "qolExpansion": "5/5",
+      "raidDefault": "11/11"
+    },
+    "screenshotReview": "Personally viewed both before and both after screenshots; body text readable and within viewport, M2 mall scenery remains visible.",
+    "localLogs": "test-results/pr110-20261028/",
+    "limitations": "No physical-device, human gameplay or performance signoff. Exact final-head CI is tracked in PR #110.",
+    "negativeBaseline": "The three product files were restored exactly from main 03ea26198259fa66ee7a39c32c06466a1545e76f. Its HTML SHA-256 is f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb; latest main added documentation only.",
+    "historicalScreenshots": "Original screenshots remain at commit 1ba5a7940fffcb434c6b6ff51e071b5d757b69d4; current 1280x720.png and 1920x1080.png show this integrated build."
+  }
 }

@@ -65,15 +65,17 @@ Windows，Node 24.21.0、pnpm 11.19.0、本地 Chrome 155.0.8059.85。下列结�
 
 ## 精神/水分/饱食 HUD 的实时投影
 
-2026-10-25（UTC），分支 `fix/live-vitals-hud`，已接受基线 `974a3a8d1ad2a7662c3a828226295d6c9b31eb64`。独立承接 #60 / 已合并 #79 的这一项；开工实时核对开放 #95、#106、#107，没有同目标 PR，D8 继续留在 #107。
+2026-10-28 续作 [PR #110](https://github.com/xuys2025/escape-bincov/pull/110)，沿原分支 `fix/live-vitals-hud` 正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`；受检源码 head `19dea0bfa59042281b4c7ec1f085aa3e8587e3b8`。保留 M2、商场四版、背包服务与双方交接，随后仅补本轮证据和文字，准确最终 head / CI 见原 PR。#60 总单保持开放。
 
 **修复边界。** 实时身体是 `CoastRaidRuntime.layered.body`，`SessionState.expansion.body` 是最近成功检查点。`frameView` 将三个数复制到只读 `HudView.needs`；宿主只按原来每八帧的刷新节奏舍入与排版。没有复制生理公式，也没有把实时对象直接放进帧；禁用测试帧冻结时同样不共享引用。经典旧行动即使会话含扩展身体，也保持 `needs: null`，状态行不显示这三项。不改存档格式、检查点、规则或事务。
 
-**验证。** 完整 `pnpm test` 877/877、`pnpm check:ci` 64/64、正式 `pnpm package` 通过。新增单测在旧代码 3/3 失败，在修复后 3/3 通过，覆盖检查点之间的自然衰减跨整数、暂停、旧帧不变及经典空投影。浏览器使用原有 `?test=1` 身体夹具，普通 UI 暂停写下检查点后只改变实时身体，等待真实八帧 HUD 刷新，在两档桌面比较保存值、实时值、帧值和可见文本。没有更改时钟或生理规则；正常暂停使慢软件渲染也不会跨自动保存。最初运行中等待八帧的探针因机器长帧跨过自动保存，已作为无效探针排除，不计为产品反例。自然推进和检查点未写入由单测另验。
+**本轮实际验证。** Windows，Node 24.22.1、pnpm 11.19.0、Chrome 156.0.8078.49。完整 `pnpm test` **1025/1025**、`pnpm check:ci` **77/77**、正式 `pnpm package`、完整 `test:qol-expansion` **5/5**、`test:raid-default` **11/11** 均首次通过。后者包含经典行动无身体读数、商场一版恢复、商场四版出击、选图和触屏。日志在 `test-results/pr110-20261028/`；[同一份对照记录](audit-contracts/live-needs/report.json) 的 `integration20261028` 留存新基线、制品、环境、两尺寸读数与完整套件结果。
 
-修复后 1280×720 / 1920×1080 的 HUD 步通过：保存值未变、普通暂停 elapsed 为 0，实时/帧/DOM 值一致，文本 fits 为 true；页面异常和外网请求均为 0。正式 HTML SHA-256 为 `aa3b1174126b119d98c075d93e404c74d78d3d0a31f4d868094568c47027a534`。已目检真实截图：[1280×720](audit-contracts/live-needs/1280x720.png)、[1920×1080](audit-contracts/live-needs/1920x1080.png)。
+新基线负对照将三个产品文件还原为准确 main `03ea261` 后构建（HTML SHA-256 `f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb`，本次主线只增加文档、产品未变）：两尺寸均有效失败，普通暂停 elapsed 为 0、保存值未变，实时值分别 71.2/62.2/53.2 和 48.2/37.2/26.2，旧 HUD 两次仍显示 100/100/100。main 投影单独代入时新增单测 0/3；恢复修复后 3/3，覆盖自然衰减跨整数、暂停、旧帧不变、双向引用隔离与经典空投影。源文件恢复原字节后才打包修复版；没有更改时钟、自动保存或生理规则。
 
-完整 `test:qol-expansion` 继续到原容器关闭步骤时按钮 detach 后超时，未记整套通过；通用 browser 中断，UI / 完整 raid-default 未运行，准确 head CI 另核。最终基线快速探针在两个尺寸均有效失败：普通暂停 elapsed 为 0、检查点未变，实时值分别为 71.2/62.2/53.2 与 48.2/37.2/26.2，旧 HUD 两次都显示 100/100/100；修复后分别显示 71/62/53 与 48/37/26。[对照记录](audit-contracts/live-needs/report.json)同时保留完整 `test:qol-expansion` 的后续容器关闭超时，不把 HUD 通过扩大为整套通过。没有真机、真人手感或性能验收；#60 其他事项仍开放，不合并或发布。
+修复版两尺寸保存值仍未变，实时/帧/DOM 一致、文本 fits 为 true，页面异常与外网请求均为 0。正式 HTML SHA-256：`f61862ed972f8efaab0c8abf7c9360ab2aebbd751d943dfa77ad8211c5568b72`。已逐张查看真实截图：[1280×720](audit-contracts/live-needs/1280x720.png)、[1920×1080](audit-contracts/live-needs/1920x1080.png)。没有真机、真人手感或性能验收；不合并或发布。
+
+**历史首败保留。** 10-25 原 head `1ba5a79` 基于 `974a3a8`，当时 877 单测、64 守卫和 HUD 步通过，但完整 QoL 在容器关闭按钮 detach 后超时；通用 browser 中断，UI / 完整 raid-default 未运行。随后该 head [CI 40161314063](https://github.com/xuys2025/escape-bincov/actions/runs/40161314063) 全部成功。本轮没有更改容器断言，完整 QoL 实际通过；原始前后读数与超时仍保留在上述报告，旧截图可从[原 head 目录](https://github.com/xuys2025/escape-bincov/tree/1ba5a7940fffcb434c6b6ff51e071b5d757b69d4/docs/tasks/audit-contracts/live-needs)读取，当前同名截图已替换为本轮实际构建。初次运行中八帧探针因跨 autosave 而无效，未计为产品反例；有效浏览器对照采用普通暂停，正常衰减和无写入另由单测验证。
 
 ## 同步 #39 后的复核
 

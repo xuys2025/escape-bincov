@@ -1,9 +1,8 @@
-## 2026-10-25 行动精神/水分/饱食 HUD 实时投影（`fix/live-vitals-hud`）
+## 2026-10-28 行动精神/水分/饱食 HUD 实时投影（PR #110）
 
-从已接受 main `974a3a8d1ad2a7662c3a828226295d6c9b31eb64` 独立承接 #60 / 已合并 #79 的读旧检查点保留项。开工核对开放 #95/#106/#107 无重复；D8 仍归 #107。实现和验证入口见 [审计摘要](docs/tasks/audit-contracts.md#精神水分饱食-hud-的实时投影)、[派生读数](docs/CODEMAP.md#派生读数)。
+沿原 `fix/live-vitals-hud` 正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，保留商场四版/M2、背包服务和其他任务交接；受检源码 head `19dea0bfa59042281b4c7ec1f085aa3e8587e3b8`，随后只更新证据文档，最终 head / CI 见 [PR #110](https://github.com/xuys2025/escape-bincov/pull/110)。投影从实时身体复制精神/水分/饱食三个标量；宿主沿原八帧节奏舍入显示；经典行动为 null，存档、生理规则及事务不变。
 
-`frameView` 从实时 `Runtime.layered.body` 复制三个数到只读 `HudView.needs`，宿主按原每八帧节奏舍入显示；不共享可变身体，不读取最近检查点，经典旧行动为 null。规则、存档及事务不变。新增单测旧代码 3/3 失败、修复后 3/3 通过；完整单测877/877、工程守卫64/64、正式package和两尺寸HUD读数通过。完整qol在原容器关闭处按钮detach超时，通用browser中断，UI/完整default未运行，准确head CI另核。两尺寸基线负对照均有效失败（elapsed=0、保存值未变、旧HUD100/100/100而实时值不同），前后原始读数和后续套件失败保存在[对照记录](docs/tasks/audit-contracts/live-needs/report.json)；普通暂停后的实时身体夹具用于避免慢渲染跨 autosave，自然衰减和无写入另由单测验证。没有真机或真人验收，不合并发布；#60 其余事项继续开放。
-
+本轮 1025 单测、77 工程守卫、正式打包、完整 QoL 5/5、默认行动 11/11 首次通过。新 main 两尺寸负对照有效失败、修复后实时/帧/DOM 一致，保存值未变；已亲看双尺寸截图，原始失败和本轮结果留在同一[摘要](docs/tasks/audit-contracts.md#精神水分饱食-hud-的实时投影)/[报告](docs/tasks/audit-contracts/live-needs/report.json)，不拿旧 CI 代替新 head。没有真机、真人或性能签收，#60 其余范围继续开放；等待准确 head CI 与维护者审阅，不自行合并发布。
 
 ## 2026-10-28 室内墙体与视野设计（功能未实施）
 
