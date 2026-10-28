@@ -1,10 +1,10 @@
-## 2026-10-28 室内墙体与视野：第一阶段（居民楼）
+## 2026-10-28 室内墙体与视野：居民楼与商场
 
-承接 [PR #135](https://github.com/xuys2025/escape-bincov/pull/135)，分支 `feat/indoor-wall-visibility`，基于 [PR #133](https://github.com/xuys2025/escape-bincov/pull/133) 的方案（其 head `6147282` 已含 main `3b61d52`）。维护者同意方案后要求合并 #133 并另开 PR 开始实现；#133 的冲突（任务清单、handoff 两处都保留）经维护者同意推到原 fork 分支，合并由维护者在 GitHub 上操作。
+承接 [PR #135](https://github.com/xuys2025/escape-bincov/pull/135)，分支 `feat/indoor-wall-visibility`，实现 [PR #133](https://github.com/xuys2025/escape-bincov/pull/133) 的方案。维护者同意方案后要求合并 #133 并另开 PR 开始实现；#133 的冲突（任务清单、handoff 两处都保留）经维护者同意推到原 fork 分支。之后维护者要求开自动合并：#133 落后 main 一个提交，经维护者同意用 GitHub 的更新分支合入 main，检查通过后自动合并为 `03ea261`；本分支随后合入该 main。
 
-已实施：居民楼一楼、二楼、地下的墙按[方案](docs/INDOOR-WALL-VISIBILITY-PLAN.md)五项规则显示，实施时定下的细节和验证记在方案的[实施进度](docs/INDOOR-WALL-VISIBILITY-PLAN.md#6-实施进度)。只改显示，存档、地图、碰撞、子弹和房间揭示都不变。
+已实施：第一阶段居民楼一楼、二楼、地下，第二阶段商场两层（新旧布局和程序绘制后备）。墙按[方案](docs/INDOOR-WALL-VISIBILITY-PLAN.md)五项规则显示，商场原来的房间剖切已删除；实施时定下的细节、分类结果和验证记在方案的[实施进度](docs/INDOOR-WALL-VISIBILITY-PLAN.md#6-实施进度)。只改显示，存档、地图、碰撞、子弹和房间揭示都不变。
 
-未做：商场楼层（第二阶段，含程序绘制后备与 `test:mall-sample` 旧剖切断言的更新）；维护者试玩；真机。准确 head、CI 与已跑检查见 PR。
+未做：维护者试玩；真机。准确 head、CI 与已跑检查见 PR。
 
 ## 2026-10-28 室内墙体与视野设计（功能未实施）
 
