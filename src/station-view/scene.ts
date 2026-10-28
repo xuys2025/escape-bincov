@@ -9,7 +9,7 @@ import { paintCanopy, paintMast, paintRoof } from './art/roofs';
 import { paintWall } from './art/walls';
 import { Lighting, MOODS, type Power } from './lighting';
 import { canvas, rim } from './paint';
-import { releaseManagedSlots } from '../coast-view/renderer-lifetime';
+import { releaseManagedSlots } from '../view-lifecycle/renderer-lifetime';
 import { emitOf, npcFrame, pick, type StationArt } from './art/station';
 
 export type Facility = 'rest' | 'medical' | 'training' | 'workbench' | 'blackmarket';
