@@ -4,6 +4,7 @@
 
 | 目标 | 承接入口 | 接手提示 |
 | --- | --- | --- |
+| 公共视图生命周期归位（Q-E02） | [#60 接手边界](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459328969) · [实施与验证](tasks/quality-entropy.md#q-e02-公共视图生命周期归位) | `codex/shared-view-lifecycle`，起点 main `0f73a67`：Scope/唯一计数与页面级 Pixi 工具归位到 `view-lifecycle`，保持注册顺序、释放与恢复；与 #134 工具包独立，SAMPLE_AREA 身份继续候选。准确 head、验证和 CI 见承接 PR |
 | 水产站玩家空手手臂与手（F16） | [#26 F16 核查](https://github.com/xuys2025/escape-bincov/issues/26#issuecomment-6446761015) · [PR #131](https://github.com/xuys2025/escape-bincov/pull/131) · [实现与验证](tasks/station-player-hands/README.md) | `codex/f16-station-hands`：仅在站内为共用身体补前臂、手套及步行动作，八方向五帧沿用原缓存、描边、光照与遮挡。原行动素材和存档不变；H15 在旧构建失败、修复后两尺寸通过；完整站内 78/79，I3 在原 main 也超时；准确 head、CI 与剩余验收见原 PR |
 | 行动背包有限服务（Q-E02 B） | [#60](https://github.com/xuys2025/escape-bincov/issues/60) · `refactor/raid-inventory-services` · [实现与验证](tasks/quality-entropy.md#q-e02-b-行动背包有限服务) | 同一交付完成三有限命令与 detached 窄读投影，面板不再持有 Session/SaveSession；原 mutate/loot 事务、快捷规则和经典兼容保持。Scope/renderer 工具不在本轮范围，#60 总单继续开放 |
 | 按风险选检查与诊断分类 | [#60 Q-E08](https://github.com/xuys2025/escape-bincov/issues/60) · [使用入口](CHECKS.md) · [交付记录](tasks/check-navigation.md) | 已合入（[PR #93](https://github.com/xuys2025/escape-bincov/pull/93)，`98c69b4`）：风险组合列出命令与前置，完整脚本用途盘点、两个堆报告目录分离。#32 F20 仍 PARTIAL；[PR #114](https://github.com/xuys2025/escape-bincov/pull/114)（`ci/resource-helper-tests`）将已核实的两份纯 Node 测试（4 项）接入 `check:ci`，其余 54 个旧工具继续 review，不自动执行或删除；四项通过不代表资源签收 |

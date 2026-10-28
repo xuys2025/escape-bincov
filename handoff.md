@@ -1,3 +1,7 @@
+## 2026-10-28 Q-E02：公共视图生命周期归位
+
+分支 `codex/shared-view-lifecycle`，起点 main `0f73a67386bac196b87c983668295be6d1a99f1e`。将场景无关 `Scope`/唯一 `lifecycle` 和页面级 Pixi 注册/缓存归位到 `src/view-lifecycle/`，保持直接导入和初始化顺序；原生产/测试引用同步，现役脚本不引用旧路径。职责入口见 [CODEMAP](docs/CODEMAP.md)，决定、首败与验证见[原质量摘要](docs/tasks/quality-entropy.md#q-e02-公共视图生命周期归位)。SAMPLE_AREA/raid-areas 身份、Q-E04 和其他在途 PR 均不在本交付。准确 head、CI 与剩余交接随后维护在承接 PR；未合并/发布。
+
 ## 2026-10-28 #47 M2：家具与地面素材接进布置表（PR #130，`agent/mall-m2-sprites`）
 
 维护者 10-27 说“接着做 #47 M2，把已有的家具和地面素材接进布置表”。基线 main `98968e1`（含 #127、#128、#115、#129、#108、#112），独立工作树开发，不碰 C:\bincov 里其他会话的分支。

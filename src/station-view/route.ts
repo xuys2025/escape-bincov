@@ -11,7 +11,7 @@ import { navigation } from '../navigation';
 import { gpuTextures, managedSlots, parkApp, takeApp } from '../pixi-app';
 import { raidWorlds, sampleMallLayout, sampleMode, villageSeed } from '../raid-areas';
 import { toast } from '../toast';
-import { lifecycle } from '../coast-view/scope';
+import { lifecycle } from '../view-lifecycle/scope';
 import type { HideoutSnapshot, RunWorld } from '../hideout-runtime/contract';
 import type { StationHost } from './host';
 

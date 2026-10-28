@@ -231,3 +231,19 @@ CI 自测失败的 1 项是 `policy.test.mjs:199` 写死 `C:/Program Files/Git/b
 
 - **F20 仍是 PARTIAL**，归 #32。诊断能进入流程，不等于 F20 总堆通过；本次只跑了默认 20 轮，没有跑严格 60 轮。`HTMLCanvasElement` 7→8 是间歇出现的，两个堆诊断都会遇到（7 次里 4 次），原因未归因，交 F20 调查；本 PR 不改断言和判定条件。
 - 两个堆诊断工作负载相同，默认输出目录都是 `test-results/coast-sample/heap`，后跑的覆盖先跑的；两者是否合并、`sol-r6-audio-controls` 是否保留（它对同一份源码也会越过 ±20% 门槛），归 Q-E08。全部脚本的用途分类也仍归 Q-E08。
+
+## Q-E02 公共视图生命周期归位
+
+2026-10-28，分支 `codex/shared-view-lifecycle`，起点已接受 main `0f73a67386bac196b87c983668295be6d1a99f1e`；[接手范围](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459328969)。这是 #115 背包有限服务之外、#134 架构工具之外的独立生命周期交付；SAMPLE_AREA/raid-areas 内容身份仍留 #60 候选，存档、规则、画面与素材没有改动。
+
+- `view-lifecycle/scope.ts` 统一拥有原 `Scope` 与 `lifecycle` 对象；院子、行动和 `pixi-app.ts` 的所有引用直接指向这一模块。没有兼容转发或第二份计数。
+- `view-lifecycle/renderer-lifetime.ts` 保持原页面级 Pixi 程序、着色器缓存和注册副作用；`pixi-app.ts` 仍在初始化前显式导入，两个场景从同一模块取 `releaseManagedSlots`。无 barrel，DOM 作用域不间接引入 Pixi 注册。
+- 全部生产和单测引用已迁移；现役脚本没有引用旧路径，页面池探针仍在 `pixi-app.ts`。源码旁保留释放/上下文恢复细节，导航只定位所有者与检查入口。
+
+本地 Windows / Node 24.22.1 / pnpm 11.19.0 / Chrome 156.0.8078.49：全量单测 1022/1022、工程守卫 77/77、严格 `pnpm package` 通过；`test:coast-render-targets` 5/5 通过，包含真实恢复、像素、键盘和结算后院子↔行动重挂。以 Git 原源码和相同构建配置作内存 bundle 对照，正式 HTML 逐字节相同（SHA-256 `f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb`）。
+
+待 review 的旧 `coast-lifecycle-test.mjs` 本轮 1/5：显式 test=1 的 Runtime 冻结/恢复/释放通过；其余 4 项在普通入口等待旧院子出击按钮超时，未进入故障注入边界，保留失败，未改断言。后续补基线对照、两尺寸程序恢复及原生能力专项；准确 head CI 待提交。
+
+首次 `pnpm test` 因 pnpm 自动安装试图重建共享 node_modules junction，在运行测试前以 `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY` 停止。改用现有已装依赖并显式设置 `pnpm_config_verify_deps_before_run=false`，没有允许删除共享目录或改锁文件。
+
+没有真机、真人观感或 F20 新签收；本阶段未合并/发布，#60 其他候选与在途 PR 保持原归属。

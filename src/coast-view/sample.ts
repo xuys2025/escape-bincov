@@ -16,7 +16,7 @@ import { exportSave } from '../save-export';
 import { toast } from '../toast';
 import { CoastSampleHost } from './host';
 import { CoastView, type ViewOptions } from './scene';
-import { lifecycle } from './scope';
+import { lifecycle } from '../view-lifecycle/scope';
 import { isMallWorld } from '../mall-world';
 
 // Node tests render the UI without a location: no flags there.
