@@ -120,7 +120,7 @@ export function buildingRunConfig(seed: number | string): RunConfig {
     const finds = D.seededRandom(config.seed + 31991);
     const judge = (entry: { id: string; qty: number }, risky: boolean) => {
         const found = D.gunsmithFind(entry.id, finds, { risky, gun: true });
-        if (found) { entry.id = found; entry.qty = 1; }
+        if (found) { entry.id = found; entry.qty = D.findQuantity(found); }
     };
     const flooded = (p: Point) => WORLD.tiles[Math.floor(p.y / TILE)][Math.floor(p.x / TILE)] === 4;
     for (const entry of config.loot) judge(entry, flooded(entry));

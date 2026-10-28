@@ -146,6 +146,41 @@ const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, descrip
   F07: ['重握把', '持续射击控制最强。很重，举枪慢。'],
   T02: ['轻激光', '近距离腰射更集中，很轻。作用距离较短；开启时增加被正面敌人发现的风险。'],
   T10: ['远组合', '远距激光加窄光束照明。最重，举枪较慢；开启时同样会暴露自己。'],
+  // #28 M3-06: the rest of wave two.
+  O02: ['稳点瞄', '手枪精瞄更稳。比微型点瞄重，举枪稍慢。'],
+  O04: ['封红点', '精瞄稳定，连续点射后恢复更快。较重。'],
+  O06: ['中棱镜', '中距离观察，精瞄适度稳定。观察距离不如远距镜。'],
+  O07: ['中远镜', '中远距精瞄更稳。举枪较慢，近距转换慢于中距棱镜。'],
+  O09: ['稳远镜', '最远的观察，首发最稳。很重，近距操控最差。'],
+  O11: ['远双档', '两档远距观察，精瞄稳定。更重，举枪慢。'],
+  O12: ['机瞄', '轻、举枪快，保留基础瞄准。没有额外观察距离。'],
+  M04: ['重消音', '降低枪声吸引范围。较重、枪身变长；装在 M1911 上要先装重型手枪接口组。'],
+  M08: ['精消音', '远距射击的枪声吸引范围大幅降低。明显增重，枪身变长。'],
+  M09: ['精制退', '两次射击之间恢复更快，后坐更小。枪声吸引范围增加。'],
+  M12: ['轻消音', '降低枪声吸引范围。价格高，枪身变长。'],
+  B02: ['接口组', '提供重弹消音器接口，首发更稳。重量增加。'],
+  B04: ['稳枪管', '中距点射更稳。重量和举枪时间增加。'],
+  B10: ['轻枪管', '减轻重量，举枪更快。极远距稳定性下降。'],
+  H10: ['支援护木', '提供 1 个下导轨、2 个侧位，持续射击更稳。明显增重。'],
+  S06: ['轻型托', '减轻重量，举枪更快。连续控制收益小。'],
+  S09: ['支撑托', '站定精瞄更稳。移动后恢复更慢。'],
+  S10: ['轻便托', '减轻重量，较快进入精瞄。稳定收益小。'],
+  P05: ['操控握', '移动结束后更快稳定。价格较高。'],
+  P08: ['轻握片', '减轻重量，举枪更快。不增加弹量或威力。'],
+  F02: ['长前握', '连续射击控制更强。举枪慢。'],
+  F05: ['紧前握', '控制和重量折中。价格高于短前握。'],
+  F06: ['腰射握', '腰射散布更小。精瞄收益小。'],
+  F08: ['脚架', '站定后远距首发更准、恢复更快。一走动就失去收益，增重。'],
+  G02: ['加长匣', '容量提高到 10 发。换弹变慢。'],
+  G04: ['扩容匣', '容量提高到 35 发。重量和换弹时间增加。'],
+  G05: ['轻便匣', '容量 30 发，更轻、换弹更快。原厂大容量的优势没了。'],
+  G11: ['扩容匣', '容量提高到 25 发。重量和换弹时间增加。'],
+  G12: ['轻匣', '容量 30 发，更轻、换弹更快。长时间压制能力下降。'],
+  T03: ['指示器', '较远距离的腰射更集中。较重，举枪稍慢；开启时增加被正面敌人发现的风险。'],
+  T06: ['窄光灯', '较远、较窄的物资轮廓提示。近处覆盖窄，增重；照亮范围也会暴露自己。'],
+  T07: ['工作灯', '轻、便宜的近距物资提示。提示距离和宽度较小；照亮范围也会暴露自己。'],
+  T09: ['组合器', '激光加中等照明。增重；开启时同样会暴露自己。'],
+  A03: ['微基座', '开放微型瞄具位，能装点瞄。自身不提供射击增益，增重。'],
 };
 const attachmentItem = (id: string, [short, description]: readonly [string, string]): ItemDef => {
   const a = ATTACHMENTS[id];
@@ -160,6 +195,10 @@ export const ITEMS: Record<string, ItemDef> = {
   ammo9: item('ammo9', '9 毫米弹', '9mm', 1, 1, 0.012, 40, 7, 3, 'ammo', '旧式手枪用弹药。商店按包出售，背包数量按发计算。', 0xcba96c),
   shell: item('shell', '霰弹', '霰弹', 1, 1, 0.045, 20, 16, 7, 'ammo', '双管霰弹枪用弹药。', 0xc76650),
   ammoR: item('ammoR', '卡宾枪弹', '卡宾弹', 1, 1, 0.022, 30, 12, 5, 'ammo', '半自动卡宾枪用弹药。', 0xcbbd88),
+  // #28 M3-05: the three ammunition groups of wave two (PLAN section 4). Packs, prices and weights are proposals.
+  ammo45: item('ammo45', '重型手枪弹', '重手弹', 1, 1, 0.016, 30, 9, 4, 'ammo', 'M1911、UMP45 用弹药。商店按包出售，背包数量按发计算。', 0xc49a62),
+  ammoPDW: item('ammoPDW', '轻型高速弹', '高速弹', 1, 1, 0.009, 50, 10, 4, 'ammo', 'P90 用弹药。商店按包出售，背包数量按发计算。', 0xb9c48a),
+  ammoHeavy: item('ammoHeavy', '精确步枪弹', '精确弹', 1, 1, 0.03, 20, 24, 10, 'ammo', 'SVD、M14、M700 用弹药。商店按包出售，背包数量按发计算。', 0xd0b070),
   bandage: item('bandage', '密封绷带', '绷带', 1, 1, 0.12, 4, 45, 18, 'medical', '止血，恢复 16 点生命。', 0xdad9bd),
   medkit: item('medkit', '急救包', '急救包', 2, 1, 0.65, 2, 160, 65, 'medical', '恢复 55 点生命并止血。', 0xc96959),
   antidote: item('antidote', '除藻药剂', '除藻剂', 1, 1, 0.2, 3, 120, 50, 'medical', '降低 55 点污染。', 0x8bb4a0),
@@ -195,6 +234,15 @@ export const ITEMS: Record<string, ItemDef> = {
   akb103: gunItem('akb103', 'AK-103', '使用卡宾枪弹，弹匣容量 30 发，全自动。单发伤害更高、后坐更重；配件和 AK-74 通用，另能装重弹鼓。', 0x6d726c),
   // #28 M3-05, early: wave two's P0 gun (2026-10-28), on an existing ammunition group.
   augb: gunItem('augb', 'AUG', '使用卡宾枪弹，弹匣容量 30 发，全自动。无托结构，枪身短、占 3 格，转向快；换弹慢。机身自带顶部、下方和侧面导轨，枪口件和弹匣能换。', 0x76805e),
+  // #28 M3-05: the rest of wave two. The M1911, UMP45 and P90 bring the heavy pistol and light high-speed rounds, the
+  // SVD, M14 and M700 the precision rifle rounds; the RPK fires the carbine rounds and shares the AKs' parts.
+  mb1911: gunItem('mb1911', 'M1911', '使用重型手枪弹，弹匣容量 7 发。单发威力大、后坐重，弹量少；装上基座能用微型瞄具，也能换枪管、握片、弹匣、枪口件和手枪侧挂设备。', 0x8e8a80),
+  umpb45: gunItem('umpb45', 'UMP45', '使用重型手枪弹，弹匣容量 25 发，全自动。射速较慢、单发较重；枪管、枪托、握把和弹匣都能更换，机身自带顶部、下方和侧面导轨。', 0x6c716c),
+  pb90: gunItem('pb90', 'P90', '使用轻型高速弹，弹匣容量 50 发，全自动。紧凑、弹量大，单发伤害低，弹药少见；机身自带顶部和侧面导轨，能换枪口件和弹匣。', 0x75796a),
+  svdb: gunItem('svdb', 'SVD', '使用精确步枪弹，弹匣容量 10 发，半自动。远距首发准、伤害高，腰射差、举枪慢；能装顶部瞄具（含远距镜）、枪口件和支撑脚架。', 0x8a6a4a),
+  mb14: gunItem('mb14', 'M14', '使用精确步枪弹，弹匣容量 20 发，半自动。中远距点射，后坐重、枪身重；枪托和弹匣能换，能装顶部瞄具（含远距镜）、枪口件和支撑脚架。', 0x94704c),
+  mb700: gunItem('mb700', 'M700', '使用精确步枪弹，内置弹仓 5 发，栓动。单发伤害和精度最高，每发之间要拉栓；枪管、枪托能换，能装顶部瞄具（含远距镜）、枪口件和支撑脚架。', 0x7a6a56),
+  rpkb: gunItem('rpkb', 'RPK', '使用卡宾枪弹，弹匣容量 40 发，全自动。能持续压制，很重、换弹慢；护木、枪托、握把和弹匣都能更换，和 AK 共用侧置基座和枪口件，能装支撑脚架。', 0x8f7352),
   ...Object.fromEntries(Object.entries(ATTACHMENT_ITEMS).map(([id, text]) => [id, attachmentItem(id, text)])),
 };
 
@@ -215,6 +263,13 @@ export const WEAPONS: Record<string, WeaponDef> = {
   akb74: { ...GUNS.akb74.stats },
   akb103: { ...GUNS.akb103.stats },
   augb: { ...GUNS.augb.stats },
+  mb1911: { ...GUNS.mb1911.stats },
+  umpb45: { ...GUNS.umpb45.stats },
+  pb90: { ...GUNS.pb90.stats },
+  svdb: { ...GUNS.svdb.stats },
+  mb14: { ...GUNS.mb14.stats },
+  mb700: { ...GUNS.mb700.stats },
+  rpkb: { ...GUNS.rpkb.stats },
 };
 export const ENEMIES: Record<string, EnemyDef> = {
   scav: { id: 'scav', name: '拾荒者', hp: 56, speed: 69, damage: 11, range: 30, vision: 220, cooldown: 0.9, color: 0xab9370 },
@@ -244,6 +299,8 @@ const SHELF_COMMON = ['O01', 'G01'];
  * gunsmith guns are found only; what the shop sells is to be studied (M4-01).
  */
 const SHELF_GUNS = ['pb226', 'mb870'];
+/** Wave two's rounds (#28 M3-05): stocked steadily like the old three, so a found gun of a new group can be fed. */
+const NEW_AMMO = ['ammo45', 'ammoPDW', 'ammoHeavy'];
 /**
  * Fixed stock, no rotation (that is #28 M4-01). The arms counter also stocks the G17, every basic-tier attachment that
  * is an item (#28 M2-13, PLAN section 10: basic parts are stocked steadily) and SHELF_COMMON, after the old goods so their places
@@ -252,7 +309,7 @@ const SHELF_GUNS = ['pb226', 'mb870'];
  */
 export const MERCHANTS: Record<'arms' | 'med', { name: string; subtitle: string; stock: string[] }> = {
   arms: { name: '老栓', subtitle: '武器 · 零件', stock: ['pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'scrap', 'wire', 'fuse', 'battery',
-    'gb17', ...SHELF_GUNS, ...partsOf('basic'), ...SHELF_COMMON] },
+    'gb17', ...SHELF_GUNS, ...NEW_AMMO, ...partsOf('basic'), ...SHELF_COMMON] },
   med: { name: '许医生', subtitle: '医疗用品 · 食品', stock: ['bandage', 'medkit', 'antidote', 'water', 'food'] },
 };
 export const QUESTS: Record<string, { name: string; description: string; needs: Record<string, number>; reward: number; radio: string }> = {
@@ -590,7 +647,8 @@ function cleanSave(raw: Record<string, any>, guns: boolean): SaveDataV1 | Profil
   if (guns && validPresets(raw.gunPresets) && raw.gunPresets.length) (save as SaveDataV1).gunPresets = structuredClone(raw.gunPresets);
   if (Array.isArray(raw.reliefSupplies)) {
     const pending = raw.reliefSupplies.filter(isObject);
-    const supplies = ['ammo9', 'bandage'].map(id => ({ id, qty: Math.min(id === 'ammo9' ? 12 : 1, pending.reduce((sum, entry) => sum + (entry.id === id ? integer(entry.qty) : 0), 0)) })).filter(entry => entry.qty > 0);
+    // A relief pack of any ammunition group (#28 M3-05; 12 for 9mm as before) and one bandage, in that order.
+    const supplies = [...AMMO_IDS, 'bandage'].map(id => ({ id, qty: Math.min(id === 'bandage' ? 1 : buyQuantity(id), pending.reduce((sum, entry) => sum + (entry.id === id ? integer(entry.qty) : 0), 0)) })).filter(entry => entry.qty > 0);
     if (supplies.length) save.reliefSupplies = supplies;
   }
   if (isObject(raw.lastResult) && ['extract', 'death', 'timeout'].includes(raw.lastResult.outcome)) {
@@ -689,11 +747,11 @@ const ownedGuns = (save: SaveDataV1): { id: string; relief: boolean }[] => [
   ...(isGun(save.equipment.weapon) ? [{ id: save.equipment.weapon, relief: save.equipment.relief }] : []),
   ...[save.stash, save.bag, save.safe].flatMap(inv => inv.items.filter(i => isGun(i.id)).map(i => ({ id: i.id, relief: !!i.relief }))),
 ];
-/** 9mm rounds anywhere: stored (relief or not), loaded in an equipped 9mm gun, or waiting as relief. */
-const ammo9Anywhere = (save: SaveDataV1): number =>
-  [save.stash, save.bag, save.safe].reduce((sum, inv) => sum + count(inv, 'ammo9'), 0)
-  + (isGun(save.equipment.weapon) && WEAPONS[save.equipment.weapon].ammo === 'ammo9' ? save.equipment.ammo : 0)
-  + (save.reliefSupplies ?? []).reduce((sum, supply) => sum + (supply.id === 'ammo9' ? supply.qty : 0), 0);
+/** Rounds of `ammo` anywhere: stored (relief or not), loaded in the equipped gun if it fires them, or waiting as relief. */
+const roundsAnywhere = (save: SaveDataV1, ammo: string): number =>
+  [save.stash, save.bag, save.safe].reduce((sum, inv) => sum + count(inv, ammo), 0)
+  + (isGun(save.equipment.weapon) && WEAPONS[save.equipment.weapon].ammo === ammo ? save.equipment.ammo : 0)
+  + (save.reliefSupplies ?? []).reduce((sum, supply) => sum + (supply.id === ammo ? supply.qty : 0), 0);
 export function grantRelief(save: SaveDataV1): boolean {
   if (save.activeRun) return false;
   let changed = false;
@@ -705,13 +763,14 @@ export function grantRelief(save: SaveDataV1): boolean {
     if (!save.reliefSupplies?.length) save.reliefSupplies = [{ id: 'ammo9', qty: 12 }, { id: 'bandage', qty: 1 }];
     changed = true;
   }
-  // Rule B: only relief guns (rule A may have just issued one), no 9mm anywhere and not enough
-  // to buy one pack. Queue the 12 relief rounds a fresh kit carries. Nothing for ammo9 is pending
-  // here, so the merged entry is exactly 12, the migrateSave cap; delivery below is unchanged.
+  // Rule B, by ammunition group (#28 M3-05): only relief guns (rule A may have just issued one), and for a group they
+  // fire no round anywhere and not enough to buy one pack of it. Queue one pack of that group (12 for 9mm, what a fresh
+  // kit carries). Nothing for the group is pending here, so the entry is exactly the migrateSave cap; delivery below
+  // is unchanged. Relief guns are pistols today, so this is the 9mm rule; the groups are read from the guns.
   const guns = ownedGuns(save);
-  if (guns.length && guns.every(gun => gun.relief) && guns.some(gun => WEAPONS[gun.id].ammo === 'ammo9')
-    && !ammo9Anywhere(save) && liquidValue(save) < buyQuantity('ammo9') * ITEMS.ammo9.buy) {
-    save.reliefSupplies = [{ id: 'ammo9', qty: 12 }, ...(save.reliefSupplies ?? []).filter(supply => supply.id !== 'ammo9')];
+  if (guns.length && guns.every(gun => gun.relief)) for (const ammo of new Set(guns.map(gun => WEAPONS[gun.id].ammo!))) {
+    if (roundsAnywhere(save, ammo) || liquidValue(save) >= buyQuantity(ammo) * ITEMS[ammo].buy) continue;
+    save.reliefSupplies = [{ id: ammo, qty: buyQuantity(ammo) }, ...(save.reliefSupplies ?? []).filter(supply => supply.id !== ammo)];
     changed = true;
   }
   for (const supply of save.reliefSupplies ?? []) {
@@ -725,7 +784,11 @@ export function grantRelief(save: SaveDataV1): boolean {
   return changed;
 }
 /** Purchases enter the stash. Ammo is bought in packs; prices are still per round. */
-export function buyQuantity(id: string): number { return id === 'ammo9' ? 12 : id === 'shell' ? 4 : id === 'ammoR' ? 10 : 1; }
+export function buyQuantity(id: string): number { return Object.hasOwn(AMMO_PACKS, id) ? AMMO_PACKS[id] : 1; }
+/** Rounds per pack, by ammunition group (wave two's are #28 M3-05 proposals). */
+const AMMO_PACKS: Readonly<Record<string, number>> = { ammo9: 12, shell: 4, ammoR: 10, ammo45: 10, ammoPDW: 20, ammoHeavy: 5 };
+/** The ammunition items, in item order. */
+export const AMMO_IDS: readonly string[] = Object.keys(ITEMS).filter(id => ITEMS[id].kind === 'ammo');
 /**
  * The equipped gun as the item it becomes when it leaves the slot: the same uid, state and body relief flag, so it
  * comes back as the gun it is. Null without a gun.
@@ -869,9 +932,10 @@ export function rollLoot(seed: number, amount: number, table: LootTable = LOOT_T
  * holds too few gun records to carry them). Any other find is an attachment, rare with chance `rare` at a high-risk
  * source (a flooded cache, an elite's corpse), common otherwise. Basic parts are the shop's (MERCHANTS). Proposals,
  * tuned in M4-02; #28 M3 lowered `rare` from 1/3 so that each of the five rare parts stays rarer than each of the 39
- * common ones.
+ * common ones. #28 M3-05: a gun record's find that is not a gun is, with chance `ammo`, one pack of a wave-two
+ * ammunition group (findQuantity), so a found gun of a new group can be fed in the raid; the old groups' supply stays.
  */
-export const GUNSMITH_FINDS = { share: 1 / 6, gun: 1 / 4, rareGun: 1 / 8, rare: 1 / 6 } as const;
+export const GUNSMITH_FINDS = { share: 1 / 6, gun: 1 / 4, rareGun: 1 / 8, rare: 1 / 6, ammo: 1 / 3 } as const;
 const FIND_PARTS = { common: partsOf('common').filter(id => !SHELF_COMMON.includes(id)), rare: partsOf('rare') };
 /** The guns that are found, by the catalog's tier (#28 M3): every gun that is an item but those the arms counter stocks. */
 const FIND_GUNS = (() => {
@@ -886,10 +950,14 @@ const FIND_GUNS = (() => {
 export function gunsmithFind(id: string, random: () => number, source: { risky: boolean; gun: boolean }): string | null {
   const carved = isGun(id) || Object.hasOwn(ITEMS, id) && ITEMS[id].kind === 'valuable';
   if (!carved || random() >= GUNSMITH_FINDS.share) return null;
-  const pool = source.gun && isGun(id) && random() < GUNSMITH_FINDS.gun ? FIND_GUNS[random() < GUNSMITH_FINDS.rareGun ? 'rare' : 'common']
-    : FIND_PARTS[source.risky && random() < GUNSMITH_FINDS.rare ? 'rare' : 'common'];
+  const gunRecord = source.gun && isGun(id);
+  const pool = gunRecord && random() < GUNSMITH_FINDS.gun ? FIND_GUNS[random() < GUNSMITH_FINDS.rareGun ? 'rare' : 'common']
+    : gunRecord && random() < GUNSMITH_FINDS.ammo ? NEW_AMMO
+      : FIND_PARTS[source.risky && random() < GUNSMITH_FINDS.rare ? 'rare' : 'common'];
   return pool[Math.floor(random() * pool.length)];
 }
+/** How many of a find a record or drop holds: one pack of rounds, else one item. */
+export const findQuantity = (id: string): number => ITEMS[id].kind === 'ammo' ? buyQuantity(id) : 1;
 /**
  * A legacy enemy's corpse in a layered raid: the old roll (rollLoot: same seed, table and count), then each gun or
  * valuable drop judged for a gunsmith find on a stream of its own, an elite's corpse being a high-risk source. Enemies
@@ -899,7 +967,7 @@ export function corpseLoot(seed: number, rolls: number, elite: boolean): { id: s
   const drops = rollLoot(seed, rolls), random = seededRandom(seed + 61211);
   for (const drop of drops) {
     const found = gunsmithFind(drop.id, random, { risky: elite, gun: false });
-    if (found) { drop.id = found; drop.qty = 1; }
+    if (found) { drop.id = found; drop.qty = findQuantity(found); }
   }
   return drops;
 }

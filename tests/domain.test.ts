@@ -17,15 +17,19 @@ test('20 original items, 10 production/RPG items and the gunsmith items have coh
   const original = ['knife', 'pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'bandage', 'medkit', 'antidote', 'water', 'food', 'scrap', 'wire', 'fuse', 'battery', 'watch', 'pearl', 'sample', 'ledger'];
   const production = ['cloth', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckyCharm', 'unluckyCharm', 'luckySachet', 'unluckySachet'];
   // #28 M2-01 and M2-02: G17, M4A1 and the 20 sample attachments; M3-01 and M3-02: the wave-one seven guns and forty parts;
-  // wave two's P0, early: the AUG and six parts (tests/gunsmith-items.test.ts ties them to the catalog).
+  // wave two's P0, early: the AUG and six parts; M3-05 and M3-06: the other seven guns, their three ammunition groups
+  // and the other 34 parts (tests/gunsmith-items.test.ts ties them to the catalog).
   const gunsmith = ['gb17', 'mb4a1', 'O01', 'O03', 'O08', 'M03', 'M06', 'B01', 'B08', 'H01', 'H05', 'S01', 'S02', 'P01', 'P02', 'F01', 'F03', 'G01', 'G10', 'T01', 'T05', 'A07',
     'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103',
     'A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'B03', 'B05', 'B06', 'B07', 'B09', 'H02', 'H03', 'H04', 'H06', 'H07', 'H08', 'H09', 'S03', 'S04', 'S05', 'S07', 'S08',
     'P03', 'P04', 'P06', 'P07', 'G03', 'G06', 'G07', 'G08', 'G09', 'M01', 'M02', 'M05', 'M07', 'M10', 'M11', 'T04', 'T08',
-    'augb', 'O05', 'O10', 'F04', 'F07', 'T02', 'T10'];
-  assert.equal(original.length, 20); assert.equal(production.length, 10); assert.equal(gunsmith.length, 76);
+    'augb', 'O05', 'O10', 'F04', 'F07', 'T02', 'T10',
+    'mb1911', 'umpb45', 'pb90', 'svdb', 'mb14', 'mb700', 'rpkb', 'ammo45', 'ammoPDW', 'ammoHeavy',
+    'O02', 'O04', 'O06', 'O07', 'O09', 'O11', 'O12', 'M04', 'M08', 'M09', 'M12', 'B02', 'B04', 'B10', 'H10', 'S06', 'S09', 'S10', 'P05', 'P08',
+    'F02', 'F05', 'F06', 'F08', 'G02', 'G04', 'G05', 'G11', 'G12', 'T03', 'T06', 'T07', 'T09', 'A03'];
+  assert.equal(original.length, 20); assert.equal(production.length, 10); assert.equal(gunsmith.length, 120);
   assert.deepEqual(new Set(Object.keys(ITEMS)), new Set([...original, ...production, ...gunsmith]));
-  assert.equal(Object.keys(ITEMS).length, 106);
+  assert.equal(Object.keys(ITEMS).length, 150);
   for (const def of Object.values(ITEMS)) {
     assert.ok(def.w > 0 && def.h > 0 && def.stack > 0);
     if (def.buy) assert.ok(def.sell <= def.buy);
@@ -542,6 +546,26 @@ test('S2: a broke player with only a relief pistol and no 9mm anywhere gets 12 r
   reissued.reliefSupplies = [{ id: 'bandage', qty: 1 }];
   assert.equal(grantRelief(reissued), true);
   assert.ok(kitDelivered(reissued));
+});
+
+test('S2 by ammunition group (#28 M3-05): each relief gun is fed one pack of its own rounds', () => {
+  // Relief guns are pistols today; a relief UMP45 (forged) shows the rule reads each gun's group, not 9mm.
+  const ump = brokeSave(0);
+  ump.equipment = { weapon: 'umpb45', weaponUid: 'test-ump', gun: factoryState(), relief: true, ammo: 0, ammoRelief: 0 };
+  addItem(ump.stash, 'ammo9', 10); // other rounds do not feed it, and ¥30 does not buy a ¥90 pack
+  assert.equal(grantRelief(ump), true);
+  assert.equal(count(ump.bag, 'ammo45'), buyQuantity('ammo45'));
+  assert.ok(ump.bag.items.filter(i => i.id === 'ammo45').every(i => i.relief));
+  assert.equal(grantRelief(ump), false, 'once');
+  // A relief pistol and a relief UMP45 with no round of either: a pack of each.
+  const both = brokeSave(0);
+  both.equipment = { weapon: 'pistol', weaponUid: 'test-gun', gun: factoryState(), relief: true, ammo: 0, ammoRelief: 0 };
+  addItem(both.stash, 'umpb45', 1, true);
+  assert.equal(grantRelief(both), true);
+  assert.deepEqual([count(both.bag, 'ammo9'), count(both.bag, 'ammo45')], [12, 10]);
+  // Waiting relief of any group survives the save codec, a pack at most; anything else is dropped.
+  const raw = { ...newSave(), reliefSupplies: [{ id: 'ammo45', qty: 25 }, { id: 'Z99', qty: 4 }, { id: 'ammoHeavy', qty: 3 }, { id: 'bandage', qty: 2 }] };
+  assert.deepEqual(migrateSave(raw).reliefSupplies, [{ id: 'ammo45', qty: 10 }, { id: 'ammoHeavy', qty: 3 }, { id: 'bandage', qty: 1 }]);
 });
 
 test('S2: extracting broke with an empty relief pistol refills it at the hideout, never inside the raid', () => {

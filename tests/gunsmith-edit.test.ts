@@ -5,6 +5,7 @@ import { decodeStoredProfile } from '../src/profile-codec';
 import { SESSION_KEY } from '../src/recovery-store';
 import type { GunEdit } from '../src/hideout-runtime';
 import { locateGun, planGunEdit, type GunEditPlan } from '../src/gunsmith/edit';
+import { ATTACHMENTS } from '../src/gunsmith/catalog';
 import { gunUids, gunWeight, nodesOf, repeatedUids } from '../src/gunsmith/instance';
 import { OFF, gun, hold, node, put, reason, yard } from './fixtures/workbench';
 
@@ -300,11 +301,13 @@ test('the gun must still fit where it lies, and the stash must take what comes o
     assert.equal(refused(planGunEdit(pistol, 'g17', [{ kind: 'remove', uid: 'g01' }]), 'space').reason, '仓库没有空位放卸出的 7 发 9 毫米弹，请先腾出空间。');
 });
 
-test('a part that is not an item yet stays on the gun: it cannot lie loose', () => {
+test('every catalog part is an item since #28 M3-06: a wave-two part comes off and lies loose', () => {
+    // planGunEdit still refuses ('loose') to take off a catalog part that is not an item, for catalog rows to come.
+    assert.ok(Object.keys(ATTACHMENTS).every(id => D.isAttachment(id)));
     const p = base();
-    // F02 is a wave-two part (#28 M3-06): not an item yet.
     hold(p, 'cb', 'carbine', [node('h05', 'H05', 'handguard', [node('f02', 'F02', 'under')])]);
-    assert.equal(refused(planGunEdit(p, 'cb', [{ kind: 'remove', uid: 'f02' }]), 'loose').reason, '长垂直前握把暂时不能拆下。');
+    const plan = planGunEdit(p, 'cb', [{ kind: 'remove', uid: 'f02' }]);
+    assert.ok(plan.ok, 'F02 comes off');
 });
 
 // ---- The hideout Runtime's GunsmithSession -----------------------------------------------------------------------

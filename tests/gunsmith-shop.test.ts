@@ -50,7 +50,7 @@ test('the catalog: by kind, only what fits the base\'s guns, and pages that each
     assert.deepEqual(Shop.browseStock(p, 'arms', true, { kind: 'weapon', fits: false, page: 0 }), ['pistol', 'shotgun', 'carbine', 'gb17', 'pb226', 'mb870']);
     // Fits: the M4A1's and the G17's parts on the shelf (the bases and the AK parts are other guns'), and the rounds they fire.
     const fits = Shop.browseStock(p, 'arms', true, { kind: 'all', fits: true, page: 0 });
-    assert.deepEqual(fits, Shop.merchantStock('arms', true).filter(id => ['ammo9', 'ammoR', 'P01', 'F01', 'P07', 'M01', 'M05', 'F04', 'O01', 'G01'].includes(id)));
+    assert.deepEqual(fits, Shop.merchantStock('arms', true).filter(id => ['ammo9', 'ammoR', 'P01', 'F01', 'P07', 'M01', 'M05', 'F04', 'O12', 'T07', 'O01', 'G01'].includes(id)));
     assert.deepEqual(Shop.stockKinds('arms', true), ['weapon', 'ammo', 'part', 'attachment']);
     assert.deepEqual(Shop.stockKinds('med', true), ['medical', 'food']);
     // Since #28 M3 the arms counter's stock takes two pages (wave one's basic parts); a long list splits in order and each page fits.
@@ -67,7 +67,7 @@ test('the catalog: by kind, only what fits the base\'s guns, and pages that each
     // A page past the end clamps to the last; the cart's catalog is that page.
     const view = Shop.catalogPage(p, 'arms', true, { kind: 'all', fits: false, page: 9 });
     assert.deepEqual([view.page, view.pages], [1, 2]);
-    assert.deepEqual(Shop.createCart(p, 'arms', true, { kind: 'ammo', fits: false, page: 0 }).catalog.items.map(i => i.id), ['ammo9', 'shell', 'ammoR']);
+    assert.deepEqual(Shop.createCart(p, 'arms', true, { kind: 'ammo', fits: false, page: 0 }).catalog.items.map(i => i.id), ['ammo9', 'shell', 'ammoR', 'ammo45', 'ammoPDW', 'ammoHeavy']);
 });
 
 test('the buy and sell lists hold the largest legal gun that is an item, with the item parts that make it largest', () => {

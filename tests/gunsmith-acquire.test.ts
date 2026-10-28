@@ -21,16 +21,21 @@ import { TILE, WORLD, type RunConfig } from '../src/world';
 // #28 M2-13 (docs/gunsmith/CONTRACTS.md, 样板获取路径): the shop stocks the G17, the basic parts and (M2 review
 // 2026-10-27) O01 and G01; the other gunsmith guns and the other common and the rare parts are found, carved out of the
 // gun and valuable shares of the loot only. #28 M3 added wave one's seven guns (found, rare ones at high-risk spots)
-// and forty parts (the basic ones on the shelf), then wave two's P0: the AUG (found) and six parts (F04 on the shelf).
+// and forty parts (the basic ones on the shelf), then wave two's P0: the AUG (found) and six parts (F04 on the shelf),
+// and M3-05/06 the other seven guns (found), their three ammunition groups (on the shelf, and carved from gun records)
+// and the other 34 parts.
 
 const PARTS = Object.keys(D.ITEMS).filter(id => D.isAttachment(id));
-const BASIC = ['P01', 'F01', 'A07', 'A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'H03', 'P04', 'P07', 'M01', 'M05', 'F04'];
-const RARE = ['O08', 'M03', 'B08', 'G09', 'M07', 'O10', 'T10'], SHELF_COMMON = ['O01', 'G01'];
+const BASIC = ['P01', 'F01', 'A07', 'A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'H03', 'P04', 'P07', 'M01', 'M05', 'F04', 'O12', 'P08', 'G02', 'T07', 'A03'];
+const RARE = ['O08', 'M03', 'B08', 'G09', 'M07', 'O10', 'T10', 'O09', 'O11', 'M04', 'M08', 'M12', 'B10', 'T03', 'T09'], SHELF_COMMON = ['O01', 'G01'];
+/** Wave two's rounds (#28 M3-05): on the shelf, and one pack now and then out of a gun record. */
+const NEW_AMMO = ['ammo45', 'ammoPDW', 'ammoHeavy'];
 /** The common parts that are found: the shelf's two are not. */
 const COMMON = PARTS.filter(id => !BASIC.includes(id) && !RARE.includes(id) && !SHELF_COMMON.includes(id));
 /** The found guns by the catalog's tier: every gunsmith gun that is an item but those on the shelf (the G17, and since
  *  the maintainer's 2026-10-28 decision the P226 and the M870). */
-const SHELF_GUNS = ['gb17', 'pb226', 'mb870'], GUNS_COMMON = ['mb4a1', 'mpb5', 'akb74', 'akb103', 'augb'], GUNS_RARE = ['vb9', 'mb1014'];
+const SHELF_GUNS = ['gb17', 'pb226', 'mb870'], GUNS_COMMON = ['mb4a1', 'mpb5', 'akb74', 'akb103', 'augb', 'mb1911', 'umpb45', 'rpkb'];
+const GUNS_RARE = ['vb9', 'mb1014', 'pb90', 'svdb', 'mb14', 'mb700'];
 const OLD_ARMS = ['pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'scrap', 'wire', 'fuse', 'battery'];
 type Unit = { id: string; qty: number };
 const records = (c: Pick<RunConfig, 'loot' | 'containers'>): Unit[] => [...c.loot, ...c.containers.flatMap(x => x.items)];
@@ -39,7 +44,7 @@ const isFind = (id: string) => isFoundGun(id) || D.isAttachment(id);
 const flooded = (p: { x: number; y: number }) => WORLD.tiles[Math.floor(p.y / TILE)][Math.floor(p.x / TILE)] === 4;
 const amounts = (units: Unit[]) => units.reduce((a, u) => ({ ...a, [u.id]: (a[u.id] ?? 0) + u.qty }), {} as Record<string, number>);
 
-test('tiers: the price bands of PLAN section 10 sort the 100 parts 20/65/15, the 66 items into 15 basic, 44 common and 7 rare', () => {
+test('tiers: the price bands of PLAN section 10 sort the 100 parts 20/65/15, and every one is an item', () => {
     const count = { basic: 0, common: 0, rare: 0 };
     for (const a of Object.values(ATTACHMENTS)) count[partTier(a)]++;
     assert.deepEqual(count, { basic: 20, common: 65, rare: 15 });
@@ -47,17 +52,19 @@ test('tiers: the price bands of PLAN section 10 sort the 100 parts 20/65/15, the
     assert.deepEqual([40, 150, 151, 450, 451, 1200].map(buy => partTier({ buy })), ['basic', 'basic', 'common', 'common', 'rare', 'rare']);
     assert.deepEqual(PARTS.filter(id => partTier(ATTACHMENTS[id]) === 'basic'), BASIC);
     assert.deepEqual(PARTS.filter(id => partTier(ATTACHMENTS[id]) === 'rare'), RARE);
-    // 44 common items: 42 found, and the G17's O01 and G01 on the shelf (M2 review 2026-10-27).
+    // Since #28 M3-06 every catalog part is an item. 65 common: 63 found, and the G17's O01 and G01 on the shelf (M2
+    // review 2026-10-27).
+    assert.deepEqual([...PARTS].sort(), Object.keys(ATTACHMENTS).sort());
     assert.deepEqual(PARTS.filter(id => partTier(ATTACHMENTS[id]) === 'common'), PARTS.filter(id => COMMON.includes(id) || SHELF_COMMON.includes(id)));
-    assert.deepEqual([COMMON.length, SHELF_COMMON.length], [42, 2]);
+    assert.deepEqual([COMMON.length, SHELF_COMMON.length], [63, 2]);
     // The found guns follow the catalog's tiers.
     for (const id of GUNS_COMMON) assert.notEqual(GUNS[id as 'mb4a1'].tier, 'rare', id);
     for (const id of GUNS_RARE) assert.equal(GUNS[id as 'vb9'].tier, 'rare', id);
 });
 
-test('shop: 老栓 stocks the G17, the basic parts, O01 and G01 after his old goods (and the cloth), at the catalog\'s prices; the doctor is unchanged', () => {
+test('shop: 老栓 stocks the G17, wave two\'s rounds, the basic parts, O01 and G01 after his old goods (and the cloth), at the catalog\'s prices; the doctor is unchanged', () => {
     for (const rpg of [false, true]) {
-        assert.deepEqual(Shop.merchantStock('arms', rpg), [...OLD_ARMS, ...rpg ? ['cloth'] : [], ...SHELF_GUNS, ...BASIC, ...SHELF_COMMON]);
+        assert.deepEqual(Shop.merchantStock('arms', rpg), [...OLD_ARMS, ...rpg ? ['cloth'] : [], ...SHELF_GUNS, ...NEW_AMMO, ...BASIC, ...SHELF_COMMON]);
         assert.deepEqual(Shop.merchantStock('med', rpg), ['bandage', 'medkit', 'antidote', 'water', 'food', ...rpg ? ['analgesic', 'focus'] : []]);
     }
     // The found guns, the found common parts and the rare parts are finds only.
@@ -68,6 +75,12 @@ test('shop: 老栓 stocks the G17, the basic parts, O01 and G01 after his old go
     for (const id of [...SHELF_GUNS, ...BASIC, ...SHELF_COMMON]) {
         const cart = Shop.createCart(D.newSave(), 'arms', false, { ...Shop.BROWSE_ALL, page: pages.findIndex(p => p.includes(id)) });
         assert.deepEqual(Shop.shopQuote('merchant', cart.catalog.items.find(i => i.id === id)!), { side: 'buy', total: D.ITEMS[id].buy }, id);
+    }
+    // Wave two's rounds come in packs like the old three's.
+    for (const [id, pack] of [['ammo45', 10], ['ammoPDW', 20], ['ammoHeavy', 5]] as const) {
+        assert.equal(D.buyQuantity(id), pack, id);
+        const cart = Shop.createCart(D.newSave(), 'arms', false, { ...Shop.BROWSE_ALL, page: pages.findIndex(p => p.includes(id)) });
+        assert.deepEqual(Shop.shopQuote('merchant', cart.catalog.items.find(i => i.id === id)!), { side: 'buy', total: D.ITEMS[id].buy * pack }, id);
     }
 });
 
@@ -140,7 +153,11 @@ test('gunsmithFind: only guns and valuables are judged, one draw each; the M4A1 
     // A high-risk source: a rare part under `rare`, a common one otherwise.
     assert.equal(D.gunsmithFind('pearl', stream([0, 0, 0]), { risky: true, gun: true }), RARE[0]);
     assert.equal(D.gunsmithFind('pearl', stream([0, D.GUNSMITH_FINDS.rare, 0]), { risky: true, gun: true }), COMMON[0]);
-    assert.equal(D.gunsmithFind('shotgun', stream([0, D.GUNSMITH_FINDS.gun, 0, .999]), { risky: true, gun: true }), RARE.at(-1));
+    // A gun record's find that is not a gun is first judged for wave two's rounds (#28 M3-05).
+    assert.equal(D.gunsmithFind('shotgun', stream([0, D.GUNSMITH_FINDS.gun, D.GUNSMITH_FINDS.ammo, 0, .999]), { risky: true, gun: true }), RARE.at(-1));
+    assert.equal(D.gunsmithFind('carbine', stream([0, D.GUNSMITH_FINDS.gun, 0, 0]), { risky: false, gun: true }), NEW_AMMO[0]);
+    assert.equal(D.gunsmithFind('carbine', stream([0, D.GUNSMITH_FINDS.gun, 0, .999]), { risky: true, gun: true }), NEW_AMMO.at(-1));
+    assert.deepEqual(NEW_AMMO.map(D.findQuantity), [10, 20, 5]); assert.deepEqual(['O03', 'mb4a1'].map(D.findQuantity), [1, 1]);
     assert.equal(D.gunsmithFind('shotgun', stream([0, 0, 0, .999]), { risky: true, gun: true }), GUNS_RARE.at(-1));
 });
 
@@ -151,21 +168,29 @@ test('zone finds leave every other record as on main: quest, food, medicine and 
         const config = buildingRunConfig(seed), all = records(config);
         assert.equal(before.ids.map(id => all.filter(r => r.id === id).reduce((n, r) => n + r.qty, 0)).join(','), before.units[seed - 1], `seed ${seed}`);
         const masked = structuredClone(config);
-        for (const r of records(masked)) if (['weapon', 'valuable', 'attachment'].includes(D.ITEMS[r.id].kind)) r.id = '*';
+        // A pack of wave two's rounds replaced a gun record (#28 M3-05), which held one.
+        for (const r of records(masked)) {
+            if (NEW_AMMO.includes(r.id)) { r.id = '*'; r.qty = 1; }
+            else if (['weapon', 'valuable', 'attachment'].includes(D.ITEMS[r.id].kind)) r.id = '*';
+        }
         hash.update(JSON.stringify(masked) + '\n');
     }
-    // Positions, crates, quantities, exits, enemies and every other id as they were: only gun and valuable ids may differ.
+    // Positions, crates, quantities, exits, enemies and every other id as they were: only gun and valuable ids may differ
+    // (and a found pack's quantity).
     assert.equal(hash.digest('hex'), before.masked);
 });
 
-test('zone finds over 1000 seeds: every found gun and part turns up, rare parts only in flooded caches; about two a raid', () => {
-    const seen: Record<string, number> = {};
+test('zone finds over 3000 seeds: every found gun and part turns up, rare parts only in flooded caches; about two a raid', () => {
+    // 3000 seeds since #28 M3-06: with 63 common and 15 rare parts, 1000 raids leave the two counts overlapping by chance.
+    const seen: Record<string, number> = {}, rounds: Record<string, number> = {}, N = 3000;
     let finds = 0;
-    for (let seed = 1; seed <= 1000; seed++) {
+    for (let seed = 1; seed <= N; seed++) {
         const config = buildingRunConfig(seed);
         assert.equal(records(config).length, 60, 'the budget');
         assert.deepEqual(buildingRunConfig(seed), config, 'the same seed, the same finds');
         for (const r of records(config)) if (isFind(r.id)) { seen[r.id] = (seen[r.id] ?? 0) + 1; finds++; assert.equal(r.qty, 1); }
+        // Wave two's rounds lie in packs (#28 M3-05).
+        for (const r of records(config)) if (NEW_AMMO.includes(r.id)) { rounds[r.id] = (rounds[r.id] ?? 0) + 1; assert.equal(r.qty, D.buyQuantity(r.id)); }
         // A rare part lies on the ground in a flooded cache; crates hold only dry spots.
         for (const r of config.loot) if (RARE.includes(r.id)) assert.ok(flooded(r), `seed ${seed} ${r.id}`);
         for (const r of config.containers.flatMap(c => c.items)) assert.ok(!RARE.includes(r.id), `seed ${seed} ${r.id}`);
@@ -174,15 +199,21 @@ test('zone finds over 1000 seeds: every found gun and part turns up, rare parts 
     // The proposal's rates (CONTRACTS.md): about 2.1 finds a raid, a gun one raid in four or five, each rare part or gun
     // rarer than each common one.
     const guns = [...GUNS_COMMON, ...GUNS_RARE].reduce((n, id) => n + seen[id], 0);
-    assert.ok(finds / 1000 > 1.8 && finds / 1000 < 2.4, String(finds / 1000));
-    assert.ok(guns / 1000 > .17 && guns / 1000 < .29, String(guns / 1000));
+    finds /= N / 1000;
+    // Since #28 M3-05 a third of a gun record's other finds are rounds: guns and parts together are about 1.9 a raid.
+    assert.ok(finds / 1000 > 1.6 && finds / 1000 < 2.2, String(finds / 1000));
+    const packs = NEW_AMMO.reduce((n, id) => n + (rounds[id] ?? 0), 0);
+    assert.deepEqual(Object.keys(rounds).sort(), [...NEW_AMMO].sort());
+    assert.ok(packs / N > .12 && packs / N < .35, `rounds ${packs / N} a raid`);
+    assert.ok(guns / N > .17 && guns / N < .29, String(guns / N));
     assert.ok(Math.max(...RARE.map(id => seen[id])) < Math.min(...COMMON.map(id => seen[id])), JSON.stringify(seen));
     assert.ok(Math.max(...GUNS_RARE.map(id => seen[id])) < Math.min(...GUNS_COMMON.map(id => seen[id])), JSON.stringify(seen));
 });
 
-test('every sample gun and part can be had: the G17 and the basic parts on the shelf, the rest found within 300 seeds', () => {
+test('every gun and part can be had: the shelf\'s on the shelf, the rest found within 1000 seeds', () => {
+    // 1000 seeds since #28 M3-06: fifteen rare parts share the flooded caches.
     const shelf = new Set(Shop.merchantStock('arms')), found = new Set<string>();
-    for (let seed = 1; seed <= 300; seed++) for (const r of records(buildingRunConfig(seed))) if (isFind(r.id)) found.add(r.id);
+    for (let seed = 1; seed <= 1000; seed++) for (const r of records(buildingRunConfig(seed))) if (isFind(r.id)) found.add(r.id);
     for (const id of [...SHELF_GUNS, ...GUNS_COMMON, ...GUNS_RARE, ...PARTS]) assert.ok(shelf.has(id) !== found.has(id), `${id}: on the shelf or found in a raid, not both`);
 });
 
@@ -216,7 +247,7 @@ test('deployed street and mall raids: a found M4A1 is a factory instance, a foun
 
 test('corpses: a legacy enemy keeps its old roll; now and then a gun or valuable drop is a part instead, rare only on an elite, never a gun', () => {
     const seen = new Set<string>();
-    // 42 common parts since #28 M3: enough corpses for each to turn up.
+    // 63 common parts since #28 M3-06: enough corpses for each to turn up.
     for (let seed = 1; seed <= 12000; seed++) for (const elite of [false, true]) {
         const rolls = elite ? 3 : 1, old = D.rollLoot(seed, rolls), now = D.corpseLoot(seed, rolls, elite);
         assert.deepEqual(D.corpseLoot(seed, rolls, elite), now, 'the same seed, the same corpse');

@@ -21,18 +21,21 @@ const sources = (dir: string): string[] => readdirSync(dir).flatMap(name => {
 
 test('one answer to "is it a gun": the WEAPONS rows but the knife, each a catalog gun and a weapon item', () => {
     const guns = Object.keys(D.WEAPONS).filter(id => D.isGun(id));
-    assert.deepEqual(guns, ['pistol', 'shotgun', 'carbine', 'gb17', 'mb4a1', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103', 'augb']);
+    assert.deepEqual(guns, ['pistol', 'shotgun', 'carbine', 'gb17', 'mb4a1', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103', 'augb',
+        'mb1911', 'umpb45', 'pb90', 'svdb', 'mb14', 'mb700', 'rpkb']);
+    // Every catalog gun is an item since #28 M3-05.
+    assert.deepEqual([...guns].sort(), Object.keys(GUNS).sort());
     // Every weapon item but the knife is a gun, and nothing else is.
     assert.deepEqual(Object.keys(D.ITEMS).filter(id => D.ITEMS[id].kind === 'weapon' && id !== 'knife'), guns);
     // Each is a catalog gun, so the gunsmith rules (instances, stats, saves) can read it.
     for (const id of guns) assert.ok(isGunId(id), id);
     // The knife, enemy weapon looks, the retired #39 sample id, catalog guns that are no items yet and odd values are not.
-    for (const id of ['knife', 'rifle', 'club', 'claw', 'm4a1', 'umpb45', 'svdb', 'ammo9', 'toString', '__proto__', '', null, undefined, ['pistol'], 7])
+    for (const id of ['knife', 'rifle', 'club', 'claw', 'm4a1', 'smg', 'ammo45', 'ammo9', 'toString', '__proto__', '', null, undefined, ['pistol'], 7])
         assert.equal(D.isGun(id), false, String(id));
 });
 
 test('the gunsmith guns are items and weapons made from the catalog: stats, name, footprint, weight and prices', () => {
-    for (const id of ['gb17', 'mb4a1', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103', 'augb'] as const) {
+    for (const id of ['gb17', 'mb4a1', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103', 'augb', 'mb1911', 'umpb45', 'pb90', 'svdb', 'mb14', 'mb700', 'rpkb'] as const) {
         const gun = GUNS[id], item = D.ITEMS[id];
         assert.deepEqual(D.WEAPONS[id], gun.stats, id);
         assert.notEqual(D.WEAPONS[id], gun.stats, `${id}: a copy, never the catalog's own object`);
@@ -63,9 +66,11 @@ const SAMPLE_PARTS = ['O01', 'O03', 'O08', 'M03', 'M06', 'B01', 'B08', 'H01', 'H
 /** #28 M3-02: the forty wave-one parts (ART-SPEC 8.2), after M2's twenty. */
 const WAVE_PARTS = ['A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'B03', 'B05', 'B06', 'B07', 'B09', 'H02', 'H03', 'H04', 'H06', 'H07', 'H08', 'H09', 'S03', 'S04', 'S05',
     'S07', 'S08', 'P03', 'P04', 'P06', 'P07', 'G03', 'G06', 'G07', 'G08', 'G09', 'M01', 'M02', 'M05', 'M07', 'M10', 'M11', 'T04', 'T08'];
-/** #28 M3-06, early: the six parts of wave two's P0 art (the AUG's two configurations). */
+/** #28 M3-06, early: the six parts of wave two's P0 art (the AUG's two configurations), then the other 34. */
 const WAVE_TWO_P0 = ['O05', 'O10', 'F04', 'F07', 'T02', 'T10'];
-const ITEM_PARTS = [...SAMPLE_PARTS, ...WAVE_PARTS, ...WAVE_TWO_P0];
+const WAVE_TWO = ['O02', 'O04', 'O06', 'O07', 'O09', 'O11', 'O12', 'M04', 'M08', 'M09', 'M12', 'B02', 'B04', 'B10', 'H10', 'S06', 'S09', 'S10', 'P05', 'P08',
+    'F02', 'F05', 'F06', 'F08', 'G02', 'G04', 'G05', 'G11', 'G12', 'T03', 'T06', 'T07', 'T09', 'A03'];
+const ITEM_PARTS = [...SAMPLE_PARTS, ...WAVE_PARTS, ...WAVE_TWO_P0, ...WAVE_TWO];
 const node = (uid: string, id: string, slot: PartNode['slot'], children: PartNode[] = []): PartNode => ({ uid, id, slot, relief: false, children });
 /** The first free cell of `inv` for an item of `id` (a fixture helper: forged items are placed where they fit). */
 function free(inv: D.Inventory, id: string) {
@@ -73,7 +78,7 @@ function free(inv: D.Inventory, id: string) {
     throw new Error(`no room for ${id}`);
 }
 
-test('the 66 attachments that are items are made from the catalog: function name, footprint, weight, prices, one per item', () => {
+test('the 100 attachments that are items are made from the catalog: function name, footprint, weight, prices, one per item', () => {
     assert.deepEqual(Object.keys(D.ITEMS).filter(id => D.isAttachment(id)), ITEM_PARTS);
     for (const id of ITEM_PARTS) {
         const a = ATTACHMENTS[id], item = D.ITEMS[id];
@@ -85,8 +90,9 @@ test('the 66 attachments that are items are made from the catalog: function name
         assert.ok([...item.short].length <= (item.w === 1 ? 3 : 4), `${id} ${item.short}`);
         assert.equal(D.isGun(id), false, id);
     }
-    // Catalog parts that are no items yet (wave two, #28 M3-06) are not attachments here.
-    for (const id of ['O02', 'A03', 'T09', 'pistol', 'ammo9', 'toString', '__proto__', '', null]) assert.equal(D.isAttachment(id), false, String(id));
+    // Every catalog part is an item since #28 M3-06; nothing else is an attachment.
+    assert.deepEqual([...ITEM_PARTS].sort(), Object.keys(ATTACHMENTS).sort());
+    for (const id of ['Z99', 'pistol', 'ammo9', 'ammo45', 'toString', '__proto__', '', null]) assert.equal(D.isAttachment(id), false, String(id));
     // Never stacked: two of a part are two items under two uids, no gun state, and a move never merges them.
     const inv = D.createInventory(6, 5);
     assert.equal(D.addItem(inv, 'O03', 2), 0);
@@ -109,23 +115,26 @@ test('loose footprints (M0 review decision 9): long parts take 2x1, every other 
 test('details: each attachment\'s maker and the guns a player can own that it fits, at once or with the part it needs', () => {
     const M4 = 'M4A1 模块步枪', CARBINE = '半自动卡宾枪', G17 = 'G17 通用手枪', P226 = 'P226 稳定手枪', MP5 = 'MP5 近战冲锋枪', VECTOR = 'Vector 9mm 高速冲锋枪';
     const M870 = 'M870 泵动霰弹枪', M1014 = 'M1014 半自动霰弹枪', AK74 = 'AK-74 稳定步枪', AK103 = 'AK-103 重型步枪', AUG = 'AUG 紧凑步枪';
-    // Since #28 M3-01 the wave-one guns are guns a player can own, and wave two's P0 AUG: the rail and optic parts fit many.
-    const RAILED = [MP5, VECTOR, M870, M1014, CARBINE, AK74, AK103, M4, AUG];
+    const M1911 = 'M1911 重型手枪', UMP = 'UMP45 重弹冲锋枪', P90 = 'P90 紧凑冲锋枪', SVD = 'SVD 精确步枪', M14 = 'M14 半自动精确步枪', M700 = 'M700 栓动步枪', RPK = 'RPK 支援机枪';
+    // Since #28 M3-05 every catalog gun is a gun a player can own: the rail and optic parts fit many of them (the RPK's
+    // rails come with H10, its optics with A08).
+    const UNDER = [MP5, UMP, VECTOR, M870, M1014, CARBINE, AK74, AK103, M4, AUG, RPK], SIDE = [MP5, UMP, P90, VECTOR, M870, M1014, CARBINE, AK74, AK103, M4, AUG, RPK];
+    const LONG = [CARBINE, AK74, AK103, M4, AUG, SVD, M14, M700, RPK];
     const expected: Record<string, [string, string[]]> = {
-        O01: ['北堤', ['旧式手枪', G17, P226]], O03: ['北堤', [MP5, VECTOR, '双管霰弹枪', M870, M1014, CARBINE, AK74, AK103, M4, AUG]], O08: ['北堤', [CARBINE, AK74, AK103, M4, AUG]],
-        M03: ['盐湾', [G17, P226, MP5, VECTOR]], M06: ['盐湾', [CARBINE, AK74, AK103, M4, AUG]], B01: ['滨机', [G17, P226]], B08: ['滨机', [M4]],
+        O01: ['北堤', ['旧式手枪', G17, M1911, P226]], O03: ['北堤', [MP5, UMP, P90, VECTOR, '双管霰弹枪', M870, M1014, CARBINE, AK74, AK103, M4, AUG, SVD, M14, M700, RPK]], O08: ['北堤', LONG],
+        M03: ['盐湾', [G17, P226, MP5, VECTOR]], M06: ['盐湾', [CARBINE, AK74, AK103, M4, AUG, RPK]], B01: ['滨机', [G17, P226]], B08: ['滨机', [M4]],
         H01: ['滨机', [M4]], H05: ['滨机', [CARBINE]], S01: ['滨机', [M4]], S02: ['滨机', [M4]], P01: ['滨机', [M4]], P02: ['滨机', [M4]],
-        F01: ['滨机', RAILED], F03: ['滨机', RAILED], G01: ['滨机', [G17]], G10: ['滨机', [M4, AUG]],
-        T01: ['盐湾', RAILED], T05: ['盐湾', RAILED], A07: ['滨机', [CARBINE]],
-        // A few of wave one's: a gun's own part, a part two guns share, the pistols' side devices.
-        A02: ['滨机', [P226]], A08: ['滨机', [AK74, AK103]], G09: ['滨机', [AK103]], M01: ['盐湾', ['旧式手枪', G17, P226, MP5, VECTOR]], T04: ['盐湾', [G17, P226]],
-        // Wave two's P0: the long optic, a foregrip, a side device.
-        O10: ['北堤', [CARBINE, AK74, AK103, M4, AUG]], F07: ['滨机', RAILED], T10: ['盐湾', RAILED],
+        F01: ['滨机', UNDER], F03: ['滨机', UNDER], G01: ['滨机', [G17]], G10: ['滨机', [M4, AUG]],
+        T01: ['盐湾', SIDE], T05: ['盐湾', SIDE], A07: ['滨机', [CARBINE]],
+        // A few of wave one's: a gun's own part, a part three guns share, the pistols' side devices.
+        A02: ['滨机', [P226]], A08: ['滨机', [AK74, AK103, RPK]], G09: ['滨机', [AK103, RPK]], M01: ['盐湾', ['旧式手枪', G17, P226, MP5, VECTOR]], T04: ['盐湾', [G17, M1911, P226]],
+        // Wave two's: the long optic, a foregrip, a side device, the RPK's handguard, the bipod, a two-gun suppressor.
+        O10: ['北堤', LONG], F07: ['滨机', UNDER], T10: ['盐湾', SIDE], H10: ['滨机', [RPK]], F08: ['滨机', [SVD, M14, M700, RPK]], M04: ['盐湾', [M1911, UMP]],
     };
     assert.deepEqual(Object.keys(expected).slice(0, 20), SAMPLE_PARTS);
     for (const [id, [brand, guns]] of Object.entries(expected)) assert.deepEqual(D.attachmentFacts(id), { brand, guns }, id);
     for (const id of ITEM_PARTS) assert.ok(D.attachmentFacts(id)!.guns.length > 0, `${id} fits a gun a player can own`);
-    for (const id of ['pistol', 'ammo9', 'O02', 'bandage']) assert.equal(D.attachmentFacts(id), null, id);
+    for (const id of ['pistol', 'ammo9', 'Z99', 'bandage']) assert.equal(D.attachmentFacts(id), null, id);
     // The three detail panels print them (the old tabs, the yard, the raid bag) through the shared lines (M2-08).
     const facts = readFileSync('src/gunsmith/item-facts.ts', 'utf8');
     assert.ok(facts.includes('D.attachmentFacts(') && facts.includes('制造商：'));
@@ -144,7 +153,6 @@ test('saves: a loose attachment is a strictly checked plain item, its uid unique
     };
     const loose = (p: D.SaveDataV1, id: string) => p.stash.items.find(i => i.id === id)!;
     const add = (p: D.SaveDataV1, item: Omit<D.Item, 'x' | 'y'>) => p.stash.items.push({ ...item, ...free(p.stash, 'O01') });
-    refused('a catalog part that is no item yet', p => add(p, { uid: 'x-o02', id: 'O02', qty: 1 }));
     refused('an unknown id', p => add(p, { uid: 'x-z99', id: 'Z99', qty: 1 }));
     refused('a gun state on an attachment', p => { loose(p, 'O03').gun = factoryState(); });
     refused('a stack of an attachment', p => { loose(p, 'O03').qty = 2; });
