@@ -1,3 +1,8 @@
+## 2026-10-29 改枪 M3-09：目录完整性门禁（#132）
+
+- 新单测 `tests/gunsmith-catalog-gate.test.ts`：20 枪、100 件的图、功能和代价、获取、适配、两种配装方向，见 CONTRACTS「目录完整性门禁（M3-09）」。单测 1069/1069。
+- M3 只剩 M3-10：维护者试玩，CI 全绿后合入 PR ③。
+
 ## 2026-10-29 改枪 M3-11：瞄具前探与脚架接进行动（#132）
 
 `feat/gunsmith-m3` / [PR #132](https://github.com/xuys2025/escape-bincov/pull/132)（草稿），在 `gunsmith-m305` 工作树做。
