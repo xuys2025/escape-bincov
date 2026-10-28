@@ -2,15 +2,34 @@
 import { readFileSync,writeFileSync,mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { canvas,rect,blit,save,decode,colors,text } from './pixels.mjs';
+import { canvas,rect,poly,crop,blit,save,decode,colors,text } from './pixels.mjs';
+import { fullPreviews } from './full-previews.mjs';
 export const root=fileURLToPath(new URL('../../../../..',import.meta.url)),docs='docs/gunsmith/art/m3-w2',incoming='assets/gunsmith/incoming/m3-w2';
 export const manifest=JSON.parse(readFileSync(resolve(root,incoming+'/manifest.json'))),baseline=JSON.parse(readFileSync(resolve(root,'assets/gunsmith/manifest.json')));
 export const assets=new Map([...baseline.assets,...manifest.assets].map(a=>[a.id.replace(/-v\d+$/,''),a]));
-const cache=new Map();export function picture(key){if(!cache.has(key)){const a=assets.get(key);if(!a)throw Error('missing '+key);cache.set(key,decode(resolve(root,a.file)));}return cache.get(key);}
+for(const a of baseline.virtual??[])assets.set(a.key,a);
+const cache=new Map();export function picture(key){if(cache.has(key))return cache.get(key);const a=assets.get(key);if(!a)throw Error('missing '+key);let image;
+ if(a.file)image=decode(resolve(root,a.file));else{const old=JSON.parse(readFileSync(resolve(root,'docs/gunsmith/art/m3-w1/source/legacy-inventory.json'))).images[a.sourceKey],src=canvas(old.w,old.h);for(const o of old.ops){if(o[0]==='r')rect(src,...o.slice(1));else poly(src,...o.slice(1));}image=canvas(a.w,a.h);if(a.rect)blit(image,crop(src,...a.rect),...(a.wholeCanvasLayer?[a.rect[0],a.rect[1]]:[0,0]));else{blit(image,src,0,0);for(const r of a.clearRects??[])rect(image,[0,0,0,0],...r);for(const r of a.fillRects??[])rect(image,...r);}}
+ cache.set(key,image);return image;
+}
 export const configurations={
  augb:{factory:[],close:[['O05','top'],['F04','under'],['T02','side']],steady:[['O10','top'],['F07','under'],['T10','side'],['M06','muzzle']],reuse:[['O03','top'],['F01','under'],['G10','mag'],['M06','muzzle']]},
  mb4a1:{factory:[],close:[['O05','top'],['H02','handguard',[['F04','under'],['T02','side']]]],steady:[['O10','top'],['H02','handguard',[['F07','under'],['T10','side']]]]}
 };
+if(manifest.stage==='P0+P1')Object.assign(configurations,{
+ mb1911:{factory:[],light:[['P08','grip'],['G02','mag'],['T04','pistolSide']],silent:[['B02','barrel'],['M04','muzzle'],['A03','base',[['O02','micro']]],['T08','pistolSide']]},
+ umpb45:{factory:[],close:[['S06','stock'],['P05','grip'],['F06','under'],['T07','side']],steady:[['B04','barrel'],['M04','muzzle'],['G04','mag'],['O05','top'],['F05','under'],['T09','side']]},
+ pb90:{factory:[],light:[['G05','mag'],['O12','top'],['T02','side']],silent:[['M12','muzzle'],['O04','top'],['T06','side']]},
+ svdb:{factory:[],steady:[['O09','top'],['F08','bipod'],['M09','muzzle']],silent:[['O07','top'],['M08','muzzle']]},
+ mb14:{factory:[],precision:[['S09','stock'],['O10','top'],['F08','bipod'],['M09','muzzle']],extended:[['G11','mag'],['O06','top'],['M08','muzzle']]},
+ mb700:{factory:[],range:[['O11','top'],['F08','bipod'],['M08','muzzle']],light:[['B10','barrel'],['S10','stock'],['O12','top']]},
+ rpkb:{factory:[],heavy:[['H10','handguard',[['F02','under'],['T06','side'],['T03','side']]],['F08','bipod'],['A08','base',[['O07','top']]],['S04','stock'],['G09','mag']],light:[['G12','mag'],['P04','grip'],['A08','base',[['O04','top']]],['M05','muzzle']]},
+ pistol:{factory:[],custom:[['A01','base',[['O02','micro']]]]},shotgun:{factory:[],custom:[['A05','base',[['O05','top']]]]},
+ carbine:{factory:[],custom:[['A07','base',[['O09','top']]],['H05','handguard',[['F07','under'],['T10','side']]]]},
+ akb74:{factory:[],custom:[['A08','base',[['O06','top']]],['H04','handguard',[['F05','under'],['T09','side']]]]},
+ vb9:{factory:[],custom:[['O04','top'],['F06','under'],['T02','side']]}
+});
+if(manifest.stage==='P0+P1')configurations.mb4a1.custom=[['O10','top'],['H02','handguard',[['F02','under'],['T03','side'],['T07','side']]]];
 const mountOf={base:'mount',grip:'rearGrip',side:'side1'};
 const order={stock:0,rearGrip:1,mag:2,barrel:3,receiver:4,handguard:5,under:6,bipod:6,mount:7,top:8,muzzle:9,side1:10,side2:10,pistolSide:10,'glove-rear':11,'glove-front':12,'glove-foregrip':12};
 const partKey=(id,code,gun)=>{const s=`gs-${id.toLowerCase()}-${code}`;return assets.has(s+'-'+gun)?s+'-'+gun:assets.has(s)?s:null;};
@@ -31,7 +50,7 @@ export function assemble(gun,configuration,code,gloves=true){
   const glove=(which,at)=>{if(gloves)attach(`gs-glove-${which}-h`,`glove-${which}`,rootNode,at);};
   if(!a.wholeCanvasLayer&&a.grip)glove('rear',a.grip);
   const fore=nodes.find(n=>n.label==='under'&&n.a.hand),guard=nodes.find(n=>n.label==='handguard'&&n.a.hand);
-  if(fore){hand=[fore.x+fore.a.hand[0],fore.y+fore.a.hand[1]];glove('foregrip',hand);}else if(guard){hand=[guard.x+guard.a.hand[0],guard.y+guard.a.hand[1]];if(!guard.a.embeddedFrontGlove)glove('front',hand);}else hand=a.hand;
+  if(fore){hand=[fore.x+fore.a.hand[0],fore.y+fore.a.hand[1]];glove('foregrip',hand);}else if(guard){hand=[guard.x+guard.a.hand[0],guard.y+guard.a.hand[1]];if(!guard.a.embeddedFrontGlove)glove('front',hand);}else{hand=a.hand;if(hand&&!a.wholeCanvasLayer&&!(a.grip&&hand[0]===a.grip[0]&&hand[1]===a.grip[1]))glove('front',hand);}
  }
  const lo=[Math.min(...nodes.map(n=>n.x)),Math.min(...nodes.map(n=>n.y))],hi=[Math.max(...nodes.map(n=>n.x+n.a.w)),Math.max(...nodes.map(n=>n.y+n.a.h))],shift=p=>[p[0]-lo[0],p[1]-lo[1]];
  const rank=n=>n.a.layer==='aboveReceiver'?4.5:order[n.label];
@@ -75,4 +94,4 @@ export function previews(){
  writeFileSync(resolve(root,docs+'/assembly-records.json'),JSON.stringify({source:'M3-W2 P0 native artwork plus unchanged formal M2/W1 images',method:'Saved manifest anchors only; no manual part placement',virtual:[],configurations,assemblies:records,bareFactories:bare},null,2)+'\n');
  console.log(JSON.stringify({assemblies:records.length,bareFactories:bare.length,sizes:records.map(r=>`${r.gun}/${r.configuration}/${r.code} ${r.w}x${r.h}`)}));
 }
-if(process.argv[1]===fileURLToPath(import.meta.url))previews();
+if(process.argv[1]===fileURLToPath(import.meta.url)){if(manifest.stage==='P0+P1')fullPreviews();else previews();}
