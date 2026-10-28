@@ -234,7 +234,7 @@ CI 自测失败的 1 项是 `policy.test.mjs:199` 写死 `C:/Program Files/Git/b
 
 ## Q-E04 提交后的发布失败
 
-2026-10-28，`codex/transaction-failure-phases` 从 main `0f73a67386bac196b87c983668295be6d1a99f1e` 开始；[开工登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553)。与 #134 架构门禁、公共生命周期归位各自验收，#60 总单保持开放。
+2026-10-28，`codex/transaction-failure-phases` 从 main `0f73a67386bac196b87c983668295be6d1a99f1e` 开始；[开工登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553)。承接 [draft PR #137](https://github.com/xuys2025/escape-bincov/pull/137)，实现及浏览器证据提交 `e703f14dae521ea91951f61c533581558885f42e`；最终 head/CI 以 PR 为准。与 #134 架构门禁、公共生命周期归位各自验收，#60 总单保持开放。
 
 原代码反例：挂接 expansion 端口只在首次 restore 抛错；`mutate` 扣 20 现金的那一次 setItem 已成功写出 680，内存却被回滚为 700。另一次始终抛错的注入会在错误回滚中再次抛出。原实现返回克隆也位于 `RecoveryStore.commit` 的 setItem 之后，扩展事务还执行重复 restore。
 

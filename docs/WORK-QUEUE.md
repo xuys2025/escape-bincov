@@ -4,7 +4,7 @@
 
 | 目标 | 承接入口 | 接手提示 |
 | --- | --- | --- |
-| 事务失败阶段（Q-E04） | [#60 登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553) · `codex/transaction-failure-phases` · [实现与验证](tasks/quality-entropy.md#q-e04-提交后的发布失败) | 写后发布异常不再当作可回滚/重试的存储失败；消费票据、停止本页、导出已提交记录后刷新。独立于 #134 架构门禁与公共生命周期归位；最终 head/CI 见承接 PR |
+| 事务失败阶段（Q-E04） | [#60 登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553) · [PR #137](https://github.com/xuys2025/escape-bincov/pull/137) · `codex/transaction-failure-phases` · [实现与验证](tasks/quality-entropy.md#q-e04-提交后的发布失败) | 写后发布异常不再当作可回滚/重试的存储失败；消费票据、停止本页、导出已提交记录后刷新。独立于 #134 架构门禁与公共生命周期归位；最终 head/CI 见承接 PR |
 | 新一轮减熵：架构门禁与依赖查询 | [#60 扫描与计划](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6449666799) · [实施与验证](tasks/quality-entropy.md#2026-10-28-架构门禁与按文件查询) | `codex/entropy-architecture`，起点 main `3b61d52`：统一全源码 AST 图，补动态加载/类型导出边界，核心依赖闭包守卫，提供只读按文件查询；其余候选继续 #60，既有 PR 不重复承接。准确 head 与 CI 见本轮 PR |
 | 室内墙体与视野设计（功能未实施） | [设计方案](INDOOR-WALL-VISIBILITY-PLAN.md) · `docs/indoor-wall-visibility` | 2026-10-28 维护者确认：所有室内适用、保留完整基础格、横墙按连续墙段切换；竖墙和顶墙实化、底墙延伸透明、门洞净空。当前仅交付设计文档并核验 main `b5bd63b`，后续代码与两尺寸验收另行安排；与 #130 商场家具及地面换图分开承接，详情见方案。 |
 | 水产站玩家空手手臂与手（F16） | [#26 F16 核查](https://github.com/xuys2025/escape-bincov/issues/26#issuecomment-6446761015) · [PR #131](https://github.com/xuys2025/escape-bincov/pull/131) · [实现与验证](tasks/station-player-hands/README.md) | `codex/f16-station-hands`：仅在站内为共用身体补前臂、手套及步行动作，八方向五帧沿用原缓存、描边、光照与遮挡。原行动素材和存档不变；H15 在旧构建失败、修复后两尺寸通过；完整站内 78/79，I3 在原 main 也超时；准确 head、CI 与剩余验收见原 PR |
