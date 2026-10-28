@@ -90,7 +90,7 @@ export interface Modifiers extends Factors {
     suppressor?: true;
     /** Cells the installed part adds to the gun's footprint (suppressors lengthen, a drum deepens). */
     grow?: { w: number; h: number };
-    /** Factor on the precise-aim camera look-ahead, one per sight mode; M0-07 sets the cap these scale. */
+    /** Factor on the precise-aim camera look-ahead, one per sight mode (M0 review decision 7: x2 at most; the raid uses it, #28 M3-11). */
     view?: readonly number[];
     /** Factors that hold only while the shooter stands still (a bipod); moving drops them at once. */
     braced?: Factors;
@@ -290,11 +290,11 @@ export const ATTACHMENTS: Readonly<Record<string, AttachmentDef>> = Object.fromE
         p('O04', '封闭红点', 'top', null, .2, 280, { precise: .85, recover: 1.1 }),
         p('O05', '全息瞄具', 'top', null, .15, 320, { sway: .85, precise: .9, raise: 1.05 }),
         p('O06', '中距棱镜', 'top', null, .25, 380, { precise: .8, sway: .95, raise: 1.05, view: [1.25] }),
-        p('O07', '中远距棱镜', 'top', null, .3, 450, { precise: .75, raise: 1.12, view: [1.45] }),
-        p('O08', '轻型远距镜', 'top', null, .35, 620, { precise: .7, raise: 1.2, sway: 1.1, view: [1.7] }, LONG),
+        p('O07', '中远距棱镜', 'top', null, .3, 450, { precise: .75, raise: 1.12, view: [1.5] }),
+        p('O08', '轻型远距镜', 'top', null, .35, 620, { precise: .7, raise: 1.2, sway: 1.1, view: [2] }, LONG),
         p('O09', '稳定远距镜', 'top', null, .55, 820, { precise: .65, raise: 1.3, sway: 1.15, view: [2] }, LONG),
-        p('O10', '近远双档镜', 'top', null, .45, 760, { precise: .72, raise: 1.18, view: [1, 1.7] }, LONG),
-        p('O11', '中远双档镜', 'top', null, .5, 860, { precise: .7, raise: 1.22, view: [1.45, 1.85] }, LONG),
+        p('O10', '近远双档镜', 'top', null, .45, 760, { precise: .72, raise: 1.18, view: [1.5, 2] }, LONG),
+        p('O11', '中远双档镜', 'top', null, .5, 860, { precise: .7, raise: 1.22, view: [1.5, 2] }, LONG),
         p('O12', '轻型机械瞄具', 'top', null, .04, 90, { raise: .88, precise: .95 }),
     ]),
     ...section('muzzle', 'yanwan', [

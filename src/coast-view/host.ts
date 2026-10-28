@@ -109,7 +109,7 @@ const HTML = `
   <div data-hitpop class="cs-hitpop" aria-hidden="true"><b><i></i><i></i><i></i><i></i></b></div>
   <div data-fade class="cs-fade"></div>
   <div data-curtain class="cs-curtain" aria-live="assertive"><b data-curtain-text></b></div>
-  <div class="cs-touch"><button type="button" data-bag>背包</button><button type="button" data-do="map">地图</button><button type="button" data-heal>治疗</button><button type="button" data-reload>换弹</button><button type="button" data-swap aria-label="切换武器">匕首</button><button type="button" data-device aria-pressed="false" hidden>设备</button><button type="button" data-act>交互</button><button type="button" data-pause aria-label="暂停">暂停</button></div>
+  <div class="cs-touch"><button type="button" data-bag>背包</button><button type="button" data-do="map">地图</button><button type="button" data-heal>治疗</button><button type="button" data-reload>换弹</button><button type="button" data-swap aria-label="切换武器">匕首</button><button type="button" data-device aria-pressed="false" hidden>设备</button><button type="button" data-scope hidden>切档</button><button type="button" data-act>交互</button><button type="button" data-pause aria-label="暂停">暂停</button></div>
 </div>
 <section class="cs-panel" data-panel hidden role="dialog" aria-modal="true"></section>`;
 
@@ -442,6 +442,8 @@ export class CoastSampleHost {
       const parts = this.last?.frame.hud.devices?.parts ?? [], any = parts.some(p => p.on);
       for (const p of parts) if (p.on === any) this.input.press(p.laser ? 'laser' : 'light');
     });
+    // Touch has no V: 切档 switches a two-mode optic (#28 M3-11), shown only on a gun that has one.
+    s.on(this.q('[data-scope]'), 'pointerdown', e => { e.preventDefault(); this.input.press('scope'); });
     s.on(this.q('[data-bag]'), 'click', () => { if (!this.panel) this.openInventory(); else if (this.panel === 'inventory') this.closePanel(true); });
     s.on(this.q('[data-choices]'), 'click', e => {
       const el = e.target as HTMLElement, w = this.last?.stamp.world; if (!w || this.panel) return;
@@ -545,9 +547,9 @@ export class CoastSampleHost {
   }
   /** Controls for this device, the guide the original pause offered. */
   private showGuide() {
-    const keys: [string, string][] = [['W A S D', '移动 / 离开搜刮'], ['鼠标', '瞄准'], ['左键 / 右键', '攻击 / 精瞄'], ['Shift', '冲刺'], ['R', '换弹'], ['E', '交互 / 搜刮 / 阅读'], ['按住 E 3 秒', '撤离（绿色标记内）'], ['滚轮', '切换搜刮目标'], ['Q', '快捷治疗'], ['Tab', '背包（不暂停）'], ['M', '地图（不暂停）'], ['1 / 2', '主武器 / 匕首'], ['F / G', '开关枪上的灯光 / 激光'], ['Esc', '暂停 / 关闭面板']];
+    const keys: [string, string][] = [['W A S D', '移动 / 离开搜刮'], ['鼠标', '瞄准'], ['左键 / 右键', '攻击 / 精瞄'], ['Shift', '冲刺'], ['R', '换弹'], ['E', '交互 / 搜刮 / 阅读'], ['按住 E 3 秒', '撤离（绿色标记内）'], ['滚轮', '切换搜刮目标'], ['Q', '快捷治疗'], ['Tab', '背包（不暂停）'], ['M', '地图（不暂停）'], ['1 / 2', '主武器 / 匕首'], ['F / G', '开关枪上的灯光 / 激光'], ['V', '切换双档瞄具'], ['Esc', '暂停 / 关闭面板']];
     const body = this.input.touch
-      ? '<p>左半屏按住拖动是移动，拖远冲刺；右半屏按住拖动是瞄准，拖远持续开火，松开即停。靠近物资点「搜刮」或「拾取」；几个箱子重叠时，点名称直接打开那一个。在撤离区站稳，按住「按住撤离」3 秒。枪上装了激光或灯光时，点「设备」开关。背包和地图不暂停行动。</p>'
+      ? '<p>左半屏按住拖动是移动，拖远冲刺；右半屏按住拖动是瞄准，拖远持续开火，松开即停。靠近物资点「搜刮」或「拾取」；几个箱子重叠时，点名称直接打开那一个。在撤离区站稳，按住「按住撤离」3 秒。枪上装了激光或灯光时，点「设备」开关；装了双档瞄具时，点「切档」。背包和地图不暂停行动。</p>'
       : `<div class="cs-guide">${keys.map(([k, v]) => `<div><kbd>${k}</kbd>${v}</div>`).join('')}</div>`;
     this.guideOpen = true;
     this.setPanel('pause', `<h2>行动指南</h2>${body}<p class="cs-sub">每局限时 10 分钟。死亡、超时或放弃都按撤离失败处理：丢失背包物资和主武器，保留安全箱内的物品和水手匕首。</p><div class="cs-row"><button type="button" data-do="pause-back">返回</button></div>`, '行动指南');
@@ -772,20 +774,25 @@ export class CoastSampleHost {
   /**
    * The switches of the gun in hand's devices at the foot of the weapon card (#28 M2-03): each part with its key (F for
    * a light, G for a laser, either for a combiner; no keys on touch) and whether it is on, and the touch 设备 button,
-   * shown only for a gun with a device and marked pressed while any is on. The Runtime's own published state; nothing
-   * here switches anything.
+   * shown only for a gun with a device and marked pressed while any is on. Then the sight (#28 M3-11): a two-mode
+   * optic's mode with V (and the touch 切档 button), and a bipod, braced or not. The Runtime's own published state;
+   * nothing here switches anything.
    */
   private deviceLine(h: HudView) {
-    const d = h.devices, touch = this.input.touch;
-    const key = d ? `${touch}|${d.parts.map(p => `${p.name}:${+p.laser}${+p.light}${+p.on}`).join()}` : '';
+    const d = h.devices, g = h.sight, touch = this.input.touch, modes = g && g.modes > 1, bipod = !!g?.bipod;
+    const key = `${touch}|${d ? d.parts.map(p => `${p.name}:${+p.laser}${+p.light}${+p.on}`).join() : ''}|${modes ? g!.mode : ''}|${bipod ? +g!.braced : ''}`;
     if (key === this.devicesShown) return;
     this.devicesShown = key;
-    const line = this.q('[data-devices]'), button = this.q('[data-device]'), any = !!d?.parts.some(p => p.on);
-    line.hidden = button.hidden = !d;
-    line.innerHTML = d ? d.parts.map(p => {
+    const line = this.q('[data-devices]'), button = this.q('[data-device]'), scope = this.q('[data-scope]'), any = !!d?.parts.some(p => p.on);
+    button.hidden = !d; scope.hidden = !modes;
+    // The sight's two modes and the bipod (#28 M3-11) share the line: each word keeps its length, so nothing moves.
+    const parts = [...(d?.parts ?? []).map(p => {
       const kind = p.laser && p.light ? '组合' : p.laser ? '激光' : '灯光', keys = p.laser && p.light ? 'F/G' : p.laser ? 'G' : 'F';
       return `<span class="${p.on ? 'on' : ''}" title="${esc(p.name)}">${touch ? '' : `<kbd>${keys}</kbd>`}${kind} ${p.on ? '开' : '关'}</span>`;
-    }).join('') : '';
+    }), ...modes ? [`<span title="瞄具档位">${touch ? '' : '<kbd>V</kbd>'}${g!.mode ? '远档' : '近档'}</span>`] : [],
+    ...bipod ? [`<span class="${g!.braced ? 'on' : ''}" title="站定后脚架架稳">脚架 ${g!.braced ? '架稳' : '未架'}</span>`] : []];
+    line.hidden = !parts.length;
+    line.innerHTML = parts.join('');
     button.setAttribute('aria-pressed', String(any)); button.classList.toggle('on', any);
   }
   /** A blow while looting: the panel's danger line says so for a moment (the world keeps running). */

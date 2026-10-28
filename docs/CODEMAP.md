@@ -96,6 +96,7 @@
 
 **按需继续。**
 
+- 瞄具前探与脚架（#28 M3-11）：V 发 `'scope'` 命令切双档瞄具，`CoastRaidRuntime.gunSight` 发布 `hud.sight`（前探倍数、档位、脚架是否架稳），镜头按 [coast-view/camera.ts](../src/coast-view/camera.ts) 的 `scopeScale`、`pointerLead`、`touchScopeLead` 放大前探；站定 `BRACE_AFTER` 秒后 `grip` 换成脚架手感。
 - 枪上的设备与枪声（#28 M2-03、M2-11）：F/G 发 `'light'`/`'laser'` 命令，开关规则在 [gunsmith/devices.ts](../src/gunsmith/devices.ts)；激光和暴露看 [raid-runtime/runtime.ts](../src/raid-runtime/runtime.ts) 的 `laserBeam`、`shotGrip`；枪声按 [gun-timbre.ts](../src/gun-timbre.ts) 的 `timbreOfGun` 选枪族，消音见 [audio.ts](../src/audio.ts) 的 `SUPPRESSED`。规则见[改枪实现契约](gunsmith/CONTRACTS.md#激光灯光与枪声m2-03m2-11)。
 - 新触屏按钮：[coast-view/host.ts](../src/coast-view/host.ts) 的 `.cs-touch` 按钮绑定。
 - 浏览器事件归属/失焦：[main.ts](../src/main.ts)、宿主事件处理；不要把 DOM 引入纯规则。

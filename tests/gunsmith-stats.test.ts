@@ -251,10 +251,10 @@ test('replacement: a feed module\'s capacity and the sight\'s modes take the fac
     }
     assert.deepEqual([fit(bare('mb4a1'), 'G10'), fit(bare('akb103'), 'G09'), fit(bare('gb17'), 'G01')].map(b => effectiveWeapon(b).magazine), [20, 60, 24]);
     // The sight: its modes, or the factory look-ahead when it has none. A fresh array each time.
-    assert.deepEqual(['O03', 'O06', 'O10', 'O11'].map(id => effectiveStats(fit(bare('mb4a1'), id)).view), [[1], [1.25], [1, 1.7], [1.45, 1.85]]);
+    assert.deepEqual(['O03', 'O06', 'O10', 'O11'].map(id => effectiveStats(fit(bare('mb4a1'), id)).view), [[1], [1.25], [1.5, 2], [1.5, 2]]); // M0 review decision 7 (#28 M3-11)
     assert.deepEqual(effectiveStats(fit(bare('carbine'), 'A07', 'O09')).view, [2]);
     effectiveStats(fit(bare('mb4a1'), 'O11')).view[0] = 9;
-    assert.deepEqual(ATTACHMENTS.O11.mods.view, [1.45, 1.85]);
+    assert.deepEqual(ATTACHMENTS.O11.mods.view, [1.5, 2]);
 });
 
 test('noise: suppressors cut it, brakes raise it, and nothing goes under 40% of factory', () => {

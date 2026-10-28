@@ -24,7 +24,7 @@ import type { MallArt } from './mall-art';
 import { MALL_FOOTPRINT, insideFootprint, mallOpenings } from './mall-dressing';
 import { mallRegionDressed } from '../mall-layout-v4';
 import { releaseManagedSlots } from '../view-lifecycle/renderer-lifetime';
-import { aimLead, leadRoom, pointerLead, snapAxis, stepLead, type AxisHold, type CameraBounds, type Lead } from './camera';
+import { FACTORY_LEAD, aimLead, leadRoom, pointerLead, scopeScale, snapAxis, stepLead, touchScopeLead, type AxisHold, type CameraBounds, type Lead, type LeadScale } from './camera';
 import { viewScale, type ViewScaleMode } from './view-scale';
 import { heldWeaponOffset, idleRetraction, stepRetraction, type RetractionShot, type RetractionState } from './weapon-retraction';
 
@@ -190,6 +190,8 @@ export class CoastView {
   private camF: { x: number; y: number; hx?: AxisHold; hy?: AxisHold; lead?: Lead } = { x: 0, y: 0 };
   /** The mouse pointer (client px) the host aims with this frame, or null while touch aims: picks the look-ahead. */
   pointer: Point | null = null;
+  /** How far the sight in hand stretches the precise look-ahead this frame (#28 M3-11; scopeScale of hud.sight). */
+  private leadScale: LeadScale = FACTORY_LEAD;
   /** Camera kick opposite the player's shot, settling back within a few frames. */
   private recoil = { x: 0, y: 0 };
   /** Which shot fired each round and which shot last struck each body (#75 H-04); cleared with the scene. */
@@ -312,6 +314,13 @@ export class CoastView {
       if (!current(e)) { this.stats.droppedEvents++; continue; }
       this.onEvent(e, f, blown);
     }
+    // A scope (#28 M3-11): with the right button held, a flick across the screen drops the whole look-ahead in one frame,
+    // so the camera can move further than the 96 px margin the culling below keeps around the last camera (walls at the
+    // screen edge went undrawn for a frame from x1.5 up, M0-07). With a scope the camera is placed first and the baking
+    // and culling use this frame's; at the factory scale the order stays as it was.
+    this.leadScale = scopeScale(f.hud.sight?.scope ?? 1, this.view.H / this.view.dpr);
+    const early = this.leadScale.x !== 1 || this.leadScale.y !== 1;
+    if (early) this.camera(f, dt, follow);
     this.bakeAhead(dt);
     this.fx.update(dt);
     this.fx.reveal(f.revealed);
@@ -342,7 +351,7 @@ export class CoastView {
     this.updateStructureGuides(f);
     this.updateXray(f);
     this.updateHighlight(f, visible);
-    this.camera(f, dt, follow);
+    if (!early) this.camera(f, dt, follow);
     if (this.map && isMall(this.map)) {
       // Mist thins out indoors over half a second (the mall's plaza and terrace are outdoors, its halls are not).
       const indoor = insideFootprint(Math.floor(f.player.x / 32), Math.floor(f.player.y / 32)) ? 1 : 0;
@@ -1255,7 +1264,7 @@ export class CoastView {
   /** The mouse look-ahead a pointer asks for: its offset from the point the camera centres the player's chest on. */
   private pointerWant(client: Point, precise: boolean): Lead {
     const c = this.canvasPoint(client.x, client.y);
-    return pointerLead(c.x - this.view.w / 2, c.y - (this.view.h / 2 - this.inset()), precise);
+    return pointerLead(c.x - this.view.w / 2, c.y - (this.view.h / 2 - this.inset()), precise, this.leadScale);
   }
   private camera(f: ViewFrame, dt: number, follow = dt) {
     const p = f.player, k = 1 - Math.exp(-follow * 8), bd = this.camBounds();
@@ -1270,7 +1279,8 @@ export class CoastView {
       const want = this.pointerWant(this.pointer, p.state.precise);
       lead = stepLead(old, want, k, leadRoom(fx, fy, want.ux, want.uy, bd));
     } else {
-      const t = aimLead(p.aim, p.state.precise), lx = ox + (t.x - ox) * k, ly = oy + (t.y - oy) * k, m = Math.hypot(lx, ly);
+      const a = aimLead(p.aim, p.state.precise), s = touchScopeLead(p.aim, this.leadScale, f.hud.aim.raise), t = { x: a.x + s.x, y: a.y + s.y };
+      const lx = ox + (t.x - ox) * k, ly = oy + (t.y - oy) * k, m = Math.hypot(lx, ly);
       lead = m > 1e-9 ? { m, ux: lx / m, uy: ly / m } : { m: 0, ux: 1, uy: 0 };
     }
     const lx = lead.m * lead.ux, ly = lead.m * lead.uy;
