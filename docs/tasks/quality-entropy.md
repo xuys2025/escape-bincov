@@ -257,6 +257,10 @@ CI 自测失败的 1 项是 `policy.test.mjs:199` 写死 `C:/Program Files/Git/b
 | 检查点（已暂停） | [截图](transaction-phases/publication-checkpoint-1280.png) | [截图](transaction-phases/publication-checkpoint-1920.png) |
 | 终局 | [截图](transaction-phases/publication-terminal-1280.png) | [截图](transaction-phases/publication-terminal-1920.png) |
 
+**#117 → #136 → #137 串联集成（2026-10-28）。** 按主代理授权，正常合入 #136 准确候选 `07babfa8e6d4ae5f77d0b9f58bacd446942122ac`（已含 #117 `4ba5b72`），merge/source head 为 `a46cfd8798c9b9f3c7c7345a456647956e308793`。只解决三处共同文档冲突；共同 host/ui 自动合并保留本轮逻辑并更新 Scope 路径。#117 内容身份源码/测试/夹具和 #136 生命周期核心/架构守卫逐字节等于该候选，没有另改逻辑。**PR base 保持 main，必须先 #117、再 #136、最后 #137；三项各自等待准确集成 head 完整 CI。**
+
+此集成重新通过 `pnpm test` **1045/1045**、`pnpm check:ci` **86/86**、`pnpm package` 与 `pnpm test:save-browser` **17/17**；页面异常/console error/外网请求仍为 0。新 HTML SHA-256：`ae43f659a1bc291f34d8672456fdb54014853763fba29181421ea118f4c369bc`。新[完整浏览器报告](transaction-phases/integrated/save-browser-report.json)和两尺寸八张截图放在独立 `transaction-phases/integrated/`，全部目视通过；上方旧报告/截图/哈希保留原提交归属，不冒充新集成。新截图示例：[院子1280](transaction-phases/integrated/publication-yard-1280.png)、[终局1920](transaction-phases/integrated/publication-terminal-1920.png)。
+
 未验：真人、真机、长时性能；准确 head CI 待提交后运行。此项修复异常语义，不宣称全库减熵或 #60 全部完成。
 ## Q-E02 公共视图生命周期归位
 

@@ -4,7 +4,7 @@
 
 | 目标 | 承接入口 | 接手提示 |
 | --- | --- | --- |
-| 事务失败阶段（Q-E04） | [#60 登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553) · [PR #137](https://github.com/xuys2025/escape-bincov/pull/137) · `codex/transaction-failure-phases` · [实现与验证](tasks/quality-entropy.md#q-e04-提交后的发布失败) | 写后发布异常不再当作可回滚/重试的存储失败；消费票据、停止本页、导出已提交记录后刷新。独立于 #134 架构门禁与公共生命周期归位；最终 head/CI 见承接 PR |
+| 事务失败阶段（Q-E04） | [#60 登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553) · [PR #137](https://github.com/xuys2025/escape-bincov/pull/137) · `codex/transaction-failure-phases` · [实现与验证](tasks/quality-entropy.md#q-e04-提交后的发布失败) | 写后发布异常不再当作可回滚/重试的存储失败；消费票据、停止本页、导出已提交记录后刷新。独立验收，当前串联暂含 #117/#136 候选，必须按 #117 → #136 → #137 合并；1045单测/86守卫/package/17存档浏览器通过，准确 head 完整CI见承接PR |
 | 公共视图生命周期归位（Q-E02） | [#60 接手边界](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459328969) · [PR #136](https://github.com/xuys2025/escape-bincov/pull/136) · [实施与验证](tasks/quality-entropy.md#q-e02-公共视图生命周期归位) | `codex/shared-view-lifecycle`，起点 main `0f73a67`：Scope/唯一计数与页面级 Pixi 工具归位到 `view-lifecycle`，保持注册顺序、释放与恢复；与 #134 工具包独立，SAMPLE_AREA 身份继续候选。当前为串联验证暂含 #117 候选 `4ba5b72`，必须先合 #117、再合 #136；准确 head、验证和 CI 见承接 PR |
 | 内容身份：居民楼 region ID（Q-E06） | [PR #117](https://github.com/xuys2025/escape-bincov/pull/117) · [审计边界](tasks/audit-contracts.md) | `fix/content-identity` 续作：居民楼 8 个已有 ID 由定义提供；世界和存档不改号。同步 main 后对照原九图及 mall-v4 两图；楼梯方向和内容登记仍开放，准确 head 与 CI 见原 PR |
 | 新一轮减熵：架构门禁与依赖查询 | [#60 扫描与计划](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6449666799) · [实施与验证](tasks/quality-entropy.md#2026-10-28-架构门禁与按文件查询) | `codex/entropy-architecture`，起点 main `3b61d52`：统一全源码 AST 图，补动态加载/类型导出边界，核心依赖闭包守卫，提供只读按文件查询；其余候选继续 #60，既有 PR 不重复承接。准确 head 与 CI 见本轮 PR |
