@@ -9,8 +9,8 @@
  */
 import { Application, GlobalResourceRegistry } from 'pixi.js';
 // Registers the kept-program graphics adaptor before takeApp creates the page's renderer (ASTRA-R3-PIXI-01).
-import './coast-view/renderer-lifetime';
-import { lifecycle } from './coast-view/scope';
+import './view-lifecycle/renderer-lifetime';
+import { lifecycle } from './view-lifecycle/scope';
 
 let parked: Application | null = null, current: Application | null = null;
 export async function takeApp(): Promise<Application> {

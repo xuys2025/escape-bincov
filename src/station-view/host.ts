@@ -3,7 +3,7 @@ import * as D from '../domain';
 import type { HideoutEvent, HideoutRuntime, HideoutSnapshot, RunWorld, TrainingProgress } from '../hideout-runtime/contract';
 import { trainingHint, trainingSeconds } from './panels';
 import { COUNTY_ART } from './county-art';
-import { Scope, lifecycle } from '../coast-view/scope';
+import { Scope, lifecycle } from '../view-lifecycle/scope';
 import { DOORWAYS, ROOMS, SHED, SITTERS, STATIONS, T, TRAINING_ZONE, WALKERS, WALL_H, domainAt, floors, inRect, type Doorway, type PropDef, type RoomId, type Station, type StationId } from './layout';
 import { HideoutScene, type ActorView, type SceneState } from './scene';
 import type { Dir, Pose } from './art/people';

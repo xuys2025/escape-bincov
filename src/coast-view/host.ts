@@ -20,7 +20,7 @@ import { actorShown } from './structure-guide';
 import { InputState, inputKey, isMoveKey } from './input';
 import { InventoryPanel } from './inventory';
 import { drawMap, mapPanelHtml, type MapLayout } from './map';
-import { Scope, lifecycle } from './scope';
+import { Scope, lifecycle } from '../view-lifecycle/scope';
 import { ITEM_ART_IDS, paintItem, type ItemArtId } from '../art/items';
 import { audio } from '../app';
 import { parkApp, takeApp } from '../pixi-app';

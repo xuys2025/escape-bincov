@@ -19,7 +19,7 @@
 
 [app.ts](../src/app.ts) 组装 `saveSession`、`hideoutRuntime`、音效和宿主引用（`coastSample`、`station`）。`SessionState` 是共享数据，调用者应在事务后重新读取 `save` / `loadout`，不要长期缓存可能被回滚或恢复替换的对象。
 
-新行动的公开端口和画面服务类型 `CoastHandle` / `CoastServices` 在 [raid-runtime/contract.ts](../src/raid-runtime/contract.ts)，[host.ts](../src/raid-runtime/host.ts) 绑定 Runtime 和事务服务并在工厂检查类型；据点端口在 [hideout-runtime/contract.ts](../src/hideout-runtime/contract.ts)。行动背包面板只收到有限服务：按需读取 detached 库存/装备投影，随身整理发三个值/UID 命令，适配器保留原 `SaveSession.mutate`；搜刮模式仍走容器事务，连 bag/safe 内整理也不绕过它。面板不持有 Session/SaveSession，不维护库存副本。尚非所有视图完全隔离：宿主与旧 UI 仍协调会话/路由，场景无关的 `Scope` / 渲染资源工具仍在 coast 目录。
+新行动的公开端口和画面服务类型 `CoastHandle` / `CoastServices` 在 [raid-runtime/contract.ts](../src/raid-runtime/contract.ts)，[host.ts](../src/raid-runtime/host.ts) 绑定 Runtime 和事务服务并在工厂检查类型；据点端口在 [hideout-runtime/contract.ts](../src/hideout-runtime/contract.ts)。行动背包面板只收到有限服务：按需读取 detached 库存/装备投影，随身整理发三个值/UID 命令，适配器保留原 `SaveSession.mutate`；搜刮模式仍走容器事务，连 bag/safe 内整理也不绕过它。面板不持有 Session/SaveSession，不维护库存副本。尚非所有视图完全隔离：宿主与旧 UI 仍协调会话/路由。场景无关的 DOM 资源作用域与唯一计数在 [view-lifecycle/scope.ts](../src/view-lifecycle/scope.ts)，页面级 Pixi 注册与渲染缓存在 [view-lifecycle/renderer-lifetime.ts](../src/view-lifecycle/renderer-lifetime.ts)；两者不导入场景或玩法，调用者直接导入，避免仅使用 `Scope` 时触发 Pixi 注册。
 
 行动期间区分三种状态：Runtime 的实时模拟、Session 最近提交后的检查点、失败后保留的候选。`captureExpansion()` 取得实时状态的独立副本；`session.expansion` 本身不随每个模拟子步更新。负重及上限由 Runtime 的只读服务提供，视图不能从最近检查点重新计算临时效果。编译期类型只约束调用端；外部 JSON 仍须严格运行时校验，字符串 ID 通过 `hasOwnStringKey` 拒绝原型键与数组隐式转换。
 
