@@ -20,11 +20,16 @@ import { AFFECTED_SQUAD } from '../src/enemy-affected.ts';
 import { RECOVERY_SQUAD, RECOVERY_POSTS, RECOVERY_PICKUP } from '../src/enemy-recovery.ts';
 import { BLOCKADE_SQUAD, BLOCKADE_WAIT_POINT } from '../src/enemy-blockade.ts';
 import { runMallEnemyCases } from './enemy-mall-browser.mjs';
+import { completeEnemyUnit, createEnemyCoverage, enemyReportPath, enemySelection, validateEnemyCoverage } from './enemy-browser-plan.mjs';
 
-const out = resolve('test-results/enemy-browser'); await mkdir(out, { recursive: true });
+const selection = enemySelection(process.argv.slice(2));
+const reportPath = resolve(enemyReportPath(selection.shard)), out = resolve(reportPath, '..');
+await mkdir(out, { recursive: true });
+const identity = { runId: process.env.GITHUB_RUN_ID ?? null, runAttempt: process.env.GITHUB_RUN_ATTEMPT ?? null, commit: process.env.GITHUB_SHA ?? null };
+const coverage = createEnemyCoverage(selection, identity);
 const artRoles = ENEMY_CATALOG.filter(card => card.assets.status === 'body-and-corpse').map(card => card.id);
 const motionRoles = ['tidal-crab', 'saltback-dog', 'sac-spitter', 'salt-dazed', 'tide-chaser', 'salt-hulk'];
-const report = { scope: 'All eighteen roles deploy natively in bounded street variants: first three, seed mod 5 = 0 boss, mod 5 = 1 fauna, mod 15 = 2 affected, mod 5 = 3 recovery with one existing cargo, mod 5 = 4 checkpoint with atomic registration and a real marked passage. Phase/art fixtures remain separate from ordinary deployment evidence.', screenshots: [], cases: [], errors: [], external: [], status: 'RUNNING' };
+const report = { scope: 'All eighteen roles deploy natively in bounded street variants: first three, seed mod 5 = 0 boss, mod 5 = 1 fauna, mod 15 = 2 affected, mod 5 = 3 recovery with one existing cargo, mod 5 = 4 checkpoint with atomic registration and a real marked passage. Phase/art fixtures remain separate from ordinary deployment evidence.', screenshots: [], cases: [], errors: [], external: [], status: 'RUNNING', coverage };
 function fixture(phase, role = 'raider-gunner') {
     const data = new Map(), state = createSessionState();
     const saves = new SaveSession(state, () => ({ getItem: k => data.get(k) ?? null, setItem: (k, v) => data.set(k, v) }));
@@ -55,7 +60,7 @@ function fixture(phase, role = 'raider-gunner') {
 }
 const browser = await chromium.launch(browserOptions);
 try {
-    for (const viewport of [{ width: 1280, height: 720 }, { width: 1920, height: 1080 }, { width: 844, height: 390 }]) {
+    for (const viewport of selection.viewports) {
         const touch = viewport.width < 1000;
         const context = await browser.newContext({ viewport, offline: true, hasTouch: touch, isMobile: touch }); await resumeStalls(context);
         const scenarios = (touch ? ['parley'] : ['windup', 'reload', 'recovery', 'parley']).map(phase => ({ phase, role: 'raider-gunner', name: phase }));
@@ -403,10 +408,15 @@ try {
             report.cases.push({viewport,scenario:`native-blockade-${focus}`,population:25,team:3,screenshot:image});
             console.log(`PASS native-blockade ${focus} ${viewport.width}: ordinary registration/patrol, paid trespass reaction and restore`);await ctx.close();
         }
+        completeEnemyUnit(coverage, viewport, 'street', report.cases);
     }
-    await runMallEnemyCases(browser, report, out);
-    assert.deepEqual(report.errors, []); assert.deepEqual(report.external, []); report.status = 'PASS';
+    await runMallEnemyCases(browser, report, out, { viewports: selection.viewports,
+        onViewportComplete: viewport => completeEnemyUnit(coverage, viewport, 'mall', report.cases) });
+    assert.deepEqual(report.errors, []); assert.deepEqual(report.external, []);
+    coverage.status = 'passed'; coverage.finishedAt = new Date().toISOString();
+    validateEnemyCoverage(coverage, selection.shard, identity);
+    report.status = 'PASS';
 } finally {
-    await browser.close(); await writeFile(resolve(out, 'report.json'), JSON.stringify(report, null, 2));
+    await browser.close(); await writeFile(reportPath, JSON.stringify(report, null, 2));
 }
 console.log(JSON.stringify(report, null, 2));

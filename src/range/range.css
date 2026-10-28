@@ -19,6 +19,7 @@
 .rg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
 .rg-grid.two { grid-template-columns: 1fr 1fr; }
 .rg-wide { grid-column: span 2; }
+.rg-full { grid-column: 1 / -1; }
 .rg-gap { margin-top: 8px; }
 button { font: inherit; font-size: 14px; line-height: 18px; min-height: 30px; margin: 0; padding: 2px 4px; background: #2b2a26; color: #ddd5c3;
   border: 1px solid #4b4842; border-radius: 0; cursor: pointer; touch-action: manipulation; white-space: nowrap; }

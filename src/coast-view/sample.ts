@@ -1,5 +1,5 @@
 /**
- * The raid view: every raid runs on this Pixi host over the real Runtime, and a new mall raid deploys layout revision 3.
+ * The raid view: every raid runs on this Pixi host over the real Runtime, and a new mall raid deploys layout revision 4.
  * Raids started before the switch (classic coast checkpoints, mall layout 1) resume and settle here too. Only one host
  * may own the SaveSession at a time.
  *
@@ -22,7 +22,7 @@ import { isMallWorld } from '../mall-world';
 // Node tests render the UI without a location: no flags there.
 const params = () => new URLSearchParams(globalThis.location?.search ?? '');
 /**
- * The view draws every raid in the save: coast-buildings, mall layouts 1-3 (a raid keeps the layout it deployed on
+ * The view draws every raid in the save: coast-buildings, mall layouts 1-4 (a raid keeps the layout it deployed on
  * until it ends) and the classic coast's checkpoint raids started before that area closed.
  */
 export const sampleSupports = () => !!app.expansion?.raid || !!app.checkpoint;

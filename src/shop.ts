@@ -1,4 +1,5 @@
 import * as D from './domain';
+import { partFits } from './gunsmith/bench';
 
 export type Merchant = keyof typeof D.MERCHANTS;
 export type ShopSource = 'merchant' | 'buy' | 'sell' | 'stash';
@@ -13,10 +14,42 @@ export interface ShopCart {
 export function merchantStock(merchant: Merchant, rpg = false): string[] {
     return [...D.MERCHANTS[merchant].stock, ...(rpg ? merchant === 'arms' ? ['cloth'] : ['analgesic', 'focus'] : [])];
 }
-export function createCart(save: D.SaveDataV1, merchant: Merchant, rpg = false): ShopCart {
-    const catalog = D.createInventory(6, 5);
-    for (const id of merchantStock(merchant, rpg)) D.addItem(catalog, id, D.buyQuantity(id));
-    return { merchant, original: JSON.stringify(save.stash), catalog, buy: D.createInventory(4, 3), sell: D.createInventory(4, 3), stash: structuredClone(save.stash) };
+/**
+ * What the catalog shows (#28 M2-08): one item kind or all, `fits` keeping only what serves a gun at the base (the
+ * attachments one of them can take, now or after an opener, and the ammo they fire), and the page.
+ */
+export interface ShopBrowse { kind: D.ItemKind | 'all'; fits: boolean; page: number }
+export const BROWSE_ALL: ShopBrowse = Object.freeze({ kind: 'all', fits: false, page: 0 });
+/** The catalog's size: one page of the stock at a time. */
+export const CATALOG_W = 6, CATALOG_H = 5;
+/** The stock the browse selects, in stock order. */
+export function browseStock(save: Readonly<D.SaveDataV1>, merchant: Merchant, rpg: boolean, browse: ShopBrowse): string[] {
+    const ammo = new Set(D.isGun(save.equipment.weapon) ? [D.WEAPONS[save.equipment.weapon].ammo] : []);
+    for (const inv of [save.stash, save.bag, save.safe]) for (const i of inv.items) if (D.isGun(i.id)) ammo.add(D.WEAPONS[i.id].ammo);
+    return merchantStock(merchant, rpg).filter(id => (browse.kind === 'all' || D.ITEMS[id].kind === browse.kind)
+        && (!browse.fits || (D.isAttachment(id) ? partFits(save, id).length > 0 : ammo.has(id))));
+}
+/** `ids` packed into catalog pages in order: a pack that no longer fits starts the next page. Never empty. */
+export function catalogPages(ids: readonly string[]): string[][] {
+    const pages: string[][] = [[]];
+    let page = D.createInventory(CATALOG_W, CATALOG_H);
+    for (const id of ids) {
+        if (D.addItem(page, id, D.buyQuantity(id)) > 0) { page = D.createInventory(CATALOG_W, CATALOG_H); D.addItem(page, id, D.buyQuantity(id)); pages.push([]); }
+        pages.at(-1)!.push(id);
+    }
+    return pages;
+}
+/** The kinds in a merchant's stock, in stock order: the catalog's category buttons. */
+export const stockKinds = (merchant: Merchant, rpg: boolean): D.ItemKind[] => [...new Set(merchantStock(merchant, rpg).map(id => D.ITEMS[id].kind))];
+export function createCart(save: D.SaveDataV1, merchant: Merchant, rpg = false, browse: ShopBrowse = BROWSE_ALL): ShopCart {
+    return { merchant, original: JSON.stringify(save.stash), catalog: catalogPage(save, merchant, rpg, browse).catalog, buy: D.createInventory(4, 3), sell: D.createInventory(4, 3), stash: structuredClone(save.stash) };
+}
+/** One catalog page of the browse (the page clamped to those there are), and how many pages there are. */
+export function catalogPage(save: Readonly<D.SaveDataV1>, merchant: Merchant, rpg: boolean, browse: ShopBrowse): { catalog: D.Inventory; page: number; pages: number } {
+    const pages = catalogPages(browseStock(save, merchant, rpg, browse)), page = Math.max(0, Math.min(pages.length - 1, Math.floor(browse.page) || 0));
+    const catalog = D.createInventory(CATALOG_W, CATALOG_H);
+    for (const id of pages[page]) D.addItem(catalog, id, D.buyQuantity(id));
+    return { catalog, page, pages: pages.length };
 }
 export const shopInventory = (cart: ShopCart, source: ShopSource) => source === 'merchant' ? cart.catalog : cart[source];
 /** The reason a cell gives when it only lacks room; quick moves replace it with their own "area is full" message. */

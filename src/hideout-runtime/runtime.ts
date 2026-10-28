@@ -11,11 +11,21 @@ import { equipCharm, unequipCharm } from '../reputation-luck';
 import { decodePortableBackup, encodeRecoveryBackup } from '../save-backup';
 import { generateRun } from '../world';
 import { SaveSession, type SessionState, type ExpansionDraft, type ExpansionTransaction } from '../session';
+import { locateGun, planGunEdit, type GunEdit, type GunEditFault, type GunEditPlan, type GunEditPreview } from '../gunsmith/edit';
+import { PRESET_LIMIT, PRESET_NAME_MAX, defaultPresetName, presetName, validPreset, type GunPreset, type PresetNode } from '../gunsmith/presets';
 import { validPractice } from './training';
 import type * as C from './contract';
 const ok = (): C.Result => ({ ok: true });
 const fail = (reason: C.FailReason, message = '操作未完成，请检查条件后重试。'): C.Result => ({ ok: false, reason, message });
 const source = (s: string): s is C.Source => ['stash', 'bag', 'safe'].includes(s);
+
+/** How the workbench's refusals answer (planGunEdit's codes); every other code is a rule the edit breaks. */
+const GUNSMITH_FAILS: Partial<Record<GunEditFault, C.FailReason>> = {
+    raid: 'locked', 'missing-gun': 'missing-item', 'missing-part': 'missing-item', unowned: 'missing-item', space: 'space', footprint: 'space', unchanged: 'no-effect',
+};
+const gunsmithFail = (code: GunEditFault, message: string) => fail(GUNSMITH_FAILS[code] ?? 'rule', message);
+/** A confirm the base moved under; and one whose token is not the latest preview's (or a preview that cannot be confirmed). */
+const STALE_EDIT = '仓库或装备已改变，请重新预览改装。', OLD_PREVIEW = '请按最新的改装预览确认。';
 
 /** The fee for resetting one attribute's perks (docs/CRITICAL-PERK-DESIGN.md section 5). */
 const PERK_RESET_COST = 500;
@@ -147,7 +157,7 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
             seconds = this.applySamples(draft);
             const result = apply(draft);
             if (result === false || typeof result === 'object' && !result.ok) { rejection = result === false ? fail('rule') : result; return false; }
-            if (['move', 'quick-move', 'secure', 'equip', 'unequip', 'shop', 'quest', 'stash-upgrade'].includes(action)) D.grantRelief(draft.profile);
+            if (['move', 'quick-move', 'secure', 'equip', 'unequip', 'shop', 'quest', 'stash-upgrade', 'gunsmith'].includes(action)) D.grantRelief(draft.profile);
             candidate = structuredClone(draft); return true;
         }); } catch { return fail('rule', '操作数据无效，当前进度未改动。'); }
         if (!ticket) return rejection;
@@ -257,7 +267,7 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
         if (!['stash', 'bag'].includes(from)) return fail('rule', '请先把枪械放入背包或仓库，再装备主武器。');
         const item = this.state.save[from].items.find(i => i.uid === uid);
         if (!item) return fail('missing-item', '物品已不在原位置，请重新选择。');
-        if (item.id === 'knife' || !Object.hasOwn(D.WEAPONS, item.id)) return fail('rule', '这件物品不能装备为主武器。');
+        if (!D.isGun(item.id)) return fail('rule', '这件物品不能装备为主武器。');
         return this.transaction('equip', d => D.equip(d.profile, uid) || fail('space', '无法装备：原武器及弹匣余弹在原容器中放不下，请先腾出空间。'));
     }
     unequip() { return this.transaction('unequip', d => D.unequip(d.profile) || fail('space')); }
@@ -410,7 +420,7 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
             + (weapon.ammo ? D.ITEMS[weapon.ammo].weight * p.equipment.ammo : 0) + (this.state.expansion?.charm ? D.ITEMS[this.state.expansion.charm.id].weight : 0);
         return { warnings: [...departureWarnings(s.profile), ...(weight > s.body.carry ? ['携行重量超过当前负重'] : []), ...(s.body.hp < s.body.hpMax ? ['生命尚未恢复'] : [])], weight, carry: s.body.carry };
     }
-    deploy(req: { world: C.RunWorld; seed: string; mallLayout?: 1 | 2 | 3 }): C.Result & { runId?: string } {
+    deploy(req: { world: C.RunWorld; seed: string; mallLayout?: 1 | 2 | 3 | 4 }): C.Result & { runId?: string } {
         const blocked = this.guard(); if (blocked) return blocked;
         if (!req || !['coast', 'buildings', 'mall'].includes(req.world) || typeof req.seed !== 'string' || req.seed.length > 200) return fail('rule');
         if (this.samples.length) { const flushed = this.transaction('checkpoint', () => true, true); if (!flushed.ok) return flushed; }
@@ -448,14 +458,16 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
     }
     openShop(merchant: C.Merchant): C.ShopSession {
         if (!Object.hasOwn(D.MERCHANTS, merchant)) throw new Error('无效商人。');
-        let cart = Shop.createCart(this.state.save, merchant, true), confirmation: { token: string; key: string } | null = null;
+        let browse: Shop.ShopBrowse = Shop.BROWSE_ALL;
+        let cart = Shop.createCart(this.state.save, merchant, true, browse), confirmation: { token: string; key: string } | null = null;
         const warnings = () => Shop.saleWarnings(this.state.save, cart).map(w => `${w.quest}：${D.ITEMS[w.id].name}还需${w.needed}，出售后剩${w.remaining}`);
         const key = () => JSON.stringify([cart, warnings(), this.state.save.quests]);
         const validSource = (value: string) => ['merchant', 'buy', 'sell', 'stash'].includes(value);
         const stale = () => Shop.cartStale(this.state.save, cart);
         const rejected = (reason: Shop.CartRejection) => fail(reason, Shop.cartRejectionMessage[reason]);
         return {
-            view: () => structuredClone({ merchant, ...D.MERCHANTS[merchant], catalog: cart.catalog, buy: cart.buy, sell: cart.sell, stash: cart.stash, totals: Shop.cartTotals(cart), dirty: Shop.cartDirty(cart), stale: stale(), warnings: warnings(), placement: 'automatic-stash' }),
+            view: () => structuredClone({ merchant, ...D.MERCHANTS[merchant], catalog: cart.catalog, buy: cart.buy, sell: cart.sell, stash: cart.stash, totals: Shop.cartTotals(cart), dirty: Shop.cartDirty(cart), stale: stale(), warnings: warnings(), placement: 'automatic-stash',
+                browse: { ...browse, pages: Shop.catalogPage(this.state.save, merchant, true, browse).pages, kinds: Shop.stockKinds(merchant, true) } } as const),
             placementError: (from, to, uid, x, y) => stale() ? Shop.cartRejectionMessage.stale : validSource(from) && validSource(to) ? Shop.shopPlacementError(cart, from, to, uid, x, y) : '无效容器。',
             place: (from, to, uid, x, y) => {
                 const blocked = this.guard(); if (blocked) return blocked;
@@ -473,9 +485,102 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
                     return { ok: false, reason: 'rule', message: '出售会消耗未完成任务，请确认。', confirmation: { kind: 'quest-sale', token: confirmation.token, warnings: list } };
                 }
                 const result = this.transaction('shop', d => { const r = Shop.settleCartResult(d.profile, cart, true); return r.ok ? true : rejected(r.reason); });
-                if (result.ok) { cart = Shop.createCart(this.state.save, merchant, true); confirmation = null; } return result;
+                if (result.ok) { cart = Shop.createCart(this.state.save, merchant, true, browse); confirmation = null; } return result;
             },
-            reset: () => { if (!this.guard()) { cart = Shop.createCart(this.state.save, merchant, true); confirmation = null; } },
+            reset: () => { if (!this.guard()) { cart = Shop.createCart(this.state.save, merchant, true, browse); confirmation = null; } },
+            browse: view => {
+                // Only the catalog changes: its packs are templates (buying copies one), so a new page loses nothing.
+                const kinds: string[] = ['all', ...Shop.stockKinds(merchant, true)];
+                const asked: Shop.ShopBrowse = { kind: kinds.includes(view?.kind) ? view.kind : 'all', fits: view?.fits === true, page: Number.isInteger(view?.page) ? view.page : 0 };
+                const page = Shop.catalogPage(this.state.save, merchant, true, asked);
+                cart.catalog = page.catalog; browse = { ...asked, page: page.page };
+            },
+        };
+    }
+    /**
+     * The workbench for one gun (#28 M2-04), shaped like the shop's cart: the player's preview stays private to the
+     * session and is written only by confirm, through `transaction` (one SaveSession commit, nothing kept after a
+     * failed write). planGunEdit does the rules on the committed profile; the session binds each preview to the
+     * equipped slot and the three containers as they were (the positions of the gun and of every part) and to a
+     * one-use token. Contract: C.GunsmithSession.
+     */
+    /** Presets (#28 M2-07): one commit each, through `transaction`; nothing is kept after a failed write. Contract: C.HideoutRuntime. */
+    savePreset(gun: string, parts: PresetNode[], name: string | null = null): C.Result & { id?: string } {
+        const blocked = this.guard(); if (blocked) return blocked;
+        let id = '';
+        const r = this.transaction('gunsmith-preset', d => {
+            const list = d.profile.gunPresets ?? [];
+            if (!D.isGun(gun)) return fail('rule', '这不是能改装的枪。');
+            if (list.filter(p => p.gun === gun).length >= PRESET_LIMIT) return fail('rule', `每种枪最多存 ${PRESET_LIMIT} 套预设，先删掉一套。`);
+            const label = name === null ? defaultPresetName(list, gun) : presetName(name);
+            if (!label) return fail('rule', `预设名要 1 到 ${PRESET_NAME_MAX} 个字。`);
+            let n = 1; while (list.some(p => p.id === `preset-${n}`)) n++;
+            const preset: GunPreset = { id: `preset-${n}`, name: label, gun, parts: structuredClone(parts) };
+            if (!validPreset(preset)) return fail('rule', '预设里的配件结构无效。');
+            d.profile.gunPresets = [...list, preset]; id = preset.id;
+            return true;
+        });
+        return r.ok ? { ok: true, message: '预设已保存。', id } : r;
+    }
+    renamePreset(id: string, name: string): C.Result {
+        const blocked = this.guard(); if (blocked) return blocked;
+        const r = this.transaction('gunsmith-preset', d => {
+            const list = d.profile.gunPresets ?? [], at = list.findIndex(p => p.id === id), label = presetName(name);
+            if (at < 0) return fail('missing-item', '这套预设已不在了。');
+            if (!label) return fail('rule', `预设名要 1 到 ${PRESET_NAME_MAX} 个字。`);
+            d.profile.gunPresets = list.map((p, i) => i === at ? { ...p, name: label } : p);
+            return true;
+        });
+        return r.ok ? { ok: true, message: '预设已改名。' } : r;
+    }
+    deletePreset(id: string): C.Result {
+        const blocked = this.guard(); if (blocked) return blocked;
+        const r = this.transaction('gunsmith-preset', d => {
+            const list = d.profile.gunPresets ?? [], left = list.filter(p => p.id !== id);
+            if (left.length === list.length) return fail('missing-item', '这套预设已不在了。');
+            if (left.length) d.profile.gunPresets = left; else delete d.profile.gunPresets;
+            return true;
+        });
+        return r.ok ? { ok: true, message: '预设已删除。' } : r;
+    }
+    openGunsmith(gun: string): C.GunsmithSession {
+        const inventory = () => { const p = this.state.save; return JSON.stringify([p.equipment, p.stash, p.bag, p.safe]); };
+        let shown: { edits: GunEdit[]; preview: GunEditPreview; key: string; token: string | null } | null = null;
+        const stale = () => !!shown && shown.key !== inventory();
+        return {
+            view: () => {
+                this.sync();
+                const found = locateGun(this.state.save, gun), old = stale();
+                return structuredClone({ gun: found && { uid: gun, id: found.id, relief: found.relief, where: found.where, state: found.state },
+                    edits: shown?.edits ?? [], preview: shown?.preview ?? null, token: old ? null : shown?.token ?? null, stale: old });
+            },
+            preview: edits => {
+                this.sync(); const blocked = this.guard(); if (blocked) return blocked;
+                let requested: GunEdit[], plan: GunEditPlan;
+                try { requested = structuredClone([...edits]); plan = planGunEdit(this.state.save, gun, requested); } catch { return fail('rule', '改装数据无效，当前进度未改动。'); }
+                if (!plan.ok && !plan.preview) return { ...gunsmithFail(plan.code, plan.reason), ...(plan.edit === null ? {} : { edit: plan.edit }) };
+                const token = plan.ok ? `gunsmith-${++this.serial}` : null;
+                shown = { edits: requested, preview: plan.preview!, key: inventory(), token };
+                return { ok: true, ...(token ? { token } : {}), preview: structuredClone(plan.preview!) };
+            },
+            confirm: token => {
+                this.sync(); const blocked = this.guard(); if (blocked) return blocked;
+                const previewed = shown;
+                if (!previewed?.token || previewed.token !== token) return fail('stale', OLD_PREVIEW);
+                if (stale()) return fail('stale', STALE_EDIT);
+                const result = this.transaction('gunsmith', d => {
+                    const plan = planGunEdit(d.profile, gun, previewed.edits);
+                    if (!plan.ok) return gunsmithFail(plan.code, plan.reason);
+                    if (JSON.stringify(plan.preview) !== JSON.stringify(previewed.preview)) return fail('stale', STALE_EDIT);
+                    const { equipment, stash, bag, safe } = plan.profile;
+                    Object.assign(d.profile, { equipment, stash, bag, safe });
+                    return true;
+                });
+                if (!result.ok) return result;
+                if (shown === previewed) shown = null;
+                return { ok: true, message: '改装已保存。' };
+            },
+            reset: () => { shown = null; },
         };
     }
 }

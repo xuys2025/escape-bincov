@@ -1,0 +1,2146 @@
+{
+ "source": "Sol, #28 M2-09 delivery (改枪素材样板-20261028/preview/fullbatch/assembly-records.json), the approved preview assemblies; ids without version suffix, the carbine inventory references under their runtime keys.",
+ "method": "Saved manifest anchors only; no manual component placement",
+ "virtual": [
+  {
+   "key": "gs-carbine-receiver-i",
+   "w": 78,
+   "h": 17,
+   "output": "inventory",
+   "anchor": null,
+   "mounts": {
+    "handguard": [
+     44,
+     8
+    ],
+    "mount": [
+     33,
+     4
+    ],
+    "muzzle": [
+     77,
+     5
+    ]
+   },
+   "tip": [
+    78,
+    6
+   ]
+  },
+  {
+   "key": "gs-carbine-handguard-factory-i",
+   "w": 78,
+   "h": 17,
+   "output": "inventory",
+   "anchor": [
+    44,
+    8
+   ]
+  }
+ ],
+ "assemblies": [
+  {
+   "gun": "mb4a1",
+   "code": "h",
+   "configuration": "factory",
+   "items": [],
+   "w": 32,
+   "h": 11,
+   "tip": [
+    32,
+    4
+   ],
+   "layers": [
+    {
+     "key": "gs-mb4a1-stock-factory-h",
+     "label": "stock",
+     "origin": [
+      0,
+      2
+     ]
+    },
+    {
+     "key": "gs-mb4a1-reargrip-factory-h",
+     "label": "rearGrip",
+     "origin": [
+      10,
+      6
+     ]
+    },
+    {
+     "key": "gs-mb4a1-mag-factory-h",
+     "label": "mag",
+     "origin": [
+      16,
+      6
+     ]
+    },
+    {
+     "key": "gs-mb4a1-barrel-factory-h",
+     "label": "barrel",
+     "origin": [
+      20,
+      1
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-h",
+     "label": "receiver",
+     "origin": [
+      7,
+      1
+     ]
+    },
+    {
+     "key": "gs-mb4a1-handguard-factory-h",
+     "label": "handguard",
+     "origin": [
+      20,
+      3
+     ]
+    },
+    {
+     "key": "gs-mb4a1-top-factory-h",
+     "label": "top",
+     "origin": [
+      13,
+      0
+     ]
+    },
+    {
+     "key": "gs-glove-rear-h",
+     "label": "glove-rear",
+     "origin": [
+      10,
+      6
+     ]
+    },
+    {
+     "key": "gs-glove-front-h",
+     "label": "glove-front",
+     "origin": [
+      23,
+      6
+     ]
+    }
+   ],
+   "grip": [
+    11,
+    6
+   ],
+   "bore": 4,
+   "forward": 0,
+   "hand": [
+    24,
+    6
+   ],
+   "tipBoreDelta": 0,
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-factory-h.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "h",
+   "configuration": "light",
+   "items": [
+    "S01",
+    "H01",
+    "F03",
+    "O03",
+    "G10",
+    "P01"
+   ],
+   "w": 31,
+   "h": 12,
+   "tip": [
+    31,
+    5
+   ],
+   "layers": [
+    {
+     "key": "gs-s01-h",
+     "label": "stock",
+     "origin": [
+      0,
+      3
+     ]
+    },
+    {
+     "key": "gs-mb4a1-reargrip-factory-h",
+     "label": "rearGrip",
+     "origin": [
+      9,
+      7
+     ]
+    },
+    {
+     "key": "gs-g10-h",
+     "label": "mag",
+     "origin": [
+      15,
+      7
+     ]
+    },
+    {
+     "key": "gs-mb4a1-barrel-factory-h",
+     "label": "barrel",
+     "origin": [
+      19,
+      2
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-h",
+     "label": "receiver",
+     "origin": [
+      6,
+      2
+     ]
+    },
+    {
+     "key": "gs-h01-h",
+     "label": "handguard",
+     "origin": [
+      19,
+      4
+     ]
+    },
+    {
+     "key": "gs-f03-h",
+     "label": "under",
+     "origin": [
+      21,
+      7
+     ]
+    },
+    {
+     "key": "gs-o03-h",
+     "label": "top",
+     "origin": [
+      11,
+      0
+     ]
+    },
+    {
+     "key": "gs-glove-rear-h",
+     "label": "glove-rear",
+     "origin": [
+      9,
+      7
+     ]
+    },
+    {
+     "key": "gs-glove-foregrip-h",
+     "label": "glove-foregrip",
+     "origin": [
+      22,
+      8
+     ]
+    }
+   ],
+   "grip": [
+    10,
+    7
+   ],
+   "bore": 5,
+   "forward": 0,
+   "hand": [
+    23,
+    8
+   ],
+   "tipBoreDelta": 0,
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-light-h.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "h",
+   "configuration": "stable",
+   "items": [
+    "S02",
+    "B08",
+    "M06",
+    "H01",
+    "F01",
+    "O08",
+    "P02"
+   ],
+   "w": 38,
+   "h": 13,
+   "tip": [
+    38,
+    6
+   ],
+   "layers": [
+    {
+     "key": "gs-s02-h",
+     "label": "stock",
+     "origin": [
+      0,
+      4
+     ]
+    },
+    {
+     "key": "gs-mb4a1-reargrip-factory-h",
+     "label": "rearGrip",
+     "origin": [
+      11,
+      8
+     ]
+    },
+    {
+     "key": "gs-mb4a1-mag-factory-h",
+     "label": "mag",
+     "origin": [
+      17,
+      8
+     ]
+    },
+    {
+     "key": "gs-b08-h",
+     "label": "barrel",
+     "origin": [
+      21,
+      4
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-h",
+     "label": "receiver",
+     "origin": [
+      8,
+      3
+     ]
+    },
+    {
+     "key": "gs-h01-h",
+     "label": "handguard",
+     "origin": [
+      21,
+      5
+     ]
+    },
+    {
+     "key": "gs-f01-h",
+     "label": "under",
+     "origin": [
+      24,
+      8
+     ]
+    },
+    {
+     "key": "gs-o08-h",
+     "label": "top",
+     "origin": [
+      11,
+      0
+     ]
+    },
+    {
+     "key": "gs-m06-h",
+     "label": "muzzle",
+     "origin": [
+      35,
+      4
+     ]
+    },
+    {
+     "key": "gs-glove-rear-h",
+     "label": "glove-rear",
+     "origin": [
+      11,
+      8
+     ]
+    },
+    {
+     "key": "gs-glove-foregrip-h",
+     "label": "glove-foregrip",
+     "origin": [
+      23,
+      9
+     ]
+    }
+   ],
+   "grip": [
+    12,
+    8
+   ],
+   "bore": 6,
+   "forward": 0,
+   "hand": [
+    24,
+    9
+   ],
+   "tipBoreDelta": 0,
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-stable-h.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "h",
+   "configuration": "laser",
+   "items": [
+    "H01",
+    "T01"
+   ],
+   "w": 32,
+   "h": 11,
+   "tip": [
+    32,
+    4
+   ],
+   "layers": [
+    {
+     "key": "gs-mb4a1-stock-factory-h",
+     "label": "stock",
+     "origin": [
+      0,
+      2
+     ]
+    },
+    {
+     "key": "gs-mb4a1-reargrip-factory-h",
+     "label": "rearGrip",
+     "origin": [
+      10,
+      6
+     ]
+    },
+    {
+     "key": "gs-mb4a1-mag-factory-h",
+     "label": "mag",
+     "origin": [
+      16,
+      6
+     ]
+    },
+    {
+     "key": "gs-mb4a1-barrel-factory-h",
+     "label": "barrel",
+     "origin": [
+      20,
+      1
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-h",
+     "label": "receiver",
+     "origin": [
+      7,
+      1
+     ]
+    },
+    {
+     "key": "gs-h01-h",
+     "label": "handguard",
+     "origin": [
+      20,
+      3
+     ]
+    },
+    {
+     "key": "gs-mb4a1-top-factory-h",
+     "label": "top",
+     "origin": [
+      13,
+      0
+     ]
+    },
+    {
+     "key": "gs-t01-h",
+     "label": "side1",
+     "origin": [
+      24,
+      4
+     ]
+    },
+    {
+     "key": "gs-glove-rear-h",
+     "label": "glove-rear",
+     "origin": [
+      10,
+      6
+     ]
+    },
+    {
+     "key": "gs-glove-front-h",
+     "label": "glove-front",
+     "origin": [
+      22,
+      6
+     ]
+    }
+   ],
+   "grip": [
+    11,
+    6
+   ],
+   "bore": 4,
+   "forward": 0,
+   "hand": [
+    23,
+    6
+   ],
+   "tipBoreDelta": 0,
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-laser-h.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "h",
+   "configuration": "p0-all",
+   "items": [
+    "O03",
+    "M06",
+    "H01",
+    "F01"
+   ],
+   "w": 34,
+   "h": 12,
+   "tip": [
+    34,
+    5
+   ],
+   "layers": [
+    {
+     "key": "gs-mb4a1-stock-factory-h",
+     "label": "stock",
+     "origin": [
+      0,
+      3
+     ]
+    },
+    {
+     "key": "gs-mb4a1-reargrip-factory-h",
+     "label": "rearGrip",
+     "origin": [
+      10,
+      7
+     ]
+    },
+    {
+     "key": "gs-mb4a1-mag-factory-h",
+     "label": "mag",
+     "origin": [
+      16,
+      7
+     ]
+    },
+    {
+     "key": "gs-mb4a1-barrel-factory-h",
+     "label": "barrel",
+     "origin": [
+      20,
+      2
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-h",
+     "label": "receiver",
+     "origin": [
+      7,
+      2
+     ]
+    },
+    {
+     "key": "gs-h01-h",
+     "label": "handguard",
+     "origin": [
+      20,
+      4
+     ]
+    },
+    {
+     "key": "gs-f01-h",
+     "label": "under",
+     "origin": [
+      23,
+      7
+     ]
+    },
+    {
+     "key": "gs-o03-h",
+     "label": "top",
+     "origin": [
+      12,
+      0
+     ]
+    },
+    {
+     "key": "gs-m06-h",
+     "label": "muzzle",
+     "origin": [
+      31,
+      3
+     ]
+    },
+    {
+     "key": "gs-glove-rear-h",
+     "label": "glove-rear",
+     "origin": [
+      10,
+      7
+     ]
+    },
+    {
+     "key": "gs-glove-foregrip-h",
+     "label": "glove-foregrip",
+     "origin": [
+      22,
+      8
+     ]
+    }
+   ],
+   "grip": [
+    11,
+    7
+   ],
+   "bore": 5,
+   "forward": 0,
+   "hand": [
+    23,
+    8
+   ],
+   "tipBoreDelta": 0,
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-p0-all-h.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "i",
+   "configuration": "factory",
+   "items": [],
+   "w": 80,
+   "h": 17,
+   "tip": [
+    80,
+    5
+   ],
+   "layers": [
+    {
+     "key": "gs-mb4a1-stock-factory-i",
+     "label": "stock",
+     "origin": [
+      0,
+      1
+     ]
+    },
+    {
+     "key": "gs-mb4a1-reargrip-factory-i",
+     "label": "rearGrip",
+     "origin": [
+      26,
+      8
+     ]
+    },
+    {
+     "key": "gs-mb4a1-mag-factory-i",
+     "label": "mag",
+     "origin": [
+      41,
+      8
+     ]
+    },
+    {
+     "key": "gs-mb4a1-barrel-factory-i",
+     "label": "barrel",
+     "origin": [
+      51,
+      1
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-i",
+     "label": "receiver",
+     "origin": [
+      19,
+      2
+     ]
+    },
+    {
+     "key": "gs-mb4a1-handguard-factory-i",
+     "label": "handguard",
+     "origin": [
+      51,
+      4
+     ]
+    },
+    {
+     "key": "gs-mb4a1-top-factory-i",
+     "label": "top",
+     "origin": [
+      31,
+      0
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-factory-i.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "i",
+   "configuration": "light",
+   "items": [
+    "S01",
+    "H01",
+    "F03",
+    "O03",
+    "G10",
+    "P01"
+   ],
+   "w": 78,
+   "h": 22,
+   "tip": [
+    78,
+    9
+   ],
+   "layers": [
+    {
+     "key": "gs-s01-i",
+     "label": "stock",
+     "origin": [
+      0,
+      5
+     ]
+    },
+    {
+     "key": "gs-p01-i",
+     "label": "rearGrip",
+     "origin": [
+      24,
+      12
+     ]
+    },
+    {
+     "key": "gs-g10-i",
+     "label": "mag",
+     "origin": [
+      39,
+      12
+     ]
+    },
+    {
+     "key": "gs-mb4a1-barrel-factory-i",
+     "label": "barrel",
+     "origin": [
+      49,
+      5
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-i",
+     "label": "receiver",
+     "origin": [
+      17,
+      6
+     ]
+    },
+    {
+     "key": "gs-h01-i",
+     "label": "handguard",
+     "origin": [
+      49,
+      8
+     ]
+    },
+    {
+     "key": "gs-f03-i",
+     "label": "under",
+     "origin": [
+      54,
+      15
+     ]
+    },
+    {
+     "key": "gs-o03-i",
+     "label": "top",
+     "origin": [
+      27,
+      0
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-light-i.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "i",
+   "configuration": "stable",
+   "items": [
+    "S02",
+    "B08",
+    "M06",
+    "H01",
+    "F01",
+    "O08",
+    "P02"
+   ],
+   "w": 96,
+   "h": 25,
+   "tip": [
+    96,
+    11
+   ],
+   "layers": [
+    {
+     "key": "gs-s02-i",
+     "label": "stock",
+     "origin": [
+      0,
+      7
+     ]
+    },
+    {
+     "key": "gs-p02-i",
+     "label": "rearGrip",
+     "origin": [
+      28,
+      14
+     ]
+    },
+    {
+     "key": "gs-mb4a1-mag-factory-i",
+     "label": "mag",
+     "origin": [
+      43,
+      14
+     ]
+    },
+    {
+     "key": "gs-b08-i",
+     "label": "barrel",
+     "origin": [
+      53,
+      8
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-i",
+     "label": "receiver",
+     "origin": [
+      21,
+      8
+     ]
+    },
+    {
+     "key": "gs-h01-i",
+     "label": "handguard",
+     "origin": [
+      53,
+      10
+     ]
+    },
+    {
+     "key": "gs-f01-i",
+     "label": "under",
+     "origin": [
+      60,
+      17
+     ]
+    },
+    {
+     "key": "gs-o08-i",
+     "label": "top",
+     "origin": [
+      26,
+      0
+     ]
+    },
+    {
+     "key": "gs-m06-i",
+     "label": "muzzle",
+     "origin": [
+      88,
+      8
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-stable-i.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "i",
+   "configuration": "laser",
+   "items": [
+    "H01",
+    "T01"
+   ],
+   "w": 80,
+   "h": 17,
+   "tip": [
+    80,
+    5
+   ],
+   "layers": [
+    {
+     "key": "gs-mb4a1-stock-factory-i",
+     "label": "stock",
+     "origin": [
+      0,
+      1
+     ]
+    },
+    {
+     "key": "gs-mb4a1-reargrip-factory-i",
+     "label": "rearGrip",
+     "origin": [
+      26,
+      8
+     ]
+    },
+    {
+     "key": "gs-mb4a1-mag-factory-i",
+     "label": "mag",
+     "origin": [
+      41,
+      8
+     ]
+    },
+    {
+     "key": "gs-mb4a1-barrel-factory-i",
+     "label": "barrel",
+     "origin": [
+      51,
+      1
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-i",
+     "label": "receiver",
+     "origin": [
+      19,
+      2
+     ]
+    },
+    {
+     "key": "gs-h01-i",
+     "label": "handguard",
+     "origin": [
+      51,
+      4
+     ]
+    },
+    {
+     "key": "gs-mb4a1-top-factory-i",
+     "label": "top",
+     "origin": [
+      31,
+      0
+     ]
+    },
+    {
+     "key": "gs-t01-i",
+     "label": "side1",
+     "origin": [
+      60,
+      6
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-laser-i.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "i",
+   "configuration": "p0-all",
+   "items": [
+    "O03",
+    "M06",
+    "H01",
+    "F01"
+   ],
+   "w": 87,
+   "h": 23,
+   "tip": [
+    87,
+    9
+   ],
+   "layers": [
+    {
+     "key": "gs-mb4a1-stock-factory-i",
+     "label": "stock",
+     "origin": [
+      0,
+      5
+     ]
+    },
+    {
+     "key": "gs-mb4a1-reargrip-factory-i",
+     "label": "rearGrip",
+     "origin": [
+      26,
+      12
+     ]
+    },
+    {
+     "key": "gs-mb4a1-mag-factory-i",
+     "label": "mag",
+     "origin": [
+      41,
+      12
+     ]
+    },
+    {
+     "key": "gs-mb4a1-barrel-factory-i",
+     "label": "barrel",
+     "origin": [
+      51,
+      5
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-i",
+     "label": "receiver",
+     "origin": [
+      19,
+      6
+     ]
+    },
+    {
+     "key": "gs-h01-i",
+     "label": "handguard",
+     "origin": [
+      51,
+      8
+     ]
+    },
+    {
+     "key": "gs-f01-i",
+     "label": "under",
+     "origin": [
+      58,
+      15
+     ]
+    },
+    {
+     "key": "gs-o03-i",
+     "label": "top",
+     "origin": [
+      29,
+      0
+     ]
+    },
+    {
+     "key": "gs-m06-i",
+     "label": "muzzle",
+     "origin": [
+      79,
+      6
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-p0-all-i.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "w",
+   "configuration": "factory",
+   "items": [],
+   "w": 160,
+   "h": 34,
+   "tip": [
+    160,
+    10
+   ],
+   "layers": [
+    {
+     "key": "gs-mb4a1-stock-factory-w",
+     "label": "stock",
+     "origin": [
+      0,
+      2
+     ]
+    },
+    {
+     "key": "gs-mb4a1-reargrip-factory-w",
+     "label": "rearGrip",
+     "origin": [
+      53,
+      16
+     ]
+    },
+    {
+     "key": "gs-mb4a1-mag-factory-w",
+     "label": "mag",
+     "origin": [
+      83,
+      16
+     ]
+    },
+    {
+     "key": "gs-mb4a1-barrel-factory-w",
+     "label": "barrel",
+     "origin": [
+      103,
+      2
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-w",
+     "label": "receiver",
+     "origin": [
+      39,
+      4
+     ]
+    },
+    {
+     "key": "gs-mb4a1-handguard-factory-w",
+     "label": "handguard",
+     "origin": [
+      103,
+      8
+     ]
+    },
+    {
+     "key": "gs-mb4a1-top-factory-w",
+     "label": "top",
+     "origin": [
+      63,
+      0
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-factory-w.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "w",
+   "configuration": "light",
+   "items": [
+    "S01",
+    "H01",
+    "F03",
+    "O03",
+    "G10",
+    "P01"
+   ],
+   "w": 156,
+   "h": 45,
+   "tip": [
+    156,
+    19
+   ],
+   "layers": [
+    {
+     "key": "gs-s01-w",
+     "label": "stock",
+     "origin": [
+      0,
+      11
+     ]
+    },
+    {
+     "key": "gs-p01-w",
+     "label": "rearGrip",
+     "origin": [
+      49,
+      25
+     ]
+    },
+    {
+     "key": "gs-g10-w",
+     "label": "mag",
+     "origin": [
+      79,
+      25
+     ]
+    },
+    {
+     "key": "gs-mb4a1-barrel-factory-w",
+     "label": "barrel",
+     "origin": [
+      99,
+      11
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-w",
+     "label": "receiver",
+     "origin": [
+      35,
+      13
+     ]
+    },
+    {
+     "key": "gs-h01-w",
+     "label": "handguard",
+     "origin": [
+      99,
+      17
+     ]
+    },
+    {
+     "key": "gs-f03-w",
+     "label": "under",
+     "origin": [
+      108,
+      32
+     ]
+    },
+    {
+     "key": "gs-o03-w",
+     "label": "top",
+     "origin": [
+      55,
+      0
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-light-w.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "w",
+   "configuration": "stable",
+   "items": [
+    "S02",
+    "B08",
+    "M06",
+    "H01",
+    "F01",
+    "O08",
+    "P02"
+   ],
+   "w": 194,
+   "h": 50,
+   "tip": [
+    194,
+    21
+   ],
+   "layers": [
+    {
+     "key": "gs-s02-w",
+     "label": "stock",
+     "origin": [
+      0,
+      13
+     ]
+    },
+    {
+     "key": "gs-p02-w",
+     "label": "rearGrip",
+     "origin": [
+      57,
+      27
+     ]
+    },
+    {
+     "key": "gs-mb4a1-mag-factory-w",
+     "label": "mag",
+     "origin": [
+      87,
+      27
+     ]
+    },
+    {
+     "key": "gs-b08-w",
+     "label": "barrel",
+     "origin": [
+      107,
+      15
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-w",
+     "label": "receiver",
+     "origin": [
+      43,
+      15
+     ]
+    },
+    {
+     "key": "gs-h01-w",
+     "label": "handguard",
+     "origin": [
+      107,
+      19
+     ]
+    },
+    {
+     "key": "gs-f01-w",
+     "label": "under",
+     "origin": [
+      121,
+      34
+     ]
+    },
+    {
+     "key": "gs-o08-w",
+     "label": "top",
+     "origin": [
+      52,
+      0
+     ]
+    },
+    {
+     "key": "gs-m06-w",
+     "label": "muzzle",
+     "origin": [
+      178,
+      15
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-stable-w.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "w",
+   "configuration": "laser",
+   "items": [
+    "H01",
+    "T01"
+   ],
+   "w": 160,
+   "h": 34,
+   "tip": [
+    160,
+    10
+   ],
+   "layers": [
+    {
+     "key": "gs-mb4a1-stock-factory-w",
+     "label": "stock",
+     "origin": [
+      0,
+      2
+     ]
+    },
+    {
+     "key": "gs-mb4a1-reargrip-factory-w",
+     "label": "rearGrip",
+     "origin": [
+      53,
+      16
+     ]
+    },
+    {
+     "key": "gs-mb4a1-mag-factory-w",
+     "label": "mag",
+     "origin": [
+      83,
+      16
+     ]
+    },
+    {
+     "key": "gs-mb4a1-barrel-factory-w",
+     "label": "barrel",
+     "origin": [
+      103,
+      2
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-w",
+     "label": "receiver",
+     "origin": [
+      39,
+      4
+     ]
+    },
+    {
+     "key": "gs-h01-w",
+     "label": "handguard",
+     "origin": [
+      103,
+      8
+     ]
+    },
+    {
+     "key": "gs-mb4a1-top-factory-w",
+     "label": "top",
+     "origin": [
+      63,
+      0
+     ]
+    },
+    {
+     "key": "gs-t01-w",
+     "label": "side1",
+     "origin": [
+      121,
+      12
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-laser-w.png"
+  },
+  {
+   "gun": "mb4a1",
+   "code": "w",
+   "configuration": "p0-all",
+   "items": [
+    "O03",
+    "M06",
+    "H01",
+    "F01"
+   ],
+   "w": 175,
+   "h": 48,
+   "tip": [
+    175,
+    19
+   ],
+   "layers": [
+    {
+     "key": "gs-mb4a1-stock-factory-w",
+     "label": "stock",
+     "origin": [
+      0,
+      11
+     ]
+    },
+    {
+     "key": "gs-mb4a1-reargrip-factory-w",
+     "label": "rearGrip",
+     "origin": [
+      53,
+      25
+     ]
+    },
+    {
+     "key": "gs-mb4a1-mag-factory-w",
+     "label": "mag",
+     "origin": [
+      83,
+      25
+     ]
+    },
+    {
+     "key": "gs-mb4a1-barrel-factory-w",
+     "label": "barrel",
+     "origin": [
+      103,
+      11
+     ]
+    },
+    {
+     "key": "gs-mb4a1-receiver-w",
+     "label": "receiver",
+     "origin": [
+      39,
+      13
+     ]
+    },
+    {
+     "key": "gs-h01-w",
+     "label": "handguard",
+     "origin": [
+      103,
+      17
+     ]
+    },
+    {
+     "key": "gs-f01-w",
+     "label": "under",
+     "origin": [
+      117,
+      32
+     ]
+    },
+    {
+     "key": "gs-o03-w",
+     "label": "top",
+     "origin": [
+      59,
+      0
+     ]
+    },
+    {
+     "key": "gs-m06-w",
+     "label": "muzzle",
+     "origin": [
+      159,
+      13
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/mb4a1-p0-all-w.png"
+  },
+  {
+   "gun": "gb17",
+   "code": "h",
+   "configuration": "factory",
+   "items": [],
+   "w": 17,
+   "h": 10,
+   "tip": [
+    17,
+    2
+   ],
+   "layers": [
+    {
+     "key": "gs-gb17-receiver-h",
+     "label": "receiver",
+     "origin": [
+      0,
+      0
+     ]
+    },
+    {
+     "key": "gs-glove-rear-h",
+     "label": "glove-rear",
+     "origin": [
+      4,
+      7
+     ]
+    }
+   ],
+   "grip": [
+    5,
+    7
+   ],
+   "bore": 2,
+   "forward": 8,
+   "hand": [
+    5,
+    7
+   ],
+   "tipBoreDelta": 0,
+   "file": "tests/fixtures/gunsmith-assemblies/gb17-factory-h.png"
+  },
+  {
+   "gun": "gb17",
+   "code": "h",
+   "configuration": "custom",
+   "items": [
+    "B01",
+    "M03",
+    "O01",
+    "G01"
+   ],
+   "w": 25,
+   "h": 13,
+   "tip": [
+    25,
+    4
+   ],
+   "layers": [
+    {
+     "key": "gs-b01-h",
+     "label": "barrel",
+     "origin": [
+      16,
+      3
+     ]
+    },
+    {
+     "key": "gs-gb17-receiver-h",
+     "label": "receiver",
+     "origin": [
+      0,
+      2
+     ]
+    },
+    {
+     "key": "gs-g01-h",
+     "label": "mag",
+     "origin": [
+      3,
+      10
+     ]
+    },
+    {
+     "key": "gs-o01-h",
+     "label": "top",
+     "origin": [
+      4,
+      0
+     ]
+    },
+    {
+     "key": "gs-m03-h",
+     "label": "muzzle",
+     "origin": [
+      19,
+      2
+     ]
+    },
+    {
+     "key": "gs-glove-rear-h",
+     "label": "glove-rear",
+     "origin": [
+      4,
+      9
+     ]
+    }
+   ],
+   "grip": [
+    5,
+    9
+   ],
+   "bore": 4,
+   "forward": 8,
+   "hand": [
+    5,
+    9
+   ],
+   "tipBoreDelta": 0,
+   "file": "tests/fixtures/gunsmith-assemblies/gb17-custom-h.png"
+  },
+  {
+   "gun": "gb17",
+   "code": "i",
+   "configuration": "factory",
+   "items": [],
+   "w": 38,
+   "h": 17,
+   "tip": [
+    38,
+    4
+   ],
+   "layers": [
+    {
+     "key": "gs-gb17-receiver-i",
+     "label": "receiver",
+     "origin": [
+      0,
+      0
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/gb17-factory-i.png"
+  },
+  {
+   "gun": "gb17",
+   "code": "i",
+   "configuration": "custom",
+   "items": [
+    "B01",
+    "M03",
+    "O01",
+    "G01"
+   ],
+   "w": 58,
+   "h": 25,
+   "tip": [
+    58,
+    8
+   ],
+   "layers": [
+    {
+     "key": "gs-b01-i",
+     "label": "barrel",
+     "origin": [
+      37,
+      6
+     ]
+    },
+    {
+     "key": "gs-gb17-receiver-i",
+     "label": "receiver",
+     "origin": [
+      0,
+      4
+     ]
+    },
+    {
+     "key": "gs-g01-i",
+     "label": "mag",
+     "origin": [
+      8,
+      18
+     ]
+    },
+    {
+     "key": "gs-o01-i",
+     "label": "top",
+     "origin": [
+      7,
+      0
+     ]
+    },
+    {
+     "key": "gs-m03-i",
+     "label": "muzzle",
+     "origin": [
+      44,
+      5
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/gb17-custom-i.png"
+  },
+  {
+   "gun": "gb17",
+   "code": "w",
+   "configuration": "factory",
+   "items": [],
+   "w": 76,
+   "h": 34,
+   "tip": [
+    76,
+    8
+   ],
+   "layers": [
+    {
+     "key": "gs-gb17-receiver-w",
+     "label": "receiver",
+     "origin": [
+      0,
+      0
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/gb17-factory-w.png"
+  },
+  {
+   "gun": "gb17",
+   "code": "w",
+   "configuration": "custom",
+   "items": [
+    "B01",
+    "M03",
+    "O01",
+    "G01"
+   ],
+   "w": 118,
+   "h": 51,
+   "tip": [
+    118,
+    17
+   ],
+   "layers": [
+    {
+     "key": "gs-b01-w",
+     "label": "barrel",
+     "origin": [
+      75,
+      13
+     ]
+    },
+    {
+     "key": "gs-gb17-receiver-w",
+     "label": "receiver",
+     "origin": [
+      0,
+      9
+     ]
+    },
+    {
+     "key": "gs-g01-w",
+     "label": "mag",
+     "origin": [
+      16,
+      37
+     ]
+    },
+    {
+     "key": "gs-o01-w",
+     "label": "top",
+     "origin": [
+      14,
+      0
+     ]
+    },
+    {
+     "key": "gs-m03-w",
+     "label": "muzzle",
+     "origin": [
+      90,
+      11
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/gb17-custom-w.png"
+  },
+  {
+   "gun": "carbine",
+   "code": "h",
+   "configuration": "factory",
+   "items": [],
+   "w": 31,
+   "h": 10,
+   "tip": [
+    31,
+    3.5
+   ],
+   "layers": [
+    {
+     "key": "gs-carbine-receiver-h",
+     "label": "receiver",
+     "origin": [
+      0,
+      0
+     ]
+    },
+    {
+     "key": "gs-carbine-handguard-factory-h",
+     "label": "handguard",
+     "origin": [
+      0,
+      0
+     ]
+    }
+   ],
+   "grip": [
+    8,
+    4
+   ],
+   "bore": 3.5,
+   "forward": 0,
+   "hand": [
+    18,
+    5
+   ],
+   "tipBoreDelta": 0,
+   "file": "tests/fixtures/gunsmith-assemblies/carbine-factory-h.png"
+  },
+  {
+   "gun": "carbine",
+   "code": "h",
+   "configuration": "custom",
+   "items": [
+    "A07",
+    "O08",
+    "H05",
+    "F01",
+    "T05",
+    "M06"
+   ],
+   "w": 33,
+   "h": 12,
+   "tip": [
+    33,
+    5
+   ],
+   "layers": [
+    {
+     "key": "gs-carbine-receiver-h",
+     "label": "receiver",
+     "origin": [
+      0,
+      1
+     ]
+    },
+    {
+     "key": "gs-h05-h",
+     "label": "handguard",
+     "origin": [
+      16,
+      4
+     ]
+    },
+    {
+     "key": "gs-f01-h",
+     "label": "under",
+     "origin": [
+      20,
+      7
+     ]
+    },
+    {
+     "key": "gs-a07-h",
+     "label": "mount",
+     "origin": [
+      11,
+      3
+     ]
+    },
+    {
+     "key": "gs-o08-h",
+     "label": "top",
+     "origin": [
+      10,
+      0
+     ]
+    },
+    {
+     "key": "gs-m06-h",
+     "label": "muzzle",
+     "origin": [
+      30,
+      3
+     ]
+    },
+    {
+     "key": "gs-t05-h",
+     "label": "side1",
+     "origin": [
+      21,
+      4
+     ]
+    },
+    {
+     "key": "gs-glove-foregrip-h",
+     "label": "glove-foregrip",
+     "origin": [
+      19,
+      8
+     ]
+    }
+   ],
+   "grip": [
+    8,
+    5
+   ],
+   "bore": 4.5,
+   "forward": 0,
+   "hand": [
+    20,
+    8
+   ],
+   "tipBoreDelta": 0.5,
+   "file": "tests/fixtures/gunsmith-assemblies/carbine-custom-h.png"
+  },
+  {
+   "gun": "carbine",
+   "code": "i",
+   "configuration": "factory",
+   "items": [],
+   "w": 78,
+   "h": 17,
+   "tip": [
+    78,
+    6
+   ],
+   "layers": [
+    {
+     "key": "gs-carbine-receiver-i",
+     "label": "receiver",
+     "origin": [
+      0,
+      0
+     ]
+    },
+    {
+     "key": "gs-carbine-handguard-factory-i",
+     "label": "handguard",
+     "origin": [
+      0,
+      0
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/carbine-factory-i.png"
+  },
+  {
+   "gun": "carbine",
+   "code": "i",
+   "configuration": "custom",
+   "items": [
+    "A07",
+    "O08",
+    "H05",
+    "F01",
+    "T05",
+    "M06"
+   ],
+   "w": 85,
+   "h": 26,
+   "tip": [
+    85,
+    11
+   ],
+   "layers": [
+    {
+     "key": "gs-carbine-receiver-i",
+     "label": "receiver",
+     "origin": [
+      0,
+      5
+     ]
+    },
+    {
+     "key": "gs-h05-i",
+     "label": "handguard",
+     "origin": [
+      44,
+      11
+     ]
+    },
+    {
+     "key": "gs-f01-i",
+     "label": "under",
+     "origin": [
+      51,
+      18
+     ]
+    },
+    {
+     "key": "gs-a07-i",
+     "label": "mount",
+     "origin": [
+      25,
+      8
+     ]
+    },
+    {
+     "key": "gs-o08-i",
+     "label": "top",
+     "origin": [
+      23,
+      0
+     ]
+    },
+    {
+     "key": "gs-m06-i",
+     "label": "muzzle",
+     "origin": [
+      77,
+      8
+     ]
+    },
+    {
+     "key": "gs-t05-i",
+     "label": "side1",
+     "origin": [
+      54,
+      12
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/carbine-custom-i.png"
+  },
+  {
+   "gun": "carbine",
+   "code": "w",
+   "configuration": "factory",
+   "items": [],
+   "w": 156,
+   "h": 34,
+   "tip": [
+    156,
+    12
+   ],
+   "layers": [
+    {
+     "key": "gs-carbine-receiver-w",
+     "label": "receiver",
+     "origin": [
+      0,
+      0
+     ]
+    },
+    {
+     "key": "gs-carbine-handguard-factory-w",
+     "label": "handguard",
+     "origin": [
+      88,
+      16
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/carbine-factory-w.png"
+  },
+  {
+   "gun": "carbine",
+   "code": "w",
+   "configuration": "custom",
+   "items": [
+    "A07",
+    "O08",
+    "H05",
+    "F01",
+    "T05",
+    "M06"
+   ],
+   "w": 171,
+   "h": 52,
+   "tip": [
+    171,
+    22
+   ],
+   "layers": [
+    {
+     "key": "gs-carbine-receiver-w",
+     "label": "receiver",
+     "origin": [
+      0,
+      10
+     ]
+    },
+    {
+     "key": "gs-h05-w",
+     "label": "handguard",
+     "origin": [
+      88,
+      22
+     ]
+    },
+    {
+     "key": "gs-f01-w",
+     "label": "under",
+     "origin": [
+      102,
+      36
+     ]
+    },
+    {
+     "key": "gs-a07-w",
+     "label": "mount",
+     "origin": [
+      49,
+      15
+     ]
+    },
+    {
+     "key": "gs-o08-w",
+     "label": "top",
+     "origin": [
+      45,
+      0
+     ]
+    },
+    {
+     "key": "gs-m06-w",
+     "label": "muzzle",
+     "origin": [
+      155,
+      16
+     ]
+    },
+    {
+     "key": "gs-t05-w",
+     "label": "side1",
+     "origin": [
+      107,
+      24
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/carbine-custom-w.png"
+  },
+  {
+   "gun": "pistol",
+   "code": "w",
+   "configuration": "factory",
+   "items": [],
+   "w": 76,
+   "h": 34,
+   "tip": [
+    76,
+    11
+   ],
+   "layers": [
+    {
+     "key": "gs-pistol-receiver-w",
+     "label": "receiver",
+     "origin": [
+      0,
+      0
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/pistol-factory-w.png"
+  },
+  {
+   "gun": "shotgun",
+   "code": "w",
+   "configuration": "factory",
+   "items": [],
+   "w": 156,
+   "h": 34,
+   "tip": [
+    156,
+    12
+   ],
+   "layers": [
+    {
+     "key": "gs-shotgun-receiver-w",
+     "label": "receiver",
+     "origin": [
+      0,
+      0
+     ]
+    }
+   ],
+   "file": "tests/fixtures/gunsmith-assemblies/shotgun-factory-w.png"
+  }
+ ]
+}

@@ -1,9 +1,9 @@
 /**
  * 试枪场 (src/range) on an isolated offline build: real mouse clicks on the 2.5D raid canvas and on the range panel. The
  * page's read-only ?test=1 hook (window.__bincovRange) is only read, never driven. The page must leave browser storage
- * alone; every gun must land hits on the 5-tile target and the panel must count them; the M4A1 sample must fire while
+ * alone; every gun (the old three, G17 and M4A1) must land hits on the 5-tile target and the panel must count them; the M4A1 must fire while
  * the button is held; presses on the panel must never fire or turn the
- * aim; the panel must fit 1280x720 and 1920x1080; abandoning settles in memory and reloads a fresh range. A phone page
+ * aim; the hit-feel A/B switch must flip the view option and its label; the panel must fit 1280x720 and 1920x1080; abandoning settles in memory and reloads a fresh range. A phone page
  * without ?test=1 checks the touch layout and that no test hook exists there.
  */
 import assert from 'node:assert/strict';
@@ -139,10 +139,10 @@ async function hitWith(p, gun) {
   assert.fail(`${gun}: no hit on the 5-tile target in 8 clicks`);
 }
 
-/** Hold the left button with the M4A1 sample: several shots, published as automatic fire; none after the release. */
+/** Hold the left button with the M4A1: several shots, published as automatic fire; none after the release. */
 async function holdRifle(p) {
-  await p.locator('[data-gun="m4a1"]').click();
-  await held(p, 'm4a1');
+  await p.locator('[data-gun="mb4a1"]').click();
+  await held(p, 'mb4a1');
   for (let attempt = 1; attempt <= 4; attempt++) {
     await running(p, 30000, HOOK);
     await steady(p);
@@ -175,8 +175,22 @@ try {
     assert.equal(await p.evaluate(() => typeof window.__bincov), 'undefined', 'the game test hook stays off on the range');
     await untouched(p);
     const guns = [];
-    for (const gun of ['pistol', 'carbine', 'shotgun', 'm4a1']) guns.push(await hitWith(p, gun));
+    for (const gun of ['pistol', 'gb17', 'carbine', 'shotgun', 'mb4a1']) guns.push(await hitWith(p, gun));
     const rifle = await holdRifle(p);
+
+    // #28 M2-15: the two M4A1 builds to compare. Each arms the rifle fitted as that build (its own magazine), the view
+    // draws it as built, its button shows pressed; the plain M4A1 goes back to the factory gun.
+    const build = async (selector, sig, mag) => {
+      await p.locator(selector).click();
+      await p.waitForFunction(sig => window.__bincovRange.host.lastBatch.frame.player.gun?.sig === sig, sig, { timeout: 20000 });
+      const now = await p.evaluate(() => { const f = window.__bincovRange.host.lastBatch.frame; return { id: f.hud.weapon.id, mag: f.hud.weapon.magSize }; });
+      assert.deepEqual(now, { id: 'mb4a1', mag }, selector);
+      await frames(p, 2);
+      return p.evaluate(() => [...document.querySelector('.range-panel').shadowRoot.querySelectorAll('[aria-pressed="true"][data-build], [aria-pressed="true"][data-gun]')].map(b => b.dataset.build ?? b.dataset.gun));
+    };
+    assert.deepEqual(await build('[data-build="light"]', 'handguard/under=F03,handguard=H01,mag=G10,rearGrip=P01,stock=S01,top=O03', 20), ['light']);
+    assert.deepEqual(await build('[data-build="steady"]', 'barrel=B08,handguard/under=F01,handguard=H01,muzzle=M06,rearGrip=P02,stock=S02,top=O08', 30), ['steady']);
+    assert.deepEqual(await build('[data-gun="mb4a1"]', '', 30), ['mb4a1']);
 
     // Presses on the panel: no shot, the magazine untouched, and the host's pointer (the aim's source) never moves. The
     // camera may still settle by a whole pixel, which turns the aim by under 0.01 rad; a press that reached the canvas
@@ -194,6 +208,18 @@ try {
       await p.locator(selector).click();
       await frames(p, 2);
     }
+    // The hit-feel A/B switch (#75 H-01) flips the view option the sound layer reads at every shot, and back.
+    const feel = () => p.evaluate(() => {
+      const button = document.querySelector('.range-panel').shadowRoot.querySelector('[data-act="feel"]');
+      return [window.__bincovRange.host.opts.feel ?? 'enhanced', button.textContent, button.getAttribute('aria-pressed')];
+    });
+    const feels = [await feel()];
+    for (let i = 0; i < 2; i++) {
+      await p.locator('[data-act="feel"]').click();
+      await frames(p, 2);
+      feels.push(await feel());
+    }
+    assert.deepEqual(feels, [['enhanced', '打击感：新版', 'true'], ['classic', '打击感：旧版', 'false'], ['enhanced', '打击感：新版', 'true']]);
     await simulated(p, .3);
     const after = await state(p);
     assert.equal(after.stats.shots, before.stats.shots, 'a panel press fired');
@@ -239,7 +265,7 @@ try {
     const fresh = await state(p);
     assert.equal(fresh.weapon.id, 'pistol', 'the reloaded range starts over');
     assert.deepEqual(fresh.stats, { shots: 0, hits: { d5: 0, d10: 0, d15: 0, d20: 0, mover: 0 } });
-    return { guns, rifle, sizes, reloaded: fresh.weapon.id };
+    return { guns, rifle, feels, sizes, reloaded: fresh.weapon.id };
   });
 
   await test('range: phone layout without the test hook, by touch', { viewport: { width: 844, height: 390 }, hasTouch: true, isMobile: true }, '?range=1', async p => {

@@ -1,11 +1,22 @@
+import { gunsmithArt } from './gunsmith-hooks';
 import { brush, C, type PixelContext } from './pixel';
 
-export const ITEM_ART_IDS = ['knife', 'pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'bandage', 'medkit', 'antidote', 'water', 'food', 'scrap', 'wire', 'fuse', 'battery', 'watch', 'pearl', 'sample', 'ledger', 'cloth', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckyCharm', 'unluckyCharm', 'luckySachet', 'unluckySachet'] as const;
+/**
+ * Gunsmith items with placeholder art (#28 M2-01, M2-02): the two catalog guns and the 20 sample attachments. Sol's
+ * PNG art (docs/gunsmith/ART-SPEC.md, M2-09) replaces every one of these drawings in M2-10.
+ */
+const PART_ART_IDS = ['O01', 'O03', 'O08', 'M03', 'M06', 'B01', 'B08', 'H01', 'H05', 'S01', 'S02', 'P01', 'P02', 'F01', 'F03', 'G01', 'G10', 'T01', 'T05', 'A07'] as const;
+export const ITEM_ART_IDS = ['knife', 'pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'bandage', 'medkit', 'antidote', 'water', 'food', 'scrap', 'wire', 'fuse', 'battery', 'watch', 'pearl', 'sample', 'ledger', 'cloth', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckyCharm', 'unluckyCharm', 'luckySachet', 'unluckySachet', 'gb17', 'mb4a1', ...PART_ART_IDS] as const;
 export type ItemArtId = typeof ITEM_ART_IDS[number];
+type PartArtId = typeof PART_ART_IDS[number];
 
 /** Authored 32px silhouettes. Texture identity never depends on a runtime tint. */
 export function paintItem(c: PixelContext, id: ItemArtId, size: 24 | 32): void {
+  // Sol's icons of the gunsmith guns and parts (#28 M2-10) once decoded; the placeholders below until then.
+  const sol = gunsmithArt?.icon(id, size);
+  if (sol) { c.drawImage(sol.img, sol.x, sol.y); return; }
   if (paintRpgItem(c, id, size)) return;
+  if ((PART_ART_IDS as readonly string[]).includes(id)) { paintPartPlaceholder(c, id as PartArtId, size); return; }
   if (size === 24) { paintSmall(c, id); return; }
   const { r, p, e } = brush(c), S = C;
   switch (id) {
@@ -126,6 +137,24 @@ export function paintItem(c: PixelContext, id: ItemArtId, size: 24 | 32): void {
       r(S.tealDark,3,4,26,20); r(S.teal,6,4,21,18); r(S.tealLight,6,4,20,2); r(S.wood,3,4,3,22);
       r(S.paperShade,10,8,13,10); r(S.paper,11,9,11,8); p(S.tealDark,[[12,13],[21,13],[19,16],[14,16]]);
       r(S.tealDark,16,10,1,4); r(S.red,23,20,3,10); r(S.redLight,23,20,1,8); break;
+    // Placeholders until Sol's PNG art (M2-10): a squared dark slide over a stippled polymer frame.
+    case 'gb17':
+      p(S.ink,[[2,5],[30,5],[31,6],[31,12],[29,12],[29,16],[22,16],[22,21],[14,21],[13,30],[3,30],[6,17],[2,16]]);
+      r(S.edge,3,6,27,6); r(S.steelDark,3,6,27,2); r(S.steel,4,6,24,1); r(S.steelDark,30,7,1,4);
+      for (const x of [4,6,8]) r(S.ink,x,8,1,3);
+      r(S.ink,16,8,6,2); r(S.clothDark,6,12,23,4); r(S.cloth,22,13,6,1); for (const x of [23,25,27]) r(S.ink,x,13,1,1);
+      r(S.clothDark,15,19,7,2); r(S.clothDark,20,16,2,4); r(S.steel,16,16,1,3);
+      p(S.clothDark,[[7,16],[14,16],[13,29],[4,29]]); r(S.edge,4,28,9,1);
+      for (const [x,y] of [[9,18],[12,18],[8,21],[11,21],[7,24],[10,24],[6,27],[9,27]]) r(S.cloth,x,y,1,1); break;
+    // A black modular rifle: sliding stock, railed receiver and handguard, curved magazine.
+    case 'mb4a1':
+      p(S.ink,[[1,18],[8,13],[12,13],[12,8],[22,8],[22,11],[31,11],[31,16],[23,16],[24,27],[19,28],[18,17],[16,17],[14,25],[9,25],[11,17],[9,18],[3,24]]);
+      r(S.ink,27,6,3,5);
+      p(S.steelDark,[[2,18],[8,14],[11,14],[11,16],[9,17],[3,22]]); r(S.steel,5,16,3,1);
+      r(S.steelDark,13,9,9,7); r(S.steel,13,9,9,1); for (let x = 13; x < 22; x += 2) r(S.steel,x,8,1,1); r(S.ink,15,11,4,2);
+      r(S.edge,22,12,9,4); for (const x of [24,26,28]) r(S.ink,x,13,1,2); r(S.steelDark,28,7,1,4);
+      p(S.steelDark,[[12,18],[15,18],[13,24],[10,24]]);
+      p(S.steel,[[19,17],[22,17],[23,26],[20,27]]); r(S.steelLight,20,18,1,8); break;
   }
 }
 
@@ -206,6 +235,83 @@ function paintSmall(c: PixelContext, id: ItemArtId): void {
       p(S.ink,[[2,1],[21,1],[24,4],[24,21],[3,24],[0,21],[0,4]]); r(S.woodDark,1,3,22,18); r(S.paperShade,5,19,18,3); r(S.paper,6,19,16,1);
       r(S.tealDark,2,2,20,17); r(S.teal,5,2,16,15); r(S.tealLight,5,2,15,2); r(S.wood,2,2,3,19);
       r(S.paper,8,6,11,8); p(S.tealDark,[[9,10],[18,10],[16,13],[11,13]]); r(S.tealDark,13,7,1,4); r(S.red,18,16,3,8); break;
+    // Placeholders until Sol's PNG art (M2-10).
+    case 'gb17':
+      p(S.ink,[[1,3],[22,3],[23,4],[23,9],[21,9],[21,12],[16,12],[16,16],[11,16],[10,23],[2,23],[5,12],[1,11]]);
+      r(S.edge,2,4,20,5); r(S.steelDark,2,4,20,1); r(S.steel,3,4,17,1); for (const x of [3,5]) r(S.ink,x,6,1,2);
+      r(S.ink,12,5,4,2); r(S.clothDark,5,9,16,3); r(S.cloth,16,10,4,1);
+      r(S.clothDark,11,14,5,1); r(S.clothDark,15,12,1,3); r(S.steel,12,12,1,2);
+      p(S.clothDark,[[6,12],[11,12],[10,22],[3,22]]); for (const [x,y] of [[7,14],[9,14],[6,17],[8,17],[5,20],[7,20]]) r(S.cloth,x,y,1,1); break;
+    case 'mb4a1':
+      p(S.ink,[[1,13],[6,10],[9,10],[9,6],[17,6],[17,8],[24,8],[24,12],[17,12],[18,20],[14,21],[13,13],[12,13],[11,19],[7,19],[8,13],[7,14],[2,18]]);
+      r(S.ink,20,4,2,4);
+      p(S.steelDark,[[2,13],[6,11],[8,11],[8,12],[7,13],[3,17]]);
+      r(S.steelDark,10,7,7,5); for (let x = 10; x < 17; x += 2) r(S.steel,x,6,1,1); r(S.ink,11,8,3,1);
+      r(S.edge,17,9,6,2); r(S.ink,19,9,1,1); r(S.ink,21,9,1,1); r(S.steelDark,21,5,1,3);
+      p(S.steelDark,[[9,14],[11,14],[10,18],[8,18]]); p(S.steel,[[14,13],[16,13],[17,19],[15,20]]); r(S.steelLight,15,14,1,5); break;
+  }
+}
+
+/**
+ * Placeholder icons of the 20 sample attachments (#28 M2-02) until Sol's PNG art replaces them (M2-10): one 24 px
+ * drawing each, centred in the 32 px slot like the RPG supplies (ART-SPEC section 2), every one a different shape.
+ */
+function paintPartPlaceholder(c: PixelContext, id: PartArtId, size: 24 | 32): void {
+  const S = C, base = brush(c), o = size === 32 ? 4 : 0;
+  const r = (color: string, x: number, y: number, w: number, h: number) => base.r(color, x + o, y + o, w, h);
+  const p = (color: string, points: readonly (readonly [number, number])[]) => base.p(color, points.map(([x, y]) => [x + o, y + o] as const));
+  /** A picatinny rail: dark body with light teeth every other pixel. */
+  const rail = (x: number, y: number, w: number) => { r(S.ink, x, y, w, 3); for (let i = 1; i < w - 1; i += 2) r(S.steel, x + i, y + 1, 1, 1); };
+  switch (id) {
+    case 'O01': // micro dot: a low hood with a small window
+      r(S.ink,4,14,16,6); r(S.steelDark,5,15,14,4); r(S.steel,5,15,14,1);
+      p(S.ink,[[6,5],[16,5],[19,15],[5,15]]); p(S.edge,[[7,6],[15,6],[17,14],[6,14]]); r(S.tealLight,8,8,7,4); r(S.red,11,9,2,2); break;
+    case 'O03': // open dot: one tall glass pane on a rail clamp, the emitter behind it
+      rail(2,17,20); r(S.ink,12,3,8,15); r(S.steelDark,13,4,6,13); r(S.tealLight,14,5,4,10); r(S.teal,14,12,4,3);
+      r(S.ink,4,12,6,6); r(S.steelDark,5,13,4,4); r(S.red,6,14,2,2); break;
+    case 'O08': // long scope: eyepiece and objective bells on a tube, a turret, two rings
+      r(S.ink,0,7,6,11); r(S.ink,5,9,13,7); r(S.ink,17,5,7,15); r(S.ink,10,5,4,5); r(S.ink,6,15,3,5); r(S.ink,14,15,3,5);
+      r(S.edge,1,8,4,9); r(S.steelDark,5,10,12,5); r(S.steel,5,10,12,1); r(S.edge,18,6,5,13); r(S.teal,22,8,1,9); r(S.steelDark,11,6,2,3);
+      r(S.steel,7,16,1,3); r(S.steel,15,16,1,3); break;
+    case 'M03': // pistol suppressor: a plain can with a threaded collar
+      r(S.ink,1,8,22,9); r(S.steelDark,2,9,20,7); r(S.steel,2,9,20,2); r(S.edge,2,14,20,2);
+      for (const x of [7,12,17]) r(S.ink,x,9,1,7); r(S.brass,0,11,2,3); r(S.ink,22,11,2,3); break;
+    case 'M06': // rifle brake: a short block with three side ports
+      r(S.ink,5,7,15,11); r(S.steelDark,6,8,13,9); r(S.steel,6,8,13,1); for (const x of [8,12,16]) r(S.ink,x,10,2,4);
+      r(S.ink,1,10,5,5); r(S.brass,2,11,3,3); break;
+    case 'B01': // pistol barrel kit: a chamber hood, a short barrel and a threaded tip
+      r(S.ink,2,6,9,10); r(S.brass,3,7,7,8); r(S.brassLight,3,7,7,2); r(S.ink,10,8,10,6); r(S.steel,10,9,9,4); r(S.steelLight,10,9,9,1);
+      for (const x of [19,21]) r(S.ink,x,9,1,4); r(S.steelDark,20,9,1,4); r(S.ink,22,9,1,4); break;
+    case 'B08': // long precision barrel: fluted, with a gas block
+      r(S.ink,0,9,24,6); r(S.steel,0,10,24,4); r(S.steelLight,0,10,24,1); for (const x of [3,7]) r(S.steelDark,x,12,3,1);
+      r(S.ink,13,6,5,9); r(S.steelDark,14,7,3,7); r(S.ink,21,8,3,8); break;
+    case 'H01': // short railed handguard
+      r(S.ink,3,8,18,10); r(S.edge,4,9,16,8); for (const x of [6,10,14]) r(S.ink,x,11,2,3); rail(3,5,18); r(S.steelDark,4,16,16,1); break;
+    case 'H05': // wooden carbine handguard with rails above and below
+      r(S.ink,2,7,20,11); r(S.wood,3,8,18,9); r(S.woodLight,3,8,18,2); r(S.woodDark,3,15,18,2); rail(4,4,16); rail(6,17,12); break;
+    case 'S01': // light stock: a skeleton frame
+      p(S.ink,[[2,4],[22,8],[22,14],[2,21]]); p(S.steelDark,[[3,6],[21,9],[21,13],[3,19]]); p(S.ink,[[6,9],[17,10],[17,12],[6,15]]); r(S.steel,3,6,4,1); break;
+    case 'S02': // steady stock: solid, with a cheek riser and a rubber pad
+      p(S.ink,[[3,3],[22,7],[22,16],[3,22]]); p(S.steelDark,[[5,5],[21,8],[21,15],[5,20]]); r(S.steel,6,6,10,2); r(S.ink,0,3,4,20); r(S.clothDark,1,4,2,18); r(S.edge,8,12,10,2); break;
+    case 'P01': // light grip: slim and swept back
+      p(S.ink,[[7,2],[16,2],[13,22],[5,22]]); p(S.steelDark,[[8,3],[15,3],[12,21],[6,21]]); r(S.steel,9,3,5,1); break;
+    case 'P02': // steady grip: wide, finger grooves and a beavertail
+      p(S.ink,[[4,1],[20,1],[17,23],[5,23]]); p(S.edge,[[5,2],[19,2],[16,22],[6,22]]); r(S.ink,2,1,4,4); r(S.steel,6,2,12,1);
+      for (const y of [9,13,17]) r(S.steelDark,7,y,8,2); break;
+    case 'F01': // short vertical foregrip on a rail clamp
+      rail(3,3,18); r(S.ink,8,5,8,16); r(S.steelDark,9,6,6,14); r(S.steel,9,6,2,13); r(S.ink,8,19,8,3); break;
+    case 'F03': // angled foregrip: a sloped wedge under its clamp
+      rail(2,4,20); p(S.ink,[[3,7],[22,7],[22,11],[6,18],[3,18]]); p(S.steelDark,[[4,8],[21,8],[21,10],[6,17],[4,17]]); r(S.steel,4,8,16,1); break;
+    case 'G01': // pistol magazine with a long floor plate
+      r(S.ink,8,1,8,21); r(S.edge,9,2,6,18); r(S.steel,9,2,6,1); for (const y of [6,10,14]) r(S.brass,13,y,1,2); r(S.ink,6,19,12,5); r(S.clothDark,7,20,10,3); break;
+    case 'G10': // short rifle magazine with a pull loop
+      p(S.ink,[[6,2],[16,2],[18,19],[8,20]]); p(S.steelDark,[[7,3],[15,3],[17,18],[9,19]]); r(S.steel,8,3,2,15); r(S.ink,9,20,8,3); r(S.red,10,21,6,2); break;
+    case 'T01': // laser: a small box with a red emitter and a switch
+      r(S.ink,3,7,18,10); r(S.steelDark,4,8,16,8); r(S.steel,4,8,16,1); r(S.ink,17,9,5,6); r(S.red,18,10,3,4); r(S.redLight,18,10,1,1); r(S.ink,7,4,4,4); r(S.brass,8,5,2,2); break;
+    case 'T05': // floodlight: a tube with a wide lit head
+      r(S.ink,1,9,15,7); r(S.steelDark,2,10,13,5); r(S.steel,2,10,13,1); r(S.ink,14,5,9,15); r(S.edge,15,6,7,13); r(S.paper,20,7,2,11); r(S.brassLight,21,8,1,9); break;
+    case 'A07': // carbine top base: a rail on two clamp legs
+      rail(1,7,22); r(S.ink,3,9,18,4); r(S.steelDark,4,10,16,2); r(S.ink,4,12,5,8); r(S.ink,15,12,5,8); r(S.steel,5,13,3,6); r(S.steel,16,13,3,6); break;
   }
 }
 

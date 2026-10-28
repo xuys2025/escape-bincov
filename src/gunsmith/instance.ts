@@ -129,6 +129,14 @@ export function gunWeight(gun: Pick<GunInstance, 'id' | 'parts'>): number {
  * and each part at its loose price. `restricted` when any component is relief: such a sale must be refused with the
  * reason, never made by stripping or destroying the relief parts.
  */
+/**
+ * The sale preview of a gun (#28 M2-08): its body and then each installed part, with the price each adds; a relief
+ * component adds nothing and is marked (it bars selling the gun whole, gunSale).
+ */
+export function gunSaleLines(gun: Pick<GunInstance, 'id' | 'relief' | 'parts'>): { id: string; name: string; price: number; relief: boolean }[] {
+    return [{ id: gun.id, name: GUNS[gun.id].stats.name, price: gun.relief ? 0 : GUNS[gun.id].sell, relief: gun.relief },
+        ...nodesOf(gun.parts).map(n => ({ id: n.id, name: ATTACHMENTS[n.id].name, price: n.relief ? 0 : ATTACHMENTS[n.id].sell, relief: n.relief }))];
+}
 export function gunSale(gun: Pick<GunInstance, 'id' | 'relief' | 'parts'>): { value: number; restricted: boolean } {
     let value = gun.relief ? 0 : GUNS[gun.id].sell, restricted = gun.relief;
     for (const node of nodesOf(gun.parts)) {

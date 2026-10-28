@@ -10,7 +10,7 @@ import { openPause, resumeStalls } from './stall-resume.mjs';
 import { placeAt, clickSlot } from './inventory-actions.mjs';
 import { batch, frames, raidReady, waitPanel } from './raid-view.mjs';
 const out = resolve('test-results'); await mkdir(out, { recursive: true });
-const report = { htmlSha256: createHash('sha256').update(await readFile('dist/index.html')).digest('hex'), methodology: 'Offline exact bundle; explicit funded base, mall container relocation (layout 3, 2.5D raid host), item and frozen-enemy fixtures. Native buttons, wheel, keyboard and emulated touch; actual bullet flight. Not natural balance or physical-device acceptance.', steps: [], errors: [], requests: [] };
+const report = { htmlSha256: createHash('sha256').update(await readFile('dist/index.html')).digest('hex'), methodology: 'Offline exact bundle; explicit funded base, mall container relocation (layout 4, 2.5D raid host), item and frozen-enemy fixtures. Native buttons, wheel, keyboard and emulated touch; actual bullet flight. Not natural balance or physical-device acceptance.', steps: [], errors: [], requests: [] };
 const browser = await chromium.launch(browserOptions); report.browser = browser.version();
 const context = await browser.newContext({ viewport: { width: 1280, height: 720 }, offline: true, hasTouch: true });
 await resumeStalls(context);
@@ -53,7 +53,7 @@ try {
     });
     await action('tab', 'gear').click(); await page.locator('#run-world').selectOption('mall'); await page.locator('#seed').fill('42'); await action('deploy').click();
     await raidReady(page);
-    assert.deepEqual((await batch(page)).map.key.worldVersion, 'mall-v3');
+    assert.deepEqual((await batch(page)).map.key.worldVersion, 'mall-v4');
     await step('body HUD reads the live raid rather than its saved checkpoint at both desktop sizes', async () => {
         const failures = []; report.liveNeeds = [];
         for (const [index, viewport] of [{ width: 1280, height: 720 }, { width: 1920, height: 1080 }].entries()) {

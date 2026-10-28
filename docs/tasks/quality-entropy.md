@@ -138,6 +138,20 @@
 
 - B 段：`CoastServices`/`CoastHandle` 移入 Runtime 合同，工厂显式返回，去掉 `as unknown as CoastHandle`；背包面板的背包/安全箱移动改走有限服务，不再持有 `SaveSession`/`SessionState`；顺带把 `Scope`/`renderer-lifetime.ts` 移出 `coast-view/`。具体位置与验收登记在 [#60](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6338855038)，依赖 PR #65。
 
+## Q-E02 B 行动背包有限服务
+
+2026-10-25（UTC），分支 `refactor/raid-inventory-services`，起点为已接受 main `974a3a8d1ad2a7662c3a828226295d6c9b31eb64`。#65 前置已合入，#79 已完成句柄/工厂合同；本次只承接剩余背包面板边界，不重复这些工作。开放 #106 的改枪展示 hunk 继续原 PR；本轮不接管 M2，也不搬 Scope / renderer 工具。
+
+**当前实现。** InventoryPanel 不再接收 SessionState/SaveSession。三个有限 carried 命令在同步 `saves.mutate` 回调内重取 loadout，验证 endpoint/UID/坐标/数量/方向后复用原 D.rotateItem、D.transferItem、moveQuantity；不接回调或库存对象，不增加 Runtime.transaction 的暂停/生命周期守卫。合法 UI 请求保留原接受集合，包括正常原地放置仍可提交、拒绝/失败仍会替换引用。搜刮模式连 bag/safe 内操作也保持原 transferLoot 和世界候选路径。
+
+`inventoryView` 按需只复制 bag/safe 及显示主武器所需字段，调用后不缓存为第二份游戏状态；装备名仍按主武器而非手中刀具展示。`inventoryReadout` 只返回当前负重/上限或 null，周期刷新不 clone 库存/世界，也不重建拖动网格。面板按 UID 重新查找，失败后沿原 toast、清暂态和 saveFailed 宿主流程。
+
+**规则与存档边界。** inventory 的 quick 仍是整件全量原子 D.transferItem；loot quick 仍可用 firstAvailableSlot + moveQuantity 部分合并/试方向，未统一算法。三命令仍让原 mutate 同时捕获并提交经典或分层世界，未增加成功后的第二次 checkpoint；存档、世界/规则版本、时钟和 UID 分配规则不变。classic-v1 无容器的旧行动也能随身整理。
+
+**本地验证。** 正式工厂路径新增10项测试、加原负重共11/11；完整 `pnpm test` 884/884、`pnpm check:ci` 64/64、`pnpm package` 和最终严格类型检查通过。覆盖三动作×经典/建筑/商场单写实时世界、各自配额失败保留原字节与完整世界、恢复后同 UID 再操作、非法请求不误报存储失败、同容器原地/交换/拆分、nested 枪件/救济、旧 coast-v1 恢复，以及 loot 模式仍走真实容器服务。浅拷贝投影和把 quick 改成部分合并两个源副本反例均被相关断言有效拦下；这些改动只在忽略目录，不进入产品。
+
+共享 flock 串行的原生键鼠定向检查 **3/3 通过**：1280×720 与 1920×1080 均完成原地旋转、整件双向 quick、拆分和同包拖动，每次输入只写一笔；1280 配额失败保留原字节，普通保存重试不重做动作，显式重试后 nested 枪件/UID 保持。页面异常/外网请求均为 0。已目检真实截图：[1280×720](raid-inventory-services/1280x720.png)、[1920×1080](raid-inventory-services/1920x1080.png)、[保存失败](raid-inventory-services/save-failed.png)，原报告与两种播种反例汇总见[验证记录](raid-inventory-services/validation.json)。测试用打包后的未提交工作树，HTML SHA-256 为 `986cb8777270ae92468dbf8fe922da6a9647713a755f5a1f939f39061dab1e85`；完整其余浏览器套件留待准确 head CI。没有真机、真人手感或性能签收；#60 其余事务分类、内容身份及资源工具收敛继续开放。
+
 ## Q-D02 旧交易与装弹接口退役
 
 2026-10-23，[PR #89](https://github.com/xuys2025/escape-bincov/pull/89)，分支 `agent/q-d02-legacy-api`，起点 main `44494ea`；之后 #79、#88、#87 先后合入 main，本分支每次都普通合并同步，冲突只在任务清单和 handoff，都是双方各自新增的内容；准确基线以 PR 为准。承接 #60 的 Q-D02 剩余部分：`writeSave`/`readSave` 已在第二批退役，本批删去 `domain.ts` 的 `buy`、`sell`、`reload`，把仍有意义的断言迁到正式路径。玩法、存档格式、界面行为和打包产物都不变。

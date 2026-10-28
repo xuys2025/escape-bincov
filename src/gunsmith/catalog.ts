@@ -84,8 +84,10 @@ export interface Modifiers extends Factors {
     magazine?: number;
     /** Kg the installed part adds to the gun; negative when it is lighter than the factory part it replaces. */
     weight: number;
-    /** Factor on the gunshot noise radius, today the one SURVIVAL.gunNoiseRange for every gun. */
+    /** Factor on the radius within which enemies hear a shot (SURVIVAL.gunNoiseRange for every factory gun, M2-11). */
     noise?: number;
+    /** A suppressor: the shots sound muffled (the view's quiet recipe, M2-11). How far enemies hear them is `noise`'s. */
+    suppressor?: true;
     /** Cells the installed part adds to the gun's footprint (suppressors lengthen, a drum deepens). */
     grow?: { w: number; h: number };
     /** Factor on the precise-aim camera look-ahead, one per sight mode; M0-07 sets the cap these scale. */
@@ -118,8 +120,8 @@ export interface AttachmentDef {
     requires: readonly Qualification[];
     /** Effect quota: one laser and one light per gun; a combiner uses both. */
     quota: 'laser' | 'light' | 'combiner' | null;
-    /** As a loose item: weight in kg and shop prices. */
-    weight: number; buy: number; sell: number;
+    /** As a loose item: footprint in cells (looseSize), weight in kg and shop prices. */
+    w: number; h: number; weight: number; buy: number; sell: number;
     mods: Modifiers;
 }
 
@@ -204,7 +206,7 @@ export const GUNS: Readonly<Record<GunId, GunDef>> = {
         { magazine: 30, damage: 30, range: 640, cooldown: .11, reload: 2.4, pellets: 1, spread: .034, crit: .06 },
         hd('auto', 2.4, .22, .45, 2.2, .011, .09, .011, .1, .17, 4),
         { muzzle: 1, barrel: 1, handguard: 1, stock: 1, grip: 1, mag: 1, base: 1 }, ['longScope']),
-    // The #39 sample rifle the maintainer playtested (SAMPLE_GUNS.m4a1 and its handling); the prices are proposals.
+    // The #39 sample rifle the maintainer playtested, unchanged: the real one since M2-01 (the test pins it); prices are proposals.
     mb4a1: gun('mb4a1', 'M4A1 模块步枪', 'rifle', 'common', 'ammoR', [4, 1, 2.9, 2300, 1080],
         { magazine: 30, damage: 24, range: 600, cooldown: .1, reload: 2.1, pellets: 1, spread: .03, crit: .05 },
         hd('auto', 2.4, .22, .4, 2.2, .009, .08, .008, .08, .15, 4),
@@ -237,15 +239,35 @@ export const GUNS: Readonly<Record<GunId, GunDef>> = {
 
 /** Loose attachments sell back for this share of the buy price, as weapons roughly do today (proposal). */
 const SELL_SHARE = .45;
+/**
+ * An attachment's acquisition tier (PLAN section 10, #28 M2-13): basic parts are stocked steadily, common ones come
+ * with progress and zone drops, rare ones from high-risk spots. ATTACHMENTS.md names no tier, so it is read from the
+ * buy price against the plan's trial bands: basic up to 150, common up to 450, rare above. Of the 100 that gives 20, 65
+ * and 15. A proposal: M4-01 and M4-03 retune tiers and prices together.
+ */
+export type PartTier = 'basic' | 'common' | 'rare';
+export const partTier = (part: Pick<AttachmentDef, 'buy'>): PartTier =>
+    part.buy <= 150 ? 'basic' : part.buy <= 450 ? 'common' : 'rare';
 type Extra = Partial<Pick<AttachmentDef, 'provides' | 'needs' | 'grants' | 'requires' | 'quota'>>;
 interface Draft { id: string; name: string; mount: Slot; guns: readonly GunId[] | null; weight: number; buy: number; mods: Partial<Modifiers>; extra: Extra }
 /** One row: id, name, slot, guns (null for rail parts), loose kg, buy price, modifiers. `mods.weight` defaults to the loose kg. */
 const p = (id: string, name: string, mount: Slot, guns: readonly GunId[] | null, weight: number, buy: number,
     mods: Partial<Modifiers> = {}, extra: Extra = {}): Draft => ({ id, name, mount, guns, weight, buy, mods, extra });
+/**
+ * A loose attachment's footprint (#28 M2-02, M0 review decision 9; a proposal M4 may tune with the shop and loot
+ * space): 2x1 for a long part, 1x1 for the rest. Long are handguards, stocks, a barrel for any gun but a pistol, a part
+ * that lengthens or deepens the installed gun (suppressors and the drum, `grow`), long-range scopes and the folded bipod.
+ * The inventory picture stays the 24 px icon (ART-SPEC section 2); only the cells it takes differ.
+ */
+function looseSize(cat: Category, d: Draft): { w: number; h: number } {
+    const long = cat === 'handguard' || cat === 'stock' || cat === 'barrel' && !!d.guns?.some(id => GUNS[id].cls !== 'pistol')
+        || !!d.mods.grow || !!d.extra.requires?.includes('longScope') || d.mount === 'bipod';
+    return long ? { w: 2, h: 1 } : { w: 1, h: 1 };
+}
 const section = (cat: Category, brand: Brand, drafts: readonly Draft[]): AttachmentDef[] => drafts.map(d => ({
     id: d.id, name: d.name, brand, cat, mount: d.mount, provides: d.extra.provides ?? {}, guns: d.guns,
     needs: d.extra.needs ?? [], grants: d.extra.grants ?? [], requires: d.extra.requires ?? [], quota: d.extra.quota ?? null,
-    weight: d.weight, buy: d.buy, sell: Math.round(d.buy * SELL_SHARE), mods: { weight: d.weight, ...d.mods },
+    ...looseSize(cat, d), weight: d.weight, buy: d.buy, sell: Math.round(d.buy * SELL_SHARE), mods: { weight: d.weight, ...d.mods },
 }));
 const RIFLE_MUZZLE: readonly GunId[] = ['carbine', 'akb74', 'akb103', 'mb4a1', 'augb', 'rpkb'];
 const PRECISION: readonly GunId[] = ['svdb', 'mb14', 'mb700'];
@@ -278,18 +300,18 @@ export const ATTACHMENTS: Readonly<Record<string, AttachmentDef>> = Object.fromE
     ...section('muzzle', 'yanwan', [
         p('M01', '轻型消焰器', 'muzzle', ['pistol', 'gb17', 'pb226', 'mpb5', 'vb9'], .05, 90, { noise: .9, kick: .97 }),
         p('M02', '近战补偿器', 'muzzle', ['gb17', 'pb226', 'mpb5', 'vb9'], .08, 220, { bloom: .8, kick: .9, noise: 1.15 }),
-        p('M03', '九系短消音器', 'muzzle', ['gb17', 'pb226', 'mpb5', 'vb9'], .2, 520, { noise: .5, raise: 1.1, grow: { w: 1, h: 0 } },
+        p('M03', '九系短消音器', 'muzzle', ['gb17', 'pb226', 'mpb5', 'vb9'], .2, 520, { noise: .5, suppressor: true, raise: 1.1, grow: { w: 1, h: 0 } },
             { needs: [{ part: 'B01', on: ['gb17', 'pb226'] }] }),
-        p('M04', '重弹消音器', 'muzzle', ['mb1911', 'umpb45'], .28, 560, { noise: .55, grow: { w: 1, h: 0 } },
+        p('M04', '重弹消音器', 'muzzle', ['mb1911', 'umpb45'], .28, 560, { noise: .55, suppressor: true, grow: { w: 1, h: 0 } },
             { needs: [{ part: 'B02', on: ['mb1911'] }] }),
         p('M05', '步枪消焰器', 'muzzle', RIFLE_MUZZLE, .08, 110, { noise: .9, bloom: .96 }),
         p('M06', '步枪制退器', 'muzzle', RIFLE_MUZZLE, .12, 260, { bloom: .8, kick: .75, noise: 1.2 }),
-        p('M07', '步枪紧凑消音器', 'muzzle', RIFLE_MUZZLE, .35, 680, { noise: .55, raise: 1.12, grow: { w: 1, h: 0 } }),
-        p('M08', '精确枪消音器', 'muzzle', PRECISION, .55, 760, { noise: .5, grow: { w: 1, h: 0 } }),
+        p('M07', '步枪紧凑消音器', 'muzzle', RIFLE_MUZZLE, .35, 680, { noise: .55, suppressor: true, raise: 1.12, grow: { w: 1, h: 0 } }),
+        p('M08', '精确枪消音器', 'muzzle', PRECISION, .55, 760, { noise: .5, suppressor: true, grow: { w: 1, h: 0 } }),
         p('M09', '精确枪制退器', 'muzzle', PRECISION, .15, 300, { recover: 1.3, kick: .8, noise: 1.2 }),
         p('M10', '通用霰弹收束器', 'muzzle', ['mb870', 'mb1014'], .1, 160, { spread: .78 }),
         p('M11', '双管收束组', 'muzzle', ['shotgun'], .15, 180, { spread: .72 }),
-        p('M12', '轻高速消音器', 'muzzle', ['pb90'], .25, 900, { noise: .5, grow: { w: 1, h: 0 } }),
+        p('M12', '轻高速消音器', 'muzzle', ['pb90'], .25, 900, { noise: .5, suppressor: true, grow: { w: 1, h: 0 } }),
     ]),
     // Barrels, handguards, stocks, grips and magazines replace a factory part, so their installed weight may be negative.
     ...section('barrel', 'binji', [

@@ -839,6 +839,50 @@ try {
     await place(27.5, 12.6); await page.waitForTimeout(600); await shot('H14-clinic-1920x1080');
     return '已截图';
   });
+  await step('H15 F16 空手玩家：八方向站立/行走手部完整，身体素材与脚底不变', async () => {
+    const sizes = [];
+    for (const size of [[1280,720],[1920,1080]]) {
+      await open({ at:[15.6,16.4],size });
+      const result = await page.evaluate(() => {
+        const h=window.__station.host,sc=h.scene;
+        const dirs=[['e',false],['se',false],['s',false],['se',true],['e',true],['ne',true],['n',false],['ne',false]];
+        const pixels=c=>c.getContext('2d').getImageData(0,0,c.width,c.height).data;
+        const sourceBefore=[...sc.sol].filter(([k])=>k.startsWith('coast-player-body-')).map(([k,c])=>[k,Array.from(pixels(c))]);
+        const frames=[];
+        for(let dir=0;dir<8;dir++) for(let frame=0;frame<5;frame++) {
+          const [d,mirror]=dirs[dir],src=sc.sol.get(`coast-player-body-${d}-f${frame}-v1`);
+          const base=document.createElement('canvas');base.width=32;base.height=48;const g=base.getContext('2d');
+          if(mirror){g.translate(32,0);g.scale(-1,1);}g.drawImage(src,0,0);
+          const a=pixels(sc.playerTex(dir,frame).source.resource),b=pixels(base);
+          let added=0,changedHands=0,changedProtected=0,removed=0;
+          const seen=new Set(),todo=[];
+          for(let p=0;p<32*48;p++) {const i=p*4,y=Math.floor(p/32);if(b[i+3]){seen.add(p);todo.push(p);if(!a[i+3])removed++;}
+            if(!b[i+3]&&a[i+3]&&y>=28&&y<38)added++;
+            if(y>=28&&y<38&&a.slice(i,i+4).some((v,k)=>v!==b[i+k]))changedHands++;
+            if((y<18||y>=38)&&a.slice(i,i+4).some((v,k)=>v!==b[i+k]))changedProtected++;
+          }
+          for(let n=0;n<todo.length;n++){const p=todo[n],x=p%32,y=Math.floor(p/32);for(const [dx,dy]of [[1,0],[-1,0],[0,1],[0,-1]]){const xx=x+dx,yy=y+dy,j=yy*32+xx;if(xx>=0&&xx<32&&yy>=0&&yy<48&&!seen.has(j)&&a[j*4+3]){seen.add(j);todo.push(j);}}}
+          let detached=0;for(let p=0;p<32*48;p++)if(a[p*4+3]&&!seen.has(p))detached++;
+          frames.push({dir,frame,added,changedHands,changedProtected,removed,detached});
+        }
+        const sourceMutated=sourceBefore.some(([k,b])=>pixels(sc.sol.get(k)).some((v,i)=>v!==b[i]));
+        const mirrors=[];for(const [left,right]of [[4,0],[3,1],[5,7]])for(let frame=0;frame<5;frame++){
+          const a=pixels(sc.playerTex(left,frame).source.resource),b=pixels(sc.playerTex(right,frame).source.resource);
+          let different=0;for(let y=0;y<48;y++)for(let x=0;x<32;x++)for(let c=0;c<4;c++)if(a[(y*32+x)*4+c]!==b[(y*32+31-x)*4+c])different++;
+          mirrors.push(different);
+        }
+        return {frames,sourceMutated,mirrors};
+      });
+      // Side-view hands can sit in front of a trouser leg, so count changed hand pixels as well as added silhouette.
+      for(const f of result.frames){assert.ok(f.changedHands>=12,`dir ${f.dir} frame ${f.frame}: missing forearm/hand pixels (${f.changedHands})`);assert.equal(f.changedProtected,0,'head/feet changed');assert.equal(f.removed,0,'body silhouette erased');assert.equal(f.detached,0,'detached hand/arm');}
+      assert.equal(result.sourceMutated,false,'shared raid body source mutated');assert.ok(result.mirrors.every(n=>n===0),'mirrored arms differ');
+      await place(15.6,16.4,2); await page.waitForTimeout(200); await shot(`H15-hands-idle-${size.join('x')}`);
+      await page.keyboard.down('d');await page.waitForTimeout(240);await shot(`H15-hands-walk-${size.join('x')}`);await page.keyboard.up('d');
+      sizes.push({size,...result});
+    }
+    report.coverage.playerHands=sizes;
+    return '两尺寸各40帧；新增手部连通、镜像一致、头脚和共用素材不变';
+  });
   for (const [w,h] of [[1280,720],[1920,1080],[844,390],[390,844]]) await step('H16 真实交互/交易/刷新 '+w+'x'+h, async () => {
     const mobile=w<900;
     await open({fixture:preset('repaired'),size:[w,h],mobile});

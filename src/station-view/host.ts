@@ -42,7 +42,7 @@ export interface StationHooks {
   /** Seed the Runtime should use for an empty seed field (village corner for the sample), or '' for the clock. */
   seedFor(world: RunWorld): string;
   /** Layout revision for a new mall raid (3, the 2.5D one); undefined keeps the Runtime default. */
-  mallLayout?(world: RunWorld): 1 | 2 | 3 | undefined;
+  mallLayout?(world: RunWorld): 1 | 2 | 3 | 4 | undefined;
   tabs(): void;
   title(): void;
   exportSave(): void;

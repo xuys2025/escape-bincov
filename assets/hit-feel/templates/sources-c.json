@@ -1,0 +1,546 @@
+{
+  "note": "Group C (#81 archetypes without poses): column 0 of each template is the runtime idle frame at 8x nearest-neighbour, computed pixel by pixel without a canvas, so every pixel (semi-transparent ones too) is exact. If an idle frame changes, regenerate the template and compare these hashes.",
+  "main": "974a3a8d1ad2a7662c3a828226295d6c9b31eb64",
+  "templates": [
+    {
+      "id": "raider-boss",
+      "name": "盐枭头目",
+      "group": "armed",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/raider-boss-hurt-template-v1.png",
+      "sha256": "54b029f0ae9290b1ad7942ae5dda9b81e2b6fd20435dcb30e21a7aaa6ed96146",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-raider-boss-body-e-f0-v1.png",
+          "sha256": "c7e2e1680534bc98ac177882261e91c79b15c8900af7ea011ba2085d40297126"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-raider-boss-body-se-f0-v1.png",
+          "sha256": "85d7320fcfab11ac389992337e55d98ab08dccadb0fa0305d5c0e148fc637228"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-raider-boss-body-s-f0-v1.png",
+          "sha256": "4266b6c1b7c065a2ea2d6376b2fba68ee06b47a7eb89e89d074de6b502e654b7"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-raider-boss-body-ne-f0-v1.png",
+          "sha256": "02f31373cf92c5bc18fb4d2ac17cd2394c64ab4169afbee5e42f4b63713d0995"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-raider-boss-body-n-f0-v1.png",
+          "sha256": "858015c51e701092357fe5368c3c6d88018c576a3b14b2d0d5119f8b0e9e7c28"
+        }
+      ]
+    },
+    {
+      "id": "tide-ritualist",
+      "name": "守潮执仪者",
+      "group": "armed",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/tide-ritualist-hurt-template-v1.png",
+      "sha256": "a60555d6d31ae890c95c59d38ea62cf0683529c3e58c38466d30530d3d23b517",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-tide-ritualist-body-e-f0-v1.png",
+          "sha256": "e3fac3eb79619d088bb2a9a03a87a6063f8532585f221286f905dca73a13f8c8"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-tide-ritualist-body-se-f0-v1.png",
+          "sha256": "b7be333bf0f6b55ffde3435ce481a217e6da15e3c4d969988558a11bcedd630b"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-tide-ritualist-body-s-f0-v1.png",
+          "sha256": "5c739096324c031cbbde9e34a9a9bc72bba3ea0dcaff4f1c3bd1f086245fb12c"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-tide-ritualist-body-ne-f0-v1.png",
+          "sha256": "be84f1baa5a38b7279c5a086d5724334a9a2033c67010f4e575594e67e3c4677"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-tide-ritualist-body-n-f0-v1.png",
+          "sha256": "a4c49aa5d42a680660d0443c1ce0a485efd2c5d6fb36c58dc0294b31978f4437"
+        }
+      ]
+    },
+    {
+      "id": "mercenary-scout",
+      "name": "侦察兵",
+      "group": "armed",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/mercenary-scout-hurt-template-v1.png",
+      "sha256": "f4603ec767aaf64f19c2d314250b6c03b1739f66cf6c3c3ef247b93c056b0852",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-mercenary-scout-body-e-f0-v1.png",
+          "sha256": "4a3c6876cd37d281dfe239db700061e26e968dac8333049dfe8075aa9c448adf"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-mercenary-scout-body-se-f0-v1.png",
+          "sha256": "4e79e98fd52dde8565aa58536afae9c46d0e1a9e091055b6dfca5cf1c110931e"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-mercenary-scout-body-s-f0-v1.png",
+          "sha256": "2a6ffacd29c0e55fd557b30e169134b0ee565a462c6ab10db3c2bd71b4cfc8d0"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-mercenary-scout-body-ne-f0-v1.png",
+          "sha256": "1183078612a666705311f63d11a711018744f9277b497117f7bf5ef3c25ca899"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-mercenary-scout-body-n-f0-v1.png",
+          "sha256": "41ea9f011dcf53e5288090643821dd0b48ca59797ee91e7a6bc00ed0a2e21bfb"
+        }
+      ]
+    },
+    {
+      "id": "mercenary-assault",
+      "name": "突击兵",
+      "group": "armed",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/mercenary-assault-hurt-template-v1.png",
+      "sha256": "e366e7ac93abb818b7c2d10be098df64444073ab5dca4564e5825544371f42b0",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-mercenary-assault-body-e-f0-v1.png",
+          "sha256": "0bc8d4d3837c666cc8c7f2fac59b13ed00e8109da1ade9bb99fa8e0388358b1d"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-mercenary-assault-body-se-f0-v1.png",
+          "sha256": "27f38c66084a0ea12815851765bc079ec5d2de368f39dd0de5d4ffb6a6e8aac4"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-mercenary-assault-body-s-f0-v1.png",
+          "sha256": "23ab5e1078274bda02f6093359131a4c3ab4b78893771d8cd92ffda6a6f1198e"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-mercenary-assault-body-ne-f0-v1.png",
+          "sha256": "7c0f09ad84a1b884ddffed2e7ccffd45fd38974ee16e4e271975099c433fec31"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-mercenary-assault-body-n-f0-v1.png",
+          "sha256": "d30a6341d1414317557a2922629d2ca039ccda5214261aacdbc32593c7bc4445"
+        }
+      ]
+    },
+    {
+      "id": "mercenary-support",
+      "name": "支援枪手",
+      "group": "armed",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/mercenary-support-hurt-template-v1.png",
+      "sha256": "88a05ecbb67d2255d7172e938f175ae8f533e6f5fe113826bb3e5cc85d8a6988",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-mercenary-support-body-e-f0-v1.png",
+          "sha256": "62ebcc1f307070826947414a832f253977eb951c657dcef277c94fc3bf599847"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-mercenary-support-body-se-f0-v1.png",
+          "sha256": "fe91458cc5fcbbf5cbf02b6372e8a33b61a12547c5c45ae085fe9542ec874bfa"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-mercenary-support-body-s-f0-v1.png",
+          "sha256": "524ffd03b13a55acc12fd941b7f13c57253915a906b6d20a17e3a0f1e92c7a91"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-mercenary-support-body-ne-f0-v1.png",
+          "sha256": "62b40af57ed687dc3499d6a1e66c6e9364f9b19bcfdf07189a826bfea352f855"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-mercenary-support-body-n-f0-v1.png",
+          "sha256": "b9523e822dfab93bda76f84b8e1b286b95c2acd5b8573e8410ce08af801bf60b"
+        }
+      ]
+    },
+    {
+      "id": "recovery-leader",
+      "name": "回收队长",
+      "group": "armed",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/recovery-leader-hurt-template-v1.png",
+      "sha256": "f8d02d641078a5232bf56f412db756967a97897bf4ddc1364de9015ecdc4cd6b",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-recovery-leader-body-e-f0-v1.png",
+          "sha256": "7014a9683ecd90ca6064bc8054dcadce3c8a10cf9b0520648f062f12bfe045e4"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-recovery-leader-body-se-f0-v1.png",
+          "sha256": "950e28ba166c681a1e02fcd0457c2e56b1466556be4cf75d4aa2adbb5b0a0975"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-recovery-leader-body-s-f0-v1.png",
+          "sha256": "580c8073c0eaffaaad0ff950cf78ad25caaa66e4067fe0dcab659563cfc3720f"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-recovery-leader-body-ne-f0-v1.png",
+          "sha256": "7349a7f87d904a214beb49f3bf27541d63526a77282f365447a9ef43aeca0140"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-recovery-leader-body-n-f0-v1.png",
+          "sha256": "2a484fb3f847c37c0562403d31f61c3fce46adaa5a3f0f1452163ff014ca3355"
+        }
+      ]
+    },
+    {
+      "id": "blockade-sentry",
+      "name": "检查哨兵",
+      "group": "armed",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/blockade-sentry-hurt-template-v1.png",
+      "sha256": "b6fcc29a211534784c046eca446f291c16f3c68da931795d12ac82b8fd0eef3b",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-blockade-sentry-body-e-f0-v1.png",
+          "sha256": "9f1f9674485d4ecb75b27521069e4487eaa596938f1933f7129cc1d8eab93c77"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-blockade-sentry-body-se-f0-v1.png",
+          "sha256": "dd6ba95c4adf09083bec6036b5cab19a528665bdc4a943860b4e181c92c8e577"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-blockade-sentry-body-s-f0-v1.png",
+          "sha256": "40b42b4abcfe529a09d9f2d579dd1f2db37c2598a51cc14222f617e8b05fd13d"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-blockade-sentry-body-ne-f0-v1.png",
+          "sha256": "8250f423b106d1e4917484f32df79ae02bde2660583e56a2e3416e3410ae7771"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-blockade-sentry-body-n-f0-v1.png",
+          "sha256": "deb7957a920d86db4db0096a2ce089e1f32bcbf6e64a2eeaa625e11c039b71f9"
+        }
+      ]
+    },
+    {
+      "id": "blockade-patrol",
+      "name": "巡逻队员",
+      "group": "armed",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/blockade-patrol-hurt-template-v1.png",
+      "sha256": "f7e39997805b0be9e171e8c93c025d311bea28a1cde1e25d435117708741b7fd",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-blockade-patrol-body-e-f0-v1.png",
+          "sha256": "5d23804157d5212a2302ea89bd8c051569f235b61fb044133d3c3b5d2b9706eb"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-blockade-patrol-body-se-f0-v1.png",
+          "sha256": "fe73204b2c1ac4f18ed64e7865592c4ad3898c064713d62ea85502604dfb9fae"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-blockade-patrol-body-s-f0-v1.png",
+          "sha256": "c8856f07ef0d59de144ad7de6555cca551db800d20be67c05eed76138d812e3a"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-blockade-patrol-body-ne-f0-v1.png",
+          "sha256": "6ccc51048d5dbd0c043c5c26dc74216948828a6c89dac60ddb41c7d5c28a4de0"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-blockade-patrol-body-n-f0-v1.png",
+          "sha256": "270e3e0ed303901ba675e706018716a3f42399d0418c59fde4c8410b37d40245"
+        }
+      ]
+    },
+    {
+      "id": "blockade-sergeant",
+      "name": "检查站班长",
+      "group": "armed",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/blockade-sergeant-hurt-template-v1.png",
+      "sha256": "9f7564eb0bcbd1b658be13d6a974099342aa2b262da581eccb0b7b8a8c072ab1",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-blockade-sergeant-body-e-f0-v1.png",
+          "sha256": "88a9041cbe80eed6df0bbcb0b8ce1ec52ec89aec5108ef32372357e0d802fdce"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-blockade-sergeant-body-se-f0-v1.png",
+          "sha256": "2c0a0c90a0f54fec2e60897a85869381ed3930f0075db8dac66ec2b43e362fb8"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-blockade-sergeant-body-s-f0-v1.png",
+          "sha256": "51802e60316b4f2dbdcb97376d18eaa01c98de05b469256e13667429cf2bc2a9"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-blockade-sergeant-body-ne-f0-v1.png",
+          "sha256": "837e3dfcfaf0477e6ad0d2af6b9b74fafe6c84c7a6b25914e51f363f741abfe8"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-blockade-sergeant-body-n-f0-v1.png",
+          "sha256": "7198b6036659e8424549ed26f68d03e2978e21cde4bc5e5bd37641ad7dc6f42d"
+        }
+      ]
+    },
+    {
+      "id": "salt-dazed",
+      "name": "失神盐蚀者",
+      "group": "unarmed",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/salt-dazed-hurt-template-v1.png",
+      "sha256": "054ef53bb4e29eed1fcd7e66bb5035e06651cdc52c3ede287a4dd0cd807cde63",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-salt-dazed-body-e-f0-v1.png",
+          "sha256": "38ce15c8ef444ea4ca051837a2785416272ac37480a87e1dfc8fa5b98027d82a"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-salt-dazed-body-se-f0-v1.png",
+          "sha256": "a11ed9ff6389c4b0f3428a3980f7985027849f9671156d471703b1f1dc780bae"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-salt-dazed-body-s-f0-v1.png",
+          "sha256": "b9794623e2c9b0445a33bf5c1e2b7a475a73bc7ecc70ce64b15dbf86657b8d75"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-salt-dazed-body-ne-f0-v1.png",
+          "sha256": "aaa5948d295e36221a250da2ffde5c32cbb8fca76400c39a749a2c005c71fefd"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-salt-dazed-body-n-f0-v1.png",
+          "sha256": "0a3e8c5415cf1d786947ff3c297540aee61ccbc2ded2f98bab560a0da794d6dd"
+        }
+      ]
+    },
+    {
+      "id": "tide-chaser",
+      "name": "追潮者",
+      "group": "unarmed",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/tide-chaser-hurt-template-v1.png",
+      "sha256": "67971538c4590c21dd34509945781ca75284f1e73717ac2dc17fde74b4ce39e4",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-tide-chaser-body-e-f0-v1.png",
+          "sha256": "d8cd8001c2288afd27140f7add29a741ea598f5b7a15e5d273986c1e4a64a916"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-tide-chaser-body-se-f0-v1.png",
+          "sha256": "3c2ea7b63eb82a26a99525de697633cc2f52a7de2c77ea288e0f09e53f35c005"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-tide-chaser-body-s-f0-v1.png",
+          "sha256": "ac2ac041c33c7c30df209f9c4fc957b69dcfc7ac8f132f04c1a364a1309cc53d"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-tide-chaser-body-ne-f0-v1.png",
+          "sha256": "4de4f31763a6c333f98a4ae2f8adcdf0c40c73bb3da2fdaf618bcd2188634bd3"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-tide-chaser-body-n-f0-v1.png",
+          "sha256": "fcec4cbb95aeb3e62ab708a81a2ccce0a8998496d5d3da5d926864648c7b7340"
+        }
+      ]
+    },
+    {
+      "id": "salt-hulk",
+      "name": "盐壳重躯",
+      "group": "unarmed",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/salt-hulk-hurt-template-v1.png",
+      "sha256": "5185755a7fff63b0c0581a29bebcd0818876a900d9164732c3bac179628ceed4",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-salt-hulk-body-e-f0-v1.png",
+          "sha256": "c2d16b90c3d76fb92de7849143fde0dbae11e0d824448f52da0b757f6f8d6301"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-salt-hulk-body-se-f0-v1.png",
+          "sha256": "32a7e5397b4d437b1c173f3fab20cb93b1778777221aeb51c3a4e6aa9bd1c49c"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-salt-hulk-body-s-f0-v1.png",
+          "sha256": "2d89e67aedd4065b54babe95c6b2870c2e1452cc4e3c71e1fa11decf73bbc8fd"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-salt-hulk-body-ne-f0-v1.png",
+          "sha256": "06d127cdea52148bab917a1fbcc5c54d3b0b8c547424ff5c0ee9d799c7a98860"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-salt-hulk-body-n-f0-v1.png",
+          "sha256": "cfcdab63306fbe88d06183b9db4ea144c47cc6997136a77561630d00b367f4b0"
+        }
+      ]
+    },
+    {
+      "id": "tidal-crab",
+      "name": "潮蚀蟹",
+      "group": "beast",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/tidal-crab-hurt-template-v1.png",
+      "sha256": "8abf627d63cf5cc60d562405cab58e02e8697632a1df8756a91eec6e95368aed",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-tidal-crab-body-e-f0-v1.png",
+          "sha256": "b52f7ce6e6e2532d47e443c0fa08c17b9f440380404b617ac03fe3dd9480ffac"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-tidal-crab-body-se-f0-v1.png",
+          "sha256": "5f8dab601a31b60a3f5e72c1cee168befb3ba6260422cb8e8f10877f1b6e233b"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-tidal-crab-body-s-f0-v1.png",
+          "sha256": "49d36cf04400a59d9ba30a500ed2d84ad484a50ce7c188ceb02adaa294d96fdf"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-tidal-crab-body-ne-f0-v1.png",
+          "sha256": "369019ac8334598dc0b80308c3cced2a8609578667d7f3a8c92a46df4e02d5be"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-tidal-crab-body-n-f0-v1.png",
+          "sha256": "bc165556cf453aa1ceb4d40ff3711af872977e73ed53e53f9589b32c35946bb4"
+        }
+      ]
+    },
+    {
+      "id": "saltback-dog",
+      "name": "盐背犬",
+      "group": "beast",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/saltback-dog-hurt-template-v1.png",
+      "sha256": "e384c9d40fe11bb0802e6939486c83749788003b5d94008cdc30122c8eaab24b",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-saltback-dog-body-e-f0-v1.png",
+          "sha256": "5c85397989bfbe1aa1a7d8782cb81ade9d87054f79244c91c2aa0ecfcd701768"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-saltback-dog-body-se-f0-v1.png",
+          "sha256": "74be30e529e6a2483a5fd7d4c6659c3c33b7281e52a2f11fa790010df6d98543"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-saltback-dog-body-s-f0-v1.png",
+          "sha256": "d9cf51d96a4e71dfe79e7eb08e06c916ea03fc188ee30381693bf90fcb90e7a2"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-saltback-dog-body-ne-f0-v1.png",
+          "sha256": "e8a0273290ece5031247e660167af18f43b038a1a955e748200adab1d6131d0e"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-saltback-dog-body-n-f0-v1.png",
+          "sha256": "6c2207c26e1df3b26e93bc0cb9bec613606be5bff3778d3cb5a0c8b108f1efca"
+        }
+      ]
+    },
+    {
+      "id": "sac-spitter",
+      "name": "囊腹喷吐兽",
+      "group": "beast",
+      "w": 32,
+      "h": 48,
+      "template": "assets/hit-feel/templates/sac-spitter-hurt-template-v1.png",
+      "sha256": "49ea3cca859ea3f348bec6315e00d7fd42b2e708198aed53a9471de8bfdc7c6e",
+      "frames": [
+        {
+          "dir": "E",
+          "file": "assets/coast/enemy-v1/coast-sac-spitter-body-e-f0-v1.png",
+          "sha256": "a86e0e32bb90d12d55d732d84809ff370ee80cf45b8bf88b77cf5372020228de"
+        },
+        {
+          "dir": "SE",
+          "file": "assets/coast/enemy-v1/coast-sac-spitter-body-se-f0-v1.png",
+          "sha256": "dc52e401d4f26a66cfb76afe0a4875e7a774cdd40e88d4d4fe2a8c6c182a12b2"
+        },
+        {
+          "dir": "S",
+          "file": "assets/coast/enemy-v1/coast-sac-spitter-body-s-f0-v1.png",
+          "sha256": "e9927f14a623fd190d49a2d393fd1728b0fb3a3e9604717a1d4143c9c1008af2"
+        },
+        {
+          "dir": "NE",
+          "file": "assets/coast/enemy-v1/coast-sac-spitter-body-ne-f0-v1.png",
+          "sha256": "b967f6e2e48e2336001f4084f23595619166f31870db2747b8510dba82266fa6"
+        },
+        {
+          "dir": "N",
+          "file": "assets/coast/enemy-v1/coast-sac-spitter-body-n-f0-v1.png",
+          "sha256": "5be21fbd6c95f6a843108ec0878eaa907f3509c4af41a86ba4a9902273c7119f"
+        }
+      ]
+    }
+  ]
+}

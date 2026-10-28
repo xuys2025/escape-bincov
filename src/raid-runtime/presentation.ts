@@ -11,8 +11,9 @@ import { coneOf, driftOf } from '../shooting';
 import { BREATH_FULL, breathChance } from '../breath';
 import { perkRaidRules } from '../expansion-state';
 import { critBreakdown } from '../perks';
+import { ATTACHMENTS } from '../gunsmith/catalog';
 import type { CoastRaidRuntime } from './runtime';
-import type { ActorView, CritChanceView, MapDef, RegionDef, TerrainCode, ViewFrame, WorldKey } from './contract';
+import type { ActorView, CritChanceView, DevicesView, MapDef, RegionDef, TerrainCode, ViewFrame, WorldKey } from './contract';
 
 /** Explicit definition keys survive array reordering; these IDs never enter a save. */
 const regionKeys: Record<string, string> = {
@@ -29,6 +30,12 @@ export function freeze<T>(value: T): T {
     return value;
 }
 export const contains = (r: RegionDef, p: Point) => p.x >= r.x && p.x < r.x + r.w && p.y >= r.y && p.y < r.y + r.h;
+/**
+ * Whether a point is shown now: outdoors, or every room containing it revealed (rooms may overlap; fail closed). The
+ * rule frameView's region of an actor follows, and the view's shownAt; the devices obey it too (#28 M2-03).
+ */
+export const pointShown = (map: MapDef, revealed: Readonly<Record<string, boolean>>, p: Point) =>
+    map.regions.every(r => !r.inside || !contains(r, p) || revealed[r.id] === true);
 
 export function mapView(r: CoastRaidRuntime, key: WorldKey): MapDef {
     const space = r.space?.definition, data = r.mapData;
@@ -117,6 +124,30 @@ function critChanceView(r: CoastRaidRuntime): CritChanceView | null {
     return { rule: 'v3', gun: plain ? critBreakdown(plain.sources) : null, onTarget: aimed ? critBreakdown(aimed.sources) : null };
 }
 
+/**
+ * HudView.devices (#28 M2-03): the device parts of the gun in hand with their switches, the laser's beam as the Runtime
+ * casts it (CoastRaidRuntime.laserBeam) and what the light outlines. The light shows containers and ground items within
+ * its reach and arc along the aim, in line of sight from the body, on this floor (the only one whose containers and
+ * loot the Runtime holds) and only where shown: never an enemy, nothing inside a room not revealed. Null with the knife
+ * drawn, without a gun, or with a gun that has no device.
+ */
+function devicesView(r: CoastRaidRuntime, map: MapDef, revealed: Readonly<Record<string, boolean>>): DevicesView | null {
+    const d = r.devices;
+    if (!d) return null;
+    const beam = r.laserBeam(), { x, y, rotation } = r.player, light = d.light;
+    const lit = (p: Point) => {
+        const dx = p.x - x, dy = p.y - y, off = Math.atan2(dy, dx) - rotation;
+        return !!light && Math.hypot(dx, dy) <= light.radius && Math.abs(Math.atan2(Math.sin(off), Math.cos(off))) <= light.arc / 2
+            && pointShown(map, revealed, p) && r.sight(r.player, p);
+    };
+    return {
+        parts: d.parts.map(p => ({ uid: p.uid, name: ATTACHMENTS[p.id].name, laser: p.laser, light: p.light, on: p.on })),
+        laser: beam && { to: beam.to, hit: beam.hit, inRange: beam.inRange },
+        light: light && { radius: light.radius, arc: light.arc, lit: [...r.containers.filter(lit).map(c => c.id), ...r.loot.filter(lit).map(l => l.uid)] },
+        spot: d.spot,
+    };
+}
+
 export function frameView(r: CoastRaidRuntime, map: MapDef, velocities: ReadonlyMap<string, Point>): ViewFrame {
     const revealed = r.revelation.read(r, map);
     const checkpointOwner=r.enemies.find(e=>e.hp>0&&e.id==='blockade-sentry'&&blockadeProgram(e))
@@ -135,6 +166,7 @@ export function frameView(r: CoastRaidRuntime, map: MapDef, velocities: Readonly
         return { uid, kind: profile?.bodyKind ?? 'player', x: e.x, y: e.y, aim: e.rotation,
             vx: velocity.x, vy: velocity.y, hp, maxHp: enemy ? actorDefinition(enemy).hp : limits.hp, alive: hp > 0,
             weapon: profile?.weapon ?? r.weaponLook,
+            ...(player && r.heldGun ? { gun: r.heldGun } : {}),
             ...(enemy?.tactics && spec ? { tactics: { archetype: enemy.id, name: spec.name, phase: enemy.tactics.phase,
                 stance: enemy.tactics.stance, awareness: enemy.tactics.awareness, left: enemy.tactics.phaseLeft,
                 total: enemy.tactics.phase === 'windup' ? spec.windup : enemy.tactics.phase === 'reload' ? spec.reload
@@ -161,11 +193,13 @@ export function frameView(r: CoastRaidRuntime, map: MapDef, velocities: Readonly
         hud: { hp: r.hp, maxHp: limits.hp, stamina: r.stamina, maxStamina: limits.stamina, pollution: r.pollution, bleeding: !!r.bleeding,
             needs: needs ? { mental: needs.mental, water: needs.water, satiety: needs.satiety } : null,
             timeLeft: Math.max(0, r.config.duration - r.elapsed), tideWarning: r.warned && !r.tideChanged, highTide: r.highTide,
-            weapon: { id: w.id, name: w.name, mag: r.mag, magSize: w.magazine, reserve: r.sampleGun ? 999 : w.ammo ? D.count(loadout.bag, w.ammo) : 0, reloading: r.reloadLeft > 0 },
-            aim: { mode: grip.mode, cone: coneOf(r.handling, w, grip, body), drift: driftOf(r.handling, grip, body),
+            weapon: { id: w.id, name: w.name, mag: r.mag, magSize: w.magazine, reserve: w.ammo ? D.count(loadout.bag, w.ammo) : 0, reloading: r.reloadLeft > 0 },
+            // The cone a shot fired now meets: with the laser resting on a body in range, the laser's (shotGrip).
+            aim: { mode: grip.mode, cone: coneOf(r.handling, w, r.shotGrip, body), drift: driftOf(r.handling, grip, body),
                 raise: r.handling.raise, sway: r.handling.sway, bloom: r.handling.bloom },
             breath: r.breathOwned ? { target: r.breath.target, seconds: r.breath.seconds, chance: breathChance(r.breath.seconds), full: BREATH_FULL } : null,
             crit: critChanceView(r),
+            devices: devicesView(r, map, revealed),
             heals: D.count(loadout.bag, 'bandage') + D.count(loadout.bag, 'medkit'), hitDirections: r.hitDirections.map(h => ({ angle: h.angle, left: h.left })) },
         phase: r.ending ? 'ending' : r.paused ? 'paused' : r.overlay ? 'blocked' : 'running',
     };
