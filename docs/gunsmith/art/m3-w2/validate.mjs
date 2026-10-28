@@ -4,7 +4,7 @@ import { readFileSync,readdirSync,writeFileSync,statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { canvas,rect,poly,decode,colors } from './source/pixels.mjs';
-import { root,docs,incoming,manifest,baseline,assets,picture,configurations,assemble,scaled } from './source/assemble.mjs';
+import { root,docs,incoming,manifest,baseline,assets,picture,configurations,assemble,scaled,previewStem } from './source/assemble.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex'),checks=[];
 const run=(name,fn)=>{try{const detail=fn();checks.push({name,status:'pass',...(detail===undefined?{}:{detail})});}catch(e){checks.push({name,status:'fail',error:e.message});}};
 const source=JSON.parse(readFileSync(resolve(root,docs+'/source/pixel-artwork.json'))),saved=JSON.parse(readFileSync(resolve(root,docs+'/assembly-records.json')));
@@ -40,7 +40,7 @@ const sizes=[];
 for(const [gun,configs]of Object.entries(configurations))for(const name of Object.keys(configs))for(const code of ['h','i','w'])run(`${gun}/${name}/${code} anchor assembly and preview`,()=>{
  const {record:r,image,nodes}=assemble(gun,name,code),expected=saved.assemblies.find(a=>a.gun===gun&&a.configuration===name&&a.code===code);assert.deepEqual(r,expected);
  const limit=code==='h'?[48,16]:code==='i'?[cols[gun]*36,26]:[cols[gun]*72,52];assert.ok(r.w<=limit[0]&&r.h<=limit[1],`${r.w}x${r.h} <= ${limit}`);assert.ok(r.colors<=(code==='w'?24:16));
- for(const s of code==='w'?[1,2]:[1,3])assert.ok(scaled(image,s).data.equals(decode(resolve(root,docs+`/preview/${gun}-${name}-${code}-${s}x.png`)).data),'exact preview pixels');
+ for(const s of code==='w'?[1,2]:[1,3])assert.ok(scaled(image,s).data.equals(decode(resolve(root,docs+`/preview/${previewStem(gun,name,code)}-${s}x.png`)).data),'exact preview pixels');
  if(code==='h'){assert.equal(r.tip[1],r.bore);if(name==='factory'&&newGuns.includes(gun)){const range=gun==='mb1911'?[15,18]:['pb90','umpb45'].includes(gun)?[22,27]:gun==='augb'?[26,26]:[34,38];assert.ok(r.w>=range[0]&&r.w<=range[1]);assert.ok(r.h<=11);}}
  // The shared anchor must cover one parent pixel. Preview inspection also checks the contour around that seam.
  for(const n of nodes.filter(n=>n.parent&&!n.label.startsWith('glove'))){const c=picture(n.key),parent=picture(n.parent.key);let touches=false;
@@ -56,7 +56,7 @@ run('AUG bullpup magazine behind grip; F04 hand behind forward stop',()=>{
 });
 for(const gun of newGuns)run(gun+' bare ground/HUD image has no gloves and exact 1x/2x previews',()=>{const {record,image}=assemble(gun,'factory','h',false);assert.deepEqual(record,saved.bareFactories.find(a=>a.gun===gun));assert.ok(!record.layers.some(l=>l.label.startsWith('glove')));for(const s of [1,2])assert.ok(scaled(image,s).data.equals(decode(resolve(root,docs+`/preview/${gun}-factory-ground-hud-${s}x.png`)).data));});
 run('419 formal images and manifest plus approved P0 32 retain original hashes',()=>{
- const lock=JSON.parse(readFileSync(resolve(root,docs+'/source/baseline-lock.json'))),p0=JSON.parse(readFileSync(resolve(root,docs+'/source/p0-lock.json')));assert.equal(lock.assets.length,419);assert.equal(p0.assets.length,32);assert.equal(sha(readFileSync(resolve(root,'assets/gunsmith/manifest.json'))),lock.manifestSha256);for(const a of [...lock.assets,...p0.assets])assert.equal(sha(readFileSync(resolve(root,a.file))),a.sha256,a.id);return{formalFiles:419,p0Files:32};
+ const lock=JSON.parse(readFileSync(resolve(root,docs+'/source/baseline-lock.json'))),p0=JSON.parse(readFileSync(resolve(root,docs+'/source/p0-lock.json')));assert.equal(lock.assets.length,419);assert.equal(p0.assets.length,32);assert.equal(sha(readFileSync(resolve(root,'assets/gunsmith/manifest.json'))),lock.manifestSha256);for(const a of [...lock.assets,...p0.assets])assert.equal(sha(readFileSync(resolve(root,a.file))),a.sha256,a.id);for(const a of p0.historicalPreviews)for(const file of [a.file,a.source])assert.equal(sha(readFileSync(resolve(root,file))),a.sha256);return{formalFiles:419,p0Files:32,historicalPreviews:2};
 });
 run('RPK shares the AK family joint coordinates, and front gloves follow d3eb43f',()=>{
  for(const c of ['h','i','w'])for(const gun of ['akb74','akb103']){const a=assets.get(`gs-rpkb-receiver-${c}`),b=assets.get(`gs-${gun}-receiver-${c}`);for(const name of ['mount','stock','rearGrip','mag','handguard'])assert.deepEqual(a.mounts[name],b.mounts[name]);assert.ok(!a.mounts.barrel);assert.deepEqual(assets.get('gs-f08-'+c).anchor,[0,0]);}
