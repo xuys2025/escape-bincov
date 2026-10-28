@@ -76,7 +76,7 @@ const gunItem = (id: GunId, short: string, description: string, color: number): 
  * its cost, from ATTACHMENTS.md). Name (the function name; the brand stays in the details), footprint, weight and
  * prices are the catalog's. They are unique items under their own uids, never stacked, and their item id is the
  * catalog id, which a part keeps on a gun (PartNode.id). #28 M3-02 adds the forty wave-one parts (ART-SPEC 8.2), M3-06
- * the other forty.
+ * the other forty (six of them came early with wave two's P0 art).
  */
 const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, description: string]>> = {
   O01: ['点瞄', '快速举枪，手枪点射较清楚。稳定收益较小。'],
@@ -139,6 +139,13 @@ const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, descrip
   M11: ['收束组', '双管霰弹的弹丸更集中。牺牲近距离容错。'],
   T04: ['小激光', '手枪近距离腰射更集中。开启时增加被正面敌人发现的风险。'],
   T08: ['组合器', '手枪激光加小范围照明。比单一激光器重，开启时同样会暴露自己。'],
+  // #28 M3-07 wave two, P0 (the maintainer took it in ahead of the rest, 2026-10-28): the AUG's six parts.
+  O05: ['全息', '移动后准星恢复更快，精瞄更稳。举枪稍慢。'],
+  O10: ['双档镜', '兼顾近距与远距，精瞄稳定。比单档远距镜重、贵，举枪慢。'],
+  F04: ['挡手', '轻，举枪快。控制收益小。'],
+  F07: ['重握把', '持续射击控制最强。很重，举枪慢。'],
+  T02: ['轻激光', '近距离腰射更集中，很轻。作用距离较短；开启时增加被正面敌人发现的风险。'],
+  T10: ['远组合', '远距激光加窄光束照明。最重，举枪较慢；开启时同样会暴露自己。'],
 };
 const attachmentItem = (id: string, [short, description]: readonly [string, string]): ItemDef => {
   const a = ATTACHMENTS[id];
@@ -186,6 +193,8 @@ export const ITEMS: Record<string, ItemDef> = {
   mb1014: gunItem('mb1014', 'M1014', '使用霰弹，管状弹仓 7 发，半自动。自带顶部导轨，枪管、护木、枪托、握把和弹仓都能更换。', 0x7a807a),
   akb74: gunItem('akb74', 'AK-74', '使用卡宾枪弹，弹匣容量 30 发，全自动。后坐平稳；护木、枪托、握把、枪管和弹匣都能更换，侧置基座能装顶部瞄具。', 0x9a7650),
   akb103: gunItem('akb103', 'AK-103', '使用卡宾枪弹，弹匣容量 30 发，全自动。单发伤害更高、后坐更重；配件和 AK-74 通用，另能装重弹鼓。', 0x6d726c),
+  // #28 M3-05, early: wave two's P0 gun (2026-10-28), on an existing ammunition group.
+  augb: gunItem('augb', 'AUG', '使用卡宾枪弹，弹匣容量 30 发，全自动。无托结构，枪身短、占 3 格，转向快；换弹慢。机身自带顶部、下方和侧面导轨，枪口件和弹匣能换。', 0x76805e),
   ...Object.fromEntries(Object.entries(ATTACHMENT_ITEMS).map(([id, text]) => [id, attachmentItem(id, text)])),
 };
 
@@ -205,6 +214,7 @@ export const WEAPONS: Record<string, WeaponDef> = {
   mb1014: { ...GUNS.mb1014.stats },
   akb74: { ...GUNS.akb74.stats },
   akb103: { ...GUNS.akb103.stats },
+  augb: { ...GUNS.augb.stats },
 };
 export const ENEMIES: Record<string, EnemyDef> = {
   scav: { id: 'scav', name: '拾荒者', hp: 56, speed: 69, damage: 11, range: 30, vision: 220, cooldown: 0.9, color: 0xab9370 },

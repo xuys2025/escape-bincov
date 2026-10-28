@@ -7,11 +7,12 @@ import { brush, C, type PixelContext } from './pixel';
  */
 const PART_ART_IDS = ['O01', 'O03', 'O08', 'M03', 'M06', 'B01', 'B08', 'H01', 'H05', 'S01', 'S02', 'P01', 'P02', 'F01', 'F03', 'G01', 'G10', 'T01', 'T05', 'A07'] as const;
 /**
- * The #28 M3 wave-one guns and parts: Sol's art only (M3-03), decoded before the first frame. Their placeholders, for
- * unit tests and a failed decode, are one generic gun and one generic part.
+ * The #28 M3 wave-one guns and parts, and wave two's P0 (the AUG and six parts): Sol's art only (M3-03, M3-07), decoded
+ * before the first frame. Their placeholders, for unit tests and a failed decode, are one generic gun and one generic part.
  */
-const WAVE_GUNS = ['pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103'] as const;
-const WAVE_PARTS = ['A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'B03', 'B05', 'B06', 'B07', 'B09', 'H02', 'H03', 'H04', 'H06', 'H07', 'H08', 'H09', 'S03', 'S04', 'S05', 'S07', 'S08', 'P03', 'P04', 'P06', 'P07', 'G03', 'G06', 'G07', 'G08', 'G09', 'M01', 'M02', 'M05', 'M07', 'M10', 'M11', 'T04', 'T08'] as const;
+const WAVE_GUNS = ['pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103', 'augb'] as const;
+const WAVE_PARTS = ['A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'B03', 'B05', 'B06', 'B07', 'B09', 'H02', 'H03', 'H04', 'H06', 'H07', 'H08', 'H09', 'S03', 'S04', 'S05', 'S07', 'S08', 'P03', 'P04', 'P06', 'P07', 'G03', 'G06', 'G07', 'G08', 'G09', 'M01', 'M02', 'M05', 'M07', 'M10', 'M11', 'T04', 'T08',
+  'O05', 'O10', 'F04', 'F07', 'T02', 'T10'] as const;
 export const ITEM_ART_IDS = ['knife', 'pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'bandage', 'medkit', 'antidote', 'water', 'food', 'scrap', 'wire', 'fuse', 'battery', 'watch', 'pearl', 'sample', 'ledger', 'cloth', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckyCharm', 'unluckyCharm', 'luckySachet', 'unluckySachet', 'gb17', 'mb4a1', ...PART_ART_IDS, ...WAVE_GUNS, ...WAVE_PARTS] as const;
 export type ItemArtId = typeof ITEM_ART_IDS[number];
 type PartArtId = typeof PART_ART_IDS[number];

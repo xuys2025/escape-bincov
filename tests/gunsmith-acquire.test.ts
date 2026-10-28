@@ -21,16 +21,16 @@ import { TILE, WORLD, type RunConfig } from '../src/world';
 // #28 M2-13 (docs/gunsmith/CONTRACTS.md, 样板获取路径): the shop stocks the G17, the basic parts and (M2 review
 // 2026-10-27) O01 and G01; the other gunsmith guns and the other common and the rare parts are found, carved out of the
 // gun and valuable shares of the loot only. #28 M3 added wave one's seven guns (found, rare ones at high-risk spots)
-// and forty parts (the basic ones on the shelf).
+// and forty parts (the basic ones on the shelf), then wave two's P0: the AUG (found) and six parts (F04 on the shelf).
 
 const PARTS = Object.keys(D.ITEMS).filter(id => D.isAttachment(id));
-const BASIC = ['P01', 'F01', 'A07', 'A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'H03', 'P04', 'P07', 'M01', 'M05'];
-const RARE = ['O08', 'M03', 'B08', 'G09', 'M07'], SHELF_COMMON = ['O01', 'G01'];
+const BASIC = ['P01', 'F01', 'A07', 'A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'H03', 'P04', 'P07', 'M01', 'M05', 'F04'];
+const RARE = ['O08', 'M03', 'B08', 'G09', 'M07', 'O10', 'T10'], SHELF_COMMON = ['O01', 'G01'];
 /** The common parts that are found: the shelf's two are not. */
 const COMMON = PARTS.filter(id => !BASIC.includes(id) && !RARE.includes(id) && !SHELF_COMMON.includes(id));
 /** The found guns by the catalog's tier: every gunsmith gun that is an item but those on the shelf (the G17, and since
  *  the maintainer's 2026-10-28 decision the P226 and the M870). */
-const SHELF_GUNS = ['gb17', 'pb226', 'mb870'], GUNS_COMMON = ['mb4a1', 'mpb5', 'akb74', 'akb103'], GUNS_RARE = ['vb9', 'mb1014'];
+const SHELF_GUNS = ['gb17', 'pb226', 'mb870'], GUNS_COMMON = ['mb4a1', 'mpb5', 'akb74', 'akb103', 'augb'], GUNS_RARE = ['vb9', 'mb1014'];
 const OLD_ARMS = ['pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'scrap', 'wire', 'fuse', 'battery'];
 type Unit = { id: string; qty: number };
 const records = (c: Pick<RunConfig, 'loot' | 'containers'>): Unit[] => [...c.loot, ...c.containers.flatMap(x => x.items)];
@@ -39,7 +39,7 @@ const isFind = (id: string) => isFoundGun(id) || D.isAttachment(id);
 const flooded = (p: { x: number; y: number }) => WORLD.tiles[Math.floor(p.y / TILE)][Math.floor(p.x / TILE)] === 4;
 const amounts = (units: Unit[]) => units.reduce((a, u) => ({ ...a, [u.id]: (a[u.id] ?? 0) + u.qty }), {} as Record<string, number>);
 
-test('tiers: the price bands of PLAN section 10 sort the 100 parts 20/65/15, the 60 items into 14 basic, 41 common and 5 rare', () => {
+test('tiers: the price bands of PLAN section 10 sort the 100 parts 20/65/15, the 66 items into 15 basic, 44 common and 7 rare', () => {
     const count = { basic: 0, common: 0, rare: 0 };
     for (const a of Object.values(ATTACHMENTS)) count[partTier(a)]++;
     assert.deepEqual(count, { basic: 20, common: 65, rare: 15 });
@@ -47,9 +47,9 @@ test('tiers: the price bands of PLAN section 10 sort the 100 parts 20/65/15, the
     assert.deepEqual([40, 150, 151, 450, 451, 1200].map(buy => partTier({ buy })), ['basic', 'basic', 'common', 'common', 'rare', 'rare']);
     assert.deepEqual(PARTS.filter(id => partTier(ATTACHMENTS[id]) === 'basic'), BASIC);
     assert.deepEqual(PARTS.filter(id => partTier(ATTACHMENTS[id]) === 'rare'), RARE);
-    // 41 common items: 39 found, and the G17's O01 and G01 on the shelf (M2 review 2026-10-27).
+    // 44 common items: 42 found, and the G17's O01 and G01 on the shelf (M2 review 2026-10-27).
     assert.deepEqual(PARTS.filter(id => partTier(ATTACHMENTS[id]) === 'common'), PARTS.filter(id => COMMON.includes(id) || SHELF_COMMON.includes(id)));
-    assert.deepEqual([COMMON.length, SHELF_COMMON.length], [39, 2]);
+    assert.deepEqual([COMMON.length, SHELF_COMMON.length], [42, 2]);
     // The found guns follow the catalog's tiers.
     for (const id of GUNS_COMMON) assert.notEqual(GUNS[id as 'mb4a1'].tier, 'rare', id);
     for (const id of GUNS_RARE) assert.equal(GUNS[id as 'vb9'].tier, 'rare', id);
@@ -216,7 +216,7 @@ test('deployed street and mall raids: a found M4A1 is a factory instance, a foun
 
 test('corpses: a legacy enemy keeps its old roll; now and then a gun or valuable drop is a part instead, rare only on an elite, never a gun', () => {
     const seen = new Set<string>();
-    // 39 common parts since #28 M3: enough corpses for each to turn up.
+    // 42 common parts since #28 M3: enough corpses for each to turn up.
     for (let seed = 1; seed <= 12000; seed++) for (const elite of [false, true]) {
         const rolls = elite ? 3 : 1, old = D.rollLoot(seed, rolls), now = D.corpseLoot(seed, rolls, elite);
         assert.deepEqual(D.corpseLoot(seed, rolls, elite), now, 'the same seed, the same corpse');

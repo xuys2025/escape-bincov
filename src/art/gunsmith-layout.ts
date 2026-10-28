@@ -95,7 +95,8 @@ export function gunArtLayout(gun: string, parts: readonly PartNode[], code: ArtC
     };
     walk(parts, root);
     // Held: the rear glove on the grip unless the receiver has it painted on (the approved carbine); the front hand on the
-    // foregrip, else on the handguard (no glove when its image has one painted on), else the receiver's hand.
+    // foregrip, else on the handguard (no glove when its image has one painted on), else the receiver's hand (ART-SPEC 5:
+    // a glove too, as on the Vector and the AUG, unless the hands are painted on or it is the grip, as on a pistol).
     let hand: ArtPoint | undefined;
     if (code === 'h') {
         const glove = (which: string, at: ArtPoint) => {
@@ -107,7 +108,10 @@ export function gunArtLayout(gun: string, parts: readonly PartNode[], code: ArtC
         const fore = nodes.find(n => n.label === 'under' && n.art.hand), guard = nodes.find(n => n.label === 'handguard' && n.art.hand);
         if (fore) { hand = add(fore.art.hand!, fore.x, fore.y); glove('foregrip', hand); }
         else if (guard) { hand = add(guard.art.hand!, guard.x, guard.y); if (!guard.art.embeddedFrontGlove) glove('front', hand); }
-        else if (rootArt.hand) hand = rootArt.hand;
+        else if (rootArt.hand) {
+            hand = rootArt.hand;
+            if (!rootArt.wholeCanvasLayer && !(rootArt.grip && hand[0] === rootArt.grip[0] && hand[1] === rootArt.grip[1])) glove('front', hand);
+        }
     }
     const lo = [Math.min(...nodes.map(n => n.x)), Math.min(...nodes.map(n => n.y))];
     const hi = [Math.max(...nodes.map(n => n.x + n.art.w)), Math.max(...nodes.map(n => n.y + n.art.h))];

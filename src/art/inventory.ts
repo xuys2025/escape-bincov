@@ -15,6 +15,7 @@ export const inventoryArtSize = (id: string): readonly [number, number] => {
     case 'mb870': return [88, 16];
     case 'mb1014': return [86, 16];
     case 'akb74': case 'akb103': return [87, 16];
+    case 'augb': return [65, 18];
     case 'medkit': case 'ledger': return [48, 16];
     case 'water': return [12, 32];
     case 'battery': return [22, 32];

@@ -13,16 +13,22 @@ import { partsOfSignature, partsSignature } from '../src/gunsmith/signature';
 const fixture = JSON.parse(readFileSync('tests/fixtures/gunsmith-assemblies.json', 'utf8'));
 /** Sol's wave-one records (#28 M3-03, docs/gunsmith/art/m3-w1): 31 configurations of 12 guns, as part trees. */
 const wave = JSON.parse(readFileSync('tests/fixtures/gunsmith-assemblies-m3.json', 'utf8'));
+/**
+ * Sol's wave-two P0 records (#28 M3-07, docs/gunsmith/art/m3-w2): the AUG and the M4A1 with its six parts. The factory
+ * AUG's held record gained the front glove on the receiver's hand (ART-SPEC 5), as did the factory Vector's in `wave`.
+ */
+const waveTwo = JSON.parse(readFileSync('tests/fixtures/gunsmith-assemblies-m3-w2.json', 'utf8'));
 import { CONFIGS, part } from './fixtures/gunsmith-configs';
 type Tree = [string, PartNode['slot'], Tree[]?];
 const grow = (trees: readonly Tree[]): PartNode[] => trees.map(([id, slot, kids]) => part(id, slot, grow(kids ?? [])));
-/** The guns with art: M2's five and the wave-one seven. */
-const ART_GUNS = ['gb17', 'mb4a1', 'carbine', 'pistol', 'shotgun', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103'] as const;
+/** The guns with art: M2's five, the wave-one seven and wave two's P0 AUG. */
+const ART_GUNS = ['gb17', 'mb4a1', 'carbine', 'pistol', 'shotgun', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103', 'augb'] as const;
 
-test('the imported art: 387 images and 5 virtual layers, every key drops its version, the revision is the manifest\'s', () => {
+test('the imported art: 419 images and 5 virtual layers, every key drops its version, the revision is the manifest\'s', () => {
     const manifest = JSON.parse(readFileSync('assets/gunsmith/manifest.json', 'utf8'));
-    // M2's 115, less the carbine's two receivers that wave one replaced (v2), plus wave one's 274 (#28 M3-03).
-    assert.equal(Object.keys(GUNSMITH_ART).length, 387);
+    // M2's 115, less the carbine's two receivers that wave one replaced (v2), plus wave one's 274 (#28 M3-03) and wave
+    // two's P0 32 (M3-07).
+    assert.equal(Object.keys(GUNSMITH_ART).length, 419);
     assert.deepEqual(Object.keys(GUNSMITH_VIRTUAL).sort(), ['gs-carbine-barrel-factory-i', 'gs-carbine-handguard-factory-i', 'gs-carbine-receiver-i', 'gs-pistol-receiver-i', 'gs-shotgun-receiver-i']);
     assert.equal(GUNSMITH_ART_REVISION, manifest.revision);
     assert.deepEqual(Object.keys(GUNSMITH_ART).sort(), manifest.assets.map((a: { id: string }) => a.id.replace(/-v\d+$/, '')).sort());
@@ -48,10 +54,11 @@ test('the layout reproduces every approved preview assembly: size, tip, grip, bo
     }
 });
 
-test('the layout reproduces Sol\'s wave-one assemblies: 31 configurations of 12 guns, three outputs each', () => {
+test('the layout reproduces Sol\'s wave-one assemblies (31 configurations of 12 guns) and wave two\'s P0 (7), three outputs each', () => {
     assert.equal(wave.assemblies.length, 93);
-    for (const a of wave.assemblies) {
-        const parts = grow(wave.configurations[a.gun][a.configuration]), name = `${a.gun} ${a.code} ${a.configuration}`;
+    assert.equal(waveTwo.assemblies.length, 21);
+    for (const [a, records] of [...wave.assemblies.map((a: unknown) => [a, wave]), ...waveTwo.assemblies.map((a: unknown) => [a, waveTwo])]) {
+        const parts = grow(records.configurations[a.gun][a.configuration]), name = `${a.gun} ${a.code} ${a.configuration}`;
         assert.ok(validateBuild(buildOf({ id: a.gun as GunId, parts })).ok, `${name} is a legal build`);
         const got = gunArtLayout(a.gun, parts, a.code as ArtCode)!;
         assert.ok(got, name);
@@ -61,10 +68,21 @@ test('the layout reproduces Sol\'s wave-one assemblies: 31 configurations of 12 
     }
     // The bare factory pictures (the ground and the HUD card): the held one without the gloves.
     assert.equal(wave.bareFactories.length, 12);
-    for (const a of wave.bareFactories) {
+    assert.equal(waveTwo.bareFactories.length, 1);
+    for (const a of [...wave.bareFactories, ...waveTwo.bareFactories]) {
         const got = gunArtLayout(a.gun, [], 'h', false)!;
         assert.deepEqual([got.w, got.h, got.layers.map(l => [l.key, l.x, l.y])], [a.w, a.h, a.layers.map((l: { key: string; origin: number[] }) => [l.key, ...l.origin])], a.gun);
     }
+});
+
+test('the front glove: on the foregrip, the handguard or the receiver\'s hand (ART-SPEC 5), never on a pistol\'s grip or painted hands', () => {
+    const gloves = (gun: string, parts: PartNode[] = []) => gunArtLayout(gun, parts, 'h')!.layers.filter(l => l.label.startsWith('glove')).map(l => l.label);
+    // The receiver's hand: the Vector and the AUG (the P90 in wave two) have no handguard.
+    for (const gun of ['vb9', 'augb', 'mb4a1', 'akb74', 'mpb5', 'mb870']) assert.deepEqual(gloves(gun), ['glove-rear', 'glove-front'], gun);
+    // A pistol's front hand is its grip; the old guns have their hands painted on.
+    for (const gun of ['gb17', 'pb226']) assert.deepEqual(gloves(gun), ['glove-rear'], gun);
+    for (const gun of ['pistol', 'shotgun', 'carbine']) assert.ok(!gloves(gun).includes('glove-front'), gun);
+    assert.deepEqual(gloves('augb', [part('F07', 'under')]), ['glove-rear', 'glove-foregrip']);
 });
 
 test('the carbine with the P0 muzzle brake keeps the known half pixel between tip and bore (approved, handled at runtime)', () => {
@@ -116,7 +134,7 @@ test('every part that is an item has a mount in all three outputs on each gun wi
 });
 
 test('the side view for the ground and the HUD card: the factory held picture without hands, within the 34 px card', () => {
-    for (const gun of ['mb4a1', 'gb17', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103']) {
+    for (const gun of ['mb4a1', 'gb17', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103', 'augb']) {
         const bare = gunArtLayout(gun, [], 'h', false)!, held = gunArtLayout(gun, [], 'h')!;
         assert.ok(!bare.layers.some(l => l.label.startsWith('glove')), gun);
         assert.deepEqual(bare.layers.map(l => l.key), held.layers.filter(l => !l.label.startsWith('glove')).map(l => l.key), gun);

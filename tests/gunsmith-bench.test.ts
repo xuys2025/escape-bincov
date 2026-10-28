@@ -47,7 +47,8 @@ test('positions: native slots in body order; rails a handguard opens are closed 
 test('candidates: what fits first, owned before not owned; refusals keep their reason; parts on another gun are named', () => {
     const p = profile(), m4 = build('mb4a1');
     const top = candidates(p, 'm4', m4, key(m4, 'gun/top/0'));
-    assert.deepEqual(top.map(c => [c.id, !!c.loose, c.refusal]), [['O03', true, null], ['O08', true, null]]);
+    // Owned O03 and O08 first, then wave two's two top optics (#28 M3-06, early), not owned.
+    assert.deepEqual(top.map(c => [c.id, !!c.loose, c.refusal]), [['O03', true, null], ['O08', true, null], ['O05', false, null], ['O10', false, null]]);
     assert.equal(top[1].loose!.from, 'bag');
     const under = candidates(p, 'm4', m4, key(m4, 'gun/under/0'));
     assert.ok(under.every(c => c.refusal === '需要 AR 短导轨护木或 AR 长导轨护木'));
@@ -70,7 +71,7 @@ test('candidates: what fits first, owned before not owned; refusals keep their r
 });
 
 test('only attachment items are listed, and where one comes from', () => {
-    assert.equal(benchParts().length, 60, 'the twenty of M2 and the forty of wave one (#28 M3-02)');
+    assert.equal(benchParts().length, 66, 'the twenty of M2, the forty of wave one (#28 M3-02) and six of wave two (P0)');
     assert.match(sourceOf('P01'), /^修理铺有售 · ¥ \d+$/);
     assert.equal(sourceOf('O08'), '行动中的高风险处可能找到');
     assert.equal(sourceOf('O03'), '行动中可能找到');

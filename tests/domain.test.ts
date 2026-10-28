@@ -16,15 +16,16 @@ const held = (weapon: string | null) => weapon && weapon !== 'knife'
 test('20 original items, 10 production/RPG items and the gunsmith items have coherent footprints, stacks and prices', () => {
   const original = ['knife', 'pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'bandage', 'medkit', 'antidote', 'water', 'food', 'scrap', 'wire', 'fuse', 'battery', 'watch', 'pearl', 'sample', 'ledger'];
   const production = ['cloth', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckyCharm', 'unluckyCharm', 'luckySachet', 'unluckySachet'];
-  // #28 M2-01 and M2-02: G17, M4A1 and the 20 sample attachments; M3-01 and M3-02: the wave-one seven guns and forty parts
-  // (tests/gunsmith-items.test.ts ties them to the catalog).
+  // #28 M2-01 and M2-02: G17, M4A1 and the 20 sample attachments; M3-01 and M3-02: the wave-one seven guns and forty parts;
+  // wave two's P0, early: the AUG and six parts (tests/gunsmith-items.test.ts ties them to the catalog).
   const gunsmith = ['gb17', 'mb4a1', 'O01', 'O03', 'O08', 'M03', 'M06', 'B01', 'B08', 'H01', 'H05', 'S01', 'S02', 'P01', 'P02', 'F01', 'F03', 'G01', 'G10', 'T01', 'T05', 'A07',
     'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103',
     'A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'B03', 'B05', 'B06', 'B07', 'B09', 'H02', 'H03', 'H04', 'H06', 'H07', 'H08', 'H09', 'S03', 'S04', 'S05', 'S07', 'S08',
-    'P03', 'P04', 'P06', 'P07', 'G03', 'G06', 'G07', 'G08', 'G09', 'M01', 'M02', 'M05', 'M07', 'M10', 'M11', 'T04', 'T08'];
-  assert.equal(original.length, 20); assert.equal(production.length, 10); assert.equal(gunsmith.length, 69);
+    'P03', 'P04', 'P06', 'P07', 'G03', 'G06', 'G07', 'G08', 'G09', 'M01', 'M02', 'M05', 'M07', 'M10', 'M11', 'T04', 'T08',
+    'augb', 'O05', 'O10', 'F04', 'F07', 'T02', 'T10'];
+  assert.equal(original.length, 20); assert.equal(production.length, 10); assert.equal(gunsmith.length, 76);
   assert.deepEqual(new Set(Object.keys(ITEMS)), new Set([...original, ...production, ...gunsmith]));
-  assert.equal(Object.keys(ITEMS).length, 99);
+  assert.equal(Object.keys(ITEMS).length, 106);
   for (const def of Object.values(ITEMS)) {
     assert.ok(def.w > 0 && def.h > 0 && def.stack > 0);
     if (def.buy) assert.ok(def.sell <= def.buy);

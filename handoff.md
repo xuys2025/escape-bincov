@@ -1,3 +1,13 @@
+## 2026-10-28 改枪 M3 第二波 P0 进游戏：AUG 和六件配件（#132）
+
+`feat/gunsmith-m3` / [PR #132](https://github.com/xuys2025/escape-bincov/pull/132)（草稿），已同步 main `6758d65`。
+
+- 美术（M3-07）：Sol 交了 P0（`195f27b`，AUG 和 O05、O10、F04、F07、T02、T10，32 张），本机重跑自查 62/62、兼容和排布 7 套 / 21 份 / 61 组通过。维护者和 Opus 审过，Sol 继续 P1。
+- 接入（M3-05、M3-06、M3-08 的一部分）：AUG 和六件成为物品；32 张复制进 `v1/`（暂存保留到 M3-08），清单修订 4，419 张；字体补 3 个字。
+- 修正：机匣自带前手位置的枪（Vector、AUG）不装前握把时补画前手手套，Vector、AUG 原厂两条拼装记录随之更新。细节见 CONTRACTS「M3 第二波 P0」。
+- 检查：单测 1057/1057、check:ci 110/110、构建通过；浏览器 art、gunsmith-bench 18/18、gunsmith-flow 3/3、shop-drag、shop-feedback、hideout、station 79/79、loot、range、issue26-inventory 18/18、hud-release 通过。本机截图见 `docs/gunsmith/evidence/m3-w2-p0/`。
+- 下一步：等 Sol 的 P1（217 张）；M3-04 剩下的浏览器专项；M3-05 其余七枪和三种新弹药。
+
 ## 2026-10-28 改枪 M3 第一波：七枪四十件进游戏（#132）
 
 `feat/gunsmith-m3` / [PR #132](https://github.com/xuys2025/escape-bincov/pull/132)（草稿），已同步 main `f66ee79`。
