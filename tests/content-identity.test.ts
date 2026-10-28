@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { BUILDING_WORLD, mapPresentation } from '../src/building-world';
-import { MALL_WORLD, mallWorldV2, mallWorldV3 } from '../src/mall-world';
+import { MALL_WORLD, mallWorldV2, mallWorldV3, mallWorldV4 } from '../src/mall-world';
 import { mapView } from '../src/raid-runtime/presentation';
 import type { CoastRaidRuntime } from '../src/raid-runtime/runtime';
 import type { SpaceDefinition } from '../src/spatial';
@@ -53,4 +53,16 @@ test('a familiar Chinese name cannot supply a missing region identity', () => {
     const copy = structuredClone(BUILDING_WORLD.maps.coast);
     assert.equal(copy.regions![0].name, '褪色居民楼 · 一楼'); delete copy.regions![0].id;
     assert.throws(() => project(BUILDING_WORLD, copy), /Missing region id/);
+});
+
+// Captured independently from main 03ea261 before the metadata move, including both current v4 maps.
+test('mall v4 projections retain the current main baseline', () => {
+    const world = mallWorldV4();
+    const actual = Object.values(world.maps).map(definition => {
+        const view = project(world, definition);
+        return { world: world.id, map: definition.id, sha256: createHash('sha256').update(JSON.stringify(canonical(view))).digest('hex'), entryCount: view.entries.length };
+    });
+    const baselineV4 = JSON.parse(readFileSync(new URL('./fixtures/content-map-v4-baseline.json', import.meta.url), 'utf8'));
+    assert.equal(actual.length, 2);
+    assert.deepEqual(actual, baselineV4);
 });

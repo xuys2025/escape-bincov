@@ -1,3 +1,9 @@
+## 2026-10-28 · 居民楼 region 身份（PR #117 续作）
+
+`fix/content-identity` 保留原 PR 历史并合入 main `03ea261`。居民楼 8 个已有完整 region ID 写入世界定义，投影不按中文名补身份；不变更世界/布局编号或存档格式。楼梯方向和内容登记仍属 Q-E06，未在本 PR 实施。
+
+在未改动的 `03ea261` 独立捕获 mall-v4 两层完整静态投影哈希，合成后逐项相等；原九图 / 28 入口基线及改名、重排、缺 ID 反例亦通过（4/4）。Windows / Node 24 / pnpm 11.19：`pnpm test` 1026/1026、`pnpm check:ci` 77/77、`pnpm package` 通过，HTML SHA-256 `bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25`。浏览器及准确 head CI 状态见 PR 正文；真实截图和真人体验不由静态投影对照替代。
+
 ## 2026-10-28 室内墙体与视野设计（功能未实施）
 
 维护者要求只生成文本，核验后提交文档 PR。本轮基于 main `b5bd63b7896b3b0697d4ba38d02d000e78903047`，分支 `docs/indoor-wall-visibility`，新增[室内视野设计](docs/INDOOR-WALL-VISIBILITY-PLAN.md)并同步任务入口。所有室内适用、完整基础格、连续横墙段切换三个选项已由维护者确认；五项显示规则、缓冲、兼容边界和后续验收统一维护在方案内。
