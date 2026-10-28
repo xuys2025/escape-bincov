@@ -17,6 +17,12 @@
   - 第二波任务书（M3-05～08）；
   - 等维护者对获取提案的意见。
 
+## 2026-10-28 · CI：文档快速通道的 main 也要部署和发布
+
+分支 `fix/ci-docs-fastpath-deploy`，起点 main `8c6589b`。#133（纯文档）合入后，main 运行 40623228494（`03ea261`）走了快速通道：浏览器组跳过、`Build and test` 成功，但 `Deploy Pages` 和 `Publish offline release` 都被跳过，`main-latest` 和发布清单停在 `0f73a67`。原因是两个 job 的 `if` 没写状态函数，默认 `success()` 连带检查被跳过的浏览器组。现在两个 job 显式写 `!cancelled() && needs.verify.result == 'success'`，`policy.test.mjs` 守住浏览器组之后的 job，详见 [CI 说明](docs/CI.md#pages-与镜像)。
+
+只改工作流、守卫测试和文档，游戏字节不变。真正的证明要等下一次纯文档 PR 合入 main：两个 job 实际执行，`main-latest` 移到那次提交。准确 head 与 CI 见承接 PR。
+
 ## 2026-10-28 室内墙体与视野：居民楼与商场
 
 承接 [PR #135](https://github.com/xuys2025/escape-bincov/pull/135)，分支 `feat/indoor-wall-visibility`，实现 [PR #133](https://github.com/xuys2025/escape-bincov/pull/133) 的方案。维护者同意方案后要求合并 #133 并另开 PR 开始实现；#133 的冲突（任务清单、handoff 两处都保留）经维护者同意推到原 fork 分支。之后维护者要求开自动合并：#133 落后 main 一个提交，经维护者同意用 GitHub 的更新分支合入 main，检查通过后自动合并为 `03ea261`；本分支已合入之后的 main（含 #134、#117、#136，冲突只在任务清单和 handoff，两边都保留）。

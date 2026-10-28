@@ -167,6 +167,24 @@ test('schedule preserves every baseline browser command exactly once and runs th
   assert.match(yaml, /name: Require every scheduled suite to have passed\s+if: needs.build.outputs.browser_required == 'true'\s+run: node scripts\/ci\/verify-timings\.mjs/);
 });
 
+test('jobs behind the browser groups state their own status check, so a docs-only main still deploys', () => {
+  const yaml = readFileSync(resolve('.github/workflows/ci-pages.yml'), 'utf8');
+  const jobs = Object.fromEntries(yaml.split('\njobs:\n')[1].split(/\n(?= {2}[\w-]+:\n)/).map(block => {
+    const field = name => new RegExp(`^ {4}${name}: (.+)$`, 'm').exec(block)?.[1] ?? '';
+    return [/^ {2}([\w-]+):/.exec(block)[1], { needs: field('needs').replace(/[[\]]/g, '').split(',').map(s => s.trim()).filter(Boolean), if: field('if') }];
+  }));
+  // GitHub skips every job down the needs chain from a skipped one unless its if has a status function;
+  // the implicit (or an explicit) success() sees all ancestors. Main run for 03ea261 skipped both deploys this way.
+  const behindBrowser = id => jobs[id].needs.some(need => need === 'browser' || behindBrowser(need));
+  const downstream = Object.keys(jobs).filter(behindBrowser).sort();
+  assert.deepEqual(downstream, ['deploy', 'release', 'verify']);
+  for (const id of downstream) assert.match(jobs[id].if, /always\(\)|cancelled\(\)|failure\(\)/, `${id} needs an explicit status check`);
+  for (const id of ['deploy', 'release']) {
+    assert.deepEqual(jobs[id].needs, ['verify']);
+    assert.equal(jobs[id].if, "${{ !cancelled() && needs.verify.result == 'success' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}");
+  }
+});
+
 test('browser jobs take host packages from pinned files, not apt mirrors, and check the renderer before any suite', () => {
   const yaml = readFileSync(resolve('.github/workflows/ci-pages.yml'), 'utf8');
   const browser = yaml.split('\n  browser:')[1].split('\n  verify:')[0];
