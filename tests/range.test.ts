@@ -80,7 +80,7 @@ test('range: hits and shots are counted per target and a hit target is back at f
 
 test('range: a target taken down within one long frame stands up again and checkpoints stay valid', () => {
     const r = open(), uid = at(r, 'd5').uid;
-    r.range.arm('m4a1');
+    r.range.arm('mb4a1');
     for (let t = 0; t < 2; t += 1 / 60) frame(r, t, { aim: aimAt(r, 'd5') });
     // Hold the rifle for one 1.9 s frame (the Runtime pauses on anything longer): far more than 190 health lands at once.
     frame(r, 2, { aim: aimAt(r, 'd5'), firePressed: true, fireHeld: true });
@@ -96,15 +96,15 @@ test('range: a target taken down within one long frame stands up again and check
     assert.ok(r.range.stats.hits.d5 >= 6, JSON.stringify(r.range.stats));
 });
 
-test('range: every weapon can be armed, the M4A1 sample fires automatically and the bag never runs dry', () => {
+test('range: every weapon can be armed, the M4A1 fires automatically and the bag never runs dry', () => {
     const r = open();
     let t = 0;
-    const ids: Record<string, string> = { pistol: 'pistol', carbine: 'carbine', shotgun: 'shotgun', m4a1: 'm4a1', knife: 'knife' };
-    for (const weapon of [...RANGE_WEAPONS, 'pistol', 'knife', 'm4a1', 'knife', 'm4a1'] as const) {
+    const ids: Record<string, string> = { pistol: 'pistol', gb17: 'gb17', carbine: 'carbine', shotgun: 'shotgun', mb4a1: 'mb4a1', knife: 'knife' };
+    for (const weapon of [...RANGE_WEAPONS, 'pistol', 'knife', 'mb4a1', 'knife', 'mb4a1'] as const) {
         r.range.arm(weapon);
         const b = frame(r, t += .02);
         assert.equal(b.frame.hud.weapon.id, ids[weapon], weapon);
-        assert.equal(b.frame.hud.aim.mode, weapon === 'm4a1' ? 'auto' : 'semi', weapon);
+        assert.equal(b.frame.hud.aim.mode, weapon === 'mb4a1' ? 'auto' : 'semi', weapon);
     }
     // Pistol clicks for 30 s: the magazine reloads from the bag, and the bag is topped up before it runs out. The shots
     // outnumber a full bag and magazine.

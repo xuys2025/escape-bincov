@@ -38,7 +38,7 @@ test('spit uses wet cues, never ballistic whizzes or metal hits, and hidden spit
   assert.deepEqual(calls, []);
   s.frame(batch({ actors: [{ uid: 'spitter', x: 440, y: 300 }] }), 0);
   s.event(ev({ type: 'shot', shooter: 'spitter', weapon: 'rifle', pellets: [] }), 'coast');
-  assert.deepEqual(calls, ['shot:enemy,spot'], 'a later frame cannot retain a stale creature identity');
+  assert.deepEqual(calls, ['shot:rifle,spot,0.55'], 'a later frame cannot retain a stale creature identity');
 });
 
 test('enemy phase cues are positional once per edge, including a release that skips its zero-time frame', () => {
@@ -85,7 +85,32 @@ test('样板音效：开枪、近战、受击、拾取与开门按原 RaidScene 
   s.event(ev({ type: 'looted', item: 'wire' }), 'coast');
   s.event(ev({ type: 'door', id: 'x', by: 'player' }), 'coast');
   s.event(ev({ type: 'shot', shooter: 'player', weapon: 'pistol' }, 'resident-f2'), 'coast');
-  assert.deepEqual(calls, ['shot:shotgun', 'shot:enemy', 'shot:knife', 'pain', 'stow', 'click']);
+  assert.deepEqual(calls, ['shot:shotgun-double', 'shot:rifle,,0.55', 'shot:knife', 'pain', 'stow', 'click']);
+});
+
+test('墙和门（#75 H-05）：子弹打墙和打门是两种撞击声；试枪场的旧版设置回到原来共用的一种', () => {
+  let feel: 'enhanced' | 'classic' = 'enhanced';
+  const { calls, out } = recorder(), s = new SampleSound(out, () => feel);
+  s.frame(batch(), 1 / 60); calls.length = 0;
+  const hit = (surface: string) => s.event(ev({ type: 'impact', reason: 'blocked', surface, lastFree: { x: 420, y: 300 } }), 'coast');
+  hit('wall'); hit('door');
+  assert.deepEqual(calls, ['impact:spot,wall', 'impact:spot,door']);
+  calls.length = 0; feel = 'classic'; hit('wall'); hit('door');
+  assert.deepEqual(calls, ['impact:spot,', 'impact:spot,'], 'the cue both shared before');
+});
+
+test('分枪种枪声（#75 H-02）：按外观取音色族，他人开枪更轻；试枪场的旧版设置回到原来所有枪共用的枪声', () => {
+  let feel: 'enhanced' | 'classic' = 'enhanced';
+  const { calls, out } = recorder(), s = new SampleSound(out, () => feel);
+  s.frame(batch({ actors: [{ uid: 'enemy-3', x: 700, y: 300 }] }), 1 / 60); calls.length = 0;
+  const fire = () => {
+    for (const weapon of ['pistol', 'carbine', 'shotgun', 'rifle']) s.event(ev({ type: 'shot', shooter: 'player', weapon, pellets: [] }), 'coast');
+    s.event(ev({ type: 'shot', shooter: 'enemy-3', weapon: 'carbine', pellets: [] }), 'coast');
+  };
+  fire();
+  assert.deepEqual(calls, ['shot:pistol9', 'shot:carbine', 'shot:shotgun-double', 'shot:rifle', 'shot:carbine,spot,0.55']);
+  calls.length = 0; feel = 'classic'; fire();
+  assert.deepEqual(calls, ['shot:pistol', 'shot:pistol', 'shot:shotgun', 'shot:pistol', 'shot:enemy,spot'], 'what every gun played before');
 });
 
 test('样板音效：他人的枪声、受击、撞墙和开门按方位左右声像、随距离减弱；玩家自己的声音居中', () => {
@@ -150,7 +175,7 @@ test('样板音效：未揭示房间里的命中和弹着点不发声，枪声�
   assert.deepEqual(calls, []);
   s.event(ev({ type: 'shot', shooter: 'enemy-3', weapon: 'rifle', pellets: [] }), 'coast', p => !hidden(p));
   s.event(ev({ type: 'hurt', cause: 'blow', uid: 'enemy-3', damage: 20, angle: 0, at: { x: 400, y: 300 } }), 'coast', p => !hidden(p));
-  assert.deepEqual(calls, ['shot:enemy,spot', 'hit:spot']);
+  assert.deepEqual(calls, ['shot:rifle,spot,0.55', 'hit:spot']);
 });
 
 test('样板音效：暂停时挂起、恢复时重启，结算阶段不挂起；首帧按当前阶段决定', () => {

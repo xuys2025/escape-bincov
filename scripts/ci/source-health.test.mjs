@@ -5,6 +5,7 @@ import { readdirSync, statSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { join, relative, resolve, sep } from 'node:path';
 import test from 'node:test';
+import { adjacency, cyclesIn, headlessProblems, sourceGraph } from '../source-graph.mjs';
 
 const root = resolve('.');
 const ts = createRequire(join(root, 'package.json'))('typescript');
@@ -33,7 +34,7 @@ const target = symbol => {
 
 // Rule modules (AGENTS.md section 3): they import only each other and use nothing that only the DOM provides.
 const PURE = ['src/domain.ts', 'src/balance.ts', 'src/world.ts', 'src/perks.ts', 'src/breath.ts', 'src/gunsmith/catalog.ts', 'src/gunsmith/compat.ts',
-  'src/gunsmith/stats.ts', 'src/gunsmith/instance.ts', 'src/gunsmith/migrate.ts'];
+  'src/gunsmith/stats.ts', 'src/gunsmith/instance.ts', 'src/gunsmith/migrate.ts', 'src/gunsmith/edit.ts', 'src/gunsmith/devices.ts', 'src/gunsmith/bench.ts', 'src/gunsmith/presets.ts', 'src/gunsmith/signature.ts', 'src/gunsmith/item-facts.ts'];
 // Known runtime cycles, tracked in #60; the two it listed (Q-E05 save codecs, Q-E02 view routers) are gone. A listed
 // cycle may shrink or disappear; a new or larger one fails.
 const KNOWN_CYCLES = [];
@@ -69,44 +70,20 @@ test('every exported declaration in src is used somewhere besides its own declar
   assert.deepEqual(unused, [], 'Delete these exports, or use them: nothing in src, tests or scripts refers to them.');
 });
 
-const runtimeImports = () => {
-  const graph = new Map();
-  for (const file of ours.filter(inSrc)) {
-    const from = rel(file.fileName), edges = new Set();
-    for (const statement of file.statements) {
-      const spec = (ts.isImportDeclaration(statement) || ts.isExportDeclaration(statement)) ? statement.moduleSpecifier : null;
-      if (!spec || !ts.isStringLiteral(spec)) continue;
-      const clause = ts.isImportDeclaration(statement) ? statement.importClause : null;
-      const typeOnly = ts.isExportDeclaration(statement) ? statement.isTypeOnly : !!clause && (clause.isTypeOnly
-        || (!clause.name && clause.namedBindings && ts.isNamedImports(clause.namedBindings) && clause.namedBindings.elements.length > 0
-          && clause.namedBindings.elements.every(e => e.isTypeOnly)));
-      if (typeOnly) continue;
-      const resolved = ts.resolveModuleName(spec.text, file.fileName, program.getCompilerOptions(), ts.sys).resolvedModule;
-      edges.add(resolved && !resolved.isExternalLibraryImport ? rel(resolved.resolvedFileName) : `package:${spec.text}`);
-    }
-    graph.set(from, edges);
-  }
-  return graph;
-};
+const model = sourceGraph(program, root);
+const runtimeImports = () => adjacency(model);
+
+test('all source module loads have a resolvable literal target', () => {
+  assert.deepEqual(model.problems, []);
+});
 
 test('runtime import cycles in src stay within the known ones', () => {
-  const graph = runtimeImports();
-  let next = 0; const index = new Map(), low = new Map(), stack = [], onStack = new Set(), cycles = [];
-  const connect = v => {
-    index.set(v, next); low.set(v, next); next++; stack.push(v); onStack.add(v);
-    for (const w of graph.get(v) ?? []) {
-      if (!graph.has(w)) continue;
-      if (!index.has(w)) { connect(w); low.set(v, Math.min(low.get(v), low.get(w))); }
-      else if (onStack.has(w)) low.set(v, Math.min(low.get(v), index.get(w)));
-    }
-    if (low.get(v) !== index.get(v)) return;
-    const component = []; let w;
-    do { w = stack.pop(); onStack.delete(w); component.push(w); } while (w !== v);
-    if (component.length > 1) cycles.push(component.sort());
-  };
-  for (const v of graph.keys()) if (!index.has(v)) connect(v);
-  const unexpected = cycles.filter(c => !KNOWN_CYCLES.some(known => c.every(file => known.includes(file))));
-  assert.deepEqual(unexpected, [], 'New or larger runtime import cycle: break it, or record why in #60 and KNOWN_CYCLES.');
+  const unexpected = cyclesIn(runtimeImports()).filter(c => !KNOWN_CYCLES.some(known => c.every(file => known.includes(file))));
+  assert.deepEqual(unexpected, [], 'New or larger runtime import cycle (including lazy loads): break it, or record why in #60 and KNOWN_CYCLES.');
+});
+
+test('headless rules, saves and runtimes stay independent of views and browser globals transitively', () => {
+  assert.deepEqual(headlessProblems(model, program), []);
 });
 
 test('the rule modules import only each other and use nothing that only the DOM provides', () => {

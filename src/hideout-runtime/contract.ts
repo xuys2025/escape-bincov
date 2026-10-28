@@ -1,11 +1,15 @@
 /** Durable water-station contract, based on the approved prototype contract (2026-10-09).
  * Presentation, animation, pathfinding and assets belong to the host. No mock settlement exists here.
  */
-import type { Inventory, Item, RunSummary, SaveDataV1 } from '../domain';
+import type { PresetNode } from '../gunsmith/presets';
+import type { Inventory, Item, ItemKind, RunSummary, SaveDataV1 } from '../domain';
 import type { Attribute, Facility } from '../expansion-state';
 import type { PerkId, PerkModifiers, PerkTier } from '../perks';
+import type { GunEdit, GunEditPreview, GunPlace } from '../gunsmith/edit';
+import type { GunState } from '../gunsmith/instance';
 export type { Attribute, Facility } from '../expansion-state';
 export type { PerkId, PerkModifiers, PerkTier } from '../perks';
+export type { GunEdit, GunEditPreview, GunPlace } from '../gunsmith/edit';
 export type Recipe = 'bandage' | 'medkit' | 'antidote';
 export type Source = 'stash' | 'bag' | 'safe';
 export type ShopSource = 'merchant' | 'buy' | 'sell' | 'stash';
@@ -46,7 +50,7 @@ export interface HideoutSnapshot {
     rev: number; profile: Readonly<SaveDataV1>; base: BaseView; body: BodyView; power: 'emergency' | 'restored';
     /** Detached view of the equipped item in the committed session; null when none is equipped. */
     readonly charm: Readonly<Item> | null;
-    storage: { ok: boolean; conflict: boolean; pendingSettlement: boolean; pendingBase: boolean; upgradeRequired: boolean };
+    storage: { ok: boolean; reloadRequired: boolean; conflict: boolean; pendingSettlement: boolean; pendingBase: boolean; upgradeRequired: boolean };
     /** Log sequence derived from run count, not a new day/night clock. */
     day: number; phase: 'menu' | 'hideout' | 'departing' | 'run' | 'result';
     arrival: { runId: string; summary: RunSummary } | null;
@@ -58,12 +62,54 @@ export interface CartView {
     stale: boolean;
     /** Buy slots are a shopping list; existing rules auto-place purchases into the stash. */
     placement: 'automatic-stash';
+    /** What the catalog shows (#28 M2-08): a kind or all, only what fits the base's guns, the page of `pages`; `kinds` are the stock's. */
+    browse: { kind: ItemKind | 'all'; fits: boolean; page: number; pages: number; kinds: ItemKind[] };
 }
 export interface ShopSession {
     view(): CartView;
     placementError(from: ShopSource, to: ShopSource, uid: string, x: number, y: number): string | null;
     place(from: ShopSource, to: ShopSource, uid: string, x: number, y: number): Result;
     settle(confirmation?: string): Result;
+    reset(): void;
+    /** Show another part of the catalog (#28 M2-08); the buy and sell lists and the stash stay as they are. */
+    browse(view: { kind: ItemKind | 'all'; fits: boolean; page: number }): void;
+}
+/** The workbench for one gun (#28 M2-04), as openGunsmith returns it. Detached and read-only; reading writes nothing. */
+export interface GunsmithView {
+    /** The gun as committed, wherever the base holds it (equipped, stash, bag or safe); null once it has left the base. */
+    gun: { uid: string; id: string; relief: boolean; where: GunPlace; state: GunState } | null;
+    /** The edits of the preview below, in order; empty without one. */
+    edits: GunEdit[];
+    /** The latest preview the session accepted: the candidate and what it changes, or null. */
+    preview: GunEditPreview | null;
+    /** Confirms exactly that preview, once; null while it cannot be committed (preview.refusal says why) or is stale. */
+    token: string | null;
+    /** The equipped slot, stash, bag or safe changed since the preview: confirm refuses it; preview again. */
+    stale: boolean;
+}
+/**
+ * The workbench's edit transaction (#28 M2-04; rules in gunsmith/edit.ts planGunEdit), shaped like ShopSession: a
+ * private preview the player builds, never written, then one commit. Only at the base, never during a raid.
+ */
+export interface GunsmithSession {
+    view(): GunsmithView;
+    /**
+     * Work out `edits` on the committed state and make them the session's preview; never writes. An edit that cannot
+     * be made (a part that does not fit, a part no longer there) is refused with its reason and its index (`edit`), and
+     * the previous preview stays. A candidate that cannot be committed (a part not owned, no room in the stash, a gun
+     * that would no longer fit where it lies, no change at all) is still previewed, with preview.refusal and no token.
+     * Each preview that can be committed gets a new token and retires the one before.
+     */
+    preview(edits: readonly GunEdit[]): Result & { token?: string; preview?: GunEditPreview; edit?: number };
+    /**
+     * Commit the previewed edits in one write: they are planned again on the committed state, and the commit is
+     * refused as `stale` when the token is not the latest preview's, when the equipped slot or a container changed
+     * since the preview (the revision may move for base-time checkpoints and retries, which change neither), or when
+     * the plan differs. A failed write changes nothing and keeps the preview and its token: once retrySave succeeds the
+     * same confirm commits it, once. Success clears the session's preview.
+     */
+    confirm(token: string): Result;
+    /** Drop the preview (cancel); nothing was written. */
     reset(): void;
 }
 export interface FacilityInfo {
@@ -118,7 +164,7 @@ export type HideoutEvent =
     | { type: 'facility-built'; facility: Facility; level: number }
     | { type: 'production-complete'; batch: string }
     | { type: 'practice-credited'; attribute: Attribute; amount: number }
-    | { type: 'save-failed'; action: string };
+    | { type: 'save-failed' | 'publish-failed'; action: string };
 /** Position/time input replaces unverified moved/inZone claims. World pixels; clock is epoch milliseconds. */
 export interface PracticeSample { from: { x: number; y: number }; to: { x: number; y: number }; seconds: number; now: number }
 export interface HideoutRuntime {
@@ -148,6 +194,18 @@ export interface HideoutRuntime {
     upgradeStash(): Result;
     claimRelief(): Result;
     openShop(merchant: Merchant): ShopSession;
+    /** The workbench for the gun whose item uid is `gun`, wherever it is at the base; any number may be open. */
+    openGunsmith(gun: string): GunsmithSession;
+    /**
+     * Save a workbench preset (#28 M2-07, gunsmith/presets.ts): gun type `gun` and a part tree of catalog ids and slots,
+     * named `name` (trimmed; null takes the default "M4A1 配装 1"). Refused past PRESET_LIMIT presets of the type, for a
+     * name too long or empty, and for a tree validateBuild refuses. Base only, one commit; the new preset's id on success.
+     */
+    savePreset(gun: string, parts: PresetNode[], name?: string | null): Result & { id?: string };
+    /** Give preset `id` a new name (same rules as savePreset). */
+    renamePreset(id: string, name: string): Result;
+    /** Remove preset `id`; the last one removed leaves the profile without the field. */
+    deletePreset(id: string): Result;
     submitQuest(id: string): Result;
     facility(id: Facility): FacilityInfo;
     build(id: Facility): Result;
@@ -185,7 +243,7 @@ export interface HideoutRuntime {
     setVolume(volume: number): Result;
     departure(): { warnings: string[]; weight: number; carry: number };
     /** mallLayout defaults to 1 and only applies to a new mall raid. */
-    deploy(req: { world: RunWorld; seed: string; mallLayout?: 1 | 2 | 3 }): Result & { runId?: string };
+    deploy(req: { world: RunWorld; seed: string; mallLayout?: 1 | 2 | 3 | 4 }): Result & { runId?: string };
     /** After the host's departure animation; never calls beginRun again. */
     startRaid(runId: string): Result;
     returnToBase(): Result;

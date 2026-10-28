@@ -164,6 +164,11 @@ export function decodeSession(text: string, resolveWorld: WorldResolver = resolv
 /** A real compare/write ownership failure, distinct from quota or serialization errors. */
 export class StorageConflictError extends Error {}
 
+/** Candidate construction/validation failed before the storage write was attempted. */
+export class SavePreparationError extends Error {
+  constructor(cause: unknown) { super(cause instanceof Error ? cause.message : '存档候选准备失败。', { cause }); }
+}
+
 /** Synchronous single-record commit. A failed setItem leaves the previous revision intact. */
 export class RecoveryStore {
   private expected: string | null = null;
@@ -218,33 +223,38 @@ export class RecoveryStore {
   commit(profile: D.SaveDataV1, raid: RaidCheckpoint | null, terminal?: SessionRecord['terminal'], expansion = this.record?.expansion ?? null, explicitImport: boolean | SessionRecord = false): SessionRecord {
     if (!this.loaded || !this.writable) throw new Error('存档未就绪或另一窗口正在使用。');
     if (this.storage.getItem(SESSION_KEY) !== this.expected) throw new StorageConflictError('另一窗口已修改存档，请刷新以加载新进度。');
-    const previous = typeof explicitImport === 'object' ? explicitImport : explicitImport ? null : this.record;
-    const fields = recordUpgradeFields(expansion, previous, explicitImport ? null : this.expected);
-    if (explicitImport && expansion?.version === 3 && this.record?.expansion?.version === 3) {
-      fields.gunsBackup = this.record.gunsBackup;
-      fields.perksBackup = this.record.perksBackup!;
-      if (enemyRecord(this.record)) fields.enemyBackup = this.record.enemyBackup!;
-    }
-    const had = this.record?.expansion?.version ?? 0;
-    const downgrade = '请导入包含角色与基地状态的完整备份，不能降级覆盖当前存档。';
-    // Once an expansion has been enabled, imports cannot downgrade and silently discard its state.
-    if (had > 0 && expansion === null) throw new Error(downgrade);
-    // Likewise an ordinary commit never writes a v3 expansion back as v1/v2 (dropping the perk selection) or switches
-    // enemy rules off.
-    if (!explicitImport && (had === 3 && expansion?.version !== 3 || enemyRecord(this.record) && fields.enemyBackup === undefined)) throw new Error(downgrade);
-    const systems = this.systems ?? (expansion && had === 0 ? this.expected : null);
-    const candidate: SessionRecord = { format: 'escape-bincov-session', version: fields.version, revision: (this.record?.revision ?? 0) + 1,
-      savedAt: this.now(), profile: structuredClone(profile), raid: structuredClone(raid),
-      terminal: terminal === undefined ? (profile.activeRun ? null : this.record?.terminal ?? null) : terminal,
-      legacyBackup: this.legacy, migrationBackup: this.migration, gunsBackup: fields.gunsBackup,
-      ...(expansion ? { expansion: structuredClone(expansion), systemsBackup: systems } : {}),
-      ...(fields.perksBackup !== undefined ? { perksBackup: fields.perksBackup } : {}),
-      ...(fields.enemyBackup !== undefined ? { enemyBackup: fields.enemyBackup } : {}) };
-    const text = JSON.stringify(candidate);
-    decodeSession(text, this.resolveWorld);
+    let candidate: SessionRecord, text: string, publication: SessionRecord, systems: string | null;
+    try {
+      const previous = typeof explicitImport === 'object' ? explicitImport : explicitImport ? null : this.record;
+      const fields = recordUpgradeFields(expansion, previous, explicitImport ? null : this.expected);
+      if (explicitImport && expansion?.version === 3 && this.record?.expansion?.version === 3) {
+        fields.gunsBackup = this.record.gunsBackup;
+        fields.perksBackup = this.record.perksBackup!;
+        if (enemyRecord(this.record)) fields.enemyBackup = this.record.enemyBackup!;
+      }
+      const had = this.record?.expansion?.version ?? 0;
+      const downgrade = '请导入包含角色与基地状态的完整备份，不能降级覆盖当前存档。';
+      // Once an expansion has been enabled, imports cannot downgrade and silently discard its state.
+      if (had > 0 && expansion === null) throw new Error(downgrade);
+      // Likewise an ordinary commit never writes a v3 expansion back as v1/v2 (dropping the perk selection) or switches
+      // enemy rules off.
+      if (!explicitImport && (had === 3 && expansion?.version !== 3 || enemyRecord(this.record) && fields.enemyBackup === undefined)) throw new Error(downgrade);
+      systems = this.systems ?? (expansion && had === 0 ? this.expected : null);
+      candidate = { format: 'escape-bincov-session', version: fields.version, revision: (this.record?.revision ?? 0) + 1,
+        savedAt: this.now(), profile: structuredClone(profile), raid: structuredClone(raid),
+        terminal: terminal === undefined ? (profile.activeRun ? null : this.record?.terminal ?? null) : terminal,
+        legacyBackup: this.legacy, migrationBackup: this.migration, gunsBackup: fields.gunsBackup,
+        ...(expansion ? { expansion: structuredClone(expansion), systemsBackup: systems } : {}),
+        ...(fields.perksBackup !== undefined ? { perksBackup: fields.perksBackup } : {}),
+        ...(fields.enemyBackup !== undefined ? { enemyBackup: fields.enemyBackup } : {}) };
+      text = JSON.stringify(candidate);
+      decodeSession(text, this.resolveWorld);
+      // Allocate the caller's detached publication before the durable boundary. Nothing after setItem may clone or call out.
+      publication = structuredClone(candidate);
+    } catch (error) { throw new SavePreparationError(error); }
     this.storage.setItem(SESSION_KEY, text);
     this.expected = text; this.record = candidate; this.systems = systems;
-    return structuredClone(candidate);
+    return publication;
   }
   original(): string | null { return this.storage.getItem(SESSION_KEY) ?? this.storage.getItem(D.SAVE_KEY); }
 }

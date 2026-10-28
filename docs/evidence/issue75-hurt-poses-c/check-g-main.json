@@ -1,0 +1,415 @@
+{
+  "startedAt": "2026-10-25T14:45:44.176Z",
+  "browser": "156.0.8078.48",
+  "entry": "dist/index.html",
+  "method": "Offline Chromium, real CDP mouse (1280x720) and multi-touch (844x390, DPR 2) on the 2.5D raid host, seed 42, layered coast map. Fixtures place the player and enemies, hand weapons and freeze AI.",
+  "steps": [
+    {
+      "id": "g",
+      "name": "a blow's flash and kick are drawn on slow frames",
+      "status": "failed",
+      "error": "60 Hz east as raider-boss: body poses --------------- (want HHHHHRRR-------); 60 Hz east as mercenary-assault: body poses --------------- (want HHHHHRRR-------); 60 Hz east as salt-hulk: body poses --------------- (want HHHHHRRR-------); 60 Hz east as saltback-dog: body poses --------------- (want HHHHHRRR-------)",
+      "detail": {
+        "cases": [
+          {
+            "hz": 60,
+            "dir": "east",
+            "style": null,
+            "enemy": "scav enemy-2",
+            "flashFrames": 4,
+            "kickFrames": 4,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "111100000000000",
+            "kickByFrame": "111100000000000",
+            "bloodAlongBullet": [
+              -37,
+              -68,
+              -91,
+              -72,
+              -75,
+              -97
+            ],
+            "poseByFrame": "HHHHHRRR-------",
+            "wantPose": "HHHHHRRR-------"
+          },
+          {
+            "hz": 30,
+            "dir": "east",
+            "style": null,
+            "enemy": "scav enemy-2",
+            "flashFrames": 2,
+            "kickFrames": 2,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "11000000",
+            "kickByFrame": "11000000",
+            "bloodAlongBullet": [
+              -55,
+              -91,
+              -105,
+              -40,
+              -41,
+              -69
+            ],
+            "poseByFrame": "HHRR----",
+            "wantPose": "HHRR----"
+          },
+          {
+            "hz": 15,
+            "dir": "east",
+            "style": null,
+            "enemy": "scav enemy-2",
+            "flashFrames": 1,
+            "kickFrames": 1,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "1000",
+            "kickByFrame": "1000",
+            "bloodAlongBullet": [
+              -86,
+              -45,
+              -79,
+              -102,
+              -103,
+              -101
+            ],
+            "poseByFrame": "HR--",
+            "wantPose": "HR--"
+          },
+          {
+            "hz": 12,
+            "dir": "east",
+            "style": null,
+            "enemy": "scav enemy-2",
+            "flashFrames": 1,
+            "kickFrames": 1,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "100",
+            "kickByFrame": "100",
+            "bloodAlongBullet": [
+              -107,
+              -37,
+              -76,
+              -97,
+              -75,
+              -35
+            ],
+            "poseByFrame": "H--",
+            "wantPose": "H--"
+          },
+          {
+            "hz": 10,
+            "dir": "east",
+            "style": null,
+            "enemy": "scav enemy-2",
+            "flashFrames": 1,
+            "kickFrames": 1,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "100",
+            "kickByFrame": "100",
+            "bloodAlongBullet": [
+              -41,
+              -106,
+              -95,
+              -99,
+              -62,
+              -83
+            ],
+            "poseByFrame": "H--",
+            "wantPose": "H--"
+          },
+          {
+            "hz": 60,
+            "dir": "south",
+            "style": null,
+            "enemy": "scav enemy-2",
+            "flashFrames": 4,
+            "kickFrames": 4,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "0,2"
+            ],
+            "wantPx": "0,2",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "0,2"
+            },
+            "flashByFrame": "111100000000000",
+            "kickByFrame": "111100000000000",
+            "bloodAlongBullet": [
+              -64,
+              -54,
+              -51,
+              -37,
+              -26,
+              -63
+            ],
+            "poseByFrame": "HHHHHRRR-------",
+            "wantPose": "HHHHHRRR-------"
+          },
+          {
+            "hz": 60,
+            "dir": "east",
+            "style": "raider-melee",
+            "enemy": "scav enemy-2",
+            "flashFrames": 4,
+            "kickFrames": 4,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "111100000000000",
+            "kickByFrame": "111100000000000",
+            "bloodAlongBullet": [
+              -63,
+              -64,
+              -72,
+              -60,
+              -50,
+              -66
+            ],
+            "poseByFrame": "HHHHHRRR-------",
+            "wantPose": "HHHHHRRR-------"
+          },
+          {
+            "hz": 60,
+            "dir": "east",
+            "style": "raider-gunner",
+            "enemy": "scav enemy-2",
+            "flashFrames": 4,
+            "kickFrames": 4,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "111100000000000",
+            "kickByFrame": "111100000000000",
+            "bloodAlongBullet": [
+              -62,
+              -108,
+              -76,
+              -109,
+              -89,
+              -50
+            ],
+            "poseByFrame": "HHHHHRRR-------",
+            "wantPose": "HHHHHRRR-------"
+          },
+          {
+            "hz": 60,
+            "dir": "east",
+            "style": "raider-lookout",
+            "enemy": "scav enemy-2",
+            "flashFrames": 4,
+            "kickFrames": 4,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "111100000000000",
+            "kickByFrame": "111100000000000",
+            "bloodAlongBullet": [
+              -99,
+              -77,
+              -57,
+              -83,
+              -103,
+              -89
+            ],
+            "poseByFrame": "HHHHHRRR-------",
+            "wantPose": "HHHHHRRR-------"
+          },
+          {
+            "hz": 60,
+            "dir": "east",
+            "style": "raider-boss",
+            "enemy": "scav enemy-2",
+            "flashFrames": 4,
+            "kickFrames": 4,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "111100000000000",
+            "kickByFrame": "111100000000000",
+            "bloodAlongBullet": [
+              -80,
+              -68,
+              -79,
+              -43,
+              -67,
+              -103
+            ],
+            "poseByFrame": "---------------",
+            "wantPose": "HHHHHRRR-------"
+          },
+          {
+            "hz": 60,
+            "dir": "east",
+            "style": "mercenary-assault",
+            "enemy": "scav enemy-2",
+            "flashFrames": 4,
+            "kickFrames": 4,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "111100000000000",
+            "kickByFrame": "111100000000000",
+            "bloodAlongBullet": [
+              -76,
+              -95,
+              -85,
+              -52,
+              -85,
+              -38
+            ],
+            "poseByFrame": "---------------",
+            "wantPose": "HHHHHRRR-------"
+          },
+          {
+            "hz": 60,
+            "dir": "east",
+            "style": "salt-hulk",
+            "enemy": "scav enemy-2",
+            "flashFrames": 4,
+            "kickFrames": 4,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "111100000000000",
+            "kickByFrame": "111100000000000",
+            "bloodAlongBullet": [
+              -83,
+              -66,
+              -87,
+              -39,
+              -53,
+              -46
+            ],
+            "poseByFrame": "---------------",
+            "wantPose": "HHHHHRRR-------"
+          },
+          {
+            "hz": 60,
+            "dir": "east",
+            "style": "saltback-dog",
+            "enemy": "scav enemy-2",
+            "flashFrames": 4,
+            "kickFrames": 4,
+            "fromFirstFrame": true,
+            "kicksPx": [
+              "2,0"
+            ],
+            "wantPx": "2,0",
+            "drawn": true,
+            "hitFrame": {
+              "flash": true,
+              "kickPx": "2,0"
+            },
+            "flashByFrame": "111100000000000",
+            "kickByFrame": "111100000000000",
+            "bloodAlongBullet": [
+              -56,
+              -70,
+              -50,
+              -38,
+              -65,
+              -70
+            ],
+            "poseByFrame": "---------------",
+            "wantPose": "HHHHHRRR-------"
+          }
+        ]
+      },
+      "seconds": 0.2
+    }
+  ],
+  "stallResumes": {
+    "desktop": 0,
+    "phone": 0
+  },
+  "finishedAt": "2026-10-25T14:45:47.539Z",
+  "status": "failed"
+}

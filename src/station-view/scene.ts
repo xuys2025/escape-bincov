@@ -3,12 +3,13 @@ import { BEACON, DOORWAYS, H, LIGHTS, PROPS, ROOMS, SHED, STATIONS, T, W, WALL_H
 import { Atmosphere } from './atmos';
 import { bakeGround } from './art/ground';
 import { paintPerson, POSE_FRAMES, type Dir, type Pose } from './art/people';
+import { paintStationPlayer } from './art/player';
 import { paintProp } from './art/props';
 import { paintCanopy, paintMast, paintRoof } from './art/roofs';
 import { paintWall } from './art/walls';
 import { Lighting, MOODS, type Power } from './lighting';
 import { canvas, rim } from './paint';
-import { releaseManagedSlots } from '../coast-view/renderer-lifetime';
+import { releaseManagedSlots } from '../view-lifecycle/renderer-lifetime';
 import { emitOf, npcFrame, pick, type StationArt } from './art/station';
 
 export type Facility = 'rest' | 'medical' | 'training' | 'workbench' | 'blackmarket';
@@ -344,9 +345,7 @@ export class HideoutScene {
     return this.t(`sol:${dir8}:${frame}`, () => {
       const src = this.sol.get(`coast-player-body-${d}-f${frame}-v1`);
       if (!src) return paintPerson('resident-b', d === 'n' || d === 'ne' ? 'n' : d === 'e' ? (mirror ? 'w' : 'e') : 's', frame ? 'walk' : 'idle', frame % 4);
-      const { c, g } = canvas(src.width, src.height);
-      if (mirror) { g.translate(src.width, 0); g.scale(-1, 1); }
-      g.drawImage(src, 0, 0); return c;
+      return paintStationPlayer(src, d, frame, mirror);
     });
   }
   /** NPC frame: Sol's delivered frame when there is one (see art/station.ts fallbacks), else the placeholder. */

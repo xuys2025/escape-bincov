@@ -11,7 +11,7 @@ import { navigation } from '../navigation';
 import { gpuTextures, managedSlots, parkApp, takeApp } from '../pixi-app';
 import { raidWorlds, sampleMallLayout, sampleMode, villageSeed } from '../raid-areas';
 import { toast } from '../toast';
-import { lifecycle } from '../coast-view/scope';
+import { lifecycle } from '../view-lifecycle/scope';
 import type { HideoutSnapshot, RunWorld } from '../hideout-runtime/contract';
 import type { StationHost } from './host';
 
@@ -54,10 +54,10 @@ async function openStation(arrival: Arrival): Promise<boolean> {
     document.documentElement.dataset.station = 'yard';
     root = document.createElement('div'); root.id = 'station-yard';
     const shadow = root.attachShadow({ mode: 'open' });
-    const [{ StationHost }, { loadStationArt, artReport: report }, { loadCoastAssets }, { default: css }] = await Promise.all([
-      import('./host'), import('./art/station'), import('../coast-view/assets'), import('./station.css')]);
+    const [{ StationHost }, { loadStationArt, artReport: report }, { loadCoastAssets }, { default: css }, { default: benchCss }] = await Promise.all([
+      import('./host'), import('./art/station'), import('../coast-view/assets'), import('./station.css'), import('../gunsmith-view/bench.css')]);
     artReport = report;
-    shadow.innerHTML = `<style>${css}</style><div class="stage"></div><div class="mount"></div>`;
+    shadow.innerHTML = `<style>${css}\n${benchCss}</style><div class="stage"></div><div class="mount"></div>`;
     document.body.appendChild(root);
     const [art, sol] = await Promise.all([loadStationArt(), loadCoastAssets()]);
     pixi = await takeApp(); lifecycle.apps++;

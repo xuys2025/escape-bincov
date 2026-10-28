@@ -185,6 +185,37 @@ try {
     assert.deepEqual(resumed.audio, ['running']); assert.equal(resumed.x, paused.x, 'Held D revived after the blur pause');
     await page.keyboard.up('d');
   });
+  for (const [width, height] of [[1280, 720], [1920, 1080]]) {
+    await test(`first key after blur works when keyup was lost ${width}x${height}`, { viewport: { width, height } }, async page => {
+      await holdRight(page);
+      await page.evaluate(() => dispatchEvent(new Event('blur')));
+      await waitPanel(page, 'pause');
+      // The OS releases D outside the game window: keep Playwright's physical state correct, but hide this one keyup
+      // from the host. All subsequent presses, including the first recovery press, are trusted keyboard events.
+      await page.evaluate(() => {
+        const missRelease = e => {
+          if (e.code !== 'KeyD') return;
+          e.stopImmediatePropagation(); removeEventListener('keyup', missRelease, true);
+        };
+        addEventListener('keyup', missRelease, true);
+      });
+      await page.keyboard.up('d');
+      await frames(page, 2);
+      await page.keyboard.press('Escape'); await waitPanel(page, null);
+      const resumed = await state(page);
+      await simulated(page, .3);
+      assert.equal((await state(page)).x, resumed.x, 'The old held key must not revive on resume');
+      await page.keyboard.down('d');
+      try {
+        await page.waitForFunction(x => window.__bincovSample.host.lastBatch.frame.player.x > x + 15, resumed.x, { timeout: 20000 });
+      } finally { await page.keyboard.up('d'); }
+      const moved = await state(page);
+      await frames(page, 3);
+      const stopped = await state(page); await frames(page, 3);
+      assert.equal((await state(page)).x, stopped.x, 'Releasing the recovered key stops movement');
+      return { resumed: resumed.x, firstPress: moved.x, stopped: stopped.x };
+    });
+  }
   await test('ineffective healing preserves held movement and all medical items', {}, async page => {
     const before = await state(page);
     assert.ok(before.bag.items.some(i => ['bandage', 'medkit'].includes(i.id)));

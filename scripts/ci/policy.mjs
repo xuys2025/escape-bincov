@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { browserGroups } from './browser-suites.mjs';
 
 export { browserGroups };
-const rootDocs = new Set(['README.md', 'AGENTS.md', 'CONTRIBUTING.md', 'handoff.md', '.github/PULL_REQUEST_TEMPLATE.md']);
+const rootDocs = new Set(['README.md', 'AGENTS.md', 'CONTRIBUTING.md', 'handoff.md', '.github/pull_request_template.md']);
 
 // This is an allowlist, not an extension-based exclusion of build inputs.
 // In particular THIRD_PARTY_NOTICES.md and the portable readme are packaged, so they

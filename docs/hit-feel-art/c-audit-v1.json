@@ -1,0 +1,5170 @@
+{
+  "schema": 1,
+  "templateMain": "974a3a8d1ad2a7662c3a828226295d6c9b31eb64",
+  "authoringBase": "dfa1199b29efd2628a8029d750f80156a1b5051d",
+  "method": "Independent RGBA checks on saved 8x PNGs, all 75 current runtime sources and 15 template hashes. Fixed contour foot band uses source bbox bottom - 4, not blindly canvas rows 44-47.",
+  "sheets": [
+    {
+      "id": "raider-boss",
+      "file": "assets/hit-feel/sources/raider-boss-hurt-sheet-v1.png",
+      "sha256": "78f510a5f9c315efbd84d5988f5b8b2b6fd35e4b3b64d0efbc71c72ba6c41136",
+      "bytes": 28382,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.3825,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 13,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 15.3581,
+              "centreShift": -0.0244,
+              "changedLogicalPixels": 213,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 15.361,
+              "centreShift": -0.0216,
+              "changedLogicalPixels": 124,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.5168,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 14.5867,
+              "centreShift": 0.0699,
+              "changedLogicalPixels": 255,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 14.5466,
+              "centreShift": 0.0298,
+              "changedLogicalPixels": 157,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.9096,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 14.9361,
+              "centreShift": 0.0265,
+              "changedLogicalPixels": 252,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 14.9131,
+              "centreShift": 0.0035,
+              "changedLogicalPixels": 154,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.8196,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 14.8563,
+              "centreShift": 0.0367,
+              "changedLogicalPixels": 282,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 14.8351,
+              "centreShift": 0.0155,
+              "changedLogicalPixels": 182,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.5114,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 14.5524,
+              "centreShift": 0.041,
+              "changedLogicalPixels": 238,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 14.5182,
+              "centreShift": 0.0068,
+              "changedLogicalPixels": 144,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tide-ritualist",
+      "file": "assets/hit-feel/sources/tide-ritualist-hurt-sheet-v1.png",
+      "sha256": "26c373a375c35fa82afbd20166eeef242b11f94a13abfb60428db873edabc2b7",
+      "bytes": 30618,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.6314,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 14,
+              "sourceTop": 12,
+              "footBandFrom": 44,
+              "centroidX": 14.6141,
+              "centreShift": -0.0173,
+              "changedLogicalPixels": 317,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 13,
+              "sourceTop": 12,
+              "footBandFrom": 44,
+              "centroidX": 14.6073,
+              "centreShift": -0.0241,
+              "changedLogicalPixels": 186,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.7453,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 15.7829,
+              "centreShift": 0.0376,
+              "changedLogicalPixels": 379,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 15.7962,
+              "centreShift": 0.0509,
+              "changedLogicalPixels": 232,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 13.8233,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 13.8306,
+              "centreShift": 0.0073,
+              "changedLogicalPixels": 409,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 13.8397,
+              "centreShift": 0.0165,
+              "changedLogicalPixels": 247,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.8189,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 14.8728,
+              "centreShift": 0.0539,
+              "changedLogicalPixels": 392,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 14.854,
+              "centreShift": 0.035,
+              "changedLogicalPixels": 246,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.3585,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 14.4671,
+              "centreShift": 0.1086,
+              "changedLogicalPixels": 393,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 14.4131,
+              "centreShift": 0.0546,
+              "changedLogicalPixels": 229,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mercenary-scout",
+      "file": "assets/hit-feel/sources/mercenary-scout-hurt-sheet-v1.png",
+      "sha256": "69508c9042ea01de8757aaaaa4ee59f544f6eb6a8bd0ca139dbe8130ac9093ca",
+      "bytes": 27997,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.6528,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 15.7004,
+              "centreShift": 0.0476,
+              "changedLogicalPixels": 304,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 15.6811,
+              "centreShift": 0.0284,
+              "changedLogicalPixels": 193,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.147,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 7,
+              "footBandFrom": 44,
+              "centroidX": 15.3166,
+              "centreShift": 0.1696,
+              "changedLogicalPixels": 378,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 8,
+              "sourceTop": 7,
+              "footBandFrom": 44,
+              "centroidX": 15.2323,
+              "centreShift": 0.0854,
+              "changedLogicalPixels": 252,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.8751,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 14.9634,
+              "centreShift": 0.0883,
+              "changedLogicalPixels": 338,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 14.9114,
+              "centreShift": 0.0364,
+              "changedLogicalPixels": 210,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.0999,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 15.1998,
+              "centreShift": 0.0999,
+              "changedLogicalPixels": 360,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 15.1382,
+              "centreShift": 0.0383,
+              "changedLogicalPixels": 226,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.8126,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 14.9352,
+              "centreShift": 0.1226,
+              "changedLogicalPixels": 330,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 14.8667,
+              "centreShift": 0.0541,
+              "changedLogicalPixels": 202,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mercenary-assault",
+      "file": "assets/hit-feel/sources/mercenary-assault-hurt-sheet-v1.png",
+      "sha256": "b725df6a6ff6097a50d25d3d6291dd6d53ad265a5a5e3dddde640721e2b98a25",
+      "bytes": 30504,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.1436,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 13,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 15.134,
+              "centreShift": -0.0096,
+              "changedLogicalPixels": 225,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 15.1369,
+              "centreShift": -0.0067,
+              "changedLogicalPixels": 126,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.3233,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 15.4114,
+              "centreShift": 0.0881,
+              "changedLogicalPixels": 289,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 15.3608,
+              "centreShift": 0.0375,
+              "changedLogicalPixels": 178,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.764,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 16.8026,
+              "centreShift": 0.0386,
+              "changedLogicalPixels": 261,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 16.7823,
+              "centreShift": 0.0183,
+              "changedLogicalPixels": 155,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.3071,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 16.4373,
+              "centreShift": 0.1302,
+              "changedLogicalPixels": 302,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 16.3643,
+              "centreShift": 0.0571,
+              "changedLogicalPixels": 190,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 17.2336,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 17.2635,
+              "centreShift": 0.0299,
+              "changedLogicalPixels": 293,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 17.2369,
+              "centreShift": 0.0033,
+              "changedLogicalPixels": 181,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mercenary-support",
+      "file": "assets/hit-feel/sources/mercenary-support-hurt-sheet-v1.png",
+      "sha256": "82401532201bb9be1529588c4c71aa8ddc1ead32f5c45caee3b77257468447d9",
+      "bytes": 32110,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 17.2215,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 17.2532,
+              "centreShift": 0.0318,
+              "changedLogicalPixels": 284,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 17.2176,
+              "centreShift": -0.0038,
+              "changedLogicalPixels": 169,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.7468,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 16.8645,
+              "centreShift": 0.1177,
+              "changedLogicalPixels": 301,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 16.8143,
+              "centreShift": 0.0675,
+              "changedLogicalPixels": 180,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 17.3535,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 17.4004,
+              "centreShift": 0.0469,
+              "changedLogicalPixels": 322,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 17.3672,
+              "centreShift": 0.0137,
+              "changedLogicalPixels": 200,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.9331,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 16.9953,
+              "centreShift": 0.0622,
+              "changedLogicalPixels": 303,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 16.9643,
+              "centreShift": 0.0311,
+              "changedLogicalPixels": 183,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 17.139,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 13,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 17.2236,
+              "centreShift": 0.0846,
+              "changedLogicalPixels": 273,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 17.1869,
+              "centreShift": 0.0479,
+              "changedLogicalPixels": 150,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recovery-leader",
+      "file": "assets/hit-feel/sources/recovery-leader-hurt-sheet-v1.png",
+      "sha256": "8ce4cc2fcacdb038936aee2bbe9b5e6892f135b235d83e884c4ca8966c31d116",
+      "bytes": 29522,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.5203,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 14,
+              "sourceTop": 12,
+              "footBandFrom": 44,
+              "centroidX": 16.5306,
+              "centreShift": 0.0103,
+              "changedLogicalPixels": 322,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 13,
+              "sourceTop": 12,
+              "footBandFrom": 44,
+              "centroidX": 16.5034,
+              "centreShift": -0.0169,
+              "changedLogicalPixels": 198,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 17.028,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 17.119,
+              "centreShift": 0.091,
+              "changedLogicalPixels": 368,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 17.0678,
+              "centreShift": 0.0398,
+              "changedLogicalPixels": 235,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.4978,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 16.6016,
+              "centreShift": 0.1038,
+              "changedLogicalPixels": 378,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 16.5591,
+              "centreShift": 0.0614,
+              "changedLogicalPixels": 234,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.9045,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 16.9955,
+              "centreShift": 0.091,
+              "changedLogicalPixels": 406,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 16.94,
+              "centreShift": 0.0355,
+              "changedLogicalPixels": 265,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.9777,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 8,
+              "footBandFrom": 43,
+              "centroidX": 17.0642,
+              "centreShift": 0.0865,
+              "changedLogicalPixels": 395,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 8,
+              "footBandFrom": 43,
+              "centroidX": 17.0224,
+              "centreShift": 0.0447,
+              "changedLogicalPixels": 248,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blockade-sentry",
+      "file": "assets/hit-feel/sources/blockade-sentry-hurt-sheet-v1.png",
+      "sha256": "88fdae58e11339d21052724720916f2955bcf76b89535a12e5cddd8c28c777a3",
+      "bytes": 27582,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.1901,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 13,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 15.1681,
+              "centreShift": -0.022,
+              "changedLogicalPixels": 281,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 15.2012,
+              "centreShift": 0.0111,
+              "changedLogicalPixels": 171,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.0779,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 14.1554,
+              "centreShift": 0.0774,
+              "changedLogicalPixels": 359,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 14.1373,
+              "centreShift": 0.0594,
+              "changedLogicalPixels": 238,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.3089,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 14.4075,
+              "centreShift": 0.0986,
+              "changedLogicalPixels": 326,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 14.3594,
+              "centreShift": 0.0506,
+              "changedLogicalPixels": 197,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.1284,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 14.2484,
+              "centreShift": 0.1201,
+              "changedLogicalPixels": 375,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 14.1704,
+              "centreShift": 0.0421,
+              "changedLogicalPixels": 239,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 13.6104,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 14,
+              "sourceTop": 12,
+              "footBandFrom": 44,
+              "centroidX": 13.6962,
+              "centreShift": 0.0858,
+              "changedLogicalPixels": 293,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 13,
+              "sourceTop": 12,
+              "footBandFrom": 44,
+              "centroidX": 13.6515,
+              "centreShift": 0.0411,
+              "changedLogicalPixels": 171,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blockade-patrol",
+      "file": "assets/hit-feel/sources/blockade-patrol-hurt-sheet-v1.png",
+      "sha256": "37289b74e3bab512b534516d10977f65d559c378eb9c7a5fb0c2d139e25e8840",
+      "bytes": 30508,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 19.5024,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 13,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 19.5423,
+              "centreShift": 0.0399,
+              "changedLogicalPixels": 335,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 19.4934,
+              "centreShift": -0.009,
+              "changedLogicalPixels": 208,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 19.2037,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 19.2165,
+              "centreShift": 0.0129,
+              "changedLogicalPixels": 367,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 19.2084,
+              "centreShift": 0.0047,
+              "changedLogicalPixels": 223,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 18.5601,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 18.6417,
+              "centreShift": 0.0816,
+              "changedLogicalPixels": 416,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 18.5858,
+              "centreShift": 0.0257,
+              "changedLogicalPixels": 256,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 18.8824,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 18.9249,
+              "centreShift": 0.0425,
+              "changedLogicalPixels": 398,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 18.9009,
+              "centreShift": 0.0185,
+              "changedLogicalPixels": 247,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 18.5325,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 7,
+              "footBandFrom": 44,
+              "centroidX": 18.6399,
+              "centreShift": 0.1074,
+              "changedLogicalPixels": 339,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 8,
+              "sourceTop": 7,
+              "footBandFrom": 44,
+              "centroidX": 18.5915,
+              "centreShift": 0.0591,
+              "changedLogicalPixels": 197,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blockade-sergeant",
+      "file": "assets/hit-feel/sources/blockade-sergeant-hurt-sheet-v1.png",
+      "sha256": "85d9bdeb39d4aaba544458d8620e1d7772049dccc551580728312d164e77665f",
+      "bytes": 29804,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.7022,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 14,
+              "sourceTop": 12,
+              "footBandFrom": 44,
+              "centroidX": 14.7001,
+              "centreShift": -0.0021,
+              "changedLogicalPixels": 215,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 13,
+              "sourceTop": 12,
+              "footBandFrom": 44,
+              "centroidX": 14.7104,
+              "centreShift": 0.0081,
+              "changedLogicalPixels": 117,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.8318,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 14.8646,
+              "centreShift": 0.0328,
+              "changedLogicalPixels": 283,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 14.8502,
+              "centreShift": 0.0184,
+              "changedLogicalPixels": 173,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.3192,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 15.344,
+              "centreShift": 0.0248,
+              "changedLogicalPixels": 273,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 15.32,
+              "centreShift": 0.0008,
+              "changedLogicalPixels": 162,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.2995,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 16.3154,
+              "centreShift": 0.0159,
+              "changedLogicalPixels": 270,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 16.2875,
+              "centreShift": -0.0119,
+              "changedLogicalPixels": 156,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.2821,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 15.3151,
+              "centreShift": 0.0329,
+              "changedLogicalPixels": 256,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 15.2895,
+              "centreShift": 0.0073,
+              "changedLogicalPixels": 146,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salt-dazed",
+      "file": "assets/hit-feel/sources/salt-dazed-hurt-sheet-v1.png",
+      "sha256": "575304224fcd4d45f7645e429420cf99edb62d08a37b345f54dee9733f0aef4f",
+      "bytes": 29468,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 17.16,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 15,
+              "sourceTop": 13,
+              "footBandFrom": 44,
+              "centroidX": 17.1257,
+              "centreShift": -0.0343,
+              "changedLogicalPixels": 300,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 14,
+              "sourceTop": 13,
+              "footBandFrom": 44,
+              "centroidX": 17.1318,
+              "centreShift": -0.0282,
+              "changedLogicalPixels": 159,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.6677,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 16.7143,
+              "centreShift": 0.0466,
+              "changedLogicalPixels": 363,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 16.6922,
+              "centreShift": 0.0245,
+              "changedLogicalPixels": 207,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.9003,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 15.9973,
+              "centreShift": 0.097,
+              "changedLogicalPixels": 385,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 9,
+              "footBandFrom": 44,
+              "centroidX": 15.944,
+              "centreShift": 0.0437,
+              "changedLogicalPixels": 228,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.1935,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 14,
+              "sourceTop": 12,
+              "footBandFrom": 44,
+              "centroidX": 16.2624,
+              "centreShift": 0.0689,
+              "changedLogicalPixels": 353,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 13,
+              "sourceTop": 12,
+              "footBandFrom": 44,
+              "centroidX": 16.207,
+              "centreShift": 0.0135,
+              "changedLogicalPixels": 189,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.2546,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 16.3061,
+              "centreShift": 0.0514,
+              "changedLogicalPixels": 374,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 11,
+              "sourceTop": 10,
+              "footBandFrom": 44,
+              "centroidX": 16.2745,
+              "centreShift": 0.0199,
+              "changedLogicalPixels": 202,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tide-chaser",
+      "file": "assets/hit-feel/sources/tide-chaser-hurt-sheet-v1.png",
+      "sha256": "4b1674869035bd783ef3559994b61d8fee2dbc78f52801adf7be73cfa73ba202",
+      "bytes": 31432,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.4236,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 13,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 15.3633,
+              "centreShift": -0.0602,
+              "changedLogicalPixels": 336,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 15.4229,
+              "centreShift": -0.0007,
+              "changedLogicalPixels": 194,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.5987,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 8,
+              "sourceTop": 6,
+              "footBandFrom": 44,
+              "centroidX": 16.6816,
+              "centreShift": 0.0829,
+              "changedLogicalPixels": 425,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 7,
+              "sourceTop": 6,
+              "footBandFrom": 44,
+              "centroidX": 16.6198,
+              "centreShift": 0.021,
+              "changedLogicalPixels": 260,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.487,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 7,
+              "footBandFrom": 44,
+              "centroidX": 15.547,
+              "centreShift": 0.0599,
+              "changedLogicalPixels": 462,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 8,
+              "sourceTop": 7,
+              "footBandFrom": 44,
+              "centroidX": 15.5054,
+              "centreShift": 0.0184,
+              "changedLogicalPixels": 282,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.0421,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 10,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 16.0708,
+              "centreShift": 0.0287,
+              "changedLogicalPixels": 418,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 9,
+              "sourceTop": 8,
+              "footBandFrom": 44,
+              "centroidX": 16.048,
+              "centreShift": 0.0059,
+              "changedLogicalPixels": 250,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.8211,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 13,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 15.8537,
+              "centreShift": 0.0326,
+              "changedLogicalPixels": 375,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 12,
+              "sourceTop": 11,
+              "footBandFrom": 44,
+              "centroidX": 15.8696,
+              "centreShift": 0.0485,
+              "changedLogicalPixels": 205,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salt-hulk",
+      "file": "assets/hit-feel/sources/salt-hulk-hurt-sheet-v1.png",
+      "sha256": "06eb7a708aa05fd2d1b037ccb4db78b128d9e182b25a4f9bca28eb9c24264c7a",
+      "bytes": 36823,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.2091,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 8,
+              "sourceTop": 6,
+              "footBandFrom": 44,
+              "centroidX": 15.3285,
+              "centreShift": 0.1194,
+              "changedLogicalPixels": 327,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 7,
+              "sourceTop": 6,
+              "footBandFrom": 44,
+              "centroidX": 15.2666,
+              "centreShift": 0.0575,
+              "changedLogicalPixels": 214,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.1647,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 7,
+              "sourceTop": 5,
+              "footBandFrom": 44,
+              "centroidX": 14.3106,
+              "centreShift": 0.1459,
+              "changedLogicalPixels": 388,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 6,
+              "sourceTop": 5,
+              "footBandFrom": 44,
+              "centroidX": 14.2298,
+              "centreShift": 0.0651,
+              "changedLogicalPixels": 265,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.562,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 7,
+              "sourceTop": 5,
+              "footBandFrom": 44,
+              "centroidX": 14.6278,
+              "centreShift": 0.0658,
+              "changedLogicalPixels": 429,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 6,
+              "sourceTop": 5,
+              "footBandFrom": 44,
+              "centroidX": 14.5953,
+              "centreShift": 0.0333,
+              "changedLogicalPixels": 299,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.3755,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 6,
+              "sourceTop": 4,
+              "footBandFrom": 44,
+              "centroidX": 15.4509,
+              "centreShift": 0.0754,
+              "changedLogicalPixels": 419,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 5,
+              "sourceTop": 4,
+              "footBandFrom": 44,
+              "centroidX": 15.4189,
+              "centreShift": 0.0434,
+              "changedLogicalPixels": 294,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.8058,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 8,
+              "sourceTop": 6,
+              "footBandFrom": 44,
+              "centroidX": 14.8767,
+              "centreShift": 0.0709,
+              "changedLogicalPixels": 386,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 7,
+              "sourceTop": 6,
+              "footBandFrom": 44,
+              "centroidX": 14.8348,
+              "centreShift": 0.029,
+              "changedLogicalPixels": 261,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tidal-crab",
+      "file": "assets/hit-feel/sources/tidal-crab-hurt-sheet-v1.png",
+      "sha256": "4c31ccf92eb5cf0ecad309fa0f41019480248279eb48491c10f1a8fe80b35269",
+      "bytes": 23143,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.8649,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 32,
+              "sourceTop": 30,
+              "footBandFrom": 44,
+              "centroidX": 16.0561,
+              "centreShift": 0.1912,
+              "changedLogicalPixels": 253,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 31,
+              "sourceTop": 30,
+              "footBandFrom": 44,
+              "centroidX": 15.7133,
+              "centreShift": -0.1516,
+              "changedLogicalPixels": 97,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.9323,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 24,
+              "sourceTop": 22,
+              "footBandFrom": 44,
+              "centroidX": 16.1414,
+              "centreShift": 0.209,
+              "changedLogicalPixels": 282,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 23,
+              "sourceTop": 22,
+              "footBandFrom": 44,
+              "centroidX": 15.9378,
+              "centreShift": 0.0055,
+              "changedLogicalPixels": 51,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.3043,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 26,
+              "sourceTop": 24,
+              "footBandFrom": 44,
+              "centroidX": 15.5341,
+              "centreShift": 0.2298,
+              "changedLogicalPixels": 235,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 25,
+              "sourceTop": 24,
+              "footBandFrom": 44,
+              "centroidX": 15.297,
+              "centreShift": -0.0073,
+              "changedLogicalPixels": 36,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.339,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 29,
+              "sourceTop": 27,
+              "footBandFrom": 44,
+              "centroidX": 16.5309,
+              "centreShift": 0.1919,
+              "changedLogicalPixels": 338,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 28,
+              "sourceTop": 27,
+              "footBandFrom": 44,
+              "centroidX": 16.2842,
+              "centreShift": -0.0548,
+              "changedLogicalPixels": 180,
+              "opaqueComponents": 2,
+              "sourceOpaqueComponents": 2,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.1706,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 28,
+              "sourceTop": 26,
+              "footBandFrom": 44,
+              "centroidX": 16.4028,
+              "centreShift": 0.2322,
+              "changedLogicalPixels": 362,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 27,
+              "sourceTop": 26,
+              "footBandFrom": 44,
+              "centroidX": 16.2126,
+              "centreShift": 0.0419,
+              "changedLogicalPixels": 162,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "saltback-dog",
+      "file": "assets/hit-feel/sources/saltback-dog-hurt-sheet-v1.png",
+      "sha256": "0c62be135d2a445f283ce7d2a8c73aee5a9ffbb7a0984079bd6cedea0ed002e5",
+      "bytes": 20627,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 14.8394,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 34,
+              "sourceTop": 32,
+              "footBandFrom": 44,
+              "centroidX": 14.7988,
+              "centreShift": -0.0406,
+              "changedLogicalPixels": 172,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 33,
+              "sourceTop": 32,
+              "footBandFrom": 44,
+              "centroidX": 14.6633,
+              "centreShift": -0.1762,
+              "changedLogicalPixels": 101,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.7282,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 29,
+              "sourceTop": 27,
+              "footBandFrom": 44,
+              "centroidX": 15.9065,
+              "centreShift": 0.1784,
+              "changedLogicalPixels": 230,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 28,
+              "sourceTop": 27,
+              "footBandFrom": 44,
+              "centroidX": 15.762,
+              "centreShift": 0.0338,
+              "changedLogicalPixels": 140,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.1971,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 25,
+              "sourceTop": 23,
+              "footBandFrom": 44,
+              "centroidX": 16.3246,
+              "centreShift": 0.1275,
+              "changedLogicalPixels": 195,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 24,
+              "sourceTop": 23,
+              "footBandFrom": 44,
+              "centroidX": 16.2067,
+              "centreShift": 0.0096,
+              "changedLogicalPixels": 117,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.1507,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 24,
+              "sourceTop": 22,
+              "footBandFrom": 44,
+              "centroidX": 15.1403,
+              "centreShift": -0.0104,
+              "changedLogicalPixels": 251,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 23,
+              "sourceTop": 22,
+              "footBandFrom": 44,
+              "centroidX": 15.0809,
+              "centreShift": -0.0698,
+              "changedLogicalPixels": 133,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 15.6284,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 23,
+              "sourceTop": 21,
+              "footBandFrom": 43,
+              "centroidX": 15.7009,
+              "centreShift": 0.0725,
+              "changedLogicalPixels": 218,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 22,
+              "sourceTop": 21,
+              "footBandFrom": 43,
+              "centroidX": 15.6253,
+              "centreShift": -0.0031,
+              "changedLogicalPixels": 123,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sac-spitter",
+      "file": "assets/hit-feel/sources/sac-spitter-hurt-sheet-v1.png",
+      "sha256": "80dc0c84fa0dd39551c5ed57f06af2a5e7de2e9beee0897e6775e99cc44958ff",
+      "bytes": 22881,
+      "checks": {
+        "canvas768x1920": true,
+        "templateHashCurrent": true,
+        "idleColumnExactIncludingTransparentRgb": true,
+        "uniform8x8Blocks": true
+      },
+      "rows": [
+        {
+          "dir": "E",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.0951,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 32,
+              "sourceTop": 30,
+              "footBandFrom": 44,
+              "centroidX": 16.0888,
+              "centreShift": -0.0063,
+              "changedLogicalPixels": 214,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 31,
+              "sourceTop": 30,
+              "footBandFrom": 44,
+              "centroidX": 15.9419,
+              "centreShift": -0.1532,
+              "changedLogicalPixels": 104,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "SE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.4811,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 28,
+              "sourceTop": 26,
+              "footBandFrom": 44,
+              "centroidX": 16.7574,
+              "centreShift": 0.2763,
+              "changedLogicalPixels": 282,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 27,
+              "sourceTop": 26,
+              "footBandFrom": 44,
+              "centroidX": 16.6291,
+              "centreShift": 0.148,
+              "changedLogicalPixels": 136,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "S",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.5867,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 25,
+              "sourceTop": 23,
+              "footBandFrom": 44,
+              "centroidX": 16.7993,
+              "centreShift": 0.2126,
+              "changedLogicalPixels": 255,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 24,
+              "sourceTop": 23,
+              "footBandFrom": 44,
+              "centroidX": 16.6189,
+              "centreShift": 0.0322,
+              "changedLogicalPixels": 140,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "NE",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.3759,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 24,
+              "sourceTop": 22,
+              "footBandFrom": 44,
+              "centroidX": 16.2429,
+              "centreShift": -0.133,
+              "changedLogicalPixels": 329,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 23,
+              "sourceTop": 22,
+              "footBandFrom": 44,
+              "centroidX": 16.1728,
+              "centreShift": -0.2031,
+              "changedLogicalPixels": 158,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        },
+        {
+          "dir": "N",
+          "runtimeHashCurrent": true,
+          "runtimeIdleRgbaExact": true,
+          "sourceCentroidX": 16.0685,
+          "recoveryCloserToIdle": true,
+          "phases": [
+            {
+              "phase": "hurt",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 24,
+              "sourceTop": 22,
+              "footBandFrom": 44,
+              "centroidX": 16.2588,
+              "centreShift": 0.1903,
+              "changedLogicalPixels": 291,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            },
+            {
+              "phase": "recovery",
+              "checks": {
+                "onlyOriginalRgba": true,
+                "topDropExact": true,
+                "lowestFourContourRowsExact": true,
+                "shoulderRows19And20Exact": true,
+                "insideCell": true,
+                "noNewBorderContact": true,
+                "centreShiftWithinOne": true,
+                "trueTransparentBackground": true,
+                "noNewOpaqueComponents": true,
+                "noMoreEnclosedHoles": true,
+                "noNewHolesExceptMovedOriginalHead": true
+              },
+              "top": 23,
+              "sourceTop": 22,
+              "footBandFrom": 44,
+              "centroidX": 16.1005,
+              "centreShift": 0.032,
+              "changedLogicalPixels": 154,
+              "opaqueComponents": 1,
+              "sourceOpaqueComponents": 1,
+              "holes": [],
+              "sourceHoles": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "failures": [],
+  "sourceCentreExceptions": [
+    {
+      "id": "raider-boss",
+      "dir": "SE",
+      "sourceAlphaCentroidX": 14.5168,
+      "sourceBbox": [
+        5,
+        9,
+        24,
+        48
+      ]
+    },
+    {
+      "id": "raider-boss",
+      "dir": "S",
+      "sourceAlphaCentroidX": 14.9096,
+      "sourceBbox": [
+        5,
+        9,
+        25,
+        48
+      ]
+    },
+    {
+      "id": "raider-boss",
+      "dir": "NE",
+      "sourceAlphaCentroidX": 14.8196,
+      "sourceBbox": [
+        6,
+        8,
+        24,
+        48
+      ]
+    },
+    {
+      "id": "raider-boss",
+      "dir": "N",
+      "sourceAlphaCentroidX": 14.5114,
+      "sourceBbox": [
+        5,
+        10,
+        24,
+        48
+      ]
+    },
+    {
+      "id": "tide-ritualist",
+      "dir": "E",
+      "sourceAlphaCentroidX": 14.6314,
+      "sourceBbox": [
+        5,
+        12,
+        26,
+        48
+      ]
+    },
+    {
+      "id": "tide-ritualist",
+      "dir": "S",
+      "sourceAlphaCentroidX": 13.8233,
+      "sourceBbox": [
+        3,
+        9,
+        26,
+        48
+      ]
+    },
+    {
+      "id": "tide-ritualist",
+      "dir": "NE",
+      "sourceAlphaCentroidX": 14.8189,
+      "sourceBbox": [
+        5,
+        8,
+        25,
+        48
+      ]
+    },
+    {
+      "id": "tide-ritualist",
+      "dir": "N",
+      "sourceAlphaCentroidX": 14.3585,
+      "sourceBbox": [
+        3,
+        10,
+        27,
+        48
+      ]
+    },
+    {
+      "id": "mercenary-scout",
+      "dir": "S",
+      "sourceAlphaCentroidX": 14.8751,
+      "sourceBbox": [
+        5,
+        9,
+        26,
+        48
+      ]
+    },
+    {
+      "id": "mercenary-scout",
+      "dir": "N",
+      "sourceAlphaCentroidX": 14.8126,
+      "sourceBbox": [
+        4,
+        10,
+        26,
+        48
+      ]
+    },
+    {
+      "id": "mercenary-assault",
+      "dir": "N",
+      "sourceAlphaCentroidX": 17.2336,
+      "sourceBbox": [
+        5,
+        9,
+        30,
+        48
+      ]
+    },
+    {
+      "id": "mercenary-support",
+      "dir": "E",
+      "sourceAlphaCentroidX": 17.2215,
+      "sourceBbox": [
+        6,
+        9,
+        28,
+        48
+      ]
+    },
+    {
+      "id": "mercenary-support",
+      "dir": "S",
+      "sourceAlphaCentroidX": 17.3535,
+      "sourceBbox": [
+        5,
+        8,
+        30,
+        48
+      ]
+    },
+    {
+      "id": "mercenary-support",
+      "dir": "N",
+      "sourceAlphaCentroidX": 17.139,
+      "sourceBbox": [
+        5,
+        11,
+        30,
+        48
+      ]
+    },
+    {
+      "id": "recovery-leader",
+      "dir": "SE",
+      "sourceAlphaCentroidX": 17.028,
+      "sourceBbox": [
+        8,
+        10,
+        27,
+        48
+      ]
+    },
+    {
+      "id": "blockade-sentry",
+      "dir": "SE",
+      "sourceAlphaCentroidX": 14.0779,
+      "sourceBbox": [
+        5,
+        8,
+        24,
+        48
+      ]
+    },
+    {
+      "id": "blockade-sentry",
+      "dir": "S",
+      "sourceAlphaCentroidX": 14.3089,
+      "sourceBbox": [
+        5,
+        10,
+        25,
+        48
+      ]
+    },
+    {
+      "id": "blockade-sentry",
+      "dir": "NE",
+      "sourceAlphaCentroidX": 14.1284,
+      "sourceBbox": [
+        6,
+        8,
+        24,
+        48
+      ]
+    },
+    {
+      "id": "blockade-sentry",
+      "dir": "N",
+      "sourceAlphaCentroidX": 13.6104,
+      "sourceBbox": [
+        5,
+        12,
+        24,
+        48
+      ]
+    },
+    {
+      "id": "blockade-patrol",
+      "dir": "E",
+      "sourceAlphaCentroidX": 19.5024,
+      "sourceBbox": [
+        10,
+        11,
+        30,
+        48
+      ]
+    },
+    {
+      "id": "blockade-patrol",
+      "dir": "SE",
+      "sourceAlphaCentroidX": 19.2037,
+      "sourceBbox": [
+        9,
+        10,
+        31,
+        48
+      ]
+    },
+    {
+      "id": "blockade-patrol",
+      "dir": "S",
+      "sourceAlphaCentroidX": 18.5601,
+      "sourceBbox": [
+        7,
+        8,
+        31,
+        48
+      ]
+    },
+    {
+      "id": "blockade-patrol",
+      "dir": "NE",
+      "sourceAlphaCentroidX": 18.8824,
+      "sourceBbox": [
+        8,
+        9,
+        30,
+        48
+      ]
+    },
+    {
+      "id": "blockade-patrol",
+      "dir": "N",
+      "sourceAlphaCentroidX": 18.5325,
+      "sourceBbox": [
+        8,
+        7,
+        30,
+        48
+      ]
+    },
+    {
+      "id": "blockade-sergeant",
+      "dir": "E",
+      "sourceAlphaCentroidX": 14.7022,
+      "sourceBbox": [
+        5,
+        12,
+        26,
+        48
+      ]
+    },
+    {
+      "id": "blockade-sergeant",
+      "dir": "SE",
+      "sourceAlphaCentroidX": 14.8318,
+      "sourceBbox": [
+        5,
+        9,
+        26,
+        48
+      ]
+    },
+    {
+      "id": "salt-dazed",
+      "dir": "E",
+      "sourceAlphaCentroidX": 17.16,
+      "sourceBbox": [
+        7,
+        13,
+        28,
+        48
+      ]
+    },
+    {
+      "id": "salt-hulk",
+      "dir": "SE",
+      "sourceAlphaCentroidX": 14.1647,
+      "sourceBbox": [
+        2,
+        5,
+        26,
+        48
+      ]
+    },
+    {
+      "id": "salt-hulk",
+      "dir": "S",
+      "sourceAlphaCentroidX": 14.562,
+      "sourceBbox": [
+        2,
+        5,
+        28,
+        48
+      ]
+    },
+    {
+      "id": "salt-hulk",
+      "dir": "N",
+      "sourceAlphaCentroidX": 14.8058,
+      "sourceBbox": [
+        2,
+        6,
+        28,
+        48
+      ]
+    },
+    {
+      "id": "saltback-dog",
+      "dir": "E",
+      "sourceAlphaCentroidX": 14.8394,
+      "sourceBbox": [
+        4,
+        32,
+        28,
+        48
+      ]
+    }
+  ],
+  "negativeControls": [
+    {
+      "case": "idleRgbChangedAlphaIdentical",
+      "rejected": true
+    },
+    {
+      "case": "nonuniform8x8Block",
+      "rejected": true
+    },
+    {
+      "case": "newRgba",
+      "rejected": true
+    },
+    {
+      "case": "wrongTop",
+      "rejected": true
+    },
+    {
+      "case": "footDrift",
+      "rejected": true
+    },
+    {
+      "case": "shoulderDrift",
+      "rejected": true
+    },
+    {
+      "case": "borderPixel",
+      "rejected": true
+    }
+  ],
+  "pixelStatus": "PASS",
+  "reviewStatus": "DRAFT_AWAITING_INDEPENDENT_ART_AND_SOURCE_CENTRE_REVIEW",
+  "centreInterpretation": "Anchor remains (16,48); no global translation. Alpha-centroid shift <= 1 is tested. Absolute alpha-centroid 16+/-1 is NOT claimed: original templates already violate it, especially blockade-patrol. Cell anchor, anatomical centre and alpha centroid differ. Independent reviewer must confirm the intended centre metric; neither source columns nor locked foot/shoulder pixels were altered to conceal this."
+}

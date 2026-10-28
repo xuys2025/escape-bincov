@@ -1,6 +1,6 @@
 import * as D from '../domain';
 import type { Attribute, Facility, HideoutRuntime, HideoutSnapshot, Merchant, Recipe, Result, RunWorld, ShopSession, ShopSource, Source } from '../hideout-runtime/contract';
-import type { Scope } from '../coast-view/scope';
+import type { Scope } from '../view-lifecycle/scope';
 import { firstShopCell, questUses } from '../shop';
 import { STATIONS, type Station, type StationId } from './layout';
 import { GridDrag, type DragHooks } from './grid';
@@ -10,8 +10,10 @@ import { confirmImport, readResetCopy, startOver } from '../fresh-start';
 import { deploymentRegion, deploymentWorld, type CountyArt } from './deploy-map';
 import { morph } from './morph';
 import { PERK_UI, choicePreview, critContext, defaultPerkAttribute, perkDone, perkFailure, perkPendingName, perkRetried, resetPreview, type PerkPreviewView } from '../perk-copy';
+import { Workbench } from '../gunsmith-view/bench';
+import { benchGuns } from '../gunsmith/bench';
 
-export type PanelKind = 'gear' | 'arms' | 'med' | 'radio' | 'generator' | 'deploy' | 'facility' | 'board' | 'chat' | 'body' | 'menu' | 'help' | 'report';
+export type PanelKind = 'gear' | 'arms' | 'med' | 'radio' | 'generator' | 'deploy' | 'facility' | 'board' | 'chat' | 'body' | 'menu' | 'help' | 'report' | 'gunsmith';
 export type Cue = 'ok' | 'error' | 'open' | 'close' | 'pick' | 'drop' | 'coins' | 'build' | 'deliver';
 export interface UIHost {
   panelChanged(kind: PanelKind | null, station: Station | null): void;
@@ -39,7 +41,7 @@ type Dialog =
   | { kind: 'perk-reset'; attribute: Attribute; token: string; view: PerkPreviewView; from: string };
 
 const WIDE: PanelKind[] = ['gear', 'arms', 'med'];
-const CENTER: PanelKind[] = ['report', 'menu', 'help'];
+const CENTER: PanelKind[] = ['report', 'menu', 'help', 'gunsmith'];
 /**
  * The old hideout tabs kept as shortcuts (decision 06-2): open any of them from anywhere with the same session the
  * stations use; the camera turns to the place it belongs to. Digits follow the bar order; Tab / J / C / G still work.
@@ -54,7 +56,7 @@ const FACILITY_LABEL: Record<Facility, string> = { rest: '休息区', medical: '
 const TITLES: Partial<Record<PanelKind, [string, string]>> = {
   gear: ['仓库与整备', '冷库'], arms: ['修理铺', '老栓 · 武器 · 零件'], med: ['卫生所', '许医生 · 医疗用品 · 食品'], radio: ['电台任务', '小蔡 · 值守记录'],
   generator: ['发电机', '发电机房'], deploy: ['出击准备', '院门'], body: ['身体与成长', '在站里休息会慢慢恢复'], menu: ['暂停', '滨科夫水产站'], help: ['操作说明', ''],
-  board: ['寻人板', '食堂门口'], chat: ['食堂', '炊事员'], report: ['行动报告', ''],
+  board: ['寻人板', '食堂门口'], chat: ['食堂', '炊事员'], report: ['行动报告', ''], gunsmith: ['改枪工作台', '选好配件，按「确认」才会改到枪上'],
 };
 const DIALOG_TITLES: Record<Dialog['kind'], string> = { sale: '确认出售', import: '导入存档', reset: '清空存档', storage: '存档没有写入', perk: PERK_UI.choiceDialog, 'perk-reset': PERK_UI.resetDialog };
 /** Browser storage for the pre-reset copy; even reading the localStorage property can throw. */
@@ -79,6 +81,9 @@ export class UI {
   private paneB: 'stash' | 'safe' = 'stash';
   private shopMode: 'buy' | 'sell' = 'buy';
   private shop: ShopSession | null = null;
+  /** The gunsmith workbench while it is open (#28 M2-05), and the panel it was opened from, which it returns to. */
+  private bench: Workbench | null = null;
+  private benchFrom: { kind: PanelKind; station: Station | null; facility: Facility } | null = null;
   private world: RunWorld = 'buildings'; private seed = ''; private worlds: readonly RunWorld[];
   private regionPreview: string | null = null;
   private countyArt: CountyArt['regions'];
@@ -108,7 +113,8 @@ export class UI {
       <div class="prompt" hidden></div><div class="doortag" hidden></div><div class="toasts" role="status"></div>
       <nav class="quick"><button class="qmore" data-quickmenu aria-expanded="false"><span>功能</span></button>${SHORTCUTS.map(q => `<button data-quick="${q.kind}"><span>${q.label}</span><kbd>${q.key}</kbd></button>`).join('')}<button data-tabs title="旧版页签界面（备用入口）"><span>页签</span><kbd>0</kbd></button><button data-quick="menu"><span>菜单</span><kbd>Esc</kbd></button></nav>
       <section class="panel" hidden aria-live="polite"></section><section class="modal" hidden></section><section class="modal dialog" hidden role="dialog" aria-modal="true"></section>
-      <button class="touch-act" aria-label="交互">交互</button><div class="joy"><i></i></div>`;
+      <button class="touch-act" aria-label="交互">交互</button><div class="joy"><i></i></div>
+      <input id="backup-file" type="file" accept=".json,application/json" hidden>`;
     const q = <T extends HTMLElement>(s: string) => this.root.querySelector<T>(s)!;
     this.panel = q('.panel'); this.modal = q('.modal:not(.dialog)'); this.dialogEl = q('.dialog'); this.hud = q('.hud'); this.tags = q('.tags'); this.toasts = q('.toasts'); this.prompt = q('.prompt'); this.bubbles = q('.bubbles'); this.quick = q('.quick'); this.alarm = q('[data-alarm]');
     for (const s of STATIONS) {
@@ -116,6 +122,8 @@ export class UI {
       this.tags.appendChild(el); this.tagEls.set(s.id, el);
     }
     scope.on(this.root, 'click', this.click);
+    // The workbench's rename field: Enter clicks its save button; the form itself never submits.
+    scope.on(this.root, 'submit', (e: Event) => e.preventDefault());
     scope.on(this.root, 'input', this.input);
     scope.on(this.root, 'change', this.input);
     scope.add(() => { for (const t of this.timers) clearTimeout(t); this.timers.clear(); });
@@ -129,6 +137,8 @@ export class UI {
   // ---------- panels ----------
   show(kind: PanelKind, station: Station | null = null, facility?: Facility) {
     if (this.kind && (this.kind === 'arms' || this.kind === 'med') && kind !== this.kind && this.shop?.view().dirty) { this.toast('待买或待卖区还有物品，先结算或清空。', 'error'); this.host.sound('error'); return; }
+    if (this.kind === 'gunsmith' && kind !== 'gunsmith' && this.bench && !this.bench.requestClose()) { this.render(); return; }
+    if (kind !== 'gunsmith') { this.bench?.dispose(); this.bench = null; this.benchFrom = null; }
     const was = this.kind;
     // The panel is painted anew: a drag from the old grids ends here instead of waiting for a release.
     this.drag.cancel();
@@ -142,9 +152,38 @@ export class UI {
   close() {
     if (this.dialog) { this.closeDialog(); return; }
     if (!this.kind) return;
+    if (this.kind === 'gunsmith' && this.bench) {
+      // Esc closes the bench's own sheet or answers its question with "stay"; a waiting preview asks before it closes.
+      if (this.bench.dismiss()) { this.render(); return; }
+      if (!this.bench.requestClose()) { this.host.sound('error'); this.render(); return; }
+      this.closeBench(); return;
+    }
     if ((this.kind === 'arms' || this.kind === 'med') && this.shop?.view().dirty) { this.toast('待买或待卖区还有物品，先结算或清空。', 'error'); this.host.sound('error'); return; }
     this.drag.cancel();
     this.kind = null; this.station = null; this.shop = null; this.selected = null;
+    this.panel.hidden = true; this.modal.hidden = true; this.panel.innerHTML = ''; this.modal.innerHTML = '';
+    this.root.classList.remove('has-panel', 'has-modal');
+    this.host.sound('close');
+    this.host.panelChanged(null, null);
+  }
+  /** Open the workbench on gun `uid` (the first gun at the base without one), from wherever the player is. */
+  openBench(uid?: string) {
+    if (this.dialog) return;
+    const gun = uid ?? benchGuns(this.rt.snapshot().profile)[0]?.uid;
+    if (!gun) { this.toast('基地里没有枪械。先在修理铺买一把，或带回行动里找到的枪。', 'error'); this.host.sound('error'); return; }
+    const from = this.kind && this.kind !== 'gunsmith' ? { kind: this.kind, station: this.station, facility: this.facility } : this.benchFrom;
+    this.show('gunsmith', STATIONS.find(s => s.id === 'workbench') ?? null);
+    if (this.kind !== 'gunsmith') return;
+    this.benchFrom = from;
+    this.bench = new Workbench(this.rt, gun, { toast: (t, tone) => this.toast(t, tone), sound: c => this.host.sound(c), storage: () => this.showStorage() });
+    this.render();
+  }
+  /** The bench closed with nothing waiting: back to the panel it came from, else to the yard. */
+  private closeBench() {
+    const from = this.benchFrom;
+    this.bench?.dispose(); this.bench = null; this.benchFrom = null;
+    if (from) { this.show(from.kind, from.station, from.kind === 'facility' ? from.facility : undefined); return; }
+    this.kind = null; this.station = null; this.selected = null;
     this.panel.hidden = true; this.modal.hidden = true; this.panel.innerHTML = ''; this.modal.innerHTML = '';
     this.root.classList.remove('has-panel', 'has-modal');
     this.host.sound('close');
@@ -202,41 +241,49 @@ export class UI {
     const sel = this.selected?.uid ?? null;
     switch (kind) {
       case 'gear': {
-        const item = this.findSelected(s), details = P.detailsHtml(item, this.selected?.src ?? null, 'gear');
+        const item = this.findSelected(s), details = P.detailsHtml(item, this.selected?.src ?? null, 'gear', [], s.profile);
         body = this.compact ? P.gearCompactHtml(s, cell, sel, this.rt.departure(), this.paneB, details) : P.gearHtml(s, cell, sel, this.rt.departure(), details); break;
       }
       case 'arms': case 'med': {
         const v = this.shop!.view(); const item = this.selected ? (v[this.selected.src === 'merchant' ? 'catalog' : this.selected.src as 'buy' | 'sell' | 'stash'].items.find(i => i.uid === this.selected!.uid) ?? null) : null;
         // Sellable stacks still in the bag or safe: this shop sells from the stash only, so its header says so.
         const outside = [s.profile.bag, s.profile.safe].reduce((n, inv) => n + inv.items.filter(i => !i.relief && (D.ITEMS[i.id]?.sell ?? 0) > 0).length, 0);
-        body = this.compact ? P.shopCompactHtml(v, cell, this.selected, s.profile.cash, this.shopMode, outside) : P.shopHtml(v, cell, sel, s.profile.cash, outside) + P.detailsHtml(item, this.selected?.src ?? null, 'shop', item ? questUses(s.profile, item.id) : []); break;
+        body = this.compact ? P.shopCompactHtml(v, cell, this.selected, s.profile.cash, this.shopMode, outside) : P.shopHtml(v, cell, sel, s.profile.cash, outside) + P.detailsHtml(item, this.selected?.src ?? null, 'shop', item ? questUses(s.profile, item.id) : [], s.profile); break;
       }
       case 'radio': body = P.questsHtml(s); break;
       case 'generator': body = P.generatorHtml(s); break;
       case 'deploy': body = P.deployHtml(s, this.rt.departure(), this.world, this.seed, this.worlds, this.regionPreview, this.countyArt, innerWidth < 600); break;
-      case 'facility': body = `<nav class="seg facs">${FACILITY_ORDER.map(f => P.btn(`${FACILITY_LABEL[f]}${s.base.facilities[f] ? ` <small>${s.base.facilities[f]} 级</small>` : ''}`, `fac:${f}`, f === this.facility ? 'on' : '')).join('')}</nav>` + P.facilityHtml(this.rt.facility(this.facility), s, this.rt.trainingProgress()); break;
+      case 'facility': body = (this.facility === 'workbench' ? P.benchEntryHtml() : '') + `<nav class="seg facs">${FACILITY_ORDER.map(f => P.btn(`${FACILITY_LABEL[f]}${s.base.facilities[f] ? ` <small>${s.base.facilities[f]} 级</small>` : ''}`, `fac:${f}`, f === this.facility ? 'on' : '')).join('')}</nav>` + P.facilityHtml(this.rt.facility(this.facility), s, this.rt.trainingProgress()); break;
       case 'body': { const board = this.rt.perkBoard(); this.perkAttr ??= defaultPerkAttribute(board); body = P.bodyHtml(s, board, this.perkAttr); break; }
       case 'board': body = P.boardHtml(); break;
       case 'chat': body = `<p class="muted">长桌上摆着碗。灶上那锅粥一直温着，谁回来谁盛。</p>`; break;
       case 'menu': body = P.menuHtml(this.volume, readResetCopy(browserStorage) !== null); break;
       case 'help': body = P.helpHtml(this.touch); break;
       case 'report': body = this.summary ? P.reportHtml(this.summary, s) : ''; break;
+      case 'gunsmith': body = this.bench?.html({ compact: this.compact }) ?? ''; break;
     }
     const scroll = el.querySelector('.pbody')?.scrollTop ?? 0;
     el.className = `${center ? 'modal' : 'panel'} k-${kind}${WIDE.includes(kind) ? ' wide' : ''}${this.compact ? ' compact' : ''}${innerHeight > innerWidth ? ' portrait' : ''}`;
     el.style.width = WIDE.includes(kind) && !this.compact ? `${Math.min(innerWidth - 24, (kind === 'gear' ? 16 * cell + 70 : 20 * cell + 74))}px` : '';
-    const cash = ['gear', 'arms', 'med', 'facility', 'deploy', 'radio', 'generator'].includes(kind) ? `<span class="pcash">现金 <b>¥ ${s.profile.cash.toLocaleString()}</b></span>` : '';
+    const cash = ['gear', 'arms', 'med', 'facility', 'deploy', 'radio', 'generator', 'gunsmith'].includes(kind) ? `<span class="pcash">现金 <b>¥ ${s.profile.cash.toLocaleString()}</b></span>` : '';
     const tabbed = SHORTCUTS.some(q => q.kind === kind) || kind === 'generator';
     const tabs = tabbed ? `<nav class="ptabs" aria-label="水产站功能">${SHORTCUTS.map(q => `<button data-tab="${q.kind}" class="${q.kind === kind ? 'on' : ''}" ${q.kind === kind ? 'aria-current="page"' : ''}>${q.label}<kbd>${q.key}</kbd></button>`).join('')}</nav>` : '';
     const heading = this.compact && tabbed ? `<button class="tabmenu" data-tabmenu aria-label="切换功能"><h2>${esc(title)}</h2><i class="caret" aria-hidden="true"></i></button>` : `<h2>${esc(title)}</h2>`;
     // Repaints (five-second checkpoints, events) keep the keyboard on the same control, e.g. a perk card.
     const active = (this.root.getRootNode() as ShadowRoot).activeElement as HTMLElement | null, focused = active && el.contains(active) ? active.dataset.act : undefined;
+    // The workbench keeps the keyboard on its control and its lists where they were scrolled.
+    const gsFocus = active && el.contains(active) && active.dataset.gs ? `[data-gs="${active.dataset.gs}"]${active.dataset.arg !== undefined ? `[data-arg="${CSS.escape(active.dataset.arg)}"]` : ':not([data-arg])'}` : null;
+    const kept = ['.gs-list', '.gs-mid', '.gs-guns'].map(q => [q, el.querySelector(q)?.scrollTop ?? 0] as const);
     const html = `<header class="phead"><div>${heading}${sub ? `<small>${esc(sub)}</small>` : ''}</div>${cash}${kind === 'gear' && !this.compact ? P.gearActions(s.profile, false) : ''}${P.btn('关闭 <kbd>Esc</kbd>', 'close', 'x')}</header>${tabs}${line ? `<p class="line">“${esc(line)}”</p>` : ''}<div class="pbody">${body}</div>`;
     // The deploy map is patched in place, so its light, lock and route animate between picks instead of restarting.
     if (kind === 'deploy' && el.querySelector(':scope > .pbody > .county-deploy')) morph(el, html); else el.innerHTML = html;
     el.querySelector('.pbody')!.scrollTop = scroll;
+    for (const [q, top] of kept) { const k = el.querySelector(q); if (k) k.scrollTop = top; }
     el.hidden = false;
     if (focused) el.querySelector<HTMLElement>(`[data-act="${focused}"]`)?.focus({ preventScroll: true });
+    if (gsFocus) el.querySelector<HTMLElement>(gsFocus)?.focus({ preventScroll: true });
+    const once = kind === 'gunsmith' ? this.bench?.focusOnce() : null;
+    if (once) el.querySelector<HTMLInputElement>(once)?.select();
     (center ? this.panel : this.modal).hidden = true;
     this.root.classList.toggle('has-panel', !center); this.root.classList.toggle('has-modal', center);
   }
@@ -248,7 +295,7 @@ export class UI {
     const body = d.kind === 'sale' ? P.saleConfirmHtml(d.warnings) : d.kind === 'import' ? P.importConfirmHtml(d.name) : d.kind === 'reset' ? P.resetConfirmHtml()
       : d.kind === 'perk' || d.kind === 'perk-reset' ? P.perkConfirmHtml(d.view, d.kind === 'perk-reset') : P.storageHtml(s, this.perkPending);
     this.dialogEl.className = `modal dialog k-${d.kind}`;
-    const title = d.kind === 'storage' && s.storage.conflict ? '存档已被另一个窗口接管' : DIALOG_TITLES[d.kind];
+    const title = d.kind === 'storage' && s.storage.conflict ? '存档已被另一个窗口接管' : d.kind === 'storage' && s.storage.reloadRequired ? '进度已保存' : DIALOG_TITLES[d.kind];
     this.dialogEl.setAttribute('aria-label', title);
     // Panel refreshes (five-second checkpoints) paint the dialog again: keep the keyboard on the same button.
     const buttons = () => Array.from(this.dialogEl.querySelectorAll<HTMLElement>('button'));
@@ -269,7 +316,7 @@ export class UI {
     const broken = !s.storage.ok || s.storage.conflict;
     if (!broken && !s.storage.pendingBase) this.perkPending = '';
     this.alarm.hidden = !broken || this.dialog?.kind === 'storage';
-    if (broken) this.alarm.textContent = s.storage.conflict ? '存档已被另一个窗口接管 · 点这里处理' : '存档没有写入 · 点这里处理';
+    if (broken) this.alarm.textContent = s.storage.conflict ? '存档已被另一个窗口接管 · 点这里处理' : s.storage.reloadRequired ? '进度已保存，页面恢复失败 · 点这里处理' : '存档没有写入 · 点这里处理';
     if (!broken && this.dialog?.kind === 'storage') { this.dialog = null; this.renderDialog(); if (!this.kind) this.host.panelChanged(null, null); }
   }
   showStorage() { this.openDialog({ kind: 'storage' }); this.alarm.hidden = true; }
@@ -338,7 +385,7 @@ export class UI {
     const before = this.rt.snapshot().profile, item = before[src].items.find(i => i.uid === uid);
     if (this.result(this.rt.secure(src, uid), 'drop')) {
       this.selected = null;
-      if (src === 'safe' && item && D.WEAPONS[item.id] && item.id !== 'knife') {
+      if (src === 'safe' && item && D.isGun(item.id)) {
         // Automatic transfers allocate a fresh UID; select the newly created gun, not its former safe entry.
         const moved = this.rt.snapshot().profile.bag.items.find(i => i.id === item.id && !!i.relief === !!item.relief && !before.bag.items.some(old => old.uid === i.uid));
         if (moved) this.selected = { src: 'bag', uid: moved.uid };
@@ -448,6 +495,13 @@ export class UI {
       this.root.querySelector<HTMLButtonElement>(`[data-region="${this.regionPreview}"]`)?.focus({ preventScroll: true });
       this.showRegionBrief(); return;
     }
+    const gs = t.closest<HTMLElement>('[data-gs]');
+    if (gs && this.bench && this.kind === 'gunsmith' && !this.dialog) {
+      if ((gs as HTMLButtonElement).disabled) return;
+      const value = gs.closest('[data-gs-form]')?.querySelector('input')?.value ?? '';
+      if (this.bench.act(gs.dataset.gs!, gs.dataset.arg ?? '', value) === 'close') this.closeBench(); else this.render();
+      return;
+    }
     const b = t.closest<HTMLElement>('[data-act]');
     if (!b || (b as HTMLButtonElement).disabled) return;
     const [act, a1, a2] = b.dataset.act!.split(':');
@@ -457,6 +511,7 @@ export class UI {
       case 'pane': this.paneB = a1 as 'stash' | 'safe'; this.selected = null; this.render(); break;
       case 'mode': this.shopMode = a1 as 'buy' | 'sell'; this.selected = null; this.render(); break;
       case 'equip': if (src && uid) this.equip(src, uid); break;
+      case 'gunsmith': this.openBench(a1 || uid); break;
       case 'unequip': this.result(this.rt.unequip(), 'drop'); this.render(); break;
       case 'charm-equip': if (src && uid) { this.result(this.rt.equipCharm(src, uid), 'drop'); this.selected = null; this.render(); } break;
       case 'charm-unequip': this.result(this.rt.unequipCharm(), 'drop'); this.render(); break;
@@ -470,6 +525,12 @@ export class UI {
       case 'sort-stash': if (this.result(this.rt.sortStash(), 'drop')) this.selected = null; this.render(); break;
       case 'relief': this.result(this.rt.claimRelief()); this.render(); break;
       case 'cart-reset': this.shop?.reset(); this.selected = null; this.host.sound('close'); this.render(); break;
+      // The catalog's filter and pages (#28 M2-08): a new catalog, so nothing in it stays selected.
+      case 'browse-kind': case 'browse-fits': case 'browse-page': {
+        const b = this.shop?.view().browse; if (!b) break;
+        this.shop!.browse(act === 'browse-kind' ? { kind: a1 as typeof b.kind, fits: b.fits, page: 0 } : act === 'browse-fits' ? { kind: b.kind, fits: !b.fits, page: 0 } : { kind: b.kind, fits: b.fits, page: Number(a1) });
+        this.selected = null; this.host.sound('pick'); this.render(); break;
+      }
       case 'cart-settle': this.settle(); break;
       case 'sale-confirm': if (this.dialog?.kind === 'sale') this.settle(this.dialog.token); break;
       case 'quest': this.result(this.rt.submitQuest(a1), 'deliver'); this.render(); break;

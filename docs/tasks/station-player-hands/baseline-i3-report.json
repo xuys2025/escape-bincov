@@ -1,0 +1,27 @@
+{
+  "build": "test-results/pre-f16.html",
+  "browser": "156.0.8078.48",
+  "startedAt": "2026-10-27T16:23:34.231Z",
+  "methodology": "Packaged offline build at https://station.test/ (routed, no network). Real session/localStorage, real DOM input in headless Chrome; phone sizes are viewport/touch emulation. ?test=1 fixtures: player placement, save seeding through SaveSession transactions while the yard is closed, storage fault injection, production time shortening. No mock Runtime and no simulated raid result.",
+  "steps": [
+    {
+      "name": "I3 菜单开关与往返：“功能”开/关；菜单开着点画面只收起不走路；整备→页签菜单切修理铺→关闭；“交互”恢复并打开老栓",
+      "status": "failed",
+      "error": "Error: timeout: arms tab\n    at file:///C:/bincov/test-results/f16-worktree/scripts/station-browser-test.mjs:107:141\n    at async until (file:///C:/bincov/test-results/f16-worktree/scripts/station-browser-test.mjs:107:68)\n    at async file:///C:/bincov/test-results/f16-worktree/scripts/station-browser-test.mjs:1048:79\n    at async step (file:///C:/bincov/test-results/f16-worktree/scripts/station-browser-test.mjs:94:18)\n    at async file:///C:/bincov/test-results/f16-worktree/scripts/station-browser-test.mjs:1035:3",
+      "ms": 10305
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "frameAudit": [],
+  "expectedLogs": [],
+  "warnings": [],
+  "coverage": {
+    "wallLight": []
+  },
+  "finishedAt": "2026-10-27T16:23:44.678Z",
+  "summary": {
+    "passed": 0,
+    "total": 1
+  }
+}

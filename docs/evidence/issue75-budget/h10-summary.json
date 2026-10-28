@@ -1,0 +1,552 @@
+{
+ "method": "node measure script, 1280x720, Chrome 156 headless (browser-options.mjs), ticker running; first second dropped; frames that healed the player (a checkpoint restore) left out of the timing. fight: every living coast enemy on a ring 150-390 px around the player, AI on, the player holds the M4A1 trigger and sweeps the aim, healed below 60 % health. crowd: AI frozen, every presented frame also carries check k's load (one near and one far gunman fire, one round strikes the wall beside the player).",
+ "builds": {
+  "main": "origin/main 1a4fe66, dist blob ec9da37",
+  "branch": "feat/hit-feel-budget 95d28e2, dist blob 85b8dee"
+ },
+ "runs": [
+  {
+   "run": 1,
+   "label": "main",
+   "mode": "fight",
+   "seconds": 20,
+   "audio": "running",
+   "errors": [],
+   "placed": 23,
+   "frames": 1142,
+   "timedFrames": 1114,
+   "fps": 60,
+   "gapMs": {
+    "p50": 16.7,
+    "p90": 17.8,
+    "p99": 21.2,
+    "max": 37.8,
+    "mean": 16.7
+   },
+   "workMs": {
+    "p50": 6.7,
+    "p90": 8.1,
+    "p99": 12,
+    "max": 28.8,
+    "mean": 7
+   },
+   "over20": 25,
+   "over33": 1,
+   "particles": {
+    "p50": 72,
+    "p90": 125,
+    "p99": 156,
+    "max": 164,
+    "mean": 72.6
+   },
+   "voices": {
+    "p50": 20,
+    "p90": 37,
+    "p99": 50,
+    "max": 60,
+    "mean": 20.4
+   },
+   "events": {
+    "shots": 214,
+    "own": 110,
+    "hurts": 178
+   },
+   "end": {
+    "phase": "running",
+    "alive": 5,
+    "minHp": 29.8373049999971
+   },
+   "heals": 28,
+   "ended": false,
+   "dropped": {
+    "particles": null,
+    "voices": null
+   }
+  },
+  {
+   "run": 1,
+   "label": "branch",
+   "mode": "fight",
+   "seconds": 20,
+   "audio": "running",
+   "errors": [],
+   "placed": 23,
+   "frames": 1139,
+   "timedFrames": 1111,
+   "fps": 60,
+   "gapMs": {
+    "p50": 16.7,
+    "p90": 17.7,
+    "p99": 20.8,
+    "max": 39.4,
+    "mean": 16.6
+   },
+   "workMs": {
+    "p50": 6.4,
+    "p90": 7.7,
+    "p99": 11.1,
+    "max": 29.9,
+    "mean": 6.7
+   },
+   "over20": 20,
+   "over33": 1,
+   "particles": {
+    "p50": 76,
+    "p90": 129,
+    "p99": 172,
+    "max": 201,
+    "mean": 74.3
+   },
+   "voices": {
+    "p50": 21,
+    "p90": 37,
+    "p99": 50,
+    "max": 55,
+    "mean": 21.3
+   },
+   "events": {
+    "shots": 224,
+    "own": 110,
+    "hurts": 175
+   },
+   "end": {
+    "phase": "running",
+    "alive": 6,
+    "minHp": 30
+   },
+   "heals": 28,
+   "ended": false,
+   "dropped": {
+    "particles": {
+     "decor": 0,
+     "core": 0
+    },
+    "voices": {
+     "decor": 0,
+     "core": 0
+    }
+   }
+  },
+  {
+   "run": 2,
+   "label": "main",
+   "mode": "fight",
+   "seconds": 20,
+   "audio": "running",
+   "errors": [],
+   "placed": 23,
+   "frames": 1140,
+   "timedFrames": 1113,
+   "fps": 60,
+   "gapMs": {
+    "p50": 16.7,
+    "p90": 17.6,
+    "p99": 21.1,
+    "max": 38.7,
+    "mean": 16.6
+   },
+   "workMs": {
+    "p50": 6.5,
+    "p90": 7.9,
+    "p99": 11.5,
+    "max": 29,
+    "mean": 6.8
+   },
+   "over20": 21,
+   "over33": 2,
+   "particles": {
+    "p50": 74,
+    "p90": 121,
+    "p99": 156,
+    "max": 168,
+    "mean": 72.1
+   },
+   "voices": {
+    "p50": 20,
+    "p90": 36,
+    "p99": 49,
+    "max": 55,
+    "mean": 20.3
+   },
+   "events": {
+    "shots": 212,
+    "own": 109,
+    "hurts": 169
+   },
+   "end": {
+    "phase": "running",
+    "alive": 5,
+    "minHp": 22
+   },
+   "heals": 27,
+   "ended": false,
+   "dropped": {
+    "particles": null,
+    "voices": null
+   }
+  },
+  {
+   "run": 2,
+   "label": "branch",
+   "mode": "fight",
+   "seconds": 20,
+   "audio": "running",
+   "errors": [],
+   "placed": 23,
+   "frames": 1140,
+   "timedFrames": 1114,
+   "fps": 59.9,
+   "gapMs": {
+    "p50": 16.7,
+    "p90": 17.7,
+    "p99": 20.8,
+    "max": 41,
+    "mean": 16.7
+   },
+   "workMs": {
+    "p50": 6.6,
+    "p90": 8.1,
+    "p99": 11.8,
+    "max": 36.2,
+    "mean": 7
+   },
+   "over20": 23,
+   "over33": 1,
+   "particles": {
+    "p50": 71,
+    "p90": 128,
+    "p99": 159,
+    "max": 177,
+    "mean": 73.1
+   },
+   "voices": {
+    "p50": 20,
+    "p90": 38,
+    "p99": 50,
+    "max": 61,
+    "mean": 20.9
+   },
+   "events": {
+    "shots": 221,
+    "own": 109,
+    "hurts": 174
+   },
+   "end": {
+    "phase": "running",
+    "alive": 6,
+    "minHp": 21.859015000000966
+   },
+   "heals": 26,
+   "ended": false,
+   "dropped": {
+    "particles": {
+     "decor": 0,
+     "core": 0
+    },
+    "voices": {
+     "decor": 0,
+     "core": 0
+    }
+   }
+  },
+  {
+   "run": 1,
+   "label": "main",
+   "mode": "crowd",
+   "seconds": 20,
+   "audio": "running",
+   "errors": [],
+   "placed": 0,
+   "frames": 1140,
+   "timedFrames": 1140,
+   "fps": 60,
+   "gapMs": {
+    "p50": 16.7,
+    "p90": 17.6,
+    "p99": 21.1,
+    "max": 32.6,
+    "mean": 16.7
+   },
+   "workMs": {
+    "p50": 6.8,
+    "p90": 7.6,
+    "p99": 10.7,
+    "max": 22.6,
+    "mean": 6.9
+   },
+   "over20": 21,
+   "over33": 0,
+   "particles": {
+    "p50": 757,
+    "p90": 802,
+    "p99": 826,
+    "max": 835,
+    "mean": 753.9
+   },
+   "voices": {
+    "p50": 96,
+    "p90": 96,
+    "p99": 96,
+    "max": 96,
+    "mean": 96
+   },
+   "events": {
+    "shots": 109,
+    "own": 109,
+    "hurts": 7
+   },
+   "end": {
+    "phase": "running",
+    "alive": 21,
+    "minHp": 100
+   },
+   "heals": 0,
+   "ended": false,
+   "dropped": {
+    "particles": null,
+    "voices": null
+   }
+  },
+  {
+   "run": 1,
+   "label": "branch",
+   "mode": "crowd",
+   "seconds": 20,
+   "audio": "running",
+   "errors": [],
+   "placed": 0,
+   "frames": 1138,
+   "timedFrames": 1138,
+   "fps": 60,
+   "gapMs": {
+    "p50": 16.7,
+    "p90": 17.6,
+    "p99": 21.2,
+    "max": 28.2,
+    "mean": 16.7
+   },
+   "workMs": {
+    "p50": 5.9,
+    "p90": 6.8,
+    "p99": 9.7,
+    "max": 17.6,
+    "mean": 6.1
+   },
+   "over20": 21,
+   "over33": 0,
+   "particles": {
+    "p50": 218,
+    "p90": 223,
+    "p99": 230,
+    "max": 235,
+    "mean": 218.3
+   },
+   "voices": {
+    "p50": 69,
+    "p90": 74,
+    "p99": 79,
+    "max": 88,
+    "mean": 69.8
+   },
+   "events": {
+    "shots": 109,
+    "own": 109,
+    "hurts": 8
+   },
+   "end": {
+    "phase": "running",
+    "alive": 21,
+    "minHp": 100
+   },
+   "heals": 0,
+   "ended": false,
+   "dropped": {
+    "particles": {
+     "decor": 16176,
+     "core": 0
+    },
+    "voices": {
+     "decor": 9185,
+     "core": 0
+    }
+   }
+  },
+  {
+   "run": 2,
+   "label": "main",
+   "mode": "crowd",
+   "seconds": 20,
+   "audio": "running",
+   "errors": [],
+   "placed": 0,
+   "frames": 1141,
+   "timedFrames": 1141,
+   "fps": 60,
+   "gapMs": {
+    "p50": 16.7,
+    "p90": 17.9,
+    "p99": 21.3,
+    "max": 29.8,
+    "mean": 16.7
+   },
+   "workMs": {
+    "p50": 7.2,
+    "p90": 9.2,
+    "p99": 11.8,
+    "max": 15.2,
+    "mean": 7.5
+   },
+   "over20": 24,
+   "over33": 0,
+   "particles": {
+    "p50": 755,
+    "p90": 800,
+    "p99": 832,
+    "max": 848,
+    "mean": 753.1
+   },
+   "voices": {
+    "p50": 96,
+    "p90": 96,
+    "p99": 96,
+    "max": 96,
+    "mean": 96
+   },
+   "events": {
+    "shots": 109,
+    "own": 109,
+    "hurts": 9
+   },
+   "end": {
+    "phase": "running",
+    "alive": 20,
+    "minHp": 100
+   },
+   "heals": 0,
+   "ended": false,
+   "dropped": {
+    "particles": null,
+    "voices": null
+   }
+  },
+  {
+   "run": 2,
+   "label": "branch",
+   "mode": "crowd",
+   "seconds": 20,
+   "audio": "running",
+   "errors": [],
+   "placed": 0,
+   "frames": 1141,
+   "timedFrames": 1141,
+   "fps": 60,
+   "gapMs": {
+    "p50": 16.7,
+    "p90": 17.6,
+    "p99": 20.7,
+    "max": 27.1,
+    "mean": 16.7
+   },
+   "workMs": {
+    "p50": 5.9,
+    "p90": 6.6,
+    "p99": 9.6,
+    "max": 21.9,
+    "mean": 6
+   },
+   "over20": 21,
+   "over33": 0,
+   "particles": {
+    "p50": 218,
+    "p90": 223,
+    "p99": 237,
+    "max": 244,
+    "mean": 218.4
+   },
+   "voices": {
+    "p50": 69,
+    "p90": 74,
+    "p99": 79,
+    "max": 89,
+    "mean": 69.8
+   },
+   "events": {
+    "shots": 109,
+    "own": 109,
+    "hurts": 7
+   },
+   "end": {
+    "phase": "running",
+    "alive": 21,
+    "minHp": 100
+   },
+   "heals": 0,
+   "ended": false,
+   "dropped": {
+    "particles": {
+     "decor": 16226,
+     "core": 0
+    },
+    "voices": {
+     "decor": 9205,
+     "core": 0
+    }
+   }
+  }
+ ],
+ "discarded": {
+  "run": "1 (discarded)",
+  "label": "branch",
+  "mode": "fight",
+  "seconds": 20,
+  "audio": "running",
+  "errors": [],
+  "placed": 23,
+  "frames": 146,
+  "timedFrames": 145,
+  "fps": 60.5,
+  "gapMs": {
+   "p50": 16.7,
+   "p90": 17.9,
+   "p99": 28.5,
+   "max": 35.1,
+   "mean": 16.6
+  },
+  "workMs": {
+   "p50": 3.7,
+   "p90": 8.7,
+   "p99": 18.9,
+   "max": 25.1,
+   "mean": 5.1
+  },
+  "over20": 2,
+  "over33": 1,
+  "particles": {
+   "p50": 12,
+   "p90": 127,
+   "p99": 134,
+   "max": 135,
+   "mean": 42.5
+  },
+  "voices": {
+   "p50": 3,
+   "p90": 33,
+   "p99": 40,
+   "max": 40,
+   "mean": 10.6
+  },
+  "events": {
+   "shots": 10,
+   "own": 7,
+   "hurts": 636
+  },
+  "end": {
+   "phase": "ending",
+   "alive": 22,
+   "minHp": 0
+  },
+  "heals": 1,
+  "ended": true,
+  "dropped": null
+ }
+}

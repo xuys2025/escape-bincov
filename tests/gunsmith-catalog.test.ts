@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as D from '../src/domain';
-import { handlingOf, SAMPLE_GUNS, type Handling } from '../src/shooting';
+import { handlingOf, type Handling } from '../src/shooting';
 import { ATTACHMENTS, BRAND_NAMES, CATEGORY_NAMES, GUN_CLASS_NAMES, GUNS, SLOT_NAMES, type AttachmentDef, type Factors, type GunHandling,
     type GunId, type Modifiers } from '../src/gunsmith/catalog';
 import { DOCS } from './fixtures/gunsmith-docs';
@@ -42,7 +42,16 @@ test('counts: guns by class 4/4/3/5/2/1/1, attachments by category 12/12/10/10/1
     for (const [id, a] of Object.entries(ATTACHMENTS)) assert.equal(a.id, id);
 });
 
-test('the old three equal today\'s WEAPONS, ITEMS and handling; mb4a1 starts as the #39 sample rifle', () => {
+/**
+ * The #39 sample rifle as the maintainer playtested it (SAMPLE_GUNS.m4a1 and its handling row in src/shooting.ts),
+ * frozen here when M2-01 retired it: the real M4A1 must keep it exactly.
+ */
+const SAMPLE_M4A1 = {
+    stats: { ammo: 'ammoR', magazine: 30, damage: 24, range: 600, cooldown: .1, reload: 2.1, pellets: 1, spread: .03, crit: .05 },
+    handling: { mode: 'auto', hip: 2.4, precise: .22, raise: .4, sway: 2.2, bloom: .009, bloomMax: .08, kick: .008, kickMax: .08, settle: .15, recover: 4 },
+} as const;
+
+test('the old three equal today\'s WEAPONS, ITEMS and handling; mb4a1 keeps the #39 sample rifle\'s numbers and handling', () => {
     for (const id of ['pistol', 'shotgun', 'carbine'] as const) {
         const gun = GUNS[id], item = D.ITEMS[id];
         assert.deepEqual(gun.stats, D.WEAPONS[id]);
@@ -50,9 +59,9 @@ test('the old three equal today\'s WEAPONS, ITEMS and handling; mb4a1 starts as 
         assert.deepEqual({ w: gun.w, h: gun.h, weight: gun.weight, buy: gun.buy, sell: gun.sell },
             { w: item.w, h: item.h, weight: item.weight, buy: item.buy, sell: item.sell });
     }
-    const sample = SAMPLE_GUNS.m4a1;
-    assert.deepEqual({ ...GUNS.mb4a1.stats, id: sample.id, name: sample.name }, sample);
-    assert.deepEqual(GUNS.mb4a1.handling, handlingOf('m4a1'));
+    const { id, name, ...stats } = GUNS.mb4a1.stats;
+    assert.deepEqual([id, name, stats], ['mb4a1', 'M4A1 模块步枪', SAMPLE_M4A1.stats]);
+    assert.deepEqual(GUNS.mb4a1.handling, SAMPLE_M4A1.handling);
     // GunHandling mirrors shooting.ts's Handling, which the rule module may not import: each type takes the other.
     const asHandling: Handling = GUNS.carbine.handling, asGun: GunHandling = handlingOf('carbine');
     assert.deepEqual(asHandling, asGun);
@@ -101,7 +110,7 @@ test('effect quotas follow the device names and the device effects', () => {
 });
 
 const FACTORS = ['hip', 'precise', 'raise', 'sway', 'bloom', 'kick', 'settle', 'recover', 'spread', 'range', 'reload'] as const;
-const FIELDS = new Set<string>([...FACTORS, 'magazine', 'weight', 'noise', 'grow', 'view', 'braced', 'laser', 'light', 'spot']);
+const FIELDS = new Set<string>([...FACTORS, 'magazine', 'weight', 'noise', 'suppressor', 'grow', 'view', 'braced', 'laser', 'light', 'spot']);
 /** The plan's per-attachment guardrails: the lowest factor allowed (40% better at most, handling time 65%, noise 40%). */
 const FLOOR: Partial<Record<keyof Factors, number>> = { hip: .6, precise: .6, sway: .6, bloom: .6, kick: .6, settle: .6, spread: .6, raise: .65, reload: .65 };
 
@@ -117,8 +126,11 @@ test('modifiers stay in the schema and inside the per-attachment guardrails; non
     for (const a of parts) {
         const m = a.mods;
         for (const key of Object.keys(m)) assert.ok(FIELDS.has(key), `${a.id}: unknown field ${key}`);
-        const { magazine, weight, noise, grow, view, braced, laser, light, spot, ...factors } = m;
+        const { magazine, weight, noise, suppressor, grow, view, braced, laser, light, spot, ...factors } = m;
         inside(a.id, factors);
+        // The suppressors, and only they, sound muffled (M2-11); each also cuts the hearing radius.
+        assert.equal(suppressor, /消音器/.test(a.name) ? true : undefined, `${a.id}: suppressor`);
+        if (suppressor) assert.ok(noise !== undefined && noise < 1, a.id);
         if (braced) { inside(a.id, braced); assert.equal(a.mount, 'bipod', a.id); }
         assert.equal(magazine !== undefined, a.cat === 'mag', a.id);
         if (magazine !== undefined) assert.ok(Number.isInteger(magazine) && magazine > 0, a.id);

@@ -1,0 +1,166 @@
+{
+  "checkedDate": "2026-10-28 +08:00",
+  "acceptedBaseline": "efe2bede6af0ed33fec065a26755e1f8ff7d0256",
+  "originalPrHead": "a169e7a5d5c984a74fb94291c4bbfa10d444fcfa",
+  "environment": {
+    "platform": "Windows",
+    "node": "v24.22.1",
+    "pnpm": "11.19.0",
+    "browser": "156.0.8078.48"
+  },
+  "method": "Offline file HTML. A synthetic blur pauses the raid; one capture listener drops D keyup. Recovery Escape and D use trusted Playwright keyboard events. Existing position/AI fixtures apply; time and movement rules are unchanged. Screenshots show the stopped frame; coordinate assertions establish the behavior.",
+  "limitations": [
+    "No physical-device or real OS window-switch certification.",
+    "Touch tests use browser emulation; legacy HTML compatibility is separately verified by CI."
+  ],
+  "sourceSha256": {
+    "src/coast-view/input.ts": "eec6db9a4791235b0a2f005b712bd0e16afd8dc3d1f799ea7296e9d37a7dfba4",
+    "src/coast-view/host.ts": "9cc857778bcddafc7e45a08e195dbdb3344cd4809e01490e3b044f7280ad8cf0",
+    "tests/input.test.ts": "85d462f4178b6a5c411ae16f7e3d50d48e983d49aa0bc0c82bcf432bda9c429c",
+    "scripts/desktop-input-test.mjs": "1fcb3acf88b96cf9714b0b25cce314ee538ebd78bd191409f601c3fca41cd9e4",
+    "scripts/loot-browser-test.mjs": "f242953724fa73f959950fdb2dd76762bdf25ebe1e22e49ec4c57c2bf56d79d1"
+  },
+  "artifactSha256": {
+    "dist/index.html": "e8018ec5b33679d81a5616286261ecf3dd117c59e32aed8f7726b3a06eacf3a1",
+    "release/Escape-Bincov-portable.zip": "67be81e54e6a585ba2da72f718cd0eec61ca151449467199d4306de961f63433",
+    "release/Escape-Bincov-web.zip": "4c1b28832d5f786ea105d6ad92d9a7561856163cf81adcf0f374864e1ae111fe"
+  },
+  "negativeControl": {
+    "baseline": "b5bd63b7896b3b0697d4ba38d02d000e78903047",
+    "htmlSha256": "cd6aed02e003c2eab97ab2705633476333cd13433f6142a2271fa230e8675708",
+    "unit": {
+      "passed": 12,
+      "failed": 1,
+      "failure": "First new W movement was 0 instead of -1."
+    },
+    "browser": "156.0.8078.48",
+    "failure": "Both first-D movement waits reached the unchanged 20000 ms timeout.",
+    "cases": [
+      {
+        "name": "first key after blur works when keyup was lost 1280x720",
+        "status": "failed",
+        "phase": "running",
+        "panel": null,
+        "x": 701.8592000026703,
+        "errors": 0,
+        "external": 0
+      },
+      {
+        "name": "first key after blur works when keyup was lost 1920x1080",
+        "status": "failed",
+        "phase": "running",
+        "panel": null,
+        "x": 701.8703999986649,
+        "errors": 0,
+        "external": 0
+      }
+    ]
+  },
+  "candidate": {
+    "startedAt": "2026-10-27T17:35:12.473Z",
+    "unit": {
+      "passed": 1022,
+      "failed": 0
+    },
+    "ciGuards": {
+      "passed": 77,
+      "failed": 0
+    },
+    "focusedInput": {
+      "passed": 13,
+      "failed": 0
+    },
+    "desktop": {
+      "passed": 12,
+      "failed": 0
+    },
+    "cases": [
+      {
+        "name": "first key after blur works when keyup was lost 1280x720",
+        "status": "passed",
+        "errors": [],
+        "requests": [],
+        "detail": {
+          "resumed": 701.7135999979973,
+          "firstPress": 718.7600000000002,
+          "stopped": 718.7600000000002
+        },
+        "stallResumes": 0
+      },
+      {
+        "name": "first key after blur works when keyup was lost 1920x1080",
+        "status": "passed",
+        "errors": [],
+        "requests": [],
+        "detail": {
+          "resumed": 702.0048000006676,
+          "firstPress": 718.7376000013352,
+          "stopped": 718.7376000013352
+        },
+        "stallResumes": 0
+      }
+    ]
+  },
+  "screenshots": [
+    "d8-first-key-1280x720.png",
+    "d8-first-key-1920x1080.png"
+  ],
+  "mergeCandidate": {
+    "acceptedBaseline": "3b61d52e898459f3e197584ae202285e7ade65e2",
+    "context": "After maintainer authorized review and merge, main #130 was merged normally. Original screenshots above remain the reviewed 9389ff9 evidence; this entry records the subsequent candidate.",
+    "artifactSha256": {
+      "dist/index.html": "f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb",
+      "release/Escape-Bincov-portable.zip": "66a0d6f2d3bdb72dbdca233d3c71fcae696d2ef69197b0f8c5696346d5d5cb6b",
+      "release/Escape-Bincov-web.zip": "cc311e1d76a0b04d6d7d9b86d060bfb6ca37d06e56010af1a6d83b423d33ae3a"
+    },
+    "sourceSha256": {
+      "src/coast-view/input.ts": "eec6db9a4791235b0a2f005b712bd0e16afd8dc3d1f799ea7296e9d37a7dfba4",
+      "src/coast-view/host.ts": "9cc857778bcddafc7e45a08e195dbdb3344cd4809e01490e3b044f7280ad8cf0",
+      "tests/input.test.ts": "85d462f4178b6a5c411ae16f7e3d50d48e983d49aa0bc0c82bcf432bda9c429c",
+      "scripts/desktop-input-test.mjs": "1fcb3acf88b96cf9714b0b25cce314ee538ebd78bd191409f601c3fca41cd9e4",
+      "scripts/loot-browser-test.mjs": "f242953724fa73f959950fdb2dd76762bdf25ebe1e22e49ec4c57c2bf56d79d1"
+    },
+    "unit": {
+      "passed": 1022,
+      "failed": 0
+    },
+    "ciGuards": {
+      "passed": 77,
+      "failed": 0
+    },
+    "package": "passed",
+    "desktop": {
+      "startedAt": "2026-10-27T17:58:58.080Z",
+      "browser": "156.0.8078.48",
+      "passed": 12,
+      "failed": 0,
+      "cases": [
+        {
+          "name": "first key after blur works when keyup was lost 1280x720",
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "detail": {
+            "resumed": 701.8704000020027,
+            "firstPress": 718.6928000040052,
+            "stopped": 718.6928000040052
+          },
+          "stallResumes": 0
+        },
+        {
+          "name": "first key after blur works when keyup was lost 1920x1080",
+          "status": "passed",
+          "errors": [],
+          "requests": [],
+          "detail": {
+            "resumed": 701.8704000020027,
+            "firstPress": 718.6591999993325,
+            "stopped": 718.6591999993325
+          },
+          "stallResumes": 0
+        }
+      ]
+    },
+    "finalCi": "See PR #107 exact-head checks; auto-merge is authorized only after required checks pass."
+  }
+}

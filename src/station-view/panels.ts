@@ -1,3 +1,4 @@
+import { attachmentLines, gunPartsLine, saleLines, saleValue } from '../gunsmith/item-facts';
 import * as D from '../domain';
 import { countyMapHtml, deploymentRegion, deploymentWorld, regionBriefHtml, type CountyArt } from './deploy-map';
 import type { Attribute, CartView, FacilityInfo, HideoutSnapshot, PerkBoard, RunWorld, TrainingProgress } from '../hideout-runtime/contract';
@@ -5,12 +6,13 @@ import { ATTRIBUTE_NAMES, PERK_UI, critContext, critView, perkPanel, perkWaiting
 import { RECIPES } from '../expansion-state';
 import { shopQuote, type ShopQuote, type ShopSource } from '../shop';
 import { itemArt } from './items';
+import { itemPicture } from '../art/item-images';
 import { gridHtml } from './grid';
 import { esc } from '../html';
 import { SUPPLY_IDS } from '../rpg';
 
 export const btn = (label: string, act: string, cls = '', extra = '') => `<button class="${cls}" data-act="${act}" ${extra}>${label}</button>`;
-const kindName: Record<D.ItemKind, string> = { weapon: '武器', ammo: '弹药', medical: '医疗用品', food: '食品', part: '零件', valuable: '贵重物资', quest: '任务物品', accessory: '饰品' };
+const kindName: Record<D.ItemKind, string> = { weapon: '武器', ammo: '弹药', medical: '医疗用品', food: '食品', part: '零件', valuable: '贵重物资', quest: '任务物品', accessory: '饰品', attachment: '配件' };
 const occupied = (inv: D.Inventory) => inv.items.reduce((n, i) => n + D.ITEMS[i.id].w * D.ITEMS[i.id].h, 0);
 const icon = (id: string, px = 32) => `<img class="ico" alt="" src="${itemArt(id)}" style="height:${px}px">`;
 const total = (s: HideoutSnapshot, id: string) => [s.profile.stash, s.profile.bag, s.profile.safe].reduce((n, inv) => n + D.count(inv, id), 0);
@@ -20,15 +22,24 @@ const total = (s: HideoutSnapshot, id: string) => [s.profile.stash, s.profile.ba
 const quoteText = (q: ShopQuote) => q.total === null ? '不可出售' : `${q.side === 'buy' ? '买入' : '卖出'} ¥ ${q.total}`;
 
 /** `uses` lists open quests that still need this item (shop mode); it joins the kind line so the height stays fixed. */
-export function detailsHtml(item: D.Item | null, source: string | null, mode: 'gear' | 'shop', uses: string[] = []) {
+/** `profile`: the base the details look at for the guns an attachment fits (#28 M2-08). */
+export function detailsHtml(item: D.Item | null, source: string | null, mode: 'gear' | 'shop', uses: string[] = [], profile: Readonly<D.SaveDataV1> | null = null) {
   if (!item) return `<aside class="details empty"><b>选中一件物品</b><span>单击查看${mode === 'gear' ? ' · 拖动整理 · 双击在仓库与背包间转移 · 拖动时按 R 旋转' : ' · 双击加入或放回 · 拖到待买或待卖，再统一结算'}</span></aside>`;
   const d = D.ITEMS[item.id], size = D.itemSize(item);
   const quote = mode === 'shop' ? shopQuote(source as ShopSource, item) : null;
   const usesText = uses.length ? ` · 任务用途：${esc(uses.join('、'))}` : '';
-  const price = quote ? `<dt>${quote.side === 'buy' ? '买入' : '卖出'}</dt><dd>${quote.total === null ? '不可出售' : `¥ ${quote.total}`}</dd>` : `<dt>售价</dt><dd>${item.relief ? '—' : `¥ ${d.sell * item.qty}`}</dd>`;
-  const gun = D.WEAPONS[item.id] && item.id !== 'knife';
+  // A gun sells as its body and parts (itemSale), never at the factory price (#28 M2-08).
+  const sale = saleValue(item);
+  const price = quote ? `<dt>${quote.side === 'buy' ? '买入' : '卖出'}</dt><dd>${quote.total === null ? '不可出售' : `¥ ${quote.total}`}</dd>` : `<dt>售价</dt><dd>${sale.value === null ? item.relief ? '—' : esc(sale.note ?? '') : `¥ ${sale.value}`}</dd>`;
+  const gun = D.isGun(item.id), parts = gunPartsLine(item), lines = saleLines(item);
+  // An attachment's maker, the guns it fits and which gun at the base takes it; a gun's parts; selling, each part's price.
+  // Selling a gun with parts: its composition on one line (the details keep a fixed height), in place of the parts line.
+  const selling = quote?.side === 'sell' && lines ? `出售构成：${lines.join(' · ')}` : null;
+  const maker = [...attachmentLines(profile, item.id), ...selling ? [] : parts ? [parts] : []].map(l => `<span class="dmaker">${esc(l)}</span>`).join('')
+    + (selling ? `<span class="dmaker dsale" title="${esc(selling)}">${esc(selling)}</span>` : '');
   const acts = mode === 'gear' ? [
     gun && source !== 'safe' ? btn('装备主武器', 'equip', 'primary') : '',
+    gun ? btn('改装', 'gunsmith') : '',
     d.kind === 'accessory' ? btn('佩戴', 'charm-equip', 'primary') : '',
     SUPPLY_IDS.includes(item.id) ? btn('使用', 'use') : '',
     source === 'stash' ? btn('放入背包', 'quick') : btn('放入仓库', 'quick'),
@@ -36,7 +47,7 @@ export function detailsHtml(item: D.Item | null, source: string | null, mode: 'g
     d.w !== d.h ? btn('旋转', 'rotate') : '',
     item.qty > 1 ? btn('拆分一半', 'split') : '',
   ].join('') : '';
-  return `<aside class="details"><img class="dico" alt="" src="${itemArt(item.id)}"><div class="dtext"><small${usesText ? ` title="${usesText.slice(3)}"` : ''}>${kindName[d.kind]}${item.relief ? ' · 救济 · 不可出售' : ''}${usesText}</small><b>${esc(d.name)}${item.qty > 1 ? ` × ${item.qty}` : ''}</b><span>${esc(d.description)}</span></div><dl><div><dt>占用</dt><dd>${size.w} × ${size.h}</dd></div><div><dt>重量</dt><dd>${D.itemWeight(item).toFixed(2)} kg</dd></div><div>${price}</div></dl><div class="dacts">${acts}</div>${mode === 'gear' && gun && source === 'safe' ? '<p class="equip-note">安全箱里的枪械请先移回背包，再装备主武器。</p>' : ''}</aside>`;
+  return `<aside class="details"><img class="dico" alt="" src="${itemPicture(item, 999, 999).url}"><div class="dtext"><small${usesText ? ` title="${usesText.slice(3)}"` : ''}>${kindName[d.kind]}${item.relief ? ' · 救济 · 不可出售' : ''}${usesText}</small><b>${esc(d.name)}${item.qty > 1 ? ` × ${item.qty}` : ''}</b><span>${esc(d.description)}</span>${maker}</div><dl><div><dt>占用</dt><dd>${size.w} × ${size.h}</dd></div><div><dt>重量</dt><dd>${D.itemWeight(item).toFixed(2)} kg</dd></div><div>${price}</div></dl><div class="dacts">${acts}</div>${mode === 'gear' && gun && source === 'safe' ? '<p class="equip-note">安全箱里的枪械请先移回背包，再装备主武器。</p>' : ''}</aside>`;
 }
 
 const charmRow = (charm: string | null) => charm ? `<div class="charm">${icon(charm, 20)}<span>护符 · ${esc(D.ITEMS[charm]?.name ?? charm)}</span>${btn('取下', 'charm-unequip', 'mini')}</div>` : '';
@@ -50,9 +61,9 @@ export function gearHtml(s: HideoutSnapshot, cell: number, selected: string | nu
     <section class="col left" style="width:${p.bag.w * cell}px">
       <h3><i>01</i>主武器槽</h3>
       <div class="slot ${e.weapon ? '' : 'emptyslot'}" data-slot="weapon" aria-label="主武器槽" title="把仓库或背包里的枪拖到这里装备">
-        <img alt="" src="${itemArt(e.weapon || 'knife')}" style="height:${Math.round(cell * .6)}px"><div><b>${esc(w.name)}</b>
+        <img alt="" src="${itemPicture({ id: e.weapon || 'knife', gun: e.gun }, 999, 999).url}" style="height:${Math.round(cell * .6)}px"><div><b>${esc(w.name)}</b>
         <span>${e.weapon ? `弹匣 ${e.ammo} / ${w.magazine}${e.relief ? ' · 救济' : ''} · 背包备用 ${w.ammo ? `${ammo} 发` : '—'}` : '随身匕首 · 始终保留 · 把枪拖到这里装备'}</span></div>
-        ${e.weapon ? btn('卸下', 'unequip', 'mini') : ''}
+        ${e.weapon ? `<span class="slot-acts">${btn('改装', `gunsmith:${e.weaponUid}`, 'mini')}${btn('卸下', 'unequip', 'mini')}</span>` : ''}
       </div>${charmRow(s.charm?.id ?? null)}
       <h3><i>02</i>背包 <small>${occupied(p.bag)} / ${p.bag.w * p.bag.h} 格</small></h3>${gridHtml(p.bag, 'bag', cell, selected, { empty: '背包是空的' })}
       <div class="meter ${over ? 'over' : ''}"><span>携行重量 <small>含装备与安全箱</small></span><b>${departure.weight.toFixed(1)} <small>/ ${departure.carry.toFixed(1)} kg</small></b><i style="width:${Math.min(100, departure.weight / departure.carry * 100)}%"></i></div>
@@ -74,7 +85,7 @@ export function gearCompactHtml(s: HideoutSnapshot, cell: number, selected: stri
   const inv = paneB === 'stash' ? p.stash : p.safe;
   return `<div class="cgear">${gearActions(p)}
     <p class="gear-hint">主武器槽 · 选中枪械后点「装备主武器」</p>
-    <div class="cbar"><div class="slot chip ${e.weapon ? '' : 'emptyslot'}" data-slot="weapon" aria-label="主武器槽" title="把仓库或背包里的枪拖到这里装备"><img alt="" src="${itemArt(e.weapon || 'knife')}"><b>${esc(w.name)}</b><span>${e.weapon ? `${e.ammo} / ${w.magazine}${w.ammo ? ` · 备用 ${ammo}` : ''}` : '拖枪到这里装备'}</span>${e.weapon ? btn('卸下', 'unequip', 'mini') : ''}</div>
+    <div class="cbar"><div class="slot chip ${e.weapon ? '' : 'emptyslot'}" data-slot="weapon" aria-label="主武器槽" title="把仓库或背包里的枪拖到这里装备"><img alt="" src="${itemPicture({ id: e.weapon || 'knife', gun: e.gun }, 999, 999).url}"><b>${esc(w.name)}</b><span>${e.weapon ? `${e.ammo} / ${w.magazine}${w.ammo ? ` · 备用 ${ammo}` : ''}` : '拖枪到这里装备'}</span>${e.weapon ? `<span class="slot-acts">${btn('改装', `gunsmith:${e.weaponUid}`, 'mini')}${btn('卸下', 'unequip', 'mini')}</span>` : ''}</div>
       <div class="cweight ${over ? 'over' : ''}">携行 <b>${departure.weight.toFixed(1)}</b> / ${departure.carry.toFixed(1)} kg</div></div>${charmRow(s.charm?.id ?? null)}
     <div class="panes">
       <section class="pane"><h3>背包 <small>${occupied(p.bag)} / ${p.bag.w * p.bag.h}</small></h3><div class="pane-scroll">${gridHtml(p.bag, 'bag', cell, selected, { empty: '背包是空的' })}</div></section>
@@ -99,15 +110,29 @@ export function shopCompactHtml(c: CartView, cell: number, sel: { src: string; u
   return `<div class="cshop">
     <nav class="seg tabs2">${btn(`买入 <small>${c.buy.items.length} 件 · ¥ ${c.totals.buy}</small>`, 'mode:buy', mode === 'buy' ? 'on' : '')}${btn(`卖出 <small>${c.sell.items.length} 件 · ¥ ${c.totals.sell}</small>`, 'mode:sell', mode === 'sell' ? 'on' : '')}</nav>
     <div class="panes">
-      <section class="pane"><h3>${a[0]} <small>${picked(a[1], a[2]) ?? (mode === 'buy' ? '按包购买' : stashNote(outside))}</small></h3><div class="pane-scroll">${gridHtml(a[1], a[2], cell, selected)}</div></section>
+      <section class="pane"><h3>${a[0]} <small>${picked(a[1], a[2]) ?? (mode === 'buy' ? '按包购买' : stashNote(outside))}</small></h3>${mode === 'buy' ? browseBar(c) : ''}<div class="pane-scroll">${gridHtml(a[1], a[2], cell, selected, mode === 'buy' ? { empty: '没有符合条件的商品' } : {})}</div></section>
       <section class="pane"><h3>${b[0]} <small>${picked(b[1], b[2]) ?? `¥ ${mode === 'buy' ? c.totals.buy : c.totals.sell}${mode === 'buy' ? ` · ${checkoutNote}` : ''}`}</small></h3><div class="pane-scroll">${gridHtml(b[1], b[2], cell, selected, { empty: '拖到这里' })}</div></section>
     </div>
     <footer class="checkout compact"><div class="sum"><b class="${c.totals.net > cash ? 'bad' : ''}">${c.totals.net >= 0 ? `支出 ¥ ${c.totals.net}` : `收入 ¥ ${-c.totals.net}`}</b><small>结算后 ¥ ${(cash - c.totals.net).toLocaleString()}</small></div>${c.stale ? '<p class="warn">仓库已改变，请刷新清单后重新选择物品。</p>' : ''}${c.warnings.length ? `<p class="warn">${c.warnings.map(esc).join('<br>')}</p>` : ''}<div class="acts">${btn(c.stale ? '刷新清单' : '清空', 'cart-reset', 'mini', c.dirty || c.stale ? '' : 'disabled')}${btn('结算', 'cart-settle', 'primary', c.dirty && !c.stale ? '' : 'disabled')}</div></footer></div>`;
 }
 
+/** Short category names for the catalog's buttons. */
+const BROWSE_NAMES: Partial<Record<D.ItemKind, string>> = { weapon: '枪械', ammo: '弹药', part: '零件', attachment: '配件', medical: '医疗', food: '食品', valuable: '贵重', accessory: '饰品', quest: '任务' };
+/**
+ * The catalog's filter (#28 M2-08): all or one kind of the stock, only what fits the base's guns (when the stock has
+ * attachments), and the pages when there is more than one.
+ */
+function browseBar(c: CartView) {
+  const b = c.browse, kinds = ['all', ...b.kinds] as const;
+  if (b.kinds.length < 2 && b.pages < 2) return '';
+  const chips = kinds.map(k => btn(k === 'all' ? '全部' : BROWSE_NAMES[k] ?? k, `browse-kind:${k}`, k === b.kind ? 'on' : '', `aria-pressed="${k === b.kind}"`)).join('');
+  const fits = b.kinds.includes('attachment') ? btn('只看适配我的枪', 'browse-fits', b.fits ? 'on' : '', `aria-pressed="${b.fits}"`) : '';
+  const pager = b.pages > 1 ? `${btn('←', `browse-page:${b.page - 1}`, '', b.page ? 'aria-label="上一页"' : 'disabled aria-label="上一页"')}<small>${b.page + 1} / ${b.pages}</small>${btn('→', `browse-page:${b.page + 1}`, '', b.page < b.pages - 1 ? 'aria-label="下一页"' : 'disabled aria-label="下一页"')}` : '';
+  return `<nav class="seg browse" aria-label="商品分类">${chips}${fits}${pager}</nav>`;
+}
 export function shopHtml(c: CartView, cell: number, selected: string | null, cash: number, outside = 0) {
   return `<div class="shop">
-    <section><h3>商人物品 <small>按包购买</small></h3>${gridHtml(c.catalog, 'merchant', cell, selected)}</section>
+    <section><h3>商人物品 <small>按包购买</small></h3>${browseBar(c)}${gridHtml(c.catalog, 'merchant', cell, selected, { empty: '没有符合条件的商品' })}</section>
     <section class="buffer"><h3>待买 <small>¥ ${c.totals.buy}</small></h3>${gridHtml(c.buy, 'buy', cell, selected, { empty: '拖到这里' })}<h3>待卖 <small>¥ ${c.totals.sell}</small></h3>${gridHtml(c.sell, 'sell', cell, selected, { empty: '拖到这里' })}</section>
     <section><h3>仓库 <small>${stashNote(outside)}</small></h3>${gridHtml(c.stash, 'stash', cell, selected)}</section>
   </div>
@@ -169,6 +194,8 @@ export function trainingHint(t: TrainingProgress): string {
   return '在训练区实际走动，每五秒保存。';
 }
 export const trainingSeconds = (t: TrainingProgress) => `已保存 ${t.saved.activeSeconds.toFixed(1)} 秒 · 待保存 ${t.pendingSeconds.toFixed(1)} 秒`;
+/** The workbench's gunsmith entry (#28 M2-05): open at any workbench level, the bench needs no building (M0 decision 5). */
+export const benchEntryHtml = () => `<div class="bench-entry"><div><b>改枪工作台</b><span>改装装备中和仓库、背包、安全箱里的枪。不用先修建工作台。</span></div>${btn('打开改枪', 'gunsmith', 'primary')}</div>`;
 export function facilityHtml(f: FacilityInfo, s: HideoutSnapshot, training: TrainingProgress) {
   const pips = Array.from({ length: f.maxLevel }, (_, i) => `<i class="${i < f.level ? 'on' : ''}"></i>`).join('');
   const short = f.cost ? s.profile.cash < f.cost.cash || f.cost.items.some(i => i.have < i.qty) : false;
@@ -240,7 +267,7 @@ export function helpHtml(touch: boolean) {
 /** `resetCopy`: a pre-reset copy is stored locally, so the menu also offers to restore it. */
 export function menuHtml(volume: number, resetCopy = false) {
   return `<div class="menu">${btn('继续', 'close', 'primary wide')}<label class="vol">游戏音量 <b id="volv">${Math.round(volume * 100)}%</b><input id="vol" type="range" min="0" max="1" step="0.05" value="${volume}" aria-label="游戏音量"></label>${btn('操作说明', 'help', 'wide')}${btn('切换到旧版页签', 'tabs', 'wide')}
-  <h4>本地存档</h4><p class="muted">更换浏览器或游玩地址前，请先导出备份。</p><div class="seg">${btn('导出存档', 'export')}${btn('导入存档', 'import')}</div><input id="backup-file" type="file" accept=".json,application/json" hidden>
+  <h4>本地存档</h4><p class="muted">更换浏览器或游玩地址前，请先导出备份。</p><div class="seg">${btn('导出存档', 'export')}${btn('导入存档', 'import')}</div>
   ${btn('清空存档，重新开始', 'reset', 'danger wide')}${resetCopy ? btn('恢复清空前的存档', 'reset-restore', 'wide') : ''}
   ${btn('返回主菜单', 'title', 'wide')}</div>`;
 }
@@ -255,6 +282,7 @@ export function resetConfirmHtml() {
  * perk change whose write failed: the Runtime keeps it, and only the retry writes it (once).
  */
 export function storageHtml(s: HideoutSnapshot, pending = '') {
+  if (s.storage.reloadRequired && !s.storage.conflict) return `<div class="storage"><p>进度已写入存档，但当前页面恢复失败。请导出备份后刷新页面；本页不会再次写入。</p><div class="acts">${btn('导出存档', 'export')}${btn('刷新页面', 'reload')}</div></div>`;
   const conflict = s.storage.conflict;
   return `<div class="storage"><p>${conflict ? '另一个窗口已经接管了存档，本页不能再写入。请先导出需要保留的进度，再刷新本页。' : pending ? esc(perkWaiting(pending)) : '最近一次操作没能写入浏览器存档，已经回滚；训练和基地进度还保留在本页，重试成功前不会丢失。'}</p>
   <div class="acts">${conflict ? '' : btn('重试保存', 'retry-save', 'primary')}${btn('导出存档', 'export')}${conflict ? btn('刷新页面', 'reload') : ''}</div>

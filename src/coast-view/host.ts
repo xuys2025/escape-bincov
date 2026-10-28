@@ -8,6 +8,7 @@
  * transition suppresses held controls until they are released. Item and save operations go only through the Runtime
  * services, or through SaveSession.mutate for plain bag/safe edits (the original inventory entry point).
  */
+import { gunsmithArt } from '../art/gunsmith-hooks';
 import type { Application } from 'pixi.js';
 import * as D from '../domain';
 import { exitBearing, questProgress } from '../qol';
@@ -19,12 +20,11 @@ import { actorShown } from './structure-guide';
 import { InputState, inputKey, isMoveKey } from './input';
 import { InventoryPanel } from './inventory';
 import { drawMap, mapPanelHtml, type MapLayout } from './map';
-import { Scope, lifecycle } from './scope';
+import { Scope, lifecycle } from '../view-lifecycle/scope';
 import { ITEM_ART_IDS, paintItem, type ItemArtId } from '../art/items';
 import { audio } from '../app';
 import { parkApp, takeApp } from '../pixi-app';
 import { SampleSound } from './sound';
-import { playtestMarks } from '../shooting';
 import { esc } from '../html';
 
 export type SampleExit = { kind: 'settled' };
@@ -32,7 +32,7 @@ type Panel = null | 'pause' | 'inventory' | 'loot' | 'map' | 'reading' | 'ending
 
 const REASONS: Record<string, string> = {
   'stale-target': '目标已失效，请重新靠近。', 'stale-or-blocked': '现在无法交互。', 'out-of-range': '离目标过远。',
-  rejected: '操作未完成，请检查空间与条件。', blocked: '现在无法操作。', 'save-failed': '存档保存失败，状态已恢复到操作前。',
+  rejected: '操作未完成，请检查空间与条件。', blocked: '现在无法操作。', 'save-failed': '存档保存失败，状态已恢复到操作前。', 'publish-failed': '进度已保存，但当前页面恢复失败。请导出备份后刷新页面。',
 };
 /** A storage error arrives as the browser's own (translated) message; any other unknown code gets a plain sentence. */
 const reasonText = (reason: string) => REASONS[reason] ?? (/[\u4e00-\u9fff]/.test(reason) ? reason : '操作未完成。');
@@ -54,15 +54,18 @@ const DRAIN: Record<Drain, { label: string; tint: string }> = {
 const ease = (t: number) => t * t * (3 - 2 * t);
 const weaponIcons = new Map<string, string>();
 /**
- * The game's own 32 px item drawing of the held weapon, shown at 2x in the weapon card. The sample rifle (PR #39) has
- * no item art of its own; its caller passes the carbine's.
+ * The game's own 32 px item drawing of the held weapon, shown at 2x in the weapon card. Every gun is an item with art.
+ * The gunsmith guns show their whole side view instead (the held picture without hands, centred), since their square
+ * icons are close-ups that do not read on the card (#28 M2-10, maintainer 2026-10-27).
  */
 function weaponIcon(id: string): string {
   let url = weaponIcons.get(id);
   if (!url) {
     const c = document.createElement('canvas'); c.width = c.height = 32;
     const g = c.getContext('2d')!; g.imageSmoothingEnabled = false;
-    if ((ITEM_ART_IDS as readonly string[]).includes(id)) paintItem(g, id as ItemArtId, 32);
+    const side = gunsmithArt?.side(id);
+    if (side) g.drawImage(side, Math.floor((32 - side.width) / 2), Math.floor((32 - side.height) / 2));
+    else if ((ITEM_ART_IDS as readonly string[]).includes(id)) paintItem(g, id as ItemArtId, 32);
     url = c.toDataURL(); weaponIcons.set(id, url);
   }
   return url;
@@ -86,6 +89,7 @@ const HTML = `
   </section>
   <section class="cs-clock"><b data-time></b><small data-tide></small></section>
   <section class="cs-arms" data-weapon><img data-weapon-icon alt="" width="64" height="64"><div class="cs-arms-text"><span data-weapon-name></span><b data-mag></b><small><span data-reserve></span> <em data-mode></em></small></div><div class="cs-heal"><kbd>Q</kbd>医疗 <b data-heals></b></div>
+    <div class="cs-dev" data-devices hidden></div>
     <div class="cs-crit" data-crit hidden><div><span data-crit-label></span><b data-crit-chance></b><em data-crit-target aria-hidden="true"></em></div><div class="cs-breath" data-breath hidden aria-hidden="true"><span data-breath-label></span><i><b data-breath-bar></b></i><small data-breath-time></small></div></div></section>
   <div data-radio class="cs-radio" hidden></div>
   <section class="cs-info">
@@ -103,7 +107,7 @@ const HTML = `
   <div data-hitpop class="cs-hitpop" aria-hidden="true"><b><i></i><i></i><i></i><i></i></b></div>
   <div data-fade class="cs-fade"></div>
   <div data-curtain class="cs-curtain" aria-live="assertive"><b data-curtain-text></b></div>
-  <div class="cs-touch"><button type="button" data-bag>背包</button><button type="button" data-do="map">地图</button><button type="button" data-heal>治疗</button><button type="button" data-reload>换弹</button><button type="button" data-swap aria-label="切换武器">匕首</button><button type="button" data-act>交互</button><button type="button" data-pause aria-label="暂停">暂停</button></div>
+  <div class="cs-touch"><button type="button" data-bag>背包</button><button type="button" data-do="map">地图</button><button type="button" data-heal>治疗</button><button type="button" data-reload>换弹</button><button type="button" data-swap aria-label="切换武器">匕首</button><button type="button" data-device aria-pressed="false" hidden>设备</button><button type="button" data-act>交互</button><button type="button" data-pause aria-label="暂停">暂停</button></div>
 </div>
 <section class="cs-panel" data-panel hidden role="dialog" aria-modal="true"></section>`;
 
@@ -140,7 +144,7 @@ export class CoastSampleHost {
 
   constructor(readonly handle: CoastHandle, private session: SessionState, private saves: SaveSession, readonly opts: ViewOptions,
     private onExit: (o: SampleExit) => void, private exportBackup: () => void) {
-    this.sound = new SampleSound(audio);
+    this.sound = new SampleSound(audio, () => this.opts.feel ?? 'enhanced');
   }
 
   get runtime() { return this.handle.runtime; }
@@ -161,7 +165,7 @@ export class CoastSampleHost {
       this.view.onRebuild = () => this.fade();
       this.input.touch = document.documentElement.classList.contains('mobile') || matchMedia('(pointer: coarse)').matches && !matchMedia('(any-pointer: fine)').matches;
       this.inv = new InventoryPanel(this.q('[data-panel]'), {
-        session: this.session, saves: this.saves, services: this.services,
+        services: this.services,
         lootRef: () => this.lootRef(), touch: () => this.input.touch, toast: (t, bad) => this.toast(t, bad),
         saveFailed: () => { if (!this.services.checkpoint()) this.lastRejected = 'checkpoint'; },
         close: () => this.closePanel(true),
@@ -175,8 +179,6 @@ export class CoastSampleHost {
       // Follow the original phone-layout decision (main.ts toggles html.mobile on resize).
       const ro = new ResizeObserver(() => { if (!this.contextLost) this.view.resize(); if (document.documentElement.classList.contains('mobile')) this.input.touch = true; this.measureSafe(); this.measureHudTop(); this.orientation(); });
       this.scope.observe(ro); ro.observe(this.root);
-      const marks = playtestMarks(location.search);
-      if (marks.gun) this.services.sampleGun(marks.gun);
       this.mounted = true;
     } catch (error) { this.unmount(); throw error; }
   }
@@ -352,7 +354,7 @@ export class CoastSampleHost {
     if (phase === 'running' && this.blockPending > 0) { this.blockPending--; return; }
     this.blockPending = 0;
     if (phase !== 'blocked' && (this.panel === 'loot' || this.panel === 'inventory' || this.panel === 'map' || this.panel === 'reading')) this.closePanel(false);
-    if (phase === 'paused' && this.panel !== 'pause') this.showPause();
+    if (phase === 'paused' && (this.panel !== 'pause' || this.pauseStorageKey !== this.storagePanelKey)) this.showPause();
     if (this.panel === 'pause' && phase === 'running') this.closePanel(false);
     if (this.panel === 'map' && (this.stats.frames & 7) === 0) this.redrawMap();
   }
@@ -376,11 +378,12 @@ export class CoastSampleHost {
       // shortcuts do not count; a Shift pressed in the window makes the walk a sprint, as it would outside.
       if (this.panel === 'loot' && isMoveKey(inputKey(e)) && !e.ctrlKey && !e.altKey && !e.metaKey) {
         this.closePanel(true);
-        if (e.shiftKey) this.input.key('shift', true);
+        // This is a held modifier observation, not a fresh Shift press: do not revive a Shift suppressed on entry.
+        if (e.shiftKey) this.input.key('shift', true, true);
       }
       if (k === 'm') { if (this.panel === 'map') this.closePanel(true); else if (!this.panel || this.blocking()) { if (this.panel) this.closePanel(true); this.openMap(); } return; }
       if (this.panel) return;
-      this.input.key(inputKey(e), true);
+      this.input.key(inputKey(e), true, e.repeat);
     });
     s.on(window, 'keyup', e => this.input.key(inputKey(e), false));
     s.on(canvas, 'contextmenu', e => e.preventDefault());
@@ -430,6 +433,13 @@ export class CoastSampleHost {
     s.on(this.q('[data-heal]'), 'pointerdown', e => { e.preventDefault(); this.input.press('heal'); });
     // Touch has no 1 / 2 keys: one button switches between the primary weapon and the knife, labelled with the other one.
     s.on(this.q('[data-swap]'), 'pointerdown', e => { e.preventDefault(); this.input.press(this.weaponShown === 'knife' ? 'primary' : 'knife'); });
+    // Touch has no F / G: one 设备 button switches the gun's devices together (#28 M2-03). With any on it turns those
+    // off, otherwise it turns every one on, each by its own part's switch (a combiner is one part, named by its laser).
+    s.on(this.q('[data-device]'), 'pointerdown', e => {
+      e.preventDefault();
+      const parts = this.last?.frame.hud.devices?.parts ?? [], any = parts.some(p => p.on);
+      for (const p of parts) if (p.on === any) this.input.press(p.laser ? 'laser' : 'light');
+    });
     s.on(this.q('[data-bag]'), 'click', () => { if (!this.panel) this.openInventory(); else if (this.panel === 'inventory') this.closePanel(true); });
     s.on(this.q('[data-choices]'), 'click', e => {
       const el = e.target as HTMLElement, w = this.last?.stamp.world; if (!w || this.panel) return;
@@ -493,18 +503,24 @@ export class CoastSampleHost {
    *  a touchscreen laptop in a tall window plays on. */
   private upright() { return document.documentElement.classList.contains('mobile') && (innerWidth < innerHeight || innerHeight < 280); }
   private guideOpen = false;
+  private pauseStorageKey = '';
+  private get storagePanelKey() { return this.session.conflict ? 'conflict' : this.session.storageFailure ?? (this.session.storageOK ? '' : 'storage'); }
   private showPause(reason?: string) {
+    this.pauseStorageKey = this.storagePanelKey;
     this.guideOpen = false;
     if (this.contextLost) reason = 'context-lost';
+    const publication = this.session.storageFailure === 'publish';
     const conflict = this.session.conflict, saveError = !this.session.storageOK || this.lastRejected === 'checkpoint' || this.lastRejected === 'save-failed';
     const rotate = !conflict && !saveError && !this.contextLost && this.upright();
     this.pausedUpright = rotate;
-    const title = conflict ? '存档已被其他窗口更新' : saveError ? '存档保存失败' : reason === 'context-lost' ? '画面中断' : rotate ? '横过来，准备出发。' : '已暂停';
+    const title = conflict ? '存档已被其他窗口更新' : publication ? '进度已保存，请刷新页面' : saveError ? '存档保存失败' : reason === 'context-lost' ? '画面中断' : rotate ? '横过来，准备出发。' : '已暂停';
     const text = conflict ? '本页已停止操作。请导出需要保留的进度，再刷新本页。'
+      : publication ? '进度已写入存档，但当前页面恢复失败。请导出备份后刷新页面；本页不会再次写入。'
       : saveError ? '最近的操作或检查点没有写入，世界已保持在保存前的状态。检查浏览器存储后重试，或先导出备份。'
       : reason === 'context-lost' ? '图形上下文丢失，行动已暂停。画面恢复后可继续，也可导出备份。'
       : rotate ? '横屏能看清街道，也能同时移动和瞄准。转回横屏后，点「继续」回到行动。' : '行动时间已停止。';
     const buttons = conflict ? `<button type="button" data-do="backup">导出备份</button>`
+      : publication ? `<button type="button" data-do="backup">导出备份</button><button type="button" data-do="reload">刷新页面</button>`
       : saveError ? `<button type="button" data-do="retry-save">重试保存</button><button type="button" data-do="backup">导出备份</button>`
       : `<button type="button" data-do="resume" ${this.contextLost || rotate ? 'disabled' : ''}>继续</button><button type="button" data-do="guide">行动指南</button><button type="button" data-do="backup">导出备份</button><button type="button" data-do="abandon">放弃行动</button>`;
     this.input.suppressHeld(); this.sticks.clear();
@@ -527,9 +543,9 @@ export class CoastSampleHost {
   }
   /** Controls for this device, the guide the original pause offered. */
   private showGuide() {
-    const keys: [string, string][] = [['W A S D', '移动 / 离开搜刮'], ['鼠标', '瞄准'], ['左键 / 右键', '攻击 / 精瞄'], ['Shift', '冲刺'], ['R', '换弹'], ['E', '交互 / 搜刮 / 阅读'], ['按住 E 3 秒', '撤离（绿色标记内）'], ['滚轮', '切换搜刮目标'], ['Q', '快捷治疗'], ['Tab', '背包（不暂停）'], ['M', '地图（不暂停）'], ['1 / 2', '主武器 / 匕首'], ['Esc', '暂停 / 关闭面板']];
+    const keys: [string, string][] = [['W A S D', '移动 / 离开搜刮'], ['鼠标', '瞄准'], ['左键 / 右键', '攻击 / 精瞄'], ['Shift', '冲刺'], ['R', '换弹'], ['E', '交互 / 搜刮 / 阅读'], ['按住 E 3 秒', '撤离（绿色标记内）'], ['滚轮', '切换搜刮目标'], ['Q', '快捷治疗'], ['Tab', '背包（不暂停）'], ['M', '地图（不暂停）'], ['1 / 2', '主武器 / 匕首'], ['F / G', '开关枪上的灯光 / 激光'], ['Esc', '暂停 / 关闭面板']];
     const body = this.input.touch
-      ? '<p>左半屏按住拖动是移动，拖远冲刺；右半屏按住拖动是瞄准，拖远持续开火，松开即停。靠近物资点「搜刮」或「拾取」；几个箱子重叠时，点名称直接打开那一个。在撤离区站稳，按住「按住撤离」3 秒。背包和地图不暂停行动。</p>'
+      ? '<p>左半屏按住拖动是移动，拖远冲刺；右半屏按住拖动是瞄准，拖远持续开火，松开即停。靠近物资点「搜刮」或「拾取」；几个箱子重叠时，点名称直接打开那一个。在撤离区站稳，按住「按住撤离」3 秒。枪上装了激光或灯光时，点「设备」开关。背包和地图不暂停行动。</p>'
       : `<div class="cs-guide">${keys.map(([k, v]) => `<div><kbd>${k}</kbd>${v}</div>`).join('')}</div>`;
     this.guideOpen = true;
     this.setPanel('pause', `<h2>行动指南</h2>${body}<p class="cs-sub">每局限时 10 分钟。死亡、超时或放弃都按撤离失败处理：丢失背包物资和主武器，保留安全箱内的物品和水手匕首。</p><div class="cs-row"><button type="button" data-do="pause-back">返回</button></div>`, '行动指南');
@@ -595,6 +611,7 @@ export class CoastSampleHost {
       case 'abandon-yes': this.services.abandon(); break;
       // A successful retry resumes the Runtime. Held upright or with the picture lost, the raid pauses again at once (the
       // guard resume() keeps) and the panel turns into the rotate or context-lost notice; 继续 comes back with landscape.
+      case 'reload': location.reload(); break;
       case 'retry-save':
         if (this.services.retrySave()) {
           this.lastRejected = ''; this.toast('已保存。');
@@ -621,7 +638,8 @@ export class CoastSampleHost {
     // The reason exists as soon as the settlement is prepared and survives a failed write, so the pending and retry
     // panels already say which ending is being saved.
     const kind: Outro = OUTRO_OF[s.reason ?? ''] ?? 'failed';
-    const title = this.q('[data-ending-title]'); if (title) title.textContent = s.reason ? `${OUTRO_TEXT[kind]} · 正在保存结算` : '正在保存结算';
+    const publication = this.session.storageFailure === 'publish';
+    const title = this.q('[data-ending-title]'); if (title) title.textContent = publication && !this.session.conflict ? '结算已保存，请刷新页面' : s.reason ? `${OUTRO_TEXT[kind]} · 正在保存结算` : '正在保存结算';
     if (s.committed) {
       if (this.exiting) return;
       this.exiting = true;
@@ -639,10 +657,10 @@ export class CoastSampleHost {
       this.scope.timeout(() => this.onExit({ kind: 'settled' }), hold);
       return;
     }
-    text.textContent = s.retryable ? '结算还没有写入存档。结算记录已保留，可以重试或先导出备份。'
+    text.textContent = publication && !this.session.conflict ? '结算已保存，但当前页面恢复失败。请导出备份后刷新页面。' : s.retryable ? '结算还没有写入存档。结算记录已保留，可以重试或先导出备份。'
       : this.session.conflict ? '另一个窗口已更新存档，本页不能再写入。结算记录已保留，请先导出备份。' : '等待结算保存';
     // Another window's newer save must not be overwritten: no retry then, but the pending result stays exportable.
-    const want = `${s.retryable ? '<button type="button" data-do="retry-settlement">重试保存</button>' : ''}${s.retryable || this.session.conflict ? '<button type="button" data-do="backup">导出备份</button>' : ''}`;
+    const want = `${s.retryable ? '<button type="button" data-do="retry-settlement">重试保存</button>' : ''}${s.retryable || this.session.conflict || publication ? '<button type="button" data-do="backup">导出备份</button>' : ''}${publication ? '<button type="button" data-do="reload">刷新页面</button>' : ''}`;
     if (row.dataset.buttons !== want) { row.dataset.buttons = want; row.innerHTML = want; }
   }
 
@@ -653,7 +671,7 @@ export class CoastSampleHost {
     q('[data-hp]').style.width = `${Math.max(0, h.hp / h.maxHp) * 100}%`; q('[data-hp-text]').textContent = `${Math.ceil(h.hp)} / ${h.maxHp}`;
     q('[data-st]').style.width = `${Math.max(0, h.stamina / h.maxStamina) * 100}%`; q('[data-st-text]').textContent = `${Math.round(h.stamina)}`;
     const w = h.weapon;
-    if (w.id !== this.weaponShown) { this.weaponShown = w.id; q<HTMLImageElement>('[data-weapon-icon]').src = weaponIcon(w.id === 'm4a1' ? 'carbine' : w.id); q('[data-weapon-name]').textContent = w.name; q('[data-swap]').textContent = w.id === 'knife' ? '主武器' : '匕首'; }
+    if (w.id !== this.weaponShown) { this.weaponShown = w.id; q<HTMLImageElement>('[data-weapon-icon]').src = weaponIcon(w.id); q('[data-weapon-name]').textContent = w.name; q('[data-swap]').textContent = w.id === 'knife' ? '主武器' : '匕首'; }
     q('[data-mag]').textContent = !w.magSize ? '近战' : w.reloading ? '换弹中' : `${w.mag} / ${w.magSize}`;
     q('[data-reserve]').textContent = w.magSize ? `备用 ${w.reserve}` : '';
     q('[data-mode]').textContent = w.magSize ? h.aim.mode === 'auto' ? '全自动' : '单发' : '';
@@ -661,6 +679,7 @@ export class CoastSampleHost {
     q('[data-weapon]').classList.toggle('reloading', w.reloading);
     q('[data-heals]').textContent = String(h.heals);
     this.critLines(h);
+    this.deviceLine(h);
     q('.cs-status').classList.toggle('low', h.hp / h.maxHp < .35);
     if ((this.stats.frames & 7) === 0) this.slowHud(b);
     const region = this.view.regionName();
@@ -745,6 +764,27 @@ export class CoastSampleHost {
     const charge = c?.breath ?? null, bar = charge ? `${(charge.share * 100).toFixed(1)}%` : '', key = charge ? `${bar}|${charge.full}` : '';
     if (charge && key !== this.critBar) { this.q('[data-breath-bar]').style.width = bar; breath.classList.toggle('full', charge.full); }
     this.critBar = key;
+  }
+  /** The device line as last written (deviceLine rewrites it only when it changes). */
+  private devicesShown = '';
+  /**
+   * The switches of the gun in hand's devices at the foot of the weapon card (#28 M2-03): each part with its key (F for
+   * a light, G for a laser, either for a combiner; no keys on touch) and whether it is on, and the touch 设备 button,
+   * shown only for a gun with a device and marked pressed while any is on. The Runtime's own published state; nothing
+   * here switches anything.
+   */
+  private deviceLine(h: HudView) {
+    const d = h.devices, touch = this.input.touch;
+    const key = d ? `${touch}|${d.parts.map(p => `${p.name}:${+p.laser}${+p.light}${+p.on}`).join()}` : '';
+    if (key === this.devicesShown) return;
+    this.devicesShown = key;
+    const line = this.q('[data-devices]'), button = this.q('[data-device]'), any = !!d?.parts.some(p => p.on);
+    line.hidden = button.hidden = !d;
+    line.innerHTML = d ? d.parts.map(p => {
+      const kind = p.laser && p.light ? '组合' : p.laser ? '激光' : '灯光', keys = p.laser && p.light ? 'F/G' : p.laser ? 'G' : 'F';
+      return `<span class="${p.on ? 'on' : ''}" title="${esc(p.name)}">${touch ? '' : `<kbd>${keys}</kbd>`}${kind} ${p.on ? '开' : '关'}</span>`;
+    }).join('') : '';
+    button.setAttribute('aria-pressed', String(any)); button.classList.toggle('on', any);
   }
   /** A blow while looting: the panel's danger line says so for a moment (the world keeps running). */
   private lootHitT = 0;
@@ -839,9 +879,9 @@ export class CoastSampleHost {
   private slowHud(b: PublishedView) {
     this.placeRadio(); // the task card may have opened or the screen turned since the line came up
     if (this.panel === 'inventory' || this.panel === 'loot') this.inv.refreshWeight();
-    const h = b.frame.hud, l = this.session.loadout, body = this.session.expansion?.body;
+    const h = b.frame.hud, l = this.session.loadout, body = h.needs;
     const status = [h.bleeding ? '流血' : '', h.pollution > 10 ? `污染 ${Math.round(h.pollution)}%` : '',
-      body && this.session.expansion?.raid ? `精神 ${Math.round(body.mental)} · 水分 ${Math.round(body.water)} · 饱食 ${Math.round(body.satiety)}` : ''].filter(Boolean).join(' · ') || '状态正常';
+      body ? `精神 ${Math.round(body.mental)} · 水分 ${Math.round(body.water)} · 饱食 ${Math.round(body.satiety)}` : ''].filter(Boolean).join(' · ') || '状态正常';
     let weight = '';
     // A no-break space keeps the number and its unit together when the line wraps, as the original weight readout did.
     if (l) weight = `${this.services.carriedWeight().toFixed(1)}\u00a0kg`;
@@ -939,7 +979,8 @@ export class CoastSampleHost {
       }
       this.toast(e.action === 'equip' && e.reason === 'rejected' ? '无法装备，背包装不下换下的武器和弹药。请先腾出空间。' : reasonText(e.reason), true);
     }
-    else if (e.type === 'looted' && e.durability === 'committed') this.toast(`获得 ${name(e.item)} ×${e.qty}${e.partial ? '（部分）' : ''}`);
+    // A gun equipped straight from a container (#26 F15) is announced by the panel that equipped it.
+    else if (e.type === 'looted' && e.durability === 'committed' && e.to !== 'equip') this.toast(`获得 ${name(e.item)} ×${e.qty}${e.partial ? '（部分）' : ''}`);
   }
   /** Radio line: the original shows Runtime messages (say) in a timed radio box. */
   private radio(text: string, seconds: number) { const r = this.q('[data-radio]'); r.textContent = text; r.hidden = false; this.radioLeft = Math.max(3, seconds || 6); this.placeRadio(); }

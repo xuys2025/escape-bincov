@@ -5,7 +5,7 @@ import { WORLD, WORLD_W, WORLD_H, generateRun, type Point, type RunConfig } from
 import { decodeOldStoredProfile, decodeStoredProfile, finite, hasOwnStringKey, identity, validInventory, whole, COUNT_MAX, UINT32_MAX } from './profile-codec';
 import type { LootContainer } from './loot';
 import type { CritSnapshot } from './perks';
-import { gunUids, isGunId, validateGun, type GunState } from './gunsmith/instance';
+import { gunUids, validateGun, type GunState } from './gunsmith/instance';
 import type { ProfileV2 } from './gunsmith/migrate';
 
 export const WORLD_VERSION = 'coast-v2';
@@ -117,10 +117,10 @@ export function validateCheckpoint(value: unknown, profile: D.SaveDataV1 | Profi
   const items = [...profile.stash.items, ...c.loadout.bag.items, ...c.loadout.safe.items];
   const itemIds = new Set(guns ? [...items.flatMap(D.itemUids), ...D.equipmentUids(c.loadout)] : items.map(item => item.uid));
   for (const l of c.loot) {
-    id(l.uid, guns && isGunId(l.id));
+    id(l.uid, guns && D.isGun(l.id));
     if (!point(l) || !hasOwnStringKey(D.ITEMS, l.id) || !whole(l.qty, 1, D.ITEMS[l.id].stack) || !bool(l.relief)) fail();
     // A gun on the ground carries a valid state (the gun format) and nothing else carries one.
-    if (guns && isGunId(l.id) ? !validateGun(l.id, l.uid, l.gun).ok : Object.hasOwn(l, 'gun')) fail();
+    if (guns && D.isGun(l.id) ? !validateGun(l.id, l.uid, l.gun).ok : Object.hasOwn(l, 'gun')) fail();
     if (l.gun) for (const part of gunUids({ uid: l.uid, parts: l.gun.parts }).slice(1)) { if (itemIds.has(part)) fail(); itemIds.add(part); }
   }
   for (const b of c.bullets) {

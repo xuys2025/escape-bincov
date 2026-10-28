@@ -2,10 +2,11 @@
 // left the table, keys that came in, and null placeholders with the identity their uid had in the previous sample.
 // Before the R3 fix each restore leaves the three replaced render-target sources as placeholders; after it they leave
 // the table and three new target sources come in. Usage: node scripts/station-resource-target-slots.mjs <report.json> <out.json>
+// A nonempty ordered prefix is allowed; summary.rounds reports only observed rounds, never sixty-round acceptance.
 import { readFile, writeFile } from 'node:fs/promises';
+import { validateResourceSlotReport } from './resource-report-input.mjs';
 const [input, out] = process.argv.slice(2); if (!out) throw Error('report and output required');
-const r = JSON.parse(await readFile(input, 'utf8'));
-if (r.mode !== 'context') throw Error('context-mode report required');
+const r = validateResourceSlotReport(JSON.parse(await readFile(input, 'utf8')));
 const table = s => new Map(s.objects.rows.filter(o => o.table === 'glTexture').map(o => [o.key, o]));
 const seq = [r.baseline, ...r.rows], rows = [];
 for (let i = 1; i < seq.length; i++) {

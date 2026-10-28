@@ -95,9 +95,12 @@ function prove(name: string, text: string, resolve?: WorldResolver, equipped = [
 }
 
 test('the old guns are exactly the guns that were items before the catalog', () => {
-    assert.deepEqual([...OLD_GUNS].sort(), Object.keys(D.WEAPONS).filter(id => id !== 'knife').sort());
+    // M2-01 made G17 and M4A1 items too, but no save before v8 can hold them: they are guns and never old guns.
+    const added = ['gb17', 'mb4a1'];
+    assert.deepEqual([...OLD_GUNS].sort(), Object.keys(D.WEAPONS).filter(id => D.isGun(id) && !added.includes(id)).sort());
     for (const id of OLD_GUNS) { assert.ok(isGunId(id) && Object.hasOwn(D.ITEMS, id)); assert.deepEqual(GUNS[id].stats, D.WEAPONS[id]); }
-    assert.ok(Object.keys(GUNS).filter(id => Object.hasOwn(D.ITEMS, id)).every(id => OLD_GUNS.includes(id as never)));
+    assert.ok(Object.keys(GUNS).filter(id => Object.hasOwn(D.ITEMS, id)).every(id => OLD_GUNS.includes(id as never) || added.includes(id)));
+    for (const id of added) assert.ok(D.isGun(id) && !OLD_GUNS.includes(id as never), id);
 });
 
 test('new saves: the starter pistol is a factory instance; old new-game, station and fresh-start records migrate on read', () => {
@@ -347,6 +350,7 @@ test('old formats holding gun fields, and unknown or malformed inputs, are refus
         ['an old slot holding a gun state', p => { p.equipment.gun = null; }],
         ['a catalog gun no old save can hold', p => { p.stash.items.push({ uid: 'x1', id: 'gb17', qty: 1, x: 0, y: 5 }); }],
         ['an equipped catalog gun no old save can hold', p => { p.equipment.weapon = 'mb4a1'; }],
+        ['an attachment no old save can hold (M2-02)', p => { p.stash.items.push({ uid: 'x1', id: 'O03', qty: 1, x: 0, y: 5 }); }],
         ['an equipped knife', p => { p.equipment.weapon = 'knife'; }], ['the sample rifle', p => { p.equipment.weapon = 'm4a1'; }],
         ['a prototype name', p => { p.equipment.weapon = '__proto__'; }], ['no equipped field', p => { delete p.equipment.weapon; }],
         ['no stash', p => { delete p.stash; }], ['items not a list', p => { p.bag.items = {}; }], ['an item not an object', p => { p.safe.items.push(7); }],
@@ -377,6 +381,7 @@ test('old formats holding gun fields, and unknown or malformed inputs, are refus
         ['an old crate item holding a state', r => { crate(r).inventory.items[0].gun = factoryState(); }],
         ['an old loadout holding a uid', r => { r.expansion.raid.loadout.weaponUid = 'x1'; }],
         ['a loadout gun no old save can hold', r => { r.expansion.raid.loadout.weapon = 'mb4a1'; }],
+        ['an old crate holding an attachment (M2-02)', r => { crate(r).inventory.items[0].id = 'S01'; crate(r).inventory.items[0].qty = 1; }],
         ['a charm that is a gun', r => { r.expansion.charm = { uid: 'c1', id: 'pistol', qty: 1, x: 0, y: 0 }; }],
         ['a charm sharing a stored gun\'s uid', r => { r.expansion.charm = { uid: r.profile.stash.items.find((i: any) => i.id === 'carbine').uid, id: 'luckyCharm', qty: 1, x: 0, y: 0 }; }],
     ];

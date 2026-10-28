@@ -1,6 +1,6 @@
 /**
  * The 2.5D raid view is the default (no ?sample): the deploy panels offer 沿海街区 and 滨湾商场 only (the classic coast
- * area is closed), both run on the Pixi view without the playtest marks, a new mall raid uses layout 3, raids started
+ * area is closed), both run on the Pixi view without the playtest marks, a new mall raid uses layout 4, raids started
  * before the switch (classic coast, mall layout 1) resume on the same 2.5D view, and a browser without WebGL gets a
  * notice instead of the game while its save stays byte for byte. The ordinary entry has no test interface: checks read
  * the page and the stored session.
@@ -137,13 +137,13 @@ await check('R3 沿海街区 deploys on the 2.5D view; outside the dressed corne
   return { where: text };
 });
 
-await check('R4 滨湾商场 deploys layout 3 on the 2.5D view', async () => {
+await check('R4 滨湾商场 deploys layout 4 on the 2.5D view', async () => {
   await yard(); await deployFromYard(page, { world: 'mall', seed: 42 });
   await pixiRunning();
   const text = await where();
   assert.ok(text.startsWith('滨湾商场'), text);
   assert.ok(!text.includes('样板外'), text);
-  assert.deepEqual(await stored(), ['mall-v3']);
+  assert.deepEqual(await stored(), ['mall-v4']);
   await page.waitForTimeout(1500); await shot('R4-mall-2.5d');
   await abandonPixi();
   return { where: text };
@@ -154,6 +154,8 @@ await check('R5 a classic coast raid started before the area closed resumes on t
   assert.ok((await stored()).includes('coast-v2'), 'a classic checkpoint raid was deployed');
   const r = await resumeOrdinary();
   assert.deepEqual(r, { where: '沿海封锁区 · 室外 / 一楼', testInterface: false });
+  await page.waitForFunction(() => !!document.querySelector('.coast-sample [data-state]')?.textContent.trim());
+  assert.doesNotMatch(await page.locator('.coast-sample [data-state]').textContent(), /精神|水分|饱食/, 'classic raids keep their original status line');
   await page.waitForTimeout(1200); await shot('R5-classic-resume-2.5d');
   await abandonPixi();
   assert.ok((await page.locator('#ui').innerText()).includes('行动报告'), 'the result page follows');
@@ -178,7 +180,7 @@ await check('R7 the view follows the raid, not the playtest flag: ?sample=villag
   await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch);
   const r = await page.evaluate(() => ({ mallArt: window.__bincovSample.counts().mallArt, art: window.__bincovSample.counts().art }));
   assert.deepEqual(r, { mallArt: 'sol', art: 'sol' });
-  assert.deepEqual(await stored(), ['mall-v3']);
+  assert.deepEqual(await stored(), ['mall-v4']);
   await abandonPixi();
   return r;
 });

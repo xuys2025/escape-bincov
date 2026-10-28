@@ -5,17 +5,17 @@ import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
-import { mallWorldV3 } from '../src/mall-world.ts';
+import { mallWorldV4 } from '../src/mall-world.ts';
 import { corridor, spacePath } from '../src/spatial.ts';
 import { browserOptions } from './browser-options.mjs';
 import { buyAffordable } from './inventory-actions.mjs';
 import { clickUncoveredCanvas } from './canvas-click.mjs';
 const out=resolve(process.env.BINCOV_PLAY_OUT || 'test-results');await mkdir(out,{recursive:true});
-// New mall raids deploy layout 3; the route waits upstairs halfway between the S-N and S-E stairs.
-const MALL = mallWorldV3(), closed = m => ({ definition: MALL.maps[m], doors: Object.fromEntries(MALL.maps[m].doors.map(d => [d.id, false])), highTide: false });
+// New mall raids deploy layout 4; the route waits upstairs halfway between the S-N and S-E stairs.
+const MALL = mallWorldV4(), closed = m => ({ definition: MALL.maps[m], doors: Object.fromEntries(MALL.maps[m].doors.map(d => [d.id, false])), highTide: false });
 const entry = (m, id) => MALL.maps[m].entries.find(e => e.id === id).at;
 const upstairs = (() => { const p = spacePath(closed('mall-f2'), entry('mall-f2', 'S-N-down'), entry('mall-f2', 'S-E-down')); return p[Math.floor(p.length / 2)]; })();
-const report={startedAt:new Date().toISOString(),methodology:'Offline packaged HTML on the 2.5D view, normal unaccelerated clock and ordinary 25-enemy layout-3 mall deployment. Hooks are read-only. Native shopping, item transfers, keyboard movement, firing, healing, E stairs and extraction. Automatic navigation knows the immutable map and visible state; this is not human balance or physical-phone evidence.',samples:[],runs:[],errors:[],requests:[],transitions:[]};
+const report={startedAt:new Date().toISOString(),methodology:'Offline packaged HTML on the 2.5D view, normal unaccelerated clock and ordinary 25-enemy layout-4 mall deployment. Hooks are read-only. Native shopping, item transfers, keyboard movement, firing, healing, E stairs and extraction. Automatic navigation knows the immutable map and visible state; this is not human balance or physical-phone evidence.',samples:[],runs:[],errors:[],requests:[],transitions:[]};
 report.htmlSha256=createHash('sha256').update(await readFile(resolve('dist/index.html'))).digest('hex');report.node=process.version;report.platform=process.platform;report.aimClicks={fired:0,occluded:0};
 const browser=await chromium.launch(browserOptions);report.browser=browser.version();const ctx=await browser.newContext({viewport:{width:1280,height:720},offline:true});const page=await ctx.newPage();page.setDefaultTimeout(15000);page.on('pageerror',e=>report.errors.push(e.stack??e.message));ctx.on('request',r=>{if(/^https?:/.test(r.url()))report.requests.push(r.url());});
 await page.addInitScript(()=>{window.__layerFrames=[];let previous=performance.now();function frame(now){if(window.__bincov?.app.state==='run'&&window.__bincovSample?.host&&!window.__bincovSample.host.panel)window.__layerFrames.push(now-previous);previous=now;requestAnimationFrame(frame);}requestAnimationFrame(frame);});

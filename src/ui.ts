@@ -1,3 +1,4 @@
+import { attachmentLines, gunPartsLine, saleLines, saleValue } from './gunsmith/item-facts';
 import { departureWarnings } from './qol';
 import * as Shop from './shop';
 import * as D from './domain';
@@ -32,12 +33,25 @@ import { openingAutoplay, playOpening } from './opening/gate';
 import { showScreen, titleScene } from './screen';
 import { esc } from './html';
 import { SUPPLY_IDS } from './rpg';
+import { Workbench } from './gunsmith-view/bench';
 // The raid view and the station yard switch screens through this port rather than importing the page.
 provideNavigation({ changeState, enterExternalRun, render, hideoutExternal, startPreparedHideoutRaid });
 let phoneLayout = false;
 /** Phone layout, set by main.ts from the device and screen size: a presentation choice, not an input mode. */
 export function setPhoneLayout(on: boolean) { phoneLayout = on; }
 const touchLayout = () => phoneLayout;
+/** The gunsmith workbench overlay (#28 M2-05): the yard's panel, on the same HideoutRuntime. */
+let bench: Workbench | null = null;
+function openBench(gun: string) {
+    // A failed write shows the page's own storage alarm on the next paint; the toast says what happened.
+    bench = new Workbench(hideoutRuntime, gun, { toast: text => toast(text), sound: () => {}, storage: () => render() });
+    setOverlay('gunsmith');
+}
+function benchOverlayHtml(b: Workbench) {
+    // On phones the panel brings its own header with the page tabs and the close button.
+    const head = touchLayout() ? '' : `<header><h2>改枪工作台</h2><span>选好配件，按「确认」才会改到枪上</span><b>现金 ¥ ${app.save.cash.toLocaleString()}</b><button type="button" data-gs="close">关闭 <kbd>Esc</kbd></button></header>`;
+    return `<div class="overlay gs-page"><section class="panel modal gs-host${touchLayout() ? ' phone' : ''}" role="dialog" aria-modal="true" aria-label="改枪工作台">${head}${b.html({ compact: touchLayout() })}</section></div>`;
+}
 type InventoryDrag = { uid: string; source: string; token: number; rotated?: boolean };
 let activeDrag: InventoryDrag | null = null;
 let dragToken = 0;
@@ -52,7 +66,7 @@ const ui = () => document.getElementById('ui')!;
 function clearSelection() { app.selected = ''; app.placement = false; app.placementRotated = undefined; app.placementQuantity = undefined; }
 function saved(ok: boolean): boolean {
     if (!ok && !app.conflict && !app.storageOK)
-        toast('存档保存失败。请检查浏览器是否允许保存数据，然后重试。');
+        toast(saveSession.requiresReload ? app.storageError : '存档保存失败。请检查浏览器是否允许保存数据，然后重试。');
     return ok;
 }
 export function persist(save: D.SaveDataV1 = app.save): boolean {
@@ -101,9 +115,26 @@ function merchantPortrait(id: string): string {
     return url ? `<img class="merchant-portrait" width="48" height="48" alt="" draggable="false" src="${url}">` : '';
 }
 function shopping() { return app.state === 'hideout' && ['arms', 'med'].includes(app.tab); }
+/** The catalog's filter and page on this page (#28 M2-08); it holds across merchants and checkouts. */
+let shopBrowse: Shop.ShopBrowse = Shop.BROWSE_ALL;
 function cart() {
-    if (!app.shop || app.shop.merchant !== app.tab) app.shop = Shop.createCart(app.save, app.tab as Shop.Merchant, rpgEnabled(app.expansion));
+    if (!app.shop || app.shop.merchant !== app.tab) {
+        // A kind the other merchant does not stock falls back to all.
+        if (shopBrowse.kind !== 'all' && !Shop.stockKinds(app.tab as Shop.Merchant, rpgEnabled(app.expansion)).includes(shopBrowse.kind)) shopBrowse = Shop.BROWSE_ALL;
+        app.shop = Shop.createCart(app.save, app.tab as Shop.Merchant, rpgEnabled(app.expansion), shopBrowse);
+    }
     return app.shop;
+}
+/** The filter buttons above the catalog: all or one kind, only what fits the base's guns, the pages. */
+function shopBrowseBar(): string {
+    const merchant = app.tab as Shop.Merchant, rpg = rpgEnabled(app.expansion), kinds = Shop.stockKinds(merchant, rpg);
+    const page = Shop.catalogPage(app.save, merchant, rpg, shopBrowse);
+    if (kinds.length < 2 && page.pages < 2) return '';
+    const chip = (id: string, label: string, on: boolean) => btn(label, 'shop-browse', on ? 'active' : '', `data-id="${id}" aria-pressed="${on}"`);
+    const chips = ['all', ...kinds].map(k => chip(`kind:${k}`, k === 'all' ? '全部' : kindName[k as D.ItemKind], shopBrowse.kind === k)).join('');
+    const fits = kinds.includes('attachment') ? chip('fits', '只看适配我的枪', shopBrowse.fits) : '';
+    const pager = page.pages > 1 ? `${btn('←', 'shop-browse', '', `data-id="page:${page.page - 1}" ${page.page ? '' : 'disabled'}`)}<small>${page.page + 1} / ${page.pages}</small>${btn('→', 'shop-browse', '', `data-id="page:${page.page + 1}" ${page.page < page.pages - 1 ? '' : 'disabled'}`)}` : '';
+    return `<div class="shop-browse">${chips}${fits}${pager}</div>`;
 }
 function inventory(source: string): D.Inventory {
     if (shopping() && ['merchant', 'buy', 'sell', 'stash'].includes(source)) return Shop.shopInventory(cart(), source as Shop.ShopSource);
@@ -112,15 +143,23 @@ function inventory(source: string): D.Inventory {
 }
 const kindName: Record<D.ItemKind, string> = {
     weapon: '武器', ammo: '弹药', medical: '医疗用品', food: '食品',
-    part: '零件', valuable: '贵重物资', quest: '任务物品', accessory: '饰品',
+    part: '零件', valuable: '贵重物资', quest: '任务物品', accessory: '饰品', attachment: '配件',
 };
+/**
+ * The gunsmith lines under an item's description (#28 M2-08): an attachment's maker and guns and, at the base, which
+ * gun there takes it; a gun's parts. '' for other items.
+ */
+function attachmentLine(item: Pick<D.Item, 'id' | 'gun'>, cls: string): string {
+    const parts = gunPartsLine(item), lines = [...attachmentLines(app.state === 'hideout' ? app.save : null, item.id), ...parts ? [parts] : []];
+    return lines.map(l => `<p class="${cls}">${esc(l)}</p>`).join('');
+}
 function occupied(inv: D.Inventory) {
     return inv.items.reduce((sum, item) => sum + D.ITEMS[item.id].w * D.ITEMS[item.id].h, 0);
 }
 function equipmentPanel(equipment: D.Equipment, bag: D.Inventory, safe: D.Inventory) {
     const weapon = D.equippedWeapon(equipment);
     const ammo = equipment.ammo;
-    return `<section class="safe-section equipment-section"><h3 class="section-title"><b class="section-number">01</b>随身装备 <span>携行</span></h3><div class="equip"><div class="equipment-caption"><span>${equipment.weapon ? '主武器' : '随身匕首'}</span>${equipment.relief ? '<span class="orange">救济</span>' : ''}</div><div class="equipped-icon">${itemArtwork(weapon.id, inventoryCell() === 80 ? 312 : 204, inventoryCell() === 80 ? 102 : 52)}</div><div class="equipment-name"><strong>${weapon.name}</strong>${equipment.weapon ? `<span id="equipped-ammo">${ammo} / ${weapon.magazine}</span>` : '<span>始终保留</span>'}</div>${equipment.weapon ? btn('卸下主武器', 'unequip', 'text-button') : ''}</div>${weapon.ammo ? `<p class="reserve-ammo">背包备用弹药 <span>${D.ITEMS[weapon.ammo].name} · ${D.count(bag, weapon.ammo)} 发</span></p>` : '<p class="reserve-ammo">装备枪械后，备用弹药放在背包。</p>'}<h3 class="section-title secure-heading">安全箱 <span>失败也保留</span></h3><div class="secure-kit">${grid(safe, 'safe')}<div class="knife-card">${itemIcon('knife')}<strong>水手匕首</strong><span>随身携带<br>始终保留</span></div></div></section>`;
+    return `<section class="safe-section equipment-section"><h3 class="section-title"><b class="section-number">01</b>随身装备 <span>携行</span></h3><div class="equip"><div class="equipment-caption"><span>${equipment.weapon ? '主武器' : '随身匕首'}</span>${equipment.relief ? '<span class="orange">救济</span>' : ''}</div><div class="equipped-icon">${itemArtwork({ id: weapon.id, gun: equipment.gun }, inventoryCell() === 80 ? 312 : 204, inventoryCell() === 80 ? 102 : 52)}</div><div class="equipment-name"><strong>${weapon.name}</strong>${equipment.weapon ? `<span id="equipped-ammo">${ammo} / ${weapon.magazine}</span>` : '<span>始终保留</span>'}</div>${equipment.weapon ? btn('卸下主武器', 'unequip', 'text-button') : ''}${equipment.weapon && equipment.weaponUid && app.state === 'hideout' ? btn('改装', 'gunsmith-open', 'text-button', `data-id="${equipment.weaponUid}"`) : ''}</div>${weapon.ammo ? `<p class="reserve-ammo">背包备用弹药 <span>${D.ITEMS[weapon.ammo].name} · ${D.count(bag, weapon.ammo)} 发</span></p>` : '<p class="reserve-ammo">装备枪械后，备用弹药放在背包。</p>'}<h3 class="section-title secure-heading">安全箱 <span>失败也保留</span></h3><div class="secure-kit">${grid(safe, 'safe')}<div class="knife-card">${itemIcon('knife')}<strong>水手匕首</strong><span>随身携带<br>始终保留</span></div></div></section>`;
 }
 function bagPanel(bag: D.Inventory, weight: number) {
     const limit = carryLimit();
@@ -134,7 +173,7 @@ function grid(inv: D.Inventory, source: string, cell = inventoryCell()) {
     return `<div class="grid" data-grid="${source}" data-cell="${cell}" style="width:${inv.w * cell}px;height:${inv.h * cell}px;--cell:${cell}px">${inv.items.map(i => {
         const d = D.ITEMS[i.id];
         const size = D.itemSize(i);
-        return `<div tabindex="0" role="button" aria-label="${d.name} × ${i.qty}" aria-pressed="${app.selected === i.uid}" title="${d.name} × ${i.qty} · ${D.itemWeight(i).toFixed(2)} kg" draggable="false" data-uid="${i.uid}" data-item-id="${i.id}" data-source="${source}" data-kind="${d.kind}" class="item ${app.selected === i.uid ? 'selected' : ''}" style="left:${i.x * cell + 1}px;top:${i.y * cell + 1}px;width:${size.w * cell - 2}px;height:${size.h * cell - 2}px"><span class="inventory-art">${itemArtwork(i.id, size.w * cell - 10, size.h * cell - 27, !!i.rotated)}</span><span class="item-label ${i.relief ? 'relief' : ''}">${d.short || d.name}</span>${i.qty > 1 ? `<span class="qty">${i.qty}</span>` : ''}</div>`;
+        return `<div tabindex="0" role="button" aria-label="${d.name} × ${i.qty}" aria-pressed="${app.selected === i.uid}" title="${d.name} × ${i.qty} · ${D.itemWeight(i).toFixed(2)} kg" draggable="false" data-uid="${i.uid}" data-item-id="${i.id}" data-source="${source}" data-kind="${d.kind}" class="item ${app.selected === i.uid ? 'selected' : ''}" style="left:${i.x * cell + 1}px;top:${i.y * cell + 1}px;width:${size.w * cell - 2}px;height:${size.h * cell - 2}px"><span class="inventory-art">${itemArtwork(i, size.w * cell - 10, size.h * cell - 27, !!i.rotated)}</span><span class="item-label ${i.relief ? 'relief' : ''}">${d.short || d.name}</span>${i.qty > 1 ? `<span class="qty">${i.qty}</span>` : ''}</div>`;
     }).join('')}${placementCells(inv, source, cell)}${!inv.items.length ? '<div class="empty-hint">暂无物品</div>' : ''}</div>`;
 }
 function placementCells(inv: D.Inventory, source: string, cell: number) {
@@ -158,10 +197,10 @@ function details() {
     if (shopping()) return shopDetails(item);
     if (!item) return `<aside class="details details-empty"><div class="section-label">出发前检查</div><h3>选中一件物品</h3><p class="muted">查看用途、重量和操作。</p><dl class="field-notes"><div><dt>弹药</dt><dd>换弹只使用背包内的弹药。</dd></div><div><dt>安全箱</dt><dd>放入这里的物品，撤离失败也会保留。</dd></div></dl><div class="inv-help">单击查看 · 拖动整理${app.state === 'hideout' ? '<br>双击在仓库与背包间转移' : ''}</div>${app.save.reliefSupplies?.length ? btn('领取救济补给', 'relief') : ''}</aside>`;
     const d = D.ITEMS[item.id];
-    const actions = `${D.WEAPONS[item.id] && item.id !== 'knife' && app.selectedSource !== 'safe' ? btn('装备主武器', 'equip', 'primary') : ''}${btn(app.selectedSource === 'stash' ? '放入背包' : '放入仓库', 'transfer')}${btn(app.selectedSource !== 'safe' ? '放入安全箱' : '放入背包', 'secure')}${!item.relief ? btn('去商店出售', 'sell') : ''}`;
+    const actions = `${D.isGun(item.id) && app.selectedSource !== 'safe' ? btn('装备主武器', 'equip', 'primary') : ''}${D.isGun(item.id) && app.state === 'hideout' ? btn('改装', 'gunsmith-open', '', `data-id="${item.uid}"`) : ''}${btn(app.selectedSource === 'stash' ? '放入背包' : '放入仓库', 'transfer')}${btn(app.selectedSource !== 'safe' ? '放入安全箱' : '放入背包', 'secure')}${!item.relief ? btn('去商店出售', 'sell') : ''}`;
     const baseActions = app.state === 'hideout' && rpgEnabled(app.expansion) ? `${d.kind === 'accessory' ? btn('佩戴', 'charm-equip') : ''}${SUPPLY_IDS.includes(item.id) ? btn('使用', 'use-base') : ''}` : '';
     const size = D.itemSize(item);
-    return `<aside class="details"><div class="item-heading"><div class="detail-icon">${itemIcon(item.id)}</div><div><div class="section-label">${kindName[d.kind]}</div><h3>${d.name}</h3></div>${touchLayout() ? btn('关闭详情', 'clear-selection', 'detail-close') : ''}</div><div class="detail-body"><p class="item-description">${itemDescription(item.id)}</p><dl class="item-facts"><div><dt>占用</dt><dd>${size.w} × ${size.h} 格</dd></div><div><dt>重量</dt><dd>${D.itemWeight(item).toFixed(2)} kg</dd></div><div><dt>数量</dt><dd>${item.qty}</dd></div><div><dt>售价</dt><dd>${item.relief ? '不可出售' : '¥ ' + d.sell * item.qty}</dd></div></dl>${item.relief ? '<p class="small orange">救济物资 · 不可出售</p>' : ''}${D.WEAPONS[item.id] && item.id !== 'knife' && app.selectedSource === 'safe' ? '<p class="small">枪械先放入背包，再选中并装备主武器。</p>' : ''}<div class="item-actions">${actions}${baseActions}${d.w !== d.h ? btn('旋转', 'rotate-item') : ''}${btn('移动格位', 'place-item')}${splitControl(item)}</div></div></aside>`;
+    return `<aside class="details"><div class="item-heading"><div class="detail-icon">${itemIcon(item.id)}</div><div><div class="section-label">${kindName[d.kind]}</div><h3>${d.name}</h3></div>${touchLayout() ? btn('关闭详情', 'clear-selection', 'detail-close') : ''}</div><div class="detail-body"><p class="item-description">${itemDescription(item.id)}</p>${attachmentLine(item, 'small item-maker')}<dl class="item-facts"><div><dt>占用</dt><dd>${size.w} × ${size.h} 格</dd></div><div><dt>重量</dt><dd>${D.itemWeight(item).toFixed(2)} kg</dd></div><div><dt>数量</dt><dd>${item.qty}</dd></div><div><dt>售价</dt><dd>${saleValue(item).value === null ? esc(saleValue(item).note ?? '不可出售') : '¥ ' + saleValue(item).value}</dd></div></dl>${item.relief ? '<p class="small orange">救济物资 · 不可出售</p>' : ''}${D.isGun(item.id) && app.selectedSource === 'safe' ? '<p class="small">枪械先放入背包，再选中并装备主武器。</p>' : ''}<div class="item-actions">${actions}${baseActions}${d.w !== d.h ? btn('旋转', 'rotate-item') : ''}${btn('移动格位', 'place-item')}${splitControl(item)}</div></div></aside>`;
 }
 /** Host calls after a successful runtime.deploy and its animation. Uses the committed checkpoint. */
 export async function startPreparedHideoutRaid(runId: string): Promise<boolean> {
@@ -186,7 +225,7 @@ function checkout() {
 function shopDetails(item: D.Item | null | undefined) {
     if (!item) return `<aside class="details shop-details details-empty"><p>从商人拖到待买区，从仓库拖到待卖区。选中物品可查看用途，再点「移动格位」选择位置。</p></aside>`;
     const def = D.ITEMS[item.id], size = D.itemSize(item), buying = ['merchant', 'buy'].includes(app.selectedSource), uses = Shop.questUses(app.save, item.id);
-    return `<aside class="details shop-details"><h3>${def.name} × ${item.qty}</h3><p>${def.description}</p><p>${size.w} × ${size.h} 格 · ${D.itemWeight(item).toFixed(2)} kg · ${buying ? '购买' : '出售'} ¥ ${(buying ? def.buy : def.sell) * item.qty}${item.relief ? ' · 救济，不可出售' : ''}</p>${uses.length ? `<p class="orange">任务用途：${uses.join('、')}</p>` : ''}<div class="item-actions">${btn('移动格位', 'place-item')}${btn('关闭详情', 'clear-selection')}</div></aside>`;
+    return `<aside class="details shop-details"><h3>${def.name} × ${item.qty}</h3><p>${def.description}</p>${attachmentLine(item, 'item-maker')}${!buying && saleLines(item) ? `<p class="item-maker">${saleLines(item)!.map(esc).join('<br>')}</p>` : ''}<p>${size.w} × ${size.h} 格 · ${D.itemWeight(item).toFixed(2)} kg · ${buying ? '购买' : '出售'} ¥ ${(buying ? def.buy : def.sell) * item.qty}${item.relief ? ' · 救济，不可出售' : ''}</p>${uses.length ? `<p class="orange">任务用途：${uses.join('、')}</p>` : ''}<div class="item-actions">${btn('移动格位', 'place-item')}${btn('关闭详情', 'clear-selection')}</div></aside>`;
 }
 export function render() {
     cancelInventoryDrag();
@@ -307,6 +346,7 @@ function storageAlarm() {
     if (app.pendingSettlement) return '';
     const { storage } = hideoutRuntime.snapshot();
     if (storage.conflict) return `<div class="save-alarm" role="alert"><span>存档已被另一个窗口接管，本页不能写入。请先导出需要保留的进度，再刷新本页。</span>${btn('导出存档', 'export-save')}${btn('刷新页面', 'refresh')}</div>`;
+    if (storage.reloadRequired) return `<div class="save-alarm" role="alert"><span>进度已保存，但当前页面恢复失败。请导出备份后刷新页面。</span>${btn('导出存档', 'export-save')}${btn('刷新页面', 'refresh')}</div>`;
     // A kept candidate always comes with a failed write (storage not ok) until retrySave commits it.
     if (storage.ok) { perkPending = ''; return ''; }
     return `<div class="save-alarm" role="alert"><span>${perkPending ? esc(perkWaiting(perkPending)) : '最近一次操作没能写入存档。请重试保存，或先导出备份。'}</span>${btn('重试保存', 'retry-save', 'primary')}${btn('导出存档', 'export-save')}</div>`;
@@ -336,7 +376,7 @@ function renderHideout() {
     } else if (app.tab === 'facilities') { body = facilityPanel();
     } else if (app.tab === 'arms' || app.tab === 'med') {
         const c = cart(), merchant = D.MERCHANTS[c.merchant], totals = Shop.cartTotals(c);
-        body = `<div class="merchant-heading">${merchantPortrait(app.tab)}<div><h3>${merchant.name}<span>${merchant.subtitle}</span></h3><p>先选物品，再一起结算。放回原侧可取消。</p></div></div><div class="shop-layout" data-merchant="${app.tab}"><section><h3>商人物品 · 按包购买</h3>${grid(c.catalog, 'merchant', 54)}</section><section class="shop-buffer"><div><h3>待买 · ¥ ${totals.buy}</h3>${grid(c.buy, 'buy', 54)}</div><div><h3>待卖 · ¥ ${totals.sell}</h3>${grid(c.sell, 'sell', 54)}</div></section><section><h3>仓库 · 整组出售</h3>${grid(c.stash, 'stash', 54)}</section></div>${details()}`;
+        body = `<div class="merchant-heading">${merchantPortrait(app.tab)}<div><h3>${merchant.name}<span>${merchant.subtitle}</span></h3><p>先选物品，再一起结算。放回原侧可取消。</p></div></div><div class="shop-layout" data-merchant="${app.tab}"><section><h3>商人物品 · 按包购买</h3>${shopBrowseBar()}${grid(c.catalog, 'merchant', 54)}</section><section class="shop-buffer"><div><h3>待买 · ¥ ${totals.buy}</h3>${grid(c.buy, 'buy', 54)}</div><div><h3>待卖 · ¥ ${totals.sell}</h3>${grid(c.sell, 'sell', 54)}</div></section><section><h3>仓库 · 整组出售</h3>${grid(c.stash, 'stash', 54)}</section></div>${details()}`;
     } else if (app.tab === 'quests') {
         body = `<div class="quests">${Object.entries(D.QUESTS).map(([id, q], i) => {
             const complete = s.quests[id];
@@ -359,6 +399,7 @@ function renderHideout() {
     if (app.overlay === 'perk') ui().querySelector<HTMLElement>('.perk-modal .perk-cancel')?.focus({ preventScroll: true });
 }
 function overlayHtml() {
+    if (saveSession.requiresReload && !app.conflict) return `<div class="overlay"><div class="panel modal"><h2>进度已保存，请刷新页面</h2><p>当前页面恢复失败。本页不会再次写入，请导出备份后刷新页面。</p><div class="actions">${btn('导出备份', 'export-save')}${btn('刷新页面', 'refresh')}</div></div></div>`;
     if (!app.storageOK && app.state === 'menu')
         return `<div class="overlay"><div class="panel modal"><div class="section-label orange">本地存档</div><h2>暂时无法打开存档</h2><p>${esc(app.storageError || '请允许浏览器存储后刷新重试。')}</p><div class="actions">${btn('导出原始存档', 'export-original')}${btn('刷新重试', 'refresh', 'primary')}</div></div></div>`;
     if (app.pendingSettlement)
@@ -367,12 +408,19 @@ function overlayHtml() {
         return `<div class="overlay"><div class="panel modal"><h2>导入这份存档？</h2><p>现金 ¥ ${(app.pendingImport || app.pendingRecoveryImport!.profile).cash} · 累计出击 ${(app.pendingImport || app.pendingRecoveryImport!.profile).stats.runs} 次</p><p>导入会替换此浏览器中本游戏的进度，两个存档不会合并。请先导出当前存档。</p><div class="actions">${btn('先导出当前存档', 'export-save')}${btn('确认导入', 'confirm-import', 'primary')}${btn('取消', 'close')}</div></div></div>`;
     if (!app.overlay)
         return '';
+    if (app.overlay === 'gunsmith' && bench) return benchOverlayHtml(bench);
     if (app.overlay === 'shop-leave') return `<div class="overlay"><section class="panel modal"><h2>放弃未结算的清单？</h2><p>待买、待卖和仓库位置会恢复。现金与物资尚未改变。</p><div class="actions">${btn('继续挑选', 'close')}${btn('放弃清单并离开', 'shop-leave-confirm', 'danger')}</div></section></div>`;
     if (app.overlay === 'perk') return perkDialog ? perkOverlayHtml(perkDialog) : '';
     if (app.overlay === 'shop-quest') return `<div class="overlay"><section class="panel modal"><h2>这些任务物资会不够交付</h2><ul>${Shop.saleWarnings(app.save, cart()).map(w => `<li>「${w.quest}」需要 ${D.ITEMS[w.id].name} ${w.needed} 件；本次卖出 ${w.sold} 件，整笔交易后剩 ${w.remaining} 件。</li>`).join('')}</ul><div class="actions">${btn('取消，继续挑选', 'close')}${btn('仍要结算', 'checkout-confirm', 'danger')}</div></section></div>`;
-    return `<div class="overlay"><div class="panel modal" style="width:610px"><div class="section-label">${touchLayout() ? '手机触控操作' : '键盘与鼠标操作'}</div><h2>行动指南</h2>${touchLayout() ? '<p class="touch-guide">左半屏按住拖动是移动，拖远冲刺；右半屏按住拖动是瞄准，拖远持续开火，松开即停。靠近物资点「搜刮」或「拾取」；几个箱子重叠时，点名称直接打开那一个。在撤离区站稳，按住「按住撤离」3 秒。背包和地图不暂停行动。</p>' : ''}<div class="help-grid">${[['W A S D', '移动'], ['鼠标', '瞄准'], ['左键 / 右键', '攻击 / 精瞄'], ['Shift', '冲刺'], ['R', '换弹'], ['E', '交互 / 搜刮 / 阅读'], ['按住 E 3 秒', '撤离（绿色标记内）'], ['滚轮', '切换搜刮目标'], ['Q', '快捷治疗'], ['Tab', '背包（不暂停）'], ['M', '地图（不暂停）'], ['1 / 2', '主武器 / 匕首'], ['Esc', '暂停 / 关闭面板']].map(([k, v]) => `<div><kbd>${k}</kbd>${v}</div>`).join('')}</div><p>每局限时 10 分钟。备用弹药放在背包中，${touchLayout() ? '靠近物资点击拾取，打开地图查看本局撤离点。在绿色圈内站稳，按住撤离按钮满 3 秒。' : '靠近箱子或尸体后，用滚轮切换高亮目标，按 E 打开双栏；关闭后可再选其他目标。散落物按 E 拾取。物品可拖入背包、安全箱或放回。搜刮不暂停。按 M 查看本局撤离点，在绿色圈内站稳，按住 E 满 3 秒撤离。'}</p><p>出击 4 分 30 秒后电台预警，5 分钟时潮位变化。涉水会积累污染；在背包中使用除藻药剂可降低污染。${touchLayout() ? '治疗按钮' : 'Q'}使用背包中的绷带或急救包。</p><p>行动中死亡、超时或放弃均按撤离失败处理：丢失背包物资和主武器，保留安全箱内的物品和水手匕首。刷新可恢复最近成功保存的进度。</p>${btn('关闭指南', 'close', 'primary')}</div></div>`;
+    return `<div class="overlay"><div class="panel modal" style="width:610px"><div class="section-label">${touchLayout() ? '手机触控操作' : '键盘与鼠标操作'}</div><h2>行动指南</h2>${touchLayout() ? '<p class="touch-guide">左半屏按住拖动是移动，拖远冲刺；右半屏按住拖动是瞄准，拖远持续开火，松开即停。靠近物资点「搜刮」或「拾取」；几个箱子重叠时，点名称直接打开那一个。在撤离区站稳，按住「按住撤离」3 秒。背包和地图不暂停行动。</p>' : ''}<div class="help-grid">${[['W A S D', '移动'], ['鼠标', '瞄准'], ['左键 / 右键', '攻击 / 精瞄'], ['Shift', '冲刺'], ['R', '换弹'], ['E', '交互 / 搜刮 / 阅读'], ['按住 E 3 秒', '撤离（绿色标记内）'], ['滚轮', '切换搜刮目标'], ['Q', '快捷治疗'], ['Tab', '背包（不暂停）'], ['M', '地图（不暂停）'], ['1 / 2', '主武器 / 匕首'], ['F / G', '开关枪上的灯光 / 激光'], ['Esc', '暂停 / 关闭面板']].map(([k, v]) => `<div><kbd>${k}</kbd>${v}</div>`).join('')}</div><p>每局限时 10 分钟。备用弹药放在背包中，${touchLayout() ? '靠近物资点击拾取，打开地图查看本局撤离点。在绿色圈内站稳，按住撤离按钮满 3 秒。枪上装了激光或灯光时，点「设备」开关。' : '靠近箱子或尸体后，用滚轮切换高亮目标，按 E 打开双栏；关闭后可再选其他目标。散落物按 E 拾取。物品可拖入背包、安全箱或放回。搜刮不暂停。按 M 查看本局撤离点，在绿色圈内站稳，按住 E 满 3 秒撤离。'}</p><p>出击 4 分 30 秒后电台预警，5 分钟时潮位变化。涉水会积累污染；在背包中使用除藻药剂可降低污染。${touchLayout() ? '治疗按钮' : 'Q'}使用背包中的绷带或急救包。</p><p>行动中死亡、超时或放弃均按撤离失败处理：丢失背包物资和主武器，保留安全箱内的物品和水手匕首。刷新可恢复最近成功保存的进度。</p>${btn('关闭指南', 'close', 'primary')}</div></div>`;
 }
 export function closeOverlay() {
+    if (app.overlay === 'gunsmith' && bench) {
+        // Esc closes the bench's own sheet or answers its question with "stay"; a waiting preview asks before it closes.
+        if (bench.dismiss()) { render(); return; }
+        if (!bench.requestClose()) { render(); return; }
+        bench.dispose(); bench = null;
+    }
     setOverlay(app.overlay === 'help' ? app.helpReturn : '');
 }
 export function setOverlay(value: string) {
@@ -406,6 +454,7 @@ export function mutate(action: SessionMutation, message = '', rejectionMessage: 
         render();
         return false;
     }
+    if (result === 'publish-failed') { clearSelection(); toast(app.storageError); render(); return false; }
     if (result === 'save-failed') {
         clearSelection();
         toast('保存失败，物资和进度已恢复到操作前。请检查浏览器存储设置后重试。');
@@ -524,6 +573,16 @@ function commitDrop(el: HTMLElement, e: DropPoint, drag: InventoryDrag) {
     } catch { activeDrag = null; toast('拖放未完成，物品仍在原处。'); }
 }
 function bind() {
+    ui().querySelectorAll<HTMLButtonElement>('[data-gs]').forEach(el => el.onclick = () => {
+        if (!bench || el.disabled) return;
+        audio.start(); audio.click();
+        const value = el.closest('[data-gs-form]')?.querySelector('input')?.value ?? '';
+        if (bench.act(el.dataset.gs!, el.dataset.arg ?? '', value) === 'close') { bench.dispose(); bench = null; setOverlay(''); } else render();
+    });
+    // The workbench's rename field: Enter clicks its save button; the form itself never submits.
+    ui().querySelectorAll<HTMLFormElement>('form[data-gs-form]').forEach(form => form.onsubmit = e => e.preventDefault());
+    const once = bench?.focusOnce();
+    if (once) ui().querySelector<HTMLInputElement>(once)?.select();
     ui().querySelectorAll<HTMLElement>('[data-action]').forEach(el => el.onclick = () => {
         const a = el.dataset.action!, id = el.dataset.id!;
         if (app.conflict && !['export-save', 'export-original', 'refresh'].includes(a)) {
@@ -540,6 +599,13 @@ function bind() {
             case 'checkout': if (Shop.saleWarnings(app.save, cart()).length) setOverlay('shop-quest'); else checkout(); break;
             case 'checkout-confirm': checkout(); break;
             case 'cart-reset': app.shop = null; clearSelection(); render(); break;
+            case 'shop-browse': {
+                // Only the catalog is built again; the buy and sell lists stay (#28 M2-08).
+                const [what, value] = id.split(':');
+                shopBrowse = what === 'kind' ? { kind: value as Shop.ShopBrowse['kind'], fits: shopBrowse.fits, page: 0 } : what === 'fits' ? { ...shopBrowse, fits: !shopBrowse.fits, page: 0 } : { ...shopBrowse, page: Number(value) };
+                const page = Shop.catalogPage(app.save, app.tab as Shop.Merchant, rpgEnabled(app.expansion), shopBrowse);
+                shopBrowse = { ...shopBrowse, page: page.page }; cart().catalog = page.catalog; clearSelection(); render(); break;
+            }
             case 'shop-leave-confirm': {
                 const next = app.shopLeave; app.shopLeave = null; app.shop = null; app.overlay = ''; clearSelection();
                 if (next?.action === 'tab') { app.tab = next.id; render(); }
@@ -643,6 +709,7 @@ function bind() {
                 toast(app.selectedSource === 'stash' ? '将物品放进待卖区，再统一结算。' : '先在整备中移入仓库，再到商店出售。');
                 app.tab = 'arms'; app.shop = null; clearSelection(); render();
                 break;
+            case 'gunsmith-open': if (id) openBench(id); break;
             case 'equip':
                 mutate(() => D.equip(app.save, app.selected), '主武器已装备。', '无法装备，请给换下的武器和弹药腾出空间。');
                 break;

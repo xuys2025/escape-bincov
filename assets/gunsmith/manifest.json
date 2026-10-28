@@ -1,0 +1,2946 @@
+{
+  "schema": 1,
+  "revision": 2,
+  "batch": "M2-P0-P1",
+  "totals": {
+    "files": 115,
+    "pngBytes": 24419,
+    "p0Files": 42,
+    "p0PngBytes": 8432,
+    "p1Files": 73,
+    "p1PngBytes": 15987
+  },
+  "assets": [
+    {
+      "id": "gs-mb4a1-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-receiver-h-v1.png",
+      "w": 14,
+      "h": 7,
+      "bytes": 221,
+      "sha256": "3073e2728518c307d192063d251862f2d9aecd531a3cacf126004931ff06a64f",
+      "revision": 1,
+      "output": "held",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "grip": [
+        4,
+        5
+      ],
+      "bore": 3,
+      "forward": 0,
+      "mounts": {
+        "barrel": [
+          13,
+          2
+        ],
+        "handguard": [
+          13,
+          3
+        ],
+        "stock": [
+          0,
+          2
+        ],
+        "rearGrip": [
+          3,
+          5
+        ],
+        "mag": [
+          9,
+          5
+        ],
+        "top": [
+          7,
+          0
+        ]
+      }
+    },
+    {
+      "id": "gs-mb4a1-barrel-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-barrel-factory-h-v1.png",
+      "w": 12,
+      "h": 4,
+      "bytes": 125,
+      "sha256": "07b3580a888d085cbb74f5ddd69153eefeb28c10393e6313fd4b1b26f7dc1834",
+      "revision": 1,
+      "output": "held",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "barrel",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "mounts": {
+        "muzzle": [
+          11,
+          2
+        ]
+      },
+      "tip": [
+        12,
+        3
+      ]
+    },
+    {
+      "id": "gs-mb4a1-handguard-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-handguard-factory-h-v1.png",
+      "w": 9,
+      "h": 4,
+      "bytes": 155,
+      "sha256": "3a0e1610ea144a8f2687a36fa3ac9a8cff076f055d024d7bd49362ae32b519a8",
+      "revision": 1,
+      "output": "held",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "hand": [
+        4,
+        3
+      ]
+    },
+    {
+      "id": "gs-mb4a1-stock-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-stock-factory-h-v1.png",
+      "w": 8,
+      "h": 6,
+      "bytes": 163,
+      "sha256": "2e47e8be0b705010b27f0afbe6579534992ee4c429528c416f7e8c208022675d",
+      "revision": 1,
+      "output": "held",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "stock",
+      "anchor": [
+        7,
+        1
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-reargrip-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-reargrip-factory-h-v1.png",
+      "w": 3,
+      "h": 4,
+      "bytes": 122,
+      "sha256": "745ffd1c5f93d1d37286d0636134e823630a2d5cebfecabd7fa7301899077e28",
+      "revision": 1,
+      "output": "held",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "rearGrip",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-mag-factory-h-v1.png",
+      "w": 4,
+      "h": 5,
+      "bytes": 124,
+      "sha256": "514dc473a17a71f7a38c1045a45a47a842e3b27a905c9a371956db3f9f91408a",
+      "revision": 1,
+      "output": "held",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-top-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-top-factory-h-v1.png",
+      "w": 3,
+      "h": 2,
+      "bytes": 99,
+      "sha256": "be67754c22397fc99db850f4fe126283f14c897dc3bbeb772042377ff935beb7",
+      "revision": 1,
+      "output": "held",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "top",
+      "anchor": [
+        1,
+        1
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-o03-h-v1",
+      "file": "assets/gunsmith/v1/gs-o03-h-v1.png",
+      "w": 5,
+      "h": 3,
+      "bytes": 118,
+      "sha256": "45c90ef87db43e543beeecf932fcd02b402a33750bf3a2b8c45bc88a2ff3282c",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "O03",
+      "role": "part",
+      "slot": "top",
+      "anchor": [
+        2,
+        2
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-m06-h-v1",
+      "file": "assets/gunsmith/v1/gs-m06-h-v1.png",
+      "w": 3,
+      "h": 3,
+      "bytes": 112,
+      "sha256": "cfaee61bc42aaa2a508773ca89ed080f5e5f0b9924c1d7df447fab41d0cc7c8d",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "M06",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "tip": [
+        3,
+        2
+      ]
+    },
+    {
+      "id": "gs-h01-h-v1",
+      "file": "assets/gunsmith/v1/gs-h01-h-v1.png",
+      "w": 8,
+      "h": 4,
+      "bytes": 146,
+      "sha256": "22c69b65005f366616528dbfd6bd51c6711bbbfe28babd6b04ade2b0d6768d91",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "H01",
+      "role": "part",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "mounts": {
+        "under": [
+          3,
+          3
+        ],
+        "side1": [
+          5,
+          1
+        ]
+      },
+      "hand": [
+        3,
+        3
+      ]
+    },
+    {
+      "id": "gs-f01-h-v1",
+      "file": "assets/gunsmith/v1/gs-f01-h-v1.png",
+      "w": 2,
+      "h": 3,
+      "bytes": 99,
+      "sha256": "6cd1919bd7734a757bb5a3158323f2fe929c24f65ad79ae64d3df66b405b12d0",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "F01",
+      "role": "part",
+      "slot": "under",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "hand": [
+        0,
+        1
+      ]
+    },
+    {
+      "id": "gs-glove-rear-h-v1",
+      "file": "assets/gunsmith/v1/gs-glove-rear-h-v1.png",
+      "w": 3,
+      "h": 3,
+      "bytes": 105,
+      "sha256": "382b6c736004201c94cc7828a4880864b8b79906bb85181924f5247437332d13",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": null,
+      "role": "glove",
+      "slot": "gloveRear",
+      "anchor": [
+        1,
+        0
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-glove-front-h-v1",
+      "file": "assets/gunsmith/v1/gs-glove-front-h-v1.png",
+      "w": 3,
+      "h": 3,
+      "bytes": 111,
+      "sha256": "325d3f911d31eca8fabaa9afef7a5dd5c75a1aeb1813c2a422f7b8c6380dd764",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": null,
+      "role": "glove",
+      "slot": "gloveFront",
+      "anchor": [
+        1,
+        0
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-glove-foregrip-h-v1",
+      "file": "assets/gunsmith/v1/gs-glove-foregrip-h-v1.png",
+      "w": 3,
+      "h": 4,
+      "bytes": 112,
+      "sha256": "d27bbf4a9746d6fded40179205fc688c36bf91da7a61b6144b1024024aa4f872",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": null,
+      "role": "glove",
+      "slot": "gloveForegrip",
+      "anchor": [
+        1,
+        0
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-receiver-i-v1.png",
+      "w": 34,
+      "h": 8,
+      "bytes": 248,
+      "sha256": "1477a9d79607c0bcb1787c86aaabe14437ebc69fc6c362e19a1616fea89f3844",
+      "revision": 1,
+      "output": "inventory",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "mounts": {
+        "barrel": [
+          32,
+          2
+        ],
+        "handguard": [
+          32,
+          4
+        ],
+        "stock": [
+          0,
+          2
+        ],
+        "rearGrip": [
+          7,
+          6
+        ],
+        "mag": [
+          22,
+          6
+        ],
+        "top": [
+          15,
+          0
+        ]
+      }
+    },
+    {
+      "id": "gs-mb4a1-barrel-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-barrel-factory-i-v1.png",
+      "w": 29,
+      "h": 6,
+      "bytes": 176,
+      "sha256": "5b446941a0e31aaf271c09ae0a4470f7f3133f79f36ac8c9056f6b4d303b9319",
+      "revision": 1,
+      "output": "inventory",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "barrel",
+      "anchor": [
+        0,
+        3
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "mounts": {
+        "muzzle": [
+          28,
+          3
+        ]
+      },
+      "tip": [
+        29,
+        4
+      ]
+    },
+    {
+      "id": "gs-mb4a1-handguard-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-handguard-factory-i-v1.png",
+      "w": 21,
+      "h": 7,
+      "bytes": 177,
+      "sha256": "e9b120af772a8316446a2800c3cfc62656d29ab949a4e5af68f486f5566a78a1",
+      "revision": 1,
+      "output": "inventory",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-stock-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-stock-factory-i-v1.png",
+      "w": 20,
+      "h": 11,
+      "bytes": 225,
+      "sha256": "7508226ebc5667d38a8167292a92e49ba249035efeec9c38593c57b609e2151b",
+      "revision": 1,
+      "output": "inventory",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "stock",
+      "anchor": [
+        19,
+        3
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-reargrip-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-reargrip-factory-i-v1.png",
+      "w": 7,
+      "h": 9,
+      "bytes": 194,
+      "sha256": "b5e0df4a837f849f23f9ce94b587b15644c7a1576f1cc649c1a1f5492e03ae8e",
+      "revision": 1,
+      "output": "inventory",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "rearGrip",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-mag-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-mag-factory-i-v1.png",
+      "w": 10,
+      "h": 9,
+      "bytes": 183,
+      "sha256": "ef7ea53fbe69007209a8f6aceda4f8848be67380c9ec3db7ecf5cda8110fdbe9",
+      "revision": 1,
+      "output": "inventory",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-top-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-top-factory-i-v1.png",
+      "w": 7,
+      "h": 3,
+      "bytes": 111,
+      "sha256": "8d7c232f85874d361aa9a1c1ed1d18e08bf14163a530e146bcb8b1c41a98954a",
+      "revision": 1,
+      "output": "inventory",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "top",
+      "anchor": [
+        3,
+        2
+      ],
+      "colors": 2,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-o03-i-v1",
+      "file": "assets/gunsmith/v1/gs-o03-i-v1.png",
+      "w": 11,
+      "h": 7,
+      "bytes": 182,
+      "sha256": "aa5450ac6f96c8acefac05601769a458708a5c4c8e36c5b253df1d75db0abf1d",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "O03",
+      "role": "part",
+      "slot": "top",
+      "anchor": [
+        5,
+        6
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-m06-i-v1",
+      "file": "assets/gunsmith/v1/gs-m06-i-v1.png",
+      "w": 8,
+      "h": 6,
+      "bytes": 156,
+      "sha256": "338cc68a89f8bf922b4b1ef4f6edcd35fc17e73944e361d9ea5939a4801a26ee",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "M06",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "tip": [
+        8,
+        3
+      ]
+    },
+    {
+      "id": "gs-h01-i-v1",
+      "file": "assets/gunsmith/v1/gs-h01-i-v1.png",
+      "w": 20,
+      "h": 8,
+      "bytes": 200,
+      "sha256": "0d0a793dd984a2ba75b4da14ac830f3202221b8d940e6445e2d29660817fdcb3",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "H01",
+      "role": "part",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "mounts": {
+        "under": [
+          9,
+          7
+        ],
+        "side1": [
+          13,
+          3
+        ]
+      }
+    },
+    {
+      "id": "gs-f01-i-v1",
+      "file": "assets/gunsmith/v1/gs-f01-i-v1.png",
+      "w": 5,
+      "h": 8,
+      "bytes": 145,
+      "sha256": "1b6a744d142153562ac6572fbcbc77bf0a3be1fb614cb1e00dc6297487469909",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "F01",
+      "role": "part",
+      "slot": "under",
+      "anchor": [
+        2,
+        0
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-receiver-w-v1.png",
+      "w": 68,
+      "h": 16,
+      "bytes": 461,
+      "sha256": "3a934a195ae75493ac4a1b9438c7c9c4509954178011eba698d00db270579cda",
+      "revision": 1,
+      "output": "bench",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "mounts": {
+        "barrel": [
+          64,
+          4
+        ],
+        "handguard": [
+          64,
+          8
+        ],
+        "stock": [
+          0,
+          4
+        ],
+        "rearGrip": [
+          14,
+          12
+        ],
+        "mag": [
+          44,
+          12
+        ],
+        "top": [
+          30,
+          0
+        ]
+      }
+    },
+    {
+      "id": "gs-mb4a1-barrel-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-barrel-factory-w-v1.png",
+      "w": 57,
+      "h": 12,
+      "bytes": 278,
+      "sha256": "1ff76ccc4f0a89131f79644bb29224f517f7ee61b17055efe4a7fb76fa6ae9c4",
+      "revision": 1,
+      "output": "bench",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "barrel",
+      "anchor": [
+        0,
+        6
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "mounts": {
+        "muzzle": [
+          56,
+          6
+        ]
+      },
+      "tip": [
+        57,
+        8
+      ]
+    },
+    {
+      "id": "gs-mb4a1-handguard-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-handguard-factory-w-v1.png",
+      "w": 42,
+      "h": 14,
+      "bytes": 275,
+      "sha256": "9ba0229f05497d216e6265624075ec348329e364fb3e0ae89f217490fe922d6d",
+      "revision": 1,
+      "output": "bench",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        4
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-stock-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-stock-factory-w-v1.png",
+      "w": 40,
+      "h": 22,
+      "bytes": 302,
+      "sha256": "d096c1a9c487471a37446791d6d5ebf4b525afd493869849d04c839666dd37a5",
+      "revision": 1,
+      "output": "bench",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "stock",
+      "anchor": [
+        39,
+        6
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-reargrip-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-reargrip-factory-w-v1.png",
+      "w": 14,
+      "h": 18,
+      "bytes": 251,
+      "sha256": "d61d88dc010744e500bc07a7967ec854ab592e839b12bc7ad2196af774cd8685",
+      "revision": 1,
+      "output": "bench",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "rearGrip",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-mag-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-mag-factory-w-v1.png",
+      "w": 20,
+      "h": 18,
+      "bytes": 255,
+      "sha256": "7b84a76fc476fb4b96664916627a184392fbc5e9e5dd85669f0d8bb1a130656d",
+      "revision": 1,
+      "output": "bench",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-top-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-top-factory-w-v1.png",
+      "w": 14,
+      "h": 5,
+      "bytes": 145,
+      "sha256": "8ef4c10109b830b34b2e8a61367273c2dea08ea19a5fa4edd46eab2acde89a20",
+      "revision": 1,
+      "output": "bench",
+      "gun": "mb4a1",
+      "item": null,
+      "role": "factory",
+      "slot": "top",
+      "anchor": [
+        6,
+        4
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-o03-w-v1",
+      "file": "assets/gunsmith/v1/gs-o03-w-v1.png",
+      "w": 22,
+      "h": 14,
+      "bytes": 263,
+      "sha256": "0b07fd7f468e5ba2b71fbed2b3190c268adf2b5470030bbaeedd9eefe2ea0491",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "O03",
+      "role": "part",
+      "slot": "top",
+      "anchor": [
+        10,
+        13
+      ],
+      "colors": 6,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-m06-w-v1",
+      "file": "assets/gunsmith/v1/gs-m06-w-v1.png",
+      "w": 16,
+      "h": 12,
+      "bytes": 192,
+      "sha256": "bb7bdaaabab982c35004bda7c88191473e42d9e53503000962a5ba3b4bad09fe",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "M06",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        4
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "tip": [
+        16,
+        6
+      ]
+    },
+    {
+      "id": "gs-h01-w-v1",
+      "file": "assets/gunsmith/v1/gs-h01-w-v1.png",
+      "w": 40,
+      "h": 16,
+      "bytes": 286,
+      "sha256": "e9507184929ace93c204d7b8136fa9a5748bc7b7aea108a805246569364fcc00",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "H01",
+      "role": "part",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        4
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling",
+      "mounts": {
+        "under": [
+          18,
+          15
+        ],
+        "side1": [
+          26,
+          6
+        ]
+      }
+    },
+    {
+      "id": "gs-f01-w-v1",
+      "file": "assets/gunsmith/v1/gs-f01-w-v1.png",
+      "w": 10,
+      "h": 16,
+      "bytes": 177,
+      "sha256": "0a059ad824f2d3074a9ef5c066be4a790bb313b2f3fbc13aaae65855af47cd14",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "F01",
+      "role": "part",
+      "slot": "under",
+      "anchor": [
+        4,
+        0
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-q24-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 309,
+      "sha256": "288b414999e5ddaf4100d553f3b43137d4a99e3191d8a621d55a56e06c6d1e09",
+      "revision": 1,
+      "output": "icon24",
+      "gun": "mb4a1",
+      "item": "mb4a1",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-mb4a1-q32-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-q32-v1.png",
+      "w": 32,
+      "h": 32,
+      "bytes": 418,
+      "sha256": "fde216f1fef7193031f8c9c9eff79b27f20e0adf96cd32dafa0e150dd289f23f",
+      "revision": 1,
+      "output": "icon32",
+      "gun": "mb4a1",
+      "item": "mb4a1",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-o03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o03-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 291,
+      "sha256": "40b54e4a14817be0af61d4e11a0fc34ff5c22fa6a6c77a67c8095544abc1f877",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "O03",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 6,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-m06-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m06-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 239,
+      "sha256": "e60714edc6f772bda0891c7ea32f26fd0fe6639e98a1aba084b8e314b7a799c9",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "M06",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-h01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-h01-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 250,
+      "sha256": "809f188233151b958039adba296620c5f72e7912056cf23e0a7d9f22d137b74a",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "H01",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-f01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-f01-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 231,
+      "sha256": "8f865795d0fcaa2a28e3fb13e900879ffdc476ecfdbd1485c6cc34f089928c68",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "F01",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; no output resampling"
+    },
+    {
+      "id": "gs-gb17-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-gb17-receiver-h-v1.png",
+      "w": 17,
+      "h": 9,
+      "bytes": 223,
+      "sha256": "07044922cb143f08f35808aa5e4dd517cbc759746c94135612db5edab1d6ffb7",
+      "revision": 1,
+      "output": "held",
+      "gun": "gb17",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "grip": [
+        5,
+        7
+      ],
+      "hand": [
+        5,
+        7
+      ],
+      "bore": 2,
+      "tip": [
+        17,
+        2
+      ],
+      "forward": 8,
+      "mounts": {
+        "micro": [
+          5,
+          0
+        ],
+        "pistolSide": [
+          13,
+          4
+        ],
+        "muzzle": [
+          16,
+          1
+        ],
+        "barrel": [
+          16,
+          1
+        ],
+        "mag": [
+          3,
+          8
+        ],
+        "rearGrip": [
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "id": "gs-carbine-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-carbine-receiver-h-v1.png",
+      "w": 31,
+      "h": 10,
+      "bytes": 333,
+      "sha256": "f8bb08a77930c89faff361363bc39edb3383d1f938a0985448937df45579c948",
+      "revision": 1,
+      "output": "held",
+      "gun": "carbine",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 8,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "grip": [
+        8,
+        4
+      ],
+      "bore": 3.5,
+      "tip": [
+        31,
+        3.5
+      ],
+      "forward": 0,
+      "wholeCanvasLayer": true,
+      "mounts": {
+        "handguard": [
+          16,
+          4
+        ],
+        "mount": [
+          14,
+          3
+        ],
+        "muzzle": [
+          30,
+          3
+        ]
+      }
+    },
+    {
+      "id": "gs-carbine-handguard-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-carbine-handguard-factory-h-v1.png",
+      "w": 31,
+      "h": 10,
+      "bytes": 199,
+      "sha256": "ce4e635000ea1589e68c063011e379bd12d03f036ea8c0a29fd7185ea4d320be",
+      "revision": 1,
+      "output": "held",
+      "gun": "carbine",
+      "item": null,
+      "role": "factory",
+      "slot": "handguard",
+      "anchor": [
+        16,
+        4
+      ],
+      "colors": 8,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "hand": [
+        18,
+        5
+      ],
+      "wholeCanvasLayer": true,
+      "embeddedFrontGlove": true
+    },
+    {
+      "id": "gs-o01-h-v1",
+      "file": "assets/gunsmith/v1/gs-o01-h-v1.png",
+      "w": 4,
+      "h": 3,
+      "bytes": 117,
+      "sha256": "aa2406f0db2d913aea37dc7f657c7b124760f1006006288a8ad4fa3b856f13f6",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "O01",
+      "role": "part",
+      "slot": "micro",
+      "anchor": [
+        1,
+        2
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-o08-h-v1",
+      "file": "assets/gunsmith/v1/gs-o08-h-v1.png",
+      "w": 9,
+      "h": 4,
+      "bytes": 130,
+      "sha256": "10739d0572835865befceb378f94727a805da165b288fb2e84faca7f21043a94",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "O08",
+      "role": "part",
+      "slot": "top",
+      "anchor": [
+        4,
+        3
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-m03-h-v1",
+      "file": "assets/gunsmith/v1/gs-m03-h-v1.png",
+      "w": 6,
+      "h": 3,
+      "bytes": 128,
+      "sha256": "777f2a86e75e92aef72943deb18464f03f20c2e41fa1e92b8b4b8a7df84b2064",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "M03",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "tip": [
+        6,
+        2
+      ]
+    },
+    {
+      "id": "gs-b01-h-v1",
+      "file": "assets/gunsmith/v1/gs-b01-h-v1.png",
+      "w": 4,
+      "h": 2,
+      "bytes": 113,
+      "sha256": "0bccd5001161c07fe22864e80ef9428369b3d84853bcc50276db12248bfac6b8",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "B01",
+      "role": "part",
+      "slot": "barrel",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "mounts": {
+        "muzzle": [
+          3,
+          0
+        ]
+      },
+      "tip": [
+        4,
+        1
+      ]
+    },
+    {
+      "id": "gs-b08-h-v1",
+      "file": "assets/gunsmith/v1/gs-b08-h-v1.png",
+      "w": 15,
+      "h": 3,
+      "bytes": 137,
+      "sha256": "b4a210eb18568df1e0b6e9cc712c8e43c26ed945b355b3de999636f25b0123cd",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "B08",
+      "role": "part",
+      "slot": "barrel",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "mounts": {
+        "muzzle": [
+          14,
+          1
+        ]
+      },
+      "tip": [
+        15,
+        2
+      ]
+    },
+    {
+      "id": "gs-h05-h-v1",
+      "file": "assets/gunsmith/v1/gs-h05-h-v1.png",
+      "w": 9,
+      "h": 4,
+      "bytes": 152,
+      "sha256": "375e27698b5c4de52633bf05f55fee25520d573be58289630a8ff99d0783ae7e",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "H05",
+      "role": "part",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "mounts": {
+        "under": [
+          4,
+          3
+        ],
+        "side1": [
+          6,
+          1
+        ]
+      },
+      "hand": [
+        3,
+        3
+      ]
+    },
+    {
+      "id": "gs-s01-h-v1",
+      "file": "assets/gunsmith/v1/gs-s01-h-v1.png",
+      "w": 7,
+      "h": 5,
+      "bytes": 127,
+      "sha256": "458d98f3f1319879fcf69aded939025fe6576bc960b241ba01855cbe1a36ce09",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "S01",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        6,
+        1
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-s02-h-v1",
+      "file": "assets/gunsmith/v1/gs-s02-h-v1.png",
+      "w": 9,
+      "h": 6,
+      "bytes": 151,
+      "sha256": "5f11ab0dcbac38bdb5b146068c3f05662b0b3568b006896b8fb4114bf64f5a6a",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "S02",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        8,
+        1
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-f03-h-v1",
+      "file": "assets/gunsmith/v1/gs-f03-h-v1.png",
+      "w": 4,
+      "h": 2,
+      "bytes": 103,
+      "sha256": "fbcc10a670b428f6516a4e4e694912d3d9ece3a1a8c55937ac2813ff8dddf102",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "F03",
+      "role": "part",
+      "slot": "under",
+      "anchor": [
+        1,
+        0
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "hand": [
+        2,
+        1
+      ]
+    },
+    {
+      "id": "gs-g01-h-v1",
+      "file": "assets/gunsmith/v1/gs-g01-h-v1.png",
+      "w": 3,
+      "h": 3,
+      "bytes": 117,
+      "sha256": "22c3432003171166773672992c2bed2376cd0753fc403d92f6c2824091411961",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "G01",
+      "role": "part",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "layer": "aboveReceiver"
+    },
+    {
+      "id": "gs-g10-h-v1",
+      "file": "assets/gunsmith/v1/gs-g10-h-v1.png",
+      "w": 4,
+      "h": 4,
+      "bytes": 124,
+      "sha256": "e9a1da84b37393580263354ea9dffe2b604837c25c000d9449c4762e55ff1c7e",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "G10",
+      "role": "part",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-t01-h-v1",
+      "file": "assets/gunsmith/v1/gs-t01-h-v1.png",
+      "w": 4,
+      "h": 2,
+      "bytes": 107,
+      "sha256": "74c870ff2f5b1c9a761a411bab1d752498c7392c9d5c54faabcdbf4a59d11dee",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "T01",
+      "role": "part",
+      "slot": "side1",
+      "anchor": [
+        1,
+        0
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "beam": [
+        3,
+        1
+      ]
+    },
+    {
+      "id": "gs-t05-h-v1",
+      "file": "assets/gunsmith/v1/gs-t05-h-v1.png",
+      "w": 4,
+      "h": 3,
+      "bytes": 118,
+      "sha256": "ee6f3a1561acb3ffcb7c66fafe48038bb2f11c2eaaafd75c0e9ea9e6c3a4f8a4",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "T05",
+      "role": "part",
+      "slot": "side1",
+      "anchor": [
+        1,
+        1
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "beam": [
+        3,
+        1
+      ]
+    },
+    {
+      "id": "gs-a07-h-v1",
+      "file": "assets/gunsmith/v1/gs-a07-h-v1.png",
+      "w": 8,
+      "h": 2,
+      "bytes": 113,
+      "sha256": "8f9855b2d8c9635574ecd661b72f31ae5e4ad4ae71206198b522a5bb34d79c84",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "A07",
+      "role": "part",
+      "slot": "mount",
+      "anchor": [
+        3,
+        1
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "mounts": {
+        "top": [
+          3,
+          0
+        ]
+      }
+    },
+    {
+      "id": "gs-gb17-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-gb17-receiver-i-v1.png",
+      "w": 38,
+      "h": 17,
+      "bytes": 336,
+      "sha256": "79463839a371e0456b99e7d0a8c812ed1467f981d934712849f148b39444098d",
+      "revision": 1,
+      "output": "inventory",
+      "gun": "gb17",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "tip": [
+        38,
+        4
+      ],
+      "mounts": {
+        "micro": [
+          11,
+          1
+        ],
+        "pistolSide": [
+          30,
+          8
+        ],
+        "muzzle": [
+          37,
+          3
+        ],
+        "barrel": [
+          37,
+          3
+        ],
+        "mag": [
+          8,
+          14
+        ],
+        "rearGrip": [
+          8,
+          8
+        ]
+      }
+    },
+    {
+      "id": "gs-gb17-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-gb17-receiver-w-v1.png",
+      "w": 76,
+      "h": 34,
+      "bytes": 501,
+      "sha256": "3e01713c5c6e71b28e57385a0ca132eeae3a9544b091bc0f87992c4bb39898cf",
+      "revision": 1,
+      "output": "bench",
+      "gun": "gb17",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "tip": [
+        76,
+        8
+      ],
+      "mounts": {
+        "micro": [
+          22,
+          2
+        ],
+        "pistolSide": [
+          60,
+          16
+        ],
+        "muzzle": [
+          75,
+          6
+        ],
+        "barrel": [
+          75,
+          6
+        ],
+        "mag": [
+          16,
+          28
+        ],
+        "rearGrip": [
+          16,
+          16
+        ]
+      }
+    },
+    {
+      "id": "gs-o01-i-v1",
+      "file": "assets/gunsmith/v1/gs-o01-i-v1.png",
+      "w": 9,
+      "h": 6,
+      "bytes": 155,
+      "sha256": "8033b9d2b99d70d4a162291de3cece01d7b88d1ff5b1912082c250f71e6474ed",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "O01",
+      "role": "part",
+      "slot": "micro",
+      "anchor": [
+        4,
+        5
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-o01-w-v1",
+      "file": "assets/gunsmith/v1/gs-o01-w-v1.png",
+      "w": 18,
+      "h": 12,
+      "bytes": 251,
+      "sha256": "9f5e5db125ae9e56b29a9703dc593debeda767da80ffea7d4f8b54d8ae7e92a5",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "O01",
+      "role": "part",
+      "slot": "micro",
+      "anchor": [
+        8,
+        11
+      ],
+      "colors": 6,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-o08-i-v1",
+      "file": "assets/gunsmith/v1/gs-o08-i-v1.png",
+      "w": 22,
+      "h": 9,
+      "bytes": 218,
+      "sha256": "de2317177b606771eb46d5f8722fd2f1372215e7a59a68952d404a39a7d2c376",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "O08",
+      "role": "part",
+      "slot": "top",
+      "anchor": [
+        10,
+        8
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-o08-w-v1",
+      "file": "assets/gunsmith/v1/gs-o08-w-v1.png",
+      "w": 44,
+      "h": 16,
+      "bytes": 304,
+      "sha256": "2b6d9d9515b96636de18afd3e2a8e93f4a4c16cab4d5f21a5e9821bd2c1b7a9f",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "O08",
+      "role": "part",
+      "slot": "top",
+      "anchor": [
+        21,
+        15
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-m03-i-v1",
+      "file": "assets/gunsmith/v1/gs-m03-i-v1.png",
+      "w": 14,
+      "h": 6,
+      "bytes": 147,
+      "sha256": "eebe577114745c297a06ef13d9b52c45f50682cb14ae4cd5668c453b58d30a15",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "M03",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "tip": [
+        14,
+        3
+      ]
+    },
+    {
+      "id": "gs-m03-w-v1",
+      "file": "assets/gunsmith/v1/gs-m03-w-v1.png",
+      "w": 28,
+      "h": 12,
+      "bytes": 208,
+      "sha256": "1c6367cc28139d1029f2b408008bd38de4409238cf58aa0fd7803268476e1603",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "M03",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        4
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "tip": [
+        28,
+        6
+      ]
+    },
+    {
+      "id": "gs-b01-i-v1",
+      "file": "assets/gunsmith/v1/gs-b01-i-v1.png",
+      "w": 8,
+      "h": 4,
+      "bytes": 126,
+      "sha256": "7d6d305e5a8fd98aac1baf71d2fca40fa66b2a668c4925295c689e9e96b25dc4",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "B01",
+      "role": "part",
+      "slot": "barrel",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "mounts": {
+        "muzzle": [
+          7,
+          1
+        ]
+      },
+      "tip": [
+        8,
+        2
+      ]
+    },
+    {
+      "id": "gs-b01-w-v1",
+      "file": "assets/gunsmith/v1/gs-b01-w-v1.png",
+      "w": 16,
+      "h": 8,
+      "bytes": 181,
+      "sha256": "346dec7ebb7ccd09c14f7c2a0ea131b5fef3e9ff26d7633416defcd7c95beb74",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "B01",
+      "role": "part",
+      "slot": "barrel",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "mounts": {
+        "muzzle": [
+          15,
+          2
+        ]
+      },
+      "tip": [
+        16,
+        4
+      ]
+    },
+    {
+      "id": "gs-b08-i-v1",
+      "file": "assets/gunsmith/v1/gs-b08-i-v1.png",
+      "w": 36,
+      "h": 5,
+      "bytes": 154,
+      "sha256": "3ea91b454d35a03e228542dbb1af1c37e94147519c782960b741ad1abe2f0963",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "B08",
+      "role": "part",
+      "slot": "barrel",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "mounts": {
+        "muzzle": [
+          35,
+          2
+        ]
+      },
+      "tip": [
+        36,
+        3
+      ]
+    },
+    {
+      "id": "gs-b08-w-v1",
+      "file": "assets/gunsmith/v1/gs-b08-w-v1.png",
+      "w": 72,
+      "h": 10,
+      "bytes": 237,
+      "sha256": "65da6ccd5f66defb447ecb420276f40a0d0cdc2c3fe47eb8716d8672a4dcda64",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "B08",
+      "role": "part",
+      "slot": "barrel",
+      "anchor": [
+        0,
+        4
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "mounts": {
+        "muzzle": [
+          71,
+          4
+        ]
+      },
+      "tip": [
+        72,
+        6
+      ]
+    },
+    {
+      "id": "gs-h05-i-v1",
+      "file": "assets/gunsmith/v1/gs-h05-i-v1.png",
+      "w": 20,
+      "h": 8,
+      "bytes": 166,
+      "sha256": "396d3be79e679634c308657ca719f46920c4ead81ee069d55ff0d346dcdb710d",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "H05",
+      "role": "part",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "mounts": {
+        "under": [
+          9,
+          7
+        ],
+        "side1": [
+          14,
+          3
+        ]
+      }
+    },
+    {
+      "id": "gs-h05-w-v1",
+      "file": "assets/gunsmith/v1/gs-h05-w-v1.png",
+      "w": 40,
+      "h": 15,
+      "bytes": 226,
+      "sha256": "4c90029e430fdeb5aab7f49d14186cd344d569a101dddef00c3007ed32ed23a5",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "H05",
+      "role": "part",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        4
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "mounts": {
+        "under": [
+          18,
+          14
+        ],
+        "side1": [
+          28,
+          6
+        ]
+      }
+    },
+    {
+      "id": "gs-s01-i-v1",
+      "file": "assets/gunsmith/v1/gs-s01-i-v1.png",
+      "w": 18,
+      "h": 10,
+      "bytes": 176,
+      "sha256": "d765f90b0d9e47e2d9298e5d6ef6e1c257bf47cbbda1977223365a3a17c899da",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "S01",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        17,
+        3
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-s01-w-v1",
+      "file": "assets/gunsmith/v1/gs-s01-w-v1.png",
+      "w": 36,
+      "h": 20,
+      "bytes": 265,
+      "sha256": "cb9df315f69351ef3be5920d5f8730bd3c5141ebc8203be1b7da06075a98aee5",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "S01",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        35,
+        6
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-s02-i-v1",
+      "file": "assets/gunsmith/v1/gs-s02-i-v1.png",
+      "w": 22,
+      "h": 12,
+      "bytes": 194,
+      "sha256": "206e75bed5be52474cfd2650df7460fb3f842e95a6d2ab4d1b5d8f37b350a467",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "S02",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        21,
+        3
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-s02-w-v1",
+      "file": "assets/gunsmith/v1/gs-s02-w-v1.png",
+      "w": 44,
+      "h": 24,
+      "bytes": 303,
+      "sha256": "b147d5e4687f4cc7b9b26fc8ed2ed55796fd9a38471e46a008662040eaef54d8",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "S02",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        43,
+        6
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-p01-i-v1",
+      "file": "assets/gunsmith/v1/gs-p01-i-v1.png",
+      "w": 7,
+      "h": 10,
+      "bytes": 187,
+      "sha256": "a2b9f445d4cd2069a53038caa100fb52aa45c966e98b17462ca00c00c9a1359e",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "P01",
+      "role": "part",
+      "slot": "rearGrip",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-p01-w-v1",
+      "file": "assets/gunsmith/v1/gs-p01-w-v1.png",
+      "w": 14,
+      "h": 20,
+      "bytes": 248,
+      "sha256": "7175429de1c7a2eee59d4f7a2d5fe24c0ea86561a7b8e8269c9507d4a4ddf7bb",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "P01",
+      "role": "part",
+      "slot": "rearGrip",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-p02-i-v1",
+      "file": "assets/gunsmith/v1/gs-p02-i-v1.png",
+      "w": 8,
+      "h": 11,
+      "bytes": 190,
+      "sha256": "c1f5a8c53af824f6f52fb455f0a9f2d4fdafb1ebaf83f5e1270e5e28f0a4b193",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "P02",
+      "role": "part",
+      "slot": "rearGrip",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-p02-w-v1",
+      "file": "assets/gunsmith/v1/gs-p02-w-v1.png",
+      "w": 16,
+      "h": 22,
+      "bytes": 257,
+      "sha256": "0a9ae40d380433cb45e95885b8303af2bb7c8bd3258d7e00cbd8c5e822fcfc00",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "P02",
+      "role": "part",
+      "slot": "rearGrip",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-f03-i-v1",
+      "file": "assets/gunsmith/v1/gs-f03-i-v1.png",
+      "w": 10,
+      "h": 6,
+      "bytes": 148,
+      "sha256": "a69bc0f56d6fe46f538503e377a66fc2fe9197d1993d4404f73bd432b91d6650",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "F03",
+      "role": "part",
+      "slot": "under",
+      "anchor": [
+        4,
+        0
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-f03-w-v1",
+      "file": "assets/gunsmith/v1/gs-f03-w-v1.png",
+      "w": 20,
+      "h": 12,
+      "bytes": 215,
+      "sha256": "8439cc85e2c41f84cab020a95e25ae26415e4ed62ab561353d43d36b5103a900",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "F03",
+      "role": "part",
+      "slot": "under",
+      "anchor": [
+        9,
+        0
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-g01-i-v1",
+      "file": "assets/gunsmith/v1/gs-g01-i-v1.png",
+      "w": 7,
+      "h": 7,
+      "bytes": 142,
+      "sha256": "915efe3f04fb07d51bd420f3606e06751ef8494db617980945292569cbdcf40b",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "G01",
+      "role": "part",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 3,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "layer": "aboveReceiver"
+    },
+    {
+      "id": "gs-g01-w-v1",
+      "file": "assets/gunsmith/v1/gs-g01-w-v1.png",
+      "w": 14,
+      "h": 14,
+      "bytes": 201,
+      "sha256": "ece140d2e4e577258182c44b1e05796750ee0cb34a4fdeeb9d253cbbff3cf76d",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "G01",
+      "role": "part",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "layer": "aboveReceiver"
+    },
+    {
+      "id": "gs-g10-i-v1",
+      "file": "assets/gunsmith/v1/gs-g10-i-v1.png",
+      "w": 9,
+      "h": 8,
+      "bytes": 145,
+      "sha256": "43368c4994e3b232af583ec1c0ad28aa73f799e1e6de6a7e9af3c3241ae78550",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "G10",
+      "role": "part",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-g10-w-v1",
+      "file": "assets/gunsmith/v1/gs-g10-w-v1.png",
+      "w": 18,
+      "h": 16,
+      "bytes": 225,
+      "sha256": "bc86b80855a7ac2438a0f7f4a36fbb6ff8c7d351c785b6629d13f3a4e9d04f1e",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "G10",
+      "role": "part",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-t01-i-v1",
+      "file": "assets/gunsmith/v1/gs-t01-i-v1.png",
+      "w": 9,
+      "h": 5,
+      "bytes": 145,
+      "sha256": "ad687d5cda7a1ae1f09e6851bf887613b2911541fe83157b7867f4258caeedaf",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "T01",
+      "role": "part",
+      "slot": "side1",
+      "anchor": [
+        4,
+        1
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "beam": [
+        7,
+        3
+      ]
+    },
+    {
+      "id": "gs-t01-w-v1",
+      "file": "assets/gunsmith/v1/gs-t01-w-v1.png",
+      "w": 18,
+      "h": 10,
+      "bytes": 203,
+      "sha256": "6f0b94cdc778cb0ef57c33d8addf932575f4bd1d277f0ee7780f0ab4341911cf",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "T01",
+      "role": "part",
+      "slot": "side1",
+      "anchor": [
+        8,
+        2
+      ],
+      "colors": 6,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "beam": [
+        16,
+        6
+      ]
+    },
+    {
+      "id": "gs-t05-i-v1",
+      "file": "assets/gunsmith/v1/gs-t05-i-v1.png",
+      "w": 10,
+      "h": 6,
+      "bytes": 153,
+      "sha256": "b84ca7b0588e20ee25e433bb6fc5d5c601d422ba4211605c1dbd7ab67849caa9",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "T05",
+      "role": "part",
+      "slot": "side1",
+      "anchor": [
+        4,
+        2
+      ],
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "beam": [
+        8,
+        3
+      ]
+    },
+    {
+      "id": "gs-t05-w-v1",
+      "file": "assets/gunsmith/v1/gs-t05-w-v1.png",
+      "w": 20,
+      "h": 12,
+      "bytes": 217,
+      "sha256": "de5574b54e85081ace9eb8da1043d4131a9b0d0b37862a09f4cff5e0f1543d26",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "T05",
+      "role": "part",
+      "slot": "side1",
+      "anchor": [
+        9,
+        4
+      ],
+      "colors": 6,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "beam": [
+        17,
+        6
+      ]
+    },
+    {
+      "id": "gs-a07-i-v1",
+      "file": "assets/gunsmith/v1/gs-a07-i-v1.png",
+      "w": 18,
+      "h": 2,
+      "bytes": 102,
+      "sha256": "d281d8e754b114dac4e7c6b612362e1d6e977ae143025a68120e0c8713cf8294",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "A07",
+      "role": "part",
+      "slot": "mount",
+      "anchor": [
+        8,
+        1
+      ],
+      "colors": 1,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "mounts": {
+        "top": [
+          8,
+          0
+        ]
+      }
+    },
+    {
+      "id": "gs-a07-w-v1",
+      "file": "assets/gunsmith/v1/gs-a07-w-v1.png",
+      "w": 36,
+      "h": 4,
+      "bytes": 154,
+      "sha256": "992de9e0169eac20e6e2714c79ab8fe371580c1b330570f139b54cfa85bbbc1f",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "A07",
+      "role": "part",
+      "slot": "mount",
+      "anchor": [
+        17,
+        3
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "mounts": {
+        "top": [
+          17,
+          0
+        ]
+      }
+    },
+    {
+      "id": "gs-carbine-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-carbine-receiver-w-v1.png",
+      "w": 156,
+      "h": 34,
+      "bytes": 747,
+      "sha256": "456e394a36c63e95bdbf6f5aec8886f25770e778cdcdb63c2ba0ac4c325dd1d9",
+      "revision": 1,
+      "output": "bench",
+      "gun": "carbine",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 9,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "wholeGunCanvas": true,
+      "tip": [
+        156,
+        12
+      ],
+      "mounts": {
+        "handguard": [
+          88,
+          16
+        ],
+        "mount": [
+          66,
+          8
+        ],
+        "muzzle": [
+          155,
+          10
+        ]
+      }
+    },
+    {
+      "id": "gs-carbine-handguard-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-carbine-handguard-factory-w-v1.png",
+      "w": 30,
+      "h": 5,
+      "bytes": 132,
+      "sha256": "98bbd87f225a3bda7398ca48c3517e82d3cf40bdfd8c073b68491892c5bbb4eb",
+      "revision": 1,
+      "output": "bench",
+      "gun": "carbine",
+      "item": null,
+      "role": "factory",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-pistol-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-pistol-receiver-w-v1.png",
+      "w": 76,
+      "h": 34,
+      "bytes": 551,
+      "sha256": "f4587aa39daa9d13575ec8d948df1c12777c4a88461fba1a12d57d2200d6d2cf",
+      "revision": 1,
+      "output": "bench",
+      "gun": "pistol",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 9,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "wholeGunCanvas": true,
+      "tip": [
+        76,
+        11
+      ],
+      "mounts": {
+        "mount": [
+          36,
+          2
+        ],
+        "muzzle": [
+          75,
+          6
+        ]
+      }
+    },
+    {
+      "id": "gs-shotgun-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-shotgun-receiver-w-v1.png",
+      "w": 156,
+      "h": 34,
+      "bytes": 665,
+      "sha256": "2c5b9c357431134b00495edc314454e1bf69f369c33b85bb8a70d9d798e32dee",
+      "revision": 1,
+      "output": "bench",
+      "gun": "shotgun",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 8,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "wholeGunCanvas": true,
+      "tip": [
+        156,
+        12
+      ],
+      "mounts": {
+        "mount": [
+          70,
+          6
+        ],
+        "muzzle": [
+          155,
+          6
+        ]
+      }
+    },
+    {
+      "id": "gs-gb17-q24-v1",
+      "file": "assets/gunsmith/v1/gs-gb17-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 283,
+      "sha256": "6109f2a1eb50a7e1457e2fe6662d3365b25c6673e4c1fdcabbff60ca3f07217a",
+      "revision": 1,
+      "output": "icon24",
+      "gun": "gb17",
+      "item": "gb17",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 3,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-gb17-q32-v1",
+      "file": "assets/gunsmith/v1/gs-gb17-q32-v1.png",
+      "w": 32,
+      "h": 32,
+      "bytes": 333,
+      "sha256": "755e7bdbf7192456d502d726d04bc72b98771493864d2e31bbb240043d2cfb86",
+      "revision": 1,
+      "output": "icon32",
+      "gun": "gb17",
+      "item": "gb17",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 3,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-o01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o01-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 232,
+      "sha256": "f7d638bb491aceb9580a41161d9d140b2793b66c01055e1e7a78592ca40214e6",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "O01",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 6,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-o08-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o08-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 268,
+      "sha256": "c7869d6b821919dc34589a26fad2347cd439c99685dce89cc35dae0c159fc2ae",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "O08",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-m03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m03-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 213,
+      "sha256": "9efe06b9305e6741c33fee2886e6e0bdcbda0b5055984af242eab16b8b6cfdbd",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "M03",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-b01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-b01-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 207,
+      "sha256": "63deb462091918ac5936326a75f98715174e4dd1d4ed7de00aef008e518be0ae",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "B01",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-b08-q24-v1",
+      "file": "assets/gunsmith/v1/gs-b08-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 204,
+      "sha256": "e5c5e47f55d10b075d59b3b2f673bff2737d63e70f0178999c6b2a1430a61cc6",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "B08",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-h05-q24-v1",
+      "file": "assets/gunsmith/v1/gs-h05-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 203,
+      "sha256": "e501e33e7d0f6541a9f7ea0aff37f06196974818c418797956e826e6c45d90c6",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "H05",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-s01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-s01-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 239,
+      "sha256": "684e1efad5eb5f4a30a157883d66d76980d42d5d3731ac8fb0fc48acf197a1d8",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "S01",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-s02-q24-v1",
+      "file": "assets/gunsmith/v1/gs-s02-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 247,
+      "sha256": "3ed2195feacecf26abbbb24e6eced9b7d222db143d379c2db710bd6e487968f7",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "S02",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-p01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-p01-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 262,
+      "sha256": "eacf5823c9e3835eea23491328454c7ad986e8a55103bfa5309a652f9ebd546c",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "P01",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-p02-q24-v1",
+      "file": "assets/gunsmith/v1/gs-p02-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 242,
+      "sha256": "7c59dabf070b03436bd25f39eca59e87992900d0c7527324b5d2f1c62624df7e",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "P02",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-f03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-f03-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 244,
+      "sha256": "e1c7dcafcab5923ceb69dd6dffa61757afc70ba964556c58d739866c1e87dde7",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "F03",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-g01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g01-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 210,
+      "sha256": "a0790a552c9c3eeca3acc484ece790647d9a9e562100ecb782800859c7f2d3f3",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "G01",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-g10-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g10-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 227,
+      "sha256": "03b7c4d255b2e68cdb76a588503277788ebe38cf24a537286d15f4ccc491afe3",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "G10",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-t01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-t01-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 221,
+      "sha256": "da2add9cadd41607239063929808240090a89889f8b6c35c3956d206c1bb694e",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "T01",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 6,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-t05-q24-v1",
+      "file": "assets/gunsmith/v1/gs-t05-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 271,
+      "sha256": "e667167b1553d251c9934d9abe44bf002634b033398f70da37d21fdeac082098",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "T05",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 6,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    },
+    {
+      "id": "gs-a07-q24-v1",
+      "file": "assets/gunsmith/v1/gs-a07-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 214,
+      "sha256": "8317a4521a62b145c111d59dc2720940b9a800ebcdb29087c22df641f5baa795",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "A07",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "source/pixel-artwork-p1.json",
+      "sourceRect": null,
+      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+    }
+  ]
+}
