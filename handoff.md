@@ -1,3 +1,5 @@
+2026-10-28 维护者已明确授权 #118 复查无问题后自动合并。本次正常合入 main `100858502b30c78965d1a308b2d6280172763716`（#117），保留双方任务记录；业务修复源码未再改变。当前组合实际通过 95 项 CI 守卫及严格打包。准确新 head CI、自动合并配置及最终合入状态以原 PR 平台记录为准；不跳过必需检查或分支保护。
+
 ## 2026-10-28 Shader cache 快照消费字段校验（PR #118，`fix/heap-cache-input`）
 
 复用 [PR #118](https://github.com/xuys2025/escape-bincov/pull/118)，续作前 head `039bac0d7e27905857ac989b2f6e9bc061f547dc`。本轮先正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`（`3613b04`），交付 head `bb507f1` 的完整 CI [40624444343](https://github.com/xuys2025/escape-bincov/actions/runs/40624444343) 已通过。main 新进 #134 后，再正常合入共同截止点 `630e68f517edea34bfbcc548473897bd36bdfa08`；只在本文件顶部冲突并保留双方小节，#134 的架构工具、分类与入口完整保留；准确交付 head 与远程检查见原 PR。职责仍是 #32/#60 的 shader-cache review 分析器输入校验，与 #116 station 报告消费字段校验分开。
@@ -9,6 +11,12 @@
 Node v24.22.1 本轮实际生成两份 V8 快照（5,210,690 / 5,211,160 bytes），候选 CLI exit 0，新增人工字符串 2 节点/176 bytes、3 owner paths。这只是 Node 人工字符串图的格式兼容证据，不是浏览器/游戏 shader 泄漏或 F20 签收。原始快照、采集脚本和日志只在忽略的 `test-results/pr118/`；首轮未扁平化人工字符串只得到零匹配，已修 fixture 重新捕获并核对非零观察。没有变更分析算法、阈值、游戏、历史证据或测试分类。
 
 此前 `bb507f1` 已实际通过完整 `pnpm test` 1022/1022（63.87 秒）、`pnpm check:ci` 87/87、`pnpm package`、CLI 十组与入口文档三组合跑 13/13，且其完整 CI 已通过。合入 #134 时逐字节核对本任务生产脚本、十组 CLI 测试与锁文件不变，依赖声明和 test/check:ci/package/build 命令不变，游戏 src/assets/tests 不变；1022 单测与真实快照兼容证据按同代码复用，不声称重新采样。当前合成树已重新实际通过 `pnpm check:ci` 95/95（18.56 秒，含 CLI 十组）、`pnpm package` 与 `git diff --check`，三产品 SHA-256/字节数与此前及 main 一致。新日志为 `test-results/pr118/check-ci-630.log`、`package-630.log`，输入核对与三哈希为 `merge-630-inputs.json`、`product-hashes-630.json`；生成物不提交。首次本地输入比对发现测试工作副本 mixed 换行，归一为已提交 LF 后字节一致；冲突解决前误启动的一次守卫日志仅留 before-resolution，不作为当前验证。未另跑本机游戏单测/浏览器、游戏堆采样、trend 或 60 轮/F20，不关闭 #32/#60；新 head 完整 CI 以原 PR 实时链接为准，旧成功不代表新 head。已 Ready，未启用自动合并、未合并或发布。
+
+## 2026-10-28 · 居民楼 region 身份（PR #117 续作）
+
+`fix/content-identity` 保留原 PR 历史并依次合入 main `03ea261`、`630e68f`（#134）。居民楼 8 个已有完整 region ID 写入世界定义，投影不按中文名补身份；不变更世界/布局编号或存档格式。楼梯方向和内容登记仍属 Q-E06，未在本 PR 实施。
+
+在未改动的 `03ea261` 独立捕获 mall-v4 两层完整静态投影哈希，合成后逐项相等；原九图 / 28 入口基线及改名、重排、缺 ID 反例亦通过（4/4）。Windows / Node 24 / pnpm 11.19：`pnpm test` 1026/1026、`pnpm check:ci` 77/77、`pnpm package` 通过，HTML SHA-256 `bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25`。同步 `630e68f` 后重跑：专项 4/4、`pnpm test` 1026/1026、`pnpm check:ci` 85/85、`pnpm package` 通过。两次 main 的游戏源码与素材无变化，复用此前打包 HTML 的 `pnpm test:raid-default` 11/11（含居民楼、mall-v4 和旧行动恢复）；准确 head CI 状态见 PR 正文。真人体验不由自动测试替代。
 
 ## 2026-10-28 · 新一轮减熵：架构门禁与依赖查询（#60）
 
