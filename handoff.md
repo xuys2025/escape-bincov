@@ -1,6 +1,6 @@
 ## 2026-10-28 室内墙体切换过渡：墙下沉／升起
 
-分支 `feat/indoor-wall-transition`，起点 main `6758d65`（已含 [PR #135](https://github.com/xuys2025/escape-bincov/pull/135) 的两阶段墙体规则）。#135 合并后维护者试玩，反馈切换“没有过渡、不自然”。可选“墙往下沉”和“慢慢变透明”，维护者选了下沉。
+承接 [PR #141](https://github.com/xuys2025/escape-bincov/pull/141)，分支 `feat/indoor-wall-transition`，起点 main `6758d65`（已含 [PR #135](https://github.com/xuys2025/escape-bincov/pull/135) 的两阶段墙体规则）。#135 合并后维护者试玩，反馈切换“没有过渡、不自然”。可选“墙往下沉”和“慢慢变透明”，维护者选了下沉。
 
 已实施：墙在 0.2 秒内整像素沉进占地格（到底等于基础格图），恢复时升起，中途掉头从当时位置返回；门洞裁切原地保持，墙上附着物跟着下移；走出建筑时原建筑的墙先升回再交还淡出。场景首帧和“减少动态效果”直接切换。规则和细节记在[方案 §6 第三阶段](docs/INDOOR-WALL-VISIBILITY-PLAN.md#第三阶段切换过渡已实施待合并)；只改显示，存档、地图、碰撞和房间揭示都不变。
 
