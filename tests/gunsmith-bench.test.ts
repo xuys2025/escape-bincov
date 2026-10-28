@@ -13,7 +13,7 @@ const build = (gun: string, parts: [string, string, string | null, string][] = [
     ({ gun, parts: parts.map(([uid, id, parent, slot]) => ({ uid, id, parent, slot: slot as Build['parts'][number]['slot'] })) });
 /** An M4A1 equipped with 28 rounds, a G17 and some parts in the stash, one part in the bag. */
 function profile() {
-    const p = D.newSave(); p.stash = D.createInventory(10, 6); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
+    const p = D.newSave(); p.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
     p.equipment = { weapon: 'mb4a1', weaponUid: 'm4', gun: factoryState(), ammo: 28, ammoRelief: 0, relief: false };
     for (const id of ['gb17', 'O03', 'H01', 'F01', 'F01', 'G10']) assert.equal(D.addItem(p.stash, id), 0);
     assert.equal(D.addItem(p.bag, 'O08'), 0);

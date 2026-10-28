@@ -37,7 +37,7 @@ const GUN = 'gun-bench-m4';
 
 /** M4A1 equipped with 28 rounds; a G17 and ten sample parts in the stash; spare rounds in the bag. */
 function fixture() {
-  const p = D.newSave(); p.stash = D.createInventory(10, 6); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2); p.cash = 900;
+  const p = D.newSave(); p.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2); p.cash = 900;
   p.equipment = { weapon: 'mb4a1', weaponUid: GUN, gun: factoryState(), ammo: 28, ammoRelief: 0, relief: false };
   for (const id of ['gb17', 'O03', 'O08', 'H01', 'F01', 'T01', 'G10', 'S01', 'B01', 'M03']) assert.equal(D.addItem(p.stash, id), 0, id);
   assert.equal(D.addItem(p.bag, 'ammoR', 30), 0);

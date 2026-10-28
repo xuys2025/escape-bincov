@@ -28,8 +28,8 @@ export function freshStartRecord(volume: number, now: number): SessionRecord {
   // The fresh record is already past the station-boundary upgrade, as after SaveSession.enableRpg.
   const expansion = newExpansion(now);
   upgradeToRpg(expansion, now);
-  return { format: 'escape-bincov-session', version: 8, revision: 1, savedAt: now, profile, raid: null, terminal: null,
-    legacyBackup: null, migrationBackup: null, gunsBackup: null, expansion, systemsBackup: null, perksBackup: null };
+  return { format: 'escape-bincov-session', version: 9, revision: 1, savedAt: now, profile, raid: null, terminal: null,
+    legacyBackup: null, migrationBackup: null, gunsBackup: null, layoutBackup: null, expansion, systemsBackup: null, perksBackup: null };
 }
 /** Portable backup text for the import pipeline; encoding validates the record with the strict session decoder. */
 export function freshStartText(volume: number, now: number): string { return encodeRecoveryBackup(freshStartRecord(volume, now)); }

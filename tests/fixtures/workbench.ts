@@ -37,7 +37,7 @@ export function yard(stock: (p: D.SaveDataV1) => void) {
     const runtime = new RealHideoutRuntime(state, saves, () => now), events: HideoutEvent[] = [];
     assert.ok(runtime.enter().ok);
     const ticket = saves.prepareExpansionMutation(d => {
-        d.profile.stash = D.createInventory(10, 6); d.profile.bag = D.createInventory(6, 5); d.profile.safe = D.createInventory(2, 2);
+        d.profile.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); d.profile.bag = D.createInventory(6, 5); d.profile.safe = D.createInventory(2, 2);
         d.profile.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 };
         stock(d.profile);
     });

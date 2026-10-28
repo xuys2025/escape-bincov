@@ -69,8 +69,8 @@ export function gearHtml(s: HideoutSnapshot, cell: number, selected: string | nu
       <div class="meter ${over ? 'over' : ''}"><span>携行重量 <small>含装备与安全箱</small></span><b>${departure.weight.toFixed(1)} <small>/ ${departure.carry.toFixed(1)} kg</small></b><i style="width:${Math.min(100, departure.weight / departure.carry * 100)}%"></i></div>
       <h3><i>安</i>安全箱 <small>撤离失败也保留</small></h3>${gridHtml(p.safe, 'safe', cell, selected)}
     </section>
-    <section class="col stash" style="width:${p.stash.w * cell}px"><h3><i>03</i>仓库 <small>${occupied(p.stash)} / ${p.stash.w * p.stash.h} 格 · 出击时留在站里</small></h3>${gridHtml(p.stash, 'stash', cell, selected, { empty: '仓库空置' })}
-      <div class="upgrade">${p.upgraded ? '<span class="ok">已扩建 · 10 × 9 格</span>' : `${btn(`扩建仓库 · ¥ ${D.STASH_UPGRADE_COST}`, 'upgrade', '', !p.quests.repair ? 'disabled' : '')}<small>${p.quests.repair ? '扩建后增至 90 格' : `完成「${D.QUESTS.repair.name}」后可扩建`}</small>`}</div>
+    <section class="col stash" style="width:${p.stash.w * cell}px"><h3><i>03</i>仓库 <small>${occupied(p.stash)} / ${p.stash.w * p.stash.h} 格${p.upgraded ? ' · 已扩建' : ''} · 出击时留在站里${overflowNote(p.stash)}</small></h3><div class="stash-scroll">${gridHtml(p.stash, 'stash', cell, selected, { empty: '仓库空置' })}</div>
+      ${p.upgraded ? '' : `<div class="upgrade">${btn(`扩建仓库 · ¥ ${D.STASH_UPGRADE_COST}`, 'upgrade', '', !p.quests.repair ? 'disabled' : '')}<small>${p.quests.repair ? `扩建后增至 ${D.STASH_W * D.STASH_UPGRADED_ROWS} 格` : `完成「${D.QUESTS.repair.name}」后可扩建`}</small></div>`}
       ${details}
     </section>
   </div>${p.reliefSupplies?.length ? `<div class="relief">有救济补给待领取 ${btn('领取救济补给', 'relief')}</div>` : ''}`;
@@ -89,7 +89,7 @@ export function gearCompactHtml(s: HideoutSnapshot, cell: number, selected: stri
       <div class="cweight ${over ? 'over' : ''}">携行 <b>${departure.weight.toFixed(1)}</b> / ${departure.carry.toFixed(1)} kg</div></div>${charmRow(s.charm?.id ?? null)}
     <div class="panes">
       <section class="pane"><h3>背包 <small>${occupied(p.bag)} / ${p.bag.w * p.bag.h}</small></h3><div class="pane-scroll">${gridHtml(p.bag, 'bag', cell, selected, { empty: '背包是空的' })}</div></section>
-      <section class="pane"><nav class="seg tabs2">${btn(`仓库 <small>${occupied(p.stash)} / ${p.stash.w * p.stash.h}</small>`, 'pane:stash', paneB === 'stash' ? 'on' : '')}${btn('安全箱 <small>失败也保留</small>', 'pane:safe', paneB === 'safe' ? 'on' : '')}${paneB === 'stash' && !p.upgraded ? btn(`扩建 ¥ ${D.STASH_UPGRADE_COST}`, 'upgrade', 'mini grow', !p.quests.repair ? `disabled title="完成「${D.QUESTS.repair.name}」后可扩建"` : '') : ''}</nav><div class="pane-scroll">${gridHtml(inv, paneB, cell, selected, { empty: paneB === 'stash' ? '仓库空置' : '安全箱是空的' })}</div></section>
+      <section class="pane"><nav class="seg tabs2">${btn(`仓库 <small>${occupied(p.stash)} / ${p.stash.w * p.stash.h}</small>${D.stashOverflow(p.stash).length ? ' <b class="bad">溢出</b>' : ''}`, 'pane:stash', paneB === 'stash' ? 'on' : '')}${btn('安全箱 <small>失败也保留</small>', 'pane:safe', paneB === 'safe' ? 'on' : '')}${paneB === 'stash' && !p.upgraded ? btn(`扩建 ¥ ${D.STASH_UPGRADE_COST}`, 'upgrade', 'mini grow', !p.quests.repair ? `disabled title="完成「${D.QUESTS.repair.name}」后可扩建"` : '') : ''}</nav><div class="pane-scroll">${gridHtml(inv, paneB, cell, selected, { empty: paneB === 'stash' ? '仓库空置' : '安全箱是空的' })}</div></section>
     </div>${details}</div>`;
 }
 
@@ -97,6 +97,8 @@ export function gearCompactHtml(s: HideoutSnapshot, cell: number, selected: stri
 const checkoutNote = '成交后自动放入仓库';
 /** The yard shop sells from the stash only; `outside` counts sellable stacks still in the bag or safe. */
 const stashNote = (outside: number) => `整组出售${outside > 0 ? ` · 背包与安全箱 ${outside} 件需先入库` : ''}`;
+/** The stash overflow (#28 M3-12) in a stash heading, while it holds something. */
+const overflowNote = (stash: D.Inventory) => { const n = D.stashOverflow(stash).length; return n ? ` <b class="bad">溢出 ${n} 件 · 清空前不能出击</b>` : ''; };
 export function shopCompactHtml(c: CartView, cell: number, sel: { src: string; uid: string } | null, cash: number, mode: 'buy' | 'sell', outside = 0) {
   const [a, b] = mode === 'buy' ? [['商人物品', c.catalog, 'merchant'], ['待买', c.buy, 'buy']] as const : [['仓库', c.stash, 'stash'], ['待卖', c.sell, 'sell']] as const;
   const selected = sel?.uid ?? null;
@@ -110,7 +112,7 @@ export function shopCompactHtml(c: CartView, cell: number, sel: { src: string; u
   return `<div class="cshop">
     <nav class="seg tabs2">${btn(`买入 <small>${c.buy.items.length} 件 · ¥ ${c.totals.buy}</small>`, 'mode:buy', mode === 'buy' ? 'on' : '')}${btn(`卖出 <small>${c.sell.items.length} 件 · ¥ ${c.totals.sell}</small>`, 'mode:sell', mode === 'sell' ? 'on' : '')}</nav>
     <div class="panes">
-      <section class="pane"><h3>${a[0]} <small>${picked(a[1], a[2]) ?? (mode === 'buy' ? '按包购买' : stashNote(outside))}</small></h3>${mode === 'buy' ? browseBar(c) : ''}<div class="pane-scroll">${gridHtml(a[1], a[2], cell, selected, mode === 'buy' ? { empty: '没有符合条件的商品' } : {})}</div></section>
+      <section class="pane"><h3>${a[0]} <small>${picked(a[1], a[2]) ?? (mode === 'buy' ? '按包购买' : stashNote(outside) + overflowNote(c.stash))}</small></h3>${mode === 'buy' ? browseBar(c) : ''}<div class="pane-scroll">${gridHtml(a[1], a[2], cell, selected, mode === 'buy' ? { empty: '没有符合条件的商品' } : {})}</div></section>
       <section class="pane"><h3>${b[0]} <small>${picked(b[1], b[2]) ?? `¥ ${mode === 'buy' ? c.totals.buy : c.totals.sell}${mode === 'buy' ? ` · ${checkoutNote}` : ''}`}</small></h3><div class="pane-scroll">${gridHtml(b[1], b[2], cell, selected, { empty: '拖到这里' })}</div></section>
     </div>
     <footer class="checkout compact"><div class="sum"><b class="${c.totals.net > cash ? 'bad' : ''}">${c.totals.net >= 0 ? `支出 ¥ ${c.totals.net}` : `收入 ¥ ${-c.totals.net}`}</b><small>结算后 ¥ ${(cash - c.totals.net).toLocaleString()}</small></div>${c.stale ? '<p class="warn">仓库已改变，请刷新清单后重新选择物品。</p>' : ''}${c.warnings.length ? `<p class="warn">${c.warnings.map(esc).join('<br>')}</p>` : ''}<div class="acts">${btn(c.stale ? '刷新清单' : '清空', 'cart-reset', 'mini', c.dirty || c.stale ? '' : 'disabled')}${btn('结算', 'cart-settle', 'primary', c.dirty && !c.stale ? '' : 'disabled')}</div></footer></div>`;
@@ -134,7 +136,7 @@ export function shopHtml(c: CartView, cell: number, selected: string | null, cas
   return `<div class="shop">
     <section><h3>商人物品 <small>按包购买</small></h3>${browseBar(c)}${gridHtml(c.catalog, 'merchant', cell, selected, { empty: '没有符合条件的商品' })}</section>
     <section class="buffer"><h3>待买 <small>¥ ${c.totals.buy}</small></h3>${gridHtml(c.buy, 'buy', cell, selected, { empty: '拖到这里' })}<h3>待卖 <small>¥ ${c.totals.sell}</small></h3>${gridHtml(c.sell, 'sell', cell, selected, { empty: '拖到这里' })}</section>
-    <section><h3>仓库 <small>${stashNote(outside)}</small></h3>${gridHtml(c.stash, 'stash', cell, selected)}</section>
+    <section><h3>仓库 <small>${stashNote(outside)}${overflowNote(c.stash)}</small></h3><div class="stash-scroll">${gridHtml(c.stash, 'stash', cell, selected)}</div></section>
   </div>
   <footer class="checkout"><div class="sum"><span>待买 ¥ ${c.totals.buy}</span><span>待卖 ¥ ${c.totals.sell}</span><b class="${c.totals.net > cash ? 'bad' : ''}">${c.totals.net >= 0 ? `支出 ¥ ${c.totals.net}` : `收入 ¥ ${-c.totals.net}`}</b><small>结算后现金 ¥ ${(cash - c.totals.net).toLocaleString()} · ${checkoutNote}</small></div>${c.stale ? '<p class="warn">仓库已改变，请刷新清单后重新选择物品。</p>' : ''}${c.warnings.length ? `<p class="warn">${c.warnings.map(esc).join('<br>')}</p>` : ''}<div class="acts">${btn(c.stale ? '刷新清单' : '清空', 'cart-reset', '', c.dirty || c.stale ? '' : 'disabled')}${btn('结算', 'cart-settle', 'primary', c.dirty && !c.stale ? '' : 'disabled')}</div></footer>`;
 }
@@ -162,8 +164,8 @@ export function generatorHtml(s: HideoutSnapshot) {
 }
 
 export function deployHtml(s: HideoutSnapshot, dep: { warnings: string[]; weight: number; carry: number }, world: RunWorld, seed: string, worlds: readonly RunWorld[], preview: string | null, art: CountyArt['regions'], narrow: boolean) {
-  const region = deploymentRegion(worlds, world, preview), canDeploy = deploymentWorld(region, worlds) !== null;
-  const p = s.profile, e = p.equipment, w = D.WEAPONS[e.weapon || 'knife'];
+  const p = s.profile, e = p.equipment, w = D.WEAPONS[e.weapon || 'knife'], overflow = D.stashOverflow(p.stash).length;
+  const region = deploymentRegion(worlds, world, preview), open = deploymentWorld(region, worlds) !== null, canDeploy = open && !overflow;
   const meds = D.count(p.bag, 'bandage') + D.count(p.bag, 'medkit');
   const checks = [
     { ok: !!e.weapon, label: e.weapon ? `主武器 · ${w.name}` : '未装备主武器' },
@@ -171,13 +173,15 @@ export function deployHtml(s: HideoutSnapshot, dep: { warnings: string[]; weight
     { ok: meds > 0, label: meds ? `止血用品 · ${meds} 件在背包` : '背包里没有止血用品' },
     { ok: dep.weight <= dep.carry, label: `携行重量 · ${dep.weight.toFixed(1)} / ${dep.carry.toFixed(1)} kg` },
     { ok: s.body.hp >= s.body.hpMax, label: `生命 · ${Math.floor(s.body.hp)} / ${s.body.hpMax}` },
+    // Only while an old save's overflow (#28 M3-12) still holds something.
+    ...(overflow ? [{ ok: false, label: `仓库溢出区 · ${overflow} 件待取出` }] : []),
   ];
   const ready = checks.filter(c => c.ok).length, clear = canDeploy && !dep.warnings.length;
   return `<div class="deploy county-deploy">${countyMapHtml(region, worlds, narrow)}<aside class="county-briefing" aria-label="区域情报与出击准备">
   ${regionBriefHtml(region, worlds, art)}<div class="county-preflight"><h3>出发前检查<span class="${ready === checks.length ? 'ok' : 'bad'}">${ready} / ${checks.length}</span></h3><ul class="checks">${checks.map(c => `<li class="${c.ok ? 'ok' : 'bad'}"><i></i>${esc(c.label)}</li>`).join('')}</ul>
   <p class="rule">撤离失败会丢失背包物资和主武器，安全箱保留。出击即写入存档。</p></div>
-  <div class="go"><span class="${clear ? 'ok' : ''}">${canDeploy ? dep.warnings.length ? esc(dep.warnings.join(' · ')) : '装备与快捷补给已备齐' : '选择地图上已开放的区域即可出击。'}</span><div class="go-row">
-  <label class="seedrow" title="相同种子可重现初始配置">种子 <input id="seed" maxlength="16" placeholder="留空随机" value="${esc(seed)}" aria-label="行动种子"></label>${btn(canDeploy ? '开门出击 <span aria-hidden="true">→</span>' : '暂未开发', 'deploy', 'primary big', canDeploy ? '' : 'disabled')}</div></div></aside></div>`;
+  <div class="go"><span class="${clear ? 'ok' : ''}">${overflow ? esc(D.OVERFLOW_BLOCKS_DEPLOY) : canDeploy ? dep.warnings.length ? esc(dep.warnings.join(' · ')) : '装备与快捷补给已备齐' : '选择地图上已开放的区域即可出击。'}</span><div class="go-row">
+  <label class="seedrow" title="相同种子可重现初始配置">种子 <input id="seed" maxlength="16" placeholder="留空随机" value="${esc(seed)}" aria-label="行动种子"></label>${btn(open ? '开门出击 <span aria-hidden="true">→</span>' : '暂未开发', 'deploy', 'primary big', canDeploy ? '' : 'disabled')}</div></div></aside></div>`;
 }
 
 export function trainingHint(t: TrainingProgress): string {

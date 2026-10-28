@@ -71,8 +71,8 @@ try {
         assert.equal(await page.evaluate(() => window.__bincov.app.storageOK), false); assert.equal(await raw(page), bytes);
         await old.close(); await page.reload(); await ready(page); // Inspect the record before the mandatory station-boundary upgrade.
         assert.equal(await page.evaluate(() => window.__bincov.app.save.cash), 1842);
-        // Loading writes the old v3 record as v8 at once (no expansion yet), its exact bytes kept as gunsBackup.
-        preUpgrade = await raw(page); assert.equal(JSON.parse(preUpgrade).version, 8); assert.equal(JSON.parse(preUpgrade).gunsBackup, bytes);
+        // Loading writes the old v3 record as v9 at once (no expansion yet), its exact bytes kept as gunsBackup.
+        preUpgrade = await raw(page); assert.equal(JSON.parse(preUpgrade).version, 9); assert.equal(JSON.parse(preUpgrade).gunsBackup, bytes);
         assert.equal('expansion' in JSON.parse(preUpgrade), false);
     });
     await step('activation quota failure preserves original bytes; retry retains one exact rollback record', async () => {
@@ -88,7 +88,7 @@ try {
             return saveSession.commitExpansionMutation(ticket);
         }), 'committed');
     });
-    await step('the actual old HTML rejects the record with an expansion (v8) both with and without the writer lock, preserving every byte', async () => {
+    await step('the actual old HTML rejects the record with an expansion (v9) both with and without the writer lock, preserving every byte', async () => {
         const bytes = await raw(page); old = await context.newPage();
         await old.goto('https://bincov-expansion.test/legacy?test=1&entry=tabs'); await ready(old);
         assert.equal(await old.evaluate(() => window.__bincov.app.storageOK), false);
@@ -99,14 +99,14 @@ try {
         assert.equal(await old.evaluate(() => window.__bincov.persist()), false); assert.equal(await raw(old), bytes);
         await old.close(); page = await context.newPage();
         await page.goto('https://bincov-expansion.test/current?test=1&entry=tabs'); await ready(page);
-        prePerk = await raw(page); assert.equal(JSON.parse(prePerk).version, 8); assert.equal(JSON.parse(prePerk).expansion.version, 1);
+        prePerk = await raw(page); assert.equal(JSON.parse(prePerk).version, 9); assert.equal(JSON.parse(prePerk).expansion.version, 1);
         // The station entry is the perk upgrade boundary: expansion v3 keeps that exact text once.
         await action(page, 'enter').click();
         const upgraded = JSON.parse(await raw(page));
-        assert.equal(upgraded.version, 8); assert.equal(upgraded.expansion.version, 3); assert.deepEqual(upgraded.expansion.growth.perks, []);
+        assert.equal(upgraded.version, 9); assert.equal(upgraded.expansion.version, 3); assert.deepEqual(upgraded.expansion.growth.perks, []);
         assert.equal(upgraded.systemsBackup, preUpgrade); assert.equal(upgraded.perksBackup, prePerk);
     });
-    await step('every actual old HTML (pre-expansion, the last v4, v5 and v7 clients) rejects v8 with and without the writer lock, preserving every byte', async () => {
+    await step('every actual old HTML (pre-expansion, the last v4, v5 and v7 clients) rejects v9 with and without the writer lock, preserving every byte', async () => {
         const bytes = await raw(page), clients = ['legacy', 'v4', 'v5', 'v7'];
         const refuses = async path => {
             old = await context.newPage(); await old.goto(`https://bincov-expansion.test/${path}?test=1&entry=tabs`); await ready(old);
@@ -121,14 +121,14 @@ try {
         page = await context.newPage();
         await page.goto('https://bincov-expansion.test/current?test=1&entry=tabs'); await ready(page); await action(page, 'enter').click();
         const record = JSON.parse(await raw(page));
-        assert.equal(record.version, 8); assert.equal(record.perksBackup, prePerk); assert.equal(record.systemsBackup, preUpgrade);
+        assert.equal(record.version, 9); assert.equal(record.perksBackup, prePerk); assert.equal(record.systemsBackup, preUpgrade);
         assert.equal(record.profile.version, 3); assert.ok(record.profile.equipment.weaponUid);
     });
     await step('settled native export includes the full extension; cancel/failure/confirmation preserve atomic import', async () => {
         await action(page, 'tab', 'home').click();
         const [download] = await Promise.all([page.waitForEvent('download'), action(page, 'export-save').click()]);
         const path = resolve(root, 'expansion-settled.json'); await download.saveAs(path);
-        const backup = JSON.parse(await readFile(path, 'utf8')); assert.equal(backup.formatVersion, 8); assert.equal(backup.record.expansion.version, 3);
+        const backup = JSON.parse(await readFile(path, 'utf8')); assert.equal(backup.formatVersion, 9); assert.equal(backup.record.expansion.version, 3);
         assert.equal(backup.record.expansion.body.hp, 37); assert.equal(backup.record.expansion.growth.progress.technique, .2);
         const changed = structuredClone(backup); changed.record.profile.cash = 2842;
         const changedPath = resolve(root, 'expansion-import-fixture.json'); await writeFile(changedPath, JSON.stringify(changed));
@@ -142,7 +142,7 @@ try {
         assert.equal(await page.evaluate(() => window.__bincov.app.save.cash), 2842);
     });
     // The v7 client starts its own save as a perk record without enemy rules (5) until a street raid.
-    for (const [name, html, version] of [['v4', v4Client, 4], ['v5', v5Client, 5], ['v7', v7Client, 5]]) await step(`the last ${name} client refuses the v8 backup file and keeps its own save`, async () => {
+    for (const [name, html, version] of [['v4', v4Client, 4], ['v5', v5Client, 5], ['v7', v7Client, 5]]) await step(`the last ${name} client refuses the v9 backup file and keeps its own save`, async () => {
         // A separate profile: the old client needs a save it can write to reach its import dialog.
         const other = await browser.newContext({ viewport: { width: 1280, height: 720 }, offline: true });
         await other.route('https://bincov-expansion.test/**', route => route.fulfill({ status: 200, contentType: 'text/html; charset=utf-8', body: html }));
@@ -156,7 +156,7 @@ try {
             assert.equal(await action(old, 'confirm-import').count(), 0); assert.equal(await raw(old), own);
         } finally { await other.close(); }
     });
-    await step('the last v7 client\'s live enemy raid is written as v8 with enemy rules kept; that client then refuses it and keeps every byte', async () => {
+    await step('the last v7 client\'s live enemy raid is written as v9 with enemy rules kept; that client then refuses it and keeps every byte', async () => {
         // A separate profile, where the v7 client deploys a street raid: its save is a v7 record with enemyBackup.
         const other = await browser.newContext({ viewport: { width: 1280, height: 720 }, offline: true });
         await other.route('https://bincov-expansion.test/**', route => route.fulfill({ status: 200, contentType: 'text/html; charset=utf-8',
@@ -171,7 +171,7 @@ try {
             await v7.close();
             const now = await other.newPage(); await now.goto('https://bincov-expansion.test/current?test=1&entry=tabs'); await ready(now);
             const migrated = JSON.parse(await raw(now));
-            assert.deepEqual([migrated.version, migrated.profile.version, migrated.expansion.raid.version, migrated.gunsBackup], [8, 3, 5, old]);
+            assert.deepEqual([migrated.version, migrated.profile.version, migrated.expansion.raid.version, migrated.gunsBackup, migrated.layoutBackup], [9, 3, 5, old, null]);
             assert.deepEqual([migrated.enemyBackup, migrated.perksBackup, migrated.systemsBackup], [stored.enemyBackup, stored.perksBackup, stored.systemsBackup]);
             assert.ok(migrated.expansion.raid.loadout.weaponUid && migrated.expansion.raid.loadout.gun, 'the carried gun is an instance');
             const bytes = await raw(now);

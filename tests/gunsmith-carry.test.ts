@@ -78,7 +78,7 @@ test('a swap or unequip that cannot place the old gun or its rounds changes noth
     assert.deepEqual(gunSize({ id: 'carbine', parts: suppressed().parts }), { w: 4, h: 1 });
     // A stash full but for one 3x1 gap: the factory carbine would fit, the suppressed one (4x1) does not, in either orientation.
     save.stash.items = [];
-    for (let y = 0; y < 6; y++) for (let x = 0; x < 10; x++) if (!(y === 0 && x < 3)) save.stash.items.push({ uid: `fill-${x}-${y}`, id: 'watch', qty: 1, x, y });
+    for (let y = 0; y < save.stash.h; y++) for (let x = 0; x < save.stash.w; x++) if (!(y === 0 && x < 3)) save.stash.items.push({ uid: `fill-${x}-${y}`, id: 'watch', qty: 1, x, y });
     const before = structuredClone(save);
     assert.equal(D.unequip(save), false); assert.deepEqual(save, before);
     // Open a 4x1 gap: it goes there, as itself; the rounds then need room of their own (none left), so still nothing moves.
@@ -278,14 +278,14 @@ test('a gun is moved, swapped, sorted and sold at its own footprint: a part that
     assert.deepEqual([bag, stash], sides);
     // Sorting and stashing everything pack it at its real length without overlaps.
     const save = D.newSave(); save.bag.items = [long()]; save.stash.items = [];
-    for (let x = 0; x < 10; x++) for (let y = 1; y < 6; y++) save.stash.items.push({ uid: `s-${x}-${y}`, id: 'watch', qty: 1, x, y });
+    for (let x = 0; x < 10; x++) for (let y = 1; y < save.stash.h; y++) save.stash.items.push({ uid: `s-${x}-${y}`, id: 'watch', qty: 1, x, y });
     for (let x = 3; x < 10; x++) save.stash.items.push({ uid: `s-${x}-0`, id: 'watch', qty: 1, x, y: 0 });
     const kept = structuredClone(save);
     assert.equal(transferBagToStash(save), false, 'a 4x1 gun does not fit the 3-cell gap, nothing moves'); assert.deepEqual(save, kept);
     save.stash.items = save.stash.items.filter(i => i.uid !== 's-3-0'); assert.ok(transferBagToStash(save)); assert.ok(organizeStash(save));
     assert.deepEqual(save.stash.items.find(i => i.uid === 'long')!.gun, suppressed());
     assert.doesNotThrow(() => decodeStoredProfile({ ...save, activeRun: null }));
-    // The sell list (6x2 since #28 M3) takes it only where four cells are free.
+    // The sell list (6x3 since #28 M3-12) takes it only where four cells are free.
     const shop = D.newSave(); shop.stash.items = [gunItem('sell-long', 'carbine', 0, 0, suppressed())]; shop.bag.items = []; shop.safe.items = [];
     const cart = S.createCart(shop, 'arms');
     assert.equal(S.shopPlacementError(cart, 'stash', 'sell', 'sell-long', 3, 0), S.SHOP_SPACE_MESSAGE);

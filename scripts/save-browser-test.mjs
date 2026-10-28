@@ -84,7 +84,7 @@ try {
     const saved = (await state()).save;
     assert.deepEqual(saved.quests, { repair: true, sample: true, ledger: true });
     assert.equal(saved.cash, 2000 + 420 + 650 + 800 - 600);
-    assert.equal(saved.stash.h, 9);
+    assert.equal(saved.stash.h, 12);
     await page.reload(); await action('enter').click();
     assert.deepEqual((await state()).save, saved);
   });
@@ -95,7 +95,7 @@ try {
     const download = await downloadPromise;
     backupPath = resolve(out, 'save-roundtrip.json'); await download.saveAs(backupPath);
     const exported = JSON.parse(await readFile(backupPath, 'utf8'));
-    assert.equal(exported.format, 'escape-bincov-recovery-backup'); assert.equal(exported.formatVersion, 8);
+    assert.equal(exported.format, 'escape-bincov-recovery-backup'); assert.equal(exported.formatVersion, 9);
     assert.equal(exported.record.expansion.version, 3); assert.deepEqual(exported.record.profile, expected);
     await page.evaluate(() => { window.__bincov.app.save.cash = 123; window.__bincov.persist(); });
     await page.locator('#backup-file').setInputFiles(backupPath);
@@ -163,7 +163,7 @@ try {
     const downloadPromise = page.waitForEvent('download'); await page.locator('.coast-sample [data-do="backup"]').click();
     backupPath = resolve(out, 'pending-settlement-backup.json'); await (await downloadPromise).saveAs(backupPath);
     const envelope = JSON.parse(await readFile(backupPath, 'utf8'));
-    assert.equal(envelope.formatVersion, 8); assert.equal(envelope.record.expansion.base.location, 'settlement');
+    assert.equal(envelope.formatVersion, 9); assert.equal(envelope.record.expansion.base.location, 'settlement');
     const backup = envelope.record.profile;
     assert.equal(backup.activeRun, null); assert.ok(backup.bag.items.some(i => i.id === 'sample'));
     await page.screenshot({ path: resolve(out, 'save-failure.png') });
@@ -243,7 +243,7 @@ try {
       const file = resolve(out, 'conflict-settlement-backup.json');
       await (await downloadPromise).saveAs(file);
       const backup = JSON.parse(await readFile(file, 'utf8'));
-      assert.equal(backup.formatVersion, 8); assert.deepEqual(backup.record.profile, pending);
+      assert.equal(backup.formatVersion, 9); assert.deepEqual(backup.record.profile, pending);
     } finally { await shared.close(); }
   });
   for (const viewport of [{ width: 1280, height: 720 }, { width: 1920, height: 1080 }]) {

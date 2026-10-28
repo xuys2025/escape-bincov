@@ -105,14 +105,34 @@ export function validateGun(id: unknown, uid: unknown, state: unknown): GunCheck
     return { ok: true };
 }
 
-/** Cells the gun takes: its catalog size grown by every installed part's `grow`, swapped when rotated (as domain itemSize). */
+/**
+ * Cells the gun takes: its catalog size grown by every installed part's `grow`, swapped when rotated (as domain itemSize).
+ * Since #28 M3-12 a box magazine makes a gun two rows (the catalog's `h`), a long one or a drum three (`grow.h`), and a
+ * suppressor one column more (`grow.w`).
+ */
 export function gunSize(gun: Pick<GunInstance, 'id' | 'parts'>, rotated = false): { w: number; h: number } {
+    const v8 = footprintRules === 'v8';
     let { w, h } = GUNS[gun.id];
+    if (v8) h = 1;
     for (const node of nodesOf(gun.parts)) {
         const grow = ATTACHMENTS[node.id].mods.grow;
-        if (grow) { w += grow.w; h += grow.h; }
+        if (grow) { w += grow.w; if (!v8 || V8_TALLER.has(node.id)) h += grow.h; }
     }
     return rotated ? { w: h, h: w } : { w, h };
+}
+/**
+ * The footprint rules gunSize (and domain stashRows) follow: the current ones, or a record v8's while that record is
+ * checked by its own rules before it is migrated (#28 M3-12, recovery-store decodeSession). Under v8 every gun is one row
+ * and only the drum grows one more; suppressors widen the gun as now.
+ */
+let footprintRules: 'current' | 'v8' = 'current';
+const V8_TALLER = new Set(['G09']);
+export const v8Footprints = (): boolean => footprintRules === 'v8';
+/** `read` under the v8 footprint rules; the current rules again afterwards, whatever it throws. */
+export function withV8Footprints<T>(read: () => T): T {
+    const was = footprintRules;
+    footprintRules = 'v8';
+    try { return read(); } finally { footprintRules = was; }
 }
 
 /**

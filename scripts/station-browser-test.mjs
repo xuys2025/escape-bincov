@@ -33,7 +33,7 @@ function preset(name) {
   const fx = { cash: s.cash, quests: { ...s.quests }, upgraded: false, facilities: null, attribute: null, stats: null };
   add(s.stash, 'scrap', 3); add(s.stash, 'wire', 2); add(s.stash, 'fuse', 1); add(s.stash, 'cloth', 4); add(s.stash, 'watch', 1); add(s.bag, 'food', 2);
   if (name !== 'parts') { fx.quests.repair = true; fx.cash = 6000; add(s.stash, 'scrap', 5); add(s.stash, 'wire', 3); add(s.stash, 'fuse', 2); add(s.stash, 'bandage', 2); }
-  if (name === 'built') { s.stash.h = 9; fx.upgraded = true; fx.facilities = { rest: 3, medical: 3, training: 3, workbench: 3, blackmarket: 0 }; fx.attribute = 'strength'; }
+  if (name === 'built') { s.stash.h = D.STASH_UPGRADED_ROWS; fx.upgraded = true; fx.facilities = { rest: 3, medical: 3, training: 3, workbench: 3, blackmarket: 0 }; fx.attribute = 'strength'; }
   return { ...fx, stash: s.stash, bag: s.bag, safe: s.safe, equipment: s.equipment };
 }
 const SEED = fx => {
@@ -134,7 +134,7 @@ try {
     await page.waitForTimeout(1200);
     const g = await page.evaluate(() => ({ bincov: '__bincov' in window, station: '__station' in window, frame: getComputedStyle(document.querySelector('#frame')).visibility, quick: !!document.querySelector('#station-yard').shadowRoot.querySelector('[data-quick="gear"]') }));
     assert.deepEqual(g, { bincov: false, station: false, frame: 'hidden', quick: true });
-    const r = await record(); assert.equal(r.version, 8); assert.equal(r.expansion.version, 3); assert.equal(r.profile.cash, 700);
+    const r = await record(); assert.equal(r.version, 9); assert.equal(r.expansion.version, 3); assert.equal(r.profile.cash, 700);
     await shot('A1-yard-1280x720');
     return `院子挂载，#frame 隐藏；存档 v${r.version}，扩展 v${r.expansion.version}，现金 ${r.profile.cash}`;
   });
@@ -929,6 +929,33 @@ try {
     return {size:[w,h],input:mobile?'CDP touch sequence, tap controls':'real mouse',cashBefore:before.profile.cash,cashAfter:after.profile.cash,refreshPreserved:true};
   });
 
+  await step('H18 旧档溢出区 1280×720：画在仓库下方、只能取出，清空前出击按钮不可用（#28 M3-12）', async () => {
+    const fx = preset('repaired'), h = fx.stash.h;
+    fx.stash.items.push({ uid: 'over-watch', id: 'watch', qty: 1, x: 0, y: h }, { uid: 'over-cloth', id: 'cloth', qty: 1, x: 1, y: h });
+    await open({ fixture: fx, at: [4.6, 5.4], size: [1280, 720] });
+    const goState = async () => { await page.keyboard.press('7'); await until(() => window.__station.host.ui.kind === 'deploy', 3000, 'deploy'); await page.waitForTimeout(200);
+      const r = { disabled: await page.locator('[data-act="deploy"]').isDisabled(), text: await page.locator('.county-deploy .go > span').innerText() }; await page.keyboard.press('Escape'); await page.waitForTimeout(150); return r; };
+    const blocked = await goState();
+    assert.deepEqual(blocked, { disabled: true, text: D.OVERFLOW_BLOCKS_DEPLOY });
+    await page.keyboard.press('1'); await page.waitForTimeout(400);
+    const band = page.locator('[data-grid="stash"] .overflow-band');
+    assert.equal(await band.count(), 1); await shot('H18-overflow-gear-1280x720');
+    const over = await page.evaluate(() => { const b = document.querySelector('#station-yard').shadowRoot.querySelector('.panel .pbody'); return b.scrollHeight - b.clientHeight; });
+    assert.ok(over <= 1, `整备多出 ${over}px`);
+    // Nothing goes in: a stash item dropped on the band lands in the grid's last row (the grid clamps), the overflow keeps its two.
+    const piece = async uid => (await page.locator(`[data-grid="stash"] .item[data-uid="${uid}"]`).boundingBox());
+    const scrap = await itemBox('stash', 'scrap'); await drag({ x: scrap.box.x + 8, y: scrap.box.y + 8 }, await cellCenter('stash', 5, h));
+    const moved = (await snap()).profile.stash;
+    assert.deepEqual([moved.items.find(i => i.uid === scrap.uid).y, D.stashOverflow(moved).map(i => i.uid)], [h - 1, ['over-watch', 'over-cloth']], '溢出区不接收放入');
+    for (const [uid, x] of [['over-watch', 5], ['over-cloth', 4]]) { const b = await piece(uid); await drag({ x: b.x + 8, y: b.y + 8 }, await cellCenter('bag', x, 4)); }
+    const s = await snap();
+    assert.deepEqual(['over-watch', 'over-cloth'].map(uid => s.profile.bag.items.some(i => i.uid === uid)), [true, true]);
+    assert.equal(await band.count(), 0, '清空后溢出区消失');
+    await page.keyboard.press('Escape'); await page.waitForTimeout(150);
+    const open2 = await goState();
+    assert.equal(open2.disabled, false);
+    return `溢出 2 件 → 拖进背包；出击按钮 ${blocked.disabled ? '禁用' : '可用'} → ${open2.disabled ? '禁用' : '可用'}`;
+  });
   await step('H17 390x844 快捷菜单中心点击必须命中整备与修理铺',async()=>{
     report.coverage.mobileMenuHit=[];
     for(const kind of ['gear','arms']) {

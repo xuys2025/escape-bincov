@@ -15,6 +15,7 @@ import { factoryState, isGunId, validateGun } from '../src/gunsmith/instance';
 import { OLD_GUNS, migrateProfile, migrateRecord, type ProfileV2, type RecordV7 } from '../src/gunsmith/migrate';
 import { prototypeWorld } from './fixtures/layered';
 import { holders, oldProfile, oldRecord } from './fixtures/old-saves';
+import { migrateLayout } from '../src/gunsmith/relayout-record';
 
 // Gunsmith M0-06 and M1-02 (docs/gunsmith/CONTRACTS.md, the save and migration section): the pure migration to profile
 // v3 / record v8 and its wiring into reading. The old saves are real bytes a client before gun instances wrote
@@ -66,7 +67,8 @@ const gunUids = (p: D.SaveDataV1) => [...[p.stash, p.bag, p.safe].flatMap(inv =>
  */
 function prove(name: string, text: string, resolve?: WorldResolver, equipped = ['gun-v6']) {
     const stored = JSON.parse(text), after = decodeSession(text, resolve);
-    assert.deepEqual([after.version, after.profile.version, after.gunsBackup], [8, 3, stored.version === 2 ? null : text], name);
+    // Read as v9 (#28 M3-12) in one go: the v8 step keeps the old text as gunsBackup, so layoutBackup is null.
+    assert.deepEqual([after.version, after.profile.version, after.gunsBackup, after.layoutBackup], [9, 3, stored.version === 2 ? null : text, null], name);
     if (stored.version >= 3) assert.deepEqual(oldRecord(after, stored.version), stored, `${name}: nothing but the gun fields changes`);
     const was = holders(stored), now = holders(after);
     assert.equal(now.items.length, was.items.length, name);
@@ -82,7 +84,7 @@ function prove(name: string, text: string, resolve?: WorldResolver, equipped = [
     assert.deepEqual(now.slots.filter(s => s.weapon !== null).map(s => s.weaponUid), equipped, name);
     assert.equal(JSON.stringify(decodeSession(text, resolve)), JSON.stringify(after), `${name}: deterministic`);
     const p = opened(text, resolve);
-    assert.equal(p.initialized, true, name); assert.equal(JSON.parse(p.raw).version, 8, name);
+    assert.equal(p.initialized, true, name); assert.equal(JSON.parse(p.raw).version, 9, name);
     const written = p.record;
     assert.equal(written.gunsBackup, after.gunsBackup, name);
     assert.deepEqual([written.legacyBackup, written.migrationBackup, written.systemsBackup, written.perksBackup, written.enemyBackup],
@@ -137,20 +139,20 @@ test('old settled backup files: the profile file and the recovery file give the 
     assert.deepEqual(oldProfile(fromFile), SAVES.settledProfileFile.save);
     const recovery = decodePortableBackup(old('settledRecoveryFile'));
     assert.equal(recovery.kind, 'session'); if (recovery.kind !== 'session') return;
-    assert.deepEqual([recovery.record.version, recovery.record.gunsBackup], [8, inner('settledRecoveryFile')]);
+    assert.deepEqual([recovery.record.version, recovery.record.gunsBackup], [9, inner('settledRecoveryFile')]);
     assert.deepEqual(recovery.record.profile, settled.profile);
     // The yard previews and imports the old full backup; the store keeps its own recovery bytes, the backup's are dropped.
     const yard = page(), guns = yard.record.gunsBackup;
     assert.ok(importText(yard, old('settledRecoveryFile')).ok);
-    assert.deepEqual([yard.record.version, yard.record.gunsBackup, yard.record.profile.equipment.weaponUid], [8, guns, 'gun-v6']);
+    assert.deepEqual([yard.record.version, yard.record.gunsBackup, yard.record.profile.equipment.weaponUid], [9, guns, 'gun-v6']);
     assert.equal(yard.state.save.cash, 4321);
     // The old tab page takes the old settled profile file (no expansion there yet); it is written as v8.
     const tabs = page(origin(), false); tabs.state.state = 'hideout';
     assert.ok(tabs.saves.importSave(decodeBackup(old('settledProfileFile'))));
-    assert.deepEqual(tabs.record.profile, fromFile); assert.equal(tabs.record.version, 8);
+    assert.deepEqual(tabs.record.profile, fromFile); assert.equal(tabs.record.version, 9);
     // Export after import: a v8 recovery file that reads back the same and imports into another save.
     const exported = yard.runtime.exportBackup(), file = JSON.parse(exported);
-    assert.deepEqual([file.formatVersion, file.record.version, file.record.profile.version], [8, 8, 3]);
+    assert.deepEqual([file.formatVersion, file.record.version, file.record.profile.version], [9, 9, 3]);
     const other = page(); assert.ok(importText(other, exported).ok); assert.deepEqual(other.state.save, yard.state.save);
     // A settled profile file (v3) round trips too.
     const v3file = JSON.stringify({ format: 'escape-bincov-backup', formatVersion: 3, createdAt: new Date(NOW).toISOString(), save: fromFile });
@@ -214,7 +216,7 @@ test('a pending settlement exported by the old client imports once: the terminal
     const file = old('pendingSettlementFile'), decoded = decodePortableBackup(file);
     assert.equal(decoded.kind, 'session'); if (decoded.kind !== 'session') return;
     const record = decoded.record;
-    assert.deepEqual([record.version, record.gunsBackup, record.terminal!.outcome, record.terminal!.reason, record.expansion!.base.location, record.expansion!.raid], [8, inner('pendingSettlementFile'), 'extract', 'extract', 'settlement', null]);
+    assert.deepEqual([record.version, record.gunsBackup, record.terminal!.outcome, record.terminal!.reason, record.expansion!.base.location, record.expansion!.raid], [9, inner('pendingSettlementFile'), 'extract', 'extract', 'settlement', null]);
     assert.deepEqual([record.profile.activeRun, record.raid, record.profile.equipment.weaponUid, record.profile.equipment.ammo, record.profile.equipment.ammoRelief], [null, null, 'gun-v6', 12, 5]);
     assert.deepEqual(oldRecord(record, 5), SAVES.pendingSettlementFile.record);
     const yard = page(); assert.ok(importText(yard, file).ok);
@@ -248,13 +250,13 @@ test('a record carrying every earlier backup keeps them verbatim and adds its ow
     assert.equal(after.profile.cash, 1842);
     // The embedded records read on their own, each migrated: v2 keeps its bytes in migrationBackup, so gunsBackup is null.
     const v2 = decodeSession(chain.migrationBackup);
-    assert.deepEqual([v2.version, v2.migrationBackup, v2.gunsBackup], [8, chain.migrationBackup, null]);
+    assert.deepEqual([v2.version, v2.migrationBackup, v2.gunsBackup], [9, chain.migrationBackup, null]);
     assert.ok(v2.profile.stash.items.some(i => i.id === 'pistol' && i.gun));
-    for (const embedded of [chain.systemsBackup, chain.perksBackup]) { const r = decodeSession(embedded); assert.deepEqual([r.version, r.gunsBackup], [8, embedded]); }
+    for (const embedded of [chain.systemsBackup, chain.perksBackup]) { const r = decodeSession(embedded); assert.deepEqual([r.version, r.gunsBackup], [9, embedded]); }
     // The legacy key (profile v1) migrates through migrateSave: the equipped pistol and the stored one become instances.
     const o = origin(); o.data.set(D.SAVE_KEY, chain.legacyBackup);
     const legacy = page(o, false); assert.equal(legacy.initialized, true);
-    assert.deepEqual([legacy.record.version, legacy.record.legacyBackup, legacy.record.gunsBackup, legacy.state.save.equipment.weaponUid], [8, chain.legacyBackup, null, 'gun-v6']);
+    assert.deepEqual([legacy.record.version, legacy.record.legacyBackup, legacy.record.gunsBackup, legacy.state.save.equipment.weaponUid], [9, chain.legacyBackup, null, 'gun-v6']);
     assert.ok(legacy.state.save.stash.items.some(i => i.id === 'pistol' && i.gun));
     assert.deepEqual(legacy.state.save, migrateProfile(D.cleanOldSave(JSON.parse(chain.legacyBackup))));
 });
@@ -265,7 +267,7 @@ test('the first v8 write can fail: the old bytes stay stored and the retry write
     assert.equal(p.initialized, false); assert.equal(p.raw, text); assert.equal(p.state.storageOK, false);
     o.failing.delete(SESSION_KEY); assert.ok(p.saves.persist());
     const written = p.raw;
-    assert.deepEqual([JSON.parse(written).version, p.record.gunsBackup], [8, text]);
+    assert.deepEqual([JSON.parse(written).version, p.record.gunsBackup], [9, text]);
     // A store that read the old bytes before that write cannot overwrite the v8 record (compare before write).
     o.data.set(SESSION_KEY, text); const behind = new RecoveryStore(o.storage); const loaded = behind.load(); o.data.set(SESSION_KEY, written);
     assert.equal(behind.record!.gunsBackup, text);
@@ -287,7 +289,8 @@ test('deterministic and idempotent: the same result every time, no clock or rand
     } finally { Math.random = random; Date.now = now; }
     assert.equal(new Set(runs).size, 1);
     assert.deepEqual(stored, JSON.parse(text), 'the input is not changed');
-    assert.equal(JSON.stringify(decodeSession(text)), runs[0], 'decodeSession gives what migrateRecord gives the checked old record');
+    // Then the layout (#28 M3-12): a record migrated from v2 to v7 has no v8 text of its own, so layoutBackup is null.
+    assert.equal(JSON.stringify(decodeSession(text)), JSON.stringify(migrateLayout(JSON.parse(runs[0]), null)), 'decodeSession gives what migrateRecord and migrateLayout give the checked old record');
 });
 
 test('the equipped gun\'s uid avoids every string already in the save', () => {
@@ -425,8 +428,8 @@ test('old formats holding gun fields, and unknown or malformed inputs, are refus
     assert.throws(() => decodeBackup(JSON.stringify({ ...file, formatVersion: 4, save: { ...file.save, version: 4 } })), /不兼容的版本/);
     assert.throws(() => decodeStoredProfile({ ...v3, version: 2 }), REFUSED, 'a v3 profile carrying gun fields read as v2');
     // An unknown version, and a v8 record relabelled as one of the enemy client's (v7, its profile still v3).
-    assert.throws(() => decodeSession(JSON.stringify({ ...v8, version: 9 })), UNREADABLE);
-    assert.throws(() => decodePortableBackup(envelope({ ...v8, version: 9 })), /不兼容的版本/);
+    assert.throws(() => decodeSession(JSON.stringify({ ...v8, version: 10 })), UNREADABLE);
+    assert.throws(() => decodePortableBackup(envelope({ ...v8, version: 10 })), /不兼容的版本/);
     assert.throws(() => decodeSession(JSON.stringify({ ...v8, version: 7, enemyBackup: null })), UNREADABLE);
 });
 

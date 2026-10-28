@@ -44,7 +44,7 @@ async function open(size = [1280, 720], fixed = false, ordinary = false) {
 async function seed({ training = true, seconds = 0, quantity = 0, body = {} } = {}) {
   // Upgraded as the station boundary does, so the growth it hands the live save carries its (empty) perk selection.
   const p = D.newSave(), e = newExpansion(Date.now()); upgradeToRpg(e, Date.now()); const l = derivedLimits(e);
-  p.stash = D.createInventory(10, 6); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2); p.quests.repair = true; p.cash = 6000;
+  p.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2); p.quests.repair = true; p.cash = 6000;
   for (const id of ['water', 'food', 'bandage', 'medkit', 'antidote', 'focus', 'luckySachet', 'unluckySachet', 'scrap']) assert.equal(D.addItem(p.bag, id, 2), 0);
   e.base.facilities.training = training ? 1 : 0; e.base.training.attribute = training ? 'technique' : null;
   e.base.training.activeSeconds = seconds; e.base.training.quantity = quantity;

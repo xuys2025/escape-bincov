@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  ITEMS, SAVE_KEY, QUESTS, STASH_UPGRADE_COST, createInventory, addItem, moveItem, transferItem,
+  ITEMS, SAVE_KEY, QUESTS, STASH_UPGRADE_COST, STASH_W, STASH_ROWS, STASH_UPGRADED_ROWS, createInventory, addItem, moveItem, transferItem,
   removeItem, count, weight, fits, newSave, migrateSave, beginRun,
   checkpointSafe, settleRun, recoverInterrupted, grantRelief, liquidValue, buyQuantity, equip, unequip, equipRun,
   submitQuest, upgradeStash, reloadMagazine, applyDamage, seededRandom, rollLoot,
@@ -292,7 +292,7 @@ test('quest submission consumes across inventories atomically and rewards once',
   assert.equal(submitQuest(save, 'repair'), false);
   assert.equal(upgradeStash(save), true);
   assert.equal(save.cash, cash + QUESTS.repair.reward - STASH_UPGRADE_COST);
-  assert.equal(save.stash.h, 9);
+  assert.equal(save.stash.h, STASH_UPGRADED_ROWS);
   assert.equal(upgradeStash(save), false);
   for (const id of ['sample', 'ledger']) {
     addItem(save.stash, id);
@@ -333,9 +333,9 @@ test('mixed magazines load relief rounds first without changing ordinary ammo pr
 test('a full bag and full stash do not lose loaded rounds on extraction or refresh', () => {
   let save = newSave();
   save.bag = createInventory(6, 5);
-  save.stash = createInventory(10, 6);
+  save.stash = createInventory(STASH_W, STASH_ROWS);
   addItem(save.bag, 'watch', 60);
-  addItem(save.stash, 'watch', 120);
+  addItem(save.stash, 'watch', STASH_W * STASH_ROWS * ITEMS.watch.stack);
   save.equipment.ammo = 8;
   save.equipment.ammoRelief = 3;
   const run = beginRun(save, 808);
@@ -350,7 +350,7 @@ test('a full bag and full stash do not lose loaded rounds on extraction or refre
   assert.equal(save.equipment.ammo, 7);
   assert.equal(save.equipment.ammoRelief, 2);
   assert.equal(count(save.bag, 'watch'), 60);
-  assert.equal(count(save.stash, 'watch'), 120);
+  assert.equal(count(save.stash, 'watch'), STASH_W * STASH_ROWS * ITEMS.watch.stack);
   assert.equal(count(save.bag, 'ammo9'), 0);
   const next = beginRun(save, 809);
   assert.equal(next.ammo, 7);
@@ -380,9 +380,9 @@ test('full inventories queue one relief kit, persist it, and deliver only when r
   save.cash = 0;
   save.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 };
   save.bag = createInventory(6, 5);
-  save.stash = createInventory(10, 6);
+  save.stash = createInventory(STASH_W, STASH_ROWS);
   addItem(save.bag, 'watch', 60);
-  addItem(save.stash, 'watch', 120);
+  addItem(save.stash, 'watch', STASH_W * STASH_ROWS * ITEMS.watch.stack);
   assert.equal(grantRelief(save), true);
   assert.equal(save.equipment.weapon, 'pistol');
   assert.equal(save.equipment.relief, true);
@@ -391,7 +391,7 @@ test('full inventories queue one relief kit, persist it, and deliver only when r
   save = migrateSave(JSON.parse(JSON.stringify(save)));
   assert.equal(grantRelief(save), false);
   assert.equal(count(save.bag, 'watch'), 60);
-  assert.equal(count(save.stash, 'watch'), 120);
+  assert.equal(count(save.stash, 'watch'), STASH_W * STASH_ROWS * ITEMS.watch.stack);
   removeItem(save.bag, 'watch', 2);
   assert.equal(grantRelief(save), true);
   assert.equal(count(save.bag, 'ammo9'), 12);
@@ -409,7 +409,7 @@ test('relief can use stash space while a full bag remains unchanged', () => {
   save.cash = 0;
   save.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 };
   save.bag = createInventory(6, 5);
-  save.stash = createInventory(10, 6);
+  save.stash = createInventory(STASH_W, STASH_ROWS);
   addItem(save.bag, 'watch', 60);
   assert.equal(grantRelief(save), true);
   assert.equal(count(save.bag, 'watch'), 60);
@@ -425,7 +425,7 @@ function brokeSave(cash: number) {
   save.cash = cash;
   save.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 };
   save.bag = createInventory(6, 5);
-  save.stash = createInventory(10, 6);
+  save.stash = createInventory(STASH_W, STASH_ROWS);
   save.safe = createInventory(2, 2);
   return save;
 }
@@ -610,7 +610,7 @@ test('rule B rounds wait once when the bag and stash are full and arrive when sp
   save.equipment = { weapon: 'pistol', weaponUid: 'test-gun', gun: factoryState(), relief: true, ammo: 0, ammoRelief: 0 };
   // Unsellable relief bandages fill every cell without adding sellable value.
   assert.equal(addItem(save.bag, 'bandage', 120, true), 0);
-  assert.equal(addItem(save.stash, 'bandage', 240, true), 0);
+  assert.equal(addItem(save.stash, 'bandage', STASH_W * STASH_ROWS * ITEMS.bandage.stack, true), 0);
   assert.equal(liquidValue(save), 0);
   assert.equal(grantRelief(save), true);
   assert.deepEqual(save.reliefSupplies, [{ id: 'ammo9', qty: 12 }]);

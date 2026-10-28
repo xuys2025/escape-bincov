@@ -28,8 +28,11 @@ export interface ShopBrowse { kind: D.ItemKind | 'all'; fits: boolean; page: num
 export const BROWSE_ALL: ShopBrowse = Object.freeze({ kind: 'all', fits: false, page: 0 });
 /** The catalog's size: one page of the stock at a time. */
 export const CATALOG_W = 6, CATALOG_H = 5;
-/** The buy and sell lists: 6 x 2 since #28 M3, so the longest legal gun (6 cells, an AK with a long suppressor) fits. */
-export const CART_W = 6, CART_H = 2;
+/**
+ * The buy and sell lists: 6 x 3 since #28 M3-12, so the largest legal gun fits (an RPK with its drum and a suppressor,
+ * 6 x 3); 6 x 2 in M3, 4 x 3 before.
+ */
+export const CART_W = 6, CART_H = 3;
 /** The stock the browse selects, in stock order. */
 export function browseStock(save: Readonly<D.SaveDataV1>, merchant: Merchant, rpg: boolean, browse: ShopBrowse): string[] {
     const ammo = new Set(D.isGun(save.equipment.weapon) ? [D.WEAPONS[save.equipment.weapon].ammo] : []);

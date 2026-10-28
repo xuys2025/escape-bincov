@@ -228,7 +228,7 @@ test('a gun weighs the same in a container as in the slot: its parts count in th
     const old = (inv: D.Inventory) => Math.round(inv.items.reduce((sum, i) => sum + D.ITEMS[i.id].weight * i.qty, 0) * 1000) / 1000;
     const random = D.seededRandom(707);
     for (let n = 0; n < 200; n++) {
-        const inv = D.createInventory(10, 9);
+        const inv = D.createInventory(D.STASH_W, D.STASH_UPGRADED_ROWS);
         for (const id of Object.keys(D.ITEMS)) if (random() < .4) D.addItem(inv, id, 1 + Math.floor(random() * D.ITEMS[id].stack), random() < .3);
         assert.ok(Object.is(D.weight(inv), old(inv)), `inventory ${n}`);
         for (const i of inv.items) assert.ok(Object.is(D.itemWeight(i), D.ITEMS[i.id].weight * i.qty), i.id);

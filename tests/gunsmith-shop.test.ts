@@ -12,7 +12,7 @@ import { gun, hold, node, put } from './fixtures/workbench';
 
 /** An M4A1 in hand, a G17 in the stash. */
 function base() {
-    const p = D.newSave(); p.stash = D.createInventory(10, 6); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
+    const p = D.newSave(); p.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
     hold(p, 'm4', 'mb4a1');
     put(p.stash, gun('g17', 'gb17'));
     return p;

@@ -48,7 +48,8 @@ test('the gunsmith guns are items and weapons made from the catalog: stats, name
     const inv = D.createInventory(6, 5);
     assert.equal(D.addItem(inv, 'gb17'), 0); assert.equal(D.addItem(inv, 'mb4a1'), 0);
     for (const item of inv.items) assert.deepEqual(item.gun, { parts: [], devices: { laser: false, light: false } }, item.id);
-    assert.deepEqual(inv.items.map(i => D.itemSize(i)), [{ w: 2, h: 1 }, { w: 4, h: 1 }]);
+    // The G17's magazine sits in its grip; the M4A1's hangs below, a second row (#28 M3-12).
+    assert.deepEqual(inv.items.map(i => D.itemSize(i)), [{ w: 2, h: 1 }, { w: 4, h: 2 }]);
 });
 
 test('no "is it a gun" check outside the domain reads the weapon table or the catalog by itself', () => {

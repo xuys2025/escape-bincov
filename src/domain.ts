@@ -2,7 +2,7 @@
 import { ATTACHMENTS, BRAND_NAMES, GUNS, partTier, type GunId, type PartTier } from './gunsmith/catalog';
 import { checkInstall } from './gunsmith/compat';
 import { effectiveWeapon } from './gunsmith/stats';
-import { buildOf, factoryState, gunSale, gunSize, gunUids, gunWeight, validateGun, type GunInstance, type GunState } from './gunsmith/instance';
+import { buildOf, factoryState, gunSale, gunSize, gunUids, gunWeight, v8Footprints, validateGun, type GunInstance, type GunState } from './gunsmith/instance';
 import { migrateProfile, type ProfileV2 } from './gunsmith/migrate';
 import { validPresets, type GunPreset } from './gunsmith/presets';
 
@@ -319,6 +319,37 @@ export const QUESTS: Record<string, { name: string; description: string; needs: 
 };
 export const SAVE_KEY = 'escape-bincov.save.v1';
 export const STASH_UPGRADE_COST = 600;
+/**
+ * The stash is 10 wide: 8 rows, 12 once built out (#28 M3-12, maintainer 2026-10-29: guns grow a row with a box
+ * magazine; 6 and 9 rows before, which a record v8 still has).
+ */
+export const STASH_W = 10, STASH_ROWS = 8, STASH_UPGRADED_ROWS = 12;
+export const stashRows = (upgraded: boolean): number => v8Footprints() ? upgraded ? 9 : 6 : upgraded ? STASH_UPGRADED_ROWS : STASH_ROWS;
+/**
+ * The stash overflow (#28 M3-12, maintainer 2026-10-29, as in Tarkov): what an old save holds beyond room by the new
+ * footprints lies in rows below the stash, wholly below `h`, at most this many. Nothing places there (fits keeps to the
+ * grid), so items only leave it; while one is left the player cannot deploy. It goes away with its last item. 18 rows
+ * keep a built-out stash and its overflow within an inventory's 30 (createInventory); a stash of nothing but long guns
+ * with drums needs about 15.
+ */
+export const STASH_OVERFLOW_ROWS = 18;
+/** The overflow rows a stored stash may hold: only in the gun format under the current footprints, never by the v8 rules. */
+export const stashOverflowRows = (guns: boolean): number => guns && !v8Footprints() ? STASH_OVERFLOW_ROWS : 0;
+/** Why a raid cannot start while the overflow holds something. */
+export const OVERFLOW_BLOCKS_DEPLOY = '仓库溢出区还有物品，先把它们移进仓库、背包或卖掉，再出击。';
+/** The stash items in its overflow, in order. */
+export const stashOverflow = (stash: Inventory): Item[] => stash.items.filter(item => item.y >= stash.h);
+/** Rows the stash shows: its own and the overflow's down to its lowest item. */
+export const stashShownRows = (stash: Inventory): number => Math.max(stash.h, ...stashOverflow(stash).map(item => item.y + itemSize(item).h));
+/** In place: `items` into the stash's overflow, each at the first free place below its rows (turned when needed); false when they do not all fit. */
+export function placeBelow(stash: Inventory, items: readonly Item[]): boolean {
+  const below = createInventory(stash.w, STASH_OVERFLOW_ROWS);
+  below.items = stashOverflow(stash).map(item => ({ ...item, y: item.y - stash.h }));
+  const before = below.items.length;
+  if (!items.every(item => placeItem(below, item))) return false;
+  stash.items.push(...below.items.slice(before).map(item => ({ ...item, y: item.y + stash.h })));
+  return true;
+}
 let serial = 0;
 const uid = () => `bc-${Date.now().toString(36)}-${(++serial).toString(36)}`;
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value));
@@ -420,7 +451,8 @@ export function createInventory(w: number, h: number): Inventory {
 }
 /** Cells an item takes. A gun with parts may be larger than its type (gunSize); a factory gun is exactly its ITEMS size. */
 export function itemSize(item: Pick<Item, 'id' | 'rotated' | 'gun'>) {
-  if (item.gun && isGun(item.id)) return gunSize({ id: item.id, parts: item.gun.parts }, !!item.rotated);
+  // Every gun through gunSize, a factory one with no state too, so its footprint rules (M3-12) hold for all of them.
+  if (isGun(item.id)) return gunSize({ id: item.id, parts: item.gun?.parts ?? [] }, !!item.rotated);
   const d = ITEMS[item.id];
   return item.rotated ? { w: d.h, h: d.w } : { w: d.w, h: d.h };
 }
@@ -477,6 +509,17 @@ export function placeItem(inv: Inventory, item: Item, autoRotate = true): boolea
   if (pos.rotated) placed.rotated = true; else delete placed.rotated;
   inv.items.push(placed);
   return true;
+}
+/**
+ * The items of `inv` laid out again under the current footprints (#28 M3-12, a record v8 migrated): each that still
+ * fits where it lies stays, in order; the others go to the first free place (turned when `rotation` allows); what finds
+ * none is returned, the inventory edited in place without it. Deterministic: the same inventory always comes out the same.
+ */
+export function relayoutInventory(inv: Inventory, rotation = true): Item[] {
+  const items = inv.items, moved: Item[] = [];
+  inv.items = [];
+  for (const item of items) if (fits(inv, item, item.x, item.y, undefined, !!item.rotated)) inv.items.push(item); else moved.push(item);
+  return moved.filter(item => !placeItem(inv, item, rotation));
 }
 /** Ground uids a classic or v1 raid deals out from a counter (loot-3, entity-12): a later raid deals the same ones again. */
 const RAID_LOCAL = /^(?:enemy|loot|entity|pursuit)-[0-9]+$/;
@@ -548,7 +591,7 @@ export function removeItem(inv: Inventory, id: string, qty: number): boolean {
 }
 export function newSave(): SaveDataV1 {
   const save: SaveDataV1 = {
-    version: 3, cash: 700, stash: createInventory(10, 6), bag: createInventory(6, 5), safe: createInventory(2, 2),
+    version: 3, cash: 700, stash: createInventory(STASH_W, STASH_ROWS), bag: createInventory(6, 5), safe: createInventory(2, 2),
     equipment: { weapon: 'pistol', weaponUid: uid(), gun: factoryState(), relief: false, ammo: 0, ammoRelief: 0 }, quests: { repair: false, sample: false, ledger: false },
     upgraded: false, settings: { volume: 0.35 }, stats: { runs: 0, extracts: 0, kills: 0 }, activeRun: null,
   };
@@ -584,9 +627,12 @@ function keptGun(id: string, gunUid: string, stored: unknown, used: Set<string>)
  * Lenient inventory repair (legacy key, migrateSave): unknown items dropped, overlaps placed anew, bad or repeated uids
  * reissued. `guns`: the format carries gun states (profile v3); a gun keeps its state (keptGun) and, when it has to be
  * placed anew, its uid. Without it no item gets a `gun` field: migrateProfile adds the factory states afterwards.
+ * `overflow`: the stash's (stashOverflowRows); an item wholly in it keeps its place there, a repair places in the grid.
  */
-function cleanInventory(raw: unknown, w: number, h: number, used = new Set<string>(), allowRotation = true, guns = true): Inventory {
-  const inv = createInventory(w, h);
+function cleanInventory(raw: unknown, w: number, h: number, used = new Set<string>(), allowRotation = true, guns = true, overflow = 0): Inventory {
+  const inv = createInventory(w, h), below = { ...inv, h: h + overflow };
+  const stays = (what: Footprint, x: number, y: number, rotated: boolean) =>
+    fits(inv, what, x, y, undefined, rotated) || overflow > 0 && y >= h && fits(below, what, x, y, undefined, rotated);
   const entries = isObject(raw) && Array.isArray(raw.items) ? raw.items : Array.isArray(raw) ? raw : [];
   for (const entry of entries.slice(0, 900)) {
     if (!isObject(entry) || typeof entry.id !== 'string' || !Object.hasOwn(ITEMS, entry.id)) continue;
@@ -596,10 +642,10 @@ function cleanInventory(raw: unknown, w: number, h: number, used = new Set<strin
     if (guns && isGun(entry.id)) {
       // The gun keeps its uid and state wherever it lands; only extra copies of a forged quantity are new factory guns.
       const itemUid = claim(used, entry.uid), gun: Item = { uid: itemUid, id: entry.id, qty: 1, x: entry.x, y: entry.y, ...kept, gun: keptGun(entry.id, itemUid, entry.gun, used) };
-      if (fits(inv, gun, entry.x, entry.y, undefined, !!gun.rotated)) inv.items.push(gun);
+      if (stays(gun, entry.x, entry.y, !!gun.rotated)) inv.items.push(gun);
       else if (!placeItem(inv, gun, false)) continue;
       if (!--qty) continue;
-    } else if (qty <= ITEMS[entry.id].stack && fits(inv, entry.id, entry.x, entry.y, undefined, allowRotation && entry.rotated === true)) {
+    } else if (qty <= ITEMS[entry.id].stack && stays(entry.id, entry.x, entry.y, allowRotation && entry.rotated === true)) {
       inv.items.push({ uid: claim(used, entry.uid), id: entry.id, qty, x: entry.x, y: entry.y, ...kept });
       continue;
     }
@@ -627,7 +673,7 @@ function cleanSave(raw: Record<string, any>, guns: boolean): SaveDataV1 | Profil
   const stats = isObject(raw.stats) ? raw.stats : {};
   const settings = isObject(raw.settings) ? raw.settings : {};
   const used = new Set<string>();
-  const stash = cleanInventory(raw.stash ?? raw.inventory, 10, upgraded ? 9 : 6, used, rotation, guns);
+  const stash = cleanInventory(raw.stash ?? raw.inventory, STASH_W, stashRows(upgraded), used, rotation, guns, stashOverflowRows(guns));
   const bag = cleanInventory(raw.bag, 6, 5, used, rotation, guns), safe = cleanInventory(raw.safe, 2, 2, used, rotation, guns);
   const weapon = isGun(equipped.weapon) ? equipped.weapon : null, relief = equipped.relief === true;
   // A v3 slot keeps its stored gun (keptSlot) and its magazine is clamped to that instance. An old slot held a factory
@@ -876,9 +922,16 @@ export function submitQuest(save: SaveDataV1, id: string): boolean {
 }
 export function upgradeStash(save: SaveDataV1): boolean {
   if (save.activeRun || save.upgraded || !save.quests.repair || save.cash < STASH_UPGRADE_COST) return false;
+  // The overflow (M3-12) comes up into the new rows: where it lies if it fits there, else the first free place; the rest
+  // stays below the new last row.
+  const stash = clone(save.stash), below = stashOverflow(stash);
+  stash.items = stash.items.filter(item => !below.includes(item));
+  stash.h = STASH_UPGRADED_ROWS;
+  const left = below.filter(item => fits(stash, item, item.x, item.y, undefined, !!item.rotated) ? (stash.items.push(item), false) : !placeItem(stash, item));
+  if (!placeBelow(stash, left)) return false;
   save.cash -= STASH_UPGRADE_COST;
   save.upgraded = true;
-  save.stash.h = 9;
+  save.stash = stash;
   return true;
 }
 /**
