@@ -1,8 +1,12 @@
+## 2026-10-28 · PR #137 CI S6 补修
+
+同步 main `d27306b4`（保留 #110/#116）。旧 CI 唯一套件失败为 station-reset S6 短暂冲突提示观测超时，本地旧脚本14/14；现恢复前台并在真实点击前记录新出现的可见 DOM 提示，保留拒绝写入/备份/下载及持久弹框断言，测试提示消失后的证据保留。1048单测、99守卫、package、station-reset14/14均通过。准确新head完整CI见原PR；旧失败保留，不声称已合并。详情见原质量摘要Q-E04。
+
 ## 2026-10-28 · Q-E04 事务发布失败
 
 最终串联：正常合入 #136 `07babfa8`（含 #117 `4ba5b72`），集成源码 head `a46cfd8798c9b9f3c7c7345a456647956e308793`。1045/1045 单测、86/86 守卫、package、17/17 save-browser 全过；新截图/报告在 `docs/tasks/transaction-phases/integrated/`，旧证据保留原归属。PR base 仍 main，必须按 #117 → #136 → #137 合并，各准确集成 head 完整 CI 通过后由 root 执行；没有改动前两项源码逻辑。
 
-承接 [draft PR #137](https://github.com/xuys2025/escape-bincov/pull/137)，实现及浏览器证据提交 `e703f14dae521ea91951f61c533581558885f42e`；最终 head/CI 以 PR 为准。任务 `codex/transaction-failure-phases`，基线 `0f73a67386bac196b87c983668295be6d1a99f1e`；本轮交付与证据集中在[原质量摘要 Q-E04](docs/tasks/quality-entropy.md#q-e04-提交后的发布失败)。先读 Session `persist` / `requiresReload`、Store `commit` 及 `tests/session-publication.test.ts`。已确认旧代码写后 restore 失败会使现金磁盘 680 / 内存 700；本轮独立发布失败结果、停写/暂停和精确已提交备份。产品源码 head `cf5e49eb0a940234ea189d2cc534a6bfc6ca2709`（含 main `630e68f`），1041/1041 单测、85/85 工程守卫、package 与两尺寸 17/17 存档浏览器通过；后续只有测试观测/证据归档。截图与准确 CI 状态见上述入口及承接 PR；真机、长时性能未验，不把已提交视为合并。
+承接 [PR #137](https://github.com/xuys2025/escape-bincov/pull/137)，实现及浏览器证据提交 `e703f14dae521ea91951f61c533581558885f42e`；最终 head/CI 以 PR 为准。任务 `codex/transaction-failure-phases`，基线 `0f73a67386bac196b87c983668295be6d1a99f1e`；本轮交付与证据集中在[原质量摘要 Q-E04](docs/tasks/quality-entropy.md#q-e04-提交后的发布失败)。先读 Session `persist` / `requiresReload`、Store `commit` 及 `tests/session-publication.test.ts`。已确认旧代码写后 restore 失败会使现金磁盘 680 / 内存 700；本轮独立发布失败结果、停写/暂停和精确已提交备份。产品源码 head `cf5e49eb0a940234ea189d2cc534a6bfc6ca2709`（含 main `630e68f`），1041/1041 单测、85/85 工程守卫、package 与两尺寸 17/17 存档浏览器通过；后续只有测试观测/证据归档。截图与准确 CI 状态见上述入口及承接 PR；真机、长时性能未验，不把已提交视为合并。
 ## 2026-10-28 Q-E02：公共视图生命周期归位
 
 串联集成：本分支按明确授权正常合入 #117 候选 `4ba5b72c70983f3eefe4affdd31e2d674b3223a3`（fetch 后核对 `origin/fix/content-identity` 同一提交），只消除共同文档冲突，不修改其源码。**必须先 #117 合入 main，再合 #136。** 该候选尚非已接受 main；此前浏览器和制品证据仍只归属原 `14df8ce`，候选集成已通过 1026/1026 单测、86/86 守卫及 package；两份 HTML/两份 ZIP 与明确标注的 #117 候选构建逐字节相同（HTML `bdd50dec…7fc25`），没有将其称为已接受 main。最新已接受 `630e68f` 已确认包含在被测集成中；完整 CI 在新 head 推送后核对，详情见原质量摘要。

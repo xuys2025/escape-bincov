@@ -4,7 +4,7 @@
 
 | 目标 | 承接入口 | 接手提示 |
 | --- | --- | --- |
-| 事务失败阶段（Q-E04） | [#60 登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553) · [PR #137](https://github.com/xuys2025/escape-bincov/pull/137) · `codex/transaction-failure-phases` · [实现与验证](tasks/quality-entropy.md#q-e04-提交后的发布失败) | 写后发布异常不再当作可回滚/重试的存储失败；消费票据、停止本页、导出已提交记录后刷新。独立验收，当前串联暂含 #117/#136 候选，必须按 #117 → #136 → #137 合并；1045单测/86守卫/package/17存档浏览器通过，准确 head 完整CI见承接PR |
+| 事务失败阶段（Q-E04） | [#60 登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553) · [PR #137](https://github.com/xuys2025/escape-bincov/pull/137) · `codex/transaction-failure-phases` · [实现与验证](tasks/quality-entropy.md#q-e04-提交后的发布失败) | 写后发布异常不再当作可回滚/重试的存储失败；消费票据、停止本页、导出已提交记录后刷新。独立验收，#117/#136 已合入，现同步 main d27306b4；CI 的 station-reset S6 短提示观测补修后1048单测/99守卫/package/14项重开浏览器通过，原17项存档浏览器CI通过；准确新head完整CI见承接PR |
 | 行动精神/水分/饱食实时 HUD | [PR #110](https://github.com/xuys2025/escape-bincov/pull/110) · [修复与验证](tasks/audit-contracts.md#精神水分饱食-hud-的实时投影) | 实时身体三标量经只读 HudView.needs 显示；经典为空。已获复查后自动合并授权，最新 head / 检查以原 PR 为准；存档与生理规则不变 |
 | 公共视图生命周期归位（Q-E02） | [#60 接手边界](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459328969) · [PR #136](https://github.com/xuys2025/escape-bincov/pull/136) · [实施与验证](tasks/quality-entropy.md#q-e02-公共视图生命周期归位) | `codex/shared-view-lifecycle`，起点 main `0f73a67`：Scope/唯一计数与页面级 Pixi 工具归位到 `view-lifecycle`，保持注册顺序、释放与恢复；与 #134 工具包独立，SAMPLE_AREA 身份继续候选。当前为串联验证暂含 #117 候选 `4ba5b72`，必须先合 #117、再合 #136；准确 head、验证和 CI 见承接 PR |
 | 内容身份：居民楼 region ID（Q-E06） | [PR #117](https://github.com/xuys2025/escape-bincov/pull/117) · [审计边界](tasks/audit-contracts.md) | `fix/content-identity` 续作：居民楼 8 个已有 ID 由定义提供；世界和存档不改号。同步 main 后对照原九图及 mall-v4 两图；楼梯方向和内容登记仍开放，准确 head 与 CI 见原 PR |

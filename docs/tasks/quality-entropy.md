@@ -234,7 +234,7 @@ CI 自测失败的 1 项是 `policy.test.mjs:199` 写死 `C:/Program Files/Git/b
 
 ## Q-E04 提交后的发布失败
 
-2026-10-28，`codex/transaction-failure-phases` 从 main `0f73a67386bac196b87c983668295be6d1a99f1e` 开始；[开工登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553)。承接 [draft PR #137](https://github.com/xuys2025/escape-bincov/pull/137)，实现及浏览器证据提交 `e703f14dae521ea91951f61c533581558885f42e`；最终 head/CI 以 PR 为准。与 #134 架构门禁、公共生命周期归位各自验收，#60 总单保持开放。
+2026-10-28，`codex/transaction-failure-phases` 从 main `0f73a67386bac196b87c983668295be6d1a99f1e` 开始；[开工登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553)。承接 [PR #137](https://github.com/xuys2025/escape-bincov/pull/137)，实现及浏览器证据提交 `e703f14dae521ea91951f61c533581558885f42e`；最终 head/CI 以 PR 为准。与 #134 架构门禁、公共生命周期归位各自验收，#60 总单保持开放。
 
 原代码反例：挂接 expansion 端口只在首次 restore 抛错；`mutate` 扣 20 现金的那一次 setItem 已成功写出 680，内存却被回滚为 700。另一次始终抛错的注入会在错误回滚中再次抛出。原实现返回克隆也位于 `RecoveryStore.commit` 的 setItem 之后，扩展事务还执行重复 restore。
 
@@ -262,6 +262,8 @@ CI 自测失败的 1 项是 `policy.test.mjs:199` 写死 `C:/Program Files/Git/b
 此集成重新通过 `pnpm test` **1045/1045**、`pnpm check:ci` **86/86**、`pnpm package` 与 `pnpm test:save-browser` **17/17**；页面异常/console error/外网请求仍为 0。新 HTML SHA-256：`ae43f659a1bc291f34d8672456fdb54014853763fba29181421ea118f4c369bc`。新[完整浏览器报告](transaction-phases/integrated/save-browser-report.json)和两尺寸八张截图放在独立 `transaction-phases/integrated/`，全部目视通过；上方旧报告/截图/哈希保留原提交归属，不冒充新集成。新截图示例：[院子1280](transaction-phases/integrated/publication-yard-1280.png)、[终局1920](transaction-phases/integrated/publication-terminal-1920.png)。
 
 未验：真人、真机、长时性能；准确 head CI 待提交后运行。此项修复异常语义，不宣称全库减熵或 #60 全部完成。
+**CI S6 补修（2026-10-28）。** 原 head `6b180fe7` 的 CI 40626741013 仅 batch-7 的 `station-reset` S6 等待冲突 toast 超时（其余7组、含17项存档浏览器均通过）；本地原样14/14通过，未复现产品故障。该提示3.1秒后删除，用例刚打开过第二页；测试改为先恢复前台、在点击前用页面内 MutationObserver 记录新出现且可见的精确提示。仍验证真实点击、持久冲突弹框、原始存档/备份字节和写入/下载次数；额外确认提示消失后观测记录及冲突弹框仍存在，没有延长超时、放宽结果或改变游戏逻辑。正常合入最新 main `d27306b4a3fceade00c025ffb4a6060bb3f35ef0`，保留 #110/#116；1048/1048 单测、99/99 工程守卫、package、完整 station-reset 14/14 通过。新的准确 head 完整 CI 待推送后运行，旧失败不记为通过。
+
 ## Q-E02 公共视图生命周期归位
 
 2026-10-28，[PR #136](https://github.com/xuys2025/escape-bincov/pull/136)，分支 `codex/shared-view-lifecycle`，起点已接受 main `0f73a67386bac196b87c983668295be6d1a99f1e`；[接手范围](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459328969)。这是 #115 背包有限服务之外、#134 架构工具之外的独立生命周期交付；SAMPLE_AREA/raid-areas 内容身份仍留 #60 候选，存档、规则、画面与素材没有改动。
