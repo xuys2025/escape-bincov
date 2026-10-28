@@ -257,6 +257,10 @@ CI 自测失败的 1 项是 `policy.test.mjs:199` 写死 `C:/Program Files/Git/b
 
 首次 `pnpm test` 因 pnpm 自动安装试图重建共享 node_modules junction，在运行测试前以 `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY` 停止。改用现有已装依赖并显式设置 `pnpm_config_verify_deps_before_run=false`，没有允许删除共享目录或改锁文件。
 
+**#117 候选串联集成（2026-10-28）。** 按主代理明确授权，在原分支正常合入 `4ba5b72c70983f3eefe4affdd31e2d674b3223a3`，fetch 后确认 `origin/fix/content-identity` 同一提交；merge 为 `9a6212f63905fbc6622f6c8ba6891d543b58ee7b`。两处共同文档冲突保留全部内容；#117 的三个源码文件、测试及两份基线夹具与候选逐字节相同，没有修改。**PR #136 暂含 #117；必须先 #117 合入 main，再合 #136。**
+
+该集成重新通过 1026/1026 单测、86/86 守卫及 package。以明确标为候选的同一 `4ba5b72` 原源码 archive build/package 对照，两份 HTML、两份 ZIP 全部逐字节相同；HTML SHA-256 `bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25`。这份比较不冒充已接受 main：当时最新已接受 main 仍是 `630e68f`，已 fetch 确认它是被测集成的祖先。此前本地浏览器仍只证明原生命周期 `14df8ce` 及其制品，不声称本地重跑新集成浏览器；最终完整 CI 在推送后另核对。候选记录见同一实际证据的 `candidate117Integration`。
+
 没有真机、真人观感或 F20 新签收；本阶段未合并/发布，#60 其他候选与在途 PR 保持原归属。
 
 ## 2026-10-28 架构门禁与按文件查询

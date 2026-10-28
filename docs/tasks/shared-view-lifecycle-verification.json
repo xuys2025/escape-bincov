@@ -478,5 +478,64 @@
         "line": 3
       }
     ]
+  },
+  "candidate117Integration": {
+    "acceptedMain": "630e68f517edea34bfbcc548473897bd36bdfa08",
+    "candidateHead": "4ba5b72c70983f3eefe4affdd31e2d674b3223a3",
+    "candidateStatus": "PR117 candidate, not accepted main when integrated; must merge PR117 before PR136",
+    "mergeCommit": "9a6212f63905fbc6622f6c8ba6891d543b58ee7b",
+    "candidateSourcesUntouched": [
+      "src/building-world.ts",
+      "src/raid-runtime/presentation.ts",
+      "src/spatial.ts",
+      "tests/content-identity.test.ts",
+      "tests/fixtures/content-map-baseline.json",
+      "tests/fixtures/content-map-v4-baseline.json"
+    ],
+    "checks": {
+      "unit": {
+        "tests": 1026,
+        "pass": 1026,
+        "fail": 0
+      },
+      "ci": {
+        "tests": 86,
+        "pass": 86,
+        "fail": 0
+      },
+      "package": "passed"
+    },
+    "artifacts": [
+      {
+        "file": "dist/index.html",
+        "equal": true,
+        "bytes": 9248874,
+        "sha256": "bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25",
+        "candidateSha256": "bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25"
+      },
+      {
+        "file": "start the game.html",
+        "equal": true,
+        "bytes": 9248874,
+        "sha256": "bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25",
+        "candidateSha256": "bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25"
+      },
+      {
+        "file": "release/Escape-Bincov-portable.zip",
+        "equal": true,
+        "bytes": 6031991,
+        "sha256": "86eed1c6c9c9872397ae60b7366355b87deed130f5217d71bbab00a142d559c5",
+        "candidateSha256": "86eed1c6c9c9872397ae60b7366355b87deed130f5217d71bbab00a142d559c5"
+      },
+      {
+        "file": "release/Escape-Bincov-web.zip",
+        "equal": true,
+        "bytes": 6027482,
+        "sha256": "7d43dd9042f0c00b07342ae17a5b058d8400621310c2a27c3e245872f3c782e0",
+        "candidateSha256": "7d43dd9042f0c00b07342ae17a5b058d8400621310c2a27c3e245872f3c782e0"
+      }
+    ],
+    "method": "Exact candidate source archive + unchanged formal build/package scripts and real tsconfig; candidate assets confirmed unchanged before sharing the asset directory",
+    "browserEvidence": "Previously recorded browser probes belong to lifecycle head 14df8ce and its exact artifacts. No new integrated browser result claimed; integrated complete CI will run."
   }
 }
