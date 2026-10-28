@@ -1008,5 +1008,51 @@
     "limitations": "No physical-device, human gameplay or performance signoff. Exact final-head CI is tracked in PR #110.",
     "negativeBaseline": "The three product files were restored exactly from main 03ea26198259fa66ee7a39c32c06466a1545e76f. Its HTML SHA-256 is f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb; latest main added documentation only.",
     "historicalScreenshots": "Original screenshots remain at commit 1ba5a7940fffcb434c6b6ff51e071b5d757b69d4; current 1280x720.png and 1920x1080.png show this integrated build."
+  },
+  "main630Integration": {
+    "baseline": "630e68f517edea34bfbcc548473897bd36bdfa08",
+    "previousVerifiedHead": "d0ebc57ae801f11ced1211d82f9df1d08600e1a9",
+    "inputEquality": {
+      "previousHead": "d0ebc57ae801f11ced1211d82f9df1d08600e1a9",
+      "baseline": "630e68f517edea34bfbcc548473897bd36bdfa08",
+      "protectedPaths": [
+        "src",
+        "tests",
+        "assets",
+        "pnpm-lock.yaml",
+        "tsconfig.json",
+        "scripts/qol-expansion-test.mjs",
+        "scripts/raid-default-test.mjs",
+        "scripts/browser-options.mjs",
+        "scripts/raid-view.mjs",
+        "scripts/stall-resume.mjs",
+        "scripts/inventory-actions.mjs",
+        "scripts/yard-entry.mjs",
+        "scripts/build.mjs",
+        "scripts/package.mjs"
+      ],
+      "changed": [],
+      "packageJson": "Only adds architecture script; dependencies, devDependencies, packageManager and every existing command unchanged"
+    },
+    "changedScripts": [
+      "scripts/architecture.mjs",
+      "scripts/ci/source-graph.test.mjs",
+      "scripts/ci/source-health.test.mjs",
+      "scripts/script-inventory.mjs",
+      "scripts/source-graph.mjs"
+    ],
+    "checkCi": "85/85 passed, actually rerun",
+    "package": "passed, actually rerun",
+    "htmlSha256": "f61862ed972f8efaab0c8abf7c9360ab2aebbd751d943dfa77ad8211c5568b72",
+    "reusedValidation": {
+      "unit": "1025/1025",
+      "qolExpansion": "5/5",
+      "raidDefault": "11/11",
+      "screenshots": "1280x720.png and 1920x1080.png",
+      "basis": "Game source, unit tests, browser scripts, all prior package commands and dependency inputs unchanged; freshly packaged HTML byte-identical. No repeat local game tests, negative controls or browsers."
+    },
+    "previousCi": "https://github.com/xuys2025/escape-bincov/actions/runs/40624184384 (d0ebc57 success, historical only)",
+    "finalCi": "See PR #110 exact head; full workflow reruns after this merge.",
+    "logs": "test-results/pr110-20261028-main630/"
   }
 }

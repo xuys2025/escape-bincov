@@ -67,6 +67,8 @@ Windows，Node 24.21.0、pnpm 11.19.0、本地 Chrome 155.0.8059.85。下列结�
 
 2026-10-28 续作 [PR #110](https://github.com/xuys2025/escape-bincov/pull/110)，沿原分支 `fix/live-vitals-hud` 正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`；受检源码 head `19dea0bfa59042281b4c7ec1f085aa3e8587e3b8`。保留 M2、商场四版、背包服务与双方交接，随后仅补本轮证据和文字，准确最终 head / CI 见原 PR。#60 总单保持开放。
 
+**最新共同基线同步（同日）。** 随后正常合入 main `630e68f517edea34bfbcc548473897bd36bdfa08`（#134 架构查询与门禁），只解决 WORK-QUEUE / handoff 的追加记录冲突，双方入口和新 source-graph / architecture 均保留。相对已验 `d0ebc57`，src、tests、assets、浏览器脚本、构建/打包输入和依赖完全未变，package.json 仅增加只读 architecture 命令；实际重跑当前 `check:ci` **85/85** 与 `package` 均通过，HTML 仍精确为下述 `f61862ed…`。因此复用下方 1025 单测、QoL 5/5、raid-default 11/11 和原双尺寸截图，本地未重复游戏回归或负对照。[同份报告](audit-contracts/live-needs/report.json) 的 `main630Integration` 保存输入一致性和重跑结果；`d0ebc57` 的成功 [CI 40624184384](https://github.com/xuys2025/escape-bincov/actions/runs/40624184384) 仅为历史，新准确 head 全量 CI 另见原 PR。
+
 **修复边界。** 实时身体是 `CoastRaidRuntime.layered.body`，`SessionState.expansion.body` 是最近成功检查点。`frameView` 将三个数复制到只读 `HudView.needs`；宿主只按原来每八帧的刷新节奏舍入与排版。没有复制生理公式，也没有把实时对象直接放进帧；禁用测试帧冻结时同样不共享引用。经典旧行动即使会话含扩展身体，也保持 `needs: null`，状态行不显示这三项。不改存档格式、检查点、规则或事务。
 
 **本轮实际验证。** Windows，Node 24.22.1、pnpm 11.19.0、Chrome 156.0.8078.49。完整 `pnpm test` **1025/1025**、`pnpm check:ci` **77/77**、正式 `pnpm package`、完整 `test:qol-expansion` **5/5**、`test:raid-default` **11/11** 均首次通过。后者包含经典行动无身体读数、商场一版恢复、商场四版出击、选图和触屏。日志在 `test-results/pr110-20261028/`；[同一份对照记录](audit-contracts/live-needs/report.json) 的 `integration20261028` 留存新基线、制品、环境、两尺寸读数与完整套件结果。

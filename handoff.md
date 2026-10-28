@@ -1,8 +1,17 @@
 ## 2026-10-28 行动精神/水分/饱食 HUD 实时投影（PR #110）
 
-沿原 `fix/live-vitals-hud` 正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，保留商场四版/M2、背包服务和其他任务交接；受检源码 head `19dea0bfa59042281b4c7ec1f085aa3e8587e3b8`，随后只更新证据文档，最终 head / CI 见 [PR #110](https://github.com/xuys2025/escape-bincov/pull/110)。投影从实时身体复制精神/水分/饱食三个标量；宿主沿原八帧节奏舍入显示；经典行动为 null，存档、生理规则及事务不变。
+沿原 `fix/live-vitals-hud` 正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，随后同步共同截止主线 `630e68f517edea34bfbcc548473897bd36bdfa08`（#134），保留商场四版/M2、背包服务和其他任务交接；受检源码 head `19dea0bfa59042281b4c7ec1f085aa3e8587e3b8`，随后只更新证据文档，最终 head / CI 见 [PR #110](https://github.com/xuys2025/escape-bincov/pull/110)。投影从实时身体复制精神/水分/饱食三个标量；宿主沿原八帧节奏舍入显示；经典行动为 null，存档、生理规则及事务不变。
 
 本轮 1025 单测、77 工程守卫、正式打包、完整 QoL 5/5、默认行动 11/11 首次通过。新 main 两尺寸负对照有效失败、修复后实时/帧/DOM 一致，保存值未变；已亲看双尺寸截图，原始失败和本轮结果留在同一[摘要](docs/tasks/audit-contracts.md#精神水分饱食-hud-的实时投影)/[报告](docs/tasks/audit-contracts/live-needs/report.json)，不拿旧 CI 代替新 head。没有真机、真人或性能签收，#60 其余范围继续开放；等待准确 head CI 与维护者审阅，不自行合并发布。
+
+最新同步后实际重跑工程守卫 **85/85** 和 package 通过；src/tests/assets、全部浏览器流程与依赖输入相对已验 `d0ebc57` 未变，正式 HTML SHA-256 仍为 `f61862ed972f8efaab0c8abf7c9360ab2aebbd751d943dfa77ad8211c5568b72`。上段单测/浏览器/截图据此复用，没有重复执行或新拍；旧 head CI 40624184384 已成功但仅作历史，新准确 head 完整 CI 以原 PR 为准。输入一致性和新结果记录在同报告 `main630Integration`。
+
+## 2026-10-28 · 新一轮减熵：架构门禁与依赖查询（#60）
+
+- 基线：`3b61d52e898459f3e197584ae202285e7ade65e2`；分支 `codex/entropy-architecture`；[全库扫描/候选清单](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6449666799)。原改枪 M3 检出保留。
+- 本批：统一源码 AST 图、动态加载/类型导出/自环检查、沿核心依赖闭包约束 61 个模块，以及只读 `pnpm architecture [src/path.ts] [--json]`。入口：[实现摘要](docs/tasks/quality-entropy.md#2026-10-28-架构门禁与按文件查询)、[代码导航](docs/CODEMAP.md)、[共享分析](scripts/source-graph.mjs)。
+- 实测：原始基线 1020/1020 单测、85/85 工程守卫、package，三份制品与该基线字节相同；正常合入 main `0f73a67386bac196b87c983668295be6d1a99f1e` 后重跑 1022/1022、85/85 与 package 均通过。动态反向依赖负对照旧守卫 3/3 放行、新守卫拒绝，已还原。独立源码审阅无阻塞，src/assets/锁文件相对最新 main 无差异；准确 head CI 与合并状态见 [PR #134](https://github.com/xuys2025/escape-bincov/pull/134)。
+- 未验：本地浏览器、真机/F20/性能未运行；产品行为未变。准确提交与完整 CI 以本批 PR 为准，未合并/发布；后续候选按 #60 原归属推进，既有修复 PR 保持原承接。
 
 ## 2026-10-28 室内墙体与视野设计（功能未实施）
 
