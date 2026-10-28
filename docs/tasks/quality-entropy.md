@@ -246,7 +246,16 @@ CI 自测失败的 1 项是 `policy.test.mjs:199` 写死 `C:/Program Files/Git/b
 
 浏览器发现并修正：已经打开的暂停面板在保存阶段变化时未重绘，曾只显示错误 toast 而缺刷新按钮；现按存储状态更新该面板，正式用例保留“先暂停，再注入”的前置。第一轮院子选择器命中隐藏 alarm，随后改为只读可见节点；没有放宽结果、下载或刷新断言。
 
-验证进行中：19 项定向回归待最终整轮复核；首轮 `pnpm test` 1032/1032、`pnpm check:ci` 77/77、`pnpm package` 通过。完整存档浏览器已 17/17 通过（原 9 项 + 两尺寸四场景 8 项），页面异常/外网请求均为 0；最终合入最新 main 后复核结果待填写。Windows / Node 24 / pnpm 11.19.0；链接现有依赖，设置 `pnpm_config_verify_deps_before_run=false`，避免 pnpm 自动重装 junction。首次未设置时 tsc 命令在运行前被 pnpm 依赖检查阻断，未记为类型失败。
+**最终本地验证。** 正常合入 main `630e68f517edea34bfbcc548473897bd36bdfa08`（#134）后，产品源码 head `cf5e49eb0a940234ea189d2cc534a6bfc6ca2709`：`pnpm test` **1041/1041**（含本轮 19 项）、`pnpm check:ci` **85/85**、`pnpm package` 通过。随后仅补新浏览器 context 的 console-error 观测，再跑完整 `pnpm test:save-browser` **17/17**：原 9 项 + 1280×720 / 1920×1080 下页签、院子、检查点、终局四场景；每项实际写入一次，重试与继续操作零额外写，导出 JSON 等于落盘 record，点击刷新后 profile 一致。每个新增 context 都监听 request，每个新增 page 都监听 pageerror 与 console error；最终异常/控制台错误/外网请求均为 **0**。报告与八张实际截图在 [transaction-phases](transaction-phases/save-browser-report.json)，故障只由脚本注入，没有增加正常入口测试全局。截图已目视检查，院子等待弹窗动画结束后截取。
+
+最终 HTML SHA-256：`5724f277b7fd27d1d0bd4dbdad2b7e932b6c97e242a52984b62605036c2d3079`。Windows / Node 24.22.1 / pnpm 11.19.0 / Chrome 156.0.8078.49；链接现有依赖，设置 `pnpm_config_verify_deps_before_run=false`，避免 pnpm 自动重装 junction。首次未设置时 tsc 命令在运行前被 pnpm 依赖检查阻断，未记为类型失败。
+
+| 故障画面 | 1280×720 | 1920×1080 |
+| --- | --- | --- |
+| 页签 | [截图](transaction-phases/publication-tabs-1280.png) | [截图](transaction-phases/publication-tabs-1920.png) |
+| 院子 | [截图](transaction-phases/publication-yard-1280.png) | [截图](transaction-phases/publication-yard-1920.png) |
+| 检查点（已暂停） | [截图](transaction-phases/publication-checkpoint-1280.png) | [截图](transaction-phases/publication-checkpoint-1920.png) |
+| 终局 | [截图](transaction-phases/publication-terminal-1280.png) | [截图](transaction-phases/publication-terminal-1920.png) |
 
 未验：真人、真机、长时性能；准确 head CI 待提交后运行。此项修复异常语义，不宣称全库减熵或 #60 全部完成。
 

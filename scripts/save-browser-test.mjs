@@ -253,6 +253,7 @@ try {
       try {
         const p = await fresh.newPage(); p.setDefaultTimeout(30000);
         p.on('pageerror', error => report.errors.push(error.message));
+        p.on('console', message => { if (message.type() === 'error') report.errors.push(message.text()); });
         p.on('dialog', dialog => dialog.accept());
         await p.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs');
         await p.locator('[data-action="enter"]').click();

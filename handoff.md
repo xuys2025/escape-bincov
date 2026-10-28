@@ -1,6 +1,6 @@
 ## 2026-10-28 · Q-E04 事务发布失败
 
-任务 `codex/transaction-failure-phases`，基线 `0f73a67386bac196b87c983668295be6d1a99f1e`；本轮交付与证据集中在[原质量摘要 Q-E04](docs/tasks/quality-entropy.md#q-e04-提交后的发布失败)。先读 Session `persist` / `requiresReload`、Store `commit` 及 `tests/session-publication.test.ts`。已确认旧代码写后 restore 失败会使现金磁盘 680 / 内存 700；本轮独立发布失败结果、停写/暂停和精确已提交备份。最终回归及 PR 状态继续更新上述入口，不把已提交视为合并。
+任务 `codex/transaction-failure-phases`，基线 `0f73a67386bac196b87c983668295be6d1a99f1e`；本轮交付与证据集中在[原质量摘要 Q-E04](docs/tasks/quality-entropy.md#q-e04-提交后的发布失败)。先读 Session `persist` / `requiresReload`、Store `commit` 及 `tests/session-publication.test.ts`。已确认旧代码写后 restore 失败会使现金磁盘 680 / 内存 700；本轮独立发布失败结果、停写/暂停和精确已提交备份。产品源码 head `cf5e49eb0a940234ea189d2cc534a6bfc6ca2709`（含 main `630e68f`），1041/1041 单测、85/85 工程守卫、package 与两尺寸 17/17 存档浏览器通过；后续只有测试观测/证据归档。截图与准确 CI 状态见上述入口及承接 PR；真机、长时性能未验，不把已提交视为合并。
 
 ## 2026-10-28 · 新一轮减熵：架构门禁与依赖查询（#60）
 
