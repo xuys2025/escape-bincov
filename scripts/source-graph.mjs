@@ -117,7 +117,7 @@ export const HEADLESS_ROOTS = [
   'src/raid-runtime/runtime.ts', 'src/hideout-runtime/runtime.ts',
 ];
 const browserGlobals = new Set(['window', 'document', 'navigator', 'location', 'localStorage', 'sessionStorage', 'fetch']);
-const browserModule = path => /(^src\/(?:coast-view|station-view|gunsmith-view|title|opening|art)\/)|(^src\/(?:app|main|ui|pixi-app|navigation)\.ts$)/.test(path);
+const browserModule = path => /(^src\/(?:coast-view|station-view|gunsmith-view|view-lifecycle|title|opening|art)\/)|(^src\/(?:app|main|ui|pixi-app|navigation)\.ts$)/.test(path);
 export function headlessProblems(model, program, roots = HEADLESS_ROOTS) {
   // Follow type edges too: a core contract must not borrow view types.
   const paths = dependencyPaths(adjacency(model, true), roots), problems = [], checker = program.getTypeChecker();

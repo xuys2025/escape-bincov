@@ -12,7 +12,7 @@ import { Lighting, MOODS, lamp, type Light } from './lighting';
 import { Textures } from './textures';
 import { enemyMotion } from './enemy-motion';
 import { BLOW_TIERS, REDUCED_KICK, ShotBlows, bloodDrops, blowTier, pushCamera, type BlowTier } from './blow-feel';
-import { lifecycle } from './scope';
+import { lifecycle } from '../view-lifecycle/scope';
 import { Weather, type RoofArea, type WeatherKind } from './weather';
 import { Tide, paintWade } from './tide';
 import { isMall, knownDoor, knownStructurePoint, mallCorridorWalls, mallCutRooms, mallCutaway, occupiedStructure, regionAtClosed, shownAt, structureContains } from './structure-guide';
@@ -21,7 +21,7 @@ import { buildMall, mallDress, type Link, type MallDress, type OccluderKind } fr
 import type { MallArt } from './mall-art';
 import { MALL_FOOTPRINT, insideFootprint } from './mall-dressing';
 import { mallRegionDressed } from '../mall-layout-v4';
-import { releaseManagedSlots } from './renderer-lifetime';
+import { releaseManagedSlots } from '../view-lifecycle/renderer-lifetime';
 import { aimLead, leadRoom, pointerLead, snapAxis, stepLead, type AxisHold, type CameraBounds, type Lead } from './camera';
 import { viewScale, type ViewScaleMode } from './view-scale';
 import { heldWeaponOffset, idleRetraction, stepRetraction, type RetractionShot, type RetractionState } from './weapon-retraction';

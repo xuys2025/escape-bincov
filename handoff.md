@@ -1,14 +1,8 @@
-2026-10-28 维护者已明确授权 #116 复查无问题后自动合并。本次正常合入 main `100858502b30c78965d1a308b2d6280172763716`（#117），保留双方任务记录；业务修复源码未再改变。当前组合实际通过 98 项 CI 守卫及严格打包。准确新 head CI、自动合并配置及最终合入状态以原 PR 平台记录为准；不跳过必需检查或分支保护。
+## 2026-10-28 Q-E02：公共视图生命周期归位
 
-## 2026-10-28 资源报告消费校验续作（PR #116）
+串联集成：本分支按明确授权正常合入 #117 候选 `4ba5b72c70983f3eefe4affdd31e2d674b3223a3`（fetch 后核对 `origin/fix/content-identity` 同一提交），只消除共同文档冲突，不修改其源码。**必须先 #117 合入 main，再合 #136。** 该候选尚非已接受 main；此前浏览器和制品证据仍只归属原 `14df8ce`，候选集成已通过 1026/1026 单测、86/86 守卫及 package；两份 HTML/两份 ZIP 与明确标注的 #117 候选构建逐字节相同（HTML `bdd50dec…7fc25`），没有将其称为已接受 main。最新已接受 `630e68f` 已确认包含在被测集成中；完整 CI 在新 head 推送后核对，详情见原质量摘要。
 
-继续原分支 `fix/resource-report-validation` / [PR #116](https://github.com/xuys2025/escape-bincov/pull/116)，原 head `902a449ccf34d817a41a7260f30eb55bf3779239`，先正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，本次再正常同步共同截止 main `630e68f517edea34bfbcc548473897bd36bdfa08`。只改两份 review CLI 的输入消费边界与纯 Node 回归，不改游戏、算法、阈值或采样器；#111 的 rounds 与 #118 的堆输入各由原 PR 承接，#32 F20 仍 PARTIAL。
-
-旧 main CLI 实际接受 13 类反例：重复轮次、缺 release/quad 身份、null/巨大 heap、缺 table/type/label、字符串 live、重复槽位键和缺释放观察。原 PR 已拒绝其中七类，本轮补全另六类：在过滤前验证 table；摘要与槽位检查各自消费的键/布尔值并拒绝表内重复身份；live 槽位要求用于身份输出的 type/label，null 占位继续无需这些字段；freed 分支仅要求被复制的 scene/parked 属性存在，保留 null 和原值，不扩展为深层 schema。identity-probe 仅检查用于 added/removed 的纹理键；其他状态与附件原样保留。
-
-本次 Windows / Node 24.22.1 / pnpm 11.19.0：13 项真实 CLI 回归通过（含逐项字段矩阵、晚到的非法 probe 在写任何报告前拒绝、已有输出不被覆盖、合法 1 轮 partial 与 null 占位）。同一输入对比 main 旧 CLI：普通值、MAX_SAFE_INTEGER 和 0/上界交替三组共 39 份摘要输出逐字节一致；两组有/无 null 占位的槽位输出也逐字节一致。13 类反例旧 CLI 均 exit 0，修复后均 exit 1。原始证据保留在忽略的 `test-results/pr116/`。前次集成提交 `04c4218` 的完整 `pnpm test` 1022/1022、`pnpm check:ci` 90/90 与打包均通过。本次同步后实际 `check:ci` 98/98（含重跑 CLI 13 项）、严格打包通过；游戏/测试/依赖与两 CLI/helper/测试/producer 输入逐字节未变，复用该提交的 1022 单测及 41 文件对照，不重跑旧反例。重新生成 HTML/portable/web 的 SHA-256 分别为 `f3b7c3e1...` / `66a0d6f2...` / `cc311e1d...`，均与前次逐字节相同；证明和新日志在原证据目录。相对截止 main 的 `git diff --check` 通过。准确最终 head 与远端完整 CI 在原 PR 更新，不引用 10-25 旧 CI 代替。
-
-本地未运行浏览器、trend、实际 60 轮或堆采样，不宣称资源/F20 签收。代码父审与本机完整验证已通过，继续原 PR 正常提交推送并核对准确 head 完整 CI；仍为 draft，未转 Ready、未合并或发布。
+[PR #136](https://github.com/xuys2025/escape-bincov/pull/136)，实现 `476086d7dc6e4f3821064c0b8d6d3b47f09680c3`，分支 `codex/shared-view-lifecycle`，起点 main `0f73a67386bac196b87c983668295be6d1a99f1e`。将场景无关 `Scope`/唯一 `lifecycle` 和页面级 Pixi 注册/缓存归位到 `src/view-lifecycle/`，保持直接导入和初始化顺序；原生产/测试引用同步，现役脚本不引用旧路径。职责入口见 [CODEMAP](docs/CODEMAP.md)，决定、首败与验证见[原质量摘要](docs/tasks/quality-entropy.md#q-e02-公共视图生命周期归位)。SAMPLE_AREA/raid-areas 身份、Q-E04 和其他在途 PR 均不在本交付。1022 单测、77 守卫、package、render-targets 5/5、两尺寸程序恢复各 8/8、能力四负载 4/4 通过；两份 HTML/两份 ZIP 与真实 main 构建同字节。旧 lifecycle 1/5 的普通入口首败在 main 同样复现，保留原边界。已正常合入 main `630e68f`（#134）并保留双方文档，新目录纯类型依赖正反例已通过；集成后重跑 1022/1022、86/86、package 全过，四份制品仍同基线。准确 head CI 见原 PR，未合并/发布。
 
 ## 2026-10-28 · 居民楼 region 身份（PR #117 续作）
 
@@ -73,6 +67,18 @@
 - 测试：领域反例（安全箱、非枪、错容器、满包原子拒绝），正式工厂三种地图的单写、失败回滚和重试、拒绝不写；`test:issue26-inventory` 新增三组（拖箱/拖包/非法、点选/按钮、满包与配额回滚），原“外部枪不能直接装备”断言改为能装备。
 
 存档格式、版本、时钟和其他规则不变。本机结果和截图见 PR 正文与 `docs/tasks/raid-equip-slot/`。未做：真机、真人手感。和 #106（改枪 M2，草稿）在 `inventory.ts` 详情两行、`runtime.ts` 的 `equipItem` 会有文本冲突，谁后合谁解。
+
+## 2026-10-28 资源报告消费校验续作（PR #116）
+
+继续原分支 `fix/resource-report-validation` / [PR #116](https://github.com/xuys2025/escape-bincov/pull/116)，原 head `902a449ccf34d817a41a7260f30eb55bf3779239`，先正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，本次再正常同步共同截止 main `630e68f517edea34bfbcc548473897bd36bdfa08`。只改两份 review CLI 的输入消费边界与纯 Node 回归，不改游戏、算法、阈值或采样器；#111 的 rounds 与 #118 的堆输入各由原 PR 承接，#32 F20 仍 PARTIAL。
+
+旧 main CLI 实际接受 13 类反例：重复轮次、缺 release/quad 身份、null/巨大 heap、缺 table/type/label、字符串 live、重复槽位键和缺释放观察。原 PR 已拒绝其中七类，本轮补全另六类：在过滤前验证 table；摘要与槽位检查各自消费的键/布尔值并拒绝表内重复身份；live 槽位要求用于身份输出的 type/label，null 占位继续无需这些字段；freed 分支仅要求被复制的 scene/parked 属性存在，保留 null 和原值，不扩展为深层 schema。identity-probe 仅检查用于 added/removed 的纹理键；其他状态与附件原样保留。
+
+本次 Windows / Node 24.22.1 / pnpm 11.19.0：13 项真实 CLI 回归通过（含逐项字段矩阵、晚到的非法 probe 在写任何报告前拒绝、已有输出不被覆盖、合法 1 轮 partial 与 null 占位）。同一输入对比 main 旧 CLI：普通值、MAX_SAFE_INTEGER 和 0/上界交替三组共 39 份摘要输出逐字节一致；两组有/无 null 占位的槽位输出也逐字节一致。13 类反例旧 CLI 均 exit 0，修复后均 exit 1。原始证据保留在忽略的 `test-results/pr116/`。前次集成提交 `04c4218` 的完整 `pnpm test` 1022/1022、`pnpm check:ci` 90/90 与打包均通过。本次同步后实际 `check:ci` 98/98（含重跑 CLI 13 项）、严格打包通过；游戏/测试/依赖与两 CLI/helper/测试/producer 输入逐字节未变，复用该提交的 1022 单测及 41 文件对照，不重跑旧反例。重新生成 HTML/portable/web 的 SHA-256 分别为 `f3b7c3e1...` / `66a0d6f2...` / `cc311e1d...`，均与前次逐字节相同；证明和新日志在原证据目录。相对截止 main 的 `git diff --check` 通过。准确最终 head 与远端完整 CI 在原 PR 更新，不引用 10-25 旧 CI 代替。
+
+本地未运行浏览器、trend、实际 60 轮或堆采样，不宣称资源/F20 签收。代码父审与本机完整验证已通过，继续原 PR 正常提交推送并核对准确 head 完整 CI；仍为 draft，未转 Ready、未合并或发布。
+
+维护者已明确授权复查后自动合并；本次正常同步 main `f66ee79af6b84ef64319891e82d7dc4e82985350`（含 #117/#136），保留上游身份与共享生命周期归位。本节原验证证据保留历史归属，当前守卫、打包及准确新 head CI / 自动合并状态以原 PR 为准，不绕过检查或保护。
 
 ## 2026-10-27 #115：行动背包有限服务同步 main（续作）
 
