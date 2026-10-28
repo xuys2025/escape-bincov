@@ -257,3 +257,20 @@ CI 自测失败的 1 项是 `policy.test.mjs:199` 写死 `C:/Program Files/Git/b
 首次 `pnpm test` 因 pnpm 自动安装试图重建共享 node_modules junction，在运行测试前以 `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY` 停止。改用现有已装依赖并显式设置 `pnpm_config_verify_deps_before_run=false`，没有允许删除共享目录或改锁文件。
 
 没有真机、真人观感或 F20 新签收；本阶段未合并/发布，#60 其他候选与在途 PR 保持原归属。
+
+## 2026-10-28 架构门禁与按文件查询
+
+本轮全库扫描登记在 [#60](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6449666799)，从 main `3b61d52e898459f3e197584ae202285e7ade65e2` 建立独立分支 `codex/entropy-architecture`。原主检出改枪 M3 保留；#107/#110/#117 和资源诊断等已有 PR 继续原归属。
+
+**扫描口径。** 盘点 Git 跟踪的 src 190、tests 155、scripts 193、docs 2065、assets 1618、.github 3 个文件；全部 181 个非声明 TS 源码模块做 AST 扫描，重点追读存档、Runtime、视图与工具边界。图中有 1308 条静态值形式边、185 条类型边、13 条动态边。素材/历史附件只做盘点；未逐图验收或声称全玩法审计完成。按文件查询由工具实时生成，计数只描述本次基线。
+
+**本 PR 的完整交付。** [source-graph.mjs](../../scripts/source-graph.mjs) 同时供 `pnpm architecture` 和 [source-health](../../scripts/ci/source-health.test.mjs) 使用；区分静态值形式、类型与动态加载，解析资源叶节点，未解析目标和非字面量加载显式失败。循环检查包含动态边和自环，内联 type re-export 不产生运行时边。保留原导出使用、纯规则闭集检查；沿八个核心入口及其类型/值依赖自动约束当前 61 个模块，新增 helper 会随闭包进入守卫。
+
+核心依赖禁止视图、组装层、资产和外部包，并检查 DOM/浏览器全局引用。现有 TextEncoder 编码与注入的 LockManager 类型/方法按源码契约允许；直接读取 navigator 或存储全局仍拒绝。规则政策与静态分析限制写在模块旁，不增加全仓人工分层表。CLI 只查询 src 关系，类型边与运行时传递依赖分别列出；值形式导入保守计入，动态表达式、反射与任意调用不属于调用图保证。
+
+**可复验入口。** `pnpm architecture src/session.ts`，或 `pnpm --silent architecture src/session.ts --json`；查看全库摘要时省略文件。CI 的真实临时文件正反例覆盖动态环、纯类型回边、空/混合导出、require/本地同名函数、资源/缺失目标、间接视图/DOM、别名和存储访问，以及 CLI 非法参数。
+
+**实际验证（Windows / Node 24.22.1 / pnpm 11.19.0）。** 全单测 1020/1020、工程守卫 85/85、package 通过；新增图/CLI 6 项加现役源码守卫 5 项共 11 项专项通过。临时在 balance 动态导入 scene，旧守卫 3/3 放行，新守卫在循环、纯规则和无视图边界拒绝；脚本在 finally 还原原字节。开发时的 LockManager 合并声明误报与 Node/browser 同名 localStorage 漏检均由正反例修正。最终入口链接/差异检查通过。HTML SHA-256 为 `5623d98946aada792ba7bb7d299908eb7b6418222a95e9555fb3cd543a4f94c1`，portable/web 分别为 `49caa6da7e77228f094ccc349aa04c016213ccd93a5b3986e342755019c89c85` / `81c1e812ececc4e6ac45da2ce744fe037e9908f110e4bf39f1d274df24db7aa0`，三份与基线逐字节相同。原始日志在忽略目录 `test-results/entropy/`。本地浏览器、真机、F20 与性能未运行；准确 head 完整 CI 见承接 PR。只改工具和文档，游戏源码/素材/依赖锁保持基线。后续公共生命周期归位、事务失败分类、内容身份与文案分离按上述 issue 的原归属推进，未计为本 PR 已完成。
+
+
+**合并前复核（2026-10-28）。** 正常合入最新 main `0f73a67386bac196b87c983668295be6d1a99f1e`（#107）后，重新通过 1022/1022 单测、85/85 工程守卫和 package，`git diff --check origin/main` 通过，任务差异仍不含 src/assets/依赖锁。上面的三个制品哈希只对应原始基线 `3b61d52`，不冒充 #107 后的字节对照。独立代理完成源码与 11 项专项审阅，未发现阻塞项；集成版本准确 head 的 CI 和合并状态以 PR #134 为准。
