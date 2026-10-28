@@ -16,12 +16,12 @@ import { BLOW_TIERS, REDUCED_KICK, ShotBlows, bloodDrops, blowTier, pushCamera, 
 import { lifecycle } from './scope';
 import { Weather, type RoofArea, type WeatherKind } from './weather';
 import { Tide, paintWade } from './tide';
-import { isMall, knownDoor, knownStructurePoint, mallCorridorWalls, mallCutRooms, mallCutaway, occupiedStructure, regionAtClosed, shownAt, structureBounds, structureContains } from './structure-guide';
+import { isMall, knownDoor, knownStructurePoint, occupiedStructure, regionAtClosed, shownAt } from './structure-guide';
 import { paintMallGround } from './art/mall-ground';
-import { clearanceCuts, doorClearances, rowModes, wallCell, wallRule, type WallMode, type WallRule } from './wall-display';
-import { buildMall, mallDress, type Link, type MallDress, type OccluderKind } from './mall-scene';
+import { clearanceCuts, clearances, doorClearances, indoorArea, rowModes, underRule, wallCell, wallRule, type WallMode, type WallRule } from './wall-display';
+import { buildMall, mallDress, mallDressMap, type Link, type MallDress, type OccluderKind } from './mall-scene';
 import type { MallArt } from './mall-art';
-import { MALL_FOOTPRINT, insideFootprint } from './mall-dressing';
+import { MALL_FOOTPRINT, insideFootprint, mallOpenings } from './mall-dressing';
 import { mallRegionDressed } from '../mall-layout-v4';
 import { releaseManagedSlots } from './renderer-lifetime';
 import { aimLead, leadRoom, pointerLead, snapAxis, stepLead, type AxisHold, type CameraBounds, type Lead } from './camera';
@@ -69,13 +69,13 @@ interface Occluder {
   tall?: { full: string; flat: string; band: number; y: number; building: Rect; collapsed: boolean };
   /** A door caught between closed and open for a few frames (display only; the Runtime state already changed). */
   swing?: { t: number; key: string };
-  /** Map cell of a generic wall, door or header piece (buildGeneric). */
+  /** Map cell of a wall, door or header piece (buildGeneric, buildMall); furniture and pillars have none. */
   cell?: { x: number; y: number };
   /**
-   * Set while the piece belongs to the building the player stands in (updateWalls): its indoor rule and mode now, and the
-   * canvas-local rectangles cut for doorways. The focus fade leaves it alone meanwhile.
+   * Set while the piece belongs to the building the player stands in (updateWalls): its indoor rule and mode now, the
+   * canvas-local rectangles cut for doorways, and the mode and picture last drawn. The focus fade leaves it alone meanwhile.
    */
-  wall?: { rule: WallRule; mode: WallMode; cut: Rect[] };
+  wall?: { rule: WallRule; mode: WallMode; cut: Rect[]; drawn?: string };
   /** Atlas key of the picture drawn now when it is not `key` (indoor walls): what the occlusion outline reads. */
   shown?: string;
 }
@@ -380,7 +380,6 @@ export class CoastView {
     if (!bake) { const geo = groundGeometry(m, M); bake = { geo, puddles: puddles(m, M, geo) }; this.bakes.set(mapKey, bake); }
     // Mall floors with Sol's samples: dressing tables, ground inputs and lights depend only on the map (one per floor).
     const mall = this.mall = this.opts.mallArt && isMall(m) ? this.mallFor(m, mapKey, this.opts.mallArt) : null;
-    this.cutRooms = new Set();
     const art = this.opts.art, groundBake = bake;
     const paint = (r: Rect) => mall ? () => paintMallGround(m, r, mall.ground, art) : () => paintGround(m, r, M, art, groundBake);
 
@@ -522,8 +521,6 @@ export class CoastView {
   /** Mall floors: dressing per map (kept like the ground inputs), and the current floor's. */
   private mallBakes = new Map<string, MallDress>();
   private mall: MallDress | null = null;
-  /** Mall floors: rooms cut away now (kept between frames for the doorway hysteresis). */
-  private cutRooms = new Set<string>();
   private mallFor(m: MapDef, key: string, art: MallArt): MallDress {
     let d = this.mallBakes.get(key);
     if (!d) { d = mallDress(m, art, this.opts.reducedMotion); this.mallBakes.set(key, d); }
@@ -1009,22 +1006,25 @@ export class CoastView {
   private indoorRowIds: number[] = [];
   private indoorRows = new Map<number, 'full' | 'base'>();
   /**
-   * Walls of the building the player stands in follow wall-display.ts instead of the fades: switched outright between
-   * the whole picture and the footprint, doorways cut clear. Mall floors keep their own cutaway (updateFades). A change
-   * of building, or a new scene, starts the rows over from the player's position.
+   * Walls of the building the player stands in (on a mall floor, of the mall's footprint) follow wall-display.ts instead
+   * of the fades: switched outright between the whole picture and the footprint, doorways cut clear. A sign, wall piece
+   * or glow on a piece shows only with the whole picture, cut like it. A change of building, or a new scene, starts the
+   * rows over from the player's position.
    */
   private updateWalls(f: ViewFrame) {
-    const map = this.map!;
-    if (isMall(map)) return;
-    const occupied = occupiedStructure(map, f.player), id = occupied?.id ?? null;
+    const map = this.map!, area = indoorArea(map, f.player), id = area?.id ?? null;
     if (id !== this.indoorOf) {
       for (const o of this.indoor) { o.wall = undefined; o.shown = undefined; o.level = -1; }
       this.indoor = []; this.indoorRows = new Map(); this.indoorOf = id;
-      if (occupied) {
-        const inside = structureBounds(map, occupied), doors = doorClearances(map, inside, WALL_H);
+      if (area) {
+        const pieces = new Set(this.occluders.flatMap(o => o.cell && o.kind !== 'lintel' ? [`${o.cell.x},${o.cell.y}`] : []));
+        const wall = (x: number, y: number) => pieces.has(`${x},${y}`);
+        // Doorways: the doors, and on mall floors the entrances (both lines of a thick wall's together).
+        const openings = isMall(map) ? mallOpenings(this.mall?.dress ?? mallDressMap(map)).map(o => [...o.cells, ...o.twin ?? []]) : [];
+        const doors = [...doorClearances(map, area.inside, WALL_H), ...clearances(openings, WALL_H)];
         for (const o of this.occluders) {
-          if (!o.cell || !structureContains(map, occupied, { x: o.cell.x * 32 + 16, y: o.cell.y * 32 + 16 })) continue;
-          o.wall = { rule: wallRule(map, inside, o.cell.x, o.cell.y, o.kind === 'lintel'), mode: 'full', cut: clearanceCuts(doors, o.rect, o.z) };
+          if (!o.cell || !underRule(map, area.inside, o.cell)) continue;
+          o.wall = { rule: wallRule(wall, area.inside, o.cell.x, o.cell.y, o.kind === 'lintel'), mode: 'full', cut: clearanceCuts(doors, o.rect, o.z) };
           this.indoor.push(o);
         }
       }
@@ -1034,8 +1034,16 @@ export class CoastView {
     this.indoorRows = rowModes(this.indoorRowIds, f.player.y, this.indoorRows);
     for (const o of this.indoor) {
       const w = o.wall!, mode: WallMode = w.rule === 'row' ? this.indoorRows.get(o.cell!.y)! : w.rule;
-      w.mode = mode; o.level = o.target = 0;
+      o.level = o.target = 0;
+      // Redrawn only when the mode or the piece's own picture (a door opening or closing) changes.
+      if (w.drawn === `${mode}|${o.key}`) continue;
+      w.mode = mode; w.drawn = `${mode}|${o.key}`;
       o.sprite.visible = mode !== 'hidden';
+      if (o.links) for (const l of o.links) {
+        l.sprite.visible = mode === 'full';
+        const cut = w.cut.map(r => ({ ...r, x: r.x + o.rect.x - l.sprite.x, y: r.y + o.rect.y - l.sprite.y }));
+        if (mode === 'full') l.sprite.texture = this.tex.atlas.get(this.tex.wallCut(l.key, null, cut));
+      }
       if (mode === 'hidden') { o.shown = undefined; continue; }
       const key = this.tex.wallCut(o.key, mode === 'base' ? this.footKey(o) : null, w.cut);
       o.shown = key === o.key ? undefined : key;
@@ -1060,20 +1068,15 @@ export class CoastView {
     // Cull by the last camera: off-screen structure neither renders nor runs fade/tint work.
     const vr = { x: this.cam.x - 96, y: this.cam.y - 96, w: this.view.w + 192, h: this.view.h + 240 };
     for (const o of this.occluders) { o.sprite.renderable = intersects(vr, o.rect); if (o.links) for (const l of o.links) l.sprite.renderable = o.sprite.renderable; }
-    // Mall floors cut away the player's room and the walls just in front; other layered floors their whole plan.
-    const map = this.map!, mall = this.mall;
-    if (mall) this.cutRooms = mallCutRooms(map, p, this.cutRooms);
-    const cut = mall ? mallCutaway(map, this.cutRooms, this.cutRooms.size ? undefined : mallCorridorWalls(map, p)) : (q: Point) => structureContains(map, occupied, q);
+    // The occupied building's walls follow updateWalls. The rest (furniture, other buildings, the outdoors, sealed
+    // blocks) fades only where it covers the player or the thing being used.
     for (const o of this.occluders) {
       if (!o.sprite.renderable) continue;
       if (o.wall) { o.target = 0; continue; }
       if (o.kind === 'roof' || o.kind === 'ceiling') {
         o.target = o.region && (f.revealed[o.region] || occupied?.regionIds.includes(o.region)) ? 4 : 0; continue;
       }
-      // Cut away the current building's complete floor plan, retaining solid wall feet. Actor/loot permissions
-      // still use only f.revealed; seeing the static layout does not reveal anyone behind a closed room door.
-      const structural = o.kind === 'wall' || o.kind === 'door' || o.kind === 'lintel';
-      let t = structural && cut({ x: o.rect.x + 16, y: o.z - 16 }) ? 3 : 0;
+      let t = 0;
       for (const r of focus) {
         if (o.z <= r.y + r.h) continue;
         if (intersects(r, o.rect)) t = Math.max(t, o.kind === 'canopy' ? 3 : 2);
