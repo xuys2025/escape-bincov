@@ -1,3 +1,7 @@
+## 2026-10-28 · PR #137 合并前主线复核
+
+原 head `8c68a3f2` 完整 CI 40632571602 已通过（构建、8组浏览器和最终门禁）；合并前 fetch 发现 main 新增 #135/#138 等，正常合入 `681426b022540dc94421ec06505ccf77b11ce470`。冲突仅任务清单与交接，两边全部保留；游戏代码无需人工冲突修正。最新集成验证和合并状态以原 PR #137 为准。
+
 ## 2026-10-28 · PR #137 CI S6 补修
 
 同步 main `d27306b4`（保留 #110/#116）。旧 CI 唯一套件失败为 station-reset S6 短暂冲突提示观测超时，本地旧脚本14/14；现恢复前台并在真实点击前记录新出现的可见 DOM 提示，保留拒绝写入/备份/下载及持久弹框断言，测试提示消失后的证据保留。1048单测、99守卫、package、station-reset14/14均通过。准确新head完整CI见原PR；旧失败保留，不声称已合并。详情见原质量摘要Q-E04。
@@ -7,6 +11,20 @@
 最终串联：正常合入 #136 `07babfa8`（含 #117 `4ba5b72`），集成源码 head `a46cfd8798c9b9f3c7c7345a456647956e308793`。1045/1045 单测、86/86 守卫、package、17/17 save-browser 全过；新截图/报告在 `docs/tasks/transaction-phases/integrated/`，旧证据保留原归属。PR base 仍 main，必须按 #117 → #136 → #137 合并，各准确集成 head 完整 CI 通过后由 root 执行；没有改动前两项源码逻辑。
 
 承接 [PR #137](https://github.com/xuys2025/escape-bincov/pull/137)，实现及浏览器证据提交 `e703f14dae521ea91951f61c533581558885f42e`；最终 head/CI 以 PR 为准。任务 `codex/transaction-failure-phases`，基线 `0f73a67386bac196b87c983668295be6d1a99f1e`；本轮交付与证据集中在[原质量摘要 Q-E04](docs/tasks/quality-entropy.md#q-e04-提交后的发布失败)。先读 Session `persist` / `requiresReload`、Store `commit` 及 `tests/session-publication.test.ts`。已确认旧代码写后 restore 失败会使现金磁盘 680 / 内存 700；本轮独立发布失败结果、停写/暂停和精确已提交备份。产品源码 head `cf5e49eb0a940234ea189d2cc534a6bfc6ca2709`（含 main `630e68f`），1041/1041 单测、85/85 工程守卫、package 与两尺寸 17/17 存档浏览器通过；后续只有测试观测/证据归档。截图与准确 CI 状态见上述入口及承接 PR；真机、长时性能未验，不把已提交视为合并。
+## 2026-10-28 · CI：文档快速通道的 main 也要部署和发布
+
+分支 `fix/ci-docs-fastpath-deploy`，起点 main `8c6589b`。#133（纯文档）合入后，main 运行 40623228494（`03ea261`）走了快速通道：浏览器组跳过、`Build and test` 成功，但 `Deploy Pages` 和 `Publish offline release` 都被跳过，`main-latest` 和发布清单停在 `0f73a67`。原因是两个 job 的 `if` 没写状态函数，默认 `success()` 连带检查被跳过的浏览器组。现在两个 job 显式写 `!cancelled() && needs.verify.result == 'success'`，`policy.test.mjs` 守住浏览器组之后的 job，详见 [CI 说明](docs/CI.md#pages-与镜像)。
+
+只改工作流、守卫测试和文档，游戏字节不变。真正的证明要等下一次纯文档 PR 合入 main：两个 job 实际执行，`main-latest` 移到那次提交。准确 head 与 CI 见承接 PR。
+
+## 2026-10-28 室内墙体与视野：居民楼与商场
+
+承接 [PR #135](https://github.com/xuys2025/escape-bincov/pull/135)，分支 `feat/indoor-wall-visibility`，实现 [PR #133](https://github.com/xuys2025/escape-bincov/pull/133) 的方案。维护者同意方案后要求合并 #133 并另开 PR 开始实现；#133 的冲突（任务清单、handoff 两处都保留）经维护者同意推到原 fork 分支。之后维护者要求开自动合并：#133 落后 main 一个提交，经维护者同意用 GitHub 的更新分支合入 main，检查通过后自动合并为 `03ea261`；本分支已合入之后的 main（含 #134、#117、#136，冲突只在任务清单和 handoff，两边都保留）。
+
+已实施：第一阶段居民楼一楼、二楼、地下，第二阶段商场两层（新旧布局和程序绘制后备）。墙按[方案](docs/INDOOR-WALL-VISIBILITY-PLAN.md)五项规则显示，商场原来的房间剖切已删除；实施时定下的细节、分类结果和验证记在方案的[实施进度](docs/INDOOR-WALL-VISIBILITY-PLAN.md#6-实施进度)。只改显示，存档、地图、碰撞、子弹和房间揭示都不变。
+
+未做：维护者试玩；真机。准确 head、CI 与已跑检查见 PR。
+
 ## 2026-10-28 Q-E02：公共视图生命周期归位
 
 串联集成：本分支按明确授权正常合入 #117 候选 `4ba5b72c70983f3eefe4affdd31e2d674b3223a3`（fetch 后核对 `origin/fix/content-identity` 同一提交），只消除共同文档冲突，不修改其源码。**必须先 #117 合入 main，再合 #136。** 该候选尚非已接受 main；此前浏览器和制品证据仍只归属原 `14df8ce`，候选集成已通过 1026/1026 单测、86/86 守卫及 package；两份 HTML/两份 ZIP 与明确标注的 #117 候选构建逐字节相同（HTML `bdd50dec…7fc25`），没有将其称为已接受 main。最新已接受 `630e68f` 已确认包含在被测集成中；完整 CI 在新 head 推送后核对，详情见原质量摘要。
@@ -102,6 +120,20 @@
 ## 2026-10-27 #115：行动背包有限服务同步 main（续作）
 
 维护者 10-27 要求查看 #115 去向并合入后再做 #26 F15。#115 自 10-25 起无人续作、无评论，准确 head `3e1047b` 当时 CI 全过。本次在隔离工作树把 main `86add10`（#126、#127 等已合入）合进原分支：源码自动合并，只有本文件冲突，保留双方小节。实现和接口不变；同步后的验证结果见 PR 正文。F15 另由 PR #129 承接（基于本分支）。10-27 晚 #128（F14）合入后，再把 main `8b59019` 合进来一次，同样只有本文件冲突，保留双方小节。
+
+## 2026-10-28 Shader cache 快照消费字段校验（PR #118，`fix/heap-cache-input`）
+
+复用 [PR #118](https://github.com/xuys2025/escape-bincov/pull/118)，续作前 head `039bac0d7e27905857ac989b2f6e9bc061f547dc`。本轮先正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`（`3613b04`），交付 head `bb507f1` 的完整 CI [40624444343](https://github.com/xuys2025/escape-bincov/actions/runs/40624444343) 已通过。main 新进 #134 后，再正常合入共同截止点 `630e68f517edea34bfbcc548473897bd36bdfa08`；只在本文件顶部冲突并保留双方小节，#134 的架构工具、分类与入口完整保留；准确交付 head 与远程检查见原 PR。职责仍是 #32/#60 的 shader-cache review 分析器输入校验，与 #116 station 报告消费字段校验分开。
+
+原脚本把 shader string 的 null `self_size` 加成零：最小图 cycle-30 应有 80 bytes，旧 CLI 仍 exit 0 并写 `newRetainedBytes: 0`。现在 [`validateSnapshot`](scripts/sol-heap-cache-inspect.mjs) 只校验实际消费的 flat-table 字段：缺失/重复字段、类型与表索引、不完整行、非安全整数 id/bytes、重复 id，以及 cycle-30 incoming edge 计数/偏移/命名；`sumBytes` 拒绝不精确求和。只在所有消费校验和报告准备成功后写 `shader-cache.json`，拒绝时保留已有报告字节。未消费的 metadata、额外列/类型允许，cycle-10 不要求未消费的 edge 图。不做完整 V8 schema 或业务内存预算校验。
+
+本轮 [CLI 测试](scripts/ci/heap-cache-input.test.mjs) 从原五组扩成十组：新增已有报告保留、重复字段、坏表/identity、edge_count 求和溢出、未消费 metadata/额外列与类型/空图、稳定 node id、weak/hidden edge、两端 MAX_SAFE_INTEGER 精确字节和、七跳边界与十二样本截断。原五组在当前 main 旧脚本实际为 1 通过/4 失败；候选扩展十组实际 10/10，不把两者写成同一测试集。合法合成图新旧报告除生成时间外所有字段 deepEqual。
+
+Node v24.22.1 本轮实际生成两份 V8 快照（5,210,690 / 5,211,160 bytes），候选 CLI exit 0，新增人工字符串 2 节点/176 bytes、3 owner paths。这只是 Node 人工字符串图的格式兼容证据，不是浏览器/游戏 shader 泄漏或 F20 签收。原始快照、采集脚本和日志只在忽略的 `test-results/pr118/`；首轮未扁平化人工字符串只得到零匹配，已修 fixture 重新捕获并核对非零观察。没有变更分析算法、阈值、游戏、历史证据或测试分类。
+
+此前 `bb507f1` 已实际通过完整 `pnpm test` 1022/1022（63.87 秒）、`pnpm check:ci` 87/87、`pnpm package`、CLI 十组与入口文档三组合跑 13/13，且其完整 CI 已通过。合入 #134 时逐字节核对本任务生产脚本、十组 CLI 测试与锁文件不变，依赖声明和 test/check:ci/package/build 命令不变，游戏 src/assets/tests 不变；1022 单测与真实快照兼容证据按同代码复用，不声称重新采样。当前合成树已重新实际通过 `pnpm check:ci` 95/95（18.56 秒，含 CLI 十组）、`pnpm package` 与 `git diff --check`，三产品 SHA-256/字节数与此前及 main 一致。新日志为 `test-results/pr118/check-ci-630.log`、`package-630.log`，输入核对与三哈希为 `merge-630-inputs.json`、`product-hashes-630.json`；生成物不提交。首次本地输入比对发现测试工作副本 mixed 换行，归一为已提交 LF 后字节一致；冲突解决前误启动的一次守卫日志仅留 before-resolution，不作为当前验证。未另跑本机游戏单测/浏览器、游戏堆采样、trend 或 60 轮/F20，不关闭 #32/#60；新 head 完整 CI 以原 PR 实时链接为准，旧成功不代表新 head。已 Ready，未启用自动合并、未合并或发布。
+
+维护者已明确授权复查后自动合并；本次正常同步 main `f66ee79af6b84ef64319891e82d7dc4e82985350`（含 #117/#136），保留上游身份与共享生命周期归位。本节原验证证据保留历史归属，当前守卫、打包及准确新 head CI / 自动合并状态以原 PR 为准，不绕过检查或保护。
 
 ## 2026-10-27 #26 F14：商场里没揭示的房间压暗（PR #128）
 
