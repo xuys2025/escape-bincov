@@ -160,9 +160,12 @@ test('corpse contains carried equipment and exactly remaining ammo; repeated dea
     enemy.tactics!.magazine = 2; enemy.tactics!.reserve = 4;
     damageLayerEnemy(state, 'coast', enemy, 1000);
     const corpse = raid.maps.coast.containers.find(c => c.id === `corpse-${enemy.uid}`)!;
-    assert.equal(D.count(corpse.inventory, 'ammo9'), 6); assert.equal(D.count(corpse.inventory, 'pistol'), 1);
+    // The gun it holds (#28 M4-02: one of the raiders' four handguns) and its rounds, the ammunition group that gun fires.
+    const held = enemy.tactics!.equipment!, ammo = D.WEAPONS[held].ammo!;
+    assert.ok(['pistol', 'gb17', 'pb226', 'mb1911'].includes(held), held);
+    assert.equal(D.count(corpse.inventory, ammo), 6); assert.equal(D.count(corpse.inventory, held), 1);
     // The carried gun drops as a gun instance (gunsmith record v8): a factory state under its own entity uid.
-    const pistol = corpse.inventory.items.find(i => i.id === 'pistol')!;
+    const pistol = corpse.inventory.items.find(i => i.id === held)!;
     assert.deepEqual(pistol.gun, factoryState()); assert.deepEqual(validateGun(pistol.id, pistol.uid, pistol.gun), { ok: true });
     const before = structuredClone(state); damageLayerEnemy(state, 'coast', enemy, 1000); assert.deepEqual(state, before);
     const store = new RecoveryStore(f.storage); store.load();

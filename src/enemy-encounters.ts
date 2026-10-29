@@ -7,6 +7,7 @@ import { BLOCKADE_POSTS, BLOCKADE_SQUAD, installBlockadeProgram } from './enemy-
 import { FAUNA_SITES, FAUNA_SQUAD, installFaunaFood } from './enemy-fauna';
 import { AFFECTED_POSTS, AFFECTED_SQUAD } from './enemy-affected';
 import { installRecoveryProgram, RECOVERY_POSTS, RECOVERY_SQUAD } from './enemy-recovery';
+import { armEncounter } from './enemy-armory';
 
 /** Authored street encounter, away from every deployment, extraction and stair landing.
  * Replaces three, six on the market seed variant, or seven on the fauna variant before one deployment commit.
@@ -50,6 +51,7 @@ export function installStreetEncounter(raid: LayeredRaid, world: WorldDefinition
     if (fauna) installFaunaFood(raid);
     if(raid.seed%5===3)installRecoveryProgram(raid);
     if(raid.seed%5===4)installBlockadeProgram(raid);
+    armEncounter(raid);
     raid.version = raid.version === 3 ? 5 : 4;
     raid.roster = Object.values(raid.maps).flatMap(m => m.enemies.map(e => ({ uid: e.uid, id: e.id })));
 }

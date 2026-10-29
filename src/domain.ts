@@ -1048,8 +1048,10 @@ export function rollLoot(seed: number, amount: number, table: LootTable = LOOT_T
  * tuned in M4-02; #28 M3 lowered `rare` from 1/3 so that each of the five rare parts stays rarer than each of the 39
  * common ones. #28 M3-05: a gun record's find that is not a gun is, with chance `ammo`, one pack of a wave-two
  * ammunition group (findQuantity), so a found gun of a new group can be fed in the raid; the old groups' supply stays.
+ * #28 M4-02 (maintainer 2026-10-29, #140): the armed enemies hold catalog guns and drop them, so a map's gun records
+ * turn into a gun a third as often (`gun` 1/12, was 1/4); good guns come mainly off enemies.
  */
-export const GUNSMITH_FINDS = { share: 1 / 6, gun: 1 / 4, rareGun: 1 / 8, rare: 1 / 6, ammo: 1 / 3 } as const;
+export const GUNSMITH_FINDS = { share: 1 / 6, gun: 1 / 12, rareGun: 1 / 8, rare: 1 / 6, ammo: 1 / 3 } as const;
 const FIND_PARTS = { common: partsOf('common').filter(id => !SHELF_COMMON.includes(id)), rare: partsOf('rare') };
 /** The guns that are found, by the catalog's tier (#28 M3): every gun that is an item but those the arms counter stocks. */
 const FIND_GUNS = (() => {

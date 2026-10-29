@@ -216,7 +216,8 @@ test('zone finds over 3000 seeds: every found gun and part turns up, rare parts 
     const packs = NEW_AMMO.reduce((n, id) => n + (rounds[id] ?? 0), 0);
     assert.deepEqual(Object.keys(rounds).sort(), [...NEW_AMMO].sort());
     assert.ok(packs / N > .12 && packs / N < .35, `rounds ${packs / N} a raid`);
-    assert.ok(guns / N > .17 && guns / N < .29, String(guns / N));
+    // A gun one raid in thirteen or so since #28 M4-02 (`gun` 1/12): good guns come mainly off enemies.
+    assert.ok(guns / N > .05 && guns / N < .1, String(guns / N));
     assert.ok(Math.max(...RARE.map(id => seen[id])) < Math.min(...COMMON.map(id => seen[id])), JSON.stringify(seen));
     assert.ok(Math.max(...GUNS_RARE.map(id => seen[id])) < Math.min(...GUNS_COMMON.map(id => seen[id])), JSON.stringify(seen));
 });

@@ -45,10 +45,10 @@ export function loadGunsmithArt(): Promise<void> {
             sides.set(id, canvas ?? null);
             return canvas ?? null;
         },
-        held: (gun, sig) => {
+        held: (gun, sig, glove) => {
             const parts = partsOfSignature(sig), layout = parts && gunArtLayout(gun, parts, 'h');
             if (!layout?.grip || !layout.tip || layout.bore === undefined) return null;
-            const canvas = drawGunLayout(layout);
+            const canvas = drawGunLayout(layout, glove);
             return canvas && { key: layout.key, canvas, grip: layout.grip, forward: layout.forward ?? 0, hand: layout.hand ?? null, tip: layout.tip, bore: layout.bore };
         },
     }));
@@ -87,7 +87,7 @@ function virtualLayer(key: string): HTMLCanvasElement | null {
 const source = (key: string): CanvasImageSource | null => images.get(key) ?? virtualLayer(key);
 
 /** Draw a layout on a new canvas, back to front; null before the images are decoded or without a 2D context. */
-export function drawGunLayout(layout: ArtLayout): HTMLCanvasElement | null {
+export function drawGunLayout(layout: ArtLayout, glove?: string): HTMLCanvasElement | null {
     const canvas = document.createElement('canvas'); canvas.width = layout.w; canvas.height = layout.h;
     const c = canvas.getContext('2d');
     if (!c) return null;
@@ -95,8 +95,20 @@ export function drawGunLayout(layout: ArtLayout): HTMLCanvasElement | null {
     for (const l of layout.layers) {
         const img = source(l.key);
         if (!img || !artOf(l.key)) return null;
-        c.drawImage(img, l.x, l.y);
+        c.drawImage(glove && l.label.startsWith('glove') ? tinted(img, l.w, l.h, glove) ?? img : img, l.x, l.y);
     }
+    return canvas;
+}
+/**
+ * A glove image in an enemy's colour (#28 M4-02): the colour over its opaque pixels, keeping half of their shading, so
+ * a gunsmith gun in an enemy's hands wears that enemy's gloves as its old weapon art does.
+ */
+function tinted(img: CanvasImageSource, w: number, h: number, colour: string): HTMLCanvasElement | null {
+    const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+    const c = canvas.getContext('2d');
+    if (!c) return null;
+    c.drawImage(img, 0, 0);
+    c.globalCompositeOperation = 'source-atop'; c.globalAlpha = .5; c.fillStyle = colour; c.fillRect(0, 0, canvas.width, canvas.height);
     return canvas;
 }
 

@@ -381,11 +381,12 @@ export type ViewEventBody = {
     weapon: WeaponLook;
     pellets: readonly PelletView[];
     /**
-     * The player's gun (#28 M2-11): its catalog id and class, so the view picks the shot's sound by the gun and not only
-     * by how it is drawn (#75 keys its per-gun recipes on these). Enemy shots and older events omit it.
+     * The shooter's gun (#28 M2-11; an armed enemy's since M4-02): its catalog id and class, so the view picks the shot's
+     * sound by the gun and not only by how it is drawn (#75 keys its per-gun recipes on these). Unarmed enemies' shots
+     * (a spitter) and older events omit it.
      */
     gun?: Readonly<{ id: string; cls: GunClass }>;
-    /** A suppressor muffles this shot (#28 M2-11): the view plays the quiet recipe. Enemy shots and older events omit it. */
+    /** A suppressor muffles this shot (#28 M2-11): the view plays the quiet recipe. Present with `gun`. */
     suppressed?: boolean;
 } | {
     type: 'melee';
