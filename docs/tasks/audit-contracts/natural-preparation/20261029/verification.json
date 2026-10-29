@@ -30,7 +30,7 @@
     "legacySamplerControl": "3 passed / 1 expected failure: event eviction produces 0 instead of 1"
   },
   "natural": {
-    "startedAt": "2026-10-29T03:55:01.670Z",
+    "startedAt": "2026-10-29T03:55:01.67Z",
     "finishedAt": "2026-10-29T04:05:06.466Z",
     "durationSeconds": 604.796,
     "htmlSha256": "4c5b8cb4c4536d448040ab65005b79265e932f4462181701e1366ccfab9ccb66",
@@ -132,5 +132,14 @@
     "thirdFailure": "repeated-deaths-report.json",
     "interruptedRun": "interrupted-progress.json (no final report; not counted as pass)"
   },
-  "boundaries": "Automated natural input, not human balance or physical-device acceptance. UI/quota/funding and kill-control are separate explicit fixtures. Save format, game rules, ordinary HUD, #32 F20 unchanged."
+  "boundaries": "Automated natural input, not human balance or physical-device acceptance. UI/quota/funding and kill-control are separate explicit fixtures. Save format, game rules, ordinary HUD, #32 F20 unchanged.",
+  "integration111": {
+    "base": "03cfb775fbef07c711fe789e9f6e886460261a91",
+    "previouslyTestedHead": "54632691ad2d4bc58698aabd253d6a1cb8d6c3be",
+    "gameTestsAssetsDependenciesBuildAndNaturalInputsUnchanged": true,
+    "guards": "126/126",
+    "package": "passed",
+    "htmlSha256": "4c5b8cb4c4536d448040ab65005b79265e932f4462181701e1366ccfab9ccb66",
+    "reusedEvidence": "1058 unit tests, 604.796-second full natural input, UI/quota and kill control; source inputs and packaged HTML unchanged"
+  }
 }
