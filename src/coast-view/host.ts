@@ -907,12 +907,13 @@ export class CoastSampleHost {
   }
   /**
    * Stair destinations as HUD text in the pixel face, at the place the view keeps for them (below the stair marker, moved
-   * clear of the player), shown by the same rules as before. On mall floors the one the player stands at is named by the
-   * interaction prompt instead.
+   * clear of the player). A destination briefly hides while its actual HUD box covers a drawn enemy body; the next frame
+   * measures it afresh so it returns as soon as the body leaves. On mall floors the interaction prompt names the current stair.
    */
   private stairEls = new Map<string, HTMLElement>();
   private stairNames(f: PublishedView['frame']) {
     const box = this.q('[data-stairs]'), seen = new Set<string>(), at = this.view.mallFloor && f.interaction?.kind === 'entry' ? f.interaction.ref.id : null;
+    const bodies = this.view.enemyBodyViews();
     for (const l of this.view.stairLabelViews()) {
       if (!l.visible || l.id === at) continue;
       seen.add(l.id);
@@ -921,6 +922,8 @@ export class CoastSampleHost {
       if (el.textContent !== l.text) el.textContent = l.text;
       const p = this.view.worldToClient({ x: l.x, y: l.y });
       el.style.transform = `translate(${Math.round(p.x)}px, ${Math.round(p.y)}px) translateX(-50%)`; el.hidden = false;
+      const r = el.getBoundingClientRect();
+      el.hidden = bodies.some(b => r.left < b.x + b.w && r.right > b.x && r.top < b.y + b.h && r.bottom > b.y);
     }
     for (const [id, el] of this.stairEls) if (!seen.has(id)) el.hidden = true;
   }

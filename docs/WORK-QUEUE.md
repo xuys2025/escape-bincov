@@ -1,6 +1,8 @@
 # 当前任务入口
 
-本轮原子任务：**[SAMPLE_AREA 共享数据边界](tasks/todo-sample-area-boundary.md)**，分支 `refactor/sample-area-boundary`，[PR #145](https://github.com/xuys2025/escape-bincov/pull/145)；已由维护者指定 GPT-6.1 Sol 实施，常量与直接引用迁移、行为对照及依赖守卫已完成，本地验收已执行（商场样板两项与旧版同样失败）。只承接 #60 Q-E02 的这一余项，准确 head、CI 与剩余边界见任务书和原 PR；不接管总单或其他 PR。
+本轮原子任务：**[修复楼梯标签遮住可见敌人（S03c）](tasks/todo-stair-label-occlusion.md)**，[PR #146](https://github.com/xuys2025/escape-bincov/pull/146) 实现与主审完成；最终 CI/合并以原 PR 实时状态为准。已同步 main `4fec648c`，1080 单测/125 工程守卫/package 通过，S03c 两档桌面与 932×430 触屏均 0 遮挡；原版 85/74 的有效失败、最终空间 20/22 的既有 S04d 首败和首轮商场证据完整保留。只承接 #26 中 S03c 遮敌子项；本地断言余项归 #61，总单保持开放。
+
+已完成原子任务：**[SAMPLE_AREA 共享数据边界](tasks/todo-sample-area-boundary.md)**，[PR #145](https://github.com/xuys2025/escape-bincov/pull/145) 已经主审及准确 head 完整 CI，合入 main `4fec648c`。常量与直接引用迁移、行为对照及依赖守卫完成；只核销 #60 Q-E02 的这一余项，本地旧版首败保留。
 
 已完成原子任务：**[HUD 堆路径报告拒绝缺失或非法观测字段](tasks/todo-hud-path-observations.md)**，[PR #144](https://github.com/xuys2025/escape-bincov/pull/144) 已经主审及准确 head 完整 CI，合入 main `13c9b80c`。原工具保持 review，F20/PARTIAL 不变；只核销 #32/#60 中这个子项。
 

@@ -4,7 +4,7 @@
 
 主审同步（2026-10-29）：main 在实施后合入 #132，已正常同步 `e2728e46`，保留双方交接；scene 与主线的差异仍只有样板范围 import。同步后 Node 24.21.0 的单测 1080/1080、工程守卫 115/115、打包通过，便携 ZIP 6,100,983 B。新主线浏览器与准确 head 平台门禁另见原 PR；以下首轮报告对应原记录哈希，保留不覆盖。
 
-状态：**已实施，本地验收已执行；商场样板保留两项旧版同样失败，准确 head CI 见原 PR；未合并、未发布**。继续分支 `refactor/sample-area-boundary` 与 [PR #145](https://github.com/xuys2025/escape-bincov/pull/145)，只承接 [#60](https://github.com/xuys2025/escape-bincov/issues/60) Q-E02 的 SAMPLE_AREA 余项；总单由主代理统一更新。
+状态：**已完成并合并**。[PR #145](https://github.com/xuys2025/escape-bincov/pull/145) 准确 head `12a89a88` 经主审及完整 [CI 40826870648](https://github.com/xuys2025/escape-bincov/actions/runs/40826870648) 后合入 main `4fec648c`，合入树与受检树相同。只核销 [#60](https://github.com/xuys2025/escape-bincov/issues/60) Q-E02 的 SAMPLE_AREA 余项；商场本地旧版首败保留，总单保持开放。
 
 ## 实现与边界
 

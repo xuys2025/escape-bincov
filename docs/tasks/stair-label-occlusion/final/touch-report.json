@@ -1,0 +1,118 @@
+{
+  "sha256": "2218052786b341a90f9dd67aaaafcf30da38fd0cfd051368fd42d461445429ed",
+  "browser": "156.0.8078.48",
+  "touch": true,
+  "checks": [
+    {
+      "name": "932x430 S03c stair-label-under-an-enemy-on-uncovered-floor",
+      "detail": {
+        "at": {
+          "x": 560,
+          "y": 318
+        },
+        "before": {
+          "hidden": false,
+          "width": 72,
+          "height": 20
+        },
+        "clip": {
+          "x": 522,
+          "y": 178,
+          "width": 76,
+          "height": 66,
+          "shown": true,
+          "hidden": true,
+          "label": {
+            "x": 560,
+            "y": 294
+          }
+        },
+        "scale": 1,
+        "permissions": {
+          "hidden": {
+            "hidden": false,
+            "shown": false
+          },
+          "offscreen": {
+            "hidden": false,
+            "shown": true
+          },
+          "absent": {
+            "hidden": false,
+            "shown": false
+          },
+          "visible": {
+            "hidden": true,
+            "shown": true
+          },
+          "unchangedPermissions": true
+        },
+        "pixels": 5016,
+        "body": 459,
+        "covered": 0,
+        "blended": 0,
+        "guide": 1440,
+        "overlap": 252,
+        "after": {
+          "hidden": false,
+          "width": 72
+        }
+      },
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "occlusion": [
+    {
+      "size": "932x430",
+      "check": "S03c",
+      "at": {
+        "x": 560,
+        "y": 318
+      },
+      "before": {
+        "hidden": false,
+        "width": 72,
+        "height": 20
+      },
+      "clip": {
+        "x": 522,
+        "y": 178,
+        "width": 76,
+        "height": 66,
+        "shown": true,
+        "hidden": true,
+        "label": {
+          "x": 560,
+          "y": 294
+        }
+      },
+      "scale": 1,
+      "permissions": {
+        "hidden": {
+          "hidden": false,
+          "shown": false
+        },
+        "offscreen": {
+          "hidden": false,
+          "shown": true
+        },
+        "absent": {
+          "hidden": false,
+          "shown": false
+        },
+        "visible": {
+          "hidden": true,
+          "shown": true
+        },
+        "unchangedPermissions": true
+      },
+      "pixels": 5016,
+      "body": 459,
+      "covered": 0,
+      "blended": 0,
+      "guide": 1440,
+      "overlap": 252
+    }
+  ]
+}

@@ -10,10 +10,11 @@ import { browserOptions } from './browser-options.mjs';
 import { resumeStalls, running, stallResumes } from './stall-resume.mjs';
 
 const option = (name, fallback) => process.argv.find(a => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
+const touch = option('touch', '0') === '1';
 const html = await readFile(option('html', 'dist/index.html'), 'utf8'), out = resolve(option('out', 'test-results/issue26-spatial'));
 await mkdir(out, { recursive: true });
 const browser = await chromium.launch(browserOptions);
-const report = { sha256: createHash('sha256').update(html).digest('hex'), browser: browser.version(), checks: [], errors: [] };
+const report = { sha256: createHash('sha256').update(html).digest('hex'), browser: browser.version(), touch, checks: [], errors: [] };
 let context, page, size;
 const frames = (n = 3) => page.evaluate(n => new Promise(resolve => { let count = 0; const tick = () => ++count >= n ? resolve() : requestAnimationFrame(tick); requestAnimationFrame(tick); }), n);
 const place = (x, y, map = 'coast') => page.evaluate(([x, y, map]) => window.__bincovSample.driver.placePlayer({ x, y }, -Math.PI / 2, map), [x, y, map]);
@@ -51,6 +52,7 @@ async function takeStairs(target) {
   throw new Error(`The stairs did not take the player to ${target}`);
 }
 async function check(name, task) {
+  if (touch && !name.startsWith('S03c ')) return;
   const row = { name: `${size.join('x')} ${name}` }; report.checks.push(row);
   try { row.detail = await task(); assert.deepEqual(report.errors, []); row.status = 'passed'; }
   catch (e) { row.status = 'failed'; row.error = String(e.stack); process.exitCode = 1; }
@@ -92,26 +94,12 @@ const OCCLUSION = `window.__occlusion = ({ A, B, C, D }) => {
 /** A page capture as RGBA in the page (the HUD's stair labels are page text above the canvas). */
 const decode = b64 => `new Promise(done => { const i = new Image(); i.onload = () => { const c = document.createElement('canvas'); c.width = i.width; c.height = i.height;
   const g = c.getContext('2d'); g.drawImage(i, 0, 0); done(g.getImageData(0, 0, i.width, i.height).data); }; i.src = 'data:image/png;base64,' + ${JSON.stringify(b64)}; })`;
-/**
- * Front-end gaps the occlusion checks found on the 2.5D view (2026-10-17, reported). Stair names are page text above the
- * canvas, so one covers part of an enemy standing right under it (hiding the name while an enemy is near the stairs would
- * take the destination away in a fight). Door guides step aside for enemies and bullets, so they are not listed.
- * While a gap is listed, its check asserts that the cover is still measured and prints a GAP line; once the view is fixed
- * the guard fails, and removing the entry restores the original assertion (0 covered pixels).
- */
-const KNOWN_GAPS = new Set(['stair-label-over-actors']);
-function uncovered(gap, covered, what) {
-  if (!KNOWN_GAPS.has(gap)) return assert.equal(covered, 0, `${what}: ${covered} covered pixels`);
-  (report.gaps ??= []).push({ size: size.join('x'), gap, covered });
-  console.log(`GAP front-end: ${size.join('x')} ${what} covers ${covered} pixels (${gap})`);
-  assert.ok(covered > 0, `${gap} no longer reproduces (0 covered pixels): remove it from KNOWN_GAPS so the original check applies`);
-}
 /** Sprites an actor's figure is drawn with (its ground shadow stays: it lies under every guide by design). */
 const FIGURE = 'g => [g.body, g.weapon, ...g.arms, g.flash, g.wade]';
 
 try {
-  for (size of [[1280, 720], [1920, 1080]]) {
-    context = await browser.newContext({ offline: true, viewport: { width: size[0], height: size[1] } });
+  for (size of touch ? [[932, 430]] : [[1280, 720], [1920, 1080]]) {
+    context = await browser.newContext({ offline: true, viewport: { width: size[0], height: size[1] }, hasTouch: touch, isMobile: touch });
     await resumeStalls(context);
     context.on('request', r => { if (/^https?:/.test(r.url()) && !r.url().startsWith('https://spatial.test/')) report.errors.push(`external request ${r.url()}`); });
     await context.route('https://spatial.test/**', r => r.fulfill({ contentType: 'text/html', body: html }));
@@ -209,7 +197,7 @@ try {
         }
         // The original drew the guide under them. The 2.5D guide is drawn above the actors (it shows through walls), so it
         // steps aside instead: no enemy or bullet pixel is covered because the guide is not drawn while they are on it.
-        uncovered('door-guide-over-actors', result.guideShown ? Math.max(result.enemy.covered, result.bullet.covered) : 0, 'the door guide over the enemy and the bullet in a visible open doorway');
+        assert.equal(result.guideShown ? Math.max(result.enemy.covered, result.bullet.covered) : 0, 0, 'the door guide over the enemy and the bullet in a visible open doorway');
         assert.equal(result.guideShown, false, 'the door guide steps aside while the enemy and the bullet are on it');
         // The bullet alone: the guide hides only for the frames its trail is on the guide, and is back once nothing is.
         await page.evaluate(({ uid, home }) => window.__bincovSample.driver.placeEnemy(uid, home), staged); await settle();
@@ -230,11 +218,10 @@ try {
       }
     });
     await check('S03c stair-label-under-an-enemy-on-uncovered-floor', async () => {
-      // Phaser P09 on the 2.5D view: a live enemy stands where the up-stair destination is drawn (the view's label box; the
-      // text is HUD text above the canvas). Four page captures of the label and the enemy: A both, B label only, C enemy
-      // only, D neither, toggling the enemy's sprites and the label element with the ticker stopped. P09's second part (the
-      // label stays readable over a roof) has no 2.5D counterpart: HUD text always draws above the canvas.
+      // Real Runtime placement and actual DOM label bounds. A is the normal collision frame; B forces the original label
+      // with no enemy, C keeps only the enemy, D neither. B/C prove the overlap still exists even when A hides the label.
       await place(464, 336); await settle();
+      await page.screenshot({ path: resolve(out, `${size.join('x')}-S03c-before.png`) });
       const staged = await page.evaluate(() => {
         const h = window.__bincovSample.host, v = h.view, el = [...document.querySelectorAll('.cs-stair')].find(e => !e.hidden && e.textContent === '上楼 · 二楼');
         if (!el) throw new Error('the up-stair destination is not shown');
@@ -243,47 +230,83 @@ try {
         if (!a) throw new Error('no live enemy away from the stairs');
         // Feet just below the label: the drawn figure (about 48 px tall) spans the label's whole height.
         const at = { x: Math.round(top.x), y: Math.round(bottom.y) + 4 }, { x, y } = v.stairLabelViews().find(l => l.id === 'resident-up');
-        window.__bincovSample.driver.placeEnemy(a.uid, at); return { uid: a.uid, home: { x: a.x, y: a.y }, at, label: { x, y } };
+        window.__bincovSample.driver.placeEnemy(a.uid, at); return { uid: a.uid, home: { x: a.x, y: a.y }, at, label: { x, y }, before: { hidden: el.hidden, width: r.width, height: r.height } };
       });
       try {
         await settle();
         // Stop the ticker before measuring, so the camera, the canvas and the label element hold one frame for every capture.
         const clip = await page.evaluate(({ uid, at }) => {
-          const h = window.__bincovSample.host, v = h.view, el = [...document.querySelectorAll('.cs-stair')].find(e => !e.hidden && e.textContent === '上楼 · 二楼');
+          const h = window.__bincovSample.host, v = h.view, el = [...document.querySelectorAll('.cs-stair')].find(e => e.textContent === '上楼 · 二楼');
           h.app.ticker.stop(); window.__figureShown = window.__figure(v.actors.get(uid)).map(s => s.visible);
+          const hidden = el.hidden; el.hidden = false;
           const r = el.getBoundingClientRect(), a = v.worldToClient({ x: at.x - 16, y: at.y - 56 }), b = v.worldToClient({ x: at.x + 16, y: at.y + 6 });
           const x = Math.floor(Math.min(r.left, a.x)) - 2, y = Math.floor(Math.min(r.top, a.y)) - 2, { x: lx, y: ly } = v.stairLabelViews().find(l => l.id === 'resident-up');
-          return { x, y, width: Math.ceil(Math.max(r.right, b.x)) + 2 - x, height: Math.ceil(Math.max(r.bottom, b.y)) + 2 - y, shown: v.actorShown(uid), label: { x: lx, y: ly } };
+          el.hidden = hidden;
+          return { x, y, width: Math.ceil(Math.max(r.right, b.x)) + 2 - x, height: Math.ceil(Math.max(r.bottom, b.y)) + 2 - y, shown: v.actorShown(uid), hidden, label: { x: lx, y: ly } };
         }, staged);
         const shots = {}, area = { x: clip.x, y: clip.y, width: clip.width, height: clip.height };
         try {
-          for (const [name, enemy, label] of [['A', true, true], ['B', false, true], ['C', true, false], ['D', false, false]]) {
+          for (const [name, enemy, label] of [['A', true, !clip.hidden], ['B', false, true], ['C', true, false], ['D', false, false]]) {
             await page.evaluate(([uid, enemy, label]) => {
-              const h = window.__bincovSample.host, v = h.view, el = [...document.querySelectorAll('.cs-stair')].find(e => !e.hidden && e.textContent === '上楼 · 二楼');
-              window.__figure(v.actors.get(uid)).forEach((s, i) => { s.visible = enemy && window.__figureShown[i]; }); el.style.visibility = label ? '' : 'hidden';
+              const h = window.__bincovSample.host, v = h.view, el = [...document.querySelectorAll('.cs-stair')].find(e => e.textContent === '上楼 · 二楼');
+              window.__figure(v.actors.get(uid)).forEach((s, i) => { s.visible = enemy && window.__figureShown[i]; }); el.hidden = !label;
               v.render(); h.app.render();
             }, [staged.uid, enemy, label]);
             await frames(2); shots[name] = (await page.screenshot({ clip: area })).toString('base64');
-            if (name === 'A') await page.screenshot({ path: resolve(out, `${size.join('x')}-S03c-label-crop.png`), clip: area });
+            if (name === 'A') {
+              await page.screenshot({ path: resolve(out, `${size.join('x')}-S03c-label-crop.png`), clip: area });
+              await page.screenshot({ path: resolve(out, `${size.join('x')}-S03c-during.png`) });
+            }
           }
         } finally {
           await page.evaluate(uid => {
             const h = window.__bincovSample.host;
             window.__figure(h.view.actors.get(uid)).forEach((s, i) => { s.visible = window.__figureShown[i]; }); delete window.__figureShown;
-            for (const el of document.querySelectorAll('.cs-stair')) el.style.visibility = '';
+            h.stairNames(h.lastBatch.frame);
             h.view.render(); h.app.render(); h.app.ticker.start();
           }, staged.uid);
         }
         const result = await page.evaluate(`(async () => window.__occlusion({ A: await ${decode(shots.A)}, B: await ${decode(shots.B)}, C: await ${decode(shots.C)}, D: await ${decode(shots.D)} }))()`);
         const s = await page.evaluate(() => window.__bincovSample.host.view.view.s), scaled = n => Math.round(n * s * s);
-        const detail = { at: staged.at, clip, scale: s, ...result };
+        const permissions = await page.evaluate(uid => {
+          const h = window.__bincovSample.host, v = h.view, b = h.lastBatch, original = JSON.stringify(b.frame.revealed);
+          h.app.ticker.stop();
+          const label = () => [...document.querySelectorAll('.cs-stair')].find(e => e.textContent === '上楼 · 二楼');
+          const actor = b.frame.actors.find(a => a.uid === uid);
+          if (!actor.regionId || b.frame.revealed[actor.regionId] !== true) throw new Error('overlap actor must be in a revealed region');
+          const probe = frame => { v.present({ ...b, events: [], frame }, 0); h.stairNames(frame); return { hidden: label().hidden, shown: v.actorShown(uid) }; };
+          try {
+            // Same coordinates, real region permission withheld; then the same actor outside the viewport or absent from
+            // this floor's frame. These presentation-only probes never alter Runtime permissions or the saved raid.
+            const hidden = probe({ ...b.frame, revealed: { ...b.frame.revealed, [actor.regionId]: false } });
+            const offscreen = probe({ ...b.frame, actors: b.frame.actors.map(a => a.uid === uid ? { ...a, x: -10000, y: -10000 } : a) });
+            const absent = probe({ ...b.frame, actors: b.frame.actors.filter(a => a.uid !== uid) });
+            const visible = probe(b.frame);
+            return { hidden, offscreen, absent, visible, unchangedPermissions: original === JSON.stringify(h.lastBatch.frame.revealed) };
+          } finally { v.present({ ...b, events: [] }, 0); h.stairNames(b.frame); h.app.render(); h.app.ticker.start(); }
+        }, staged.uid);
+        const detail = { at: staged.at, before: staged.before, clip, scale: s, permissions, ...result };
         (report.occlusion ??= []).push({ size: size.join('x'), check: 'S03c', ...detail }); // kept on failure too
         assert.ok(clip.shown, 'the enemy on the uncovered hall floor is drawn');
         assert.deepEqual(clip.label, staged.label, 'the destination did not move for the enemy');
         assert.ok(result.body > scaled(100), `positive control: the enemy is in the capture (${result.body} px)`);
         assert.ok(result.guide > scaled(50), `positive control: the label is drawn in the capture (${result.guide} px)`);
         assert.ok(result.overlap > scaled(20), `positive control: the enemy sits on the label (${result.overlap} px, need > ${scaled(20)})`);
-        uncovered('stair-label-over-actors', result.covered, 'the stair label over an enemy on uncovered floor');
+        assert.equal(result.covered, 0, `the stair label over an enemy on uncovered floor: ${result.covered} covered pixels`);
+        assert.equal(staged.before.hidden, false, 'destination is readable before collision');
+        assert.equal(clip.hidden, true, 'destination hides only during collision');
+        assert.deepEqual(permissions.hidden, { hidden: false, shown: false }, 'unrevealed enemy at the same position cannot hide the destination');
+        assert.equal(permissions.offscreen.hidden, false, 'offscreen enemy cannot hide the destination');
+        assert.deepEqual(permissions.absent, { hidden: false, shown: false }, 'enemy absent from this floor cannot hide the destination');
+        assert.deepEqual(permissions.visible, { hidden: true, shown: true }, 'restoring the same visible body restores collision');
+        assert.ok(permissions.unchangedPermissions, 'view probes never change Runtime revelation');
+        await page.evaluate(({ uid, home }) => window.__bincovSample.driver.placeEnemy(uid, home), staged); await settle();
+        detail.after = await page.evaluate(() => {
+          const el = [...document.querySelectorAll('.cs-stair')].find(e => e.textContent === '上楼 · 二楼');
+          return { hidden: el.hidden, width: el.getBoundingClientRect().width };
+        });
+        await page.screenshot({ path: resolve(out, `${size.join('x')}-S03c-after.png`) });
+        assert.ok(!detail.after.hidden && detail.after.width > 0, 'destination returns after the enemy leaves');
         return detail;
       } finally {
         await page.evaluate(({ uid, home }) => window.__bincovSample.driver.placeEnemy(uid, home), staged);
