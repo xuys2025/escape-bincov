@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import * as D from '../src/domain';
-import { ATTACHMENTS, GUNS, type GunId } from '../src/gunsmith/catalog';
+import { ATTACHMENTS, FACTORY_MAGS, GUNS, factoryMagOf, type GunId } from '../src/gunsmith/catalog';
 import { checkInstall, validateBuild } from '../src/gunsmith/compat';
 import { buildOf, gunWeight, type PartNode } from '../src/gunsmith/instance';
 import { effectiveStats } from '../src/gunsmith/stats';
@@ -35,7 +35,9 @@ test('twenty guns and a hundred parts, every one an item, nothing else in the ca
     for (const id of GUN_IDS) assert.ok(D.isGun(id) && D.ITEMS[id].kind === 'weapon', id);
     for (const id of PART_IDS) assert.ok(D.isAttachment(id) && D.ITEMS[id].kind === 'attachment', id);
     assert.deepEqual(Object.keys(D.ITEMS).filter(id => D.isGun(id)).sort(), [...GUN_IDS].sort());
-    assert.deepEqual(Object.keys(D.ITEMS).filter(id => D.isAttachment(id)).sort(), [...PART_IDS].sort());
+    // Besides the hundred, the attachment items are the factory magazines that come off at the workbench (M4-07).
+    assert.deepEqual(Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && !factoryMagOf(id)).sort(), [...PART_IDS].sort());
+    assert.deepEqual(Object.keys(D.ITEMS).filter(id => factoryMagOf(id)), Object.values(FACTORY_MAGS));
 });
 
 test('art: every gun in the three outputs with its icons and side view, every part in its outputs with its icon; no placeholder', () => {

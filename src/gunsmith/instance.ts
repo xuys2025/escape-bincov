@@ -5,7 +5,7 @@
  * game yet: how each save format stores an instance is decided in docs/gunsmith/CONTRACTS.md (M0-05, M0-06), and M1
  * wires it in. Combat numbers (effective handling and stats) are M0-04's, not this module's.
  */
-import { ATTACHMENTS, GUNS, type GunId, type Slot } from './catalog';
+import { ATTACHMENTS, FACTORY_MAG_PARTS, FACTORY_MAGS, GUNS, type GunId, type Slot } from './catalog';
 import { MAX_DEPTH, MAX_PARTS, validateBuild, type Build, type Part, type Rejection } from './compat';
 
 /**
@@ -16,12 +16,20 @@ import { MAX_DEPTH, MAX_PARTS, validateBuild, type Build, type Part, type Reject
 export interface PartNode { uid: string; id: string; slot: Slot; relief: boolean; children: PartNode[] }
 /** Device switches, kept per gun. A switch may be on only while an installed part has that effect (a combiner has both). */
 export interface Devices { laser: boolean; light: boolean }
-/** What a gun holds besides the uid, id and relief flag of the item, ground loot or equipped slot that carries it. */
-export interface GunState { parts: PartNode[]; devices: Devices }
+/**
+ * What a gun holds besides the uid, id and relief flag of the item, ground loot or equipped slot that carries it.
+ * `magOut` (#28 M4-07): its factory magazine was taken out at the workbench and lies loose, so the gun holds a magazine
+ * only while another sits in its mag slot (magless). Present only then, so a gun whose magazine never came out is
+ * stored as before; an old client's strict check refuses the key, as it refuses gunPresets (CONTRACTS, M4-07). A
+ * factory magazine put back is no node again: the key goes, and the gun is as it was.
+ */
+export interface GunState { parts: PartNode[]; devices: Devices; magOut?: true }
 /** A whole gun: its uid and type, whether the body came as relief, its installed parts and its switches. */
 export interface GunInstance extends GunState { uid: string; id: GunId; relief: boolean }
 
 const NODE_KEYS = ['uid', 'id', 'slot', 'relief', 'children'] as const;
+/** What gunSize, gunWeight, gunSale and buildOf read of a gun: its type, installed parts and whether its magazine is out. */
+export type GunShape = Pick<GunInstance, 'id' | 'parts' | 'magOut'>;
 /** Item uids as profile-codec's identity() accepts them; tests/gunsmith-instance.test.ts keeps the two equal. */
 const ITEM_UID = /^[a-zA-Z0-9_-]{1,100}$/;
 // The reasons compat.ts gives for the same faults; the instance test keeps them equal.
@@ -39,15 +47,27 @@ export const nodesOf = (parts: readonly PartNode[]): PartNode[] => parts.flatMap
 /** Every uid a gun holds: its own, then its parts' in nodesOf order. Record-wide uniqueness is the caller's (repeatedUids). */
 export const gunUids = (gun: Pick<GunInstance, 'uid' | 'parts'>): string[] => [gun.uid, ...nodesOf(gun.parts).map(node => node.uid)];
 
-/** The flat build compat.ts checks: every node with the uid of the node holding it (null for the gun itself). */
-export function buildOf(gun: Pick<GunInstance, 'id' | 'parts'>): Build {
+/** The flat build compat.ts checks: every node with the uid of the node holding it (null for the gun itself), and `magOut`. */
+export function buildOf(gun: GunShape): Build {
     const parts: Part[] = [];
     const visit = (nodes: readonly PartNode[], parent: string | null) => {
         for (const node of nodes) { parts.push({ uid: node.uid, id: node.id, parent, slot: node.slot }); visit(node.children, node.uid); }
     };
     visit(gun.parts, null);
-    return { gun: gun.id, parts };
+    return gun.magOut ? { gun: gun.id, parts, magOut: true } : { gun: gun.id, parts };
 }
+
+/** The gun's factory magazine comes off at the workbench (catalog FACTORY_MAGS, #28 M4-07). */
+export const detachable = (gun: unknown): gun is GunId => typeof gun === 'string' && Object.hasOwn(FACTORY_MAGS, gun);
+/**
+ * The gun holds no magazine: its factory one is out and nothing sits in the mag slot. `roots` are the parts on the gun
+ * itself (a gun's `parts`, or a build's parts, whose roots have parent null). It cannot fire or reload, its capacity is
+ * 0 and it is a row shorter, lighter by the magazine's kg.
+ */
+export const magless = (magOut: boolean | undefined, roots: readonly { slot: Slot; parent?: string | null }[]): boolean =>
+    !!magOut && !roots.some(p => p.slot === 'mag' && !p.parent);
+/** The factory magazine of a detachable gun as the catalog has it; undefined for any other gun. */
+const factoryMag = (gun: GunId) => detachable(gun) ? FACTORY_MAG_PARTS[FACTORY_MAGS[gun]!] : undefined;
 
 /** The uids that occur more than once in `uids`, given every uid of one record: empty when they are all unique. */
 export function repeatedUids(uids: Iterable<string>): string[] {
@@ -78,7 +98,10 @@ const refuse = (code: GunFault, reason: string): GunCheck => ({ ok: false, code,
  */
 export function validateGun(id: unknown, uid: unknown, state: unknown): GunCheck {
     if (!isGunId(id)) return refuse('unknown', UNKNOWN);
-    if (!exact(state, ['parts', 'devices']) || !Array.isArray(state.parts) || !exact(state.devices, ['laser', 'light'])
+    // `magOut` is stored only as true and only on a gun whose magazine comes off (M4-07).
+    const out = !!state && typeof state === 'object' && Object.hasOwn(state, 'magOut');
+    if (out && ((state as Record<string, unknown>).magOut !== true || !detachable(id))) return refuse('structure', STRUCTURE);
+    if (!exact(state, out ? ['parts', 'devices', 'magOut'] : ['parts', 'devices']) || !Array.isArray(state.parts) || !exact(state.devices, ['laser', 'light'])
         || typeof state.devices.laser !== 'boolean' || typeof state.devices.light !== 'boolean') return refuse('structure', STRUCTURE);
     const uids = new Set<string>(), visited = new Set<object>();
     const claim = (value: unknown) => typeof value === 'string' && ITEM_UID.test(value) && !uids.has(value) && !!uids.add(value);
@@ -108,12 +131,12 @@ export function validateGun(id: unknown, uid: unknown, state: unknown): GunCheck
 /**
  * Cells the gun takes: its catalog size grown by every installed part's `grow`, swapped when rotated (as domain itemSize).
  * Since #28 M3-12 a box magazine makes a gun two rows (the catalog's `h`), a long one or a drum three (`grow.h`), and a
- * suppressor one column more (`grow.w`).
+ * suppressor one column more (`grow.w`). Without a magazine (magless, M4-07) the box magazine's row goes: one row.
  */
-export function gunSize(gun: Pick<GunInstance, 'id' | 'parts'>, rotated = false): { w: number; h: number } {
+export function gunSize(gun: GunShape, rotated = false): { w: number; h: number } {
     const v8 = footprintRules === 'v8';
     let { w, h } = GUNS[gun.id];
-    if (v8) h = 1;
+    if (v8 || magless(gun.magOut, gun.parts)) h = 1;
     for (const node of nodesOf(gun.parts)) {
         const grow = ATTACHMENTS[node.id].mods.grow;
         if (grow) { w += grow.w; if (!v8 || V8_TALLER.has(node.id)) h += grow.h; }
@@ -137,13 +160,17 @@ export function withV8Footprints<T>(read: () => T): T {
 
 /**
  * Carried kg: the gun's own weight plus each installed part's installed weight (`mods.weight`, below zero for a part
- * lighter than the factory part it replaces), every part counted once. Rounded to grams, as domain weight() rounds.
+ * lighter than the factory part it replaces), every part counted once; less its factory magazine's loose kg when it
+ * holds no magazine (magless). Rounded to grams, as domain weight() rounds.
  */
-export function gunWeight(gun: Pick<GunInstance, 'id' | 'parts'>): number {
-    const kg = nodesOf(gun.parts).reduce((sum, node) => sum + ATTACHMENTS[node.id].mods.weight, GUNS[gun.id].weight);
+export function gunWeight(gun: GunShape): number {
+    const out = magless(gun.magOut, gun.parts) ? factoryMag(gun.id)!.weight : 0;
+    const kg = nodesOf(gun.parts).reduce((sum, node) => sum + ATTACHMENTS[node.id].mods.weight, GUNS[gun.id].weight - out);
     return Math.round(kg * 1000) / 1000;
 }
 
+/** The body's sell price: the gun's, less its factory magazine's while that is out. */
+const bodySell = (gun: GunShape) => GUNS[gun.id].sell - (gun.magOut ? factoryMag(gun.id)!.sell : 0);
 /**
  * What selling the whole gun pays: the sell price of every component that is not relief, the body at the gun's price
  * and each part at its loose price. `restricted` when any component is relief: such a sale must be refused with the
@@ -151,14 +178,16 @@ export function gunWeight(gun: Pick<GunInstance, 'id' | 'parts'>): number {
  */
 /**
  * The sale preview of a gun (#28 M2-08): its body and then each installed part, with the price each adds; a relief
- * component adds nothing and is marked (it bars selling the gun whole, gunSale).
+ * component adds nothing and is marked (it bars selling the gun whole, gunSale). The body's price leaves out its factory
+ * magazine while that is out (M4-07): the magazine sells on its own.
  */
-export function gunSaleLines(gun: Pick<GunInstance, 'id' | 'relief' | 'parts'>): { id: string; name: string; price: number; relief: boolean }[] {
-    return [{ id: gun.id, name: GUNS[gun.id].stats.name, price: gun.relief ? 0 : GUNS[gun.id].sell, relief: gun.relief },
+export function gunSaleLines(gun: GunShape & Pick<GunInstance, 'relief'>): { id: string; name: string; price: number; relief: boolean }[] {
+    const name = GUNS[gun.id].stats.name + (gun.magOut ? '（不含原厂弹匣）' : '');
+    return [{ id: gun.id, name, price: gun.relief ? 0 : bodySell(gun), relief: gun.relief },
         ...nodesOf(gun.parts).map(n => ({ id: n.id, name: ATTACHMENTS[n.id].name, price: n.relief ? 0 : ATTACHMENTS[n.id].sell, relief: n.relief }))];
 }
-export function gunSale(gun: Pick<GunInstance, 'id' | 'relief' | 'parts'>): { value: number; restricted: boolean } {
-    let value = gun.relief ? 0 : GUNS[gun.id].sell, restricted = gun.relief;
+export function gunSale(gun: GunShape & Pick<GunInstance, 'relief'>): { value: number; restricted: boolean } {
+    let value = gun.relief ? 0 : bodySell(gun), restricted = gun.relief;
     for (const node of nodesOf(gun.parts)) {
         if (node.relief) restricted = true;
         else value += ATTACHMENTS[node.id].sell;

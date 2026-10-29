@@ -62,7 +62,7 @@ export function gearHtml(s: HideoutSnapshot, cell: number, selected: string | nu
       <h3><i>01</i>主武器槽</h3>
       <div class="slot ${e.weapon ? '' : 'emptyslot'}" data-slot="weapon" aria-label="主武器槽" title="把仓库或背包里的枪拖到这里装备">
         <img alt="" src="${itemPicture({ id: e.weapon || 'knife', gun: e.gun }, 999, 999).url}" style="height:${Math.round(cell * .6)}px"><div><b>${esc(w.name)}</b>
-        <span>${e.weapon ? `弹匣 ${e.ammo} / ${w.magazine}${e.relief ? ' · 救济' : ''} · 背包备用 ${w.ammo ? `${ammo} 发` : '—'}` : '随身匕首 · 始终保留 · 把枪拖到这里装备'}</span></div>
+        <span>${e.weapon ? `${w.magazine ? `弹匣 ${e.ammo} / ${w.magazine}` : '没装弹匣'}${e.relief ? ' · 救济' : ''} · 背包备用 ${w.ammo ? `${ammo} 发` : '—'}` : '随身匕首 · 始终保留 · 把枪拖到这里装备'}</span></div>
         ${e.weapon ? `<span class="slot-acts">${btn('改装', `gunsmith:${e.weaponUid}`, 'mini')}${btn('卸下', 'unequip', 'mini')}</span>` : ''}
       </div>${charmRow(s.charm?.id ?? null)}
       <h3><i>02</i>背包 <small>${occupied(p.bag)} / ${p.bag.w * p.bag.h} 格</small></h3>${gridHtml(p.bag, 'bag', cell, selected, { empty: '背包是空的' })}
@@ -85,7 +85,7 @@ export function gearCompactHtml(s: HideoutSnapshot, cell: number, selected: stri
   const inv = paneB === 'stash' ? p.stash : p.safe;
   return `<div class="cgear">${gearActions(p)}
     <p class="gear-hint">主武器槽 · 选中枪械后点「装备主武器」</p>
-    <div class="cbar"><div class="slot chip ${e.weapon ? '' : 'emptyslot'}" data-slot="weapon" aria-label="主武器槽" title="把仓库或背包里的枪拖到这里装备"><img alt="" src="${itemPicture({ id: e.weapon || 'knife', gun: e.gun }, 999, 999).url}"><b>${esc(w.name)}</b><span>${e.weapon ? `${e.ammo} / ${w.magazine}${w.ammo ? ` · 备用 ${ammo}` : ''}` : '拖枪到这里装备'}</span>${e.weapon ? `<span class="slot-acts">${btn('改装', `gunsmith:${e.weaponUid}`, 'mini')}${btn('卸下', 'unequip', 'mini')}</span>` : ''}</div>
+    <div class="cbar"><div class="slot chip ${e.weapon ? '' : 'emptyslot'}" data-slot="weapon" aria-label="主武器槽" title="把仓库或背包里的枪拖到这里装备"><img alt="" src="${itemPicture({ id: e.weapon || 'knife', gun: e.gun }, 999, 999).url}"><b>${esc(w.name)}</b><span>${e.weapon ? `${w.magazine ? `${e.ammo} / ${w.magazine}` : '没装弹匣'}${w.ammo ? ` · 备用 ${ammo}` : ''}` : '拖枪到这里装备'}</span>${e.weapon ? `<span class="slot-acts">${btn('改装', `gunsmith:${e.weaponUid}`, 'mini')}${btn('卸下', 'unequip', 'mini')}</span>` : ''}</div>
       <div class="cweight ${over ? 'over' : ''}">携行 <b>${departure.weight.toFixed(1)}</b> / ${departure.carry.toFixed(1)} kg</div></div>${charmRow(s.charm?.id ?? null)}
     <div class="panes">
       <section class="pane"><h3>背包 <small>${occupied(p.bag)} / ${p.bag.w * p.bag.h}</small></h3><div class="pane-scroll">${gridHtml(p.bag, 'bag', cell, selected, { empty: '背包是空的' })}</div></section>
@@ -164,11 +164,12 @@ export function generatorHtml(s: HideoutSnapshot) {
 }
 
 export function deployHtml(s: HideoutSnapshot, dep: { warnings: string[]; weight: number; carry: number }, world: RunWorld, seed: string, worlds: readonly RunWorld[], preview: string | null, art: CountyArt['regions'], narrow: boolean) {
-  const p = s.profile, e = p.equipment, w = D.WEAPONS[e.weapon || 'knife'], overflow = D.stashOverflow(p.stash).length;
-  const region = deploymentRegion(worlds, world, preview), open = deploymentWorld(region, worlds) !== null, canDeploy = open && !overflow;
+  const p = s.profile, e = p.equipment, w = D.WEAPONS[e.weapon || 'knife'], overflow = D.stashOverflow(p.stash).length, stop = D.deployBlocker(p);
+  const region = deploymentRegion(worlds, world, preview), open = deploymentWorld(region, worlds) !== null, canDeploy = open && !stop;
+  const bare = D.equippedMagless(e);
   const meds = D.count(p.bag, 'bandage') + D.count(p.bag, 'medkit');
   const checks = [
-    { ok: !!e.weapon, label: e.weapon ? `主武器 · ${w.name}` : '未装备主武器' },
+    { ok: !!e.weapon && !bare, label: e.weapon ? `主武器 · ${w.name}${bare ? ' · 没装弹匣' : ''}` : '未装备主武器' },
     { ok: !w.ammo || D.count(p.bag, w.ammo) > 0, label: w.ammo ? `备用弹药 · ${D.ITEMS[w.ammo].name} ${D.count(p.bag, w.ammo)} 发` : '匕首 · 不需要弹药' },
     { ok: meds > 0, label: meds ? `止血用品 · ${meds} 件在背包` : '背包里没有止血用品' },
     { ok: dep.weight <= dep.carry, label: `携行重量 · ${dep.weight.toFixed(1)} / ${dep.carry.toFixed(1)} kg` },
@@ -180,7 +181,7 @@ export function deployHtml(s: HideoutSnapshot, dep: { warnings: string[]; weight
   return `<div class="deploy county-deploy">${countyMapHtml(region, worlds, narrow)}<aside class="county-briefing" aria-label="区域情报与出击准备">
   ${regionBriefHtml(region, worlds, art)}<div class="county-preflight"><h3>出发前检查<span class="${ready === checks.length ? 'ok' : 'bad'}">${ready} / ${checks.length}</span></h3><ul class="checks">${checks.map(c => `<li class="${c.ok ? 'ok' : 'bad'}"><i></i>${esc(c.label)}</li>`).join('')}</ul>
   <p class="rule">撤离失败会丢失背包物资和主武器，安全箱保留。出击即写入存档。</p></div>
-  <div class="go"><span class="${clear ? 'ok' : ''}">${overflow ? esc(D.OVERFLOW_BLOCKS_DEPLOY) : canDeploy ? dep.warnings.length ? esc(dep.warnings.join(' · ')) : '装备与快捷补给已备齐' : '选择地图上已开放的区域即可出击。'}</span><div class="go-row">
+  <div class="go"><span class="${clear ? 'ok' : ''}">${stop ? esc(stop) : canDeploy ? dep.warnings.length ? esc(dep.warnings.join(' · ')) : '装备与快捷补给已备齐' : '选择地图上已开放的区域即可出击。'}</span><div class="go-row">
   <label class="seedrow" title="相同种子可重现初始配置">种子 <input id="seed" maxlength="16" placeholder="留空随机" value="${esc(seed)}" aria-label="行动种子"></label>${btn(open ? '开门出击 <span aria-hidden="true">→</span>' : '暂未开发', 'deploy', 'primary big', canDeploy ? '' : 'disabled')}</div></div></aside></div>`;
 }
 

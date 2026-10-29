@@ -36,12 +36,13 @@ export function freshStartText(volume: number, now: number): string { return enc
 
 /**
  * Owned goods per item and relief flag, wherever they sit: stash, bag, safe, the equipped gun and its magazine. A gun
- * with anything installed is listed with its parts, so a fresh start (factory guns only) never equals it.
+ * with anything installed, or with its magazine out, is listed with its state, so a fresh start (factory guns only)
+ * never equals it.
  */
 function goods(p: D.SaveDataV1): string {
   const totals = new Map<string, number>();
   const add = (id: string, relief: boolean, qty: number) => { if (qty > 0) totals.set(`${id}:${relief}`, (totals.get(`${id}:${relief}`) ?? 0) + qty); };
-  const gun = (id: string, state: D.Item['gun'] | null) => state?.parts.length ? `${id}+${D.gunKey(state)}` : id;
+  const gun = (id: string, state: D.Item['gun'] | null) => state?.parts.length || state?.magOut ? `${id}+${D.gunKey(state)}` : id;
   for (const inv of [p.stash, p.bag, p.safe]) for (const item of inv.items) add(gun(item.id, item.gun), !!item.relief, item.qty);
   const weapon = p.equipment.weapon, ammo = weapon ? D.WEAPONS[weapon]?.ammo : null;
   if (weapon) add(gun(weapon, p.equipment.gun), p.equipment.relief, 1);

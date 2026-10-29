@@ -138,7 +138,8 @@ function fitted(gun: GunId, id: string, items: readonly string[]): PartNode[] | 
 }
 
 test('every part that is an item has a mount in all three outputs on each gun with art it fits, within the size limits', () => {
-    const parts = Object.keys(D.ITEMS).filter(D.isAttachment);
+    // A factory magazine (#28 M4-07) is the gun's factory layer, not a part with its own images.
+    const parts = Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && Object.hasOwn(ATTACHMENTS, id));
     const checked: string[] = [];
     assert.deepEqual(Object.keys(GUNS).filter(g => artFrame(g, 'h')).sort(), [...ART_GUNS].sort());
     for (const gun of ART_GUNS) {

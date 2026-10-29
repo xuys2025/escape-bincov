@@ -20,7 +20,8 @@ export const MAX_DEPTH = 3;
 
 /** One installed attachment. `parent` is the uid of the part whose slot holds it, or null for the gun's own slot. */
 export interface Part { uid: string; id: string; parent: string | null; slot: Slot }
-export interface Build { gun: string; parts: readonly Part[] }
+/** A gun type and its parts, flat; `magOut`: its factory magazine is out (instance.ts GunState, #28 M4-07). */
+export interface Build { gun: string; parts: readonly Part[]; magOut?: true }
 export interface Placement { parent: string | null; slot: Slot }
 
 /**

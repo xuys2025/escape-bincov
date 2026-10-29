@@ -2,6 +2,7 @@ import { inventoryArtSize, paintInventoryItem } from './inventory';
 import { ITEM_ART_IDS, type ItemArtId } from './items';
 import { gunsmithArt } from './gunsmith-hooks';
 import type { GunState } from '../gunsmith/instance';
+import { drawnParts } from '../gunsmith/signature';
 
 const cache = new Map<string, string>();
 /** Art painted once into a canvas and kept as a data URL (the same painters the 2.5D views use); '' without a 2D context. */
@@ -34,7 +35,8 @@ export type ArtItem = { id: string; gun?: GunState | null };
  * gun type's picture with `modified` set, for the mark that says so (M0 review decision 8).
  */
 export function itemPicture(item: ArtItem, maxWidth: number, maxHeight: number, rotated = false): { url: string; w: number; h: number; modified: boolean } {
-  const parts = item.gun?.parts ?? [];
+  // A gun without its magazine (#28 M4-07) is drawn without one: drawnParts adds the stand-in.
+  const parts = drawnParts(item.gun);
   if (parts.length) {
     const pic = gunsmithArt?.configured(item.id, parts);
     if (pic && (rotated ? pic.h <= maxWidth && pic.w <= maxHeight : pic.w <= maxWidth && pic.h <= maxHeight)) return { ...pic, modified: false };

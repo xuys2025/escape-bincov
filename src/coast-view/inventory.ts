@@ -114,7 +114,7 @@ export class InventoryPanel {
   private slot(l: CarriedInventoryView) {
     const w = D.equippedWeapon(l), cell = this.cell(), sel = this.selected, i = this.item();
     const ready = !!sel && !!i && !this.equipError(sel.source, i);
-    return `<h3>主武器 <span>${this.host.touch() ? '选中枪后点这里' : '把枪拖到这里装备'}</span></h3><div class="cs-slot${l.weapon ? '' : ' empty'}${ready ? ' ready' : ''}" data-equip-slot role="button" tabindex="0" aria-label="主武器槽：${esc(w.name)}" title="把背包或搜刮箱里的枪拖到这里装备" style="width:${3 * cell + 18}px"><span class="inventory-art" style="min-height:${cell - 14}px">${itemArtwork(l.weapon ?? 'knife', 3 * cell, cell - 14)}</span><b>${esc(w.name)}</b><span>${w.magazine ? `弹匣 ${this.host.magazine()} / ${w.magazine}${l.relief ? ' · 救济' : ''}` : '随身匕首 · 始终保留'}</span></div>`;
+    return `<h3>主武器 <span>${this.host.touch() ? '选中枪后点这里' : '把枪拖到这里装备'}</span></h3><div class="cs-slot${l.weapon ? '' : ' empty'}${ready ? ' ready' : ''}" data-equip-slot role="button" tabindex="0" aria-label="主武器槽：${esc(w.name)}" title="把背包或搜刮箱里的枪拖到这里装备" style="width:${3 * cell + 18}px"><span class="inventory-art" style="min-height:${cell - 14}px">${itemArtwork(l.weapon ?? 'knife', 3 * cell, cell - 14)}</span><b>${esc(w.name)}</b><span>${!l.weapon ? '随身匕首 · 始终保留' : w.magazine ? `弹匣 ${this.host.magazine()} / ${w.magazine}${l.relief ? ' · 救济' : ''}` : '没装弹匣'}</span></div>`;
   }
   /** Why `item` cannot go into the weapon slot from `source`, or null. Bag space for the swap is the Runtime's check. */
   private equipError(source: Source, item: D.Item) {

@@ -6,7 +6,7 @@
  */
 import * as D from '../domain';
 import { ATTACHMENTS } from './catalog';
-import { nodesOf, gunSaleLines } from './instance';
+import { magless, nodesOf, gunSaleLines } from './instance';
 import { WHERE_NAMES, partFits } from './bench';
 
 /** An attachment's lines: maker and guns; with `profile` (at the base), each gun there that takes it and what it lacks. */
@@ -21,10 +21,16 @@ export function attachmentLines(profile: Readonly<D.SaveDataV1> | null, id: stri
     return lines;
 }
 
-/** A gun's installed parts, "已装：…", or null for a factory gun and other items. */
+/**
+ * A gun's installed parts, "已装：…", and that it holds no magazine (#28 M4-07); null for a factory gun and other
+ * items.
+ */
 export function gunPartsLine(item: Pick<D.Item, 'id' | 'gun'>): string | null {
-    const parts = item.gun ? nodesOf(item.gun.parts) : [];
-    return D.isGun(item.id) && parts.length ? `已装：${parts.map(n => ATTACHMENTS[n.id].name).join('、')}` : null;
+    if (!D.isGun(item.id) || !item.gun) return null;
+    const parts = nodesOf(item.gun.parts), lines = [
+        ...parts.length ? [`已装：${parts.map(n => ATTACHMENTS[n.id].name).join('、')}`] : [],
+        ...magless(item.gun.magOut, item.gun.parts) ? ['没装弹匣，不能开火'] : []];
+    return lines.length ? lines.join('；') : null;
 }
 
 /** What selling the item pays (itemSale: a gun with its parts), or null and why when it cannot be sold. */
@@ -34,9 +40,12 @@ export function saleValue(item: Pick<D.Item, 'id' | 'qty' | 'relief' | 'gun'>): 
     return sale.restricted || sale.value <= 0 ? { value: null, note: '不可出售' } : { value: sale.value, note: null };
 }
 
-/** The sale preview of a gun with parts: each component and its price (a relief one marked, adding nothing); null otherwise. */
+/**
+ * The sale preview of a gun with parts or with its factory magazine out: each component and its price (a relief one
+ * marked, adding nothing); null otherwise.
+ */
 export function saleLines(item: Pick<D.Item, 'id' | 'relief' | 'gun'>): string[] | null {
-    if (!D.isGun(item.id) || !item.gun?.parts.length) return null;
-    return gunSaleLines({ id: item.id, relief: !!item.relief, parts: item.gun.parts })
+    if (!D.isGun(item.id) || !item.gun?.parts.length && !item.gun?.magOut) return null;
+    return gunSaleLines({ id: item.id, relief: !!item.relief, parts: item.gun.parts, magOut: item.gun.magOut })
         .map((l, i) => `${i ? '配件' : '枪身'} ${l.name}：${l.relief ? '救济，不计价' : `¥ ${l.price}`}`);
 }

@@ -7,10 +7,10 @@
  */
 import * as D from '../domain';
 import { SURVIVAL } from '../balance';
-import { ATTACHMENTS, GUNS, SLOT_NAMES, type GunId, type Slot } from './catalog';
+import { ATTACHMENTS, FACTORY_MAGS, GUNS, SLOT_NAMES, factoryMagOf, partDef, type GunId, type Slot } from './catalog';
 import { checkInstall, removalCascade, type Build, type Part } from './compat';
 import { GUARDRAILS, effectiveStats, type GunStats } from './stats';
-import { buildOf, gunWeight, nodesOf, type GunState } from './instance';
+import { buildOf, gunWeight, magless, nodesOf, type GunState } from './instance';
 import { locateGun, type GunEdit, type GunPlace } from './edit';
 import type { PresetNode } from './presets';
 
@@ -44,9 +44,9 @@ export interface BenchGun {
 export function benchGuns(profile: Readonly<D.SaveDataV1>): BenchGun[] {
     const out: BenchGun[] = [], e = profile.equipment;
     const gun = (uid: string, id: GunId, where: GunPlace, relief: boolean, state: GunState, magazine: BenchGun['magazine']): BenchGun =>
-        ({ uid, id, name: GUNS[id].stats.name, where, relief, state, parts: nodesOf(state.parts).length, weight: gunWeight({ id, parts: state.parts }), magazine });
+        ({ uid, id, name: GUNS[id].stats.name, where, relief, state, parts: nodesOf(state.parts).length, weight: gunWeight({ id, parts: state.parts, magOut: state.magOut }), magazine });
     if (D.isGun(e.weapon) && e.weaponUid && e.gun) {
-        const capacity = effectiveStats(buildOf({ id: e.weapon, parts: e.gun.parts })).weapon.magazine;
+        const capacity = effectiveStats(buildOf({ id: e.weapon, parts: e.gun.parts, magOut: e.gun.magOut })).weapon.magazine;
         out.push(gun(e.weaponUid, e.weapon, 'equipment', e.relief, e.gun, { ammo: e.ammo, capacity }));
     }
     for (const where of CONTAINERS) for (const item of profile[where].items) {
@@ -60,12 +60,13 @@ export function benchGuns(profile: Readonly<D.SaveDataV1>): BenchGun[] {
 /**
  * One place on the gun body: a slot of the gun (parent null) or of a part on it, `n` counting within a slot that holds
  * more than one. `part` is what sits there in the build. A closed position is a slot nothing in the build offers yet,
- * that a part this gun takes would open: `reason` says which (compat's wording), and it holds nothing.
+ * that a part this gun takes would open: `reason` says which (compat's wording), and it holds nothing. `out`: the gun's
+ * own mag slot while the gun holds no magazine (#28 M4-07), where the factory one would otherwise be.
  */
 export interface Position {
     key: string; parent: string | null; slot: Slot; n: number;
     name: string; place: string; part: Part | null;
-    open: boolean; reason: string | null;
+    open: boolean; reason: string | null; out: boolean;
 }
 const keyOf = (parent: string | null, slot: Slot, n: number) => `${parent ?? 'gun'}/${slot}/${n}`;
 /** A part's name after Chinese text, with a space before a Latin letter or digit (compat writes 需要 AR …). */
@@ -73,7 +74,7 @@ const after = (text: string) => /^[A-Za-z0-9]/.test(text) ? ` ${text}` : text;
 
 /** The positions of a build in body order: open ones for every slot offered, then closed ones a part could open. */
 export function positions(build: Build): Position[] {
-    const gun = GUNS[build.gun as GunId], out: Position[] = [];
+    const gun = GUNS[build.gun as GunId], out: Position[] = [], empty = magless(build.magOut, build.parts);
     const holders: { parent: string | null; slots: Partial<Record<Slot, number>> }[] =
         [{ parent: null, slots: gun.slots }, ...build.parts.map(p => ({ parent: p.uid, slots: ATTACHMENTS[p.id].provides }))];
     for (const slot of ORDER) {
@@ -82,13 +83,13 @@ export function positions(build: Build): Position[] {
             const by = h.parent === null ? '' : ` · 由${after(ATTACHMENTS[build.parts.find(p => p.uid === h.parent)!.id].name)}提供`;
             for (let n = 0; n < size; n++) {
                 out.push({ key: keyOf(h.parent, slot, n), parent: h.parent, slot, n, name: POSITION_NAMES[slot], place: SLOT_NAMES[slot] + by,
-                    part: sitting[n] ?? null, open: true, reason: null });
+                    part: sitting[n] ?? null, open: true, reason: null, out: empty && h.parent === null && slot === 'mag' });
             }
         }
         if (holders.some(h => (h.slots[slot] ?? 0) > 0)) continue;
         // Nothing offers it: closed when a part this gun takes mounts there and a part a player can own would open it.
         const reason = closedReason(build, slot);
-        if (reason) out.push({ key: keyOf(null, slot, 0), parent: null, slot, n: 0, name: POSITION_NAMES[slot], place: SLOT_NAMES[slot], part: null, open: false, reason });
+        if (reason) out.push({ key: keyOf(null, slot, 0), parent: null, slot, n: 0, name: POSITION_NAMES[slot], place: SLOT_NAMES[slot], part: null, open: false, reason, out: false });
     }
     return out;
 }
@@ -126,20 +127,20 @@ export interface Candidate {
     source: string;
 }
 /** The loose copies of each part in the profile, in container order, ordinary before relief; minus `taken` uids. */
-function looseParts(profile: Readonly<D.SaveDataV1>, taken: ReadonlySet<string>): Map<string, { uid: string; from: Container }[]> {
+function looseParts(profile: Readonly<D.SaveDataV1>, taken: ReadonlySet<string>): Map<string, { uid: string; from: Container; relief: boolean }[]> {
     const out = new Map<string, { uid: string; from: Container; relief: boolean }[]>();
     for (const from of CONTAINERS) for (const item of profile[from].items) {
         if (D.ITEMS[item.id]?.kind !== 'attachment' || taken.has(item.uid)) continue;
         const list = out.get(item.id) ?? []; list.push({ uid: item.uid, from, relief: !!item.relief }); out.set(item.id, list);
     }
     for (const list of out.values()) list.sort((a, b) => Number(a.relief) - Number(b.relief));
-    return out as Map<string, { uid: string; from: Container }[]>;
+    return out;
 }
 /** The build with what sits in `at` and everything that comes off with it removed. */
 export function without(build: Build, at: Position): Build {
     if (!at.part) return build;
     const off = new Set([at.part.uid, ...removalCascade(build, at.part.uid)]);
-    return { gun: build.gun, parts: build.parts.filter(p => !off.has(p.uid)) };
+    return { ...build, parts: build.parts.filter(p => !off.has(p.uid)) };
 }
 /**
  * The parts that mount in `at`'s slot and this gun may ever take, owned or not: the ones that fit first (owned before
@@ -169,9 +170,12 @@ export function candidates(profile: Readonly<D.SaveDataV1>, gunUid: string, buil
  */
 export function partFits(profile: Readonly<D.SaveDataV1>, id: string): { uid: string; gun: string; where: GunPlace; reason: string | null }[] {
     if (!D.isAttachment(id)) return [];
+    // A factory magazine (M4-07) goes back on a gun of its own type whose factory magazine is out.
+    const own = factoryMagOf(id);
+    if (own) return benchGuns(profile).filter(g => g.id === own).map(g => ({ uid: g.uid, gun: g.name, where: g.where, reason: g.state.magOut ? null : '它的原厂弹匣还在枪上' }));
     return benchGuns(profile).flatMap((g): { uid: string; gun: string; where: GunPlace; reason: string | null }[] => {
         if (!eligible(g.id, id)) return [];
-        const build = buildOf({ id: g.id, parts: g.state.parts }), check = checkInstall(build, id);
+        const build = buildOf({ id: g.id, parts: g.state.parts, magOut: g.state.magOut }), check = checkInstall(build, id);
         if (check.ok) return [{ uid: g.uid, gun: g.name, where: g.where, reason: null }];
         // Occupied: the part would replace what sits there, so it fits.
         if (check.code === 'full') return [{ uid: g.uid, gun: g.name, where: g.where, reason: null }];
@@ -202,6 +206,21 @@ export function replaceEdits(at: Position, id: string | null, loose: { uid: stri
     edits.push(loose ? { kind: 'install', uid: loose.uid, at: place } : { kind: 'install', id, at: place });
     return edits;
 }
+/**
+ * The edits the gun's mag position appends for its two factory cards (#28 M4-07): `empty` takes off what sits there
+ * and, unless it is out already, the factory magazine too; `factory` takes off what sits there and, while the factory
+ * magazine is out, puts one back: `ejected`, the one this preview took out, else a loose one of this gun type from the
+ * stash, bag or safe, ordinary first and relief only on a relief gun. The reason instead when there is none.
+ */
+export function magEdits(profile: Readonly<D.SaveDataV1>, gun: Pick<BenchGun, 'id' | 'relief'>, build: Build, at: Position,
+    to: 'empty' | 'factory', ejected: string | null): { edits: GunEdit[] } | { reason: string } {
+    const edits: GunEdit[] = at.part ? [{ kind: 'remove', uid: at.part.uid }] : [];
+    if (to === 'empty') return { edits: build.magOut ? edits : [...edits, { kind: 'eject' }] };
+    if (!build.magOut) return { edits };
+    const id = FACTORY_MAGS[gun.id]!, uid = ejected ?? looseParts(profile, new Set()).get(id)?.find(c => gun.relief || !c.relief)?.uid;
+    return uid ? { edits: [...edits, { kind: 'install', uid }] } : { reason: `基地里没有能装回的${partDef(id).name}。` };
+}
+
 /**
  * After `old` was replaced by the part `uid` in `build`, the edits that put `old`'s children back, onto the new part
  * where its slots take them, in tree order. `before` is the build that still held `old`. A child that does not fit
@@ -307,7 +326,11 @@ export function benchStats(build: Build, on: readonly string[] = []): { scores: 
     numbers.devices = build.parts.some(p => ATTACHMENTS[p.id].quota !== null);
     return { scores: benchScores(stats, kg), numbers, stats };
 }
-const gunWeightOf = (build: Build) => Math.round(build.parts.reduce((kg, p) => kg + ATTACHMENTS[p.id].mods.weight, GUNS[build.gun as GunId].weight) * 1000) / 1000;
+/** gunWeight of a flat build: without a magazine the factory one's kg is off (M4-07). */
+const gunWeightOf = (build: Build) => {
+    const gun = build.gun as GunId, out = magless(build.magOut, build.parts) ? partDef(FACTORY_MAGS[gun]!).weight : 0;
+    return Math.round(build.parts.reduce((kg, p) => kg + ATTACHMENTS[p.id].mods.weight, GUNS[gun].weight - out) * 1000) / 1000;
+};
 
 /** Dimensions the comparison names when the parts together reach a guardrail (stats.ts GUARDRAILS). */
 export type Capped = 'precise' | 'spread' | 'kick' | 'raise' | 'reload' | 'range' | 'noise';
@@ -337,5 +360,5 @@ export function candidateBuild(build: Build, at: Position, id: string): Build | 
             queue.push(...build.parts.filter(p => p.parent === child.uid));
         }
     }
-    return { gun: build.gun, parts };
+    return { ...build, parts };
 }

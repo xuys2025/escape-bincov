@@ -64,9 +64,12 @@ export const CATEGORY_NAMES: Readonly<Record<Category, string>> = {
     optic: '瞄具', muzzle: '枪口', barrel: '枪管模块', handguard: '护木', stock: '枪托', grip: '后握把',
     fore: '前握把和支撑', mag: '弹匣和供弹模块', tactical: '战术设备', base: '基座和转接件',
 };
-/** Fictional maker, shown only in the details (maintainer, 2026-10-12): no hidden quality bonus. */
-export type Brand = 'beidi' | 'yanwan' | 'binji';
-export const BRAND_NAMES: Readonly<Record<Brand, string>> = { beidi: '北堤', yanwan: '盐湾', binji: '滨机' };
+/**
+ * Fictional maker, shown only in the details (maintainer, 2026-10-12): no hidden quality bonus. A factory magazine
+ * (FACTORY_MAGS) is the gun maker's own: 原厂.
+ */
+export type Brand = 'beidi' | 'yanwan' | 'binji' | 'factory';
+export const BRAND_NAMES: Readonly<Record<Brand, string>> = { beidi: '北堤', yanwan: '盐湾', binji: '滨机', factory: '原厂' };
 
 /**
  * Multiplicative factors on the gun itself; absent means 1. Lower is better except `recover` and `range`. `bloom`
@@ -274,6 +277,11 @@ const RIFLE_MUZZLE: readonly GunId[] = ['carbine', 'akb74', 'akb103', 'mb4a1', '
 const PRECISION: readonly GunId[] = ['svdb', 'mb14', 'mb700'];
 const AK: readonly GunId[] = ['akb74', 'akb103'];
 const AK_FAMILY: readonly GunId[] = ['akb74', 'akb103', 'rpkb'];
+/** FACTORY_MAGS' rows: the name before 原厂弹匣, loose kg and buy price (proposals, M4-03 tunes the prices). */
+const FACTORY_MAG_ROWS: Readonly<Partial<Record<GunId, readonly [string, number, number]>>> = {
+    mpb5: ['MP5', .2, 90], umpb45: ['UMP45', .25, 100], akb74: ['AK-74', .3, 110], akb103: ['AK-103', .35, 120],
+    mb4a1: ['M4A1', .2, 100], augb: ['AUG', .15, 110], mb14: ['M14', .3, 120], rpkb: ['RPK', .45, 150],
+};
 const LONG = { requires: ['longScope'] } as const;
 const UNDER_SIDE = (side: number): Extra => ({ provides: { under: 1, side } });
 
@@ -412,3 +420,24 @@ export const ATTACHMENTS: Readonly<Record<string, AttachmentDef>> = Object.fromE
         p('A08', 'AK 侧置基座', 'base', AK_FAMILY, .15, 90, {}, { provides: { top: 1 } }),
     ]),
 ].map(def => [def.id, def]));
+
+/**
+ * The factory magazine of each gun whose box magazine makes it a row deeper (#28 M3-12) and comes off at the workbench
+ * (M4-07, #142, maintainer 2026-10-29): the gun turns back to one row, holds no rounds and cannot fire. Its id is the
+ * gun's plus `-mag`. On the gun it is no node, as every factory part, and never one of the hundred ATTACHMENTS: taken
+ * out it is a loose item of its own (FACTORY_MAG_PARTS, an AttachmentDef for its name, cells, kg, prices and maker),
+ * which only its gun takes back (gunsmith/instance.ts `magOut`, edit.ts). The SVD and the Vector paint theirs on the
+ * receiver, so they wait for Sol's pictures without one (art/svd-joint/BRIEF.md). The gun's own kg and prices include
+ * its magazine.
+ */
+export const FACTORY_MAGS: Readonly<Partial<Record<GunId, string>>> =
+    Object.fromEntries(Object.keys(FACTORY_MAG_ROWS).map(gun => [gun, `${gun}-mag`]));
+/** The factory magazines as loose parts, by id. No factor and no installed kg: on the gun they are the factory part. */
+export const FACTORY_MAG_PARTS: Readonly<Record<string, AttachmentDef>> = Object.fromEntries(
+    section('mag', 'factory', (Object.entries(FACTORY_MAG_ROWS) as [GunId, readonly [string, number, number]][])
+        .map(([gun, [name, kg, buy]]) => p(`${gun}-mag`, `${name} 原厂弹匣`, 'mag', [gun], kg, buy, { weight: 0 })))
+        .map(def => [def.id, def]));
+/** The gun a factory magazine belongs to, or null for any other id. */
+export const factoryMagOf = (id: string): GunId | null => Object.hasOwn(FACTORY_MAG_PARTS, id) ? FACTORY_MAG_PARTS[id].guns![0] : null;
+/** A loose part's catalog row: one of the hundred, or a factory magazine. */
+export const partDef = (id: string): AttachmentDef => ATTACHMENTS[id] ?? FACTORY_MAG_PARTS[id];

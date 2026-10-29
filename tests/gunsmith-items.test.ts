@@ -80,7 +80,8 @@ function free(inv: D.Inventory, id: string) {
 }
 
 test('the 100 attachments that are items are made from the catalog: function name, footprint, weight, prices, one per item', () => {
-    assert.deepEqual(Object.keys(D.ITEMS).filter(id => D.isAttachment(id)), ITEM_PARTS);
+    // The factory magazines (#28 M4-07) are attachment items too, outside the catalog's hundred.
+    assert.deepEqual(Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && Object.hasOwn(ATTACHMENTS, id)), ITEM_PARTS);
     for (const id of ITEM_PARTS) {
         const a = ATTACHMENTS[id], item = D.ITEMS[id];
         assert.deepEqual({ name: item.name, w: item.w, h: item.h, weight: item.weight, stack: item.stack, buy: item.buy, sell: item.sell, kind: item.kind },

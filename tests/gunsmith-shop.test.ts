@@ -71,7 +71,7 @@ test('the catalog: by kind, only what fits the base\'s guns, and pages that each
 });
 
 test('the buy and sell lists hold the largest legal gun that is an item, with the item parts that make it largest', () => {
-    const cart = Shop.createCart(D.newSave(), 'arms'), parts = Object.keys(D.ITEMS).filter(D.isAttachment);
+    const cart = Shop.createCart(D.newSave(), 'arms'), parts = Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && Object.hasOwn(ATTACHMENTS, id));
     for (const id of Object.keys(GUNS).filter(D.isGun) as GunId[]) {
         // The parts that lengthen or deepen a gun, one per slot, that this gun takes (an opener counts: it can be fitted).
         let { w, h } = gunSize({ id, parts: [] });

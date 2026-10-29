@@ -1,8 +1,8 @@
 /** Pure game rules. No renderer, browser globals, or wall-clock timers are required. */
-import { ATTACHMENTS, BRAND_NAMES, GUNS, partTier, type GunId, type PartTier } from './gunsmith/catalog';
+import { ATTACHMENTS, BRAND_NAMES, FACTORY_MAG_PARTS, GUNS, factoryMagOf, partDef, partTier, type GunId, type PartTier } from './gunsmith/catalog';
 import { checkInstall } from './gunsmith/compat';
 import { effectiveWeapon } from './gunsmith/stats';
-import { buildOf, factoryState, gunSale, gunSize, gunUids, gunWeight, v8Footprints, validateGun, type GunInstance, type GunState } from './gunsmith/instance';
+import { buildOf, factoryState, gunSale, gunSize, gunUids, gunWeight, magless, v8Footprints, validateGun, type GunInstance, type GunState } from './gunsmith/instance';
 import { migrateProfile, type ProfileV2 } from './gunsmith/migrate';
 import { validPresets, type GunPreset } from './gunsmith/presets';
 
@@ -183,9 +183,18 @@ const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, descrip
   A03: ['微基座', '开放微型瞄具位，能装点瞄。自身不提供射击增益，增重。'],
 };
 const attachmentItem = (id: string, [short, description]: readonly [string, string]): ItemDef => {
-  const a = ATTACHMENTS[id];
+  const a = partDef(id);
   return item(id, a.name, short, a.w, a.h, a.weight, 1, a.buy, a.sell, 'attachment', description, 0x8a9692);
 };
+/**
+ * The factory magazines taken out at the workbench (#28 M4-07, catalog FACTORY_MAGS): attachment items like the rest,
+ * but outside ATTACHMENT_ITEMS, so no shop shelf or find pool holds them (M4-01 decides that); one comes only off a gun.
+ */
+const FACTORY_MAG_ITEMS: Readonly<Record<string, readonly [string, string]>> = Object.fromEntries(
+  Object.values(FACTORY_MAG_PARTS).map(({ id, name: full, guns }) => {
+    const gun = guns![0], name = full.replace(' 原厂弹匣', '');
+    return [id, ['原厂匣', `${name} 出厂时装的弹匣，容量 ${GUNS[gun].stats.magazine} 发。拆下后枪少占一行，没装弹匣的枪不能开火；只能装回 ${name}。`]];
+  }));
 
 export const ITEMS: Record<string, ItemDef> = {
   knife: item('knife', '水手匕首', '匕首', 1, 2, 0.35, 1, 0, 0, 'weapon', '随身携带的旧匕首。撤离失败也不会丢失。', 0xb4c3bf),
@@ -244,6 +253,7 @@ export const ITEMS: Record<string, ItemDef> = {
   mb700: gunItem('mb700', 'M700', '使用精确步枪弹，内置弹仓 5 发，栓动。单发伤害和精度最高，每发之间要拉栓；枪管、枪托能换，能装顶部瞄具（含远距镜）、枪口件和支撑脚架。', 0x7a6a56),
   rpkb: gunItem('rpkb', 'RPK', '使用卡宾枪弹，弹匣容量 40 发，全自动。能持续压制，很重、换弹慢；护木、枪托、握把和弹匣都能更换，和 AK 共用侧置基座和枪口件，能装支撑脚架。', 0x8f7352),
   ...Object.fromEntries(Object.entries(ATTACHMENT_ITEMS).map(([id, text]) => [id, attachmentItem(id, text)])),
+  ...Object.fromEntries(Object.entries(FACTORY_MAG_ITEMS).map(([id, text]) => [id, attachmentItem(id, text)])),
 };
 
 /** Distances are world pixels; cooldown/reload are seconds; spread is radians. */
@@ -337,6 +347,13 @@ export const STASH_OVERFLOW_ROWS = 18;
 export const stashOverflowRows = (guns: boolean): number => guns && !v8Footprints() ? STASH_OVERFLOW_ROWS : 0;
 /** Why a raid cannot start while the overflow holds something. */
 export const OVERFLOW_BLOCKS_DEPLOY = '仓库溢出区还有物品，先把它们移进仓库、背包或卖掉，再出击。';
+/** The equipped gun holds no magazine (#28 M4-07): it cannot fire, so the player cannot deploy with it. */
+export const NO_MAG_BLOCKS_DEPLOY = '主武器没装弹匣，不能开火。装上弹匣或换一把枪，再出击。';
+/** Why the player cannot deploy from the base now, or null: the stash overflow holds something, or the gun in hand has no magazine. */
+export function deployBlocker(save: Pick<SaveDataV1, 'stash' | 'equipment'>): string | null {
+  if (stashOverflow(save.stash).length) return OVERFLOW_BLOCKS_DEPLOY;
+  return equippedMagless(save.equipment) ? NO_MAG_BLOCKS_DEPLOY : null;
+}
 /** The stash items in its overflow, in order. */
 export const stashOverflow = (stash: Inventory): Item[] => stash.items.filter(item => item.y >= stash.h);
 /** Rows the stash shows: its own and the overflow's down to its lowest item. */
@@ -373,6 +390,9 @@ export const isAttachment = (id: unknown): id is string => typeof id === 'string
  */
 export function attachmentFacts(id: string): { brand: string; guns: string[] } | null {
   if (!isAttachment(id)) return null;
+  // A factory magazine (#28 M4-07) goes back on its own gun only, and is no catalog part compat knows.
+  const own = factoryMagOf(id);
+  if (own) return { brand: BRAND_NAMES.factory, guns: [WEAPONS[own].name] };
   const guns = Object.keys(GUNS).filter(gun => {
     if (!isGun(gun)) return false;
     const fit = checkInstall({ gun, parts: [] }, id);
@@ -401,6 +421,11 @@ export function equippedGun(slot: GunSlot): GunInstance | null {
 export function equippedWeapon(slot: GunSlot): WeaponDef {
   const gun = equippedGun(slot);
   return gun ? effectiveWeapon(buildOf(gun)) : WEAPONS[slot.weapon || 'knife'];
+}
+/** The equipped gun holds no magazine (gunsmith magless, #28 M4-07): its capacity is 0 and it cannot fire. */
+export function equippedMagless(slot: GunSlot): boolean {
+  const gun = equippedGun(slot);
+  return !!gun && magless(gun.magOut, gun.parts);
 }
 /** Kg of the equipped gun, every installed part counted once (gunsmith gunWeight); 0 without a gun. */
 export function equippedWeight(slot: GunSlot): number {
@@ -432,7 +457,7 @@ export const itemUids = (item: Pick<Item, 'uid' | 'gun'>): string[] => item.gun 
  * whole. Such a sale is refused with the reason, never made by stripping or destroying the relief parts.
  */
 export function itemSale(item: Pick<Item, 'id' | 'qty' | 'relief' | 'gun'>): { value: number; restricted: boolean } {
-  if (item.gun && isGun(item.id)) return gunSale({ id: item.id, relief: !!item.relief, parts: item.gun.parts });
+  if (item.gun && isGun(item.id)) return gunSale({ id: item.id, relief: !!item.relief, parts: item.gun.parts, magOut: item.gun.magOut });
   return { value: item.relief ? 0 : ITEMS[item.id].sell * item.qty, restricted: !!item.relief };
 }
 /** Every uid the equipped slot holds: the gun's and its parts', none without a gun. */
@@ -452,7 +477,7 @@ export function createInventory(w: number, h: number): Inventory {
 /** Cells an item takes. A gun with parts may be larger than its type (gunSize); a factory gun is exactly its ITEMS size. */
 export function itemSize(item: Pick<Item, 'id' | 'rotated' | 'gun'>) {
   // Every gun through gunSize, a factory one with no state too, so its footprint rules (M3-12) hold for all of them.
-  if (isGun(item.id)) return gunSize({ id: item.id, parts: item.gun?.parts ?? [] }, !!item.rotated);
+  if (isGun(item.id)) return gunSize({ id: item.id, parts: item.gun?.parts ?? [], magOut: item.gun?.magOut }, !!item.rotated);
   const d = ITEMS[item.id];
   return item.rotated ? { w: d.h, h: d.w } : { w: d.w, h: d.h };
 }
@@ -574,7 +599,7 @@ export const count = (inv: Inventory, id: string): number => inv.items.reduce((s
  * exactly its ITEMS weight. Anything else is its ITEMS weight times the quantity.
  */
 export const itemWeight = (item: Pick<Item, 'id' | 'qty' | 'gun'>): number =>
-  item.gun && isGun(item.id) ? gunWeight({ id: item.id, parts: item.gun.parts }) * item.qty : ITEMS[item.id].weight * item.qty;
+  item.gun && isGun(item.id) ? gunWeight({ id: item.id, parts: item.gun.parts, magOut: item.gun.magOut }) * item.qty : ITEMS[item.id].weight * item.qty;
 export const weight = (inv: Inventory): number => Math.round(inv.items.reduce((sum, i) => sum + itemWeight(i), 0) * 1000) / 1000;
 export function removeItem(inv: Inventory, id: string, qty: number): boolean {
   if (!Number.isInteger(qty) || qty < 0 || count(inv, id) < qty) return false;

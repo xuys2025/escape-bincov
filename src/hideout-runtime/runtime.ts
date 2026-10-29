@@ -432,7 +432,8 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
     deploy(req: { world: C.RunWorld; seed: string; mallLayout?: 1 | 2 | 3 | 4 }): C.Result & { runId?: string } {
         const blocked = this.guard(); if (blocked) return blocked;
         if (!req || !['coast', 'buildings', 'mall'].includes(req.world) || typeof req.seed !== 'string' || req.seed.length > 200) return fail('rule');
-        if (D.stashOverflow(this.state.save.stash).length) return fail('rule', D.OVERFLOW_BLOCKS_DEPLOY);
+        const stop = D.deployBlocker(this.state.save);
+        if (stop) return fail('rule', stop);
         if (this.samples.length) { const flushed = this.transaction('checkpoint', () => true, true); if (!flushed.ok) return flushed; }
         const seed = generateRun(req.seed.trim() || this.now()).seed;
         if (!this.saves.beginRun(seed, req.world === 'mall' ? 'mall' : req.world === 'buildings', { mallLayout: req.mallLayout })) return this.failed('deploy');

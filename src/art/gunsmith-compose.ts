@@ -13,6 +13,7 @@ import { inventoryArtSize, paintInventoryItem } from './inventory';
 import type { ItemArtId } from './items';
 import { installGunsmithArt, type ArtBox } from './gunsmith-hooks';
 import { partsOfSignature } from '../gunsmith/signature';
+import { factoryMagOf } from '../gunsmith/catalog';
 
 const images = new Map<string, HTMLImageElement>();
 let loading: Promise<void> | null = null;
@@ -24,7 +25,11 @@ export function loadGunsmithArt(): Promise<void> {
     })).then(() => installGunsmithArt({
         icon: (id, size) => {
             const own = gunsmithIconImage(id, size), small = size === 32 && !own ? gunsmithIconImage(id, 24) : null;
-            return own ? { img: own, x: 0, y: 0 } : small ? { img: small, x: 4, y: 4 } : null;
+            if (own) return { img: own, x: 0, y: 0 };
+            if (small) return { img: small, x: 4, y: 4 };
+            // A factory magazine (#28 M4-07) until Sol draws its icons: its gun's inventory magazine image, centred.
+            const gun = factoryMagOf(id), mag = gun ? images.get(`gs-${gun}-mag-factory-i`) : undefined;
+            return mag ? { img: mag, x: Math.floor((size - mag.naturalWidth) / 2), y: Math.floor((size - mag.naturalHeight) / 2) } : null;
         },
         inventory: id => {
             const layout = gunArtLayout(id, [], 'i');

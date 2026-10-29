@@ -159,7 +159,7 @@ function occupied(inv: D.Inventory) {
 function equipmentPanel(equipment: D.Equipment, bag: D.Inventory, safe: D.Inventory) {
     const weapon = D.equippedWeapon(equipment);
     const ammo = equipment.ammo;
-    return `<section class="safe-section equipment-section"><h3 class="section-title"><b class="section-number">01</b>随身装备 <span>携行</span></h3><div class="equip"><div class="equipment-caption"><span>${equipment.weapon ? '主武器' : '随身匕首'}</span>${equipment.relief ? '<span class="orange">救济</span>' : ''}</div><div class="equipped-icon">${itemArtwork({ id: weapon.id, gun: equipment.gun }, inventoryCell() === 80 ? 312 : 204, inventoryCell() === 80 ? 102 : 52)}</div><div class="equipment-name"><strong>${weapon.name}</strong>${equipment.weapon ? `<span id="equipped-ammo">${ammo} / ${weapon.magazine}</span>` : '<span>始终保留</span>'}</div>${equipment.weapon ? btn('卸下主武器', 'unequip', 'text-button') : ''}${equipment.weapon && equipment.weaponUid && app.state === 'hideout' ? btn('改装', 'gunsmith-open', 'text-button', `data-id="${equipment.weaponUid}"`) : ''}</div>${weapon.ammo ? `<p class="reserve-ammo">背包备用弹药 <span>${D.ITEMS[weapon.ammo].name} · ${D.count(bag, weapon.ammo)} 发</span></p>` : '<p class="reserve-ammo">装备枪械后，备用弹药放在背包。</p>'}<h3 class="section-title secure-heading">安全箱 <span>失败也保留</span></h3><div class="secure-kit">${grid(safe, 'safe')}<div class="knife-card">${itemIcon('knife')}<strong>水手匕首</strong><span>随身携带<br>始终保留</span></div></div></section>`;
+    return `<section class="safe-section equipment-section"><h3 class="section-title"><b class="section-number">01</b>随身装备 <span>携行</span></h3><div class="equip"><div class="equipment-caption"><span>${equipment.weapon ? '主武器' : '随身匕首'}</span>${equipment.relief ? '<span class="orange">救济</span>' : ''}</div><div class="equipped-icon">${itemArtwork({ id: weapon.id, gun: equipment.gun }, inventoryCell() === 80 ? 312 : 204, inventoryCell() === 80 ? 102 : 52)}</div><div class="equipment-name"><strong>${weapon.name}</strong>${equipment.weapon ? `<span id="equipped-ammo">${weapon.magazine ? `${ammo} / ${weapon.magazine}` : '没装弹匣'}</span>` : '<span>始终保留</span>'}</div>${equipment.weapon ? btn('卸下主武器', 'unequip', 'text-button') : ''}${equipment.weapon && equipment.weaponUid && app.state === 'hideout' ? btn('改装', 'gunsmith-open', 'text-button', `data-id="${equipment.weaponUid}"`) : ''}</div>${weapon.ammo ? `<p class="reserve-ammo">背包备用弹药 <span>${D.ITEMS[weapon.ammo].name} · ${D.count(bag, weapon.ammo)} 发</span></p>` : '<p class="reserve-ammo">装备枪械后，备用弹药放在背包。</p>'}<h3 class="section-title secure-heading">安全箱 <span>失败也保留</span></h3><div class="secure-kit">${grid(safe, 'safe')}<div class="knife-card">${itemIcon('knife')}<strong>水手匕首</strong><span>随身携带<br>始终保留</span></div></div></section>`;
 }
 function bagPanel(bag: D.Inventory, weight: number) {
     const limit = carryLimit();
@@ -212,7 +212,8 @@ export async function startPreparedHideoutRaid(runId: string): Promise<boolean> 
 }
 const WORLD_OPTION: Record<'coast' | 'buildings' | 'mall', string> = { coast: '沿海封锁区 · 经典规则', buildings: '沿海街区 · 居民楼', mall: '滨湾商场 · 两层与露台' };
 function deploy() {
-    if (D.stashOverflow(app.save.stash).length) { toast(D.OVERFLOW_BLOCKS_DEPLOY); return; }
+    const stop = D.deployBlocker(app.save);
+    if (stop) { toast(stop); return; }
     const cfg = app.runWorld === 'mall' ? mallRunConfig(app.seed || Date.now()) : generateRun(app.seed || (sampleMode() === 'village' && app.runWorld === 'buildings' ? villageSeed() : Date.now()));
     if (!saved(saveSession.beginRun(cfg.seed, app.runWorld === 'mall' ? 'mall' : app.runWorld === 'buildings', { mallLayout: sampleMallLayout(app.runWorld) }))) return;
     app.shop = null; void startCoastSample();

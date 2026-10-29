@@ -25,7 +25,8 @@ import { TILE, WORLD, type RunConfig } from '../src/world';
 // and M3-05/06 the other seven guns (found), their three ammunition groups (on the shelf, and carved from gun records)
 // and the other 34 parts.
 
-const PARTS = Object.keys(D.ITEMS).filter(id => D.isAttachment(id));
+// The catalog's parts; a factory magazine (#28 M4-07) only ever comes off a gun, never from a shelf or a find.
+const PARTS = Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && Object.hasOwn(ATTACHMENTS, id));
 const BASIC = ['P01', 'F01', 'A07', 'A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'H03', 'P04', 'P07', 'M01', 'M05', 'F04', 'O12', 'P08', 'G02', 'T07', 'A03'];
 const RARE = ['O08', 'M03', 'B08', 'G09', 'M07', 'O10', 'T10', 'O09', 'O11', 'M04', 'M08', 'M12', 'B10', 'T03', 'T09'], SHELF_COMMON = ['O01', 'G01'];
 /** Wave two's rounds (#28 M3-05): on the shelf, and one pack now and then out of a gun record. */

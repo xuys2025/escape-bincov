@@ -5,7 +5,7 @@
  * on it. Pure: the catalog's slot names only.
  */
 import type { Slot } from './catalog';
-import type { PartNode } from './instance';
+import { magless, type PartNode } from './instance';
 
 /** The art mount of each catalog slot (ART-SPEC 3.3); a second side rail is side2. */
 export const MOUNT: Readonly<Record<Slot, string>> = {
@@ -13,6 +13,17 @@ export const MOUNT: Readonly<Record<Slot, string>> = {
     muzzle: 'muzzle', barrel: 'barrel', handguard: 'handguard', stock: 'stock', grip: 'rearGrip', mag: 'mag', base: 'mount',
 };
 const SLOT_OF: Readonly<Record<string, Slot>> = { ...Object.fromEntries(Object.entries(MOUNT).map(([slot, mount]) => [mount, slot as Slot])), side2: 'side' };
+
+/** The art's stand-in for a magazine that is not there (#28 M4-07): in the mag slot it draws nothing, not the factory one. */
+export const NO_MAG = 'empty';
+/**
+ * The parts the art draws for a gun state: its own, and NO_MAG in the mag slot while the gun holds no magazine
+ * (instance.ts magless), so its pictures and signature leave the magazine out. Never a stored part.
+ */
+export function drawnParts(gun: { parts: readonly PartNode[]; magOut?: true } | null | undefined): readonly PartNode[] {
+    if (!gun) return [];
+    return magless(gun.magOut, gun.parts) ? [...gun.parts, { uid: 'no-mag', id: NO_MAG, slot: 'mag', relief: false, children: [] }] : gun.parts;
+}
 
 export function partsSignature(parts: readonly PartNode[]): string {
     const out: string[] = [];

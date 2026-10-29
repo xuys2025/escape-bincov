@@ -1,5 +1,5 @@
 /** Headless coastal raid. Rules transplanted from RaidScene at f144147; no renderer/DOM imports. */
-import { partsSignature } from '../gunsmith/signature';
+import { drawnParts, partsSignature } from '../gunsmith/signature';
 import * as D from '../domain';
 import { getLegacyEnemyProfile } from '../enemy-profile';
 import { actorArchetype, actorDefinition, enemyDefinition } from '../enemy-archetypes';
@@ -306,7 +306,7 @@ export class CoastRaidRuntime implements RaidRuntime {
     /** The gun in hand's type and configuration signature, for its picture (#28 M2-10); null with the knife or no gun. */
     get heldGun(): { id: string; sig: string } | null {
         const gun = this.knife ? null : D.equippedGun(this.session.loadout ?? this.terminalLoadout);
-        return gun ? { id: gun.id, sig: partsSignature(gun.parts) } : null;
+        return gun ? { id: gun.id, sig: partsSignature(drawnParts(gun)) } : null;
     }
     /** How the held weapon is drawn (heldLook). */
     get weaponLook(): WeaponLook { return heldLook(this.currentWeapon.id); }
@@ -1031,6 +1031,8 @@ export class CoastRaidRuntime implements RaidRuntime {
     get reloadTime() { return this.currentWeapon.reload * perkEffects(this.layered).reload; }
     startReload() {
         const w = this.currentWeapon;
+        // A gun without a magazine (#28 M4-07) neither fires nor loads.
+        if (w.ammo && !w.magazine) { this.say('这把枪没装弹匣，不能开火。'); return; }
         if (w.ammo && !this.reloadLeft && this.mag < w.magazine) {
             if (!D.count(this.session.loadout!.bag, w.ammo)) {
                 this.say('背包中没有适用的备用弹药。');
