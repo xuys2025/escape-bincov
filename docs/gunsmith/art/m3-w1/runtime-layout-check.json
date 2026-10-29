@@ -1,0 +1,2319 @@
+{
+  "status": "pass",
+  "codeHead": "1cff08e5cd100ec7ad5c631b0732b065125642f8",
+  "method": "Incoming metadata and virtual entries injected only into a process-local exported table; actual validateBuild, gunSize and gunArtLayout; no game files written",
+  "configurations": 31,
+  "checks": [
+    {
+      "gun": "pb226",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        18,
+        9
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "pb226",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        40,
+        17
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "pb226",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        80,
+        34
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "pb226",
+      "configuration": "light",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        20,
+        9
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "pb226",
+      "configuration": "light",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        46,
+        17
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "pb226",
+      "configuration": "light",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        93,
+        34
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "pb226",
+      "configuration": "precision",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        26,
+        12
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "pb226",
+      "configuration": "precision",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        60,
+        23
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "pb226",
+      "configuration": "precision",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        122,
+        47
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        26,
+        10
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        65,
+        17
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        131,
+        34
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "close",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        24,
+        10
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "close",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        65,
+        17
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "close",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        132,
+        34
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "steady",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        31,
+        13
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "steady",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        78,
+        25
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "steady",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        158,
+        51
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "vb9",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        24,
+        10
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "vb9",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        55,
+        17
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "vb9",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        110,
+        34
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "vb9",
+      "configuration": "close",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        26,
+        11
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "vb9",
+      "configuration": "close",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        61,
+        17
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "vb9",
+      "configuration": "close",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        123,
+        34
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "vb9",
+      "configuration": "range",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        29,
+        13
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "vb9",
+      "configuration": "range",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        68,
+        23
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "vb9",
+      "configuration": "range",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        137,
+        47
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb870",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        33,
+        10
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb870",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        88,
+        16
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb870",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        177,
+        32
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb870",
+      "configuration": "short",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        30,
+        10
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb870",
+      "configuration": "short",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        82,
+        16
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb870",
+      "configuration": "short",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        166,
+        32
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb870",
+      "configuration": "extended",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        33,
+        13
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb870",
+      "configuration": "extended",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        88,
+        24
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb870",
+      "configuration": "extended",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        177,
+        50
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        32,
+        10
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        86,
+        16
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        173,
+        32
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "control",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        35,
+        10
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "control",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        94,
+        16
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "control",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        190,
+        33
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "extended",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        35,
+        12
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "extended",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        94,
+        22
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "extended",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        189,
+        45
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb74",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        33,
+        10
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb74",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        87,
+        16
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb74",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        175,
+        32
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb74",
+      "configuration": "light",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        29,
+        10
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb74",
+      "configuration": "light",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        79,
+        16
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb74",
+      "configuration": "light",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        160,
+        32
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb74",
+      "configuration": "steady",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        41,
+        16
+      ],
+      "footprint": {
+        "w": 5,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb74",
+      "configuration": "steady",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        107,
+        26
+      ],
+      "footprint": {
+        "w": 5,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb74",
+      "configuration": "steady",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        216,
+        52
+      ],
+      "footprint": {
+        "w": 5,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb103",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        33,
+        10
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb103",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        87,
+        16
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb103",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        175,
+        32
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb103",
+      "configuration": "compact",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        29,
+        10
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb103",
+      "configuration": "compact",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        79,
+        16
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb103",
+      "configuration": "compact",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        160,
+        32
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "akb103",
+      "configuration": "heavy",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        36,
+        14
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 2
+      }
+    },
+    {
+      "gun": "akb103",
+      "configuration": "heavy",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        96,
+        26
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 2
+      }
+    },
+    {
+      "gun": "akb103",
+      "configuration": "heavy",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        194,
+        52
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 2
+      }
+    },
+    {
+      "gun": "pistol",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        18,
+        10
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "pistol",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        38,
+        17
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "pistol",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        76,
+        34
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "pistol",
+      "configuration": "custom",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        19,
+        13
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "pistol",
+      "configuration": "custom",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        43,
+        23
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "pistol",
+      "configuration": "custom",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        87,
+        47
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        33,
+        10
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        78,
+        17
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        156,
+        34
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "custom",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        34,
+        13
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "custom",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        85,
+        22
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "custom",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        171,
+        45
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "carbine",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        31,
+        10
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "carbine",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        78,
+        17
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "carbine",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        156,
+        34
+      ],
+      "footprint": {
+        "w": 3,
+        "h": 1
+      }
+    },
+    {
+      "gun": "carbine",
+      "configuration": "custom",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        44,
+        10
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "carbine",
+      "configuration": "custom",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        104,
+        17
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "carbine",
+      "configuration": "custom",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        209,
+        34
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "gb17",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        17,
+        10
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "gb17",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        38,
+        17
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "gb17",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        76,
+        34
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "gb17",
+      "configuration": "custom",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        19,
+        10
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "gb17",
+      "configuration": "custom",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        44,
+        17
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "gb17",
+      "configuration": "custom",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        89,
+        34
+      ],
+      "footprint": {
+        "w": 2,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        32,
+        11
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        80,
+        17
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        160,
+        34
+      ],
+      "footprint": {
+        "w": 4,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "custom",
+      "code": "h",
+      "status": "pass",
+      "size": [
+        39,
+        11
+      ],
+      "footprint": {
+        "w": 5,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "custom",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        98,
+        18
+      ],
+      "footprint": {
+        "w": 5,
+        "h": 1
+      }
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "custom",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        197,
+        37
+      ],
+      "footprint": {
+        "w": 5,
+        "h": 1
+      }
+    }
+  ],
+  "fitChecks": [
+    {
+      "gun": "pb226",
+      "part": "A02",
+      "status": "pass",
+      "opener": [
+        "A02"
+      ]
+    },
+    {
+      "gun": "pb226",
+      "part": "P07",
+      "status": "pass",
+      "opener": [
+        "P07"
+      ]
+    },
+    {
+      "gun": "pb226",
+      "part": "M01",
+      "status": "pass",
+      "opener": [
+        "M01"
+      ]
+    },
+    {
+      "gun": "pb226",
+      "part": "M02",
+      "status": "pass",
+      "opener": [
+        "M02"
+      ]
+    },
+    {
+      "gun": "pb226",
+      "part": "T04",
+      "status": "pass",
+      "opener": [
+        "T04"
+      ]
+    },
+    {
+      "gun": "pb226",
+      "part": "T08",
+      "status": "pass",
+      "opener": [
+        "T08"
+      ]
+    },
+    {
+      "gun": "pb226",
+      "part": "O01",
+      "status": "pass",
+      "opener": [
+        "A02"
+      ]
+    },
+    {
+      "gun": "pb226",
+      "part": "M03",
+      "status": "pass",
+      "opener": [
+        "B01",
+        "M03"
+      ]
+    },
+    {
+      "gun": "pb226",
+      "part": "B01",
+      "status": "pass",
+      "opener": [
+        "B01"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "A04",
+      "status": "pass",
+      "opener": [
+        "A04"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "B03",
+      "status": "pass",
+      "opener": [
+        "B03"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "H06",
+      "status": "pass",
+      "opener": [
+        "H06"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "H07",
+      "status": "pass",
+      "opener": [
+        "H07"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "S05",
+      "status": "pass",
+      "opener": [
+        "S05"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "G03",
+      "status": "pass",
+      "opener": [
+        "G03"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "M01",
+      "status": "pass",
+      "opener": [
+        "M01"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "M02",
+      "status": "pass",
+      "opener": [
+        "M02"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "O03",
+      "status": "pass",
+      "opener": [
+        "A04"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "M03",
+      "status": "pass",
+      "opener": [
+        "M03"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "F01",
+      "status": "pass",
+      "opener": [
+        "H07"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "F03",
+      "status": "pass",
+      "opener": [
+        "H07"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "T01",
+      "status": "pass",
+      "opener": [
+        "H06"
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "T05",
+      "status": "pass",
+      "opener": [
+        "H06"
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "M01",
+      "status": "pass",
+      "opener": [
+        "M01"
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "M02",
+      "status": "pass",
+      "opener": [
+        "M02"
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "O03",
+      "status": "pass",
+      "opener": [
+        "O03"
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "M03",
+      "status": "pass",
+      "opener": [
+        "M03"
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "F01",
+      "status": "pass",
+      "opener": [
+        "F01"
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "F03",
+      "status": "pass",
+      "opener": [
+        "F03"
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "T01",
+      "status": "pass",
+      "opener": [
+        "T01"
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "T05",
+      "status": "pass",
+      "opener": [
+        "T05"
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "A06",
+      "status": "pass",
+      "opener": [
+        "A06"
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "B05",
+      "status": "pass",
+      "opener": [
+        "B05"
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "H08",
+      "status": "pass",
+      "opener": [
+        "H08"
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "S07",
+      "status": "pass",
+      "opener": [
+        "S07"
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "P06",
+      "status": "pass",
+      "opener": [
+        "P06"
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "G06",
+      "status": "pass",
+      "opener": [
+        "G06"
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "M10",
+      "status": "pass",
+      "opener": [
+        "M10"
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "O03",
+      "status": "pass",
+      "opener": [
+        "A06"
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "F01",
+      "status": "pass",
+      "opener": [
+        "H08"
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "F03",
+      "status": "pass",
+      "opener": [
+        "H08"
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "T01",
+      "status": "pass",
+      "opener": [
+        "H08"
+      ]
+    },
+    {
+      "gun": "mb870",
+      "part": "T05",
+      "status": "pass",
+      "opener": [
+        "H08"
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "B06",
+      "status": "pass",
+      "opener": [
+        "B06"
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "H09",
+      "status": "pass",
+      "opener": [
+        "H09"
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "S08",
+      "status": "pass",
+      "opener": [
+        "S08"
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "P06",
+      "status": "pass",
+      "opener": [
+        "P06"
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "G07",
+      "status": "pass",
+      "opener": [
+        "G07"
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "M10",
+      "status": "pass",
+      "opener": [
+        "M10"
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "O03",
+      "status": "pass",
+      "opener": [
+        "O03"
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "F01",
+      "status": "pass",
+      "opener": [
+        "H09"
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "F03",
+      "status": "pass",
+      "opener": [
+        "H09"
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "T01",
+      "status": "pass",
+      "opener": [
+        "H09"
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "part": "T05",
+      "status": "pass",
+      "opener": [
+        "H09"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "B07",
+      "status": "pass",
+      "opener": [
+        "B07"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "H03",
+      "status": "pass",
+      "opener": [
+        "H03"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "H04",
+      "status": "pass",
+      "opener": [
+        "H04"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "S03",
+      "status": "pass",
+      "opener": [
+        "S03"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "S04",
+      "status": "pass",
+      "opener": [
+        "S04"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "P03",
+      "status": "pass",
+      "opener": [
+        "P03"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "P04",
+      "status": "pass",
+      "opener": [
+        "P04"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "G08",
+      "status": "pass",
+      "opener": [
+        "G08"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "M05",
+      "status": "pass",
+      "opener": [
+        "M05"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "M07",
+      "status": "pass",
+      "opener": [
+        "M07"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "A08",
+      "status": "pass",
+      "opener": [
+        "A08"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "O03",
+      "status": "pass",
+      "opener": [
+        "A08"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "O08",
+      "status": "pass",
+      "opener": [
+        "A08"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "M06",
+      "status": "pass",
+      "opener": [
+        "M06"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "F01",
+      "status": "pass",
+      "opener": [
+        "H04"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "F03",
+      "status": "pass",
+      "opener": [
+        "H04"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "T01",
+      "status": "pass",
+      "opener": [
+        "H04"
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "T05",
+      "status": "pass",
+      "opener": [
+        "H04"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "B07",
+      "status": "pass",
+      "opener": [
+        "B07"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "H03",
+      "status": "pass",
+      "opener": [
+        "H03"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "H04",
+      "status": "pass",
+      "opener": [
+        "H04"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "S03",
+      "status": "pass",
+      "opener": [
+        "S03"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "S04",
+      "status": "pass",
+      "opener": [
+        "S04"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "P03",
+      "status": "pass",
+      "opener": [
+        "P03"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "P04",
+      "status": "pass",
+      "opener": [
+        "P04"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "M05",
+      "status": "pass",
+      "opener": [
+        "M05"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "M07",
+      "status": "pass",
+      "opener": [
+        "M07"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "A08",
+      "status": "pass",
+      "opener": [
+        "A08"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "G09",
+      "status": "pass",
+      "opener": [
+        "G09"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "O03",
+      "status": "pass",
+      "opener": [
+        "A08"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "O08",
+      "status": "pass",
+      "opener": [
+        "A08"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "M06",
+      "status": "pass",
+      "opener": [
+        "M06"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "F01",
+      "status": "pass",
+      "opener": [
+        "H04"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "F03",
+      "status": "pass",
+      "opener": [
+        "H04"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "T01",
+      "status": "pass",
+      "opener": [
+        "H04"
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "T05",
+      "status": "pass",
+      "opener": [
+        "H04"
+      ]
+    },
+    {
+      "gun": "pistol",
+      "part": "A01",
+      "status": "pass",
+      "opener": [
+        "A01"
+      ]
+    },
+    {
+      "gun": "pistol",
+      "part": "M01",
+      "status": "pass",
+      "opener": [
+        "M01"
+      ]
+    },
+    {
+      "gun": "pistol",
+      "part": "O01",
+      "status": "pass",
+      "opener": [
+        "A01"
+      ]
+    },
+    {
+      "gun": "shotgun",
+      "part": "A05",
+      "status": "pass",
+      "opener": [
+        "A05"
+      ]
+    },
+    {
+      "gun": "shotgun",
+      "part": "M11",
+      "status": "pass",
+      "opener": [
+        "M11"
+      ]
+    },
+    {
+      "gun": "shotgun",
+      "part": "O03",
+      "status": "pass",
+      "opener": [
+        "A05"
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "M05",
+      "status": "pass",
+      "opener": [
+        "M05"
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "M07",
+      "status": "pass",
+      "opener": [
+        "M07"
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "B09",
+      "status": "pass",
+      "opener": [
+        "B09"
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "O03",
+      "status": "pass",
+      "opener": [
+        "A07"
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "O08",
+      "status": "pass",
+      "opener": [
+        "A07"
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "M06",
+      "status": "pass",
+      "opener": [
+        "M06"
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "F01",
+      "status": "pass",
+      "opener": [
+        "H05"
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "F03",
+      "status": "pass",
+      "opener": [
+        "H05"
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "T01",
+      "status": "pass",
+      "opener": [
+        "H05"
+      ]
+    },
+    {
+      "gun": "carbine",
+      "part": "T05",
+      "status": "pass",
+      "opener": [
+        "H05"
+      ]
+    },
+    {
+      "gun": "gb17",
+      "part": "P07",
+      "status": "pass",
+      "opener": [
+        "P07"
+      ]
+    },
+    {
+      "gun": "gb17",
+      "part": "M01",
+      "status": "pass",
+      "opener": [
+        "M01"
+      ]
+    },
+    {
+      "gun": "gb17",
+      "part": "M02",
+      "status": "pass",
+      "opener": [
+        "M02"
+      ]
+    },
+    {
+      "gun": "gb17",
+      "part": "T04",
+      "status": "pass",
+      "opener": [
+        "T04"
+      ]
+    },
+    {
+      "gun": "gb17",
+      "part": "T08",
+      "status": "pass",
+      "opener": [
+        "T08"
+      ]
+    },
+    {
+      "gun": "gb17",
+      "part": "O01",
+      "status": "pass",
+      "opener": [
+        "O01"
+      ]
+    },
+    {
+      "gun": "gb17",
+      "part": "M03",
+      "status": "pass",
+      "opener": [
+        "B01",
+        "M03"
+      ]
+    },
+    {
+      "gun": "gb17",
+      "part": "B01",
+      "status": "pass",
+      "opener": [
+        "B01"
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "M05",
+      "status": "pass",
+      "opener": [
+        "M05"
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "M07",
+      "status": "pass",
+      "opener": [
+        "M07"
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "H02",
+      "status": "pass",
+      "opener": [
+        "H02"
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "O03",
+      "status": "pass",
+      "opener": [
+        "O03"
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "O08",
+      "status": "pass",
+      "opener": [
+        "O08"
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "M06",
+      "status": "pass",
+      "opener": [
+        "M06"
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "F01",
+      "status": "pass",
+      "opener": [
+        "H02"
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "F03",
+      "status": "pass",
+      "opener": [
+        "H02"
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "T01",
+      "status": "pass",
+      "opener": [
+        "H02"
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "T05",
+      "status": "pass",
+      "opener": [
+        "H02"
+      ]
+    }
+  ],
+  "bareFactories": {
+    "status": "pass",
+    "guns": [
+      "pb226",
+      "mpb5",
+      "vb9",
+      "mb870",
+      "mb1014",
+      "akb74",
+      "akb103"
+    ]
+  },
+  "scope": "Importer rehearsal only. Official import, virtual image source integration, eight headings, firing effects, two desktop sizes, real devices and maintainer review remain M3-04."
+}

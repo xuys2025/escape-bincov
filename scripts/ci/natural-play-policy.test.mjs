@@ -64,6 +64,24 @@ test('preparation funds supplies at official sale prices without selling reserve
   const result = spawnSync(process.execPath, ['--import', 'tsx', '--input-type=module', '-e', code], { encoding: 'utf8' });
   assert.equal(result.status, 0, result.stderr || result.stdout);
 });
+test('native loot destinations respect a long magazine, rotation and relief stack provenance', () => {
+  const code = `
+    import assert from 'node:assert/strict';
+    import {naturalLootDestination} from './scripts/natural-play-preparation.mjs';
+    import {createInventory,itemSize} from './src/domain.ts';
+    const gun={uid:'long-g17',id:'gb17',qty:1,x:0,y:0,gun:{parts:[{uid:'long-mag',id:'G01',slot:'mag',children:[]}],devices:{laser:false,light:false}}};
+    assert.deepEqual(itemSize(gun),{w:2,h:2});
+    assert.equal(naturalLootDestination(createInventory(2,1),gun),null,'a factory-sized gap cannot accept the fitted gun');
+    const bag=createInventory(4,2);bag.items.push({uid:'blocked-row',id:'watch',qty:1,x:0,y:1});
+    const before=structuredClone(bag);assert.deepEqual(naturalLootDestination(bag,gun),{x:1,y:0});assert.deepEqual(bag,before);
+    const turned={...gun,gun:{...gun.gun,parts:[]},rotated:true};
+    assert.deepEqual(itemSize(turned),{w:1,h:2});assert.deepEqual(naturalLootDestination(createInventory(1,2),turned),{x:0,y:0});
+    const relief=createInventory(2,1);relief.items.push({uid:'aid',id:'ammo9',qty:12,x:0,y:0,relief:true});
+    assert.deepEqual(naturalLootDestination(relief,{uid:'owned',id:'ammo9',qty:12}),{x:1,y:0},'ordinary rounds cannot merge with relief rounds');
+  `;
+  const result = spawnSync(process.execPath, ['--import', 'tsx', '--input-type=module', '-e', code], { encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+});
 test('medical preparation uses real RPG effects and protects a complete medical reserve before ammunition purchases', () => {
   const code = `
     import assert from 'node:assert/strict';

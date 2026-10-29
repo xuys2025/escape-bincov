@@ -11,6 +11,16 @@ const entries = record => sources.flatMap(source => record.profile[source].items
 const count = (inv, id) => inv.items.filter(i => i.id === id).reduce((n, i) => n + i.qty, 0);
 const ownedCount = (record, id) => entries(record).filter(i => i.id === id).reduce((n, i) => n + i.qty, 0);
 
+/** Native loot placement uses this instance's current footprint, including the magazine and rotation. */
+export function naturalLootDestination(inv, item) {
+  const stack = inv.items.find(other => other.id === item.id && !!other.relief === !!item.relief
+    && other.qty + item.qty <= D.ITEMS[item.id].stack);
+  if (stack) return { x: stack.x, y: stack.y };
+  for (let y = 0; y < inv.h; y++) for (let x = 0; x < inv.w; x++)
+    if (D.fits(inv, item, x, y, undefined, !!item.rotated)) return { x, y };
+  return null;
+}
+
 /** Bot trading policy: fund supplies from ordinary materials/valuables, keeping food, medicine, guns, ammo and the safe. */
 export function preparationSale(record, source = null) {
   return entries(record).filter(i => i.source !== 'safe' && (!source || i.source === source)

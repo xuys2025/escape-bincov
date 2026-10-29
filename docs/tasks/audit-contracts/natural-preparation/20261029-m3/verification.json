@@ -1,0 +1,171 @@
+{
+  "status": "passed",
+  "baseline": "e2728e46d072ee83af480999a6bd12f3aa0576d1",
+  "sourceHashes": {
+    "src/raid-runtime/test-support.ts": "09eeec932040155256e69634446b4ba169512d31dc05bc60e858c32744857769",
+    "tests/raid-runtime.test.ts": "bed80d9e0b982d67efce22b67d78f47efbe7d8ce274f4daf79c06fa0e31260e9",
+    "scripts/natural-play.mjs": "fe7e14a1171cf10c27c3ca5e1d277231a9aacc32de34dca05557fa72f289c2c3",
+    "scripts/natural-play-state.mjs": "b7931b655bfab819815172ffd7a59c572b46da42f97d706d4c22416f7b16e6e6",
+    "scripts/natural-play-preparation.mjs": "48b4d289b5db5539bf877bec21be0e13586994fa8bf2e47f0bb92c914c24559c",
+    "scripts/natural-play-policy.mjs": "22deaca7e083647ca91feab95742565795c9c3a36442a18982e98bdcb08e1bc8",
+    "scripts/ci/natural-play-state.test.mjs": "a0c246243c51448922422915f62ce6de2bb7899d230185e5b962e3b4fb7d50ff",
+    "scripts/ci/natural-play-policy.test.mjs": "340ad0b745cd7987ada14f1756397a0c9e11faf018a81fb4776382bbdd6db9b6",
+    "src/domain.ts": "c2f865e92d34bf67fa0e8d94c97146de78a14d6d484b8210925da69cc237f70c",
+    "src/recovery-store.ts": "7a13637191158c36629cadd7f47db620ee9e727aacfed5ca1adc0c0595559237",
+    "src/raid-runtime/runtime.ts": "242da7ab29c67971bcbe1dec039487c282532f496386f5595dfa6bf96fdb6fb8",
+    "src/raid-runtime/presentation.ts": "9a55d10e3eafa68b4524339d9345b401e5f06aa94ff493b9b8aa2d570c145a66",
+    "src/gunsmith/instance.ts": "3d121ec37b1bac5957b52788911fad372c597901e9c4d1d715ef58515b2ae5b3",
+    "src/profile-codec.ts": "68aa362f6a0ec2a8a9345b5d040628e7160a85a01a4d3be8ecbc5d28c9a5bfb6",
+    "src/coast-view/host.ts": "630efa7e273f89adf35234dff3299a2f01957b11e0219104ec5b66550fde12b3",
+    "src/coast-view/input.ts": "492054fceba8549fd4b90b73a47c1b0d0a34f4c97879fd1166eaed55310d8624",
+    "src/ui.ts": "dab2f45bbd67df519f0bd06ad0bf08f08a31e77458375db5cc436e401847bc66"
+  },
+  "artifacts": {
+    "htmlBytes": 9475097,
+    "portableZipBytes": 6101014,
+    "webZipBytes": 6096505
+  },
+  "environment": {
+    "platform": "win32",
+    "node": "v24.19.0",
+    "pnpm": "11.25.0",
+    "browser": "156.0.8078.48"
+  },
+  "checks": {
+    "unit": "1079/1079",
+    "guards": "127/127",
+    "package": "passed",
+    "medicalOracle": "756/756 matched, no input mutation",
+    "legacySamplerControl": "3 passed / 1 expected failure: event eviction produces 0 instead of 1"
+  },
+  "natural": {
+    "startedAt": "2026-10-29T05:35:09.503Z",
+    "finishedAt": "2026-10-29T05:45:11.506Z",
+    "durationSeconds": 602.003,
+    "htmlSha256": "618793d89a0df8287b5f2d98e92c4a4bed406976cbba27ff30fd4226a7c5e360",
+    "timing": {
+      "method": "Wall intervals attributed to the previous observed UI state (including its UI actions); simulation sums nonnegative published run-clock deltas. Neither is a GPU/active-fun measurement.",
+      "runWallSeconds": 561.8369999999959,
+      "baseWallSeconds": 11.864,
+      "resultWallSeconds": 27.087000000000007,
+      "otherWallSeconds": 0,
+      "simulationSeconds": 489.84569999999877,
+      "playStartedAt": "2026-10-29T05:35:10.499Z"
+    },
+    "outcomes": [
+      {
+        "outcome": "extract",
+        "kills": 2
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 0
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 0
+      },
+      {
+        "outcome": "extract",
+        "kills": 5
+      },
+      {
+        "outcome": "extract",
+        "kills": 2
+      },
+      {
+        "outcome": "extract",
+        "kills": 0
+      },
+      {
+        "outcome": "extract",
+        "kills": 0
+      },
+      {
+        "outcome": "death",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 3
+      },
+      {
+        "outcome": "extract",
+        "kills": 3
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 3
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 0
+      }
+    ],
+    "totalKills": 29,
+    "samples": 20,
+    "sampledRuns": 15,
+    "monotonicWithinEveryRun": true,
+    "samplesNotAboveSettlement": true,
+    "finalStatsReconciled": true,
+    "opened": 8,
+    "nativeTransfers": 14,
+    "banks": 27,
+    "sales": 4,
+    "enemyWindups": [
+      "raider-gunner/windup",
+      "raider-melee/windup",
+      "raider-lookout/windup"
+    ],
+    "pageErrors": 0,
+    "externalRequests": 0
+  },
+  "retained": {
+    "firstFailure": "../20261029/insufficient-funds-report.json",
+    "secondFailure": "../20261029/unbanked-loot-report.json",
+    "thirdFailure": "../20261029/repeated-deaths-report.json",
+    "beforeFootprintFix": "before-footprint-fix-progress.json (interrupted for actual-item footprint fix; not acceptance)",
+    "interruptedRun": "../20261029/interrupted-progress.json (no final report; not counted as pass)"
+  },
+  "boundaries": "Automated natural input, not human balance or physical-device acceptance. UI/quota/funding and kill-control are separate explicit fixtures. Save format, game rules, ordinary HUD, #32 F20 unchanged."
+}

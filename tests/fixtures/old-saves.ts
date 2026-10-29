@@ -7,6 +7,7 @@
  */
 import * as D from '../../src/domain';
 import type { SessionRecord } from '../../src/recovery-store';
+import { withV8Footprints } from '../../src/gunsmith/instance';
 
 /** Every object that holds a gun or could: items and ground loot (an id and a qty) and equipped slots (a weapon and ammoRelief). */
 export function holders(value: unknown, out = { items: [] as any[], slots: [] as any[] }) {
@@ -38,25 +39,36 @@ function oldGoods(value: unknown): void {
         if (id) { item.id = id; item.qty = 1; }
     }
 }
-/** The v2 profile an old client would have stored for this one. */
+/** The v2 profile an old client would have stored for this one: the stash at its old rows too (v8Record). */
 export function oldProfile(profile: D.SaveDataV1): any {
-    const copy = withoutGuns(profile); oldGoods(copy);
+    const copy = withoutGuns(v8Record({ version: 9, profile } as SessionRecord).profile); oldGoods(copy);
     return { ...copy, version: 2 };
 }
 /**
- * The record an old client would have stored for this v8 one: v3 without an expansion, v4 with a v1/v2 one, v5 with a v3
+ * The record a v8 client (before footprints followed the magazine, #28 M3-12) would have stored for this v9 one: no
+ * layoutBackup, the stash 6 or 9 rows. Its guns lie where they are, which the v8 footprints (one row) always allow; a
+ * stash item below the old rows has no v8 place, so that throws.
+ */
+export function v8Record(record: SessionRecord): any {
+    const copy: any = structuredClone(record), rows = copy.profile.upgraded ? 9 : 6;
+    if (!withV8Footprints(() => copy.profile.stash.items.every((i: D.Item) => i.y + D.itemSize(i).h <= rows))) throw new Error('a stash item below the v8 rows');
+    delete copy.layoutBackup; copy.version = 8; copy.profile.stash.h = rows;
+    return copy;
+}
+/**
+ * The record an old client would have stored for this v9 one: v3 without an expansion, v4 with a v1/v2 one, v5 with a v3
  * one, v6 and v7 as v4 and v5 with enemy rules on (it holds enemyBackup), or `version` when a test relabels it on
  * purpose. Embedded backups (strings) are kept as they are.
  */
 export function oldRecord(record: SessionRecord, version?: 3 | 4 | 5 | 6 | 7): any {
-    const copy: any = withoutGuns(record), enemies = copy.enemyBackup !== undefined;
+    const copy: any = withoutGuns(v8Record(record)), enemies = copy.enemyBackup !== undefined;
     oldGoods(copy);
     delete copy.gunsBackup; copy.profile.version = 2;
     copy.version = version ?? (!copy.expansion ? 3 : (copy.expansion.version === 3 ? 5 : 4) + (enemies ? 2 : 0));
     return copy;
 }
 /**
- * In place: the v4 record the client before perks wrote for this v8 one with a v3 expansion: gun fields gone, expansion
+ * In place: the v4 record the client before perks wrote for this v9 one with a v3 expansion: gun fields gone, expansion
  * and raid v2, no perk selection, perksBackup or enemy rules. Works on a record from before gun instances as well.
  */
 export function makeV4(record: any): void {

@@ -24,7 +24,7 @@ const writeCount = () => page.evaluate(() => window.__issue26Writes.length);
 const ready = () => page.waitForFunction(() => window.__station?.mounted && window.__station.host.frames > 8);
 const shot = async name => { await page.screenshot({ path: resolve(out, `${name}.png`) }); report.screenshots.push(`${name}.png`); };
 function fixture() {
-  const p = D.newSave(); p.stash = D.createInventory(10, 6); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
+  const p = D.newSave(); p.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
   p.cash = 700; p.equipment = { weapon: null, weaponUid: null, gun: null, ammo: 0, ammoRelief: 0, relief: false }; return p;
 }
 function add(inv, id, qty = 1) { assert.equal(D.addItem(inv, id, qty), 0, `fixture ${id}`); return inv.items.at(-1); }

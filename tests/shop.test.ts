@@ -69,7 +69,7 @@ test('each merchant settles only its own stock; a pack from the other counter is
     assert.equal(S.settleCartResult(save, med).ok, true); assert.equal(save.cash, before.cash - D.ITEMS.medkit.buy); assert.equal(D.count(save.stash, 'medkit'), 1);
 });
 test('unloading a mixed magazine preserves saleability independently of a relief gun', () => {
-    const save = fixture(); save.stash = D.createInventory(10, 6);
+    const save = fixture(); save.stash = D.createInventory(D.STASH_W, D.STASH_ROWS);
     save.equipment = { weapon: 'pistol', weaponUid: 'test-gun', gun: factoryState(), relief: true, ammo: 7, ammoRelief: 3 };
     assert.equal(D.unequip(save), true);
     const ordinary = save.stash.items.find(i => i.id === 'ammo9' && !i.relief)!, relief = save.stash.items.find(i => i.id === 'ammo9' && i.relief)!;

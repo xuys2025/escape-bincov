@@ -60,7 +60,10 @@ test('every id counts once, the input order never matters, and ids outside the c
 });
 
 test('every weapon states its own critical source; the knife and an empty hand get no sources at all', () => {
-    assert.deepEqual(Object.fromEntries(Object.values(D.WEAPONS).map(w => [w.id, w.crit])), { knife: 0, pistol: .05, shotgun: .03, carbine: .08, gb17: .05, mb4a1: .05 });
+    // The gunsmith guns state the catalog's (#28 M2-01, M3-01, M3-05).
+    assert.deepEqual(Object.fromEntries(Object.values(D.WEAPONS).map(w => [w.id, w.crit])), { knife: 0, pistol: .05, shotgun: .03, carbine: .08, gb17: .05, mb4a1: .05,
+        pb226: .05, mpb5: .04, vb9: .04, mb870: .03, mb1014: .03, akb74: .05, akb103: .06, augb: .05,
+        mb1911: .07, umpb45: .05, pb90: .04, svdb: .1, mb14: .09, mb700: .12, rpkb: .05 });
     // @ts-expect-error a weapon that does not state `crit` does not compile
     const unstated: D.WeaponDef = { id: 'x', name: 'x', ammo: 'ammo9', magazine: 1, damage: 1, range: 1, cooldown: 1, reload: 1, pellets: 1, spread: 0 };
     assert.equal(unstated.crit, undefined);

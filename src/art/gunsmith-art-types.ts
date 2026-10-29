@@ -12,7 +12,8 @@ export interface GunsmithArt {
     gun?: string;
     /** The attachment id of a part, or the item id of an icon. */
     item?: string;
-    role: 'receiver' | 'factory' | 'part' | 'glove' | 'icon';
+    /** `bare`: an old gun's held picture without its painted hands, for the ground and the HUD card (#28 M3-07). */
+    role: 'receiver' | 'factory' | 'part' | 'glove' | 'icon' | 'bare';
     /** The mount it sits on (ART-SPEC 3.3), or a glove's place. */
     slot?: string;
     anchor?: ArtPoint;
@@ -27,4 +28,15 @@ export interface GunsmithArt {
     /** The carbine's factory handguard has the front glove painted on. */
     embeddedFrontGlove?: boolean;
     wholeGunCanvas?: boolean;
+}
+/**
+ * An old gun's inventory layer (#28 M3-03): the procedural picture of `sourceKey` (art/inventory.ts), cut by rectangles
+ * [x, y, w, h]. With `rect`, only that area, kept at its place on the whole canvas (`wholeCanvasLayer`) or cropped to it;
+ * otherwise the whole picture with `clearRects` emptied, then `fillRects` ([colour, x, y, w, h]) filled.
+ */
+export interface VirtualArt extends GunsmithArt {
+    sourceKey: string;
+    rect?: readonly [number, number, number, number];
+    clearRects?: readonly (readonly [number, number, number, number])[];
+    fillRects?: readonly (readonly [string, number, number, number, number])[];
 }

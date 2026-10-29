@@ -7,10 +7,9 @@ import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { findPath, lineOfSight } from '../src/world.ts';
 import { corridor, spacePath } from '../src/spatial.ts';
-import { ITEMS, fits } from '../src/domain.ts';
 import { browserOptions } from './browser-options.mjs';
 import { readNaturalPlayState } from './natural-play-state.mjs';
-import { prepareNaturalLoadout, PreparationBlocked } from './natural-play-preparation.mjs';
+import { prepareNaturalLoadout, PreparationBlocked, naturalLootDestination } from './natural-play-preparation.mjs';
 import { NATURAL_PREPARATION_POLICY, NATURAL_RETREAT_POLICY, naturalRetreatReason, chooseSafeContainer, confirmedNativeTransfer } from './natural-play-policy.mjs';
 
 const minutes = Number(process.env.BINCOV_PLAY_MINUTES || 10);
@@ -57,12 +56,6 @@ async function snapshot() {
 }
 /** Client point of a world point on the chest plane, where shots are aimed. */
 const screenOf = point => page.evaluate(p => window.__bincovSample.host.view.worldToClient({ x: p.x, y: p.y - 22 }), point);
-function destination(inv, item) {
-  const stack = inv.items.find(other => other.id === item.id && !!other.relief === !!item.relief && other.qty + item.qty <= ITEMS[item.id].stack);
-  if (stack) return { x: stack.x, y: stack.y };
-  for (let y = 0; y < inv.h; y++) for (let x = 0; x < inv.w; x++) if (fits(inv, item.id, x, y, undefined, !!item.rotated)) return { x, y };
-  return null;
-}
 async function lootOpenContainer(s) {
   await keys(new Set());
   const container = s.containers.find(c => c.id === s.lootContext?.containerId);
@@ -76,7 +69,7 @@ async function lootOpenContainer(s) {
     visited.add(`${container.x},${container.y}`); goal = null;
     await page.keyboard.press('Escape'); return;
   }
-  const candidate = container.inventory.items.map(item => ({ item, cell: destination(s.bag, item) })).find(candidate => candidate.cell);
+  const candidate = container.inventory.items.map(item => ({ item, cell: naturalLootDestination(s.bag, item) })).find(candidate => candidate.cell);
   if (!candidate) { visited.add(`${container.x},${container.y}`); goal = null; await page.keyboard.press('Escape'); return; }
   const { item, cell } = candidate;
   // The panel places an item by the ghost's top-left corner: grab just inside the item, release just inside the cell.

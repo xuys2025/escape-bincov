@@ -43,6 +43,8 @@
 
 ### #109 自然游玩报告与准备流程收尾
 
+**当前合并候选已同步 #132 改枪 M3。** 下文先保留原 `54632691` 与 #111 同步轮的证据；最新组合、实例尺寸修复及完整验收见[合并前最终复核（M3）](#合并前最终复核m3)。
+
 2026-10-29（+08:00）沿原分支 `fix/natural-play-kill-count` 续作，快进接入候选 `3739d7b0fed1b5687ed79ae7f0b7b35d6254328d`，正常合入已接受 main `275fafd77b1574938ecc0409ab405b77850359c1`。只解决交接追加记录与脚本索引冲突，保留双方历史；合并提交为 `1e8df183`，准确最终 head 和 CI 见 [PR #109](https://github.com/xuys2025/escape-bincov/pull/109)。
 
 累计击杀由显式测试 driver 的 `killCount()` 直读 Runtime，普通端口、生产 HUD、战斗与存档规则不变。原候选的整备只读成功提交记录，每次真实界面动作后检查新 revision、发布状态及实际变化；医疗报价仍使用官方 RPG 克隆。首搜保持原 220px/LOS 危险边界，打开后保持原 60HP/流血关闭条件，拖放必须同 run/map/context 且源减、背包等量增。
@@ -69,6 +71,22 @@
 本轮只修报告与自动玩家工具，不改变游戏战斗、交易、救济、存档格式或普通 HUD。完整 CI 与准确最终 head 统一维护在原 #109；未合并、未发布。真人平衡、真机及 #32 F20 保持各自验收边界。
 
 **授权合并前同步 #111。** 维护者要求复查无问题后合并。再次 fetch 后主线为 `03cfb775fbef07c711fe789e9f6e886460261a91`（资源趋势参数入口），正常合入，只解决 WORK-QUEUE 和脚本支持清单冲突，保留双方交接及 `station-resource-args.mjs`。相对已验 `54632691`，`src`、`tests`、素材、依赖、构建输入和全部自然游玩脚本均无变化。组合重新通过 **126/126** 工程守卫和严格打包，HTML 哈希与字节数精确保持上述值，因此复用 1058 单测、604.796 秒自然输入及控制探针证据，不重复长测。新准确 head 的完整 CI 和最终合并状态以原 PR 为准。
+
+### 合并前最终复核（M3）
+
+维护者明确授权复查无问题后合并。`1e85742b` 在 #111 基线的[完整 CI 40821686704](https://github.com/xuys2025/escape-bincov/actions/runs/40821686704)全部通过后，最终 fetch 发现 main 已合入 #132、前移到 `e2728e46d072ee83af480999a6bd12f3aa0576d1`。沿原 PR 正常整合，保留双方 handoff；M3 是已接受主线，不由 #109 重新实现。
+
+集成复核发现测试工具仍以 `fits(inv, item.id, ...)` 选择落格，忽略武器实例的配件尺寸。`naturalLootDestination` 现把实际 item（含 gun 与 rotated）交给官方 `fits`，并复用原合堆/救济来源规则。[同函数负对照](audit-contracts/natural-preparation/20261029-m3/footprint-negative.json)证实 G17 + G01 长弹匣实际 2×2，旧算法错误接受 2×1 空位，新算法拒绝；新增回归同时覆盖合适空位、旋转、救济来源与输入不变。修复前诊断主动中断，只有[进度](audit-contracts/natural-preparation/20261029-m3/before-footprint-fix-progress.json)，不计完整验收。
+
+| 当前 M3 组合检查 | 实际结果 |
+| --- | --- |
+| `pnpm test` / `pnpm check:ci` / `pnpm package` | 1079/1079、127/127、严格检查和打包通过；HTML 9,475,097 字节、便携 ZIP 6,101,014 字节 |
+| [最终 UI / quota / 筹资](audit-contracts/natural-preparation/20261029-m3/ui-control.json) | 26.387 秒通过；真实死亡后写失败保留原字节/revision/身体/库存，恢复可准备。独立合法低现金夹具通过真实入库、出售、补弹后 cash157 / 弹12 |
+| [医疗报价](audit-contracts/natural-preparation/20261029-m3/medical-oracle.json)与计数控制 | 756 状态0差异；旧计数回归3通过/1有效失败；[当前构建控制](audit-contracts/natural-preparation/20261029-m3/kill-control.json)杀敌→日志淘汰→重挂→正式结算均为1，普通入口无 driver |
+| [完整默认十分钟](audit-contracts/natural-preparation/20261029-m3/natural-play-report.json) | **PASS，exit 0**；默认 `minutes=10`、buildings，2026-10-29 13:35:09.503～13:45:11.506（+08:00），实际602.003秒。22局，21撤离/1死亡，29击杀，8次开箱、14原生转移、27入库、4出售；三类真实windup，页面异常/外部请求0 |
+| [源码哈希与逐局对账](audit-contracts/natural-preparation/20261029-m3/verification.json) | 20样本/15个run，同run无下降且不高于该局正式结算；22局之和29=最终stats.kills29。行动墙钟561.837秒、基地11.864秒、结算27.087秒，模拟累计489.846秒，各口径分列 |
+
+当前正式 HTML SHA-256 为 `618793d89a0df8287b5f2d98e92c4a4bed406976cbba27ff30fd4226a7c5e360`，Windows / Node24.19.0 / pnpm11.25.0 / Chrome156.0.8078.48。UI/quota/低现金和杀敌控制为单独显式夹具；最终自然输入不注入游戏状态或时钟，浏览器串行独占锁。原始记录与 `.source.txt` 复放脚本在同目录，旧轮所有失败、中断和成功均保留。#109 不改变 M3 的 v9 存档、物品尺寸、经济或射击规则；准确新 head CI、授权合并和发布状态仍以原 PR 为准。
 
 ### 自然准备与首搜候选（未并入 #109）
 

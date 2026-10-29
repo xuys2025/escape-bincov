@@ -1,0 +1,44 @@
+import assert from 'node:assert/strict';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { pathToFileURL } from 'node:url';
+import { chromium } from 'playwright';
+import { browserOptions } from '../../scripts/browser-options.mjs';
+import { spacePath } from '../../src/spatial.ts';
+import { readNaturalPlayState } from '../../scripts/natural-play-state.mjs';
+import { prepareNaturalLoadout, readCommittedPreparation, preparationFacts, PreparationBlocked } from '../../scripts/natural-play-preparation.mjs';
+
+const entry='D:/bincov/pr109-natural-play/dist/index.html',out='D:/bincov/pr109-natural-play/test-results/pr109/m3/ui';await mkdir(out,{recursive:true});
+const report={startedAt:new Date().toISOString(),htmlSha256:createHash('sha256').update(await readFile(entry)).digest('hex'),methodology:'Short UI controls: death/quota phase walks into a real enemy without health/enemy/inventory/RNG/clock injection; quota interception is an explicit fault. Separate funding phase seeds a legal committed cash1/ammo0/watch1-in-bag base fixture through SaveSession, then sells and buys only through visible UI. This is not ten-minute natural acceptance.',errors:[],requests:[],decisions:[]};
+const browser=await chromium.launch(browserOptions);report.browser=browser.version();const context=await browser.newContext({viewport:{width:1280,height:720},offline:true});const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));context.on('request',r=>{if(/^https?:/.test(r.url()))report.requests.push(r.url());});
+const action=(name,id)=>page.locator(`[data-action="${name}"]${id?`[data-id="${id}"]`:''}`);let held=new Set();
+async function keys(next){for(const k of held)if(!next.has(k))await page.keyboard.up(k);for(const k of next)if(!held.has(k))await page.keyboard.down(k);held=next;}
+try{
+ await page.goto(pathToFileURL(entry).href+'?test=1&entry=tabs');await action('enter').click();
+ report.initial=await prepareNaturalLoadout(page,report.decisions,1);console.log('Initial committed preparation',JSON.stringify(report.initial));
+ await page.locator('#run-world').selectOption('buildings');await page.locator('#seed').fill('42');await action('deploy').click();await page.waitForFunction(()=>!!window.__bincovSample?.host?.lastBatch);
+ const deadline=Date.now()+150000;
+ while(Date.now()<deadline){const s=await page.evaluate(readNaturalPlayState);if(s.state==='result')break;if(s.state!=='run')throw Error('Unexpected state '+s.state);if(s.overlay){await keys(new Set());if(s.overlay!=='ending')await page.keyboard.press('Escape');await page.waitForTimeout(200);continue;}
+  const enemy=s.enemies.filter(e=>e.tactics?.archetype.startsWith('raider')).sort((a,b)=>Math.hypot(a.x-s.x,a.y-s.y)-Math.hypot(b.x-s.x,b.y-s.y))[0];assert.ok(enemy,'real street raider');
+  const path=spacePath({definition:s.map,doors:s.doors,highTide:s.high},s,enemy);let point=path.find(p=>Math.hypot(p.x-s.x,p.y-s.y)>14)??enemy;const next=new Set();
+  if(Math.hypot(enemy.x-s.x,enemy.y-s.y)>75){if(point.x-s.x>6)next.add('d');if(point.x-s.x< -6)next.add('a');if(point.y-s.y>6)next.add('s');if(point.y-s.y< -6)next.add('w');}
+  await keys(next);await page.waitForTimeout(180);
+ }
+ await keys(new Set());assert.equal((await page.evaluate(readNaturalPlayState)).state,'result','real hostile attacks must produce the controlled death');await action('return').click();
+ const before=await page.evaluate(readCommittedPreparation);report.postDeath=preparationFacts(before);assert.ok(report.postDeath.hp<2,'real post-death committed body');console.log('Real death committed',JSON.stringify(report.postDeath));
+ const rawBefore=await page.evaluate(()=>localStorage.getItem('escape-bincov.session.v2'));
+ await page.evaluate(()=>{window.__probeSetItem=Storage.prototype.setItem;window.__probeFailedWrites=0;document.addEventListener('click',function arm(event){if(!event.isTrusted||!event.target.closest?.('[data-action="use-base"]'))return;document.removeEventListener('click',arm,true);Storage.prototype.setItem=function(key,value){if(key==='escape-bincov.session.v2'){window.__probeFailedWrites++;throw Error('Controlled preparation quota');}return window.__probeSetItem.call(this,key,value);};},true);});
+ let blocked;try{await prepareNaturalLoadout(page,report.decisions,2);}catch(e){assert.ok(e instanceof PreparationBlocked);blocked={reason:e.reason,facts:e.facts};}assert.ok(blocked,'quota cannot produce a ready candidate');
+ const failed=await page.evaluate(readCommittedPreparation);assert.equal(failed.storageOK,false);assert.equal(failed.record.revision,before.record.revision);assert.deepEqual(failed.record,before.record);assert.equal(await page.evaluate(()=>localStorage.getItem('escape-bincov.session.v2')),rawBefore);assert.equal(await page.evaluate(()=>window.__bincov.app.state),'hideout');assert.ok(await page.evaluate(()=>window.__probeFailedWrites)>0);
+ report.quota={blocked,unchangedBytes:true,unchangedRevision:true,unchangedCommittedBodyAndInventory:true};await page.screenshot({path:out+'/quota.png'});console.log('Quota rejected without publication');
+ await page.evaluate(()=>{Storage.prototype.setItem=window.__probeSetItem;});await action('tab','gear').click();await action('retry-save').click();
+ report.ready=await prepareNaturalLoadout(page,report.decisions,2);assert.ok(report.ready.hp>=70);assert.ok(report.ready.bagMedical>=1);assert.ok(report.ready.totalRounds>=12);assert.equal(report.ready.gunReady,true);assert.equal(report.ready.phase,'hideout');
+ await page.screenshot({path:out+'/prepared.png'});assert.deepEqual(report.errors,[]);assert.deepEqual(report.requests,[]); // Explicit low-cash control, separate from natural acceptance. Seed a legal base record, then trade only through visible UI.
+ await page.evaluate(()=>{const saves=window.__bincov.saveSession;const ticket=saves.prepareExpansionMutation(d=>{d.profile.cash=1;d.profile.equipment.ammo=0;d.profile.equipment.ammoRelief=0;for(const source of ['bag','stash','safe'])d.profile[source].items=d.profile[source].items.filter(i=>i.id!=='ammo9');d.profile.stash.items=[];d.profile.bag.items.push({uid:'funding-control-watch',id:'watch',qty:1,x:1,y:0});});if(!ticket||saves.commitExpansionMutation(ticket)!=='committed')throw Error('Funding control setup failed');});
+ await action('tab','gear').click();
+ const fundingBefore=preparationFacts(await page.evaluate(readCommittedPreparation));assert.equal(fundingBefore.cash,1);assert.equal(fundingBefore.totalRounds,0);
+ const fundingAfter=await prepareNaturalLoadout(page,report.decisions,3);assert.equal(fundingAfter.cash,157);assert.ok(fundingAfter.totalRounds>=12);assert.ok(report.decisions.some(d=>d.kind==='bank-loot'));assert.ok(report.decisions.some(d=>d.kind==='sell-loot'));
+ assert.ok(!(await page.evaluate(readCommittedPreparation)).record.profile.stash.items.some(i=>i.id==='watch'));report.funding={fixture:'Legal committed base: cash1, ammo0, watch1 in bag; preparation banks, sells and buys through real UI only',before:fundingBefore,after:fundingAfter};
+assert.deepEqual(report.errors,[]);assert.deepEqual(report.requests,[]);report.status='ui-control-passed';console.log('Final committed preparation',JSON.stringify(report.ready));
+}catch(e){report.status='failed';report.failure=String(e.stack??e);process.exitCode=1;console.error(report.failure);}
+finally{await keys(new Set()).catch(()=>{});await context.close();await browser.close();report.finishedAt=new Date().toISOString();await writeFile(out+'/report.json',JSON.stringify(report,null,2));console.log(JSON.stringify({status:report.status,startedAt:report.startedAt,finishedAt:report.finishedAt,failure:report.failure}));}

@@ -8,7 +8,9 @@
  * Versions 1 and 2 (records v2 to v7) are the old format, where no `gun` or `weaponUid` field may appear: they are
  * checked by the old rules and migrated (docs/gunsmith/CONTRACTS.md, the M0-06 section), never repaired.
  */
-import { ITEMS, WEAPONS, cleanOldSave, createInventory, equippedWeapon, fits, isGun, itemUids, migrateSave, type Inventory, type Item, type SaveDataV1 } from './domain';
+import { ITEMS, STASH_W, WEAPONS, cleanOldSave, createInventory, equippedWeapon, fits, isGun, itemSize, itemUids, migrateSave, stashOverflowRows, stashRows, type Inventory, type Item, type SaveDataV1 } from './domain';
+import { v8Footprints, withV8Footprints } from './gunsmith/instance';
+import { relayoutProfile } from './gunsmith/relayout';
 import { gunUids, validateGun } from './gunsmith/instance';
 import { validPresets } from './gunsmith/presets';
 import type { ProfileV2 } from './gunsmith/migrate';
@@ -42,14 +44,16 @@ export function hasExactKeys(value: unknown, keys: readonly string[]): value is 
  * `guns`: the gun format (profile v3, record v8). A gun item must carry a valid gun state (validateGun), takes the cells
  * its parts grow it to, and its part uids join `seen` like item uids; no other item may have a `gun` field. Without it
  * (the old format) no item may have one at all.
+ * `overflow`: the stash in the current format (D.stashOverflowRows) may also hold items wholly below its rows, at most
+ * that many rows down (#28 M3-12).
  * `each` runs for an item that passed, before it is recorded; it may throw the caller's own error.
  */
 export function validInventory(value: unknown, w: number, h: number, seen: Set<string>,
-  rules: { rotation: boolean; exact: boolean; guns: boolean }, each?: (item: Item) => void): value is Inventory {
+  rules: { rotation: boolean; exact: boolean; guns: boolean; overflow?: number }, each?: (item: Item) => void): value is Inventory {
   if (rules.exact && !hasExactKeys(value, ['w', 'h', 'items'])) return false;
-  const inv = value as Inventory | null;
-  if (!inv || inv.w !== w || inv.h !== h || !Array.isArray(inv.items) || inv.items.length > w * h) return false;
-  const placed = createInventory(w, h);
+  const inv = value as Inventory | null, rows = h + (rules.overflow ?? 0);
+  if (!inv || inv.w !== w || inv.h !== h || !Array.isArray(inv.items) || inv.items.length > w * rows) return false;
+  const placed = createInventory(w, rows);
   for (const item of inv.items as unknown[]) {
     if (!item || typeof item !== 'object') return false;
     const i = item as Item, gun = rules.guns && isGun(i.id);
@@ -61,6 +65,8 @@ export function validInventory(value: unknown, w: number, h: number, seen: Set<s
     if (gun ? !validateGun(i.id, i.uid, i.gun).ok : Object.hasOwn(i, 'gun')) return false;
     const uids = itemUids(i);
     if (uids.some(uid => seen.has(uid)) || !fits(placed, i, i.x, i.y, undefined, !!i.rotated)) return false;
+    // In the overflow wholly: nothing reaches across the stash's last row.
+    if (i.y < h && i.y + itemSize(i).h > h) return false;
     each?.(i);
     for (const uid of uids) seen.add(uid);
     placed.items.push(i);
@@ -102,8 +108,8 @@ function checkProfile(raw: any): void {
   if (!raw.stats || !['runs', 'extracts', 'kills'].every(k => whole(raw.stats[k], 0, COUNT_MAX)) || raw.stats.extracts > raw.stats.runs) invalid();
   if (!raw.quests || !['repair', 'sample', 'ledger'].every(k => typeof raw.quests[k] === 'boolean')) invalid();
   const guns = raw.version === 3, seen = new Set<string>(), rules = { rotation: raw.version >= 2, exact: false, guns };
-  for (const [name, w, h] of [['stash', 10, raw.upgraded ? 9 : 6], ['bag', 6, 5], ['safe', 2, 2]] as const)
-    if (!validInventory(raw[name], w, h, seen, rules)) invalid();
+  for (const [name, w, h] of [['stash', STASH_W, stashRows(raw.upgraded === true)], ['bag', 6, 5], ['safe', 2, 2]] as const)
+    if (!validInventory(raw[name], w, h, seen, name === 'stash' ? { ...rules, overflow: stashOverflowRows(guns) } : rules)) invalid();
   if (!validEquipment(raw.equipment, seen, guns)) invalid();
   // Presets (#28 M2-07) only in the gun format, never an empty list: no presets is no field.
   if (Object.hasOwn(raw, 'gunPresets') && (!guns || !validPresets(raw.gunPresets) || !raw.gunPresets.length)) invalid();
@@ -118,6 +124,11 @@ export function decodeProfileDocument(parsed: any): SaveDataV1 {
   if (parsed?.format === 'escape-bincov-backup' && (![1, 2, 3].includes(parsed.formatVersion) || parsed.save?.version !== parsed.formatVersion))
     throw new Error('此备份来自不兼容的版本，当前进度未改动。');
   const raw = parsed?.format === 'escape-bincov-backup' ? parsed.save : parsed;
+  // A profile from before footprints followed the magazine (#28 M3-12) has the stash's old rows (6, or 9 built out;
+  // now 8 and 12): checked by the v8 rules, then laid out again. Inside a record v8 being checked (already under the v8
+  // rules) it stays as it is: decodeSession lays the whole record out.
+  if (!v8Footprints() && raw && typeof raw === 'object' && raw.stash?.h === (raw.upgraded === true ? 9 : 6))
+    return relayoutProfile(withV8Footprints(() => { checkProfile(raw); return migrateSave(raw); }));
   checkProfile(raw);
   return migrateSave(raw);
 }

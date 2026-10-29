@@ -1,0 +1,600 @@
+{
+  "schema": 1,
+  "status": "pass",
+  "codeHead": "94b7e5cf5f776e34908425a528d6156fdfba5d86",
+  "method": "Process-local GUNSMITH_ART injection; real validateBuild, gunSize and gunArtLayout. No formal importer or source files written.",
+  "configurations": 21,
+  "layouts": 42,
+  "heldUnchanged": 20,
+  "checks": [
+    {
+      "gun": "mb4a1",
+      "part": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        80,
+        24
+      ],
+      "cells": [
+        4,
+        2
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        160,
+        48
+      ],
+      "cells": [
+        4,
+        2
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "G10",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        80,
+        24
+      ],
+      "cells": [
+        4,
+        2
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "part": "G10",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        160,
+        48
+      ],
+      "cells": [
+        4,
+        2
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        87,
+        23
+      ],
+      "cells": [
+        4,
+        2
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        175,
+        46
+      ],
+      "cells": [
+        4,
+        2
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "G08",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        87,
+        29
+      ],
+      "cells": [
+        4,
+        3
+      ]
+    },
+    {
+      "gun": "akb74",
+      "part": "G08",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        175,
+        58
+      ],
+      "cells": [
+        4,
+        3
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        87,
+        24
+      ],
+      "cells": [
+        4,
+        2
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        175,
+        48
+      ],
+      "cells": [
+        4,
+        2
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "G09",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        87,
+        26
+      ],
+      "cells": [
+        4,
+        3
+      ]
+    },
+    {
+      "gun": "akb103",
+      "part": "G09",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        175,
+        52
+      ],
+      "cells": [
+        4,
+        3
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        65,
+        21
+      ],
+      "cells": [
+        3,
+        2
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        131,
+        42
+      ],
+      "cells": [
+        3,
+        2
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "G03",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        65,
+        21
+      ],
+      "cells": [
+        3,
+        2
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "part": "G03",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        131,
+        42
+      ],
+      "cells": [
+        3,
+        2
+      ]
+    },
+    {
+      "gun": "umpb45",
+      "part": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        66,
+        22
+      ],
+      "cells": [
+        3,
+        2
+      ]
+    },
+    {
+      "gun": "umpb45",
+      "part": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        133,
+        44
+      ],
+      "cells": [
+        3,
+        2
+      ]
+    },
+    {
+      "gun": "umpb45",
+      "part": "G04",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        66,
+        26
+      ],
+      "cells": [
+        3,
+        3
+      ]
+    },
+    {
+      "gun": "umpb45",
+      "part": "G04",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        133,
+        52
+      ],
+      "cells": [
+        3,
+        3
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        65,
+        25
+      ],
+      "cells": [
+        3,
+        2
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        130,
+        50
+      ],
+      "cells": [
+        3,
+        2
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "G10",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        65,
+        25
+      ],
+      "cells": [
+        3,
+        2
+      ]
+    },
+    {
+      "gun": "augb",
+      "part": "G10",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        130,
+        50
+      ],
+      "cells": [
+        3,
+        2
+      ]
+    },
+    {
+      "gun": "mb14",
+      "part": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        89,
+        18
+      ],
+      "cells": [
+        5,
+        2
+      ]
+    },
+    {
+      "gun": "mb14",
+      "part": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        179,
+        36
+      ],
+      "cells": [
+        5,
+        2
+      ]
+    },
+    {
+      "gun": "mb14",
+      "part": "G11",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        89,
+        22
+      ],
+      "cells": [
+        5,
+        2
+      ]
+    },
+    {
+      "gun": "mb14",
+      "part": "G11",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        179,
+        44
+      ],
+      "cells": [
+        5,
+        2
+      ]
+    },
+    {
+      "gun": "svdb",
+      "part": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        92,
+        18
+      ],
+      "cells": [
+        5,
+        2
+      ]
+    },
+    {
+      "gun": "svdb",
+      "part": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        184,
+        36
+      ],
+      "cells": [
+        5,
+        2
+      ]
+    },
+    {
+      "gun": "rpkb",
+      "part": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        97,
+        28
+      ],
+      "cells": [
+        5,
+        2
+      ]
+    },
+    {
+      "gun": "rpkb",
+      "part": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        195,
+        56
+      ],
+      "cells": [
+        5,
+        2
+      ]
+    },
+    {
+      "gun": "rpkb",
+      "part": "G12",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        97,
+        25
+      ],
+      "cells": [
+        5,
+        2
+      ]
+    },
+    {
+      "gun": "rpkb",
+      "part": "G12",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        195,
+        50
+      ],
+      "cells": [
+        5,
+        2
+      ]
+    },
+    {
+      "gun": "rpkb",
+      "part": "G09",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        97,
+        26
+      ],
+      "cells": [
+        5,
+        3
+      ]
+    },
+    {
+      "gun": "rpkb",
+      "part": "G09",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        195,
+        52
+      ],
+      "cells": [
+        5,
+        3
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "factory",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        55,
+        18
+      ],
+      "cells": [
+        2,
+        2
+      ]
+    },
+    {
+      "gun": "vb9",
+      "part": "factory",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        110,
+        36
+      ],
+      "cells": [
+        2,
+        2
+      ]
+    },
+    {
+      "gun": "gb17",
+      "part": "G01",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        38,
+        27
+      ],
+      "cells": [
+        2,
+        2
+      ]
+    },
+    {
+      "gun": "gb17",
+      "part": "G01",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        76,
+        54
+      ],
+      "cells": [
+        2,
+        2
+      ]
+    },
+    {
+      "gun": "mb1911",
+      "part": "G02",
+      "code": "i",
+      "status": "pass",
+      "size": [
+        42,
+        21
+      ],
+      "cells": [
+        2,
+        2
+      ]
+    },
+    {
+      "gun": "mb1911",
+      "part": "G02",
+      "code": "w",
+      "status": "pass",
+      "size": [
+        84,
+        42
+      ],
+      "cells": [
+        2,
+        2
+      ]
+    }
+  ],
+  "scope": "Importer rehearsal for 21 brief configurations, not live-game screenshots or exhaustive loadout testing. Opus integrates after visual acceptance."
+}

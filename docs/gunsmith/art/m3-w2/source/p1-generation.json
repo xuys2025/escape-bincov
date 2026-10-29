@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "date": "2026-10-28",
+  "tool": "built-in image_gen",
+  "calls": 2,
+  "successful": 2,
+  "mode": "shape references for native editable pixel-grid artwork; not runtime resampling",
+  "requests": [
+    {
+      "gun": "pb90",
+      "prompt": "Use case: stylized-concept. Original pixel-art shape reference for an east-facing P90-class compact bullpup submachine gun, muzzle to the right. One complete firearm only. Rounded low polymer chassis, short forward barrel, large oval thumbhole at the front grip, support hand position forward, long translucent horizontal magazine lying on the upper rear receiver behind the optic rail, unmistakably different from a boxy Vector or a conventional vertical-magazine SMG. Hand-authored retro game pixel art with hard square pixel edges, subdued charcoal and olive-gray palette, upper-left steel highlights, dark outline, genuinely transparent background. No text, logos, inscriptions, hands, shadows, light beams or muzzle flashes. Intended native held silhouette is 25 pixels long and at most 11 pixels tall; enlarged pixel concept reference for separate native H/I/W/Q artwork.",
+      "file": "docs/gunsmith/art/m3-w2/source/pb90-design-reference.png"
+    },
+    {
+      "gun": "svdb",
+      "prompt": "Use case: stylized-concept. Original pixel-art shape reference for an SVD-class precision rifle, facing east with muzzle right. One full rifle only, unusually long slender bare barrel, dark gray stamped receiver, warm brown open skeletonized shoulder stock, curved short magazine, long slim wood fore-end. Stock must have a clearly visible empty triangular cutout. Bare barrel terminates without a flash hider. No scope, no bipod, no hands, no symbols, logos or text. Genuinely transparent background; no shadows, glow or smooth edges. Deliberate hand-made square-pixel game art, upper-left highlights, muted charcoal/gray/warm wood palette. Intended native held silhouette about 37 pixels long by 10 pixels high; enlarged reference for separate final-grid H/I/W artwork.",
+      "file": "docs/gunsmith/art/m3-w2/source/svdb-design-reference.png"
+    }
+  ],
+  "otherDrawings": "Seven P1 guns, 34 P1 parts, six ammo icons and legacy bare repairs use separately authored native-grid recipes in wave2.mjs, preserving approved source pixels where specified. P0 generation.json retains the previous successful reference call."
+}

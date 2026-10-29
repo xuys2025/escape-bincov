@@ -31,7 +31,7 @@ try {
       const inspect=()=>page.evaluate(()=>{const root=document.querySelector('#station-yard')?.shadowRoot;return{url:location.href,bincov:'__bincov'in window,station:'__station'in window,frame:getComputedStyle(document.querySelector('#frame')).visibility,sub:root?.querySelector('#hud-sub')?.textContent,quickVisible:!!root?.querySelector('.quick')&&getComputedStyle(root.querySelector('.quick')).display!=='none',save:JSON.parse(localStorage.getItem('escape-bincov.session.v2'))};});
       const first=await inspect();
       assert.equal(first.url,'https://station.test/');assert.equal(first.bincov,false);assert.equal(first.station,false);assert.equal(first.frame,'hidden');assert.equal(first.quickVisible,true);
-      assert.equal(first.save.version,8);assert.equal(first.save.expansion.version,3);
+      assert.equal(first.save.version,9);assert.equal(first.save.expansion.version,3);
       if(profile) {assert.deepEqual(first.save.profile,profile);assert.equal(first.save.legacyBackup,bytes);assert.match(first.sub,fixture==='legacy-restored'?/供电正常/:/应急供电/);}
       await page.screenshot({path:resolve(out,fixture+'.png')});
       await page.reload();await page.locator('[data-action="enter"]').click();await page.locator('#station-yard canvas').waitFor();await page.waitForTimeout(400);

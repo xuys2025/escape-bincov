@@ -1,0 +1,3349 @@
+{
+  "schema": 1,
+  "stage": "P0+P1",
+  "status": "pass",
+  "passed": 386,
+  "failed": 0,
+  "knownIssues": [],
+  "approvedExceptions": [
+    {
+      "asset": "gs-shotgun-receiver-h-v1",
+      "source": "assets/coast/v1/coast-weapon-shotgun-held-v1.png",
+      "sourceSha256": "dce0144a844cf9ceabcbdfcac859023fe8607a7c95a88cbed57ff4d3e4f69914",
+      "rgbaSha256": "1d38c8c6321498144281b275c5b9ab54772b9b413a23dd8ede045f72799209f2",
+      "w": 33,
+      "h": 10,
+      "colors": 10,
+      "normalSingleImageCap": 8,
+      "approvedOn": "2026-10-28",
+      "reviewedHead": "175b559bf0c989e8a77d1e148f4228ffff53aa6e",
+      "humanInstruction": "保留原图，作为旧整枪色数例外（推荐）",
+      "scope": "Only this accepted whole-gun original, with its fixed original PNG and RGBA hashes. Preserve zero pixel difference; no relaxation for new guns or parts."
+    }
+  ],
+  "checks": [
+    {
+      "name": "exact first-wave inventory: 269 core images and five declared legacy variants",
+      "status": "pass",
+      "detail": {
+        "core": 269,
+        "variants": 5,
+        "total": 274
+      }
+    },
+    {
+      "name": "gs-akb74-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-barrel-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b07-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-barrel-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b07-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-barrel-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b07-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-handguard-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h03-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h04-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-handguard-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h03-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-handguard-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h03-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-stock-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s03-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s04-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-stock-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s03-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-stock-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s03-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-reargrip-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-reargrip-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p03-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-reargrip-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p03-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-mag-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g08-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-mag-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g08-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-mag-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g08-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m05-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m07-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m05-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m07-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m05-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m07-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a08-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a08-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a08-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s03-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h03-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b07-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m05-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p03-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a08-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g08-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m07-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pb226-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pb226-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pb226-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-barrel-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-barrel-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-barrel-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-barrel-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-barrel-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-barrel-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-barrel-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-barrel-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-barrel-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-barrel-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-barrel-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-barrel-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-stock-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-stock-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-stock-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-stock-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-stock-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-stock-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-stock-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-stock-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-stock-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-stock-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-stock-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-stock-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-handguard-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-handguard-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-handguard-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-handguard-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-handguard-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-handguard-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-handguard-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-handguard-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-handguard-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-handguard-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-handguard-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-handguard-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-reargrip-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-reargrip-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-reargrip-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-reargrip-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-reargrip-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-reargrip-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-reargrip-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-reargrip-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-reargrip-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-mag-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-mag-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-mag-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-mag-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-mag-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-mag-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-mag-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-mag-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-mag-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-mag-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-mag-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-mag-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pb226-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pb226-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb870-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1014-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a01-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a01-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a01-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a02-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a02-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a02-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a04-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a05-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a05-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a05-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a06-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a06-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a06-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b03-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b03-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b03-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b05-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b05-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b05-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b06-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b06-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b06-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b09-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b09-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b09-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h02-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h02-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h02-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h06-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h06-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h06-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h07-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h07-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h07-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h08-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h08-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h08-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h09-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h09-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h09-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s05-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s05-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s05-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s07-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s07-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s07-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s08-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s08-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s08-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p06-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p06-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p07-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p07-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g03-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g03-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g03-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g06-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g06-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g06-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g07-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g07-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g07-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g09-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g09-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g09-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m01-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m01-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m01-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m02-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m02-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m02-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m10-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m10-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m10-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m11-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m11-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m11-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t04-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t08-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t08-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t08-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a01-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a02-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a05-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a06-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b03-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b05-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b06-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b09-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h02-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h06-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h07-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h08-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h09-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s05-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s07-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s08-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p06-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p07-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g03-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g06-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g07-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g09-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m01-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m02-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m10-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m11-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t08-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pistol-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-shotgun-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-carbine-receiver-h-v2",
+      "status": "pass"
+    },
+    {
+      "name": "gs-carbine-barrel-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-carbine-receiver-w-v2",
+      "status": "pass"
+    },
+    {
+      "name": "gs-carbine-barrel-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m01-h-pistol-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m01-i-pistol-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m01-w-pistol-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m05-h-carbine-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m07-h-carbine-v1",
+      "status": "pass"
+    },
+    {
+      "name": "all 62 P0 runtime files retain their delivered SHA-256",
+      "status": "pass",
+      "detail": {
+        "files": 62,
+        "sourceCommit": "7060db44e1da8f72f53dc0c02661c9896f05d5fc"
+      }
+    },
+    {
+      "name": "all 115 M2 runtime files retain their accepted SHA-256",
+      "status": "pass",
+      "detail": {
+        "files": 115
+      }
+    },
+    {
+      "name": "AK-74 and AK-103 receivers use exactly the same mount coordinates",
+      "status": "pass"
+    },
+    {
+      "name": "P07 is aboveReceiver and all four held rear-grip parts are omitted",
+      "status": "pass"
+    },
+    {
+      "name": "W has its own native pixels and I/W metadata agree within two pixels",
+      "status": "pass",
+      "detail": [
+        {
+          "id": "gs-akb74-receiver-w-v1",
+          "pixelsDifferentFromScaledI": 476
+        },
+        {
+          "id": "gs-akb74-barrel-factory-w-v1",
+          "pixelsDifferentFromScaledI": 269
+        },
+        {
+          "id": "gs-b07-w-v1",
+          "pixelsDifferentFromScaledI": 199
+        },
+        {
+          "id": "gs-akb74-handguard-factory-w-v1",
+          "pixelsDifferentFromScaledI": 288
+        },
+        {
+          "id": "gs-h03-w-v1",
+          "pixelsDifferentFromScaledI": 259
+        },
+        {
+          "id": "gs-h04-w-v1",
+          "pixelsDifferentFromScaledI": 301
+        },
+        {
+          "id": "gs-akb74-stock-factory-w-v1",
+          "pixelsDifferentFromScaledI": 239
+        },
+        {
+          "id": "gs-s03-w-v1",
+          "pixelsDifferentFromScaledI": 294
+        },
+        {
+          "id": "gs-s04-w-v1",
+          "pixelsDifferentFromScaledI": 511
+        },
+        {
+          "id": "gs-akb74-reargrip-factory-w-v1",
+          "pixelsDifferentFromScaledI": 120
+        },
+        {
+          "id": "gs-p03-w-v1",
+          "pixelsDifferentFromScaledI": 157
+        },
+        {
+          "id": "gs-p04-w-v1",
+          "pixelsDifferentFromScaledI": 107
+        },
+        {
+          "id": "gs-akb74-mag-factory-w-v1",
+          "pixelsDifferentFromScaledI": 135
+        },
+        {
+          "id": "gs-g08-w-v1",
+          "pixelsDifferentFromScaledI": 189
+        },
+        {
+          "id": "gs-m05-w-v1",
+          "pixelsDifferentFromScaledI": 76
+        },
+        {
+          "id": "gs-m07-w-v1",
+          "pixelsDifferentFromScaledI": 242
+        },
+        {
+          "id": "gs-a08-w-v1",
+          "pixelsDifferentFromScaledI": 56
+        },
+        {
+          "id": "gs-pb226-receiver-w-v1",
+          "pixelsDifferentFromScaledI": 621
+        },
+        {
+          "id": "gs-vb9-receiver-w-v1",
+          "pixelsDifferentFromScaledI": 526
+        },
+        {
+          "id": "gs-mpb5-receiver-w-v1",
+          "pixelsDifferentFromScaledI": 342
+        },
+        {
+          "id": "gs-mb870-receiver-w-v1",
+          "pixelsDifferentFromScaledI": 333
+        },
+        {
+          "id": "gs-mb1014-receiver-w-v1",
+          "pixelsDifferentFromScaledI": 348
+        },
+        {
+          "id": "gs-akb103-receiver-w-v1",
+          "pixelsDifferentFromScaledI": 441
+        },
+        {
+          "id": "gs-mpb5-barrel-factory-w-v1",
+          "pixelsDifferentFromScaledI": 201
+        },
+        {
+          "id": "gs-mb870-barrel-factory-w-v1",
+          "pixelsDifferentFromScaledI": 297
+        },
+        {
+          "id": "gs-mb1014-barrel-factory-w-v1",
+          "pixelsDifferentFromScaledI": 281
+        },
+        {
+          "id": "gs-akb103-barrel-factory-w-v1",
+          "pixelsDifferentFromScaledI": 233
+        },
+        {
+          "id": "gs-mpb5-stock-factory-w-v1",
+          "pixelsDifferentFromScaledI": 280
+        },
+        {
+          "id": "gs-mb870-stock-factory-w-v1",
+          "pixelsDifferentFromScaledI": 408
+        },
+        {
+          "id": "gs-mb1014-stock-factory-w-v1",
+          "pixelsDifferentFromScaledI": 438
+        },
+        {
+          "id": "gs-akb103-stock-factory-w-v1",
+          "pixelsDifferentFromScaledI": 404
+        },
+        {
+          "id": "gs-mpb5-handguard-factory-w-v1",
+          "pixelsDifferentFromScaledI": 261
+        },
+        {
+          "id": "gs-mb870-handguard-factory-w-v1",
+          "pixelsDifferentFromScaledI": 267
+        },
+        {
+          "id": "gs-mb1014-handguard-factory-w-v1",
+          "pixelsDifferentFromScaledI": 284
+        },
+        {
+          "id": "gs-akb103-handguard-factory-w-v1",
+          "pixelsDifferentFromScaledI": 316
+        },
+        {
+          "id": "gs-mb870-reargrip-factory-w-v1",
+          "pixelsDifferentFromScaledI": 186
+        },
+        {
+          "id": "gs-mb1014-reargrip-factory-w-v1",
+          "pixelsDifferentFromScaledI": 186
+        },
+        {
+          "id": "gs-akb103-reargrip-factory-w-v1",
+          "pixelsDifferentFromScaledI": 186
+        },
+        {
+          "id": "gs-mpb5-mag-factory-w-v1",
+          "pixelsDifferentFromScaledI": 154
+        },
+        {
+          "id": "gs-mb870-mag-factory-w-v1",
+          "pixelsDifferentFromScaledI": 204
+        },
+        {
+          "id": "gs-mb1014-mag-factory-w-v1",
+          "pixelsDifferentFromScaledI": 204
+        },
+        {
+          "id": "gs-akb103-mag-factory-w-v1",
+          "pixelsDifferentFromScaledI": 168
+        },
+        {
+          "id": "gs-a01-w-v1",
+          "pixelsDifferentFromScaledI": 47
+        },
+        {
+          "id": "gs-a02-w-v1",
+          "pixelsDifferentFromScaledI": 47
+        },
+        {
+          "id": "gs-a04-w-v1",
+          "pixelsDifferentFromScaledI": 53
+        },
+        {
+          "id": "gs-a05-w-v1",
+          "pixelsDifferentFromScaledI": 53
+        },
+        {
+          "id": "gs-a06-w-v1",
+          "pixelsDifferentFromScaledI": 53
+        },
+        {
+          "id": "gs-b03-w-v1",
+          "pixelsDifferentFromScaledI": 145
+        },
+        {
+          "id": "gs-b05-w-v1",
+          "pixelsDifferentFromScaledI": 217
+        },
+        {
+          "id": "gs-b06-w-v1",
+          "pixelsDifferentFromScaledI": 345
+        },
+        {
+          "id": "gs-b09-w-v1",
+          "pixelsDifferentFromScaledI": 231
+        },
+        {
+          "id": "gs-h02-w-v1",
+          "pixelsDifferentFromScaledI": 450
+        },
+        {
+          "id": "gs-h06-w-v1",
+          "pixelsDifferentFromScaledI": 241
+        },
+        {
+          "id": "gs-h07-w-v1",
+          "pixelsDifferentFromScaledI": 338
+        },
+        {
+          "id": "gs-h08-w-v1",
+          "pixelsDifferentFromScaledI": 350
+        },
+        {
+          "id": "gs-h09-w-v1",
+          "pixelsDifferentFromScaledI": 315
+        },
+        {
+          "id": "gs-s05-w-v1",
+          "pixelsDifferentFromScaledI": 162
+        },
+        {
+          "id": "gs-s07-w-v1",
+          "pixelsDifferentFromScaledI": 400
+        },
+        {
+          "id": "gs-s08-w-v1",
+          "pixelsDifferentFromScaledI": 440
+        },
+        {
+          "id": "gs-p06-w-v1",
+          "pixelsDifferentFromScaledI": 216
+        },
+        {
+          "id": "gs-p07-w-v1",
+          "pixelsDifferentFromScaledI": 236
+        },
+        {
+          "id": "gs-g03-w-v1",
+          "pixelsDifferentFromScaledI": 165
+        },
+        {
+          "id": "gs-g06-w-v1",
+          "pixelsDifferentFromScaledI": 284
+        },
+        {
+          "id": "gs-g07-w-v1",
+          "pixelsDifferentFromScaledI": 268
+        },
+        {
+          "id": "gs-g09-w-v1",
+          "pixelsDifferentFromScaledI": 280
+        },
+        {
+          "id": "gs-m01-w-v1",
+          "pixelsDifferentFromScaledI": 51
+        },
+        {
+          "id": "gs-m02-w-v1",
+          "pixelsDifferentFromScaledI": 83
+        },
+        {
+          "id": "gs-m10-w-v1",
+          "pixelsDifferentFromScaledI": 61
+        },
+        {
+          "id": "gs-m11-w-v1",
+          "pixelsDifferentFromScaledI": 125
+        },
+        {
+          "id": "gs-t04-w-v1",
+          "pixelsDifferentFromScaledI": 75
+        },
+        {
+          "id": "gs-t08-w-v1",
+          "pixelsDifferentFromScaledI": 105
+        }
+      ]
+    },
+    {
+      "name": "pb226/factory/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          18,
+          9
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "pb226/factory/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          40,
+          17
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "pb226/factory/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          80,
+          34
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "pb226/light/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          20,
+          9
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "pb226/light/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          46,
+          17
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "pb226/light/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          93,
+          34
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "pb226/precision/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          26,
+          12
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "pb226/precision/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          60,
+          23
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "pb226/precision/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          122,
+          47
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mpb5/factory/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          26,
+          10
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "mpb5/factory/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          65,
+          17
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mpb5/factory/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          131,
+          34
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mpb5/close/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          24,
+          10
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mpb5/close/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          65,
+          17
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "mpb5/close/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          132,
+          34
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mpb5/steady/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          31,
+          13
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mpb5/steady/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          78,
+          25
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mpb5/steady/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          158,
+          51
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "vb9/factory/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          24,
+          10
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "vb9/factory/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          55,
+          17
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "vb9/factory/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          110,
+          34
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "vb9/close/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          26,
+          11
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "vb9/close/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          61,
+          17
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "vb9/close/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          123,
+          34
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "vb9/range/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          29,
+          13
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "vb9/range/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          68,
+          23
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "vb9/range/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          137,
+          47
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb870/factory/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          33,
+          10
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "mb870/factory/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          88,
+          16
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb870/factory/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          177,
+          32
+        ],
+        "colors": 12
+      }
+    },
+    {
+      "name": "mb870/short/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          30,
+          10
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "mb870/short/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          82,
+          16
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb870/short/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          166,
+          32
+        ],
+        "colors": 11
+      }
+    },
+    {
+      "name": "mb870/extended/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          33,
+          13
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "mb870/extended/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          88,
+          24
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "mb870/extended/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          177,
+          50
+        ],
+        "colors": 14
+      }
+    },
+    {
+      "name": "mb1014/factory/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          32,
+          10
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "mb1014/factory/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          86,
+          16
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mb1014/factory/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          173,
+          32
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb1014/control/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          35,
+          10
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "mb1014/control/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          94,
+          16
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mb1014/control/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          190,
+          33
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb1014/extended/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          35,
+          12
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb1014/extended/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          94,
+          22
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "mb1014/extended/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          189,
+          45
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "akb74/factory/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          33,
+          10
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "akb74/factory/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          87,
+          16
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "akb74/factory/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          175,
+          32
+        ],
+        "colors": 12
+      }
+    },
+    {
+      "name": "akb74/light/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          29,
+          10
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "akb74/light/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          79,
+          16
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "akb74/light/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          160,
+          32
+        ],
+        "colors": 12
+      }
+    },
+    {
+      "name": "akb74/steady/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          41,
+          16
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "akb74/steady/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          107,
+          26
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "akb74/steady/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          216,
+          52
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "akb103/factory/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          33,
+          10
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "akb103/factory/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          87,
+          16
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "akb103/factory/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          175,
+          32
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "akb103/compact/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          29,
+          10
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "akb103/compact/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          79,
+          16
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "akb103/compact/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          160,
+          32
+        ],
+        "colors": 11
+      }
+    },
+    {
+      "name": "akb103/heavy/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          36,
+          14
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "akb103/heavy/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          96,
+          26
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "akb103/heavy/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          194,
+          52
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "pistol/factory/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          18,
+          10
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "pistol/factory/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          38,
+          17
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "pistol/factory/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          76,
+          34
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "pistol/custom/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          19,
+          13
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "pistol/custom/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          43,
+          23
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "pistol/custom/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          87,
+          47
+        ],
+        "colors": 11
+      }
+    },
+    {
+      "name": "shotgun/factory/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          33,
+          10
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "shotgun/factory/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          78,
+          17
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "shotgun/factory/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          156,
+          34
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "shotgun/custom/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          34,
+          13
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "shotgun/custom/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          85,
+          22
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "shotgun/custom/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          171,
+          45
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "carbine/factory/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          31,
+          10
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "carbine/factory/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          78,
+          17
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "carbine/factory/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          156,
+          34
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "carbine/custom/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          44,
+          10
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "carbine/custom/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          104,
+          17
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "carbine/custom/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          209,
+          34
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "gb17/factory/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          17,
+          10
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "gb17/factory/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          38,
+          17
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "gb17/factory/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          76,
+          34
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "gb17/custom/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          19,
+          10
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "gb17/custom/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          44,
+          17
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "gb17/custom/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          89,
+          34
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "mb4a1/factory/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          32,
+          11
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mb4a1/factory/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          80,
+          17
+        ],
+        "colors": 4
+      }
+    },
+    {
+      "name": "mb4a1/factory/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          160,
+          34
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mb4a1/custom/h",
+      "status": "pass",
+      "detail": {
+        "size": [
+          39,
+          11
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb4a1/custom/i",
+      "status": "pass",
+      "detail": {
+        "size": [
+          98,
+          18
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "mb4a1/custom/w",
+      "status": "pass",
+      "detail": {
+        "size": [
+          197,
+          37
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "pistol legacy zero-pixel reconstruction h",
+      "status": "pass",
+      "detail": {
+        "differentPixels": 0
+      }
+    },
+    {
+      "name": "pistol legacy zero-pixel reconstruction i",
+      "status": "pass",
+      "detail": {
+        "differentPixels": 0
+      }
+    },
+    {
+      "name": "pistol legacy zero-pixel reconstruction w",
+      "status": "pass",
+      "detail": {
+        "differentPixels": 0
+      }
+    },
+    {
+      "name": "shotgun legacy zero-pixel reconstruction h",
+      "status": "pass",
+      "detail": {
+        "differentPixels": 0
+      }
+    },
+    {
+      "name": "shotgun legacy zero-pixel reconstruction i",
+      "status": "pass",
+      "detail": {
+        "differentPixels": 0
+      }
+    },
+    {
+      "name": "shotgun legacy zero-pixel reconstruction w",
+      "status": "pass",
+      "detail": {
+        "differentPixels": 0
+      }
+    },
+    {
+      "name": "carbine legacy zero-pixel reconstruction h",
+      "status": "pass",
+      "detail": {
+        "differentPixels": 0
+      }
+    },
+    {
+      "name": "carbine legacy zero-pixel reconstruction i",
+      "status": "pass",
+      "detail": {
+        "differentPixels": 0
+      }
+    },
+    {
+      "name": "carbine legacy zero-pixel reconstruction w",
+      "status": "pass",
+      "detail": {
+        "differentPixels": 0
+      }
+    },
+    {
+      "name": "carbine v2 replaces the exact accepted receiver hashes",
+      "status": "pass"
+    },
+    {
+      "name": "integer translation contract and seven new-gun ground/HUD outputs",
+      "status": "pass"
+    },
+    {
+      "name": "all preview PNGs below one MiB",
+      "status": "pass",
+      "detail": {
+        "files": 380,
+        "maxBytes": 36005
+      }
+    },
+    {
+      "name": "byte totals",
+      "status": "pass",
+      "detail": {
+        "pngBytes": 38807,
+        "m2Bytes": 24419,
+        "cumulativeBytes": 63226
+      }
+    }
+  ],
+  "assemblies": [
+    {
+      "gun": "pb226",
+      "configuration": "factory",
+      "code": "h",
+      "w": 18,
+      "h": 9,
+      "colors": 7
+    },
+    {
+      "gun": "pb226",
+      "configuration": "factory",
+      "code": "i",
+      "w": 40,
+      "h": 17,
+      "colors": 5
+    },
+    {
+      "gun": "pb226",
+      "configuration": "factory",
+      "code": "w",
+      "w": 80,
+      "h": 34,
+      "colors": 7
+    },
+    {
+      "gun": "pb226",
+      "configuration": "light",
+      "code": "h",
+      "w": 20,
+      "h": 9,
+      "colors": 7
+    },
+    {
+      "gun": "pb226",
+      "configuration": "light",
+      "code": "i",
+      "w": 46,
+      "h": 17,
+      "colors": 5
+    },
+    {
+      "gun": "pb226",
+      "configuration": "light",
+      "code": "w",
+      "w": 93,
+      "h": 34,
+      "colors": 7
+    },
+    {
+      "gun": "pb226",
+      "configuration": "precision",
+      "code": "h",
+      "w": 26,
+      "h": 12,
+      "colors": 8
+    },
+    {
+      "gun": "pb226",
+      "configuration": "precision",
+      "code": "i",
+      "w": 60,
+      "h": 23,
+      "colors": 6
+    },
+    {
+      "gun": "pb226",
+      "configuration": "precision",
+      "code": "w",
+      "w": 122,
+      "h": 47,
+      "colors": 8
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "factory",
+      "code": "h",
+      "w": 26,
+      "h": 10,
+      "colors": 6
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "factory",
+      "code": "i",
+      "w": 65,
+      "h": 17,
+      "colors": 5
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "factory",
+      "code": "w",
+      "w": 131,
+      "h": 34,
+      "colors": 7
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "close",
+      "code": "h",
+      "w": 24,
+      "h": 10,
+      "colors": 7
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "close",
+      "code": "i",
+      "w": 65,
+      "h": 17,
+      "colors": 6
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "close",
+      "code": "w",
+      "w": 132,
+      "h": 34,
+      "colors": 8
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "steady",
+      "code": "h",
+      "w": 31,
+      "h": 13,
+      "colors": 8
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "steady",
+      "code": "i",
+      "w": 78,
+      "h": 25,
+      "colors": 7
+    },
+    {
+      "gun": "mpb5",
+      "configuration": "steady",
+      "code": "w",
+      "w": 158,
+      "h": 51,
+      "colors": 9
+    },
+    {
+      "gun": "vb9",
+      "configuration": "factory",
+      "code": "h",
+      "w": 24,
+      "h": 10,
+      "colors": 6
+    },
+    {
+      "gun": "vb9",
+      "configuration": "factory",
+      "code": "i",
+      "w": 55,
+      "h": 17,
+      "colors": 5
+    },
+    {
+      "gun": "vb9",
+      "configuration": "factory",
+      "code": "w",
+      "w": 110,
+      "h": 34,
+      "colors": 7
+    },
+    {
+      "gun": "vb9",
+      "configuration": "close",
+      "code": "h",
+      "w": 26,
+      "h": 11,
+      "colors": 7
+    },
+    {
+      "gun": "vb9",
+      "configuration": "close",
+      "code": "i",
+      "w": 61,
+      "h": 17,
+      "colors": 6
+    },
+    {
+      "gun": "vb9",
+      "configuration": "close",
+      "code": "w",
+      "w": 123,
+      "h": 34,
+      "colors": 8
+    },
+    {
+      "gun": "vb9",
+      "configuration": "range",
+      "code": "h",
+      "w": 29,
+      "h": 13,
+      "colors": 8
+    },
+    {
+      "gun": "vb9",
+      "configuration": "range",
+      "code": "i",
+      "w": 68,
+      "h": 23,
+      "colors": 6
+    },
+    {
+      "gun": "vb9",
+      "configuration": "range",
+      "code": "w",
+      "w": 137,
+      "h": 47,
+      "colors": 8
+    },
+    {
+      "gun": "mb870",
+      "configuration": "factory",
+      "code": "h",
+      "w": 33,
+      "h": 10,
+      "colors": 9
+    },
+    {
+      "gun": "mb870",
+      "configuration": "factory",
+      "code": "i",
+      "w": 88,
+      "h": 16,
+      "colors": 8
+    },
+    {
+      "gun": "mb870",
+      "configuration": "factory",
+      "code": "w",
+      "w": 177,
+      "h": 32,
+      "colors": 12
+    },
+    {
+      "gun": "mb870",
+      "configuration": "short",
+      "code": "h",
+      "w": 30,
+      "h": 10,
+      "colors": 9
+    },
+    {
+      "gun": "mb870",
+      "configuration": "short",
+      "code": "i",
+      "w": 82,
+      "h": 16,
+      "colors": 8
+    },
+    {
+      "gun": "mb870",
+      "configuration": "short",
+      "code": "w",
+      "w": 166,
+      "h": 32,
+      "colors": 11
+    },
+    {
+      "gun": "mb870",
+      "configuration": "extended",
+      "code": "h",
+      "w": 33,
+      "h": 13,
+      "colors": 10
+    },
+    {
+      "gun": "mb870",
+      "configuration": "extended",
+      "code": "i",
+      "w": 88,
+      "h": 24,
+      "colors": 10
+    },
+    {
+      "gun": "mb870",
+      "configuration": "extended",
+      "code": "w",
+      "w": 177,
+      "h": 50,
+      "colors": 14
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "factory",
+      "code": "h",
+      "w": 32,
+      "h": 10,
+      "colors": 6
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "factory",
+      "code": "i",
+      "w": 86,
+      "h": 16,
+      "colors": 5
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "factory",
+      "code": "w",
+      "w": 173,
+      "h": 32,
+      "colors": 7
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "control",
+      "code": "h",
+      "w": 35,
+      "h": 10,
+      "colors": 6
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "control",
+      "code": "i",
+      "w": 94,
+      "h": 16,
+      "colors": 5
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "control",
+      "code": "w",
+      "w": 190,
+      "h": 33,
+      "colors": 7
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "extended",
+      "code": "h",
+      "w": 35,
+      "h": 12,
+      "colors": 8
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "extended",
+      "code": "i",
+      "w": 94,
+      "h": 22,
+      "colors": 6
+    },
+    {
+      "gun": "mb1014",
+      "configuration": "extended",
+      "code": "w",
+      "w": 189,
+      "h": 45,
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "configuration": "factory",
+      "code": "h",
+      "w": 33,
+      "h": 10,
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "configuration": "factory",
+      "code": "i",
+      "w": 87,
+      "h": 16,
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "configuration": "factory",
+      "code": "w",
+      "w": 175,
+      "h": 32,
+      "colors": 12
+    },
+    {
+      "gun": "akb74",
+      "configuration": "light",
+      "code": "h",
+      "w": 29,
+      "h": 10,
+      "colors": 9
+    },
+    {
+      "gun": "akb74",
+      "configuration": "light",
+      "code": "i",
+      "w": 79,
+      "h": 16,
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "configuration": "light",
+      "code": "w",
+      "w": 160,
+      "h": 32,
+      "colors": 12
+    },
+    {
+      "gun": "akb74",
+      "configuration": "steady",
+      "code": "h",
+      "w": 41,
+      "h": 16,
+      "colors": 9
+    },
+    {
+      "gun": "akb74",
+      "configuration": "steady",
+      "code": "i",
+      "w": 107,
+      "h": 26,
+      "colors": 6
+    },
+    {
+      "gun": "akb74",
+      "configuration": "steady",
+      "code": "w",
+      "w": 216,
+      "h": 52,
+      "colors": 8
+    },
+    {
+      "gun": "akb103",
+      "configuration": "factory",
+      "code": "h",
+      "w": 33,
+      "h": 10,
+      "colors": 6
+    },
+    {
+      "gun": "akb103",
+      "configuration": "factory",
+      "code": "i",
+      "w": 87,
+      "h": 16,
+      "colors": 5
+    },
+    {
+      "gun": "akb103",
+      "configuration": "factory",
+      "code": "w",
+      "w": 175,
+      "h": 32,
+      "colors": 7
+    },
+    {
+      "gun": "akb103",
+      "configuration": "compact",
+      "code": "h",
+      "w": 29,
+      "h": 10,
+      "colors": 9
+    },
+    {
+      "gun": "akb103",
+      "configuration": "compact",
+      "code": "i",
+      "w": 79,
+      "h": 16,
+      "colors": 8
+    },
+    {
+      "gun": "akb103",
+      "configuration": "compact",
+      "code": "w",
+      "w": 160,
+      "h": 32,
+      "colors": 11
+    },
+    {
+      "gun": "akb103",
+      "configuration": "heavy",
+      "code": "h",
+      "w": 36,
+      "h": 14,
+      "colors": 8
+    },
+    {
+      "gun": "akb103",
+      "configuration": "heavy",
+      "code": "i",
+      "w": 96,
+      "h": 26,
+      "colors": 7
+    },
+    {
+      "gun": "akb103",
+      "configuration": "heavy",
+      "code": "w",
+      "w": 194,
+      "h": 52,
+      "colors": 9
+    },
+    {
+      "gun": "pistol",
+      "configuration": "factory",
+      "code": "h",
+      "w": 18,
+      "h": 10,
+      "colors": 8
+    },
+    {
+      "gun": "pistol",
+      "configuration": "factory",
+      "code": "i",
+      "w": 38,
+      "h": 17,
+      "colors": 8
+    },
+    {
+      "gun": "pistol",
+      "configuration": "factory",
+      "code": "w",
+      "w": 76,
+      "h": 34,
+      "colors": 9
+    },
+    {
+      "gun": "pistol",
+      "configuration": "custom",
+      "code": "h",
+      "w": 19,
+      "h": 13,
+      "colors": 9
+    },
+    {
+      "gun": "pistol",
+      "configuration": "custom",
+      "code": "i",
+      "w": 43,
+      "h": 23,
+      "colors": 10
+    },
+    {
+      "gun": "pistol",
+      "configuration": "custom",
+      "code": "w",
+      "w": 87,
+      "h": 47,
+      "colors": 11
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "factory",
+      "code": "h",
+      "w": 33,
+      "h": 10,
+      "colors": 10
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "factory",
+      "code": "i",
+      "w": 78,
+      "h": 17,
+      "colors": 7
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "factory",
+      "code": "w",
+      "w": 156,
+      "h": 34,
+      "colors": 8
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "custom",
+      "code": "h",
+      "w": 34,
+      "h": 13,
+      "colors": 10
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "custom",
+      "code": "i",
+      "w": 85,
+      "h": 22,
+      "colors": 9
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "custom",
+      "code": "w",
+      "w": 171,
+      "h": 45,
+      "colors": 10
+    },
+    {
+      "gun": "carbine",
+      "configuration": "factory",
+      "code": "h",
+      "w": 31,
+      "h": 10,
+      "colors": 8
+    },
+    {
+      "gun": "carbine",
+      "configuration": "factory",
+      "code": "i",
+      "w": 78,
+      "h": 17,
+      "colors": 7
+    },
+    {
+      "gun": "carbine",
+      "configuration": "factory",
+      "code": "w",
+      "w": 156,
+      "h": 34,
+      "colors": 9
+    },
+    {
+      "gun": "carbine",
+      "configuration": "custom",
+      "code": "h",
+      "w": 44,
+      "h": 10,
+      "colors": 10
+    },
+    {
+      "gun": "carbine",
+      "configuration": "custom",
+      "code": "i",
+      "w": 104,
+      "h": 17,
+      "colors": 8
+    },
+    {
+      "gun": "carbine",
+      "configuration": "custom",
+      "code": "w",
+      "w": 209,
+      "h": 34,
+      "colors": 10
+    },
+    {
+      "gun": "gb17",
+      "configuration": "factory",
+      "code": "h",
+      "w": 17,
+      "h": 10,
+      "colors": 5
+    },
+    {
+      "gun": "gb17",
+      "configuration": "factory",
+      "code": "i",
+      "w": 38,
+      "h": 17,
+      "colors": 5
+    },
+    {
+      "gun": "gb17",
+      "configuration": "factory",
+      "code": "w",
+      "w": 76,
+      "h": 34,
+      "colors": 5
+    },
+    {
+      "gun": "gb17",
+      "configuration": "custom",
+      "code": "h",
+      "w": 19,
+      "h": 10,
+      "colors": 6
+    },
+    {
+      "gun": "gb17",
+      "configuration": "custom",
+      "code": "i",
+      "w": 44,
+      "h": 17,
+      "colors": 5
+    },
+    {
+      "gun": "gb17",
+      "configuration": "custom",
+      "code": "w",
+      "w": 89,
+      "h": 34,
+      "colors": 6
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "h",
+      "w": 32,
+      "h": 11,
+      "colors": 5
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "i",
+      "w": 80,
+      "h": 17,
+      "colors": 4
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "w",
+      "w": 160,
+      "h": 34,
+      "colors": 5
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "custom",
+      "code": "h",
+      "w": 39,
+      "h": 11,
+      "colors": 8
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "custom",
+      "code": "i",
+      "w": 98,
+      "h": 18,
+      "colors": 6
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "custom",
+      "code": "w",
+      "w": 197,
+      "h": 37,
+      "colors": 7
+    }
+  ],
+  "legacyReconstruction": [
+    {
+      "gun": "pistol",
+      "code": "h",
+      "differentPixels": 0
+    },
+    {
+      "gun": "pistol",
+      "code": "i",
+      "differentPixels": 0
+    },
+    {
+      "gun": "pistol",
+      "code": "w",
+      "differentPixels": 0
+    },
+    {
+      "gun": "shotgun",
+      "code": "h",
+      "differentPixels": 0
+    },
+    {
+      "gun": "shotgun",
+      "code": "i",
+      "differentPixels": 0
+    },
+    {
+      "gun": "shotgun",
+      "code": "w",
+      "differentPixels": 0
+    },
+    {
+      "gun": "carbine",
+      "code": "h",
+      "differentPixels": 0
+    },
+    {
+      "gun": "carbine",
+      "code": "i",
+      "differentPixels": 0
+    },
+    {
+      "gun": "carbine",
+      "code": "w",
+      "differentPixels": 0
+    }
+  ],
+  "visualReview": "Geometric contact does not certify a single-ink seam or silhouette recognition; inspect per-gun color/grayscale contact sheets and assembly previews."
+}

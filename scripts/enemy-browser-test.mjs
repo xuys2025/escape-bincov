@@ -96,8 +96,8 @@ try {
             assert.equal(actual.phase, ['parley', 'corpse'].includes(phase) ? 'idle' : phase, `${viewport.width}/${name}: saved phase survives mount`);
             if (phase !== 'corpse') assert.ok(actual.cue);
             assert.equal(actual.reloading, phase === 'reload');
-            // Record v8 (gun instances) with enemy rules on, which the record says by holding enemyBackup.
-            assert.equal(actual.weapon, phase === 'parley' ? 'rifle' : archetype(role).weapon); assert.deepEqual(actual.record, { version: 8, enemyRules: true });
+            // Record v9 (gun instances, footprints that follow the magazine) with enemy rules on, which the record says by holding enemyBackup.
+            assert.equal(actual.weapon, phase === 'parley' ? 'rifle' : archetype(role).weapon); assert.deepEqual(actual.record, { version: 9, enemyRules: true });
             if (phase !== 'parley') {
                 assert.equal(actual.artStyle, role); assert.ok(phase === 'corpse' ? actual.corpseArt : actual.bodyArt);
             }

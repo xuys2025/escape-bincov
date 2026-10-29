@@ -5,6 +5,7 @@ import { decodeStoredProfile } from '../src/profile-codec';
 import { SESSION_KEY } from '../src/recovery-store';
 import type { GunEdit } from '../src/hideout-runtime';
 import { locateGun, planGunEdit, type GunEditPlan } from '../src/gunsmith/edit';
+import { ATTACHMENTS } from '../src/gunsmith/catalog';
 import { gunUids, gunWeight, nodesOf, repeatedUids } from '../src/gunsmith/instance';
 import { OFF, gun, hold, node, put, reason, yard } from './fixtures/workbench';
 
@@ -16,7 +17,7 @@ import { OFF, gun, hold, node, put, reason, yard } from './fixtures/workbench';
 /** A profile at the base with empty containers and no gun in hand. */
 function base(): D.SaveDataV1 {
     const p = D.newSave();
-    p.stash = D.createInventory(10, 6); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
+    p.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
     p.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 };
     return p;
 }
@@ -79,7 +80,7 @@ test('an install takes an owned loose part onto the gun with its uid and relief 
     assert.deepEqual([plan.preview.removals, plan.preview.moves, plan.preview.unloaded, plan.preview.refusal], [[], [], null, null]);
     assert.deepEqual(plan.preview.weight, { before: 2.9, after: gunWeight({ id: 'mb4a1', parts: m4.gun!.parts }) });
     assert.equal(plan.preview.weight.after, 3.21);
-    assert.deepEqual([plan.preview.capacity, plan.preview.size], [{ before: 30, after: 30 }, { before: { w: 4, h: 1 }, after: { w: 4, h: 1 } }]);
+    assert.deepEqual([plan.preview.capacity, plan.preview.size], [{ before: 30, after: 30 }, { before: { w: 4, h: 2 }, after: { w: 4, h: 2 } }]);
     assert.deepEqual(plan.preview.gun, { uid: 'm4', id: 'mb4a1', relief: false, where: 'stash' });
     // The relief stock stays relief on the gun: the gun can no longer be sold whole.
     assert.equal(D.itemSale(m4).restricted, true);
@@ -272,7 +273,7 @@ test('the gun must still fit where it lies, and the stash must take what comes o
     // What comes off needs room in the stash: a full stash refuses the handguard, a free 1x2 gap takes it turned.
     const full = base();
     hold(full, 'm4', 'mb4a1', [node('h01', 'H01', 'handguard')]);
-    assert.equal(D.addItem(full.stash, 'fuse', 240), 0);
+    assert.equal(D.addItem(full.stash, 'fuse', D.STASH_W * D.STASH_ROWS * D.ITEMS.fuse.stack), 0);
     r = refused(planGunEdit(full, 'm4', [{ kind: 'remove', uid: 'h01' }]), 'space');
     assert.equal(r.reason, '仓库放不下拆下的 AR 短导轨护木，请先腾出空间。');
     assert.deepEqual(r.preview!.removals, [{ uid: 'h01', id: 'H01', with: null }]);
@@ -284,7 +285,7 @@ test('the gun must still fit where it lies, and the stash must take what comes o
     const rounds28 = base();
     hold(rounds28, 'm4', 'mb4a1', [], 28, 0);
     put(rounds28.bag, { uid: 'g10', id: 'G10' });
-    assert.equal(D.addItem(rounds28.stash, 'fuse', 240), 0);
+    assert.equal(D.addItem(rounds28.stash, 'fuse', D.STASH_W * D.STASH_ROWS * D.ITEMS.fuse.stack), 0);
     assert.equal(refused(planGunEdit(rounds28, 'm4', [{ kind: 'install', uid: 'g10' }]), 'space').reason, '仓库没有空位放卸出的 8 发卡宾枪弹，请先腾出空间。');
     rounds28.stash.items[0] = { uid: 'stack', id: 'ammoR', qty: 22, x: 0, y: 0 };
     const merged = done(planGunEdit(rounds28, 'm4', [{ kind: 'install', uid: 'g10' }]));
@@ -292,7 +293,7 @@ test('the gun must still fit where it lies, and the stash must take what comes o
     conserved(rounds28, merged);
     const pistol = base();
     hold(pistol, 'g17', 'gb17', [node('g01', 'G01', 'mag')], 24, 0);
-    assert.equal(D.addItem(pistol.stash, 'fuse', 240), 0);
+    assert.equal(D.addItem(pistol.stash, 'fuse', D.STASH_W * D.STASH_ROWS * D.ITEMS.fuse.stack), 0);
     pistol.stash.items[0] = { uid: 'gap', id: 'ammo9', qty: 40, x: 0, y: 0 };
     pistol.stash.items[1] = { uid: 'free', id: 'fuse', qty: 4, x: 1, y: 0 };
     assert.equal(refused(planGunEdit(pistol, 'g17', [{ kind: 'remove', uid: 'g01' }]), 'space').reason, '仓库放不下拆下的 G17 加长匣，请先腾出空间。');
@@ -300,10 +301,13 @@ test('the gun must still fit where it lies, and the stash must take what comes o
     assert.equal(refused(planGunEdit(pistol, 'g17', [{ kind: 'remove', uid: 'g01' }]), 'space').reason, '仓库没有空位放卸出的 7 发 9 毫米弹，请先腾出空间。');
 });
 
-test('a part that is not an item yet stays on the gun: it cannot lie loose', () => {
+test('every catalog part is an item since #28 M3-06: a wave-two part comes off and lies loose', () => {
+    // planGunEdit still refuses ('loose') to take off a catalog part that is not an item, for catalog rows to come.
+    assert.ok(Object.keys(ATTACHMENTS).every(id => D.isAttachment(id)));
     const p = base();
-    hold(p, 'cb', 'carbine', [node('m05', 'M05', 'muzzle')]);
-    assert.equal(refused(planGunEdit(p, 'cb', [{ kind: 'remove', uid: 'm05' }]), 'loose').reason, '步枪消焰器暂时不能拆下。');
+    hold(p, 'cb', 'carbine', [node('h05', 'H05', 'handguard', [node('f02', 'F02', 'under')])]);
+    const plan = planGunEdit(p, 'cb', [{ kind: 'remove', uid: 'f02' }]);
+    assert.ok(plan.ok, 'F02 comes off');
 });
 
 // ---- The hideout Runtime's GunsmithSession -----------------------------------------------------------------------
