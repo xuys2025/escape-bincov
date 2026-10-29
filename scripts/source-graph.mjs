@@ -114,6 +114,7 @@ export function cyclesIn(graph) {
 export const HEADLESS_ROOTS = [
   'src/domain.ts', 'src/balance.ts', 'src/world.ts', 'src/session.ts',
   'src/recovery-store.ts', 'src/save-backup.ts',
+  'src/skill-tree-research.ts', 'src/skill-tree-mechanics.ts',
   'src/raid-runtime/runtime.ts', 'src/hideout-runtime/runtime.ts',
 ];
 const browserGlobals = new Set(['window', 'document', 'navigator', 'location', 'localStorage', 'sessionStorage', 'fetch']);

@@ -1,3 +1,23 @@
+## 2026-10-29 · #143 三分支技能：隔离研究交付
+
+起点 main `275fafd`，研究与稳定性验证基线为最新 main `cf5845e9ba0b530fe2b8be4bb69c431a8049efa3`，分支 `feat/skills-local-spike`。用户已确认提交经过测试的隔离研究版；通过 `Nekomole/escape-bincov` fork 向权威仓库发起 PR，准确 head／检查／审阅状态以承接 PR 为准。授权不包含合并 main 或额外实施正式存档接入。未迁移旧 Perk，未改正式存档或正常游戏入口。
+
+本轮已复现并修复三项：[详情与唯一反例入口](docs/tasks/skill-tree-research.md#稳定性复核已复现并修复的问题)、[stability 测试](tests/skill-tree-stability.test.ts)。死亡敌人的正极小血量被epsilon连续性放行，能按新ID重结击杀；暂停活动推进限时效果时钟；长ID事件越过检查点上限后才无法导出。现分别严格匹配权威HP、暂停只接受停止的行动时钟标记、返回候选前检查400万字符上限。保留合法极小HP、正常闲置计时与原状态不变反例；不把错误研究日志静默修复。主线同步的两处文档冲突保留双方内容，保护快照 stash `37fdf6a`。
+
+本轮最终验证：技能专项 **113/113**（新增8项），全仓 **1195/1195**（研究共113项）、本地工程守卫 **139/139**、package含严格TypeScript通过。300随机构筑／9600条件组合、200不规则时间分片／读档、当前全部20枪种与弹药、逐嵌套对象未知字段均通过。四配置试验页通过；100轮＋1800次操作无脚本错误、存储访问／网络请求；强制GC后DOM435、监听器61保持，堆1361840→1513988字节，未声称长期泄漏验收。日志为 `test-results/local-prep/skill-tree-stability-{targeted,full-tests,ci,package}.log`，首败为 `*-repro.log` 和 `*-size-repro.log`；浏览器原始结果在 `test-results/skill-tree-lab/stability-browser-results.json`。正式游戏2170构建输入不含研究模块，脚本与打包HTML一致，SHA-256 `83750c8bf465fc90e2abcaabf73e8478a8ea087761ef06f3a2e6b34746526fc3`，证据 `skill-tree-stability-build.json`。完整正式浏览器、真实旧端、真机及数小时连续游玩仍未验。
+
+当前实现：[48 项候选与唯一机制说明](docs/tasks/skill-tree-research.md)。目录保持旧 24 项稳定前缀，增加至每支16项；各支最多15点，中层5点／专精10点门槛，2点机制节点独立互斥。`skill-tree.ts` 增加可脱离原对象的效果预编译；经验日志冻结出击配置并核对原生来源、幂等与条件触发。新增 `skill-tree-mechanics.ts` 从真实库存／枪械配置重放自动续装、废料压弹、代谢回血、应急绷带、标记回收和有限扫描，复用既有 `reloadMagazine`、`addItem` 和严格库存校验；追踪救济来源、保护名单、每局预算、时间分片与满包整笔回滚。经验与资源仍是隔离的两个研究契约，未来正式组合必须走既有事务。随机额外物资仍仅为计划；正式游戏未导入任何研究组件。
+
+上一扩充阶段验证（main `03cfb77`、Node24.19.0／pnpm11.19.0／Windows）：1161单测／113守卫／package通过；旧日志为 `test-results/local-prep/skill-tree-expanded-final-{tests,ci,package}.log`。108套构筑／12960条混合命令等仍在本轮重新执行。独立试验页 `test-results/skill-tree-lab/lab.html` 使用真实研究模块，重建为 `node test-results/skill-tree-lab/build.mjs`，四配置检查为 `node test-results/skill-tree-lab/browser-check.mjs`，100轮压力为 `node test-results/skill-tree-lab/stability-browser.mjs`（先加载本地 Enter-Dev.ps1）；原始素材与辅助脚本均为忽略的本地证据，不属于正式UI。
+
+首败与修复：早期修正未知输入类型收窄、数组事件种类被键转换接受及必需时间为 null 的漏洞，并保留反例。首次 package 的中文字体覆盖失败通过移除规则中的显示文案解决，中文名称集中在候选说明；没有改字体或关闭守卫。本次扩充的首次全测因测试夹具重复学习满级技能失败，修正夹具后全过；原日志保留 `skill-tree-expanded-tests-first.log`。资源测试曾因电池占两格的满包夹具重叠被严格拒绝，改为现有放置函数生成合法满包后验证回滚。规则核心仍接受纯模块守卫，资源模块及其共享解码依赖接受传递 headless 守卫；没有为研究放宽 DOM 检查。
+
+上一扩充阶段的构建隔离与性能历史：main `03cfb77` 的1646输入未含研究模块，旧HTML SHA-256 `a1904981…c21c45`；当前制品以本轮新证明为准。相同合成日志的旧／预编译实现（各7次中位数）：6000条27.86→13.14ms，8192条36.79→16.65ms，10万次效果计算约65ms，数据为 `test-results/local-prep/skill-tree-expanded-benchmark.json`。这不是当前主线的正式战斗性能，也没有改变全量回放不宜生产逐帧使用的边界。
+
+接入前仍需解决：旧 Perk 的逐项迁移／补偿；在既有 `SaveSession` 同一事务中提交角色、技能和世界，接入版本与原始备份；物资拆分／合堆后的原生来源传播；正式触发时钟与暴击快照来源；实际掉落、提示范围、声音与负重调用点。研究格式的 `progress` 由日志重放验证，不能作为可选字段直接塞入现有存档。已有测试证明正式扩展解码器拒绝技能字段、当前暴击来源白名单拒绝新来源，因此不能靠添加可选属性或直接叠加概率接入。现有体质训练量混合了运动、恢复和训练效率／递减，也不能直接当作新生存经验；需从正式事件计量实际生命变化、物品类型和合格伤害。
+
+下一步入口：[候选与机制说明](docs/tasks/skill-tree-research.md)、[规则与计划](src/skill-tree.ts)、[经验日志](src/skill-tree-research.ts)、[资源机制](src/skill-tree-mechanics.ts) 及四组测试（含 stability）。按本研究范围处理 PR 审阅与 CI；正式接入合同及阶段验收仍归 #143，不能把研究组件当作完整玩法交付或自行合并。同步 main 前的保护快照与忽略目录中的补丁只作历史备份，提交后以 PR 源码为准。
+
 ## 2026-10-29 · S03c 楼梯标签避让可见敌人
 
 承接 [PR #146](https://github.com/xuys2025/escape-bincov/pull/146)，原分支 `fix/stair-label-occlusion`，基线 main `03cfb775`。场景仅投影当前已呈现敌人身体，宿主按真实 DOM 字框在碰撞时暂隐标签，离开后恢复；玩家、商场、地图、揭示、存档规则不变。S03c 删除已知缺口并要求 0 遮挡像素，两档桌面/短高触屏通过；旧版独立硬断言测到 85/74 个遮挡像素。1056 单测/113 工程守卫/package 通过；完整空间 20/22（仅两尺寸 S04d）、商场 24/25（仅 M21），既有墙过渡整像素首帧断言失败也在旧版复现，未改其规则或断言。真实前/中/后截图、哈希、首败和边界见[原任务书](docs/tasks/todo-stair-label-occlusion.md)。准确 head/CI 由原 PR 正文维护；未合并、未发布、真人/真机未验，总单由主代理维护。

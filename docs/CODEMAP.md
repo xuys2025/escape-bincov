@@ -16,6 +16,7 @@
 | 新持久字段、迁移、导入、恢复 | [存档](#存档) | 活动行动字段必须核对两端捕获/恢复 |
 | 负重、上限等画面读数不一致 | [派生读数](#派生读数) | 先分清实时模拟、最近检查点与失败候选，再查格式化 |
 | 楼梯 HUD 标签避让 | [scene.ts](../src/coast-view/scene.ts) 的 `enemyBodyViews` → [host.ts](../src/coast-view/host.ts) 的 `stairNames` | 已呈现身体边界与真实 DOM 字框；可见性、离屏/换层及像素正反例见 [S03c](../scripts/issue26-spatial-test.mjs) |
+| 三分支技能的本地隔离研究 | [技能研究](#技能研究) | 尚未接入正式游戏，不据此修改现有存档或 Perk |
 
 地图/碰撞从 [expansion-worlds.ts](../src/expansion-worlds.ts) 的 `resolveExpansionWorld` 和 [spatial.ts](../src/spatial.ts) 进入；画面/资源从 [station-view/route.ts](../src/station-view/route.ts)、[coast-view/sample.ts](../src/coast-view/sample.ts) 追宿主；两者经 [navigation.ts](../src/navigation.ts) 请页面（[ui.ts](../src/ui.ts) 注册）换画面，不直接导入页面，轮用 [pixi-app.ts](../src/pixi-app.ts) 的同一个 Pixi 应用。只改素材时无需先读交易和迁移实现。村庄样板范围唯一来源为纯数据 [sample-area.ts](../src/sample-area.ts)，[raid-areas.ts](../src/raid-areas.ts) 的 `villageSeed` 与 [scene.ts](../src/coast-view/scene.ts) 直接消费；固定选种和范围边界见 [raid-areas.test.ts](../tests/raid-areas.test.ts)，依赖方向由 [source-health.test.mjs](../scripts/ci/source-health.test.mjs) 守卫。区域身份由世界定义的 `region.id` 提供（[居民楼](../src/building-world.ts)与商场相同）；[投影](../src/raid-runtime/presentation.ts)不按显示名称补身份。楼梯方向的中文前缀依赖仍归 #60 Q-E06。
 
@@ -24,6 +25,12 @@
 商场布局：骨架与各版本世界在 [mall-world.ts](../src/mall-world.ts)（`mallWorldV2`～`mallWorldV4`），家具类型与二、三版家具表在 [mall-layout-v2.ts](../src/mall-layout-v2.ts)，四版家具表与“哪些区域已布置”在 [mall-layout-v4.ts](../src/mall-layout-v4.ts)；新出击选哪一版看 [raid-areas.ts](../src/raid-areas.ts) 的 `sampleMallLayout`。改碰撞要开新版本（已存行动按原版本恢复），只换图不用。画面按格选素材在 [coast-view/mall-dressing.ts](../src/coast-view/mall-dressing.ts)（四版家具选 Sol 的 M2 素材，暂不用的模块和替代见 `SAMPLE_STAND_IN`），[art/mall-furniture.ts](../src/coast-view/art/mall-furniture.ts) 的程序绘制件是同画布的后备；约束测试 [mall-layout-v2.test.ts](../tests/mall-layout-v2.test.ts)、[mall-layout-v4.test.ts](../tests/mall-layout-v4.test.ts)，记录见[商场 2.5D](mall-2-5d/README.md)。
 
 水产站玩家空手姿态由 [station-view/art/player.ts](../src/station-view/art/player.ts) 的 `paintStationPlayer` 补齐，接入在 `HideoutScene.playerTex`，回归见 [station-browser-test.mjs](../scripts/station-browser-test.mjs) 的 H15（CI 入口 `test:station-hands`）。
+
+## 技能研究
+
+[#143](https://github.com/xuys2025/escape-bincov/issues/143) 的隔离研究实现：[48 项候选与机制约束](tasks/skill-tree-research.md)。目录与稳定 ID 在 [skill-tree-catalog.ts](../src/skill-tree-catalog.ts)；等级、专用点、学习／手册／重配计划与预编译效果在 [skill-tree.ts](../src/skill-tree.ts)；冻结出击配置、权威事实事件与严格经验检查点在 [skill-tree-research.ts](../src/skill-tree-research.ts)；六个机制节点的实际资源回放在 [skill-tree-mechanics.ts](../src/skill-tree-mechanics.ts)，复用现有库存与装填规则。没有 DOM、存储或正式 Runtime 依赖，正常游戏没有导入它们；组件版本 1 不是正式存档版本。
+
+反例与验证见 [skill-tree.test.ts](../tests/skill-tree.test.ts)、[skill-tree-research.test.ts](../tests/skill-tree-research.test.ts)、[skill-tree-mechanics.test.ts](../tests/skill-tree-mechanics.test.ts) 与 [skill-tree-stability.test.ts](../tests/skill-tree-stability.test.ts)，包括实际伤害／治疗、资源守恒、自动治疗不训练、时间分片、死亡边界、暂停与容量拒绝。完整回放只用于研究，不是生产逐帧保存方案；旧 Perk 迁移、正式事务接入、原生物资拆分后的来源传播和真实世界掉落须先完成契约。当前范围与验证见 [handoff 顶部](../handoff.md)。
 
 ## 交易
 
