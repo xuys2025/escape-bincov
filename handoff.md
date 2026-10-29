@@ -1,3 +1,7 @@
+## 2026-10-29 · S03c 楼梯标签避让可见敌人
+
+承接 [PR #146](https://github.com/xuys2025/escape-bincov/pull/146)，原分支 `fix/stair-label-occlusion`，基线 main `03cfb775`。场景仅投影当前已呈现敌人身体，宿主按真实 DOM 字框在碰撞时暂隐标签，离开后恢复；玩家、商场、地图、揭示、存档规则不变。S03c 删除已知缺口并要求 0 遮挡像素，两档桌面/短高触屏通过；旧版独立硬断言测到 85/74 个遮挡像素。1056 单测/113 工程守卫/package 通过；完整空间 20/22（仅两尺寸 S04d）、商场 24/25（仅 M21），既有墙过渡整像素首帧断言失败也在旧版复现，未改其规则或断言。真实前/中/后截图、哈希、首败和边界见[原任务书](docs/tasks/todo-stair-label-occlusion.md)。准确 head/CI 由原 PR 正文维护；未合并、未发布、真人/真机未验，总单由主代理维护。
+
 ## 2026-10-29 · SAMPLE_AREA 共享数据边界（PR #145）
 
 在 `refactor/sample-area-boundary` 续作 [PR #145](https://github.com/xuys2025/escape-bincov/pull/145)，基线 main `03cfb775`。零依赖的 `src/sample-area.ts` 是唯一世界像素范围来源，raid-areas 与 scene 直接消费；appearance 不转发，scene 本体未改。固定输入的旧版选种、400 次/fallback、URL入口与依赖反例见 [原任务书](docs/tasks/todo-sample-area-boundary.md)。本地1059单测、115守卫、package及建筑/通道/落点/默认入口/村庄两档专项通过；商场样板当前和旧393客户端均23/25，同两断言失败，数值差异及准确head/CI见任务书与原PR。只承接 #60 Q-E02 的这一项；未合并、未发布，不接管区域注册、地图/存档或楼梯方向。
