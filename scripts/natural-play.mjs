@@ -7,9 +7,10 @@ import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 import { findPath, lineOfSight } from '../src/world.ts';
 import { corridor, spacePath } from '../src/spatial.ts';
-import { ITEMS, fits } from '../src/domain.ts';
 import { browserOptions } from './browser-options.mjs';
-import { buyAffordable } from './inventory-actions.mjs';
+import { readNaturalPlayState } from './natural-play-state.mjs';
+import { prepareNaturalLoadout, PreparationBlocked, naturalLootDestination } from './natural-play-preparation.mjs';
+import { NATURAL_PREPARATION_POLICY, NATURAL_RETREAT_POLICY, naturalRetreatReason, chooseSafeContainer, confirmedNativeTransfer } from './natural-play-policy.mjs';
 
 const minutes = Number(process.env.BINCOV_PLAY_MINUTES || 10);
 assert.ok(minutes >= 1 && minutes <= 60);
@@ -19,7 +20,8 @@ assert.ok(Number.isInteger(firstSeed) && firstSeed > 0 && firstSeed <= 0xfffffff
 const entry = resolve(process.env.BINCOV_PLAY_ENTRY || 'dist/index.html');
 assert.ok(['coast', 'buildings'].includes(world), 'BINCOV_PLAY_WORLD must be coast or buildings');
 const report = { htmlSha256: createHash('sha256').update(await readFile(entry)).digest('hex'), entry, startedAt: new Date().toISOString(), minutes, world, firstSeed,
-  methodology: `Automated real-time session on ${world === 'coast' ? 'the classic coast' : 'the layered street with new enemy encounters'} (2.5D view). Test hook is read-only: no teleports, no clock changes, no changes to health, enemies, inventory or RNG. All actions use visible buttons and real keyboard/mouse, including E opening and native inventory drag for crates and corpses. This is not a human fun/balance evaluation.`, enemyPhases: {}, containerLoot: { opened: [], transfers: [], threatenedClosures: 0 }, samples: [], outcomes: [], errors: [], externalRequests: [] };
+  methodology: `Automated real-time session on ${world === 'coast' ? 'the classic coast' : 'the layered street with new enemy encounters'} (2.5D view). Test hook is read-only: no teleports, no clock changes, no changes to health, enemies, inventory or RNG. All actions use visible buttons and real keyboard/mouse, including E opening and native inventory drag for crates and corpses. This is not a human fun/balance evaluation.`, preparationPolicy: NATURAL_PREPARATION_POLICY, preparation: [], decisions: [], timing: { method: 'Wall intervals attributed to the previous observed UI state (including its UI actions); simulation sums nonnegative published run-clock deltas. Neither is a GPU/active-fun measurement.', runWallSeconds: 0, baseWallSeconds: 0, resultWallSeconds: 0, otherWallSeconds: 0, simulationSeconds: 0 }, enemyPhases: {}, containerLoot: { opened: [], transfers: [], threatenedClosures: 0 }, samples: [], outcomes: [], errors: [], externalRequests: [] };
+report.retreatPolicy = NATURAL_RETREAT_POLICY;
 const out = resolve(process.env.BINCOV_PLAY_OUT || 'test-results'); await mkdir(out, { recursive: true });
 const browser = await chromium.launch(browserOptions); report.browser = browser.version();
 const context = await browser.newContext({ viewport: { width: 1280, height: 720 }, offline: true });
@@ -31,44 +33,29 @@ const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
 const space = s => ({ definition: s.map, doors: s.doors, highTide: s.high });
 const route = (s, to) => world === 'coast' ? findPath(s, to, s.high) : spacePath(space(s), s, to);
 const sight = (s, to) => world === 'coast' ? lineOfSight(s, to) : corridor(space(s), s, to, 'sight');
-let held = new Set(), runNumber = 0, goal = null, path = [], repathAt = 0, lastSample = 0, streetStep = 0;
+let held = new Set(), runNumber = 0, goal = null, path = [], repathAt = 0, lastSample = 0, streetStep = 0, retreating = false;
 const streetApproach = [{ x:6.5*32,y:24.5*32 },{ x:20.5*32,y:24.5*32 }];
-report.observationPolicy = 'Before the first street windup: walk the authored public west/cross street, approach a visible new enemy, and wait for its real preparation before shooting it. No game-state mutations.';
+report.observationPolicy = 'First complete a native transfer at a dynamically reachable container whose route passes the original 220px/LOS danger boundary. Then approach a visible new enemy and observe its actual windup. No game-state mutations.';
 let visited = new Set(), lastPosition, stuckAt = Date.now(), lastHeal = 0;
+let observedAt = null, observedState = 'hideout', observedRun = null, observedSimulation = 0;
+function observeTime(s, now) {
+  const key = observedState === 'run' ? 'runWallSeconds' : observedState === 'hideout' ? 'baseWallSeconds' : observedState === 'result' ? 'resultWallSeconds' : 'otherWallSeconds';
+  if (observedAt !== null) report.timing[key] += Math.max(0, now - observedAt) / 1000;
+  if (s?.state === 'run') report.timing.simulationSeconds += Math.max(0, s.elapsed - (s.runId === observedRun ? observedSimulation : 0));
+  observedAt = now;
+  if (s) { observedState = s.state; observedRun = s.runId ?? null; observedSimulation = s.elapsed ?? 0; }
+}
 async function keys(next) {
   for (const key of held) if (!next.has(key)) await page.keyboard.up(key);
   for (const key of next) if (!held.has(key)) await page.keyboard.down(key);
   held = next;
 }
-/** Read-only view of the published frame (the raid host's last batch); nothing here changes the world. */
+/** Read the published frame and the test driver's cumulative total; nothing here changes the world. */
 async function snapshot() {
-  return page.evaluate(() => {
-    const a = window.__bincov.app, h = window.__bincovSample?.host;
-    if (a.state !== 'run' || !h?.lastBatch) return { state: a.state, result: a.save.lastResult, stats: a.save.stats };
-    const b = h.lastBatch, f = b.frame, hud = f.hud, w = b.stamp.world, context = h.services.lootContext();
-    const inventory = c => c.id === context?.containerId ? h.services.lootInventory({ runId: w.runId, mapId: w.mapId, kind: 'container', id: c.id }) : null;
-    return { state: a.state, hp: hud.hp, bleeding: hud.bleeding, elapsed: b.stamp.simulationTime, high: hud.highTide,
-      map: { id: w.mapId, tile: b.map.tile, cells: b.map.cells, doors: b.map.doors, entries: b.map.entries }, doors: f.doors,
-      kills: h.eventLog.filter(e => e.type === 'death' && e.detail.uid !== 'player' && (e.detail.killer === undefined || e.detail.killer === 'player')).length,
-      mag: hud.weapon.mag, reload: hud.weapon.reloading, cooldown: f.player.state.attackCooldown, x: f.player.x, y: f.player.y,
-      exits: b.map.exits.map(e => ({ ...e.at, id: e.id, name: e.name })), loot: f.loot.map(l => ({ x: l.x, y: l.y, id: l.item })),
-      overlay: h.panel, saveError: !!document.querySelector('.coast-sample [data-do="retry-save"], .coast-sample [data-do="retry-settlement"]'),
-      lootContext: context, bag: a.loadout.bag,
-      containers: f.containers.map(c => ({ id: c.id, kind: c.kind, x: c.x, y: c.y, items: c.totalQty, inventory: inventory(c) })),
-      enemies: f.actors.filter(e => e.alive).map(e => ({ x: e.x, y: e.y, id: e.kind, tactics: e.tactics })),
-      ammo: a.loadout.bag.items.filter(i => i.id === 'ammo9').reduce((sum, i) => sum + i.qty, 0),
-      medical: a.loadout.bag.items.filter(i => ['medkit', 'bandage'].includes(i.id)).reduce((sum, i) => sum + i.qty, 0),
-      pending: !!a.pendingSettlement };
-  });
+  return page.evaluate(readNaturalPlayState);
 }
 /** Client point of a world point on the chest plane, where shots are aimed. */
 const screenOf = point => page.evaluate(p => window.__bincovSample.host.view.worldToClient({ x: p.x, y: p.y - 22 }), point);
-function destination(inv, item) {
-  const stack = inv.items.find(other => other.id === item.id && !!other.relief === !!item.relief && other.qty + item.qty <= ITEMS[item.id].stack);
-  if (stack) return { x: stack.x, y: stack.y };
-  for (let y = 0; y < inv.h; y++) for (let x = 0; x < inv.w; x++) if (fits(inv, item.id, x, y, undefined, !!item.rotated)) return { x, y };
-  return null;
-}
 async function lootOpenContainer(s) {
   await keys(new Set());
   const container = s.containers.find(c => c.id === s.lootContext?.containerId);
@@ -82,7 +69,7 @@ async function lootOpenContainer(s) {
     visited.add(`${container.x},${container.y}`); goal = null;
     await page.keyboard.press('Escape'); return;
   }
-  const candidate = container.inventory.items.map(item => ({ item, cell: destination(s.bag, item) })).find(candidate => candidate.cell);
+  const candidate = container.inventory.items.map(item => ({ item, cell: naturalLootDestination(s.bag, item) })).find(candidate => candidate.cell);
   if (!candidate) { visited.add(`${container.x},${container.y}`); goal = null; await page.keyboard.press('Escape'); return; }
   const { item, cell } = candidate;
   // The panel places an item by the ghost's top-left corner: grab just inside the item, release just inside the cell.
@@ -96,16 +83,21 @@ async function lootOpenContainer(s) {
   await page.mouse.move(from.x + 22, from.y + 22, { steps: 3 }); await page.mouse.move(to.x, to.y, { steps: 6 }); await page.mouse.up();
   await page.waitForTimeout(80);
   const after = await snapshot();
-  const remaining = after.containers?.find(c => c.id === container.id)?.inventory.items.find(i => i.uid === item.uid);
-  if (!remaining) report.containerLoot.transfers.push({ run: runNumber, containerId: container.id, kind: container.kind, item: item.id, qty: item.qty, elapsed: s.elapsed });
+  if (confirmedNativeTransfer(s, after, container.id, item)) {
+    const first = report.containerLoot.transfers.length === 0;
+    report.containerLoot.transfers.push({ run: runNumber, containerId: container.id, kind: container.kind, item: item.id, qty: item.qty, elapsed: s.elapsed });
+    if (first) { visited.add(`${container.x},${container.y}`); goal = null; await page.keyboard.press('Escape'); }
+  }
   else { visited.add(`${container.x},${container.y}`); goal = null; await page.keyboard.press('Escape'); }
 }
 try {
   await page.goto(pathToFileURL(entry).href + '?test=1&entry=tabs');
   await action('enter').click();
   const start = Date.now(), deadline = start + minutes * 60000;
+  report.timing.playStartedAt = new Date(start).toISOString(); observedAt = start;
   while (Date.now() < deadline || (await snapshot()).state === 'run') {
     const s = await snapshot(), now = Date.now();
+    observeTime(s, now);
     if (s.pending && s.state === 'run') {
       // Say why the terminal write failed: the session's storage error and the Runtime's last rejections.
       const why = await page.evaluate(() => { const a = window.__bincov.app, h = window.__bincovSample?.host;
@@ -121,20 +113,11 @@ try {
     }
     if (s.state === 'hideout') {
       if (now >= deadline) break;
-      await action('tab', 'arms').click();
-      await buyAffordable(page, 'ammo9', 2);
-      await action('tab', 'med').click();
-      await buyAffordable(page, 'medkit');
-      await action('tab', 'gear').click();
-      for (let i = 0; i < 12; i++) {
-        const items = page.locator('[data-source="stash"][data-uid]'); const count = await items.count();
-        if (!count) break;
-        await items.first().dblclick(); if (await items.count() >= count) break;
-      }
+      await prepareNaturalLoadout(page, report.preparation, runNumber + 1);
       await page.locator('#run-world').selectOption(world);
       await page.locator('#seed').fill(String(firstSeed + runNumber++)); await action('deploy').click();
       await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch, null, { timeout: 30000 });
-      goal = null; path = []; visited = new Set(); lastPosition = null; stuckAt = now; streetStep = 0;
+      goal = null; path = []; visited = new Set(); lastPosition = null; stuckAt = now; streetStep = 0; retreating = false;
       continue;
     }
     if (s.state !== 'run') throw new Error('Unexpected state ' + s.state);
@@ -156,7 +139,7 @@ try {
       await keys(new Set()); await page.keyboard.press('Escape'); continue;
     }
     if (now - lastSample > 30000) {
-      const sample = { realSeconds: Math.round((now - start) / 1000), run: runNumber, elapsed: Math.round(s.elapsed), hp: Math.round(s.hp), kills: s.kills, highTide: s.high, x: Math.round(s.x), y: Math.round(s.y) };
+      const sample = { realSeconds: Math.round((now - start) / 1000), run: runNumber, elapsed: Math.round(s.elapsed), hp: Math.round(s.hp), kills: s.kills, highTide: s.high, ammo: s.ammo, medical: s.medical, goal: goal?.id ?? null, x: Math.round(s.x), y: Math.round(s.y) };
       report.samples.push(sample); console.log('PLAY', JSON.stringify(sample)); lastSample = now;
       await writeFile(resolve(out, 'natural-play-progress.json'), JSON.stringify(report, null, 2));
     }
@@ -164,17 +147,35 @@ try {
     if (s.mag === 0 && s.ammo && !s.reload) await page.keyboard.press('r');
     const target = s.enemies.filter(e => dist(e, s) < 430 && sight(s, e)).sort((a, b) => dist(a, s) - dist(b, s))[0];
     const observedWindup = Object.keys(report.enemyPhases).some(key => key.endsWith('/windup'));
-    const waitingForTell = world === 'buildings' && !observedWindup;
-    if (target && !(waitingForTell && target.tactics) && s.mag && !s.reload && s.cooldown <= 0) {
+    const needsFirstLoot = report.containerLoot.transfers.length === 0;
+    const waitingForTell = world === 'buildings' && !observedWindup && !needsFirstLoot;
+    if (target && (!needsFirstLoot || dist(target, s) < 220) && !(waitingForTell && target.tactics) && s.mag && !s.reload && s.cooldown <= 0) {
       const { x, y } = await screenOf(target);
       if (x > 0 && x < 1280 && y > 0 && y < 720) await page.mouse.click(x, y, { delay: 40 });
     }
-    const evacuate = now >= deadline || s.elapsed >= 550 || (s.hp < 35 && !s.medical) || (!s.mag && !s.ammo);
+    const retreatReason = naturalRetreatReason(s);
+    if (!retreating && retreatReason) report.decisions.push({ run: runNumber, elapsed: s.elapsed, reason: retreatReason });
+    retreating ||= !!retreatReason;
+    const evacuate = retreating || now >= deadline || s.elapsed >= 550;
     if (evacuate) {
       goal = [...s.exits].sort((a, b) => dist(a, s) - dist(b, s))[0] ?? s.map.entries[0]?.at;
       if (dist(goal, s) < 43) {
         await keys(new Set()); await page.keyboard.down('e'); await page.waitForTimeout(3300); await page.keyboard.up('e'); continue;
       }
+    } else if (needsFirstLoot) {
+      if (goal && dist(goal, s) < 35) {
+        await keys(new Set());
+        if (s.interaction?.kind === 'container') {
+          await page.keyboard.press('e', { delay: 70 });
+          if ((await snapshot()).overlay === 'loot') continue;
+        }
+        report.decisions.push({ run: runNumber, elapsed: s.elapsed, reason: 'first-loot-interaction-unavailable', target: goal.id, interaction: s.interaction?.kind ?? null });
+        visited.add(`${goal.x},${goal.y}`); goal = null;
+      }
+      const chosen = chooseSafeContainer(s, visited, route, sight);
+      if (!chosen) throw new Error('Natural first loot blocked: no live route satisfies the original 220px/LOS danger boundary');
+      if (goal?.id !== chosen.container.id) report.decisions.push({ run: runNumber, elapsed: s.elapsed, reason: 'safe-first-container', target: chosen.container.id, routePoints: chosen.path.length });
+      goal = chosen.container;
     } else if (waitingForTell && s.map.id === 'coast' && streetStep < streetApproach.length) {
       if(dist(streetApproach[streetStep],s)<35)streetStep++;
       goal=streetApproach[Math.min(streetStep,streetApproach.length-1)];
@@ -189,9 +190,11 @@ try {
         if ((await snapshot()).overlay === 'loot') continue;
         visited.add(`${goal.x},${goal.y}`);
       }
-      const choices = [...s.containers.filter(c => c.items && (world === 'coast' && !s.high || route(s, c).length)).map(c => ({ ...c, container: true })), ...s.loot]
-        .filter(l => !visited.has(`${l.x},${l.y}`) && !s.enemies.some(e => dist(e, l) < 100));
-      goal = choices.sort((a, b) => dist(a, s) * (a.container ? .55 : 1) - dist(b, s) * (b.container ? .55 : 1))[0] ?? s.exits[0];
+      // Later looting uses the same live route/danger boundary as the first native transfer.
+      const choices = [...s.containers, ...s.loot.map(l => ({ ...l, id: `ground-${l.id}-${l.x},${l.y}`, items: 1 }))];
+      const chosen = chooseSafeContainer({ ...s, containers: choices }, visited, route, sight);
+      if (chosen) goal = chosen.container;
+      else { retreating = true; goal = null; await keys(new Set()); continue; }
     }
     if (!lastPosition || dist(lastPosition, s) > 10) { lastPosition = { x: s.x, y: s.y }; stuckAt = now; }
     if (now - stuckAt > 7000) { visited.add(`${goal.x},${goal.y}`); goal = null; stuckAt = now; await keys(new Set()); continue; }
@@ -200,19 +203,22 @@ try {
     const point = path[0] ?? goal, next = new Set();
     if (point.x - s.x > 6) next.add('d'); if (point.x - s.x < -6) next.add('a');
     if (point.y - s.y > 6) next.add('s'); if (point.y - s.y < -6) next.add('w');
+    if (evacuate && next.size) next.add('Shift');
     await keys(next); await page.waitForTimeout(120);
     if (now > deadline + 150000) throw new Error('Could not finish the final run within the session limit');
   }
   await keys(new Set());
   const final = await snapshot();
+  report.finalStats = final.stats;
   if (final.state === 'result') report.outcomes.push(final.result);
   await page.screenshot({ path: resolve(out, 'natural-play-end.png') });
   assert.deepEqual(report.errors, []); assert.deepEqual(report.externalRequests, []);
   assert.ok(report.containerLoot.transfers.length > 0, 'Natural play must visibly open a container and complete at least one native drag transfer');
   if (world === 'buildings') assert.ok(Object.keys(report.enemyPhases).some(key => key.endsWith('/windup')), 'observe a new enemy preparing an attack during real play');
-  report.status = 'passed'; report.finalStats = final.stats;
-} catch (error) { report.status = 'failed'; report.failure = error.stack; console.error(error); process.exitCode = 1; }
+  report.status = 'passed';
+} catch (error) { report.status = 'failed'; report.failure = error.stack; if (error instanceof PreparationBlocked) report.preparationBlocked = { reason: error.reason, facts: error.facts }; console.error(error); process.exitCode = 1; }
 finally {
+  observeTime(null, Date.now());
   await keys(new Set()).catch(() => {}); await context.close(); await browser.close();
   report.finishedAt = new Date().toISOString(); await writeFile(resolve(out, 'natural-play-report.json'), JSON.stringify(report, null, 2));
 }

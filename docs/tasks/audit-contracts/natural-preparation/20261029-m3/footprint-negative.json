@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "method": "Same placement callback, replacing only the actual item argument with its old item.id argument. Real M3 G17 + G01 magazine: 2x2; target inventory: 2x1.",
+  "actualSize": {
+    "w": 2,
+    "h": 2
+  },
+  "legacyDestination": {
+    "x": 0,
+    "y": 0
+  },
+  "fixedDestination": null,
+  "inputUnchanged": true
+}

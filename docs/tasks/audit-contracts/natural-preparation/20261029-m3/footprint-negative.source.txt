@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {writeFileSync} from 'node:fs';
+import * as D from '../../src/domain.ts';
+import {naturalLootDestination} from '../../scripts/natural-play-preparation.mjs';
+const legacy=eval('('+naturalLootDestination.toString().replace('D.fits(inv, item,','D.fits(inv, item.id,')+')');
+const gun={uid:'long-g17',id:'gb17',qty:1,x:0,y:0,gun:{parts:[{uid:'long-mag',id:'G01',slot:'mag',children:[]}],devices:{laser:false,light:false}}};
+const inventory=D.createInventory(2,1),before=structuredClone(inventory);
+const old=legacy(inventory,gun),fixed=naturalLootDestination(inventory,gun);
+assert.deepEqual(old,{x:0,y:0});assert.equal(fixed,null);assert.deepEqual(inventory,before);
+const report={status:'passed',method:'Same placement callback, replacing only the actual item argument with its old item.id argument. Real M3 G17 + G01 magazine: 2x2; target inventory: 2x1.',actualSize:D.itemSize(gun),legacyDestination:old,fixedDestination:fixed,inputUnchanged:true};
+writeFileSync('test-results/pr109/m3/footprint-negative.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

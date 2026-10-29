@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync,statSync} from 'node:fs';
+import {execFileSync} from 'node:child_process';
+import {createHash} from 'node:crypto';
+import {SAMPLE_AREA} from '../../src/sample-area.ts';
+const dir='docs/tasks/audit-contracts/natural-preparation/20261029-main145';
+const git=(...args)=>execFileSync('git',args,{encoding:'utf8'}).trim();
+const old=JSON.parse(readFileSync('docs/tasks/audit-contracts/natural-preparation/20261029-m3/verification.json','utf8'));
+const hash=data=>createHash('sha256').update(data).digest('hex');
+const mismatches=Object.entries(old.sourceHashes).filter(([path,expected])=>hash(readFileSync(path))!==expected).map(([path])=>path);assert.deepEqual(mismatches,[]);
+assert.deepEqual(SAMPLE_AREA,{x:96,y:32,w:1088,h:832});
+const ui=JSON.parse(readFileSync(dir+'/ui-control.json','utf8')),control=JSON.parse(readFileSync(dir+'/kill-control.json','utf8'));
+assert.equal(ui.status,'ui-control-passed');assert.deepEqual(ui.errors,[]);assert.deepEqual(ui.requests,[]);assert.equal(ui.funding.after.cash,157);assert.ok(ui.funding.after.totalRounds>=12);
+assert.equal(control.status,'passed');assert.deepEqual(control.observations,{before:1,afterEviction:1,afterRemount:1,settled:1});assert.equal(control.ordinaryEntryHasNoDriver,true);
+const htmlSha256=hash(readFileSync('dist/index.html'));assert.equal(control.htmlSha256,htmlSha256);assert.equal(ui.htmlSha256,htmlSha256);
+const report={base:git('rev-parse','MERGE_HEAD'),previousCandidate:git('rev-parse','HEAD'),constant:SAMPLE_AREA,sourceHashesMatched:Object.keys(old.sourceHashes).length,mismatches,validation:{unit:'1082/1082',guards:'139/139',package:'passed',uiSeconds:(Date.parse(ui.finishedAt)-Date.parse(ui.startedAt))/1000,killControl:control.observations},artifacts:{htmlSha256,htmlBytes:statSync('dist/index.html').size,portableZipBytes:statSync('release/Escape-Bincov-portable.zip').size,webZipBytes:statSync('release/Escape-Bincov-web.zip').size},reusedNaturalEvidence:{file:'../20261029-m3/natural-play-report.json',durationSeconds:old.natural.durationSeconds,reason:'Accepted main #145 moves the same SAMPLE_AREA values without changing selection/render behavior; geometry equivalence is tested, all 17 critical game and natural-input source hashes match. The prior report retains its actual M3 HTML hash, rather than claiming the relocated build was timed again.'},baseline144:old.integration144.base};
+for(const sha of [report.base,report.previousCandidate,report.baseline144])git('cat-file','-e',sha+'^{commit}');
+writeFileSync(dir+'/verification.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

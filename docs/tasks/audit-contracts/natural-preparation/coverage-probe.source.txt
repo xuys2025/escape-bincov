@@ -1,0 +1,17 @@
+// Diagnostic source-derived runner only. The formal test:play has no short-run switch.
+import assert from 'node:assert/strict';
+import { readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+const file = new URL('../../scripts/natural-play.mjs', import.meta.url), source = await readFile(file, 'utf8');
+const sentinel = '    const s = await snapshot(), now = Date.now();';
+assert.equal(source.split(sentinel).length, 2);
+assert.equal(source.split("report.status = 'passed';").length, 2);
+let probe = source.replace(sentinel, sentinel + `
+    if (report.containerLoot.transfers.length && Object.keys(report.enemyPhases).some(k => k.endsWith('/windup'))) { report.coverageProbeComplete = true; break; }
+    if (Date.now() - start > 180000) throw Error('Short coverage probe exceeded 180 real seconds');`);
+probe = probe.replace("report.status = 'passed';", "report.status = 'coverage-probe-passed';");
+probe = probe.replace('const out = resolve(process.env.BINCOV_PLAY_OUT', `report.probeScope = 'Source-derived short native-transfer + windup control; default minutes stays 10 but this diagnostic stops after coverage. NEVER ten-minute acceptance.';
+report.controllerSourceSha256 = '${createHash('sha256').update(source).digest('hex')}';
+const out = resolve(process.env.BINCOV_PLAY_OUT`);
+probe = probe.replace(/from (['"])(\.\.?\/[^'"]+)\1/g, (_match, _quote, path) => 'from ' + JSON.stringify(new URL(path, file).href));
+const generated = new URL('./coverage-probe.generated.mjs', import.meta.url); await writeFile(generated, probe); await import(generated.href);

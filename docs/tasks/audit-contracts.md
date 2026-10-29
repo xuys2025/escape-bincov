@@ -39,7 +39,75 @@
 | 失焦后首按被抑制（已知 D8） | `InputState.suppressHeld` 和宿主 blur/pause；要区分失焦丢失释放事件与面板切换保护，保住 E 关闭搜刮不重开的断言 |
 | 内容身份依赖文案（Q-E06） | `fix/content-identity` 只把居民楼 8 个既有完整 region ID 放回定义，投影不再按中文名称补身份；楼梯中文前缀仍待处理。世界/布局不改号，不表示 Q-E06 全部完成 |
 | 单测通过不等于真机/完整资源签收 | 帧率、真实输入、WebGL 上下文恢复、F20 总堆与真人手感仍按原任务验收，不把本轮结果替代这些结论 |
-| 自然游玩探针的击杀采样不是累计值 | `scripts/natural-play.mjs` 从宿主至多 1000 条的 `eventLog` 计数，旧死亡事件淘汰后 samples.kills 会下降；累计击杀应读最终结算，不根据这条采样推断游戏进度丢失 |
+| 自然游玩探针的击杀采样（独立修复） | 原[真实报告](audit-contracts/natural-play-report.json)同一 run 的 kills 在 332 秒为 25、363 秒为 0；只有至多 1000 条事件的采样失真，Runtime 和最终结算未丢击杀。[PR #109](https://github.com/xuys2025/escape-bincov/pull/109) 将实时采样改读显式 `?test=1` driver 的 `killCount()`，终态继续读已提交结算。采样与 Runtime 反例覆盖日志淘汰、视图重挂、经典/分层检查点恢复、零写入与结算对账；[打包页控制探针](audit-contracts/natural-kills-browser-probe.json)实测 1→1→1→1。[默认十分钟原脚本](audit-contracts/natural-kills-buildings-report.json)实际 622.217 秒，同 run 样本无下降，但失败于 0 次容器拖放，**不能记整套 PASS**；原始失败与真人/真机、#32 边界保持 |
+
+### #109 自然游玩报告与准备流程收尾
+
+**当前合并候选已同步 #132 改枪 M3。** 下文先保留原 `54632691` 与 #111 同步轮的证据；最新组合、实例尺寸修复及完整验收见[合并前最终复核（M3）](#合并前最终复核m3)。
+
+2026-10-29（+08:00）沿原分支 `fix/natural-play-kill-count` 续作，快进接入候选 `3739d7b0fed1b5687ed79ae7f0b7b35d6254328d`，正常合入已接受 main `275fafd77b1574938ecc0409ab405b77850359c1`。只解决交接追加记录与脚本索引冲突，保留双方历史；合并提交为 `1e8df183`，准确最终 head 和 CI 见 [PR #109](https://github.com/xuys2025/escape-bincov/pull/109)。
+
+累计击杀由显式测试 driver 的 `killCount()` 直读 Runtime，普通端口、生产 HUD、战斗与存档规则不变。原候选的整备只读成功提交记录，每次真实界面动作后检查新 revision、发布状态及实际变化；医疗报价仍使用官方 RPG 克隆。首搜保持原 220px/LOS 危险边界，打开后保持原 60HP/流血关闭条件，拖放必须同 run/map/context 且源减、背包等量增。
+
+同步后的首轮自然输入在 286.675 秒时失败：两次死亡、两次撤离，30 次开箱、39 次原生转移，但只剩现金 1、匹配弹药 0，无法支付 84 的弹药报价。机器人虽然带回战利品，却没有交易筹资步骤。修复仅在测试准备器中增加真实商店出售：不足时按官方 `shopQuote` 选择普通材料、贵重品或配件，先真实转入仓库，再核对可得报价与成功提交后的现金/数量；保留医疗、食物、武器、弹药、安全箱及不可售救济物资。无可售物资或写入失败仍明确 blocked，不修改经济、救济或游戏状态。原失败记录保留，不通过减少补给要求或缩短时长规避。
+
+第二轮在 408.925 秒失败：两次死亡、两次撤离，38 次开箱、45 次原生转移。资金不足时才出售仍有漏洞：已带回的交易材料未入库，再次死亡后随背包丢失，只剩现金 32，无法支付 205 的恢复报价。因此在每次准备开始时先通过真实整备界面把普通交易材料入库，再按需出售；食物、医疗、武器、弹药与安全箱保持原政策。两次失败分别保存在[无交易筹资](audit-contracts/natural-preparation/20261029/insufficient-funds-report.json)与[未入库](audit-contracts/natural-preparation/20261029/unbanked-loot-report.json)，不以短诊断覆盖。
+
+入库修复后的第一轮被会话中断，只有 181 秒进度、没有最终报告，保存为[中断采样](audit-contracts/natural-preparation/20261029/interrupted-progress.json)，不计通过。恢复后又出现连续死亡耗尽医疗资金的[实际失败](audit-contracts/natural-preparation/20261029/repeated-deaths-report.json)：入库与出售均已执行，但首次搜刮后的旧策略仍会接敌到低血或空枪。测试机器人因此将后续搜刮也统一按原 220px/LOS 路径筛选，生命低于 60 或总弹量不超过 8 时撤离并用真实 Shift 冲刺，保留返程自卫弹药；这是明确记录的自动玩家策略，游戏数值、原生拖放、前摇观察及十分钟门槛均不变。
+
+**最终实际验证。** Windows、Node 24.19.0、pnpm 11.25.0、Chrome 156.0.8078.48；正式 HTML SHA-256 `4c5b8cb4c4536d448040ab65005b79265e932f4462181701e1366ccfab9ccb66`。源码哈希、对账断言和原始结果见[验证汇总](audit-contracts/natural-preparation/20261029/verification.json)。
+
+| 检查 | 本轮结果 |
+| --- | --- |
+| `pnpm test` / `pnpm check:ci` / `pnpm package` | 1058/1058、123/123、严格类型检查及打包通过；HTML 9,260,294 字节、便携 ZIP 6,035,876 字节，生成物不提交 |
+| [最终真实 UI、quota、入库与筹资](audit-contracts/natural-preparation/20261029/ui-control.json) | 28.605 秒通过；真实死亡后写失败保留原字节/revision/身体/库存且不出击，恢复后可准备。另以合法提交的 cash1 / ammo0 / 背包怀表1 为明确夹具，真实入库→出售→补弹，最终 cash157 / 匹配弹12；夹具不计自然输入 |
+| [医疗报价](audit-contracts/natural-preparation/20261029/medical-oracle.json) / 旧计数负对照 | 官方效果的 756 状态全匹配、输入不变；当前四项采样回归替换回旧计数后 3 通过 / 1 有效失败（日志淘汰后 `0 !== 1`） |
+| [当前构建累计值控制探针](audit-contracts/natural-preparation/20261029/kill-control.json) | 真实 Runtime 夹具杀敌 1→日志淘汰 1→实际视图重挂 1→可见 UI 正式放弃结算 1；普通入口无 driver、零页面异常。冻结 AI / 杀敌是独立控制，不计自然输入 |
+| [完整默认十分钟自然输入](audit-contracts/natural-preparation/20261029/natural-play-report.json) | **通过，exit 0**；默认 `minutes=10`、`world=buildings`，2026-10-29 11:55:01.670～12:05:06.466（+08:00），实际 604.796 秒。16 个正式结算为 13 撤离 / 3 死亡，总 26 击杀；10 次开箱、15 次原生转移、20 次真实入库、5 次真实出售，gunner / lookout 实际 windup，页面异常 / 外部请求均为 0 |
+| 逐局对账 | 20 个样本覆盖 12 个 run，同 run 无下降、各样本不高于该局正式结算；16 局之和 26 = 最终 `stats.kills` 26。行动墙钟 562.630 秒、基地准备 23.664 秒、结算界面 16.474 秒，模拟时间累计 509.087 秒；没有混称十分钟模拟或单局时长 |
+
+浏览器检查串行独占 `D:/bincov/browser-validation.lock`，最终长测没有注入生命、物品、敌人、RNG 或时钟。当前[复核 source](audit-contracts/natural-preparation/20261029/verification.source.txt)、[UI source](audit-contracts/natural-preparation/20261029/ui-control.source.txt)、[控制 source](audit-contracts/natural-preparation/20261029/kill-control.source.txt)与[报价 source](audit-contracts/natural-preparation/20261029/medical-oracle.source.txt)保留复放方法；UI/控制脚本复制到 `test-results/pr109/*.mjs` 后用 `node --import tsx`，异地检出调整入口、输出和 import 绝对前缀。原失败和中断记录不覆盖。
+
+本轮只修报告与自动玩家工具，不改变游戏战斗、交易、救济、存档格式或普通 HUD。完整 CI 与准确最终 head 统一维护在原 #109；未合并、未发布。真人平衡、真机及 #32 F20 保持各自验收边界。
+
+**授权合并前同步 #111。** 维护者要求复查无问题后合并。再次 fetch 后主线为 `03cfb775fbef07c711fe789e9f6e886460261a91`（资源趋势参数入口），正常合入，只解决 WORK-QUEUE 和脚本支持清单冲突，保留双方交接及 `station-resource-args.mjs`。相对已验 `54632691`，`src`、`tests`、素材、依赖、构建输入和全部自然游玩脚本均无变化。组合重新通过 **126/126** 工程守卫和严格打包，HTML 哈希与字节数精确保持上述值，因此复用 1058 单测、604.796 秒自然输入及控制探针证据，不重复长测。新准确 head 的完整 CI 和最终合并状态以原 PR 为准。
+
+### 合并前最终复核（M3）
+
+维护者明确授权复查无问题后合并。`1e85742b` 在 #111 基线的[完整 CI 40821686704](https://github.com/xuys2025/escape-bincov/actions/runs/40821686704)全部通过后，最终 fetch 发现 main 已合入 #132、前移到 `e2728e46d072ee83af480999a6bd12f3aa0576d1`。沿原 PR 正常整合，保留双方 handoff；M3 是已接受主线，不由 #109 重新实现。
+
+集成复核发现测试工具仍以 `fits(inv, item.id, ...)` 选择落格，忽略武器实例的配件尺寸。`naturalLootDestination` 现把实际 item（含 gun 与 rotated）交给官方 `fits`，并复用原合堆/救济来源规则。[同函数负对照](audit-contracts/natural-preparation/20261029-m3/footprint-negative.json)证实 G17 + G01 长弹匣实际 2×2，旧算法错误接受 2×1 空位，新算法拒绝；新增回归同时覆盖合适空位、旋转、救济来源与输入不变。修复前诊断主动中断，只有[进度](audit-contracts/natural-preparation/20261029-m3/before-footprint-fix-progress.json)，不计完整验收。
+
+| 当前 M3 组合检查 | 实际结果 |
+| --- | --- |
+| `pnpm test` / `pnpm check:ci` / `pnpm package` | 1079/1079、127/127、严格检查和打包通过；HTML 9,475,097 字节、便携 ZIP 6,101,014 字节 |
+| [最终 UI / quota / 筹资](audit-contracts/natural-preparation/20261029-m3/ui-control.json) | 26.387 秒通过；真实死亡后写失败保留原字节/revision/身体/库存，恢复可准备。独立合法低现金夹具通过真实入库、出售、补弹后 cash157 / 弹12 |
+| [医疗报价](audit-contracts/natural-preparation/20261029-m3/medical-oracle.json)与计数控制 | 756 状态0差异；旧计数回归3通过/1有效失败；[当前构建控制](audit-contracts/natural-preparation/20261029-m3/kill-control.json)杀敌→日志淘汰→重挂→正式结算均为1，普通入口无 driver |
+| [完整默认十分钟](audit-contracts/natural-preparation/20261029-m3/natural-play-report.json) | **PASS，exit 0**；默认 `minutes=10`、buildings，2026-10-29 13:35:09.503～13:45:11.506（+08:00），实际602.003秒。22局，21撤离/1死亡，29击杀，8次开箱、14原生转移、27入库、4出售；三类真实windup，页面异常/外部请求0 |
+| [源码哈希与逐局对账](audit-contracts/natural-preparation/20261029-m3/verification.json) | 20样本/15个run，同run无下降且不高于该局正式结算；22局之和29=最终stats.kills29。行动墙钟561.837秒、基地11.864秒、结算27.087秒，模拟累计489.846秒，各口径分列 |
+
+当前正式 HTML SHA-256 为 `618793d89a0df8287b5f2d98e92c4a4bed406976cbba27ff30fd4226a7c5e360`，Windows / Node24.19.0 / pnpm11.25.0 / Chrome156.0.8078.48。UI/quota/低现金和杀敌控制为单独显式夹具；最终自然输入不注入游戏状态或时钟，浏览器串行独占锁。原始记录与 `.source.txt` 复放脚本在同目录，旧轮所有失败、中断和成功均保留。#109 不改变 M3 的 v9 存档、物品尺寸、经济或射击规则；准确新 head CI、授权合并和发布状态仍以原 PR 为准。
+
+**最终同步 #144（诊断工具）。** `5f4e6c71` 推送期间，main 又前移到 `13c9b80c9193456fc2e5d6f6ddb0cefde62a9705`（HUD 堆路径消费字段校验），公共 handoff / WORK-QUEUE 顶部发生冲突，GitHub 尚未生成该轮 CI。正常整合后保留最新主线前言，把 #109 自身历史附到 handoff 的独立段落、任务行放到当前表末尾、自然工具分类放入独立 support 组，避免再次覆盖并行任务的共同插入点。相对已验 M3 组合，游戏源码、单测、素材、依赖和自然脚本均无变化；17 份关键源码哈希匹配。组合 **137/137** 工程守卫和严格打包重新通过，HTML 仍为上述 `618793d8…`，因此复用1079单测、最终602.003秒与独立控制证据。最新准确head CI与授权合并结果以原PR为准。
+
+**共享常量主线 #145 的最终组合。** 随后正常合入 `4fec648c89a59198b94721218f1e06401a92647e`，此次已无公共记录冲突。差异仅把同值 `SAMPLE_AREA` 从 appearance 迁到共享纯数据层并更新三个引用，补齐依赖方向及既有选图行为回归；区域仍为 `{ x:96, y:32, w:1088, h:832 }`，战斗、计数、物品、存档和自然脚本不变。组合重新通过 **1082 单测 / 139 工程守卫 / 严格打包**；当前构建 [UI/quota/筹资控制](audit-contracts/natural-preparation/20261029-main145/ui-control.json) 28.864 秒通过，[累计值控制](audit-contracts/natural-preparation/20261029-main145/kill-control.json)仍为1→1→1→正式结算1。17份关键源码哈希匹配，[机器校验摘要](audit-contracts/natural-preparation/20261029-main145/verification.json)逐项记录复用边界。新打包因模块布局变化为9,475,133字节，SHA-256 `f1cdae01b0ec79ee2c9dada3f0c3fcebca450a178cfba84d2ced4340ba02c08b`，便携ZIP6,100,994字节；上面的602.003秒报告保留原M3哈希，未把常量迁移后的构建写成再次自然计时。两处仅文档中的 #144 完整基线 SHA 抄写错误也已按 Git 实际父提交校正并验证对象存在，代码与测试结果不受影响。最新准确head CI通过后按维护者授权合并。
+
+### 自然准备与首搜候选（未并入 #109）
+
+**下文为 2026-10-25 的历史候选记录。** 该候选现已进入原 #109，本轮复核与后续修复见上节；下文的“未并入”“下一次”等仅代表当时状态。
+
+`research/natural-play-preparation` 从 #109 的 `6629ab1` 续同一工具可靠性目标，不另开 PR，不改 #109 受检 head。候选仅改测试控制器/只读报告：70HP、无流血、医疗至少1份、现有枪匹配总弹至少12发为 bot 政策；通过 `currentRecord()` 核对发布状态，每次真实 UI 动作后确认 revision 与实际身体/库存/现金变化，失败或不足明确 blocked。两药报价只在官方 RPG 克隆中搜索最多6次治疗加1份储备；首搜按动态路径与原220px/LOS危险门槛选择，原生拖放须同 run/map/context 且源减、背包等量增。原60HP关闭条件、native/windup断言和默认600秒未放宽，游戏源码及HTML不变。
+
+| 证据 | 实际结果 |
+| --- | --- |
+| Node / guards / package | 876/876、75/75、打包通过；HTML仍 `31ca729a4a900a327160f7a2e46add41267e2aada3d215b7b32ca4e66dc7c251` |
+| [真实 UI / quota](audit-contracts/natural-preparation/ui-control.json) | 33.638秒：真实死亡HP1后，quota不改原字节/revision/药/HP、不出击；实际UI恢复后HP72.065、医疗1、匹配弹24、cash290 |
+| [医疗 oracle](audit-contracts/natural-preparation/medical-oracle.json) | 756状态0差异、原record不变；[中间版6个错价](audit-contracts/natural-preparation/medical-oracle-before.json)保留，正式反例含HP40/150→预算135及HP1/绷带2/160→预算160 |
+| [短首搜 / windup](audit-contracts/natural-preparation/coverage-probe.json) | 65.405秒：19.4704模拟秒原生拖 cloth×2，随后真实 raider-melee/windup，错误/请求0；`coverage-probe-passed` **不是十分钟验收** |
+
+短 UI 正向路径在最终报价收束前完成，最后只改医疗报价；该UI状态报价仍为90，最终函数由正式领域反例与756 oracle验证，未重复UI。方法保留为 [UI source](audit-contracts/natural-preparation/ui-probe.source.txt)、[coverage source](audit-contracts/natural-preparation/coverage-probe.source.txt)、[oracle source](audit-contracts/natural-preparation/medical-oracle.source.txt)；前两份复放时复制为 `.drafts/natural-play-preparation/*.mjs`，使用 `node --import tsx` 和独占浏览器锁，异地检出调整本轮 `/workspace/natural-play-preparation` 入口/输出/import前缀。coverage只给同源副本增加停止条件/诊断标签，正式 `test:play` 没有缩时入口。
+
+按维护者本轮额度收尾指令，候选最终完整默认十分钟 **未运行**。下一次从原#109接手评论的固定候选commit/compare续作，先跑原十分钟并读run/base计时、blocked原因、原生拖放、windup和结算；不覆盖原622秒失败，不替真人/真机或#32 F20签收。
 
 ## 首轮验证（同步射击主线之前）
 
