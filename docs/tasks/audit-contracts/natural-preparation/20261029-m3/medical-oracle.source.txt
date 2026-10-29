@@ -1,0 +1,37 @@
+// Read-only bounded two-medical quote check. No browser, application mutation or economic simulation.
+import assert from 'node:assert/strict';
+import { writeFileSync } from 'node:fs';
+import { createSessionState, SaveSession } from 'file:///D:/bincov/pr109-natural-play/src/session.ts';
+import { useRpgItemResult } from 'file:///D:/bincov/pr109-natural-play/src/rpg.ts';
+import { ITEMS } from 'file:///D:/bincov/pr109-natural-play/src/domain.ts';
+import { medicalPreparationPlan } from 'file:///D:/bincov/pr109-natural-play/scripts/natural-play-preparation.mjs';
+const state = createSessionState(), data = new Map();
+const saves = new SaveSession(state, () => ({ getItem: key => data.get(key) ?? null, setItem: (key, value) => data.set(key, value) }), undefined, () => 1800000000000);
+assert.ok(saves.initialize()); state.state = 'hideout'; assert.ok(saves.ensureRpg());
+const base = saves.currentRecord(), hpValues = [1,8,16,24,32,40,48,54,56,64,69,70,85,100];
+function optimum(expansion, bands, kits, depth = 0) {
+  if (expansion.body.hp >= 70 && !expansion.body.bleeding) return bands + kits > 0 ? 0 : ITEMS.bandage.buy;
+  if (depth >= 6) return Infinity;
+  let best = Infinity;
+  for (const id of ['bandage', 'medkit']) {
+    const trial = structuredClone(expansion); if (!useRpgItemResult(trial, id).ok) continue;
+    const owned = id === 'bandage' ? bands : kits;
+    best = Math.min(best, (owned ? 0 : ITEMS[id].buy) + optimum(trial, bands - (id === 'bandage' && owned ? 1 : 0), kits - (id === 'medkit' && owned ? 1 : 0), depth + 1));
+  }
+  return best;
+}
+const mismatches = []; let checked = 0;
+for (const perks of [[], ['constitution-15-b'], ['constitution-15-b', 'constitution-30-b']])
+for (const hp of hpValues) for (const bleed of [false, true]) for (let b = 0; b <= 2; b++) for (let k = 0; k <= 2; k++) {
+  const record = structuredClone(base); record.expansion.growth.permanent.constitution = perks.length === 2 ? 30 : perks.length ? 15 : 10;
+  record.expansion.growth.perks = perks; record.expansion.body.hp = hp; record.expansion.body.bleeding = bleed;
+  for (const source of ['bag', 'stash', 'safe']) record.profile[source].items = [];
+  if (b) record.profile.stash.items.push({ uid: 'b', id: 'bandage', qty: b, x: 0, y: 0 });
+  if (k) record.profile.stash.items.push({ uid: 'k', id: 'medkit', qty: k, x: 1, y: 0 });
+  const before = JSON.stringify(record), got = medicalPreparationPlan(record).cost, expected = optimum(record.expansion, b, k);
+  assert.equal(JSON.stringify(record), before); checked++;
+  if (got !== expected) mismatches.push({ hp, bleed, b, k, perks, got, expected });
+}
+const result = { checked, mismatches, mismatchCount: mismatches.length, scope: '756 bounded medical quote states; official RPG effects; zero browser/game writes' };
+writeFileSync('D:/bincov/pr109-natural-play/test-results/pr109/m3/medical-oracle.json', JSON.stringify(result, null, 2) + '\n'); console.log(JSON.stringify(result));
+assert.equal(mismatches.length, 0);

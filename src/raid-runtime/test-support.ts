@@ -19,6 +19,8 @@ export function createRuntimeTestDriver(runtime: CoastRaidRuntime, search: strin
         if (!fits) throw new Error(`Invalid fixture position on ${mapId}: (${point.x}, ${point.y}); body overlaps obstacle or bounds.`);
     };
     return {
+        /** Read the Runtime's cumulative total, including a restored checkpoint; never replay the view's bounded log. */
+        killCount(): number { return runtime.kills; },
         freezeAI(value: boolean) { runtime.freezeAI = value; },
         placePlayer(point: Point, angle = runtime.player.rotation, mapId?: string) {
             checkPosition(point, mapId);

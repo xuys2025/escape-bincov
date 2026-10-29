@@ -1,0 +1,16 @@
+{
+  "startedAt": "2026-10-29T05:35:06.101Z",
+  "htmlSha256": "618793d89a0df8287b5f2d98e92c4a4bed406976cbba27ff30fd4226a7c5e360",
+  "methodology": "Explicit fixture: freeze AI, kill through Runtime damage, evict only the diagnostic log and remount the actual view; then abandon using visible UI. Separate from ten-minute natural input.",
+  "errors": [],
+  "observations": {
+    "before": 1,
+    "afterEviction": 1,
+    "afterRemount": 1,
+    "settled": 1
+  },
+  "browser": "156.0.8078.48",
+  "ordinaryEntryHasNoDriver": true,
+  "status": "passed",
+  "finishedAt": "2026-10-29T05:35:08.719Z"
+}

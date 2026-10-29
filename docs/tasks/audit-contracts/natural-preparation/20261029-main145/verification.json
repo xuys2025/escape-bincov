@@ -1,0 +1,36 @@
+{
+  "base": "4fec648c89a59198b94721218f1e06401a92647e",
+  "previousCandidate": "415d270f02b85d75139d3d7a5633aa4c16d0a00f",
+  "constant": {
+    "x": 96,
+    "y": 32,
+    "w": 1088,
+    "h": 832
+  },
+  "sourceHashesMatched": 17,
+  "mismatches": [],
+  "validation": {
+    "unit": "1082/1082",
+    "guards": "139/139",
+    "package": "passed",
+    "uiSeconds": 28.864,
+    "killControl": {
+      "before": 1,
+      "afterEviction": 1,
+      "afterRemount": 1,
+      "settled": 1
+    }
+  },
+  "artifacts": {
+    "htmlSha256": "f1cdae01b0ec79ee2c9dada3f0c3fcebca450a178cfba84d2ced4340ba02c08b",
+    "htmlBytes": 9475133,
+    "portableZipBytes": 6100994,
+    "webZipBytes": 6096485
+  },
+  "reusedNaturalEvidence": {
+    "file": "../20261029-m3/natural-play-report.json",
+    "durationSeconds": 602.003,
+    "reason": "Accepted main #145 moves the same SAMPLE_AREA values without changing selection/render behavior; geometry equivalence is tested, all 17 critical game and natural-input source hashes match. The prior report retains its actual M3 HTML hash, rather than claiming the relocated build was timed again."
+  },
+  "baseline144": "13c9b80c9193456fc2e5d6f6ddb0cefde62a9705"
+}
