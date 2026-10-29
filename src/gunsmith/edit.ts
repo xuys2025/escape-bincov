@@ -17,7 +17,6 @@ import { effectiveWeapon } from './stats';
 
 type Container = 'stash' | 'bag' | 'safe';
 const CONTAINERS: readonly Container[] = ['stash', 'bag', 'safe'];
-const CONTAINER_NAMES: Readonly<Record<Container, string>> = { stash: '仓库', bag: '背包', safe: '安全箱' };
 /** Where a gun can be at the base: the equipped slot or a container. */
 export type GunPlace = 'equipment' | Container;
 
@@ -60,6 +59,11 @@ export interface GunEditPreview {
     size: { before: { w: number; h: number }; after: { w: number; h: number } };
     /** Rounds the equipped gun no longer holds, going into the stash, ordinary and relief apart; null when none. */
     unloaded: { ammo: string; normal: number; relief: number } | null;
+    /**
+     * Where the gun goes when it no longer fits where it lies (PLAN section 8): its container's first free place,
+     * turned if need be, else the stash or the bag (a gun in the safe stays in the safe); null when it stays put.
+     */
+    relocated: { where: Container; x: number; y: number; rotated: boolean } | null;
     /** Why this candidate cannot be committed, or null. */
     refusal: { code: GunEditFault; reason: string } | null;
 }
@@ -207,6 +211,7 @@ export function planGunEdit(profile: D.SaveDataV1, gunUid: string, edits: readon
         capacity: { before: capacity(gun.state), after: room },
         size: { before: gunSize({ id: gun.id, parts: gun.state.parts }, gun.rotated), after: gunSize({ id: gun.id, parts: after.parts }, gun.rotated) },
         unloaded: unload ? { ammo, normal, relief: unload - normal } : null,
+        relocated: null,
         refusal: null,
     };
     const blocked = (code: GunEditFault, reason: string): GunEditPlan => ({ ok: false, code, reason, edit: null, preview: { ...preview, refusal: { code, reason } } });
@@ -227,7 +232,16 @@ export function planGunEdit(profile: D.SaveDataV1, gunUid: string, edits: readon
         // In the stash overflow (#28 M3-12) nothing may change size: it comes out first.
         if (item.y >= next[where].h) return blocked('footprint', '这把枪在仓库溢出区，先移进仓库或背包再改装。');
         item.gun = structuredClone(after);
-        if (!D.fits(next[where], item, item.x, item.y, item.uid, !!item.rotated)) return blocked('footprint', `改装后枪身变大，在${CONTAINER_NAMES[where]}原来的位置放不下，请先腾出空间。`);
+        if (!D.fits(next[where], item, item.x, item.y, item.uid, !!item.rotated)) {
+            // It no longer fits where it lies: another place, shown in the preview; confirm moves it there, cancel
+            // leaves it as it was. Never out of the safe, which would lose its protection.
+            next[where].items = next[where].items.filter(i => i !== item);
+            const to = ([where, ...(where === 'safe' ? [] : (['stash', 'bag'] as const).filter(c => c !== where))] as Container[]).find(c => D.placeItem(next[c], item));
+            if (!to) return blocked('footprint', where === 'safe' ? '改装后枪身变大，安全箱里放不下，请先腾出空间。' : '改装后枪身变大，仓库和背包里都放不下，请先腾出空间。');
+            const placed = next[to].items.find(i => i.uid === gunUid)!;
+            preview.relocated = { where: to, x: placed.x, y: placed.y, rotated: !!placed.rotated };
+            preview.size.after = gunSize({ id: gun.id, parts: after.parts }, !!placed.rotated);
+        }
     }
     for (const p of removals) {
         const item: D.Item = { uid: p.uid, id: p.id, qty: 1, x: 0, y: 0, ...(relief.get(p.uid) ? { relief: true } : {}) };

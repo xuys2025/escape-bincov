@@ -1312,3 +1312,18 @@ M0 评审决定 3：逐项护栏之外，腰射锥和精瞄锥各自不低于原
   - [gunsmith-art.test.ts](../../tests/gunsmith-art.test.ts) 按 Sol 的 21 套 42 条新记录逐层比对，并检查每套都在自己的占格内。早先三批记录里用到新弹匣的 90 条：每层位置、枪口和宽度不变，只有高度可以变（M1911 装 G02 按任务书画短，变矮 2 像素）。
   - gunsmith-bench A1：257 张批准预览照旧逐像素比对，其中 90 张跳过新图改过的区域（[gunsmith-m3-w3-redrawn.json](../../tests/fixtures/gunsmith-m3-w3-redrawn.json)：弹匣取新旧画布的并集，SVD 和 Vector 机匣取 Sol 的 mask）。
   - 工作台画框只往下变深（M4A1 59、AK-103 71、RPK 75 像素高），1280×720 下仍是 2 倍、1920×1080 下 3 倍。游戏截图见 [evidence/m3-12](evidence/m3-12/)。
+
+## 收尾小项（2026-10-29）
+
+M3 合入后，维护者让先做几件不用定方向的小事（TASKS M4-08）。
+
+- **试枪场二十把枪**：`RANGE_WEAPONS`（[range/raid.ts](../../src/range/raid.ts)）是目录里全部二十把枪和匕首，按 WEAPONS.md 的类别排；按钮用物品短名，桌面四列，手机横屏三列。霰弹的命中提示按 `pellets` 判断，不再只认双管。测试：[range.test.ts](../../tests/range.test.ts) 逐把发枪，核对手里的枪和射击模式；test:range 检查面板不横向滚动。
+- **改装后另选落点**（PLAN 第 8 节；M2 决定第 6 条原先「整次拒绝，另选落点以后再做」）：`planGunEdit` 发现枪在原位放不下时，按顺序找新位置。
+  - 先在原来的容器里找第一个空位，可以转向；
+  - 再找仓库、背包；
+  - 安全箱里的枪只在安全箱里找，不挪出去，免得失去撤离失败也保留的保护。
+  - 找到时预览的 `relocated` 写明去向，`size.after` 按新的朝向算，确认就照办，取消不动；找不到才拒绝（「仓库和背包里都放不下」或「安全箱里放不下」）。
+  - 工作台桌面版在底栏中间写「确认后放到某处第几行第几列」，手机版写在明细里，底部摘要标「换位置」。
+  - 测试：[gunsmith-edit.test.ts](../../tests/gunsmith-edit.test.ts)，以及 gunsmith-bench B10（真实点击，确认后枪在底栏说的位置）。
+- **SVD 接缝**：枪托、护木、枪管画在机匣图里，和机匣之间只隔一列描边色，深色底上像断开。这是美术问题，修图说明见 [art/svd-joint/BRIEF.md](art/svd-joint/BRIEF.md)，等 Sol。
+

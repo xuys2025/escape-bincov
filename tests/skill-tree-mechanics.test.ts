@@ -27,7 +27,7 @@ function seed(ids: SkillId[] = []): SkillMechanicSeed {
     return { runId: 'lab-143', progress: selection(ids), bag: D.createInventory(6, 5),
         equipment: { weapon: 'pistol', weaponUid: 'held', gun: factoryState(), relief: false, ammo: 0, ammoRelief: 0 },
         vitals: { hpMilli: 20000, maxHpMilli: 100000, waterMilli: 100000, satietyMilli: 100000, pollutionMilli: 0, bleeding: false },
-        protectedItems: [], containers: [] };
+        protectedItems: [], containers: [], completedQuests: [] };
 }
 function stock(s: SkillMechanicSeed, id: string, qty: number, relief = false) {
     let n = s.bag.items.length; assert.equal(D.addItem(s.bag, id, qty, relief, false, true, () => `stock-${++n}`), 0);
@@ -40,6 +40,78 @@ const advance = (j: SkillMechanicJournal, atMs: number, flags: Record<string, bo
     step(j, 'advance', { atMs, paused: false, reloading: false, sprinting: false, ...flags });
 const quantity = (j: SkillMechanicJournal, id: string, relief?: boolean) => skillMechanicView(j).bag.items
     .filter(i => i.id === id && (relief === undefined || !!i.relief === relief)).reduce((n, i) => n + i.qty, 0);
+const approvePress = (j: SkillMechanicJournal, quantity = 3, uid = j.seed.bag.items.find(i => i.id === 'scrap' && !i.relief)!.uid) =>
+    step(j, 'approve-press', { uid, quantity });
+
+test('field press never consumes unapproved pump parts needed for the repair quest', () => {
+    const s = seed(['combat-field-press']); stock(s, 'scrap', 3);
+    const j = advance(newSkillMechanics(s), 42000);
+    assert.equal(quantity(j, 'scrap'), 3);
+    assert.equal(skillMechanicView(j).counters.generatedAmmo, 0);
+});
+
+test('unfinished quest reserves cannot be approved, while only surplus pump parts can be consumed', () => {
+    const s = seed(['combat-field-press']); stock(s, 'scrap', 3); stock(s, 'scrap', 5, true);
+    const original = newSkillMechanics(s), saved = encodeSkillMechanics(original);
+    assert.throws(() => approvePress(original, 1)); assert.equal(encodeSkillMechanics(original), saved);
+    stock(s, 'scrap', 2);
+    let j = newSkillMechanics(s); assert.throws(() => approvePress(j, 3));
+    j = advance(approvePress(j, 2), 600000);
+    assert.equal(quantity(j, 'scrap', false), 3); assert.equal(quantity(j, 'scrap', true), 5);
+    assert.equal(quantity(j, 'ammo9'), 4);
+});
+
+test('completed quests release reserves but never grant implicit approval; approved quantities survive retries and reloads', () => {
+    const s = seed(['combat-field-press']); s.completedQuests = ['repair']; stock(s, 'scrap', 3);
+    assert.equal(quantity(advance(newSkillMechanics(s), 600000), 'scrap'), 3);
+    let j = approvePress(newSkillMechanics(s), 2), command = j.commands[0];
+    j = planSkillMechanic(j, command).journal;
+    j = advance(j, 18000); assert.equal(quantity(j, 'scrap'), 2);
+    assert.equal(skillMechanicView(j).pressApprovals[0].remaining, 1);
+    j = advance(decodeSkillMechanics(encodeSkillMechanics(j)), 600000);
+    assert.equal(quantity(j, 'scrap'), 1); assert.equal(quantity(j, 'ammo9'), 4);
+    assert.deepEqual(skillMechanicView(j).pressApprovals, []);
+});
+
+test('press approval can be revoked and rejects relief, protected, unrelated, missing or excessive materials', () => {
+    const s = seed(['combat-field-press']); s.completedQuests = ['repair'];
+    stock(s, 'scrap', 2); stock(s, 'scrap', 2, true); stock(s, 'cloth', 1);
+    const j = newSkillMechanics(s);
+    for (const item of s.bag.items.filter(i => i.relief || i.id !== 'scrap')) assert.throws(() => approvePress(j, 1, item.uid));
+    for (const n of [-1, .5, 3, 4]) assert.throws(() => approvePress(j, n));
+    assert.throws(() => approvePress(j, 1, 'missing'));
+    const approved = approvePress(j, 2);
+    const revoked = advance(approvePress(approved, 0), 600000);
+    assert.equal(quantity(revoked, 'scrap', false), 2); assert.equal(quantity(revoked, 'ammo9'), 0);
+    s.protectedItems = ['scrap']; assert.throws(() => approvePress(newSkillMechanics(s), 1));
+});
+
+test('press approval cannot overbook the same quest reserve across separate stacks', () => {
+    const s = seed(['combat-field-press']); stock(s, 'scrap', 6);
+    let j = newSkillMechanics(s); const [first, second] = s.bag.items;
+    j = approvePress(j, 3, first.uid);
+    assert.throws(() => approvePress(j, 1, second.uid));
+    j = approvePress(j, 2, first.uid); j = approvePress(j, 1, second.uid);
+    j = advance(j, 600000); assert.equal(quantity(j, 'scrap'), 3); assert.equal(quantity(j, 'ammo9'), 6);
+});
+
+test('resource version 1 and missing, duplicate or unknown completion facts are rejected without reinterpretation', () => {
+    const j = newSkillMechanics(seed(['combat-field-press']));
+    const old = { ...j, version: 1 }; assert.throws(() => decodeSkillMechanics(JSON.stringify(old)));
+    for (const completedQuests of [undefined, ['repair', 'repair'], ['unknown'], [null], 'repair']) {
+        assert.throws(() => decodeSkillMechanics(JSON.stringify({ ...j, seed: { ...j.seed, completedQuests } })));
+    }
+});
+
+test('field press covers only its three documented ammo families without consuming materials for other guns', () => {
+    for (const weapon of Object.keys(D.WEAPONS).filter(D.isGun)) {
+        const s = seed(['combat-field-press']); s.completedQuests = ['repair']; s.equipment.weapon = weapon; stock(s, 'scrap', 3);
+        const j = advance(approvePress(newSkillMechanics(s)), 600000);
+        const supported = ['ammo9', 'ammoR', 'shell'].includes(D.equippedWeapon(s.equipment).ammo!);
+        assert.equal(skillMechanicView(j).counters.usedScrap, supported ? 3 : 0, weapon);
+        assert.equal(quantity(j, 'scrap'), supported ? 0 : 3, weapon);
+    }
+});
 
 test('automatic feed moves one real matching round after its warmup, preserving relief provenance and effective capacity', () => {
     const s = seed(['combat-auto-feed']); stock(s, 'ammo9', 12); stock(s, 'ammo9', 3, true); stock(s, 'shell', 5);
@@ -92,7 +164,8 @@ test('firing and normal reload conserve ordinary and relief ammunition across a 
 test('field press consumes ordinary scrap, produces only the current gun ammo and stops at six rounds per run', () => {
     for (const [weapon, ammo] of [['pistol', 'ammo9'], ['shotgun', 'shell'], ['carbine', 'ammoR']]) {
         const s = seed(['combat-field-press']); s.equipment.weapon = weapon; stock(s, 'scrap', 4); stock(s, 'scrap', 5, true);
-        let j = advance(newSkillMechanics(s), 17999); assert.equal(quantity(j, ammo), 0);
+        s.completedQuests = ['repair'];
+        let j = advance(approvePress(newSkillMechanics(s)), 17999); assert.equal(quantity(j, ammo), 0);
         j = advance(j, 600000); const v = skillMechanicView(j);
         assert.equal(quantity(j, ammo, false), 6); assert.equal(quantity(j, 'scrap', false), 1); assert.equal(quantity(j, 'scrap', true), 5);
         assert.equal(v.counters.generatedAmmo, 6); assert.equal(v.counters.usedScrap, 3); assert.equal(v.equipment.ammo, 0);
@@ -106,9 +179,11 @@ test('press cannot convert relief or protected scrap; insufficient space rolls b
     const protectedSeed = seed(['combat-field-press']); stock(protectedSeed, 'scrap', 5); protectedSeed.protectedItems = ['scrap'];
     assert.equal(quantity(advance(newSkillMechanics(protectedSeed), 600000), 'scrap'), 5);
     const full = seed(['combat-field-press']); stock(full, 'scrap', 5);
+    full.completedQuests = ['repair'];
     for (let n = 1; n < 30; n++) full.bag.items.push({ uid: `fill-${n}`, id: 'cloth', qty: 10, x: n % 6, y: Math.floor(n / 6) });
-    const j = advance(newSkillMechanics(full), 600000);
+    const j = advance(approvePress(newSkillMechanics(full)), 600000);
     assert.deepEqual(skillMechanicView(j).bag, full.bag); assert.equal(skillMechanicView(j).counters.generatedAmmo, 0);
+    assert.equal(skillMechanicView(j).pressApprovals[0].remaining, 3);
 });
 
 test('regeneration spends exactly one water and satiety per HP, with 60 percent and 30 HP per-run caps', () => {
@@ -209,15 +284,20 @@ test('scan observations cannot introduce nonexistent containers, hide discovered
     assert.throws(() => step(j, 'observe', { target: { ...s.containers[0], revealed: true } }));
 });
 
-test('shared salvage/press resources are processed chronologically and produce identical results for one frame or 600 frames', () => {
+test('salvage does not implicitly authorize pressing its output; explicit budgets remain independent of frame partition', () => {
     const s = seed(['combat-field-press', 'survival-regeneration', 'search-auto-salvage']); stock(s, 'battery', 4);
+    s.completedQuests = ['repair'];
     let start = newSkillMechanics(s);
     for (const item of s.bag.items) start = step(start, 'mark-salvage', { uid: item.uid, marked: true });
+    const unapproved = advance(start, 600000);
+    assert.equal(skillMechanicView(unapproved).counters.generatedAmmo, 0); assert.equal(quantity(unapproved, 'scrap'), 3);
+    start = advance(start, 16000);
+    start = approvePress(start, 1, skillMechanicView(start).bag.items.find(i => i.id === 'scrap')!.uid);
     const one = advance(start, 600000), split = structuredClone(start);
-    for (let atMs = 1000; atMs <= 600000; atMs += 1000) split.commands.push({ id: `tick-${atMs}`, runId: s.runId, kind: 'advance', atMs,
+    for (let atMs = 17000; atMs <= 600000; atMs += 1000) split.commands.push({ id: `tick-${atMs}`, runId: s.runId, kind: 'advance', atMs,
         paused: false, reloading: false, sprinting: false });
     assert.deepEqual(skillMechanicView(split), skillMechanicView(one));
-    assert.equal(skillMechanicView(one).counters.generatedAmmo, 6); assert.equal(skillMechanicView(one).counters.salvaged, 3);
+    assert.equal(skillMechanicView(one).counters.generatedAmmo, 2); assert.equal(skillMechanicView(one).counters.salvaged, 3);
     assert.equal(quantity(one, 'battery') + skillMechanicView(one).counters.salvaged, 4);
     assert.equal(quantity(one, 'scrap') + skillMechanicView(one).counters.usedScrap, 3);
 });
@@ -236,7 +316,7 @@ test('idempotent retries survive JSON key order and checkpoint roundtrips; chang
 
 test('strict resource checkpoint rejects unknown/coerced fields, UID collisions, overlaps, point debt and clock jumps without mutation', () => {
     const s = seed(['combat-auto-feed']); stock(s, 'ammo9', 10); const valid = newSkillMechanics(s), text = encodeSkillMechanics(valid);
-    const corrupt: unknown[] = [null, [], { ...valid, extra: 1 }, { ...valid, version: 2 },
+    const corrupt: unknown[] = [null, [], { ...valid, extra: 1 }, { ...valid, version: 3 },
         { ...valid, seed: { ...s, extra: true } }, { ...valid, seed: { ...s, runId: ['run'] } },
         { ...valid, seed: { ...s, vitals: { ...s.vitals, hpMilli: '20000' } } },
         { ...valid, seed: { ...s, equipment: { ...s.equipment, ammoRelief: 1 } } },
@@ -281,10 +361,11 @@ test('automatic healing is bridged as non-training recovery and cannot be launde
 
 test('generated item identities are deterministic, skip existing uid collisions and never invoke random allocation', () => {
     const s = seed(['combat-field-press']); stock(s, 'scrap', 5); stock(s, 'cloth', 1);
+    s.completedQuests = ['repair'];
     s.bag.items[1].uid = 'skill-lab-143-1';
     const random = Math.random; Math.random = () => { throw new Error('mechanics must not consume game randomness'); };
     try {
-        const j = advance(newSkillMechanics(s), 600000), first = skillMechanicView(j), second = skillMechanicView(decodeSkillMechanics(encodeSkillMechanics(j)));
+        const j = advance(approvePress(newSkillMechanics(s)), 600000), first = skillMechanicView(j), second = skillMechanicView(decodeSkillMechanics(encodeSkillMechanics(j)));
         assert.deepEqual(first, second); assert.equal(first.bag.items.find(i => i.id === 'ammo9')!.uid, 'skill-lab-143-2');
         assert.equal(new Set(first.bag.items.map(i => i.uid)).size, first.bag.items.length);
     } finally { Math.random = random; }
@@ -316,7 +397,8 @@ test('108 deterministic mixed loadouts conserve ammo, materials and medical supp
         const s = seed([combat, survival, search].filter((id): id is Exclude<typeof id, null> => id !== null));
         stock(s, 'ammo9', 20); stock(s, 'ammo9', 5, true); stock(s, 'scrap', 5); stock(s, 'battery', 4); stock(s, 'bandage', 3);
         s.vitals.hpMilli = 20000 + variant * 20000;
-        const j = newSkillMechanics(s);
+        s.completedQuests = ['repair'];
+        const j = approvePress(newSkillMechanics(s));
         for (const item of s.bag.items.filter(i => i.id === 'battery')) j.commands.push({ id: `mark-${item.uid}`, runId: s.runId, atMs: 0,
             kind: 'mark-salvage', uid: item.uid, marked: true });
         let clock = 0, rng = 143 + variant;

@@ -18,7 +18,7 @@
 .rg-tip[hidden] { display: none; }
 .rg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
 .rg-grid.two { grid-template-columns: 1fr 1fr; }
-.rg-wide { grid-column: span 2; }
+.rg-grid.four { grid-template-columns: repeat(4, 1fr); }
 .rg-full { grid-column: 1 / -1; }
 .rg-gap { margin-top: 8px; }
 button { font: inherit; font-size: 14px; line-height: 18px; min-height: 30px; margin: 0; padding: 2px 4px; background: #2b2a26; color: #ddd5c3;
@@ -40,6 +40,7 @@ tfoot td { border-top: 1px solid #3f3b33; }
 :host(.touch) button { min-height: 36px; }
 /* Short screens (landscape phones): the small system face, as the raid HUD uses there. */
 @media (max-height: 480px) {
+  .rg-grid.four { grid-template-columns: repeat(3, 1fr); }
   .rg { width: 212px; left: calc(env(safe-area-inset-left) + 8px); padding: 4px 8px 8px; font: 13px/16px "Microsoft YaHei", "PingFang SC", sans-serif; }
   button { font-size: 13px; line-height: 16px; }
   table, .rg-aim { font-size: 13px; line-height: 17px; }

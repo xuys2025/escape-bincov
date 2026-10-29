@@ -35,7 +35,7 @@ function seed(ids: SkillId[] = [], weapon = 'pistol'): SkillMechanicSeed {
     return { runId: 'stability', progress: selected(ids), bag: D.createInventory(6, 5),
         equipment: { weapon, weaponUid: 'held', gun: factoryState(), relief: false, ammo: 0, ammoRelief: 0 },
         vitals: { hpMilli: 20000, maxHpMilli: 100000, waterMilli: 100000, satietyMilli: 100000, pollutionMilli: 0, bleeding: false },
-        protectedItems: [], containers: [] };
+        protectedItems: [], containers: [], completedQuests: [] };
 }
 
 test('a dead enemy cannot be killed again by a positive sub-epsilon before-HP under new event identities', () => {
@@ -153,6 +153,8 @@ test('200 irregular multi-phase runs preserve exact resource results under frame
             assert.equal(D.addItem(s.bag, id, qty, relief, false, true, () => `stock-${++serial}`), 0);
         const one = newSkillMechanics(s), split = newSkillMechanics(s);
         const append = (j: typeof one, c: Record<string, unknown>) => j.commands.push({ id: `event-${j.commands.length}`, runId: s.runId, ...c } as SkillMechanicCommand);
+        const press = { kind: 'approve-press', atMs: 0, uid: s.bag.items.find(i => i.id === 'scrap')!.uid, quantity: 2 };
+        append(one, press); append(split, press);
         for (const item of s.bag.items.filter(i => i.id === 'battery')) {
             const c = { kind: 'mark-salvage', atMs: 0, uid: item.uid, marked: true }; append(one, c); append(split, c);
         }

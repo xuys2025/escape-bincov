@@ -6,6 +6,7 @@ import type { RaidIntent } from '../src/raid-runtime/contract';
 import { shotBarrier } from '../src/layer-transition';
 import type { Point } from '../src/world';
 import { createRangeRaid, ShootingRange, FIRING_LINE, MOVER, RANGE_WEAPONS, TARGETS } from '../src/range/raid';
+import { GUNS } from '../src/gunsmith/catalog';
 
 // 试枪场 (src/range): the playtest page's raid. The page itself is checked in a browser by scripts/range-test.mjs.
 const open = () => { const raid = createRangeRaid(); return { ...raid, range: new ShootingRange(raid.core) }; };
@@ -96,15 +97,15 @@ test('range: a target taken down within one long frame stands up again and check
     assert.ok(r.range.stats.hits.d5 >= 6, JSON.stringify(r.range.stats));
 });
 
-test('range: every weapon can be armed, the M4A1 fires automatically and the bag never runs dry', () => {
+test('range: every gun of the catalog and the knife can be armed, each firing as its handling says, and the bag never runs dry', () => {
     const r = open();
     let t = 0;
-    const ids: Record<string, string> = { pistol: 'pistol', gb17: 'gb17', carbine: 'carbine', shotgun: 'shotgun', mb4a1: 'mb4a1', knife: 'knife' };
+    assert.deepEqual(RANGE_WEAPONS.filter(w => w !== 'knife').sort(), Object.keys(GUNS).sort(), 'all twenty guns (#28 M3)');
     for (const weapon of [...RANGE_WEAPONS, 'pistol', 'knife', 'mb4a1', 'knife', 'mb4a1'] as const) {
         r.range.arm(weapon);
         const b = frame(r, t += .02);
-        assert.equal(b.frame.hud.weapon.id, ids[weapon], weapon);
-        assert.equal(b.frame.hud.aim.mode, weapon === 'mb4a1' ? 'auto' : 'semi', weapon);
+        assert.equal(b.frame.hud.weapon.id, weapon, weapon);
+        assert.equal(b.frame.hud.aim.mode, weapon === 'knife' ? 'semi' : GUNS[weapon].handling.mode, weapon);
     }
     // Pistol clicks for 30 s: the magazine reloads from the bag, and the bag is topped up before it runs out. The shots
     // outnumber a full bag and magazine.

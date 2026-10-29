@@ -15,6 +15,8 @@ export interface SkillScanTarget { id: string; revealed: boolean; inRange: boole
 export interface SkillMechanicSeed {
     runId: string; progress: SkillProgress; bag: D.Inventory; equipment: D.Equipment; vitals: SkillMechanicVitals;
     protectedItems: string[]; containers: SkillScanTarget[];
+    /** Captured from the owning profile at deployment; absent/unknown quest state must not waive reserves. */
+    completedQuests: string[];
 }
 type CommandBase = { id: string; runId: string; atMs: number };
 export type SkillMechanicCommand = CommandBase & (
@@ -22,14 +24,17 @@ export type SkillMechanicCommand = CommandBase & (
     | { kind: 'hurt'; amountMilli: number; enemy: boolean }
     | { kind: 'hostile' | 'fire' | 'reload' | 'scan' }
     | { kind: 'mark-salvage'; uid: string; marked: boolean }
+    /** Explicit per-stack consumption budget. Zero revokes it; successful conversions alone spend it. */
+    | { kind: 'approve-press'; uid: string; quantity: number }
     | { kind: 'observe'; target: SkillScanTarget });
 export interface SkillMechanicJournal {
-    kind: 'bincov-skill-mechanics'; version: 1; seed: SkillMechanicSeed; commands: SkillMechanicCommand[];
+    kind: 'bincov-skill-mechanics'; version: 2; seed: SkillMechanicSeed; commands: SkillMechanicCommand[];
 }
 type Counters = { transferred: number; generatedAmmo: number; usedScrap: number; regeneratedMilli: number; usedBandages: number;
     salvaged: number; scans: number; fired: number; firedRelief: number };
 export interface SkillMechanicView {
     atMs: number; bag: D.Inventory; equipment: D.Equipment; vitals: SkillMechanicVitals; marked: string[];
+    pressApprovals: { uid: string; remaining: number }[];
     containers: SkillScanTarget[]; counters: Counters; lastScan: string[];
 }
 type State = SkillMechanicView & { due: Record<'feed' | 'press' | 'salvage' | 'regen', number>; scanReady: number; serial: number };
@@ -44,7 +49,7 @@ function checkTarget(v: unknown): asserts v is SkillScanTarget {
         || ['revealed', 'inRange', 'lineOfSight', 'opened'].some(k => typeof v[k] !== 'boolean')) bad();
 }
 function checkSeed(v: unknown): asserts v is SkillMechanicSeed {
-    if (!exact(v, ['runId', 'progress', 'bag', 'equipment', 'vitals', 'protectedItems', 'containers'])
+    if (!exact(v, ['runId', 'progress', 'bag', 'equipment', 'vitals', 'protectedItems', 'containers', 'completedQuests'])
         || typeof v.runId !== 'string' || !/^[a-zA-Z0-9_-]{1,48}$/.test(v.runId)) bad();
     assertSkillProgress(v.progress);
     const seen = new Set<string>();
@@ -68,6 +73,8 @@ function checkSeed(v: unknown): asserts v is SkillMechanicSeed {
         || ['waterMilli', 'satietyMilli', 'pollutionMilli'].some(k => !whole(b[k], 0, 100000))) bad();
     if (!Array.isArray(v.protectedItems) || v.protectedItems.length > Object.keys(D.ITEMS).length
         || v.protectedItems.some(id => !hasOwnStringKey(D.ITEMS, id)) || new Set(v.protectedItems).size !== v.protectedItems.length) bad();
+    if (!Array.isArray(v.completedQuests) || v.completedQuests.length > Object.keys(D.QUESTS).length
+        || v.completedQuests.some(id => !hasOwnStringKey(D.QUESTS, id)) || new Set(v.completedQuests).size !== v.completedQuests.length) bad();
     if (!Array.isArray(v.containers) || v.containers.length > 256) bad();
     for (const target of v.containers) checkTarget(target);
     if (new Set(v.containers.map(t => t.id)).size !== v.containers.length) bad();
@@ -85,6 +92,8 @@ function checkCommand(v: unknown): asserts v is SkillMechanicCommand {
             if (!exact(c, [...common, 'amountMilli', 'enemy']) || !whole(c.amountMilli, 0, 1000000) || typeof c.enemy !== 'boolean') bad(); break;
         case 'mark-salvage':
             if (!exact(c, [...common, 'uid', 'marked']) || !identity(c.uid) || typeof c.marked !== 'boolean') bad(); break;
+        case 'approve-press':
+            if (!exact(c, [...common, 'uid', 'quantity']) || !identity(c.uid) || !whole(c.quantity, 0, 3)) bad(); break;
         case 'observe':
             if (!exact(c, [...common, 'target'])) bad(); checkTarget(c.target); break;
         case 'hostile': case 'fire': case 'reload': case 'scan': if (!exact(c, common)) bad(); break;
@@ -99,7 +108,7 @@ function commandKey(c: SkillMechanicCommand): string {
 }
 function initial(seed: SkillMechanicSeed): State {
     return { atMs: 0, bag: structuredClone(seed.bag), equipment: structuredClone(seed.equipment), vitals: structuredClone(seed.vitals),
-        containers: structuredClone(seed.containers), marked: [], counters: { transferred: 0, generatedAmmo: 0, usedScrap: 0,
+        containers: structuredClone(seed.containers), marked: [], pressApprovals: [], counters: { transferred: 0, generatedAmmo: 0, usedScrap: 0,
             regeneratedMilli: 0, usedBandages: 0, salvaged: 0, scans: 0, fired: 0, firedRelief: 0 }, lastScan: [],
         due: initialDue(0), scanReady: 0, serial: 0 };
 }
@@ -133,6 +142,14 @@ const questItems = new Set(Object.values(D.QUESTS).flatMap(q => Object.keys(q.ne
 function salvageable(seed: SkillMechanicSeed, item: D.Item | undefined): item is D.Item {
     return !!item && item.id === 'battery' && !item.relief && !questItems.has(item.id) && !seed.protectedItems.includes(item.id);
 }
+function pressable(seed: SkillMechanicSeed, item: D.Item | undefined): item is D.Item {
+    return !!item && item.id === 'scrap' && !item.relief && !seed.protectedItems.includes(item.id);
+}
+/** Conservatively reserve unfinished quests' full needs in this bag; a future owner may also own stash/secure items. */
+function sparePressMaterials(s: State, seed: SkillMechanicSeed): number {
+    const reserve = Object.entries(D.QUESTS).reduce((n, [id, q]) => n + (seed.completedQuests.includes(id) ? 0 : q.needs.scrap ?? 0), 0);
+    return Math.max(0, s.bag.items.filter(i => i.id === 'scrap' && !i.relief).reduce((n, i) => n + i.qty, 0) - reserve);
+}
 function advance(s: State, seed: SkillMechanicSeed, c: Extract<SkillMechanicCommand, { kind: 'advance' }>, effects: ReturnType<ReturnType<typeof compileSkillEffects>>): void {
     if (c.atMs < s.atMs || c.paused && c.atMs !== s.atMs) bad();
     while (true) {
@@ -145,9 +162,12 @@ function advance(s: State, seed: SkillMechanicSeed, c: Extract<SkillMechanicComm
             if (k === 'feed' && effects.autoFeedRounds && !busy) feed(s, seed);
             if (k === 'press' && effects.pressRounds && !busy && s.counters.generatedAmmo < 6 && D.isGun(s.equipment.weapon)) {
                 const ammo = D.equippedWeapon(s.equipment).ammo;
-                const scrap = s.bag.items.find(i => i.id === 'scrap' && !i.relief && !seed.protectedItems.includes(i.id));
-                if (scrap && ammo && ['ammo9', 'ammoR', 'shell'].includes(ammo)
-                    && exchange(s, seed, scrap.uid, ammo, 2)) { s.counters.generatedAmmo += 2; s.counters.usedScrap++; }
+                const approval = s.pressApprovals.find(a => a.remaining > 0 && pressable(seed, s.bag.items.find(i => i.uid === a.uid)));
+                if (approval && sparePressMaterials(s, seed) > 0 && ammo && ['ammo9', 'ammoR', 'shell'].includes(ammo)
+                    && exchange(s, seed, approval.uid, ammo, 2)) {
+                    approval.remaining--; s.pressApprovals = s.pressApprovals.filter(a => a.remaining > 0);
+                    s.counters.generatedAmmo += 2; s.counters.usedScrap++;
+                }
             }
             if (k === 'salvage' && effects.salvageYield && !busy && s.counters.salvaged < 3) {
                 const item = s.bag.items.find(i => s.marked.includes(i.uid) && salvageable(seed, i));
@@ -181,6 +201,15 @@ function apply(s: State, seed: SkillMechanicSeed, c: SkillMechanicCommand, effec
         if (c.marked && !salvageable(seed, s.bag.items.find(i => i.uid === c.uid))) bad();
         s.marked = s.marked.filter(uid => uid !== c.uid); if (c.marked) s.marked.push(c.uid); return;
     }
+    if (c.kind === 'approve-press') {
+        const item = s.bag.items.find(i => i.uid === c.uid);
+        const others = s.pressApprovals.filter(a => a.uid !== c.uid);
+        if (c.quantity > 0 && (!pressable(seed, item) || c.quantity > item.qty
+            || c.quantity + others.reduce((n, a) => n + a.remaining, 0) > Math.min(sparePressMaterials(s, seed), 3 - s.counters.usedScrap))) bad();
+        s.pressApprovals = others;
+        if (c.quantity > 0) s.pressApprovals.push({ uid: c.uid, remaining: c.quantity });
+        return;
+    }
     if (s.vitals.hpMilli === 0) return;
     if (c.kind === 'hostile') s.due = initialDue(s.atMs);
     if (c.kind === 'hurt' && c.amountMilli > 0) {
@@ -206,7 +235,7 @@ function apply(s: State, seed: SkillMechanicSeed, c: SkillMechanicCommand, effec
     }
 }
 function replay(value: unknown): State {
-    if (!exact(value, ['kind', 'version', 'seed', 'commands']) || value.kind !== 'bincov-skill-mechanics' || value.version !== 1) bad();
+    if (!exact(value, ['kind', 'version', 'seed', 'commands']) || value.kind !== 'bincov-skill-mechanics' || value.version !== 2) bad();
     checkSeed(value.seed);
     if (!Array.isArray(value.commands) || value.commands.length > MAX_COMMANDS) bad();
     const s = initial(value.seed), ids = new Set<string>();
@@ -221,7 +250,7 @@ function publicView(s: State): SkillMechanicView {
     const { due: _due, scanReady: _ready, serial: _serial, ...view } = s; return structuredClone(view);
 }
 export function newSkillMechanics(seed: SkillMechanicSeed): SkillMechanicJournal {
-    const journal: SkillMechanicJournal = { kind: 'bincov-skill-mechanics', version: 1, seed: structuredClone(seed), commands: [] };
+    const journal: SkillMechanicJournal = { kind: 'bincov-skill-mechanics', version: 2, seed: structuredClone(seed), commands: [] };
     replay(journal); return journal;
 }
 export function skillMechanicView(journal: SkillMechanicJournal): SkillMechanicView { return publicView(replay(journal)); }

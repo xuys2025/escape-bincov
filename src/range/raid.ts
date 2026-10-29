@@ -15,10 +15,15 @@ import { drawAim, SWAY } from '../shooting';
 import { checkpointBodyFits, traversable } from '../spatial';
 import type { Point } from '../world';
 import type { PartNode } from '../gunsmith/instance';
+import type { GunId } from '../gunsmith/catalog';
 
-/** The weapons the panel hands out: the old three, the real G17 and M4A1 (the M4A1 was the #39 sample rifle until M2-01) and the knife. */
-export type RangeWeapon = 'pistol' | 'gb17' | 'carbine' | 'shotgun' | 'mb4a1' | 'knife';
-export const RANGE_WEAPONS: readonly RangeWeapon[] = ['pistol', 'gb17', 'carbine', 'shotgun', 'mb4a1', 'knife'];
+/**
+ * The weapons the panel hands out: every gun of the catalog (#28 M3), by class as WEAPONS.md lists them (pistols,
+ * submachine guns, shotguns, rifles, precision rifles, the machine gun), and the knife.
+ */
+export type RangeWeapon = GunId | 'knife';
+export const RANGE_WEAPONS: readonly RangeWeapon[] = ['pistol', 'gb17', 'pb226', 'mb1911', 'mpb5', 'vb9', 'umpb45', 'pb90', 'shotgun', 'mb870', 'mb1014',
+    'carbine', 'akb74', 'akb103', 'mb4a1', 'augb', 'svdb', 'mb14', 'mb700', 'rpkb', 'knife'];
 
 /**
  * The two M4A1 builds the M2-15 playtest compares (PLAN section 11, Sol's approved preview configurations): light
