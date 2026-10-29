@@ -63,6 +63,9 @@ const signed = (n: number, digits = 0) => `${n > 0 ? '+' : n < 0 ? '−' : ''}${
 const ammoName = (gun: GunId) => D.ITEMS[GUNS[gun].stats.ammo]?.name ?? '';
 const sizeText = (s: { w: number; h: number }) => `${s.w} × ${s.h}`;
 /** Before → after when they differ, else the one value. */
+/** Where a gun that no longer fits where it lies goes on confirm (GunEditPreview.relocated, PLAN section 8). */
+const INTO: Readonly<Record<'stash' | 'bag' | 'safe', string>> = { stash: '仓库', bag: '背包', safe: '安全箱' };
+const relocation = (r: NonNullable<GunEditPreview['relocated']>) => `放到${INTO[r.where]}第 ${r.y + 1} 行第 ${r.x + 1} 列${r.rotated ? '，转向' : ''}`;
 const arrow = (a: string, z: string) => a === z ? a : `${a} → <b>${z}</b>`;
 
 export class Workbench {
@@ -398,7 +401,7 @@ export class Workbench {
     /** The phone's fixed bar: what the preview changes (opens the sheet), why it cannot be confirmed, cancel and confirm. */
     private phoneFootHtml(p: GunEditPreview | null) {
         const n = p?.unloaded ? p.unloaded.normal + p.unloaded.relief : 0;
-        const summary = p ? `待装 ${p.installs.length} · 待卸 ${p.removals.length}${n ? ` · 卸出 ${n} 发` : ''}` : '还没有改动';
+        const summary = p ? `待装 ${p.installs.length} · 待卸 ${p.removals.length}${n ? ` · 卸出 ${n} 发` : ''}${p.relocated ? ' · 换位置' : ''}` : '还没有改动';
         const token = !!this.session.view().token, why = p?.refusal && p.refusal.code !== 'unchanged' ? `<p class="gs-block" role="alert">${esc(p.refusal.reason)}</p>` : '';
         return `<footer class="gs-cfoot">${b(`<span>${summary}</span><small>明细</small>`, 'sheet', '', 'gs-sumbtn', p ? 'aria-haspopup="dialog"' : 'disabled')}${b('取消', 'cancel', '', '', p ? '' : 'disabled')}${b('确认', 'confirm', '', 'primary', token ? '' : 'disabled')}${why}</footer>`;
     }
@@ -530,14 +533,15 @@ export class Workbench {
     private effectsHtml(gun: BenchGun, p: GunEditPreview | null) {
         const why = p?.refusal && p.refusal.code !== 'unchanged' ? `<span class="gs-block" role="alert">${esc(p.refusal.reason)}</span>` : '';
         const unload = p?.unloaded && gun.where === 'equipment' ? `<span>卸出 ${p.unloaded.normal + p.unloaded.relief} 发${esc(D.ITEMS[p.unloaded.ammo]?.name ?? '')}，放进仓库${p.unloaded.relief ? `（其中救济 ${p.unloaded.relief} 发）` : ''}</span>` : '';
+        const move = p?.relocated && !why ? `<span>枪身变大，原位放不下：确认后${relocation(p.relocated)}</span>` : '';
         const note = p ? '确认后一次保存；取消回到枪上的配置。' : '改动只在预览里，确认前不会动到枪和仓库。';
-        return `<p class="gs-fx">${why}${unload}${why || unload ? '' : `<span class="gs-dim">${note}</span>`}</p>`;
+        return `<p class="gs-fx">${why}${move}${unload}${why || move || unload ? '' : `<span class="gs-dim">${note}</span>`}</p>`;
     }
 
     /** Weight, magazine, unloaded rounds (equipped guns) and footprint, before → after. */
     private sumHtml(gun: BenchGun, p: GunEditPreview | null) {
         const unload = p?.unloaded ? `卸出 ${p.unloaded.normal + p.unloaded.relief} 发${esc(D.ITEMS[p.unloaded.ammo]?.name ?? '')}，放进仓库${p.unloaded.relief ? `（其中救济 ${p.unloaded.relief} 发）` : ''}` : '不用卸弹';
-        return p ? `<dl class="gs-sum"><div><dt>枪重</dt><dd>${arrow(kg(p.weight.before), kg(p.weight.after))}</dd></div><div><dt>弹匣</dt><dd>${arrow(`${p.capacity.before} 发`, `${p.capacity.after} 发`)}</dd></div>${gun.where === 'equipment' ? `<div><dt>子弹</dt><dd>${unload}</dd></div>` : ''}<div><dt>占格</dt><dd>${arrow(sizeText(p.size.before), sizeText(p.size.after))}</dd></div></dl>` : '<p class="gs-dim gs-sum">还没有改动。</p>';
+        return p ? `<dl class="gs-sum"><div><dt>枪重</dt><dd>${arrow(kg(p.weight.before), kg(p.weight.after))}</dd></div><div><dt>弹匣</dt><dd>${arrow(`${p.capacity.before} 发`, `${p.capacity.after} 发`)}</dd></div>${gun.where === 'equipment' ? `<div><dt>子弹</dt><dd>${unload}</dd></div>` : ''}<div><dt>占格</dt><dd>${arrow(sizeText(p.size.before), sizeText(p.size.after))}</dd></div>${p.relocated ? `<div><dt>位置</dt><dd>原位放不下，${relocation(p.relocated)}</dd></div>` : ''}</dl>` : '<p class="gs-dim gs-sum">还没有改动。</p>';
     }
 
     /** The desktop bar's cancel and confirm, side by side. */

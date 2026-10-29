@@ -80,10 +80,13 @@ const layout = p => p.evaluate(() => {
   const box = el => { const r = el.getBoundingClientRect(); return { l: r.left, t: r.top, r: r.right, b: r.bottom, w: r.width, h: r.height }; };
   const hud = [...document.querySelectorAll('.coast-sample .cs-status, .coast-sample .cs-keys, .coast-sample .cs-arms, .coast-sample .cs-info, .coast-sample .cs-clock, .coast-sample .cs-touch button')]
     .filter(el => el.getBoundingClientRect().width > 0).map(el => ({ name: `${el.className} ${el.textContent.slice(0, 8)}`.trim(), ...box(el) }));
-  return { panel: box(document.querySelector('.range-panel').shadowRoot.querySelector('.rg')), hud, view: { w: innerWidth, h: innerHeight } };
+  const rg = document.querySelector('.range-panel').shadowRoot.querySelector('.rg');
+  return { panel: { ...box(rg), sideways: rg.scrollWidth > rg.clientWidth + 1 }, hud, view: { w: innerWidth, h: innerHeight } };
 });
 function fits({ panel, hud, view }, label) {
   assert.ok(panel.w > 0 && panel.l >= 0 && panel.t >= 0 && panel.r <= view.w && panel.b <= view.h, `${label}: panel outside the view ${JSON.stringify(panel)}`);
+  // Twenty guns in a row of buttons (#28 M3) must not push the panel sideways on a narrow phone panel.
+  assert.equal(panel.sideways, false, `${label}: the panel scrolls sideways`);
   for (const part of hud) assert.ok(!(panel.l < part.r && part.l < panel.r && panel.t < part.b && part.t < panel.b), `${label}: panel covers ${part.name}`);
 }
 
