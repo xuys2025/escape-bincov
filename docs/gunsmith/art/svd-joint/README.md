@@ -51,6 +51,18 @@ node docs/gunsmith/art/svd-joint/validate.mjs
 
 `finish.mjs` 从正式旧图导出暂存图和预览，`validate.mjs` 独立检查实际 PNG 与基线。正式接入由实现方按 `replacesSha256` 搬到 `v1/`、更新正式清单和导入模块，再验收游戏内画面；本交付不改变存档、规则、离线依赖或发布版本。
 
+## 接入游戏（PR #149）
+
+实现方签收后接入：三张图按 `replacesSha256` 搬进 `assets/gunsmith/v1/`，旧图删除；正式清单升到第 7 版（636 张、98,605 字节），由 `scripts/gunsmith-assets.mjs` 重新生成导入模块；本批清单移到 [incoming-manifest.json](incoming-manifest.json)。`validate.mjs` 校验的是接入前的暂存图和正式基线，接入后不再适用，结果留在 [validation.json](validation.json)。
+
+工作台逐像素比对（gunsmith-bench A1）只略过 `source/edits.json` 记录的 70 个像素，其余与审定预览逐像素相同。游戏内截图（离线打包页面）：
+
+| 工作台 1280×720 | 仓库与主武器槽 1920×1080 | 试枪场手持与武器卡 1280×720 |
+| --- | --- | --- |
+| ![](../../evidence/svd-joint/bench-1280x720.png) | ![](../../evidence/svd-joint/gear-1920x1080.png) | ![](../../evidence/svd-joint/range-held-1280x720.png) |
+
+另有 [工作台 1920×1080](../../evidence/svd-joint/bench-1920x1080.png)、[仓库 1280×720](../../evidence/svd-joint/gear-1280x720.png)。
+
 ## 实际验证与交接
 
 | 检查 | 结果 |

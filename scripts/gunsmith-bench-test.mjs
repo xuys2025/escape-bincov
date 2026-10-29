@@ -125,8 +125,12 @@ try {
     // with the preview PNG channel by channel. #28 M3-04 adds Sol's wave-one records and M3-08 wave two's, each against
     // its 1x preview, and the bare side views (the ground and the HUD card) where Sol drew one. M3-12 redrew the
     // magazines (M3-W3): a picture with one is compared outside the region each redrawn image changed, at the same width;
-    // the new magazines' layouts are checked against Sol's M3-W3 records in tests/gunsmith-art.test.ts.
-    const { redrawn } = JSON.parse(await readFile('tests/fixtures/gunsmith-m3-w3-redrawn.json', 'utf8'));
+    // the new magazines' layouts are checked against Sol's M3-W3 records in tests/gunsmith-art.test.ts. Sol's SVD joint
+    // repair (#80, svd-joint) changed 70 single pixels of the SVD receivers: those pixels are left out as well.
+    const { redrawn: magazines } = JSON.parse(await readFile('tests/fixtures/gunsmith-m3-w3-redrawn.json', 'utf8'));
+    const { redrawn: joints } = JSON.parse(await readFile('tests/fixtures/gunsmith-svd-joint-redrawn.json', 'utf8'));
+    const redrawn = Object.fromEntries([...new Set([...Object.keys(magazines), ...Object.keys(joints)])]
+      .map(key => [key, [...magazines[key] ? [magazines[key]] : [], ...joints[key] ?? []]]));
     const { assemblies } = JSON.parse(await readFile('tests/fixtures/gunsmith-assemblies.json', 'utf8'));
     const cases = await Promise.all(assemblies.map(async a => ({ name: `${a.gun}-${a.configuration}-${a.code}`, gun: a.gun, code: a.code,
       parts: CONFIGS[a.gun][a.configuration](), png: (await readFile(a.file)).toString('base64') })));
@@ -159,7 +163,7 @@ try {
         const canvas = layout && art.draw(layout);
         if (!canvas) { out.push(`${c.name}: not drawn`); continue; }
         const img = new Image(); img.src = `data:image/png;base64,${c.png}`; await img.decode();
-        const masks = layout.layers.filter(l => redrawn[l.key]).map(l => { const [x, y, w, h] = redrawn[l.key]; return [l.x + x, l.y + y, w, h]; });
+        const masks = layout.layers.flatMap(l => (redrawn[l.key] ?? []).map(([x, y, w, h]) => [l.x + x, l.y + y, w, h]));
         if (img.width !== canvas.width || (!masks.length && img.height !== canvas.height)) { out.push(`${c.name}: ${canvas.width}x${canvas.height}, preview ${img.width}x${img.height}`); continue; }
         const ref = document.createElement('canvas'); ref.width = img.width; ref.height = img.height;
         const rc = ref.getContext('2d'); rc.drawImage(img, 0, 0);
