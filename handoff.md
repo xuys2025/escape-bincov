@@ -293,6 +293,16 @@ Node v24.22.1 本轮实际生成两份 V8 快照（5,210,690 / 5,211,160 bytes�
 
 10-28 维护者授权合并时，main 已通过 #106 前进到 `02b5e1e5c5261f5caea55dccc875c8ae93e3120b`。无冲突组合的 77 项 CI 守卫通过，但 GitHub 分支保护拒绝原 head 的合并，明确要求新的 `Build and test`；因此正常合入该主线、保持原 PR 继续检查。同步后完整单测 1020/1020、CI 守卫 77/77、严格打包通过；HTML SHA-256 `cd6aed02e003c2eab97ab2705633476333cd13433f6142a2271fa230e8675708`。相对当前 main 仍只有原 5 个任务文件变化，游戏和原辅助算法没有本 PR 引入的改动。最终准确 head 检查与授权合并状态见原 PR，不绕过保护或自行变更发布规则。
 
+## 2026-10-28 资源趋势工具轮数参数拒绝（续作 #111）
+
+基线 main `974a3a8d1ad2a7662c3a828226295d6c9b31eb64`，承接 #32 的诊断证据边界。`scripts/station-resource-trend.mjs` 原先在创建输出目录、读取 HTML、启动 Chromium 后才解析轮数；`--rounds=NaN`、`0`、空值和负数会跳过循环，却可能写出 `BOUNDED_CHECKS_PASS_HEAP_PENDING`。只修参数入口：`station-resource-args.mjs` 在副作用前校验，默认 60，保留 `--rounds=N` 的正安全整数；拒绝缺值、非整数、非有限、非正和重复选项，不新增空格传值语法。原工具继续归 `review`，没有调整 F20 阈值、采样循环或状态公式。
+
+原实现的 CI Node 测试启动真实 CLI，以不存在的 HTML 为前置哨兵：非法轮数必须先报参数错误且不创建输出目录；默认和合法轮数只走到原 HTML 前置，不启动浏览器。未执行六十轮、缩短轮数浏览器或 F20 签收。10-25 历史验证：`pnpm test` 874/874、`pnpm check:ci` 67/67 与 `pnpm package` 全部通过；任务入口文档与 `git diff --check` 通过。打包 HTML、portable/web ZIP 分别保持主线哈希 `b309e11f…`、`ec356f01…`、`854bc3cd…`。首次受限沙箱的 Git 子进程报 EPERM，按环境允许方式重验通过，不改断言。原交付在 [PR #111](https://github.com/xuys2025/escape-bincov/pull/111) 保持，不另建同目标 PR。
+
+10-28 维护者授权继续找简单任务后，在本聊天管理的隔离工作树续作原 head `a379337fe369b0f0a8b719e23d5adce0ff30b50f`，正常合入 main `b5bd63b7896b3b0697d4ba38d02d000e78903047`。仅任务清单、交接和脚本分类表冲突：保留主线 #112/#114 的登记，新增参数 helper 为 support，trend 继续 review。没有切换主检出的 M3 分支。离线依赖缓存缺包，按 frozen lockfile 从官方 npm 源安装后验证，锁文件和依赖声明未改。Windows 10 / Node 24.22.1 / pnpm 11.19.0：同一真实 CLI 回归在主线为 2/3（一项预期失败，非法轮数仍先读缺失 HTML），候选 3/3；包含 13 组非法参数与 4 组合法/默认 CLI 输入，不启动浏览器。完整单测 1020/1020、CI 守卫 80/80、严格打包通过。HTML SHA-256 `cd6aed02e003c2eab97ab2705633476333cd13433f6142a2271fa230e8675708`，游戏源码、素材和构建输入相对该 main 无差异，生成物不提交。准确 head 与完整 CI 见原 PR；未运行六十轮资源诊断或 F20，不扩大签收，未合并或发布。
+
+10-29 按维护者“检查并完成111”续作原 head `1c613947be40b7fd6ce494b5702fd9cae05a44dc`，正常合入 main `275fafd77b1574938ecc0409ab405b77850359c1`。任务清单、交接、脚本分类三处冲突均保留双方更新，新增的 `source-graph.mjs`、`resource-report-input.mjs` 登记保留；复查原参数修复无需补改。Windows / Node 24.19.0 / pnpm 11.19.0：frozen lockfile 安装、1056/1056 单测、113/113 工程守卫（含3项参数回归）和严格打包全部通过；最新 main 原 CLI 的相同回归为2通过/1预期失败，仍先报缺失HTML，候选覆盖13组非法和4组合法/默认CLI输入。HTML SHA-256 `a190498102bdf579ed82b70627ea2c1e36ce339ac76881db85e4977a99c21c45`，便携ZIP 6,035,864字节；游戏源码、素材、依赖与构建规则相对该main无差异，生成物不提交。准确新head与远端完整CI见原PR；未执行资源采样/F20，仍需维护者明确授权后合并。
+
 ## 2026-10-28 #60 D8：失焦后第一次按键恢复（续作 PR #107）
 
 沿原分支 `fix/first-key-after-blur` / [PR #107](https://github.com/xuys2025/escape-bincov/pull/107) 从 head `a169e7a5d5c984a74fb94291c4bbfa10d444fcfa` 续作，正常合入已接受 main `efe2bede6af0ed33fec065a26755e1f8ff7d0256`；保留 M2、#114、#131 与双方交接，没有覆盖其他工作树。`InputState.key` 区分新按与连发，只解除本键抑制；宿主 Shift 状态观察不复活旧冲刺，E 关闭面板仍直接返回。原新按恢复测试扩到 M2 的 F/G 命令。

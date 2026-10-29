@@ -2,6 +2,7 @@
  * R3 resource identity and separated 60-round workloads. Initial helpers below are frozen copies of Sol R2's
  * fixtures/input/traversal/release gates; the original station-round2-recheck.mjs is not changed.
  * Usage: node --import tsx scripts/station-resource-trend.mjs --mode=remount|shared|context --rounds=60 --snapshots --out=<new dir>
+ * --rounds=<positive safe integer> defaults to 60; missing values and repeated --rounds options are errors.
  * --mode=probe records cold/first-return/context identities. Render-fixture prewarming is documented below;
  * it tests bounded resource domains, not gameplay correctness. PARTIAL exit 0 means sampling completed, not acceptance.
  */
@@ -14,7 +15,9 @@ import { browserOptions } from './browser-options.mjs';
 import * as D from '../src/domain.ts';
 import { assertFrames } from './station-acceptance-gates.mjs';
 import { readManagedTables, readPixiEvents } from './pixi-managed-gate.mjs';
+import { parseTrendRounds } from './station-resource-args.mjs';
 
+const rounds = parseTrendRounds(process.argv.slice(2));
 const out = resolve(process.argv.find(a => a.startsWith('--out='))?.slice(6) ?? 'test-results/astra-resource-r3/probe'); await mkdir(out, { recursive: true });
 // --html=<file> runs the same checks against another build (the saved pre-fix build for failure controls).
 const htmlPath = process.argv.find(a => a.startsWith('--html='))?.slice(7) ?? 'dist/index.html';
@@ -149,7 +152,6 @@ const compare=(a,b)=>{for(const k of ['listeners','tickers','views','apps','park
 // R3 keeps Sol's action/traversal/release helpers above. The original R script is unchanged.
 import {installProbe,inventory,warmVariants,markRelease,checkRelease} from './station-resource-probe.mjs';
 const mode=process.argv.find(a=>a.startsWith('--mode='))?.slice(7)??'probe';
-const rounds=Number(process.argv.find(a=>a.startsWith('--rounds='))?.slice(9)??60);
 const snapshots=process.argv.includes('--snapshots');
 let cdp;
 report.mode=mode;report.rounds=rounds;report.buildSHA256=createHash('sha256').update(html).digest('hex');
