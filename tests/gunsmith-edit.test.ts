@@ -244,32 +244,47 @@ test('a part the player lacks previews under a placeholder, takes parts under it
     assert.deepEqual(refused(planGunEdit(p, 'm4', [{ kind: 'install', id: 'O03' }]), 'unowned').preview!.installs.map(i => i.uid), ['unowned-1-2']);
 });
 
-test('the gun must still fit where it lies, and the stash must take what comes off, or nothing is planned', () => {
-    // A G17 with its barrel set in the stash, a watch beside it: the suppressor makes it 3x1.
+test('a gun that no longer fits where it lies moves to another place the preview names; with none, and the stash must take what comes off, nothing is planned', () => {
+    // A G17 with its barrel set in the stash, a watch beside it: the suppressor makes it 3x1, too long for its place, so
+    // it goes to the stash's first free place (PLAN section 8); confirming moves it, cancelling leaves it.
     const p = base();
     put(p.stash, gun('g17', 'gb17', [node('b01', 'B01', 'barrel')], OFF, { x: 0, y: 0 }));
     put(p.stash, { uid: 'watch', id: 'watch', x: 2, y: 0 });
     put(p.bag, { uid: 'm03', id: 'M03' });
-    let r = refused(planGunEdit(p, 'g17', [{ kind: 'install', uid: 'm03' }]), 'footprint');
-    assert.equal(r.reason, '改装后枪身变大，在仓库原来的位置放不下，请先腾出空间。');
-    assert.deepEqual(r.preview!.size, { before: { w: 2, h: 1 }, after: { w: 3, h: 1 } });
+    const moved = done(planGunEdit(p, 'g17', [{ kind: 'install', uid: 'm03' }]));
+    assert.deepEqual([moved.preview.relocated, moved.preview.size], [{ where: 'stash', x: 3, y: 0, rotated: false }, { before: { w: 2, h: 1 }, after: { w: 3, h: 1 } }]);
+    assert.deepEqual([find(moved.profile, 'g17')!.x, find(moved.profile, 'g17')!.y, D.itemSize(find(moved.profile, 'g17')!)], [3, 0, { w: 3, h: 1 }]);
+    assert.ok(moved.profile.stash.items.some(i => i.uid === 'g17')); conserved(p, moved);
+    // Where it still fits it stays.
     p.stash.items = p.stash.items.filter(i => i.uid !== 'watch');
     const grown = done(planGunEdit(p, 'g17', [{ kind: 'install', uid: 'm03' }]));
-    assert.deepEqual(find(grown.profile, 'g17')!.x, 0); assert.deepEqual(D.itemSize(find(grown.profile, 'g17')!), { w: 3, h: 1 });
+    assert.deepEqual([grown.preview.relocated, find(grown.profile, 'g17')!.x], [null, 0]); assert.deepEqual(D.itemSize(find(grown.profile, 'g17')!), { w: 3, h: 1 });
     conserved(p, grown);
-    // Lying rotated it grows downwards; in the 2x2 safe it cannot grow at all.
+    // With no place in the stash it goes into the bag; with none there either, nothing is planned.
+    const crowded = base();
+    put(crowded.stash, gun('g17', 'gb17', [node('b01', 'B01', 'barrel')], OFF, { x: 0, y: 0 }));
+    D.addItem(crowded.stash, 'fuse', crowded.stash.w * crowded.stash.h * D.ITEMS.fuse.stack);
+    put(crowded.bag, { uid: 'm03', id: 'M03' });
+    const bagged = done(planGunEdit(crowded, 'g17', [{ kind: 'install', uid: 'm03' }]));
+    assert.deepEqual(bagged.preview.relocated, { where: 'bag', x: 0, y: 0, rotated: false });
+    assert.ok(bagged.profile.bag.items.some(i => i.uid === 'g17') && !bagged.profile.stash.items.some(i => i.uid === 'g17')); conserved(crowded, bagged);
+    D.addItem(crowded.bag, 'fuse', crowded.bag.w * crowded.bag.h * D.ITEMS.fuse.stack);
+    let r = refused(planGunEdit(crowded, 'g17', [{ kind: 'install', uid: 'm03' }]), 'footprint');
+    assert.equal(r.reason, '改装后枪身变大，仓库和背包里都放不下，请先腾出空间。');
+    // Lying turned it grows downwards; blocked below, it keeps its turn and goes to the first free column.
     const q = base();
     put(q.stash, gun('g17', 'gb17', [node('b01', 'B01', 'barrel')], OFF, { x: 4, y: 0, rotated: true }));
     put(q.stash, { uid: 'watch', id: 'watch', x: 4, y: 2 });
     put(q.bag, { uid: 'm03', id: 'M03' });
-    refused(planGunEdit(q, 'g17', [{ kind: 'install', uid: 'm03' }]), 'footprint');
+    assert.deepEqual(done(planGunEdit(q, 'g17', [{ kind: 'install', uid: 'm03' }])).preview.relocated, { where: 'stash', x: 0, y: 0, rotated: true });
     q.stash.items = q.stash.items.filter(i => i.uid !== 'watch');
     const down = done(planGunEdit(q, 'g17', [{ kind: 'install', uid: 'm03' }]));
-    assert.deepEqual([D.itemSize(find(down.profile, 'g17')!), find(down.profile, 'g17')!.rotated], [{ w: 1, h: 3 }, true]);
+    assert.deepEqual([D.itemSize(find(down.profile, 'g17')!), find(down.profile, 'g17')!.rotated, down.preview.relocated], [{ w: 1, h: 3 }, true, null]);
+    // A gun in the 2x2 safe stays in the safe, so it keeps its protection: it cannot grow there at all, room elsewhere or not.
     const s = base();
     put(s.safe, gun('g17', 'gb17', [node('b01', 'B01', 'barrel')]));
     put(s.bag, { uid: 'm03', id: 'M03' });
-    assert.equal(refused(planGunEdit(s, 'g17', [{ kind: 'install', uid: 'm03' }]), 'footprint').reason, '改装后枪身变大，在安全箱原来的位置放不下，请先腾出空间。');
+    assert.equal(refused(planGunEdit(s, 'g17', [{ kind: 'install', uid: 'm03' }]), 'footprint').reason, '改装后枪身变大，安全箱里放不下，请先腾出空间。');
     // What comes off needs room in the stash: a full stash refuses the handguard, a free 1x2 gap takes it turned.
     const full = base();
     hold(full, 'm4', 'mb4a1', [node('h01', 'H01', 'handguard')]);

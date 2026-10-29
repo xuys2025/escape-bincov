@@ -526,6 +526,26 @@ try {
     return res.join('、');
   });
 
+  await step('B10-grown-gun-moves-to-the-place-the-bar-names', async () => {
+    // PLAN section 8: a gun that no longer fits where it lies goes to another place; the bar says where before the
+    // confirm, and the confirm puts it there. The fixture's G17 lies at the stash's corner with a part beside it, so the
+    // barrel group and the suppressor (3 cells long) cannot stay.
+    await open(); await openFromSlot();
+    const g17 = (await snapshot()).profile.stash.items.find(i => i.id === 'gb17');
+    await bench(`[data-gs="gun"][data-arg="${g17.uid}"]`).click();
+    await pos('gun/barrel/0').click(); await part('B01').click();
+    await pos('gun/muzzle/0').click(); await part('M03').click();
+    const text = await bench('.gs-fx').innerText(), at = /原位放不下：确认后放到仓库第 (\d+) 行第 (\d+) 列/.exec(text);
+    assert.ok(at, `the bar names the new place: ${text}`);
+    await shot('10-desktop-1280x720-relocated');
+    await bench('[data-gs="confirm"]').click();
+    await page.waitForFunction(uid => window.__bincov.hideoutRuntime.snapshot().profile.stash.items.find(i => i.uid === uid)?.gun.parts.length === 2, g17.uid);
+    const moved = (await snapshot()).profile.stash.items.find(i => i.uid === g17.uid);
+    assert.deepEqual([moved.y + 1, moved.x + 1], [Number(at[1]), Number(at[2])], 'it lies where the bar said');
+    assert.notDeepEqual([moved.x, moved.y], [g17.x, g17.y]);
+    return `G17 (${g17.x}, ${g17.y}) → (${moved.x}, ${moved.y})`;
+  });
+
   await step('B5-desktop-1920x1080', async () => {
     await open(fixture(), [1920, 1080]); await openFromSlot(); await fits();
     await pos('gun/top/0').click(); await bench('[data-gs="unowned"]').click(); await bench('[data-gs="detail"]').click();
