@@ -218,7 +218,7 @@ export function magEdits(profile: Readonly<D.SaveDataV1>, gun: Pick<BenchGun, 'i
     if (to === 'empty') return { edits: build.magOut ? edits : [...edits, { kind: 'eject' }] };
     if (!build.magOut) return { edits };
     const id = FACTORY_MAGS[gun.id]!, uid = ejected ?? looseParts(profile, new Set()).get(id)?.find(c => gun.relief || !c.relief)?.uid;
-    return uid ? { edits: [...edits, { kind: 'install', uid }] } : { reason: `基地里没有能装回的${partDef(id).name}。` };
+    return uid ? { edits: [...edits, { kind: 'install', uid }] } : { reason: `基地里没有能装回的${after(partDef(id).name)}。` };
 }
 
 /**

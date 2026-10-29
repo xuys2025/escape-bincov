@@ -188,7 +188,7 @@ export function planGunEdit(profile: D.SaveDataV1, gunUid: string, edits: readon
         }
         if (edit.kind === 'install' && 'uid' in edit && (edit.uid === out || factoryMagOf(loose.get(edit.uid)?.item.id ?? ''))) {
             const there = loose.get(edit.uid), id = there?.item.id ?? FACTORY_MAGS[gun.id]!;
-            if (factoryMagOf(id) !== gun.id) return refuse('mag', `${partDef(id).name}只能装回${GUNS[factoryMagOf(id)!].stats.name}。`, index);
+            if (factoryMagOf(id) !== gun.id) return refuse('mag', `${partDef(id).name}只能装回${spaced(GUNS[factoryMagOf(id)!].stats.name)}。`, index);
             if (edit.at && (edit.at.parent !== null || edit.at.slot !== 'mag')) return refuse('place', '不能装在这个位置', index);
             if (!magOut) return refuse('mag', MAG_IN, index);
             if (magOn()) return refuse('mag', MAG_ON, index);

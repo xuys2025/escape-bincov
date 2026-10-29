@@ -176,7 +176,7 @@ test('refusals: a fixed magazine, one out already, one on, another gun type, a r
     refused(planGunEdit(p, 'm4b', [{ kind: 'eject' }, { kind: 'eject' }]), 'mag', 1, '这把枪的原厂弹匣已经拆下了。');
     refused(planGunEdit(p, 'ak', [{ kind: 'eject' }]), 'mag', 0, '先拆下装着的弹匣。');
     refused(planGunEdit(p, 'm4b', [{ kind: 'install', uid: 'mag' }]), 'mag', 0, '这把枪的原厂弹匣还在枪上。');
-    refused(planGunEdit(p, 'm4', [{ kind: 'install', uid: 'akmag' }]), 'mag', 0, 'AK-74 原厂弹匣只能装回AK-74 稳定步枪。');
+    refused(planGunEdit(p, 'm4', [{ kind: 'install', uid: 'akmag' }]), 'mag', 0, 'AK-74 原厂弹匣只能装回 AK-74 稳定步枪。');
     refused(planGunEdit(p, 'm4', [{ kind: 'install', uid: 'rmag' }]), 'mag', 0, '救济的原厂弹匣只能装回救济枪。');
     refused(planGunEdit(p, 'm4', [{ kind: 'install', uid: 'mag', at: { parent: null, slot: 'stock' } }]), 'place', 0);
     refused(planGunEdit(p, 'm4b', [{ kind: 'eject' }, { kind: 'install', uid: 'mag-m4b', at: { parent: null, slot: 'stock' } }]), 'place', 1);
@@ -205,7 +205,7 @@ test('the bench: the mag position says the magazine is out; its two cards append
     assert.deepEqual(magEdits(p, ak, at(ak).build, at(ak).at, 'factory', null), { edits: [{ kind: 'remove', uid: 'g08' }] });
     const bare = base(); put(bare.stash, { ...gun('m4', 'mb4a1'), gun: out({ parts: [], devices: OFF }) });
     const g = benchGuns(bare)[0], b = buildOf({ id: g.id, ...g.state });
-    assert.deepEqual(magEdits(bare, g, b, positions(b).find(x => x.slot === 'mag')!, 'factory', null), { reason: '基地里没有能装回的M4A1 原厂弹匣。' });
+    assert.deepEqual(magEdits(bare, g, b, positions(b).find(x => x.slot === 'mag')!, 'factory', null), { reason: '基地里没有能装回的 M4A1 原厂弹匣。' });
     assert.deepEqual(partFits(p, 'mb4a1-mag').map(f => [f.uid, f.reason]), [['m4', null], ['m4b', '它的原厂弹匣还在枪上']]);
     assert.deepEqual(partFits(p, 'akb74-mag').map(f => [f.uid, f.reason]), [['ak', '它的原厂弹匣还在枪上']]);
 });
