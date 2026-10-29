@@ -1387,8 +1387,7 @@ export class CoastView {
     const dx = (clientX - rect.left) * (this.view.W / Math.max(1, rect.width)), dy = (clientY - rect.top) * (this.view.H / Math.max(1, rect.height));
     return { x: dx / this.view.s + this.cam.x, y: dy / this.view.s + this.cam.y };
   }
-  worldToClient(p: Point): Point {
-    const rect = this.app.canvas.getBoundingClientRect();
+  worldToClient(p: Point, rect = this.app.canvas.getBoundingClientRect()): Point {
     return { x: rect.left + (p.x - this.cam.x) * this.view.s * rect.width / Math.max(1, this.view.W), y: rect.top + (p.y - this.cam.y) * this.view.s * rect.height / Math.max(1, this.view.H) };
   }
   /**
@@ -1455,6 +1454,22 @@ export class CoastView {
   /** Stair labels to show now: text, world anchor (top centre) and whether the rules show it. */
   stairLabelViews(): { id: string; text: string; x: number; y: number; visible: boolean }[] {
     return (this.map?.entries ?? []).map(e => { const s = this.stairLabels.get(e.id); return { id: e.id, text: e.label, x: s?.x ?? e.at.x, y: s?.y ?? e.at.y, visible: !!s?.visible }; });
+  }
+  /** Current drawn enemy bodies in client pixels, clipped to the canvas. Hidden rooms and other floors provide no cue. */
+  enemyBodyViews(): Rect[] {
+    const canvas = this.app.canvas.getBoundingClientRect(), bodies: Rect[] = [];
+    for (const a of this.last?.actors ?? []) {
+      const body = this.actors.get(a.uid)?.body;
+      if (!body?.visible || !body.renderable || body.alpha <= 0) continue;
+      // Transform the actual frame's local bounds, including its anchor, pose scale, tilt and hit displacement.
+      const b = body.getLocalBounds(), c = Math.cos(body.rotation), s = Math.sin(body.rotation);
+      const corners = [[b.minX, b.minY], [b.maxX, b.minY], [b.minX, b.maxY], [b.maxX, b.maxY]].map(([x, y]) =>
+        this.worldToClient({ x: body.x + x * body.scale.x * c - y * body.scale.y * s, y: body.y + x * body.scale.x * s + y * body.scale.y * c }, canvas));
+      const left = Math.max(canvas.left, Math.min(...corners.map(p => p.x))), right = Math.min(canvas.right, Math.max(...corners.map(p => p.x)));
+      const top = Math.max(canvas.top, Math.min(...corners.map(p => p.y))), bottom = Math.min(canvas.bottom, Math.max(...corners.map(p => p.y)));
+      if (right > left && bottom > top) bodies.push({ x: left, y: top, w: right - left, h: bottom - top });
+    }
+    return bodies;
   }
   /** Region a point counts as for visibility: an unrevealed containing room first (the Runtime's rule). */
   regionAt(p: Point): string | null { return this.map ? regionAtClosed(this.map, this.last?.revealed ?? {}, p) : null; }

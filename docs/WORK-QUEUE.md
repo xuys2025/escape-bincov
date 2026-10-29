@@ -1,6 +1,6 @@
 # 当前任务入口
 
-本轮原子待办：**[待办：修复楼梯标签遮住可见敌人（S03c）](tasks/todo-stair-label-occlusion.md)**，分支 `fix/stair-label-occlusion`；维护者要求先建立草稿 PR，负责人待指定，尚未实施。只承接 #26 中任务书列出的子项，不接管总单或其他 PR。
+本轮原子待办：**[修复楼梯标签遮住可见敌人（S03c）](tasks/todo-stair-label-occlusion.md)**，分支 `fix/stair-label-occlusion`，续作 [PR #146](https://github.com/xuys2025/escape-bincov/pull/146)。按真实 HUD 字框暂隐避让已呈现敌人：1056 单测/113 工程守卫/package 通过，S03c 两档桌面与 932×430 触屏通过，旧版 85/74 个遮挡像素有效失败；完整空间 20/22、商场 24/25，仅保留旧版亦复现的墙过渡首帧断言失败，等主审/CI。只承接 #26 中 S03c 遮敌子项，总单由主代理维护。
 
 最近核对：2026-10-29，main `275fafd`（含 #95 落幕等待与 #141 室内墙体过渡）。本轮沿 [PR #111](https://github.com/xuys2025/escape-bincov/pull/111) 复核资源趋势工具轮数入口，正常合入该主线并解决三处文档/脚本分类冲突；1056 单测、113 工程守卫与打包通过，准确 head CI 见原 PR。下表其他条目的合并状态、head 与检查结果以对应 GitHub 页面实时信息为准，旧快照不作为当前指令。
 
