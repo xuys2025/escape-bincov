@@ -8,8 +8,11 @@ const groups = [
   { kind: 'support', reason: '被现役构建或测试导入的共用模块，不是独立验收命令。', files: [
     'browser-options.mjs', 'canvas-click.mjs', 'font-characters.mjs', 'game-bundle.mjs', 'inventory-actions.mjs',
     'pixi-managed-gate.mjs', 'stall-resume.mjs', 'step-filter.mjs', 'storage-fault.mjs', 'title-edge-check.mjs', 'yard-entry.mjs',
-    'check-catalog.mjs', 'script-inventory.mjs', 'source-graph.mjs', 'natural-play-state.mjs', 'natural-play-preparation.mjs', 'natural-play-policy.mjs', 'enemy-catalog-data.ts', 'resource-report-input.mjs', 'station-resource-args.mjs',
+    'check-catalog.mjs', 'script-inventory.mjs', 'source-graph.mjs', 'enemy-catalog-data.ts', 'resource-report-input.mjs', 'station-resource-args.mjs',
     'shop-touch-cases.mjs', 'station-acceptance-gates.mjs', 'enemy-mall-browser.mjs', 'enemy-browser-plan.mjs',
+  ] },
+  { kind: 'support', reason: '自然游玩工具共用的只读采样、真实准备及自动玩家策略；由现役 natural-play 和 CI 反例导入。', files: [
+    'natural-play-state.mjs', 'natural-play-preparation.mjs', 'natural-play-policy.mjs',
   ] },
   { kind: 'support', reason: '由 scripts/ci/resource-helpers.test.mjs 导入的四项纯 Node 回归：合成图支配关系的独立 oracle、缺表和未释放对象负对照；不运行浏览器/堆采样，不代表资源或 F20 签收。', files: [
     'astra-r7-heap-graph.test.mjs', 'station-resource-probe.test.mjs',

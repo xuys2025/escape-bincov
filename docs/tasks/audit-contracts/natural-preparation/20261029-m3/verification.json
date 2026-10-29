@@ -167,5 +167,15 @@
     "beforeFootprintFix": "before-footprint-fix-progress.json (interrupted for actual-item footprint fix; not acceptance)",
     "interruptedRun": "../20261029/interrupted-progress.json (no final report; not counted as pass)"
   },
-  "boundaries": "Automated natural input, not human balance or physical-device acceptance. UI/quota/funding and kill-control are separate explicit fixtures. Save format, game rules, ordinary HUD, #32 F20 unchanged."
+  "boundaries": "Automated natural input, not human balance or physical-device acceptance. UI/quota/funding and kill-control are separate explicit fixtures. Save format, game rules, ordinary HUD, #32 F20 unchanged.",
+  "integration144": {
+    "base": "13c9b80c9193456fc2e5d6f6e886460261a91",
+    "previousCandidate": "5f4e6c71e9376c7e5b1adb5d19addf653e849a50",
+    "gameUnitAssetsDependenciesAndNaturalInputsUnchanged": true,
+    "sourceHashesMatched": 17,
+    "guards": "137/137",
+    "package": "passed",
+    "htmlSha256": "618793d89a0df8287b5f2d98e92c4a4bed406976cbba27ff30fd4226a7c5e360",
+    "reusedEvidence": "1079 unit tests, 602.003-second final M3 natural input, UI/quota/funding, medical oracle, cumulative controls and instance footprint negative control"
+  }
 }
