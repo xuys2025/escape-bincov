@@ -19,6 +19,22 @@ const wave = JSON.parse(readFileSync('tests/fixtures/gunsmith-assemblies-m3.json
  * in `wave` gained that layer when the glove came (d3eb43f).
  */
 const waveTwo = JSON.parse(readFileSync('tests/fixtures/gunsmith-assemblies-m3-w2.json', 'utf8'));
+/**
+ * Sol's redrawn magazines (#28 M3-12, docs/gunsmith/art/m3-w3): 21 configurations, the factory gun and each magazine,
+ * I and W. The earlier records stay the truth for everything else: a redrawn magazine keeps its anchor and mounts, so
+ * every layer of theirs lies where it did, the tip and width too; only the height may change (matches).
+ */
+const waveThree = JSON.parse(readFileSync('tests/fixtures/gunsmith-assemblies-m3-w3.json', 'utf8'));
+const REDRAWN = new Set<string>(JSON.parse(readFileSync('docs/gunsmith/art/m3-w3/incoming-manifest.json', 'utf8')).assets.map((a: { id: string }) => a.id.replace(/-v\d+$/, '')));
+type Layout = NonNullable<ReturnType<typeof gunArtLayout>>;
+type Assembly = { w: number; h: number; tip: unknown; layers: { key: string; label: string; origin: number[] }[] };
+/** `got` is `a`'s picture: each layer at its place, the tip and the size, the height changed only by a redrawn magazine. */
+function matches(got: Layout, a: Assembly, name: string, layers = true) {
+    if (layers) assert.deepEqual(got.layers.map(l => [l.key, l.label, l.x, l.y]), a.layers.map(l => [l.key, l.label, ...l.origin]), `${name}: layers`);
+    assert.deepEqual(got.tip, a.tip, `${name}: tip`);
+    if (a.layers.some(l => REDRAWN.has(l.key))) assert.equal(got.w, a.w, `${name}: width`);
+    else assert.deepEqual([got.w, got.h], [a.w, a.h], `${name}: size`);
+}
 import { CONFIGS, part } from './fixtures/gunsmith-configs';
 type Tree = [string, PartNode['slot'], Tree[]?];
 const grow = (trees: readonly Tree[]): PartNode[] => trees.map(([id, slot, kids]) => part(id, slot, grow(kids ?? [])));
@@ -47,10 +63,9 @@ test('the layout reproduces every approved preview assembly: size, tip, grip, bo
         assert.ok(validateBuild(buildOf({ id: a.gun as GunId, parts })).ok, `${a.gun} ${a.configuration} is a legal build`);
         const got = gunArtLayout(a.gun, parts, a.code as ArtCode)!, name = `${a.gun} ${a.code} ${a.configuration}`;
         assert.ok(got, name);
-        assert.deepEqual([got.w, got.h, got.tip], [a.w, a.h, a.tip], `${name}: size and tip`);
         // Wave one cut the carbine's factory barrel out (#28 M3-03), so its layers differ from M2's records; the stack
         // still gives M2's pixels (gunsmith-bench A1 compares them with the approved previews).
-        if (a.gun !== 'carbine') assert.deepEqual(got.layers.map(l => [l.key, l.label, l.x, l.y]), a.layers.map((l: { key: string; label: string; origin: number[] }) => [l.key, l.label, ...l.origin]), `${name}: layers`);
+        matches(got, a, name, a.gun !== 'carbine');
         if (a.code === 'h') assert.deepEqual([got.grip, got.bore, got.forward, got.hand], [a.grip, a.bore, a.forward, a.hand], `${name}: held geometry`);
     }
 });
@@ -63,8 +78,7 @@ test('the layout reproduces Sol\'s wave-one assemblies (31 configurations of 12 
         assert.ok(validateBuild(buildOf({ id: a.gun as GunId, parts })).ok, `${name} is a legal build`);
         const got = gunArtLayout(a.gun, parts, a.code as ArtCode)!;
         assert.ok(got, name);
-        assert.deepEqual([got.w, got.h, got.tip], [a.w, a.h, a.tip], `${name}: size and tip`);
-        assert.deepEqual(got.layers.map(l => [l.key, l.label, l.x, l.y]), a.layers.map((l: { key: string; label: string; origin: number[] }) => [l.key, l.label, ...l.origin]), `${name}: layers`);
+        matches(got, a, name);
         if (a.code === 'h') assert.deepEqual([got.grip, got.bore, got.forward, got.hand], [a.grip, a.bore, a.forward, a.hand], `${name}: held geometry`);
     }
     // The bare factory pictures (the ground and the HUD card): the held one without the gloves.
@@ -74,6 +88,18 @@ test('the layout reproduces Sol\'s wave-one assemblies (31 configurations of 12 
     for (const a of [...wave.bareFactories.filter((b: { gun: string }) => !waveTwo.bareFactories.some((n: { gun: string }) => n.gun === b.gun)), ...waveTwo.bareFactories]) {
         const got = gunArtLayout(a.gun, [], 'h', false)!;
         assert.deepEqual([got.w, got.h, got.layers.map(l => [l.key, l.x, l.y])], [a.w, a.h, a.layers.map((l: { key: string; origin: number[] }) => [l.key, ...l.origin])], a.gun);
+    }
+});
+
+test('the layout reproduces Sol\'s redrawn magazines (#28 M3-12): 21 configurations, I and W, each within its footprint', () => {
+    assert.equal(waveThree.assemblies.length, 42);
+    for (const a of waveThree.assemblies) {
+        const parts = a.part === 'factory' ? [] : [part(a.part, 'mag')], name = `${a.gun} ${a.code} ${a.part}`;
+        assert.ok(validateBuild(buildOf({ id: a.gun as GunId, parts })).ok, `${name} is a legal build`);
+        const got = gunArtLayout(a.gun, parts, a.code as ArtCode)!, size = gunSize({ id: a.gun as GunId, parts }), scale = a.code === 'w' ? 2 : 1;
+        assert.deepEqual([got.w, got.h, got.tip], [a.w, a.h, a.tip], `${name}: size and tip`);
+        assert.deepEqual(got.layers.map(l => [l.key, l.label, l.x, l.y]), a.layers.map((l: { key: string; label: string; origin: number[] }) => [l.key, l.label, ...l.origin]), `${name}: layers`);
+        assert.ok(got.w <= size.w * 36 * scale && got.h <= size.h * 26 * scale, `${name}: ${got.w}x${got.h} within ${size.w}x${size.h} cells`);
     }
 });
 
@@ -178,12 +204,13 @@ test('the cache key: the output, the gun, the parts by place and the art revisio
 test('the workbench frame: every build fits around the same receiver point, so a new part moves nothing else', () => {
     // Wave one's long parts widened the M2 frames: M07 and H02 on the M4A1, B09 and M07 on the carbine (#28 M3); wave
     // two's taller optics and foregrips deepened them.
-    assert.deepEqual(artFrame('mb4a1', 'w'), { x: -43, y: -15, w: 216, h: 52 });
-    assert.deepEqual(artFrame('gb17', 'w'), { x: 0, y: -9, w: 118, h: 51 });
+    // The magazines redrawn at full length (#28 M3-12) deepened them again, below the receiver only.
+    assert.deepEqual(artFrame('mb4a1', 'w'), { x: -43, y: -15, w: 216, h: 59 });
+    assert.deepEqual(artFrame('gb17', 'w'), { x: 0, y: -9, w: 118, h: 63 });
     assert.deepEqual(artFrame('carbine', 'w'), { x: 0, y: -10, w: 209, h: 54 }, 'an optic on the A07 base sits above the receiver');
-    assert.deepEqual(artFrame('akb103', 'w'), { x: -51, y: -19, w: 216, h: 54 });
-    // The longest: the RPK with its long handguard and a suppressor.
-    assert.deepEqual(artFrame('rpkb', 'w'), { x: -51, y: -19, w: 236, h: 54 });
+    assert.deepEqual(artFrame('akb103', 'w'), { x: -51, y: -19, w: 216, h: 71 });
+    // The longest: the RPK with its long handguard and a suppressor; the deepest with its drum.
+    assert.deepEqual(artFrame('rpkb', 'w'), { x: -51, y: -19, w: 236, h: 75 });
     assert.equal(artFrame('m4a1', 'w'), null, 'a gun without art has no frame');
     const all = [...Object.entries(CONFIGS).flatMap(([gun, configs]) => Object.entries(configs).map(([name, make]) => [gun, name, make()] as const)),
         ...Object.entries(wave.configurations as Record<string, Record<string, Tree[]>>).flatMap(([gun, configs]) => Object.entries(configs).map(([name, t]) => [gun, name, grow(t)] as const))];

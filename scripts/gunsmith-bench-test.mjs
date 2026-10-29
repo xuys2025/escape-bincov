@@ -123,7 +123,10 @@ try {
   await step('A1-composites-equal-the-approved-previews', async () => {
     // M2-10: every approved preview assembly (Sol, M2-09) drawn by the game's compositor in the packaged page, compared
     // with the preview PNG channel by channel. #28 M3-04 adds Sol's wave-one records and M3-08 wave two's, each against
-    // its 1x preview, and the bare side views (the ground and the HUD card) where Sol drew one.
+    // its 1x preview, and the bare side views (the ground and the HUD card) where Sol drew one. M3-12 redrew the
+    // magazines (M3-W3): a picture with one is compared outside the region each redrawn image changed, at the same width;
+    // the new magazines' layouts are checked against Sol's M3-W3 records in tests/gunsmith-art.test.ts.
+    const { redrawn } = JSON.parse(await readFile('tests/fixtures/gunsmith-m3-w3-redrawn.json', 'utf8'));
     const { assemblies } = JSON.parse(await readFile('tests/fixtures/gunsmith-assemblies.json', 'utf8'));
     const cases = await Promise.all(assemblies.map(async a => ({ name: `${a.gun}-${a.configuration}-${a.code}`, gun: a.gun, code: a.code,
       parts: CONFIGS[a.gun][a.configuration](), png: (await readFile(a.file)).toString('base64') })));
@@ -144,8 +147,9 @@ try {
       }
     }
     await open();
-    const bad = await page.evaluate(async cases => {
+    const { out: bad, partial } = await page.evaluate(async ([cases, redrawn]) => {
       const art = window.__bincov.gunsmithArt, out = [];
+      let partial = 0;
       for (const c of cases) {
         let layout = art.layout(c.gun, c.parts, c.code, !c.bare);
         if (layout && c.dropFrontGlove) {
@@ -155,17 +159,21 @@ try {
         const canvas = layout && art.draw(layout);
         if (!canvas) { out.push(`${c.name}: not drawn`); continue; }
         const img = new Image(); img.src = `data:image/png;base64,${c.png}`; await img.decode();
-        if (img.width !== canvas.width || img.height !== canvas.height) { out.push(`${c.name}: ${canvas.width}x${canvas.height}, preview ${img.width}x${img.height}`); continue; }
+        const masks = layout.layers.filter(l => redrawn[l.key]).map(l => { const [x, y, w, h] = redrawn[l.key]; return [l.x + x, l.y + y, w, h]; });
+        if (img.width !== canvas.width || (!masks.length && img.height !== canvas.height)) { out.push(`${c.name}: ${canvas.width}x${canvas.height}, preview ${img.width}x${img.height}`); continue; }
         const ref = document.createElement('canvas'); ref.width = img.width; ref.height = img.height;
         const rc = ref.getContext('2d'); rc.drawImage(img, 0, 0);
-        const a = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data, b = rc.getImageData(0, 0, img.width, img.height).data;
-        let diff = 0; for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) diff++;
+        const w = img.width, h = Math.min(img.height, canvas.height);
+        const a = canvas.getContext('2d').getImageData(0, 0, w, h).data, b = rc.getImageData(0, 0, w, h).data;
+        const masked = (x, y) => masks.some(([mx, my, mw, mh]) => x >= mx && x < mx + mw && y >= my && y < my + mh);
+        let diff = 0; for (let i = 0; i < a.length; i++) if (a[i] !== b[i] && !masked((i >> 2) % w, Math.floor((i >> 2) / w))) diff++;
         if (diff) out.push(`${c.name}: ${diff} channel values differ`);
+        if (masks.length) partial++;
       }
-      return out;
-    }, cases);
+      return { out, partial };
+    }, [cases, redrawn]);
     assert.deepEqual(bad, []);
-    return { compared: cases.length };
+    return { compared: cases.length, outsideRedrawnMagazines: partial };
   });
 
   await step('B1-preview-writes-nothing-confirm-writes-once', async () => {

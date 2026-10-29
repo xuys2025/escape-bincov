@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "revision": 5,
-  "batch": "M2-P0-P1+M3-W1+M3-W2",
+  "revision": 6,
+  "batch": "M2-P0-P1+M3-W1+M3-W2+M3-W3",
   "totals": {
     "files": 636,
-    "pngBytes": 98932,
+    "pngBytes": 98609,
     "p0Files": 42,
     "p0PngBytes": 8432,
     "p1Files": 73,
@@ -12,7 +12,9 @@
     "m3w1Files": 274,
     "m3w1PngBytes": 38807,
     "m3w2Files": 249,
-    "m3w2PngBytes": 36786
+    "m3w2PngBytes": 36786,
+    "m3w3Files": 38,
+    "m3w3PngBytes": 6448
   },
   "assets": [
     {
@@ -532,13 +534,13 @@
       "exportMethod": "original native integer-grid draw operations; no output resampling"
     },
     {
-      "id": "gs-mb4a1-mag-factory-i-v1",
-      "file": "assets/gunsmith/v1/gs-mb4a1-mag-factory-i-v1.png",
+      "id": "gs-mb4a1-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-mb4a1-mag-factory-i-v2.png",
       "w": 10,
-      "h": 9,
-      "bytes": 183,
-      "sha256": "ef7ea53fbe69007209a8f6aceda4f8848be67380c9ec3db7ecf5cda8110fdbe9",
-      "revision": 1,
+      "h": 16,
+      "bytes": 104,
+      "sha256": "18ea10503db07adf5f0ec8f12324ba66d94034cca9c26a2fde2b4fd2c1293eef",
+      "revision": 2,
       "output": "inventory",
       "gun": "mb4a1",
       "item": null,
@@ -549,9 +551,9 @@
         0
       ],
       "colors": 4,
-      "source": "source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; no output resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-mb4a1-top-factory-i-v1",
@@ -821,13 +823,13 @@
       "exportMethod": "original native integer-grid draw operations; no output resampling"
     },
     {
-      "id": "gs-mb4a1-mag-factory-w-v1",
-      "file": "assets/gunsmith/v1/gs-mb4a1-mag-factory-w-v1.png",
+      "id": "gs-mb4a1-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-mb4a1-mag-factory-w-v2.png",
       "w": 20,
-      "h": 18,
-      "bytes": 255,
-      "sha256": "7b84a76fc476fb4b96664916627a184392fbc5e9e5dd85669f0d8bb1a130656d",
-      "revision": 1,
+      "h": 32,
+      "bytes": 147,
+      "sha256": "9cbb5f3beacb296d35459b59c25e51264039bbf30eaaff0489be9a55d63acab5",
+      "revision": 2,
       "output": "bench",
       "gun": "mb4a1",
       "item": null,
@@ -837,10 +839,10 @@
         0,
         0
       ],
-      "colors": 5,
-      "source": "source/pixel-artwork.json",
+      "colors": 6,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; no output resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-mb4a1-top-factory-w-v1",
@@ -2183,13 +2185,13 @@
       "exportMethod": "original native integer-grid draw operations; independent output resolutions"
     },
     {
-      "id": "gs-g01-i-v1",
-      "file": "assets/gunsmith/v1/gs-g01-i-v1.png",
+      "id": "gs-g01-i-v2",
+      "file": "assets/gunsmith/v1/gs-g01-i-v2.png",
       "w": 7,
-      "h": 7,
-      "bytes": 142,
-      "sha256": "915efe3f04fb07d51bd420f3606e06751ef8494db617980945292569cbdcf40b",
-      "revision": 1,
+      "h": 13,
+      "bytes": 104,
+      "sha256": "caad7cfe927c818bc9f7e5e2842c387ebbbcd8e1b14bd84e4d3101430f330aa0",
+      "revision": 2,
       "output": "inventory",
       "gun": null,
       "item": "G01",
@@ -2200,19 +2202,19 @@
         0
       ],
       "colors": 3,
-      "source": "source/pixel-artwork-p1.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask",
       "layer": "aboveReceiver"
     },
     {
-      "id": "gs-g01-w-v1",
-      "file": "assets/gunsmith/v1/gs-g01-w-v1.png",
+      "id": "gs-g01-w-v2",
+      "file": "assets/gunsmith/v1/gs-g01-w-v2.png",
       "w": 14,
-      "h": 14,
-      "bytes": 201,
-      "sha256": "ece140d2e4e577258182c44b1e05796750ee0cb34a4fdeeb9d253cbbff3cf76d",
-      "revision": 1,
+      "h": 26,
+      "bytes": 157,
+      "sha256": "e4e1648b2b3891ef807c1ece3a8d283419cca6e87d174dafa2c6f8a248fa733b",
+      "revision": 2,
       "output": "bench",
       "gun": null,
       "item": "G01",
@@ -2223,19 +2225,19 @@
         0
       ],
       "colors": 5,
-      "source": "source/pixel-artwork-p1.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independent output resolutions",
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask",
       "layer": "aboveReceiver"
     },
     {
-      "id": "gs-g10-i-v1",
-      "file": "assets/gunsmith/v1/gs-g10-i-v1.png",
-      "w": 9,
-      "h": 8,
-      "bytes": 145,
-      "sha256": "43368c4994e3b232af583ec1c0ad28aa73f799e1e6de6a7e9af3c3241ae78550",
-      "revision": 1,
+      "id": "gs-g10-i-v2",
+      "file": "assets/gunsmith/v1/gs-g10-i-v2.png",
+      "w": 10,
+      "h": 16,
+      "bytes": 106,
+      "sha256": "e1973589d3cb57d87f552de746568db972ceeedfcb378b6182ea6a45b5da3858",
+      "revision": 2,
       "output": "inventory",
       "gun": null,
       "item": "G10",
@@ -2246,18 +2248,18 @@
         0
       ],
       "colors": 4,
-      "source": "source/pixel-artwork-p1.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-g10-w-v1",
-      "file": "assets/gunsmith/v1/gs-g10-w-v1.png",
-      "w": 18,
-      "h": 16,
-      "bytes": 225,
-      "sha256": "bc86b80855a7ac2438a0f7f4a36fbb6ff8c7d351c785b6629d13f3a4e9d04f1e",
-      "revision": 1,
+      "id": "gs-g10-w-v2",
+      "file": "assets/gunsmith/v1/gs-g10-w-v2.png",
+      "w": 20,
+      "h": 32,
+      "bytes": 159,
+      "sha256": "34e5ac891c644496fdce769aa5b44f348fc03c54b713071af7c6451c9c2b4bc3",
+      "revision": 2,
       "output": "bench",
       "gun": null,
       "item": "G10",
@@ -2268,9 +2270,9 @@
         0
       ],
       "colors": 5,
-      "source": "source/pixel-artwork-p1.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independent output resolutions"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-t01-i-v1",
@@ -3870,13 +3872,13 @@
       "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
     },
     {
-      "id": "gs-akb74-mag-factory-i-v1",
-      "file": "assets/gunsmith/v1/gs-akb74-mag-factory-i-v1.png",
+      "id": "gs-akb74-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-akb74-mag-factory-i-v2.png",
       "w": 13,
-      "h": 10,
-      "bytes": 135,
-      "sha256": "27a4a079c89e500606d77e5cc5bbf2205d5e42a644234611b46f897c52294e77",
-      "revision": 1,
+      "h": 17,
+      "bytes": 116,
+      "sha256": "3138932897fe94200baca8f612a4349cf0c723bb4721bd292499dd0facd3c87f",
+      "revision": 2,
       "output": "inventory",
       "gun": "akb74",
       "item": null,
@@ -3887,18 +3889,18 @@
         0
       ],
       "colors": 4,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-g08-i-v1",
-      "file": "assets/gunsmith/v1/gs-g08-i-v1.png",
+      "id": "gs-g08-i-v2",
+      "file": "assets/gunsmith/v1/gs-g08-i-v2.png",
       "w": 16,
-      "h": 10,
-      "bytes": 138,
-      "sha256": "46acc053f9ed4a173051657f3c8a2989c5dc0ff34789cb5aef471646808edffc",
-      "revision": 1,
+      "h": 23,
+      "bytes": 115,
+      "sha256": "80ec7def7b0039a3c46a0f15173e49a8a8e2cebc643aa44da9085c0d395fc995",
+      "revision": 2,
       "output": "inventory",
       "gun": null,
       "item": "G08",
@@ -3908,19 +3910,19 @@
         0,
         0
       ],
-      "colors": 5,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "colors": 4,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-akb74-mag-factory-w-v1",
-      "file": "assets/gunsmith/v1/gs-akb74-mag-factory-w-v1.png",
+      "id": "gs-akb74-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-akb74-mag-factory-w-v2.png",
       "w": 26,
-      "h": 20,
-      "bytes": 197,
-      "sha256": "ffa3194fe06b76294e7f59b06a921326c180f082f6d9702b2c73198a76fcc4b4",
-      "revision": 1,
+      "h": 34,
+      "bytes": 183,
+      "sha256": "05ea90c07e14045fc3e5fa10aa1acea1c160950840b32398a70316ec864d92e2",
+      "revision": 2,
       "output": "bench",
       "gun": "akb74",
       "item": null,
@@ -3930,19 +3932,19 @@
         0,
         0
       ],
-      "colors": 5,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "colors": 6,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-g08-w-v1",
-      "file": "assets/gunsmith/v1/gs-g08-w-v1.png",
+      "id": "gs-g08-w-v2",
+      "file": "assets/gunsmith/v1/gs-g08-w-v2.png",
       "w": 32,
-      "h": 20,
-      "bytes": 212,
-      "sha256": "61ff9c5c1fdf4f596884bc7e421e42413c89f7ca72743827d714ccb6032b4150",
-      "revision": 1,
+      "h": 46,
+      "bytes": 186,
+      "sha256": "e878fc0f9d964f3e536956af295af8bedf3a91f991086380e11cd8d5877a76ee",
+      "revision": 2,
       "output": "bench",
       "gun": null,
       "item": "G08",
@@ -3952,10 +3954,10 @@
         0,
         0
       ],
-      "colors": 5,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "colors": 6,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-m05-h-v1",
@@ -4641,13 +4643,13 @@
       ]
     },
     {
-      "id": "gs-vb9-receiver-i-v1",
-      "file": "assets/gunsmith/v1/gs-vb9-receiver-i-v1.png",
+      "id": "gs-vb9-receiver-i-v2",
+      "file": "assets/gunsmith/v1/gs-vb9-receiver-i-v2.png",
       "w": 55,
-      "h": 17,
-      "bytes": 240,
-      "sha256": "fb2dc34f0c31e54dba2c06c1509fc25ae3f57758f3a7ac7cf8341d71803e066a",
-      "revision": 1,
+      "h": 18,
+      "bytes": 246,
+      "sha256": "30dbf68eef2e71d57fd84429e48247395686c5b451c82e88e526984fd5df5a79",
+      "revision": 2,
       "output": "inventory",
       "gun": "vb9",
       "item": null,
@@ -4655,9 +4657,9 @@
       "slot": null,
       "anchor": null,
       "colors": 5,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling",
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask",
       "mounts": {
         "top": [
           23,
@@ -4682,13 +4684,13 @@
       ]
     },
     {
-      "id": "gs-vb9-receiver-w-v1",
-      "file": "assets/gunsmith/v1/gs-vb9-receiver-w-v1.png",
+      "id": "gs-vb9-receiver-w-v2",
+      "file": "assets/gunsmith/v1/gs-vb9-receiver-w-v2.png",
       "w": 110,
-      "h": 34,
-      "bytes": 415,
-      "sha256": "0681358bf9acb1d2515d1cca7f26a4e097638a2bd14abe97bf54f77d9eea34c1",
-      "revision": 1,
+      "h": 36,
+      "bytes": 445,
+      "sha256": "a690196ae27e9bab2a334e9473cd6384da1ddaa07fc02c73033bf5e45f7ca31a",
+      "revision": 2,
       "output": "bench",
       "gun": "vb9",
       "item": null,
@@ -4696,9 +4698,9 @@
       "slot": null,
       "anchor": null,
       "colors": 7,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling",
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask",
       "mounts": {
         "top": [
           46,
@@ -6455,13 +6457,13 @@
       "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
     },
     {
-      "id": "gs-mpb5-mag-factory-i-v1",
-      "file": "assets/gunsmith/v1/gs-mpb5-mag-factory-i-v1.png",
+      "id": "gs-mpb5-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-mpb5-mag-factory-i-v2.png",
       "w": 12,
-      "h": 10,
-      "bytes": 111,
-      "sha256": "a01531c8bd4e43c63e7479cd06d04311d88514c78011a03f8805ae50ce8ce54e",
-      "revision": 1,
+      "h": 14,
+      "bytes": 107,
+      "sha256": "026c061311fb0d56765662284f03a443ad285377e3d96f7d3b7b6ff7fd5f4f37",
+      "revision": 2,
       "output": "inventory",
       "gun": "mpb5",
       "item": null,
@@ -6471,19 +6473,19 @@
         0,
         0
       ],
-      "colors": 3,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "colors": 4,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-mpb5-mag-factory-w-v1",
-      "file": "assets/gunsmith/v1/gs-mpb5-mag-factory-w-v1.png",
+      "id": "gs-mpb5-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-mpb5-mag-factory-w-v2.png",
       "w": 24,
-      "h": 20,
-      "bytes": 194,
-      "sha256": "5ae897b8137e2db48e05b719a4af6e4e4322f73a7b2cca9a699859622e665423",
-      "revision": 1,
+      "h": 28,
+      "bytes": 161,
+      "sha256": "940def35215a0c2300a236baa66fbf496b4aaf0de8dc2172cebbc3446b7177ff",
+      "revision": 2,
       "output": "bench",
       "gun": "mpb5",
       "item": null,
@@ -6493,10 +6495,10 @@
         0,
         0
       ],
-      "colors": 5,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "colors": 6,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-mb870-mag-factory-h-v1",
@@ -6653,13 +6655,13 @@
       "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
     },
     {
-      "id": "gs-akb103-mag-factory-i-v1",
-      "file": "assets/gunsmith/v1/gs-akb103-mag-factory-i-v1.png",
+      "id": "gs-akb103-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-akb103-mag-factory-i-v2.png",
       "w": 16,
-      "h": 10,
-      "bytes": 124,
-      "sha256": "7971351967dc4a43baf93d00eaab5df23f3bcbb5c31d313169e820c8009a2fe4",
-      "revision": 1,
+      "h": 18,
+      "bytes": 109,
+      "sha256": "dc2eadedeffb6c894ba0a6d625e6c5f5f9a1d86f01a12c7b4f8b33d028b09e89",
+      "revision": 2,
       "output": "inventory",
       "gun": "akb103",
       "item": null,
@@ -6670,18 +6672,18 @@
         0
       ],
       "colors": 3,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-akb103-mag-factory-w-v1",
-      "file": "assets/gunsmith/v1/gs-akb103-mag-factory-w-v1.png",
+      "id": "gs-akb103-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-akb103-mag-factory-w-v2.png",
       "w": 32,
-      "h": 20,
-      "bytes": 203,
-      "sha256": "61a1e35f60fd8462411aae0beca8c966ce66fe6ed4d7c6dfbbbfed7a35996ed9",
-      "revision": 1,
+      "h": 36,
+      "bytes": 178,
+      "sha256": "6e1737cfe0d35a8cd4b73321906b13b9b17553323a29fe525de0791429b62def",
+      "revision": 2,
       "output": "bench",
       "gun": "akb103",
       "item": null,
@@ -6692,9 +6694,9 @@
         0
       ],
       "colors": 5,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-pb226-q24-v1",
@@ -8591,13 +8593,13 @@
       "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
     },
     {
-      "id": "gs-g03-i-v1",
-      "file": "assets/gunsmith/v1/gs-g03-i-v1.png",
-      "w": 15,
-      "h": 10,
-      "bytes": 121,
-      "sha256": "25ccb648cf4bcd3d3b522210ed9de71ad74a4397b51ad44e518442dc2c4ec419",
-      "revision": 1,
+      "id": "gs-g03-i-v2",
+      "file": "assets/gunsmith/v1/gs-g03-i-v2.png",
+      "w": 13,
+      "h": 14,
+      "bytes": 109,
+      "sha256": "83d29f79cd341bbe786b6f81ba4867ee93ca990ba71e6179b792d7379a3926f9",
+      "revision": 2,
       "output": "inventory",
       "gun": null,
       "item": "G03",
@@ -8607,19 +8609,19 @@
         0,
         0
       ],
-      "colors": 3,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "colors": 4,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-g03-w-v1",
-      "file": "assets/gunsmith/v1/gs-g03-w-v1.png",
-      "w": 30,
-      "h": 20,
-      "bytes": 193,
-      "sha256": "270d3e488e5dbb770c44edc9d304a9c685f6c54c4750c67284a1a391f0d0cefe",
-      "revision": 1,
+      "id": "gs-g03-w-v2",
+      "file": "assets/gunsmith/v1/gs-g03-w-v2.png",
+      "w": 26,
+      "h": 28,
+      "bytes": 174,
+      "sha256": "10c976c9969eaf6bcbebdd2b5a4b7e9d1166c35064cfb628c9d77022ad33a346",
+      "revision": 2,
       "output": "bench",
       "gun": null,
       "item": "G03",
@@ -8629,10 +8631,10 @@
         0,
         0
       ],
-      "colors": 5,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "colors": 6,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-g06-h-v1",
@@ -8789,13 +8791,13 @@
       "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
     },
     {
-      "id": "gs-g09-i-v1",
-      "file": "assets/gunsmith/v1/gs-g09-i-v1.png",
+      "id": "gs-g09-i-v2",
+      "file": "assets/gunsmith/v1/gs-g09-i-v2.png",
       "w": 20,
-      "h": 12,
-      "bytes": 131,
-      "sha256": "e977e75a705eb0005b0420ae30bc4b32d8711a802cdc96c7fca26a337347442b",
-      "revision": 1,
+      "h": 20,
+      "bytes": 169,
+      "sha256": "64fb81831cf3dc468d0458e34b998421a5db0308e6ff43ee3ea91f614fe1fd5f",
+      "revision": 2,
       "output": "inventory",
       "gun": null,
       "item": "G09",
@@ -8806,18 +8808,18 @@
         0
       ],
       "colors": 3,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-g09-w-v1",
-      "file": "assets/gunsmith/v1/gs-g09-w-v1.png",
+      "id": "gs-g09-w-v2",
+      "file": "assets/gunsmith/v1/gs-g09-w-v2.png",
       "w": 40,
-      "h": 23,
-      "bytes": 173,
-      "sha256": "0491ed6de0abe5dfc1bdcf417f38aba8d0463e152e44b9eb6aa7d801d43c5f38",
-      "revision": 1,
+      "h": 40,
+      "bytes": 343,
+      "sha256": "802c35a7b3580a9aa20218ae0c39f0d1af49c1d7b138b89727e0a64963839e22",
+      "revision": 2,
       "output": "bench",
       "gun": null,
       "item": "G09",
@@ -8828,9 +8830,9 @@
         0
       ],
       "colors": 5,
-      "source": "docs/gunsmith/art/m3-w1/source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; independently authored H/I/W/Q; no runtime-image resampling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-m01-h-v1",
@@ -10354,13 +10356,13 @@
       ]
     },
     {
-      "id": "gs-augb-mag-factory-i-v1",
-      "file": "assets/gunsmith/v1/gs-augb-mag-factory-i-v1.png",
+      "id": "gs-augb-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-augb-mag-factory-i-v2.png",
       "w": 10,
-      "h": 9,
-      "bytes": 123,
-      "sha256": "3e8501bac443b9a7fbac383b79081f69112fe51558f2d2ca2694de6319fc2426",
-      "revision": 1,
+      "h": 16,
+      "bytes": 136,
+      "sha256": "8a8ba920da60091f9753ff0f545c1d58ce6964d68d96b7ef3628d850c182756d",
+      "revision": 2,
       "output": "inventory",
       "gun": "augb",
       "item": null,
@@ -10370,10 +10372,10 @@
         0,
         0
       ],
-      "colors": 4,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "colors": 5,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling",
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask",
       "layer": "aboveReceiver"
     },
     {
@@ -10426,13 +10428,13 @@
       ]
     },
     {
-      "id": "gs-augb-mag-factory-w-v1",
-      "file": "assets/gunsmith/v1/gs-augb-mag-factory-w-v1.png",
+      "id": "gs-augb-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-augb-mag-factory-w-v2.png",
       "w": 20,
-      "h": 18,
-      "bytes": 183,
-      "sha256": "da4c63c76a6c33756730f1ef5116357bf53cb2af51b9d8324ea750d16410b23d",
-      "revision": 1,
+      "h": 32,
+      "bytes": 203,
+      "sha256": "ac287c485bcbfb1540008b5ccfdce9d57668a6d54da21e1ff80d57f8b56964e8",
+      "revision": 2,
       "output": "bench",
       "gun": "augb",
       "item": null,
@@ -10442,10 +10444,10 @@
         0,
         0
       ],
-      "colors": 5,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "colors": 7,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling",
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask",
       "layer": "aboveReceiver"
     },
     {
@@ -11539,23 +11541,23 @@
       "forward": 0
     },
     {
-      "id": "gs-svdb-receiver-i-v1",
-      "file": "assets/gunsmith/v1/gs-svdb-receiver-i-v1.png",
+      "id": "gs-svdb-receiver-i-v2",
+      "file": "assets/gunsmith/v1/gs-svdb-receiver-i-v2.png",
       "w": 92,
-      "h": 17,
-      "bytes": 322,
-      "sha256": "ce5d67d9b6eac20305a02e6aeb7a06c2cbc9f583d0f0ed884282fdbb2dce915e",
-      "revision": 1,
+      "h": 18,
+      "bytes": 324,
+      "sha256": "bbe89b2cbaf395b3b39d0e665a0fb84209891db0a895020464f3b2dfaa0e8ac1",
+      "revision": 2,
       "output": "inventory",
       "gun": "svdb",
       "item": null,
       "role": "receiver",
       "slot": null,
       "anchor": null,
-      "colors": 7,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "colors": 8,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling",
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask",
       "tip": [
         92,
         6
@@ -11576,23 +11578,23 @@
       }
     },
     {
-      "id": "gs-svdb-receiver-w-v1",
-      "file": "assets/gunsmith/v1/gs-svdb-receiver-w-v1.png",
+      "id": "gs-svdb-receiver-w-v2",
+      "file": "assets/gunsmith/v1/gs-svdb-receiver-w-v2.png",
       "w": 184,
-      "h": 34,
-      "bytes": 542,
-      "sha256": "9476d24047ccf914bf1ad0e491439df5a03c6735c96abbac54c689d6ee111247",
-      "revision": 1,
+      "h": 36,
+      "bytes": 567,
+      "sha256": "992a51b4c4c4e517c7638c0efaab22a5b6c48d242f1eb254cbb368fc8b663d2d",
+      "revision": 2,
       "output": "bench",
       "gun": "svdb",
       "item": null,
       "role": "receiver",
       "slot": null,
       "anchor": null,
-      "colors": 8,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "colors": 9,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling",
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask",
       "tip": [
         184,
         12
@@ -12210,13 +12212,13 @@
       "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
     },
     {
-      "id": "gs-umpb45-mag-factory-i-v1",
-      "file": "assets/gunsmith/v1/gs-umpb45-mag-factory-i-v1.png",
+      "id": "gs-umpb45-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-umpb45-mag-factory-i-v2.png",
       "w": 8,
-      "h": 11,
-      "bytes": 115,
-      "sha256": "26a8450ef090ff5b929112e8602d31cad4e67b808b9a5654a96588edc0b006ed",
-      "revision": 1,
+      "h": 15,
+      "bytes": 92,
+      "sha256": "2129e7ff147b3f8f7f47b3468aea1d9217f3b8f41db05d3b244c2ae719458c20",
+      "revision": 2,
       "output": "inventory",
       "gun": "umpb45",
       "item": null,
@@ -12226,19 +12228,19 @@
         0,
         0
       ],
-      "colors": 4,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "colors": 3,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-umpb45-mag-factory-w-v1",
-      "file": "assets/gunsmith/v1/gs-umpb45-mag-factory-w-v1.png",
+      "id": "gs-umpb45-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-umpb45-mag-factory-w-v2.png",
       "w": 16,
-      "h": 22,
-      "bytes": 146,
-      "sha256": "2927c4d21d42ef41e8222f5342f0a7629a2ed70c4d652a00fb6865cc4f71ff19",
-      "revision": 1,
+      "h": 30,
+      "bytes": 131,
+      "sha256": "2cf1efcce00b0126f2c177ffe46cb4ba78098d44f3e23ce65e4496a8071d0c48",
+      "revision": 2,
       "output": "bench",
       "gun": "umpb45",
       "item": null,
@@ -12249,9 +12251,9 @@
         0
       ],
       "colors": 5,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-umpb45-barrel-factory-h-v1",
@@ -12507,13 +12509,13 @@
       "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
     },
     {
-      "id": "gs-mb14-mag-factory-i-v1",
-      "file": "assets/gunsmith/v1/gs-mb14-mag-factory-i-v1.png",
+      "id": "gs-mb14-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-mb14-mag-factory-i-v2.png",
       "w": 9,
-      "h": 10,
-      "bytes": 113,
-      "sha256": "133e2c8f3f3048d55f9d302e36b07556867fd4671f7cd292bcbcfb4150ca9a7f",
-      "revision": 1,
+      "h": 11,
+      "bytes": 105,
+      "sha256": "e4f9ee12a577b4cd8ea484e61afe8dcc73bf55d5eebcaf91acf9e57ede4f4ab1",
+      "revision": 2,
       "output": "inventory",
       "gun": "mb14",
       "item": null,
@@ -12524,18 +12526,18 @@
         0
       ],
       "colors": 4,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-mb14-mag-factory-w-v1",
-      "file": "assets/gunsmith/v1/gs-mb14-mag-factory-w-v1.png",
+      "id": "gs-mb14-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-mb14-mag-factory-w-v2.png",
       "w": 18,
-      "h": 20,
-      "bytes": 142,
-      "sha256": "e2d86a98fd3bac201c9abc0772b476cd5b53a7fa7a497d3780b519ee30e52cb2",
-      "revision": 1,
+      "h": 22,
+      "bytes": 134,
+      "sha256": "83c0d07c2dc93cd5b615611fec9196ec1838613752e8d7109e862b86b7a0bf31",
+      "revision": 2,
       "output": "bench",
       "gun": "mb14",
       "item": null,
@@ -12545,10 +12547,10 @@
         0,
         0
       ],
-      "colors": 5,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "colors": 6,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-mb700-stock-factory-h-v1",
@@ -12867,13 +12869,13 @@
       "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
     },
     {
-      "id": "gs-rpkb-mag-factory-i-v1",
-      "file": "assets/gunsmith/v1/gs-rpkb-mag-factory-i-v1.png",
-      "w": 13,
-      "h": 10,
-      "bytes": 132,
-      "sha256": "1f9b9364fb7be5187c65366812ee0a70768d7104756fd28d7a034611ad0cc385",
-      "revision": 1,
+      "id": "gs-rpkb-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-rpkb-mag-factory-i-v2.png",
+      "w": 14,
+      "h": 22,
+      "bytes": 112,
+      "sha256": "783ae44635e3a69527e0c396a101b0246faa6737df1c38319f05a283d13a335b",
+      "revision": 2,
       "output": "inventory",
       "gun": "rpkb",
       "item": null,
@@ -12883,19 +12885,19 @@
         0,
         0
       ],
-      "colors": 4,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "colors": 3,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-rpkb-mag-factory-w-v1",
-      "file": "assets/gunsmith/v1/gs-rpkb-mag-factory-w-v1.png",
-      "w": 26,
-      "h": 20,
-      "bytes": 190,
-      "sha256": "c5b32b4c78033c7c31ccce1c429d1af404d2133b4cb23f47d04364abc5abd2b2",
-      "revision": 1,
+      "id": "gs-rpkb-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-rpkb-mag-factory-w-v2.png",
+      "w": 28,
+      "h": 44,
+      "bytes": 184,
+      "sha256": "250b542ba957cd98fd90d0bbfabc197a041f6ba22fa2e8e3a58c0e3dff00d8b1",
+      "revision": 2,
       "output": "bench",
       "gun": "rpkb",
       "item": null,
@@ -12906,9 +12908,9 @@
         0
       ],
       "colors": 5,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-rpkb-handguard-factory-h-v1",
@@ -13792,13 +13794,13 @@
       "layer": "aboveReceiver"
     },
     {
-      "id": "gs-g02-i-v1",
-      "file": "assets/gunsmith/v1/gs-g02-i-v1.png",
+      "id": "gs-g02-i-v2",
+      "file": "assets/gunsmith/v1/gs-g02-i-v2.png",
       "w": 7,
-      "h": 7,
-      "bytes": 109,
-      "sha256": "66cde7e15cb157be867b3a145020b59b93dd89609be1e91e290846c5e2c5a013",
-      "revision": 1,
+      "h": 5,
+      "bytes": 91,
+      "sha256": "56b7a8fbdec7466def7829590b48e9e61d4c29dc003c04e54456eca9725301a0",
+      "revision": 2,
       "output": "inventory",
       "gun": null,
       "item": "G02",
@@ -13808,20 +13810,20 @@
         0,
         0
       ],
-      "colors": 4,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "colors": 3,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling",
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask",
       "layer": "aboveReceiver"
     },
     {
-      "id": "gs-g02-w-v1",
-      "file": "assets/gunsmith/v1/gs-g02-w-v1.png",
+      "id": "gs-g02-w-v2",
+      "file": "assets/gunsmith/v1/gs-g02-w-v2.png",
       "w": 14,
-      "h": 14,
-      "bytes": 136,
-      "sha256": "45e781e1dfb46f8a77df078e49141a897a35a5ac9552db48699340b359576a8a",
-      "revision": 1,
+      "h": 10,
+      "bytes": 127,
+      "sha256": "100a2c406bcb3b44f2c5f16aea38427f9deebfc717cdf730bfef16e295b8199c",
+      "revision": 2,
       "output": "bench",
       "gun": null,
       "item": "G02",
@@ -13831,10 +13833,10 @@
         0,
         0
       ],
-      "colors": 5,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "colors": 6,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling",
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask",
       "layer": "aboveReceiver"
     },
     {
@@ -13860,13 +13862,13 @@
       "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
     },
     {
-      "id": "gs-g04-i-v1",
-      "file": "assets/gunsmith/v1/gs-g04-i-v1.png",
+      "id": "gs-g04-i-v2",
+      "file": "assets/gunsmith/v1/gs-g04-i-v2.png",
       "w": 9,
-      "h": 12,
-      "bytes": 116,
-      "sha256": "7e4ed6cb06e63db6bc3dc2841095069d4b86b0523749365117b092587d866326",
-      "revision": 1,
+      "h": 19,
+      "bytes": 100,
+      "sha256": "05dfdac76db47c74662335d5cc72171b9b5b05affd7ac9a0783a09d0e3df9fb0",
+      "revision": 2,
       "output": "inventory",
       "gun": null,
       "item": "G04",
@@ -13876,19 +13878,19 @@
         0,
         0
       ],
-      "colors": 4,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "colors": 3,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-g04-w-v1",
-      "file": "assets/gunsmith/v1/gs-g04-w-v1.png",
+      "id": "gs-g04-w-v2",
+      "file": "assets/gunsmith/v1/gs-g04-w-v2.png",
       "w": 18,
-      "h": 24,
-      "bytes": 143,
-      "sha256": "0ff76b718d578a796e77b36f0f50dabd8f4910d749e5b2c9c44bef440873e23d",
-      "revision": 1,
+      "h": 38,
+      "bytes": 152,
+      "sha256": "e582b9cf2aeeba3b1ec681a25ae6682fe26c51c79f663226ee4e255959e1e708",
+      "revision": 2,
       "output": "bench",
       "gun": null,
       "item": "G04",
@@ -13899,9 +13901,9 @@
         0
       ],
       "colors": 5,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-g05-h-v1",
@@ -13995,13 +13997,13 @@
       "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
     },
     {
-      "id": "gs-g11-i-v1",
-      "file": "assets/gunsmith/v1/gs-g11-i-v1.png",
+      "id": "gs-g11-i-v2",
+      "file": "assets/gunsmith/v1/gs-g11-i-v2.png",
       "w": 10,
-      "h": 11,
-      "bytes": 116,
-      "sha256": "04294894cf4efee7ee0172532fdf354f981a1e084c7c91d8307666a543ed908e",
-      "revision": 1,
+      "h": 15,
+      "bytes": 117,
+      "sha256": "24ffc5044236d7a669bfd2a74aacac1187d6bb652e098855a074424cf09409e9",
+      "revision": 2,
       "output": "inventory",
       "gun": null,
       "item": "G11",
@@ -14012,18 +14014,18 @@
         0
       ],
       "colors": 4,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-g11-w-v1",
-      "file": "assets/gunsmith/v1/gs-g11-w-v1.png",
+      "id": "gs-g11-w-v2",
+      "file": "assets/gunsmith/v1/gs-g11-w-v2.png",
       "w": 20,
-      "h": 22,
-      "bytes": 148,
-      "sha256": "13795f03530a54eb2070c6721bca9453de9bd074849738b6c4dc7d5a16a9fb4e",
-      "revision": 1,
+      "h": 30,
+      "bytes": 159,
+      "sha256": "d4748b099eabc3f811b2bd959d064a884a07fc0e6ea4f91c4c90742f4db0eb26",
+      "revision": 2,
       "output": "bench",
       "gun": null,
       "item": "G11",
@@ -14033,10 +14035,10 @@
         0,
         0
       ],
-      "colors": 5,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "colors": 6,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-g12-h-v1",
@@ -14061,13 +14063,13 @@
       "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
     },
     {
-      "id": "gs-g12-i-v1",
-      "file": "assets/gunsmith/v1/gs-g12-i-v1.png",
-      "w": 10,
-      "h": 10,
-      "bytes": 114,
-      "sha256": "c0585a43845b6d75f4b8572dd5978e14c6c1946d59007290bfd10effccb0abdb",
-      "revision": 1,
+      "id": "gs-g12-i-v2",
+      "file": "assets/gunsmith/v1/gs-g12-i-v2.png",
+      "w": 15,
+      "h": 19,
+      "bytes": 111,
+      "sha256": "4aa09ce38d39c3d8d5e4ce0f95cd5015a06d03658fc3c1aa5546a5472d63fafe",
+      "revision": 2,
       "output": "inventory",
       "gun": null,
       "item": "G12",
@@ -14077,19 +14079,19 @@
         0,
         0
       ],
-      "colors": 4,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "colors": 3,
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
-      "id": "gs-g12-w-v1",
-      "file": "assets/gunsmith/v1/gs-g12-w-v1.png",
-      "w": 20,
-      "h": 20,
-      "bytes": 143,
-      "sha256": "a3e8a569b8e054561825edc3741d3f3de7ab89c7f28df5cf03db31d5b88f75cd",
-      "revision": 1,
+      "id": "gs-g12-w-v2",
+      "file": "assets/gunsmith/v1/gs-g12-w-v2.png",
+      "w": 30,
+      "h": 38,
+      "bytes": 185,
+      "sha256": "d614835f5043163cb71160fa2bf4bdc8f426a60e4b7f13dca3b00860fe9b0fd9",
+      "revision": 2,
       "output": "bench",
       "gun": null,
       "item": "G12",
@@ -14100,9 +14102,9 @@
         0
       ],
       "colors": 5,
-      "source": "docs/gunsmith/art/m3-w2/source/pixel-artwork.json",
+      "source": "docs/gunsmith/art/m3-w3/source/pixel-artwork.json",
       "sourceRect": null,
-      "exportMethod": "original native integer-grid draw operations; separately authored H/I/W/Q; no runtime sprite scaling"
+      "exportMethod": "native final-resolution integer pixel profile; W independently outlined and detailed; immutable receiver pixels outside recorded magazine mask"
     },
     {
       "id": "gs-m04-h-v1",
