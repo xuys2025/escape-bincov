@@ -1,0 +1,32 @@
+import assert from 'node:assert/strict';
+import { readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { chromium } from 'playwright';
+import { browserOptions } from '../../scripts/browser-options.mjs';
+import { readNaturalPlayState } from '../../scripts/natural-play-state.mjs';
+const entry = resolve('dist/index.html'), out = resolve('test-results/pr109/kill-control.json');
+const report = { startedAt: new Date().toISOString(), htmlSha256: createHash('sha256').update(await readFile(entry)).digest('hex'), methodology: 'Explicit fixture: freeze AI, kill through Runtime damage, evict only the diagnostic log and remount the actual view; then abandon using visible UI. Separate from ten-minute natural input.', errors: [], observations: {} };
+const browser = await chromium.launch(browserOptions); report.browser = browser.version();
+const context = await browser.newContext({ viewport: { width: 1280, height: 720 }, offline: true });
+const page = await context.newPage(); page.on('pageerror', e => report.errors.push(e.message));
+try {
+  await page.goto(pathToFileURL(entry).href + '?entry=tabs');
+  report.ordinaryEntryHasNoDriver = await page.evaluate(() => !window.__bincovSample?.driver && !window.__bincov);
+  assert.ok(report.ordinaryEntryHasNoDriver);
+  await page.goto(pathToFileURL(entry).href + '?test=1&entry=tabs');
+  await page.locator('[data-action="enter"]').click(); await page.locator('#run-world').selectOption('buildings');
+  await page.locator('[data-action="deploy"]').click(); await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch);
+  await page.evaluate(() => { const s = window.__bincovSample; s.driver.freezeAI(true); s.driver.kill(s.host.lastBatch.frame.actors.find(e => e.alive).uid); });
+  report.observations.before = (await page.evaluate(readNaturalPlayState)).kills; assert.equal(report.observations.before, 1);
+  await page.evaluate(() => { const log = window.__bincovSample.host.eventLog; for (let i = 0; i < 1001; i++) { log.push({ type: 'shot', detail: {} }); if (log.length > 1000) log.shift(); } });
+  report.observations.afterEviction = (await page.evaluate(readNaturalPlayState)).kills; assert.equal(report.observations.afterEviction, 1);
+  await page.evaluate(() => window.__bincovSample.remount(1));
+  report.observations.afterRemount = (await page.evaluate(readNaturalPlayState)).kills; assert.equal(report.observations.afterRemount, 1);
+  await page.keyboard.press('Escape'); await page.locator('[data-do="abandon"]').click(); await page.locator('[data-do="abandon-yes"]').click();
+  await page.waitForFunction(() => window.__bincov.app.state === 'result');
+  report.observations.settled = (await page.evaluate(readNaturalPlayState)).result.kills; assert.equal(report.observations.settled, 1);
+  assert.deepEqual(report.errors, []); report.status = 'passed';
+} catch (e) { report.status = 'failed'; report.failure = String(e.stack ?? e); process.exitCode = 1; }
+finally { await context.close(); await browser.close(); report.finishedAt = new Date().toISOString(); await writeFile(out, JSON.stringify(report, null, 2) + '\n'); console.log(JSON.stringify(report)); }

@@ -1,5 +1,13 @@
 /** Automated-player policy, not game balance. All input describes committed or published state. */
 export const NATURAL_PREPARATION_POLICY = Object.freeze({ readyHp: 70, carriedMedical: 1, totalRounds: 12 });
+export const NATURAL_RETREAT_POLICY = Object.freeze({ hp: 60, rounds: 8 });
+
+/** Keep a defensive magazine for the walk home instead of waiting until both gun and bag are empty. */
+export function naturalRetreatReason(s) {
+  if (s.hp < NATURAL_RETREAT_POLICY.hp) return 'low-health';
+  if (s.mag + s.ammo <= NATURAL_RETREAT_POLICY.rounds) return 'ammunition-reserve';
+  return null;
+}
 
 export function assessPreparation(s, policy = NATURAL_PREPARATION_POLICY) {
   const blocked = reason => ({ ready: false, reason });

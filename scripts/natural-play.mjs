@@ -11,7 +11,7 @@ import { ITEMS, fits } from '../src/domain.ts';
 import { browserOptions } from './browser-options.mjs';
 import { readNaturalPlayState } from './natural-play-state.mjs';
 import { prepareNaturalLoadout, PreparationBlocked } from './natural-play-preparation.mjs';
-import { NATURAL_PREPARATION_POLICY, chooseSafeContainer, confirmedNativeTransfer } from './natural-play-policy.mjs';
+import { NATURAL_PREPARATION_POLICY, NATURAL_RETREAT_POLICY, naturalRetreatReason, chooseSafeContainer, confirmedNativeTransfer } from './natural-play-policy.mjs';
 
 const minutes = Number(process.env.BINCOV_PLAY_MINUTES || 10);
 assert.ok(minutes >= 1 && minutes <= 60);
@@ -22,6 +22,7 @@ const entry = resolve(process.env.BINCOV_PLAY_ENTRY || 'dist/index.html');
 assert.ok(['coast', 'buildings'].includes(world), 'BINCOV_PLAY_WORLD must be coast or buildings');
 const report = { htmlSha256: createHash('sha256').update(await readFile(entry)).digest('hex'), entry, startedAt: new Date().toISOString(), minutes, world, firstSeed,
   methodology: `Automated real-time session on ${world === 'coast' ? 'the classic coast' : 'the layered street with new enemy encounters'} (2.5D view). Test hook is read-only: no teleports, no clock changes, no changes to health, enemies, inventory or RNG. All actions use visible buttons and real keyboard/mouse, including E opening and native inventory drag for crates and corpses. This is not a human fun/balance evaluation.`, preparationPolicy: NATURAL_PREPARATION_POLICY, preparation: [], decisions: [], timing: { method: 'Wall intervals attributed to the previous observed UI state (including its UI actions); simulation sums nonnegative published run-clock deltas. Neither is a GPU/active-fun measurement.', runWallSeconds: 0, baseWallSeconds: 0, resultWallSeconds: 0, otherWallSeconds: 0, simulationSeconds: 0 }, enemyPhases: {}, containerLoot: { opened: [], transfers: [], threatenedClosures: 0 }, samples: [], outcomes: [], errors: [], externalRequests: [] };
+report.retreatPolicy = NATURAL_RETREAT_POLICY;
 const out = resolve(process.env.BINCOV_PLAY_OUT || 'test-results'); await mkdir(out, { recursive: true });
 const browser = await chromium.launch(browserOptions); report.browser = browser.version();
 const context = await browser.newContext({ viewport: { width: 1280, height: 720 }, offline: true });
@@ -33,7 +34,7 @@ const dist = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
 const space = s => ({ definition: s.map, doors: s.doors, highTide: s.high });
 const route = (s, to) => world === 'coast' ? findPath(s, to, s.high) : spacePath(space(s), s, to);
 const sight = (s, to) => world === 'coast' ? lineOfSight(s, to) : corridor(space(s), s, to, 'sight');
-let held = new Set(), runNumber = 0, goal = null, path = [], repathAt = 0, lastSample = 0, streetStep = 0;
+let held = new Set(), runNumber = 0, goal = null, path = [], repathAt = 0, lastSample = 0, streetStep = 0, retreating = false;
 const streetApproach = [{ x:6.5*32,y:24.5*32 },{ x:20.5*32,y:24.5*32 }];
 report.observationPolicy = 'First complete a native transfer at a dynamically reachable container whose route passes the original 220px/LOS danger boundary. Then approach a visible new enemy and observe its actual windup. No game-state mutations.';
 let visited = new Set(), lastPosition, stuckAt = Date.now(), lastHeal = 0;
@@ -123,7 +124,7 @@ try {
       await page.locator('#run-world').selectOption(world);
       await page.locator('#seed').fill(String(firstSeed + runNumber++)); await action('deploy').click();
       await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch, null, { timeout: 30000 });
-      goal = null; path = []; visited = new Set(); lastPosition = null; stuckAt = now; streetStep = 0;
+      goal = null; path = []; visited = new Set(); lastPosition = null; stuckAt = now; streetStep = 0; retreating = false;
       continue;
     }
     if (s.state !== 'run') throw new Error('Unexpected state ' + s.state);
@@ -159,7 +160,10 @@ try {
       const { x, y } = await screenOf(target);
       if (x > 0 && x < 1280 && y > 0 && y < 720) await page.mouse.click(x, y, { delay: 40 });
     }
-    const evacuate = now >= deadline || s.elapsed >= 550 || (s.hp < 35 && !s.medical) || (!s.mag && !s.ammo);
+    const retreatReason = naturalRetreatReason(s);
+    if (!retreating && retreatReason) report.decisions.push({ run: runNumber, elapsed: s.elapsed, reason: retreatReason });
+    retreating ||= !!retreatReason;
+    const evacuate = retreating || now >= deadline || s.elapsed >= 550;
     if (evacuate) {
       goal = [...s.exits].sort((a, b) => dist(a, s) - dist(b, s))[0] ?? s.map.entries[0]?.at;
       if (dist(goal, s) < 43) {
@@ -193,9 +197,11 @@ try {
         if ((await snapshot()).overlay === 'loot') continue;
         visited.add(`${goal.x},${goal.y}`);
       }
-      const choices = [...s.containers.filter(c => c.items && (world === 'coast' && !s.high || route(s, c).length)).map(c => ({ ...c, container: true })), ...s.loot]
-        .filter(l => !visited.has(`${l.x},${l.y}`) && !s.enemies.some(e => dist(e, l) < 100));
-      goal = choices.sort((a, b) => dist(a, s) * (a.container ? .55 : 1) - dist(b, s) * (b.container ? .55 : 1))[0] ?? s.exits[0];
+      // Later looting uses the same live route/danger boundary as the first native transfer.
+      const choices = [...s.containers, ...s.loot.map(l => ({ ...l, id: `ground-${l.id}-${l.x},${l.y}`, items: 1 }))];
+      const chosen = chooseSafeContainer({ ...s, containers: choices }, visited, route, sight);
+      if (chosen) goal = chosen.container;
+      else { retreating = true; goal = null; await keys(new Set()); continue; }
     }
     if (!lastPosition || dist(lastPosition, s) > 10) { lastPosition = { x: s.x, y: s.y }; stuckAt = now; }
     if (now - stuckAt > 7000) { visited.add(`${goal.x},${goal.y}`); goal = null; stuckAt = now; await keys(new Set()); continue; }
@@ -204,6 +210,7 @@ try {
     const point = path[0] ?? goal, next = new Set();
     if (point.x - s.x > 6) next.add('d'); if (point.x - s.x < -6) next.add('a');
     if (point.y - s.y > 6) next.add('s'); if (point.y - s.y < -6) next.add('w');
+    if (evacuate && next.size) next.add('Shift');
     await keys(next); await page.waitForTimeout(120);
     if (now > deadline + 150000) throw new Error('Could not finish the final run within the session limit');
   }

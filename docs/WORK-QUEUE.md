@@ -1,9 +1,10 @@
 # 当前任务入口
 
-最近核对：2026-10-29，main `ae177b4`（含 #137 事务失败阶段与 #141 室内墙体过渡）。本轮沿 [PR #95](https://github.com/xuys2025/escape-bincov/pull/95) 复核 W12/W13 等待仍有必要，维护者已授权验证后合并；下表其他条目的合并状态、head 与检查结果以对应 GitHub 页面实时信息为准，旧快照不作为当前指令。
+最近核对：2026-10-29，main `275fafd`（含 #95 退场等待复核、#137 事务失败阶段与 #141 室内墙体过渡）。本轮沿 [PR #109](https://github.com/xuys2025/escape-bincov/pull/109) 完成自然游玩报告与测试准备流程；下表其他条目的合并状态、head 与检查结果以对应 GitHub 页面实时信息为准，旧快照不作为当前指令。
 
 | 目标 | 承接入口 | 接手提示 |
 | --- | --- | --- |
+| 自然游玩累计击杀与真实整备 | [PR #109](https://github.com/xuys2025/escape-bincov/pull/109) · `fix/natural-play-kill-count` · [本轮复核](tasks/audit-contracts.md#109-自然游玩报告与准备流程收尾) | 同一 PR 接入原候选 `3739d7b` 并正常同步 main；累计值直读 Runtime，测试机器人通过真实 UI 治疗、补弹、出售普通战利品筹资。原生拖放、危险边界和默认十分钟要求保留；验证与准确 head CI 见原 PR，真人/真机与 #32 F20 保持原边界 |
 | 事务失败阶段（Q-E04） | [#60 登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553) · [PR #137](https://github.com/xuys2025/escape-bincov/pull/137) · `codex/transaction-failure-phases` · [实现与验证](tasks/quality-entropy.md#q-e04-提交后的发布失败) | 写后发布异常不再当作可回滚/重试的存储失败；消费票据、停止本页、导出已提交记录后刷新。独立验收，#117/#136 已合入，现同步 main d27306b4；CI 的 station-reset S6 短提示观测补修后1048单测/99守卫/package/14项重开浏览器通过，原17项存档浏览器CI通过；准确新head完整CI见承接PR |
 | 文档快速通道的 main 也部署和发布 | [CI 说明](CI.md#pages-与镜像) · [交接](../handoff.md) | `fix/ci-docs-fastpath-deploy`，起点 main `8c6589b`：`03ea261` 纯文档合入时 Pages 与 `main-latest` 发布被连带跳过；两个 job 改为显式状态检查并加守卫测试。真正证明要等下一次纯文档合入实际部署；准确 head 与 CI 见承接 PR |
 | 室内墙体切换过渡（墙下沉／升起） | [方案 §6 第三阶段](INDOOR-WALL-VISIBILITY-PLAN.md#第三阶段切换过渡已实施待合并) · [PR #141](https://github.com/xuys2025/escape-bincov/pull/141) `feat/indoor-wall-transition` | 两阶段规则已随 [PR #135](https://github.com/xuys2025/escape-bincov/pull/135) 合入 main（`5c65eb4`）。维护者试玩后要求加过渡并选了“下沉”：墙在 0.2 秒内沉进占地格或升回，像素始终实心；进出建筑、门洞裁切和附着物都跟着；减少动态效果时直接切换。维护者 10-29 局域网试玩后说“手感可以”，真机未测。准确 head、CI 与验收见承接 PR |

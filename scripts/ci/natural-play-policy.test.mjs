@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { spawnSync } from 'node:child_process';
-import { assessPreparation, confirmSupplyUse, chooseSafeContainer, confirmedNativeTransfer } from '../natural-play-policy.mjs';
+import { assessPreparation, naturalRetreatReason, confirmSupplyUse, chooseSafeContainer, confirmedNativeTransfer } from '../natural-play-policy.mjs';
 
 const ready = () => ({ revision: 4, confirmed: true, storageOK: true, conflict: false, pending: false,
   phase: 'hideout', activeRun: false, hp: 72, hpMax: 100, bleeding: false, cash: 44,
@@ -16,6 +16,12 @@ test('HP1/17 and missing, failed or conflicting preparation cannot silently depl
 test('carried medicine, matching gun/ammunition and free space are independent requirements', () => {
   for (const patch of [{ bagMedical: 0 }, { gunReady: false }, { totalRounds: 11 }, { spareCells: 0 }])
     assert.equal(assessPreparation({ ...ready(), ...patch }).ready, false);
+});
+test('natural retreat preserves ammunition for the return route and reacts before critically low health', () => {
+  assert.equal(naturalRetreatReason({ hp: 72, mag: 0, ammo: 12 }), null);
+  assert.equal(naturalRetreatReason({ hp: 72, mag: 8, ammo: 0 }), 'ammunition-reserve');
+  assert.equal(naturalRetreatReason({ hp: 59, mag: 8, ammo: 24 }), 'low-health');
+  assert.equal(naturalRetreatReason({ hp: 60, mag: 8, ammo: 1 }), null);
 });
 test('supply acknowledgement requires a new committed revision, real consumption and observed treatment', () => {
   const before = { revision: 4, hp: 1, bleeding: true, quantities: { med: 2 } };
@@ -39,6 +45,24 @@ test('native drag proof rejects death, closed inventory, another run and a sourc
   for (const patch of [{ state: 'result' }, { runId: 'run-2' }, { map: { id: 'flat-1' } }, { lootContext: null }, { bag: { items: [] } }, { containers: [] },
     { containers: [{ id: 'box', inventory: { items: [{ ...item, uid: 'replacement' }] } }] }])
     assert.equal(!!confirmedNativeTransfer(before, { ...after, ...patch }, 'box', item), false);
+});
+test('preparation funds supplies at official sale prices without selling reserves, relief or safe contents', () => {
+  const code = `
+    import assert from 'node:assert/strict';
+    import {preparationSale} from './scripts/natural-play-preparation.mjs';
+    import {itemSale} from './src/domain.ts';
+    const item=(id,uid,qty=1,extra={})=>({id,uid,qty,x:0,y:0,...extra});
+    const record={profile:{bag:{items:[item('cloth','cloth',2),item('bandage','medicine'),item('ammo9','ammo',40),item('pistol','gun'),item('water','drink')]},
+      stash:{items:[item('watch','relief-watch',1,{relief:true})]},safe:{items:[item('watch','safe-watch')]}}};
+    const before=structuredClone(record),sale=preparationSale(record);
+    assert.equal(sale.uid,'cloth');assert.equal(sale.source,'bag');assert.equal(sale.price,itemSale(record.profile.bag.items[0]).value);
+    assert.deepEqual(record,before,'quotes cannot move or sell owned items');
+    record.profile.bag.items.shift();assert.equal(preparationSale(record),null,'no reserved or restricted fallback');
+    record.profile.stash.items.push(item('watch','ordinary-watch'));assert.equal(preparationSale(record).uid,'ordinary-watch');
+    assert.equal(preparationSale(record,'bag'),null,'banking does not repeatedly move goods already at the base');
+  `;
+  const result = spawnSync(process.execPath, ['--import', 'tsx', '--input-type=module', '-e', code], { encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr || result.stdout);
 });
 test('medical preparation uses real RPG effects and protects a complete medical reserve before ammunition purchases', () => {
   const code = `

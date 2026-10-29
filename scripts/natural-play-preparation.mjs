@@ -1,7 +1,8 @@
 import * as D from '../src/domain.ts';
 import { derivedLimits } from '../src/expansion-state.ts';
 import { useRpgItemResult } from '../src/rpg.ts';
-import { placeAt } from './inventory-actions.mjs';
+import { shopQuote } from '../src/shop.ts';
+import { placeAt, clickSlot } from './inventory-actions.mjs';
 import { NATURAL_PREPARATION_POLICY as policy, assessPreparation, confirmSupplyUse } from './natural-play-policy.mjs';
 
 const medical = new Set(['medkit', 'bandage']);
@@ -9,6 +10,15 @@ const sources = ['bag', 'stash', 'safe'];
 const entries = record => sources.flatMap(source => record.profile[source].items.map(item => ({ ...item, source })));
 const count = (inv, id) => inv.items.filter(i => i.id === id).reduce((n, i) => n + i.qty, 0);
 const ownedCount = (record, id) => entries(record).filter(i => i.id === id).reduce((n, i) => n + i.qty, 0);
+
+/** Bot trading policy: fund supplies from ordinary materials/valuables, keeping food, medicine, guns, ammo and the safe. */
+export function preparationSale(record, source = null) {
+  return entries(record).filter(i => i.source !== 'safe' && (!source || i.source === source)
+    && ['part', 'valuable', 'accessory', 'attachment'].includes(D.ITEMS[i.id].kind))
+    .map(item => ({ ...item, price: shopQuote('stash', item).total }))
+    .filter(i => i.price > 0 && D.itemSize(i).w <= 4 && D.itemSize(i).h <= 3)
+    .sort((a, b) => b.price - a.price || a.uid.localeCompare(b.uid))[0] ?? null;
+}
 
 /** Cached committed SessionRecord only: no backup candidate, clock advance, persistence or game mutation. */
 export function readCommittedPreparation() {
@@ -93,8 +103,36 @@ export async function prepareNaturalLoadout(page, decisions, run) {
       throw new PreparationBlocked(`${kind}-commit-not-observed`, preparationFacts(after));
     recordStep(kind, reason, before, after); current = after;
   };
+  const fund = async required => {
+    for (let step = 0; current.record.profile.cash < required && step < 24; step++) {
+      const sale = preparationSale(current.record);
+      if (!sale) throw new PreparationBlocked('no-tradable-loot-for-preparation', { ...preparationFacts(current), required });
+      if (sale.source === 'bag') {
+        await action('tab', 'gear').click();
+        await perform('unpack-sale', 'fund-supplies-with-loot', () => page.locator(`[data-source="bag"][data-uid="${sale.uid}"]`).dblclick(), (a, b) =>
+          ownedCount(a.record, sale.id) === ownedCount(b.record, sale.id)
+          && count(b.record.profile.stash, sale.id) > count(a.record.profile.stash, sale.id));
+        continue;
+      }
+      await action('tab', 'arms').click();
+      await page.locator(`[data-source="stash"][data-uid="${sale.uid}"]`).click();
+      await action('place-item').click(); await clickSlot(page, 'sell', 0, 0);
+      const quote = await page.locator('.shop-checkout strong').innerText();
+      if (!quote.startsWith('可得') || Number(quote.replace(/[^0-9]/g, '')) !== sale.price)
+        throw new PreparationBlocked('changed-sale-quote', { ...preparationFacts(current), id: sale.id, quote });
+      await perform('sell-loot', 'fund-supplies-with-loot', async () => {
+        await action('checkout').click();
+        if (await action('checkout-confirm').isVisible()) await action('checkout-confirm').click();
+      }, (a, b) => b.record.profile.cash - a.record.profile.cash === sale.price
+        && ownedCount(a.record, sale.id) - ownedCount(b.record, sale.id) === sale.qty);
+    }
+    if (current.record.profile.cash < required)
+      throw new PreparationBlocked('funding-action-limit', { ...preparationFacts(current), required });
+  };
   const buy = async id => {
-    const before = current, expected = D.ITEMS[id].buy * D.buyQuantity(id);
+    const expected = D.ITEMS[id].buy * D.buyQuantity(id);
+    await fund(expected);
+    const before = current;
     await action('tab', medical.has(id) ? 'med' : 'arms').click(); await placeAt(page, 'merchant', id, 'buy');
     const quote = await page.locator('.shop-checkout strong').innerText();
     const price = Number(quote.replace(/[^0-9]/g, ''));
@@ -104,11 +142,20 @@ export async function prepareNaturalLoadout(page, decisions, run) {
       // Official checkout may also grant eligible relief supplies; read them rather than assuming only the purchase exists.
       a.record.profile.cash - b.record.profile.cash === price && ownedCount(b.record, id) - ownedCount(a.record, id) >= D.buyQuantity(id));
   };
+  // Returned trading goods belong at the base before another raid can lose them. Do not wait for a cash shortfall.
+  for (let step = 0; step < 30; step++) {
+    const loot = preparationSale(current.record, 'bag');
+    if (!loot) break;
+    await action('tab', 'gear').click();
+    await perform('bank-loot', 'keep-returned-trading-goods', () => page.locator(`[data-source="bag"][data-uid="${loot.uid}"]`).dblclick(), (a, b) =>
+      ownedCount(a.record, loot.id) === ownedCount(b.record, loot.id)
+      && count(b.record.profile.stash, loot.id) - count(a.record.profile.stash, loot.id) === loot.qty);
+  }
   for (let step = 0; step < 24; step++) {
     const facts = preparationFacts(current), assessment = assessPreparation(facts), plan = medicalPreparationPlan(current.record);
     recordStep('decision', assessment.reason, current);
     if (assessment.ready) { await action('tab', 'gear').click(); return facts; }
-    if (plan.cost > facts.cash) throw new PreparationBlocked('complete-medical-preparation-unaffordable', { ...facts, medicalQuote: plan.cost });
+    if (plan.cost > facts.cash) { await fund(plan.cost); continue; }
     if (plan.next) {
       const next = plan.next;
       if (next.kind === 'buy') { await buy(next.id); continue; }
@@ -130,7 +177,7 @@ export async function prepareNaturalLoadout(page, decisions, run) {
       if (!gun) {
         const needAmmo = Math.max(0, policy.totalRounds - ownedCount(current.record, 'ammo9'));
         const minimum = D.ITEMS.pistol.buy + Math.ceil(needAmmo / D.buyQuantity('ammo9')) * D.buyQuantity('ammo9') * D.ITEMS.ammo9.buy;
-        if (facts.cash < minimum) throw new PreparationBlocked('no-affordable-prepared-gun', { ...facts, minimum });
+        if (facts.cash < minimum) await fund(minimum);
         await buy('pistol'); continue;
       }
       await action('tab', 'gear').click(); const item = page.locator(`[data-source="${gun.source}"][data-uid="${gun.uid}"]`);

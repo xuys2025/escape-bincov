@@ -1,0 +1,10 @@
+$ node --import tsx scripts/natural-play.mjs
+PLAY {"realSeconds":1,"run":1,"elapsed":0,"hp":100,"kills":0,"highTide":false,"ammo":24,"medical":2,"goal":null,"x":208,"y":1232}
+PLAY {"realSeconds":31,"run":1,"elapsed":30,"hp":92,"kills":2,"highTide":false,"ammo":16,"medical":2,"goal":"crate-21","x":813,"y":1010}
+PLAY {"realSeconds":61,"run":1,"elapsed":60,"hp":51,"kills":7,"highTide":false,"ammo":10,"medical":0,"goal":null,"x":852,"y":1174}
+PLAY {"realSeconds":91,"run":1,"elapsed":89,"hp":51,"kills":7,"highTide":false,"ammo":10,"medical":0,"goal":"pistol","x":1166,"y":1198}
+Run completed death kills 9
+PLAY {"realSeconds":121,"run":2,"elapsed":4,"hp":72,"kills":0,"highTide":true,"ammo":16,"medical":1,"goal":"crate-14","x":308,"y":722}
+PLAY {"realSeconds":151,"run":2,"elapsed":35,"hp":72,"kills":0,"highTide":true,"ammo":0,"medical":1,"goal":null,"x":923,"y":906}
+Run completed extract kills 1
+PLAY {"realSeconds":181,"run":3,"elapsed":3,"hp":72,"kills":1,"highTide":false,"ammo":4,"medical":1,"goal":"crate-12","x":273,"y":498}

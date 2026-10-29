@@ -1,0 +1,136 @@
+{
+  "status": "passed",
+  "baseline": "275fafd77b1574938ecc0409ab405b77850359c1",
+  "sourceHashes": {
+    "src/raid-runtime/test-support.ts": "09eeec932040155256e69634446b4ba169512d31dc05bc60e858c32744857769",
+    "tests/raid-runtime.test.ts": "bed80d9e0b982d67efce22b67d78f47efbe7d8ce274f4daf79c06fa0e31260e9",
+    "scripts/natural-play.mjs": "d34b2fd10c391ed4713f85f40edf9e708f5421ec48ee42a856852bbfdfcb4ad7",
+    "scripts/natural-play-state.mjs": "b7931b655bfab819815172ffd7a59c572b46da42f97d706d4c22416f7b16e6e6",
+    "scripts/natural-play-preparation.mjs": "ffea6e970270a88c52545e6c9a96e1a5217d1a72d77ebc762d5b3b115c163512",
+    "scripts/natural-play-policy.mjs": "22deaca7e083647ca91feab95742565795c9c3a36442a18982e98bdcb08e1bc8",
+    "scripts/ci/natural-play-state.test.mjs": "a0c246243c51448922422915f62ce6de2bb7899d230185e5b962e3b4fb7d50ff",
+    "scripts/ci/natural-play-policy.test.mjs": "f2f663dfe33b43387f44dc4dbd29614d923a2884e3b96a87d5533aa23290648b"
+  },
+  "artifacts": {
+    "htmlBytes": 9260294,
+    "portableZipBytes": 6035876,
+    "webZipBytes": 6031367
+  },
+  "environment": {
+    "platform": "win32",
+    "node": "v24.19.0",
+    "pnpm": "11.25.0",
+    "browser": "156.0.8078.48"
+  },
+  "checks": {
+    "unit": "1058/1058",
+    "guards": "123/123",
+    "package": "passed",
+    "medicalOracle": "756/756 matched, no input mutation",
+    "legacySamplerControl": "3 passed / 1 expected failure: event eviction produces 0 instead of 1"
+  },
+  "natural": {
+    "startedAt": "2026-10-29T03:55:01.670Z",
+    "finishedAt": "2026-10-29T04:05:06.466Z",
+    "durationSeconds": 604.796,
+    "htmlSha256": "4c5b8cb4c4536d448040ab65005b79265e932f4462181701e1366ccfab9ccb66",
+    "timing": {
+      "method": "Wall intervals attributed to the previous observed UI state (including its UI actions); simulation sums nonnegative published run-clock deltas. Neither is a GPU/active-fun measurement.",
+      "runWallSeconds": 562.6299999999998,
+      "baseWallSeconds": 23.663999999999998,
+      "resultWallSeconds": 16.473999999999997,
+      "otherWallSeconds": 0,
+      "simulationSeconds": 509.086699999998,
+      "playStartedAt": "2026-10-29T03:55:03.291Z"
+    },
+    "outcomes": [
+      {
+        "outcome": "death",
+        "kills": 3
+      },
+      {
+        "outcome": "extract",
+        "kills": 0
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 2
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 0
+      },
+      {
+        "outcome": "extract",
+        "kills": 5
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 0
+      },
+      {
+        "outcome": "extract",
+        "kills": 0
+      },
+      {
+        "outcome": "death",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "extract",
+        "kills": 3
+      },
+      {
+        "outcome": "extract",
+        "kills": 6
+      },
+      {
+        "outcome": "extract",
+        "kills": 1
+      },
+      {
+        "outcome": "death",
+        "kills": 1
+      }
+    ],
+    "totalKills": 26,
+    "samples": 20,
+    "sampledRuns": 12,
+    "monotonicWithinEveryRun": true,
+    "samplesNotAboveSettlement": true,
+    "finalStatsReconciled": true,
+    "opened": 10,
+    "nativeTransfers": 15,
+    "banks": 20,
+    "sales": 5,
+    "enemyWindups": [
+      "raider-gunner/windup",
+      "raider-lookout/windup"
+    ],
+    "pageErrors": 0,
+    "externalRequests": 0
+  },
+  "retained": {
+    "firstFailure": "insufficient-funds-report.json",
+    "secondFailure": "unbanked-loot-report.json",
+    "thirdFailure": "repeated-deaths-report.json",
+    "interruptedRun": "interrupted-progress.json (no final report; not counted as pass)"
+  },
+  "boundaries": "Automated natural input, not human balance or physical-device acceptance. UI/quota/funding and kill-control are separate explicit fixtures. Save format, game rules, ordinary HUD, #32 F20 unchanged."
+}
