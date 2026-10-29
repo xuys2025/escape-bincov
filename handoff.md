@@ -1,6 +1,6 @@
 ## 2026-10-29 · #143 三分支技能：隔离研究交付
 
-起点 main `275fafd`，研究与稳定性验证基线为最新 main `cf5845e9ba0b530fe2b8be4bb69c431a8049efa3`，分支 `feat/skills-local-spike`。用户已确认提交经过测试的隔离研究版；通过 `Nekomole/escape-bincov` fork 向权威仓库发起 PR，准确 head／检查／审阅状态以承接 PR 为准。授权不包含合并 main 或额外实施正式存档接入。未迁移旧 Perk，未改正式存档或正常游戏入口。
+起点 main `275fafd`，研究与稳定性验证基线为最新 main `cf5845e9ba0b530fe2b8be4bb69c431a8049efa3`。[PR #148](https://github.com/xuys2025/escape-bincov/pull/148)，head `Nekomole:feat/skills-local-spike`，源码提交 `84748f819a955de2be196f286ed5fbe9e055a85a`；后续交接索引仅文档更新，准确head／检查／审阅状态以PR为准。用户已确认提交该隔离研究版，授权不包含合并 main 或额外实施正式存档接入。未迁移旧 Perk，未改正式存档或正常游戏入口。
 
 本轮已复现并修复三项：[详情与唯一反例入口](docs/tasks/skill-tree-research.md#稳定性复核已复现并修复的问题)、[stability 测试](tests/skill-tree-stability.test.ts)。死亡敌人的正极小血量被epsilon连续性放行，能按新ID重结击杀；暂停活动推进限时效果时钟；长ID事件越过检查点上限后才无法导出。现分别严格匹配权威HP、暂停只接受停止的行动时钟标记、返回候选前检查400万字符上限。保留合法极小HP、正常闲置计时与原状态不变反例；不把错误研究日志静默修复。主线同步的两处文档冲突保留双方内容，保护快照 stash `37fdf6a`。
 
