@@ -33,9 +33,10 @@ const RARE = ['O08', 'M03', 'B08', 'G09', 'M07', 'O10', 'T10', 'O09', 'O11', 'M0
 const NEW_AMMO = ['ammo45', 'ammoPDW', 'ammoHeavy'];
 /** The common parts that are found: the shelf's two are not. */
 const COMMON = PARTS.filter(id => !BASIC.includes(id) && !RARE.includes(id) && !SHELF_COMMON.includes(id));
-/** The found guns by the catalog's tier: every gunsmith gun that is an item but those on the shelf (the G17, and since
- *  the maintainer's 2026-10-28 decision the P226 and the M870). */
-const SHELF_GUNS = ['gb17', 'pb226', 'mb870'], GUNS_COMMON = ['mb4a1', 'mpb5', 'akb74', 'akb103', 'augb', 'mb1911', 'umpb45', 'rpkb'];
+/** The found guns by the catalog's tier: every gunsmith gun that is an item but those always on the shelf (the G17; the
+ *  P226 and the M870 since the maintainer's 2026-10-28 decision; the MP5 and the M1911 since 2026-10-29, #28 M4-01).
+ *  The guns a radio quest puts on the shelf stay finds. */
+const SHELF_GUNS = ['gb17', 'pb226', 'mb870', 'mpb5', 'mb1911'], GUNS_COMMON = ['mb4a1', 'akb74', 'akb103', 'augb', 'umpb45', 'rpkb'];
 const GUNS_RARE = ['vb9', 'mb1014', 'pb90', 'svdb', 'mb14', 'mb700'];
 const OLD_ARMS = ['pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'scrap', 'wire', 'fuse', 'battery'];
 type Unit = { id: string; qty: number };
@@ -64,15 +65,18 @@ test('tiers: the price bands of PLAN section 10 sort the 100 parts 20/65/15, and
 });
 
 test('shop: 老栓 stocks the G17, wave two\'s rounds, the basic parts, O01 and G01 after his old goods (and the cloth), at the catalog\'s prices; the doctor is unchanged', () => {
+    const fresh = D.newSave();
     for (const rpg of [false, true]) {
-        assert.deepEqual(Shop.merchantStock('arms', rpg), [...OLD_ARMS, ...rpg ? ['cloth'] : [], ...SHELF_GUNS, ...NEW_AMMO, ...BASIC, ...SHELF_COMMON]);
-        assert.deepEqual(Shop.merchantStock('med', rpg), ['bandage', 'medkit', 'antidote', 'water', 'food', ...rpg ? ['analgesic', 'focus'] : []]);
+        assert.deepEqual(Shop.merchantStock('arms', fresh, rpg), [...OLD_ARMS, ...rpg ? ['cloth'] : [], ...SHELF_GUNS, ...NEW_AMMO, ...BASIC, ...SHELF_COMMON, ...D.rotationParts(0)]);
+        assert.deepEqual(Shop.merchantStock('med', fresh, rpg), ['bandage', 'medkit', 'antidote', 'water', 'food', ...rpg ? ['analgesic', 'focus'] : []]);
     }
-    // The found guns, the found common parts and the rare parts are finds only.
-    assert.ok(!Shop.merchantStock('arms', true).some(id => isFoundGun(id) || COMMON.includes(id) || RARE.includes(id)));
+    // Before any quest the found guns are finds only, the rare parts always; the found common parts only on the
+    // rotating shelf (#28 M4-01, tests/gunsmith-shelf.test.ts).
+    assert.ok(!Shop.merchantStock('arms', fresh, true).some(id => isFoundGun(id) || RARE.includes(id)));
+    assert.deepEqual(Shop.merchantStock('arms', fresh, true).filter(id => COMMON.includes(id)), D.rotationParts(0));
     for (const id of SHELF_GUNS as ('gb17' | 'pb226' | 'mb870')[]) assert.deepEqual([D.ITEMS[id].buy, D.ITEMS[id].sell], [GUNS[id].buy, GUNS[id].sell], id);
     for (const id of [...BASIC, ...SHELF_COMMON]) assert.deepEqual([D.ITEMS[id].buy, D.ITEMS[id].sell], [ATTACHMENTS[id].buy, ATTACHMENTS[id].sell], id);
-    const pages = Shop.catalogPages(Shop.merchantStock('arms'));
+    const pages = Shop.catalogPages(Shop.merchantStock('arms', fresh));
     for (const id of [...SHELF_GUNS, ...BASIC, ...SHELF_COMMON]) {
         const cart = Shop.createCart(D.newSave(), 'arms', false, { ...Shop.BROWSE_ALL, page: pages.findIndex(p => p.includes(id)) });
         assert.deepEqual(Shop.shopQuote('merchant', cart.catalog.items.find(i => i.id === id)!), { side: 'buy', total: D.ITEMS[id].buy }, id);
@@ -94,8 +98,9 @@ test('shop: every stocked pack shows on the 6x5 catalog pages, both counters, wi
             shown.push(...cart.catalog.items.map(i => [i.id, i.qty]));
         }
         // A pack that does not fit a page starts the next one: none may be missing, and the order is the stock's.
-        assert.deepEqual(shown, Shop.merchantStock(merchant, rpg).map(id => [id, D.buyQuantity(id)]), `${merchant} rpg=${rpg}`);
-        assert.equal(first.pages, merchant === 'arms' ? 2 : 1, `${merchant} rpg=${rpg}`);
+        assert.deepEqual(shown, Shop.merchantStock(merchant, save, rpg).map(id => [id, D.buyQuantity(id)]), `${merchant} rpg=${rpg}`);
+        // The arms counter's take three pages since #28 M4-01 (the MP5, the M1911 and the rotating parts).
+        assert.equal(first.pages, merchant === 'arms' ? 3 : 1, `${merchant} rpg=${rpg}`);
     }
     // The old goods and the cloth keep the first page's cells they had before the gunsmith goods came.
     const cells = Object.fromEntries(Shop.createCart(D.newSave(), 'arms', true).catalog.items.map(i => [i.id, [i.x, i.y]]));
@@ -105,7 +110,12 @@ test('shop: every stocked pack shows on the 6x5 catalog pages, both counters, wi
 
 test('shop: the G17 and the basic parts settle into the stash at catalog prices: a factory G17 under a new uid, each part its own item', () => {
     const save = D.newSave(); save.cash = 2000;
-    const cart = Shop.createCart(save, 'arms'), pick = (id: string) => cart.catalog.items.find(i => i.id === id)!.uid;
+    // The catalog runs to three pages since #28 M4-01: each pick turns to its page, as the browse does (only the catalog changes).
+    const cart = Shop.createCart(save, 'arms'), pages = Shop.catalogPages(Shop.merchantStock('arms', save));
+    const pick = (id: string) => {
+        cart.catalog = Shop.catalogPage(save, 'arms', false, { ...Shop.BROWSE_ALL, page: pages.findIndex(p => p.includes(id)) }).catalog;
+        return cart.catalog.items.find(i => i.id === id)!.uid;
+    };
     for (const [id, x, y] of [['gb17', 0, 0], ['P01', 2, 0], ['P01', 3, 0], ['F01', 0, 1], ['A07', 1, 1]] as const)
         assert.ok(Shop.moveShopItem(cart, 'merchant', 'buy', pick(id), x, y), id);
     const price = GUNS.gb17.buy + 2 * ATTACHMENTS.P01.buy + ATTACHMENTS.F01.buy + ATTACHMENTS.A07.buy;
@@ -211,11 +221,12 @@ test('zone finds over 3000 seeds: every found gun and part turns up, rare parts 
     assert.ok(Math.max(...GUNS_RARE.map(id => seen[id])) < Math.min(...GUNS_COMMON.map(id => seen[id])), JSON.stringify(seen));
 });
 
-test('every gun and part can be had: the shelf\'s on the shelf, the rest found within 1000 seeds', () => {
-    // 1000 seeds since #28 M3-06: fifteen rare parts share the flooded caches.
-    const shelf = new Set(Shop.merchantStock('arms')), found = new Set<string>();
+test('every gun and part can be had: the steady shelf\'s on the shelf, the rest found within 1000 seeds', () => {
+    // 1000 seeds since #28 M3-06: fifteen rare parts share the flooded caches. The guns a quest puts on the shelf and the
+    // common parts of the rotating shelf (#28 M4-01) are found as well.
+    const steady = new Set(D.MERCHANTS.arms.stock), found = new Set<string>();
     for (let seed = 1; seed <= 1000; seed++) for (const r of records(buildingRunConfig(seed))) if (isFind(r.id)) found.add(r.id);
-    for (const id of [...SHELF_GUNS, ...GUNS_COMMON, ...GUNS_RARE, ...PARTS]) assert.ok(shelf.has(id) !== found.has(id), `${id}: on the shelf or found in a raid, not both`);
+    for (const id of [...SHELF_GUNS, ...GUNS_COMMON, ...GUNS_RARE, ...PARTS]) assert.ok(steady.has(id) !== found.has(id), `${id}: on the steady shelf or found in a raid, not both`);
 });
 
 test('the mall deals out the same records, finds included', () => {

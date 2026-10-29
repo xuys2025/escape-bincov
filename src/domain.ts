@@ -305,23 +305,59 @@ const partsOf = (tier: PartTier): string[] => Object.keys(ATTACHMENT_ITEMS).filt
  */
 const SHELF_COMMON = ['O01', 'G01'];
 /**
- * Wave-one guns the arms counter stocks as well (maintainer 2026-10-28, #28 M3): the P226 and the M870. The other
- * gunsmith guns are found only; what the shop sells is to be studied (M4-01).
+ * Gunsmith guns the arms counter always stocks besides the G17: the P226 and the M870 (maintainer 2026-10-28, #28 M3),
+ * the MP5 and the M1911 (maintainer 2026-10-29, #28 M4-01). The other common guns come with the radio quests
+ * (GUNS_BY_QUEST); the rare ones are never stocked, only found.
  */
-const SHELF_GUNS = ['pb226', 'mb870'];
+const SHELF_GUNS = ['pb226', 'mb870', 'mpb5', 'mb1911'];
 /** Wave two's rounds (#28 M3-05): stocked steadily like the old three, so a found gun of a new group can be fed. */
 const NEW_AMMO = ['ammo45', 'ammoPDW', 'ammoHeavy'];
 /**
- * Fixed stock, no rotation (that is #28 M4-01). The arms counter also stocks the G17, every basic-tier attachment that
- * is an item (#28 M2-13, PLAN section 10: basic parts are stocked steadily) and SHELF_COMMON, after the old goods so their places
- * in the catalog do not move. The catalog is one 6x5 page: every stocked pack must fit it, which
- * tests/gunsmith-acquire.test.ts checks (catalog pages are M2-08).
+ * The stock each counter holds whatever the progress. The arms counter also stocks the G17, SHELF_GUNS, every
+ * basic-tier attachment that is an item (#28 M2-13, PLAN section 10: basic parts are stocked steadily) and
+ * SHELF_COMMON, after the old goods so their places in the catalog do not move; armsStock adds what the radio quests
+ * and the rotation add (#28 M4-01). The catalog has pages (M2-08).
  */
 export const MERCHANTS: Record<'arms' | 'med', { name: string; subtitle: string; stock: string[] }> = {
   arms: { name: '老栓', subtitle: '武器 · 零件', stock: ['pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'scrap', 'wire', 'fuse', 'battery',
     'gb17', ...SHELF_GUNS, ...NEW_AMMO, ...partsOf('basic'), ...SHELF_COMMON] },
   med: { name: '许医生', subtitle: '医疗用品 · 食品', stock: ['bandage', 'medkit', 'antidote', 'water', 'food'] },
 };
+/**
+ * The common guns each radio quest puts on the arms counter once done (#28 M4-01, maintainer 2026-10-29, #139): only the
+ * quests open guns, and the rare guns stay finds, so the ledger, whose guns would all be rare, opens none yet.
+ */
+export const GUNS_BY_QUEST: Readonly<Record<string, readonly GunId[]>> = { repair: ['umpb45', 'akb74', 'mb4a1', 'akb103'], sample: ['augb', 'rpkb'], ledger: [] };
+/** How many common parts the arms counter's rotating shelf holds (#28 M4-01; a proposal M4-03 may tune). */
+export const ROTATION_PARTS = 6;
+/**
+ * The rotating shelf of a profile that has deployed `runs` times (#28 M4-01, PLAN section 10): ROTATION_PARTS of the
+ * common parts that are found, drawn by a stream seeded from `runs` alone and kept in item order. A reload never changes
+ * them; each deployment brings the next set. They stay finds as well.
+ */
+export function rotationParts(runs: number): string[] {
+  const pool = [...FIND_PARTS.common], random = seededRandom(0x4d340001 + integer(runs) * 7919), picked = new Set<string>();
+  while (picked.size < ROTATION_PARTS && pool.length) picked.add(pool.splice(Math.floor(random() * pool.length), 1)[0]);
+  return FIND_PARTS.common.filter(id => picked.has(id));
+}
+/**
+ * Everything the arms counter stocks for this profile (#28 M4-01): MERCHANTS.arms.stock, the guns of each radio quest
+ * done right after SHELF_GUNS, and the rotating parts last. Worked out from the quests and the deployments each time,
+ * so the profile holds no field for it.
+ */
+export function armsStock(save: Pick<SaveDataV1, 'quests' | 'stats'>): string[] {
+  const base = MERCHANTS.arms.stock, at = base.indexOf(SHELF_GUNS.at(-1)!) + 1;
+  const guns = Object.entries(GUNS_BY_QUEST).flatMap(([quest, ids]) => save.quests[quest] === true ? ids : []);
+  return [...base.slice(0, at), ...guns, ...base.slice(at), ...rotationParts(save.stats.runs)];
+}
+/** The quest card's line on the guns it puts on the arms counter (#28 M4-01), before and after; null for a quest that opens none. */
+export function questGunsText(id: string, done: boolean): string | null {
+  const guns = GUNS_BY_QUEST[id] ?? [];
+  return guns.length ? `${done ? '修理铺已上架' : '完成后修理铺上架'}：${guns.map(gun => ITEMS[gun].short).join('、')}` : null;
+}
+/** What a counter stocks for this profile: the arms counter by progress (armsStock), the doctor's fixed stock. */
+export const merchantGoods = (merchant: 'arms' | 'med', save: Pick<SaveDataV1, 'quests' | 'stats'>): string[] =>
+  merchant === 'arms' ? armsStock(save) : [...MERCHANTS[merchant].stock];
 export const QUESTS: Record<string, { name: string; description: string; needs: Record<string, number>; reward: number; radio: string }> = {
   repair: { name: '让灯亮起来', description: '找齐维修物资，恢复水产站供电。完成后可扩建仓库。', needs: { scrap: 3, wire: 2, fuse: 1 }, reward: 420, radio: '电台通了，灯也稳了。仓库可以扩建了。' },
   sample: { name: '瓶中的潮声', description: '从潮汐观测站带回一份赤潮封存样本。', needs: { sample: 1 }, reward: 650, radio: '样本收到了。瓶里的水面比外海提前三十秒上涨。先别开封。' },

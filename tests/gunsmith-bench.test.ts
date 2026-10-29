@@ -73,9 +73,12 @@ test('candidates: what fits first, owned before not owned; refusals keep their r
 
 test('only attachment items are listed, and where one comes from', () => {
     assert.equal(benchParts().length, 100, 'every catalog part since #28 M3-06');
-    assert.match(sourceOf('P01'), /^修理铺有售 · ¥ \d+$/);
-    assert.equal(sourceOf('O08'), '行动中的高风险处可能找到');
-    assert.equal(sourceOf('O03'), '行动中可能找到');
+    // The rotating shelf (#28 M4-01) of a profile whose rotation holds O03, and of one whose does not.
+    const runs = (has: boolean) => { let n = 0; while (D.rotationParts(n).includes('O03') !== has) n++; const s = D.newSave(); s.stats.runs = n; return s; };
+    assert.match(sourceOf('P01', runs(false)), /^修理铺有售 · ¥ \d+$/);
+    assert.equal(sourceOf('O08', runs(false)), '行动中的高风险处可能找到');
+    assert.equal(sourceOf('O03', runs(false)), '行动中可能找到，修理铺的轮换货架有时也有');
+    assert.match(sourceOf('O03', runs(true)), /^修理铺这次的轮换货架有售 · ¥ \d+$/);
 });
 
 test('a click appends edits that planGunEdit accepts; replacing a handguard moves its rail parts onto the new one', () => {

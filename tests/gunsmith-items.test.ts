@@ -195,7 +195,7 @@ test('attachments live in bags, on the ground, in crates and in the shop like an
     const cash = save.cash;
     assert.deepEqual(Shop.settleCartResult(save, cart), { ok: true });
     assert.equal(save.cash, cash + ATTACHMENTS.S02.sell); assert.equal(D.count(save.stash, 'S02'), 0);
-    assert.ok(!Shop.merchantStock('arms', true).includes('S02'), 'a common part is found, not sold (M2-13)');
+    assert.ok(!D.MERCHANTS.arms.stock.includes('S02'), 'a common part is found, never steady stock (M2-13; it may rotate onto the shelf, M4-01)');
 });
 
 test('nothing but the workbench (M2-04) installs an attachment: equipping refuses one, and nothing else writes a gun\'s parts', () => {

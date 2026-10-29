@@ -156,7 +156,7 @@ export function candidates(profile: Readonly<D.SaveDataV1>, gunUid: string, buil
         const on = copies.length ? null : others.find(g => nodesOf(g.state.parts).some(n => n.id === id))?.name ?? null;
         return {
             id, name: ATTACHMENTS[id].name, current: at.part?.id === id, loose: copies[0] ?? null, count: copies.length, elsewhere: on,
-            refusal: !at.open ? at.reason : check && !check.ok ? check.reason : null, source: sourceOf(id),
+            refusal: !at.open ? at.reason : check && !check.ok ? check.reason : null, source: sourceOf(id, profile),
         };
     });
     const rank = (c: Candidate) => c.refusal ? 2 : c.loose || c.current ? 0 : 1;
@@ -185,11 +185,15 @@ export function partFits(profile: Readonly<D.SaveDataV1>, id: string): { uid: st
         return [];
     });
 }
-/** Where a part not owned comes from (M2-13): the arms counter's basic stock, else finds in a raid. */
-export function sourceOf(id: string): string {
+/**
+ * Where a part not owned comes from (M2-13, M4-01): the arms counter's steady stock; its rotating shelf for this
+ * profile's deployment; else finds in a raid, a common part now and then on the rotating shelf too.
+ */
+export function sourceOf(id: string, save: Pick<D.SaveDataV1, 'quests' | 'stats'>): string {
     const a = ATTACHMENTS[id];
     if (D.MERCHANTS.arms.stock.includes(id)) return `修理铺有售 · ¥ ${a.buy}`;
-    return a.buy > 450 ? '行动中的高风险处可能找到' : '行动中可能找到';
+    if (D.armsStock(save).includes(id)) return `修理铺这次的轮换货架有售 · ¥ ${a.buy}`;
+    return a.buy > 450 ? '行动中的高风险处可能找到' : '行动中可能找到，修理铺的轮换货架有时也有';
 }
 
 // ---------- edits ----------

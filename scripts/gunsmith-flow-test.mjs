@@ -128,10 +128,16 @@ try {
       await open(size); await fixture({ bag: { w: 6, h: 5, items: [] } });
       // Buy: the G17, the micro sight and the long magazine (老栓 stocks all three, M2 decision 8).
       await tap(action('tab', 'arms'));
-      // Since #28 M3 the arms counter's gunsmith goods run onto a second catalog page: turn to it for the two parts; the
-      // buy list keeps the G17.
+      // Since #28 M3 the arms counter's gunsmith goods run over more catalog pages (three since M4-01): turn to the page
+      // each sits on; the buy list keeps what is in it.
       for (const [id, x] of [['gb17', 0], ['O01', 2], ['G01', 3]]) {
-        if (id === 'O01') await tap(page.locator('[data-action="shop-browse"][data-id="page:1"]'));
+        const offer = page.locator(`[data-source="merchant"][data-item-id="${id}"]`);
+        // The bar offers the pages beside this one: forward until the item shows (each sits after the one before).
+        for (let n = 1; !await offer.count(); n++) {
+          assert.ok(n < 9, `${id} on no catalog page`);
+          const turn = page.locator(`[data-action="shop-browse"][data-id="page:${n}"]`);
+          if (await turn.count()) await tap(turn);
+        }
         await placeAt(page, 'merchant', id, 'buy', x, 0);
       }
       await tap(action('checkout'));

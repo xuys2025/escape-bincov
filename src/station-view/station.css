@@ -252,6 +252,7 @@ button.on { border-color: var(--amber); color: var(--amber2); }
 .quest li b, .needs li b, .cost li b { margin-left: auto; font-weight: normal; color: var(--bad); }
 .quest li.ok b, .needs li.ok b, .cost li.ok b { color: var(--ok); }
 .ico { image-rendering: pixelated; }
+.quest .unlock { color: var(--amber2); font-size: 12px; margin: 6px 0 0; }
 .quest footer { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
 .quest footer b { font: 16px var(--px); color: var(--amber2); }
 .quest footer small { color: var(--mute); flex: 1; font-size: 11px; }

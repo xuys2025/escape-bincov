@@ -362,7 +362,7 @@ export class Workbench {
             const plan = presetEdits(profile, gun.uid, p.parts), missing = plan?.missing ?? [], count = presetIds(p.parts).length;
             const state = same(p, gun.state.parts) ? '装着这套' : preview && same(p, (preview.after).parts) ? '预览中' : missing.length ? '' : '可以应用';
             const lack = missing.length ? b(`缺 ${missing.length} 件${this.opened === p.id ? ' ▴' : ' ▾'}`, 'preset-missing', p.id, 'gs-lack', `aria-expanded="${this.opened === p.id}"`) : '';
-            const list = missing.length && this.opened === p.id ? `<ul class="gs-missing">${missing.map(id => `<li>${esc(partName(id))} · ${esc(sourceText(id))}</li>`).join('')}</ul>` : '';
+            const list = missing.length && this.opened === p.id ? `<ul class="gs-missing">${missing.map(id => `<li>${esc(partName(id))} · ${esc(sourceText(id, profile))}</li>`).join('')}</ul>` : '';
             const name = this.renaming === p.id
                 ? `<form class="gs-rename" data-gs-form><input name="gs-name" aria-label="预设名" maxlength="${PRESET_NAME_MAX}" value="${esc(p.name)}"><button type="submit" data-gs="preset-name" data-arg="${esc(p.id)}">保存</button>${b('取消', 'preset-rename-cancel', p.id)}</form>`
                 : `<b>${esc(p.name)}</b>`;
@@ -604,7 +604,7 @@ export class Workbench {
     }
 }
 
-const sourceText = (id: string) => sourceOf(id);
+const sourceText = (id: string, save: D.SaveDataV1) => sourceOf(id, save);
 /** The name of a part in a preview, after the edit or else before it. */
 function pendingName(p: GunEditPreview | null, uid: string | null) { const n = p && (findPart(p.after, uid) ?? findPart(p.before, uid)); return n ? partName(n.id) : ''; }
 const brandName = (brand: string) => ({ beidi: '北堤', yanwan: '盐湾', binji: '滨机', factory: '原厂' } as Record<string, string>)[brand] ?? '';

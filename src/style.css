@@ -134,6 +134,7 @@ button.text-button:hover:not(:disabled) { border-color: transparent; background:
 .quest-needs strong { font: 11px/1.8 var(--mono); color: #d0d8b4; }
 .quest-needs strong span { color: #83967f; }
 .quest-needs li.ready { color: #c6d593; }
+.quest .quest-unlock { color: #d6c095; margin-top: 4px; }
 .quest-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 11px; border-top: 1px solid #3a4c38; }
 .quest-footer strong { display: block; font: 14px var(--mono); color: #d6c095; }
 .quest-footer div > span { font-size: 9px; color: #91a080; }

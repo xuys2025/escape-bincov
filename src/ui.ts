@@ -120,14 +120,14 @@ let shopBrowse: Shop.ShopBrowse = Shop.BROWSE_ALL;
 function cart() {
     if (!app.shop || app.shop.merchant !== app.tab) {
         // A kind the other merchant does not stock falls back to all.
-        if (shopBrowse.kind !== 'all' && !Shop.stockKinds(app.tab as Shop.Merchant, rpgEnabled(app.expansion)).includes(shopBrowse.kind)) shopBrowse = Shop.BROWSE_ALL;
+        if (shopBrowse.kind !== 'all' && !Shop.stockKinds(app.tab as Shop.Merchant, app.save, rpgEnabled(app.expansion)).includes(shopBrowse.kind)) shopBrowse = Shop.BROWSE_ALL;
         app.shop = Shop.createCart(app.save, app.tab as Shop.Merchant, rpgEnabled(app.expansion), shopBrowse);
     }
     return app.shop;
 }
 /** The filter buttons above the catalog: all or one kind, only what fits the base's guns, the pages. */
 function shopBrowseBar(): string {
-    const merchant = app.tab as Shop.Merchant, rpg = rpgEnabled(app.expansion), kinds = Shop.stockKinds(merchant, rpg);
+    const merchant = app.tab as Shop.Merchant, rpg = rpgEnabled(app.expansion), kinds = Shop.stockKinds(merchant, app.save, rpg);
     const page = Shop.catalogPage(app.save, merchant, rpg, shopBrowse);
     if (kinds.length < 2 && page.pages < 2) return '';
     const chip = (id: string, label: string, on: boolean) => btn(label, 'shop-browse', on ? 'active' : '', `data-id="${id}" aria-pressed="${on}"`);
@@ -386,7 +386,7 @@ function renderHideout() {
             const complete = s.quests[id];
             const needs = Object.entries(q.needs).map(([itemId, needed]) => ({ itemId, needed, have: [s.stash, s.bag, s.safe].reduce((sum, inv) => sum + D.count(inv, itemId), 0) }));
             const ready = needs.every(({ have, needed }) => have >= needed);
-            return `<article class="quest ${complete ? 'complete' : ''}"><div class="quest-status"><span class="mono">0${i + 1}</span><span>${complete ? '已交付' : ready ? '可以交付' : '等待物资'}</span></div><h3>${q.name}</h3><p>${q.description}</p>${complete ? `<p class="quest-reply">${q.radio}</p>` : `<ul class="quest-needs">${needs.map(({ itemId, needed, have }) => {
+            return `<article class="quest ${complete ? 'complete' : ''}"><div class="quest-status"><span class="mono">0${i + 1}</span><span>${complete ? '已交付' : ready ? '可以交付' : '等待物资'}</span></div><h3>${q.name}</h3><p>${q.description}</p>${D.questGunsText(id, complete) ? `<p class="quest-unlock">${D.questGunsText(id, complete)}</p>` : ''}${complete ? `<p class="quest-reply">${q.radio}</p>` : `<ul class="quest-needs">${needs.map(({ itemId, needed, have }) => {
                 return `<li class="${have >= needed ? 'ready' : ''}"><span>${D.ITEMS[itemId].name}</span><strong>${Math.min(have, needed)} <span>/ ${needed}</span></strong></li>`;
             }).join('')}</ul>`}<div class="quest-footer"><div><strong>¥ ${q.reward}</strong><span>${id === 'repair' ? '另解锁仓库扩建' : '任务报酬'}</span></div>${complete ? '<span class="completion-mark">✓ 已完成</span>' : btn('交付物资', 'quest', ready ? 'primary' : '', `data-id="${id}"`)}</div></article>`;
         }).join('')}</div><p class="content-note">交付时会扣除仓库、背包或安全箱中的所需物资。放进安全箱的任务物品，撤离失败也保留。</p>`;

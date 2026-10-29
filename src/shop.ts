@@ -12,11 +12,12 @@ export interface ShopCart {
     stash: D.Inventory;
 }
 /**
- * A counter's stock, with the RPG extras right after the old goods: since #28 M3 the arms counter's gunsmith goods fill
- * more than a page, and the cloth a crafter buys often stays on the first.
+ * A counter's stock for this profile (D.merchantGoods: the arms counter by quests and deployments since #28 M4-01), with
+ * the RPG extras right after the old goods: since #28 M3 the arms counter's gunsmith goods fill more than a page, and the
+ * cloth a crafter buys often stays on the first.
  */
-export function merchantStock(merchant: Merchant, rpg = false): string[] {
-    const stock = D.MERCHANTS[merchant].stock, extras = rpg ? merchant === 'arms' ? ['cloth'] : ['analgesic', 'focus'] : [];
+export function merchantStock(merchant: Merchant, save: Pick<D.SaveDataV1, 'quests' | 'stats'>, rpg = false): string[] {
+    const stock = D.merchantGoods(merchant, save), extras = rpg ? merchant === 'arms' ? ['cloth'] : ['analgesic', 'focus'] : [];
     const gunsmith = stock.findIndex(id => D.isAttachment(id) || D.isGun(id) && !['pistol', 'shotgun', 'carbine'].includes(id));
     return gunsmith < 0 ? [...stock, ...extras] : [...stock.slice(0, gunsmith), ...extras, ...stock.slice(gunsmith)];
 }
@@ -37,7 +38,7 @@ export const CART_W = 6, CART_H = 3;
 export function browseStock(save: Readonly<D.SaveDataV1>, merchant: Merchant, rpg: boolean, browse: ShopBrowse): string[] {
     const ammo = new Set(D.isGun(save.equipment.weapon) ? [D.WEAPONS[save.equipment.weapon].ammo] : []);
     for (const inv of [save.stash, save.bag, save.safe]) for (const i of inv.items) if (D.isGun(i.id)) ammo.add(D.WEAPONS[i.id].ammo);
-    return merchantStock(merchant, rpg).filter(id => (browse.kind === 'all' || D.ITEMS[id].kind === browse.kind)
+    return merchantStock(merchant, save, rpg).filter(id => (browse.kind === 'all' || D.ITEMS[id].kind === browse.kind)
         && (!browse.fits || (D.isAttachment(id) ? partFits(save, id).length > 0 : ammo.has(id))));
 }
 /** `ids` packed into catalog pages in order: a pack that no longer fits starts the next page. Never empty. */
@@ -51,7 +52,8 @@ export function catalogPages(ids: readonly string[]): string[][] {
     return pages;
 }
 /** The kinds in a merchant's stock, in stock order: the catalog's category buttons. */
-export const stockKinds = (merchant: Merchant, rpg: boolean): D.ItemKind[] => [...new Set(merchantStock(merchant, rpg).map(id => D.ITEMS[id].kind))];
+export const stockKinds = (merchant: Merchant, save: Pick<D.SaveDataV1, 'quests' | 'stats'>, rpg: boolean): D.ItemKind[] =>
+    [...new Set(merchantStock(merchant, save, rpg).map(id => D.ITEMS[id].kind))];
 export function createCart(save: D.SaveDataV1, merchant: Merchant, rpg = false, browse: ShopBrowse = BROWSE_ALL): ShopCart {
     return { merchant, original: JSON.stringify(save.stash), catalog: catalogPage(save, merchant, rpg, browse).catalog, buy: D.createInventory(CART_W, CART_H), sell: D.createInventory(CART_W, CART_H), stash: structuredClone(save.stash) };
 }
@@ -158,7 +160,7 @@ export function settleCartResult(save: D.SaveDataV1, cart: ShopCart, rpg = false
             || D.gunKey(item.gun) !== D.gunKey(original.gun)) return fail('rule');
     }
     if (cart.sell.items.some(i => !Object.hasOwn(D.ITEMS, i.id) || saleRefusal(i) !== null)) return fail('rule');
-    if (cart.buy.items.some(i => i.relief || !Object.hasOwn(D.ITEMS, i.id) || !merchantStock(cart.merchant, rpg).includes(i.id) || i.qty !== D.buyQuantity(i.id))) return fail('rule');
+    if (cart.buy.items.some(i => i.relief || !Object.hasOwn(D.ITEMS, i.id) || !merchantStock(cart.merchant, save, rpg).includes(i.id) || i.qty !== D.buyQuantity(i.id))) return fail('rule');
     const stash = structuredClone(cart.stash), { net } = cartTotals(cart);
     if (!Number.isFinite(net)) return fail('rule');
     if (save.cash < net) return fail('funds');

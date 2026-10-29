@@ -76,7 +76,9 @@ test('function and cost: every part changes something and says what it gives and
 
 test('acquisition: every gun and part is on 老栓\'s shelf or found in a raid, and the workbench says which', () => {
     const shelf = new Set(D.MERCHANTS.arms.stock);
-    for (const id of PART_IDS) assert.match(sourceOf(id), shelf.has(id) ? /^修理铺有售/ : /^行动中(的高风险处)?可能找到$/, id);
+    // A profile whose rotating shelf (#28 M4-01) is empty of none: each found part says where it is found.
+    const none = { quests: {}, stats: { runs: 0, extracts: 0, kills: 0 } }, rotating = new Set(D.rotationParts(0));
+    for (const id of PART_IDS) assert.match(sourceOf(id, none), shelf.has(id) ? /^修理铺有售/ : rotating.has(id) ? /^修理铺这次的轮换货架有售/ : /^行动中(的高风险处)?可能找到/, id);
     // A gun off the shelf is found (D.gunsmithFind's pools: every gun that is an item but those the arms counter stocks).
     const found = new Set<string>(), draw = (values: number[]) => { let i = 0; return () => values[i++]; };
     for (let k = 0; k < 400; k++) for (const rare of [0, 1]) {
