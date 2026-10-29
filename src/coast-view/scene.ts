@@ -1,4 +1,4 @@
-import { Application, Container, Graphics, RenderTexture, Sprite, type Texture } from 'pixi.js';
+import { Application, Container, Graphics, RenderTexture, Sprite, Texture } from 'pixi.js';
 import { worldKeyString, type ActorKind, type ActorView, type MapDef, type Point, type PublishedView, type Rect, type StampedEvent, type ViewFrame } from '../raid-runtime/contract';
 import { SAMPLE_AREA, hasRoof, isRuined, materials, regionLamps, storeys, type GroundMaterial } from './appearance';
 import { paintGround, puddles, type GroundBake } from './art/ground';
@@ -18,7 +18,7 @@ import { Weather, type RoofArea, type WeatherKind } from './weather';
 import { Tide, paintWade } from './tide';
 import { isMall, knownDoor, knownStructurePoint, occupiedStructure, regionAtClosed, shownAt } from './structure-guide';
 import { paintMallGround } from './art/mall-ground';
-import { clearanceCuts, clearances, doorClearances, indoorArea, rowModes, underRule, wallCell, wallRule, type WallMode, type WallRule } from './wall-display';
+import { clearanceCuts, clearances, doorClearances, indoorArea, rowModes, sinkStep, sunkRows, topClear, underRule, wallCell, wallRule, type WallMode, type WallRule } from './wall-display';
 import { buildMall, mallDress, mallDressMap, type Link, type MallDress, type OccluderKind } from './mall-scene';
 import type { MallArt } from './mall-art';
 import { MALL_FOOTPRINT, insideFootprint, mallOpenings } from './mall-dressing';
@@ -72,10 +72,13 @@ interface Occluder {
   /** Map cell of a wall, door or header piece (buildGeneric, buildMall); furniture and pillars have none. */
   cell?: { x: number; y: number };
   /**
-   * Set while the piece belongs to the building the player stands in (updateWalls): its indoor rule and mode now, the
-   * canvas-local rectangles cut for doorways, and the mode and picture last drawn. The focus fade leaves it alone meanwhile.
+   * Set while the piece belongs to the building the player stands in, or rises back after the player left it
+   * (updateWalls): its indoor rule and mode now, the canvas-local rectangles cut for doorways, and the state and picture
+   * last drawn. `sunk` runs from 0 (whole) to 1 (down to its cell, wall-display.ts sinkStep); `clear` is its topClear,
+   * null when it switches outright; `home` the y of its links; `crops` the reframed textures of the piece (0) and its
+   * links (1 on) while it moves. The focus fade leaves it alone meanwhile.
    */
-  wall?: { rule: WallRule; mode: WallMode; cut: Rect[]; drawn?: string };
+  wall?: { rule: WallRule; mode: WallMode; cut: Rect[]; drawn?: string; sunk: number; clear: number | null; home: number[]; crops?: Texture[] };
   /** Atlas key of the picture drawn now when it is not `key` (indoor walls): what the occlusion outline reads. */
   shown?: string;
 }
@@ -346,7 +349,7 @@ export class CoastView {
 
     this.updateExit(f);
     this.updateTall(f);
-    this.updateWalls(f);
+    this.updateWalls(f, dt);
     this.updateFades(f, dt);
     this.updateStructureGuides(f);
     this.updateXray(f);
@@ -371,7 +374,8 @@ export class CoastView {
   private clearScene() {
     for (const layer of [this.groundLayer, this.flat, this.shadows, this.sorted, this.xray, this.overhead]) for (const c of layer.removeChildren()) c.destroy();
     this.fx?.clear(); this.shots.clear(); this.blowGroups.clear();
-    this.occluders = []; this.indoor = []; this.indoorOf = undefined; this.openingGuides = []; this.pendingChunks = []; this.doors.clear(); this.doorGuides.clear(); this.stairLabels.clear(); this.actors.clear(); this.bullets.clear(); this.crates.clear(); this.loot.clear(); this.muzzles = []; this.swings = [];
+    for (const o of [...this.indoor, ...this.rising]) this.dropCrops(o.wall!);
+    this.occluders = []; this.indoor = []; this.rising = []; this.indoorOf = undefined; this.openingGuides = []; this.pendingChunks = []; this.doors.clear(); this.doorGuides.clear(); this.stairLabels.clear(); this.actors.clear(); this.bullets.clear(); this.crates.clear(); this.loot.clear(); this.muzzles = []; this.swings = [];
     this.debugG.clear();
   }
 
@@ -1008,23 +1012,27 @@ export class CoastView {
 
   /**
    * Pieces under the indoor wall rule now, the building they belong to (undefined until the first frame of a scene), the
-   * rows of their east-west runs and those rows' modes.
+   * rows of their east-west runs and those rows' modes; and pieces of a building just left, rising back before the
+   * fades take them again.
    */
   private indoor: Occluder[] = [];
   private indoorOf: string | null | undefined;
   private indoorRowIds: number[] = [];
   private indoorRows = new Map<number, 'full' | 'base'>();
+  private rising: Occluder[] = [];
   /**
    * Walls of the building the player stands in (on a mall floor, of the mall's footprint) follow wall-display.ts instead
-   * of the fades: switched outright between the whole picture and the footprint, doorways cut clear. A sign, wall piece
-   * or glow on a piece shows only with the whole picture, cut like it. A change of building, or a new scene, starts the
-   * rows over from the player's position.
+   * of the fades: a wall sinks into its footprint or rises back to the whole picture in WALL_SINK_T, doorways cut clear.
+   * A sign, wall piece or glow on a piece goes down with it and shows only above its cell's south edge. A change of
+   * building starts the rows over from the player's position; the walls of the building left rise back first. The first
+   * frame of a scene, and reduced motion, switch outright.
    */
-  private updateWalls(f: ViewFrame) {
+  private updateWalls(f: ViewFrame, dt: number) {
     const map = this.map!, area = indoorArea(map, f.player), id = area?.id ?? null;
+    const snap = this.indoorOf === undefined || this.opts.reducedMotion;
     if (id !== this.indoorOf) {
-      for (const o of this.indoor) { o.wall = undefined; o.shown = undefined; o.level = -1; }
-      this.indoor = []; this.indoorRows = new Map(); this.indoorOf = id;
+      const left = this.indoor;
+      this.indoor = []; this.indoorOf = id;
       if (area) {
         const pieces = new Set(this.occluders.flatMap(o => o.cell && o.kind !== 'lintel' ? [`${o.cell.x},${o.cell.y}`] : []));
         const wall = (x: number, y: number) => pieces.has(`${x},${y}`);
@@ -1033,31 +1041,74 @@ export class CoastView {
         const doors = [...doorClearances(map, area.inside, WALL_H), ...clearances(openings, WALL_H)];
         for (const o of this.occluders) {
           if (!o.cell || !underRule(map, area.inside, o.cell)) continue;
-          o.wall = { rule: wallRule(wall, area.inside, o.cell.x, o.cell.y, o.kind === 'lintel'), mode: 'full', cut: clearanceCuts(doors, o.rect, o.z) };
+          // A piece still on its way keeps how far it has sunk and where its links stand.
+          const was = o.wall, cut = clearanceCuts(doors, o.rect, o.z);
+          o.wall = { rule: wallRule(wall, area.inside, o.cell.x, o.cell.y, o.kind === 'lintel'), mode: 'full', cut, sunk: was?.sunk ?? 0,
+            clear: topClear(cut, o.rect.w), home: was?.home ?? (o.links ?? []).map(l => l.sprite.y), crops: was?.crops };
           this.indoor.push(o);
         }
       }
+      const now = new Set(this.indoor);
+      this.rising = this.rising.filter(o => !now.has(o));
+      for (const o of left) if (!now.has(o)) { if (snap || o.wall!.sunk === 0) this.releaseWall(o); else this.rising.push(o); }
       this.indoorRowIds = [...new Set(this.indoor.filter(o => o.wall!.rule === 'row').map(o => o.cell!.y))];
+      // A piece the focus fade had thinned over the player goes straight to its mode: it never turns solid first.
+      this.indoorRows = rowModes(this.indoorRowIds, f.player.y);
+      for (const o of this.indoor) if (o.level > 0) o.wall!.sunk = this.modeOf(o) === 'base' ? 1 : 0;
     }
-    if (!this.indoor.length) return;
-    this.indoorRows = rowModes(this.indoorRowIds, f.player.y, this.indoorRows);
-    for (const o of this.indoor) {
-      const w = o.wall!, mode: WallMode = w.rule === 'row' ? this.indoorRows.get(o.cell!.y)! : w.rule;
-      o.level = o.target = 0;
-      // Redrawn only when the mode or the piece's own picture (a door opening or closing) changes.
-      if (w.drawn === `${mode}|${o.key}`) continue;
-      w.mode = mode; w.drawn = `${mode}|${o.key}`;
-      o.sprite.visible = mode !== 'hidden';
-      if (o.links) for (const l of o.links) {
-        l.sprite.visible = mode === 'full';
-        const cut = w.cut.map(r => ({ ...r, x: r.x + o.rect.x - l.sprite.x, y: r.y + o.rect.y - l.sprite.y }));
-        if (mode === 'full') l.sprite.texture = this.tex.atlas.get(this.tex.wallCut(l.key, null, cut));
-      }
-      if (mode === 'hidden') { o.shown = undefined; continue; }
-      const key = this.tex.wallCut(o.key, mode === 'base' ? this.footKey(o) : null, w.cut);
-      o.shown = key === o.key ? undefined : key;
-      o.sprite.texture = this.tex.atlas.get(key);
+    if (this.indoor.length) this.indoorRows = rowModes(this.indoorRowIds, f.player.y, this.indoorRows);
+    for (const o of this.indoor) this.showWall(o, this.modeOf(o), dt, snap);
+    for (const o of this.rising) { this.showWall(o, 'full', dt, snap); if (!o.wall!.sunk) this.releaseWall(o); }
+    this.rising = this.rising.filter(o => o.wall);
+  }
+  private modeOf(o: Occluder): WallMode { const r = o.wall!.rule; return r === 'row' ? this.indoorRows.get(o.cell!.y)! : r; }
+  /**
+   * Draws an indoor piece on its way to `mode`: the whole picture, the base one, or between them the whole picture
+   * lowered (sunkRows) through a reframed texture, its links lowered with it and cut off at its cell's south edge. The
+   * occlusion outline reads the picture of `mode`. Redrawn only when that state or the piece's own picture (a door
+   * opening or closing) changes.
+   */
+  private showWall(o: Occluder, mode: WallMode, dt: number, snap: boolean) {
+    const w = o.wall!, goal = mode === 'base' ? 1 : 0;
+    o.level = o.target = 0; w.mode = mode;
+    w.sunk = snap || mode === 'hidden' || w.clear === null ? goal : sinkStep(w.sunk, goal, dt);
+    const rows = w.sunk > 0 && w.sunk < 1 ? sunkRows(o.rect.h, w.sunk, w.clear!) : null;
+    const state = mode === 'hidden' ? 'hidden' : rows ? `sink:${rows.drop}` : w.sunk ? 'base' : 'full';
+    if (w.drawn === `${state}|${o.key}`) return;
+    w.drawn = `${state}|${o.key}`;
+    const links = o.links ?? [], cutOf = (i: number) => w.cut.map(r => ({ ...r, x: r.x + o.rect.x - links[i].sprite.x, y: r.y + o.rect.y - w.home[i] }));
+    if (mode === 'hidden') { o.shown = undefined; o.sprite.visible = false; for (const l of links) l.sprite.visible = false; return; }
+    const key = this.tex.wallCut(o.key, mode === 'base' ? this.footKey(o) : null, w.cut);
+    o.shown = key === o.key ? undefined : key;
+    if (!rows) {
+      const pic = state === 'base' ? this.tex.wallCut(o.key, this.footKey(o), w.cut) : this.tex.wallCut(o.key, null, w.cut);
+      o.sprite.texture = this.tex.atlas.get(pic); o.sprite.y = o.rect.y; o.sprite.visible = true;
+      links.forEach((l, i) => { l.sprite.texture = this.tex.atlas.get(this.tex.wallCut(l.key, null, cutOf(i))); l.sprite.y = w.home[i]; l.sprite.visible = state === 'full'; });
+      this.dropCrops(w);
+      return;
     }
+    const crops = w.crops ??= [];
+    o.sprite.texture = this.crop(crops, 0, this.tex.atlas.get(o.key), rows.from, rows.to);
+    o.sprite.y = o.rect.y + rows.at; o.sprite.visible = rows.to > rows.from;
+    links.forEach((l, i) => {
+      const y = w.home[i] + rows.drop, t = this.tex.atlas.get(this.tex.wallCut(l.key, null, cutOf(i))), keep = Math.min(t.height, o.rect.y + o.rect.h - y);
+      l.sprite.texture = this.crop(crops, i + 1, t, 0, keep); l.sprite.y = y; l.sprite.visible = keep > 0;
+    });
+  }
+  /** Rows [from, to) of `t` through the reframed texture `crops[i]` (made on first use, from the same source). */
+  private crop(crops: Texture[], i: number, t: Texture, from: number, to: number): Texture {
+    const c = crops[i] ??= new Texture({ source: t.source, frame: t.frame, dynamic: true });
+    if (c.source !== t.source) c.source = t.source;
+    c.frame.copyFrom(t.frame); c.frame.y += from; c.frame.height = Math.max(1, to - from); c.update();
+    return c;
+  }
+  private dropCrops(w: NonNullable<Occluder['wall']>) { for (const c of w.crops ?? []) c.destroy(); w.crops = undefined; }
+  /** Hands a piece back to the fades, standing where it was built. */
+  private releaseWall(o: Occluder) {
+    const w = o.wall!;
+    o.sprite.texture = this.tex.atlas.get(o.key); o.sprite.y = o.rect.y; o.sprite.visible = true;
+    (o.links ?? []).forEach((l, i) => { l.sprite.texture = this.tex.atlas.get(l.key); l.sprite.y = w.home[i]; });
+    this.dropCrops(w); o.wall = undefined; o.shown = undefined; o.level = -1;
   }
   /** The 32x32 picture of a wall piece cut down to its cell: its own top (cap), or a door's leaf or sill seen from above. */
   private footKey(o: Occluder): string {

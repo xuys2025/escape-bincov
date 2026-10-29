@@ -7,7 +7,7 @@ import type { MapDef } from '../src/raid-runtime/contract';
 import type { WorldDefinition } from '../src/expansion-state';
 import { mallWorldV2, mallWorldV3, mallWorldV4 } from '../src/mall-world';
 import { MALL_FOOTPRINT, mallOpenings, mallWallCells, mallWallRole, type DressMap } from '../src/coast-view/mall-dressing';
-import { WALL_BUFFER, clearanceCuts, clearances, doorClearances, indoorArea, rowModes, underRule, wallCell, wallRule, type WallAt } from '../src/coast-view/wall-display';
+import { WALL_BUFFER, WALL_SINK_T, clearanceCuts, clearances, doorClearances, indoorArea, rowModes, sinkStep, sunkRows, topClear, underRule, wallCell, wallRule, type WallAt } from '../src/coast-view/wall-display';
 
 function floor(x: number, y: number, mapId: string) {
   const state = createSessionState(), data = new Map<string, string>();
@@ -58,6 +58,43 @@ test('a row switches only past the buffer, keeps its mode inside it, starts as b
   }
   // North of row 3 and south of row 1 at once.
   assert.deepEqual(Object.fromEntries(rowModes([1, 3], 2.5 * 32)), { 1: 'full', 3: 'base' });
+});
+
+test('a wall sinks into its cell in WALL_SINK_T at a steady rate, turns back from where it is, and ends on the base picture', () => {
+  let sunk = 0; const dt = WALL_SINK_T / 10;
+  for (let i = 0; i < 5; i++) sunk = sinkStep(sunk, 1, dt);
+  assert.ok(Math.abs(sunk - .5) < 1e-9, 'half-way after half the time');
+  sunk = sinkStep(sunk, 0, dt); assert.ok(Math.abs(sunk - .4) < 1e-9, 'turned back, it rises from where it was');
+  assert.equal(sinkStep(.9, 1, 1), 1, 'a long frame stops at the goal'); assert.equal(sinkStep(.1, 0, 1), 0);
+  assert.equal(sinkStep(1, 1, dt), 1, 'at the goal it stays');
+  // A generic piece: its 32 px cell under 48 px of wall (WALL_H).
+  const h = 80;
+  assert.deepEqual(sunkRows(h, 0, 0), { drop: 0, at: 0, from: 0, to: 80 }, 'not sunk: the whole picture');
+  assert.deepEqual(sunkRows(h, 1, 0), { drop: 48, at: 48, from: 0, to: 32 }, 'all the way: its top 32 rows stand on its cell, as in the base picture');
+  assert.equal(sunkRows(h, .5, 0).drop, 24, 'half-way at half the time');
+  assert.ok(sunkRows(h, .1, 0).drop < 4.8 && sunkRows(h, .9, 0).drop > 43.2, 'eased: slower than steady near either end');
+  let last = -1;
+  for (let i = 0; i <= 50; i++) for (const clear of [0, 16, 48]) {
+    const r = sunkRows(h, i / 50, clear);
+    assert.ok(Number.isInteger(r.drop) && r.drop >= 0 && r.drop <= 48, 'whole px, never below its cell');
+    assert.ok(r.at >= clear && r.at + (r.to - r.from) === h, 'drawn from below the doorway cut down to the south edge of its cell');
+    if (clear === 0) { assert.ok(r.drop >= last, 'never moves back on its way down'); last = r.drop; }
+  }
+  assert.deepEqual(sunkRows(h, .5, 48), { drop: 24, at: 48, from: 24, to: 56 }, 'a doorway cut stays clear where it is while the wall goes down');
+  assert.deepEqual(sunkRows(h, 1, 48), { drop: 48, at: 48, from: 0, to: 32 });
+  assert.equal(topClear([], 32), 0);
+  assert.equal(topClear([{ x: 0, y: 0, w: 32, h: 48 }], 32), 48, 'a whole-width band from the top');
+  assert.equal(topClear([{ x: 0, y: 0, w: 32, h: 16 }, { x: 0, y: 0, w: 32, h: 40 }], 32), 40);
+  assert.equal(topClear([{ x: 0, y: 0, w: 16, h: 48 }], 32), null, 'part of the width: switches outright');
+  assert.equal(topClear([{ x: 0, y: 8, w: 32, h: 40 }], 32), null, 'below the top: switches outright');
+  // Every cut the doors of the second floor give a piece of 32 x 80 in front of them is such a band.
+  const { map, inside } = floor(176, 176, 'resident-f2'), doors = doorClearances(map, inside, 48);
+  let cuts = 0;
+  for (let y = 0; y < map.rows; y++) for (let x = 0; x < map.cols; x++) {
+    const p = piece(x, y), cut = clearanceCuts(doors, p.rect, p.z);
+    if (cut.length) { cuts++; assert.notEqual(topClear(cut, 32), null, `${x},${y}`); }
+  }
+  assert.ok(cuts > 0, 'the floor has pieces in front of doors');
 });
 
 /** Wall pieces are 32 x (32 + lift), drawn `lift` px above their cell, at depth (y + 1) * 32. */
