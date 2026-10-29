@@ -1,8 +1,12 @@
 # 修复楼梯标签遮住可见敌人（S03c）
 
+最终组合复核（2026-10-29）：正常同步 main `4fec648c`，含已完成 #144/#145；保留双方清单/交接，scene 的共享范围 import 与本任务身体投影自动合并。Node 24.21.0 / pnpm 11.19.0：单测 **1080/1080**、工程守卫 **125/125**、正式打包通过，便携 ZIP 6,101,351 B、web ZIP 6,096,842 B。最终 HTML SHA-256 `2218052786b341a90f9dd67aaaafcf30da38fd0cfd051368fd42d461445429ed`。
+
+独占锁执行的最终组合浏览器复核：[两桌面报告](stair-label-occlusion/final/report.json) **20/22**，只有既有 S04d 两项首帧断言失败；S03c 两尺寸仍为 **0 遮挡像素**、权限对照通过，正对照数字保持。[触屏报告](stair-label-occlusion/final/touch-report.json) **1/1**，covered 0；两份报告页面错误/外部请求为 0。最终碰撞帧：[1280×720](stair-label-occlusion/final/1280x720-during.png)、[1920×1080](stair-label-occlusion/final/1920x1080-during.png)、[932×430 触屏](stair-label-occlusion/final/932x430-during.png)。前一主线同步 head `051fc393` 的完整 [CI 40824916410](https://github.com/xuys2025/escape-bincov/actions/runs/40824916410) 已通过；最终 head CI 与合并结果见原 PR。本地首帧/遮罩余项集中到 [#61](https://github.com/xuys2025/escape-bincov/issues/61)，本任务未改断言或墙体。
+
 主审同步（2026-10-29）：main 在实施后合入 #132，已正常同步 `e2728e46`，保留双方交接；scene/host 自动合并，复核后的本任务差异与原实现一致。同步后 Node 24.21.0 的单测 1077/1077、工程守卫 113/113、打包通过，便携 ZIP 6,101,358 B。新主线浏览器与准确 head 平台门禁另见原 PR；以下首轮截图和报告对应原记录哈希，保留不覆盖。
 
-状态：**已实施，S03c 两档桌面及短高触屏验收通过；既有墙过渡断言失败已保留，等主审与 CI**。维护者于 2026-10-29 指派 GPT-6.1 Sol 在原分支与 [PR #146](https://github.com/xuys2025/escape-bincov/pull/146) 续作。
+状态：**实现与主审完成，S03c 两档桌面及短高触屏验收通过**；准确 head CI 与合并结果以 [PR #146](https://github.com/xuys2025/escape-bincov/pull/146) 实时状态为准。维护者于 2026-10-29 指派 GPT-6.1 Sol 续作，主代理复核并统筹合并；既有墙过渡首败和真人/真机边界保留。
 
 - 分支：`fix/stair-label-occlusion`
 - 建档基线：`03cfb775fbef07c711fe789e9f6e886460261a91`（2026-10-29；#111 已合并）。开工前重新 fetch 并核对原 PR。

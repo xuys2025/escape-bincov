@@ -2,7 +2,7 @@
  * Which areas a player can deploy to, the one preselected when the page opens, and the `?sample=` playtest flags.
  * Read by the tab page, the station yard and the raid view alike; no page or view state lives here.
  */
-import { SAMPLE_AREA } from './coast-view/appearance';
+import { SAMPLE_AREA } from './sample-area';
 import type { RunWorld } from './hideout-runtime/contract';
 import { generateRunBase } from './world';
 

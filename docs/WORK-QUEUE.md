@@ -1,6 +1,10 @@
 # 当前任务入口
 
-本轮原子待办：**[修复楼梯标签遮住可见敌人（S03c）](tasks/todo-stair-label-occlusion.md)**，分支 `fix/stair-label-occlusion`，续作 [PR #146](https://github.com/xuys2025/escape-bincov/pull/146)。按真实 HUD 字框暂隐避让已呈现敌人：1056 单测/113 工程守卫/package 通过，S03c 两档桌面与 932×430 触屏通过，旧版 85/74 个遮挡像素有效失败；完整空间 20/22、商场 24/25，仅保留旧版亦复现的墙过渡首帧断言失败，等主审/CI。只承接 #26 中 S03c 遮敌子项，总单由主代理维护。
+本轮原子任务：**[修复楼梯标签遮住可见敌人（S03c）](tasks/todo-stair-label-occlusion.md)**，[PR #146](https://github.com/xuys2025/escape-bincov/pull/146) 实现与主审完成；最终 CI/合并以原 PR 实时状态为准。已同步 main `4fec648c`，1080 单测/125 工程守卫/package 通过，S03c 两档桌面与 932×430 触屏均 0 遮挡；原版 85/74 的有效失败、最终空间 20/22 的既有 S04d 首败和首轮商场证据完整保留。只承接 #26 中 S03c 遮敌子项；本地断言余项归 #61，总单保持开放。
+
+已完成原子任务：**[SAMPLE_AREA 共享数据边界](tasks/todo-sample-area-boundary.md)**，[PR #145](https://github.com/xuys2025/escape-bincov/pull/145) 已经主审及准确 head 完整 CI，合入 main `4fec648c`。常量与直接引用迁移、行为对照及依赖守卫完成；只核销 #60 Q-E02 的这一余项，本地旧版首败保留。
+
+已完成原子任务：**[HUD 堆路径报告拒绝缺失或非法观测字段](tasks/todo-hud-path-observations.md)**，[PR #144](https://github.com/xuys2025/escape-bincov/pull/144) 已经主审及准确 head 完整 CI，合入 main `13c9b80c`。原工具保持 review，F20/PARTIAL 不变；只核销 #32/#60 中这个子项。
 
 最近核对：2026-10-29，main `275fafd`（含 #95 落幕等待与 #141 室内墙体过渡）。本轮沿 [PR #111](https://github.com/xuys2025/escape-bincov/pull/111) 复核资源趋势工具轮数入口，正常合入该主线并解决三处文档/脚本分类冲突；1056 单测、113 工程守卫与打包通过，准确 head CI 见原 PR。下表其他条目的合并状态、head 与检查结果以对应 GitHub 页面实时信息为准，旧快照不作为当前指令。
 

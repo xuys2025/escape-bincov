@@ -2,6 +2,16 @@
 
 承接 [PR #146](https://github.com/xuys2025/escape-bincov/pull/146)，原分支 `fix/stair-label-occlusion`，基线 main `03cfb775`。场景仅投影当前已呈现敌人身体，宿主按真实 DOM 字框在碰撞时暂隐标签，离开后恢复；玩家、商场、地图、揭示、存档规则不变。S03c 删除已知缺口并要求 0 遮挡像素，两档桌面/短高触屏通过；旧版独立硬断言测到 85/74 个遮挡像素。1056 单测/113 工程守卫/package 通过；完整空间 20/22（仅两尺寸 S04d）、商场 24/25（仅 M21），既有墙过渡整像素首帧断言失败也在旧版复现，未改其规则或断言。真实前/中/后截图、哈希、首败和边界见[原任务书](docs/tasks/todo-stair-label-occlusion.md)。准确 head/CI 由原 PR 正文维护；未合并、未发布、真人/真机未验，总单由主代理维护。
 
+## 2026-10-29 · SAMPLE_AREA 共享数据边界（PR #145）
+
+在 `refactor/sample-area-boundary` 续作 [PR #145](https://github.com/xuys2025/escape-bincov/pull/145)，基线 main `03cfb775`。零依赖的 `src/sample-area.ts` 是唯一世界像素范围来源，raid-areas 与 scene 直接消费；appearance 不转发，scene 本体未改。固定输入的旧版选种、400 次/fallback、URL入口与依赖反例见 [原任务书](docs/tasks/todo-sample-area-boundary.md)。本地1059单测、115守卫、package及建筑/通道/落点/默认入口/村庄两档专项通过；商场样板当前和旧393客户端均23/25，同两断言失败，数值差异及准确head/CI见任务书与原PR。只承接 #60 Q-E02 的这一项；未合并、未发布，不接管区域注册、地图/存档或楼梯方向。
+
+## 2026-10-29 · HUD 堆路径消费字段校验（PR #144）
+
+沿 `fix/hud-path-observations` 与 [PR #144](https://github.com/xuys2025/escape-bincov/pull/144) 续作，基线 main `03cfb775`、原 head `4cf4f72c`。输入在 flat-table 算术与 typed array 写入前校验；坏 edge_count/索引/stride 明确报文件与字段，任一输入失败均不创建或覆盖报告。合法输出、weak 排除、80 节点路径与字符串省略保持；只约束消费字段，原工具仍为 review。
+
+[任务与首败](docs/tasks/todo-hud-path-observations.md)、[真实 CLI10项](scripts/ci/hud-paths-input.test.mjs)、[原实现负对照](scripts/ci/fixtures/hud-paths-before-validation.txt) 为接手入口。Windows Node24.21.0/pnpm11.19.0：1056 单测、123工程守卫、package 均通过，便携 ZIP 6,035,864 B、web ZIP 6,031,355 B。首轮专项发现报告末尾换行回归，恢复原字节后10/10；旧CLI null仍错误exit0/不可达，修后exit1且哨兵不变。准确head与CI见原PR；未运行浏览器/真实堆/60轮/真人真机，F20/PARTIAL不变。总单状态与最终审查合并交主代理，未合并/发布。
+
 ## 2026-10-29 改枪 M3-12：占格跟着弹匣变（#132）
 
 `feat/gunsmith-m3` / [PR #132](https://github.com/xuys2025/escape-bincov/pull/132)（草稿），在 `gunsmith-m305` 工作树做。
