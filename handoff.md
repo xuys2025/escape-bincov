@@ -1,3 +1,33 @@
+## 2026-10-29 · #143 审阅调整与正式接入决定
+
+维护者转达开发者一致决定接入游戏并采纳审阅意见。[正式接入计划](docs/tasks/skill-tree-integration.md)现为后续开发入口；下方“隔离研究交付”是此前阶段的历史记录，授权与数值说明以本节和计划为准。本轮沿 [PR #148](https://github.com/xuys2025/escape-bincov/pull/148) 的 `Nekomole:feat/skills-local-spike` 续作，从 head `8b861591` 同步最新 main `d60e7c0db6e2783244422736656bc571edc0d879`，只在独立工作树调整；未操作他人的未提交工作。准确最终 head、CI 与交付状态见原 PR。
+
+压弹改为玩家按堆指定有限数量，默认不消费；未完成任务保留普通泵机零件，救济不抵扣需求，回收或合堆不扩大授权，满包失败不扣材料或批准量。`SkillMechanicSeed.completedQuests` 严格校验；资源研究格式 v2 拒绝旧 v1，技能进度/经验研究格式仍为 v1，正式存档未变。入口是 [资源机制](src/skill-tree-mechanics.ts) 与[反例测试](tests/skill-tree-mechanics.test.ts)。原版在42秒吃完3个任务零件的失败已经复现并保留；新增7项回归覆盖授权、任务、重试、撤销、多堆和全枪种适用性。
+
+Windows / Node24.21.0 / pnpm11.19.0：全仓单测 **1202/1202**、工程检查 **139/139**、严格TypeScript/构建/离线打包通过。复用目录锁文件一致；pnpm默认依赖目录检查要求重装并因无TTY中止，本轮使用命令级 `--config.verify-deps-before-run=false` 执行 test/check:ci/build，随后直接执行 `node scripts/package.mjs`，未修改依赖或仓库配置。便携ZIP 6,101,796 B，web ZIP 6,097,287 B。正式2170个构建输入仍无技能研究模块，打包脚本一致，HTML SHA-256 `10951b5dca0dd2594c88d0690f5532efad7a515555c38886cf8578831afa6392`。日志与构建隔离数据在忽略的 `test-results/skill-review/`，首败 `press-before.log`；生成物不提交。
+
+后续按计划S0～S7推进：先完成48项真实作用点、旧权益补偿与版本合同，再做同一SaveSession事务内的成长/世界/物资、战斗生存与搜索、六机制、界面和自愿转换、两图实玩与发布验收。旧角色默认保留现有属性和Perk，合同批准前不开转换；不把研究全量回放放进逐帧运行。当前无正式UI接入，未重做浏览器/真实旧端/真机/长期平衡验收，不据此声称已上线或自行合并。#143保留开放，承担剩余实施和总验收。
+
+## 2026-10-29 · #143 三分支技能：隔离研究交付（历史）
+
+起点 main `275fafd`，研究与稳定性验证基线为最新 main `cf5845e9ba0b530fe2b8be4bb69c431a8049efa3`。[PR #148](https://github.com/xuys2025/escape-bincov/pull/148)，head `Nekomole:feat/skills-local-spike`，源码提交 `84748f819a955de2be196f286ed5fbe9e055a85a`；后续交接索引仅文档更新，准确head／检查／审阅状态以PR为准。用户已确认提交该隔离研究版，授权不包含合并 main 或额外实施正式存档接入。未迁移旧 Perk，未改正式存档或正常游戏入口。
+
+本轮已复现并修复三项：[详情与唯一反例入口](docs/tasks/skill-tree-research.md#稳定性复核已复现并修复的问题)、[stability 测试](tests/skill-tree-stability.test.ts)。死亡敌人的正极小血量被epsilon连续性放行，能按新ID重结击杀；暂停活动推进限时效果时钟；长ID事件越过检查点上限后才无法导出。现分别严格匹配权威HP、暂停只接受停止的行动时钟标记、返回候选前检查400万字符上限。保留合法极小HP、正常闲置计时与原状态不变反例；不把错误研究日志静默修复。主线同步的两处文档冲突保留双方内容，保护快照 stash `37fdf6a`。
+
+本轮最终验证：技能专项 **113/113**（新增8项），全仓 **1195/1195**（研究共113项）、本地工程守卫 **139/139**、package含严格TypeScript通过。300随机构筑／9600条件组合、200不规则时间分片／读档、当前全部20枪种与弹药、逐嵌套对象未知字段均通过。四配置试验页通过；100轮＋1800次操作无脚本错误、存储访问／网络请求；强制GC后DOM435、监听器61保持，堆1361840→1513988字节，未声称长期泄漏验收。日志为 `test-results/local-prep/skill-tree-stability-{targeted,full-tests,ci,package}.log`，首败为 `*-repro.log` 和 `*-size-repro.log`；浏览器原始结果在 `test-results/skill-tree-lab/stability-browser-results.json`。正式游戏2170构建输入不含研究模块，脚本与打包HTML一致，SHA-256 `83750c8bf465fc90e2abcaabf73e8478a8ea087761ef06f3a2e6b34746526fc3`，证据 `skill-tree-stability-build.json`。完整正式浏览器、真实旧端、真机及数小时连续游玩仍未验。
+
+当前实现：[48 项候选与唯一机制说明](docs/tasks/skill-tree-research.md)。目录保持旧 24 项稳定前缀，增加至每支16项；各支最多15点，中层5点／专精10点门槛，2点机制节点独立互斥。`skill-tree.ts` 增加可脱离原对象的效果预编译；经验日志冻结出击配置并核对原生来源、幂等与条件触发。新增 `skill-tree-mechanics.ts` 从真实库存／枪械配置重放自动续装、废料压弹、代谢回血、应急绷带、标记回收和有限扫描，复用既有 `reloadMagazine`、`addItem` 和严格库存校验；追踪救济来源、保护名单、每局预算、时间分片与满包整笔回滚。经验与资源仍是隔离的两个研究契约，未来正式组合必须走既有事务。随机额外物资仍仅为计划；正式游戏未导入任何研究组件。
+
+上一扩充阶段验证（main `03cfb77`、Node24.19.0／pnpm11.19.0／Windows）：1161单测／113守卫／package通过；旧日志为 `test-results/local-prep/skill-tree-expanded-final-{tests,ci,package}.log`。108套构筑／12960条混合命令等仍在本轮重新执行。独立试验页 `test-results/skill-tree-lab/lab.html` 使用真实研究模块，重建为 `node test-results/skill-tree-lab/build.mjs`，四配置检查为 `node test-results/skill-tree-lab/browser-check.mjs`，100轮压力为 `node test-results/skill-tree-lab/stability-browser.mjs`（先加载本地 Enter-Dev.ps1）；原始素材与辅助脚本均为忽略的本地证据，不属于正式UI。
+
+首败与修复：早期修正未知输入类型收窄、数组事件种类被键转换接受及必需时间为 null 的漏洞，并保留反例。首次 package 的中文字体覆盖失败通过移除规则中的显示文案解决，中文名称集中在候选说明；没有改字体或关闭守卫。本次扩充的首次全测因测试夹具重复学习满级技能失败，修正夹具后全过；原日志保留 `skill-tree-expanded-tests-first.log`。资源测试曾因电池占两格的满包夹具重叠被严格拒绝，改为现有放置函数生成合法满包后验证回滚。规则核心仍接受纯模块守卫，资源模块及其共享解码依赖接受传递 headless 守卫；没有为研究放宽 DOM 检查。
+
+上一扩充阶段的构建隔离与性能历史：main `03cfb77` 的1646输入未含研究模块，旧HTML SHA-256 `a1904981…c21c45`；当前制品以本轮新证明为准。相同合成日志的旧／预编译实现（各7次中位数）：6000条27.86→13.14ms，8192条36.79→16.65ms，10万次效果计算约65ms，数据为 `test-results/local-prep/skill-tree-expanded-benchmark.json`。这不是当前主线的正式战斗性能，也没有改变全量回放不宜生产逐帧使用的边界。
+
+接入前仍需解决：旧 Perk 的逐项迁移／补偿；在既有 `SaveSession` 同一事务中提交角色、技能和世界，接入版本与原始备份；物资拆分／合堆后的原生来源传播；正式触发时钟与暴击快照来源；实际掉落、提示范围、声音与负重调用点。研究格式的 `progress` 由日志重放验证，不能作为可选字段直接塞入现有存档。已有测试证明正式扩展解码器拒绝技能字段、当前暴击来源白名单拒绝新来源，因此不能靠添加可选属性或直接叠加概率接入。现有体质训练量混合了运动、恢复和训练效率／递减，也不能直接当作新生存经验；需从正式事件计量实际生命变化、物品类型和合格伤害。
+
+下一步入口：[候选与机制说明](docs/tasks/skill-tree-research.md)、[规则与计划](src/skill-tree.ts)、[经验日志](src/skill-tree-research.ts)、[资源机制](src/skill-tree-mechanics.ts) 及四组测试（含 stability）。按本研究范围处理 PR 审阅与 CI；正式接入合同及阶段验收仍归 #143，不能把研究组件当作完整玩法交付或自行合并。同步 main 前的保护快照与忽略目录中的补丁只作历史备份，提交后以 PR 源码为准。
+
 ## 2026-10-29 改枪收尾小项（#80，M4-08）
 
 分支 `feat/gunsmith-polish`，基线 main `aa1db0e`（#132 已合入 `e2728e4`）。

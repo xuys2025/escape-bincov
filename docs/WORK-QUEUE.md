@@ -10,6 +10,7 @@
 
 | 目标 | 承接入口 | 接手提示 |
 | --- | --- | --- |
+| 三分支技能：审阅调整与正式接入计划 | [PR #148](https://github.com/xuys2025/escape-bincov/pull/148) · [#143](https://github.com/xuys2025/escape-bincov/issues/143) · [S0～S7计划](tasks/skill-tree-integration.md) · [研究规则](tasks/skill-tree-research.md) · [代码入口](CODEMAP.md#技能研究) | 维护者2026-10-29转达开发者一致同意正式接入，采纳材料保护、旧权益和节奏审阅意见。本轮在原分支正常同步 main d60e7c0，压弹改为明确数量授权并保留任务材料，资源研究v2拒读旧v1；后续按S0～S7验收。正式游戏仍未接线，准确提交/检查见原PR，#77保持原归属 |
 | 事务失败阶段（Q-E04） | [#60 登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553) · [PR #137](https://github.com/xuys2025/escape-bincov/pull/137) · `codex/transaction-failure-phases` · [实现与验证](tasks/quality-entropy.md#q-e04-提交后的发布失败) | 写后发布异常不再当作可回滚/重试的存储失败；消费票据、停止本页、导出已提交记录后刷新。独立验收，#117/#136 已合入，现同步 main d27306b4；CI 的 station-reset S6 短提示观测补修后1048单测/99守卫/package/14项重开浏览器通过，原17项存档浏览器CI通过；准确新head完整CI见承接PR |
 | 文档快速通道的 main 也部署和发布 | [CI 说明](CI.md#pages-与镜像) · [交接](../handoff.md) | `fix/ci-docs-fastpath-deploy`，起点 main `8c6589b`：`03ea261` 纯文档合入时 Pages 与 `main-latest` 发布被连带跳过；两个 job 改为显式状态检查并加守卫测试。真正证明要等下一次纯文档合入实际部署；准确 head 与 CI 见承接 PR |
 | 室内墙体切换过渡（墙下沉／升起） | [方案 §6 第三阶段](INDOOR-WALL-VISIBILITY-PLAN.md#第三阶段切换过渡已实施待合并) · [PR #141](https://github.com/xuys2025/escape-bincov/pull/141) `feat/indoor-wall-transition` | 两阶段规则已随 [PR #135](https://github.com/xuys2025/escape-bincov/pull/135) 合入 main（`5c65eb4`）。维护者试玩后要求加过渡并选了“下沉”：墙在 0.2 秒内沉进占地格或升回，像素始终实心；进出建筑、门洞裁切和附着物都跟着；减少动态效果时直接切换。维护者 10-29 局域网试玩后说“手感可以”，真机未测。准确 head、CI 与验收见承接 PR |
