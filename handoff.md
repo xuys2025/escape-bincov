@@ -1,3 +1,7 @@
+## 2026-10-29 · SAMPLE_AREA 共享数据边界（PR #145）
+
+在 `refactor/sample-area-boundary` 续作 [PR #145](https://github.com/xuys2025/escape-bincov/pull/145)，基线 main `03cfb775`。零依赖的 `src/sample-area.ts` 是唯一世界像素范围来源，raid-areas 与 scene 直接消费；appearance 不转发，scene 本体未改。固定输入的旧版选种、400 次/fallback、URL入口与依赖反例见 [原任务书](docs/tasks/todo-sample-area-boundary.md)。本地1059单测、115守卫、package及建筑/通道/落点/默认入口/村庄两档专项通过；商场样板当前和旧393客户端均23/25，同两断言失败，数值差异及准确head/CI见任务书与原PR。只承接 #60 Q-E02 的这一项；未合并、未发布，不接管区域注册、地图/存档或楼梯方向。
+
 ## 2026-10-29 · HUD 堆路径消费字段校验（PR #144）
 
 沿 `fix/hud-path-observations` 与 [PR #144](https://github.com/xuys2025/escape-bincov/pull/144) 续作，基线 main `03cfb775`、原 head `4cf4f72c`。输入在 flat-table 算术与 typed array 写入前校验；坏 edge_count/索引/stride 明确报文件与字段，任一输入失败均不创建或覆盖报告。合法输出、weak 排除、80 节点路径与字符串省略保持；只约束消费字段，原工具仍为 review。

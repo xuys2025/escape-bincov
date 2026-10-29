@@ -1,0 +1,274 @@
+{
+  "html": "dist/index.html",
+  "sha256": "32d1ddc92905f5b427d5b23d5e0c7aec71b71f793fafb8575e1945eb2dbf63a1",
+  "browser": "156.0.8078.48",
+  "checks": [
+    {
+      "name": "R1 yard: the deploy panel offers 沿海街区 (selected) and 滨湾商场; 沿海封锁区 is closed",
+      "result": {
+        "worlds": [
+          "buildings",
+          "mall"
+        ],
+        "checked": "buildings",
+        "names": [
+          "沿海街区",
+          "滨湾商场"
+        ]
+      },
+      "status": "passed"
+    },
+    {
+      "name": "R2 old tab page (页签 from the yard): the area list has the same two areas",
+      "result": {
+        "options": [
+          [
+            "buildings",
+            "沿海街区 · 居民楼",
+            true
+          ],
+          [
+            "mall",
+            "滨湾商场 · 两层与露台",
+            false
+          ]
+        ],
+        "note": "行动规则 每局限时 10 分钟"
+      },
+      "status": "passed"
+    },
+    {
+      "name": "R3 沿海街区 deploys on the 2.5D view; outside the dressed corner there is no playtest mark",
+      "result": {
+        "where": "沿海街区 · 室外 / 一楼"
+      },
+      "status": "passed"
+    },
+    {
+      "name": "R4 滨湾商场 deploys layout 4 on the 2.5D view",
+      "result": {
+        "where": "滨湾商场 · 一层 · 正门广场 · 室外"
+      },
+      "status": "passed"
+    },
+    {
+      "name": "R5 a classic coast raid started before the area closed resumes on the 2.5D view and settles",
+      "result": {
+        "where": "沿海封锁区 · 室外 / 一楼",
+        "testInterface": false
+      },
+      "status": "passed"
+    },
+    {
+      "name": "R6 a mall layout 1 raid started before the switch resumes on the 2.5D view and settles",
+      "result": {
+        "where": "滨湾商场 · 一层 / 地面室外 · 弧形步行街 · 室外",
+        "testInterface": false
+      },
+      "status": "passed"
+    },
+    {
+      "name": "R7 the view follows the raid, not the playtest flag: ?sample=village draws a mall raid with the mall art",
+      "result": {
+        "mallArt": "sol",
+        "art": "sol"
+      },
+      "status": "passed"
+    },
+    {
+      "name": "R10 county map: previews cannot deploy, selections preserve the seed, and desktop/phone layouts remain reachable",
+      "result": [
+        {
+          "width": 1280,
+          "height": 720,
+          "clipped": [],
+          "overlapping": [],
+          "covered": [],
+          "misplaced": [],
+          "missed": [],
+          "stretched": false,
+          "cropped": false,
+          "offCentre": false,
+          "overflow": false
+        },
+        {
+          "width": 1920,
+          "height": 1080,
+          "clipped": [],
+          "overlapping": [],
+          "covered": [],
+          "misplaced": [],
+          "missed": [],
+          "stretched": false,
+          "cropped": false,
+          "offCentre": false,
+          "overflow": false
+        },
+        {
+          "width": 844,
+          "height": 390,
+          "clipped": [],
+          "overlapping": [],
+          "covered": [],
+          "misplaced": [],
+          "missed": [],
+          "stretched": false,
+          "cropped": false,
+          "offCentre": false,
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "height": 844,
+          "clipped": [],
+          "overlapping": [],
+          "covered": [],
+          "misplaced": [],
+          "missed": [],
+          "stretched": false,
+          "cropped": false,
+          "offCentre": false,
+          "overflow": false
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "name": "R11 county map motion: a pick patches the map in place, every animation ends, reduced motion stops them and closing the panel ends them",
+      "result": {
+        "moving": [
+          {
+            "name": "--map-y",
+            "iterations": 1
+          },
+          {
+            "name": "--map-x",
+            "iterations": 1
+          },
+          {
+            "name": "bottom",
+            "iterations": 1
+          },
+          {
+            "name": "left",
+            "iterations": 1
+          },
+          {
+            "name": "right",
+            "iterations": 1
+          },
+          {
+            "name": "top",
+            "iterations": 1
+          },
+          {
+            "name": "background-color",
+            "iterations": 1
+          },
+          {
+            "name": "border-bottom-color",
+            "iterations": 1
+          },
+          {
+            "name": "border-left-color",
+            "iterations": 1
+          },
+          {
+            "name": "border-right-color",
+            "iterations": 1
+          },
+          {
+            "name": "border-top-color",
+            "iterations": 1
+          },
+          {
+            "name": "bottom",
+            "iterations": 1
+          },
+          {
+            "name": "left",
+            "iterations": 1
+          },
+          {
+            "name": "right",
+            "iterations": 1
+          },
+          {
+            "name": "top",
+            "iterations": 1
+          },
+          {
+            "name": "background-color",
+            "iterations": 1
+          },
+          {
+            "name": "border-bottom-color",
+            "iterations": 1
+          },
+          {
+            "name": "border-left-color",
+            "iterations": 1
+          },
+          {
+            "name": "border-right-color",
+            "iterations": 1
+          },
+          {
+            "name": "border-top-color",
+            "iterations": 1
+          },
+          {
+            "name": "background-color",
+            "iterations": 1
+          },
+          {
+            "name": "slide",
+            "iterations": 1
+          },
+          {
+            "name": "lock-in",
+            "iterations": 1
+          },
+          {
+            "name": "art-in",
+            "iterations": 1
+          },
+          {
+            "name": "copy-in",
+            "iterations": 1
+          }
+        ]
+      },
+      "status": "passed"
+    },
+    {
+      "name": "R8 without WebGL the page shows the notice instead of the game and leaves the save untouched",
+      "result": {
+        "heading": "需要支持 WebGL 的浏览器",
+        "frame": false,
+        "canvases": 0
+      },
+      "status": "passed"
+    },
+    {
+      "name": "R9 phone (844x390 touch): the 2.5D raid has a weapon button that switches to the knife and back",
+      "result": {
+        "start": {
+          "weapon": "旧式手枪",
+          "label": "匕首"
+        },
+        "knife": {
+          "weapon": "水手匕首",
+          "label": "主武器"
+        },
+        "back": {
+          "weapon": "旧式手枪",
+          "label": "匕首"
+        }
+      },
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "requests": []
+}
