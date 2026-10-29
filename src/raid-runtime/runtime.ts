@@ -66,7 +66,14 @@ type Armed = {
     laser: { range: number; grip: Handling } | null;
     /** The light while on, and the spot factor of the devices on (#28 M2-03). */
     light: { radius: number; arc: number } | null; spot: number;
+    /** The sight's look-ahead factor per mode (#28 M3-11; [1] without a scope), and the handling braced on a bipod. */
+    view: readonly number[]; braced: Handling | null;
 };
+/**
+ * Seconds of standing still after which a bipod braces the gun (#28 M3-11, a proposal M4 may tune): its handling
+ * (GunStats.braced) holds until the player moves, when it goes at once.
+ */
+export const BRACE_AFTER = .5;
 type PendingEvent = {
     body: ViewEventBody;
     world: WorldKey;
@@ -91,6 +98,10 @@ export class CoastRaidRuntime implements RaidRuntime {
     mag = 0;
     magRelief = 0;
     knife = false;
+    /** The sight mode in use (#28 M3-11): an index into the gun's view factors, switched with V on a two-mode optic. Raid-local, never saved: a resumed raid starts on the near mode. */
+    private scopeMode = 0;
+    /** Seconds the player has stood still (#28 M3-11): a bipod braces after BRACE_AFTER. Raid-local. */
+    private stillFor = 0;
     reloadLeft = 0;
     fireCooldown = 0;
     /**
@@ -280,7 +291,8 @@ export class CoastRaidRuntime implements RaidRuntime {
             const stats = effectiveStats(buildOf(gun), devicesOn(gun)), grip = Object.freeze(stats.handling);
             this.armed = { key, weapon: Object.freeze(stats.weapon), grip, weight: gunWeight(gun), noise: stats.noise, suppressed: stats.suppressed,
                 laser: stats.laser && Object.freeze({ range: stats.laser.range, grip: Object.freeze(laserHandling(grip, stats.laser)) }),
-                light: stats.light && Object.freeze(stats.light), spot: stats.spot };
+                light: stats.light && Object.freeze(stats.light), spot: stats.spot,
+                view: Object.freeze([...stats.view]), braced: stats.braced && Object.freeze(stats.braced) };
         }
         return this.armed;
     }
@@ -298,8 +310,25 @@ export class CoastRaidRuntime implements RaidRuntime {
     }
     /** How the held weapon is drawn (heldLook). */
     get weaponLook(): WeaponLook { return heldLook(this.currentWeapon.id); }
-    /** Handling of the weapon in hand, from the same source as currentWeapon. */
-    get grip(): Handling { const gun = !this.knife && this.equipped(); return gun ? gun.grip : handlingOf(this.currentWeapon.id); }
+    /**
+     * Handling of the weapon in hand, from the same source as currentWeapon: braced on the gun's bipod once the player
+     * has stood still for BRACE_AFTER (#28 M3-11).
+     */
+    get grip(): Handling {
+        const gun = !this.knife && this.equipped();
+        return gun ? gun.braced && this.stillFor >= BRACE_AFTER ? gun.braced : gun.grip : handlingOf(this.currentWeapon.id);
+    }
+    /**
+     * The sight of the gun in hand (#28 M3-11): the look-ahead factor of the mode in use (`scope`, 1 without a scope), the
+     * number of modes and the one in use, and whether it has a bipod and is braced on it now. Null with the knife drawn,
+     * without a gun, or with a gun that has neither a scope nor a bipod.
+     */
+    get gunSight(): { scope: number; modes: number; mode: number; bipod: boolean; braced: boolean } | null {
+        const gun = this.held();
+        if (!gun || (Math.max(...gun.view) <= 1 && !gun.braced)) return null;
+        const mode = this.scopeMode < gun.view.length ? this.scopeMode : 0;
+        return { scope: gun.view[mode], modes: gun.view.length, mode, bipod: !!gun.braced, braced: !!gun.braced && this.stillFor >= BRACE_AFTER };
+    }
     /**
      * The handling a shot fired now meets (shoot, and the HUD's cone): the grip, or while the laser of the gun in hand is
      * on and its beam rests on a body within range, the laser's (#28 M2-03): tighter from the hip, the same once the aim
@@ -375,6 +404,14 @@ export class CoastRaidRuntime implements RaidRuntime {
         if (!gun) { this.rejected('device', '没有装备枪械。'); return; }
         if (this.knife) { this.rejected('device', '先换回主武器，再开关设备。'); return; }
         if (!toggleDevice(gun, effect)) { this.rejected('device', effect === 'laser' ? '这把枪没有装激光。' : '这把枪没有装灯光。'); return; }
+        this.dirty = true;
+    }
+    /** V (#28 M3-11): the next mode of a two-mode optic. Refused, with a reason, with the knife drawn or without one. */
+    private switchScope() {
+        const gun = this.held();
+        if (!gun) { this.rejected('scope', this.knife ? '先换回主武器，再切换瞄具档位。' : '没有装备枪械。'); return; }
+        if (gun.view.length < 2) { this.rejected('scope', '这把枪的瞄具没有两档。'); return; }
+        this.scopeMode = (this.scopeMode < gun.view.length ? this.scopeMode + 1 : 1) % gun.view.length;
         this.dirty = true;
     }
     /** The published map of the floor the player stands on, as publish shows it; built again only when the floor changed. */
@@ -1074,6 +1111,8 @@ export class CoastRaidRuntime implements RaidRuntime {
                 this.switchDevice('laser');
             if (frame.actions.has('light'))
                 this.switchDevice('light');
+            if (frame.actions.has('scope'))
+                this.switchScope();
         }
         if (this.paused)
             return;
@@ -1087,6 +1126,8 @@ export class CoastRaidRuntime implements RaidRuntime {
         this.sprinting = sprint;
         // The heavy-stride perk (strength-20-a) scales only this slowdown, never the overweight stamina cost.
         const speed = (sprint ? B.sprintSpeed : B.walkSpeed) * (this.inputFrame.precise && !sprint ? B.aimSpeedFactor : 1) / Math.max(1, 1 + over * B.overloadSlowdownPerKg * perkEffects(this.layered).overweight) * (this.layered ? rpgMultipliers(this.layered).movement : 1);
+        // A bipod braces only standing still (#28 M3-11): walking, or a step that moved the player, starts the count again.
+        this.stillFor = moving ? 0 : this.stillFor + dt;
         if (moving) {
             const len = Math.max(1, Math.hypot(dx, dy));
             this.move(this.player, dx / len * speed * dt, dy / len * speed * dt, true);

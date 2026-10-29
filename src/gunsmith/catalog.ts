@@ -90,7 +90,7 @@ export interface Modifiers extends Factors {
     suppressor?: true;
     /** Cells the installed part adds to the gun's footprint (suppressors lengthen, a drum deepens). */
     grow?: { w: number; h: number };
-    /** Factor on the precise-aim camera look-ahead, one per sight mode; M0-07 sets the cap these scale. */
+    /** Factor on the precise-aim camera look-ahead, one per sight mode (M0 review decision 7: x2 at most; the raid uses it, #28 M3-11). */
     view?: readonly number[];
     /** Factors that hold only while the shooter stands still (a bipod); moving drops them at once. */
     braced?: Factors;
@@ -161,12 +161,12 @@ export const GUNS: Readonly<Record<GunId, GunDef>> = {
         hd('semi', 1.7, .2, .32, 1.6, .013, .06, .008, .045, .14, 5.5),
         { muzzle: 1, barrel: 1, grip: 1, base: 1, pistolSide: 1 }),
     // Proposal: controllable automatic fire, weak at range.
-    mpb5: gun('mpb5', 'MP5 近战冲锋枪', 'smg', 'common', 'ammo9', [3, 1, 2.4, 1500, 700],
+    mpb5: gun('mpb5', 'MP5 近战冲锋枪', 'smg', 'common', 'ammo9', [3, 2, 2.4, 1500, 700],
         { magazine: 30, damage: 21, range: 480, cooldown: .085, reload: 2, pellets: 1, spread: .045, crit: .04 },
         hd('auto', 2.2, .25, .35, 1.9, .007, .07, .006, .06, .14, 4.5),
         { muzzle: 1, barrel: 1, handguard: 1, stock: 1, mag: 1, base: 1 }),
     // Proposal: slow rate and strong rounds; a slow reload and the weight are the price.
-    umpb45: gun('umpb45', 'UMP45 重弹冲锋枪', 'smg', 'common', 'ammo45', [3, 1, 2.3, 1600, 750],
+    umpb45: gun('umpb45', 'UMP45 重弹冲锋枪', 'smg', 'common', 'ammo45', [3, 2, 2.3, 1600, 750],
         { magazine: 25, damage: 29, range: 480, cooldown: .12, reload: 2.3, pellets: 1, spread: .045, crit: .05 },
         hd('auto', 2.2, .25, .38, 2, .01, .08, .009, .07, .16, 4.2),
         { muzzle: 1, barrel: 1, stock: 1, grip: 1, mag: 1, top: 1, under: 1, side: 1 }),
@@ -175,7 +175,7 @@ export const GUNS: Readonly<Record<GunId, GunDef>> = {
         { magazine: 50, damage: 18, range: 500, cooldown: .075, reload: 2.4, pellets: 1, spread: .045, crit: .04 },
         hd('auto', 2.1, .25, .32, 1.8, .006, .07, .005, .05, .13, 4.8), { muzzle: 1, mag: 1, top: 1, side: 1 }),
     // Proposal: the highest short-burst output; eats ammo and blooms the most.
-    vb9: gun('vb9', 'Vector 9mm 高速冲锋枪', 'smg', 'rare', 'ammo9', [2, 1, 2.6, 2400, 1130],
+    vb9: gun('vb9', 'Vector 9mm 高速冲锋枪', 'smg', 'rare', 'ammo9', [2, 2, 2.6, 2400, 1130],
         { magazine: 25, damage: 20, range: 420, cooldown: .06, reload: 1.9, pellets: 1, spread: .05, crit: .04 },
         hd('auto', 2.3, .28, .3, 2, .01, .1, .006, .07, .15, 4), { muzzle: 1, top: 1, under: 1, side: 1 }),
     // Copied from domain WEAPONS/ITEMS and shooting.ts; the test keeps them equal.
@@ -197,31 +197,31 @@ export const GUNS: Readonly<Record<GunId, GunDef>> = {
         { magazine: 12, damage: 39, range: 660, cooldown: .24, reload: 1.65, pellets: 1, spread: .035, crit: .08 },
         hd('semi', 2.2, .2, .4, 2, .014, .06, .012, .06, .18, 4.5), { muzzle: 1, barrel: 1, handguard: 1, base: 1 }),
     // Proposal: sustained mid-range fire; slow to raise.
-    akb74: gun('akb74', 'AK-74 稳定步枪', 'rifle', 'common', 'ammoR', [4, 1, 3.1, 2000, 940],
+    akb74: gun('akb74', 'AK-74 稳定步枪', 'rifle', 'common', 'ammoR', [4, 2, 3.1, 2000, 940],
         { magazine: 30, damage: 25, range: 620, cooldown: .1, reload: 2.3, pellets: 1, spread: .032, crit: .05 },
         hd('auto', 2.4, .22, .45, 2.2, .008, .07, .007, .07, .15, 4.2),
         { muzzle: 1, barrel: 1, handguard: 1, stock: 1, grip: 1, mag: 1, base: 1 }, ['longScope']),
     // Proposal: harder hits and a heavy climb in bursts.
-    akb103: gun('akb103', 'AK-103 重型步枪', 'rifle', 'common', 'ammoR', [4, 1, 3.4, 2200, 1030],
+    akb103: gun('akb103', 'AK-103 重型步枪', 'rifle', 'common', 'ammoR', [4, 2, 3.4, 2200, 1030],
         { magazine: 30, damage: 30, range: 640, cooldown: .11, reload: 2.4, pellets: 1, spread: .034, crit: .06 },
         hd('auto', 2.4, .22, .45, 2.2, .011, .09, .011, .1, .17, 4),
         { muzzle: 1, barrel: 1, handguard: 1, stock: 1, grip: 1, mag: 1, base: 1 }, ['longScope']),
     // The #39 sample rifle the maintainer playtested, unchanged: the real one since M2-01 (the test pins it); prices are proposals.
-    mb4a1: gun('mb4a1', 'M4A1 模块步枪', 'rifle', 'common', 'ammoR', [4, 1, 2.9, 2300, 1080],
+    mb4a1: gun('mb4a1', 'M4A1 模块步枪', 'rifle', 'common', 'ammoR', [4, 2, 2.9, 2300, 1080],
         { magazine: 30, damage: 24, range: 600, cooldown: .1, reload: 2.1, pellets: 1, spread: .03, crit: .05 },
         hd('auto', 2.4, .22, .4, 2.2, .009, .08, .008, .08, .15, 4),
         { muzzle: 1, barrel: 1, handguard: 1, stock: 1, grip: 1, mag: 1, top: 1 }, ['longScope']),
     // Proposal: small in the bag and quick to turn; a slow reload and a fixed stock.
-    augb: gun('augb', 'AUG 紧凑步枪', 'rifle', 'common', 'ammoR', [3, 1, 3.2, 2500, 1180],
+    augb: gun('augb', 'AUG 紧凑步枪', 'rifle', 'common', 'ammoR', [3, 2, 3.2, 2500, 1180],
         { magazine: 30, damage: 25, range: 620, cooldown: .1, reload: 2.6, pellets: 1, spread: .03, crit: .05 },
         hd('auto', 2.3, .22, .36, 1.9, .009, .08, .008, .075, .15, 4.2),
         { muzzle: 1, mag: 1, top: 1, under: 1, side: 1 }, ['longScope']),
     // Proposal: a strong first shot at range; poor from the hip, slow to raise and to track.
-    svdb: gun('svdb', 'SVD 精确步枪', 'dmr', 'rare', 'ammoHeavy', [5, 1, 4, 3200, 1500],
+    svdb: gun('svdb', 'SVD 精确步枪', 'dmr', 'rare', 'ammoHeavy', [5, 2, 4, 3200, 1500],
         { magazine: 10, damage: 52, range: 820, cooldown: .45, reload: 2.6, pellets: 1, spread: .025, crit: .1 },
         hd('semi', 3.6, .15, .55, 2.6, .02, .07, .02, .07, .22, 4), { muzzle: 1, top: 1, bipod: 1 }, ['longScope']),
     // Proposal: paced fire at middle to long range; strong recoil and heavy.
-    mb14: gun('mb14', 'M14 半自动精确步枪', 'dmr', 'rare', 'ammoHeavy', [5, 1, 4.3, 3000, 1410],
+    mb14: gun('mb14', 'M14 半自动精确步枪', 'dmr', 'rare', 'ammoHeavy', [5, 2, 4.3, 3000, 1410],
         { magazine: 20, damage: 46, range: 760, cooldown: .3, reload: 2.5, pellets: 1, spread: .027, crit: .09 },
         hd('semi', 3.2, .17, .5, 2.4, .022, .08, .022, .08, .22, 4),
         { muzzle: 1, stock: 1, mag: 1, top: 1, bipod: 1 }, ['longScope']),
@@ -231,7 +231,7 @@ export const GUNS: Readonly<Record<GunId, GunDef>> = {
         hd('semi', 4.2, .12, .55, 2.6, .03, .06, .02, .05, .5, 3.5),
         { muzzle: 1, barrel: 1, stock: 1, top: 1, bipod: 1 }, ['longScope']),
     // Proposal: suppressing fire from 40 rounds; heavy, slow and hungry.
-    rpkb: gun('rpkb', 'RPK 支援机枪', 'lmg', 'common', 'ammoR', [5, 1, 4.8, 2800, 1320],
+    rpkb: gun('rpkb', 'RPK 支援机枪', 'lmg', 'common', 'ammoR', [5, 2, 4.8, 2800, 1320],
         { magazine: 40, damage: 26, range: 640, cooldown: .11, reload: 3.4, pellets: 1, spread: .034, crit: .05 },
         hd('auto', 2.6, .24, .55, 2.4, .008, .09, .008, .09, .18, 3.8),
         { muzzle: 1, handguard: 1, stock: 1, grip: 1, mag: 1, base: 1, bipod: 1 }, ['longScope']),
@@ -256,12 +256,13 @@ const p = (id: string, name: string, mount: Slot, guns: readonly GunId[] | null,
 /**
  * A loose attachment's footprint (#28 M2-02, M0 review decision 9; a proposal M4 may tune with the shop and loot
  * space): 2x1 for a long part, 1x1 for the rest. Long are handguards, stocks, a barrel for any gun but a pistol, a part
- * that lengthens or deepens the installed gun (suppressors and the drum, `grow`), long-range scopes and the folded bipod.
+ * that lengthens the installed gun (suppressors, `grow.w`), the drum, long-range scopes and the folded bipod. The long
+ * magazines that make the installed gun a row deeper since #28 M3-12 stay 1x1 loose, as they were.
  * The inventory picture stays the 24 px icon (ART-SPEC section 2); only the cells it takes differ.
  */
 function looseSize(cat: Category, d: Draft): { w: number; h: number } {
     const long = cat === 'handguard' || cat === 'stock' || cat === 'barrel' && !!d.guns?.some(id => GUNS[id].cls !== 'pistol')
-        || !!d.mods.grow || !!d.extra.requires?.includes('longScope') || d.mount === 'bipod';
+        || !!d.mods.grow?.w || d.id === 'G09' || !!d.extra.requires?.includes('longScope') || d.mount === 'bipod';
     return long ? { w: 2, h: 1 } : { w: 1, h: 1 };
 }
 const section = (cat: Category, brand: Brand, drafts: readonly Draft[]): AttachmentDef[] => drafts.map(d => ({
@@ -290,11 +291,11 @@ export const ATTACHMENTS: Readonly<Record<string, AttachmentDef>> = Object.fromE
         p('O04', '封闭红点', 'top', null, .2, 280, { precise: .85, recover: 1.1 }),
         p('O05', '全息瞄具', 'top', null, .15, 320, { sway: .85, precise: .9, raise: 1.05 }),
         p('O06', '中距棱镜', 'top', null, .25, 380, { precise: .8, sway: .95, raise: 1.05, view: [1.25] }),
-        p('O07', '中远距棱镜', 'top', null, .3, 450, { precise: .75, raise: 1.12, view: [1.45] }),
-        p('O08', '轻型远距镜', 'top', null, .35, 620, { precise: .7, raise: 1.2, sway: 1.1, view: [1.7] }, LONG),
+        p('O07', '中远距棱镜', 'top', null, .3, 450, { precise: .75, raise: 1.12, view: [1.5] }),
+        p('O08', '轻型远距镜', 'top', null, .35, 620, { precise: .7, raise: 1.2, sway: 1.1, view: [2] }, LONG),
         p('O09', '稳定远距镜', 'top', null, .55, 820, { precise: .65, raise: 1.3, sway: 1.15, view: [2] }, LONG),
-        p('O10', '近远双档镜', 'top', null, .45, 760, { precise: .72, raise: 1.18, view: [1, 1.7] }, LONG),
-        p('O11', '中远双档镜', 'top', null, .5, 860, { precise: .7, raise: 1.22, view: [1.45, 1.85] }, LONG),
+        p('O10', '近远双档镜', 'top', null, .45, 760, { precise: .72, raise: 1.18, view: [1.5, 2] }, LONG),
+        p('O11', '中远双档镜', 'top', null, .5, 860, { precise: .7, raise: 1.22, view: [1.5, 2] }, LONG),
         p('O12', '轻型机械瞄具', 'top', null, .04, 90, { raise: .88, precise: .95 }),
     ]),
     ...section('muzzle', 'yanwan', [
@@ -371,14 +372,14 @@ export const ATTACHMENTS: Readonly<Record<string, AttachmentDef>> = Object.fromE
         p('F08', '折叠支撑脚架', 'bipod', null, .45, 380, { braced: { precise: .75, recover: 1.35 } }),
     ]),
     ...section('mag', 'binji', [
-        p('G01', 'G17 加长匣', 'mag', ['gb17'], .12, 160, { magazine: 24, reload: 1.15, weight: .08 }),
-        p('G02', '单排加长匣', 'mag', ['mb1911'], .1, 150, { magazine: 10, reload: 1.12, weight: .06 }),
+        p('G01', 'G17 加长匣', 'mag', ['gb17'], .12, 160, { magazine: 24, grow: { w: 0, h: 1 }, reload: 1.15, weight: .08 }),
+        p('G02', '单排加长匣', 'mag', ['mb1911'], .1, 150, { magazine: 10, grow: { w: 0, h: 1 }, reload: 1.12, weight: .06 }),
         p('G03', 'MP 快换匣', 'mag', ['mpb5'], .2, 180, { magazine: 25, reload: .8, weight: -.02 }),
-        p('G04', 'UMP 扩容匣', 'mag', ['umpb45'], .3, 240, { magazine: 35, reload: 1.15, weight: .15 }),
+        p('G04', 'UMP 扩容匣', 'mag', ['umpb45'], .3, 240, { magazine: 35, grow: { w: 0, h: 1 }, reload: 1.15, weight: .15 }),
         p('G05', 'P90 轻便匣', 'mag', ['pb90'], .15, 260, { magazine: 30, reload: .75, weight: -.15 }),
         p('G06', '泵动扩展供弹组', 'mag', ['mb870'], .3, 220, { magazine: 8, reload: 1.3, weight: .25 }),
         p('G07', '半自动扩展供弹组', 'mag', ['mb1014'], .35, 280, { magazine: 9, reload: 1.25, weight: .25 }),
-        p('G08', 'AK-74 扩容匣', 'mag', ['akb74'], .35, 260, { magazine: 45, reload: 1.15, weight: .15 }),
+        p('G08', 'AK-74 扩容匣', 'mag', ['akb74'], .35, 260, { magazine: 45, grow: { w: 0, h: 1 }, reload: 1.15, weight: .15 }),
         p('G09', 'AK 重弹鼓组', 'mag', ['akb103', 'rpkb'], 1.1, 620, { magazine: 60, reload: 1.35, raise: 1.12, weight: .9, grow: { w: 0, h: 1 } }),
         p('G10', '模块步枪快换匣', 'mag', ['mb4a1', 'augb'], .2, 200, { magazine: 20, reload: .8, weight: -.05 }),
         p('G11', 'M14 扩容匣', 'mag', ['mb14'], .35, 300, { magazine: 25, reload: 1.12, weight: .15 }),

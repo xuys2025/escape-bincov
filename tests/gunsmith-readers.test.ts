@@ -62,14 +62,14 @@ test('the equipped gun\'s instance, weapon and weight: the old three read as fro
         assert.notEqual(w, D.WEAPONS[id], 'the effective stats, worked out fresh, not the table row');
         assert.equal(D.equippedWeight(held), D.ITEMS[id].weight);
     }
-    // No gun is the knife: its row, no weight. Neither the knife nor the retired #39 sample id is a gun, and nor is a
-    // catalog gun that is not an item yet (D.isGun, #28 M2-01).
+    // No gun is the knife: its row, no weight. Neither the knife, the retired #39 sample id nor an old look id is a gun
+    // (D.isGun, #28 M2-01; every catalog gun is an item since M3-05).
     for (const weapon of [null, 'knife']) {
         assert.equal(D.equippedGun(slot(weapon)), null);
         assert.equal(D.equippedWeapon(slot(weapon)), D.WEAPONS.knife);
         assert.equal(D.equippedWeight(slot(weapon)), 0);
     }
-    for (const weapon of ['m4a1', 'mpb5']) assert.equal(D.equippedGun({ ...slot(null), weapon }), null, weapon);
+    for (const weapon of ['m4a1', 'rifle']) assert.equal(D.equippedGun({ ...slot(null), weapon }), null, weapon);
 });
 
 test('the readers take the equipped instance\'s own parts, and refuse a gun slot without its instance', () => {
@@ -228,7 +228,7 @@ test('a gun weighs the same in a container as in the slot: its parts count in th
     const old = (inv: D.Inventory) => Math.round(inv.items.reduce((sum, i) => sum + D.ITEMS[i.id].weight * i.qty, 0) * 1000) / 1000;
     const random = D.seededRandom(707);
     for (let n = 0; n < 200; n++) {
-        const inv = D.createInventory(10, 9);
+        const inv = D.createInventory(D.STASH_W, D.STASH_UPGRADED_ROWS);
         for (const id of Object.keys(D.ITEMS)) if (random() < .4) D.addItem(inv, id, 1 + Math.floor(random() * D.ITEMS[id].stack), random() < .3);
         assert.ok(Object.is(D.weight(inv), old(inv)), `inventory ${n}`);
         for (const i of inv.items) assert.ok(Object.is(D.itemWeight(i), D.ITEMS[i.id].weight * i.qty), i.id);

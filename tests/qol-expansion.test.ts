@@ -21,7 +21,8 @@ test('RPG shop keeps cloth and medicines in atomic carts; classic shop cannot bu
         assert.ok(f.session.persist());
         assert.equal(Shop.createCart(f.state.save, merchant).catalog.items.some(i => i.id === id), false);
         const cart = Shop.createCart(f.state.save, merchant, true), item = cart.catalog.items.find(i => i.id === id)!;
-        assert.ok(item); assert.equal(cart.catalog.items.length, Shop.merchantStock(merchant, true).length);
+        // The first catalog page (the arms counter's gunsmith goods run onto a second since #28 M3).
+        assert.ok(item); assert.equal(cart.catalog.items.length, Shop.catalogPages(Shop.merchantStock(merchant, true))[0].length);
         assert.ok(Shop.moveShopItem(cart, 'merchant', 'buy', item.uid, 0, 0));
         assert.equal(Shop.settleCartResult(structuredClone(f.state.save), cart).ok, false);
         const before = f.bytes, cash = f.state.save.cash, count = D.count(f.state.save.stash, id);

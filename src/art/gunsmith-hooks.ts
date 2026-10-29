@@ -30,7 +30,8 @@ export interface GunsmithArtHooks {
     held(gun: string, sig: string): HeldPicture | null;
     /**
      * The whole gun from the side: its factory held picture without the hands, for the ground and the HUD weapon card,
-     * where Sol's square close-ups do not read (maintainer, 2026-10-27). Null for items without held images.
+     * where Sol's square close-ups do not read (maintainer, 2026-10-27). Null for items without held images, and for the
+     * old guns, whose approved held pictures have the hands painted on.
      */
     side(id: string): HTMLCanvasElement | null;
 }

@@ -137,7 +137,9 @@ test('modifiers stay in the schema and inside the per-attachment guardrails; non
         assert.ok(Number.isFinite(weight) && Math.abs(weight) < 1, a.id);
         if (noise !== undefined) assert.ok(noise >= .4 && noise <= 1.5, `${a.id}: noise ${noise}`);
         if (grow) assert.ok(Number.isInteger(grow.w) && Number.isInteger(grow.h) && grow.w >= 0 && grow.h >= 0 && grow.w + grow.h > 0, a.id);
-        assert.equal(!!grow, /消音器|鼓/.test(a.name), `${a.id}: suppressors lengthen and a drum deepens the gun, nothing else`);
+        // Suppressors lengthen the gun a column; the drum and, since #28 M3-12, the long magazines deepen it a row.
+        assert.equal(!!grow, /消音器|鼓/.test(a.name) || ['G01', 'G02', 'G04', 'G08'].includes(a.id), `${a.id}: suppressors lengthen, a drum or a long magazine deepens the gun, nothing else`);
+        if (grow) assert.deepEqual(grow, /消音器/.test(a.name) ? { w: 1, h: 0 } : { w: 0, h: 1 }, a.id);
         if (view) { assert.equal(a.cat, 'optic'); for (const v of view) assert.ok(v >= 1 && v <= 2, a.id); }
         if (laser) assert.ok(laser.hip >= .6 && laser.hip < 1 && laser.range > 0, a.id);
         if (light) assert.ok(light.radius > 0 && light.arc > 0 && light.arc < Math.PI, a.id);

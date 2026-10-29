@@ -2,7 +2,7 @@
 import { ATTACHMENTS, BRAND_NAMES, GUNS, partTier, type GunId, type PartTier } from './gunsmith/catalog';
 import { checkInstall } from './gunsmith/compat';
 import { effectiveWeapon } from './gunsmith/stats';
-import { buildOf, factoryState, gunSale, gunSize, gunUids, gunWeight, validateGun, type GunInstance, type GunState } from './gunsmith/instance';
+import { buildOf, factoryState, gunSale, gunSize, gunUids, gunWeight, v8Footprints, validateGun, type GunInstance, type GunState } from './gunsmith/instance';
 import { migrateProfile, type ProfileV2 } from './gunsmith/migrate';
 import { validPresets, type GunPreset } from './gunsmith/presets';
 
@@ -75,7 +75,8 @@ const gunItem = (id: GunId, short: string, description: string, color: number): 
  * The 20 sample attachments of #28 M2-02 that are items, with each one's cell label and description (its benefit, then
  * its cost, from ATTACHMENTS.md). Name (the function name; the brand stays in the details), footprint, weight and
  * prices are the catalog's. They are unique items under their own uids, never stacked, and their item id is the
- * catalog id, which a part keeps on a gun (PartNode.id). M3 makes the other 80 items.
+ * catalog id, which a part keeps on a gun (PartNode.id). #28 M3-02 adds the forty wave-one parts (ART-SPEC 8.2), M3-06
+ * the other forty (six of them came early with wave two's P0 art).
  */
 const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, description: string]>> = {
   O01: ['点瞄', '快速举枪，手枪点射较清楚。稳定收益较小。'],
@@ -98,6 +99,88 @@ const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, descrip
   T01: ['激光器', '近距离腰射更集中。开启时增加被正面敌人发现的风险。'],
   T05: ['泛光灯', '较宽的近距可交互物轮廓提示。照亮范围也会暴露自己。'],
   A07: ['顶基座', '开放顶部导轨，并让半自动卡宾枪能装远距瞄具。增重。'],
+  A01: ['微基座', '开放微型瞄具位，能装点瞄。自身不提供射击增益，增重。'],
+  A02: ['微基座', '开放微型瞄具位，能装点瞄。自身不提供射击增益，增重。'],
+  A04: ['顶基座', '开放顶部导轨，能装瞄具。增重，举枪略慢。'],
+  A05: ['顶基座', '开放顶部导轨，能装瞄具。增重。'],
+  A06: ['顶基座', '开放顶部导轨，能装瞄具。增重。'],
+  A08: ['侧基座', '从机匣侧面开放顶部导轨，能装瞄具。增重。'],
+  B03: ['短枪管', '举枪和移动后恢复更快，枪身更轻。有效距离降低。'],
+  B05: ['短枪管', '举枪快，近距弹丸覆盖更宽。中距命中集中度下降。'],
+  B06: ['收束管', '霰弹在中距更集中。重量和举枪时间增加。'],
+  B07: ['紧凑管', '近距操控更好，枪身更轻。有效距离和持续控制下降。'],
+  B09: ['精确管', '旧卡宾的精瞄更稳。增重，转向后恢复较慢。'],
+  H02: ['长护木', '提供 1 个下导轨、2 个侧位，连续射击更稳。更重、举枪慢。'],
+  H03: ['木护木', '轻便、便宜，举枪快。不提供下导轨或侧位。'],
+  H04: ['导轨护木', '提供 1 个下导轨、2 个侧位。增重。'],
+  H06: ['紧凑护木', '轻便，提供 1 个侧位。没有前握把接口。'],
+  H07: ['扩展护木', '提供 1 个下导轨、2 个侧位。比紧凑护木重。'],
+  H08: ['导轨护木', '提供 1 个下导轨、1 个侧位。增重，换弹略慢。'],
+  H09: ['稳固护木', '提供 1 个下导轨、1 个侧位，连续射击更稳。增重，举枪略慢。'],
+  S03: ['紧凑托', '移动和转向后恢复快，减轻重量。精瞄稳定性下降。'],
+  S04: ['实心托', '点射和连续射击更稳。重量增加。'],
+  S05: ['伸缩托', '举枪快、轻。稳定收益小。'],
+  S07: ['缓冲托', '射击后恢复更快。增重。'],
+  S08: ['控制托', '连续射击更容易收束。增重，举枪慢。'],
+  P03: ['防滑握', '射击后恢复较快。略重。'],
+  P04: ['木握把', '轻、便宜。稳定收益小。'],
+  P06: ['控制握', '近距连续射击更稳。增重，举枪略慢。'],
+  P07: ['握片', '手枪连续点射恢复更快。增加少量重量。'],
+  G03: ['快换匣', '容量 25 发，换弹快。持续射击时间缩短。'],
+  G06: ['扩弹仓', '弹仓增加到 8 发。补满更慢、增重。'],
+  G07: ['扩弹仓', '弹仓增加到 9 发。补满更慢、增重。'],
+  G08: ['扩容匣', '容量提高到 45 发。换弹变慢、增重。'],
+  G09: ['弹鼓', '容量提高到 60 发。很重，举枪和换弹都慢；装上后枪多占一行格子。'],
+  M01: ['消焰器', '枪声吸引范围略减，后坐略减。收益很小。'],
+  M02: ['补偿器', '减少连续射击的散布增长和后坐。枪声传播更明显。'],
+  M05: ['消焰器', '枪声吸引范围略减，连续射击略稳。稳定收益小。'],
+  M07: ['消音器', '大幅降低枪声吸引范围。枪身变长、增重、举枪慢。'],
+  M10: ['收束器', '霰弹弹丸散布更小。近距覆盖面积变小。'],
+  M11: ['收束组', '双管霰弹的弹丸更集中。牺牲近距离容错。'],
+  T04: ['小激光', '手枪近距离腰射更集中。开启时增加被正面敌人发现的风险。'],
+  T08: ['组合器', '手枪激光加小范围照明。比单一激光器重，开启时同样会暴露自己。'],
+  // #28 M3-07 wave two, P0 (the maintainer took it in ahead of the rest, 2026-10-28): the AUG's six parts.
+  O05: ['全息', '移动后准星恢复更快，精瞄更稳。举枪稍慢。'],
+  O10: ['双档镜', '兼顾近距与远距，精瞄稳定。比单档远距镜重、贵，举枪慢。'],
+  F04: ['挡手', '轻，举枪快。控制收益小。'],
+  F07: ['重握把', '持续射击控制最强。很重，举枪慢。'],
+  T02: ['轻激光', '近距离腰射更集中，很轻。作用距离较短；开启时增加被正面敌人发现的风险。'],
+  T10: ['远组合', '远距激光加窄光束照明。最重，举枪较慢；开启时同样会暴露自己。'],
+  // #28 M3-06: the rest of wave two.
+  O02: ['稳点瞄', '手枪精瞄更稳。比微型点瞄重，举枪稍慢。'],
+  O04: ['封红点', '精瞄稳定，连续点射后恢复更快。较重。'],
+  O06: ['中棱镜', '中距离观察，精瞄适度稳定。观察距离不如远距镜。'],
+  O07: ['中远镜', '中远距精瞄更稳。举枪较慢，近距转换慢于中距棱镜。'],
+  O09: ['稳远镜', '最远的观察，首发最稳。很重，近距操控最差。'],
+  O11: ['远双档', '两档远距观察，精瞄稳定。更重，举枪慢。'],
+  O12: ['机瞄', '轻、举枪快，保留基础瞄准。没有额外观察距离。'],
+  M04: ['重消音', '降低枪声吸引范围。较重、枪身变长；装在 M1911 上要先装重型手枪接口组。'],
+  M08: ['精消音', '远距射击的枪声吸引范围大幅降低。明显增重，枪身变长。'],
+  M09: ['精制退', '两次射击之间恢复更快，后坐更小。枪声吸引范围增加。'],
+  M12: ['轻消音', '降低枪声吸引范围。价格高，枪身变长。'],
+  B02: ['接口组', '提供重弹消音器接口，首发更稳。重量增加。'],
+  B04: ['稳枪管', '中距点射更稳。重量和举枪时间增加。'],
+  B10: ['轻枪管', '减轻重量，举枪更快。极远距稳定性下降。'],
+  H10: ['支援护木', '提供 1 个下导轨、2 个侧位，持续射击更稳。明显增重。'],
+  S06: ['轻型托', '减轻重量，举枪更快。连续控制收益小。'],
+  S09: ['支撑托', '站定精瞄更稳。移动后恢复更慢。'],
+  S10: ['轻便托', '减轻重量，较快进入精瞄。稳定收益小。'],
+  P05: ['操控握', '移动结束后更快稳定。价格较高。'],
+  P08: ['轻握片', '减轻重量，举枪更快。不增加弹量或威力。'],
+  F02: ['长前握', '连续射击控制更强。举枪慢。'],
+  F05: ['紧前握', '控制和重量折中。价格高于短前握。'],
+  F06: ['腰射握', '腰射散布更小。精瞄收益小。'],
+  F08: ['脚架', '站定后远距首发更准、恢复更快。一走动就失去收益，增重。'],
+  G02: ['加长匣', '容量提高到 10 发。换弹变慢。'],
+  G04: ['扩容匣', '容量提高到 35 发。重量和换弹时间增加。'],
+  G05: ['轻便匣', '容量 30 发，更轻、换弹更快。原厂大容量的优势没了。'],
+  G11: ['扩容匣', '容量提高到 25 发。重量和换弹时间增加。'],
+  G12: ['轻匣', '容量 30 发，更轻、换弹更快。长时间压制能力下降。'],
+  T03: ['指示器', '较远距离的腰射更集中。较重，举枪稍慢；开启时增加被正面敌人发现的风险。'],
+  T06: ['窄光灯', '较远、较窄的物资轮廓提示。近处覆盖窄，增重；照亮范围也会暴露自己。'],
+  T07: ['工作灯', '轻、便宜的近距物资提示。提示距离和宽度较小；照亮范围也会暴露自己。'],
+  T09: ['组合器', '激光加中等照明。增重；开启时同样会暴露自己。'],
+  A03: ['微基座', '开放微型瞄具位，能装点瞄。自身不提供射击增益，增重。'],
 };
 const attachmentItem = (id: string, [short, description]: readonly [string, string]): ItemDef => {
   const a = ATTACHMENTS[id];
@@ -112,6 +195,10 @@ export const ITEMS: Record<string, ItemDef> = {
   ammo9: item('ammo9', '9 毫米弹', '9mm', 1, 1, 0.012, 40, 7, 3, 'ammo', '旧式手枪用弹药。商店按包出售，背包数量按发计算。', 0xcba96c),
   shell: item('shell', '霰弹', '霰弹', 1, 1, 0.045, 20, 16, 7, 'ammo', '双管霰弹枪用弹药。', 0xc76650),
   ammoR: item('ammoR', '卡宾枪弹', '卡宾弹', 1, 1, 0.022, 30, 12, 5, 'ammo', '半自动卡宾枪用弹药。', 0xcbbd88),
+  // #28 M3-05: the three ammunition groups of wave two (PLAN section 4). Packs, prices and weights are proposals.
+  ammo45: item('ammo45', '重型手枪弹', '重手弹', 1, 1, 0.016, 30, 9, 4, 'ammo', 'M1911、UMP45 用弹药。商店按包出售，背包数量按发计算。', 0xc49a62),
+  ammoPDW: item('ammoPDW', '轻型高速弹', '高速弹', 1, 1, 0.009, 50, 10, 4, 'ammo', 'P90 用弹药。商店按包出售，背包数量按发计算。', 0xb9c48a),
+  ammoHeavy: item('ammoHeavy', '精确步枪弹', '精确弹', 1, 1, 0.03, 20, 24, 10, 'ammo', 'SVD、M14、M700 用弹药。商店按包出售，背包数量按发计算。', 0xd0b070),
   bandage: item('bandage', '密封绷带', '绷带', 1, 1, 0.12, 4, 45, 18, 'medical', '止血，恢复 16 点生命。', 0xdad9bd),
   medkit: item('medkit', '急救包', '急救包', 2, 1, 0.65, 2, 160, 65, 'medical', '恢复 55 点生命并止血。', 0xc96959),
   antidote: item('antidote', '除藻药剂', '除藻剂', 1, 1, 0.2, 3, 120, 50, 'medical', '降低 55 点污染。', 0x8bb4a0),
@@ -137,6 +224,25 @@ export const ITEMS: Record<string, ItemDef> = {
   ledger: item('ledger', '港口船册', '船册', 2, 1, 0.45, 1, 0, 130, 'quest', '旧渔港的值班船册，用于任务「未归的第七艘船」。', 0xd2c396),
   gb17: gunItem('gb17', 'G17', '使用 9 毫米弹，弹匣容量 17 发。轻便的通用手枪，能装微型瞄具、枪口件和手枪侧挂设备。', 0x8a9390),
   mb4a1: gunItem('mb4a1', 'M4A1', '使用卡宾枪弹，弹匣容量 30 发，全自动。模块化步枪，护木、枪托、握把和弹匣都能更换。', 0x7c8775),
+  // #28 M3-01: the wave-one guns, on the three existing ammunition groups.
+  pb226: gunItem('pb226', 'P226', '使用 9 毫米弹，弹匣容量 15 发。稳重的手枪，装上基座能用微型瞄具，也能换枪管、握片、枪口件和手枪侧挂设备。', 0x8b8e86),
+  mpb5: gunItem('mpb5', 'MP5', '使用 9 毫米弹，弹匣容量 30 发，全自动。近战冲锋枪，枪管、护木、枪托和弹匣都能更换，装上基座能用顶部瞄具。', 0x7f8a86),
+  vb9: gunItem('vb9', 'Vector', '使用 9 毫米弹，弹匣容量 25 发，全自动，射速很高。机身自带顶部、下方和侧面导轨。', 0x6f7672),
+  mb870: gunItem('mb870', 'M870', '使用霰弹，管状弹仓 6 发，泵动。枪管、护木、枪托、握把和弹仓都能更换，装上基座能用顶部瞄具。', 0xa0784f),
+  mb1014: gunItem('mb1014', 'M1014', '使用霰弹，管状弹仓 7 发，半自动。自带顶部导轨，枪管、护木、枪托、握把和弹仓都能更换。', 0x7a807a),
+  akb74: gunItem('akb74', 'AK-74', '使用卡宾枪弹，弹匣容量 30 发，全自动。后坐平稳；护木、枪托、握把、枪管和弹匣都能更换，侧置基座能装顶部瞄具。', 0x9a7650),
+  akb103: gunItem('akb103', 'AK-103', '使用卡宾枪弹，弹匣容量 30 发，全自动。单发伤害更高、后坐更重；配件和 AK-74 通用，另能装重弹鼓。', 0x6d726c),
+  // #28 M3-05, early: wave two's P0 gun (2026-10-28), on an existing ammunition group.
+  augb: gunItem('augb', 'AUG', '使用卡宾枪弹，弹匣容量 30 发，全自动。无托结构，枪身短、占 3 格，转向快；换弹慢。机身自带顶部、下方和侧面导轨，枪口件和弹匣能换。', 0x76805e),
+  // #28 M3-05: the rest of wave two. The M1911, UMP45 and P90 bring the heavy pistol and light high-speed rounds, the
+  // SVD, M14 and M700 the precision rifle rounds; the RPK fires the carbine rounds and shares the AKs' parts.
+  mb1911: gunItem('mb1911', 'M1911', '使用重型手枪弹，弹匣容量 7 发。单发威力大、后坐重，弹量少；装上基座能用微型瞄具，也能换枪管、握片、弹匣、枪口件和手枪侧挂设备。', 0x8e8a80),
+  umpb45: gunItem('umpb45', 'UMP45', '使用重型手枪弹，弹匣容量 25 发，全自动。射速较慢、单发较重；枪管、枪托、握把和弹匣都能更换，机身自带顶部、下方和侧面导轨。', 0x6c716c),
+  pb90: gunItem('pb90', 'P90', '使用轻型高速弹，弹匣容量 50 发，全自动。紧凑、弹量大，单发伤害低，弹药少见；机身自带顶部和侧面导轨，能换枪口件和弹匣。', 0x75796a),
+  svdb: gunItem('svdb', 'SVD', '使用精确步枪弹，弹匣容量 10 发，半自动。远距首发准、伤害高，腰射差、举枪慢；能装顶部瞄具（含远距镜）、枪口件和支撑脚架。', 0x8a6a4a),
+  mb14: gunItem('mb14', 'M14', '使用精确步枪弹，弹匣容量 20 发，半自动。中远距点射，后坐重、枪身重；枪托和弹匣能换，能装顶部瞄具（含远距镜）、枪口件和支撑脚架。', 0x94704c),
+  mb700: gunItem('mb700', 'M700', '使用精确步枪弹，内置弹仓 5 发，栓动。单发伤害和精度最高，每发之间要拉栓；枪管、枪托能换，能装顶部瞄具（含远距镜）、枪口件和支撑脚架。', 0x7a6a56),
+  rpkb: gunItem('rpkb', 'RPK', '使用卡宾枪弹，弹匣容量 40 发，全自动。能持续压制，很重、换弹慢；护木、枪托、握把和弹匣都能更换，和 AK 共用侧置基座和枪口件，能装支撑脚架。', 0x8f7352),
   ...Object.fromEntries(Object.entries(ATTACHMENT_ITEMS).map(([id, text]) => [id, attachmentItem(id, text)])),
 };
 
@@ -149,6 +255,21 @@ export const WEAPONS: Record<string, WeaponDef> = {
   // #28 M2-01: the gunsmith catalog's factory rows. The old three above stay literal; the catalog test keeps them equal.
   gb17: { ...GUNS.gb17.stats },
   mb4a1: { ...GUNS.mb4a1.stats },
+  pb226: { ...GUNS.pb226.stats },
+  mpb5: { ...GUNS.mpb5.stats },
+  vb9: { ...GUNS.vb9.stats },
+  mb870: { ...GUNS.mb870.stats },
+  mb1014: { ...GUNS.mb1014.stats },
+  akb74: { ...GUNS.akb74.stats },
+  akb103: { ...GUNS.akb103.stats },
+  augb: { ...GUNS.augb.stats },
+  mb1911: { ...GUNS.mb1911.stats },
+  umpb45: { ...GUNS.umpb45.stats },
+  pb90: { ...GUNS.pb90.stats },
+  svdb: { ...GUNS.svdb.stats },
+  mb14: { ...GUNS.mb14.stats },
+  mb700: { ...GUNS.mb700.stats },
+  rpkb: { ...GUNS.rpkb.stats },
 };
 export const ENEMIES: Record<string, EnemyDef> = {
   scav: { id: 'scav', name: '拾荒者', hp: 56, speed: 69, damage: 11, range: 30, vision: 220, cooldown: 0.9, color: 0xab9370 },
@@ -174,6 +295,13 @@ const partsOf = (tier: PartTier): string[] => Object.keys(ATTACHMENT_ITEMS).filt
  */
 const SHELF_COMMON = ['O01', 'G01'];
 /**
+ * Wave-one guns the arms counter stocks as well (maintainer 2026-10-28, #28 M3): the P226 and the M870. The other
+ * gunsmith guns are found only; what the shop sells is to be studied (M4-01).
+ */
+const SHELF_GUNS = ['pb226', 'mb870'];
+/** Wave two's rounds (#28 M3-05): stocked steadily like the old three, so a found gun of a new group can be fed. */
+const NEW_AMMO = ['ammo45', 'ammoPDW', 'ammoHeavy'];
+/**
  * Fixed stock, no rotation (that is #28 M4-01). The arms counter also stocks the G17, every basic-tier attachment that
  * is an item (#28 M2-13, PLAN section 10: basic parts are stocked steadily) and SHELF_COMMON, after the old goods so their places
  * in the catalog do not move. The catalog is one 6x5 page: every stocked pack must fit it, which
@@ -181,7 +309,7 @@ const SHELF_COMMON = ['O01', 'G01'];
  */
 export const MERCHANTS: Record<'arms' | 'med', { name: string; subtitle: string; stock: string[] }> = {
   arms: { name: '老栓', subtitle: '武器 · 零件', stock: ['pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'scrap', 'wire', 'fuse', 'battery',
-    'gb17', ...partsOf('basic'), ...SHELF_COMMON] },
+    'gb17', ...SHELF_GUNS, ...NEW_AMMO, ...partsOf('basic'), ...SHELF_COMMON] },
   med: { name: '许医生', subtitle: '医疗用品 · 食品', stock: ['bandage', 'medkit', 'antidote', 'water', 'food'] },
 };
 export const QUESTS: Record<string, { name: string; description: string; needs: Record<string, number>; reward: number; radio: string }> = {
@@ -191,6 +319,37 @@ export const QUESTS: Record<string, { name: string; description: string; needs: 
 };
 export const SAVE_KEY = 'escape-bincov.save.v1';
 export const STASH_UPGRADE_COST = 600;
+/**
+ * The stash is 10 wide: 8 rows, 12 once built out (#28 M3-12, maintainer 2026-10-29: guns grow a row with a box
+ * magazine; 6 and 9 rows before, which a record v8 still has).
+ */
+export const STASH_W = 10, STASH_ROWS = 8, STASH_UPGRADED_ROWS = 12;
+export const stashRows = (upgraded: boolean): number => v8Footprints() ? upgraded ? 9 : 6 : upgraded ? STASH_UPGRADED_ROWS : STASH_ROWS;
+/**
+ * The stash overflow (#28 M3-12, maintainer 2026-10-29, as in Tarkov): what an old save holds beyond room by the new
+ * footprints lies in rows below the stash, wholly below `h`, at most this many. Nothing places there (fits keeps to the
+ * grid), so items only leave it; while one is left the player cannot deploy. It goes away with its last item. 18 rows
+ * keep a built-out stash and its overflow within an inventory's 30 (createInventory); a stash of nothing but long guns
+ * with drums needs about 15.
+ */
+export const STASH_OVERFLOW_ROWS = 18;
+/** The overflow rows a stored stash may hold: only in the gun format under the current footprints, never by the v8 rules. */
+export const stashOverflowRows = (guns: boolean): number => guns && !v8Footprints() ? STASH_OVERFLOW_ROWS : 0;
+/** Why a raid cannot start while the overflow holds something. */
+export const OVERFLOW_BLOCKS_DEPLOY = '仓库溢出区还有物品，先把它们移进仓库、背包或卖掉，再出击。';
+/** The stash items in its overflow, in order. */
+export const stashOverflow = (stash: Inventory): Item[] => stash.items.filter(item => item.y >= stash.h);
+/** Rows the stash shows: its own and the overflow's down to its lowest item. */
+export const stashShownRows = (stash: Inventory): number => Math.max(stash.h, ...stashOverflow(stash).map(item => item.y + itemSize(item).h));
+/** In place: `items` into the stash's overflow, each at the first free place below its rows (turned when needed); false when they do not all fit. */
+export function placeBelow(stash: Inventory, items: readonly Item[]): boolean {
+  const below = createInventory(stash.w, STASH_OVERFLOW_ROWS);
+  below.items = stashOverflow(stash).map(item => ({ ...item, y: item.y - stash.h }));
+  const before = below.items.length;
+  if (!items.every(item => placeItem(below, item))) return false;
+  stash.items.push(...below.items.slice(before).map(item => ({ ...item, y: item.y + stash.h })));
+  return true;
+}
 let serial = 0;
 const uid = () => `bc-${Date.now().toString(36)}-${(++serial).toString(36)}`;
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value));
@@ -292,7 +451,8 @@ export function createInventory(w: number, h: number): Inventory {
 }
 /** Cells an item takes. A gun with parts may be larger than its type (gunSize); a factory gun is exactly its ITEMS size. */
 export function itemSize(item: Pick<Item, 'id' | 'rotated' | 'gun'>) {
-  if (item.gun && isGun(item.id)) return gunSize({ id: item.id, parts: item.gun.parts }, !!item.rotated);
+  // Every gun through gunSize, a factory one with no state too, so its footprint rules (M3-12) hold for all of them.
+  if (isGun(item.id)) return gunSize({ id: item.id, parts: item.gun?.parts ?? [] }, !!item.rotated);
   const d = ITEMS[item.id];
   return item.rotated ? { w: d.h, h: d.w } : { w: d.w, h: d.h };
 }
@@ -349,6 +509,17 @@ export function placeItem(inv: Inventory, item: Item, autoRotate = true): boolea
   if (pos.rotated) placed.rotated = true; else delete placed.rotated;
   inv.items.push(placed);
   return true;
+}
+/**
+ * The items of `inv` laid out again under the current footprints (#28 M3-12, a record v8 migrated): each that still
+ * fits where it lies stays, in order; the others go to the first free place (turned when `rotation` allows); what finds
+ * none is returned, the inventory edited in place without it. Deterministic: the same inventory always comes out the same.
+ */
+export function relayoutInventory(inv: Inventory, rotation = true): Item[] {
+  const items = inv.items, moved: Item[] = [];
+  inv.items = [];
+  for (const item of items) if (fits(inv, item, item.x, item.y, undefined, !!item.rotated)) inv.items.push(item); else moved.push(item);
+  return moved.filter(item => !placeItem(inv, item, rotation));
 }
 /** Ground uids a classic or v1 raid deals out from a counter (loot-3, entity-12): a later raid deals the same ones again. */
 const RAID_LOCAL = /^(?:enemy|loot|entity|pursuit)-[0-9]+$/;
@@ -420,7 +591,7 @@ export function removeItem(inv: Inventory, id: string, qty: number): boolean {
 }
 export function newSave(): SaveDataV1 {
   const save: SaveDataV1 = {
-    version: 3, cash: 700, stash: createInventory(10, 6), bag: createInventory(6, 5), safe: createInventory(2, 2),
+    version: 3, cash: 700, stash: createInventory(STASH_W, STASH_ROWS), bag: createInventory(6, 5), safe: createInventory(2, 2),
     equipment: { weapon: 'pistol', weaponUid: uid(), gun: factoryState(), relief: false, ammo: 0, ammoRelief: 0 }, quests: { repair: false, sample: false, ledger: false },
     upgraded: false, settings: { volume: 0.35 }, stats: { runs: 0, extracts: 0, kills: 0 }, activeRun: null,
   };
@@ -456,9 +627,12 @@ function keptGun(id: string, gunUid: string, stored: unknown, used: Set<string>)
  * Lenient inventory repair (legacy key, migrateSave): unknown items dropped, overlaps placed anew, bad or repeated uids
  * reissued. `guns`: the format carries gun states (profile v3); a gun keeps its state (keptGun) and, when it has to be
  * placed anew, its uid. Without it no item gets a `gun` field: migrateProfile adds the factory states afterwards.
+ * `overflow`: the stash's (stashOverflowRows); an item wholly in it keeps its place there, a repair places in the grid.
  */
-function cleanInventory(raw: unknown, w: number, h: number, used = new Set<string>(), allowRotation = true, guns = true): Inventory {
-  const inv = createInventory(w, h);
+function cleanInventory(raw: unknown, w: number, h: number, used = new Set<string>(), allowRotation = true, guns = true, overflow = 0): Inventory {
+  const inv = createInventory(w, h), below = { ...inv, h: h + overflow };
+  const stays = (what: Footprint, x: number, y: number, rotated: boolean) =>
+    fits(inv, what, x, y, undefined, rotated) || overflow > 0 && y >= h && fits(below, what, x, y, undefined, rotated);
   const entries = isObject(raw) && Array.isArray(raw.items) ? raw.items : Array.isArray(raw) ? raw : [];
   for (const entry of entries.slice(0, 900)) {
     if (!isObject(entry) || typeof entry.id !== 'string' || !Object.hasOwn(ITEMS, entry.id)) continue;
@@ -468,10 +642,10 @@ function cleanInventory(raw: unknown, w: number, h: number, used = new Set<strin
     if (guns && isGun(entry.id)) {
       // The gun keeps its uid and state wherever it lands; only extra copies of a forged quantity are new factory guns.
       const itemUid = claim(used, entry.uid), gun: Item = { uid: itemUid, id: entry.id, qty: 1, x: entry.x, y: entry.y, ...kept, gun: keptGun(entry.id, itemUid, entry.gun, used) };
-      if (fits(inv, gun, entry.x, entry.y, undefined, !!gun.rotated)) inv.items.push(gun);
+      if (stays(gun, entry.x, entry.y, !!gun.rotated)) inv.items.push(gun);
       else if (!placeItem(inv, gun, false)) continue;
       if (!--qty) continue;
-    } else if (qty <= ITEMS[entry.id].stack && fits(inv, entry.id, entry.x, entry.y, undefined, allowRotation && entry.rotated === true)) {
+    } else if (qty <= ITEMS[entry.id].stack && stays(entry.id, entry.x, entry.y, allowRotation && entry.rotated === true)) {
       inv.items.push({ uid: claim(used, entry.uid), id: entry.id, qty, x: entry.x, y: entry.y, ...kept });
       continue;
     }
@@ -499,7 +673,7 @@ function cleanSave(raw: Record<string, any>, guns: boolean): SaveDataV1 | Profil
   const stats = isObject(raw.stats) ? raw.stats : {};
   const settings = isObject(raw.settings) ? raw.settings : {};
   const used = new Set<string>();
-  const stash = cleanInventory(raw.stash ?? raw.inventory, 10, upgraded ? 9 : 6, used, rotation, guns);
+  const stash = cleanInventory(raw.stash ?? raw.inventory, STASH_W, stashRows(upgraded), used, rotation, guns, stashOverflowRows(guns));
   const bag = cleanInventory(raw.bag, 6, 5, used, rotation, guns), safe = cleanInventory(raw.safe, 2, 2, used, rotation, guns);
   const weapon = isGun(equipped.weapon) ? equipped.weapon : null, relief = equipped.relief === true;
   // A v3 slot keeps its stored gun (keptSlot) and its magazine is clamped to that instance. An old slot held a factory
@@ -519,7 +693,8 @@ function cleanSave(raw: Record<string, any>, guns: boolean): SaveDataV1 | Profil
   if (guns && validPresets(raw.gunPresets) && raw.gunPresets.length) (save as SaveDataV1).gunPresets = structuredClone(raw.gunPresets);
   if (Array.isArray(raw.reliefSupplies)) {
     const pending = raw.reliefSupplies.filter(isObject);
-    const supplies = ['ammo9', 'bandage'].map(id => ({ id, qty: Math.min(id === 'ammo9' ? 12 : 1, pending.reduce((sum, entry) => sum + (entry.id === id ? integer(entry.qty) : 0), 0)) })).filter(entry => entry.qty > 0);
+    // A relief pack of any ammunition group (#28 M3-05; 12 for 9mm as before) and one bandage, in that order.
+    const supplies = [...AMMO_IDS, 'bandage'].map(id => ({ id, qty: Math.min(id === 'bandage' ? 1 : buyQuantity(id), pending.reduce((sum, entry) => sum + (entry.id === id ? integer(entry.qty) : 0), 0)) })).filter(entry => entry.qty > 0);
     if (supplies.length) save.reliefSupplies = supplies;
   }
   if (isObject(raw.lastResult) && ['extract', 'death', 'timeout'].includes(raw.lastResult.outcome)) {
@@ -618,11 +793,11 @@ const ownedGuns = (save: SaveDataV1): { id: string; relief: boolean }[] => [
   ...(isGun(save.equipment.weapon) ? [{ id: save.equipment.weapon, relief: save.equipment.relief }] : []),
   ...[save.stash, save.bag, save.safe].flatMap(inv => inv.items.filter(i => isGun(i.id)).map(i => ({ id: i.id, relief: !!i.relief }))),
 ];
-/** 9mm rounds anywhere: stored (relief or not), loaded in an equipped 9mm gun, or waiting as relief. */
-const ammo9Anywhere = (save: SaveDataV1): number =>
-  [save.stash, save.bag, save.safe].reduce((sum, inv) => sum + count(inv, 'ammo9'), 0)
-  + (isGun(save.equipment.weapon) && WEAPONS[save.equipment.weapon].ammo === 'ammo9' ? save.equipment.ammo : 0)
-  + (save.reliefSupplies ?? []).reduce((sum, supply) => sum + (supply.id === 'ammo9' ? supply.qty : 0), 0);
+/** Rounds of `ammo` anywhere: stored (relief or not), loaded in the equipped gun if it fires them, or waiting as relief. */
+const roundsAnywhere = (save: SaveDataV1, ammo: string): number =>
+  [save.stash, save.bag, save.safe].reduce((sum, inv) => sum + count(inv, ammo), 0)
+  + (isGun(save.equipment.weapon) && WEAPONS[save.equipment.weapon].ammo === ammo ? save.equipment.ammo : 0)
+  + (save.reliefSupplies ?? []).reduce((sum, supply) => sum + (supply.id === ammo ? supply.qty : 0), 0);
 export function grantRelief(save: SaveDataV1): boolean {
   if (save.activeRun) return false;
   let changed = false;
@@ -634,13 +809,14 @@ export function grantRelief(save: SaveDataV1): boolean {
     if (!save.reliefSupplies?.length) save.reliefSupplies = [{ id: 'ammo9', qty: 12 }, { id: 'bandage', qty: 1 }];
     changed = true;
   }
-  // Rule B: only relief guns (rule A may have just issued one), no 9mm anywhere and not enough
-  // to buy one pack. Queue the 12 relief rounds a fresh kit carries. Nothing for ammo9 is pending
-  // here, so the merged entry is exactly 12, the migrateSave cap; delivery below is unchanged.
+  // Rule B, by ammunition group (#28 M3-05): only relief guns (rule A may have just issued one), and for a group they
+  // fire no round anywhere and not enough to buy one pack of it. Queue one pack of that group (12 for 9mm, what a fresh
+  // kit carries). Nothing for the group is pending here, so the entry is exactly the migrateSave cap; delivery below
+  // is unchanged. Relief guns are pistols today, so this is the 9mm rule; the groups are read from the guns.
   const guns = ownedGuns(save);
-  if (guns.length && guns.every(gun => gun.relief) && guns.some(gun => WEAPONS[gun.id].ammo === 'ammo9')
-    && !ammo9Anywhere(save) && liquidValue(save) < buyQuantity('ammo9') * ITEMS.ammo9.buy) {
-    save.reliefSupplies = [{ id: 'ammo9', qty: 12 }, ...(save.reliefSupplies ?? []).filter(supply => supply.id !== 'ammo9')];
+  if (guns.length && guns.every(gun => gun.relief)) for (const ammo of new Set(guns.map(gun => WEAPONS[gun.id].ammo!))) {
+    if (roundsAnywhere(save, ammo) || liquidValue(save) >= buyQuantity(ammo) * ITEMS[ammo].buy) continue;
+    save.reliefSupplies = [{ id: ammo, qty: buyQuantity(ammo) }, ...(save.reliefSupplies ?? []).filter(supply => supply.id !== ammo)];
     changed = true;
   }
   for (const supply of save.reliefSupplies ?? []) {
@@ -654,7 +830,11 @@ export function grantRelief(save: SaveDataV1): boolean {
   return changed;
 }
 /** Purchases enter the stash. Ammo is bought in packs; prices are still per round. */
-export function buyQuantity(id: string): number { return id === 'ammo9' ? 12 : id === 'shell' ? 4 : id === 'ammoR' ? 10 : 1; }
+export function buyQuantity(id: string): number { return Object.hasOwn(AMMO_PACKS, id) ? AMMO_PACKS[id] : 1; }
+/** Rounds per pack, by ammunition group (wave two's are #28 M3-05 proposals). */
+const AMMO_PACKS: Readonly<Record<string, number>> = { ammo9: 12, shell: 4, ammoR: 10, ammo45: 10, ammoPDW: 20, ammoHeavy: 5 };
+/** The ammunition items, in item order. */
+export const AMMO_IDS: readonly string[] = Object.keys(ITEMS).filter(id => ITEMS[id].kind === 'ammo');
 /**
  * The equipped gun as the item it becomes when it leaves the slot: the same uid, state and body relief flag, so it
  * comes back as the gun it is. Null without a gun.
@@ -742,9 +922,16 @@ export function submitQuest(save: SaveDataV1, id: string): boolean {
 }
 export function upgradeStash(save: SaveDataV1): boolean {
   if (save.activeRun || save.upgraded || !save.quests.repair || save.cash < STASH_UPGRADE_COST) return false;
+  // The overflow (M3-12) comes up into the new rows: where it lies if it fits there, else the first free place; the rest
+  // stays below the new last row.
+  const stash = clone(save.stash), below = stashOverflow(stash);
+  stash.items = stash.items.filter(item => !below.includes(item));
+  stash.h = STASH_UPGRADED_ROWS;
+  const left = below.filter(item => fits(stash, item, item.x, item.y, undefined, !!item.rotated) ? (stash.items.push(item), false) : !placeItem(stash, item));
+  if (!placeBelow(stash, left)) return false;
   save.cash -= STASH_UPGRADE_COST;
   save.upgraded = true;
-  save.stash.h = 9;
+  save.stash = stash;
   return true;
 }
 /**
@@ -790,27 +977,40 @@ export function rollLoot(seed: number, amount: number, table: LootTable = LOOT_T
   });
 }
 /**
- * Gunsmith finds (#28 M2-13; the acquisition section of docs/gunsmith/CONTRACTS.md). The M4A1 and the common and rare
- * attachments that are items come only out of the gun and valuable shares of the loot: each gun or valuable record or
- * drop is a find with chance `share`, so quest, food, medicine and ammunition supply stays exactly what it was. A find
- * from a gun record of a map's loot is the M4A1 with chance `rifle` (never on a corpse: an enemy's sidearm does not turn
- * into a rifle); any other find is an attachment, rare with chance `rare` at a high-risk source (a flooded cache, an
- * elite's corpse), common otherwise. Basic parts are the shop's (MERCHANTS). Proposals, tuned in M4-02.
+ * Gunsmith finds (#28 M2-13 and M3; the acquisition section of docs/gunsmith/CONTRACTS.md). The gunsmith guns the shop
+ * does not stock, and the common and rare attachments that are items, come only out of the gun and valuable shares of the
+ * loot: each gun or valuable record or drop is a find with chance `share`, so quest, food, medicine and ammunition supply
+ * stays exactly what it was. A find from a gun record of a map's loot is a gun with chance `gun` (never on a corpse: an
+ * enemy's sidearm does not turn into another gun), a rare one with chance `rareGun` wherever it lies (a flooded cache
+ * holds too few gun records to carry them). Any other find is an attachment, rare with chance `rare` at a high-risk
+ * source (a flooded cache, an elite's corpse), common otherwise. Basic parts are the shop's (MERCHANTS). Proposals,
+ * tuned in M4-02; #28 M3 lowered `rare` from 1/3 so that each of the five rare parts stays rarer than each of the 39
+ * common ones. #28 M3-05: a gun record's find that is not a gun is, with chance `ammo`, one pack of a wave-two
+ * ammunition group (findQuantity), so a found gun of a new group can be fed in the raid; the old groups' supply stays.
  */
-export const GUNSMITH_FINDS = { share: 1 / 6, rifle: 1 / 4, rare: 1 / 3 } as const;
+export const GUNSMITH_FINDS = { share: 1 / 6, gun: 1 / 4, rareGun: 1 / 8, rare: 1 / 6, ammo: 1 / 3 } as const;
 const FIND_PARTS = { common: partsOf('common').filter(id => !SHELF_COMMON.includes(id)), rare: partsOf('rare') };
+/** The guns that are found, by the catalog's tier (#28 M3): every gun that is an item but those the arms counter stocks. */
+const FIND_GUNS = (() => {
+  const found = Object.keys(WEAPONS).filter((id): id is GunId => isGun(id) && !MERCHANTS.arms.stock.includes(id));
+  return { common: found.filter(id => GUNS[id].tier !== 'rare'), rare: found.filter(id => GUNS[id].tier === 'rare') };
+})();
 /**
  * What the record or drop `id` becomes, or null when it stays as it is. Draws from `random` only for a gun or a
- * valuable, so a caller's own stream decides finds and nothing else. `risky`: a high-risk source; `rifle`: the find
- * may be the M4A1.
+ * valuable, so a caller's own stream decides finds and nothing else. `risky`: a high-risk source; `gun`: the find may
+ * be a gun.
  */
-export function gunsmithFind(id: string, random: () => number, source: { risky: boolean; rifle: boolean }): string | null {
+export function gunsmithFind(id: string, random: () => number, source: { risky: boolean; gun: boolean }): string | null {
   const carved = isGun(id) || Object.hasOwn(ITEMS, id) && ITEMS[id].kind === 'valuable';
   if (!carved || random() >= GUNSMITH_FINDS.share) return null;
-  if (source.rifle && isGun(id) && random() < GUNSMITH_FINDS.rifle) return 'mb4a1';
-  const pool = FIND_PARTS[source.risky && random() < GUNSMITH_FINDS.rare ? 'rare' : 'common'];
+  const gunRecord = source.gun && isGun(id);
+  const pool = gunRecord && random() < GUNSMITH_FINDS.gun ? FIND_GUNS[random() < GUNSMITH_FINDS.rareGun ? 'rare' : 'common']
+    : gunRecord && random() < GUNSMITH_FINDS.ammo ? NEW_AMMO
+      : FIND_PARTS[source.risky && random() < GUNSMITH_FINDS.rare ? 'rare' : 'common'];
   return pool[Math.floor(random() * pool.length)];
 }
+/** How many of a find a record or drop holds: one pack of rounds, else one item. */
+export const findQuantity = (id: string): number => ITEMS[id].kind === 'ammo' ? buyQuantity(id) : 1;
 /**
  * A legacy enemy's corpse in a layered raid: the old roll (rollLoot: same seed, table and count), then each gun or
  * valuable drop judged for a gunsmith find on a stream of its own, an elite's corpse being a high-risk source. Enemies
@@ -819,8 +1019,8 @@ export function gunsmithFind(id: string, random: () => number, source: { risky: 
 export function corpseLoot(seed: number, rolls: number, elite: boolean): { id: string; qty: number }[] {
   const drops = rollLoot(seed, rolls), random = seededRandom(seed + 61211);
   for (const drop of drops) {
-    const found = gunsmithFind(drop.id, random, { risky: elite, rifle: false });
-    if (found) { drop.id = found; drop.qty = 1; }
+    const found = gunsmithFind(drop.id, random, { risky: elite, gun: false });
+    if (found) { drop.id = found; drop.qty = findQuantity(found); }
   }
   return drops;
 }

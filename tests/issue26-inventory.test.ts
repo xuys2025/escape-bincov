@@ -123,7 +123,7 @@ for (const action of ['stashAll', 'sortStash'] as const) test(`${action} rolls b
     assert.deepEqual(station(f.raw).state.save, committed); assert.deepEqual(f.state.save.safe, before.safe); assert.deepEqual(f.state.save.equipment, before.equipment);
 });
 test('station batch actions respect stale-writer and active-raid guards, and insufficient space writes nothing', () => {
-    const f = station(); f.setup(d => { d.profile.stash.items = []; D.addItem(d.profile.stash, 'sample', 60); d.profile.bag.items = [item('bag', 'water')]; });
+    const f = station(); f.setup(d => { d.profile.stash.items = []; D.addItem(d.profile.stash, 'sample', d.profile.stash.w * d.profile.stash.h * D.ITEMS.sample.stack); d.profile.bag.items = [item('bag', 'water')]; });
     const before = structuredClone(f.state.save), raw = f.raw, writes = f.writes, failed = f.runtime.stashAll();
     assert.ok(!failed.ok); assert.equal(failed.reason, 'space'); assert.match(failed.message, /全部留在原处/); assert.deepEqual(f.state.save, before); assert.equal(f.raw, raw); assert.equal(f.writes, writes);
     f.saves.markConflict(); for (const action of ['stashAll', 'sortStash'] as const) { const result = f.runtime[action](); assert.ok(!result.ok); assert.equal(result.reason, 'conflict'); }

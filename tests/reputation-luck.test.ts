@@ -49,7 +49,7 @@ test('饰品交换守恒、满栏拒绝卸下、隐藏幸运仅临时改变且�
     assert.equal(state.charm!.uid, lucky.uid); assert.equal(effectiveLuck(state), 2); assert.equal(state.growth.luck, 1);
     const bad = profile.stash.items.find(i => i.id === 'unluckyCharm')!; assert.equal(equipCharm(profile, state, bad.uid, 'stash'), true);
     assert.equal(D.count(profile.stash, 'luckyCharm'), 1); assert.equal(profile.stash.items.find(i => i.id === 'luckyCharm')!.uid, lucky.uid); assert.equal(effectiveLuck(state), 0);
-    profile.stash = D.createInventory(10, 6); D.addItem(profile.stash, 'watch', 120); assert.equal(unequipCharm(profile, state), false); assert.equal(state.charm!.uid, bad.uid);
+    profile.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); D.addItem(profile.stash, 'watch', D.STASH_W * D.STASH_ROWS * D.ITEMS.watch.stack); assert.equal(unequipCharm(profile, state), false); assert.equal(state.charm!.uid, bad.uid);
     profile.stash.items = []; assert.equal(unequipCharm(profile, state), true); assert.equal(profile.stash.items[0].uid, bad.uid); assert.equal(state.charm, null);
 });
 test('中心仍可不暴击，边缘仍可暴击，miss不抽取；实际枪傷不会按过量或匕首计训练', () => {

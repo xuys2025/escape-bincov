@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "date": "2026-10-28",
+  "tool": "built-in image_gen",
+  "calls": 1,
+  "successful": 1,
+  "mode": "design-reference; project-native editable pixel-grid recipes for exact runtime outputs",
+  "prompt": "Use case: stylized-concept. Asset type: original pixel-art design reference for Escape Bincov's AUG compact bullpup rifle. Primary request: one clear east-facing side silhouette, muzzle points right, compact AUG bullpup with olive polymer stock, large open trigger guard and grip ahead of magazine, sloping rear magazine behind the grip, short exposed steel barrel, slim flat upper rail rather than integrated scope. Style: hand-drawn low-resolution game pixel sprite enlarged with crisp square pixels, no antialias, 8 subdued colors, dark charcoal outline, warm muted olive polymer, gray steel highlights from upper left. Composition: one rifle only centered on genuinely transparent background with generous clear margins, no hands, no accessories, no text, no numbers, no markings, no logo, no shadow or glow. Native held-game silhouette intended about 26 pixels long and 10 pixels high; this is a shape reference for later precise native H/I/W pixel-grid authoring, not a photoreal firearm.",
+  "file": "docs/gunsmith/art/m3-w2/source/augb-design-reference.png",
+  "originalSavedPath": "C:/Users/xty/.codex/generated_images/01a18158-f2fb-7c61-8e05-1a1bf12e85db/exec-e919a2ec-828c-4985-9def-140f33d39e36.png",
+  "notes": "Generated output is retained as reference only. H/I/W/Q authored independently in existing repository pixel-art recipe format. No CLI or external API used."
+}

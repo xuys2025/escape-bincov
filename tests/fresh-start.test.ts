@@ -45,16 +45,16 @@ function rich(f: Page) {
 function assertFresh(f: Page, volume: number) {
     const s = f.runtime.snapshot(), p = s.profile;
     assert.equal(p.cash, 700); assert.deepEqual(p.stats, { runs: 0, extracts: 0, kills: 0 }); assert.deepEqual(p.quests, { repair: false, sample: false, ledger: false });
-    assert.equal(p.upgraded, false); assert.equal(p.stash.h, 6); assert.equal(owned(p, 'watch'), 0); assert.equal(p.settings.volume, volume);
+    assert.equal(p.upgraded, false); assert.equal(p.stash.h, 8); assert.equal(owned(p, 'watch'), 0); assert.equal(p.settings.volume, volume);
     assert.ok(FACILITIES.every(id => s.base.facilities[id] === 0)); assert.equal(s.body.attributes.strength.base, 10); assert.equal(s.body.attributes.technique.progress, 0);
     assert.equal(s.body.hp, 100); assert.equal(f.state.state, 'hideout'); assert.ok(isPristine(decodeSession(f.raw!)));
 }
 
-test('fresh start record is a strict v8 session with the starter kit and the old volume only', () => {
+test('fresh start record is a strict v9 session with the starter kit and the old volume only', () => {
     const data = decodePortableBackup(freshStartText(.6, NOW));
     assert.equal(data.kind, 'session'); if (data.kind !== 'session') return;
     const r = data.record, p = r.profile, e = r.expansion!;
-    assert.equal(r.version, 8); assert.equal(r.perksBackup, null); assert.equal(r.gunsBackup, null); assert.equal(e.version, 3); assert.deepEqual(e.growth.perks, []);
+    assert.equal(r.version, 9); assert.equal(r.perksBackup, null); assert.equal(r.gunsBackup, null); assert.equal(r.layoutBackup, null); assert.equal(e.version, 3); assert.deepEqual(e.growth.perks, []);
     assert.equal(e.charm, null); assert.deepEqual(e.awards, []); assert.equal(e.raid, null);
     assert.equal(r.raid, null); assert.equal(r.terminal, null); assert.equal(p.activeRun, null);
     assert.equal(p.cash, 700); assert.deepEqual(p.stats, { runs: 0, extracts: 0, kills: 0 }); assert.equal(p.settings.volume, .6);

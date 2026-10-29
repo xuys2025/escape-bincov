@@ -25,7 +25,7 @@ test('长离线按强化到期、治疗和上限分段，与逐秒在线计算�
 });
 
 test('五设施各级成本/前置替代一次支付，救济不能变成建设材料，黑市海珠只扣一件', () => {
-    const profile = D.newSave(), state = newExpansion(0); profile.cash = 10000; profile.stash = D.createInventory(10, 6);
+    const profile = D.newSave(), state = newExpansion(0); profile.cash = 10000; profile.stash = D.createInventory(D.STASH_W, D.STASH_ROWS);
     profile.bag = D.createInventory(6, 5); profile.safe = D.createInventory(2, 2);
     D.addItem(profile.stash, 'bandage', 2, true);
     assert.equal(buildFacility(profile, state, 'medical'), false);
@@ -39,7 +39,7 @@ test('五设施各级成本/前置替代一次支付，救济不能变成建设�
 
 test('有限串行生产锁定入队等级，取消只退排队批次，整批领取不重复、空间不足不改状态', () => {
     const profile = D.newSave(), state = newExpansion(0); state.base.facilities.workbench = 2;
-    profile.cash = 1000; profile.stash = D.createInventory(10, 6); D.addItem(profile.stash, 'cloth', 6);
+    profile.cash = 1000; profile.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); D.addItem(profile.stash, 'cloth', 6);
     assert.equal(enqueueProduction(profile, state, 'bandage'), true); assert.equal(enqueueProduction(profile, state, 'bandage'), true);
     assert.equal(enqueueProduction(profile, state, 'bandage'), false); assert.equal(profile.cash, 930);
     state.base.facilities.workbench = 3; assert.equal(state.base.queue[0].duration, 510);

@@ -106,7 +106,7 @@ function stocked(seed: number, rng: Rng): Page {
     const held = build(rng, 'carbine', next, int(rng, 5)), cash = 4000 + int(rng, 4000);
     const ticket = page.saves.prepareExpansionMutation(d => {
         const p = d.profile, gun = (id: string, state: GunState, relief = false): D.Item => ({ uid: next(), id, qty: 1, x: 0, y: 0, ...(relief ? { relief: true } : {}), gun: state });
-        p.cash = cash; p.stash = D.createInventory(10, 6); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
+        p.cash = cash; p.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
         for (const [inv, item] of [[p.stash, gun('carbine', carbineA)], [p.stash, gun('carbine', carbineB)], [p.stash, gun('shotgun', shotgun)],
             [p.bag, gun('pistol', reliefPistol, true)], [p.safe, gun('pistol', safePistol)]] as const) assert.ok(D.placeItem(inv, item));
         for (const [inv, id, qty, relief] of [[p.stash, 'ammoR', 24, false], [p.stash, 'ammoR', 9, true], [p.bag, 'ammo9', 20, false],

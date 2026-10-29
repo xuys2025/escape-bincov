@@ -11,6 +11,7 @@ import { useRpgItem, useRpgItemResult } from '../src/rpg';
 import { derivedLimits } from '../src/expansion-state';
 import { oldProfile, oldRecord } from './fixtures/old-saves';
 import { migrateProfile } from '../src/gunsmith/migrate';
+import { relayoutProfile } from '../src/gunsmith/relayout';
 import { factoryState } from '../src/gunsmith/instance';
 function fixture(raw?: string, enter = true, allowed = () => true) {
     let now = 1800000000000, failed = false, writes = 0;
@@ -30,8 +31,8 @@ function poorStation(full = false) {
     const f = fixture();
     f.setup(d => {
         d.profile.cash = 0; d.profile.equipment = { weapon: null, weaponUid: null, gun: null, relief: false, ammo: 0, ammoRelief: 0 };
-        d.profile.bag = D.createInventory(6, 5); d.profile.stash = D.createInventory(10, 6); d.profile.safe = D.createInventory(2, 2);
-        if (full) { D.addItem(d.profile.bag, 'watch', 60); D.addItem(d.profile.stash, 'watch', 120); }
+        d.profile.bag = D.createInventory(6, 5); d.profile.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); d.profile.safe = D.createInventory(2, 2);
+        if (full) { D.addItem(d.profile.bag, 'watch', 60); D.addItem(d.profile.stash, 'watch', D.STASH_W * D.STASH_ROWS * D.ITEMS.watch.stack); }
     });
     f.state.state = 'menu'; return f;
 }
@@ -118,7 +119,7 @@ test('station upgrades legacy bytes atomically, preserves progress and is idempo
     const profile = oldProfile(save), old = JSON.stringify(profile), f = fixture(old, false), v3 = f.raw;
     assert.equal(f.runtime.enter().ok, true); const record = decodeSession(f.raw);
     // The legacy key's v2 profile arrives migrated (gunsmith M0-06): the same profile with factory guns.
-    assert.deepEqual(record.profile, migrateProfile(profile)); assert.equal(record.version, 8); assert.equal(record.expansion?.version, 3);
+    assert.deepEqual(record.profile, relayoutProfile(migrateProfile(profile))); assert.equal(record.version, 9); assert.equal(record.expansion?.version, 3);
     // Straight from a record without an expansion to expansion v3: the bytes without one are kept once, and there is
     // no v1/v2 expansion to keep; the legacy bytes stay in legacyBackup, so there is no gunsBackup.
     assert.equal(record.legacyBackup, old); assert.equal(record.systemsBackup, v3); assert.equal(record.perksBackup, null); assert.equal(record.gunsBackup, null);
@@ -201,7 +202,7 @@ test('run count begins at zero, preserves legacy seven, and increments only on c
     assert.ok(f.runtime.startRaid(start.runId!).ok); assert.equal(f.runtime.snapshot().profile.stats.runs, 8);
 });
 test('inventory split merge rotate transfer and failed write preserve identities and quantities', () => {
-    const f = fixture(); f.setup(d => { d.profile.stash = D.createInventory(10, 6); d.profile.bag = D.createInventory(6, 5); D.addItem(d.profile.stash, 'ammo9', 20); D.addItem(d.profile.stash, 'pistol'); });
+    const f = fixture(); f.setup(d => { d.profile.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); d.profile.bag = D.createInventory(6, 5); D.addItem(d.profile.stash, 'ammo9', 20); D.addItem(d.profile.stash, 'pistol'); });
     const ammo = f.state.save.stash.items.find(i => i.id === 'ammo9')!;
     assert.ok(f.runtime.split('stash', ammo.uid, 5, 8, 5).ok); assert.equal(D.count(f.state.save.stash, 'ammo9'), 20);
     const split = f.state.save.stash.items.find(i => i.id === 'ammo9' && i.uid !== ammo.uid)!;
@@ -234,7 +235,7 @@ test('shop rejections tell the player whether cash or stash space is missing wit
     for (const blockedBy of ['funds', 'space'] as const) {
         const f = fixture(); f.setup(d => {
             d.profile.cash = blockedBy === 'funds' ? 0 : 5000;
-            if (blockedBy === 'space') { d.profile.stash = D.createInventory(10, 6); D.addItem(d.profile.stash, 'watch', 120); }
+            if (blockedBy === 'space') { d.profile.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); D.addItem(d.profile.stash, 'watch', D.STASH_W * D.STASH_ROWS * D.ITEMS.watch.stack); }
         });
         const shop = f.runtime.openShop('arms'), stock = shop.view().catalog.items.find(i => i.id === 'pistol')!;
         assert.ok(shop.place('merchant', 'buy', stock.uid, 0, 0).ok);
@@ -288,7 +289,7 @@ test('the station shop refuses to list relief guns or rounds for sale', () => {
 });
 test('facilities enforce power, non-relief materials and three-level cap', () => {
     const f = fixture(); assert.equal(reason(f.runtime.build('training')), 'locked');
-    f.setup(d => { d.profile.cash = 5000; d.profile.stash = D.createInventory(10, 6); D.addItem(d.profile.stash, 'scrap', 10, true); });
+    f.setup(d => { d.profile.cash = 5000; d.profile.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); D.addItem(d.profile.stash, 'scrap', 10, true); });
     assert.equal(reason(f.runtime.build('rest')), 'materials'); assert.equal(f.state.save.cash, 5000);
     f.setup(d => { D.addItem(d.profile.stash, 'scrap', 10); D.addItem(d.profile.stash, 'wire', 10); });
     for (let i = 0; i < 3; i++) assert.ok(f.runtime.build('rest').ok);
@@ -384,7 +385,7 @@ test('power event occurs once after durable quest turn-in, never on quota failur
     assert.equal(reason(f.runtime.submitQuest('repair')), 'rule'); assert.equal(f.events.filter(e => e.type === 'power-restored').length, 1);
 });
 test('shop full stash returns space without paying for a rejected purchase', () => {
-    const f = fixture(); f.setup(d => { d.profile.cash = 10000; d.profile.stash.items = []; for (let i = 0; i < 60; i++) D.addItem(d.profile.stash, 'watch', D.ITEMS.watch.stack); });
+    const f = fixture(); f.setup(d => { d.profile.cash = 10000; d.profile.stash.items = []; for (let i = 0; i < D.STASH_W * D.STASH_ROWS; i++) D.addItem(d.profile.stash, 'watch', D.ITEMS.watch.stack); });
     const shop = f.runtime.openShop('arms'), item = shop.view().catalog.items.find(i => i.id === 'pistol')!; assert.ok(shop.place('merchant', 'buy', item.uid, 0, 0).ok);
     const raw = f.raw; assert.equal(reason(shop.settle()), 'space'); assert.equal(f.raw, raw);
 });
@@ -412,7 +413,7 @@ test('v1 expansion upgrade preserves body, facilities and growth without double 
     assert.equal(g.state.expansion!.growth.permanent.technique, 13); assert.equal(g.state.expansion!.base.facilities.rest, 2); assert.equal(g.saves.currentRecord()!.systemsBackup, record.systemsBackup);
     // Loading wrote the record as v8 with the v1 expansion (the old text is gunsBackup); the perk upgrade then kept that text.
     const v4 = JSON.parse(g.saves.currentRecord()!.perksBackup!);
-    assert.equal(v4.version, 8); assert.equal(v4.expansion.version, 1); assert.equal('perksBackup' in v4, false);
+    assert.equal(v4.version, 9); assert.equal(v4.expansion.version, 1); assert.equal('perksBackup' in v4, false);
     assert.equal(g.saves.currentRecord()!.gunsBackup, JSON.stringify(record));
 });
 test('offline production remains finite and cannot bank blocked time; offline movement is never credited', () => {
@@ -557,7 +558,7 @@ test('supply rejection types preserve all bytes and transaction protection takes
 });
 test('water, food and medicine remain usable for each secondary effect at full primary resource', () => {
     for (const [id, field, value] of [['water', 'stamina', 30], ['water', 'pollution', 12], ['food', 'hp', 40], ['food', 'stamina', 30], ['medkit', 'bleeding', true]] as const) {
-        const f = fixture(); f.setup(d => { const b = d.expansion.body, l = derivedLimits(d.expansion); b.hp = l.hp; b.stamina = l.stamina; b.water = b.satiety = 100; b.pollution = 0; Object.assign(b, { [field]: value }); d.profile.stash = D.createInventory(10, 6); D.addItem(d.profile.stash, id); });
+        const f = fixture(); f.setup(d => { const b = d.expansion.body, l = derivedLimits(d.expansion); b.hp = l.hp; b.stamina = l.stamina; b.water = b.satiety = 100; b.pollution = 0; Object.assign(b, { [field]: value }); d.profile.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); D.addItem(d.profile.stash, id); });
         const item = f.state.save.stash.items[0]; assert.ok(f.runtime.useSupply('stash', item.uid).ok, `${id} ${field}`);
         assert.equal(D.count(f.state.save.stash, id), 0); assert.notEqual(f.state.expansion!.body[field], value);
     }
