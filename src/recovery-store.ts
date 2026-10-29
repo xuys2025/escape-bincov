@@ -4,18 +4,21 @@ import { decodeOldStoredProfile, decodeStoredProfile, identity, utf8Bytes, whole
 import { enemyRules, validateExpansion, type ExpansionState, type WorldResolver, type EndReason } from './expansion-state';
 import { resolveExpansionWorld } from './expansion-worlds';
 import { migrateRecord, type RecordV7 } from './gunsmith/migrate';
+import { migrateLayout } from './gunsmith/relayout-record';
+import { withV8Footprints } from './gunsmith/instance';
 
 /** A separate versioned record isolates old clients that silently discard unknown fields. */
 export const SESSION_KEY = 'escape-bincov.session.v2';
 export const SESSION_MAX_BYTES = 2 * 1024 * 1024;
 /**
- * The record every write stores: `version` 8, the gun instance format (profile v3), whatever else it carries. Which
- * expansion it carries is the expansion's own `version`; whether enemy rules (#81) are on is whether it holds
- * `enemyBackup`. Records v2 to v7 are only read: decodeSession checks one by its own rules and migrates it to v8
- * (migrateRecord, docs/gunsmith/CONTRACTS.md section M0-06).
+ * The record every write stores: `version` 9, the gun instance format (profile v3) with footprints that follow the
+ * magazine (#28 M3-12), whatever else it carries. Which expansion it carries is the expansion's own `version`; whether
+ * enemy rules (#81) are on is whether it holds `enemyBackup`. Records v2 to v8 are only read: decodeSession checks one
+ * by its own rules and migrates it (migrateRecord to v8, docs/gunsmith/CONTRACTS.md section M0-06; migrateLayout to
+ * v9, section M3-12).
  */
 export interface SessionRecord {
-  format: 'escape-bincov-session'; version: 8; revision: number; savedAt: number;
+  format: 'escape-bincov-session'; version: 9; revision: number; savedAt: number;
   profile: D.SaveDataV1; raid: RaidCheckpoint | null;
   terminal: { runId: string; outcome: D.Outcome; reason?: EndReason } | null;
   /** Exact pre-migration bytes. Retained even if an old tab later changes the old key. */
@@ -29,6 +32,12 @@ export interface SessionRecord {
    * enemyBackup (recordUpgradeFields, RecoveryStore.commit).
    */
   gunsBackup: string | null;
+  /**
+   * The exact v8 record text the first v9 write replaced (#28 M3-12: decodeSession laid it out again under the new
+   * footprints), taken when it migrates that record; null for a new game and for records v2 to v7, whose bytes the other
+   * backups keep. Retained once, never replaced, carried by imports as gunsBackup is.
+   */
+  layoutBackup: string | null;
   /** Present exactly when the record carries an expansion. It is part of this same atomic record, never a second key. */
   expansion?: ExpansionState;
   /** Present with an expansion: the exact bytes of the record without one that the first write with one replaced, retained once. */
@@ -57,7 +66,7 @@ export const enemyRecord = (record: Pick<SessionRecord, 'enemyBackup'> | null | 
  */
 export function recordUpgradeFields(expansion: ExpansionState | null, previous: SessionRecord | null, raw: string | null) {
   const enemies = !!expansion && (enemyRecord(previous) || enemyRules(expansion.raid));
-  return { version: 8 as const, gunsBackup: previous?.gunsBackup ?? null,
+  return { version: 9 as const, gunsBackup: previous?.gunsBackup ?? null, layoutBackup: previous?.layoutBackup ?? null,
     perksBackup: expansion?.version === 3
       ? previous?.expansion?.version === 3 ? previous.perksBackup! : previous?.expansion ? raw : null
       : undefined,
@@ -88,7 +97,8 @@ function canonical(value: unknown): string {
  * (none for 2 and 3, a v1/v2 expansion for 4 and 6, a v3 one for 5 and 7, enemy rules for 6 and 7).
  */
 function checkRecord(r: any, resolveWorld: WorldResolver): void {
-  const current = r.version === 8, legacy = r.version === 2;
+  // `current`: the gun format (v8, checked under v8 footprints, and v9); `layout`: v9, which adds layoutBackup.
+  const current = r.version >= 8, layout = r.version === 9, legacy = r.version === 2;
   const expanded = current ? Object.hasOwn(r, 'expansion') : r.version >= 4;
   const perks = current ? expanded && r.expansion?.version === 3 : r.version === 5 || r.version === 7;
   const enemies = current ? Object.hasOwn(r, 'enemyBackup') : r.version >= 6;
@@ -96,6 +106,7 @@ function checkRecord(r: any, resolveWorld: WorldResolver): void {
       || (r.legacyBackup !== null && typeof r.legacyBackup !== 'string') || !r.profile || r.profile.version !== (current ? 3 : legacy ? 1 : 2)
       || (!legacy && r.migrationBackup !== null && typeof r.migrationBackup !== 'string')
       || (current && r.gunsBackup !== null && typeof r.gunsBackup !== 'string')
+      || (layout && r.layoutBackup !== null && typeof r.layoutBackup !== 'string')
       || (expanded && (r.systemsBackup !== null && typeof r.systemsBackup !== 'string'))
       || (perks && (r.perksBackup !== null && typeof r.perksBackup !== 'string'))
       || (enemies && (!expanded || (r.enemyBackup !== null && typeof r.enemyBackup !== 'string')))
@@ -104,7 +115,7 @@ function checkRecord(r: any, resolveWorld: WorldResolver): void {
       || (!enemies && r.enemyBackup !== undefined)) return failure();
   if (current || expanded) {
     const keys = ['format', 'version', 'revision', 'savedAt', 'profile', 'raid', 'terminal', 'legacyBackup', 'migrationBackup',
-      ...(current ? ['gunsBackup'] : []), ...(expanded ? ['expansion', 'systemsBackup'] : []), ...(perks ? ['perksBackup'] : []),
+      ...(current ? ['gunsBackup'] : []), ...(layout ? ['layoutBackup'] : []), ...(expanded ? ['expansion', 'systemsBackup'] : []), ...(perks ? ['perksBackup'] : []),
       ...(enemies ? ['enemyBackup'] : [])];
     if (Object.keys(r).length !== keys.length || keys.some(key => !Object.hasOwn(r, key))) return failure();
   }
@@ -139,23 +150,31 @@ function checkRecord(r: any, resolveWorld: WorldResolver): void {
 }
 
 /**
- * A stored record as v8. A v8 record is checked as such. A v2 to v7 record is checked by its own (old) rules first, then
- * migrated in memory, a live raid included (migrateRecord: factory guns, the equipped gun a new uid; v3 to v7 keep their
- * text as gunsBackup; v6 and v7 keep enemyBackup, so their enemy rules stay on), and the result is checked again as v8.
- * Nothing is written here: the first commit stores the v8 record. A failed migration or v8 check reads as an
- * incompatible save, never as a repaired one.
+ * A stored record as v9. A v9 record is checked as such. Older ones are checked by their own rules first, under the
+ * footprints of their time (withV8Footprints), and migrated in memory, a live raid included. A v2 to v7 record goes to
+ * v8 (migrateRecord: factory guns, the equipped gun a new uid; v3 to v7 keep their text as gunsBackup; v6 and v7 keep
+ * enemyBackup, so their enemy rules stay on), checked again as v8. A v8 record goes to v9 (migrateLayout: the stash
+ * grows and every inventory is laid out again under the footprints that follow the magazine, #28 M3-12; its text is
+ * layoutBackup, null when it was migrated here from v2 to v7), checked again as v9. Nothing is written here: the first
+ * commit stores the v9 record. A failed migration or check reads as an incompatible save, never as a repaired one.
  */
 export function decodeSession(text: string, resolveWorld: WorldResolver = resolveExpansionWorld): SessionRecord {
   if (utf8Bytes(text) > SESSION_MAX_BYTES) return failure();
   let r: any;
   try { r = JSON.parse(text); } catch { return failure(); }
-  if (!r || r.format !== 'escape-bincov-session' || ![2, 3, 4, 5, 6, 7, 8].includes(r.version)) return failure();
-  checkRecord(r, resolveWorld);
-  if (r.version === 8) return structuredClone(r);
-  const old: RecordV7 = { ...structuredClone(r), version: r.version >= 4 ? r.version : 3, migrationBackup: r.version === 2 ? text : r.migrationBackup };
-  let migrated: any;
+  if (!r || r.format !== 'escape-bincov-session' || ![2, 3, 4, 5, 6, 7, 8, 9].includes(r.version)) return failure();
+  if (r.version === 9) { checkRecord(r, resolveWorld); return structuredClone(r); }
+  const stored = r.version;
+  let v8: any, migrated: any;
   try {
-    migrated = JSON.parse(JSON.stringify(migrateRecord(old, r.version >= 3 ? text : null)));
+    withV8Footprints(() => {
+      checkRecord(r, resolveWorld);
+      if (stored === 8) { v8 = structuredClone(r); return; }
+      const old: RecordV7 = { ...structuredClone(r), version: stored >= 4 ? stored : 3, migrationBackup: stored === 2 ? text : r.migrationBackup };
+      v8 = JSON.parse(JSON.stringify(migrateRecord(old, stored >= 3 ? text : null)));
+      checkRecord(v8, resolveWorld);
+    });
+    migrated = JSON.parse(JSON.stringify(migrateLayout(v8, stored === 8 ? text : null)));
     checkRecord(migrated, resolveWorld);
   } catch { return failure(); }
   return migrated as SessionRecord;
@@ -213,7 +232,7 @@ export class RecoveryStore {
     return { save, raid: null, expansion: null, legacyRecovery };
   }
   /**
-   * Writes the record as v8, keeping every earlier backup. The stored record guards the write: once it has an expansion,
+   * Writes the record as v9, keeping every earlier backup. The stored record guards the write: once it has an expansion,
    * no write may drop it; a v3 (perk) expansion is never written back as v1/v2 and enemy rules are never switched off,
    * except by `explicitImport`, a player-confirmed import (the imported record, or true without one) of an older backup,
    * possibly holding a live v2 raid; it upgrades again at the next station boundary. Importing or resetting a current
@@ -229,6 +248,7 @@ export class RecoveryStore {
       const fields = recordUpgradeFields(expansion, previous, explicitImport ? null : this.expected);
       if (explicitImport && expansion?.version === 3 && this.record?.expansion?.version === 3) {
         fields.gunsBackup = this.record.gunsBackup;
+        fields.layoutBackup = this.record.layoutBackup;
         fields.perksBackup = this.record.perksBackup!;
         if (enemyRecord(this.record)) fields.enemyBackup = this.record.enemyBackup!;
       }
@@ -243,7 +263,7 @@ export class RecoveryStore {
       candidate = { format: 'escape-bincov-session', version: fields.version, revision: (this.record?.revision ?? 0) + 1,
         savedAt: this.now(), profile: structuredClone(profile), raid: structuredClone(raid),
         terminal: terminal === undefined ? (profile.activeRun ? null : this.record?.terminal ?? null) : terminal,
-        legacyBackup: this.legacy, migrationBackup: this.migration, gunsBackup: fields.gunsBackup,
+        legacyBackup: this.legacy, migrationBackup: this.migration, gunsBackup: fields.gunsBackup, layoutBackup: fields.layoutBackup,
         ...(expansion ? { expansion: structuredClone(expansion), systemsBackup: systems } : {}),
         ...(fields.perksBackup !== undefined ? { perksBackup: fields.perksBackup } : {}),
         ...(fields.enemyBackup !== undefined ? { enemyBackup: fields.enemyBackup } : {}) };

@@ -1,5 +1,7 @@
 # 待办：HUD 堆路径报告拒绝缺失或非法观测字段
 
+主审同步（2026-10-29）：实施后 main 合入 #132，现正常合并 `e2728e46`，只解决 `handoff.md` 双方新增记录的冲突；HUD 脚本及其测试与已审 `6c0b4e7d` 相同。同步后 Node 24.21.0 执行 `pnpm test` 1077/1077、`pnpm check:ci` 123/123、`pnpm package` 通过，便携 ZIP 6,101,003 B；准确新 head 的平台门禁另见原 PR。
+
 状态：**已实施，等待准确 head 的 CI 与主代理独立审查**。维护者于 2026-10-29 指派 GPT-6.1 Sol 续作 [PR #144](https://github.com/xuys2025/escape-bincov/pull/144)，保留原分支与原 PR；最终合并交主代理。
 
 - 分支：`fix/hud-path-observations`

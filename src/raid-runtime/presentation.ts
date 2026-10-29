@@ -192,7 +192,7 @@ export function frameView(r: CoastRaidRuntime, map: MapDef, velocities: Readonly
                 raise: r.handling.raise, sway: r.handling.sway, bloom: r.handling.bloom },
             breath: r.breathOwned ? { target: r.breath.target, seconds: r.breath.seconds, chance: breathChance(r.breath.seconds), full: BREATH_FULL } : null,
             crit: critChanceView(r),
-            devices: devicesView(r, map, revealed),
+            devices: devicesView(r, map, revealed), sight: r.gunSight,
             heals: D.count(loadout.bag, 'bandage') + D.count(loadout.bag, 'medkit'), hitDirections: r.hitDirections.map(h => ({ angle: h.angle, left: h.left })) },
         phase: r.ending ? 'ending' : r.paused ? 'paused' : r.overlay ? 'blocked' : 'running',
     };

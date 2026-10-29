@@ -33,7 +33,7 @@ function preset(name) {
   const fx = { cash: s.cash, quests: { ...s.quests }, upgraded: false, facilities: null, attribute: null, stats: null };
   add(s.stash, 'scrap', 3); add(s.stash, 'wire', 2); add(s.stash, 'fuse', 1); add(s.stash, 'cloth', 4); add(s.stash, 'watch', 1); add(s.bag, 'food', 2);
   if (name !== 'parts') { fx.quests.repair = true; fx.cash = 6000; add(s.stash, 'scrap', 5); add(s.stash, 'wire', 3); add(s.stash, 'fuse', 2); add(s.stash, 'bandage', 2); }
-  if (name === 'built') { s.stash.h = 9; fx.upgraded = true; fx.facilities = { rest: 3, medical: 3, training: 3, workbench: 3, blackmarket: 0 }; fx.attribute = 'strength'; }
+  if (name === 'built') { s.stash.h = D.STASH_UPGRADED_ROWS; fx.upgraded = true; fx.facilities = { rest: 3, medical: 3, training: 3, workbench: 3, blackmarket: 0 }; fx.attribute = 'strength'; }
   return { ...fx, stash: s.stash, bag: s.bag, safe: s.safe, equipment: s.equipment };
 }
 const SEED = fx => {

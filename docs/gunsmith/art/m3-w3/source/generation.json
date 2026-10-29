@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "date": "2026-10-29",
+  "mode": "built-in image_gen reference attempt; final-resolution native pixel artwork",
+  "calls": 1,
+  "successfulCalls": 0,
+  "referenceResult": "No image returned. Tool rejected the reference request with HTTP 400 moderation_blocked, category violence. No retry, CLI or API fallback was used.",
+  "requestId": "8ceee484-a6bd-4264-baf7-64a32bf4def1",
+  "prompt": "Use case: stylized-concept. Asset type: a single technical visual reference board for original pixel-art game magazines; reference only, not runtime sprites. Create a clean sheet of side silhouettes of 8 firearm magazine families pointing to the right, suspended below a tiny neutral magazine-well marker: STANAG 30 round slight forward curve; AK74 30 round curved polymer; AK74 45 round longer curved polymer; AK103 30 round strongly forward curved black polymer; MP5 30 round slim forward curved steel; UMP45 straight narrow polymer box; M14 straight wide box; AK round drum with short neck. All in the same strict side view with front toward right. Clear relative shapes: AK45 longer than AK30, UMP extension straight, drum circular with a narrow feed neck. Restrained muted teal steel, charcoal outline, olive polymer. No guns, ammunition, logos, branding, markings, text or labels, shadows, perspective, hands, glow. Crisp pixel-art-like edges on plain warm light gray background. This board informs separately hand-authored integer pixel assets in an existing game.",
+  "finalAssets": "Original native I/W pixel profiles in design.mjs and draw.mjs, matching the established editable source format. No generated raster reference was used. W has separately outlined contours and individual channels, witness holes, hardware and highlights. Embedded receiver regions are retained losslessly outside the magazine masks.",
+  "finalPromptSet": "None for final runtime PNGs; design.mjs, draw.mjs and pixel-artwork.json are the complete editable and replayable source. The failed reference prompt above is the only image_gen prompt."
+}

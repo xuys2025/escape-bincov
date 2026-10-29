@@ -4,9 +4,11 @@
  * once; replacing a handguard takes its rail parts along; a smaller magazine unloads into the stash; switching guns or
  * closing with a preview asks first. Screenshots at 1280x720 and 1920x1080. Phones (M2-06, touch): three pages, cancel
  * and confirm in the bottom bar at 844x390, 740x300, 640x300 and 390x844, every step a tap, rotation keeps the preview.
- * Fixtures use the session with ?test=1.
+ * A1 compares the game's composites with Sol's approved previews pixel by pixel: M2's, wave one's and wave two's P0
+ * (#28 M3-04, M3-07). Fixtures use the session with ?test=1.
  */
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
@@ -15,7 +17,7 @@ import { browserOptions } from './browser-options.mjs';
 import { reportFilter, stepFilter } from './step-filter.mjs';
 import * as D from '../src/domain.ts';
 import { factoryState } from '../src/gunsmith/instance.ts';
-import { CONFIGS } from '../tests/fixtures/gunsmith-configs.ts';
+import { CONFIGS, part as partNode } from '../tests/fixtures/gunsmith-configs.ts';
 
 const option = (name, fallback) => process.argv.find(a => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const htmlPath = option('html', 'dist/index.html'), html = await readFile(htmlPath, 'utf8');
@@ -35,7 +37,7 @@ const GUN = 'gun-bench-m4';
 
 /** M4A1 equipped with 28 rounds; a G17 and ten sample parts in the stash; spare rounds in the bag. */
 function fixture() {
-  const p = D.newSave(); p.stash = D.createInventory(10, 6); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2); p.cash = 900;
+  const p = D.newSave(); p.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2); p.cash = 900;
   p.equipment = { weapon: 'mb4a1', weaponUid: GUN, gun: factoryState(), ammo: 28, ammoRelief: 0, relief: false };
   for (const id of ['gb17', 'O03', 'O08', 'H01', 'F01', 'T01', 'G10', 'S01', 'B01', 'M03']) assert.equal(D.addItem(p.stash, id), 0, id);
   assert.equal(D.addItem(p.bag, 'ammoR', 30), 0);
@@ -120,28 +122,58 @@ async function step(name, fn) {
 try {
   await step('A1-composites-equal-the-approved-previews', async () => {
     // M2-10: every approved preview assembly (Sol, M2-09) drawn by the game's compositor in the packaged page, compared
-    // with the preview PNG channel by channel.
+    // with the preview PNG channel by channel. #28 M3-04 adds Sol's wave-one records and M3-08 wave two's, each against
+    // its 1x preview, and the bare side views (the ground and the HUD card) where Sol drew one. M3-12 redrew the
+    // magazines (M3-W3): a picture with one is compared outside the region each redrawn image changed, at the same width;
+    // the new magazines' layouts are checked against Sol's M3-W3 records in tests/gunsmith-art.test.ts.
+    const { redrawn } = JSON.parse(await readFile('tests/fixtures/gunsmith-m3-w3-redrawn.json', 'utf8'));
     const { assemblies } = JSON.parse(await readFile('tests/fixtures/gunsmith-assemblies.json', 'utf8'));
     const cases = await Promise.all(assemblies.map(async a => ({ name: `${a.gun}-${a.configuration}-${a.code}`, gun: a.gun, code: a.code,
       parts: CONFIGS[a.gun][a.configuration](), png: (await readFile(a.file)).toString('base64') })));
+    const grow = trees => trees.map(([id, slot, kids]) => partNode(id, slot, grow(kids ?? [])));
+    // Sol drew wave one's factory Vector before the receiver's front glove (ART-SPEC 5; d3eb43f): the glove is checked on
+    // its own. The approved P0 AUG preview keeps its pixels too; its glove version is `-front-glove` (92f7a7f), compared whole.
+    const beforeGlove = ['tests/fixtures/gunsmith-assemblies-m3.json:vb9-factory-h'];
+    const previewOf = (dir, name) => existsSync(`${dir}/${name}-front-glove-1x.png`) ? `${dir}/${name}-front-glove-1x.png` : `${dir}/${name}-1x.png`;
+    for (const [file, dir] of [['tests/fixtures/gunsmith-assemblies-m3.json', 'docs/gunsmith/art/m3-w1/preview'], ['tests/fixtures/gunsmith-assemblies-m3-w2.json', 'docs/gunsmith/art/m3-w2/preview']]) {
+      const wave = JSON.parse(await readFile(file, 'utf8'));
+      for (const a of wave.assemblies) {
+        const name = `${a.gun}-${a.configuration}-${a.code}`;
+        cases.push({ name, gun: a.gun, code: a.code, parts: grow(wave.configurations[a.gun][a.configuration]), png: (await readFile(previewOf(dir, name))).toString('base64'), dropFrontGlove: beforeGlove.includes(`${file}:${name}`) });
+      }
+      for (const b of wave.bareFactories) {
+        const png = `${dir}/${b.gun}-factory-ground-hud-1x.png`;
+        if (existsSync(png)) cases.push({ name: `${b.gun}-bare`, gun: b.gun, code: 'h', parts: [], png: (await readFile(png)).toString('base64'), bare: true });
+      }
+    }
     await open();
-    const bad = await page.evaluate(async cases => {
+    const { out: bad, partial } = await page.evaluate(async ([cases, redrawn]) => {
       const art = window.__bincov.gunsmithArt, out = [];
+      let partial = 0;
       for (const c of cases) {
-        const layout = art.layout(c.gun, c.parts, c.code), canvas = layout && art.draw(layout);
+        let layout = art.layout(c.gun, c.parts, c.code, !c.bare);
+        if (layout && c.dropFrontGlove) {
+          if (!layout.layers.some(l => l.label === 'glove-front')) out.push(`${c.name}: no front glove on the receiver's hand`);
+          layout = { ...layout, layers: layout.layers.filter(l => l.label !== 'glove-front') };
+        }
+        const canvas = layout && art.draw(layout);
         if (!canvas) { out.push(`${c.name}: not drawn`); continue; }
         const img = new Image(); img.src = `data:image/png;base64,${c.png}`; await img.decode();
-        if (img.width !== canvas.width || img.height !== canvas.height) { out.push(`${c.name}: ${canvas.width}x${canvas.height}, preview ${img.width}x${img.height}`); continue; }
+        const masks = layout.layers.filter(l => redrawn[l.key]).map(l => { const [x, y, w, h] = redrawn[l.key]; return [l.x + x, l.y + y, w, h]; });
+        if (img.width !== canvas.width || (!masks.length && img.height !== canvas.height)) { out.push(`${c.name}: ${canvas.width}x${canvas.height}, preview ${img.width}x${img.height}`); continue; }
         const ref = document.createElement('canvas'); ref.width = img.width; ref.height = img.height;
         const rc = ref.getContext('2d'); rc.drawImage(img, 0, 0);
-        const a = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data, b = rc.getImageData(0, 0, img.width, img.height).data;
-        let diff = 0; for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) diff++;
+        const w = img.width, h = Math.min(img.height, canvas.height);
+        const a = canvas.getContext('2d').getImageData(0, 0, w, h).data, b = rc.getImageData(0, 0, w, h).data;
+        const masked = (x, y) => masks.some(([mx, my, mw, mh]) => x >= mx && x < mx + mw && y >= my && y < my + mh);
+        let diff = 0; for (let i = 0; i < a.length; i++) if (a[i] !== b[i] && !masked((i >> 2) % w, Math.floor((i >> 2) / w))) diff++;
         if (diff) out.push(`${c.name}: ${diff} channel values differ`);
+        if (masks.length) partial++;
       }
-      return out;
-    }, cases);
+      return { out, partial };
+    }, [cases, redrawn]);
     assert.deepEqual(bad, []);
-    return { compared: cases.length };
+    return { compared: cases.length, outsideRedrawnMagazines: partial };
   });
 
   await step('B1-preview-writes-nothing-confirm-writes-once', async () => {
@@ -408,11 +440,12 @@ try {
     await shot('20-desktop-1280x720-part-details');
     // The arms counter: all, one kind, only what fits; the lists stay.
     await yard('[data-tab="arms"]').click(); await yard('.seg.browse').waitFor();
-    const catalog = () => page.evaluate(() => [...document.querySelector('#station-yard').shadowRoot.querySelectorAll('[data-grid="merchant"] .item')].map(e => e.dataset.uid));
+    const catalog = () => page.evaluate(() => [...document.querySelector('#station-yard').shadowRoot.querySelectorAll('[data-grid="merchant"] .item')].map(e => e.classList.contains('k-attachment')));
     const all = (await catalog()).length;
+    // The stock runs onto a second page (#28 M3), so a page of parts alone can hold more than the first page of all.
     await yard('.seg.browse [data-act="browse-kind:attachment"]').click();
-    const parts = (await catalog()).length;
-    assert.ok(parts > 0 && parts < all, `${parts} of ${all}`);
+    const shown = await catalog(), parts = shown.length;
+    assert.ok(parts > 0 && shown.every(Boolean), `${parts} parts, all attachments`);
     await yard('.seg.browse [data-act="browse-fits"]').click();
     const fitting = (await catalog()).length;
     assert.ok(fitting > 0 && fitting < parts, 'A07 is the carbine\'s: it goes');
@@ -433,7 +466,7 @@ try {
     await page.locator('.shop-browse').waitFor();
     const count = () => page.locator('[data-grid="merchant"] .item').count(), all = await count();
     await page.locator('.shop-browse [data-id="kind:ammo"]').click();
-    assert.equal(await count(), 3, 'the three rounds');
+    assert.equal(await count(), 6, 'the six rounds (#28 M3-05)');
     await page.locator('.shop-browse [data-id="kind:all"]').click();
     assert.equal(await count(), all);
     // Phones: the buy pane carries the same filter.

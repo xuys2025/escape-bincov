@@ -1,0 +1,12 @@
+{
+  "status": "fixed by restoring the historical preview path and adding a distinct current preview path",
+  "commit": "5ecc658e8e55d9dc18582035a1025b5f201bfdb1",
+  "run": "https://github.com/xuys2025/escape-bincov/actions/runs/40702871500",
+  "job": 122868651147,
+  "suite": "gunsmith-bench",
+  "case": "A1-composites-equal-the-approved-previews",
+  "failure": "augb-factory-h: 26 channel values differ",
+  "cause": "The existing P0 browser fixture strips the newly added receiver-native front glove before comparing the pre-d3eb43f approved preview. Full-wave preview generation replaced that old path with the current gloved composite.",
+  "correction": "Retain the 195f27bc factory H 1x/3x previews at their original paths, with locked hashes. Generate current gloved H previews under augb-factory-h-front-glove-1x/3x.png and use these for the full-wave independent check. Runtime PNG, formal art, game code and browser assertions remain unchanged.",
+  "validation": "Run the independent full-wave art check, real layout rehearsal and existing browser A1 case after the correction; final remote result is recorded in the PR delivery comment."
+}

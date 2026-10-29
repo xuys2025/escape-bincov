@@ -1,0 +1,2026 @@
+{
+  "schema": 1,
+  "batch": "M3-W3",
+  "status": "fail",
+  "baseline": {
+    "head": "ec1b39b42b200b6865dc0a3e4c0b48bd290a25f2",
+    "main": "275fafd77b1574938ecc0409ab405b77850359c1"
+  },
+  "totals": {
+    "count": 38,
+    "bytes": 6413
+  },
+  "checks": 103,
+  "passed": 99,
+  "failed": 4,
+  "measurements": [
+    {
+      "row": 1,
+      "gun": "mb4a1",
+      "part": "factory",
+      "code": "i",
+      "exposure": 14,
+      "target": 14,
+      "delta": 0,
+      "size": [
+        80,
+        24
+      ],
+      "limit": [
+        144,
+        52
+      ],
+      "colors": 4
+    },
+    {
+      "row": 1,
+      "gun": "mb4a1",
+      "part": "factory",
+      "code": "w",
+      "exposure": 28,
+      "target": 28,
+      "delta": 0,
+      "size": [
+        160,
+        48
+      ],
+      "limit": [
+        288,
+        104
+      ],
+      "colors": 6
+    },
+    {
+      "row": 1,
+      "gun": "mb4a1",
+      "part": "G10",
+      "code": "i",
+      "exposure": 14,
+      "target": 14,
+      "delta": 0,
+      "size": [
+        80,
+        24
+      ],
+      "limit": [
+        144,
+        52
+      ],
+      "colors": 4
+    },
+    {
+      "row": 1,
+      "gun": "mb4a1",
+      "part": "G10",
+      "code": "w",
+      "exposure": 28,
+      "target": 28,
+      "delta": 0,
+      "size": [
+        160,
+        48
+      ],
+      "limit": [
+        288,
+        104
+      ],
+      "colors": 6
+    },
+    {
+      "row": 2,
+      "gun": "akb74",
+      "part": "factory",
+      "code": "i",
+      "exposure": 16,
+      "target": 16,
+      "delta": 0,
+      "size": [
+        87,
+        23
+      ],
+      "limit": [
+        144,
+        52
+      ],
+      "colors": 10
+    },
+    {
+      "row": 2,
+      "gun": "akb74",
+      "part": "factory",
+      "code": "w",
+      "exposure": 32,
+      "target": 32,
+      "delta": 0,
+      "size": [
+        175,
+        46
+      ],
+      "limit": [
+        288,
+        104
+      ],
+      "colors": 15
+    },
+    {
+      "row": 3,
+      "gun": "akb74",
+      "part": "G08",
+      "code": "i",
+      "exposure": 22,
+      "target": 22,
+      "delta": 0,
+      "size": [
+        87,
+        29
+      ],
+      "limit": [
+        144,
+        78
+      ],
+      "colors": 10
+    },
+    {
+      "row": 3,
+      "gun": "akb74",
+      "part": "G08",
+      "code": "w",
+      "exposure": 44,
+      "target": 44,
+      "delta": 0,
+      "size": [
+        175,
+        58
+      ],
+      "limit": [
+        288,
+        156
+      ],
+      "colors": 15
+    },
+    {
+      "row": 4,
+      "gun": "akb103",
+      "part": "factory",
+      "code": "i",
+      "exposure": 17,
+      "target": 17,
+      "delta": 0,
+      "size": [
+        87,
+        24
+      ],
+      "limit": [
+        144,
+        52
+      ],
+      "colors": 5
+    },
+    {
+      "row": 4,
+      "gun": "akb103",
+      "part": "factory",
+      "code": "w",
+      "exposure": 34,
+      "target": 34,
+      "delta": 0,
+      "size": [
+        175,
+        48
+      ],
+      "limit": [
+        288,
+        104
+      ],
+      "colors": 7
+    },
+    {
+      "row": 5,
+      "gun": "akb103",
+      "part": "G09",
+      "code": "i",
+      "exposure": 19,
+      "target": 19,
+      "delta": 0,
+      "size": [
+        87,
+        26
+      ],
+      "limit": [
+        144,
+        78
+      ],
+      "colors": 5
+    },
+    {
+      "row": 5,
+      "gun": "akb103",
+      "part": "G09",
+      "code": "w",
+      "exposure": 38,
+      "target": 38,
+      "delta": 0,
+      "size": [
+        175,
+        52
+      ],
+      "limit": [
+        288,
+        156
+      ],
+      "colors": 7
+    },
+    {
+      "row": 6,
+      "gun": "mpb5",
+      "part": "factory",
+      "code": "i",
+      "exposure": 14,
+      "target": 14,
+      "delta": 0,
+      "size": [
+        65,
+        21
+      ],
+      "limit": [
+        108,
+        52
+      ],
+      "colors": 5
+    },
+    {
+      "row": 6,
+      "gun": "mpb5",
+      "part": "factory",
+      "code": "w",
+      "exposure": 28,
+      "target": 28,
+      "delta": 0,
+      "size": [
+        131,
+        42
+      ],
+      "limit": [
+        216,
+        104
+      ],
+      "colors": 7
+    },
+    {
+      "row": 6,
+      "gun": "mpb5",
+      "part": "G03",
+      "code": "i",
+      "exposure": 14,
+      "target": 14,
+      "delta": 0,
+      "size": [
+        65,
+        21
+      ],
+      "limit": [
+        108,
+        52
+      ],
+      "colors": 5
+    },
+    {
+      "row": 6,
+      "gun": "mpb5",
+      "part": "G03",
+      "code": "w",
+      "exposure": 28,
+      "target": 28,
+      "delta": 0,
+      "size": [
+        131,
+        42
+      ],
+      "limit": [
+        216,
+        104
+      ],
+      "colors": 7
+    },
+    {
+      "row": 7,
+      "gun": "umpb45",
+      "part": "factory",
+      "code": "i",
+      "exposure": 15,
+      "target": 15,
+      "delta": 0,
+      "size": [
+        66,
+        22
+      ],
+      "limit": [
+        108,
+        52
+      ],
+      "colors": 5
+    },
+    {
+      "row": 7,
+      "gun": "umpb45",
+      "part": "factory",
+      "code": "w",
+      "exposure": 30,
+      "target": 30,
+      "delta": 0,
+      "size": [
+        133,
+        44
+      ],
+      "limit": [
+        216,
+        104
+      ],
+      "colors": 6
+    },
+    {
+      "row": 8,
+      "gun": "umpb45",
+      "part": "G04",
+      "code": "i",
+      "exposure": 19,
+      "target": 19,
+      "delta": 0,
+      "size": [
+        66,
+        26
+      ],
+      "limit": [
+        108,
+        78
+      ],
+      "colors": 5
+    },
+    {
+      "row": 8,
+      "gun": "umpb45",
+      "part": "G04",
+      "code": "w",
+      "exposure": 38,
+      "target": 38,
+      "delta": 0,
+      "size": [
+        133,
+        52
+      ],
+      "limit": [
+        216,
+        156
+      ],
+      "colors": 6
+    },
+    {
+      "row": 9,
+      "gun": "augb",
+      "part": "factory",
+      "code": "i",
+      "exposure": 12,
+      "target": 12,
+      "delta": 0,
+      "size": [
+        65,
+        25
+      ],
+      "limit": [
+        108,
+        52
+      ],
+      "colors": 8
+    },
+    {
+      "row": 9,
+      "gun": "augb",
+      "part": "factory",
+      "code": "w",
+      "exposure": 24,
+      "target": 24,
+      "delta": 0,
+      "size": [
+        130,
+        50
+      ],
+      "limit": [
+        216,
+        104
+      ],
+      "colors": 9
+    },
+    {
+      "row": 9,
+      "gun": "augb",
+      "part": "G10",
+      "code": "i",
+      "exposure": 12,
+      "target": 12,
+      "delta": 0,
+      "size": [
+        65,
+        25
+      ],
+      "limit": [
+        108,
+        52
+      ],
+      "colors": 8
+    },
+    {
+      "row": 9,
+      "gun": "augb",
+      "part": "G10",
+      "code": "w",
+      "exposure": 24,
+      "target": 24,
+      "delta": 0,
+      "size": [
+        130,
+        50
+      ],
+      "limit": [
+        216,
+        104
+      ],
+      "colors": 9
+    },
+    {
+      "row": 12,
+      "gun": "svdb",
+      "part": "factory",
+      "code": "i",
+      "exposure": 7,
+      "target": 7,
+      "delta": 0,
+      "size": [
+        92,
+        18
+      ],
+      "limit": [
+        180,
+        52
+      ],
+      "colors": 8
+    },
+    {
+      "row": 12,
+      "gun": "svdb",
+      "part": "factory",
+      "code": "w",
+      "exposure": 14,
+      "target": 14,
+      "delta": 0,
+      "size": [
+        184,
+        36
+      ],
+      "limit": [
+        360,
+        104
+      ],
+      "colors": 9
+    },
+    {
+      "row": 13,
+      "gun": "rpkb",
+      "part": "factory",
+      "code": "i",
+      "exposure": 21,
+      "target": 21,
+      "delta": 0,
+      "size": [
+        97,
+        28
+      ],
+      "limit": [
+        180,
+        52
+      ],
+      "colors": 7
+    },
+    {
+      "row": 13,
+      "gun": "rpkb",
+      "part": "factory",
+      "code": "w",
+      "exposure": 42,
+      "target": 42,
+      "delta": 0,
+      "size": [
+        195,
+        56
+      ],
+      "limit": [
+        360,
+        104
+      ],
+      "colors": 10
+    },
+    {
+      "row": 14,
+      "gun": "rpkb",
+      "part": "G12",
+      "code": "i",
+      "exposure": 18,
+      "target": 18,
+      "delta": 0,
+      "size": [
+        97,
+        25
+      ],
+      "limit": [
+        180,
+        52
+      ],
+      "colors": 7
+    },
+    {
+      "row": 14,
+      "gun": "rpkb",
+      "part": "G12",
+      "code": "w",
+      "exposure": 36,
+      "target": 36,
+      "delta": 0,
+      "size": [
+        195,
+        50
+      ],
+      "limit": [
+        360,
+        104
+      ],
+      "colors": 10
+    },
+    {
+      "row": 15,
+      "gun": "rpkb",
+      "part": "G09",
+      "code": "i",
+      "exposure": 19,
+      "target": 20,
+      "delta": -1,
+      "size": [
+        97,
+        26
+      ],
+      "limit": [
+        180,
+        78
+      ],
+      "colors": 7
+    },
+    {
+      "row": 15,
+      "gun": "rpkb",
+      "part": "G09",
+      "code": "w",
+      "exposure": 38,
+      "target": 40,
+      "delta": -2,
+      "size": [
+        195,
+        52
+      ],
+      "limit": [
+        360,
+        156
+      ],
+      "colors": 10
+    },
+    {
+      "row": 16,
+      "gun": "vb9",
+      "part": "factory",
+      "code": "i",
+      "exposure": 8,
+      "target": 8,
+      "delta": 0,
+      "size": [
+        55,
+        18
+      ],
+      "limit": [
+        72,
+        52
+      ],
+      "colors": 5
+    },
+    {
+      "row": 16,
+      "gun": "vb9",
+      "part": "factory",
+      "code": "w",
+      "exposure": 16,
+      "target": 16,
+      "delta": 0,
+      "size": [
+        110,
+        36
+      ],
+      "limit": [
+        144,
+        104
+      ],
+      "colors": 7
+    },
+    {
+      "row": 17,
+      "gun": "gb17",
+      "part": "G01",
+      "code": "i",
+      "exposure": 10,
+      "target": 10,
+      "delta": 0,
+      "size": [
+        38,
+        27
+      ],
+      "limit": [
+        72,
+        52
+      ],
+      "colors": 5
+    },
+    {
+      "row": 17,
+      "gun": "gb17",
+      "part": "G01",
+      "code": "w",
+      "exposure": 20,
+      "target": 20,
+      "delta": 0,
+      "size": [
+        76,
+        54
+      ],
+      "limit": [
+        144,
+        104
+      ],
+      "colors": 6
+    },
+    {
+      "row": 18,
+      "gun": "mb1911",
+      "part": "G02",
+      "code": "i",
+      "exposure": 4,
+      "target": 4,
+      "delta": 0,
+      "size": [
+        42,
+        21
+      ],
+      "limit": [
+        72,
+        52
+      ],
+      "colors": 7
+    },
+    {
+      "row": 18,
+      "gun": "mb1911",
+      "part": "G02",
+      "code": "w",
+      "exposure": 8,
+      "target": 8,
+      "delta": 0,
+      "size": [
+        84,
+        42
+      ],
+      "limit": [
+        144,
+        104
+      ],
+      "colors": 9
+    }
+  ],
+  "results": [
+    {
+      "name": "Exactly 19 requested components / 38 v2 PNGs, bijection with manifest",
+      "status": "pass"
+    },
+    {
+      "name": "Formal manifest, all accepted PNGs (including H/Q) and virtual metadata remain unchanged",
+      "status": "pass",
+      "evidence": {
+        "formalPngs": 636,
+        "formalBytes": 98932
+      }
+    },
+    {
+      "name": "gs-mb4a1-mag-factory-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 104,
+        "colors": 4
+      }
+    },
+    {
+      "name": "gs-mb4a1-mag-factory-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 147,
+        "colors": 6
+      }
+    },
+    {
+      "name": "gs-akb74-mag-factory-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 116,
+        "colors": 4
+      }
+    },
+    {
+      "name": "gs-akb74-mag-factory-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 183,
+        "colors": 6
+      }
+    },
+    {
+      "name": "gs-akb103-mag-factory-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 109,
+        "colors": 3
+      }
+    },
+    {
+      "name": "gs-akb103-mag-factory-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 178,
+        "colors": 5
+      }
+    },
+    {
+      "name": "gs-mpb5-mag-factory-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 107,
+        "colors": 4
+      }
+    },
+    {
+      "name": "gs-mpb5-mag-factory-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 161,
+        "colors": 6
+      }
+    },
+    {
+      "name": "gs-umpb45-mag-factory-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 92,
+        "colors": 3
+      }
+    },
+    {
+      "name": "gs-umpb45-mag-factory-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 131,
+        "colors": 5
+      }
+    },
+    {
+      "name": "gs-augb-mag-factory-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 136,
+        "colors": 5
+      }
+    },
+    {
+      "name": "gs-augb-mag-factory-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 203,
+        "colors": 7
+      }
+    },
+    {
+      "name": "gs-mb14-mag-factory-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 99,
+        "colors": 4
+      }
+    },
+    {
+      "name": "gs-mb14-mag-factory-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 134,
+        "colors": 6
+      }
+    },
+    {
+      "name": "gs-rpkb-mag-factory-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 112,
+        "colors": 3
+      }
+    },
+    {
+      "name": "gs-rpkb-mag-factory-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 184,
+        "colors": 5
+      }
+    },
+    {
+      "name": "gs-g01-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 104,
+        "colors": 3
+      }
+    },
+    {
+      "name": "gs-g01-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 157,
+        "colors": 5
+      }
+    },
+    {
+      "name": "gs-g02-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 91,
+        "colors": 3
+      }
+    },
+    {
+      "name": "gs-g02-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 127,
+        "colors": 6
+      }
+    },
+    {
+      "name": "gs-g03-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 109,
+        "colors": 4
+      }
+    },
+    {
+      "name": "gs-g03-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 174,
+        "colors": 6
+      }
+    },
+    {
+      "name": "gs-g04-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 100,
+        "colors": 3
+      }
+    },
+    {
+      "name": "gs-g04-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 152,
+        "colors": 5
+      }
+    },
+    {
+      "name": "gs-g08-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 115,
+        "colors": 4
+      }
+    },
+    {
+      "name": "gs-g08-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 186,
+        "colors": 6
+      }
+    },
+    {
+      "name": "gs-g09-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 169,
+        "colors": 3
+      }
+    },
+    {
+      "name": "gs-g09-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 343,
+        "colors": 5
+      }
+    },
+    {
+      "name": "gs-g10-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 106,
+        "colors": 4
+      }
+    },
+    {
+      "name": "gs-g10-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 159,
+        "colors": 5
+      }
+    },
+    {
+      "name": "gs-g11-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 109,
+        "colors": 4
+      }
+    },
+    {
+      "name": "gs-g11-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 156,
+        "colors": 6
+      }
+    },
+    {
+      "name": "gs-g12-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 107,
+        "colors": 3
+      }
+    },
+    {
+      "name": "gs-g12-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 171,
+        "colors": 5
+      }
+    },
+    {
+      "name": "gs-svdb-receiver-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 324,
+        "colors": 8,
+        "changedPixelsInsideMagazine": 49
+      }
+    },
+    {
+      "name": "gs-svdb-receiver-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 567,
+        "colors": 9,
+        "changedPixelsInsideMagazine": 227
+      }
+    },
+    {
+      "name": "gs-vb9-receiver-i-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 246,
+        "colors": 5,
+        "changedPixelsInsideMagazine": 49
+      }
+    },
+    {
+      "name": "gs-vb9-receiver-w-v2",
+      "status": "pass",
+      "evidence": {
+        "bytes": 445,
+        "colors": 7,
+        "changedPixelsInsideMagazine": 243
+      }
+    },
+    {
+      "name": "mb4a1-mag-factory W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 256
+      }
+    },
+    {
+      "name": "akb74-mag-factory W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 251
+      }
+    },
+    {
+      "name": "akb103-mag-factory W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 253
+      }
+    },
+    {
+      "name": "mpb5-mag-factory W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 203
+      }
+    },
+    {
+      "name": "umpb45-mag-factory W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 188
+      }
+    },
+    {
+      "name": "augb-mag-factory W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 249
+      }
+    },
+    {
+      "name": "mb14-mag-factory W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 160
+      }
+    },
+    {
+      "name": "rpkb-mag-factory W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 304
+      }
+    },
+    {
+      "name": "g01 W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 149
+      }
+    },
+    {
+      "name": "g02 W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 69
+      }
+    },
+    {
+      "name": "g03 W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 206
+      }
+    },
+    {
+      "name": "g04 W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 265
+      }
+    },
+    {
+      "name": "g08 W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 339
+      }
+    },
+    {
+      "name": "g09 W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 324
+      }
+    },
+    {
+      "name": "g10 W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 223
+      }
+    },
+    {
+      "name": "g11 W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 247
+      }
+    },
+    {
+      "name": "g12 W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 297
+      }
+    },
+    {
+      "name": "svdb-receiver W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 604
+      }
+    },
+    {
+      "name": "vb9-receiver W is not a nearest-neighbor enlargement of I",
+      "status": "pass",
+      "evidence": {
+        "differentPixels": 576
+      }
+    },
+    {
+      "name": "mb4a1/factory/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 1,
+        "gun": "mb4a1",
+        "part": "factory",
+        "code": "i",
+        "exposure": 14,
+        "target": 14,
+        "delta": 0,
+        "size": [
+          80,
+          24
+        ],
+        "limit": [
+          144,
+          52
+        ],
+        "colors": 4
+      }
+    },
+    {
+      "name": "mb4a1/factory/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 1,
+        "gun": "mb4a1",
+        "part": "factory",
+        "code": "w",
+        "exposure": 28,
+        "target": 28,
+        "delta": 0,
+        "size": [
+          160,
+          48
+        ],
+        "limit": [
+          288,
+          104
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "mb4a1/G10/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 1,
+        "gun": "mb4a1",
+        "part": "G10",
+        "code": "i",
+        "exposure": 14,
+        "target": 14,
+        "delta": 0,
+        "size": [
+          80,
+          24
+        ],
+        "limit": [
+          144,
+          52
+        ],
+        "colors": 4
+      }
+    },
+    {
+      "name": "mb4a1/G10/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 1,
+        "gun": "mb4a1",
+        "part": "G10",
+        "code": "w",
+        "exposure": 28,
+        "target": 28,
+        "delta": 0,
+        "size": [
+          160,
+          48
+        ],
+        "limit": [
+          288,
+          104
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "akb74/factory/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 2,
+        "gun": "akb74",
+        "part": "factory",
+        "code": "i",
+        "exposure": 16,
+        "target": 16,
+        "delta": 0,
+        "size": [
+          87,
+          23
+        ],
+        "limit": [
+          144,
+          52
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "akb74/factory/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 2,
+        "gun": "akb74",
+        "part": "factory",
+        "code": "w",
+        "exposure": 32,
+        "target": 32,
+        "delta": 0,
+        "size": [
+          175,
+          46
+        ],
+        "limit": [
+          288,
+          104
+        ],
+        "colors": 15
+      }
+    },
+    {
+      "name": "akb74/G08/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 3,
+        "gun": "akb74",
+        "part": "G08",
+        "code": "i",
+        "exposure": 22,
+        "target": 22,
+        "delta": 0,
+        "size": [
+          87,
+          29
+        ],
+        "limit": [
+          144,
+          78
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "akb74/G08/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 3,
+        "gun": "akb74",
+        "part": "G08",
+        "code": "w",
+        "exposure": 44,
+        "target": 44,
+        "delta": 0,
+        "size": [
+          175,
+          58
+        ],
+        "limit": [
+          288,
+          156
+        ],
+        "colors": 15
+      }
+    },
+    {
+      "name": "akb103/factory/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 4,
+        "gun": "akb103",
+        "part": "factory",
+        "code": "i",
+        "exposure": 17,
+        "target": 17,
+        "delta": 0,
+        "size": [
+          87,
+          24
+        ],
+        "limit": [
+          144,
+          52
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "akb103/factory/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 4,
+        "gun": "akb103",
+        "part": "factory",
+        "code": "w",
+        "exposure": 34,
+        "target": 34,
+        "delta": 0,
+        "size": [
+          175,
+          48
+        ],
+        "limit": [
+          288,
+          104
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "akb103/G09/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 5,
+        "gun": "akb103",
+        "part": "G09",
+        "code": "i",
+        "exposure": 19,
+        "target": 19,
+        "delta": 0,
+        "size": [
+          87,
+          26
+        ],
+        "limit": [
+          144,
+          78
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "akb103/G09/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 5,
+        "gun": "akb103",
+        "part": "G09",
+        "code": "w",
+        "exposure": 38,
+        "target": 38,
+        "delta": 0,
+        "size": [
+          175,
+          52
+        ],
+        "limit": [
+          288,
+          156
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mpb5/factory/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 6,
+        "gun": "mpb5",
+        "part": "factory",
+        "code": "i",
+        "exposure": 14,
+        "target": 14,
+        "delta": 0,
+        "size": [
+          65,
+          21
+        ],
+        "limit": [
+          108,
+          52
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mpb5/factory/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 6,
+        "gun": "mpb5",
+        "part": "factory",
+        "code": "w",
+        "exposure": 28,
+        "target": 28,
+        "delta": 0,
+        "size": [
+          131,
+          42
+        ],
+        "limit": [
+          216,
+          104
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mpb5/G03/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 6,
+        "gun": "mpb5",
+        "part": "G03",
+        "code": "i",
+        "exposure": 14,
+        "target": 14,
+        "delta": 0,
+        "size": [
+          65,
+          21
+        ],
+        "limit": [
+          108,
+          52
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mpb5/G03/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 6,
+        "gun": "mpb5",
+        "part": "G03",
+        "code": "w",
+        "exposure": 28,
+        "target": 28,
+        "delta": 0,
+        "size": [
+          131,
+          42
+        ],
+        "limit": [
+          216,
+          104
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "umpb45/factory/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 7,
+        "gun": "umpb45",
+        "part": "factory",
+        "code": "i",
+        "exposure": 15,
+        "target": 15,
+        "delta": 0,
+        "size": [
+          66,
+          22
+        ],
+        "limit": [
+          108,
+          52
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "umpb45/factory/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 7,
+        "gun": "umpb45",
+        "part": "factory",
+        "code": "w",
+        "exposure": 30,
+        "target": 30,
+        "delta": 0,
+        "size": [
+          133,
+          44
+        ],
+        "limit": [
+          216,
+          104
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "umpb45/G04/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 8,
+        "gun": "umpb45",
+        "part": "G04",
+        "code": "i",
+        "exposure": 19,
+        "target": 19,
+        "delta": 0,
+        "size": [
+          66,
+          26
+        ],
+        "limit": [
+          108,
+          78
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "umpb45/G04/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 8,
+        "gun": "umpb45",
+        "part": "G04",
+        "code": "w",
+        "exposure": 38,
+        "target": 38,
+        "delta": 0,
+        "size": [
+          133,
+          52
+        ],
+        "limit": [
+          216,
+          156
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "augb/factory/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 9,
+        "gun": "augb",
+        "part": "factory",
+        "code": "i",
+        "exposure": 12,
+        "target": 12,
+        "delta": 0,
+        "size": [
+          65,
+          25
+        ],
+        "limit": [
+          108,
+          52
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "augb/factory/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 9,
+        "gun": "augb",
+        "part": "factory",
+        "code": "w",
+        "exposure": 24,
+        "target": 24,
+        "delta": 0,
+        "size": [
+          130,
+          50
+        ],
+        "limit": [
+          216,
+          104
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "augb/G10/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 9,
+        "gun": "augb",
+        "part": "G10",
+        "code": "i",
+        "exposure": 12,
+        "target": 12,
+        "delta": 0,
+        "size": [
+          65,
+          25
+        ],
+        "limit": [
+          108,
+          52
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "augb/G10/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 9,
+        "gun": "augb",
+        "part": "G10",
+        "code": "w",
+        "exposure": 24,
+        "target": 24,
+        "delta": 0,
+        "size": [
+          130,
+          50
+        ],
+        "limit": [
+          216,
+          104
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "mb14/factory/i bounds, exposure, seams, assembly",
+      "status": "fail",
+      "error": "Single ink row at feed lip"
+    },
+    {
+      "name": "mb14/factory/w bounds, exposure, seams, assembly",
+      "status": "fail",
+      "error": "Single ink row at feed lip"
+    },
+    {
+      "name": "mb14/G11/i bounds, exposure, seams, assembly",
+      "status": "fail",
+      "error": "Single ink row at feed lip"
+    },
+    {
+      "name": "mb14/G11/w bounds, exposure, seams, assembly",
+      "status": "fail",
+      "error": "Single ink row at feed lip"
+    },
+    {
+      "name": "svdb/factory/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 12,
+        "gun": "svdb",
+        "part": "factory",
+        "code": "i",
+        "exposure": 7,
+        "target": 7,
+        "delta": 0,
+        "size": [
+          92,
+          18
+        ],
+        "limit": [
+          180,
+          52
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "svdb/factory/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 12,
+        "gun": "svdb",
+        "part": "factory",
+        "code": "w",
+        "exposure": 14,
+        "target": 14,
+        "delta": 0,
+        "size": [
+          184,
+          36
+        ],
+        "limit": [
+          360,
+          104
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "rpkb/factory/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 13,
+        "gun": "rpkb",
+        "part": "factory",
+        "code": "i",
+        "exposure": 21,
+        "target": 21,
+        "delta": 0,
+        "size": [
+          97,
+          28
+        ],
+        "limit": [
+          180,
+          52
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "rpkb/factory/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 13,
+        "gun": "rpkb",
+        "part": "factory",
+        "code": "w",
+        "exposure": 42,
+        "target": 42,
+        "delta": 0,
+        "size": [
+          195,
+          56
+        ],
+        "limit": [
+          360,
+          104
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "rpkb/G12/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 14,
+        "gun": "rpkb",
+        "part": "G12",
+        "code": "i",
+        "exposure": 18,
+        "target": 18,
+        "delta": 0,
+        "size": [
+          97,
+          25
+        ],
+        "limit": [
+          180,
+          52
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "rpkb/G12/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 14,
+        "gun": "rpkb",
+        "part": "G12",
+        "code": "w",
+        "exposure": 36,
+        "target": 36,
+        "delta": 0,
+        "size": [
+          195,
+          50
+        ],
+        "limit": [
+          360,
+          104
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "rpkb/G09/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 15,
+        "gun": "rpkb",
+        "part": "G09",
+        "code": "i",
+        "exposure": 19,
+        "target": 20,
+        "delta": -1,
+        "size": [
+          97,
+          26
+        ],
+        "limit": [
+          180,
+          78
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "rpkb/G09/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 15,
+        "gun": "rpkb",
+        "part": "G09",
+        "code": "w",
+        "exposure": 38,
+        "target": 40,
+        "delta": -2,
+        "size": [
+          195,
+          52
+        ],
+        "limit": [
+          360,
+          156
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "vb9/factory/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 16,
+        "gun": "vb9",
+        "part": "factory",
+        "code": "i",
+        "exposure": 8,
+        "target": 8,
+        "delta": 0,
+        "size": [
+          55,
+          18
+        ],
+        "limit": [
+          72,
+          52
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "vb9/factory/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 16,
+        "gun": "vb9",
+        "part": "factory",
+        "code": "w",
+        "exposure": 16,
+        "target": 16,
+        "delta": 0,
+        "size": [
+          110,
+          36
+        ],
+        "limit": [
+          144,
+          104
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "gb17/G01/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 17,
+        "gun": "gb17",
+        "part": "G01",
+        "code": "i",
+        "exposure": 10,
+        "target": 10,
+        "delta": 0,
+        "size": [
+          38,
+          27
+        ],
+        "limit": [
+          72,
+          52
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "gb17/G01/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 17,
+        "gun": "gb17",
+        "part": "G01",
+        "code": "w",
+        "exposure": 20,
+        "target": 20,
+        "delta": 0,
+        "size": [
+          76,
+          54
+        ],
+        "limit": [
+          144,
+          104
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "mb1911/G02/i bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 18,
+        "gun": "mb1911",
+        "part": "G02",
+        "code": "i",
+        "exposure": 4,
+        "target": 4,
+        "delta": 0,
+        "size": [
+          42,
+          21
+        ],
+        "limit": [
+          72,
+          52
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb1911/G02/w bounds, exposure, seams, assembly",
+      "status": "pass",
+      "evidence": {
+        "row": 18,
+        "gun": "mb1911",
+        "part": "G02",
+        "code": "w",
+        "exposure": 8,
+        "target": 8,
+        "delta": 0,
+        "size": [
+          84,
+          42
+        ],
+        "limit": [
+          144,
+          104
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "18 comparison previews, complete overview, color and grayscale sheets",
+      "status": "pass"
+    },
+    {
+      "name": "Manifest totals match actual files",
+      "status": "pass",
+      "evidence": {
+        "count": 38,
+        "bytes": 6413
+      }
+    }
+  ],
+  "scope": "Standalone incoming-art validation. Runtime importer rehearsal is separate. Maintainer visual acceptance and in-game integration remain outstanding."
+}

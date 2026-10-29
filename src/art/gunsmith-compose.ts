@@ -8,7 +8,9 @@
 import type { PartNode } from '../gunsmith/instance';
 import { GUNSMITH_ART_URLS } from './gunsmith-assets';
 import { artFrame, artOf, gunArtLayout, type ArtCode, type ArtLayout } from './gunsmith-layout';
+import { GUNSMITH_VIRTUAL } from './gunsmith-art-meta';
 import { inventoryArtSize, paintInventoryItem } from './inventory';
+import type { ItemArtId } from './items';
 import { installGunsmithArt, type ArtBox } from './gunsmith-hooks';
 import { partsOfSignature } from '../gunsmith/signature';
 
@@ -32,7 +34,10 @@ export function loadGunsmithArt(): Promise<void> {
         benchFrame: gun => { if (!frames.has(gun)) frames.set(gun, artFrame(gun, 'w')); return frames.get(gun)!; },
         side: id => {
             if (sides.has(id)) return sides.get(id)!;
-            const layout = gunArtLayout(id, [], 'h', false), canvas = layout && drawGunLayout(layout);
+            // The old guns' approved held pictures have the hands painted on (wholeCanvasLayer, #28 M3-03): their side view
+            // is Sol's bare picture (M3-07), and without one they keep their item icons.
+            const old = artOf(`gs-${id}-receiver-h`)?.wholeCanvasLayer, layout = old && !artOf(`gs-${id}-bare-h`) ? null : gunArtLayout(id, [], 'h', false);
+            const canvas = layout && drawGunLayout(layout);
             sides.set(id, canvas ?? null);
             return canvas ?? null;
         },
@@ -49,24 +54,33 @@ export function loadGunsmithArt(): Promise<void> {
 const frames = new Map<string, ArtBox | null>();
 /** The side views of the gunsmith guns (the factory held picture without hands), one per gun type, kept for the page. */
 const sides = new Map<string, HTMLCanvasElement | null>();
-let carbine: { receiver: HTMLCanvasElement; handguard: HTMLCanvasElement } | null = null;
+const virtual = new Map<string, HTMLCanvasElement>();
 /**
- * The old carbine's inventory image split as Sol split it for the approved previews: the factory handguard is rows 8
- * and 9 of columns 44 to 58; the receiver is the whole image with those pixels filled in the barrel's colour.
+ * An old gun's inventory layer (#28 M3-03): its procedural picture cut by the manifest's rectangles (VirtualArt), once
+ * per page. The approved stacks give the picture back pixel for pixel (Sol's check, and gunsmith-bench A1).
  */
-function carbineLayers() {
-    if (carbine) return carbine;
-    const [w, h] = inventoryArtSize('carbine'), canvas = (paint: (c: CanvasRenderingContext2D) => void) => {
-        const el = document.createElement('canvas'); el.width = w; el.height = h;
+function virtualLayer(key: string): HTMLCanvasElement | null {
+    const v = GUNSMITH_VIRTUAL[key];
+    if (!v) return null;
+    if (virtual.has(key)) return virtual.get(key)!;
+    const [w, h] = inventoryArtSize(v.sourceKey), canvas = (cw: number, ch: number, paint: (c: CanvasRenderingContext2D) => void) => {
+        const el = document.createElement('canvas'); el.width = cw; el.height = ch;
         const c = el.getContext('2d')!; c.imageSmoothingEnabled = false; paint(c); return el;
     };
-    const original = canvas(c => paintInventoryItem(c, 'carbine')), pixels = original.getContext('2d')!.getImageData(44, 8, 15, 2);
-    const receiver = canvas(c => { c.drawImage(original, 0, 0); c.fillStyle = 'rgb(66,90,96)'; c.fillRect(44, 8, 15, 2); });
-    const handguard = canvas(c => c.putImageData(pixels, 44, 8));
-    return carbine = { receiver, handguard };
+    const original = canvas(w, h, c => paintInventoryItem(c, v.sourceKey as ItemArtId));
+    let out: HTMLCanvasElement;
+    if (v.rect) {
+        const [x, y, rw, rh] = v.rect;
+        out = v.wholeCanvasLayer ? canvas(w, h, c => c.drawImage(original, x, y, rw, rh, x, y, rw, rh)) : canvas(rw, rh, c => c.drawImage(original, x, y, rw, rh, 0, 0, rw, rh));
+    } else out = canvas(w, h, c => {
+        c.drawImage(original, 0, 0);
+        for (const [x, y, rw, rh] of v.clearRects ?? []) c.clearRect(x, y, rw, rh);
+        for (const [color, x, y, rw, rh] of v.fillRects ?? []) { c.fillStyle = color; c.fillRect(x, y, rw, rh); }
+    });
+    virtual.set(key, out);
+    return out;
 }
-const source = (key: string): CanvasImageSource | null =>
-    key === 'gs-carbine-receiver-i' ? carbineLayers().receiver : key === 'gs-carbine-handguard-factory-i' ? carbineLayers().handguard : images.get(key) ?? null;
+const source = (key: string): CanvasImageSource | null => images.get(key) ?? virtualLayer(key);
 
 /** Draw a layout on a new canvas, back to front; null before the images are decoded or without a 2D context. */
 export function drawGunLayout(layout: ArtLayout): HTMLCanvasElement | null {

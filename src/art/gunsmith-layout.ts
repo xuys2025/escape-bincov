@@ -10,7 +10,7 @@
 import { ATTACHMENTS } from '../gunsmith/catalog';
 import type { PartNode } from '../gunsmith/instance';
 import { MOUNT, partsSignature } from '../gunsmith/signature';
-import { GUNSMITH_ART, GUNSMITH_ART_REVISION } from './gunsmith-art-meta';
+import { GUNSMITH_ART, GUNSMITH_ART_REVISION, GUNSMITH_VIRTUAL } from './gunsmith-art-meta';
 import type { ArtPoint, GunsmithArt } from './gunsmith-art-types';
 
 export type ArtCode = 'h' | 'i' | 'w';
@@ -38,15 +38,11 @@ const ORDER: Readonly<Record<string, number>> = {
     muzzle: 9, side1: 10, side2: 10, pistolSide: 10, 'glove-rear': 11, 'glove-front': 12, 'glove-foregrip': 12,
 };
 /**
- * The old carbine's inventory image is the procedural one (art/inventory.ts), split as Sol split it for the approved
- * previews: the factory handguard is rows 8 and 9 of columns 44 to 58, and the receiver is the rest with those pixels
- * filled (gunsmith-compose.ts paints both).
+ * The old guns' inventory images are the procedural ones (art/inventory.ts), cut into layers as Sol cut them (the
+ * manifest's `virtual`, #28 M3-03): the pistol's and the double-barrel's whole receivers, the carbine's receiver,
+ * factory handguard and factory barrel. gunsmith-compose.ts paints them.
  */
-export const VIRTUAL_ART: Readonly<Record<string, GunsmithArt>> = {
-    'gs-carbine-receiver-i': { w: 78, h: 17, output: 'inventory', gun: 'carbine', role: 'receiver', mounts: { handguard: [44, 8], mount: [33, 4], muzzle: [77, 5] }, tip: [78, 6] },
-    'gs-carbine-handguard-factory-i': { w: 78, h: 17, output: 'inventory', gun: 'carbine', role: 'factory', slot: 'handguard', anchor: [44, 8] },
-};
-export const artOf = (key: string): GunsmithArt | undefined => GUNSMITH_ART[key] ?? VIRTUAL_ART[key];
+export const artOf = (key: string): GunsmithArt | undefined => GUNSMITH_ART[key] ?? GUNSMITH_VIRTUAL[key];
 /** A part's image in an output: the variant drawn for this gun first (gs-h04-h-akb103), else the shared one. */
 const partArt = (id: string, code: ArtCode, gun: string) => {
     const shared = `gs-${id.toLowerCase()}-${code}`, own = `${shared}-${gun}`;
@@ -99,7 +95,8 @@ export function gunArtLayout(gun: string, parts: readonly PartNode[], code: ArtC
     };
     walk(parts, root);
     // Held: the rear glove on the grip unless the receiver has it painted on (the approved carbine); the front hand on the
-    // foregrip, else on the handguard (no glove when its image has one painted on), else the receiver's hand.
+    // foregrip, else on the handguard (no glove when its image has one painted on), else the receiver's hand (ART-SPEC 5:
+    // a glove too, as on the Vector and the AUG, unless the hands are painted on or it is the grip, as on a pistol).
     let hand: ArtPoint | undefined;
     if (code === 'h') {
         const glove = (which: string, at: ArtPoint) => {
@@ -111,13 +108,20 @@ export function gunArtLayout(gun: string, parts: readonly PartNode[], code: ArtC
         const fore = nodes.find(n => n.label === 'under' && n.art.hand), guard = nodes.find(n => n.label === 'handguard' && n.art.hand);
         if (fore) { hand = add(fore.art.hand!, fore.x, fore.y); glove('foregrip', hand); }
         else if (guard) { hand = add(guard.art.hand!, guard.x, guard.y); if (!guard.art.embeddedFrontGlove) glove('front', hand); }
-        else if (rootArt.hand) hand = rootArt.hand;
+        else if (rootArt.hand) {
+            hand = rootArt.hand;
+            if (!rootArt.wholeCanvasLayer && !(rootArt.grip && hand[0] === rootArt.grip[0] && hand[1] === rootArt.grip[1])) glove('front', hand);
+        }
     }
     const lo = [Math.min(...nodes.map(n => n.x)), Math.min(...nodes.map(n => n.y))];
     const hi = [Math.max(...nodes.map(n => n.x + n.art.w)), Math.max(...nodes.map(n => n.y + n.art.h))];
     const shift = (p: ArtPoint): [number, number] => [p[0] - lo[0], p[1] - lo[1]];
     const rank = (n: Node) => n.art.layer === 'aboveReceiver' ? 4.5 : ORDER[n.label] ?? 8;
     const layers = [...nodes].sort((a, b) => rank(a) - rank(b)).map(n => ({ key: n.key, label: n.label, x: n.x - lo[0], y: n.y - lo[1], w: n.art.w, h: n.art.h }));
+    // An old gun's factory side view (no hands, no parts): Sol's bare picture (#28 M3-07), the approved held picture with
+    // its painted hands taken out, on the same canvas, in place of the receiver and its factory layers.
+    const bareKey = `gs-${gun}-bare-${code}`, bare = !gloves && rootArt.wholeCanvasLayer && !parts.length ? artOf(bareKey) : undefined;
+    if (bare) layers.splice(0, layers.length, { key: bareKey, label: 'bare', x: root.x - lo[0], y: root.y - lo[1], w: bare.w, h: bare.h });
     const tipNode = nodes.find(n => n.label === 'muzzle' && n.art.tip) ?? nodes.find(n => n.label === 'barrel' && n.art.tip) ?? root;
     const device = nodes.find(n => n.art.beam);
     const layout: ArtLayout = {

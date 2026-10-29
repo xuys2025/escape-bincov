@@ -1,7 +1,7 @@
 import * as D from '../domain';
 import type { Attribute, Facility, HideoutRuntime, HideoutSnapshot, Merchant, Recipe, Result, RunWorld, ShopSession, ShopSource, Source } from '../hideout-runtime/contract';
 import type { Scope } from '../view-lifecycle/scope';
-import { firstShopCell, questUses } from '../shop';
+import { CART_W, CATALOG_W, firstShopCell, questUses } from '../shop';
 import { STATIONS, type Station, type StationId } from './layout';
 import { GridDrag, type DragHooks } from './grid';
 import { esc } from '../html';
@@ -42,6 +42,8 @@ type Dialog =
 
 const WIDE: PanelKind[] = ['gear', 'arms', 'med'];
 const CENTER: PanelKind[] = ['report', 'menu', 'help', 'gunsmith'];
+/** Grid columns across a desktop panel: bag and stash; the shop's goods, cart and stash. */
+const GEAR_COLS = 6 + D.STASH_W, SHOP_COLS = CATALOG_W + CART_W + D.STASH_W;
 /**
  * The old hideout tabs kept as shortcuts (decision 06-2): open any of them from anywhere with the same session the
  * stations use; the camera turns to the place it belongs to. Digits follow the bar order; Tab / J / C / G still work.
@@ -198,7 +200,7 @@ export class UI {
   get compact() { return innerWidth < 900 || innerHeight < 560; }
   /** Grid cell (CSS px) that fits the panel's tallest column and a width that leaves the station in view. */
   private cellFor(kind: PanelKind): number {
-    const s = this.rt.snapshot(), rows = s.profile.stash.h, H = innerHeight, Wd = innerWidth;
+    const s = this.rt.snapshot(), rows = D.stashShownRows(s.profile.stash), H = innerHeight, Wd = innerWidth;
     if (this.compact) {
       // Landscape: two containers side by side (16 columns for gear, 14 for shops); portrait: stacked, 10 columns wide.
       // Height fits the first container (5 rows); the second one scrolls when it is taller.
@@ -208,13 +210,14 @@ export class UI {
     }
     if (kind === 'gear') {
       // Left: slot, three headings and the weight meter (~224 px) around bag (5 rows) and safe (2 rows); right: stash, upgrade and details (~180 px).
-      const byH = Math.min((H - 164 - 326) / 7, (H - 164 - 254) / rows), byW = (Math.min(Wd - 24, Wd * .74) - 70) / 16;
+      const byH = Math.min((H - 164 - 326) / 7, (H - 164 - 254) / rows), byW = (Math.min(Wd - 24, Wd * .74) - 70) / GEAR_COLS;
       // Below 36 px, three-character labels such as 保险管 no longer fit after the new gear actions.
       // Keep labels readable and allow the existing vertical scroll on exceptionally short desktop panels.
       return Math.max(36, Math.min(56, Math.floor(Math.min(byH, byW))));
     }
-    const byH = Math.min((H - 331 - 70) / 6, (H - 331) / rows), byW = (Math.min(Wd - 24, Wd * .76) - 74) / 20;
-    return Math.max(28, Math.min(56, Math.floor(Math.min(byH, byW))));
+    const byH = Math.min((H - 331 - 70) / 6, (H - 331) / rows), byW = (Math.min(Wd - 24, Wd * .76) - 74) / SHOP_COLS;
+    // Not below 36 px either (three-character labels); a stash taller than that leaves scrolls in its box (fitStash).
+    return Math.max(36, Math.min(56, Math.floor(Math.min(byH, byW))));
   }
 
   render() {
@@ -225,6 +228,7 @@ export class UI {
     const [title, sub] = kind === 'facility' ? [this.rt.facility(this.facility).name, facilityPlace[this.facility]] : TITLES[kind] ?? ['', ''];
     const line = this.station ? this.host.lineFor(this.station.id) : '';
     let cell = this.cellFor(kind);
+    const stashTop = el.querySelector('.stash-scroll')?.scrollTop ?? 0;
     // Desktop panels must fit without scrolling: if the first paint overflows (a quote line, an upgraded stash), the
     // cell shrinks by the overflow spread over the tallest column and the panel is painted again (at most twice).
     for (let pass = 0; ; pass++) {
@@ -232,9 +236,29 @@ export class UI {
       const pb = el.querySelector<HTMLElement>('.pbody')!, over = pb.scrollHeight - pb.clientHeight;
       // Gear details may scroll vertically; keep inventory geometry fixed while a first click selects an item,
       // otherwise the second click of a double click can land outside that item after the panel resizes.
-      if (kind === 'gear' || over <= 1 || this.compact || !WIDE.includes(kind) || cell <= 28 || pass >= 2) break;
-      cell = Math.max(28, cell - Math.ceil(over / Math.max(6, s.profile.stash.h)));
+      if (kind === 'gear' || over <= 1 || this.compact || !WIDE.includes(kind) || cell <= 36 || pass >= 2) break;
+      cell = Math.max(36, cell - Math.ceil(over / Math.max(6, D.stashShownRows(s.profile.stash))));
     }
+    if (!this.compact && WIDE.includes(kind)) this.fitStash(el, cell, stashTop);
+  }
+  /**
+   * A desktop panel still too tall at the smallest readable cell (a built-out stash at 1280x720, the overflow of #28
+   * M3-12): the stash scrolls in its own box, at least four rows tall, and the panel keeps its place. Measured as if
+   * nothing were selected (the empty details box, last measured when nothing was), so a click never resizes the stash;
+   * a taller details box may still scroll the panel, as before. In the gear panel only the stash column counts.
+   */
+  private detailsEmpty = 0;
+  private fitStash(el: HTMLElement, cell: number, top: number) {
+    const pb = el.querySelector<HTMLElement>('.pbody'), box = el.querySelector<HTMLElement>('.stash-scroll');
+    if (!pb || !box) return;
+    const details = pb.querySelector<HTMLElement>('aside.details');
+    if (details?.classList.contains('empty')) this.detailsEmpty = details.offsetHeight;
+    const grown = details && this.detailsEmpty ? Math.max(0, details.offsetHeight - this.detailsEmpty) : 0;
+    const col = box.closest<HTMLElement>('.gear .col'), limit = pb.getBoundingClientRect().top + pb.clientHeight - parseFloat(getComputedStyle(pb).paddingBottom);
+    const over = (col ? col.getBoundingClientRect().bottom - limit : pb.scrollHeight - pb.clientHeight) - grown;
+    if (over <= 1) return;
+    box.style.maxHeight = `${Math.max(cell * 4, Math.floor(box.clientHeight - over))}px`; box.classList.add('scrolls');
+    box.scrollTop = top;
   }
   private paint(kind: PanelKind, s: HideoutSnapshot, cell: number, center: boolean, el: HTMLElement, title: string, sub: string, line: string) {
     let body = '';
@@ -264,7 +288,7 @@ export class UI {
     }
     const scroll = el.querySelector('.pbody')?.scrollTop ?? 0;
     el.className = `${center ? 'modal' : 'panel'} k-${kind}${WIDE.includes(kind) ? ' wide' : ''}${this.compact ? ' compact' : ''}${innerHeight > innerWidth ? ' portrait' : ''}`;
-    el.style.width = WIDE.includes(kind) && !this.compact ? `${Math.min(innerWidth - 24, (kind === 'gear' ? 16 * cell + 70 : 20 * cell + 74))}px` : '';
+    el.style.width = WIDE.includes(kind) && !this.compact ? `${Math.min(innerWidth - 24, (kind === 'gear' ? GEAR_COLS * cell + 70 : SHOP_COLS * cell + 74))}px` : '';
     const cash = ['gear', 'arms', 'med', 'facility', 'deploy', 'radio', 'generator', 'gunsmith'].includes(kind) ? `<span class="pcash">现金 <b>¥ ${s.profile.cash.toLocaleString()}</b></span>` : '';
     const tabbed = SHORTCUTS.some(q => q.kind === kind) || kind === 'generator';
     const tabs = tabbed ? `<nav class="ptabs" aria-label="水产站功能">${SHORTCUTS.map(q => `<button data-tab="${q.kind}" class="${q.kind === kind ? 'on' : ''}" ${q.kind === kind ? 'aria-current="page"' : ''}>${q.label}<kbd>${q.key}</kbd></button>`).join('')}</nav>` : '';

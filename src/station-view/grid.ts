@@ -14,7 +14,9 @@ export function gridHtml(inv: D.Inventory, source: string, cell: number, selecte
     const img = `<img alt="" draggable="false" src="${pic.url}" style="width:${aw0 * art}px;height:${ah0 * art}px;transform:translate(-50%,-50%)${i.rotated ? ' rotate(90deg)' : ''}">`;
     return `<div class="item k-${d.kind}${selected === i.uid ? ' sel' : ''}${i.relief ? ' relief' : ''}" data-uid="${i.uid}" data-src="${source}" tabindex="0" role="button" aria-label="${esc(d.name)} × ${i.qty}" title="${esc(d.name)} × ${i.qty}" style="left:${i.x * cell}px;top:${i.y * cell}px;width:${w}px;height:${h}px"><span class="art">${img}</span>${pic.modified ? MODIFIED_MARK : ''}<span class="lbl">${esc(d.short || d.name)}</span>${i.qty > 1 ? `<span class="qty">${i.qty}</span>` : ''}</div>`;
   }).join('');
-  return `<div class="grid" data-grid="${source}" data-cell="${cell}" style="width:${inv.w * cell}px;height:${inv.h * cell}px;--cell:${cell}px">${items}<div class="preview" hidden></div>${!inv.items.length && opts.empty ? `<div class="empty">${esc(opts.empty)}</div>` : ''}</div>`;
+  // The stash overflow (#28 M3-12) shows below the grid, marked; nothing can be dropped there.
+  const rows = D.stashShownRows(inv), band = rows > inv.h ? `<div class="overflow-band" style="top:${inv.h * cell}px;height:${(rows - inv.h) * cell}px"><span>溢出区 · 只能取出，清空后才能出击</span></div>` : '';
+  return `<div class="grid${band ? ' overflowed' : ''}" data-grid="${source}" data-cell="${cell}" style="width:${inv.w * cell}px;height:${rows * cell}px;--cell:${cell}px">${band}${items}<div class="preview" hidden></div>${!inv.items.length && opts.empty ? `<div class="empty">${esc(opts.empty)}</div>` : ''}</div>`;
 }
 
 export interface DragHooks {
@@ -87,11 +89,11 @@ export class GridDrag {
     this.track(e.clientX, e.clientY);
     this.autoScroll(e.clientX, e.clientY);
   };
-  /** While dragging near the top or bottom of a scrolling pane, keep scrolling it (compact layout). */
+  /** While dragging near the top or bottom of a scrolling pane, keep scrolling it (compact layout; a desktop stash too tall for its panel). */
   private scrollTick = 0;
   private autoScroll(cx: number, cy: number) {
     cancelAnimationFrame(this.scrollTick);
-    const pane = this.at(cx, cy).map(el => el.closest?.('.pane-scroll') as HTMLElement | null).find(Boolean);
+    const pane = this.at(cx, cy).map(el => el.closest?.('.pane-scroll, .stash-scroll.scrolls') as HTMLElement | null).find(Boolean);
     if (!pane || !this.ghost) return;
     const r = pane.getBoundingClientRect(), edge = 32, v = cy < r.top + edge ? -(r.top + edge - cy) / 3 : cy > r.bottom - edge ? (cy - (r.bottom - edge)) / 3 : 0;
     if (!v) return;

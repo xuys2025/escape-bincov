@@ -1,0 +1,8 @@
+{
+  "tool": "built-in image_gen",
+  "calls": 1,
+  "intent": "Source design reference only; not shipped as runtime art",
+  "source": "akb74-design-reference.png",
+  "runtimeMethod": "62 original integer-grid raster recipes, H/I/W/Q authored independently; source/export.mjs and pixel-artwork.json",
+  "prompt": "Use case: stylized-concept. Asset type: source design reference for an existing tiny pixel-art game's AK-74 modular rifle. Produce one transparent sprite reference plate with three side-on right-facing AK-74 configurations, one per row: factory with muted orange brown wood stock/handguard and curved slender magazine; lightweight with short skeletal stock, light wood handguard, shortened barrel and short flash hider; steady with dark solid stock, black railed handguard, vertical foregrip, small side laser device (no beam), side scope mount and compact scope, extended curved magazine and slim suppressor. No hands. Absolutely no text, letters, numerals, logos, watermark, background, floor, cast shadow, glow or effects. Side orthographic silhouette only. Strict chunky integer pixel artwork: dark 1 pixel outline, restrained desaturated slate gray metal, rusty warm wood, upper-left highlights. Show obvious silhouette differences. Image is a visual reference for separately authored native pixel assets, not a game screenshot. Keep generous transparent space between the three rifles; do not overlap. Maintain barrel bore perfectly horizontal. Reference game's tiny H rifle factory total length is 33 pixels; final I is about 82 by 22 pixels, W separately drawn 164 by 44 pixels. Render large crisp pixel blocks with no blur."
+}

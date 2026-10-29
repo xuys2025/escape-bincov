@@ -76,7 +76,7 @@ try {
       assert.equal(await page.evaluate(() => window.__bincov.app.save.safe.items.length), 0);
       await page.evaluate(() => {
         const { app } = window.__bincov;
-        app.save.upgraded = true; app.save.stash.h = 9;
+        app.save.upgraded = true; app.save.stash.h = 12;
         app.save.stash.items.push({ id: 'watch', qty: 1, uid: 'ui-bottom-row', x: 9, y: 8 });
         app.save.quests = { repair: true, sample: true, ledger: true };
       });

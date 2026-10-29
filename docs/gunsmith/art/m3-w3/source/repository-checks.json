@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "date": "2026-10-29",
+  "codeHead": "94b7e5cf5f776e34908425a528d6156fdfba5d86",
+  "artStartHead": "ec1b39b42b200b6865dc0a3e4c0b48bd290a25f2",
+  "node": "24.19.0",
+  "pnpm": "11.25.0",
+  "status": "pass",
+  "environment": {
+    "note": "Existing shared node_modules junction. pnpm_config_verify_deps_before_run=warn only in checking processes; no dependency installation, deletion or project config changes.",
+    "firstFailure": "pnpm-environment-first-failure.txt"
+  },
+  "checks": [
+    {
+      "command": "pnpm test",
+      "status": "pass",
+      "tests": 1076,
+      "failed": 0,
+      "log": "unit-test-output.txt",
+      "logSha256": "f5a18abfcf0ea7e6bc3aef371544ecf63ac8a10d0a1b33b51ad42c054bcd73d7"
+    },
+    {
+      "command": "pnpm check:ci",
+      "status": "pass",
+      "tests": 110,
+      "failed": 0,
+      "log": "ci-check-output.txt",
+      "logSha256": "8c5b9c12ae20706cf4c895349dc6c4c7603ca5990f5a48f34160dc7883187dcf"
+    },
+    {
+      "command": "pnpm package",
+      "status": "pass",
+      "log": "package-output.txt",
+      "logSha256": "17161e4b0a8968029eaf79ac6ab626585acf9d905b2f458043a4eb398504f5e4"
+    }
+  ],
+  "generatedFiles": [
+    {
+      "file": "dist/index.html",
+      "bytes": 9474733,
+      "sha256": "04bccd863f42fffe289d1b560cc9c879b7f41401a0b32630a049bdc4f1744df3"
+    },
+    {
+      "file": "start the game.html",
+      "bytes": 9474733,
+      "sha256": "04bccd863f42fffe289d1b560cc9c879b7f41401a0b32630a049bdc4f1744df3"
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "bytes": 6100696,
+      "sha256": "a79f3569645cd4bbeeff8f9b3e9d08457c06deae13d01250762d349083876970"
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "bytes": 6096187,
+      "sha256": "4f084e4eea6a394ac49a50678ba0d720d99a342655c28c0a1b9905f7c280e50c"
+    }
+  ],
+  "generatedFilesCommitted": false,
+  "newArtConsumed": false
+}

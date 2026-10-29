@@ -1,0 +1,8 @@
+{
+  "stage": "P0 real compatibility rehearsal",
+  "status": "fixed",
+  "initialFailure": "akb74/O10/w 175x53 exceeds 288x52",
+  "cause": "The first O10 workbench drawing was 18 pixels tall with its anchor on row 17. On the AK side base the full factory gun became one pixel too tall, although the AUG and M4A1 designated previews passed.",
+  "fix": "Redrew O10 I/W as 26x8 and 52x16 with bottom-row anchors. W retains independently authored details. Did not resize any old image or change limits.",
+  "verification": "Real validateBuild/gunArtLayout: 61 legal fit relations, three outputs each; all within applicable limits. See ../runtime-layout-check.json."
+}

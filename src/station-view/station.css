@@ -97,7 +97,7 @@ kbd { display: inline-block; min-width: 18px; padding: 0 4px; border: 1px solid 
 .modal { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: min(520px, calc(100vw - 24px)); max-height: calc(100vh - 40px); display: flex; flex-direction: column; background: var(--bg2); border: 1px solid var(--line2); box-shadow: 0 20px 60px rgba(0,0,0,.6); animation: pop .2s ease-out; }
 .modal.k-help { width: min(600px, calc(100vw - 24px)); }
 /* The gunsmith workbench (#28 M2-05): one fixed box, centred (DESK in gunsmith-view/bench.ts); its own stylesheet is bench.css. */
-.modal.k-gunsmith { width: min(1480px, calc(100vw - 24px)); height: min(780px, calc(100vh - 24px)); max-height: none; }
+.modal.k-gunsmith { width: min(1600px, calc(100vw - 24px)); height: min(780px, calc(100vh - 24px)); max-height: none; }
 .modal.k-gunsmith .pbody { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
 .modal.k-gunsmith .pbody > .gs { flex: 1; }
 .modal.compact.k-gunsmith { left: 0; top: 0; translate: none; width: 100%; height: 100%; border: 0; }
@@ -125,6 +125,7 @@ h3 small, h4 small { font: 11px var(--sys); color: var(--mute); }
 h4 { margin: 14px 0 6px; font: 16px/20px var(--px); color: #d8d1bd; }
 .muted { color: var(--mute); }
 .warn { color: var(--bad); margin: 6px 0; font-size: 12px; }
+h3 small b.bad, .seg b.bad { color: var(--bad); font-weight: normal; }
 .ok { color: var(--ok); }
 button[data-act] { padding: 6px 12px; background: #222b29; border: 1px solid var(--line2); cursor: pointer; font-size: 13px; }
 button[data-act]:hover:not(:disabled) { border-color: var(--amber); background: #2b302a; }
@@ -140,6 +141,11 @@ button.on { border-color: var(--amber); color: var(--amber2); }
 /* grids */
 .grid { position: relative; background-color: var(--cellbg); background-image: linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px); background-size: var(--cell) var(--cell); border: 1px solid var(--line); box-sizing: content-box; touch-action: none; user-select: none; }
 .grid .empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--mute); font-size: 12px; pointer-events: none; }
+/* The stash overflow (#28 M3-12): rows below the stash an old save's leftovers lie in, take-only. */
+.grid .overflow-band { position: absolute; left: 0; right: 0; border-top: 2px dashed var(--bad); background: repeating-linear-gradient(135deg, rgba(224,116,90,.13) 0 6px, rgba(224,116,90,.05) 6px 12px); pointer-events: none; }
+/* A desktop stash too tall for the panel at 36 px scrolls in its box (fitStash); the scrollbar sits in the panel's padding. */
+.stash-scroll.scrolls { overflow-y: auto; overflow-x: hidden; margin-right: -12px; scrollbar-width: thin; scrollbar-color: var(--line2) transparent; }
+.grid .overflow-band span { position: absolute; right: 4px; bottom: 2px; color: var(--bad); font-size: 11px; white-space: nowrap; }
 .item { position: absolute; padding: 1px; cursor: grab; outline: none; }
 .item::before { content: ''; position: absolute; inset: 1px; background: #2a3230; border: 1px solid #4b5752; }
 .item.k-weapon::before { border-color: #8a8a7a; background: #2e3330; }

@@ -1,0 +1,233 @@
+{
+  "note": "The images Sol redrew at full magazine length (#28 M3-12, docs/gunsmith/art/m3-w3) and the region each changed, [x, y, w, h] from its own top-left: a magazine its old and new canvas, a receiver the mask in source/design.mjs. gunsmith-bench A1 compares the approved earlier previews outside these regions.",
+  "redrawn": {
+    "gs-mb4a1-mag-factory-i": [
+      0,
+      0,
+      10,
+      16
+    ],
+    "gs-mb4a1-mag-factory-w": [
+      0,
+      0,
+      20,
+      32
+    ],
+    "gs-akb74-mag-factory-i": [
+      0,
+      0,
+      13,
+      17
+    ],
+    "gs-akb74-mag-factory-w": [
+      0,
+      0,
+      26,
+      34
+    ],
+    "gs-akb103-mag-factory-i": [
+      0,
+      0,
+      16,
+      18
+    ],
+    "gs-akb103-mag-factory-w": [
+      0,
+      0,
+      32,
+      36
+    ],
+    "gs-mpb5-mag-factory-i": [
+      0,
+      0,
+      12,
+      14
+    ],
+    "gs-mpb5-mag-factory-w": [
+      0,
+      0,
+      24,
+      28
+    ],
+    "gs-umpb45-mag-factory-i": [
+      0,
+      0,
+      8,
+      15
+    ],
+    "gs-umpb45-mag-factory-w": [
+      0,
+      0,
+      16,
+      30
+    ],
+    "gs-augb-mag-factory-i": [
+      0,
+      0,
+      10,
+      16
+    ],
+    "gs-augb-mag-factory-w": [
+      0,
+      0,
+      20,
+      32
+    ],
+    "gs-mb14-mag-factory-i": [
+      0,
+      0,
+      9,
+      11
+    ],
+    "gs-mb14-mag-factory-w": [
+      0,
+      0,
+      18,
+      22
+    ],
+    "gs-rpkb-mag-factory-i": [
+      0,
+      0,
+      14,
+      22
+    ],
+    "gs-rpkb-mag-factory-w": [
+      0,
+      0,
+      28,
+      44
+    ],
+    "gs-g01-i": [
+      0,
+      0,
+      7,
+      13
+    ],
+    "gs-g01-w": [
+      0,
+      0,
+      14,
+      26
+    ],
+    "gs-g02-i": [
+      0,
+      0,
+      7,
+      7
+    ],
+    "gs-g02-w": [
+      0,
+      0,
+      14,
+      14
+    ],
+    "gs-g03-i": [
+      0,
+      0,
+      15,
+      14
+    ],
+    "gs-g03-w": [
+      0,
+      0,
+      30,
+      28
+    ],
+    "gs-g04-i": [
+      0,
+      0,
+      9,
+      19
+    ],
+    "gs-g04-w": [
+      0,
+      0,
+      18,
+      38
+    ],
+    "gs-g08-i": [
+      0,
+      0,
+      16,
+      23
+    ],
+    "gs-g08-w": [
+      0,
+      0,
+      32,
+      46
+    ],
+    "gs-g09-i": [
+      0,
+      0,
+      20,
+      20
+    ],
+    "gs-g09-w": [
+      0,
+      0,
+      40,
+      40
+    ],
+    "gs-g10-i": [
+      0,
+      0,
+      10,
+      16
+    ],
+    "gs-g10-w": [
+      0,
+      0,
+      20,
+      32
+    ],
+    "gs-g11-i": [
+      0,
+      0,
+      10,
+      15
+    ],
+    "gs-g11-w": [
+      0,
+      0,
+      20,
+      30
+    ],
+    "gs-g12-i": [
+      0,
+      0,
+      15,
+      19
+    ],
+    "gs-g12-w": [
+      0,
+      0,
+      30,
+      38
+    ],
+    "gs-svdb-receiver-i": [
+      37,
+      11,
+      15,
+      7
+    ],
+    "gs-svdb-receiver-w": [
+      74,
+      22,
+      30,
+      14
+    ],
+    "gs-vb9-receiver-i": [
+      30,
+      10,
+      12,
+      8
+    ],
+    "gs-vb9-receiver-w": [
+      60,
+      20,
+      24,
+      16
+    ]
+  }
+}

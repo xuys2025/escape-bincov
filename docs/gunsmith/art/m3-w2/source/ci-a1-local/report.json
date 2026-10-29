@@ -1,0 +1,24 @@
+{
+  "build": "dist/index.html",
+  "sha256": "9e965ee363f02e349b7b51db489690d060e50d2ee5d4ed9d19109420775a9a61",
+  "browser": "156.0.8078.48",
+  "startedAt": "2026-10-28T14:22:53.037Z",
+  "methodology": "Packaged HTML offline; real mouse input on the station yard, its HideoutRuntime, SaveSession and localStorage. Fixtures use the session transaction with ?test=1.",
+  "steps": [
+    {
+      "name": "A1-composites-equal-the-approved-previews",
+      "detail": {
+        "compared": 151
+      },
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "external": [],
+  "screenshots": [],
+  "finishedAt": "2026-10-28T14:22:55.400Z",
+  "summary": {
+    "passed": 1,
+    "total": 1
+  }
+}

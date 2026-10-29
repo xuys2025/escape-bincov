@@ -1,0 +1,8 @@
+[WARN] Your node_modules are out of sync with your lockfile. The workspace structure has changed since last install
+$ pnpm build && node scripts/package.mjs
+$ tsc --noEmit && node scripts/build.mjs
+Gunsmith art: 636 PNG, 98932 bytes (budget 229376, report only).
+Built dist/index.html and start the game.html (9.04 MB each), completely offline.
+Portable ZIP: D:\bincov\gunsmith-m2\release\Escape-Bincov-portable.zip (6100696 bytes)
+Web upload ZIP: D:\bincov\gunsmith-m2\release\Escape-Bincov-web.zip (6096187 bytes)
+Share the ZIP, or just start the game.html. No install, server or internet required.

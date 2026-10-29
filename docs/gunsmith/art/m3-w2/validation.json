@@ -1,0 +1,4021 @@
+{
+  "schema": 1,
+  "stage": "P0+P1",
+  "status": "pass",
+  "passed": 434,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "249 PNG exact full-wave inventory; flat directory and manifest bijection",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-mag-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-mag-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-mag-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o05-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o10-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f04-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f07-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t02-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t10-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o05-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o10-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f07-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t02-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t10-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o05-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o10-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f07-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t02-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t10-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o05-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o10-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f07-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t02-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t10-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1911-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1911-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1911-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pb90-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pb90-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pb90-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb700-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb700-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb700-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-receiver-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-receiver-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-receiver-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-stock-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-stock-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-stock-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-reargrip-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-reargrip-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-reargrip-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-mag-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-mag-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-mag-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-barrel-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-barrel-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-barrel-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pb90-mag-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pb90-mag-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pb90-mag-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-stock-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-stock-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-stock-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-mag-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-mag-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-mag-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb700-stock-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb700-stock-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb700-stock-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb700-barrel-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb700-barrel-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb700-barrel-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-stock-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-stock-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-stock-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-reargrip-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-reargrip-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-reargrip-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-mag-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-mag-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-mag-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-handguard-factory-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-handguard-factory-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-handguard-factory-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a03-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a03-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a03-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b02-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b02-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b02-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b04-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b10-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b10-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b10-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h10-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h10-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h10-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s06-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s06-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s06-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s09-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s09-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s09-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s10-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s10-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s10-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p05-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p05-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p08-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p08-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g02-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g02-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g02-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g04-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g05-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g05-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g05-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g11-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g11-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g11-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g12-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g12-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g12-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m04-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m08-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m08-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m08-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m09-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m09-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m09-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m12-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m12-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m12-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f08-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f08-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f08-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o02-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o02-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o02-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o04-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o04-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o04-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o06-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o06-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o06-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o07-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o07-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o07-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o12-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o12-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o12-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o09-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o09-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o09-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o11-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o11-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o11-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f02-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f02-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f02-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f05-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f05-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f05-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f06-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f06-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f06-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t03-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t03-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t03-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t06-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t06-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t06-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t07-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t07-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t07-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t09-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t09-i-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t09-w-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1911-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb1911-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pb90-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pb90-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb700-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb700-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-a03-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b02-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-b10-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-h10-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s06-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s09-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-s10-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p05-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-p08-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g02-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g05-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g11-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-g12-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m08-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m09-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-m12-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f08-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o02-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o04-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o06-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o07-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o12-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o09-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-o11-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f02-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f05-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-f06-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t03-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t06-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t07-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-t09-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-ammo45-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-ammo45-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-ammopdw-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-ammopdw-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-ammoheavy-q24-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-ammoheavy-q32-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-pistol-bare-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-shotgun-bare-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "gs-carbine-bare-h-v1",
+      "status": "pass"
+    },
+    {
+      "name": "All W independently detailed; W/I coordinates within two pixels",
+      "status": "pass",
+      "detail": [
+        {
+          "id": "gs-augb-receiver-w-v1",
+          "differentPixelsFromScaledI": 839
+        },
+        {
+          "id": "gs-augb-mag-factory-w-v1",
+          "differentPixelsFromScaledI": 153
+        },
+        {
+          "id": "gs-o05-w-v1",
+          "differentPixelsFromScaledI": 104
+        },
+        {
+          "id": "gs-o10-w-v1",
+          "differentPixelsFromScaledI": 304
+        },
+        {
+          "id": "gs-f04-w-v1",
+          "differentPixelsFromScaledI": 59
+        },
+        {
+          "id": "gs-f07-w-v1",
+          "differentPixelsFromScaledI": 98
+        },
+        {
+          "id": "gs-t02-w-v1",
+          "differentPixelsFromScaledI": 36
+        },
+        {
+          "id": "gs-t10-w-v1",
+          "differentPixelsFromScaledI": 173
+        },
+        {
+          "id": "gs-mb1911-receiver-w-v1",
+          "differentPixelsFromScaledI": 500
+        },
+        {
+          "id": "gs-umpb45-receiver-w-v1",
+          "differentPixelsFromScaledI": 447
+        },
+        {
+          "id": "gs-pb90-receiver-w-v1",
+          "differentPixelsFromScaledI": 514
+        },
+        {
+          "id": "gs-svdb-receiver-w-v1",
+          "differentPixelsFromScaledI": 534
+        },
+        {
+          "id": "gs-mb14-receiver-w-v1",
+          "differentPixelsFromScaledI": 646
+        },
+        {
+          "id": "gs-mb700-receiver-w-v1",
+          "differentPixelsFromScaledI": 380
+        },
+        {
+          "id": "gs-rpkb-receiver-w-v1",
+          "differentPixelsFromScaledI": 743
+        },
+        {
+          "id": "gs-umpb45-stock-factory-w-v1",
+          "differentPixelsFromScaledI": 348
+        },
+        {
+          "id": "gs-umpb45-reargrip-factory-w-v1",
+          "differentPixelsFromScaledI": 204
+        },
+        {
+          "id": "gs-umpb45-mag-factory-w-v1",
+          "differentPixelsFromScaledI": 195
+        },
+        {
+          "id": "gs-umpb45-barrel-factory-w-v1",
+          "differentPixelsFromScaledI": 87
+        },
+        {
+          "id": "gs-pb90-mag-factory-w-v1",
+          "differentPixelsFromScaledI": 288
+        },
+        {
+          "id": "gs-mb14-stock-factory-w-v1",
+          "differentPixelsFromScaledI": 414
+        },
+        {
+          "id": "gs-mb14-mag-factory-w-v1",
+          "differentPixelsFromScaledI": 191
+        },
+        {
+          "id": "gs-mb700-stock-factory-w-v1",
+          "differentPixelsFromScaledI": 414
+        },
+        {
+          "id": "gs-mb700-barrel-factory-w-v1",
+          "differentPixelsFromScaledI": 239
+        },
+        {
+          "id": "gs-rpkb-stock-factory-w-v1",
+          "differentPixelsFromScaledI": 317
+        },
+        {
+          "id": "gs-rpkb-reargrip-factory-w-v1",
+          "differentPixelsFromScaledI": 208
+        },
+        {
+          "id": "gs-rpkb-mag-factory-w-v1",
+          "differentPixelsFromScaledI": 246
+        },
+        {
+          "id": "gs-rpkb-handguard-factory-w-v1",
+          "differentPixelsFromScaledI": 190
+        },
+        {
+          "id": "gs-a03-w-v1",
+          "differentPixelsFromScaledI": 47
+        },
+        {
+          "id": "gs-b02-w-v1",
+          "differentPixelsFromScaledI": 41
+        },
+        {
+          "id": "gs-b04-w-v1",
+          "differentPixelsFromScaledI": 127
+        },
+        {
+          "id": "gs-b10-w-v1",
+          "differentPixelsFromScaledI": 167
+        },
+        {
+          "id": "gs-h10-w-v1",
+          "differentPixelsFromScaledI": 224
+        },
+        {
+          "id": "gs-s06-w-v1",
+          "differentPixelsFromScaledI": 291
+        },
+        {
+          "id": "gs-s09-w-v1",
+          "differentPixelsFromScaledI": 466
+        },
+        {
+          "id": "gs-s10-w-v1",
+          "differentPixelsFromScaledI": 434
+        },
+        {
+          "id": "gs-p05-w-v1",
+          "differentPixelsFromScaledI": 204
+        },
+        {
+          "id": "gs-p08-w-v1",
+          "differentPixelsFromScaledI": 221
+        },
+        {
+          "id": "gs-g02-w-v1",
+          "differentPixelsFromScaledI": 105
+        },
+        {
+          "id": "gs-g04-w-v1",
+          "differentPixelsFromScaledI": 225
+        },
+        {
+          "id": "gs-g05-w-v1",
+          "differentPixelsFromScaledI": 224
+        },
+        {
+          "id": "gs-g11-w-v1",
+          "differentPixelsFromScaledI": 231
+        },
+        {
+          "id": "gs-g12-w-v1",
+          "differentPixelsFromScaledI": 207
+        },
+        {
+          "id": "gs-m04-w-v1",
+          "differentPixelsFromScaledI": 194
+        },
+        {
+          "id": "gs-m08-w-v1",
+          "differentPixelsFromScaledI": 348
+        },
+        {
+          "id": "gs-m09-w-v1",
+          "differentPixelsFromScaledI": 126
+        },
+        {
+          "id": "gs-m12-w-v1",
+          "differentPixelsFromScaledI": 194
+        },
+        {
+          "id": "gs-f08-w-v1",
+          "differentPixelsFromScaledI": 81
+        },
+        {
+          "id": "gs-o02-w-v1",
+          "differentPixelsFromScaledI": 113
+        },
+        {
+          "id": "gs-o04-w-v1",
+          "differentPixelsFromScaledI": 199
+        },
+        {
+          "id": "gs-o06-w-v1",
+          "differentPixelsFromScaledI": 198
+        },
+        {
+          "id": "gs-o07-w-v1",
+          "differentPixelsFromScaledI": 241
+        },
+        {
+          "id": "gs-o12-w-v1",
+          "differentPixelsFromScaledI": 78
+        },
+        {
+          "id": "gs-o09-w-v1",
+          "differentPixelsFromScaledI": 409
+        },
+        {
+          "id": "gs-o11-w-v1",
+          "differentPixelsFromScaledI": 380
+        },
+        {
+          "id": "gs-f02-w-v1",
+          "differentPixelsFromScaledI": 112
+        },
+        {
+          "id": "gs-f05-w-v1",
+          "differentPixelsFromScaledI": 82
+        },
+        {
+          "id": "gs-f06-w-v1",
+          "differentPixelsFromScaledI": 111
+        },
+        {
+          "id": "gs-t03-w-v1",
+          "differentPixelsFromScaledI": 70
+        },
+        {
+          "id": "gs-t06-w-v1",
+          "differentPixelsFromScaledI": 92
+        },
+        {
+          "id": "gs-t07-w-v1",
+          "differentPixelsFromScaledI": 80
+        },
+        {
+          "id": "gs-t09-w-v1",
+          "differentPixelsFromScaledI": 111
+        }
+      ]
+    },
+    {
+      "name": "augb/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          26,
+          10
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "augb/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          65,
+          18
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "augb/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          130,
+          36
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "augb/close/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          26,
+          12
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "augb/close/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          65,
+          23
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "augb/close/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          130,
+          47
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "augb/steady/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          28,
+          13
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "augb/steady/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          72,
+          24
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "augb/steady/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          145,
+          49
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "augb/reuse/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          28,
+          11
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "augb/reuse/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          72,
+          23
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "augb/reuse/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          145,
+          47
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "mb4a1/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          32,
+          11
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mb4a1/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          80,
+          17
+        ],
+        "colors": 4
+      }
+    },
+    {
+      "name": "mb4a1/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          160,
+          34
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mb4a1/close/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          32,
+          13
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb4a1/close/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          80,
+          21
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mb4a1/close/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          160,
+          43
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "mb4a1/steady/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          32,
+          14
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb4a1/steady/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          80,
+          23
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mb4a1/steady/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          160,
+          48
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb4a1/custom/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          32,
+          13
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb4a1/custom/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          80,
+          24
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "mb4a1/custom/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          160,
+          50
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb1911/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          18,
+          9
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb1911/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          42,
+          17
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb1911/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          84,
+          34
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb1911/light/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          18,
+          12
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb1911/light/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          42,
+          23
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb1911/light/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          84,
+          46
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "mb1911/silent/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          25,
+          12
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb1911/silent/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          61,
+          22
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb1911/silent/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          124,
+          46
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "umpb45/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          25,
+          10
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "umpb45/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          66,
+          18
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "umpb45/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          133,
+          36
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "umpb45/close/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          24,
+          10
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "umpb45/close/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          64,
+          18
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "umpb45/close/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          129,
+          36
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "umpb45/steady/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          32,
+          14
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "umpb45/steady/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          84,
+          25
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "umpb45/steady/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          170,
+          51
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "pb90/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          25,
+          10
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "pb90/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          56,
+          17
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "pb90/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          112,
+          34
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "pb90/light/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          25,
+          11
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "pb90/light/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          56,
+          19
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "pb90/light/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          112,
+          39
+        ],
+        "colors": 11
+      }
+    },
+    {
+      "name": "pb90/silent/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          30,
+          12
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "pb90/silent/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          69,
+          22
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "pb90/silent/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          139,
+          45
+        ],
+        "colors": 12
+      }
+    },
+    {
+      "name": "svdb/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          37,
+          10
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "svdb/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          92,
+          17
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "svdb/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          184,
+          34
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "svdb/steady/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          40,
+          13
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "svdb/steady/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          101,
+          24
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "svdb/steady/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          203,
+          49
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "svdb/silent/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          46,
+          13
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "svdb/silent/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          116,
+          23
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "svdb/silent/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          233,
+          47
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "mb14/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          35,
+          10
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb14/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          89,
+          17
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb14/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          179,
+          34
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "mb14/precision/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          39,
+          13
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb14/precision/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          100,
+          24
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb14/precision/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          202,
+          49
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "mb14/extended/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          44,
+          13
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb14/extended/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          113,
+          24
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb14/extended/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          228,
+          49
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "mb700/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          35,
+          9
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb700/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          92,
+          15
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb700/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          185,
+          30
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "mb700/range/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          44,
+          12
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb700/range/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          116,
+          22
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "mb700/range/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          234,
+          45
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "mb700/light/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          30,
+          9
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb700/light/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          78,
+          16
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "mb700/light/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          157,
+          33
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "rpkb/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          37,
+          10
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "rpkb/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          97,
+          16
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "rpkb/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          195,
+          32
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "rpkb/heavy/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          38,
+          15
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "rpkb/heavy/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          99,
+          26
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "rpkb/heavy/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          199,
+          52
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "rpkb/light/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          39,
+          14
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "rpkb/light/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          103,
+          23
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "rpkb/light/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          208,
+          47
+        ],
+        "colors": 11
+      }
+    },
+    {
+      "name": "pistol/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          18,
+          10
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "pistol/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          38,
+          17
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "pistol/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          76,
+          34
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "pistol/custom/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          18,
+          13
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "pistol/custom/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          38,
+          22
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "pistol/custom/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          76,
+          45
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "shotgun/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          33,
+          10
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "shotgun/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          78,
+          17
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "shotgun/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          156,
+          34
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "shotgun/custom/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          33,
+          14
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "shotgun/custom/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          78,
+          22
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "shotgun/custom/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          156,
+          45
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "carbine/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          31,
+          10
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "carbine/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          78,
+          17
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "carbine/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          156,
+          34
+        ],
+        "colors": 9
+      }
+    },
+    {
+      "name": "carbine/custom/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          31,
+          13
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "carbine/custom/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          78,
+          25
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "carbine/custom/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          156,
+          52
+        ],
+        "colors": 10
+      }
+    },
+    {
+      "name": "akb74/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          33,
+          10
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "akb74/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          87,
+          16
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "akb74/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          175,
+          32
+        ],
+        "colors": 12
+      }
+    },
+    {
+      "name": "akb74/custom/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          33,
+          14
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "akb74/custom/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          87,
+          24
+        ],
+        "colors": 8
+      }
+    },
+    {
+      "name": "akb74/custom/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          175,
+          49
+        ],
+        "colors": 12
+      }
+    },
+    {
+      "name": "vb9/factory/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          24,
+          10
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "vb9/factory/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          55,
+          17
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "vb9/factory/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          110,
+          34
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "vb9/custom/h anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          24,
+          13
+        ],
+        "colors": 6
+      }
+    },
+    {
+      "name": "vb9/custom/i anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          55,
+          22
+        ],
+        "colors": 5
+      }
+    },
+    {
+      "name": "vb9/custom/w anchor assembly and preview",
+      "status": "pass",
+      "detail": {
+        "size": [
+          110,
+          45
+        ],
+        "colors": 7
+      }
+    },
+    {
+      "name": "AUG bullpup magazine behind grip; F04 hand behind forward stop",
+      "status": "pass"
+    },
+    {
+      "name": "mb1911 bare ground/HUD image has no gloves and exact 1x/2x previews",
+      "status": "pass"
+    },
+    {
+      "name": "umpb45 bare ground/HUD image has no gloves and exact 1x/2x previews",
+      "status": "pass"
+    },
+    {
+      "name": "pb90 bare ground/HUD image has no gloves and exact 1x/2x previews",
+      "status": "pass"
+    },
+    {
+      "name": "svdb bare ground/HUD image has no gloves and exact 1x/2x previews",
+      "status": "pass"
+    },
+    {
+      "name": "mb14 bare ground/HUD image has no gloves and exact 1x/2x previews",
+      "status": "pass"
+    },
+    {
+      "name": "mb700 bare ground/HUD image has no gloves and exact 1x/2x previews",
+      "status": "pass"
+    },
+    {
+      "name": "augb bare ground/HUD image has no gloves and exact 1x/2x previews",
+      "status": "pass"
+    },
+    {
+      "name": "rpkb bare ground/HUD image has no gloves and exact 1x/2x previews",
+      "status": "pass"
+    },
+    {
+      "name": "419 formal images and manifest plus approved P0 32 retain original hashes",
+      "status": "pass",
+      "detail": {
+        "formalFiles": 419,
+        "p0Files": 32,
+        "historicalPreviews": 2
+      }
+    },
+    {
+      "name": "RPK shares the AK family joint coordinates, and front gloves follow d3eb43f",
+      "status": "pass"
+    },
+    {
+      "name": "pistol bare has zero difference outside explicit hand masks",
+      "status": "pass",
+      "detail": {
+        "changedPixels": 8,
+        "outsideMaskDifference": 0,
+        "colors": 8
+      }
+    },
+    {
+      "name": "shotgun bare has zero difference outside explicit hand masks",
+      "status": "pass",
+      "detail": {
+        "changedPixels": 14,
+        "outsideMaskDifference": 0,
+        "colors": 9
+      }
+    },
+    {
+      "name": "carbine bare has zero difference outside explicit hand masks",
+      "status": "pass",
+      "detail": {
+        "changedPixels": 9,
+        "outsideMaskDifference": 0,
+        "colors": 8
+      }
+    },
+    {
+      "name": "Native held/world and UI palette; W alone may add its middle tones",
+      "status": "pass"
+    },
+    {
+      "name": "Preview/source images below one MiB; icon grayscale silhouettes distinct",
+      "status": "pass"
+    },
+    {
+      "name": "All six ammunition families distinguish in grayscale at Q24 and Q32",
+      "status": "pass"
+    },
+    {
+      "name": "mb1911 designated A/B profiles differ at native held scale",
+      "status": "pass"
+    },
+    {
+      "name": "umpb45 designated A/B profiles differ at native held scale",
+      "status": "pass"
+    },
+    {
+      "name": "pb90 designated A/B profiles differ at native held scale",
+      "status": "pass"
+    },
+    {
+      "name": "svdb designated A/B profiles differ at native held scale",
+      "status": "pass"
+    },
+    {
+      "name": "mb14 designated A/B profiles differ at native held scale",
+      "status": "pass"
+    },
+    {
+      "name": "mb700 designated A/B profiles differ at native held scale",
+      "status": "pass"
+    },
+    {
+      "name": "augb designated A/B profiles differ at native held scale",
+      "status": "pass"
+    },
+    {
+      "name": "rpkb designated A/B profiles differ at native held scale",
+      "status": "pass"
+    },
+    {
+      "name": "augb/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "augb/close exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "augb/steady exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "augb/reuse exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "mb4a1/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "mb4a1/close exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "mb4a1/steady exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "mb4a1/custom exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "mb1911/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "mb1911/light exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "mb1911/silent exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "umpb45/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "umpb45/close exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "umpb45/steady exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "pb90/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "pb90/light exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "pb90/silent exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "svdb/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "svdb/steady exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "svdb/silent exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "mb14/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "mb14/precision exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "mb14/extended exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "mb700/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "mb700/range exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "mb700/light exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "rpkb/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "rpkb/heavy exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "rpkb/light exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "pistol/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "pistol/custom exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "shotgun/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "shotgun/custom exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "carbine/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "carbine/custom exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "akb74/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "akb74/custom exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "vb9/factory exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "vb9/custom exact body alignment",
+      "status": "pass"
+    },
+    {
+      "name": "Held close and steady silhouettes distinct at 1x",
+      "status": "pass"
+    },
+    {
+      "name": "Byte accounting deduplicates the 32 P0 images already formally integrated",
+      "status": "pass",
+      "detail": {
+        "files": 249,
+        "pngBytes": 36786,
+        "baselineFiles": 419,
+        "baselinePngBytes": 67275,
+        "pendingFiles": 217,
+        "pendingPngBytes": 31657,
+        "cumulativeUniqueFiles": 636,
+        "cumulativeUniquePngBytes": 98932
+      }
+    }
+  ],
+  "assemblies": [
+    {
+      "gun": "augb",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        26,
+        10
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "augb",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        65,
+        18
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "augb",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        130,
+        36
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "augb",
+      "configuration": "close",
+      "code": "h",
+      "size": [
+        26,
+        12
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "augb",
+      "configuration": "close",
+      "code": "i",
+      "size": [
+        65,
+        23
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "augb",
+      "configuration": "close",
+      "code": "w",
+      "size": [
+        130,
+        47
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "augb",
+      "configuration": "steady",
+      "code": "h",
+      "size": [
+        28,
+        13
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "augb",
+      "configuration": "steady",
+      "code": "i",
+      "size": [
+        72,
+        24
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "augb",
+      "configuration": "steady",
+      "code": "w",
+      "size": [
+        145,
+        49
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "augb",
+      "configuration": "reuse",
+      "code": "h",
+      "size": [
+        28,
+        11
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "augb",
+      "configuration": "reuse",
+      "code": "i",
+      "size": [
+        72,
+        23
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "augb",
+      "configuration": "reuse",
+      "code": "w",
+      "size": [
+        145,
+        47
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        32,
+        11
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        80,
+        17
+      ],
+      "colors": 4
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        160,
+        34
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "close",
+      "code": "h",
+      "size": [
+        32,
+        13
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "close",
+      "code": "i",
+      "size": [
+        80,
+        21
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "close",
+      "code": "w",
+      "size": [
+        160,
+        43
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "steady",
+      "code": "h",
+      "size": [
+        32,
+        14
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "steady",
+      "code": "i",
+      "size": [
+        80,
+        23
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "steady",
+      "code": "w",
+      "size": [
+        160,
+        48
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "custom",
+      "code": "h",
+      "size": [
+        32,
+        13
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "custom",
+      "code": "i",
+      "size": [
+        80,
+        24
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb4a1",
+      "configuration": "custom",
+      "code": "w",
+      "size": [
+        160,
+        50
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb1911",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        18,
+        9
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb1911",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        42,
+        17
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb1911",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        84,
+        34
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb1911",
+      "configuration": "light",
+      "code": "h",
+      "size": [
+        18,
+        12
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb1911",
+      "configuration": "light",
+      "code": "i",
+      "size": [
+        42,
+        23
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb1911",
+      "configuration": "light",
+      "code": "w",
+      "size": [
+        84,
+        46
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "mb1911",
+      "configuration": "silent",
+      "code": "h",
+      "size": [
+        25,
+        12
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb1911",
+      "configuration": "silent",
+      "code": "i",
+      "size": [
+        61,
+        22
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb1911",
+      "configuration": "silent",
+      "code": "w",
+      "size": [
+        124,
+        46
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "umpb45",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        25,
+        10
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "umpb45",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        66,
+        18
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "umpb45",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        133,
+        36
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "umpb45",
+      "configuration": "close",
+      "code": "h",
+      "size": [
+        24,
+        10
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "umpb45",
+      "configuration": "close",
+      "code": "i",
+      "size": [
+        64,
+        18
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "umpb45",
+      "configuration": "close",
+      "code": "w",
+      "size": [
+        129,
+        36
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "umpb45",
+      "configuration": "steady",
+      "code": "h",
+      "size": [
+        32,
+        14
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "umpb45",
+      "configuration": "steady",
+      "code": "i",
+      "size": [
+        84,
+        25
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "umpb45",
+      "configuration": "steady",
+      "code": "w",
+      "size": [
+        170,
+        51
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "pb90",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        25,
+        10
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "pb90",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        56,
+        17
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "pb90",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        112,
+        34
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "pb90",
+      "configuration": "light",
+      "code": "h",
+      "size": [
+        25,
+        11
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "pb90",
+      "configuration": "light",
+      "code": "i",
+      "size": [
+        56,
+        19
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "pb90",
+      "configuration": "light",
+      "code": "w",
+      "size": [
+        112,
+        39
+      ],
+      "colors": 11
+    },
+    {
+      "gun": "pb90",
+      "configuration": "silent",
+      "code": "h",
+      "size": [
+        30,
+        12
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "pb90",
+      "configuration": "silent",
+      "code": "i",
+      "size": [
+        69,
+        22
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "pb90",
+      "configuration": "silent",
+      "code": "w",
+      "size": [
+        139,
+        45
+      ],
+      "colors": 12
+    },
+    {
+      "gun": "svdb",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        37,
+        10
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "svdb",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        92,
+        17
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "svdb",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        184,
+        34
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "svdb",
+      "configuration": "steady",
+      "code": "h",
+      "size": [
+        40,
+        13
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "svdb",
+      "configuration": "steady",
+      "code": "i",
+      "size": [
+        101,
+        24
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "svdb",
+      "configuration": "steady",
+      "code": "w",
+      "size": [
+        203,
+        49
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "svdb",
+      "configuration": "silent",
+      "code": "h",
+      "size": [
+        46,
+        13
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "svdb",
+      "configuration": "silent",
+      "code": "i",
+      "size": [
+        116,
+        23
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "svdb",
+      "configuration": "silent",
+      "code": "w",
+      "size": [
+        233,
+        47
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "mb14",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        35,
+        10
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb14",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        89,
+        17
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb14",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        179,
+        34
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "mb14",
+      "configuration": "precision",
+      "code": "h",
+      "size": [
+        39,
+        13
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb14",
+      "configuration": "precision",
+      "code": "i",
+      "size": [
+        100,
+        24
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb14",
+      "configuration": "precision",
+      "code": "w",
+      "size": [
+        202,
+        49
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "mb14",
+      "configuration": "extended",
+      "code": "h",
+      "size": [
+        44,
+        13
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb14",
+      "configuration": "extended",
+      "code": "i",
+      "size": [
+        113,
+        24
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb14",
+      "configuration": "extended",
+      "code": "w",
+      "size": [
+        228,
+        49
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "mb700",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        35,
+        9
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb700",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        92,
+        15
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb700",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        185,
+        30
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "mb700",
+      "configuration": "range",
+      "code": "h",
+      "size": [
+        44,
+        12
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb700",
+      "configuration": "range",
+      "code": "i",
+      "size": [
+        116,
+        22
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb700",
+      "configuration": "range",
+      "code": "w",
+      "size": [
+        234,
+        45
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "mb700",
+      "configuration": "light",
+      "code": "h",
+      "size": [
+        30,
+        9
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb700",
+      "configuration": "light",
+      "code": "i",
+      "size": [
+        78,
+        16
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb700",
+      "configuration": "light",
+      "code": "w",
+      "size": [
+        157,
+        33
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "rpkb",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        37,
+        10
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "rpkb",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        97,
+        16
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "rpkb",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        195,
+        32
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "rpkb",
+      "configuration": "heavy",
+      "code": "h",
+      "size": [
+        38,
+        15
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "rpkb",
+      "configuration": "heavy",
+      "code": "i",
+      "size": [
+        99,
+        26
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "rpkb",
+      "configuration": "heavy",
+      "code": "w",
+      "size": [
+        199,
+        52
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "rpkb",
+      "configuration": "light",
+      "code": "h",
+      "size": [
+        39,
+        14
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "rpkb",
+      "configuration": "light",
+      "code": "i",
+      "size": [
+        103,
+        23
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "rpkb",
+      "configuration": "light",
+      "code": "w",
+      "size": [
+        208,
+        47
+      ],
+      "colors": 11
+    },
+    {
+      "gun": "pistol",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        18,
+        10
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "pistol",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        38,
+        17
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "pistol",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        76,
+        34
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "pistol",
+      "configuration": "custom",
+      "code": "h",
+      "size": [
+        18,
+        13
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "pistol",
+      "configuration": "custom",
+      "code": "i",
+      "size": [
+        38,
+        22
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "pistol",
+      "configuration": "custom",
+      "code": "w",
+      "size": [
+        76,
+        45
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        33,
+        10
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        78,
+        17
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        156,
+        34
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "custom",
+      "code": "h",
+      "size": [
+        33,
+        14
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "custom",
+      "code": "i",
+      "size": [
+        78,
+        22
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "shotgun",
+      "configuration": "custom",
+      "code": "w",
+      "size": [
+        156,
+        45
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "carbine",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        31,
+        10
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "carbine",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        78,
+        17
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "carbine",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        156,
+        34
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "carbine",
+      "configuration": "custom",
+      "code": "h",
+      "size": [
+        31,
+        13
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "carbine",
+      "configuration": "custom",
+      "code": "i",
+      "size": [
+        78,
+        25
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "carbine",
+      "configuration": "custom",
+      "code": "w",
+      "size": [
+        156,
+        52
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "akb74",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        33,
+        10
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        87,
+        16
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        175,
+        32
+      ],
+      "colors": 12
+    },
+    {
+      "gun": "akb74",
+      "configuration": "custom",
+      "code": "h",
+      "size": [
+        33,
+        14
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "configuration": "custom",
+      "code": "i",
+      "size": [
+        87,
+        24
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "configuration": "custom",
+      "code": "w",
+      "size": [
+        175,
+        49
+      ],
+      "colors": 12
+    },
+    {
+      "gun": "vb9",
+      "configuration": "factory",
+      "code": "h",
+      "size": [
+        24,
+        10
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "vb9",
+      "configuration": "factory",
+      "code": "i",
+      "size": [
+        55,
+        17
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "vb9",
+      "configuration": "factory",
+      "code": "w",
+      "size": [
+        110,
+        34
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "vb9",
+      "configuration": "custom",
+      "code": "h",
+      "size": [
+        24,
+        13
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "vb9",
+      "configuration": "custom",
+      "code": "i",
+      "size": [
+        55,
+        22
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "vb9",
+      "configuration": "custom",
+      "code": "w",
+      "size": [
+        110,
+        45
+      ],
+      "colors": 7
+    }
+  ],
+  "oldBareSprites": {
+    "status": "checked",
+    "palettePolicy": "Three legacy bare roles are whole guns: H combined cap 16, original-color-only, original canvas and every pixel outside explicit hand masks invariant. All new single parts still obey H/I/Q 8, W 12."
+  },
+  "visualReview": "Native 1x and enlarged sheets, three backgrounds, grayscale and body scale reviewed. Anchor contact checks do not by themselves prove every contour seam."
+}
