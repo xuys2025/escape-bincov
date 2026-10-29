@@ -45,12 +45,13 @@ const CAP_TEXT: Readonly<Record<Capped, [string, string]>> = {
  * page's overlay use the same numbers). The stage's room for the gun follows from them and the window alone, never
  * from the gun's parts, so the picture's scale and place stay put while parts change (maintainer, 2026-10-27).
  */
-const DESK = { w: 1480, h: 780, cols: [[1600, 240, 404], [1200, 224, 360], [0, 184, 300]] as const };
+const DESK = { w: 1600, h: 780, cols: [[1600, 240, 404], [1200, 200, 360], [0, 184, 300]] as const };
 function stageRoom(): { w: number; h: number } {
     const vw = typeof innerWidth === 'number' ? innerWidth : 1280, vh = typeof innerHeight === 'number' ? innerHeight : 720;
     const [, left, right] = DESK.cols.find(c => vw >= c[0])!;
     // The middle column less its padding and the stage's; the panel's height less every fixed row around the picture.
-    return { w: Math.min(DESK.w, vw - 24) - left - right - 2 - 46, h: Math.max(96, Math.min(216, Math.min(DESK.h, vh - 24) - 520)) };
+    // #28 M3: the wave-one frames reach 216 px (AK, M4A1 with the long parts), 3x at 1280 and 4x at 1920.
+    return { w: Math.min(DESK.w, vw - 24) - left - right - 2 - 42, h: Math.max(96, Math.min(216, Math.min(DESK.h, vh - 24) - 520)) };
 }
 
 const b = (label: string, act: string, arg = '', cls = '', extra = '') =>

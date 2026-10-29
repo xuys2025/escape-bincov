@@ -13,7 +13,7 @@ const build = (gun: string, parts: [string, string, string | null, string][] = [
     ({ gun, parts: parts.map(([uid, id, parent, slot]) => ({ uid, id, parent, slot: slot as Build['parts'][number]['slot'] })) });
 /** An M4A1 equipped with 28 rounds, a G17 and some parts in the stash, one part in the bag. */
 function profile() {
-    const p = D.newSave(); p.stash = D.createInventory(10, 6); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
+    const p = D.newSave(); p.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
     p.equipment = { weapon: 'mb4a1', weaponUid: 'm4', gun: factoryState(), ammo: 28, ammoRelief: 0, relief: false };
     for (const id of ['gb17', 'O03', 'H01', 'F01', 'F01', 'G10']) assert.equal(D.addItem(p.stash, id), 0);
     assert.equal(D.addItem(p.bag, 'O08'), 0);
@@ -33,8 +33,8 @@ test('positions: native slots in body order; rails a handguard opens are closed 
     const bare = positions(build('mb4a1'));
     assert.deepEqual(bare.map(p => p.key), ['gun/stock/0', 'gun/top/0', 'gun/handguard/0', 'gun/barrel/0', 'gun/muzzle/0', 'gun/grip/0', 'gun/mag/0', 'gun/under/0', 'gun/side/0']);
     const under = bare.find(p => p.slot === 'under')!;
-    // AR 长导轨护木 (H02) also opens it, but it is not an item yet, so the reason names only the one a player can own.
-    assert.equal(under.open, false); assert.equal(under.reason, '需要 AR 短导轨护木');
+    // Both rail handguards open it and both are items since #28 M3-02, so the reason names both.
+    assert.equal(under.open, false); assert.equal(under.reason, '需要 AR 短导轨护木或 AR 长导轨护木');
     const railed = positions(build('mb4a1', [['h', 'H01', null, 'handguard'], ['f', 'F01', 'h', 'under']]));
     assert.deepEqual(railed.filter(p => p.parent === 'h').map(p => [p.slot, p.part?.id ?? null, p.place]),
         [['under', 'F01', '下导轨 · 由 AR 短导轨护木提供'], ['side', null, '侧导轨 · 由 AR 短导轨护木提供']]);
@@ -47,10 +47,12 @@ test('positions: native slots in body order; rails a handguard opens are closed 
 test('candidates: what fits first, owned before not owned; refusals keep their reason; parts on another gun are named', () => {
     const p = profile(), m4 = build('mb4a1');
     const top = candidates(p, 'm4', m4, key(m4, 'gun/top/0'));
-    assert.deepEqual(top.map(c => [c.id, !!c.loose, c.refusal]), [['O03', true, null], ['O08', true, null]]);
+    // Owned O03 and O08 first, then wave two's top optics (#28 M3-06), not owned, in catalog order.
+    assert.deepEqual(top.map(c => [c.id, !!c.loose, c.refusal]), [['O03', true, null], ['O08', true, null],
+        ...['O04', 'O05', 'O06', 'O07', 'O09', 'O10', 'O11', 'O12'].map(id => [id, false, null])]);
     assert.equal(top[1].loose!.from, 'bag');
     const under = candidates(p, 'm4', m4, key(m4, 'gun/under/0'));
-    assert.ok(under.every(c => c.refusal === '需要 AR 短导轨护木'));
+    assert.ok(under.every(c => c.refusal === '需要 AR 短导轨护木或 AR 长导轨护木'));
     // Two loose F01: one copy to install, the count says two; once one is on the build it is no longer loose.
     const railed = build('mb4a1', [['h', 'H01', null, 'handguard']]), f = candidates(p, 'm4', railed, key(railed, 'h/under/0')).find(c => c.id === 'F01')!;
     assert.equal(f.count, 2);
@@ -70,7 +72,7 @@ test('candidates: what fits first, owned before not owned; refusals keep their r
 });
 
 test('only attachment items are listed, and where one comes from', () => {
-    assert.equal(benchParts().length, 20);
+    assert.equal(benchParts().length, 100, 'every catalog part since #28 M3-06');
     assert.match(sourceOf('P01'), /^修理铺有售 · ¥ \d+$/);
     assert.equal(sourceOf('O08'), '行动中的高风险处可能找到');
     assert.equal(sourceOf('O03'), '行动中可能找到');
@@ -84,7 +86,7 @@ test('a click appends edits that planGunEdit accepts; replacing a handguard move
     const h = plan.preview.after.parts[0].uid, railed = buildOf({ id: 'mb4a1', parts: plan.preview.after.parts });
     edits = [...edits, ...replaceEdits(key(railed, `${h}/under/0`), 'F01', { uid: uid('F01') })];
     plan = planGunEdit(p, 'm4', edits); assert.ok(plan.ok);
-    // H02 (the long handguard, not an item) in place of H01: previewed by id, the foregrip moves across.
+    // H02 (the long handguard) in place of H01: previewed by id, the foregrip moves across.
     const before = buildOf({ id: 'mb4a1', parts: plan.preview.after.parts }), at = key(before, 'gun/handguard/0');
     edits = [...edits, ...replaceEdits(at, 'H02', null)];
     plan = planGunEdit(p, 'm4', edits); assert.equal(plan.ok, false);

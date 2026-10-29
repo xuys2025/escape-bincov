@@ -6,7 +6,17 @@ import { brush, C, type PixelContext } from './pixel';
  * PNG art (docs/gunsmith/ART-SPEC.md, M2-09) replaces every one of these drawings in M2-10.
  */
 const PART_ART_IDS = ['O01', 'O03', 'O08', 'M03', 'M06', 'B01', 'B08', 'H01', 'H05', 'S01', 'S02', 'P01', 'P02', 'F01', 'F03', 'G01', 'G10', 'T01', 'T05', 'A07'] as const;
-export const ITEM_ART_IDS = ['knife', 'pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'bandage', 'medkit', 'antidote', 'water', 'food', 'scrap', 'wire', 'fuse', 'battery', 'watch', 'pearl', 'sample', 'ledger', 'cloth', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckyCharm', 'unluckyCharm', 'luckySachet', 'unluckySachet', 'gb17', 'mb4a1', ...PART_ART_IDS] as const;
+/**
+ * The #28 M3 guns, parts and wave two's rounds: Sol's art only (M3-03, M3-07), decoded before the first frame. Their
+ * placeholders, for unit tests and a failed decode, are one generic gun, one generic part and one generic pair of rounds.
+ */
+const WAVE_GUNS = ['pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103', 'augb', 'mb1911', 'umpb45', 'pb90', 'svdb', 'mb14', 'mb700', 'rpkb'] as const;
+const WAVE_PARTS = ['A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'B03', 'B05', 'B06', 'B07', 'B09', 'H02', 'H03', 'H04', 'H06', 'H07', 'H08', 'H09', 'S03', 'S04', 'S05', 'S07', 'S08', 'P03', 'P04', 'P06', 'P07', 'G03', 'G06', 'G07', 'G08', 'G09', 'M01', 'M02', 'M05', 'M07', 'M10', 'M11', 'T04', 'T08',
+  'O05', 'O10', 'F04', 'F07', 'T02', 'T10',
+  'O02', 'O04', 'O06', 'O07', 'O09', 'O11', 'O12', 'M04', 'M08', 'M09', 'M12', 'B02', 'B04', 'B10', 'H10', 'S06', 'S09', 'S10', 'P05', 'P08',
+  'F02', 'F05', 'F06', 'F08', 'G02', 'G04', 'G05', 'G11', 'G12', 'T03', 'T06', 'T07', 'T09', 'A03'] as const;
+const WAVE_AMMO = ['ammo45', 'ammoPDW', 'ammoHeavy'] as const;
+export const ITEM_ART_IDS = ['knife', 'pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'bandage', 'medkit', 'antidote', 'water', 'food', 'scrap', 'wire', 'fuse', 'battery', 'watch', 'pearl', 'sample', 'ledger', 'cloth', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckyCharm', 'unluckyCharm', 'luckySachet', 'unluckySachet', 'gb17', 'mb4a1', ...PART_ART_IDS, ...WAVE_GUNS, ...WAVE_PARTS, ...WAVE_AMMO] as const;
 export type ItemArtId = typeof ITEM_ART_IDS[number];
 type PartArtId = typeof PART_ART_IDS[number];
 
@@ -17,6 +27,7 @@ export function paintItem(c: PixelContext, id: ItemArtId, size: 24 | 32): void {
   if (sol) { c.drawImage(sol.img, sol.x, sol.y); return; }
   if (paintRpgItem(c, id, size)) return;
   if ((PART_ART_IDS as readonly string[]).includes(id)) { paintPartPlaceholder(c, id as PartArtId, size); return; }
+  if ([...WAVE_GUNS, ...WAVE_PARTS, ...WAVE_AMMO].includes(id as never)) { paintWavePlaceholder(c, id, size); return; }
   if (size === 24) { paintSmall(c, id); return; }
   const { r, p, e } = brush(c), S = C;
   switch (id) {
@@ -256,6 +267,19 @@ function paintSmall(c: PixelContext, id: ItemArtId): void {
  * Placeholder icons of the 20 sample attachments (#28 M2-02) until Sol's PNG art replaces them (M2-10): one 24 px
  * drawing each, centred in the 32 px slot like the RPG supplies (ART-SPEC section 2), every one a different shape.
  */
+/** A wave-one gun or part before Sol's art: a gun's side outline, or a part's plain block on a rail clamp. */
+function paintWavePlaceholder(c: PixelContext, id: string, size: 24 | 32): void {
+  const S = C, { r } = brush(c), o = size === 32 ? 4 : 0;
+  if ((WAVE_GUNS as readonly string[]).includes(id)) {
+    r(S.ink, o + 1, o + 8, 22, 6); r(S.steelDark, o + 2, o + 9, 20, 4); r(S.steel, o + 2, o + 9, 20, 1);
+    r(S.ink, o + 8, o + 13, 5, 8); r(S.edge, o + 9, o + 14, 3, 6); return;
+  }
+  if ((WAVE_AMMO as readonly string[]).includes(id)) {
+    for (const x of [o + 5, o + 13]) { r(S.ink, x, o + 4, 6, 16); r(S.brass, x + 1, o + 8, 4, 11); r(S.brassLight, x + 1, o + 5, 4, 3); }
+    return;
+  }
+  r(S.ink, o + 4, o + 6, 16, 12); r(S.steelDark, o + 5, o + 7, 14, 10); r(S.steel, o + 5, o + 7, 14, 1); r(S.edge, o + 6, o + 17, 12, 2);
+}
 function paintPartPlaceholder(c: PixelContext, id: PartArtId, size: 24 | 32): void {
   const S = C, base = brush(c), o = size === 32 ? 4 : 0;
   const r = (color: string, x: number, y: number, w: number, h: number) => base.r(color, x + o, y + o, w, h);

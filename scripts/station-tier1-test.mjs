@@ -97,7 +97,7 @@ async function assertCounts(n) {
   await tap(page.locator('[data-action="base-enter"]').first()); await ready();
 }
 function charmFixture() {
-  const p = D.newSave(); p.stash = D.createInventory(10, 6); p.bag = D.createInventory(6, 5);
+  const p = D.newSave(); p.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); p.bag = D.createInventory(6, 5);
   assert.equal(D.addItem(p.stash, 'luckyCharm'), 0); assert.equal(D.addItem(p.bag, 'unluckyCharm'), 0);
   return p;
 }

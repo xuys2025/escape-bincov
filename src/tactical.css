@@ -79,6 +79,11 @@ html:not(.mobile) .content { padding:14px 20px 0; }
 html:not(.mobile) .gear-content { display:flex; flex-direction:column; overflow:hidden; }
 html:not(.mobile) .gear-columns { display:grid; grid-template-columns:minmax(210px,1fr) calc(var(--inventory-cell) * 6) calc(var(--inventory-cell) * 10); gap:24px; flex:1; min-height:0; overflow:auto; padding:0 0 14px; align-items:start; }
 html:not(.mobile) .gear-columns > section { position:static; }
+/* A stash taller than the page (8 rows at 54 px at 1280x720, built out, the overflow of #28 M3-12) scrolls in its own
+   box; the bag, safe and inspector stay put. The extra 12 px holds the thin scrollbar beside the tenth column. */
+html:not(.mobile) .gear-columns { grid-template-columns:minmax(210px,1fr) calc(var(--inventory-cell) * 6) calc(var(--inventory-cell) * 10 + 12px); grid-template-rows:minmax(0,1fr); }
+html:not(.mobile) .gear-columns > .stash-section { display:flex; flex-direction:column; max-height:100%; min-height:0; }
+html:not(.mobile) .gear-columns > .stash-section > .stash-scroll { flex:0 1 auto; min-height:0; overflow-y:auto; overflow-x:hidden; scrollbar-width:thin; scrollbar-color:#5d7157 #0d1916; }
 html:not(.mobile) .content > .details { display:grid; grid-template-columns:210px 1fr; gap:16px; width:100%; flex:0 0 120px; height:120px; min-height:120px; padding:12px 0; border-left:0; border-top:1px solid #686b52; overflow:auto; background:#1a1d19; }
 html:not(.mobile) .details .item-heading { align-items:flex-start; margin:0; gap:10px; }
 html:not(.mobile) .details h3 { font-size:16px; font-weight:400; margin:3px 0; }

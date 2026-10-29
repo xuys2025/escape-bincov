@@ -224,6 +224,8 @@ export function planGunEdit(profile: D.SaveDataV1, gunUid: string, edits: readon
     if (equipped) next.equipment.gun = structuredClone(after);
     else {
         const where = gun.where as Container, item = next[where].items.find(i => i.uid === gunUid)!;
+        // In the stash overflow (#28 M3-12) nothing may change size: it comes out first.
+        if (item.y >= next[where].h) return blocked('footprint', '这把枪在仓库溢出区，先移进仓库或背包再改装。');
         item.gun = structuredClone(after);
         if (!D.fits(next[where], item, item.x, item.y, item.uid, !!item.rotated)) return blocked('footprint', `改装后枪身变大，在${CONTAINER_NAMES[where]}原来的位置放不下，请先腾出空间。`);
     }

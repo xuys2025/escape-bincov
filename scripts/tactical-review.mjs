@@ -31,7 +31,13 @@ try {
     const box=selector=>page.locator(selector).boundingBox();
     const equipment=await box('.equipment-section'),bag=await box('[data-grid="bag"]'),stash=await box('[data-grid="stash"]'),safe=await box('[data-grid="safe"]'),details=await box('.details');
     assert.ok(equipment.x+equipment.width<bag.x && bag.x+bag.width<stash.x);
-    assert.ok(safe.y+safe.height<=details.y && stash.y+stash.height<=details.y,`All default inventory rows remain visible: ${JSON.stringify({safe,stash,details})}`);
+    // The stash scrolls in its own box when it is taller than the page (#28 M3-12: 8 rows at 54 px at 1280x720); every row stays reachable above the inspector.
+    const stashBox=await box('.stash-section > .stash-scroll');
+    assert.ok(safe.y+safe.height<=details.y && stashBox.y+stashBox.height<=details.y,`All default inventory rows remain visible: ${JSON.stringify({safe,stashBox,details})}`);
+    await page.locator('.stash-section > .stash-scroll').evaluate(e=>{e.scrollTop=e.scrollHeight;});
+    const lastRow=await box('[data-grid="stash"]');
+    assert.ok(lastRow.y+lastRow.height<=details.y+1,`The stash's last row scrolls into view: ${JSON.stringify({lastRow,details})}`);
+    await page.locator('.stash-section > .stash-scroll').evaluate(e=>{e.scrollTop=0;});
     const cell=width===1920?80:54;
     assert.equal(await page.locator('[data-grid="bag"]').getAttribute('data-cell'),String(cell));
     await page.locator('[data-source="bag"][aria-label^="密封绷带"]').click();
@@ -53,7 +59,7 @@ try {
     // fit one stash, so they fill as many stashes as they need, in item order, each shown, counted and checked alone.
     const stashes=[];
     for(const id of Object.keys(D.ITEMS)){
-      if(!stashes.length||D.addItem(stashes.at(-1),id,1)!==0){stashes.push({w:10,h:6,items:[]});assert.equal(D.addItem(stashes.at(-1),id,1),0,`${id} fits an empty stash`);}
+      if(!stashes.length||D.addItem(stashes.at(-1),id,1)!==0){stashes.push({w:D.STASH_W,h:D.STASH_ROWS,items:[]});assert.equal(D.addItem(stashes.at(-1),id,1),0,`${id} fits an empty stash`);}
     }
     assert.equal(stashes.reduce((n,s)=>n+s.items.length,0),Object.keys(D.ITEMS).length);
     for(const [i,fixture] of stashes.entries()){
@@ -63,7 +69,7 @@ try {
       await shot(i?`all-items-${i+1}`:'all-items');
       await noClipping();
     }
-    const rotated={w:10,h:6,items:[]};
+    const rotated={w:D.STASH_W,h:D.STASH_ROWS,items:[]};
     for(const id of ['pistol','shotgun','carbine','gb17','mb4a1','medkit','ledger','water','battery','knife']) {
       assert.equal(D.addItem(rotated,id,1,false,true,false),0);
     }

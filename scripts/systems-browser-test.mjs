@@ -54,7 +54,7 @@ const closePanel=async()=>{await page.locator('.coast-sample [data-panel] [data-
 const freeze=(p=page)=>p.evaluate(()=>window.__bincovSample.driver.freezeAI(true));
 try {
  await page.goto(pathToFileURL(resolve('dist/index.html')).href+'?test=1&entry=tabs');await action('enter').click();await page.locator('#ui .panel.hideout').waitFor();
- const funded=D.newSave(); funded.cash=100000; funded.quests.repair=true; funded.upgraded=true; funded.stash=D.createInventory(10,9);
+ const funded=D.newSave(); funded.cash=100000; funded.quests.repair=true; funded.upgraded=true; funded.stash=D.createInventory(D.STASH_W,D.STASH_UPGRADED_ROWS);
  for(const [id,qty] of Object.entries({scrap:35,wire:20,bandage:15,medkit:5,fuse:10,battery:10,pearl:5,watch:3,cloth:10,water:6,luckyCharm:1,unluckyCharm:1,analgesic:1,strengthDose:1}))assert.equal(D.addItem(funded.stash,id,qty),0);
  await page.evaluate(profile=>{const s=window.__bincov.saveSession,t=s.prepareExpansionMutation(d=>{Object.assign(d.profile,profile);d.expansion.base.extractedPearl=true;d.expansion.body.hp=20;d.expansion.body.mental=40;d.expansion.body.water=50;d.expansion.body.satiety=50;d.expansion.body.bleeding=true;});if(!t||s.commitExpansionMutation(t)!=='committed')throw new Error('Funding fixture rejected');},funded);
  // The walking base is the station yard: real movement, and a failed write when leaving keeps the yard and its storage dialog.
