@@ -8,6 +8,22 @@ export const inventoryArtSize = (id: string): readonly [number, number] => {
     case 'shotgun': case 'carbine': return [78, 17];
     case 'pistol': case 'gb17': return [38, 17];
     case 'mb4a1': return [80, 17];
+    // #28 M3-01: Sol's factory inventory pictures (M3-03).
+    case 'pb226': return [40, 17];
+    case 'vb9': return [55, 17];
+    case 'mpb5': return [65, 17];
+    case 'mb870': return [88, 16];
+    case 'mb1014': return [86, 16];
+    case 'akb74': case 'akb103': return [87, 16];
+    case 'augb': return [65, 18];
+    // #28 M3-05: wave two's factory inventory pictures (Sol, M3-07).
+    case 'mb1911': return [42, 17];
+    case 'umpb45': return [66, 18];
+    case 'pb90': return [56, 17];
+    case 'svdb': return [92, 17];
+    case 'mb14': return [89, 17];
+    case 'mb700': return [92, 15];
+    case 'rpkb': return [97, 16];
     case 'medkit': case 'ledger': return [48, 16];
     case 'water': return [12, 32];
     case 'battery': return [22, 32];
@@ -17,9 +33,9 @@ export const inventoryArtSize = (id: string): readonly [number, number] => {
 };
 
 export function paintInventoryItem(c: PixelContext, id: ItemArtId): void {
-  // The gunsmith guns' factory pictures and the parts' icons from Sol's art (#28 M2-10), once decoded. The old carbine
-  // keeps its painted picture here: gunsmith-compose.ts splits that one for configured carbines.
-  const sol = id === 'carbine' ? null : gunsmithArt?.inventory(id);
+  // The gunsmith guns' factory pictures and the parts' icons from Sol's art (#28 M2-10), once decoded. The old three
+  // keep their painted pictures here: gunsmith-compose.ts cuts these into layers for configured old guns (#28 M3-03).
+  const sol = id === 'pistol' || id === 'shotgun' || id === 'carbine' ? null : gunsmithArt?.inventory(id);
   if (sol) { c.drawImage(sol, 0, 0); return; }
   const { r, p } = brush(c), S = C;
   switch (id) {

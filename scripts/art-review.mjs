@@ -23,8 +23,9 @@ const hash = data => createHash('sha256').update(data).digest('hex');
 const report = { htmlSha256: hash(await readFile('dist/index.html')), method: 'Item art from the game\'s own painters (bundled into an independent diagnostic sheet at native / 3x sizes) and compared pixel for pixel with the art the tab page shows. World textures read from the live 2.5D raid view (fresh seed 42). Scene captures are 2.5D raid frames with enemies frozen and the player placed by the explicit ?test=1 driver; rendering remains active. No screenshot editing.', checks: [], errors: [], externalRequests: [] };
 const browser = await chromium.launch(browserOptions);
 report.browser = browser.version();
-// The painters, as the bundle uses them (pure canvas code).
-const painters = (await build({ stdin: { contents: "export { paintItem, ITEM_ART_IDS } from './src/art/items.ts'; export { paintInventoryItem, inventoryArtSize } from './src/art/inventory.ts'; export { paintPortrait } from './src/art/portraits.ts';", resolveDir: resolve('.'), loader: 'ts' }, bundle: true, write: false, format: 'iife', globalName: '__art', platform: 'browser' })).outputFiles[0].text;
+// The painters, with Sol's gunsmith art decoded as the game decodes it before its first frame (#28 M2-10; since M3 the
+// wave-one guns and parts have no hand-drawn placeholders of their own).
+const painters = (await build({ stdin: { contents: "export { paintItem, ITEM_ART_IDS } from './src/art/items.ts'; export { paintInventoryItem, inventoryArtSize } from './src/art/inventory.ts'; export { paintPortrait } from './src/art/portraits.ts'; export { loadGunsmithArt } from './src/art/gunsmith-compose.ts';", resolveDir: resolve('.'), loader: 'ts' }, bundle: true, write: false, format: 'iife', globalName: '__art', platform: 'browser', loader: { '.png': 'dataurl' } })).outputFiles[0].text;
 /** In-page: pixel statistics and a PNG of a canvas. */
 const STATS = `window.__stats = c => {
   const pixels = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
@@ -45,6 +46,7 @@ try {
   const sheet = await context.newPage();
   await sheet.setContent('<html><body></body></html>');
   await sheet.addScriptTag({ content: painters }); await sheet.addScriptTag({ content: STATS });
+  await sheet.evaluate(() => window.__art.loadGunsmithArt());
   const textures = await sheet.evaluate(ids => {
     const paint = (w, h, fn) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d'); g.imageSmoothingEnabled = false; fn(g); return window.__stats(c); };
     const list = [];

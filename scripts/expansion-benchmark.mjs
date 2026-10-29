@@ -31,8 +31,8 @@ for (let i = 0; i < 10; i++) {
     raid.maps[Object.keys(world.maps)[i % 3]].containers.push({ id: `crate-${i}`, name: '容量夹具', kind: 'crate', runId: raid.runId, x: 48 + i * 32, y: 208, inventory });
 }
 const oldProfile = D.newSave(), oldRaid = initialCheckpoint(generateRun(42), D.beginRun(oldProfile, 42));
-const archive = { format: 'escape-bincov-session', version: 8, revision: 5, savedAt: 1000, profile: oldProfile, raid: oldRaid, terminal: null,
-    legacyBackup: JSON.stringify({ ...D.newSave(), version: 1 }), migrationBackup: null, gunsBackup: null };
+const archive = { format: 'escape-bincov-session', version: 9, revision: 5, savedAt: 1000, profile: oldProfile, raid: oldRaid, terminal: null,
+    legacyBackup: JSON.stringify({ ...D.newSave(), version: 1 }), migrationBackup: null, gunsBackup: null, layoutBackup: null };
 decodeSession(JSON.stringify(archive));
 const record = { ...archive, revision: 6, profile, raid: null, expansion: state, systemsBackup: JSON.stringify(archive) };
 const resolver = id => id === world.id ? world : undefined;

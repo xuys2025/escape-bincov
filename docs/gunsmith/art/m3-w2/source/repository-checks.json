@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "date": "2026-10-28",
+  "stage": "P0+P1",
+  "codeHead": "7d7490dbc296ea1f9009bc1af0b89c5a3161f7ec",
+  "main": "6758d65411abaf1a85aef020621f268a2c6bee63",
+  "node": "24.21.0",
+  "pnpm": "11.19.0",
+  "status": "pass",
+  "checks": [
+    {
+      "command": "pnpm test",
+      "status": "pass",
+      "tests": 1057,
+      "failed": 0,
+      "rawLogSha256": "acaeb4609286d090b19676d9d8cdc0ba1d88a52ecea4e96c442d80f30a26611d"
+    },
+    {
+      "command": "pnpm check:ci",
+      "status": "pass",
+      "tests": 110,
+      "failed": 0,
+      "rawLogSha256": "9a877462eceae879396c77caea7103738cab6008f1151eab90326f077cde3f0c"
+    },
+    {
+      "command": "pnpm package",
+      "status": "pass",
+      "rawLogSha256": "1f5349e598d1982d7f1a8ba4821c726d597dd2ba71d53eb2a51796cb1ef7089a",
+      "generatedFiles": [
+        {
+          "file": "dist/index.html",
+          "bytes": 9376928,
+          "sha256": "9e965ee363f02e349b7b51db489690d060e50d2ee5d4ed9d19109420775a9a61"
+        },
+        {
+          "file": "start the game.html",
+          "bytes": 9376928,
+          "sha256": "9e965ee363f02e349b7b51db489690d060e50d2ee5d4ed9d19109420775a9a61"
+        },
+        {
+          "file": "release/Escape-Bincov-portable.zip",
+          "bytes": 6071052,
+          "sha256": "2826288080926d5828d3aa3e18836427a77fb7ece7c54f8985ffbc10368b3eb7"
+        },
+        {
+          "file": "release/Escape-Bincov-web.zip",
+          "bytes": 6066543,
+          "sha256": "cef57b6af746574de98ba62f6365ab087c31f0020ee28470066941c0817906ae"
+        }
+      ],
+      "formalGunsmithImages": 419,
+      "formalGunsmithPngBytes": 67275,
+      "newP1Consumed": false
+    }
+  ],
+  "environment": {
+    "note": "Existing shared node_modules junction; pnpm_config_verify_deps_before_run=warn set only for the checking processes. No dependency installation or project config change."
+  },
+  "browserAcceptance": "P0 was integrated by Opus; new P1 incoming artwork is not yet integrated. Full P1 live-game acceptance belongs to M3-08.",
+  "generatedFilesCommitted": false,
+  "focusedAfterCiCorrection": {
+    "command": "node --import tsx scripts/gunsmith-bench-test.mjs --only=A1 --out=docs/gunsmith/art/m3-w2/source/ci-a1-local",
+    "status": "pass",
+    "comparedImages": 151,
+    "passed": 1,
+    "total": 1,
+    "report": "docs/gunsmith/art/m3-w2/source/ci-a1-local/report.json",
+    "reportSha256": "c49c8e9053baa5bd9187501010656e406f2a29f3ad191fc14d08152d648bd776",
+    "buildSha256": "9e965ee363f02e349b7b51db489690d060e50d2ee5d4ed9d19109420775a9a61",
+    "originalFailure": "source/p1-ci-first-failure.json",
+    "change": "Only preview generation, preview path preservation and their documentation; runtime PNG and game code unchanged."
+  }
+}

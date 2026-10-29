@@ -1,0 +1,21 @@
+{
+  "tool": "built-in image_gen",
+  "requestedCalls": 3,
+  "availableOutputs": 0,
+  "result": "The parallel call returned: image generation failed: connection failed: error sending request. No reference output was available to use; remaining reference requests were not dispatched.",
+  "runtimeMethod": "Original native integer-grid artwork in wave1.mjs and pixel-artwork.json. No CLI/API fallback, no source image scaling. The retained P0 reference used one successful built-in call.",
+  "prompts": [
+    {
+      "id": "pb226",
+      "prompt": "Use case: stylized-concept. Asset type: source design reference for tiny modular pixel-art game sprites. Subject: P226 style sturdy squared metal service pistol, slightly larger than a polymer G17, external hammer and curved trigger guard. Three configurations: factory; compact with thin grip panel, small muzzle compensator and tiny side laser (no beam); precision with threaded barrel and suppressor, micro red-dot on a low mount and side device. One transparent reference plate, three side-on orthographic right-facing gun configurations, one per row, isolated with generous separation. Restrained desaturated steel grey and warm wood, chunky sharp integer pixel edges, dark single-pixel outline, highlights from top left. No hands, text, letters, numerals, engraving, logos, watermark, shadows, floor, glow, muzzle effects or background. Maintain perfectly horizontal bore. This is design reference only; production H/I/W/Q sprites will be independently drawn on tiny native integer grids. The gun identity must be evident in silhouette."
+    },
+    {
+      "id": "mpb5",
+      "prompt": "Use case: stylized-concept. Asset type: source design reference for tiny modular pixel-art game sprites. Subject: MP5 style compact submachine gun with round ribbed handguard and slender curved magazine. Three configurations: factory with fixed stock; short with telescoping stock, shorter barrel, compact ribbed handguard and small side device; stable with square railed handguard, vertical foregrip, low red-dot, suppressor and larger curved magazine. One transparent reference plate, three side-on orthographic right-facing gun configurations, one per row, isolated with generous separation. Restrained desaturated steel grey and warm wood, chunky sharp integer pixel edges, dark single-pixel outline, highlights from top left. No hands, text, letters, numerals, engraving, logos, watermark, shadows, floor, glow, muzzle effects or background. Maintain perfectly horizontal bore. This is design reference only; production H/I/W/Q sprites will be independently drawn on tiny native integer grids. The gun identity must be evident in silhouette."
+    },
+    {
+      "id": "vb9",
+      "prompt": "Use case: stylized-concept. Asset type: source design reference for tiny modular pixel-art game sprites. Subject: Vector 9mm style very compact angular submachine gun, boxy stepped lower action and vertical magazine ahead of pistol grip, short top rail and folding-style rear stock. Three configurations: factory; close-range with muzzle compensator, angled foregrip, side torch (no light); scoped with low red dot, short suppressor, vertical grip and small side device. One transparent reference plate, three side-on orthographic right-facing gun configurations, one per row, isolated with generous separation. Restrained desaturated steel grey and warm wood, chunky sharp integer pixel edges, dark single-pixel outline, highlights from top left. No hands, text, letters, numerals, engraving, logos, watermark, shadows, floor, glow, muzzle effects or background. Maintain perfectly horizontal bore. This is design reference only; production H/I/W/Q sprites will be independently drawn on tiny native integer grids. The gun identity must be evident in silhouette."
+    }
+  ]
+}

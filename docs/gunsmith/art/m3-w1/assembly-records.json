@@ -1,0 +1,7940 @@
+{
+  "source": "M3-W1 full delivery, native art and unchanged M2 references",
+  "method": "Saved manifest anchors only; no manual component placement",
+  "virtual": [
+    {
+      "key": "gs-pistol-receiver-i",
+      "gun": "pistol",
+      "role": "receiver",
+      "w": 38,
+      "h": 17,
+      "output": "inventory",
+      "anchor": null,
+      "mounts": {
+        "mount": [
+          18,
+          1
+        ],
+        "muzzle": [
+          37,
+          3
+        ]
+      },
+      "tip": [
+        38,
+        5.5
+      ],
+      "sourceKey": "pistol"
+    },
+    {
+      "key": "gs-shotgun-receiver-i",
+      "gun": "shotgun",
+      "role": "receiver",
+      "w": 78,
+      "h": 17,
+      "output": "inventory",
+      "anchor": null,
+      "mounts": {
+        "mount": [
+          35,
+          3
+        ],
+        "muzzle": [
+          77,
+          3
+        ]
+      },
+      "tip": [
+        78,
+        6
+      ],
+      "sourceKey": "shotgun"
+    },
+    {
+      "key": "gs-carbine-receiver-i",
+      "gun": "carbine",
+      "role": "receiver",
+      "w": 78,
+      "h": 17,
+      "output": "inventory",
+      "anchor": null,
+      "mounts": {
+        "handguard": [
+          44,
+          8
+        ],
+        "mount": [
+          33,
+          4
+        ],
+        "barrel": [
+          59,
+          5
+        ]
+      },
+      "sourceKey": "carbine",
+      "clearRects": [
+        [
+          44,
+          8,
+          15,
+          2
+        ],
+        [
+          60,
+          0,
+          18,
+          11
+        ]
+      ],
+      "fillRects": [
+        [
+          "#425a60",
+          44,
+          8,
+          15,
+          2
+        ]
+      ]
+    },
+    {
+      "key": "gs-carbine-handguard-factory-i",
+      "gun": "carbine",
+      "role": "factory",
+      "slot": "handguard",
+      "w": 78,
+      "h": 17,
+      "output": "inventory",
+      "anchor": [
+        44,
+        8
+      ],
+      "sourceKey": "carbine",
+      "rect": [
+        44,
+        8,
+        15,
+        2
+      ],
+      "wholeCanvasLayer": true
+    },
+    {
+      "key": "gs-carbine-barrel-factory-i",
+      "gun": "carbine",
+      "role": "factory",
+      "slot": "barrel",
+      "w": 19,
+      "h": 11,
+      "output": "inventory",
+      "anchor": [
+        0,
+        5
+      ],
+      "mounts": {
+        "muzzle": [
+          18,
+          5
+        ]
+      },
+      "tip": [
+        19,
+        6
+      ],
+      "sourceKey": "carbine",
+      "rect": [
+        59,
+        0,
+        19,
+        11
+      ]
+    }
+  ],
+  "configurations": {
+    "pb226": {
+      "factory": [],
+      "light": [
+        [
+          "P07",
+          "grip"
+        ],
+        [
+          "M02",
+          "muzzle"
+        ],
+        [
+          "T04",
+          "pistolSide"
+        ]
+      ],
+      "precision": [
+        [
+          "B01",
+          "barrel"
+        ],
+        [
+          "M03",
+          "muzzle"
+        ],
+        [
+          "A02",
+          "base",
+          [
+            [
+              "O01",
+              "micro"
+            ]
+          ]
+        ],
+        [
+          "T08",
+          "pistolSide"
+        ]
+      ]
+    },
+    "mpb5": {
+      "factory": [],
+      "close": [
+        [
+          "S05",
+          "stock"
+        ],
+        [
+          "B03",
+          "barrel"
+        ],
+        [
+          "H06",
+          "handguard",
+          [
+            [
+              "T01",
+              "side"
+            ]
+          ]
+        ],
+        [
+          "M02",
+          "muzzle"
+        ]
+      ],
+      "steady": [
+        [
+          "H07",
+          "handguard",
+          [
+            [
+              "F01",
+              "under"
+            ],
+            [
+              "T05",
+              "side"
+            ]
+          ]
+        ],
+        [
+          "A04",
+          "base",
+          [
+            [
+              "O03",
+              "top"
+            ]
+          ]
+        ],
+        [
+          "G03",
+          "mag"
+        ],
+        [
+          "M03",
+          "muzzle"
+        ]
+      ]
+    },
+    "vb9": {
+      "factory": [],
+      "close": [
+        [
+          "M02",
+          "muzzle"
+        ],
+        [
+          "F03",
+          "under"
+        ],
+        [
+          "T05",
+          "side"
+        ]
+      ],
+      "range": [
+        [
+          "O03",
+          "top"
+        ],
+        [
+          "M03",
+          "muzzle"
+        ],
+        [
+          "F01",
+          "under"
+        ],
+        [
+          "T01",
+          "side"
+        ]
+      ]
+    },
+    "mb870": {
+      "factory": [],
+      "short": [
+        [
+          "B05",
+          "barrel"
+        ],
+        [
+          "S07",
+          "stock"
+        ],
+        [
+          "P06",
+          "grip"
+        ],
+        [
+          "M10",
+          "muzzle"
+        ]
+      ],
+      "extended": [
+        [
+          "H08",
+          "handguard",
+          [
+            [
+              "F01",
+              "under"
+            ],
+            [
+              "T05",
+              "side"
+            ]
+          ]
+        ],
+        [
+          "G06",
+          "mag"
+        ],
+        [
+          "A06",
+          "base",
+          [
+            [
+              "O03",
+              "top"
+            ]
+          ]
+        ]
+      ]
+    },
+    "mb1014": {
+      "factory": [],
+      "control": [
+        [
+          "S08",
+          "stock"
+        ],
+        [
+          "P06",
+          "grip"
+        ],
+        [
+          "H09",
+          "handguard",
+          [
+            [
+              "F01",
+              "under"
+            ]
+          ]
+        ],
+        [
+          "M10",
+          "muzzle"
+        ]
+      ],
+      "extended": [
+        [
+          "G07",
+          "mag"
+        ],
+        [
+          "B06",
+          "barrel"
+        ],
+        [
+          "O03",
+          "top"
+        ],
+        [
+          "H09",
+          "handguard",
+          [
+            [
+              "T01",
+              "side"
+            ]
+          ]
+        ]
+      ]
+    },
+    "akb74": {
+      "factory": [],
+      "light": [
+        [
+          "S03",
+          "stock"
+        ],
+        [
+          "H03",
+          "handguard"
+        ],
+        [
+          "P04",
+          "grip"
+        ],
+        [
+          "B07",
+          "barrel"
+        ],
+        [
+          "M05",
+          "muzzle"
+        ]
+      ],
+      "steady": [
+        [
+          "S04",
+          "stock"
+        ],
+        [
+          "H04",
+          "handguard",
+          [
+            [
+              "F01",
+              "under"
+            ],
+            [
+              "T01",
+              "side"
+            ]
+          ]
+        ],
+        [
+          "P03",
+          "grip"
+        ],
+        [
+          "A08",
+          "base",
+          [
+            [
+              "O08",
+              "top"
+            ]
+          ]
+        ],
+        [
+          "M07",
+          "muzzle"
+        ],
+        [
+          "G08",
+          "mag"
+        ]
+      ]
+    },
+    "akb103": {
+      "factory": [],
+      "compact": [
+        [
+          "S03",
+          "stock"
+        ],
+        [
+          "B07",
+          "barrel"
+        ],
+        [
+          "H03",
+          "handguard"
+        ],
+        [
+          "M05",
+          "muzzle"
+        ]
+      ],
+      "heavy": [
+        [
+          "S04",
+          "stock"
+        ],
+        [
+          "H04",
+          "handguard",
+          [
+            [
+              "F03",
+              "under"
+            ],
+            [
+              "T05",
+              "side"
+            ]
+          ]
+        ],
+        [
+          "A08",
+          "base",
+          [
+            [
+              "O03",
+              "top"
+            ]
+          ]
+        ],
+        [
+          "G09",
+          "mag"
+        ],
+        [
+          "M06",
+          "muzzle"
+        ]
+      ]
+    },
+    "pistol": {
+      "factory": [],
+      "custom": [
+        [
+          "A01",
+          "base",
+          [
+            [
+              "O01",
+              "micro"
+            ]
+          ]
+        ],
+        [
+          "M01",
+          "muzzle"
+        ]
+      ]
+    },
+    "shotgun": {
+      "factory": [],
+      "custom": [
+        [
+          "A05",
+          "base",
+          [
+            [
+              "O03",
+              "top"
+            ]
+          ]
+        ],
+        [
+          "M11",
+          "muzzle"
+        ]
+      ]
+    },
+    "carbine": {
+      "factory": [],
+      "custom": [
+        [
+          "B09",
+          "barrel"
+        ],
+        [
+          "M07",
+          "muzzle"
+        ]
+      ]
+    },
+    "gb17": {
+      "factory": [],
+      "custom": [
+        [
+          "P07",
+          "grip"
+        ],
+        [
+          "M02",
+          "muzzle"
+        ],
+        [
+          "T04",
+          "pistolSide"
+        ]
+      ]
+    },
+    "mb4a1": {
+      "factory": [],
+      "custom": [
+        [
+          "H02",
+          "handguard",
+          [
+            [
+              "F01",
+              "under"
+            ],
+            [
+              "T01",
+              "side"
+            ],
+            [
+              "T05",
+              "side"
+            ]
+          ]
+        ],
+        [
+          "M07",
+          "muzzle"
+        ]
+      ]
+    }
+  },
+  "assemblies": [
+    {
+      "gun": "pb226",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 18,
+      "h": 9,
+      "tip": [
+        18,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-pb226-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            5,
+            6
+          ]
+        }
+      ],
+      "grip": [
+        6,
+        6
+      ],
+      "bore": 2,
+      "forward": 8,
+      "hand": [
+        6,
+        6
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "pb226",
+      "code": "i",
+      "configuration": "factory",
+      "items": [],
+      "w": 40,
+      "h": 17,
+      "tip": [
+        40,
+        4
+      ],
+      "layers": [
+        {
+          "key": "gs-pb226-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "pb226",
+      "code": "w",
+      "configuration": "factory",
+      "items": [],
+      "w": 80,
+      "h": 34,
+      "tip": [
+        80,
+        8
+      ],
+      "layers": [
+        {
+          "key": "gs-pb226-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "pb226",
+      "code": "h",
+      "configuration": "light",
+      "items": [
+        "P07",
+        "M02",
+        "T04"
+      ],
+      "w": 20,
+      "h": 9,
+      "tip": [
+        20,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-pb226-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-m02-h",
+          "label": "muzzle",
+          "origin": [
+            17,
+            0
+          ]
+        },
+        {
+          "key": "gs-t04-h",
+          "label": "pistolSide",
+          "origin": [
+            13,
+            4
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            5,
+            6
+          ]
+        }
+      ],
+      "grip": [
+        6,
+        6
+      ],
+      "bore": 2,
+      "forward": 8,
+      "hand": [
+        6,
+        6
+      ],
+      "beam": [
+        15,
+        5
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "pb226",
+      "code": "i",
+      "configuration": "light",
+      "items": [
+        "P07",
+        "M02",
+        "T04"
+      ],
+      "w": 46,
+      "h": 17,
+      "tip": [
+        46,
+        4
+      ],
+      "layers": [
+        {
+          "key": "gs-pb226-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-p07-i",
+          "label": "rearGrip",
+          "origin": [
+            8,
+            8
+          ]
+        },
+        {
+          "key": "gs-m02-i",
+          "label": "muzzle",
+          "origin": [
+            39,
+            2
+          ]
+        },
+        {
+          "key": "gs-t04-i",
+          "label": "pistolSide",
+          "origin": [
+            29,
+            7
+          ]
+        }
+      ],
+      "beam": [
+        35,
+        9
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "pb226",
+      "code": "w",
+      "configuration": "light",
+      "items": [
+        "P07",
+        "M02",
+        "T04"
+      ],
+      "w": 93,
+      "h": 34,
+      "tip": [
+        93,
+        8
+      ],
+      "layers": [
+        {
+          "key": "gs-pb226-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-p07-w",
+          "label": "rearGrip",
+          "origin": [
+            16,
+            16
+          ]
+        },
+        {
+          "key": "gs-m02-w",
+          "label": "muzzle",
+          "origin": [
+            79,
+            4
+          ]
+        },
+        {
+          "key": "gs-t04-w",
+          "label": "pistolSide",
+          "origin": [
+            58,
+            14
+          ]
+        }
+      ],
+      "beam": [
+        70,
+        18
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "pb226",
+      "code": "h",
+      "configuration": "precision",
+      "items": [
+        "B01",
+        "M03",
+        "A02",
+        "T08"
+      ],
+      "w": 26,
+      "h": 12,
+      "tip": [
+        26,
+        5
+      ],
+      "layers": [
+        {
+          "key": "gs-b01-h",
+          "label": "barrel",
+          "origin": [
+            17,
+            4
+          ]
+        },
+        {
+          "key": "gs-pb226-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            3
+          ]
+        },
+        {
+          "key": "gs-a02-h",
+          "label": "mount",
+          "origin": [
+            4,
+            2
+          ]
+        },
+        {
+          "key": "gs-o01-h",
+          "label": "top",
+          "origin": [
+            5,
+            0
+          ]
+        },
+        {
+          "key": "gs-m03-h",
+          "label": "muzzle",
+          "origin": [
+            20,
+            3
+          ]
+        },
+        {
+          "key": "gs-t08-h",
+          "label": "pistolSide",
+          "origin": [
+            13,
+            6
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            5,
+            9
+          ]
+        }
+      ],
+      "grip": [
+        6,
+        9
+      ],
+      "bore": 5,
+      "forward": 8,
+      "hand": [
+        6,
+        9
+      ],
+      "beam": [
+        16,
+        7
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "pb226",
+      "code": "i",
+      "configuration": "precision",
+      "items": [
+        "B01",
+        "M03",
+        "A02",
+        "T08"
+      ],
+      "w": 60,
+      "h": 23,
+      "tip": [
+        60,
+        10
+      ],
+      "layers": [
+        {
+          "key": "gs-b01-i",
+          "label": "barrel",
+          "origin": [
+            39,
+            8
+          ]
+        },
+        {
+          "key": "gs-pb226-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            6
+          ]
+        },
+        {
+          "key": "gs-a02-i",
+          "label": "mount",
+          "origin": [
+            8,
+            5
+          ]
+        },
+        {
+          "key": "gs-o01-i",
+          "label": "top",
+          "origin": [
+            9,
+            0
+          ]
+        },
+        {
+          "key": "gs-m03-i",
+          "label": "muzzle",
+          "origin": [
+            46,
+            7
+          ]
+        },
+        {
+          "key": "gs-t08-i",
+          "label": "pistolSide",
+          "origin": [
+            28,
+            12
+          ]
+        }
+      ],
+      "beam": [
+        36,
+        15
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "pb226",
+      "code": "w",
+      "configuration": "precision",
+      "items": [
+        "B01",
+        "M03",
+        "A02",
+        "T08"
+      ],
+      "w": 122,
+      "h": 47,
+      "tip": [
+        122,
+        21
+      ],
+      "layers": [
+        {
+          "key": "gs-b01-w",
+          "label": "barrel",
+          "origin": [
+            79,
+            17
+          ]
+        },
+        {
+          "key": "gs-pb226-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            13
+          ]
+        },
+        {
+          "key": "gs-a02-w",
+          "label": "mount",
+          "origin": [
+            16,
+            11
+          ]
+        },
+        {
+          "key": "gs-o01-w",
+          "label": "top",
+          "origin": [
+            18,
+            0
+          ]
+        },
+        {
+          "key": "gs-m03-w",
+          "label": "muzzle",
+          "origin": [
+            94,
+            15
+          ]
+        },
+        {
+          "key": "gs-t08-w",
+          "label": "pistolSide",
+          "origin": [
+            56,
+            25
+          ]
+        }
+      ],
+      "beam": [
+        72,
+        31
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mpb5",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 26,
+      "h": 10,
+      "tip": [
+        26,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-mpb5-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-mpb5-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            12,
+            4
+          ]
+        },
+        {
+          "key": "gs-mpb5-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            15,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-receiver-h",
+          "label": "receiver",
+          "origin": [
+            6,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            15,
+            2
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            8,
+            5
+          ]
+        },
+        {
+          "key": "gs-glove-front-h",
+          "label": "glove-front",
+          "origin": [
+            17,
+            5
+          ]
+        }
+      ],
+      "grip": [
+        9,
+        5
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        18,
+        5
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "mpb5",
+      "code": "i",
+      "configuration": "factory",
+      "items": [],
+      "w": 65,
+      "h": 17,
+      "tip": [
+        65,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-mpb5-stock-factory-i",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            30,
+            7
+          ]
+        },
+        {
+          "key": "gs-mpb5-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            39,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-receiver-i",
+          "label": "receiver",
+          "origin": [
+            16,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-handguard-factory-i",
+          "label": "handguard",
+          "origin": [
+            39,
+            2
+          ]
+        }
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mpb5",
+      "code": "w",
+      "configuration": "factory",
+      "items": [],
+      "w": 131,
+      "h": 34,
+      "tip": [
+        131,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-mpb5-stock-factory-w",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            61,
+            14
+          ]
+        },
+        {
+          "key": "gs-mpb5-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            79,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-receiver-w",
+          "label": "receiver",
+          "origin": [
+            33,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-handguard-factory-w",
+          "label": "handguard",
+          "origin": [
+            79,
+            4
+          ]
+        }
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mpb5",
+      "code": "h",
+      "configuration": "close",
+      "items": [
+        "S05",
+        "B03",
+        "H06",
+        "M02"
+      ],
+      "w": 24,
+      "h": 10,
+      "tip": [
+        24,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-s05-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-mpb5-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-b03-h",
+          "label": "barrel",
+          "origin": [
+            14,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-receiver-h",
+          "label": "receiver",
+          "origin": [
+            5,
+            0
+          ]
+        },
+        {
+          "key": "gs-h06-h",
+          "label": "handguard",
+          "origin": [
+            14,
+            2
+          ]
+        },
+        {
+          "key": "gs-m02-h",
+          "label": "muzzle",
+          "origin": [
+            21,
+            0
+          ]
+        },
+        {
+          "key": "gs-t01-h",
+          "label": "side1",
+          "origin": [
+            16,
+            3
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            7,
+            5
+          ]
+        },
+        {
+          "key": "gs-glove-front-h",
+          "label": "glove-front",
+          "origin": [
+            16,
+            5
+          ]
+        }
+      ],
+      "grip": [
+        8,
+        5
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        17,
+        5
+      ],
+      "beam": [
+        19,
+        4
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mpb5",
+      "code": "i",
+      "configuration": "close",
+      "items": [
+        "S05",
+        "B03",
+        "H06",
+        "M02"
+      ],
+      "w": 65,
+      "h": 17,
+      "tip": [
+        65,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-s05-i",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            31,
+            7
+          ]
+        },
+        {
+          "key": "gs-b03-i",
+          "label": "barrel",
+          "origin": [
+            40,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-receiver-i",
+          "label": "receiver",
+          "origin": [
+            17,
+            0
+          ]
+        },
+        {
+          "key": "gs-h06-i",
+          "label": "handguard",
+          "origin": [
+            40,
+            2
+          ]
+        },
+        {
+          "key": "gs-m02-i",
+          "label": "muzzle",
+          "origin": [
+            58,
+            1
+          ]
+        },
+        {
+          "key": "gs-t01-i",
+          "label": "side1",
+          "origin": [
+            46,
+            4
+          ]
+        }
+      ],
+      "beam": [
+        53,
+        7
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "mpb5",
+      "code": "w",
+      "configuration": "close",
+      "items": [
+        "S05",
+        "B03",
+        "H06",
+        "M02"
+      ],
+      "w": 132,
+      "h": 34,
+      "tip": [
+        132,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-s05-w",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            63,
+            14
+          ]
+        },
+        {
+          "key": "gs-b03-w",
+          "label": "barrel",
+          "origin": [
+            81,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-receiver-w",
+          "label": "receiver",
+          "origin": [
+            35,
+            0
+          ]
+        },
+        {
+          "key": "gs-h06-w",
+          "label": "handguard",
+          "origin": [
+            81,
+            4
+          ]
+        },
+        {
+          "key": "gs-m02-w",
+          "label": "muzzle",
+          "origin": [
+            118,
+            2
+          ]
+        },
+        {
+          "key": "gs-t01-w",
+          "label": "side1",
+          "origin": [
+            93,
+            8
+          ]
+        }
+      ],
+      "beam": [
+        109,
+        14
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mpb5",
+      "code": "h",
+      "configuration": "steady",
+      "items": [
+        "H07",
+        "A04",
+        "G03",
+        "M03"
+      ],
+      "w": 31,
+      "h": 13,
+      "tip": [
+        31,
+        5
+      ],
+      "layers": [
+        {
+          "key": "gs-mpb5-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            4
+          ]
+        },
+        {
+          "key": "gs-g03-h",
+          "label": "mag",
+          "origin": [
+            12,
+            7
+          ]
+        },
+        {
+          "key": "gs-mpb5-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            15,
+            3
+          ]
+        },
+        {
+          "key": "gs-mpb5-receiver-h",
+          "label": "receiver",
+          "origin": [
+            6,
+            3
+          ]
+        },
+        {
+          "key": "gs-h07-h",
+          "label": "handguard",
+          "origin": [
+            15,
+            5
+          ]
+        },
+        {
+          "key": "gs-f01-h",
+          "label": "under",
+          "origin": [
+            18,
+            8
+          ]
+        },
+        {
+          "key": "gs-a04-h",
+          "label": "mount",
+          "origin": [
+            9,
+            2
+          ]
+        },
+        {
+          "key": "gs-o03-h",
+          "label": "top",
+          "origin": [
+            9,
+            0
+          ]
+        },
+        {
+          "key": "gs-m03-h",
+          "label": "muzzle",
+          "origin": [
+            25,
+            3
+          ]
+        },
+        {
+          "key": "gs-t05-h",
+          "label": "side1",
+          "origin": [
+            19,
+            5
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            8,
+            8
+          ]
+        },
+        {
+          "key": "gs-glove-foregrip-h",
+          "label": "glove-foregrip",
+          "origin": [
+            17,
+            9
+          ]
+        }
+      ],
+      "grip": [
+        9,
+        8
+      ],
+      "bore": 5,
+      "forward": 0,
+      "hand": [
+        18,
+        9
+      ],
+      "beam": [
+        22,
+        6
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mpb5",
+      "code": "i",
+      "configuration": "steady",
+      "items": [
+        "H07",
+        "A04",
+        "G03",
+        "M03"
+      ],
+      "w": 78,
+      "h": 25,
+      "tip": [
+        78,
+        11
+      ],
+      "layers": [
+        {
+          "key": "gs-mpb5-stock-factory-i",
+          "label": "stock",
+          "origin": [
+            0,
+            8
+          ]
+        },
+        {
+          "key": "gs-g03-i",
+          "label": "mag",
+          "origin": [
+            30,
+            15
+          ]
+        },
+        {
+          "key": "gs-mpb5-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            39,
+            8
+          ]
+        },
+        {
+          "key": "gs-mpb5-receiver-i",
+          "label": "receiver",
+          "origin": [
+            16,
+            8
+          ]
+        },
+        {
+          "key": "gs-h07-i",
+          "label": "handguard",
+          "origin": [
+            39,
+            10
+          ]
+        },
+        {
+          "key": "gs-f01-i",
+          "label": "under",
+          "origin": [
+            45,
+            16
+          ]
+        },
+        {
+          "key": "gs-a04-i",
+          "label": "mount",
+          "origin": [
+            22,
+            6
+          ]
+        },
+        {
+          "key": "gs-o03-i",
+          "label": "top",
+          "origin": [
+            23,
+            0
+          ]
+        },
+        {
+          "key": "gs-m03-i",
+          "label": "muzzle",
+          "origin": [
+            64,
+            8
+          ]
+        },
+        {
+          "key": "gs-t05-i",
+          "label": "side1",
+          "origin": [
+            49,
+            11
+          ]
+        }
+      ],
+      "beam": [
+        57,
+        14
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mpb5",
+      "code": "w",
+      "configuration": "steady",
+      "items": [
+        "H07",
+        "A04",
+        "G03",
+        "M03"
+      ],
+      "w": 158,
+      "h": 51,
+      "tip": [
+        158,
+        23
+      ],
+      "layers": [
+        {
+          "key": "gs-mpb5-stock-factory-w",
+          "label": "stock",
+          "origin": [
+            0,
+            17
+          ]
+        },
+        {
+          "key": "gs-g03-w",
+          "label": "mag",
+          "origin": [
+            61,
+            31
+          ]
+        },
+        {
+          "key": "gs-mpb5-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            79,
+            17
+          ]
+        },
+        {
+          "key": "gs-mpb5-receiver-w",
+          "label": "receiver",
+          "origin": [
+            33,
+            17
+          ]
+        },
+        {
+          "key": "gs-h07-w",
+          "label": "handguard",
+          "origin": [
+            79,
+            21
+          ]
+        },
+        {
+          "key": "gs-f01-w",
+          "label": "under",
+          "origin": [
+            91,
+            34
+          ]
+        },
+        {
+          "key": "gs-a04-w",
+          "label": "mount",
+          "origin": [
+            45,
+            13
+          ]
+        },
+        {
+          "key": "gs-o03-w",
+          "label": "top",
+          "origin": [
+            47,
+            0
+          ]
+        },
+        {
+          "key": "gs-m03-w",
+          "label": "muzzle",
+          "origin": [
+            130,
+            17
+          ]
+        },
+        {
+          "key": "gs-t05-w",
+          "label": "side1",
+          "origin": [
+            98,
+            23
+          ]
+        }
+      ],
+      "beam": [
+        115,
+        29
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "vb9",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 24,
+      "h": 10,
+      "tip": [
+        24,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-vb9-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            8,
+            7
+          ]
+        }
+      ],
+      "grip": [
+        9,
+        7
+      ],
+      "bore": 3,
+      "forward": 0,
+      "hand": [
+        16,
+        6
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "vb9",
+      "code": "i",
+      "configuration": "factory",
+      "items": [],
+      "w": 55,
+      "h": 17,
+      "tip": [
+        55,
+        4
+      ],
+      "layers": [
+        {
+          "key": "gs-vb9-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "vb9",
+      "code": "w",
+      "configuration": "factory",
+      "items": [],
+      "w": 110,
+      "h": 34,
+      "tip": [
+        110,
+        8
+      ],
+      "layers": [
+        {
+          "key": "gs-vb9-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "vb9",
+      "code": "h",
+      "configuration": "close",
+      "items": [
+        "M02",
+        "F03",
+        "T05"
+      ],
+      "w": 26,
+      "h": 11,
+      "tip": [
+        26,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-vb9-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-f03-h",
+          "label": "under",
+          "origin": [
+            15,
+            6
+          ]
+        },
+        {
+          "key": "gs-m02-h",
+          "label": "muzzle",
+          "origin": [
+            23,
+            1
+          ]
+        },
+        {
+          "key": "gs-t05-h",
+          "label": "side1",
+          "origin": [
+            18,
+            2
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            8,
+            7
+          ]
+        },
+        {
+          "key": "gs-glove-foregrip-h",
+          "label": "glove-foregrip",
+          "origin": [
+            16,
+            7
+          ]
+        }
+      ],
+      "grip": [
+        9,
+        7
+      ],
+      "bore": 3,
+      "forward": 0,
+      "hand": [
+        17,
+        7
+      ],
+      "beam": [
+        21,
+        3
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "vb9",
+      "code": "i",
+      "configuration": "close",
+      "items": [
+        "M02",
+        "F03",
+        "T05"
+      ],
+      "w": 61,
+      "h": 17,
+      "tip": [
+        61,
+        4
+      ],
+      "layers": [
+        {
+          "key": "gs-vb9-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-f03-i",
+          "label": "under",
+          "origin": [
+            33,
+            9
+          ]
+        },
+        {
+          "key": "gs-m02-i",
+          "label": "muzzle",
+          "origin": [
+            54,
+            2
+          ]
+        },
+        {
+          "key": "gs-t05-i",
+          "label": "side1",
+          "origin": [
+            41,
+            3
+          ]
+        }
+      ],
+      "beam": [
+        49,
+        6
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "vb9",
+      "code": "w",
+      "configuration": "close",
+      "items": [
+        "M02",
+        "F03",
+        "T05"
+      ],
+      "w": 123,
+      "h": 34,
+      "tip": [
+        123,
+        8
+      ],
+      "layers": [
+        {
+          "key": "gs-vb9-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-f03-w",
+          "label": "under",
+          "origin": [
+            65,
+            18
+          ]
+        },
+        {
+          "key": "gs-m02-w",
+          "label": "muzzle",
+          "origin": [
+            109,
+            4
+          ]
+        },
+        {
+          "key": "gs-t05-w",
+          "label": "side1",
+          "origin": [
+            81,
+            6
+          ]
+        }
+      ],
+      "beam": [
+        98,
+        12
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "vb9",
+      "code": "h",
+      "configuration": "range",
+      "items": [
+        "O03",
+        "M03",
+        "F01",
+        "T01"
+      ],
+      "w": 29,
+      "h": 13,
+      "tip": [
+        29,
+        5
+      ],
+      "layers": [
+        {
+          "key": "gs-vb9-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            2
+          ]
+        },
+        {
+          "key": "gs-f01-h",
+          "label": "under",
+          "origin": [
+            16,
+            8
+          ]
+        },
+        {
+          "key": "gs-o03-h",
+          "label": "top",
+          "origin": [
+            8,
+            0
+          ]
+        },
+        {
+          "key": "gs-m03-h",
+          "label": "muzzle",
+          "origin": [
+            23,
+            3
+          ]
+        },
+        {
+          "key": "gs-t01-h",
+          "label": "side1",
+          "origin": [
+            18,
+            5
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            8,
+            9
+          ]
+        },
+        {
+          "key": "gs-glove-foregrip-h",
+          "label": "glove-foregrip",
+          "origin": [
+            15,
+            9
+          ]
+        }
+      ],
+      "grip": [
+        9,
+        9
+      ],
+      "bore": 5,
+      "forward": 0,
+      "hand": [
+        16,
+        9
+      ],
+      "beam": [
+        21,
+        6
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "vb9",
+      "code": "i",
+      "configuration": "range",
+      "items": [
+        "O03",
+        "M03",
+        "F01",
+        "T01"
+      ],
+      "w": 68,
+      "h": 23,
+      "tip": [
+        68,
+        10
+      ],
+      "layers": [
+        {
+          "key": "gs-vb9-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            6
+          ]
+        },
+        {
+          "key": "gs-f01-i",
+          "label": "under",
+          "origin": [
+            35,
+            15
+          ]
+        },
+        {
+          "key": "gs-o03-i",
+          "label": "top",
+          "origin": [
+            18,
+            0
+          ]
+        },
+        {
+          "key": "gs-m03-i",
+          "label": "muzzle",
+          "origin": [
+            54,
+            7
+          ]
+        },
+        {
+          "key": "gs-t01-i",
+          "label": "side1",
+          "origin": [
+            41,
+            10
+          ]
+        }
+      ],
+      "beam": [
+        48,
+        13
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "vb9",
+      "code": "w",
+      "configuration": "range",
+      "items": [
+        "O03",
+        "M03",
+        "F01",
+        "T01"
+      ],
+      "w": 137,
+      "h": 47,
+      "tip": [
+        137,
+        21
+      ],
+      "layers": [
+        {
+          "key": "gs-vb9-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            13
+          ]
+        },
+        {
+          "key": "gs-f01-w",
+          "label": "under",
+          "origin": [
+            70,
+            31
+          ]
+        },
+        {
+          "key": "gs-o03-w",
+          "label": "top",
+          "origin": [
+            36,
+            0
+          ]
+        },
+        {
+          "key": "gs-m03-w",
+          "label": "muzzle",
+          "origin": [
+            109,
+            15
+          ]
+        },
+        {
+          "key": "gs-t01-w",
+          "label": "side1",
+          "origin": [
+            82,
+            21
+          ]
+        }
+      ],
+      "beam": [
+        98,
+        27
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb870",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 33,
+      "h": 10,
+      "tip": [
+        33,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-mb870-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb870-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-mb870-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            19,
+            3
+          ]
+        },
+        {
+          "key": "gs-mb870-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            19,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-receiver-h",
+          "label": "receiver",
+          "origin": [
+            9,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            19,
+            2
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-glove-front-h",
+          "label": "glove-front",
+          "origin": [
+            21,
+            5
+          ]
+        }
+      ],
+      "grip": [
+        12,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        22,
+        5
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "mb870",
+      "code": "i",
+      "configuration": "factory",
+      "items": [],
+      "w": 88,
+      "h": 16,
+      "tip": [
+        88,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-mb870-stock-factory-i",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-reargrip-factory-i",
+          "label": "rearGrip",
+          "origin": [
+            29,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb870-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            50,
+            5
+          ]
+        },
+        {
+          "key": "gs-mb870-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            50,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-receiver-i",
+          "label": "receiver",
+          "origin": [
+            24,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-handguard-factory-i",
+          "label": "handguard",
+          "origin": [
+            50,
+            2
+          ]
+        }
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb870",
+      "code": "w",
+      "configuration": "factory",
+      "items": [],
+      "w": 177,
+      "h": 32,
+      "tip": [
+        177,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-mb870-stock-factory-w",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-reargrip-factory-w",
+          "label": "rearGrip",
+          "origin": [
+            59,
+            12
+          ]
+        },
+        {
+          "key": "gs-mb870-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            101,
+            10
+          ]
+        },
+        {
+          "key": "gs-mb870-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            101,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-receiver-w",
+          "label": "receiver",
+          "origin": [
+            49,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-handguard-factory-w",
+          "label": "handguard",
+          "origin": [
+            101,
+            4
+          ]
+        }
+      ],
+      "colors": 12
+    },
+    {
+      "gun": "mb870",
+      "code": "h",
+      "configuration": "short",
+      "items": [
+        "B05",
+        "S07",
+        "P06",
+        "M10"
+      ],
+      "w": 30,
+      "h": 10,
+      "tip": [
+        30,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-s07-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb870-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            10,
+            4
+          ]
+        },
+        {
+          "key": "gs-mb870-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            18,
+            3
+          ]
+        },
+        {
+          "key": "gs-b05-h",
+          "label": "barrel",
+          "origin": [
+            18,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-receiver-h",
+          "label": "receiver",
+          "origin": [
+            8,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            18,
+            2
+          ]
+        },
+        {
+          "key": "gs-m10-h",
+          "label": "muzzle",
+          "origin": [
+            27,
+            1
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            10,
+            4
+          ]
+        },
+        {
+          "key": "gs-glove-front-h",
+          "label": "glove-front",
+          "origin": [
+            20,
+            5
+          ]
+        }
+      ],
+      "grip": [
+        11,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        21,
+        5
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "mb870",
+      "code": "i",
+      "configuration": "short",
+      "items": [
+        "B05",
+        "S07",
+        "P06",
+        "M10"
+      ],
+      "w": 82,
+      "h": 16,
+      "tip": [
+        82,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-s07-i",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-p06-i",
+          "label": "rearGrip",
+          "origin": [
+            27,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb870-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            48,
+            5
+          ]
+        },
+        {
+          "key": "gs-b05-i",
+          "label": "barrel",
+          "origin": [
+            48,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-receiver-i",
+          "label": "receiver",
+          "origin": [
+            22,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-handguard-factory-i",
+          "label": "handguard",
+          "origin": [
+            48,
+            2
+          ]
+        },
+        {
+          "key": "gs-m10-i",
+          "label": "muzzle",
+          "origin": [
+            75,
+            1
+          ]
+        }
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb870",
+      "code": "w",
+      "configuration": "short",
+      "items": [
+        "B05",
+        "S07",
+        "P06",
+        "M10"
+      ],
+      "w": 166,
+      "h": 32,
+      "tip": [
+        166,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-s07-w",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-p06-w",
+          "label": "rearGrip",
+          "origin": [
+            55,
+            12
+          ]
+        },
+        {
+          "key": "gs-mb870-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            97,
+            10
+          ]
+        },
+        {
+          "key": "gs-b05-w",
+          "label": "barrel",
+          "origin": [
+            97,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-receiver-w",
+          "label": "receiver",
+          "origin": [
+            45,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-handguard-factory-w",
+          "label": "handguard",
+          "origin": [
+            97,
+            4
+          ]
+        },
+        {
+          "key": "gs-m10-w",
+          "label": "muzzle",
+          "origin": [
+            152,
+            2
+          ]
+        }
+      ],
+      "colors": 11
+    },
+    {
+      "gun": "mb870",
+      "code": "h",
+      "configuration": "extended",
+      "items": [
+        "H08",
+        "G06",
+        "A06"
+      ],
+      "w": 33,
+      "h": 13,
+      "tip": [
+        33,
+        5
+      ],
+      "layers": [
+        {
+          "key": "gs-mb870-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            4
+          ]
+        },
+        {
+          "key": "gs-mb870-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            11,
+            7
+          ]
+        },
+        {
+          "key": "gs-g06-h",
+          "label": "mag",
+          "origin": [
+            19,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb870-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            19,
+            3
+          ]
+        },
+        {
+          "key": "gs-mb870-receiver-h",
+          "label": "receiver",
+          "origin": [
+            9,
+            3
+          ]
+        },
+        {
+          "key": "gs-h08-h",
+          "label": "handguard",
+          "origin": [
+            19,
+            5
+          ]
+        },
+        {
+          "key": "gs-f01-h",
+          "label": "under",
+          "origin": [
+            22,
+            8
+          ]
+        },
+        {
+          "key": "gs-a06-h",
+          "label": "mount",
+          "origin": [
+            13,
+            2
+          ]
+        },
+        {
+          "key": "gs-o03-h",
+          "label": "top",
+          "origin": [
+            13,
+            0
+          ]
+        },
+        {
+          "key": "gs-t05-h",
+          "label": "side1",
+          "origin": [
+            22,
+            5
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            11,
+            7
+          ]
+        },
+        {
+          "key": "gs-glove-foregrip-h",
+          "label": "glove-foregrip",
+          "origin": [
+            21,
+            9
+          ]
+        }
+      ],
+      "grip": [
+        12,
+        7
+      ],
+      "bore": 5,
+      "forward": 0,
+      "hand": [
+        22,
+        9
+      ],
+      "beam": [
+        25,
+        6
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "mb870",
+      "code": "i",
+      "configuration": "extended",
+      "items": [
+        "H08",
+        "G06",
+        "A06"
+      ],
+      "w": 88,
+      "h": 24,
+      "tip": [
+        88,
+        11
+      ],
+      "layers": [
+        {
+          "key": "gs-mb870-stock-factory-i",
+          "label": "stock",
+          "origin": [
+            0,
+            8
+          ]
+        },
+        {
+          "key": "gs-mb870-reargrip-factory-i",
+          "label": "rearGrip",
+          "origin": [
+            29,
+            14
+          ]
+        },
+        {
+          "key": "gs-g06-i",
+          "label": "mag",
+          "origin": [
+            50,
+            13
+          ]
+        },
+        {
+          "key": "gs-mb870-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            50,
+            8
+          ]
+        },
+        {
+          "key": "gs-mb870-receiver-i",
+          "label": "receiver",
+          "origin": [
+            24,
+            8
+          ]
+        },
+        {
+          "key": "gs-h08-i",
+          "label": "handguard",
+          "origin": [
+            50,
+            10
+          ]
+        },
+        {
+          "key": "gs-f01-i",
+          "label": "under",
+          "origin": [
+            56,
+            16
+          ]
+        },
+        {
+          "key": "gs-a06-i",
+          "label": "mount",
+          "origin": [
+            34,
+            6
+          ]
+        },
+        {
+          "key": "gs-o03-i",
+          "label": "top",
+          "origin": [
+            35,
+            0
+          ]
+        },
+        {
+          "key": "gs-t05-i",
+          "label": "side1",
+          "origin": [
+            59,
+            11
+          ]
+        }
+      ],
+      "beam": [
+        67,
+        14
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "mb870",
+      "code": "w",
+      "configuration": "extended",
+      "items": [
+        "H08",
+        "G06",
+        "A06"
+      ],
+      "w": 177,
+      "h": 50,
+      "tip": [
+        177,
+        23
+      ],
+      "layers": [
+        {
+          "key": "gs-mb870-stock-factory-w",
+          "label": "stock",
+          "origin": [
+            0,
+            17
+          ]
+        },
+        {
+          "key": "gs-mb870-reargrip-factory-w",
+          "label": "rearGrip",
+          "origin": [
+            59,
+            29
+          ]
+        },
+        {
+          "key": "gs-g06-w",
+          "label": "mag",
+          "origin": [
+            101,
+            27
+          ]
+        },
+        {
+          "key": "gs-mb870-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            101,
+            17
+          ]
+        },
+        {
+          "key": "gs-mb870-receiver-w",
+          "label": "receiver",
+          "origin": [
+            49,
+            17
+          ]
+        },
+        {
+          "key": "gs-h08-w",
+          "label": "handguard",
+          "origin": [
+            101,
+            21
+          ]
+        },
+        {
+          "key": "gs-f01-w",
+          "label": "under",
+          "origin": [
+            113,
+            34
+          ]
+        },
+        {
+          "key": "gs-a06-w",
+          "label": "mount",
+          "origin": [
+            69,
+            13
+          ]
+        },
+        {
+          "key": "gs-o03-w",
+          "label": "top",
+          "origin": [
+            71,
+            0
+          ]
+        },
+        {
+          "key": "gs-t05-w",
+          "label": "side1",
+          "origin": [
+            118,
+            23
+          ]
+        }
+      ],
+      "beam": [
+        135,
+        29
+      ],
+      "colors": 14
+    },
+    {
+      "gun": "mb1014",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 32,
+      "h": 10,
+      "tip": [
+        32,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-mb1014-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb1014-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-mb1014-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            19,
+            3
+          ]
+        },
+        {
+          "key": "gs-mb1014-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            19,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb1014-receiver-h",
+          "label": "receiver",
+          "origin": [
+            9,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb1014-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            19,
+            2
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-glove-front-h",
+          "label": "glove-front",
+          "origin": [
+            21,
+            5
+          ]
+        }
+      ],
+      "grip": [
+        12,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        22,
+        5
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "mb1014",
+      "code": "i",
+      "configuration": "factory",
+      "items": [],
+      "w": 86,
+      "h": 16,
+      "tip": [
+        86,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-mb1014-stock-factory-i",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb1014-reargrip-factory-i",
+          "label": "rearGrip",
+          "origin": [
+            29,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb1014-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            50,
+            5
+          ]
+        },
+        {
+          "key": "gs-mb1014-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            50,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb1014-receiver-i",
+          "label": "receiver",
+          "origin": [
+            24,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb1014-handguard-factory-i",
+          "label": "handguard",
+          "origin": [
+            50,
+            2
+          ]
+        }
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb1014",
+      "code": "w",
+      "configuration": "factory",
+      "items": [],
+      "w": 173,
+      "h": 32,
+      "tip": [
+        173,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-mb1014-stock-factory-w",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb1014-reargrip-factory-w",
+          "label": "rearGrip",
+          "origin": [
+            59,
+            12
+          ]
+        },
+        {
+          "key": "gs-mb1014-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            101,
+            10
+          ]
+        },
+        {
+          "key": "gs-mb1014-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            101,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb1014-receiver-w",
+          "label": "receiver",
+          "origin": [
+            49,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb1014-handguard-factory-w",
+          "label": "handguard",
+          "origin": [
+            101,
+            4
+          ]
+        }
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb1014",
+      "code": "h",
+      "configuration": "control",
+      "items": [
+        "S08",
+        "P06",
+        "H09",
+        "M10"
+      ],
+      "w": 35,
+      "h": 10,
+      "tip": [
+        35,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-s08-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb1014-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            12,
+            4
+          ]
+        },
+        {
+          "key": "gs-mb1014-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            20,
+            3
+          ]
+        },
+        {
+          "key": "gs-mb1014-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            20,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb1014-receiver-h",
+          "label": "receiver",
+          "origin": [
+            10,
+            0
+          ]
+        },
+        {
+          "key": "gs-h09-h",
+          "label": "handguard",
+          "origin": [
+            20,
+            2
+          ]
+        },
+        {
+          "key": "gs-f01-h",
+          "label": "under",
+          "origin": [
+            23,
+            5
+          ]
+        },
+        {
+          "key": "gs-m10-h",
+          "label": "muzzle",
+          "origin": [
+            32,
+            1
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            12,
+            4
+          ]
+        },
+        {
+          "key": "gs-glove-foregrip-h",
+          "label": "glove-foregrip",
+          "origin": [
+            22,
+            6
+          ]
+        }
+      ],
+      "grip": [
+        13,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        23,
+        6
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "mb1014",
+      "code": "i",
+      "configuration": "control",
+      "items": [
+        "S08",
+        "P06",
+        "H09",
+        "M10"
+      ],
+      "w": 94,
+      "h": 16,
+      "tip": [
+        94,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-s08-i",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-p06-i",
+          "label": "rearGrip",
+          "origin": [
+            31,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb1014-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            52,
+            5
+          ]
+        },
+        {
+          "key": "gs-mb1014-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            52,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb1014-receiver-i",
+          "label": "receiver",
+          "origin": [
+            26,
+            0
+          ]
+        },
+        {
+          "key": "gs-h09-i",
+          "label": "handguard",
+          "origin": [
+            52,
+            2
+          ]
+        },
+        {
+          "key": "gs-f01-i",
+          "label": "under",
+          "origin": [
+            58,
+            8
+          ]
+        },
+        {
+          "key": "gs-m10-i",
+          "label": "muzzle",
+          "origin": [
+            87,
+            1
+          ]
+        }
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb1014",
+      "code": "w",
+      "configuration": "control",
+      "items": [
+        "S08",
+        "P06",
+        "H09",
+        "M10"
+      ],
+      "w": 190,
+      "h": 33,
+      "tip": [
+        190,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-s08-w",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-p06-w",
+          "label": "rearGrip",
+          "origin": [
+            63,
+            12
+          ]
+        },
+        {
+          "key": "gs-mb1014-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            105,
+            10
+          ]
+        },
+        {
+          "key": "gs-mb1014-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            105,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb1014-receiver-w",
+          "label": "receiver",
+          "origin": [
+            53,
+            0
+          ]
+        },
+        {
+          "key": "gs-h09-w",
+          "label": "handguard",
+          "origin": [
+            105,
+            4
+          ]
+        },
+        {
+          "key": "gs-f01-w",
+          "label": "under",
+          "origin": [
+            117,
+            17
+          ]
+        },
+        {
+          "key": "gs-m10-w",
+          "label": "muzzle",
+          "origin": [
+            176,
+            2
+          ]
+        }
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb1014",
+      "code": "h",
+      "configuration": "extended",
+      "items": [
+        "G07",
+        "B06",
+        "O03",
+        "H09"
+      ],
+      "w": 35,
+      "h": 12,
+      "tip": [
+        35,
+        4
+      ],
+      "layers": [
+        {
+          "key": "gs-mb1014-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            3
+          ]
+        },
+        {
+          "key": "gs-mb1014-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            11,
+            6
+          ]
+        },
+        {
+          "key": "gs-g07-h",
+          "label": "mag",
+          "origin": [
+            19,
+            5
+          ]
+        },
+        {
+          "key": "gs-b06-h",
+          "label": "barrel",
+          "origin": [
+            19,
+            2
+          ]
+        },
+        {
+          "key": "gs-mb1014-receiver-h",
+          "label": "receiver",
+          "origin": [
+            9,
+            2
+          ]
+        },
+        {
+          "key": "gs-h09-h",
+          "label": "handguard",
+          "origin": [
+            19,
+            4
+          ]
+        },
+        {
+          "key": "gs-o03-h",
+          "label": "top",
+          "origin": [
+            13,
+            0
+          ]
+        },
+        {
+          "key": "gs-t01-h",
+          "label": "side1",
+          "origin": [
+            22,
+            5
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            11,
+            6
+          ]
+        },
+        {
+          "key": "gs-glove-front-h",
+          "label": "glove-front",
+          "origin": [
+            21,
+            7
+          ]
+        }
+      ],
+      "grip": [
+        12,
+        6
+      ],
+      "bore": 4,
+      "forward": 0,
+      "hand": [
+        22,
+        7
+      ],
+      "beam": [
+        25,
+        6
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb1014",
+      "code": "i",
+      "configuration": "extended",
+      "items": [
+        "G07",
+        "B06",
+        "O03",
+        "H09"
+      ],
+      "w": 94,
+      "h": 22,
+      "tip": [
+        94,
+        9
+      ],
+      "layers": [
+        {
+          "key": "gs-mb1014-stock-factory-i",
+          "label": "stock",
+          "origin": [
+            0,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb1014-reargrip-factory-i",
+          "label": "rearGrip",
+          "origin": [
+            29,
+            12
+          ]
+        },
+        {
+          "key": "gs-g07-i",
+          "label": "mag",
+          "origin": [
+            50,
+            11
+          ]
+        },
+        {
+          "key": "gs-b06-i",
+          "label": "barrel",
+          "origin": [
+            50,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb1014-receiver-i",
+          "label": "receiver",
+          "origin": [
+            24,
+            6
+          ]
+        },
+        {
+          "key": "gs-h09-i",
+          "label": "handguard",
+          "origin": [
+            50,
+            8
+          ]
+        },
+        {
+          "key": "gs-o03-i",
+          "label": "top",
+          "origin": [
+            35,
+            0
+          ]
+        },
+        {
+          "key": "gs-t01-i",
+          "label": "side1",
+          "origin": [
+            59,
+            10
+          ]
+        }
+      ],
+      "beam": [
+        66,
+        13
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "mb1014",
+      "code": "w",
+      "configuration": "extended",
+      "items": [
+        "G07",
+        "B06",
+        "O03",
+        "H09"
+      ],
+      "w": 189,
+      "h": 45,
+      "tip": [
+        189,
+        19
+      ],
+      "layers": [
+        {
+          "key": "gs-mb1014-stock-factory-w",
+          "label": "stock",
+          "origin": [
+            0,
+            13
+          ]
+        },
+        {
+          "key": "gs-mb1014-reargrip-factory-w",
+          "label": "rearGrip",
+          "origin": [
+            59,
+            25
+          ]
+        },
+        {
+          "key": "gs-g07-w",
+          "label": "mag",
+          "origin": [
+            101,
+            23
+          ]
+        },
+        {
+          "key": "gs-b06-w",
+          "label": "barrel",
+          "origin": [
+            101,
+            13
+          ]
+        },
+        {
+          "key": "gs-mb1014-receiver-w",
+          "label": "receiver",
+          "origin": [
+            49,
+            13
+          ]
+        },
+        {
+          "key": "gs-h09-w",
+          "label": "handguard",
+          "origin": [
+            101,
+            17
+          ]
+        },
+        {
+          "key": "gs-o03-w",
+          "label": "top",
+          "origin": [
+            71,
+            0
+          ]
+        },
+        {
+          "key": "gs-t01-w",
+          "label": "side1",
+          "origin": [
+            119,
+            21
+          ]
+        }
+      ],
+      "beam": [
+        135,
+        27
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 33,
+      "h": 10,
+      "tip": [
+        33,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-akb74-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-akb74-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb74-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            17,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb74-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            21,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-h",
+          "label": "receiver",
+          "origin": [
+            8,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            21,
+            2
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-glove-front-h",
+          "label": "glove-front",
+          "origin": [
+            23,
+            5
+          ]
+        }
+      ],
+      "grip": [
+        12,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        24,
+        5
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "code": "i",
+      "configuration": "factory",
+      "items": [],
+      "w": 87,
+      "h": 16,
+      "tip": [
+        87,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-akb74-stock-factory-i",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-reargrip-factory-i",
+          "label": "rearGrip",
+          "origin": [
+            30,
+            6
+          ]
+        },
+        {
+          "key": "gs-akb74-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            45,
+            6
+          ]
+        },
+        {
+          "key": "gs-akb74-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            57,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-i",
+          "label": "receiver",
+          "origin": [
+            23,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-handguard-factory-i",
+          "label": "handguard",
+          "origin": [
+            57,
+            2
+          ]
+        }
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "code": "w",
+      "configuration": "factory",
+      "items": [],
+      "w": 175,
+      "h": 32,
+      "tip": [
+        175,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-akb74-stock-factory-w",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-reargrip-factory-w",
+          "label": "rearGrip",
+          "origin": [
+            61,
+            12
+          ]
+        },
+        {
+          "key": "gs-akb74-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            91,
+            12
+          ]
+        },
+        {
+          "key": "gs-akb74-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            115,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-w",
+          "label": "receiver",
+          "origin": [
+            47,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-handguard-factory-w",
+          "label": "handguard",
+          "origin": [
+            115,
+            4
+          ]
+        }
+      ],
+      "colors": 12
+    },
+    {
+      "gun": "akb74",
+      "code": "h",
+      "configuration": "light",
+      "items": [
+        "S03",
+        "H03",
+        "P04",
+        "B07",
+        "M05"
+      ],
+      "w": 29,
+      "h": 10,
+      "tip": [
+        29,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-s03-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-akb74-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            8,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb74-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            14,
+            4
+          ]
+        },
+        {
+          "key": "gs-b07-h",
+          "label": "barrel",
+          "origin": [
+            18,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-h",
+          "label": "receiver",
+          "origin": [
+            5,
+            0
+          ]
+        },
+        {
+          "key": "gs-h03-h",
+          "label": "handguard",
+          "origin": [
+            18,
+            2
+          ]
+        },
+        {
+          "key": "gs-m05-h",
+          "label": "muzzle",
+          "origin": [
+            26,
+            1
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            8,
+            4
+          ]
+        },
+        {
+          "key": "gs-glove-front-h",
+          "label": "glove-front",
+          "origin": [
+            20,
+            5
+          ]
+        }
+      ],
+      "grip": [
+        9,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        21,
+        5
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "akb74",
+      "code": "i",
+      "configuration": "light",
+      "items": [
+        "S03",
+        "H03",
+        "P04",
+        "B07",
+        "M05"
+      ],
+      "w": 79,
+      "h": 16,
+      "tip": [
+        79,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-s03-i",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-p04-i",
+          "label": "rearGrip",
+          "origin": [
+            23,
+            6
+          ]
+        },
+        {
+          "key": "gs-akb74-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            38,
+            6
+          ]
+        },
+        {
+          "key": "gs-b07-i",
+          "label": "barrel",
+          "origin": [
+            50,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-i",
+          "label": "receiver",
+          "origin": [
+            16,
+            0
+          ]
+        },
+        {
+          "key": "gs-h03-i",
+          "label": "handguard",
+          "origin": [
+            50,
+            2
+          ]
+        },
+        {
+          "key": "gs-m05-i",
+          "label": "muzzle",
+          "origin": [
+            72,
+            1
+          ]
+        }
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "code": "w",
+      "configuration": "light",
+      "items": [
+        "S03",
+        "H03",
+        "P04",
+        "B07",
+        "M05"
+      ],
+      "w": 160,
+      "h": 32,
+      "tip": [
+        160,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-s03-w",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-p04-w",
+          "label": "rearGrip",
+          "origin": [
+            47,
+            12
+          ]
+        },
+        {
+          "key": "gs-akb74-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            77,
+            12
+          ]
+        },
+        {
+          "key": "gs-b07-w",
+          "label": "barrel",
+          "origin": [
+            101,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-w",
+          "label": "receiver",
+          "origin": [
+            33,
+            0
+          ]
+        },
+        {
+          "key": "gs-h03-w",
+          "label": "handguard",
+          "origin": [
+            101,
+            4
+          ]
+        },
+        {
+          "key": "gs-m05-w",
+          "label": "muzzle",
+          "origin": [
+            146,
+            2
+          ]
+        }
+      ],
+      "colors": 12
+    },
+    {
+      "gun": "akb74",
+      "code": "h",
+      "configuration": "steady",
+      "items": [
+        "S04",
+        "H04",
+        "P03",
+        "A08",
+        "M07",
+        "G08"
+      ],
+      "w": 41,
+      "h": 16,
+      "tip": [
+        41,
+        7
+      ],
+      "layers": [
+        {
+          "key": "gs-s04-h",
+          "label": "stock",
+          "origin": [
+            0,
+            6
+          ]
+        },
+        {
+          "key": "gs-akb74-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            12,
+            9
+          ]
+        },
+        {
+          "key": "gs-g08-h",
+          "label": "mag",
+          "origin": [
+            18,
+            9
+          ]
+        },
+        {
+          "key": "gs-akb74-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            22,
+            5
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-h",
+          "label": "receiver",
+          "origin": [
+            9,
+            5
+          ]
+        },
+        {
+          "key": "gs-h04-h",
+          "label": "handguard",
+          "origin": [
+            22,
+            7
+          ]
+        },
+        {
+          "key": "gs-f01-h",
+          "label": "under",
+          "origin": [
+            25,
+            10
+          ]
+        },
+        {
+          "key": "gs-a08-h",
+          "label": "mount",
+          "origin": [
+            13,
+            3
+          ]
+        },
+        {
+          "key": "gs-o08-h",
+          "label": "top",
+          "origin": [
+            12,
+            0
+          ]
+        },
+        {
+          "key": "gs-m07-h",
+          "label": "muzzle",
+          "origin": [
+            33,
+            6
+          ]
+        },
+        {
+          "key": "gs-t01-h",
+          "label": "side1",
+          "origin": [
+            26,
+            8
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            12,
+            9
+          ]
+        },
+        {
+          "key": "gs-glove-foregrip-h",
+          "label": "glove-foregrip",
+          "origin": [
+            24,
+            11
+          ]
+        }
+      ],
+      "grip": [
+        13,
+        9
+      ],
+      "bore": 7,
+      "forward": 0,
+      "hand": [
+        25,
+        11
+      ],
+      "beam": [
+        29,
+        9
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "akb74",
+      "code": "i",
+      "configuration": "steady",
+      "items": [
+        "S04",
+        "H04",
+        "P03",
+        "A08",
+        "M07",
+        "G08"
+      ],
+      "w": 107,
+      "h": 26,
+      "tip": [
+        107,
+        13
+      ],
+      "layers": [
+        {
+          "key": "gs-s04-i",
+          "label": "stock",
+          "origin": [
+            0,
+            10
+          ]
+        },
+        {
+          "key": "gs-p03-i",
+          "label": "rearGrip",
+          "origin": [
+            32,
+            16
+          ]
+        },
+        {
+          "key": "gs-g08-i",
+          "label": "mag",
+          "origin": [
+            47,
+            16
+          ]
+        },
+        {
+          "key": "gs-akb74-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            59,
+            10
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-i",
+          "label": "receiver",
+          "origin": [
+            25,
+            10
+          ]
+        },
+        {
+          "key": "gs-h04-i",
+          "label": "handguard",
+          "origin": [
+            59,
+            12
+          ]
+        },
+        {
+          "key": "gs-f01-i",
+          "label": "under",
+          "origin": [
+            65,
+            18
+          ]
+        },
+        {
+          "key": "gs-a08-i",
+          "label": "mount",
+          "origin": [
+            34,
+            8
+          ]
+        },
+        {
+          "key": "gs-o08-i",
+          "label": "top",
+          "origin": [
+            32,
+            0
+          ]
+        },
+        {
+          "key": "gs-m07-i",
+          "label": "muzzle",
+          "origin": [
+            88,
+            11
+          ]
+        },
+        {
+          "key": "gs-t01-i",
+          "label": "side1",
+          "origin": [
+            68,
+            14
+          ]
+        }
+      ],
+      "beam": [
+        75,
+        17
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "akb74",
+      "code": "w",
+      "configuration": "steady",
+      "items": [
+        "S04",
+        "H04",
+        "P03",
+        "A08",
+        "M07",
+        "G08"
+      ],
+      "w": 216,
+      "h": 52,
+      "tip": [
+        216,
+        25
+      ],
+      "layers": [
+        {
+          "key": "gs-s04-w",
+          "label": "stock",
+          "origin": [
+            0,
+            19
+          ]
+        },
+        {
+          "key": "gs-p03-w",
+          "label": "rearGrip",
+          "origin": [
+            65,
+            31
+          ]
+        },
+        {
+          "key": "gs-g08-w",
+          "label": "mag",
+          "origin": [
+            95,
+            31
+          ]
+        },
+        {
+          "key": "gs-akb74-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            119,
+            19
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-w",
+          "label": "receiver",
+          "origin": [
+            51,
+            19
+          ]
+        },
+        {
+          "key": "gs-h04-w",
+          "label": "handguard",
+          "origin": [
+            119,
+            23
+          ]
+        },
+        {
+          "key": "gs-f01-w",
+          "label": "under",
+          "origin": [
+            131,
+            36
+          ]
+        },
+        {
+          "key": "gs-a08-w",
+          "label": "mount",
+          "origin": [
+            69,
+            15
+          ]
+        },
+        {
+          "key": "gs-o08-w",
+          "label": "top",
+          "origin": [
+            64,
+            0
+          ]
+        },
+        {
+          "key": "gs-m07-w",
+          "label": "muzzle",
+          "origin": [
+            178,
+            21
+          ]
+        },
+        {
+          "key": "gs-t01-w",
+          "label": "side1",
+          "origin": [
+            137,
+            27
+          ]
+        }
+      ],
+      "beam": [
+        153,
+        33
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb103",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 33,
+      "h": 10,
+      "tip": [
+        33,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-akb103-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-akb103-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb103-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            17,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb103-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            21,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-receiver-h",
+          "label": "receiver",
+          "origin": [
+            8,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            21,
+            2
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-glove-front-h",
+          "label": "glove-front",
+          "origin": [
+            23,
+            5
+          ]
+        }
+      ],
+      "grip": [
+        12,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        24,
+        5
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "akb103",
+      "code": "i",
+      "configuration": "factory",
+      "items": [],
+      "w": 87,
+      "h": 16,
+      "tip": [
+        87,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-akb103-stock-factory-i",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-reargrip-factory-i",
+          "label": "rearGrip",
+          "origin": [
+            30,
+            6
+          ]
+        },
+        {
+          "key": "gs-akb103-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            45,
+            6
+          ]
+        },
+        {
+          "key": "gs-akb103-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            57,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-receiver-i",
+          "label": "receiver",
+          "origin": [
+            23,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-handguard-factory-i",
+          "label": "handguard",
+          "origin": [
+            57,
+            2
+          ]
+        }
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "akb103",
+      "code": "w",
+      "configuration": "factory",
+      "items": [],
+      "w": 175,
+      "h": 32,
+      "tip": [
+        175,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-akb103-stock-factory-w",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-reargrip-factory-w",
+          "label": "rearGrip",
+          "origin": [
+            61,
+            12
+          ]
+        },
+        {
+          "key": "gs-akb103-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            91,
+            12
+          ]
+        },
+        {
+          "key": "gs-akb103-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            115,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-receiver-w",
+          "label": "receiver",
+          "origin": [
+            47,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-handguard-factory-w",
+          "label": "handguard",
+          "origin": [
+            115,
+            4
+          ]
+        }
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "akb103",
+      "code": "h",
+      "configuration": "compact",
+      "items": [
+        "S03",
+        "B07",
+        "H03",
+        "M05"
+      ],
+      "w": 29,
+      "h": 10,
+      "tip": [
+        29,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-s03-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-akb103-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            8,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb103-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            14,
+            4
+          ]
+        },
+        {
+          "key": "gs-b07-h",
+          "label": "barrel",
+          "origin": [
+            18,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-receiver-h",
+          "label": "receiver",
+          "origin": [
+            5,
+            0
+          ]
+        },
+        {
+          "key": "gs-h03-h",
+          "label": "handguard",
+          "origin": [
+            18,
+            2
+          ]
+        },
+        {
+          "key": "gs-m05-h",
+          "label": "muzzle",
+          "origin": [
+            26,
+            1
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            8,
+            4
+          ]
+        },
+        {
+          "key": "gs-glove-front-h",
+          "label": "glove-front",
+          "origin": [
+            20,
+            5
+          ]
+        }
+      ],
+      "grip": [
+        9,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        21,
+        5
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "akb103",
+      "code": "i",
+      "configuration": "compact",
+      "items": [
+        "S03",
+        "B07",
+        "H03",
+        "M05"
+      ],
+      "w": 79,
+      "h": 16,
+      "tip": [
+        79,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-s03-i",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-reargrip-factory-i",
+          "label": "rearGrip",
+          "origin": [
+            23,
+            6
+          ]
+        },
+        {
+          "key": "gs-akb103-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            38,
+            6
+          ]
+        },
+        {
+          "key": "gs-b07-i",
+          "label": "barrel",
+          "origin": [
+            50,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-receiver-i",
+          "label": "receiver",
+          "origin": [
+            16,
+            0
+          ]
+        },
+        {
+          "key": "gs-h03-i",
+          "label": "handguard",
+          "origin": [
+            50,
+            2
+          ]
+        },
+        {
+          "key": "gs-m05-i",
+          "label": "muzzle",
+          "origin": [
+            72,
+            1
+          ]
+        }
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb103",
+      "code": "w",
+      "configuration": "compact",
+      "items": [
+        "S03",
+        "B07",
+        "H03",
+        "M05"
+      ],
+      "w": 160,
+      "h": 32,
+      "tip": [
+        160,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-s03-w",
+          "label": "stock",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-reargrip-factory-w",
+          "label": "rearGrip",
+          "origin": [
+            47,
+            12
+          ]
+        },
+        {
+          "key": "gs-akb103-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            77,
+            12
+          ]
+        },
+        {
+          "key": "gs-b07-w",
+          "label": "barrel",
+          "origin": [
+            101,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-receiver-w",
+          "label": "receiver",
+          "origin": [
+            33,
+            0
+          ]
+        },
+        {
+          "key": "gs-h03-w",
+          "label": "handguard",
+          "origin": [
+            101,
+            4
+          ]
+        },
+        {
+          "key": "gs-m05-w",
+          "label": "muzzle",
+          "origin": [
+            146,
+            2
+          ]
+        }
+      ],
+      "colors": 11
+    },
+    {
+      "gun": "akb103",
+      "code": "h",
+      "configuration": "heavy",
+      "items": [
+        "S04",
+        "H04",
+        "A08",
+        "G09",
+        "M06"
+      ],
+      "w": 36,
+      "h": 14,
+      "tip": [
+        36,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-s04-h",
+          "label": "stock",
+          "origin": [
+            0,
+            5
+          ]
+        },
+        {
+          "key": "gs-akb103-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            12,
+            8
+          ]
+        },
+        {
+          "key": "gs-g09-h",
+          "label": "mag",
+          "origin": [
+            18,
+            8
+          ]
+        },
+        {
+          "key": "gs-akb103-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            22,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb103-receiver-h",
+          "label": "receiver",
+          "origin": [
+            9,
+            4
+          ]
+        },
+        {
+          "key": "gs-h04-h",
+          "label": "handguard",
+          "origin": [
+            22,
+            6
+          ]
+        },
+        {
+          "key": "gs-f03-h",
+          "label": "under",
+          "origin": [
+            24,
+            9
+          ]
+        },
+        {
+          "key": "gs-a08-h",
+          "label": "mount",
+          "origin": [
+            13,
+            2
+          ]
+        },
+        {
+          "key": "gs-o03-h",
+          "label": "top",
+          "origin": [
+            14,
+            0
+          ]
+        },
+        {
+          "key": "gs-m06-h",
+          "label": "muzzle",
+          "origin": [
+            33,
+            4
+          ]
+        },
+        {
+          "key": "gs-t05-h",
+          "label": "side1",
+          "origin": [
+            26,
+            6
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            12,
+            8
+          ]
+        },
+        {
+          "key": "gs-glove-foregrip-h",
+          "label": "glove-foregrip",
+          "origin": [
+            25,
+            10
+          ]
+        }
+      ],
+      "grip": [
+        13,
+        8
+      ],
+      "bore": 6,
+      "forward": 0,
+      "hand": [
+        26,
+        10
+      ],
+      "beam": [
+        29,
+        7
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb103",
+      "code": "i",
+      "configuration": "heavy",
+      "items": [
+        "S04",
+        "H04",
+        "A08",
+        "G09",
+        "M06"
+      ],
+      "w": 96,
+      "h": 26,
+      "tip": [
+        96,
+        11
+      ],
+      "layers": [
+        {
+          "key": "gs-s04-i",
+          "label": "stock",
+          "origin": [
+            0,
+            8
+          ]
+        },
+        {
+          "key": "gs-akb103-reargrip-factory-i",
+          "label": "rearGrip",
+          "origin": [
+            32,
+            14
+          ]
+        },
+        {
+          "key": "gs-g09-i",
+          "label": "mag",
+          "origin": [
+            47,
+            14
+          ]
+        },
+        {
+          "key": "gs-akb103-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            59,
+            8
+          ]
+        },
+        {
+          "key": "gs-akb103-receiver-i",
+          "label": "receiver",
+          "origin": [
+            25,
+            8
+          ]
+        },
+        {
+          "key": "gs-h04-i",
+          "label": "handguard",
+          "origin": [
+            59,
+            10
+          ]
+        },
+        {
+          "key": "gs-f03-i",
+          "label": "under",
+          "origin": [
+            63,
+            16
+          ]
+        },
+        {
+          "key": "gs-a08-i",
+          "label": "mount",
+          "origin": [
+            34,
+            6
+          ]
+        },
+        {
+          "key": "gs-o03-i",
+          "label": "top",
+          "origin": [
+            37,
+            0
+          ]
+        },
+        {
+          "key": "gs-m06-i",
+          "label": "muzzle",
+          "origin": [
+            88,
+            8
+          ]
+        },
+        {
+          "key": "gs-t05-i",
+          "label": "side1",
+          "origin": [
+            68,
+            11
+          ]
+        }
+      ],
+      "beam": [
+        76,
+        14
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "akb103",
+      "code": "w",
+      "configuration": "heavy",
+      "items": [
+        "S04",
+        "H04",
+        "A08",
+        "G09",
+        "M06"
+      ],
+      "w": 194,
+      "h": 52,
+      "tip": [
+        194,
+        23
+      ],
+      "layers": [
+        {
+          "key": "gs-s04-w",
+          "label": "stock",
+          "origin": [
+            0,
+            17
+          ]
+        },
+        {
+          "key": "gs-akb103-reargrip-factory-w",
+          "label": "rearGrip",
+          "origin": [
+            65,
+            29
+          ]
+        },
+        {
+          "key": "gs-g09-w",
+          "label": "mag",
+          "origin": [
+            95,
+            29
+          ]
+        },
+        {
+          "key": "gs-akb103-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            119,
+            17
+          ]
+        },
+        {
+          "key": "gs-akb103-receiver-w",
+          "label": "receiver",
+          "origin": [
+            51,
+            17
+          ]
+        },
+        {
+          "key": "gs-h04-w",
+          "label": "handguard",
+          "origin": [
+            119,
+            21
+          ]
+        },
+        {
+          "key": "gs-f03-w",
+          "label": "under",
+          "origin": [
+            126,
+            34
+          ]
+        },
+        {
+          "key": "gs-a08-w",
+          "label": "mount",
+          "origin": [
+            69,
+            13
+          ]
+        },
+        {
+          "key": "gs-o03-w",
+          "label": "top",
+          "origin": [
+            75,
+            0
+          ]
+        },
+        {
+          "key": "gs-m06-w",
+          "label": "muzzle",
+          "origin": [
+            178,
+            17
+          ]
+        },
+        {
+          "key": "gs-t05-w",
+          "label": "side1",
+          "origin": [
+            136,
+            23
+          ]
+        }
+      ],
+      "beam": [
+        153,
+        29
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "pistol",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 18,
+      "h": 10,
+      "tip": [
+        17,
+        2.5
+      ],
+      "layers": [
+        {
+          "key": "gs-pistol-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "grip": [
+        6,
+        6
+      ],
+      "bore": 2.5,
+      "forward": 8,
+      "hand": [
+        6,
+        6
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "pistol",
+      "code": "i",
+      "configuration": "factory",
+      "items": [],
+      "w": 38,
+      "h": 17,
+      "tip": [
+        38,
+        5.5
+      ],
+      "layers": [
+        {
+          "key": "gs-pistol-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "pistol",
+      "code": "w",
+      "configuration": "factory",
+      "items": [],
+      "w": 76,
+      "h": 34,
+      "tip": [
+        76,
+        11
+      ],
+      "layers": [
+        {
+          "key": "gs-pistol-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "pistol",
+      "code": "h",
+      "configuration": "custom",
+      "items": [
+        "A01",
+        "M01"
+      ],
+      "w": 19,
+      "h": 13,
+      "tip": [
+        19,
+        5.5
+      ],
+      "layers": [
+        {
+          "key": "gs-pistol-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            3
+          ]
+        },
+        {
+          "key": "gs-a01-h",
+          "label": "mount",
+          "origin": [
+            6,
+            2
+          ]
+        },
+        {
+          "key": "gs-o01-h",
+          "label": "top",
+          "origin": [
+            7,
+            0
+          ]
+        },
+        {
+          "key": "gs-m01-h-pistol",
+          "label": "muzzle",
+          "origin": [
+            16,
+            5
+          ]
+        }
+      ],
+      "grip": [
+        6,
+        9
+      ],
+      "bore": 5.5,
+      "forward": 8,
+      "hand": [
+        6,
+        9
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "pistol",
+      "code": "i",
+      "configuration": "custom",
+      "items": [
+        "A01",
+        "M01"
+      ],
+      "w": 43,
+      "h": 23,
+      "tip": [
+        43,
+        11.5
+      ],
+      "layers": [
+        {
+          "key": "gs-pistol-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            6
+          ]
+        },
+        {
+          "key": "gs-a01-i",
+          "label": "mount",
+          "origin": [
+            13,
+            5
+          ]
+        },
+        {
+          "key": "gs-o01-i",
+          "label": "top",
+          "origin": [
+            14,
+            0
+          ]
+        },
+        {
+          "key": "gs-m01-i-pistol",
+          "label": "muzzle",
+          "origin": [
+            37,
+            8
+          ]
+        }
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "pistol",
+      "code": "w",
+      "configuration": "custom",
+      "items": [
+        "A01",
+        "M01"
+      ],
+      "w": 87,
+      "h": 47,
+      "tip": [
+        87,
+        24
+      ],
+      "layers": [
+        {
+          "key": "gs-pistol-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            13
+          ]
+        },
+        {
+          "key": "gs-a01-w",
+          "label": "mount",
+          "origin": [
+            26,
+            11
+          ]
+        },
+        {
+          "key": "gs-o01-w",
+          "label": "top",
+          "origin": [
+            28,
+            0
+          ]
+        },
+        {
+          "key": "gs-m01-w-pistol",
+          "label": "muzzle",
+          "origin": [
+            75,
+            17
+          ]
+        }
+      ],
+      "colors": 11
+    },
+    {
+      "gun": "shotgun",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 33,
+      "h": 10,
+      "tip": [
+        32,
+        2.5
+      ],
+      "layers": [
+        {
+          "key": "gs-shotgun-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "grip": [
+        11,
+        6
+      ],
+      "bore": 2.5,
+      "forward": 0,
+      "hand": [
+        21,
+        6
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "shotgun",
+      "code": "i",
+      "configuration": "factory",
+      "items": [],
+      "w": 78,
+      "h": 17,
+      "tip": [
+        78,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-shotgun-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "shotgun",
+      "code": "w",
+      "configuration": "factory",
+      "items": [],
+      "w": 156,
+      "h": 34,
+      "tip": [
+        156,
+        12
+      ],
+      "layers": [
+        {
+          "key": "gs-shotgun-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "shotgun",
+      "code": "h",
+      "configuration": "custom",
+      "items": [
+        "A05",
+        "M11"
+      ],
+      "w": 34,
+      "h": 13,
+      "tip": [
+        34,
+        5.5
+      ],
+      "layers": [
+        {
+          "key": "gs-shotgun-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            3
+          ]
+        },
+        {
+          "key": "gs-a05-h",
+          "label": "mount",
+          "origin": [
+            13,
+            2
+          ]
+        },
+        {
+          "key": "gs-o03-h",
+          "label": "top",
+          "origin": [
+            13,
+            0
+          ]
+        },
+        {
+          "key": "gs-m11-h",
+          "label": "muzzle",
+          "origin": [
+            31,
+            5
+          ]
+        }
+      ],
+      "grip": [
+        11,
+        9
+      ],
+      "bore": 5.5,
+      "forward": 0,
+      "hand": [
+        21,
+        9
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "shotgun",
+      "code": "i",
+      "configuration": "custom",
+      "items": [
+        "A05",
+        "M11"
+      ],
+      "w": 85,
+      "h": 22,
+      "tip": [
+        85,
+        11
+      ],
+      "layers": [
+        {
+          "key": "gs-shotgun-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            5
+          ]
+        },
+        {
+          "key": "gs-a05-i",
+          "label": "mount",
+          "origin": [
+            29,
+            6
+          ]
+        },
+        {
+          "key": "gs-o03-i",
+          "label": "top",
+          "origin": [
+            30,
+            0
+          ]
+        },
+        {
+          "key": "gs-m11-i",
+          "label": "muzzle",
+          "origin": [
+            77,
+            8
+          ]
+        }
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "shotgun",
+      "code": "w",
+      "configuration": "custom",
+      "items": [
+        "A05",
+        "M11"
+      ],
+      "w": 171,
+      "h": 45,
+      "tip": [
+        171,
+        23
+      ],
+      "layers": [
+        {
+          "key": "gs-shotgun-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            11
+          ]
+        },
+        {
+          "key": "gs-a05-w",
+          "label": "mount",
+          "origin": [
+            58,
+            13
+          ]
+        },
+        {
+          "key": "gs-o03-w",
+          "label": "top",
+          "origin": [
+            60,
+            0
+          ]
+        },
+        {
+          "key": "gs-m11-w",
+          "label": "muzzle",
+          "origin": [
+            155,
+            17
+          ]
+        }
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "carbine",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 31,
+      "h": 10,
+      "tip": [
+        31,
+        3.5
+      ],
+      "layers": [
+        {
+          "key": "gs-carbine-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            22,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "grip": [
+        8,
+        4
+      ],
+      "bore": 3.5,
+      "forward": 0,
+      "hand": [
+        18,
+        5
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "carbine",
+      "code": "i",
+      "configuration": "factory",
+      "items": [],
+      "w": 78,
+      "h": 17,
+      "tip": [
+        78,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-carbine-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            59,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-handguard-factory-i",
+          "label": "handguard",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "carbine",
+      "code": "w",
+      "configuration": "factory",
+      "items": [],
+      "w": 156,
+      "h": 34,
+      "tip": [
+        156,
+        12
+      ],
+      "layers": [
+        {
+          "key": "gs-carbine-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            118,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-handguard-factory-w",
+          "label": "handguard",
+          "origin": [
+            88,
+            16
+          ]
+        }
+      ],
+      "colors": 9
+    },
+    {
+      "gun": "carbine",
+      "code": "h",
+      "configuration": "custom",
+      "items": [
+        "B09",
+        "M07"
+      ],
+      "w": 44,
+      "h": 10,
+      "tip": [
+        44,
+        3.5
+      ],
+      "layers": [
+        {
+          "key": "gs-b09-h",
+          "label": "barrel",
+          "origin": [
+            22,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-m07-h-carbine",
+          "label": "muzzle",
+          "origin": [
+            36,
+            2
+          ]
+        }
+      ],
+      "grip": [
+        8,
+        4
+      ],
+      "bore": 3.5,
+      "forward": 0,
+      "hand": [
+        18,
+        5
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "carbine",
+      "code": "i",
+      "configuration": "custom",
+      "items": [
+        "B09",
+        "M07"
+      ],
+      "w": 104,
+      "h": 17,
+      "tip": [
+        104,
+        6
+      ],
+      "layers": [
+        {
+          "key": "gs-b09-i",
+          "label": "barrel",
+          "origin": [
+            59,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-handguard-factory-i",
+          "label": "handguard",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-m07-i",
+          "label": "muzzle",
+          "origin": [
+            85,
+            4
+          ]
+        }
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "carbine",
+      "code": "w",
+      "configuration": "custom",
+      "items": [
+        "B09",
+        "M07"
+      ],
+      "w": 209,
+      "h": 34,
+      "tip": [
+        209,
+        12
+      ],
+      "layers": [
+        {
+          "key": "gs-b09-w",
+          "label": "barrel",
+          "origin": [
+            118,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-handguard-factory-w",
+          "label": "handguard",
+          "origin": [
+            88,
+            16
+          ]
+        },
+        {
+          "key": "gs-m07-w",
+          "label": "muzzle",
+          "origin": [
+            171,
+            8
+          ]
+        }
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "gb17",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 17,
+      "h": 10,
+      "tip": [
+        17,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-gb17-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            4,
+            7
+          ]
+        }
+      ],
+      "grip": [
+        5,
+        7
+      ],
+      "bore": 2,
+      "forward": 8,
+      "hand": [
+        5,
+        7
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "gb17",
+      "code": "i",
+      "configuration": "factory",
+      "items": [],
+      "w": 38,
+      "h": 17,
+      "tip": [
+        38,
+        4
+      ],
+      "layers": [
+        {
+          "key": "gs-gb17-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "gb17",
+      "code": "w",
+      "configuration": "factory",
+      "items": [],
+      "w": 76,
+      "h": 34,
+      "tip": [
+        76,
+        8
+      ],
+      "layers": [
+        {
+          "key": "gs-gb17-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "gb17",
+      "code": "h",
+      "configuration": "custom",
+      "items": [
+        "P07",
+        "M02",
+        "T04"
+      ],
+      "w": 19,
+      "h": 10,
+      "tip": [
+        19,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-gb17-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-m02-h",
+          "label": "muzzle",
+          "origin": [
+            16,
+            0
+          ]
+        },
+        {
+          "key": "gs-t04-h",
+          "label": "pistolSide",
+          "origin": [
+            12,
+            4
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            4,
+            7
+          ]
+        }
+      ],
+      "grip": [
+        5,
+        7
+      ],
+      "bore": 2,
+      "forward": 8,
+      "hand": [
+        5,
+        7
+      ],
+      "beam": [
+        14,
+        5
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "gb17",
+      "code": "i",
+      "configuration": "custom",
+      "items": [
+        "P07",
+        "M02",
+        "T04"
+      ],
+      "w": 44,
+      "h": 17,
+      "tip": [
+        44,
+        4
+      ],
+      "layers": [
+        {
+          "key": "gs-gb17-receiver-i",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-p07-i",
+          "label": "rearGrip",
+          "origin": [
+            8,
+            8
+          ]
+        },
+        {
+          "key": "gs-m02-i",
+          "label": "muzzle",
+          "origin": [
+            37,
+            2
+          ]
+        },
+        {
+          "key": "gs-t04-i",
+          "label": "pistolSide",
+          "origin": [
+            27,
+            7
+          ]
+        }
+      ],
+      "beam": [
+        33,
+        9
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "gb17",
+      "code": "w",
+      "configuration": "custom",
+      "items": [
+        "P07",
+        "M02",
+        "T04"
+      ],
+      "w": 89,
+      "h": 34,
+      "tip": [
+        89,
+        8
+      ],
+      "layers": [
+        {
+          "key": "gs-gb17-receiver-w",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-p07-w",
+          "label": "rearGrip",
+          "origin": [
+            16,
+            16
+          ]
+        },
+        {
+          "key": "gs-m02-w",
+          "label": "muzzle",
+          "origin": [
+            75,
+            4
+          ]
+        },
+        {
+          "key": "gs-t04-w",
+          "label": "pistolSide",
+          "origin": [
+            54,
+            14
+          ]
+        }
+      ],
+      "beam": [
+        66,
+        18
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "mb4a1",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 32,
+      "h": 11,
+      "tip": [
+        32,
+        4
+      ],
+      "layers": [
+        {
+          "key": "gs-mb4a1-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            2
+          ]
+        },
+        {
+          "key": "gs-mb4a1-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            10,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb4a1-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            16,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb4a1-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            20,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb4a1-receiver-h",
+          "label": "receiver",
+          "origin": [
+            7,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb4a1-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            20,
+            3
+          ]
+        },
+        {
+          "key": "gs-mb4a1-top-factory-h",
+          "label": "top",
+          "origin": [
+            13,
+            0
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            10,
+            6
+          ]
+        },
+        {
+          "key": "gs-glove-front-h",
+          "label": "glove-front",
+          "origin": [
+            23,
+            6
+          ]
+        }
+      ],
+      "grip": [
+        11,
+        6
+      ],
+      "bore": 4,
+      "forward": 0,
+      "hand": [
+        24,
+        6
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb4a1",
+      "code": "i",
+      "configuration": "factory",
+      "items": [],
+      "w": 80,
+      "h": 17,
+      "tip": [
+        80,
+        5
+      ],
+      "layers": [
+        {
+          "key": "gs-mb4a1-stock-factory-i",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb4a1-reargrip-factory-i",
+          "label": "rearGrip",
+          "origin": [
+            26,
+            8
+          ]
+        },
+        {
+          "key": "gs-mb4a1-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            41,
+            8
+          ]
+        },
+        {
+          "key": "gs-mb4a1-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            51,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb4a1-receiver-i",
+          "label": "receiver",
+          "origin": [
+            19,
+            2
+          ]
+        },
+        {
+          "key": "gs-mb4a1-handguard-factory-i",
+          "label": "handguard",
+          "origin": [
+            51,
+            4
+          ]
+        },
+        {
+          "key": "gs-mb4a1-top-factory-i",
+          "label": "top",
+          "origin": [
+            31,
+            0
+          ]
+        }
+      ],
+      "colors": 4
+    },
+    {
+      "gun": "mb4a1",
+      "code": "w",
+      "configuration": "factory",
+      "items": [],
+      "w": 160,
+      "h": 34,
+      "tip": [
+        160,
+        10
+      ],
+      "layers": [
+        {
+          "key": "gs-mb4a1-stock-factory-w",
+          "label": "stock",
+          "origin": [
+            0,
+            2
+          ]
+        },
+        {
+          "key": "gs-mb4a1-reargrip-factory-w",
+          "label": "rearGrip",
+          "origin": [
+            53,
+            16
+          ]
+        },
+        {
+          "key": "gs-mb4a1-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            83,
+            16
+          ]
+        },
+        {
+          "key": "gs-mb4a1-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            103,
+            2
+          ]
+        },
+        {
+          "key": "gs-mb4a1-receiver-w",
+          "label": "receiver",
+          "origin": [
+            39,
+            4
+          ]
+        },
+        {
+          "key": "gs-mb4a1-handguard-factory-w",
+          "label": "handguard",
+          "origin": [
+            103,
+            8
+          ]
+        },
+        {
+          "key": "gs-mb4a1-top-factory-w",
+          "label": "top",
+          "origin": [
+            63,
+            0
+          ]
+        }
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb4a1",
+      "code": "h",
+      "configuration": "custom",
+      "items": [
+        "H02",
+        "M07"
+      ],
+      "w": 39,
+      "h": 11,
+      "tip": [
+        39,
+        4
+      ],
+      "layers": [
+        {
+          "key": "gs-mb4a1-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            2
+          ]
+        },
+        {
+          "key": "gs-mb4a1-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            10,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb4a1-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            16,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb4a1-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            20,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb4a1-receiver-h",
+          "label": "receiver",
+          "origin": [
+            7,
+            1
+          ]
+        },
+        {
+          "key": "gs-h02-h",
+          "label": "handguard",
+          "origin": [
+            20,
+            3
+          ]
+        },
+        {
+          "key": "gs-f01-h",
+          "label": "under",
+          "origin": [
+            23,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb4a1-top-factory-h",
+          "label": "top",
+          "origin": [
+            13,
+            0
+          ]
+        },
+        {
+          "key": "gs-m07-h",
+          "label": "muzzle",
+          "origin": [
+            31,
+            3
+          ]
+        },
+        {
+          "key": "gs-t01-h",
+          "label": "side1",
+          "origin": [
+            26,
+            4
+          ]
+        },
+        {
+          "key": "gs-t05-h",
+          "label": "side2",
+          "origin": [
+            28,
+            3
+          ]
+        },
+        {
+          "key": "gs-glove-rear-h",
+          "label": "glove-rear",
+          "origin": [
+            10,
+            6
+          ]
+        },
+        {
+          "key": "gs-glove-foregrip-h",
+          "label": "glove-foregrip",
+          "origin": [
+            22,
+            7
+          ]
+        }
+      ],
+      "grip": [
+        11,
+        6
+      ],
+      "bore": 4,
+      "forward": 0,
+      "hand": [
+        23,
+        7
+      ],
+      "beam": [
+        29,
+        5
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "mb4a1",
+      "code": "i",
+      "configuration": "custom",
+      "items": [
+        "H02",
+        "M07"
+      ],
+      "w": 98,
+      "h": 18,
+      "tip": [
+        98,
+        5
+      ],
+      "layers": [
+        {
+          "key": "gs-mb4a1-stock-factory-i",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb4a1-reargrip-factory-i",
+          "label": "rearGrip",
+          "origin": [
+            26,
+            8
+          ]
+        },
+        {
+          "key": "gs-mb4a1-mag-factory-i",
+          "label": "mag",
+          "origin": [
+            41,
+            8
+          ]
+        },
+        {
+          "key": "gs-mb4a1-barrel-factory-i",
+          "label": "barrel",
+          "origin": [
+            51,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb4a1-receiver-i",
+          "label": "receiver",
+          "origin": [
+            19,
+            2
+          ]
+        },
+        {
+          "key": "gs-h02-i",
+          "label": "handguard",
+          "origin": [
+            51,
+            4
+          ]
+        },
+        {
+          "key": "gs-f01-i",
+          "label": "under",
+          "origin": [
+            57,
+            10
+          ]
+        },
+        {
+          "key": "gs-mb4a1-top-factory-i",
+          "label": "top",
+          "origin": [
+            31,
+            0
+          ]
+        },
+        {
+          "key": "gs-m07-i",
+          "label": "muzzle",
+          "origin": [
+            79,
+            3
+          ]
+        },
+        {
+          "key": "gs-t01-i",
+          "label": "side1",
+          "origin": [
+            67,
+            6
+          ]
+        },
+        {
+          "key": "gs-t05-i",
+          "label": "side2",
+          "origin": [
+            70,
+            5
+          ]
+        }
+      ],
+      "beam": [
+        74,
+        9
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "mb4a1",
+      "code": "w",
+      "configuration": "custom",
+      "items": [
+        "H02",
+        "M07"
+      ],
+      "w": 197,
+      "h": 37,
+      "tip": [
+        197,
+        10
+      ],
+      "layers": [
+        {
+          "key": "gs-mb4a1-stock-factory-w",
+          "label": "stock",
+          "origin": [
+            0,
+            2
+          ]
+        },
+        {
+          "key": "gs-mb4a1-reargrip-factory-w",
+          "label": "rearGrip",
+          "origin": [
+            53,
+            16
+          ]
+        },
+        {
+          "key": "gs-mb4a1-mag-factory-w",
+          "label": "mag",
+          "origin": [
+            83,
+            16
+          ]
+        },
+        {
+          "key": "gs-mb4a1-barrel-factory-w",
+          "label": "barrel",
+          "origin": [
+            103,
+            2
+          ]
+        },
+        {
+          "key": "gs-mb4a1-receiver-w",
+          "label": "receiver",
+          "origin": [
+            39,
+            4
+          ]
+        },
+        {
+          "key": "gs-h02-w",
+          "label": "handguard",
+          "origin": [
+            103,
+            8
+          ]
+        },
+        {
+          "key": "gs-f01-w",
+          "label": "under",
+          "origin": [
+            115,
+            21
+          ]
+        },
+        {
+          "key": "gs-mb4a1-top-factory-w",
+          "label": "top",
+          "origin": [
+            63,
+            0
+          ]
+        },
+        {
+          "key": "gs-m07-w",
+          "label": "muzzle",
+          "origin": [
+            159,
+            6
+          ]
+        },
+        {
+          "key": "gs-t01-w",
+          "label": "side1",
+          "origin": [
+            135,
+            12
+          ]
+        },
+        {
+          "key": "gs-t05-w",
+          "label": "side2",
+          "origin": [
+            140,
+            10
+          ]
+        }
+      ],
+      "beam": [
+        151,
+        18
+      ],
+      "colors": 7
+    }
+  ],
+  "bareFactories": [
+    {
+      "gun": "pb226",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 18,
+      "h": 9,
+      "tip": [
+        18,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-pb226-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "grip": [
+        6,
+        6
+      ],
+      "bore": 2,
+      "forward": 8,
+      "hand": [
+        6,
+        6
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mpb5",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 26,
+      "h": 10,
+      "tip": [
+        26,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-mpb5-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-mpb5-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            12,
+            4
+          ]
+        },
+        {
+          "key": "gs-mpb5-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            15,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-receiver-h",
+          "label": "receiver",
+          "origin": [
+            6,
+            0
+          ]
+        },
+        {
+          "key": "gs-mpb5-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            15,
+            2
+          ]
+        }
+      ],
+      "grip": [
+        9,
+        5
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        18,
+        5
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "vb9",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 24,
+      "h": 10,
+      "tip": [
+        24,
+        3
+      ],
+      "layers": [
+        {
+          "key": "gs-vb9-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "grip": [
+        9,
+        7
+      ],
+      "bore": 3,
+      "forward": 0,
+      "hand": [
+        16,
+        6
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "mb870",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 33,
+      "h": 10,
+      "tip": [
+        33,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-mb870-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb870-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-mb870-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            19,
+            3
+          ]
+        },
+        {
+          "key": "gs-mb870-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            19,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-receiver-h",
+          "label": "receiver",
+          "origin": [
+            9,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb870-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            19,
+            2
+          ]
+        }
+      ],
+      "grip": [
+        12,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        22,
+        5
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb1014",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 32,
+      "h": 10,
+      "tip": [
+        32,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-mb1014-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb1014-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-mb1014-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            19,
+            3
+          ]
+        },
+        {
+          "key": "gs-mb1014-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            19,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb1014-receiver-h",
+          "label": "receiver",
+          "origin": [
+            9,
+            0
+          ]
+        },
+        {
+          "key": "gs-mb1014-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            19,
+            2
+          ]
+        }
+      ],
+      "grip": [
+        12,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        22,
+        5
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "akb74",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 33,
+      "h": 10,
+      "tip": [
+        33,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-akb74-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-akb74-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb74-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            17,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb74-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            21,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-receiver-h",
+          "label": "receiver",
+          "origin": [
+            8,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb74-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            21,
+            2
+          ]
+        }
+      ],
+      "grip": [
+        12,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        24,
+        5
+      ],
+      "colors": 6
+    },
+    {
+      "gun": "akb103",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 33,
+      "h": 10,
+      "tip": [
+        33,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-akb103-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            1
+          ]
+        },
+        {
+          "key": "gs-akb103-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            11,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb103-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            17,
+            4
+          ]
+        },
+        {
+          "key": "gs-akb103-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            21,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-receiver-h",
+          "label": "receiver",
+          "origin": [
+            8,
+            0
+          ]
+        },
+        {
+          "key": "gs-akb103-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            21,
+            2
+          ]
+        }
+      ],
+      "grip": [
+        12,
+        4
+      ],
+      "bore": 2,
+      "forward": 0,
+      "hand": [
+        24,
+        5
+      ],
+      "colors": 5
+    },
+    {
+      "gun": "pistol",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 18,
+      "h": 10,
+      "tip": [
+        17,
+        2.5
+      ],
+      "layers": [
+        {
+          "key": "gs-pistol-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "grip": [
+        6,
+        6
+      ],
+      "bore": 2.5,
+      "forward": 8,
+      "hand": [
+        6,
+        6
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "shotgun",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 33,
+      "h": 10,
+      "tip": [
+        32,
+        2.5
+      ],
+      "layers": [
+        {
+          "key": "gs-shotgun-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "grip": [
+        11,
+        6
+      ],
+      "bore": 2.5,
+      "forward": 0,
+      "hand": [
+        21,
+        6
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "carbine",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 31,
+      "h": 10,
+      "tip": [
+        31,
+        3.5
+      ],
+      "layers": [
+        {
+          "key": "gs-carbine-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            22,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        },
+        {
+          "key": "gs-carbine-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "grip": [
+        8,
+        4
+      ],
+      "bore": 3.5,
+      "forward": 0,
+      "hand": [
+        18,
+        5
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "gb17",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 17,
+      "h": 9,
+      "tip": [
+        17,
+        2
+      ],
+      "layers": [
+        {
+          "key": "gs-gb17-receiver-h",
+          "label": "receiver",
+          "origin": [
+            0,
+            0
+          ]
+        }
+      ],
+      "grip": [
+        5,
+        7
+      ],
+      "bore": 2,
+      "forward": 8,
+      "hand": [
+        5,
+        7
+      ],
+      "colors": 4
+    },
+    {
+      "gun": "mb4a1",
+      "code": "h",
+      "configuration": "factory",
+      "items": [],
+      "w": 32,
+      "h": 11,
+      "tip": [
+        32,
+        4
+      ],
+      "layers": [
+        {
+          "key": "gs-mb4a1-stock-factory-h",
+          "label": "stock",
+          "origin": [
+            0,
+            2
+          ]
+        },
+        {
+          "key": "gs-mb4a1-reargrip-factory-h",
+          "label": "rearGrip",
+          "origin": [
+            10,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb4a1-mag-factory-h",
+          "label": "mag",
+          "origin": [
+            16,
+            6
+          ]
+        },
+        {
+          "key": "gs-mb4a1-barrel-factory-h",
+          "label": "barrel",
+          "origin": [
+            20,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb4a1-receiver-h",
+          "label": "receiver",
+          "origin": [
+            7,
+            1
+          ]
+        },
+        {
+          "key": "gs-mb4a1-handguard-factory-h",
+          "label": "handguard",
+          "origin": [
+            20,
+            3
+          ]
+        },
+        {
+          "key": "gs-mb4a1-top-factory-h",
+          "label": "top",
+          "origin": [
+            13,
+            0
+          ]
+        }
+      ],
+      "grip": [
+        11,
+        6
+      ],
+      "bore": 4,
+      "forward": 0,
+      "hand": [
+        24,
+        6
+      ],
+      "colors": 4
+    }
+  ]
+}

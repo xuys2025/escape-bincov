@@ -291,6 +291,11 @@ export type CritChanceView = Readonly<{
     onTarget: Readonly<CritBreakdown> | null;
 }>;
 /**
+ * The sight of the gun in hand (#28 M3-11), display only: the camera stretches the precise look-ahead by `scope` (the
+ * view factor of the mode in use, M0 review decision 7), and the HUD names the mode of a two-mode optic and the bipod.
+ */
+export type SightView = Readonly<{ scope: number; modes: number; mode: number; bipod: boolean; braced: boolean }>;
+/**
  * The tactical devices of the gun in hand (#28 M2-03), display only: the Runtime decides every effect, and a view draws
  * these values without deriving them again. Points are on the ground plane; the beam travels at chest height.
  */
@@ -338,6 +343,8 @@ export type HudView = Readonly<{
     crit: CritChanceView | null;
     /** Null with the knife drawn, without a gun, or with a gun that has no device. */
     devices: DevicesView | null;
+    /** Null with the knife drawn, without a gun, or with a gun that has neither a scope nor a bipod (#28 M3-11). */
+    sight: SightView | null;
     heals: number;
     hitDirections: readonly Readonly<{
         angle: number | null;
@@ -490,7 +497,7 @@ export type RaidIntent = Readonly<{
     interactPressed: boolean;
     interactHeld: boolean;
     /** `laser` and `light` flip the switch of the device part with that effect on the gun in hand (#28 M2-03). */
-    commands: readonly ('reload' | 'heal' | 'primary' | 'knife' | 'laser' | 'light')[];
+    commands: readonly ('reload' | 'heal' | 'primary' | 'knife' | 'laser' | 'light' | 'scope')[];
     selectTarget: string | null;
     source: 'mouse-keyboard' | 'touch';
 }>;

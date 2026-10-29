@@ -293,10 +293,10 @@ export function validateExpansion(value: unknown, profile: D.SaveDataV1 | Profil
         if (rpg && id.startsWith('entity-') && !id.startsWith(prefix)) return; // Retained loot from an older action.
         if (match && (!whole(Number(match[1]), 1, COUNT_MAX) || Number(match[1]) >= raid.nextEntity)) fail();
     };
-    const inventory = (inv: D.Inventory, w: number, h: number) => {
-        if (!validInventory(inv, w, h, invIds, { rotation: true, exact: true, guns }, item => D.itemUids(item).forEach(allocated))) fail();
+    const inventory = (inv: D.Inventory, w: number, h: number, overflow = 0) => {
+        if (!validInventory(inv, w, h, invIds, { rotation: true, exact: true, guns, overflow }, item => D.itemUids(item).forEach(allocated))) fail();
     };
-    inventory(profile.stash, 10, profile.upgraded ? 9 : 6); inventory(raid.loadout.bag, 6, 5); inventory(raid.loadout.safe, 2, 2);
+    inventory(profile.stash, D.STASH_W, D.stashRows(profile.upgraded), D.stashOverflowRows(guns)); inventory(raid.loadout.bag, 6, 5); inventory(raid.loadout.safe, 2, 2);
     exactKeys(raid.loadout, ['bag', 'safe', 'weapon', 'ammo', 'ammoRelief', 'relief', 'runId', ...(guns ? ['weaponUid', 'gun'] : [])]);
     const magazine = raid.loadout, gun = magazine.weapon === null ? null : D.isGun(magazine.weapon) ? D.WEAPONS[magazine.weapon] : undefined;
     // The old format caps the magazine at the gun type's size; the gun format at its instance's, below.

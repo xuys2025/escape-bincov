@@ -808,6 +808,51 @@ async function heldArt(page) {
   return { configs: seen.length, base: base.large, held: 8, ground: looks };
 }
 
+/**
+ * #28 M3-11: a scope's precise look-ahead (M0 review decision 7) and the bipod. The right button held with a still
+ * pointer far ahead: the factory M4A1's lead, then with O08 (x2) twice it, the aim unmoved; O10 switches near and far with
+ * V and the weapon card says which; the SVD with F08 braces after standing still and the card says so.
+ */
+async function scopes(page) {
+  await place(page, HOME, 0);
+  const sight = () => page.evaluate(() => window.__bincovSample.host.lastBatch.frame.hud.sight);
+  const reach = async () => {
+    await aimAt(page, 0, 110); await settle(page, .3);
+    const at = await state(page), far = { x: Math.round(at.chest.x + 420), y: Math.round(at.chest.y) };
+    assert.ok(await onCanvas(page, far), `pointer target covered: ${JSON.stringify(far)}`);
+    await page.mouse.move(far.x, far.y); await page.mouse.down({ button: 'right' }); await settle(page, .8);
+    const a = (await state(page)).aim; await settle(page, .4);
+    const out = await page.evaluate(() => window.__bincovSample.host.view.camF.lead?.m ?? 0), b = (await state(page)).aim;
+    await page.mouse.up({ button: 'right' }); await settle(page, .3);
+    return { lead: r3(out, 2), drift: r3(Math.abs(wrap(b - a)), 5) };
+  };
+  await drive(page, 'weapon', 'mb4a1'); await drive(page, 'fit', []);
+  const factory = await reach();
+  await drive(page, 'fit', [{ uid: 'sc-o08', id: 'O08', slot: 'top', relief: false, children: [] }]);
+  const o08 = await reach();
+  check(o08.lead > factory.lead * 1.8 && o08.lead <= factory.lead * 2 + .5, `O08 doubles the precise look-ahead: ${factory.lead} -> ${o08.lead}`, { factory, o08 });
+  check(o08.drift < .002 && factory.drift < .002, 'a still pointer keeps its aim with the scope', { factory, o08 });
+  await drive(page, 'fit', [{ uid: 'sc-o10', id: 'O10', slot: 'top', relief: false, children: [] }]);
+  await page.waitForFunction(() => window.__bincovSample.host.lastBatch.frame.hud.sight?.modes === 2, null, { polling: 'raf' });
+  const nearMode = { hud: await sight(), line: await deviceLine(page) };
+  await page.keyboard.press('v');
+  await page.waitForFunction(() => window.__bincovSample.host.lastBatch.frame.hud.sight?.mode === 1, null, { polling: 'raf' });
+  await settle(page, .2);
+  const farMode = { hud: await sight(), line: await deviceLine(page) };
+  check(nearMode.hud.scope === 1.5 && farMode.hud.scope === 2 && nearMode.line?.includes('近档') && farMode.line?.includes('远档') && farMode.line.includes('V'),
+    'V switches O10 from near to far and the weapon card says so', { nearMode, farMode });
+  await page.keyboard.press('v');
+  await page.waitForFunction(() => window.__bincovSample.host.lastBatch.frame.hud.sight?.mode === 0, null, { polling: 'raf' });
+  await drive(page, 'weapon', 'svdb'); await drive(page, 'fit', [{ uid: 'sc-f08', id: 'F08', slot: 'bipod', relief: false, children: [] }]);
+  await page.waitForFunction(() => window.__bincovSample.host.lastBatch.frame.hud.sight?.braced === true, null, { polling: 'raf', timeout: 30000 });
+  await settle(page, .2);
+  const braced = { hud: await sight(), line: await deviceLine(page) };
+  check(braced.line?.includes('脚架 架稳'), `standing still the SVD braces on its bipod: ${braced.line}`, braced);
+  await page.screenshot({ path: resolve(out, 'scope-bipod.png') });
+  await drive(page, 'weapon', 'pistol'); await place(page, HOME, 0);
+  return { factory, o08, nearMode: nearMode.line, farMode: farMode.line, braced: braced.line };
+}
+
 async function devices(page) {
   await place(page, LANE, 0);
   await drive(page, 'weapon', 'mb4a1'); await drive(page, 'fit', FIT_LASER);
@@ -973,6 +1018,7 @@ try {
   await step('l', 'devices: G and F switch a fitted gun\'s laser and light; HUD, cone, beam, outline and save follow', desktop, devices);
   await step('k', 'a crowded fight stays within the particle and voice budget; the player\'s own blood and cues still come through', desktop, crowdBudget);
   await step('m', 'a configured gun in hand is drawn from the gunsmith art; the view keeps at most 8 held pictures', desktop, heldArt);
+  await step('n', 'scopes and the bipod: O08 doubles the precise look-ahead with the aim unmoved; V switches O10; a bipod braces standing still', desktop, scopes);
   desktop.stallResumes = await stallResumes(desktop.page);
   phone = await context('phone', { viewport: { width: 844, height: 390 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 });
   phone.touch = true;

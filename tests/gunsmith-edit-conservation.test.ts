@@ -30,7 +30,12 @@ const SEEDS = 120, STEPS = 20, FAIL_RATE = .12, STALE_RATE = .08;
 type Rng = () => number;
 const int = (rng: Rng, n: number) => Math.floor(rng() * n);
 const pick = <T>(rng: Rng, list: readonly T[]): T => list[int(rng, list.length)];
-const SAMPLE = Object.keys(D.ITEMS).filter(id => D.isAttachment(id));
+/**
+ * The loose parts a seed holds, 0 to 2 of each: those of the fixture's guns, and the rail parts. Since #28 M3-06 every
+ * catalog part is an item; the other guns' own parts would only crowd the containers.
+ */
+const FIXTURE_GUNS: readonly string[] = ['mb4a1', 'gb17', 'carbine', 'pistol', 'shotgun'];
+const SAMPLE = Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && (!ATTACHMENTS[id].guns || ATTACHMENTS[id].guns!.some(g => FIXTURE_GUNS.includes(g))));
 const CATALOG = Object.keys(ATTACHMENTS);
 const SLOTS = Object.keys(SLOT_NAMES) as Slot[];
 const CONTAINERS = ['stash', 'bag', 'safe'] as const;

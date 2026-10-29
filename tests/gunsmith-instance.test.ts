@@ -62,12 +62,13 @@ test('a factory gun is a valid instance of every catalog gun, with the catalog s
     assert.notEqual(factoryState(), factoryState(), 'each factory state is a fresh object');
 });
 
-test('weight and sale count the gun and each installed part once, nested parts included; the footprint grows with suppressors and drums', () => {
+test('weight and sale count the gun and each installed part once, nested parts included; the footprint grows with suppressors, drums and long magazines', () => {
     // Worked by hand from the catalog rows: M07 adds .35 kg and sells for 306, G10 is .05 kg lighter and sells for 90.
     const light = gun('mb4a1', 'M07', 'G10');
     assert.deepEqual(check(light), { ok: true });
     assert.equal(gunWeight(light), 3.2); assert.deepEqual(gunSale(light), { value: 1476, restricted: false });
-    assert.deepEqual(gunSize(light), { w: 5, h: 1 });
+    // Two rows for its box magazine (#28 M3-12), one column more for the suppressor.
+    assert.deepEqual(gunSize(light), { w: 5, h: 2 });
     // Two levels: H02 holds F01 and T01. 2.9 + .3 + .08 + .1 kg; 1080 + 171 + 54 + 135.
     const nested = gun('mb4a1', 'H02', 'F01', 'T01');
     assert.equal(nested.parts.length, 1); assert.equal(nested.parts[0].children.length, 2);
@@ -79,14 +80,14 @@ test('weight and sale count the gun and each installed part once, nested parts i
     assert.deepEqual(gunUids(full), ['gun-mb4a1', ...all.map(n => n.uid)]);
     assert.equal(gunWeight(full), Math.round((2.9 + all.reduce((kg, n) => kg + ATTACHMENTS[n.id].mods.weight, 0)) * 1000) / 1000);
     assert.equal(gunSale(full).value, 1080 + all.reduce((sum, n) => sum + ATTACHMENTS[n.id].sell, 0));
-    assert.deepEqual(gunSize(full), { w: 5, h: 1 });
+    assert.deepEqual(gunSize(full), { w: 5, h: 2 });
     // Parts lighter than the factory part they replace make the gun lighter.
     assert.ok(gunWeight(gun('mb700', 'B10', 'S10')) < GUNS.mb700.weight);
     // buildOf gives compat.ts the same build the tree was made from, parents before children.
     const build = fit({ gun: 'mb4a1', parts: [] }, 'H02', 'F01', 'T01', 'T05', 'O03', 'M07', 'S02', 'P02', 'G10', 'B08');
     assert.deepEqual(buildOf(full), build); assert.deepEqual(validateBuild(buildOf(full)), { ok: true });
-    assert.deepEqual(gunSize(gun('rpkb', 'M07', 'G09')), { w: 6, h: 2 });
-    assert.deepEqual(gunSize(gun('rpkb', 'M07', 'G09'), true), { w: 2, h: 6 });
+    assert.deepEqual(gunSize(gun('rpkb', 'M07', 'G09')), { w: 6, h: 3 });
+    assert.deepEqual(gunSize(gun('rpkb', 'M07', 'G09'), true), { w: 3, h: 6 });
 });
 
 test('relief parts and bodies are worth nothing and flag the gun, so a sale is refused rather than stripped', () => {
@@ -112,7 +113,7 @@ test('the largest legal gun still fits the 6x5 bag: every footprint over all bui
         return a.needs.some(n => n.part === id) || (h.provides[a.mount] ?? 0) > 0 || a.requires.some(q => h.grants.includes(q));
     }));
     const candidates = [...grows, ...helpers];
-    assert.deepEqual(grows.sort(), ['G09', 'M03', 'M04', 'M07', 'M08', 'M12']);
+    assert.deepEqual(grows.sort(), ['G01', 'G02', 'G04', 'G08', 'G09', 'M03', 'M04', 'M07', 'M08', 'M12']);
     let largest = { gun: '', parts: [] as string[], w: 0, h: 0 }, builds = 0;
     for (const id of GUN_IDS) {
         const visit = (build: Build) => {
@@ -129,7 +130,7 @@ test('the largest legal gun still fits the 6x5 bag: every footprint over all bui
         visit({ gun: id, parts: [] });
     }
     assert.ok(builds > 20);
-    assert.deepEqual([largest.gun, largest.parts.sort(), largest.w, largest.h], ['rpkb', ['G09', 'M07'], 6, 2]);
+    assert.deepEqual([largest.gun, largest.parts.sort(), largest.w, largest.h], ['rpkb', ['G09', 'M07'], 6, 3]);
     const bag = D.createInventory(6, 5), size = gunSize(gun('rpkb', 'M07', 'G09'));
     assert.ok(size.w <= bag.w && size.h <= bag.h, 'it lies flat in the bag');
     assert.ok(gunSize(gun('rpkb', 'M07', 'G09'), true).h > bag.h, 'turned on end it does not');

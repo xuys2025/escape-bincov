@@ -12,7 +12,7 @@ import { gun, hold, node, put } from './fixtures/workbench';
 
 /** An M4A1 in hand, a G17 in the stash. */
 function base() {
-    const p = D.newSave(); p.stash = D.createInventory(10, 6); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
+    const p = D.newSave(); p.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
     hold(p, 'm4', 'mb4a1');
     put(p.stash, gun('g17', 'gb17'));
     return p;
@@ -32,7 +32,7 @@ test('the sale preview lists the body and each part; relief components add nothi
 test('where a part fits at the base: now, or what the gun lacks first; guns it can never go on are left out', () => {
     const p = base();
     assert.deepEqual(partFits(p, 'O03'), [{ uid: 'm4', gun: 'M4A1 模块步枪', where: 'equipment', reason: null }]);
-    assert.deepEqual(partFits(p, 'F01').map(f => [f.uid, f.reason]), [['m4', '需要 AR 短导轨护木']]);
+    assert.deepEqual(partFits(p, 'F01').map(f => [f.uid, f.reason]), [['m4', '需要 AR 短导轨护木或 AR 长导轨护木']]);
     assert.deepEqual(partFits(p, 'M03').map(f => [f.uid, f.reason]), [['g17', '需要九系精瞄枪管组']]);
     assert.deepEqual(partFits(p, 'O01').map(f => [f.uid, f.reason]), [['g17', null]]);
     assert.deepEqual(partFits(p, 'A07'), [], 'the carbine base: no carbine at the base');
@@ -47,14 +47,15 @@ test('the catalog: by kind, only what fits the base\'s guns, and pages that each
     const p = base(), all = Shop.browseStock(p, 'arms', true, Shop.BROWSE_ALL);
     assert.deepEqual(all, Shop.merchantStock('arms', true));
     assert.ok(Shop.browseStock(p, 'arms', true, { kind: 'attachment', fits: false, page: 0 }).every(D.isAttachment));
-    assert.deepEqual(Shop.browseStock(p, 'arms', true, { kind: 'weapon', fits: false, page: 0 }), ['pistol', 'shotgun', 'carbine', 'gb17']);
-    // Fits: the M4A1's and the G17's parts (A07 is the carbine's), and the rounds they fire.
+    assert.deepEqual(Shop.browseStock(p, 'arms', true, { kind: 'weapon', fits: false, page: 0 }), ['pistol', 'shotgun', 'carbine', 'gb17', 'pb226', 'mb870']);
+    // Fits: the M4A1's and the G17's parts on the shelf (the bases and the AK parts are other guns'), and the rounds they fire.
     const fits = Shop.browseStock(p, 'arms', true, { kind: 'all', fits: true, page: 0 });
-    assert.deepEqual(fits, Shop.merchantStock('arms', true).filter(id => ['ammo9', 'ammoR'].includes(id) || D.isAttachment(id) && id !== 'A07'));
+    assert.deepEqual(fits, Shop.merchantStock('arms', true).filter(id => ['ammo9', 'ammoR', 'P01', 'F01', 'P07', 'M01', 'M05', 'F04', 'O12', 'T07', 'O01', 'G01'].includes(id)));
     assert.deepEqual(Shop.stockKinds('arms', true), ['weapon', 'ammo', 'part', 'attachment']);
     assert.deepEqual(Shop.stockKinds('med', true), ['medical', 'food']);
-    // Today every counter's stock is one page; a long list splits in order and each page fits.
-    assert.equal(Shop.catalogPages(all).length, 1);
+    // Since #28 M3 the arms counter's stock takes two pages (wave one's basic parts); a long list splits in order and each page fits.
+    assert.equal(Shop.catalogPages(all).length, 2);
+    assert.equal(Shop.catalogPages(Shop.merchantStock('med', true)).length, 1);
     const long = [...all, ...all, ...all], pages = Shop.catalogPages(long);
     assert.ok(pages.length > 1);
     assert.deepEqual(pages.flat(), long);
@@ -65,8 +66,8 @@ test('the catalog: by kind, only what fits the base\'s guns, and pages that each
     assert.deepEqual(Shop.catalogPages([]), [[]]);
     // A page past the end clamps to the last; the cart's catalog is that page.
     const view = Shop.catalogPage(p, 'arms', true, { kind: 'all', fits: false, page: 9 });
-    assert.deepEqual([view.page, view.pages], [0, 1]);
-    assert.deepEqual(Shop.createCart(p, 'arms', true, { kind: 'ammo', fits: false, page: 0 }).catalog.items.map(i => i.id), ['ammo9', 'shell', 'ammoR']);
+    assert.deepEqual([view.page, view.pages], [1, 2]);
+    assert.deepEqual(Shop.createCart(p, 'arms', true, { kind: 'ammo', fits: false, page: 0 }).catalog.items.map(i => i.id), ['ammo9', 'shell', 'ammoR', 'ammo45', 'ammoPDW', 'ammoHeavy']);
 });
 
 test('the buy and sell lists hold the largest legal gun that is an item, with the item parts that make it largest', () => {
@@ -89,7 +90,7 @@ test('the buy and sell lists hold the largest legal gun that is an item, with th
 test('the details lines: maker and guns, which gun at the base takes it, the parts of a gun, its composed sale value', () => {
     const p = base();
     assert.deepEqual(attachmentLines(p, 'F01'), [`制造商：${D.attachmentFacts('F01')!.brand} · 适配：${D.attachmentFacts('F01')!.guns.join('、')}`,
-        '装在M4A1 模块步枪（装备中）上：需要 AR 短导轨护木。']);
+        '装在M4A1 模块步枪（装备中）上：需要 AR 短导轨护木或 AR 长导轨护木。']);
     assert.deepEqual(attachmentLines(p, 'O01').slice(1), ['能装在G17 通用手枪（在仓库）上。']);
     assert.deepEqual(attachmentLines(p, 'A07').slice(1), ['基地里还没有能装它的枪。']);
     assert.equal(attachmentLines(null, 'F01').length, 1, 'in a raid: the maker and guns only');

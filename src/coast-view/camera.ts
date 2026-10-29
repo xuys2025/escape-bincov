@@ -17,6 +17,26 @@ export const aimLead = (aim: number, precise: boolean) => {
 export const POINTER_LEAD = .35;
 /** A look-ahead as a length along a unit direction. */
 export interface Lead { m: number; ux: number; uy: number }
+/** How much farther a scope's precise look-ahead reaches, across and down (1 is the factory reach). */
+export interface LeadScale { x: number; y: number }
+export const FACTORY_LEAD: LeadScale = { x: 1, y: 1 };
+/** M0 review decision 7 (#28 M3-11): a scope reaches x2 at most (163 x 116 world px); under 480 CSS px tall, x1.5 down. */
+export const SCOPE_MAX = 2, SHORT_SCREEN = 480, SHORT_SCOPE_Y = 1.5;
+/** The look-ahead scale of a sight whose `view` is `view`, on a screen `cssHeight` px tall. */
+export const scopeScale = (view: number, cssHeight: number): LeadScale => {
+  const s = Math.min(SCOPE_MAX, Math.max(1, view));
+  return { x: s, y: cssHeight < SHORT_SCREEN ? Math.min(s, SHORT_SCOPE_Y) : s };
+};
+/**
+ * A scope on touch (#28 M3-11, from the M0-07 prototype): touch has no precise look-ahead (maintainer, 2026-10-22), so a
+ * scope adds only its part beyond the factory, the precise ellipse along the aim times (scale - 1), in step with the
+ * raised aim (hud.aim.raise, 0 to 1: the aim stick held in the inner ring while standing). The stick aims without the
+ * camera, so this cannot turn the aim. The factory scale adds nothing.
+ */
+export const touchScopeLead = (aim: number, scale: LeadScale, raise: number) => {
+  const l = aimLead(aim, true), k = Math.min(1, Math.max(0, raise));
+  return { x: l.x * Math.max(0, scale.x - 1) * k, y: l.y * Math.max(0, scale.y - 1) * k };
+};
 /**
  * Mouse look-ahead (PR #39). Only a precise aim (the right button) looks ahead: along the pointer's offset (qx, qy) from
  * the point the camera centres on, world px, a share of that distance capped by the PRECISE_LEAD ellipse in that
@@ -25,11 +45,15 @@ export interface Lead { m: number; ux: number; uy: number }
  * read through the moving camera and kept turning it after the mouse stopped (up to 29 degrees, or 78 with the right
  * button). With the player drawn behind the centre along the pointer's own line, a still pointer keeps its aim however
  * the lead's length eases. Touch keeps aimLead: its aim comes from the stick, not through the camera.
+ *
+ * A scope (`scale`, #28 M3-11) stretches the ellipse's axes and the share together: the share alone already stops the
+ * lead at 0.35 of the half screen (134 px across a 1280 x 720 view), so the ellipse alone would do little. Only the
+ * length changes, never the direction, so a still pointer keeps its aim; the factory scale is the old lead exactly.
  */
-export function pointerLead(qx: number, qy: number, precise: boolean): Lead {
+export function pointerLead(qx: number, qy: number, precise: boolean, scale: LeadScale = FACTORY_LEAD): Lead {
   const d = Math.hypot(qx, qy); if (d < 1e-9) return { m: 0, ux: 1, uy: 0 };
-  const ux = qx / d, uy = qy / d, l = PRECISE_LEAD;
-  return { m: precise ? Math.min(l.x * l.y / Math.hypot(l.y * ux, l.x * uy), POINTER_LEAD * d) : 0, ux, uy };
+  const ux = qx / d, uy = qy / d, ax = PRECISE_LEAD.x * scale.x, ay = PRECISE_LEAD.y * scale.y;
+  return { m: precise ? Math.min(ax * ay / Math.hypot(ay * ux, ax * uy), POINTER_LEAD * Math.max(scale.x, scale.y) * d) : 0, ux, uy };
 }
 /**
  * One frame of the mouse look-ahead with easing share k: the direction follows the pointer at once and only the length

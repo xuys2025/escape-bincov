@@ -1,9 +1,9 @@
 import type { RaidIntent } from '../raid-runtime/contract';
 
-type Action = 'reload' | 'heal' | 'primary' | 'knife' | 'laser' | 'light' | 'interact';
+type Action = 'reload' | 'heal' | 'primary' | 'knife' | 'laser' | 'light' | 'scope' | 'interact';
 type Stick = { id: number; x: number; y: number; distance: number };
 /** F and G flip the light and the laser of the gun in hand (#28 M2-03); a combiner answers to either. Physical keys (inputKey). */
-const ACTION_KEYS: Record<string, Action> = { r: 'reload', q: 'heal', '1': 'primary', '2': 'knife', e: 'interact', f: 'light', g: 'laser' };
+const ACTION_KEYS: Record<string, Action> = { r: 'reload', q: 'heal', '1': 'primary', '2': 'knife', e: 'interact', f: 'light', g: 'laser', v: 'scope' };
 
 /** The InputState name of a key event, the same for its press and release. Letters, digits and Shift go by the physical
  *  key (e.code): with Shift held a US layout reports 2 as "@" and a 1 released as "!", and AZERTY digits are symbols
