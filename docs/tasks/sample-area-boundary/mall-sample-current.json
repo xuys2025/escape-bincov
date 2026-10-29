@@ -1,0 +1,962 @@
+{
+  "startedAt": "2026-10-29T05:14:30.409Z",
+  "build": "file:///D:/bincov/todo-sample-area/dist/index.html",
+  "buildSHA256": "32d1ddc92905f5b427d5b23d5e0c7aec71b71f793fafb8575e1945eb2dbf63a1",
+  "seed": "42",
+  "steps": [
+    {
+      "name": "M00 the mall sample deploys layout revision 4 on the Pixi host with both art sets",
+      "status": "passed",
+      "detail": {
+        "state": "run",
+        "worldVersion": "mall-v4",
+        "map": "mall-f1",
+        "art": "sol",
+        "mallArt": "sol",
+        "occluders": 1044,
+        "flights": [
+          "S-N-up"
+        ],
+        "roots": 1
+      }
+    },
+    {
+      "name": "M01 dressed route: furniture, signs and glows are placed; a fading piece takes its links along",
+      "status": "passed",
+      "detail": {
+        "props": 253,
+        "linked": 41,
+        "glows": 45,
+        "faded": 3,
+        "gondolas": 59,
+        "linkVisible": true
+      }
+    },
+    {
+      "name": "M02 the facade stays solid from the plaza; inside the footprint every wall follows the indoor rule (facade whole, south front on its cells, runs by the player's row, doorways clear)",
+      "status": "passed",
+      "detail": {
+        "outside": {
+          "curtain": 7,
+          "levels": [
+            0,
+            1
+          ],
+          "ruled": 0,
+          "mist": 0.0013681288684106161
+        },
+        "counts": {
+          "full": 308,
+          "base": 107,
+          "hidden": 9,
+          "cut": 19,
+          "linked": 17,
+          "core": 63
+        },
+        "mist": 0.999058759548763
+      }
+    },
+    {
+      "name": "M03 overlapping rooms fail closed: an enemy in an unrevealed room inside a revealed one stays hidden",
+      "status": "passed",
+      "detail": {
+        "pair": {
+          "a": "F2-06",
+          "b": "F2-10"
+        },
+        "probe": {
+          "player": [
+            19.5,
+            35.5
+          ]
+        },
+        "enemy": {
+          "uid": "enemy-16",
+          "at": [
+            28.5,
+            36.5
+          ]
+        },
+        "seen": {
+          "runtimeRegion": "F2-10",
+          "revealed": false,
+          "shown": false,
+          "viewRegion": "F2-10",
+          "shownAt": false
+        },
+        "control": {
+          "shown": true,
+          "revealed": [
+            "F2-06",
+            "F2-10",
+            "F2-18"
+          ]
+        }
+      }
+    },
+    {
+      "name": "M03b at a room's edge a hidden target gives no hit marker, and its corpse's blood stays hidden past the edge",
+      "status": "passed",
+      "detail": {
+        "spot": {
+          "room": "F1-01",
+          "p": {
+            "x": 858,
+            "y": 464
+          }
+        },
+        "enemy": "enemy-0",
+        "marker": {
+          "hidden": {
+            "region": "F1-01",
+            "shownAt": true,
+            "on": false
+          },
+          "revealed": {
+            "region": "F1-01",
+            "shownAt": true,
+            "on": true
+          }
+        },
+        "hidden": {
+          "near": 14,
+          "visible": 0,
+          "outside": 3
+        },
+        "shown": {
+          "near": 14,
+          "visible": 14,
+          "outside": 3
+        }
+      }
+    },
+    {
+      "name": "M03c (#26 F14) an unrevealed room is shaded, furniture and all, from the corridor; the shade lifts with its lights and shows nothing of who is inside",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: hidden again, the shade is back in the same frame (dt 0)\n\n51508 !== 0\n\n    at file:///D:/bincov/todo-sample-area/scripts/mall-sample-test.mjs:355:12\n    at async step (file:///D:/bincov/todo-sample-area/scripts/mall-sample-test.mjs:22:24)\n    at async file:///D:/bincov/todo-sample-area/scripts/mall-sample-test.mjs:261:3"
+    },
+    {
+      "name": "M04 the S-N stairs take the player up and back down; each floor keeps its own dressing",
+      "status": "passed",
+      "detail": [
+        {
+          "from": "mall-f1",
+          "to": "mall-f2",
+          "ms": 71,
+          "map": "mall-f2",
+          "rebuildMs": 10.5,
+          "occluders": 662,
+          "flights": [
+            "S-N-down"
+          ],
+          "pages": 1,
+          "bytes": 54362112
+        },
+        {
+          "from": "mall-f2",
+          "to": "mall-f1",
+          "ms": 62,
+          "map": "mall-f1",
+          "rebuildMs": 9.299999999813735,
+          "occluders": 1044,
+          "flights": [
+            "S-N-up"
+          ],
+          "pages": 1,
+          "bytes": 54362112
+        }
+      ]
+    },
+    {
+      "name": "M05 exits are listed and pointed at on the ground floor only",
+      "status": "passed",
+      "detail": {
+        "f1": 2,
+        "first": "北侧接应",
+        "f2": 0,
+        "pointer": {
+          "selected": "北侧接应",
+          "panel": null,
+          "hidden": false,
+          "cls": "cs-exitptr edge",
+          "exits": [
+            "北侧接应",
+            "南街接应"
+          ],
+          "box": {
+            "x": 884,
+            "y": 153,
+            "width": 0,
+            "height": 0,
+            "top": 153,
+            "right": 884,
+            "bottom": 153,
+            "left": 884
+          }
+        },
+        "pointerF2": false
+      }
+    },
+    {
+      "name": "M06 rain falls on the plaza and the terrace, never inside the footprint",
+      "status": "passed",
+      "detail": {
+        "plaza": {
+          "front": true,
+          "drops": 39,
+          "splashesInside": 0
+        },
+        "terrace": {
+          "front": true,
+          "drops": 24,
+          "splashesInside": 0
+        }
+      }
+    },
+    {
+      "name": "M07 five view remounts on the live Runtime keep listeners, render targets, canvases and textures flat",
+      "status": "passed",
+      "detail": {
+        "first": {
+          "listeners": 32,
+          "tickers": 1,
+          "observers": 1,
+          "timers": 0,
+          "apps": 1,
+          "parked": 0,
+          "views": 1,
+          "renderTextures": 3,
+          "liveViews": 1,
+          "canvases": 1,
+          "sampleRoots": 1,
+          "art": "sol",
+          "mallArt": "sol",
+          "atlasPages": 1,
+          "largeTextures": 38,
+          "gpuTextures": 45,
+          "managedEmpty": 100,
+          "managedLive": 82,
+          "heap": 35100000
+        },
+        "last": {
+          "listeners": 32,
+          "tickers": 1,
+          "observers": 1,
+          "timers": 0,
+          "apps": 1,
+          "parked": 0,
+          "views": 1,
+          "renderTextures": 3,
+          "liveViews": 1,
+          "canvases": 1,
+          "sampleRoots": 1,
+          "art": "sol",
+          "mallArt": "sol",
+          "atlasPages": 1,
+          "largeTextures": 13,
+          "gpuTextures": 20,
+          "managedEmpty": 0,
+          "managedLive": 57,
+          "heap": 35100000
+        }
+      }
+    },
+    {
+      "name": "M08 1920x1080: the lobby and the home store, at the default whole-number scale (2, 960x540 world px)",
+      "status": "passed",
+      "detail": {
+        "view": {
+          "w": 960,
+          "h": 540,
+          "s": 2,
+          "k": 2,
+          "dpr": 1,
+          "W": 1920,
+          "H": 1080
+        },
+        "screenScale": 1,
+        "frameMs": 0.599999999627471
+      }
+    },
+    {
+      "name": "M15 entrances are marked (door guides over the gap, a sill on the floor), headers only on entrances; the run starts on the plaza; the HUD names places",
+      "status": "passed",
+      "detail": {
+        "near": {
+          "total": 12,
+          "shown": [
+            {
+              "x": 53,
+              "y": 16
+            },
+            {
+              "x": 57,
+              "y": 22
+            }
+          ],
+          "openings": 12,
+          "sills": 12,
+          "lintels": 9,
+          "where": "滨湾商场 · 一层 · 湾角便利"
+        },
+        "plaza": "滨湾商场 · 一层 · 正门广场 · 室外"
+      }
+    },
+    {
+      "name": "M14 stairs: no label beside the drawn flight but floor arrows to it; other stairs are named in the HUD face when near; pieces sit on their drawn base",
+      "status": "passed",
+      "detail": {
+        "lobby": {
+          "labels": [],
+          "guides": [
+            {
+              "x": 62,
+              "y": 13,
+              "dx": 0,
+              "dy": -1
+            },
+            {
+              "x": 62,
+              "y": 12,
+              "dx": 0,
+              "dy": -1
+            }
+          ]
+        },
+        "near": [
+          {
+            "text": "上楼至二层",
+            "font": "\"Bincov Text\", \"Microsoft YaHei\", \"PingFang SC\", sans-serif",
+            "r": {
+              "x": 433,
+              "y": 487,
+              "width": 94,
+              "height": 22,
+              "top": 487,
+              "right": 527,
+              "bottom": 509,
+              "left": 433
+            }
+          }
+        ],
+        "far": [],
+        "onIt": {
+          "labels": [],
+          "prompt": "E上楼至二层"
+        },
+        "home": {
+          "sofa": [
+            {
+              "asset": "mall-prop-sofa-s-v1",
+              "z": 608,
+              "gap": 0,
+              "foot": {
+                "x": 1856,
+                "y": 576,
+                "w": 64,
+                "h": 32,
+                "lift": 20,
+                "band": {
+                  "x": 1858,
+                  "w": 60
+                }
+              }
+            },
+            {
+              "asset": "mall-prop-sofa-s-v1",
+              "z": 1056,
+              "gap": 0,
+              "foot": {
+                "x": 1856,
+                "y": 1024,
+                "w": 64,
+                "h": 32,
+                "lift": 20,
+                "band": {
+                  "x": 1858,
+                  "w": 60
+                }
+              }
+            }
+          ],
+          "bed": [
+            {
+              "asset": "mall-prop-bed-v1",
+              "z": 864,
+              "gap": 0,
+              "foot": {
+                "x": 1856,
+                "y": 800,
+                "w": 64,
+                "h": 64,
+                "lift": 20,
+                "band": {
+                  "x": 1860,
+                  "w": 56
+                }
+              }
+            },
+            {
+              "asset": "mall-prop-bed-v1",
+              "z": 1312,
+              "gap": 0,
+              "foot": {
+                "x": 1856,
+                "y": 1248,
+                "w": 64,
+                "h": 64,
+                "lift": 20,
+                "band": {
+                  "x": 1860,
+                  "w": 56
+                }
+              }
+            }
+          ],
+          "bench": [
+            {
+              "asset": "mall-prop-bench-v1",
+              "z": 480,
+              "gap": 8,
+              "foot": {
+                "x": 1824,
+                "y": 448,
+                "w": 64,
+                "h": 24,
+                "lift": 18,
+                "band": {
+                  "x": 1828,
+                  "w": 56
+                }
+              }
+            },
+            {
+              "asset": "mall-prop-bench-v1",
+              "z": 1504,
+              "gap": 8,
+              "foot": {
+                "x": 608,
+                "y": 1472,
+                "w": 64,
+                "h": 24,
+                "lift": 18,
+                "band": {
+                  "x": 612,
+                  "w": 56
+                }
+              }
+            },
+            {
+              "asset": "mall-prop-bench-v1",
+              "z": 1536,
+              "gap": 8,
+              "foot": {
+                "x": 1824,
+                "y": 1504,
+                "w": 64,
+                "h": 24,
+                "lift": 18,
+                "band": {
+                  "x": 1828,
+                  "w": 56
+                }
+              }
+            }
+          ],
+          "table": [
+            {
+              "asset": "mall-prop-coffee-table-v1",
+              "z": 640,
+              "gap": 8,
+              "foot": {
+                "x": 1872,
+                "y": 608,
+                "w": 32,
+                "h": 24,
+                "lift": 12,
+                "band": {
+                  "x": 1874,
+                  "w": 28
+                }
+              }
+            },
+            {
+              "asset": "mall-prop-coffee-table-v1",
+              "z": 1088,
+              "gap": 8,
+              "foot": {
+                "x": 1872,
+                "y": 1056,
+                "w": 32,
+                "h": 24,
+                "lift": 12,
+                "band": {
+                  "x": 1874,
+                  "w": 28
+                }
+              }
+            }
+          ],
+          "lamp": [
+            {
+              "z": 608,
+              "foot": {
+                "x": 1931,
+                "y": 588,
+                "w": 10,
+                "h": 8,
+                "lift": 8
+              }
+            },
+            {
+              "z": 832,
+              "foot": {
+                "x": 1931,
+                "y": 812,
+                "w": 10,
+                "h": 8,
+                "lift": 8
+              }
+            },
+            {
+              "z": 1056,
+              "foot": {
+                "x": 1931,
+                "y": 1036,
+                "w": 10,
+                "h": 8,
+                "lift": 8
+              }
+            },
+            {
+              "z": 1280,
+              "foot": {
+                "x": 1931,
+                "y": 1260,
+                "w": 10,
+                "h": 8,
+                "lift": 8
+              }
+            }
+          ],
+          "cafe": 4
+        }
+      }
+    },
+    {
+      "name": "M19 the sealed maintenance core keeps the old rule (never cut down to its cells or faded away), even from the F2 hall that contains it",
+      "status": "passed",
+      "detail": {
+        "counts": {
+          "full": 166,
+          "base": 156,
+          "hidden": 0,
+          "cut": 8,
+          "linked": 10,
+          "core": 63
+        },
+        "levels": [
+          0
+        ]
+      }
+    },
+    {
+      "name": "M21 walking out through a shop entrance raises its wall row whole over 0.2 s, with no rebuild (1280x720 and 1920x1080)",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: 29: lowered whole px, drawn down to its cell's south edge {\"x\":29,\"sunk\":0.9694999999999981,\"clear\":0,\"mode\":\"full\",\"visible\":true,\"dy\":48,\"h\":32,\"full\":80,\"bottom\":0,\"links\":[]}\n    at file:///D:/bincov/todo-sample-area/scripts/mall-sample-test.mjs:519:16\n    at async step (file:///D:/bincov/todo-sample-area/scripts/mall-sample-test.mjs:22:24)\n    at async file:///D:/bincov/todo-sample-area/scripts/mall-sample-test.mjs:492:3"
+    },
+    {
+      "name": "M17 a room's lights come up over 0.3 s once it is revealed and go out in the frame it is hidden",
+      "status": "passed",
+      "detail": {
+        "room": "F1-03",
+        "before": true,
+        "shelter": 0.999999952552415,
+        "lights": 5,
+        "shownLit": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "hiddenLit": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "hiddenLeaks": 0,
+        "frame1": [
+          0.05555555555555556,
+          0.05555555555555556,
+          0.05555555555555556,
+          0.05555555555555556,
+          0.05555555555555556
+        ],
+        "frame9": {
+          "lit": [
+            0.5000000000000001,
+            0.5000000000000001,
+            0.5000000000000001,
+            0.5000000000000001,
+            0.5000000000000001
+          ],
+          "vsHidden": 1093224,
+          "vsShown": 1093332
+        },
+        "maxStep": 0.0011694637345679012,
+        "steps": [
+          0.117,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "settled": {
+          "lit": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "vsShown": 0
+        },
+        "pop": 0.7810751832561729,
+        "hide": {
+          "lit": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "leaks": 0,
+          "vsHidden": 0
+        }
+      }
+    },
+    {
+      "name": "M20 layout 4 furnishes every region with the M2 pieces and floors (shops, back rooms, upstairs halls, streets); none falls back to the painted piece; no room is dimmed or outside the sample",
+      "status": "passed",
+      "detail": {
+        "floors": {
+          "mall-f1": [
+            132,
+            0
+          ],
+          "mall-f2": [
+            107,
+            0
+          ]
+        },
+        "places": [
+          {
+            "name": "pharmacy",
+            "size": 1280,
+            "where": "滨湾商场 · 一层 · 滨湾药房"
+          },
+          {
+            "name": "chicken",
+            "size": 1280,
+            "where": "滨湾商场 · 一层 · 红帆炸鸡"
+          },
+          {
+            "name": "storeroom",
+            "size": 1280,
+            "where": "滨湾商场 · 一层 · 北侧仓库"
+          },
+          {
+            "name": "service",
+            "size": 1280,
+            "where": "滨湾商场 · 一层 · 西侧服务间"
+          },
+          {
+            "name": "street",
+            "size": 1280,
+            "where": "滨湾商场 · 一层 · 车库入口及南街 · 室外"
+          },
+          {
+            "name": "yard",
+            "size": 1280,
+            "where": "滨湾商场 · 一层 · 卸货区 · 室外"
+          },
+          {
+            "name": "fashion",
+            "size": 1280,
+            "where": "滨湾商场 · 二层 · 海风服装"
+          },
+          {
+            "name": "office",
+            "size": 1280,
+            "where": "滨湾商场 · 二层 · 商场办公室"
+          },
+          {
+            "name": "play",
+            "size": 1280,
+            "where": "滨湾商场 · 二层 · 儿童乐园"
+          },
+          {
+            "name": "toilet",
+            "size": 1280,
+            "where": "滨湾商场 · 二层 · 厕所"
+          },
+          {
+            "name": "chicken",
+            "size": 1920,
+            "where": "滨湾商场 · 一层 · 红帆炸鸡"
+          },
+          {
+            "name": "yard",
+            "size": 1920,
+            "where": "滨湾商场 · 一层 · 卸货区 · 室外"
+          },
+          {
+            "name": "fashion",
+            "size": 1920,
+            "where": "滨湾商场 · 二层 · 海风服装"
+          }
+        ]
+      }
+    },
+    {
+      "name": "M16 ?crisp=1 scales the world by a whole number (2 at 1280x720), so world pixels stay square",
+      "status": "passed",
+      "detail": {
+        "s": 2,
+        "k": 2,
+        "w": 640,
+        "h": 360
+      }
+    },
+    {
+      "name": "M16b ?crisp=0 keeps the old fractional picture (2.5 at 1920x1080, 24 cells wide) for comparison",
+      "status": "passed",
+      "detail": {
+        "s": 2.5,
+        "k": 3,
+        "w": 768,
+        "h": 432,
+        "screenScale": 0.8333333333333334
+      }
+    },
+    {
+      "name": "M09 without ?test=1 the station yard deploys the mall sample on layout 4 and exposes no test interface",
+      "status": "passed",
+      "detail": {
+        "test": "undefined",
+        "bincov": "undefined",
+        "roots": 1,
+        "worldVersion": "mall-v4"
+      }
+    },
+    {
+      "name": "M18 a layout-2 raid continues on layout 2 in the 2.5D view with the old table; the next deploy is layout 4 with the table centred on the sofa",
+      "status": "passed",
+      "detail": {
+        "old": {
+          "world": [
+            "mall-v2",
+            "mall-layout-2",
+            "mall-f2"
+          ],
+          "saved": "mall-v2",
+          "mallArt": "sol",
+          "sofas": [
+            {
+              "x": 1856,
+              "z": 608
+            },
+            {
+              "x": 1856,
+              "z": 1056
+            }
+          ],
+          "tables": [
+            {
+              "x": 1856,
+              "z": 672,
+              "shadow": {
+                "x": 1856,
+                "y": 640,
+                "w": 32,
+                "h": 24,
+                "lift": 12,
+                "band": {
+                  "x": 1858,
+                  "w": 28
+                }
+              }
+            },
+            {
+              "x": 1856,
+              "z": 1120,
+              "shadow": {
+                "x": 1856,
+                "y": 1088,
+                "w": 32,
+                "h": 24,
+                "lift": 12,
+                "band": {
+                  "x": 1858,
+                  "w": 28
+                }
+              }
+            }
+          ],
+          "walls": {
+            "full": 196,
+            "base": 172,
+            "hidden": 0,
+            "cut": 8,
+            "linked": 10,
+            "core": 63
+          }
+        },
+        "next": {
+          "world": [
+            "mall-v4",
+            "mall-layout-4",
+            "mall-f2"
+          ],
+          "saved": "mall-v4",
+          "mallArt": "sol",
+          "sofas": [
+            {
+              "x": 1856,
+              "z": 608
+            },
+            {
+              "x": 1856,
+              "z": 1056
+            }
+          ],
+          "tables": [
+            {
+              "x": 1872,
+              "z": 640,
+              "shadow": {
+                "x": 1872,
+                "y": 608,
+                "w": 32,
+                "h": 24,
+                "lift": 12,
+                "band": {
+                  "x": 1874,
+                  "w": 28
+                }
+              }
+            },
+            {
+              "x": 1872,
+              "z": 1088,
+              "shadow": {
+                "x": 1872,
+                "y": 1056,
+                "w": 32,
+                "h": 24,
+                "lift": 12,
+                "band": {
+                  "x": 1874,
+                  "w": 28
+                }
+              }
+            }
+          ],
+          "walls": {
+            "full": 166,
+            "base": 156,
+            "hidden": 0,
+            "cut": 8,
+            "linked": 10,
+            "core": 63
+          }
+        }
+      }
+    },
+    {
+      "name": "M13 the playtest launcher 商场试玩.html opens the offline game with the mall sample on",
+      "status": "passed",
+      "detail": {
+        "url": "start%20the%20game.html?sample=mall&weather=clear"
+      }
+    },
+    {
+      "name": "M10 a test page without sample= deploys like the ordinary entry: layout 4 on the 2.5D view, no playtest marks",
+      "status": "passed",
+      "detail": {
+        "sample": 1,
+        "coastSample": true,
+        "marks": false,
+        "where": "滨湾商场 · 一层 · 正门广场 · 室外",
+        "worldVersion": "mall-v4"
+      }
+    },
+    {
+      "name": "M11 without art the mall floors keep the generic placeholder pipeline",
+      "status": "passed",
+      "detail": {
+        "art": "placeholder",
+        "mallArt": "placeholder",
+        "mall": false,
+        "occluders": 998,
+        "hall": {
+          "drops": 0,
+          "splashesInside": 0,
+          "shelter": 0.9986957002521771
+        },
+        "plaza": {
+          "drops": 37,
+          "splashesInside": 0,
+          "shelter": 0.001387786741172562
+        },
+        "pharmacy": {
+          "full": 291,
+          "base": 277,
+          "hidden": 6,
+          "cut": 19,
+          "linked": 0,
+          "core": 63
+        },
+        "wide": {
+          "full": 291,
+          "base": 277,
+          "hidden": 6,
+          "cut": 19,
+          "linked": 0,
+          "core": 63
+        }
+      }
+    },
+    {
+      "name": "M12 the village sample still preselects 沿海街区",
+      "status": "passed",
+      "detail": {
+        "world": "buildings"
+      }
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "156.0.8078.48",
+  "finishedAt": "2026-10-29T05:15:10.499Z",
+  "passed": 23,
+  "failed": 2
+}

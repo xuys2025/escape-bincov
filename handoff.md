@@ -1,3 +1,6 @@
+## 2026-10-29 · SAMPLE_AREA 共享数据边界（PR #145）
+
+在 `refactor/sample-area-boundary` 续作 [PR #145](https://github.com/xuys2025/escape-bincov/pull/145)，基线 main `03cfb775`。零依赖的 `src/sample-area.ts` 是唯一世界像素范围来源，raid-areas 与 scene 直接消费；appearance 不转发，scene 本体未改。固定输入的旧版选种、400 次/fallback、URL入口与依赖反例见 [原任务书](docs/tasks/todo-sample-area-boundary.md)。本地1059单测、115守卫、package及建筑/通道/落点/默认入口/村庄两档专项通过；商场样板当前和旧393客户端均23/25，同两断言失败，数值差异及准确head/CI见任务书与原PR。只承接 #60 Q-E02 的这一项；未合并、未发布，不接管区域注册、地图/存档或楼梯方向。
 ## 2026-10-28 室内墙体切换过渡：墙下沉／升起
 
 承接 [PR #141](https://github.com/xuys2025/escape-bincov/pull/141)，分支 `feat/indoor-wall-transition`，起点 main `6758d65`（已含 [PR #135](https://github.com/xuys2025/escape-bincov/pull/135) 的两阶段墙体规则）。#135 合并后维护者试玩，反馈切换“没有过渡、不自然”。可选“墙往下沉”和“慢慢变透明”，维护者选了下沉。

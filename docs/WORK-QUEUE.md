@@ -1,6 +1,6 @@
 # 当前任务入口
 
-本轮原子待办：**[待办：将 SAMPLE_AREA 移到共享数据层，去除选区对视图的反向依赖](tasks/todo-sample-area-boundary.md)**，分支 `refactor/sample-area-boundary`；维护者要求先建立草稿 PR，负责人待指定，尚未实施。只承接 #60 中任务书列出的子项，不接管总单或其他 PR。
+本轮原子任务：**[SAMPLE_AREA 共享数据边界](tasks/todo-sample-area-boundary.md)**，分支 `refactor/sample-area-boundary`，[PR #145](https://github.com/xuys2025/escape-bincov/pull/145)；已由维护者指定 GPT-6.1 Sol 实施，常量与直接引用迁移、行为对照及依赖守卫已完成，本地验收已执行（商场样板两项与旧版同样失败）。只承接 #60 Q-E02 的这一余项，准确 head、CI 与剩余边界见任务书和原 PR；不接管总单或其他 PR。
 
 最近核对：2026-10-29，main `275fafd`（含 #95 落幕等待与 #141 室内墙体过渡）。本轮沿 [PR #111](https://github.com/xuys2025/escape-bincov/pull/111) 复核资源趋势工具轮数入口，正常合入该主线并解决三处文档/脚本分类冲突；1056 单测、113 工程守卫与打包通过，准确 head CI 见原 PR。下表其他条目的合并状态、head 与检查结果以对应 GitHub 页面实时信息为准，旧快照不作为当前指令。
 

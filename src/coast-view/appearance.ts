@@ -2,12 +2,9 @@
  * Front-end appearance table: terrain codes -> materials, buildings/regions -> look (storeys, roof art, lamps).
  * Display decisions only; nothing here enters the contract or a save.
  */
-import type { BuildingDef, MapDef, Rect, RegionDef } from '../raid-runtime/contract';
+import type { BuildingDef, MapDef, RegionDef } from '../raid-runtime/contract';
 
 export type GroundMaterial = 'asphalt' | 'yard' | 'tile' | 'wood' | 'concrete' | 'mud' | 'water' | 'void';
-
-/** Tile rectangle that received sample-specific dressing (village street corner). Elsewhere uses the generic placeholder pipeline. */
-export const SAMPLE_AREA: Rect = { x: 3 * 32, y: 1 * 32, w: 34 * 32, h: 26 * 32 };
 
 const CONCRETE_KINDS = new Set(['workshop', 'warehouse', 'utility', 'pump', 'harbor', 'laboratory']);
 const isResident = (b: BuildingDef) => b.id.endsWith('/building/resident');

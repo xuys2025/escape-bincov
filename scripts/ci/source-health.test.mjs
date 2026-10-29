@@ -86,6 +86,13 @@ test('headless rules, saves and runtimes stay independent of views and browser g
   assert.deepEqual(headlessProblems(model, program), []);
 });
 
+test('sample bounds stay headless and raid area selection never borrows view modules', () => {
+  assert.deepEqual(headlessProblems(model, program, ['src/sample-area.ts']), []);
+  // raid-areas reads URL flags, so it is not headless. Its transitive module ownership still must be.
+  assert.deepEqual(headlessProblems(model, program, ['src/raid-areas.ts'])
+    .filter(p => p.startsWith('Headless dependency:')), []);
+});
+
 test('the rule modules import only each other and use nothing that only the DOM provides', () => {
   const graph = runtimeImports();
   for (const file of PURE) for (const dep of graph.get(file) ?? []) assert.ok(PURE.includes(dep), `${file} imports ${dep}`);

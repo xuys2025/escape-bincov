@@ -1,6 +1,7 @@
 import { Application, Container, Graphics, RenderTexture, Sprite, Texture } from 'pixi.js';
 import { worldKeyString, type ActorKind, type ActorView, type MapDef, type Point, type PublishedView, type Rect, type StampedEvent, type ViewFrame } from '../raid-runtime/contract';
-import { SAMPLE_AREA, hasRoof, isRuined, materials, regionLamps, storeys, type GroundMaterial } from './appearance';
+import { hasRoof, isRuined, materials, regionLamps, storeys, type GroundMaterial } from './appearance';
+import { SAMPLE_AREA } from '../sample-area';
 import { paintGround, puddles, type GroundBake } from './art/ground';
 import { canvas } from './art/paint';
 import { groundGeometry } from './art/surface';
