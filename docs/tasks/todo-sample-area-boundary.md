@@ -1,5 +1,7 @@
 # SAMPLE_AREA 共享数据边界（PR #145）
 
+顺序集成：#144 完整 CI 后合入 `13c9b80c`，本分支已继续正常同步；只解决清单/交接新增记录，产品源码与已验 `362bf3e6` 相同。新主线村庄专项 5/5、页面错误/外部请求 0；HTML `b047c6a07135d1c85f8b811040a62f5aceea2dc8009b3730b1700f90b577c2cf`，两档空字段 Date42→48、显式42保持、普通入口无测试接口均通过，[新报告](sample-area-boundary/main-sync-village.json)。
+
 主审同步（2026-10-29）：main 在实施后合入 #132，已正常同步 `e2728e46`，保留双方交接；scene 与主线的差异仍只有样板范围 import。同步后 Node 24.21.0 的单测 1080/1080、工程守卫 115/115、打包通过，便携 ZIP 6,100,983 B。新主线浏览器与准确 head 平台门禁另见原 PR；以下首轮报告对应原记录哈希，保留不覆盖。
 
 状态：**已实施，本地验收已执行；商场样板保留两项旧版同样失败，准确 head CI 见原 PR；未合并、未发布**。继续分支 `refactor/sample-area-boundary` 与 [PR #145](https://github.com/xuys2025/escape-bincov/pull/145)，只承接 [#60](https://github.com/xuys2025/escape-bincov/issues/60) Q-E02 的 SAMPLE_AREA 余项；总单由主代理统一更新。
