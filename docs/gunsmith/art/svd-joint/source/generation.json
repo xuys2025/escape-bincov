@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "date": "2026-10-29",
+  "mode": "built-in image_gen",
+  "calls": 1,
+  "successful": 1,
+  "prompt": "Use case: precise-object-edit\nAsset type: existing small transparent pixel-art game inventory sprite.\nEdit target: the attached original W sprite.\nPrimary request: repair only the three visible dark vertical joints in this existing brown-and-gray side-view fictional game sprite: the rear wooden silhouette to gray middle body, gray middle body to wooden front cover, and wooden front cover to the thin gray forward line. Fill internal joint pixels with the adjacent solid wood or steel shades so the silhouette visually reads as one connected object on a dark UI. Keep only a single ink line at the outside outline.\nInvariants: preserve the original side profile, proportions, exact pixel grid, every other pixel and all transparent areas, the long thin forward line endpoint and its vertical level, and the lower gray magazine shape. No added parts. No text, logos, shadows, lighting changes, perspective, smoothing or antialiasing. Keep true transparent background and use only the source palette. This is purely a cosmetic 2D game asset repair.",
+  "editTarget": "assets/gunsmith/v1/gs-svdb-receiver-w-v2.png",
+  "savedReference": "docs/gunsmith/art/svd-joint/source/joint-treatment-reference.png",
+  "finalization": "Reference establishes the solid joint treatment. The tool changed raster dimensions and colors, so runtime PNGs are finalized on the existing native integer grid by source/finish.mjs, replacing only recorded ink pixels. No CLI/API mode used."
+}

@@ -1,3 +1,7 @@
+## 2026-10-29 SVD 接缝美术（#80）
+
+分支 `art/svd-joints`，起点 main `d60e7c0`；原说明 PR #147 已合入。本次按 [BRIEF](docs/gunsmith/art/svd-joint/BRIEF.md) 交 I/W v3 及同类问题的 H v2，共 3 张、1,079 字节，位于 `assets/gunsmith/incoming/svd-joint/`。只改 70 个原墨色像素，画布、Alpha、色板、挂点、枪口、弹匣保留；40 项美术自查通过，正式 636 图及清单未改。前后对照、源稿、完整提示词和验证见[交付说明](docs/gunsmith/art/svd-joint/README.md)。实现方签收后按 `replacesSha256` 接入，再验游戏内截图；本次未接入、未合并、未发布。仓库检查及准确 head CI 见承接 PR。
+
 ## 2026-10-29 改枪收尾小项（#80，M4-08）
 
 分支 `feat/gunsmith-polish`，基线 main `aa1db0e`（#132 已合入 `e2728e4`）。
