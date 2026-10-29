@@ -546,6 +546,39 @@ try {
     return `G17 (${g17.x}, ${g17.y}) → (${moved.x}, ${moved.y})`;
   });
 
+  await step('B11-factory-magazine-out-and-back', async () => {
+    // #28 M4-07: the M4A1 in hand loses its factory magazine at the mag position's 不装弹匣 card; the bar names it, the
+    // gun is a row shorter and holds no rounds; confirmed, the magazine and the rounds lie in the stash, the weapon slot
+    // says 没装弹匣 and the player cannot deploy. The 原厂弹匣 card puts it back.
+    await open(); await openFromSlot();
+    await pos('gun/mag/0').click(); await part('empty').click();
+    await bench('[data-gs="pos"][data-arg="gun/mag/0"].changed').waitFor();
+    assert.match(await pos('gun/mag/0').innerText(), /没装/);
+    const bar = await bench('.gs-foot').innerText();
+    assert.match(bar, /M4A1 原厂弹匣/); assert.match(await bench(".gs-head").innerText(), /4 × 2 → 4 × 1/);
+    await fits(); await shot('11-desktop-1280x720-mag-out');
+    const rounds = async () => (await snapshot()).profile.stash.items.filter(i => i.id === 'ammoR').reduce((n, i) => n + i.qty, 0);
+    const before = await rounds();
+    await bench('[data-gs="confirm"]').click();
+    await page.waitForFunction(() => window.__bincov.hideoutRuntime.snapshot().profile.equipment.gun?.magOut === true);
+    let p = (await snapshot()).profile;
+    assert.equal(p.equipment.ammo, 0);
+    assert.ok(p.stash.items.some(i => i.uid === `mag-${GUN}` && i.id === 'mb4a1-mag'), 'the magazine lies in the stash');
+    assert.equal(await rounds(), before + 28, 'the rounds went with it');
+    await yard('.modal.k-gunsmith .phead [data-act="close"]').click(); await yard('.panel.k-gear').waitFor();
+    assert.match(await yard('[data-slot="weapon"]').innerText(), /没装弹匣/);
+    await page.evaluate(() => Promise.all(document.querySelector('#station-yard').shadowRoot.getAnimations().filter(a => a.effect?.getTiming().iterations !== Infinity).map(a => a.finished.catch(() => {}))));
+    await shot('11-desktop-1280x720-gear-no-mag');
+    // Back in from the factory card: the gun is as it was.
+    await yard(`[data-act="gunsmith:${GUN}"]`).click(); await bench('.gs').waitFor(); await pos('gun/mag/0').click(); await part('').click();
+    await bench('[data-gs="confirm"]').click();
+    await page.waitForFunction(() => !('magOut' in window.__bincov.hideoutRuntime.snapshot().profile.equipment.gun));
+    p = (await snapshot()).profile;
+    assert.ok(!p.stash.items.some(i => i.id === 'mb4a1-mag'), 'the magazine went back on');
+    assert.deepEqual(p.equipment.gun, { parts: [], devices: { laser: false, light: false } });
+    return `M4A1 magazine out (28 rounds to the stash) and back`;
+  });
+
   await step('B5-desktop-1920x1080', async () => {
     await open(fixture(), [1920, 1080]); await openFromSlot(); await fits();
     await pos('gun/top/0').click(); await bench('[data-gs="unowned"]').click(); await bench('[data-gs="detail"]').click();

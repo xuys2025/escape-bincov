@@ -16,7 +16,12 @@ const WAVE_PARTS = ['A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'B03', 'B05', 'B06
   'O02', 'O04', 'O06', 'O07', 'O09', 'O11', 'O12', 'M04', 'M08', 'M09', 'M12', 'B02', 'B04', 'B10', 'H10', 'S06', 'S09', 'S10', 'P05', 'P08',
   'F02', 'F05', 'F06', 'F08', 'G02', 'G04', 'G05', 'G11', 'G12', 'T03', 'T06', 'T07', 'T09', 'A03'] as const;
 const WAVE_AMMO = ['ammo45', 'ammoPDW', 'ammoHeavy'] as const;
-export const ITEM_ART_IDS = ['knife', 'pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'bandage', 'medkit', 'antidote', 'water', 'food', 'scrap', 'wire', 'fuse', 'battery', 'watch', 'pearl', 'sample', 'ledger', 'cloth', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckyCharm', 'unluckyCharm', 'luckySachet', 'unluckySachet', 'gb17', 'mb4a1', ...PART_ART_IDS, ...WAVE_GUNS, ...WAVE_PARTS, ...WAVE_AMMO] as const;
+/**
+ * The factory magazines taken out at the workbench (#28 M4-07, catalog FACTORY_MAGS): their gun's magazine image as the
+ * icon (gunsmith-compose.ts), the generic part until it is decoded.
+ */
+export const FACTORY_MAG_ART = ['mpb5-mag', 'umpb45-mag', 'akb74-mag', 'akb103-mag', 'mb4a1-mag', 'augb-mag', 'mb14-mag', 'rpkb-mag'] as const;
+export const ITEM_ART_IDS = ['knife', 'pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'bandage', 'medkit', 'antidote', 'water', 'food', 'scrap', 'wire', 'fuse', 'battery', 'watch', 'pearl', 'sample', 'ledger', 'cloth', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckyCharm', 'unluckyCharm', 'luckySachet', 'unluckySachet', 'gb17', 'mb4a1', ...PART_ART_IDS, ...WAVE_GUNS, ...WAVE_PARTS, ...WAVE_AMMO, ...FACTORY_MAG_ART] as const;
 export type ItemArtId = typeof ITEM_ART_IDS[number];
 type PartArtId = typeof PART_ART_IDS[number];
 
@@ -27,7 +32,7 @@ export function paintItem(c: PixelContext, id: ItemArtId, size: 24 | 32): void {
   if (sol) { c.drawImage(sol.img, sol.x, sol.y); return; }
   if (paintRpgItem(c, id, size)) return;
   if ((PART_ART_IDS as readonly string[]).includes(id)) { paintPartPlaceholder(c, id as PartArtId, size); return; }
-  if ([...WAVE_GUNS, ...WAVE_PARTS, ...WAVE_AMMO].includes(id as never)) { paintWavePlaceholder(c, id, size); return; }
+  if ([...WAVE_GUNS, ...WAVE_PARTS, ...WAVE_AMMO, ...FACTORY_MAG_ART].includes(id as never)) { paintWavePlaceholder(c, id, size); return; }
   if (size === 24) { paintSmall(c, id); return; }
   const { r, p, e } = brush(c), S = C;
   switch (id) {

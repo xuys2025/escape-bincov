@@ -27,13 +27,12 @@ export function loadGunsmithArt(): Promise<void> {
             const own = gunsmithIconImage(id, size), small = size === 32 && !own ? gunsmithIconImage(id, 24) : null;
             if (own) return { img: own, x: 0, y: 0 };
             if (small) return { img: small, x: 4, y: 4 };
-            // A factory magazine (#28 M4-07) until Sol draws its icons: its gun's inventory magazine image, centred.
-            const gun = factoryMagOf(id), mag = gun ? images.get(`gs-${gun}-mag-factory-i`) : undefined;
-            return mag ? { img: mag, x: Math.floor((size - mag.naturalWidth) / 2), y: Math.floor((size - mag.naturalHeight) / 2) } : null;
+            const mag = factoryMagIcon(id);
+            return mag ? { img: mag, x: size === 32 ? 4 : 0, y: size === 32 ? 4 : 0 } : null;
         },
         inventory: id => {
             const layout = gunArtLayout(id, [], 'i');
-            return layout ? drawGunLayout(layout) : gunsmithIconImage(id, 24);
+            return layout ? drawGunLayout(layout) : gunsmithIconImage(id, 24) ?? factoryMagIcon(id);
         },
         configured: gunInventoryArt, bench: gunBenchArt, releaseBench: releaseBenchArt,
         benchFrame: gun => { if (!frames.has(gun)) frames.set(gun, artFrame(gun, 'w')); return frames.get(gun)!; },
@@ -143,5 +142,20 @@ const releaseBenchArt = () => bench.clear();
 /** The cache sizes, for the resource checks of M2-10 and M5-02. */
 export const gunArtCaches = () => ({ inventory: inventory.size, bench: bench.size });
 
+const magIcons = new Map<string, HTMLCanvasElement | null>();
+/**
+ * A factory magazine's 24 px icon (#28 M4-07) until Sol draws its own: its gun's inventory magazine image, centred.
+ * Null for any other id and before decoding.
+ */
+function factoryMagIcon(id: string): HTMLCanvasElement | null {
+    const gun = factoryMagOf(id), mag = gun ? images.get(`gs-${gun}-mag-factory-i`) : undefined;
+    if (!mag) return null;
+    if (!magIcons.has(id)) {
+        const canvas = document.createElement('canvas'); canvas.width = canvas.height = 24;
+        canvas.getContext('2d')!.drawImage(mag, Math.floor((24 - mag.naturalWidth) / 2), Math.floor((24 - mag.naturalHeight) / 2));
+        magIcons.set(id, canvas);
+    }
+    return magIcons.get(id)!;
+}
 /** The decoded square icon of a gun or part; null when there is none or before decoding. */
 const gunsmithIconImage = (item: string, size: 24 | 32): HTMLImageElement | null => images.get(`gs-${item.toLowerCase()}-q${size}`) ?? null;

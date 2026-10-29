@@ -11,6 +11,8 @@ import { gunPartsLine, saleLines } from '../src/gunsmith/item-facts';
 import { NO_MAG, drawnParts, partsOfSignature, partsSignature } from '../src/gunsmith/signature';
 import { gunArtLayout } from '../src/art/gunsmith-layout';
 import { GUNSMITH_ART } from '../src/art/gunsmith-art-meta';
+import { FACTORY_MAG_ART } from '../src/art/items';
+import { artId } from '../src/art/item-images';
 import { OFF, gun, hold, node, put, yard } from './fixtures/workbench';
 
 // #28 M4-07 (#142, maintainer 2026-10-29): the factory magazine comes off at the workbench. The gun is one row again,
@@ -54,6 +56,9 @@ test('the factory magazines: the box magazines that make a gun two rows and are 
         assert.deepEqual(D.attachmentFacts(id), { brand: '原厂', guns: [D.WEAPONS[gunId].name] });
         assert.ok(!D.MERCHANTS.arms.stock.includes(id) && !benchParts().includes(id), 'only ever off a gun, never a shelf or a bench candidate');
     }
+    // Each has an inventory picture: its gun's magazine image (gunsmith-compose.ts) until Sol draws an icon.
+    assert.deepEqual([...FACTORY_MAG_ART], Object.values(FACTORY_MAGS));
+    for (const id of Object.values(FACTORY_MAGS)) assert.equal(artId(id!), id);
     for (const id of ['pistol', 'gb17', 'pb90', 'mb870', 'svdb', 'vb9', 'mb700']) assert.equal(detachable(id), false, id);
     for (const id of ['G08', 'svdb-mag', 'mpb5', 'toString', '']) assert.equal(factoryMagOf(id), null, id);
 });
