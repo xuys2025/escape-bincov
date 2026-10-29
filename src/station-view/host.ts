@@ -3,7 +3,7 @@ import * as D from '../domain';
 import type { HideoutEvent, HideoutRuntime, HideoutSnapshot, RunWorld, TrainingProgress } from '../hideout-runtime/contract';
 import { trainingHint, trainingSeconds } from './panels';
 import { COUNTY_ART } from './county-art';
-import { Scope, lifecycle } from '../coast-view/scope';
+import { Scope, lifecycle } from '../view-lifecycle/scope';
 import { DOORWAYS, ROOMS, SHED, SITTERS, STATIONS, T, TRAINING_ZONE, WALKERS, WALL_H, domainAt, floors, inRect, type Doorway, type PropDef, type RoomId, type Station, type StationId } from './layout';
 import { HideoutScene, type ActorView, type SceneState } from './scene';
 import type { Dir, Pose } from './art/people';
@@ -256,6 +256,7 @@ export class StationHost {
     if (e.type === 'production-complete') { this.ui.toast('工作台：一批成品可以领取了。', 'ok'); this.audio.cue('ok'); }
     if (e.type === 'practice-credited') { this.ui.toast(`练习收益 +${(e.amount * 100).toFixed(1)}% 成长`, 'ok'); this.audio.cue('credit'); this.trainingFlash = 1; }
     // A failed perk write is kept for the retry, not undone: the body panel reports it itself.
+    if (e.type === 'publish-failed') { this.ui.toast('进度已保存，但当前页面恢复失败。请导出备份后刷新页面。', 'error'); this.ui.showStorage(); }
     if (e.type === 'save-failed') { if (!e.action.startsWith('perk-')) this.ui.toast('存档没有写入，操作已撤销。', 'error'); this.ui.showStorage(); }
     this.ui.updateHud(this.snap);
     if (e.type === 'committed' && this.ui.open) this.ui.refresh();

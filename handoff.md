@@ -1,3 +1,94 @@
+## 2026-10-28 室内墙体切换过渡：墙下沉／升起
+
+承接 [PR #141](https://github.com/xuys2025/escape-bincov/pull/141)，分支 `feat/indoor-wall-transition`，起点 main `6758d65`（已含 [PR #135](https://github.com/xuys2025/escape-bincov/pull/135) 的两阶段墙体规则）。#135 合并后维护者试玩，反馈切换“没有过渡、不自然”。可选“墙往下沉”和“慢慢变透明”，维护者选了下沉。
+
+已实施：墙在 0.2 秒内整像素沉进占地格（到底等于基础格图），恢复时升起，中途掉头从当时位置返回；门洞裁切原地保持，墙上附着物跟着下移；走出建筑时原建筑的墙先升回再交还淡出。场景首帧和“减少动态效果”直接切换。规则和细节记在[方案 §6 第三阶段](docs/INDOOR-WALL-VISIBILITY-PLAN.md#第三阶段切换过渡已实施待合并)；只改显示，存档、地图、碰撞和房间揭示都不变。
+
+维护者 2026-10-29 在局域网试玩 `1d0bb8a6` 的构建（商场），反馈“手感可以”。未做：真机。准确 head、CI 与已跑检查见承接 PR。
+
+## 2026-10-28 · PR #137 合并前主线复核
+
+原 head `8c68a3f2` 完整 CI 40632571602 已通过（构建、8组浏览器和最终门禁）；合并前 fetch 发现 main 新增 #135/#138 等，正常合入 `681426b022540dc94421ec06505ccf77b11ce470`。冲突仅任务清单与交接，两边全部保留；游戏代码无需人工冲突修正。最新集成验证和合并状态以原 PR #137 为准。
+
+## 2026-10-28 · PR #137 CI S6 补修
+
+同步 main `d27306b4`（保留 #110/#116）。旧 CI 唯一套件失败为 station-reset S6 短暂冲突提示观测超时，本地旧脚本14/14；现恢复前台并在真实点击前记录新出现的可见 DOM 提示，保留拒绝写入/备份/下载及持久弹框断言，测试提示消失后的证据保留。1048单测、99守卫、package、station-reset14/14均通过。准确新head完整CI见原PR；旧失败保留，不声称已合并。详情见原质量摘要Q-E04。
+
+## 2026-10-28 · Q-E04 事务发布失败
+
+最终串联：正常合入 #136 `07babfa8`（含 #117 `4ba5b72`），集成源码 head `a46cfd8798c9b9f3c7c7345a456647956e308793`。1045/1045 单测、86/86 守卫、package、17/17 save-browser 全过；新截图/报告在 `docs/tasks/transaction-phases/integrated/`，旧证据保留原归属。PR base 仍 main，必须按 #117 → #136 → #137 合并，各准确集成 head 完整 CI 通过后由 root 执行；没有改动前两项源码逻辑。
+
+承接 [PR #137](https://github.com/xuys2025/escape-bincov/pull/137)，实现及浏览器证据提交 `e703f14dae521ea91951f61c533581558885f42e`；最终 head/CI 以 PR 为准。任务 `codex/transaction-failure-phases`，基线 `0f73a67386bac196b87c983668295be6d1a99f1e`；本轮交付与证据集中在[原质量摘要 Q-E04](docs/tasks/quality-entropy.md#q-e04-提交后的发布失败)。先读 Session `persist` / `requiresReload`、Store `commit` 及 `tests/session-publication.test.ts`。已确认旧代码写后 restore 失败会使现金磁盘 680 / 内存 700；本轮独立发布失败结果、停写/暂停和精确已提交备份。产品源码 head `cf5e49eb0a940234ea189d2cc534a6bfc6ca2709`（含 main `630e68f`），1041/1041 单测、85/85 工程守卫、package 与两尺寸 17/17 存档浏览器通过；后续只有测试观测/证据归档。截图与准确 CI 状态见上述入口及承接 PR；真机、长时性能未验，不把已提交视为合并。
+## 2026-10-28 · CI：文档快速通道的 main 也要部署和发布
+
+分支 `fix/ci-docs-fastpath-deploy`，起点 main `8c6589b`。#133（纯文档）合入后，main 运行 40623228494（`03ea261`）走了快速通道：浏览器组跳过、`Build and test` 成功，但 `Deploy Pages` 和 `Publish offline release` 都被跳过，`main-latest` 和发布清单停在 `0f73a67`。原因是两个 job 的 `if` 没写状态函数，默认 `success()` 连带检查被跳过的浏览器组。现在两个 job 显式写 `!cancelled() && needs.verify.result == 'success'`，`policy.test.mjs` 守住浏览器组之后的 job，详见 [CI 说明](docs/CI.md#pages-与镜像)。
+
+只改工作流、守卫测试和文档，游戏字节不变。真正的证明要等下一次纯文档 PR 合入 main：两个 job 实际执行，`main-latest` 移到那次提交。准确 head 与 CI 见承接 PR。
+
+## 2026-10-28 室内墙体与视野：居民楼与商场
+
+承接 [PR #135](https://github.com/xuys2025/escape-bincov/pull/135)，分支 `feat/indoor-wall-visibility`，实现 [PR #133](https://github.com/xuys2025/escape-bincov/pull/133) 的方案。维护者同意方案后要求合并 #133 并另开 PR 开始实现；#133 的冲突（任务清单、handoff 两处都保留）经维护者同意推到原 fork 分支。之后维护者要求开自动合并：#133 落后 main 一个提交，经维护者同意用 GitHub 的更新分支合入 main，检查通过后自动合并为 `03ea261`；本分支已合入之后的 main（含 #134、#117、#136，冲突只在任务清单和 handoff，两边都保留）。
+
+已实施：第一阶段居民楼一楼、二楼、地下，第二阶段商场两层（新旧布局和程序绘制后备）。墙按[方案](docs/INDOOR-WALL-VISIBILITY-PLAN.md)五项规则显示，商场原来的房间剖切已删除；实施时定下的细节、分类结果和验证记在方案的[实施进度](docs/INDOOR-WALL-VISIBILITY-PLAN.md#6-实施进度)。只改显示，存档、地图、碰撞、子弹和房间揭示都不变。
+
+未做：维护者试玩；真机。准确 head、CI 与已跑检查见 PR。
+
+## 2026-10-28 Q-E02：公共视图生命周期归位
+
+串联集成：本分支按明确授权正常合入 #117 候选 `4ba5b72c70983f3eefe4affdd31e2d674b3223a3`（fetch 后核对 `origin/fix/content-identity` 同一提交），只消除共同文档冲突，不修改其源码。**必须先 #117 合入 main，再合 #136。** 该候选尚非已接受 main；此前浏览器和制品证据仍只归属原 `14df8ce`，候选集成已通过 1026/1026 单测、86/86 守卫及 package；两份 HTML/两份 ZIP 与明确标注的 #117 候选构建逐字节相同（HTML `bdd50dec…7fc25`），没有将其称为已接受 main。最新已接受 `630e68f` 已确认包含在被测集成中；完整 CI 在新 head 推送后核对，详情见原质量摘要。
+
+[PR #136](https://github.com/xuys2025/escape-bincov/pull/136)，实现 `476086d7dc6e4f3821064c0b8d6d3b47f09680c3`，分支 `codex/shared-view-lifecycle`，起点 main `0f73a67386bac196b87c983668295be6d1a99f1e`。将场景无关 `Scope`/唯一 `lifecycle` 和页面级 Pixi 注册/缓存归位到 `src/view-lifecycle/`，保持直接导入和初始化顺序；原生产/测试引用同步，现役脚本不引用旧路径。职责入口见 [CODEMAP](docs/CODEMAP.md)，决定、首败与验证见[原质量摘要](docs/tasks/quality-entropy.md#q-e02-公共视图生命周期归位)。SAMPLE_AREA/raid-areas 身份、Q-E04 和其他在途 PR 均不在本交付。1022 单测、77 守卫、package、render-targets 5/5、两尺寸程序恢复各 8/8、能力四负载 4/4 通过；两份 HTML/两份 ZIP 与真实 main 构建同字节。旧 lifecycle 1/5 的普通入口首败在 main 同样复现，保留原边界。已正常合入 main `630e68f`（#134）并保留双方文档，新目录纯类型依赖正反例已通过；集成后重跑 1022/1022、86/86、package 全过，四份制品仍同基线。准确 head CI 见原 PR，未合并/发布。
+
+## 2026-10-28 · 居民楼 region 身份（PR #117 续作）
+
+`fix/content-identity` 保留原 PR 历史并依次合入 main `03ea261`、`630e68f`（#134）。居民楼 8 个已有完整 region ID 写入世界定义，投影不按中文名补身份；不变更世界/布局编号或存档格式。楼梯方向和内容登记仍属 Q-E06，未在本 PR 实施。
+
+在未改动的 `03ea261` 独立捕获 mall-v4 两层完整静态投影哈希，合成后逐项相等；原九图 / 28 入口基线及改名、重排、缺 ID 反例亦通过（4/4）。Windows / Node 24 / pnpm 11.19：`pnpm test` 1026/1026、`pnpm check:ci` 77/77、`pnpm package` 通过，HTML SHA-256 `bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25`。同步 `630e68f` 后重跑：专项 4/4、`pnpm test` 1026/1026、`pnpm check:ci` 85/85、`pnpm package` 通过。两次 main 的游戏源码与素材无变化，复用此前打包 HTML 的 `pnpm test:raid-default` 11/11（含居民楼、mall-v4 和旧行动恢复）；准确 head CI 状态见 PR 正文。真人体验不由自动测试替代。
+
+## 2026-10-28 · 新一轮减熵：架构门禁与依赖查询（#60）
+
+- 基线：`3b61d52e898459f3e197584ae202285e7ade65e2`；分支 `codex/entropy-architecture`；[全库扫描/候选清单](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6449666799)。原改枪 M3 检出保留。
+- 本批：统一源码 AST 图、动态加载/类型导出/自环检查、沿核心依赖闭包约束 61 个模块，以及只读 `pnpm architecture [src/path.ts] [--json]`。入口：[实现摘要](docs/tasks/quality-entropy.md#2026-10-28-架构门禁与按文件查询)、[代码导航](docs/CODEMAP.md)、[共享分析](scripts/source-graph.mjs)。
+- 实测：原始基线 1020/1020 单测、85/85 工程守卫、package，三份制品与该基线字节相同；正常合入 main `0f73a67386bac196b87c983668295be6d1a99f1e` 后重跑 1022/1022、85/85 与 package 均通过。动态反向依赖负对照旧守卫 3/3 放行、新守卫拒绝，已还原。独立源码审阅无阻塞，src/assets/锁文件相对最新 main 无差异；准确 head CI 与合并状态见 [PR #134](https://github.com/xuys2025/escape-bincov/pull/134)。
+- 未验：本地浏览器、真机/F20/性能未运行；产品行为未变。准确提交与完整 CI 以本批 PR 为准，未合并/发布；后续候选按 #60 原归属推进，既有修复 PR 保持原承接。
+
+## 2026-10-28 室内墙体与视野设计（功能未实施）
+
+维护者要求只生成文本，核验后提交文档 PR。本轮基于 main `b5bd63b7896b3b0697d4ba38d02d000e78903047`，分支 `docs/indoor-wall-visibility`，新增[室内视野设计](docs/INDOOR-WALL-VISIBILITY-PLAN.md)并同步任务入口。所有室内适用、完整基础格、连续横墙段切换三个选项已由维护者确认；五项显示规则、缓冲、兼容边界和后续验收统一维护在方案内。
+
+已静态核对通用墙体与商场绘制、淡出和揭示路径及现有测试命令。没有同目标开放 PR，#130 仍承接商场家具和地面换图。默认沙箱启动失败后，提权完成 Git 状态检查与 fetch，使用独立工作树验证，保留原工作区已有修改。上游连接无分支写权限，改用已有 fork `LMX-323/escape-bincov` 提交。文档链接、源码事实和差异已核对；纯文档交付未运行游戏测试或打包；准确 head 与 CI 状态见承接 PR。游戏代码及两尺寸、真人、真机验收均未实施，不表示已上线，不自行合并。
+## 2026-10-28 #47 M2：家具与地面素材接进布置表（PR #130，`agent/mall-m2-sprites`）
+
+维护者 10-27 说“接着做 #47 M2，把已有的家具和地面素材接进布置表”。基线 main `98968e1`（含 #127、#128、#115、#129、#108、#112），独立工作树开发，不碰 C:\bincov 里其他会话的分支。
+
+- 家具：`mall-dressing.ts` 的 `mallProps` 给 26 种四版家具先选 M2 素材，程序绘制件留作后备。连排件按邻居选端头、中段（a/b 交替）或单件；墙架和柜台按店铺选外观，其他店铺用零食架和普通柜台。玻璃柜台、售货机、配电柜带同名发光遮罩。
+- 底座：素材多数填满占地，投影按占地画、由场景按图收窄；人台、衣架、快餐桌凳、滑梯、竹屏风按图量了底座（`DRAWN_BASE`），程序件那套窄底座不再用。
+- 地面（只在四版）：水泥（后场、仓库、电房、服务通道）、地毯（办公室、财务室）、橡胶垫（儿童乐园）、小方砖（厕所）、沥青（南街、卸货区）。地面改按最内层房间取区域，二层电房不再铺成儿童乐园的地面。
+- 素材问题：快餐柜台 `mid-b`、`end-e` 和洗手台 `mid-b` 有透明竖缝（碰撞连续，看着像能过），仓储货架 `end-e` 有导出花纹。四个模块暂用同类代替（`SAMPLE_STAND_IN`），待 Sol 重新导出，对照图 `docs/mall-2-5d/m2/stand-ins.png`。
+- 测试：`tests/mall-dressing.test.ts` 改为检查素材 ID、画布尺寸、连排位置、替代、底座、发光和新地面；`test:mall-sample` 的 M20 改为两层 132/107 件全画素材、程序绘制件 0 件。
+
+存档、布局、碰撞都没改，一至三版画面不变。实测结果和截图见 PR 正文与 `docs/mall-2-5d/screens/22`～`29`。未做：维护者观感、真机、建筑补图、M3。开 PR 后 #106 合入 main，已把 main `02b5e1e` 合进来，只有本文件冲突，保留双方小节。
+
+## 2026-10-28 #26 F16：水产站玩家空手手臂与手
+
+承接 [PR #131](https://github.com/xuys2025/escape-bincov/pull/131)，实现提交 `750d6a9a050495a56e7fe8eaf45d334de3d5069e`，准确 PR head 和 CI 见原 PR。
+
+完整 `test:station` 是手动项；新增的 `test:station-hands` 只运行 H15，在 CI batch-2 执行，同步了检查导航与 CI 清单（现 45 条浏览器命令）。
+
+维护者授权修复并开 PR。基线 main `02b5e1e5c5261f5caea55dccc875c8ae93e3120b`，隔离分支 `codex/f16-station-hands`。`src/station-view/art/player.ts` 的 `paintStationPlayer` 在站内生成完整空手帧，`HideoutScene.playerTex` 沿用原纹理缓存；不改共用身体 PNG 或行动手臂/武器分层，脚底、碰撞、存档与离线能力不变。
+
+源码入口、80帧浏览器检查、修复前负对照和两尺寸真实截图见[本项记录](docs/tasks/station-player-hands/README.md)。当前通过：1020 单测、打包、CI 策略 73/73、H15 两尺寸、行动动画 8/8 与冷素材加载；完整站内 78/79，I3 手机菜单切修理铺在原 main 对照和修复构建中均同样超时，保留失败，不拼为完整通过。准确 head、CI 与审阅状态见本项 PR；尚未合并/发布，真机与真人姿态观感待验。#26 其他反馈保留原归属。
+
+## 2026-10-28 行动精神/水分/饱食 HUD 实时投影（PR #110）
+
+沿原 `fix/live-vitals-hud` 正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，随后同步共同截止主线 `630e68f517edea34bfbcc548473897bd36bdfa08`（#134），保留商场四版/M2、背包服务和其他任务交接；受检源码 head `19dea0bfa59042281b4c7ec1f085aa3e8587e3b8`，随后只更新证据文档，最终 head / CI 见 [PR #110](https://github.com/xuys2025/escape-bincov/pull/110)。投影从实时身体复制精神/水分/饱食三个标量；宿主沿原八帧节奏舍入显示；经典行动为 null，存档、生理规则及事务不变。
+
+本轮 1025 单测、77 工程守卫、正式打包、完整 QoL 5/5、默认行动 11/11 首次通过。新 main 两尺寸负对照有效失败、修复后实时/帧/DOM 一致，保存值未变；已亲看双尺寸截图，原始失败和本轮结果留在同一[摘要](docs/tasks/audit-contracts.md#精神水分饱食-hud-的实时投影)/[报告](docs/tasks/audit-contracts/live-needs/report.json)，不拿旧 CI 代替新 head。没有真机、真人或性能签收，#60 其余范围继续开放；等待准确 head CI 与维护者审阅，不自行合并发布。
+
+最新同步后实际重跑工程守卫 **85/85** 和 package 通过；src/tests/assets、全部浏览器流程与依赖输入相对已验 `d0ebc57` 未变，正式 HTML SHA-256 仍为 `f61862ed972f8efaab0c8abf7c9360ab2aebbd751d943dfa77ad8211c5568b72`。上段单测/浏览器/截图据此复用，没有重复执行或新拍；旧 head CI 40624184384 已成功但仅作历史，新准确 head 完整 CI 以原 PR 为准。输入一致性和新结果记录在同报告 `main630Integration`。
+
+维护者已明确授权复查后自动合并；本次正常同步 main `f66ee79af6b84ef64319891e82d7dc4e82985350`（含 #117/#136），保留上游身份与共享生命周期归位。本节原验证证据保留历史归属，当前守卫、打包及准确新 head CI / 自动合并状态以原 PR 为准，不绕过检查或保护。
+
 ## 2026-10-27 改枪 M2：工作台、预设、美术、详情与商店、全流程检查（#106）
 
 `feat/gunsmith-m2` / [PR #106](https://github.com/xuys2025/escape-bincov/pull/106)（草稿），已同步 main `0d20857`。本日合入暂停的 M2-03/04/11/13 分支，并完成 M2-05～08、M2-10、M2-12、M2-14；M2-15（维护者试玩、合入）待办。
@@ -22,9 +113,35 @@
 
 存档格式、版本、时钟和其他规则不变。本机结果和截图见 PR 正文与 `docs/tasks/raid-equip-slot/`。未做：真机、真人手感。和 #106（改枪 M2，草稿）在 `inventory.ts` 详情两行、`runtime.ts` 的 `equipItem` 会有文本冲突，谁后合谁解。
 
+## 2026-10-28 资源报告消费校验续作（PR #116）
+
+继续原分支 `fix/resource-report-validation` / [PR #116](https://github.com/xuys2025/escape-bincov/pull/116)，原 head `902a449ccf34d817a41a7260f30eb55bf3779239`，先正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`，本次再正常同步共同截止 main `630e68f517edea34bfbcc548473897bd36bdfa08`。只改两份 review CLI 的输入消费边界与纯 Node 回归，不改游戏、算法、阈值或采样器；#111 的 rounds 与 #118 的堆输入各由原 PR 承接，#32 F20 仍 PARTIAL。
+
+旧 main CLI 实际接受 13 类反例：重复轮次、缺 release/quad 身份、null/巨大 heap、缺 table/type/label、字符串 live、重复槽位键和缺释放观察。原 PR 已拒绝其中七类，本轮补全另六类：在过滤前验证 table；摘要与槽位检查各自消费的键/布尔值并拒绝表内重复身份；live 槽位要求用于身份输出的 type/label，null 占位继续无需这些字段；freed 分支仅要求被复制的 scene/parked 属性存在，保留 null 和原值，不扩展为深层 schema。identity-probe 仅检查用于 added/removed 的纹理键；其他状态与附件原样保留。
+
+本次 Windows / Node 24.22.1 / pnpm 11.19.0：13 项真实 CLI 回归通过（含逐项字段矩阵、晚到的非法 probe 在写任何报告前拒绝、已有输出不被覆盖、合法 1 轮 partial 与 null 占位）。同一输入对比 main 旧 CLI：普通值、MAX_SAFE_INTEGER 和 0/上界交替三组共 39 份摘要输出逐字节一致；两组有/无 null 占位的槽位输出也逐字节一致。13 类反例旧 CLI 均 exit 0，修复后均 exit 1。原始证据保留在忽略的 `test-results/pr116/`。前次集成提交 `04c4218` 的完整 `pnpm test` 1022/1022、`pnpm check:ci` 90/90 与打包均通过。本次同步后实际 `check:ci` 98/98（含重跑 CLI 13 项）、严格打包通过；游戏/测试/依赖与两 CLI/helper/测试/producer 输入逐字节未变，复用该提交的 1022 单测及 41 文件对照，不重跑旧反例。重新生成 HTML/portable/web 的 SHA-256 分别为 `f3b7c3e1...` / `66a0d6f2...` / `cc311e1d...`，均与前次逐字节相同；证明和新日志在原证据目录。相对截止 main 的 `git diff --check` 通过。准确最终 head 与远端完整 CI 在原 PR 更新，不引用 10-25 旧 CI 代替。
+
+本地未运行浏览器、trend、实际 60 轮或堆采样，不宣称资源/F20 签收。代码父审与本机完整验证已通过，继续原 PR 正常提交推送并核对准确 head 完整 CI；仍为 draft，未转 Ready、未合并或发布。
+
+维护者已明确授权复查后自动合并；本次正常同步 main `f66ee79af6b84ef64319891e82d7dc4e82985350`（含 #117/#136），保留上游身份与共享生命周期归位。本节原验证证据保留历史归属，当前守卫、打包及准确新 head CI / 自动合并状态以原 PR 为准，不绕过检查或保护。
+
 ## 2026-10-27 #115：行动背包有限服务同步 main（续作）
 
 维护者 10-27 要求查看 #115 去向并合入后再做 #26 F15。#115 自 10-25 起无人续作、无评论，准确 head `3e1047b` 当时 CI 全过。本次在隔离工作树把 main `86add10`（#126、#127 等已合入）合进原分支：源码自动合并，只有本文件冲突，保留双方小节。实现和接口不变；同步后的验证结果见 PR 正文。F15 另由 PR #129 承接（基于本分支）。10-27 晚 #128（F14）合入后，再把 main `8b59019` 合进来一次，同样只有本文件冲突，保留双方小节。
+
+## 2026-10-28 Shader cache 快照消费字段校验（PR #118，`fix/heap-cache-input`）
+
+复用 [PR #118](https://github.com/xuys2025/escape-bincov/pull/118)，续作前 head `039bac0d7e27905857ac989b2f6e9bc061f547dc`。本轮先正常合入 main `03ea26198259fa66ee7a39c32c06466a1545e76f`（`3613b04`），交付 head `bb507f1` 的完整 CI [40624444343](https://github.com/xuys2025/escape-bincov/actions/runs/40624444343) 已通过。main 新进 #134 后，再正常合入共同截止点 `630e68f517edea34bfbcc548473897bd36bdfa08`；只在本文件顶部冲突并保留双方小节，#134 的架构工具、分类与入口完整保留；准确交付 head 与远程检查见原 PR。职责仍是 #32/#60 的 shader-cache review 分析器输入校验，与 #116 station 报告消费字段校验分开。
+
+原脚本把 shader string 的 null `self_size` 加成零：最小图 cycle-30 应有 80 bytes，旧 CLI 仍 exit 0 并写 `newRetainedBytes: 0`。现在 [`validateSnapshot`](scripts/sol-heap-cache-inspect.mjs) 只校验实际消费的 flat-table 字段：缺失/重复字段、类型与表索引、不完整行、非安全整数 id/bytes、重复 id，以及 cycle-30 incoming edge 计数/偏移/命名；`sumBytes` 拒绝不精确求和。只在所有消费校验和报告准备成功后写 `shader-cache.json`，拒绝时保留已有报告字节。未消费的 metadata、额外列/类型允许，cycle-10 不要求未消费的 edge 图。不做完整 V8 schema 或业务内存预算校验。
+
+本轮 [CLI 测试](scripts/ci/heap-cache-input.test.mjs) 从原五组扩成十组：新增已有报告保留、重复字段、坏表/identity、edge_count 求和溢出、未消费 metadata/额外列与类型/空图、稳定 node id、weak/hidden edge、两端 MAX_SAFE_INTEGER 精确字节和、七跳边界与十二样本截断。原五组在当前 main 旧脚本实际为 1 通过/4 失败；候选扩展十组实际 10/10，不把两者写成同一测试集。合法合成图新旧报告除生成时间外所有字段 deepEqual。
+
+Node v24.22.1 本轮实际生成两份 V8 快照（5,210,690 / 5,211,160 bytes），候选 CLI exit 0，新增人工字符串 2 节点/176 bytes、3 owner paths。这只是 Node 人工字符串图的格式兼容证据，不是浏览器/游戏 shader 泄漏或 F20 签收。原始快照、采集脚本和日志只在忽略的 `test-results/pr118/`；首轮未扁平化人工字符串只得到零匹配，已修 fixture 重新捕获并核对非零观察。没有变更分析算法、阈值、游戏、历史证据或测试分类。
+
+此前 `bb507f1` 已实际通过完整 `pnpm test` 1022/1022（63.87 秒）、`pnpm check:ci` 87/87、`pnpm package`、CLI 十组与入口文档三组合跑 13/13，且其完整 CI 已通过。合入 #134 时逐字节核对本任务生产脚本、十组 CLI 测试与锁文件不变，依赖声明和 test/check:ci/package/build 命令不变，游戏 src/assets/tests 不变；1022 单测与真实快照兼容证据按同代码复用，不声称重新采样。当前合成树已重新实际通过 `pnpm check:ci` 95/95（18.56 秒，含 CLI 十组）、`pnpm package` 与 `git diff --check`，三产品 SHA-256/字节数与此前及 main 一致。新日志为 `test-results/pr118/check-ci-630.log`、`package-630.log`，输入核对与三哈希为 `merge-630-inputs.json`、`product-hashes-630.json`；生成物不提交。首次本地输入比对发现测试工作副本 mixed 换行，归一为已提交 LF 后字节一致；冲突解决前误启动的一次守卫日志仅留 before-resolution，不作为当前验证。未另跑本机游戏单测/浏览器、游戏堆采样、trend 或 60 轮/F20，不关闭 #32/#60；新 head 完整 CI 以原 PR 实时链接为准，旧成功不代表新 head。已 Ready，未启用自动合并、未合并或发布。
+
+维护者已明确授权复查后自动合并；本次正常同步 main `f66ee79af6b84ef64319891e82d7dc4e82985350`（含 #117/#136），保留上游身份与共享生命周期归位。本节原验证证据保留历史归属，当前守卫、打包及准确新 head CI / 自动合并状态以原 PR 为准，不绕过检查或保护。
 
 ## 2026-10-27 #26 F14：商场里没揭示的房间压暗（PR #128）
 
@@ -118,6 +235,16 @@
 原实现的 CI Node 测试启动真实 CLI，以不存在的 HTML 为前置哨兵：非法轮数必须先报参数错误且不创建输出目录；默认和合法轮数只走到原 HTML 前置，不启动浏览器。未执行六十轮、缩短轮数浏览器或 F20 签收。10-25 历史验证：`pnpm test` 874/874、`pnpm check:ci` 67/67 与 `pnpm package` 全部通过；任务入口文档与 `git diff --check` 通过。打包 HTML、portable/web ZIP 分别保持主线哈希 `b309e11f…`、`ec356f01…`、`854bc3cd…`。首次受限沙箱的 Git 子进程报 EPERM，按环境允许方式重验通过，不改断言。原交付在 [PR #111](https://github.com/xuys2025/escape-bincov/pull/111) 保持，不另建同目标 PR。
 
 10-28 维护者授权继续找简单任务后，在本聊天管理的隔离工作树续作原 head `a379337fe369b0f0a8b719e23d5adce0ff30b50f`，正常合入 main `b5bd63b7896b3b0697d4ba38d02d000e78903047`。仅任务清单、交接和脚本分类表冲突：保留主线 #112/#114 的登记，新增参数 helper 为 support，trend 继续 review。没有切换主检出的 M3 分支。离线依赖缓存缺包，按 frozen lockfile 从官方 npm 源安装后验证，锁文件和依赖声明未改。Windows 10 / Node 24.22.1 / pnpm 11.19.0：同一真实 CLI 回归在主线为 2/3（一项预期失败，非法轮数仍先读缺失 HTML），候选 3/3；包含 13 组非法参数与 4 组合法/默认 CLI 输入，不启动浏览器。完整单测 1020/1020、CI 守卫 80/80、严格打包通过。HTML SHA-256 `cd6aed02e003c2eab97ab2705633476333cd13433f6142a2271fa230e8675708`，游戏源码、素材和构建输入相对该 main 无差异，生成物不提交。准确 head 与完整 CI 见原 PR；未运行六十轮资源诊断或 F20，不扩大签收，未合并或发布。
+
+10-29 按维护者“检查并完成111”续作原 head `1c613947be40b7fd6ce494b5702fd9cae05a44dc`，正常合入 main `275fafd77b1574938ecc0409ab405b77850359c1`。任务清单、交接、脚本分类三处冲突均保留双方更新，新增的 `source-graph.mjs`、`resource-report-input.mjs` 登记保留；复查原参数修复无需补改。Windows / Node 24.19.0 / pnpm 11.19.0：frozen lockfile 安装、1056/1056 单测、113/113 工程守卫（含3项参数回归）和严格打包全部通过；最新 main 原 CLI 的相同回归为2通过/1预期失败，仍先报缺失HTML，候选覆盖13组非法和4组合法/默认CLI输入。HTML SHA-256 `a190498102bdf579ed82b70627ea2c1e36ce339ac76881db85e4977a99c21c45`，便携ZIP 6,035,864字节；游戏源码、素材、依赖与构建规则相对该main无差异，生成物不提交。准确新head与远端完整CI见原PR；未执行资源采样/F20，仍需维护者明确授权后合并。
+
+## 2026-10-28 #60 D8：失焦后第一次按键恢复（续作 PR #107）
+
+沿原分支 `fix/first-key-after-blur` / [PR #107](https://github.com/xuys2025/escape-bincov/pull/107) 从 head `a169e7a5d5c984a74fb94291c4bbfa10d444fcfa` 续作，正常合入已接受 main `efe2bede6af0ed33fec065a26755e1f8ff7d0256`；保留 M2、#114、#131 与双方交接，没有覆盖其他工作树。`InputState.key` 区分新按与连发，只解除本键抑制；宿主 Shift 状态观察不复活旧冲刺，E 关闭面板仍直接返回。原新按恢复测试扩到 M2 的 F/G 命令。
+
+本轮负对照基线 `b5bd63b`：输入 12 通过 / 1 预期失败（首按 W 为 0）；两档真实键鼠首按 D 均在原 20 秒移动等待处超时，页面正常且无异常/外部请求。最新组合实际通过：输入 13/13、全量单测 1022/1022、工程守卫 77/77、严格打包、键鼠 12/12；两档首按立即移动、松开后停止。双尺寸截图与带制品/源码哈希的断言记录已审阅并保留，入口见 [D8 摘要](docs/tasks/audit-contracts.md#d8-失焦后第一次按键恢复)。搜刮、触屏和准确 head CI 结果以原 PR 验证表为准。生成物不提交。
+
+10-28 维护者授权自行检查、无问题后合并。复查确认没有未解决审阅意见；正常合入最新 main `3b61d52`（#130），无冲突，输入/宿主与回归源码未变。组合实际通过 1022 单测、77 工程守卫、严格打包和键鼠 12/12；HTML SHA-256 `f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb`，新构建证据补在原 JSON 的 `mergeCandidate`，旧截图仍对应 `9389ff9`。自动合并约定按要求记入 AGENTS；待原 PR 准确 head 必需检查通过后由平台合入，最终合并号和后续状态见原 PR。#60 其他事项开放；真实系统切窗、真机与真人手感未签收，发布仍需主线 CI 通过。
 
 ## 2026-10-24 打包产物改由 CI 构建和发布（`ci/no-committed-builds`）
 
@@ -260,6 +387,10 @@ EN-13 接入每五种子之一的头目＋两护卫，替换已有名册三人�
 - 2026-10-24 · [县域选图界面 / #82](docs/tasks/county-map-select.md)：`feat/county-map-select` / PR #91；十二地区战术地图、两处现有入口可出击、十区暂未开发。[Opus 视觉深化](docs/tasks/county-map-select.md#opus-视觉深化2026-10-24)：先正常合并 main（#89、#90、#92、#93、#94）并重建字体子集与生成物；地图固定 3:2（容器查询单位适配，最多裁 6%），标记钉在地标上、标签放一侧；选中时局部点亮、准星滑动锁定（`CSS.registerProperty`）、路线沿公路绘制；十二张插图接入区域情报；出发按钮常驻底部；出击面板由 `morph.ts` 就地更新，焦点、种子与过渡在重绘中保留。`test:raid-default` R10 扩充、新增 R11 与 `tests/deploy-map.test.ts`。真机与真人观感未验，额外训练 E4 记录见任务文档；准确 head / CI 见 PR，新增关卡继续归 #82。
 
 当前任务从 [WORK-QUEUE 顶部](docs/WORK-QUEUE.md) 和相关 PR 的最新 head/检查接手。读代码先用 [CODEMAP](docs/CODEMAP.md)；每个在途交付维护一份[短摘要](docs/TASK-HANDOFF-TEMPLATE.md)，不把本文件全部放入默认上下文。
+
+- 2026-10-29 · [PR #95](https://github.com/xuys2025/escape-bincov/pull/95) 复核：最新 main 的 W12/W13 仍可能在实际落幕前读取文案，修复有必要，维护者已明确授权完成验证后合并。沿原 `fix/coast-outro-checks` 正常同步 main `ae177b4`，保留双方历史及任务登记；正式代码差异仍只有两处等待。首轮完整手动套件 53/53、延迟与两个负对照重新验证，见 [CI 原记录](docs/CI.md#手动落幕检查的时序)；最终组合的复验、准确 head CI 与实际合并状态统一维护在原 PR。游戏、存档、离线及原检查断言不变，不替代 F20 或真机签收。
+
+- 2026-10-28 · [#61 手动落幕检查](docs/CI.md#手动落幕检查的时序)（[原 PR #95](https://github.com/xuys2025/escape-bincov/pull/95)，`fix/coast-outro-checks`）：从原 head `7176bee` 正常合入 main `0f73a67386bac196b87c983668295be6d1a99f1e`，保留双方记录与 #112/#114 检查登记。正式变更仍只有 W12/W13 等实际落幕再读文案，游戏源码/素材/依赖与 main 相同。Windows / Node 24.22.1 / pnpm 11.19.0 / Chrome 156.0.8078.49：1022 单测、77 守卫、严格打包、完整 coast-sample 53/53 通过。600 ms 延迟对照旧等待 25/26（仅 W13 过早读 null）、新等待 26/26；移除标记与错误文案各 25/26，仅原 W13 超时/断言失败，四组均无页面异常或外部请求。HTML SHA-256 `f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb`，日志在忽略目录 `test-results/pr95/`。旧 Linux 自动暂停首败保留在 CI 说明的历史段；完整套件仍为手动，准确 head CI 和待审状态见原 PR，未获本任务合并授权。
 
 - 2026-10-24 · 地图边瞄准偏转（`fix/aim-map-edge`，起点 main `f73e9de`；改枪 M0-07 原型发现，见 [#80](https://github.com/xuys2025/escape-bincov/issues/80)，M0 评审决定单独修）：
   - **问题**：按住右键精瞄、镜头被地图边挡住时，夹紧只卡住前探的一个轴，另一个轴照常缓动，光标不动瞄准也转约 1 秒。主线上试枪场射击线 1280×720 测得 8.47°，1920×1080 3.6–3.7°；居民楼楼层比画面窄，同样会转。#39 的检查都在空地上。

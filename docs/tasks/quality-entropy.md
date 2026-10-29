@@ -231,3 +231,83 @@ CI 自测失败的 1 项是 `policy.test.mjs:199` 写死 `C:/Program Files/Git/b
 
 - **F20 仍是 PARTIAL**，归 #32。诊断能进入流程，不等于 F20 总堆通过；本次只跑了默认 20 轮，没有跑严格 60 轮。`HTMLCanvasElement` 7→8 是间歇出现的，两个堆诊断都会遇到（7 次里 4 次），原因未归因，交 F20 调查；本 PR 不改断言和判定条件。
 - 两个堆诊断工作负载相同，默认输出目录都是 `test-results/coast-sample/heap`，后跑的覆盖先跑的；两者是否合并、`sol-r6-audio-controls` 是否保留（它对同一份源码也会越过 ±20% 门槛），归 Q-E08。全部脚本的用途分类也仍归 Q-E08。
+
+## Q-E04 提交后的发布失败
+
+2026-10-28，`codex/transaction-failure-phases` 从 main `0f73a67386bac196b87c983668295be6d1a99f1e` 开始；[开工登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553)。承接 [PR #137](https://github.com/xuys2025/escape-bincov/pull/137)，实现及浏览器证据提交 `e703f14dae521ea91951f61c533581558885f42e`；最终 head/CI 以 PR 为准。与 #134 架构门禁、公共生命周期归位各自验收，#60 总单保持开放。
+
+原代码反例：挂接 expansion 端口只在首次 restore 抛错；`mutate` 扣 20 现金的那一次 setItem 已成功写出 680，内存却被回滚为 700。另一次始终抛错的注入会在错误回滚中再次抛出。原实现返回克隆也位于 `RecoveryStore.commit` 的 setItem 之后，扩展事务还执行重复 restore。
+
+本轮让 Store 在写入前完成返回副本分配；Session 区分准备、存储、发布阶段。已落盘发布失败使用独立 `publish-failed` 结果，消费事务票据，保留已提交进度，不回滚、不继续运行、不重复写；页面提示导出后刷新。`pendingSettlement` 保留到刷新或导出流程，但备份以已落盘完整记录为准。Runtime 仍能渲染故障画面；据点不会因 revision 改变补发成功事件。真实冲突继续优先展示并阻止写入。无新存档格式、存储键、依赖或离线网络请求。
+
+入口：[Session](../../src/session.ts)、[Store](../../src/recovery-store.ts)、[定向故障回归](../../tests/session-publication.test.ts)、[浏览器验收](../../scripts/save-browser-test.mjs)。成功路径保险箱三方一致性属于契约测试，未声称它是额外复现的旧缺陷。
+
+据点 `transaction` / `enter` / `retrySave` / `importBackup` / `deploy` / `returnToBase` 的提交后时钟与 `sync` 也走 `publishCommitted` 同步保护；外部 revision 同步异常不能再进入可重做状态。一次性时钟反例在修复前实际抛错，修复后停止后续写入。成功发布副本与保留提交记录隔离，后续候选回滚不能污染故障恢复来源。
+
+浏览器发现并修正：已经打开的暂停面板在保存阶段变化时未重绘，曾只显示错误 toast 而缺刷新按钮；现按存储状态更新该面板，正式用例保留“先暂停，再注入”的前置。第一轮院子选择器命中隐藏 alarm，随后改为只读可见节点；没有放宽结果、下载或刷新断言。
+
+**最终本地验证。** 正常合入 main `630e68f517edea34bfbcc548473897bd36bdfa08`（#134）后，产品源码 head `cf5e49eb0a940234ea189d2cc534a6bfc6ca2709`：`pnpm test` **1041/1041**（含本轮 19 项）、`pnpm check:ci` **85/85**、`pnpm package` 通过。随后仅补新浏览器 context 的 console-error 观测，再跑完整 `pnpm test:save-browser` **17/17**：原 9 项 + 1280×720 / 1920×1080 下页签、院子、检查点、终局四场景；每项实际写入一次，重试与继续操作零额外写，导出 JSON 等于落盘 record，点击刷新后 profile 一致。每个新增 context 都监听 request，每个新增 page 都监听 pageerror 与 console error；最终异常/控制台错误/外网请求均为 **0**。报告与八张实际截图在 [transaction-phases](transaction-phases/save-browser-report.json)，故障只由脚本注入，没有增加正常入口测试全局。截图已目视检查，院子等待弹窗动画结束后截取。
+
+最终 HTML SHA-256：`5724f277b7fd27d1d0bd4dbdad2b7e932b6c97e242a52984b62605036c2d3079`。Windows / Node 24.22.1 / pnpm 11.19.0 / Chrome 156.0.8078.49；链接现有依赖，设置 `pnpm_config_verify_deps_before_run=false`，避免 pnpm 自动重装 junction。首次未设置时 tsc 命令在运行前被 pnpm 依赖检查阻断，未记为类型失败。
+
+| 故障画面 | 1280×720 | 1920×1080 |
+| --- | --- | --- |
+| 页签 | [截图](transaction-phases/publication-tabs-1280.png) | [截图](transaction-phases/publication-tabs-1920.png) |
+| 院子 | [截图](transaction-phases/publication-yard-1280.png) | [截图](transaction-phases/publication-yard-1920.png) |
+| 检查点（已暂停） | [截图](transaction-phases/publication-checkpoint-1280.png) | [截图](transaction-phases/publication-checkpoint-1920.png) |
+| 终局 | [截图](transaction-phases/publication-terminal-1280.png) | [截图](transaction-phases/publication-terminal-1920.png) |
+
+**#117 → #136 → #137 串联集成（2026-10-28）。** 按主代理授权，正常合入 #136 准确候选 `07babfa8e6d4ae5f77d0b9f58bacd446942122ac`（已含 #117 `4ba5b72`），merge/source head 为 `a46cfd8798c9b9f3c7c7345a456647956e308793`。只解决三处共同文档冲突；共同 host/ui 自动合并保留本轮逻辑并更新 Scope 路径。#117 内容身份源码/测试/夹具和 #136 生命周期核心/架构守卫逐字节等于该候选，没有另改逻辑。**PR base 保持 main，必须先 #117、再 #136、最后 #137；三项各自等待准确集成 head 完整 CI。**
+
+此集成重新通过 `pnpm test` **1045/1045**、`pnpm check:ci` **86/86**、`pnpm package` 与 `pnpm test:save-browser` **17/17**；页面异常/console error/外网请求仍为 0。新 HTML SHA-256：`ae43f659a1bc291f34d8672456fdb54014853763fba29181421ea118f4c369bc`。新[完整浏览器报告](transaction-phases/integrated/save-browser-report.json)和两尺寸八张截图放在独立 `transaction-phases/integrated/`，全部目视通过；上方旧报告/截图/哈希保留原提交归属，不冒充新集成。新截图示例：[院子1280](transaction-phases/integrated/publication-yard-1280.png)、[终局1920](transaction-phases/integrated/publication-terminal-1920.png)。
+
+未验：真人、真机、长时性能；准确 head CI 待提交后运行。此项修复异常语义，不宣称全库减熵或 #60 全部完成。
+**CI S6 补修（2026-10-28）。** 原 head `6b180fe7` 的 CI 40626741013 仅 batch-7 的 `station-reset` S6 等待冲突 toast 超时（其余7组、含17项存档浏览器均通过）；本地原样14/14通过，未复现产品故障。该提示3.1秒后删除，用例刚打开过第二页；测试改为先恢复前台、在点击前用页面内 MutationObserver 记录新出现且可见的精确提示。仍验证真实点击、持久冲突弹框、原始存档/备份字节和写入/下载次数；额外确认提示消失后观测记录及冲突弹框仍存在，没有延长超时、放宽结果或改变游戏逻辑。正常合入最新 main `d27306b4a3fceade00c025ffb4a6060bb3f35ef0`，保留 #110/#116；1048/1048 单测、99/99 工程守卫、package、完整 station-reset 14/14 通过。新的准确 head 完整 CI 待推送后运行，旧失败不记为通过。
+
+## Q-E02 公共视图生命周期归位
+
+2026-10-28，[PR #136](https://github.com/xuys2025/escape-bincov/pull/136)，分支 `codex/shared-view-lifecycle`，起点已接受 main `0f73a67386bac196b87c983668295be6d1a99f1e`；[接手范围](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459328969)。这是 #115 背包有限服务之外、#134 架构工具之外的独立生命周期交付；SAMPLE_AREA/raid-areas 内容身份仍留 #60 候选，存档、规则、画面与素材没有改动。
+
+- `view-lifecycle/scope.ts` 统一拥有原 `Scope` 与 `lifecycle` 对象；院子、行动和 `pixi-app.ts` 的所有引用直接指向这一模块。没有兼容转发或第二份计数。
+- `view-lifecycle/renderer-lifetime.ts` 保持原页面级 Pixi 程序、着色器缓存和注册副作用；`pixi-app.ts` 仍在初始化前显式导入，两个场景从同一模块取 `releaseManagedSlots`。无 barrel，DOM 作用域不间接引入 Pixi 注册。
+- 全部生产和单测引用已迁移；现役脚本没有引用旧路径，页面池探针仍在 `pixi-app.ts`。源码旁保留释放/上下文恢复细节，导航只定位所有者与检查入口。
+- 正常合入 #134 后，`source-graph.mjs` 的核心边界匹配纳入 `view-lifecycle`；纯类型借用反例故意没有 DOM/Pixi 引用，证明新目录本身仍在核心之外。临时去掉匹配时唯一断言有效失败，finally 恢复原字节。
+
+本地 Windows / Node 24.22.1 / pnpm 11.19.0 / Chrome 156.0.8078.49，AMD Radeon RX 6600 / ANGLE D3D11；浏览器按协调窗口串行运行。[实际证据](shared-view-lifecycle-verification.json)保留原首败、通过项与制品哈希。
+
+| 检查 | 实际结果 |
+| --- | --- |
+| 全量单测 / 工程守卫 / 严格打包 | 同步 #134 前 1022/1022、77/77、打包通过；正常合入 `630e68f` 并维护路径后重新通过 1022/1022、86/86 与 `pnpm package`，最终四份制品仍与原 main 构建同字节 |
+| `test:coast-render-targets` | 5/5；20 次实际 resize、6 次真实 context restore、像素/键盘、结算及共享 renderer 院子↔行动重挂 |
+| `station-context-program` | 1280×720、1920×1080 各 8/8；真实恢复、8/16 能力切换、程序复用及恢复后键盘；原工具仍归用途清单 review，不擅自提升为 CI 门禁 |
+| `test:station-capability` | 4/4；probe/idle/remount/trip 各三轮 (8,8,16,16)，真实上下文丢失/恢复与模拟能力查询；原生起点 16，着色器监听/计数稳定 |
+| 真实 main 基线构建 | 从最新已接受 `03ea261` 用 git archive 取原源码/脚本/tsconfig，真实路径 build/package；两份 HTML 和两份 ZIP 与本轮逐字节相同，`src` tree 与起点 `0f73a67` 相同 |
+| 待 review 的旧 `coast-lifecycle-test` | 本轮完整 1/5；显式 test=1 Runtime 冻结/恢复/释放通过（host/runtime/view/targets 回收、空 stage、停 ticker、唯一计数归零）；普通入口四项等旧按钮超时，未进入故障注入边界 |
+| 同一旧工具 main 基线 | 原首项同样在旧院子出击按钮等 20 秒超时；按共享浏览器协调在首败后停止精确进程及子树，其余基线项未运行/中断，未冒领通过 |
+
+通过的渲染/能力专项页面异常和外部请求均为 0。HTML SHA-256 `f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb`；ZIP 哈希见实际证据。已正常合入 main `630e68f517edea34bfbcc548473897bd36bdfa08`（#134），保留双方文档；新目录纯类型边界正反例已通过。准确 head CI 待提交后核对，不修改旧工具断言或接管其修复。
+
+首次 `pnpm test` 因 pnpm 自动安装试图重建共享 node_modules junction，在运行测试前以 `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY` 停止。改用现有已装依赖并显式设置 `pnpm_config_verify_deps_before_run=false`，没有允许删除共享目录或改锁文件。
+
+**#117 候选串联集成（2026-10-28）。** 按主代理明确授权，在原分支正常合入 `4ba5b72c70983f3eefe4affdd31e2d674b3223a3`，fetch 后确认 `origin/fix/content-identity` 同一提交；merge 为 `9a6212f63905fbc6622f6c8ba6891d543b58ee7b`。两处共同文档冲突保留全部内容；#117 的三个源码文件、测试及两份基线夹具与候选逐字节相同，没有修改。**PR #136 暂含 #117；必须先 #117 合入 main，再合 #136。**
+
+该集成重新通过 1026/1026 单测、86/86 守卫及 package。以明确标为候选的同一 `4ba5b72` 原源码 archive build/package 对照，两份 HTML、两份 ZIP 全部逐字节相同；HTML SHA-256 `bdd50decc7b30d8e857a1e58c8c1834de0761195fa08de64ce8c0df348a7fc25`。这份比较不冒充已接受 main：当时最新已接受 main 仍是 `630e68f`，已 fetch 确认它是被测集成的祖先。此前本地浏览器仍只证明原生命周期 `14df8ce` 及其制品，不声称本地重跑新集成浏览器；最终完整 CI 在推送后另核对。候选记录见同一实际证据的 `candidate117Integration`。
+
+没有真机、真人观感或 F20 新签收；本阶段未合并/发布，#60 其他候选与在途 PR 保持原归属。
+
+## 2026-10-28 架构门禁与按文件查询
+
+本轮全库扫描登记在 [#60](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6449666799)，从 main `3b61d52e898459f3e197584ae202285e7ade65e2` 建立独立分支 `codex/entropy-architecture`。原主检出改枪 M3 保留；#107/#110/#117 和资源诊断等已有 PR 继续原归属。
+
+**扫描口径。** 盘点 Git 跟踪的 src 190、tests 155、scripts 193、docs 2065、assets 1618、.github 3 个文件；全部 181 个非声明 TS 源码模块做 AST 扫描，重点追读存档、Runtime、视图与工具边界。图中有 1308 条静态值形式边、185 条类型边、13 条动态边。素材/历史附件只做盘点；未逐图验收或声称全玩法审计完成。按文件查询由工具实时生成，计数只描述本次基线。
+
+**本 PR 的完整交付。** [source-graph.mjs](../../scripts/source-graph.mjs) 同时供 `pnpm architecture` 和 [source-health](../../scripts/ci/source-health.test.mjs) 使用；区分静态值形式、类型与动态加载，解析资源叶节点，未解析目标和非字面量加载显式失败。循环检查包含动态边和自环，内联 type re-export 不产生运行时边。保留原导出使用、纯规则闭集检查；沿八个核心入口及其类型/值依赖自动约束当前 61 个模块，新增 helper 会随闭包进入守卫。
+
+核心依赖禁止视图、组装层、资产和外部包，并检查 DOM/浏览器全局引用。现有 TextEncoder 编码与注入的 LockManager 类型/方法按源码契约允许；直接读取 navigator 或存储全局仍拒绝。规则政策与静态分析限制写在模块旁，不增加全仓人工分层表。CLI 只查询 src 关系，类型边与运行时传递依赖分别列出；值形式导入保守计入，动态表达式、反射与任意调用不属于调用图保证。
+
+**可复验入口。** `pnpm architecture src/session.ts`，或 `pnpm --silent architecture src/session.ts --json`；查看全库摘要时省略文件。CI 的真实临时文件正反例覆盖动态环、纯类型回边、空/混合导出、require/本地同名函数、资源/缺失目标、间接视图/DOM、别名和存储访问，以及 CLI 非法参数。
+
+**实际验证（Windows / Node 24.22.1 / pnpm 11.19.0）。** 全单测 1020/1020、工程守卫 85/85、package 通过；新增图/CLI 6 项加现役源码守卫 5 项共 11 项专项通过。临时在 balance 动态导入 scene，旧守卫 3/3 放行，新守卫在循环、纯规则和无视图边界拒绝；脚本在 finally 还原原字节。开发时的 LockManager 合并声明误报与 Node/browser 同名 localStorage 漏检均由正反例修正。最终入口链接/差异检查通过。HTML SHA-256 为 `5623d98946aada792ba7bb7d299908eb7b6418222a95e9555fb3cd543a4f94c1`，portable/web 分别为 `49caa6da7e77228f094ccc349aa04c016213ccd93a5b3986e342755019c89c85` / `81c1e812ececc4e6ac45da2ce744fe037e9908f110e4bf39f1d274df24db7aa0`，三份与基线逐字节相同。原始日志在忽略目录 `test-results/entropy/`。本地浏览器、真机、F20 与性能未运行；准确 head 完整 CI 见承接 PR。只改工具和文档，游戏源码/素材/依赖锁保持基线。后续公共生命周期归位、事务失败分类、内容身份与文案分离按上述 issue 的原归属推进，未计为本 PR 已完成。
+
+
+**合并前复核（2026-10-28）。** 正常合入最新 main `0f73a67386bac196b87c983668295be6d1a99f1e`（#107）后，重新通过 1022/1022 单测、85/85 工程守卫和 package，`git diff --check origin/main` 通过，任务差异仍不含 src/assets/依赖锁。上面的三个制品哈希只对应原始基线 `3b61d52`，不冒充 #107 后的字节对照。独立代理完成源码与 11 项专项审阅，未发现阻塞项；集成版本准确 head 的 CI 和合并状态以 PR #134 为准。

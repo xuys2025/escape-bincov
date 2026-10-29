@@ -1,8 +1,8 @@
 import type { Texture } from 'pixi.js';
-import type { ActorKind } from '../raid-runtime/contract';
+import type { ActorKind, Rect } from '../raid-runtime/contract';
 import { Atlas } from './atlas';
 import { WALK_FRAMES, paintActorFrame, paintArm, paintCorpse, paintMuzzle, paintWeapon, type WeaponArt } from './art/actors';
-import { dithered, edge, rim, silhouette } from './art/paint';
+import { canvas, dithered, edge, rim, silhouette } from './art/paint';
 import { blob, paintCrate, paintExitDecal, paintLoot, pixel } from './art/props';
 import { solActorFrame, solCorpse, solWeapon, type SolArt } from './art/sol';
 import { gunsmithArt } from '../art/gunsmith-hooks';
@@ -34,6 +34,22 @@ export class Textures {
     if (level <= 0) return this.atlas.get(key);
     const k = `${key}|f${level}|${keepBottom}|${ox & 3},${oy & 3}`;
     return this.ensure(k, () => dithered(this.canvas(key), FADE_LEVELS[level], keepBottom, ox, oy));
+  }
+  /**
+   * An indoor wall piece (wall-display.ts), never dithered: the whole picture, or with `foot` only its own cell (the
+   * bottom 32 rows) painted with that 32x32 canvas; then the canvas-local `cut` rectangles cleared to alpha 0. Returns
+   * the atlas key, which is also the canvas the occlusion outline reads.
+   */
+  wallCut(key: string, foot: string | null, cut: readonly Rect[]): string {
+    if (!foot && !cut.length) return key;
+    const k = `${key}|cut:${foot ?? ''}|${cut.map(r => `${r.x},${r.y},${r.w},${r.h}`).join(';')}`;
+    this.ensure(k, () => {
+      const src = this.canvas(key), { c, g } = canvas(src.width, src.height);
+      if (foot) g.drawImage(this.canvas(foot), 0, src.height - 32); else g.drawImage(src, 0, 0);
+      for (const r of cut) g.clearRect(r.x, r.y, r.w, r.h);
+      return c;
+    });
+    return k;
   }
 
   private actorStyle(kind: ActorKind, variant?: string): string {

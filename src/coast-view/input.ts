@@ -31,10 +31,14 @@ export class InputState {
   private suppressedButtons = new Set<number>();
   private selected: string | null = null;
 
-  key(key: string, down: boolean) {
+  /** A non-repeat keydown is a fresh press, even if blur hid the preceding keyup. Keep repeats suppressed across panels. */
+  key(key: string, down: boolean, repeat = false) {
     key = key.toLowerCase();
     if (!down) { this.suppressedKeys.delete(key); this.keys.delete(key); return; }
-    if (this.suppressedKeys.has(key)) return;
+    if (this.suppressedKeys.has(key)) {
+      if (repeat) return;
+      this.suppressedKeys.delete(key);
+    }
     if (!this.keys.has(key) && ACTION_KEYS[key]) this.actions.add(ACTION_KEYS[key]);
     this.keys.add(key);
   }

@@ -1,18 +1,23 @@
 // Promote compact observations, never raw heap contents. Full local evidence remains hash-addressed.
+// Inputs are complete ordered 60-round raw trend reports, not an already compacted summary. PARTIAL stays PARTIAL.
 import {readFile,writeFile,mkdir,copyFile,readdir,stat} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
+import {validateResourceSummaryReport,validateResourceIdentityProbe} from './resource-report-input.mjs';
 const root=resolve(process.argv[2]??'test-results/astra-resource-r3');
-const out=resolve(process.argv[3]??'docs/station-yard/astra-resource-r3-20261010/evidence');await mkdir(out,{recursive:true});
+const out=resolve(process.argv[3]??'docs/station-yard/astra-resource-r3-20261010/evidence');
 const json=p=>readFile(p,'utf8').then(JSON.parse),write=(name,x)=>writeFile(resolve(out,name),JSON.stringify(x,null,2)+'\n');
+const modes=['remount','shared','context'];
+const reports=new Map(await Promise.all(modes.map(async mode=>[mode,validateResourceSummaryReport(await json(resolve(root,'long-'+mode,'report.json')),mode)])));
+const probe=validateResourceIdentityProbe(await json(resolve(root,'identity-probe','report.json')));
+await mkdir(out,{recursive:true});
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const mean=xs=>xs.reduce((a,b)=>a+b,0)/xs.length;
 const range=xs=>({min:Math.min(...xs),max:Math.max(...xs),first:xs[0],last:xs.at(-1)});
 const slope=xs=>{const x=xs.map((_,i)=>i+1),mx=mean(x),my=mean(xs);return x.reduce((n,v,i)=>n+(v-mx)*(xs[i]-my),0)/x.reduce((n,v)=>n+(v-mx)**2,0);};
 const summary={modes:{}};
-for(const mode of ['remount','shared','context']){
- const r=await json(resolve(root,'long-'+mode,'report.json'));
- if(r.fatal||r.rows.length!==60)throw Error(mode+' incomplete');
+for(const mode of modes){
+ const r=reports.get(mode);
  const heaps=r.rows.map(x=>x.counts.heap), keyHash=x=>hash(JSON.stringify(x.objects.textures.map(t=>t.key).sort()));
  const baselineHash=keyHash(r.baseline), resources={};
  for(const key of ['scene','wallFrameGroups','wallFrames','gpuTextures'])resources[key]=range(r.rows.map(x=>x.counts[key]));
@@ -32,7 +37,6 @@ for(const mode of ['remount','shared','context']){
  await write('long-'+mode+'.json',v);summary.modes[mode]={heap:v.heap,resources,checks,status:v.status,strictFailures:r.strictFailures.length,ownershipFailures:r.ownershipFailures.length};
 }
 await copyFile(resolve(root,'sol-r-repro','report.json'),resolve(out,'sol-r-repro.json'));
-const probe=await json(resolve(root,'identity-probe','report.json'));
 for(const name of ['cold','first-return','restore-1','restore-2','restore-3','final-remount'])await copyFile(resolve(root,'identity-probe',name+'-identities.json'),resolve(out,'identity-'+name+'.json'));
 await write('identity-summary.json',{status:probe.status,strictFailures:probe.strictFailures,firstAction:probe.firstAction,release:probe.release,
  added:probe.firstReturn.objects.textures.filter(t=>!probe.initial.objects.textures.some(s=>s.key===t.key)),removed:probe.initial.objects.textures.filter(t=>!probe.firstReturn.objects.textures.some(s=>s.key===t.key))});

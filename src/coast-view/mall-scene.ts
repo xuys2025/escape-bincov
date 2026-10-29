@@ -23,8 +23,8 @@ import type { Textures } from './textures';
 export type OccluderKind = 'wall' | 'door' | 'roof' | 'ceiling' | 'canopy' | 'lintel' | 'prop';
 /** A sprite that follows its owner's fade, visibility and culling: wall signs, aisle signs, emission overlays. */
 export interface Link { sprite: Sprite; key: string; emit: boolean }
-/** The part of an occluder the mall builder sets; the scene owns the rest. */
-export interface MallOccluder { sprite: Sprite; z: number; links?: Link[]; tintAt?: Point }
+/** The part of an occluder the mall builder sets; the scene owns the rest. `cell`: the map cell of a wall or header. */
+export interface MallOccluder { sprite: Sprite; z: number; links?: Link[]; tintAt?: Point; cell?: Point }
 export interface MallContext {
   tex: Textures;
   art: MallArt;
@@ -62,9 +62,12 @@ const keepOf = (asset: string, c: HTMLCanvasElement) => /stairs-down/.test(asset
 const glowOf = (asset: string) => /fridge|freezer/.test(asset) ? 0xbfe0ea : /exit/.test(asset) ? 0x7fe08f : /emergency/.test(asset) ? 0xe8f0e8
   : /floor-lamp/.test(asset) ? 0xf0c890 : /directory|pylon/.test(asset) ? 0xcfe5dc : 0x9fb0b8;
 
+/** The parts of a mall floor the dressing tables read. */
+export const mallDressMap = (m: MapDef): DressMap => ({ mapId: m.key.mapId, cells: m.cells, regions: m.regions, decorations: m.decorations, full: mallFullyDressed(m.key.layoutRevision) });
+
 /** Everything about a mall floor that depends only on the map and the samples. */
 export function mallDress(m: MapDef, art: MallArt, reduced: boolean): MallDress {
-  const dress: DressMap = { mapId: m.key.mapId, cells: m.cells, regions: m.regions, decorations: m.decorations, full: mallFullyDressed(m.key.layoutRevision) };
+  const dress = mallDressMap(m);
   const cols = m.cols, rows = m.rows, zones = new Uint8Array(cols * rows);
   for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) zones[y * cols + x] = ZONES.indexOf(mallZone(dress, x, y));
   const zoneAt = (x: number, y: number) => x < 0 || y < 0 || x >= cols || y >= rows ? 1 : zones[y * cols + x];
@@ -115,7 +118,9 @@ export function mallDress(m: MapDef, art: MallArt, reduced: boolean): MallDress 
       // No floor under the stairwell: the opening is dark wherever its sprite does not cover it.
       const ids = drop[i] || well || c === 'tide' ? [] : mallGround(dress, x, y), sample = mallCanvas(art, ids);
       floor[y].push(sample);
-      mat[y].push(drop[i] || well ? 'void' : c === 'tide' ? 'mud' : outdoor[i] ? 'concrete' : /wood|deck/.test(mallPick(art, ids) ?? '') ? 'wood' : 'tile');
+      const picked = mallPick(art, ids) ?? '';
+      mat[y].push(drop[i] || well ? 'void' : c === 'tide' ? 'mud' : /asphalt/.test(picked) ? 'asphalt' : outdoor[i] || /concrete/.test(picked) ? 'concrete'
+        : /wood|deck/.test(picked) ? 'wood' : 'tile');
     }
   }
   const W = cols * T, H = rows * T;
@@ -145,7 +150,7 @@ export function mallDress(m: MapDef, art: MallArt, reduced: boolean): MallDress 
     else if (/freezer/.test(p.asset)) light(p.x + 32, p.z + 8, 54, 0x7aa0aa, .32);
     else if (/floor-lamp/.test(p.asset)) light(p.x + 16, p.z - 16, 64, 0xc89a5a, .5);
     else if (/directory|pylon/.test(p.asset)) light(p.x + 16, p.z + 6, 40, 0x8fb8a8, .3);
-    else if (/furniture:vending/.test(p.asset)) light(p.x + 16, p.z + 10, 44, 0xb8c8d0, .34);
+    else if (/vending/.test(p.asset)) light(p.x + 16, p.z + 10, 44, 0xb8c8d0, .34);
   }
   const wallProps = resolve(mallWallProps(dress));
   for (const p of wallProps) {
@@ -263,14 +268,14 @@ export function buildMall(ctx: MallContext, d: MallDress) {
   for (const w of d.walls) {
     const key = `mall:wall:${w.cap}|${w.face}|${w.rail}|${w.link}|${w.edges}|${w.lift}`;
     tex.ensure(key, () => paintWallPiece(art, w));
-    // A cut-away wall keeps the cell it blocks solid (its bottom 32 rows), so a ghosted wall never reads as floor.
+    // A faded wall (outside the indoor rule) keeps the cell it blocks solid (its bottom 32 rows), so it never reads as floor.
     const y = w.y * T - w.lift, o = ctx.add(key, w.x * T, y, (w.y + 1) * T, 'wall', Math.min(32, T + w.lift));
-    o.tintAt = w.tint; owners.set(`${w.x},${w.y}`, o);
+    o.tintAt = w.tint; o.cell = { x: w.x, y: w.y }; owners.set(`${w.x},${w.y}`, o);
     if (w.face) glow(o, w.face, w.x * T, y + T);
   }
   for (const l of d.lintels) {
     const o = ctx.add(sample(l.asset), l.x * T, l.y * T - 48, (l.y + 1) * T + .05, 'lintel', 0);
-    o.tintAt = { x: l.x * T + 16, y: (l.y + 1) * T + 8 }; owners.set(`${l.x},${l.y}`, o);
+    o.tintAt = { x: l.x * T + 16, y: (l.y + 1) * T + 8 }; o.cell = { x: l.x, y: l.y }; owners.set(`${l.x},${l.y}`, o);
     glow(o, l.asset, l.x * T, l.y * T - 48);
   }
   for (const p of d.props) {

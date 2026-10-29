@@ -19,7 +19,7 @@
 
 [app.ts](../src/app.ts) 组装 `saveSession`、`hideoutRuntime`、音效和宿主引用（`coastSample`、`station`）。`SessionState` 是共享数据，调用者应在事务后重新读取 `save` / `loadout`，不要长期缓存可能被回滚或恢复替换的对象。
 
-新行动的公开端口和画面服务类型 `CoastHandle` / `CoastServices` 在 [raid-runtime/contract.ts](../src/raid-runtime/contract.ts)，[host.ts](../src/raid-runtime/host.ts) 绑定 Runtime 和事务服务并在工厂检查类型；据点端口在 [hideout-runtime/contract.ts](../src/hideout-runtime/contract.ts)。行动背包面板只收到有限服务：按需读取 detached 库存/装备投影，随身整理发三个值/UID 命令，适配器保留原 `SaveSession.mutate`；搜刮模式仍走容器事务，连 bag/safe 内整理也不绕过它。面板不持有 Session/SaveSession，不维护库存副本。尚非所有视图完全隔离：宿主与旧 UI 仍协调会话/路由，场景无关的 `Scope` / 渲染资源工具仍在 coast 目录。
+新行动的公开端口和画面服务类型 `CoastHandle` / `CoastServices` 在 [raid-runtime/contract.ts](../src/raid-runtime/contract.ts)，[host.ts](../src/raid-runtime/host.ts) 绑定 Runtime 和事务服务并在工厂检查类型；据点端口在 [hideout-runtime/contract.ts](../src/hideout-runtime/contract.ts)。行动背包面板只收到有限服务：按需读取 detached 库存/装备投影，随身整理发三个值/UID 命令，适配器保留原 `SaveSession.mutate`；搜刮模式仍走容器事务，连 bag/safe 内整理也不绕过它。面板不持有 Session/SaveSession，不维护库存副本。尚非所有视图完全隔离：宿主与旧 UI 仍协调会话/路由。场景无关的 DOM 资源作用域与唯一计数在 [view-lifecycle/scope.ts](../src/view-lifecycle/scope.ts)，页面级 Pixi 注册与渲染缓存在 [view-lifecycle/renderer-lifetime.ts](../src/view-lifecycle/renderer-lifetime.ts)；两者不导入场景或玩法，调用者直接导入，避免仅使用 `Scope` 时触发 Pixi 注册。
 
 行动期间区分三种状态：Runtime 的实时模拟、Session 最近提交后的检查点、失败后保留的候选。`captureExpansion()` 取得实时状态的独立副本；`session.expansion` 本身不随每个模拟子步更新。负重及上限由 Runtime 的只读服务提供，视图不能从最近检查点重新计算临时效果。编译期类型只约束调用端；外部 JSON 仍须严格运行时校验，字符串 ID 通过 `hasOwnStringKey` 拒绝原型键与数组隐式转换。
 
@@ -39,7 +39,7 @@
 | 结算 | `prepareSettlement` 冻结结果；`retrySettlement` 写入后发布 `result` | 保留 `pendingSettlement` / `pendingExpansion`，重试不重新发奖；未成功不得卸载唯一候选 |
 | 完整导入 | 严格解码和确认后调用 `importRecord`，经 `persist` 原子替换 | 写入失败保留旧记录；活动导入回菜单恢复，不重新出击 |
 
-事务回调为同步规则操作；不得在其中发网络请求、换场景或修改未参与回滚的外部对象。`MutationResult` 区分 `committed`、`rejected`、`blocked`、`save-failed`。UI 只在 `committed` 后发成功反馈，冲突与待结算状态不能当一般失败强行重试。
+事务回调为同步规则操作；不得在其中发网络请求、换场景或修改未参与回滚的外部对象。`MutationResult` 区分 `committed`、`rejected`、`blocked`、`save-failed` 与 `publish-failed`。UI 只在 `committed` 后发成功反馈，冲突与待结算状态不能当一般失败强行重试。上表的回滚/重试只适用于写入前失败；`publish-failed` 已落盘，当前页停止操作，导出已提交记录后刷新。阶段、返回值及端口失败的契约以 [SaveSession](../src/session.ts) 的 `persist` / `requiresReload` / `mutate` 为准。
 
 现有商店有两条适配路径，但共用 `Shop.settleCartResult`：水产站 `RealHideoutRuntime.openShop` → `transaction`，旧页签 `checkout` → `SaveSession.mutate`。购物车 `place` 只改临时清单，`settle` 才提交；新增交易规则应放纯规则层，并检查两个调用端。领域层没有绕过购物车的单件买卖函数，新交易也不要另开结算路径。
 
@@ -71,10 +71,16 @@ profile/已结算备份版本、session/完整备份封套版本、`ExpansionSta
 
 多窗口保护由 `ownSession` 的页面生命周期锁和 `RecoveryStore.commit` 写前记录比对共同承担。`markConflict` 禁止后续持久化；窗口事件负责锁定画面并提示刷新/导出，不得用强制覆盖或改存档键消除冲突。
 
+## 可执行的依赖边界
+
+[source-graph.mjs](../scripts/source-graph.mjs) 的 `HEADLESS_ROOTS` 从规则、Session、存档编解码和两个 Runtime 入口展开类型与值依赖；[source-health](../scripts/ci/source-health.test.mjs) 阻止闭包引入视图、组装层、资源、外部包和浏览器全局。新 helper 自动跟随依赖进入检查，独立的新核心入口需登记根。既有 TextEncoder 编码与注入的 LockManager 端口允许；存储和页面访问仍由外层注入。
+
+全源码循环检查区分 type-only 与值形式导入，并纳入字面量动态加载和自环；未知目标/非字面量加载直接报告。查询与 CI 使用同一模型（[CODEMAP](CODEMAP.md) 的 `pnpm architecture`）；静态值形式导入保守计入，运行时反射和任意调用不在此模型内。原导出使用检查仍含 tests/scripts 使用者，查询里的消费者只统计 src。
+
 ## 维护与历史
 
 调用者必须知道的副作用、单位、提交点、引用失效和兼容条件贴在正式类型/方法旁；本页维护跨模块责任与格式边界，CODEMAP 维护定位路径，验收结果留在对应 PR/报告。价格、字段清单和全部函数签名不在三处重复。
 
-按职责和可验证边界拆分文件；只有代码变短、依赖仍共同写一组状态时，并未降低接手成本。当前只有一个行动 Runtime，存档 codec 与视图路由的已登记运行时 import 环已消除；背包已收敛到有限服务，事务失败分类、内容身份与文案分离等剩余事项继续按 #60 跟踪，不再按旧的“双执行器”计划开发。
+按职责和可验证边界拆分文件；只有代码变短、依赖仍共同写一组状态时，并未降低接手成本。当前只有一个行动 Runtime，存档 codec 与视图路由的已登记运行时 import 环已消除；背包已收敛到有限服务，事务失败分类的本轮交付见[Q-E04](tasks/quality-entropy.md#q-e04-提交后的发布失败)；内容身份与文案分离等剩余事项继续按 #60 跟踪，不再按旧的“双执行器”计划开发。
 
 PR #2/#3/M0 的原始叙述见[本轮更新前的固定版本](https://github.com/xuys2025/escape-bincov/blob/773dcdf37c69c9441f7687627b89b582087eb021/docs/ARCHITECTURE.md)。历史验收只证明其受检提交；当前修改的验证从 [CODEMAP](CODEMAP.md) 和[开发手册](AGENT-HANDBOOK.md#4-按风险验证)选择。

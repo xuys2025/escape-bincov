@@ -1,5 +1,10 @@
+/**
+ * Page-wide diagnostics for the raid and station hosts and their one shared Pixi app. Import this object directly;
+ * each view owns only its contributions and must release them on unmount. The title renderer has its own lifetime.
+ */
 export const lifecycle = { listeners: 0, tickers: 0, observers: 0, timers: 0, apps: 0, parked: 0, views: 0, renderTextures: 0 };
 
+/** A host-owned DOM/resource scope: abort listeners, then release registrations in reverse order on dispose. */
 export class Scope {
   private ctrl = new AbortController();
   private cleanups: (() => void)[] = [];

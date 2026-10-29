@@ -1,6 +1,6 @@
-// Mall sample (?sample=mall) on the real mall Runtime: the 2.5D view of layout revision 4 with Sol's samples and the painted
-// layout-4 furniture (issue #47). Deploys through the ordinary tab page and the station yard, then checks the layout-4 world, the dressed scene, the
-// cutaway from outside, overlap-safe visibility, the stairs between floors, exits per floor, weather, remounts, the
+// Mall sample (?sample=mall) on the real mall Runtime: the 2.5D view of layout revision 4 with Sol's samples, layout-4 furniture
+// and floors included (issue #47). Deploys through the ordinary tab page and the station yard, then checks the layout-4 world, the dressed scene, the
+// facade from outside and the indoor wall rule inside, overlap-safe visibility, the stairs between floors, exits per floor, weather, remounts, the
 // placeholder fallback and screenshots at 1280x720 and 1920x1080. Fixtures use the explicit ?test=1 driver only to
 // place the player and enemies.
 import assert from 'node:assert/strict';
@@ -46,6 +46,62 @@ const place = (page, x, y, angle = 0, map) => page.evaluate(([x, y, a, m]) => {
   throw new Error(last);
 }, [x, y, angle, map]);
 const shot = (page, name) => page.screenshot({ path: resolve(out, name) });
+/**
+ * Wall pieces under the indoor rule now (docs/INDOOR-WALL-VISIBILITY-PLAN.md), once every wall has sunk or risen to its
+ * mode: rule, mode, how far sunk and how the picture is drawn, read from its pixels (above its cell, on its cell, in its
+ * doorway cuts); and the footprint's other wall pieces.
+ */
+const settled = page => page.waitForFunction(() => {
+  const v = window.__bincovSample.host.view;
+  return !v.rising.length && v.occluders.every(o => !o.wall || o.wall.sunk === (o.wall.mode === 'base' ? 1 : 0));
+}, null, { timeout: 10000 });
+const walls = async page => { await settled(page); return page.evaluate(() => {
+  const v = window.__bincovSample.host.view, p = window.__bincovSample.host.lastBatch.frame.player;
+  const alpha = (o, r) => {
+    const c = v.tex.canvas(o.shown ?? o.key), x0 = Math.max(0, r.x), y0 = Math.max(0, r.y), x1 = Math.min(c.width, r.x + r.w), y1 = Math.min(c.height, r.y + r.h);
+    if (x1 <= x0 || y1 <= y0) return 0;
+    const d = c.getContext('2d').getImageData(x0, y0, x1 - x0, y1 - y0).data;
+    let n = 0; for (let i = 3; i < d.length; i += 4) if (d[i] > 0) n++; return n;
+  };
+  const inFootprint = o => o.cell.x >= 8 && o.cell.x <= 64 && o.cell.y >= 6 && o.cell.y <= 48;
+  return {
+    player: { x: p.x, y: p.y }, rebuilds: v.stats.rebuilds,
+    pieces: v.occluders.filter(o => o.wall).map(o => {
+      const { w, h } = o.rect, shown = o.sprite.visible;
+      return { x: o.cell.x, y: o.cell.y, kind: o.kind, rule: o.wall.rule, mode: o.wall.mode, sunk: o.wall.sunk, level: o.level, visible: shown, curtain: o.key.includes('curtain'),
+        drawn: !shown || o.sprite.texture === v.tex.atlas.get(o.shown ?? o.key) && o.sprite.y === o.rect.y, cut: o.wall.cut,
+        above: shown ? alpha(o, { x: 0, y: 0, w, h: h - 32 }) : 0, foot: shown ? alpha(o, { x: 0, y: h - 32, w, h: 32 }) : 0,
+        inCut: shown ? o.wall.cut.reduce((n, r) => n + alpha(o, r), 0) : 0, links: (o.links ?? []).map(l => l.sprite.visible) };
+    }),
+    others: v.occluders.filter(o => o.cell && !o.wall && inFootprint(o)).map(o => ({ x: o.cell.x, y: o.cell.y, level: o.level, renderable: o.sprite.renderable })),
+  };
+}); };
+/**
+ * The indoor rule on a mall floor, from `walls`: nothing fades; headers are hidden; row 48 (the south front) shows only
+ * its cells and row 6 and the sides stay whole; each run row goes by the side of its centre line the feet are on (outside
+ * the 4 px buffer); a cut-down piece has nothing above its cell; doorway cuts are clear; signs and glows show only with
+ * the whole picture. Inside the footprint only the sealed core (x45-53, y7-13) keeps the old rule, never faded away.
+ */
+function checkWalls(s, label) {
+  const at = `${label} at ${Math.round(s.player.x)},${Math.round(s.player.y)}`;
+  assert.ok(s.pieces.length > 300, `${at}: ${s.pieces.length} pieces under the rule`);
+  for (const w of s.pieces) {
+    const where = `${at}: ${w.kind} ${w.x},${w.y} ${w.rule}/${w.mode}`, c = (w.y + .5) * 32;
+    assert.equal(w.level, 0, `${where} never fades`); assert.ok(w.drawn, `${where} shows its picture where it was built`);
+    assert.equal(w.sunk, w.mode === 'base' ? 1 : 0, `${where}: sunk to its mode`);
+    if (w.kind === 'lintel') { assert.ok(w.mode === 'hidden' && !w.visible, where); continue; }
+    if (w.y === 48) assert.equal(w.mode, 'base', `${where}: south front`);
+    else if (w.y === 6 || w.x === 8 || w.x === 64) assert.equal(w.mode, 'full', `${where}: facade`);
+    if (w.rule === 'row' && Math.abs(s.player.y - c) > 4) assert.equal(w.mode, s.player.y < c ? 'base' : 'full', `${where}: by the player's row`);
+    if (w.mode === 'base') assert.ok(w.above === 0 && w.foot > 0, `${where}: only its cell (${w.above}/${w.foot})`);
+    else assert.ok(w.above + w.foot > 0, `${where}: drawn`);
+    assert.equal(w.inCut, 0, `${where}: doorway cut clear`);
+    assert.ok(w.links.every(v => v === (w.mode === 'full')), `${where}: signs and glows go with the whole picture`);
+  }
+  for (const o of s.others) assert.ok(o.x >= 45 && o.x <= 53 && o.y >= 7 && o.y <= 13 && o.level < 3, `${at}: ${o.x},${o.y} outside the rule (level ${o.level})`);
+  const count = m => s.pieces.filter(w => w.mode === m).length;
+  return { full: count('full'), base: count('base'), hidden: count('hidden'), cut: s.pieces.filter(w => w.cut.length).length, linked: s.pieces.filter(w => w.links.length).length, core: s.others.length };
+}
 async function deployTabs(page) {
   await action(page, 'enter').click();
   assert.equal(await page.locator('#run-world').inputValue(), 'mall', 'the mall sample preselects the mall');
@@ -87,32 +143,28 @@ async function deployTabs(page) {
     await shot(page, 'm01-f1-supermarket-1280.png');
     return s;
   });
-  await step('M02 the facade stays solid from the plaza and from inside; only the player\'s room is cut away, keeping each wall\'s blocked cell solid', async () => {
+  await step('M02 the facade stays solid from the plaza; inside the footprint every wall follows the indoor rule (facade whole, south front on its cells, runs by the player\'s row, doorways clear)', async () => {
     const facade = () => page.evaluate(() => {
       const v = window.__bincovSample.host.view, curtain = v.occluders.filter(o => o.kind === 'wall' && o.key.includes('curtain'));
-      return { curtain: curtain.length, levels: [...new Set(curtain.map(o => o.level))], mist: v.weather.shelter };
+      return { curtain: curtain.length, levels: [...new Set(curtain.map(o => o.level))], ruled: v.occluders.filter(o => o.wall).length, mist: v.weather.shelter };
     });
     await place(page, 59.5, 4.5, Math.PI / 2, 'mall-f1'); await wait(1500); await frames(page, 10);
     const outside = await facade(); await shot(page, 'm02-f1-entrance-outside-1280.png');
-    // A walled room (the convenience store F1-06): its own walls are cut, the facade beside it is not.
+    // The convenience store F1-06 (x57-63, y19-24): north wall row 18, south wall row 25, side door x57 y21-23.
     await place(page, 60, 21.5, Math.PI / 2, 'mall-f1'); await wait(1500); await frames(page, 10);
-    const lobby = await page.evaluate(() => {
-      const v = window.__bincovSample.host.view, m = v.mapDef, rooms = [...v.cutRooms];
-      const cell = o => ({ x: Math.floor(o.rect.x / 32), y: Math.floor((o.z - 16) / 32) });
-      const band = c => c.x >= 8 && c.x <= 64 && c.y >= 6 && c.y <= 48 && (c.x <= 9 || c.x >= 63 || c.y <= 7 || c.y >= 47);
-      const cut = v.occluders.filter(o => o.kind === 'wall' && o.level === 3), rects = m.regions.filter(r => rooms.includes(r.id));
-      const inRoom = o => rects.some(r => o.rect.x + 16 >= r.x && o.rect.x + 16 < r.x + r.w && o.z - 16 >= r.y && o.z - 16 < r.y + r.h + 32);
-      return { rooms, cut: cut.length, outside: cut.filter(o => !inRoom(o)).length, facade: cut.filter(o => band(cell(o))).length,
-        keep: [...new Set(cut.map(o => o.keepBottom))], mist: v.weather.shelter };
-    });
-    await shot(page, 'm02-f1-store-cutaway-1280.png');
-    // Only the player's own focus fade (levels 1-2 next to the body) may touch it; the structural cutaway (3) must not.
+    const store = await walls(page), mist = await page.evaluate(() => window.__bincovSample.host.view.weather.shelter);
+    await shot(page, 'm02-f1-store-walls-1280.png');
+    // From the plaza only the player's own focus fade (levels 1-2 next to the body) may touch the facade.
     assert.ok(outside.curtain >= 6, 'glass curtain cells'); assert.ok(outside.levels.every(l => l < 3) && outside.levels.includes(0), `curtain wall solid from outside: ${outside.levels}`);
-    assert.ok(outside.mist < .2, `mist outdoors: ${outside.mist}`);
-    assert.deepEqual(lobby.rooms, ['F1-06'], JSON.stringify(lobby)); assert.ok(lobby.cut > 0, 'the store\'s own walls are cut away');
-    assert.equal(lobby.outside, 0, 'nothing outside the player\'s room is cut'); assert.equal(lobby.facade, 0, 'the facade is never cut');
-    assert.deepEqual(lobby.keep, [32], 'a cut wall keeps its blocked cell solid'); assert.ok(lobby.mist > .8, `mist thins indoors: ${lobby.mist}`);
-    return { outside, lobby };
+    assert.equal(outside.ruled, 0, 'on the plaza no wall follows the indoor rule'); assert.ok(outside.mist < .2, `mist outdoors: ${outside.mist}`);
+    const counts = checkWalls(store, 'the store'), piece = (x, y) => store.pieces.find(w => w.x === x && w.y === y && w.kind === 'wall');
+    assert.ok(store.pieces.filter(w => w.curtain).length >= 6 && store.pieces.filter(w => w.curtain).every(w => w.mode === 'full'), 'the glass curtain stays whole from inside');
+    assert.deepEqual([piece(60, 18).mode, piece(60, 25).mode], ['full', 'base'], 'the store\'s north wall whole, its south wall on its cells');
+    // The low jamb south of the side door (16 px above its cell) is cut where it rises over the doorway.
+    assert.deepEqual(piece(57, 24).cut, [{ x: 0, y: 0, w: 32, h: 16 }]);
+    assert.ok(counts.linked >= 9, `wall pieces and glows on walls under the rule: ${counts.linked}`);
+    assert.ok(mist > .8, `mist thins indoors: ${mist}`);
+    return { outside, counts, mist };
   });
   await step('M03 overlapping rooms fail closed: an enemy in an unrevealed room inside a revealed one stays hidden', async () => {
     // Find two overlapping inside regions on F2 and a fitting point inside both whose inner room is not revealed.
@@ -426,21 +478,90 @@ async function deployTabs(page) {
     assert.equal(home.cafe, 4);
     return { lobby, near, far, onIt, home };
   });
-  await step('M19 the sealed maintenance core is never cut away, even from the F2 hall that contains it', async () => {
+  await step('M19 the sealed maintenance core keeps the old rule (never cut down to its cells or faded away), even from the F2 hall that contains it', async () => {
     await page.setViewportSize({ width: 1280, height: 720 });
     await place(page, 49.5, 16.5, Math.PI / 2, 'mall-f2'); await wait(1500); await frames(page, 10);
-    const s = await page.evaluate(() => {
-      const v = window.__bincovSample.host.view;
-      // The core is x45-53, y7-13 on both floors; a wall piece's cell is (rect.x, z - 16).
-      const core = v.occluders.filter(o => o.kind === 'wall' && o.rect.x >= 45 * 32 && o.rect.x < 54 * 32 && o.z - 16 >= 7 * 32 && o.z - 16 < 14 * 32);
-      return { rooms: [...v.cutRooms], core: core.length, renderable: core.filter(o => o.sprite.renderable).length,
-        levels: [...new Set(core.map(o => o.level))].sort(), cut: core.filter(o => o.level >= 3).length };
-    });
+    const s = await walls(page), where = await page.evaluate(() => document.querySelector('[data-where]').textContent);
     await shot(page, 'm19-f2-hall-core-1280.png');
-    assert.ok(s.rooms.includes('F2-01'), `the player stands in the hall around the core: ${s.rooms}`);
-    assert.equal(s.core, 63, 'one wall piece per core cell'); assert.equal(s.renderable, 63, 'the whole core is in view');
-    assert.equal(s.cut, 0, `no core wall is cut away (levels ${s.levels})`);
-    return s;
+    assert.match(where, /二层 · 海风服装$/, 'the player stands in the hall around the core (F2-01)');
+    const counts = checkWalls(s, 'the F2 hall');
+    // The core is x45-53, y7-13 on both floors: one piece per cell, all in view, none under the indoor rule.
+    assert.equal(counts.core, 63, 'one wall piece per core cell, outside the rule'); assert.equal(s.others.filter(o => o.renderable).length, 63, 'the whole core is in view');
+    return { counts, levels: [...new Set(s.others.map(o => o.level))].sort() };
+  });
+  await step('M21 walking out through a shop entrance raises its wall row whole over 0.2 s, with no rebuild (1280x720 and 1920x1080)', async () => {
+    const result = {};
+    // Row 13 (x29-43) fronts the F1 shops north of the central aisle; their entrance is x36-38.
+    const inRun = o => o.wall && o.kind === 'wall' && o.cell.y === 13 && o.cell.x >= 29 && o.cell.x <= 43;
+    const geometry = `o => ({ x: o.cell.x, sunk: o.wall.sunk, clear: o.wall.clear, mode: o.wall.mode, visible: o.sprite.visible, dy: o.sprite.y - o.rect.y,
+      h: o.sprite.texture.height, full: o.rect.h, bottom: o.sprite.y + o.sprite.texture.height - o.rect.y - o.rect.h,
+      links: (o.links ?? []).filter(l => l.sprite.visible).map(l => l.sprite.y + l.sprite.texture.height - o.rect.y - o.rect.h) })`;
+    for (const [w, h] of [[1280, 720], [1920, 1080]]) {
+      await page.setViewportSize({ width: w, height: h }); await frames(page, 4);
+      await place(page, 37.5, 11.5, Math.PI / 2, 'mall-f1'); await frames(page, 10);
+      const north = await walls(page); await shot(page, `m21-f1-north-of-run-${w}.png`);
+      // Watched every frame from the first step south: the frame the run is between its cells and its whole picture.
+      const between = page.waitForFunction(([inRun, geometry]) => {
+        const run = window.__bincovSample.host.view.occluders.filter(eval(inRun));
+        return run.some(o => o.wall.sunk > 0 && o.wall.sunk < 1) && run.map(eval(geometry));
+      }, [String(inRun), geometry], { polling: 'raf', timeout: 10000 }).then(r => r.jsonValue());
+      let mid;
+      await page.keyboard.down('s');
+      try { mid = await between; await page.waitForFunction(() => window.__bincovSample.host.lastBatch.frame.player.y >= 14.3 * 32); } finally { await page.keyboard.up('s'); }
+      await frames(page, 10);
+      const south = await walls(page); await shot(page, `m21-f1-south-of-run-${w}.png`);
+      const row = s => [...new Set(s.pieces.filter(p => p.y === 13 && p.x >= 29 && p.x <= 43 && p.kind === 'wall').map(p => p.mode))];
+      assert.deepEqual([row(north), row(south)], [['base'], ['full']], 'the whole run x29-43 switches as the feet cross row 13');
+      assert.equal(south.rebuilds, north.rebuilds, 'walking never rebuilds the scene');
+      assert.equal(new Set(mid.map(p => p.sunk)).size, 1, `the run rises as one: ${JSON.stringify(mid.map(p => p.sunk))}`);
+      for (const p of mid) {
+        assert.ok(p.mode === 'full' && p.clear === 0 && p.visible, `${p.x}: rising to the whole picture ${JSON.stringify(p)}`);
+        assert.ok(p.dy > 0 && p.dy < p.full - 32 && p.h === p.full - p.dy && p.bottom === 0, `${p.x}: lowered whole px, drawn down to its cell's south edge ${JSON.stringify(p)}`);
+        assert.ok(p.links.every(b => b <= 0), `${p.x}: its links never hang below its cell`);
+      }
+      result[w] = { north: checkWalls(north, `north of row 13, ${w}`), south: checkWalls(south, `south of row 13, ${w}`), between: { sunk: mid[0].sunk, dy: mid[0].dy } };
+    }
+    // Five steps of the run going down at both sizes, each drawn by the scene's own showWall with the step held (dt 0),
+    // for the strips in docs/indoor-walls/screens: whole, a quarter, half and three quarters of the way, then the base
+    // picture on its cells. Lowered round(smoothstep(sunk) * the height above the cell) (wall-display.ts sunkRows); all
+    // the way down the base picture stands where it was built.
+    const sinks = [0, .25, .5, .75, 1], drop = (s, full) => s === 1 ? 0 : Math.round(s * s * (3 - 2 * s) * (full - 32));
+    for (const [w, h] of [[1280, 720], [1920, 1080]]) {
+      // The camera settles on the size first, so every step is cut from the same world rectangle.
+      await page.setViewportSize({ width: w, height: h }); await wait(1500); await frames(page, 10);
+      const steps = [], clips = [];
+      for (const sunk of sinks) {
+        await page.evaluate(([inRun, sunk]) => {
+          const v = window.__bincovSample.host.view, show = v.__showWall ??= v.showWall, held = eval(inRun);
+          v.showWall = function (o, mode, dt, snap) { if (!held(o)) return show.call(this, o, mode, dt, snap); o.wall.sunk = sunk; return show.call(this, o, 'full', 0, false); };
+        }, [String(inRun), sunk]);
+        await frames(page, 3);
+        const s = await page.evaluate(([inRun, geometry]) => {
+          const v = window.__bincovSample.host.view, run = v.occluders.filter(eval(inRun)), a = v.worldToClient({ x: 29 * 32, y: 13 * 32 - 56 }), b = v.worldToClient({ x: 44 * 32, y: 14 * 32 + 8 });
+          return { run: run.map(eval(geometry)), clip: { x: a.x, y: a.y, width: b.x - a.x, height: b.y - a.y } };
+        }, [String(inRun), geometry]);
+        steps.push(s.run); clips.push((await page.screenshot({ clip: s.clip })).toString('base64'));
+      }
+      await page.evaluate(() => { const v = window.__bincovSample.host.view; v.showWall = v.__showWall; delete v.__showWall; });
+      const strip = await page.evaluate(async shots => {
+        const imgs = await Promise.all(shots.map(b => new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = `data:image/png;base64,${b}`; })));
+        const c = document.createElement('canvas'); c.width = imgs[0].width; c.height = imgs.reduce((n, i) => n + i.height + 4, -4);
+        const g = c.getContext('2d'); g.fillStyle = '#000'; g.fillRect(0, 0, c.width, c.height);
+        let y = 0; for (const i of imgs) { g.drawImage(i, 0, y); y += i.height + 4; }
+        return c.toDataURL('image/png').split(',')[1];
+      }, clips);
+      await writeFile(resolve(out, `m21-f1-run-sinking-${w}.png`), Buffer.from(strip, 'base64'));
+      steps.forEach((run, i) => {
+        for (const p of run) {
+          assert.ok(p.dy === drop(sinks[i], p.full) && p.h === p.full - p.dy && p.bottom === 0, `${w}, step ${sinks[i]}, ${p.x}: ${JSON.stringify(p)}`);
+          assert.equal(p.sunk, sinks[i]);
+        }
+      });
+      await walls(page);
+      result[w].steps = steps.map(run => [...new Set(run.map(p => `${p.dy}/${p.h}`))]);
+    }
+    await page.setViewportSize({ width: 1280, height: 720 }); await frames(page, 4);
+    return result;
   });
   await step('M17 a room\'s lights come up over 0.3 s once it is revealed and go out in the frame it is hidden', async () => {
     // Last step of this page: its synthetic reveal flips leave light state that no later step should inherit.
@@ -492,7 +613,7 @@ async function deployTabs(page) {
     assert.ok(r.hide.lit.every(l => l === 0), `hidden again: ${r.hide.lit}`); assert.equal(r.hide.leaks, 0); assert.equal(r.hide.vsHidden, 0, 'hiding is immediate');
     return r;
   });
-  await step('M20 layout 4 furnishes every region: painted pieces in the shops, back rooms, upstairs halls and streets; no room is dimmed or outside the sample', async () => {
+  await step('M20 layout 4 furnishes every region with the M2 pieces and floors (shops, back rooms, upstairs halls, streets); none falls back to the painted piece; no room is dimmed or outside the sample', async () => {
     const spots = [['pharmacy', 'mall-f1', 18, 13, '滨湾药房'], ['chicken', 'mall-f1', 17, 30, '红帆炸鸡'], ['storeroom', 'mall-f1', 36, 10, '北侧仓库'],
       ['service', 'mall-f1', 18, 45, '西侧服务间'], ['street', 'mall-f1', 30, 49, '车库入口及南街'], ['yard', 'mall-f1', 66, 49, '卸货区'],
       ['fashion', 'mall-f2', 20, 13, '海风服装'], ['office', 'mall-f2', 15, 25, '商场办公室'], ['play', 'mall-f2', 24, 40, '儿童乐园'], ['toilet', 'mall-f2', 12, 38, '厕所']];
@@ -505,17 +626,18 @@ async function deployTabs(page) {
           const v = window.__bincovSample.host.view, m = v.map;
           return { map: m.key.mapId, revision: m.key.layoutRevision, where: document.querySelector('[data-where]').textContent, note: v.sampleNote(),
             painted: v.mall.props.filter(p => p.asset.startsWith('procedural:furniture:')).length,
+            m2: v.mall.props.filter(p => /^mall-prop-(shelf-wall|rack|counter|glass-case|kitchen-line|sink|stall|lockers|switchgear|clothes-rail|barrier|diner-table|desk|cabinet|safe|mannequin|fitting-room|vending|checkout|ball-pool|slide|bamboo-screen|car|dumpster|container|ac-unit)-/.test(p.asset)).length,
             dim: m.regions.filter(r => r.inside && v.mall.zone(r.x + r.w / 2, r.y + r.h / 2) === 'dim').map(r => r.id) };
         });
         assert.equal(s.revision, 'mall-layout-4'); assert.equal(s.map, map);
         assert.ok(s.where.includes(place_), `${name}: ${s.where}`); assert.ok(!s.where.includes('样板外'), s.where); assert.equal(s.note, null);
         assert.deepEqual(s.dim, [], 'no room sits darker as outside the sample');
-        floors[map] = s.painted; places.push({ name, size: size.width, where: s.where });
+        floors[map] = [s.m2, s.painted]; places.push({ name, size: size.width, where: s.where });
         await shot(page, `m20-${name}-${size.width}.png`);
       }
     }
-    // Every layout-4 piece or run module without a sample is painted; none falls back to nothing.
-    assert.deepEqual(floors, { 'mall-f1': 132, 'mall-f2': 107 });
+    // Every layout-4 piece or run module is drawn from its M2 sample; none falls back to the painted piece or to nothing.
+    assert.deepEqual(floors, { 'mall-f1': [132, 0], 'mall-f2': [107, 0] });
     await page.setViewportSize({ width: 1280, height: 720 }); await frames(page, 4);
     return { floors, places };
   });
@@ -568,7 +690,11 @@ const savedWorld = page => page.evaluate(() => /"worldVersion":"([^"]+)"/.exec(l
         tables: pieces('coffee-table').map(p => ({ x: p.x, z: p.z, shadow: d.ground.feet.find(f => f.x === p.foot.x && f.y === p.foot.y) ?? null })) };
     });
     // Beside the first living room, so the screenshot shows the sofa and its table.
-    const onFloorTwo = async () => { await page.evaluate(() => window.__bincovSample.driver.freezeAI(true)); await place(page, 62, 20.6, 0, 'mall-f2'); await frames(page, 10); return living(); };
+    // Either layout's walls follow the indoor rule.
+    const onFloorTwo = async () => {
+      await page.evaluate(() => window.__bincovSample.driver.freezeAI(true)); await place(page, 62, 20.6, 0, 'mall-f2'); await frames(page, 10);
+      const s = await living(); return { ...s, walls: checkWalls(await walls(page), s.world.join(' ')) };
+    };
     // An older raid: deployed on layout 2 (as the sample did before layout 3), then the page is reloaded and continued.
     await action(page, 'enter').click(); assert.equal(await page.locator('#run-world').inputValue(), 'mall');
     assert.equal(await page.evaluate(() => window.__bincov.saveSession.beginRun(42, 'mall', { mallLayout: 2 })), true);
@@ -641,7 +767,12 @@ const savedWorld = page => page.evaluate(() => /"worldVersion":"([^"]+)"/.exec(l
     assert.equal(hall.splashesInside, 0); assert.ok(hall.shelter > .8, JSON.stringify(hall));
     assert.ok(plaza.drops > 0 && plaza.shelter < .2, JSON.stringify(plaza));
     await shot(page, 'm11-placeholder-1280.png');
-    return { ...s, hall, plaza };
+    // The placeholder walls follow the same indoor rule: in the pharmacy (F1-01), at both sizes.
+    await place(page, 17.5, 12.5, Math.PI / 2, 'mall-f1'); await frames(page, 10);
+    const pharmacy = checkWalls(await walls(page), 'placeholder pharmacy'); await shot(page, 'm11-placeholder-walls-1280.png');
+    await page.setViewportSize({ width: 1920, height: 1080 }); await frames(page, 10);
+    const wide = checkWalls(await walls(page), 'placeholder pharmacy 1920'); await shot(page, 'm11-placeholder-walls-1920.png');
+    return { ...s, hall, plaza, pharmacy, wide };
   });
   await context.close();
 }

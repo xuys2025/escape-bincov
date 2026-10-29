@@ -36,14 +36,14 @@ CI 策略测试还守住五件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 
 ## 八组分配
 
-各组在独立 Ubuntu runner 上顺序执行，最多同时八组，`fail-fast: false` 保留其他组的失败诊断。当前执行 **44** 条浏览器命令，覆盖 **42** 条完整逻辑套件（仅敌人套件按三个独立视口分片；改枪的 `test:gunsmith-bench`、`test:gunsmith-flow` 由 #106 加入 batch-5、batch-6 末尾），包括 #48 的商场样板、#57 的普通 2.5D 行动检查、#56 的开场动画验收（约 20 秒，排在 batch-3）、2026-10-22 从手动转入 batch-6 的 `test:hideout`（旧页签普通入口、商店门面、写入故障与出发，本地限 2 核软件渲染 14 秒），以及同日射击改造（#39）新增的两条：`test:shooting`（静止指针下瞄准不漂（空地与地图边）、开枪不动瞄准、枪口火光与曳光对齐枪管、贴墙与门角挡弹、隐藏房间不漏曳光、开火方式、受击闪白与抖动从命中当帧画起且慢帧至少一帧、抖动顺着子弹方向而血迹朝射手、暴击与击杀的命中标记和击杀确认音）排在 batch-1 末尾，试枪场 `test:range` 排在 batch-5 末尾。两条起初都放在 batch-2，但 PR 运行里 batch-2 原有五条已要约 22 分钟，加上这两条（CI 上 `test:shooting` 约 8 分钟、`test:range` 约 2.5 分钟）后，遇到安装步骤慢的 runner 就超过 45 分钟被取消；batch-1 与 batch-5 是 2026-10-22 几次运行中耗时最短的两组（套件合计约 8–17 分钟）。其余未排入 CI 的套件见下方“每次仍然执行的检查”提到的手动表。2.5D 收尾移除 Phaser 后，只检查 Phaser 场景的 `test:issue26-phaser-spatial` 退役（空间检查由 `test:issue26-spatial` 在 2.5D 上保留）。完整的 `test:coast-sample` 只在本地运行：CI 的软件渲染下，动画组最后一步 V-CAM 之后再开页面会超时，完整套件要先把 V-CAM 挪到最后并验证计时检查，才能进 CI。除随 Phaser 退役、在 [2.5D 收尾说明](2-5d-closeout/README.md#测试迁移) 中逐项列出的检查外，原回归内容保留；本批仅将敌人套件按完整视口分片，断言、浏览器参数与真实训练计时保持原要求。
+各组在独立 Ubuntu runner 上顺序执行，最多同时八组，`fail-fast: false` 保留其他组的失败诊断。当前执行 **45** 条浏览器命令，覆盖 **42** 条完整逻辑套件及 F16 手部定向检查（仅敌人套件按三个独立视口分片；改枪的 `test:gunsmith-bench`、`test:gunsmith-flow` 由 #106 加入 batch-5、batch-6 末尾），包括 #48 的商场样板、#57 的普通 2.5D 行动检查、#56 的开场动画验收（约 20 秒，排在 batch-3）、2026-10-22 从手动转入 batch-6 的 `test:hideout`（旧页签普通入口、商店门面、写入故障与出发，本地限 2 核软件渲染 14 秒），以及同日射击改造（#39）新增的两条：`test:shooting`（静止指针下瞄准不漂（空地与地图边）、开枪不动瞄准、枪口火光与曳光对齐枪管、贴墙与门角挡弹、隐藏房间不漏曳光、开火方式、受击闪白与抖动从命中当帧画起且慢帧至少一帧、抖动顺着子弹方向而血迹朝射手、暴击与击杀的命中标记和击杀确认音）排在 batch-1 末尾，试枪场 `test:range` 排在 batch-5 末尾。两条起初都放在 batch-2，但 PR 运行里 batch-2 原有五条已要约 22 分钟，加上这两条（CI 上 `test:shooting` 约 8 分钟、`test:range` 约 2.5 分钟）后，遇到安装步骤慢的 runner 就超过 45 分钟被取消；batch-1 与 batch-5 是 2026-10-22 几次运行中耗时最短的两组（套件合计约 8–17 分钟）。其余未排入 CI 的套件见下方“每次仍然执行的检查”提到的手动表。2.5D 收尾移除 Phaser 后，只检查 Phaser 场景的 `test:issue26-phaser-spatial` 退役（空间检查由 `test:issue26-spatial` 在 2.5D 上保留）。完整的 `test:coast-sample` 只在本地运行：CI 的软件渲染下，动画组最后一步 V-CAM 之后再开页面会超时，完整套件要先把 V-CAM 挪到最后并验证计时检查，才能进 CI。除随 Phaser 退役、在 [2.5D 收尾说明](2-5d-closeout/README.md#测试迁移) 中逐项列出的检查外，原回归内容保留；本批仅将敌人套件按完整视口分片，断言、浏览器参数与真实训练计时保持原要求。
 
 [scripts/ci/browser-suites.mjs](../scripts/ci/browser-suites.mjs) 是执行顺序和覆盖核对的清单；[run-browser.mjs](../scripts/ci/run-browser.mjs) 逐条执行原 `pnpm test:<id>`，因此 package.json 中的原参数仍生效。组合命令现在分开计时，存档检查在 batch-2 首个执行。旧客户端固定 HTML 在 batch-8 下载，随后由 expansion 校验并使用。
 
 | 组 | 顺序执行的完整命令 |
 | --- | --- |
 | batch-1 | `test:browser`、`test:qol-expansion`、`test:station-tier2`、`test:shooting` |
-| batch-2 | `test:save-browser`、`test:asset-load`、`test:hud-release`、`test:issue26-inventory`、`test:mall-passages` |
+| batch-2 | `test:save-browser`、`test:asset-load`、`test:hud-release`、`test:issue26-inventory`、`test:mall-passages`、`test:station-hands` |
 | batch-3 | `test:desktop-input`、`test:portable`、`test:shop-drag`、`test:title`、`test:title-water`、`test:opening` |
 | batch-4 | `test:issue26-station`、`test:issue26-spatial`、`test:tactical`、`test:art`、`test:systems`、`test:mobile` |
 | batch-5 | `test:buildings`、`test:station-tier1`、`test:shop-feedback`、`test:mobile-ux`、`test:range`、`test:gunsmith-bench` |
@@ -53,7 +53,7 @@ CI 策略测试还守住五件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 
 2.5D 收尾（#64）后，CI 没有显卡、2.5D 用软件渲染，迁移到 2.5D 的行动套件变慢：loot 一套约 30 分钟，原 batch-8 超过 45 分钟的 job 上限。因此把 mall-passages 移到 batch-2 末尾、systems 和 mobile 移到 batch-4 末尾，batch-8 只留 expansion（带旧客户端）和 loot。
 
-#61 当时按较慢运行样本重排，并将新增 raid-default 的实测 124 秒纳入负载。此前 35 套件的中位 17:33 和约 13–14 分钟调度回放仅为 #61 的研究输入；当前已经是原 42 套件的 44 条执行命令（#106 加入改枪两套），实际收益必须使用同产品字节的新基线/候选对照，结果见承接 PR，不能把旧回放当成本次 CI 通过。
+#61 当时按较慢运行样本重排，并将新增 raid-default 的实测 124 秒纳入负载。此前 35 套件的中位 17:33 和约 13–14 分钟调度回放仅为 #61 的研究输入；当前已经是原 42 套件的 44 条执行命令（#106 加入改枪两套）加 F16 定向检查，共 45 条命令，实际收益必须使用同产品字节的新基线/候选对照，结果见承接 PR，不能把旧回放当成本次 CI 通过。
 
 2026-10-23 的 #78 最初新增 `test:enemy` 到 batch-8。#81 与 #104 随后扩展至十八原型、三视口的街区及商场验收；早期“六组合约 8 秒”不再代表当前套件。
 
@@ -78,6 +78,44 @@ CI 策略测试还守住五件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 2026-10-27 的 #28 M2-14 新增 `test:gunsmith-flow` 到 batch-6：旧页签上买 G17 和两件配件、在工作台装上、装备、出击（手里的枪按配置画、弹匣 24 发）、刷新后恢复、撤离带回原样、再出击死亡后枪和配件一起丢失，1280×720 与 1920×1080；手机 740×300 出击、恢复、死亡。本地约 30 秒。命令计数同步为 42。
 
 每组可在依赖和 Chromium 安装后用 `node scripts/ci/run-browser.mjs batch-2` 运行；batch-8 另需按工作流下载真实旧客户端。执行失败会立即停止本组后续套件并标记未运行，其他组照常完成。保留 45 分钟 job 超时，不额外缩短套件预算。
+
+## 手动落幕检查的时序
+
+2026-10-24（UTC+8），`fix/coast-outro-checks` 从 main `98c69b4` 承接 [#61 的 W13 误报](https://github.com/xuys2025/escape-bincov/issues/61#issuecomment-6338851506)。[coast-sample-test.mjs](../scripts/coast-sample-test.mjs) 的 W12/W13 现在等待实际 `data-outro` 为 `extract` / `abandon`，再核对原文案和结算结果。`result` 只说明结算已保存，放弃流程的宿主可能下一帧才显示落幕，不能作为画面就绪的替代条件。W12 当前重试按钮同步刷新落幕，也去掉无效的替代条件。
+
+本地 Windows / Chrome 155.0.8059.85，正式离线 HTML SHA-256 为 `340e6a41fe4ce842edaf7cda258cd5674abc8a00972d3ddf9cfe675fa0b12f28`：
+
+| 场景 | 实测结果 |
+| --- | --- |
+| 原版完整手动套件 | 53/53；本轮自然运行未触发误报 |
+| 确认放弃的真实点击前，用捕获监听暂停 Pixi ticker，600 ms 后恢复；保留真实结算 | 原等待条件 25/26，W13 在 `result` / `outro: null` 时过早读取；修复后相同桌面流程 26/26 |
+| 修复后完整 `pnpm test:coast-sample` | 53/53，页面异常和外部请求均为 0 |
+| 同一控制流程中移除落幕标记 / 将文案改成“你倒下了” | 均为 25/26；W13 分别按原 15 秒等待上限超时 / 在原文案断言失败 |
+
+对照仅在临时测试副本里注入，不修改游戏或正式套件的运行时间。原撤离 3 秒、写失败重试、结算结果、文案和资源释放断言保留，没有加固定等待或重试。完整套件仍为手动，是否加固后进入 CI 继续归 #61；这次没有验证软件渲染下 V-CAM 后续页面的已知问题，也不替代真机验收。
+
+2026-10-25 续作正常合并 main `974a3a8`（保留 #105 的生成物删除），只保留本节与两处等待的原交付范围。Linux / Node 24.19.0 / pnpm 11.25.0 的本轮 `pnpm test` 874/874、`pnpm check:ci` 64/64 与 `pnpm package` 通过；共享现有依赖时以 `pnpm_config_verify_deps_before_run=false` 禁止 pnpm 自动安装，未在 worktree 安装依赖。正式 HTML SHA-256 为 `b309e11f248f46e9c10ba08d0056aab8160212adb20ecab35bedf54c1d8bfe7f`。
+
+本轮完整手动套件在并行软件渲染负载下 W00–W02 通过、W03 首败，随后写失败注入造成级联；已中断，不能记为完整回归通过。使用同制品、main 原样 W00–W03 前缀（与本 PR 对应前缀逐字节相同）作对照，1/4 通过、零页面异常/外部请求；W03 前后均为 `panel=pause` / `phase=paused`，页面明确提示“画面暂时停顿，行动已暂停。准备好后继续。”，没有门事件。该阻塞早于 W12/W13；没有修改暂停规则、正式断言、阈值或重试。原始中断日志、main 对照报告在本地忽略目录 `test-results/coast-outro-review-linux/`，上表 Windows 53/53 属于原 head 的历史验证。本轮准确 head 的完整 CI 与定向结果以 [PR #95](https://github.com/xuys2025/escape-bincov/pull/95) 正文为准。
+
+### 2026-10-28 同步 main 后的复验
+
+沿原 PR #95 / `fix/coast-outro-checks` 从 `7176beee6f074758a612476be16eedc4237ecc89` 正常合入已接受 main `0f73a67386bac196b87c983668295be6d1a99f1e`。只解决任务清单冲突，保留 #112/#114 的检查登记和其他交接；游戏源码、素材及依赖与主线相同。Windows / Node 24.22.1 / pnpm 11.19.0 / Chrome 156.0.8078.49，本轮独立安装的既有工作树依赖未改变锁文件。
+
+本次实际通过 `pnpm test` 1022/1022、`pnpm check:ci` 77/77、严格 `pnpm package` 和完整 `pnpm test:coast-sample` 53/53，页面异常与外部请求均为 0；W12 保留真实 3 秒撤离、保存失败与重试断言。正式 HTML SHA-256：`f3b7c3e1f19bcc8bc22a517856c0fdf4301ff2ad16d8a0d9269304d1a626a9cb`。本轮串行验证完成，旧 Linux 自动暂停首败仍是上节历史记录。
+
+同一正式 HTML、同一 26 步桌面流程，临时副本在可信确认放弃点击的捕获监听中停 Pixi ticker 600 ms 后恢复；未改变结算、游戏时钟、前置步骤、等待上限或原断言：
+
+| 本轮对照 | 实际结果 |
+| --- | --- |
+| main 原等待条件 + 延迟 | 25/26；仅 W13 失败，读取时 `state=result`、`outro=null`，早于 ticker 恢复 |
+| 新等待条件 + 同样延迟 | 26/26；恢复后读到实际 `outro=abandon` 与“已放弃行动” |
+| 新等待条件 + 移除落幕标记 | 25/26；仅 W13 按原 15 秒上限超时 |
+| 新等待条件 + 错误文案“你倒下了” | 25/26；仅 W13 在原文案断言失败 |
+
+四组对照均为 0 页面异常、0 外部请求。600 ms 延迟及两个界面变异仅位于忽略目录的临时副本；正式测试脚本只保留两处等待修复。原始报告、控制条件及读取时刻在本地 `test-results/pr95/`，准确 head 完整 CI 与最终交付状态统一维护在原 PR。完整套件仍为手动，本次不改变 CI 分组或签收 F20、真人/真机。
+
+2026-10-29 维护者要求复核必要性并在完成后合并。最新 main 仍保留两处提前放行条件，宿主也仍在后续帧呈现已保存的放弃落幕，因此沿原 PR 正常合入 main `ae177b42369fe2cf4d1769db6496ee785e1bb7e7`，不改游戏、断言、等待上限或 CI 分组。Windows / Node 24.21.0 / pnpm 11.19.0 / Chrome 156.0.8078.48：首轮 main `6758d654` 的组合通过 1055 单测、110 守卫、严格打包及完整手动套件 53/53。该轮正式 HTML SHA-256 为 `86aa90b7f34f0f31b4cd071ad027f9aa915cd217a71a910c695387b2d55c2bd1`；四组临时桌面对照重新生成自当前正式脚本，600 ms 延迟下旧等待 25/26、新等待 26/26，缺失标记与错误文案各 25/26，所有预期失败均只在 W13，页面异常与外部请求均为 0。随后 main 合入 #141（宿主与本测试没有变化），已同步并通过 1056 单测及严格打包，新 HTML SHA-256 为 `a190498102bdf579ed82b70627ea2c1e36ce339ac76881db85e4977a99c21c45`；最终组合的完整手动套件、准确 head CI 和实际合并状态统一见 [原 PR #95](https://github.com/xuys2025/escape-bincov/pull/95)。本轮日志与对照在忽略目录 `test-results/pr95-20261029/`；完整套件仍为手动，F20 与真机仍归原任务。
 
 ## 浏览器 job 的主机环境：字体、Chromium 与渲染器
 
@@ -117,6 +155,8 @@ CI 策略测试还守住五件事。[entry-docs.test.mjs](../scripts/ci/entry-do
 ## Pages 与镜像
 
 main 即便走文档快速通道，也从本次重新构建并校验的制品正常执行 `Deploy Pages` 和离线包发布。相同游戏字节已有完整 main 回归证据，本次单测与构建仍需通过。
+
+这两个 job 只直接依赖 `Build and test`，但 GitHub 会把被跳过的 job 沿依赖链往下传：`if` 里没有状态函数时，默认的 `success()` 也检查更上游的浏览器组，快速通道跳过浏览器组，部署和发布就跟着被跳过（2026-10-28 main `03ea261` 就是这样，`main-latest` 停在上一次提交）。所以两个 job 的 `if` 显式写 `!cancelled() && needs.verify.result == 'success'`，再加 main push 条件；`Build and test` 失败或运行被取消时仍不部署。[policy.test.mjs](../scripts/ci/policy.test.mjs) 要求浏览器组之后的每个 job 都带状态函数。
 
 镜像对 `Build and test`、`Deploy Pages` 的成功要求和检查名不变。提交里已经没有 HTML 和发布清单，镜像（服务器脚本不在本仓库）改读 `main-latest` 发布页的清单 `https://github.com/xuys2025/escape-bincov/releases/download/main-latest/release-manifest.json`：
 
