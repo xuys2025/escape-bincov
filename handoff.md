@@ -1,3 +1,7 @@
+## 2026-10-29 · SAMPLE_AREA 共享数据边界（PR #145）
+
+在 `refactor/sample-area-boundary` 续作 [PR #145](https://github.com/xuys2025/escape-bincov/pull/145)，基线 main `03cfb775`。零依赖的 `src/sample-area.ts` 是唯一世界像素范围来源，raid-areas 与 scene 直接消费；appearance 不转发，scene 本体未改。固定输入的旧版选种、400 次/fallback、URL入口与依赖反例见 [原任务书](docs/tasks/todo-sample-area-boundary.md)。本地1059单测、115守卫、package及建筑/通道/落点/默认入口/村庄两档专项通过；商场样板当前和旧393客户端均23/25，同两断言失败，数值差异及准确head/CI见任务书与原PR。只承接 #60 Q-E02 的这一项；未合并、未发布，不接管区域注册、地图/存档或楼梯方向。
+
 ## 2026-10-29 · HUD 堆路径消费字段校验（PR #144）
 
 沿 `fix/hud-path-observations` 与 [PR #144](https://github.com/xuys2025/escape-bincov/pull/144) 续作，基线 main `03cfb775`、原 head `4cf4f72c`。输入在 flat-table 算术与 typed array 写入前校验；坏 edge_count/索引/stride 明确报文件与字段，任一输入失败均不创建或覆盖报告。合法输出、weak 排除、80 节点路径与字符串省略保持；只约束消费字段，原工具仍为 review。
@@ -1879,6 +1883,10 @@ CI 首轮移动专项暴露测试夹具竞态：恢复的 0.8 秒换弹会在医
 </details>
 
 ## PR #109 复核与合并记录
+
+### 最终共享常量组合 #145
+
+正常合入主线 `4fec648c89a59198b94721218f1e06401a92647e`，公共记录位置隔离后已无冲突。SAMPLE_AREA 同值迁移，17关键源码匹配；1082单测、139守卫、打包与当前UI/quota/筹资/累计值控制通过，602.003秒M3自然输入按无行为变更复用，原哈希保留。新构建哈希 `f1cdae01b0ec79ee2c9dada3f0c3fcebca450a178cfba84d2ced4340ba02c08b`，边界与机器验证见[最终组合](docs/tasks/audit-contracts/natural-preparation/20261029-main145/verification.json)。两处文档基线SHA已按Git实际父提交校正。准确head全量CI通过后按维护者授权合并，状态见原#109。
 
 ### 最终授权合并同步 #144
 

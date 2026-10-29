@@ -1,0 +1,185 @@
+{
+  "sha256": "b047c6a07135d1c85f8b811040a62f5aceea2dc8009b3730b1700f90b577c2cf",
+  "checks": [
+    {
+      "width": 1280,
+      "height": 720,
+      "explicit": false,
+      "seed": 48,
+      "marks": true,
+      "world": {
+        "runId": "bc-16-d",
+        "worldVersion": "coast-buildings-v1",
+        "layoutRevision": "resident-layout-1",
+        "mapId": "coast"
+      },
+      "player": {
+        "uid": "player",
+        "kind": "player",
+        "x": 208,
+        "y": 656,
+        "aim": 0,
+        "vx": 0,
+        "vy": 0,
+        "hp": 100,
+        "maxHp": 100,
+        "alive": true,
+        "weapon": "pistol",
+        "gun": {
+          "id": "pistol",
+          "sig": ""
+        },
+        "state": {
+          "moving": false,
+          "sprinting": false,
+          "precise": false,
+          "reloading": null,
+          "attackCooldown": 0,
+          "hurtLeft": 0,
+          "ai": null
+        },
+        "regionId": null,
+        "corpse": null
+      },
+      "where": "沿海街区 · 室外 / 一楼",
+      "interfaces": true
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "explicit": true,
+      "seed": 42,
+      "marks": true,
+      "world": {
+        "runId": "bc-16-d",
+        "worldVersion": "coast-buildings-v1",
+        "layoutRevision": "resident-layout-1",
+        "mapId": "coast"
+      },
+      "player": {
+        "uid": "player",
+        "kind": "player",
+        "x": 208,
+        "y": 1232,
+        "aim": 0,
+        "vx": 0,
+        "vy": 0,
+        "hp": 100,
+        "maxHp": 100,
+        "alive": true,
+        "weapon": "pistol",
+        "gun": {
+          "id": "pistol",
+          "sig": ""
+        },
+        "state": {
+          "moving": false,
+          "sprinting": false,
+          "precise": false,
+          "reloading": null,
+          "attackCooldown": 0,
+          "hurtLeft": 0,
+          "ai": null
+        },
+        "regionId": null,
+        "corpse": null
+      },
+      "where": "沿海街区 · 室外 / 一楼 · 样板外（通用占位画面）",
+      "interfaces": true
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "explicit": false,
+      "seed": 48,
+      "marks": true,
+      "world": {
+        "runId": "bc-16-d",
+        "worldVersion": "coast-buildings-v1",
+        "layoutRevision": "resident-layout-1",
+        "mapId": "coast"
+      },
+      "player": {
+        "uid": "player",
+        "kind": "player",
+        "x": 208,
+        "y": 656,
+        "aim": 0,
+        "vx": 0,
+        "vy": 0,
+        "hp": 100,
+        "maxHp": 100,
+        "alive": true,
+        "weapon": "pistol",
+        "gun": {
+          "id": "pistol",
+          "sig": ""
+        },
+        "state": {
+          "moving": false,
+          "sprinting": false,
+          "precise": false,
+          "reloading": null,
+          "attackCooldown": 0,
+          "hurtLeft": 0,
+          "ai": null
+        },
+        "regionId": null,
+        "corpse": null
+      },
+      "where": "沿海街区 · 室外 / 一楼",
+      "interfaces": true
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "explicit": true,
+      "seed": 42,
+      "marks": true,
+      "world": {
+        "runId": "bc-16-d",
+        "worldVersion": "coast-buildings-v1",
+        "layoutRevision": "resident-layout-1",
+        "mapId": "coast"
+      },
+      "player": {
+        "uid": "player",
+        "kind": "player",
+        "x": 208,
+        "y": 1232,
+        "aim": 0,
+        "vx": 0,
+        "vy": 0,
+        "hp": 100,
+        "maxHp": 100,
+        "alive": true,
+        "weapon": "pistol",
+        "gun": {
+          "id": "pistol",
+          "sig": ""
+        },
+        "state": {
+          "moving": false,
+          "sprinting": false,
+          "precise": false,
+          "reloading": null,
+          "attackCooldown": 0,
+          "hurtLeft": 0,
+          "ai": null
+        },
+        "regionId": null,
+        "corpse": null
+      },
+      "where": "沿海街区 · 室外 / 一楼 · 样板外（通用占位画面）",
+      "interfaces": true
+    },
+    {
+      "ordinarySample": true,
+      "typedSeed": 42,
+      "interfacesAbsent": true
+    }
+  ],
+  "errors": [],
+  "requests": [],
+  "browser": "156.0.8078.48"
+}

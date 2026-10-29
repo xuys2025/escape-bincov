@@ -93,6 +93,20 @@ test('headless boundary rejects pure type borrowing from shared view lifecycle',
   'a shared browser lifecycle type stays outside the headless core');
 });
 
+test('sample selection rejects borrowing bounds from appearance even through a helper or re-export', t => {
+  const { model, program } = fixture(t, {
+    'src/raid-areas.ts': "import { SAMPLE_AREA } from './sample-area'; export const seed = () => SAMPLE_AREA.x;",
+    'src/sample-area.ts': "export { SAMPLE_AREA } from './coast-view/appearance';",
+    // Deliberately pure: directory ownership alone must reject the original reverse dependency.
+    'src/coast-view/appearance.ts': 'export const SAMPLE_AREA = { x: 96, y: 32, w: 1088, h: 832 };',
+  });
+  assert.deepEqual(model.problems, []);
+  assert.deepEqual(headlessProblems(model, program, ['src/raid-areas.ts'])
+    .filter(p => p.startsWith('Headless dependency:')), [
+      'Headless dependency: src/raid-areas.ts -> src/sample-area.ts -> src/coast-view/appearance.ts',
+    ]);
+});
+
 test('headless browser global detection follows aliases but allows encoding, injected locks and local names', t => {
   const { model, program } = fixture(t, {
     'src/session.ts': "export { save } from './helper';",
