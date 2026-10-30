@@ -98,7 +98,7 @@ const checkoutNote = '成交后自动放入仓库';
 /** The yard shop sells from the stash only; `outside` counts sellable stacks still in the bag or safe. */
 const stashNote = (outside: number) => `整组出售${outside > 0 ? ` · 背包与安全箱 ${outside} 件需先入库` : ''}`;
 /** The guns a quest puts on the arms counter (#28 M4-01), on its card. */
-const unlockLine = (id: string, done: boolean) => { const text = D.questGunsText(id, done); return text ? `<p class="unlock">${esc(text)}</p>` : ''; };
+const unlockLine = (id: string, done: boolean) => { const text = D.questShelfText(id, done); return text ? `<p class="unlock">${esc(text)}</p>` : ''; };
 /** The stash overflow (#28 M3-12) in a stash heading, while it holds something. */
 const overflowNote = (stash: D.Inventory) => { const n = D.stashOverflow(stash).length; return n ? ` <b class="bad">溢出 ${n} 件 · 清空前不能出击</b>` : ''; };
 export function shopCompactHtml(c: CartView, cell: number, sel: { src: string; uid: string } | null, cash: number, mode: 'buy' | 'sell', outside = 0) {

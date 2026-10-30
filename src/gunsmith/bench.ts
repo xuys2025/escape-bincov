@@ -7,7 +7,7 @@
  */
 import * as D from '../domain';
 import { SURVIVAL } from '../balance';
-import { ATTACHMENTS, FACTORY_MAGS, GUNS, SLOT_NAMES, factoryMagOf, partDef, type GunId, type Slot } from './catalog';
+import { ATTACHMENTS, FACTORY_MAGS, GUNS, SLOT_NAMES, factoryMagOf, partDef, partTier, type GunId, type Slot } from './catalog';
 import { checkInstall, removalCascade, type Build, type Part } from './compat';
 import { GUARDRAILS, effectiveStats, type GunStats } from './stats';
 import { buildOf, gunWeight, magless, nodesOf, type GunState } from './instance';
@@ -186,14 +186,16 @@ export function partFits(profile: Readonly<D.SaveDataV1>, id: string): { uid: st
     });
 }
 /**
- * Where a part not owned comes from (M2-13, M4-01): the arms counter's steady stock; its rotating shelf for this
- * profile's deployment; else finds in a raid, a common part now and then on the rotating shelf too.
+ * Where a part not owned comes from (M2-13, M4-01, M4-03): the arms counter's steady stock; its rotating shelf, or for a
+ * rare part the late shelf, for this profile's deployment, at the counter's price; else finds in a raid, now and then
+ * on those shelves too (the late one once the ledger quest is done).
  */
 export function sourceOf(id: string, save: Pick<D.SaveDataV1, 'quests' | 'stats'>): string {
-    const a = ATTACHMENTS[id];
-    if (D.MERCHANTS.arms.stock.includes(id)) return `修理铺有售 · ¥ ${a.buy}`;
-    if (D.armsStock(save).includes(id)) return `修理铺这次的轮换货架有售 · ¥ ${a.buy}`;
-    return a.buy > 450 ? '行动中的高风险处可能找到' : '行动中可能找到，修理铺的轮换货架有时也有';
+    const rare = partTier(ATTACHMENTS[id]) === 'rare', price = D.ITEMS[id].buy;
+    if (D.MERCHANTS.arms.stock.includes(id)) return `修理铺有售 · ¥ ${price}`;
+    if (D.armsStock(save).includes(id)) return `修理铺这次的${rare ? '后期' : '轮换'}货架有售 · ¥ ${price}`;
+    if (!rare) return '行动中可能找到，修理铺的轮换货架有时也有';
+    return save.quests[D.LATE_QUEST] === true ? '行动中的高风险处可能找到，修理铺的后期货架有时也有' : '行动中的高风险处可能找到；做完「未归的第七艘船」后修理铺也卖';
 }
 
 // ---------- edits ----------

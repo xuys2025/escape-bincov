@@ -76,7 +76,11 @@ test('only attachment items are listed, and where one comes from', () => {
     // The rotating shelf (#28 M4-01) of a profile whose rotation holds O03, and of one whose does not.
     const runs = (has: boolean) => { let n = 0; while (D.rotationParts(n).includes('O03') !== has) n++; const s = D.newSave(); s.stats.runs = n; return s; };
     assert.match(sourceOf('P01', runs(false)), /^修理铺有售 · ¥ \d+$/);
-    assert.equal(sourceOf('O08', runs(false)), '行动中的高风险处可能找到');
+    assert.equal(sourceOf('O08', runs(false)), '行动中的高风险处可能找到；做完「未归的第七艘船」后修理铺也卖');
+    // The late shelf (#28 M4-03): after the ledger quest, a rare part on this deployment's shelf at its price, else now and then.
+    const late = (has: boolean) => { let n = 0; while (D.lateParts(n).includes('O08') !== has) n++; const s = D.newSave(); s.quests.ledger = true; s.stats.runs = n; return s; };
+    assert.equal(sourceOf('O08', late(true)), `修理铺这次的后期货架有售 · ¥ ${D.ITEMS.O08.buy}`);
+    assert.equal(sourceOf('O08', late(false)), '行动中的高风险处可能找到，修理铺的后期货架有时也有');
     assert.equal(sourceOf('O03', runs(false)), '行动中可能找到，修理铺的轮换货架有时也有');
     assert.match(sourceOf('O03', runs(true)), /^修理铺这次的轮换货架有售 · ¥ \d+$/);
 });

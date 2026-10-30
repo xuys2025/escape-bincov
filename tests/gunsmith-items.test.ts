@@ -4,7 +4,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import * as D from '../src/domain';
 import * as Shop from '../src/shop';
-import { ATTACHMENTS, GUNS } from '../src/gunsmith/catalog';
+import { ATTACHMENTS, GUNS, partTier } from '../src/gunsmith/catalog';
 import { buildOf, factoryState, gunWeight, isGunId, type PartNode } from '../src/gunsmith/instance';
 import { effectiveStats } from '../src/gunsmith/stats';
 import { coneOf } from '../src/shooting';
@@ -85,7 +85,8 @@ test('the 100 attachments that are items are made from the catalog: function nam
     for (const id of ITEM_PARTS) {
         const a = ATTACHMENTS[id], item = D.ITEMS[id];
         assert.deepEqual({ name: item.name, w: item.w, h: item.h, weight: item.weight, stack: item.stack, buy: item.buy, sell: item.sell, kind: item.kind },
-            { name: a.name, w: a.w, h: a.h, weight: a.weight, stack: 1, buy: a.buy, sell: a.sell, kind: 'attachment' }, id);
+            // A rare part sells on the late shelf only, at RARE_MARKUP times its catalog price (#28 M4-03).
+            { name: a.name, w: a.w, h: a.h, weight: a.weight, stack: 1, buy: partTier(a) === 'rare' ? Math.round(a.buy * D.RARE_MARKUP / 10) * 10 : a.buy, sell: a.sell, kind: 'attachment' }, id);
         // The brand shows only in the details (maintainer, 2026-10-12): never in the name, the cell label or the description.
         assert.ok(!/北堤|盐湾|滨机/.test(item.name + item.short + item.description), id);
         // The cell label fits the cell: three characters in one cell, four in two.

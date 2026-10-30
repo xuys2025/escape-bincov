@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import * as D from '../src/domain';
-import { ATTACHMENTS, FACTORY_MAGS, GUNS, factoryMagOf, type GunId } from '../src/gunsmith/catalog';
+import { ATTACHMENTS, FACTORY_MAGS, GUNS, factoryMagOf, partTier, type GunId } from '../src/gunsmith/catalog';
 import { checkInstall, validateBuild } from '../src/gunsmith/compat';
 import { buildOf, gunWeight, type PartNode } from '../src/gunsmith/instance';
 import { effectiveStats } from '../src/gunsmith/stats';
@@ -79,6 +79,9 @@ test('acquisition: every gun and part is on 老栓\'s shelf or found in a raid, 
     // A profile whose rotating shelf (#28 M4-01) is empty of none: each found part says where it is found.
     const none = { quests: {}, stats: { runs: 0, extracts: 0, kills: 0 } }, rotating = new Set(D.rotationParts(0));
     for (const id of PART_IDS) assert.match(sourceOf(id, none), shelf.has(id) ? /^修理铺有售/ : rotating.has(id) ? /^修理铺这次的轮换货架有售/ : /^行动中(的高风险处)?可能找到/, id);
+    // Once the ledger quest is done the rare parts come round on the late shelf too (#28 M4-03).
+    const late = { quests: { ledger: true }, stats: { runs: 0, extracts: 0, kills: 0 } }, lateNow = new Set(D.lateParts(0));
+    for (const id of PART_IDS.filter(id => partTier(ATTACHMENTS[id]) === 'rare')) assert.match(sourceOf(id, late), lateNow.has(id) ? /^修理铺这次的后期货架有售/ : /修理铺的后期货架有时也有$/, id);
     // A gun off the shelf is found (D.gunsmithFind's pools: every gun that is an item but those the arms counter stocks).
     const found = new Set<string>(), draw = (values: number[]) => { let i = 0; return () => values[i++]; };
     for (let k = 0; k < 400; k++) for (const rare of [0, 1]) {

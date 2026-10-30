@@ -6,8 +6,9 @@ import { ATTACHMENTS, GUNS, partTier, type GunId } from '../src/gunsmith/catalog
 import { decodeStoredProfile } from '../src/profile-codec';
 
 // #28 M4-01 (maintainer 2026-10-29, #139): 老栓's guns come with the radio quests, the rare guns are never stocked, the
-// basic parts are steady stock and the common parts rotate with every deployment. Rules in docs/gunsmith/CONTRACTS.md,
-// 「老栓按进度供货（M4-01）」.
+// basic parts are steady stock and the common parts rotate with every deployment. M4-03 (maintainer 2026-10-30): the
+// ledger opens a late shelf of rare parts. Rules in docs/gunsmith/CONTRACTS.md, 「老栓按进度供货（M4-01）」 and
+// 「价格与收入（M4-03）」.
 
 const START = ['pistol', 'shotgun', 'carbine', 'gb17', 'pb226', 'mb870', 'mpb5', 'mb1911'];
 const RARE_GUNS = (Object.keys(GUNS) as GunId[]).filter(id => GUNS[id].tier === 'rare');
@@ -56,6 +57,39 @@ test('a deployment turns the rotation; a reload does not', () => {
     assert.equal(save.stats.runs, 1);
     assert.deepEqual(D.armsStock(save).slice(0, -D.ROTATION_PARTS), before.slice(0, -D.ROTATION_PARTS), 'the steady stock stays');
     assert.deepEqual(D.armsStock(save).slice(-D.ROTATION_PARTS), D.rotationParts(1));
+});
+
+test('the late shelf (M4-03): after the ledger quest, two rare parts per deployment at 2.5 times the catalog price; selling pays the catalog', () => {
+    const RARE = Object.keys(D.ITEMS).filter(id => Object.hasOwn(ATTACHMENTS, id) && partTier(ATTACHMENTS[id]) === 'rare');
+    assert.equal(RARE.length, 15);
+    for (let runs = 0; runs < 300; runs++) {
+        const parts = D.lateParts(runs);
+        assert.equal(parts.length, D.LATE_PARTS);
+        assert.deepEqual(parts, RARE.filter(id => parts.includes(id)), 'rare parts, in item order');
+        assert.deepEqual(D.lateParts(runs), parts, 'worked out from the count alone');
+    }
+    assert.deepEqual([...new Set(Array.from({ length: 100 }, (_, n) => D.lateParts(n)).flat())].sort(), [...RARE].sort(), 'every rare part comes round');
+    // Only once the ledger is done, after the rotating shelf; the quest card says so.
+    const before = withQuests('repair', 'sample'), after = withQuests('repair', 'sample', 'ledger');
+    before.stats.runs = after.stats.runs = 5;
+    assert.ok(!D.armsStock(before).some(id => RARE.includes(id)));
+    assert.deepEqual(D.armsStock(after).slice(-D.ROTATION_PARTS - D.LATE_PARTS), [...D.rotationParts(5), ...D.lateParts(5)]);
+    assert.deepEqual([D.questShelfText('ledger', false), D.questShelfText('ledger', true)], ['完成后修理铺上架：稀有配件（每次出击换 2 件）', '修理铺已上架：稀有配件（每次出击换 2 件）']);
+    // The counter asks 2.5 times the catalog price, to the nearest 10 (1150 to 2250); the sale price stays the catalog's.
+    for (const id of RARE) {
+        assert.deepEqual([D.ITEMS[id].buy, D.ITEMS[id].sell], [Math.round(ATTACHMENTS[id].buy * 2.5 / 10) * 10, ATTACHMENTS[id].sell], id);
+        assert.ok(D.ITEMS[id].buy >= 1150 && D.ITEMS[id].buy <= 2250, id);
+    }
+    for (const id of COMMON_FOUND) assert.equal(D.ITEMS[id].buy, ATTACHMENTS[id].buy, id);
+    // Checkout: this deployment's rare part at that price; another rare part is refused.
+    const save = withQuests('ledger'); save.cash = 100000; save.stats.runs = 5;
+    const [on] = D.lateParts(5), off = RARE.find(id => !D.lateParts(5).includes(id))!;
+    for (const [id, result] of [[on, { ok: true }], [off, { ok: false, reason: 'rule' }]] as const) {
+        const copy = structuredClone(save), cart = Shop.createCart(copy, 'arms');
+        assert.equal(D.addItem(cart.buy, id, 1), 0);
+        assert.deepEqual(Shop.settleCartResult(copy, cart), result, id);
+        if (result.ok) assert.equal(copy.cash, 100000 - D.ITEMS[id].buy);
+    }
 });
 
 test('checkout takes only what is on the shelf for this profile: a quest gun after its quest, a rotating part in its rotation', () => {

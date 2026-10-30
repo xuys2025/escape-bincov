@@ -21,6 +21,7 @@ const groups = [
     'coast-import-assets.mjs', 'gunsmith-assets.mjs', 'mall-assets.mjs', 'opening-assets.mjs', 'station-assets.mjs', 'subset-font.py', 'build-coast-runtime.mjs',
     'format.mjs', 'enemy-export-art.mjs', 'prepare-county-map.mjs', 'pack-coast-art.py',
   ] },
+  { kind: 'diagnostic', reason: '#28 M4-04 改枪经济二十局样本：在真实的出击、结算、任务、仓库和工作台代码上按固定习惯连打二十局（node --import tsx scripts/economy-sample.ts）；习惯与战斗模型是写明的假设，结果不代表真人手感或平衡结论。', files: ['economy-sample.ts'] },
   { kind: 'diagnostic', reason: '帧时、标题性能或确定性射击测量；参数见源码头部，独立运行并记录环境。本轮未重测这些性能工具，不把输出数值当作真人手感或 GPU 完成时间。', files: [
     'coast-sample-measure.mjs', 'title-performance.mjs', 'shooting-bench.ts',
   ] },

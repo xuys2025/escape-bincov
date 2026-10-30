@@ -1,5 +1,5 @@
 /** Pure game rules. No renderer, browser globals, or wall-clock timers are required. */
-import { ATTACHMENTS, BRAND_NAMES, FACTORY_MAG_PARTS, GUNS, factoryMagOf, partDef, partTier, type GunId, type PartTier } from './gunsmith/catalog';
+import { ATTACHMENTS, BRAND_NAMES, FACTORY_MAG_PARTS, GUNS, factoryMagOf, partDef, partTier, type AttachmentDef, type GunId, type PartTier } from './gunsmith/catalog';
 import { checkInstall } from './gunsmith/compat';
 import { effectiveWeapon } from './gunsmith/stats';
 import { buildOf, factoryState, gunSale, gunSize, gunUids, gunWeight, magless, v8Footprints, validateGun, type GunInstance, type GunState } from './gunsmith/instance';
@@ -184,8 +184,15 @@ const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, descrip
 };
 const attachmentItem = (id: string, [short, description]: readonly [string, string]): ItemDef => {
   const a = partDef(id);
-  return item(id, a.name, short, a.w, a.h, a.weight, 1, a.buy, a.sell, 'attachment', description, 0x8a9692);
+  return item(id, a.name, short, a.w, a.h, a.weight, 1, shopPrice(a), a.sell, 'attachment', description, 0x8a9692);
 };
+/** The late shelf's markup on a rare part's catalog price (#28 M4-03, maintainer 2026-10-30). */
+export const RARE_MARKUP = 2.5;
+/**
+ * What the arms counter asks for a part: its catalog price; a rare part, sold only on the late shelf (lateParts), RARE_MARKUP
+ * times that, to the nearest 10 (#28 M4-03, maintainer 2026-10-30). Selling pays the catalog's sell price either way.
+ */
+const shopPrice = (a: Pick<AttachmentDef, 'buy'>) => partTier(a) === 'rare' ? Math.round(a.buy * RARE_MARKUP / 10) * 10 : a.buy;
 /**
  * The factory magazines taken out at the workbench (#28 M4-07, catalog FACTORY_MAGS): attachment items like the rest,
  * but outside ATTACHMENT_ITEMS, so no shop shelf or find pool holds them (M4-01 decides that); one comes only off a gun.
@@ -325,7 +332,8 @@ export const MERCHANTS: Record<'arms' | 'med', { name: string; subtitle: string;
 };
 /**
  * The common guns each radio quest puts on the arms counter once done (#28 M4-01, maintainer 2026-10-29, #139): only the
- * quests open guns, and the rare guns stay finds, so the ledger, whose guns would all be rare, opens none yet.
+ * quests open guns, and the rare guns stay finds, so the ledger, whose guns would all be rare, opens none; it opens the
+ * late shelf of rare parts instead (lateParts).
  */
 export const GUNS_BY_QUEST: Readonly<Record<string, readonly GunId[]>> = { repair: ['umpb45', 'akb74', 'mb4a1', 'akb103'], sample: ['augb', 'rpkb'], ledger: [] };
 /** How many common parts the arms counter's rotating shelf holds (#28 M4-01; a proposal M4-03 may tune). */
@@ -348,12 +356,28 @@ export function rotationParts(runs: number): string[] {
 export function armsStock(save: Pick<SaveDataV1, 'quests' | 'stats'>): string[] {
   const base = MERCHANTS.arms.stock, at = base.indexOf(SHELF_GUNS.at(-1)!) + 1;
   const guns = Object.entries(GUNS_BY_QUEST).flatMap(([quest, ids]) => save.quests[quest] === true ? ids : []);
-  return [...base.slice(0, at), ...guns, ...base.slice(at), ...rotationParts(save.stats.runs)];
+  return [...base.slice(0, at), ...guns, ...base.slice(at), ...rotationParts(save.stats.runs), ...save.quests[LATE_QUEST] === true ? lateParts(save.stats.runs) : []];
 }
-/** The quest card's line on the guns it puts on the arms counter (#28 M4-01), before and after; null for a quest that opens none. */
-export function questGunsText(id: string, done: boolean): string | null {
-  const guns = GUNS_BY_QUEST[id] ?? [];
-  return guns.length ? `${done ? '修理铺已上架' : '完成后修理铺上架'}：${guns.map(gun => ITEMS[gun].short).join('、')}` : null;
+/** How many rare parts the late shelf holds, and the quest that opens it (#28 M4-03, maintainer 2026-10-30). */
+export const LATE_PARTS = 2;
+export const LATE_QUEST = 'ledger';
+/**
+ * The late shelf of a profile that has deployed `runs` times, once the ledger quest is done (#28 M4-03): LATE_PARTS of
+ * the rare parts, drawn as rotationParts draws the common ones but from a stream of its own, in item order. Somewhere for
+ * late cash to go, and a way to a full kit that a raid's rare finds alone hardly give; the rare parts stay finds too.
+ */
+export function lateParts(runs: number): string[] {
+  const pool = [...FIND_PARTS.rare], random = seededRandom(0x4d340003 + integer(runs) * 7919), picked = new Set<string>();
+  while (picked.size < LATE_PARTS && pool.length) picked.add(pool.splice(Math.floor(random() * pool.length), 1)[0]);
+  return FIND_PARTS.rare.filter(id => picked.has(id));
+}
+/**
+ * The quest card's line on what it puts on the arms counter (#28 M4-01, M4-03), before and after: its guns, or for the
+ * ledger the late shelf; null for a quest that opens nothing.
+ */
+export function questShelfText(id: string, done: boolean): string | null {
+  const guns = GUNS_BY_QUEST[id] ?? [], what = guns.length ? guns.map(gun => ITEMS[gun].short).join('、') : id === LATE_QUEST ? `稀有配件（每次出击换 ${LATE_PARTS} 件）` : '';
+  return what ? `${done ? '修理铺已上架' : '完成后修理铺上架'}：${what}` : null;
 }
 /** What a counter stocks for this profile: the arms counter by progress (armsStock), the doctor's fixed stock. */
 export const merchantGoods = (merchant: 'arms' | 'med', save: Pick<SaveDataV1, 'quests' | 'stats'>): string[] =>
