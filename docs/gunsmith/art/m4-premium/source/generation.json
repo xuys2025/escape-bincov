@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "date": "2026-10-30",
+  "mode": "built-in image_gen",
+  "calls": 8,
+  "successful": 8,
+  "scope": "Seven family shape references and one unfinished-billet reference. Final H/I/W/Q24 sprites are independently authored at native pixel resolution using repository pixel tooling, not resampled tool rasters.",
+  "records": [
+    {
+      "name": "optic",
+      "file": "gs-o05-w-v1.png",
+      "prompt": "Use case: precise-object-edit. Asset type: original low-resolution side-view pixel-art component for an existing fictional inventory game.\nEdit the attached component into a premium workshop-made variant: a reinforced compact holographic optic casing with a stepped protective roof, open viewing window, articulated base clamp and one tiny muted-brass rivet near the upper left of its casing.\nMaintain the source side profile, footprint, horizontal east-facing orientation and mounting interface position. Introduce a visible structural redesign beyond a palette change. The brass rivet is a small craft detail, not a logo. Keep a restrained steel-gray palette, one-pixel dark ink outside contour, crisp integer-grid edges, upper-left light, genuine transparent background. No text, numbers, branding, watermark, scenery, hands, glow, shadows or antialiasing. Do not include a full weapon. Intended as shape reference for native tiny game sprites.",
+      "savedReference": "docs/gunsmith/art/m4-premium/source/optic-reference.png"
+    },
+    {
+      "name": "device",
+      "file": "gs-t09-w-v1.png",
+      "prompt": "Use case: precise-object-edit. Asset type: original low-resolution side-view pixel-art component for an existing fictional inventory game.\nEdit the attached component into a premium workshop-made variant: a compact dual-module rail-mounted sensor/light casing with two distinct apertures, faceted shell, recessed top switch, one tiny muted-brass rivet near the upper left of its casing; do not draw emitted beams.\nMaintain the source side profile, footprint, horizontal east-facing orientation and mounting interface position. Introduce a visible structural redesign beyond a palette change. The brass rivet is a small craft detail, not a logo. Keep a restrained steel-gray palette, one-pixel dark ink outside contour, crisp integer-grid edges, upper-left light, genuine transparent background. No text, numbers, branding, watermark, scenery, hands, glow, shadows or antialiasing. Do not include a full weapon. Intended as shape reference for native tiny game sprites.",
+      "savedReference": "docs/gunsmith/art/m4-premium/source/device-reference.png"
+    },
+    {
+      "name": "tube",
+      "file": "gs-m07-w-v1.png",
+      "prompt": "Use case: precise-object-edit. Asset type: original low-resolution side-view pixel-art component for an existing fictional inventory game.\nEdit the attached component into a premium workshop-made variant: a precision-machined compact cylindrical attachment with shouldered end caps, three distinct circumferential cooling grooves, a recessed fastening collar and one tiny muted-brass rivet near the upper left of its casing.\nMaintain the source side profile, footprint, horizontal east-facing orientation and mounting interface position. Introduce a visible structural redesign beyond a palette change. The brass rivet is a small craft detail, not a logo. Keep a restrained steel-gray palette, one-pixel dark ink outside contour, crisp integer-grid edges, upper-left light, genuine transparent background. No text, numbers, branding, watermark, scenery, hands, glow, shadows or antialiasing. Do not include a full weapon. Intended as shape reference for native tiny game sprites.",
+      "savedReference": "docs/gunsmith/art/m4-premium/source/tube-reference.png"
+    },
+    {
+      "name": "stock",
+      "file": "gs-s02-w-v1.png",
+      "prompt": "Use case: precise-object-edit. Asset type: original low-resolution side-view pixel-art component for an existing fictional inventory game.\nEdit the attached component into a premium workshop-made variant: a reinforced adjustable buttstock with an angular open support frame, straight cheek rest, two structural braces, textured buttpad and one tiny muted-brass rivet near the upper left of its casing.\nMaintain the source side profile, footprint, horizontal east-facing orientation and mounting interface position. Introduce a visible structural redesign beyond a palette change. The brass rivet is a small craft detail, not a logo. Keep a restrained steel-gray palette, one-pixel dark ink outside contour, crisp integer-grid edges, upper-left light, genuine transparent background. No text, numbers, branding, watermark, scenery, hands, glow, shadows or antialiasing. Do not include a full weapon. Intended as shape reference for native tiny game sprites.",
+      "savedReference": "docs/gunsmith/art/m4-premium/source/stock-reference.png"
+    },
+    {
+      "name": "grip",
+      "file": "gs-p02-w-v1.png",
+      "prompt": "Use case: precise-object-edit. Asset type: low-resolution native pixel-art component for an existing fictional inventory game.\nEdit the attached existing component into a premium stippled rubber rear grip with an angular machined heel, inset palm panel and one tiny muted-brass rivet at the upper left of the panel. Maintain the source side-profile envelope, footprint, east-facing orientation and interface positions. Redesign shape/panel geometry rather than only recoloring. Restrained steel-gray and dark-rubber palette with a single brass craft detail, one pixel ink exterior, upper-left light, original coherent pixel art. Genuine transparent background, no lettering, brands, serials, logo, watermark, shadows, glow, scenery, hands, antialiasing or full weapon. Shape reference for native tiny game sprites.",
+      "savedReference": "docs/gunsmith/art/m4-premium/source/grip-reference.png"
+    },
+    {
+      "name": "handguard",
+      "file": "gs-h02-w-v1.png",
+      "prompt": "Use case: precise-object-edit. Asset type: low-resolution native pixel-art component for an existing fictional inventory game.\nEdit the attached existing component into a premium ventilated rail handguard with paired elongated cooling slots, a reinforced cutaway side panel, neatly spaced rail teeth, one tiny muted-brass rivet at the upper left of the body; preserve every rail mounting interface. Maintain the source side-profile envelope, footprint, east-facing orientation and interface positions. Redesign shape/panel geometry rather than only recoloring. Restrained steel-gray and dark-rubber palette with a single brass craft detail, one pixel ink exterior, upper-left light, original coherent pixel art. Genuine transparent background, no lettering, brands, serials, logo, watermark, shadows, glow, scenery, hands, antialiasing or full weapon. Shape reference for native tiny game sprites.",
+      "savedReference": "docs/gunsmith/art/m4-premium/source/handguard-reference.png"
+    },
+    {
+      "name": "precision",
+      "file": "gs-s09-w-v1.png",
+      "prompt": "Use case: precise-object-edit. Asset type: low-resolution native pixel-art component for an existing fictional inventory game.\nEdit the attached existing component into a premium precision support stock with a steel skeleton, adjustable raised cheek rest, inset buttpad, two structural support braces and one tiny muted-brass rivet near the upper left of the body. Maintain the source side-profile envelope, footprint, east-facing orientation and interface positions. Redesign shape/panel geometry rather than only recoloring. Restrained steel-gray and dark-rubber palette with a single brass craft detail, one pixel ink exterior, upper-left light, original coherent pixel art. Genuine transparent background, no lettering, brands, serials, logo, watermark, shadows, glow, scenery, hands, antialiasing or full weapon. Shape reference for native tiny game sprites.",
+      "savedReference": "docs/gunsmith/art/m4-premium/source/precision-reference.png"
+    },
+    {
+      "name": "blank",
+      "prompt": "Use case: stylized-concept. Asset type: 24x24 pixel-art inventory material icon.\nOne unfinished precision-machining billet, a short rectangular stepped steel blank with a chamfered corner, a shallow unfinished recess and one small brass locating pin. It should clearly read as raw workshop material, not a finished accessory. Native crisp small pixel art, upper-left highlight, one pixel #122027 outside ink. Palette #122027 #24373d #425a60 #829c9d #bdcfca and #c09a55 only, maximum 8 opaque colors. Full billet centered within square with transparent margins. True transparent background. No writing, numbering, logo, watermark, hand, gun, scene, shadow, glow or antialiasing.",
+      "savedReference": "docs/gunsmith/art/m4-premium/source/blank-reference.png"
+    }
+  ]
+}

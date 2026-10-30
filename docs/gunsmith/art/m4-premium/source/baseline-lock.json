@@ -1,0 +1,3921 @@
+{
+  "schema": 1,
+  "taskHead": "40d43c102fbaa12a671f635736c98ea154d473a3",
+  "acceptedMain": "e5c660ea076abfec4fde01616251915ffb2852eb",
+  "deliveryMain": "7d982a6fc5b4c849d9a3dc576074a01e17c2d052",
+  "assets": [
+    {
+      "id": "gs-mb4a1-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-receiver-h-v1.png",
+      "sha256": "3073e2728518c307d192063d251862f2d9aecd531a3cacf126004931ff06a64f",
+      "bytes": 221
+    },
+    {
+      "id": "gs-mb4a1-barrel-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-barrel-factory-h-v1.png",
+      "sha256": "07b3580a888d085cbb74f5ddd69153eefeb28c10393e6313fd4b1b26f7dc1834",
+      "bytes": 125
+    },
+    {
+      "id": "gs-mb4a1-handguard-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-handguard-factory-h-v1.png",
+      "sha256": "3a0e1610ea144a8f2687a36fa3ac9a8cff076f055d024d7bd49362ae32b519a8",
+      "bytes": 155
+    },
+    {
+      "id": "gs-mb4a1-stock-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-stock-factory-h-v1.png",
+      "sha256": "2e47e8be0b705010b27f0afbe6579534992ee4c429528c416f7e8c208022675d",
+      "bytes": 163
+    },
+    {
+      "id": "gs-mb4a1-reargrip-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-reargrip-factory-h-v1.png",
+      "sha256": "745ffd1c5f93d1d37286d0636134e823630a2d5cebfecabd7fa7301899077e28",
+      "bytes": 122
+    },
+    {
+      "id": "gs-mb4a1-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-mag-factory-h-v1.png",
+      "sha256": "514dc473a17a71f7a38c1045a45a47a842e3b27a905c9a371956db3f9f91408a",
+      "bytes": 124
+    },
+    {
+      "id": "gs-mb4a1-top-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-top-factory-h-v1.png",
+      "sha256": "be67754c22397fc99db850f4fe126283f14c897dc3bbeb772042377ff935beb7",
+      "bytes": 99
+    },
+    {
+      "id": "gs-o03-h-v1",
+      "file": "assets/gunsmith/v1/gs-o03-h-v1.png",
+      "sha256": "45c90ef87db43e543beeecf932fcd02b402a33750bf3a2b8c45bc88a2ff3282c",
+      "bytes": 118
+    },
+    {
+      "id": "gs-m06-h-v1",
+      "file": "assets/gunsmith/v1/gs-m06-h-v1.png",
+      "sha256": "cfaee61bc42aaa2a508773ca89ed080f5e5f0b9924c1d7df447fab41d0cc7c8d",
+      "bytes": 112
+    },
+    {
+      "id": "gs-h01-h-v1",
+      "file": "assets/gunsmith/v1/gs-h01-h-v1.png",
+      "sha256": "22c69b65005f366616528dbfd6bd51c6711bbbfe28babd6b04ade2b0d6768d91",
+      "bytes": 146
+    },
+    {
+      "id": "gs-f01-h-v1",
+      "file": "assets/gunsmith/v1/gs-f01-h-v1.png",
+      "sha256": "6cd1919bd7734a757bb5a3158323f2fe929c24f65ad79ae64d3df66b405b12d0",
+      "bytes": 99
+    },
+    {
+      "id": "gs-glove-rear-h-v1",
+      "file": "assets/gunsmith/v1/gs-glove-rear-h-v1.png",
+      "sha256": "382b6c736004201c94cc7828a4880864b8b79906bb85181924f5247437332d13",
+      "bytes": 105
+    },
+    {
+      "id": "gs-glove-front-h-v1",
+      "file": "assets/gunsmith/v1/gs-glove-front-h-v1.png",
+      "sha256": "325d3f911d31eca8fabaa9afef7a5dd5c75a1aeb1813c2a422f7b8c6380dd764",
+      "bytes": 111
+    },
+    {
+      "id": "gs-glove-foregrip-h-v1",
+      "file": "assets/gunsmith/v1/gs-glove-foregrip-h-v1.png",
+      "sha256": "d27bbf4a9746d6fded40179205fc688c36bf91da7a61b6144b1024024aa4f872",
+      "bytes": 112
+    },
+    {
+      "id": "gs-mb4a1-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-receiver-i-v1.png",
+      "sha256": "1477a9d79607c0bcb1787c86aaabe14437ebc69fc6c362e19a1616fea89f3844",
+      "bytes": 248
+    },
+    {
+      "id": "gs-mb4a1-barrel-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-barrel-factory-i-v1.png",
+      "sha256": "5b446941a0e31aaf271c09ae0a4470f7f3133f79f36ac8c9056f6b4d303b9319",
+      "bytes": 176
+    },
+    {
+      "id": "gs-mb4a1-handguard-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-handguard-factory-i-v1.png",
+      "sha256": "e9b120af772a8316446a2800c3cfc62656d29ab949a4e5af68f486f5566a78a1",
+      "bytes": 177
+    },
+    {
+      "id": "gs-mb4a1-stock-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-stock-factory-i-v1.png",
+      "sha256": "7508226ebc5667d38a8167292a92e49ba249035efeec9c38593c57b609e2151b",
+      "bytes": 225
+    },
+    {
+      "id": "gs-mb4a1-reargrip-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-reargrip-factory-i-v1.png",
+      "sha256": "b5e0df4a837f849f23f9ce94b587b15644c7a1576f1cc649c1a1f5492e03ae8e",
+      "bytes": 194
+    },
+    {
+      "id": "gs-mb4a1-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-mb4a1-mag-factory-i-v2.png",
+      "sha256": "18ea10503db07adf5f0ec8f12324ba66d94034cca9c26a2fde2b4fd2c1293eef",
+      "bytes": 104
+    },
+    {
+      "id": "gs-mb4a1-top-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-top-factory-i-v1.png",
+      "sha256": "8d7c232f85874d361aa9a1c1ed1d18e08bf14163a530e146bcb8b1c41a98954a",
+      "bytes": 111
+    },
+    {
+      "id": "gs-o03-i-v1",
+      "file": "assets/gunsmith/v1/gs-o03-i-v1.png",
+      "sha256": "aa5450ac6f96c8acefac05601769a458708a5c4c8e36c5b253df1d75db0abf1d",
+      "bytes": 182
+    },
+    {
+      "id": "gs-m06-i-v1",
+      "file": "assets/gunsmith/v1/gs-m06-i-v1.png",
+      "sha256": "338cc68a89f8bf922b4b1ef4f6edcd35fc17e73944e361d9ea5939a4801a26ee",
+      "bytes": 156
+    },
+    {
+      "id": "gs-h01-i-v1",
+      "file": "assets/gunsmith/v1/gs-h01-i-v1.png",
+      "sha256": "0d0a793dd984a2ba75b4da14ac830f3202221b8d940e6445e2d29660817fdcb3",
+      "bytes": 200
+    },
+    {
+      "id": "gs-f01-i-v1",
+      "file": "assets/gunsmith/v1/gs-f01-i-v1.png",
+      "sha256": "1b6a744d142153562ac6572fbcbc77bf0a3be1fb614cb1e00dc6297487469909",
+      "bytes": 145
+    },
+    {
+      "id": "gs-mb4a1-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-receiver-w-v1.png",
+      "sha256": "3a934a195ae75493ac4a1b9438c7c9c4509954178011eba698d00db270579cda",
+      "bytes": 461
+    },
+    {
+      "id": "gs-mb4a1-barrel-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-barrel-factory-w-v1.png",
+      "sha256": "1ff76ccc4f0a89131f79644bb29224f517f7ee61b17055efe4a7fb76fa6ae9c4",
+      "bytes": 278
+    },
+    {
+      "id": "gs-mb4a1-handguard-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-handguard-factory-w-v1.png",
+      "sha256": "9ba0229f05497d216e6265624075ec348329e364fb3e0ae89f217490fe922d6d",
+      "bytes": 275
+    },
+    {
+      "id": "gs-mb4a1-stock-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-stock-factory-w-v1.png",
+      "sha256": "d096c1a9c487471a37446791d6d5ebf4b525afd493869849d04c839666dd37a5",
+      "bytes": 302
+    },
+    {
+      "id": "gs-mb4a1-reargrip-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-reargrip-factory-w-v1.png",
+      "sha256": "d61d88dc010744e500bc07a7967ec854ab592e839b12bc7ad2196af774cd8685",
+      "bytes": 251
+    },
+    {
+      "id": "gs-mb4a1-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-mb4a1-mag-factory-w-v2.png",
+      "sha256": "9cbb5f3beacb296d35459b59c25e51264039bbf30eaaff0489be9a55d63acab5",
+      "bytes": 147
+    },
+    {
+      "id": "gs-mb4a1-top-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-top-factory-w-v1.png",
+      "sha256": "8ef4c10109b830b34b2e8a61367273c2dea08ea19a5fa4edd46eab2acde89a20",
+      "bytes": 145
+    },
+    {
+      "id": "gs-o03-w-v1",
+      "file": "assets/gunsmith/v1/gs-o03-w-v1.png",
+      "sha256": "0b07fd7f468e5ba2b71fbed2b3190c268adf2b5470030bbaeedd9eefe2ea0491",
+      "bytes": 263
+    },
+    {
+      "id": "gs-m06-w-v1",
+      "file": "assets/gunsmith/v1/gs-m06-w-v1.png",
+      "sha256": "bb7bdaaabab982c35004bda7c88191473e42d9e53503000962a5ba3b4bad09fe",
+      "bytes": 192
+    },
+    {
+      "id": "gs-h01-w-v1",
+      "file": "assets/gunsmith/v1/gs-h01-w-v1.png",
+      "sha256": "e9507184929ace93c204d7b8136fa9a5748bc7b7aea108a805246569364fcc00",
+      "bytes": 286
+    },
+    {
+      "id": "gs-f01-w-v1",
+      "file": "assets/gunsmith/v1/gs-f01-w-v1.png",
+      "sha256": "0a059ad824f2d3074a9ef5c066be4a790bb313b2f3fbc13aaae65855af47cd14",
+      "bytes": 177
+    },
+    {
+      "id": "gs-mb4a1-q24-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-q24-v1.png",
+      "sha256": "288b414999e5ddaf4100d553f3b43137d4a99e3191d8a621d55a56e06c6d1e09",
+      "bytes": 309
+    },
+    {
+      "id": "gs-mb4a1-q32-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-q32-v1.png",
+      "sha256": "fde216f1fef7193031f8c9c9eff79b27f20e0adf96cd32dafa0e150dd289f23f",
+      "bytes": 418
+    },
+    {
+      "id": "gs-o03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o03-q24-v1.png",
+      "sha256": "40b54e4a14817be0af61d4e11a0fc34ff5c22fa6a6c77a67c8095544abc1f877",
+      "bytes": 291
+    },
+    {
+      "id": "gs-m06-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m06-q24-v1.png",
+      "sha256": "e60714edc6f772bda0891c7ea32f26fd0fe6639e98a1aba084b8e314b7a799c9",
+      "bytes": 239
+    },
+    {
+      "id": "gs-h01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-h01-q24-v1.png",
+      "sha256": "809f188233151b958039adba296620c5f72e7912056cf23e0a7d9f22d137b74a",
+      "bytes": 250
+    },
+    {
+      "id": "gs-f01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-f01-q24-v1.png",
+      "sha256": "8f865795d0fcaa2a28e3fb13e900879ffdc476ecfdbd1485c6cc34f089928c68",
+      "bytes": 231
+    },
+    {
+      "id": "gs-gb17-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-gb17-receiver-h-v1.png",
+      "sha256": "07044922cb143f08f35808aa5e4dd517cbc759746c94135612db5edab1d6ffb7",
+      "bytes": 223
+    },
+    {
+      "id": "gs-carbine-handguard-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-carbine-handguard-factory-h-v1.png",
+      "sha256": "ce4e635000ea1589e68c063011e379bd12d03f036ea8c0a29fd7185ea4d320be",
+      "bytes": 199
+    },
+    {
+      "id": "gs-o01-h-v1",
+      "file": "assets/gunsmith/v1/gs-o01-h-v1.png",
+      "sha256": "aa2406f0db2d913aea37dc7f657c7b124760f1006006288a8ad4fa3b856f13f6",
+      "bytes": 117
+    },
+    {
+      "id": "gs-o08-h-v1",
+      "file": "assets/gunsmith/v1/gs-o08-h-v1.png",
+      "sha256": "10739d0572835865befceb378f94727a805da165b288fb2e84faca7f21043a94",
+      "bytes": 130
+    },
+    {
+      "id": "gs-m03-h-v1",
+      "file": "assets/gunsmith/v1/gs-m03-h-v1.png",
+      "sha256": "777f2a86e75e92aef72943deb18464f03f20c2e41fa1e92b8b4b8a7df84b2064",
+      "bytes": 128
+    },
+    {
+      "id": "gs-b01-h-v1",
+      "file": "assets/gunsmith/v1/gs-b01-h-v1.png",
+      "sha256": "0bccd5001161c07fe22864e80ef9428369b3d84853bcc50276db12248bfac6b8",
+      "bytes": 113
+    },
+    {
+      "id": "gs-b08-h-v1",
+      "file": "assets/gunsmith/v1/gs-b08-h-v1.png",
+      "sha256": "b4a210eb18568df1e0b6e9cc712c8e43c26ed945b355b3de999636f25b0123cd",
+      "bytes": 137
+    },
+    {
+      "id": "gs-h05-h-v1",
+      "file": "assets/gunsmith/v1/gs-h05-h-v1.png",
+      "sha256": "375e27698b5c4de52633bf05f55fee25520d573be58289630a8ff99d0783ae7e",
+      "bytes": 152
+    },
+    {
+      "id": "gs-s01-h-v1",
+      "file": "assets/gunsmith/v1/gs-s01-h-v1.png",
+      "sha256": "458d98f3f1319879fcf69aded939025fe6576bc960b241ba01855cbe1a36ce09",
+      "bytes": 127
+    },
+    {
+      "id": "gs-s02-h-v1",
+      "file": "assets/gunsmith/v1/gs-s02-h-v1.png",
+      "sha256": "5f11ab0dcbac38bdb5b146068c3f05662b0b3568b006896b8fb4114bf64f5a6a",
+      "bytes": 151
+    },
+    {
+      "id": "gs-f03-h-v1",
+      "file": "assets/gunsmith/v1/gs-f03-h-v1.png",
+      "sha256": "fbcc10a670b428f6516a4e4e694912d3d9ece3a1a8c55937ac2813ff8dddf102",
+      "bytes": 103
+    },
+    {
+      "id": "gs-g01-h-v1",
+      "file": "assets/gunsmith/v1/gs-g01-h-v1.png",
+      "sha256": "22c3432003171166773672992c2bed2376cd0753fc403d92f6c2824091411961",
+      "bytes": 117
+    },
+    {
+      "id": "gs-g10-h-v1",
+      "file": "assets/gunsmith/v1/gs-g10-h-v1.png",
+      "sha256": "e9a1da84b37393580263354ea9dffe2b604837c25c000d9449c4762e55ff1c7e",
+      "bytes": 124
+    },
+    {
+      "id": "gs-t01-h-v1",
+      "file": "assets/gunsmith/v1/gs-t01-h-v1.png",
+      "sha256": "74c870ff2f5b1c9a761a411bab1d752498c7392c9d5c54faabcdbf4a59d11dee",
+      "bytes": 107
+    },
+    {
+      "id": "gs-t05-h-v1",
+      "file": "assets/gunsmith/v1/gs-t05-h-v1.png",
+      "sha256": "ee6f3a1561acb3ffcb7c66fafe48038bb2f11c2eaaafd75c0e9ea9e6c3a4f8a4",
+      "bytes": 118
+    },
+    {
+      "id": "gs-a07-h-v1",
+      "file": "assets/gunsmith/v1/gs-a07-h-v1.png",
+      "sha256": "8f9855b2d8c9635574ecd661b72f31ae5e4ad4ae71206198b522a5bb34d79c84",
+      "bytes": 113
+    },
+    {
+      "id": "gs-gb17-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-gb17-receiver-i-v1.png",
+      "sha256": "79463839a371e0456b99e7d0a8c812ed1467f981d934712849f148b39444098d",
+      "bytes": 336
+    },
+    {
+      "id": "gs-gb17-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-gb17-receiver-w-v1.png",
+      "sha256": "3e01713c5c6e71b28e57385a0ca132eeae3a9544b091bc0f87992c4bb39898cf",
+      "bytes": 501
+    },
+    {
+      "id": "gs-o01-i-v1",
+      "file": "assets/gunsmith/v1/gs-o01-i-v1.png",
+      "sha256": "8033b9d2b99d70d4a162291de3cece01d7b88d1ff5b1912082c250f71e6474ed",
+      "bytes": 155
+    },
+    {
+      "id": "gs-o01-w-v1",
+      "file": "assets/gunsmith/v1/gs-o01-w-v1.png",
+      "sha256": "9f5e5db125ae9e56b29a9703dc593debeda767da80ffea7d4f8b54d8ae7e92a5",
+      "bytes": 251
+    },
+    {
+      "id": "gs-o08-i-v1",
+      "file": "assets/gunsmith/v1/gs-o08-i-v1.png",
+      "sha256": "de2317177b606771eb46d5f8722fd2f1372215e7a59a68952d404a39a7d2c376",
+      "bytes": 218
+    },
+    {
+      "id": "gs-o08-w-v1",
+      "file": "assets/gunsmith/v1/gs-o08-w-v1.png",
+      "sha256": "2b6d9d9515b96636de18afd3e2a8e93f4a4c16cab4d5f21a5e9821bd2c1b7a9f",
+      "bytes": 304
+    },
+    {
+      "id": "gs-m03-i-v1",
+      "file": "assets/gunsmith/v1/gs-m03-i-v1.png",
+      "sha256": "eebe577114745c297a06ef13d9b52c45f50682cb14ae4cd5668c453b58d30a15",
+      "bytes": 147
+    },
+    {
+      "id": "gs-m03-w-v1",
+      "file": "assets/gunsmith/v1/gs-m03-w-v1.png",
+      "sha256": "1c6367cc28139d1029f2b408008bd38de4409238cf58aa0fd7803268476e1603",
+      "bytes": 208
+    },
+    {
+      "id": "gs-b01-i-v1",
+      "file": "assets/gunsmith/v1/gs-b01-i-v1.png",
+      "sha256": "7d6d305e5a8fd98aac1baf71d2fca40fa66b2a668c4925295c689e9e96b25dc4",
+      "bytes": 126
+    },
+    {
+      "id": "gs-b01-w-v1",
+      "file": "assets/gunsmith/v1/gs-b01-w-v1.png",
+      "sha256": "346dec7ebb7ccd09c14f7c2a0ea131b5fef3e9ff26d7633416defcd7c95beb74",
+      "bytes": 181
+    },
+    {
+      "id": "gs-b08-i-v1",
+      "file": "assets/gunsmith/v1/gs-b08-i-v1.png",
+      "sha256": "3ea91b454d35a03e228542dbb1af1c37e94147519c782960b741ad1abe2f0963",
+      "bytes": 154
+    },
+    {
+      "id": "gs-b08-w-v1",
+      "file": "assets/gunsmith/v1/gs-b08-w-v1.png",
+      "sha256": "65da6ccd5f66defb447ecb420276f40a0d0cdc2c3fe47eb8716d8672a4dcda64",
+      "bytes": 237
+    },
+    {
+      "id": "gs-h05-i-v1",
+      "file": "assets/gunsmith/v1/gs-h05-i-v1.png",
+      "sha256": "396d3be79e679634c308657ca719f46920c4ead81ee069d55ff0d346dcdb710d",
+      "bytes": 166
+    },
+    {
+      "id": "gs-h05-w-v1",
+      "file": "assets/gunsmith/v1/gs-h05-w-v1.png",
+      "sha256": "4c90029e430fdeb5aab7f49d14186cd344d569a101dddef00c3007ed32ed23a5",
+      "bytes": 226
+    },
+    {
+      "id": "gs-s01-i-v1",
+      "file": "assets/gunsmith/v1/gs-s01-i-v1.png",
+      "sha256": "d765f90b0d9e47e2d9298e5d6ef6e1c257bf47cbbda1977223365a3a17c899da",
+      "bytes": 176
+    },
+    {
+      "id": "gs-s01-w-v1",
+      "file": "assets/gunsmith/v1/gs-s01-w-v1.png",
+      "sha256": "cb9df315f69351ef3be5920d5f8730bd3c5141ebc8203be1b7da06075a98aee5",
+      "bytes": 265
+    },
+    {
+      "id": "gs-s02-i-v1",
+      "file": "assets/gunsmith/v1/gs-s02-i-v1.png",
+      "sha256": "206e75bed5be52474cfd2650df7460fb3f842e95a6d2ab4d1b5d8f37b350a467",
+      "bytes": 194
+    },
+    {
+      "id": "gs-s02-w-v1",
+      "file": "assets/gunsmith/v1/gs-s02-w-v1.png",
+      "sha256": "b147d5e4687f4cc7b9b26fc8ed2ed55796fd9a38471e46a008662040eaef54d8",
+      "bytes": 303
+    },
+    {
+      "id": "gs-p01-i-v1",
+      "file": "assets/gunsmith/v1/gs-p01-i-v1.png",
+      "sha256": "a2b9f445d4cd2069a53038caa100fb52aa45c966e98b17462ca00c00c9a1359e",
+      "bytes": 187
+    },
+    {
+      "id": "gs-p01-w-v1",
+      "file": "assets/gunsmith/v1/gs-p01-w-v1.png",
+      "sha256": "7175429de1c7a2eee59d4f7a2d5fe24c0ea86561a7b8e8269c9507d4a4ddf7bb",
+      "bytes": 248
+    },
+    {
+      "id": "gs-p02-i-v1",
+      "file": "assets/gunsmith/v1/gs-p02-i-v1.png",
+      "sha256": "c1f5a8c53af824f6f52fb455f0a9f2d4fdafb1ebaf83f5e1270e5e28f0a4b193",
+      "bytes": 190
+    },
+    {
+      "id": "gs-p02-w-v1",
+      "file": "assets/gunsmith/v1/gs-p02-w-v1.png",
+      "sha256": "0a9ae40d380433cb45e95885b8303af2bb7c8bd3258d7e00cbd8c5e822fcfc00",
+      "bytes": 257
+    },
+    {
+      "id": "gs-f03-i-v1",
+      "file": "assets/gunsmith/v1/gs-f03-i-v1.png",
+      "sha256": "a69bc0f56d6fe46f538503e377a66fc2fe9197d1993d4404f73bd432b91d6650",
+      "bytes": 148
+    },
+    {
+      "id": "gs-f03-w-v1",
+      "file": "assets/gunsmith/v1/gs-f03-w-v1.png",
+      "sha256": "8439cc85e2c41f84cab020a95e25ae26415e4ed62ab561353d43d36b5103a900",
+      "bytes": 215
+    },
+    {
+      "id": "gs-g01-i-v2",
+      "file": "assets/gunsmith/v1/gs-g01-i-v2.png",
+      "sha256": "caad7cfe927c818bc9f7e5e2842c387ebbbcd8e1b14bd84e4d3101430f330aa0",
+      "bytes": 104
+    },
+    {
+      "id": "gs-g01-w-v2",
+      "file": "assets/gunsmith/v1/gs-g01-w-v2.png",
+      "sha256": "e4e1648b2b3891ef807c1ece3a8d283419cca6e87d174dafa2c6f8a248fa733b",
+      "bytes": 157
+    },
+    {
+      "id": "gs-g10-i-v2",
+      "file": "assets/gunsmith/v1/gs-g10-i-v2.png",
+      "sha256": "e1973589d3cb57d87f552de746568db972ceeedfcb378b6182ea6a45b5da3858",
+      "bytes": 106
+    },
+    {
+      "id": "gs-g10-w-v2",
+      "file": "assets/gunsmith/v1/gs-g10-w-v2.png",
+      "sha256": "34e5ac891c644496fdce769aa5b44f348fc03c54b713071af7c6451c9c2b4bc3",
+      "bytes": 159
+    },
+    {
+      "id": "gs-t01-i-v1",
+      "file": "assets/gunsmith/v1/gs-t01-i-v1.png",
+      "sha256": "ad687d5cda7a1ae1f09e6851bf887613b2911541fe83157b7867f4258caeedaf",
+      "bytes": 145
+    },
+    {
+      "id": "gs-t01-w-v1",
+      "file": "assets/gunsmith/v1/gs-t01-w-v1.png",
+      "sha256": "6f0b94cdc778cb0ef57c33d8addf932575f4bd1d277f0ee7780f0ab4341911cf",
+      "bytes": 203
+    },
+    {
+      "id": "gs-t05-i-v1",
+      "file": "assets/gunsmith/v1/gs-t05-i-v1.png",
+      "sha256": "b84ca7b0588e20ee25e433bb6fc5d5c601d422ba4211605c1dbd7ab67849caa9",
+      "bytes": 153
+    },
+    {
+      "id": "gs-t05-w-v1",
+      "file": "assets/gunsmith/v1/gs-t05-w-v1.png",
+      "sha256": "de5574b54e85081ace9eb8da1043d4131a9b0d0b37862a09f4cff5e0f1543d26",
+      "bytes": 217
+    },
+    {
+      "id": "gs-a07-i-v1",
+      "file": "assets/gunsmith/v1/gs-a07-i-v1.png",
+      "sha256": "d281d8e754b114dac4e7c6b612362e1d6e977ae143025a68120e0c8713cf8294",
+      "bytes": 102
+    },
+    {
+      "id": "gs-a07-w-v1",
+      "file": "assets/gunsmith/v1/gs-a07-w-v1.png",
+      "sha256": "992de9e0169eac20e6e2714c79ab8fe371580c1b330570f139b54cfa85bbbc1f",
+      "bytes": 154
+    },
+    {
+      "id": "gs-carbine-handguard-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-carbine-handguard-factory-w-v1.png",
+      "sha256": "98bbd87f225a3bda7398ca48c3517e82d3cf40bdfd8c073b68491892c5bbb4eb",
+      "bytes": 132
+    },
+    {
+      "id": "gs-pistol-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-pistol-receiver-w-v1.png",
+      "sha256": "f4587aa39daa9d13575ec8d948df1c12777c4a88461fba1a12d57d2200d6d2cf",
+      "bytes": 551
+    },
+    {
+      "id": "gs-shotgun-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-shotgun-receiver-w-v1.png",
+      "sha256": "2c5b9c357431134b00495edc314454e1bf69f369c33b85bb8a70d9d798e32dee",
+      "bytes": 665
+    },
+    {
+      "id": "gs-gb17-q24-v1",
+      "file": "assets/gunsmith/v1/gs-gb17-q24-v1.png",
+      "sha256": "6109f2a1eb50a7e1457e2fe6662d3365b25c6673e4c1fdcabbff60ca3f07217a",
+      "bytes": 283
+    },
+    {
+      "id": "gs-gb17-q32-v1",
+      "file": "assets/gunsmith/v1/gs-gb17-q32-v1.png",
+      "sha256": "755e7bdbf7192456d502d726d04bc72b98771493864d2e31bbb240043d2cfb86",
+      "bytes": 333
+    },
+    {
+      "id": "gs-o01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o01-q24-v1.png",
+      "sha256": "f7d638bb491aceb9580a41161d9d140b2793b66c01055e1e7a78592ca40214e6",
+      "bytes": 232
+    },
+    {
+      "id": "gs-o08-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o08-q24-v1.png",
+      "sha256": "c7869d6b821919dc34589a26fad2347cd439c99685dce89cc35dae0c159fc2ae",
+      "bytes": 268
+    },
+    {
+      "id": "gs-m03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m03-q24-v1.png",
+      "sha256": "9efe06b9305e6741c33fee2886e6e0bdcbda0b5055984af242eab16b8b6cfdbd",
+      "bytes": 213
+    },
+    {
+      "id": "gs-b01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-b01-q24-v1.png",
+      "sha256": "63deb462091918ac5936326a75f98715174e4dd1d4ed7de00aef008e518be0ae",
+      "bytes": 207
+    },
+    {
+      "id": "gs-b08-q24-v1",
+      "file": "assets/gunsmith/v1/gs-b08-q24-v1.png",
+      "sha256": "e5c5e47f55d10b075d59b3b2f673bff2737d63e70f0178999c6b2a1430a61cc6",
+      "bytes": 204
+    },
+    {
+      "id": "gs-h05-q24-v1",
+      "file": "assets/gunsmith/v1/gs-h05-q24-v1.png",
+      "sha256": "e501e33e7d0f6541a9f7ea0aff37f06196974818c418797956e826e6c45d90c6",
+      "bytes": 203
+    },
+    {
+      "id": "gs-s01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-s01-q24-v1.png",
+      "sha256": "684e1efad5eb5f4a30a157883d66d76980d42d5d3731ac8fb0fc48acf197a1d8",
+      "bytes": 239
+    },
+    {
+      "id": "gs-s02-q24-v1",
+      "file": "assets/gunsmith/v1/gs-s02-q24-v1.png",
+      "sha256": "3ed2195feacecf26abbbb24e6eced9b7d222db143d379c2db710bd6e487968f7",
+      "bytes": 247
+    },
+    {
+      "id": "gs-p01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-p01-q24-v1.png",
+      "sha256": "eacf5823c9e3835eea23491328454c7ad986e8a55103bfa5309a652f9ebd546c",
+      "bytes": 262
+    },
+    {
+      "id": "gs-p02-q24-v1",
+      "file": "assets/gunsmith/v1/gs-p02-q24-v1.png",
+      "sha256": "7c59dabf070b03436bd25f39eca59e87992900d0c7527324b5d2f1c62624df7e",
+      "bytes": 242
+    },
+    {
+      "id": "gs-f03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-f03-q24-v1.png",
+      "sha256": "e1c7dcafcab5923ceb69dd6dffa61757afc70ba964556c58d739866c1e87dde7",
+      "bytes": 244
+    },
+    {
+      "id": "gs-g01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g01-q24-v1.png",
+      "sha256": "a0790a552c9c3eeca3acc484ece790647d9a9e562100ecb782800859c7f2d3f3",
+      "bytes": 210
+    },
+    {
+      "id": "gs-g10-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g10-q24-v1.png",
+      "sha256": "03b7c4d255b2e68cdb76a588503277788ebe38cf24a537286d15f4ccc491afe3",
+      "bytes": 227
+    },
+    {
+      "id": "gs-t01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-t01-q24-v1.png",
+      "sha256": "da2add9cadd41607239063929808240090a89889f8b6c35c3956d206c1bb694e",
+      "bytes": 221
+    },
+    {
+      "id": "gs-t05-q24-v1",
+      "file": "assets/gunsmith/v1/gs-t05-q24-v1.png",
+      "sha256": "e667167b1553d251c9934d9abe44bf002634b033398f70da37d21fdeac082098",
+      "bytes": 271
+    },
+    {
+      "id": "gs-a07-q24-v1",
+      "file": "assets/gunsmith/v1/gs-a07-q24-v1.png",
+      "sha256": "8317a4521a62b145c111d59dc2720940b9a800ebcdb29087c22df641f5baa795",
+      "bytes": 214
+    },
+    {
+      "id": "gs-akb74-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-receiver-h-v1.png",
+      "sha256": "a3232861657b471c8970fed23ebf721589da40f88f699951c107a87ba541623e",
+      "bytes": 116
+    },
+    {
+      "id": "gs-akb74-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-receiver-i-v1.png",
+      "sha256": "30a7d5fca69b3ffaba25d37523c949e50e2f5e0818ff39123b7bde628e67f3dc",
+      "bytes": 160
+    },
+    {
+      "id": "gs-akb74-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-receiver-w-v1.png",
+      "sha256": "0d393f984d1127466c370ef4a43616af7d0861d30616c86c3af944b0e3fef159",
+      "bytes": 287
+    },
+    {
+      "id": "gs-akb74-barrel-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-barrel-factory-h-v1.png",
+      "sha256": "6d4afde90f2b7f11ce7a6a0e0c6b910eb851345462c82811b5fd2321f39db93a",
+      "bytes": 104
+    },
+    {
+      "id": "gs-b07-h-v1",
+      "file": "assets/gunsmith/v1/gs-b07-h-v1.png",
+      "sha256": "aefecb4036dd257031af993c7e2615c799f4a2093eda6bb2e7eccf4e5180da02",
+      "bytes": 103
+    },
+    {
+      "id": "gs-akb74-barrel-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-barrel-factory-i-v1.png",
+      "sha256": "a757f6daa9c80e62f533a3543b0e576bdf215724e79263ed9c0d33c0f444deb2",
+      "bytes": 145
+    },
+    {
+      "id": "gs-b07-i-v1",
+      "file": "assets/gunsmith/v1/gs-b07-i-v1.png",
+      "sha256": "5ac7c1c8957afed906c259371b4e98acb7093219117916ce7d03b1bc99747ebe",
+      "bytes": 142
+    },
+    {
+      "id": "gs-akb74-barrel-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-barrel-factory-w-v1.png",
+      "sha256": "490f16e04f65164e5004f0c1c52502445b414dd646ff8ece4adb1abb6bdf8a7f",
+      "bytes": 204
+    },
+    {
+      "id": "gs-b07-w-v1",
+      "file": "assets/gunsmith/v1/gs-b07-w-v1.png",
+      "sha256": "6bf31c979ed6b857309c86ed678ad79733c8feefd0c622d84ae027a2b2a9b285",
+      "bytes": 195
+    },
+    {
+      "id": "gs-akb74-handguard-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-handguard-factory-h-v1.png",
+      "sha256": "44bb09e8207769d480210246db9e2a825d91b07c8a72620a30a0c5d1d34a02f1",
+      "bytes": 88
+    },
+    {
+      "id": "gs-h03-h-v1",
+      "file": "assets/gunsmith/v1/gs-h03-h-v1.png",
+      "sha256": "72ed8311e4eb0c97c35b1fa614b96d30e57a8ff6d03fb8c1d72a72b1740dc858",
+      "bytes": 93
+    },
+    {
+      "id": "gs-h04-h-v1",
+      "file": "assets/gunsmith/v1/gs-h04-h-v1.png",
+      "sha256": "bdd6257a4d770f26b44433df89a340eb41dd134c4e1687e142c7f0aa0d3464ed",
+      "bytes": 90
+    },
+    {
+      "id": "gs-akb74-handguard-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-handguard-factory-i-v1.png",
+      "sha256": "58590deec68c738e6ab1c1153032a6397ea85542c659caf29ff57a137f6d9c6d",
+      "bytes": 123
+    },
+    {
+      "id": "gs-h03-i-v1",
+      "file": "assets/gunsmith/v1/gs-h03-i-v1.png",
+      "sha256": "7e158dd1626f620caa3545dbbb555e1bd43fa7948b2135e6ebc5e06fdb6fda5e",
+      "bytes": 115
+    },
+    {
+      "id": "gs-h04-i-v1",
+      "file": "assets/gunsmith/v1/gs-h04-i-v1.png",
+      "sha256": "317778f0a96e012170dfffed8716f432f07521f010397b3d4b8ada572788d9d9",
+      "bytes": 123
+    },
+    {
+      "id": "gs-akb74-handguard-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-handguard-factory-w-v1.png",
+      "sha256": "b758c86896b3464666b0c98363bef8948327e812ecdc0a962bcfe09f9ae08a99",
+      "bytes": 161
+    },
+    {
+      "id": "gs-h03-w-v1",
+      "file": "assets/gunsmith/v1/gs-h03-w-v1.png",
+      "sha256": "b3140c40bc9d5c0dbbf155d25c5cce1e80e4c5638fee7512462c08faa4f0167b",
+      "bytes": 153
+    },
+    {
+      "id": "gs-h04-w-v1",
+      "file": "assets/gunsmith/v1/gs-h04-w-v1.png",
+      "sha256": "81ca1c0e65bd0c1d7104caef8d9d57f224eefd99b4392220ac48c3e91e8c0b13",
+      "bytes": 146
+    },
+    {
+      "id": "gs-akb74-stock-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-stock-factory-h-v1.png",
+      "sha256": "fa6f349c7e85deb21d9b1e5b3dbbc59a4d454143c022bb97fb6333920f4b0933",
+      "bytes": 104
+    },
+    {
+      "id": "gs-s03-h-v1",
+      "file": "assets/gunsmith/v1/gs-s03-h-v1.png",
+      "sha256": "d8eb1729a68ea9308748f19512421d794ea5ad2da6d17f9fef92ae4cde8c2573",
+      "bytes": 97
+    },
+    {
+      "id": "gs-s04-h-v1",
+      "file": "assets/gunsmith/v1/gs-s04-h-v1.png",
+      "sha256": "958f70cc5a5b6bc44e801ec2f49acca355b6c4e9300716e910983f50fce28995",
+      "bytes": 104
+    },
+    {
+      "id": "gs-akb74-stock-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-stock-factory-i-v1.png",
+      "sha256": "662c042ab903a81b2337e8fad02f7be065f9f201d0420a65683df942759feb4a",
+      "bytes": 149
+    },
+    {
+      "id": "gs-s03-i-v1",
+      "file": "assets/gunsmith/v1/gs-s03-i-v1.png",
+      "sha256": "b633a6753c13a01d4992370bc0103a8190fba299e408991483f23c441798a804",
+      "bytes": 152
+    },
+    {
+      "id": "gs-s04-i-v1",
+      "file": "assets/gunsmith/v1/gs-s04-i-v1.png",
+      "sha256": "63bd6fc868d8e9a45afb4808bc414dc79f9e481074848b66961a0811694ff232",
+      "bytes": 159
+    },
+    {
+      "id": "gs-akb74-stock-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-stock-factory-w-v1.png",
+      "sha256": "d6380a64f5ea2f893ddca3d80154096c2900062d941ad6faca5a16600b95ebd6",
+      "bytes": 257
+    },
+    {
+      "id": "gs-s03-w-v1",
+      "file": "assets/gunsmith/v1/gs-s03-w-v1.png",
+      "sha256": "06b9cd839207b194241b7a40d662fd862d0a5aa955e0616415fd363825a87678",
+      "bytes": 239
+    },
+    {
+      "id": "gs-s04-w-v1",
+      "file": "assets/gunsmith/v1/gs-s04-w-v1.png",
+      "sha256": "54162ac6d5b0ec08cb6781bcfc03d92f463713f590f0ecbda5b2a91c696ed356",
+      "bytes": 267
+    },
+    {
+      "id": "gs-akb74-reargrip-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-reargrip-factory-h-v1.png",
+      "sha256": "dc031401aec572324cdbf6d7e08d96a4114bb079a75534078013376743fb2b11",
+      "bytes": 94
+    },
+    {
+      "id": "gs-akb74-reargrip-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-reargrip-factory-i-v1.png",
+      "sha256": "41caa4b0335f060bb1459e9a8766fad4e5ba486dfbfb078aa8daa1aa0e5ff1a9",
+      "bytes": 125
+    },
+    {
+      "id": "gs-p03-i-v1",
+      "file": "assets/gunsmith/v1/gs-p03-i-v1.png",
+      "sha256": "b4650984fc9278522a68becdc9bd63a0c4d11767cca77a6ad23c3d540de066c0",
+      "bytes": 134
+    },
+    {
+      "id": "gs-p04-i-v1",
+      "file": "assets/gunsmith/v1/gs-p04-i-v1.png",
+      "sha256": "e0a34dcd57fb328583746182c9b4d3457d69764fd33b8a95a18512fc84478686",
+      "bytes": 121
+    },
+    {
+      "id": "gs-akb74-reargrip-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-reargrip-factory-w-v1.png",
+      "sha256": "61b771fe92d62613e6e86a1d5cff3df1d95049e52cebc33eaea8a4d39cfe5f9b",
+      "bytes": 171
+    },
+    {
+      "id": "gs-p03-w-v1",
+      "file": "assets/gunsmith/v1/gs-p03-w-v1.png",
+      "sha256": "e79fdb2daf7aaeb07d1298f54274606ffb38105cc5d9e4360a54514f368b3e88",
+      "bytes": 189
+    },
+    {
+      "id": "gs-p04-w-v1",
+      "file": "assets/gunsmith/v1/gs-p04-w-v1.png",
+      "sha256": "5cb6a3434f3d1e38c3730d8becc8a47aa60eb3fbda1890dacbbbdca2278a932e",
+      "bytes": 156
+    },
+    {
+      "id": "gs-akb74-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-mag-factory-h-v1.png",
+      "sha256": "cc756b0ab970d6106455b284c6dd0464c8fe9415cd84ed80a96906ea57727c1e",
+      "bytes": 102
+    },
+    {
+      "id": "gs-g08-h-v1",
+      "file": "assets/gunsmith/v1/gs-g08-h-v1.png",
+      "sha256": "d2818fa13f21cfd8c7c24b5c503f9def05c06b63949417a0019ccf05efbe07a1",
+      "bytes": 105
+    },
+    {
+      "id": "gs-akb74-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-akb74-mag-factory-i-v2.png",
+      "sha256": "3138932897fe94200baca8f612a4349cf0c723bb4721bd292499dd0facd3c87f",
+      "bytes": 116
+    },
+    {
+      "id": "gs-g08-i-v2",
+      "file": "assets/gunsmith/v1/gs-g08-i-v2.png",
+      "sha256": "80ec7def7b0039a3c46a0f15173e49a8a8e2cebc643aa44da9085c0d395fc995",
+      "bytes": 115
+    },
+    {
+      "id": "gs-akb74-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-akb74-mag-factory-w-v2.png",
+      "sha256": "05ea90c07e14045fc3e5fa10aa1acea1c160950840b32398a70316ec864d92e2",
+      "bytes": 183
+    },
+    {
+      "id": "gs-g08-w-v2",
+      "file": "assets/gunsmith/v1/gs-g08-w-v2.png",
+      "sha256": "e878fc0f9d964f3e536956af295af8bedf3a91f991086380e11cd8d5877a76ee",
+      "bytes": 186
+    },
+    {
+      "id": "gs-m05-h-v1",
+      "file": "assets/gunsmith/v1/gs-m05-h-v1.png",
+      "sha256": "24668736eaf23f4be3a820590755836f4b1e0607a41a2a2d184be6389e675c6b",
+      "bytes": 80
+    },
+    {
+      "id": "gs-m07-h-v1",
+      "file": "assets/gunsmith/v1/gs-m07-h-v1.png",
+      "sha256": "a9d86a4bdb7d03cd163325555d7bf652799e4a8f7c297c2a734998d68f132700",
+      "bytes": 83
+    },
+    {
+      "id": "gs-m05-i-v1",
+      "file": "assets/gunsmith/v1/gs-m05-i-v1.png",
+      "sha256": "eee50689c9fbe612f3531dc0e8ad54d78d5fad45667fb8573f5467ed6df8ce94",
+      "bytes": 91
+    },
+    {
+      "id": "gs-m07-i-v1",
+      "file": "assets/gunsmith/v1/gs-m07-i-v1.png",
+      "sha256": "06852342910a71c7a007e95a7b633bda8dd0b72480e91183e3d68ce350deabfd",
+      "bytes": 113
+    },
+    {
+      "id": "gs-m05-w-v1",
+      "file": "assets/gunsmith/v1/gs-m05-w-v1.png",
+      "sha256": "b3d3123f1da3a5b8c0bdd352535b726382fdb24a5ef3862e2b45dd3a190714ca",
+      "bytes": 131
+    },
+    {
+      "id": "gs-m07-w-v1",
+      "file": "assets/gunsmith/v1/gs-m07-w-v1.png",
+      "sha256": "1d2483422a34400e99789196c589d7247a71dc4c7f660f20c8fe770bc2eb6944",
+      "bytes": 153
+    },
+    {
+      "id": "gs-a08-h-v1",
+      "file": "assets/gunsmith/v1/gs-a08-h-v1.png",
+      "sha256": "19d174f86a13e51cc588f4155c1bce4c541fdfd5592d5b1ae40a3c771f401a7e",
+      "bytes": 93
+    },
+    {
+      "id": "gs-a08-i-v1",
+      "file": "assets/gunsmith/v1/gs-a08-i-v1.png",
+      "sha256": "70589c03747ddadbed049e8cb5ff1f49a76df8f889afe26dd99d87bda08307c3",
+      "bytes": 100
+    },
+    {
+      "id": "gs-a08-w-v1",
+      "file": "assets/gunsmith/v1/gs-a08-w-v1.png",
+      "sha256": "c7a7c7951b87f62239d2c8443c6f8225ec16a9c2a2b9def747c0bb8c4a82c617",
+      "bytes": 134
+    },
+    {
+      "id": "gs-akb74-q24-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-q24-v1.png",
+      "sha256": "0ded481400105a0cbf3e7577f91c66a3808764bd71fc1c41c6dfe3d1ceaa4952",
+      "bytes": 243
+    },
+    {
+      "id": "gs-akb74-q32-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-q32-v1.png",
+      "sha256": "b7efd72dd32825bad2c2db30afc31e79af460d983a21fbcc4c2edeb73370b3e7",
+      "bytes": 320
+    },
+    {
+      "id": "gs-s03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-s03-q24-v1.png",
+      "sha256": "8985d70371a86a444154b2d626e3d0a5b863a9c42534ff7fc3a52860de47f22e",
+      "bytes": 168
+    },
+    {
+      "id": "gs-h03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-h03-q24-v1.png",
+      "sha256": "9226218b54dfea898dd0f70f147e44f1837a5a6d0fb1fdc2b754ede803bb135e",
+      "bytes": 143
+    },
+    {
+      "id": "gs-p04-q24-v1",
+      "file": "assets/gunsmith/v1/gs-p04-q24-v1.png",
+      "sha256": "e3ba5e75de854e51e0eb665becfb79d112701497b3e593b7da78e774f2fb6b1c",
+      "bytes": 169
+    },
+    {
+      "id": "gs-b07-q24-v1",
+      "file": "assets/gunsmith/v1/gs-b07-q24-v1.png",
+      "sha256": "76d4e2b0b1d9e43dbb10d4eb428755014af8eac82f1bc4ce048cfda654813ded",
+      "bytes": 147
+    },
+    {
+      "id": "gs-m05-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m05-q24-v1.png",
+      "sha256": "7f4dd41bcb7ddea43fb417626bd798755396ed9abd59238ff8500ddbfd2e2e75",
+      "bytes": 138
+    },
+    {
+      "id": "gs-s04-q24-v1",
+      "file": "assets/gunsmith/v1/gs-s04-q24-v1.png",
+      "sha256": "bf389125922b1c52a9e9700f026ef56dade9abf4a1178808203c00a52beb74dd",
+      "bytes": 170
+    },
+    {
+      "id": "gs-h04-q24-v1",
+      "file": "assets/gunsmith/v1/gs-h04-q24-v1.png",
+      "sha256": "f7c459d357b93a6090eac43da325aa79036b4fca6887f4234c118a7167658d40",
+      "bytes": 145
+    },
+    {
+      "id": "gs-p03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-p03-q24-v1.png",
+      "sha256": "7eba8ff27682ebc4bbd6973935cbb5c521b5ba2ed391b0ff4cbfcb338134245d",
+      "bytes": 177
+    },
+    {
+      "id": "gs-a08-q24-v1",
+      "file": "assets/gunsmith/v1/gs-a08-q24-v1.png",
+      "sha256": "6370577f4434029b44d59242f5420c1252324238def07be98e44ea73bd5ab3c6",
+      "bytes": 138
+    },
+    {
+      "id": "gs-g08-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g08-q24-v1.png",
+      "sha256": "d86f8dd3c2aabf57168b065220f91cf670c0d5b4ae26e0d96bfeb837075777b3",
+      "bytes": 184
+    },
+    {
+      "id": "gs-m07-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m07-q24-v1.png",
+      "sha256": "7e8f6894e453ceae7a1175b1cd8196759b15f5916925878e74ad212088ae65dc",
+      "bytes": 141
+    },
+    {
+      "id": "gs-pb226-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-pb226-receiver-h-v1.png",
+      "sha256": "b2ac8cc5b340555cae946f6d547083735c9b46430f7c1fca780b2755dc19b7ab",
+      "bytes": 138
+    },
+    {
+      "id": "gs-pb226-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-pb226-receiver-i-v1.png",
+      "sha256": "c4ba86092be3c1f066d72fb236af730742a70c8eef20cd21b48a85ba5754443e",
+      "bytes": 225
+    },
+    {
+      "id": "gs-pb226-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-pb226-receiver-w-v1.png",
+      "sha256": "441be5d6b9034d332ac323f6dc0414c37c21440d9d86f28549fa20cdf33028dd",
+      "bytes": 352
+    },
+    {
+      "id": "gs-vb9-receiver-h-v2",
+      "file": "assets/gunsmith/v1/gs-vb9-receiver-h-v2.png",
+      "sha256": "0c427cb5d9d38d54ec8774545bc59f54a5535f265d4c3b6db23b035ac5efd6cb",
+      "bytes": 138
+    },
+    {
+      "id": "gs-vb9-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-vb9-mag-factory-h-v1.png",
+      "sha256": "dc9faa1c0d890dac164b704d254fedbf7976644768e23138d671fd9bf61790f7",
+      "bytes": 89
+    },
+    {
+      "id": "gs-vb9-receiver-i-v3",
+      "file": "assets/gunsmith/v1/gs-vb9-receiver-i-v3.png",
+      "sha256": "ab795382c93f550180772a87027e1b408d75db569c6555e0a57b99288e44d8da",
+      "bytes": 220
+    },
+    {
+      "id": "gs-vb9-mag-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-vb9-mag-factory-i-v1.png",
+      "sha256": "6dc260433e2b0ca5d933e4b9e67f44dadeb4920edaad1ef26149d75d00ba2e1e",
+      "bytes": 111
+    },
+    {
+      "id": "gs-vb9-receiver-w-v3",
+      "file": "assets/gunsmith/v1/gs-vb9-receiver-w-v3.png",
+      "sha256": "1c4ff46093bb11644af95ee3a6efa24f36ff5861525b5bbcb9a6b83a5edae518",
+      "bytes": 378
+    },
+    {
+      "id": "gs-vb9-mag-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-vb9-mag-factory-w-v1.png",
+      "sha256": "ec46a8c31119bf88511864361b6927e5cc87479bd8be0e302335bf265bd3c6a1",
+      "bytes": 151
+    },
+    {
+      "id": "gs-mpb5-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-receiver-h-v1.png",
+      "sha256": "e46ea1370937cde3e4381b5b91e6baa339e73eb61b2d731a1b02d6d926dad228",
+      "bytes": 126
+    },
+    {
+      "id": "gs-mpb5-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-receiver-i-v1.png",
+      "sha256": "f1561adcdafa0b5f0b03f5eceb9aabb88a295d0f36ab79ae8de45200008b63f1",
+      "bytes": 180
+    },
+    {
+      "id": "gs-mpb5-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-receiver-w-v1.png",
+      "sha256": "2eb27c234d3706ad7ebdd10d229b884703397fe7a6e3594de9bc6497e1f34bcb",
+      "bytes": 300
+    },
+    {
+      "id": "gs-mb870-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-receiver-h-v1.png",
+      "sha256": "3a09cdd5ef1c1dc93f1ff7c4fe503647a67bf87b1de0364353009b87c9f8b517",
+      "bytes": 109
+    },
+    {
+      "id": "gs-mb870-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-receiver-i-v1.png",
+      "sha256": "48543110ff2a62ce9ba093036cc6b777e199b17f9119cccf3a5479ce3316504f",
+      "bytes": 140
+    },
+    {
+      "id": "gs-mb870-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-receiver-w-v1.png",
+      "sha256": "7a19dd8999698e02f12c47f0aa1416ad3bcf3bf7e7054d59e2783b92a8d89222",
+      "bytes": 215
+    },
+    {
+      "id": "gs-mb1014-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-receiver-h-v1.png",
+      "sha256": "d8a234c130643653e02a737a11bf110f351a240d9a8ec4d165045b3ced883246",
+      "bytes": 114
+    },
+    {
+      "id": "gs-mb1014-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-receiver-i-v1.png",
+      "sha256": "76c8723e12521e59536fe5224b3b10696f0c5248e77261ce308d6171bce8b708",
+      "bytes": 144
+    },
+    {
+      "id": "gs-mb1014-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-receiver-w-v1.png",
+      "sha256": "4a17a27bac71e9bdff11e4ca0d457ed1d2e46718bd7011ebde811c88635dabfc",
+      "bytes": 225
+    },
+    {
+      "id": "gs-akb103-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-receiver-h-v1.png",
+      "sha256": "9907df98f58f1a4b2d59922d8a93469bf91b861e4fc3a7c39f91959ae9d29112",
+      "bytes": 118
+    },
+    {
+      "id": "gs-akb103-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-receiver-i-v1.png",
+      "sha256": "58cd9cc4a2f4afc74d5a64ca13fd16411758f532172c98bf20fefc0410cea312",
+      "bytes": 142
+    },
+    {
+      "id": "gs-akb103-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-receiver-w-v1.png",
+      "sha256": "c54540d22a4ce077242442e5e9ceb3466d4370030d13267c697cb4f8ab98bc63",
+      "bytes": 228
+    },
+    {
+      "id": "gs-mpb5-barrel-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-barrel-factory-h-v1.png",
+      "sha256": "ea23d2cabf19e1b49edfb407259907a111523324f2a0fb71be8ba95111a301a2",
+      "bytes": 92
+    },
+    {
+      "id": "gs-mpb5-barrel-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-barrel-factory-i-v1.png",
+      "sha256": "29a11b52f1254e04e5e29b0fbabc749634cbeaf2fc1a8d5ba46f19f2de569b93",
+      "bytes": 124
+    },
+    {
+      "id": "gs-mpb5-barrel-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-barrel-factory-w-v1.png",
+      "sha256": "27d25df9ff23d2ecc7706439407c295022dc5a542acb53a28498071d45160b23",
+      "bytes": 158
+    },
+    {
+      "id": "gs-mb870-barrel-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-barrel-factory-h-v1.png",
+      "sha256": "524ca420556f4e8848334385d14d88623783303bf45809984e375f62386943a8",
+      "bytes": 92
+    },
+    {
+      "id": "gs-mb870-barrel-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-barrel-factory-i-v1.png",
+      "sha256": "2c23ff17e6fe9f1544b1af564fa518ef7e65dc63a2717f80376f19d9a2f0340e",
+      "bytes": 127
+    },
+    {
+      "id": "gs-mb870-barrel-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-barrel-factory-w-v1.png",
+      "sha256": "457b8c5c3cf0510ee01e39f5a782300265375dcbc998ca22a03f03a80c7c6376",
+      "bytes": 170
+    },
+    {
+      "id": "gs-mb1014-barrel-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-barrel-factory-h-v1.png",
+      "sha256": "a39c2059cc9f4a670a531324c53ba5b486f185f1339d4d0ef8a61154628fd069",
+      "bytes": 92
+    },
+    {
+      "id": "gs-mb1014-barrel-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-barrel-factory-i-v1.png",
+      "sha256": "d9ba438251ef402b8b1715ee47204267e18d953a4215e8b1f4611bb581313f0d",
+      "bytes": 126
+    },
+    {
+      "id": "gs-mb1014-barrel-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-barrel-factory-w-v1.png",
+      "sha256": "3c24dbfd6de9280456fe3b001747a1e224c7a26a61c85f3d863fa95b1a20c9bb",
+      "bytes": 168
+    },
+    {
+      "id": "gs-akb103-barrel-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-barrel-factory-h-v1.png",
+      "sha256": "19a92310d85f6c9130948accee3fd704248fa137bd034a8ef3e758600074d10d",
+      "bytes": 92
+    },
+    {
+      "id": "gs-akb103-barrel-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-barrel-factory-i-v1.png",
+      "sha256": "877bf6ac7f4ef57871ef3d314cf7ebb55bae9a3796effe8587de981e25380e61",
+      "bytes": 125
+    },
+    {
+      "id": "gs-akb103-barrel-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-barrel-factory-w-v1.png",
+      "sha256": "f0f1989360176b3a0eee2b9667432594804d03dce339e272ac803772969e0916",
+      "bytes": 159
+    },
+    {
+      "id": "gs-mpb5-stock-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-stock-factory-h-v1.png",
+      "sha256": "97fa3c97a939c192c8d7a1b980120e6b7b513b671694ffda65ad8a0019e314ae",
+      "bytes": 97
+    },
+    {
+      "id": "gs-mpb5-stock-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-stock-factory-i-v1.png",
+      "sha256": "85b0a6596048a5e70105dcf3befe4f897c9e6634612be790a1e7141b8dfba426",
+      "bytes": 152
+    },
+    {
+      "id": "gs-mpb5-stock-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-stock-factory-w-v1.png",
+      "sha256": "305cd67a2bccbf9d062c207e56df9ae2eac1a7c6527c00f572840a238f90c9f0",
+      "bytes": 224
+    },
+    {
+      "id": "gs-mb870-stock-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-stock-factory-h-v1.png",
+      "sha256": "13c111585c53ce27f42f6ed99abf0da8838e055ffac49861bcd6e07ee5670cba",
+      "bytes": 103
+    },
+    {
+      "id": "gs-mb870-stock-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-stock-factory-i-v1.png",
+      "sha256": "958a8662ce9858d3d194ade2733475044ecd286e1d2264483de0babfafe46de2",
+      "bytes": 159
+    },
+    {
+      "id": "gs-mb870-stock-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-stock-factory-w-v1.png",
+      "sha256": "f524d9f9e36cedfbbf08a1dfbe52f426f36fc8456e57e876dd245acfdd9dbecb",
+      "bytes": 252
+    },
+    {
+      "id": "gs-mb1014-stock-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-stock-factory-h-v1.png",
+      "sha256": "c91ca01b021a4b3073b797795a37011d40951000c322220a0e2b37ae9e902044",
+      "bytes": 103
+    },
+    {
+      "id": "gs-mb1014-stock-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-stock-factory-i-v1.png",
+      "sha256": "7caaf50b423881fae8ff802783cb119743a2599ded1058a74b5e677750d76913",
+      "bytes": 168
+    },
+    {
+      "id": "gs-mb1014-stock-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-stock-factory-w-v1.png",
+      "sha256": "dd69b45ebece1eb4a9040e32cbbbea846f8b86d059f62af5dbab240c7d8fc3eb",
+      "bytes": 261
+    },
+    {
+      "id": "gs-akb103-stock-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-stock-factory-h-v1.png",
+      "sha256": "237b55cae01cbb6881c0e47e9a42054fec5365e64255d90aa5d7176a3e3c4e54",
+      "bytes": 102
+    },
+    {
+      "id": "gs-akb103-stock-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-stock-factory-i-v1.png",
+      "sha256": "252b8b6541a970d5a4698785bf30d8c1df163b357bc48d6da59d721521df385b",
+      "bytes": 163
+    },
+    {
+      "id": "gs-akb103-stock-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-stock-factory-w-v1.png",
+      "sha256": "71a205809e6fd16b4749114f91a8a89e1fccd339d56258b9a0829fbdc651feac",
+      "bytes": 247
+    },
+    {
+      "id": "gs-mpb5-handguard-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-handguard-factory-h-v1.png",
+      "sha256": "c89af7ee510753a8fd14db90a00b90e5557f4556fb47d9ce38bfb0fb5bdeb17c",
+      "bytes": 93
+    },
+    {
+      "id": "gs-mpb5-handguard-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-handguard-factory-i-v1.png",
+      "sha256": "42b5afa6f77e5800c4902599d00c7452262c11f5db5bf2d8371cc2f9e32b4aed",
+      "bytes": 105
+    },
+    {
+      "id": "gs-mpb5-handguard-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-handguard-factory-w-v1.png",
+      "sha256": "cf9b252cc3c4a7ce023f7534c358e7f74dde29f7faf9479459d094d9585afea0",
+      "bytes": 133
+    },
+    {
+      "id": "gs-mb870-handguard-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-handguard-factory-h-v1.png",
+      "sha256": "cae0deb6e771fb8f988d8422234331bc1e1afb01f235a763f32db661a23d893b",
+      "bytes": 93
+    },
+    {
+      "id": "gs-mb870-handguard-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-handguard-factory-i-v1.png",
+      "sha256": "28ff664c51170004fce8be455c66583e71d69626be876fd5d1601b25a5268152",
+      "bytes": 108
+    },
+    {
+      "id": "gs-mb870-handguard-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-handguard-factory-w-v1.png",
+      "sha256": "efb0cf98eb64ba02f7ccc9aa2c5c0cd37d34cb77622eb14b34316b602a189992",
+      "bytes": 127
+    },
+    {
+      "id": "gs-mb1014-handguard-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-handguard-factory-h-v1.png",
+      "sha256": "c89af7ee510753a8fd14db90a00b90e5557f4556fb47d9ce38bfb0fb5bdeb17c",
+      "bytes": 93
+    },
+    {
+      "id": "gs-mb1014-handguard-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-handguard-factory-i-v1.png",
+      "sha256": "e086780c91a8360b2ec047506b829af966398ec7e5e0ec89249cd9903ec5f5ca",
+      "bytes": 104
+    },
+    {
+      "id": "gs-mb1014-handguard-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-handguard-factory-w-v1.png",
+      "sha256": "3f3af2ac8f94c9d33e54bbad08892f57c0b67d279c5c267621b70af8680fb9ac",
+      "bytes": 133
+    },
+    {
+      "id": "gs-akb103-handguard-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-handguard-factory-h-v1.png",
+      "sha256": "c89af7ee510753a8fd14db90a00b90e5557f4556fb47d9ce38bfb0fb5bdeb17c",
+      "bytes": 93
+    },
+    {
+      "id": "gs-akb103-handguard-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-handguard-factory-i-v1.png",
+      "sha256": "8ff2f948cce919da9c0771ee2ab46e3c6d6010171d2c3492ed5278434d70838f",
+      "bytes": 104
+    },
+    {
+      "id": "gs-akb103-handguard-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-handguard-factory-w-v1.png",
+      "sha256": "874fdf13c22c9eba6d7283daf83666b3574e18d582cec9e33eddf746c33a6c44",
+      "bytes": 136
+    },
+    {
+      "id": "gs-mb870-reargrip-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-reargrip-factory-h-v1.png",
+      "sha256": "2fe9c5d1727c87d0516836543c606040659c3d2778f4a03c45bcc394e0b647b0",
+      "bytes": 95
+    },
+    {
+      "id": "gs-mb870-reargrip-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-reargrip-factory-i-v1.png",
+      "sha256": "d2ae51f01cbaca1b3ec752adce40ad4516193cab28a59cb607007d575523a2b3",
+      "bytes": 114
+    },
+    {
+      "id": "gs-mb870-reargrip-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-reargrip-factory-w-v1.png",
+      "sha256": "8c6ee53bd4a6c595d35faebac97f942a9b987e74ad703f8ce4a922fe3edfcb90",
+      "bytes": 146
+    },
+    {
+      "id": "gs-mb1014-reargrip-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-reargrip-factory-h-v1.png",
+      "sha256": "2fe9c5d1727c87d0516836543c606040659c3d2778f4a03c45bcc394e0b647b0",
+      "bytes": 95
+    },
+    {
+      "id": "gs-mb1014-reargrip-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-reargrip-factory-i-v1.png",
+      "sha256": "d2ae51f01cbaca1b3ec752adce40ad4516193cab28a59cb607007d575523a2b3",
+      "bytes": 114
+    },
+    {
+      "id": "gs-mb1014-reargrip-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-reargrip-factory-w-v1.png",
+      "sha256": "8c6ee53bd4a6c595d35faebac97f942a9b987e74ad703f8ce4a922fe3edfcb90",
+      "bytes": 146
+    },
+    {
+      "id": "gs-akb103-reargrip-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-reargrip-factory-h-v1.png",
+      "sha256": "2fe9c5d1727c87d0516836543c606040659c3d2778f4a03c45bcc394e0b647b0",
+      "bytes": 95
+    },
+    {
+      "id": "gs-akb103-reargrip-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-reargrip-factory-i-v1.png",
+      "sha256": "d2ae51f01cbaca1b3ec752adce40ad4516193cab28a59cb607007d575523a2b3",
+      "bytes": 114
+    },
+    {
+      "id": "gs-akb103-reargrip-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-reargrip-factory-w-v1.png",
+      "sha256": "8c6ee53bd4a6c595d35faebac97f942a9b987e74ad703f8ce4a922fe3edfcb90",
+      "bytes": 146
+    },
+    {
+      "id": "gs-mpb5-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-mag-factory-h-v1.png",
+      "sha256": "893cfb3b267684ba596fe126757902d72d4cb423003ed14073eda9c640f115da",
+      "bytes": 97
+    },
+    {
+      "id": "gs-mpb5-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-mpb5-mag-factory-i-v2.png",
+      "sha256": "026c061311fb0d56765662284f03a443ad285377e3d96f7d3b7b6ff7fd5f4f37",
+      "bytes": 107
+    },
+    {
+      "id": "gs-mpb5-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-mpb5-mag-factory-w-v2.png",
+      "sha256": "940def35215a0c2300a236baa66fbf496b4aaf0de8dc2172cebbc3446b7177ff",
+      "bytes": 161
+    },
+    {
+      "id": "gs-mb870-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-mag-factory-h-v1.png",
+      "sha256": "a070137e7ccb2c0963f1db31f3e8fcc3f6365691a7f0e30bd0892c14543892e2",
+      "bytes": 81
+    },
+    {
+      "id": "gs-mb870-mag-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-mag-factory-i-v1.png",
+      "sha256": "94c8203dbdbc3a1fdc49d8d125097676b357e35b9f88742f3941b322c8d47fd5",
+      "bytes": 91
+    },
+    {
+      "id": "gs-mb870-mag-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-mag-factory-w-v1.png",
+      "sha256": "fd5d5b267a9c99f5b4b6386784f829d14f4150164eb4f994b6e3d2990aa8cb27",
+      "bytes": 113
+    },
+    {
+      "id": "gs-mb1014-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-mag-factory-h-v1.png",
+      "sha256": "a070137e7ccb2c0963f1db31f3e8fcc3f6365691a7f0e30bd0892c14543892e2",
+      "bytes": 81
+    },
+    {
+      "id": "gs-mb1014-mag-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-mag-factory-i-v1.png",
+      "sha256": "94c8203dbdbc3a1fdc49d8d125097676b357e35b9f88742f3941b322c8d47fd5",
+      "bytes": 91
+    },
+    {
+      "id": "gs-mb1014-mag-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-mag-factory-w-v1.png",
+      "sha256": "fd5d5b267a9c99f5b4b6386784f829d14f4150164eb4f994b6e3d2990aa8cb27",
+      "bytes": 113
+    },
+    {
+      "id": "gs-akb103-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-mag-factory-h-v1.png",
+      "sha256": "c6ef760a67f644ee99f506bdf21f9941ea90a1c77fea42a506b169b1df462259",
+      "bytes": 98
+    },
+    {
+      "id": "gs-akb103-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-akb103-mag-factory-i-v2.png",
+      "sha256": "dc2eadedeffb6c894ba0a6d625e6c5f5f9a1d86f01a12c7b4f8b33d028b09e89",
+      "bytes": 109
+    },
+    {
+      "id": "gs-akb103-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-akb103-mag-factory-w-v2.png",
+      "sha256": "6e1737cfe0d35a8cd4b73321906b13b9b17553323a29fe525de0791429b62def",
+      "bytes": 178
+    },
+    {
+      "id": "gs-pb226-q24-v1",
+      "file": "assets/gunsmith/v1/gs-pb226-q24-v1.png",
+      "sha256": "a7659ef3dc1351945b9db7000307b2bf6c7225bb612b84356fca8876d34ed76a",
+      "bytes": 193
+    },
+    {
+      "id": "gs-pb226-q32-v1",
+      "file": "assets/gunsmith/v1/gs-pb226-q32-v1.png",
+      "sha256": "bff032c408039a0235635a37e96e7a2cf3daff08eb529f5d27c861c742aa7e88",
+      "bytes": 241
+    },
+    {
+      "id": "gs-vb9-q24-v1",
+      "file": "assets/gunsmith/v1/gs-vb9-q24-v1.png",
+      "sha256": "d7503b8f4558b68d9111cc5d38d212581e7394371625a5ec94fbf3ea16f4e45e",
+      "bytes": 203
+    },
+    {
+      "id": "gs-vb9-q32-v1",
+      "file": "assets/gunsmith/v1/gs-vb9-q32-v1.png",
+      "sha256": "cc919628f23c7bce4b1cb846169429174f56de111fa3034c6d300d2133410c03",
+      "bytes": 227
+    },
+    {
+      "id": "gs-mpb5-q24-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-q24-v1.png",
+      "sha256": "eb6432542a6834afa6884725a57ee915763407220089daf8cf8b1cf74dbcbde0",
+      "bytes": 209
+    },
+    {
+      "id": "gs-mpb5-q32-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-q32-v1.png",
+      "sha256": "917ff97a34c401bf8234b4a63f587f681c1bc92486a23eff057a059773d226cb",
+      "bytes": 275
+    },
+    {
+      "id": "gs-mb870-q24-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-q24-v1.png",
+      "sha256": "7c16ec713357dd48d3ccb9e2f797057f3b8cebd1d32f80d4c993dc1f47a3c255",
+      "bytes": 187
+    },
+    {
+      "id": "gs-mb870-q32-v1",
+      "file": "assets/gunsmith/v1/gs-mb870-q32-v1.png",
+      "sha256": "306a88c6b251ede29874be732d6f2f07bf2cc571923d945f1278af6dde442291",
+      "bytes": 227
+    },
+    {
+      "id": "gs-mb1014-q24-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-q24-v1.png",
+      "sha256": "2a6a40c61c3fcac8639bdad699db6c7de5b08ab7527e245d34414fe43c9ed28e",
+      "bytes": 193
+    },
+    {
+      "id": "gs-mb1014-q32-v1",
+      "file": "assets/gunsmith/v1/gs-mb1014-q32-v1.png",
+      "sha256": "23ad195dfe3993213f1894fc109b04d8be5459ccc4b5e74fb485494521897622",
+      "bytes": 238
+    },
+    {
+      "id": "gs-akb103-q24-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-q24-v1.png",
+      "sha256": "ea30958e7e9242c4d77d1339343f9b44d8849e56f9d645549fef5a55aca5fba1",
+      "bytes": 210
+    },
+    {
+      "id": "gs-akb103-q32-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-q32-v1.png",
+      "sha256": "c5df5be2d47f7f851518ebecbadebcaf0306ce64be510182a8c6da4e2802de4f",
+      "bytes": 273
+    },
+    {
+      "id": "gs-a01-h-v1",
+      "file": "assets/gunsmith/v1/gs-a01-h-v1.png",
+      "sha256": "db9f15a7eb5f1260c503494dbfadab41cb2721e6080cac3ff6cf0e75097a428b",
+      "bytes": 86
+    },
+    {
+      "id": "gs-a01-i-v1",
+      "file": "assets/gunsmith/v1/gs-a01-i-v1.png",
+      "sha256": "611d5afcf25281c03064463f0499a4fcc80dff3b6dd5ed1bf34c70f6423c5788",
+      "bytes": 97
+    },
+    {
+      "id": "gs-a01-w-v1",
+      "file": "assets/gunsmith/v1/gs-a01-w-v1.png",
+      "sha256": "097e0835c1288b2986e5bba1a11f4b3ce6cb912cffe6a7b929db0766ef64f8be",
+      "bytes": 116
+    },
+    {
+      "id": "gs-a02-h-v1",
+      "file": "assets/gunsmith/v1/gs-a02-h-v1.png",
+      "sha256": "db9f15a7eb5f1260c503494dbfadab41cb2721e6080cac3ff6cf0e75097a428b",
+      "bytes": 86
+    },
+    {
+      "id": "gs-a02-i-v1",
+      "file": "assets/gunsmith/v1/gs-a02-i-v1.png",
+      "sha256": "611d5afcf25281c03064463f0499a4fcc80dff3b6dd5ed1bf34c70f6423c5788",
+      "bytes": 97
+    },
+    {
+      "id": "gs-a02-w-v1",
+      "file": "assets/gunsmith/v1/gs-a02-w-v1.png",
+      "sha256": "097e0835c1288b2986e5bba1a11f4b3ce6cb912cffe6a7b929db0766ef64f8be",
+      "bytes": 116
+    },
+    {
+      "id": "gs-a04-h-v1",
+      "file": "assets/gunsmith/v1/gs-a04-h-v1.png",
+      "sha256": "db9f15a7eb5f1260c503494dbfadab41cb2721e6080cac3ff6cf0e75097a428b",
+      "bytes": 86
+    },
+    {
+      "id": "gs-a04-i-v1",
+      "file": "assets/gunsmith/v1/gs-a04-i-v1.png",
+      "sha256": "bc71acfd27b3920e8c8c806380a98b090089b66a2bf25385e96a23cf63a8a836",
+      "bytes": 97
+    },
+    {
+      "id": "gs-a04-w-v1",
+      "file": "assets/gunsmith/v1/gs-a04-w-v1.png",
+      "sha256": "71ce05ce7108b96df95ec639e210a71efa914c05d30aacff08bac943c9868097",
+      "bytes": 116
+    },
+    {
+      "id": "gs-a05-h-v1",
+      "file": "assets/gunsmith/v1/gs-a05-h-v1.png",
+      "sha256": "db9f15a7eb5f1260c503494dbfadab41cb2721e6080cac3ff6cf0e75097a428b",
+      "bytes": 86
+    },
+    {
+      "id": "gs-a05-i-v1",
+      "file": "assets/gunsmith/v1/gs-a05-i-v1.png",
+      "sha256": "bc71acfd27b3920e8c8c806380a98b090089b66a2bf25385e96a23cf63a8a836",
+      "bytes": 97
+    },
+    {
+      "id": "gs-a05-w-v1",
+      "file": "assets/gunsmith/v1/gs-a05-w-v1.png",
+      "sha256": "71ce05ce7108b96df95ec639e210a71efa914c05d30aacff08bac943c9868097",
+      "bytes": 116
+    },
+    {
+      "id": "gs-a06-h-v1",
+      "file": "assets/gunsmith/v1/gs-a06-h-v1.png",
+      "sha256": "db9f15a7eb5f1260c503494dbfadab41cb2721e6080cac3ff6cf0e75097a428b",
+      "bytes": 86
+    },
+    {
+      "id": "gs-a06-i-v1",
+      "file": "assets/gunsmith/v1/gs-a06-i-v1.png",
+      "sha256": "bc71acfd27b3920e8c8c806380a98b090089b66a2bf25385e96a23cf63a8a836",
+      "bytes": 97
+    },
+    {
+      "id": "gs-a06-w-v1",
+      "file": "assets/gunsmith/v1/gs-a06-w-v1.png",
+      "sha256": "71ce05ce7108b96df95ec639e210a71efa914c05d30aacff08bac943c9868097",
+      "bytes": 116
+    },
+    {
+      "id": "gs-b03-h-v1",
+      "file": "assets/gunsmith/v1/gs-b03-h-v1.png",
+      "sha256": "1a8cfe049e66b0b017ff3a01723115eb9c592e3813e633eca7450cee8b553803",
+      "bytes": 91
+    },
+    {
+      "id": "gs-b03-i-v1",
+      "file": "assets/gunsmith/v1/gs-b03-i-v1.png",
+      "sha256": "631a7848986750b0672517ce3984641fa9676b058d085dceeacef86086a25cac",
+      "bytes": 122
+    },
+    {
+      "id": "gs-b03-w-v1",
+      "file": "assets/gunsmith/v1/gs-b03-w-v1.png",
+      "sha256": "ba199ed298af67a448d598ca0b195752f834d2dde7cded6303b807540f0545f2",
+      "bytes": 155
+    },
+    {
+      "id": "gs-b05-h-v1",
+      "file": "assets/gunsmith/v1/gs-b05-h-v1.png",
+      "sha256": "479af4dce2812bbb2abcecae554f41aa8779d93233b9a606b36fa95b81aa8db8",
+      "bytes": 92
+    },
+    {
+      "id": "gs-b05-i-v1",
+      "file": "assets/gunsmith/v1/gs-b05-i-v1.png",
+      "sha256": "31dd24919f8a9e0a7c4e739a1e9c37d8fffaf8b0efc4b20a47ff67705d77a705",
+      "bytes": 124
+    },
+    {
+      "id": "gs-b05-w-v1",
+      "file": "assets/gunsmith/v1/gs-b05-w-v1.png",
+      "sha256": "0959e6217e4f7a9575d7f410d39628796b6ada06d46c1e6613986d65c09ecc8c",
+      "bytes": 159
+    },
+    {
+      "id": "gs-b06-h-v1",
+      "file": "assets/gunsmith/v1/gs-b06-h-v1.png",
+      "sha256": "f2bd1ed769146a4ad2e2c1b8b2ec6f0a0292563c465d62e6d1193c54bc1bc1aa",
+      "bytes": 92
+    },
+    {
+      "id": "gs-b06-i-v1",
+      "file": "assets/gunsmith/v1/gs-b06-i-v1.png",
+      "sha256": "eac527c49faf42e3e3c46e76e483149bfcc145186c08a6572a09446b64995789",
+      "bytes": 128
+    },
+    {
+      "id": "gs-b06-w-v1",
+      "file": "assets/gunsmith/v1/gs-b06-w-v1.png",
+      "sha256": "708b9520c090018c7a1c221641070721b65274d71756587c3503247ed1055975",
+      "bytes": 176
+    },
+    {
+      "id": "gs-b09-h-v1",
+      "file": "assets/gunsmith/v1/gs-b09-h-v1.png",
+      "sha256": "46922e85eddab5cc74a5fdfea73813d4366d116372f01dd0e8e1f020b07a0efd",
+      "bytes": 97
+    },
+    {
+      "id": "gs-b09-i-v1",
+      "file": "assets/gunsmith/v1/gs-b09-i-v1.png",
+      "sha256": "c2164c3ad6afa52ed65204cb2c6cefcb2afb2cf991ad87c659fb896c32ebd3b0",
+      "bytes": 127
+    },
+    {
+      "id": "gs-b09-w-v1",
+      "file": "assets/gunsmith/v1/gs-b09-w-v1.png",
+      "sha256": "75d591c330fbe795141e117cd6ae593812635abd1d7d4c888e48d4c58723f467",
+      "bytes": 156
+    },
+    {
+      "id": "gs-h02-h-v1",
+      "file": "assets/gunsmith/v1/gs-h02-h-v1.png",
+      "sha256": "9a7e037e0551dc56930e4318b44a9fa359958fbace51387337fc653d33bbb8f6",
+      "bytes": 98
+    },
+    {
+      "id": "gs-h02-i-v1",
+      "file": "assets/gunsmith/v1/gs-h02-i-v1.png",
+      "sha256": "a12b66addce4fd75f6368201af667acefeca6ed77b7f1b98274fc71f2ccd862b",
+      "bytes": 119
+    },
+    {
+      "id": "gs-h02-w-v1",
+      "file": "assets/gunsmith/v1/gs-h02-w-v1.png",
+      "sha256": "2d046101c16f3546f5a767f9c063b0bd7dfdcc37c8940eaa65ab47c982f8294f",
+      "bytes": 161
+    },
+    {
+      "id": "gs-h06-h-v1",
+      "file": "assets/gunsmith/v1/gs-h06-h-v1.png",
+      "sha256": "0a7c5372d9d0bd71cd7f75c1b724df1e512edd5c7f2ee5826a1adab81a161cab",
+      "bytes": 96
+    },
+    {
+      "id": "gs-h06-i-v1",
+      "file": "assets/gunsmith/v1/gs-h06-i-v1.png",
+      "sha256": "916c8fd2c196c9a3b8cfe055e4e343092129bd617fcd1c4063ec5d172de1778b",
+      "bytes": 114
+    },
+    {
+      "id": "gs-h06-w-v1",
+      "file": "assets/gunsmith/v1/gs-h06-w-v1.png",
+      "sha256": "7677fc9572c884f7a43007fc038aa4d0611ae2e438361b47d7a6a90f7575b78c",
+      "bytes": 148
+    },
+    {
+      "id": "gs-h07-h-v1",
+      "file": "assets/gunsmith/v1/gs-h07-h-v1.png",
+      "sha256": "1488dec627560894f88e74294dd7e145922c1be51484363fef3ec11d94cdfb28",
+      "bytes": 99
+    },
+    {
+      "id": "gs-h07-i-v1",
+      "file": "assets/gunsmith/v1/gs-h07-i-v1.png",
+      "sha256": "84439911979093341788572f615ae50c8364042b09794f258b0d8589b6cb3d99",
+      "bytes": 118
+    },
+    {
+      "id": "gs-h07-w-v1",
+      "file": "assets/gunsmith/v1/gs-h07-w-v1.png",
+      "sha256": "c2d8f8c39854e0326c01eeaf1acbc7d9bc03c0e8d8532a55dc2618d72a17436e",
+      "bytes": 154
+    },
+    {
+      "id": "gs-h08-h-v1",
+      "file": "assets/gunsmith/v1/gs-h08-h-v1.png",
+      "sha256": "091009fe7918333b6638e55a2f8a9a4c2eb70381ca6dcfc349dca3cf25347b50",
+      "bytes": 97
+    },
+    {
+      "id": "gs-h08-i-v1",
+      "file": "assets/gunsmith/v1/gs-h08-i-v1.png",
+      "sha256": "24e93fc1a4a1b56b9c13df36565b5f99465f94588ac8585dc99b2c43003f532e",
+      "bytes": 108
+    },
+    {
+      "id": "gs-h08-w-v1",
+      "file": "assets/gunsmith/v1/gs-h08-w-v1.png",
+      "sha256": "7a1fbb8de487b998875c8be0bb2b7444d5496b967c1956a2a7d2c28a7a05fd48",
+      "bytes": 159
+    },
+    {
+      "id": "gs-h09-h-v1",
+      "file": "assets/gunsmith/v1/gs-h09-h-v1.png",
+      "sha256": "091009fe7918333b6638e55a2f8a9a4c2eb70381ca6dcfc349dca3cf25347b50",
+      "bytes": 97
+    },
+    {
+      "id": "gs-h09-i-v1",
+      "file": "assets/gunsmith/v1/gs-h09-i-v1.png",
+      "sha256": "03ba580cdf5564a05575297be52c222e5d5ed1aa0c82ca6ab2d6f77fa11be89e",
+      "bytes": 115
+    },
+    {
+      "id": "gs-h09-w-v1",
+      "file": "assets/gunsmith/v1/gs-h09-w-v1.png",
+      "sha256": "8b924a01366199fec48fb56922bb2d799264521687240846ef40be66647c8eaa",
+      "bytes": 153
+    },
+    {
+      "id": "gs-s05-h-v1",
+      "file": "assets/gunsmith/v1/gs-s05-h-v1.png",
+      "sha256": "ff27c7ac2f2798cff12ef80743e697232dfb523313a8a3315c32c063f8faa57a",
+      "bytes": 95
+    },
+    {
+      "id": "gs-s05-i-v1",
+      "file": "assets/gunsmith/v1/gs-s05-i-v1.png",
+      "sha256": "0855c748b3d932032c650c9eb6a9ef2223c12ba0cb6606807b31d9e88fd2fca4",
+      "bytes": 110
+    },
+    {
+      "id": "gs-s05-w-v1",
+      "file": "assets/gunsmith/v1/gs-s05-w-v1.png",
+      "sha256": "50a396880496475e60a51ea27a5c4db85d441054a62cfed99e4e9606a3a08af0",
+      "bytes": 150
+    },
+    {
+      "id": "gs-s07-h-v1",
+      "file": "assets/gunsmith/v1/gs-s07-h-v1.png",
+      "sha256": "237b55cae01cbb6881c0e47e9a42054fec5365e64255d90aa5d7176a3e3c4e54",
+      "bytes": 102
+    },
+    {
+      "id": "gs-s07-i-v1",
+      "file": "assets/gunsmith/v1/gs-s07-i-v1.png",
+      "sha256": "d4c89b9db9b209f79095ba7589eb456e19a66308203aba6cece8a363cef01f97",
+      "bytes": 164
+    },
+    {
+      "id": "gs-s07-w-v1",
+      "file": "assets/gunsmith/v1/gs-s07-w-v1.png",
+      "sha256": "040acdfc6ef9381ebf7946fd11c60c9196fcf162a4264b115cdc55d67481c070",
+      "bytes": 258
+    },
+    {
+      "id": "gs-s08-h-v1",
+      "file": "assets/gunsmith/v1/gs-s08-h-v1.png",
+      "sha256": "b3e12cd29821c30063a996635acddad0242cb046a2d9523238dd8369cdb69464",
+      "bytes": 101
+    },
+    {
+      "id": "gs-s08-i-v1",
+      "file": "assets/gunsmith/v1/gs-s08-i-v1.png",
+      "sha256": "da5e58bfc82b062209fe5641b0516a7c565d8bdb6defb518cd9768fc512f7319",
+      "bytes": 165
+    },
+    {
+      "id": "gs-s08-w-v1",
+      "file": "assets/gunsmith/v1/gs-s08-w-v1.png",
+      "sha256": "79b217069f741e4a6e6f772af863d5029c122b2e250d909398aeaa7a39ae4355",
+      "bytes": 260
+    },
+    {
+      "id": "gs-p06-i-v1",
+      "file": "assets/gunsmith/v1/gs-p06-i-v1.png",
+      "sha256": "8264233dfc0ae75090eae37b4b13d2cda429b6073d63bf0b2b2b81d669970877",
+      "bytes": 131
+    },
+    {
+      "id": "gs-p06-w-v1",
+      "file": "assets/gunsmith/v1/gs-p06-w-v1.png",
+      "sha256": "55d56131577d12b16d09dfc361708fbf99974e166cf6f64a864e6b77afc3698a",
+      "bytes": 166
+    },
+    {
+      "id": "gs-p07-i-v1",
+      "file": "assets/gunsmith/v1/gs-p07-i-v1.png",
+      "sha256": "833de2b089d7222bba58a9d1d8685661d66187e76f3e7c5988098464d9955d87",
+      "bytes": 124
+    },
+    {
+      "id": "gs-p07-w-v1",
+      "file": "assets/gunsmith/v1/gs-p07-w-v1.png",
+      "sha256": "6df4ca9d6e7767be4dc9d6f239e3fe9ea8de8a32c865b4f940674cbd8cce218e",
+      "bytes": 165
+    },
+    {
+      "id": "gs-g03-h-v1",
+      "file": "assets/gunsmith/v1/gs-g03-h-v1.png",
+      "sha256": "c6ef760a67f644ee99f506bdf21f9941ea90a1c77fea42a506b169b1df462259",
+      "bytes": 98
+    },
+    {
+      "id": "gs-g03-i-v2",
+      "file": "assets/gunsmith/v1/gs-g03-i-v2.png",
+      "sha256": "83d29f79cd341bbe786b6f81ba4867ee93ca990ba71e6179b792d7379a3926f9",
+      "bytes": 109
+    },
+    {
+      "id": "gs-g03-w-v2",
+      "file": "assets/gunsmith/v1/gs-g03-w-v2.png",
+      "sha256": "10c976c9969eaf6bcbebdd2b5a4b7e9d1166c35064cfb628c9d77022ad33a346",
+      "bytes": 174
+    },
+    {
+      "id": "gs-g06-h-v1",
+      "file": "assets/gunsmith/v1/gs-g06-h-v1.png",
+      "sha256": "5af6c9c3e8e5060bbbf5fe6cb704ff51b3e965e231475e7f3467ca6eb4026867",
+      "bytes": 81
+    },
+    {
+      "id": "gs-g06-i-v1",
+      "file": "assets/gunsmith/v1/gs-g06-i-v1.png",
+      "sha256": "68936e732354e53d305b5f6ae25e4010ef2662003aea80582c4a5f8269fe66e5",
+      "bytes": 92
+    },
+    {
+      "id": "gs-g06-w-v1",
+      "file": "assets/gunsmith/v1/gs-g06-w-v1.png",
+      "sha256": "3d4147fc60ad6ce27973f32c32ee374a2364abc8bd7e7cf0b8eaca53fbcd0a3a",
+      "bytes": 122
+    },
+    {
+      "id": "gs-g07-h-v1",
+      "file": "assets/gunsmith/v1/gs-g07-h-v1.png",
+      "sha256": "3907d9c3914835bd93ad01431f02f4d456423cf8f84fa935c957dd431881853d",
+      "bytes": 81
+    },
+    {
+      "id": "gs-g07-i-v1",
+      "file": "assets/gunsmith/v1/gs-g07-i-v1.png",
+      "sha256": "398621d6ce3f73cc6b23ffea12f2340ac24a4b17e7b3f985ebb1174c2528fc9f",
+      "bytes": 92
+    },
+    {
+      "id": "gs-g07-w-v1",
+      "file": "assets/gunsmith/v1/gs-g07-w-v1.png",
+      "sha256": "d1dc979f3307954318bd79d696bc928219499e8c68fd70617cdba28633d06496",
+      "bytes": 117
+    },
+    {
+      "id": "gs-g09-h-v1",
+      "file": "assets/gunsmith/v1/gs-g09-h-v1.png",
+      "sha256": "a72138a8b51ae267c439b00322d3b5d99201a4096d15c85ee30d38d942163fe3",
+      "bytes": 100
+    },
+    {
+      "id": "gs-g09-i-v2",
+      "file": "assets/gunsmith/v1/gs-g09-i-v2.png",
+      "sha256": "64fb81831cf3dc468d0458e34b998421a5db0308e6ff43ee3ea91f614fe1fd5f",
+      "bytes": 169
+    },
+    {
+      "id": "gs-g09-w-v2",
+      "file": "assets/gunsmith/v1/gs-g09-w-v2.png",
+      "sha256": "802c35a7b3580a9aa20218ae0c39f0d1af49c1d7b138b89727e0a64963839e22",
+      "bytes": 343
+    },
+    {
+      "id": "gs-m01-h-v1",
+      "file": "assets/gunsmith/v1/gs-m01-h-v1.png",
+      "sha256": "bb6c1d1031defff9c3e7292780351d748d6ff96dd9a16912ba23e3e9a7e0135b",
+      "bytes": 79
+    },
+    {
+      "id": "gs-m01-i-v1",
+      "file": "assets/gunsmith/v1/gs-m01-i-v1.png",
+      "sha256": "28b422e3003ea9b4d036b985e99ba147d5c5f80d9849e8db0ddd38cb3408b910",
+      "bytes": 89
+    },
+    {
+      "id": "gs-m01-w-v1",
+      "file": "assets/gunsmith/v1/gs-m01-w-v1.png",
+      "sha256": "9745ad90adc4e336e60f414edbd41f04df4fac5b339d0e22d687afe370ab7834",
+      "bytes": 106
+    },
+    {
+      "id": "gs-m02-h-v1",
+      "file": "assets/gunsmith/v1/gs-m02-h-v1.png",
+      "sha256": "24668736eaf23f4be3a820590755836f4b1e0607a41a2a2d184be6389e675c6b",
+      "bytes": 80
+    },
+    {
+      "id": "gs-m02-i-v1",
+      "file": "assets/gunsmith/v1/gs-m02-i-v1.png",
+      "sha256": "eee50689c9fbe612f3531dc0e8ad54d78d5fad45667fb8573f5467ed6df8ce94",
+      "bytes": 91
+    },
+    {
+      "id": "gs-m02-w-v1",
+      "file": "assets/gunsmith/v1/gs-m02-w-v1.png",
+      "sha256": "8efbaa10e8a307dd3bdfd0bca2167e22512f6c50476804364bb9bdee566b2d91",
+      "bytes": 111
+    },
+    {
+      "id": "gs-m10-h-v1",
+      "file": "assets/gunsmith/v1/gs-m10-h-v1.png",
+      "sha256": "bb6c1d1031defff9c3e7292780351d748d6ff96dd9a16912ba23e3e9a7e0135b",
+      "bytes": 79
+    },
+    {
+      "id": "gs-m10-i-v1",
+      "file": "assets/gunsmith/v1/gs-m10-i-v1.png",
+      "sha256": "8761a2b1c8301779276b960af7a1700223a3d7345821e4991ec3817adcaa2b79",
+      "bytes": 89
+    },
+    {
+      "id": "gs-m10-w-v1",
+      "file": "assets/gunsmith/v1/gs-m10-w-v1.png",
+      "sha256": "87488a36a4b22dc6c5ed9a569c6e0f8ce83309af1f868f11ae7e926a13be8d74",
+      "bytes": 106
+    },
+    {
+      "id": "gs-m11-h-v1",
+      "file": "assets/gunsmith/v1/gs-m11-h-v1.png",
+      "sha256": "9476cfb6d0c6f49e0ac9f1840cd4176dcd8abe90f1e9c76c781bff882e058430",
+      "bytes": 82
+    },
+    {
+      "id": "gs-m11-i-v1",
+      "file": "assets/gunsmith/v1/gs-m11-i-v1.png",
+      "sha256": "d9dfd333fefbbea9ff89c676db6c85ca7950e43271c241350abb388ab16ce914",
+      "bytes": 98
+    },
+    {
+      "id": "gs-m11-w-v1",
+      "file": "assets/gunsmith/v1/gs-m11-w-v1.png",
+      "sha256": "0614211abb4afba75df850bd8890ec1c02aaa3fcce8255af3a360bdc2ede45ab",
+      "bytes": 123
+    },
+    {
+      "id": "gs-t04-h-v1",
+      "file": "assets/gunsmith/v1/gs-t04-h-v1.png",
+      "sha256": "67f988f24585479ef0e1ef9f4518831773303e68c122bee4d3a31356af1a65c1",
+      "bytes": 74
+    },
+    {
+      "id": "gs-t04-i-v1",
+      "file": "assets/gunsmith/v1/gs-t04-i-v1.png",
+      "sha256": "d307d821c97140bca35ba81d0fdd3fdef4cd1d4fdf85bac25e52a0c3db7cbb02",
+      "bytes": 101
+    },
+    {
+      "id": "gs-t04-w-v1",
+      "file": "assets/gunsmith/v1/gs-t04-w-v1.png",
+      "sha256": "9b477189e0a141145159b4255ef5435ff85bc6b0089e55a1555b2c3155b5303f",
+      "bytes": 120
+    },
+    {
+      "id": "gs-t08-h-v1",
+      "file": "assets/gunsmith/v1/gs-t08-h-v1.png",
+      "sha256": "e71e70bd9a1e191a20ebd0e9c40e652d87a6a139a23b494f3c1e7a88a7d96f75",
+      "bytes": 81
+    },
+    {
+      "id": "gs-t08-i-v1",
+      "file": "assets/gunsmith/v1/gs-t08-i-v1.png",
+      "sha256": "fee5c814ef6fd1890f8edaf101f8e99d23ded4cc0ecfb78a4d14b7b3162a200d",
+      "bytes": 104
+    },
+    {
+      "id": "gs-t08-w-v1",
+      "file": "assets/gunsmith/v1/gs-t08-w-v1.png",
+      "sha256": "24ef24e711145c329c2e7348a1dd09ddb41b11280bb132f41e4d92ed15f1d44c",
+      "bytes": 126
+    },
+    {
+      "id": "gs-a01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-a01-q24-v1.png",
+      "sha256": "1d068c73f64b50499b8640557089d89bb12028dfdc06b3ccd4a82eb5e4bd47f2",
+      "bytes": 137
+    },
+    {
+      "id": "gs-a02-q24-v1",
+      "file": "assets/gunsmith/v1/gs-a02-q24-v1.png",
+      "sha256": "85c95d16bd59e4e37bbedfe9787a600144df5fcd101896533466ce5b26df25d0",
+      "bytes": 148
+    },
+    {
+      "id": "gs-a04-q24-v1",
+      "file": "assets/gunsmith/v1/gs-a04-q24-v1.png",
+      "sha256": "3a06d2208ba57e47ec2363724aca9a48aa7db8ee0191229ac75590b5211460b2",
+      "bytes": 143
+    },
+    {
+      "id": "gs-a05-q24-v1",
+      "file": "assets/gunsmith/v1/gs-a05-q24-v1.png",
+      "sha256": "f61848ed3eac79301313c48d4df99261936f1595ae8947af37569a98d5cf87a1",
+      "bytes": 145
+    },
+    {
+      "id": "gs-a06-q24-v1",
+      "file": "assets/gunsmith/v1/gs-a06-q24-v1.png",
+      "sha256": "cc6473a4461fe6b7e29e00e50e259e77aec4211cc474624d5d80d1576954d805",
+      "bytes": 129
+    },
+    {
+      "id": "gs-b03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-b03-q24-v1.png",
+      "sha256": "6e68d9b21fecdd81fbbaad0d6758299117d8f10edd254a2ba5a7b47a23917774",
+      "bytes": 147
+    },
+    {
+      "id": "gs-b05-q24-v1",
+      "file": "assets/gunsmith/v1/gs-b05-q24-v1.png",
+      "sha256": "0a462fa3996a34b12416340581311459986ba9b5f1e7036553d49f27dcb1ad75",
+      "bytes": 148
+    },
+    {
+      "id": "gs-b06-q24-v1",
+      "file": "assets/gunsmith/v1/gs-b06-q24-v1.png",
+      "sha256": "8bc22e378a37404000268ed748525b435f058c48d566b535a06619a2c4c7a17a",
+      "bytes": 142
+    },
+    {
+      "id": "gs-b09-q24-v1",
+      "file": "assets/gunsmith/v1/gs-b09-q24-v1.png",
+      "sha256": "5f5f72f5c5f41b8b44c76bb69cb46d9645abecc8331778b0706856acb77ffe3b",
+      "bytes": 146
+    },
+    {
+      "id": "gs-h02-q24-v1",
+      "file": "assets/gunsmith/v1/gs-h02-q24-v1.png",
+      "sha256": "f629ca3d8d98798efb99c34e8a05fbb5ad7820f9c002dba95f42af7816d0a4e7",
+      "bytes": 141
+    },
+    {
+      "id": "gs-h06-q24-v1",
+      "file": "assets/gunsmith/v1/gs-h06-q24-v1.png",
+      "sha256": "bdeff68b4476a177b49b1fb9cc7c55a36eaafa4ff6b83dc97cbede8c74b8119b",
+      "bytes": 126
+    },
+    {
+      "id": "gs-h07-q24-v1",
+      "file": "assets/gunsmith/v1/gs-h07-q24-v1.png",
+      "sha256": "1ba57364a0baa13ee4998cfea7634c6959830dbe812b79d1b9ca2619ecf67ac3",
+      "bytes": 138
+    },
+    {
+      "id": "gs-h08-q24-v1",
+      "file": "assets/gunsmith/v1/gs-h08-q24-v1.png",
+      "sha256": "d5d2ce79b73b6216b82c066f2486b0758b58f1a3cc4c95ee6b744a1dbcf315ec",
+      "bytes": 172
+    },
+    {
+      "id": "gs-h09-q24-v1",
+      "file": "assets/gunsmith/v1/gs-h09-q24-v1.png",
+      "sha256": "06123531cfc5e81cc9adcdea7cf41dd372495a40b2c1e155c9348f2299fbe67b",
+      "bytes": 158
+    },
+    {
+      "id": "gs-s05-q24-v1",
+      "file": "assets/gunsmith/v1/gs-s05-q24-v1.png",
+      "sha256": "afb56c6f274e4f529c085432b66021e5dd15ac5d1a169d28bf2dcf42cc47255a",
+      "bytes": 127
+    },
+    {
+      "id": "gs-s07-q24-v1",
+      "file": "assets/gunsmith/v1/gs-s07-q24-v1.png",
+      "sha256": "e14439b8b39b22484e2c09b7138dd33986805791d4cb230a2f2dda11025a0d31",
+      "bytes": 208
+    },
+    {
+      "id": "gs-s08-q24-v1",
+      "file": "assets/gunsmith/v1/gs-s08-q24-v1.png",
+      "sha256": "78f3e6315ef2abe2654a8497db2ed12f5bcf5ad15331c4cf71bd0c156ad445a9",
+      "bytes": 204
+    },
+    {
+      "id": "gs-p06-q24-v1",
+      "file": "assets/gunsmith/v1/gs-p06-q24-v1.png",
+      "sha256": "443b3f535cb01c13fe5e1438855554736ed005feb3a7c7e7c2f2016e68144d45",
+      "bytes": 169
+    },
+    {
+      "id": "gs-p07-q24-v1",
+      "file": "assets/gunsmith/v1/gs-p07-q24-v1.png",
+      "sha256": "d59f6c313cf335b12d0a268979385f2cfb367f9c8300c1cf462945b7c6da9fb0",
+      "bytes": 164
+    },
+    {
+      "id": "gs-g03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g03-q24-v1.png",
+      "sha256": "a3ae3a930c155dec915d55445f1147fb261555e45702ec775011cb7f87bfb0a8",
+      "bytes": 151
+    },
+    {
+      "id": "gs-g06-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g06-q24-v1.png",
+      "sha256": "28c2e8fbdbb1d1af4dec5114bc0ae16fc97644b860cc171a76ae60b4f13c9151",
+      "bytes": 116
+    },
+    {
+      "id": "gs-g07-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g07-q24-v1.png",
+      "sha256": "ed98508cf435d135fcbc6d7bd67b61b2286e2b585151439143fbeae145021f78",
+      "bytes": 118
+    },
+    {
+      "id": "gs-g09-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g09-q24-v1.png",
+      "sha256": "2f2d09d73b5d171c8e080c91f6799dded880ae43563653f7afdca7171622c9ea",
+      "bytes": 164
+    },
+    {
+      "id": "gs-m01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m01-q24-v1.png",
+      "sha256": "a7c2ec28751b83b8d47aa3f85bac316b8dbdffc3b130eed2c631cc66f8bb2196",
+      "bytes": 132
+    },
+    {
+      "id": "gs-m02-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m02-q24-v1.png",
+      "sha256": "8e31f3b16d25d561aa6c354f8199cb2c1ff1ba2291e17ffff74443c04669c3b0",
+      "bytes": 134
+    },
+    {
+      "id": "gs-m10-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m10-q24-v1.png",
+      "sha256": "1323580fe248a175fc1b44befeafa43b69c1c1c190da51e6f5715acca7c0f6e4",
+      "bytes": 136
+    },
+    {
+      "id": "gs-m11-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m11-q24-v1.png",
+      "sha256": "318c2067d3893ea887a4eb798b37601b77358ef3df141b49fb8df6d067177ea1",
+      "bytes": 138
+    },
+    {
+      "id": "gs-t04-q24-v1",
+      "file": "assets/gunsmith/v1/gs-t04-q24-v1.png",
+      "sha256": "acfab7abb96c4e839489cad6f1685cc48a26937a859dc0e17294febd48fac780",
+      "bytes": 131
+    },
+    {
+      "id": "gs-t08-q24-v1",
+      "file": "assets/gunsmith/v1/gs-t08-q24-v1.png",
+      "sha256": "825fe4804ef48d5a07ea2f46bf0a50e548235b03eb93b4b9a49decd43de9264c",
+      "bytes": 157
+    },
+    {
+      "id": "gs-pistol-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-pistol-receiver-h-v1.png",
+      "sha256": "1a1c774b6b30a38dd1fff9f542d31e34af198453a5f744b0128f87b75e937c45",
+      "bytes": 179
+    },
+    {
+      "id": "gs-shotgun-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-shotgun-receiver-h-v1.png",
+      "sha256": "a0a84a8bc63742b143a17a4fda220868e1a95b3e16c143ab9f36f1ae1cee0a69",
+      "bytes": 206
+    },
+    {
+      "id": "gs-carbine-receiver-h-v2",
+      "file": "assets/gunsmith/v1/gs-carbine-receiver-h-v2.png",
+      "sha256": "2df192658ab9f1d146fc0911775168320d7d089d485c0697055315ee88420589",
+      "bytes": 191
+    },
+    {
+      "id": "gs-carbine-barrel-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-carbine-barrel-factory-h-v1.png",
+      "sha256": "5b847506d34d6160cf81a105c4a8e2a14947db94f1c4a07b49fa55ff7d2356db",
+      "bytes": 96
+    },
+    {
+      "id": "gs-carbine-receiver-w-v2",
+      "file": "assets/gunsmith/v1/gs-carbine-receiver-w-v2.png",
+      "sha256": "07968840ec966c8eb539b12e4dfbb922a3293245eadc234d3fb690a3b346410b",
+      "bytes": 508
+    },
+    {
+      "id": "gs-carbine-barrel-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-carbine-barrel-factory-w-v1.png",
+      "sha256": "5d76dc2c3e783393038fa3841b7bff1e967b74c20a36d9eaf2a91b754799344c",
+      "bytes": 145
+    },
+    {
+      "id": "gs-m01-h-pistol-v1",
+      "file": "assets/gunsmith/v1/gs-m01-h-pistol-v1.png",
+      "sha256": "0fad9aa984515139c1db9f1adf73e50df7ebc87e0c978642b514b63415685b19",
+      "bytes": 71
+    },
+    {
+      "id": "gs-m01-i-pistol-v1",
+      "file": "assets/gunsmith/v1/gs-m01-i-pistol-v1.png",
+      "sha256": "4371907ea9bd69334675f1790be5c01c6e6cdfd6a252fab66cbf07148db92f11",
+      "bytes": 89
+    },
+    {
+      "id": "gs-m01-w-pistol-v1",
+      "file": "assets/gunsmith/v1/gs-m01-w-pistol-v1.png",
+      "sha256": "f643ec9a659af268e45843745c400bf9f4a35b2831916432b67b060534894523",
+      "bytes": 116
+    },
+    {
+      "id": "gs-m05-h-carbine-v1",
+      "file": "assets/gunsmith/v1/gs-m05-h-carbine-v1.png",
+      "sha256": "381184247d949d2270b465a61d966812cddea4c405c9a3805cc4d6b8d9139568",
+      "bytes": 80
+    },
+    {
+      "id": "gs-m07-h-carbine-v1",
+      "file": "assets/gunsmith/v1/gs-m07-h-carbine-v1.png",
+      "sha256": "341af80d3ce4e91c79b6476c6bb74ae66e081e0f1624974704b6e628123b3b2f",
+      "bytes": 86
+    },
+    {
+      "id": "gs-augb-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-augb-receiver-h-v1.png",
+      "sha256": "51cccdb539b7e6bf718097bb72bd1050bf9f026f5fb69b9f6525579f8ce03edd",
+      "bytes": 170
+    },
+    {
+      "id": "gs-augb-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-augb-mag-factory-h-v1.png",
+      "sha256": "25c804caa76940d76c8001f2522ba4c7741f54382b57c7c14c33ced42dc9f185",
+      "bytes": 90
+    },
+    {
+      "id": "gs-augb-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-augb-receiver-i-v1.png",
+      "sha256": "e7bf984f89efbdd573a9c8151b160cf055230b48a84b6ca08ed2ecfe30098562",
+      "bytes": 298
+    },
+    {
+      "id": "gs-augb-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-augb-mag-factory-i-v2.png",
+      "sha256": "8a8ba920da60091f9753ff0f545c1d58ce6964d68d96b7ef3628d850c182756d",
+      "bytes": 136
+    },
+    {
+      "id": "gs-augb-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-augb-receiver-w-v1.png",
+      "sha256": "f5566928cf1108aea90ba2c5cfe5b044698370a30a3e0f87d5c3b730d93e6220",
+      "bytes": 553
+    },
+    {
+      "id": "gs-augb-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-augb-mag-factory-w-v2.png",
+      "sha256": "ac287c485bcbfb1540008b5ccfdce9d57668a6d54da21e1ff80d57f8b56964e8",
+      "bytes": 203
+    },
+    {
+      "id": "gs-o05-h-v1",
+      "file": "assets/gunsmith/v1/gs-o05-h-v1.png",
+      "sha256": "a9b0c7fab00c5e52c9801f18f0c6cb712aac8b0a84efcc5cec3c73bb55de2fac",
+      "bytes": 96
+    },
+    {
+      "id": "gs-o10-h-v1",
+      "file": "assets/gunsmith/v1/gs-o10-h-v1.png",
+      "sha256": "fb1fa67ec84e9e6b1b7a5e5b63a0a0b6728fc5dc4a866f7193cdaf97deaffb82",
+      "bytes": 103
+    },
+    {
+      "id": "gs-f04-h-v1",
+      "file": "assets/gunsmith/v1/gs-f04-h-v1.png",
+      "sha256": "4dbee8ffd885c57f2596c7f00b9024a0e7db6a2e89b41342494c7245c258ff53",
+      "bytes": 82
+    },
+    {
+      "id": "gs-f07-h-v1",
+      "file": "assets/gunsmith/v1/gs-f07-h-v1.png",
+      "sha256": "3b5c0a76131862c5e57d00ba07eb3a0254d41fe7b6d8d08a6685fa0a4bd2bbc7",
+      "bytes": 92
+    },
+    {
+      "id": "gs-t02-h-v1",
+      "file": "assets/gunsmith/v1/gs-t02-h-v1.png",
+      "sha256": "42a640735e7f190cc1c0907f833ac24253d742081996f823b68c228d580da92a",
+      "bytes": 82
+    },
+    {
+      "id": "gs-t10-h-v1",
+      "file": "assets/gunsmith/v1/gs-t10-h-v1.png",
+      "sha256": "97554c5d1134eac80f9507ee9f26b8cb5b9c71b0b16712f9f5b3cbc1d8f04760",
+      "bytes": 93
+    },
+    {
+      "id": "gs-o05-i-v1",
+      "file": "assets/gunsmith/v1/gs-o05-i-v1.png",
+      "sha256": "d3afcf05c904fefbfbadbfbd4dfbae5b08fd8c5d3009c6ce593985b1fef1ad81",
+      "bytes": 113
+    },
+    {
+      "id": "gs-o10-i-v1",
+      "file": "assets/gunsmith/v1/gs-o10-i-v1.png",
+      "sha256": "93ada75827dd62f6a7b52090763d0e34efd2909c1b87c296b164397d3fecdfcf",
+      "bytes": 151
+    },
+    {
+      "id": "gs-f04-i-v1",
+      "file": "assets/gunsmith/v1/gs-f04-i-v1.png",
+      "sha256": "6bf0fdce3f59cd88e81a0abdbe87f57711db11104226ec10bde0f21fa8c2c2c4",
+      "bytes": 99
+    },
+    {
+      "id": "gs-f07-i-v1",
+      "file": "assets/gunsmith/v1/gs-f07-i-v1.png",
+      "sha256": "482313cb8fd55d60541ef56e3b6d69d86906d0930e54660645f9deda6dfc4792",
+      "bytes": 116
+    },
+    {
+      "id": "gs-t02-i-v1",
+      "file": "assets/gunsmith/v1/gs-t02-i-v1.png",
+      "sha256": "d04e804e1daaba8b1cce51d9fe7bbcbaa40f529bf69ee19e011c0c17ab1da078",
+      "bytes": 100
+    },
+    {
+      "id": "gs-t10-i-v1",
+      "file": "assets/gunsmith/v1/gs-t10-i-v1.png",
+      "sha256": "8ff0934a72eb2cb41ed3263aac9c6c112090f87bc3161296e615353f83783c98",
+      "bytes": 119
+    },
+    {
+      "id": "gs-o05-w-v1",
+      "file": "assets/gunsmith/v1/gs-o05-w-v1.png",
+      "sha256": "6a98d34733a2fb185ca41929a51eddd5429dc046b7ce1b952be6b32ff19a4091",
+      "bytes": 167
+    },
+    {
+      "id": "gs-o10-w-v1",
+      "file": "assets/gunsmith/v1/gs-o10-w-v1.png",
+      "sha256": "8cd4d56fc59d221f2868537671c851d5c265c6cb2207677555df2a0509ce8cad",
+      "bytes": 254
+    },
+    {
+      "id": "gs-f04-w-v1",
+      "file": "assets/gunsmith/v1/gs-f04-w-v1.png",
+      "sha256": "e00b3c6ff465d58949f5af63e2e1efe2bb0c003b31ba80b790442838cb130457",
+      "bytes": 130
+    },
+    {
+      "id": "gs-f07-w-v1",
+      "file": "assets/gunsmith/v1/gs-f07-w-v1.png",
+      "sha256": "1e5a81278cd744b0be343e711ce1b42cbae6aa1c19fa5c4a13e62f1ebee18c27",
+      "bytes": 153
+    },
+    {
+      "id": "gs-t02-w-v1",
+      "file": "assets/gunsmith/v1/gs-t02-w-v1.png",
+      "sha256": "f2bd60ff122c62c1ee4c771ac0c5542bc5f192ddee8d50d8a488d3bd7084d25b",
+      "bytes": 136
+    },
+    {
+      "id": "gs-t10-w-v1",
+      "file": "assets/gunsmith/v1/gs-t10-w-v1.png",
+      "sha256": "a57f53c79e40c41c9794e2b0a130b823efd106845617209e385e06f60578a2d6",
+      "bytes": 180
+    },
+    {
+      "id": "gs-augb-q24-v1",
+      "file": "assets/gunsmith/v1/gs-augb-q24-v1.png",
+      "sha256": "826e5c1e98d5d7fe4d1d51d4c522f67665647156459d2aab9624659acaebbe50",
+      "bytes": 224
+    },
+    {
+      "id": "gs-augb-q32-v1",
+      "file": "assets/gunsmith/v1/gs-augb-q32-v1.png",
+      "sha256": "d8d0158ad782478db5762df02089d2791eb45a58fb9f093036bef51db038e421",
+      "bytes": 277
+    },
+    {
+      "id": "gs-o05-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o05-q24-v1.png",
+      "sha256": "95093179b86819787cfeb83c5dda8b9d0a4dba84be0fbee405c0276760afc9da",
+      "bytes": 160
+    },
+    {
+      "id": "gs-o10-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o10-q24-v1.png",
+      "sha256": "4ef5ef05b8a03fea0178ea5bcc0239b94f84accf39940daa92ea3acad7af26aa",
+      "bytes": 168
+    },
+    {
+      "id": "gs-f04-q24-v1",
+      "file": "assets/gunsmith/v1/gs-f04-q24-v1.png",
+      "sha256": "d3771cf5155b4fae9c9d603938942a2579b0ea5362de71a248c12b9e884f239a",
+      "bytes": 142
+    },
+    {
+      "id": "gs-f07-q24-v1",
+      "file": "assets/gunsmith/v1/gs-f07-q24-v1.png",
+      "sha256": "a152f418e0b8247df452f55de92e27563258eac6cbd464a1acb9fde6d42057c6",
+      "bytes": 157
+    },
+    {
+      "id": "gs-t02-q24-v1",
+      "file": "assets/gunsmith/v1/gs-t02-q24-v1.png",
+      "sha256": "1d70f54544a80b337ac1ce1d29fb98e21dd179e898e0682ea093d8895f0811b5",
+      "bytes": 140
+    },
+    {
+      "id": "gs-t10-q24-v1",
+      "file": "assets/gunsmith/v1/gs-t10-q24-v1.png",
+      "sha256": "00e46a3454c8402169dc11c0bb19e77d088a02352a8d708bb3c86475e4edd985",
+      "bytes": 178
+    },
+    {
+      "id": "gs-mb1911-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb1911-receiver-h-v1.png",
+      "sha256": "d77c0c127a8b6fdea34187b35bb81ba20a53269b41d2a0958de80a4e04674b39",
+      "bytes": 137
+    },
+    {
+      "id": "gs-mb1911-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb1911-receiver-i-v1.png",
+      "sha256": "e17a36145c3c18aae6a9831d7e0b8824bfbf70a4e9ee8edb814155fe1640bae5",
+      "bytes": 207
+    },
+    {
+      "id": "gs-mb1911-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb1911-receiver-w-v1.png",
+      "sha256": "ccd3ce6415de4842a6ca95141a342f6f513ea9b6ffb68934fde523d5187fdb33",
+      "bytes": 363
+    },
+    {
+      "id": "gs-umpb45-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-receiver-h-v1.png",
+      "sha256": "3a1c673a42b47ee46f77477acc507e01a159345a2e22e4226ed1a113be794d11",
+      "bytes": 122
+    },
+    {
+      "id": "gs-umpb45-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-receiver-i-v1.png",
+      "sha256": "c6240227cf3ff88fedbb2756af52aedcba7e9623597de1a0082dc4fa2ed19bf3",
+      "bytes": 159
+    },
+    {
+      "id": "gs-umpb45-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-receiver-w-v1.png",
+      "sha256": "aa511a3f0a96d16159b15b9145a31993f68363df343555c50766120dadbcd33e",
+      "bytes": 254
+    },
+    {
+      "id": "gs-pb90-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-pb90-receiver-h-v1.png",
+      "sha256": "794db017b4e4814cb4d3898e4a91f616619123526cf2fe79d8e09deb00b19149",
+      "bytes": 157
+    },
+    {
+      "id": "gs-pb90-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-pb90-receiver-i-v1.png",
+      "sha256": "d8ee5aa59614bc55345b38b9ad75eb4077217f445d59538d787935900ee162cd",
+      "bytes": 238
+    },
+    {
+      "id": "gs-pb90-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-pb90-receiver-w-v1.png",
+      "sha256": "2878e43001a7bf072453a7311f233881739462a67ffb88b9276c6630b4b066b9",
+      "bytes": 411
+    },
+    {
+      "id": "gs-svdb-receiver-h-v3",
+      "file": "assets/gunsmith/v1/gs-svdb-receiver-h-v3.png",
+      "sha256": "5d98b7cd35ad66d844c2c538b2e6f099cd4d74fd6e40172fb6a8c600bdbb8d83",
+      "bytes": 172
+    },
+    {
+      "id": "gs-svdb-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-svdb-mag-factory-h-v1.png",
+      "sha256": "8ada0743be8f3df1c8b891f76445727063c1400f6f864506d737c6878fa8c16e",
+      "bytes": 89
+    },
+    {
+      "id": "gs-svdb-receiver-i-v4",
+      "file": "assets/gunsmith/v1/gs-svdb-receiver-i-v4.png",
+      "sha256": "ef8877008e44a56e5232082b4a65c17f80280cd07751e75c52fde648df875d3a",
+      "bytes": 304
+    },
+    {
+      "id": "gs-svdb-mag-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-svdb-mag-factory-i-v1.png",
+      "sha256": "6b2a341acc7a17c0686cd2cd0f7c094fb5655e8d0b3f49595132cfd41fcf3b31",
+      "bytes": 102
+    },
+    {
+      "id": "gs-svdb-receiver-w-v4",
+      "file": "assets/gunsmith/v1/gs-svdb-receiver-w-v4.png",
+      "sha256": "59f44afd1883c23e793df4a7d301a0381cd901d9d1cf41c241dfac544e580276",
+      "bytes": 486
+    },
+    {
+      "id": "gs-svdb-mag-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-svdb-mag-factory-w-v1.png",
+      "sha256": "300abdbf3cf5dfbd770c25792a87c707e183daa65b40ea3106d095881baaaf9e",
+      "bytes": 144
+    },
+    {
+      "id": "gs-mb14-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb14-receiver-h-v1.png",
+      "sha256": "9c1c7b4f916168046c490ff30c0d0d78cb5d6b6c50d5cf6cb225d4e7173f1e0d",
+      "bytes": 137
+    },
+    {
+      "id": "gs-mb14-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb14-receiver-i-v1.png",
+      "sha256": "2100797b003c67ed44c72e93a139f2f4d111f70dad0f7d587b9efffdef69815f",
+      "bytes": 180
+    },
+    {
+      "id": "gs-mb14-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb14-receiver-w-v1.png",
+      "sha256": "fd7ce4df5967f528addf5535655381bfc51048b64a6fbbe9335e8b3e455f2b2b",
+      "bytes": 292
+    },
+    {
+      "id": "gs-mb700-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb700-receiver-h-v1.png",
+      "sha256": "310e7e9c8f6383b9028b9a12c9f8cc2b2d9caa6a876364418816be6f246bf85e",
+      "bytes": 136
+    },
+    {
+      "id": "gs-mb700-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb700-receiver-i-v1.png",
+      "sha256": "ae1f8c3f0ee25cea4111d8afe12a6bc202766cdb7f0b77312082875ecedebc7e",
+      "bytes": 189
+    },
+    {
+      "id": "gs-mb700-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb700-receiver-w-v1.png",
+      "sha256": "5fe488847304f9717f40b0c0b0c4025293d21e9505860751435c22c5c28bc220",
+      "bytes": 293
+    },
+    {
+      "id": "gs-rpkb-receiver-h-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-receiver-h-v1.png",
+      "sha256": "4eb442f37b6bfc5a393541b22967039c6ac7c5f3926441c3f649ce948c2bdd79",
+      "bytes": 133
+    },
+    {
+      "id": "gs-rpkb-receiver-i-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-receiver-i-v1.png",
+      "sha256": "790f4d7e12f120d58e4bbd8afd02b7a42715ca7129677c1a23621cd35f5e1b9c",
+      "bytes": 200
+    },
+    {
+      "id": "gs-rpkb-receiver-w-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-receiver-w-v1.png",
+      "sha256": "f15f1409fde455f8bad798bbc77b6f726792dc9a27ce680db6702a5599b513f9",
+      "bytes": 379
+    },
+    {
+      "id": "gs-umpb45-stock-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-stock-factory-h-v1.png",
+      "sha256": "aa0bc75a894a9c326f56062f3ad0f42f9b90106b7f4be19043857d43defe412f",
+      "bytes": 103
+    },
+    {
+      "id": "gs-umpb45-stock-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-stock-factory-i-v1.png",
+      "sha256": "05e4f1bc0e7de094807e404a111c97b4886228cbad61fd78403675487c9bd871",
+      "bytes": 161
+    },
+    {
+      "id": "gs-umpb45-stock-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-stock-factory-w-v1.png",
+      "sha256": "33a2fe1c3ee4e0d4bda004e0d3f23200f5f54a2e2110548420500c043a21caa9",
+      "bytes": 261
+    },
+    {
+      "id": "gs-umpb45-reargrip-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-reargrip-factory-h-v1.png",
+      "sha256": "52c1580f0afdc57dd067e0f278c4f03a6b06187346150cb2f325bb591e503118",
+      "bytes": 90
+    },
+    {
+      "id": "gs-umpb45-reargrip-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-reargrip-factory-i-v1.png",
+      "sha256": "abaa9b101ab2e433feb6deda142ab0f13183d402d84fc6279ea1eb9c8e1eaca5",
+      "bytes": 120
+    },
+    {
+      "id": "gs-umpb45-reargrip-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-reargrip-factory-w-v1.png",
+      "sha256": "ee35942a3ca78530460a13671df16e7dbde63b598eef4d7e6687bbed94a19b33",
+      "bytes": 162
+    },
+    {
+      "id": "gs-umpb45-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-mag-factory-h-v1.png",
+      "sha256": "e61963fe96fdc7c357d82371959ae412421a6ad30d1fd94c62fc4f65c8b1cbc1",
+      "bytes": 89
+    },
+    {
+      "id": "gs-umpb45-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-umpb45-mag-factory-i-v2.png",
+      "sha256": "2129e7ff147b3f8f7f47b3468aea1d9217f3b8f41db05d3b244c2ae719458c20",
+      "bytes": 92
+    },
+    {
+      "id": "gs-umpb45-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-umpb45-mag-factory-w-v2.png",
+      "sha256": "2cf1efcce00b0126f2c177ffe46cb4ba78098d44f3e23ce65e4496a8071d0c48",
+      "bytes": 131
+    },
+    {
+      "id": "gs-umpb45-barrel-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-barrel-factory-h-v1.png",
+      "sha256": "7724eea623b137587e6753108187dd56a57461d85afef6e9cfdcfb0a216ec1c7",
+      "bytes": 89
+    },
+    {
+      "id": "gs-umpb45-barrel-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-barrel-factory-i-v1.png",
+      "sha256": "eb552730de60ee7280b75a29b39ad5e0eb985e6b7b4eeacc4fea0dd2212008e1",
+      "bytes": 127
+    },
+    {
+      "id": "gs-umpb45-barrel-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-barrel-factory-w-v1.png",
+      "sha256": "dbb924506f93016c3b6a283419c319c4d5b186da191d9e03d982600c7dac1351",
+      "bytes": 134
+    },
+    {
+      "id": "gs-pb90-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-pb90-mag-factory-h-v1.png",
+      "sha256": "0808a4fb7197a965343e24f27f687e6b6a4ff89b8bbd54e98ebec939304cc822",
+      "bytes": 81
+    },
+    {
+      "id": "gs-pb90-mag-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-pb90-mag-factory-i-v1.png",
+      "sha256": "eae93d16ff610c2276148fbe97ec41123b9a0d2e3d5787664cff023a0654710f",
+      "bytes": 99
+    },
+    {
+      "id": "gs-pb90-mag-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-pb90-mag-factory-w-v1.png",
+      "sha256": "372171dd4cbb696698049da63ce381fa0345ca36268cbd9c8473abaed48d4af1",
+      "bytes": 114
+    },
+    {
+      "id": "gs-mb14-stock-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb14-stock-factory-h-v1.png",
+      "sha256": "14f3f6628fe360647a4c9dfa351ec36e8bf3400563d47c4e8362c4301bce8351",
+      "bytes": 108
+    },
+    {
+      "id": "gs-mb14-stock-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb14-stock-factory-i-v1.png",
+      "sha256": "5baf1c01239ccd0e44cd59fa940c5c00a7e69cd85352e18dee4c6141f9a5fd84",
+      "bytes": 180
+    },
+    {
+      "id": "gs-mb14-stock-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb14-stock-factory-w-v1.png",
+      "sha256": "094b4e1ecb160fbfa52d5c1b830d2f4d3b1f45f0c529c233555f7a1e17ed0aae",
+      "bytes": 298
+    },
+    {
+      "id": "gs-mb14-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb14-mag-factory-h-v1.png",
+      "sha256": "f59614efe4e6f890ec4c971fef5192dcddd193874e87f4b9fe92c03ed3dac455",
+      "bytes": 91
+    },
+    {
+      "id": "gs-mb14-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-mb14-mag-factory-i-v2.png",
+      "sha256": "e4f9ee12a577b4cd8ea484e61afe8dcc73bf55d5eebcaf91acf9e57ede4f4ab1",
+      "bytes": 105
+    },
+    {
+      "id": "gs-mb14-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-mb14-mag-factory-w-v2.png",
+      "sha256": "83c0d07c2dc93cd5b615611fec9196ec1838613752e8d7109e862b86b7a0bf31",
+      "bytes": 134
+    },
+    {
+      "id": "gs-mb700-stock-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb700-stock-factory-h-v1.png",
+      "sha256": "14f3f6628fe360647a4c9dfa351ec36e8bf3400563d47c4e8362c4301bce8351",
+      "bytes": 108
+    },
+    {
+      "id": "gs-mb700-stock-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb700-stock-factory-i-v1.png",
+      "sha256": "5baf1c01239ccd0e44cd59fa940c5c00a7e69cd85352e18dee4c6141f9a5fd84",
+      "bytes": 180
+    },
+    {
+      "id": "gs-mb700-stock-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb700-stock-factory-w-v1.png",
+      "sha256": "094b4e1ecb160fbfa52d5c1b830d2f4d3b1f45f0c529c233555f7a1e17ed0aae",
+      "bytes": 298
+    },
+    {
+      "id": "gs-mb700-barrel-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-mb700-barrel-factory-h-v1.png",
+      "sha256": "495101f0006e357212c62c9067e48e76cba651abd304562dc650f0a2d8dd7687",
+      "bytes": 89
+    },
+    {
+      "id": "gs-mb700-barrel-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-mb700-barrel-factory-i-v1.png",
+      "sha256": "307c079d8d7bb20b7ac35d5fb0a768e6715146f191bc8c45dd5994b44cd40a0d",
+      "bytes": 128
+    },
+    {
+      "id": "gs-mb700-barrel-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-mb700-barrel-factory-w-v1.png",
+      "sha256": "b593283e4d9d11fa7795708b2b427c2b7368634479a812f0ed3c870e875f3512",
+      "bytes": 145
+    },
+    {
+      "id": "gs-rpkb-stock-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-stock-factory-h-v1.png",
+      "sha256": "b24af39007c7c28c0380cfe81d3b5b52d01137d9cf7620c0c81d92c58d927640",
+      "bytes": 102
+    },
+    {
+      "id": "gs-rpkb-stock-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-stock-factory-i-v1.png",
+      "sha256": "c9ce14f24c6ed59078b9c0688c5948f27068d2f20c69eaea117f96e798eefcc2",
+      "bytes": 158
+    },
+    {
+      "id": "gs-rpkb-stock-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-stock-factory-w-v1.png",
+      "sha256": "f1b01f92ef9f8cc8d3f9bbebdf620280c0c2b5b8aca12c6677b88c85c5cbc504",
+      "bytes": 274
+    },
+    {
+      "id": "gs-rpkb-reargrip-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-reargrip-factory-h-v1.png",
+      "sha256": "fbd85ae014115852241f0391f0d1feb466ed7e60c6e20abbfa5a295d42fea7c8",
+      "bytes": 93
+    },
+    {
+      "id": "gs-rpkb-reargrip-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-reargrip-factory-i-v1.png",
+      "sha256": "7e5230f0095639ec5c785a9451bea62bc7c616ca3d3dffa727ed7ec8c21e9f4c",
+      "bytes": 119
+    },
+    {
+      "id": "gs-rpkb-reargrip-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-reargrip-factory-w-v1.png",
+      "sha256": "f7c6d1bdbe65c992ad6822e1b84f664d7d532fc84e02035afb503b520ca168c1",
+      "bytes": 163
+    },
+    {
+      "id": "gs-rpkb-mag-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-mag-factory-h-v1.png",
+      "sha256": "3ee5f3ca66eafd7639aff8e2e0b397937ec8494d86c063d04219bb197c80809c",
+      "bytes": 98
+    },
+    {
+      "id": "gs-rpkb-mag-factory-i-v2",
+      "file": "assets/gunsmith/v1/gs-rpkb-mag-factory-i-v2.png",
+      "sha256": "783ae44635e3a69527e0c396a101b0246faa6737df1c38319f05a283d13a335b",
+      "bytes": 112
+    },
+    {
+      "id": "gs-rpkb-mag-factory-w-v2",
+      "file": "assets/gunsmith/v1/gs-rpkb-mag-factory-w-v2.png",
+      "sha256": "250b542ba957cd98fd90d0bbfabc197a041f6ba22fa2e8e3a58c0e3dff00d8b1",
+      "bytes": 184
+    },
+    {
+      "id": "gs-rpkb-handguard-factory-h-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-handguard-factory-h-v1.png",
+      "sha256": "47ec3574fb37a078f5298241f4e7eaf24ff7d7eeb7a6dd54fbe582ad3d0472b7",
+      "bytes": 90
+    },
+    {
+      "id": "gs-rpkb-handguard-factory-i-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-handguard-factory-i-v1.png",
+      "sha256": "f9a70340df2aad75bc65f46e818ee35b035f85af24e5152900b24ac6edb59a01",
+      "bytes": 99
+    },
+    {
+      "id": "gs-rpkb-handguard-factory-w-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-handguard-factory-w-v1.png",
+      "sha256": "65dadb095edc6855964e96efba8da1e4d225559efe2031cd4b7bd6ace9ad1cd3",
+      "bytes": 135
+    },
+    {
+      "id": "gs-a03-h-v1",
+      "file": "assets/gunsmith/v1/gs-a03-h-v1.png",
+      "sha256": "3971a4d44889f7f931d8681538366d89f4de8bab2e79d487c3d400d476872552",
+      "bytes": 75
+    },
+    {
+      "id": "gs-a03-i-v1",
+      "file": "assets/gunsmith/v1/gs-a03-i-v1.png",
+      "sha256": "d910ac73a9fcabd472b8a125e3ff4d0e55b030f3ff113fc613453b9f7b838a25",
+      "bytes": 94
+    },
+    {
+      "id": "gs-a03-w-v1",
+      "file": "assets/gunsmith/v1/gs-a03-w-v1.png",
+      "sha256": "ce9fc7a87589776fd98925dd7ed221e427c57d4604bb913897ad4505baee09ae",
+      "bytes": 107
+    },
+    {
+      "id": "gs-b02-h-v1",
+      "file": "assets/gunsmith/v1/gs-b02-h-v1.png",
+      "sha256": "9e0e56f39fb104c62a14ebbe0da56559657e371700520b2ae08c7be2fe35e5e3",
+      "bytes": 80
+    },
+    {
+      "id": "gs-b02-i-v1",
+      "file": "assets/gunsmith/v1/gs-b02-i-v1.png",
+      "sha256": "b1d5cf848ebb1a92101639c80c4c06835a11848485418a3af85ac2cdb5d0c8b1",
+      "bytes": 99
+    },
+    {
+      "id": "gs-b02-w-v1",
+      "file": "assets/gunsmith/v1/gs-b02-w-v1.png",
+      "sha256": "65866f9c09a576b8da55d6ee4c2eabae62e5f139054c5b609673d51e783e128f",
+      "bytes": 115
+    },
+    {
+      "id": "gs-b04-h-v1",
+      "file": "assets/gunsmith/v1/gs-b04-h-v1.png",
+      "sha256": "2ce1498a04e0fe87793fd5f63ed840f360b0aa9be533de25e6d41a7b444b89ba",
+      "bytes": 88
+    },
+    {
+      "id": "gs-b04-i-v1",
+      "file": "assets/gunsmith/v1/gs-b04-i-v1.png",
+      "sha256": "36d52a62903c3e67a28682e404f9ccde28f278d8280ffb245ccef6b656af8d62",
+      "bytes": 125
+    },
+    {
+      "id": "gs-b04-w-v1",
+      "file": "assets/gunsmith/v1/gs-b04-w-v1.png",
+      "sha256": "f0b389c23d9d58458dfdcfc3a524fe53ae7504a70e727f5360208e4727968018",
+      "bytes": 135
+    },
+    {
+      "id": "gs-b10-h-v1",
+      "file": "assets/gunsmith/v1/gs-b10-h-v1.png",
+      "sha256": "3a5a40a43cc02d5ea72a0e5686041cbc2bb54cb8d87216b6f79e7a7441c7e9af",
+      "bytes": 89
+    },
+    {
+      "id": "gs-b10-i-v1",
+      "file": "assets/gunsmith/v1/gs-b10-i-v1.png",
+      "sha256": "2d71a47539dbe27347f2de7f314a2ed8a6bbf51166460f2c47b74a17427d01f4",
+      "bytes": 126
+    },
+    {
+      "id": "gs-b10-w-v1",
+      "file": "assets/gunsmith/v1/gs-b10-w-v1.png",
+      "sha256": "eae177dacd33a27e58f0be2706de6f1fcf205d9a57951a474014359998f4ed4d",
+      "bytes": 143
+    },
+    {
+      "id": "gs-h10-h-v1",
+      "file": "assets/gunsmith/v1/gs-h10-h-v1.png",
+      "sha256": "9985c131e4bb5701c76eb3427f70b29252a6c6e9721757456779c7d95050a9ff",
+      "bytes": 94
+    },
+    {
+      "id": "gs-h10-i-v1",
+      "file": "assets/gunsmith/v1/gs-h10-i-v1.png",
+      "sha256": "5eec4bd08d964ba198cf9ab81ecc830ef4464d43b5d9dc47ea752cd3896020f4",
+      "bytes": 102
+    },
+    {
+      "id": "gs-h10-w-v1",
+      "file": "assets/gunsmith/v1/gs-h10-w-v1.png",
+      "sha256": "a0346c18ef689bbdbde46cfcc69e1516e9fce52041459b2fffc2dc64675c9d54",
+      "bytes": 138
+    },
+    {
+      "id": "gs-s06-h-v1",
+      "file": "assets/gunsmith/v1/gs-s06-h-v1.png",
+      "sha256": "2b8dc7db12dc70c3a6f4da88d4d1813ded4385839910a37aede816ca63852332",
+      "bytes": 98
+    },
+    {
+      "id": "gs-s06-i-v1",
+      "file": "assets/gunsmith/v1/gs-s06-i-v1.png",
+      "sha256": "bb1320a9f867ea442a800482c53c7d10cd02ef6868aeff0ddaa5149399346b18",
+      "bytes": 151
+    },
+    {
+      "id": "gs-s06-w-v1",
+      "file": "assets/gunsmith/v1/gs-s06-w-v1.png",
+      "sha256": "61004f2d41a7d241839df686e42e00e9eb5a003b70c7dd41dcf95fb0b92115f6",
+      "bytes": 246
+    },
+    {
+      "id": "gs-s09-h-v1",
+      "file": "assets/gunsmith/v1/gs-s09-h-v1.png",
+      "sha256": "c4819bdc5238b8a4cf8d868de97b810182f84cd42921d79d3d6e63e0c8b0353f",
+      "bytes": 110
+    },
+    {
+      "id": "gs-s09-i-v1",
+      "file": "assets/gunsmith/v1/gs-s09-i-v1.png",
+      "sha256": "c42fa390fef8e9a3f6cd768ec5e74d4f46317c5797ba0cc4b937c171cac2f11b",
+      "bytes": 190
+    },
+    {
+      "id": "gs-s09-w-v1",
+      "file": "assets/gunsmith/v1/gs-s09-w-v1.png",
+      "sha256": "568cb7d2aa9805a29cbd1e76a5b8b96b736daca683e3c650f7573af7bec254ba",
+      "bytes": 332
+    },
+    {
+      "id": "gs-s10-h-v1",
+      "file": "assets/gunsmith/v1/gs-s10-h-v1.png",
+      "sha256": "da9716a4480ff5c3b8422cb373a8f20d36f3909537856c498f47c8fa1abf3cc5",
+      "bytes": 105
+    },
+    {
+      "id": "gs-s10-i-v1",
+      "file": "assets/gunsmith/v1/gs-s10-i-v1.png",
+      "sha256": "51fde785899f62182ea62831309c2fbae2429219ec65eccfde6b2b30a7d3c4fa",
+      "bytes": 170
+    },
+    {
+      "id": "gs-s10-w-v1",
+      "file": "assets/gunsmith/v1/gs-s10-w-v1.png",
+      "sha256": "8c966f8f76ddf38039ef9397c75b4e967416fcd16e3d6415839ec20759df0f73",
+      "bytes": 283
+    },
+    {
+      "id": "gs-p05-i-v1",
+      "file": "assets/gunsmith/v1/gs-p05-i-v1.png",
+      "sha256": "abaa9b101ab2e433feb6deda142ab0f13183d402d84fc6279ea1eb9c8e1eaca5",
+      "bytes": 120
+    },
+    {
+      "id": "gs-p05-w-v1",
+      "file": "assets/gunsmith/v1/gs-p05-w-v1.png",
+      "sha256": "ee35942a3ca78530460a13671df16e7dbde63b598eef4d7e6687bbed94a19b33",
+      "bytes": 162
+    },
+    {
+      "id": "gs-p08-i-v1",
+      "file": "assets/gunsmith/v1/gs-p08-i-v1.png",
+      "sha256": "aeba07c1634265ddd943262365e761fb65132723c2a8d12901775a454a67a092",
+      "bytes": 123
+    },
+    {
+      "id": "gs-p08-w-v1",
+      "file": "assets/gunsmith/v1/gs-p08-w-v1.png",
+      "sha256": "52c458ec3d3b9163b7fef897de898c114f0d0f35a693ce2764050537b3b60f25",
+      "bytes": 155
+    },
+    {
+      "id": "gs-g02-h-v1",
+      "file": "assets/gunsmith/v1/gs-g02-h-v1.png",
+      "sha256": "72d3984712180f2c6a52ec157054da4448cfa8712549f4ef01c4b48a4422c018",
+      "bytes": 87
+    },
+    {
+      "id": "gs-g02-i-v2",
+      "file": "assets/gunsmith/v1/gs-g02-i-v2.png",
+      "sha256": "56b7a8fbdec7466def7829590b48e9e61d4c29dc003c04e54456eca9725301a0",
+      "bytes": 91
+    },
+    {
+      "id": "gs-g02-w-v2",
+      "file": "assets/gunsmith/v1/gs-g02-w-v2.png",
+      "sha256": "100a2c406bcb3b44f2c5f16aea38427f9deebfc717cdf730bfef16e295b8199c",
+      "bytes": 127
+    },
+    {
+      "id": "gs-g04-h-v1",
+      "file": "assets/gunsmith/v1/gs-g04-h-v1.png",
+      "sha256": "0686a57c477dc8a7a2e9b5037510f4a1190befe88773cf133d468e70856c751a",
+      "bytes": 93
+    },
+    {
+      "id": "gs-g04-i-v2",
+      "file": "assets/gunsmith/v1/gs-g04-i-v2.png",
+      "sha256": "05dfdac76db47c74662335d5cc72171b9b5b05affd7ac9a0783a09d0e3df9fb0",
+      "bytes": 100
+    },
+    {
+      "id": "gs-g04-w-v2",
+      "file": "assets/gunsmith/v1/gs-g04-w-v2.png",
+      "sha256": "e582b9cf2aeeba3b1ec681a25ae6682fe26c51c79f663226ee4e255959e1e708",
+      "bytes": 152
+    },
+    {
+      "id": "gs-g05-h-v1",
+      "file": "assets/gunsmith/v1/gs-g05-h-v1.png",
+      "sha256": "61d8bb1666a6a36ff71d842758dabb54b34d5f9737d73d87a13441ab1365d5d5",
+      "bytes": 81
+    },
+    {
+      "id": "gs-g05-i-v1",
+      "file": "assets/gunsmith/v1/gs-g05-i-v1.png",
+      "sha256": "feb6d18109cf636e11398fd301b316266f4ae5be5709717926774350135ca0ea",
+      "bytes": 99
+    },
+    {
+      "id": "gs-g05-w-v1",
+      "file": "assets/gunsmith/v1/gs-g05-w-v1.png",
+      "sha256": "c1cbda8bb0dbd091463ab861889a1e551f56cb25e0f539988e8617cf829404a5",
+      "bytes": 112
+    },
+    {
+      "id": "gs-g11-h-v1",
+      "file": "assets/gunsmith/v1/gs-g11-h-v1.png",
+      "sha256": "a9ac7bf589c43819dcdfba962a57aea9e3721cc8127f4f796de97210a191053b",
+      "bytes": 96
+    },
+    {
+      "id": "gs-g11-i-v2",
+      "file": "assets/gunsmith/v1/gs-g11-i-v2.png",
+      "sha256": "24ffc5044236d7a669bfd2a74aacac1187d6bb652e098855a074424cf09409e9",
+      "bytes": 117
+    },
+    {
+      "id": "gs-g11-w-v2",
+      "file": "assets/gunsmith/v1/gs-g11-w-v2.png",
+      "sha256": "d4748b099eabc3f811b2bd959d064a884a07fc0e6ea4f91c4c90742f4db0eb26",
+      "bytes": 159
+    },
+    {
+      "id": "gs-g12-h-v1",
+      "file": "assets/gunsmith/v1/gs-g12-h-v1.png",
+      "sha256": "0cea8ccba52d6d76bbfd4c52771c473da2ac4a4785632a99e25dcf2f40c28865",
+      "bytes": 93
+    },
+    {
+      "id": "gs-g12-i-v2",
+      "file": "assets/gunsmith/v1/gs-g12-i-v2.png",
+      "sha256": "4aa09ce38d39c3d8d5e4ce0f95cd5015a06d03658fc3c1aa5546a5472d63fafe",
+      "bytes": 111
+    },
+    {
+      "id": "gs-g12-w-v2",
+      "file": "assets/gunsmith/v1/gs-g12-w-v2.png",
+      "sha256": "d614835f5043163cb71160fa2bf4bdc8f426a60e4b7f13dca3b00860fe9b0fd9",
+      "bytes": 185
+    },
+    {
+      "id": "gs-m04-h-v1",
+      "file": "assets/gunsmith/v1/gs-m04-h-v1.png",
+      "sha256": "aa1eed095642fe59d5f59083cf8020c9f3ad2176eeee4c846549df9e961c1658",
+      "bytes": 82
+    },
+    {
+      "id": "gs-m04-i-v1",
+      "file": "assets/gunsmith/v1/gs-m04-i-v1.png",
+      "sha256": "4ebfc8d748b998a78f28690f423947f9886994aef4b1bc9f838e7f5541be856e",
+      "bytes": 109
+    },
+    {
+      "id": "gs-m04-w-v1",
+      "file": "assets/gunsmith/v1/gs-m04-w-v1.png",
+      "sha256": "d6280a4bc6bfd304efe75d90a81f5c538e80491083ecb6c4167d4da549e3b503",
+      "bytes": 129
+    },
+    {
+      "id": "gs-m08-h-v1",
+      "file": "assets/gunsmith/v1/gs-m08-h-v1.png",
+      "sha256": "5d513e9a4ef5a7adfba81ff06e113fc1c1a0dc34daf5883f6a9346081ce647fe",
+      "bytes": 83
+    },
+    {
+      "id": "gs-m08-i-v1",
+      "file": "assets/gunsmith/v1/gs-m08-i-v1.png",
+      "sha256": "34e920d65aee928191efda3a929717d38a1b93925dab3969071926b9ccd93ca5",
+      "bytes": 111
+    },
+    {
+      "id": "gs-m08-w-v1",
+      "file": "assets/gunsmith/v1/gs-m08-w-v1.png",
+      "sha256": "8f6299bf38b99a4dc25a177ce9b8adaa9ffac1b7d715424e62672a9361acfe9f",
+      "bytes": 136
+    },
+    {
+      "id": "gs-m09-h-v1",
+      "file": "assets/gunsmith/v1/gs-m09-h-v1.png",
+      "sha256": "b812b7da071f93919389ca55dcbe43139e44cc4f752f2d36e05994cb85670b3a",
+      "bytes": 82
+    },
+    {
+      "id": "gs-m09-i-v1",
+      "file": "assets/gunsmith/v1/gs-m09-i-v1.png",
+      "sha256": "d01a27609bbb204bfa9c7c36d1af907be4cd1e4e0fe711dc0301020706f110ed",
+      "bytes": 100
+    },
+    {
+      "id": "gs-m09-w-v1",
+      "file": "assets/gunsmith/v1/gs-m09-w-v1.png",
+      "sha256": "35c97ff207307e384c0d155eac5ce96dccfc8a31b55d718fb9f1cfa770d65213",
+      "bytes": 112
+    },
+    {
+      "id": "gs-m12-h-v1",
+      "file": "assets/gunsmith/v1/gs-m12-h-v1.png",
+      "sha256": "aa1eed095642fe59d5f59083cf8020c9f3ad2176eeee4c846549df9e961c1658",
+      "bytes": 82
+    },
+    {
+      "id": "gs-m12-i-v1",
+      "file": "assets/gunsmith/v1/gs-m12-i-v1.png",
+      "sha256": "4ebfc8d748b998a78f28690f423947f9886994aef4b1bc9f838e7f5541be856e",
+      "bytes": 109
+    },
+    {
+      "id": "gs-m12-w-v1",
+      "file": "assets/gunsmith/v1/gs-m12-w-v1.png",
+      "sha256": "d6280a4bc6bfd304efe75d90a81f5c538e80491083ecb6c4167d4da549e3b503",
+      "bytes": 129
+    },
+    {
+      "id": "gs-f08-h-v1",
+      "file": "assets/gunsmith/v1/gs-f08-h-v1.png",
+      "sha256": "a3ab92f2ce5a953cd9e432e63df0e45fa5205aff79d709b6166ce867dacd8f67",
+      "bytes": 81
+    },
+    {
+      "id": "gs-f08-i-v1",
+      "file": "assets/gunsmith/v1/gs-f08-i-v1.png",
+      "sha256": "cf0891d81ad6bde66e14ba03885579234a56c2facc898c02f50ba5c997c8880c",
+      "bytes": 98
+    },
+    {
+      "id": "gs-f08-w-v1",
+      "file": "assets/gunsmith/v1/gs-f08-w-v1.png",
+      "sha256": "db5f7d58f9b3091f04396685f098499efe6398ae2d89b49e5996308a4045867e",
+      "bytes": 122
+    },
+    {
+      "id": "gs-o02-h-v1",
+      "file": "assets/gunsmith/v1/gs-o02-h-v1.png",
+      "sha256": "bb89830e8a57d223339ae04fafcdd080350e5fbddc9d087bbf70edfb6a981ffe",
+      "bytes": 88
+    },
+    {
+      "id": "gs-o02-i-v1",
+      "file": "assets/gunsmith/v1/gs-o02-i-v1.png",
+      "sha256": "3dd22662546cad50a4a4963a70d6508accfcb4c8ec4105fca3b7f569b2e3e560",
+      "bytes": 103
+    },
+    {
+      "id": "gs-o02-w-v1",
+      "file": "assets/gunsmith/v1/gs-o02-w-v1.png",
+      "sha256": "7eeb897d25497bde95652a2c7fe97ff36b69819ca16bf4ace7505960633a0930",
+      "bytes": 126
+    },
+    {
+      "id": "gs-o04-h-v1",
+      "file": "assets/gunsmith/v1/gs-o04-h-v1.png",
+      "sha256": "ae35d9d121196b624527b02e8f5329144c07d280a5d948aa493c6133b1d2ed98",
+      "bytes": 88
+    },
+    {
+      "id": "gs-o04-i-v1",
+      "file": "assets/gunsmith/v1/gs-o04-i-v1.png",
+      "sha256": "535bbcb34ed3cf215119383bd79f5bd33af0c4a0630930e22f4533edbc05cabf",
+      "bytes": 104
+    },
+    {
+      "id": "gs-o04-w-v1",
+      "file": "assets/gunsmith/v1/gs-o04-w-v1.png",
+      "sha256": "2180b17e310e804d999c4d450ae0ad1dbc43c0c7ce9a4f75880a062261c817b0",
+      "bytes": 129
+    },
+    {
+      "id": "gs-o06-h-v1",
+      "file": "assets/gunsmith/v1/gs-o06-h-v1.png",
+      "sha256": "d21be5c4d7816031d954d3085bca019ddc2484ac34b1dd9d1ab7f8a3c3835486",
+      "bytes": 94
+    },
+    {
+      "id": "gs-o06-i-v1",
+      "file": "assets/gunsmith/v1/gs-o06-i-v1.png",
+      "sha256": "cd6e141cb82e185181219d4c14ec3eb7a0244d13057343bf994e585beec7eab1",
+      "bytes": 140
+    },
+    {
+      "id": "gs-o06-w-v1",
+      "file": "assets/gunsmith/v1/gs-o06-w-v1.png",
+      "sha256": "51d2d450fefa4b40c07a97ee8bc9430b6c16141d0c92e86624b99b160a3d58f8",
+      "bytes": 167
+    },
+    {
+      "id": "gs-o07-h-v1",
+      "file": "assets/gunsmith/v1/gs-o07-h-v1.png",
+      "sha256": "a9f4097bb47dd86ba09c9e4b4597a33f988fca1b0acdb55d9db837c4a30972ed",
+      "bytes": 107
+    },
+    {
+      "id": "gs-o07-i-v1",
+      "file": "assets/gunsmith/v1/gs-o07-i-v1.png",
+      "sha256": "2224ca20d321efff1559cd123180e6809c29966a59efbea3a76c955a609311f8",
+      "bytes": 140
+    },
+    {
+      "id": "gs-o07-w-v1",
+      "file": "assets/gunsmith/v1/gs-o07-w-v1.png",
+      "sha256": "dc3148ebd3f1021e7d293a39711f5eb31ad63fdd04aa657237956908263ff042",
+      "bytes": 168
+    },
+    {
+      "id": "gs-o12-h-v1",
+      "file": "assets/gunsmith/v1/gs-o12-h-v1.png",
+      "sha256": "353505e201fd2e689753feb78f031ff393a06dd7f05813f0d54fe1f9e5cc3e4e",
+      "bytes": 79
+    },
+    {
+      "id": "gs-o12-i-v1",
+      "file": "assets/gunsmith/v1/gs-o12-i-v1.png",
+      "sha256": "22160019194aeecfcaff0928500bbd0ee444b334fbad25d20f0ada178c01100e",
+      "bytes": 91
+    },
+    {
+      "id": "gs-o12-w-v1",
+      "file": "assets/gunsmith/v1/gs-o12-w-v1.png",
+      "sha256": "c69dcb0654eed091912da1919999d7d756f67feee3a8ce9628dd41697be49d43",
+      "bytes": 95
+    },
+    {
+      "id": "gs-o09-h-v1",
+      "file": "assets/gunsmith/v1/gs-o09-h-v1.png",
+      "sha256": "94f32ee2461b8b9f4146f8a51ed667df03a1e802154863f94894dbc5b0b0c913",
+      "bytes": 108
+    },
+    {
+      "id": "gs-o09-i-v1",
+      "file": "assets/gunsmith/v1/gs-o09-i-v1.png",
+      "sha256": "3fbdfdf5ef8236fb54aede898455fd3de0697f7de36fd145f97f90efe78b2d94",
+      "bytes": 148
+    },
+    {
+      "id": "gs-o09-w-v1",
+      "file": "assets/gunsmith/v1/gs-o09-w-v1.png",
+      "sha256": "ef1e1bc9b92e9cadca69aaa97e1c0e9f8e2d3ef92168c79191817f484c3c9e9c",
+      "bytes": 189
+    },
+    {
+      "id": "gs-o11-h-v1",
+      "file": "assets/gunsmith/v1/gs-o11-h-v1.png",
+      "sha256": "15431c6c4c5aac472299af1fd4bcf07846ab0112402376af4fdcd11ef867ee6a",
+      "bytes": 102
+    },
+    {
+      "id": "gs-o11-i-v1",
+      "file": "assets/gunsmith/v1/gs-o11-i-v1.png",
+      "sha256": "e8bfd9b5ef2b706d9c3c404028e67297dda7e8ed5ed3842a97bcb1b962566ee3",
+      "bytes": 149
+    },
+    {
+      "id": "gs-o11-w-v1",
+      "file": "assets/gunsmith/v1/gs-o11-w-v1.png",
+      "sha256": "7fbcc3058ac43883af11b7a91d09a91d901e9cd4257cd941883b91065689434b",
+      "bytes": 183
+    },
+    {
+      "id": "gs-f02-h-v1",
+      "file": "assets/gunsmith/v1/gs-f02-h-v1.png",
+      "sha256": "a49760cde106d24da345ea989d27e2baba3e1894bad00755804c797c7601ba8b",
+      "bytes": 85
+    },
+    {
+      "id": "gs-f02-i-v1",
+      "file": "assets/gunsmith/v1/gs-f02-i-v1.png",
+      "sha256": "20230388fd7ea1812d45c6798e406c7579e07ee8b5b7631181b7f8a2ef81bb5c",
+      "bytes": 110
+    },
+    {
+      "id": "gs-f02-w-v1",
+      "file": "assets/gunsmith/v1/gs-f02-w-v1.png",
+      "sha256": "802e74139f819473fab4e516821a5c6152e3888710f06678d9bf8f039e261929",
+      "bytes": 143
+    },
+    {
+      "id": "gs-f05-h-v1",
+      "file": "assets/gunsmith/v1/gs-f05-h-v1.png",
+      "sha256": "68e265f550cec68236225ad443a2a4a373047930ed4515c423e19953f31a6a5f",
+      "bytes": 83
+    },
+    {
+      "id": "gs-f05-i-v1",
+      "file": "assets/gunsmith/v1/gs-f05-i-v1.png",
+      "sha256": "ce775a3b824de44d35d5d4325d94b293546286f207118fd26015ce459700aa9d",
+      "bytes": 105
+    },
+    {
+      "id": "gs-f05-w-v1",
+      "file": "assets/gunsmith/v1/gs-f05-w-v1.png",
+      "sha256": "c8bab47cd9a137e7405b041072f5cc4868ff8dd61a40fee75acb8bc1b7f2543c",
+      "bytes": 142
+    },
+    {
+      "id": "gs-f06-h-v1",
+      "file": "assets/gunsmith/v1/gs-f06-h-v1.png",
+      "sha256": "7ca3356bf15742c4145d20d1b23c34e102c52b4539013fc3e587c25f5c7b99af",
+      "bytes": 84
+    },
+    {
+      "id": "gs-f06-i-v1",
+      "file": "assets/gunsmith/v1/gs-f06-i-v1.png",
+      "sha256": "a4176ed1c33b203d4a2075954377cc37ea5e31e927fd95bb2d457fccd9c3bddf",
+      "bytes": 106
+    },
+    {
+      "id": "gs-f06-w-v1",
+      "file": "assets/gunsmith/v1/gs-f06-w-v1.png",
+      "sha256": "51c082428c1cff2130c8ab922e14620574293ffda61a0107fe13a21ab6c29944",
+      "bytes": 139
+    },
+    {
+      "id": "gs-t03-h-v1",
+      "file": "assets/gunsmith/v1/gs-t03-h-v1.png",
+      "sha256": "bf84203c0f49bcf9e255f0b452000d0c6e7c9db2bb128c188b343e401a6a8f30",
+      "bytes": 83
+    },
+    {
+      "id": "gs-t03-i-v1",
+      "file": "assets/gunsmith/v1/gs-t03-i-v1.png",
+      "sha256": "eb6ce0e3536cb6b325cb7036417080d6df5282f0e2caadf57f76892cf01cbed0",
+      "bytes": 104
+    },
+    {
+      "id": "gs-t03-w-v1",
+      "file": "assets/gunsmith/v1/gs-t03-w-v1.png",
+      "sha256": "25b7c32e50528380cf7b5725b2dd7e0e89618dced8b01f2505841410a905a3ab",
+      "bytes": 127
+    },
+    {
+      "id": "gs-t06-h-v1",
+      "file": "assets/gunsmith/v1/gs-t06-h-v1.png",
+      "sha256": "95d27b7a0eefbe630349c1d6b06fe9ae1427022bed4076699315358f9fcf1a22",
+      "bytes": 91
+    },
+    {
+      "id": "gs-t06-i-v1",
+      "file": "assets/gunsmith/v1/gs-t06-i-v1.png",
+      "sha256": "76f59f58775d6823deb7385275a16de512f068336875003f1cd5130903aa385a",
+      "bytes": 106
+    },
+    {
+      "id": "gs-t06-w-v1",
+      "file": "assets/gunsmith/v1/gs-t06-w-v1.png",
+      "sha256": "b747df1da5eb04e335df1cbfc56f196381e820f25f2fbca62667fb4c56603f86",
+      "bytes": 128
+    },
+    {
+      "id": "gs-t07-h-v1",
+      "file": "assets/gunsmith/v1/gs-t07-h-v1.png",
+      "sha256": "ebda7f4e86e3fa398d86e326eac98611284f010ac555ea25aba821474c80f850",
+      "bytes": 85
+    },
+    {
+      "id": "gs-t07-i-v1",
+      "file": "assets/gunsmith/v1/gs-t07-i-v1.png",
+      "sha256": "0fa566fd6d30638d9a031995dac33ef88ffe4b1e05933f957fd1d1b76d7f40d9",
+      "bytes": 105
+    },
+    {
+      "id": "gs-t07-w-v1",
+      "file": "assets/gunsmith/v1/gs-t07-w-v1.png",
+      "sha256": "48697766a0248a56977866d21d3d884bd52c9f7b41eb053bfe8834bce8e07809",
+      "bytes": 127
+    },
+    {
+      "id": "gs-t09-h-v1",
+      "file": "assets/gunsmith/v1/gs-t09-h-v1.png",
+      "sha256": "95d27b7a0eefbe630349c1d6b06fe9ae1427022bed4076699315358f9fcf1a22",
+      "bytes": 91
+    },
+    {
+      "id": "gs-t09-i-v1",
+      "file": "assets/gunsmith/v1/gs-t09-i-v1.png",
+      "sha256": "1e21c6efcf17a0dcb35669d201b35080d16d31bd977eecea259d9e6c8c5a52c2",
+      "bytes": 111
+    },
+    {
+      "id": "gs-t09-w-v1",
+      "file": "assets/gunsmith/v1/gs-t09-w-v1.png",
+      "sha256": "067633f25a6342afbe05259cd18dbc2e5e0f0999745e00cad651aa2b40aa4d36",
+      "bytes": 135
+    },
+    {
+      "id": "gs-mb1911-q24-v1",
+      "file": "assets/gunsmith/v1/gs-mb1911-q24-v1.png",
+      "sha256": "03444a702a64c77e4731d9205787ed489ecd4dc80ff36c163f09a0a54a532d67",
+      "bytes": 177
+    },
+    {
+      "id": "gs-mb1911-q32-v1",
+      "file": "assets/gunsmith/v1/gs-mb1911-q32-v1.png",
+      "sha256": "f5b715bed7388e2333d0ae8885e7c529cc76be2d685117744a5d93b2d9a36909",
+      "bytes": 244
+    },
+    {
+      "id": "gs-umpb45-q24-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-q24-v1.png",
+      "sha256": "7e2010a6d292c72afe46ea5f7903d8ac404e1dfcc92262518a84c2e9286a88e3",
+      "bytes": 164
+    },
+    {
+      "id": "gs-umpb45-q32-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-q32-v1.png",
+      "sha256": "c240c3cd72f5c2669882675bfb31b3ab80bf383ee4bcc1debde051a06d7f42bd",
+      "bytes": 185
+    },
+    {
+      "id": "gs-pb90-q24-v1",
+      "file": "assets/gunsmith/v1/gs-pb90-q24-v1.png",
+      "sha256": "b1073e1d1957a86198385614924a7071a425001a41806b659d86096d458fee94",
+      "bytes": 169
+    },
+    {
+      "id": "gs-pb90-q32-v1",
+      "file": "assets/gunsmith/v1/gs-pb90-q32-v1.png",
+      "sha256": "b6cb5f0a60d5bbb657d40cc7a93153b491eab164f8042f10854f0a38e11d20ce",
+      "bytes": 224
+    },
+    {
+      "id": "gs-svdb-q24-v1",
+      "file": "assets/gunsmith/v1/gs-svdb-q24-v1.png",
+      "sha256": "99cb0f9c6c0469ef7f0fb159fda259b8bf53e7902f8401079e22f464b293ceb5",
+      "bytes": 200
+    },
+    {
+      "id": "gs-svdb-q32-v1",
+      "file": "assets/gunsmith/v1/gs-svdb-q32-v1.png",
+      "sha256": "004ecdc3ef3dbaffa3049a61299478e0d07006a63612842369d5cd3b1470a80b",
+      "bytes": 212
+    },
+    {
+      "id": "gs-mb14-q24-v1",
+      "file": "assets/gunsmith/v1/gs-mb14-q24-v1.png",
+      "sha256": "c1a79db0922961ccb3d29030939a3fdd465989d6d4ae69c4e4f1a2264cd3dcee",
+      "bytes": 192
+    },
+    {
+      "id": "gs-mb14-q32-v1",
+      "file": "assets/gunsmith/v1/gs-mb14-q32-v1.png",
+      "sha256": "def27a0102b04ea4be9b0dc1abb276263a4bfc08b738ff4b12ff8c9ab74d44b6",
+      "bytes": 200
+    },
+    {
+      "id": "gs-mb700-q24-v1",
+      "file": "assets/gunsmith/v1/gs-mb700-q24-v1.png",
+      "sha256": "0f77c1ad1dfd810ac0750aff8727efef48c8edb22addf5f05f19334a9cd425e6",
+      "bytes": 171
+    },
+    {
+      "id": "gs-mb700-q32-v1",
+      "file": "assets/gunsmith/v1/gs-mb700-q32-v1.png",
+      "sha256": "60b39e68a115588adfd6250c47ed2e6cd556cb88408b3147bdeca51bd2e8ee1a",
+      "bytes": 190
+    },
+    {
+      "id": "gs-rpkb-q24-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-q24-v1.png",
+      "sha256": "e2386515840969dbe06cf44536a6a2e6865945e328de502b233d79636a6f75e3",
+      "bytes": 193
+    },
+    {
+      "id": "gs-rpkb-q32-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-q32-v1.png",
+      "sha256": "0bfd4318758cfba004f2b5fa86796cdc06b38203602c6004980fb32419e9fbb7",
+      "bytes": 215
+    },
+    {
+      "id": "gs-a03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-a03-q24-v1.png",
+      "sha256": "a04d90fdd0e837a4aab0be7c340e5fd581555ca708225a8d8267d32892094d89",
+      "bytes": 131
+    },
+    {
+      "id": "gs-b02-q24-v1",
+      "file": "assets/gunsmith/v1/gs-b02-q24-v1.png",
+      "sha256": "99c982c3011f797cfe56e4b80bb56dd7e78f4c4ed461cfb163c4af48e1777f11",
+      "bytes": 131
+    },
+    {
+      "id": "gs-b04-q24-v1",
+      "file": "assets/gunsmith/v1/gs-b04-q24-v1.png",
+      "sha256": "d902af39b79f4bfc56164ea8bb3335a40c37cbe2fa5072b7452f78b714151a57",
+      "bytes": 135
+    },
+    {
+      "id": "gs-b10-q24-v1",
+      "file": "assets/gunsmith/v1/gs-b10-q24-v1.png",
+      "sha256": "6f019e182b31914b9b31cfc5561f8238b5bda38ba1e1bf53a3a1f9d3055ba9ab",
+      "bytes": 129
+    },
+    {
+      "id": "gs-h10-q24-v1",
+      "file": "assets/gunsmith/v1/gs-h10-q24-v1.png",
+      "sha256": "31b233f778566d2b45cbf573d97e8b93324bb7e12664e71419f4791435b23c5f",
+      "bytes": 141
+    },
+    {
+      "id": "gs-s06-q24-v1",
+      "file": "assets/gunsmith/v1/gs-s06-q24-v1.png",
+      "sha256": "376b339a7299716ee3cba4ce1f924e1a7759247f20662ed1728090ec1cc77ede",
+      "bytes": 208
+    },
+    {
+      "id": "gs-s09-q24-v1",
+      "file": "assets/gunsmith/v1/gs-s09-q24-v1.png",
+      "sha256": "ba563efd8723f2ae0e9e0516c1ddcb39d74aa00448e87da9971057eac9293ba6",
+      "bytes": 206
+    },
+    {
+      "id": "gs-s10-q24-v1",
+      "file": "assets/gunsmith/v1/gs-s10-q24-v1.png",
+      "sha256": "9f68ceb8b762c8d3e463f251a40660cfc7ddd3b14819b1a0b4d4df2bfe920569",
+      "bytes": 204
+    },
+    {
+      "id": "gs-p05-q24-v1",
+      "file": "assets/gunsmith/v1/gs-p05-q24-v1.png",
+      "sha256": "4b6581e9771aba811c1dbaf9c197368e33a46fdcdd2af73727f6f855c71cbf8f",
+      "bytes": 156
+    },
+    {
+      "id": "gs-p08-q24-v1",
+      "file": "assets/gunsmith/v1/gs-p08-q24-v1.png",
+      "sha256": "1e8d68e2caeb85e0eca27202cd923cf6f221645e1d96e3825666c62cde5be7cf",
+      "bytes": 166
+    },
+    {
+      "id": "gs-g02-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g02-q24-v1.png",
+      "sha256": "682f4dd63735d53c2eb5c1e42031e7dbbbe645eaf570d2d11c5c9f87793c528d",
+      "bytes": 138
+    },
+    {
+      "id": "gs-g04-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g04-q24-v1.png",
+      "sha256": "23c03ce5766d07f725d93dbc29588a58c5d918a9b3a0fba4b581fff6a0193a61",
+      "bytes": 133
+    },
+    {
+      "id": "gs-g05-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g05-q24-v1.png",
+      "sha256": "c6b86e450eabd73d70fdcf628a38b08bf84ba70d942e1f274d52a19f68119c61",
+      "bytes": 118
+    },
+    {
+      "id": "gs-g11-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g11-q24-v1.png",
+      "sha256": "aba03dd21c424c0cd5c95f3425b61c5454bbd923c5d10674c2be8aaf593259fc",
+      "bytes": 133
+    },
+    {
+      "id": "gs-g12-q24-v1",
+      "file": "assets/gunsmith/v1/gs-g12-q24-v1.png",
+      "sha256": "dae54ade7f27a0cc49f92baba881e2a78d83dd8aea828c9058bab3831d9ccb6b",
+      "bytes": 142
+    },
+    {
+      "id": "gs-m04-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m04-q24-v1.png",
+      "sha256": "7b480b03fa5e900e65b4e418380940819128f51ad0daf557ce31098b4578e5b8",
+      "bytes": 124
+    },
+    {
+      "id": "gs-m08-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m08-q24-v1.png",
+      "sha256": "af6518b3a27e5df71a39a8d1ed4bc155808d49ce6a2af4adb81846b43ca03bc8",
+      "bytes": 124
+    },
+    {
+      "id": "gs-m09-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m09-q24-v1.png",
+      "sha256": "d09a522092ec5c86d48d219942ec84d4459567653a9d4d65cf0dc5938b55dd27",
+      "bytes": 132
+    },
+    {
+      "id": "gs-m12-q24-v1",
+      "file": "assets/gunsmith/v1/gs-m12-q24-v1.png",
+      "sha256": "1cf0b9ba7516c44b51d44b7dc9af5214c2ca3513c9a6f0e023a08b8d61c5d807",
+      "bytes": 134
+    },
+    {
+      "id": "gs-f08-q24-v1",
+      "file": "assets/gunsmith/v1/gs-f08-q24-v1.png",
+      "sha256": "348ca0bc050c4d374e077a33b30982b782901ce19ba15a87778dff4f0a9e9631",
+      "bytes": 118
+    },
+    {
+      "id": "gs-o02-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o02-q24-v1.png",
+      "sha256": "f1d62d78e86e8a41f509b00ed9e51ab6979ba517a4d803532c1b703724003391",
+      "bytes": 116
+    },
+    {
+      "id": "gs-o04-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o04-q24-v1.png",
+      "sha256": "0a5204c341b9e52d198792738208220afc2ff9987fd72cb7214398241733919a",
+      "bytes": 115
+    },
+    {
+      "id": "gs-o06-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o06-q24-v1.png",
+      "sha256": "c1da01349eabf9b3c7c49d0ae396ef7b14997ef61e11344996dbf48964a42811",
+      "bytes": 152
+    },
+    {
+      "id": "gs-o07-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o07-q24-v1.png",
+      "sha256": "6ce13c2f2a22e63296814db2c7e96a7eeee43d43967eb2c0ca7afa05a055e9a9",
+      "bytes": 153
+    },
+    {
+      "id": "gs-o12-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o12-q24-v1.png",
+      "sha256": "111431c2f3aa3fa15d82564145a1d982563f4bf493704a612ee8d72d3c0c4f01",
+      "bytes": 103
+    },
+    {
+      "id": "gs-o09-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o09-q24-v1.png",
+      "sha256": "39ef969dcb723dbc186d59d1bc3a66fe3d932c506fbf844dbd11552eff519738",
+      "bytes": 152
+    },
+    {
+      "id": "gs-o11-q24-v1",
+      "file": "assets/gunsmith/v1/gs-o11-q24-v1.png",
+      "sha256": "000d1a21af21ae6c84b01b95b710faa10392f9a9d2fcde5778ba5d9980a9697e",
+      "bytes": 156
+    },
+    {
+      "id": "gs-f02-q24-v1",
+      "file": "assets/gunsmith/v1/gs-f02-q24-v1.png",
+      "sha256": "dbf585571e55d28d8805e2ec1d23901ed94d2005d2475135e04606a4465c3610",
+      "bytes": 134
+    },
+    {
+      "id": "gs-f05-q24-v1",
+      "file": "assets/gunsmith/v1/gs-f05-q24-v1.png",
+      "sha256": "f7b181ca7111ab0d3dedca99b3a93c997db05da480064fb7ccc6c9d7326707b5",
+      "bytes": 122
+    },
+    {
+      "id": "gs-f06-q24-v1",
+      "file": "assets/gunsmith/v1/gs-f06-q24-v1.png",
+      "sha256": "070c9ed80f6aedff266b1effe966aa7aff9cbff264187dd8ba14b22c4d6a3ba7",
+      "bytes": 161
+    },
+    {
+      "id": "gs-t03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-t03-q24-v1.png",
+      "sha256": "4d0ad567de9ec7f04f86ca376840c1f545aae77829aecde9a6eef70665842957",
+      "bytes": 135
+    },
+    {
+      "id": "gs-t06-q24-v1",
+      "file": "assets/gunsmith/v1/gs-t06-q24-v1.png",
+      "sha256": "3e4e37010e2b39547d04ae1c7fff7d191e785f82a8870172b8e91655e71c54ca",
+      "bytes": 133
+    },
+    {
+      "id": "gs-t07-q24-v1",
+      "file": "assets/gunsmith/v1/gs-t07-q24-v1.png",
+      "sha256": "8fdd35fd36f123cf5f8b427307bc560d3e02b077841a4526774b7aa1f7027ac8",
+      "bytes": 138
+    },
+    {
+      "id": "gs-t09-q24-v1",
+      "file": "assets/gunsmith/v1/gs-t09-q24-v1.png",
+      "sha256": "37d23cec11c1a2a4b7840f7a3ea0c060497c92bfa65dc9b49dabb310599d9de2",
+      "bytes": 154
+    },
+    {
+      "id": "gs-ammo45-q24-v1",
+      "file": "assets/gunsmith/v1/gs-ammo45-q24-v1.png",
+      "sha256": "ad6a5302b29055f175c60dec4a582b8f1804eb1eea016ed5caea2d7da538aa1c",
+      "bytes": 169
+    },
+    {
+      "id": "gs-ammo45-q32-v1",
+      "file": "assets/gunsmith/v1/gs-ammo45-q32-v1.png",
+      "sha256": "f3263f3f0455f5ab57fd7d9ab7d8a1657e517d610739c52f667098b555d3c64b",
+      "bytes": 182
+    },
+    {
+      "id": "gs-ammopdw-q24-v1",
+      "file": "assets/gunsmith/v1/gs-ammopdw-q24-v1.png",
+      "sha256": "02cf53c04d774d901fac5dc13d82923cbd13dad95f67ff49780b96c2ad5507a5",
+      "bytes": 144
+    },
+    {
+      "id": "gs-ammopdw-q32-v1",
+      "file": "assets/gunsmith/v1/gs-ammopdw-q32-v1.png",
+      "sha256": "8fe233aaa235f7c7edc469a53b86531582368d4f160c22afadf6c8d45ac4be88",
+      "bytes": 166
+    },
+    {
+      "id": "gs-ammoheavy-q24-v1",
+      "file": "assets/gunsmith/v1/gs-ammoheavy-q24-v1.png",
+      "sha256": "c7e455de0ed4948c26f71db7073f525af5c9bdbf28bdfe014f810b4d32825cdd",
+      "bytes": 152
+    },
+    {
+      "id": "gs-ammoheavy-q32-v1",
+      "file": "assets/gunsmith/v1/gs-ammoheavy-q32-v1.png",
+      "sha256": "08aa269bbcfb3b0603185d74d5f97db2e7c75932c202297ebc5fe26a2053fc7b",
+      "bytes": 201
+    },
+    {
+      "id": "gs-pistol-bare-h-v1",
+      "file": "assets/gunsmith/v1/gs-pistol-bare-h-v1.png",
+      "sha256": "15e35640a0366e3cab5e380b2350dbf1e486e81dbd461c612ecc229a950c473a",
+      "bytes": 182
+    },
+    {
+      "id": "gs-shotgun-bare-h-v1",
+      "file": "assets/gunsmith/v1/gs-shotgun-bare-h-v1.png",
+      "sha256": "c9d47d09cde139af6459423b4dcc8fca0f2020d82dcc28f151d332ae897cf25b",
+      "bytes": 204
+    },
+    {
+      "id": "gs-carbine-bare-h-v1",
+      "file": "assets/gunsmith/v1/gs-carbine-bare-h-v1.png",
+      "sha256": "a4a89795eecbed2eba87e2729698bd4bd6d295c676e3c91cf9aa33706752d186",
+      "bytes": 233
+    },
+    {
+      "id": "gs-mpb5-mag-q24-v1",
+      "file": "assets/gunsmith/v1/gs-mpb5-mag-q24-v1.png",
+      "sha256": "a1e593cd07e32419e0f1cdce2acf1f2b7e082d0f231b557fb8c696a6a503f0f9",
+      "bytes": 144
+    },
+    {
+      "id": "gs-umpb45-mag-q24-v1",
+      "file": "assets/gunsmith/v1/gs-umpb45-mag-q24-v1.png",
+      "sha256": "f6272bbf70427ff9733f9fa47aaa71a2c07eb4a796b64fc9af7d4587ad69c673",
+      "bytes": 133
+    },
+    {
+      "id": "gs-akb74-mag-q24-v1",
+      "file": "assets/gunsmith/v1/gs-akb74-mag-q24-v1.png",
+      "sha256": "e8057a53d530f54260bb9944c69cc6f9057121202941ccf5d52a76ab55dfe81a",
+      "bytes": 147
+    },
+    {
+      "id": "gs-akb103-mag-q24-v1",
+      "file": "assets/gunsmith/v1/gs-akb103-mag-q24-v1.png",
+      "sha256": "74a91e81b1460c5c21d156138c4cd8e03d80b252e3ca6b37b9bb7478e2f24fc4",
+      "bytes": 146
+    },
+    {
+      "id": "gs-mb4a1-mag-q24-v1",
+      "file": "assets/gunsmith/v1/gs-mb4a1-mag-q24-v1.png",
+      "sha256": "ce2fde229d5784e4a00819a1e1026942107e8a16fc59116d48843a93bf1a5fdf",
+      "bytes": 146
+    },
+    {
+      "id": "gs-augb-mag-q24-v1",
+      "file": "assets/gunsmith/v1/gs-augb-mag-q24-v1.png",
+      "sha256": "fa9ace7f08e3bd135b6509d554c5cbcaef7c266b4c236593cbf012587de525d3",
+      "bytes": 152
+    },
+    {
+      "id": "gs-mb14-mag-q24-v1",
+      "file": "assets/gunsmith/v1/gs-mb14-mag-q24-v1.png",
+      "sha256": "8e3859b0805f2b2e8a53a6ec52b500e157a3b9b8b62b8695b82de0f1b84a787b",
+      "bytes": 145
+    },
+    {
+      "id": "gs-rpkb-mag-q24-v1",
+      "file": "assets/gunsmith/v1/gs-rpkb-mag-q24-v1.png",
+      "sha256": "82ef38d7b4ab8b03f9d20a2593660cae7d78c2094136459ef29fc067835b128a",
+      "bytes": 148
+    },
+    {
+      "id": "gs-svdb-mag-q24-v1",
+      "file": "assets/gunsmith/v1/gs-svdb-mag-q24-v1.png",
+      "sha256": "b59900901fb9642cf1b3b5b46b7958c3d0717d0acec91e04a325047abd416cfc",
+      "bytes": 158
+    },
+    {
+      "id": "gs-vb9-mag-q24-v1",
+      "file": "assets/gunsmith/v1/gs-vb9-mag-q24-v1.png",
+      "sha256": "00c334485c87bdec79e7abc4f4334233d528eae51639d31587659d4ba0f7507f",
+      "bytes": 130
+    }
+  ],
+  "manifestSha256": "cb3844c01da605ee63e3680f081b6beff00b5484f2035624bf3fa18403fcf97e"
+}

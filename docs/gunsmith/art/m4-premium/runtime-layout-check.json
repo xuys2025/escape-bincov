@@ -1,0 +1,5854 @@
+{
+  "schema": 1,
+  "date": "2026-10-30",
+  "status": "pass",
+  "fitRelations": 87,
+  "layouts": 261,
+  "compoundLayouts": 9,
+  "representativeGuns": 20,
+  "fits": [
+    {
+      "gun": "pistol",
+      "id": "J03",
+      "parts": [
+        {
+          "uid": "premium-art-385",
+          "id": "A01",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-384",
+              "id": "J03",
+              "slot": "micro",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            18,
+            13
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j03-h",
+          "tip": [
+            17,
+            5.5
+          ],
+          "hand": [
+            6,
+            9
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            38,
+            23
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j03-i",
+          "tip": [
+            38,
+            11.5
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            76,
+            47
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j03-w",
+          "tip": [
+            76,
+            24
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "gb17",
+      "id": "J03",
+      "parts": [
+        {
+          "uid": "premium-art-936",
+          "id": "J03",
+          "slot": "micro",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            17,
+            12
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j03-h",
+          "tip": [
+            17,
+            4
+          ],
+          "hand": [
+            5,
+            9
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            38,
+            21
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j03-i",
+          "tip": [
+            38,
+            8
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            76,
+            43
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j03-w",
+          "tip": [
+            76,
+            17
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "gb17",
+      "id": "J06",
+      "parts": [
+        {
+          "uid": "premium-art-1227",
+          "id": "J06",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            22,
+            10
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j06-h",
+          "tip": [
+            22,
+            2
+          ],
+          "hand": [
+            5,
+            7
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            51,
+            17
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j06-i",
+          "tip": [
+            51,
+            4
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            103,
+            34
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j06-w",
+          "tip": [
+            103,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "gb17",
+      "id": "J18",
+      "parts": [
+        {
+          "uid": "premium-art-1228",
+          "id": "J18",
+          "slot": "grip",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            17,
+            10
+          ],
+          "colors": 5,
+          "hiddenRearGrip": true,
+          "partKey": null,
+          "tip": [
+            17,
+            2
+          ],
+          "hand": [
+            5,
+            7
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            38,
+            17
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j18-i",
+          "tip": [
+            38,
+            4
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            76,
+            34
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j18-w",
+          "tip": [
+            76,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb1911",
+      "id": "J03",
+      "parts": [
+        {
+          "uid": "premium-art-1649",
+          "id": "A03",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-1648",
+              "id": "J03",
+              "slot": "micro",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            18,
+            12
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j03-h",
+          "tip": [
+            18,
+            5
+          ],
+          "hand": [
+            6,
+            9
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            42,
+            23
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j03-i",
+          "tip": [
+            42,
+            10
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            84,
+            48
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j03-w",
+          "tip": [
+            84,
+            22
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "pb226",
+      "id": "J03",
+      "parts": [
+        {
+          "uid": "premium-art-2366",
+          "id": "A02",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-2365",
+              "id": "J03",
+              "slot": "micro",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            18,
+            12
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j03-h",
+          "tip": [
+            18,
+            5
+          ],
+          "hand": [
+            6,
+            9
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            40,
+            23
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j03-i",
+          "tip": [
+            40,
+            10
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            80,
+            47
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j03-w",
+          "tip": [
+            80,
+            21
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "pb226",
+      "id": "J06",
+      "parts": [
+        {
+          "uid": "premium-art-2659",
+          "id": "J06",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            23,
+            9
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j06-h",
+          "tip": [
+            23,
+            2
+          ],
+          "hand": [
+            6,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            53,
+            17
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j06-i",
+          "tip": [
+            53,
+            4
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            107,
+            34
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j06-w",
+          "tip": [
+            107,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "pb226",
+      "id": "J18",
+      "parts": [
+        {
+          "uid": "premium-art-2660",
+          "id": "J18",
+          "slot": "grip",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            18,
+            9
+          ],
+          "colors": 7,
+          "hiddenRearGrip": true,
+          "partKey": null,
+          "tip": [
+            18,
+            2
+          ],
+          "hand": [
+            6,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            40,
+            17
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j18-i",
+          "tip": [
+            40,
+            4
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            80,
+            34
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j18-w",
+          "tip": [
+            80,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-2815",
+          "id": "A04",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-2814",
+              "id": "J01",
+              "slot": "top",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            14
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            26,
+            6
+          ],
+          "hand": [
+            18,
+            9
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            29
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            65,
+            11
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            131,
+            59
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            131,
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "id": "J04",
+      "parts": [
+        {
+          "uid": "premium-art-3202",
+          "id": "H07",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-3201",
+              "id": "J04",
+              "slot": "under",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-h",
+          "tip": [
+            26,
+            2
+          ],
+          "hand": [
+            18,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            21
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-i",
+          "tip": [
+            65,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            131,
+            42
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-w",
+          "tip": [
+            131,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "id": "J05",
+      "parts": [
+        {
+          "uid": "premium-art-3271",
+          "id": "H06",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-3270",
+              "id": "J05",
+              "slot": "side",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-h",
+          "tip": [
+            26,
+            2
+          ],
+          "hand": [
+            18,
+            5
+          ],
+          "beam": [
+            20,
+            4
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            21
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-i",
+          "tip": [
+            65,
+            3
+          ],
+          "beam": [
+            55,
+            6
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            131,
+            42
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-w",
+          "tip": [
+            131,
+            6
+          ],
+          "beam": [
+            111,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "id": "J06",
+      "parts": [
+        {
+          "uid": "premium-art-3274",
+          "id": "J06",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            31,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j06-h",
+          "tip": [
+            31,
+            2
+          ],
+          "hand": [
+            18,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            78,
+            21
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j06-i",
+          "tip": [
+            78,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            158,
+            42
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j06-w",
+          "tip": [
+            158,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mpb5",
+      "id": "J16",
+      "parts": [
+        {
+          "uid": "premium-art-3275",
+          "id": "J16",
+          "slot": "stock",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            25,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j16-h",
+          "tip": [
+            25,
+            2
+          ],
+          "hand": [
+            17,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            66,
+            21
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j16-i",
+          "tip": [
+            66,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            133,
+            42
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j16-w",
+          "tip": [
+            133,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "umpb45",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-3276",
+          "id": "J01",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            25,
+            13
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            25,
+            6
+          ],
+          "hand": [
+            18,
+            8
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            66,
+            28
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            66,
+            10
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            133,
+            57
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            133,
+            21
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "umpb45",
+      "id": "J04",
+      "parts": [
+        {
+          "uid": "premium-art-3559",
+          "id": "J04",
+          "slot": "under",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            25,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-h",
+          "tip": [
+            25,
+            3
+          ],
+          "hand": [
+            18,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            66,
+            22
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-i",
+          "tip": [
+            66,
+            4
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            133,
+            44
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-w",
+          "tip": [
+            133,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "umpb45",
+      "id": "J05",
+      "parts": [
+        {
+          "uid": "premium-art-3560",
+          "id": "J05",
+          "slot": "side",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            25,
+            10
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-h",
+          "tip": [
+            25,
+            3
+          ],
+          "hand": [
+            18,
+            5
+          ],
+          "beam": [
+            21,
+            4
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            66,
+            22
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-i",
+          "tip": [
+            66,
+            4
+          ],
+          "beam": [
+            56,
+            6
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            133,
+            44
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-w",
+          "tip": [
+            133,
+            8
+          ],
+          "beam": [
+            113,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "umpb45",
+      "id": "J17",
+      "parts": [
+        {
+          "uid": "premium-art-3561",
+          "id": "J17",
+          "slot": "stock",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            24,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j17-h",
+          "tip": [
+            24,
+            3
+          ],
+          "hand": [
+            17,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            64,
+            22
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j17-i",
+          "tip": [
+            64,
+            4
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            129,
+            44
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j17-w",
+          "tip": [
+            129,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "pb90",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-3562",
+          "id": "J01",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            25,
+            13
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            25,
+            7
+          ],
+          "hand": [
+            21,
+            10
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            56,
+            23
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            56,
+            12
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            112,
+            47
+          ],
+          "colors": 12,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            112,
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "pb90",
+      "id": "J05",
+      "parts": [
+        {
+          "uid": "premium-art-3950",
+          "id": "J05",
+          "slot": "side",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            25,
+            10
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-h",
+          "tip": [
+            25,
+            4
+          ],
+          "hand": [
+            21,
+            7
+          ],
+          "beam": [
+            22,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            56,
+            17
+          ],
+          "colors": 12,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-i",
+          "tip": [
+            56,
+            6
+          ],
+          "beam": [
+            53,
+            7
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            112,
+            34
+          ],
+          "colors": 14,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-w",
+          "tip": [
+            112,
+            12
+          ],
+          "beam": [
+            106,
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "vb9",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-3951",
+          "id": "J01",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            24,
+            13
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            24,
+            6
+          ],
+          "hand": [
+            16,
+            9
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            55,
+            24
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            55,
+            10
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            110,
+            49
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            110,
+            21
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "vb9",
+      "id": "J04",
+      "parts": [
+        {
+          "uid": "premium-art-4218",
+          "id": "J04",
+          "slot": "under",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            24,
+            11
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-h",
+          "tip": [
+            24,
+            3
+          ],
+          "hand": [
+            16,
+            7
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            55,
+            18
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-i",
+          "tip": [
+            55,
+            4
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            110,
+            36
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-w",
+          "tip": [
+            110,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "vb9",
+      "id": "J05",
+      "parts": [
+        {
+          "uid": "premium-art-4219",
+          "id": "J05",
+          "slot": "side",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            24,
+            10
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-h",
+          "tip": [
+            24,
+            3
+          ],
+          "hand": [
+            16,
+            6
+          ],
+          "beam": [
+            21,
+            4
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            55,
+            18
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-i",
+          "tip": [
+            55,
+            4
+          ],
+          "beam": [
+            51,
+            6
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            110,
+            36
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-w",
+          "tip": [
+            110,
+            8
+          ],
+          "beam": [
+            102,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "vb9",
+      "id": "J06",
+      "parts": [
+        {
+          "uid": "premium-art-4220",
+          "id": "J06",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            29,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j06-h",
+          "tip": [
+            29,
+            3
+          ],
+          "hand": [
+            16,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            68,
+            18
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j06-i",
+          "tip": [
+            68,
+            4
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            137,
+            36
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j06-w",
+          "tip": [
+            137,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "shotgun",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-4347",
+          "id": "A05",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-4346",
+              "id": "J01",
+              "slot": "top",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            14
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            32,
+            6.5
+          ],
+          "hand": [
+            21,
+            10
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            78,
+            22
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            78,
+            11
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            156,
+            45
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            156,
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "shotgun",
+      "id": "J09",
+      "parts": [
+        {
+          "uid": "premium-art-4866",
+          "id": "J09",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            34,
+            10
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j09-h",
+          "tip": [
+            34,
+            3
+          ],
+          "hand": [
+            21,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            84,
+            17
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j09-i",
+          "tip": [
+            84,
+            4
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            169,
+            34
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j09-w",
+          "tip": [
+            169,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb870",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-5013",
+          "id": "A06",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-5012",
+              "id": "J01",
+              "slot": "top",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            14
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            33,
+            6
+          ],
+          "hand": [
+            22,
+            9
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            88,
+            24
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            88,
+            11
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            177,
+            49
+          ],
+          "colors": 13,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            177,
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb870",
+      "id": "J04",
+      "parts": [
+        {
+          "uid": "premium-art-5372",
+          "id": "H08",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-5371",
+              "id": "J04",
+              "slot": "under",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-h",
+          "tip": [
+            33,
+            2
+          ],
+          "hand": [
+            22,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            88,
+            17
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-i",
+          "tip": [
+            88,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            177,
+            35
+          ],
+          "colors": 13,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-w",
+          "tip": [
+            177,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb870",
+      "id": "J05",
+      "parts": [
+        {
+          "uid": "premium-art-5433",
+          "id": "H08",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-5432",
+              "id": "J05",
+              "slot": "side",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-h",
+          "tip": [
+            33,
+            2
+          ],
+          "hand": [
+            22,
+            5
+          ],
+          "beam": [
+            25,
+            4
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            88,
+            16
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-i",
+          "tip": [
+            88,
+            3
+          ],
+          "beam": [
+            69,
+            6
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            177,
+            32
+          ],
+          "colors": 14,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-w",
+          "tip": [
+            177,
+            6
+          ],
+          "beam": [
+            139,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb870",
+      "id": "J09",
+      "parts": [
+        {
+          "uid": "premium-art-5436",
+          "id": "J09",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            35,
+            10
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j09-h",
+          "tip": [
+            35,
+            2
+          ],
+          "hand": [
+            22,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            94,
+            16
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j09-i",
+          "tip": [
+            94,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            190,
+            32
+          ],
+          "colors": 13,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j09-w",
+          "tip": [
+            190,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb870",
+      "id": "J19",
+      "parts": [
+        {
+          "uid": "premium-art-5437",
+          "id": "J19",
+          "slot": "stock",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            10
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j19-h",
+          "tip": [
+            32,
+            2
+          ],
+          "hand": [
+            21,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            86,
+            16
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j19-i",
+          "tip": [
+            86,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            173,
+            32
+          ],
+          "colors": 12,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j19-w",
+          "tip": [
+            173,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-5438",
+          "id": "J01",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            13
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            32,
+            5
+          ],
+          "hand": [
+            22,
+            8
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            86,
+            22
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            86,
+            9
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            173,
+            45
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            173,
+            19
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "id": "J04",
+      "parts": [
+        {
+          "uid": "premium-art-5787",
+          "id": "H09",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-5786",
+              "id": "J04",
+              "slot": "under",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-h",
+          "tip": [
+            32,
+            2
+          ],
+          "hand": [
+            22,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            86,
+            17
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-i",
+          "tip": [
+            86,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            173,
+            35
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-w",
+          "tip": [
+            173,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "id": "J05",
+      "parts": [
+        {
+          "uid": "premium-art-5848",
+          "id": "H09",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-5847",
+              "id": "J05",
+              "slot": "side",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            10
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-h",
+          "tip": [
+            32,
+            2
+          ],
+          "hand": [
+            22,
+            5
+          ],
+          "beam": [
+            25,
+            4
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            86,
+            16
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-i",
+          "tip": [
+            86,
+            3
+          ],
+          "beam": [
+            69,
+            6
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            173,
+            32
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-w",
+          "tip": [
+            173,
+            6
+          ],
+          "beam": [
+            139,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "id": "J09",
+      "parts": [
+        {
+          "uid": "premium-art-5851",
+          "id": "J09",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            34,
+            10
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j09-h",
+          "tip": [
+            34,
+            2
+          ],
+          "hand": [
+            22,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            92,
+            16
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j09-i",
+          "tip": [
+            92,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            186,
+            32
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j09-w",
+          "tip": [
+            186,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb1014",
+      "id": "J19",
+      "parts": [
+        {
+          "uid": "premium-art-5852",
+          "id": "J19",
+          "slot": "stock",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            31,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j19-h",
+          "tip": [
+            31,
+            2
+          ],
+          "hand": [
+            21,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            84,
+            16
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j19-i",
+          "tip": [
+            84,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            169,
+            32
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j19-w",
+          "tip": [
+            169,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "carbine",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-5995",
+          "id": "A07",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-5994",
+              "id": "J01",
+              "slot": "top",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            31,
+            11
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            31,
+            4.5
+          ],
+          "hand": [
+            18,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            78,
+            20
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            78,
+            9
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            156,
+            42
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            156,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "carbine",
+      "id": "J02",
+      "parts": [
+        {
+          "uid": "premium-art-6140",
+          "id": "A07",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-6139",
+              "id": "J02",
+              "slot": "top",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            31,
+            11
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-h",
+          "tip": [
+            31,
+            4.5
+          ],
+          "hand": [
+            18,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            78,
+            21
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-i",
+          "tip": [
+            78,
+            10
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            156,
+            44
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-w",
+          "tip": [
+            156,
+            22
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "carbine",
+      "id": "J04",
+      "parts": [
+        {
+          "uid": "premium-art-6354",
+          "id": "H05",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-6353",
+              "id": "J04",
+              "slot": "under",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            31,
+            11
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-h",
+          "tip": [
+            31,
+            3.5
+          ],
+          "hand": [
+            20,
+            7
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            78,
+            22
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-i",
+          "tip": [
+            78,
+            6
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            156,
+            44
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-w",
+          "tip": [
+            156,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "carbine",
+      "id": "J05",
+      "parts": [
+        {
+          "uid": "premium-art-6423",
+          "id": "H05",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-6422",
+              "id": "J05",
+              "slot": "side",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            31,
+            10
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-h",
+          "tip": [
+            31,
+            3.5
+          ],
+          "hand": [
+            19,
+            6
+          ],
+          "beam": [
+            24,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            78,
+            17
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-i",
+          "tip": [
+            78,
+            6
+          ],
+          "beam": [
+            64,
+            10
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            156,
+            34
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-w",
+          "tip": [
+            156,
+            12
+          ],
+          "beam": [
+            128,
+            20
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "carbine",
+      "id": "J07",
+      "parts": [
+        {
+          "uid": "premium-art-6426",
+          "id": "J07",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            38,
+            10
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-h-carbine",
+          "tip": [
+            38,
+            3.5
+          ],
+          "hand": [
+            18,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            96,
+            17
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-i",
+          "tip": [
+            96,
+            6
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            193,
+            34
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-w",
+          "tip": [
+            193,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-6593",
+          "id": "A08",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-6592",
+              "id": "J01",
+              "slot": "top",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            15
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            33,
+            7
+          ],
+          "hand": [
+            24,
+            10
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            31
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            87,
+            11
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            63
+          ],
+          "colors": 16,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            175,
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "id": "J02",
+      "parts": [
+        {
+          "uid": "premium-art-6762",
+          "id": "A08",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-6761",
+              "id": "J02",
+              "slot": "top",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            15
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-h",
+          "tip": [
+            33,
+            7
+          ],
+          "hand": [
+            24,
+            10
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            32
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-i",
+          "tip": [
+            87,
+            12
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            65
+          ],
+          "colors": 16,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-w",
+          "tip": [
+            175,
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "id": "J04",
+      "parts": [
+        {
+          "uid": "premium-art-7004",
+          "id": "H04",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-7003",
+              "id": "J04",
+              "slot": "under",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-h",
+          "tip": [
+            33,
+            2
+          ],
+          "hand": [
+            24,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            23
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-i",
+          "tip": [
+            87,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            46
+          ],
+          "colors": 16,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-w",
+          "tip": [
+            175,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "id": "J05",
+      "parts": [
+        {
+          "uid": "premium-art-7077",
+          "id": "H04",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-7076",
+              "id": "J05",
+              "slot": "side",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-h",
+          "tip": [
+            33,
+            2
+          ],
+          "hand": [
+            24,
+            5
+          ],
+          "beam": [
+            28,
+            4
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            23
+          ],
+          "colors": 12,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-i",
+          "tip": [
+            87,
+            3
+          ],
+          "beam": [
+            76,
+            6
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            46
+          ],
+          "colors": 17,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-w",
+          "tip": [
+            175,
+            6
+          ],
+          "beam": [
+            153,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "id": "J07",
+      "parts": [
+        {
+          "uid": "premium-art-7080",
+          "id": "J07",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            40,
+            10
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-h",
+          "tip": [
+            40,
+            2
+          ],
+          "hand": [
+            24,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            105,
+            23
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-i",
+          "tip": [
+            105,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            212,
+            46
+          ],
+          "colors": 16,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-w",
+          "tip": [
+            212,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "id": "J13",
+      "parts": [
+        {
+          "uid": "premium-art-7081",
+          "id": "J13",
+          "slot": "stock",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            34,
+            10
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j13-h",
+          "tip": [
+            34,
+            2
+          ],
+          "hand": [
+            25,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            89,
+            23
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j13-i",
+          "tip": [
+            89,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            179,
+            46
+          ],
+          "colors": 16,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j13-w",
+          "tip": [
+            179,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "id": "J14",
+      "parts": [
+        {
+          "uid": "premium-art-7082",
+          "id": "J14",
+          "slot": "grip",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": true,
+          "partKey": null,
+          "tip": [
+            33,
+            2
+          ],
+          "hand": [
+            24,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            23
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j14-i",
+          "tip": [
+            87,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            46
+          ],
+          "colors": 16,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j14-w",
+          "tip": [
+            175,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb74",
+      "id": "J15",
+      "parts": [
+        {
+          "uid": "premium-art-7083",
+          "id": "J15",
+          "slot": "handguard",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j15-h",
+          "tip": [
+            33,
+            2
+          ],
+          "hand": [
+            24,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            23
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j15-i",
+          "tip": [
+            87,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            46
+          ],
+          "colors": 16,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j15-w",
+          "tip": [
+            175,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-7250",
+          "id": "A08",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-7249",
+              "id": "J01",
+              "slot": "top",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            15
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            33,
+            7
+          ],
+          "hand": [
+            24,
+            10
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            32
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            87,
+            11
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            65
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            175,
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "id": "J02",
+      "parts": [
+        {
+          "uid": "premium-art-7419",
+          "id": "A08",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-7418",
+              "id": "J02",
+              "slot": "top",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            15
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-h",
+          "tip": [
+            33,
+            7
+          ],
+          "hand": [
+            24,
+            10
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            33
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-i",
+          "tip": [
+            87,
+            12
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            67
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-w",
+          "tip": [
+            175,
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "id": "J04",
+      "parts": [
+        {
+          "uid": "premium-art-7661",
+          "id": "H04",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-7660",
+              "id": "J04",
+              "slot": "under",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-h",
+          "tip": [
+            33,
+            2
+          ],
+          "hand": [
+            24,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            24
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-i",
+          "tip": [
+            87,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            48
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-w",
+          "tip": [
+            175,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "id": "J05",
+      "parts": [
+        {
+          "uid": "premium-art-7734",
+          "id": "H04",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-7733",
+              "id": "J05",
+              "slot": "side",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-h",
+          "tip": [
+            33,
+            2
+          ],
+          "hand": [
+            24,
+            5
+          ],
+          "beam": [
+            28,
+            4
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            24
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-i",
+          "tip": [
+            87,
+            3
+          ],
+          "beam": [
+            76,
+            6
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            48
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-w",
+          "tip": [
+            175,
+            6
+          ],
+          "beam": [
+            153,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "id": "J07",
+      "parts": [
+        {
+          "uid": "premium-art-7737",
+          "id": "J07",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            40,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-h",
+          "tip": [
+            40,
+            2
+          ],
+          "hand": [
+            24,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            105,
+            24
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-i",
+          "tip": [
+            105,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            212,
+            48
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-w",
+          "tip": [
+            212,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "id": "J13",
+      "parts": [
+        {
+          "uid": "premium-art-7738",
+          "id": "J13",
+          "slot": "stock",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            34,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j13-h",
+          "tip": [
+            34,
+            2
+          ],
+          "hand": [
+            25,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            89,
+            24
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j13-i",
+          "tip": [
+            89,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            179,
+            48
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j13-w",
+          "tip": [
+            179,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "id": "J14",
+      "parts": [
+        {
+          "uid": "premium-art-7739",
+          "id": "J14",
+          "slot": "grip",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 6,
+          "hiddenRearGrip": true,
+          "partKey": null,
+          "tip": [
+            33,
+            2
+          ],
+          "hand": [
+            24,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            24
+          ],
+          "colors": 5,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j14-i",
+          "tip": [
+            87,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            48
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j14-w",
+          "tip": [
+            175,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "akb103",
+      "id": "J15",
+      "parts": [
+        {
+          "uid": "premium-art-7740",
+          "id": "J15",
+          "slot": "handguard",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j15-h",
+          "tip": [
+            33,
+            2
+          ],
+          "hand": [
+            24,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            87,
+            24
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j15-i",
+          "tip": [
+            87,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            175,
+            48
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j15-w",
+          "tip": [
+            175,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-7741",
+          "id": "J01",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            13
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            32,
+            6
+          ],
+          "hand": [
+            24,
+            8
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            80,
+            28
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            80,
+            9
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            160,
+            57
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            160,
+            19
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "id": "J02",
+      "parts": [
+        {
+          "uid": "premium-art-7742",
+          "id": "J02",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            13
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-h",
+          "tip": [
+            32,
+            6
+          ],
+          "hand": [
+            24,
+            8
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            80,
+            29
+          ],
+          "colors": 5,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-i",
+          "tip": [
+            80,
+            10
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            160,
+            59
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-w",
+          "tip": [
+            160,
+            21
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "id": "J04",
+      "parts": [
+        {
+          "uid": "premium-art-7974",
+          "id": "H01",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-7973",
+              "id": "J04",
+              "slot": "under",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            11
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-h",
+          "tip": [
+            32,
+            4
+          ],
+          "hand": [
+            23,
+            7
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            80,
+            24
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-i",
+          "tip": [
+            80,
+            5
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            160,
+            48
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-w",
+          "tip": [
+            160,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "id": "J05",
+      "parts": [
+        {
+          "uid": "premium-art-8043",
+          "id": "H01",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-8042",
+              "id": "J05",
+              "slot": "side",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            11
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-h",
+          "tip": [
+            32,
+            4
+          ],
+          "hand": [
+            23,
+            6
+          ],
+          "beam": [
+            27,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            80,
+            24
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-i",
+          "tip": [
+            80,
+            5
+          ],
+          "beam": [
+            70,
+            8
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            160,
+            48
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-w",
+          "tip": [
+            160,
+            10
+          ],
+          "beam": [
+            141,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "id": "J07",
+      "parts": [
+        {
+          "uid": "premium-art-8046",
+          "id": "J07",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            39,
+            11
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-h",
+          "tip": [
+            39,
+            4
+          ],
+          "hand": [
+            24,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            98,
+            24
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-i",
+          "tip": [
+            98,
+            5
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            197,
+            48
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-w",
+          "tip": [
+            197,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "id": "J10",
+      "parts": [
+        {
+          "uid": "premium-art-8047",
+          "id": "J10",
+          "slot": "stock",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            11
+          ],
+          "colors": 6,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j10-h",
+          "tip": [
+            33,
+            4
+          ],
+          "hand": [
+            25,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            82,
+            24
+          ],
+          "colors": 5,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j10-i",
+          "tip": [
+            82,
+            5
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            164,
+            48
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j10-w",
+          "tip": [
+            164,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "id": "J11",
+      "parts": [
+        {
+          "uid": "premium-art-8048",
+          "id": "J11",
+          "slot": "grip",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            11
+          ],
+          "colors": 5,
+          "hiddenRearGrip": true,
+          "partKey": null,
+          "tip": [
+            32,
+            4
+          ],
+          "hand": [
+            24,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            80,
+            24
+          ],
+          "colors": 5,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j11-i",
+          "tip": [
+            80,
+            5
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            160,
+            48
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j11-w",
+          "tip": [
+            160,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb4a1",
+      "id": "J12",
+      "parts": [
+        {
+          "uid": "premium-art-8049",
+          "id": "J12",
+          "slot": "handguard",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            32,
+            11
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j12-h",
+          "tip": [
+            32,
+            4
+          ],
+          "hand": [
+            23,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            80,
+            24
+          ],
+          "colors": 5,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j12-i",
+          "tip": [
+            80,
+            5
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            160,
+            48
+          ],
+          "colors": 7,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j12-w",
+          "tip": [
+            160,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-8050",
+          "id": "J01",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            12
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            26,
+            6
+          ],
+          "hand": [
+            20,
+            7
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            30
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            65,
+            13
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            61
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            130,
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "id": "J02",
+      "parts": [
+        {
+          "uid": "premium-art-8051",
+          "id": "J02",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            12
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-h",
+          "tip": [
+            26,
+            6
+          ],
+          "hand": [
+            20,
+            7
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            31
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-i",
+          "tip": [
+            65,
+            14
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            63
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-w",
+          "tip": [
+            130,
+            29
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "id": "J04",
+      "parts": [
+        {
+          "uid": "premium-art-8189",
+          "id": "J04",
+          "slot": "under",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-h",
+          "tip": [
+            26,
+            4
+          ],
+          "hand": [
+            20,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            25
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-i",
+          "tip": [
+            65,
+            8
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            50
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-w",
+          "tip": [
+            130,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "id": "J05",
+      "parts": [
+        {
+          "uid": "premium-art-8190",
+          "id": "J05",
+          "slot": "side",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            26,
+            10
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-h",
+          "tip": [
+            26,
+            4
+          ],
+          "hand": [
+            20,
+            5
+          ],
+          "beam": [
+            23,
+            4
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            65,
+            25
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-i",
+          "tip": [
+            65,
+            8
+          ],
+          "beam": [
+            58,
+            8
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            130,
+            50
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-w",
+          "tip": [
+            130,
+            16
+          ],
+          "beam": [
+            116,
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "augb",
+      "id": "J07",
+      "parts": [
+        {
+          "uid": "premium-art-8191",
+          "id": "J07",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            33,
+            10
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-h",
+          "tip": [
+            33,
+            4
+          ],
+          "hand": [
+            20,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            83,
+            25
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-i",
+          "tip": [
+            83,
+            7
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            167,
+            50
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-w",
+          "tip": [
+            167,
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "svdb",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-8192",
+          "id": "J01",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            37,
+            13
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            37,
+            6
+          ],
+          "hand": [
+            24,
+            8
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            92,
+            24
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            92,
+            12
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            184,
+            49
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            184,
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "svdb",
+      "id": "J02",
+      "parts": [
+        {
+          "uid": "premium-art-8193",
+          "id": "J02",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            37,
+            13
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-h",
+          "tip": [
+            37,
+            6
+          ],
+          "hand": [
+            24,
+            8
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            92,
+            25
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-i",
+          "tip": [
+            92,
+            13
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            184,
+            51
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-w",
+          "tip": [
+            184,
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "svdb",
+      "id": "J08",
+      "parts": [
+        {
+          "uid": "premium-art-8581",
+          "id": "J08",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            46,
+            10
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j08-h",
+          "tip": [
+            46,
+            3
+          ],
+          "hand": [
+            24,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            116,
+            18
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j08-i",
+          "tip": [
+            116,
+            6
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            233,
+            36
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j08-w",
+          "tip": [
+            233,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb14",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-8582",
+          "id": "J01",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            35,
+            13
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            35,
+            6
+          ],
+          "hand": [
+            26,
+            7
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            89,
+            24
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            89,
+            12
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            179,
+            49
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            179,
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb14",
+      "id": "J02",
+      "parts": [
+        {
+          "uid": "premium-art-8583",
+          "id": "J02",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            35,
+            13
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-h",
+          "tip": [
+            35,
+            6
+          ],
+          "hand": [
+            26,
+            7
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            89,
+            25
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-i",
+          "tip": [
+            89,
+            13
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            179,
+            51
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-w",
+          "tip": [
+            179,
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb14",
+      "id": "J08",
+      "parts": [
+        {
+          "uid": "premium-art-8995",
+          "id": "J08",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            44,
+            10
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j08-h",
+          "tip": [
+            44,
+            3
+          ],
+          "hand": [
+            26,
+            4
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            113,
+            18
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j08-i",
+          "tip": [
+            113,
+            6
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            228,
+            36
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j08-w",
+          "tip": [
+            228,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb14",
+      "id": "J20",
+      "parts": [
+        {
+          "uid": "premium-art-8996",
+          "id": "J20",
+          "slot": "stock",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            36,
+            10
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j20-h",
+          "tip": [
+            36,
+            3
+          ],
+          "hand": [
+            27,
+            4
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            91,
+            18
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j20-i",
+          "tip": [
+            91,
+            6
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            183,
+            36
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j20-w",
+          "tip": [
+            183,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb700",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-8997",
+          "id": "J01",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            35,
+            12
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            35,
+            6
+          ],
+          "hand": [
+            22,
+            8
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            92,
+            21
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            92,
+            10
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            185,
+            43
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            185,
+            21
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb700",
+      "id": "J02",
+      "parts": [
+        {
+          "uid": "premium-art-8998",
+          "id": "J02",
+          "slot": "top",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            35,
+            12
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-h",
+          "tip": [
+            35,
+            6
+          ],
+          "hand": [
+            22,
+            8
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            92,
+            22
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-i",
+          "tip": [
+            92,
+            11
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            185,
+            45
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-w",
+          "tip": [
+            185,
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb700",
+      "id": "J08",
+      "parts": [
+        {
+          "uid": "premium-art-9410",
+          "id": "J08",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            44,
+            9
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j08-h",
+          "tip": [
+            44,
+            3
+          ],
+          "hand": [
+            22,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            116,
+            15
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j08-i",
+          "tip": [
+            116,
+            4
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            234,
+            30
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j08-w",
+          "tip": [
+            234,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "mb700",
+      "id": "J20",
+      "parts": [
+        {
+          "uid": "premium-art-9411",
+          "id": "J20",
+          "slot": "stock",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            36,
+            9
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j20-h",
+          "tip": [
+            36,
+            3
+          ],
+          "hand": [
+            23,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            94,
+            16
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j20-i",
+          "tip": [
+            94,
+            4
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            189,
+            32
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j20-w",
+          "tip": [
+            189,
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "rpkb",
+      "id": "J01",
+      "parts": [
+        {
+          "uid": "premium-art-9570",
+          "id": "A08",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-9569",
+              "id": "J01",
+              "slot": "top",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            37,
+            15
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-h",
+          "tip": [
+            37,
+            7
+          ],
+          "hand": [
+            24,
+            10
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            97,
+            36
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-i",
+          "tip": [
+            97,
+            11
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            195,
+            73
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j01-w",
+          "tip": [
+            195,
+            23
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "rpkb",
+      "id": "J02",
+      "parts": [
+        {
+          "uid": "premium-art-9731",
+          "id": "A08",
+          "slot": "base",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-9730",
+              "id": "J02",
+              "slot": "top",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            37,
+            15
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-h",
+          "tip": [
+            37,
+            7
+          ],
+          "hand": [
+            24,
+            10
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            97,
+            37
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-i",
+          "tip": [
+            97,
+            12
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            195,
+            75
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j02-w",
+          "tip": [
+            195,
+            25
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "rpkb",
+      "id": "J04",
+      "parts": [
+        {
+          "uid": "premium-art-9957",
+          "id": "H10",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-9956",
+              "id": "J04",
+              "slot": "under",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            37,
+            10
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-h",
+          "tip": [
+            37,
+            2
+          ],
+          "hand": [
+            25,
+            6
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            97,
+            28
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-i",
+          "tip": [
+            97,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            195,
+            56
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j04-w",
+          "tip": [
+            195,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "rpkb",
+      "id": "J05",
+      "parts": [
+        {
+          "uid": "premium-art-10022",
+          "id": "H10",
+          "slot": "handguard",
+          "relief": false,
+          "children": [
+            {
+              "uid": "premium-art-10021",
+              "id": "J05",
+              "slot": "side",
+              "relief": false,
+              "children": []
+            }
+          ]
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            37,
+            10
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-h",
+          "tip": [
+            37,
+            2
+          ],
+          "hand": [
+            25,
+            5
+          ],
+          "beam": [
+            30,
+            4
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            97,
+            28
+          ],
+          "colors": 9,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-i",
+          "tip": [
+            97,
+            3
+          ],
+          "beam": [
+            78,
+            5
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            195,
+            56
+          ],
+          "colors": 12,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j05-w",
+          "tip": [
+            195,
+            6
+          ],
+          "beam": [
+            157,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "rpkb",
+      "id": "J07",
+      "parts": [
+        {
+          "uid": "premium-art-10025",
+          "id": "J07",
+          "slot": "muzzle",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            44,
+            10
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-h",
+          "tip": [
+            44,
+            2
+          ],
+          "hand": [
+            24,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            115,
+            28
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-i",
+          "tip": [
+            115,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            232,
+            56
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j07-w",
+          "tip": [
+            232,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "rpkb",
+      "id": "J13",
+      "parts": [
+        {
+          "uid": "premium-art-10026",
+          "id": "J13",
+          "slot": "stock",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            38,
+            10
+          ],
+          "colors": 10,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j13-h",
+          "tip": [
+            38,
+            2
+          ],
+          "hand": [
+            25,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            99,
+            28
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j13-i",
+          "tip": [
+            99,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            199,
+            56
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j13-w",
+          "tip": [
+            199,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "gun": "rpkb",
+      "id": "J14",
+      "parts": [
+        {
+          "uid": "premium-art-10027",
+          "id": "J14",
+          "slot": "grip",
+          "relief": false,
+          "children": []
+        }
+      ],
+      "frames": [
+        {
+          "code": "h",
+          "size": [
+            37,
+            10
+          ],
+          "colors": 9,
+          "hiddenRearGrip": true,
+          "partKey": null,
+          "tip": [
+            37,
+            2
+          ],
+          "hand": [
+            24,
+            5
+          ]
+        },
+        {
+          "code": "i",
+          "size": [
+            97,
+            28
+          ],
+          "colors": 8,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j14-i",
+          "tip": [
+            97,
+            3
+          ]
+        },
+        {
+          "code": "w",
+          "size": [
+            195,
+            56
+          ],
+          "colors": 11,
+          "hiddenRearGrip": false,
+          "partKey": "gs-j14-w",
+          "tip": [
+            195,
+            6
+          ]
+        }
+      ]
+    }
+  ],
+  "compound": [
+    {
+      "gun": "mb4a1",
+      "id": "J12",
+      "code": "h",
+      "status": "pass",
+      "hand": [
+        23,
+        7
+      ],
+      "beam": [
+        29,
+        5
+      ],
+      "size": [
+        32,
+        11
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb4a1",
+      "id": "J12",
+      "code": "i",
+      "status": "pass",
+      "beam": [
+        77,
+        8
+      ],
+      "size": [
+        80,
+        24
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "mb4a1",
+      "id": "J12",
+      "code": "w",
+      "status": "pass",
+      "beam": [
+        155,
+        16
+      ],
+      "size": [
+        160,
+        48
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb74",
+      "id": "J15",
+      "code": "h",
+      "status": "pass",
+      "hand": [
+        24,
+        6
+      ],
+      "beam": [
+        28,
+        4
+      ],
+      "size": [
+        33,
+        10
+      ],
+      "colors": 10
+    },
+    {
+      "gun": "akb74",
+      "id": "J15",
+      "code": "i",
+      "status": "pass",
+      "beam": [
+        76,
+        6
+      ],
+      "size": [
+        87,
+        23
+      ],
+      "colors": 12
+    },
+    {
+      "gun": "akb74",
+      "id": "J15",
+      "code": "w",
+      "status": "pass",
+      "beam": [
+        153,
+        12
+      ],
+      "size": [
+        175,
+        46
+      ],
+      "colors": 17
+    },
+    {
+      "gun": "akb103",
+      "id": "J15",
+      "code": "h",
+      "status": "pass",
+      "hand": [
+        24,
+        6
+      ],
+      "beam": [
+        28,
+        4
+      ],
+      "size": [
+        33,
+        10
+      ],
+      "colors": 8
+    },
+    {
+      "gun": "akb103",
+      "id": "J15",
+      "code": "i",
+      "status": "pass",
+      "beam": [
+        76,
+        6
+      ],
+      "size": [
+        87,
+        24
+      ],
+      "colors": 7
+    },
+    {
+      "gun": "akb103",
+      "id": "J15",
+      "code": "w",
+      "status": "pass",
+      "beam": [
+        153,
+        12
+      ],
+      "size": [
+        175,
+        48
+      ],
+      "colors": 9
+    }
+  ],
+  "issues": [],
+  "method": "Process-local incoming metadata injection; actual validateBuild, gunSize and gunArtLayout. Native PNG rendering with frozen unchanged legacy virtual I layers. No official source/manifest writes.",
+  "scope": "Every premium part on every gun for which a legal standalone or one-opener fit exists; three child-bearing handguard fits and representative compound builds. Gameplay integration and live screenshots remain with implementation."
+}
