@@ -313,6 +313,81 @@ try {
         await settle();
       }
     });
+    await check('S03d faced-door-glow-and-way-through', async () => {
+      // #26 F07: the door the E prompt is about glows (only where the door itself is drawn, at the door's depth) and the way
+      // through it is marked on the floor under the actors, barred while closed. Reads of the world target with the ticker
+      // stopped, toggling one sprite at a time, as in S03b.
+      const cue = () => page.evaluate(() => {
+        const h = window.__bincovSample.host, v = h.view, b = h.lastBatch, t = b.frame.interaction, c = v.facedDoor;
+        return { faced: t?.kind === 'door' ? t.ref.id : null, glow: !!c?.glow.visible, way: !!c?.way.visible,
+          wayAt: c && [c.way.x, c.way.y, c.way.texture.width, c.way.texture.height], wayUnder: c?.way.parent === v.flat,
+          glowDepth: c && c.glow.parent === v.sorted && c.glow.zIndex - v.doors.get(t?.ref.id)?.z };
+      });
+      const pixels = () => page.evaluate(() => {
+        const h = window.__bincovSample.host, v = h.view, c = v.facedDoor, door = v.doors.get(h.lastBatch.frame.interaction.ref.id).sprite;
+        h.app.ticker.stop();
+        try {
+          v.time = 0; const shown = [c.glow.visible, c.way.visible, door.visible];
+          const read = (glow, way, d) => { c.glow.visible = glow; c.way.visible = way; door.visible = d; v.render(); return h.app.renderer.extract.pixels({ target: v.worldRT }).pixels.slice(); };
+          const all = read(true, true, true), noGlow = read(false, true, true), noWay = read(true, false, true), bare = read(false, false, true), noDoor = read(false, false, false);
+          [c.glow.visible, c.way.visible, door.visible] = shown;
+          const differs = (x, y, i) => x[i] !== y[i] || x[i + 1] !== y[i + 1] || x[i + 2] !== y[i + 2];
+          let glow = 0, glowOffDoor = 0, way = 0;
+          for (let i = 0; i < all.length; i += 4) {
+            if (differs(all, noGlow, i)) { glow++; if (!differs(bare, noDoor, i)) glowOffDoor++; }
+            if (differs(all, noWay, i)) way++;
+          }
+          return { glow, glowOffDoor, way };
+        } finally { v.render(); h.app.render(); h.app.ticker.start(); }
+      });
+      await page.evaluate(() => { const d = window.__bincovSample.driver; for (const id of ['resident-front', 'resident-west', 'resident-east']) d.door(id, false); });
+      await page.evaluate(() => window.__bincovSample.driver.placePlayer({ x: 464, y: 336 }, Math.PI, 'coast')); await settle();
+      const closed = { ...await cue(), pixels: await pixels() };
+      assert.equal(closed.faced, 'resident-west', 'the prompt is about the west door');
+      assert.ok(closed.glow && closed.way, 'the faced closed door glows and shows its way through');
+      assert.deepEqual(closed.wayAt, [12 * 32, 10 * 32, 96, 32], 'the way runs east-west across the north-south wall, one cell either side');
+      assert.ok(closed.wayUnder, 'the way lies on the floor layer, under walls and actors');
+      assert.ok(closed.glowDepth > 0 && closed.glowDepth < .1, 'the glow is drawn right above the door, so actors in front stay on top');
+      assert.ok(closed.pixels.glow > 100 && closed.pixels.way > 100, `positive controls: glow ${closed.pixels.glow} px, way ${closed.pixels.way} px`);
+      assert.equal(closed.pixels.glowOffDoor, 0, 'the glow lights only pixels where the door itself is drawn');
+      const before = await page.evaluate(() => window.__bincovSample.host.view.facedDoor.way.texture);
+      await page.keyboard.press('e'); await page.waitForFunction(() => window.__bincovSample.host.lastBatch.frame.doors['resident-west']); await settle();
+      const open = await cue();
+      assert.ok(open.faced === 'resident-west' && open.glow && open.way, 'still marked once open');
+      assert.ok(await page.evaluate(t => window.__bincovSample.host.view.facedDoor.way.texture !== t, before), 'the open way is drawn without the bar');
+      // An enemy in the open doorway stands on the way: none of its pixels may be covered by it (the S03b reads).
+      const staged = await page.evaluate(() => {
+        const h = window.__bincovSample.host, a = h.lastBatch.frame.actors.find(a => a.kind !== 'player' && a.alive && Math.hypot(a.x - 432, a.y - 336) > 120);
+        if (!a) throw new Error('no live enemy away from the doorway');
+        window.__bincovSample.driver.placeEnemy(a.uid, { x: 432, y: 340 }); return { uid: a.uid, home: { x: a.x, y: a.y } };
+      });
+      try {
+        await settle();
+        const enemy = await page.evaluate(uid => {
+          const h = window.__bincovSample.host, v = h.view, c = v.facedDoor, parts = window.__figure(v.actors.get(uid));
+          h.app.ticker.stop();
+          try {
+            v.time = 0; const shown = parts.map(s => s.visible), way = c.way.visible, glow = c.glow.visible, shots = {};
+            const read = () => { v.render(); return h.app.renderer.extract.pixels({ target: v.worldRT }).pixels.slice(); };
+            for (const [name, entity, marked] of [['A', true, true], ['B', false, true], ['C', true, false], ['D', false, false]]) {
+              parts.forEach((s, i) => { s.visible = entity && shown[i]; }); c.way.visible = c.glow.visible = marked; shots[name] = read();
+            }
+            parts.forEach((s, i) => { s.visible = shown[i]; }); c.way.visible = way; c.glow.visible = glow;
+            return { faced: h.lastBatch.frame.interaction?.ref.id, enemyShown: shown[0], ...window.__occlusion(shots) };
+          } finally { v.render(); h.app.render(); h.app.ticker.start(); }
+        }, staged.uid);
+        assert.ok(enemy.enemyShown && enemy.body > 100, `positive control: the enemy is drawn (${enemy.body} px)`);
+        assert.ok(enemy.overlap > 20, `positive control: the enemy stands on the marks (${enemy.overlap} px)`);
+        assert.equal(enemy.covered, 0, 'no enemy pixel is covered by the glow or the way');
+        await place(208, 1232); await settle();
+        const away = await cue();
+        assert.ok(away.faced !== 'resident-west' && !away.glow && !away.way, 'the marks go once no door is faced');
+        return { closed, open, enemy, away };
+      } finally {
+        await page.evaluate(({ uid, home }) => { const d = window.__bincovSample.driver; d.placeEnemy(uid, home); d.door('resident-west', false); }, staged);
+        await settle();
+      }
+    });
     await check('S04 real-stairs-and-whole-current-floor', async () => {
       await place(560, 272); await settle(); await takeStairs('resident-f2'); await settle();
       const upstairs = await guides();

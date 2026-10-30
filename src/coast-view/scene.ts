@@ -3,11 +3,11 @@ import { worldKeyString, type ActorKind, type ActorView, type MapDef, type Point
 import { hasRoof, isRuined, materials, regionLamps, storeys, type GroundMaterial } from './appearance';
 import { SAMPLE_AREA } from '../sample-area';
 import { paintGround, puddles, type GroundBake } from './art/ground';
-import { canvas } from './art/paint';
+import { canvas, silhouette } from './art/paint';
 import { groundGeometry } from './art/surface';
 import { LOOT_FOOT, LOOT_H } from './art/props';
 import { solWall, type SolArt } from './art/sol';
-import { LOW_H, ROOF_MARGIN, STOREY_H, WALL_H, paintCanopy, paintCeiling, paintDoorGuide, paintDownpipe, paintDoorFoot, paintLintel, paintLow, paintOpeningGuide, paintRoof, paintStairLabel, paintStairs, paintWall, paintWallAC, wallKey, type WallSpec } from './art/structures';
+import { LOW_H, ROOF_MARGIN, STOREY_H, WALL_H, paintCanopy, paintCeiling, paintDoorGuide, paintDownpipe, paintDoorFoot, paintLintel, paintLow, paintOpeningGuide, paintPassageGuide, paintRoof, paintStairLabel, paintStairs, paintWall, paintWallAC, wallKey, type WallSpec } from './art/structures';
 import { Fx } from './fx';
 import { gait, walkFrame } from '../gait';
 import { Lighting, MOODS, lamp, type Light } from './lighting';
@@ -165,6 +165,11 @@ export class CoastView {
   private occluders: Occluder[] = [];
   private doors = new Map<string, Occluder>();
   private doorGuides = new Map<string, Sprite>();
+  /**
+   * The door the interaction prompt is about (#26 F07): a glow over its leaf at the door's own depth, so actors in front
+   * stay on top, and the way through it on the floor under the actors (showFacedDoor). Made when a door is first faced.
+   */
+  private facedDoor: { glow: Sprite; way: Sprite } | null = null;
   private stairLabels = new Map<string, Sprite>();
   private actors = new Map<string, ActorGfx>();
   /** `from`: the drawn muzzle (chest plane) the tracer starts at; `seen`: where the head was first shown (its tail never
@@ -376,7 +381,7 @@ export class CoastView {
     for (const layer of [this.groundLayer, this.flat, this.shadows, this.sorted, this.xray, this.overhead]) for (const c of layer.removeChildren()) c.destroy();
     this.fx?.clear(); this.shots.clear(); this.blowGroups.clear();
     for (const o of [...this.indoor, ...this.rising]) this.dropCrops(o.wall!);
-    this.occluders = []; this.indoor = []; this.rising = []; this.indoorOf = undefined; this.openingGuides = []; this.pendingChunks = []; this.doors.clear(); this.doorGuides.clear(); this.stairLabels.clear(); this.actors.clear(); this.bullets.clear(); this.crates.clear(); this.loot.clear(); this.muzzles = []; this.swings = [];
+    this.occluders = []; this.indoor = []; this.rising = []; this.indoorOf = undefined; this.openingGuides = []; this.pendingChunks = []; this.doors.clear(); this.doorGuides.clear(); this.facedDoor = null; this.stairLabels.clear(); this.actors.clear(); this.bullets.clear(); this.crates.clear(); this.loot.clear(); this.muzzles = []; this.swings = [];
     this.debugG.clear();
   }
 
@@ -1176,16 +1181,20 @@ export class CoastView {
       const d = Math.hypot(o.at.x - f.player.x, o.at.y - f.player.y);
       o.s.visible = d < 9 * 32; o.s.alpha = d < 2.5 * 32 ? .95 : .7;
     }
+    const faced = f.interaction?.kind === 'door' ? f.interaction.ref.id : null;
+    let facing = false;
     for (const door of map.doors) {
       const guide = this.doorGuides.get(door.id)!;
       guide.visible = knownDoor(map, door, f.revealed, occupied);
       if (!guide.visible) continue;
       const open = !!f.doors[door.id];
       guide.texture = this.tex.ensure(`door-guide:${door.wall}:${open}`, () => paintDoorGuide(door.wall, open));
-      guide.alpha = f.interaction?.ref.id === door.id ? 1 : .82;
+      guide.alpha = door.id === faced ? 1 : .82;
+      if (door.id === faced) { this.showFacedDoor(door, open); facing = true; }
       const box = { x: guide.x, y: guide.y, w: guide.texture.width, h: guide.texture.height };
       if (threats.some(t => intersects(t, box))) guide.visible = false;
     }
+    if (!facing && this.facedDoor) this.facedDoor.glow.visible = this.facedDoor.way.visible = false;
     for (const entry of map.entries) {
       const label = this.stairLabels.get(entry.id)!;
       label.visible = knownStructurePoint(map, entry.at, f.revealed, occupied);
@@ -1196,6 +1205,25 @@ export class CoastView {
       if (label.visible && intersects({ x: label.x - label.width / 2, y: label.y, w: label.width, h: label.height },
         { x: f.player.x - 14, y: f.player.y - 44, w: 28, h: 48 })) label.y = f.player.y + 8;
     }
+  }
+  /**
+   * Marks the door being faced: its leaf (or doorway) glows, pulsing unless motion is reduced, and the cells either side
+   * of it show the way through, barred while it is closed. The glow uses the picture drawn now and is left out while the
+   * door is faded for a view behind it, hidden or sinking; the way is a floor marking only, so walls and roofs in front
+   * cover it like any floor and it shows nothing of the far side.
+   */
+  private showFacedDoor(door: MapDef['doors'][number], open: boolean) {
+    const cue = this.facedDoor ??= { glow: this.sorted.addChild(new Sprite()), way: this.flat.addChild(new Sprite()) };
+    const { glow, way } = cue, o = this.doors.get(door.id)!;
+    way.texture = this.tex.ensure(`passage-guide:${door.wall}:${open}`, () => paintPassageGuide(door.wall, open));
+    way.position.set(door.wall === 'ns' ? (door.x - 1) * 32 : door.x * 32, door.wall === 'ns' ? door.y * 32 : (door.y - 1) * 32);
+    way.visible = true;
+    const pic = !o.sprite.visible || o.wall?.crops || (!o.wall && o.level > 0) ? null : o.wall ? o.shown ?? o.key : o.key;
+    glow.visible = !!pic;
+    if (!pic) return;
+    glow.texture = this.tex.ensure(`${pic}|glow:${door.wall}`, () => doorGlow(this.tex.canvas(pic), door.wall));
+    glow.position.set(o.rect.x, o.sprite.y); glow.zIndex = o.z + .01;
+    glow.tint = 0xf2deaa; glow.alpha = this.opts.reducedMotion ? .4 : .375 + Math.sin(this.time * 6) * .125;
   }
   private applyFade(o: Occluder) {
     if (o.links) for (const l of o.links) {
@@ -1524,6 +1552,12 @@ export class CoastView {
   }
 }
 
+/** The faced-door glow: a door picture in white, kept for an east-west door to its leaf or doorway (between the jambs, below the wall top). */
+function doorGlow(c: HTMLCanvasElement, wall: 'ew' | 'ns'): HTMLCanvasElement {
+  const s = silhouette(c);
+  if (wall === 'ew') { const g = s.getContext('2d')!; g.clearRect(0, 0, s.width, 32); g.clearRect(0, 0, 4, s.height); g.clearRect(28, 0, s.width - 28, s.height); }
+  return s;
+}
 function rimOf(c: HTMLCanvasElement): HTMLCanvasElement {
   const o = document.createElement('canvas'); o.width = c.width + 2; o.height = c.height + 2;
   const g = o.getContext('2d')!; g.drawImage(c, 1, 1);
