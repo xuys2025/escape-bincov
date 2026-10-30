@@ -1,0 +1,3913 @@
+{
+  "schema": 1,
+  "date": "2026-10-30",
+  "status": "fail",
+  "passed": 602,
+  "failed": 13,
+  "totals": {
+    "files": 79,
+    "pngBytes": 11904,
+    "baseRequestedFiles": 78,
+    "carbineVariants": 1
+  },
+  "formalAssetsUnchanged": 652,
+  "results": [
+    {
+      "id": "gs-j01-h-v1",
+      "reference": "gs-o05-h-v1",
+      "dimensions": [
+        6,
+        4
+      ],
+      "colors": 3,
+      "bytes": 95,
+      "mark": {
+        "x": 2,
+        "y": 0,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j01-i-v1",
+      "reference": "gs-o05-i-v1",
+      "dimensions": [
+        14,
+        7
+      ],
+      "colors": 5,
+      "bytes": 127,
+      "mark": {
+        "x": 3,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j01-w-v1",
+      "reference": "gs-o05-w-v1",
+      "dimensions": [
+        28,
+        14
+      ],
+      "colors": 5,
+      "bytes": 166,
+      "mark": {
+        "x": 4,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j01-q24-v1",
+      "reference": "gs-o05-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 5,
+      "bytes": 154,
+      "mark": {
+        "x": 8,
+        "y": 7,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j02-h-v1",
+      "reference": "gs-o11-h-v1",
+      "dimensions": [
+        12,
+        4
+      ],
+      "colors": 5,
+      "bytes": 114,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j02-i-v1",
+      "reference": "gs-o11-i-v1",
+      "dimensions": [
+        29,
+        8
+      ],
+      "colors": 4,
+      "bytes": 147,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j02-w-v1",
+      "reference": "gs-o11-w-v1",
+      "dimensions": [
+        58,
+        16
+      ],
+      "colors": 5,
+      "bytes": 197,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j02-q24-v1",
+      "reference": "gs-o11-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 4,
+      "bytes": 153,
+      "mark": {
+        "x": 3,
+        "y": 9,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j03-h-v1",
+      "reference": "gs-o01-h-v1",
+      "dimensions": [
+        4,
+        3
+      ],
+      "colors": 4,
+      "bytes": 93,
+      "mark": {
+        "x": 1,
+        "y": 0,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j03-i-v1",
+      "reference": "gs-o01-i-v1",
+      "dimensions": [
+        9,
+        6
+      ],
+      "colors": 5,
+      "bytes": 115,
+      "mark": {
+        "x": 3,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j03-w-v1",
+      "reference": "gs-o01-w-v1",
+      "dimensions": [
+        18,
+        12
+      ],
+      "colors": 5,
+      "bytes": 148,
+      "mark": {
+        "x": 2,
+        "y": 9,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j03-q24-v1",
+      "reference": "gs-o01-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 5,
+      "bytes": 150,
+      "mark": {
+        "x": 10,
+        "y": 7,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j04-h-v1",
+      "reference": "gs-f02-h-v1",
+      "dimensions": [
+        3,
+        4
+      ],
+      "colors": 5,
+      "bytes": 96,
+      "mark": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j04-i-v1",
+      "reference": "gs-f02-i-v1",
+      "dimensions": [
+        6,
+        9
+      ],
+      "colors": 5,
+      "bytes": 117,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j04-w-v1",
+      "reference": "gs-f02-w-v1",
+      "dimensions": [
+        12,
+        18
+      ],
+      "colors": 5,
+      "bytes": 157,
+      "mark": {
+        "x": 3,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j04-q24-v1",
+      "reference": "gs-f02-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 5,
+      "bytes": 142,
+      "mark": {
+        "x": 9,
+        "y": 4,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j05-h-v1",
+      "reference": "gs-t09-h-v1",
+      "dimensions": [
+        5,
+        3
+      ],
+      "colors": 4,
+      "bytes": 92,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j05-i-v1",
+      "reference": "gs-t09-i-v1",
+      "dimensions": [
+        12,
+        6
+      ],
+      "colors": 7,
+      "bytes": 128,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j05-w-v1",
+      "reference": "gs-t09-w-v1",
+      "dimensions": [
+        24,
+        12
+      ],
+      "colors": 7,
+      "bytes": 168,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j05-q24-v1",
+      "reference": "gs-t09-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 7,
+      "bytes": 142,
+      "mark": {
+        "x": 4,
+        "y": 8,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j06-h-v1",
+      "reference": "gs-m03-h-v1",
+      "dimensions": [
+        6,
+        3
+      ],
+      "colors": 4,
+      "bytes": 101,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j06-i-v1",
+      "reference": "gs-m03-i-v1",
+      "dimensions": [
+        14,
+        6
+      ],
+      "colors": 6,
+      "bytes": 131,
+      "mark": {
+        "x": 2,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j06-w-v1",
+      "reference": "gs-m03-w-v1",
+      "dimensions": [
+        28,
+        12
+      ],
+      "colors": 6,
+      "bytes": 166,
+      "mark": {
+        "x": 2,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j06-q24-v1",
+      "reference": "gs-m03-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 6,
+      "bytes": 148,
+      "mark": {
+        "x": 6,
+        "y": 9,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j07-h-v1",
+      "reference": "gs-m07-h-v1",
+      "dimensions": [
+        8,
+        3
+      ],
+      "colors": 4,
+      "bytes": 98,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j07-i-v1",
+      "reference": "gs-m07-i-v1",
+      "dimensions": [
+        19,
+        5
+      ],
+      "colors": 6,
+      "bytes": 136,
+      "mark": {
+        "x": 2,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j07-w-v1",
+      "reference": "gs-m07-w-v1",
+      "dimensions": [
+        38,
+        10
+      ],
+      "colors": 6,
+      "bytes": 171,
+      "mark": {
+        "x": 2,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j07-q24-v1",
+      "reference": "gs-m07-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 6,
+      "bytes": 147,
+      "mark": {
+        "x": 4,
+        "y": 9,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j08-h-v1",
+      "reference": "gs-m08-h-v1",
+      "dimensions": [
+        10,
+        3
+      ],
+      "colors": 4,
+      "bytes": 98,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j08-i-v1",
+      "reference": "gs-m08-i-v1",
+      "dimensions": [
+        25,
+        6
+      ],
+      "colors": 6,
+      "bytes": 154,
+      "mark": {
+        "x": 2,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j08-w-v1",
+      "reference": "gs-m08-w-v1",
+      "dimensions": [
+        50,
+        12
+      ],
+      "colors": 6,
+      "bytes": 191,
+      "mark": {
+        "x": 2,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j08-q24-v1",
+      "reference": "gs-m08-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 6,
+      "bytes": 157,
+      "mark": {
+        "x": 3,
+        "y": 9,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j09-h-v1",
+      "reference": "gs-m10-h-v1",
+      "dimensions": [
+        3,
+        2
+      ],
+      "colors": 2,
+      "bytes": 83,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j09-i-v1",
+      "reference": "gs-m10-i-v1",
+      "dimensions": [
+        7,
+        4
+      ],
+      "colors": 5,
+      "bytes": 106,
+      "mark": {
+        "x": 2,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j09-w-v1",
+      "reference": "gs-m10-w-v1",
+      "dimensions": [
+        14,
+        8
+      ],
+      "colors": 6,
+      "bytes": 147,
+      "mark": {
+        "x": 2,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j09-q24-v1",
+      "reference": "gs-m10-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 6,
+      "bytes": 135,
+      "mark": {
+        "x": 9,
+        "y": 9,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j10-h-v1",
+      "reference": "gs-s02-h-v1",
+      "dimensions": [
+        9,
+        6
+      ],
+      "colors": 4,
+      "bytes": 111,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j10-i-v1",
+      "reference": "gs-s02-i-v1",
+      "dimensions": [
+        22,
+        12
+      ],
+      "colors": 5,
+      "bytes": 165,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j10-w-v1",
+      "reference": "gs-s02-w-v1",
+      "dimensions": [
+        44,
+        24
+      ],
+      "colors": 5,
+      "bytes": 271,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j10-q24-v1",
+      "reference": "gs-s02-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 5,
+      "bytes": 188,
+      "mark": {
+        "x": 3,
+        "y": 5,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j11-i-v1",
+      "reference": "gs-p02-i-v1",
+      "dimensions": [
+        8,
+        11
+      ],
+      "colors": 5,
+      "bytes": 124,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j11-w-v1",
+      "reference": "gs-p02-w-v1",
+      "dimensions": [
+        16,
+        22
+      ],
+      "colors": 5,
+      "bytes": 175,
+      "mark": {
+        "x": 3,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j11-q24-v1",
+      "reference": "gs-p02-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 5,
+      "bytes": 153,
+      "mark": {
+        "x": 9,
+        "y": 4,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j12-h-v1",
+      "reference": "gs-h02-h-v1",
+      "dimensions": [
+        10,
+        4
+      ],
+      "colors": 5,
+      "bytes": 104,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j12-i-v1",
+      "reference": "gs-h02-i-v1",
+      "dimensions": [
+        25,
+        7
+      ],
+      "colors": 4,
+      "bytes": 128,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j12-w-v1",
+      "reference": "gs-h02-w-v1",
+      "dimensions": [
+        50,
+        14
+      ],
+      "colors": 7,
+      "bytes": 207,
+      "mark": {
+        "x": 4,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j12-q24-v1",
+      "reference": "gs-h02-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 4,
+      "bytes": 128,
+      "mark": {
+        "x": 2,
+        "y": 8,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j13-h-v1",
+      "reference": "gs-s04-h-v1",
+      "dimensions": [
+        10,
+        6
+      ],
+      "colors": 4,
+      "bytes": 111,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j13-i-v1",
+      "reference": "gs-s04-i-v1",
+      "dimensions": [
+        26,
+        12
+      ],
+      "colors": 5,
+      "bytes": 160,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j13-w-v1",
+      "reference": "gs-s04-w-v1",
+      "dimensions": [
+        52,
+        24
+      ],
+      "colors": 5,
+      "bytes": 261,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j13-q24-v1",
+      "reference": "gs-s04-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 5,
+      "bytes": 171,
+      "mark": {
+        "x": 2,
+        "y": 6,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j14-i-v1",
+      "reference": "gs-p03-i-v1",
+      "dimensions": [
+        9,
+        10
+      ],
+      "colors": 5,
+      "bytes": 127,
+      "mark": {
+        "x": 2,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j14-w-v1",
+      "reference": "gs-p03-w-v1",
+      "dimensions": [
+        18,
+        20
+      ],
+      "colors": 5,
+      "bytes": 168,
+      "mark": {
+        "x": 4,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j14-q24-v1",
+      "reference": "gs-p03-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 5,
+      "bytes": 154,
+      "mark": {
+        "x": 8,
+        "y": 4,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j15-h-v1",
+      "reference": "gs-h04-h-v1",
+      "dimensions": [
+        7,
+        4
+      ],
+      "colors": 5,
+      "bytes": 102,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j15-i-v1",
+      "reference": "gs-h04-i-v1",
+      "dimensions": [
+        18,
+        7
+      ],
+      "colors": 4,
+      "bytes": 132,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j15-w-v1",
+      "reference": "gs-h04-w-v1",
+      "dimensions": [
+        36,
+        14
+      ],
+      "colors": 6,
+      "bytes": 200,
+      "mark": {
+        "x": 4,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j15-q24-v1",
+      "reference": "gs-h04-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 4,
+      "bytes": 134,
+      "mark": {
+        "x": 3,
+        "y": 8,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j16-h-v1",
+      "reference": "gs-s05-h-v1",
+      "dimensions": [
+        6,
+        5
+      ],
+      "colors": 4,
+      "bytes": 99,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j16-i-v1",
+      "reference": "gs-s05-i-v1",
+      "dimensions": [
+        18,
+        11
+      ],
+      "colors": 4,
+      "bytes": 132,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j16-w-v1",
+      "reference": "gs-s05-w-v1",
+      "dimensions": [
+        36,
+        22
+      ],
+      "colors": 4,
+      "bytes": 184,
+      "mark": {
+        "x": 1,
+        "y": 6,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j16-q24-v1",
+      "reference": "gs-s05-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 4,
+      "bytes": 155,
+      "mark": {
+        "x": 5,
+        "y": 5,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j17-h-v1",
+      "reference": "gs-s06-h-v1",
+      "dimensions": [
+        6,
+        5
+      ],
+      "colors": 4,
+      "bytes": 101,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j17-i-v1",
+      "reference": "gs-s06-i-v1",
+      "dimensions": [
+        16,
+        11
+      ],
+      "colors": 5,
+      "bytes": 160,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j17-w-v1",
+      "reference": "gs-s06-w-v1",
+      "dimensions": [
+        32,
+        22
+      ],
+      "colors": 5,
+      "bytes": 257,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j17-q24-v1",
+      "reference": "gs-s06-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 5,
+      "bytes": 182,
+      "mark": {
+        "x": 5,
+        "y": 6,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j18-i-v1",
+      "reference": "gs-p07-i-v1",
+      "dimensions": [
+        12,
+        9
+      ],
+      "colors": 5,
+      "bytes": 139,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j18-w-v1",
+      "reference": "gs-p07-w-v1",
+      "dimensions": [
+        24,
+        18
+      ],
+      "colors": 5,
+      "bytes": 175,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j18-q24-v1",
+      "reference": "gs-p07-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 5,
+      "bytes": 163,
+      "mark": {
+        "x": 6,
+        "y": 7,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j19-h-v1",
+      "reference": "gs-s07-h-v1",
+      "dimensions": [
+        9,
+        6
+      ],
+      "colors": 4,
+      "bytes": 107,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j19-i-v1",
+      "reference": "gs-s07-i-v1",
+      "dimensions": [
+        23,
+        12
+      ],
+      "colors": 5,
+      "bytes": 155,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j19-w-v1",
+      "reference": "gs-s07-w-v1",
+      "dimensions": [
+        46,
+        24
+      ],
+      "colors": 5,
+      "bytes": 252,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j19-q24-v1",
+      "reference": "gs-s07-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 5,
+      "bytes": 174,
+      "mark": {
+        "x": 2,
+        "y": 6,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j20-h-v1",
+      "reference": "gs-s09-h-v1",
+      "dimensions": [
+        12,
+        7
+      ],
+      "colors": 4,
+      "bytes": 113,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j20-i-v1",
+      "reference": "gs-s09-i-v1",
+      "dimensions": [
+        30,
+        15
+      ],
+      "colors": 5,
+      "bytes": 201,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j20-w-v1",
+      "reference": "gs-s09-w-v1",
+      "dimensions": [
+        60,
+        30
+      ],
+      "colors": 5,
+      "bytes": 327,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 2,
+        "h": 2,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j20-q24-v1",
+      "reference": "gs-s09-q24-v1",
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 5,
+      "bytes": 195,
+      "mark": {
+        "x": 2,
+        "y": 5,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-j07-h-carbine-v1",
+      "reference": "gs-m07-h-carbine-v1",
+      "dimensions": [
+        8,
+        3
+      ],
+      "colors": 4,
+      "bytes": 98,
+      "mark": {
+        "x": 1,
+        "y": 1,
+        "w": 1,
+        "h": 1,
+        "color": "#ab9370"
+      },
+      "structuralDifference": true
+    },
+    {
+      "id": "gs-premiumblank-q24-v1",
+      "reference": null,
+      "dimensions": [
+        24,
+        24
+      ],
+      "colors": 6,
+      "bytes": 191,
+      "mark": {
+        "x": 17,
+        "y": 7,
+        "w": 1,
+        "h": 1,
+        "color": "#c09a55"
+      },
+      "structuralDifference": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "78 requested base files plus required carbine-held variant",
+      "status": "pass"
+    },
+    {
+      "name": "Formal manifest and all 652 accepted PNGs are unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j01-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "fail",
+      "error": "Expected values to be strictly equal:\n\n133 !== 134\n"
+    },
+    {
+      "name": "gs-j02-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "fail",
+      "error": "Expected values to be strictly equal:\n\n564 !== 565\n"
+    },
+    {
+      "name": "gs-j02-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j02-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j03-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j04-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-i-v1: single ink outside contour",
+      "status": "fail",
+      "error": "11,2\n\n'bdcfca' !== '122027'\n"
+    },
+    {
+      "name": "gs-j05-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-w-v1: single ink outside contour",
+      "status": "fail",
+      "error": "23,4\n\n'bdcfca' !== '122027'\n"
+    },
+    {
+      "name": "gs-j05-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j05-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-w-v1: single ink outside contour",
+      "status": "fail",
+      "error": "26,1\n\n'425a60' !== '122027'\n"
+    },
+    {
+      "name": "gs-j06-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j06-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j08-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j09-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j10-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j11-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "fail",
+      "error": "The expression evaluated to a falsy value:\n\n  assert.ok([...pal].every(v=>allowed.has(v)))\n"
+    },
+    {
+      "name": "gs-j12-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-w-v1: single ink outside contour",
+      "status": "fail",
+      "error": "16,13\n\n'829c9d' !== '122027'\n"
+    },
+    {
+      "name": "gs-j12-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j12-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j13-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j14-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-i-v1: single ink outside contour",
+      "status": "fail",
+      "error": "8,6\n\n'829c9d' !== '122027'\n"
+    },
+    {
+      "name": "gs-j15-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j15-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "fail",
+      "error": "Expected values to be strictly equal:\n\n87 !== 90\n"
+    },
+    {
+      "name": "gs-j16-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "fail",
+      "error": "Expected values to be strictly equal:\n\n253 !== 265\n"
+    },
+    {
+      "name": "gs-j16-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j16-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j17-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j18-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "fail",
+      "error": "Expected values to be strictly equal:\n\n173 !== 175\n"
+    },
+    {
+      "name": "gs-j19-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "fail",
+      "error": "Expected values to be strictly equal:\n\n743 !== 748\n"
+    },
+    {
+      "name": "gs-j19-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "fail",
+      "error": "Expected values to be strictly equal:\n\n195 !== 196\n"
+    },
+    {
+      "name": "gs-j19-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j19-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-h-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-h-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-h-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-h-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-h-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-h-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-h-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-i-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-i-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-i-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-i-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-i-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-i-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-i-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-i-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-w-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-w-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-w-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-w-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-w-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-w-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-w-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-w-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-q24-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-q24-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j20-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-carbine-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-carbine-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-carbine-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-carbine-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-carbine-v1: reference frame, anchor, mounts, tip, hand, beam and layer match exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-carbine-v1: real structural silhouette difference from reference, beyond palette",
+      "status": "pass"
+    },
+    {
+      "name": "gs-j07-h-carbine-v1: mounting-interface pixels and muzzle terminal remain exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-premiumblank-q24-v1: SHA, bytes, dimensions and exact native RGBA replay",
+      "status": "pass"
+    },
+    {
+      "name": "gs-premiumblank-q24-v1: nonempty binary alpha, color count, legal palette and limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-premiumblank-q24-v1: consistent upper-left brass rivet",
+      "status": "pass"
+    },
+    {
+      "name": "gs-premiumblank-q24-v1: no stray disconnected pixels (eight-neighbor pixel contour)",
+      "status": "pass"
+    },
+    {
+      "name": "gs-premiumblank-q24-v1: single ink outside contour",
+      "status": "pass"
+    },
+    {
+      "name": "J01: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J02: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J03: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J04: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J05: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J06: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J07: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J08: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J09: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J10: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J11: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J12: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J13: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J14: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J15: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J16: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J17: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J18: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J19: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "J20: complete output set; hidden rear grips have no held sprite",
+      "status": "pass"
+    },
+    {
+      "name": "21 icons unique in color, alpha silhouette and grayscale",
+      "status": "pass"
+    },
+    {
+      "name": "Twenty W sprites are independently detailed, never nearest-neighbor I enlargement",
+      "status": "pass"
+    }
+  ]
+}
