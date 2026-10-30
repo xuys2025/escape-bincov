@@ -1325,5 +1325,8 @@ M3 合入后，维护者让先做几件不用定方向的小事（TASKS M4-08）
   - 找到时预览的 `relocated` 写明去向，`size.after` 按新的朝向算，确认就照办，取消不动；找不到才拒绝（「仓库和背包里都放不下」或「安全箱里放不下」）。
   - 工作台桌面版在底栏中间写「确认后放到某处第几行第几列」，手机版写在明细里，底部摘要标「换位置」。
   - 测试：[gunsmith-edit.test.ts](../../tests/gunsmith-edit.test.ts)，以及 gunsmith-bench B10（真实点击，确认后枪在底栏说的位置）。
-- **SVD 接缝**：枪托、护木、枪管画在机匣图里，和机匣之间只隔一列描边色，深色底上像断开。这是美术问题，修图说明见 [art/svd-joint/BRIEF.md](art/svd-joint/BRIEF.md)，等 Sol。
+- **SVD 接缝**：枪托、护木、枪管画在机匣图里，和机匣之间只隔一列描边色，深色底上像断开。修图说明见 [art/svd-joint/BRIEF.md](art/svd-joint/BRIEF.md)。
+  - Sol 交了 I、W 的 `-v3` 和 H 的 `-v2`（`3b18898`，[交付说明](art/svd-joint/README.md)）：只把 70 个接缝处的墨色像素换成原图的木色、金属色，画布、透明、挂点、枪口和弹匣都不变。
+  - 接入（PR #149）：三张图按 `replacesSha256` 换掉正式目录里的旧图，正式清单第 7 版，636 张、98,605 字节；暂存清单移到 [art/svd-joint/incoming-manifest.json](art/svd-joint/incoming-manifest.json)。H 同时是地面和武器卡的无手套侧视图，三处一起换。
+  - gunsmith-bench A1 照旧逐像素比对 SVD 的审定预览，只略过这 70 个像素（[tests/fixtures/gunsmith-svd-joint-redrawn.json](../../tests/fixtures/gunsmith-svd-joint-redrawn.json)，由 Sol 的 `source/edits.json` 生成）。游戏内截图见 [evidence/svd-joint](evidence/svd-joint/)。
 

@@ -1,0 +1,336 @@
+{
+  "schema": 1,
+  "date": "2026-10-29",
+  "baseline": "d60e7c0db6e2783244422736656bc571edc0d879",
+  "status": "pass",
+  "passed": 40,
+  "failed": 0,
+  "totals": {
+    "files": 3,
+    "pngBytes": 1079
+  },
+  "runtimeArtConsumed": false,
+  "assets": [
+    {
+      "id": "gs-svdb-receiver-i-v3",
+      "dimensions": [
+        92,
+        18
+      ],
+      "colors": 8,
+      "bytes": 330,
+      "changedPixels": 12,
+      "magazineRect": [
+        37,
+        10,
+        18,
+        8
+      ],
+      "magazineUnchanged": true,
+      "alphaUnchanged": true,
+      "mounts": {
+        "top": [
+          36,
+          0
+        ],
+        "bipod": [
+          73,
+          7
+        ],
+        "muzzle": [
+          91,
+          5
+        ]
+      },
+      "tip": [
+        92,
+        6
+      ],
+      "joins": [
+        {
+          "name": "stock-receiver",
+          "beforeSolidPath": false,
+          "afterSolidPath": true
+        },
+        {
+          "name": "receiver-handguard",
+          "beforeSolidPath": false,
+          "afterSolidPath": true
+        },
+        {
+          "name": "handguard-barrel",
+          "beforeSolidPath": false,
+          "afterSolidPath": true
+        }
+      ]
+    },
+    {
+      "id": "gs-svdb-receiver-w-v3",
+      "dimensions": [
+        184,
+        36
+      ],
+      "colors": 9,
+      "bytes": 560,
+      "changedPixels": 51,
+      "magazineRect": [
+        74,
+        20,
+        36,
+        16
+      ],
+      "magazineUnchanged": true,
+      "alphaUnchanged": true,
+      "mounts": {
+        "top": [
+          72,
+          0
+        ],
+        "bipod": [
+          146,
+          14
+        ],
+        "muzzle": [
+          183,
+          10
+        ]
+      },
+      "tip": [
+        184,
+        12
+      ],
+      "joins": [
+        {
+          "name": "stock-receiver",
+          "beforeSolidPath": false,
+          "afterSolidPath": true
+        },
+        {
+          "name": "receiver-handguard",
+          "beforeSolidPath": false,
+          "afterSolidPath": true
+        },
+        {
+          "name": "handguard-barrel",
+          "beforeSolidPath": false,
+          "afterSolidPath": true
+        }
+      ]
+    },
+    {
+      "id": "gs-svdb-receiver-h-v2",
+      "dimensions": [
+        37,
+        10
+      ],
+      "colors": 6,
+      "bytes": 189,
+      "changedPixels": 7,
+      "magazineRect": [
+        14,
+        6,
+        6,
+        4
+      ],
+      "magazineUnchanged": true,
+      "alphaUnchanged": true,
+      "mounts": {
+        "top": [
+          15,
+          0
+        ],
+        "bipod": [
+          29,
+          4
+        ],
+        "muzzle": [
+          36,
+          2
+        ]
+      },
+      "tip": [
+        37,
+        3
+      ],
+      "joins": [
+        {
+          "name": "stock-receiver",
+          "beforeSolidPath": false,
+          "afterSolidPath": true
+        },
+        {
+          "name": "receiver-handguard",
+          "beforeSolidPath": true,
+          "afterSolidPath": true
+        },
+        {
+          "name": "handguard-barrel",
+          "beforeSolidPath": false,
+          "afterSolidPath": true
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "name": "Formal manifest is unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "All 636 formal PNGs retain manifest identity and bytes",
+      "status": "pass"
+    },
+    {
+      "name": "Only three requested receiver replacements delivered",
+      "status": "pass"
+    },
+    {
+      "name": "Files exactly match batch manifest",
+      "status": "pass"
+    },
+    {
+      "name": "I: file SHA, bytes, dimensions, revision and replacesSha256",
+      "status": "pass"
+    },
+    {
+      "name": "I: every placement field including mounts, grip, bore, hand and tip is unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "I: alpha is binary and identical to baseline",
+      "status": "pass"
+    },
+    {
+      "name": "I: palette is unchanged and within ART-SPEC limit",
+      "status": "pass"
+    },
+    {
+      "name": "I: only recorded original ink pixels changed; all other pixels exact",
+      "status": "pass"
+    },
+    {
+      "name": "I: M3-W3 magazine and feed-lip pixels are identical",
+      "status": "pass"
+    },
+    {
+      "name": "I: muzzle terminal and mounted coordinates retain their original pixels",
+      "status": "pass"
+    },
+    {
+      "name": "I: every edited pixel is internal; exterior ink contour is intact",
+      "status": "pass"
+    },
+    {
+      "name": "I: stock-receiver has a four-neighbor solid material path without ink",
+      "status": "pass"
+    },
+    {
+      "name": "I: receiver-handguard has a four-neighbor solid material path without ink",
+      "status": "pass"
+    },
+    {
+      "name": "I: handguard-barrel has a four-neighbor solid material path without ink",
+      "status": "pass"
+    },
+    {
+      "name": "I: original defect is reproduced by excluding ink",
+      "status": "pass"
+    },
+    {
+      "name": "W: file SHA, bytes, dimensions, revision and replacesSha256",
+      "status": "pass"
+    },
+    {
+      "name": "W: every placement field including mounts, grip, bore, hand and tip is unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "W: alpha is binary and identical to baseline",
+      "status": "pass"
+    },
+    {
+      "name": "W: palette is unchanged and within ART-SPEC limit",
+      "status": "pass"
+    },
+    {
+      "name": "W: only recorded original ink pixels changed; all other pixels exact",
+      "status": "pass"
+    },
+    {
+      "name": "W: M3-W3 magazine and feed-lip pixels are identical",
+      "status": "pass"
+    },
+    {
+      "name": "W: muzzle terminal and mounted coordinates retain their original pixels",
+      "status": "pass"
+    },
+    {
+      "name": "W: every edited pixel is internal; exterior ink contour is intact",
+      "status": "pass"
+    },
+    {
+      "name": "W: stock-receiver has a four-neighbor solid material path without ink",
+      "status": "pass"
+    },
+    {
+      "name": "W: receiver-handguard has a four-neighbor solid material path without ink",
+      "status": "pass"
+    },
+    {
+      "name": "W: handguard-barrel has a four-neighbor solid material path without ink",
+      "status": "pass"
+    },
+    {
+      "name": "W: original defect is reproduced by excluding ink",
+      "status": "pass"
+    },
+    {
+      "name": "H: file SHA, bytes, dimensions, revision and replacesSha256",
+      "status": "pass"
+    },
+    {
+      "name": "H: every placement field including mounts, grip, bore, hand and tip is unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "H: alpha is binary and identical to baseline",
+      "status": "pass"
+    },
+    {
+      "name": "H: palette is unchanged and within ART-SPEC limit",
+      "status": "pass"
+    },
+    {
+      "name": "H: only recorded original ink pixels changed; all other pixels exact",
+      "status": "pass"
+    },
+    {
+      "name": "H: M3-W3 magazine and feed-lip pixels are identical",
+      "status": "pass"
+    },
+    {
+      "name": "H: muzzle terminal and mounted coordinates retain their original pixels",
+      "status": "pass"
+    },
+    {
+      "name": "H: stock-receiver has a four-neighbor solid material path without ink",
+      "status": "pass"
+    },
+    {
+      "name": "H: receiver-handguard has a four-neighbor solid material path without ink",
+      "status": "pass"
+    },
+    {
+      "name": "H: handguard-barrel has a four-neighbor solid material path without ink",
+      "status": "pass"
+    },
+    {
+      "name": "H: original defect is reproduced by excluding ink",
+      "status": "pass"
+    },
+    {
+      "name": "Batch totals are exact",
+      "status": "pass"
+    }
+  ]
+}

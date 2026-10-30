@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "revision": 1,
+  "batch": "SVD-JOINT",
+  "totals": {
+    "files": 3,
+    "pngBytes": 1079
+  },
+  "assets": [
+    {
+      "id": "gs-svdb-receiver-i-v3",
+      "file": "assets/gunsmith/incoming/svd-joint/gs-svdb-receiver-i-v3.png",
+      "w": 92,
+      "h": 18,
+      "bytes": 330,
+      "sha256": "433428b34db1a00ee87838a6fa0ee88a8733075c8823c2178ac807455e43f9fb",
+      "revision": 3,
+      "output": "inventory",
+      "gun": "svdb",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 8,
+      "source": "docs/gunsmith/art/svd-joint/source/edits.json",
+      "sourceRect": null,
+      "exportMethod": "image_gen joint-treatment reference; native-grid ink-only finishing; unchanged alpha, coordinates and magazine pixels",
+      "tip": [
+        92,
+        6
+      ],
+      "mounts": {
+        "top": [
+          36,
+          0
+        ],
+        "bipod": [
+          73,
+          7
+        ],
+        "muzzle": [
+          91,
+          5
+        ]
+      },
+      "replacesSha256": "bbe89b2cbaf395b3b39d0e665a0fb84209891db0a895020464f3b2dfaa0e8ac1"
+    },
+    {
+      "id": "gs-svdb-receiver-w-v3",
+      "file": "assets/gunsmith/incoming/svd-joint/gs-svdb-receiver-w-v3.png",
+      "w": 184,
+      "h": 36,
+      "bytes": 560,
+      "sha256": "3bce50a43e13f5b3b2a505d1f1711f62b4dbb63ec661a9d73cb4cd741ce1c9dc",
+      "revision": 3,
+      "output": "bench",
+      "gun": "svdb",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 9,
+      "source": "docs/gunsmith/art/svd-joint/source/edits.json",
+      "sourceRect": null,
+      "exportMethod": "image_gen joint-treatment reference; native-grid ink-only finishing; unchanged alpha, coordinates and magazine pixels",
+      "tip": [
+        184,
+        12
+      ],
+      "mounts": {
+        "top": [
+          72,
+          0
+        ],
+        "bipod": [
+          146,
+          14
+        ],
+        "muzzle": [
+          183,
+          10
+        ]
+      },
+      "replacesSha256": "992a51b4c4c4e517c7638c0efaab22a5b6c48d242f1eb254cbb368fc8b663d2d"
+    },
+    {
+      "id": "gs-svdb-receiver-h-v2",
+      "file": "assets/gunsmith/incoming/svd-joint/gs-svdb-receiver-h-v2.png",
+      "w": 37,
+      "h": 10,
+      "bytes": 189,
+      "sha256": "b5500c926aa372bbe29e3ba2b477d84aa7c0cf83de27bb4e74f0f10d6250ab07",
+      "revision": 2,
+      "output": "held",
+      "gun": "svdb",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 6,
+      "source": "docs/gunsmith/art/svd-joint/source/edits.json",
+      "sourceRect": null,
+      "exportMethod": "image_gen joint-treatment reference; native-grid ink-only finishing; unchanged alpha, coordinates and magazine pixels",
+      "grip": [
+        13,
+        5
+      ],
+      "hand": [
+        24,
+        5
+      ],
+      "bore": 3,
+      "tip": [
+        37,
+        3
+      ],
+      "mounts": {
+        "top": [
+          15,
+          0
+        ],
+        "bipod": [
+          29,
+          4
+        ],
+        "muzzle": [
+          36,
+          2
+        ]
+      },
+      "forward": 0,
+      "replacesSha256": "b8251da45c4bd6c0ea79724ee09b592b51045ce2e63e16c451d628eae72b39a4"
+    }
+  ]
+}
