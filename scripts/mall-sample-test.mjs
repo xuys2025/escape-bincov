@@ -315,8 +315,11 @@ async function deployTabs(page) {
         };
         const inRoom = p => p.x >= room.x && p.x < room.x + room.w && p.y >= room.y && p.y < room.y + room.h;
         const tinted = () => v.occluders.filter(o => o.kind === 'prop' && o.sprite.renderable && o.tintAt && inRoom(o.tintAt)).map(o => o.sprite.tint);
-        // Controls shade every other room as usual and leave this one out.
-        const hidden = grab(false), hiddenTints = tinted();
+        // Controls shade every other room as usual and leave this one out. Frames are compared only at one step: from the
+        // pins a dt present still eases the camera and the mist shelter, while a dt-0 one moves neither, and Pixi stores
+        // a sprite's alpha in 8 bits, so a mist a 1/255 step apart repaints the whole screen (#61). `still` is the hidden
+        // frame at dt 0, the reference for hiding again at dt 0.
+        const hidden = grab(false), hiddenTints = tinted(), still = grab(false, 0);
         L.setUnseen(m, others);
         const control = grab(false), controlTints = tinted();
         L.setUnseen(m, rooms);
@@ -337,7 +340,7 @@ async function deployTabs(page) {
           corridor: { hidden: block(hidden, spot.corridor), control: block(control, spot.corridor) },
           darker: darker(hidden, control), againVsHidden: exact(again, hidden), occupiedVsHidden: occupied ? exact(occupied, hidden) : null, enemy: enemy?.uid ?? null,
           props: hiddenTints.length, propRatio: hiddenTints.length ? Math.max(...hiddenTints.flatMap((t, i) => [16, 8, 0].map(s => ch(t, s) / Math.max(1, ch(controlTints[i], s))))) : null,
-          settledVsControl: exact(settled, settledControl), rehiddenVsHidden: exact(rehidden, hidden),
+          settledVsControl: exact(settled, settledControl), rehiddenVsStill: exact(rehidden, still), stillVsHidden: exact(still, hidden),
         };
       } finally { h.app.ticker.start(); }
     }, spot);
@@ -348,11 +351,11 @@ async function deployTabs(page) {
     assert.equal(r.corridor.hidden, r.corridor.control, 'the corridor outside the room is untouched');
     assert.ok(r.darker >= .6, `most of the room on screen, furniture included, is darker: ${(r.darker * 100).toFixed(1)}%`);
     assert.ok(r.props >= 1 && r.propRatio <= .75, `furniture in the room takes the shade: ${r.props} props, worst channel ratio ${r.propRatio}`);
-    assert.equal(r.againVsHidden, 0, 'restoring the shade draws the same hidden frame');
-    assert.ok(r.enemy, 'an enemy to stand in the room'); assert.equal(r.occupiedVsHidden, 0, 'an enemy in the hidden room changes no pixel');
+    assert.equal(r.againVsHidden, 0, `restoring the shade draws the same hidden frame: ${r.againVsHidden} px differ`);
+    assert.ok(r.enemy, 'an enemy to stand in the room'); assert.equal(r.occupiedVsHidden, 0, `an enemy in the hidden room changes no pixel: ${r.occupiedVsHidden} px differ`);
     assert.ok(r.floor.first > r.floor.hidden && r.floor.first < r.floor.settled, `the shade lifts over the lights' 0.3 s: ${JSON.stringify(r.floor)}`);
-    assert.equal(r.settledVsControl, 0, 'once revealed nothing of the shade is left');
-    assert.equal(r.rehiddenVsHidden, 0, 'hidden again, the shade is back in the same frame (dt 0)');
+    assert.equal(r.settledVsControl, 0, `once revealed nothing of the shade is left: ${r.settledVsControl} px differ`);
+    assert.equal(r.rehiddenVsStill, 0, `hidden again, the shade is back in the same frame (dt 0): ${r.rehiddenVsStill} px differ`);
     return r;
   });
   await step('M04 the S-N stairs take the player up and back down; each floor keeps its own dressing', async () => {
