@@ -32,20 +32,24 @@
 
 ## 验证（Windows，Node 24.22.1，系统 Chrome，离线真实构建）
 
-同一份构建（`pnpm package` 产出的 `dist/index.html`，SHA-256 `6df60bba9d98186261e306b85e1346a2c31295be24a85336995373fae16d03fd`），浏览器套件逐个串行运行：
+先在基线上跑一轮（构建 SHA-256 `6df60bba…`），正常合入 main `e3a74961`（#157/#158 老栓精工美术，只有 handoff.md 冲突）后在合并树上全部重跑（构建 SHA-256 `2528f2a19223724d31e29516ba41db70544a2dce2567a8f83580d75785f654a1`）。浏览器套件逐个串行运行，表中「基线 / 合并树」两列：
 
-| 检查 | 结果 |
-| --- | --- |
-| `pnpm test` | 1113/1113 |
-| `pnpm package` | 通过；便携 ZIP 6,112,751 B，web ZIP 6,108,242 B |
-| `pnpm check:ci`（工程守卫） | 139/139 |
-| `test:shop-feedback`（含新增 F03 B 两尺寸） | 28/28（[报告](shop-trade-tabs/shop-feedback-report.json)） |
-| `test:shop-drag`（旧页签商店拖放与触控） | 21/21 |
-| `test:hideout`（旧页签据点与 Runtime 接线） | 8/8 |
-| `test:gunsmith-bench`（含院子与手机商店的分类筛选） | 20/20 |
-| `test:save-browser`（写入失败、重试、多窗口） | 17/17 |
-| `test:station`（完整院子验收，手动套件） | 80/80，页面错误与外部请求 0 |
-| `test:mobile-ux`（手机横竖屏与短屏） | 13/13；没给 `BINCOV_LEGACY_HTML`，旧客户端迁移那项按设计不运行 |
+| 检查 | 基线 | 合并树 |
+| --- | --- | --- |
+| `pnpm test` | 1113/1113 | 1113/1113 |
+| `pnpm package` | 通过 | 通过 |
+| `pnpm check:ci`（工程守卫） | 139/139 | 139/139 |
+| `test:shop-feedback`（含新增 F03 B 两尺寸） | 28/28（[报告](shop-trade-tabs/shop-feedback-report.json)） | 28/28 |
+| `test:shop-drag`（旧页签商店拖放与触控） | 21/21 | 21/21 |
+| `test:hideout`（旧页签据点与 Runtime 接线） | 8/8 | 8/8 |
+| `test:gunsmith-bench`（含院子与手机商店的分类筛选） | 20/20 | 20/20 |
+| `test:save-browser`（写入失败、重试、多窗口） | 17/17 | 17/17 |
+| `test:station`（完整院子验收，手动套件） | 80/80 | 79/80，唯一失败 I3（见下） |
+| `test:mobile-ux`（手机横竖屏与短屏） | 13/13 | 13/13 |
+
+两轮页面错误与外部请求都是 0。`test:mobile-ux` 没给 `BINCOV_LEGACY_HTML`，旧客户端迁移那项按设计不运行。
+
+**I3 是原有问题，不是本项引入的。** 合并树完整套件里 I3（390×844 从整备经标题菜单切修理铺）失败：`timeout: arms tab`。单独重跑 3 次：本分支 1 过 2 败；main `7d982a6f` 的构建 3 次全败，报同一个错误；本分支第一轮完整套件里 I3 是通过的。[F16 记录](station-player-hands/README.md)也写过 I3 在原 main 可复现。失败发生在从整备切过去的那一下（菜单输入），在商店渲染之前；这里保留失败，不拼成完整通过，菜单问题另行核查。
 
 新增的 `F03 B`（1280×720、1920×1080）：
 
