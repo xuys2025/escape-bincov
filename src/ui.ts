@@ -11,7 +11,8 @@ import type { SessionMutation } from './session';
 import { titleScreen } from './title-screen';
 import { moveQuantity, placementError } from './loot';
 import { transferBagToStash, organizeStash } from './inventory-actions';
-import { ATTRIBUTES, EFFECTS, FACILITIES, RECIPES, derivedLimits, effectiveAttributes, rpgEnabled, type Facility } from './expansion-state';
+import { ATTRIBUTES, EFFECTS, FACILITIES, RECIPES, derivedLimits, effectiveAttributes, rpgEnabled, type ExpansionState, type Facility } from './expansion-state';
+import { craftPremium, premiumOrders, PREMIUM_LOCKED_NOTE, PREMIUM_OPEN_NOTE } from './gunsmith/premium';
 import { FACILITY_COSTS, FACILITY_NAMES, buildFacility, enqueueProduction, claimProduction, cancelProduction } from './base';
 import { equipCharm, unequipCharm, reputationTier } from './reputation-luck';
 import { mallRunConfig } from './mall-world';
@@ -120,14 +121,14 @@ let shopBrowse: Shop.ShopBrowse = Shop.BROWSE_ALL;
 function cart() {
     if (!app.shop || app.shop.merchant !== app.tab) {
         // A kind the other merchant does not stock falls back to all.
-        if (shopBrowse.kind !== 'all' && !Shop.stockKinds(app.tab as Shop.Merchant, rpgEnabled(app.expansion)).includes(shopBrowse.kind)) shopBrowse = Shop.BROWSE_ALL;
+        if (shopBrowse.kind !== 'all' && !Shop.stockKinds(app.tab as Shop.Merchant, app.save, rpgEnabled(app.expansion)).includes(shopBrowse.kind)) shopBrowse = Shop.BROWSE_ALL;
         app.shop = Shop.createCart(app.save, app.tab as Shop.Merchant, rpgEnabled(app.expansion), shopBrowse);
     }
     return app.shop;
 }
 /** The filter buttons above the catalog: all or one kind, only what fits the base's guns, the pages. */
 function shopBrowseBar(): string {
-    const merchant = app.tab as Shop.Merchant, rpg = rpgEnabled(app.expansion), kinds = Shop.stockKinds(merchant, rpg);
+    const merchant = app.tab as Shop.Merchant, rpg = rpgEnabled(app.expansion), kinds = Shop.stockKinds(merchant, app.save, rpg);
     const page = Shop.catalogPage(app.save, merchant, rpg, shopBrowse);
     if (kinds.length < 2 && page.pages < 2) return '';
     const chip = (id: string, label: string, on: boolean) => btn(label, 'shop-browse', on ? 'active' : '', `data-id="${id}" aria-pressed="${on}"`);
@@ -159,7 +160,7 @@ function occupied(inv: D.Inventory) {
 function equipmentPanel(equipment: D.Equipment, bag: D.Inventory, safe: D.Inventory) {
     const weapon = D.equippedWeapon(equipment);
     const ammo = equipment.ammo;
-    return `<section class="safe-section equipment-section"><h3 class="section-title"><b class="section-number">01</b>随身装备 <span>携行</span></h3><div class="equip"><div class="equipment-caption"><span>${equipment.weapon ? '主武器' : '随身匕首'}</span>${equipment.relief ? '<span class="orange">救济</span>' : ''}</div><div class="equipped-icon">${itemArtwork({ id: weapon.id, gun: equipment.gun }, inventoryCell() === 80 ? 312 : 204, inventoryCell() === 80 ? 102 : 52)}</div><div class="equipment-name"><strong>${weapon.name}</strong>${equipment.weapon ? `<span id="equipped-ammo">${ammo} / ${weapon.magazine}</span>` : '<span>始终保留</span>'}</div>${equipment.weapon ? btn('卸下主武器', 'unequip', 'text-button') : ''}${equipment.weapon && equipment.weaponUid && app.state === 'hideout' ? btn('改装', 'gunsmith-open', 'text-button', `data-id="${equipment.weaponUid}"`) : ''}</div>${weapon.ammo ? `<p class="reserve-ammo">背包备用弹药 <span>${D.ITEMS[weapon.ammo].name} · ${D.count(bag, weapon.ammo)} 发</span></p>` : '<p class="reserve-ammo">装备枪械后，备用弹药放在背包。</p>'}<h3 class="section-title secure-heading">安全箱 <span>失败也保留</span></h3><div class="secure-kit">${grid(safe, 'safe')}<div class="knife-card">${itemIcon('knife')}<strong>水手匕首</strong><span>随身携带<br>始终保留</span></div></div></section>`;
+    return `<section class="safe-section equipment-section"><h3 class="section-title"><b class="section-number">01</b>随身装备 <span>携行</span></h3><div class="equip"><div class="equipment-caption"><span>${equipment.weapon ? '主武器' : '随身匕首'}</span>${equipment.relief ? '<span class="orange">救济</span>' : ''}</div><div class="equipped-icon">${itemArtwork({ id: weapon.id, gun: equipment.gun }, inventoryCell() === 80 ? 312 : 204, inventoryCell() === 80 ? 102 : 52)}</div><div class="equipment-name"><strong>${weapon.name}</strong>${equipment.weapon ? `<span id="equipped-ammo">${weapon.magazine ? `${ammo} / ${weapon.magazine}` : '没装弹匣'}</span>` : '<span>始终保留</span>'}</div>${equipment.weapon ? btn('卸下主武器', 'unequip', 'text-button') : ''}${equipment.weapon && equipment.weaponUid && app.state === 'hideout' ? btn('改装', 'gunsmith-open', 'text-button', `data-id="${equipment.weaponUid}"`) : ''}</div>${weapon.ammo ? `<p class="reserve-ammo">背包备用弹药 <span>${D.ITEMS[weapon.ammo].name} · ${D.count(bag, weapon.ammo)} 发</span></p>` : '<p class="reserve-ammo">装备枪械后，备用弹药放在背包。</p>'}<h3 class="section-title secure-heading">安全箱 <span>失败也保留</span></h3><div class="secure-kit">${grid(safe, 'safe')}<div class="knife-card">${itemIcon('knife')}<strong>水手匕首</strong><span>随身携带<br>始终保留</span></div></div></section>`;
 }
 function bagPanel(bag: D.Inventory, weight: number) {
     const limit = carryLimit();
@@ -212,7 +213,8 @@ export async function startPreparedHideoutRaid(runId: string): Promise<boolean> 
 }
 const WORLD_OPTION: Record<'coast' | 'buildings' | 'mall', string> = { coast: '沿海封锁区 · 经典规则', buildings: '沿海街区 · 居民楼', mall: '滨湾商场 · 两层与露台' };
 function deploy() {
-    if (D.stashOverflow(app.save.stash).length) { toast(D.OVERFLOW_BLOCKS_DEPLOY); return; }
+    const stop = D.deployBlocker(app.save);
+    if (stop) { toast(stop); return; }
     const cfg = app.runWorld === 'mall' ? mallRunConfig(app.seed || Date.now()) : generateRun(app.seed || (sampleMode() === 'village' && app.runWorld === 'buildings' ? villageSeed() : Date.now()));
     if (!saved(saveSession.beginRun(cfg.seed, app.runWorld === 'mall' ? 'mall' : app.runWorld === 'buildings', { mallLayout: sampleMallLayout(app.runWorld) }))) return;
     app.shop = null; void startCoastSample();
@@ -360,7 +362,13 @@ function facilityPanel() {
     const facility = FACILITIES.includes(app.baseFacility as Facility) ? app.baseFacility as Facility : 'rest', level = state.base.facilities[facility], cost = FACILITY_COSTS[facility][level];
     const explanation = { rest: '提高生命与精神恢复速度，并缩短获得精力充沛所需的休息。', medical: '提高生命恢复和止血、镇痛、疲劳治疗速度。', training: '提高行动训练效率。在训练区实际走动，每满 120 秒获得一次练习收益。', workbench: '有限队列串行生产；领完一批，再为后续成品腾出位置。', blackmarket: '需要修好电源，并成功带回一颗普通黑珍珠。货单尚未开放。' };
     const locked = facility !== 'rest' && !app.save.quests.repair || facility === 'blackmarket' && !state.base.extractedPearl;
-    return `<section class="facility-panel"><nav class="facility-tabs">${FACILITIES.map(id => btn(FACILITY_NAMES[id], 'facility-select', facility === id ? 'active' : '', `data-id="${id}"`)).join('')}</nav><h3>${FACILITY_NAMES[facility]} · ${level ? `${level} 级` : '未修建'}</h3><p>${explanation[facility]}</p>${cost ? `<p>费用 ¥${cost.cash} · ${cost.items.map(i => `${D.ITEMS[i.id].name} × ${i.qty}`).join('、')}（仅普通物资）</p>${locked ? '<p class="orange">先完成供电任务；黑市还需要成功带回黑珍珠。</p>' : ''}${btn(level ? '升级设施' : '修建设施', 'facility-build', 'primary', locked ? 'disabled' : '')}` : '<p>已达到最高等级。</p>'}${facility === 'training' ? `<h4>主动练习</h4><p>十分钟内共享 1 点训练量上限；更换项目保留同一额度。</p>${ATTRIBUTES.map(id => btn(attributeNames[id], 'practice-select', state.base.training.attribute === id ? 'active' : '', `data-id="${id}"`)).join('')}` : ''}${facility === 'workbench' ? `<h4>配方</h4>${Object.entries(RECIPES).map(([id,r]) => `<div class="production-row"><span>${r.result.map(i => `${D.ITEMS[i.id].name} × ${i.qty}`).join('、')} · ${r.seconds / 60}分钟<br>¥${r.cash} + ${r.materials.map(i => `${D.ITEMS[i.id].name} × ${i.qty}`).join('、')} · 工作台 ${r.level}级${r.medical ? ' / 医疗区1级' : ''}</span>${btn('排入生产', 'production-enqueue', '', `data-id="${id}"`)}</div>`).join('')}<h4>生产队列 ${state.base.queue.length} / ${state.base.facilities.workbench}</h4>${state.base.queue.map((b,i) => `<div class="production-row"><span>${D.ITEMS[b.recipe].name} · ${i === 0 ? b.remaining === 0 ? '等待成品位' : `剩余 ${Math.ceil(b.remaining)}秒` : '等待生产'}</span>${i ? btn('取消并退款', 'production-cancel', '', `data-id="${b.id}"`) : ''}</div>`).join('')}<h4>待领取 ${state.base.completed.length} / 3</h4>${state.base.completed.map(b => `<div class="production-row"><span>${b.result.map(i => `${D.ITEMS[i.id].name} × ${i.qty}`).join('、')}</span>${btn('整批领入仓库', 'production-claim', '', `data-id="${b.id}"`)}</div>`).join('')}` : ''}</section>`;
+    return `<section class="facility-panel"><nav class="facility-tabs">${FACILITIES.map(id => btn(FACILITY_NAMES[id], 'facility-select', facility === id ? 'active' : '', `data-id="${id}"`)).join('')}</nav><h3>${FACILITY_NAMES[facility]} · ${level ? `${level} 级` : '未修建'}</h3><p>${explanation[facility]}</p>${cost ? `<p>费用 ¥${cost.cash} · ${cost.items.map(i => `${D.ITEMS[i.id].name} × ${i.qty}`).join('、')}（仅普通物资）</p>${locked ? '<p class="orange">先完成供电任务；黑市还需要成功带回黑珍珠。</p>' : ''}${btn(level ? '升级设施' : '修建设施', 'facility-build', 'primary', locked ? 'disabled' : '')}` : '<p>已达到最高等级。</p>'}${facility === 'training' ? `<h4>主动练习</h4><p>十分钟内共享 1 点训练量上限；更换项目保留同一额度。</p>${ATTRIBUTES.map(id => btn(attributeNames[id], 'practice-select', state.base.training.attribute === id ? 'active' : '', `data-id="${id}"`)).join('')}` : ''}${facility === 'workbench' ? `<h4>配方</h4>${Object.entries(RECIPES).map(([id,r]) => `<div class="production-row"><span>${r.result.map(i => `${D.ITEMS[i.id].name} × ${i.qty}`).join('、')} · ${r.seconds / 60}分钟<br>¥${r.cash} + ${r.materials.map(i => `${D.ITEMS[i.id].name} × ${i.qty}`).join('、')} · 工作台 ${r.level}级${r.medical ? ' / 医疗区1级' : ''}</span>${btn('排入生产', 'production-enqueue', '', `data-id="${id}"`)}</div>`).join('')}<h4>生产队列 ${state.base.queue.length} / ${state.base.facilities.workbench}</h4>${state.base.queue.map((b,i) => `<div class="production-row"><span>${D.ITEMS[b.recipe].name} · ${i === 0 ? b.remaining === 0 ? '等待成品位' : `剩余 ${Math.ceil(b.remaining)}秒` : '等待生产'}</span>${i ? btn('取消并退款', 'production-cancel', '', `data-id="${b.id}"`) : ''}</div>`).join('')}<h4>待领取 ${state.base.completed.length} / 3</h4>${state.base.completed.map(b => `<div class="production-row"><span>${b.result.map(i => `${D.ITEMS[i.id].name} × ${i.qty}`).join('、')}</span>${btn('整批领入仓库', 'production-claim', '', `data-id="${b.id}"`)}</div>`).join('')}${premiumPanel(state)}` : ''}</section>`;
+}
+/** 老栓精工 (#28 M4-09) under the workbench, as the yard shows it (station-view/panels.ts premiumHtml). */
+function premiumPanel(state: ExpansionState) {
+    const o = premiumOrders(app.save, state);
+    const rows = o.rows.map(r => `<div class="production-row"><span>${esc(r.name)} · ${esc(r.guns)}<br>底料 ${esc(r.base ?? r.bases)} · ¥${r.price}${r.why ? ` · <b class="orange">${esc(r.why)}</b>` : ''}</span>${btn('定制', 'premium-craft', '', `data-id="${r.id}"${r.why ? ' disabled' : ''}`)}</div>`).join('');
+    return `<h4>老栓精工定制 · 精工件坯 ${o.blanks} 份</h4>${o.lock ? `<p>${esc(o.lock)}${esc(PREMIUM_LOCKED_NOTE)}</p>` : `<p>${esc(PREMIUM_OPEN_NOTE)}</p>${rows}`}`;
 }
 function renderHideout() {
     const scrollPositions = new Map<string, number>();
@@ -385,7 +393,7 @@ function renderHideout() {
             const complete = s.quests[id];
             const needs = Object.entries(q.needs).map(([itemId, needed]) => ({ itemId, needed, have: [s.stash, s.bag, s.safe].reduce((sum, inv) => sum + D.count(inv, itemId), 0) }));
             const ready = needs.every(({ have, needed }) => have >= needed);
-            return `<article class="quest ${complete ? 'complete' : ''}"><div class="quest-status"><span class="mono">0${i + 1}</span><span>${complete ? '已交付' : ready ? '可以交付' : '等待物资'}</span></div><h3>${q.name}</h3><p>${q.description}</p>${complete ? `<p class="quest-reply">${q.radio}</p>` : `<ul class="quest-needs">${needs.map(({ itemId, needed, have }) => {
+            return `<article class="quest ${complete ? 'complete' : ''}"><div class="quest-status"><span class="mono">0${i + 1}</span><span>${complete ? '已交付' : ready ? '可以交付' : '等待物资'}</span></div><h3>${q.name}</h3><p>${q.description}</p>${D.questShelfText(id, complete) ? `<p class="quest-unlock">${D.questShelfText(id, complete)}</p>` : ''}${complete ? `<p class="quest-reply">${q.radio}</p>` : `<ul class="quest-needs">${needs.map(({ itemId, needed, have }) => {
                 return `<li class="${have >= needed ? 'ready' : ''}"><span>${D.ITEMS[itemId].name}</span><strong>${Math.min(have, needed)} <span>/ ${needed}</span></strong></li>`;
             }).join('')}</ul>`}<div class="quest-footer"><div><strong>¥ ${q.reward}</strong><span>${id === 'repair' ? '另解锁仓库扩建' : '任务报酬'}</span></div>${complete ? '<span class="completion-mark">✓ 已完成</span>' : btn('交付物资', 'quest', ready ? 'primary' : '', `data-id="${id}"`)}</div></article>`;
         }).join('')}</div><p class="content-note">交付时会扣除仓库、背包或安全箱中的所需物资。放进安全箱的任务物品，撤离失败也保留。</p>`;
@@ -742,6 +750,7 @@ function bind() {
             case 'production-enqueue': expansionAction(draft => enqueueProduction(draft.profile, draft.expansion, id as keyof typeof RECIPES), '材料已支付，生产已排入队列。'); break;
             case 'production-claim': expansionAction(draft => claimProduction(draft.profile, draft.expansion, id, 'stash'), '整批物资已放入仓库。'); break;
             case 'production-cancel': expansionAction(draft => cancelProduction(draft.profile, draft.expansion, id), '材料与现金已退回。'); break;
+            case 'premium-craft': expansionAction(draft => craftPremium(draft.profile, draft.expansion, id) === null, '老栓做好了，已放进仓库。'); break;
             case 'practice-select': expansionAction(draft => { draft.expansion.base.training.attribute = id as 'strength' | 'constitution' | 'technique'; }, '练习项目已更换。'); break;
             case 'charm-equip': expansionAction(draft => equipCharm(draft.profile, draft.expansion, app.selected, app.selectedSource as 'stash' | 'bag' | 'safe'), '护符已佩戴。'); break;
             case 'charm-unequip': expansionAction(draft => unequipCharm(draft.profile, draft.expansion), '护符已收起。'); break;

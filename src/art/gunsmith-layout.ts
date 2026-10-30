@@ -9,7 +9,7 @@
  */
 import { ATTACHMENTS } from '../gunsmith/catalog';
 import type { PartNode } from '../gunsmith/instance';
-import { MOUNT, partsSignature } from '../gunsmith/signature';
+import { MOUNT, NO_MAG, partsSignature } from '../gunsmith/signature';
 import { GUNSMITH_ART, GUNSMITH_ART_REVISION, GUNSMITH_VIRTUAL } from './gunsmith-art-meta';
 import type { ArtPoint, GunsmithArt } from './gunsmith-art-types';
 
@@ -66,14 +66,15 @@ export function gunArtLayout(gun: string, parts: readonly PartNode[], code: ArtC
         const node: Node = { key, label, art, x: parent.x + at[0] - anchor[0], y: parent.y + at[1] - anchor[1], parent };
         nodes.push(node); return node;
     };
-    // Replaced slots on the receiver: the installed part's image, else the factory image, else nothing.
+    // Replaced slots on the receiver: the installed part's image, else the factory image, else nothing; NO_MAG (a gun
+    // without a magazine, M4-07) draws nothing either.
     const done = new Set<string>();
     for (const [mount, stem] of REPLACED) {
         const at = rootArt.mounts?.[mount];
         if (!at) continue;
         const part = parts.find(p => MOUNT[p.slot] === mount), key = part && partArt(part.id, code, gun), factory = `gs-${gun}-${stem}-factory-${code}`;
         if (part && key) { byUid.set(part.uid, attach(key, mount, root, at)); done.add(part.uid); }
-        else if (artOf(factory)) attach(factory, mount, root, at);
+        else if (part?.id !== NO_MAG && artOf(factory)) attach(factory, mount, root, at);
         // A replacing part with no image here (the held rear grips) is drawn as the factory part; its children too have no place.
         if (part && !key) done.add(part.uid);
     }

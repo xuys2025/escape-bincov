@@ -10,9 +10,9 @@
  * domain.ts must never import it.
  */
 import * as D from '../domain';
-import { ATTACHMENTS, type GunId, type Slot } from './catalog';
+import { ATTACHMENTS, FACTORY_MAGS, GUNS, factoryMagOf, partDef, type GunId, type Slot } from './catalog';
 import { checkInstall, removalCascade, type Part, type Placement, type Rejection } from './compat';
-import { buildOf, gunSize, gunUids, gunWeight, nodesOf, validateGun, type Devices, type GunState, type PartNode } from './instance';
+import { buildOf, detachable, gunSize, gunUids, gunWeight, nodesOf, validateGun, type Devices, type GunState, type PartNode } from './instance';
 import { effectiveWeapon } from './stats';
 
 type Container = 'stash' | 'bag' | 'safe';
@@ -27,23 +27,35 @@ export type GunPlace = 'equipment' | Container;
  * - install `id`: previews a part the player does not have, by catalog id. It sits in the candidate under the uid
  *   `unowned-1`, `unowned-2`, ... in list order (`unowned-1-2` and so on if the profile already holds that uid), which
  *   later edits may name as a parent; such a candidate is never committed (M0 review decision 6);
- * - remove `uid`: a part on the gun; whatever compat's removalCascade lists comes off with it.
- * The result is the net change: a part installed and taken off again in the same list stays where it was.
+ * - remove `uid`: a part on the gun; whatever compat's removalCascade lists comes off with it;
+ * - eject: take the gun's factory magazine out (#28 M4-07, catalog FACTORY_MAGS). It goes into the stash as a loose
+ *   item of its own, uid `mag-<gun uid>` (another free one if that is taken), relief as the gun's body; the gun holds no
+ *   magazine until one goes into its mag slot. Installing a loose factory magazine of this gun type by `uid` (at the mag
+ *   slot, or no `at`) puts it back: the item is used up, no node is made and the gun is as before (GunState `magOut`).
+ * The result is the net change: a part installed and taken off again in the same list stays where it was, and so does
+ * a factory magazine taken out and put back.
  */
 export type GunEdit =
     | { kind: 'install'; uid: string; at?: Placement }
     | { kind: 'install'; id: string; at?: Placement }
-    | { kind: 'remove'; uid: string };
+    | { kind: 'remove'; uid: string }
+    | { kind: 'eject' };
 
 /**
  * Why an edit list cannot be made (an edit names its index) or its candidate cannot be committed. compat's codes and
  * reasons pass through for a part that does not fit; the rest are this module's (the table is in CONTRACTS.md).
  */
 export type GunEditFault = Rejection | 'raid' | 'missing-gun' | 'missing-part' | 'not-part' | 'installed' | 'not-installed'
-    | 'unowned' | 'loose' | 'unchanged' | 'footprint' | 'space';
-/** A part going on: `from` is the container it leaves, null for a part not owned (its uid is then a placeholder). */
+    | 'unowned' | 'loose' | 'unchanged' | 'footprint' | 'space' | 'mag';
+/**
+ * A part going on: `from` is the container it leaves, null for a part not owned (its uid is then a placeholder). A
+ * factory magazine put back (M4-07) is listed at the mag slot, though on the gun it is no node.
+ */
 export interface GunEditInstall { uid: string; id: string; parent: string | null; slot: Slot; from: Container | null }
-/** A part coming off into the stash, as the loose item it was: `with` is the part whose removal took it off, else null. */
+/**
+ * A part coming off into the stash, as the loose item it was: `with` is the part whose removal took it off, else null.
+ * The factory magazine taken out (M4-07) comes last, as the new item it becomes.
+ */
 export interface GunEditRemoval { uid: string; id: string; with: string | null }
 /** A part that stays on the gun in another place (taken off and installed again in the same list). */
 export interface GunEditMove { uid: string; id: string; parent: string | null; slot: Slot }
@@ -79,11 +91,13 @@ export type GunEditPlan =
 const RAID = '行动中不能改装枪械。', MISSING_GUN = '这把枪已不在原位置，请重新选择。', STRUCTURE = '配件结构无效';
 const MISSING_PART = '这个配件已不在原位置，请重新选择。', ELSEWHERE = '这个配件装在别的枪上，请先拆下。', NOT_PART = '这件物品不是配件。';
 const INSTALLED = '这个配件已经装在枪上。', NOT_INSTALLED = '这个配件不在这把枪上。', UNCHANGED = '还没有改动。';
+const FIXED_MAG = '这把枪的弹匣不能拆下。', MAG_OUT = '这把枪的原厂弹匣已经拆下了。', MAG_IN = '这把枪的原厂弹匣还在枪上。';
+const MAG_ON = '先拆下装着的弹匣。', RELIEF_MAG = '救济的原厂弹匣只能装回救济枪。';
 /** More edits than any gun could use (at most 12 parts); a longer list is refused unread. */
 const MAX_EDITS = 64;
 const UNOWNED = 'unowned';
 
-const name = (id: string) => ATTACHMENTS[id].name;
+const name = (id: string) => partDef(id).name;
 /** A name after Chinese text: a space first when it starts with a Latin letter or a digit, as compat writes 需要 AR …. */
 const spaced = (text: string) => /^[A-Za-z0-9]/.test(text) ? ` ${text}` : text;
 const effects = (id: string): readonly (keyof Devices)[] => {
@@ -98,6 +112,7 @@ function wellFormed(edit: unknown): edit is GunEdit {
     if (!edit || typeof edit !== 'object' || Array.isArray(edit)) return false;
     const e = edit as Record<string, unknown>;
     if (e.kind === 'remove') return typeof e.uid === 'string';
+    if (e.kind === 'eject') return true;
     return e.kind === 'install' && placement(e.at) && (typeof e.uid === 'string' ? e.id === undefined : typeof e.id === 'string');
 }
 
@@ -154,8 +169,35 @@ export function planGunEdit(profile: D.SaveDataV1, gunUid: string, edits: readon
 
     let parts: Part[] = original.map(p => ({ ...p }));
     const cause = new Map<string, string | null>(), unowned: string[] = [];
+    // The factory magazine (M4-07): whether it is out, the uid of the one this list took out while that lies loose, and
+    // a loose one put back from a container.
+    let magOut = !!gun.state.magOut, out: string | null = null, back: { uid: string; id: string; from: Container } | null = null;
+    const magOn = () => parts.some(p => p.parent === null && p.slot === 'mag');
+    const freshUid = () => { let uid = `mag-${gunUid}`.slice(0, 100); for (let n = 2; held.has(uid); n++) uid = `mag-${n}-${gunUid}`.slice(0, 100); return uid; };
     for (const [index, edit] of edits.entries()) {
         if (!wellFormed(edit)) return refuse('structure', STRUCTURE, index);
+        if (edit.kind === 'eject') {
+            if (!detachable(gun.id)) return refuse('mag', FIXED_MAG, index);
+            if (magOut) return refuse('mag', MAG_OUT, index);
+            if (magOn()) return refuse('mag', MAG_ON, index);
+            magOut = true;
+            // One put back earlier in this list stays where it was; otherwise the gun's own comes out as a new item.
+            if (back) back = null;
+            else out = freshUid();
+            continue;
+        }
+        if (edit.kind === 'install' && 'uid' in edit && (edit.uid === out || factoryMagOf(loose.get(edit.uid)?.item.id ?? ''))) {
+            const there = loose.get(edit.uid), id = there?.item.id ?? FACTORY_MAGS[gun.id]!;
+            if (factoryMagOf(id) !== gun.id) return refuse('mag', `${partDef(id).name}只能装回${spaced(GUNS[factoryMagOf(id)!].stats.name)}。`, index);
+            if (edit.at && (edit.at.parent !== null || edit.at.slot !== 'mag')) return refuse('place', '不能装在这个位置', index);
+            if (!magOut) return refuse('mag', MAG_IN, index);
+            if (magOn()) return refuse('mag', MAG_ON, index);
+            if (there?.item.relief && !gun.relief) return refuse('mag', RELIEF_MAG, index);
+            magOut = false;
+            if (edit.uid === out) out = null;
+            else back = { uid: edit.uid, id, from: there!.from };
+            continue;
+        }
         if (edit.kind === 'remove') {
             if (!parts.some(p => p.uid === edit.uid)) return refuse('not-installed', NOT_INSTALLED, index);
             const off = new Set([edit.uid, ...removalCascade({ gun: gun.id, parts }, edit.uid)]);
@@ -192,24 +234,27 @@ export function planGunEdit(profile: D.SaveDataV1, gunUid: string, edits: readon
     const tree = (parent: string | null): PartNode[] => ordered.filter(p => p.parent === parent)
         .map(p => ({ uid: p.uid, id: p.id, slot: p.slot, relief: relief.get(p.uid)!, children: tree(p.uid) }));
     const stays = (effect: keyof Devices) => original.some(p => kept.has(p.uid) && effects(p.id).includes(effect));
-    const after: GunState = { parts: tree(null), devices: { laser: gun.state.devices.laser && stays('laser'), light: gun.state.devices.light && stays('light') } };
+    const after: GunState = { parts: tree(null), devices: { laser: gun.state.devices.laser && stays('laser'), light: gun.state.devices.light && stays('light') },
+        ...magOut ? { magOut: true } as const : {} };
     const legal = validateGun(gun.id, gunUid, after);
     if (!legal.ok) return refuse(legal.code === 'uid' || legal.code === 'devices' ? 'structure' : legal.code, legal.reason);
 
     const removals = original.filter(p => !kept.has(p.uid)).map(p => ({ uid: p.uid, id: p.id, with: cause.get(p.uid) ?? null }));
     const installs = ordered.filter(p => !onGun.has(p.uid)).map(p => ({ uid: p.uid, id: p.id, parent: p.parent, slot: p.slot, from: loose.get(p.uid)?.from ?? null }));
+    if (out) { removals.push({ uid: out, id: FACTORY_MAGS[gun.id]!, with: null }); relief.set(out, gun.relief); }
+    if (back) installs.push({ uid: back.uid, id: back.id, parent: null, slot: 'mag', from: back.from });
     const moves = ordered.filter(p => { const i = onGun.get(p.uid); return i !== undefined && (original[i].parent !== p.parent || original[i].slot !== p.slot); })
         .map(p => ({ uid: p.uid, id: p.id, parent: p.parent, slot: p.slot }));
-    const capacity = (state: GunState) => effectiveWeapon(buildOf({ id: gun.id, parts: state.parts })).magazine;
+    const capacity = (state: GunState) => effectiveWeapon(buildOf({ id: gun.id, ...state })).magazine;
     const hand = profile.equipment, equipped = gun.where === 'equipment', room = capacity(after);
     const unload = equipped && hand.ammo > room ? hand.ammo - room : 0, normal = Math.min(unload, hand.ammo - hand.ammoRelief);
     const ammo = equipped ? D.equippedWeapon(hand).ammo! : '';
     const preview: GunEditPreview = {
         gun: { uid: gunUid, id: gun.id, relief: gun.relief, where: gun.where }, before: structuredClone(gun.state), after,
         installs, removals, moves,
-        weight: { before: gunWeight({ id: gun.id, parts: gun.state.parts }), after: gunWeight({ id: gun.id, parts: after.parts }) },
+        weight: { before: gunWeight({ id: gun.id, ...gun.state }), after: gunWeight({ id: gun.id, ...after }) },
         capacity: { before: capacity(gun.state), after: room },
-        size: { before: gunSize({ id: gun.id, parts: gun.state.parts }, gun.rotated), after: gunSize({ id: gun.id, parts: after.parts }, gun.rotated) },
+        size: { before: gunSize({ id: gun.id, ...gun.state }, gun.rotated), after: gunSize({ id: gun.id, ...after }, gun.rotated) },
         unloaded: unload ? { ammo, normal, relief: unload - normal } : null,
         relocated: null,
         refusal: null,
@@ -240,7 +285,7 @@ export function planGunEdit(profile: D.SaveDataV1, gunUid: string, edits: readon
             if (!to) return blocked('footprint', where === 'safe' ? '改装后枪身变大，安全箱里放不下，请先腾出空间。' : '改装后枪身变大，仓库和背包里都放不下，请先腾出空间。');
             const placed = next[to].items.find(i => i.uid === gunUid)!;
             preview.relocated = { where: to, x: placed.x, y: placed.y, rotated: !!placed.rotated };
-            preview.size.after = gunSize({ id: gun.id, parts: after.parts }, !!placed.rotated);
+            preview.size.after = gunSize({ id: gun.id, ...after }, !!placed.rotated);
         }
     }
     for (const p of removals) {

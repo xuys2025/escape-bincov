@@ -1,0 +1,225 @@
+{
+  "schema": 1,
+  "date": "2026-10-30",
+  "acceptedMain": "8a4b46e4942402ed83487aa8fa27ee6169a9fc65",
+  "taskStart": "0e9f8b3439166716ae3c8335a4f6fd0cb362b998",
+  "formalManifestSha256": "f2f0794369b508a53dbd0d6731ec98d3384a12fb8430337b9daecd379f114885",
+  "records": [
+    {
+      "gun": "svdb",
+      "code": "h",
+      "baseline": "gs-svdb-receiver-h-v2",
+      "crop": [
+        14,
+        5,
+        7,
+        5
+      ],
+      "baselineFile": "assets/gunsmith/v1/gs-svdb-receiver-h-v2.png",
+      "baselineSha256": "b5500c926aa372bbe29e3ba2b477d84aa7c0cf83de27bb4e74f0f10d6250ab07",
+      "receiver": "gs-svdb-receiver-h-v3",
+      "magazine": "gs-svdb-mag-factory-h-v1",
+      "magMount": [
+        14,
+        5
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "layerOrder": [
+        "mag",
+        "receiver"
+      ],
+      "dimensions": [
+        37,
+        10
+      ],
+      "differingPixels": 0,
+      "originalRGBA": "d7cc89165cab8e250ef5c5d03dbb21d09d1e8d0f9b5af546e4218c5467bc8018",
+      "recombinedRGBA": "d7cc89165cab8e250ef5c5d03dbb21d09d1e8d0f9b5af546e4218c5467bc8018",
+      "receiverColors": 6,
+      "magazineColors": 2
+    },
+    {
+      "gun": "svdb",
+      "code": "i",
+      "baseline": "gs-svdb-receiver-i-v3",
+      "crop": [
+        39,
+        10,
+        11,
+        8
+      ],
+      "baselineFile": "assets/gunsmith/v1/gs-svdb-receiver-i-v3.png",
+      "baselineSha256": "433428b34db1a00ee87838a6fa0ee88a8733075c8823c2178ac807455e43f9fb",
+      "receiver": "gs-svdb-receiver-i-v4",
+      "magazine": "gs-svdb-mag-factory-i-v1",
+      "magMount": [
+        39,
+        10
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "layerOrder": [
+        "mag",
+        "receiver"
+      ],
+      "dimensions": [
+        92,
+        18
+      ],
+      "differingPixels": 0,
+      "originalRGBA": "1ae7300c7a52688c4dbbe497de0364df5c3dca1b4df4405f273bbad4a01e2183",
+      "recombinedRGBA": "1ae7300c7a52688c4dbbe497de0364df5c3dca1b4df4405f273bbad4a01e2183",
+      "receiverColors": 7,
+      "magazineColors": 4
+    },
+    {
+      "gun": "svdb",
+      "code": "w",
+      "baseline": "gs-svdb-receiver-w-v3",
+      "crop": [
+        78,
+        21,
+        22,
+        15
+      ],
+      "baselineFile": "assets/gunsmith/v1/gs-svdb-receiver-w-v3.png",
+      "baselineSha256": "3bce50a43e13f5b3b2a505d1f1711f62b4dbb63ec661a9d73cb4cd741ce1c9dc",
+      "receiver": "gs-svdb-receiver-w-v4",
+      "magazine": "gs-svdb-mag-factory-w-v1",
+      "magMount": [
+        78,
+        21
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "layerOrder": [
+        "mag",
+        "receiver"
+      ],
+      "dimensions": [
+        184,
+        36
+      ],
+      "differingPixels": 0,
+      "originalRGBA": "d6e49a6ee79afddef861be4b497aad0ef60ea07ac7e061b2bc01867799be59ec",
+      "recombinedRGBA": "d6e49a6ee79afddef861be4b497aad0ef60ea07ac7e061b2bc01867799be59ec",
+      "receiverColors": 8,
+      "magazineColors": 6
+    },
+    {
+      "gun": "vb9",
+      "code": "h",
+      "baseline": "gs-vb9-receiver-h-v1",
+      "crop": [
+        13,
+        5,
+        5,
+        5
+      ],
+      "baselineFile": "assets/gunsmith/v1/gs-vb9-receiver-h-v1.png",
+      "baselineSha256": "e2c626efddb4fc0243e9a42106ca4891d6eed2756705e24bba010f40f1da01ea",
+      "receiver": "gs-vb9-receiver-h-v2",
+      "magazine": "gs-vb9-mag-factory-h-v1",
+      "magMount": [
+        13,
+        5
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "layerOrder": [
+        "mag",
+        "receiver"
+      ],
+      "dimensions": [
+        24,
+        10
+      ],
+      "differingPixels": 0,
+      "originalRGBA": "15a91421e5c666921404c2b7d3320bb29acb81f6621dcbdc4216c8730c0033d3",
+      "recombinedRGBA": "15a91421e5c666921404c2b7d3320bb29acb81f6621dcbdc4216c8730c0033d3",
+      "receiverColors": 5,
+      "magazineColors": 3
+    },
+    {
+      "gun": "vb9",
+      "code": "i",
+      "baseline": "gs-vb9-receiver-i-v2",
+      "crop": [
+        31,
+        9,
+        9,
+        9
+      ],
+      "baselineFile": "assets/gunsmith/v1/gs-vb9-receiver-i-v2.png",
+      "baselineSha256": "30dbf68eef2e71d57fd84429e48247395686c5b451c82e88e526984fd5df5a79",
+      "receiver": "gs-vb9-receiver-i-v3",
+      "magazine": "gs-vb9-mag-factory-i-v1",
+      "magMount": [
+        31,
+        9
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "layerOrder": [
+        "mag",
+        "receiver"
+      ],
+      "dimensions": [
+        55,
+        18
+      ],
+      "differingPixels": 0,
+      "originalRGBA": "07978e949b7a9f1caf5d8e1bf44b64d5a656cdaa543ff9f2b3e6b4f84e8cf081",
+      "recombinedRGBA": "07978e949b7a9f1caf5d8e1bf44b64d5a656cdaa543ff9f2b3e6b4f84e8cf081",
+      "receiverColors": 5,
+      "magazineColors": 4
+    },
+    {
+      "gun": "vb9",
+      "code": "w",
+      "baseline": "gs-vb9-receiver-w-v2",
+      "crop": [
+        62,
+        19,
+        18,
+        17
+      ],
+      "baselineFile": "assets/gunsmith/v1/gs-vb9-receiver-w-v2.png",
+      "baselineSha256": "a690196ae27e9bab2a334e9473cd6384da1ddaa07fc02c73033bf5e45f7ca31a",
+      "receiver": "gs-vb9-receiver-w-v3",
+      "magazine": "gs-vb9-mag-factory-w-v1",
+      "magMount": [
+        62,
+        19
+      ],
+      "anchor": [
+        0,
+        0
+      ],
+      "layerOrder": [
+        "mag",
+        "receiver"
+      ],
+      "dimensions": [
+        110,
+        36
+      ],
+      "differingPixels": 0,
+      "originalRGBA": "ebbcaaebd6b7f91d73fefc34f0e40900604f43073467495e5ac0d70ff5bd4945",
+      "recombinedRGBA": "ebbcaaebd6b7f91d73fefc34f0e40900604f43073467495e5ac0d70ff5bd4945",
+      "receiverColors": 7,
+      "magazineColors": 5
+    }
+  ]
+}

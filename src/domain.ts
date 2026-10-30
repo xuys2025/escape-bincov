@@ -1,8 +1,8 @@
 /** Pure game rules. No renderer, browser globals, or wall-clock timers are required. */
-import { ATTACHMENTS, BRAND_NAMES, GUNS, partTier, type GunId, type PartTier } from './gunsmith/catalog';
+import { ATTACHMENTS, BRAND_NAMES, FACTORY_MAG_PARTS, GUNS, factoryMagOf, partDef, partTier, type AttachmentDef, type GunId, type PartTier } from './gunsmith/catalog';
 import { checkInstall } from './gunsmith/compat';
 import { effectiveWeapon } from './gunsmith/stats';
-import { buildOf, factoryState, gunSale, gunSize, gunUids, gunWeight, v8Footprints, validateGun, type GunInstance, type GunState } from './gunsmith/instance';
+import { buildOf, factoryState, gunSale, gunSize, gunUids, gunWeight, magless, v8Footprints, validateGun, type GunInstance, type GunState } from './gunsmith/instance';
 import { migrateProfile, type ProfileV2 } from './gunsmith/migrate';
 import { validPresets, type GunPreset } from './gunsmith/presets';
 
@@ -88,9 +88,9 @@ const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, descrip
   B08: ['精确枪管', '提高精瞄稳定与有效距离。重量增加、举枪变慢。'],
   H01: ['短护木', '提供 1 个下导轨、1 个侧位，轻便。控制收益小。'],
   H05: ['卡宾护木', '提供 1 个下导轨、1 个侧位。增加重量和成本。'],
-  S01: ['轻托', '轻量、快速举枪。连续控制弱于稳定托。'],
+  S01: ['轻托', '轻量、快速举枪。后坐略大，连续控制弱于稳定托。'],
   S02: ['稳定托', '降低连续射击散布增长。更重、举枪慢。'],
-  P01: ['轻握把', '快速举枪、轻。控制收益小。'],
+  P01: ['轻握把', '快速举枪、轻。控制收益小，移动后恢复更慢。'],
   P02: ['稳握把', '连续点射恢复好。重量与成本高。'],
   F01: ['短前握', '适度控制、代价小。少量增重。'],
   F03: ['斜握把', '转向后和移动后恢复快。持续控制较弱。'],
@@ -111,7 +111,7 @@ const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, descrip
   B07: ['紧凑管', '近距操控更好，枪身更轻。有效距离和持续控制下降。'],
   B09: ['精确管', '旧卡宾的精瞄更稳。增重，转向后恢复较慢。'],
   H02: ['长护木', '提供 1 个下导轨、2 个侧位，连续射击更稳。更重、举枪慢。'],
-  H03: ['木护木', '轻便、便宜，举枪快。不提供下导轨或侧位。'],
+  H03: ['木护木', '轻便、便宜，举枪快。不提供下导轨或侧位，移动后恢复更慢。'],
   H04: ['导轨护木', '提供 1 个下导轨、2 个侧位。增重。'],
   H06: ['紧凑护木', '轻便，提供 1 个侧位。没有前握把接口。'],
   H07: ['扩展护木', '提供 1 个下导轨、2 个侧位。比紧凑护木重。'],
@@ -119,11 +119,11 @@ const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, descrip
   H09: ['稳固护木', '提供 1 个下导轨、1 个侧位，连续射击更稳。增重，举枪略慢。'],
   S03: ['紧凑托', '移动和转向后恢复快，减轻重量。精瞄稳定性下降。'],
   S04: ['实心托', '点射和连续射击更稳。重量增加。'],
-  S05: ['伸缩托', '举枪快、轻。稳定收益小。'],
+  S05: ['伸缩托', '举枪快、轻。稳定收益小，后坐略大。'],
   S07: ['缓冲托', '射击后恢复更快。增重。'],
   S08: ['控制托', '连续射击更容易收束。增重，举枪慢。'],
   P03: ['防滑握', '射击后恢复较快。略重。'],
-  P04: ['木握把', '轻、便宜。稳定收益小。'],
+  P04: ['木握把', '轻、便宜。稳定收益小，移动后恢复更慢。'],
   P06: ['控制握', '近距连续射击更稳。增重，举枪略慢。'],
   P07: ['握片', '手枪连续点射恢复更快。增加少量重量。'],
   G03: ['快换匣', '容量 25 发，换弹快。持续射击时间缩短。'],
@@ -162,11 +162,11 @@ const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, descrip
   B04: ['稳枪管', '中距点射更稳。重量和举枪时间增加。'],
   B10: ['轻枪管', '减轻重量，举枪更快。极远距稳定性下降。'],
   H10: ['支援护木', '提供 1 个下导轨、2 个侧位，持续射击更稳。明显增重。'],
-  S06: ['轻型托', '减轻重量，举枪更快。连续控制收益小。'],
+  S06: ['轻型托', '减轻重量，举枪更快。连续控制收益小，后坐略大。'],
   S09: ['支撑托', '站定精瞄更稳。移动后恢复更慢。'],
-  S10: ['轻便托', '减轻重量，较快进入精瞄。稳定收益小。'],
+  S10: ['轻便托', '减轻重量，较快进入精瞄。稳定收益小，移动后恢复更慢。'],
   P05: ['操控握', '移动结束后更快稳定。价格较高。'],
-  P08: ['轻握片', '减轻重量，举枪更快。不增加弹量或威力。'],
+  P08: ['轻握片', '减轻重量，举枪更快。不增加弹量或威力，移动后恢复更慢。'],
   F02: ['长前握', '连续射击控制更强。举枪慢。'],
   F05: ['紧前握', '控制和重量折中。价格高于短前握。'],
   F06: ['腰射握', '腰射散布更小。精瞄收益小。'],
@@ -181,11 +181,48 @@ const ATTACHMENT_ITEMS: Readonly<Record<string, readonly [short: string, descrip
   T07: ['工作灯', '轻、便宜的近距物资提示。提示距离和宽度较小；照亮范围也会暴露自己。'],
   T09: ['组合器', '激光加中等照明。增重；开启时同样会暴露自己。'],
   A03: ['微基座', '开放微型瞄具位，能装点瞄。自身不提供射击增益，增重。'],
+  // 老栓精工 (#28 M4-09): made to order from one of the parts PREMIUM_BASES names; never sold or found.
+  J01: ['精全息', '举枪快、精瞄准，移动后和射击后都恢复更快。比开放红点略重。'],
+  J02: ['精变倍镜', '两档观察距离，精瞄最稳，举枪不慢于同类远距镜。较重。'],
+  J03: ['精点瞄', '微型接口上举枪快、精瞄准。比普通点瞄略重。'],
+  J04: ['精前握', '连续射击控制强，举枪还更快。比普通前握把略重。'],
+  J05: ['精组合', '近距激光加较远的照明，开启时比普通组合器隐蔽。较重。'],
+  J06: ['九系精消', '大幅降低枪声，同时压住枪口跳动。枪身变长、增重。'],
+  J07: ['步枪精消', '大幅降低枪声，同时压住后坐。枪身变长、较重。'],
+  J08: ['精确精消', '远距射击的枪声大幅降低，射击后恢复更快。明显增重，枪身变长。'],
+  J09: ['精收束', '霰弹弹丸更集中，后坐略小。增重。'],
+  J10: ['AR精托', '举枪快，连续射击也稳。比轻托重。'],
+  J11: ['精稳握', '举枪快，射击后恢复好。略重。'],
+  J12: ['AR精护', '提供 1 个下导轨、2 个侧位，连续射击更稳，举枪不变慢。较重。'],
+  J13: ['AK精托', '移动后恢复快，点射和连续射击都稳。重量增加。'],
+  J14: ['精防滑', '射击后恢复快，举枪略快。略重。'],
+  J15: ['AK精护', '提供 1 个下导轨、2 个侧位，举枪更快。增重。'],
+  J16: ['MP精托', '举枪快，连续射击更稳。略重。'],
+  J17: ['精UMP', '举枪快，连续射击更稳。略重。'],
+  J18: ['精握片', '手枪连续点射恢复更快，举枪略快。增加少量重量。'],
+  J19: ['精霰托', '泵动和半自动霰弹枪的射击恢复与连续控制都更好。重量增加。'],
+  J20: ['精确托', '精瞄准、举枪快。重量增加。'],
 };
 const attachmentItem = (id: string, [short, description]: readonly [string, string]): ItemDef => {
-  const a = ATTACHMENTS[id];
-  return item(id, a.name, short, a.w, a.h, a.weight, 1, a.buy, a.sell, 'attachment', description, 0x8a9692);
+  const a = partDef(id);
+  return item(id, a.name, short, a.w, a.h, a.weight, 1, shopPrice(a), a.sell, 'attachment', description, 0x8a9692);
 };
+/** The late shelf's markup on a rare part's catalog price (#28 M4-03, maintainer 2026-10-30). */
+export const RARE_MARKUP = 2.5;
+/**
+ * What the arms counter asks for a part: its catalog price; a rare part, sold only on the late shelf (lateParts), RARE_MARKUP
+ * times that, to the nearest 10 (#28 M4-03, maintainer 2026-10-30). Selling pays the catalog's sell price either way.
+ */
+const shopPrice = (a: Pick<AttachmentDef, 'buy'>) => partTier(a) === 'rare' ? Math.round(a.buy * RARE_MARKUP / 10) * 10 : a.buy;
+/**
+ * The factory magazines taken out at the workbench (#28 M4-07, catalog FACTORY_MAGS): attachment items like the rest,
+ * but outside ATTACHMENT_ITEMS, so no shop shelf or find pool holds them (M4-01 decides that); one comes only off a gun.
+ */
+const FACTORY_MAG_ITEMS: Readonly<Record<string, readonly [string, string]>> = Object.fromEntries(
+  Object.values(FACTORY_MAG_PARTS).map(({ id, name: full, guns }) => {
+    const gun = guns![0], name = full.replace(' 原厂弹匣', '');
+    return [id, ['原厂匣', `${name} 出厂时装的弹匣，容量 ${GUNS[gun].stats.magazine} 发。拆下后枪少占一行，没装弹匣的枪不能开火；只能装回 ${name}。`]];
+  }));
 
 export const ITEMS: Record<string, ItemDef> = {
   knife: item('knife', '水手匕首', '匕首', 1, 2, 0.35, 1, 0, 0, 'weapon', '随身携带的旧匕首。撤离失败也不会丢失。', 0xb4c3bf),
@@ -244,6 +281,9 @@ export const ITEMS: Record<string, ItemDef> = {
   mb700: gunItem('mb700', 'M700', '使用精确步枪弹，内置弹仓 5 发，栓动。单发伤害和精度最高，每发之间要拉栓；枪管、枪托能换，能装顶部瞄具（含远距镜）、枪口件和支撑脚架。', 0x7a6a56),
   rpkb: gunItem('rpkb', 'RPK', '使用卡宾枪弹，弹匣容量 40 发，全自动。能持续压制，很重、换弹慢；护木、枪托、握把和弹匣都能更换，和 AK 共用侧置基座和枪口件，能装支撑脚架。', 0x8f7352),
   ...Object.fromEntries(Object.entries(ATTACHMENT_ITEMS).map(([id, text]) => [id, attachmentItem(id, text)])),
+  ...Object.fromEntries(Object.entries(FACTORY_MAG_ITEMS).map(([id, text]) => [id, attachmentItem(id, text)])),
+  // 老栓精工's material (#28 M4-09): only on leaders' bodies and at flooded spots; never on a shelf.
+  premiumBlank: item('premiumBlank', '精工件坯', '件坯', 1, 1, 0.6, 5, 0, 280, 'part', '老栓做精工配件用的毛坯，每件精工配件要一份。只有头目、队长、班长身上和淹水的地方才找得到。', 0xb8a06a),
 };
 
 /** Distances are world pixels; cooldown/reload are seconds; spread is radians. */
@@ -295,23 +335,76 @@ const partsOf = (tier: PartTier): string[] => Object.keys(ATTACHMENT_ITEMS).filt
  */
 const SHELF_COMMON = ['O01', 'G01'];
 /**
- * Wave-one guns the arms counter stocks as well (maintainer 2026-10-28, #28 M3): the P226 and the M870. The other
- * gunsmith guns are found only; what the shop sells is to be studied (M4-01).
+ * Gunsmith guns the arms counter always stocks besides the G17: the P226 and the M870 (maintainer 2026-10-28, #28 M3),
+ * the MP5 and the M1911 (maintainer 2026-10-29, #28 M4-01). The other common guns come with the radio quests
+ * (GUNS_BY_QUEST); the rare ones are never stocked, only found.
  */
-const SHELF_GUNS = ['pb226', 'mb870'];
+const SHELF_GUNS = ['pb226', 'mb870', 'mpb5', 'mb1911'];
 /** Wave two's rounds (#28 M3-05): stocked steadily like the old three, so a found gun of a new group can be fed. */
 const NEW_AMMO = ['ammo45', 'ammoPDW', 'ammoHeavy'];
 /**
- * Fixed stock, no rotation (that is #28 M4-01). The arms counter also stocks the G17, every basic-tier attachment that
- * is an item (#28 M2-13, PLAN section 10: basic parts are stocked steadily) and SHELF_COMMON, after the old goods so their places
- * in the catalog do not move. The catalog is one 6x5 page: every stocked pack must fit it, which
- * tests/gunsmith-acquire.test.ts checks (catalog pages are M2-08).
+ * The stock each counter holds whatever the progress. The arms counter also stocks the G17, SHELF_GUNS, every
+ * basic-tier attachment that is an item (#28 M2-13, PLAN section 10: basic parts are stocked steadily) and
+ * SHELF_COMMON, after the old goods so their places in the catalog do not move; armsStock adds what the radio quests
+ * and the rotation add (#28 M4-01). The catalog has pages (M2-08).
  */
 export const MERCHANTS: Record<'arms' | 'med', { name: string; subtitle: string; stock: string[] }> = {
   arms: { name: '老栓', subtitle: '武器 · 零件', stock: ['pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'scrap', 'wire', 'fuse', 'battery',
     'gb17', ...SHELF_GUNS, ...NEW_AMMO, ...partsOf('basic'), ...SHELF_COMMON] },
   med: { name: '许医生', subtitle: '医疗用品 · 食品', stock: ['bandage', 'medkit', 'antidote', 'water', 'food'] },
 };
+/**
+ * The common guns each radio quest puts on the arms counter once done (#28 M4-01, maintainer 2026-10-29, #139): only the
+ * quests open guns, and the rare guns stay finds, so the ledger, whose guns would all be rare, opens none; it opens the
+ * late shelf of rare parts instead (lateParts).
+ */
+export const GUNS_BY_QUEST: Readonly<Record<string, readonly GunId[]>> = { repair: ['umpb45', 'akb74', 'mb4a1', 'akb103'], sample: ['augb', 'rpkb'], ledger: [] };
+/** How many common parts the arms counter's rotating shelf holds (#28 M4-01; a proposal M4-03 may tune). */
+export const ROTATION_PARTS = 6;
+/**
+ * The rotating shelf of a profile that has deployed `runs` times (#28 M4-01, PLAN section 10): ROTATION_PARTS of the
+ * common parts that are found, drawn by a stream seeded from `runs` alone and kept in item order. A reload never changes
+ * them; each deployment brings the next set. They stay finds as well.
+ */
+export function rotationParts(runs: number): string[] {
+  const pool = [...FIND_PARTS.common], random = seededRandom(0x4d340001 + integer(runs) * 7919), picked = new Set<string>();
+  while (picked.size < ROTATION_PARTS && pool.length) picked.add(pool.splice(Math.floor(random() * pool.length), 1)[0]);
+  return FIND_PARTS.common.filter(id => picked.has(id));
+}
+/**
+ * Everything the arms counter stocks for this profile (#28 M4-01): MERCHANTS.arms.stock, the guns of each radio quest
+ * done right after SHELF_GUNS, and the rotating parts last. Worked out from the quests and the deployments each time,
+ * so the profile holds no field for it.
+ */
+export function armsStock(save: Pick<SaveDataV1, 'quests' | 'stats'>): string[] {
+  const base = MERCHANTS.arms.stock, at = base.indexOf(SHELF_GUNS.at(-1)!) + 1;
+  const guns = Object.entries(GUNS_BY_QUEST).flatMap(([quest, ids]) => save.quests[quest] === true ? ids : []);
+  return [...base.slice(0, at), ...guns, ...base.slice(at), ...rotationParts(save.stats.runs), ...save.quests[LATE_QUEST] === true ? lateParts(save.stats.runs) : []];
+}
+/** How many rare parts the late shelf holds, and the quest that opens it (#28 M4-03, maintainer 2026-10-30). */
+export const LATE_PARTS = 2;
+export const LATE_QUEST = 'ledger';
+/**
+ * The late shelf of a profile that has deployed `runs` times, once the ledger quest is done (#28 M4-03): LATE_PARTS of
+ * the rare parts, drawn as rotationParts draws the common ones but from a stream of its own, in item order. Somewhere for
+ * late cash to go, and a way to a full kit that a raid's rare finds alone hardly give; the rare parts stay finds too.
+ */
+export function lateParts(runs: number): string[] {
+  const pool = [...FIND_PARTS.rare], random = seededRandom(0x4d340003 + integer(runs) * 7919), picked = new Set<string>();
+  while (picked.size < LATE_PARTS && pool.length) picked.add(pool.splice(Math.floor(random() * pool.length), 1)[0]);
+  return FIND_PARTS.rare.filter(id => picked.has(id));
+}
+/**
+ * The quest card's line on what it puts on the arms counter (#28 M4-01, M4-03), before and after: its guns, or for the
+ * ledger the late shelf; null for a quest that opens nothing.
+ */
+export function questShelfText(id: string, done: boolean): string | null {
+  const guns = GUNS_BY_QUEST[id] ?? [], what = guns.length ? guns.map(gun => ITEMS[gun].short).join('、') : id === LATE_QUEST ? `稀有配件（每次出击换 ${LATE_PARTS} 件）` : '';
+  return what ? `${done ? '修理铺已上架' : '完成后修理铺上架'}：${what}` : null;
+}
+/** What a counter stocks for this profile: the arms counter by progress (armsStock), the doctor's fixed stock. */
+export const merchantGoods = (merchant: 'arms' | 'med', save: Pick<SaveDataV1, 'quests' | 'stats'>): string[] =>
+  merchant === 'arms' ? armsStock(save) : [...MERCHANTS[merchant].stock];
 export const QUESTS: Record<string, { name: string; description: string; needs: Record<string, number>; reward: number; radio: string }> = {
   repair: { name: '让灯亮起来', description: '找齐维修物资，恢复水产站供电。完成后可扩建仓库。', needs: { scrap: 3, wire: 2, fuse: 1 }, reward: 420, radio: '电台通了，灯也稳了。仓库可以扩建了。' },
   sample: { name: '瓶中的潮声', description: '从潮汐观测站带回一份赤潮封存样本。', needs: { sample: 1 }, reward: 650, radio: '样本收到了。瓶里的水面比外海提前三十秒上涨。先别开封。' },
@@ -337,6 +430,13 @@ export const STASH_OVERFLOW_ROWS = 18;
 export const stashOverflowRows = (guns: boolean): number => guns && !v8Footprints() ? STASH_OVERFLOW_ROWS : 0;
 /** Why a raid cannot start while the overflow holds something. */
 export const OVERFLOW_BLOCKS_DEPLOY = '仓库溢出区还有物品，先把它们移进仓库、背包或卖掉，再出击。';
+/** The equipped gun holds no magazine (#28 M4-07): it cannot fire, so the player cannot deploy with it. */
+export const NO_MAG_BLOCKS_DEPLOY = '主武器没装弹匣，不能开火。装上弹匣或换一把枪，再出击。';
+/** Why the player cannot deploy from the base now, or null: the stash overflow holds something, or the gun in hand has no magazine. */
+export function deployBlocker(save: Pick<SaveDataV1, 'stash' | 'equipment'>): string | null {
+  if (stashOverflow(save.stash).length) return OVERFLOW_BLOCKS_DEPLOY;
+  return equippedMagless(save.equipment) ? NO_MAG_BLOCKS_DEPLOY : null;
+}
 /** The stash items in its overflow, in order. */
 export const stashOverflow = (stash: Inventory): Item[] => stash.items.filter(item => item.y >= stash.h);
 /** Rows the stash shows: its own and the overflow's down to its lowest item. */
@@ -373,6 +473,9 @@ export const isAttachment = (id: unknown): id is string => typeof id === 'string
  */
 export function attachmentFacts(id: string): { brand: string; guns: string[] } | null {
   if (!isAttachment(id)) return null;
+  // A factory magazine (#28 M4-07) goes back on its own gun only, and is no catalog part compat knows.
+  const own = factoryMagOf(id);
+  if (own) return { brand: BRAND_NAMES.factory, guns: [WEAPONS[own].name] };
   const guns = Object.keys(GUNS).filter(gun => {
     if (!isGun(gun)) return false;
     const fit = checkInstall({ gun, parts: [] }, id);
@@ -401,6 +504,11 @@ export function equippedGun(slot: GunSlot): GunInstance | null {
 export function equippedWeapon(slot: GunSlot): WeaponDef {
   const gun = equippedGun(slot);
   return gun ? effectiveWeapon(buildOf(gun)) : WEAPONS[slot.weapon || 'knife'];
+}
+/** The equipped gun holds no magazine (gunsmith magless, #28 M4-07): its capacity is 0 and it cannot fire. */
+export function equippedMagless(slot: GunSlot): boolean {
+  const gun = equippedGun(slot);
+  return !!gun && magless(gun.magOut, gun.parts);
 }
 /** Kg of the equipped gun, every installed part counted once (gunsmith gunWeight); 0 without a gun. */
 export function equippedWeight(slot: GunSlot): number {
@@ -432,7 +540,7 @@ export const itemUids = (item: Pick<Item, 'uid' | 'gun'>): string[] => item.gun 
  * whole. Such a sale is refused with the reason, never made by stripping or destroying the relief parts.
  */
 export function itemSale(item: Pick<Item, 'id' | 'qty' | 'relief' | 'gun'>): { value: number; restricted: boolean } {
-  if (item.gun && isGun(item.id)) return gunSale({ id: item.id, relief: !!item.relief, parts: item.gun.parts });
+  if (item.gun && isGun(item.id)) return gunSale({ id: item.id, relief: !!item.relief, parts: item.gun.parts, magOut: item.gun.magOut });
   return { value: item.relief ? 0 : ITEMS[item.id].sell * item.qty, restricted: !!item.relief };
 }
 /** Every uid the equipped slot holds: the gun's and its parts', none without a gun. */
@@ -452,7 +560,7 @@ export function createInventory(w: number, h: number): Inventory {
 /** Cells an item takes. A gun with parts may be larger than its type (gunSize); a factory gun is exactly its ITEMS size. */
 export function itemSize(item: Pick<Item, 'id' | 'rotated' | 'gun'>) {
   // Every gun through gunSize, a factory one with no state too, so its footprint rules (M3-12) hold for all of them.
-  if (isGun(item.id)) return gunSize({ id: item.id, parts: item.gun?.parts ?? [] }, !!item.rotated);
+  if (isGun(item.id)) return gunSize({ id: item.id, parts: item.gun?.parts ?? [], magOut: item.gun?.magOut }, !!item.rotated);
   const d = ITEMS[item.id];
   return item.rotated ? { w: d.h, h: d.w } : { w: d.w, h: d.h };
 }
@@ -574,7 +682,7 @@ export const count = (inv: Inventory, id: string): number => inv.items.reduce((s
  * exactly its ITEMS weight. Anything else is its ITEMS weight times the quantity.
  */
 export const itemWeight = (item: Pick<Item, 'id' | 'qty' | 'gun'>): number =>
-  item.gun && isGun(item.id) ? gunWeight({ id: item.id, parts: item.gun.parts }) * item.qty : ITEMS[item.id].weight * item.qty;
+  item.gun && isGun(item.id) ? gunWeight({ id: item.id, parts: item.gun.parts, magOut: item.gun.magOut }) * item.qty : ITEMS[item.id].weight * item.qty;
 export const weight = (inv: Inventory): number => Math.round(inv.items.reduce((sum, i) => sum + itemWeight(i), 0) * 1000) / 1000;
 export function removeItem(inv: Inventory, id: string, qty: number): boolean {
   if (!Number.isInteger(qty) || qty < 0 || count(inv, id) < qty) return false;
@@ -987,8 +1095,10 @@ export function rollLoot(seed: number, amount: number, table: LootTable = LOOT_T
  * tuned in M4-02; #28 M3 lowered `rare` from 1/3 so that each of the five rare parts stays rarer than each of the 39
  * common ones. #28 M3-05: a gun record's find that is not a gun is, with chance `ammo`, one pack of a wave-two
  * ammunition group (findQuantity), so a found gun of a new group can be fed in the raid; the old groups' supply stays.
+ * #28 M4-02 (maintainer 2026-10-29, #140): the armed enemies hold catalog guns and drop them, so a map's gun records
+ * turn into a gun a third as often (`gun` 1/12, was 1/4); good guns come mainly off enemies.
  */
-export const GUNSMITH_FINDS = { share: 1 / 6, gun: 1 / 4, rareGun: 1 / 8, rare: 1 / 6, ammo: 1 / 3 } as const;
+export const GUNSMITH_FINDS = { share: 1 / 6, gun: 1 / 12, rareGun: 1 / 8, rare: 1 / 6, ammo: 1 / 3 } as const;
 const FIND_PARTS = { common: partsOf('common').filter(id => !SHELF_COMMON.includes(id)), rare: partsOf('rare') };
 /** The guns that are found, by the catalog's tier (#28 M3): every gun that is an item but those the arms counter stocks. */
 const FIND_GUNS = (() => {

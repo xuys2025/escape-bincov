@@ -306,8 +306,9 @@ export class SaveSession {
     beginRun(seed: number, buildings: boolean | 'mall' = false, options: { mallLayout?: 1 | 2 | 3 | 4; legacyEnemies?: boolean } = {}): boolean {
         const s = this.session;
         if (this.requiresReload || s.state !== 'hideout' || s.conflict || s.pendingSettlement || s.save.activeRun) return false;
-        // Nothing may be left in the stash overflow (#28 M3-12); callers say why (D.OVERFLOW_BLOCKS_DEPLOY).
-        if (D.stashOverflow(s.save.stash).length) return false;
+        // Nothing may be left in the stash overflow (#28 M3-12) and the gun in hand needs a magazine (M4-07); callers
+        // say why (D.deployBlocker).
+        if (D.deployBlocker(s.save)) return false;
         // Layered raids store seeds 1..0xffffffff (older pages reject 0), so seed 0 deploys as seed 1; the coast keeps 0.
         if (buildings && !(seed >>> 0)) seed = 1;
         const candidate = structuredClone(s.save);

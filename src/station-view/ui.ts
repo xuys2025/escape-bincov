@@ -560,6 +560,7 @@ export class UI {
       case 'quest': this.result(this.rt.submitQuest(a1), 'deliver'); this.render(); break;
       case 'build': this.result(this.rt.build(a1 as Facility), 'build'); this.render(); break;
       case 'enqueue': this.result(this.rt.enqueue(a1 as Recipe)); this.render(); break;
+      case 'premium': this.result(this.rt.craftPremium(a1), 'build'); this.render(); break;
       case 'cancel': this.result(this.rt.cancel(a1)); this.render(); break;
       case 'claim': this.result(this.rt.claim(a1, a2 as Source), 'drop'); this.render(); break;
       case 'practice': this.result(this.rt.selectPractice(a1 as Attribute)); this.render(); break;

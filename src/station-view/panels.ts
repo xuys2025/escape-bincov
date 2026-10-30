@@ -4,6 +4,7 @@ import { countyMapHtml, deploymentRegion, deploymentWorld, regionBriefHtml, type
 import type { Attribute, CartView, FacilityInfo, HideoutSnapshot, PerkBoard, RunWorld, TrainingProgress } from '../hideout-runtime/contract';
 import { ATTRIBUTE_NAMES, PERK_UI, critContext, critView, perkPanel, perkWaiting, type CritView, type PerkCardView, type PerkPanelView, type PerkPreviewView } from '../perk-copy';
 import { RECIPES } from '../expansion-state';
+import { PREMIUM_LOCKED_NOTE, PREMIUM_OPEN_NOTE, premiumOrders } from '../gunsmith/premium';
 import { shopQuote, type ShopQuote, type ShopSource } from '../shop';
 import { itemArt } from './items';
 import { itemPicture } from '../art/item-images';
@@ -62,7 +63,7 @@ export function gearHtml(s: HideoutSnapshot, cell: number, selected: string | nu
       <h3><i>01</i>主武器槽</h3>
       <div class="slot ${e.weapon ? '' : 'emptyslot'}" data-slot="weapon" aria-label="主武器槽" title="把仓库或背包里的枪拖到这里装备">
         <img alt="" src="${itemPicture({ id: e.weapon || 'knife', gun: e.gun }, 999, 999).url}" style="height:${Math.round(cell * .6)}px"><div><b>${esc(w.name)}</b>
-        <span>${e.weapon ? `弹匣 ${e.ammo} / ${w.magazine}${e.relief ? ' · 救济' : ''} · 背包备用 ${w.ammo ? `${ammo} 发` : '—'}` : '随身匕首 · 始终保留 · 把枪拖到这里装备'}</span></div>
+        <span>${e.weapon ? `${w.magazine ? `弹匣 ${e.ammo} / ${w.magazine}` : '没装弹匣'}${e.relief ? ' · 救济' : ''} · 背包备用 ${w.ammo ? `${ammo} 发` : '—'}` : '随身匕首 · 始终保留 · 把枪拖到这里装备'}</span></div>
         ${e.weapon ? `<span class="slot-acts">${btn('改装', `gunsmith:${e.weaponUid}`, 'mini')}${btn('卸下', 'unequip', 'mini')}</span>` : ''}
       </div>${charmRow(s.charm?.id ?? null)}
       <h3><i>02</i>背包 <small>${occupied(p.bag)} / ${p.bag.w * p.bag.h} 格</small></h3>${gridHtml(p.bag, 'bag', cell, selected, { empty: '背包是空的' })}
@@ -85,7 +86,7 @@ export function gearCompactHtml(s: HideoutSnapshot, cell: number, selected: stri
   const inv = paneB === 'stash' ? p.stash : p.safe;
   return `<div class="cgear">${gearActions(p)}
     <p class="gear-hint">主武器槽 · 选中枪械后点「装备主武器」</p>
-    <div class="cbar"><div class="slot chip ${e.weapon ? '' : 'emptyslot'}" data-slot="weapon" aria-label="主武器槽" title="把仓库或背包里的枪拖到这里装备"><img alt="" src="${itemPicture({ id: e.weapon || 'knife', gun: e.gun }, 999, 999).url}"><b>${esc(w.name)}</b><span>${e.weapon ? `${e.ammo} / ${w.magazine}${w.ammo ? ` · 备用 ${ammo}` : ''}` : '拖枪到这里装备'}</span>${e.weapon ? `<span class="slot-acts">${btn('改装', `gunsmith:${e.weaponUid}`, 'mini')}${btn('卸下', 'unequip', 'mini')}</span>` : ''}</div>
+    <div class="cbar"><div class="slot chip ${e.weapon ? '' : 'emptyslot'}" data-slot="weapon" aria-label="主武器槽" title="把仓库或背包里的枪拖到这里装备"><img alt="" src="${itemPicture({ id: e.weapon || 'knife', gun: e.gun }, 999, 999).url}"><b>${esc(w.name)}</b><span>${e.weapon ? `${w.magazine ? `${e.ammo} / ${w.magazine}` : '没装弹匣'}${w.ammo ? ` · 备用 ${ammo}` : ''}` : '拖枪到这里装备'}</span>${e.weapon ? `<span class="slot-acts">${btn('改装', `gunsmith:${e.weaponUid}`, 'mini')}${btn('卸下', 'unequip', 'mini')}</span>` : ''}</div>
       <div class="cweight ${over ? 'over' : ''}">携行 <b>${departure.weight.toFixed(1)}</b> / ${departure.carry.toFixed(1)} kg</div></div>${charmRow(s.charm?.id ?? null)}
     <div class="panes">
       <section class="pane"><h3>背包 <small>${occupied(p.bag)} / ${p.bag.w * p.bag.h}</small></h3><div class="pane-scroll">${gridHtml(p.bag, 'bag', cell, selected, { empty: '背包是空的' })}</div></section>
@@ -97,6 +98,8 @@ export function gearCompactHtml(s: HideoutSnapshot, cell: number, selected: stri
 const checkoutNote = '成交后自动放入仓库';
 /** The yard shop sells from the stash only; `outside` counts sellable stacks still in the bag or safe. */
 const stashNote = (outside: number) => `整组出售${outside > 0 ? ` · 背包与安全箱 ${outside} 件需先入库` : ''}`;
+/** The guns a quest puts on the arms counter (#28 M4-01), on its card. */
+const unlockLine = (id: string, done: boolean) => { const text = D.questShelfText(id, done); return text ? `<p class="unlock">${esc(text)}</p>` : ''; };
 /** The stash overflow (#28 M3-12) in a stash heading, while it holds something. */
 const overflowNote = (stash: D.Inventory) => { const n = D.stashOverflow(stash).length; return n ? ` <b class="bad">溢出 ${n} 件 · 清空前不能出击</b>` : ''; };
 export function shopCompactHtml(c: CartView, cell: number, sel: { src: string; uid: string } | null, cash: number, mode: 'buy' | 'sell', outside = 0) {
@@ -134,7 +137,7 @@ function browseBar(c: CartView) {
 }
 export function shopHtml(c: CartView, cell: number, selected: string | null, cash: number, outside = 0) {
   return `<div class="shop">
-    <section><h3>商人物品 <small>按包购买</small></h3>${browseBar(c)}${gridHtml(c.catalog, 'merchant', cell, selected, { empty: '没有符合条件的商品' })}</section>
+    <section><h3>商人物品 <small>${c.merchant === 'arms' ? '按包购买 · 配件每次出击后轮换' : '按包购买'}</small></h3>${browseBar(c)}${gridHtml(c.catalog, 'merchant', cell, selected, { empty: '没有符合条件的商品' })}</section>
     <section class="buffer"><h3>待买 <small>¥ ${c.totals.buy}</small></h3>${gridHtml(c.buy, 'buy', cell, selected, { empty: '拖到这里' })}<h3>待卖 <small>¥ ${c.totals.sell}</small></h3>${gridHtml(c.sell, 'sell', cell, selected, { empty: '拖到这里' })}</section>
     <section><h3>仓库 <small>${stashNote(outside)}${overflowNote(c.stash)}</small></h3><div class="stash-scroll">${gridHtml(c.stash, 'stash', cell, selected)}</div></section>
   </div>
@@ -150,7 +153,7 @@ export function questsHtml(s: HideoutSnapshot) {
   const p = s.profile;
   const cards = Object.entries(D.QUESTS).map(([id, q], i) => {
     const done = p.quests[id], needs = Object.entries(q.needs).map(([item, n]) => ({ item, n, have: total(s, item) })), ready = needs.every(x => x.have >= x.n);
-    return `<article class="quest ${done ? 'done' : ready ? 'ready' : ''}"><header><span>0${i + 1}</span><b>${esc(q.name)}</b><em>${done ? '已交付' : ready ? '可以交付' : '等待物资'}</em></header><p>${esc(q.description)}</p>${done ? `<p class="reply">${esc(q.radio)}</p>` : `<ul>${needs.map(x => `<li class="${x.have >= x.n ? 'ok' : ''}">${icon(x.item, 20)}<span>${esc(D.ITEMS[x.item].name)}</span><b>${Math.min(x.have, x.n)} / ${x.n}</b></li>`).join('')}</ul>`}<footer><b>¥ ${q.reward}</b><small>${id === 'repair' ? '另解锁仓库扩建与基地设施' : '任务报酬'}</small>${done ? '<span class="tick">已完成</span>' : btn('交付物资', `quest:${id}`, ready ? 'primary' : '', ready ? '' : 'disabled')}</footer></article>`;
+    return `<article class="quest ${done ? 'done' : ready ? 'ready' : ''}"><header><span>0${i + 1}</span><b>${esc(q.name)}</b><em>${done ? '已交付' : ready ? '可以交付' : '等待物资'}</em></header><p>${esc(q.description)}</p>${unlockLine(id, done)}${done ? `<p class="reply">${esc(q.radio)}</p>` : `<ul>${needs.map(x => `<li class="${x.have >= x.n ? 'ok' : ''}">${icon(x.item, 20)}<span>${esc(D.ITEMS[x.item].name)}</span><b>${Math.min(x.have, x.n)} / ${x.n}</b></li>`).join('')}</ul>`}<footer><b>¥ ${q.reward}</b><small>${id === 'repair' ? '另解锁仓库扩建与基地设施' : '任务报酬'}</small>${done ? '<span class="tick">已完成</span>' : btn('交付物资', `quest:${id}`, ready ? 'primary' : '', ready ? '' : 'disabled')}</footer></article>`;
   }).join('');
   return `<div class="radio"><div class="quests">${cards}</div><aside class="log"><small>水产站值守记录 · 累计出击 ${p.stats.runs} 次</small><h4>${s.power === 'restored' ? '供电已恢复。' : '目前靠应急电源供电。'}</h4><p>出击前查好路线，涉水会积累污染。以下时间从出击开始计算。</p><dl><div><dt>04:30</dt><dd>电台预警，离开浅滩。</dd></div><div><dt>05:00</dt><dd>潮位变化，高架路与海堤仍可通行。</dd></div></dl><div class="stats"><div><b>${p.stats.runs}</b><span>累计出击</span></div><div><b>${p.stats.extracts}</b><span>成功撤离</span></div><div><b>${p.stats.kills}</b><span>击败敌人</span></div></div><p class="muted">交付时会扣除仓库、背包或安全箱中的所需物资。放进安全箱的任务物品，撤离失败也保留。</p></aside></div>`;
 }
@@ -164,11 +167,12 @@ export function generatorHtml(s: HideoutSnapshot) {
 }
 
 export function deployHtml(s: HideoutSnapshot, dep: { warnings: string[]; weight: number; carry: number }, world: RunWorld, seed: string, worlds: readonly RunWorld[], preview: string | null, art: CountyArt['regions'], narrow: boolean) {
-  const p = s.profile, e = p.equipment, w = D.WEAPONS[e.weapon || 'knife'], overflow = D.stashOverflow(p.stash).length;
-  const region = deploymentRegion(worlds, world, preview), open = deploymentWorld(region, worlds) !== null, canDeploy = open && !overflow;
+  const p = s.profile, e = p.equipment, w = D.WEAPONS[e.weapon || 'knife'], overflow = D.stashOverflow(p.stash).length, stop = D.deployBlocker(p);
+  const region = deploymentRegion(worlds, world, preview), open = deploymentWorld(region, worlds) !== null, canDeploy = open && !stop;
+  const bare = D.equippedMagless(e);
   const meds = D.count(p.bag, 'bandage') + D.count(p.bag, 'medkit');
   const checks = [
-    { ok: !!e.weapon, label: e.weapon ? `主武器 · ${w.name}` : '未装备主武器' },
+    { ok: !!e.weapon && !bare, label: e.weapon ? `主武器 · ${w.name}${bare ? ' · 没装弹匣' : ''}` : '未装备主武器' },
     { ok: !w.ammo || D.count(p.bag, w.ammo) > 0, label: w.ammo ? `备用弹药 · ${D.ITEMS[w.ammo].name} ${D.count(p.bag, w.ammo)} 发` : '匕首 · 不需要弹药' },
     { ok: meds > 0, label: meds ? `止血用品 · ${meds} 件在背包` : '背包里没有止血用品' },
     { ok: dep.weight <= dep.carry, label: `携行重量 · ${dep.weight.toFixed(1)} / ${dep.carry.toFixed(1)} kg` },
@@ -180,7 +184,7 @@ export function deployHtml(s: HideoutSnapshot, dep: { warnings: string[]; weight
   return `<div class="deploy county-deploy">${countyMapHtml(region, worlds, narrow)}<aside class="county-briefing" aria-label="区域情报与出击准备">
   ${regionBriefHtml(region, worlds, art)}<div class="county-preflight"><h3>出发前检查<span class="${ready === checks.length ? 'ok' : 'bad'}">${ready} / ${checks.length}</span></h3><ul class="checks">${checks.map(c => `<li class="${c.ok ? 'ok' : 'bad'}"><i></i>${esc(c.label)}</li>`).join('')}</ul>
   <p class="rule">撤离失败会丢失背包物资和主武器，安全箱保留。出击即写入存档。</p></div>
-  <div class="go"><span class="${clear ? 'ok' : ''}">${overflow ? esc(D.OVERFLOW_BLOCKS_DEPLOY) : canDeploy ? dep.warnings.length ? esc(dep.warnings.join(' · ')) : '装备与快捷补给已备齐' : '选择地图上已开放的区域即可出击。'}</span><div class="go-row">
+  <div class="go"><span class="${clear ? 'ok' : ''}">${stop ? esc(stop) : canDeploy ? dep.warnings.length ? esc(dep.warnings.join(' · ')) : '装备与快捷补给已备齐' : '选择地图上已开放的区域即可出击。'}</span><div class="go-row">
   <label class="seedrow" title="相同种子可重现初始配置">种子 <input id="seed" maxlength="16" placeholder="留空随机" value="${esc(seed)}" aria-label="行动种子"></label>${btn(open ? '开门出击 <span aria-hidden="true">→</span>' : '暂未开发', 'deploy', 'primary big', canDeploy ? '' : 'disabled')}</div></div></aside></div>`;
 }
 
@@ -215,8 +219,19 @@ export function facilityHtml(f: FacilityInfo, s: HideoutSnapshot, training: Trai
     <h4>生产队列 ${b.queue.length} / ${f.level}</h4>${b.queue.map((q, i) => `<div class="row">${icon(q.recipe, 24)}<span><b>${esc(D.ITEMS[q.recipe].name)}</b><small>${i === 0 ? q.remaining === 0 ? '等待成品位' : `剩余 ${fmt(q.remaining)}` : '等待生产'}</small><i class="prog" style="width:${(1 - q.remaining / q.duration) * 100}%"></i></span>${i ? btn('取消并退款', `cancel:${q.id}`, 'mini') : ''}</div>`).join('') || '<p class="muted">队列空闲。</p>'}
     <h4>成品 ${b.completed.length} / 3</h4>${b.completed.map(q => `<div class="row ready">${icon(q.recipe, 24)}<span><b>${q.result.map(r => `${esc(D.ITEMS[r.id].name)} × ${r.qty}`).join('、')}</b><small>领取到</small></span>${btn('仓库', `claim:${q.id}:stash`, 'mini')}${btn('背包', `claim:${q.id}:bag`, 'mini')}${btn('安全箱', `claim:${q.id}:safe`, 'mini')}</div>`).join('') || '<p class="muted">还没有成品。</p>'}`;
   }
+  if (f.id === 'workbench') extra += premiumHtml(s);
   if (f.id === 'blackmarket' && f.level) extra = '<p class="muted">船上的人只收货、不卖货。货单尚未开放。</p>';
   return `<div class="facility"><div class="lvl"><span class="pips">${pips}</span><b>${f.level ? `${f.level} 级` : '未修建'}</b></div><p>${esc(f.explanation)}</p>${costHtml}${extra}</div>`;
+}
+/**
+ * 老栓精工 (#28 M4-09): the order list under the workbench. Locked, one line says what opens it and what he makes; open,
+ * a row per part (those for the player's guns first) with its guns, the base he would take and the price, and the
+ * button greyed with the reason when it cannot be made now.
+ */
+function premiumHtml(s: HideoutSnapshot) {
+  const o = premiumOrders(s.profile as D.SaveDataV1, s);
+  const rows = o.rows.map(r => `<div class="row premium">${icon(r.id, 24)}<span><b>${esc(r.name)}</b><small>${esc(r.guns)} · 底料 ${esc(r.base ?? r.bases)} · ¥ ${r.price}${r.why ? ` · <em class="bad">${esc(r.why)}</em>` : ''}</small></span>${btn('定制', `premium:${r.id}`, 'mini', r.why ? 'disabled' : '')}</div>`).join('');
+  return `<h4>老栓精工定制 <small>精工件坯 ${o.blanks} 份</small></h4>${o.lock ? `<p class="muted">${esc(o.lock)}${esc(PREMIUM_LOCKED_NOTE)}</p>` : `<p class="muted">${esc(PREMIUM_OPEN_NOTE)}</p>${rows}`}`;
 }
 const fmt = (sec: number) => sec >= 60 ? `${Math.floor(sec / 60)} 分 ${Math.floor(sec % 60)} 秒` : `${Math.ceil(sec)} 秒`;
 

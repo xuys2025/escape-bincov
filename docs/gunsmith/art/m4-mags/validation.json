@@ -1,0 +1,807 @@
+{
+  "schema": 1,
+  "date": "2026-10-30",
+  "status": "pass",
+  "passed": 164,
+  "failed": 0,
+  "totals": {
+    "files": 22,
+    "pngBytes": 3833,
+    "icons": 10,
+    "receivers": 6,
+    "factoryMagazines": 6
+  },
+  "formalAssetsUnchanged": 636,
+  "splitResults": [
+    {
+      "receiver": "gs-svdb-receiver-h-v3",
+      "magazine": "gs-svdb-mag-factory-h-v1",
+      "baseline": "gs-svdb-receiver-h-v2",
+      "crop": [
+        14,
+        5,
+        7,
+        5
+      ],
+      "magMount": [
+        14,
+        5
+      ],
+      "magAnchor": [
+        0,
+        0
+      ],
+      "originalRGBA": "d7cc89165cab8e250ef5c5d03dbb21d09d1e8d0f9b5af546e4218c5467bc8018",
+      "recombinedRGBA": "d7cc89165cab8e250ef5c5d03dbb21d09d1e8d0f9b5af546e4218c5467bc8018",
+      "differingPixels": 0
+    },
+    {
+      "receiver": "gs-svdb-receiver-i-v4",
+      "magazine": "gs-svdb-mag-factory-i-v1",
+      "baseline": "gs-svdb-receiver-i-v3",
+      "crop": [
+        39,
+        10,
+        11,
+        8
+      ],
+      "magMount": [
+        39,
+        10
+      ],
+      "magAnchor": [
+        0,
+        0
+      ],
+      "originalRGBA": "1ae7300c7a52688c4dbbe497de0364df5c3dca1b4df4405f273bbad4a01e2183",
+      "recombinedRGBA": "1ae7300c7a52688c4dbbe497de0364df5c3dca1b4df4405f273bbad4a01e2183",
+      "differingPixels": 0
+    },
+    {
+      "receiver": "gs-svdb-receiver-w-v4",
+      "magazine": "gs-svdb-mag-factory-w-v1",
+      "baseline": "gs-svdb-receiver-w-v3",
+      "crop": [
+        78,
+        21,
+        22,
+        15
+      ],
+      "magMount": [
+        78,
+        21
+      ],
+      "magAnchor": [
+        0,
+        0
+      ],
+      "originalRGBA": "d6e49a6ee79afddef861be4b497aad0ef60ea07ac7e061b2bc01867799be59ec",
+      "recombinedRGBA": "d6e49a6ee79afddef861be4b497aad0ef60ea07ac7e061b2bc01867799be59ec",
+      "differingPixels": 0
+    },
+    {
+      "receiver": "gs-vb9-receiver-h-v2",
+      "magazine": "gs-vb9-mag-factory-h-v1",
+      "baseline": "gs-vb9-receiver-h-v1",
+      "crop": [
+        13,
+        5,
+        5,
+        5
+      ],
+      "magMount": [
+        13,
+        5
+      ],
+      "magAnchor": [
+        0,
+        0
+      ],
+      "originalRGBA": "15a91421e5c666921404c2b7d3320bb29acb81f6621dcbdc4216c8730c0033d3",
+      "recombinedRGBA": "15a91421e5c666921404c2b7d3320bb29acb81f6621dcbdc4216c8730c0033d3",
+      "differingPixels": 0
+    },
+    {
+      "receiver": "gs-vb9-receiver-i-v3",
+      "magazine": "gs-vb9-mag-factory-i-v1",
+      "baseline": "gs-vb9-receiver-i-v2",
+      "crop": [
+        31,
+        9,
+        9,
+        9
+      ],
+      "magMount": [
+        31,
+        9
+      ],
+      "magAnchor": [
+        0,
+        0
+      ],
+      "originalRGBA": "07978e949b7a9f1caf5d8e1bf44b64d5a656cdaa543ff9f2b3e6b4f84e8cf081",
+      "recombinedRGBA": "07978e949b7a9f1caf5d8e1bf44b64d5a656cdaa543ff9f2b3e6b4f84e8cf081",
+      "differingPixels": 0
+    },
+    {
+      "receiver": "gs-vb9-receiver-w-v3",
+      "magazine": "gs-vb9-mag-factory-w-v1",
+      "baseline": "gs-vb9-receiver-w-v2",
+      "crop": [
+        62,
+        19,
+        18,
+        17
+      ],
+      "magMount": [
+        62,
+        19
+      ],
+      "magAnchor": [
+        0,
+        0
+      ],
+      "originalRGBA": "ebbcaaebd6b7f91d73fefc34f0e40900604f43073467495e5ac0d70ff5bd4945",
+      "recombinedRGBA": "ebbcaaebd6b7f91d73fefc34f0e40900604f43073467495e5ac0d70ff5bd4945",
+      "differingPixels": 0
+    }
+  ],
+  "checks": [
+    {
+      "name": "Only 22 batch PNGs and manifest, with unique IDs and exact totals",
+      "status": "pass"
+    },
+    {
+      "name": "Accepted formal manifest and all 636 formal PNGs are unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-mag-q24-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-mag-q24-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-mag-q24-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-mag-q24-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-mag-q24-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-mag-q24-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-mag-q24-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-mag-q24-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-mag-q24-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-mag-q24-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-mag-q24-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-mag-q24-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-mag-q24-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-mag-q24-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-mag-q24-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-mag-q24-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb4a1-mag-q24-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb4a1-mag-q24-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb4a1-mag-q24-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb4a1-mag-q24-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-mag-q24-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-mag-q24-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-mag-q24-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-mag-q24-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-mag-q24-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-mag-q24-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-mag-q24-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-mag-q24-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-mag-q24-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-mag-q24-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-mag-q24-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-mag-q24-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-q24-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-q24-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-q24-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-q24-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-q24-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-q24-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-q24-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-q24-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-h-v3: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-h-v3: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-h-v3: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-h-v3: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-h-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-h-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-h-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-h-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-i-v4: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-i-v4: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-i-v4: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-i-v4: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-i-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-i-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-i-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-i-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-w-v4: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-w-v4: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-w-v4: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-w-v4: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-w-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-w-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-w-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-w-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-h-v2: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-h-v2: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-h-v2: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-h-v2: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-h-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-h-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-h-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-h-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-i-v3: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-i-v3: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-i-v3: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-i-v3: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-i-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-i-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-i-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-i-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-w-v3: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-w-v3: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-w-v3: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-w-v3: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-w-v1: SHA, bytes and declared PNG dimensions",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-w-v1: nonempty binary alpha and ART-SPEC color limit",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-w-v1: complete original RGBA source replays exactly",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-w-v1: all anchors and mounts inside canvas",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-mag-q24-v1: 24x24 detached item metadata and two-pixel transparent border",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-mag-q24-v1: UI palette and single ink exterior contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mpb5-mag-q24-v1: one connected object without detached pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-mag-q24-v1: 24x24 detached item metadata and two-pixel transparent border",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-mag-q24-v1: UI palette and single ink exterior contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-umpb45-mag-q24-v1: one connected object without detached pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-mag-q24-v1: 24x24 detached item metadata and two-pixel transparent border",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-mag-q24-v1: UI palette and single ink exterior contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb74-mag-q24-v1: one connected object without detached pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-mag-q24-v1: 24x24 detached item metadata and two-pixel transparent border",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-mag-q24-v1: UI palette and single ink exterior contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-akb103-mag-q24-v1: one connected object without detached pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb4a1-mag-q24-v1: 24x24 detached item metadata and two-pixel transparent border",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb4a1-mag-q24-v1: UI palette and single ink exterior contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb4a1-mag-q24-v1: one connected object without detached pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-mag-q24-v1: 24x24 detached item metadata and two-pixel transparent border",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-mag-q24-v1: UI palette and single ink exterior contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-augb-mag-q24-v1: one connected object without detached pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-mag-q24-v1: 24x24 detached item metadata and two-pixel transparent border",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-mag-q24-v1: UI palette and single ink exterior contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-mb14-mag-q24-v1: one connected object without detached pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-mag-q24-v1: 24x24 detached item metadata and two-pixel transparent border",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-mag-q24-v1: UI palette and single ink exterior contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-rpkb-mag-q24-v1: one connected object without detached pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-q24-v1: 24x24 detached item metadata and two-pixel transparent border",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-q24-v1: UI palette and single ink exterior contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-q24-v1: one connected object without detached pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-q24-v1: 24x24 detached item metadata and two-pixel transparent border",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-q24-v1: UI palette and single ink exterior contour",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-q24-v1: one connected object without detached pixels",
+      "status": "pass"
+    },
+    {
+      "name": "Exactly ten named factory magazine icons, distinct silhouettes and grayscale images",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-h-v3: uses exact accepted baseline and next revision",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-h-v3: canvas, tip, grip, hand, bore, forward and existing mounts exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-h-v1: crop size, anchor, role and default behind-receiver metadata",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-h-v3: every original pixel outside magazine is unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-h-v1: M3-W3 magazine pixels and shared lip row transferred without resampling",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-h-v3: exact whole-image RGBA reassembly, including transparent pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-h-v3: negative control proves removing magazine changes original image",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-i-v4: uses exact accepted baseline and next revision",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-i-v4: canvas, tip, grip, hand, bore, forward and existing mounts exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-i-v1: crop size, anchor, role and default behind-receiver metadata",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-i-v4: every original pixel outside magazine is unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-i-v1: M3-W3 magazine pixels and shared lip row transferred without resampling",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-i-v4: exact whole-image RGBA reassembly, including transparent pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-i-v4: negative control proves removing magazine changes original image",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-w-v4: uses exact accepted baseline and next revision",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-w-v4: canvas, tip, grip, hand, bore, forward and existing mounts exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-w-v1: crop size, anchor, role and default behind-receiver metadata",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-w-v4: every original pixel outside magazine is unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-mag-factory-w-v1: M3-W3 magazine pixels and shared lip row transferred without resampling",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-w-v4: exact whole-image RGBA reassembly, including transparent pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-svdb-receiver-w-v4: negative control proves removing magazine changes original image",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-h-v2: uses exact accepted baseline and next revision",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-h-v2: canvas, tip, grip, hand, bore, forward and existing mounts exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-h-v1: crop size, anchor, role and default behind-receiver metadata",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-h-v2: every original pixel outside magazine is unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-h-v1: M3-W3 magazine pixels and shared lip row transferred without resampling",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-h-v2: exact whole-image RGBA reassembly, including transparent pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-h-v2: negative control proves removing magazine changes original image",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-i-v3: uses exact accepted baseline and next revision",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-i-v3: canvas, tip, grip, hand, bore, forward and existing mounts exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-i-v1: crop size, anchor, role and default behind-receiver metadata",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-i-v3: every original pixel outside magazine is unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-i-v1: M3-W3 magazine pixels and shared lip row transferred without resampling",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-i-v3: exact whole-image RGBA reassembly, including transparent pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-i-v3: negative control proves removing magazine changes original image",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-w-v3: uses exact accepted baseline and next revision",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-w-v3: canvas, tip, grip, hand, bore, forward and existing mounts exact",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-w-v1: crop size, anchor, role and default behind-receiver metadata",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-w-v3: every original pixel outside magazine is unchanged",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-mag-factory-w-v1: M3-W3 magazine pixels and shared lip row transferred without resampling",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-w-v3: exact whole-image RGBA reassembly, including transparent pixels",
+      "status": "pass"
+    },
+    {
+      "name": "gs-vb9-receiver-w-v3: negative control proves removing magazine changes original image",
+      "status": "pass"
+    },
+    {
+      "name": "Exactly six H/I/W layer pairs and six same-size receiver replacements",
+      "status": "pass"
+    }
+  ]
+}

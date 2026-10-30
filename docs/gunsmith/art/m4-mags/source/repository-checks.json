@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "date": "2026-10-30",
+  "status": "pass",
+  "taskStart": "0e9f8b3439166716ae3c8335a4f6fd0cb362b998",
+  "acceptedMain": "8a4b46e4942402ed83487aa8fa27ee6169a9fc65",
+  "codeBaseline": "Normal merge of taskStart and acceptedMain. Merge conflicts confined to queue/tasks/handoff; both sides retained.",
+  "node": "24.22.1",
+  "pnpm": "11.25.0",
+  "platform": "Windows",
+  "environment": "Existing shared node_modules junction; pnpm_config_verify_deps_before_run=warn only for check processes; no installation or config change.",
+  "checks": [
+    {
+      "command": "pnpm test",
+      "status": "pass",
+      "passed": 1102,
+      "localLog": "test-results/m4-mags/unit.txt",
+      "logSha256": "3e414b870de1ec3e60fcdfd7d1d8d1e0164548fb6079d58626b6403cd08c42ab"
+    },
+    {
+      "command": "pnpm check:ci",
+      "status": "pass",
+      "passed": 139,
+      "localLog": "test-results/m4-mags/ci.txt",
+      "logSha256": "3393405359491395ed185935d047b3dcfe0f907eb8c714087aeca19902369fc0"
+    },
+    {
+      "command": "pnpm package",
+      "status": "pass",
+      "passed": null,
+      "localLog": "test-results/m4-mags/package.txt",
+      "logSha256": "99588c1ba9241e3bd757797fe7b110b32471cfd467dafe2773b496b2074cafe1"
+    },
+    {
+      "command": "pnpm test:gunsmith-bench",
+      "status": "pass",
+      "passed": 20,
+      "localLog": "test-results/m4-mags/bench.txt",
+      "logSha256": "d0673cb80e26dfd0a34041bed2b39bad4153b671202f7cd0503c923679a8eb5f"
+    }
+  ],
+  "generatedFiles": [
+    {
+      "file": "dist/index.html",
+      "bytes": 9489708,
+      "sha256": "ef7e55428393401ce68e06751405241927fe5c9a121243f1e065b519f9d0940b"
+    },
+    {
+      "file": "start the game.html",
+      "bytes": 9489708,
+      "sha256": "ef7e55428393401ce68e06751405241927fe5c9a121243f1e065b519f9d0940b"
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "bytes": 6107313,
+      "sha256": "c4a9d68304bf068cf57da34e8e816a2362e936e0e9d8f053748a3fba2955a7b8"
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "bytes": 6102804,
+      "sha256": "07f51caa66c6e8bff0ea7fbe8997066fa3cbf0b429c76958a7835c9f95cffe3f"
+    }
+  ],
+  "generatedFilesCommitted": false,
+  "newArtConsumed": false,
+  "browserScope": "Existing game and approved art only; pending incoming art independently validated and rehearsed through actual layout engine. Incoming gameplay integration/screenshots not performed."
+}

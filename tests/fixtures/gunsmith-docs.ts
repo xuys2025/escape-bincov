@@ -21,6 +21,8 @@ export interface DocPart {
     grantsLongScope: boolean;
 }
 
+/** The section of ATTACHMENTS.md that lists 老栓精工's made-to-order parts (#28 M4-09), apart from the hundred. */
+const PREMIUM = '老栓精工';
 const lines = (name: string) => readFileSync(`docs/gunsmith/${name}`, 'utf8').split(/\r?\n/);
 const cells = (line: string) => line.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
 const RAILS: Record<string, DocSlot> = {
@@ -57,12 +59,23 @@ function parse() {
     const longScope = new Set(sentence(/远距瞄具资格授予\s*(.+?)；/));
     const classCounts = new Map(weapons.map(cells).filter(c => c.length === 2 && /^\d+$/.test(c[1]) && c[0] !== '合计').map(([cls, n]) => [cls, Number(n)]));
 
-    const attachments = lines('ATTACHMENTS.md'), parts: DocPart[] = [], headings = new Map<string, number>();
-    let heading = '';
+    const attachments = lines('ATTACHMENTS.md'), parts: DocPart[] = [], premium: DocPart[] = [], headings = new Map<string, number>();
+    let heading = '', sub = '';
     for (const line of attachments) {
         const h = /^## (\S+) (\d+) 种$/.exec(line.trim());
-        if (h) { heading = h[1]; headings.set(heading, Number(h[2])); continue; }
+        if (h) { heading = h[1]; sub = ''; if (heading !== PREMIUM) headings.set(heading, Number(h[2])); continue; }
+        // 老栓精工 (#28 M4-09): one section, its parts under a heading per category.
+        const s = /^### (\S+)$/.exec(line.trim());
+        if (s) { sub = s[1]; continue; }
         const c = cells(line);
+        if (c.length === 6 && heading === PREMIUM && /^J\d\d$/.test(c[0])) {
+            const [id, name, brand, iface, benefit, cost] = c, rail = RAILS[iface] ?? null, provides: Partial<Record<DocSlot, number>> = {};
+            const under = /(\d+) 个下导轨/.exec(benefit), side = /(\d+) 个侧位/.exec(benefit);
+            if (under) provides.under = Number(under[1]);
+            if (side) provides.side = Number(side[1]);
+            premium.push({ id, name, brand, heading: sub, iface, benefit, cost, rail, guns: rail ? null : list(iface), longScope: iface.includes('远距瞄具资格'), provides, grantsLongScope: false });
+            continue;
+        }
         if (c.length !== 6 || !/^[OMBHSPFGTA]\d\d$/.test(c[0])) continue;
         const [id, name, brand, iface, benefit, cost] = c;
         const rail = RAILS[iface] ?? null, provides: Partial<Record<DocSlot, number>> = {};
@@ -82,7 +95,7 @@ function parse() {
     // PLAN section 4: ammo group names to ids ("保留 ammo9", "新 ammo45").
     const ammo = new Map(readFileSync('docs/gunsmith/PLAN.md', 'utf8').split(/\r?\n/).map(cells)
         .filter(c => c.length === 3 && /^(?:保留|新) \w+$/.test(c[1])).map(([name, id]) => [name, id.split(' ')[1]]));
-    return { guns, parts, headings, classCounts, longScope, prereqs, ammo };
+    return { guns, parts, premium, headings, classCounts, longScope, prereqs, ammo };
 }
 
 export const DOCS = parse();
@@ -92,12 +105,12 @@ export const DOCS = parse();
  * on once a base, handguard or prerequisite part is installed first.
  */
 export function docExpectation(gunId: string, partId: string): { direct: boolean; eventual: boolean } {
-    const gun = DOCS.guns.find(g => g.id === gunId)!, part = DOCS.parts.find(p => p.id === partId)!;
+    const gun = DOCS.guns.find(g => g.id === gunId)!, part = [...DOCS.parts, ...DOCS.premium].find(p => p.id === partId)!;
     if (part.guns) {
         const listed = part.guns.includes(gun.id), prereq = DOCS.prereqs.some(r => r.part === part.id && r.on.includes(gun.id));
         return { direct: listed && !prereq, eventual: listed };
     }
     const rail = part.rail!, qualified = !part.longScope || DOCS.longScope.has(gun.id);
-    const native = gun.native.has(rail), opened = DOCS.parts.some(o => !!o.guns?.includes(gun.id) && (o.provides[rail] ?? 0) > 0);
+    const native = gun.native.has(rail), opened = [...DOCS.parts, ...DOCS.premium].some(o => !!o.guns?.includes(gun.id) && (o.provides[rail] ?? 0) > 0);
     return { direct: native && qualified, eventual: (native || opened) && qualified };
 }

@@ -1,6 +1,9 @@
 import * as D from './domain';
 import { getLegacyEnemyProfile } from './enemy-profile';
 import { archetype, enemyDefinition } from './enemy-archetypes';
+import { presetState } from './gunsmith/presets';
+import { PREMIUM_BLANK } from './gunsmith/premium';
+import { leaderBlank } from './enemy-armory';
 import { canDamageEnemy } from './enemy-relations';
 import { enemyDamageAfterArmor } from './enemy-defense';
 import { enemyPost } from './enemy-posts';
@@ -128,11 +131,16 @@ export function damageLayerEnemy(state: ExpansionState, mapId: string, enemy: En
         ...(tactics.equipment ? [{ id: tactics.equipment, qty: 1 }] : []),
         ...(gunDef?.ammo && tactics.magazine + tactics.reserve > 0 ? [{ id: gunDef.ammo, qty: tactics.magazine + tactics.reserve }] : []),
         ...tactics.supplies,
+        // A leader's body may hold 老栓精工's material too (#28 M4-09).
+        ...leaderBlank(raid.seed, enemy.id, enemy.uid) ? [{ id: PREMIUM_BLANK, qty: 1 }] : [],
     ] : D.corpseLoot(raid.seed + raid.kills * 47, getLegacyEnemyProfile(enemy.id).corpseLootRolls, enemy.id === 'elite');
     const random = D.seededRandom(raid.rng);
+    const allocate = () => entityUid(raid, raid.nextEntity++);
     for (const drop of drops) {
-        if (D.addItem(inventory, drop.id, drop.qty, false, false, true, () => entityUid(raid, raid.nextEntity++))) throw new Error('尸体容器容量不足。');
+        if (D.addItem(inventory, drop.id, drop.qty, false, false, true, allocate)) throw new Error('尸体容器容量不足。');
         if (!tactics) { random(); random(); }
+        // A leader's gun keeps its parts (#28 M4-02): the same build, each part under a fresh uid of this raid.
+        if (tactics?.fit && drop.id === tactics.equipment) inventory.items.find(i => i.id === drop.id)!.gun = presetState(tactics.fit, allocate);
     }
     raid.rng = random.getState();
     if (raid.version >= 2 && !tactics) luckInventory(state, mapId, inventory, enemy);

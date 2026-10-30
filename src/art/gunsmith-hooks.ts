@@ -25,9 +25,10 @@ export interface GunsmithArtHooks {
     releaseBench(): void;
     /**
      * The held picture (H) of `gun` with the parts its signature names, a new canvas each call (the raid view caches it):
-     * the pivot, forward offset, front hand, muzzle tip and barrel row; null without images for that gun.
+     * the pivot, forward offset, front hand, muzzle tip and barrel row; null without images for that gun. `glove`: the
+     * gloves tinted to an enemy's colour (#28 M4-02); the player's own otherwise.
      */
-    held(gun: string, sig: string): HeldPicture | null;
+    held(gun: string, sig: string, glove?: string): HeldPicture | null;
     /**
      * The whole gun from the side: its factory held picture without the hands, for the ground and the HUD weapon card,
      * where Sol's square close-ups do not read (maintainer, 2026-10-27). Null for items without held images, and for the

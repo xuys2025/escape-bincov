@@ -1,4 +1,5 @@
 import { archetype, initialTactics, type ArchetypeId } from './enemy-archetypes';
+import { armEncounter } from './enemy-armory';
 import type { LayeredRaid, WorldDefinition } from './expansion-state';
 import { MALL_ANCHORS } from './mall-world';
 import { separation, traversable } from './spatial';
@@ -44,6 +45,7 @@ export function installMallEncounter(raid: LayeredRaid, world: WorldDefinition):
         .sort((a, b) => separation(a, MALL_RAIDER_STORES[0]) - separation(b, MALL_RAIDER_STORES[0]) || a.id.localeCompare(b.id, 'en'))[0];
     if (!destination || !crate) throw new Error('商场遭遇缺少现有物资来源。');
     Object.assign(crate, destination);
+    armEncounter(raid);
     raid.version = raid.version === 3 ? 5 : 4;
     raid.roster = Object.values(raid.maps).flatMap(m => m.enemies.map(e => ({ uid: e.uid, id: e.id })));
 }

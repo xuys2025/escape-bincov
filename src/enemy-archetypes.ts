@@ -1,3 +1,4 @@
+import type { PresetNode } from './gunsmith/presets';
 import { ENEMIES, type EnemyDef } from './domain';
 import type { Point } from './world';
 
@@ -95,6 +96,11 @@ interface EnemyTacticsCore {
     phase: 'idle' | 'windup' | 'release' | 'recovery' | 'reload'; phaseLeft: number; lockedAim: number;
     magazine: number; reserve: number; signalUsed: boolean;
     equipment: string | null; supplies: { id: string; qty: number }[];
+    /**
+     * A leader's parts on its gun (#28 M4-02, enemy-armory.ts), as a preset tree without uids: present only when it has
+     * any. `equipment` is then the catalog gun they sit on; the body yields the gun with them (layer-transition.ts).
+     */
+    fit?: PresetNode[];
     killedBy: string | null;
 }
 export type EnemyTactics = EnemyTacticsCore & ({ version: 1 } | { version: 2; program: EnemyProgram });

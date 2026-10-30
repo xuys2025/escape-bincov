@@ -1,0 +1,499 @@
+{
+ "habits": {
+  "search": 0.5,
+  "fight": 0.3,
+  "questSearch": 0.8,
+  "hit": 0.5,
+  "death": 0.025,
+  "bandage": 0.5,
+  "kills": 10,
+  "bandages": 3,
+  "medkits": 1,
+  "reserve": 600
+ },
+ "campaigns": 60,
+ "runs": 20,
+ "parts": 2,
+ "lateShelf": true,
+ "perRun": [
+  {
+   "run": 1,
+   "extract": 75,
+   "dry": 2,
+   "brought": [
+    1849,
+    2736,
+    3793
+   ],
+   "cash": 571,
+   "worth": 4092,
+   "parts": 0,
+   "loose": 0,
+   "idle": 0,
+   "stash": 3,
+   "quests": [
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "run": 2,
+   "extract": 87,
+   "dry": 28,
+   "brought": [
+    1774,
+    2753,
+    3914
+   ],
+   "cash": 126,
+   "worth": 6243,
+   "parts": 0,
+   "loose": 1,
+   "idle": 1,
+   "stash": 16,
+   "quests": [
+    63,
+    58,
+    57
+   ]
+  },
+  {
+   "run": 3,
+   "extract": 82,
+   "dry": 13,
+   "brought": [
+    2352,
+    3436,
+    4673
+   ],
+   "cash": 611,
+   "worth": 7456,
+   "parts": 1,
+   "loose": 2,
+   "idle": 1,
+   "stash": 25,
+   "quests": [
+    93,
+    85,
+    78
+   ]
+  },
+  {
+   "run": 4,
+   "extract": 72,
+   "dry": 13,
+   "brought": [
+    2640,
+    3451,
+    4509
+   ],
+   "cash": 631,
+   "worth": 8351,
+   "parts": 2,
+   "loose": 2,
+   "idle": 1,
+   "stash": 31,
+   "quests": [
+    100,
+    90,
+    92
+   ]
+  },
+  {
+   "run": 5,
+   "extract": 80,
+   "dry": 10,
+   "brought": [
+    2501,
+    3492,
+    4658
+   ],
+   "cash": 637,
+   "worth": 9306,
+   "parts": 3,
+   "loose": 3,
+   "idle": 2,
+   "stash": 37,
+   "quests": [
+    100,
+    97,
+    95
+   ]
+  },
+  {
+   "run": 6,
+   "extract": 85,
+   "dry": 7,
+   "brought": [
+    2291,
+    3124,
+    3939
+   ],
+   "cash": 986,
+   "worth": 10989,
+   "parts": 3,
+   "loose": 4,
+   "idle": 3,
+   "stash": 41,
+   "quests": [
+    100,
+    98,
+    97
+   ]
+  },
+  {
+   "run": 7,
+   "extract": 75,
+   "dry": 8,
+   "brought": [
+    2139,
+    3380,
+    3909
+   ],
+   "cash": 727,
+   "worth": 11085,
+   "parts": 3,
+   "loose": 4,
+   "idle": 3,
+   "stash": 49,
+   "quests": [
+    100,
+    100,
+    98
+   ]
+  },
+  {
+   "run": 8,
+   "extract": 87,
+   "dry": 13,
+   "brought": [
+    2429,
+    3325,
+    4809
+   ],
+   "cash": 850,
+   "worth": 12822,
+   "parts": 4,
+   "loose": 5,
+   "idle": 4,
+   "stash": 51,
+   "quests": [
+    100,
+    100,
+    100
+   ]
+  },
+  {
+   "run": 9,
+   "extract": 85,
+   "dry": 12,
+   "brought": [
+    2388,
+    3173,
+    4343
+   ],
+   "cash": 1228,
+   "worth": 13289,
+   "parts": 4,
+   "loose": 6,
+   "idle": 5,
+   "stash": 53,
+   "quests": [
+    100,
+    100,
+    100
+   ]
+  },
+  {
+   "run": 10,
+   "extract": 88,
+   "dry": 17,
+   "brought": [
+    2061,
+    3273,
+    4070
+   ],
+   "cash": 3382,
+   "worth": 14436,
+   "parts": 4,
+   "loose": 7,
+   "idle": 5,
+   "stash": 53,
+   "quests": [
+    100,
+    100,
+    100
+   ]
+  },
+  {
+   "run": 11,
+   "extract": 83,
+   "dry": 10,
+   "brought": [
+    1521,
+    2953,
+    3935
+   ],
+   "cash": 2468,
+   "worth": 14726,
+   "parts": 4,
+   "loose": 8,
+   "idle": 6,
+   "stash": 55,
+   "quests": [
+    100,
+    100,
+    100
+   ]
+  },
+  {
+   "run": 12,
+   "extract": 83,
+   "dry": 3,
+   "brought": [
+    1681,
+    2923,
+    4272
+   ],
+   "cash": 1953,
+   "worth": 14504,
+   "parts": 5,
+   "loose": 8,
+   "idle": 6,
+   "stash": 54,
+   "quests": [
+    100,
+    100,
+    100
+   ]
+  },
+  {
+   "run": 13,
+   "extract": 90,
+   "dry": 18,
+   "brought": [
+    2075,
+    3142,
+    4004
+   ],
+   "cash": 2448,
+   "worth": 15662,
+   "parts": 5,
+   "loose": 10,
+   "idle": 7,
+   "stash": 55,
+   "quests": [
+    100,
+    100,
+    100
+   ]
+  },
+  {
+   "run": 14,
+   "extract": 80,
+   "dry": 10,
+   "brought": [
+    1544,
+    3053,
+    4235
+   ],
+   "cash": 2761,
+   "worth": 15510,
+   "parts": 5,
+   "loose": 11,
+   "idle": 8,
+   "stash": 54,
+   "quests": [
+    100,
+    100,
+    100
+   ]
+  },
+  {
+   "run": 15,
+   "extract": 82,
+   "dry": 7,
+   "brought": [
+    1842,
+    3042,
+    4229
+   ],
+   "cash": 3283,
+   "worth": 16506,
+   "parts": 5,
+   "loose": 12,
+   "idle": 8,
+   "stash": 54,
+   "quests": [
+    100,
+    100,
+    100
+   ]
+  },
+  {
+   "run": 16,
+   "extract": 85,
+   "dry": 5,
+   "brought": [
+    1752,
+    2744,
+    3478
+   ],
+   "cash": 2287,
+   "worth": 15624,
+   "parts": 5,
+   "loose": 13,
+   "idle": 9,
+   "stash": 53,
+   "quests": [
+    100,
+    100,
+    100
+   ]
+  },
+  {
+   "run": 17,
+   "extract": 83,
+   "dry": 3,
+   "brought": [
+    1776,
+    2851,
+    3697
+   ],
+   "cash": 1397,
+   "worth": 15010,
+   "parts": 6,
+   "loose": 13,
+   "idle": 9,
+   "stash": 54,
+   "quests": [
+    100,
+    100,
+    100
+   ]
+  },
+  {
+   "run": 18,
+   "extract": 88,
+   "dry": 17,
+   "brought": [
+    1703,
+    3137,
+    4279
+   ],
+   "cash": 2134,
+   "worth": 16088,
+   "parts": 6,
+   "loose": 14,
+   "idle": 9,
+   "stash": 53,
+   "quests": [
+    100,
+    100,
+    100
+   ]
+  },
+  {
+   "run": 19,
+   "extract": 83,
+   "dry": 7,
+   "brought": [
+    1662,
+    3182,
+    4289
+   ],
+   "cash": 1653,
+   "worth": 16043,
+   "parts": 6,
+   "loose": 14,
+   "idle": 9,
+   "stash": 53,
+   "quests": [
+    100,
+    100,
+    100
+   ]
+  },
+  {
+   "run": 20,
+   "extract": 72,
+   "dry": 7,
+   "brought": [
+    1743,
+    2868,
+    3855
+   ],
+   "cash": 2756,
+   "worth": 16110,
+   "parts": 5,
+   "loose": 15,
+   "idle": 9,
+   "stash": 53,
+   "quests": [
+    100,
+    100,
+    100
+   ]
+  }
+ ],
+ "summary": {
+  "raids": 1200,
+  "extractRate": 82,
+  "dryRate": 11,
+  "shortRate": 6,
+  "broughtPerExtract": [
+   1970,
+   3107,
+   4256
+  ],
+  "ammo": {
+   "boughtPerRaid": 376,
+   "roundsFoundPerRaid": 13.4,
+   "roundsUsedPerRaid": 36.1
+  },
+  "spentPerRaid": {
+   "parts": 997,
+   "guns": 576
+  },
+  "lastHand": {
+   "rpkb": 37,
+   "augb": 5,
+   "akb74": 3,
+   "svdb": 3,
+   "akb103": 2,
+   "pistol": 2,
+   "umpb45": 2,
+   "mb4a1": 2,
+   "carbine": 2,
+   "-": 1,
+   "pb90": 1
+  },
+  "lastHandParts": [
+   2,
+   5,
+   9
+  ],
+  "lastHandRare": [
+   0,
+   1,
+   4
+  ],
+  "questsDone": {
+   "repair": 100,
+   "sample": 100,
+   "ledger": 100
+  },
+  "questRun": {
+   "repair": 2,
+   "sample": 2,
+   "ledger": 2
+  },
+  "idleParts": {
+   "median": 9,
+   "p90": 16,
+   "soldPer20": 0.5
+  },
+  "rareBroughtPer20": 0.65
+ }
+}

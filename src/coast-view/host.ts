@@ -676,7 +676,7 @@ export class CoastSampleHost {
     q('[data-st]').style.width = `${Math.max(0, h.stamina / h.maxStamina) * 100}%`; q('[data-st-text]').textContent = `${Math.round(h.stamina)}`;
     const w = h.weapon;
     if (w.id !== this.weaponShown) { this.weaponShown = w.id; q<HTMLImageElement>('[data-weapon-icon]').src = weaponIcon(w.id); q('[data-weapon-name]').textContent = w.name; q('[data-swap]').textContent = w.id === 'knife' ? '主武器' : '匕首'; }
-    q('[data-mag]').textContent = !w.magSize ? '近战' : w.reloading ? '换弹中' : `${w.mag} / ${w.magSize}`;
+    q('[data-mag]').textContent = !w.magSize ? w.id === 'knife' ? '近战' : '没装弹匣' : w.reloading ? '换弹中' : `${w.mag} / ${w.magSize}`;
     q('[data-reserve]').textContent = w.magSize ? `备用 ${w.reserve}` : '';
     q('[data-mode]').textContent = w.magSize ? h.aim.mode === 'auto' ? '全自动' : '单发' : '';
     q('[data-weapon]').classList.toggle('empty', !!w.magSize && w.mag === 0 && !w.reloading);

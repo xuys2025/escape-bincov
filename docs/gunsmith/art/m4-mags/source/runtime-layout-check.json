@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "date": "2026-10-30",
+  "status": "pass",
+  "factoryLayouts": 8,
+  "emptyLayouts": 8,
+  "checks": [
+    {
+      "gun": "svdb",
+      "output": "h",
+      "gloves": false,
+      "status": "pass",
+      "originalRGBA": "d7cc89165cab8e250ef5c5d03dbb21d09d1e8d0f9b5af546e4218c5467bc8018",
+      "recombinedRGBA": "d7cc89165cab8e250ef5c5d03dbb21d09d1e8d0f9b5af546e4218c5467bc8018",
+      "differingPixels": 0,
+      "magBeforeReceiver": true,
+      "emptyMagLayerAbsent": true,
+      "tip": [
+        37,
+        3
+      ],
+      "grip": [
+        13,
+        5
+      ],
+      "hand": [
+        24,
+        5
+      ]
+    },
+    {
+      "gun": "svdb",
+      "output": "h",
+      "gloves": true,
+      "status": "pass",
+      "originalRGBA": "b467a8fac55160d414adff3143cd71fa8a6bcd42df4be8cbbddc369a78a11b18",
+      "recombinedRGBA": "b467a8fac55160d414adff3143cd71fa8a6bcd42df4be8cbbddc369a78a11b18",
+      "differingPixels": 0,
+      "magBeforeReceiver": true,
+      "emptyMagLayerAbsent": true,
+      "tip": [
+        37,
+        3
+      ],
+      "grip": [
+        13,
+        5
+      ],
+      "hand": [
+        24,
+        5
+      ]
+    },
+    {
+      "gun": "svdb",
+      "output": "i",
+      "gloves": false,
+      "status": "pass",
+      "originalRGBA": "1ae7300c7a52688c4dbbe497de0364df5c3dca1b4df4405f273bbad4a01e2183",
+      "recombinedRGBA": "1ae7300c7a52688c4dbbe497de0364df5c3dca1b4df4405f273bbad4a01e2183",
+      "differingPixels": 0,
+      "magBeforeReceiver": true,
+      "emptyMagLayerAbsent": true,
+      "tip": [
+        92,
+        6
+      ]
+    },
+    {
+      "gun": "svdb",
+      "output": "w",
+      "gloves": false,
+      "status": "pass",
+      "originalRGBA": "d6e49a6ee79afddef861be4b497aad0ef60ea07ac7e061b2bc01867799be59ec",
+      "recombinedRGBA": "d6e49a6ee79afddef861be4b497aad0ef60ea07ac7e061b2bc01867799be59ec",
+      "differingPixels": 0,
+      "magBeforeReceiver": true,
+      "emptyMagLayerAbsent": true,
+      "tip": [
+        184,
+        12
+      ]
+    },
+    {
+      "gun": "vb9",
+      "output": "h",
+      "gloves": false,
+      "status": "pass",
+      "originalRGBA": "15a91421e5c666921404c2b7d3320bb29acb81f6621dcbdc4216c8730c0033d3",
+      "recombinedRGBA": "15a91421e5c666921404c2b7d3320bb29acb81f6621dcbdc4216c8730c0033d3",
+      "differingPixels": 0,
+      "magBeforeReceiver": true,
+      "emptyMagLayerAbsent": true,
+      "tip": [
+        24,
+        3
+      ],
+      "grip": [
+        9,
+        7
+      ],
+      "hand": [
+        16,
+        6
+      ]
+    },
+    {
+      "gun": "vb9",
+      "output": "h",
+      "gloves": true,
+      "status": "pass",
+      "originalRGBA": "908af72a489fed0ac008abd85fd7aec948f8278bee7185d002b62caa24c0fe51",
+      "recombinedRGBA": "908af72a489fed0ac008abd85fd7aec948f8278bee7185d002b62caa24c0fe51",
+      "differingPixels": 0,
+      "magBeforeReceiver": true,
+      "emptyMagLayerAbsent": true,
+      "tip": [
+        24,
+        3
+      ],
+      "grip": [
+        9,
+        7
+      ],
+      "hand": [
+        16,
+        6
+      ]
+    },
+    {
+      "gun": "vb9",
+      "output": "i",
+      "gloves": false,
+      "status": "pass",
+      "originalRGBA": "07978e949b7a9f1caf5d8e1bf44b64d5a656cdaa543ff9f2b3e6b4f84e8cf081",
+      "recombinedRGBA": "07978e949b7a9f1caf5d8e1bf44b64d5a656cdaa543ff9f2b3e6b4f84e8cf081",
+      "differingPixels": 0,
+      "magBeforeReceiver": true,
+      "emptyMagLayerAbsent": true,
+      "tip": [
+        55,
+        4
+      ]
+    },
+    {
+      "gun": "vb9",
+      "output": "w",
+      "gloves": false,
+      "status": "pass",
+      "originalRGBA": "ebbcaaebd6b7f91d73fefc34f0e40900604f43073467495e5ac0d70ff5bd4945",
+      "recombinedRGBA": "ebbcaaebd6b7f91d73fefc34f0e40900604f43073467495e5ac0d70ff5bd4945",
+      "differingPixels": 0,
+      "magBeforeReceiver": true,
+      "emptyMagLayerAbsent": true,
+      "tip": [
+        110,
+        8
+      ]
+    }
+  ],
+  "method": "Process-local incoming metadata injection into real gunArtLayout; actual PNG rendering in layer order. Includes H with gloves and H bare side views. No source/manifest writes and no gameplay integration."
+}

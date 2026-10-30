@@ -86,7 +86,8 @@ test('factors on one dimension multiply, and each combined factor scales the fac
     assert.deepEqual(effectiveStats(fit(bare('mb4a1'), 'O03')).handling, { ...m4, raise: m4.raise * .85, precise: m4.precise * .9 });
     const light = effectiveStats(fit(bare('mb4a1'), 'S01', 'P01')).handling;
     assert.equal(light.raise, m4.raise * (.85 * .9));
-    assert.deepEqual([light.kick, light.kickMax], [m4.kick * .98, m4.kickMax * .98], 'kick scales the per-shot drift and its cap');
+    // The light grip's .98 and the light stock's cost 1.06 (#28 M4-05) multiply into one kick factor.
+    assert.deepEqual([light.kick, light.kickMax], [m4.kick * (.98 * 1.06), m4.kickMax * (.98 * 1.06)], 'kick scales the per-shot drift and its cap');
     const brake = effectiveStats(fit(bare('mb4a1'), 'M06'));
     assert.deepEqual([brake.handling.bloom, brake.handling.bloomMax, brake.noise], [m4.bloom * .8, m4.bloomMax * .8, 1.2]);
     // Below a bound nothing is clamped: the M1014 choke and barrel make 0.6396, just over the spread floor.

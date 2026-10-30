@@ -7,14 +7,15 @@
  */
 import * as D from '../domain';
 import type { GunsmithSession, HideoutRuntime } from '../hideout-runtime/contract';
-import { ATTACHMENTS, GUNS, type GunId } from '../gunsmith/catalog';
+import { ATTACHMENTS, FACTORY_MAGS, GUNS, partDef, type GunId } from '../gunsmith/catalog';
 import type { Build } from '../gunsmith/compat';
-import { buildOf, gunSize, nodesOf, type GunState } from '../gunsmith/instance';
+import { buildOf, detachable, gunSize, nodesOf, type GunState } from '../gunsmith/instance';
+import { NO_MAG, drawnParts } from '../gunsmith/signature';
 import { devicesOn } from '../gunsmith/devices';
 import type { GunEdit, GunEditPreview } from '../gunsmith/edit';
 import {
     FACTORY_NAMES, POSITION_NAMES, SCORE_ROWS, WHERE_NAMES, benchGuns, benchParts, benchStats, candidateBuild, candidates, capped,
-    positions, presetEdits, remountEdits, replaceEdits, sourceOf, without, type BenchGun, type BenchNumbers, type BenchScores, type Candidate, type Capped, type Position,
+    magEdits, positions, presetEdits, remountEdits, replaceEdits, sourceOf, without, type BenchGun, type BenchNumbers, type BenchScores, type Candidate, type Capped, type Position,
 } from '../gunsmith/bench';
 import { PRESET_LIMIT, PRESET_NAME_MAX, presetIds, presetOf, type GunPreset } from '../gunsmith/presets';
 import { inventoryArtUrl, itemPicture } from '../art/item-images';
@@ -57,15 +58,15 @@ function stageRoom(): { w: number; h: number } {
 const b = (label: string, act: string, arg = '', cls = '', extra = '') =>
     `<button type="button" class="${cls}" data-gs="${act}"${arg ? ` data-arg="${esc(arg)}"` : ''} ${extra}>${label}</button>`;
 const img = (id: string, cls = '') => `<img class="${cls}" alt="" src="${inventoryArtUrl(id)}">`;
-const partName = (id: string) => ATTACHMENTS[id]?.name ?? id;
+const partName = (id: string) => partDef(id)?.name ?? id;
 const kg = (n: number) => `${n.toFixed(2)} kg`;
 const signed = (n: number, digits = 0) => `${n > 0 ? '+' : n < 0 ? '−' : ''}${Math.abs(n).toFixed(digits)}`;
 const ammoName = (gun: GunId) => D.ITEMS[GUNS[gun].stats.ammo]?.name ?? '';
 const sizeText = (s: { w: number; h: number }) => `${s.w} × ${s.h}`;
-/** Before → after when they differ, else the one value. */
 /** Where a gun that no longer fits where it lies goes on confirm (GunEditPreview.relocated, PLAN section 8). */
 const INTO: Readonly<Record<'stash' | 'bag' | 'safe', string>> = { stash: '仓库', bag: '背包', safe: '安全箱' };
 const relocation = (r: NonNullable<GunEditPreview['relocated']>) => `放到${INTO[r.where]}第 ${r.y + 1} 行第 ${r.x + 1} 列${r.rotated ? '，转向' : ''}`;
+/** Before → after when they differ, else the one value. */
 const arrow = (a: string, z: string) => a === z ? a : `${a} → <b>${z}</b>`;
 
 export class Workbench {
@@ -192,11 +193,14 @@ export class Workbench {
         return { gun, before: gun?.state ?? null, after: v.preview?.after ?? gun?.state ?? null, preview: v.preview };
     }
 
-    /** A click on a part (or on the factory card, `id` null) for the selected position, or for its own position in the all view. */
+    /**
+     * A click on a part (or on the factory card, `id` null; on the no-magazine card, NO_MAG) for the selected position, or
+     * for its own position in the all view.
+     */
     private choose(id: string | null) {
-        const { gun, after } = this.states();
+        const { gun, after, preview } = this.states();
         if (!gun || !after) return;
-        const build = buildOf({ id: gun.id, parts: after.parts }), list = positions(build);
+        const build = buildOf({ id: gun.id, ...after }), list = positions(build);
         let at = list.find(p => p.key === this.at) ?? null;
         if (this.mode === 'all' && id) {
             // Every part in the all view goes to its own slot: an empty position first, else the first one offered.
@@ -205,6 +209,7 @@ export class Workbench {
             if (at) this.at = at.key;
         }
         if (!at) return;
+        if (magCards(gun, at) && (id === null || id === NO_MAG)) { this.chooseMag(gun, build, at, id ? 'empty' : 'factory', preview); return; }
         const name = id ? partName(id) : at.part ? FACTORY_NAMES[at.slot] ?? '不装' : '';
         const refuse = (reason: string) => { this.refusal = { name, reason }; this.host.sound('error'); };
         if (!at.open) { refuse(at.reason ?? ''); return; }
@@ -226,6 +231,21 @@ export class Workbench {
                 if (more.length) this.preview([...edits, ...more], true);
             }
         }
+        this.compact();
+        this.host.sound('pick');
+    }
+
+    /**
+     * The gun's mag position's two factory cards (#28 M4-07): `factory` puts the factory magazine back (the one this
+     * preview took out, else a loose one), `empty` takes off what sits there and the factory magazine too.
+     */
+    private chooseMag(gun: BenchGun, build: Build, at: Position, to: 'empty' | 'factory', preview: GunEditPreview | null) {
+        if (to === 'empty' ? at.out : !at.part && !at.out) return;
+        const ejected = preview?.removals.find(r => r.id === FACTORY_MAGS[gun.id])?.uid ?? null;
+        const plan = magEdits(this.rt.snapshot().profile, gun, build, at, to, ejected);
+        if ('reason' in plan) { this.refusal = { name: to === 'empty' ? '' : FACTORY_NAMES.mag!, reason: plan.reason }; this.host.sound('error'); return; }
+        if (!this.preview([...this.session.view().edits, ...plan.edits])) return;
+        this.refusal = null;
         this.compact();
         this.host.sound('pick');
     }
@@ -258,7 +278,10 @@ export class Workbench {
             for (const n of nodes) walk(n.children, n.uid);
         };
         walk(v.preview.after.parts, null);
-        const before = JSON.stringify(v.preview), edits = [...roots, ...installs], r = this.session.preview(edits);
+        // The factory magazine (M4-07): taken out after the roots come off, or put back by the item's uid.
+        const mag: GunEdit[] = v.preview.after.magOut && !gun.state.magOut ? [{ kind: 'eject' }]
+            : v.preview.installs.filter(i => i.id === FACTORY_MAGS[v.preview!.gun.id]).map(i => ({ kind: 'install', uid: i.uid }));
+        const before = JSON.stringify(v.preview), edits = [...roots, ...mag, ...installs], r = this.session.preview(edits);
         // Keep the long list unless the short one gives the very same candidate.
         if (!r.ok || JSON.stringify(r.preview) !== before) this.session.preview(v.edits);
     }
@@ -288,7 +311,7 @@ export class Workbench {
         if (!gun || !before || !after) {
             return `<div class="gs gs-empty"><p>${guns.length ? '这把枪已不在基地里。从左边另选一把。' : '基地里没有枪械。先在修理铺买一把，或带回行动里找到的枪。'}</p>${guns.length ? `<div class="gs-guns">${this.gunsHtml(guns, null)}</div>` : ''}</div>`;
         }
-        const buildBefore = buildOf({ id: gun.id, parts: before.parts }), buildAfter = buildOf({ id: gun.id, parts: after.parts });
+        const buildBefore = buildOf({ id: gun.id, ...before }), buildAfter = buildOf({ id: gun.id, ...after });
         const list = positions(buildAfter);
         if (!list.some(p => p.key === this.at)) this.at = (list.find(p => p.open) ?? list[0])?.key ?? null;
         const at = list.find(p => p.key === this.at) ?? null;
@@ -323,6 +346,8 @@ export class Workbench {
     private marks(before: Build, preview: GunEditPreview | null): (p: Position) => boolean {
         const changed = new Set([...(preview?.installs ?? []), ...(preview?.moves ?? [])].map(i => i.uid));
         const emptied = new Set((preview?.removals ?? []).map(r => { const q = before.parts.find(x => x.uid === r.uid); return q ? `${q.parent ?? 'gun'}/${q.slot}` : ''; }));
+        // The factory magazine going out or back in (M4-07) changes the gun's own mag position.
+        if (preview && !!preview.before.magOut !== !!preview.after.magOut) emptied.add('gun/mag');
         return p => p.part ? changed.has(p.part.uid) : emptied.has(`${p.parent ?? 'gun'}/${p.slot}`);
     }
 
@@ -337,7 +362,7 @@ export class Workbench {
             const plan = presetEdits(profile, gun.uid, p.parts), missing = plan?.missing ?? [], count = presetIds(p.parts).length;
             const state = same(p, gun.state.parts) ? '装着这套' : preview && same(p, (preview.after).parts) ? '预览中' : missing.length ? '' : '可以应用';
             const lack = missing.length ? b(`缺 ${missing.length} 件${this.opened === p.id ? ' ▴' : ' ▾'}`, 'preset-missing', p.id, 'gs-lack', `aria-expanded="${this.opened === p.id}"`) : '';
-            const list = missing.length && this.opened === p.id ? `<ul class="gs-missing">${missing.map(id => `<li>${esc(partName(id))} · ${esc(sourceText(id))}</li>`).join('')}</ul>` : '';
+            const list = missing.length && this.opened === p.id ? `<ul class="gs-missing">${missing.map(id => `<li>${esc(partName(id))} · ${esc(sourceText(id, profile))}</li>`).join('')}</ul>` : '';
             const name = this.renaming === p.id
                 ? `<form class="gs-rename" data-gs-form><input name="gs-name" aria-label="预设名" maxlength="${PRESET_NAME_MAX}" value="${esc(p.name)}"><button type="submit" data-gs="preset-name" data-arg="${esc(p.id)}">保存</button>${b('取消', 'preset-rename-cancel', p.id)}</form>`
                 : `<b>${esc(p.name)}</b>`;
@@ -350,7 +375,7 @@ export class Workbench {
 
     /** One position on the gun body (and a chip on the phone's parts page). */
     private posHtml(p: Position, at: Position | null, mark: (p: Position) => boolean) {
-        const label = p.part ? partName(p.part.id) : p.open ? FACTORY_NAMES[p.slot] ?? '空' : '未开放', m = mark(p);
+        const label = p.part ? partName(p.part.id) : p.out ? '没装' : p.open ? FACTORY_NAMES[p.slot] ?? '空' : '未开放', m = mark(p);
         const cls = ['gs-pos', p.key === at?.key ? 'on' : '', p.open ? '' : 'closed', p.part ? '' : 'empty', m ? 'changed' : ''].filter(Boolean).join(' ');
         return `<button type="button" class="${cls}" data-gs="pos" data-arg="${esc(p.key)}" aria-pressed="${p.key === at?.key}" title="${esc(p.place)}${p.reason ? ` · ${esc(p.reason)}` : ''}"><small>${p.name}</small><b>${esc(label)}</b>${p.open ? '' : `<span>${esc(p.reason ?? '')}</span>`}${m ? '<i>改</i>' : ''}</button>`;
     }
@@ -359,7 +384,7 @@ export class Workbench {
      * The phone's picture of the gun as the preview builds it (#28 M2-10): Sol's workbench picture at the largest whole
      * scale that fits (ART-SPEC 2: 1 to 3 times on phones), else the inventory picture.
      */
-    private phoneArt(gun: BenchGun, parts: GunState['parts']) {
+    private phoneArt(gun: BenchGun, parts: readonly GunState['parts'][number][]) {
         const pic = gunsmithArt?.bench(gun.id, parts) ?? null;
         if (!pic) return img(gun.id);
         const vw = typeof innerWidth === 'number' ? innerWidth : 1280, vh = typeof innerHeight === 'number' ? innerHeight : 720;
@@ -373,7 +398,7 @@ export class Workbench {
      * whole scale that fits the room, centred, and the picture placed by its receiver inside it. A new part then changes
      * only its own pixels; the rest of the gun does not move or rescale.
      */
-    private stageHtml(gun: BenchGun, parts: GunState['parts']) {
+    private stageHtml(gun: BenchGun, parts: readonly GunState['parts'][number][]) {
         const room = stageRoom(), pic = gunsmithArt?.bench(gun.id, parts) ?? null, f = gunsmithArt?.benchFrame(gun.id) ?? null;
         if (!pic || !f) return `<div class="gs-art" style="height:${room.h}px">${img(gun.id)}</div>`;
         const k = Math.max(1, Math.floor(Math.min(room.w / f.w, room.h / f.h)));
@@ -385,7 +410,7 @@ export class Workbench {
     private infoText(gun: BenchGun, preview: GunEditPreview | null) {
         const mag = gun.magazine ? ` · 弹匣 ${gun.magazine.ammo} / ${arrow(String(preview?.capacity.before ?? gun.magazine.capacity), String(preview?.capacity.after ?? gun.magazine.capacity))} 发${ammoName(gun.id)}` : '';
         const weight = arrow(kg(preview?.weight.before ?? gun.weight), kg(preview?.weight.after ?? gun.weight));
-        const size = preview ? arrow(sizeText(preview.size.before), sizeText(preview.size.after)) : sizeText(gunSize({ id: gun.id, parts: gun.state.parts }));
+        const size = preview ? arrow(sizeText(preview.size.before), sizeText(preview.size.after)) : sizeText(gunSize({ id: gun.id, ...gun.state }));
         return `${WHERE_NAMES[gun.where]}${mag} · 枪重 ${weight} · 占格 ${size}`;
     }
 
@@ -395,7 +420,7 @@ export class Workbench {
             const on = g.uid === this.gunUid;
             return `<button type="button" class="gs-gun${on ? ' on' : ''}" data-gs="gun" data-arg="${esc(g.uid)}" aria-pressed="${on}"><b>${esc(g.name)}</b><em>${WHERE_NAMES[g.where]}${on && changes ? ` · ${changes} 处改动` : ''}</em></button>`;
         }).join('');
-        return `<div class="gs-guns gs-crow">${chips}</div><div class="gs-cbody"><div class="gs-art">${this.phoneArt(gun, preview?.after.parts ?? gun.state.parts)}</div><div class="gs-cpos">${list.map(p => this.posHtml(p, at, mark)).join('')}</div></div><p class="gs-cinfo">${this.infoText(gun, preview)}</p>${this.presetsHtml(gun, preview)}`;
+        return `<div class="gs-guns gs-crow">${chips}</div><div class="gs-cbody"><div class="gs-art">${this.phoneArt(gun, drawnParts(preview?.after ?? gun.state))}</div><div class="gs-cpos">${list.map(p => this.posHtml(p, at, mark)).join('')}</div></div><p class="gs-cinfo">${this.infoText(gun, preview)}</p>${this.presetsHtml(gun, preview)}`;
     }
 
     /** The phone's fixed bar: what the preview changes (opens the sheet), why it cannot be confirmed, cancel and confirm. */
@@ -418,7 +443,7 @@ export class Workbench {
         const top = list.filter(p => TOP.has(p.slot)), bottom = list.filter(p => !TOP.has(p.slot));
         const state = changes ? `<span class="gs-badge">预览中 · ${changes} 处改动没确认</span>` : '<span class="gs-dim">和枪上一致</span>';
         return `<header class="gs-head"><div><h3>${esc(gun.name)}</h3><p>${this.infoText(gun, preview)}</p></div><span class="gs-state">${state}</span></header>
-<div class="gs-stage"><div class="gs-row">${top.map(box).join('')}</div>${this.stageHtml(gun, preview?.after.parts ?? gun.state.parts)}<div class="gs-row">${bottom.map(box).join('')}</div></div>`;
+<div class="gs-stage"><div class="gs-row">${top.map(box).join('')}</div>${this.stageHtml(gun, drawnParts(preview?.after ?? gun.state))}<div class="gs-row">${bottom.map(box).join('')}</div></div>`;
     }
 
     private statsHtml(a: { scores: BenchScores; numbers: BenchNumbers }, z: { scores: BenchScores; numbers: BenchNumbers }, build: Build) {
@@ -451,9 +476,9 @@ export class Workbench {
             cards = rows.map(r => r.c && r.spot ? this.cardHtml(r.c, r.spot, build, now, true) : `<div class="gs-card refused"><b>${esc(partName(r.id))}</b><span class="gs-why">这把枪上没有能装它的位置</span></div>`).join('');
         } else if (at) {
             const factory = FACTORY_NAMES[at.slot];
-            const shown = at.part ? `现在：${esc(partName(at.part.id))}` : `现在：${factory ?? '空'}`;
+            const shown = at.part ? `现在：${esc(partName(at.part.id))}` : at.out ? '现在：没装弹匣，不能开火' : `现在：${factory ?? '空'}`;
             head = `<h3>${at.name} <small>${esc(at.place)}</small></h3><p>${shown}${at.open ? '' : ` · ${esc(at.reason ?? '')}`}</p>`;
-            const factoryCard = at.open ? this.factoryHtml(at, build, now) : '';
+            const factoryCard = !at.open ? '' : magCards(gun, at) ? this.magFactoryHtml(gun, at, build, now) + this.noMagHtml(at, build, now) : this.factoryHtml(at, build, now);
             const shownList = candidates(profile, gun.uid, build, at).filter(c => this.unowned || owned(c));
             cards = factoryCard + (shownList.length ? shownList.map(c => this.cardHtml(c, at, build, now, false)).join('')
                 : `<p class="gs-dim gs-none">${candidates(profile, gun.uid, build, at).length ? '仓库里没有能装在这里的配件。可以打开「显示未拥有的」先看看效果。' : '暂时没有能装在这里的配件。'}</p>`);
@@ -474,6 +499,28 @@ export class Workbench {
         const effect = current ? '<span class="gs-delta gs-dim">现在用的就是它</span>'
             : off.length ? `<span class="gs-why" title="${esc(off.join('、'))}会一起拆下">换回后${esc(off.join('、'))}会一起拆下</span>` : `<span class="gs-delta">换回后：${delta || '属性不变'}</span>`;
         return `<button type="button" class="gs-card factory${current ? ' current' : ''}" data-gs="part" data-arg="" aria-pressed="${current}"><span class="gs-fac">${FACTORY_NAMES[at.slot] ? '原厂' : '空'}</span><div><span class="gs-l1"><b>${name}</b>${current ? '<em>装着</em>' : ''}<small>${FACTORY_NAMES[at.slot] ? '不占仓库' : ''}</small></span><span class="gs-desc">${FACTORY_NAMES[at.slot] ? '原厂部件，一直在枪上。' : '这个位置空着。'}</span>${effect}</div></button>`;
+    }
+
+    /**
+     * The factory magazine's card on a gun whose magazine comes off (M4-07): on the gun, put back (the one taken out, or
+     * a loose one), or missing from the base.
+     */
+    private magFactoryHtml(gun: BenchGun, at: Position, build: Build, now: BenchScores) {
+        const current = !at.part && !at.out, id = FACTORY_MAGS[gun.id]!, profile = this.rt.snapshot().profile;
+        const loose = [profile.stash, profile.bag, profile.safe].reduce((n, inv) => n + inv.items.filter(i => i.id === id).length, 0);
+        const back = build.magOut ? { ...build, parts: without(build, at).parts, magOut: undefined } : without(build, at);
+        const effect = current ? '<span class="gs-delta gs-dim">现在用的就是它</span>'
+            : build.magOut && !loose && !this.session.view().preview?.removals.some(r => r.id === id) ? '<span class="gs-why">基地里没有能装回的原厂弹匣</span>'
+            : `<span class="gs-delta">换回后：${deltaText(now, benchStats(back).scores) || '属性不变'}</span>`;
+        const where = build.magOut ? `已拆下${loose ? ` · 基地里 ${loose} 个` : ''}` : '不占仓库';
+        return `<button type="button" class="gs-card factory${current ? ' current' : ''}" data-gs="part" data-arg="" aria-pressed="${current}"><span class="gs-fac">原厂</span><div><span class="gs-l1"><b>原厂弹匣</b>${current ? '<em>装着</em>' : ''}<small>${where}</small></span><span class="gs-desc">原厂部件，可以拆下。拆下后放进仓库，只能装回同型号的枪。</span>${effect}</div></button>`;
+    }
+
+    /** The no-magazine card (M4-07): the gun a row shorter and lighter, unable to fire until a magazine goes in. */
+    private noMagHtml(at: Position, build: Build, now: BenchScores) {
+        const current = at.out, empty = { ...without(build, at), magOut: true } as const;
+        const effect = current ? '<span class="gs-delta gs-dim">现在就没装弹匣</span>' : `<span class="gs-delta">拆下后：${deltaText(now, benchStats(empty).scores) || '属性不变'}</span>`;
+        return `<button type="button" class="gs-card factory${current ? ' current' : ''}" data-gs="part" data-arg="${NO_MAG}" aria-pressed="${current}"><span class="gs-fac">空</span><div><span class="gs-l1"><b>不装弹匣</b>${current ? '<em>空着</em>' : ''}<small>枪少占一行</small></span><span class="gs-desc">拆下的弹匣放进仓库。没装弹匣的枪不能开火，也不能出发。</span>${effect}</div></button>`;
     }
 
     private cardHtml(c: Candidate, at: Position, build: Build, now: BenchScores, all: boolean) {
@@ -503,7 +550,7 @@ export class Workbench {
     private pendingHtml(p: GunEditPreview | null) {
         const name = (uid: string | null) => pendingName(p, uid);
         const adds = (p?.installs ?? []).map(i => `<li class="${i.from ? '' : 'missing'}"><i>+</i><b>${esc(partName(i.id))}</b><small>${POSITION_NAMES[i.slot]} · ${i.from ? `从${{ stash: '仓库', bag: '背包', safe: '安全箱' }[i.from]}取` : '未拥有，确认前要先买到'}</small></li>`).join('');
-        const rems = (p?.removals ?? []).map(r => `<li class="${r.with ? 'cascade' : ''}"><i>−</i><b>${esc(partName(r.id))}</b><small>${r.with ? `随${esc(name(r.with))}拆下 · ` : `${POSITION_NAMES[ATTACHMENTS[r.id].mount]} · `}放回仓库</small></li>`).join('');
+        const rems = (p?.removals ?? []).map(r => `<li class="${r.with ? 'cascade' : ''}"><i>−</i><b>${esc(partName(r.id))}</b><small>${r.with ? `随${esc(name(r.with))}拆下 · ` : `${POSITION_NAMES[partDef(r.id).mount]} · `}放回仓库</small></li>`).join('');
         const moves = (p?.moves ?? []).map(m => `<li><i>↔</i><b>${esc(partName(m.id))}</b><small>换到${esc(name(m.parent) || '枪身')}上</small></li>`).join('');
         return `<div class="gs-pend"><h4>待装 <small>${p?.installs.length ?? 0} 件</small></h4><ul>${adds || '<li class="none">没有要装的配件</li>'}</ul></div>
 <div class="gs-pend"><h4>待卸 <small>${p?.removals.length ?? 0} 件</small></h4><ul>${rems || '<li class="none">没有要拆的配件</li>'}${moves}</ul></div>`;
@@ -520,7 +567,7 @@ export class Workbench {
         const from = { stash: '', bag: ' · 从背包取', safe: ' · 从安全箱取' };
         const items = [
             ...p.installs.map(i => `<span class="${i.from ? '' : 'missing'}"><i>+</i><b>${esc(partName(i.id))}</b><small>${POSITION_NAMES[i.slot]}${i.from ? from[i.from] : ' · 未拥有'}</small></span>`),
-            ...p.removals.map(r => `<span class="${r.with ? 'cascade' : ''}"><i>−</i><b>${esc(partName(r.id))}</b><small>${r.with ? `随${esc(pendingName(p, r.with))}拆下` : POSITION_NAMES[ATTACHMENTS[r.id].mount]}</small></span>`),
+            ...p.removals.map(r => `<span class="${r.with ? 'cascade' : ''}"><i>−</i><b>${esc(partName(r.id))}</b><small>${r.with ? `随${esc(pendingName(p, r.with))}拆下` : POSITION_NAMES[partDef(r.id).mount]}</small></span>`),
             ...p.moves.map(m => `<span><i>↔</i><b>${esc(partName(m.id))}</b><small>换到${esc(pendingName(p, m.parent) || '枪身')}上</small></span>`),
         ].join('');
         return `<div class="gs-pend"><h4>待改 <small>${n} 处</small></h4><p class="gs-pline" title="${items.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()}">${items}</p></div>`;
@@ -557,10 +604,12 @@ export class Workbench {
     }
 }
 
-const sourceText = (id: string) => sourceOf(id);
+const sourceText = (id: string, save: D.SaveDataV1) => sourceOf(id, save);
 /** The name of a part in a preview, after the edit or else before it. */
 function pendingName(p: GunEditPreview | null, uid: string | null) { const n = p && (findPart(p.after, uid) ?? findPart(p.before, uid)); return n ? partName(n.id) : ''; }
-const brandName = (brand: string) => ({ beidi: '北堤', yanwan: '盐湾', binji: '滨机' } as Record<string, string>)[brand] ?? '';
+const brandName = (brand: string) => ({ beidi: '北堤', yanwan: '盐湾', binji: '滨机', factory: '原厂' } as Record<string, string>)[brand] ?? '';
+/** The gun's own mag position on a gun whose factory magazine comes off (M4-07): it shows the two factory cards. */
+const magCards = (gun: Pick<BenchGun, 'id'>, at: Position) => detachable(gun.id) && at.parent === null && at.slot === 'mag' && at.open;
 function findPart(state: GunState, uid: string | null) {
     const walk = (nodes: GunState['parts']): GunState['parts'][number] | null => { for (const n of nodes) { if (n.uid === uid) return n; const c = walk(n.children); if (c) return c; } return null; };
     return uid === null ? null : walk(state.parts);

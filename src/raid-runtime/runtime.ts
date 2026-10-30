@@ -1,5 +1,5 @@
 /** Headless coastal raid. Rules transplanted from RaidScene at f144147; no renderer/DOM imports. */
-import { partsSignature } from '../gunsmith/signature';
+import { drawnParts, partsSignature } from '../gunsmith/signature';
 import * as D from '../domain';
 import { getLegacyEnemyProfile } from '../enemy-profile';
 import { actorArchetype, actorDefinition, enemyDefinition } from '../enemy-archetypes';
@@ -22,7 +22,8 @@ import { critMultiplier, critSources, type CritSnapshot } from '../perks';
 import { advanceBreath, breathChance, clearBreath, idleBreath } from '../breath';
 import { advancePursuits } from '../pursuit';
 import { advanceAim, coneOf, drawAim, driftOf, handlingOf, preciseHeld, recoil, turnAim, unsteadyAim, SWAY, type AimState, type Handling, type Motion } from '../shooting';
-import { GUNS, type GunClass } from '../gunsmith/catalog';
+import { ATTACHMENTS, GUNS, type GunClass } from '../gunsmith/catalog';
+import { presetIds } from '../gunsmith/presets';
 import { effectiveStats, laserHandling } from '../gunsmith/stats';
 import { buildOf, gunWeight } from '../gunsmith/instance';
 import { deviceParts, devicesOn, partOn, toggleDevice, type DeviceEffect, type DevicePart } from '../gunsmith/devices';
@@ -205,7 +206,10 @@ export class CoastRaidRuntime implements RaidRuntime {
             // Start at the body: the normal segment collision cannot shoot through a wall beside a muzzle.
             const bullet: BulletState = { uid: this.allocateEntityUid(), x: enemy.x, y: enemy.y, rotation: angle,
                 vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, left: def.range, damage: def.damage, enemy: true, owner: enemy.uid };
-            this.bullets.push(bullet); this.shotEvent(enemy.uid, def.weapon, [bullet], [angle]);
+            // The gun it holds names the report (#28 M4-02); its numbers stay the archetype's (#152).
+            const held = enemy.tactics?.equipment, gun = held && D.isGun(held) ? { id: held, cls: GUNS[held].cls,
+                suppressed: presetIds(enemy.tactics!.fit ?? []).some(id => ATTACHMENTS[id]?.mods.suppressor === true) } : undefined;
+            this.bullets.push(bullet); this.shotEvent(enemy.uid, def.weapon, [bullet], [angle], gun);
         },
     };
     private checkpointAt = 0;
@@ -306,7 +310,7 @@ export class CoastRaidRuntime implements RaidRuntime {
     /** The gun in hand's type and configuration signature, for its picture (#28 M2-10); null with the knife or no gun. */
     get heldGun(): { id: string; sig: string } | null {
         const gun = this.knife ? null : D.equippedGun(this.session.loadout ?? this.terminalLoadout);
-        return gun ? { id: gun.id, sig: partsSignature(gun.parts) } : null;
+        return gun ? { id: gun.id, sig: partsSignature(drawnParts(gun)) } : null;
     }
     /** How the held weapon is drawn (heldLook). */
     get weaponLook(): WeaponLook { return heldLook(this.currentWeapon.id); }
@@ -1031,6 +1035,8 @@ export class CoastRaidRuntime implements RaidRuntime {
     get reloadTime() { return this.currentWeapon.reload * perkEffects(this.layered).reload; }
     startReload() {
         const w = this.currentWeapon;
+        // A gun without a magazine (#28 M4-07) neither fires nor loads.
+        if (w.ammo && !w.magazine) { this.say('这把枪没装弹匣，不能开火。'); return; }
         if (w.ammo && !this.reloadLeft && this.mag < w.magazine) {
             if (!D.count(this.session.loadout!.bag, w.ammo)) {
                 this.say('背包中没有适用的备用弹药。');
@@ -1282,7 +1288,7 @@ export class CoastRaidRuntime implements RaidRuntime {
             this.setOverlay('');
         return ok;
     }
-    /** `gun`: the player's gun, its id, class and whether a suppressor muffles it, for the view's sound (#28 M2-11). */
+    /** `gun`: the shooter's gun (the player's, #28 M2-11; an armed enemy's, M4-02), its id, class and whether a suppressor muffles it, for the view's sound. */
     private shotEvent(shooter: string, weapon: WeaponLook, bullets: BulletState[], angles: number[], gun?: { id: string; cls: GunClass; suppressed: boolean }) {
         this.emit({ type: 'shot', shotId: `${shooter}:${bullets[0].uid}`, shooter, weapon,
             pellets: bullets.map((b, i) => ({ bullet: b.uid, origin: { x: b.x, y: b.y }, angle: angles[i] })),

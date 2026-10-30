@@ -7,7 +7,7 @@
  */
 import { GUNS, type GunId, type Slot } from './catalog';
 import { MAX_PARTS, validateBuild, type Build, type Part } from './compat';
-import { isGunId, type PartNode } from './instance';
+import { isGunId, type GunState, type PartNode } from './instance';
 
 /** One part of a preset: its catalog id, the slot it sits in on its parent, and the parts on it. */
 export interface PresetNode { id: string; slot: Slot; children: PresetNode[] }
@@ -55,6 +55,17 @@ function wellFormed(nodes: unknown, budget: { left: number }): nodes is PresetNo
     }
     return true;
 }
+/**
+ * A gun state built to a preset tree, every part under a fresh uid from `allocate`, every device off: an armed leader's
+ * gun as its body yields it (#28 M4-02, layer-transition.ts).
+ */
+export function presetState(parts: readonly PresetNode[], allocate: () => string): GunState {
+    const grow = (nodes: readonly PresetNode[]): PartNode[] => nodes.map(n => ({ uid: allocate(), id: n.id, slot: n.slot, relief: false, children: grow(n.children) }));
+    return { parts: grow(parts), devices: { laser: false, light: false } };
+}
+/** A non-empty part tree that is a valid build on `gun` (an armed leader's parts, #28 M4-02). */
+export const validFit = (gun: unknown, parts: unknown): parts is PresetNode[] => isGunId(gun) && Array.isArray(parts) && parts.length > 0
+    && wellFormed(parts, { left: MAX_PARTS }) && validateBuild(presetBuild(gun, parts as PresetNode[])).ok;
 /** One preset: a known gun, a valid build of catalog parts, an id and a name as presetName leaves it. */
 export function validPreset(value: unknown): value is GunPreset {
     if (!value || typeof value !== 'object' || Array.isArray(value)) return false;

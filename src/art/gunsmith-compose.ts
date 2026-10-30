@@ -24,7 +24,8 @@ export function loadGunsmithArt(): Promise<void> {
     })).then(() => installGunsmithArt({
         icon: (id, size) => {
             const own = gunsmithIconImage(id, size), small = size === 32 && !own ? gunsmithIconImage(id, 24) : null;
-            return own ? { img: own, x: 0, y: 0 } : small ? { img: small, x: 4, y: 4 } : null;
+            if (own) return { img: own, x: 0, y: 0 };
+            return small ? { img: small, x: 4, y: 4 } : null;
         },
         inventory: id => {
             const layout = gunArtLayout(id, [], 'i');
@@ -41,10 +42,10 @@ export function loadGunsmithArt(): Promise<void> {
             sides.set(id, canvas ?? null);
             return canvas ?? null;
         },
-        held: (gun, sig) => {
+        held: (gun, sig, glove) => {
             const parts = partsOfSignature(sig), layout = parts && gunArtLayout(gun, parts, 'h');
             if (!layout?.grip || !layout.tip || layout.bore === undefined) return null;
-            const canvas = drawGunLayout(layout);
+            const canvas = drawGunLayout(layout, glove);
             return canvas && { key: layout.key, canvas, grip: layout.grip, forward: layout.forward ?? 0, hand: layout.hand ?? null, tip: layout.tip, bore: layout.bore };
         },
     }));
@@ -83,7 +84,7 @@ function virtualLayer(key: string): HTMLCanvasElement | null {
 const source = (key: string): CanvasImageSource | null => images.get(key) ?? virtualLayer(key);
 
 /** Draw a layout on a new canvas, back to front; null before the images are decoded or without a 2D context. */
-export function drawGunLayout(layout: ArtLayout): HTMLCanvasElement | null {
+export function drawGunLayout(layout: ArtLayout, glove?: string): HTMLCanvasElement | null {
     const canvas = document.createElement('canvas'); canvas.width = layout.w; canvas.height = layout.h;
     const c = canvas.getContext('2d');
     if (!c) return null;
@@ -91,8 +92,20 @@ export function drawGunLayout(layout: ArtLayout): HTMLCanvasElement | null {
     for (const l of layout.layers) {
         const img = source(l.key);
         if (!img || !artOf(l.key)) return null;
-        c.drawImage(img, l.x, l.y);
+        c.drawImage(glove && l.label.startsWith('glove') ? tinted(img, l.w, l.h, glove) ?? img : img, l.x, l.y);
     }
+    return canvas;
+}
+/**
+ * A glove image in an enemy's colour (#28 M4-02): the colour over its opaque pixels, keeping half of their shading, so
+ * a gunsmith gun in an enemy's hands wears that enemy's gloves as its old weapon art does.
+ */
+function tinted(img: CanvasImageSource, w: number, h: number, colour: string): HTMLCanvasElement | null {
+    const canvas = document.createElement('canvas'); canvas.width = w; canvas.height = h;
+    const c = canvas.getContext('2d');
+    if (!c) return null;
+    c.drawImage(img, 0, 0);
+    c.globalCompositeOperation = 'source-atop'; c.globalAlpha = .5; c.fillStyle = colour; c.fillRect(0, 0, canvas.width, canvas.height);
     return canvas;
 }
 
@@ -138,5 +151,5 @@ const releaseBenchArt = () => bench.clear();
 /** The cache sizes, for the resource checks of M2-10 and M5-02. */
 export const gunArtCaches = () => ({ inventory: inventory.size, bench: bench.size });
 
-/** The decoded square icon of a gun or part; null when there is none or before decoding. */
+/** The decoded square icon of a gun, part or factory magazine (Sol's, #142); null when there is none or before decoding. */
 const gunsmithIconImage = (item: string, size: 24 | 32): HTMLImageElement | null => images.get(`gs-${item.toLowerCase()}-q${size}`) ?? null;

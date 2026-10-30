@@ -1,10 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as D from '../src/domain';
-import { ATTACHMENTS, SLOT_NAMES, type Slot } from '../src/gunsmith/catalog';
+import { ATTACHMENTS, SLOT_NAMES, factoryMagOf, partDef, type Slot } from '../src/gunsmith/catalog';
 import { checkInstall, removalCascade } from '../src/gunsmith/compat';
 import { locateGun, planGunEdit, type GunEdit, type GunEditPlan } from '../src/gunsmith/edit';
-import { buildOf, factoryState, gunUids, nodesOf, repeatedUids, type GunState, type PartNode } from '../src/gunsmith/instance';
+import { buildOf, detachable, factoryState, gunUids, nodesOf, repeatedUids, type GunState, type PartNode } from '../src/gunsmith/instance';
 import type { SessionRecord } from '../src/recovery-store';
 import { reason, yard } from './fixtures/workbench';
 
@@ -16,7 +16,8 @@ import { reason, yard } from './fixtures/workbench';
  * loose sample parts (some relief) and rounds of both kinds; half the seeds pack the stash nearly full. Each step either
  * shuffles the base (quick moves, the safe, equipping, sorting) or opens the workbench on a random gun and builds a
  * random edit list, edit by edit as a player taps: removals, installs of owned parts that fit (and some that do not),
- * moves of parts the list took off, previews of parts not owned. Edits the planner refuses are dropped (the session
+ * moves of parts the list took off, previews of parts not owned, factory magazines taken out and put back (#28 M4-07).
+ * Edits the planner refuses are dropped (the session
  * refuses them too and keeps its preview). The list is previewed through the session; a confirmable one is committed,
  * sometimes after the base changed under it (stale, previewed again) or after a forced write failure and retrySave.
  *
@@ -35,7 +36,7 @@ const pick = <T>(rng: Rng, list: readonly T[]): T => list[int(rng, list.length)]
  * catalog part is an item; the other guns' own parts would only crowd the containers.
  */
 const FIXTURE_GUNS: readonly string[] = ['mb4a1', 'gb17', 'carbine', 'pistol', 'shotgun'];
-const SAMPLE = Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && (!ATTACHMENTS[id].guns || ATTACHMENTS[id].guns!.some(g => FIXTURE_GUNS.includes(g))));
+const SAMPLE = Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && Object.hasOwn(ATTACHMENTS, id) && (!ATTACHMENTS[id].guns || ATTACHMENTS[id].guns!.some(g => FIXTURE_GUNS.includes(g))));
 const CATALOG = Object.keys(ATTACHMENTS);
 const SLOTS = Object.keys(SLOT_NAMES) as Slot[];
 const CONTAINERS = ['stash', 'bag', 'safe'] as const;
@@ -58,7 +59,10 @@ function stock(seed: number, rng: Rng) {
         const fitted: [string, GunState][] = [
             ['mb4a1', { parts: [part('H01', 'handguard', [part('T01', 'side'), part('F03', 'under')])], devices: { laser: rng() < .7, light: false } }],
             ['carbine', { parts: [part('H05', 'handguard', [part('T05', 'side')]), part('A07', 'base', [part('O03', 'top')])], devices: { laser: false, light: rng() < .7 } }],
+            // An M4A1 whose factory magazine is out (#28 M4-07), and now and then its magazine loose in the bag.
+            ['mb4a1', { ...factoryState(), magOut: true }],
         ];
+        if (rng() < .6) D.placeItem(p.bag, { uid: uid(), id: 'mb4a1-mag', qty: 1, x: 0, y: 0, ...(rng() < .2 ? { relief: true } : {}) });
         for (const [id, state] of [...fitted, ...['mb4a1', 'gb17', 'carbine', 'gb17', 'pistol', 'shotgun'].map(id => [id, factoryState()] as const)])
             D.placeItem(rng() < .65 ? p.stash : p.bag, { uid: uid(), id, qty: 1, x: 0, y: 0, gun: state });
         // Loose parts, some relief, and always one quick magazine.
@@ -72,20 +76,26 @@ function stock(seed: number, rng: Rng) {
     };
 }
 
-/** The record's parts, guns and goods (rounds in the magazine counted with their kind), and every uid once. */
+/**
+ * The record's parts, guns and goods (rounds in the magazine counted with their kind), and every uid once. Factory
+ * magazines (M4-07) are counted by type: the loose ones and the ones in their guns. Taking one out makes a new item.
+ */
 function census(record: SessionRecord) {
-    const p = record.profile, uids: string[] = [], parts: string[] = [], guns: string[] = [], goods = new Map<string, number>();
+    const p = record.profile, uids: string[] = [], parts: string[] = [], guns: string[] = [], goods = new Map<string, number>(), mags = new Map<string, number>();
+    const mag = (gun: string) => mags.set(gun, (mags.get(gun) ?? 0) + 1);
     const tag = (uid: string, id: string, relief: boolean | undefined) => `${uid} ${id}${relief ? ' relief' : ''}`;
     const add = (key: string, qty: number) => { if (qty) goods.set(key, (goods.get(key) ?? 0) + qty); };
     const gun = (uid: string, id: string, relief: boolean, state: GunState) => {
         guns.push(tag(uid, id, relief));
+        if (detachable(id) && !state.magOut) mag(id);
         for (const n of nodesOf(state.parts)) parts.push(tag(n.uid, n.id, n.relief));
         uids.push(...gunUids({ uid, parts: state.parts }));
     };
     for (const c of CONTAINERS) for (const i of p[c].items) {
         if (i.gun) { gun(i.uid, i.id, !!i.relief, i.gun); continue; }
         uids.push(i.uid);
-        if (D.isAttachment(i.id)) parts.push(tag(i.uid, i.id, i.relief)); else add(`${i.id}${i.relief ? ' relief' : ''}`, i.qty);
+        if (factoryMagOf(i.id)) mag(factoryMagOf(i.id)!);
+        else if (D.isAttachment(i.id)) parts.push(tag(i.uid, i.id, i.relief)); else add(`${i.id}${i.relief ? ' relief' : ''}`, i.qty);
     }
     const e = p.equipment;
     if (e.weapon) {
@@ -97,7 +107,7 @@ function census(record: SessionRecord) {
     // A yard transfer may give a loose part a new uid (D.transferItem goes through addItem, CONTRACTS M2-02), so across
     // shuffles parts are compared by type; across a workbench step by uid as well (`parts`).
     return { parts: parts.sort(), totals: { kinds: parts.map(t => t.slice(t.indexOf(' ') + 1)).sort(), guns: guns.sort(),
-        goods: [...goods].sort(([a], [b]) => a < b ? -1 : 1), cash: p.cash } };
+        goods: [...goods].sort(([a], [b]) => a < b ? -1 : 1), mags: [...mags].sort(), cash: p.cash } };
 }
 
 /** Shuffle the base through the yard: what the workbench finds where changes between steps. */
@@ -115,7 +125,11 @@ function shuffle(f: Yard, rng: Rng, log: string[]) {
 /** A random tap on the candidate `state` of gun `target`, as the edits it makes: mostly what a player would do, sometimes not. */
 function randomTap(rng: Rng, p: D.SaveDataV1, target: string, state: GunState): GunEdit[] {
     const gun = locateGun(p, target)!, original = nodesOf(gun.state.parts), on = nodesOf(state.parts);
-    const build = buildOf({ id: gun.id, parts: state.parts }), fits = (id: string) => checkInstall(build, id).ok;
+    const build = buildOf({ id: gun.id, ...state }), fits = (id: string) => checkInstall(build, id).ok;
+    // The factory magazine (M4-07): out now and then; while it is out, often a loose one of this gun type back in.
+    if (rng() < .08) return [{ kind: 'eject' }];
+    const loose = state.magOut && rng() < .35 ? CONTAINERS.flatMap(c => p[c].items).find(i => factoryMagOf(i.id) === gun.id) : undefined;
+    if (loose) return [{ kind: 'install', uid: loose.uid }];
     // Owned: loose parts not on this candidate, and parts of this gun the list took off.
     const owned: { uid: string; id: string }[] = [...CONTAINERS.flatMap(c => p[c].items.filter(i => D.isAttachment(i.id) && !on.some(n => n.uid === i.uid))),
         ...original.filter(n => !on.some(o => o.uid === n.uid))];
@@ -140,7 +154,7 @@ function randomTap(rng: Rng, p: D.SaveDataV1, target: string, state: GunState): 
         const fitting = owned.filter(o => fits(o.id)), quick = gun.where === 'equipment' ? fitting.filter(o => o.id === 'G10') : [];
         const part = quick.length && rng() < .6 ? pick(rng, quick) : fitting.length && rng() < .75 ? pick(rng, fitting) : owned.length ? pick(rng, owned) : null;
         if (!part) return [];
-        const at = rng() < .6 ? undefined : { parent: pick(rng, [null, ...on.map(n => n.uid)]), slot: rng() < .9 ? ATTACHMENTS[part.id].mount : pick(rng, SLOTS) };
+        const at = rng() < .6 ? undefined : { parent: pick(rng, [null, ...on.map(n => n.uid)]), slot: rng() < .9 ? partDef(part.id).mount : pick(rng, SLOTS) };
         return [{ kind: 'install', uid: part.uid, ...(at ? { at } : {}) }];
     }
     if (r < .94) {
@@ -220,7 +234,8 @@ function workbench(f: Yard, rng: Rng, log: string[], stats: Stats, shuffled: { p
     const after = f.record.profile, held = locateGun(after, target)!, preview = committed.preview;
     assert.deepEqual(held.state, preview.after, 'the gun holds the previewed candidate');
     const items = CONTAINERS.flatMap(c => after[c].items);
-    for (const i of preview.installs) assert.ok(!items.some(x => x.uid === i.uid) && nodesOf(held.state.parts).some(n => n.uid === i.uid), `${i.uid} went on`);
+    // A factory magazine put back is no node: it is used up and the gun's magazine is in again.
+    for (const i of preview.installs) assert.ok(!items.some(x => x.uid === i.uid) && (factoryMagOf(i.id) ? !held.state.magOut : nodesOf(held.state.parts).some(n => n.uid === i.uid)), `${i.uid} went on`);
     for (const r of preview.removals) assert.ok(after.stash.items.some(x => x.uid === r.uid && x.id === r.id), `${r.uid} lies in the stash`);
     if (preview.unloaded) assert.equal(after.equipment.ammo, preview.capacity.after);
     const used = f.raw;
@@ -229,6 +244,8 @@ function workbench(f: Yard, rng: Rng, log: string[], stats: Stats, shuffled: { p
     count(stats, 'commit'); count(stats, 'installed', preview.installs.length); count(stats, 'removed', preview.removals.length);
     count(stats, 'removed with a parent', preview.removals.filter(r => r.with).length); count(stats, 'moved', preview.moves.length);
     count(stats, `committed in the ${preview.gun.where}`);
+    if (!preview.before.magOut && preview.after.magOut) count(stats, 'magazine out');
+    if (preview.before.magOut && !preview.after.magOut) count(stats, 'magazine back');
     if (preview.unloaded) { count(stats, 'unloaded'); count(stats, 'unloaded relief', +!!preview.unloaded.relief); }
     if (preview.after.devices.laser || preview.after.devices.light) count(stats, 'switch kept on');
     if ((preview.before.devices.laser && !preview.after.devices.laser) || (preview.before.devices.light && !preview.after.devices.light)) count(stats, 'switch turned off');

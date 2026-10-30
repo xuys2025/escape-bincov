@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "date": "2026-10-30",
+  "mode": "built-in image_gen",
+  "calls": 10,
+  "successful": 9,
+  "failed": 1,
+  "finalization": "New icon silhouettes/materials use tool references, then original native 24x24 integer-grid finish using existing repo pixel authoring support. UMP reference blocked by tool; no retry or CLI/API fallback, existing editable native profiles used. Layer splits are exact native pixel transfers, without resampling.",
+  "records": [
+    {
+      "gun": "mpb5",
+      "prompt": "Use case: precise-object-edit\nAsset type: 24 by 24 native pixel-art standalone inventory icon for an existing game.\nInput: existing small magazine icon is the exact style, palette and grid reference.\nPrimary request: create a new standalone MP5 compact curved narrow steel magazine, gently swept lower third, gray rib, small flat floorplate. Show ONLY the detached factory magazine, feed lips at top and floorplate at bottom, side profile pointing down, clear complete silhouette centered in square. No weapon and no cartridges.\nStyle: restrained original low-resolution pixel art, NOT a rendering. Solid one-pixel dark outline #122027. Use only #122027 #24373d #425a60 #829c9d #bdcfca, with #485c4b #7d9168 for olive polymer if specified. Maximum eight opaque colors. Upper left light, readable at actual 24x24. Transparent background. One object only, no grid, no labels, no text, no logo, no shadows or glow, no antialiasing. Keep integer-grid edges and leave at least 2 transparent pixels around icon.",
+      "localReference": "docs/gunsmith/art/m4-mags/source/mpb5-reference.png"
+    },
+    {
+      "gun": "umpb45",
+      "error": "image generation failed: http 400 Bad Request: Some(\"{\\n  \\\"error\\\": {\\n    \\\"message\\\": \\\"Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID 8de51e2e-3fa2-48f6-aa18-58a6f44685ca. safety_violations=[violence].\\\",\\n    \\\"type\\\": \\\"image_generation_user_error\\\",\\n    \\\"param\\\": null,\\n    \\\"code\\\": \\\"moderation_blocked\\\",\\n    \\\"moderation_details\\\": {\\n      \\\"moderation_stage\\\": \\\"input\\\",\\n      \\\"categories\\\": [\\n        \\\"violence\\\"\\n      ]\\n    }\\n  }\\n}\")",
+      "subject": "UMP45 straight tall narrow black polymer box magazine, rectangular spine and small witness holes, flat base",
+      "prompt": "Use case: precise-object-edit\nAsset type: 24 by 24 native pixel-art standalone inventory icon for an existing game.\nInput: existing small magazine icon is the exact style, palette and grid reference.\nPrimary request: create a new standalone UMP45 straight tall narrow black polymer box magazine, rectangular spine and small witness holes, flat base. Show ONLY the detached factory magazine, feed lips at top and floorplate at bottom, side profile pointing down, clear complete silhouette centered in square. No weapon and no cartridges.\nStyle: restrained original low-resolution pixel art, NOT a rendering. Solid one-pixel dark outline #122027. Use only #122027 #24373d #425a60 #829c9d #bdcfca, with #485c4b #7d9168 for olive polymer if specified. Maximum eight opaque colors. Upper left light, readable at actual 24x24. Transparent background. One object only, no grid, no labels, no text, no logo, no shadows or glow, no antialiasing. Keep integer-grid edges and leave at least 2 transparent pixels around icon."
+    },
+    {
+      "gun": "akb74",
+      "prompt": "Use case: precise-object-edit\nAsset type: 24 by 24 native pixel-art standalone inventory icon for an existing game.\nInput: existing small magazine icon is the exact style, palette and grid reference.\nPrimary request: create a new standalone AK-74 slim curved olive-green magazine, pronounced sweep at lower end, long molded ribs. Show ONLY the detached factory magazine, feed lips at top and floorplate at bottom, side profile pointing down, clear complete silhouette centered in square. No weapon and no cartridges.\nStyle: restrained original low-resolution pixel art, NOT a rendering. Solid one-pixel dark outline #122027. Use only #122027 #24373d #425a60 #829c9d #bdcfca, with #485c4b #7d9168 for olive polymer if specified. Maximum eight opaque colors. Upper left light, readable at actual 24x24. Transparent background. One object only, no grid, no labels, no text, no logo, no shadows or glow, no antialiasing. Keep integer-grid edges and leave at least 2 transparent pixels around icon.",
+      "localReference": "docs/gunsmith/art/m4-mags/source/akb74-reference.png"
+    },
+    {
+      "gun": "akb103",
+      "prompt": "Use case: precise-object-edit\nAsset type: 24 by 24 native pixel-art standalone inventory icon for an existing game.\nInput: existing small magazine icon is the exact style, palette and grid reference.\nPrimary request: create a new standalone AK-103 broad curved dark polymer magazine, thicker arc and broad lower floorplate. Show ONLY the detached factory magazine, feed lips at top and floorplate at bottom, side profile pointing down, clear complete silhouette centered in square. No weapon and no cartridges.\nStyle: restrained original low-resolution pixel art, NOT a rendering. Solid one-pixel dark outline #122027. Use only #122027 #24373d #425a60 #829c9d #bdcfca, with #485c4b #7d9168 for olive polymer if specified. Maximum eight opaque colors. Upper left light, readable at actual 24x24. Transparent background. One object only, no grid, no labels, no text, no logo, no shadows or glow, no antialiasing. Keep integer-grid edges and leave at least 2 transparent pixels around icon.",
+      "localReference": "docs/gunsmith/art/m4-mags/source/akb103-reference.png"
+    },
+    {
+      "gun": "mb4a1",
+      "prompt": "Use case: precise-object-edit\nAsset type: 24 by 24 native pixel-art standalone inventory icon for an existing game.\nInput: existing small magazine icon is the exact style, palette and grid reference.\nPrimary request: create a new standalone M4A1 gray steel box magazine, mostly straight upper half, shallow lower bend, two stamped lengthwise ribs. Show ONLY the detached factory magazine, feed lips at top and floorplate at bottom, side profile pointing down, clear complete silhouette centered in square. No weapon and no cartridges.\nStyle: restrained original low-resolution pixel art, NOT a rendering. Solid one-pixel dark outline #122027. Use only #122027 #24373d #425a60 #829c9d #bdcfca, with #485c4b #7d9168 for olive polymer if specified. Maximum eight opaque colors. Upper left light, readable at actual 24x24. Transparent background. One object only, no grid, no labels, no text, no logo, no shadows or glow, no antialiasing. Keep integer-grid edges and leave at least 2 transparent pixels around icon.",
+      "localReference": "docs/gunsmith/art/m4-mags/source/mb4a1-reference.png"
+    },
+    {
+      "gun": "augb",
+      "prompt": "Use case: precise-object-edit\nAsset type: native 24x24 pixel-art standalone inventory icon for a fictional pixel game.\nPrimary request: redraw the provided icon as one detached AUG compact olive polymer rifle magazine, a short shallow curved box with subdued translucent side window and visible internal dark follower shape. Feed lips at the top, base below, full side silhouette centered in the square, at least two transparent pixels of margin.\nUse the provided existing game icon as exact pixel-style reference. Upper left light. One pixel outside ink #122027; maximum eight opaque colors chosen from #122027 #24373d #425a60 #829c9d #bdcfca #485c4b #7d9168 #996749 #cb9362 #5c4236. Use steel gray for steel, dark gray for black polymer, olive for AUG, brown for RPK. No text, cartridges, weapon, logo, grid, shadows, glow, antialiasing, photorealism or background. Crisp integer pixel art, true transparency.",
+      "localReference": "docs/gunsmith/art/m4-mags/source/augb-reference.png"
+    },
+    {
+      "gun": "mb14",
+      "prompt": "Use case: precise-object-edit\nAsset type: native 24x24 pixel-art standalone inventory icon for a fictional pixel game.\nPrimary request: redraw the provided icon as one detached M14 short broad steel rectangular box magazine, squared lower edge and two straight stamped vertical ribs. Feed lips at the top, base below, full side silhouette centered in the square, at least two transparent pixels of margin.\nUse the provided existing game icon as exact pixel-style reference. Upper left light. One pixel outside ink #122027; maximum eight opaque colors chosen from #122027 #24373d #425a60 #829c9d #bdcfca #485c4b #7d9168 #996749 #cb9362 #5c4236. Use steel gray for steel, dark gray for black polymer, olive for AUG, brown for RPK. No text, cartridges, weapon, logo, grid, shadows, glow, antialiasing, photorealism or background. Crisp integer pixel art, true transparency.",
+      "localReference": "docs/gunsmith/art/m4-mags/source/mb14-reference.png"
+    },
+    {
+      "gun": "rpkb",
+      "prompt": "Use case: precise-object-edit\nAsset type: native 24x24 pixel-art standalone inventory icon for a fictional pixel game.\nPrimary request: redraw the provided icon as one detached RPK long curved brown bakelite rifle magazine, slender upper neck, long prominent curved rib and wide base. Feed lips at the top, base below, full side silhouette centered in the square, at least two transparent pixels of margin.\nUse the provided existing game icon as exact pixel-style reference. Upper left light. One pixel outside ink #122027; maximum eight opaque colors chosen from #122027 #24373d #425a60 #829c9d #bdcfca #485c4b #7d9168 #996749 #cb9362 #5c4236. Use steel gray for steel, dark gray for black polymer, olive for AUG, brown for RPK. No text, cartridges, weapon, logo, grid, shadows, glow, antialiasing, photorealism or background. Crisp integer pixel art, true transparency.",
+      "localReference": "docs/gunsmith/art/m4-mags/source/rpkb-reference.png"
+    },
+    {
+      "gun": "svdb",
+      "prompt": "Use case: precise-object-edit\nAsset type: native 24x24 pixel-art standalone inventory icon for a fictional pixel game.\nPrimary request: redraw the provided icon as one detached SVD short squat gray steel box magazine, a wide almost rectangular body with slight lower-front rake and two pressed panel ribs. Feed lips at the top, base below, full side silhouette centered in the square, at least two transparent pixels of margin.\nUse the provided existing game icon as exact pixel-style reference. Upper left light. One pixel outside ink #122027; maximum eight opaque colors chosen from #122027 #24373d #425a60 #829c9d #bdcfca #485c4b #7d9168 #996749 #cb9362 #5c4236. Use steel gray for steel, dark gray for black polymer, olive for AUG, brown for RPK. No text, cartridges, weapon, logo, grid, shadows, glow, antialiasing, photorealism or background. Crisp integer pixel art, true transparency.",
+      "localReference": "docs/gunsmith/art/m4-mags/source/svdb-reference.png"
+    },
+    {
+      "gun": "vb9",
+      "prompt": "Use case: precise-object-edit\nAsset type: native 24x24 pixel-art standalone inventory icon for a fictional pixel game.\nPrimary request: redraw the provided icon as one detached Vector compact straight dark polymer submachine-gun magazine, narrow tall rectangular body with one line of witness holes and small flat floorplate. Feed lips at the top, base below, full side silhouette centered in the square, at least two transparent pixels of margin.\nUse the provided existing game icon as exact pixel-style reference. Upper left light. One pixel outside ink #122027; maximum eight opaque colors chosen from #122027 #24373d #425a60 #829c9d #bdcfca #485c4b #7d9168 #996749 #cb9362 #5c4236. Use steel gray for steel, dark gray for black polymer, olive for AUG, brown for RPK. No text, cartridges, weapon, logo, grid, shadows, glow, antialiasing, photorealism or background. Crisp integer pixel art, true transparency.",
+      "localReference": "docs/gunsmith/art/m4-mags/source/vb9-reference.png"
+    }
+  ]
+}

@@ -174,7 +174,7 @@ export class SampleSound {
         }
         const s = at(e.shooter) ?? (e.pellets[0] ? this.spot(e.pellets[0].origin.x, e.pellets[0].origin.y) : undefined);
         if (this.spitters.has(e.shooter)) { if (actorShown(e.shooter)) this.out.shot('spit', s); break; }
-        if (timbre) this.out.shot(timbre, s, ENEMY_SHOT); else if (s) this.out.shot('enemy', s); else this.out.shot('enemy');
+        if (timbre && e.suppressed) this.out.shot(timbre, s, ENEMY_SHOT, true); else if (timbre) this.out.shot(timbre, s, ENEMY_SHOT); else if (s) this.out.shot('enemy', s); else this.out.shot('enemy');
         break;
       }
       case 'melee': if (e.attacker === 'player') this.out.shot('knife'); break;

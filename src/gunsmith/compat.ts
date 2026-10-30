@@ -12,7 +12,7 @@
  *   4. nothing conflicts: one laser and one light effect per gun, a combiner counting as both.
  * A rejection carries a short player-facing reason in Chinese that names parts and slots, never internal ids.
  */
-import { ATTACHMENTS, CATEGORY_NAMES, GUNS, SLOT_NAMES, type AttachmentDef, type GunDef, type GunId, type Qualification, type Slot } from './catalog';
+import { ATTACHMENTS, CATEGORY_NAMES, GUNS, SLOT_NAMES, isPremium, type AttachmentDef, type GunDef, type GunId, type Qualification, type Slot } from './catalog';
 
 /** At most 12 attachments on a gun, three levels deep (a part on a part on a part), and no cycles. */
 export const MAX_PARTS = 12;
@@ -20,7 +20,8 @@ export const MAX_DEPTH = 3;
 
 /** One installed attachment. `parent` is the uid of the part whose slot holds it, or null for the gun's own slot. */
 export interface Part { uid: string; id: string; parent: string | null; slot: Slot }
-export interface Build { gun: string; parts: readonly Part[] }
+/** A gun type and its parts, flat; `magOut`: its factory magazine is out (instance.ts GunState, #28 M4-07). */
+export interface Build { gun: string; parts: readonly Part[]; magOut?: true }
 export interface Placement { parent: string | null; slot: Slot }
 
 /**
@@ -81,10 +82,11 @@ const depthOf = (parts: readonly Part[], uid: string | null) => {
 /**
  * Layer 2 when nothing in the build offers `slot`: name the parts that would open it, or the installed part standing
  * where they go, or say the gun can never have it. Openers mount in a native slot of the gun (bases and handguards).
+ * 老栓精工's handguards (#28 M4-09) open rails too, but are made to order, so the reason names the ordinary ones.
  */
 function missingSlot(gun: GunDef, build: Build, slot: Slot): Refusal {
     const openers = Object.values(ATTACHMENTS)
-        .filter(a => (a.provides[slot] ?? 0) > 0 && gunFault(gun, a) === null && (gun.slots[a.mount] ?? 0) > 0);
+        .filter(a => (a.provides[slot] ?? 0) > 0 && gunFault(gun, a) === null && (gun.slots[a.mount] ?? 0) > 0 && !isPremium(a.id));
     if (!openers.length) return refuse('slot', `这把枪没有${SLOT_NAMES[slot]}`);
     const ready = openers.filter(a => checkInstall(build, a.id).ok);
     if (ready.length) return refuse('opener', need(ready.map(a => a.name)));

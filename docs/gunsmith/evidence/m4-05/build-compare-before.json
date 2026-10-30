@@ -1,0 +1,4008 @@
+{
+ "trials": 300,
+ "distances": [
+  120,
+  280,
+  480
+ ],
+ "kinds": {
+  "quick": "轻快",
+  "quiet": "安静",
+  "steady": "稳定",
+  "big": "大容量"
+ },
+ "guns": {
+  "pistol": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 19,
+     "acc": 25,
+     "ctl": 49,
+     "hdl": 57,
+     "feed": 42,
+     "kg": 0.8,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 27,
+     "pellets": 1,
+     "cooldown": 0.29,
+     "aimed": 1.5882390081026423,
+     "hip": 7.2192682186483745,
+     "laserHip": null,
+     "range": 440,
+     "kick": 0.5156620156177408,
+     "bloom": 0.9167324722093171,
+     "recover": 5,
+     "raise": 0.3,
+     "sway": 1.8,
+     "magazine": 8,
+     "reload": 1.25,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 0.8
+    },
+    "down": [
+     0.8699999999999999,
+     1.17,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.7816666666666666,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "A01",
+     "O01"
+    ],
+    "scores": {
+     "fire": 19,
+     "acc": 28,
+     "ctl": 49,
+     "hdl": 63,
+     "feed": 42,
+     "kg": 0.91,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 27,
+     "pellets": 1,
+     "cooldown": 0.29,
+     "aimed": 1.4611798874544308,
+     "hip": 7.2192682186483745,
+     "laserHip": null,
+     "range": 440,
+     "kick": 0.5156620156177408,
+     "bloom": 0.9167324722093171,
+     "recover": 5,
+     "raise": 0.255,
+     "sway": 1.8,
+     "magazine": 8,
+     "reload": 1.25,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 0.91
+    },
+    "down": [
+     0.8699999999999999,
+     1.125,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.7933333333333333,
+    "price": 240
+   },
+   "quiet": {
+    "parts": [
+     "M01",
+     "A01",
+     "O01"
+    ],
+    "scores": {
+     "fire": 19,
+     "acc": 28,
+     "ctl": 50,
+     "hdl": 63,
+     "feed": 42,
+     "kg": 0.96,
+     "noise": 46
+    },
+    "numbers": {
+     "damage": 27,
+     "pellets": 1,
+     "cooldown": 0.29,
+     "aimed": 1.4611798874544308,
+     "hip": 7.2192682186483745,
+     "laserHip": null,
+     "range": 440,
+     "kick": 0.5001921551492087,
+     "bloom": 0.9167324722093171,
+     "recover": 5,
+     "raise": 0.255,
+     "sway": 1.8,
+     "magazine": 8,
+     "reload": 1.25,
+     "noise": 459,
+     "suppressed": false,
+     "devices": false,
+     "kg": 0.96
+    },
+    "down": [
+     0.8699999999999999,
+     1.125,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.7779166666666667,
+    "price": 330
+   },
+   "steady": {
+    "parts": [
+     "A01",
+     "O02",
+     "M01"
+    ],
+    "scores": {
+     "fire": 19,
+     "acc": 32,
+     "ctl": 50,
+     "hdl": 55,
+     "feed": 42,
+     "kg": 0.99,
+     "noise": 46
+    },
+    "numbers": {
+     "damage": 27,
+     "pellets": 1,
+     "cooldown": 0.29,
+     "aimed": 1.270591206482114,
+     "hip": 7.2192682186483745,
+     "laserHip": null,
+     "range": 440,
+     "kick": 0.5001921551492087,
+     "bloom": 0.9167324722093171,
+     "recover": 5,
+     "raise": 0.315,
+     "sway": 1.8,
+     "magazine": 8,
+     "reload": 1.25,
+     "noise": 459,
+     "suppressed": false,
+     "devices": false,
+     "kg": 0.99
+    },
+    "down": [
+     0.8699999999999999,
+     1.185,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.7775,
+    "price": 390
+   }
+  },
+  "gb17": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 20,
+     "acc": 28,
+     "ctl": 50,
+     "hdl": 60,
+     "feed": 54,
+     "kg": 0.7,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 26,
+     "pellets": 1,
+     "cooldown": 0.26,
+     "aimed": 1.474793364666739,
+     "hip": 6.703606203030633,
+     "laserHip": null,
+     "range": 450,
+     "kick": 0.5156620156177408,
+     "bloom": 0.8594366926962348,
+     "recover": 5,
+     "raise": 0.28,
+     "sway": 1.7,
+     "magazine": 17,
+     "reload": 1.4,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 0.7
+    },
+    "down": [
+     0.78,
+     1.06,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.8629166666666667,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "O01"
+    ],
+    "scores": {
+     "fire": 20,
+     "acc": 30,
+     "ctl": 50,
+     "hdl": 66,
+     "feed": 54,
+     "kg": 0.75,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 26,
+     "pellets": 1,
+     "cooldown": 0.26,
+     "aimed": 1.3568098954933998,
+     "hip": 6.703606203030633,
+     "laserHip": null,
+     "range": 450,
+     "kick": 0.5156620156177408,
+     "bloom": 0.8594366926962348,
+     "recover": 5,
+     "raise": 0.23800000000000002,
+     "sway": 1.7,
+     "magazine": 17,
+     "reload": 1.4,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 0.75
+    },
+    "down": [
+     0.78,
+     1.018,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.8616666666666667,
+    "price": 180
+   },
+   "quiet": {
+    "parts": [
+     "B01",
+     "M03",
+     "O01",
+     "P07"
+    ],
+    "scores": {
+     "fire": 20,
+     "acc": 36,
+     "ctl": 53,
+     "hdl": 60,
+     "feed": 54,
+     "kg": 1.03,
+     "noise": 26
+    },
+    "numbers": {
+     "damage": 26,
+     "pellets": 1,
+     "cooldown": 0.26,
+     "aimed": 1.15328841116939,
+     "hip": 6.703606203030633,
+     "laserHip": null,
+     "range": 450,
+     "kick": 0.5156620156177408,
+     "bloom": 0.790681757280536,
+     "recover": 5.75,
+     "raise": 0.27750800000000003,
+     "sway": 1.7,
+     "magazine": 17,
+     "reload": 1.4,
+     "noise": 255,
+     "suppressed": true,
+     "devices": false,
+     "kg": 1.03
+    },
+    "down": [
+     0.78,
+     1.0575080000000001,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.8679166666666667,
+    "price": 1880
+   },
+   "steady": {
+    "parts": [
+     "O02",
+     "M02",
+     "B01",
+     "P07"
+    ],
+    "scores": {
+     "fire": 20,
+     "acc": 41,
+     "ctl": 59,
+     "hdl": 56,
+     "feed": 54,
+     "kg": 0.94,
+     "noise": 55
+    },
+    "numbers": {
+     "damage": 26,
+     "pellets": 1,
+     "cooldown": 0.26,
+     "aimed": 1.0028594879733828,
+     "hip": 6.703606203030633,
+     "laserHip": null,
+     "range": 450,
+     "kick": 0.4640958140559668,
+     "bloom": 0.632545405824429,
+     "recover": 5.75,
+     "raise": 0.3116400000000001,
+     "sway": 1.7,
+     "magazine": 17,
+     "reload": 1.4,
+     "noise": 587,
+     "suppressed": false,
+     "devices": false,
+     "kg": 0.94
+    },
+    "down": [
+     0.78,
+     1.0916400000000002,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.8795833333333334,
+    "price": 860
+   },
+   "big": {
+    "parts": [
+     "G01",
+     "O02",
+     "M02",
+     "B01",
+     "P07"
+    ],
+    "scores": {
+     "fire": 20,
+     "acc": 41,
+     "ctl": 59,
+     "hdl": 56,
+     "feed": 57,
+     "kg": 1.02,
+     "noise": 55
+    },
+    "numbers": {
+     "damage": 26,
+     "pellets": 1,
+     "cooldown": 0.26,
+     "aimed": 1.0028594879733828,
+     "hip": 6.703606203030633,
+     "laserHip": null,
+     "range": 450,
+     "kick": 0.4640958140559668,
+     "bloom": 0.632545405824429,
+     "recover": 5.75,
+     "raise": 0.3116400000000001,
+     "sway": 1.7,
+     "magazine": 24,
+     "reload": 1.6099999999999999,
+     "noise": 587,
+     "suppressed": false,
+     "devices": false,
+     "kg": 1.02
+    },
+    "down": [
+     0.78,
+     1.0916400000000002,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.8833333333333333,
+    "price": 1020
+   }
+  },
+  "mb1911": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 20,
+     "acc": 28,
+     "ctl": 34,
+     "hdl": 55,
+     "feed": 36,
+     "kg": 1,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 36,
+     "pellets": 1,
+     "cooldown": 0.36,
+     "aimed": 1.474793364666739,
+     "hip": 6.703606203030633,
+     "laserHip": null,
+     "range": 450,
+     "kick": 0.8021409131831525,
+     "bloom": 1.260507149287811,
+     "recover": 4.5,
+     "raise": 0.32,
+     "sway": 1.8,
+     "magazine": 7,
+     "reload": 1.5,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 1
+    },
+    "down": [
+     0.72,
+     1.04,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.8579166666666667,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "A03",
+     "O01",
+     "P08"
+    ],
+    "scores": {
+     "fire": 20,
+     "acc": 30,
+     "ctl": 34,
+     "hdl": 65,
+     "feed": 36,
+     "kg": 1.06,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 36,
+     "pellets": 1,
+     "cooldown": 0.36,
+     "aimed": 1.3568098954933998,
+     "hip": 6.703606203030633,
+     "laserHip": null,
+     "range": 450,
+     "kick": 0.8021409131831525,
+     "bloom": 1.260507149287811,
+     "recover": 4.5,
+     "raise": 0.23936000000000002,
+     "sway": 1.8,
+     "magazine": 7,
+     "reload": 1.5,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 1.06
+    },
+    "down": [
+     0.72,
+     0.95936,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.8266666666666667,
+    "price": 380
+   },
+   "quiet": {
+    "parts": [
+     "B02",
+     "M04",
+     "A03",
+     "O01",
+     "P08"
+    ],
+    "scores": {
+     "fire": 20,
+     "acc": 34,
+     "ctl": 34,
+     "hdl": 65,
+     "feed": 36,
+     "kg": 1.46,
+     "noise": 29
+    },
+    "numbers": {
+     "damage": 36,
+     "pellets": 1,
+     "cooldown": 0.36,
+     "aimed": 1.22112890594406,
+     "hip": 6.703606203030633,
+     "laserHip": null,
+     "range": 450,
+     "kick": 0.8021409131831525,
+     "bloom": 1.260507149287811,
+     "recover": 4.5,
+     "raise": 0.23936000000000002,
+     "sway": 1.8,
+     "magazine": 7,
+     "reload": 1.5,
+     "noise": 281,
+     "suppressed": true,
+     "devices": false,
+     "kg": 1.46
+    },
+    "down": [
+     0.72,
+     0.95936,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.8495833333333334,
+    "price": 2040
+   },
+   "steady": {
+    "parts": [
+     "A03",
+     "O02",
+     "B02"
+    ],
+    "scores": {
+     "fire": 20,
+     "acc": 39,
+     "ctl": 34,
+     "hdl": 53,
+     "feed": 36,
+     "kg": 1.26,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 36,
+     "pellets": 1,
+     "cooldown": 0.36,
+     "aimed": 1.061851222560052,
+     "hip": 6.703606203030633,
+     "laserHip": null,
+     "range": 450,
+     "kick": 0.8021409131831525,
+     "bloom": 1.260507149287811,
+     "recover": 4.5,
+     "raise": 0.336,
+     "sway": 1.8,
+     "magazine": 7,
+     "reload": 1.5,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 1.26
+    },
+    "down": [
+     0.72,
+     1.056,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.855,
+    "price": 560
+   },
+   "big": {
+    "parts": [
+     "G02",
+     "A03",
+     "O02",
+     "B02"
+    ],
+    "scores": {
+     "fire": 20,
+     "acc": 39,
+     "ctl": 34,
+     "hdl": 53,
+     "feed": 40,
+     "kg": 1.32,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 36,
+     "pellets": 1,
+     "cooldown": 0.36,
+     "aimed": 1.061851222560052,
+     "hip": 6.703606203030633,
+     "laserHip": null,
+     "range": 450,
+     "kick": 0.8021409131831525,
+     "bloom": 1.260507149287811,
+     "recover": 4.5,
+     "raise": 0.336,
+     "sway": 1.8,
+     "magazine": 10,
+     "reload": 1.6800000000000002,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 1.32
+    },
+    "down": [
+     0.72,
+     1.056,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.85875,
+    "price": 710
+   }
+  },
+  "pb226": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 19,
+     "acc": 39,
+     "ctl": 56,
+     "hdl": 56,
+     "feed": 51,
+     "kg": 0.9,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 27,
+     "pellets": 1,
+     "cooldown": 0.28,
+     "aimed": 1.0714310768946396,
+     "hip": 5.357155384473197,
+     "laserHip": null,
+     "range": 460,
+     "kick": 0.45836623610465854,
+     "bloom": 0.7448451336700701,
+     "recover": 5.5,
+     "raise": 0.32,
+     "sway": 1.6,
+     "magazine": 15,
+     "reload": 1.45,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 0.9
+    },
+    "down": [
+     0.8400000000000001,
+     1.1600000000000001,
+     null
+    ],
+    "sustained": 0,
+    "walking": 1,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "A02",
+     "O01"
+    ],
+    "scores": {
+     "fire": 19,
+     "acc": 42,
+     "ctl": 56,
+     "hdl": 62,
+     "feed": 51,
+     "kg": 1.01,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 27,
+     "pellets": 1,
+     "cooldown": 0.28,
+     "aimed": 0.9857165907430683,
+     "hip": 5.357155384473197,
+     "laserHip": null,
+     "range": 460,
+     "kick": 0.45836623610465854,
+     "bloom": 0.7448451336700701,
+     "recover": 5.5,
+     "raise": 0.272,
+     "sway": 1.6,
+     "magazine": 15,
+     "reload": 1.45,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 1.01
+    },
+    "down": [
+     0.8400000000000001,
+     1.112,
+     null
+    ],
+    "sustained": 0,
+    "walking": 1,
+    "price": 240
+   },
+   "quiet": {
+    "parts": [
+     "B01",
+     "M03",
+     "A02",
+     "O01",
+     "P07"
+    ],
+    "scores": {
+     "fire": 19,
+     "acc": 48,
+     "ctl": 59,
+     "hdl": 56,
+     "feed": 51,
+     "kg": 1.29,
+     "noise": 26
+    },
+    "numbers": {
+     "damage": 27,
+     "pellets": 1,
+     "cooldown": 0.28,
+     "aimed": 0.8378591021316082,
+     "hip": 5.357155384473197,
+     "laserHip": null,
+     "range": 460,
+     "kick": 0.45836623610465854,
+     "bloom": 0.6852575229764646,
+     "recover": 6.324999999999999,
+     "raise": 0.31715200000000004,
+     "sway": 1.6,
+     "magazine": 15,
+     "reload": 1.45,
+     "noise": 255,
+     "suppressed": true,
+     "devices": false,
+     "kg": 1.29
+    },
+    "down": [
+     0.8400000000000001,
+     1.1571520000000002,
+     null
+    ],
+    "sustained": 0,
+    "walking": 1,
+    "price": 1940
+   },
+   "steady": {
+    "parts": [
+     "A02",
+     "O02",
+     "M02",
+     "B01",
+     "P07"
+    ],
+    "scores": {
+     "fire": 19,
+     "acc": 53,
+     "ctl": 65,
+     "hdl": 52,
+     "feed": 51,
+     "kg": 1.2,
+     "noise": 55
+    },
+    "numbers": {
+     "damage": 27,
+     "pellets": 1,
+     "cooldown": 0.28,
+     "aimed": 0.7285731322883549,
+     "hip": 5.357155384473197,
+     "laserHip": null,
+     "range": 460,
+     "kick": 0.41252961249419273,
+     "bloom": 0.5482060183811717,
+     "recover": 6.324999999999999,
+     "raise": 0.3561600000000001,
+     "sway": 1.6,
+     "magazine": 15,
+     "reload": 1.45,
+     "noise": 587,
+     "suppressed": false,
+     "devices": false,
+     "kg": 1.2
+    },
+    "down": [
+     0.8400000000000001,
+     1.1961600000000001,
+     null
+    ],
+    "sustained": 0,
+    "walking": 1,
+    "price": 920
+   }
+  },
+  "mpb5": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 50,
+     "acc": 31,
+     "ctl": 70,
+     "hdl": 51,
+     "feed": 58,
+     "kg": 2.4,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 21,
+     "pellets": 1,
+     "cooldown": 0.085,
+     "aimed": 1.4180705429487874,
+     "hip": 5.67228217179515,
+     "laserHip": null,
+     "range": 480,
+     "kick": 0.34377467707849396,
+     "bloom": 0.40107045659157625,
+     "recover": 4.5,
+     "raise": 0.35,
+     "sway": 1.9,
+     "magazine": 30,
+     "reload": 2,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.4
+    },
+    "down": [
+     0.34,
+     0.69,
+     0.875
+    ],
+    "sustained": 0.3181111111111105,
+    "walking": 0.87875,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "B03",
+     "S05",
+     "A04",
+     "O03",
+     "G03"
+    ],
+    "scores": {
+     "fire": 50,
+     "acc": 31,
+     "ctl": 70,
+     "hdl": 67,
+     "feed": 58,
+     "kg": 2.46,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 21,
+     "pellets": 1,
+     "cooldown": 0.085,
+     "aimed": 1.276263488653909,
+     "hip": 5.67228217179515,
+     "laserHip": null,
+     "range": 422.4,
+     "kick": 0.34377467707849396,
+     "bloom": 0.38903834289382894,
+     "recover": 4.5,
+     "raise": 0.22749999999999998,
+     "sway": 1.71,
+     "magazine": 25,
+     "reload": 1.6,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.46
+    },
+    "down": [
+     0.34,
+     0.5675,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.885,
+    "price": 940
+   },
+   "quiet": {
+    "parts": [
+     "M03",
+     "A04",
+     "O03",
+     "S05",
+     "H07",
+     "F05",
+     "B03"
+    ],
+    "scores": {
+     "fire": 50,
+     "acc": 31,
+     "ctl": 75,
+     "hdl": 64,
+     "feed": 58,
+     "kg": 2.96,
+     "noise": 26
+    },
+    "numbers": {
+     "damage": 21,
+     "pellets": 1,
+     "cooldown": 0.085,
+     "aimed": 1.276263488653909,
+     "hip": 5.67228217179515,
+     "laserHip": null,
+     "range": 422.4,
+     "kick": 0.30252171582907467,
+     "bloom": 0.33457297488869286,
+     "recover": 4.5,
+     "raise": 0.24826003125,
+     "sway": 1.71,
+     "magazine": 30,
+     "reload": 2,
+     "noise": 255,
+     "suppressed": true,
+     "devices": false,
+     "kg": 2.96
+    },
+    "down": [
+     0.34,
+     0.58826003125,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.9154166666666667,
+    "price": 2580
+   },
+   "steady": {
+    "parts": [
+     "H07",
+     "F07",
+     "A04",
+     "O07",
+     "M02"
+    ],
+    "scores": {
+     "fire": 50,
+     "acc": 40,
+     "ctl": 82,
+     "hdl": 39,
+     "feed": 58,
+     "kg": 3.38,
+     "noise": 55
+    },
+    "numbers": {
+     "damage": 21,
+     "pellets": 1,
+     "cooldown": 0.085,
+     "aimed": 1.0635529072115908,
+     "hip": 5.67228217179515,
+     "laserHip": null,
+     "range": 480,
+     "kick": 0.22276599074686407,
+     "bloom": 0.24064227395494575,
+     "recover": 4.5,
+     "raise": 0.47334,
+     "sway": 1.9,
+     "magazine": 30,
+     "reload": 2,
+     "noise": 587,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.38
+    },
+    "down": [
+     0.34,
+     0.8133399999999998,
+     0.8133399999999998
+    ],
+    "sustained": 0.4905555555555557,
+    "walking": 0.9220833333333334,
+    "price": 1430
+   }
+  },
+  "umpb45": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 49,
+     "acc": 31,
+     "ctl": 56,
+     "hdl": 47,
+     "feed": 52,
+     "kg": 2.3,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 29,
+     "pellets": 1,
+     "cooldown": 0.12,
+     "aimed": 1.4180705429487874,
+     "hip": 5.67228217179515,
+     "laserHip": null,
+     "range": 480,
+     "kick": 0.5156620156177408,
+     "bloom": 0.5729577951308232,
+     "recover": 4.2,
+     "raise": 0.38,
+     "sway": 2,
+     "magazine": 25,
+     "reload": 2.3,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.3
+    },
+    "down": [
+     0.36,
+     0.74,
+     0.9600000000000001
+    ],
+    "sustained": 0.25253333333333355,
+    "walking": 0.8183333333333334,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "S06",
+     "O03",
+     "F04",
+     "P05"
+    ],
+    "scores": {
+     "fire": 49,
+     "acc": 34,
+     "ctl": 57,
+     "hdl": 63,
+     "feed": 52,
+     "kg": 2.22,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 29,
+     "pellets": 1,
+     "cooldown": 0.12,
+     "aimed": 1.276263488653909,
+     "hip": 5.67228217179515,
+     "laserHip": null,
+     "range": 480,
+     "kick": 0.5001921551492087,
+     "bloom": 0.5557690612768985,
+     "recover": 4.2,
+     "raise": 0.255816,
+     "sway": 1.7,
+     "magazine": 25,
+     "reload": 2.3,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.22
+    },
+    "down": [
+     0.36,
+     0.6158159999999999,
+     0.835816
+    ],
+    "sustained": 0.2478666666666667,
+    "walking": 0.8591666666666666,
+    "price": 810
+   },
+   "quiet": {
+    "parts": [
+     "M04",
+     "O03",
+     "F07",
+     "S06",
+     "B04",
+     "P05"
+    ],
+    "scores": {
+     "fire": 49,
+     "acc": 40,
+     "ctl": 70,
+     "hdl": 51,
+     "feed": 52,
+     "kg": 2.91,
+     "noise": 29
+    },
+    "numbers": {
+     "damage": 29,
+     "pellets": 1,
+     "cooldown": 0.12,
+     "aimed": 1.0848239653558227,
+     "hip": 5.67228217179515,
+     "laserHip": null,
+     "range": 480,
+     "kick": 0.37127665124477344,
+     "bloom": 0.35013450860444606,
+     "recover": 4.2,
+     "raise": 0.35956360000000004,
+     "sway": 1.7,
+     "magazine": 25,
+     "reload": 2.3,
+     "noise": 281,
+     "suppressed": true,
+     "devices": false,
+     "kg": 2.91
+    },
+    "down": [
+     0.36,
+     0.7195636,
+     0.7195636
+    ],
+    "sustained": 0.34173333333333267,
+    "walking": 0.8991666666666667,
+    "price": 2840
+   },
+   "steady": {
+    "parts": [
+     "F07",
+     "O07",
+     "B04"
+    ],
+    "scores": {
+     "fire": 49,
+     "acc": 46,
+     "ctl": 70,
+     "hdl": 34,
+     "feed": 52,
+     "kg": 3.05,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 29,
+     "pellets": 1,
+     "cooldown": 0.12,
+     "aimed": 0.9040199711298521,
+     "hip": 5.67228217179515,
+     "laserHip": null,
+     "range": 480,
+     "kick": 0.37127665124477344,
+     "bloom": 0.3609634109324186,
+     "recover": 4.2,
+     "raise": 0.538384,
+     "sway": 2,
+     "magazine": 25,
+     "reload": 2.3,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.05
+    },
+    "down": [
+     0.36,
+     0.898384,
+     0.898384
+    ],
+    "sustained": 0.3438666666666664,
+    "walking": 0.8754166666666666,
+    "price": 1170
+   },
+   "big": {
+    "parts": [
+     "G04",
+     "F07",
+     "O07",
+     "B04"
+    ],
+    "scores": {
+     "fire": 49,
+     "acc": 46,
+     "ctl": 70,
+     "hdl": 34,
+     "feed": 55,
+     "kg": 3.2,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 29,
+     "pellets": 1,
+     "cooldown": 0.12,
+     "aimed": 0.9040199711298521,
+     "hip": 5.67228217179515,
+     "laserHip": null,
+     "range": 480,
+     "kick": 0.37127665124477344,
+     "bloom": 0.3609634109324186,
+     "recover": 4.2,
+     "raise": 0.538384,
+     "sway": 2,
+     "magazine": 35,
+     "reload": 2.6449999999999996,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.2
+    },
+    "down": [
+     0.36,
+     0.898384,
+     0.898384
+    ],
+    "sustained": 0.3058888888888882,
+    "walking": 0.8625,
+    "price": 1410
+   }
+  },
+  "pb90": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 48,
+     "acc": 33,
+     "ctl": 75,
+     "hdl": 55,
+     "feed": 63,
+     "kg": 2.5,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 18,
+     "pellets": 1,
+     "cooldown": 0.075,
+     "aimed": 1.35361279099657,
+     "hip": 5.41445116398628,
+     "laserHip": null,
+     "range": 500,
+     "kick": 0.2864788975654116,
+     "bloom": 0.34377467707849396,
+     "recover": 4.8,
+     "raise": 0.32,
+     "sway": 1.8,
+     "magazine": 50,
+     "reload": 2.4,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.5
+    },
+    "down": [
+     0.375,
+     0.695,
+     0.87
+    ],
+    "sustained": 0.40611111111111065,
+    "walking": 0.9158333333333334,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "O03",
+     "G05"
+    ],
+    "scores": {
+     "fire": 48,
+     "acc": 37,
+     "ctl": 75,
+     "hdl": 60,
+     "feed": 59,
+     "kg": 2.41,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 18,
+     "pellets": 1,
+     "cooldown": 0.075,
+     "aimed": 1.2182515118969128,
+     "hip": 5.41445116398628,
+     "laserHip": null,
+     "range": 500,
+     "kick": 0.2864788975654116,
+     "bloom": 0.34377467707849396,
+     "recover": 4.8,
+     "raise": 0.272,
+     "sway": 1.8,
+     "magazine": 30,
+     "reload": 1.7999999999999998,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.41
+    },
+    "down": [
+     0.375,
+     0.647,
+     0.8220000000000001
+    ],
+    "sustained": 0.40011111111111086,
+    "walking": 0.9154166666666667,
+    "price": 460
+   },
+   "quiet": {
+    "parts": [
+     "M12",
+     "O03"
+    ],
+    "scores": {
+     "fire": 48,
+     "acc": 37,
+     "ctl": 75,
+     "hdl": 60,
+     "feed": 63,
+     "kg": 2.81,
+     "noise": 26
+    },
+    "numbers": {
+     "damage": 18,
+     "pellets": 1,
+     "cooldown": 0.075,
+     "aimed": 1.2182515118969128,
+     "hip": 5.41445116398628,
+     "laserHip": null,
+     "range": 500,
+     "kick": 0.2864788975654116,
+     "bloom": 0.34377467707849396,
+     "recover": 4.8,
+     "raise": 0.272,
+     "sway": 1.8,
+     "magazine": 50,
+     "reload": 2.4,
+     "noise": 255,
+     "suppressed": true,
+     "devices": false,
+     "kg": 2.81
+    },
+    "down": [
+     0.375,
+     0.647,
+     0.8220000000000001
+    ],
+    "sustained": 0.402333333333333,
+    "walking": 0.9108333333333334,
+    "price": 2450
+   },
+   "steady": {
+    "parts": [
+     "O07"
+    ],
+    "scores": {
+     "fire": 48,
+     "acc": 43,
+     "ctl": 75,
+     "hdl": 50,
+     "feed": 63,
+     "kg": 2.8,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 18,
+     "pellets": 1,
+     "cooldown": 0.075,
+     "aimed": 1.0152095932474272,
+     "hip": 5.41445116398628,
+     "laserHip": null,
+     "range": 500,
+     "kick": 0.2864788975654116,
+     "bloom": 0.34377467707849396,
+     "recover": 4.8,
+     "raise": 0.35840000000000005,
+     "sway": 1.8,
+     "magazine": 50,
+     "reload": 2.4,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.8
+    },
+    "down": [
+     0.375,
+     0.7333999999999999,
+     0.9084
+    ],
+    "sustained": 0.3985555555555551,
+    "walking": 0.9170833333333334,
+    "price": 450
+   }
+  },
+  "vb9": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 61,
+     "acc": 20,
+     "ctl": 63,
+     "hdl": 56,
+     "feed": 55,
+     "kg": 2.6,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 20,
+     "pellets": 1,
+     "cooldown": 0.06,
+     "aimed": 1.8449241003212509,
+     "hip": 6.589014644004467,
+     "laserHip": null,
+     "range": 420,
+     "kick": 0.34377467707849396,
+     "bloom": 0.5729577951308232,
+     "recover": 4,
+     "raise": 0.3,
+     "sway": 2,
+     "magazine": 25,
+     "reload": 1.9,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.6
+    },
+    "down": [
+     0.24,
+     0.54,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.745,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "O03",
+     "F04"
+    ],
+    "scores": {
+     "fire": 61,
+     "acc": 23,
+     "ctl": 63,
+     "hdl": 65,
+     "feed": 55,
+     "kg": 2.7,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 20,
+     "pellets": 1,
+     "cooldown": 0.06,
+     "aimed": 1.660431690289126,
+     "hip": 6.589014644004467,
+     "laserHip": null,
+     "range": 420,
+     "kick": 0.3334614367661391,
+     "bloom": 0.5729577951308232,
+     "recover": 4,
+     "raise": 0.22949999999999998,
+     "sway": 2,
+     "magazine": 25,
+     "reload": 1.9,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.7
+    },
+    "down": [
+     0.24,
+     0.4695,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.765,
+    "price": 290
+   },
+   "quiet": {
+    "parts": [
+     "M03",
+     "O03",
+     "F07"
+    ],
+    "scores": {
+     "fire": 61,
+     "acc": 23,
+     "ctl": 74,
+     "hdl": 53,
+     "feed": 55,
+     "kg": 3.16,
+     "noise": 26
+    },
+    "numbers": {
+     "damage": 20,
+     "pellets": 1,
+     "cooldown": 0.06,
+     "aimed": 1.660431690289126,
+     "hip": 6.589014644004467,
+     "laserHip": null,
+     "range": 420,
+     "kick": 0.24751776749651563,
+     "bloom": 0.4010704565915762,
+     "recover": 4,
+     "raise": 0.322575,
+     "sway": 2,
+     "magazine": 25,
+     "reload": 1.9,
+     "noise": 255,
+     "suppressed": true,
+     "devices": false,
+     "kg": 3.16
+    },
+    "down": [
+     0.24,
+     0.562575,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.7779166666666667,
+    "price": 1920
+   },
+   "steady": {
+    "parts": [
+     "F07",
+     "O07",
+     "M02"
+    ],
+    "scores": {
+     "fire": 61,
+     "acc": 28,
+     "ctl": 77,
+     "hdl": 46,
+     "feed": 55,
+     "kg": 3.28,
+     "noise": 55
+    },
+    "numbers": {
+     "damage": 20,
+     "pellets": 1,
+     "cooldown": 0.06,
+     "aimed": 1.3836930752409382,
+     "hip": 6.589014644004467,
+     "laserHip": null,
+     "range": 420,
+     "kick": 0.22276599074686407,
+     "bloom": 0.34377467707849396,
+     "recover": 4,
+     "raise": 0.3864,
+     "sway": 2,
+     "magazine": 25,
+     "reload": 1.9,
+     "noise": 587,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.28
+    },
+    "down": [
+     0.24,
+     0.6264000000000001,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.7995833333333333,
+    "price": 1090
+   }
+  },
+  "shotgun": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 26,
+     "acc": 2,
+     "ctl": 15,
+     "hdl": 68,
+     "feed": 16,
+     "kg": 2.7,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 15,
+     "pellets": 6,
+     "cooldown": 0.72,
+     "aimed": 7.7349302342661135,
+     "hip": 15.469860468532227,
+     "laserHip": null,
+     "range": 290,
+     "kick": 1.7188733853924696,
+     "bloom": 2.291831180523293,
+     "recover": 4,
+     "raise": 0.25,
+     "sway": 1.2,
+     "magazine": 2,
+     "reload": 1.9,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.7
+    },
+    "down": [
+     0.72,
+     0.97,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.46701388888888884,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "A05",
+     "O03"
+    ],
+    "scores": {
+     "fire": 26,
+     "acc": 2,
+     "ctl": 15,
+     "hdl": 73,
+     "feed": 16,
+     "kg": 2.86,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 15,
+     "pellets": 6,
+     "cooldown": 0.72,
+     "aimed": 6.961437210839502,
+     "hip": 15.469860468532227,
+     "laserHip": null,
+     "range": 290,
+     "kick": 1.7188733853924696,
+     "bloom": 2.291831180523293,
+     "recover": 4,
+     "raise": 0.2125,
+     "sway": 1.2,
+     "magazine": 2,
+     "reload": 1.9,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.86
+    },
+    "down": [
+     0.72,
+     0.9325,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.4625694444444446,
+    "price": 270
+   },
+   "quiet": {
+    "parts": [
+     "A05",
+     "O03",
+     "M11"
+    ],
+    "scores": {
+     "fire": 26,
+     "acc": 4,
+     "ctl": 15,
+     "hdl": 73,
+     "feed": 16,
+     "kg": 3.01,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 15,
+     "pellets": 6,
+     "cooldown": 0.72,
+     "aimed": 5.012234791804443,
+     "hip": 11.138299537343205,
+     "laserHip": null,
+     "range": 290,
+     "kick": 1.7188733853924696,
+     "bloom": 2.291831180523293,
+     "recover": 4,
+     "raise": 0.2125,
+     "sway": 1.2,
+     "magazine": 2,
+     "reload": 1.9,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.01
+    },
+    "down": [
+     0.72,
+     0.9325,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.6430555555555558,
+    "price": 450
+   },
+   "steady": {
+    "parts": [
+     "M11",
+     "A05",
+     "O04"
+    ],
+    "scores": {
+     "fire": 26,
+     "acc": 4,
+     "ctl": 16,
+     "hdl": 68,
+     "feed": 16,
+     "kg": 3.15,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 15,
+     "pellets": 6,
+     "cooldown": 0.72,
+     "aimed": 4.733777303370862,
+     "hip": 11.138299537343205,
+     "laserHip": null,
+     "range": 290,
+     "kick": 1.7188733853924696,
+     "bloom": 2.291831180523293,
+     "recover": 4.4,
+     "raise": 0.25,
+     "sway": 1.2,
+     "magazine": 2,
+     "reload": 1.9,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.15
+    },
+    "down": [
+     0.72,
+     0.97,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.6481249999999997,
+    "price": 530
+   }
+  },
+  "mb870": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 20,
+     "acc": 2,
+     "ctl": 17,
+     "hdl": 64,
+     "feed": 23,
+     "kg": 3.1,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 15,
+     "pellets": 6,
+     "cooldown": 0.9,
+     "aimed": 7.16197243913529,
+     "hip": 14.32394487827058,
+     "laserHip": null,
+     "range": 300,
+     "kick": 1.604281826366305,
+     "bloom": 2.0053522829578814,
+     "recover": 4,
+     "raise": 0.28,
+     "sway": 1.2,
+     "magazine": 6,
+     "reload": 3,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.1
+    },
+    "down": [
+     0.9,
+     1.1800000000000002,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.5072222222222222,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "B05",
+     "A06",
+     "O03",
+     "H08",
+     "F04"
+    ],
+    "scores": {
+     "fire": 20,
+     "acc": 2,
+     "ctl": 17,
+     "hdl": 77,
+     "feed": 22,
+     "kg": 3.35,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 15,
+     "pellets": 6,
+     "cooldown": 0.9,
+     "aimed": 7.412641474505025,
+     "hip": 16.472536610011165,
+     "laserHip": null,
+     "range": 300,
+     "kick": 1.5561533715753157,
+     "bloom": 2.0053522829578814,
+     "recover": 4,
+     "raise": 0.18207,
+     "sway": 1.2,
+     "magazine": 6,
+     "reload": 3.24,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.35
+    },
+    "down": [
+     0.9,
+     1.08207,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.4359027777777779,
+    "price": 820
+   },
+   "quiet": {
+    "parts": [
+     "A06",
+     "O03",
+     "B05",
+     "H08",
+     "F07",
+     "S07",
+     "M10",
+     "P06"
+    ],
+    "scores": {
+     "fire": 20,
+     "acc": 3,
+     "ctl": 30,
+     "hdl": 69,
+     "feed": 22,
+     "kg": 3.97,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 15,
+     "pellets": 6,
+     "cooldown": 0.9,
+     "aimed": 5.78186035011392,
+     "hip": 12.84857855580871,
+     "laserHip": null,
+     "range": 300,
+     "kick": 1.1550829149837396,
+     "bloom": 1.2352970063020552,
+     "recover": 5,
+     "raise": 0.24660369999999998,
+     "sway": 1.104,
+     "magazine": 6,
+     "reload": 3.24,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.97
+    },
+    "down": [
+     0.9,
+     1.1466037,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.5888888888888889,
+    "price": 1770
+   },
+   "steady": {
+    "parts": [
+     "H08",
+     "F07",
+     "S07",
+     "P06",
+     "A06",
+     "O04",
+     "M10"
+    ],
+    "scores": {
+     "fire": 20,
+     "acc": 4,
+     "ctl": 31,
+     "hdl": 58,
+     "feed": 22,
+     "kg": 4.21,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 15,
+     "pellets": 6,
+     "cooldown": 0.9,
+     "aimed": 4.748387727146698,
+     "hip": 11.172677005051053,
+     "laserHip": null,
+     "range": 300,
+     "kick": 1.1550829149837396,
+     "bloom": 1.2352970063020552,
+     "recover": 5.5,
+     "raise": 0.34132,
+     "sway": 1.104,
+     "magazine": 6,
+     "reload": 3.24,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.21
+    },
+    "down": [
+     0.9,
+     1.24132,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.6768749999999993,
+    "price": 1630
+   },
+   "big": {
+    "parts": [
+     "G06",
+     "H08",
+     "F07",
+     "S07",
+     "P06",
+     "A06",
+     "O04",
+     "M10"
+    ],
+    "scores": {
+     "fire": 20,
+     "acc": 4,
+     "ctl": 31,
+     "hdl": 58,
+     "feed": 22,
+     "kg": 4.46,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 15,
+     "pellets": 6,
+     "cooldown": 0.9,
+     "aimed": 4.748387727146698,
+     "hip": 11.172677005051053,
+     "laserHip": null,
+     "range": 300,
+     "kick": 1.1550829149837396,
+     "bloom": 1.2352970063020552,
+     "recover": 5.5,
+     "raise": 0.34132,
+     "sway": 1.104,
+     "magazine": 8,
+     "reload": 4.212000000000001,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.46
+    },
+    "down": [
+     0.9,
+     1.24132,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.6782638888888886,
+    "price": 1850
+   }
+  },
+  "mb1014": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 45,
+     "acc": 2,
+     "ctl": 14,
+     "hdl": 60,
+     "feed": 24,
+     "kg": 3.4,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 14,
+     "pellets": 6,
+     "cooldown": 0.38,
+     "aimed": 7.7349302342661135,
+     "hip": 15.469860468532227,
+     "laserHip": null,
+     "range": 290,
+     "kick": 1.7188733853924696,
+     "bloom": 2.5783100780887045,
+     "recover": 4,
+     "raise": 0.3,
+     "sway": 1.3,
+     "magazine": 7,
+     "reload": 3.2,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.4
+    },
+    "down": [
+     0.38,
+     0.6799999999999999,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.4223611111111114,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "O03",
+     "H09",
+     "F04"
+    ],
+    "scores": {
+     "fire": 45,
+     "acc": 2,
+     "ctl": 15,
+     "hdl": 68,
+     "feed": 24,
+     "kg": 3.7,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 14,
+     "pellets": 6,
+     "cooldown": 0.38,
+     "aimed": 6.961437210839502,
+     "hip": 15.469860468532227,
+     "laserHip": null,
+     "range": 290,
+     "kick": 1.6673071838306954,
+     "bloom": 2.320479070279834,
+     "recover": 4,
+     "raise": 0.24327000000000001,
+     "sway": 1.3,
+     "magazine": 7,
+     "reload": 3.2,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.7
+    },
+    "down": [
+     0.38,
+     0.62327,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.41770833333333335,
+    "price": 610
+   },
+   "quiet": {
+    "parts": [
+     "O03",
+     "H09",
+     "F04",
+     "M10",
+     "P06"
+    ],
+    "scores": {
+     "fire": 45,
+     "acc": 3,
+     "ctl": 17,
+     "hdl": 67,
+     "feed": 24,
+     "kg": 3.86,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 14,
+     "pellets": 6,
+     "cooldown": 0.38,
+     "aimed": 5.429921024454813,
+     "hip": 12.066491165455137,
+     "laserHip": null,
+     "range": 290,
+     "kick": 1.6673071838306954,
+     "bloom": 2.042021581846254,
+     "recover": 4,
+     "raise": 0.25786620000000005,
+     "sway": 1.1960000000000002,
+     "magazine": 7,
+     "reload": 3.2,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.86
+    },
+    "down": [
+     0.38,
+     0.6378662,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.5525694444444446,
+    "price": 970
+   },
+   "steady": {
+    "parts": [
+     "H09",
+     "F07",
+     "O04",
+     "M10",
+     "B06"
+    ],
+    "scores": {
+     "fire": 45,
+     "acc": 4,
+     "ctl": 24,
+     "hdl": 50,
+     "feed": 24,
+     "kg": 4.4,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 14,
+     "pellets": 6,
+     "cooldown": 0.38,
+     "aimed": 4.640958140559667,
+     "hip": 9.894522755673211,
+     "laserHip": null,
+     "range": 290,
+     "kick": 1.237588837482578,
+     "bloom": 1.6243353491958838,
+     "recover": 4.4,
+     "raise": 0.40226999999999996,
+     "sway": 1.3,
+     "magazine": 7,
+     "reload": 3.2,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.4
+    },
+    "down": [
+     0.38,
+     0.78227,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.663541666666667,
+    "price": 1560
+   },
+   "big": {
+    "parts": [
+     "G07",
+     "H09",
+     "F07",
+     "O04",
+     "M10",
+     "B06"
+    ],
+    "scores": {
+     "fire": 45,
+     "acc": 4,
+     "ctl": 24,
+     "hdl": 50,
+     "feed": 25,
+     "kg": 4.65,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 14,
+     "pellets": 6,
+     "cooldown": 0.38,
+     "aimed": 4.640958140559667,
+     "hip": 9.894522755673211,
+     "laserHip": null,
+     "range": 290,
+     "kick": 1.237588837482578,
+     "bloom": 1.6243353491958838,
+     "recover": 4.4,
+     "raise": 0.40226999999999996,
+     "sway": 1.3,
+     "magazine": 9,
+     "reload": 4,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.65
+    },
+    "down": [
+     0.38,
+     0.78227,
+     null
+    ],
+    "sustained": 0,
+    "walking": 0.6609722222222225,
+    "price": 1840
+   }
+  },
+  "carbine": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 34,
+     "acc": 57,
+     "ctl": 45,
+     "hdl": 45,
+     "feed": 44,
+     "kg": 2.4,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 39,
+     "pellets": 1,
+     "cooldown": 0.24,
+     "aimed": 0.882355004501468,
+     "hip": 4.4117750225073395,
+     "laserHip": null,
+     "range": 660,
+     "kick": 0.6875493541569879,
+     "bloom": 0.8021409131831525,
+     "recover": 4.5,
+     "raise": 0.4,
+     "sway": 2,
+     "magazine": 12,
+     "reload": 1.65,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.4
+    },
+    "down": [
+     0.48,
+     0.88,
+     0.88
+    ],
+    "sustained": 0.587777777777778,
+    "walking": 0.9433333333333334,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "A07",
+     "O03",
+     "H05",
+     "F04"
+    ],
+    "scores": {
+     "fire": 34,
+     "acc": 61,
+     "ctl": 46,
+     "hdl": 55,
+     "feed": 44,
+     "kg": 2.82,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 39,
+     "pellets": 1,
+     "cooldown": 0.24,
+     "aimed": 0.7941195040513211,
+     "hip": 4.4117750225073395,
+     "laserHip": null,
+     "range": 660,
+     "kick": 0.6669228735322782,
+     "bloom": 0.8021409131831525,
+     "recover": 4.5,
+     "raise": 0.30600000000000005,
+     "sway": 2,
+     "magazine": 12,
+     "reload": 1.65,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.82
+    },
+    "down": [
+     0.48,
+     0.786,
+     0.786
+    ],
+    "sustained": 0.6024999999999998,
+    "walking": 0.9433333333333334,
+    "price": 660
+   },
+   "quiet": {
+    "parts": [
+     "M07",
+     "A07",
+     "O03",
+     "H05",
+     "F07",
+     "B09"
+    ],
+    "scores": {
+     "fire": 34,
+     "acc": 66,
+     "ctl": 58,
+     "hdl": 41,
+     "feed": 44,
+     "kg": 3.53,
+     "noise": 29
+    },
+    "numbers": {
+     "damage": 39,
+     "pellets": 1,
+     "cooldown": 0.24,
+     "aimed": 0.6750015784436231,
+     "hip": 4.4117750225073395,
+     "laserHip": null,
+     "range": 660,
+     "kick": 0.49503553499303127,
+     "bloom": 0.5614986392282068,
+     "recover": 4.5,
+     "raise": 0.43792000000000003,
+     "sway": 2.2,
+     "magazine": 12,
+     "reload": 1.65,
+     "noise": 281,
+     "suppressed": true,
+     "devices": false,
+     "kg": 3.53
+    },
+    "down": [
+     0.48,
+     0.9179200000000001,
+     0.9179200000000001
+    ],
+    "sustained": 0.7747222222222224,
+    "walking": 0.96625,
+    "price": 3050
+   },
+   "steady": {
+    "parts": [
+     "A07",
+     "O09",
+     "M06",
+     "H05",
+     "F07",
+     "B09"
+    ],
+    "scores": {
+     "fire": 34,
+     "acc": 74,
+     "ctl": 64,
+     "hdl": 29,
+     "feed": 44,
+     "kg": 3.79,
+     "noise": 57
+    },
+    "numbers": {
+     "damage": 39,
+     "pellets": 1,
+     "cooldown": 0.24,
+     "aimed": 0.5294130027008808,
+     "hip": 4.4117750225073395,
+     "laserHip": null,
+     "range": 660,
+     "kick": 0.41252961249419273,
+     "bloom": 0.4812845479098915,
+     "recover": 4.5,
+     "raise": 0.598,
+     "sway": 2.53,
+     "magazine": 12,
+     "reload": 1.65,
+     "noise": 612,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.79
+    },
+    "down": [
+     0.48,
+     1.0779999999999998,
+     1.0779999999999998
+    ],
+    "sustained": 0.876944444444444,
+    "walking": 0.9479166666666666,
+    "price": 3460
+   }
+  },
+  "akb74": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 50,
+     "acc": 52,
+     "ctl": 64,
+     "hdl": 40,
+     "feed": 55,
+     "kg": 3.1,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 25,
+     "pellets": 1,
+     "cooldown": 0.1,
+     "aimed": 0.9680694906530388,
+     "hip": 4.400315866604722,
+     "laserHip": null,
+     "range": 620,
+     "kick": 0.40107045659157625,
+     "bloom": 0.45836623610465854,
+     "recover": 4.2,
+     "raise": 0.45,
+     "sway": 2.2,
+     "magazine": 30,
+     "reload": 2.3,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.1
+    },
+    "down": [
+     0.30000000000000004,
+     0.75,
+     0.75
+    ],
+    "sustained": 0.19877777777777786,
+    "walking": 0.9066666666666666,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "B07",
+     "A08",
+     "O03",
+     "H03",
+     "S03",
+     "P04"
+    ],
+    "scores": {
+     "fire": 50,
+     "acc": 49,
+     "ctl": 63,
+     "hdl": 59,
+     "feed": 55,
+     "kg": 2.88,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 25,
+     "pellets": 1,
+     "cooldown": 0.1,
+     "aimed": 0.940963544914754,
+     "hip": 4.400315866604722,
+     "laserHip": null,
+     "range": 558,
+     "kick": 0.40107045659157625,
+     "bloom": 0.5042028597151245,
+     "recover": 4.3260000000000005,
+     "raise": 0.2926125,
+     "sway": 1.6830000000000003,
+     "magazine": 30,
+     "reload": 2.3,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.88
+    },
+    "down": [
+     0.30000000000000004,
+     0.5926125,
+     0.5926125
+    ],
+    "sustained": 0.22488888888888903,
+    "walking": 0.9295833333333333,
+    "price": 1020
+   },
+   "quiet": {
+    "parts": [
+     "M07",
+     "A08",
+     "O03",
+     "S04",
+     "B07",
+     "H04",
+     "F04",
+     "P03"
+    ],
+    "scores": {
+     "fire": 50,
+     "acc": 54,
+     "ctl": 70,
+     "hdl": 53,
+     "feed": 55,
+     "kg": 4.1,
+     "noise": 29
+    },
+    "numbers": {
+     "damage": 25,
+     "pellets": 1,
+     "cooldown": 0.1,
+     "aimed": 0.8276994145083482,
+     "hip": 4.400315866604722,
+     "laserHip": null,
+     "range": 558,
+     "kick": 0.3423537417465695,
+     "bloom": 0.4285724307578558,
+     "recover": 4.83,
+     "raise": 0.327726,
+     "sway": 1.9800000000000002,
+     "magazine": 30,
+     "reload": 2.3,
+     "noise": 281,
+     "suppressed": true,
+     "devices": false,
+     "kg": 4.1
+    },
+    "down": [
+     0.30000000000000004,
+     0.627726,
+     0.627726
+    ],
+    "sustained": 0.27966666666666645,
+    "walking": 0.9329166666666666,
+    "price": 3180
+   },
+   "steady": {
+    "parts": [
+     "A08",
+     "O09",
+     "M06",
+     "H04",
+     "F07",
+     "S04",
+     "P03"
+    ],
+    "scores": {
+     "fire": 50,
+     "acc": 69,
+     "ctl": 81,
+     "hdl": 25,
+     "feed": 55,
+     "kg": 4.72,
+     "noise": 57
+    },
+    "numbers": {
+     "damage": 25,
+     "pellets": 1,
+     "cooldown": 0.1,
+     "aimed": 0.5977829104782515,
+     "hip": 4.400315866604722,
+     "laserHip": null,
+     "range": 620,
+     "kick": 0.24064227395494575,
+     "bloom": 0.27501974166279514,
+     "recover": 4.83,
+     "raise": 0.67275,
+     "sway": 2.53,
+     "magazine": 30,
+     "reload": 2.3,
+     "noise": 612,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.72
+    },
+    "down": [
+     0.30000000000000004,
+     0.9727499999999999,
+     0.9727499999999999
+    ],
+    "sustained": 0.43155555555555575,
+    "walking": 0.9395833333333333,
+    "price": 3620
+   },
+   "big": {
+    "parts": [
+     "G08",
+     "A08",
+     "O09",
+     "M06",
+     "H04",
+     "F07",
+     "S04",
+     "P03"
+    ],
+    "scores": {
+     "fire": 50,
+     "acc": 69,
+     "ctl": 81,
+     "hdl": 25,
+     "feed": 60,
+     "kg": 4.87,
+     "noise": 57
+    },
+    "numbers": {
+     "damage": 25,
+     "pellets": 1,
+     "cooldown": 0.1,
+     "aimed": 0.5977829104782515,
+     "hip": 4.400315866604722,
+     "laserHip": null,
+     "range": 620,
+     "kick": 0.24064227395494575,
+     "bloom": 0.27501974166279514,
+     "recover": 4.83,
+     "raise": 0.67275,
+     "sway": 2.53,
+     "magazine": 45,
+     "reload": 2.6449999999999996,
+     "noise": 612,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.87
+    },
+    "down": [
+     0.30000000000000004,
+     0.9727499999999999,
+     0.9727499999999999
+    ],
+    "sustained": 0.41977777777777764,
+    "walking": 0.94125,
+    "price": 3880
+   }
+  },
+  "akb103": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 53,
+     "acc": 50,
+     "ctl": 50,
+     "hdl": 40,
+     "feed": 54,
+     "kg": 3.4,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 30,
+     "pellets": 1,
+     "cooldown": 0.11,
+     "aimed": 1.028573833818854,
+     "hip": 4.675335608267518,
+     "laserHip": null,
+     "range": 640,
+     "kick": 0.6302535746439055,
+     "bloom": 0.6302535746439055,
+     "recover": 4,
+     "raise": 0.45,
+     "sway": 2.2,
+     "magazine": 30,
+     "reload": 2.4,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.4
+    },
+    "down": [
+     0.33,
+     0.78,
+     1.1400000000000001
+    ],
+    "sustained": 0.12011111111111132,
+    "walking": 0.8241666666666667,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "B07",
+     "A08",
+     "O03",
+     "H03",
+     "S03",
+     "P04"
+    ],
+    "scores": {
+     "fire": 53,
+     "acc": 48,
+     "ctl": 48,
+     "hdl": 59,
+     "feed": 54,
+     "kg": 3.18,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 30,
+     "pellets": 1,
+     "cooldown": 0.11,
+     "aimed": 0.9997737664719261,
+     "hip": 4.675335608267518,
+     "laserHip": null,
+     "range": 576,
+     "kick": 0.6302535746439055,
+     "bloom": 0.693278932108296,
+     "recover": 4.12,
+     "raise": 0.2926125,
+     "sway": 1.6830000000000003,
+     "magazine": 30,
+     "reload": 2.4,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.18
+    },
+    "down": [
+     0.33,
+     0.6226125,
+     0.9826125000000002
+    ],
+    "sustained": 0.12177777777777796,
+    "walking": 0.8466666666666667,
+    "price": 1020
+   },
+   "quiet": {
+    "parts": [
+     "M07",
+     "A08",
+     "O03",
+     "S04",
+     "B07",
+     "H04",
+     "F07",
+     "P03"
+    ],
+    "scores": {
+     "fire": 53,
+     "acc": 53,
+     "ctl": 67,
+     "hdl": 43,
+     "feed": 54,
+     "kg": 4.66,
+     "noise": 29
+    },
+    "numbers": {
+     "damage": 30,
+     "pellets": 1,
+     "cooldown": 0.11,
+     "aimed": 0.8794306279151201,
+     "hip": 4.675335608267518,
+     "laserHip": null,
+     "range": 576,
+     "kick": 0.39932866489437846,
+     "bloom": 0.41250096460443614,
+     "recover": 4.6,
+     "raise": 0.418761,
+     "sway": 1.9800000000000002,
+     "magazine": 30,
+     "reload": 2.4,
+     "noise": 281,
+     "suppressed": true,
+     "devices": false,
+     "kg": 4.66
+    },
+    "down": [
+     0.33,
+     0.748761,
+     0.748761
+    ],
+    "sustained": 0.2093333333333333,
+    "walking": 0.9120833333333334,
+    "price": 3510
+   },
+   "steady": {
+    "parts": [
+     "A08",
+     "O09",
+     "M06",
+     "H04",
+     "F07",
+     "S04",
+     "P03"
+    ],
+    "scores": {
+     "fire": 53,
+     "acc": 68,
+     "ctl": 69,
+     "hdl": 25,
+     "feed": 54,
+     "kg": 5.02,
+     "noise": 57
+    },
+    "numbers": {
+     "damage": 30,
+     "pellets": 1,
+     "cooldown": 0.11,
+     "aimed": 0.6351443423831423,
+     "hip": 4.675335608267518,
+     "laserHip": null,
+     "range": 640,
+     "kick": 0.3781521447863433,
+     "bloom": 0.3781521447863433,
+     "recover": 4.6,
+     "raise": 0.67275,
+     "sway": 2.53,
+     "magazine": 30,
+     "reload": 2.4,
+     "noise": 612,
+     "suppressed": false,
+     "devices": false,
+     "kg": 5.02
+    },
+    "down": [
+     0.33,
+     1.00275,
+     1.00275
+    ],
+    "sustained": 0.20311111111111133,
+    "walking": 0.8791666666666667,
+    "price": 3620
+   },
+   "big": {
+    "parts": [
+     "G09",
+     "A08",
+     "O09",
+     "M06",
+     "H04",
+     "F07",
+     "S04",
+     "P03"
+    ],
+    "scores": {
+     "fire": 53,
+     "acc": 68,
+     "ctl": 69,
+     "hdl": 22,
+     "feed": 61,
+     "kg": 5.92,
+     "noise": 57
+    },
+    "numbers": {
+     "damage": 30,
+     "pellets": 1,
+     "cooldown": 0.11,
+     "aimed": 0.6351443423831423,
+     "hip": 4.675335608267518,
+     "laserHip": null,
+     "range": 640,
+     "kick": 0.3781521447863433,
+     "bloom": 0.3781521447863433,
+     "recover": 4.6,
+     "raise": 0.75348,
+     "sway": 2.53,
+     "magazine": 60,
+     "reload": 3.24,
+     "noise": 612,
+     "suppressed": false,
+     "devices": false,
+     "kg": 5.92
+    },
+    "down": [
+     0.33,
+     1.08348,
+     1.08348
+    ],
+    "sustained": 0.20133333333333334,
+    "walking": 0.88375,
+    "price": 5170
+   }
+  },
+  "mb4a1": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 48,
+     "acc": 53,
+     "ctl": 59,
+     "hdl": 44,
+     "feed": 57,
+     "kg": 2.9,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 24,
+     "pellets": 1,
+     "cooldown": 0.1,
+     "aimed": 0.9075651474872239,
+     "hip": 4.125296124941927,
+     "laserHip": null,
+     "range": 600,
+     "kick": 0.45836623610465854,
+     "bloom": 0.5156620156177408,
+     "recover": 4,
+     "raise": 0.4,
+     "sway": 2.2,
+     "magazine": 30,
+     "reload": 2.1,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.9
+    },
+    "down": [
+     0.4,
+     0.7999999999999999,
+     1.1
+    ],
+    "sustained": 0.15955555555555553,
+    "walking": 0.89125,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "S01",
+     "O03",
+     "P01",
+     "H01",
+     "F03",
+     "G10"
+    ],
+    "scores": {
+     "fire": 48,
+     "acc": 57,
+     "ctl": 60,
+     "hdl": 62,
+     "feed": 53,
+     "kg": 2.86,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 24,
+     "pellets": 1,
+     "cooldown": 0.1,
+     "aimed": 0.8168086327385016,
+     "hip": 4.125296124941927,
+     "laserHip": null,
+     "range": 600,
+     "kick": 0.4491989113825654,
+     "bloom": 0.5001921551492087,
+     "recover": 4,
+     "raise": 0.2601,
+     "sway": 1.804,
+     "magazine": 20,
+     "reload": 1.6800000000000002,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 2.86
+    },
+    "down": [
+     0.4,
+     0.6600999999999999,
+     0.9601000000000001
+    ],
+    "sustained": 0.24283333333333354,
+    "walking": 0.9329166666666666,
+    "price": 1200
+   },
+   "quiet": {
+    "parts": [
+     "M07",
+     "O03",
+     "H01",
+     "F07",
+     "B08",
+     "S01",
+     "P01"
+    ],
+    "scores": {
+     "fire": 48,
+     "acc": 67,
+     "ctl": 72,
+     "hdl": 47,
+     "feed": 57,
+     "kg": 3.68,
+     "noise": 29
+    },
+    "numbers": {
+     "damage": 24,
+     "pellets": 1,
+     "cooldown": 0.1,
+     "aimed": 0.6942873378277263,
+     "hip": 4.125296124941927,
+     "laserHip": null,
+     "range": 690,
+     "kick": 0.3234232161954471,
+     "bloom": 0.35013450860444606,
+     "recover": 4,
+     "raise": 0.36850968000000006,
+     "sway": 2.2,
+     "magazine": 30,
+     "reload": 2.1,
+     "noise": 281,
+     "suppressed": true,
+     "devices": false,
+     "kg": 3.68
+    },
+    "down": [
+     0.4,
+     0.76850968,
+     0.76850968
+    ],
+    "sustained": 0.2649999999999999,
+    "walking": 0.9441666666666667,
+    "price": 4200
+   },
+   "steady": {
+    "parts": [
+     "O09",
+     "M06",
+     "B08",
+     "S02",
+     "P02",
+     "H02"
+    ],
+    "scores": {
+     "fire": 48,
+     "acc": 74,
+     "ctl": 77,
+     "hdl": 25,
+     "feed": 57,
+     "kg": 4.4,
+     "noise": 57
+    },
+    "numbers": {
+     "damage": 24,
+     "pellets": 1,
+     "cooldown": 0.1,
+     "aimed": 0.5445390884923345,
+     "hip": 4.125296124941927,
+     "laserHip": null,
+     "range": 690,
+     "kick": 0.2922084755167198,
+     "bloom": 0.3093972093706445,
+     "recover": 4.8,
+     "raise": 0.6795360000000001,
+     "sway": 2.4034999999999997,
+     "magazine": 30,
+     "reload": 2.1,
+     "noise": 612,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.4
+    },
+    "down": [
+     0.4,
+     1.079536,
+     1.079536
+    ],
+    "sustained": 0.3006666666666661,
+    "walking": 0.9466666666666667,
+    "price": 4610
+   }
+  },
+  "augb": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 50,
+     "acc": 56,
+     "ctl": 60,
+     "hdl": 50,
+     "feed": 53,
+     "kg": 3.2,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 25,
+     "pellets": 1,
+     "cooldown": 0.1,
+     "aimed": 0.8697499330085896,
+     "hip": 3.95340878640268,
+     "laserHip": null,
+     "range": 620,
+     "kick": 0.45836623610465854,
+     "bloom": 0.5156620156177408,
+     "recover": 4.2,
+     "raise": 0.36,
+     "sway": 1.9,
+     "magazine": 30,
+     "reload": 2.6,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.2
+    },
+    "down": [
+     0.30000000000000004,
+     0.6599999999999999,
+     0.6599999999999999
+    ],
+    "sustained": 0.1717777777777778,
+    "walking": 0.9275,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "O03",
+     "F04",
+     "G10"
+    ],
+    "scores": {
+     "fire": 50,
+     "acc": 59,
+     "ctl": 61,
+     "hdl": 59,
+     "feed": 49,
+     "kg": 3.25,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 25,
+     "pellets": 1,
+     "cooldown": 0.1,
+     "aimed": 0.7827749397077306,
+     "hip": 3.95340878640268,
+     "laserHip": null,
+     "range": 620,
+     "kick": 0.4446152490215188,
+     "bloom": 0.5156620156177408,
+     "recover": 4.2,
+     "raise": 0.2754,
+     "sway": 1.9,
+     "magazine": 20,
+     "reload": 2.08,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.25
+    },
+    "down": [
+     0.30000000000000004,
+     0.5753999999999999,
+     0.5753999999999999
+    ],
+    "sustained": 0.2689999999999999,
+    "walking": 0.9258333333333333,
+    "price": 490
+   },
+   "quiet": {
+    "parts": [
+     "M07",
+     "O03",
+     "F07"
+    ],
+    "scores": {
+     "fire": 50,
+     "acc": 59,
+     "ctl": 71,
+     "hdl": 46,
+     "feed": 53,
+     "kg": 3.91,
+     "noise": 29
+    },
+    "numbers": {
+     "damage": 25,
+     "pellets": 1,
+     "cooldown": 0.1,
+     "aimed": 0.7827749397077306,
+     "hip": 3.95340878640268,
+     "laserHip": null,
+     "range": 620,
+     "kick": 0.33002368999535414,
+     "bloom": 0.3609634109324186,
+     "recover": 4.2,
+     "raise": 0.394128,
+     "sway": 1.9,
+     "magazine": 30,
+     "reload": 2.6,
+     "noise": 281,
+     "suppressed": true,
+     "devices": false,
+     "kg": 3.91
+    },
+    "down": [
+     0.30000000000000004,
+     0.694128,
+     0.694128
+    ],
+    "sustained": 0.30311111111111066,
+    "walking": 0.9720833333333333,
+    "price": 2320
+   },
+   "steady": {
+    "parts": [
+     "O09",
+     "F07",
+     "M06"
+    ],
+    "scores": {
+     "fire": 50,
+     "acc": 70,
+     "ctl": 76,
+     "hdl": 34,
+     "feed": 53,
+     "kg": 4.17,
+     "noise": 57
+    },
+    "numbers": {
+     "damage": 25,
+     "pellets": 1,
+     "cooldown": 0.1,
+     "aimed": 0.5653374564555833,
+     "hip": 3.95340878640268,
+     "laserHip": null,
+     "range": 620,
+     "kick": 0.27501974166279514,
+     "bloom": 0.3093972093706445,
+     "recover": 4.2,
+     "raise": 0.5381999999999999,
+     "sway": 2.1849999999999996,
+     "magazine": 30,
+     "reload": 2.6,
+     "noise": 612,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.17
+    },
+    "down": [
+     0.30000000000000004,
+     0.8381999999999998,
+     0.8381999999999998
+    ],
+    "sustained": 0.3908888888888885,
+    "walking": 0.9745833333333334,
+    "price": 2730
+   }
+  },
+  "svdb": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 24,
+     "acc": 68,
+     "ctl": 29,
+     "hdl": 31,
+     "feed": 33,
+     "kg": 4,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 52,
+     "pellets": 1,
+     "cooldown": 0.45,
+     "aimed": 0.7734930234266114,
+     "hip": 5.15662015617741,
+     "laserHip": null,
+     "range": 820,
+     "kick": 1.1459155902616465,
+     "bloom": 1.1459155902616465,
+     "recover": 4,
+     "raise": 0.55,
+     "sway": 2.6,
+     "magazine": 10,
+     "reload": 2.6,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4
+    },
+    "down": [
+     0.45,
+     1,
+     1
+    ],
+    "sustained": 1,
+    "walking": 0.8808333333333334,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "O03"
+    ],
+    "scores": {
+     "fire": 24,
+     "acc": 71,
+     "ctl": 29,
+     "hdl": 37,
+     "feed": 33,
+     "kg": 4.06,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 52,
+     "pellets": 1,
+     "cooldown": 0.45,
+     "aimed": 0.6961437210839505,
+     "hip": 5.15662015617741,
+     "laserHip": null,
+     "range": 820,
+     "kick": 1.1459155902616465,
+     "bloom": 1.1459155902616465,
+     "recover": 4,
+     "raise": 0.4675,
+     "sway": 2.6,
+     "magazine": 10,
+     "reload": 2.6,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.06
+    },
+    "down": [
+     0.45,
+     0.9175,
+     0.9175
+    ],
+    "sustained": 1,
+    "walking": 0.8820833333333333,
+    "price": 200
+   },
+   "quiet": {
+    "parts": [
+     "M08",
+     "O03"
+    ],
+    "scores": {
+     "fire": 24,
+     "acc": 71,
+     "ctl": 29,
+     "hdl": 37,
+     "feed": 33,
+     "kg": 4.61,
+     "noise": 26
+    },
+    "numbers": {
+     "damage": 52,
+     "pellets": 1,
+     "cooldown": 0.45,
+     "aimed": 0.6961437210839505,
+     "hip": 5.15662015617741,
+     "laserHip": null,
+     "range": 820,
+     "kick": 1.1459155902616465,
+     "bloom": 1.1459155902616465,
+     "recover": 4,
+     "raise": 0.4675,
+     "sway": 2.6,
+     "magazine": 10,
+     "reload": 2.6,
+     "noise": 255,
+     "suppressed": true,
+     "devices": false,
+     "kg": 4.61
+    },
+    "down": [
+     0.45,
+     0.9175,
+     0.9175
+    ],
+    "sustained": 1,
+    "walking": 0.8808333333333334,
+    "price": 2100
+   },
+   "steady": {
+    "parts": [
+     "O09",
+     "M09"
+    ],
+    "scores": {
+     "fire": 24,
+     "acc": 80,
+     "ctl": 35,
+     "hdl": 22,
+     "feed": 33,
+     "kg": 4.7,
+     "noise": 57
+    },
+    "numbers": {
+     "damage": 52,
+     "pellets": 1,
+     "cooldown": 0.45,
+     "aimed": 0.5027704652272975,
+     "hip": 5.15662015617741,
+     "laserHip": null,
+     "range": 820,
+     "kick": 0.9167324722093171,
+     "bloom": 1.1459155902616465,
+     "recover": 5.2,
+     "raise": 0.7150000000000001,
+     "sway": 2.9899999999999998,
+     "magazine": 10,
+     "reload": 2.6,
+     "noise": 612,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.7
+    },
+    "down": [
+     0.45,
+     1.165,
+     1.165
+    ],
+    "sustained": 1,
+    "walking": 0.8158333333333333,
+    "price": 2350
+   }
+  },
+  "mb14": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 32,
+     "acc": 63,
+     "ctl": 26,
+     "hdl": 35,
+     "feed": 46,
+     "kg": 4.3,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 46,
+     "pellets": 1,
+     "cooldown": 0.3,
+     "aimed": 0.8415604094881532,
+     "hip": 4.950355349930313,
+     "laserHip": null,
+     "range": 760,
+     "kick": 1.260507149287811,
+     "bloom": 1.260507149287811,
+     "recover": 4,
+     "raise": 0.5,
+     "sway": 2.4,
+     "magazine": 20,
+     "reload": 2.5,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.3
+    },
+    "down": [
+     0.6,
+     1.1,
+     1.5000000000000002
+    ],
+    "sustained": 0.2516666666666666,
+    "walking": 0.8275,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "O03"
+    ],
+    "scores": {
+     "fire": 32,
+     "acc": 66,
+     "ctl": 26,
+     "hdl": 41,
+     "feed": 46,
+     "kg": 4.36,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 46,
+     "pellets": 1,
+     "cooldown": 0.3,
+     "aimed": 0.7574043685393379,
+     "hip": 4.950355349930313,
+     "laserHip": null,
+     "range": 760,
+     "kick": 1.260507149287811,
+     "bloom": 1.260507149287811,
+     "recover": 4,
+     "raise": 0.425,
+     "sway": 2.4,
+     "magazine": 20,
+     "reload": 2.5,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.36
+    },
+    "down": [
+     0.6,
+     1.025,
+     1.025
+    ],
+    "sustained": 0.2466666666666668,
+    "walking": 0.81125,
+    "price": 200
+   },
+   "quiet": {
+    "parts": [
+     "M08",
+     "O03",
+     "S09"
+    ],
+    "scores": {
+     "fire": 32,
+     "acc": 71,
+     "ctl": 26,
+     "hdl": 40,
+     "feed": 46,
+     "kg": 5.06,
+     "noise": 26
+    },
+    "numbers": {
+     "damage": 46,
+     "pellets": 1,
+     "cooldown": 0.3,
+     "aimed": 0.6437937132584373,
+     "hip": 4.950355349930313,
+     "laserHip": null,
+     "range": 760,
+     "kick": 1.260507149287811,
+     "bloom": 1.260507149287811,
+     "recover": 4,
+     "raise": 0.425,
+     "sway": 2.688,
+     "magazine": 20,
+     "reload": 2.5,
+     "noise": 255,
+     "suppressed": true,
+     "devices": false,
+     "kg": 5.06
+    },
+    "down": [
+     0.6,
+     1.025,
+     1.025
+    ],
+    "sustained": 0.23783333333333345,
+    "walking": 0.7954166666666667,
+    "price": 2520
+   },
+   "steady": {
+    "parts": [
+     "O09",
+     "M09",
+     "S09"
+    ],
+    "scores": {
+     "fire": 32,
+     "acc": 78,
+     "ctl": 32,
+     "hdl": 25,
+     "feed": 46,
+     "kg": 5.15,
+     "noise": 57
+    },
+    "numbers": {
+     "damage": 46,
+     "pellets": 1,
+     "cooldown": 0.3,
+     "aimed": 0.504936245692892,
+     "hip": 4.950355349930313,
+     "laserHip": null,
+     "range": 760,
+     "kick": 1.008405719430249,
+     "bloom": 1.260507149287811,
+     "recover": 5.2,
+     "raise": 0.65,
+     "sway": 3.0912,
+     "magazine": 20,
+     "reload": 2.5,
+     "noise": 612,
+     "suppressed": false,
+     "devices": false,
+     "kg": 5.15
+    },
+    "down": [
+     0.6,
+     1.25,
+     1.25
+    ],
+    "sustained": 0.523666666666667,
+    "walking": 0.7779166666666667,
+    "price": 2770
+   },
+   "big": {
+    "parts": [
+     "G11",
+     "O09",
+     "M09",
+     "S09"
+    ],
+    "scores": {
+     "fire": 32,
+     "acc": 78,
+     "ctl": 32,
+     "hdl": 25,
+     "feed": 48,
+     "kg": 5.3,
+     "noise": 57
+    },
+    "numbers": {
+     "damage": 46,
+     "pellets": 1,
+     "cooldown": 0.3,
+     "aimed": 0.504936245692892,
+     "hip": 4.950355349930313,
+     "laserHip": null,
+     "range": 760,
+     "kick": 1.008405719430249,
+     "bloom": 1.260507149287811,
+     "recover": 5.2,
+     "raise": 0.65,
+     "sway": 3.0912,
+     "magazine": 25,
+     "reload": 2.8000000000000003,
+     "noise": 612,
+     "suppressed": false,
+     "devices": false,
+     "kg": 5.3
+    },
+    "down": [
+     0.6,
+     1.25,
+     1.25
+    ],
+    "sustained": 0.4894666666666669,
+    "walking": 0.7929166666666667,
+    "price": 3070
+   }
+  },
+  "mb700": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 12,
+     "acc": 78,
+     "ctl": 22,
+     "hdl": 31,
+     "feed": 21,
+     "kg": 3.8,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 80,
+     "pellets": 1,
+     "cooldown": 1.2,
+     "aimed": 0.5775414574918698,
+     "hip": 4.8128454790989155,
+     "laserHip": null,
+     "range": 880,
+     "kick": 1.1459155902616465,
+     "bloom": 1.7188733853924696,
+     "recover": 3.5,
+     "raise": 0.55,
+     "sway": 2.6,
+     "magazine": 5,
+     "reload": 3,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.8
+    },
+    "down": [
+     1.2,
+     1.75,
+     1.75
+    ],
+    "sustained": 1,
+    "walking": 0.9783333333333334,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "B10",
+     "S10",
+     "O12"
+    ],
+    "scores": {
+     "fire": 12,
+     "acc": 78,
+     "ctl": 22,
+     "hdl": 46,
+     "feed": 21,
+     "kg": 3.24,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 80,
+     "pellets": 1,
+     "cooldown": 1.2,
+     "aimed": 0.5641367202634836,
+     "hip": 4.8128454790989155,
+     "laserHip": null,
+     "range": 880,
+     "kick": 1.1459155902616465,
+     "bloom": 1.7188733853924696,
+     "recover": 3.5,
+     "raise": 0.35750000000000004,
+     "sway": 2.6,
+     "magazine": 5,
+     "reload": 3,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 3.24
+    },
+    "down": [
+     1.2,
+     1.5575,
+     1.5575
+    ],
+    "sustained": 1,
+    "walking": 0.98125,
+    "price": 1670
+   },
+   "quiet": {
+    "parts": [
+     "M08",
+     "O03",
+     "S10",
+     "B10"
+    ],
+    "scores": {
+     "fire": 12,
+     "acc": 80,
+     "ctl": 22,
+     "hdl": 46,
+     "feed": 21,
+     "kg": 3.81,
+     "noise": 26
+    },
+    "numbers": {
+     "damage": 80,
+     "pellets": 1,
+     "cooldown": 1.2,
+     "aimed": 0.5344453139338265,
+     "hip": 4.8128454790989155,
+     "laserHip": null,
+     "range": 880,
+     "kick": 1.1459155902616465,
+     "bloom": 1.7188733853924696,
+     "recover": 3.5,
+     "raise": 0.35750000000000004,
+     "sway": 2.6,
+     "magazine": 5,
+     "reload": 3,
+     "noise": 255,
+     "suppressed": true,
+     "devices": false,
+     "kg": 3.81
+    },
+    "down": [
+     1.2,
+     1.5575,
+     1.5575
+    ],
+    "sustained": 1,
+    "walking": 0.9745833333333334,
+    "price": 3680
+   },
+   "steady": {
+    "parts": [
+     "O09",
+     "M09",
+     "S10"
+    ],
+    "scores": {
+     "fire": 12,
+     "acc": 88,
+     "ctl": 27,
+     "hdl": 27,
+     "feed": 21,
+     "kg": 4.25,
+     "noise": 57
+    },
+    "numbers": {
+     "damage": 80,
+     "pellets": 1,
+     "cooldown": 1.2,
+     "aimed": 0.3641398889486239,
+     "hip": 4.8128454790989155,
+     "laserHip": null,
+     "range": 880,
+     "kick": 0.9167324722093171,
+     "bloom": 1.7188733853924696,
+     "recover": 4.55,
+     "raise": 0.60775,
+     "sway": 2.9899999999999998,
+     "magazine": 5,
+     "reload": 3,
+     "noise": 612,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.25
+    },
+    "down": [
+     1.2,
+     1.80775,
+     1.80775
+    ],
+    "sustained": 1,
+    "walking": 0.8958333333333334,
+    "price": 2730
+   }
+  },
+  "rpkb": {
+   "factory": {
+    "parts": [],
+    "scores": {
+     "fire": 48,
+     "acc": 44,
+     "ctl": 61,
+     "hdl": 32,
+     "feed": 53,
+     "kg": 4.8,
+     "noise": 50
+    },
+    "numbers": {
+     "damage": 26,
+     "pellets": 1,
+     "cooldown": 0.11,
+     "aimed": 1.2155872581495548,
+     "hip": 5.064946908956478,
+     "laserHip": null,
+     "range": 640,
+     "kick": 0.45836623610465854,
+     "bloom": 0.45836623610465854,
+     "recover": 3.8,
+     "raise": 0.55,
+     "sway": 2.4,
+     "magazine": 40,
+     "reload": 3.4,
+     "noise": 510,
+     "suppressed": false,
+     "devices": false,
+     "kg": 4.8
+    },
+    "down": [
+     0.33,
+     0.88,
+     0.88
+    ],
+    "sustained": 0.16011111111111104,
+    "walking": 0.8475,
+    "price": 0
+   },
+   "quick": {
+    "parts": [
+     "A08",
+     "O03",
+     "G12",
+     "P04",
+     "M05",
+     "H10",
+     "F04"
+    ],
+    "scores": {
+     "fire": 48,
+     "acc": 48,
+     "ctl": 66,
+     "hdl": 41,
+     "feed": 52,
+     "kg": 5.2,
+     "noise": 46
+    },
+    "numbers": {
+     "damage": 26,
+     "pellets": 1,
+     "cooldown": 0.11,
+     "aimed": 1.094028532334599,
+     "hip": 5.064946908956478,
+     "laserHip": null,
+     "range": 640,
+     "kick": 0.4090460290997973,
+     "bloom": 0.396028427994425,
+     "recover": 3.9139999999999997,
+     "raise": 0.42075000000000007,
+     "sway": 2.4,
+     "magazine": 30,
+     "reload": 2.72,
+     "noise": 459,
+     "suppressed": false,
+     "devices": false,
+     "kg": 5.2
+    },
+    "down": [
+     0.33,
+     0.75075,
+     0.75075
+    ],
+    "sustained": 0.17077777777777792,
+    "walking": 0.85875,
+    "price": 1150
+   },
+   "quiet": {
+    "parts": [
+     "M07",
+     "A08",
+     "O03",
+     "S04",
+     "H10",
+     "F04",
+     "P03"
+    ],
+    "scores": {
+     "fire": 48,
+     "acc": 50,
+     "ctl": 71,
+     "hdl": 37,
+     "feed": 53,
+     "kg": 6.1,
+     "noise": 29
+    },
+    "numbers": {
+     "damage": 26,
+     "pellets": 1,
+     "cooldown": 0.11,
+     "aimed": 1.0393271057178692,
+     "hip": 5.064946908956478,
+     "laserHip": null,
+     "range": 640,
+     "kick": 0.35996050560782167,
+     "bloom": 0.3506501706200639,
+     "recover": 4.369999999999999,
+     "raise": 0.4712400000000001,
+     "sway": 2.4,
+     "magazine": 40,
+     "reload": 3.4,
+     "noise": 281,
+     "suppressed": true,
+     "devices": false,
+     "kg": 6.1
+    },
+    "down": [
+     0.33,
+     0.8012400000000001,
+     0.8012400000000001
+    ],
+    "sustained": 0.20944444444444468,
+    "walking": 0.8695833333333334,
+    "price": 2940
+   },
+   "steady": {
+    "parts": [
+     "A08",
+     "O09",
+     "M06",
+     "S04",
+     "H10",
+     "P03"
+    ],
+    "scores": {
+     "fire": 48,
+     "acc": 62,
+     "ctl": 78,
+     "hdl": 23,
+     "feed": 53,
+     "kg": 6.32,
+     "noise": 57
+    },
+    "numbers": {
+     "damage": 26,
+     "pellets": 1,
+     "cooldown": 0.11,
+     "aimed": 0.7506251319073499,
+     "hip": 5.064946908956478,
+     "laserHip": null,
+     "range": 640,
+     "kick": 0.27831997856274876,
+     "bloom": 0.2805201364960511,
+     "recover": 4.369999999999999,
+     "raise": 0.7150000000000001,
+     "sway": 2.76,
+     "magazine": 40,
+     "reload": 3.4,
+     "noise": 612,
+     "suppressed": false,
+     "devices": false,
+     "kg": 6.32
+    },
+    "down": [
+     0.33,
+     1.0450000000000002,
+     1.0450000000000002
+    ],
+    "sustained": 0.321444444444444,
+    "walking": 0.8458333333333333,
+    "price": 3260
+   },
+   "big": {
+    "parts": [
+     "G09",
+     "A08",
+     "O09",
+     "M06",
+     "S04",
+     "H10",
+     "P03"
+    ],
+    "scores": {
+     "fire": 48,
+     "acc": 62,
+     "ctl": 78,
+     "hdl": 20,
+     "feed": 55,
+     "kg": 7.22,
+     "noise": 57
+    },
+    "numbers": {
+     "damage": 26,
+     "pellets": 1,
+     "cooldown": 0.11,
+     "aimed": 0.7506251319073499,
+     "hip": 5.064946908956478,
+     "laserHip": null,
+     "range": 640,
+     "kick": 0.27831997856274876,
+     "bloom": 0.2805201364960511,
+     "recover": 4.369999999999999,
+     "raise": 0.8008000000000002,
+     "sway": 2.76,
+     "magazine": 60,
+     "reload": 4.59,
+     "noise": 612,
+     "suppressed": false,
+     "devices": false,
+     "kg": 7.22
+    },
+    "down": [
+     0.33,
+     1.1308000000000002,
+     1.1308000000000002
+    ],
+    "sustained": 0.31333333333333263,
+    "walking": 0.8391666666666666,
+    "price": 4810
+   }
+  }
+ },
+ "pairs": [],
+ "findings": [
+  "mb1911: P08 costs nothing",
+  "mpb5: S05 costs nothing",
+  "umpb45: 安静 beats 稳定 at its own aim",
+  "umpb45: 轻快 is no worse than the factory gun in any number (S06 O03 F04 P05)",
+  "umpb45: S06 costs nothing",
+  "akb74: H03 costs nothing",
+  "akb74: P04 costs nothing",
+  "akb103: H03 costs nothing",
+  "akb103: P04 costs nothing",
+  "mb4a1: S01 costs nothing",
+  "mb4a1: P01 costs nothing",
+  "mb700: 轻快 is no worse than the factory gun in any number (B10 S10 O12)",
+  "mb700: S10 costs nothing",
+  "rpkb: P04 costs nothing"
+ ]
+}

@@ -130,6 +130,10 @@
 
 [enemy-mall.ts](../src/enemy-mall.ts)的 `installMallEncounter` 仅在新三版或四版商场部署候选内替换二层三人和移动一只既有箱子，复用 actor v1、expansion 3 / raid 5；#98合入后外层统一写v8，`gunsBackup`与敌人/Perk备份沿原规则保留。活动旧商场不调用该初始化器。岗位、东侧绕行、旧版恢复和原子写失败见[商场记录](tasks/enemy-mall.md)与[测试](../tests/enemy-mall.test.ts)，三尺寸场景随 `test:enemy` 运行。
 
+老栓精工（#28 M4-09，#155）：20 件精品配件和它们的底料在 [gunsmith/catalog.ts](../src/gunsmith/catalog.ts)（`PREMIUM_BASES`、`isPremium`，档次 `premium`），定制规则与面板数据在 [gunsmith/premium.ts](../src/gunsmith/premium.ts)（`craftPremium`、`premiumOrders`），院子入口是据点 Runtime 的 `craftPremium`、面板在 [station-view/panels.ts](../src/station-view/panels.ts) 的 `premiumHtml`，旧页签在 [ui.ts](../src/ui.ts) 的 `premiumPanel`；件坯来源是 [enemy-armory.ts](../src/enemy-armory.ts) 的 `leaderBlank` 和 [building-world.ts](../src/building-world.ts)；测试 [gunsmith-premium.test.ts](../tests/gunsmith-premium.test.ts)。
+
+持枪敌人拿什么枪（#28 M4-02，#140）：[enemy-armory.ts](../src/enemy-armory.ts) 的 `armEncounter` 在街区、商场遭遇装配完后按 `ARMORY` 给每个持枪敌人发一把目录枪（只用行动种子和敌人 uid 抽），头目、队长、班长另存配件树 `tactics.fit`；尸体按 [gunsmith/presets.ts](../src/gunsmith/presets.ts) 的 `presetState` 掉同一把枪。敌人数值仍按原型；测试 [enemy-armory.test.ts](../tests/enemy-armory.test.ts)。
+
 方向性防护由 [enemy-defense.ts](../src/enemy-defense.ts) 根据实际入射方向处理，再由 `damageLayerEnemy` 结算真实生命差；不能用射手后来的位置。兵种压制、驻守、扑击上限和损失撤退见[组织合同](tasks/enemy-relations.md)。十八类角色已有身体/尸体/轮廓，由 `ActorView.tactics.archetype` 选择 [textures.ts](../src/coast-view/textures.ts)；前三类、市场头目、三种动物、四类盐蚀者、四人回收队与三类封锁队在本分支普通街区出击生成。[enemy-motion.ts](../src/coast-view/enemy-motion.ts) 从真实阶段投影身体姿态与音色，声音的阶段去重和可见性由 [sound.ts](../src/coast-view/sound.ts) 负责，不持有模拟时钟。来源、尺寸、确定性导出及动作覆盖见[美术记录](tasks/enemy-street-art.md)，旧 ID 的素材选择保持不变。
 
 [enemy-posts.ts](../src/enemy-posts.ts) 拥有市场据点的固定岗位、短巡查与备用位置，target/path/timer/stance 保存在既有敌人字段；其近身护卫不跨层追击。布置、经济守恒和绕行证据见[据点记录](tasks/enemy-market.md)。

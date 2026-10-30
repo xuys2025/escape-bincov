@@ -12,6 +12,8 @@ import { BREATH_FULL, breathChance } from '../breath';
 import { perkRaidRules } from '../expansion-state';
 import { critBreakdown } from '../perks';
 import { ATTACHMENTS } from '../gunsmith/catalog';
+import { partsSignature } from '../gunsmith/signature';
+import { presetState } from '../gunsmith/presets';
 import type { CoastRaidRuntime } from './runtime';
 import type { ActorView, CritChanceView, DevicesView, MapDef, RegionDef, TerrainCode, ViewFrame, WorldKey } from './contract';
 
@@ -159,7 +161,8 @@ export function frameView(r: CoastRaidRuntime, map: MapDef, velocities: Readonly
         return { uid, kind: profile?.bodyKind ?? 'player', x: e.x, y: e.y, aim: e.rotation,
             vx: velocity.x, vy: velocity.y, hp, maxHp: enemy ? actorDefinition(enemy).hp : limits.hp, alive: hp > 0,
             weapon: profile?.weapon ?? r.weaponLook,
-            ...(player && r.heldGun ? { gun: r.heldGun } : {}),
+            ...(player && r.heldGun ? { gun: r.heldGun } : enemy?.tactics?.equipment && D.isGun(enemy.tactics.equipment) && hp > 0
+                ? { gun: { id: enemy.tactics.equipment, sig: partsSignature(presetState(enemy.tactics.fit ?? [], () => 'fit').parts) } } : {}),
             ...(enemy?.tactics && spec ? { tactics: { archetype: enemy.id, name: spec.name, phase: enemy.tactics.phase,
                 stance: enemy.tactics.stance, awareness: enemy.tactics.awareness, left: enemy.tactics.phaseLeft,
                 total: enemy.tactics.phase === 'windup' ? spec.windup : enemy.tactics.phase === 'reload' ? spec.reload

@@ -12,6 +12,11 @@ export const FADE_LEVELS = [1, .7, .45, .25, 0];
 const HELD_LIMIT = 8;
 type HeldArt = WeaponArt & { texture: Texture; rim: Texture; tip: { x: number; y: number }; keys: string[] };
 
+/** The glove colour of each body kind: the old weapon art's, and an enemy's gunsmith gun's (#28 M4-02). */
+const gloveOf = (kind: ActorKind) => kind === 'player' ? '#4a463c' : kind === 'salt' ? '#7f7a6b' : '#3e3a33';
+/** The old three guns: as factory guns in an enemy's hands they keep Sol's enemy weapon art. */
+const OLD_GUNS = ['pistol', 'shotgun', 'carbine'];
+
 export class Textures {
   readonly atlas = new Atlas();
   private canvases = new Map<string, HTMLCanvasElement>();
@@ -96,7 +101,8 @@ export class Textures {
   private heldGun(gun: { id: string; sig: string }, kind: ActorKind): HeldArt | null {
     const key = `${gun.id}:${gun.sig}:${kind}`, hit = this.held.get(key);
     if (hit) { this.held.delete(key); this.held.set(key, hit); return hit; }
-    const pic = gunsmithArt?.held(gun.id, gun.sig);
+    // An enemy's gloves in its own colour (#28 M4-02), as its old weapon art has them.
+    const pic = gunsmithArt?.held(gun.id, gun.sig, kind === 'player' ? undefined : gloveOf(kind));
     if (!pic) return null;
     const tex = `${pic.key}:${kind}`, rimKey = `${tex}|rim`, rimCanvas = rim(pic.canvas);
     this.atlas.add(tex, pic.canvas, true); this.atlas.add(rimKey, rimCanvas, true);
@@ -119,10 +125,11 @@ export class Textures {
   weapon(id: string, kind: ActorKind, variant?: string, gun?: { id: string; sig: string }): WeaponArt & { texture: Texture; rim: Texture; tip?: { x: number; y: number } } {
     // The factory carbine keeps its approved held art (same pixels, and its arm reach as playtested); with parts it is
     // drawn from the gunsmith art like the new guns.
-    if (gun && kind === 'player' && !(gun.id === 'carbine' && gun.sig === '')) { const held = this.heldGun(gun, kind); if (held) return held; }
+    // An enemy holding a gunsmith gun (#28 M4-02) is drawn with it too; the old three factory guns keep Sol's enemy art.
+    if (gun && (kind === 'player' ? !(gun.id === 'carbine' && gun.sig === '') : !(OLD_GUNS.includes(gun.id) && gun.sig === ''))) { const held = this.heldGun(gun, kind); if (held) return held; }
     // The ritualist's existing long-reach melee rule has a two-handed fishing tool; this is a view style, not a new item.
     if (id === 'club' && variant === 'tide-ritualist') id = 'polearm';
-    const glove = kind === 'player' ? '#4a463c' : kind === 'salt' ? '#7f7a6b' : '#3e3a33';
+    const glove = gloveOf(kind);
     const key = `weapon:${id}:${kind === 'salt' || kind === 'elite' ? kind : glove}`;
     let art = this.weapons.get(key);
     if (!art) { art = (this.art && solWeapon(this.art, id, kind)) || paintWeapon(id, glove); this.weapons.set(key, art); this.canvases.set(key, art.canvas); this.atlas.add(key, art.canvas); }

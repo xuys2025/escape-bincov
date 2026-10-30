@@ -16,7 +16,17 @@ const WAVE_PARTS = ['A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'B03', 'B05', 'B06
   'O02', 'O04', 'O06', 'O07', 'O09', 'O11', 'O12', 'M04', 'M08', 'M09', 'M12', 'B02', 'B04', 'B10', 'H10', 'S06', 'S09', 'S10', 'P05', 'P08',
   'F02', 'F05', 'F06', 'F08', 'G02', 'G04', 'G05', 'G11', 'G12', 'T03', 'T06', 'T07', 'T09', 'A03'] as const;
 const WAVE_AMMO = ['ammo45', 'ammoPDW', 'ammoHeavy'] as const;
-export const ITEM_ART_IDS = ['knife', 'pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'bandage', 'medkit', 'antidote', 'water', 'food', 'scrap', 'wire', 'fuse', 'battery', 'watch', 'pearl', 'sample', 'ledger', 'cloth', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckyCharm', 'unluckyCharm', 'luckySachet', 'unluckySachet', 'gb17', 'mb4a1', ...PART_ART_IDS, ...WAVE_GUNS, ...WAVE_PARTS, ...WAVE_AMMO] as const;
+/**
+ * The factory magazines taken out at the workbench (#28 M4-07, catalog FACTORY_MAGS): their gun's magazine image as the
+ * icon (gunsmith-compose.ts), the generic part until it is decoded.
+ */
+export const FACTORY_MAG_ART = ['mpb5-mag', 'umpb45-mag', 'akb74-mag', 'akb103-mag', 'mb4a1-mag', 'augb-mag', 'mb14-mag', 'rpkb-mag', 'svdb-mag', 'vb9-mag'] as const;
+/**
+ * 老栓精工's twenty parts and their material (#28 M4-09): Sol draws them (docs/gunsmith/art/m4-premium/BRIEF.md); until
+ * then a brass-framed part with its number in pips, and a brass blank.
+ */
+export const PREMIUM_ART = ['J01', 'J02', 'J03', 'J04', 'J05', 'J06', 'J07', 'J08', 'J09', 'J10', 'J11', 'J12', 'J13', 'J14', 'J15', 'J16', 'J17', 'J18', 'J19', 'J20', 'premiumBlank'] as const;
+export const ITEM_ART_IDS = ['knife', 'pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'bandage', 'medkit', 'antidote', 'water', 'food', 'scrap', 'wire', 'fuse', 'battery', 'watch', 'pearl', 'sample', 'ledger', 'cloth', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckyCharm', 'unluckyCharm', 'luckySachet', 'unluckySachet', 'gb17', 'mb4a1', ...PART_ART_IDS, ...WAVE_GUNS, ...WAVE_PARTS, ...WAVE_AMMO, ...FACTORY_MAG_ART, ...PREMIUM_ART] as const;
 export type ItemArtId = typeof ITEM_ART_IDS[number];
 type PartArtId = typeof PART_ART_IDS[number];
 
@@ -27,7 +37,8 @@ export function paintItem(c: PixelContext, id: ItemArtId, size: 24 | 32): void {
   if (sol) { c.drawImage(sol.img, sol.x, sol.y); return; }
   if (paintRpgItem(c, id, size)) return;
   if ((PART_ART_IDS as readonly string[]).includes(id)) { paintPartPlaceholder(c, id as PartArtId, size); return; }
-  if ([...WAVE_GUNS, ...WAVE_PARTS, ...WAVE_AMMO].includes(id as never)) { paintWavePlaceholder(c, id, size); return; }
+  if ([...WAVE_GUNS, ...WAVE_PARTS, ...WAVE_AMMO, ...FACTORY_MAG_ART].includes(id as never)) { paintWavePlaceholder(c, id, size); return; }
+  if ((PREMIUM_ART as readonly string[]).includes(id)) { paintPremiumPlaceholder(c, id, size); return; }
   if (size === 24) { paintSmall(c, id); return; }
   const { r, p, e } = brush(c), S = C;
   switch (id) {
@@ -279,6 +290,15 @@ function paintWavePlaceholder(c: PixelContext, id: string, size: 24 | 32): void 
     return;
   }
   r(S.ink, o + 4, o + 6, 16, 12); r(S.steelDark, o + 5, o + 7, 14, 10); r(S.steel, o + 5, o + 7, 14, 1); r(S.edge, o + 6, o + 17, 12, 2);
+}
+/** 老栓精工's placeholders: the blank a brass block; a part a steel body in a brass frame, its number in pips (1-5 by 1-4). */
+function paintPremiumPlaceholder(c: PixelContext, id: string, size: 24 | 32): void {
+  const S = C, { r } = brush(c), o = size === 32 ? 4 : 0;
+  if (id === 'premiumBlank') { r(S.ink, o + 5, o + 7, 14, 11); r(S.brass, o + 6, o + 8, 12, 9); r(S.brassLight, o + 6, o + 8, 12, 2); r(S.steelDark, o + 8, o + 13, 8, 2); return; }
+  const n = Number(id.slice(1)) - 1;
+  r(S.ink, o + 3, o + 5, 18, 14); r(S.brass, o + 4, o + 6, 16, 12); r(S.steelDark, o + 6, o + 8, 12, 8); r(S.steel, o + 6, o + 8, 12, 1);
+  for (let k = 0; k <= n % 5; k++) r(S.brassLight, o + 7 + 2 * k, o + 12, 1, 2);
+  for (let k = 0; k <= Math.floor(n / 5); k++) r(S.edge, o + 17, o + 9 + 2 * k, 1, 1);
 }
 function paintPartPlaceholder(c: PixelContext, id: PartArtId, size: 24 | 32): void {
   const S = C, base = brush(c), o = size === 32 ? 4 : 0;

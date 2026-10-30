@@ -140,12 +140,14 @@ export function effectiveStats(build: Build, on: readonly string[] = []): GunSta
     const bipods = mods.flatMap(m => m.braced ?? []), braced = bipods.length ? combineFactors([...mods, ...bipods]) : null;
     // Step 2: one part per position leaves at most one feed module, one sight, one laser and one light on the gun.
     const feed = mods.find(m => m.magazine !== undefined), sight = mods.find(m => m.view);
+    // Without a magazine (its factory one out, none other on: #28 M4-07) it holds nothing and cannot fire.
+    const empty = !!build.magOut && !build.parts.some(p => p.slot === 'mag' && p.parent === null);
     const switched = new Set(on), devices = build.parts.filter(p => switched.has(p.uid) && ATTACHMENTS[p.id].cat === 'tactical')
         .map(p => ATTACHMENTS[p.id].mods);
     const laser = devices.find(m => m.laser)?.laser, light = devices.find(m => m.light)?.light;
     return {
         weapon: { ...gun.stats, spread: gun.stats.spread * factors.spread, range: gun.stats.range * factors.range,
-            reload: gun.stats.reload * factors.reload, magazine: feed?.magazine ?? gun.stats.magazine },
+            reload: gun.stats.reload * factors.reload, magazine: empty ? 0 : feed?.magazine ?? gun.stats.magazine },
         handling: scaled(gun.handling, factors),
         braced: braced && scaled(gun.handling, braced),
         noise: factors.noise,

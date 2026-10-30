@@ -1,0 +1,620 @@
+{
+  "schema": 1,
+  "revision": 1,
+  "batch": "M4-MAGS",
+  "totals": {
+    "files": 22,
+    "pngBytes": 3833,
+    "icons": 10,
+    "receivers": 6,
+    "factoryMagazines": 6
+  },
+  "assets": [
+    {
+      "id": "gs-mpb5-mag-q24-v1",
+      "revision": 1,
+      "output": "icon24",
+      "gun": "mpb5",
+      "item": "mpb5-mag",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "exportMethod": "original native 24x24 pixel profile, independent icon detail; no I-layer centering or resampling",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-mpb5-mag-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 144,
+      "sha256": "a1e593cd07e32419e0f1cdce2acf1f2b7e082d0f231b557fb8c696a6a503f0f9",
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-umpb45-mag-q24-v1",
+      "revision": 1,
+      "output": "icon24",
+      "gun": "umpb45",
+      "item": "umpb45-mag",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "exportMethod": "original native 24x24 pixel profile, independent icon detail; no I-layer centering or resampling",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-umpb45-mag-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 133,
+      "sha256": "f6272bbf70427ff9733f9fa47aaa71a2c07eb4a796b64fc9af7d4587ad69c673",
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-akb74-mag-q24-v1",
+      "revision": 1,
+      "output": "icon24",
+      "gun": "akb74",
+      "item": "akb74-mag",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "exportMethod": "original native 24x24 pixel profile, independent icon detail; no I-layer centering or resampling",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-akb74-mag-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 147,
+      "sha256": "e8057a53d530f54260bb9944c69cc6f9057121202941ccf5d52a76ab55dfe81a",
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-akb103-mag-q24-v1",
+      "revision": 1,
+      "output": "icon24",
+      "gun": "akb103",
+      "item": "akb103-mag",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "exportMethod": "original native 24x24 pixel profile, independent icon detail; no I-layer centering or resampling",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-akb103-mag-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 146,
+      "sha256": "74a91e81b1460c5c21d156138c4cd8e03d80b252e3ca6b37b9bb7478e2f24fc4",
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-mb4a1-mag-q24-v1",
+      "revision": 1,
+      "output": "icon24",
+      "gun": "mb4a1",
+      "item": "mb4a1-mag",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "exportMethod": "original native 24x24 pixel profile, independent icon detail; no I-layer centering or resampling",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-mb4a1-mag-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 146,
+      "sha256": "ce2fde229d5784e4a00819a1e1026942107e8a16fc59116d48843a93bf1a5fdf",
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-augb-mag-q24-v1",
+      "revision": 1,
+      "output": "icon24",
+      "gun": "augb",
+      "item": "augb-mag",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "exportMethod": "original native 24x24 pixel profile, independent icon detail; no I-layer centering or resampling",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-augb-mag-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 152,
+      "sha256": "fa9ace7f08e3bd135b6509d554c5cbcaef7c266b4c236593cbf012587de525d3",
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-mb14-mag-q24-v1",
+      "revision": 1,
+      "output": "icon24",
+      "gun": "mb14",
+      "item": "mb14-mag",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "exportMethod": "original native 24x24 pixel profile, independent icon detail; no I-layer centering or resampling",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-mb14-mag-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 145,
+      "sha256": "8e3859b0805f2b2e8a53a6ec52b500e157a3b9b8b62b8695b82de0f1b84a787b",
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-rpkb-mag-q24-v1",
+      "revision": 1,
+      "output": "icon24",
+      "gun": "rpkb",
+      "item": "rpkb-mag",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "exportMethod": "original native 24x24 pixel profile, independent icon detail; no I-layer centering or resampling",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-rpkb-mag-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 148,
+      "sha256": "82ef38d7b4ab8b03f9d20a2593660cae7d78c2094136459ef29fc067835b128a",
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-svdb-mag-q24-v1",
+      "revision": 1,
+      "output": "icon24",
+      "gun": "svdb",
+      "item": "svdb-mag",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "exportMethod": "original native 24x24 pixel profile, independent icon detail; no I-layer centering or resampling",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-svdb-mag-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 158,
+      "sha256": "b59900901fb9642cf1b3b5b46b7958c3d0717d0acec91e04a325047abd416cfc",
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-vb9-mag-q24-v1",
+      "revision": 1,
+      "output": "icon24",
+      "gun": "vb9",
+      "item": "vb9-mag",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "exportMethod": "original native 24x24 pixel profile, independent icon detail; no I-layer centering or resampling",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-vb9-mag-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 130,
+      "sha256": "00c334485c87bdec79e7abc4f4334233d528eae51639d31587659d4ba0f7507f",
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-svdb-receiver-h-v3",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-svdb-receiver-h-v3.png",
+      "w": 37,
+      "h": 10,
+      "bytes": 172,
+      "sha256": "5d98b7cd35ad66d844c2c538b2e6f099cd4d74fd6e40172fb6a8c600bdbb8d83",
+      "revision": 3,
+      "output": "held",
+      "gun": "svdb",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "lossless native magazine-layer separation; one shared lip row; unchanged pixels outside crop",
+      "grip": [
+        13,
+        5
+      ],
+      "hand": [
+        24,
+        5
+      ],
+      "bore": 3,
+      "tip": [
+        37,
+        3
+      ],
+      "mounts": {
+        "top": [
+          15,
+          0
+        ],
+        "bipod": [
+          29,
+          4
+        ],
+        "muzzle": [
+          36,
+          2
+        ],
+        "mag": [
+          14,
+          5
+        ]
+      },
+      "forward": 0,
+      "replacesSha256": "b5500c926aa372bbe29e3ba2b477d84aa7c0cf83de27bb4e74f0f10d6250ab07"
+    },
+    {
+      "id": "gs-svdb-mag-factory-h-v1",
+      "revision": 1,
+      "output": "held",
+      "gun": "svdb",
+      "item": null,
+      "role": "factory",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "exportMethod": "exact original magazine pixels including shared lip row; default mag layer behind receiver",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-svdb-mag-factory-h-v1.png",
+      "w": 7,
+      "h": 5,
+      "bytes": 89,
+      "sha256": "8ada0743be8f3df1c8b891f76445727063c1400f6f864506d737c6878fa8c16e",
+      "colors": 2,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-svdb-receiver-i-v4",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-svdb-receiver-i-v4.png",
+      "w": 92,
+      "h": 18,
+      "bytes": 304,
+      "sha256": "ef8877008e44a56e5232082b4a65c17f80280cd07751e75c52fde648df875d3a",
+      "revision": 4,
+      "output": "inventory",
+      "gun": "svdb",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 7,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "lossless native magazine-layer separation; one shared lip row; unchanged pixels outside crop",
+      "tip": [
+        92,
+        6
+      ],
+      "mounts": {
+        "top": [
+          36,
+          0
+        ],
+        "bipod": [
+          73,
+          7
+        ],
+        "muzzle": [
+          91,
+          5
+        ],
+        "mag": [
+          39,
+          10
+        ]
+      },
+      "replacesSha256": "433428b34db1a00ee87838a6fa0ee88a8733075c8823c2178ac807455e43f9fb"
+    },
+    {
+      "id": "gs-svdb-mag-factory-i-v1",
+      "revision": 1,
+      "output": "inventory",
+      "gun": "svdb",
+      "item": null,
+      "role": "factory",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "exportMethod": "exact original magazine pixels including shared lip row; default mag layer behind receiver",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-svdb-mag-factory-i-v1.png",
+      "w": 11,
+      "h": 8,
+      "bytes": 102,
+      "sha256": "6b2a341acc7a17c0686cd2cd0f7c094fb5655e8d0b3f49595132cfd41fcf3b31",
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-svdb-receiver-w-v4",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-svdb-receiver-w-v4.png",
+      "w": 184,
+      "h": 36,
+      "bytes": 486,
+      "sha256": "59f44afd1883c23e793df4a7d301a0381cd901d9d1cf41c241dfac544e580276",
+      "revision": 4,
+      "output": "bench",
+      "gun": "svdb",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 8,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "lossless native magazine-layer separation; one shared lip row; unchanged pixels outside crop",
+      "tip": [
+        184,
+        12
+      ],
+      "mounts": {
+        "top": [
+          72,
+          0
+        ],
+        "bipod": [
+          146,
+          14
+        ],
+        "muzzle": [
+          183,
+          10
+        ],
+        "mag": [
+          78,
+          21
+        ]
+      },
+      "replacesSha256": "3bce50a43e13f5b3b2a505d1f1711f62b4dbb63ec661a9d73cb4cd741ce1c9dc"
+    },
+    {
+      "id": "gs-svdb-mag-factory-w-v1",
+      "revision": 1,
+      "output": "bench",
+      "gun": "svdb",
+      "item": null,
+      "role": "factory",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "exportMethod": "exact original magazine pixels including shared lip row; default mag layer behind receiver",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-svdb-mag-factory-w-v1.png",
+      "w": 22,
+      "h": 15,
+      "bytes": 144,
+      "sha256": "300abdbf3cf5dfbd770c25792a87c707e183daa65b40ea3106d095881baaaf9e",
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-vb9-receiver-h-v2",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-vb9-receiver-h-v2.png",
+      "w": 24,
+      "h": 10,
+      "bytes": 138,
+      "sha256": "0c427cb5d9d38d54ec8774545bc59f54a5535f265d4c3b6db23b035ac5efd6cb",
+      "revision": 2,
+      "output": "held",
+      "gun": "vb9",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "lossless native magazine-layer separation; one shared lip row; unchanged pixels outside crop",
+      "mounts": {
+        "top": [
+          10,
+          0
+        ],
+        "under": [
+          16,
+          6
+        ],
+        "side1": [
+          19,
+          3
+        ],
+        "muzzle": [
+          23,
+          2
+        ],
+        "mag": [
+          13,
+          5
+        ]
+      },
+      "tip": [
+        24,
+        3
+      ],
+      "grip": [
+        9,
+        7
+      ],
+      "bore": 3,
+      "forward": 0,
+      "hand": [
+        16,
+        6
+      ],
+      "replacesSha256": "e2c626efddb4fc0243e9a42106ca4891d6eed2756705e24bba010f40f1da01ea"
+    },
+    {
+      "id": "gs-vb9-mag-factory-h-v1",
+      "revision": 1,
+      "output": "held",
+      "gun": "vb9",
+      "item": null,
+      "role": "factory",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "exportMethod": "exact original magazine pixels including shared lip row; default mag layer behind receiver",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-vb9-mag-factory-h-v1.png",
+      "w": 5,
+      "h": 5,
+      "bytes": 89,
+      "sha256": "dc9faa1c0d890dac164b704d254fedbf7976644768e23138d671fd9bf61790f7",
+      "colors": 3,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-vb9-receiver-i-v3",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-vb9-receiver-i-v3.png",
+      "w": 55,
+      "h": 18,
+      "bytes": 220,
+      "sha256": "ab795382c93f550180772a87027e1b408d75db569c6555e0a57b99288e44d8da",
+      "revision": 3,
+      "output": "inventory",
+      "gun": "vb9",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "lossless native magazine-layer separation; one shared lip row; unchanged pixels outside crop",
+      "mounts": {
+        "top": [
+          23,
+          0
+        ],
+        "under": [
+          37,
+          9
+        ],
+        "side1": [
+          45,
+          5
+        ],
+        "muzzle": [
+          54,
+          3
+        ],
+        "mag": [
+          31,
+          9
+        ]
+      },
+      "tip": [
+        55,
+        4
+      ],
+      "replacesSha256": "30dbf68eef2e71d57fd84429e48247395686c5b451c82e88e526984fd5df5a79"
+    },
+    {
+      "id": "gs-vb9-mag-factory-i-v1",
+      "revision": 1,
+      "output": "inventory",
+      "gun": "vb9",
+      "item": null,
+      "role": "factory",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "exportMethod": "exact original magazine pixels including shared lip row; default mag layer behind receiver",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-vb9-mag-factory-i-v1.png",
+      "w": 9,
+      "h": 9,
+      "bytes": 111,
+      "sha256": "6dc260433e2b0ca5d933e4b9e67f44dadeb4920edaad1ef26149d75d00ba2e1e",
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    },
+    {
+      "id": "gs-vb9-receiver-w-v3",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-vb9-receiver-w-v3.png",
+      "w": 110,
+      "h": 36,
+      "bytes": 378,
+      "sha256": "1c4ff46093bb11644af95ee3a6efa24f36ff5861525b5bbcb9a6b83a5edae518",
+      "revision": 3,
+      "output": "bench",
+      "gun": "vb9",
+      "item": null,
+      "role": "receiver",
+      "slot": null,
+      "anchor": null,
+      "colors": 7,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "lossless native magazine-layer separation; one shared lip row; unchanged pixels outside crop",
+      "mounts": {
+        "top": [
+          46,
+          0
+        ],
+        "under": [
+          74,
+          18
+        ],
+        "side1": [
+          90,
+          10
+        ],
+        "muzzle": [
+          109,
+          6
+        ],
+        "mag": [
+          62,
+          19
+        ]
+      },
+      "tip": [
+        110,
+        8
+      ],
+      "replacesSha256": "a690196ae27e9bab2a334e9473cd6384da1ddaa07fc02c73033bf5e45f7ca31a"
+    },
+    {
+      "id": "gs-vb9-mag-factory-w-v1",
+      "revision": 1,
+      "output": "bench",
+      "gun": "vb9",
+      "item": null,
+      "role": "factory",
+      "slot": "mag",
+      "anchor": [
+        0,
+        0
+      ],
+      "exportMethod": "exact original magazine pixels including shared lip row; default mag layer behind receiver",
+      "file": "assets/gunsmith/incoming/m4-mags/gs-vb9-mag-factory-w-v1.png",
+      "w": 18,
+      "h": 17,
+      "bytes": 151,
+      "sha256": "ec46a8c31119bf88511864361b6927e5cc87479bd8be0e302335bf265bd3c6a1",
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
+      "sourceRect": null
+    }
+  ]
+}
