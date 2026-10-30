@@ -134,6 +134,53 @@ async function step(name, fn) {
   } catch (e) { row.status = 'failed'; row.error = String(e.stack); await shot(`failure-${report.steps.length}`).catch(() => {}); console.log('FAIL', name, e.message); }
 }
 try {
+  for (const [width, height] of [[1280, 720], [1920, 1080]]) await step(`radio-progression-${width}`, async () => {
+    const legacy = D.newSave(); legacy.quests.repair = true; legacy.stats.runs = 9; legacy.stats.extracts = 2;
+    D.addItem(legacy.stash, 'sample'); D.addItem(legacy.stash, 'ledger');
+    await open({ size: [width, height], legacy }); await panel('radio');
+    const sample = yard('.quest').nth(1), ledger = yard('.quest').nth(2);
+    assert.match(await sample.innerText(), /累计成功撤离 2 \/ 3 次/);
+    assert.match(await ledger.innerText(), /先完成「瓶中的潮声」/);
+    assert.ok(await yard('[data-act="quest:sample"]').isDisabled());
+    assert.ok(await yard('[data-act="quest:ledger"]').isDisabled());
+    await readable('#station-yard .quest:nth-child(2)'); await shot(`radio-locked-${width}`);
+    await tabs(); await tap(page.locator('[data-action="tab"][data-id="quests"]'));
+    assert.match(await page.locator('.quest').nth(1).innerText(), /累计成功撤离 2 \/ 3 次/);
+    assert.ok(await page.locator('[data-action="quest"][data-id="sample"]').isDisabled());
+    await shot(`radio-tabs-locked-${width}`);
+    await tap(page.locator('[data-action="base-enter"]').first()); await ready();
+    await page.evaluate(async () => { await window.__station.reseed(() => {
+      const saves = window.__bincov.saveSession, ticket = saves.prepareExpansionMutation(d => { d.profile.stats.extracts = 3; });
+      if (saves.commitExpansionMutation(ticket) !== 'committed') throw Error('quest milestone fixture');
+    }); });
+    await ready(); await panel('radio');
+    assert.ok(await yard('[data-act="quest:sample"]').isEnabled());
+    const cash = (await snapshot()).profile.cash;
+    if (width === 1280) await tap(yard('[data-act="quest:sample"]'));
+    else {
+      await tabs(); await tap(page.locator('[data-action="tab"][data-id="quests"]'));
+      assert.ok(await page.locator('[data-action="quest"][data-id="sample"]').isEnabled());
+      await tap(page.locator('[data-action="quest"][data-id="sample"]'));
+      await tap(page.locator('[data-action="base-enter"]').first()); await ready(); await panel('radio');
+    }
+    assert.equal((await snapshot()).profile.quests.sample, true);
+    assert.equal((await snapshot()).profile.cash, cash + D.QUESTS.sample.reward);
+    assert.ok(await yard('[data-act="quest:ledger"]').isDisabled());
+    assert.match(await yard('.quest').nth(2).innerText(), /累计成功撤离 3 \/ 6 次/);
+    await readable('#station-yard .quest:nth-child(3)'); await shot(`radio-sample-done-${width}`);
+  });
+  await step('legacy-completed-radio-shelves-survive-new-gates', async () => {
+    const legacy = D.newSave(); legacy.quests.sample = true; legacy.quests.ledger = true;
+    await open({ legacy }); await panel('radio');
+    assert.match(await yard('.quest').nth(1).innerText(), /已交付/);
+    assert.match(await yard('.quest').nth(2).innerText(), /修理铺已上架/);
+    assert.doesNotMatch(await yard('.quest').nth(2).innerText(), /尚未开放|累计成功撤离/);
+    assert.equal((await snapshot()).profile.quests.repair, false, 'no retroactive prerequisite edits');
+    const cash = (await snapshot()).profile.cash;
+    await page.reload(); await page.waitForFunction(() => window.__bincov);
+    assert.equal((await snapshot()).profile.cash, cash);
+    assert.equal((await snapshot()).profile.quests.ledger, true);
+  });
   await step('ordinary-new-save-zero', async () => {
     await open({ test: false }); await shot('ordinary-zero-1280');
     assert.equal(await page.evaluate(() => '__bincov' in window || '__station' in window), false);

@@ -389,6 +389,24 @@ test('shop full stash returns space without paying for a rejected purchase', () 
     const shop = f.runtime.openShop('arms'), item = shop.view().catalog.items.find(i => i.id === 'pistol')!; assert.ok(shop.place('merchant', 'buy', item.uid, 0, 0).ok);
     const raw = f.raw; assert.equal(reason(shop.settle()), 'space'); assert.equal(f.raw, raw);
 });
+test('radio milestones reject without writing and keep task, money and shelves atomic on storage failure', () => {
+    const f = fixture();
+    f.setup(d => { d.profile.quests.repair = true; d.profile.stats.runs = 6; d.profile.stats.extracts = 2; D.addItem(d.profile.safe, 'sample'); });
+    const locked = f.raw, writes = f.writes;
+    const refused = f.runtime.submitQuest('sample'); assert.equal(reason(refused), 'rule');
+    assert.match(!refused.ok ? refused.message! : '', /2 \/ 3/);
+    assert.equal(f.raw, locked); assert.equal(f.writes, writes);
+    f.setup(d => { d.profile.stats.extracts = 3; });
+    const before = structuredClone(f.state.save), raw = f.raw;
+    f.fail(); assert.equal(reason(f.runtime.submitQuest('sample')), 'storage');
+    assert.deepEqual(f.state.save, before); assert.equal(f.raw, raw); assert.ok(!D.armsStock(f.state.save).includes('augb'));
+    f.fail(false); assert.ok(f.runtime.retrySave().ok); assert.ok(f.runtime.submitQuest('sample').ok);
+    assert.equal(f.state.save.cash, before.cash + D.QUESTS.sample.reward);
+    assert.equal(D.count(f.state.save.safe, 'sample'), 0); assert.ok(D.armsStock(f.state.save).includes('augb'));
+    const reload = fixture(f.raw), committed = reload.raw;
+    assert.equal(reason(reload.runtime.submitQuest('sample')), 'rule'); assert.equal(reload.raw, committed);
+    assert.equal(reload.state.save.quests.sample, true); assert.ok(D.armsStock(reload.state.save).includes('augb'));
+});
 test('base supplies and secure transfers use one transaction with body and inventory', () => {
     const f = fixture(); f.setup(d => { d.expansion.body.hp = 40; });
     const item = f.state.save.bag.items.find(i => i.id === 'bandage')!, before = structuredClone(f.state);

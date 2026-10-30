@@ -299,6 +299,7 @@ test('quest submission consumes across inventories atomically and rewards once',
   assert.equal(save.stash.h, STASH_UPGRADED_ROWS);
   assert.equal(upgradeStash(save), false);
   for (const id of ['sample', 'ledger']) {
+    save.stats.extracts = QUESTS[id].extracts!;
     addItem(save.stash, id);
     assert.equal(submitQuest(save, id), true);
     assert.equal(save.quests[id], true);

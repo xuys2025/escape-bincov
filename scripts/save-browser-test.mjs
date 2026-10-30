@@ -57,7 +57,7 @@ async function step(name, work) {
   try { await work(); assert.deepEqual(report.errors, []); assert.deepEqual(report.externalRequests, []); item.status = 'passed'; console.log('PASS', name); }
   catch (error) { item.status = 'failed'; item.error = error.stack; throw error; }
 }
-let backupPath;
+let backupPath, beforeRaidStats;
 try {
   await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs');
   await action('enter').click();
@@ -74,6 +74,7 @@ try {
     await page.evaluate(() => {
       const { app, persist } = window.__bincov;
       app.save.cash = 2000;
+      app.save.stats.runs = 6; app.save.stats.extracts = 6; // Eligible progress; this case checks durable turn-in and reload.
       [['scrap', 3], ['wire', 2], ['fuse', 1], ['sample', 1], ['ledger', 1]].forEach(([id, qty], i) => app.save.stash.items.push({ id, qty, uid: 'quest-fixture-' + i, x: i, y: 2 }));
       persist();
     });
@@ -117,6 +118,7 @@ try {
     await failStorage(false);
   });
   await step('failed safe transfer rolls back live containers', async () => {
+    beforeRaidStats = (await state()).save.stats;
     await action('tab', 'gear').click(); await page.locator('#seed').fill('42'); await action('deploy').click();
     await raidReady(page); await drive(page, 'freezeAI', true); await running(page);
     const item = page.locator('.coast-sample [data-panel] [data-source="bag"][aria-label^="密封绷带"]');
@@ -172,7 +174,7 @@ try {
     await failStorage(false); await page.locator('.coast-sample [data-do="retry-settlement"]').click();
     await action('return').waitFor({ timeout: 30000 });
     const saved = (await state()).save;
-    assert.equal(saved.stats.extracts, 1); assert.equal(saved.stats.runs, 1);
+    assert.equal(saved.stats.extracts, beforeRaidStats.extracts + 1); assert.equal(saved.stats.runs, beforeRaidStats.runs + 1);
     await page.reload(); await action('enter').click();
     assert.deepEqual((await state()).save, saved);
     assert.ok(saved.bag.items.some(i => i.id === 'sample'));
@@ -189,7 +191,7 @@ try {
       await p.locator('[data-action="enter"]').click(); await throughYard(p); await p.locator('[data-action="tab"][data-id="home"]').click();
       await p.locator('#backup-file').setInputFiles(backupPath); await p.locator('[data-action="confirm-import"]').click();
       const saved = await p.evaluate(() => JSON.parse(localStorage.getItem('escape-bincov.session.v2')).profile);
-      assert.equal(saved.stats.extracts, 1); assert.ok(saved.bag.items.some(i => i.id === 'sample'));
+      assert.equal(saved.stats.extracts, beforeRaidStats.extracts + 1); assert.ok(saved.bag.items.some(i => i.id === 'sample'));
       await p.goto('https://bincov.test/updated/index.html');
       assert.deepEqual(await p.evaluate(() => JSON.parse(localStorage.getItem('escape-bincov.session.v2')).profile), saved);
     } finally { await fresh.close(); }

@@ -294,7 +294,12 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
     unequipCharm() { return this.transaction('charm-unequip', d => unequipCharm(d.profile, d.expansion)); }
     upgradeStash() { return this.transaction('stash-upgrade', d => D.upgradeStash(d.profile)); }
     claimRelief() { return this.transaction('relief', d => D.grantRelief(d.profile)); }
-    submitQuest(id: string) { return this.transaction('quest', d => Object.hasOwn(D.QUESTS, id) && D.submitQuest(d.profile, id)); }
+    submitQuest(id: string) {
+        return this.transaction('quest', d => {
+            const requirements = D.questRequirements(d.profile, id);
+            return requirements.length ? fail('rule', requirements.join('；')) : D.submitQuest(d.profile, id);
+        });
+    }
     facility(id: C.Facility): C.FacilityInfo {
         const s = this.snapshot(), level = s.base.facilities[id], cost = B.FACILITY_COSTS[id]?.[level];
         return { id, name: B.FACILITY_NAMES[id], level, maxLevel: 3, explanation: { rest: '提高生命与精神恢复速度，并缩短获得精力充沛所需的休息。', medical: '提高生命恢复和止血、镇痛、疲劳治疗速度。', training: '提高行动训练效率。在训练区实际走动，每满 120 秒获得一次练习收益。', workbench: '有限队列串行生产；领完一批，再为后续成品腾出位置。', blackmarket: '需要修好电源，并成功带回一颗普通黑珍珠。货单尚未开放。' }[id],

@@ -405,11 +405,23 @@ export function questShelfText(id: string, done: boolean): string | null {
 /** What a counter stocks for this profile: the arms counter by progress (armsStock), the doctor's fixed stock. */
 export const merchantGoods = (merchant: 'arms' | 'med', save: Pick<SaveDataV1, 'quests' | 'stats'>): string[] =>
   merchant === 'arms' ? armsStock(save) : [...MERCHANTS[merchant].stock];
-export const QUESTS: Record<string, { name: string; description: string; needs: Record<string, number>; reward: number; radio: string }> = {
+export const QUESTS: Record<string, { name: string; description: string; needs: Record<string, number>; reward: number; radio: string; after?: string; extracts?: number }> = {
   repair: { name: '让灯亮起来', description: '找齐维修物资，恢复水产站供电。完成后可扩建仓库。', needs: { scrap: 3, wire: 2, fuse: 1 }, reward: 420, radio: '电台通了，灯也稳了。仓库可以扩建了。' },
-  sample: { name: '瓶中的潮声', description: '从潮汐观测站带回一份赤潮封存样本。', needs: { sample: 1 }, reward: 650, radio: '样本收到了。瓶里的水面比外海提前三十秒上涨。先别开封。' },
-  ledger: { name: '未归的第七艘船', description: '从旧渔港带回港口船册。', needs: { ledger: 1 }, reward: 800, radio: '船册上记了七艘船，码头却只有六个泊位。第七艘还得再查。' },
+  sample: { name: '瓶中的潮声', description: '从潮汐观测站带回一份赤潮封存样本。', needs: { sample: 1 }, reward: 650, radio: '样本收到了。瓶里的水面比外海提前三十秒上涨。先别开封。', after: 'repair', extracts: 3 },
+  ledger: { name: '未归的第七艘船', description: '从旧渔港带回港口船册。', needs: { ledger: 1 }, reward: 800, radio: '船册上记了七艘船，码头却只有六个泊位。第七艘还得再查。', after: 'sample', extracts: 6 },
 };
+/**
+ * Unmet progression requirements for a radio quest (#153), shared by turn-in and every quest view.
+ * Only unfinished quests use the new gates: completed legacy quests and their shelves stay earned. Counts are
+ * lifetime successful extractions already committed in stats; deploying, dying or abandoning never advances them.
+ */
+export function questRequirements(save: Pick<SaveDataV1, 'quests' | 'stats'>, id: string): string[] {
+  if (!Object.hasOwn(QUESTS, id) || save.quests[id]) return [];
+  const q = QUESTS[id], requirements: string[] = [];
+  if (q.after && !save.quests[q.after]) requirements.push(`先完成「${QUESTS[q.after].name}」`);
+  if (q.extracts && save.stats.extracts < q.extracts) requirements.push(`累计成功撤离 ${save.stats.extracts} / ${q.extracts} 次`);
+  return requirements;
+}
 export const SAVE_KEY = 'escape-bincov.save.v1';
 export const STASH_UPGRADE_COST = 600;
 /**
@@ -1012,8 +1024,9 @@ function unloadMagazine(inv: Inventory, equipment: Equipment): boolean {
   return addItem(inv, ammoId, ammo - relief) === 0 && addItem(inv, ammoId, relief, true) === 0;
 }
 export function submitQuest(save: SaveDataV1, id: string): boolean {
+  if (!Object.hasOwn(QUESTS, id)) return false;
   const quest = QUESTS[id];
-  if (save.activeRun || !quest || save.quests[id]) return false;
+  if (save.activeRun || save.quests[id] || questRequirements(save, id).length) return false;
   const inventories = [save.stash, save.bag, save.safe];
   if (!Object.entries(quest.needs).every(([itemId, needed]) => inventories.reduce((sum, inv) => sum + count(inv, itemId), 0) >= needed)) return false;
   for (const [itemId, needed] of Object.entries(quest.needs)) {

@@ -11,7 +11,7 @@ export function departureWarnings(save: D.SaveDataV1): string[] {
 }
 export function questProgress(save: D.SaveDataV1, loadout: D.RunLoadout | null) {
     return Object.entries(D.QUESTS).filter(([key]) => !save.quests[key]).map(([key, q]) => ({
-        key, name: q.name, needs: Object.entries(q.needs).map(([id, needed]) => ({
+        key, name: q.name, requirements: D.questRequirements(save, key), needs: Object.entries(q.needs).map(([id, needed]) => ({
             id, needed,
             stored: loadout ? D.count(save.stash, id) : [save.stash, save.bag, save.safe].reduce((n, inv) => n + D.count(inv, id), 0),
             carried: loadout ? D.count(loadout.bag, id) + D.count(loadout.safe, id) : 0,

@@ -65,10 +65,17 @@ try {
           return content.scrollWidth <= content.clientWidth && content.getBoundingClientRect().bottom <= footer.getBoundingClientRect().top + 1;
         }), true, `${tab}: content overlaps the footer or clips horizontally`);
       }
-      // The new task progress must include safe-box supplies and become completed after real submission.
+      // Safe-box supplies count, but progress still gates turn-in; once eligible, submit through the real button.
       await page.evaluate(() => window.__bincov.app.save.safe.items.push({ id: 'sample', qty: 1, uid: 'ui-task-sample', x: 0, y: 0 }));
       await action('tab', 'quests').click();
       const sampleQuest = page.locator('.quest').filter({ has: page.getByRole('heading', { name: '瓶中的潮声' }) });
+      assert.equal(await sampleQuest.locator('.quest-status').textContent(), '02尚未开放');
+      assert.ok(await action('quest', 'sample').isDisabled());
+      await page.evaluate(() => {
+        const save = window.__bincov.app.save;
+        save.quests.repair = true; save.stats.runs = 3; save.stats.extracts = 3;
+      });
+      await action('tab', 'quests').click();
       assert.equal(await sampleQuest.locator('.quest-status').textContent(), '02可以交付');
       await shot('ready-quest');
       await action('quest', 'sample').click();

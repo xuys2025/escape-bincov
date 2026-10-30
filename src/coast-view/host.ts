@@ -902,7 +902,7 @@ export class CoastSampleHost {
       : this.selectedExit ? `${this.selectedExit} · 返回地面查看方位` : '选择撤离点';
     const progress = questProgress(this.session.save, this.session.loadout);
     this.q('[data-quest-count]').textContent = `· ${progress.length} 项未完成`;
-    const html = progress.map(qt => `<section><strong>${esc(qt.name)}</strong>${qt.needs.map(n => `<p>${esc(name(n.id))}：仓库 ${n.stored} · 携带 ${n.carried} / 需 ${n.needed}</p>`).join('')}</section>`).join('') || '<p>全部任务已交付。</p>';
+    const html = progress.map(qt => `<section><strong>${esc(qt.name)}</strong>${qt.requirements.map(r => `<p>${esc(r)}</p>`).join('')}${qt.needs.map(n => `<p>${esc(name(n.id))}：仓库 ${n.stored} · 携带 ${n.carried} / 需 ${n.needed}</p>`).join('')}</section>`).join('') || '<p>全部任务已交付。</p>';
     const list = this.q('[data-quest-list]'); if (list.innerHTML !== html) list.innerHTML = html;
   }
   /**

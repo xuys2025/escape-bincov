@@ -50,6 +50,7 @@
 
 **按需继续。**
 
+- 电台任务前置和成功撤离门槛（#153）：[domain.ts](../src/domain.ts) 的 `QUESTS` / `questRequirements` / `submitQuest` 是唯一规则；院子、旧页签、行动清单共读未满足条件。完成状态仍为旧布尔值，不回收已赚取货架；反例在 [quest-progression.test.ts](../tests/quest-progression.test.ts)，事务与两档桌面入口见 `hideout-runtime.test.ts` / `test:station-tier1`。当前交付见[记录](tasks/radio-quest-progression.md)。
 - 物品或商人定义：[domain.ts](../src/domain.ts) 的 `ITEMS`、`MERCHANTS`、`buyQuantity`；格位/转移规则：[loot.ts](../src/loot.ts)。改枪样板的获取（货架上的 G17、基础件和 O01、G01，行动里的发现 `D.gunsmithFind`、旧敌人尸体的 `D.corpseLoot`，配件档次 `partTier`）见[改枪契约](gunsmith/CONTRACTS.md#样板获取路径m2-13)。
 - 枪的估值与售价按组成算：`D.itemSale`（枪身加每件配件，救济组成不计、有救济组成时整件不可售），商店的报价、待卖区和结算都经 [shop.ts](../src/shop.ts) 的 `saleRefusal`，不自动拆件。
 - 物品重量只经 `D.itemWeight`（枪按 `gunWeight` 连配件算，和装备时一样）：`D.weight`、行动负重、出发负重和各面板的重量显示都读它。
