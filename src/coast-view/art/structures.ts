@@ -169,6 +169,28 @@ export function paintDoorFoot(open: boolean): HTMLCanvasElement {
   return c;
 }
 
+/**
+ * The way through the door being faced (#26 F07), on the floor across the wall line: the door cell and one cell either
+ * side, a band with chevrons pointing out both ways, green while open and amber with a bar on the wall line while
+ * closed. Canvas 96x32 for a north-south wall (the way runs east-west), 32x96 for an east-west one.
+ */
+export function paintPassageGuide(wall: 'ew' | 'ns', open: boolean): HTMLCanvasElement {
+  const across = wall === 'ew', W = across ? 32 : 96, H = across ? 96 : 32, { c, g } = canvas(W, H);
+  const color = open ? '#b9dec5' : '#e7c28b';
+  // (along, side): along runs 0..96 through the door, side 0..32 across the way.
+  const at = (along: number, side: number): [number, number] => across ? [side, along] : [along, side];
+  const box = (along: number, side: number, l: number, s: number, col: string) => { const [x, y] = at(along, side); rect(g, col, x, y, across ? s : l, across ? l : s); };
+  g.globalAlpha = open ? .45 : .35; box(2, 6, 92, 20, open ? '#233d34' : '#403225'); g.globalAlpha = 1;
+  box(2, 6, 92, 1, color); box(2, 25, 92, 1, color);
+  // Chevrons out of the door both ways: the way through reads whether or not it is open.
+  for (const [base, dir] of [[8, -1], [20, -1], [76, 1], [88, 1]] as const) for (let k = 0; k < 6; k++) {
+    box(base - dir * k, 15 - k, 2, 1, color); box(base - dir * k, 16 + k, 2, 1, color);
+  }
+  // Closed: a bar across the way on the wall line.
+  if (!open) { box(44, 7, 8, 18, P.char); box(45, 8, 6, 16, color); }
+  return c;
+}
+
 export function paintLintel(width: number): HTMLCanvasElement {
   const { c, g } = canvas(width, 32 + WALL_H);
   rect(g, '#46433d', 0, 0, width, 32); rect(g, '#9a927f', 0, 30, width, 2); rect(g, '#a49b88', 0, 0, width, 2);
