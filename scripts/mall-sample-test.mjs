@@ -280,6 +280,8 @@ async function deployTabs(page) {
     });
     assert.ok(spot, 'a room seen straight on from open floor');
     await place(page, spot.stand[0], spot.stand[1], spot.angle, 'mall-f1'); await frames(page, 20);
+    // The mist eases toward this spot's shelter over about half a second: let it get there before pinning it (below).
+    await page.waitForFunction(() => { const s = window.__bincovSample.host.view.weather.shelter; return Math.abs(s - Math.round(s)) < .02; });
     const r = await page.evaluate(spot => {
       const h = window.__bincovSample.host, v = h.view, L = v.light, dt = 1 / 60, m = v.mapDef, T = 32;
       const live = h.lastBatch.frame, rooms = m.regions.filter(x => x.inside && !x.sealed), others = rooms.filter(x => x.id !== spot.room);
@@ -289,8 +291,9 @@ async function deployTabs(page) {
         const enemy = base.frame.actors.find(a => a.alive && a.uid !== base.frame.player.uid);
         base.events = []; base.frame.actors = base.frame.actors.filter(a => a.uid === base.frame.player.uid);
         base.frame.loot = []; base.frame.containers = []; base.frame.bullets = [];
-        // Pin everything else a present moves (camera, recoil, shake, mist shelter, flicker time), as M17 does.
-        const cam = { ...v.camF }, recoil = { ...v.recoil }, shelter = v.weather.shelter;
+        // Pin everything else a present moves (camera, recoil, shake, mist shelter, flicker time), as M17 does. The shelter is
+        // pinned to where it eases to, so the dt-0 present at the end and the dt ones agree (half-way, they differed by a level).
+        const cam = { ...v.camF }, recoil = { ...v.recoil }, shelter = Math.round(v.weather.shelter);
         const grab = (reveal, step = dt, edit) => {
           const b = structuredClone(base); b.frame.revealed[spot.room] = reveal; edit?.(b.frame);
           v.camF = { ...cam }; v.recoil = { ...recoil }; v.shake = 0; v.weather.shelter = shelter; v.time = 7.25 - step;
