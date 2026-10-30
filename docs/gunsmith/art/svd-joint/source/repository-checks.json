@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "date": "2026-10-29",
+  "codeHead": "d60e7c0db6e2783244422736656bc571edc0d879",
+  "status": "pass",
+  "node": "24.22.1",
+  "pnpm": "11.25.0",
+  "environment": "Existing shared node_modules junction reused; pnpm_config_verify_deps_before_run=warn only in checking processes. No install or project config changes.",
+  "checks": [
+    {
+      "command": "pnpm test",
+      "status": "pass",
+      "passed": 1082,
+      "localLog": "test-results/svd-joint/unit.txt",
+      "logSha256": "64db6b773c548b56fe3d59f3002ab855fd2f8c6d5d4f676348844f390e4a811c"
+    },
+    {
+      "command": "pnpm check:ci",
+      "status": "pass",
+      "passed": 139,
+      "localLog": "test-results/svd-joint/ci.txt",
+      "logSha256": "88f1baa6d2eb6f76da37952af2ae4b803e24caaeef30e466376ddb8c6c2fc20d"
+    },
+    {
+      "command": "pnpm package",
+      "status": "pass",
+      "passed": null,
+      "localLog": "test-results/svd-joint/package.txt",
+      "logSha256": "42a16e9a78f9831efa8ac54e347e64d6b448a21a652d6ab8f828364d5a255697"
+    }
+  ],
+  "generatedFiles": [
+    {
+      "file": "dist/index.html",
+      "bytes": 9477008,
+      "sha256": "10951b5dca0dd2594c88d0690f5532efad7a515555c38886cf8578831afa6392"
+    },
+    {
+      "file": "start the game.html",
+      "bytes": 9477008,
+      "sha256": "10951b5dca0dd2594c88d0690f5532efad7a515555c38886cf8578831afa6392"
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "bytes": 6101796,
+      "sha256": "bc88ad205053f322793d275719a13e154599e12983f827d5ada1484a6d183ab8"
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "bytes": 6097287,
+      "sha256": "e49fc3478ec908f0bd520f4c4ebdb3b1ab23e4169768ce17c4b24a29240492b3"
+    }
+  ],
+  "generatedFilesCommitted": false,
+  "newArtConsumed": false,
+  "browserChecks": {
+    "status": "not-run",
+    "reason": "Only incoming PNGs and art documentation delivered; no runtime manifest or source change. Actual game screenshots belong to integration."
+  }
+}
