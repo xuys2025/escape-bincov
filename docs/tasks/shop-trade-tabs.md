@@ -2,7 +2,7 @@
 
 状态：**实现与本地验证完成，待 PR 的 CI 与维护者合并**；真人试玩、真机/触屏未验。
 
-- 分支：`claude/f03-shop-layout-1be71c`
+- 分支：`claude/f03-shop-layout-1be71c`，[PR #159](https://github.com/xuys2025/escape-bincov/pull/159)
 - 基线：main `7d982a6fc5b4c849d9a3dc576074a01e17c2d052`（2026-10-30，#150 已合入）
 - 归属：[#26](https://github.com/xuys2025/escape-bincov/issues/26) F03「商店 UI 参考《逃离塔科夫》重做」。#44/#49 的局部改进（详情按方向显示价格、详情固定高度、真实拒绝原因、入库提示、窄屏价格）全部保留；本项是它们没做的整体布局。只改院子（水产站）里的修理铺和卫生所；旧版页签的商店不变。
 
