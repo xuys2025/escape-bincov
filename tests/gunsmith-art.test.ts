@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import * as D from '../src/domain';
-import { ATTACHMENTS, GUNS, isPremium, type GunId } from '../src/gunsmith/catalog';
+import { ATTACHMENTS, GUNS, type GunId } from '../src/gunsmith/catalog';
 import { checkInstall, validateBuild } from '../src/gunsmith/compat';
 import { buildOf, gunSize, type PartNode } from '../src/gunsmith/instance';
 import { GUNSMITH_ART, GUNSMITH_ART_REVISION, GUNSMITH_VIRTUAL } from '../src/art/gunsmith-art-meta';
@@ -56,11 +56,12 @@ const grow = (trees: readonly Tree[]): PartNode[] => trees.map(([id, slot, kids]
 /** The guns with art: every catalog gun since #28 M3-08 (M2's five, wave one's seven, wave two's eight). */
 const ART_GUNS = ['gb17', 'mb4a1', 'carbine', 'pistol', 'shotgun', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103', 'augb', 'mb1911', 'umpb45', 'pb90', 'svdb', 'mb14', 'mb700', 'rpkb'] as const;
 
-test('the imported art: 652 images and 5 virtual layers, every key drops its version, the revision is the manifest\'s', () => {
+test('the imported art: 731 images and 5 virtual layers, every key drops its version, the revision is the manifest\'s', () => {
     const manifest = JSON.parse(readFileSync('assets/gunsmith/manifest.json', 'utf8'));
     // M2's 115, less the carbine's two receivers that wave one replaced (v2), plus wave one's 274 (#28 M3-03) and wave
-    // two's 249 (M3-07); then sixteen more in M4: six magazine layers and ten magazine icons (#142).
-    assert.equal(Object.keys(GUNSMITH_ART).length, 652);
+    // two's 249 (M3-07); then sixteen more in M4: six magazine layers and ten magazine icons (#142); then 老栓精工's 79
+    // (M4-09, #155): twenty parts in four outputs less the three held rear grips, J07's carbine held picture and the blank.
+    assert.equal(Object.keys(GUNSMITH_ART).length, 731);
     assert.deepEqual(Object.keys(GUNSMITH_VIRTUAL).sort(), ['gs-carbine-barrel-factory-i', 'gs-carbine-handguard-factory-i', 'gs-carbine-receiver-i', 'gs-pistol-receiver-i', 'gs-shotgun-receiver-i']);
     assert.equal(GUNSMITH_ART_REVISION, manifest.revision);
     assert.deepEqual(Object.keys(GUNSMITH_ART).sort(), manifest.assets.map((a: { id: string }) => a.id.replace(/-v\d+$/, '')).sort());
@@ -154,8 +155,8 @@ function fitted(gun: GunId, id: string, items: readonly string[]): PartNode[] | 
 
 test('every part that is an item has a mount in all three outputs on each gun with art it fits, within the size limits', () => {
     // A factory magazine (#28 M4-07) is the gun's factory layer, not a part with its own images. 老栓精工's twenty (M4-09)
-    // wait for Sol's pictures (docs/gunsmith/art/m4-premium/BRIEF.md; the catalog gate holds that list).
-    const parts = Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && Object.hasOwn(ATTACHMENTS, id) && !isPremium(id));
+    // are parts like the others.
+    const parts = Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && Object.hasOwn(ATTACHMENTS, id));
     const checked: string[] = [];
     assert.deepEqual(Object.keys(GUNS).filter(g => artFrame(g, 'h')).sort(), [...ART_GUNS].sort());
     for (const gun of ART_GUNS) {

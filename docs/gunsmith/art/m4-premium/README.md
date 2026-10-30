@@ -6,7 +6,7 @@
 
 ## 交付与审图
 
-- [本批清单](../../../../assets/gunsmith/incoming/m4-premium/manifest.json)：20 件 J01–J20，17 张通用 H、20 张 I、20 张 W、20 张 Q24；另有 J07 卡宾 H 与精工件坯 Q24。
+- [本批清单](incoming-manifest.json)（接入后从 `assets/gunsmith/incoming/m4-premium/manifest.json` 移来）：20 件 J01–J20，17 张通用 H、20 张 I、20 张 W、20 张 Q24；另有 J07 卡宾 H 与精工件坯 Q24。
 - [图标总览](preview/icons-overview.png)：1 倍、3 倍及灰度 1 倍；[三底色图标](preview/icons-three-backgrounds.png)。
 - 和普通参照件并排：[H 持枪](preview/h-reference-comparison.png)、[I 背包](preview/i-reference-comparison.png)、[W 工作台](preview/w-reference-comparison.png)、[Q24 图标](preview/q24-reference-comparison.png)。每格左边是参照件，右边是精品。
 - [二十把枪的代表组合](preview/representative-assemblies.png)：每行 H／I／W；[配置树](representative-configurations.json)。
@@ -77,3 +77,7 @@ node --import tsx docs/gunsmith/art/m4-premium/source/check-runtime.mjs
 实现方在本批后续 PR 内审图并续作，导入这 79 张 PNG，更新正式清单／导入模块和对应素材数量，移除精品件占位图与 `ART_PENDING` 例外，再补工作台、背包、持枪和图标在两档桌面下的游戏截图。原 PR #150 已合并；本批没有向已结束的 PR 继续推送。J07 卡宾 H 变体和 J12／J15 子挂点应随主体一起接入。
 
 本次不修改正式运行图、游戏规则、存档、精工定制成本或经济平衡；没有合并或部署。维护者视觉签收与正式接入后的游戏验收仍待完成。
+
+## 接入（`feat/gunsmith-premium-art`）
+
+2026-10-30 实现方另开接入 PR（本批 #157 按维护者分工只交素材）：79 张图进正式目录，正式清单第 9 版，731 张、112,401 字节；本批清单移到 [incoming-manifest.json](incoming-manifest.json)。精品件在持枪、背包、工作台和图标里都画这批图，J07 装在卡宾上用卡宾专用图；占位画法和目录门禁的例外已删。规则见 [CONTRACTS「老栓精工（M4-09）」](../../CONTRACTS.md#老栓精工m4-09) 的「美术」，游戏截图见 [evidence/m4-premium](../../evidence/m4-premium/)。

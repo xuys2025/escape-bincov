@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "revision": 8,
-  "batch": "M2-P0-P1+M3-W1+M3-W2+M3-W3+SVD-JOINT+M4-MAGS",
+  "revision": 9,
+  "batch": "M2-P0-P1+M3-W1+M3-W2+M3-W3+SVD-JOINT+M4-MAGS+M4-PREMIUM",
   "totals": {
-    "files": 652,
-    "pngBytes": 100521,
+    "files": 731,
+    "pngBytes": 112401,
     "p0Files": 42,
     "p0PngBytes": 8432,
     "p1Files": 73,
@@ -18,7 +18,9 @@
     "svdJointFiles": 3,
     "svdJointPngBytes": 1079,
     "m4MagsFiles": 22,
-    "m4MagsPngBytes": 3833
+    "m4MagsPngBytes": 3833,
+    "m4PremiumFiles": 79,
+    "m4PremiumPngBytes": 11880
   },
   "assets": [
     {
@@ -16933,6 +16935,1868 @@
       "source": "docs/gunsmith/art/m4-mags/source/pixel-artwork.json",
       "sourceRect": null,
       "exportMethod": "original native 24x24 pixel profile, independent icon detail; no I-layer centering or resampling"
+    },
+    {
+      "id": "gs-j01-h-v1",
+      "file": "assets/gunsmith/v1/gs-j01-h-v1.png",
+      "w": 6,
+      "h": 4,
+      "bytes": 95,
+      "sha256": "8e0a28b8e57bb9c6ac4c51fdc367f894fea0f6e39eef57576c03e696df83d785",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J01",
+      "role": "part",
+      "slot": "top",
+      "anchor": [
+        2,
+        3
+      ],
+      "colors": 3,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j01-i-v1",
+      "file": "assets/gunsmith/v1/gs-j01-i-v1.png",
+      "w": 14,
+      "h": 7,
+      "bytes": 127,
+      "sha256": "c4875dc19b6982d61a20c5d6f05cd653a561afe7245c29cb3089f041a4ba8b2a",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J01",
+      "role": "part",
+      "slot": "top",
+      "anchor": [
+        6,
+        6
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j01-w-v1",
+      "file": "assets/gunsmith/v1/gs-j01-w-v1.png",
+      "w": 28,
+      "h": 14,
+      "bytes": 166,
+      "sha256": "2f70decfe64551a214cebc578a677843064329c1b8ac53669a5487912da22057",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J01",
+      "role": "part",
+      "slot": "top",
+      "anchor": [
+        13,
+        13
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j01-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j01-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 154,
+      "sha256": "ec5bd2e0798a1fad76cedb460b6990f4bbf137f435e3807dac9530a2a0a6ed99",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J01",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j02-h-v1",
+      "file": "assets/gunsmith/v1/gs-j02-h-v1.png",
+      "w": 12,
+      "h": 4,
+      "bytes": 114,
+      "sha256": "0f6762c282deb06b26f0a5023fae3af6d1c6ed62c2d2f2c2a66c49c1fa610893",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J02",
+      "role": "part",
+      "slot": "top",
+      "anchor": [
+        5,
+        3
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j02-i-v1",
+      "file": "assets/gunsmith/v1/gs-j02-i-v1.png",
+      "w": 29,
+      "h": 8,
+      "bytes": 144,
+      "sha256": "8bf7c164e98f550918e616182f11f45c983087787c7799b7c5f9ed77f2c1a5b0",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J02",
+      "role": "part",
+      "slot": "top",
+      "anchor": [
+        14,
+        7
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j02-w-v1",
+      "file": "assets/gunsmith/v1/gs-j02-w-v1.png",
+      "w": 58,
+      "h": 16,
+      "bytes": 195,
+      "sha256": "7cc630efe04d5b77c7e08d2b04ba50374878b11cb18e199ab4baf2d5ef5863ad",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J02",
+      "role": "part",
+      "slot": "top",
+      "anchor": [
+        28,
+        15
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j02-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j02-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 152,
+      "sha256": "376986a4c54cad725b26778ed07455a43490147eff90303d3b9e057b596eb614",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J02",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j03-h-v1",
+      "file": "assets/gunsmith/v1/gs-j03-h-v1.png",
+      "w": 4,
+      "h": 3,
+      "bytes": 93,
+      "sha256": "4e15e8b5406125146c2ae83d4b741d3b84c0c225c13451453b80d291cdf773b6",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J03",
+      "role": "part",
+      "slot": "micro",
+      "anchor": [
+        1,
+        2
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j03-i-v1",
+      "file": "assets/gunsmith/v1/gs-j03-i-v1.png",
+      "w": 9,
+      "h": 6,
+      "bytes": 115,
+      "sha256": "e0bb4e2021278e439f2b333ceebe27e927ec5e0c4eae81a567e1909c846f16e8",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J03",
+      "role": "part",
+      "slot": "micro",
+      "anchor": [
+        4,
+        5
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j03-w-v1",
+      "file": "assets/gunsmith/v1/gs-j03-w-v1.png",
+      "w": 18,
+      "h": 12,
+      "bytes": 148,
+      "sha256": "ee8f9eee4a12c842cc52a478c027eedac5215eb8045e229bd878a8c4192da707",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J03",
+      "role": "part",
+      "slot": "micro",
+      "anchor": [
+        8,
+        11
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j03-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j03-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 150,
+      "sha256": "63b4e8cce0b455fcf7325db496fbad18ba367fe56380894f9be50d76e2f02c98",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J03",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j04-h-v1",
+      "file": "assets/gunsmith/v1/gs-j04-h-v1.png",
+      "w": 3,
+      "h": 4,
+      "bytes": 96,
+      "sha256": "ddd7397d94658071c49a9adcaa8e59bf307ea1b18dced66cb9b4d2973d2c7112",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J04",
+      "role": "part",
+      "slot": "under",
+      "anchor": [
+        1,
+        0
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "hand": [
+        1,
+        1
+      ]
+    },
+    {
+      "id": "gs-j04-i-v1",
+      "file": "assets/gunsmith/v1/gs-j04-i-v1.png",
+      "w": 6,
+      "h": 9,
+      "bytes": 117,
+      "sha256": "0492bd810f0f1c452c5766982b024fa233446491c84674cd99b68b5cf13dbb8b",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J04",
+      "role": "part",
+      "slot": "under",
+      "anchor": [
+        2,
+        0
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "hand": [
+        2,
+        2
+      ]
+    },
+    {
+      "id": "gs-j04-w-v1",
+      "file": "assets/gunsmith/v1/gs-j04-w-v1.png",
+      "w": 12,
+      "h": 18,
+      "bytes": 157,
+      "sha256": "6e8c5912e5a75742d166c6d16d23f159c443912e0dd52ebc9175094acf0d7a73",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J04",
+      "role": "part",
+      "slot": "under",
+      "anchor": [
+        5,
+        0
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "hand": [
+        4,
+        4
+      ]
+    },
+    {
+      "id": "gs-j04-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j04-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 142,
+      "sha256": "76f0997dd7ea58103281c9c6904abe42c10fe31888a997218a4b9e5fadd7666c",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J04",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j05-h-v1",
+      "file": "assets/gunsmith/v1/gs-j05-h-v1.png",
+      "w": 5,
+      "h": 3,
+      "bytes": 92,
+      "sha256": "5d4ef383efe3edd0a7cc49ce57a9a01b387d08f707f9365a67c2adeb71d4ea26",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J05",
+      "role": "part",
+      "slot": "side",
+      "anchor": [
+        2,
+        0
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "beam": [
+        4,
+        1
+      ]
+    },
+    {
+      "id": "gs-j05-i-v1",
+      "file": "assets/gunsmith/v1/gs-j05-i-v1.png",
+      "w": 12,
+      "h": 6,
+      "bytes": 128,
+      "sha256": "e4a870a23a030047c12e989e054e579be778c1f9c5a6bce6bd96e32441c99ec8",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J05",
+      "role": "part",
+      "slot": "side",
+      "anchor": [
+        5,
+        1
+      ],
+      "colors": 7,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "beam": [
+        11,
+        2
+      ]
+    },
+    {
+      "id": "gs-j05-w-v1",
+      "file": "assets/gunsmith/v1/gs-j05-w-v1.png",
+      "w": 24,
+      "h": 12,
+      "bytes": 168,
+      "sha256": "1be73eaed2dd24831c6302d944852457f21a416b7f7d422ff7e1d5f1cb80ad16",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J05",
+      "role": "part",
+      "slot": "side",
+      "anchor": [
+        11,
+        2
+      ],
+      "colors": 7,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "beam": [
+        23,
+        4
+      ]
+    },
+    {
+      "id": "gs-j05-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j05-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 142,
+      "sha256": "a440d986720d7de7af0b732de878f7ce3392142fca4fb65a62b583a076a07192",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J05",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 7,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j06-h-v1",
+      "file": "assets/gunsmith/v1/gs-j06-h-v1.png",
+      "w": 6,
+      "h": 3,
+      "bytes": 101,
+      "sha256": "d7911a3394f9106f8a60d54ee3ccdd9bba6ec83e44c792b8d25caf06f68284d5",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J06",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "tip": [
+        6,
+        2
+      ]
+    },
+    {
+      "id": "gs-j06-i-v1",
+      "file": "assets/gunsmith/v1/gs-j06-i-v1.png",
+      "w": 14,
+      "h": 6,
+      "bytes": 131,
+      "sha256": "ae05c7c70f88c5c14bac7ed4e07cb06726b9aab45bfa11f64b644a3ffeafc854",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J06",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "tip": [
+        14,
+        3
+      ]
+    },
+    {
+      "id": "gs-j06-w-v1",
+      "file": "assets/gunsmith/v1/gs-j06-w-v1.png",
+      "w": 28,
+      "h": 12,
+      "bytes": 166,
+      "sha256": "c094e83545d441f03608ac8d41e4529c0399de27a553583cdd792cec31b9a23a",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J06",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        4
+      ],
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "tip": [
+        28,
+        6
+      ]
+    },
+    {
+      "id": "gs-j06-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j06-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 148,
+      "sha256": "92cb220253d68e4d56449d7666ba52baae0a5475187173f89f2fc04ee74efec1",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J06",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j07-h-v1",
+      "file": "assets/gunsmith/v1/gs-j07-h-v1.png",
+      "w": 8,
+      "h": 3,
+      "bytes": 98,
+      "sha256": "637a2d965bb3e1712d069005b1be0e4845f6d75abdb1c0d72d648db900495f19",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J07",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "tip": [
+        8,
+        1
+      ]
+    },
+    {
+      "id": "gs-j07-i-v1",
+      "file": "assets/gunsmith/v1/gs-j07-i-v1.png",
+      "w": 19,
+      "h": 5,
+      "bytes": 136,
+      "sha256": "6fd6ae26659681cf488b3c60c5da3016685b955457ed1ac61171987ef8e2f861",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J07",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "tip": [
+        19,
+        2
+      ]
+    },
+    {
+      "id": "gs-j07-w-v1",
+      "file": "assets/gunsmith/v1/gs-j07-w-v1.png",
+      "w": 38,
+      "h": 10,
+      "bytes": 171,
+      "sha256": "2688e7c26fe47c3b407bd8a3c678f2732e0ad6a6f303cb35453f296cc5292394",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J07",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "tip": [
+        38,
+        4
+      ]
+    },
+    {
+      "id": "gs-j07-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j07-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 147,
+      "sha256": "84957bb664600b02ede5907f5643728d7136a6e1788c583d2f7d279e666ce533",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J07",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j08-h-v1",
+      "file": "assets/gunsmith/v1/gs-j08-h-v1.png",
+      "w": 10,
+      "h": 3,
+      "bytes": 98,
+      "sha256": "998bd09c1cd48e7188ad24cc56432a4b88bd65d72ede0b4a456593fc3dd547fb",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J08",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "tip": [
+        10,
+        2
+      ]
+    },
+    {
+      "id": "gs-j08-i-v1",
+      "file": "assets/gunsmith/v1/gs-j08-i-v1.png",
+      "w": 25,
+      "h": 6,
+      "bytes": 154,
+      "sha256": "9404297041191eb545a359e05253610434ac1936ca5b2d14fab0cbc88bd126fa",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J08",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "tip": [
+        25,
+        3
+      ]
+    },
+    {
+      "id": "gs-j08-w-v1",
+      "file": "assets/gunsmith/v1/gs-j08-w-v1.png",
+      "w": 50,
+      "h": 12,
+      "bytes": 191,
+      "sha256": "df2355ab0dad74841ff96d4565fbf9190b89507bcb7d868aab0f4de38e0d35f0",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J08",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        4
+      ],
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "tip": [
+        50,
+        6
+      ]
+    },
+    {
+      "id": "gs-j08-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j08-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 157,
+      "sha256": "5a54af7d6e00cd2572fc726d200a05d28e90f8ff37b788d37d6239684d32d1ea",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J08",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j09-h-v1",
+      "file": "assets/gunsmith/v1/gs-j09-h-v1.png",
+      "w": 3,
+      "h": 2,
+      "bytes": 83,
+      "sha256": "65cc87066313f5e522db996f601123ccaaeebb49909940c67c682aa5543ba589",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J09",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 2,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "tip": [
+        3,
+        1
+      ]
+    },
+    {
+      "id": "gs-j09-i-v1",
+      "file": "assets/gunsmith/v1/gs-j09-i-v1.png",
+      "w": 7,
+      "h": 4,
+      "bytes": 106,
+      "sha256": "be408c1d7ce4ebdd13e671790213e93f7e6f50f0eed24901d6558ceda9534728",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J09",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "tip": [
+        7,
+        2
+      ]
+    },
+    {
+      "id": "gs-j09-w-v1",
+      "file": "assets/gunsmith/v1/gs-j09-w-v1.png",
+      "w": 14,
+      "h": 8,
+      "bytes": 147,
+      "sha256": "79e54953d4224e725b45cab39747fcd5fdb046f73bfa2c5e3f3fb4b970ba6bd8",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J09",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "tip": [
+        14,
+        4
+      ]
+    },
+    {
+      "id": "gs-j09-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j09-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 135,
+      "sha256": "684a55f4f71960537244b264860795b2f80d22731e9fa16c599d4ff2d1a9b911",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J09",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j10-h-v1",
+      "file": "assets/gunsmith/v1/gs-j10-h-v1.png",
+      "w": 9,
+      "h": 6,
+      "bytes": 111,
+      "sha256": "2f55abf1fc1caecc14ec176f6404474de256b1d5b6888738ce0abf48d54c9431",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J10",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        8,
+        1
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j10-i-v1",
+      "file": "assets/gunsmith/v1/gs-j10-i-v1.png",
+      "w": 22,
+      "h": 12,
+      "bytes": 165,
+      "sha256": "6ae7a3012c8d272eea495a3869ea1a6590439b042b6c01afee8740d48db80615",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J10",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        21,
+        3
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j10-w-v1",
+      "file": "assets/gunsmith/v1/gs-j10-w-v1.png",
+      "w": 44,
+      "h": 24,
+      "bytes": 271,
+      "sha256": "d1b9b16248e0e6da1838b2661a5cb4731036c56de4ebb9f7c150715e9ff929a7",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J10",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        43,
+        6
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j10-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j10-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 188,
+      "sha256": "1c5344336ddf169fcf46852d0cd9df0003f38dbf2b9fff98cbea1b25a446ec2b",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J10",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j11-i-v1",
+      "file": "assets/gunsmith/v1/gs-j11-i-v1.png",
+      "w": 8,
+      "h": 11,
+      "bytes": 124,
+      "sha256": "0f7a1640b7f7741ad1e207b2b174df98d8a0251449c587a2c13840719aefc99b",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J11",
+      "role": "part",
+      "slot": "rearGrip",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j11-w-v1",
+      "file": "assets/gunsmith/v1/gs-j11-w-v1.png",
+      "w": 16,
+      "h": 22,
+      "bytes": 175,
+      "sha256": "3dcc17dc355d68451ccaf3fe9969ed6f81bd3b8aba76daf67aea2f4396491c60",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J11",
+      "role": "part",
+      "slot": "rearGrip",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j11-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j11-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 153,
+      "sha256": "55f519c69ab281bfa19fa04130a8f010bce1cf0b9d0de1e8ce3e11dc199b464c",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J11",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j12-h-v1",
+      "file": "assets/gunsmith/v1/gs-j12-h-v1.png",
+      "w": 10,
+      "h": 4,
+      "bytes": 104,
+      "sha256": "df6c163f5532ec8ef22b0bd8eb1c9daefe04c007b246de05077848856e08d46c",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J12",
+      "role": "part",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "hand": [
+        3,
+        3
+      ],
+      "mounts": {
+        "under": [
+          3,
+          3
+        ],
+        "side1": [
+          7,
+          1
+        ],
+        "side2": [
+          9,
+          1
+        ]
+      }
+    },
+    {
+      "id": "gs-j12-i-v1",
+      "file": "assets/gunsmith/v1/gs-j12-i-v1.png",
+      "w": 25,
+      "h": 7,
+      "bytes": 128,
+      "sha256": "ecac2f9809ac5611d1254b64b67da86f3d2abc3f7e087c80fb4483b4e7d7dc3b",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J12",
+      "role": "part",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "hand": [
+        8,
+        5
+      ],
+      "mounts": {
+        "under": [
+          8,
+          6
+        ],
+        "side1": [
+          20,
+          3
+        ],
+        "side2": [
+          23,
+          3
+        ]
+      }
+    },
+    {
+      "id": "gs-j12-w-v1",
+      "file": "assets/gunsmith/v1/gs-j12-w-v1.png",
+      "w": 50,
+      "h": 14,
+      "bytes": 207,
+      "sha256": "20b38a8bd35abdc1e28d4ed229ddf38766e9319699ca6e15b83c4f597100d2fd",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J12",
+      "role": "part",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        4
+      ],
+      "colors": 7,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "hand": [
+        16,
+        10
+      ],
+      "mounts": {
+        "under": [
+          16,
+          13
+        ],
+        "side1": [
+          40,
+          6
+        ],
+        "side2": [
+          46,
+          6
+        ]
+      }
+    },
+    {
+      "id": "gs-j12-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j12-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 128,
+      "sha256": "ae63f9fe31c2383e549ac28b97bf002010d51254ae9bccb016e4295d1487c01f",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J12",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j13-h-v1",
+      "file": "assets/gunsmith/v1/gs-j13-h-v1.png",
+      "w": 10,
+      "h": 6,
+      "bytes": 111,
+      "sha256": "0d6a20e34957ec748b2aec58b8a1274f1a358721b378191f7ce8e5c7d2a19d54",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J13",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        9,
+        1
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j13-i-v1",
+      "file": "assets/gunsmith/v1/gs-j13-i-v1.png",
+      "w": 26,
+      "h": 12,
+      "bytes": 160,
+      "sha256": "812c60010bf6d281933651bc06b397433c348c4bf44d971c0812a83277da8e5e",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J13",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        25,
+        3
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j13-w-v1",
+      "file": "assets/gunsmith/v1/gs-j13-w-v1.png",
+      "w": 52,
+      "h": 24,
+      "bytes": 261,
+      "sha256": "abb243c0d897736a4b2d97d1d3c36e31bd022559ee84ad743acf0a8d3a5d1ecf",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J13",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        51,
+        6
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j13-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j13-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 171,
+      "sha256": "7d539a20c0e54a460c030254a1a5e3e2ad0f15a0a7fc6b754bdf2d1e44b8caed",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J13",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j14-i-v1",
+      "file": "assets/gunsmith/v1/gs-j14-i-v1.png",
+      "w": 9,
+      "h": 10,
+      "bytes": 127,
+      "sha256": "2428de98f2447f9e48f52a723bf51272b230d993e74b7ea7bb3bc4a69da32bb8",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J14",
+      "role": "part",
+      "slot": "rearGrip",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j14-w-v1",
+      "file": "assets/gunsmith/v1/gs-j14-w-v1.png",
+      "w": 18,
+      "h": 20,
+      "bytes": 168,
+      "sha256": "e0a8d6c096ffe74824cf2bb563747a767a9ecc352f5bd3d0153d4c5eee255d76",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J14",
+      "role": "part",
+      "slot": "rearGrip",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j14-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j14-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 154,
+      "sha256": "9adbf2790d7be0210a0c107db89f6ae69e2c8812e899974459179d6ed9077c39",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J14",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j15-h-v1",
+      "file": "assets/gunsmith/v1/gs-j15-h-v1.png",
+      "w": 7,
+      "h": 4,
+      "bytes": 102,
+      "sha256": "66ae0d17d0f563513fd1b41e845f90ec9125f0064df490961500aa5cebced7bd",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J15",
+      "role": "part",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "hand": [
+        3,
+        3
+      ],
+      "mounts": {
+        "under": [
+          3,
+          3
+        ],
+        "side1": [
+          5,
+          1
+        ],
+        "side2": [
+          2,
+          1
+        ]
+      }
+    },
+    {
+      "id": "gs-j15-i-v1",
+      "file": "assets/gunsmith/v1/gs-j15-i-v1.png",
+      "w": 18,
+      "h": 7,
+      "bytes": 132,
+      "sha256": "f537121e2ea02ed344d718c2fe0c0d30a6decc5a1bfab953eeeef0e57aaa2d0c",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J15",
+      "role": "part",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        2
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "hand": [
+        8,
+        5
+      ],
+      "mounts": {
+        "under": [
+          8,
+          6
+        ],
+        "side1": [
+          13,
+          3
+        ],
+        "side2": [
+          5,
+          3
+        ]
+      }
+    },
+    {
+      "id": "gs-j15-w-v1",
+      "file": "assets/gunsmith/v1/gs-j15-w-v1.png",
+      "w": 36,
+      "h": 14,
+      "bytes": 200,
+      "sha256": "ead46a99683e83b49d3ec4e30f642a99e685eebbafca4bc6802a4aeb058965ee",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J15",
+      "role": "part",
+      "slot": "handguard",
+      "anchor": [
+        0,
+        4
+      ],
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "hand": [
+        16,
+        10
+      ],
+      "mounts": {
+        "under": [
+          16,
+          13
+        ],
+        "side1": [
+          26,
+          6
+        ],
+        "side2": [
+          10,
+          6
+        ]
+      }
+    },
+    {
+      "id": "gs-j15-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j15-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 134,
+      "sha256": "f0973f154fd8e3783413d11c716f283200a9d99c844ac05f9985b4addef15100",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J15",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j16-h-v1",
+      "file": "assets/gunsmith/v1/gs-j16-h-v1.png",
+      "w": 6,
+      "h": 5,
+      "bytes": 99,
+      "sha256": "862d82ad0c31b1cf3bbd9ab144b3d8b9f9a0c7a6949604d8dd7f4aefb72febae",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J16",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        5,
+        1
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j16-i-v1",
+      "file": "assets/gunsmith/v1/gs-j16-i-v1.png",
+      "w": 18,
+      "h": 11,
+      "bytes": 131,
+      "sha256": "ef1d07028dea5d2b04e64008b9651a190871e4e406dcc6391a6b7b712ef2b370",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J16",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        17,
+        3
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j16-w-v1",
+      "file": "assets/gunsmith/v1/gs-j16-w-v1.png",
+      "w": 36,
+      "h": 22,
+      "bytes": 207,
+      "sha256": "95be3292f3b85da6401d073547d1abd791907dc7262622d61543bc26865959d9",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J16",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        35,
+        6
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j16-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j16-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 155,
+      "sha256": "219c9a499b0b48f87b1a75e34f45a3e391a893524a0242414096c9a63e8f6b45",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J16",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j17-h-v1",
+      "file": "assets/gunsmith/v1/gs-j17-h-v1.png",
+      "w": 6,
+      "h": 5,
+      "bytes": 101,
+      "sha256": "a0848a820b6f4b08606fe99540b8ebff455f864b3c36ca2ed03a1c7266a73aa9",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J17",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        5,
+        1
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j17-i-v1",
+      "file": "assets/gunsmith/v1/gs-j17-i-v1.png",
+      "w": 16,
+      "h": 11,
+      "bytes": 160,
+      "sha256": "b15ad9289b791941d2781bbe24415bb6bf5ea9a7deab6db793d8b98bde148b97",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J17",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        15,
+        3
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j17-w-v1",
+      "file": "assets/gunsmith/v1/gs-j17-w-v1.png",
+      "w": 32,
+      "h": 22,
+      "bytes": 257,
+      "sha256": "f2e93df83f4f1811d04f6b7b91f012d47452470a3d92bcd477472fdae6b2d98d",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J17",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        31,
+        6
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j17-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j17-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 182,
+      "sha256": "9bd2d1dcde1624c8348cbc9a17bdd81bb704259ae23eb8c99a09b36817bd9a35",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J17",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j18-i-v1",
+      "file": "assets/gunsmith/v1/gs-j18-i-v1.png",
+      "w": 12,
+      "h": 9,
+      "bytes": 139,
+      "sha256": "1803cfb905bc3cf5cead902c52e2792c8b7c8db0ded18c7c9dbf9beff122eb2b",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J18",
+      "role": "part",
+      "slot": "rearGrip",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "layer": "aboveReceiver"
+    },
+    {
+      "id": "gs-j18-w-v1",
+      "file": "assets/gunsmith/v1/gs-j18-w-v1.png",
+      "w": 24,
+      "h": 18,
+      "bytes": 175,
+      "sha256": "9665e6dfc2d4c316d712f455673276a07244db6b9b779e39677e4ad9b5f32395",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J18",
+      "role": "part",
+      "slot": "rearGrip",
+      "anchor": [
+        0,
+        0
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "layer": "aboveReceiver"
+    },
+    {
+      "id": "gs-j18-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j18-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 163,
+      "sha256": "bdcaea50d8555df304ee43a846d58fccfa7c9cfc98a0e3c810defd1bb3dafc33",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J18",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j19-h-v1",
+      "file": "assets/gunsmith/v1/gs-j19-h-v1.png",
+      "w": 9,
+      "h": 6,
+      "bytes": 107,
+      "sha256": "ffb4079bd923fd47f3f5060deaf71beb471ad300c70f182b44dffaf95ca6c74a",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J19",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        8,
+        1
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j19-i-v1",
+      "file": "assets/gunsmith/v1/gs-j19-i-v1.png",
+      "w": 23,
+      "h": 12,
+      "bytes": 146,
+      "sha256": "1625190d19ea2bf4936a6b7b0c3120b95e97855c4356f833709d0b274ce2206f",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J19",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        22,
+        3
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j19-w-v1",
+      "file": "assets/gunsmith/v1/gs-j19-w-v1.png",
+      "w": 46,
+      "h": 24,
+      "bytes": 234,
+      "sha256": "92735e5253b9529c9b946744fba5ac36dc548a383ca633182f9efc6002f42c55",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J19",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        45,
+        6
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j19-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j19-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 161,
+      "sha256": "df3f484517a010a734ef12021dca7411bb6cddbf7ad4a358a22f4bfe32c54fae",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J19",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j20-h-v1",
+      "file": "assets/gunsmith/v1/gs-j20-h-v1.png",
+      "w": 12,
+      "h": 7,
+      "bytes": 113,
+      "sha256": "e8eeac7df63817eb35fef1cae52617c7445cda77cb836f65d09c177e3279c683",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J20",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        11,
+        1
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j20-i-v1",
+      "file": "assets/gunsmith/v1/gs-j20-i-v1.png",
+      "w": 30,
+      "h": 15,
+      "bytes": 201,
+      "sha256": "53d016fa2a94c97a79debc3ca47bba9bb6196b165549175d462e92b65f30af89",
+      "revision": 1,
+      "output": "inventory",
+      "gun": null,
+      "item": "J20",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        29,
+        3
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j20-w-v1",
+      "file": "assets/gunsmith/v1/gs-j20-w-v1.png",
+      "w": 60,
+      "h": 30,
+      "bytes": 327,
+      "sha256": "17a42781b394754773e651c8919e17e63a4b8d1916e4c72f607b8bf4ff1af7da",
+      "revision": 1,
+      "output": "bench",
+      "gun": null,
+      "item": "J20",
+      "role": "part",
+      "slot": "stock",
+      "anchor": [
+        59,
+        6
+      ],
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j20-q24-v1",
+      "file": "assets/gunsmith/v1/gs-j20-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 195,
+      "sha256": "5eebdbd44938f1c1ffc1b5fa97e95ff20edb19bdccf28af76c0d6cb84ccef6ab",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "J20",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 5,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
+    },
+    {
+      "id": "gs-j07-h-carbine-v1",
+      "file": "assets/gunsmith/v1/gs-j07-h-carbine-v1.png",
+      "w": 8,
+      "h": 3,
+      "bytes": 98,
+      "sha256": "637a2d965bb3e1712d069005b1be0e4845f6d75abdb1c0d72d648db900495f19",
+      "revision": 1,
+      "output": "held",
+      "gun": null,
+      "item": "J07",
+      "role": "part",
+      "slot": "muzzle",
+      "anchor": [
+        0,
+        1
+      ],
+      "colors": 4,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling",
+      "tip": [
+        8,
+        1.5
+      ],
+      "variantFor": "carbine"
+    },
+    {
+      "id": "gs-premiumblank-q24-v1",
+      "file": "assets/gunsmith/v1/gs-premiumblank-q24-v1.png",
+      "w": 24,
+      "h": 24,
+      "bytes": 191,
+      "sha256": "1172c0509b81399ce8b2f5c88b64627352595e70215f8dd14ae564ebcc19589d",
+      "revision": 1,
+      "output": "icon24",
+      "gun": null,
+      "item": "premiumBlank",
+      "role": "icon",
+      "slot": null,
+      "anchor": null,
+      "colors": 6,
+      "source": "docs/gunsmith/art/m4-premium/source/pixel-artwork.json",
+      "sourceRect": null,
+      "exportMethod": "original independently authored native H/I/W/Q24 integer-grid artwork; shared family-rivet design; no runtime-image resampling"
     }
   ],
   "virtual": [

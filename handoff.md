@@ -2,6 +2,8 @@
 
 绘图起点 M4 `40d43c1`，检查时合入 main `e5c660e`；#150 绘图期间已合并，按 #155 最新交接快进到 main `7d982a6`，新开后续美术 PR。Sol 交付 `assets/gunsmith/incoming/m4-premium/`：任务书 78 张主体加 J07 卡宾专用 H，共 79 张、11,880 字节。尺寸、anchor/mounts、tip/hand/beam 与各自参照件相同；78 张配件图均有轮廓差异，统一黄铜铆点，W 独立细化。615 项美术检查、87 组适配的 261 份布局、9 份子挂点组合、20 枪代表组合通过；1113 单测、139 工程检查、package、20 项既有改枪浏览器检查通过。源稿、提示词、首轮缺陷、预览与验证见[交付说明](docs/gunsmith/art/m4-premium/README.md)。仅暂存，正式 652 图与清单保留；实现方在本批后续 PR 导入、移除占位／ART_PENDING 后补游戏截图。准确 head 与 CI 见承接 PR，未合并、未部署，#155 保持开放。
 
+同日实现方另开接入 PR（`feat/gunsmith-premium-art`，叠在 #157 上；#157 按维护者分工只交素材）：79 张进正式目录（清单第 9 版，731 张、112,401 字节），本批清单移到 `docs/gunsmith/art/m4-premium/incoming-manifest.json`；拼装按零件编号找图，不用改代码，J07 在卡宾上自动用专用图；`items.ts` 的黄铜占位画法和目录门禁的 `ART_PENDING` 例外已删。游戏截图在 `docs/gunsmith/evidence/m4-premium`（两档桌面：仓库图标、M4A1 与 AK-74 工作台、行动持枪）。下一步：维护者看图签收后合并；M4-06 试玩和 M5 仍在 #80。
+
 ## 2026-10-30 · 正对的门：暖光与地面通行带（#26 F07/F11）
 
 分支 `agent/door-passage-readability`，基线 main `8a4b46e4`。核对时发现竖向门只有程序画的窄木板、提示看不出指哪扇门、地面引导看不出穿到哪边。做了三个本地原型（所有门描边 / 只亮正对的门 / 正对的门加通行带），维护者选了第三个。`CoastView.showFacedDoor` 让提示指向的门发暖光（只照门自身像素、深度紧贴门，减少动态效果时不闪），`paintPassageGuide` 在地面层画门格加两侧各一格的通行带，关门带横杠。碰撞、揭示、存档不变。1082 单测、package、空间套件 24/24 通过，main 构建对照只有新 S03d 失败；建筑、普通行动、界面、渲染目标、资源释放、城中村样板和 139 项工程守卫也都通过。细节、截图与边界见[任务记录](docs/tasks/door-faced-cue.md)；未合并、未发布，真人/真机未验，竖向门正式美术仍缺（#32）。
@@ -22,7 +24,7 @@
 - 10-30 Sol 的原厂弹匣图标和 SVD、Vector 分层（`87d0084`）已接入：清单第 8 版，十把枪能拆弹匣；内嵌字体加「期」「稀」两字重新生成。
 - M4-05 也已做完（维护者 10-30：八件白给的轻配件各加小代价）：对比工具 `scripts/build-compare.ts`，搜索与比较在 `scripts/build-search.ts`，守护测试 `tests/gunsmith-balance.test.ts`。细节见 CONTRACTS「配装对比与占优修正（M4-05）」。
 - M4-09 老栓精工（维护者 10-30 新增，#155）也已做完：20 件精品配件在 `catalog.ts`（J01–J20、`PREMIUM_BASES`），定制规则和面板数据在 `src/gunsmith/premium.ts`，件坯掉落在 `enemy-armory.ts` 的 `leaderBlank` 和 `building-world.ts`。美术等 Sol（`docs/gunsmith/art/m4-premium/BRIEF.md`），现在是占位图标，目录门禁对这 20 件开了例外。细节见 CONTRACTS「老栓精工（M4-09）」。
-- 维护者 10-30 定：没时间试玩，先合入 PR ④。M4-06 试玩以后做；M5 验收和老栓精工的美术（等 Sol）合入后另开 PR 承接，登记在 #80。
+- 维护者 10-30 定：没时间试玩，先合入 PR ④。M4-06 试玩以后做；M5 验收和老栓精工的美术合入后另开 PR 承接，登记在 #80（Sol 的图在 #157，接入在 `feat/gunsmith-premium-art`）。
 - 10-30 另修了商场遮罩测试 M03c 的偶发失败（#156，薄雾遮蔽值缓动到终点再钉住），已并入本分支。
 
 ## 2026-10-29 SVD 接缝新图接入游戏（#80，PR #149）
