@@ -1,3 +1,7 @@
+## 2026-10-30 · 正对的门：暖光与地面通行带（#26 F07/F11）
+
+分支 `agent/door-passage-readability`，基线 main `8a4b46e4`。核对时发现竖向门只有程序画的窄木板、提示看不出指哪扇门、地面引导看不出穿到哪边。做了三个本地原型（所有门描边 / 只亮正对的门 / 正对的门加通行带），维护者选了第三个。`CoastView.showFacedDoor` 让提示指向的门发暖光（只照门自身像素、深度紧贴门，减少动态效果时不闪），`paintPassageGuide` 在地面层画门格加两侧各一格的通行带，关门带横杠。碰撞、揭示、存档不变。1082 单测、package、空间套件 24/24 通过，main 构建对照只有新 S03d 失败。细节、截图与边界见[任务记录](docs/tasks/door-faced-cue.md)；未合并、未发布，真人/真机未验，竖向门正式美术仍缺（#32）。
+
 ## 2026-10-29 SVD 接缝新图接入游戏（#80，PR #149）
 
 同一分支 `art/svd-joints` 续作：Sol 的三张图按 `replacesSha256` 换进正式目录，清单第 7 版（636 张、98,605 字节）；gunsmith-bench A1 只略过 Sol 记录的 70 个接缝像素；工作台、仓库、试枪场手持和武器卡的游戏内截图在 `docs/gunsmith/evidence/svd-joint/`。细节见 CONTRACTS「收尾小项」。
