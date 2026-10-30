@@ -19,7 +19,7 @@ import { OFF, gun, hold, node, put, yard } from './fixtures/workbench';
 // holds nothing and cannot fire; the magazine is a loose item of its own that only its gun type takes back, and put back
 // the gun is as it was. Rules in docs/gunsmith/CONTRACTS.md, 「拆下弹匣（M4-07）」.
 
-const DETACHABLE: GunId[] = ['mpb5', 'umpb45', 'akb74', 'akb103', 'mb4a1', 'augb', 'mb14', 'rpkb'];
+const DETACHABLE: GunId[] = ['mpb5', 'umpb45', 'akb74', 'akb103', 'mb4a1', 'augb', 'mb14', 'rpkb', 'svdb', 'vb9'];
 function base(): D.SaveDataV1 {
     const p = D.newSave();
     p.stash = D.createInventory(D.STASH_W, D.STASH_ROWS); p.bag = D.createInventory(6, 5); p.safe = D.createInventory(2, 2);
@@ -41,9 +41,9 @@ const find = (p: D.SaveDataV1, uid: string) => items(p).find(i => i.uid === uid)
 const out = <T extends object>(state: T) => ({ ...state, magOut: true as const });
 
 test('the factory magazines: the box magazines that make a gun two rows and are their own layer, items outside the shelf and the finds', () => {
-    // Every two-row gun but the SVD and the Vector, whose magazines are painted on the receiver (Sol redraws them).
+    // Every two-row gun: the SVD and the Vector too since Sol split their magazines off the receiver (#142, 10-30).
     const twoRows = (Object.keys(GUNS) as GunId[]).filter(id => GUNS[id].h === 2);
-    assert.deepEqual(twoRows.filter(id => !detachable(id)).sort(), ['svdb', 'vb9']);
+    assert.deepEqual(twoRows.filter(id => !detachable(id)), []);
     assert.deepEqual(Object.keys(FACTORY_MAGS).sort(), [...DETACHABLE].sort());
     for (const gunId of DETACHABLE) {
         const id = FACTORY_MAGS[gunId]!, def = partDef(id), item = D.ITEMS[id];
@@ -56,11 +56,12 @@ test('the factory magazines: the box magazines that make a gun two rows and are 
         assert.deepEqual(D.attachmentFacts(id), { brand: '原厂', guns: [D.WEAPONS[gunId].name] });
         assert.ok(!D.MERCHANTS.arms.stock.includes(id) && !benchParts().includes(id), 'only ever off a gun, never a shelf or a bench candidate');
     }
-    // Each has an inventory picture: its gun's magazine image (gunsmith-compose.ts) until Sol draws an icon.
+    // Each has Sol's own 24 px icon (#142, 10-30), and every gun with a magazine slot has its factory one as a layer.
     assert.deepEqual([...FACTORY_MAG_ART], Object.values(FACTORY_MAGS));
-    for (const id of Object.values(FACTORY_MAGS)) assert.equal(artId(id!), id);
-    for (const id of ['pistol', 'gb17', 'pb90', 'mb870', 'svdb', 'vb9', 'mb700']) assert.equal(detachable(id), false, id);
-    for (const id of ['G08', 'svdb-mag', 'mpb5', 'toString', '']) assert.equal(factoryMagOf(id), null, id);
+    for (const id of Object.values(FACTORY_MAGS)) { assert.equal(artId(id!), id); assert.equal(GUNSMITH_ART[`gs-${id}-q24`]?.item, id, id); }
+    for (const gunId of DETACHABLE) assert.equal(GUNS[gunId].slots.mag, 1, gunId);
+    for (const id of ['pistol', 'gb17', 'pb90', 'mb870', 'mb1014', 'mb700']) assert.equal(detachable(id), false, id);
+    for (const id of ['G08', 'pb90-mag', 'mpb5', 'toString', '']) assert.equal(factoryMagOf(id), null, id);
 });
 
 test('a gun without its magazine: one row, lighter by the magazine, the body sells without it, capacity 0; another magazine makes it whole', () => {
@@ -84,7 +85,8 @@ test('a stored magOut is strict: only true, only on a gun whose magazine comes o
     assert.deepEqual(validateGun('mb4a1', 'm4', out({ parts: [], devices: OFF })), { ok: true });
     for (const bad of [{ parts: [], devices: OFF, magOut: false }, { parts: [], devices: OFF, magOut: 1 }, { parts: [], devices: OFF, magOut: true, extra: 1 }])
         assert.equal(validateGun('mb4a1', 'm4', bad).ok, false, JSON.stringify(bad));
-    for (const id of ['gb17', 'svdb', 'vb9', 'pistol', 'mb870']) assert.equal(validateGun(id, 'g', out({ parts: [], devices: OFF })).ok, false, id);
+    for (const id of ['gb17', 'pb90', 'mb700', 'pistol', 'mb870']) assert.equal(validateGun(id, 'g', out({ parts: [], devices: OFF })).ok, false, id);
+    for (const id of ['svdb', 'vb9']) assert.deepEqual(validateGun(id, 'g', out({ parts: [], devices: OFF })), { ok: true }, id);
     // A factory magazine is never a node: put back, it is the factory part again.
     assert.equal(validateGun('mb4a1', 'm4', out({ parts: [node('m', 'mb4a1-mag', 'mag')], devices: OFF })).ok, false);
     const p = base();
@@ -164,14 +166,14 @@ test('the magazine slot keeps the factory rule: a replacing magazine on a gun wi
 
 test('refusals: a fixed magazine, one out already, one on, another gun type, a relief magazine on an ordinary gun, another place', () => {
     const p = base();
-    put(p.stash, gun('g17', 'gb17')); put(p.stash, gun('svd', 'svdb'));
+    put(p.stash, gun('g17', 'gb17')); put(p.stash, gun('p90', 'pb90'));
     put(p.stash, gun('ak', 'akb74', [node('g08', 'G08', 'mag')]));
     put(p.stash, { ...gun('m4', 'mb4a1'), gun: out({ parts: [], devices: OFF }) });
     put(p.stash, gun('m4b', 'mb4a1'));
     put(p.stash, { uid: 'akmag', id: 'akb74-mag' }); put(p.stash, { uid: 'rmag', id: 'mb4a1-mag', relief: true });
     put(p.stash, { uid: 'mag', id: 'mb4a1-mag' });
     refused(planGunEdit(p, 'g17', [{ kind: 'eject' }]), 'mag', 0, '这把枪的弹匣不能拆下。');
-    refused(planGunEdit(p, 'svd', [{ kind: 'eject' }]), 'mag', 0, '这把枪的弹匣不能拆下。');
+    refused(planGunEdit(p, 'p90', [{ kind: 'eject' }]), 'mag', 0, '这把枪的弹匣不能拆下。');
     refused(planGunEdit(p, 'm4', [{ kind: 'eject' }]), 'mag', 0, '这把枪的原厂弹匣已经拆下了。');
     refused(planGunEdit(p, 'm4b', [{ kind: 'eject' }, { kind: 'eject' }]), 'mag', 1, '这把枪的原厂弹匣已经拆下了。');
     refused(planGunEdit(p, 'ak', [{ kind: 'eject' }]), 'mag', 0, '先拆下装着的弹匣。');

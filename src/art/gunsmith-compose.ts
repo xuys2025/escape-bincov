@@ -13,7 +13,6 @@ import { inventoryArtSize, paintInventoryItem } from './inventory';
 import type { ItemArtId } from './items';
 import { installGunsmithArt, type ArtBox } from './gunsmith-hooks';
 import { partsOfSignature } from '../gunsmith/signature';
-import { factoryMagOf } from '../gunsmith/catalog';
 
 const images = new Map<string, HTMLImageElement>();
 let loading: Promise<void> | null = null;
@@ -26,13 +25,11 @@ export function loadGunsmithArt(): Promise<void> {
         icon: (id, size) => {
             const own = gunsmithIconImage(id, size), small = size === 32 && !own ? gunsmithIconImage(id, 24) : null;
             if (own) return { img: own, x: 0, y: 0 };
-            if (small) return { img: small, x: 4, y: 4 };
-            const mag = factoryMagIcon(id);
-            return mag ? { img: mag, x: size === 32 ? 4 : 0, y: size === 32 ? 4 : 0 } : null;
+            return small ? { img: small, x: 4, y: 4 } : null;
         },
         inventory: id => {
             const layout = gunArtLayout(id, [], 'i');
-            return layout ? drawGunLayout(layout) : gunsmithIconImage(id, 24) ?? factoryMagIcon(id);
+            return layout ? drawGunLayout(layout) : gunsmithIconImage(id, 24);
         },
         configured: gunInventoryArt, bench: gunBenchArt, releaseBench: releaseBenchArt,
         benchFrame: gun => { if (!frames.has(gun)) frames.set(gun, artFrame(gun, 'w')); return frames.get(gun)!; },
@@ -154,20 +151,5 @@ const releaseBenchArt = () => bench.clear();
 /** The cache sizes, for the resource checks of M2-10 and M5-02. */
 export const gunArtCaches = () => ({ inventory: inventory.size, bench: bench.size });
 
-const magIcons = new Map<string, HTMLCanvasElement | null>();
-/**
- * A factory magazine's 24 px icon (#28 M4-07) until Sol draws its own: its gun's inventory magazine image, centred.
- * Null for any other id and before decoding.
- */
-function factoryMagIcon(id: string): HTMLCanvasElement | null {
-    const gun = factoryMagOf(id), mag = gun ? images.get(`gs-${gun}-mag-factory-i`) : undefined;
-    if (!mag) return null;
-    if (!magIcons.has(id)) {
-        const canvas = document.createElement('canvas'); canvas.width = canvas.height = 24;
-        canvas.getContext('2d')!.drawImage(mag, Math.floor((24 - mag.naturalWidth) / 2), Math.floor((24 - mag.naturalHeight) / 2));
-        magIcons.set(id, canvas);
-    }
-    return magIcons.get(id)!;
-}
-/** The decoded square icon of a gun or part; null when there is none or before decoding. */
+/** The decoded square icon of a gun, part or factory magazine (Sol's, #142); null when there is none or before decoding. */
 const gunsmithIconImage = (item: string, size: 24 | 32): HTMLImageElement | null => images.get(`gs-${item.toLowerCase()}-q${size}`) ?? null;

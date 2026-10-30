@@ -180,7 +180,7 @@ export const GUNS: Readonly<Record<GunId, GunDef>> = {
     // Proposal: the highest short-burst output; eats ammo and blooms the most.
     vb9: gun('vb9', 'Vector 9mm 高速冲锋枪', 'smg', 'rare', 'ammo9', [2, 2, 2.6, 2400, 1130],
         { magazine: 25, damage: 20, range: 420, cooldown: .06, reload: 1.9, pellets: 1, spread: .05, crit: .04 },
-        hd('auto', 2.3, .28, .3, 2, .01, .1, .006, .07, .15, 4), { muzzle: 1, top: 1, under: 1, side: 1 }),
+        hd('auto', 2.3, .28, .3, 2, .01, .1, .006, .07, .15, 4), { muzzle: 1, mag: 1, top: 1, under: 1, side: 1 }),
     // Copied from domain WEAPONS/ITEMS and shooting.ts; the test keeps them equal.
     shotgun: gun('shotgun', '双管霰弹枪', 'shotgun', 'entry', 'shell', [3, 1, 2.7, 780, 370],
         { magazine: 2, damage: 15, range: 290, cooldown: .72, reload: 1.9, pellets: 6, spread: .27, crit: .03 },
@@ -222,7 +222,7 @@ export const GUNS: Readonly<Record<GunId, GunDef>> = {
     // Proposal: a strong first shot at range; poor from the hip, slow to raise and to track.
     svdb: gun('svdb', 'SVD 精确步枪', 'dmr', 'rare', 'ammoHeavy', [5, 2, 4, 3200, 1500],
         { magazine: 10, damage: 52, range: 820, cooldown: .45, reload: 2.6, pellets: 1, spread: .025, crit: .1 },
-        hd('semi', 3.6, .15, .55, 2.6, .02, .07, .02, .07, .22, 4), { muzzle: 1, top: 1, bipod: 1 }, ['longScope']),
+        hd('semi', 3.6, .15, .55, 2.6, .02, .07, .02, .07, .22, 4), { muzzle: 1, mag: 1, top: 1, bipod: 1 }, ['longScope']),
     // Proposal: paced fire at middle to long range; strong recoil and heavy.
     mb14: gun('mb14', 'M14 半自动精确步枪', 'dmr', 'rare', 'ammoHeavy', [5, 2, 4.3, 3000, 1410],
         { magazine: 20, damage: 46, range: 760, cooldown: .3, reload: 2.5, pellets: 1, spread: .027, crit: .09 },
@@ -281,6 +281,8 @@ const AK_FAMILY: readonly GunId[] = ['akb74', 'akb103', 'rpkb'];
 const FACTORY_MAG_ROWS: Readonly<Partial<Record<GunId, readonly [string, number, number]>>> = {
     mpb5: ['MP5', .2, 90], umpb45: ['UMP45', .25, 100], akb74: ['AK-74', .3, 110], akb103: ['AK-103', .35, 120],
     mb4a1: ['M4A1', .2, 100], augb: ['AUG', .15, 110], mb14: ['M14', .3, 120], rpkb: ['RPK', .45, 150],
+    // Sol's separate magazine layers (#142, 10-30) let these two come off as well; they have no other magazine.
+    svdb: ['SVD', .25, 140], vb9: ['Vector', .15, 100],
 };
 const LONG = { requires: ['longScope'] } as const;
 const UNDER_SIDE = (side: number): Extra => ({ provides: { under: 1, side } });

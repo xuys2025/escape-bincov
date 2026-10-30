@@ -27,10 +27,25 @@ const waveTwo = JSON.parse(readFileSync('tests/fixtures/gunsmith-assemblies-m3-w
 const waveThree = JSON.parse(readFileSync('tests/fixtures/gunsmith-assemblies-m3-w3.json', 'utf8'));
 const REDRAWN = new Set<string>(JSON.parse(readFileSync('docs/gunsmith/art/m3-w3/incoming-manifest.json', 'utf8')).assets.map((a: { id: string }) => a.id.replace(/-v\d+$/, '')));
 type Layout = NonNullable<ReturnType<typeof gunArtLayout>>;
-type Assembly = { w: number; h: number; tip: unknown; layers: { key: string; label: string; origin: number[] }[] };
+type Layer = { key: string; label?: string; origin: number[] };
+type Assembly = { gun: string; w: number; h: number; tip: unknown; layers: Layer[] };
+/**
+ * An earlier record's layers since Sol split the SVD's and the Vector's factory magazines off the receiver (#142,
+ * docs/gunsmith/art/m4-mags): the magazine is a layer of its own on the receiver's new mag mount, drawn before it. The
+ * pixels are the same (Sol's six reassemblies; gunsmith-bench A1 compares the approved previews); every other layer
+ * stays where it was.
+ */
+const SPLIT = new Set(['svdb', 'vb9']);
+function split(gun: string, layers: Layer[]): Layer[] {
+    const at = layers.findIndex(l => /-receiver-[hiw]$/.test(l.key));
+    if (!SPLIT.has(gun) || at < 0) return layers;
+    const receiver = layers[at], code = receiver.key.at(-1), mount = GUNSMITH_ART[receiver.key].mounts!.mag!;
+    const mag = { key: `gs-${gun}-mag-factory-${code}`, ...receiver.label ? { label: 'mag' } : {}, origin: [receiver.origin[0] + mount[0], receiver.origin[1] + mount[1]] };
+    return [...layers.slice(0, at), mag, ...layers.slice(at)];
+}
 /** `got` is `a`'s picture: each layer at its place, the tip and the size, the height changed only by a redrawn magazine. */
 function matches(got: Layout, a: Assembly, name: string, layers = true) {
-    if (layers) assert.deepEqual(got.layers.map(l => [l.key, l.label, l.x, l.y]), a.layers.map(l => [l.key, l.label, ...l.origin]), `${name}: layers`);
+    if (layers) assert.deepEqual(got.layers.map(l => [l.key, l.label, l.x, l.y]), split(a.gun, a.layers).map(l => [l.key, l.label, ...l.origin]), `${name}: layers`);
     assert.deepEqual(got.tip, a.tip, `${name}: tip`);
     if (a.layers.some(l => REDRAWN.has(l.key))) assert.equal(got.w, a.w, `${name}: width`);
     else assert.deepEqual([got.w, got.h], [a.w, a.h], `${name}: size`);
@@ -41,11 +56,11 @@ const grow = (trees: readonly Tree[]): PartNode[] => trees.map(([id, slot, kids]
 /** The guns with art: every catalog gun since #28 M3-08 (M2's five, wave one's seven, wave two's eight). */
 const ART_GUNS = ['gb17', 'mb4a1', 'carbine', 'pistol', 'shotgun', 'pb226', 'mpb5', 'vb9', 'mb870', 'mb1014', 'akb74', 'akb103', 'augb', 'mb1911', 'umpb45', 'pb90', 'svdb', 'mb14', 'mb700', 'rpkb'] as const;
 
-test('the imported art: 636 images and 5 virtual layers, every key drops its version, the revision is the manifest\'s', () => {
+test('the imported art: 652 images and 5 virtual layers, every key drops its version, the revision is the manifest\'s', () => {
     const manifest = JSON.parse(readFileSync('assets/gunsmith/manifest.json', 'utf8'));
     // M2's 115, less the carbine's two receivers that wave one replaced (v2), plus wave one's 274 (#28 M3-03) and wave
-    // two's 249 (M3-07).
-    assert.equal(Object.keys(GUNSMITH_ART).length, 636);
+    // two's 249 (M3-07); then sixteen more in M4: six magazine layers and ten magazine icons (#142).
+    assert.equal(Object.keys(GUNSMITH_ART).length, 652);
     assert.deepEqual(Object.keys(GUNSMITH_VIRTUAL).sort(), ['gs-carbine-barrel-factory-i', 'gs-carbine-handguard-factory-i', 'gs-carbine-receiver-i', 'gs-pistol-receiver-i', 'gs-shotgun-receiver-i']);
     assert.equal(GUNSMITH_ART_REVISION, manifest.revision);
     assert.deepEqual(Object.keys(GUNSMITH_ART).sort(), manifest.assets.map((a: { id: string }) => a.id.replace(/-v\d+$/, '')).sort());
@@ -87,7 +102,7 @@ test('the layout reproduces Sol\'s wave-one assemblies (31 configurations of 12 
     // Wave two drew the old three without hands (#28 M3-07): its records replace wave one's for them.
     for (const a of [...wave.bareFactories.filter((b: { gun: string }) => !waveTwo.bareFactories.some((n: { gun: string }) => n.gun === b.gun)), ...waveTwo.bareFactories]) {
         const got = gunArtLayout(a.gun, [], 'h', false)!;
-        assert.deepEqual([got.w, got.h, got.layers.map(l => [l.key, l.x, l.y])], [a.w, a.h, a.layers.map((l: { key: string; origin: number[] }) => [l.key, ...l.origin])], a.gun);
+        assert.deepEqual([got.w, got.h, got.layers.map(l => [l.key, l.x, l.y])], [a.w, a.h, split(a.gun, a.layers).map(l => [l.key, ...l.origin])], a.gun);
     }
 });
 
@@ -98,7 +113,7 @@ test('the layout reproduces Sol\'s redrawn magazines (#28 M3-12): 21 configurati
         assert.ok(validateBuild(buildOf({ id: a.gun as GunId, parts })).ok, `${name} is a legal build`);
         const got = gunArtLayout(a.gun, parts, a.code as ArtCode)!, size = gunSize({ id: a.gun as GunId, parts }), scale = a.code === 'w' ? 2 : 1;
         assert.deepEqual([got.w, got.h, got.tip], [a.w, a.h, a.tip], `${name}: size and tip`);
-        assert.deepEqual(got.layers.map(l => [l.key, l.label, l.x, l.y]), a.layers.map((l: { key: string; label: string; origin: number[] }) => [l.key, l.label, ...l.origin]), `${name}: layers`);
+        assert.deepEqual(got.layers.map(l => [l.key, l.label, l.x, l.y]), split(a.gun, a.layers).map(l => [l.key, l.label, ...l.origin]), `${name}: layers`);
         assert.ok(got.w <= size.w * 36 * scale && got.h <= size.h * 26 * scale, `${name}: ${got.w}x${got.h} within ${size.w}x${size.h} cells`);
     }
 });

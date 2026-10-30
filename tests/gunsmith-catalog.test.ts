@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as D from '../src/domain';
 import { handlingOf, type Handling } from '../src/shooting';
-import { ATTACHMENTS, BRAND_NAMES, CATEGORY_NAMES, GUN_CLASS_NAMES, GUNS, SLOT_NAMES, type AttachmentDef, type Factors, type GunHandling,
+import { ATTACHMENTS, BRAND_NAMES, CATEGORY_NAMES, FACTORY_MAGS, GUN_CLASS_NAMES, GUNS, SLOT_NAMES, type AttachmentDef, type Factors, type GunHandling,
     type GunId, type Modifiers } from '../src/gunsmith/catalog';
 import { DOCS } from './fixtures/gunsmith-docs';
 
@@ -67,10 +67,11 @@ test('the old three equal today\'s WEAPONS, ITEMS and handling; mb4a1 keeps the 
     assert.deepEqual(asHandling, asGun);
 });
 
-test('native slots follow the docs: a position wherever an attachment lists the gun, rails from the mod-entry table', () => {
+test('native slots follow the docs: a position wherever an attachment lists the gun or its factory magazine comes off, rails from the mod-entry table', () => {
     for (const doc of DOCS.guns) {
         const gun = GUNS[doc.id as GunId], slots = Object.keys(gun.slots);
-        const positions = new Set(DOCS.parts.filter(p => p.guns?.includes(doc.id)).map(p => POSITION[p.heading]));
+        // The SVD and the Vector take no other magazine; their slot holds the factory one that comes off (#142, M4-07).
+        const positions = new Set([...DOCS.parts.filter(p => p.guns?.includes(doc.id)).map(p => POSITION[p.heading]), ...FACTORY_MAGS[doc.id as GunId] ? ['mag'] : []]);
         assert.deepEqual(new Set(slots.filter(s => !RAILS.has(s))), positions, doc.id);
         assert.deepEqual(new Set(slots.filter(s => RAILS.has(s))), doc.native, doc.id);
         for (const n of Object.values(gun.slots)) assert.equal(n, 1, `${doc.id}: one of each native slot`);

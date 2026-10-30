@@ -20,7 +20,7 @@ const WAVE_AMMO = ['ammo45', 'ammoPDW', 'ammoHeavy'] as const;
  * The factory magazines taken out at the workbench (#28 M4-07, catalog FACTORY_MAGS): their gun's magazine image as the
  * icon (gunsmith-compose.ts), the generic part until it is decoded.
  */
-export const FACTORY_MAG_ART = ['mpb5-mag', 'umpb45-mag', 'akb74-mag', 'akb103-mag', 'mb4a1-mag', 'augb-mag', 'mb14-mag', 'rpkb-mag'] as const;
+export const FACTORY_MAG_ART = ['mpb5-mag', 'umpb45-mag', 'akb74-mag', 'akb103-mag', 'mb4a1-mag', 'augb-mag', 'mb14-mag', 'rpkb-mag', 'svdb-mag', 'vb9-mag'] as const;
 export const ITEM_ART_IDS = ['knife', 'pistol', 'shotgun', 'carbine', 'ammo9', 'shell', 'ammoR', 'bandage', 'medkit', 'antidote', 'water', 'food', 'scrap', 'wire', 'fuse', 'battery', 'watch', 'pearl', 'sample', 'ledger', 'cloth', 'analgesic', 'focus', 'strengthDose', 'constitutionDose', 'techniqueDose', 'luckyCharm', 'unluckyCharm', 'luckySachet', 'unluckySachet', 'gb17', 'mb4a1', ...PART_ART_IDS, ...WAVE_GUNS, ...WAVE_PARTS, ...WAVE_AMMO, ...FACTORY_MAG_ART] as const;
 export type ItemArtId = typeof ITEM_ART_IDS[number];
 type PartArtId = typeof PART_ART_IDS[number];

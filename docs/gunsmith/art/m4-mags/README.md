@@ -6,7 +6,7 @@
 
 ## 成品与预览
 
-- [本批清单](../../../../assets/gunsmith/incoming/m4-mags/manifest.json)：10 张 24×24 原厂弹匣图标、6 张无弹匣机匣、6 张独立弹匣层。
+- [本批清单](incoming-manifest.json)（接入后从 `assets/gunsmith/incoming/m4-mags/manifest.json` 移来）：10 张 24×24 原厂弹匣图标、6 张无弹匣机匣、6 张独立弹匣层。
 - [图标总览](preview/icons-contact.png)：原生 1 倍、整数 3 倍、深／中／浅三底色，以及 1 倍灰度。
 - [SVD 前后及重合](preview/svdb-split-reassembly.png) · [Vector 前后及重合](preview/vb9-split-reassembly.png)：原图、拆下弹匣、回装，以及独立弹匣层。
 
@@ -86,3 +86,7 @@ node --import tsx docs/gunsmith/art/m4-mags/source/check-runtime.mjs
 实现方签收后，在原 PR #150 内按替换哈希导入，接入十个 `-mag` 物品图标及两把枪的拆弹匣规则，再补工作台、仓库、交易区和行动内的游戏截图。原厂弹匣层用 `anchor [0,0]` 压在机匣新 `mag` 点上，默认在机匣后画；移除时只去掉 mag 层。
 
 本次交图不改领域规则、存档、经济平衡或离线依赖，不合并或部署。维护者视觉签收、正式接入和游戏内验收仍待完成。
+
+## 接入（PR #150）
+
+2026-10-30 实现方接入：22 张图按 `replacesSha256` 进正式目录（六张机匣换掉旧图，16 张新加），正式清单第 8 版，652 张、100,521 字节；本批清单移到 [incoming-manifest.json](incoming-manifest.json)。SVD、Vector 加了弹匣位，十把枪都能拆原厂弹匣；十个 `-mag` 物品用这批图标。规则和测试见 [CONTRACTS「拆下弹匣（M4-07）」](../../CONTRACTS.md#拆下弹匣m4-07) 的「美术接入」，游戏截图见 [evidence/m4-mags](../../evidence/m4-mags/)。

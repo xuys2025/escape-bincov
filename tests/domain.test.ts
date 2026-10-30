@@ -28,10 +28,10 @@ test('20 original items, 10 production/RPG items and the gunsmith items have coh
     'O02', 'O04', 'O06', 'O07', 'O09', 'O11', 'O12', 'M04', 'M08', 'M09', 'M12', 'B02', 'B04', 'B10', 'H10', 'S06', 'S09', 'S10', 'P05', 'P08',
     'F02', 'F05', 'F06', 'F08', 'G02', 'G04', 'G05', 'G11', 'G12', 'T03', 'T06', 'T07', 'T09', 'A03',
     // M4-07: the factory magazines that come off at the workbench.
-    'mpb5-mag', 'umpb45-mag', 'akb74-mag', 'akb103-mag', 'mb4a1-mag', 'augb-mag', 'mb14-mag', 'rpkb-mag'];
-  assert.equal(original.length, 20); assert.equal(production.length, 10); assert.equal(gunsmith.length, 128);
+    'mpb5-mag', 'umpb45-mag', 'akb74-mag', 'akb103-mag', 'mb4a1-mag', 'augb-mag', 'mb14-mag', 'rpkb-mag', 'svdb-mag', 'vb9-mag'];
+  assert.equal(original.length, 20); assert.equal(production.length, 10); assert.equal(gunsmith.length, 130);
   assert.deepEqual(new Set(Object.keys(ITEMS)), new Set([...original, ...production, ...gunsmith]));
-  assert.equal(Object.keys(ITEMS).length, 158);
+  assert.equal(Object.keys(ITEMS).length, 160);
   for (const def of Object.values(ITEMS)) {
     assert.ok(def.w > 0 && def.h > 0 && def.stack > 0);
     if (def.buy) assert.ok(def.sell <= def.buy);
