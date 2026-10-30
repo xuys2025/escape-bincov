@@ -38,6 +38,8 @@
 
 ## 验证
 
+首轮 `d951adbf` 的 [CI 41087792229](https://github.com/xuys2025/escape-bincov/actions/runs/41087792229) 已全部成功。等待期间 main 合入 #160，随后正常同步 `61cd6c55`：只需合并双方 `handoff.md` 的新增段落，游戏代码没有文本冲突，保留手机菜单重绘修复。同步后 1118 单测、139 工程守卫、package、任务界面专项 13/13 与手机菜单 I3/I3b 2/2 再次通过，便携 ZIP 6,120,406 字节。以下截图、哈希与详细本地数据属于首轮；同步后组合提交与远端 CI 的准确结果见 [PR #161](https://github.com/xuys2025/escape-bincov/pull/161)，不拿首轮 CI 替代新 head。
+
 Windows、Node 24.21.0、pnpm 11.19.0、Chrome 156.0.8078.48、离线正式 HTML（SHA-256 `f461ee2b9b8219e6726f6b6e70d33c342d2364a0e4c7d8978cc5f7730b5ab162`）。本次证据保留于 `test-results/quest-progression/`，长期截图与样本提升到本目录同名子目录。
 
 | 检查 | 实际结果 |
