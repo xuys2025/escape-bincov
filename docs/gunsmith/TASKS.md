@@ -196,7 +196,7 @@ M0-01/02/03、M0-08、M0-09 于 10-22 由子代理开工，被停电和暂停打
 
 ### M4 经济与平衡（PR ④ 第一阶段）
 
-维护者 10-30 定：没时间试玩，先合入 PR ④（[#150](https://github.com/xuys2025/escape-bincov/pull/150)），里面是 M4-01～M4-05、M4-07～M4-09 的实现。M4-06 试玩以后做；M5 和老栓精工的美术合入后另开 PR 承接，都登记在 [#80](https://github.com/xuys2025/escape-bincov/issues/80)。
+维护者 10-30 定：没时间试玩，先合入 PR ④（[#150](https://github.com/xuys2025/escape-bincov/pull/150)），里面是 M4-01～M4-05、M4-07～M4-09 的实现。M4-06 试玩以后做；M5 和老栓精工的美术合入后另开 PR 承接（美术：Sol 的图在 [#157](https://github.com/xuys2025/escape-bincov/pull/157)，接入在 `feat/gunsmith-premium-art`），都登记在 [#80](https://github.com/xuys2025/escape-bincov/issues/80)。
 
 | 编号 | 任务 | 产出与完成判据 | 依赖 | 负责 | 工 | 日期 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -207,7 +207,7 @@ M0-01/02/03、M0-08、M0-09 于 10-22 由子代理开工，被停电和暂停打
 | M4-05 | 配装对比与占优修正（10-30 完成，`scripts/build-compare.ts`，PR ④；维护者 10-30 定八件白给的轻配件各加小代价，见 [CONTRACTS](CONTRACTS.md#配装对比与占优修正m4-05)） | 轻快、安静、稳定、大容量四类配装实测对比；修掉全面占优的组合；RPG 倍率和 #92 Perk 只乘一次 | M4-04 | 实现 | 1 | 12-07 |
 | M4-07 | 拆下弹匣（[#142](https://github.com/xuys2025/escape-bincov/issues/142)，维护者 10-29 定为先做；10-29 实现，PR ④，见 [CONTRACTS](CONTRACTS.md#拆下弹匣m4-07)；10-30 Sol 的十个弹匣图标和 SVD、Vector 分层接入，这两把也能拆） | 工作台能拆下弹匣，没装弹匣的枪回到 1 行、不能开火和换弹；只适用于能换弹匣的枪；存档表示空位置 | M3-12 | 实现 | 1 | 12-07 |
 | M4-08 | 收尾小项（10-29 维护者「做吧」，#80） | 试枪场二十把枪；改装后原位放不下时预览新位置、确认后放过去（PLAN 第 8 节）；SVD 接缝 Sol 修图并接入（[说明](art/svd-joint/BRIEF.md)、[交付](art/svd-joint/README.md)，#149） | M3-10 | 实现、Sol | 0.5 | 10-29 |
-| M4-09 | 老栓精工：定制的精品配件（维护者 10-30 新增，[#155](https://github.com/xuys2025/escape-bincov/issues/155)；10-30 实现，PR ④，见 [CONTRACTS](CONTRACTS.md#老栓精工m4-09)） | 20 件精品配件，同位置最好、仍受护栏；做完船册任务、工作台 3 级后向老栓定制，交底料、精工件坯和现金当场拿到；件坯只在头目尸体和淹水点；不能购买、不会掉落；美术交 Sol（[任务书](art/m4-premium/BRIEF.md)） | M4-05 | 实现、Sol | 1 | 10-30 |
+| M4-09 | 老栓精工：定制的精品配件（维护者 10-30 新增，[#155](https://github.com/xuys2025/escape-bincov/issues/155)；10-30 实现，PR ④，见 [CONTRACTS](CONTRACTS.md#老栓精工m4-09)） | 20 件精品配件，同位置最好、仍受护栏；做完船册任务、工作台 3 级后向老栓定制，交底料、精工件坯和现金当场拿到；件坯只在头目尸体和淹水点；不能购买、不会掉落；美术交 Sol（[任务书](art/m4-premium/BRIEF.md)），10-30 交 79 张（[#157](https://github.com/xuys2025/escape-bincov/pull/157)），接入另开 PR（`feat/gunsmith-premium-art`） | M4-05 | 实现、Sol | 1 | 10-30 |
 | M4-06 | 试玩（关口；维护者 10-30：没时间，先合入 PR ④，以后再试玩，见 #80） | 维护者试玩经济节奏 | M4-05、M4-07 | 维护者 | — | 12-08 |
 
 ### M5 完整验收与交付（PR ④ 合入后另开 PR）

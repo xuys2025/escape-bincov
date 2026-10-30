@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "date": "2026-10-30",
+  "platform": "Windows",
+  "node": "24.22.1",
+  "pnpm": "11.25.0",
+  "taskHead": "40d43c102fbaa12a671f635736c98ea154d473a3",
+  "testedMain": "e5c660ea076abfec4fde01616251915ffb2852eb",
+  "deliveryMain": "7d982a6fc5b4c849d9a3dc576074a01e17c2d052",
+  "baselineRefresh": {
+    "testedTree": "M4 40d43c1 + clean merge main e5c660e; runtime/test contents equal e09490b4",
+    "afterRefresh": [
+      "CHANGELOG.md",
+      "docs/WORK-QUEUE.md",
+      "docs/gunsmith/TASKS.md",
+      "handoff.md"
+    ],
+    "decision": "Only Markdown changed since tested runtime/test contents; no repeated regression run needed."
+  },
+  "dependencies": "Reused existing local node_modules junction; no dependency installation or project configuration changes. pnpm_config_verify_deps_before_run=warn was set only in check processes.",
+  "checks": [
+    {
+      "command": "pnpm test",
+      "status": "pass",
+      "passed": 1113,
+      "total": 1113,
+      "log": {
+        "file": "test-results/m4-premium/unit.txt",
+        "bytes": 129385,
+        "sha256": "e50bb46fff30e9b100a775d4f5086f132b818fd9ae9caefb567ed40a95207200"
+      }
+    },
+    {
+      "command": "pnpm check:ci",
+      "status": "pass",
+      "passed": 139,
+      "total": 139,
+      "log": {
+        "file": "test-results/m4-premium/ci.txt",
+        "bytes": 14495,
+        "sha256": "426e25bd9bdccaf38244096de84746caf96fac5c481540e4d8d5a31e7ac48e57"
+      }
+    },
+    {
+      "command": "pnpm package",
+      "status": "pass",
+      "passed": null,
+      "total": null,
+      "log": {
+        "file": "test-results/m4-premium/package.txt",
+        "bytes": 608,
+        "sha256": "8ed4c853170d99036e6de6a52afd5fb0fb7dc15dee85b5e32e12e43924d2ec49"
+      }
+    },
+    {
+      "command": "pnpm test:gunsmith-bench",
+      "status": "pass",
+      "passed": 20,
+      "total": 20,
+      "log": {
+        "file": "test-results/m4-premium/bench.txt",
+        "bytes": 1032,
+        "sha256": "d0673cb80e26dfd0a34041bed2b39bad4153b671202f7cd0503c923679a8eb5f"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "dist/index.html",
+      "bytes": 9509272,
+      "sha256": "6b1418c9980e7e78e382b7e58f6ebeb173e2b5b8fd151210d73a4767fb022001"
+    },
+    {
+      "file": "start the game.html",
+      "bytes": 9509272,
+      "sha256": "6b1418c9980e7e78e382b7e58f6ebeb173e2b5b8fd151210d73a4767fb022001"
+    },
+    {
+      "file": "release/Escape-Bincov-portable.zip",
+      "bytes": 6111771,
+      "sha256": "b0391833434eec9b843088fb689262cd2f9620d9c35ab45795445c39d4e46916"
+    },
+    {
+      "file": "release/Escape-Bincov-web.zip",
+      "bytes": 6107262,
+      "sha256": "e3023496710b15a7085c0027094b31f2502a1bc746fd0a31d02f8eb792792803"
+    }
+  ],
+  "formalArt": {
+    "file": "assets/gunsmith/manifest.json",
+    "bytes": 466178,
+    "sha256": "cb3844c01da605ee63e3680f081b6beff00b5484f2035624bf3fa18403fcf97e"
+  },
+  "scope": "Repository checks use the existing 652 formal sprites. Incoming premium sprites were checked by validate.mjs and actual gunArtLayout injection. Runtime import and game screenshots remain pending.",
+  "remoteCI": {
+    "status": "pending-at-commit",
+    "source": "Exact delivery PR head; final result recorded in PR."
+  }
+}

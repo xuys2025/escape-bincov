@@ -15,11 +15,6 @@ import { artFrame, gunArtLayout } from '../src/art/gunsmith-layout';
 // gun can be built two different ways. The detailed rules live in their own tests; this one checks the whole catalog.
 
 const GUN_IDS = Object.keys(GUNS) as GunId[], PART_IDS = Object.keys(ATTACHMENTS);
-/**
- * 老栓精工's twenty (#28 M4-09) wait for Sol's pictures (docs/gunsmith/art/m4-premium/BRIEF.md) and show placeholders
- * until then: the one exception to the art gate, to be emptied when the pictures are in.
- */
-const ART_PENDING = PART_IDS.filter(isPremium);
 const OLD = ['pistol', 'shotgun', 'carbine'];
 const part = (id: string, kids: PartNode[] = []): PartNode => ({ uid: `gate-${id}`, id, slot: ATTACHMENTS[id].mount, relief: false, children: kids });
 const legal = (gun: GunId, parts: PartNode[]) => validateBuild(buildOf({ id: gun, parts })).ok;
@@ -54,16 +49,16 @@ test('art: every gun in the three outputs with its icons and side view, every pa
         // The old three keep their own painted item icons; every other gun has Sol's.
         if (!OLD.includes(gun)) for (const size of ['q24', 'q32']) assert.ok(GUNSMITH_ART[`gs-${gun}-${size}`], `${gun} ${size}`);
     }
-    assert.deepEqual(ART_PENDING, ['J01', 'J02', 'J03', 'J04', 'J05', 'J06', 'J07', 'J08', 'J09', 'J12', 'J15', 'J10', 'J13', 'J16', 'J17', 'J19', 'J20', 'J11', 'J14', 'J18']);
-    assert.ok(readFileSync('docs/gunsmith/art/m4-premium/BRIEF.md', 'utf8').includes('J20'), 'the pending art has its brief');
-    for (const id of PART_IDS.filter(id => !ART_PENDING.includes(id))) {
+    // 老栓精工's twenty (#28 M4-09) included: Sol's pictures came in with #157.
+    for (const id of PART_IDS) {
         const key = (code: string) => Object.keys(GUNSMITH_ART).some(k => k.startsWith(`gs-${id.toLowerCase()}-${code}`));
         for (const code of ['i', 'w', 'q24']) assert.ok(key(code), `${id} ${code}`);
         // Held rear grips are hidden by the glove (M0 review decision 8): only they may go without a held image.
         assert.ok(key('h') || ATTACHMENTS[id].mount === 'grip', `${id} h`);
     }
-    // Wave two's rounds carry Sol's icons too.
+    // Wave two's rounds carry Sol's icons too, and so does 老栓精工's blank.
     for (const id of ['ammo45', 'ammoPDW', 'ammoHeavy']) for (const size of ['q24', 'q32']) assert.ok(GUNSMITH_ART[`gs-${id.toLowerCase()}-${size}`], `${id} ${size}`);
+    assert.ok(GUNSMITH_ART['gs-premiumblank-q24'], 'premiumBlank q24');
 });
 
 test('function and cost: every part changes something and says what it gives and what it costs', () => {
