@@ -89,6 +89,7 @@ for (const outcome of ['extract', 'death', 'timeout'] as const) test(`${outcome}
 });
 
 test('merchant purchases and quest submission roll back cash, items and rewards on storage failure', () => {
+  app.save.quests.repair = true; app.save.stats.runs = 3; app.save.stats.extracts = 3;
   D.addItem(app.save.stash, 'sample');
   const original = structuredClone(app.save), pack = D.buyQuantity('ammo9');
   // The tab page's 统一结算 button: checkout() settles the cart inside mutate().

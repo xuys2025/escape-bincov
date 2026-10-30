@@ -1,5 +1,7 @@
 # 当前任务入口
 
+本轮修复：**[电台任务与货架解锁节奏](tasks/radio-quest-progression.md)**（[#153](https://github.com/xuys2025/escape-bincov/issues/153)），分支 `fix/radio-quest-progression`，基线 main `e3a74961`。用户明确要求解决；#150 已合并，本次独立承接任务过快问题。维修保持前期引导，样本/船册分别增加前置任务和累计 3/6 次成功撤离门槛；保留已完成旧任务和货架。实现、60×20 局同口径样本与验证见记录；M4-06 真人试玩仍归 #80。准确 head 与 CI 见本修复 PR。
+
 本轮原子任务：**[正对的门：暖光与地面通行带](tasks/door-faced-cue.md)**（#26 F07/F11 门/通道理解度），分支 `agent/door-passage-readability`，基线 main `8a4b46e4`。维护者从三个本地原型里选了 C：交互提示指向的门发暖光，地上画出穿过它的三格通行带；只改显示。本地 1082 单测、package、空间套件 24/24（main 对照仅新增 S03d 失败）及另外六项浏览器回归、工程守卫全部通过；准确 head、CI 与合并以承接 PR 为准，真人/真机未验。
 
 已完成原子任务：**[修复楼梯标签遮住可见敌人（S03c）](tasks/todo-stair-label-occlusion.md)**，[PR #146](https://github.com/xuys2025/escape-bincov/pull/146) 已合入 main `aa1db0e8`。已同步 main `4fec648c`，1080 单测/125 工程守卫/package 通过，S03c 两档桌面与 932×430 触屏均 0 遮挡；原版 85/74 的有效失败、最终空间 20/22 的既有 S04d 首败和首轮商场证据完整保留。只承接 #26 中 S03c 遮敌子项；本地断言余项归 #61，总单保持开放。
