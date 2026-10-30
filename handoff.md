@@ -13,6 +13,7 @@
 - M4-03、M4-04 也已做完（维护者 10-30：配件维持现价，做完「未归的第七艘船」开稀有配件后期货架，任务太快登记 #153）：后期货架在 `D.lateParts`，二十局样本工具是 `scripts/economy-sample.ts`。细节见 CONTRACTS「价格与收入（M4-03）」「二十局资源样本（M4-04）」。
 - 10-30 Sol 的原厂弹匣图标和 SVD、Vector 分层（`87d0084`）已接入：清单第 8 版，十把枪能拆弹匣；内嵌字体加「期」「稀」两字重新生成。
 - M4-05 也已做完（维护者 10-30：八件白给的轻配件各加小代价）：对比工具 `scripts/build-compare.ts`，搜索与比较在 `scripts/build-search.ts`，守护测试 `tests/gunsmith-balance.test.ts`。细节见 CONTRACTS「配装对比与占优修正（M4-05）」。
+- M4-09 老栓精工（维护者 10-30 新增，#155）也已做完：20 件精品配件在 `catalog.ts`（J01–J20、`PREMIUM_BASES`），定制规则和面板数据在 `src/gunsmith/premium.ts`，件坯掉落在 `enemy-armory.ts` 的 `leaderBlank` 和 `building-world.ts`。美术等 Sol（`docs/gunsmith/art/m4-premium/BRIEF.md`），现在是占位图标，目录门禁对这 20 件开了例外。细节见 CONTRACTS「老栓精工（M4-09）」。
 - 下一步：M4-06 维护者试玩经济节奏。
 
 ## 2026-10-29 SVD 接缝新图接入游戏（#80，PR #149）

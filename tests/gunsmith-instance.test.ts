@@ -113,7 +113,7 @@ test('the largest legal gun still fits the 6x5 bag: every footprint over all bui
         return a.needs.some(n => n.part === id) || (h.provides[a.mount] ?? 0) > 0 || a.requires.some(q => h.grants.includes(q));
     }));
     const candidates = [...grows, ...helpers];
-    assert.deepEqual(grows.sort(), ['G01', 'G02', 'G04', 'G08', 'G09', 'M03', 'M04', 'M07', 'M08', 'M12']);
+    assert.deepEqual(grows.sort(), ['G01', 'G02', 'G04', 'G08', 'G09', 'J06', 'J07', 'J08', 'M03', 'M04', 'M07', 'M08', 'M12']);
     let largest = { gun: '', parts: [] as string[], w: 0, h: 0 }, builds = 0;
     for (const id of GUN_IDS) {
         const visit = (build: Build) => {

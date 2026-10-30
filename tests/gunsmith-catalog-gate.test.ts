@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import * as D from '../src/domain';
-import { ATTACHMENTS, FACTORY_MAGS, GUNS, factoryMagOf, partTier, type GunId } from '../src/gunsmith/catalog';
+import { ATTACHMENTS, FACTORY_MAGS, GUNS, factoryMagOf, isPremium, partTier, type GunId } from '../src/gunsmith/catalog';
 import { checkInstall, validateBuild } from '../src/gunsmith/compat';
 import { buildOf, gunWeight, type PartNode } from '../src/gunsmith/instance';
 import { effectiveStats } from '../src/gunsmith/stats';
@@ -15,6 +15,11 @@ import { artFrame, gunArtLayout } from '../src/art/gunsmith-layout';
 // gun can be built two different ways. The detailed rules live in their own tests; this one checks the whole catalog.
 
 const GUN_IDS = Object.keys(GUNS) as GunId[], PART_IDS = Object.keys(ATTACHMENTS);
+/**
+ * 老栓精工's twenty (#28 M4-09) wait for Sol's pictures (docs/gunsmith/art/m4-premium/BRIEF.md) and show placeholders
+ * until then: the one exception to the art gate, to be emptied when the pictures are in.
+ */
+const ART_PENDING = PART_IDS.filter(isPremium);
 const OLD = ['pistol', 'shotgun', 'carbine'];
 const part = (id: string, kids: PartNode[] = []): PartNode => ({ uid: `gate-${id}`, id, slot: ATTACHMENTS[id].mount, relief: false, children: kids });
 const legal = (gun: GunId, parts: PartNode[]) => validateBuild(buildOf({ id: gun, parts })).ok;
@@ -30,12 +35,12 @@ function fitted(gun: GunId, id: string): PartNode[] | null {
     return null;
 }
 
-test('twenty guns and a hundred parts, every one an item, nothing else in the catalog', () => {
-    assert.equal(GUN_IDS.length, 20); assert.equal(PART_IDS.length, 100);
+test('twenty guns, a hundred parts and 老栓精工\'s twenty, every one an item, nothing else in the catalog', () => {
+    assert.equal(GUN_IDS.length, 20); assert.equal(PART_IDS.length, 120); assert.equal(PART_IDS.filter(isPremium).length, 20);
     for (const id of GUN_IDS) assert.ok(D.isGun(id) && D.ITEMS[id].kind === 'weapon', id);
     for (const id of PART_IDS) assert.ok(D.isAttachment(id) && D.ITEMS[id].kind === 'attachment', id);
     assert.deepEqual(Object.keys(D.ITEMS).filter(id => D.isGun(id)).sort(), [...GUN_IDS].sort());
-    // Besides the hundred, the attachment items are the factory magazines that come off at the workbench (M4-07).
+    // Besides the catalog's parts, the attachment items are the factory magazines that come off at the workbench (M4-07).
     assert.deepEqual(Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && !factoryMagOf(id)).sort(), [...PART_IDS].sort());
     assert.deepEqual(Object.keys(D.ITEMS).filter(id => factoryMagOf(id)), Object.values(FACTORY_MAGS));
 });
@@ -49,7 +54,9 @@ test('art: every gun in the three outputs with its icons and side view, every pa
         // The old three keep their own painted item icons; every other gun has Sol's.
         if (!OLD.includes(gun)) for (const size of ['q24', 'q32']) assert.ok(GUNSMITH_ART[`gs-${gun}-${size}`], `${gun} ${size}`);
     }
-    for (const id of PART_IDS) {
+    assert.deepEqual(ART_PENDING, ['J01', 'J02', 'J03', 'J04', 'J05', 'J06', 'J07', 'J08', 'J09', 'J12', 'J15', 'J10', 'J13', 'J16', 'J17', 'J19', 'J20', 'J11', 'J14', 'J18']);
+    assert.ok(readFileSync('docs/gunsmith/art/m4-premium/BRIEF.md', 'utf8').includes('J20'), 'the pending art has its brief');
+    for (const id of PART_IDS.filter(id => !ART_PENDING.includes(id))) {
         const key = (code: string) => Object.keys(GUNSMITH_ART).some(k => k.startsWith(`gs-${id.toLowerCase()}-${code}`));
         for (const code of ['i', 'w', 'q24']) assert.ok(key(code), `${id} ${code}`);
         // Held rear grips are hidden by the glove (M0 review decision 8): only they may go without a held image.
@@ -78,7 +85,7 @@ test('acquisition: every gun and part is on 老栓\'s shelf or found in a raid, 
     const shelf = new Set(D.MERCHANTS.arms.stock);
     // A profile whose rotating shelf (#28 M4-01) is empty of none: each found part says where it is found.
     const none = { quests: {}, stats: { runs: 0, extracts: 0, kills: 0 } }, rotating = new Set(D.rotationParts(0));
-    for (const id of PART_IDS) assert.match(sourceOf(id, none), shelf.has(id) ? /^修理铺有售/ : rotating.has(id) ? /^修理铺这次的轮换货架有售/ : /^行动中(的高风险处)?可能找到/, id);
+    for (const id of PART_IDS) assert.match(sourceOf(id, none), shelf.has(id) ? /^修理铺有售/ : rotating.has(id) ? /^修理铺这次的轮换货架有售/ : isPremium(id) ? /^只能找老栓定制 · ¥ \d+，另交一件底料和精工件坯$/ : /^行动中(的高风险处)?可能找到/, id);
     // Once the ledger quest is done the rare parts come round on the late shelf too (#28 M4-03).
     const late = { quests: { ledger: true }, stats: { runs: 0, extracts: 0, kills: 0 } }, lateNow = new Set(D.lateParts(0));
     for (const id of PART_IDS.filter(id => partTier(ATTACHMENTS[id]) === 'rare')) assert.match(sourceOf(id, late), lateNow.has(id) ? /^修理铺这次的后期货架有售/ : /修理铺的后期货架有时也有$/, id);

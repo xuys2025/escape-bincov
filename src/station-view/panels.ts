@@ -4,6 +4,7 @@ import { countyMapHtml, deploymentRegion, deploymentWorld, regionBriefHtml, type
 import type { Attribute, CartView, FacilityInfo, HideoutSnapshot, PerkBoard, RunWorld, TrainingProgress } from '../hideout-runtime/contract';
 import { ATTRIBUTE_NAMES, PERK_UI, critContext, critView, perkPanel, perkWaiting, type CritView, type PerkCardView, type PerkPanelView, type PerkPreviewView } from '../perk-copy';
 import { RECIPES } from '../expansion-state';
+import { PREMIUM_LOCKED_NOTE, PREMIUM_OPEN_NOTE, premiumOrders } from '../gunsmith/premium';
 import { shopQuote, type ShopQuote, type ShopSource } from '../shop';
 import { itemArt } from './items';
 import { itemPicture } from '../art/item-images';
@@ -218,8 +219,19 @@ export function facilityHtml(f: FacilityInfo, s: HideoutSnapshot, training: Trai
     <h4>生产队列 ${b.queue.length} / ${f.level}</h4>${b.queue.map((q, i) => `<div class="row">${icon(q.recipe, 24)}<span><b>${esc(D.ITEMS[q.recipe].name)}</b><small>${i === 0 ? q.remaining === 0 ? '等待成品位' : `剩余 ${fmt(q.remaining)}` : '等待生产'}</small><i class="prog" style="width:${(1 - q.remaining / q.duration) * 100}%"></i></span>${i ? btn('取消并退款', `cancel:${q.id}`, 'mini') : ''}</div>`).join('') || '<p class="muted">队列空闲。</p>'}
     <h4>成品 ${b.completed.length} / 3</h4>${b.completed.map(q => `<div class="row ready">${icon(q.recipe, 24)}<span><b>${q.result.map(r => `${esc(D.ITEMS[r.id].name)} × ${r.qty}`).join('、')}</b><small>领取到</small></span>${btn('仓库', `claim:${q.id}:stash`, 'mini')}${btn('背包', `claim:${q.id}:bag`, 'mini')}${btn('安全箱', `claim:${q.id}:safe`, 'mini')}</div>`).join('') || '<p class="muted">还没有成品。</p>'}`;
   }
+  if (f.id === 'workbench') extra += premiumHtml(s);
   if (f.id === 'blackmarket' && f.level) extra = '<p class="muted">船上的人只收货、不卖货。货单尚未开放。</p>';
   return `<div class="facility"><div class="lvl"><span class="pips">${pips}</span><b>${f.level ? `${f.level} 级` : '未修建'}</b></div><p>${esc(f.explanation)}</p>${costHtml}${extra}</div>`;
+}
+/**
+ * 老栓精工 (#28 M4-09): the order list under the workbench. Locked, one line says what opens it and what he makes; open,
+ * a row per part (those for the player's guns first) with its guns, the base he would take and the price, and the
+ * button greyed with the reason when it cannot be made now.
+ */
+function premiumHtml(s: HideoutSnapshot) {
+  const o = premiumOrders(s.profile as D.SaveDataV1, s);
+  const rows = o.rows.map(r => `<div class="row premium">${icon(r.id, 24)}<span><b>${esc(r.name)}</b><small>${esc(r.guns)} · 底料 ${esc(r.base ?? r.bases)} · ¥ ${r.price}${r.why ? ` · <em class="bad">${esc(r.why)}</em>` : ''}</small></span>${btn('定制', `premium:${r.id}`, 'mini', r.why ? 'disabled' : '')}</div>`).join('');
+  return `<h4>老栓精工定制 <small>精工件坯 ${o.blanks} 份</small></h4>${o.lock ? `<p class="muted">${esc(o.lock)}${esc(PREMIUM_LOCKED_NOTE)}</p>` : `<p class="muted">${esc(PREMIUM_OPEN_NOTE)}</p>${rows}`}`;
 }
 const fmt = (sec: number) => sec >= 60 ? `${Math.floor(sec / 60)} 分 ${Math.floor(sec % 60)} 秒` : `${Math.ceil(sec)} 秒`;
 

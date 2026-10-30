@@ -21,6 +21,8 @@ import { checkInstall } from '../src/gunsmith/compat';
 import { planGunEdit } from '../src/gunsmith/edit';
 import { buildOf, nodesOf } from '../src/gunsmith/instance';
 import { merchantStock } from '../src/shop';
+import { buildFacility, FACILITY_COSTS } from '../src/base';
+import { craftPremium, premiumBases, premiumBlanks, premiumLock, premiumPrice, PREMIUM_BLANK, PREMIUM_IDS } from '../src/gunsmith/premium';
 
 const arg = (name: string, fallback: string) => process.argv.find(a => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const CAMPAIGNS = Number(arg('campaigns', '40')), RUNS = Number(arg('runs', '20')), OUT = arg('out', ''), PARTS = Number(arg('parts', '1')),
@@ -52,6 +54,8 @@ interface RunRow {
     cash: number; worth: number; gun: string; parts: number; loose: number; idle: number; looseValue: number;
     stashUse: number; idleSold: number; ammoBought: number; ammoFound: number; ammoUsed: number; spentParts: number; spentGuns: number;
     quests: string[];
+    /** 老栓精工 (#28 M4-09): blanks brought home this raid, the workbench level, premium parts made so far and on the gun. */
+    blanks: number; workbench: number; made: number; handPremium: number;
 }
 
 function campaign(index: number): RunRow[] {
@@ -61,10 +65,12 @@ function campaign(index: number): RunRow[] {
     state.state = 'hideout';
     if (!saves.enableRpg()) throw Error('rpg');
     const random = D.seededRandom(0x4d340004 + index * 977), rows: RunRow[] = [];
+    let made = 0;
     for (let run = 1; run <= RUNS; run++) {
         const spent = base(state);
+        made += spent.made;
         const hand = state.save.equipment.weapon ?? '-', handNodes = state.save.equipment.gun ? nodesOf(state.save.equipment.gun.parts) : [];
-        const handParts = handNodes.length, handRare = handNodes.filter(n => TIER.get(n.id) === 'rare').length;
+        const handParts = handNodes.length, handRare = handNodes.filter(n => TIER.get(n.id) === 'rare').length, handPremium = handNodes.filter(n => TIER.get(n.id) === 'premium').length;
         const world = random() < .5 ? 'street' as const : 'mall' as const, seed = index * 1000 + run;
         if (!saves.beginRun(seed, world === 'mall' ? 'mall' : true, world === 'mall' ? { mallLayout: 4 } : {})) throw Error(`deploy ${index}/${run}: ${D.deployBlocker(state.save) ?? state.storageError}`);
         const raid = play(state, random);
@@ -82,6 +88,7 @@ function campaign(index: number): RunRow[] {
             stashUse: stashUse(save), idleSold: spent.idleSold,
             ammoBought: spent.ammo, ammoFound: raid.found, ammoUsed: raid.used, spentParts: spent.parts, spentGuns: spent.guns,
             quests: Object.keys(save.quests).filter(k => save.quests[k]),
+            blanks: raid.outcome === 'extract' ? raid.blanks : 0, workbench: state.expansion!.base.facilities.workbench, made, handPremium,
         });
     }
     return rows;
@@ -100,9 +107,12 @@ const stashUse = (save: D.SaveDataV1) => save.stash.items.reduce((n, i) => { con
 /** The base between raids: quests, stash, the best gun and its parts, selling, then shopping. Returns what it spent. */
 function base(state: Session) {
     let save = state.save;
-    const spent = { ammo: 0, parts: 0, guns: 0, short: false, idleSold: 0 };
+    const spent = { ammo: 0, parts: 0, guns: 0, short: false, idleSold: 0, made: 0 };
     for (const id of Object.keys(D.QUESTS)) D.submitQuest(save, id);
     if (save.quests.repair && !save.upgraded && save.cash >= D.STASH_UPGRADE_COST + HABITS.reserve) D.upgradeStash(save);
+    // The workbench, a level at a time, once the power is back and the cash and the repair parts are there (M4-09's orders need level 3).
+    const bench = state.expansion!.base.facilities.workbench, cost = FACILITY_COSTS.workbench[bench];
+    if (cost && save.quests.repair && save.cash >= cost.cash + HABITS.reserve) buildFacility(save, state.expansion!, 'workbench');
     // Unpack the bag into the stash; what does not fit is sold.
     for (const item of [...save.bag.items]) {
         save.bag.items.splice(save.bag.items.indexOf(item), 1);
@@ -124,7 +134,7 @@ function base(state: Session) {
     const kept = owned(save), fires = new Set(kept.map(g => D.WEAPONS[g].ammo));
     const clutter: ((i: D.Item) => boolean)[] = [
         i => D.ITEMS[i.id].kind === 'ammo' && !fires.has(i.id),
-        i => D.ITEMS[i.id].kind === 'part' && !wanted.has(i.id),
+        i => D.ITEMS[i.id].kind === 'part' && !wanted.has(i.id) && i.id !== PREMIUM_BLANK && !workbenchNeeds(state).has(i.id),
         i => (i.id === 'food' || i.id === 'water') && D.count(save.stash, i.id) > 2,
         i => Object.hasOwn(ATTACHMENTS, i.id) && !kept.some(g => fitsGun(g, i.id)),
     ];
@@ -167,12 +177,24 @@ function base(state: Session) {
         save.cash -= price; spent.parts += price;
         save = state.save = fit(save);
     }
+    // 老栓精工 (#28 M4-09): once he takes orders, a premium part for the gun in hand from a loose base, the dearest first.
+    if (gun && D.isGun(gun) && !premiumLock(save, state.expansion!)) for (const id of [...PREMIUM_IDS].sort((a, b) => premiumPrice(b) - premiumPrice(a))) {
+        if (premiumBlanks(save) < 1 || save.cash < premiumPrice(id) + HABITS.reserve || !premiumBases(save, id).length || !swap(save, id)) continue;
+        if (craftPremium(save, state.expansion!, id)) continue;
+        spent.parts += premiumPrice(id); spent.made++;
+        save = state.save = fit(save);
+    }
     // Pack the kit: the gun's rounds and the meds go from the stash into the bag.
     for (const id of [ammo, 'bandage', 'medkit'].filter((id): id is string => !!id)) {
         const n = D.count(save.stash, id);
         if (n && D.removeItem(save.stash, id, n)) { const left = D.addItem(save.bag, id, n); if (left) D.addItem(save.stash, id, left); }
     }
     return spent;
+}
+/** The repair parts the next workbench level still takes: kept through a clean-up. */
+function workbenchNeeds(state: Session): Set<string> {
+    const cost = FACILITY_COSTS.workbench[state.expansion!.base.facilities.workbench];
+    return new Set(cost ? cost.items.map(i => i.id) : []);
 }
 function sell(save: D.SaveDataV1, item: D.Item) {
     for (const inv of [save.stash, save.bag]) { const at = inv.items.indexOf(item); if (at >= 0) inv.items.splice(at, 1); }
@@ -207,7 +229,7 @@ function fit(save: D.SaveDataV1): D.SaveDataV1 {
 function play(state: Session, random: () => number) {
     const e = state.expansion!, raid = e.raid!, loadout = state.loadout!;
     const weapon = D.equippedWeapon(loadout), ammo = weapon.ammo, needed = neededQuestItems(state.save);
-    let kills = 0, dry = false, used = 0, found = 0, rare = 0, outcome: D.Outcome = 'extract';
+    let kills = 0, dry = false, used = 0, found = 0, rare = 0, blanks = 0, outcome: D.Outcome = 'extract';
     const rounds = () => ammo ? loadout.ammo + D.count(loadout.bag, ammo) : 0;
     const spend = (n: number) => {
         const fromMag = Math.min(n, loadout.ammo);
@@ -235,18 +257,19 @@ function play(state: Session, random: () => number) {
         for (const c of map.containers) if (c.kind === 'corpse' || random() < HABITS.search) take.push(...c.inventory.items);
     }
     // Quest items into the safe first, then the gun's own rounds, meds, and the rest by value per cell.
-    const rank = (i: D.Item) => needed.has(i.id) ? 1e9 : i.id === ammo ? 1e8 : ['bandage', 'medkit'].includes(i.id) ? 1e7 : value(i) / Math.max(1, cells(i));
+    const rank = (i: D.Item) => needed.has(i.id) || i.id === PREMIUM_BLANK ? 1e9 : i.id === ammo ? 1e8 : ['bandage', 'medkit'].includes(i.id) ? 1e7 : value(i) / Math.max(1, cells(i));
     let brought = 0;
     for (const item of take.filter(i => !i.relief).sort((a, b) => rank(b) - rank(a))) {
         const copy = structuredClone(item);
         if (D.isGun(item.id) && D.placeGroundGun(loadout.bag, { uid: item.uid, id: item.id, gun: item.gun, relief: false })) { brought += value(item); continue; }
         if (D.isGun(item.id)) continue;
-        const into = needed.has(item.id) && D.placeItem(loadout.safe, copy) ? 'safe' : D.addItem(loadout.bag, item.id, item.qty) === 0 ? 'bag' : null;
+        const into = (needed.has(item.id) || item.id === PREMIUM_BLANK) && D.placeItem(loadout.safe, copy) ? 'safe' : D.addItem(loadout.bag, item.id, item.qty) === 0 ? 'bag' : null;
         if (!into) continue;
+        if (item.id === PREMIUM_BLANK) blanks += item.qty;
         if (item.id === ammo) found += item.qty; else if (!needed.has(item.id)) brought += value(item);
         if (Object.hasOwn(ATTACHMENTS, item.id) && TIER.get(item.id) === 'rare') rare++;
     }
-    return { outcome, kills, dry, used, found, rare, brought };
+    return { outcome, kills, dry, used, found, rare, blanks, brought };
 }
 const cells = (i: D.Item) => { const s = D.itemSize(i); return s.w * s.h; };
 function neededQuestItems(save: D.SaveDataV1): Set<string> {
@@ -288,6 +311,12 @@ const summary = {
     questRun: Object.fromEntries(Object.keys(D.QUESTS).map(q => [q, pct(all.map(c => c.find(x => x.quests.includes(q))?.run ?? Infinity), .5)])),
     idleParts: { median: pct(all.map(c => c.at(-1)!.idle), .5), p90: pct(all.map(c => c.at(-1)!.idle), .9), soldPer20: +(flat.reduce((n, x) => n + x.idleSold, 0) / CAMPAIGNS * 20 / RUNS).toFixed(1) },
     rareBroughtPer20: +(all.reduce((n, c) => n + c.reduce((m, x) => m + x.rare, 0), 0) / CAMPAIGNS * 20 / RUNS).toFixed(2),
+    premium: {
+        blanksBroughtPer20: +(all.reduce((n, c) => n + c.reduce((m, x) => m + x.blanks, 0), 0) / CAMPAIGNS * 20 / RUNS).toFixed(2),
+        workbench3By: pct(all.map(c => c.find(x => x.workbench >= 3)?.run ?? Infinity), .5),
+        madeBy20: [.1, .5, .9].map(p => pct(all.map(c => c.at(-1)!.made), p)),
+        onGunAt20: [.1, .5, .9].map(p => pct(all.map(c => c.at(-1)!.handPremium), p)),
+    },
 };
 console.log(JSON.stringify(summary, null, 1));
 if (OUT) writeFileSync(OUT, JSON.stringify({ habits: HABITS, campaigns: CAMPAIGNS, runs: RUNS, parts: PARTS, lateShelf: LATE, perRun, summary }, null, 1) + '\n');

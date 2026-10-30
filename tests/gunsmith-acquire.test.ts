@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import * as D from '../src/domain';
 import * as Shop from '../src/shop';
-import { ATTACHMENTS, GUNS, partTier } from '../src/gunsmith/catalog';
+import { ATTACHMENTS, GUNS, isPremium, partTier } from '../src/gunsmith/catalog';
 import { factoryState } from '../src/gunsmith/instance';
 import { buildingRunConfig, initializeBuildingRaid } from '../src/building-world';
 import { initializeMallRaid, mallRunConfig, mallWorldV3 } from '../src/mall-world';
@@ -25,8 +25,9 @@ import { TILE, WORLD, type RunConfig } from '../src/world';
 // and M3-05/06 the other seven guns (found), their three ammunition groups (on the shelf, and carved from gun records)
 // and the other 34 parts.
 
-// The catalog's parts; a factory magazine (#28 M4-07) only ever comes off a gun, never from a shelf or a find.
-const PARTS = Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && Object.hasOwn(ATTACHMENTS, id));
+// The catalog's hundred parts; a factory magazine (#28 M4-07) only ever comes off a gun, and 老栓精工's parts (M4-09) are
+// only made to order (tests/gunsmith-premium.test.ts), never from a shelf or a find.
+const PARTS = Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && Object.hasOwn(ATTACHMENTS, id) && !isPremium(id));
 const BASIC = ['P01', 'F01', 'A07', 'A01', 'A02', 'A04', 'A05', 'A06', 'A08', 'H03', 'P04', 'P07', 'M01', 'M05', 'F04', 'O12', 'P08', 'G02', 'T07', 'A03'];
 const RARE = ['O08', 'M03', 'B08', 'G09', 'M07', 'O10', 'T10', 'O09', 'O11', 'M04', 'M08', 'M12', 'B10', 'T03', 'T09'], SHELF_COMMON = ['O01', 'G01'];
 /** Wave two's rounds (#28 M3-05): on the shelf, and one pack now and then out of a gun record. */
@@ -47,16 +48,16 @@ const flooded = (p: { x: number; y: number }) => WORLD.tiles[Math.floor(p.y / TI
 const amounts = (units: Unit[]) => units.reduce((a, u) => ({ ...a, [u.id]: (a[u.id] ?? 0) + u.qty }), {} as Record<string, number>);
 
 test('tiers: the price bands of PLAN section 10 sort the 100 parts 20/65/15, and every one is an item', () => {
-    const count = { basic: 0, common: 0, rare: 0 };
+    const count = { basic: 0, common: 0, rare: 0, premium: 0 };
     for (const a of Object.values(ATTACHMENTS)) count[partTier(a)]++;
-    assert.deepEqual(count, { basic: 20, common: 65, rare: 15 });
+    assert.deepEqual(count, { basic: 20, common: 65, rare: 15, premium: 20 });
     // The band edges: 150 is still basic, 450 still common.
     assert.deepEqual([40, 150, 151, 450, 451, 1200].map(buy => partTier({ buy })), ['basic', 'basic', 'common', 'common', 'rare', 'rare']);
     assert.deepEqual(PARTS.filter(id => partTier(ATTACHMENTS[id]) === 'basic'), BASIC);
     assert.deepEqual(PARTS.filter(id => partTier(ATTACHMENTS[id]) === 'rare'), RARE);
     // Since #28 M3-06 every catalog part is an item. 65 common: 63 found, and the G17's O01 and G01 on the shelf (M2
     // review 2026-10-27).
-    assert.deepEqual([...PARTS].sort(), Object.keys(ATTACHMENTS).sort());
+    assert.deepEqual([...PARTS].sort(), Object.keys(ATTACHMENTS).filter(id => !isPremium(id)).sort());
     assert.deepEqual(PARTS.filter(id => partTier(ATTACHMENTS[id]) === 'common'), PARTS.filter(id => COMMON.includes(id) || SHELF_COMMON.includes(id)));
     assert.deepEqual([COMMON.length, SHELF_COMMON.length], [63, 2]);
     // The found guns follow the catalog's tiers.
@@ -179,10 +180,11 @@ test('zone finds leave every other record as on main: quest, food, medicine and 
         const config = buildingRunConfig(seed), all = records(config);
         assert.equal(before.ids.map(id => all.filter(r => r.id === id).reduce((n, r) => n + r.qty, 0)).join(','), before.units[seed - 1], `seed ${seed}`);
         const masked = structuredClone(config);
-        // A pack of wave two's rounds replaced a gun record (#28 M3-05), which held one.
+        // A pack of wave two's rounds replaced a gun record (#28 M3-05), which held one. A 精工件坯 (M4-09) took a flooded
+        // valuable's place.
         for (const r of records(masked)) {
             if (NEW_AMMO.includes(r.id)) { r.id = '*'; r.qty = 1; }
-            else if (['weapon', 'valuable', 'attachment'].includes(D.ITEMS[r.id].kind)) r.id = '*';
+            else if (['weapon', 'valuable', 'attachment'].includes(D.ITEMS[r.id].kind) || r.id === 'premiumBlank') r.id = '*';
         }
         hash.update(JSON.stringify(masked) + '\n');
     }

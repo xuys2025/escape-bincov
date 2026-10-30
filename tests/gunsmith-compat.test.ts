@@ -38,8 +38,9 @@ const REACH = (() => {
     return out;
 })();
 
-test('all 2000 gun x attachment pairs match the docs, on the bare gun and once a base, handguard or prerequisite is in', () => {
-    assert.equal(REACH.size, 2000);
+test('all 2400 gun x attachment pairs match the docs, on the bare gun and once a base, handguard or prerequisite is in', () => {
+    // The hundred and 老栓精工's twenty (#28 M4-09) on each of the twenty guns.
+    assert.equal(REACH.size, 2400);
     const wrong: string[] = [];
     for (const gun of DOCS.guns) for (const part of DOCS.parts) {
         const want = docExpectation(gun.id, part.id), got = REACH.get(`${gun.id} ${part.id}`)!;

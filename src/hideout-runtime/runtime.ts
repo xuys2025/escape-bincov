@@ -13,6 +13,7 @@ import { generateRun } from '../world';
 import { SaveSession, type SessionState, type ExpansionDraft, type ExpansionTransaction } from '../session';
 import { locateGun, planGunEdit, type GunEdit, type GunEditFault, type GunEditPlan, type GunEditPreview } from '../gunsmith/edit';
 import { PRESET_LIMIT, PRESET_NAME_MAX, defaultPresetName, presetName, validPreset, type GunPreset, type PresetNode } from '../gunsmith/presets';
+import { craftPremium, premiumLock, PREMIUM_REFUSALS } from '../gunsmith/premium';
 import { validPractice } from './training';
 import type * as C from './contract';
 const ok = (): C.Result => ({ ok: true });
@@ -313,6 +314,14 @@ export class RealHideoutRuntime implements C.HideoutRuntime {
             const r = RECIPES[recipe], b = d.expansion.base;
             if (b.facilities.workbench < r.level || b.facilities.medical < r.medical || b.queue.length >= b.facilities.workbench) return fail('locked');
             return d.profile.cash < r.cash ? fail('funds') : B.enqueueProduction(d.profile, d.expansion, recipe) || fail('materials');
+        });
+    }
+    /** 老栓精工 (#28 M4-09): make premium part `id` now from a base part, a blank and its price; one write or none. */
+    craftPremium(id: string): C.Result {
+        const blocked = this.guard(); if (blocked) return blocked;
+        return this.transaction('premium', d => {
+            const refusal = craftPremium(d.profile, d.expansion, id);
+            return !refusal ? true : fail(refusal, refusal === 'locked' ? premiumLock(d.profile, d.expansion)! : PREMIUM_REFUSALS[refusal]);
         });
     }
     cancel(batchId: string) { return this.transaction('cancel', d => d.expansion.base.queue.findIndex(b => b.id === batchId) <= 0 ? fail('rule') : B.cancelProduction(d.profile, d.expansion, batchId) || fail('space')); }

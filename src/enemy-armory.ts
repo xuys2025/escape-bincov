@@ -11,6 +11,7 @@ import { checkInstall, type Part } from './gunsmith/compat';
 import { presetOf, type PresetNode } from './gunsmith/presets';
 import type { PartNode } from './gunsmith/instance';
 import type { LayeredRaid } from './expansion-state';
+import { PREMIUM_BLANKS } from './gunsmith/premium';
 
 /** Each armed archetype's guns with their weights (maintainer's table, #140); a weight of 1 against 3 or 4 is 「少数」. */
 export const ARMORY: Readonly<Record<string, readonly (readonly [GunId, number])[]>> = (() => {
@@ -36,7 +37,7 @@ export const armoryGuns = (id: string): GunId[] => (ARMORY[id] ?? []).map(([gun]
  * The parts a leader's gun may carry: the basic and common catalog parts (rare ones stay finds at high-risk spots), each
  * placed where compat puts it first.
  */
-const FIT_PARTS = Object.keys(ATTACHMENTS).filter(id => partTier(ATTACHMENTS[id]) !== 'rare');
+const FIT_PARTS = Object.keys(ATTACHMENTS).filter(id => ['basic', 'common'].includes(partTier(ATTACHMENTS[id])));
 
 /** A stream for one enemy of one raid: FNV-1a of the seed and the uid, so it depends on nothing else. */
 function streamOf(seed: number, uid: string) {
@@ -44,6 +45,11 @@ function streamOf(seed: number, uid: string) {
     for (const c of `${seed}:${uid}`) h = Math.imul(h ^ c.charCodeAt(0), 0x01000193) >>> 0;
     return D.seededRandom(h);
 }
+/**
+ * Whether the body of `enemyId` (uid `uid`) in the raid of `seed` holds a 精工件坯 (#28 M4-09): only a leader's, by a
+ * stream of the seed and the uid alone, so a body yields the same however and whenever it falls.
+ */
+export const leaderBlank = (seed: number, enemyId: string, uid: string) => ARMED_LEADERS.has(enemyId) && streamOf(seed, `${uid}:blank`)() < PREMIUM_BLANKS.leader;
 /** One to three parts that go on `gun` one after another, each where compat places it, as a preset tree. */
 function fitFor(gun: GunId, random: () => number): PresetNode[] {
     const parts: Part[] = [];

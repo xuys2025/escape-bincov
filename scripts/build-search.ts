@@ -5,8 +5,12 @@
  * "Dominates" is read on the numbers behind the workbench's seven rows (NUMBERS), not on the rows themselves: those
  * round, and feed folds capacity and reload into one, so a cost can hide in them (a short barrel's wider pellets, a
  * quick magazine's fewer rounds).
+ *
+ * 老栓精工's made-to-order parts (#28 M4-09, maintainer 2026-10-30) are meant to lead the parts they are made from in
+ * everything but weight: the four kinds are searched over the ordinary parts, and a premium part beating an ordinary one
+ * is no finding. They must still cost something against the factory gun, as every part.
  */
-import { ATTACHMENTS, GUNS, type AttachmentDef, type GunId, type Slot } from '../src/gunsmith/catalog';
+import { ATTACHMENTS, GUNS, isPremium, type AttachmentDef, type GunId, type Slot } from '../src/gunsmith/catalog';
 import { checkInstall, MAX_PARTS, type Build } from '../src/gunsmith/compat';
 import { benchStats, type BenchNumbers, type BenchScores } from '../src/gunsmith/bench';
 
@@ -32,8 +36,8 @@ const way = (a: Measured, b: Measured, k: keyof Measured, up: number) => {
 /** `a` is no worse than `b` in any of the numbers and better in one. */
 export const dominates = (a: Measured, b: Measured) => NUMBERS.every(([k, up]) => way(a, b, k, up) >= 0) && NUMBERS.some(([k, up]) => way(a, b, k, up) > 0);
 
-/** The parts that can go on `gun` in some build: its own, and the rail parts. */
-export const partsFor = (gun: GunId) => Object.values(ATTACHMENTS).filter(a => !a.guns || a.guns.includes(gun)).map(a => a.id);
+/** The parts that can go on `gun` in some build: its own, and the rail parts; 老栓精工's too with `premium`. */
+export const partsFor = (gun: GunId, premium = false) => Object.values(ATTACHMENTS).filter(a => (!a.guns || a.guns.includes(gun)) && (premium || !isPremium(a.id))).map(a => a.id);
 const value = (aim: Aim, b: Build) => { const s = benchStats(b); return aim(s.scores, s.stats.weapon.magazine); };
 /** Beam search from the bare gun: each step adds one part wherever it fits; the best build by `aim` seen anywhere wins. */
 export function search(gun: GunId, aim: Aim, width = 24): Build {
@@ -87,14 +91,14 @@ export function findings(gun: GunId, kinds = kindsOf(gun)): string[] {
         const at = checkInstall(base, id);
         return at.ok ? { gun, parts: [...base.parts, { uid: `p${base.parts.length}`, id, parent: at.at.parent, slot: at.at.slot }] } : null;
     };
-    for (const id of partsFor(gun)) {
+    for (const id of partsFor(gun, true)) {
         const one = with1(factory, id);
         if (!one) continue;
         if (dominates(measured(one), bare)) out.push(`${gun}: ${id} costs nothing`);
         // The parts it opens a place for, against it alone.
         if (!Object.keys(ATTACHMENTS[id].provides).length) continue;
         const alone = measured(one);
-        for (const child of partsFor(gun)) {
+        for (const child of partsFor(gun, true)) {
             if (with1(factory, child)) continue;
             const two = with1(one, child);
             if (two && dominates(measured(two), alone)) out.push(`${gun}: ${child} costs nothing on ${id}`);
@@ -120,7 +124,7 @@ function compare(a: AttachmentDef, b: AttachmentDef): number[] {
     cmp(a.mods.suppressor ? 1 : 0, b.mods.suppressor ? 1 : 0, true);
     cmp(Object.values(a.provides).reduce((n, x) => n + x, 0), Object.values(b.provides).reduce((n, x) => n + x, 0), true);
     cmp(a.grants.length, b.grants.length, true);
-    cmp(b.requires.length + b.needs.length, a.requires.length + a.needs.length, false);
+    cmp(a.requires.length + a.needs.length, b.requires.length + b.needs.length, false);
     const braced = (m: AttachmentDef['mods'], f: string) => (m.braced as Record<string, number> | undefined)?.[f] ?? 1;
     for (const f of FACTORS) cmp(braced(a.mods, f), braced(b.mods, f), HIGHER.has(f));
     cmp(a.mods.laser ? 1 / a.mods.laser.hip : 0, b.mods.laser ? 1 / b.mods.laser.hip : 0, true);
@@ -129,14 +133,27 @@ function compare(a: AttachmentDef, b: AttachmentDef): number[] {
     cmp(b.mods.spot ?? 1, a.mods.spot ?? 1, true);
     return out;
 }
-/** Pairs on one mount that share a gun, where the first is no worse in anything and better in something. */
+/**
+ * Pairs on one mount that share a gun, where the first is no worse in anything and better in something; a 老栓精工 part
+ * ahead of an ordinary one is meant to be (M4-09) and left out.
+ */
 export function dominatedPairs() {
     const all = Object.values(ATTACHMENTS), out: { better: string; worse: string; mount: Slot; guns: GunId[] }[] = [];
     for (const a of all) for (const b of all) {
-        if (a === b || a.mount !== b.mount) continue;
+        if (a === b || a.mount !== b.mount || isPremium(a.id) && !isPremium(b.id)) continue;
         const guns = (Object.keys(GUNS) as GunId[]).filter(g => (!a.guns || a.guns.includes(g)) && (!b.guns || b.guns.includes(g)));
         const c = compare(a, b);
         if (guns.length && c.every(x => x >= 0) && c.some(x => x > 0)) out.push({ better: a.id, worse: b.id, mount: a.mount, guns });
     }
     return out;
+}
+
+/**
+ * A 老栓精工 part against each ordinary part it is made from (PREMIUM_BASES): the counts on which it is worse, among
+ * the factors, magazine, view, suppression, slots opened and devices (weight and length are its allowed costs).
+ */
+export function behindBase(premium: string, base: string): string[] {
+    const names = [...FACTORS, 'magazine', 'weight', 'grow', 'view', 'modes', 'suppressor', 'provides', 'grants', 'requires',
+        ...FACTORS.map(f => `braced.${f}`), 'laser', 'laserRange', 'light', 'spot'];
+    return compare(ATTACHMENTS[premium], ATTACHMENTS[base]).flatMap((c, i) => c < 0 && !['weight', 'grow'].includes(names[i]) ? [names[i]] : []);
 }

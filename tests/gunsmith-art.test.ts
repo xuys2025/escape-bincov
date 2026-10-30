@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import * as D from '../src/domain';
-import { ATTACHMENTS, GUNS, type GunId } from '../src/gunsmith/catalog';
+import { ATTACHMENTS, GUNS, isPremium, type GunId } from '../src/gunsmith/catalog';
 import { checkInstall, validateBuild } from '../src/gunsmith/compat';
 import { buildOf, gunSize, type PartNode } from '../src/gunsmith/instance';
 import { GUNSMITH_ART, GUNSMITH_ART_REVISION, GUNSMITH_VIRTUAL } from '../src/art/gunsmith-art-meta';
@@ -153,8 +153,9 @@ function fitted(gun: GunId, id: string, items: readonly string[]): PartNode[] | 
 }
 
 test('every part that is an item has a mount in all three outputs on each gun with art it fits, within the size limits', () => {
-    // A factory magazine (#28 M4-07) is the gun's factory layer, not a part with its own images.
-    const parts = Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && Object.hasOwn(ATTACHMENTS, id));
+    // A factory magazine (#28 M4-07) is the gun's factory layer, not a part with its own images. 老栓精工's twenty (M4-09)
+    // wait for Sol's pictures (docs/gunsmith/art/m4-premium/BRIEF.md; the catalog gate holds that list).
+    const parts = Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && Object.hasOwn(ATTACHMENTS, id) && !isPremium(id));
     const checked: string[] = [];
     assert.deepEqual(Object.keys(GUNS).filter(g => artFrame(g, 'h')).sort(), [...ART_GUNS].sort());
     for (const gun of ART_GUNS) {

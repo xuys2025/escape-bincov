@@ -4,7 +4,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import * as D from '../src/domain';
 import * as Shop from '../src/shop';
-import { ATTACHMENTS, GUNS, partTier } from '../src/gunsmith/catalog';
+import { ATTACHMENTS, GUNS, isPremium, partTier } from '../src/gunsmith/catalog';
 import { buildOf, factoryState, gunWeight, isGunId, type PartNode } from '../src/gunsmith/instance';
 import { effectiveStats } from '../src/gunsmith/stats';
 import { coneOf } from '../src/shooting';
@@ -80,21 +80,24 @@ function free(inv: D.Inventory, id: string) {
 }
 
 test('the 100 attachments that are items are made from the catalog: function name, footprint, weight, prices, one per item', () => {
-    // The factory magazines (#28 M4-07) are attachment items too, outside the catalog's hundred.
-    assert.deepEqual(Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && Object.hasOwn(ATTACHMENTS, id)), ITEM_PARTS);
-    for (const id of ITEM_PARTS) {
+    // The factory magazines (#28 M4-07) are attachment items too, outside the catalog's hundred, and so are 老栓精工's
+    // twenty (M4-09), after them in the catalog's order.
+    assert.deepEqual(Object.keys(D.ITEMS).filter(id => D.isAttachment(id) && Object.hasOwn(ATTACHMENTS, id) && !isPremium(id)), ITEM_PARTS);
+    const premium = Object.keys(ATTACHMENTS).filter(isPremium);
+    assert.deepEqual(Object.keys(D.ITEMS).filter(id => isPremium(id)), [...premium].sort());
+    for (const id of [...ITEM_PARTS, ...premium]) {
         const a = ATTACHMENTS[id], item = D.ITEMS[id];
         assert.deepEqual({ name: item.name, w: item.w, h: item.h, weight: item.weight, stack: item.stack, buy: item.buy, sell: item.sell, kind: item.kind },
             // A rare part sells on the late shelf only, at RARE_MARKUP times its catalog price (#28 M4-03).
             { name: a.name, w: a.w, h: a.h, weight: a.weight, stack: 1, buy: partTier(a) === 'rare' ? Math.round(a.buy * D.RARE_MARKUP / 10) * 10 : a.buy, sell: a.sell, kind: 'attachment' }, id);
         // The brand shows only in the details (maintainer, 2026-10-12): never in the name, the cell label or the description.
-        assert.ok(!/北堤|盐湾|滨机/.test(item.name + item.short + item.description), id);
+        assert.ok(!/北堤|盐湾|滨机|老栓精工/.test(item.name + item.short + item.description), id);
         // The cell label fits the cell: three characters in one cell, four in two.
         assert.ok([...item.short].length <= (item.w === 1 ? 3 : 4), `${id} ${item.short}`);
         assert.equal(D.isGun(id), false, id);
     }
-    // Every catalog part is an item since #28 M3-06; nothing else is an attachment.
-    assert.deepEqual([...ITEM_PARTS].sort(), Object.keys(ATTACHMENTS).sort());
+    // Every catalog part is an item since #28 M3-06, 老栓精工's too (M4-09); nothing else is an attachment.
+    assert.deepEqual([...ITEM_PARTS, ...premium].sort(), Object.keys(ATTACHMENTS).sort());
     for (const id of ['Z99', 'pistol', 'ammo9', 'ammo45', 'toString', '__proto__', '', null]) assert.equal(D.isAttachment(id), false, String(id));
     // Never stacked: two of a part are two items under two uids, no gun state, and a move never merges them.
     const inv = D.createInventory(6, 5);
@@ -105,9 +108,11 @@ test('the 100 attachments that are items are made from the catalog: function nam
     assert.equal(inv.items.length, 2);
 });
 
-test('loose footprints (M0 review decision 9): long parts take 2x1, every other part 1x1, across all 100', () => {
+test('loose footprints (M0 review decision 9): long parts take 2x1, every other part 1x1, across all 120', () => {
     const LONG = ['O08', 'O09', 'O10', 'O11', 'M03', 'M04', 'M07', 'M08', 'M12', 'B03', 'B04', 'B05', 'B06', 'B07', 'B08', 'B09', 'B10',
-        'H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07', 'H08', 'H09', 'H10', 'S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'F08', 'G09'];
+        'H01', 'H02', 'H03', 'H04', 'H05', 'H06', 'H07', 'H08', 'H09', 'H10', 'S01', 'S02', 'S03', 'S04', 'S05', 'S06', 'S07', 'S08', 'S09', 'S10', 'F08', 'G09',
+        // 老栓精工 (#28 M4-09): the far scope, the three suppressors, both handguards and the six stocks.
+        'J02', 'J06', 'J07', 'J08', 'J10', 'J12', 'J13', 'J15', 'J16', 'J17', 'J19', 'J20'];
     for (const a of Object.values(ATTACHMENTS)) assert.deepEqual([a.w, a.h], LONG.includes(a.id) ? [2, 1] : [1, 1], a.id);
     // The sample: the long scope, the suppressor, the rifle barrel, both handguards and both stocks are long.
     assert.deepEqual(SAMPLE_PARTS.filter(id => ATTACHMENTS[id].w === 2), ['O08', 'M03', 'B08', 'H01', 'H05', 'S01', 'S02']);

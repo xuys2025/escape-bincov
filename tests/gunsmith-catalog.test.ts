@@ -2,11 +2,12 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as D from '../src/domain';
 import { handlingOf, type Handling } from '../src/shooting';
-import { ATTACHMENTS, BRAND_NAMES, CATEGORY_NAMES, FACTORY_MAGS, GUN_CLASS_NAMES, GUNS, SLOT_NAMES, type AttachmentDef, type Factors, type GunHandling,
+import { ATTACHMENTS, BRAND_NAMES, CATEGORY_NAMES, FACTORY_MAGS, GUN_CLASS_NAMES, GUNS, SLOT_NAMES, isPremium, type AttachmentDef, type Factors, type GunHandling,
     type GunId, type Modifiers } from '../src/gunsmith/catalog';
 import { DOCS } from './fixtures/gunsmith-docs';
 
-const guns = Object.values(GUNS), parts = Object.values(ATTACHMENTS);
+/** `all` the catalog's parts; `parts` the hundred ATTACHMENTS.md tables list, without 老栓精工's (#28 M4-09, tests/gunsmith-premium.test.ts). */
+const guns = Object.values(GUNS), all = Object.values(ATTACHMENTS), parts = all.filter(a => !isPremium(a.id));
 const RAILS = new Set(['micro', 'top', 'under', 'side', 'pistolSide', 'bipod']);
 /** The position a gun-listed part takes, by its ATTACHMENTS.md section (the test's own reading). */
 const POSITION: Record<string, string> = {
@@ -83,8 +84,10 @@ test('native slots follow the docs: a position wherever an attachment lists the 
 });
 
 test('every attachment matches its ATTACHMENTS.md row: name, brand, category, slot, guns, slots it opens, prerequisites', () => {
-    assert.deepEqual(Object.keys(ATTACHMENTS), DOCS.parts.map(p => p.id));
-    for (const doc of DOCS.parts) {
+    assert.deepEqual(parts.map(a => a.id), DOCS.parts.map(p => p.id));
+    // 老栓精工's twenty (#28 M4-09) follow their own section, under a heading per category.
+    assert.deepEqual(all.filter(a => isPremium(a.id)).map(a => a.id).sort(), DOCS.premium.map(p => p.id).sort());
+    for (const doc of [...DOCS.parts, ...DOCS.premium]) {
         const a = ATTACHMENTS[doc.id];
         assert.equal(a.name, doc.name); assert.equal(BRAND_NAMES[a.brand], doc.brand, doc.id);
         assert.equal(CATEGORY_NAMES[a.cat], doc.heading, doc.id);
@@ -124,7 +127,7 @@ test('modifiers stay in the schema and inside the per-attachment guardrails; non
         }
         assert.ok((f.recover ?? 1) <= 1.4 && (f.range ?? 1) <= 1.25, id);
     };
-    for (const a of parts) {
+    for (const a of all) {
         const m = a.mods;
         for (const key of Object.keys(m)) assert.ok(FIELDS.has(key), `${a.id}: unknown field ${key}`);
         const { magazine, weight, noise, suppressor, grow, view, braced, laser, light, spot, ...factors } = m;
@@ -246,7 +249,7 @@ test('prices, weights and footprints: parts cost 40 to 1200 and sell for less; t
     for (const gun of guns) {
         assert.ok(gun.sell > 0 && gun.sell / gun.buy >= .45 && gun.sell / gun.buy <= .5, gun.id);
         assert.ok(gun.weight > 0 && gun.weight < 6, gun.id);
-        const fits = parts.filter(a => a.guns?.includes(gun.id) && a.mods.grow);
+        const fits = all.filter(a => a.guns?.includes(gun.id) && a.mods.grow);
         const grow = (cat: string, axis: 'w' | 'h') => Math.max(0, ...fits.filter(a => a.cat === cat).map(a => a.mods.grow![axis]));
         const w = gun.w + grow('muzzle', 'w') + grow('mag', 'w'), h = gun.h + grow('muzzle', 'h') + grow('mag', 'h');
         assert.ok(w <= 6 && h <= 5, `${gun.id} at most ${w}x${h}`);

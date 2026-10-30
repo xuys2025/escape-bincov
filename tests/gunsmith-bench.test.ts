@@ -47,9 +47,9 @@ test('positions: native slots in body order; rails a handguard opens are closed 
 test('candidates: what fits first, owned before not owned; refusals keep their reason; parts on another gun are named', () => {
     const p = profile(), m4 = build('mb4a1');
     const top = candidates(p, 'm4', m4, key(m4, 'gun/top/0'));
-    // Owned O03 and O08 first, then wave two's top optics (#28 M3-06), not owned, in catalog order.
+    // Owned O03 and O08 first, then wave two's top optics (#28 M3-06) and 老栓精工's two (M4-09), not owned, in catalog order.
     assert.deepEqual(top.map(c => [c.id, !!c.loose, c.refusal]), [['O03', true, null], ['O08', true, null],
-        ...['O04', 'O05', 'O06', 'O07', 'O09', 'O10', 'O11', 'O12'].map(id => [id, false, null])]);
+        ...['O04', 'O05', 'O06', 'O07', 'O09', 'O10', 'O11', 'O12', 'J01', 'J02'].map(id => [id, false, null])]);
     assert.equal(top[1].loose!.from, 'bag');
     const under = candidates(p, 'm4', m4, key(m4, 'gun/under/0'));
     assert.ok(under.every(c => c.refusal === '需要 AR 短导轨护木或 AR 长导轨护木'));
@@ -72,7 +72,7 @@ test('candidates: what fits first, owned before not owned; refusals keep their r
 });
 
 test('only attachment items are listed, and where one comes from', () => {
-    assert.equal(benchParts().length, 100, 'every catalog part since #28 M3-06');
+    assert.equal(benchParts().length, 120, 'every catalog part since #28 M3-06, 老栓精工\'s twenty since M4-09');
     // The rotating shelf (#28 M4-01) of a profile whose rotation holds O03, and of one whose does not.
     const runs = (has: boolean) => { let n = 0; while (D.rotationParts(n).includes('O03') !== has) n++; const s = D.newSave(); s.stats.runs = n; return s; };
     assert.match(sourceOf('P01', runs(false)), /^修理铺有售 · ¥ \d+$/);

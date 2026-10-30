@@ -210,6 +210,8 @@ export interface HideoutRuntime {
     facility(id: Facility): FacilityInfo;
     build(id: Facility): Result;
     enqueue(recipe: Recipe): Result;
+    /** 老栓精工 (#28 M4-09): make premium part `id` on the spot (gunsmith/premium.ts craftPremium). */
+    craftPremium(id: string): Result;
     cancel(batchId: string): Result;
     claim(batchId: string, target: Source): Result;
     selectPractice(attribute: Attribute): Result;

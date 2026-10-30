@@ -7,7 +7,7 @@
  */
 import * as D from '../domain';
 import { SURVIVAL } from '../balance';
-import { ATTACHMENTS, FACTORY_MAGS, GUNS, SLOT_NAMES, factoryMagOf, partDef, partTier, type GunId, type Slot } from './catalog';
+import { ATTACHMENTS, FACTORY_MAGS, GUNS, SLOT_NAMES, factoryMagOf, isPremium, partDef, partTier, type GunId, type Slot } from './catalog';
 import { checkInstall, removalCascade, type Build, type Part } from './compat';
 import { GUARDRAILS, effectiveStats, type GunStats } from './stats';
 import { buildOf, gunWeight, magless, nodesOf, type GunState } from './instance';
@@ -97,12 +97,13 @@ export function positions(build: Build): Position[] {
 const eligible = (gun: GunId, id: string) => { const g = ATTACHMENTS[id].guns; return !g || g.includes(gun); };
 /**
  * Why `slot` is closed on this build, naming only openers that are items: the ones that would go on now, else the part
- * that stands where they go (compat's wording). Null when no item ever mounts there or none could open it.
+ * that stands where they go (compat's wording). Null when no item ever mounts there or none could open it. As compat,
+ * it names the ordinary openers, not 老栓精工's made-to-order handguards (#28 M4-09).
  */
 function closedReason(build: Build, slot: Slot): string | null {
     const gun = build.gun as GunId, parts = benchParts();
     if (!parts.some(id => ATTACHMENTS[id].mount === slot && eligible(gun, id))) return null;
-    const openers = parts.filter(id => (ATTACHMENTS[id].provides[slot] ?? 0) > 0 && eligible(gun, id) && (GUNS[gun].slots[ATTACHMENTS[id].mount] ?? 0) > 0);
+    const openers = parts.filter(id => (ATTACHMENTS[id].provides[slot] ?? 0) > 0 && eligible(gun, id) && (GUNS[gun].slots[ATTACHMENTS[id].mount] ?? 0) > 0 && !isPremium(id));
     if (!openers.length) return null;
     const ready = openers.filter(id => checkInstall(build, id).ok);
     if (ready.length) return ready.reduce((text, id, i) => `${text}${i ? '或' : ''}${after(ATTACHMENTS[id].name)}`, '需要');
@@ -188,10 +189,11 @@ export function partFits(profile: Readonly<D.SaveDataV1>, id: string): { uid: st
 /**
  * Where a part not owned comes from (M2-13, M4-01, M4-03): the arms counter's steady stock; its rotating shelf, or for a
  * rare part the late shelf, for this profile's deployment, at the counter's price; else finds in a raid, now and then
- * on those shelves too (the late one once the ledger quest is done).
+ * on those shelves too (the late one once the ledger quest is done). 老栓精工's parts (#28 M4-09) are only made to order.
  */
 export function sourceOf(id: string, save: Pick<D.SaveDataV1, 'quests' | 'stats'>): string {
     const rare = partTier(ATTACHMENTS[id]) === 'rare', price = D.ITEMS[id].buy;
+    if (isPremium(id)) return `只能找老栓定制 · ¥ ${price}，另交一件底料和精工件坯`;
     if (D.MERCHANTS.arms.stock.includes(id)) return `修理铺有售 · ¥ ${price}`;
     if (D.armsStock(save).includes(id)) return `修理铺这次的${rare ? '后期' : '轮换'}货架有售 · ¥ ${price}`;
     if (!rare) return '行动中可能找到，修理铺的轮换货架有时也有';

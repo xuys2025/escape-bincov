@@ -68,8 +68,8 @@ export const CATEGORY_NAMES: Readonly<Record<Category, string>> = {
  * Fictional maker, shown only in the details (maintainer, 2026-10-12): no hidden quality bonus. A factory magazine
  * (FACTORY_MAGS) is the gun maker's own: 原厂.
  */
-export type Brand = 'beidi' | 'yanwan' | 'binji' | 'factory';
-export const BRAND_NAMES: Readonly<Record<Brand, string>> = { beidi: '北堤', yanwan: '盐湾', binji: '滨机', factory: '原厂' };
+export type Brand = 'beidi' | 'yanwan' | 'binji' | 'factory' | 'laoshuan';
+export const BRAND_NAMES: Readonly<Record<Brand, string>> = { beidi: '北堤', yanwan: '盐湾', binji: '滨机', factory: '原厂', laoshuan: '老栓精工' };
 
 /**
  * Multiplicative factors on the gun itself; absent means 1. Lower is better except `recover` and `range`. `bloom`
@@ -248,9 +248,13 @@ const SELL_SHARE = .45;
  * buy price against the plan's trial bands: basic up to 150, common up to 450, rare above. Of the 100 that gives 20, 65
  * and 15. A proposal: M4-01 and M4-03 retune tiers and prices together.
  */
-export type PartTier = 'basic' | 'common' | 'rare';
-export const partTier = (part: Pick<AttachmentDef, 'buy'>): PartTier =>
-    part.buy <= 150 ? 'basic' : part.buy <= 450 ? 'common' : 'rare';
+export type PartTier = 'basic' | 'common' | 'rare' | 'premium';
+/**
+ * How a part is come by, from its catalog price (M2-13): basic, common or rare. 老栓精工's parts (#28 M4-09) are a tier
+ * of their own whatever they cost: only made to order (PREMIUM_BASES), never on a shelf or found.
+ */
+export const partTier = (part: Pick<AttachmentDef, 'buy'> & { brand?: Brand }): PartTier =>
+    part.brand === 'laoshuan' ? 'premium' : part.buy <= 150 ? 'basic' : part.buy <= 450 ? 'common' : 'rare';
 type Extra = Partial<Pick<AttachmentDef, 'provides' | 'needs' | 'grants' | 'requires' | 'quota'>>;
 interface Draft { id: string; name: string; mount: Slot; guns: readonly GunId[] | null; weight: number; buy: number; mods: Partial<Modifiers>; extra: Extra }
 /** One row: id, name, slot, guns (null for rail parts), loose kg, buy price, modifiers. `mods.weight` defaults to the loose kg. */
@@ -288,7 +292,7 @@ const LONG = { requires: ['longScope'] } as const;
 const UNDER_SIDE = (side: number): Extra => ({ provides: { under: 1, side } });
 
 /**
- * The 100 attachments in ATTACHMENTS.md order. Every number is a proposal, except the slot counts the handguard rows
+ * The 100 attachments in ATTACHMENTS.md order, then 老栓精工's twenty made-to-order parts (#28 M4-09). Every number is a proposal, except the slot counts the handguard rows
  * quote. Each value follows its row's benefit and cost; no single part goes past the plan's guardrails (at most 40%
  * better spread or recoil, handling time at least 65% of factory, at most +25% range, noise at least 40% of factory).
  * Combined clamping is M0-04's.
@@ -421,7 +425,58 @@ export const ATTACHMENTS: Readonly<Record<string, AttachmentDef>> = Object.fromE
         p('A07', '卡宾顶部基座', 'base', ['carbine'], .12, 90, {}, { provides: { top: 1 }, grants: ['longScope'] }),
         p('A08', 'AK 侧置基座', 'base', AK_FAMILY, .15, 90, {}, { provides: { top: 1 } }),
     ]),
+    // 老栓精工 (#28 M4-09, maintainer 2026-10-30): each the best of its position, a little ahead of every part it is made
+    // from (PREMIUM_BASES) in everything but weight and length, and still under the combined guardrails. Made to order
+    // only; the buy price is what 老栓 asks for the work (premium.ts), the sell price the usual share of it.
+    ...section('optic', 'laoshuan', [
+        p('J01', '精工全息瞄具', 'top', null, .12, 1600, { raise: .85, precise: .84, sway: .85, recover: 1.1 }),
+        p('J02', '精工变倍远距镜', 'top', null, .5, 2600, { precise: .68, raise: 1.15, view: [1.5, 2] }, LONG),
+        p('J03', '精工微型瞄具', 'micro', null, .07, 1500, { raise: .85, precise: .8 }),
+    ]),
+    ...section('fore', 'laoshuan', [
+        p('J04', '精工前握把', 'under', null, .13, 1600, { bloom: .82, kick: .85, raise: .9 }),
+    ]),
+    ...section('tactical', 'laoshuan', [
+        p('J05', '精工组合器', 'side', null, .24, 2200,
+            { laser: { hip: .7, range: 300 }, light: { radius: 220, arc: 1.6 }, spot: 1.1 }, { quota: 'combiner' }),
+    ]),
+    ...section('muzzle', 'laoshuan', [
+        p('J06', '精工九系消音器', 'muzzle', ['gb17', 'pb226', 'mpb5', 'vb9'], .22, 2400, { noise: .45, suppressor: true, bloom: .8, kick: .9, grow: { w: 1, h: 0 } }),
+        p('J07', '精工步枪消音器', 'muzzle', RIFLE_MUZZLE, .4, 3000, { noise: .5, suppressor: true, bloom: .8, kick: .75, grow: { w: 1, h: 0 } }),
+        p('J08', '精工精确枪消音器', 'muzzle', PRECISION, .6, 3000, { noise: .45, suppressor: true, recover: 1.3, kick: .8, grow: { w: 1, h: 0 } }),
+        p('J09', '精工霰弹收束器', 'muzzle', ['shotgun', 'mb870', 'mb1014'], .18, 1500, { spread: .7, kick: .92 }),
+    ]),
+    ...section('handguard', 'laoshuan', [
+        p('J12', '精工 AR 护木', 'handguard', ['mb4a1'], .4, 2000, { bloom: .92, sway: .95, weight: .2 }, UNDER_SIDE(2)),
+        p('J15', '精工 AK 护木', 'handguard', AK, .35, 1800, { raise: .9, bloom: .95, weight: .15 }, UNDER_SIDE(2)),
+    ]),
+    ...section('stock', 'laoshuan', [
+        p('J10', '精工 AR 托', 'stock', ['mb4a1'], .4, 1800, { raise: .85, bloom: .8, kick: .85, weight: .1 }),
+        p('J13', '精工 AK 托', 'stock', AK_FAMILY, .45, 1800, { sway: .85, bloom: .85, kick: .88, precise: .95, weight: .1 }),
+        p('J16', '精工 MP 托', 'stock', ['mpb5'], .3, 1500, { raise: .85, bloom: .92, kick: .95, weight: .03 }),
+        p('J17', '精工 UMP 托', 'stock', ['umpb45'], .25, 1500, { raise: .86, bloom: .92, kick: .95, weight: .03 }),
+        p('J19', '精工霰弹托', 'stock', ['mb870', 'mb1014'], .45, 1600, { recover: 1.25, settle: .85, bloom: .82, weight: .2 }),
+        p('J20', '精工精确托', 'stock', ['mb14', 'mb700'], .4, 2000, { precise: .85, raise: .85, weight: .12 }),
+    ]),
+    ...section('grip', 'laoshuan', [
+        p('J11', '精工 AR 握把', 'grip', ['mb4a1'], .08, 1500, { raise: .9, kick: .98, recover: 1.2, settle: .9, weight: .03 }),
+        p('J14', '精工 AK 握把', 'grip', AK_FAMILY, .07, 1500, { recover: 1.18, raise: .95, weight: .02 }),
+        p('J18', '精工九系握片', 'grip', ['gb17', 'pb226'], .04, 1500, { recover: 1.2, bloom: .88, raise: .95, weight: .03 }),
+    ]),
 ].map(def => [def.id, def]));
+
+/**
+ * 老栓精工 (#28 M4-09): the ordinary parts each premium part is made from, any one of them taken as the work's base
+ * (premium.ts). The same position, and every gun of the base the premium part fits too.
+ */
+export const PREMIUM_BASES: Readonly<Record<string, readonly string[]>> = {
+    J01: ['O03', 'O04', 'O05', 'O12'], J02: ['O08', 'O10', 'O11'], J03: ['O01', 'O02'], J04: ['F01', 'F02', 'F04', 'F05'],
+    J05: ['T01', 'T02', 'T05', 'T07', 'T09'], J06: ['M02', 'M03'], J07: ['M05', 'M06', 'M07'], J08: ['M08', 'M09'],
+    J09: ['M10', 'M11'], J10: ['S01', 'S02'], J11: ['P01', 'P02'], J12: ['H01', 'H02'], J13: ['S03', 'S04'], J14: ['P03', 'P04'],
+    J15: ['H03', 'H04'], J16: ['S05'], J17: ['S06'], J18: ['P07'], J19: ['S07', 'S08'], J20: ['S09', 'S10'],
+};
+/** A 老栓精工 part (#28 M4-09). */
+export const isPremium = (id: string): boolean => Object.hasOwn(PREMIUM_BASES, id);
 
 /**
  * The factory magazine of each gun whose box magazine makes it a row deeper (#28 M3-12) and comes off at the workbench
@@ -441,5 +496,5 @@ export const FACTORY_MAG_PARTS: Readonly<Record<string, AttachmentDef>> = Object
         .map(def => [def.id, def]));
 /** The gun a factory magazine belongs to, or null for any other id. */
 export const factoryMagOf = (id: string): GunId | null => Object.hasOwn(FACTORY_MAG_PARTS, id) ? FACTORY_MAG_PARTS[id].guns![0] : null;
-/** A loose part's catalog row: one of the hundred, or a factory magazine. */
+/** A loose part's catalog row: one of the hundred or 老栓精工's twenty, or a factory magazine. */
 export const partDef = (id: string): AttachmentDef => ATTACHMENTS[id] ?? FACTORY_MAG_PARTS[id];

@@ -2,6 +2,8 @@ import * as D from './domain';
 import { getLegacyEnemyProfile } from './enemy-profile';
 import { archetype, enemyDefinition } from './enemy-archetypes';
 import { presetState } from './gunsmith/presets';
+import { PREMIUM_BLANK } from './gunsmith/premium';
+import { leaderBlank } from './enemy-armory';
 import { canDamageEnemy } from './enemy-relations';
 import { enemyDamageAfterArmor } from './enemy-defense';
 import { enemyPost } from './enemy-posts';
@@ -129,6 +131,8 @@ export function damageLayerEnemy(state: ExpansionState, mapId: string, enemy: En
         ...(tactics.equipment ? [{ id: tactics.equipment, qty: 1 }] : []),
         ...(gunDef?.ammo && tactics.magazine + tactics.reserve > 0 ? [{ id: gunDef.ammo, qty: tactics.magazine + tactics.reserve }] : []),
         ...tactics.supplies,
+        // A leader's body may hold 老栓精工's material too (#28 M4-09).
+        ...leaderBlank(raid.seed, enemy.id, enemy.uid) ? [{ id: PREMIUM_BLANK, qty: 1 }] : [],
     ] : D.corpseLoot(raid.seed + raid.kills * 47, getLegacyEnemyProfile(enemy.id).corpseLootRolls, enemy.id === 'elite');
     const random = D.seededRandom(raid.rng);
     const allocate = () => entityUid(raid, raid.nextEntity++);
