@@ -204,12 +204,18 @@ export class CoastRaidRuntime implements RaidRuntime {
         fire: (enemy, angle) => {
             const def = actorArchetype(enemy)!, speed = def.attack === 'spit' ? 180 : 365;
             // Start at the body: the normal segment collision cannot shoot through a wall beside a muzzle.
-            const bullet: BulletState = { uid: this.allocateEntityUid(), x: enemy.x, y: enemy.y, rotation: angle,
-                vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, left: def.range, damage: def.damage, enemy: true, owner: enemy.uid };
-            // The gun it holds names the report (#28 M4-02); its numbers stay the archetype's (#152).
+            const bullets: BulletState[] = [], angles: number[] = [];
+            for (let i = 0; i < (def.ballistics?.pellets ?? 1); i++) {
+                // Historical actors keep their exact direction and RNG stream. New gun rules scatter each pellet
+                // around the paid locked aim, never around the target's later position.
+                const shotAngle = angle + (def.ballistics ? (this.random() - .5) * def.ballistics.spread : 0);
+                const bullet: BulletState = { uid: this.allocateEntityUid(), x: enemy.x, y: enemy.y, rotation: shotAngle,
+                    vx: Math.cos(shotAngle) * speed, vy: Math.sin(shotAngle) * speed, left: def.range, damage: def.damage, enemy: true, owner: enemy.uid };
+                bullets.push(bullet); angles.push(shotAngle);
+            }
             const held = enemy.tactics?.equipment, gun = held && D.isGun(held) ? { id: held, cls: GUNS[held].cls,
                 suppressed: presetIds(enemy.tactics!.fit ?? []).some(id => ATTACHMENTS[id]?.mods.suppressor === true) } : undefined;
-            this.bullets.push(bullet); this.shotEvent(enemy.uid, def.weapon, [bullet], [angle], gun);
+            this.bullets.push(...bullets); this.shotEvent(enemy.uid, def.weapon, bullets, angles, gun);
         },
     };
     private checkpointAt = 0;

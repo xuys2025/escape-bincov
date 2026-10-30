@@ -148,7 +148,7 @@ export function advanceTacticalEnemy(world: TacticalWorld, effects: TacticalEffe
                 const count = Math.min(def.magazine - t.magazine, t.reserve);
                 t.magazine += count; t.reserve -= count;
             }
-            t.phase = 'idle'; e.cooldown = .15;
+            t.phase = 'idle'; e.cooldown = def.ballistics ? 0 : .15;
         }
         return;
     }

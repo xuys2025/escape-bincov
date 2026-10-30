@@ -6,6 +6,7 @@ import { resumeStalls } from './stall-resume.mjs';
 import { decodeSession, SESSION_KEY } from '../src/recovery-store.ts';
 import { MALL_RAIDERS } from '../src/enemy-mall.ts';
 import { enemyViewports } from './enemy-browser-plan.mjs';
+import { actorArchetype } from '../src/enemy-archetypes.ts';
 
 /** Native deployment, real stair activation and paid phases; only observation positions use test fixtures. */
 export async function runMallEnemyCases(browser, report, out, { priorClient, priorClientCommit = '67a7468',
@@ -28,6 +29,12 @@ export async function runMallEnemyCases(browser, report, out, { priorClient, pri
             const raid = original.expansion.raid, team = raid.maps['mall-f2'].enemies.filter(e => e.tactics?.squad === MALL_RAIDERS);
             assert.equal(raid.worldVersion, 'mall-v4'); assert.equal(raid.version, 5); assert.equal(team.length, 3);
             assert.equal(raid.roster.length, 25);
+            for (const e of team.filter(e => e.tactics.equipment)) {
+                const combat = actorArchetype(e);
+                assert.equal(e.tactics.ballistics, 1);
+                assert.equal(e.tactics.magazine, Math.min(combat.magazine, combat.ballistics.budget));
+                assert.equal(e.tactics.magazine + e.tactics.reserve, combat.ballistics.budget);
+            }
             const ids = team.map(e => e.uid);
             assert.equal(await page.evaluate(ids => window.__bincovSample.host.lastBatch.frame.actors.some(a => ids.includes(a.uid)), ids), false, 'upstairs actors cannot leak to F1');
             report.cases.push({ viewport, scenario: 'native-mall-deployment', team: 3, population: 25, upstairsHiddenOnF1: true });
