@@ -993,6 +993,12 @@ try {
   });
   const overlaps = list => { const a = list.find(c => c.id === 'interact'); if (!a) return []; return list.filter(c => c !== a && c.rect.x < a.rect.x + a.rect.w && a.rect.x < c.rect.x + c.rect.w && c.rect.y < a.rect.y + a.rect.h && a.rect.y < c.rect.y + c.rect.h).map(c => c.id); };
   const menuOpen = () => page.evaluate(() => document.querySelector('#station-yard').shadowRoot.querySelector('.quick').classList.contains('open'));
+  const tabsOpen = () => page.evaluate(() => !!document.querySelector('#station-yard').shadowRoot.querySelector('.panel:not([hidden]) .ptabs.open'));
+  /** Waits for the game's own repaint of the open panel (a checkpoint, or 设施's half-second refresh): its tabs are replaced. */
+  const repainted = async () => {
+    const tabs = await page.evaluateHandle(() => document.querySelector('#station-yard').shadowRoot.querySelector('.panel:not([hidden]) .ptabs'));
+    await until(t => !t.isConnected, 7000, 'panel repaint', tabs);
+  };
   const centreOf = async sel => { const b = await page.locator(sel).boundingBox(); assert.ok(b, `${sel} not on screen`); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
   /** One finger: touchStart / touchEnd at a screen point (the browser turns it into the click a player gets). */
   const touchTap = async ({ x, y }) => {
@@ -1072,7 +1078,10 @@ try {
     assert.equal(await menuOpen(), false, 'tapping the scene left the menu open');
     assert.ok(Math.hypot(p1.x - p0.x, p1.y - p0.y) < 1, `tapping the scene to close the menu also walked ${Math.hypot(p1.x - p0.x, p1.y - p0.y).toFixed(1)} px`);
     await tapSel('[data-quickmenu]'); await tapSel('[data-quick="gear"]'); await until(() => window.__station.host.ui.kind === 'gear', 3000, 'gear');
-    await tapSel('[data-tabmenu]'); await tapSel('.ptabs [data-tab="arms"]'); await until(() => window.__station.host.ui.kind === 'arms', 3000, 'arms tab');
+    await tapSel('[data-tabmenu]'); assert.equal(await tabsOpen(), true, 'the title did not open the tab menu');
+    // The five-second checkpoint repaints the panel; it used to fold the menu, sometimes under the finger on its tab.
+    await repainted(); assert.equal(await tabsOpen(), true, 'a checkpoint repaint folded the tab menu');
+    await tapSel('.ptabs [data-tab="arms"]'); await until(() => window.__station.host.ui.kind === 'arms', 3000, 'arms tab');
     assert.ok(!(await controls()).some(c => c.id === 'interact'), 'interact shown over the arms panel');
     await tapClose();
     const back = await controls(); assert.deepEqual(back.filter(c => c.blocked.length), []);
@@ -1081,6 +1090,16 @@ try {
     await shot('I3-interact-arms-390x844');
     await tapClose();
     return { closedByScene: true, walked: +Math.hypot(p1.x - p0.x, p1.y - p0.y).toFixed(2), roundTrip: ['gear', 'arms'], interact: 'arms' };
+  });
+
+  await step('I3b 390×844 设施：页签菜单经过面板每半秒的刷新仍展开，手指点修理铺命中', async () => {
+    await open({ fixture: preset('repaired'), size: [390, 844], mobile: true });
+    await tapSel('[data-quickmenu]'); await tapSel('[data-quick="facility"]'); await until(() => window.__station.host.ui.kind === 'facility', 3000, 'facility');
+    await tapSel('[data-tabmenu]'); assert.equal(await tabsOpen(), true, 'the title did not open the tab menu');
+    await repainted(); await repainted(); assert.equal(await tabsOpen(), true, 'the facility refresh folded the tab menu');
+    await shot('I3b-facility-tabs-390x844');
+    await tapSel('.ptabs [data-tab="arms"]'); await until(() => window.__station.host.ui.kind === 'arms', 3000, 'arms tab');
+    return { repaints: 2, open: true, tapped: 'arms' };
   });
 
   for (const [w, h] of [[360, 740], [412, 915], [640, 360], [768, 1024], [932, 430]]) await step(`I4 ${w}×${h}：菜单收起与展开时所有快捷按钮和“交互”互不遮挡，手指点修理铺命中`, async () => {

@@ -40,7 +40,7 @@
 | --- | --- | --- |
 | ![反馈截图](screens/reported-before.png) | [站立](screens/idle-1280x720.png) · [行走](screens/walk-1280x720.png) | [站立](screens/idle-1920x1080.png) · [行走](screens/walk-1920x1080.png) |
 
-I3 的原 main 对照与修复构建结果分别在 `test-results/f16-baseline-i3/`、`test-results/f16-fixed-i3/`。本项没有改变菜单输入；该已有问题需要另行核查，不以改手部的任务冒充修好菜单。
+I3 的原 main 对照与修复构建结果分别在 `test-results/f16-baseline-i3/`、`test-results/f16-fixed-i3/`。本项没有改变菜单输入；该已有问题需要另行核查，不以改手部的任务冒充修好菜单。（后续：原因是检查点重绘收起了标题菜单，已由 `fix/station-tab-menu-repaint` 修复，见 [handoff](../../../handoff.md)。）
 
 未验：手机真机、真人对补绘姿态的观感；没有改变规则或代替这些验收。尚未合并、尚未发布。
 
