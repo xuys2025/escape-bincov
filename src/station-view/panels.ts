@@ -102,6 +102,24 @@ const stashNote = (outside: number) => `整组出售${outside > 0 ? ` · 背包�
 const unlockLine = (id: string, done: boolean) => { const text = D.questShelfText(id, done); return text ? `<p class="unlock">${esc(text)}</p>` : ''; };
 /** The stash overflow (#28 M3-12) in a stash heading, while it holds something. */
 const overflowNote = (stash: D.Inventory) => { const n = D.stashOverflow(stash).length; return n ? ` <b class="bad">溢出 ${n} 件 · 清空前不能出击</b>` : ''; };
+const yuan = (n: number) => `¥ ${n.toLocaleString()}`;
+/** The buy / sell tabs, each with its list's count and total; a stash item dropped on 出售 joins the sell list. */
+const tradeTabs = (c: CartView, mode: 'buy' | 'sell', cls: string) => `<nav class="seg ${cls}" aria-label="买卖">${btn(`购买 <small>${c.buy.items.length} 件 · ${yuan(c.totals.buy)}</small>`, 'mode:buy', mode === 'buy' ? 'on' : '', `aria-pressed="${mode === 'buy'}"`)}${btn(`出售 <small>${c.sell.items.length} 件 · ${yuan(c.totals.sell)}</small>`, 'mode:sell', mode === 'sell' ? 'on' : '', `aria-pressed="${mode === 'sell'}" data-slot="sell-tab" title="仓库里的东西也可以拖到这里"`)}</nav>`;
+/**
+ * The trade's money in one box (#26 F03): cash now, what the buy list costs, what the sell list earns and the cash
+ * after, then the one settle for both lists. The message line keeps its height whatever it says (stale cart, quest
+ * warnings, not enough cash), so no warning moves the grids under the pointer.
+ */
+function ledgerHtml(c: CartView, cash: number, compact: boolean) {
+  const short = c.totals.net > cash;
+  const msg = c.stale ? '<p class="warn">仓库已改变，请刷新清单后重新选择物品。</p>' : c.warnings.length ? `<p class="warn">${c.warnings.map(esc).join('<br>')}</p>`
+    : short ? '<p class="warn">现金不足，请减少待买物品或增加待卖物品。</p>' : compact ? '' : `<p class="muted">${checkoutNote}</p>`;
+  const net = !c.dirty ? '' : `<small>${c.totals.net >= 0 ? `支出 ${yuan(c.totals.net)}` : `收入 ${yuan(-c.totals.net)}`}</small>`;
+  return `<div class="ledger${compact ? ' compact' : ''}" aria-label="交易单"><dl>
+    <div><dt>现有现金</dt><dd>${yuan(cash)}</dd></div><div class="out"><dt>买入 ${c.buy.items.length} 件</dt><dd>- ${yuan(c.totals.buy)}</dd></div>
+    <div class="after"><dt>结算后</dt><dd class="${short ? 'bad' : ''}">${yuan(cash - c.totals.net)}</dd></div><div class="in"><dt>卖出 ${c.sell.items.length} 件</dt><dd>+ ${yuan(c.totals.sell)}</dd></div></dl>
+    <div class="lmsg">${msg}</div><div class="acts">${btn(c.stale ? '刷新清单' : '清空', 'cart-reset', compact ? 'mini' : '', c.dirty || c.stale ? '' : 'disabled')}${btn(`结算${net}`, 'cart-settle', 'primary', c.dirty && !c.stale ? '' : 'disabled')}</div></div>`;
+}
 export function shopCompactHtml(c: CartView, cell: number, sel: { src: string; uid: string } | null, cash: number, mode: 'buy' | 'sell', outside = 0) {
   const [a, b] = mode === 'buy' ? [['商人物品', c.catalog, 'merchant'], ['待买', c.buy, 'buy']] as const : [['仓库', c.stash, 'stash'], ['待卖', c.sell, 'sell']] as const;
   const selected = sel?.uid ?? null;
@@ -113,12 +131,12 @@ export function shopCompactHtml(c: CartView, cell: number, sel: { src: string; u
     return it ? `${esc(D.ITEMS[it.id].short || D.ITEMS[it.id].name)} · ${quoteText(shopQuote(src, it))}` : null;
   };
   return `<div class="cshop">
-    <nav class="seg tabs2">${btn(`买入 <small>${c.buy.items.length} 件 · ¥ ${c.totals.buy}</small>`, 'mode:buy', mode === 'buy' ? 'on' : '')}${btn(`卖出 <small>${c.sell.items.length} 件 · ¥ ${c.totals.sell}</small>`, 'mode:sell', mode === 'sell' ? 'on' : '')}</nav>
+    ${tradeTabs(c, mode, 'tabs2')}
     <div class="panes">
       <section class="pane"><h3>${a[0]} <small>${picked(a[1], a[2]) ?? (mode === 'buy' ? '按包购买' : stashNote(outside) + overflowNote(c.stash))}</small></h3>${mode === 'buy' ? browseBar(c) : ''}<div class="pane-scroll">${gridHtml(a[1], a[2], cell, selected, mode === 'buy' ? { empty: '没有符合条件的商品' } : {})}</div></section>
       <section class="pane"><h3>${b[0]} <small>${picked(b[1], b[2]) ?? `¥ ${mode === 'buy' ? c.totals.buy : c.totals.sell}${mode === 'buy' ? ` · ${checkoutNote}` : ''}`}</small></h3><div class="pane-scroll">${gridHtml(b[1], b[2], cell, selected, { empty: '拖到这里' })}</div></section>
     </div>
-    <footer class="checkout compact"><div class="sum"><b class="${c.totals.net > cash ? 'bad' : ''}">${c.totals.net >= 0 ? `支出 ¥ ${c.totals.net}` : `收入 ¥ ${-c.totals.net}`}</b><small>结算后 ¥ ${(cash - c.totals.net).toLocaleString()}</small></div>${c.stale ? '<p class="warn">仓库已改变，请刷新清单后重新选择物品。</p>' : ''}${c.warnings.length ? `<p class="warn">${c.warnings.map(esc).join('<br>')}</p>` : ''}<div class="acts">${btn(c.stale ? '刷新清单' : '清空', 'cart-reset', 'mini', c.dirty || c.stale ? '' : 'disabled')}${btn('结算', 'cart-settle', 'primary', c.dirty && !c.stale ? '' : 'disabled')}</div></footer></div>`;
+    ${ledgerHtml(c, cash, true)}</div>`;
 }
 
 /** Short category names for the catalog's buttons. */
@@ -135,13 +153,24 @@ function browseBar(c: CartView) {
   const pager = b.pages > 1 ? `${btn('←', `browse-page:${b.page - 1}`, '', b.page ? 'aria-label="上一页"' : 'disabled aria-label="上一页"')}<small>${b.page + 1} / ${b.pages}</small>${btn('→', `browse-page:${b.page + 1}`, '', b.page < b.pages - 1 ? 'aria-label="下一页"' : 'disabled aria-label="下一页"')}` : '';
   return `<nav class="seg browse" aria-label="商品分类">${chips}${fits}${pager}</nav>`;
 }
-export function shopHtml(c: CartView, cell: number, selected: string | null, cash: number, outside = 0) {
-  return `<div class="shop">
-    <section><h3>商人物品 <small>${c.merchant === 'arms' ? '按包购买 · 配件每次出击后轮换' : '按包购买'}</small></h3>${browseBar(c)}${gridHtml(c.catalog, 'merchant', cell, selected, { empty: '没有符合条件的商品' })}</section>
-    <section class="buffer"><h3>待买 <small>¥ ${c.totals.buy}</small></h3>${gridHtml(c.buy, 'buy', cell, selected, { empty: '拖到这里' })}<h3>待卖 <small>¥ ${c.totals.sell}</small></h3>${gridHtml(c.sell, 'sell', cell, selected, { empty: '拖到这里' })}</section>
-    <section><h3>仓库 <small>${stashNote(outside)}${overflowNote(c.stash)}</small></h3><div class="stash-scroll">${gridHtml(c.stash, 'stash', cell, selected)}</div></section>
-  </div>
-  <footer class="checkout"><div class="sum"><span>待买 ¥ ${c.totals.buy}</span><span>待卖 ¥ ${c.totals.sell}</span><b class="${c.totals.net > cash ? 'bad' : ''}">${c.totals.net >= 0 ? `支出 ¥ ${c.totals.net}` : `收入 ¥ ${-c.totals.net}`}</b><small>结算后现金 ¥ ${(cash - c.totals.net).toLocaleString()} · ${checkoutNote}</small></div>${c.stale ? '<p class="warn">仓库已改变，请刷新清单后重新选择物品。</p>' : ''}${c.warnings.length ? `<p class="warn">${c.warnings.map(esc).join('<br>')}</p>` : ''}<div class="acts">${btn(c.stale ? '刷新清单' : '清空', 'cart-reset', '', c.dirty || c.stale ? '' : 'disabled')}${btn('结算', 'cart-settle', 'primary', c.dirty && !c.stale ? '' : 'disabled')}</div></footer>`;
+/**
+ * Desktop shop (#26 F03, maintainer's pick of three prototypes, 2026-10-30): Tarkov's buy / sell tabs. The merchant's
+ * side (left) shows the goods and the buy list, or the sell list and every line of the deal; the stash and the trade's
+ * money stay on the right in both tabs. Both panes are always laid out in the same cell (the other one hidden and
+ * inert), so switching tabs never changes the panel's size or the cells under the pointer.
+ */
+export function shopHtml(c: CartView, cell: number, selected: string | null, cash: number, mode: 'buy' | 'sell', outside = 0) {
+  const pane = (side: 'buy' | 'sell', html: string) => `<div class="tabpane ${side}"${side === mode ? '' : ' inert aria-hidden="true"'}>${html}</div>`;
+  const line = (i: D.Item, src: 'buy' | 'sell') => `<li class="${src}">${icon(i.id, 18)}<span>${esc(D.ITEMS[i.id].name)}${i.qty > 1 ? ` × ${i.qty}` : ''}</span><b>${src === 'buy' ? '-' : '+'} ${yuan(shopQuote(src, i).total ?? 0)}</b></li>`;
+  const lines = [...c.buy.items.map(i => line(i, 'buy')), ...c.sell.items.map(i => line(i, 'sell'))].join('');
+  const buyNote = c.merchant === 'arms' ? '按包购买 · 配件每次出击后轮换' : '按包购买';
+  return `<div class="shop" style="--cell:${cell}px">
+    <section class="side theirs">${tradeTabs(c, mode, 'tradetabs')}<div class="tabpanes">
+      ${pane('buy', `${browseBar(c)}${gridHtml(c.catalog, 'merchant', cell, selected, { empty: '没有符合条件的商品' })}<h3>待买 <small title="${buyNote}">${yuan(c.totals.buy)} · ${buyNote}</small></h3>${gridHtml(c.buy, 'buy', cell, selected, { empty: '把要买的拖到这里' })}`)}
+      ${pane('sell', `<h3>待卖 <small>${yuan(c.totals.sell)} · 整组出售</small></h3>${gridHtml(c.sell, 'sell', cell, selected, { empty: '把要卖的拖到这里' })}<h3>本单明细</h3><ul class="lines">${lines || '<li class="none">还没有要买卖的东西</li>'}</ul>`)}
+    </div></section>
+    <section class="side mine"><h3>我的仓库 <small>${stashNote(outside)}${overflowNote(c.stash)}</small></h3><div class="stash-scroll">${gridHtml(c.stash, 'stash', cell, selected)}</div>${ledgerHtml(c, cash, false)}</section>
+  </div>`;
 }
 
 /** Selling goods an open quest still needs: the Runtime asks for this explicit confirmation (quest-sale token). */
