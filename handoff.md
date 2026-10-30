@@ -1,3 +1,7 @@
+## 2026-10-31 · #152 敌人按实际持枪计算战斗
+
+从 main `e3a74961` 在 `fix/enemy-weapon-stats` 承接维护者“解决152”，交付前正常同步 main `61cd6c55`（#160）。新遭遇通过可选的 `tactics.ballistics: 1` 启用枪械有效数值和阵营折算；旧活动行动缺键保持原行为，枪与配件、有限弹药、在途弹丸、已付出的攻击阶段及写失败保护一起保留。源码、当前验证与 PR 入口见[任务摘要](docs/tasks/enemy-weapon-stats.md)，规则见[改枪契约](docs/gunsmith/CONTRACTS.md#敌人按持枪计算战斗152)。本次不自动合并或发布，#153/M4-06/M5 另行承接。
+
 ## 2026-10-30 · 手机标题菜单被检查点重绘收起（`test:station` I3，#61）
 
 分支 `fix/station-tab-menu-repaint`（[PR #160](https://github.com/xuys2025/escape-bincov/pull/160)），基线 main `e3a74961`。I3（390×844 触屏：整备 → 标题“切换功能”菜单 → 修理铺）长期报 `timeout: arms tab`，原因在游戏：菜单展开只是 `.ptabs` 上的 `open` 类，五秒检查点提交后 `UI.refresh()` 重绘整块面板，把它收起。插桩看到手指按在“修理铺”上之后、抬起之前面板被重绘，抬手的 click 落在下面的 `.gear-actions`。步骤节奏和检查点相位基本固定，所以 main 几乎必现、#159 构建 2/4 通过。玩家同样会遇到：菜单最多 5 秒自己收起；设施面板每 30 帧刷新，约半秒就收起；手指正落在页签上时点到面板内容。

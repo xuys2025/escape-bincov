@@ -1,5 +1,6 @@
-import type { PresetNode } from './gunsmith/presets';
-import { ENEMIES, type EnemyDef } from './domain';
+import { presetBuild, type PresetNode } from './gunsmith/presets';
+import { effectiveStats } from './gunsmith/stats';
+import { ENEMIES, isGun, type EnemyDef } from './domain';
 import type { Point } from './world';
 
 /** Rules for newly authored encounters. Legacy IDs and their saved behaviour remain in ENEMIES. */
@@ -11,6 +12,8 @@ interface Archetype extends EnemyDef {
     body: 'scav' | 'salt' | 'creature' | 'elite';
     windup: number; recovery: number; magazine: number; reserve: number; reload: number;
     territory: number; confirm: number; signal: boolean; armor: number;
+    /** Present only for #152 gun rules: per-pellet spread/damage and the original finite ammunition budget. */
+    ballistics?: { pellets: number; spread: number; budget: number };
 }
 function define(id: string, name: string, faction: Faction, body: Archetype['body'], attack: Archetype['attack'], weapon: Weapon,
     hp: number, speed: number, damage: number, range: number, patch: Partial<Archetype> = {}): Readonly<Archetype> {
@@ -65,8 +68,8 @@ const RECOVERY_RULES:Readonly<Record<string,Readonly<Archetype>>> = Object.freez
     (['mercenary-scout','mercenary-assault','mercenary-support','recovery-leader'] as const)
         .map(id=>[id,Object.freeze({...ENEMY_ARCHETYPES[id],territory:600})])));
 /** All controller, projectile, save and view consumers resolve one persisted armament here.
- * Existing v1 actors retain their original definitions and confirmation times. */
-export function actorArchetype(actor: { id: string; tactics?: EnemyTactics }): Readonly<Archetype> | undefined {
+ * Actors without the optional ballistics key retain their original combat and confirmation times. */
+function bodyArchetype(actor: { id: string; tactics?: EnemyTactics }): Readonly<Archetype> | undefined {
     const def = archetype(actor.id), t = actor.tactics;
     if (t?.version !== 2) return def;
     if (t.program?.kind === 'recovery' && Object.hasOwn(RECOVERY_RULES,actor.id)) return RECOVERY_RULES[actor.id];
@@ -74,6 +77,31 @@ export function actorArchetype(actor: { id: string; tactics?: EnemyTactics }): R
     if (actor.id === 'salt-dazed') return AFFECTED_DAZED;
     if (actor.id === 'salt-hulk') return AFFECTED_HULK;
     return actor.id === 'tide-ritualist' && t.program.armament === 'rifle' ? RITUALIST_RIFLE : def;
+}
+/** #152 skill factors, applied once after the shared gun/attachment guardrails. Cadence is seconds per shot as a
+ * multiple of the gun's cooldown; confirmation still supplies the initial reaction time. No player perks/crit roll. */
+const GUN_SKILL = {
+    raiders: { damage: .36, range: .6, cadence: 5, spread: 1.8 },
+    mercenaries: { damage: .42, range: .6, cadence: 9, spread: 1.4 },
+    blockade: { damage: .42, range: .58, cadence: 9, spread: 1.5 },
+    affected: { damage: .34, range: .55, cadence: 8, spread: 2 },
+} as const;
+// Equipment/fit are installed once and never edited in an active raid. Cache by their identities, not by uid: a
+// restored actor must derive its own rules, and no lookup may consume RNG or allocate owned item identifiers.
+const combatRules = new WeakMap<EnemyTactics, { body: Readonly<Archetype>; gun: string; fit: EnemyTactics['fit']; rules: Readonly<Archetype> }>();
+export function actorArchetype(actor: { id: string; tactics?: EnemyTactics }): Readonly<Archetype> | undefined {
+    const body = bodyArchetype(actor), t = actor.tactics;
+    if (!body || body.attack !== 'projectile' || t?.ballistics !== 1 || !isGun(t.equipment) || body.faction === 'fauna') return body;
+    const cached = combatRules.get(t);
+    if (cached?.body === body && cached.gun === t.equipment && cached.fit === t.fit) return cached.rules;
+    const stats = effectiveStats(presetBuild(t.equipment, t.fit ?? [])), w = stats.weapon, skill = GUN_SKILL[body.faction];
+    const interval = w.cooldown * skill.cadence, windup = Math.min(body.windup, interval / 2);
+    const rules: Readonly<Archetype> = Object.freeze({ ...body, damage: w.damage * skill.damage, range: w.range * skill.range,
+        magazine: w.magazine, reload: w.reload, cooldown: interval, windup, recovery: interval - windup,
+        ballistics: { pellets: w.pellets, spread: w.spread * stats.handling.hip * stats.handling.precise * skill.spread,
+            budget: body.magazine + body.reserve } });
+    combatRules.set(t, { body, gun: t.equipment, fit: t.fit, rules });
+    return rules;
 }
 export function actorDefinition(actor: { id: string; tactics?: EnemyTactics }): Readonly<EnemyDef> {
     return actorArchetype(actor) ?? enemyDefinition(actor.id);
@@ -101,6 +129,8 @@ interface EnemyTacticsCore {
      * any. `equipment` is then the catalog gun they sit on; the body yields the gun with them (layer-transition.ts).
      */
     fit?: PresetNode[];
+    /** New encounters only (#152). Missing keeps the historical archetype's combat, ammunition and paid phases. */
+    ballistics?: 1;
     killedBy: string | null;
 }
 export type EnemyTactics = EnemyTacticsCore & ({ version: 1 } | { version: 2; program: EnemyProgram });

@@ -31,7 +31,8 @@ test('native affected variants preserve the population and the two story guards,
         assert.ok(g.every(e=>e.tactics?.version===2));
         const ritual=g.find(e=>e.id==='tide-ritualist')!,def=actorArchetype(ritual)!;
         assert.equal(def.weapon,gun?'rifle':'club');assert.equal(ritual.tactics!.equipment,gun?'carbine':null);
-        assert.equal(def.magazine,gun?4:0);assert.equal(def.reserve,gun?8:0);
+        assert.equal(def.magazine,gun?WEAPONS.carbine.magazine:0);assert.equal(def.reserve,gun?8:0);
+        assert.equal(ritual.tactics!.magazine+ritual.tactics!.reserve,gun?12:0);
         assert.ok(f.saves.persist(),f.state.storageError);assert.deepEqual(decodeSession(f.data.get(SESSION_KEY)!).expansion!.raid,f.raid);
         for(const a of g)for(const b of g)if(a.id!=='tide-ritualist'||b.id!=='tide-ritualist')assert.equal(canReceiveReport(a,b),false);
     }
@@ -51,7 +52,7 @@ test('strict actor capability rejects unknown fields, versions, programs, armame
     const f=fixture(),valid=decodeSession(f.data.get(SESSION_KEY)!);
     for(const mutate of [
         (e:any)=>{e.tactics.program.extra=true;},(e:any)=>{e.tactics.program.kind='future';},(e:any)=>{e.tactics.program.armament='shotgun';},
-        (e:any)=>{e.tactics.version=1;},(e:any)=>{e.tactics.version=3;},(e:any)=>{e.tactics.magazine=5;},(e:any)=>{e.tactics.reserve=9;},
+        (e:any)=>{e.tactics.version=1;},(e:any)=>{e.tactics.version=3;},(e:any)=>{e.tactics.magazine=13;},(e:any)=>{e.tactics.reserve=9;},
         (e:any)=>{e.tactics.equipment='pistol';},(e:any)=>{delete e.tactics.program;},(e:any)=>{e.tactics.program=null;},
     ]) {
         const bad=structuredClone(valid),e=bad.expansion!.raid!.maps.coast.enemies.find(e=>e.id==='tide-ritualist')!;
@@ -80,9 +81,9 @@ test('gun ritualist emits a real finite rifle shot and drops that same weapon an
     assert.ok(f.saves.persist(),f.state.storageError);f.state.state='run';const r=new CoastRaidRuntime(f.state,f.saves);
     r.updateEnemy(r.enemies.find(a=>a.uid===e.uid)!,.05);
     const batch=r.current(),shot=batch.events.find(v=>v.type==='shot'&&v.shooter===e.uid);assert.ok(shot?.type==='shot');assert.equal(shot.weapon,'rifle');
-    const bullet=r.bullets.find(b=>b.uid===shot.pellets[0].bullet)!;assert.equal(bullet.owner,e.uid);assert.equal(bullet.left,240);assert.equal(bullet.damage,12);
+    const bullet=r.bullets.find(b=>b.uid===shot.pellets[0].bullet)!;assert.equal(bullet.owner,e.uid);assert.equal(bullet.left,WEAPONS.carbine.range*.55);assert.equal(bullet.damage,WEAPONS.carbine.damage*.34);
     assert.equal(batch.frame.actors.find(a=>a.uid===e.uid)!.weapon,'rifle');assert.ok(r.checkpoint());
-    const live=group(f).find(a=>a.uid===e.uid)!;assert.equal(live.tactics!.magazine,3);
+    const live=group(f).find(a=>a.uid===e.uid)!;assert.equal(live.tactics!.magazine,11);
     damageLayerEnemy(f.state.expansion!,'coast',live,1000);
     const corpse=f.raid.maps.coast.containers.find(c=>c.id===`corpse-${e.uid}`)!;
     assert.equal(corpse.inventory.items.filter(i=>i.id==='carbine').reduce((n,i)=>n+i.qty,0),1);
@@ -106,15 +107,15 @@ test('dangerous service-yard posts and a public bypass remain usable at both tid
     }
 });
 
-test('a real v2 reload resumed midway fills its four-round magazine once and debits the saved reserve',()=>{
+test('a real v2 gun reload resumed midway loads only the saved reserve once',()=>{
     const f=fixture(),e=group(f).find(e=>e.id==='tide-ritualist')!;
     Object.assign(e.tactics!,{phase:'reload',phaseLeft:.3,magazine:0,reserve:5});assert.ok(f.saves.persist());
     f.state.state='run';const original=new CoastRaidRuntime(f.state,f.saves);original.updateEnemy(original.enemies.find(a=>a.uid===e.uid)!,.15);assert.ok(original.checkpoint());
     const state=createSessionState(),saves=new SaveSession(state,()=>({getItem:k=>f.data.get(k)??null,setItem:(k,v)=>f.data.set(k,v)}),undefined,()=>1800000000000);
     assert.ok(saves.initialize());assert.ok(saves.resumeRun());state.state='run';const copy=new CoastRaidRuntime(state,saves),live=copy.enemies.find(a=>a.uid===e.uid)!;
-    assert.equal(copy.current().frame.actors.find(a=>a.uid===e.uid)!.state.reloading!.total,2.4);assert.equal(live.tactics!.phaseLeft,.15);
-    copy.updateEnemy(live,.2);assert.equal(live.tactics!.magazine,4);assert.equal(live.tactics!.reserve,1);assert.equal(live.tactics!.phase,'idle');
-    copy.updateEnemy(live,.2);assert.equal(live.tactics!.magazine,4);assert.equal(live.tactics!.reserve,1);
+    assert.equal(copy.current().frame.actors.find(a=>a.uid===e.uid)!.state.reloading!.total,WEAPONS.carbine.reload);assert.equal(live.tactics!.phaseLeft,.15);
+    copy.updateEnemy(live,.2);assert.equal(live.tactics!.magazine,5);assert.equal(live.tactics!.reserve,0);assert.equal(live.tactics!.phase,'idle');
+    copy.updateEnemy(live,.2);assert.equal(live.tactics!.magazine,5);assert.equal(live.tactics!.reserve,0);
     original.cancelStart();copy.cancelStart();
 });
 

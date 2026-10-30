@@ -333,7 +333,8 @@ export function validateExpansion(value: unknown, profile: D.SaveDataV1 | Profil
         for (const key of ['timer', 'cooldown', 'repath', 'alert'] as const) if (!finite(e[key], -10000, 10000)) fail();
         if (spec) {
             const t = e.tactics!;
-            exactKeys(t, ['version', 'squad', 'awareness', 'stance', 'warning', 'memory', 'phase', 'phaseLeft', 'lockedAim', 'magazine', 'reserve', 'signalUsed', 'equipment', 'supplies', 'killedBy', ...(Object.hasOwn(t, 'fit') ? ['fit'] : []), ...(t.version === 2 ? ['program'] : [])]);
+            exactKeys(t, ['version', 'squad', 'awareness', 'stance', 'warning', 'memory', 'phase', 'phaseLeft', 'lockedAim', 'magazine', 'reserve', 'signalUsed', 'equipment', 'supplies', 'killedBy', ...(Object.hasOwn(t, 'fit') ? ['fit'] : []), ...(Object.hasOwn(t, 'ballistics') ? ['ballistics'] : []), ...(t.version === 2 ? ['program'] : [])]);
+            if (Object.hasOwn(t, 'ballistics') && (t.ballistics !== 1 || !spec.ballistics)) fail();
             if (t.version === 2) {
                 if(!obj(t.program))fail();
                 if(t.program.kind==='affected') {
@@ -357,6 +358,7 @@ export function validateExpansion(value: unknown, profile: D.SaveDataV1 | Profil
                 || !['idle', 'warning', 'hostile', 'retreat'].includes(t.stance)
                 || !['idle', 'windup', 'release', 'recovery', 'reload'].includes(t.phase) || !finite(t.phaseLeft, 0, 10)
                 || !finite(t.lockedAim, -100, 100) || !whole(t.magazine, 0, spec.magazine) || !whole(t.reserve, 0, spec.reserve)
+                || (spec.ballistics && t.magazine + t.reserve > spec.ballistics.budget)
                 || typeof t.signalUsed !== 'boolean'
                 // The archetype's old gun (a raid from before #28 M4-02), or one of its ARMORY guns; a leader's parts only on one of those.
                 || (t.equipment !== initial.equipment && (initial.equipment === null || !(armoryGuns(e.id) as (string | null)[]).includes(t.equipment)))

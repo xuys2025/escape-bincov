@@ -1,0 +1,794 @@
+{
+  "baseline": "e3a749618870a0925418713505a2e64cf77118d4",
+  "htmlSha256": "58f265fcc4c8a7883ab763c71f74ada8f7ec5ea9e5ad8b83f5a3f5b9602040e4",
+  "environment": {
+    "browser": "156.0.8078.48",
+    "platform": "Windows",
+    "node": "24.21.0",
+    "pnpm": "11.19.0"
+  },
+  "unit": {
+    "failed": 0,
+    "passed": 1119
+  },
+  "engineering": {
+    "failed": 0,
+    "passed": 139
+  },
+  "package": {
+    "portableBytes": 6120548,
+    "webBytes": 6116039
+  },
+  "enemy": {
+    "shotSamples": [
+      {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "scenario": "native-market-deployment-and-restore",
+        "population": 25,
+        "squad": [
+          {
+            "uid": "enemy-4",
+            "id": "raider-boss"
+          },
+          {
+            "uid": "enemy-5",
+            "id": "raider-melee"
+          },
+          {
+            "uid": "enemy-12",
+            "id": "raider-gunner"
+          }
+        ],
+        "saveVersion": 9,
+        "screenshot": "native-market-1280.png",
+        "gun": "mb1014",
+        "pellets": 6,
+        "remainingShells": 13,
+        "damagePerPellet": 5.04,
+        "range": 174
+      },
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "scenario": "native-market-deployment-and-restore",
+        "population": 25,
+        "squad": [
+          {
+            "uid": "enemy-4",
+            "id": "raider-boss"
+          },
+          {
+            "uid": "enemy-5",
+            "id": "raider-melee"
+          },
+          {
+            "uid": "enemy-12",
+            "id": "raider-gunner"
+          }
+        ],
+        "saveVersion": 9,
+        "screenshot": "native-market-1920.png",
+        "gun": "mb1014",
+        "pellets": 6,
+        "remainingShells": 13,
+        "damagePerPellet": 5.04,
+        "range": 174
+      },
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "scenario": "native-market-deployment-and-restore",
+        "population": 25,
+        "squad": [
+          {
+            "uid": "enemy-4",
+            "id": "raider-boss"
+          },
+          {
+            "uid": "enemy-5",
+            "id": "raider-melee"
+          },
+          {
+            "uid": "enemy-12",
+            "id": "raider-gunner"
+          }
+        ],
+        "saveVersion": 9,
+        "screenshot": "native-market-844.png",
+        "gun": "mb1014",
+        "pellets": 6,
+        "remainingShells": 13,
+        "damagePerPellet": 5.04,
+        "range": 174
+      }
+    ],
+    "externalRequests": [],
+    "coverage": {
+      "schemaVersion": 1,
+      "shard": "all",
+      "runId": null,
+      "runAttempt": null,
+      "commit": null,
+      "startedAt": "2026-10-30T16:17:36.035Z",
+      "finishedAt": "2026-10-30T16:25:51.295Z",
+      "status": "passed",
+      "units": [
+        {
+          "id": "1280x720/street",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "context": {
+            "offline": true,
+            "hasTouch": false,
+            "isMobile": false
+          },
+          "caseIds": [
+            "1280x720/windup",
+            "1280x720/enemy-synth-output-contract",
+            "1280x720/reload",
+            "1280x720/recovery",
+            "1280x720/parley",
+            "1280x720/raider-melee-windup",
+            "1280x720/raider-melee-corpse",
+            "1280x720/raider-gunner-corpse",
+            "1280x720/raider-lookout-windup",
+            "1280x720/raider-lookout-corpse",
+            "1280x720/raider-boss-windup",
+            "1280x720/raider-boss-corpse",
+            "1280x720/tidal-crab-motion-contract",
+            "1280x720/tidal-crab-windup",
+            "1280x720/tidal-crab-corpse",
+            "1280x720/saltback-dog-motion-contract",
+            "1280x720/saltback-dog-windup",
+            "1280x720/saltback-dog-corpse",
+            "1280x720/sac-spitter-motion-contract",
+            "1280x720/sac-spitter-windup",
+            "1280x720/spit-presentation-contract",
+            "1280x720/sac-spitter-corpse",
+            "1280x720/salt-dazed-motion-contract",
+            "1280x720/salt-dazed-windup",
+            "1280x720/salt-dazed-corpse",
+            "1280x720/tide-chaser-motion-contract",
+            "1280x720/tide-chaser-windup",
+            "1280x720/tide-chaser-corpse",
+            "1280x720/tide-ritualist-windup",
+            "1280x720/tide-ritualist-corpse",
+            "1280x720/salt-hulk-motion-contract",
+            "1280x720/salt-hulk-windup",
+            "1280x720/salt-hulk-corpse",
+            "1280x720/mercenary-scout-windup",
+            "1280x720/mercenary-scout-corpse",
+            "1280x720/mercenary-assault-windup",
+            "1280x720/mercenary-assault-corpse",
+            "1280x720/mercenary-support-windup",
+            "1280x720/mercenary-support-corpse",
+            "1280x720/recovery-leader-windup",
+            "1280x720/recovery-leader-corpse",
+            "1280x720/blockade-sentry-windup",
+            "1280x720/blockade-sentry-corpse",
+            "1280x720/blockade-patrol-windup",
+            "1280x720/blockade-patrol-corpse",
+            "1280x720/blockade-sergeant-windup",
+            "1280x720/blockade-sergeant-corpse",
+            "1280x720/native-market-deployment-and-restore",
+            "1280x720/native-fauna-tidal-crab",
+            "1280x720/native-fauna-saltback-dog",
+            "1280x720/native-fauna-sac-spitter",
+            "1280x720/native-affected-salt-dazed-47",
+            "1280x720/native-affected-tide-chaser-47",
+            "1280x720/native-affected-tide-ritualist-47",
+            "1280x720/native-affected-tide-ritualist-62",
+            "1280x720/native-affected-salt-hulk-47",
+            "1280x720/native-recovery-recovery-leader",
+            "1280x720/native-recovery-mercenary-scout",
+            "1280x720/native-recovery-mercenary-assault",
+            "1280x720/native-recovery-mercenary-support",
+            "1280x720/native-blockade-registration-and-passage",
+            "1280x720/native-blockade-blockade-sentry",
+            "1280x720/native-blockade-blockade-patrol",
+            "1280x720/native-blockade-blockade-sergeant"
+          ]
+        },
+        {
+          "id": "1920x1080/street",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          },
+          "context": {
+            "offline": true,
+            "hasTouch": false,
+            "isMobile": false
+          },
+          "caseIds": [
+            "1920x1080/windup",
+            "1920x1080/reload",
+            "1920x1080/recovery",
+            "1920x1080/parley",
+            "1920x1080/raider-melee-windup",
+            "1920x1080/raider-melee-corpse",
+            "1920x1080/raider-gunner-corpse",
+            "1920x1080/raider-lookout-windup",
+            "1920x1080/raider-lookout-corpse",
+            "1920x1080/raider-boss-windup",
+            "1920x1080/raider-boss-corpse",
+            "1920x1080/tidal-crab-windup",
+            "1920x1080/tidal-crab-corpse",
+            "1920x1080/saltback-dog-windup",
+            "1920x1080/saltback-dog-corpse",
+            "1920x1080/sac-spitter-windup",
+            "1920x1080/sac-spitter-corpse",
+            "1920x1080/salt-dazed-windup",
+            "1920x1080/salt-dazed-corpse",
+            "1920x1080/tide-chaser-windup",
+            "1920x1080/tide-chaser-corpse",
+            "1920x1080/tide-ritualist-windup",
+            "1920x1080/tide-ritualist-corpse",
+            "1920x1080/salt-hulk-windup",
+            "1920x1080/salt-hulk-corpse",
+            "1920x1080/mercenary-scout-windup",
+            "1920x1080/mercenary-scout-corpse",
+            "1920x1080/mercenary-assault-windup",
+            "1920x1080/mercenary-assault-corpse",
+            "1920x1080/mercenary-support-windup",
+            "1920x1080/mercenary-support-corpse",
+            "1920x1080/recovery-leader-windup",
+            "1920x1080/recovery-leader-corpse",
+            "1920x1080/blockade-sentry-windup",
+            "1920x1080/blockade-sentry-corpse",
+            "1920x1080/blockade-patrol-windup",
+            "1920x1080/blockade-patrol-corpse",
+            "1920x1080/blockade-sergeant-windup",
+            "1920x1080/blockade-sergeant-corpse",
+            "1920x1080/native-market-deployment-and-restore",
+            "1920x1080/native-fauna-tidal-crab",
+            "1920x1080/native-fauna-saltback-dog",
+            "1920x1080/native-fauna-sac-spitter",
+            "1920x1080/native-affected-salt-dazed-47",
+            "1920x1080/native-affected-tide-chaser-47",
+            "1920x1080/native-affected-tide-ritualist-47",
+            "1920x1080/native-affected-tide-ritualist-62",
+            "1920x1080/native-affected-salt-hulk-47",
+            "1920x1080/native-recovery-recovery-leader",
+            "1920x1080/native-recovery-mercenary-scout",
+            "1920x1080/native-recovery-mercenary-assault",
+            "1920x1080/native-recovery-mercenary-support",
+            "1920x1080/native-blockade-registration-and-passage",
+            "1920x1080/native-blockade-blockade-sentry",
+            "1920x1080/native-blockade-blockade-patrol",
+            "1920x1080/native-blockade-blockade-sergeant"
+          ]
+        },
+        {
+          "id": "844x390/street",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "context": {
+            "offline": true,
+            "hasTouch": true,
+            "isMobile": true
+          },
+          "caseIds": [
+            "844x390/parley",
+            "844x390/raider-melee-windup",
+            "844x390/raider-gunner-windup",
+            "844x390/raider-lookout-windup",
+            "844x390/raider-boss-windup",
+            "844x390/tidal-crab-windup",
+            "844x390/saltback-dog-windup",
+            "844x390/sac-spitter-windup",
+            "844x390/salt-dazed-windup",
+            "844x390/tide-chaser-windup",
+            "844x390/tide-ritualist-windup",
+            "844x390/salt-hulk-windup",
+            "844x390/mercenary-scout-windup",
+            "844x390/mercenary-assault-windup",
+            "844x390/mercenary-support-windup",
+            "844x390/recovery-leader-windup",
+            "844x390/blockade-sentry-windup",
+            "844x390/blockade-patrol-windup",
+            "844x390/blockade-sergeant-windup",
+            "844x390/native-market-deployment-and-restore",
+            "844x390/native-fauna-tidal-crab",
+            "844x390/native-fauna-saltback-dog",
+            "844x390/native-fauna-sac-spitter",
+            "844x390/native-affected-salt-dazed-47",
+            "844x390/native-affected-tide-chaser-47",
+            "844x390/native-affected-tide-ritualist-47",
+            "844x390/native-affected-tide-ritualist-62",
+            "844x390/native-affected-salt-hulk-47",
+            "844x390/native-recovery-recovery-leader",
+            "844x390/native-recovery-mercenary-scout",
+            "844x390/native-recovery-mercenary-assault",
+            "844x390/native-recovery-mercenary-support",
+            "844x390/native-blockade-registration-and-passage",
+            "844x390/native-blockade-blockade-sentry",
+            "844x390/native-blockade-blockade-patrol",
+            "844x390/native-blockade-blockade-sergeant"
+          ]
+        },
+        {
+          "id": "1280x720/mall",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "context": {
+            "offline": true,
+            "hasTouch": false,
+            "isMobile": false
+          },
+          "caseIds": [
+            "1280x720/native-mall-deployment",
+            "1280x720/native-mall-real-stair",
+            "1280x720/native-mall-art-and-paid-restore"
+          ]
+        },
+        {
+          "id": "1920x1080/mall",
+          "viewport": {
+            "width": 1920,
+            "height": 1080
+          },
+          "context": {
+            "offline": true,
+            "hasTouch": false,
+            "isMobile": false
+          },
+          "caseIds": [
+            "1920x1080/native-mall-deployment",
+            "1920x1080/native-mall-real-stair",
+            "1920x1080/native-mall-art-and-paid-restore"
+          ]
+        },
+        {
+          "id": "844x390/mall",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "context": {
+            "offline": true,
+            "hasTouch": true,
+            "isMobile": true
+          },
+          "caseIds": [
+            "844x390/native-mall-deployment",
+            "844x390/native-mall-real-stair",
+            "844x390/native-mall-art-and-paid-restore"
+          ]
+        }
+      ]
+    },
+    "errors": [],
+    "cases": 165,
+    "status": "PASS"
+  },
+  "range": {
+    "cases": [
+      {
+        "name": "range: storage, hits with every gun, automatic fire, panel presses, layout and abandon",
+        "status": "passed"
+      },
+      {
+        "name": "range: phone layout without the test hook, by touch",
+        "status": "passed"
+      }
+    ]
+  },
+  "saveBrowser": {
+    "status": "passed",
+    "externalRequests": [],
+    "steps": 17,
+    "errors": []
+  },
+  "naturalPlay": {
+    "finishedAt": "2026-10-30T16:30:45.592Z",
+    "externalRequests": [],
+    "enemyPhases": {
+      "raider-melee/idle": 116,
+      "raider-gunner/idle": 53,
+      "raider-gunner/windup": 4,
+      "raider-melee/windup": 3,
+      "raider-lookout/idle": 8,
+      "raider-lookout/windup": 1,
+      "mercenary-assault/idle": 46,
+      "mercenary-support/idle": 58,
+      "recovery-leader/idle": 87,
+      "mercenary-scout/idle": 69,
+      "raider-boss/idle": 37,
+      "salt-dazed/idle": 13,
+      "blockade-sentry/idle": 38,
+      "tidal-crab/idle": 10,
+      "mercenary-assault/windup": 3,
+      "mercenary-assault/recovery": 1
+    },
+    "status": "passed",
+    "outcomes": [
+      {
+        "outcome": "extract",
+        "kills": 2,
+        "seed": 42
+      },
+      {
+        "outcome": "extract",
+        "kills": 3,
+        "seed": 43
+      },
+      {
+        "outcome": "extract",
+        "kills": 2,
+        "seed": 44
+      },
+      {
+        "outcome": "extract",
+        "kills": 1,
+        "seed": 45
+      },
+      {
+        "outcome": "extract",
+        "kills": 1,
+        "seed": 46
+      },
+      {
+        "outcome": "extract",
+        "kills": 0,
+        "seed": 47
+      },
+      {
+        "outcome": "death",
+        "kills": 3,
+        "seed": 48
+      },
+      {
+        "outcome": "extract",
+        "kills": 1,
+        "seed": 49
+      },
+      {
+        "outcome": "extract",
+        "kills": 0,
+        "seed": 50
+      },
+      {
+        "outcome": "extract",
+        "kills": 0,
+        "seed": 51
+      },
+      {
+        "outcome": "death",
+        "kills": 1,
+        "seed": 52
+      },
+      {
+        "outcome": "extract",
+        "kills": 1,
+        "seed": 53
+      },
+      {
+        "outcome": "extract",
+        "kills": 3,
+        "seed": 54
+      },
+      {
+        "outcome": "extract",
+        "kills": 6,
+        "seed": 55
+      },
+      {
+        "outcome": "extract",
+        "kills": 1,
+        "seed": 56
+      },
+      {
+        "outcome": "extract",
+        "kills": 2,
+        "seed": 57
+      },
+      {
+        "outcome": "extract",
+        "kills": 1,
+        "seed": 58
+      },
+      {
+        "outcome": "extract",
+        "kills": 1,
+        "seed": 59
+      },
+      {
+        "outcome": "extract",
+        "kills": 2,
+        "seed": 60
+      }
+    ],
+    "minutes": 10,
+    "nativeTransfers": 18,
+    "startedAt": "2026-10-30T16:20:36.427Z",
+    "errors": [],
+    "world": "buildings",
+    "timing": {
+      "method": "Wall intervals attributed to the previous observed UI state (including its UI actions); simulation sums nonnegative published run-clock deltas. Neither is a GPU/active-fun measurement.",
+      "runWallSeconds": 573.154999999997,
+      "baseWallSeconds": 11.413000000000004,
+      "resultWallSeconds": 23.123,
+      "otherWallSeconds": 0,
+      "simulationSeconds": 510.68739999999565,
+      "playStartedAt": "2026-10-30T16:20:37.672Z"
+    }
+  },
+  "oldClient": {
+    "status": "PASS",
+    "baseline": "e3a749618870a0925418713505a2e64cf77118d4",
+    "method": "Accepted main source rebuilt through the formal game bundler; its exact five changed source files restored with git show. Unchanged CSS/template, dependencies and other sources. Offline browser, unchanged current v9 session envelope; ballistics is the incompatible key.",
+    "baselineHtmlSha256": "3835cb482be78bec545137b52a9f917301bcaeb8c44b11d04fd5ee4dc9986424",
+    "browser": "156.0.8078.48",
+    "cases": [
+      {
+        "name": "new-rules-refused",
+        "storageOK": false,
+        "originalBytesPreserved": true,
+        "persistRefused": true
+      },
+      {
+        "name": "old-active-rules-accepted",
+        "storageOK": true,
+        "raidPreserved": true
+      }
+    ]
+  },
+  "beforeShots": {
+    "baseline": "e3a74961",
+    "cases": [
+      {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "gun": "mb1014",
+        "pellets": 1,
+        "screenshot": "native-market-1280-before.png"
+      },
+      {
+        "viewport": {
+          "width": 1920,
+          "height": 1080
+        },
+        "gun": "mb1014",
+        "pellets": 1,
+        "screenshot": "native-market-1920-before.png"
+      }
+    ]
+  },
+  "shooting": {
+    "fullSuite": {
+      "failed": [
+        {
+          "id": "k",
+          "name": "a crowded fight stays within the particle and voice budget; the player's own blood and cues still come through",
+          "status": "failed",
+          "error": "the player's kill got 0 new voices (want at least 3); the player's pain got 0 new voices (want at least 2)",
+          "detail": {
+            "audio": "running",
+            "frames": 120,
+            "blood": 14,
+            "report": 4,
+            "hit": 2,
+            "kill": 0,
+            "pain": 0,
+            "peak": {
+              "particles": 269,
+              "voices": 96
+            },
+            "dropped": {
+              "particles": {
+                "decor": 1414,
+                "core": 0
+              },
+              "voices": {
+                "decor": 953,
+                "core": 273
+              }
+            }
+          },
+          "seconds": 0.7
+        }
+      ],
+      "status": "failed",
+      "passed": 16
+    },
+    "baseline": [
+      {
+        "id": "k",
+        "name": "a crowded fight stays within the particle and voice budget; the player's own blood and cues still come through",
+        "status": "failed",
+        "error": "the player's kill got 0 new voices (want at least 3); the player's pain got 0 new voices (want at least 2)",
+        "detail": {
+          "audio": "running",
+          "frames": 120,
+          "blood": 14,
+          "report": 4,
+          "hit": 2,
+          "kill": 0,
+          "pain": 0,
+          "peak": {
+            "particles": 265,
+            "voices": 96
+          },
+          "dropped": {
+            "particles": {
+              "decor": 1425,
+              "core": 0
+            },
+            "voices": {
+              "decor": 953,
+              "core": 263
+            }
+          }
+        },
+        "seconds": 0.7
+      }
+    ],
+    "candidate": [
+      {
+        "id": "k",
+        "name": "a crowded fight stays within the particle and voice budget; the player's own blood and cues still come through",
+        "status": "failed",
+        "error": "the player's report got 2 new voices (want at least 4); the player's hit got 0 new voices (want at least 2); the player's kill got 0 new voices (want at least 3); the player's pain got 0 new voices (want at least 2)",
+        "detail": {
+          "audio": "running",
+          "frames": 120,
+          "blood": 14,
+          "report": 2,
+          "hit": 0,
+          "kill": 0,
+          "pain": 0,
+          "peak": {
+            "particles": 264,
+            "voices": 96
+          },
+          "dropped": {
+            "particles": {
+              "decor": 1425,
+              "core": 0
+            },
+            "voices": {
+              "decor": 953,
+              "core": 265
+            }
+          }
+        },
+        "seconds": 0.7
+      }
+    ]
+  },
+  "layeredPlay": {
+    "baseline": {
+      "requests": [],
+      "status": "failed",
+      "runs": [
+        {
+          "run": 1,
+          "result": {
+            "outcome": "death",
+            "kills": 1,
+            "keptValue": 0,
+            "lostValue": 233,
+            "seed": 41,
+            "recovered": false,
+            "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+          },
+          "realSeconds": 69.278,
+          "lastObservedElapsed": 68.90779999999518
+        },
+        {
+          "run": 2,
+          "result": {
+            "outcome": "extract",
+            "kills": 0,
+            "keptValue": 0,
+            "lostValue": 0,
+            "seed": 41,
+            "recovered": false,
+            "message": "成功撤离，装备和物资已带回水产站。"
+          },
+          "realSeconds": 7.777,
+          "lastObservedElapsed": 4.5017999999969955
+        },
+        {
+          "run": 3,
+          "result": {
+            "outcome": "extract",
+            "kills": 0,
+            "keptValue": 0,
+            "lostValue": 0,
+            "seed": 41,
+            "recovered": false,
+            "message": "成功撤离，装备和物资已带回水产站。"
+          },
+          "realSeconds": 8.981,
+          "lastObservedElapsed": 5.705200000002977
+        }
+      ],
+      "errors": [],
+      "failure": "AssertionError [ERR_ASSERTION]: At least one unaccelerated full 600-second action\n    at file:///D:/bincov/enemy-weapon-stats/test-results/issue152-layered-main.mjs:76:9"
+    },
+    "candidate": {
+      "requests": [],
+      "status": "failed",
+      "runs": [
+        {
+          "run": 1,
+          "result": {
+            "outcome": "death",
+            "kills": 1,
+            "keptValue": 0,
+            "lostValue": 236,
+            "seed": 41,
+            "recovered": false,
+            "message": "撤离失败，背包物资和主武器丢失。安全箱内的物品和水手匕首保留。"
+          },
+          "realSeconds": 70.12,
+          "lastObservedElapsed": 69.73419999999376
+        },
+        {
+          "run": 2,
+          "result": {
+            "outcome": "extract",
+            "kills": 0,
+            "keptValue": 0,
+            "lostValue": 0,
+            "seed": 41,
+            "recovered": false,
+            "message": "成功撤离，装备和物资已带回水产站。"
+          },
+          "realSeconds": 7.905,
+          "lastObservedElapsed": 4.6302000000029615
+        },
+        {
+          "run": 3,
+          "result": {
+            "outcome": "extract",
+            "kills": 0,
+            "keptValue": 0,
+            "lostValue": 0,
+            "seed": 41,
+            "recovered": false,
+            "message": "成功撤离，装备和物资已带回水产站。"
+          },
+          "realSeconds": 8.832,
+          "lastObservedElapsed": 5.562499999999994
+        }
+      ],
+      "errors": [],
+      "failure": "AssertionError [ERR_ASSERTION]: At least one unaccelerated full 600-second action\n    at file:///D:/bincov/enemy-weapon-stats/scripts/layered-play.mjs:76:9"
+    }
+  },
+  "postMainSync": {
+    "baseline": "61cd6c5591e3248230ac374d78dfb3b2d26bde95",
+    "htmlSha256": "b0f35350cbbfc255a3b3963f47b59ca56f8e9430455895556cdef6b613b6c6be",
+    "unit": {
+      "failed": 0,
+      "passed": 1119
+    },
+    "engineering": {
+      "failed": 0,
+      "passed": 139
+    },
+    "package": {
+      "webBytes": 6116066,
+      "portableBytes": 6120575
+    },
+    "note": "Full local browser evidence above used the pre-sync artifact; the only upstream addition is PR #160 station menu repaint, with no combat changes. Exact final-head full browsers are required in PR CI."
+  }
+}

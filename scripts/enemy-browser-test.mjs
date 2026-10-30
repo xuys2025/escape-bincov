@@ -11,7 +11,7 @@ import { createSessionState, SaveSession } from '../src/session.ts';
 import { decodeSession, SESSION_KEY } from '../src/recovery-store.ts';
 import { BUILDING_WORLD } from '../src/building-world.ts';
 import { corridor, traversable } from '../src/spatial.ts';
-import { archetype, initialTactics } from '../src/enemy-archetypes.ts';
+import { actorArchetype, archetype, initialTactics } from '../src/enemy-archetypes.ts';
 import { damageLayerEnemy } from '../src/layer-transition.ts';
 import { ENEMY_CATALOG } from './enemy-catalog-data.ts';
 import { MARKET_RAIDERS, MARKET_STORES } from '../src/enemy-posts.ts';
@@ -40,6 +40,10 @@ function fixture(phase, role = 'raider-gunner') {
         e.id = role; e.hp = spec.hp; e.tactics = initialTactics(role, 'art-review');
         raid.roster.find(r => r.uid === e.uid).id = role;
     }
+    // These authored phase/art fixtures exercise the historical controller's full telegraph times. Native encounter
+    // cases below retain #152 gun rules; their own saved phases/ammunition are observed without restocking.
+    delete e.tactics.ballistics;
+    Object.assign(e.tactics, { magazine: spec.magazine, reserve: spec.reserve });
     const context = { definition: BUILDING_WORLD.maps.coast, doors: raid.maps.coast.doors, highTide: raid.highTide };
     const p = [0, Math.PI / 2, Math.PI, -Math.PI / 2].map(a => ({ x: e.x + Math.cos(a) * 96, y: e.y + Math.sin(a) * 96 }))
         .find(p => traversable(context, p, 'body', 10) && corridor(context, e, p, 'sight'));
@@ -230,16 +234,27 @@ try {
             const a = window.__bincovSample.host.lastBatch.frame.actors.find(a => a.uid === uid);
             return a?.tactics && ['windup','release','recovery'].includes(a.tactics.phase);
         }, boss.uid);
+        const combat = actorArchetype(boss);
+        assert.equal(boss.tactics.ballistics, 1); assert.equal(combat.ballistics.pellets, 6);
+        await native.waitForFunction(uid => window.__bincovSample.host.eventLog.some(e => e.type === 'shot' && e.detail.shooter === uid), boss.uid);
+        const shot = await native.evaluate(uid => window.__bincovSample.host.eventLog.find(e => e.type === 'shot' && e.detail.shooter === uid).detail, boss.uid);
+        assert.equal(shot.pellets.length, 6); assert.equal(shot.gun.id, boss.tactics.equipment);
+        assert.equal(new Set(shot.pellets.map(p => p.bullet)).size, 6);
+        assert.ok(new Set(shot.pellets.map(p => p.angle)).size > 1, 'the real enemy shotgun scatters its pellets');
+        assert.ok(Math.max(...shot.pellets.map(p => p.angle)) - Math.min(...shot.pellets.map(p => p.angle)) <= combat.ballistics.spread);
         const file = `native-market-${viewport.width}.png`; await native.screenshot({ path: resolve(out,file) }); report.screenshots.push(file);
         if (touch) await native.locator('.coast-sample [data-pause]').tap(); else await native.keyboard.press('Escape');
         await native.waitForFunction(() => window.__bincovSample.host.panel === 'pause');
         const saved = decodeSession(await native.evaluate(key => localStorage.getItem(key), SESSION_KEY));
+        const spent = saved.expansion.raid.maps.coast.enemies.find(e => e.uid === boss.uid).tactics;
+        assert.ok(spent.magazine + spent.reserve < combat.ballistics.budget, 'real fire consumes finite shells before refresh');
         await native.reload(); await native.locator('[data-action="enter"]').click(); await raidReady(native);
         const loaded = decodeSession(await native.evaluate(key => localStorage.getItem(key), SESSION_KEY));
         const members = r => r.expansion.raid.maps.coast.enemies.filter(e => e.tactics?.squad === MARKET_RAIDERS);
         assert.deepEqual(members(loaded),members(saved), 'paused checkpoint preserves complete native squad without restocking');
         report.cases.push({ viewport, scenario: 'native-market-deployment-and-restore', population: deployed.length,
-            squad: team.map(e => ({ uid:e.uid,id:e.id })), saveVersion:loaded.version, screenshot:file });
+            squad: team.map(e => ({ uid:e.uid,id:e.id })), saveVersion:loaded.version, screenshot:file,
+            gun:boss.tactics.equipment, pellets:shot.pellets.length, remainingShells:spent.magazine+spent.reserve, damagePerPellet:combat.damage, range:combat.range });
         console.log(`PASS native-market ${viewport.width}: ordinary deployment, attack and checkpoint restore`);
         await nativeContext.close();
         for(const focus of ['tidal-crab','saltback-dog','sac-spitter']){
@@ -298,7 +313,7 @@ try {
             assert.ok(observer);await drive(p,'placePlayer',observer,Math.atan2(point.y-observer.y,point.x-observer.x),'coast');
             await p.waitForFunction(uid=>{const a=window.__bincovSample.host.lastBatch.frame.actors.find(a=>a.uid===uid);return a?.tactics&&['windup','release','recovery'].includes(a.tactics.phase);},actor.uid);
             const actual=await p.evaluate(uid=>{const a=window.__bincovSample.host.lastBatch.frame.actors.find(a=>a.uid===uid);return {weapon:a.weapon,range:a.tactics.range};},actor.uid);
-            if(focus==='tide-ritualist')assert.deepEqual(actual,{weapon:seed===47?'rifle':'club',range:seed===47?240:64});
+            if(focus==='tide-ritualist')assert.deepEqual(actual,{weapon:seed===47?'rifle':'club',range:actorArchetype(actor).range});
             const image=`native-affected-${focus}-${seed}-${viewport.width}.png`;await p.screenshot({path:resolve(out,image)});report.screenshots.push(image);
             if(touch)await p.locator('.coast-sample [data-pause]').tap();else await p.keyboard.press('Escape');
             await p.waitForFunction(()=>window.__bincovSample.host.panel==='pause');

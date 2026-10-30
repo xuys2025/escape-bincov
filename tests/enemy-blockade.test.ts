@@ -4,7 +4,7 @@ import {createSessionState,SaveSession} from '../src/session';
 import {decodeSession,SESSION_KEY} from '../src/recovery-store';
 import {CoastRaidRuntime,emptyIntent} from '../src/raid-runtime/runtime';
 import {BLOCKADE_POSTS,BLOCKADE_SQUAD,BLOCKADE_WAIT,BLOCKADE_WAIT_POINT,BLOCKADE_PASSAGE,blockadeProgram,blockadePassageAllowed} from '../src/enemy-blockade';
-import {initialTactics} from '../src/enemy-archetypes';
+import {actorArchetype,initialTactics} from '../src/enemy-archetypes';
 import {damageLayerEnemy} from '../src/layer-transition';
 import {canonicalBehavior} from './fixtures/enemy-benchmark';
 import {firstAvailableSlot} from '../src/loot';
@@ -46,14 +46,14 @@ test('native checkpoint replaces three slots and preserves all cargo, RNG, story
             assert.equal(loot(f.raid),loot(old.raid));assert.equal(f.raid.rng,old.raid.rng);
             const guards=(r:typeof f.raid)=>Object.values(r.maps).flatMap(m=>m.enemies).filter(e=>e.id==='elite').map(e=>[e.uid,e.x,e.y]);
             assert.deepEqual(guards(f.raid),guards(old.raid));
-            for(const e of team(f)){assert.equal(blockadeProgram(e)!.leader,captain(f).uid);assert.equal(e.tactics!.magazine,6);assert.equal(e.tactics!.reserve,12);}
+            for(const e of team(f)){assert.equal(blockadeProgram(e)!.leader,captain(f).uid);assert.equal(e.tactics!.magazine,Math.min(actorArchetype(e)!.magazine,18));assert.equal(e.tactics!.magazine+e.tactics!.reserve,18);}
             decodeSession(f.raw);
         } finally {f.runtime.cancelStart();old.runtime.cancelStart();}
     }
 });
 
 test('ordinary armed observation outside the boundary never registers or attacks',()=>{
-    const f=fixture();try {step(f,6);assert.equal(program(f).phase,'none');for(const e of team(f)){assert.equal(e.tactics!.stance,'idle');assert.equal(e.tactics!.magazine,6);}assert.ok(f.runtime.checkpoint());}
+    const f=fixture();try {const ammo=team(f).map(e=>[e.tactics!.magazine,e.tactics!.reserve]);step(f,6);assert.equal(program(f).phase,'none');for(const e of team(f))assert.equal(e.tactics!.stance,'idle');assert.deepEqual(team(f).map(e=>[e.tactics!.magazine,e.tactics!.reserve]),ammo);assert.ok(f.runtime.checkpoint());}
     finally {f.runtime.cancelStart();}
 });
 
@@ -92,7 +92,7 @@ test('permission covers the marked public passage only; actual repeated trespass
         Object.assign(f.runtime.player,{x:784,y:1104});step(f,1);assert.equal(team(f).find(e=>e.id==='blockade-sentry')!.tactics!.stance,'idle');
         const sentry=team(f).find(e=>e.id==='blockade-sentry')!;assert.ok(blockadePassageAllowed(sentry,f.runtime.player));
         Object.assign(f.runtime.player,{x:784,y:1072});assert.equal(blockadePassageAllowed(sentry,f.runtime.player),false);step(f,6);
-        assert.ok(team(f).some(e=>e.tactics!.magazine<6),'the committed attack releases and consumes real ammunition');
+        assert.ok(team(f).some(e=>e.tactics!.magazine+e.tactics!.reserve<18),'the committed attack releases and consumes real ammunition');
         assert.equal(program(f).phase,'engaged');const copy=savedCopy(f);assert.equal(blockadeProgram(copy.enemies.find(e=>e.uid===captain(f).uid)!)!.phase,'engaged');copy.cancelStart();
         Object.assign(f.runtime.player,BLOCKADE_WAIT_POINT);assert.ok(ask(f));assert.equal(program(f).phase,'engaged');
     } finally {f.runtime.cancelStart();}

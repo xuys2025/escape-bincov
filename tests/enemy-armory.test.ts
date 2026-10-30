@@ -13,7 +13,7 @@ import { validFit } from '../src/gunsmith/presets';
 import { nodesOf, validateGun } from '../src/gunsmith/instance';
 
 // #28 M4-02 (#140, maintainer 2026-10-29): the armed enemies hold catalog guns by faction and rank, the leaders' with one
-// to three parts, and their bodies yield that very gun. Their own numbers stay the archetype's (#152). Rules in
+// to three parts, and their bodies yield that very gun. #152 adds opt-in gun combat for new encounters. Rules in
 // docs/gunsmith/CONTRACTS.md, 「敌人拿什么枪就掉什么枪（M4-02）」.
 
 function deployed(seed: number) {
@@ -85,7 +85,7 @@ test('the record refuses a gun off the row, parts on a follower, and parts that 
     bad(copy => { find(copy, leader.uid).tactics!.fit = []; });
     // A raid installed before M4-02 holds the archetype's old gun (the carbine for every rifle) and no parts.
     const old = structuredClone(e);
-    for (const x of armed(old)) { const t = x.tactics!; t.equipment = ({ pistol: 'pistol', shotgun: 'shotgun', rifle: 'carbine' } as Record<string, string>)[archetype(x.id)!.weapon] ?? 'carbine'; delete t.fit; }
+    for (const x of armed(old)) { const t = x.tactics!, spec = archetype(x.id)!; t.equipment = ({ pistol: 'pistol', shotgun: 'shotgun', rifle: 'carbine' } as Record<string, string>)[spec.weapon] ?? 'carbine'; delete t.fit; delete t.ballistics; t.magazine = spec.magazine; t.reserve = spec.reserve; }
     assert.doesNotThrow(() => check(old, state.save));
 });
 

@@ -1,9 +1,9 @@
 /**
  * What each armed enemy holds (#28 M4-02, #140, maintainer 2026-10-29): a catalog gun by faction and rank, and for the
  * three leaders a gun with one to three parts. It is drawn once, when an encounter is installed, from the raid's seed and
- * the enemy's uid alone, so no other random draw of the raid changes. The enemy's own numbers stay its archetype's
- * (damage, range, fire rate, magazine); the gun decides what it holds, what it sounds like and what its body yields
- * (layer-transition.ts, with gunsmith/presets.ts presetState). Using the gun's numbers is #152. Pure rules over the catalog.
+ * the enemy's uid alone, so no other random draw of the raid changes. New encounters opt into the gun's combat rules
+ * (#152, actorArchetype); old active actors keep their archetype's numbers. The body yields the same gun and parts
+ * (layer-transition.ts, with gunsmith/presets.ts presetState). Pure rules over the catalog.
  */
 import * as D from './domain';
 import { ATTACHMENTS, GUNS, partTier, type GunId } from './gunsmith/catalog';
@@ -12,6 +12,7 @@ import { presetOf, type PresetNode } from './gunsmith/presets';
 import type { PartNode } from './gunsmith/instance';
 import type { LayeredRaid } from './expansion-state';
 import { PREMIUM_BLANKS } from './gunsmith/premium';
+import { actorArchetype } from './enemy-archetypes';
 
 /** Each armed archetype's guns with their weights (maintainer's table, #140); a weight of 1 against 3 or 4 is 「少数」. */
 export const ARMORY: Readonly<Record<string, readonly (readonly [GunId, number])[]>> = (() => {
@@ -85,5 +86,10 @@ export function armEncounter(raid: Pick<LayeredRaid, 'seed' | 'maps'>): void {
         if (!arms || !GUNS[arms.gun]) continue;
         t.equipment = arms.gun;
         if (arms.fit.length) t.fit = arms.fit; else delete t.fit;
+        const budget = t.magazine + t.reserve;
+        t.ballistics = 1;
+        // Capacity follows the gun; the ammunition already assigned to this enemy is merely redistributed.
+        t.magazine = Math.min(actorArchetype(e)!.magazine, budget);
+        t.reserve = budget - t.magazine;
     }
 }
