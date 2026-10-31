@@ -33,7 +33,7 @@ type Sequence =
   | { kind: 'power'; t: number }
   | { kind: 'leave'; t: number; runId: string }
   | { kind: 'away' }
-  | { kind: 'return'; t: number; summary: D.RunSummary };
+  | { kind: 'return'; t: number; summary: D.RunSummary | null };
 
 /** What the yard asks of the game around it; every save write still goes through the Runtime. */
 export interface StationHooks {
@@ -56,7 +56,8 @@ export interface StationHooks {
 export interface HostOptions {
   app: Application; shadow: ShadowRoot; mount: HTMLElement; rt: HideoutRuntime; sol: Map<string, HTMLCanvasElement>; art: StationArt;
   test: boolean; reduced: boolean; frozen: boolean; mood: string; touch: boolean; volume: number;
-  arrival: { runId: string; summary: D.RunSummary } | null; world: RunWorld; seed: string; hooks: StationHooks;
+  /** A settled raid's one-time arrival; `summary` is null when the result page already showed its report. */
+  arrival: { runId: string; summary: D.RunSummary | null } | null; world: RunWorld; seed: string; hooks: StationHooks;
   /** Areas the deploy panel offers. */
   worlds: readonly RunWorld[];
 }
@@ -279,8 +280,8 @@ export class StationHost {
     this.seq = { kind: 'leave', t: 0, runId: r.runId }; this.gateOpen = true; this.colKey = ''; this.audio.cue('gate');
     this.path = [{ x: 27.5 * T, y: 20.3 * T }, { x: 27.5 * T, y: 23.2 * T }];
   }
-  /** Walk in through the gate from a settled raid; the report opens once inside. */
-  private arrive(summary: D.RunSummary) {
+  /** Walk in through the gate from a settled raid; the report (if not shown already) opens once inside. */
+  private arrive(summary: D.RunSummary | null) {
     this.player = { ...this.player, x: 27.5 * T, y: 23.3 * T, dir8: 6 };
     this.seq = { kind: 'return', t: 0, summary }; this.gateOpen = true; this.colKey = ''; this.curtain = 1;
     this.path = [{ x: 27.5 * T, y: 19.6 * T }];
@@ -474,7 +475,7 @@ export class StationHost {
       this.curtain = 1;
     } else if (q.kind === 'return') {
       q.t += dt; this.curtain = Math.max(0, 1 - q.t * 1.2);
-      if (!this.path && q.t > 1) { this.gateOpen = false; this.colKey = ''; this.audio.cue('gate'); const summary = q.summary; this.seq = null; this.ui.summary = summary; this.ui.setQuickVisible(true); this.ui.show('report'); }
+      if (!this.path && q.t > 1) { this.gateOpen = false; this.colKey = ''; this.audio.cue('gate'); const summary = q.summary; this.seq = null; this.ui.setQuickVisible(true); if (summary) { this.ui.summary = summary; this.ui.show('report'); } }
     }
   }
 

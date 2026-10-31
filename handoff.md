@@ -1,3 +1,12 @@
+## 2026-10-31 · 两份行动报告合一（#163 待定项）
+
+分支 `fix/one-raid-report`，基线 main `278b7e24`。核对发现结算写入、写入失败重试、备份导出和撤离/死亡音效都在局内「正在保存结算」面板，两份报告只负责显示（#163 原写“结算页负责音效与重试落点”不准确）。做了对照表（A 保留旧结算页 / B 保留院子报告 / C 合并原型，三尺寸真实截图），维护者选 B，并同意不等 #165 先做。
+
+- 实现：`coast-view/sample.ts` 的 `finish` 改调页面 `settled` → `returnToStation`，结局动画后直接走进院门、只弹院子报告。旧结算页只在页签入口或 `returnToBase` 被拒时兜底，从它返回用 `returnToStation(true)`，不再弹第二份；院子起不来时报告在页签界面以对话框出现。存档规则不变。
+- 测试：7 个院子模式脚本改测新流程；`yard-entry.mjs` 新增 `watchOldPage` / `yardReport`（断言途中没画旧页面）与 `atRaidRelease` / `releasedState`（院子紧接着接管 Pixi 应用，停放状态改在释放瞬间读，回收检查放到院子起来之后）；station 新增 G8/G9/G10 兜底反例。
+- 验证（本机 Chrome，构建 `2e4eb2aa…`）：1113 单测、package、139 工程守卫；`test:station` 84/84，save-browser 17/17，raid-default 11/11，coast-render-targets 5/5，station-capability 4/4，browser、ui、systems、station-relief/tier1/tier2、hud-release、desktop-input、mobile 通过。station-round2-recheck（J,K,R）4/8、coast-lifecycle（review 类）1/5，与 main 原脚本逐项相同，改动处的检查通过。详见[任务页](docs/tasks/one-raid-report.md)。
+- 未做/待办：#165 合并后同步 main 重跑；真人/真机未验；院子报告没有“进度已保存”这句（未要求改）。
+
 ## 2026-10-30 · 商店整体布局：购买/出售页签与交易单（#26 F03）
 
 [PR #159](https://github.com/xuys2025/escape-bincov/pull/159)，分支 `claude/f03-shop-layout-1be71c`，基线 main `7d982a6f`。核对时发现旧三栏把钱分散在标题和底部小字里，任务警告还会让结算栏变高、1280×720 下整个面板缩小、格子挪位。做了三个本地原型（两侧对面 / 买卖页签 / 交易清单），维护者选了 B。院子商店左边是商人这边的「购买 / 出售」页签（购买页：筛选、货、待买；出售页：待卖和本单明细），右边一直是仓库和交易单（现有现金、买入、卖出、结算后、结算）；两页叠在同一格、隐藏页 inert，切页签、加物品、警告都不移动格子。购买页双击或拖到「出售」页签的仓库物品会进待卖并转页。手机沿用两栏切换，底部换成交易单。交易规则、ShopSession、存档和旧版页签商店都不变。1113 单测、package、139 项工程守卫，商店反馈 28/28（新增 F03 B，main 构建对照失败）、商店拖放、旧页签据点、改枪工作台、存档浏览器、院子完整验收合并前 80/80、合并后 79/80（I3 是 main 上也复现的菜单切换超时，已由 #160 修复）、手机 13/13 通过。细节、截图与边界见[任务记录](docs/tasks/shop-trade-tabs.md)；未合并、未发布，真人/真机未验。

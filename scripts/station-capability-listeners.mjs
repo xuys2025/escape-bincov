@@ -31,6 +31,7 @@ import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { chromium } from 'playwright';
 import { browserOptions } from './browser-options.mjs';
+import { watchOldPage, yardReport } from './yard-entry.mjs';
 import * as D from '../src/domain.ts';
 
 const arg = name => process.argv.find(a => a.startsWith(`--${name}=`))?.slice(name.length + 3);
@@ -133,10 +134,11 @@ async function trip(rows, label) {
   await page.waitForFunction(() => !!window.__bincovSample?.host?.lastBatch, null, { timeout: 20000 }); await page.waitForTimeout(600);
   rows.push(await sample(label + '-village'));
   await page.evaluate(() => { window.__bincovSample.driver.freezeAI(true); window.__bincovSample.driver.placePlayer({ x: 208, y: 122 }, Math.PI / 2); });
+  await watchOldPage(page);
   await page.keyboard.down('e'); try { await page.waitForFunction(() => window.__bincov.app.state === 'result', null, { timeout: 20000 }); } finally { await page.keyboard.up('e'); }
-  await page.waitForFunction(() => !document.querySelector('.coast-sample'));
-  await page.locator('[data-action="return"]').click(); await yardReady();
-  await page.waitForFunction(() => window.__station.host.ui.kind === 'report', null, { timeout: 8000 }); await page.locator('.report [data-act="close"]').click();
+  // After the outro the yard walks in by itself and opens the raid's one report (#163).
+  await page.waitForFunction(() => !document.querySelector('.coast-sample')); await yardReady();
+  await page.waitForFunction(() => window.__station.host.ui.kind === 'report', null, { timeout: 8000 }); await yardReport(page); await page.locator('.report [data-act="close"]').click();
 }
 /** Default-shader listener identities per group; the graphics adaptor's Shader is made new on every context change. */
 const ids = row => Object.fromEntries(row.groups.map(g => [g.units, g.listeners.filter(l => l.kind !== 'graphics-shader').map(l => l.bindGroup).sort((a, b) => a - b).join(',')]));

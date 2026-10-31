@@ -11,7 +11,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import { browserOptions } from './browser-options.mjs';
-import { deployFromYard, skipOpening, throughYard } from './yard-entry.mjs';
+import { deployFromYard, skipOpening, throughYard, watchOldPage, yardReport } from './yard-entry.mjs';
 
 const option = (name, fallback) => process.argv.find(a => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const out = resolve(option('out', 'test-results/raid-default'));
@@ -74,11 +74,15 @@ async function yardWorlds() {
 }
 const pixiRunning = () => page.waitForFunction(() => document.documentElement.dataset.coastSample === 'run' && !!document.querySelector('.coast-sample canvas'));
 const where = async () => { await page.waitForFunction(() => (document.querySelector('.coast-sample [data-where]')?.textContent ?? '').length > 0); return page.locator('.coast-sample [data-where]').textContent(); };
-/** Abandon from the pause panel (a resumed raid opens on it; a running one opens it with Esc). */
+/**
+ * Abandon from the pause panel (a resumed raid opens on it; a running one opens it with Esc). Every raid here settles on
+ * the yard entry: the yard walks in and shows the one report (#163); returns its text.
+ */
 async function abandonPixi() {
   if (!await page.locator('.coast-sample [data-do="abandon"]').isVisible()) await page.keyboard.press('Escape');
+  await watchOldPage(page);
   await page.locator('[data-do="abandon"]').click(); await page.locator('[data-do="abandon-yes"]').click();
-  await page.waitForFunction(() => !document.querySelector('.coast-sample') && !!document.querySelector('#ui [data-action="return"]'), null, { timeout: 30000 });
+  return yardReport(page);
 }
 /**
  * A raid started before the switch, left mid-raid: a classic coast checkpoint raid (test pages still deploy the closed
@@ -157,8 +161,7 @@ await check('R5 a classic coast raid started before the area closed resumes on t
   await page.waitForFunction(() => !!document.querySelector('.coast-sample [data-state]')?.textContent.trim());
   assert.doesNotMatch(await page.locator('.coast-sample [data-state]').textContent(), /精神|水分|饱食/, 'classic raids keep their original status line');
   await page.waitForTimeout(1200); await shot('R5-classic-resume-2.5d');
-  await abandonPixi();
-  assert.ok((await page.locator('#ui').innerText()).includes('行动报告'), 'the result page follows');
+  assert.match(await abandonPixi(), /行动报告[\s\S]*撤离失败/, 'the yard report follows');
   assert.deepEqual(await stored(), [], 'the settled raid left no world in the save');
   return r;
 });

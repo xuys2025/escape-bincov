@@ -10,6 +10,8 @@ export interface Navigation {
   changeState(state: Exclude<GameState, 'run'>): void;
   /** Hand the whole page to the raid view. */
   enterExternalRun(): void;
+  /** The raid's settlement is saved and its view released: by default the yard walks in and shows the one report. */
+  settled(): void;
   render(): void;
   /** Clear the tab page for the yard; false keeps it (a pending settlement shows its save dialog instead). */
   hideoutExternal(): boolean;

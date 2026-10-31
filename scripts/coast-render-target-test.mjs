@@ -6,6 +6,7 @@ import { resolve } from 'node:path';
 import { chromium } from 'playwright';
 import { browserOptions } from './browser-options.mjs';
 import { readManagedTables, readPixiEvents } from './pixi-managed-gate.mjs';
+import { atRaidRelease, releasedState, watchOldPage, yardReport } from './yard-entry.mjs';
 
 const option = (name, fallback) => process.argv.find(a => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const out = resolve(option('out', 'test-results/coast-render-targets'));
@@ -199,32 +200,30 @@ try {
   await check('real settlement, parked shared renderer and another yard departure release and rebuild cleanly', async row => {
     await pause(); await markTargets();
     await page.evaluate(() => { const h = window.__bincovSample.host; window.__targetProbe.host = new WeakRef(h); window.__targetProbe.view = new WeakRef(h.view); });
-    await page.locator('[data-do="abandon"]').click(); await page.locator('[data-do="abandon-yes"]').click();
-    await page.waitForFunction(() => window.__bincov.app.state === 'result' && !document.querySelector('.coast-sample'));
-    await collect();
-    row.parked = await page.evaluate(({ managed, events }) => {
+    // After the outro the yard walks in at once and takes the renderer back (#163): the parked state is read as the raid
+    // lets go of it; what needs a garbage collection is checked once the yard is up (the raid's objects stay collectable).
+    await watchOldPage(page);
+    await atRaidRelease(page, ({ managed, events }) => {
       const w = window.__targetProbe, a = w.app.deref(), r = a.renderer;
       const d = r.gc._managedResourceHashes.find(d => d.context.name === 'glTexture'), table = d.context[d.hash];
-      return { hostCollected: !w.host.deref(), viewCollected: !w.view.deref(), stage: a.stage.children.length, attached: a.canvas.isConnected, ticker: a.ticker.started,
+      return { stage: a.stage.children.length, attached: a.canvas.isConnected, ticker: a.ticker.started,
         old: w.current.map(t => {
           const source = t.source.deref();
-          // Pixi's parked stage keeps its last rendered instruction until the next render. This is also observed
-          // without extract.pixels; a destroyed source can remain here, with no canvas/GPU payload or managed slot.
-          const instructions = r._lastObjectRendered?.renderGroup?.instructionSet?.instructions ?? [];
-          return { uid: t.uid, absent: !Object.hasOwn(table, t.uid), textureCollected: !t.texture.deref(), sourceCollected: !source,
-            sourceReleased: !source || source.destroyed, gpuReleased: !source || source._gpuData?.[r.uid] == null,
-            lastStageInstruction: !!source && instructions.some(i => i.textures?.textures?.includes(source)) };
+          return { uid: t.uid, absent: !Object.hasOwn(table, t.uid), sourceReleased: !source || source.destroyed, gpuReleased: !source || source._gpuData?.[r.uid] == null };
         }),
         tables: (0, eval)(`(${managed})`)(r), events: (0, eval)(`(${events})`)(r), counts: window.__bincovSample.counts() };
     }, { managed: readManagedTables.toString(), events: readPixiEvents.toString() });
-    assert.equal(row.parked.hostCollected, true); assert.equal(row.parked.viewCollected, true);
+    await page.locator('[data-do="abandon"]').click(); await page.locator('[data-do="abandon-yes"]').click();
+    row.parked = await releasedState(page);
     assert.equal(row.parked.stage, 0); assert.equal(row.parked.attached, false); assert.equal(row.parked.ticker, false);
     assert.equal(row.parked.tables.empty, 0); assert.equal(row.parked.counts.renderTextures, 0);
     assert.equal(row.parked.events.attached, false); assert.equal(row.parked.events.native, 0);
     assert.ok(Object.values(row.parked.events.roots).every(v => !v));
-    assert.ok(row.parked.old.every(t => t.absent && t.textureCollected && t.sourceReleased && t.gpuReleased));
-    assert.ok(row.parked.old.every(t => t.sourceCollected || t.lastStageInstruction), 'any parked source must belong to the last stage instruction');
-    await page.locator('[data-action="return"]').click();
+    assert.ok(row.parked.old.every(t => t.absent && t.sourceReleased && t.gpuReleased));
+    await yardReport(page);
+    await collect();
+    row.retired = await page.evaluate(() => { const w = window.__targetProbe; return { hostCollected: !w.host.deref(), viewCollected: !w.view.deref() }; });
+    assert.deepEqual(row.retired, { hostCollected: true, viewCollected: true });
     await page.locator('#station-yard .report [data-act="close"]').click();
     row.yardSameRenderer = await page.evaluate(() => window.__station.host.app.renderer === window.__targetProbe.renderer.deref());
     assert.equal(row.yardSameRenderer, true);
