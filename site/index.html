@@ -19,11 +19,15 @@
 <meta property="og:description" content="台风过后，海没有退去。带上最后一匣子弹，活着回到水产站。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://xuys2025.github.io/escape-bincov/">
-<meta property="og:image" content="https://xuys2025.github.io/escape-bincov/assets/og-card.jpg">
+<meta property="og:image" content="https://xuys2025.github.io/escape-bincov/assets/art/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="favicon.ico" sizes="32x32">
-<link rel="icon" href="assets/favicon-32.png" type="image/png">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="favicon.ico" sizes="16x16 32x32">
+<link rel="icon" href="assets/art/icon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="assets/art/icon-16.png" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="assets/art/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
 <link rel="preload" href="assets/fonts/bincov-site.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 <script type="module" src="js/main.js"></script>
@@ -216,7 +220,7 @@
     </header>
     <ul class="people-grid">
       <li class="person" tabindex="0">
-        <div class="person-stage" aria-hidden="true"><i class="npc" data-npc="xu"></i></div>
+        <div class="person-stage" aria-hidden="true"><i class="portrait" style="background-image:url(assets/art/npc-xu.png)"></i></div>
         <div class="person-body">
           <h3 class="px">许医生</h3><p class="person-role">原县医院内科医生 · 卫生所</p>
           <blockquote class="person-say">“嗓子干不干？一天喝几壶水？”</blockquote>
@@ -224,7 +228,7 @@
         </div>
       </li>
       <li class="person" tabindex="0">
-        <div class="person-stage" aria-hidden="true"><i class="npc" data-npc="shuan"></i></div>
+        <div class="person-stage" aria-hidden="true"><i class="portrait" style="background-image:url(assets/art/npc-shuan.png)"></i></div>
         <div class="person-body">
           <h3 class="px">老栓</h3><p class="person-role">前机械厂钳工 · 修配台</p>
           <blockquote class="person-say">“站里不养闲人。能喘气，明天就跟着出门。”</blockquote>
@@ -232,7 +236,7 @@
         </div>
       </li>
       <li class="person" tabindex="0">
-        <div class="person-stage" aria-hidden="true"><i class="npc" data-npc="cai"></i></div>
+        <div class="person-stage" aria-hidden="true"><i class="portrait" style="background-image:url(assets/art/npc-cai.png)"></i></div>
         <div class="person-body">
           <h3 class="px">小蔡</h3><p class="person-role">十九岁 · 守电台、管供电</p>
           <blockquote class="person-say">“灯是我拿蓄电池接的。油桶里的柴油，只够发电机再转六天。”</blockquote>
@@ -277,6 +281,14 @@
 
   <!-- ========= Extraction ========= -->
   <section class="extract" id="extract" aria-labelledby="extractTitle">
+    <div class="extract-scene" id="extractScene" aria-hidden="true">
+      <div class="extract-frame">
+        <img class="layer far" src="assets/art/extract-far.png" alt="" width="640" height="360" loading="lazy" decoding="async">
+        <div class="layer mid"><img src="assets/art/extract-mid-overscan.png" alt="" width="680" height="360" loading="lazy" decoding="async"><i class="flare"></i></div>
+        <img class="layer near" src="assets/art/extract-near-overscan.png" alt="" width="680" height="360" loading="lazy" decoding="async">
+      </div>
+      <i class="extract-rain"></i>
+    </div>
     <div class="extract-zone" id="extractZone">
       <svg class="extract-ring" viewBox="0 0 200 200" aria-hidden="true">
         <circle class="ring-bg" cx="100" cy="100" r="88"/>

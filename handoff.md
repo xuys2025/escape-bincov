@@ -5,7 +5,8 @@
 - 官网源码 `site/`；`scripts/site/build.mjs` 组装 `pages/`：官网 + 从 `assets/` 原样复制的游戏美术 + `play/index.html`（与 `dist/index.html` 逐字节相同）。CI build job 运行 `pnpm site:build`，`Deploy Pages` 改部署 `pages/`，校验和多记两项。
 - 旧根链接带游戏参数时转到 `play/`；存档按网站保存不受影响；离线包、发布与清单不变。
 - 检查：新增 `pnpm test:site`（batch-3，16 步：两档桌面、手机、减少动态、旧链接、按住撤离进游戏、零错误零外部请求）；本地 16/16，`pnpm test` 1113、`pnpm check:ci` 139、`pnpm package` 通过。
-- 遗留：新加坡镜像脚本要改从 `play/` 取 HTML（未改前安全跳过、停在旧版本）；真机、Safari、Firefox 未测；图标与分享卡片是占位，等 Sol。详见 [任务记录](docs/tasks/official-site.md)。
+- 遗留：新加坡镜像脚本要改从 `play/` 取 HTML（未改前安全跳过、停在旧版本）；真机、Safari、Firefox 未测。
+- 同日接入 Sol 的十六张官网图（`site/assets/art/`，哈希与交付说明一致）：图标、分享卡片、三张半身像、五张敌人档案像、三层撤离夜景；`test:site` 增至 18 步。详见 [任务记录](docs/tasks/official-site.md)。
 
 ## 2026-10-30 · 商店整体布局：购买/出售页签与交易单（#26 F03）
 

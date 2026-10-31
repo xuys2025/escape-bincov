@@ -3,7 +3,6 @@ import { createPrologue } from './prologue.js';
 import { createAudio } from './audio.js';
 import { createThreats } from './threats.js';
 import { createBench } from './bench.js';
-import { strip, npcFrames } from './strip.js';
 
 const GAME_URL = 'play/';
 const $ = s => document.querySelector(s);
@@ -177,7 +176,7 @@ function onScroll() {
   ticking = true;
   requestAnimationFrame(() => {
     ticking = false;
-    updatePrologue(); updateLoop(); updateBench(); updateClock();
+    updatePrologue(); updateLoop(); updateBench(); updateClock(); updateExtractScene();
     if (holding && Math.abs(scrollY - holdY) > 6) interruptHold();
   });
 }
@@ -214,7 +213,6 @@ new IntersectionObserver(([en]) => {
 
 // ---------- Enemies and station people ----------
 createThreats($('#threats'));
-$$('.npc[data-npc]').forEach(el => strip(npcFrames(el.dataset.npc)).then(url => { el.style.backgroundImage = `url(${url})`; }).catch(console.error));
 
 // ---------- Counting numbers ----------
 const featIO = new IntersectionObserver(ens => ens.forEach(en => {
@@ -240,6 +238,20 @@ addEventListener('keydown', e => {
   const k = e.key.toLowerCase();
   if (k === 'm' || k === 'g') { $('#county').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' }); toast(k === 'g' ? '出击准备' : '地图'); }
 });
+
+// ---------- Extraction scene parallax (Sol's three layers) ----------
+const extractScene = $('#extractScene');
+if (!reduced) {
+  addEventListener('pointermove', e => {
+    if (e.pointerType === 'mouse') extractScene.style.setProperty('--ex', ((e.clientX / innerWidth - 0.5) * 2).toFixed(3));
+  }, { passive: true });
+}
+function updateExtractScene() {
+  if (reduced) return;
+  const r = $('#extract').getBoundingClientRect();
+  if (r.top > innerHeight || r.bottom < 0) return;
+  extractScene.style.setProperty('--ey', clamp01(r.top / innerHeight).toFixed(3));
+}
 
 // ---------- Extraction: hold for 3 seconds ----------
 const extractEl = $('#extract'), ring = $('#extractRing'), fill = $('#extractFill'), btn = $('#extractBtn');

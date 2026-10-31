@@ -75,8 +75,17 @@ try {
     await page.waitForFunction(() => [...document.querySelectorAll('#threatStage .sprite')].every(s => s.style.backgroundImage.startsWith('url("data:')), null, { timeout: 10000 });
     await page.locator('.threat-tab', { hasText: '盐蚀者' }).click();
     await page.waitForFunction(() => document.getElementById('threatName').textContent === '盐蚀者');
-    await page.waitForFunction(() => [...document.querySelectorAll('.npc')].every(s => s.style.backgroundImage.startsWith('url("data:')), null, { timeout: 10000 });
-    step(`${tag} enemy and station sprites composed from game frames`);
+    await page.waitForFunction(() => { const img = document.querySelector('#threatStage .dossier img'); return img?.complete && img.naturalWidth === 96; }, null, { timeout: 10000 });
+    await page.waitForFunction(() => [...document.querySelectorAll('#threatStage .sprite')].length === 2 && [...document.querySelectorAll('#threatStage .sprite')].every(s => s.style.backgroundImage.startsWith('url("data:'))
+      && document.getAnimations().every(a => a.effect?.getTiming().iterations === Infinity || a.playState === 'finished'), null, { timeout: 10000 });
+    await page.locator('#threatCard').screenshot({ path: `${OUT}/threats-${tag}.png` });
+    await toSection(page, 'people');
+    const portraits = await page.$$eval('.portrait', els => els.map(e => getComputedStyle(e).backgroundImage));
+    assert.equal(portraits.filter(b => /assets\/art\/npc-(xu|shuan|cai)\.png/.test(b)).length, 3, `portraits: ${portraits}`);
+    await page.locator('.person').first().hover();
+    await page.waitForFunction(() => getComputedStyle(document.querySelector('.portrait')).animationName === 'talk');
+    await page.screenshot({ path: `${OUT}/people-${tag}.png` });
+    step(`${tag} enemy dossier art, in-game sprites from game frames, station portraits talk on hover`);
 
     await toSection(page, 'bench', 0.98);
     await page.waitForFunction(() => Number(getComputedStyle(document.getElementById('benchStats')).opacity) > 0.9, null, { timeout: 10000 });
@@ -84,6 +93,9 @@ try {
     step(`${tag} gunsmith parts assemble`);
 
     await toSection(page, 'extract');
+    await page.waitForFunction(() => [...document.querySelectorAll('#extractScene img')].every(img => img.complete && img.naturalWidth >= 640), null, { timeout: 15000 });
+    await page.screenshot({ path: `${OUT}/extract-${tag}.png` });
+    step(`${tag} extraction scene layers load`);
     const button = page.locator('#extractBtn');
     await button.hover();
     await page.mouse.down();

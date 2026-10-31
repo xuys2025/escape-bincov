@@ -29,4 +29,3 @@ export function strip(urls) {
 }
 
 export const enemyFrames = id => [0, 1, 2, 3, 4].map(n => `assets/enemy/${id}-${n}.png`);
-export const npcFrames = id => ['idle-0', 'idle-1', 'talk-0', 'talk-1'].map(f => `assets/npc/${id}-${f}.png`);

@@ -23,7 +23,6 @@ const REGIONS = ['old-town', 'mall', 'hospital', 'old-hospital', 'factory', 'lab
   'observatory', 'lighthouse', 'harbor', 'freighter'];
 const ENEMIES = ['raider-boss', 'raider-gunner', 'saltback-dog', 'tidal-crab', 'tide-ritualist', 'salt-hulk',
   'mercenary-assault', 'recovery-leader', 'blockade-sergeant', 'blockade-sentry'];
-const NPCS = ['xu', 'shuan', 'cai'];
 // M4A1 "stable" workbench assembly approved in tests/fixtures/gunsmith-assemblies.json (site/js/bench.js keeps the anchors).
 const GUN = ['gs-s02-w-v1', 'gs-p02-w-v1', 'gs-mb4a1-mag-factory-w-v2', 'gs-b08-w-v1', 'gs-mb4a1-receiver-w-v1',
   'gs-h01-w-v1', 'gs-f01-w-v1', 'gs-o08-w-v1', 'gs-m06-w-v1'];
@@ -34,7 +33,6 @@ const SHARED = [
   ['assets/county-map/county-terrain.webp', 'assets/map/county-terrain.webp'],
   ...REGIONS.map(k => [`assets/county-map/briefing-concepts/${k}.webp`, `assets/map/${k}.webp`]),
   ...ENEMIES.flatMap(k => [0, 1, 2, 3, 4].map(f => [`assets/coast/enemy-v1/coast-${k}-body-s-f${f}-v1.png`, `assets/enemy/${k}-${f}.png`])),
-  ...NPCS.flatMap(k => ['idle', 'talk'].flatMap(a => [0, 1].map(f => [`assets/station/v1/station-npc-${k}-s-${a}-f${f}-v1.png`, `assets/npc/${k}-${a}-${f}.png`]))),
   ...GUN.map(k => [`assets/gunsmith/v1/${k}.png`, `assets/gun/${k.replace(/-v\d+$/, '')}.png`]),
   ['assets/fonts/LICENSE.txt', 'assets/OFL-ChillBitmap.txt'],
 ];
