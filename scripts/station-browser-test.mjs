@@ -260,6 +260,8 @@ try {
     await page.keyboard.press('e'); await until(() => window.__station.host.ui.kind === 'arms', 3000, 'arms');
     const cash0 = (await snap()).profile.cash;
     const ammo = await itemBox('merchant', 'ammo9'); await drag({ x: ammo.box.x + 8, y: ammo.box.y + 8 }, await cellCenter('buy', 0, 0));
+    // #26 F03: the sell list is on the 出售 tab.
+    await page.locator('[data-act="mode:sell"]').click(); await page.waitForTimeout(150);
     const watch = await itemBox('stash', 'watch'); await drag({ x: watch.box.x + 8, y: watch.box.y + 8 }, await cellCenter('sell', 0, 0));
     await shot('D1-shop-cart');
     await page.locator('[data-act="cart-settle"]').click(); await page.waitForTimeout(200);
@@ -270,6 +272,7 @@ try {
   await step('D2 卖出任务物资：Runtime 要求确认 → 弹出确认 → 确认后成交', async () => {
     await open({ fixture: preset('parts'), at: [4.5, 18.8] });
     await page.keyboard.press('2'); await until(() => window.__station.host.ui.kind === 'arms', 3000, 'arms');
+    await page.locator('[data-act="mode:sell"]').click(); await page.waitForTimeout(150);
     const cash0 = (await snap()).profile.cash, sc = await itemBox('stash', 'scrap');
     await drag({ x: sc.box.x + 8, y: sc.box.y + 8 }, await cellCenter('sell', 0, 0));
     await page.locator('[data-act="cart-settle"]').click(); await page.waitForTimeout(200);

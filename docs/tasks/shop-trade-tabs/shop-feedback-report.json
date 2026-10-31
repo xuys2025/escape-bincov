@@ -1,0 +1,935 @@
+{
+  "sha256": "6df60bba9d98186261e306b85e1346a2c31295be24a85336995373fae16d03fd",
+  "browser": "156.0.8078.74",
+  "cpuRate": 1,
+  "only": [],
+  "checks": [
+    {
+      "name": "1280x720 funds rejection",
+      "detail": {
+        "message": "现金不足，请减少待买物品或增加待卖物品。",
+        "box": {
+          "x": 238.5,
+          "y": 576.5,
+          "width": 291,
+          "height": 33.5
+        },
+        "unchangedSave": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "1280x720 space rejection",
+      "detail": {
+        "message": "仓库空间不足，请先腾出能放下待买物品的空格。",
+        "box": {
+          "x": 225.5,
+          "y": 576.5,
+          "width": 317,
+          "height": 33.5
+        },
+        "unchangedSave": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "1920x1080 funds rejection",
+      "detail": {
+        "message": "现金不足，请减少待买物品或增加待卖物品。",
+        "box": {
+          "x": 430.5,
+          "y": 936.5,
+          "width": 291,
+          "height": 33.5
+        },
+        "unchangedSave": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "1920x1080 space rejection",
+      "detail": {
+        "message": "仓库空间不足，请先腾出能放下待买物品的空格。",
+        "box": {
+          "x": 417.5,
+          "y": 936.5,
+          "width": 317,
+          "height": 33.5
+        },
+        "unchangedSave": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "390x844 funds rejection",
+      "taps": {
+        "mode": "queued-cdp-touch",
+        "interactionCpuRate": 1,
+        "inputGapMs": null,
+        "blockSecondUpMs": 0,
+        "events": [
+          {
+            "type": "pointerdown",
+            "timeStamp": 1399,
+            "receivedAt": 1399,
+            "beforeHandlerAt": 1399,
+            "pointerId": 2,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i0jo-1o"
+          },
+          {
+            "type": "pointerup",
+            "timeStamp": 1399,
+            "receivedAt": 1399,
+            "beforeHandlerAt": 1399,
+            "pointerId": 2,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i0jo-1o"
+          },
+          {
+            "type": "pointerdown",
+            "timeStamp": 1403,
+            "receivedAt": 1403,
+            "beforeHandlerAt": 1403,
+            "pointerId": 3,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i0jo-1o"
+          },
+          {
+            "type": "pointerup",
+            "timeStamp": 1403,
+            "receivedAt": 1403,
+            "beforeHandlerAt": 1403,
+            "pointerId": 3,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i0jo-1o"
+          }
+        ],
+        "gapMs": 4,
+        "handlerGapMs": 4
+      },
+      "detail": {
+        "message": "现金不足，请减少待买物品或增加待卖物品。",
+        "box": {
+          "x": 97.5,
+          "y": 681,
+          "width": 195,
+          "height": 53
+        },
+        "unchangedSave": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "390x844 space rejection",
+      "taps": {
+        "mode": "queued-cdp-touch",
+        "interactionCpuRate": 1,
+        "inputGapMs": null,
+        "blockSecondUpMs": 0,
+        "events": [
+          {
+            "type": "pointerdown",
+            "timeStamp": 1357,
+            "receivedAt": 1356,
+            "beforeHandlerAt": 1357,
+            "pointerId": 2,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i1zc-1o"
+          },
+          {
+            "type": "pointerup",
+            "timeStamp": 1357,
+            "receivedAt": 1357,
+            "beforeHandlerAt": 1357,
+            "pointerId": 2,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i1zc-1o"
+          },
+          {
+            "type": "pointerdown",
+            "timeStamp": 1362,
+            "receivedAt": 1362,
+            "beforeHandlerAt": 1362,
+            "pointerId": 3,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i1zc-1o"
+          },
+          {
+            "type": "pointerup",
+            "timeStamp": 1362,
+            "receivedAt": 1362,
+            "beforeHandlerAt": 1362,
+            "pointerId": 3,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i1zc-1o"
+          }
+        ],
+        "gapMs": 5,
+        "handlerGapMs": 5
+      },
+      "detail": {
+        "message": "仓库空间不足，请先腾出能放下待买物品的空格。",
+        "box": {
+          "x": 97.5,
+          "y": 681,
+          "width": 195,
+          "height": 53
+        },
+        "unchangedSave": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "timing: quick input survives a long task before its second pointerup handler",
+      "clock": {
+        "nativeInputTime": true,
+        "frozenDateNow": true
+      },
+      "taps": {
+        "mode": "queued-cdp-touch",
+        "interactionCpuRate": 1,
+        "inputGapMs": 80,
+        "blockSecondUpMs": 450,
+        "events": [
+          {
+            "type": "pointerdown",
+            "timeStamp": 348.80000001192093,
+            "receivedAt": 1412.199999988079,
+            "beforeHandlerAt": 1412.300000011921,
+            "pointerId": 2,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i3i0-1o"
+          },
+          {
+            "type": "pointerup",
+            "timeStamp": 348.80000001192093,
+            "receivedAt": 1412.3999999761581,
+            "beforeHandlerAt": 1412.3999999761581,
+            "pointerId": 2,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i3i0-1o"
+          },
+          {
+            "type": "pointerdown",
+            "timeStamp": 428.89999997615814,
+            "receivedAt": 1416.0999999642372,
+            "beforeHandlerAt": 1416.0999999642372,
+            "pointerId": 3,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i3i0-1o"
+          },
+          {
+            "type": "pointerup",
+            "timeStamp": 428.89999997615814,
+            "receivedAt": 1416.199999988079,
+            "beforeHandlerAt": 1866.199999988079,
+            "pointerId": 3,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i3i0-1o"
+          }
+        ],
+        "gapMs": 80.09999996423721,
+        "handlerGapMs": 453.80000001192093
+      },
+      "detail": {
+        "unchangedSave": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "timing: inputs 350 ms apart remain separate selections even when queued together",
+      "clock": {
+        "nativeInputTime": true,
+        "frozenDateNow": true
+      },
+      "taps": {
+        "mode": "queued-cdp-touch",
+        "interactionCpuRate": 1,
+        "inputGapMs": 350,
+        "blockSecondUpMs": 0,
+        "events": [
+          {
+            "type": "pointerdown",
+            "timeStamp": 364.19999998807907,
+            "receivedAt": 1424.8999999761581,
+            "beforeHandlerAt": 1425,
+            "pointerId": 2,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i53n-1o"
+          },
+          {
+            "type": "pointerup",
+            "timeStamp": 364.19999998807907,
+            "receivedAt": 1425.1000000238419,
+            "beforeHandlerAt": 1425.1000000238419,
+            "pointerId": 2,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i53n-1o"
+          },
+          {
+            "type": "pointerdown",
+            "timeStamp": 714.1000000238419,
+            "receivedAt": 1428.699999988079,
+            "beforeHandlerAt": 1428.800000011921,
+            "pointerId": 3,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i53n-1o"
+          },
+          {
+            "type": "pointerup",
+            "timeStamp": 714.1000000238419,
+            "receivedAt": 1428.800000011921,
+            "beforeHandlerAt": 1428.800000011921,
+            "pointerId": 3,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "bc-mvv1i53n-1o"
+          }
+        ],
+        "gapMs": 349.9000000357628,
+        "handlerGapMs": 3.699999988079071
+      },
+      "detail": {
+        "unchangedSave": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "yard refreshes stale empty cart without reopening",
+      "detail": {
+        "unchangedSave": true,
+        "newStockVisible": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "tabs refreshes stale empty cart without reopening",
+      "detail": {
+        "unchangedSave": true,
+        "newStockVisible": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "legacy tabs show the same funds rejection",
+      "detail": {
+        "message": "现金不足，请减少待买物品或增加待卖物品。",
+        "unchangedSave": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "legacy tabs show the same space rejection",
+      "detail": {
+        "message": "仓库空间不足，请先腾出能放下待买物品的空格。",
+        "unchangedSave": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "another window still locks settlement and cannot be overwritten through refresh",
+      "detail": {
+        "result": {
+          "ok": false,
+          "reason": "conflict",
+          "message": "存档已由另一窗口接管，本页不能写入。"
+        },
+        "newerSavePreserved": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 C1 1280x720 details price by side and fixed shop geometry",
+      "detail": {
+        "geometry": {
+          "cells": {
+            "merchant": 36,
+            "buy": 36,
+            "sell": 36,
+            "stash": 36
+          },
+          "pistol": [
+            564,
+            279,
+            72,
+            36
+          ],
+          "details": 76
+        },
+        "hint": "选中一件物品\n单击查看 · 双击加入或放回 · 拖到待买或待卖，再统一结算",
+        "rows": [
+          {
+            "uid": "bc-mvv1icbg-1r",
+            "dl": "占用 1 × 1 重量 0.14 kg 买入 ¥ 84",
+            "kind": "弹药",
+            "clipped": 0
+          },
+          {
+            "uid": "bc-mvv1icbg-1u",
+            "dl": "占用 1 × 1 重量 0.55 kg 买入 ¥ 85",
+            "kind": "零件 · 任务用途：让灯亮起来",
+            "clipped": 0
+          },
+          {
+            "uid": "st-watch",
+            "dl": "占用 1 × 1 重量 0.15 kg 卖出 ¥ 240",
+            "kind": "贵重物资",
+            "clipped": 0
+          },
+          {
+            "uid": "st-pistol",
+            "dl": "占用 2 × 1 重量 0.80 kg 卖出 ¥ 150",
+            "kind": "武器",
+            "clipped": 0
+          },
+          {
+            "uid": "st-relief",
+            "dl": "占用 1 × 1 重量 0.14 kg 卖出 不可出售",
+            "kind": "弹药 · 救济 · 不可出售",
+            "clipped": 0
+          }
+        ]
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 C1 1920x1080 details price by side and fixed shop geometry",
+      "detail": {
+        "geometry": {
+          "cells": {
+            "merchant": 56,
+            "buy": 56,
+            "sell": 56,
+            "stash": 56
+          },
+          "pistol": [
+            918,
+            279,
+            112,
+            56
+          ],
+          "details": 76
+        },
+        "hint": "选中一件物品\n单击查看 · 双击加入或放回 · 拖到待买或待卖，再统一结算",
+        "rows": [
+          {
+            "uid": "bc-mvv1idzr-1r",
+            "dl": "占用 1 × 1 重量 0.14 kg 买入 ¥ 84",
+            "kind": "弹药",
+            "clipped": 0
+          },
+          {
+            "uid": "bc-mvv1idzr-1u",
+            "dl": "占用 1 × 1 重量 0.55 kg 买入 ¥ 85",
+            "kind": "零件 · 任务用途：让灯亮起来",
+            "clipped": 0
+          },
+          {
+            "uid": "st-watch",
+            "dl": "占用 1 × 1 重量 0.15 kg 卖出 ¥ 240",
+            "kind": "贵重物资",
+            "clipped": 0
+          },
+          {
+            "uid": "st-pistol",
+            "dl": "占用 2 × 1 重量 0.80 kg 卖出 ¥ 150",
+            "kind": "武器",
+            "clipped": 0
+          },
+          {
+            "uid": "st-relief",
+            "dl": "占用 1 × 1 重量 0.14 kg 卖出 不可出售",
+            "kind": "弹药 · 救济 · 不可出售",
+            "clipped": 0
+          }
+        ]
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 C1 1280x600 details price by side and fixed shop geometry",
+      "detail": {
+        "geometry": {
+          "cells": {
+            "merchant": 36,
+            "buy": 36,
+            "sell": 36,
+            "stash": 36
+          },
+          "pistol": [
+            564,
+            279,
+            72,
+            36
+          ],
+          "details": 76
+        },
+        "hint": "选中一件物品\n单击查看 · 双击加入或放回 · 拖到待买或待卖，再统一结算",
+        "rows": [
+          {
+            "uid": "bc-mvv1ifof-1r",
+            "dl": "占用 1 × 1 重量 0.14 kg 买入 ¥ 84",
+            "kind": "弹药",
+            "clipped": 0
+          },
+          {
+            "uid": "bc-mvv1ifof-1u",
+            "dl": "占用 1 × 1 重量 0.55 kg 买入 ¥ 85",
+            "kind": "零件 · 任务用途：让灯亮起来",
+            "clipped": 0
+          },
+          {
+            "uid": "st-watch",
+            "dl": "占用 1 × 1 重量 0.15 kg 卖出 ¥ 240",
+            "kind": "贵重物资",
+            "clipped": 0
+          },
+          {
+            "uid": "st-pistol",
+            "dl": "占用 2 × 1 重量 0.80 kg 卖出 ¥ 150",
+            "kind": "武器",
+            "clipped": 0
+          },
+          {
+            "uid": "st-relief",
+            "dl": "占用 1 × 1 重量 0.14 kg 卖出 不可出售",
+            "kind": "弹药 · 救济 · 不可出售",
+            "clipped": 0
+          }
+        ]
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 C2 1280x720 quick move of relief goods names the rule",
+      "detail": {
+        "message": "这件物品不可出售。",
+        "unchangedSave": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 C2 390x844 quick move of relief goods names the rule",
+      "taps": {
+        "mode": "queued-cdp-touch",
+        "interactionCpuRate": 1,
+        "inputGapMs": null,
+        "blockSecondUpMs": 0,
+        "events": [
+          {
+            "type": "pointerdown",
+            "timeStamp": 1399,
+            "receivedAt": 1399,
+            "beforeHandlerAt": 1399,
+            "pointerId": 3,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "st-relief"
+          },
+          {
+            "type": "pointerup",
+            "timeStamp": 1399,
+            "receivedAt": 1399,
+            "beforeHandlerAt": 1399,
+            "pointerId": 3,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "st-relief"
+          },
+          {
+            "type": "pointerdown",
+            "timeStamp": 1403,
+            "receivedAt": 1403,
+            "beforeHandlerAt": 1403,
+            "pointerId": 4,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "st-relief"
+          },
+          {
+            "type": "pointerup",
+            "timeStamp": 1403,
+            "receivedAt": 1403,
+            "beforeHandlerAt": 1403,
+            "pointerId": 4,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "st-relief"
+          }
+        ],
+        "gapMs": 4,
+        "handlerGapMs": 4
+      },
+      "detail": {
+        "message": "这件物品不可出售。",
+        "unchangedSave": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 C2 1280x720 quick move on a changed stash asks for a refresh",
+      "detail": {
+        "message": "仓库已改变，请刷新清单后重新选择物品。",
+        "unchangedSave": true
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 C3 1280x720 goods stash header",
+      "detail": {
+        "text": "整组出售 · 背包与安全箱 1 件需先入库",
+        "cut": 0,
+        "overflow": 0
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 C3 1280x720 goods-clear stash header",
+      "detail": {
+        "text": "整组出售",
+        "cut": 0,
+        "overflow": 0
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 C3 844x390 goods stash header",
+      "detail": {
+        "text": "整组出售 · 背包与安全箱 1 件需先入库",
+        "cut": 0,
+        "overflow": 0
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 C4 844x390 compact header shows the selected price",
+      "detail": {
+        "rows": [
+          {
+            "uid": "bc-mvv1ip2z-1o",
+            "shown": "手枪 · 买入 ¥ 320",
+            "cut": 0,
+            "overflow": 0
+          },
+          {
+            "uid": "st-watch",
+            "shown": "怀表 · 卖出 ¥ 240",
+            "cut": 0,
+            "overflow": 0
+          },
+          {
+            "uid": "st-relief",
+            "shown": "9mm · 不可出售",
+            "cut": 0,
+            "overflow": 0
+          }
+        ]
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 C4 390x844 compact header shows the selected price",
+      "detail": {
+        "rows": [
+          {
+            "uid": "bc-mvv1iqeb-1o",
+            "shown": "手枪 · 买入 ¥ 320",
+            "cut": 0,
+            "overflow": 0
+          },
+          {
+            "uid": "st-watch",
+            "shown": "怀表 · 卖出 ¥ 240",
+            "cut": 0,
+            "overflow": 0
+          },
+          {
+            "uid": "st-relief",
+            "shown": "9mm · 不可出售",
+            "cut": 0,
+            "overflow": 0
+          }
+        ]
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 C4 844x390 compact headers keep totals after a quick move",
+      "detail": {
+        "rows": [
+          {
+            "from": "stash",
+            "to": "sell",
+            "shown": [
+              "整组出售 · 背包与安全箱 1 件需先入库",
+              "¥ 240"
+            ],
+            "expected": [
+              "整组出售 · 背包与安全箱 1 件需先入库",
+              "¥ 240"
+            ]
+          },
+          {
+            "from": "sell",
+            "to": "stash",
+            "shown": [
+              "整组出售 · 背包与安全箱 1 件需先入库",
+              "¥ 0"
+            ],
+            "expected": [
+              "整组出售 · 背包与安全箱 1 件需先入库",
+              "¥ 0"
+            ]
+          }
+        ]
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 C4 390x844 compact headers keep totals after a quick move",
+      "taps": {
+        "mode": "queued-cdp-touch",
+        "interactionCpuRate": 1,
+        "inputGapMs": null,
+        "blockSecondUpMs": 0,
+        "events": [
+          {
+            "type": "pointerdown",
+            "timeStamp": 1494,
+            "receivedAt": 1494,
+            "beforeHandlerAt": 1494,
+            "pointerId": 5,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "st-watch"
+          },
+          {
+            "type": "pointerup",
+            "timeStamp": 1495,
+            "receivedAt": 1495,
+            "beforeHandlerAt": 1495,
+            "pointerId": 5,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "st-watch"
+          },
+          {
+            "type": "pointerdown",
+            "timeStamp": 1497,
+            "receivedAt": 1497,
+            "beforeHandlerAt": 1497,
+            "pointerId": 6,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "st-watch"
+          },
+          {
+            "type": "pointerup",
+            "timeStamp": 1497,
+            "receivedAt": 1497,
+            "beforeHandlerAt": 1497,
+            "pointerId": 6,
+            "pointerType": "touch",
+            "trusted": true,
+            "uid": "st-watch"
+          }
+        ],
+        "gapMs": 2,
+        "handlerGapMs": 2
+      },
+      "detail": {
+        "rows": [
+          {
+            "from": "stash",
+            "to": "sell",
+            "shown": [
+              "整组出售 · 背包与安全箱 1 件需先入库",
+              "¥ 240"
+            ],
+            "expected": [
+              "整组出售 · 背包与安全箱 1 件需先入库",
+              "¥ 240"
+            ]
+          },
+          {
+            "from": "sell",
+            "to": "stash",
+            "shown": [
+              "整组出售 · 背包与安全箱 1 件需先入库",
+              "¥ 0"
+            ],
+            "expected": [
+              "整组出售 · 背包与安全箱 1 件需先入库",
+              "¥ 0"
+            ]
+          }
+        ]
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 B 1280x720 tabs, money box and sell-tab drop keep the layout",
+      "detail": {
+        "base": {
+          "panel": [
+            546,
+            12,
+            722,
+            696
+          ],
+          "side": [
+            563,
+            172,
+            252,
+            428
+          ],
+          "stash": [
+            829,
+            198,
+            362,
+            290
+          ],
+          "ledger": [
+            829,
+            512,
+            422,
+            88
+          ],
+          "details": [
+            563,
+            612,
+            688,
+            76
+          ],
+          "cells": [
+            36,
+            36,
+            36,
+            36
+          ],
+          "over": 0,
+          "shown": [
+            "buy"
+          ]
+        },
+        "rows": [
+          {
+            "label": "a purchase",
+            "shown": "buy"
+          },
+          {
+            "label": "a drop on the 出售 tab",
+            "shown": "sell"
+          },
+          {
+            "label": "back to 购买",
+            "shown": "buy"
+          },
+          {
+            "label": "a quest warning",
+            "shown": "sell"
+          }
+        ],
+        "sold": {
+          "现有现金": "¥ 5,000",
+          "买入 1 件": "- ¥ 320",
+          "结算后": "¥ 5,025",
+          "卖出 2 件": "+ ¥ 345",
+          "msg": "让灯亮起来：泵机零件还需3，出售后剩0",
+          "settle": "结算收入 ¥ 25"
+        }
+      },
+      "status": "passed"
+    },
+    {
+      "name": "F03 B 1920x1080 tabs, money box and sell-tab drop keep the layout",
+      "detail": {
+        "base": {
+          "panel": [
+            900,
+            12,
+            1008,
+            1056
+          ],
+          "side": [
+            917,
+            172,
+            338,
+            588
+          ],
+          "stash": [
+            1277,
+            198,
+            562,
+            450
+          ],
+          "ledger": [
+            1277,
+            672,
+            614,
+            88
+          ],
+          "details": [
+            917,
+            772,
+            974,
+            76
+          ],
+          "cells": [
+            56,
+            56,
+            56,
+            56
+          ],
+          "over": 0,
+          "shown": [
+            "buy"
+          ]
+        },
+        "rows": [
+          {
+            "label": "a purchase",
+            "shown": "buy"
+          },
+          {
+            "label": "a drop on the 出售 tab",
+            "shown": "sell"
+          },
+          {
+            "label": "back to 购买",
+            "shown": "buy"
+          },
+          {
+            "label": "a quest warning",
+            "shown": "sell"
+          }
+        ],
+        "sold": {
+          "现有现金": "¥ 5,000",
+          "买入 1 件": "- ¥ 320",
+          "结算后": "¥ 5,025",
+          "卖出 2 件": "+ ¥ 345",
+          "msg": "让灯亮起来：泵机零件还需3，出售后剩0",
+          "settle": "结算收入 ¥ 25"
+        }
+      },
+      "status": "passed"
+    }
+  ]
+}

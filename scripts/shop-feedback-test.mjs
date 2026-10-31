@@ -34,7 +34,9 @@ async function open(size, kind, tabs = false, fixedTime = true) {
     const ticket = s.prepareExpansionMutation(d => {
       d.profile.cash = kind === 'funds' ? 0 : 5000;
       d.profile.stash.items = kind === 'space' ? Array.from({ length: d.profile.stash.w * d.profile.stash.h }, (_, i) => ({ uid: `full-${i}`, id: 'scrap', qty: 5, x: i % d.profile.stash.w, y: Math.floor(i / d.profile.stash.w) }))
-        : kind.startsWith('goods') ? [{ uid: 'st-watch', id: 'watch', qty: 1, x: 0, y: 0 }, { uid: 'st-relief', id: 'ammo9', qty: 12, relief: true, x: 1, y: 0 }, { uid: 'st-pistol', id: 'pistol', qty: 1, x: 2, y: 0, gun: { parts: [], devices: { laser: false, light: false } } }] : [];
+        : kind.startsWith('goods') ? [{ uid: 'st-watch', id: 'watch', qty: 1, x: 0, y: 0 }, { uid: 'st-relief', id: 'ammo9', qty: 12, relief: true, x: 1, y: 0 }, { uid: 'st-pistol', id: 'pistol', qty: 1, x: 2, y: 0, gun: { parts: [], devices: { laser: false, light: false } } },
+          // 'goods-scrap': also the three pump parts an open quest still needs (#26 F03 B: the warning line).
+          ...kind === 'goods-scrap' ? [{ uid: 'st-scrap', id: 'scrap', qty: 3, x: 4, y: 0 }] : []] : [];
       // 'goods': one sellable watch still in the bag; 'goods-clear': nothing outside the stash.
       if (kind.startsWith('goods')) { d.profile.bag.items = kind === 'goods' ? [{ uid: 'bag-watch', id: 'watch', qty: 1, x: 0, y: 0 }] : []; d.profile.safe.items = []; }
     });
@@ -220,6 +222,9 @@ try {
   });
   const horizontalOverflow = () => page.evaluate(() => { const p = document.querySelector('#station-yard').shadowRoot.querySelector('.panel'); return p.scrollWidth - p.clientWidth; });
   const uidOf = id => page.evaluate(id => window.__station.host.ui.shop.view().catalog.items.find(i => i.id === id).uid, id);
+  // The money box (#26 F03 B): each line's label and amount, the message line and the settle button.
+  const ledger = () => yard('.ledger').evaluate(el => ({ ...Object.fromEntries([...el.querySelectorAll('dl div')].map(d => [d.querySelector('dt').textContent, d.querySelector('dd').textContent])),
+    msg: el.querySelector('.lmsg').textContent, settle: el.querySelector('[data-act="cart-settle"]').textContent }));
   for (const size of [[1280, 720], [1920, 1080], [1280, 600]]) await check(`F03 C1 ${size.join('x')} details price by side and fixed shop geometry`, async () => {
     await open(size, 'goods');
     await itemTarget('merchant', await uidOf('pistol'));
@@ -312,12 +317,54 @@ try {
       const shown = await headers(), sell = await page.evaluate(() => window.__station.host.ui.shop.view().sell.items.map(i => i.uid));
       assert.deepEqual(sell, to === 'sell' ? ['st-watch'] : [], `${from} -> ${to} moved the watch`);
       rows.push({ from, to, shown, expected: ['整组出售 · 背包与安全箱 1 件需先入库', total] });
+      // The compact money box under the panes follows the list too.
+      const money = await ledger(); assert.equal(money[to === 'sell' ? '卖出 1 件' : '卖出 0 件'], `+ ${total}`, JSON.stringify(money));
       if (to === 'sell') await shot(`F03-C4-${size.join('x')}-quick-sell`);
     }
     // Both directions are compared at once so a failure shows every header that went wrong.
     assert.deepEqual(rows.map(r => r.shown), rows.map(r => r.expected), 'quick moves keep the stash note and the sell total');
     assert.equal(await raw(), before, 'quick moves only change the cart, never the save');
     return { rows };
+  });
+  // #26 F03 B (the maintainer's pick of three prototypes): buy / sell tabs on the merchant side, the stash and the
+  // trade's money beside them. Switching tabs, a purchase, a drop on the 出售 tab and a quest warning all keep the
+  // stash, the merchant side, the money box and the details exactly where they were; nothing is written before settle.
+  for (const size of [[1280, 720], [1920, 1080]]) await check(`F03 B ${size.join('x')} tabs, money box and sell-tab drop keep the layout`, async () => {
+    await open(size, 'goods-scrap');
+    const layout = () => page.evaluate(() => {
+      const root = document.querySelector('#station-yard').shadowRoot, body = root.querySelector('.panel .pbody');
+      const box = q => { const r = root.querySelector(q).getBoundingClientRect(); return [r.x, r.y, r.width, r.height].map(v => Math.round(v)); };
+      return { panel: box('.panel'), side: box('.side.theirs'), stash: box('[data-grid="stash"]'), ledger: box('.ledger'), details: box('.panel .details'),
+        cells: [...root.querySelectorAll('.grid')].map(g => Number(g.dataset.cell)), over: body.scrollHeight - body.clientHeight,
+        shown: ['buy', 'sell'].filter(side => !root.querySelector(`.tabpane.${side}`).inert && getComputedStyle(root.querySelector(`.tabpane.${side}`)).visibility === 'visible') };
+    });
+    // itemTarget waits for the panel's slide-in, so the first measurement is the settled layout.
+    const pistol = await itemTarget('merchant', await uidOf('pistol')), before = await raw(), base = await layout(), rows = [];
+    assert.deepEqual(base.shown, ['buy'], 'the shop opens on 购买 with the sell pane hidden and inert'); assert.ok(base.over <= 1, `no panel scroll (${base.over}px)`);
+    const same = async (label, shown) => { const now = await layout(); assert.deepEqual({ ...now, shown: null }, { ...base, shown: null }, `${label} keeps the layout`); assert.deepEqual(now.shown, [shown], `${label}: ${shown} tab`); rows.push({ label, shown }); };
+    await pistol.item.dblclick();
+    await page.waitForFunction(() => window.__station.host.ui.shop.view().buy.items.length === 1);
+    await same('a purchase', 'buy');
+    assert.deepEqual(await ledger(), { '现有现金': '¥ 5,000', '买入 1 件': '- ¥ 320', '结算后': '¥ 4,680', '卖出 0 件': '+ ¥ 0', msg: '成交后自动放入仓库', settle: '结算支出 ¥ 320' });
+    assert.equal(await yard('[data-act="mode:buy"] small').innerText(), '1 件 · ¥ 320');
+    // From the 购买 tab the sell list is hidden: a stash item dragged onto the 出售 tab joins it and the tab turns.
+    const watch = await itemTarget('stash', 'st-watch'), tab = await yard('[data-act="mode:sell"]').boundingBox();
+    await page.mouse.move(watch.x, watch.y); await page.mouse.down(); await page.mouse.move(watch.x + 20, watch.y + 10, { steps: 4 });
+    await page.mouse.move(tab.x + tab.width / 2, tab.y + tab.height / 2, { steps: 12 }); await page.mouse.up();
+    await yard('[data-grid="sell"] [data-uid="st-watch"]').waitFor();
+    await same('a drop on the 出售 tab', 'sell');
+    assert.match(await yard('.lines').innerText(), /旧式手枪\s*- ¥ 320\s*防水怀表\s*\+ ¥ 240/);
+    await yard('[data-act="mode:buy"]').click(); await same('back to 购买', 'buy');
+    // A double-click on a stash stack an open quest needs: the warning takes the money box's message line.
+    await (await itemTarget('stash', 'st-scrap')).item.dblclick();
+    await yard('[data-grid="sell"] [data-uid="st-scrap"]').waitFor();
+    await same('a quest warning', 'sell');
+    const sold = await ledger();
+    assert.deepEqual({ ...sold, msg: null }, { '现有现金': '¥ 5,000', '买入 1 件': '- ¥ 320', '结算后': '¥ 5,025', '卖出 2 件': '+ ¥ 345', msg: null, settle: '结算收入 ¥ 25' });
+    assert.match(sold.msg, /让灯亮起来：泵机零件还需3，出售后剩0/);
+    if (size[0] === 1280) await shot('F03-B-1280x720-sell-warning');
+    assert.equal(await raw(), before, 'tabs and lists never write the save');
+    return { base, rows, sold };
   });
   assert.deepEqual(filter.problems(report.checks.length), [], '--only: every prefix must match a check and at least one check must run');
 } finally { try { await throttleSession?.detach(); } finally { await context?.close(); await browser.close(); } }

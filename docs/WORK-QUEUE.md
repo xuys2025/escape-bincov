@@ -1,6 +1,8 @@
 # 当前任务入口
 
-本轮原子任务：**[正对的门：暖光与地面通行带](tasks/door-faced-cue.md)**（#26 F07/F11 门/通道理解度），分支 `agent/door-passage-readability`，基线 main `8a4b46e4`。维护者从三个本地原型里选了 C：交互提示指向的门发暖光，地上画出穿过它的三格通行带；只改显示。本地 1082 单测、package、空间套件 24/24（main 对照仅新增 S03d 失败）及另外六项浏览器回归、工程守卫全部通过；准确 head、CI 与合并以承接 PR 为准，真人/真机未验。
+本轮原子任务：**[商店整体布局：购买/出售页签与交易单](tasks/shop-trade-tabs.md)**（#26 F03），[PR #159](https://github.com/xuys2025/escape-bincov/pull/159)，分支 `claude/f03-shop-layout-1be71c`，基线 main `7d982a6f`。维护者从三个本地原型里选了 B（塔科夫式买卖页签）：左边商人这边分「购买/出售」两页，右边一直是仓库和交易单（现金、买入、卖出、结算后现金、结算）；切页签、加物品、出现警告都不移动格子。只改院子商店的显示，交易规则、ShopSession 与存档不变；旧版页签商店不变。验证结果见任务页；维护者 10-30 授权 CI 通过后自动合并；准确 head、CI 与合并以承接 PR 为准，真人/真机未验。
+
+已完成原子任务：**[正对的门：暖光与地面通行带](tasks/door-faced-cue.md)**（#26 F07/F11），[PR #154](https://github.com/xuys2025/escape-bincov/pull/154) 已合入 main `9ac9567e`。维护者从三个本地原型里选了 C：交互提示指向的门发暖光，地上画出穿过它的三格通行带；只改显示，真人/真机未验。
 
 已完成原子任务：**[修复楼梯标签遮住可见敌人（S03c）](tasks/todo-stair-label-occlusion.md)**，[PR #146](https://github.com/xuys2025/escape-bincov/pull/146) 已合入 main `aa1db0e8`。已同步 main `4fec648c`，1080 单测/125 工程守卫/package 通过，S03c 两档桌面与 932×430 触屏均 0 遮挡；原版 85/74 的有效失败、最终空间 20/22 的既有 S04d 首败和首轮商场证据完整保留。只承接 #26 中 S03c 遮敌子项；本地断言余项归 #61，总单保持开放。
 

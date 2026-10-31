@@ -45,6 +45,7 @@
 - [shop.test.ts](../tests/shop.test.ts)：购物车守恒、净额交易、拒绝时整笔不变；救济品或别家商人的货硬塞进清单，结算也整笔拒绝。
 - [hideout-runtime.test.ts](../tests/hideout-runtime.test.ts)：`shop retains disposable cart on quota failure`、`shop reasons distinguish`、`quest sale requires confirmation`、`the station shop refuses to list relief`。
 - [save-flow.test.ts](../tests/save-flow.test.ts)：`merchant purchases and quest submission roll back`，经旧页签「统一结算」按钮走 `checkout` → `mutate`：写入失败回滚并保留购物车，重试只写一次。
+- 院子商店的布局（购买/出售页签、交易单，#26 F03）在 [station-view/panels.ts](../src/station-view/panels.ts) 的 `shopHtml` / `shopCompactHtml`；[shop-feedback-test.mjs](../scripts/shop-feedback-test.mjs) 的 `F03 B` 检查切页签、加物品和任务警告都不移动格子。
 
 这些是定位相关断言的入口；修改后仍按[验证矩阵](AGENT-HANDBOOK.md#4-按风险验证)执行必要检查，不把测试文件存在当作已验证。
 

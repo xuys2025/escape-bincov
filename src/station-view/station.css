@@ -217,8 +217,41 @@ button.on { border-color: var(--amber); color: var(--amber2); }
 .details dt { color: var(--mute); font-size: 11px; } .details dd { margin: 0; font-size: 12px; }
 .details .dacts { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
 
-.shop { display: flex; gap: 14px; align-items: flex-start; }
-.shop h3 small { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Shop (#26 F03, layout B): the merchant's side with the buy / sell tabs on the left, the stash and the money on the right. */
+.shop { display: grid; grid-template-columns: auto auto; gap: 14px; align-items: stretch; }
+.shop h3 { white-space: nowrap; } .shop h3 small { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.shop .side { display: flex; flex-direction: column; min-width: 0; }
+/* At least SHOP_SIDE_MIN wide (ui.ts), so the catalog filter keeps to two lines. */
+.shop .theirs { width: max(calc(var(--cell) * 6 + 2px), 252px); }
+.tradetabs { display: flex; gap: 4px; margin: 0 0 4px; }
+.tradetabs button[data-act] { flex: 1; padding: 2px 8px; font: 16px/19px var(--px); }
+.tradetabs small { display: block; font: 11px/13px var(--sys); color: var(--mute); white-space: nowrap; } .tradetabs .on small { color: var(--dim); }
+.seg button.slot-over { border-color: var(--ok); background: rgba(143,194,138,.16); }
+/* Both panes share one cell, so the column is as tall in either tab; the hidden one is inert. */
+.shop .tabpanes { flex: 1; display: grid; }
+.shop .tabpane { grid-area: 1 / 1; display: flex; flex-direction: column; min-height: 0; }
+.shop .tabpane[inert] { visibility: hidden; }
+.shop .seg.browse { margin-bottom: 4px; }
+.shop .tabpane h3 { margin-bottom: 4px; } .shop .tabpane .grid + h3 { margin-top: 6px; }
+.shop .lines { flex: 1 1 0; min-height: 0; contain: size; overflow: auto; margin: 0; padding: 0; list-style: none; background: #141a19; border: 1px solid var(--line); scrollbar-width: thin; }
+.shop .lines li { display: flex; align-items: center; gap: 6px; padding: 2px 6px; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,.04); }
+.shop .lines span { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.shop .lines b { font: 13px var(--px); white-space: nowrap; color: #e0a080; } .shop .lines .sell b { color: var(--ok); } .shop .lines .none { color: var(--mute); }
+.shop .mine .stash-scroll { margin-bottom: 8px; }
+.shop .mine .ledger { margin-top: auto; }
+/* The trade's money: cash, buy, cash after, sell; the message line keeps its height so no warning moves the grids. */
+.ledger { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; align-items: center; padding: 6px 10px; background: #161c1b; border: 1px solid var(--line2); }
+.ledger dl { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 210px)); gap: 0 14px; }
+.ledger dl div { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+.ledger dt { color: var(--dim); font-size: 12px; white-space: nowrap; } .ledger dd { margin: 0; font: 15px/20px var(--px); white-space: nowrap; }
+.ledger .out dd { color: #e0a080; } .ledger .in dd { color: var(--ok); }
+.ledger .after dt { color: var(--ink); } .ledger .after dd { color: var(--amber2); } .ledger .after dd.bad { color: var(--bad); }
+.ledger .lmsg { grid-column: 1 / -1; height: 32px; overflow: auto; scrollbar-width: thin; } .ledger .lmsg p { margin: 0; font-size: 12px; line-height: 16px; }
+.ledger .acts { grid-column: 2; grid-row: 1; display: flex; gap: 6px; align-items: stretch; }
+.ledger .acts .primary { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 80px; padding: 2px 12px; font: 16px/19px var(--px); }
+.ledger .acts .primary small { font: 11px/13px var(--sys); }
+.ledger.compact { margin-top: 6px; } .ledger.compact .lmsg { height: auto; max-height: 48px; } .ledger.compact .lmsg:empty { display: none; }
+.panel.portrait .ledger { grid-template-columns: 1fr; } .panel.portrait .ledger .acts { grid-column: 1; grid-row: auto; justify-content: flex-end; }
 /* Desktop shop details keep one height whether empty or showing any item (kind and quest line, name, two lines of
    description), so a first click never changes the cell size the fit loop chose and the second click of a double
    click lands on the same item. */
@@ -227,14 +260,6 @@ button.on { border-color: var(--amber); color: var(--amber2); }
 .panel.k-arms:not(.compact) .dtext small, .panel.k-med:not(.compact) .dtext small { line-height: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .panel.k-arms:not(.compact) .dtext b, .panel.k-med:not(.compact) .dtext b { line-height: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .panel.k-arms:not(.compact) .dtext span, .panel.k-med:not(.compact) .dtext span { line-height: 15px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
-.shop .buffer { display: flex; flex-direction: column; }
-.shop .buffer h3:nth-of-type(2) { margin-top: 10px; }
-.checkout { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between; margin-top: 12px; padding: 10px 12px; background: #161c1b; border: 1px solid var(--line); }
-.checkout .sum { display: flex; gap: 14px; align-items: baseline; color: var(--dim); }
-.checkout .sum b { font: 16px var(--px); color: var(--ink); } .checkout .sum b.bad { color: var(--bad); }
-.checkout .sum small { color: var(--mute); }
-.checkout .acts { display: flex; gap: 8px; }
-.checkout .warn { flex-basis: 100%; margin: 0; }
 
 .radio { display: grid; grid-template-columns: 1fr 200px; gap: 14px; }
 .quests { display: flex; flex-direction: column; gap: 10px; }
@@ -409,7 +434,6 @@ button.pcard:hover:not(:disabled) { border-color: var(--amber); background: #2b3
 .seg.tabs2 small { color: var(--mute); font-size: 11px; margin-left: 4px; }
 .cshop .seg.tabs2 { margin-bottom: 6px; }
 .cshop .pane h3 small { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.checkout.compact { margin-top: 6px; padding: 6px 10px; }
 .panel.compact .details { margin-top: 6px; padding: 6px 10px; min-height: 0; gap: 4px 10px; }
 .panel.compact .gear-actions button { min-height: 40px; }
 .panel.compact .details .dacts { grid-column: 1 / -1; justify-content: flex-start; }
