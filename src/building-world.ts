@@ -66,8 +66,7 @@ export function mapPresentation(map: SpaceDefinition): MapData {
 }
 
 /** One generation allocates the entire population and supplies across all maps. */
-export function initializeBuildingRaid(state: ExpansionState, loadout: D.RunLoadout, config: RunConfig): void {
-    const world = BUILDING_WORLD;
+export function initializeBuildingRaid(state: ExpansionState, loadout: D.RunLoadout, config: RunConfig, world = BUILDING_WORLD): void {
     const maps: LayeredRaid['maps'] = Object.fromEntries(Object.values(world.maps).map(m => [m.id, {
         doors: Object.fromEntries(m.doors.map(d => [d.id, false])), localTime: 0, enemies: [], loot: [], containers: [], bullets: [], noise: null,
     }]));
@@ -106,8 +105,8 @@ export function initializeBuildingRaid(state: ExpansionState, loadout: D.RunLoad
     initialLuck(state);
 }
 
-export function buildingRunConfig(seed: number | string): RunConfig {
-    const config = generateRun(seed), random = D.seededRandom(config.seed + 11939);
+export function buildingRunConfig(seed: number | string, source?: RunConfig): RunConfig {
+    const config = source ?? generateRun(seed), random = D.seededRandom(config.seed + 11939);
     const rare = ['strengthDose', 'constitutionDose', 'techniqueDose', 'luckyCharm', 'unluckyCharm', 'luckySachet', 'unluckySachet'];
     for (const entry of [...config.loot, ...config.containers.flatMap(c => c.items)]) {
         if (['sample', 'ledger', 'scrap', 'wire', 'fuse'].includes(entry.id)) continue;

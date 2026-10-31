@@ -60,12 +60,12 @@ test('historical Perk and enemy actions keep distinct critical rules through che
         assert.ok(p.saves.resumeRun()); p.state.state = 'run';
         const runtime = new CoastRaidRuntime(p.state, p.saves);
         assert.ok(p.saves.persist()); runtime.cancelStart();
-        assert.equal(p.record.version, 9); assert.equal(enemyOn(p.record), version === 6); assert.deepEqual(hit(p.record), hit(record));
+        assert.equal(p.record.version, 10); assert.equal(enemyOn(p.record), version === 6); assert.deepEqual(hit(p.record), hit(record));
         const reopened = page(p.raw); assert.deepEqual(hit(reopened.record), hit(record));
         const portable = decodePortableBackup(encodeRecoveryBackup(p.record));
         assert.equal(portable.kind, 'session'); if (portable.kind !== 'session') continue;
         const target = page(); assert.ok(target.saves.importRecord(portable.record));
-        assert.equal(target.record.version, 9); assert.equal(enemyOn(target.record), version === 6); assert.deepEqual(hit(target.record), hit(record));
+        assert.equal(target.record.version, 10); assert.equal(enemyOn(target.record), version === 6); assert.deepEqual(hit(target.record), hit(record));
         assert.equal(target.record.enemyBackup, record.enemyBackup); assert.equal(target.record.perksBackup, record.perksBackup);
     }
 });
@@ -74,12 +74,12 @@ test('enemy-only v6 settles before Perk upgrade: failed upgrade preserves exact 
     const p = page(historical(6)), enemyBackup = p.record.enemyBackup;
     assert.ok(p.saves.resumeRun()); p.state.state = 'run';
     assert.ok(p.saves.prepareSettlement('extract', 0)); assert.ok(p.saves.retrySettlement());
-    assert.equal(p.record.version, 9); assert.ok(enemyOn(p.record)); assert.equal(p.record.expansion!.version, 2);
+    assert.equal(p.record.version, 10); assert.ok(enemyOn(p.record)); assert.equal(p.record.expansion!.version, 2);
     p.state.state = 'hideout'; const before = p.raw;
     p.fail(true); assert.equal(p.saves.ensureRpg(), false); assert.equal(p.raw, before);
     assert.equal(p.state.expansion!.version, 2);
     p.fail(false); assert.ok(p.saves.ensureRpg());
-    assert.equal(p.record.version, 9); assert.equal(p.record.perksBackup, before); assert.equal(p.record.enemyBackup, enemyBackup);
+    assert.equal(p.record.version, 10); assert.equal(p.record.perksBackup, before); assert.equal(p.record.enemyBackup, enemyBackup);
     assert.ok(p.saves.beginRun(43, true)); assert.equal(p.record.expansion!.raid!.version, 5);
     assert.equal(hit(p.record).damage, 10); assert.ok(p.saves.persist());
     const reopened = page(p.raw); assert.equal(reopened.record.perksBackup, before); assert.equal(reopened.record.enemyBackup, enemyBackup);
@@ -92,15 +92,15 @@ test('Perk-first deployment turns enemy rules on once; both backups survive sett
     assert.equal(p.record.perksBackup, v4);
     p.fail(true); assert.equal(p.saves.beginRun(42, true), false); assert.equal(p.raw, v5);
     p.fail(false); assert.ok(p.saves.beginRun(42, true)); p.state.state = 'run';
-    assert.equal(p.record.version, 9); assert.equal(p.record.enemyBackup, v5); assert.equal(p.record.perksBackup, v4);
+    assert.equal(p.record.version, 10); assert.equal(p.record.enemyBackup, v5); assert.equal(p.record.perksBackup, v4);
     assert.ok(p.saves.prepareSettlement('extract', 0)); assert.ok(p.saves.retrySettlement()); p.state.state = 'hideout';
     const rt = new RealHideoutRuntime(p.state, p.saves, () => NOW); assert.ok(rt.enter().ok);
     assert.ok(startOver(rt, () => p.storage, NOW).ok);
-    assert.equal(p.record.version, 9); assert.equal(p.record.enemyBackup, v5); assert.equal(p.record.perksBackup, v4);
+    assert.equal(p.record.version, 10); assert.equal(p.record.enemyBackup, v5); assert.equal(p.record.perksBackup, v4);
     const decoded = decodePortableBackup(encodeRecoveryBackup(p.record)); assert.equal(decoded.kind, 'session');
     if (decoded.kind !== 'session') return;
     const q = page(); assert.ok(q.saves.importRecord(decoded.record));
-    assert.equal(q.record.version, 9); assert.equal(q.record.enemyBackup, v5); assert.equal(q.record.perksBackup, v4);
+    assert.equal(q.record.version, 10); assert.equal(q.record.enemyBackup, v5); assert.equal(q.record.perksBackup, v4);
 });
 
 test('combined records reject mismatched rules, missing snapshots, lost backups and downgrade without overwriting', () => {

@@ -49,7 +49,7 @@ function grown(p: Page, permanent: Record<Attribute, number>, perks: PerkId[] = 
 }
 /** The record the previous client (session v4) writes for the same state: expansion and raid v2, no perks, no gun fields. */
 function asV4(text: string): string {
-    const r = JSON.parse(text); assert.equal(r.version, 9); assert.deepEqual(r.expansion.growth.perks, []);
+    const r = JSON.parse(text); assert.equal(r.version, 10); assert.deepEqual(r.expansion.growth.perks, []);
     makeV4(r);
     return JSON.stringify(r);
 }

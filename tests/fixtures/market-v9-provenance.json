@@ -1,0 +1,8 @@
+{
+  "sourceCommit": "8a28da9873e5188e13053f894e5b6bbb0ae10dc8",
+  "record": "market-v9.json",
+  "recordSha256": "d584e1ad2344de81dd1b2fb860fff30bf75787a425a3ec6435876f259a5c6b8d",
+  "htmlSha256": "5e8567b27c3e8407a5165495384bef95a1bc4f6a3d270e1ee63e66ececd39d21",
+  "builtWith": "Node 24.22.1; pnpm 11.19.0; frozen lockfile",
+  "capture": "Real Chromium, fresh browser context, baseline file URL with ?test=1&entry=tabs; exact localStorage bytes after initialization."
+}

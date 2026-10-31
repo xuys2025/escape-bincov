@@ -57,7 +57,7 @@ try {
     await step('native deployment saves all three maps with one global roster and body', async () => {
         const state = await info(), record = JSON.parse(state.raw);
         // Record v8 (gun instances) with enemy rules on (it holds enemyBackup) for the combined perk and enemy raid v5.
-        assert.equal(record.version, 9); assert.equal(record.raid, null); assert.equal(record.expansion.raid.version, 5); assert.ok('enemyBackup' in record);
+        assert.equal(record.version, 10); assert.equal(record.raid, null); assert.equal(record.expansion.raid.version, 5); assert.ok('enemyBackup' in record);
         assert.equal(record.expansion.raid.roster.length, 25);
         assert.deepEqual(Object.keys(record.expansion.raid.maps).sort(), ['coast', 'resident-b1', 'resident-f2']);
         assert.equal(state.map, 'coast');

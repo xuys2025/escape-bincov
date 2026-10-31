@@ -8,7 +8,7 @@
  * profile-codec.
  */
 import * as D from '../domain';
-import type { SessionRecord } from '../recovery-store';
+import type { SessionRecordV9 } from '../recovery-store';
 import type { LootState } from '../checkpoint';
 import type { LootContainer } from '../loot';
 import { entityUid } from '../expansion-state';
@@ -32,7 +32,7 @@ function relayoutCarried(loadout: D.RunLoadout, player: { x: number; y: number }
  * layoutBackup, null when it was migrated from v2 to v7 just before (their bytes are in gunsBackup or migrationBackup).
  * Throws when it cannot; the input is not changed. decodeSession checks the result again by the v9 rules.
  */
-export function migrateLayout(record: Json, original: string | null): SessionRecord {
+export function migrateLayout(record: Json, original: string | null): SessionRecordV9 {
     if (record.version !== 8 || (original !== null && typeof original !== 'string')) return layoutRefused();
     const out = structuredClone(record), p = out.profile as D.SaveDataV1;
     const classic = out.raid, layered = out.expansion?.raid ?? null;
@@ -54,5 +54,5 @@ export function migrateLayout(record: Json, original: string | null): SessionRec
     } else layOutBase(p);
     out.version = 9;
     out.layoutBackup = original;
-    return out as SessionRecord;
+    return out as SessionRecordV9;
 }

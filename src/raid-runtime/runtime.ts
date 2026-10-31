@@ -32,6 +32,9 @@ import { SaveSession, type SessionState, type ExpansionTransaction, type Mutatio
 import type { LootContainer, LootTransfer } from '../loot';
 import type { RaidRuntime, RaidIntent, PublishedView, WorldKey, MapDef, StampedEvent, ViewEventBody, Durability, WeaponLook, TargetRef, Interaction, HurtCause } from './contract';
 import { mapView, frameView, freeze, Revelation, bulletOwner, pointShown } from './presentation';
+import { STORY_WORLD, STORY_CABINET, STORY_RECALL, storyView, observeStory as recordStoryObservation, type StoryClue, type StoryCueId } from '../story';
+import { MARKET_ANCHORS } from '../market-world';
+import type { StorySourceRef, StorySource } from './contract';
 export const emptyIntent = (): RaidIntent => ({ move: { x: 0, y: 0, sprint: false }, aim: null, precise: false,
     firePressed: false, fireHeld: false, aimHeld: false, interactPressed: false, interactHeld: false, commands: [], selectTarget: null, source: 'mouse-keyboard' });
 const distance = (a: Point, b: Point) => Math.hypot(a.x - b.x, a.y - b.y);
@@ -262,7 +265,7 @@ export class CoastRaidRuntime implements RaidRuntime {
             throw new Error('Resume or deploy a valid owned raid before creating Runtime.');
         this.layered = session.expansion?.raid ? structuredClone(session.expansion) : null;
         const world = this.layered?.raid?.worldVersion;
-        if (world && world !== 'coast-buildings-v1' && !isMallWorld(world))
+        if (world && world !== 'coast-buildings-v1' && world !== STORY_WORLD && !isMallWorld(world))
             throw new Error('Sample Runtime does not support this world.');
         this.config = this.layered ? (isMallWorld(world) ? mallRunConfig : buildingRunConfig)(this.layered.raid!.seed)
             : generateRun(session.checkpoint!.seed);
@@ -575,6 +578,8 @@ export class CoastRaidRuntime implements RaidRuntime {
                         }
                         if (this.session.state === 'run' && !this.paused && !this.ending)
                             this.pull(this.overlay ? emptyIntent() : effective);
+                        if (this.canObserveStory('ch01-sc-freezer'))
+                            this.observeStory({ id: 'ch01-sc-freezer', world: this.worldKey() });
                         if (this.session.state === 'run' && !this.paused && !this.ending && this.elapsed - this.checkpointAt >= 2)
                             this.checkpoint();
                     }
@@ -911,6 +916,40 @@ export class CoastRaidRuntime implements RaidRuntime {
         this.restore(activeRaidCheckpoint(state.body, this.layered.raid, this.stepTime));
     }
     getLootContainer(id: string): LootContainer | undefined { return this.containers.find(container => container.id === id); }
+    story() { return storyView(this.session.story, this.session.save, this.session.loadout); }
+    storySources(): StorySource[] {
+        if (this.worldKey().worldVersion !== STORY_WORLD || this.worldKey().mapId !== 'coast') return [];
+        return (['ch01-sc-freezer', 'ch01-sc-breaker'] as const).map(id => {
+            const anchor = MARKET_ANCHORS[id];
+            return { ref: { id, world: { ...this.worldKey() } }, at: { x: anchor.x, y: anchor.y }, radius: anchor.radius, title: anchor.title, available: this.canObserveStory(id) };
+        });
+    }
+    private canObserveStory(id: StorySourceRef['id']): boolean {
+        const key = this.worldKey(), point = MARKET_ANCHORS[id];
+        if (!point || key.worldVersion !== STORY_WORLD || key.mapId !== 'coast' || this.session.story.currentRun?.runId !== key.runId
+            || this.disposed || this.paused || this.overlay || this.locked || this.ending || this.extracted || this.hp <= 0
+            || this.session.state !== 'run' || this.session.pendingSettlement || this.session.conflict || !this.session.storageOK) return false;
+        if (id === 'ch01-sc-freezer' ? this.session.story.currentRun.cues.includes(id) : this.session.story.clues.includes('breaker-down')) return false;
+        return distance(this.player, point) < point.radius && this.walkable(point.x, point.y, this.highTide) && this.sight(this.player, point, this.highTide, 10);
+    }
+    observeStory(ref: StorySourceRef): boolean {
+        if (!ref || !['ch01-sc-freezer', 'ch01-sc-breaker'].includes(ref.id) || !ref.world
+            || Object.keys(this.worldKey()).some(k => ref.world[k as keyof WorldKey] !== this.worldKey()[k as keyof WorldKey])
+            || !this.canObserveStory(ref.id)) return false;
+        return this.commitStoryObservation(ref.id, ref.id === 'ch01-sc-freezer' ? 'freezer-knocks' : 'breaker-down', ref.id === 'ch01-sc-freezer' ? ref.id : undefined);
+    }
+    private commitStoryObservation(source: string, clue: StoryClue, cue?: StoryCueId): boolean {
+        const ticket = this.saves.prepareExpansionMutation(draft => recordStoryObservation(draft.story, clue, cue));
+        if (!ticket) return false;
+        return this.commitLayer({ ticket, action: `story:${source}`, suppress: false, from: this.worldKey().mapId,
+            events: [{ body: { type: 'story-cue', source, clue, text: STORY_RECALL[clue].text,
+                sound: clue === 'heard-call' ? 'call' : clue === 'freezer-knocks' ? 'knocks' : null },
+                world: this.worldKey(), epoch: this.epoch, durability: 'committed' }] });
+    }
+    private openLoot(id: string, runId: string): void {
+        this.lootContext = { containerId: id, runId };
+        this.suppressHeldInput(); this.setOverlay('loot');
+    }
     canLootContainer(id: string, runId: string): boolean {
         const container = this.getLootContainer(id);
         return !!container && !!runId && !!this.player && this.session.state === 'run' && !this.disposed
@@ -1284,8 +1323,11 @@ export class CoastRaidRuntime implements RaidRuntime {
         // A dropped stale ticket leaves the live world as the state to save.
         if (!ok && pending && !this.pendingLayer)
             ok = this.checkpoint();
-        if (ok)
+        if (ok) {
             this.setOverlay('');
+            if (pending?.action === 'story:ch01-sc-call' && this.canLootContainer(STORY_CABINET, this.worldKey().runId))
+                this.openLoot(STORY_CABINET, this.worldKey().runId);
+        }
         return ok;
     }
     /** `gun`: the shooter's gun (the player's, #28 M2-11; an armed enemy's, M4-02), its id, class and whether a suppressor muffles it, for the view's sound. */
@@ -1658,9 +1700,10 @@ export class CoastRaidRuntime implements RaidRuntime {
         if (ref.kind === 'ground')
             return this.pickupLoot(ref.id);
         if (ref.kind === 'container' && this.canLootContainer(ref.id, ref.runId)) {
-            this.lootContext = { containerId: ref.id, runId: ref.runId };
-            this.suppressHeldInput();
-            this.setOverlay('loot');
+            if (ref.id === STORY_CABINET && this.worldKey().worldVersion === STORY_WORLD
+                && !this.session.story.currentRun?.cues.includes('ch01-sc-call')
+                && !this.commitStoryObservation('ch01-sc-call', 'heard-call', 'ch01-sc-call')) return false;
+            this.openLoot(ref.id, ref.runId);
             return true;
         }
         if (ref.kind === 'door' && (!this.space || !doorAnchor(this.space, ref.id, this.player))) {

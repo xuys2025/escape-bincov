@@ -39,7 +39,7 @@ test('v2 session migration keeps exact bytes and a failed commit leaves the orig
   const store=new RecoveryStore(storage), loaded=store.load();
   assert.equal(loaded.save.version,3); assert.equal(store.record?.migrationBackup,old); assert.equal(store.record?.gunsBackup,null);
   assert.throws(()=>store.commit(loaded.save,null)); assert.equal(data.get(SESSION_KEY),old);
-  fail=false; const current=store.commit(loaded.save,null); assert.equal(current.version, 9); assert.equal(current.migrationBackup,old); assert.equal(current.gunsBackup,null);
+  fail=false; const current=store.commit(loaded.save,null); assert.equal(current.version, 10); assert.equal(current.migrationBackup,old); assert.equal(current.gunsBackup,null);
   const decoded=decodeSession(data.get(SESSION_KEY)!); assert.deepEqual(decoded,current);
   const legacy=decodeBackup(JSON.stringify(profile)); assert.equal(legacy.version,3); assert.deepEqual(legacy.bag,profile.bag);
 });

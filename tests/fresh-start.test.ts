@@ -54,7 +54,7 @@ test('fresh start record is a strict v9 session with the starter kit and the old
     const data = decodePortableBackup(freshStartText(.6, NOW));
     assert.equal(data.kind, 'session'); if (data.kind !== 'session') return;
     const r = data.record, p = r.profile, e = r.expansion!;
-    assert.equal(r.version, 9); assert.equal(r.perksBackup, null); assert.equal(r.gunsBackup, null); assert.equal(r.layoutBackup, null); assert.equal(e.version, 3); assert.deepEqual(e.growth.perks, []);
+    assert.equal(r.version, 10); assert.equal(r.perksBackup, null); assert.equal(r.gunsBackup, null); assert.equal(r.layoutBackup, null); assert.equal(e.version, 3); assert.deepEqual(e.growth.perks, []);
     assert.equal(e.charm, null); assert.deepEqual(e.awards, []); assert.equal(e.raid, null);
     assert.equal(r.raid, null); assert.equal(r.terminal, null); assert.equal(p.activeRun, null);
     assert.equal(p.cash, 700); assert.deepEqual(p.stats, { runs: 0, extracts: 0, kills: 0 }); assert.equal(p.settings.volume, .6);

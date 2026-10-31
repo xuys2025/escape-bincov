@@ -97,7 +97,7 @@ try {
             if (phase !== 'corpse') assert.ok(actual.cue);
             assert.equal(actual.reloading, phase === 'reload');
             // Record v9 (gun instances, footprints that follow the magazine) with enemy rules on, which the record says by holding enemyBackup.
-            assert.equal(actual.weapon, phase === 'parley' ? 'rifle' : archetype(role).weapon); assert.deepEqual(actual.record, { version: 9, enemyRules: true });
+            assert.equal(actual.weapon, phase === 'parley' ? 'rifle' : archetype(role).weapon); assert.deepEqual(actual.record, { version: 10, enemyRules: true });
             if (phase !== 'parley') {
                 assert.equal(actual.artStyle, role); assert.ok(phase === 'corpse' ? actual.corpseArt : actual.bodyArt);
             }

@@ -37,7 +37,7 @@ test('v4 activation is atomic, retains exact pre-upgrade bytes once, and preserv
     assert.equal(f.bytes, bytes); assert.equal(f.state.expansion, null); assert.deepEqual(f.state.checkpoint, original);
     f.deny(false); assert.equal(f.session.enableExpansion(2000), true);
     const record = decodeSession(f.bytes);
-    assert.equal(record.version, 9); assert.equal(record.expansion!.version, 1); assert.equal(record.systemsBackup, bytes);
+    assert.equal(record.version, 10); assert.equal(record.expansion!.version, 1); assert.equal(record.systemsBackup, bytes);
     assert.deepEqual(record.profile, profile); assert.deepEqual(record.raid, original);
     assert.equal(record.expansion!.body.hp, 37); assert.equal(record.expansion!.body.stamina, 15);
     assert.equal(record.expansion!.body.pollution, 63); assert.equal(record.expansion!.body.bleeding, true);

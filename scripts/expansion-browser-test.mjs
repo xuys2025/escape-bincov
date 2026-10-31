@@ -72,7 +72,7 @@ try {
         await old.close(); await page.reload(); await ready(page); // Inspect the record before the mandatory station-boundary upgrade.
         assert.equal(await page.evaluate(() => window.__bincov.app.save.cash), 1842);
         // Loading writes the old v3 record as v9 at once (no expansion yet), its exact bytes kept as gunsBackup.
-        preUpgrade = await raw(page); assert.equal(JSON.parse(preUpgrade).version, 9); assert.equal(JSON.parse(preUpgrade).gunsBackup, bytes);
+        preUpgrade = await raw(page); assert.equal(JSON.parse(preUpgrade).version, 10); assert.equal(JSON.parse(preUpgrade).gunsBackup, bytes);
         assert.equal('expansion' in JSON.parse(preUpgrade), false);
     });
     await step('activation quota failure preserves original bytes; retry retains one exact rollback record', async () => {
@@ -99,11 +99,11 @@ try {
         assert.equal(await old.evaluate(() => window.__bincov.persist()), false); assert.equal(await raw(old), bytes);
         await old.close(); page = await context.newPage();
         await page.goto('https://bincov-expansion.test/current?test=1&entry=tabs'); await ready(page);
-        prePerk = await raw(page); assert.equal(JSON.parse(prePerk).version, 9); assert.equal(JSON.parse(prePerk).expansion.version, 1);
+        prePerk = await raw(page); assert.equal(JSON.parse(prePerk).version, 10); assert.equal(JSON.parse(prePerk).expansion.version, 1);
         // The station entry is the perk upgrade boundary: expansion v3 keeps that exact text once.
         await action(page, 'enter').click();
         const upgraded = JSON.parse(await raw(page));
-        assert.equal(upgraded.version, 9); assert.equal(upgraded.expansion.version, 3); assert.deepEqual(upgraded.expansion.growth.perks, []);
+        assert.equal(upgraded.version, 10); assert.equal(upgraded.expansion.version, 3); assert.deepEqual(upgraded.expansion.growth.perks, []);
         assert.equal(upgraded.systemsBackup, preUpgrade); assert.equal(upgraded.perksBackup, prePerk);
     });
     await step('every actual old HTML (pre-expansion, the last v4, v5 and v7 clients) rejects v9 with and without the writer lock, preserving every byte', async () => {
@@ -121,14 +121,14 @@ try {
         page = await context.newPage();
         await page.goto('https://bincov-expansion.test/current?test=1&entry=tabs'); await ready(page); await action(page, 'enter').click();
         const record = JSON.parse(await raw(page));
-        assert.equal(record.version, 9); assert.equal(record.perksBackup, prePerk); assert.equal(record.systemsBackup, preUpgrade);
+        assert.equal(record.version, 10); assert.equal(record.perksBackup, prePerk); assert.equal(record.systemsBackup, preUpgrade);
         assert.equal(record.profile.version, 3); assert.ok(record.profile.equipment.weaponUid);
     });
     await step('settled native export includes the full extension; cancel/failure/confirmation preserve atomic import', async () => {
         await action(page, 'tab', 'home').click();
         const [download] = await Promise.all([page.waitForEvent('download'), action(page, 'export-save').click()]);
         const path = resolve(root, 'expansion-settled.json'); await download.saveAs(path);
-        const backup = JSON.parse(await readFile(path, 'utf8')); assert.equal(backup.formatVersion, 9); assert.equal(backup.record.expansion.version, 3);
+        const backup = JSON.parse(await readFile(path, 'utf8')); assert.equal(backup.formatVersion, 10); assert.equal(backup.record.expansion.version, 3);
         assert.equal(backup.record.expansion.body.hp, 37); assert.equal(backup.record.expansion.growth.progress.technique, .2);
         const changed = structuredClone(backup); changed.record.profile.cash = 2842;
         const changedPath = resolve(root, 'expansion-import-fixture.json'); await writeFile(changedPath, JSON.stringify(changed));
@@ -171,7 +171,7 @@ try {
             await v7.close();
             const now = await other.newPage(); await now.goto('https://bincov-expansion.test/current?test=1&entry=tabs'); await ready(now);
             const migrated = JSON.parse(await raw(now));
-            assert.deepEqual([migrated.version, migrated.profile.version, migrated.expansion.raid.version, migrated.gunsBackup, migrated.layoutBackup], [9, 3, 5, old, null]);
+            assert.deepEqual([migrated.version, migrated.profile.version, migrated.expansion.raid.version, migrated.gunsBackup, migrated.layoutBackup], [10, 3, 5, old, null]);
             assert.deepEqual([migrated.enemyBackup, migrated.perksBackup, migrated.systemsBackup], [stored.enemyBackup, stored.perksBackup, stored.systemsBackup]);
             assert.ok(migrated.expansion.raid.loadout.weaponUid && migrated.expansion.raid.loadout.gun, 'the carried gun is an instance');
             const bytes = await raw(now);

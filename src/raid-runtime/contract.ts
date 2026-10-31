@@ -4,6 +4,9 @@ import type { GunClass } from '../gunsmith/catalog';
 import type { LootTransfer } from '../loot';
 import type { CritBreakdown } from '../perks';
 import type { MutationResult } from '../session';
+import type { storyView, StoryClue } from '../story';
+export interface StorySourceRef { world: WorldKey; id: 'ch01-sc-freezer' | 'ch01-sc-breaker' }
+export interface StorySource { ref: StorySourceRef; at: Point; radius: number; title: string; available: boolean }
 
 export type CarriedEndpoint = 'bag' | 'safe';
 /** Detached display inputs, read afresh after a transaction; never a second inventory owner. */
@@ -16,6 +19,9 @@ export type CarriedPlacement = Readonly<{
 /** Durable actions and detached reads offered to a raid view. Implemented by raid-runtime/host, never by a view.
  * Read again after any transaction: rollback/restore may replace loadout and world objects. */
 export interface CoastServices {
+    story(): ReturnType<typeof storyView>;
+    storySources(): StorySource[];
+    observeStory(ref: StorySourceRef): boolean;
     cancelStart(): void;
     activate(ref: TargetRef): boolean;
     transferLoot(ref: TargetRef, request: LootTransfer): MutationResult;
@@ -455,6 +461,13 @@ export type ViewEventBody = {
      * Door refusals distinguish 'unreachable' from 'occupied'; no success side effects survive rejection.
      */
     reason: string;
+} | {
+    type: 'story-cue';
+    source: string;
+    clue: StoryClue;
+    text: string;
+    /** A presentation hint only. Text and recap contain the whole information even with audio disabled. */
+    sound: 'knocks' | 'call' | null;
 } | {
     type: 'notice';
     text: string;
