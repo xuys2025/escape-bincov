@@ -12,10 +12,10 @@ import { gpuTextures, managedSlots, parkApp, takeApp } from '../pixi-app';
 import { raidWorlds, sampleMallLayout, sampleMode, villageSeed } from '../raid-areas';
 import { toast } from '../toast';
 import { lifecycle } from '../view-lifecycle/scope';
-import type { HideoutSnapshot, RunWorld } from '../hideout-runtime/contract';
-import type { StationHost } from './host';
+import type { RunWorld } from '../hideout-runtime/contract';
+import type { HostOptions, StationHost } from './host';
 
-type Arrival = HideoutSnapshot['arrival'];
+type StationArrival = HostOptions['arrival'];
 const params = () => new URLSearchParams(globalThis.location?.search ?? '');
 /** Test fixture only (`?test=1&entry=tabs`): the legacy suites keep the old tab page as the hideout entry. */
 export const stationDefault = () => !(params().get('test') === '1' && params().get('entry') === 'tabs');
@@ -34,18 +34,23 @@ export async function enterStation(): Promise<boolean> {
   if (!entered.ok) { navigation().render(); toast(entered.message); return false; }
   return openStation(null);
 }
-/** Result page "返回": the Runtime hands over a one-time arrival; the yard plays the walk-in and the report. */
-export async function returnToStation(): Promise<boolean> {
+/**
+ * After a saved settlement (the page's `settled`, or the fallback result page's 「返回水产站」): the Runtime hands over a
+ * one-time arrival and the yard plays the walk-in. The raid has one report: the yard opens it unless the result page
+ * already showed it (`reported`).
+ */
+export async function returnToStation(reported = false): Promise<boolean> {
   if (current || starting) return false;
   const back = hideoutRuntime.returnToBase();
   if (!back.ok) { toast(back.message); return false; }
-  return openStation(hideoutRuntime.consumeArrival());
+  const arrival = hideoutRuntime.consumeArrival();
+  return openStation(arrival && reported ? { ...arrival, summary: null } : arrival);
 }
 
 /** The handle the page sees while the yard owns the hideout view (set before the old page is cleared). */
 const handle = { checkpoint: () => !current || current.host.busy || hideoutRuntime.flush().ok };
 
-async function openStation(arrival: Arrival): Promise<boolean> {
+async function openStation(arrival: StationArrival): Promise<boolean> {
   app.station = handle;
   if (!navigation().hideoutExternal()) { app.station = null; return false; }
   starting = true;

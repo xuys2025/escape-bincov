@@ -16,6 +16,7 @@ import * as D from '../src/domain.ts';
 import { assertFrames } from './station-acceptance-gates.mjs';
 import { readManagedTables, readPixiEvents } from './pixi-managed-gate.mjs';
 import { parseTrendRounds } from './station-resource-args.mjs';
+import { atRaidRelease, releasedState, watchOldPage, yardReport } from './yard-entry.mjs';
 
 const rounds = parseTrendRounds(process.argv.slice(2));
 const out = resolve(process.argv.find(a => a.startsWith('--out='))?.slice(6) ?? 'test-results/astra-resource-r3/probe'); await mkdir(out, { recursive: true });
@@ -186,12 +187,12 @@ async function trip(){
   assert.equal(await page.evaluate(()=>window.__round2Released.app.deref()===window.__bincovSample.host.app),true);
   const freed=await released();
   await page.evaluate(()=>{window.__bincovSample.driver.freezeAI(true);window.__bincovSample.driver.placePlayer({x:208,y:122},Math.PI/2);});
+  // The yard takes the Application back right after the outro (#163), so the parked state is read as the raid lets go.
+  await watchOldPage(page);await atRaidRelease(page,src=>{const a=window.__round2Released.app.deref();return{counts:window.__station.counts(),children:a.stage.children.length,ticker:a.ticker.started,attached:a.canvas.isConnected,events:(0,eval)('('+src+')')(a.renderer),tables:a.renderer.gc._managedResourceHashes.map(d=>({name:d.context.name,live:Object.values(d.context[d.hash]).filter(Boolean).length,empty:Object.values(d.context[d.hash]).filter(x=>x===null).length}))};},readPixiEvents.toString());
   await page.keyboard.down('e');try{await page.waitForFunction(()=>window.__bincov.app.state==='result',null,{timeout:20000});}finally{await page.keyboard.up('e');}
-  await page.waitForFunction(()=>!document.querySelector('.coast-sample'));
-  await page.waitForFunction(()=>window.__station.counts().parked===1&&window.__station.counts().apps===0);
-  const parked=await page.evaluate(src=>{const a=window.__round2Released.app.deref();return{children:a.stage.children.length,ticker:a.ticker.started,attached:a.canvas.isConnected,events:(0,eval)('('+src+')')(a.renderer),tables:a.renderer.gc._managedResourceHashes.map(d=>({name:d.context.name,live:Object.values(d.context[d.hash]).filter(Boolean).length,empty:Object.values(d.context[d.hash]).filter(x=>x===null).length}))};},readPixiEvents.toString());
+  const parked=await releasedState(page);assert.equal(parked.counts.parked,1);assert.equal(parked.counts.apps,0);delete parked.counts;
   assert.equal(parked.children,0);assert.equal(parked.ticker,false);assert.equal(parked.attached,false);assert.equal(parked.events.attached,false);assert.equal(parked.events.native,0);assert.ok(Object.values(parked.events.roots).every(v=>!v));assert.ok(parked.tables.every(t=>t.empty===0));
-  await page.locator('[data-action="return"]').click();await yardReady();await until(()=>window.__station.host.ui.kind==='report',8000);await page.locator('.report [data-act="close"]').click();
+  await yardReady();await until(()=>window.__station.host.ui.kind==='report',8000);await yardReport(page);await page.locator('.report [data-act="close"]').click();
   return{freed,parked};
 }
 async function remount(){await page.evaluate(markRelease);await page.evaluate(()=>window.__station.remount(1));await yardReady();}

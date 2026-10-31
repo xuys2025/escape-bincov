@@ -74,16 +74,17 @@ export async function startCoastSample(paused = false): Promise<boolean> {
   } finally { starting = false; }
 }
 
-/** Settlement is committed: release the Runtime, unmount the view, then hand the result screen to the original UI. */
+/** Settlement is committed: release the Runtime, unmount the view, then the page shows what follows (the yard's walk-in). */
 function finish(host: CoastSampleHost) {
   host.runtime.dispose();
   host.unmount();
   testDriver = null;
   if (app.coastSample === host) app.coastSample = null;
   delete document.documentElement.dataset.coastSample;
-  // The result screen plays the extract/death cue; a run settled from the pause menu still has audio suspended.
+  // The extract/death cue already played when the settlement committed (sound.settled); a run settled from the pause
+  // menu still has audio suspended for what follows.
   audio.start();
-  navigation().changeState('result');
+  navigation().settled();
 }
 
 function expose(driver: unknown) {

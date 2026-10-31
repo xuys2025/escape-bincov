@@ -45,7 +45,7 @@ await startPreparedHideoutRaid(prepared.runId!);
 
 动画中刷新：保存的活动行动直接走标题 resumeRun 路径，不重播假结算。城市宿主启动失败仍保留其检查点，由现有失败清理/刷新恢复路径处理。
 
-结算顺序保持现有 `prepareSettlement → retrySettlement → result`。pendingSettlement 未持久化时不允许走回动画。原城市 finish 会释放 Raid Runtime、unmount 视图，才进入结果页；不要抢先 mount 院子。真实结果页返回时调用 `returnToBase()`，ok 后读 `consumeArrival()`，仅用这份一次性标记播放院门走入和报告。消费后/刷新后为 null；普通读档不重播上一局报告。
+结算顺序保持现有 `prepareSettlement → retrySettlement → result`。pendingSettlement 未持久化时不允许走回动画。原城市 finish 会释放 Raid Runtime、unmount 视图之后，才交给页面；不要抢先 mount 院子。2026-10-31 起（#163，一局只显示一份行动报告）页面的 `settled` 直接调用 `returnToBase()`，ok 后读 `consumeArrival()`，仅用这份一次性标记播放院门走入和报告；结果页只在页签入口或 `returnToBase` 被拒时兜底，从结果页返回时只播放走入、不再弹报告。消费后/刷新后为 null；普通读档不重播上一局报告。
 
 院子与沿海共用 Application 的停放/接管由你完成，本轮没有建立第二个 Pixi 实例。后续仍须真实验证 20 次挂载循环、图形上下文丢失/恢复与失败清理；本轮旧样板 51 项通过不算院子宿主验收。
 

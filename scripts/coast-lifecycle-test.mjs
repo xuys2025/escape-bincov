@@ -8,6 +8,7 @@ import { chromium } from 'playwright';
 import { browserOptions } from './browser-options.mjs';
 import { decodeSession } from '../src/recovery-store.ts';
 import { readPixiEvents } from './pixi-managed-gate.mjs';
+import { atRaidRelease, releasedState, watchOldPage, yardReport } from './yard-entry.mjs';
 const out = resolve(process.env.BINCOV_LIFECYCLE_OUT || 'test-results/coast-lifecycle');
 await mkdir(out, { recursive: true });
 const report = { at: new Date().toISOString(), checks: [], requests: [] };
@@ -164,14 +165,15 @@ try {
       assert.equal(await bytes(p), beforeEnd);
       assert.equal(await p.locator('.coast-sample').count(), 1);
       await p.evaluate(() => { window.__life.fault = ''; });
+      // The yard walks in right after the outro and reattaches the shared canvas (#163), so the release is read as it happens.
+      await watchOldPage(p); await atRaidRelease(p, () => ({ attached:window.__life.live.canvas.isConnected, roots:document.querySelectorAll('.coast-sample').length }));
       await p.locator('[data-do="retry-settlement"]').click();
-      await p.waitForSelector('[data-action="return"]');
-      assert.equal(await p.locator('.coast-sample').count(), 0);
-      const terminal = decodeSession(await bytes(p)); assert.equal(terminal.profile.activeRun, null);
-      const released = await p.evaluate(() => ({ attached:window.__life.live.canvas.isConnected, roots:document.querySelectorAll('.coast-sample').length }));
+      const released = await releasedState(p);
       assert.equal(released.attached, false, 'settlement detaches the retired raid canvas');
       assert.equal(released.roots, 0, 'settlement removes raid view');
-      await p.locator('[data-action="return"]').click();
+      await yardReport(p);
+      assert.equal(await p.locator('.coast-sample').count(), 0);
+      const terminal = decodeSession(await bytes(p)); assert.equal(terminal.profile.activeRun, null);
       await p.locator('#station-yard .report [data-act="close"]').click({timeout:20000});
       await departure(p); await deploy(p); await p.waitForSelector('.coast-sample canvas');
       assert.deepEqual(errors, []);
@@ -197,9 +199,9 @@ try {
       await p.locator('[data-do="resume"]').click();await p.waitForTimeout(600);const resumed=await state();assert.equal(resumed.phase,'running');assert.ok(resumed.elapsed>pausedEnd.elapsed+.1);assert.deepEqual(resumed.player,pausedEnd.player,'held movement remains suppressed on resume');await p.keyboard.up('d');
       await p.keyboard.press('Escape');await p.waitForFunction(()=>window.__bincovSample.host.lastBatch.frame.phase==='paused');
       await p.evaluate(()=>{const h=window.__bincovSample.host,v=h.view;window.__life.retired={host:new WeakRef(h),runtime:new WeakRef(h.runtime),view:new WeakRef(v),app:new WeakRef(h.app),targets:[v.worldRT,v.lightRT,v.upRT].map(t=>({texture:new WeakRef(t),source:new WeakRef(t.source)}))};});
-      await p.locator('[data-do="abandon"]').click();await p.locator('[data-do="abandon-yes"]').click();await p.locator('[data-action="return"]').waitFor();await p.waitForFunction(()=>!document.querySelector('.coast-sample'));
+      /* The yard walks in right after the outro and takes the shared Application back (#163): the parked state is read as the raid lets go, the collection checks once the yard is up. */await watchOldPage(p);await atRaidRelease(p,src=>{const a=window.__life.retired.app.deref();return{stage:a.stage.children.length,ticker:a.ticker.started,attached:a.canvas.isConnected,events:(0,eval)('('+src+')')(a.renderer),counts:window.__bincovSample.counts()};},readPixiEvents.toString());await p.locator('[data-do="abandon"]').click();await p.locator('[data-do="abandon-yes"]').click();const parked=await releasedState(p);await yardReport(p);
       const cdp=await ctx.newCDPSession(p);for(let i=0;i<3;i++){await cdp.send('HeapProfiler.collectGarbage');await p.waitForTimeout(200);}await cdp.detach();
-      const released=await p.evaluate(src=>{const w=window.__life.retired,a=w.app.deref(),status=(r,k)=>{const x=r.deref();return !x?'collected':x[k]?'released':'alive';};let runtime='collected';const port=w.runtime.deref();if(port){try{port.current();runtime='alive';}catch(e){runtime=e.message==='Runtime disposed.'?'released':String(e);}}return{host:status(w.host,'closed'),runtime,view:status(w.view,'destroyed'),targets:w.targets.map(t=>({texture:status(t.texture,'destroyed'),source:status(t.source,'destroyed')})),stage:a.stage.children.length,ticker:a.ticker.started,attached:a.canvas.isConnected,events:(0,eval)('('+src+')')(a.renderer),counts:window.__bincovSample.counts()};},readPixiEvents.toString());
+      const released=await p.evaluate(()=>{const w=window.__life.retired,status=(r,k)=>{const x=r.deref();return !x?'collected':x[k]?'released':'alive';};let runtime='collected';const port=w.runtime.deref();if(port){try{port.current();runtime='alive';}catch(e){runtime=e.message==='Runtime disposed.'?'released':String(e);}}return{host:status(w.host,'closed'),runtime,view:status(w.view,'destroyed'),targets:w.targets.map(t=>({texture:status(t.texture,'destroyed'),source:status(t.source,'destroyed')}))};});Object.assign(released,parked);
       for(const k of ['host','runtime','view'])assert.notEqual(released[k],'alive',k+' released or collected');assert.ok(['collected','released'].includes(released.runtime),'Runtime must be collected or reject current() specifically as disposed');assert.ok(released.targets.every(t=>t.texture!=='alive'&&t.source!=='alive'));assert.equal(released.stage,0);assert.equal(released.ticker,false);assert.equal(released.attached,false);assert.equal(released.events.attached,false);assert.equal(released.events.native,0);assert.ok(Object.values(released.events.roots).every(v=>!v));assert.equal(released.counts.apps,0);assert.equal(released.counts.views,0);assert.deepEqual(errors,[]);
       return{method:'Explicit test=1 read-only Runtime/weak-release probe, same real yard departure and UI resume/abandon; no clock mutation or simulated settlement',running,lost,lostEnd,restored,pausedEnd,resumed,released};
     } finally {report.checks.at(-1).errors=errors;await p.screenshot({path:resolve(out,'direct-runtime-last-state.png')}).catch(()=>{});await ctx.close();}
