@@ -1,3 +1,21 @@
+## 2026-11-01 · #151 四批文学合审归档（PR #164，未开发功能）
+
+沿 `docs/quest-expansion-151` / [PR #164](https://github.com/xuys2025/escape-bincov/pull/164)续作，原设计head `7edc174fc8c81e89b2965927e514c64299215cf5`，正常同步main `8a28da9873e5188e13053f894e5b6bbb0ae10dc8`；保留main的官网/商店记录。维护者授权全线合审、定点修订、归档与实施清单，本轮仍无功能开发。
+
+[内容入口](docs/story/quest-expansion/README.md)、[四批文稿](docs/story/quest-expansion/literary/README.md)、[合审与已验边界](docs/story/quest-expansion/REVIEW.md)、[实施顺序](docs/story/quest-expansion/IMPLEMENTATION.md)。32卡规模不变；286槽、28,528正文字符，4份Gemini原稿留存，哈希见[清单](docs/story/quest-expansion/ARCHIVE.md)。修正R合格记录后续失败保留、D仍持有才可交、总闸已见未报、医疗逐站签认、顾阿婆发车前引见，以及结局唯一证据/人物互斥与显示只读。
+
+文稿精确ID/九字段/长度/预算/占位、14项设计检查、16份Markdown的80个相对链接与8个文稿LF哈希通过；配装/材料相关五源码与原预算基线无差异。人工组合走读已做，不是运行测试；本地未跑新任务/迁移/浏览器/20局样本/真人真机，也未安装依赖、改源码或发布。准确最终head与CI见原PR，未自行合并。
+
+下一步是签收文档后另行授权#83市场闭环，再接sq01/sq03/sq05三类样板；章节与人物结局仍归#84/#85，#151不关闭。#161核对时仍开放未合并；开工重新查最新main和原PR，不重复开同目标任务。
+
+## 2026-10-31 · #151任务扩充内容设计（未开发功能）
+
+维护者确认按市场闭环＋近期六委托、全线约30～34节点制作内容。本轮收敛为18原主线＋14支线＝32节点，分支 `docs/quest-expansion-151`，开始基线main `61cd6c5591e3248230ac374d78dfb3b2d26bde95`。交付入口：[内容包](docs/story/quest-expansion/README.md)、[完整任务表](docs/story/quest-expansion/TASKS.md)、[故事逻辑/14人去向/三结局](docs/story/quest-expansion/STORY-LOGIC.md)、[Gemini任务书](docs/story/quest-expansion/GEMINI-BRIEF.md)。
+
+来源提取、既定改编、本轮新增分别标明；近期两图可用空间与未来地图门槛分开；任务写明物件、同局、失败、重取、消耗和一次反馈。旧repair/sample/ledger不重奖、不降货架、不补造新调查。Gemini交付分四包：168条任务文字、21条短文、16组条件对话、三结局及30个人物结果变体；市场18话题复用。核验实际调用现有枪械纯模块，5套配装及5组材料预算符合目录；发现轮换依赖后给sq06补全常备解，没有改产品数据。
+
+本次只做文档一致性和算例核验；没有运行新任务、20局经济样本、剧情存档/浏览器/真人测试，没有修改源码、存档或发布物。#161核对时head `ef6e64a1`，CI已成功、PR仍开放；功能开工前再确认合并状态。下一步由维护者转交Gemini先写G01，回稿按任务ID与条件审阅；实现继续原#83/#84/#85，不因文稿完成关闭它们或启动代码。
+
 ## 2026-10-31 · 官网首页：Pages 根目录是官网，游戏移到 `play/`
 
 分支 `feat/official-site`，基线 main `278b7e24`。维护者要 Pages 首页就是官网，点一下才进去玩；原型先在仓库外做好再接入。
