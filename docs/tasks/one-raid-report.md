@@ -2,7 +2,7 @@
 
 状态：**实现与本地验证完成，待维护者合并**。真人试玩、真机未验；CI 结果以 PR 为准。
 
-- 分支：`fix/one-raid-report`，PR 见 [WORK-QUEUE](../WORK-QUEUE.md) 顶部
+- 分支：`fix/one-raid-report`，[PR #166](https://github.com/xuys2025/escape-bincov/pull/166)
 - 基线：main `278b7e24`（2026-10-31，#159 已合入）
 - 归属：[#163](https://github.com/xuys2025/escape-bincov/issues/163)「待定：两份行动报告合一」。第一批 [PR #165](https://github.com/xuys2025/escape-bincov/pull/165)（含「结算页铺满」）开工时未合并，维护者同意先做，#165 合并后再同步 main。
 
