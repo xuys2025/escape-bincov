@@ -161,7 +161,8 @@ main 即便走文档快速通道，也从本次重新构建并校验的制品正
 镜像对 `Build and test`、`Deploy Pages` 的成功要求和检查名不变。提交里已经没有 HTML 和发布清单，镜像（服务器脚本不在本仓库）改读 `main-latest` 发布页的清单 `https://github.com/xuys2025/escape-bincov/releases/download/main-latest/release-manifest.json`：
 
 1. 清单的 `commit` 是构建这些文件的 main 提交，`run` 是那次 CI 运行。用 `run` 照旧核对运行（main push、成功、必需 job 齐全），并要求运行的 `head_sha` 等于 `commit`。
-2. 要同步的 HTML（Pages 上的，或发布页 `Escape-Bincov-web.zip` 里的 `index.html`）SHA-256 等于 `htmlSha256`。
+2. 要同步的 HTML（Pages 上的 `play/index.html`，或发布页 `Escape-Bincov-web.zip` 里的 `index.html`）SHA-256 等于 `htmlSha256`。
+   2026-10-31 起 Pages 根目录是官网，游戏在 `https://xuys2025.github.io/escape-bincov/play/`（[官网任务记录](tasks/official-site.md)）。镜像脚本要改从 `play/` 取 HTML；改之前它取到的是官网页面，哈希对不上，按第 3 条跳过、保留现有版本，不会坏，只是停在旧版本。
 3. 不一致时本轮不同步，下次再试。Pages 部署和发布是两个并行的 job，期间又有新的 main 合入时会短暂不一致；不要退回去读旧提交里的文件。
 
 PR 不部署，main 新代码必须完整回归；浏览器首次采用本策略的 PR 和合并后主线都需要全量通过。
@@ -172,7 +173,8 @@ PR 不部署，main 新代码必须完整回归；浏览器首次采用本策略
 
 - 每次运行由 build job 打包一次，上传为 `built-game` 制品（保留 1 天），浏览器组与发布都用它并先核对 SHA-256。PR 不发布任何东西。
 - CI 打包时设置 `BINCOV_BUILD_COMMIT`、`BINCOV_BUILD_RUN`，清单因此多出 `commit` 和 `run` 两项；本地打包没有这两项。发布 job 在清单的 `commit` 不是本次提交时拒绝发布。
-- main 的 `Build and test` 通过后，`Deploy Pages` 部署 `dist/`，`Publish offline release` 用 [publish-release.sh](../scripts/ci/publish-release.sh) 更新滚动预发布 [`main-latest`](https://github.com/xuys2025/escape-bincov/releases/tag/main-latest)：标签移到本次提交，两个 ZIP 和清单按同名替换，所以 [README](../README.md) 的下载地址不变；发布说明写明提交和运行。`main-latest` 是预发布，不抢正式版本（v0.2.0）的 Latest 标记。只有这一个 job 有 `contents: write`。
+- build job 打包后用 `pnpm site:build`（[scripts/site/build.mjs](../scripts/site/build.mjs)）组装 `pages/`：根目录是官网（`site/` 加上从 `assets/` 原样复制的游戏美术），`play/index.html` 与 `dist/index.html` 逐字节相同。`pages/` 随 `built-game` 上传，`pages/index.html` 和 `pages/play/index.html` 也记进校验和。
+- main 的 `Build and test` 通过后，`Deploy Pages` 部署 `pages/`，`Publish offline release` 用 [publish-release.sh](../scripts/ci/publish-release.sh) 更新滚动预发布 [`main-latest`](https://github.com/xuys2025/escape-bincov/releases/tag/main-latest)：标签移到本次提交，两个 ZIP 和清单按同名替换，所以 [README](../README.md) 的下载地址不变；发布说明写明提交和运行。`main-latest` 是预发布，不抢正式版本（v0.2.0）的 Latest 标记。只有这一个 job 有 `contents: write`。
 - 发布 job 失败会让这次 main 运行失败，它也就不能作为文档快速通道的复用证据。一天内只重跑失败的 job 即可（`built-game` 只保留 1 天，过期后整体重跑）。较新的 main push 会取消还在跑的旧运行；万一恰好取消在替换文件的几秒里，缺的文件要等较新的运行发布后才补上。
 - 旧客户端：batch-8 下载的四份旧 HTML 来自历史提交里的 `dist/index.html`，历史保留，固定链接仍然有效。以后的提交里没有 HTML，新增固定旧客户端时，要么从该提交的源码重新构建（构建可复现，脚本照样核对哈希），要么在 `main-latest` 被替换前保存它的文件；用哪种由新增固定的 PR 一并定下。
 - 同步 main 时，若旧分支还改着这些文件，Git 会报“对方删除、我方修改”的冲突：保留删除（`git rm` 这几个路径），不要把它们加回来。
