@@ -13,6 +13,7 @@ import * as D from './domain';
 import { ATTRIBUTES, FACILITIES, newExpansion, upgradeToRpg } from './expansion-state';
 import { decodePortableBackup, encodeRecoveryBackup } from './save-backup';
 import type { SessionRecord } from './recovery-store';
+import { newStory } from './story';
 import type { HideoutRuntime, Result } from './hideout-runtime/contract';
 
 /** One local copy of the save as it was before the latest real reset. Separate from the session record. */
@@ -20,7 +21,7 @@ export const RESET_COPY_KEY = 'escape-bincov.reset-copy.v1';
 type CopyStorage = () => D.StorageLike;
 
 /**
- * A complete current-version record (v8, profile v3, expansion v3, enemy rules off until the first enemy raid) equal to
+ * A complete current-version record (v10, empty story, profile v3, expansion v3, enemy rules off until the first enemy raid) equal to
  * a new player's, keeping only the volume setting.
  */
 export function freshStartRecord(volume: number, now: number): SessionRecord {
@@ -28,7 +29,7 @@ export function freshStartRecord(volume: number, now: number): SessionRecord {
   // The fresh record is already past the station-boundary upgrade, as after SaveSession.enableRpg.
   const expansion = newExpansion(now);
   upgradeToRpg(expansion, now);
-  return { format: 'escape-bincov-session', version: 9, revision: 1, savedAt: now, profile, raid: null, terminal: null,
+  return { format: 'escape-bincov-session', version: 10, story: newStory(profile), storyBackup: null, revision: 1, savedAt: now, profile, raid: null, terminal: null,
     legacyBackup: null, migrationBackup: null, gunsBackup: null, layoutBackup: null, expansion, systemsBackup: null, perksBackup: null };
 }
 /** Portable backup text for the import pipeline; encoding validates the record with the strict session decoder. */
@@ -59,6 +60,7 @@ function goods(p: D.SaveDataV1): string {
  */
 export function isPristine(record: SessionRecord): boolean {
   const p = record.profile, fresh = D.newSave(), e = record.expansion, start = newExpansion(0);
+  if (record.story.clues.length || record.story.choices.call !== 'unselected' || record.story.memory.xiaocai.breakerReported || record.story.currentRun) return false;
   if (p.activeRun || record.raid || p.lastResult || p.reliefSupplies?.length || p.upgraded !== fresh.upgraded || p.cash !== fresh.cash) return false;
   if ((Object.keys(fresh.stats) as (keyof D.SaveDataV1['stats'])[]).some(k => p.stats[k] !== fresh.stats[k])) return false;
   if (Object.values(p.quests).some(Boolean) || goods(p) !== goods(fresh)) return false;

@@ -270,7 +270,7 @@ export function generateRunBase(seed: number | string): Omit<RunConfig, 'contain
 }
 
 /** Group existing nearby supplies without rolling, adding, or discarding any loot. */
-export function partitionRunLoot(entries: readonly GroundLoot[]): Pick<RunConfig, 'loot' | 'containers'> {
+export function partitionRunLoot(entries: readonly GroundLoot[], maxContainers = 10): Pick<RunConfig, 'loot' | 'containers'> {
   const zones = entries.map(p => WORLD.zones.findIndex(z => p.x >= z.x && p.x < z.x + z.w && p.y >= z.y && p.y < z.y + z.h));
   const eligible = entries.map((p, i) => zones[i] >= 0 && p.id !== 'sample' && p.id !== 'ledger'
     && isWalkable(p.x, p.y, true)
@@ -278,7 +278,7 @@ export function partitionRunLoot(entries: readonly GroundLoot[]): Pick<RunConfig
     && WORLD.notes.every(note => Math.hypot(note.x - p.x, note.y - p.y) >= 43));
   const used = new Set<number>();
   const containers: CrateConfig[] = [];
-  for (let anchor = 0; anchor < entries.length && containers.length < 10; anchor++) {
+  for (let anchor = 0; anchor < entries.length && containers.length < maxContainers; anchor++) {
     if (!eligible[anchor] || used.has(anchor)) continue;
     const point = entries[anchor];
     // One bounded breadth-first search per anchor measures the actual permanent route.

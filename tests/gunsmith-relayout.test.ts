@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import * as D from '../src/domain';
 import { SaveSession, createSessionState } from '../src/session';
-import { SESSION_KEY, decodeSession, type SessionRecord } from '../src/recovery-store';
+import { SESSION_KEY, decodeSession } from '../src/recovery-store';
 import { decodeBackup } from '../src/save-backup';
 import { factoryState, withV8Footprints } from '../src/gunsmith/instance';
 import { overflow, relayoutProfile } from '../src/gunsmith/relayout';
@@ -34,7 +34,7 @@ const at = (inv: D.Inventory, uid: string) => { const i = inv.items.find(x => x.
 /** The text a v8 client wrote for this yard's record, its profile stocked by `stock` under the v8 rules (stash 6 or 9 rows). */
 function v8Text(stock: (p: D.SaveDataV1) => void): string {
     const r = JSON.parse(yard(() => {}).raw);
-    delete r.layoutBackup; r.version = 8; r.profile.stash.h = r.profile.upgraded ? 9 : 6;
+    delete r.story; delete r.storyBackup; delete r.layoutBackup; r.version = 8; r.profile.stash.h = r.profile.upgraded ? 9 : 6;
     stock(r.profile);
     return JSON.stringify(r);
 }
@@ -51,7 +51,7 @@ test('at the base a grown gun keeps its place and what it now covers moves; the 
         p.safe.items = [longG17('s-g17', 0, 0), watch('f-w0', 0, 1), watch('f-w1', 1, 1)];
     });
     const stored = JSON.parse(text), after = decodeSession(text), p = after.profile;
-    assert.deepEqual([after.version, after.layoutBackup, after.gunsBackup, p.stash.h, p.stash.w], [9, text, stored.gunsBackup, D.STASH_ROWS, D.STASH_W]);
+    assert.deepEqual([after.version, after.layoutBackup, after.gunsBackup, p.stash.h, p.stash.w], [10, text, stored.gunsBackup, D.STASH_ROWS, D.STASH_W]);
     assert.deepEqual(held(p), held(stored.profile), 'every item once, the same instance');
     // The stash's M4A1 stays and the watch under its new row moves to the first free cell.
     assert.deepEqual([at(p.stash, 's-m4'), at(p.stash, 's-w')], [[0, 0, false], [4, 0, false]]);
@@ -65,7 +65,7 @@ test('at the base a grown gun keeps its place and what it now covers moves; the 
     const page = opened(text);
     assert.equal(page.initialized, true); assert.deepEqual(page.state.save, after.profile);
     const first = JSON.parse(page.raw);
-    assert.deepEqual([first.version, first.layoutBackup], [9, text]);
+    assert.deepEqual([first.version, first.layoutBackup], [10, text]);
     assert.ok(page.saves.persist()); assert.equal(JSON.parse(page.raw).layoutBackup, text);
     assert.deepEqual(opened(page.raw).state.save, after.profile);
     // Nothing moves when nothing overlaps: an upgraded stash only gains its rows.
@@ -111,7 +111,7 @@ test('in a raid what the carried bag or safe cannot hold lies under the player a
     record.profile.safe = structuredClone(raid.loadout.safe);
     box.inventory.items = [m4('c-m4', 0, 0)]; fill(box.inventory, 'c-w', (x, y) => y === 0 && x < 4);
     const text = JSON.stringify(record), after = decodeSession(text), r = after.expansion!.raid!;
-    assert.deepEqual([after.version, after.layoutBackup, after.profile.stash.h], [9, text, D.STASH_ROWS]);
+    assert.deepEqual([after.version, after.layoutBackup, after.profile.stash.h], [10, text, D.STASH_ROWS]);
     const all = Object.values(r.maps).flatMap(m => m.loot), map = r.maps[r.currentMap].loot;
     const ground = (uids: string[]) => uids.map(uid => { const l = all.find(x => x.uid === uid); return l && [l.id, l.x, l.y]; });
     const serials = (from: number, count: number) => Array.from({ length: count }, (_, i) => entityUid(r, from + i));
@@ -164,7 +164,7 @@ test('a v8 client\'s profile file is laid out again on import, its leftovers in 
 
 test('migrateLayout takes only a v8 record and its text, and leaves its input alone', () => {
     const r = JSON.parse(v8Text(p => { p.stash.items = [m4('s-m4', 0, 0), watch('s-w', 1, 1)]; }));
-    const before = structuredClone(r), out: SessionRecord = migrateLayout(r, null);
+    const before = structuredClone(r), out = migrateLayout(r, null);
     assert.deepEqual(r, before); assert.deepEqual([out.version, out.layoutBackup], [9, null]);
     for (const version of [7, 9, '8']) assert.throws(() => migrateLayout({ ...r, version }, null), /按新的占格放不下/);
     assert.throws(() => migrateLayout(r, 8 as never), /按新的占格放不下/);

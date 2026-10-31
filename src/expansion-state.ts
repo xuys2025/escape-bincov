@@ -444,7 +444,7 @@ export function validateExpansion(value: unknown, profile: D.SaveDataV1 | Profil
         const post=RECOVERY_POSTS.find(post=>post.id===e.id);
         if(!leader||leader.id!=='recovery-leader'||order?.kind!=='recovery'||order.leader!==leader.uid
             ||order.crate!==p.crate||lt!.squad!==t!.squad||enemyMaps.get(leader.uid)!==mapId
-            ||world.id!=='coast-buildings-v1'||mapId!=='coast'||!post||e.home.x!==post.home.x||e.home.y!==post.home.y
+            ||!['coast-buildings-v1','coast-story-v1'].includes(world.id)||mapId!=='coast'||!post||e.home.x!==post.home.x||e.home.y!==post.home.y
             ||!cargo||cargo.mapId!==mapId||cargo.container.kind!=='crate'
             ||e.id==='recovery-leader'&&e.uid!==p.leader||cargoOwners.has(p.crate)&&cargoOwners.get(p.crate)!==p.leader)fail();
         cargoOwners.set(p.crate,p.leader);
@@ -462,7 +462,7 @@ export function validateExpansion(value: unknown, profile: D.SaveDataV1 | Profil
         const leader=enemies.get(p.leader),lt=leader?.tactics,order=lt?.version===2?lt.program:null;
         if(!leader||leader.id!=='blockade-sergeant'||order?.kind!=='blockade'||order.leader!==leader.uid)return fail();
         const post=BLOCKADE_POSTS.find(post=>post.id===e.id),mapId=enemyMaps.get(e.uid);
-        if(world.id!=='coast-buildings-v1'||mapId!=='coast'||enemyMaps.get(leader.uid)!==mapId||t!.squad!==lt!.squad
+        if(!['coast-buildings-v1','coast-story-v1'].includes(world.id)||mapId!=='coast'||enemyMaps.get(leader.uid)!==mapId||t!.squad!==lt!.squad
             ||!post||e.home.x!==post.home.x||e.home.y!==post.home.y||e.id==='blockade-sergeant'&&e.uid!==p.leader
             ||p.phase==='granted'&&!['granted','engaged'].includes(order.phase)||p.phase==='waiting'&&order.phase==='none'
             ||p.phase!=='engaged'&&p.since>order.since)fail();

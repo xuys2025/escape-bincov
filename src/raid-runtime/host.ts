@@ -23,6 +23,7 @@ export function wrapCoastRuntime(core: CoastRaidRuntime, session: SessionState, 
         resume: core.resume.bind(core), resetClock: core.resetClock.bind(core), setBlocked: core.setBlocked.bind(core), dispose: core.dispose.bind(core),
     });
     const services = Object.freeze({
+        story: core.story.bind(core), storySources: core.storySources.bind(core), observeStory: core.observeStory.bind(core),
         cancelStart: core.cancelStart.bind(core),
         selectTarget: core.selectTarget.bind(core), activate: core.activate.bind(core),
         transferLoot: (ref: TargetRef, request: LootTransfer) => core.transferLoot(ref, request),

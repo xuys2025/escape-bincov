@@ -134,7 +134,7 @@ try {
     await page.waitForTimeout(1200);
     const g = await page.evaluate(() => ({ bincov: '__bincov' in window, station: '__station' in window, frame: getComputedStyle(document.querySelector('#frame')).visibility, quick: !!document.querySelector('#station-yard').shadowRoot.querySelector('[data-quick="gear"]') }));
     assert.deepEqual(g, { bincov: false, station: false, frame: 'hidden', quick: true });
-    const r = await record(); assert.equal(r.version, 9); assert.equal(r.expansion.version, 3); assert.equal(r.profile.cash, 700);
+    const r = await record(); assert.equal(r.version, 10); assert.equal(r.expansion.version, 3); assert.equal(r.profile.cash, 700);
     await shot('A1-yard-1280x720');
     return `院子挂载，#frame 隐藏；存档 v${r.version}，扩展 v${r.expansion.version}，现金 ${r.profile.cash}`;
   });

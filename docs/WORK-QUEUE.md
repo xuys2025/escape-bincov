@@ -1,5 +1,7 @@
 # 当前任务入口
 
+当前授权任务：**[#83 市场剧情底层](tasks/market-story-core.md)**，[PR #168](https://github.com/xuys2025/escape-bincov/pull/168)，`feat/story-market-83`，基线 main `8a28da9873e5188e13053f894e5b6bbb0ae10dc8`。2026-11-01 维护者明确“做非前端表现的事情，前端让 Opus 专家做”。本阶段负责确定补给、见闻/选择/对白条件、单记录存档迁移与 Runtime 接口；Opus 接续场景、面板、字幕/音效和输入。#83 总单保持开放，同一承接 PR 完成后续接线与验收；#164 是文学文档交付，#161 是独立任务节奏线，不在本分支合并或改动。
+
 本轮原子任务：**[官网首页：Pages 根目录是官网，游戏移到 `play/`](tasks/official-site.md)**，分支 `feat/official-site`，基线 main `278b7e24`。维护者 10-31 要一个纯静态官网，Pages 首页就是官网，点一下才进去玩。官网源码在 `site/`，游戏美术构建时从 `assets/` 原样复制；`pnpm site:build` 组装 `pages/`，CI 改为部署它，游戏字节、离线包和发布清单不变；带游戏参数的旧根链接转到 `play/`，存档按网站保存不受影响。新增 `pnpm test:site`（batch-3）。新加坡镜像脚本要改从 `play/` 取 HTML（不在本仓库，未改前安全跳过）。已接入 Sol 同日交付的图标、分享卡片、人物与敌人大图和撤离段夜景；真机未验。
 
 已完成原子任务：**[商店整体布局：购买/出售页签与交易单](tasks/shop-trade-tabs.md)**（#26 F03），[PR #159](https://github.com/xuys2025/escape-bincov/pull/159)，分支 `claude/f03-shop-layout-1be71c`，基线 main `7d982a6f`。维护者从三个本地原型里选了 B（塔科夫式买卖页签）：左边商人这边分「购买/出售」两页，右边一直是仓库和交易单（现金、买入、卖出、结算后现金、结算）；切页签、加物品、出现警告都不移动格子。只改院子商店的显示，交易规则、ShopSession 与存档不变；旧版页签商店不变。验证结果见任务页；维护者 10-30 授权 CI 通过后自动合并；准确 head、CI 与合并以承接 PR 为准，真人/真机未验。

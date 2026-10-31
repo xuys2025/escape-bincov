@@ -86,7 +86,10 @@ export function initialLuck(state: ExpansionState): void {
             raid.rng = random.getState(); loot.qty = result[0].qty;
             if (result.length === 2) layer.loot.push({ uid: entityUid(raid, raid.nextEntity++), id: result[1].id, qty: 1, relief: false, x: loot.x, y: loot.y, ...D.factoryGun(result[1].id) });
         }
-        for (const container of layer.containers) luckInventory(state, mapId, container.inventory, container, mapId === raid.currentMap && Math.hypot(container.x - raid.player.x, container.y - raid.player.y) < 240);
+        // The story cabinet is a fixed deficit replacement, including an intentionally empty cabinet. Ordinary
+        // ground/crates retain their luck rules; no refresh/open path rolls any of them again.
+        for (const container of layer.containers) if (raid.worldVersion !== 'coast-story-v1' || container.id !== 'ch01-sc-toolcab')
+            luckInventory(state, mapId, container.inventory, container, mapId === raid.currentMap && Math.hypot(container.x - raid.player.x, container.y - raid.player.y) < 240);
     }
     if (!raid.eventRolled) {
         const random = D.seededRandom(raid.rng), chance = luck === 1 ? .002 : .01 * Math.abs(luck - 1);

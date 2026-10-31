@@ -45,7 +45,7 @@ test('street deployment atomically upgrades only the new action; exact prior byt
     assert.equal(f.raw, before); assert.deepEqual(f.state.save, base); assert.equal(f.writes, writes);
     f.deny(false); assert.ok(f.saves.beginRun(42, true), f.state.storageError);
     const r = decodeSession(f.raw);
-    assert.equal(r.version, 9); assert.equal(r.enemyBackup, before); assert.equal(r.expansion!.raid!.version, 5);
+    assert.equal(r.version, 10); assert.equal(r.enemyBackup, before); assert.equal(r.expansion!.raid!.version, 5);
     assert.equal(r.expansion!.raid!.roster.length, BUILDING_WORLD.enemyCount);
     assert.equal(Object.values(r.expansion!.raid!.maps).flatMap(m => m.enemies).filter(e => e.tactics).length, 3);
     assert.ok(f.saves.persist()); assert.equal(decodeSession(f.raw).enemyBackup, before);

@@ -14,6 +14,7 @@
 | 行动命令、输入、暂停或恢复 | [行动输入](#行动输入) | 触屏按钮、DOM 绑定、持久字段分别扩展 |
 | 敌人身份、AI、表现或尸体掉落 | [敌人](#敌人) | 新持久状态继续存档卡；玩家射击继续行动输入 |
 | 新持久字段、迁移、导入、恢复 | [存档](#存档) | 活动行动字段必须核对两端捕获/恢复 |
+| 市场任务、见闻、条件对白 | [story.ts](../src/story.ts) → [story-dialogue.ts](../src/story-dialogue.ts) → 两个 Runtime 的 `story` 接口 | 物资/新世界看 [market-world.ts](../src/market-world.ts)；事务、前端接入与未验范围见 [#83 接入说明](tasks/market-story-core.md)；反例见 [market-story.test.ts](../tests/market-story.test.ts) |
 | 负重、上限等画面读数不一致 | [派生读数](#派生读数) | 先分清实时模拟、最近检查点与失败候选，再查格式化 |
 | 楼梯 HUD 标签避让 | [scene.ts](../src/coast-view/scene.ts) 的 `enemyBodyViews` → [host.ts](../src/coast-view/host.ts) 的 `stairNames` | 已呈现身体边界与真实 DOM 字框；可见性、离屏/换层及像素正反例见 [S03c](../scripts/issue26-spatial-test.mjs) |
 | 正对的门：暖光与地面通行带 | [scene.ts](../src/coast-view/scene.ts) 的 `showFacedDoor` → [structures.ts](../src/coast-view/art/structures.ts) 的 `paintPassageGuide` | 只在交互提示指向门时画；暖光只照门自身像素、深度紧贴门，通行带在地面层；正反例见 [S03d](../scripts/issue26-spatial-test.mjs) |

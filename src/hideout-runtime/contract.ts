@@ -7,6 +7,14 @@ import type { Attribute, Facility } from '../expansion-state';
 import type { PerkId, PerkModifiers, PerkTier } from '../perks';
 import type { GunEdit, GunEditPreview, GunPlace } from '../gunsmith/edit';
 import type { GunState } from '../gunsmith/instance';
+import type { storyView } from '../story';
+import type { StoryDialogue, StoryEntry } from '../story-dialogue';
+export interface StoryConversation {
+    /** Detached current reply. Closing/reading never saves a choice. */
+    view(): StoryDialogue | null;
+    choose(option: string): Result;
+    close(): void;
+}
 export type { Attribute, Facility } from '../expansion-state';
 export type { PerkId, PerkModifiers, PerkTier } from '../perks';
 export type { GunEdit, GunEditPreview, GunPlace } from '../gunsmith/edit';
@@ -168,6 +176,8 @@ export type HideoutEvent =
 /** Position/time input replaces unverified moved/inZone claims. World pixels; clock is epoch milliseconds. */
 export interface PracticeSample { from: { x: number; y: number }; to: { x: number; y: number }; seconds: number; now: number }
 export interface HideoutRuntime {
+    story(): ReturnType<typeof storyView>;
+    openStory(entry?: StoryEntry): StoryConversation | null;
     /** Upgrade at the station boundary, then persist eligible relief before entry; active legacy raids resume first. */
     enter(): Result;
     snapshot(): HideoutSnapshot;
@@ -245,7 +255,7 @@ export interface HideoutRuntime {
     setVolume(volume: number): Result;
     departure(): { warnings: string[]; weight: number; carry: number };
     /** mallLayout defaults to 1 and only applies to a new mall raid. */
-    deploy(req: { world: RunWorld; seed: string; mallLayout?: 1 | 2 | 3 | 4 }): Result & { runId?: string };
+    deploy(req: { world: RunWorld; seed: string; mallLayout?: 1 | 2 | 3 | 4; marketStory?: boolean }): Result & { runId?: string };
     /** After the host's departure animation; never calls beginRun again. */
     startRaid(runId: string): Result;
     returnToBase(): Result;

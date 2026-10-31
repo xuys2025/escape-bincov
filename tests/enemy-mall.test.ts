@@ -54,7 +54,7 @@ test('mall deployment quota failure keeps prior exact bytes and profile; retry c
     assert.equal(f.raw, before); assert.deepEqual(f.state.save, save); assert.equal(f.state.expansion, null); assert.equal(f.writes, writes);
     f.deny(false); assert.ok(f.saves.beginRun(42, 'mall', { mallLayout: 3 }), f.state.storageError);
     const r = decodeSession(f.raw);
-    assert.equal(r.version, 9); assert.equal(r.expansion!.version, 3); assert.equal(r.expansion!.raid!.version, 5);
+    assert.equal(r.version, 10); assert.equal(r.expansion!.version, 3); assert.equal(r.expansion!.raid!.version, 5);
     assert.equal(r.enemyBackup, before); assert.ok(f.saves.persist());
     const saved = decodeSession(f.raw);
     assert.equal(saved.enemyBackup, before); assert.equal(saved.gunsBackup, r.gunsBackup);

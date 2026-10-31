@@ -21,7 +21,7 @@ export function installRecoveryProgram(raid:LayeredRaid):void {
     if(raid.elapsed!==0||![2,3].includes(raid.version))throw Error('遭遇只能在新街区行动初始化。');
     const layer=raid.maps.coast,team=layer.enemies.filter(e=>e.tactics?.squad===RECOVERY_SQUAD);
     const leader=team.find(e=>e.id==='recovery-leader');
-    const crate=layer.containers.filter(c=>c.kind==='crate').sort((a,b)=>Number(!a.inventory.items.length)-Number(!b.inventory.items.length)||Math.hypot(a.x-RECOVERY_PICKUP.x,a.y-RECOVERY_PICKUP.y)
+    const crate=layer.containers.filter(c=>c.kind==='crate'&&c.id!=='ch01-sc-toolcab').sort((a,b)=>Number(!a.inventory.items.length)-Number(!b.inventory.items.length)||Math.hypot(a.x-RECOVERY_PICKUP.x,a.y-RECOVERY_PICKUP.y)
         -Math.hypot(b.x-RECOVERY_PICKUP.x,b.y-RECOVERY_PICKUP.y)||a.id.localeCompare(b.id,'en'))[0];
     if(!leader||!crate||team.length!==4||RECOVERY_POSTS.some(p=>!team.some(e=>e.id===p.id&&e.home.x===p.home.x&&e.home.y===p.home.y)))
         throw Error('回收队与物资来源不符。');

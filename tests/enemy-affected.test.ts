@@ -43,7 +43,7 @@ test('v2 deployment is atomic on quota failure and retains both original backup 
     f.deny(true);assert.equal(f.saves.beginRun(47,true),false);assert.equal(f.data.get(SESSION_KEY),raw);assert.deepEqual(f.state.save,save);assert.deepEqual(f.state.expansion,expansion);
     f.deny(false);assert.ok(f.saves.beginRun(47,true),f.state.storageError);
     // Record v9 (gun instances, #28 M3-12 footprints) with enemy rules on: it holds enemyBackup, the exact bytes before this deployment.
-    const record=decodeSession(f.data.get(SESSION_KEY)!);assert.equal(record.version,9);assert.equal(record.enemyBackup,raw);
+    const record=decodeSession(f.data.get(SESSION_KEY)!);assert.equal(record.version,10);assert.equal(record.enemyBackup,raw);
     const backups=[record.enemyBackup,record.perksBackup];assert.ok(f.saves.persist());assert.deepEqual([f.saves.currentRecord()!.enemyBackup,f.saves.currentRecord()!.perksBackup],backups);
 });
 

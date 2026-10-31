@@ -41,7 +41,7 @@ function oldGoods(value: unknown): void {
 }
 /** The v2 profile an old client would have stored for this one: the stash at its old rows too (v8Record). */
 export function oldProfile(profile: D.SaveDataV1): any {
-    const copy = withoutGuns(v8Record({ version: 9, profile } as SessionRecord).profile); oldGoods(copy);
+    const copy = withoutGuns(v8Record({ version: 9, profile }).profile); oldGoods(copy);
     return { ...copy, version: 2 };
 }
 /**
@@ -49,10 +49,10 @@ export function oldProfile(profile: D.SaveDataV1): any {
  * layoutBackup, the stash 6 or 9 rows. Its guns lie where they are, which the v8 footprints (one row) always allow; a
  * stash item below the old rows has no v8 place, so that throws.
  */
-export function v8Record(record: SessionRecord): any {
+export function v8Record(record: Pick<SessionRecord, 'profile'> & { version: number }): any {
     const copy: any = structuredClone(record), rows = copy.profile.upgraded ? 9 : 6;
     if (!withV8Footprints(() => copy.profile.stash.items.every((i: D.Item) => i.y + D.itemSize(i).h <= rows))) throw new Error('a stash item below the v8 rows');
-    delete copy.layoutBackup; copy.version = 8; copy.profile.stash.h = rows;
+    delete copy.story; delete copy.storyBackup; delete copy.layoutBackup; copy.version = 8; copy.profile.stash.h = rows;
     return copy;
 }
 /**
