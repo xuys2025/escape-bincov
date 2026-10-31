@@ -34,7 +34,7 @@ export function assertTraining(d) {
 }
 export function assertTitlePreserved(before, after) {
   const expected = structuredClone(before), actual = structuredClone(after);
-  assert.equal(before.version,9); assert.equal(before.expansion.version,3,'round-trip must start after controlled upgrade');
+  assert.equal(before.version,10); assert.equal(before.expansion.version,3,'round-trip must start after controlled upgrade');
   assert.ok(after.revision >= before.revision); assert.ok(after.savedAt >= before.savedAt);
   const elapsed = (after.expansion.base.cursor-before.expansion.base.cursor)/1000;
   assert.ok(elapsed >= 0 && elapsed < 60, 'unexpected round-trip clock delta');
