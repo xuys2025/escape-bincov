@@ -40,6 +40,14 @@ try {
         report.checks.push({ viewport: size, view: name, status: 'passed' });
         console.log(`PASS ${size} ${name}`);
       };
+      /** The page toast as a storage conflict shows it during a raid (fixture: text and opacity set directly), measured, then hidden. */
+      const toastBox = () => page.evaluate(() => {
+        const t = document.getElementById('toast'); t.textContent = '另一个窗口已更新存档，本页已停止操作。请导出需要保留的进度，再刷新本页。';
+        t.style.transition = 'none'; t.style.opacity = '1'; const r = t.getBoundingClientRect(); t.style.opacity = '0'; t.style.transition = '';
+        return { left: r.left, top: r.top, right: r.right, bottom: r.bottom };
+      });
+      const box = selector => page.locator(selector).evaluate(el => { const r = el.getBoundingClientRect(); return { left: r.left, top: r.top, right: r.right, bottom: r.bottom }; });
+      const meets = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
       await page.goto(pathToFileURL(resolve('dist/index.html')).href + '?test=1&entry=tabs');
       await action('enter').waitFor({ timeout: 60000 }); await page.waitForTimeout(200);
       await shot('menu');
@@ -110,9 +118,16 @@ try {
       assert.match(combined, /流血.*污染 (4[6-9]|50)%/);
       // The camera eases onto the placed player and every rebuild fades in from black (0.45 s).
       await page.waitForTimeout(1500); await shot('raid');
+      // A page toast during a desktop raid sits above the key hints instead of covering them.
+      const keys = await box('.coast-sample .cs-keys'), raidToast = await toastBox();
+      assert.equal(meets(raidToast, keys), false, `Page toast covers the key hints: ${JSON.stringify({ raidToast, keys })}`);
       // Tab opens the bag only while the raid runs (a stall pause resumed after the deploy would swallow it).
       await running(page);
       await page.keyboard.press('Tab'); await waitPanel(page, 'inventory'); await shot('inventory');
+      // ... and above the docked bag (the host measures the panel every four frames).
+      await frames(page, 6);
+      const bag = await box('.coast-sample [data-panel]'), bagToast = await toastBox();
+      assert.ok(bagToast.bottom <= bag.top, `Page toast covers the docked bag: ${JSON.stringify({ bagToast, bag })}`);
       const raidBandage = page.locator('.coast-sample [data-panel] [data-source="bag"][aria-label^="密封绷带"]');
       await raidBandage.click(); await page.locator('.coast-sample [data-do="inv-use"]').waitFor(); await shot('inventory-item');
       const bandages = () => page.evaluate(() => window.__bincov.app.loadout.bag.items.filter(i => i.id === 'bandage').reduce((n, i) => n + i.qty, 0));
@@ -135,6 +150,9 @@ try {
       assert.equal(await page.locator('.coast-sample [data-time]').textContent(), timer, 'Pause changes the displayed clock');
       await page.locator('.coast-sample [data-do="abandon"]').click(); await page.locator('.coast-sample [data-do="abandon-yes"]').waitFor(); await shot('abandon');
       await page.locator('.coast-sample [data-do="abandon-yes"]').click(); await action('return').waitFor({ timeout: 30000 }); await shot('result');
+      // The result page fills the window like the title instead of a 960×540 box in a dark frame.
+      const frame = await box('#frame');
+      assert.deepEqual([frame.left, frame.top, frame.right, frame.bottom], [0, 0, viewport.width, viewport.height], 'Result page does not fill the window');
     } finally { await context.close(); }
   }
   assert.deepEqual(report.errors, []); assert.deepEqual(report.externalRequests, []);

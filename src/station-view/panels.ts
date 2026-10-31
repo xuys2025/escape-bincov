@@ -63,14 +63,14 @@ export function gearHtml(s: HideoutSnapshot, cell: number, selected: string | nu
       <h3><i>01</i>主武器槽</h3>
       <div class="slot ${e.weapon ? '' : 'emptyslot'}" data-slot="weapon" aria-label="主武器槽" title="把仓库或背包里的枪拖到这里装备">
         <img alt="" src="${itemPicture({ id: e.weapon || 'knife', gun: e.gun }, 999, 999).url}" style="height:${Math.round(cell * .6)}px"><div><b>${esc(w.name)}</b>
-        <span>${e.weapon ? `${w.magazine ? `弹匣 ${e.ammo} / ${w.magazine}` : '没装弹匣'}${e.relief ? ' · 救济' : ''} · 背包备用 ${w.ammo ? `${ammo} 发` : '—'}` : '随身匕首 · 始终保留 · 把枪拖到这里装备'}</span></div>
+        <span>${e.weapon ? [w.magazine ? `弹匣 ${e.ammo} / ${w.magazine}` : '没装弹匣', e.relief ? '救济' : '', `背包备用 ${w.ammo ? `${ammo} 发` : '—'}`].filter(Boolean).map(t => `<i>${t}</i>`).join(' · ') : '随身匕首 · 始终保留 · 把枪拖到这里装备'}</span></div>
         ${e.weapon ? `<span class="slot-acts">${btn('改装', `gunsmith:${e.weaponUid}`, 'mini')}${btn('卸下', 'unequip', 'mini')}</span>` : ''}
       </div>${charmRow(s.charm?.id ?? null)}
       <h3><i>02</i>背包 <small>${occupied(p.bag)} / ${p.bag.w * p.bag.h} 格</small></h3>${gridHtml(p.bag, 'bag', cell, selected, { empty: '背包是空的' })}
-      <div class="meter ${over ? 'over' : ''}"><span>携行重量 <small>含装备与安全箱</small></span><b>${departure.weight.toFixed(1)} <small>/ ${departure.carry.toFixed(1)} kg</small></b><i style="width:${Math.min(100, departure.weight / departure.carry * 100)}%"></i></div>
-      <h3><i>安</i>安全箱 <small>撤离失败也保留</small></h3>${gridHtml(p.safe, 'safe', cell, selected)}
+      <div class="meter ${over ? 'over' : ''}"><span>携行重量</span><b>${departure.weight.toFixed(1)} <small>/ ${departure.carry.toFixed(1)} kg</small></b><small class="meter-note">含装备与安全箱</small><i style="width:${Math.min(100, departure.weight / departure.carry * 100)}%"></i></div>
+      <h3><i>03</i>安全箱 <small>撤离失败也保留</small></h3>${gridHtml(p.safe, 'safe', cell, selected)}
     </section>
-    <section class="col stash" style="width:${p.stash.w * cell}px"><h3><i>03</i>仓库 <small>${occupied(p.stash)} / ${p.stash.w * p.stash.h} 格${p.upgraded ? ' · 已扩建' : ''} · 出击时留在站里${overflowNote(p.stash)}</small></h3><div class="stash-scroll">${gridHtml(p.stash, 'stash', cell, selected, { empty: '仓库空置' })}</div>
+    <section class="col stash" style="width:${p.stash.w * cell}px"><h3><i>04</i>仓库 <small>${occupied(p.stash)} / ${p.stash.w * p.stash.h} 格${p.upgraded ? ' · 已扩建' : ''} · 出击时留在站里${overflowNote(p.stash)}</small></h3><div class="stash-scroll">${gridHtml(p.stash, 'stash', cell, selected, { empty: '仓库空置' })}</div>
       ${p.upgraded ? '' : `<div class="upgrade">${btn(`扩建仓库 · ¥ ${D.STASH_UPGRADE_COST}`, 'upgrade', '', !p.quests.repair ? 'disabled' : '')}<small>${p.quests.repair ? `扩建后增至 ${D.STASH_W * D.STASH_UPGRADED_ROWS} 格` : `完成「${D.QUESTS.repair.name}」后可扩建`}</small></div>`}
       ${details}
     </section>
