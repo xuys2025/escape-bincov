@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<script>
+// The game moved from the Pages root to play/. Links that carry one of its URL parameters
+// (?sample=village, ?range=1, ...) go straight on; share-tracking parameters stay on the site.
+(function () {
+  var game = ['sample', 'range', 'test', 'entry', 'opening', 'at', 'freeze', 'freezeAI', 'art', 'collapse', 'crisp', 'debug', 'mood', 'view', 'weather', 'xray'];
+  var q = new URLSearchParams(location.search);
+  if (game.some(function (k) { return q.has(k); })) location.replace('play/' + location.search + location.hash);
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>逃离滨科夫 · Escape Bincov</title>
+<meta name="description" content="台风过后，海没有退去。带上最后一匣子弹，活着回到水产站。浏览器即玩的俯视角像素撤离生存游戏，免费、无账号、可离线。">
+<meta name="theme-color" content="#0b1215">
+<meta property="og:title" content="逃离滨科夫 · Escape Bincov">
+<meta property="og:description" content="台风过后，海没有退去。带上最后一匣子弹，活着回到水产站。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xuys2025.github.io/escape-bincov/">
+<meta property="og:image" content="https://xuys2025.github.io/escape-bincov/assets/art/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico" sizes="16x16 32x32">
+<link rel="icon" href="assets/art/icon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="assets/art/icon-16.png" type="image/png" sizes="16x16">
+<link rel="apple-touch-icon" href="assets/art/icon-180.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="preload" href="assets/fonts/bincov-site.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/site.css">
+<script type="module" src="js/main.js"></script>
+</head>
+<body>
+<a class="skip" href="#loop">跳到正文</a>
+
+<!-- Prologue canvas: rainy radio room -> out the door -> rising tide -->
+<canvas id="stage" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="hud" id="hud">
+  <a class="hud-brand" href="#top" aria-label="逃离滨科夫 首页">
+    <img src="assets/title/title-wordmark-industrial-v5.png" alt="" width="48" height="24">
+    <span class="px">逃离滨科夫</span>
+  </a>
+  <div class="hud-clock" aria-hidden="true">
+    <span class="hud-clock-label">行动剩余</span>
+    <span class="hud-clock-time px" id="clock">10:00</span>
+    <span class="hud-clock-bar"><i id="clockBar"></i></span>
+  </div>
+  <nav class="hud-tasks" id="tasks">
+    <button class="hud-tasks-toggle px" id="tasksToggle" aria-expanded="false" aria-controls="taskList">▸ 任务 · <span id="taskCount">7</span> 项未完成</button>
+    <ol class="hud-task-list" id="taskList">
+      <li><a href="#top" data-task="top"><i></i>进站，听电台</a></li>
+      <li><a href="#loop" data-task="loop"><i></i>弄明白一局怎么走</a></li>
+      <li><a href="#county" data-task="county"><i></i>看一眼县域地图</a></li>
+      <li><a href="#threats" data-task="threats"><i></i>认清潮里的东西</a></li>
+      <li><a href="#people" data-task="people"><i></i>见见站里的人</a></li>
+      <li><a href="#bench" data-task="bench"><i></i>去老栓的修配台</a></li>
+      <li><a href="#extract" data-task="extract"><i></i>撤离</a></li>
+    </ol>
+  </nav>
+  <button class="hud-sound px" id="sound" aria-pressed="false" title="雨声与电台（默认关闭）"><span class="hud-sound-icon" aria-hidden="true"></span>声音</button>
+  <a class="btn btn-amber btn-sm px" href="play/" id="hudPlay">出击 →</a>
+</header>
+
+<div class="toast px" id="toast" role="status" aria-live="polite"></div>
+
+<main>
+  <!-- ========= Prologue ========= -->
+  <section class="prologue" id="top" aria-label="序章">
+    <div class="prologue-sticky">
+      <div class="hero" id="hero">
+        <h1 class="hero-title">
+          <img class="hero-wordmark" src="assets/title/title-wordmark-industrial-v5.png" alt="逃离滨科夫" width="144" height="72">
+          <span class="hero-latin">E S C A P E &nbsp; B I N C O V</span>
+        </h1>
+        <p class="hero-tagline">台风过后，海没有退去。<br>带上最后一匣子弹，活着回到水产站。</p>
+        <div class="hero-actions">
+          <a class="btn btn-amber px" href="play/">▶ 浏览器里开玩</a>
+          <a class="btn btn-ghost px" href="https://github.com/xuys2025/escape-bincov/releases/download/main-latest/Escape-Bincov-portable.zip">下载离线版</a>
+        </div>
+        <ul class="hero-facts">
+          <li>俯视角像素</li><li>单人撤离生存</li><li>免费 · 无账号</li><li>单文件离线运行</li>
+        </ul>
+      </div>
+
+      <aside class="radio" id="radio" aria-label="水产站电台">
+        <div class="radio-head px"><i class="radio-led"></i>水产站电台 · 早 05:00</div>
+        <p class="radio-text" id="radioText" aria-live="off"></p>
+      </aside>
+
+      <div class="scroll-cue px" id="scrollCue" aria-hidden="true"><span>向下滚动 · 出门</span><i></i></div>
+
+      <div class="story" id="story">
+        <p class="story-day px" data-at="0.36">序 · 第十七天</p>
+        <p class="story-line" data-at="0.40">台风进港前一天下午，你开车进了滨科夫县。<br>原打算装完货，当晚就走。</p>
+        <p class="story-line story-big solo" data-at="0.50">结果在县里困了十六天。</p>
+        <p class="story-line" data-at="0.58">国道、跨海堤道和几座老石桥，全泡在浑水底下。<br>县里没人提“海淹了”，都管它叫<em>潮水</em>。</p>
+        <p class="story-line" data-at="0.67">第十六天后半夜，西南角旧渔港方向<br>亮着一团黄光，一整夜都没灭。</p>
+        <p class="story-line" data-at="0.76">那是滨科夫水产站。门垛上拿红漆刷了五个字：<span class="stencil">进门先看手</span></p>
+        <p class="story-line story-big" data-at="0.86">在这儿，出门找罐头和柴油叫<em>出击</em>；<br>能平平安安走回水产站大门，才算<em>撤离</em>。</p>
+      </div>
+      <div class="tideline px" id="tideline" aria-hidden="true"><span>潮位</span><b id="tideValue">+0.0 m</b></div>
+    </div>
+  </section>
+
+  <!-- ========= Raid loop ========= -->
+  <section class="loop" id="loop" aria-labelledby="loopTitle">
+    <div class="loop-sticky">
+      <header class="sec-head">
+        <p class="sec-kicker px">01 / 行动流程</p>
+        <h2 id="loopTitle" class="sec-title px">回来，才算带走</h2>
+        <p class="sec-lede">每局限时 10 分钟。从水产站出门，到能走回大门，中间的每一件东西都可能丢在外面。</p>
+      </header>
+      <div class="loop-rail" id="loopRail">
+        <ol class="loop-steps" id="loopSteps">
+          <li class="loop-step">
+            <figure class="monitor"><i class="scan"></i><img src="assets/shots/gear.webp" alt="仓库与整备界面：主武器、背包与仓库格子" loading="lazy" width="1600" height="900"></figure>
+            <div class="loop-copy"><b class="loop-no px">01</b><h3 class="px">整备</h3>
+              <p>仓库、背包、安全箱分开放。拖放、旋转、拆分物品，挑好主武器、备用弹药和药品。买来的东西进仓库，得自己整理进背包。</p>
+              <p class="keys"><kbd>Tab</kbd> 整备 <kbd>2</kbd> 修理铺 <kbd>3</kbd> 卫生所</p></div>
+          </li>
+          <li class="loop-step">
+            <figure class="monitor"><i class="scan"></i><img src="assets/shots/deploy.webp" alt="出击准备：滨科夫县地图与区域情报" loading="lazy" width="1600" height="900"></figure>
+            <div class="loop-copy"><b class="loop-no px">02</b><h3 class="px">出击</h3>
+              <p>走到院门，或按 <kbd>G</kbd> 打开出击准备。在县域地图上选一块区域，确认出发前检查，开门出击。</p>
+              <p class="keys"><kbd>G</kbd> 出击准备 <kbd>7</kbd> 出击页</p></div>
+          </li>
+          <li class="loop-step">
+            <figure class="monitor"><i class="scan"></i><img src="assets/shots/loot.webp" alt="搜刮物资：背包、安全箱与容器格子" loading="lazy" width="1280" height="720"></figure>
+            <div class="loop-copy"><b class="loop-no px">03</b><h3 class="px">搜刮</h3>
+              <p>箱子、尸体、货架都能翻。打开背包和地图时世界照常运转——没人会等你整理完。</p>
+              <p class="keys"><kbd>E</kbd> 拾取 / 搜刮 <kbd>M</kbd> 地图 <kbd>滚轮</kbd> 切换目标</p></div>
+          </li>
+          <li class="loop-step">
+            <figure class="monitor"><i class="scan"></i><img src="assets/shots/fight.webp" alt="交战：精瞄圈对准守潮执仪者" loading="lazy" width="1600" height="900"></figure>
+            <div class="loop-copy"><b class="loop-no px">04</b><h3 class="px">交战</h3>
+              <p>枪械与近战。右键精瞄收紧散布，换弹要算时机。第 4 分 30 秒电台预警，第 5 分钟潮位变化。</p>
+              <p class="keys"><kbd>右键</kbd> 精瞄 <kbd>R</kbd> 换弹 <kbd>Q</kbd> 治疗</p></div>
+          </li>
+          <li class="loop-step">
+            <figure class="monitor"><i class="scan"></i><img src="assets/shots/yard.webp" alt="雨夜水产站院子，地上写着进门先看手" loading="lazy" width="1600" height="900"></figure>
+            <div class="loop-copy"><b class="loop-no px">05</b><h3 class="px">撤离 · 回站</h3>
+              <p>到达撤离区，停稳，按住 <kbd>E</kbd> 满 3 秒。死亡、超时或放弃，背包和主武器都留在外面；只有安全箱和水手匕首跟你回来。</p>
+              <p class="keys"><kbd>E</kbd> 按住 3 秒撤离</p></div>
+          </li>
+        </ol>
+      </div>
+      <div class="loop-progress" aria-hidden="true"><i id="loopBar"></i></div>
+    </div>
+  </section>
+
+  <!-- ========= County map ========= -->
+  <section class="county" id="county" aria-labelledby="countyTitle">
+    <header class="sec-head">
+      <p class="sec-kicker px">02 / 作战终端</p>
+      <h2 id="countyTitle" class="sec-title px">滨科夫县</h2>
+      <p class="sec-lede">十二块区域，眼下能出击的有两块。拖动潮位，看看海一天天往县城里漫——每次落潮露出的地都比上一次少。</p>
+    </header>
+    <div class="county-grid">
+      <div class="county-map" id="countyMap">
+        <canvas id="mapCanvas" aria-hidden="true"></canvas>
+        <img class="county-fallback" src="assets/map/county-terrain.webp" alt="滨科夫县全图：内陆城区、旧渔港、灯塔岬角与港外的搁浅货轮" width="1536" height="1024">
+        <svg class="county-route" id="countyRoute" viewBox="0 0 150 100" preserveAspectRatio="none" aria-hidden="true">
+          <path id="routePath" d=""/>
+        </svg>
+        <div class="county-pins" id="countyPins"></div>
+        <div class="county-badge px"><small>作战终端 / 区域总览</small><b>滨科夫县</b><small>BINCOV COUNTY</small></div>
+      </div>
+      <aside class="brief" id="brief" aria-live="polite">
+        <div class="brief-art"><img id="briefImg" src="assets/map/mall.webp" alt="" width="768" height="512"><span class="brief-tag px">情报示意图</span></div>
+        <div class="brief-body">
+          <p class="brief-area px" id="briefArea">内陆 · 商业区</p>
+          <h3 class="brief-name px" id="briefName">滨湾商场</h3>
+          <p class="brief-desc" id="briefDesc"></p>
+          <ul class="brief-feat" id="briefFeat"></ul>
+          <div class="brief-meta">
+            <div><small>状态</small><b class="px" id="briefState">可出击</b></div>
+            <div><small>此处潮位</small><b class="px" id="briefTide">干</b></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class="tide-ctl">
+      <label class="px" for="tide">潮位</label>
+      <input type="range" id="tide" min="0" max="100" value="18" step="0.1" aria-describedby="tideHint">
+      <ol class="tide-days px" aria-hidden="true"><li>第 1 天</li><li>第 9 天</li><li>第 17 天</li><li>以后</li></ol>
+      <button class="btn btn-ghost btn-sm px" id="tideAuto" aria-pressed="true">潮汐呼吸 · 开</button>
+      <p class="tide-hint" id="tideHint">淡黄的线是潮水到过的最高处——盐碱印，落潮后也不会消失。</p>
+    </div>
+  </section>
+
+  <!-- ========= Enemies ========= -->
+  <section class="threats" id="threats" aria-labelledby="threatTitle">
+    <header class="sec-head">
+      <p class="sec-kicker px">03 / 遭遇记录</p>
+      <h2 id="threatTitle" class="sec-title px">潮里的东西</h2>
+      <p class="sec-lede">五方势力、十八种敌人。有人抢你的背包，有人只想按名单放行，也有东西已经不太像人了。</p>
+    </header>
+    <div class="threat-tabs" role="tablist" id="threatTabs"></div>
+    <div class="threat-card" id="threatCard">
+      <div class="threat-stage" id="threatStage" aria-hidden="true"></div>
+      <div class="threat-info">
+        <p class="threat-kicker px" id="threatKicker"></p>
+        <h3 class="threat-name px" id="threatName"></h3>
+        <p class="threat-desc" id="threatDesc"></p>
+        <ul class="threat-roster" id="threatRoster"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========= Station people ========= -->
+  <section class="people" id="people" aria-labelledby="peopleTitle">
+    <header class="sec-head">
+      <p class="sec-kicker px">04 / 水产站互助会</p>
+      <h2 id="peopleTitle" class="sec-title px">站里的人</h2>
+      <p class="sec-lede">四十多口人守着一个院子：鱼贩、船工家属、修船作坊的伙计。有三个人你每天都会碰到。</p>
+    </header>
+    <ul class="people-grid">
+      <li class="person" tabindex="0">
+        <div class="person-stage" aria-hidden="true"><i class="portrait" style="background-image:url(assets/art/npc-xu.png)"></i></div>
+        <div class="person-body">
+          <h3 class="px">许医生</h3><p class="person-role">原县医院内科医生 · 卫生所</p>
+          <blockquote class="person-say">“嗓子干不干？一天喝几壶水？”</blockquote>
+          <p class="person-note">进站先摊开手心手背、挽起袖管。她的硬皮本上，记着每个进出的人的盐度。</p>
+        </div>
+      </li>
+      <li class="person" tabindex="0">
+        <div class="person-stage" aria-hidden="true"><i class="portrait" style="background-image:url(assets/art/npc-shuan.png)"></i></div>
+        <div class="person-body">
+          <h3 class="px">老栓</h3><p class="person-role">前机械厂钳工 · 修配台</p>
+          <blockquote class="person-say">“站里不养闲人。能喘气，明天就跟着出门。”</blockquote>
+          <p class="person-note">油渍发亮的帆布围裙，说话时不抬头。第一把缠着黑胶布的水手匕首，是他从抽屉里摸出来的。</p>
+        </div>
+      </li>
+      <li class="person" tabindex="0">
+        <div class="person-stage" aria-hidden="true"><i class="portrait" style="background-image:url(assets/art/npc-cai.png)"></i></div>
+        <div class="person-body">
+          <h3 class="px">小蔡</h3><p class="person-role">十九岁 · 守电台、管供电</p>
+          <blockquote class="person-say">“灯是我拿蓄电池接的。油桶里的柴油，只够发电机再转六天。”</blockquote>
+          <p class="person-note">每天清晨五点扳开电源，对着炭精话筒念同一张纸。你昨晚就是看着他的探照灯摸过来的。</p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ========= Gunsmith ========= -->
+  <section class="bench" id="bench" aria-labelledby="benchTitle">
+    <div class="bench-sticky">
+      <header class="sec-head">
+        <p class="sec-kicker px">05 / 老栓的修配台</p>
+        <h2 id="benchTitle" class="sec-title px">二十把枪，一百个配件</h2>
+        <p class="sec-lede">托、握把、枪管、护木、瞄具、枪口，一件件换上去。改动先在台面上预览，按「确认」才装到枪上。</p>
+      </header>
+      <div class="bench-board" id="benchBoard">
+        <div class="bench-gun" id="benchGun" aria-label="M4A1 模块步枪，稳定型改装"></div>
+        <svg class="bench-leaders" id="benchLeaders" aria-hidden="true"></svg>
+        <div class="bench-labels" id="benchLabels"></div>
+      </div>
+      <div class="bench-stats" id="benchStats"></div>
+    </div>
+  </section>
+
+  <!-- ========= Features ========= -->
+  <section class="features" id="features" aria-labelledby="featTitle">
+    <header class="sec-head">
+      <p class="sec-kicker px">06 / 站里的日子</p>
+      <h2 id="featTitle" class="sec-title px">出门之前，先把家守住</h2>
+    </header>
+    <ul class="feat-grid">
+      <li class="feat"><b class="feat-num px" data-count="12">12</b><h3 class="px">块县域区域</h3><p>沿海街区、滨湾商场已能出击；县医院、旧渔港、灯塔岬角、搁浅的远汐号还在潮水里等着。</p></li>
+      <li class="feat"><b class="feat-num px" data-count="18">18</b><h3 class="px">种敌人</h3><p>拾荒者团伙、潮蚀生物、盐蚀者、雇佣兵、沿海封锁队，各有各的打法和规矩。</p></li>
+      <li class="feat"><b class="feat-num px" data-count="100">100</b><h3 class="px">个改枪配件</h3><p>二十把枪，像素级拼装。改动先预览，按「确认」才装到枪上。</p></li>
+      <li class="feat"><b class="feat-num px">5</b><h3 class="px">项据点设施</h3><p>休息区、医疗区、训练区、工作台、黑市。修好电源，接电台任务，扩建仓库。</p></li>
+      <li class="feat"><b class="feat-num px">0</b><h3 class="px">个账号</h3><p>存档在你自己的浏览器里，可导出、导入备份。交易与结算写失败可以重试，多开窗口有保护。</p></li>
+      <li class="feat"><b class="feat-num px">1</b><h3 class="px">个 HTML 文件</h3><p>离线包解压即玩，不联网、不装环境。手机横屏也能玩：双摇杆和屏幕按钮。</p></li>
+    </ul>
+  </section>
+
+  <!-- ========= Extraction ========= -->
+  <section class="extract" id="extract" aria-labelledby="extractTitle">
+    <div class="extract-scene" id="extractScene" aria-hidden="true">
+      <div class="extract-frame">
+        <img class="layer far" src="assets/art/extract-far.png" alt="" width="640" height="360" loading="lazy" decoding="async">
+        <div class="layer mid"><img src="assets/art/extract-mid-overscan.png" alt="" width="680" height="360" loading="lazy" decoding="async"><i class="flare"></i></div>
+        <img class="layer near" src="assets/art/extract-near-overscan.png" alt="" width="680" height="360" loading="lazy" decoding="async">
+      </div>
+      <i class="extract-rain"></i>
+    </div>
+    <div class="extract-zone" id="extractZone">
+      <svg class="extract-ring" viewBox="0 0 200 200" aria-hidden="true">
+        <circle class="ring-bg" cx="100" cy="100" r="88"/>
+        <circle class="ring-fg" id="extractRing" cx="100" cy="100" r="88"/>
+      </svg>
+      <div class="extract-core">
+        <p class="sec-kicker px">撤离点 · 已启用</p>
+        <h2 id="extractTitle" class="extract-title px">停稳，按住 E</h2>
+        <p class="extract-sub" id="extractSub">按住键盘 E 或下面的按钮 3 秒，撤回水产站——也就是开始游戏。</p>
+        <button class="btn btn-amber btn-hold px" id="extractBtn"><span>按住撤离</span><i id="extractFill"></i></button>
+      </div>
+    </div>
+    <div class="extract-links">
+      <a class="btn btn-ghost px" href="play/">直接开始游戏</a>
+      <a class="btn btn-ghost px" href="https://github.com/xuys2025/escape-bincov/releases/download/main-latest/Escape-Bincov-portable.zip">下载离线版 ZIP</a>
+      <a class="btn btn-ghost px" href="https://github.com/xuys2025/escape-bincov">GitHub 源码</a>
+    </div>
+    <p class="extract-note">推荐电脑端 Chrome 或 Edge。项目仍在开发中，部分人物与场景还是占位素材；截图来自开发中的实际构建。</p>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="px">逃离滨科夫 · ESCAPE BINCOV</p>
+  <p>本作为虚构故事，滨科夫县及其中人物、组织均为虚构。界面点阵字体为寒蝉点阵体（ChillBitmap，<a href="assets/OFL-ChillBitmap.txt">SIL OFL 1.1</a>）子集。</p>
+</footer>
+</body>
+</html>

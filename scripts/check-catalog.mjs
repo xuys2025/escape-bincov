@@ -8,7 +8,7 @@ const descriptions = {
   'enemy-1080': '完整敌人验收的 1920×1080 视口链（街区与商场）',
   'enemy-touch': '完整敌人验收的 844×390 原生触控视口链（街区与商场）',
   'save-browser': '保存失败、重试、导入导出与多窗口', play: '约十分钟真实计时行动', portable: '解压两种 ZIP、离线入口与操作',
-  ui: '桌面界面布局', mobile: '触屏行动与按钮', 'mobile-ux': '手机横竖屏、短屏与操作边界', title: '标题页与输入',
+  site: '官网首页（Pages 根）：play/ 游戏入口、旧链接跳转、序章与地图', ui: '桌面界面布局', mobile: '触屏行动与按钮', 'mobile-ux': '手机横竖屏、短屏与操作边界', title: '标题页与输入',
   opening: '序幕播放、跳过与持久化', loot: '搜刮、物品转移与退出输入', 'loot-target': '附近搜刮目标与选择',
   qol: '行动信息与便捷操作', hideout: '旧页签据点与 Runtime 接线', station: '完整院子交互验收',
   'station-tier1': '院子计数、护符与等级展示', 'station-tier2': '生产、领取与真实训练', 'station-relief': '进站救济与重复领取边界',

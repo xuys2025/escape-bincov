@@ -7,3 +7,5 @@ test-results/
 /release/
 /start the game.html
 /docs/release-manifest.json
+# Pages tree (official site + game at play/), assembled by scripts/site/build.mjs.
+/pages/

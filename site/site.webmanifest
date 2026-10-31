@@ -1,0 +1,12 @@
+{
+  "name": "逃离滨科夫",
+  "short_name": "滨科夫",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#0a1113",
+  "theme_color": "#0b1215",
+  "icons": [
+    { "src": "assets/art/icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "assets/art/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
