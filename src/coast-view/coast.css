@@ -1,6 +1,8 @@
 /* Raid host: full-viewport Pixi view; the page frame is hidden while it runs. */
 html[data-coast-sample] #frame { visibility: hidden; }
 html[data-coast-sample] #toast { z-index: 120; }
+/* On a desktop raid it keeps above the key hints, and above a docked inventory or loot panel (--cs-dock, set by the host). */
+html:not(.mobile)[data-coast-sample] #toast { bottom: max(52px, calc(var(--cs-dock, 0px) + 10px)); }
 /* A page toast during a phone raid (a storage conflict) sits above the touch buttons. */
 html.mobile[data-coast-sample] #toast { bottom: calc(76px + var(--safe-bottom, 0px)); }
 .coast-sample { --cs-ink: #242321; --cs-panel: #1b1a17f0; --cs-line: #4b4842; --cs-text: #ddd5c3; --cs-muted: #a49b88; --cs-accent: #c9a65e; --cs-bad: #d07a5a;

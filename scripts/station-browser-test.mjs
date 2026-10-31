@@ -956,6 +956,30 @@ try {
     assert.equal(open2.disabled, false);
     return `溢出 2 件 → 拖进背包；出击按钮 ${blocked.disabled ? '禁用' : '可用'} → ${open2.disabled ? '禁用' : '可用'}`;
   });
+  await step('H19 两档桌面：七个页签在最窄面板里放得下，整备的武器行和携行重量不断开，快捷栏居中', async () => {
+    const rows = [];
+    for (const size of [[1280, 720], [1920, 1080]]) {
+      await open({ fixture: preset('repaired'), size });
+      const quick = await page.evaluate(() => { const r = document.querySelector('#station-yard').shadowRoot.querySelector('.quick').getBoundingClientRect(); return Math.round(r.left + r.width / 2 - innerWidth / 2); });
+      assert.ok(Math.abs(quick) <= 1, `${size}: 快捷栏偏离中线 ${quick}px`);
+      // 任务、设施、身体 open at the base 560 px width; 整备 is wider. A tab whose right edge passes the strip is cut.
+      const tabs = {};
+      for (const [key, kind] of [['4', 'radio'], ['5', 'facility'], ['6', 'body'], ['1', 'gear']]) {
+        await page.keyboard.press(key); await until(k => window.__station.host.ui.kind === k, 3000, kind, kind); await page.waitForTimeout(150);
+        tabs[kind] = await page.evaluate(() => { const t = document.querySelector('#station-yard').shadowRoot.querySelector('.panel .ptabs'), box = t.getBoundingClientRect(); return { width: Math.round(box.width), spare: Math.floor(box.right - t.lastElementChild.getBoundingClientRect().right) }; });
+        assert.ok(tabs[kind].spare >= 0, `${size} ${kind}: 最后一个页签被截 ${JSON.stringify(tabs[kind])}`);
+      }
+      const gear = await page.evaluate(() => {
+        const root = document.querySelector('#station-yard').shadowRoot, m = root.querySelector('.gear .meter'), b = m.querySelector(':scope > b').getBoundingClientRect(), label = m.querySelector(':scope > span').getBoundingClientRect();
+        return { weightH: Math.round(b.height), sameRow: Math.abs(label.bottom - b.bottom) < 6, broken: [...root.querySelectorAll('.gear .slot span i')].filter(i => i.getClientRects().length > 1).map(i => i.textContent), numbers: [...root.querySelectorAll('.gear h3 i')].map(i => i.textContent) };
+      });
+      assert.ok(gear.weightH < 30 && gear.sameRow, `${size}: 携行重量折行 ${JSON.stringify(gear)}`);
+      assert.deepEqual([gear.broken, gear.numbers], [[], ['01', '02', '03', '04']], `${size}: 武器行或小节编号`);
+      await shot(`H19-gear-${size.join('x')}`);
+      rows.push({ size, quickOffset: quick, tabs, gear });
+    }
+    return rows;
+  });
   await step('H17 390x844 快捷菜单中心点击必须命中整备与修理铺',async()=>{
     report.coverage.mobileMenuHit=[];
     for(const kind of ['gear','arms']) {

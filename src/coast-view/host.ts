@@ -124,6 +124,8 @@ export class CoastSampleHost {
   private last: PublishedView | null = null;
   private lastSeq = 0;
   private toastLeft = 0;
+  /** The --cs-dock value last written on the page (the docked panel's height), so an unchanged one is not rewritten. */
+  private dockShown = '';
   private radioLeft = 0;
   private lastRejected = '';
   private mounted = false;
@@ -694,7 +696,12 @@ export class CoastSampleHost {
     q('[data-tide]').textContent = h.tideWarning ? '潮汐预警' : h.highTide ? '高潮' : '';
     q('[data-hits]').innerHTML = h.hitDirections.filter(x => x.angle !== null).map(x => `<i style="transform:rotate(${x.angle!}rad);opacity:${Math.min(1, x.left)}"></i>`).join('');
     if ((this.stats.frames & 15) === 0) this.measureHudTop();
-    if ((this.stats.frames & 3) === 0) { const docked = this.panel === 'loot' || this.panel === 'inventory'; this.view.panelInset = docked ? Math.max(0, innerHeight - this.q('[data-panel]').getBoundingClientRect().top) : 0; }
+    if ((this.stats.frames & 3) === 0) {
+      const docked = this.panel === 'loot' || this.panel === 'inventory'; this.view.panelInset = docked ? Math.max(0, innerHeight - this.q('[data-panel]').getBoundingClientRect().top) : 0;
+      // The page toast (#toast, outside this root) keeps above a docked panel on a desktop raid (coast.css).
+      const dock = `${Math.round(this.view.panelInset)}px`;
+      if (dock !== this.dockShown) { this.dockShown = dock; document.documentElement.style.setProperty('--cs-dock', dock); }
+    }
     this.prompt(this.panel ? null : f.interaction, f.player.y);
     this.stairNames(f);
     const cross = q('[data-cross]'); cross.hidden = this.input.touch || !this.input.pointer.inside || !!this.panel;
@@ -1030,6 +1037,7 @@ export class CoastSampleHost {
     if (this.view) { this.view.destroy(); lifecycle.views--; }
     // The parked canvas is reused by the next mount: drop the outro's grading.
     if (this.app) { this.app.canvas.style.filter = ''; parkApp(this.app); lifecycle.apps--; }
+    document.documentElement.style.removeProperty('--cs-dock');
     this.root?.remove();
     this.last = null;
   }
