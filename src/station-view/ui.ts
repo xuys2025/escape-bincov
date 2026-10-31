@@ -357,7 +357,12 @@ export class UI {
     if (this.dragging || focused?.tagName === 'INPUT') return;
     if (this.dialog?.kind === 'storage') this.renderDialog();
     if (!this.kind) return;
-    const s = this.rt.snapshot(); if (force || s.rev !== this.lastSnapshotRev || this.kind === 'facility') this.render();
+    const s = this.rt.snapshot(); if (!force && s.rev === this.lastSnapshotRev && this.kind !== 'facility') return;
+    // The phone tab menu (.ptabs.open) is only a class: kept through the repaint, or a five-second checkpoint (every
+    // half second on 设施) folds it, and a tap already on a tab lands on the panel below.
+    const tabsOpen = this.panel.querySelector('.ptabs.open') !== null;
+    this.render();
+    if (tabsOpen) this.panel.querySelector('.ptabs')?.classList.add('open');
   }
 
   private findSelected(s: HideoutSnapshot): D.Item | null {
