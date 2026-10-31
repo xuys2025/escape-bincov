@@ -1,6 +1,6 @@
 # 当前任务入口
 
-内容设计：**[#151任务扩充内容包](story/quest-expansion/README.md)**，分支 `docs/quest-expansion-151`，起点main `61cd6c55`。维护者已授权按18主线＋14支线（含近期6委托）整理任务表、补故事逻辑和Gemini任务书；仅文档，功能未开工。原三任务/货架承接，后续地图门槛、14人条件与三路线详见内容包；实现仍归#83/#84/#85。#161的节奏修复是独立PR，状态按实时页面核对。
+内容设计已合审归档：**[#151任务扩充内容包](story/quest-expansion/README.md)**，[PR #164](https://github.com/xuys2025/escape-bincov/pull/164)，分支 `docs/quest-expansion-151`。2026-11-01正常同步main `8a28da98`；18主线＋14支线的32卡、G01—G04共286槽/28,528正文字符及原稿归档完成。跨批条件修订见[合审](story/quest-expansion/REVIEW.md)，[实施顺序/21项验收](story/quest-expansion/IMPLEMENTATION.md)已备；当前仍只交文档，功能未开工。后续先#83市场闭环，再三类委托样板，章节/结局归#84/#85；#161复核仍开放未合并，开工再查实时状态。
 
 本轮原子任务：**[官网首页：Pages 根目录是官网，游戏移到 `play/`](tasks/official-site.md)**，分支 `feat/official-site`，基线 main `278b7e24`。维护者 10-31 要一个纯静态官网，Pages 首页就是官网，点一下才进去玩。官网源码在 `site/`，游戏美术构建时从 `assets/` 原样复制；`pnpm site:build` 组装 `pages/`，CI 改为部署它，游戏字节、离线包和发布清单不变；带游戏参数的旧根链接转到 `play/`，存档按网站保存不受影响。新增 `pnpm test:site`（batch-3）。新加坡镜像脚本要改从 `play/` 取 HTML（不在本仓库，未改前安全跳过）。已接入 Sol 同日交付的图标、分享卡片、人物与敌人大图和撤离段夜景；真机未验。
 
