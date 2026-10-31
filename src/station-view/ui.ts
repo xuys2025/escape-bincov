@@ -1,7 +1,7 @@
 import * as D from '../domain';
 import type { Attribute, Facility, HideoutRuntime, HideoutSnapshot, Merchant, Recipe, Result, RunWorld, ShopSession, ShopSource, Source } from '../hideout-runtime/contract';
 import type { Scope } from '../view-lifecycle/scope';
-import { CART_W, CATALOG_W, firstShopCell, questUses } from '../shop';
+import { CATALOG_W, firstShopCell, questUses } from '../shop';
 import { STATIONS, type Station, type StationId } from './layout';
 import { GridDrag, type DragHooks } from './grid';
 import { esc } from '../html';
@@ -42,8 +42,13 @@ type Dialog =
 
 const WIDE: PanelKind[] = ['gear', 'arms', 'med'];
 const CENTER: PanelKind[] = ['report', 'menu', 'help', 'gunsmith'];
-/** Grid columns across a desktop panel: bag and stash; the shop's goods, cart and stash. */
-const GEAR_COLS = 6 + D.STASH_W, SHOP_COLS = CATALOG_W + CART_W + D.STASH_W;
+/**
+ * Grid columns across a desktop panel: bag and stash; the shop's merchant side (goods, or the sell list, as wide) and
+ * stash. SHOP_PAD: the shop's padding, column gap and the stash's scrollbar; the merchant side is never narrower than
+ * SHOP_SIDE_MIN px (its tabs and catalog filter).
+ */
+const GEAR_COLS = 6 + D.STASH_W, SHOP_COLS = CATALOG_W + D.STASH_W, SHOP_PAD = 110, SHOP_SIDE_MIN = 252;
+const shopWidth = (cell: number) => Math.max(CATALOG_W * cell + 2, SHOP_SIDE_MIN) + D.STASH_W * cell + SHOP_PAD;
 /**
  * The old hideout tabs kept as shortcuts (decision 06-2): open any of them from anywhere with the same session the
  * stations use; the camera turns to the place it belongs to. Digits follow the bar order; Tab / J / C / G still work.
@@ -79,7 +84,7 @@ export class UI {
   station: Station | null = null;
   facility: Facility = 'rest';
   private selected: { src: string; uid: string } | null = null;
-  /** Compact layout state: the switchable second container in gear, buy or sell in shops. */
+  /** The switchable second container in compact gear; the shop's buy or sell tab (every layout). */
   private paneB: 'stash' | 'safe' = 'stash';
   private shopMode: 'buy' | 'sell' = 'buy';
   private shop: ShopSession | null = null;
@@ -215,7 +220,8 @@ export class UI {
       // Keep labels readable and allow the existing vertical scroll on exceptionally short desktop panels.
       return Math.max(36, Math.min(56, Math.floor(Math.min(byH, byW))));
     }
-    const byH = Math.min((H - 331 - 70) / 6, (H - 331) / rows), byW = (Math.min(Wd - 24, Wd * .76) - 74) / SHOP_COLS;
+    // The merchant side is 8 rows (goods 5, buy list 3) under the tabs and the filter; the stash and the money beside it.
+    const byH = Math.min((H - 416) / 8, (H - 380) / rows), byW = (Math.min(Wd - 24, Wd * .76) - SHOP_PAD) / SHOP_COLS;
     // Not below 36 px either (three-character labels); a stash taller than that leaves scrolls in its box (fitStash).
     return Math.max(36, Math.min(56, Math.floor(Math.min(byH, byW))));
   }
@@ -237,7 +243,7 @@ export class UI {
       // Gear details may scroll vertically; keep inventory geometry fixed while a first click selects an item,
       // otherwise the second click of a double click can land outside that item after the panel resizes.
       if (kind === 'gear' || over <= 1 || this.compact || !WIDE.includes(kind) || cell <= 36 || pass >= 2) break;
-      cell = Math.max(36, cell - Math.ceil(over / Math.max(6, D.stashShownRows(s.profile.stash))));
+      cell = Math.max(36, cell - Math.ceil(over / Math.max(8, D.stashShownRows(s.profile.stash))));
     }
     if (!this.compact && WIDE.includes(kind)) this.fitStash(el, cell, stashTop);
   }
@@ -272,7 +278,7 @@ export class UI {
         const v = this.shop!.view(); const item = this.selected ? (v[this.selected.src === 'merchant' ? 'catalog' : this.selected.src as 'buy' | 'sell' | 'stash'].items.find(i => i.uid === this.selected!.uid) ?? null) : null;
         // Sellable stacks still in the bag or safe: this shop sells from the stash only, so its header says so.
         const outside = [s.profile.bag, s.profile.safe].reduce((n, inv) => n + inv.items.filter(i => !i.relief && (D.ITEMS[i.id]?.sell ?? 0) > 0).length, 0);
-        body = this.compact ? P.shopCompactHtml(v, cell, this.selected, s.profile.cash, this.shopMode, outside) : P.shopHtml(v, cell, sel, s.profile.cash, outside) + P.detailsHtml(item, this.selected?.src ?? null, 'shop', item ? questUses(s.profile, item.id) : [], s.profile); break;
+        body = this.compact ? P.shopCompactHtml(v, cell, this.selected, s.profile.cash, this.shopMode, outside) : P.shopHtml(v, cell, sel, s.profile.cash, this.shopMode, outside) + P.detailsHtml(item, this.selected?.src ?? null, 'shop', item ? questUses(s.profile, item.id) : [], s.profile); break;
       }
       case 'radio': body = P.questsHtml(s); break;
       case 'generator': body = P.generatorHtml(s); break;
@@ -288,7 +294,7 @@ export class UI {
     }
     const scroll = el.querySelector('.pbody')?.scrollTop ?? 0;
     el.className = `${center ? 'modal' : 'panel'} k-${kind}${WIDE.includes(kind) ? ' wide' : ''}${this.compact ? ' compact' : ''}${innerHeight > innerWidth ? ' portrait' : ''}`;
-    el.style.width = WIDE.includes(kind) && !this.compact ? `${Math.min(innerWidth - 24, (kind === 'gear' ? GEAR_COLS * cell + 70 : SHOP_COLS * cell + 74))}px` : '';
+    el.style.width = WIDE.includes(kind) && !this.compact ? `${Math.min(innerWidth - 24, (kind === 'gear' ? GEAR_COLS * cell + 70 : shopWidth(cell)))}px` : '';
     const cash = ['gear', 'arms', 'med', 'facility', 'deploy', 'radio', 'generator', 'gunsmith'].includes(kind) ? `<span class="pcash">现金 <b>¥ ${s.profile.cash.toLocaleString()}</b></span>` : '';
     const tabbed = SHORTCUTS.some(q => q.kind === kind) || kind === 'generator';
     const tabs = tabbed ? `<nav class="ptabs" aria-label="水产站功能">${SHORTCUTS.map(q => `<button data-tab="${q.kind}" class="${q.kind === kind ? 'on' : ''}" ${q.kind === kind ? 'aria-current="page"' : ''}>${q.label}<kbd>${q.key}</kbd></button>`).join('')}</nav>` : '';
@@ -378,19 +384,32 @@ export class UI {
     };
     if ((this.kind === 'arms' || this.kind === 'med') && this.shop) {
       const shop = this.shop, inv = (src: string) => { const v = shop.view(); return src === 'merchant' ? v.catalog : v[src as 'buy' | 'sell' | 'stash']; };
+      // Into the first free cell of `to`; a stash item that joins the sell list turns to the 出售 tab, where it shows.
+      const toFirstCell = (src: ShopSource, to: ShopSource, uid: string) => {
+        const target = inv(to), at = firstShopCell(target.w, target.h, (x, y) => shop.placementError(src, to, uid, x, y));
+        if ('x' in at) {
+          const r = shop.place(src, to, uid, at.x, at.y);
+          if (r.ok) { this.host.sound('drop'); if (to === 'sell') this.shopMode = 'sell'; } else this.toast(r.message, 'error');
+          this.render(); return;
+        }
+        // A rule (relief goods, a changed stash) names itself; otherwise only room was missing.
+        this.toast(at.reason ?? (to === 'buy' || to === 'sell' ? '待买或待卖区放不下了。' : '仓库放不下。'), 'error'); this.host.sound('error');
+      };
       return {
         rotatable: false, inv,
         check: (from, to, uid, x, y) => shop.placementError(from as ShopSource, to as ShopSource, uid, x, y),
         drop: (from, to, uid, x, y) => { const r = shop.place(from as ShopSource, to as ShopSource, uid, x, y); if (!r.ok) { this.toast(r.message, 'error'); this.host.sound('error'); } else this.host.sound('drop'); this.selected = null; this.render(); },
+        // The 出售 tab takes a stash item from the 购买 tab, where the sell list is hidden.
+        dropSlot: (slot, from, uid) => {
+          if (slot !== 'sell-tab') return;
+          if (from === 'stash') { this.selected = null; toFirstCell('stash', 'sell', uid); }
+          else { this.toast('只有仓库里的东西能拖到「出售」。', 'error'); this.host.sound('error'); }
+        },
         select: (src, uid) => { this.selected = { src, uid }; this.host.sound('pick'); this.render(); },
         quick: (src, uid) => {
           // Double-click: catalog <-> buy, stash <-> sell, using the first free cell.
           const to: ShopSource | null = src === 'merchant' ? 'buy' : src === 'buy' ? 'merchant' : src === 'stash' ? 'sell' : src === 'sell' ? 'stash' : null;
-          if (!to) return; const target = inv(to);
-          const at = firstShopCell(target.w, target.h, (x, y) => shop.placementError(src as ShopSource, to, uid, x, y));
-          if ('x' in at) { const r = shop.place(src as ShopSource, to, uid, at.x, at.y); if (r.ok) this.host.sound('drop'); else this.toast(r.message, 'error'); this.render(); return; }
-          // A rule (relief goods, a changed stash) names itself; otherwise only room was missing.
-          this.toast(at.reason ?? (to === 'buy' || to === 'sell' ? '待买或待卖区放不下了。' : '仓库放不下。'), 'error'); this.host.sound('error');
+          if (to) toFirstCell(src as ShopSource, to, uid);
         },
         reject: m => { this.toast(m, 'error'); this.host.sound('error'); },
       };

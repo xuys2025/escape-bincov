@@ -11,9 +11,9 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-77a79d?style=flat-square&labelColor=142323)
 ![PixiJS](https://img.shields.io/badge/PixiJS-8.22.0-cb906b?style=flat-square&labelColor=142323)
 
-### [▶️ 在线试玩](https://xuys2025.github.io/escape-bincov/) · [🎯 试枪场](https://xuys2025.github.io/escape-bincov/?range=1) · [📦 下载离线版](https://github.com/xuys2025/escape-bincov/releases/download/main-latest/Escape-Bincov-portable.zip)
+### [🌊 官网](https://xuys2025.github.io/escape-bincov/) · [▶️ 在线试玩](https://xuys2025.github.io/escape-bincov/play/) · [🎯 试枪场](https://xuys2025.github.io/escape-bincov/play/?range=1) · [📦 下载离线版](https://github.com/xuys2025/escape-bincov/releases/download/main-latest/Escape-Bincov-portable.zip)
 
-<a href="https://xuys2025.github.io/escape-bincov/">
+<a href="https://xuys2025.github.io/escape-bincov/play/">
   <img src="docs/station-relief-20261011/evidence/entry-1920x1080.png" alt="水产站雨夜院子：院门、火桶、居民与整备快捷入口" width="100%">
 </a>
 
@@ -71,7 +71,7 @@
 
 游戏需要浏览器支持 **WebGL**；不支持时页面只显示提示，不进入游戏，存档不受影响。
 
-**在线：** 用电脑端 Chrome 或 Edge 打开 [GitHub Pages](https://xuys2025.github.io/escape-bincov/)。页面加载完成后，游戏运行无需外部素材、账号或服务器连接。
+**在线：** 用电脑端 Chrome 或 Edge 打开[官网](https://xuys2025.github.io/escape-bincov/)，点「浏览器里开玩」；也可以直接打开[游戏页](https://xuys2025.github.io/escape-bincov/play/)。页面加载完成后，游戏运行无需外部素材、账号或服务器连接。游戏从 2026-10-31 起放在 `play/`，存档按网站保存，换地址不受影响；带游戏参数的旧链接（如 `?sample=village`、`?range=1`）会自动转过去。
 
 **离线：** 下载 [便携 ZIP](https://github.com/xuys2025/escape-bincov/releases/download/main-latest/Escape-Bincov-portable.zip)，解压到固定目录，双击 `start the game.html`。它是 `main` 最近一次通过全部检查的构建，每次验证成功后自动更新（[发布页](https://github.com/xuys2025/escape-bincov/releases/tag/main-latest)写明对应提交）。游玩无需 Node.js 或联网；若打开了编辑器，请右键选择 Chrome 或 Edge。
 
@@ -84,7 +84,7 @@
 
 ### 🎯 先试试枪
 
-打开 [试枪场](https://xuys2025.github.io/escape-bincov/?range=1)，可切换全部二十把枪（手枪、冲锋枪、霰弹枪、步枪、精确步枪、轻机枪）和匕首，以及 M4A1 的「轻快」「稳定」两套配装，对固定靶和移动靶练习。面板显示命中数、散布、后坐偏移与举枪进度；试枪场使用内存中的临时进度，**不读取或改写正式存档**，刷新后重置。
+打开 [试枪场](https://xuys2025.github.io/escape-bincov/play/?range=1)，可切换全部二十把枪（手枪、冲锋枪、霰弹枪、步枪、精确步枪、轻机枪）和匕首，以及 M4A1 的「轻快」「稳定」两套配装，对固定靶和移动靶练习。面板显示命中数、散布、后坐偏移与举枪进度；试枪场使用内存中的临时进度，**不读取或改写正式存档**，刷新后重置。
 
 本地源码仓库先运行 `pnpm build`，再双击 `试枪场.html`；下载的便携版则打开 `start the game.html`，在浏览器地址末尾加 `?range=1`。
 
@@ -100,7 +100,7 @@
 
 ### 样板入口（看美术进度用）
 
-普通入口已经是 2.5D 画面。另有两个样板入口，方便看美术做到哪里：[`?sample=village`](https://xuys2025.github.io/escape-bincov/?sample=village) 预选沿海街区，种子留空时挑一个从精修街口出发的种子；[`?sample=mall`](https://xuys2025.github.io/escape-bincov/?sample=mall) 预选滨湾商场。两个入口都会把还没精修的地方压暗，并在左上角地点后标「样板外」。
+普通入口已经是 2.5D 画面。另有两个样板入口，方便看美术做到哪里：[`?sample=village`](https://xuys2025.github.io/escape-bincov/play/?sample=village) 预选沿海街区，种子留空时挑一个从精修街口出发的种子；[`?sample=mall`](https://xuys2025.github.io/escape-bincov/play/?sample=mall) 预选滨湾商场。两个入口都会把还没精修的地方压暗，并在左上角地点后标「样板外」。
 
 本地仓库运行 `pnpm build` 后，可双击根目录的 `城中村试玩.html` 或 `商场试玩.html`。样板和普通入口在同一网站使用同一份存档。
 
@@ -179,6 +179,7 @@ pnpm dev
 | `pnpm test` | 领域规则、世界、Runtime、存档与事务单测 |
 | `pnpm build` | 严格类型检查，生成 `dist/index.html` 与 `start the game.html`（生成物不入库，下同） |
 | `pnpm package` | 构建并在 `release/` 生成离线 ZIP、网页 ZIP 和发布清单 |
+| `pnpm site` / `pnpm test:site` | 组装 Pages（根目录是官网 `site/`，游戏在 `play/`）并在 `http://127.0.0.1:5180` 预览 / 官网检查；都要先 `pnpm package` |
 | `pnpm test:station` / `pnpm test:hideout` | 院子交互与宿主切换 / 据点接口浏览器回归 |
 | `pnpm test:station-tier1` / `pnpm test:station-tier2` / `pnpm test:station-relief` | 计数与护符 / 训练与补给 / 进站救济专项 |
 | `pnpm test:raid-default` | 普通入口：两个区域、街区和商场走 2.5D、旧行动续玩、无 WebGL 提示 |
@@ -234,6 +235,6 @@ PixiJS 及其依赖的许可，以及内嵌字体的 OFL 声明，见 [THIRD_PAR
 
 <div align="center">
 
-[🌊 进入滨科夫](https://xuys2025.github.io/escape-bincov/) · [🐛 玩家反馈](https://github.com/xuys2025/escape-bincov/issues/26) · [🔧 开发遗留](https://github.com/xuys2025/escape-bincov/issues/32)
+[🌊 进入滨科夫](https://xuys2025.github.io/escape-bincov/play/) · [官网](https://xuys2025.github.io/escape-bincov/) · [🐛 玩家反馈](https://github.com/xuys2025/escape-bincov/issues/26) · [🔧 开发遗留](https://github.com/xuys2025/escape-bincov/issues/32)
 
 </div>

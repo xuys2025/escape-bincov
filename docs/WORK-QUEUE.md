@@ -2,7 +2,11 @@
 
 内容设计：**[#151任务扩充内容包](story/quest-expansion/README.md)**，分支 `docs/quest-expansion-151`，起点main `61cd6c55`。维护者已授权按18主线＋14支线（含近期6委托）整理任务表、补故事逻辑和Gemini任务书；仅文档，功能未开工。原三任务/货架承接，后续地图门槛、14人条件与三路线详见内容包；实现仍归#83/#84/#85。#161的节奏修复是独立PR，状态按实时页面核对。
 
-本轮原子任务：**[正对的门：暖光与地面通行带](tasks/door-faced-cue.md)**（#26 F07/F11 门/通道理解度），分支 `agent/door-passage-readability`，基线 main `8a4b46e4`。维护者从三个本地原型里选了 C：交互提示指向的门发暖光，地上画出穿过它的三格通行带；只改显示。本地 1082 单测、package、空间套件 24/24（main 对照仅新增 S03d 失败）及另外六项浏览器回归、工程守卫全部通过；准确 head、CI 与合并以承接 PR 为准，真人/真机未验。
+本轮原子任务：**[官网首页：Pages 根目录是官网，游戏移到 `play/`](tasks/official-site.md)**，分支 `feat/official-site`，基线 main `278b7e24`。维护者 10-31 要一个纯静态官网，Pages 首页就是官网，点一下才进去玩。官网源码在 `site/`，游戏美术构建时从 `assets/` 原样复制；`pnpm site:build` 组装 `pages/`，CI 改为部署它，游戏字节、离线包和发布清单不变；带游戏参数的旧根链接转到 `play/`，存档按网站保存不受影响。新增 `pnpm test:site`（batch-3）。新加坡镜像脚本要改从 `play/` 取 HTML（不在本仓库，未改前安全跳过）。已接入 Sol 同日交付的图标、分享卡片、人物与敌人大图和撤离段夜景；真机未验。
+
+已完成原子任务：**[商店整体布局：购买/出售页签与交易单](tasks/shop-trade-tabs.md)**（#26 F03），[PR #159](https://github.com/xuys2025/escape-bincov/pull/159)，分支 `claude/f03-shop-layout-1be71c`，基线 main `7d982a6f`。维护者从三个本地原型里选了 B（塔科夫式买卖页签）：左边商人这边分「购买/出售」两页，右边一直是仓库和交易单（现金、买入、卖出、结算后现金、结算）；切页签、加物品、出现警告都不移动格子。只改院子商店的显示，交易规则、ShopSession 与存档不变；旧版页签商店不变。验证结果见任务页；维护者 10-30 授权 CI 通过后自动合并；准确 head、CI 与合并以承接 PR 为准，真人/真机未验。
+
+已完成原子任务：**[正对的门：暖光与地面通行带](tasks/door-faced-cue.md)**（#26 F07/F11），[PR #154](https://github.com/xuys2025/escape-bincov/pull/154) 已合入 main `9ac9567e`。维护者从三个本地原型里选了 C：交互提示指向的门发暖光，地上画出穿过它的三格通行带；只改显示，真人/真机未验。
 
 已完成原子任务：**[修复楼梯标签遮住可见敌人（S03c）](tasks/todo-stair-label-occlusion.md)**，[PR #146](https://github.com/xuys2025/escape-bincov/pull/146) 已合入 main `aa1db0e8`。已同步 main `4fec648c`，1080 单测/125 工程守卫/package 通过，S03c 两档桌面与 932×430 触屏均 0 遮挡；原版 85/74 的有效失败、最终空间 20/22 的既有 S04d 首败和首轮商场证据完整保留。只承接 #26 中 S03c 遮敌子项；本地断言余项归 #61，总单保持开放。
 
@@ -14,6 +18,7 @@
 
 | 目标 | 承接入口 | 接手提示 |
 | --- | --- | --- |
+| 官网首页与 `play/` 游戏入口 | [任务记录](tasks/official-site.md) · `feat/official-site` | 改官网文案后重跑 `scripts/site/subset-font.py`；游戏新增入口参数要同步 `site/index.html` 开头的转发列表；镜像脚本需改取 `play/` |
 | 改枪 M4 经济与平衡（PR ④） | [#80](https://github.com/xuys2025/escape-bincov/issues/80) · [#142](https://github.com/xuys2025/escape-bincov/issues/142) · [#139](https://github.com/xuys2025/escape-bincov/issues/139) · [#140](https://github.com/xuys2025/escape-bincov/issues/140) · [任务](gunsmith/TASKS.md) | `feat/gunsmith-m4`，基线 main `d60e7c0`，10-30 合入 main `8a4b46e`（#149）。维护者 10-29 定：拆弹匣先做，枪按进度解锁卖，敌人拿什么枪就掉什么枪。M4-07 拆弹匣（[规则](gunsmith/CONTRACTS.md#拆下弹匣m4-07)）和 M4-01 老栓按任务上枪、配件轮换（[规则](gunsmith/CONTRACTS.md#老栓按进度供货m4-01)）和 M4-02 敌人掉手里的枪（[规则](gunsmith/CONTRACTS.md#敌人拿什么枪就掉什么枪m4-02)）已实现；10-30 维护者定 M4-03（配件维持现价、稀有配件后期货架，[规则](gunsmith/CONTRACTS.md#价格与收入m4-03)），M4-04 二十局样本已做（[结果](gunsmith/CONTRACTS.md#二十局资源样本m4-04)，任务太快登记 #153）；Sol 的原厂弹匣图标与 SVD/Vector 分层（[说明](gunsmith/art/m4-mags/README.md)）已接入；M4-05 配装对比已做（[结果](gunsmith/CONTRACTS.md#配装对比与占优修正m4-05)，八件白给的轻配件加了小代价）；M4-09 老栓精工已做（[规则](gunsmith/CONTRACTS.md#老栓精工m4-09)，#155；Sol 交 78 张主体图和 1 张卡宾适配图，[预览与验证](gunsmith/art/m4-premium/README.md)，10-30 交在 #157，接入另开 PR（`feat/gunsmith-premium-art`））；维护者 10-30 定先合入 PR ④，M4-06 试玩以后做；剩下的试玩、M5 验收见 #80，合入后另开 PR，精工美术在 #157 和接入 PR `feat/gunsmith-premium-art`；准确 head 与 CI 见承接 PR |
 | 事务失败阶段（Q-E04） | [#60 登记](https://github.com/xuys2025/escape-bincov/issues/60#issuecomment-6459436553) · [PR #137](https://github.com/xuys2025/escape-bincov/pull/137) · `codex/transaction-failure-phases` · [实现与验证](tasks/quality-entropy.md#q-e04-提交后的发布失败) | 写后发布异常不再当作可回滚/重试的存储失败；消费票据、停止本页、导出已提交记录后刷新。独立验收，#117/#136 已合入，现同步 main d27306b4；CI 的 station-reset S6 短提示观测补修后1048单测/99守卫/package/14项重开浏览器通过，原17项存档浏览器CI通过；准确新head完整CI见承接PR |
 | 文档快速通道的 main 也部署和发布 | [CI 说明](CI.md#pages-与镜像) · [交接](../handoff.md) | `fix/ci-docs-fastpath-deploy`，起点 main `8c6589b`：`03ea261` 纯文档合入时 Pages 与 `main-latest` 发布被连带跳过；两个 job 改为显式状态检查并加守卫测试。真正证明要等下一次纯文档合入实际部署；准确 head 与 CI 见承接 PR |

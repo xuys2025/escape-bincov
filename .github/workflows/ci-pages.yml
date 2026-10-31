@@ -50,11 +50,14 @@ jobs:
           BINCOV_BUILD_COMMIT: ${{ github.sha }}
           BINCOV_BUILD_RUN: ${{ github.run_id }}
         run: pnpm package
+      # Pages serves the official site at the root and this exact game build at play/ (scripts/site/build.mjs).
+      - name: Assemble Pages tree
+        run: pnpm site:build
       - name: Record shared artifact checksums
         run: |
           sha256sum dist/index.html 'start the game.html' \
             release/Escape-Bincov-portable.zip release/Escape-Bincov-web.zip \
-            release/release-manifest.json > build-checksums.sha256
+            release/release-manifest.json pages/index.html pages/play/index.html > build-checksums.sha256
       - name: Select browser regression from validated main history
         id: scope
         env:
@@ -79,6 +82,7 @@ jobs:
             release/Escape-Bincov-portable.zip
             release/Escape-Bincov-web.zip
             release/release-manifest.json
+            pages/
             build-checksums.sha256
           if-no-files-found: error
           retention-days: 1
@@ -253,7 +257,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v4
         with:
-          path: dist
+          path: pages
 
   deploy:
     # Explicit status check (here and in release): the implicit success() also sees the browser groups the docs fast path skips.
